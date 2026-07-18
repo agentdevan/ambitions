@@ -403,6 +403,34 @@ class TaskIntakeTests(unittest.TestCase):
 
 
 class TaskPackTests(unittest.TestCase):
+    def test_optional_visual_manifest_absence_skips_full_ux_inputs(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_empty_cli_root(root)
+
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+
+    def test_optional_visual_manifest_detects_absent_to_present_mutation(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            initialize_empty_cli_root(root)
+            manifest = (
+                root
+                / "docs/canon/migration/visual-authority-rebaseline.json"
+            )
+
+            with self.assertRaises(CanonError) as raised:
+                with task_pack_module._optional_visual_authority_manifest(
+                    root
+                ) as present:
+                    self.assertFalse(present)
+                    manifest.write_text("{}\n", encoding="utf-8")
+
+            self.assertEqual(
+                raised.exception.code,
+                "PACK_VISUAL_AUTHORITY_STALE",
+            )
+
     def test_scope_contract_excludes_unmatched_direct_dependency_semantics(self):
         pack = build_task_pack(sample_registry(), intake(), "repo-sha", ())
 
@@ -1133,6 +1161,63 @@ class TaskPackTests(unittest.TestCase):
                 )
                 self.assertEqual(pack.budget_class, budget_class)
                 self.assertEqual(pack.token_budget, PACK_BUDGETS[budget_class])
+
+    def test_task_pack_schema_closes_exact_task_type_budget_mapping(self):
+        schema = json.loads(
+            (ROOT / "docs/canon/schemas/task-pack.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(
+            schema["properties"]["task_type"]["enum"],
+            [
+                "mechanical",
+                "docs",
+                "release",
+                "swiftui",
+                "runtime",
+                "privacy",
+                "constitutional-audit",
+            ],
+        )
+        self.assertNotIn("governance", schema["properties"]["task_type"]["enum"])
+        conditionals = schema["allOf"]
+        self.assertEqual(len(conditionals), 4)
+        mapped = {}
+        for conditional in conditionals:
+            selector = conditional["if"]["properties"]["task_type"]
+            task_types = selector.get("enum", [selector.get("const")])
+            outcome = conditional["then"]["properties"]
+            for task_type in task_types:
+                mapped[task_type] = (
+                    outcome["budget_class"]["const"],
+                    outcome["token_budget"]["const"],
+                )
+        self.assertEqual(
+            mapped,
+            {
+                task_type: (budget_class, PACK_BUDGETS[budget_class])
+                for task_type, budget_class in TASK_TYPE_BUDGET_CLASS.items()
+            },
+        )
+
+    def test_task_pack_parser_rejects_governance_and_budget_mutations(self):
+        pack = build_task_pack(sample_registry(), intake("release"), "repo-sha", ())
+        current = {
+            "canon_sha": pack.canon_sha,
+            "repository_sha": pack.repository_sha,
+            "intake_sha": pack.intake_sha,
+        }
+        cases = (
+            ({**pack.to_dict(), "task_type": "governance"}, "PACK_TASK_TYPE_UNKNOWN"),
+            ({**pack.to_dict(), "budget_class": "normal"}, "PACK_BUDGET_CONTRACT"),
+            ({**pack.to_dict(), "token_budget": 16_000}, "PACK_BUDGET_CONTRACT"),
+        )
+        for candidate, code in cases:
+            with self.subTest(code=code):
+                with self.assertRaises(CanonError) as raised:
+                    validate_task_pack(candidate, **current)
+                self.assertEqual(raised.exception.code, code)
 
     def test_unknown_task_type_fails_stably(self):
         with self.assertRaises(CanonError) as raised:

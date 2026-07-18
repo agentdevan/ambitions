@@ -5,6 +5,24 @@
   "description": "Machine contract for deterministic bounded Codex task-pack content and stale-state rejection.",
   "type": "object",
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"task_type": {"const": "mechanical"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "mechanical"}, "token_budget": {"const": 8000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"const": "docs"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "normal"}, "token_budget": {"const": 16000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"enum": ["release", "swiftui", "runtime", "privacy"]}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "complex"}, "token_budget": {"const": 30000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"const": "constitutional-audit"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "constitutional-audit"}, "token_budget": {"const": null}}}
+    }
+  ],
   "required": [
     "schema_version",
     "canon_revision",
@@ -86,7 +104,7 @@
     "task_type": {
       "description": "Bounded implementation or inspection task classification.",
       "type": "string",
-      "minLength": 1
+      "enum": ["mechanical", "docs", "release", "swiftui", "runtime", "privacy", "constitutional-audit"]
     },
     "budget_class": {
       "type": "string",

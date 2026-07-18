@@ -1,0 +1,86 @@
+{
+  "compiler_compatibility": [
+    "0.2.0"
+  ],
+  "registry_revision": "skill-dependencies-v1",
+  "requirement_index_path": "docs/canon/generated/canon-index.json",
+  "requirement_index_sha256": "64338b7a538c1a93c9b6f11e52956670197cea261efd44dd2638abb7994b9b7a",
+  "schema_version": 1,
+  "skills": [
+    {
+      "allowed_adapter_purpose": "Route source and review work to current canon, source evidence, and proof boundaries.",
+      "compiler_compatibility": ["0.2.0"],
+      "dependencies": [
+        {"authority_role": "canonical", "path": "docs/canon/CONSTITUTION.md", "sha256": "9322e4f043a047c29830c6c0687cac8f735f46ecb8997b3837a1ab17324d5808"},
+        {"authority_role": "schema", "path": "docs/canon/schemas/requirement.schema.json", "sha256": "2d6759616d8c41410e03585225eea0323f9a0b3e2a56b7c6209c939dc159fc6b"}
+      ],
+      "depends_on_skills": [],
+      "may_authorize": false,
+      "path": ".agents/skills/ambitions-source-truth-authority/SKILL.md",
+      "requirement_ids": ["AUTHORITY-MISSION-001", "CONST-PROOF-EVIDENCE-001"],
+      "schema_compatibility": [1],
+      "skill_id": "ambitions-source-truth-authority",
+      "skill_sha256": "3bd2a4d5758d3dcbd61507d55dd413e110a4a4c715ef37f7ad83541c5b7195e7"
+    },
+    {
+      "allowed_adapter_purpose": "Enforce canonical source-owner paths without defining product law.",
+      "compiler_compatibility": ["0.2.0"],
+      "dependencies": [
+        {"authority_role": "canonical", "path": "docs/canon/CONSTITUTION.md", "sha256": "9322e4f043a047c29830c6c0687cac8f735f46ecb8997b3837a1ab17324d5808"},
+        {"authority_role": "canonical", "path": "docs/canon/standards/native-ios-engineering.md", "sha256": "53915068eb6b6a5aed6cecb365118f9e1844fddf4140485842e5cb35fda75b4d"}
+      ],
+      "depends_on_skills": [],
+      "may_authorize": false,
+      "path": ".agents/skills/ambitions-architecture-tree-enforcement/SKILL.md",
+      "requirement_ids": ["ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001", "CONST-RUNTIME-MUTATION-001"],
+      "schema_compatibility": [1],
+      "skill_id": "ambitions-architecture-tree-enforcement",
+      "skill_sha256": "d17380d279003808e1e2ccf65cb3893e54e13f103460a1b53991c25bbce7ec49"
+    },
+    {
+      "allowed_adapter_purpose": "Route native iPhone implementation through canonical platform and accessibility obligations.",
+      "compiler_compatibility": ["0.2.0"],
+      "dependencies": [
+        {"authority_role": "canonical", "path": "docs/canon/standards/native-ios-engineering.md", "sha256": "53915068eb6b6a5aed6cecb365118f9e1844fddf4140485842e5cb35fda75b4d"},
+        {"authority_role": "schema", "path": "docs/canon/schemas/requirement.schema.json", "sha256": "2d6759616d8c41410e03585225eea0323f9a0b3e2a56b7c6209c939dc159fc6b"}
+      ],
+      "depends_on_skills": [],
+      "may_authorize": false,
+      "path": ".agents/skills/ambitions-ios-quality-gate/SKILL.md",
+      "requirement_ids": ["SPEC-APP-SHELL-ROOT-NAVIGATION-001", "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"],
+      "schema_compatibility": [1],
+      "skill_id": "ambitions-ios-quality-gate",
+      "skill_sha256": "82971e6c1bb4fdb8ada4dbb26010d64be3687b58e9d9a3a1f251e9c760b06014"
+    },
+    {
+      "allowed_adapter_purpose": "Keep validation and readiness claims within current evidence ceilings.",
+      "compiler_compatibility": ["0.2.0"],
+      "dependencies": [
+        {"authority_role": "canonical", "path": "docs/canon/CONSTITUTION.md", "sha256": "9322e4f043a047c29830c6c0687cac8f735f46ecb8997b3837a1ab17324d5808"},
+        {"authority_role": "canonical", "path": "docs/canon/standards/validation-and-release.md", "sha256": "cd0fb3503f48ae02547b5e4a96ecfa6c52df11067fc242e35fb3c7b8e76e30d3"}
+      ],
+      "depends_on_skills": [],
+      "may_authorize": false,
+      "path": ".agents/skills/ambitions-release-proof-honesty/SKILL.md",
+      "requirement_ids": ["CONST-PROOF-EVIDENCE-001", "CANON-DESTRUCTIVE-SUPERSESSION-001"],
+      "schema_compatibility": [1],
+      "skill_id": "ambitions-release-proof-honesty",
+      "skill_sha256": "37da293f88d977886fa820ad004227f669cc3e1178a60ef0044ce092ef742558"
+    },
+    {
+      "allowed_adapter_purpose": "Route scoped runtime-contract implementation through canonical mutation and proof law.",
+      "compiler_compatibility": ["0.2.0"],
+      "dependencies": [
+        {"authority_role": "canonical", "path": "docs/canon/CONSTITUTION.md", "sha256": "9322e4f043a047c29830c6c0687cac8f735f46ecb8997b3837a1ab17324d5808"},
+        {"authority_role": "canonical", "path": "docs/canon/standards/testing-and-fixtures.md", "sha256": "00b0753f7f0da860b2b14de8537f1008507a97c4d2f065c1582223120c2de9a3"}
+      ],
+      "depends_on_skills": [],
+      "may_authorize": false,
+      "path": ".agents/skills/ambitions-runtime-contract-engineering/SKILL.md",
+      "requirement_ids": ["CONST-RUNTIME-MUTATION-001", "LAW-RUNTIME-DURABLE-SUCCESS-001"],
+      "schema_compatibility": [1],
+      "skill_id": "ambitions-runtime-contract-engineering",
+      "skill_sha256": "41cf95f68b4fdd242e26750ea81f12cb51e566265b95e5bc7149c97e957bf312"
+    }
+  ]
+}

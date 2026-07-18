@@ -37,6 +37,7 @@ Privacy filtering MUST precede retrieval and synthesis. Deterministic local proj
 Accept the input; immediately rank privacy-authorized local objects and projections while typing; classify exact-search, natural-language-question, action, and creation intent without hiding ambiguity; optionally synthesize a bounded on-device answer grounded in displayed objects and approved local reference sources; label support, assumptions, uncertainty, retrieved fact, inferred interpretation, and proposed change; route Open or Inspect in context; route creation to Capture; preview a material action; re-resolve current owner and state; obtain explicit confirmation; let the owner commit and issue History, Receipt, and applicable Undo; then restore predictable Search context and focus.
 
 <!-- canon-section: branches -->
+Branch evidence covers exact Find, bounded Ask, owner-routed action, Capture handoff, inspection, privacy filtering, and approved-reference outcomes.
 Branches include exact Find, optional Ask, Ask unavailable, ambiguous intent, mixed Find and Ask, unsupported question, proposed action, stale proposal, creation handoff, Open step, Start now, Source, Privacy, History, Proof, Receipts, no result, filtered private result, and approved-reference unavailability. Search MUST expose the applicable branch without fabricating support or a generic mutation path.
 
 <!-- canon-section: cancellation -->
@@ -49,6 +50,7 @@ Within the current session, resume query, scope, filters, deterministic results,
 Find, Ask, proposal, Capture handoff, and Inspect are non-durable in Search. Creation commits only in Capture under Capture policy. A material action crosses the boundary only inside its canonical owner after current-state validation, visible consequence preview, explicit confirmation, typed local commit, projection, History, Receipt, and applicable Undo; result-list optimism is never success.
 
 <!-- canon-section: failure -->
+Failure evidence preserves deterministic results, query context, truthful canonical state, privacy boundaries, and exact recovery ownership.
 No result, partial or corrupt index, Ask unavailable, unsupported synthesis, missing or changed grounding, stale source, privacy suppression, deleted object, stale proposal, owner rejection, projection delay, Capture rejection, and external-effect failure MUST preserve query context, identify what remains usable, withhold unsupported content, and leave canonical state truthful.
 
 <!-- canon-section: recovery -->
@@ -67,4 +69,5 @@ VoiceOver orders dismiss, unified input and scope, deterministic result count an
 Find, result opening, local action proposals, owner routing, Capture handoff, contextual Inspect, local index rebuild, History, Receipts, replay, and Undo remain usable offline. Ask MAY run on device from privacy-authorized local data and approved cached references, but its absence or cancellation returns gracefully to the deterministic Find / Act / Inspect fallback without changing retrieval authority or disclosing private data.
 
 <!-- canon-section: scenario-tests -->
+Scenario evidence binds retrieval, grounding, session boundaries, owner routing, mutation safety, offline fallback, recovery, focus, and non-color accessibility.
 Execute `SCENARIO-JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001`, `SCENARIO-JOURNEY-SEARCH-ASK-UNAVAILABLE-001`, `SCENARIO-JOURNEY-SEARCH-GROUNDING-CHANGE-001`, `SCENARIO-JOURNEY-SEARCH-SESSION-EXPIRY-001`, `SCENARIO-JOURNEY-SEARCH-CAPTURE-HANDOFF-001`, `SCENARIO-JOURNEY-SEARCH-STALE-PROPOSAL-001`, `SCENARIO-JOURNEY-SEARCH-PRIVACY-001`, `SCENARIO-JOURNEY-SEARCH-OFFLINE-001`, and `SCENARIO-JOURNEY-SEARCH-ACCESSIBILITY-001`; prove immediate deterministic retrieval, optional synthesis, evidence distinctions, session-local history, owner routing, no silent mutation, offline fallback, recovery, focus, and non-color accessibility equivalence.

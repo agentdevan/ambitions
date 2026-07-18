@@ -7,7 +7,8 @@ import json
 import os
 import re
 import stat
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from pathlib import Path
 
@@ -53,6 +54,7 @@ from tools.ambitions_canon.model import (
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.traceability import TraceabilityReport
 from tools.ambitions_canon.visual_authority import (
+    MANIFEST_PATH as VISUAL_AUTHORITY_MANIFEST_PATH,
     load_visual_authority_rebaseline_if_present,
     visual_authority_lines_for_task_pack,
 )
@@ -95,6 +97,78 @@ TASK_TYPE_BUDGET_CLASS = {
     "privacy": "complex",
     "constitutional-audit": "constitutional-audit",
 }
+
+
+def _optional_visual_authority_manifest_state(
+    root_descriptor: int,
+) -> tuple[tuple[str, str | None, tuple[int, int] | None], ...]:
+    """Pin the optional manifest path without following unsafe entries."""
+
+    descriptors = [os.dup(root_descriptor)]
+    current = descriptors[0]
+    state: list[tuple[str, str | None, tuple[int, int] | None]] = []
+    try:
+        for index, component in enumerate(VISUAL_AUTHORITY_MANIFEST_PATH.parts):
+            kind, identity = _entry_kind_and_identity(current, component)
+            state.append((component, kind, identity))
+            if kind is None:
+                return tuple(state)
+            if index == len(VISUAL_AUTHORITY_MANIFEST_PATH.parts) - 1:
+                if kind != "file":
+                    raise CanonError(
+                        "PACK_VISUAL_AUTHORITY_PATH_UNSAFE",
+                        "optional visual-authority manifest must be a regular file",
+                        VISUAL_AUTHORITY_MANIFEST_PATH,
+                    )
+                return tuple(state)
+            if kind != "directory":
+                raise CanonError(
+                    "PACK_VISUAL_AUTHORITY_PATH_UNSAFE",
+                    "optional visual-authority manifest ancestors must be real directories",
+                    VISUAL_AUTHORITY_MANIFEST_PATH,
+                )
+            child = _open_directory_at(current, component)
+            descriptors.append(child)
+            if _descriptor_identity(child) != identity:
+                raise CanonError(
+                    "PACK_VISUAL_AUTHORITY_PATH_UNSAFE",
+                    "optional visual-authority manifest ancestor changed during open",
+                    VISUAL_AUTHORITY_MANIFEST_PATH,
+                )
+            current = child
+    finally:
+        for descriptor in reversed(descriptors):
+            os.close(descriptor)
+
+
+@contextmanager
+def _optional_visual_authority_manifest(
+    repo_root: Path,
+) -> Iterator[bool]:
+    """Pin optional-manifest presence across the complete TaskPack read."""
+
+    absolute_root = Path(os.path.abspath(repo_root))
+    with _open_directory_absolute_nofollow(absolute_root) as root_descriptor:
+        root_identity = _descriptor_identity(root_descriptor)
+        initial_state = _optional_visual_authority_manifest_state(root_descriptor)
+        present = (
+            len(initial_state) == len(VISUAL_AUTHORITY_MANIFEST_PATH.parts)
+            and initial_state[-1][1] == "file"
+        )
+        try:
+            yield present
+        finally:
+            current_state = _optional_visual_authority_manifest_state(root_descriptor)
+            if (
+                _descriptor_identity(root_descriptor) != root_identity
+                or current_state != initial_state
+            ):
+                raise CanonError(
+                    "PACK_VISUAL_AUTHORITY_STALE",
+                    "optional visual-authority manifest presence changed during TaskPack generation",
+                    VISUAL_AUTHORITY_MANIFEST_PATH,
+                )
+            _assert_parent_path_identity(absolute_root, root_descriptor)
 
 _INTAKE_FIELDS = frozenset(
     {
@@ -185,6 +259,27 @@ class TaskIntake:
             claim_type=claim_type,
             known_issue_ids=known_issue_ids,
             sha=hashlib.sha256(encoded).hexdigest(),
+        )
+
+    @classmethod
+    def from_authorization_intake(
+        cls, data: Mapping[str, object]
+    ) -> "TaskIntake":
+        """Map request-only authorization intake into bounded pack inputs."""
+
+        from tools.ambitions_canon.authorization import validate_task_intake
+
+        normalized = validate_task_intake(data)
+        return cls.from_json(
+            {
+                "schema_version": 1,
+                "issue_id": normalized["task_id"],
+                "task_type": normalized["requested_task_type"],
+                "scope": normalized["requested_scope"],
+                "changed_files": normalized["requested_changed_files"],
+                "claim_type": normalized["requested_claim_ceiling"],
+                "known_issue_ids": [],
+            }
         )
 
     def with_source_path(self, path: str) -> "TaskIntake":
@@ -611,9 +706,16 @@ def build_task_pack(
             key=lambda item: item.reference_id,
         )
     )
-    visual_contract = load_visual_authority_rebaseline_if_present(
-        registry.manifest.repository_root
-    )
+    repository_root = registry.manifest.repository_root
+    if repository_root is None:
+        visual_contract = None
+    else:
+        with _optional_visual_authority_manifest(repository_root) as present:
+            visual_contract = (
+                load_visual_authority_rebaseline_if_present(repository_root)
+                if present
+                else None
+            )
     visual_contract_lines = (
         visual_authority_lines_for_task_pack(
             visual_contract,
@@ -1012,6 +1114,25 @@ def validate_task_pack(
     intake_sha: str,
 ) -> None:
     """Reject a generated pack whose authority, repository, or intake moved."""
+
+    task_type = data.get("task_type")
+    if not isinstance(task_type, str) or task_type not in TASK_TYPE_BUDGET_CLASS:
+        raise CanonError(
+            "PACK_TASK_TYPE_UNKNOWN",
+            f"unsupported task type: {task_type!r}",
+        )
+    expected_class = TASK_TYPE_BUDGET_CLASS[task_type]
+    expected_budget = PACK_BUDGETS[expected_class]
+    if data.get("budget_class") != expected_class or data.get(
+        "token_budget"
+    ) != expected_budget:
+        raise CanonError(
+            "PACK_BUDGET_CONTRACT",
+            (
+                f"task type {task_type!r} requires budget class "
+                f"{expected_class!r} and token budget {expected_budget!r}"
+            ),
+        )
 
     checks = (
         ("canon_sha", canon_sha, "PACK_CANON_STALE"),

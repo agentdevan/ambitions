@@ -18,6 +18,9 @@ from tools.ambitions_canon.model import (
     GapSeverity,
     Modality,
 )
+from tools.ambitions_canon.purge import authority_sprawl_findings
+
+__all__ = ("audit_registry", "authority_sprawl_findings")
 
 
 def _finding(

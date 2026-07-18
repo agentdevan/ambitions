@@ -345,7 +345,7 @@
   ],
   "authority_state": "candidate_shadow",
   "canon": {
-    "content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
+    "content_sha": "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe",
     "revision": 1,
     "source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3"
   },

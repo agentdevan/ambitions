@@ -1,0 +1,265 @@
+{
+  "registry_revision": "task-25-authorization-benchmark-policy-v1",
+  "scenarios": [
+    {
+      "approval_required": false,
+      "authorized_files": [
+        "Native/Ambitions/Surfaces/Today/TodayAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Source Green for the exact authorized synthetic Today SwiftUI scope only; no Runtime, Visual, Accessibility, Device, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "native-ui-proof",
+        "offline-determinism"
+      ],
+      "required_checks": [
+        "gate-b-today-swiftui"
+      ],
+      "requirement_ids": [
+        "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001"
+      ],
+      "scenario_id": "today-swiftui",
+      "scope": [
+        "surface.today.first-viewport"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-ios-quality-gate",
+        "ambitions-release-proof-honesty",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "swiftui"
+    },
+    {
+      "approval_required": false,
+      "authorized_files": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecurrenceAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Source and test proof for the exact authorized synthetic Time recurrence scope only; no product, device, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "recurrence-contract-proof"
+      ],
+      "required_checks": [
+        "gate-b-time-recurrence"
+      ],
+      "requirement_ids": [
+        "OBJ-EVENT-RECURRENCE-EDIT-001"
+      ],
+      "scenario_id": "time-recurrence",
+      "scope": [
+        "object.event.recurrence-edit"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-ios-quality-gate",
+        "ambitions-runtime-contract-engineering",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "runtime"
+    },
+    {
+      "approval_required": false,
+      "authorized_files": [
+        "Native/Ambitions/Composer/Capture/CaptureProposalAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Source Green for the exact authorized synthetic Capture proposal scope only; no Interaction, Visual, Device, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "proposal-only-proof"
+      ],
+      "required_checks": [
+        "gate-b-capture-proposal"
+      ],
+      "requirement_ids": [
+        "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001"
+      ],
+      "scenario_id": "capture-proposal",
+      "scope": [
+        "global.capture.proposal-flow"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-ios-quality-gate",
+        "ambitions-runtime-contract-engineering",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "swiftui"
+    },
+    {
+      "approval_required": false,
+      "authorized_files": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MutationAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Source and test proof for the exact authorized synthetic LocalRuntimeOS mutation scope only; no app-wide Runtime or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "runtime-receipt-proof"
+      ],
+      "required_checks": [
+        "gate-b-local-runtime-mutation"
+      ],
+      "requirement_ids": [
+        "SYSTEM-RUNTIME-MUTATION-001"
+      ],
+      "scenario_id": "local-runtime-mutation",
+      "scope": [
+        "system.runtime.mutation-sequence"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-runtime-contract-engineering",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "runtime"
+    },
+    {
+      "approval_required": true,
+      "authorized_files": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Authorization proof for the exact synthetic CloudKit continuity scope only; no privacy/legal, production CloudKit, Runtime, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "privacy-continuity-proof"
+      ],
+      "required_checks": [
+        "gate-b-cloudkit-continuity"
+      ],
+      "requirement_ids": [
+        "SYSTEM-CONTINUITY-SEPARATION-001"
+      ],
+      "scenario_id": "cloudkit-continuity",
+      "scope": [
+        "system.continuity.user-owned-cloudkit"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-release-proof-honesty",
+        "ambitions-runtime-contract-engineering",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "privacy"
+    },
+    {
+      "approval_required": true,
+      "authorized_files": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/BoundaryAuthorizationBenchmark.swift",
+        "raw-base64url:TmF0aXZlL0FtYml0aW9ucy9Db3JlL0xvY2FsUnVudGltZU9TL1NvdXJjZUF0bGFzL3Jhdy3_LmJpbg"
+      ],
+      "maximum_claim_ceiling": "Authorization proof for the exact synthetic Source Atlas boundary scope only; no privacy/legal, production R2, Runtime, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "source-atlas-boundary-proof"
+      ],
+      "required_checks": [
+        "gate-b-source-atlas-boundary"
+      ],
+      "requirement_ids": [
+        "SYSTEM-SOURCE-ATLAS-FIREWALL-001"
+      ],
+      "scenario_id": "source-atlas-boundary",
+      "scope": [
+        "system.source-atlas.egress-firewall"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-release-proof-honesty",
+        "ambitions-runtime-contract-engineering",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "privacy"
+    },
+    {
+      "approval_required": false,
+      "authorized_files": [
+        "Native/Ambitions/Interaction/Accessibility/ReadingOrderAuthorizationBenchmark.swift"
+      ],
+      "maximum_claim_ceiling": "Source and test proof for the exact authorized synthetic accessibility repair scope only; no Accessibility, Visual, Device, or Release Green.",
+      "proof_obligations": [
+        "accessibility-proof",
+        "focused-tests",
+        "independent-review",
+        "offline-determinism"
+      ],
+      "required_checks": [
+        "gate-b-accessibility-repair"
+      ],
+      "requirement_ids": [
+        "A11Y-READING-FOCUS-001"
+      ],
+      "scenario_id": "accessibility-repair",
+      "scope": [
+        "standard.accessibility.reading-focus"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-ios-quality-gate",
+        "ambitions-release-proof-honesty",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "swiftui"
+    },
+    {
+      "approval_required": true,
+      "authorized_files": [
+        "docs/qa/authorization/ReleaseProofAuthorizationBenchmark.json"
+      ],
+      "maximum_claim_ceiling": "Governance authorization proof for the exact synthetic release-proof claim scope only; no Device, TestFlight, App Store, or Release Green.",
+      "proof_obligations": [
+        "focused-tests",
+        "independent-review",
+        "offline-determinism",
+        "release-claim-proof"
+      ],
+      "required_checks": [
+        "gate-b-release-proof-claim"
+      ],
+      "requirement_ids": [
+        "PROOF-CLAIM-CEILING-001"
+      ],
+      "scenario_id": "release-proof-claim",
+      "scope": [
+        "engineering.release.claim-ceiling"
+      ],
+      "skill_adapters": [
+        "ambitions-architecture-tree-enforcement",
+        "ambitions-release-proof-honesty",
+        "ambitions-source-truth-authority"
+      ],
+      "task_type": "release"
+    }
+  ],
+  "schema_version": 1,
+  "visual_review_policy": {
+    "accessibility_variants_source": "docs/canon/migration/visual-authority-rebaseline.json",
+    "claim_ceiling": "Figma design authority only; no simulator, runtime, device, accessibility, privacy, or release proof.",
+    "figma_evidence_kind": "figma-design-export",
+    "merged_visual_ledger_paths": [
+      "docs/canon/generated/canon-index.json",
+      "docs/canon/generated/visual-authority-manifest.json",
+      "docs/canon/migration/ux-blueprint.json",
+      "docs/canon/migration/visual-authority-rebaseline.json"
+    ],
+    "required_review_dimensions": [
+      "accessibility-coverage",
+      "frame-completeness",
+      "journey-coverage",
+      "object-coverage",
+      "requirement-coverage",
+      "screenshot-authenticity",
+      "state-coverage"
+    ]
+  }
+}

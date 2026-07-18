@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
+  "canon_content_sha": "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "documents": [
@@ -3329,7 +3329,7 @@
     },
     {
       "concept": "global.search.placement",
-      "line": 1496,
+      "line": 1503,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
       "source_path": "docs/canon/specifications/global/search.md",
@@ -4823,5 +4823,5 @@
     }
   ],
   "schema_version": 1,
-  "traceability_input_sha": "0325ca1f208b16eb88470965be3d4e512520c93bf5e93418cd6da8c4baf50c77"
+  "traceability_input_sha": "2a498a0c103cbb297b4ca489982b820e1e14f915a56656989fdf21ddfa09e723"
 }

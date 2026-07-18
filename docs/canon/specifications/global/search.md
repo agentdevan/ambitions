@@ -1437,6 +1437,7 @@ Search is full-screen non-root presentation. Result detail uses native depth or 
 Results show canonical identity, type, relevant status/date/context, privacy-safe excerpt, provenance/trust marker only when relevant, and safe actions. Grouping and ranking rationale remain plain and inspectable without exposing internals.
 
 <!-- canon-section: resting-states -->
+Resting-state evidence covers the declared empty, result, answer, recovery, handoff, action, rebuild, restored, and privacy-suppressed presentations.
 Required states are empty query, recent/local suggestions, querying, results, no results, filtered, selected, Ask unavailable with deterministic offline fallback, synthesis in progress, a bounded grounded answer with supporting objects, sources, assumptions, and uncertainty, Ask failure, interruption, resume, recovery, Capture handoff, action preview, action complete, rebuilding, restored, and privacy-suppressed.
 
 <!-- canon-section: loading-transitional -->
@@ -1450,12 +1451,15 @@ No results offers query repair, scope/filter changes, Capture, or exact setting 
 Type/edit query, filter, select, open, ask, inspect supporting object/source/assumption/uncertainty, propose complete, Start now, schedule/reschedule, add Proof, pause/resume, review conflict, inspect Source/Receipt/History/Proof/Privacy, open Capture, and open exact setting use explicit controls and canonical commands. No gesture is required.
 
 <!-- canon-section: durable-effects -->
+Durable effects are limited to canonical-owner commands, events, projections, Receipts, and replay after explicit confirmation.
 Queries, answers, interpretations, proposals, and result views do not mutate canonical data. Accepted owner actions follow Command to Event to Projection to Receipt to Replay; explicit persistence routes a question, answer, proposal, or derived object to its identified canonical owner; index updates consume projections and never write canonical object copies.
 
 <!-- canon-section: failure-rollback -->
+Failure preserves canonical state and query context; rollback delegates any committed inverse to the canonical owner.
 Rejected or stale result actions re-resolve the object and leave state unchanged. Partial action/external failure preserves accepted local intent and result status. Missing, stale, private, or contradictory grounding withholds or labels the affected inference and preserves deterministic results. Index failure quarantines/rebuilds from canonical projections; Undo routes to the canonical owner.
 
 <!-- canon-section: offline -->
+Offline Search preserves deterministic local Find, Act, Inspect, Receipt, replay, and index-rebuild behavior.
 Query, ranking, filtering, result opening, approved local action proposals, inspection, rebuild, Receipt, and replay work without account/network. On-device Ask MAY enhance this path but is never required; when unavailable, Search degrades to deterministic Find / Act / Inspect. Network availability cannot change core ranking authority or reveal more private content.
 
 <!-- canon-section: privacy-data-classification -->
@@ -1481,12 +1485,15 @@ The named shell package controls placement only;
 Search rendering, accessibility/device evidence, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
+Source ownership remains exact across Stage, LocalRuntimeOS Search, Projections, Commands, Trust, and Quality.
 Canonical target ownership is exact: `Stage/` owns presentation containment; the existing `Core/LocalRuntimeOS/Search/` owner owns index/ranking/rebuild and any future on-device Ask synthesis; `Projections/` supplies views; `Commands/` owns actions; `Trust/` owns inspection; `Quality/` owns proof. This ownership statement creates no new architecture path or Swift source and does not assert that Ask is implemented.
 
 <!-- canon-section: tests -->
+Executable tests bind ranking, privacy, object families, Ask grounding, action safety, recovery, offline use, replay, accessibility, and return focus.
 Tests cover exact/prefix/typo/date/context ranking, immediate while-typing results, suppression/privacy, every object family, optional Ask grounding and unavailable fallback, approved-reference use, supporting objects/sources/assumptions/uncertainty, retrieved/inferred/proposed distinction, session-local history, explicit persistence routing, Capture handoff, action safety/material preview, stale object, index corruption/rebuild, partial results, offline, replay/Undo, return focus, VoiceOver order/actions/rotor, Dynamic Type, reduced effects, contrast, and scale.
 
 <!-- canon-section: proof -->
+Proof binds declared-corpus ranking, privacy filtering, local execution, grounded Ask fallback, owner Receipts, recovery, and accessibility evidence.
 Required proof includes declared-corpus ranking metrics, privacy/filter fixtures, on-device and no-egress evidence, Ask-grounding and unavailable-fallback fixtures, session-expiry/persistence proof, Capture handoff, action Receipts/replay, corruption recovery, screenshot/accessibility matrices, scoped visual approval, exact commands/exits, environment, known gaps, and rollback. Current posture is canon-and-mapping-only: generated index maps, normative Ask wording, target source ownership, and state contracts do not prove or implement on-device Ask, rendered Search UI, accessibility behavior, or runtime performance.
 
 <!-- canon-section: performance -->

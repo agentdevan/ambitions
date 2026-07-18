@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104`
+- Canon content SHA: `b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe`
 
 ## Specifications
 
@@ -386,7 +386,7 @@
 | `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:1364` |
 | `SPEC-GLOBAL-SEARCH-INPUT-001` | MUST | `global.search.input` | `docs/canon/specifications/global/search.md:1283` |
 | `SPEC-GLOBAL-SEARCH-INSPECT-001` | MUST | `global.search.inspect` | `docs/canon/specifications/global/search.md:1316` |
-| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:1496` |
+| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:1503` |
 | `SPEC-GLOBAL-SEARCH-PRESENTATION-001` | MUST NOT | `global.search.presentation` | `docs/canon/specifications/global/search.md:1338` |
 | `SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:1228` |
 | `SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001` | MUST | `global.search.session-history` | `docs/canon/specifications/global/search.md:1305` |

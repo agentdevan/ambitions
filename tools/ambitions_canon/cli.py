@@ -9,12 +9,24 @@ import os
 import stat
 import subprocess
 import sys
-from collections.abc import Sequence
+import tempfile
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
 from tools.ambitions_canon import __version__
 from tools.ambitions_canon.audit import audit_registry
+from tools.ambitions_canon.authorization import (
+    AuthorizationError,
+    canonical_json_bytes,
+    load_base_nonce_consumption_generation,
+    load_base_policy,
+    load_trusted_bindings,
+    task_finalize,
+    task_start,
+    trusted_event_projection_digest,
+    write_authorization_output,
+)
 from tools.ambitions_canon.build import build_canon
 from tools.ambitions_canon.build import (
     _open_parent_nofollow,
@@ -69,6 +81,13 @@ from tools.ambitions_canon.model import (
     Requirement,
 )
 from tools.ambitions_canon.query import query_by_concept, query_by_id
+from tools.ambitions_canon.purge import (
+    PurgePlan,
+    authority_sprawl_findings,
+    parse_purge_plan,
+    render_purge_plan,
+    verify_purge_dry_run,
+)
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.task_pack import (
@@ -82,6 +101,13 @@ from tools.ambitions_canon.task_pack import (
     write_task_pack,
 )
 from tools.ambitions_canon.traceability import build_traceability
+from tools.ambitions_canon.skill_conformance import (
+    SkillConformanceError,
+    check_skill_conformance,
+)
+
+
+_GIT_TIMEOUT_SECONDS = 60
 
 
 PUBLIC_AUDIT_CODES = frozenset(
@@ -256,6 +282,62 @@ def main(argv: Sequence[str] | None = None) -> int:
         type=Path,
         metavar="PACK_JSON",
         help="reject this stored pack unless every authorization input is current",
+    )
+    skill_parser = subparsers.add_parser(
+        "skill-conformance",
+        help="validate retained procedural adapters against canonical dependencies",
+    )
+    skill_parser.add_argument("--check", action="store_true", required=True)
+    sprawl_parser = subparsers.add_parser(
+        "authority-sprawl",
+        help="reject authority-like files outside the canonical atlas",
+    )
+    sprawl_parser.add_argument("--check", action="store_true", required=True)
+    purge_parser = subparsers.add_parser(
+        "purge", help="plan or verify authority purge eligibility without deleting"
+    )
+    purge_subparsers = purge_parser.add_subparsers(
+        dest="purge_command", required=True
+    )
+    purge_plan_parser = purge_subparsers.add_parser("plan")
+    purge_plan_parser.add_argument("--output", type=Path, required=True)
+    purge_verify_parser = purge_subparsers.add_parser("verify")
+    purge_verify_parser.add_argument("--plan", type=Path, required=True)
+    purge_verify_parser.add_argument("--dry-run", action="store_true", required=True)
+    purge_verify_parser.add_argument("--pre-delete-revision")
+    purge_verify_parser.add_argument("--candidate-revision")
+    purge_verify_parser.add_argument(
+        "--owner-approval-attestation", type=Path, action="append", default=[]
+    )
+    purge_verify_parser.add_argument(
+        "--independent-review-attestation", type=Path, action="append", default=[]
+    )
+    task_parser = subparsers.add_parser(
+        "task", help="start or finalize fail-closed tracked-change authorization"
+    )
+    task_subparsers = task_parser.add_subparsers(dest="task_command", required=True)
+    task_start_parser = task_subparsers.add_parser("start")
+    task_start_parser.add_argument(
+        "--mode", choices=("local", "local-advisory", "ci-pr-range"), default="local"
+    )
+    task_start_parser.add_argument("--intake-json", type=Path, required=True)
+    task_start_parser.add_argument("--output", type=Path, required=True)
+    task_start_parser.add_argument("--trusted-event", type=Path)
+    task_start_parser.add_argument(
+        "--approval-attestation", type=Path, action="append", default=[]
+    )
+    task_finalize_parser = task_subparsers.add_parser("finalize")
+    task_finalize_parser.add_argument(
+        "--authorization", type=Path, required=True
+    )
+    task_finalize_parser.add_argument("--intake-json", type=Path)
+    task_finalize_parser.add_argument("--output", type=Path, required=True)
+    task_finalize_parser.add_argument("--trusted-event", type=Path)
+    task_finalize_parser.add_argument(
+        "--approval-attestation", type=Path, action="append", default=[]
+    )
+    task_finalize_parser.add_argument(
+        "--validation-attestation", type=Path, action="append", default=[]
     )
     amend_parser = subparsers.add_parser(
         "amend", help="prepare a governed temporary canon amendment"
@@ -433,6 +515,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not issue_path.is_absolute():
             issue_path = Path.cwd() / issue_path
         return _pack(Path.cwd(), issue_path, check=False)
+
+    if arguments.command == "skill-conformance":
+        return _skill_conformance(Path.cwd())
+
+    if arguments.command == "authority-sprawl":
+        return _authority_sprawl(Path.cwd())
+
+    if arguments.command == "purge":
+        return _purge(Path.cwd(), arguments)
+
+    if arguments.command == "task":
+        return _task(Path.cwd(), arguments)
 
     if arguments.command == "amend":
         assert arguments.amend_command == "scaffold"
@@ -989,6 +1083,366 @@ def _requirement_payload(requirement: Requirement) -> dict[str, object]:
     }
 
 
+def _skill_conformance(root: Path) -> int:
+    path = root / "docs/canon/references/skill-dependencies.json"
+    try:
+        data = _read_json_object(path, "SKILL_REGISTRY_READ")
+        result = check_skill_conformance(root, data, compiler_version=__version__)
+        print(
+            "GREEN skill conformance "
+            f"skills={len(result['skill_ids'])} "
+            f"registry_digest={result['registry_digest']}"
+        )
+        return 0
+    except (CanonError, SkillConformanceError) as error:
+        code = getattr(error, "code", "SKILL_CONFORMANCE")
+        print(f"P0_BLOCKER {code} {error}")
+        return 1
+
+
+def _authority_sprawl(root: Path) -> int:
+    try:
+        manifest = load_manifest(root)
+        baseline_path = root / "docs/canon/migration/authority-freeze-baseline.json"
+        baseline = _read_json_object(baseline_path, "AUTHORITY_BASELINE_READ")
+        paths = baseline.get("paths")
+        if not isinstance(paths, list) or any(
+            not isinstance(item, str) for item in paths
+        ):
+            raise CanonError(
+                "AUTHORITY_BASELINE_INVALID",
+                "authority freeze baseline has no path array",
+                baseline_path,
+            )
+        findings = authority_sprawl_findings(root, manifest, baseline=paths)
+        if findings:
+            for finding in findings:
+                location = finding.path.as_posix() if finding.path else "<repo>"
+                print(
+                    f"{finding.severity.value} {finding.code} {location}:0 "
+                    f"{finding.message}"
+                )
+            return 1
+        print(
+            "GREEN authority sprawl "
+            f"authority_state={manifest.authority_state.value}"
+        )
+        return 0
+    except CanonError as error:
+        location = error.path.as_posix() if error.path else "<repo>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _purge(root: Path, arguments: argparse.Namespace) -> int:
+    try:
+        if arguments.purge_command == "plan":
+            plan = PurgePlan(
+                schema_version=1,
+                rollback_ref="refs/tags/canon-system-baseline-2026-07-11",
+                source_catalog_sha256=hashlib.sha256(
+                    canonical_json_bytes([])
+                ).hexdigest(),
+                dispositions_sha256=hashlib.sha256(
+                    canonical_json_bytes({})
+                ).hexdigest(),
+                references_sha256=hashlib.sha256(
+                    canonical_json_bytes({})
+                ).hexdigest(),
+                artifacts=(),
+            )
+            output = arguments.output
+            if not output.is_absolute():
+                output = root / output
+            _write_text_atomic(output, render_purge_plan(plan))
+            print(f"GREEN purge plan output={_display_path(root, output)} artifacts=0")
+            return 0
+        plan_path = arguments.plan
+        if not plan_path.is_absolute():
+            plan_path = root / plan_path
+        try:
+            text = _read_intake_bytes(plan_path).decode("utf-8")
+            plan = parse_purge_plan(text)
+        except (OSError, UnicodeError, ValueError, CanonError) as exc:
+            raise CanonError(
+                "PURGE_PLAN_READ", "unable to parse purge plan", plan_path
+            ) from exc
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        pre_delete_revision = arguments.pre_delete_revision or _git(
+            root, "rev-parse", "HEAD"
+        ).decode().strip()
+        candidate_revision = arguments.candidate_revision or _git(
+            root, "write-tree"
+        ).decode().strip()
+        owner_attestations = tuple(
+            _read_json_argument(root, path, "PURGE_APPROVAL_READ")
+            for path in arguments.owner_approval_attestation
+        )
+        review_attestations = tuple(
+            _read_json_argument(root, path, "PURGE_REVIEW_READ")
+            for path in arguments.independent_review_attestation
+        )
+        findings = verify_purge_dry_run(
+            plan,
+            root,
+            registry,
+            pre_delete_revision=pre_delete_revision,
+            candidate_revision=candidate_revision,
+            owner_approval_attestations=owner_attestations,
+            independent_review_attestations=review_attestations,
+        )
+        if findings:
+            for finding in findings:
+                location = finding.path.as_posix() if finding.path else "<plan>"
+                print(
+                    f"{finding.severity.value} {finding.code} {location}:0 "
+                    f"{finding.message}"
+                )
+            return 1
+        print(
+            "GREEN purge verify dry_run=true "
+            f"artifacts={len(plan.artifacts)} "
+            f"pre_delete_tree={pre_delete_revision} candidate_tree={candidate_revision}"
+        )
+        return 0
+    except CanonError as error:
+        location = error.path.as_posix() if error.path else "<purge>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _task(root: Path, arguments: argparse.Namespace) -> int:
+    try:
+        if arguments.task_command == "start":
+            mode = (
+                "local-advisory"
+                if arguments.mode in {"local", "local-advisory"}
+                else "ci-pr-range"
+            )
+            intake_path = arguments.intake_json
+            if not intake_path.is_absolute():
+                intake_path = root / intake_path
+            intake_data = _read_json_object(intake_path, "AUTH_INTAKE_READ")
+            event_data = (
+                _local_trusted_event(root)
+                if mode == "local-advisory"
+                else _required_json_argument(
+                    root, arguments.trusted_event, "AUTH_EVENT_MISSING"
+                )
+            )
+            base_sha, verification_epoch = _event_cli_bindings(event_data)
+            policy_data = load_base_policy(root, base_sha)
+            bindings = load_trusted_bindings(
+                root, base_sha, intake_data, policy_data
+            )
+            approvals = tuple(
+                _read_json_argument(root, path, "AUTH_APPROVAL_READ")
+                for path in arguments.approval_attestation
+            )
+            result = task_start(
+                repo_root=root,
+                mode=mode,
+                intake_data=intake_data,
+                trusted_event_data=event_data,
+                trusted_bindings=bindings,
+                policy_data=policy_data,
+                approval_attestations=approvals,
+                verification_epoch=verification_epoch,
+            )
+            output = arguments.output
+            pack_result = _pack(root, intake_path, check=False)
+            if pack_result != 0:
+                raise AuthorizationError(
+                    "AUTH_TASK_PACK_FAILED",
+                    "bounded task pack could not be generated",
+                )
+            write_authorization_output(
+                root, output, result, kind="authorization"
+            )
+            print(
+                "GREEN task start "
+                f"mode={mode} files={len(result['computed_authorized_files'])}"
+            )
+            return 0
+
+        authorization_path = arguments.authorization
+        if not authorization_path.is_absolute():
+            authorization_path = root / authorization_path
+        authorization = _read_json_object(
+            authorization_path, "AUTH_ENVELOPE_READ"
+        )
+        if arguments.intake_json is None:
+            intake_data = authorization.get("intake")
+            if not isinstance(intake_data, dict):
+                raise AuthorizationError(
+                    "AUTH_INTAKE_MISSING", "authorization has no embedded intake"
+                )
+        else:
+            intake_data = _read_json_argument(
+                root, arguments.intake_json, "AUTH_INTAKE_READ"
+            )
+        event_data = (
+            authorization.get("trusted_event_provenance")
+            if arguments.trusted_event is None
+            else _read_json_argument(
+                root, arguments.trusted_event, "AUTH_EVENT_READ"
+            )
+        )
+        if not isinstance(event_data, dict):
+            raise AuthorizationError(
+                "AUTH_EVENT_MISSING", "trusted event projection is required"
+            )
+        base_sha, verification_epoch = _event_cli_bindings(event_data)
+        policy_data = load_base_policy(root, base_sha)
+        bindings = load_trusted_bindings(root, base_sha, intake_data, policy_data)
+        approvals = tuple(
+            _read_json_argument(root, path, "AUTH_APPROVAL_READ")
+            for path in arguments.approval_attestation
+        )
+        validations = tuple(
+            _read_json_argument(root, path, "AUTH_VALIDATION_READ")
+            for path in arguments.validation_attestation
+        )
+        receipt = task_finalize(
+            repo_root=root,
+            authorization=authorization,
+            intake_data=intake_data,
+            trusted_event_data=event_data,
+            trusted_bindings=bindings,
+            policy_data=policy_data,
+            approval_attestations=approvals,
+            validation_attestations=validations,
+            verification_epoch=verification_epoch,
+        )
+        write_authorization_output(
+            root, arguments.output, receipt, kind="finalization"
+        )
+        print(
+            "GREEN task finalize "
+            f"mode={receipt['mode']} files={len(receipt['exact_changed_files'])} "
+            f"merge_authorized={str(receipt['merge_authorized']).lower()}"
+        )
+        return 0
+    except (AuthorizationError, CanonError) as error:
+        code = getattr(error, "code", "AUTHORIZATION_FAILED")
+        print(f"P0_BLOCKER {code} {error}")
+        return 1
+
+
+def _event_cli_bindings(event_data: Mapping[str, object]) -> tuple[str, int]:
+    base_sha = event_data.get("trusted_base_sha")
+    verification_epoch = event_data.get("verification_epoch")
+    if not isinstance(base_sha, str) or not base_sha.strip():
+        raise AuthorizationError(
+            "AUTH_EVENT_FIELDS", "trusted event has no base SHA"
+        )
+    if (
+        isinstance(verification_epoch, bool)
+        or not isinstance(verification_epoch, int)
+        or verification_epoch <= 0
+    ):
+        raise AuthorizationError(
+            "AUTH_EVENT_FIELDS", "trusted event has no positive verification epoch"
+        )
+    return base_sha, verification_epoch
+
+
+def _local_trusted_event(root: Path) -> dict[str, object]:
+    head = _git(root, "rev-parse", "HEAD").decode().strip()
+    base_ref = "refs/heads/main"
+    try:
+        base = _git(root, "rev-parse", "--verify", base_ref).decode().strip()
+    except CanonError:
+        branch = _git(root, "symbolic-ref", "--quiet", "HEAD").decode().strip()
+        base_ref = branch
+        base = head
+    merge_base = _git(root, "merge-base", base, head).decode().strip()
+    policy = load_base_policy(root, base)
+    consumption_generation = load_base_nonce_consumption_generation(root, base)
+    identity = policy["repository_identity"]
+    assert isinstance(identity, Mapping)
+    event: dict[str, object] = {
+        "schema_version": 1,
+        "event_provider": "github",
+        "event_attestation_origin": "local-advisory",
+        "repository_id": identity["repository_id"],
+        "repository_full_name": identity["repository_full_name"],
+        "pull_request_number": 1,
+        "base_ref": base_ref,
+        "trusted_base_sha": base,
+        "trusted_head_sha": head,
+        "merge_base_sha": merge_base,
+        "verification_epoch": 1,
+        "workflow_run_id": 0,
+        "workflow_run_attempt": 0,
+        "consumption_generation": consumption_generation,
+        "issue_state_transition": {
+            "schema_version": 1,
+            "snapshot_revision": "local-advisory-empty-v1",
+            "base_issue_state_sha256": hashlib.sha256(
+                canonical_json_bytes(policy["issue_state"])
+            ).hexdigest(),
+            "completed_task_receipts": [],
+        },
+        "trust_anchor_id": None,
+        "trust_anchor_sha256": None,
+        "signature_algorithm": None,
+        "signature_base64url": None,
+    }
+    event["event_projection_digest"] = trusted_event_projection_digest(event)
+    return event
+
+
+def _required_json_argument(
+    root: Path, path: Path | None, code: str
+) -> dict[str, object]:
+    if path is None:
+        raise AuthorizationError(code, "required JSON argument is missing")
+    return _read_json_argument(root, path, code)
+
+
+def _read_json_argument(root: Path, path: Path, code: str) -> dict[str, object]:
+    absolute = path if path.is_absolute() else root / path
+    try:
+        return _read_json_object(absolute, code)
+    except CanonError as exc:
+        raise AuthorizationError(code, "unable to read trusted JSON argument") from exc
+
+
+def _read_json_object(path: Path, code: str) -> dict[str, object]:
+    try:
+        raw = _read_intake_bytes(path)
+        value = json.loads(raw.decode("utf-8"))
+    except (CanonError, UnicodeError, json.JSONDecodeError) as exc:
+        raise CanonError(code, "unable to read UTF-8 JSON object", path) from exc
+    if not isinstance(value, dict):
+        raise CanonError(code, "JSON root must be an object", path)
+    return value
+
+
+def _write_text_atomic(path: Path, text: str) -> None:
+    if not text.endswith("\n"):
+        raise CanonError("CANON_OUTPUT_NEWLINE", "text output must end in newline", path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        dir=path.parent, prefix=f".{path.name}."
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+            stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+
+
 def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
     """Build or validate one issue-scoped task pack."""
 
@@ -1016,7 +1470,7 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
                 "issue intake must be a JSON object",
                 issue_path,
             )
-        intake = TaskIntake.from_json(data).with_source_path(
+        intake = _task_pack_intake(data).with_source_path(
             _display_path(root, issue_path)
         )
         try:
@@ -1520,7 +1974,7 @@ def _require_source_snapshot(
         ) from exc
     if not isinstance(data, dict):
         raise CanonError("PACK_INTAKE_STALE", "issue intake root changed", issue_path)
-    intake = TaskIntake.from_json(data).with_source_path(
+    intake = _task_pack_intake(data).with_source_path(
         _display_path(root, issue_path)
     )
     repository_sha = _repository_state_sha(root)
@@ -1586,6 +2040,12 @@ def _validated_docket_issues(
     return docket_known_issues(dockets)
 
 
+def _task_pack_intake(data: Mapping[str, object]) -> TaskIntake:
+    if "intake_id" in data or "requested_task_type" in data:
+        return TaskIntake.from_authorization_intake(data)
+    return TaskIntake.from_json(data)
+
+
 def _read_intake_bytes(path: Path) -> bytes:
     try:
         with _open_parent_nofollow(path) as (parent_descriptor, name, absolute):
@@ -1630,8 +2090,9 @@ def _git(root: Path, *arguments: str) -> bytes:
             check=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            timeout=_GIT_TIMEOUT_SECONDS,
         )
-    except OSError as exc:
+    except (OSError, subprocess.SubprocessError) as exc:
         raise CanonError(
             "PACK_REPOSITORY_STATE",
             "unable to execute Git for task-pack provenance",

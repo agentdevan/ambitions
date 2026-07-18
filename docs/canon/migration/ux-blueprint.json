@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
+  "canon_content_sha": "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe",
   "canon_revision": 1,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [
@@ -11564,11 +11564,11 @@
     },
     {
       "path": "docs/canon/specifications/global",
-      "sha256": "9e3cbbf3e7250d7393f0600642c76aecf3c80d74f3842a77d5f10035a1619a8b"
+      "sha256": "24ceb7d37f4f5006ef237e0a6b8569bb7d2a888d97c0b258541bcfabc330cc8f"
     },
     {
       "path": "docs/canon/specifications/journeys",
-      "sha256": "8b02777707116a8160861a1acc21ad2f39d4f4ce7fb2157823281a2a03fb7906"
+      "sha256": "370801d6547e71fc8b0ff7a8fd4aa6ebe50c7ef7f32ea90280998c04810036ee"
     },
     {
       "path": "docs/canon/specifications/objects",

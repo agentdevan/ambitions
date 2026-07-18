@@ -1,0 +1,33 @@
+{
+  "authorities": [
+    {
+      "accessibility_variants": ["Dynamic Type", "VoiceOver"],
+      "frame_id": "SYNTH-VSP-01",
+      "journey_ids": ["synthetic-today-start"],
+      "requirement_ids": ["SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"],
+      "screen_id": "synthetic-today",
+      "source_node_id": "synthetic:1",
+      "state_ids": ["default", "recovery"]
+    },
+    {
+      "accessibility_variants": ["Dynamic Type", "Reduce Motion", "VoiceOver"],
+      "frame_id": "SYNTH-VSP-02",
+      "journey_ids": ["synthetic-capture-proposal"],
+      "requirement_ids": ["SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001", "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001"],
+      "screen_id": "synthetic-capture",
+      "source_node_id": "synthetic:2",
+      "state_ids": ["confirmation", "proposal"]
+    },
+    {
+      "accessibility_variants": ["Differentiate Without Color", "Increase Contrast", "VoiceOver"],
+      "frame_id": "SYNTH-VSP-03",
+      "journey_ids": ["synthetic-trust-review"],
+      "requirement_ids": ["SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"],
+      "screen_id": "synthetic-trust",
+      "source_node_id": "synthetic:3",
+      "state_ids": ["approved", "review"]
+    }
+  ],
+  "manifest_revision": "task-25-synthetic-complete-visual-authority-v1",
+  "schema_version": 1
+}

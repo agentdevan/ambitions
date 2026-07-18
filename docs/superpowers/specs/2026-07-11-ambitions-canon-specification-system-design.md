@@ -10,6 +10,10 @@
 
 **Train 5 trust-topology amendment:** `TRAIN5-TRUST-TOPOLOGY-AMENDMENT-2026-07-17`, recorded at `docs/superpowers/amendments/2026-07-17-train-5-trust-topology-amendment.json`, governs Tasks 24–29 where it is more specific than the original Train 5 allocation. The amendment changes sequencing and proof ownership only; it does not change active authority, routing, CI, retained skills, cutover state, or any product/release claim.
 
+**Owner direct-integration override:** `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z` supersedes every protected-branch, required-CI/check, CI-installation, ruleset-inspection, live-boundary activation/no-drift receipt, and post-merge protected-receipt prerequisite for Tasks 24–29. Those controls remain an unimplemented future target and MUST NOT be claimed from this train. Tasks 24–29 may integrate directly only after exact SHA-bound local authorization and verification, one exact high-risk review, an owner-approved break-glass record bound to this decision, and current rollback evidence. Gate B must state `live_enforcement_proven = false` and `post_merge_receipt_required = false`; Task 26 cuts authority and routing without installing protected CI; Gate C still requires exact destructive manifests/dry-runs, rollback, independent review, privacy/security/proof-honesty review, and owner-approved Search frames; Task 29 is limited to compact permanent negatives, one canary, and one regression closeout with no GitHub protection inspection. Final claims explicitly exclude protected enforcement. One reviewable commit per numbered task remains mandatory. Any contradictory Task 24–29 wording below is superseded by this paragraph and the bound amendment record.
+
+Task 24 additionally owns exactly two non-directional canon evidence inputs: `docs/canon/specifications/global/search.md` and `docs/canon/specifications/journeys/search-find-ask-act-inspect.md`. Their content-identity change owns all fourteen `docs/canon/generated/` manifest projections, `docs/canon/generated/codex-consumption-benchmark.md`, plus freshness-only rebinding of `docs/canon/migration/UX_BLUEPRINT.md`, `VISUAL_AUTHORITY_REBASELINE.md`, `ux-blueprint-requirement-dispositions.json`, `ux-blueprint.json`, `visual-authority-r1-node-snapshot.json`, `visual-authority-rebaseline.json`, `docs/canon/registries/command-gate-approval-receipts.json`, and `command-gate-dependencies.json`; Task 24 also owns this five-document topology amendment bundle. After inputs freeze, perform those deterministic rebindings and regenerate the fifteen generated projections exactly once, then require `build --check` Green. Task 25 may not change those inputs or freshness outputs while they remain frozen. Tasks 24–29 use existing task type `release`, budget class `complex`, and exact ceiling `30,000`; `governance` remains unknown and fails `PACK_TASK_TYPE_UNKNOWN`.
+
 ---
 
 ## 1. Executive decision
@@ -99,7 +103,7 @@ The design must:
 15. Delete superseded files and downstream duplicate authority after cutover.
 16. Prevent authority sprawl from returning through CI and repository policy.
 17. Convert ChatGPT intent into a fail-closed, current-task authorization that binds the exact checkout, intake, dependencies, and diff.
-18. Make protected-branch required CI independently regenerate authorization so ignored local artifacts cannot authorize merge.
+18. Preserve protected-branch required CI as a future target while Tasks 24–29 use owner-approved exact SHA-bound local authorization and explicitly do not claim protected enforcement.
 
 ---
 
@@ -168,9 +172,9 @@ Unresolved P0 law, missing source ownership, missing UI authority, missing mutat
 
 ChatGPT expresses intent but cannot authorize implementation. Machine-readable PR intake is untrusted intent only. Project Instructions and skills are not authority. Intake may request scope, files, validation, proof, and claim ceiling, but it cannot carry authoritative owner approval, authorized-file decisions, proof claims, validation results, break-glass permission, or merge permission. A tracked change is authorized only when trusted policy computes authorization from the trusted base branch canon, schemas, task policy/registry, source ownership, trusted state snapshots, and platform-authenticated event/approval provenance, then validates the exact final diff. Any missing, mismatched, revoked, or stale trusted input invalidates authorization.
 
-### 5.12 Enforcement lives at the protected branch
+### 5.12 Protected enforcement is a future target outside Tasks 24–29
 
-Local hooks are convenience only. The protected-branch required CI check is the enforcement boundary and independently regenerates authorization from trusted base-owned or externally pinned policy, trusted GitHub event bindings, the PR checkout as data, and machine-readable PR intake as untrusted intent. It never trusts a task pack, local authorization envelope, finalization receipt, approval claim, or validation/proof result supplied by the contributor.
+The long-term target is protected-branch required CI that independently regenerates authorization from trusted base-owned or externally pinned policy. Owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z` explicitly excludes that installation and proof from Tasks 24–29. For this train, exact SHA-bound local authorization/finalization, verification, one exact high-risk review, rollback, and the bound owner break-glass record form the integration boundary. This exception creates no claim that protected enforcement exists.
 
 ---
 
@@ -1027,23 +1031,23 @@ PR-controlled workflows cannot satisfy required validation even when GitHub repo
 
 Workflow order is: trusted start and requirements derivation → required validation → CI-owned attestations → exact-diff finalize → skill conformance/build/audits as applicable. Local validation is advisory and cannot authorize merge.
 
-### 18.12 Gate transition, live proof, and break-glass
+### 18.12 Tasks 24–29 direct-integration transition and break-glass
 
-Verifier or policy changes use a two-stage gate-change protocol. A prior owner-approved governance amendment authorizes the new verifier/policy digest; the old trusted gate validates the transition PR; the protected ruleset switches only after merge and independent proof, with no unprotected interval.
+The two-stage protected gate-change protocol remains an unimplemented future target. Tasks 24–29 do not install protected CI, switch or inspect a ruleset, require a post-merge receipt, or claim live enforcement. They integrate directly under owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z` only after exact SHA-bound local authorization/finalization, verification, one exact high-risk review, and current rollback evidence.
 
 Train 5 preserves one program train but has three integration boundaries. Task 24 is a shadow-only verifier-foundation commit and reviewed foundation PR. It owns the reusable Gate B verifier, `task_pack.py` budget/freshness contract and its exact schema/permanent tests, closed registry, benchmark harness and exact fixtures, fixed benchmark policy, and closed legacy-audit invariant-parity policy needed by Task 25. It may also bind the validation command manifest and modify `task-authorization-policy.json` only if Gate B requires a byte change. Exact Task 24 files, fixture paths, folded permanent repair-test owners, `TASK_24_IMPLEMENTATION_REPORT.md`, and ignored `.superpowers/sdd/progress.md` are listed in the Train 5A plan; broad fixture staging is forbidden. Task 24 remains non-authoritative and MUST NOT change `authority_state`, `AGENTS.md` routing, retained skills, replacement CI, protected ruleset state, or cutover state. Its reviewed bytes must merge before Task 25 begins. Reuse bounded patches from the frozen speculative Task 24 and Task 25 candidates; do not repair, test, or merge those branches in place.
 
-Task 25 is proof/generated-output-only. It MUST execute the already-merged Task 24 verifier bytes and MUST NOT introduce or modify verifier, schema, policy, registry, CLI, fixture, or test behavior. Its tracked files are limited to `docs/canon/generated/cutover-readiness.md`, `docs/canon/migration/purge-plan.toml`, deterministic generated outputs changed by frozen inputs, and `docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md`; `.superpowers/sdd/progress.md` remains ignored. Gate B must be Green and approved before Task 26 changes authority, routing, retained skills, or CI. That owner decision is limited to Task 26 bootstrap installation: destructive and purge approvals remain false, Gate C remains Red, and purge-scope approval is deferred to Gate C. Tasks 25–26 then form the reviewed Train 5A cutover PR from merged Task 24. One reviewable commit per numbered task remains mandatory.
+Task 25 is proof/generated-output-only. It MUST execute the already-integrated Task 24 verifier bytes and MUST NOT introduce or modify verifier, schema, policy, registry, CLI, fixture, or test behavior. Its tracked files are limited to `docs/canon/generated/cutover-readiness.md`, `docs/canon/migration/purge-plan.toml`, deterministic generated outputs changed by frozen inputs, and `docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md`; `.superpowers/sdd/progress.md` remains ignored. Gate B must be Green and approved before Task 26 changes authority, routing, or retained skills. That decision covers Task 26 authority/routing cutover only, requires `live_enforcement_proven = false` and `post_merge_receipt_required = false`, and keeps destructive and purge approvals false, Gate C Red, and purge-scope approval deferred. Task 26 installs no protected CI. One reviewable commit per numbered task remains mandatory.
 
 Task 25 derives the exact required visual screen, state, journey, object, accessibility-variant, and visual-requirement set from the merged canon, UX, and visual ledgers; derives review dimensions from fixed merged policy; requires `figma-design-export` evidence bound to Figma file key, node ID, frame version, artifact bytes/digest, and the merged visual ledger; and remains Red for every `gap_blocked_state_ids` entry. It runs the base-owned old audit and requires a closed one-to-one legacy-audit invariant-parity registry with no missing, duplicate, unknown, or weaker mapping. It requires and parses all five replacement commands: audit, build check, P0 coverage, traceability, and authority sprawl. It binds real rollback evidence, uses bounded reads and explicit timeouts, and never upgrades design-authority evidence into simulator, runtime, device, accessibility, or release proof.
 
-The Train 5A cutover PR then merges so its base-owned required workflow can become live enforcement on protected `main`; an unmerged branch workflow is never live enforcement. Immediately after merge and before Gate C, controlled external GitHub inspection records the first durable protected-boundary receipt. Only a Green independently reviewed receipt may allow Gate C to approve destructive Tasks 27–28 or destructive/migration-state-removal portions of Task 29.
+The exact Tasks 25–26 range integrates directly after exact local authorization/finalization, one exact high-risk review, rollback, and the owner decision are current. Task 26 changes canon authority and repo routing only. No workflow installation, GitHub protection inspection, live-boundary activation, or post-merge receipt is required or produced, and protected enforcement remains unproven.
 
-Tasks 27–29 continue as Train 5B from merged Task 26 main in a separate reviewed PR/commit range; the exact branch name may be recreated or updated only from that merged base. Task 27 removes approved bypass paths in bounded reviewed batches. Task 28 is unchanged. Task 29 installs permanent negative tests including the Task 24 budget/topology repairs, runs exactly one heavyweight end-to-end ChatGPT-to-Codex canary, and uses fast deterministic fixtures/unit tests for the eight representative scenarios. Run one qualifying full regression only after the integrated cross-cutting enforcement candidate is frozen; repeat the whole-train regression at closeout only if the candidate changed after that qualifying run. Task 29 records `break_glass_status = "not_used"` by default; a live one-time attestation is required only after a separately approved actual incident/use. Task 29 repeats controlled external inspection at final closeout, records a second reviewed receipt, and proves no protected-boundary drift. The offline compiler can validate receipt schema and bindings but cannot manufacture live proof. Final closeout records the Task 24 foundation PR, the Train 5A cutover PR, and the Train 5B PR.
+Tasks 27–29 continue as Train 5B from integrated Task 26 main in a separate reviewed commit range. Task 27 removes approved bypass paths in bounded reviewed batches. Task 28 is unchanged. Task 29 retains compact permanent negatives including the Task 24 topology repairs, runs exactly one end-to-end canary and one qualifying regression, and performs no GitHub protection inspection or no-drift receipt work. It records owner break-glass decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`, exact reviewed SHA, rollback, `live_enforcement_proven = false`, and the explicit protected-enforcement exclusion.
 
 Every Task 24, Task 25, and Task 29 Python proof command is pinned to `python3.12`. Each task's durable evidence records the exact interpreter version and executable identity with the commands, exit codes, and results.
 
-No tracked change may merge without current task authorization and protected-branch required-CI enforcement. This amendment does not establish protected enforcement and does not authorize an unprotected Task 24 merge. If the foundation cannot merge under protected required CI, work stops for explicit one-time break-glass approval with an incident record, rollback, and independent post-action review; no such approval is implied here. No routine bypass is permitted. Break-glass is a platform-authenticated one-time attestation bound to incident ID, repository, PR, base/head, exact scope, authenticated owner principal, rollback, expiry and revocation, and post-action independent-review requirement. Reuse, ordinary routing, scope drift, missing incident record, expiry, or revocation fails closed. Gate B, Gate C, and delegated owner approval cannot waive these properties.
+Tasks 24–29 require current task authorization/finalization, exact SHA verification, one exact high-risk review, and rollback before direct integration. Owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z` is the scoped break-glass record and authorizes no reusable or routine bypass. Reuse, ordinary routing outside Tasks 24–29, scope drift, missing review, or missing rollback fails closed. Gate B and Gate C cannot waive retained authorization, Critical/Important repair, security/privacy/proof honesty, owner-approved Search frames, or exact destructive manifests/dry-runs; protected CI is outside their current scope.
 
 ---
 
@@ -1303,8 +1307,8 @@ Required proof:
 - final diff and changed files are exact and declared;
 - skill dependency freshness is proven;
 - all eight representative task scenarios pass `task start` and `task finalize`;
-- local packs, envelopes, and receipts cannot substitute for independent CI regeneration;
-- the merge-authorizing validator runs from the trusted base or pinned digest and CI-owned validation attestations bind the same trusted event;
+- local packs, envelopes, and receipts cannot self-authorize; exact local authorization/finalization is independently checked against the reviewed SHA;
+- the owner decision, exact tree delta, one exact high-risk review, and rollback bind the same frozen candidate;
 - the exact visual coverage set and fixed review dimensions are derived from merged ledgers/policy, not caller assertions;
 - every accepted visual artifact uses `figma-design-export` evidence bound to its Figma and artifact identity, and no gap-blocked state remains;
 - the base-owned old audit runs and a closed legacy-audit invariant-parity registry maps every old invariant exactly once to equivalent-or-stronger coverage;
@@ -1314,9 +1318,9 @@ Required proof:
 
 This proof is Gate B. Gate B remains hard Red until every item is Green, current, and independently reviewed. Task 26 cannot start while Gate B is Red.
 
-Any owner approval recorded by Task 25 is explicitly `owner_gate_b_task_26_bootstrap_approval`: it covers Task 26 installation only. Task 25 records destructive approval and purge approval as false, purge-scope approval as deferred to Gate C, and Gate C as Red.
+Any owner approval recorded by Task 25 is explicitly `owner_gate_b_task_26_authority_routing_cutover_approval`: it covers Task 26 authority/routing cutover only under `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`. It records `live_enforcement_proven = false`, `post_merge_receipt_required = false`, destructive approval and purge approval as false, purge-scope approval as deferred to Gate C, and Gate C as Red.
 
-### Phase 9 — Authority cutover and live-boundary activation
+### Phase 9 — Authority/routing cutover by direct integration
 
 One controlled cutover boundary from merged Task 24 plus reviewed Task 25 proof:
 
@@ -1324,19 +1328,17 @@ One controlled cutover boundary from merged Task 24 plus reviewed Task 25 proof:
 - require `task start` and `task finalize` for every tracked change;
 - reduce retained skills to non-authoritative procedural adapters with canonical dependency metadata;
 - generate `CHATGPT_CODEX_HANDOFF.md` and verify the governed ChatGPT Project Instructions SHA-256;
-- replace old constitutional CI with canon compiler checks;
-- install authorization and skill-conformance checks that independently regenerate from checkout plus PR intake;
-- install the base-owned/pinned least-privilege trust-boundary workflow and two-stage gate-change protocol;
 - make `docs/canon/` the only normative path;
 - record cutover commit and canon revision;
 - mark old authorities superseded for the cutover boundary only.
-- review and merge the Tasks 25–26 Train 5A cutover PR to protected `main`;
-- immediately inspect the live ruleset/environment/required-check boundary and record the first independently reviewed protected-boundary receipt;
-- keep Gate C Red until that post-merge receipt, rollback, and purge manifests are Green.
+- integrate each numbered task as one exact reviewed commit after SHA-bound local authorization/finalization, one exact high-risk review, rollback, and owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`;
+- install or inspect no protected CI, required check, branch rule, or ruleset;
+- record `live_enforcement_proven = false` and `post_merge_receipt_required = false`;
+- keep Gate C Red until rollback, privacy/security/proof-honesty review, owner-approved Search frames, and exact destructive manifests/dry-runs are Green.
 
 ### Phase 10 — Destructive purge
 
-After the Train 5A merge, first protected-boundary receipt, and Gate C approval:
+After Train 5A direct integration and Gate C approval for the retained destructive controls:
 
 - delete old truth files;
 - delete separate engineering constitution and article shards;
@@ -1350,16 +1352,12 @@ After the Train 5A merge, first protected-boundary receipt, and Gate C approval:
 
 ### Phase 11 — Anti-regression and closeout
 
-- install authority-sprawl CI;
-- verify no stale IDs or duplicate owners;
-- verify no old authority references;
-- run the eight representative scenarios as bounded deterministic fixtures/unit tests;
-- permanently test missing/stale intake, stale packs, undeclared files, missing finalization, stale skills, bypassed amendments, and deleted authority references;
-- prove the protected-branch ruleset requires the independently regenerating authorization check;
-- repeat live GitHub configuration inspection, validate a final reviewed ruleset/environment evidence receipt, and prove no drift from the first receipt;
-- run exactly one heavyweight end-to-end ChatGPT-to-Codex canary;
-- run one qualifying full regression after the integrated cross-cutting enforcement candidate is frozen, and rerun the whole-train regression at closeout only if that candidate changes afterward;
-- record `break_glass_status = "not_used"` unless a separately owner-approved actual incident uses the one-time path; only then require the authenticated incident attestation and post-action review;
+- retain a compact deterministic set of permanent authorization, proof-honesty, destructive-manifest/dry-run, rollback, privacy/security, Search-frame, amendment, and deleted-authority negatives;
+- run the eight representative scenarios inside exactly one qualifying regression;
+- run exactly one end-to-end ChatGPT-to-Codex canary;
+- perform no GitHub protection, ruleset, required-check, activation, or no-drift inspection;
+- record owner break-glass decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`, exact reviewed SHA, and rollback;
+- record `live_enforcement_proven = false` and explicitly exclude protected enforcement from final claims;
 - record the Python 3.12 interpreter version and executable identity in the durable Task 29 closeout evidence;
 - publish evidence-bounded closeout;
 - do not claim implementation or release Green from governance completion.
@@ -1428,7 +1426,7 @@ Git history is the historical record. No new in-repo graveyard is created.
 
 ## 26. Anti-regression controls
 
-CI fails when:
+The future CI target, and the Task 29 local regression for its retained subset, fail when:
 
 - normative authority appears outside `docs/canon/`;
 - a new prohibited authority filename is added without allowlist;
@@ -1450,10 +1448,10 @@ CI fails when:
 - a stale task pack or local authorization artifact is presented as merge proof;
 - the final diff contains an undeclared file or lacks current finalization;
 - a retained skill has stale or undeclared canonical dependencies;
-- protected-branch authorization cannot be independently regenerated from checkout plus PR intake;
-- the merge-authorizing validator/workflow/policy is PR-controlled or its trusted digest/integration identity mismatches;
-- a required CI-owned validation attestation is absent, stale, contributor-authored, mismatched, skipped, or non-Green;
-- live ruleset evidence or one-time break-glass provenance is absent, stale, reused, revoked, or scope-mismatched.
+- the exact local authorization/finalization does not bind the reviewed SHA;
+- owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`, one exact high-risk review, or rollback is absent or scope-mismatched;
+- destructive manifests/dry-runs, privacy/security/proof-honesty review, or owner-approved Search-frame evidence is absent or stale;
+- a Task 24–29 artifact claims `live_enforcement_proven = true`, requires a post-merge receipt, or claims protected enforcement/no drift.
 
 Authority-word scanning is a candidate detector, not the sole enforcement mechanism. Legitimate source comments and historical Git messages must not cause false authority.
 
@@ -1552,16 +1550,15 @@ Include:
 - undeclared changed file or changed exact diff;
 - missing finalization receipt;
 - stale or authority-bearing retained skill;
-- checked-in/local authorization artifact offered as CI proof;
+- contributor-controlled artifact offered as self-authorizing proof;
 - bypassed amendment and deleted authority reference;
 - intake-carried approval, authorized-file, proof, validation-result, break-glass, or merge claims;
 - repository mismatch, base movement, force-push/head replacement, missing Git object, or inconsistent merge base;
 - clean head versus synthetic merge checkout and merge-commit cases;
 - delete/add move normalization, copy-as-add, opaque blob, raw-path bytes, symlink, mode-only, submodule gitlink, and deletion deltas;
-- PR-controlled validator/workflow/schema/policy and required-check identity mismatch;
-- PR-controlled validation workflow/command manifest, wrong command-manifest digest, or re-attested untrusted Green result;
-- missing/stale/mismatched/non-Green CI-owned validation attestation;
-- stale trusted snapshot, forged live-ruleset receipt, reused/revoked/expired break-glass attestation.
+- exact authorized/finalized SHA mismatch or missing exact high-risk review;
+- missing/mismatched/reused owner direct-integration decision or rollback;
+- stale trusted snapshot, overbroad destructive manifest, dry-run mismatch, or protected-enforcement overclaim;
 - caller-supplied visual completeness, omitted required screen/state/journey/object/accessibility variant/visual requirement, non-fixed review dimension, or nonempty gap-blocked state;
 - visual evidence that is not a digest-bound `figma-design-export`, or that attempts to upgrade a Figma design claim into simulator/runtime/device/accessibility proof;
 - missing, duplicate, unknown, or weaker legacy-audit invariant mapping, or a missing/non-Green replacement command result;
@@ -1590,16 +1587,13 @@ Exercise:
 - issue intake → task pack;
 - ChatGPT handoff → task intake → task start → exact-diff task finalize;
 - resume → authorization regeneration → stale local artifact rejection;
-- CI checkout + PR intake → independent authorization regeneration;
-- trusted GitHub event → canonical base/head tree delta → computed authorization;
-- base-owned/pinned validator → CI-owned validation attestations → exact-diff finalize;
-- prior gate digest → old-gate transition validation → post-merge ruleset switch;
-- controlled GitHub inspection → durable ruleset evidence → offline receipt validation;
+- exact local base/head tree delta → computed authorization → exact-diff finalize;
+- owner decision + exact reviewed SHA + rollback → direct-integration record;
 - old authority inventory → migration dispositions;
 - cutover reference rewrite;
 - purge verification.
 
-Task 29 retains these failure modes as permanent fast deterministic negatives. Repository-level integration is reserved for exactly one heavyweight end-to-end canary.
+Task 29 retains only the compact direct-integration, proof-honesty, destructive-safety, privacy/security, Search-frame, amendment, and deleted-authority subset as permanent fast deterministic negatives. It runs exactly one canary and one qualifying regression and performs no GitHub protection inspection.
 
 ### 29.5 Semantic-loss review
 
@@ -1684,7 +1678,7 @@ Parallel work is forbidden for final concept ownership, owner-conflict decisions
 
 Compiler implementation uses test-driven development, typed Python, standard-library-first dependencies, small commits, independent review, and verification before completion.
 
-Gate C is the post-Train-5A-merge, pre-destruction owner gate. The controlled live-boundary inspection and first protected-boundary receipt occur before Gate C; they are not blocked by it. Gate C remains hard Red until that receipt proves the merged base-owned verifier and required workflow are live, and rollback, independent review, purge manifests, and post-cutover verification are all current and Green. It then gates destructive Tasks 27–28 and destructive/migration-state-removal portions of Task 29. The controller may exercise the user's delegated owner approval for Tasks 22–29 only when confident in the recommendation and after every mandated proof is Green. That delegation cannot waive any Red, Critical, Important, authorization, security, required-CI, protected-branch, or destructive-cleanup requirement.
+Gate C is the post-Train-5A direct-integration, pre-destruction owner gate. It remains hard Red until exact SHA-bound authorization/finalization, one exact high-risk review, rollback, privacy/security/proof-honesty review, owner-approved Search frames, exact destructive manifests, and exact dry-runs are current and Green. It then gates destructive Tasks 27–28 and destructive/migration-state-removal portions of Task 29. Delegation cannot waive any retained Red, Critical, Important, authorization, security/privacy/proof-honesty, rollback, Search-frame, or destructive-cleanup requirement. Protected CI, required checks, ruleset inspection, and post-merge/live-boundary receipts are excluded for Tasks 24–29 and must not be claimed.
 
 A detailed task-by-task implementation plan will define branch or main posture, exact files, tests, commands, commit boundaries, review checkpoints, and model assignments after this design is reviewed.
 
@@ -1698,7 +1692,7 @@ Delete the shadow `docs/canon/` work and compiler commits or revert the stacked 
 
 ### At cutover
 
-Use a named baseline tag and cutover commit. Revert the cutover to restore old routing and CI.
+Use a named baseline tag and cutover commit. Revert the cutover to restore old authority and routing. Tasks 24–29 do not install protected CI.
 
 ### During purge
 
@@ -1742,12 +1736,12 @@ This design is implemented only when:
 17. Representative Codex benchmarks show improved adherence without unsupported claims.
 18. Governance completion does not overclaim product implementation or release readiness.
 19. Every tracked change requires current `task start` and exact-diff `task finalize` authorization.
-20. Protected-branch required CI independently regenerates authorization from checkout plus machine-readable PR intake.
+20. Tasks 24–29 bind exact SHA local authorization/finalization, one exact high-risk review, owner decision `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z`, and rollback; protected enforcement remains excluded and unproven.
 21. Project Instructions and skills remain non-authoritative, skill dependencies are current, and the ChatGPT Project Instructions SHA-256 is verified.
-22. Gate B and Gate C are Green with independent review; neither was waived through delegation or break-glass.
-23. Intake remains untrusted request-only data; computed authorization and owner/break-glass provenance come only from trusted base/platform records.
+22. Gate B and Gate C are Green for retained controls with exact review; the owner override removes only protected-enforcement prerequisites and waives no retained authorization, security/privacy/proof-honesty, rollback, Search-frame, or destructive requirement.
+23. Intake remains untrusted request-only data; computed authorization and owner/break-glass provenance bind the exact local SHA and the recorded owner decision.
 24. Exact PR authorization binds immutable repository/PR/base/head/merge-base state and a complete canonical tree delta.
-25. The merge-authorizing validator is base-owned or immutably pinned, required validation is CI-owned and attested, live ruleset proof is independently inspected, and break-glass is either recorded `not_used` or has independently reviewed evidence for a separately approved actual incident/use.
+25. Final evidence records the owner break-glass decision, exact reviewed SHA, rollback, `live_enforcement_proven = false`, `post_merge_receipt_required = false`, and an explicit statement that protected CI was neither installed nor proven.
 
 ---
 
@@ -1767,7 +1761,7 @@ It does not prove:
 - source matches canon;
 - any product, visual, accessibility, runtime, privacy, device, or release claim is Green;
 - the authorization controls, protected-branch ruleset, or end-to-end canary are implemented merely because this design specifies them.
-- final no-drift authorization closeout exists before Task 29 repeats live protected-boundary inspection.
+- protected enforcement or no-drift closeout exists; Tasks 24–29 explicitly do not produce that proof.
 
 Those claims require the implementation plan, executed work, current validation, evidence, owner decisions, and independent review.
 
