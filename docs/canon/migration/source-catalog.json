@@ -22,20 +22,8 @@
       "raw_path": ".codex/canon-migration/sources/linear-v3.md",
       "raw_sha256": "3e05be30be73bbeeaf0be67d5c8f8730fde94079869989996b6beff317a4aa38",
       "source_id": "LINEAR-CANON-V3",
-      "title": "B1A-D01R — Ambitions Product / IA / Object Model Full Design Spec v3 — Canonical",
+      "title": "B1A-D01R \u2014 Ambitions Product / IA / Object Model Full Design Spec v3 \u2014 Canonical",
       "updated_at": "2026-07-10T00:44:25.448Z"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "085f43f6032fd6b56293f26ab0065404c4ebaad2e849a6445579af1b3b7abc2e",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_36_release-and-app-store-delivery.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_36_release-and-app-store-delivery.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-0A71762610F2156C71AE5968",
-      "title": "docs/constitution/articles/ARTICLE_36_release-and-app-store-delivery.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
@@ -267,18 +255,6 @@
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "52ec4ed3ec9f69b87df448f0a7f1674023a8bc9e93e25452207e3f2f97f26b9c",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_37_localization-and-temporal-culture.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_37_localization-and-temporal-culture.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-49594C1526BD63B0ED53C7AF",
-      "title": "docs/constitution/articles/ARTICLE_37_localization-and-temporal-culture.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
       "content_sha256": "41cf95f68b4fdd242e26750ea81f12cb51e566265b95e5bc7149c97e957bf312",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-runtime-contract-engineering/SKILL.md",
@@ -351,18 +327,6 @@
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "ba42068da8e16541ee43b42a215873713467c8800eec4b37fdc083756818982a",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_33_security-and-threat-model.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_33_security-and-threat-model.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-7599EFB6F30B89790BFA8AC2",
-      "title": "docs/constitution/articles/ARTICLE_33_security-and-threat-model.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
       "content_sha256": "1eeebe3a00b975edabcdb4db370338d97a01220724ba8681dbacff8205bd9712",
       "kind": "repo",
       "locator": "repo:docs/skills/ui-north-star-production-gate/SKILL.md",
@@ -419,18 +383,6 @@
       "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
       "source_id": "REPO-7DCEB69ACBAACC24AA107ABA",
       "title": "docs/constitution/WAVE_0_READBACK.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "233a4258a7b2041e818e9642afdde91bdaf571cc7687e58572b5e65310d2ab85",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_40_app-lifecycle-and-background-execution.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_40_app-lifecycle-and-background-execution.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-7DE5232D987BEBEC4488640D",
-      "title": "docs/constitution/articles/ARTICLE_40_app-lifecycle-and-background-execution.md",
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
@@ -519,18 +471,6 @@
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "d464ada1faecf1b091639223bdba76c785a0a1ca344ba4a66c345d4a9de5876a",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_29_frontend-architecture.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_29_frontend-architecture.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-98E0A39B9B95511D59FDED59",
-      "title": "docs/constitution/articles/ARTICLE_29_frontend-architecture.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
       "content_sha256": "84c013433ba670c53d214e1a0acd2cd29614d97f5e16642765b874f7eeaab0ce",
       "kind": "repo",
       "locator": "repo:docs/constitution/law-source-map.json",
@@ -555,18 +495,6 @@
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "949f7403658ee662f9824b5ff9e26ca4c806b7cd93e49895c47b0432fcf7ea5c",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_42_machine-readable-constitutional-enforcement.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_42_machine-readable-constitutional-enforcement.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-A2160D5C4171C0B1CB740F8E",
-      "title": "docs/constitution/articles/ARTICLE_42_machine-readable-constitutional-enforcement.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
       "content_sha256": "772a274b20f6aff4227f739d8ece9c36b6a36164d5bea0fe4cee523edf43f175",
       "kind": "repo",
       "locator": "repo:AGENTS.md",
@@ -576,18 +504,6 @@
       "source_id": "REPO-A54FF182C7E8ACF56ACFD6E4",
       "title": "AGENTS.md",
       "updated_at": "2026-07-10T22:16:39-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "a71a93b94b9e2cdc9f4c351e526a8ca524a63017128283a91ae623ec83ea64c6",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_35_testing-and-fixture-engineering.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_35_testing-and-fixture-engineering.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-A7192B1B77B5A2875E5021BD",
-      "title": "docs/constitution/articles/ARTICLE_35_testing-and-fixture-engineering.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
@@ -636,18 +552,6 @@
       "source_id": "REPO-B11ED8716F99F213DF6470B4",
       "title": "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md",
       "updated_at": "2026-07-01T22:29:20-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "8e236f7b2c3105f2d9f62496ff36415d8cc3363065fe6c6696f59ec4d6d7bac2",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_39_entitlements-and-monetization.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_39_entitlements-and-monetization.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-B2788D54EACE9F585896C1DC",
-      "title": "docs/constitution/articles/ARTICLE_39_entitlements-and-monetization.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
@@ -732,18 +636,6 @@
       "source_id": "REPO-BEDDB916A81B3CF9A1764AD1",
       "title": "docs/constitution/law-source-map/map-02.json",
       "updated_at": "2026-07-10T22:16:39-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "6ee5a4428039f9eae2337876eeb2d578ce4278c31079f420d885ff805f38e233",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_26_swift-concurrency-and-isolation.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_26_swift-concurrency-and-isolation.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-C1B6B2BD9D241810C116ABCC",
-      "title": "docs/constitution/articles/ARTICLE_26_swift-concurrency-and-isolation.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
       "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
@@ -851,30 +743,6 @@
       "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
       "source_id": "REPO-E2F17CA3798BA41F89FDA871",
       "title": "docs/constitution/opportunities/P1-026-050.json",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "6dcd30ee7e6d9fdb0f32692f143d899f543f4dff44d025cc8b3e4d0cd4bb70e0",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_38_dependencies-and-supply-chain.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_38_dependencies-and-supply-chain.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-F3970166F9EBF1C0C21D2A5B",
-      "title": "docs/constitution/articles/ARTICLE_38_dependencies-and-supply-chain.md",
-      "updated_at": "2026-07-09T22:43:24-04:00"
-    },
-    {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
-      "content_sha256": "67dca47e1c79b8b80c6a7d0c118a12bd56dc37874075a79581433f712ab4e4d6",
-      "kind": "repo",
-      "locator": "repo:docs/constitution/articles/ARTICLE_32_reliability-diagnostics-and-incident-response.md",
-      "owner": "agentdevan",
-      "repo_path": "docs/constitution/articles/ARTICLE_32_reliability-diagnostics-and-incident-response.md",
-      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6",
-      "source_id": "REPO-F6B22302C4CBCB44DA13B11E",
-      "title": "docs/constitution/articles/ARTICLE_32_reliability-diagnostics-and-incident-response.md",
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {

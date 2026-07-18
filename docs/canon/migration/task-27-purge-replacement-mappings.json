@@ -1,0 +1,1381 @@
+{
+  "authority": {
+    "active_requirement_count": 473,
+    "active_requirement_graph_path": "docs/canon/generated/requirement-graph.json",
+    "active_requirement_graph_sha256": "ac28cf0c0f9dfcc546eace98b1fe16ae3c6e46c28ce423faa148686ffd275ca4",
+    "semantic_loss_independent_review": null,
+    "semantic_loss_review_path": "docs/canon/migration/semantic-loss-review.json",
+    "semantic_loss_review_sha256": "0aa48ab7a3dec2d362dab2367b9b386d8cc31405eaac91fadf55953f4827afc4",
+    "semantic_loss_review_status": "candidate"
+  },
+  "classification": [
+    {
+      "artifact_id": "REPO-108BA05D93452C3B8DD3EC51",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 2
+      },
+      "claim_count": 3,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/ENGINEERING_CONSTITUTION.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-2E32AD0FD1AE317A32D800B4",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 7
+      },
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/LINEAR_COVERAGE_MAP.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-76F9B2E3818DA58F8848319C",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/PR_23_RUTHLESS_REVIEW.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-CDF79CD3D63C16ED778760B0",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 12
+      },
+      "claim_count": 13,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/PR_COMPLIANCE_TEMPLATE.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-B65E71E91F3F2B1897FAA7FB",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 5,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/README.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-7DCEB69ACBAACC24AA107ABA",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 7
+      },
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/WAVE_0_READBACK.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-A1371F8B6FCB79E60DD082A5",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1,
+        "provenance_only_no_active_replacement": 6
+      },
+      "claim_count": 17,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_25_persistence-and-data-integrity.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-C1B6B2BD9D241810C116ABCC",
+      "artifact_path_sha256": "c1b6b2bd9d241810c116abcc9786cbad1b4b29b454846e04e54e8e7c6fd08ff0",
+      "blocker_counts": {},
+      "claim_count": 9,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-3783A2A0F6E2E4ECF4E1D622",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1,
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 8,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_27_determinism-replay-and-policy-versioning.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-7D369F0108835D3538A1E6F5",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 3
+      },
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_28_runtime-intelligence-quality.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-98E0A39B9B95511D59FDED59",
+      "artifact_path_sha256": "98e0a39b9b95511d59fded5901b8ddb65543d058daea060b6971b9cce322e05f",
+      "blocker_counts": {},
+      "claim_count": 10,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-4296019196E7E491BE6122FD",
+      "blocker_counts": {
+        "required_semantics_not_preserved": 1
+      },
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_30_design-system-governance.md",
+      "remaining_gate_c_blockers": [
+        "independent_semantic_review_required_semantics_loss"
+      ],
+      "replacement_ready": false,
+      "semantic_gap": {
+        "claim_id": "CLAIM-NAV-067",
+        "reason": "Independent semantic review found that the proposed one-to-one replacement does not preserve required source semantics; the artifact must remain tracked and is excluded from the Task 27 deletion candidate.",
+        "replacement_id": "DESIGN-007",
+        "reviewed_mapping_sha256": "1220ae255d856da51dda5902f7c72783ad6ef23540fe5c469a0ef84096d52e2f"
+      }
+    },
+    {
+      "artifact_id": "REPO-CD93CB377D7C64450BCB9B93",
+      "blocker_counts": {
+        "required_semantics_not_preserved": 1
+      },
+      "claim_count": 5,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_31_performance-and-energy.md",
+      "remaining_gate_c_blockers": [
+        "independent_semantic_review_required_semantics_loss"
+      ],
+      "replacement_ready": false,
+      "semantic_gap": {
+        "claim_id": "CLAIM-NAV-070",
+        "reason": "Independent semantic review found that the proposed one-to-one replacement does not preserve required source semantics; the artifact must remain tracked and is excluded from the Task 27 deletion candidate.",
+        "replacement_id": "PERF-003",
+        "reviewed_mapping_sha256": "1220ae255d856da51dda5902f7c72783ad6ef23540fe5c469a0ef84096d52e2f"
+      }
+    },
+    {
+      "artifact_id": "REPO-F6B22302C4CBCB44DA13B11E",
+      "artifact_path_sha256": "f6b22302c4cbcb44da13b11eb6c98f78eca09d7210334b9860a95cf50486e132",
+      "blocker_counts": {},
+      "claim_count": 6,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-7599EFB6F30B89790BFA8AC2",
+      "artifact_path_sha256": "7599efb6f30b89790bfa8ac2809d8ac02748a10707d8e811b13b08a7ec8c0be5",
+      "blocker_counts": {},
+      "claim_count": 6,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-30F82AEBB440C03C0671AE4A",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_34_cloudkit-continuity.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-A7192B1B77B5A2875E5021BD",
+      "artifact_path_sha256": "a7192b1b77b5a2875e5021bdcf17d81b56da4999331e6c81daa36cdf81890bfd",
+      "blocker_counts": {},
+      "claim_count": 7,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-0A71762610F2156C71AE5968",
+      "artifact_path_sha256": "0a71762610f2156c71ae59682846040a7d7e6da70df313793a95a793a366200b",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-49594C1526BD63B0ED53C7AF",
+      "artifact_path_sha256": "49594c1526bd63b0ed53c7afa7ccb8c5685f9d3a464da0fd329d9320903f532d",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-F3970166F9EBF1C0C21D2A5B",
+      "artifact_path_sha256": "f3970166f9ebf1c0c21d2a5b0b44342e213f2bfe2f530e8daf6bd49163c90e1c",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-B2788D54EACE9F585896C1DC",
+      "artifact_path_sha256": "b2788d54eace9f585896c1dc036c4c669fd2045ae1644727becab89288fb3811",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-7DE5232D987BEBEC4488640D",
+      "artifact_path_sha256": "7de5232d987bebec4488640d53d1cf73453b34b65c80d146caa7093fe39a1b04",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-BB19A1C5749B205632301BC9",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_41_codex-departmental-operating-model.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-A2160D5C4171C0B1CB740F8E",
+      "artifact_path_sha256": "a2160d5c4171c0b1cb740f8e8c1418f6a0d60b0daef33ee6cc90b1ead8a968e7",
+      "blocker_counts": {},
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "remaining_gate_c_blockers": [
+        "owner_approval_missing",
+        "independent_purge_review_missing"
+      ],
+      "replacement_ready": true
+    },
+    {
+      "artifact_id": "REPO-0E532EDE42D041D9867A8A3D",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1
+      },
+      "claim_count": 4,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/articles/ARTICLE_43_constitutional-evolution-and-audit.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-110D0BFC2660AF72E0673BBF",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 6
+      },
+      "claim_count": 6,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/data-classification.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-82A568416C5D699F73D8646B",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 1,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/dependency-graph.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-9CCF7BDDE9232E721AE6A1BD",
+      "blocker_counts": {
+        "zero_claims": 1
+      },
+      "claim_count": 0,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-source-map.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-A99AD2DB1D26DB18B7525CF2",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 10
+      },
+      "claim_count": 10,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-source-map/map-01.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-BEDDB916A81B3CF9A1764AD1",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 10
+      },
+      "claim_count": 10,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-source-map/map-02.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-5126C76C760C2E798B32B568",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 14
+      },
+      "claim_count": 14,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-source-map/map-03.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-FA5FD2273058F8C395A916C0",
+      "blocker_counts": {
+        "zero_claims": 1
+      },
+      "claim_count": 0,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-test-map.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-208E98C054DDF2FC7E4EB4F4",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 15
+      },
+      "claim_count": 15,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-test-map/map-01.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-C4C266F9BC681838FBF35AD0",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 19
+      },
+      "claim_count": 19,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/law-test-map/map-02.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-1B5E29821B6FA7CEF0D57A84",
+      "blocker_counts": {
+        "zero_claims": 1
+      },
+      "claim_count": 0,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/laws.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-684175D7D9AF83208E4BC727",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 31
+      },
+      "claim_count": 31,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/laws/laws-01.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-C1F43F79DABDCCF8C38F612B",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 29
+      },
+      "claim_count": 31,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/laws/laws-02.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-8ADD2E77BEA5128931D17041",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 28
+      },
+      "claim_count": 31,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/laws/laws-03.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-2C767C72A533E6B6DB343A2B",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 30
+      },
+      "claim_count": 31,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/laws/laws-04.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-5FC40D76CA8AFD5F55634D14",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 9
+      },
+      "claim_count": 9,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P0-001-009.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-C3294FB61CA34FFF7E205E81",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 9
+      },
+      "claim_count": 9,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P0-010-018.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-FD05FA33E9A2AE8169F6E87F",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 25
+      },
+      "claim_count": 25,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P1-001-025.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-E2F17CA3798BA41F89FDA871",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 24
+      },
+      "claim_count": 25,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P1-026-050.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-B8DCA6E9A67D1E0BA43CEC26",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 24
+      },
+      "claim_count": 25,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P1-051-075.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-198A8F176504FA874B4FA078",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 24
+      },
+      "claim_count": 25,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunities/P1-076-100.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-2AA8C812BCBF285307BB8A30",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 1,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/opportunity-register.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-2EE95332ADC9CD5F86A5E66A",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 1
+      },
+      "claim_count": 1,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/performance-budgets.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-D99BAE8DAE729FA01B175D4A",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 16
+      },
+      "claim_count": 16,
+      "gate_c_eligible": false,
+      "path": "docs/constitution/scenarios.json",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-5E65B22176A5B68006DB6CD1",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 8
+      },
+      "claim_count": 13,
+      "gate_c_eligible": false,
+      "path": "docs/truth/2026-06-22-runtime-remediation-decision-register.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-8E5E95467C0AAC813830AA24",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 16,
+      "gate_c_eligible": false,
+      "path": "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-AC6969F876C13A1978611216",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 5
+      },
+      "claim_count": 11,
+      "gate_c_eligible": false,
+      "path": "docs/truth/CODEX_START_HERE.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-8AD090B849C0D640D8D8B4B1",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 13
+      },
+      "claim_count": 30,
+      "gate_c_eligible": false,
+      "path": "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-BDFB6773AEE1EE818E2AFE56",
+      "blocker_counts": {
+        "one_to_many_not_supported": 2,
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 8,
+      "gate_c_eligible": false,
+      "path": "docs/truth/HISTORICAL_POLICY.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-2354457AAD1DD21D0F59E611",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1,
+        "provenance_only_no_active_replacement": 2
+      },
+      "claim_count": 20,
+      "gate_c_eligible": false,
+      "path": "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-CE1E8C8831E909B1C139C954",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 18
+      },
+      "claim_count": 23,
+      "gate_c_eligible": false,
+      "path": "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-B11ED8716F99F213DF6470B4",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1,
+        "provenance_only_no_active_replacement": 7
+      },
+      "claim_count": 19,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-43E0D80464B2869224C805D8",
+      "blocker_counts": {
+        "one_to_many_not_supported": 6,
+        "provenance_only_no_active_replacement": 120
+      },
+      "claim_count": 232,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-BD8734CA17422446DB65B9BB",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 18
+      },
+      "claim_count": 19,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+      "blocker_counts": {
+        "one_to_many_not_supported": 1,
+        "provenance_only_no_active_replacement": 70
+      },
+      "claim_count": 159,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-24AE31A618868443E87AFB86",
+      "blocker_counts": {
+        "one_to_many_not_supported": 3,
+        "provenance_only_no_active_replacement": 12
+      },
+      "claim_count": 26,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-595E296613757CC876D84DCA",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 10,
+      "gate_c_eligible": false,
+      "path": "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-270E46EC3D174DCCE1EFC5B1",
+      "blocker_counts": {
+        "one_to_many_not_supported": 2,
+        "provenance_only_no_active_replacement": 6
+      },
+      "claim_count": 12,
+      "gate_c_eligible": false,
+      "path": "docs/truth/README.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    },
+    {
+      "artifact_id": "REPO-85E8FCCE72F548DEDB08341B",
+      "blocker_counts": {
+        "provenance_only_no_active_replacement": 4
+      },
+      "claim_count": 22,
+      "gate_c_eligible": false,
+      "path": "docs/truth/RELEASE_TRUTH.md",
+      "remaining_gate_c_blockers": [],
+      "replacement_ready": false
+    }
+  ],
+  "link_repair": {
+    "decision_id": "OWNER-TRAIN5-TASK27-LINK-REPAIR-2026-07-18T003100Z",
+    "linked_artifact_ids": [
+      "REPO-0A71762610F2156C71AE5968",
+      "REPO-49594C1526BD63B0ED53C7AF",
+      "REPO-7599EFB6F30B89790BFA8AC2",
+      "REPO-7DE5232D987BEBEC4488640D",
+      "REPO-98E0A39B9B95511D59FDED59",
+      "REPO-A2160D5C4171C0B1CB740F8E",
+      "REPO-A7192B1B77B5A2875E5021BD",
+      "REPO-B2788D54EACE9F585896C1DC",
+      "REPO-C1B6B2BD9D241810C116ABCC",
+      "REPO-F3970166F9EBF1C0C21D2A5B",
+      "REPO-F6B22302C4CBCB44DA13B11E"
+    ],
+    "removed_link_count": 11,
+    "replacement_kind": "active_canon_routing_only_no_semantic_law",
+    "replacement_targets": [
+      "docs/canon/generated/CODEX_START_HERE.md",
+      "docs/canon/generated/requirement-graph.json"
+    ],
+    "source_path": "docs/constitution/ENGINEERING_CONSTITUTION.md",
+    "source_sha256": "c9444c9e9a3bb41e972f1fbd38f7198ff966f14a6450e7f96f360d3cf5246a33"
+  },
+  "plan_dispositions": {
+    "REPO-0A71762610F2156C71AE5968": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0001": "RELEASE-003",
+        "CLAIM-STB-0002": "RELEASE-004",
+        "CLAIM-STB-0003": "RELEASE-001",
+        "CLAIM-STB-0004": "RELEASE-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "RELEASE-001",
+        "RELEASE-002",
+        "RELEASE-003",
+        "RELEASE-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-49594C1526BD63B0ED53C7AF": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0275": "LOCALIZATION-003",
+        "CLAIM-STB-0276": "LOCALIZATION-004",
+        "CLAIM-STB-0277": "LOCALIZATION-001",
+        "CLAIM-STB-0278": "LOCALIZATION-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "LOCALIZATION-001",
+        "LOCALIZATION-002",
+        "LOCALIZATION-003",
+        "LOCALIZATION-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-7599EFB6F30B89790BFA8AC2": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0350": "SECURITY-003",
+        "CLAIM-STB-0351": "SECURITY-004",
+        "CLAIM-STB-0352": "SECURITY-005",
+        "CLAIM-STB-0353": "SECURITY-006",
+        "CLAIM-STB-0354": "SECURITY-001",
+        "CLAIM-STB-0355": "SECURITY-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "SECURITY-001",
+        "SECURITY-002",
+        "SECURITY-003",
+        "SECURITY-004",
+        "SECURITY-005",
+        "SECURITY-006"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-7DE5232D987BEBEC4488640D": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0376": "LIFECYCLE-003",
+        "CLAIM-STB-0377": "LIFECYCLE-004",
+        "CLAIM-STB-0378": "LIFECYCLE-001",
+        "CLAIM-STB-0379": "LIFECYCLE-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "LIFECYCLE-001",
+        "LIFECYCLE-002",
+        "LIFECYCLE-003",
+        "LIFECYCLE-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-98E0A39B9B95511D59FDED59": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-NAV-051": "FRONTEND-001",
+        "CLAIM-NAV-052": "FRONTEND-002",
+        "CLAIM-NAV-053": "FRONTEND-003",
+        "CLAIM-NAV-054": "FRONTEND-004",
+        "CLAIM-NAV-055": "FRONTEND-005",
+        "CLAIM-NAV-056": "FRONTEND-006",
+        "CLAIM-NAV-057": "FRONTEND-007",
+        "CLAIM-NAV-058": "FRONTEND-008",
+        "CLAIM-NAV-059": "FRONTEND-009",
+        "CLAIM-NAV-060": "FRONTEND-010"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "FRONTEND-001",
+        "FRONTEND-002",
+        "FRONTEND-003",
+        "FRONTEND-004",
+        "FRONTEND-005",
+        "FRONTEND-006",
+        "FRONTEND-007",
+        "FRONTEND-008",
+        "FRONTEND-009",
+        "FRONTEND-010"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-A2160D5C4171C0B1CB740F8E": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0412": "ENFORCEMENT-002",
+        "CLAIM-STB-0413": "ENFORCEMENT-003",
+        "CLAIM-STB-0414": "ENFORCEMENT-004",
+        "CLAIM-STB-0415": "ENFORCEMENT-001"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "ENFORCEMENT-001",
+        "ENFORCEMENT-002",
+        "ENFORCEMENT-003",
+        "ENFORCEMENT-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-A7192B1B77B5A2875E5021BD": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0424": "TEST-003",
+        "CLAIM-STB-0425": "TEST-004",
+        "CLAIM-STB-0426": "TEST-005",
+        "CLAIM-STB-0427": "TEST-006",
+        "CLAIM-STB-0428": "TEST-007",
+        "CLAIM-STB-0429": "TEST-001",
+        "CLAIM-STB-0430": "TEST-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "TEST-001",
+        "TEST-002",
+        "TEST-003",
+        "TEST-004",
+        "TEST-005",
+        "TEST-006",
+        "TEST-007"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-B2788D54EACE9F585896C1DC": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0584": "ENTITLEMENT-003",
+        "CLAIM-STB-0585": "ENTITLEMENT-004",
+        "CLAIM-STB-0586": "ENTITLEMENT-001",
+        "CLAIM-STB-0587": "ENTITLEMENT-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "ENTITLEMENT-001",
+        "ENTITLEMENT-002",
+        "ENTITLEMENT-003",
+        "ENTITLEMENT-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-C1B6B2BD9D241810C116ABCC": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0653": "CONCURRENCY-003",
+        "CLAIM-STB-0654": "CONCURRENCY-004",
+        "CLAIM-STB-0655": "CONCURRENCY-005",
+        "CLAIM-STB-0656": "CONCURRENCY-006",
+        "CLAIM-STB-0657": "CONCURRENCY-007",
+        "CLAIM-STB-0658": "CONCURRENCY-008",
+        "CLAIM-STB-0659": "CONCURRENCY-009",
+        "CLAIM-STB-0660": "CONCURRENCY-001",
+        "CLAIM-STB-0661": "CONCURRENCY-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "CONCURRENCY-001",
+        "CONCURRENCY-002",
+        "CONCURRENCY-003",
+        "CONCURRENCY-004",
+        "CONCURRENCY-005",
+        "CONCURRENCY-006",
+        "CONCURRENCY-007",
+        "CONCURRENCY-008",
+        "CONCURRENCY-009"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-F3970166F9EBF1C0C21D2A5B": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0800": "SUPPLY-003",
+        "CLAIM-STB-0801": "SUPPLY-004",
+        "CLAIM-STB-0802": "SUPPLY-001",
+        "CLAIM-STB-0803": "SUPPLY-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "SUPPLY-001",
+        "SUPPLY-002",
+        "SUPPLY-003",
+        "SUPPLY-004"
+      ],
+      "unique_content_extracted": true
+    },
+    "REPO-F6B22302C4CBCB44DA13B11E": {
+      "action": "delete",
+      "claim_dispositions": {
+        "CLAIM-STB-0804": "RELIABILITY-003",
+        "CLAIM-STB-0805": "RELIABILITY-004",
+        "CLAIM-STB-0806": "RELIABILITY-005",
+        "CLAIM-STB-0807": "RELIABILITY-006",
+        "CLAIM-STB-0808": "RELIABILITY-001",
+        "CLAIM-STB-0809": "RELIABILITY-002"
+      },
+      "external_references_reconciled": false,
+      "incoming_links_rewritten": true,
+      "independent_review": false,
+      "owner_approved": false,
+      "replacement_ids": [
+        "RELIABILITY-001",
+        "RELIABILITY-002",
+        "RELIABILITY-003",
+        "RELIABILITY-004",
+        "RELIABILITY-005",
+        "RELIABILITY-006"
+      ],
+      "unique_content_extracted": true
+    }
+  },
+  "plan_source_catalog_digest_only": [
+    {
+      "artifact_id": "REPO-0A71762610F2156C71AE5968",
+      "claim_ids": [
+        "CLAIM-STB-0001",
+        "CLAIM-STB-0002",
+        "CLAIM-STB-0003",
+        "CLAIM-STB-0004"
+      ],
+      "content_sha256": "085f43f6032fd6b56293f26ab0065404c4ebaad2e849a6445579af1b3b7abc2e",
+      "locator_sha256": "0a71762610f2156c71ae59682846040a7d7e6da70df313793a95a793a366200b",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-49594C1526BD63B0ED53C7AF",
+      "claim_ids": [
+        "CLAIM-STB-0275",
+        "CLAIM-STB-0276",
+        "CLAIM-STB-0277",
+        "CLAIM-STB-0278"
+      ],
+      "content_sha256": "52ec4ed3ec9f69b87df448f0a7f1674023a8bc9e93e25452207e3f2f97f26b9c",
+      "locator_sha256": "49594c1526bd63b0ed53c7afa7ccb8c5685f9d3a464da0fd329d9320903f532d",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-7599EFB6F30B89790BFA8AC2",
+      "claim_ids": [
+        "CLAIM-STB-0350",
+        "CLAIM-STB-0351",
+        "CLAIM-STB-0352",
+        "CLAIM-STB-0353",
+        "CLAIM-STB-0354",
+        "CLAIM-STB-0355"
+      ],
+      "content_sha256": "ba42068da8e16541ee43b42a215873713467c8800eec4b37fdc083756818982a",
+      "locator_sha256": "7599efb6f30b89790bfa8ac2809d8ac02748a10707d8e811b13b08a7ec8c0be5",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-7DE5232D987BEBEC4488640D",
+      "claim_ids": [
+        "CLAIM-STB-0376",
+        "CLAIM-STB-0377",
+        "CLAIM-STB-0378",
+        "CLAIM-STB-0379"
+      ],
+      "content_sha256": "233a4258a7b2041e818e9642afdde91bdaf571cc7687e58572b5e65310d2ab85",
+      "locator_sha256": "7de5232d987bebec4488640d53d1cf73453b34b65c80d146caa7093fe39a1b04",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-98E0A39B9B95511D59FDED59",
+      "claim_ids": [
+        "CLAIM-NAV-051",
+        "CLAIM-NAV-052",
+        "CLAIM-NAV-053",
+        "CLAIM-NAV-054",
+        "CLAIM-NAV-055",
+        "CLAIM-NAV-056",
+        "CLAIM-NAV-057",
+        "CLAIM-NAV-058",
+        "CLAIM-NAV-059",
+        "CLAIM-NAV-060"
+      ],
+      "content_sha256": "d464ada1faecf1b091639223bdba76c785a0a1ca344ba4a66c345d4a9de5876a",
+      "locator_sha256": "98e0a39b9b95511d59fded5901b8ddb65543d058daea060b6971b9cce322e05f",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-A2160D5C4171C0B1CB740F8E",
+      "claim_ids": [
+        "CLAIM-STB-0412",
+        "CLAIM-STB-0413",
+        "CLAIM-STB-0414",
+        "CLAIM-STB-0415"
+      ],
+      "content_sha256": "949f7403658ee662f9824b5ff9e26ca4c806b7cd93e49895c47b0432fcf7ea5c",
+      "locator_sha256": "a2160d5c4171c0b1cb740f8e8c1418f6a0d60b0daef33ee6cc90b1ead8a968e7",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-A7192B1B77B5A2875E5021BD",
+      "claim_ids": [
+        "CLAIM-STB-0424",
+        "CLAIM-STB-0425",
+        "CLAIM-STB-0426",
+        "CLAIM-STB-0427",
+        "CLAIM-STB-0428",
+        "CLAIM-STB-0429",
+        "CLAIM-STB-0430"
+      ],
+      "content_sha256": "a71a93b94b9e2cdc9f4c351e526a8ca524a63017128283a91ae623ec83ea64c6",
+      "locator_sha256": "a7192b1b77b5a2875e5021bdcf17d81b56da4999331e6c81daa36cdf81890bfd",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-B2788D54EACE9F585896C1DC",
+      "claim_ids": [
+        "CLAIM-STB-0584",
+        "CLAIM-STB-0585",
+        "CLAIM-STB-0586",
+        "CLAIM-STB-0587"
+      ],
+      "content_sha256": "8e236f7b2c3105f2d9f62496ff36415d8cc3363065fe6c6696f59ec4d6d7bac2",
+      "locator_sha256": "b2788d54eace9f585896c1dc036c4c669fd2045ae1644727becab89288fb3811",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-C1B6B2BD9D241810C116ABCC",
+      "claim_ids": [
+        "CLAIM-STB-0653",
+        "CLAIM-STB-0654",
+        "CLAIM-STB-0655",
+        "CLAIM-STB-0656",
+        "CLAIM-STB-0657",
+        "CLAIM-STB-0658",
+        "CLAIM-STB-0659",
+        "CLAIM-STB-0660",
+        "CLAIM-STB-0661"
+      ],
+      "content_sha256": "6ee5a4428039f9eae2337876eeb2d578ce4278c31079f420d885ff805f38e233",
+      "locator_sha256": "c1b6b2bd9d241810c116abcc9786cbad1b4b29b454846e04e54e8e7c6fd08ff0",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-F3970166F9EBF1C0C21D2A5B",
+      "claim_ids": [
+        "CLAIM-STB-0800",
+        "CLAIM-STB-0801",
+        "CLAIM-STB-0802",
+        "CLAIM-STB-0803"
+      ],
+      "content_sha256": "6dcd30ee7e6d9fdb0f32692f143d899f543f4dff44d025cc8b3e4d0cd4bb70e0",
+      "locator_sha256": "f3970166f9ebf1c0c21d2a5b0b44342e213f2bfe2f530e8daf6bd49163c90e1c",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    },
+    {
+      "artifact_id": "REPO-F6B22302C4CBCB44DA13B11E",
+      "claim_ids": [
+        "CLAIM-STB-0804",
+        "CLAIM-STB-0805",
+        "CLAIM-STB-0806",
+        "CLAIM-STB-0807",
+        "CLAIM-STB-0808",
+        "CLAIM-STB-0809"
+      ],
+      "content_sha256": "67dca47e1c79b8b80c6a7d0c118a12bd56dc37874075a79581433f712ab4e4d6",
+      "locator_sha256": "f6b22302c4cbcb44da13b11eb6c98f78eca09d7210334b9860a95cf50486e132",
+      "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+    }
+  ],
+  "preparation_authorization_record": {
+    "approved_scope": {
+      "algorithm": "sha256 over sorted UTF-8 path lines, each terminated by LF",
+      "manifest_sha256": "217e86b4946c4fa37930fc8a59e677e1b6f63b3fe9123dfb1ad7df04ba841dd3",
+      "path_count": 7,
+      "paths": [
+        "docs/canon/migration/authority-freeze-baseline.json",
+        "docs/canon/migration/purge-plan.toml",
+        "docs/canon/migration/semantic-loss-review.json",
+        "docs/canon/migration/source-catalog.json",
+        "docs/canon/migration/task-27-purge-replacement-mappings.json",
+        "docs/canon/references/task-authorization-policy.json",
+        "docs/constitution/ENGINEERING_CONSTITUTION.md"
+      ]
+    },
+    "authorization_source": "external_owner_instruction",
+    "base_commit_sha": "0ab85651ed36b1f84d56438fd35eb6e78ce0d959",
+    "base_tree_sha": "5ae1d9ea68d8e935d15e7d259af6ff08c0ed1cd4",
+    "candidate_policy_is_authority": false,
+    "decision_id": "OWNER-TRAIN5-TASK27-LINK-REPAIR-2026-07-18T003100Z",
+    "destructive_approval": false,
+    "external_action_approved": false,
+    "reusable": false,
+    "status": "externally_approved_non_destructive_link_repair"
+  },
+  "prior_preparation_authorization_record": {
+    "approved_scope": {
+      "algorithm": "sha256 over sorted UTF-8 path lines, each terminated by LF",
+      "manifest_sha256": "df5759d47d454aab1eb5c3fd94be75a1cbd2f0446224a2d04ca5bdb39f4e9793",
+      "path_count": 6,
+      "paths": [
+        "docs/canon/migration/authority-freeze-baseline.json",
+        "docs/canon/migration/purge-plan.toml",
+        "docs/canon/migration/semantic-loss-review.json",
+        "docs/canon/migration/source-catalog.json",
+        "docs/canon/migration/task-27-purge-replacement-mappings.json",
+        "docs/canon/references/task-authorization-policy.json"
+      ]
+    },
+    "authorization_source": "external_owner_instruction",
+    "base_commit_sha": "0ab85651ed36b1f84d56438fd35eb6e78ce0d959",
+    "base_tree_sha": "5ae1d9ea68d8e935d15e7d259af6ff08c0ed1cd4",
+    "candidate_policy_is_authority": false,
+    "decision_id": "OWNER-TRAIN5-TASK27-PREP-2026-07-18T001700Z",
+    "destructive_approval": false,
+    "external_action_approved": false,
+    "reusable": false,
+    "status": "externally_approved_non_destructive_prep"
+  },
+  "rollback_restore_proof": {
+    "artifact_count": 11,
+    "base_commit_sha": "0ab85651ed36b1f84d56438fd35eb6e78ce0d959",
+    "base_tree_sha": "5ae1d9ea68d8e935d15e7d259af6ff08c0ed1cd4",
+    "exact_path_list_sha256": "67d3e438af84035d7130ef58c5f0962b6cd0d958e357fb6558081807e60b4907",
+    "path_order": "sorted_utf8_locator_lines_lf",
+    "records": [
+      {
+        "artifact_id": "REPO-0A71762610F2156C71AE5968",
+        "base_blob_oid": "aff702a95ae8c0d75cedf2e2e5423b9f1e1311a2",
+        "base_byte_size": 1019,
+        "base_mode": "100644",
+        "content_sha256": "085f43f6032fd6b56293f26ab0065404c4ebaad2e849a6445579af1b3b7abc2e",
+        "locator_sha256": "0a71762610f2156c71ae59682846040a7d7e6da70df313793a95a793a366200b",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-49594C1526BD63B0ED53C7AF",
+        "base_blob_oid": "e81783d3faad2d28283ac619568c322bebc9888b",
+        "base_byte_size": 801,
+        "base_mode": "100644",
+        "content_sha256": "52ec4ed3ec9f69b87df448f0a7f1674023a8bc9e93e25452207e3f2f97f26b9c",
+        "locator_sha256": "49594c1526bd63b0ed53c7afa7ccb8c5685f9d3a464da0fd329d9320903f532d",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-7599EFB6F30B89790BFA8AC2",
+        "base_blob_oid": "5500743b836fd8c5431b2bc7b0b9841e40ec9c66",
+        "base_byte_size": 1355,
+        "base_mode": "100644",
+        "content_sha256": "ba42068da8e16541ee43b42a215873713467c8800eec4b37fdc083756818982a",
+        "locator_sha256": "7599efb6f30b89790bfa8ac2809d8ac02748a10707d8e811b13b08a7ec8c0be5",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-7DE5232D987BEBEC4488640D",
+        "base_blob_oid": "f3490078a482a43d5c3f49bb9e98053ade1651da",
+        "base_byte_size": 838,
+        "base_mode": "100644",
+        "content_sha256": "233a4258a7b2041e818e9642afdde91bdaf571cc7687e58572b5e65310d2ab85",
+        "locator_sha256": "7de5232d987bebec4488640d53d1cf73453b34b65c80d146caa7093fe39a1b04",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-98E0A39B9B95511D59FDED59",
+        "base_blob_oid": "8d0d8fef62c2c60822e5f7de3186649b8b754e5b",
+        "base_byte_size": 2431,
+        "base_mode": "100644",
+        "content_sha256": "d464ada1faecf1b091639223bdba76c785a0a1ca344ba4a66c345d4a9de5876a",
+        "locator_sha256": "98e0a39b9b95511d59fded5901b8ddb65543d058daea060b6971b9cce322e05f",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-A2160D5C4171C0B1CB740F8E",
+        "base_blob_oid": "84336a8b894bb2226ebb34b61155617230fc7d84",
+        "base_byte_size": 1300,
+        "base_mode": "100644",
+        "content_sha256": "949f7403658ee662f9824b5ff9e26ca4c806b7cd93e49895c47b0432fcf7ea5c",
+        "locator_sha256": "a2160d5c4171c0b1cb740f8e8c1418f6a0d60b0daef33ee6cc90b1ead8a968e7",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-A7192B1B77B5A2875E5021BD",
+        "base_blob_oid": "4fbceb8eed3c4453e9643d65212ee5ed552e9c24",
+        "base_byte_size": 1395,
+        "base_mode": "100644",
+        "content_sha256": "a71a93b94b9e2cdc9f4c351e526a8ca524a63017128283a91ae623ec83ea64c6",
+        "locator_sha256": "a7192b1b77b5a2875e5021bdcf17d81b56da4999331e6c81daa36cdf81890bfd",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-B2788D54EACE9F585896C1DC",
+        "base_blob_oid": "942a5b7c1d5b4601d66dee666ca1d4be28f60a4c",
+        "base_byte_size": 761,
+        "base_mode": "100644",
+        "content_sha256": "8e236f7b2c3105f2d9f62496ff36415d8cc3363065fe6c6696f59ec4d6d7bac2",
+        "locator_sha256": "b2788d54eace9f585896c1dc036c4c669fd2045ae1644727becab89288fb3811",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-C1B6B2BD9D241810C116ABCC",
+        "base_blob_oid": "310f17221ef69a26b6c6f12c47622f1f957bc299",
+        "base_byte_size": 2327,
+        "base_mode": "100644",
+        "content_sha256": "6ee5a4428039f9eae2337876eeb2d578ce4278c31079f420d885ff805f38e233",
+        "locator_sha256": "c1b6b2bd9d241810c116abcc9786cbad1b4b29b454846e04e54e8e7c6fd08ff0",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-F3970166F9EBF1C0C21D2A5B",
+        "base_blob_oid": "88d9d1c434e50e0c4d5faadfcb41aadc8221c33c",
+        "base_byte_size": 754,
+        "base_mode": "100644",
+        "content_sha256": "6dcd30ee7e6d9fdb0f32692f143d899f543f4dff44d025cc8b3e4d0cd4bb70e0",
+        "locator_sha256": "f3970166f9ebf1c0c21d2a5b0b44342e213f2bfe2f530e8daf6bd49163c90e1c",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      },
+      {
+        "artifact_id": "REPO-F6B22302C4CBCB44DA13B11E",
+        "base_blob_oid": "b236ee5936582dff9d5f073c93ecc33ebeb27327",
+        "base_byte_size": 1396,
+        "base_mode": "100644",
+        "content_sha256": "67dca47e1c79b8b80c6a7d0c118a12bd56dc37874075a79581433f712ab4e4d6",
+        "locator_sha256": "f6b22302c4cbcb44da13b11eb6c98f78eca09d7210334b9860a95cf50486e132",
+        "repository_revision": "d01536c278a66e71c415a4a9de81dcee865ff4e6"
+      }
+    ],
+    "restore_scope_source": "docs/canon/migration/purge-plan.toml artifact.locator values",
+    "restore_source": "0ab85651ed36b1f84d56438fd35eb6e78ce0d959",
+    "verification": "Each artifact locator resolves at the immediate pre-delete base to the recorded Git blob, byte size, mode, and content SHA-256."
+  },
+  "schema_version": 1,
+  "scoped_independent_semantic_re_review": {
+    "artifact_count": 11,
+    "claim_mapping_count": 62,
+    "finding_counts": {
+      "critical": 0,
+      "important": 0,
+      "minor": 0
+    },
+    "global_semantic_review_promoted": false,
+    "mapping_sha256": "b95c1953aec72ea235344ea1f0b4127d0f9f97f5812e34090c2aff4187a24d9c",
+    "purge_operation_digest": "93cd3b9fddd61c9a543d0a30d5f3ccd32476afdeea54a8233e3cd13dc6ea2385",
+    "receipt_path": ".superpowers/sdd/task27-semantic-review-receipt-b95c1953.json",
+    "receipt_sha256": "80dbcb9e56c844b37acb21ceb1af0b4d338a03bf06221de88d9347b843f6d460",
+    "unique_content_extraction": true,
+    "verdict": "clean",
+    "virtual_candidate_tree_sha": "f338d9590fbbcfcc26c1211fa880955de064abed"
+  },
+  "scoped_independent_semantic_review": {
+    "failed_claim_mappings": [
+      {
+        "artifact_id": "REPO-4296019196E7E491BE6122FD",
+        "claim_id": "CLAIM-NAV-067",
+        "finding": "required_semantics_not_preserved",
+        "replacement_id": "DESIGN-007"
+      },
+      {
+        "artifact_id": "REPO-CD93CB377D7C64450BCB9B93",
+        "claim_id": "CLAIM-NAV-070",
+        "finding": "required_semantics_not_preserved",
+        "replacement_id": "PERF-003"
+      }
+    ],
+    "finding_counts": {
+      "critical": 2,
+      "important": 0,
+      "minor": 0
+    },
+    "global_semantic_review_promoted": false,
+    "reviewed_mapping_sha256": "1220ae255d856da51dda5902f7c72783ad6ef23540fe5c469a0ef84096d52e2f",
+    "scope": "Task 27 proposed 13-artifact, 74-claim mapping only",
+    "verdict": "fail"
+  },
+  "status": "non_destructive_link_repair_pending_exact_review",
+  "task_id": "TASK-27"
+}

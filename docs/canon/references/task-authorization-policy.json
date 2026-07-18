@@ -348,15 +348,16 @@
       "approval_required": true,
       "authorized_deletion_manifest": "docs/canon/migration/purge-plan.toml",
       "authorized_files": [
-        "docs/canon/decisions/SUPERSESSION_LEDGER.toml",
-        "docs/canon/migration/TASK_27_IMPLEMENTATION_REPORT.md",
         "docs/canon/migration/authority-freeze-baseline.json",
         "docs/canon/migration/purge-plan.toml",
-        "scripts/ambitions-authority-freeze-check.py",
-        "scripts/tests/test_ambitions_authority_freeze_check.py"
+        "docs/canon/migration/semantic-loss-review.json",
+        "docs/canon/migration/source-catalog.json",
+        "docs/canon/migration/task-27-purge-replacement-mappings.json",
+        "docs/canon/references/task-authorization-policy.json",
+        "docs/constitution/ENGINEERING_CONSTITUTION.md"
       ],
       "issue_reference": "CANON-TASK-27",
-      "maximum_claim_ceiling": "Repository authority purge Governance Green for the exact Gate C-approved Task 27 manifest only",
+      "maximum_claim_ceiling": "Candidate record only of externally approved non-destructive Task 27 link-repair scope OWNER-TRAIN5-TASK27-LINK-REPAIR-2026-07-18T003100Z: exactly 7 paths bound by 217e86b4946c4fa37930fc8a59e677e1b6f63b3fe9123dfb1ad7df04ba841dd3 at 0ab85651ed36b1f84d56438fd35eb6e78ce0d959; this candidate policy is not the approval authority and grants no artifact deletion, commit, external action, Gate C Green, or reusable authorization",
       "proof_obligations": [
         "focused-red-green",
         "one-covering-set",
