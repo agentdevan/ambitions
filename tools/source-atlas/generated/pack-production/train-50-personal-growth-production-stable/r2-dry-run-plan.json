@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 1151,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json",
+      "sha256": "5b907b478bd4020e013f832a4e6406bd734822802c10193317f6dfc395f5bbad"
+    },
+    {
+      "bytes": 776,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json",
+      "sha256": "7fde5cc1dcf5fa108774d4c4bcb62921e8d987db2b03d5f0e9a58b065c243d59"
+    },
+    {
+      "bytes": 7439,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json",
+      "sha256": "ef2c3ecac67aa20519f94dad88f877cc0ce5a41e3e9be79715b1cf1eafce4520"
+    },
+    {
+      "bytes": 2976,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json",
+      "sha256": "fa807fc105e648463d50ee03058f6ab3f249cb8a0db1b2859bcdd0fd733d5036"
+    },
+    {
+      "bytes": 1892,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json",
+      "sha256": "0254460fb4aec7e476c0b00bdb1d22a9a60bd6a85a0db560db31bfbe9d04d5f3"
+    },
+    {
+      "bytes": 1682,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json",
+      "sha256": "f01b127f64039c8312aed8cf8df67caaf48feb91f45bb2f00433127461a1baf6"
+    },
+    {
+      "bytes": 1953,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json",
+      "sha256": "828383d3062292c78f92e61ee9237078a946edec9db90212160ca86efd820b60"
+    },
+    {
+      "bytes": 1238,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "sha256": "d972073b53bfe1ec6f058a9214057d938db6dcd393a0cb4950ad3fdd488dcb6c"
+    },
+    {
+      "bytes": 8595,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+      "sha256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e"
+    },
+    {
+      "bytes": 1265,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json",
+      "sha256": "923f027c14eae38b1e1f4ead008b92e0ad73fb1d9e20be3052acc39005dc1a0a"
+    },
+    {
+      "bytes": 18517,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+      "sha256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9"
+    },
+    {
+      "bytes": 1393,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+      "sha256": "67e17ee1f77674f60948c4b8f76a836d36600fc8e27d9911728536832edf8059"
+    },
+    {
+      "bytes": 2572,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json",
+      "sha256": "15f70f0e4fda7ddfbcdfa004303e6c79f4e5000fa0f04aaf66dfa2ed642d78df"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

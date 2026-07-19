@@ -1,0 +1,35 @@
+{
+  "allowedChannels": [
+    "stable",
+    "staging"
+  ],
+  "dataClass": "public_ontology",
+  "kind": "ambitions.sourceAtlas.lastKnownGoodSchema",
+  "manifestRequiredFields": [
+    "path",
+    "sha256",
+    "bytes"
+  ],
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "requiredFields": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "channel",
+    "versionID",
+    "manifest",
+    "state",
+    "privacyBoundary",
+    "nonClaims"
+  ],
+  "schemaVersion": 1,
+  "state": "last_known_good_candidate"
+}

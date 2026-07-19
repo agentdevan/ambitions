@@ -1,0 +1,129 @@
+{
+  "approvalArtifactPath": "",
+  "approvalValidation": {
+    "approvalArtifactPath": "",
+    "approvalArtifactProvided": false,
+    "approvedEntries": [],
+    "issues": [
+      "approval artifact not provided; all draft registry mutations remain blocked"
+    ],
+    "nonClaims": [
+      "missing approval is expected for blocked dry-run plans"
+    ],
+    "selectedIntakeIDs": [],
+    "valid": false
+  },
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_required_for_planned_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations_written",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "registry_mutation_plan_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unapproved_drafts_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planned_mutations_are_dry_run_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRequested": false,
+  "inputPath": "tools/source-atlas/generated/catalog-governance-intake/train-57-live-data-gov/draft-governance-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogRegistryMutationPlanManifest.v1",
+  "nonClaims": [
+    "not active registry mutation",
+    "not source authority without approval artifact",
+    "not legal approval",
+    "not outside legal approval",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "activeRegistryMutations": "0fa7366caf0f184e3259d81217c2fa012bd560d58ebef1d437b6c0999bade805",
+    "blockedRegistryMutations": "77ec422e136fcb6f63b2f53a3dc3abd97064bb8ae32d73ecb573abfa4f993f08",
+    "catalogRegistryMutationPlan": "7488baca6d8b70109f973c66bcfd986adeb4bedd5c81d32cb50cc3ffdd1d3b3d",
+    "manifest": "685b94f302b52f4c0ed9d602ad5aa6330c511d744997be45d6504a94bbb98c4d",
+    "plannedRegistryMutations": "0fb8bfaa685509df76895d7ca5f50101b56694ee84dff0181db8c6aeff393e09"
+  },
+  "outputPaths": {
+    "activeRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/04-approval-chain/03-mutation-plan/active-registry-mutations.json",
+    "blockedRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/04-approval-chain/03-mutation-plan/blocked-registry-mutations.json",
+    "catalogRegistryMutationPlan": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/04-approval-chain/03-mutation-plan/catalog-registry-mutation-plan.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/04-approval-chain/03-mutation-plan/closeout.md",
+    "plannedRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/04-approval-chain/03-mutation-plan/planned-registry-mutations.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedApiPolicies": 0,
+    "approvedLegalEntries": 0,
+    "approvedSourceLanes": 0,
+    "blockedRegistryMutations": 4,
+    "claims": 0,
+    "draftGovernancePackets": 4,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; registry mutation planning only",
+  "status": "Source Green for approval-gated catalog registry mutation planning",
+  "valid": true,
+  "versionID": "source-atlas-catalog-registry-mutation-plan-train-58"
+}

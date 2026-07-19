@@ -1,0 +1,563 @@
+{
+  "createdAt": "2026-06-27T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.domainScorecards.v1",
+  "scorecards": [
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "business_entrepreneurship",
+      "freshness_policy_gaps": [],
+      "frontier_id": "business_entrepreneurship",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized incorporation strategy",
+        "not accounting advice",
+        "not legal advice",
+        "not pack ready",
+        "not tax advice",
+        "not universal business formation coverage",
+        "state-specific requirements are excluded until separately reviewed"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "sba.business_guide.start_business"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_institution",
+        "standards_body"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "creative-commons.licenses",
+        "w3c.web-standards"
+      ],
+      "claim_count": 0,
+      "domain": "creative_project_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "creative_project_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "scholarly_metadata",
+        "standards_body"
+      ],
+      "missing_authority_classes": [
+        "scholarly_metadata"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a final creative plan",
+        "not copyright permission",
+        "not pack ready",
+        "not redistribution approval beyond listed sources"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "missing_license_posture",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "accreditation.public-records"
+      ],
+      "claim_count": 0,
+      "domain": "education_credentialing",
+      "freshness_policy_gaps": [],
+      "frontier_id": "education_credentialing",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_license_posture",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "missing_authority_classes": [
+        "official_institution"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized degree plan",
+        "not admissions advice",
+        "not credentialing authority",
+        "not financial aid guidance",
+        "not pack ready"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government",
+        "regulated_body"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "cfpb.consumer-education",
+        "irs.tax-deadlines"
+      ],
+      "claim_count": 0,
+      "domain": "finance_public_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "finance_public_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "regulated_body"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized financial plan",
+        "not investment advice",
+        "not pack ready",
+        "not tax advice"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "cdc.physical-activity.guidelines",
+        "hhs.physical-activity-guidelines"
+      ],
+      "claim_count": 0,
+      "domain": "health_wellness_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "health_wellness_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "missing_authority_classes": [
+        "official_institution"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a treatment plan",
+        "not diagnosis",
+        "not medical advice",
+        "not pack ready"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [
+        "nps.recreation-safety"
+      ],
+      "claim_count": 0,
+      "domain": "hobbies_recreation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "hobbies_recreation",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "standards_body"
+      ],
+      "missing_authority_classes": [
+        "standards_body"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized recreation plan",
+        "not pack ready",
+        "not restricted membership data",
+        "not unsafe instructions"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "cpsc.safety-education",
+        "ready.gov.preparedness"
+      ],
+      "claim_count": 0,
+      "domain": "home_life_admin",
+      "freshness_policy_gaps": [],
+      "frontier_id": "home_life_admin",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "standards_body"
+      ],
+      "missing_authority_classes": [
+        "standards_body"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a household schedule",
+        "not pack ready",
+        "not private home data storage",
+        "not unsafe repair instructions"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [],
+      "blocking_reasons": [],
+      "candidate_count": 0,
+      "candidate_only_count": 0,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "occupation_foundation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "occupation_foundation",
+      "legal_posture_gaps": [],
+      "minimum_authority_classes": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "missing_authority_classes": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized job ranking",
+        "not career advice",
+        "not pack ready",
+        "not universal occupation coverage"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "status": "not_started",
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_institution",
+        "open_knowledge_graph"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "crosswalk_only",
+        "crosswalk_only_not_regulated_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "nih.medlineplus.wellness"
+      ],
+      "claim_count": 0,
+      "domain": "personal_growth",
+      "freshness_policy_gaps": [],
+      "frontier_id": "personal_growth",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "scholarly_metadata"
+      ],
+      "missing_authority_classes": [
+        "scholarly_metadata"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a cloud-personalized self-improvement plan",
+        "not diagnosis",
+        "not mental health treatment",
+        "not pack ready"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government",
+        "public_catalog"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "public_civic_requirements",
+      "freshness_policy_gaps": [],
+      "frontier_id": "public_civic_requirements",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not guaranteed eligibility",
+        "not legal advice",
+        "not pack ready",
+        "not universal government coverage"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "nara.constitution.presidency"
+      ],
+      "status": "source_review_ready",
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [
+        "acf.family-services"
+      ],
+      "claim_count": 0,
+      "domain": "relationships_family",
+      "freshness_policy_gaps": [],
+      "frontier_id": "relationships_family",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "missing_authority_classes": [
+        "official_institution"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not legal custody advice",
+        "not pack ready",
+        "not personalized relationship judgment",
+        "not therapy"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [
+        "state.travel-advisories"
+      ],
+      "claim_count": 0,
+      "domain": "travel_relocation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "travel_relocation",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized itinerary",
+        "not legal advice",
+        "not pack ready",
+        "not visa advice"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

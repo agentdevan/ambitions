@@ -1,0 +1,834 @@
+{
+  "adapterID": "college_scorecard_education_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_no_key",
+    "liveMode": "requires_live_flag_and_api_governance_budget",
+    "packOutput": "allowed_for_bounded_public_reference_metadata_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "institution",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.6f16c0d5962f6368",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "University of California, Berkeley",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "education_program",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.955899b6c659a2f2",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Computer and Information Sciences, General",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "credential_level",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.0590166dc46a3959",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "bachelor_degree",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "institution",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.573183d3e8479bb8",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Miami Dade College",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "education_program",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.36c041b309a1f4ca",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Registered Nursing/Registered Nurse",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "credential_level",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.1edaf2c1926eea08",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "associate_degree",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "institution",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.894417119e4f3034",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "CUNY City College",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "education_program",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.a03923c5997dae82",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Education, General",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "credential_level",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.0590166dc46a3959",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "bachelor_degree",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.dc6f989fa1c22e5d",
+      "claimType": "candidate_institution_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.e65c92876c984b63",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "University of California, Berkeley appears in College Scorecard fixture metadata as a candidate public institution reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.62901780ee5b4c36",
+      "claimType": "candidate_education_program_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.0413b2e87433ce13",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "University of California, Berkeley has College Scorecard fixture metadata for Computer and Information Sciences, General at bachelor_degree level as a candidate public program reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.3af35ca537cfbf5d",
+      "claimType": "candidate_institution_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.77b7b7a6f07f2438",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "Miami Dade College appears in College Scorecard fixture metadata as a candidate public institution reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.b9327b4ed6efe9ac",
+      "claimType": "candidate_education_program_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.db88b0ef9ebb22c8",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "Miami Dade College has College Scorecard fixture metadata for Registered Nursing/Registered Nurse at associate_degree level as a candidate public program reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.b91e0599ab887531",
+      "claimType": "candidate_institution_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.064579b03a872997",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "CUNY City College appears in College Scorecard fixture metadata as a candidate public institution reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.9ab81800d5a1cc8c",
+      "claimType": "candidate_education_program_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "claim.bb3c95b696e375a5",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://collegescorecard.ed.gov/data/",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "state": "source_backed",
+      "text": "CUNY City College has College Scorecard fixture metadata for Education, General at bachelor_degree level as a candidate public program reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "college_scorecard_education_adapter",
+    "atomCount": 9,
+    "claimCount": 6,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "education_credentialing",
+    "edgeCount": 6,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 6,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "college-scorecard.api",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "education_credentialing",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.6f16c0d5962f6368",
+      "id": "edge.e5b835859ce1dad2",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "offers_candidate_program_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.955899b6c659a2f2",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.955899b6c659a2f2",
+      "id": "edge.c8dde105c6e325e8",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "has_candidate_credential_level",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.0590166dc46a3959",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.573183d3e8479bb8",
+      "id": "edge.2f1fd028ac563644",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "offers_candidate_program_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.36c041b309a1f4ca",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.36c041b309a1f4ca",
+      "id": "edge.1a29aa0f7d2cbbc5",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "has_candidate_credential_level",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.1edaf2c1926eea08",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.894417119e4f3034",
+      "id": "edge.83a4b731c3d70da9",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "offers_candidate_program_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.a03923c5997dae82",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.a03923c5997dae82",
+      "id": "edge.d56aba1f35fa2a8f",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "has_candidate_credential_level",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "toAtomID": "atom.0590166dc46a3959",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.6f16c0d5962f6368",
+        "atom.955899b6c659a2f2",
+        "atom.0590166dc46a3959",
+        "atom.573183d3e8479bb8",
+        "atom.36c041b309a1f4ca",
+        "atom.1edaf2c1926eea08",
+        "atom.894417119e4f3034",
+        "atom.a03923c5997dae82",
+        "atom.0590166dc46a3959"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.e5b835859ce1dad2",
+        "edge.c8dde105c6e325e8",
+        "edge.2f1fd028ac563644",
+        "edge.1a29aa0f7d2cbbc5",
+        "edge.83a4b731c3d70da9",
+        "edge.d56aba1f35fa2a8f"
+      ],
+      "id": "lattice.e9ddad9edb632a59",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "college_scorecard_education_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "education_credentialing",
+      "id": "pack_candidate.d46601a16a32341e",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 9,
+        "claims": 6,
+        "crosswalks": 0,
+        "edges": 6,
+        "requirements": 6
+      },
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "college-scorecard.api"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "bd6bde0020885f75dc0f27edd15ebf302fa5f81e289352b4d9df5c69c7a203f7",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+      "id": "provenance.7545f1f8956b3392",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "Creative Commons Attribution via current data.ed.gov/Data.gov catalog metadata",
+      "locator": "https://collegescorecard.ed.gov/data/",
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Department of Education",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "college-scorecard.api",
+      "sourceState": "current",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "termsURL": "https://collegescorecard.ed.gov/data/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.e65c92876c984b63",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_institution_reference_only",
+      "id": "requirement.2e8bc091a119a8ce",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.0413b2e87433ce13",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_program_reference_only",
+      "id": "requirement.fcf4f24fd2712de4",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.77b7b7a6f07f2438",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_institution_reference_only",
+      "id": "requirement.44e124e12ab7ed59",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.db88b0ef9ebb22c8",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_program_reference_only",
+      "id": "requirement.a01e5b449b53c996",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.064579b03a872997",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_institution_reference_only",
+      "id": "requirement.3ffd57f1725d4ad8",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.bb3c95b696e375a5",
+      "dataClass": "public_requirement",
+      "gateType": "candidate_program_reference_only",
+      "id": "requirement.988a2b655df5c7ed",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.7545f1f8956b3392"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "college-scorecard.api",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "College Scorecard release tracking and quarterly legal/terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "Creative Commons Attribution via current data.ed.gov/Data.gov catalog metadata",
+    "licenseVersion": "Data.gov College Scorecard package extra license=http://www.opendefinition.org/licenses/cc-by",
+    "publisher": "U.S. Department of Education",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "college-scorecard.api",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://collegescorecard.ed.gov/data/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "college-scorecard.api"
+  }
+}

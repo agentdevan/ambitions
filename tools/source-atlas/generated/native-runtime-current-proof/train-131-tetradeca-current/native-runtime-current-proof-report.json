@@ -1,0 +1,589 @@
+{
+  "allowedClaims": [
+    "bounded_configured_runtime_green"
+  ],
+  "blockedClaims": [
+    "account_entitlement_readiness",
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "outside_legal_approval",
+    "release_green"
+  ],
+  "branch": "main",
+  "checks": [
+    {
+      "issues": [],
+      "name": "production_target_ledger_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "gateway_release_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "native_registry_artifact_public_and_active",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "focused_native_tests_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_configured_domains_runtime_ready",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    }
+  ],
+  "commitSHA": "a370bd92bdf8f819e40afef7829d7c8a7adfc989",
+  "configuredFrontierCount": 14,
+  "configuredFrontiers": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "health_wellness_reference_ca_statistics",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "relationships_family",
+    "travel_relocation",
+    "volunteering_public_reference"
+  ],
+  "createdAt": "2026-06-29T00:19:30Z",
+  "domainProofs": [
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "business_entrepreneurship",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "creative_project_reference",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "education_credentialing",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "packableClaimCount": 8,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "finance_public_reference",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "health_wellness_reference",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+      "packableClaimCount": 2,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "hobbies_recreation",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "home_life_admin",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+      "packableClaimCount": 4,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "occupation_foundation",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "packableClaimCount": 26,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "personal_growth",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "public_civic_requirements",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "packableClaimCount": 2,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "relationships_family",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+      "packableClaimCount": 5,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "travel_relocation",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    },
+    {
+      "allowedModes": [
+        "active_lifecycle",
+        "background",
+        "startup"
+      ],
+      "blockers": [],
+      "domainID": "volunteering_public_reference",
+      "gatewayCurrentManifestPackVerified": true,
+      "gatewayVerifiedLabels": [
+        "current",
+        "manifest",
+        "pack"
+      ],
+      "nativeRegistryTargetActive": true,
+      "nativeTargetPackID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not Release Green",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+      "packableClaimCount": 3,
+      "runtimeReady": true,
+      "sourceIDs": [
+        "americorps.volunteer_rate_state"
+      ]
+    }
+  ],
+  "evidencePaths": {
+    "gatewayReleaseReport": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-ledger-gated-live-verify/public-gateway-release-report.json",
+    "nativeRegistryArtifact": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-131-final.json",
+    "xcodeLog": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-29T00-16-33-842Z_pid24471_22a3592e.log",
+    "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-29T00-16-33-842Z_pid24471_c121958c.xcresult"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.nativeRuntimeCurrentProof.v1",
+  "nonClaims": [
+    "bounded configured-frontier native runtime proof only",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not independent visual or accessibility proof",
+    "not account entitlement readiness",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "6a629ce204e4ecb7ae8a99d75fb9abac6429f31c334e7b9f9e1f6a5c74158013",
+    "reportPayload": "a0846d7cf2a2a16d139e66bfc04486169c5928aba72a31bc4692c7ca4d3cd1fc"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/native-runtime-current-proof/train-131-tetradeca-current/closeout.md",
+    "markdown": "tools/source-atlas/generated/native-runtime-current-proof/train-131-tetradeca-current/native-runtime-current-proof-report.md",
+    "report": "tools/source-atlas/generated/native-runtime-current-proof/train-131-tetradeca-current/native-runtime-current-proof-report.json"
+  },
+  "overallReadinessStatus": "bounded_configured_native_runtime_green",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLawPreserved": true,
+  "proofID": "source_atlas.native_runtime_current_proof.8edaaebcdcc69900",
+  "proofSummary": {
+    "freshnessRevocationProof": "Focused native suites cover current pointer, revocation manifest, manifest, LKG pointer, and pack fetch behavior.",
+    "licenseTermsProof": "Inherited from current production pack/R2 gates; this native proof emits no legal approval.",
+    "lkgRollbackProof": "Focused native suites cover repository/LKG/offline fallback without blocking core local planning.",
+    "nativeOfflineNoAccountProof": "Offline/no-account focused suite keeps core local planning available without remote public reference access.",
+    "noPrivateGraphEgressProof": "Registry, request, cache, and runtime proof metadata are privacy-boundary scanned; private goal/capture/schedule/proof/account/device/private graph fields are absent.",
+    "provenanceCompletenessProof": "Native runtime consumes published pack manifests and declared pack SHA-256s before local cache use.",
+    "r2RequestPrivacyProof": "Public manifest/object requests contain domain, channel, schema, app version, public locale, and public object keys only.",
+    "restrictedSourceExclusionProof": "Inherited from production target ledger and pack/R2 reports selected by the gateway.",
+    "runtimeCompositionProof": "Local source inspection proof keeps Source Atlas reference-only; Runtime owns fit, timing, priority, and final action composition."
+  },
+  "recordCounts": {
+    "configuredDomains": 14,
+    "domainsBlocked": 0,
+    "domainsRuntimeReady": 14,
+    "gatewayLiveDomains": 14,
+    "privacyIssues": 0,
+    "registryActiveTargets": 14,
+    "xcodeFailed": 0,
+    "xcodePassed": 72,
+    "xcodeSkipped": 0
+  },
+  "runtimeGreenClaim": {
+    "allowed": true,
+    "allowedScope": "configured production-target public/reference frontiers only",
+    "claimID": "bounded_configured_runtime_green",
+    "issues": []
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded configured-frontier native runtime proof only",
+  "status": "Native Runtime Green for configured Source Atlas public-pack runtime / Yellow overall Source Atlas",
+  "valid": true,
+  "versionID": "source-atlas-native-runtime-current-proof-train-117",
+  "worktreeDirtyEntryCountAtProof": 421,
+  "xcodeBuildMCP": {
+    "buildLogPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-29T00-16-33-842Z_pid24471_22a3592e.log",
+    "durationMs": 136697,
+    "failed": 0,
+    "passed": 72,
+    "result": "SUCCEEDED",
+    "skipped": 0,
+    "target": "simulator",
+    "testRunnerEnv": {
+      "SOURCE_ATLAS_LIVE_R2_ENDPOINT": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev"
+    },
+    "testSuites": [
+      "SourceAtlasLocalReferenceCompositionProofTests",
+      "SourceAtlasOfflineNoAccountScenarioTests",
+      "SourceAtlasPublicPackAppRefreshCoordinatorTests",
+      "SourceAtlasPublicPackFetchPipelineTests",
+      "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "SourceAtlasPublicPackRemoteTransportTests",
+      "SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests"
+    ],
+    "xcodeBuildMCPProfile": "ambitions-ios",
+    "xcresultPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-29T00-16-33-842Z_pid24471_c121958c.xcresult"
+  }
+}

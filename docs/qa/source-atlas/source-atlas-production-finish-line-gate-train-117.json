@@ -1,0 +1,1683 @@
+{
+  "allowedClaims": [
+    "bounded_configured_production_target",
+    "internal_terms_review",
+    "production_r2_write_readback",
+    "bounded_live_transport",
+    "bounded_configured_runtime_green",
+    "gateway_native_runtime_recertification"
+  ],
+  "blockedClaims": [
+    "outside_legal_approval",
+    "runtime_green",
+    "release_green",
+    "universal_coverage"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_target_ledger_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "internal_terms_gate_all_current_production_sources",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_r2_write_readback_all_configured_domains",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "bounded_live_transport_proven",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "bounded_configured_runtime_green_proven",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "gateway_native_runtime_recertification",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "release_and_universal_claims_remain_explicit",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T21:55:28Z",
+  "domainEvaluations": [
+    {
+      "blockers": [],
+      "domainID": "business_entrepreneurship",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "creative_project_reference",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "education_credentialing",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "finance_public_reference",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "health_wellness_reference",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "hobbies_recreation",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "home_life_admin",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "occupation_foundation",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "personal_growth",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "public_civic_requirements",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "relationships_family",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "blockers": [],
+      "domainID": "travel_relocation",
+      "productionTargetReady": true,
+      "r2WriteReadbackReady": true,
+      "recertified": true,
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    }
+  ],
+  "evidencePaths": {
+    "coverageReport": null,
+    "gatewayReleaseReport": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-train-116.json",
+    "legalTermsApprovalPacket": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/01-internal-terms-approval/legal-terms-approval-packet.json",
+    "nativeRegistryArtifact": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "nativeRuntimeReport": "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+    "releaseApprovalArtifact": null
+  },
+  "finishLineGateID": "source_atlas.production_finish_line_gate.ea9022a96c29d49a",
+  "finishLineGates": [
+    {
+      "allowed": true,
+      "allowedScope": "all configured frontiers in the production target ledger",
+      "claimID": "bounded_configured_production_target",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "source-specific internal terms review for current production source IDs",
+      "claimID": "internal_terms_review",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "all configured-domain production stable R2 publisher reports",
+      "claimID": "production_r2_write_readback",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "current gateway, native registry, and native runtime recertification",
+      "claimID": "bounded_live_transport",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "bounded configured Source Atlas public-pack runtime proof",
+      "claimID": "bounded_configured_runtime_green",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "current production ledger, gateway, native registry, and native runtime recertification",
+      "claimID": "gateway_native_runtime_recertification",
+      "issues": [],
+      "status": "allowed"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "outside_legal_approval",
+      "issues": [
+        "outside legal approval is not proven by a source-specific artifact and hash"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "runtime_green",
+      "issues": [
+        "current evidence proves bounded transport/lifecycle behavior, not broad Source Atlas Runtime Green"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "release_green",
+      "issues": [
+        "Codex cannot self-certify Release Green; release umbrella/device/accessibility/privacy/legal approval evidence is missing"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "universal_coverage",
+      "issues": [
+        "literal or unbounded universal coverage is not proven; use governed coverage-frontier scope instead"
+      ],
+      "status": "blocked"
+    }
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionFinishLineGate.v1",
+  "legalClaimGate": {
+    "allowedClaims": [
+      "source_atlas_terms_gate_green",
+      "bounded_configured_runtime_green"
+    ],
+    "blockedClaims": [
+      "unqualified_legal_approval",
+      "outside_legal_approval",
+      "bounded_live_native_transport",
+      "source_atlas_runtime_green",
+      "release_green",
+      "universal_coverage"
+    ],
+    "claimEvaluations": [
+      {
+        "allowed": true,
+        "allowedScope": "bounded internal Source Atlas terms-review gate for listed sources",
+        "claimID": "source_atlas_terms_gate_green",
+        "evidence": [
+          "tools/source-atlas/generated/production-finish-line-gate/train-117-current/01-internal-terms-approval/legal-terms-approval-packet.json"
+        ],
+        "issues": [],
+        "nonClaims": [
+          "not outside legal approval",
+          "not release readiness"
+        ],
+        "status": "allowed"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked; only bounded internal terms-review may be claimed",
+        "claimID": "unqualified_legal_approval",
+        "evidence": [
+          "tools/source-atlas/generated/production-finish-line-gate/train-117-current/01-internal-terms-approval/legal-terms-approval-packet.json"
+        ],
+        "issues": [
+          "unqualified legal approval requires a current source-specific legal/privacy approval artifact and cannot be inferred from internal terms review"
+        ],
+        "nonClaims": [
+          "internal terms review is not outside legal approval"
+        ],
+        "status": "blocked"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked",
+        "claimID": "outside_legal_approval",
+        "evidence": [
+          "tools/source-atlas/generated/production-finish-line-gate/train-117-current/01-internal-terms-approval/legal-terms-approval-packet.json"
+        ],
+        "issues": [
+          "outside legal approval is not proven by a source-specific artifact and hash"
+        ],
+        "nonClaims": [
+          "not outside legal approval"
+        ],
+        "status": "blocked"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked",
+        "claimID": "bounded_live_native_transport",
+        "evidence": [
+          "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json"
+        ],
+        "issues": [
+          "live native transport proof is missing or incomplete"
+        ],
+        "nonClaims": [
+          "not custom-domain production readiness",
+          "not Release Green"
+        ],
+        "status": "blocked"
+      },
+      {
+        "allowed": true,
+        "allowedScope": "bounded configured runtime proof for business_entrepreneurship, creative_project_reference, education_credentialing, finance_public_reference, health_wellness_reference, health_wellness_reference_ca_statistics, hobbies_recreation, home_life_admin, occupation_foundation, personal_growth, public_civic_requirements, relationships_family, travel_relocation",
+        "claimID": "bounded_configured_runtime_green",
+        "evidence": [
+          "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json"
+        ],
+        "issues": [],
+        "nonClaims": [
+          "not full Source Atlas Green",
+          "not Release Green",
+          "not literal universal coverage"
+        ],
+        "status": "allowed"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked; requires full runtime scenario proof across Source Atlas composition, offline fallback, inspection, and release gates",
+        "claimID": "source_atlas_runtime_green",
+        "evidence": [
+          "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json"
+        ],
+        "issues": [
+          "current evidence proves bounded transport/lifecycle behavior, not broad Source Atlas Runtime Green"
+        ],
+        "nonClaims": [
+          "not broad Runtime Green",
+          "not Release Green"
+        ],
+        "status": "blocked"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked",
+        "claimID": "release_green",
+        "evidence": [],
+        "issues": [
+          "Codex cannot self-certify Release Green; release umbrella/device/accessibility/privacy/legal approval evidence is missing"
+        ],
+        "nonClaims": [
+          "not Release Green"
+        ],
+        "status": "blocked"
+      },
+      {
+        "allowed": false,
+        "allowedScope": "blocked",
+        "claimID": "universal_coverage",
+        "evidence": [],
+        "issues": [
+          "literal or unbounded universal coverage is not proven; use governed coverage-frontier scope instead"
+        ],
+        "nonClaims": [
+          "not universal coverage"
+        ],
+        "status": "blocked"
+      }
+    ],
+    "createdAt": "2026-06-28T21:55:28Z",
+    "gateID": "source-atlas/legal-release-claim-gate/0b88e9d970c02725",
+    "gateIssues": [],
+    "kind": "ambitions.sourceAtlas.legalReleaseClaimGate.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not unqualified legal approval",
+      "not Release Green",
+      "not Visual Green",
+      "not App Store readiness",
+      "not universal coverage",
+      "not entitlement readiness",
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "requestedClaims": [
+      "source_atlas_terms_gate_green",
+      "unqualified_legal_approval",
+      "outside_legal_approval",
+      "bounded_live_native_transport",
+      "bounded_configured_runtime_green",
+      "source_atlas_runtime_green",
+      "release_green",
+      "universal_coverage"
+    ],
+    "schemaVersion": 1,
+    "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; see per-claim evaluations",
+    "sourceIDs": [
+      "acf.healthy_marriage_fatherhood",
+      "bls.public.data.api",
+      "cdc.physical-activity.basics",
+      "cdc.positive_parenting",
+      "cfpb.adult_financial_education",
+      "childwelfare.family_support",
+      "college-scorecard.api",
+      "creative-commons.licenses",
+      "energy.gov.energy_saver",
+      "irs.when_to_file",
+      "loc.primary_sources",
+      "nara.constitution.presidency",
+      "nih.medlineplus.wellness",
+      "nps.recreation-safety",
+      "official.statcan.table.13100974",
+      "onet.database",
+      "openalex.dataset",
+      "openalex.personal_growth_research",
+      "openalex.works",
+      "ready.gov.kit",
+      "sba.business_guide.start_business",
+      "state.travel.public_travel",
+      "usa.gov.benefits",
+      "usa.gov.change_address",
+      "usa.gov.home_repair",
+      "w3c.web-standards",
+      "westpoint.redbook.computer_science_major"
+    ],
+    "status": "Source Green for release-claim gate",
+    "termsValidation": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+      "nonClaims": [
+        "not outside legal approval unless an outside approval artifact is validated",
+        "not production R2 readiness",
+        "not release readiness"
+      ],
+      "outsideLegalApprovalClaimed": false,
+      "requestedArtifactClasses": [
+        "official_public_source",
+        "public_freshness",
+        "public_provenance",
+        "public_reference_claim"
+      ],
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "bls.public.data.api",
+        "cdc.physical-activity.basics",
+        "cdc.positive_parenting",
+        "cfpb.adult_financial_education",
+        "childwelfare.family_support",
+        "college-scorecard.api",
+        "creative-commons.licenses",
+        "energy.gov.energy_saver",
+        "irs.when_to_file",
+        "loc.primary_sources",
+        "nara.constitution.presidency",
+        "nih.medlineplus.wellness",
+        "nps.recreation-safety",
+        "official.statcan.table.13100974",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.personal_growth_research",
+        "openalex.works",
+        "ready.gov.kit",
+        "sba.business_guide.start_business",
+        "state.travel.public_travel",
+        "usa.gov.benefits",
+        "usa.gov.change_address",
+        "usa.gov.home_repair",
+        "w3c.web-standards",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "status": "Green",
+      "valid": true,
+      "validations": [
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "acf.healthy_marriage_fatherhood",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "bls.public.data.api",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "cdc.physical-activity.basics",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "cdc.positive_parenting",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "cfpb.adult_financial_education",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "childwelfare.family_support",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "college-scorecard.api",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "creative-commons.licenses",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "energy.gov.energy_saver",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "irs.when_to_file",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "loc.primary_sources",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "nara.constitution.presidency",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "nih.medlineplus.wellness",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "nps.recreation-safety",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "official.statcan.table.13100974",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "onet.database",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "openalex.dataset",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "openalex.personal_growth_research",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "openalex.works",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "ready.gov.kit",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "sba.business_guide.start_business",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "state.travel.public_travel",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "usa.gov.benefits",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "usa.gov.change_address",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "usa.gov.home_repair",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "w3c.web-standards",
+          "status": "Green",
+          "valid": true
+        },
+        {
+          "approvalReviewStatus": "approved_internal_terms_review",
+          "issues": [],
+          "outsideLegalApprovalArtifact": "",
+          "outsideLegalApprovalClaimed": false,
+          "sourceID": "westpoint.redbook.computer_science_major",
+          "status": "Green",
+          "valid": true
+        }
+      ]
+    },
+    "valid": true,
+    "versionID": "source-atlas-legal-release-claim-gate-v1"
+  },
+  "nonClaims": [
+    "bounded configured-frontier production finish-line gate only",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not independent physical-device proof",
+    "not independent visual/accessibility Green",
+    "not account entitlement readiness",
+    "not a new live harvest",
+    "not a new production R2 write",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "compiledLegalTermsApprovalPacket": "4eee6a78d864a5d7d50c96fd4cc7e70cb3be2381970c724a8ae6ad1b91eedf48",
+    "productionRecertification": "898664aecd0caa477b1284036fd79ae3ed88f93b0dcbd051ebe83a0538817682",
+    "report": "72fa2b5c27972a4c5e7efaf678f656b685bc5e17dbb0928be8f78ff3897d612b"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/closeout.md",
+    "compiledLegalTermsApprovalPacket": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/01-internal-terms-approval/legal-terms-approval-packet.json",
+    "markdown": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/production-finish-line-gate-report.md",
+    "productionRecertification": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/00-production-recertification/production-recertification-report.json",
+    "report": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/production-finish-line-gate-report.json"
+  },
+  "overallReadinessStatus": "bounded_configured_production_finish_line_green",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productionDomains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "health_wellness_reference_ca_statistics",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "productionRecertification": {
+    "allowedClaims": [
+      "bounded_configured_source_atlas_production_runtime_ready",
+      "bounded_configured_frontier_current_production_runtime_ready"
+    ],
+    "blockedClaims": [
+      "accessibility_green",
+      "account_entitlement_readiness",
+      "app_store_readiness",
+      "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+      "full_source_atlas_green",
+      "future_domain_readiness_without_frontier_source_pack_r2_native_proof",
+      "literal_universal_coverage",
+      "outside_legal_approval",
+      "release_green",
+      "visual_green"
+    ],
+    "checks": [
+      {
+        "issues": [],
+        "name": "production_target_ledger_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "gateway_release_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "gateway_live_verification_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "native_runtime_proof_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "native_registry_coherence_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "domain_chain_recertification",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "privacy_boundary",
+        "passed": true
+      }
+    ],
+    "createdAt": "2026-06-28T21:55:28Z",
+    "domains": [
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "business_entrepreneurship",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "sba.business_guide.start_business"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "creative_project_reference",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "creative-commons.licenses",
+          "loc.primary_sources",
+          "w3c.web-standards"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "education_credentialing",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 8,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "college-scorecard.api",
+          "westpoint.redbook.computer_science_major"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "finance_public_reference",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "cfpb.adult_financial_education",
+          "irs.when_to_file",
+          "usa.gov.benefits"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "health_wellness_reference",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "cdc.physical-activity.basics"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "health_wellness_reference_ca_statistics",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 2,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "official.statcan.table.13100974"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "hobbies_recreation",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "nps.recreation-safety"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "home_life_admin",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 4,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "energy.gov.energy_saver",
+          "ready.gov.kit",
+          "usa.gov.home_repair"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "occupation_foundation",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 26,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "bls.public.data.api",
+          "onet.database",
+          "openalex.dataset",
+          "openalex.works"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "personal_growth",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "nih.medlineplus.wellness",
+          "openalex.personal_growth_research"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "public_civic_requirements",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 2,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "nara.constitution.presidency"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "relationships_family",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 5,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "acf.healthy_marriage_fatherhood",
+          "cdc.positive_parenting",
+          "childwelfare.family_support"
+        ]
+      },
+      {
+        "allowedClaimScopes": [
+          "bounded_production_target"
+        ],
+        "blockers": [],
+        "domainID": "travel_relocation",
+        "gatewayCurrentManifestPackVerified": true,
+        "gatewayVerifiedLabels": [
+          "current",
+          "manifest",
+          "pack"
+        ],
+        "ledgerR2PathMatchesSelected": true,
+        "ledgerR2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "ledgerReadinessStatus": "bounded_production_target_ready",
+        "nativeRegistryMatched": true,
+        "nativeRuntimeCovered": true,
+        "nativeTargetPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "nonClaims": [
+          "not universal coverage",
+          "not outside legal approval",
+          "not Release Green",
+          "not final user plans, schedules, or Steps"
+        ],
+        "packableClaimCount": 3,
+        "recertified": true,
+        "selectedPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "selectedPublisherReportPath": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "sourceIDs": [
+          "state.travel.public_travel",
+          "usa.gov.change_address"
+        ]
+      }
+    ],
+    "evidencePaths": {
+      "gatewayReleaseReport": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-train-116.json",
+      "nativeRegistryArtifact": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "nativeRuntimeReport": "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json",
+      "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json"
+    },
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionRecertificationGate.v1",
+    "nativeRegistryCoherenceGate": {
+      "activeDomains": [
+        "business_entrepreneurship",
+        "creative_project_reference",
+        "education_credentialing",
+        "finance_public_reference",
+        "health_wellness_reference",
+        "health_wellness_reference_ca_statistics",
+        "hobbies_recreation",
+        "home_life_admin",
+        "occupation_foundation",
+        "personal_growth",
+        "public_civic_requirements",
+        "relationships_family",
+        "travel_relocation"
+      ],
+      "activeTargetCount": 13,
+      "artifactID": "source_atlas_public_refresh_targets.train85_ledger_gated_active",
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.nativeRegistryCoherenceGate.v1",
+      "matchedTargetCount": 13,
+      "matches": [
+        {
+          "domainID": "business_entrepreneurship",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.business_entrepreneurship.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z"
+        },
+        {
+          "domainID": "creative_project_reference",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.creative_project_reference.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z"
+        },
+        {
+          "domainID": "education_credentialing",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.education_credentialing.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z"
+        },
+        {
+          "domainID": "finance_public_reference",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.finance_public_reference.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z"
+        },
+        {
+          "domainID": "health_wellness_reference",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.health_wellness_reference.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z"
+        },
+        {
+          "domainID": "health_wellness_reference_ca_statistics",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.health_wellness_reference_ca_statistics.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z"
+        },
+        {
+          "domainID": "hobbies_recreation",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.hobbies_recreation.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z"
+        },
+        {
+          "domainID": "home_life_admin",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.home_life_admin.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z"
+        },
+        {
+          "domainID": "occupation_foundation",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z"
+        },
+        {
+          "domainID": "personal_growth",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.personal_growth.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z"
+        },
+        {
+          "domainID": "public_civic_requirements",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+          "targetID": "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+          "targetPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z"
+        },
+        {
+          "domainID": "relationships_family",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z"
+        },
+        {
+          "domainID": "travel_relocation",
+          "matched": true,
+          "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+          "selectedPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+          "targetID": "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+          "targetPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z"
+        }
+      ],
+      "nonClaims": [
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not universal goal coverage",
+        "not a final user plan, schedule, or Step generator",
+        "not a broad release readiness claim"
+      ],
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "registryPath": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "required": true,
+      "schemaVersion": 1,
+      "selectedDomains": [
+        "business_entrepreneurship",
+        "creative_project_reference",
+        "education_credentialing",
+        "finance_public_reference",
+        "health_wellness_reference",
+        "health_wellness_reference_ca_statistics",
+        "hobbies_recreation",
+        "home_life_admin",
+        "occupation_foundation",
+        "personal_growth",
+        "public_civic_requirements",
+        "relationships_family",
+        "travel_relocation"
+      ],
+      "selectedReportCount": 13,
+      "valid": true
+    },
+    "nonClaims": [
+      "not literal universal coverage",
+      "not full Source Atlas Green",
+      "not outside legal approval",
+      "not App Store or TestFlight readiness",
+      "not physical-device proof",
+      "not independent visual or accessibility proof",
+      "not account entitlement readiness",
+      "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+      "not approval for future domains without source/frontier/pack/R2/native evidence",
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval"
+    ],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/00-production-recertification/closeout.md",
+      "markdown": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/00-production-recertification/production-recertification-report.md",
+      "report": "tools/source-atlas/generated/production-finish-line-gate/train-117-current/00-production-recertification/production-recertification-report.json"
+    },
+    "overallReadinessStatus": "bounded_configured_production_runtime_recertified",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "privacyIssues": [],
+    "recertificationID": "source_atlas.production_recertification.9452551d92342c59",
+    "recordCounts": {
+      "blockedDomains": 0,
+      "gatewayLiveDomains": 13,
+      "ledgerDomains": 13,
+      "nativeRegistryMatches": 13,
+      "nativeRuntimeFrontiers": 13,
+      "privacyIssues": 0,
+      "recertifiedDomains": 13,
+      "selectedGatewayReports": 13
+    },
+    "schemaVersion": 1,
+    "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded configured-frontier production/runtime recertification only",
+    "status": "Source Green for bounded configured production/runtime recertification",
+    "universalCoverageClaimAllowed": false,
+    "valid": true,
+    "versionID": "source-atlas-production-recertification-train-104"
+  },
+  "productionSourceIDs": [
+    "acf.healthy_marriage_fatherhood",
+    "bls.public.data.api",
+    "cdc.physical-activity.basics",
+    "cdc.positive_parenting",
+    "cfpb.adult_financial_education",
+    "childwelfare.family_support",
+    "college-scorecard.api",
+    "creative-commons.licenses",
+    "energy.gov.energy_saver",
+    "irs.when_to_file",
+    "loc.primary_sources",
+    "nara.constitution.presidency",
+    "nih.medlineplus.wellness",
+    "nps.recreation-safety",
+    "official.statcan.table.13100974",
+    "onet.database",
+    "openalex.dataset",
+    "openalex.personal_growth_research",
+    "openalex.works",
+    "ready.gov.kit",
+    "sba.business_guide.start_business",
+    "state.travel.public_travel",
+    "usa.gov.benefits",
+    "usa.gov.change_address",
+    "usa.gov.home_repair",
+    "w3c.web-standards",
+    "westpoint.redbook.computer_science_major"
+  ],
+  "r2Evaluation": {
+    "blocked": 0,
+    "domains": [
+      {
+        "domainID": "business_entrepreneurship",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "creative_project_reference",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "education_credentialing",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "finance_public_reference",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "health_wellness_reference",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "health_wellness_reference_ca_statistics",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "hobbies_recreation",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "home_life_admin",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "occupation_foundation",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "personal_growth",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "public_civic_requirements",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "relationships_family",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      },
+      {
+        "domainID": "travel_relocation",
+        "issues": [],
+        "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "valid": true
+      }
+    ],
+    "expected": 13,
+    "issues": [],
+    "valid": 13
+  },
+  "recordCounts": {
+    "legalAllowedClaims": 2,
+    "legalBlockedClaims": 6,
+    "privacyIssues": 0,
+    "productionDomains": 13,
+    "productionSourceIDs": 27,
+    "r2ReportsBlocked": 0,
+    "r2ReportsExpected": 13,
+    "r2ReportsValid": 13,
+    "recertificationBlockedDomains": 0,
+    "recertifiedDomains": 13
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded configured-frontier production finish-line gate only",
+  "status": "Source Green for bounded configured production finish-line gate",
+  "valid": true,
+  "versionID": "source-atlas-production-finish-line-gate-train-114"
+}

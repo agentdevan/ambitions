@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.m09.validationCommandMatrix",
+  "status": "canonical-m09-local-validation-matrix",
+  "nonClaims": [
+    "does not claim release readiness",
+    "does not claim production R2 upload",
+    "does not close known issues",
+    "does not close the Source Atlas project"
+  ],
+  "commands": [
+    {
+      "id": "m09.git.diff.check",
+      "area": "privacy-security",
+      "availability": "available",
+      "command": "git diff --check",
+      "proofExpectation": "Whitespace and patch integrity check for tracked diff."
+    },
+    {
+      "id": "m09.local.pr.review",
+      "area": "privacy-security",
+      "availability": "available",
+      "command": "bash scripts/ci/ambitions-pr-review-local.sh --continue",
+      "proofExpectation": "Local PR review stack output with pass/fail counts."
+    },
+    {
+      "id": "m09.green.standard.audit",
+      "area": "privacy-security",
+      "availability": "available",
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "proofExpectation": "Green-standard source audit output."
+    },
+    {
+      "id": "m09.boundary.audit",
+      "area": "boundary",
+      "availability": "available",
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "proofExpectation": "Source Atlas public/reference boundary audit output."
+    },
+    {
+      "id": "m09.no.private.egress.audit",
+      "area": "no-private-egress",
+      "availability": "available",
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "proofExpectation": "No-private-graph egress audit output."
+    },
+    {
+      "id": "m09.foundry.pytest",
+      "area": "foundry",
+      "availability": "available",
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "proofExpectation": "Foundry and Source Atlas Python test result."
+    },
+    {
+      "id": "m09.schema.contracts",
+      "area": "schema",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py r2-contracts --output-root tools/source-atlas/foundry/contracts --prefix source-atlas/v1",
+      "proofExpectation": "Schema and R2 object-layout contract generation result."
+    },
+    {
+      "id": "m09.cache.boundary.focused",
+      "area": "cache",
+      "availability": "available",
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_M09_FOCUSED --only-testing AmbitionsTests/SourceAtlasPublicArtifactPrivacyBoundaryTests --timeout 15m --kill-after 60s",
+      "proofExpectation": "Focused native cache/public artifact privacy boundary test result."
+    },
+    {
+      "id": "m09.runtime.egress.focused",
+      "area": "runtime",
+      "availability": "available",
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_M09_FOCUSED --only-testing AmbitionsTests/SourceAtlasNoPrivateGraphEgressAuditTests --timeout 15m --kill-after 60s",
+      "proofExpectation": "Focused native runtime no-private-graph egress test result."
+    },
+    {
+      "id": "m09.inspection.ui.focused",
+      "area": "inspection-ui",
+      "availability": "available",
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_M09_FOCUSED --only-testing AmbitionsTests/SourceInspectionPresentationTests --timeout 15m --kill-after 60s",
+      "proofExpectation": "Focused Source inspection presentation test result."
+    },
+    {
+      "id": "m09.accessibility.focused",
+      "area": "accessibility",
+      "availability": "available",
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_M09_FOCUSED --only-testing AmbitionsTests/SourceInspectionAccessibilityProofTests --timeout 15m --kill-after 60s",
+      "proofExpectation": "Focused Source inspection accessibility proof contract test result."
+    },
+    {
+      "id": "m09.xcode.build.for.testing",
+      "area": "xcode-build-for-testing",
+      "availability": "available",
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "proofExpectation": "Xcode build-for-testing summary for the Ambitions scheme."
+    },
+    {
+      "id": "m09.validation.matrix.command",
+      "area": "evidence-generation",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-m09.py validation-matrix --output output/source-atlas/m09/validation-command-matrix-result.json",
+      "proofExpectation": "M09 command matrix validation output."
+    },
+    {
+      "id": "m09.golden.benchmarks",
+      "area": "golden-benchmarks",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-m09.py golden-benchmarks --output output/source-atlas/m09/golden-benchmark-result.json",
+      "proofExpectation": "M09 17-scenario golden benchmark result."
+    },
+    {
+      "id": "m09.source.state.repair",
+      "area": "source-state-repair",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-m09.py source-state-repair --output output/source-atlas/m09/source-state-repair-result.json",
+      "proofExpectation": "M09 source-state repair fixture result."
+    },
+    {
+      "id": "m09.known.issue.router",
+      "area": "known-issue-router",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-m09.py known-issue-router --output output/source-atlas/m09/known-issue-router-result.json",
+      "proofExpectation": "M09 known-issue router output; no known issues closed."
+    },
+    {
+      "id": "m09.evidence.pack",
+      "area": "evidence-generation",
+      "availability": "available",
+      "command": "python3 tools/source-atlas/source-atlas-m09.py evidence-pack --output-root output/source-atlas/m09",
+      "proofExpectation": "Repeatable M09 release-evidence pack JSON and Markdown output with non-claims."
+    },
+    {
+      "id": "m09.production.r2.upload",
+      "area": "privacy-security",
+      "availability": "not_available",
+      "notAvailableReason": "Production R2 upload is explicitly out of scope for M09 and must not be run or claimed.",
+      "proofExpectation": "Record as not run; no production R2 upload claim."
+    }
+  ]
+}

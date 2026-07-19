@@ -1,0 +1,29 @@
+{
+  "adapterID": "usagov_home_repair_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "986dacf4f2e75b2a6605477ede2b73774dc192bc62d12243c7b57c251077c0a1",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "usagov_public_web",
+  "normalizedPath": "normalized/usa.gov.home_repair.json",
+  "normalizedSHA256": "77ad24965816ff6a9026c4dd9279cf5470aae478b781df0d7d91fd9eccffff85",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "usa.gov.home_repair",
+  "sourceLane": "usa.gov.home_repair"
+}

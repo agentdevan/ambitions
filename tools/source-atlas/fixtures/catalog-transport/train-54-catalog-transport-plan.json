@@ -1,0 +1,37 @@
+{
+  "catalogEndpoints": [
+    {
+      "endpoint_id": "data-json-public-catalog",
+      "url": "https://catalog.example.gov/data.json",
+      "fixture_path": "tools/source-atlas/fixtures/catalog-discovery/train-53-catalogs/data-json-catalog.json",
+      "catalog_kind": "dcat_data_json",
+      "enabled": true,
+      "timeout_seconds": 20,
+      "max_bytes": 2000000
+    },
+    {
+      "endpoint_id": "ckan-package-search-public-catalog",
+      "url": "https://catalog.example.gov/api/3/action/package_search?q=public_reference",
+      "fixture_path": "tools/source-atlas/fixtures/catalog-discovery/train-53-catalogs/ckan-package-search.json",
+      "catalog_kind": "ckan_package_search",
+      "enabled": true,
+      "timeout_seconds": 20,
+      "max_bytes": 2000000
+    },
+    {
+      "endpoint_id": "schema-org-public-catalog",
+      "url": "https://example.edu/public-learning-resources/catalog.jsonld",
+      "fixture_path": "tools/source-atlas/fixtures/catalog-discovery/train-53-catalogs/schema-org-datasets.json",
+      "catalog_kind": "schema_org",
+      "enabled": true,
+      "timeout_seconds": 20,
+      "max_bytes": 2000000
+    }
+  ],
+  "non_claims": [
+    "catalog transport plan only",
+    "not source authority",
+    "not pack output",
+    "not R2 readiness"
+  ]
+}

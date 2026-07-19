@@ -1,0 +1,28 @@
+{
+  "caseID": "valid.public_reference_request_shape",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "dataClass": "official_public_source",
+    "kind": "ambitions.sourceAtlas.boundaryRequestFixture.v1",
+    "request": {
+      "headers": {
+        "Accept": "application/json"
+      },
+      "path": "/source-atlas/public/packs",
+      "query": {
+        "artifact_id": "pack.synthetic.public_reference",
+        "artifact_version": "2026-06-public-reference",
+        "channel": "stable",
+        "freshness_state": "current",
+        "manifest_version": "fixture-v1",
+        "pack_id": "pack.synthetic.public_reference",
+        "public_jurisdiction": "US",
+        "public_locale": "en-US",
+        "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "source_state": "official_current"
+      }
+    },
+    "schemaVersion": 1
+  }
+}

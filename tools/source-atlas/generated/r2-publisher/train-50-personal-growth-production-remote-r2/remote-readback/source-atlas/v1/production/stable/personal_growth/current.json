@@ -1,0 +1,33 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_freshness",
+  "environment": "production",
+  "kind": "ambitions.sourceAtlas.currentPackPointer.v1",
+  "lastKnownGoodKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+  "manifestKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+  "manifestSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+  "packSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "publishGate": "current pointer may update only after upload, readback, checksum, revocation, LKG, and rollback checks pass",
+  "revocationManifestKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+  "schemaVersion": 1
+}

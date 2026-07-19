@@ -1,0 +1,19 @@
+{
+  "category": "object",
+  "items": {
+    "atmosphereComposer": {
+      "primary_token": "captureSignal",
+      "proof": "capture routing and correction path",
+      "states": [
+        "idle",
+        "active text",
+        "route reveal",
+        "held with dignity",
+        "proof attached",
+        "wrong-route recovery"
+      ],
+      "surface": "Capture"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

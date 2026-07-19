@@ -1,0 +1,329 @@
+{
+  "bucket": "ambitions-source-atlas-prod",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "currentPointer": {
+    "actualSHA256": "b731f435d79cb8e57448fb1909faad5d6b59d9963a24afaad99f68b59570f5de",
+    "blockedUntilReadback": true,
+    "expectedSHA256": "b731f435d79cb8e57448fb1909faad5d6b59d9963a24afaad99f68b59570f5de",
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "issues": [],
+    "key": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+    "put": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/current.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    "updated": true
+  },
+  "dataClass": "public_r2_object_key",
+  "dryRun": false,
+  "executeRequested": true,
+  "executed": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+  "mode": "remote_r2",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "previousPointers": {
+    "current": {
+      "bytes": null,
+      "exists": false,
+      "get": {
+        "returnCode": 1,
+        "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_09-37-02_305.log\"\n",
+        "stdout": "\n ⛅️ wrangler 4.104.0\n────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/current.json\" from \"ambitions-source-atlas-prod\".\n\n",
+        "success": false
+      },
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+      "sha256": null
+    },
+    "lastKnownGood": {
+      "bytes": null,
+      "exists": false,
+      "get": {
+        "returnCode": 1,
+        "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_09-37-05_205.log\"\n",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/lkg.json\" from \"ambitions-source-atlas-prod\".\n\n",
+        "success": false
+      },
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+      "sha256": null
+    }
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "readbackResults": [
+    {
+      "actualSHA256": "08190d6e5a6f830ecdf11d2f46d1decedaf5f40c6c7bf6cb621db5d757d4932f",
+      "expectedSHA256": "08190d6e5a6f830ecdf11d2f46d1decedaf5f40c6c7bf6cb621db5d757d4932f",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/adjudications.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/adjudications.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "0c607fceb08e364e474d898c573ce242008fe44714ff5fa62fe11a4fb1a5ccea",
+      "expectedSHA256": "0c607fceb08e364e474d898c573ce242008fe44714ff5fa62fe11a4fb1a5ccea",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/attribution.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/attribution.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "cf7b75e5fd230781c19afa3263605fb4e33b5c76693eaa50fe8171cda3ff2614",
+      "expectedSHA256": "cf7b75e5fd230781c19afa3263605fb4e33b5c76693eaa50fe8171cda3ff2614",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/claims.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "4a138b4a6c22aff77904acb39a70ca7a4ee01be29bbf6d5f687ef21195e5b76e",
+      "expectedSHA256": "4a138b4a6c22aff77904acb39a70ca7a4ee01be29bbf6d5f687ef21195e5b76e",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/coverage.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/coverage.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "0f198cb850f12e935ed2f0d88ed20c7b5ec2126543120a971832dd9c0d4d60cb",
+      "expectedSHA256": "0f198cb850f12e935ed2f0d88ed20c7b5ec2126543120a971832dd9c0d4d60cb",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/entities.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/entities.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "7b9590cfa8a3272fb5367cf423e2138f47250a3525913967174d28b3fc964c2d",
+      "expectedSHA256": "7b9590cfa8a3272fb5367cf423e2138f47250a3525913967174d28b3fc964c2d",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/freshness.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/freshness.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "9840d5d036befebf2f43a714506ea9e04ce1c85dbc721510f6a7aaa3b12e0d0c",
+      "expectedSHA256": "9840d5d036befebf2f43a714506ea9e04ce1c85dbc721510f6a7aaa3b12e0d0c",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/licenses.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/licenses.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "9ba5302638450c14dcee969abf02df289930dbfcdc3634ca9e03ddbed878af9f",
+      "expectedSHA256": "9ba5302638450c14dcee969abf02df289930dbfcdc3634ca9e03ddbed878af9f",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405",
+      "expectedSHA256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "51e9a35fe191629c72b984604c3b1bd19a55811f8a300d2673e5c8f83749b488",
+      "expectedSHA256": "51e9a35fe191629c72b984604c3b1bd19a55811f8a300d2673e5c8f83749b488",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/non_claims.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/non_claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19",
+      "expectedSHA256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "7b1fd0b7fb329140a9eb21b3a7685df1d9fa53bcdee8a857916a28843805a464",
+      "expectedSHA256": "7b1fd0b7fb329140a9eb21b3a7685df1d9fa53bcdee8a857916a28843805a464",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/revocations.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/revocations.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "e59370e0be81d7c041e76b88f2ea5ae73594cca02ab7c2425a28a76e4a7f0ee2",
+      "expectedSHA256": "e59370e0be81d7c041e76b88f2ea5ae73594cca02ab7c2425a28a76e4a7f0ee2",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/sources.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/sources.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    }
+  ],
+  "readbackRoot": "tools/source-atlas/generated/r2-publisher/train-47-finance-production-remote-r2/remote-readback",
+  "remoteR2": true,
+  "schemaVersion": 1,
+  "success": true,
+  "uploadResults": [
+    {
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/adjudications.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/adjudications.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/attribution.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/attribution.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/claims.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/coverage.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/coverage.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/entities.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/entities.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/freshness.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/freshness.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/licenses.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/licenses.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/lkg.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/non_claims.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/non_claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/revocations.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/revocations.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/sources.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/sources.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    }
+  ]
+}

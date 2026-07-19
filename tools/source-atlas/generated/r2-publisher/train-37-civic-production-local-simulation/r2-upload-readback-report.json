@@ -1,0 +1,264 @@
+{
+  "createdAt": "2026-06-28T04:25:00Z",
+  "currentPointer": {
+    "blockedUntilReadback": true,
+    "bytes": 1885,
+    "issues": [],
+    "key": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+    "sha256": "1667cc4508c9d1924f51f0cea71eb8b51b8987b6d81a4e0f4cfc29d9b18bbb3e",
+    "updated": true
+  },
+  "dataClass": "public_r2_object_key",
+  "dryRun": false,
+  "executeRequested": true,
+  "executed": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+  "localStoreRoot": "tools/source-atlas/generated/r2-publisher/train-37-civic-production-local-store",
+  "mode": "local_simulation",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not real R2 credentials proof",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "previousPointers": {
+    "current": {
+      "exists": false,
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/current.json"
+    },
+    "lastKnownGood": {
+      "exists": false,
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json"
+    }
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "readbackResults": [
+    {
+      "actualSHA256": "61b87891fccdc004b08bd2c23e3dd245f78e27a25a7209f6fd5c8c12333c2e9f",
+      "bytes": 776,
+      "expectedSHA256": "61b87891fccdc004b08bd2c23e3dd245f78e27a25a7209f6fd5c8c12333c2e9f",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/adjudications.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "bf47ed45c7dfb2f8591fd062db0712384c8405dca4cf1d7cad0bed35d88b7f69",
+      "bytes": 724,
+      "expectedSHA256": "bf47ed45c7dfb2f8591fd062db0712384c8405dca4cf1d7cad0bed35d88b7f69",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/attribution.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "2ca5946abd6212f4030ad4d52ea4fc1b9b57398b4361383fa461f6393437ed85",
+      "bytes": 4520,
+      "expectedSHA256": "2ca5946abd6212f4030ad4d52ea4fc1b9b57398b4361383fa461f6393437ed85",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/claims.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "e9694b67c71a85c3d7929620b0628dfdeca1550080cafcb07f2706937833e40d",
+      "bytes": 2313,
+      "expectedSHA256": "e9694b67c71a85c3d7929620b0628dfdeca1550080cafcb07f2706937833e40d",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/coverage.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "94c8ecf870c2c1a8d928cc8093b13b0255a0924eb3ce9e77a2215bea52705ccf",
+      "bytes": 1020,
+      "expectedSHA256": "94c8ecf870c2c1a8d928cc8093b13b0255a0924eb3ce9e77a2215bea52705ccf",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/entities.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "e1b2412ac4af9008d97eb029be0176dfb1a63ba52bd4fd329ad8d54ad902ee32",
+      "bytes": 1062,
+      "expectedSHA256": "e1b2412ac4af9008d97eb029be0176dfb1a63ba52bd4fd329ad8d54ad902ee32",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/freshness.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "a0a20819bf31bd1b4366a1e51cd3441a48213a25fbf6744c5b75008967fb8d78",
+      "bytes": 830,
+      "expectedSHA256": "a0a20819bf31bd1b4366a1e51cd3441a48213a25fbf6744c5b75008967fb8d78",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/licenses.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "e9acd783151de03b2abdb47bb19a2e5b8270fca699d87c9349e04995c94ac9f4",
+      "bytes": 1268,
+      "expectedSHA256": "e9acd783151de03b2abdb47bb19a2e5b8270fca699d87c9349e04995c94ac9f4",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+      "bytes": 8783,
+      "expectedSHA256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "494d5587d0d17ba4c62f16ec11caaf8c8d9a6c12786f1db9ef0a2a02804741cb",
+      "bytes": 1167,
+      "expectedSHA256": "494d5587d0d17ba4c62f16ec11caaf8c8d9a6c12786f1db9ef0a2a02804741cb",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/non_claims.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+      "bytes": 11098,
+      "expectedSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "c89d21078cd0d6f7c7ed6a5d11631500bf304e0562bbd2e986df0457a93f52dc",
+      "bytes": 1413,
+      "expectedSHA256": "c89d21078cd0d6f7c7ed6a5d11631500bf304e0562bbd2e986df0457a93f52dc",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "a968d6b6b86bb4474206c013758898c94ff11c2b5bf4a3e8a04fe46ad5ea4955",
+      "bytes": 1140,
+      "expectedSHA256": "a968d6b6b86bb4474206c013758898c94ff11c2b5bf4a3e8a04fe46ad5ea4955",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/sources.json",
+      "passed": true,
+      "status": "readback"
+    }
+  ],
+  "schemaVersion": 1,
+  "success": true,
+  "uploadResults": [
+    {
+      "bytes": 776,
+      "expectedSHA256": "61b87891fccdc004b08bd2c23e3dd245f78e27a25a7209f6fd5c8c12333c2e9f",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/adjudications.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 724,
+      "expectedSHA256": "bf47ed45c7dfb2f8591fd062db0712384c8405dca4cf1d7cad0bed35d88b7f69",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/attribution.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 4520,
+      "expectedSHA256": "2ca5946abd6212f4030ad4d52ea4fc1b9b57398b4361383fa461f6393437ed85",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/claims.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 2313,
+      "expectedSHA256": "e9694b67c71a85c3d7929620b0628dfdeca1550080cafcb07f2706937833e40d",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/coverage.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1020,
+      "expectedSHA256": "94c8ecf870c2c1a8d928cc8093b13b0255a0924eb3ce9e77a2215bea52705ccf",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/entities.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1062,
+      "expectedSHA256": "e1b2412ac4af9008d97eb029be0176dfb1a63ba52bd4fd329ad8d54ad902ee32",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/freshness.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 830,
+      "expectedSHA256": "a0a20819bf31bd1b4366a1e51cd3441a48213a25fbf6744c5b75008967fb8d78",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/licenses.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1268,
+      "expectedSHA256": "e9acd783151de03b2abdb47bb19a2e5b8270fca699d87c9349e04995c94ac9f4",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 8783,
+      "expectedSHA256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1167,
+      "expectedSHA256": "494d5587d0d17ba4c62f16ec11caaf8c8d9a6c12786f1db9ef0a2a02804741cb",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/non_claims.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 11098,
+      "expectedSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1413,
+      "expectedSHA256": "c89d21078cd0d6f7c7ed6a5d11631500bf304e0562bbd2e986df0457a93f52dc",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1140,
+      "expectedSHA256": "a968d6b6b86bb4474206c013758898c94ff11c2b5bf4a3e8a04fe46ad5ea4955",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/sources.json",
+      "status": "uploaded"
+    }
+  ]
+}

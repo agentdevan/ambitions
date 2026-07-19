@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.m09.goldenBenchmarkMatrix",
+  "status": "public-reference-contract-fixture",
+  "productionSourceAtlasTruthClaimed": false,
+  "sourceStateVariants": {
+    "current": {
+      "description": "Public/reference artifact is current enough for local reference use after validation.",
+      "mayDriveRuntime": true
+    },
+    "unavailable": {
+      "description": "Required public/reference artifact or source lane is unavailable.",
+      "mayDriveRuntime": false
+    },
+    "stale": {
+      "description": "Public/reference artifact needs freshness review before final use.",
+      "mayDriveRuntime": false
+    },
+    "stale-critical": {
+      "description": "High-risk public/reference artifact is stale and must be quarantined.",
+      "mayDriveRuntime": false
+    },
+    "conflicted": {
+      "description": "Multiple public/reference claims conflict and require review.",
+      "mayDriveRuntime": false
+    },
+    "revoked": {
+      "description": "Artifact was revoked and must not drive runtime behavior.",
+      "mayDriveRuntime": false
+    },
+    "unsupported": {
+      "description": "Claim is not supported by approved public/reference sources.",
+      "mayDriveRuntime": false
+    },
+    "review-required": {
+      "description": "Public/reference claim or source lane requires human review before use.",
+      "mayDriveRuntime": false
+    }
+  },
+  "defaultSourceStateAssertions": {
+    "current": {
+      "expectedRoute": "source-backed-reference-only",
+      "artifactMayDriveRuntime": true,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "unavailable": {
+      "expectedRoute": "fallback-local-only",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "stale": {
+      "expectedRoute": "repair-required",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "stale-critical": {
+      "expectedRoute": "quarantine-and-fallback",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "conflicted": {
+      "expectedRoute": "review-required",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "revoked": {
+      "expectedRoute": "quarantine-and-fallback",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "unsupported": {
+      "expectedRoute": "unsupported-source-fallback",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    },
+    "review-required": {
+      "expectedRoute": "review-required",
+      "artifactMayDriveRuntime": false,
+      "completionClaimAllowed": false,
+      "finalUserPathClaimAllowed": false
+    }
+  },
+  "scenarios": [
+    {
+      "id": "nasa-astronaut",
+      "title": "NASA astronaut",
+      "publicReferenceFocus": "Astronaut candidacy requirements, selection stages, preparation lanes, and alternate career transfer atoms.",
+      "requiredPublicSourceRefs": ["nasa.astronaut.requirements", "nasa.astronaut.selection"],
+      "requiredReusableAtoms": ["stem_credential", "operational_experience", "medical_physical_readiness", "technical_communication"]
+    },
+    {
+      "id": "us-president",
+      "title": "U.S. president",
+      "publicReferenceFocus": "Constitutional eligibility, election process context, civic leadership preparation, and age-gated review states.",
+      "requiredPublicSourceRefs": ["nara.constitution.presidency", "fec.candidate-guidance"],
+      "requiredReusableAtoms": ["citizenship_requirement", "minimum_age_gate", "public_leadership", "campaign_compliance"]
+    },
+    {
+      "id": "college-football-player",
+      "title": "College football player",
+      "publicReferenceFocus": "Academic eligibility, recruiting exposure, athletic preparation, team role, and transfer-safe public requirements.",
+      "requiredPublicSourceRefs": ["ncaa.eligibility-center", "onet.athlete-competitor"],
+      "requiredReusableAtoms": ["academic_eligibility", "position_skill", "conditioning", "recruiting_materials"]
+    },
+    {
+      "id": "professional-football-player",
+      "title": "Professional football player",
+      "publicReferenceFocus": "Draft and free-agent pathways, combine preparation, agent/legal review boundaries, and football skill transfer.",
+      "requiredPublicSourceRefs": ["nfl.draft-rules", "onet.athlete-competitor"],
+      "requiredReusableAtoms": ["college_football_transfer", "combine_readiness", "agent_boundary", "film_study"]
+    },
+    {
+      "id": "nurse",
+      "title": "Nurse",
+      "publicReferenceFocus": "Education, licensure, clinical experience, examination, and jurisdiction review states.",
+      "requiredPublicSourceRefs": ["bls.registered-nurses", "ncsbn.nclex"],
+      "requiredReusableAtoms": ["accredited_program", "clinical_hours", "licensure_exam", "patient_safety"]
+    },
+    {
+      "id": "pilot",
+      "title": "Pilot",
+      "publicReferenceFocus": "Training stages, certificates, flight hours, medical requirements, and checkride sequence.",
+      "requiredPublicSourceRefs": ["faa.pilot-certification", "bls.airline-commercial-pilots"],
+      "requiredReusableAtoms": ["flight_training", "medical_certificate", "logged_hours", "checkride"]
+    },
+    {
+      "id": "teacher",
+      "title": "Teacher",
+      "publicReferenceFocus": "Credentialing, practicum or student teaching, subject preparation, and state-specific review boundaries.",
+      "requiredPublicSourceRefs": ["bls.teachers", "ed.gov.teacher-preparation"],
+      "requiredReusableAtoms": ["degree_path", "classroom_practicum", "subject_matter", "state_credential"]
+    },
+    {
+      "id": "software-engineer",
+      "title": "Software engineer",
+      "publicReferenceFocus": "Role skills, portfolio signals, interview preparation, experience ladders, and adjacent technical paths.",
+      "requiredPublicSourceRefs": ["onet.software-developers", "bls.software-developers"],
+      "requiredReusableAtoms": ["programming_skill", "systems_design", "portfolio_project", "technical_interview"]
+    },
+    {
+      "id": "small-business-owner",
+      "title": "Small business owner",
+      "publicReferenceFocus": "Business formation, tax and licensing context, market validation, operating systems, and public compliance references.",
+      "requiredPublicSourceRefs": ["sba.business-guide", "irs.small-business"],
+      "requiredReusableAtoms": ["business_registration", "tax_basics", "market_validation", "operating_plan"]
+    },
+    {
+      "id": "music-artist",
+      "title": "Music artist",
+      "publicReferenceFocus": "Creative production, release planning, rights basics, performance development, and audience-building atoms.",
+      "requiredPublicSourceRefs": ["copyright.gov.music", "onet.musicians-singers"],
+      "requiredReusableAtoms": ["songwriting", "recording_release", "copyright_registration", "live_performance"]
+    },
+    {
+      "id": "audio-engineer",
+      "title": "Audio engineer",
+      "publicReferenceFocus": "Audio production skills, studio workflow, portfolio proof, software/hardware familiarity, and adjacent music transfer.",
+      "requiredPublicSourceRefs": ["onet.sound-engineering-technicians", "bls.broadcast-sound-video-technicians"],
+      "requiredReusableAtoms": ["signal_flow", "mixing", "studio_workflow", "portfolio_reel"]
+    },
+    {
+      "id": "marathon-runner",
+      "title": "Marathon runner",
+      "publicReferenceFocus": "Training progression, event registration, injury-risk review, nutrition, and proof-preserving fallback lanes.",
+      "requiredPublicSourceRefs": ["rrca.training-guidelines", "cdc.physical-activity"],
+      "requiredReusableAtoms": ["base_mileage", "long_run_progression", "recovery", "race_registration"]
+    },
+    {
+      "id": "electrician-apprenticeship",
+      "title": "Electrician/apprenticeship",
+      "publicReferenceFocus": "Apprenticeship entry, classroom and on-the-job hours, licensure pathways, and jurisdiction review states.",
+      "requiredPublicSourceRefs": ["dol.apprenticeship", "bls.electricians"],
+      "requiredReusableAtoms": ["apprenticeship_application", "on_the_job_hours", "safety_code", "licensure_path"]
+    },
+    {
+      "id": "lawyer",
+      "title": "Lawyer",
+      "publicReferenceFocus": "Education, admissions tests, law school, bar admission, ethics review, and jurisdiction-specific requirements.",
+      "requiredPublicSourceRefs": ["aba.legal-education", "ncbe.bar-admissions"],
+      "requiredReusableAtoms": ["legal_education", "admissions_test", "bar_exam", "professional_responsibility"]
+    },
+    {
+      "id": "medical-school-path",
+      "title": "Medical school path",
+      "publicReferenceFocus": "Prerequisites, admissions testing, clinical exposure, application cycles, and high-risk review states.",
+      "requiredPublicSourceRefs": ["aamc.medical-school-admission", "bls.physicians-surgeons"],
+      "requiredReusableAtoms": ["science_prerequisites", "admissions_test", "clinical_exposure", "application_timeline"]
+    },
+    {
+      "id": "career-pivot",
+      "title": "Career pivot",
+      "publicReferenceFocus": "Transferable skills, adjacent occupations, credential gaps, and local runtime composition boundaries.",
+      "requiredPublicSourceRefs": ["onet.skills", "bls.occupational-outlook"],
+      "requiredReusableAtoms": ["transferable_skill", "gap_analysis", "adjacent_role", "portfolio_proof"]
+    },
+    {
+      "id": "still-counts-pivot",
+      "title": "Still-counts pivot",
+      "publicReferenceFocus": "Progress transfer, proof preservation, skill reuse, and non-completion-safe alternate pathing.",
+      "requiredPublicSourceRefs": ["onet.skills", "source-atlas.proof-transfer-policy"],
+      "requiredReusableAtoms": ["proof_preservation", "skill_reuse", "alternate_route", "non_shaming_reentry"]
+    }
+  ]
+}

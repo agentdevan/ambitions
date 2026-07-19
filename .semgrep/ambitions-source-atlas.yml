@@ -1,0 +1,94 @@
+rules:
+  - id: ambitions.source-atlas.private-runtime-field
+    message: Source Atlas public/reference artifacts must not contain private runtime fields.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /tools/source-atlas/**
+      exclude:
+        - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
+        - /tools/source-atlas/foundry/model.py
+        - /tools/source-atlas/foundry/schemas.py
+        - /tools/source-atlas/foundry/validator.py
+    pattern-regex: (?i)\b(userGoalId|user_goal_id|goalText|goal_text|privateStepText|private_step_text|stepText|step_text|captureText|capture_text|voiceTranscript|voice_transcript|protectedTime|protected_time|scheduleAssumption|schedule_assumption|timeAvailability|time_availability|cognitiveLoad|cognitive_load|physicalEnergy|physical_energy|transitionFriction|transition_friction|recoveryState|recovery_state|freeTimeQuality|free_time_quality|executionLane|execution_lane|goalLoad|goal_load|closureEvent|closure_event|proofPayload|proof_payload|privateHistory|private_history|behaviorHistory|behavior_history|inferredPriority|inferred_priority|personalizationSettings|personalization_settings|recommendationScore|recommendation_score|userCorrection|user_correction|privateLifeGraph|private_life_graph|accessToken|access_token|refreshToken|refresh_token)\b
+
+  - id: ambitions.source-atlas.r2-key-private-segment
+    message: R2/cache object keys must not include private user/runtime identifiers.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /tools/source-atlas/**
+      exclude:
+        - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+    pattern-regex: (?i)\b(objectKey|object_key|cacheKey|cache_key|r2Key|r2_key)\b.{0,120}\b(users?|private|captures?|goals?|steps?|life[-_]graph|receipts?|personalization|calendar|schedule|proof|behavior)\b
+
+  - id: ambitions.source-atlas.request-private-context
+    message: Source Atlas request/query/body payloads must not carry private runtime context.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /tools/source-atlas/**
+      exclude:
+        - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
+        - /tools/source-atlas/foundry/schemas.py
+        - /tools/source-atlas/foundry/validator.py
+    pattern-regex: (?i)\b(request|query|body|payload|upload|publish|staging)\b.{0,160}\b(goalText|goal_text|captureText|capture_text|scheduleAssumption|schedule_assumption|privateLifeGraph|private_life_graph|personalization|behaviorHistory|behavior_history|proofPayload|proof_payload|accessToken|access_token|refreshToken|refresh_token)\b
+
+  - id: ambitions.source-atlas.private-life-graph-shape
+    message: Source Atlas artifacts must not model private life graph nodes or edges.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /tools/source-atlas/**
+      exclude:
+        - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
+    pattern-regex: (?i)\b(private\s+life\s+graph|privateLifeGraph|private_life_graph)\b.{0,120}\b(node|edge|payload|record|artifact|fixture|schema)\b
+
+  - id: ambitions.validator.noop-pass
+    message: Validators and audits must not be no-op pass bodies.
+    severity: ERROR
+    languages: [python]
+    paths:
+      include:
+        - /scripts/**/*.py
+        - /tools/source-atlas/**/*.py
+    pattern-either:
+      - pattern: |
+          def $F(...):
+              pass
+      - pattern: |
+          def $F(...):
+              return True
+      - pattern: |
+          def $F(...):
+              return []
+
+  - id: ambitions.shell.empty-success
+    message: Shell validation scripts must not include unconditional placeholder success.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /scripts/**/*.sh
+    pattern-regex: (?i)\b(echo\s+["']?(green|passed|success)|exit\s+0)\b.{0,80}\b(noop|no-op|placeholder|stub|not implemented)\b
+
+  - id: ambitions.release-green-without-proof
+    message: Green/release claims in PR governance docs must include proof artifact references and non-claims.
+    severity: ERROR
+    languages: [generic]
+    paths:
+      include:
+        - /docs/repo/**
+        - /.github/pull_request_template.md
+    pattern-regex: (?i)\b(Release Green|Visual Green|release[- ]ready|CI-proven|fully tested|Status:\s*Green)\b(?!.*\b(proof artifact|not claimed|not release|requires proof|Yellow|Red)\b)

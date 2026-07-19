@@ -1,0 +1,307 @@
+{
+  "issue": "AMB-1824",
+  "title": "Risk Register Leaf - P0/P1 architecture risk ledger",
+  "status": "Implemented Yellow / Ready For Review for this docs/control-plane leaf",
+  "date": "2026-07-05T16:09:45Z",
+  "branch": "main",
+  "baseline_main_sha": "476cf4a22683f39e39509bbb9939d454edefeac2",
+  "artifact_commit_sha": "recorded in Linear after commit/push",
+  "parent": "AMB-1703",
+  "release_metadata": {
+    "Branch": "main",
+    "Commit SHA": "artifact commit SHA is recorded in Linear after commit/push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "simulator preflight and XcodeBuildMCP transport proof were verified before this packet; no app build, app launch, XCTest, focused test, or physical-device procedure is claimed for AMB-1824",
+    "Exit code": "listed in the Markdown packet validation table and Linear closeout comment",
+    "Artifact paths": [
+      "docs/linear/reconciliation/2026-07-05-amb-1824-risk-register-ledger.md",
+      "docs/linear/reconciliation/2026-07-05-amb-1824-risk-register-ledger.json"
+    ],
+    "Validation run": "static/control-plane validation only; listed in Markdown packet and Linear closeout comment",
+    "Validation not run": "XCTest, xcodebuild build/test, build-for-testing, focused tests, UI tests, app launch, manual device, accessibility walkthrough, performance profiling, privacy/legal review, account/R2 production proof, TestFlight, App Store, archive export, and upload procedures were not run",
+    "Non-Claims": "No risk burn-down Green, final architecture Green, source/runtime Green, build success, test success, device proof, privacy/legal approval, Release Green, TestFlight readiness, App Store readiness, or product completion is claimed"
+  },
+  "live_status_snapshot": {
+    "AMB-1665": "Accepted Yellow",
+    "AMB-1668": "Accepted Yellow",
+    "AMB-1678": "In Progress",
+    "AMB-1679": "In Progress",
+    "AMB-1681": "In Progress",
+    "AMB-1682": "Spec Ready",
+    "AMB-1683": "In Progress",
+    "AMB-1685": "In Progress",
+    "AMB-1687": "In Progress",
+    "AMB-1688": "In Progress",
+    "AMB-1690": "In Progress",
+    "AMB-1691": "Spec Ready",
+    "AMB-1700": "In Progress",
+    "AMB-1701": "In Progress",
+    "AMB-1702": "Ready For Review",
+    "AMB-1703": "In Progress",
+    "AMB-1704": "Ready For Review",
+    "AMB-1705": "Needs Repair",
+    "AMB-1758": "Ready For Review",
+    "AMB-1759": "Ready For Review",
+    "AMB-1760": "Ready For Review",
+    "AMB-1761": "Ready For Review",
+    "AMB-1762": "Ready For Review",
+    "AMB-1794": "Ready For Review",
+    "AMB-1801": "Ready For Review",
+    "AMB-1821": "Ready For Codex",
+    "AMB-1822": "Ready For Codex",
+    "AMB-1823": "Ready For Review",
+    "AMB-1824": "In Progress",
+    "AMB-1825": "Ready For Review"
+  },
+  "risk_ledger": [
+    {
+      "risk_id": "P0-01",
+      "severity": "P0",
+      "risk": "Legacy runtime, persistence, adapter, and direct-write authority can be mistaken for Green when current proof is only map/guard/source-slice proof.",
+      "evidence_sources": [
+        "ARR-001",
+        "ARR-002",
+        "ARR-003",
+        "ARR-008",
+        "docs/linear/reconciliation/2026-07-05-amb-1760-accepted-yellow-follow-up-ledger.md"
+      ],
+      "owner_issues": {
+        "AMB-1665": "Accepted Yellow",
+        "AMB-1668": "Accepted Yellow"
+      },
+      "current_ledger_status": "Open residual risk; tracked by this ledger but not burned down.",
+      "proof_ceiling": "No M02 Green, LocalRuntimeOS completion, all-mutation enforcement, device proof, or release proof.",
+      "unblocker": "Current runtime/source gates plus re-enabled focused tests/device proof before any Green; final reconciliation remains blocked by AMB-1705."
+    },
+    {
+      "risk_id": "P0-02",
+      "severity": "P0",
+      "risk": "Architecture theater and fake-Green drift: docs, scorecards, or packet language can imply remediation completion without executable/current evidence.",
+      "evidence_sources": [
+        "ARR-005",
+        "ARR-006",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/linear/reconciliation/2026-07-05-amb-1826-pre-scorecard-blocker-inventory.md"
+      ],
+      "owner_issues": {
+        "AMB-1705": "Needs Repair",
+        "AMB-1760": "Ready For Review",
+        "AMB-1794": "Ready For Review",
+        "AMB-1702": "Ready For Review",
+        "AMB-1704": "Ready For Review"
+      },
+      "current_ledger_status": "Open until AMB-1705 rerun closes with explicit Green/Yellow/Red by evidence.",
+      "proof_ceiling": "Docs/control-plane Green only for exact packet discipline; no final architecture, source, release, or product Green.",
+      "unblocker": "AMB-1705 must rerun scorecard after accepted risks, validation inheritance, non-claim gates, and blocker inventory are reconciled."
+    },
+    {
+      "risk_id": "P0-03",
+      "severity": "P0",
+      "risk": "Wrong-owner edits and path drift can reintroduce legacy Features/ compatibility debt, Motion/Capture tab drift, generic projection/lens authority, or non-canonical architecture ownership.",
+      "evidence_sources": [
+        "ARR-004",
+        "ARR-010",
+        "AGENTS.md",
+        "docs/linear/reconciliation/2026-07-05-amb-1759-architecture-repo-path-normalization.md"
+      ],
+      "owner_issues": {
+        "AMB-1759": "Ready For Review",
+        "AMB-1761": "Ready For Review",
+        "AMB-1704": "Ready For Review"
+      },
+      "current_ledger_status": "Tracked / review-ready for current docs-control-plane packet; still open as source discipline until gates run on future source edits.",
+      "proof_ceiling": "No source architecture Green or owner permanence claim from docs alone.",
+      "unblocker": "Continue enforcing path normalization, Final Architecture Tree inspection, and remediation governance on every source train."
+    },
+    {
+      "risk_id": "P0-04",
+      "severity": "P0",
+      "risk": "Source Atlas scope creep can turn public/reference/freshness infrastructure into private intelligence, private graph egress, or production R2/release claims.",
+      "evidence_sources": [
+        "ARR-012",
+        "docs/linear/reconciliation/2026-07-05-amb-1760-accepted-yellow-follow-up-ledger.md",
+        "docs/truth/IMPLEMENTATION_TRUTH.md",
+        "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md"
+      ],
+      "owner_issues": {
+        "AMB-1682": "Spec Ready",
+        "AMB-1725": "Accepted Yellow in AMB-1760 ledger",
+        "AMB-1726": "Accepted Yellow in AMB-1760 ledger",
+        "AMB-1727": "Accepted Yellow in AMB-1760 ledger",
+        "AMB-1728": "Accepted Yellow in AMB-1760 ledger",
+        "AMB-1762": "Ready For Review"
+      },
+      "current_ledger_status": "Open.",
+      "proof_ceiling": "No Source Atlas private planning Green, production R2 Green, privacy/legal approval, device proof, TestFlight, App Store, or release readiness.",
+      "unblocker": "Decompose/execute AMB-1682; retain ADR allowlist and boundary audit before any Source Atlas scope growth."
+    },
+    {
+      "risk_id": "P1-01",
+      "severity": "P1",
+      "risk": "UI framework reinvention and design-system duplication can hide native SwiftUI leverage behind custom shell/stage/design abstractions.",
+      "evidence_sources": [
+        "ARR-005",
+        "AGENTS.md",
+        "docs/linear/reconciliation/2026-07-05-amb-1825-doctrine-gap-scan.md"
+      ],
+      "owner_issues": {
+        "AMB-1678": "In Progress",
+        "AMB-1679": "In Progress",
+        "AMB-1801": "Ready For Review",
+        "AMB-1704": "Ready For Review"
+      },
+      "current_ledger_status": "Open / partially control-plane mitigated.",
+      "proof_ceiling": "No Visual Green, accessibility Green, SwiftUI leverage Green, or package-boundary Green from doctrine alone.",
+      "unblocker": "Continue AMB-1678 and AMB-1679; use AMB-1801 boundary decision and source/build proof when testing is re-enabled."
+    },
+    {
+      "risk_id": "P1-02",
+      "severity": "P1",
+      "risk": "Release proof gap: architecture and docs packets can be mistaken for TestFlight/App Store readiness without RC artifacts, device matrix, screenshots, accessibility, privacy/legal, archive, or upload proof.",
+      "evidence_sources": [
+        "AMB-1762",
+        "AMB-1794",
+        "docs/linear/reconciliation/2026-07-05-amb-1826-pre-scorecard-blocker-inventory.md"
+      ],
+      "owner_issues": {
+        "AMB-1700": "In Progress",
+        "AMB-1821": "Ready For Codex",
+        "AMB-1701": "In Progress",
+        "AMB-1822": "Ready For Codex",
+        "AMB-1762": "Ready For Review",
+        "AMB-1794": "Ready For Review"
+      },
+      "current_ledger_status": "Open.",
+      "proof_ceiling": "No Release Green, TestFlight readiness, App Store readiness, archive/upload, device readiness, build success, or test success.",
+      "unblocker": "Execute AMB-1821 and AMB-1822; keep release non-claim gate required on release-facing packets."
+    },
+    {
+      "risk_id": "P1-03",
+      "severity": "P1",
+      "risk": "Privacy metadata drift: local-first philosophy can diverge from manifest/disclosure reality, extension snapshots, App Group payloads, Source Atlas references, and account/R2 behavior.",
+      "evidence_sources": [
+        "ARR-009",
+        "ARR-012",
+        "docs/linear/reconciliation/2026-07-05-amb-1758-extension-surface-privacy-gate.md",
+        "docs/linear/reconciliation/2026-07-05-amb-1760-accepted-yellow-follow-up-ledger.md"
+      ],
+      "owner_issues": {
+        "AMB-1683": "In Progress",
+        "AMB-1685": "In Progress",
+        "AMB-1758": "Ready For Review",
+        "AMB-1682": "Spec Ready"
+      },
+      "current_ledger_status": "Open / partially review-ready for extension gate.",
+      "proof_ceiling": "No privacy/legal approval, App Store privacy disclosure approval, device proof, production account proof, or R2 readiness.",
+      "unblocker": "Continue AMB-1683 and AMB-1685; pair privacy manifests with current code inventory and device/system-surface proof before release claims."
+    },
+    {
+      "risk_id": "P1-04",
+      "severity": "P1",
+      "risk": "System-surface regressions: widgets, App Intents, Live Activities, EventKit/Reminders, notifications, and extensions can bypass runtime command/projection/privacy laws under lifecycle/device conditions.",
+      "evidence_sources": [
+        "ARR-009",
+        "docs/linear/reconciliation/2026-07-05-amb-1760-accepted-yellow-follow-up-ledger.md",
+        "docs/linear/reconciliation/2026-07-05-amb-1826-pre-scorecard-blocker-inventory.md"
+      ],
+      "owner_issues": {
+        "AMB-1687": "In Progress",
+        "AMB-1688": "In Progress",
+        "AMB-1690": "In Progress",
+        "AMB-1668": "Accepted Yellow",
+        "AMB-1701": "In Progress",
+        "AMB-1822": "Ready For Codex"
+      },
+      "current_ledger_status": "Open.",
+      "proof_ceiling": "No system-surface Green, device Green, locked-device proof, extension lifecycle proof, notification proof, or EventKit/Reminders device proof.",
+      "unblocker": "Execute system-surface parents and AMB-1822; rerun device matrix and focused source tests when testing/device proof are permitted."
+    },
+    {
+      "risk_id": "P2-01",
+      "severity": "P2",
+      "risk": "UI test monolith and implicit target selection can make validation ad hoc and non-repeatable.",
+      "evidence_sources": [
+        "ARR-007",
+        "AMB-1794"
+      ],
+      "owner_issues": {
+        "AMB-1691": "Spec Ready",
+        "AMB-1794": "Ready For Review"
+      },
+      "current_ledger_status": "Open.",
+      "proof_ceiling": "No test architecture Green, CI Green, XCTest pass, UI test pass, or release-validation completeness.",
+      "unblocker": "Decompose and execute AMB-1691 test-plan leaves; wire smoke/runtime/accessibility/screenshots/RC plans when testing is re-enabled."
+    },
+    {
+      "risk_id": "P2-02",
+      "severity": "P2",
+      "risk": "Package fragmentation and platform-floor drift can turn modularization into cleanup theater or stale package authority.",
+      "evidence_sources": [
+        "ARR-011",
+        "docs/linear/reconciliation/2026-07-05-amb-1801-experiencekernel-boundary-decision.md"
+      ],
+      "owner_issues": {
+        "AMB-1681": "In Progress",
+        "AMB-1679": "In Progress",
+        "AMB-1801": "Ready For Review"
+      },
+      "current_ledger_status": "Open / partially review-ready for ExperienceKernel boundary.",
+      "proof_ceiling": "No package-boundary Green, build success, source import Green, or release proof from docs alone.",
+      "unblocker": "Continue AMB-1681 and parent AMB-1679; require build/import proof before package-boundary Green."
+    }
+  ],
+  "parent_feature_coverage": [
+    "P0 legacy authority, architecture theater, wrong-owner edits, and Source Atlas creep covered.",
+    "P1 UI framework reinvention, release proof gap, privacy metadata drift, and system-surface regressions covered.",
+    "P2 UI test monolith and package fragmentation covered."
+  ],
+  "validation_run": [
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 -m json.tool docs/linear/reconciliation/2026-07-05-amb-1824-risk-register-ledger.json",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 scripts/ambitions-release-non-claim-gate.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation; release_facing_packets_checked=2."
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation; checkedAcceptedYellowIssues=19, invalidAcceptedYellowIssues=0."
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-path-normalization-check.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation; architecture_packets_checked=21."
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/linear/reconciliation/2026-07-05-amb-1824-risk-register-ledger.md docs/linear/reconciliation/2026-07-05-amb-1824-risk-register-ledger.json docs/linear/reconciliation/2026-07-05-xcodebuildmcp-transport-and-simulator-preflight-repair.md",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation; changed_paths=2, production_swift_files=1421, overHardLineCapFiles=0."
+    }
+  ],
+  "validation_not_run": [
+    "XCTest, xcodebuild build, xcodebuild test, build-for-testing, focused tests, UI tests, app launch, manual device, accessibility walkthrough, performance profiling, privacy/legal review, account/R2 production proof, TestFlight, App Store, archive export, and upload procedures were not run for this docs/control-plane packet under the current user instruction authorizing issue completion without testing until advised otherwise."
+  ],
+  "non_claims": [
+    "This packet does not burn down the risks. It creates the tracked risk ledger and current status map.",
+    "No final architecture Green, M02 Green, LocalRuntimeOS completion, all-mutation enforcement, source architecture Green, build success, test success, device proof, Visual Green, accessibility Green, privacy/legal approval, account readiness, R2 readiness, Release Green, TestFlight readiness, App Store readiness, or product completion is claimed.",
+    "Accepted Yellow remains Yellow and cannot close required remediation scope that still needs source changes, runtime enforcement, executable tests, device proof, privacy/legal approval, or release proof.",
+    "This packet does not close AMB-1705."
+  ],
+  "private_life_orchestration_relationship": "Protects the Proof and Learning side of Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning by keeping architecture risk ownership, status, proof ceilings, and unblockers explicit.",
+  "rollback": "Revert this packet and the paired Markdown ledger. Move AMB-1824 back to Needs Repair or Ready For Codex if the P0/P1/P2 risk rows, owner statuses, proof ceilings, or unblockers are not preserved."
+}

@@ -1,0 +1,349 @@
+{
+  "allowedClaims": [
+    "LocalRuntimeOS source-present owner inventory can be reported when architecture_inventory passes.",
+    "LocalRuntimeProof Gate Green means the current 20-item LRO-100 checklist is semantic, fail-closed, and passing for the checked source tree.",
+    "For the current checked source tree and the represented 20-item checklist, no known meaningful Ambitions state-change bypass remains outside Command -> Event -> Projection -> Receipt -> Replay."
+  ],
+  "blockedClaims": [
+    "LocalRuntimeOS is complete across future or unscanned code paths",
+    "physical-device behavior, rendered UI quality, accessibility conformance, privacy/legal approval, Visual Green, Release Green, TestFlight readiness, or App Store readiness",
+    "production CloudKit continuity or production R2 deployment"
+  ],
+  "checklist": [
+    {
+      "category": "architecture",
+      "checklistId": "lro100-01-final-tree-source-parity",
+      "findings": [],
+      "linkedCheckId": "architecture_inventory",
+      "requirement": "Final architecture inventory must be green before LocalRuntimeProof can claim runtime law coverage.",
+      "status": "pass",
+      "summary": "Final architecture tree source parity is green.",
+      "title": "Final Architecture Tree source parity"
+    },
+    {
+      "category": "architecture",
+      "checklistId": "lro100-02-owner-coverage",
+      "findings": [],
+      "linkedCheckId": "owner_directories",
+      "requirement": "All 19 LocalRuntimeOS owners must exist with production Swift source.",
+      "status": "pass",
+      "summary": "All 19 LocalRuntimeOS owners are source-present.",
+      "title": "LocalRuntimeOS owner coverage"
+    },
+    {
+      "category": "integration",
+      "checklistId": "lro100-03-core-integration",
+      "findings": [],
+      "linkedCheckId": "integration_markers",
+      "requirement": "Command, event, projection, replay, search, and outbox integration points must be source-present.",
+      "status": "pass",
+      "summary": "Core command, event, projection, replay, search, and outbox integration markers are present.",
+      "title": "Core runtime integration evidence"
+    },
+    {
+      "category": "event-store authority",
+      "checklistId": "lro100-04-event-store-authority",
+      "findings": [],
+      "linkedCheckId": "live_event_store_authority",
+      "requirement": "Production runtime event authority must be SQLite and must not fall back to JSONL authority.",
+      "status": "pass",
+      "summary": "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory.",
+      "title": "Live event-store authority"
+    },
+    {
+      "category": "command authority",
+      "checklistId": "lro100-05-command-event-reconciliation",
+      "findings": [],
+      "linkedCheckId": "command_event_reconciliation",
+      "requirement": "Command journal records, RuntimeEvents, receipts, replay, diagnostics, and RuntimeDoctor drift signals must reconcile.",
+      "status": "pass",
+      "summary": "Command journal/runtime event linkage and drift diagnostics are present.",
+      "title": "Command journal to RuntimeEvent reconciliation"
+    },
+    {
+      "category": "transaction commit",
+      "checklistId": "lro100-06-fail-closed-transaction-commit",
+      "findings": [],
+      "linkedCheckId": "meaningful_mutation_commit_policy",
+      "requirement": "Meaningful successful mutations must require transaction, event, projection, receipt, rollback, and replay evidence.",
+      "status": "pass",
+      "summary": "Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed.",
+      "title": "Fail-closed meaningful mutation commit"
+    },
+    {
+      "category": "transaction commit",
+      "checklistId": "lro100-07-transaction-coordinator-ownership",
+      "findings": [],
+      "linkedCheckId": "transaction_coordinator_commit_ownership",
+      "requirement": "Runtime event append and mutation projection materialization must be owned by the transaction coordinator or approved rebuild path.",
+      "status": "pass",
+      "summary": "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path.",
+      "title": "RuntimeTransactionCoordinator ownership"
+    },
+    {
+      "category": "projection consumption",
+      "checklistId": "lro100-08-projection-consumption",
+      "findings": [],
+      "linkedCheckId": "projection_store_surface_read_gate",
+      "requirement": "Today, Goals, Time, You, Search, and rebuild paths must consume ProjectionStore/SearchStore evidence rather than raw private graph reads.",
+      "status": "pass",
+      "summary": "ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present.",
+      "title": "ProjectionStore/SearchStore consumption"
+    },
+    {
+      "category": "projection consumption",
+      "checklistId": "lro100-09-external-surface-sanitized-reads",
+      "findings": [],
+      "linkedCheckId": "external_surface_sanitized_projection_gate",
+      "requirement": "Widgets, App Intents, notifications, and share surfaces must use sanitized projections or durable intake records.",
+      "status": "pass",
+      "summary": "Widget/runtime readers use safe AppGroup snapshot records; writer consumes sanitized projections; App Intents/share use sanitized or durable-intake bridges.",
+      "title": "Sanitized external-surface reads"
+    },
+    {
+      "category": "privacy",
+      "checklistId": "lro100-10-privacy-boundary",
+      "findings": [],
+      "linkedCheckId": "privacy_security_external_boundary_gate",
+      "requirement": "PrivacySecurity must gate egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection.",
+      "status": "pass",
+      "summary": "PrivacySecurity gates egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection.",
+      "title": "PrivacySecurity external boundary"
+    },
+    {
+      "category": "privacy",
+      "checklistId": "lro100-11-source-atlas-r2-public-only",
+      "findings": [],
+      "linkedCheckId": "source_atlas_r2_public_only_gate",
+      "requirement": "Source Atlas/R2 request and cache paths must remain public-reference-only and deny private graph payloads.",
+      "status": "pass",
+      "summary": "SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only.",
+      "title": "Source Atlas/R2 public-only boundary"
+    },
+    {
+      "category": "sync",
+      "checklistId": "lro100-12-sync-non-authority",
+      "findings": [],
+      "linkedCheckId": "continuity_backend_authority_gate",
+      "requirement": "Continuity must not become backend authority and must preserve local runtime/projection authority.",
+      "status": "pass",
+      "summary": "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
+      "title": "Continuity non-authority"
+    },
+    {
+      "category": "command authority",
+      "checklistId": "lro100-13-capture-durable-intake",
+      "findings": [],
+      "linkedCheckId": "capture_intake_durability_gate",
+      "requirement": "Capture accepted input must be durably journaled before classification, attachment staging, promotion, and restart lookup.",
+      "status": "pass",
+      "summary": "Capture accepted input is journaled before classification, attachment staging, promotion, and restart lookup evidence.",
+      "title": "Capture durable intake before promotion"
+    },
+    {
+      "category": "side-effect",
+      "checklistId": "lro100-14-side-effect-receipt-gating",
+      "findings": [],
+      "linkedCheckId": "side_effect_local_commit_receipt_gate",
+      "requirement": "External side effects must require prior local runtime commit receipt evidence.",
+      "status": "pass",
+      "summary": "External side effects require local runtime commit receipt evidence before attempt.",
+      "title": "Side-effect local commit receipt gating"
+    },
+    {
+      "category": "receipt/replay",
+      "checklistId": "lro100-15-trust-system-lineage",
+      "findings": [],
+      "linkedCheckId": "trust_system_runtime_lineage_gate",
+      "requirement": "TrustSystem receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
+      "status": "pass",
+      "summary": "TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.",
+      "title": "TrustSystem runtime lineage"
+    },
+    {
+      "category": "repository boundary",
+      "checklistId": "lro100-16-runtime-mutation-context",
+      "findings": [],
+      "linkedCheckId": "runtime_mutation_context_boundaries",
+      "requirement": "Canonical object-state writes must require coordinator-issued RuntimeMutationContext.",
+      "status": "pass",
+      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.",
+      "title": "RuntimeMutationContext boundaries"
+    },
+    {
+      "category": "RuntimeDoctor",
+      "checklistId": "lro100-17-runtime-doctor-drift-repair",
+      "findings": [],
+      "linkedCheckId": "runtime_doctor_local_drift_repair_gate",
+      "requirement": "RuntimeDoctor must detect local drift with redacted readers and produce receipt-backed reviewable repair previews.",
+      "status": "pass",
+      "summary": "RuntimeDoctor has redacted local drift readers, receipt-backed preview repair plans, and focused tests.",
+      "title": "RuntimeDoctor local drift repair previews"
+    },
+    {
+      "category": "repository boundary",
+      "checklistId": "lro100-18-mutation-bypass-scan",
+      "findings": [],
+      "linkedCheckId": "mutation_bypass_scan",
+      "requirement": "Production surface/app/interaction/extension code must not contain high-risk direct mutation or external-write bypasses.",
+      "status": "pass",
+      "summary": "No high-risk mutation or external-write bypass candidates were found.",
+      "title": "High-risk mutation bypass scan"
+    },
+    {
+      "category": "repository boundary",
+      "checklistId": "lro100-19-feature-service-boundary",
+      "findings": [],
+      "linkedCheckId": "feature_service_mutation_authority",
+      "requirement": "Feature/service repository writes must be command-owned, transaction-owned, migration-owned, test-only, or non-canonical.",
+      "status": "pass",
+      "summary": "Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical.",
+      "title": "Feature/service write authority classification"
+    },
+    {
+      "category": "proof/CI",
+      "checklistId": "lro100-20-proof-ceiling-and-ci",
+      "findings": [],
+      "linkedCheckId": "proof_ceiling_and_ci_evidence",
+      "requirement": "Known Issues/truth files must reflect the proof ceiling, stale runtime-source blockers must be absent, and CI must run LocalRuntimeProof.",
+      "status": "pass",
+      "summary": "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling.",
+      "title": "Known Issues, truth, and CI evidence"
+    }
+  ],
+  "checks": [
+    {
+      "checkId": "architecture_inventory",
+      "findings": [],
+      "status": "pass",
+      "summary": "Final architecture tree source parity is green."
+    },
+    {
+      "checkId": "owner_directories",
+      "findings": [],
+      "status": "pass",
+      "summary": "All 19 LocalRuntimeOS owners are source-present."
+    },
+    {
+      "checkId": "integration_markers",
+      "findings": [],
+      "status": "pass",
+      "summary": "Core command, event, projection, replay, search, and outbox integration markers are present."
+    },
+    {
+      "checkId": "live_event_store_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory."
+    },
+    {
+      "checkId": "command_event_reconciliation",
+      "findings": [],
+      "status": "pass",
+      "summary": "Command journal/runtime event linkage and drift diagnostics are present."
+    },
+    {
+      "checkId": "meaningful_mutation_commit_policy",
+      "findings": [],
+      "status": "pass",
+      "summary": "Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed."
+    },
+    {
+      "checkId": "transaction_coordinator_commit_ownership",
+      "findings": [],
+      "status": "pass",
+      "summary": "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path."
+    },
+    {
+      "checkId": "projection_store_surface_read_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present."
+    },
+    {
+      "checkId": "external_surface_sanitized_projection_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "Widget/runtime readers use safe AppGroup snapshot records; writer consumes sanitized projections; App Intents/share use sanitized or durable-intake bridges."
+    },
+    {
+      "checkId": "privacy_security_external_boundary_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "PrivacySecurity gates egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection."
+    },
+    {
+      "checkId": "source_atlas_r2_public_only_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only."
+    },
+    {
+      "checkId": "continuity_backend_authority_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority."
+    },
+    {
+      "checkId": "capture_intake_durability_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "Capture accepted input is journaled before classification, attachment staging, promotion, and restart lookup evidence."
+    },
+    {
+      "checkId": "side_effect_local_commit_receipt_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "External side effects require local runtime commit receipt evidence before attempt."
+    },
+    {
+      "checkId": "trust_system_runtime_lineage_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage."
+    },
+    {
+      "checkId": "runtime_mutation_context_boundaries",
+      "findings": [],
+      "status": "pass",
+      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext."
+    },
+    {
+      "checkId": "runtime_doctor_local_drift_repair_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "RuntimeDoctor has redacted local drift readers, receipt-backed preview repair plans, and focused tests."
+    },
+    {
+      "checkId": "mutation_bypass_scan",
+      "findings": [],
+      "status": "pass",
+      "summary": "No high-risk mutation or external-write bypass candidates were found."
+    },
+    {
+      "checkId": "feature_service_mutation_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical."
+    },
+    {
+      "checkId": "proof_ceiling_and_ci_evidence",
+      "findings": [],
+      "status": "pass",
+      "summary": "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling."
+    }
+  ],
+  "generatedAt": "2026-07-01T20:15:21+00:00",
+  "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
+  "status": "green",
+  "summary": {
+    "blockers": 0,
+    "checklistFailures": 0,
+    "checklistItems": 20,
+    "checklistPassed": 20,
+    "checks": 20,
+    "green": true,
+    "passed": 20,
+    "warnings": 0
+  }
+}

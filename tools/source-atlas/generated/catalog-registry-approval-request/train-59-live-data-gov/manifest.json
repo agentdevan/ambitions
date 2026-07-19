@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "selection_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_are_not_approvals",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_requests_emit_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "inputPath": "tools/source-atlas/generated/catalog-governance-intake/train-57-live-data-gov/draft-governance-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogRegistryApprovalRequestManifest.v1",
+  "nonClaims": [
+    "not an approval artifact",
+    "not active registry mutation",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not API approval",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "approvalRequests": "c091519715531ad23b07fad3979077c257cd3326c55e38e479888ccbb2c3575d",
+    "catalogRegistryApprovalRequest": "5fef07c9bfdd97925928d6ae7dc527ecaaf56094e44ab3fd9e8810f5aef79817",
+    "completedApprovalArtifacts": "2e289aa3ac9e3ec248775c436e66365d5722dd97035b717b449b02928ef78681",
+    "manifest": "efa0dfd0408938c9bc9203e9a42988556be062114d78169665fb7b402e8213b0"
+  },
+  "outputPaths": {
+    "approvalRequests": "tools/source-atlas/generated/catalog-registry-approval-request/train-59-live-data-gov/approval-requests.json",
+    "catalogRegistryApprovalRequest": "tools/source-atlas/generated/catalog-registry-approval-request/train-59-live-data-gov/catalog-registry-approval-request.json",
+    "closeout": "tools/source-atlas/generated/catalog-registry-approval-request/train-59-live-data-gov/closeout.md",
+    "completedApprovalArtifacts": "tools/source-atlas/generated/catalog-registry-approval-request/train-59-live-data-gov/completed-approval-artifacts.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalRequests": 4,
+    "approvedApiPolicies": 0,
+    "approvedLegalEntries": 0,
+    "approvedSourceLanes": 0,
+    "claims": 0,
+    "completedApprovalArtifacts": 0,
+    "draftGovernancePackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "selectedIntakeIDs": [],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; approval request templates only",
+  "status": "Source Green for catalog registry approval request template tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-registry-approval-request-train-59"
+}

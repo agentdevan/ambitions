@@ -1,0 +1,32 @@
+{
+  "createdAt": "2026-07-01T00:00:00Z",
+  "fallbackRegressionReport": {
+    "currentDenominator": 50000,
+    "currentNumerator": 200,
+    "currentRate": 0.004,
+    "currentRateBps": 40.0,
+    "delta": null,
+    "deltaBps": 0.0,
+    "fallbackUnder5Percent": true,
+    "goldenGauntletRerunPresent": true,
+    "kind": "ambitions.sourceAtlas.missingShardFallbackRegressionReport.v1",
+    "previousDenominator": null,
+    "previousMetricPresent": false,
+    "previousNumerator": null,
+    "previousRate": null,
+    "previousRateBps": 0.0,
+    "regressionStatus": "no_previous_metric"
+  },
+  "kind": "ambitions.sourceAtlas.missingShardResolutionFallbackRegressionReport.v1",
+  "resolutionRateReport": {
+    "kind": "ambitions.sourceAtlas.missingShardResolutionRateReport.v1",
+    "resolutionRate": 0.0,
+    "resolutionRateBps": 0.0,
+    "resolutionStates": {
+      "unresolved": 200
+    },
+    "resolvedEvents": 0,
+    "totalEvents": 200,
+    "unresolvedEvents": 200
+  }
+}

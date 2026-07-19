@@ -1,0 +1,34 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.0bda6845c1a287c2",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "cdc.physical-activity.basics",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.2374ff14046fe006",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "cdc.physical-activity.basics",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.699e43fcecbbb4c0",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "cdc.physical-activity.basics",
+      "status": "accepted_claim"
+    }
+  ]
+}

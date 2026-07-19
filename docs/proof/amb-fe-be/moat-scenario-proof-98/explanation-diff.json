@@ -1,0 +1,43 @@
+{
+  "contextACapacityMinutes" : 45,
+  "contextAProtects" : [
+    "Uses the open window locally."
+  ],
+  "contextAReceiptIDs" : [
+    "receipt.action.health.a"
+  ],
+  "contextAReplayHash" : "466ff3dd6caade83a129a12e69cd9c154a7cae0ecf5f9d141274b6be75bc172e",
+  "contextAReplayTraceID" : "ReplayTrace.moat-scenario.intent.health-consistency.context-a",
+  "contextASourceRecordIDs" : [
+    "source.health.local",
+    "source.schedule.fresh"
+  ],
+  "contextAWhyNow" : [
+    "A successful previous evening closure keeps the proof trail current.",
+    "Fresh schedule data shows an open window that fits the health step."
+  ],
+  "contextBCapacityMinutes" : 5,
+  "contextBProtects" : [
+    "Avoids pushing the larger step into constrained time.",
+    "Respects the protected recovery block."
+  ],
+  "contextBReceiptIDs" : [
+    "receipt.action.health.b"
+  ],
+  "contextBReplayHash" : "b0436872cfd74976b67cb16b9ad1da9edd45e55c25c689ae9078c69f77b9680b",
+  "contextBReplayTraceID" : "ReplayTrace.moat-scenario.intent.health-consistency.context-b",
+  "contextBSourceRecordIDs" : [
+    "source.health.local",
+    "source.schedule.constrained"
+  ],
+  "contextBWhyNow" : [
+    "Protected recovery time is already visible, so the smaller step comes first.",
+    "The schedule is constrained, so the longer step waits."
+  ],
+  "explanationDifferencePresent" : true,
+  "protectedTimeDifference" : true,
+  "receiptContinuityPresent" : true,
+  "recoveryStateDifference" : true,
+  "replayContinuityPresent" : true,
+  "sameIntentID" : "intent.health-consistency"
+}

@@ -1,0 +1,107 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "frontier_intake_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "gold_claims_are_review_markers_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_mutation_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "workflow_queue_review_bound",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T12:00:00Z",
+  "extraction": {
+    "mode": "json_file"
+  },
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/fixtures/deep-research-frontier-intake/source-atlas-frontier-coverage-2026-06-29.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.deepResearchFrontierIntake.v1",
+  "manifestPath": "tools/source-atlas/generated/deep-research-frontier-intake/current/manifest.json",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production target readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not owner approval",
+    "not credential proof",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "coverageFreedomMap": "84c2bf5f538779b9358558f16552d0cab001248347b9874d633fe5fd12e867bd",
+    "frontierIntakeInput": "99b11b1ee7b339cc3a4d17e71e5975d6f1e068558e1c75dc3492c622cc02fc96",
+    "frontierIntakeManifest": "121572a903aaa25edfd82f818eb251069a8fa8d88ce869f8c2297da88c63ad48",
+    "goldClaimReviewQueue": "5d59ce8387033ac680488b2e5e4f18b9d8737195231bf6ee88e06547a40ce47f",
+    "manifest": "68d700bcb436027b4afe40a0108c669fe941e9575540ea8a2d5ad8f87df474c6",
+    "normalizedFrontiers": "bf09e315fb3dc9a71dd6ff303dac3734592a1172a3abec5a48ea9060e845169e",
+    "normalizedSources": "acaf8a1142d807db3d8c8a0d43f5f5d782ef27e2c2fc701a9f61b16c9a23e475",
+    "workflowQueue": "c8b34c94de41cc6b63f3003867708fbd11a00b8c932ca63650d78b722b125dc6"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/deep-research-frontier-intake/current/closeout.md",
+    "coverageFreedomMap": "tools/source-atlas/generated/deep-research-frontier-intake/current/coverage-freedom-map.json",
+    "frontierIntakeInput": "tools/source-atlas/generated/deep-research-frontier-intake/current/frontier-intake-input.json",
+    "frontierIntakeManifest": "tools/source-atlas/generated/deep-research-frontier-intake/current/frontier-intake/manifest.json",
+    "goldClaimReviewQueue": "tools/source-atlas/generated/deep-research-frontier-intake/current/gold-claim-review-queue.json",
+    "manifest": "tools/source-atlas/generated/deep-research-frontier-intake/current/manifest.json",
+    "normalizedFrontiers": "tools/source-atlas/generated/deep-research-frontier-intake/current/normalized-frontiers.json",
+    "normalizedSources": "tools/source-atlas/generated/deep-research-frontier-intake/current/normalized-source-candidates.json",
+    "workflowQueue": "tools/source-atlas/generated/deep-research-frontier-intake/current/workflow-queue.json"
+  },
+  "outputRoot": "tools/source-atlas/generated/deep-research-frontier-intake/current",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "frontierCandidates": 12,
+    "goldClaimReviewMarkers": 29,
+    "productionRegistryMutations": 0,
+    "r2Objects": 0,
+    "sourceCandidates": 31,
+    "workflowItems": 108
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Deep Research candidate normalization only",
+  "sourceLaneRegistryPath": "tools/source-atlas/governance/source-lane-registry.json",
+  "status": "Source Green for Deep Research frontier intake normalization",
+  "valid": true,
+  "versionID": "source-atlas-deep-research-frontier-intake-train-137"
+}

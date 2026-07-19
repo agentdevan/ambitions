@@ -1,0 +1,92 @@
+{
+  "completedReviewPackets": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletions.v1",
+  "nonClaims": [
+    "goal-domain review completion records only",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 publish"
+  ],
+  "reviewBundles": [
+    {
+      "blockedReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.6df7d4db56f369d8",
+      "claimOutputAllowed": false,
+      "completedReviewLanes": [],
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "missingReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review bundle summary only",
+        "not registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "packOutputAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "registryMutationPlanningReady": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ]
+    },
+    {
+      "blockedReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.26d48f973e5270f6",
+      "claimOutputAllowed": false,
+      "completedReviewLanes": [],
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "missingReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review bundle summary only",
+        "not registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "packOutputAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "registryMutationPlanningReady": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_are_blocked_not_completed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_emit_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogReviewerCompletionTemplateManifest.v1",
+  "nonClaims": [
+    "reviewer completion packet templates only",
+    "not completed reviewer packets",
+    "not legal approval",
+    "not outside legal approval",
+    "not source authority",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogReviewerCompletionTemplate": "bba09d82bd95dbba9a5cee3f0ca25778d944c9626cae5734c1ef08a5bd28efca",
+    "manifest": "6e40401d53e269c5c7c7e28ac1d59d9298d26848c6f3bad6afc146c8d1639ed3",
+    "sourceReviewCompletionPackets": "85d2c45322c6a146572b482e90b6b4526a918d53caf944a5f66a99917b8945aa"
+  },
+  "outputPaths": {
+    "catalogReviewerCompletionTemplate": "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/catalog-reviewer-completion-template.json",
+    "closeout": "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/closeout.md",
+    "sourceReviewCompletionPackets": "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/source-review-completion-packets.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "claims": 0,
+    "completedDecisionArtifacts": 0,
+    "completedReviewCompletions": 0,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "sourceReviewCompletionPacketTemplates": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; reviewer completion templates only",
+  "status": "Source Green for catalog reviewer completion template tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-reviewer-completion-template-train-68"
+}

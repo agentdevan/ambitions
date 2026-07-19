@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "mode_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_lanes_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_stages_can_complete_without_live_or_execute",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_gates_remain_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upstream_gates_remain_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "executor_performs_no_live_write_claim_pack_r2_or_native_operations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T22:55:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainWorkOrderExecutorManifest.v1",
+  "mode": "fixture",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not native activation proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "executionRecords": "c0cc63fc0acb6cd24777e37af6a0b78a8d9f5ce5ff105308dfc7868b986a5123",
+    "executorReport": "4a054a3d27f21cfc3a6296bf913d7e4aac1ef75e998f41ef33a0cc28eb153ece",
+    "manifest": "c1666f236957c4a00a81b809b95788ceb496ec40e97c2dab051931aaceb7538b"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/closeout.md",
+    "executionRecords": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/execution-records.json",
+    "executorReport": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/work-order-executor-report.json",
+    "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionLanesManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+  "recordCounts": {
+    "blockedConfiguredFrontier": 0,
+    "blockedReviewRequired": 0,
+    "blockedUpstreamEvidenceRequired": 0,
+    "claims": 0,
+    "completedDryRunChecks": 0,
+    "completedFixtureChecks": 4,
+    "executeOperations": 0,
+    "executionRecords": 4,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "registryWriteOperations": 0,
+    "workOrders": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; fixture/dry-run work-order executor only",
+  "status": "Source Green for goal-domain work-order fixture executor",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-work-order-executor-train-90"
+}

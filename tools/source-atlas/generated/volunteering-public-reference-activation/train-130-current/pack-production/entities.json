@@ -1,0 +1,37 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "volunteering_public_reference",
+      "entity_id": "public_entity.d30e2c747935abac",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "AmeriCorps Open Data publishes State Ranking by Volunteer Rate as official public-domain volunteering and civic-life reference data for state-level volunteer-rate context, not as a current opportunity listing, eligibility decision, or personalized placement recommendation.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "americorps.volunteer_rate_state"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "volunteering_public_reference",
+      "entity_id": "public_entity.e0aa8d9c591eb299",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "AmeriCorps Open Data metadata identifies the State Ranking by Volunteer Rate dataset as national, state-granularity public-domain reference data with biennial posting context; Source Atlas must not treat it as real-time volunteer opportunity availability.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "americorps.volunteer_rate_state"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "volunteering_public_reference",
+      "entity_id": "public_entity.e6c5f76a457b0f8f",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "AmeriCorps Open Data describes volunteering and civic engagement trends and analysis for public reference only, not as service-program legal advice, a requirement guarantee, or a personalized volunteering plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "americorps.volunteer_rate_state"
+    }
+  ]
+}

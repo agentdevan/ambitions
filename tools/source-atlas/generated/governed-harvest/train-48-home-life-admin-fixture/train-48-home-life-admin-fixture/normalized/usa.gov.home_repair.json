@@ -1,0 +1,393 @@
+{
+  "adapterID": "usagov_home_repair_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_usagov_home_repair_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_home_service_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_home_service_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.f7868a1611742e08",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "USA.gov home repair assistance public reference page",
+      "provenanceIDs": [
+        "provenance.bba0d01763ad2592"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.home_repair"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "home_service_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.4eb9ef2a18944b4f",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "home repair assistance",
+      "provenanceIDs": [
+        "provenance.bba0d01763ad2592"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.home_repair"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.2efa4b8e07dffb11",
+      "claimType": "public_service_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly USA.gov home repair page and government-works terms re-review",
+      "id": "claim.9acfa8379bbfab4f",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.usa.gov/government-works",
+      "provenanceIDs": [
+        "provenance.bba0d01763ad2592"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "USA.gov / General Services Administration",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.home_repair",
+      "sourceIDs": [
+        "usa.gov.home_repair"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.usa.gov/home-repair-programs",
+      "state": "source_backed",
+      "text": "USA.gov publishes government home repair assistance program reference context for finding official repair and improvement assistance information, not eligibility approval, a loan decision, legal advice, contractor advice, or a personalized household plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "usagov_home_repair_reference_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "home_life_admin",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "usa.gov.home_repair",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_service_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateContractorAdvice": true,
+      "doesNotCreateEligibilityApproval": true,
+      "doesNotCreateLegalAdvice": true,
+      "doesNotCreateLoanDecision": true,
+      "doesNotCreatePersonalizedHouseholdPlan": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.homeLifeAdminCoverage.v1",
+      "label": "USA.gov home repair assistance public program reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.home_repair",
+      "subject": "home_admin.home_repair_assistance"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "home_life_admin",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.f7868a1611742e08",
+      "id": "edge.1a5e8a2a776d6d83",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.bba0d01763ad2592"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_home_service_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.home_repair"
+      ],
+      "toAtomID": "atom.4eb9ef2a18944b4f",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.f7868a1611742e08",
+        "atom.4eb9ef2a18944b4f"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.1a5e8a2a776d6d83"
+      ],
+      "id": "lattice.46c20ab7ac397e89",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "usagov_home_repair_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "home_life_admin",
+      "id": "pack_candidate.875563625483e338",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.home_repair",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "usa.gov.home_repair"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "8b4bb3462cb4e50555ee163d19821cb829094d1ce7ab05df8e81be5ef4e1ce42",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly USA.gov home repair page and government-works terms re-review",
+      "id": "provenance.bba0d01763ad2592",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+      "locator": "https://www.usa.gov/home-repair-programs",
+      "publicReferenceOnly": true,
+      "publisher": "USA.gov / General Services Administration",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.home_repair",
+      "sourceState": "current",
+      "sourceURL": "https://www.usa.gov/home-repair-programs",
+      "termsURL": "https://www.usa.gov/government-works",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.9acfa8379bbfab4f",
+      "dataClass": "public_requirement",
+      "gateType": "public_home_service_reference_only",
+      "id": "requirement.d1c92dff1c2c7701",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.bba0d01763ad2592"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.home_repair"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "usa.gov.home_repair",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly USA.gov home repair page and government-works terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current USA.gov government works posture",
+    "publisher": "USA.gov / General Services Administration",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "usa.gov.home_repair",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.usa.gov/government-works"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "usa.gov.home_repair"
+  }
+}

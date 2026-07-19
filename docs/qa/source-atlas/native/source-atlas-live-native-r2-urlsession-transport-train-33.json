@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0.0",
+  "train": "33",
+  "linear_issue": "AMB-1519",
+  "title": "Source Atlas Train 33 live native R2 URLSession transport proof",
+  "created_at": "2026-06-28T03:28:06Z",
+  "status": "yellow_blocked_public_r2_endpoint_not_enabled",
+  "scope_completed": [
+    "Inspected native SourceAtlasURLSessionPublicPackRemoteTransport support.",
+    "Inspected native public refresh target registry artifact.",
+    "Verified the production R2 bucket exists and contains public/reference objects.",
+    "Verified the production bucket has no custom domain and r2.dev public access is disabled.",
+    "Preserved the no-private-context boundary by not attempting a fabricated or credentialed native URLSession endpoint."
+  ],
+  "files_changed": [
+    "docs/qa/source-atlas/native/source-atlas-live-native-r2-urlsession-transport-train-33.json",
+    "docs/qa/source-atlas/native/source-atlas-live-native-r2-urlsession-transport-train-33.md"
+  ],
+  "inspected_files": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransport.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransportAdapters.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+    "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/current-pointer.json",
+    "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/manifest.json"
+  ],
+  "read_only_cloudflare_checks": [
+    {
+      "command": "wrangler r2 bucket domain list ambitions-source-atlas-prod",
+      "status": "passed",
+      "summary": "There are no custom domains connected to this bucket."
+    },
+    {
+      "command": "wrangler r2 bucket info ambitions-source-atlas-prod",
+      "status": "passed",
+      "summary": "Bucket exists; object_count 68; bucket_size 734 kB."
+    },
+    {
+      "command": "wrangler r2 bucket dev-url get ambitions-source-atlas-prod",
+      "status": "passed",
+      "summary": "Public access via the r2.dev URL is disabled."
+    }
+  ],
+  "blocker": {
+    "reason": "No approved public HTTPS base URL exists for native URLSession. The production bucket has no custom domain and r2.dev public access is disabled.",
+    "blocking_gate": "Public R2 endpoint policy and owner/security/legal approval for exposing public/reference pack objects over HTTPS.",
+    "required_to_unblock": [
+      "Choose custom domain or r2.dev policy for public/reference Source Atlas packs.",
+      "Record owner/security/legal approval artifact for public HTTPS exposure.",
+      "Enable/configure the approved endpoint in Cloudflare.",
+      "Add a public endpoint entry to native refresh target configuration without private context.",
+      "Run live native URLSession fetch against current pointer, manifest, revocations, LKG, and pack hash verification."
+    ]
+  },
+  "source_atlas_status_ceiling": "Yellow for live native transport. Existing Train 29 R2 upload/readback proof remains valid, but native URLSession against public HTTPS R2 remains unproven.",
+  "product_law_preserved": true,
+  "r2_request_privacy_proof": "No native URLSession request was made because no approved public endpoint exists. The inspected transport constructs HTTPS GET requests from public object keys only and rejects invalid/private object keys in existing tests.",
+  "no_private_graph_egress_proof": "No private user context was used. Read-only Wrangler checks did not include user goals, captures, schedules, proof, receipts, private graph, account identifiers, or personalization context.",
+  "license_terms_proof": "No source, license, or pack output changed. Public endpoint exposure still requires explicit approval before release-facing Green.",
+  "restricted_source_exclusion_proof": "No source registry or pack output changed.",
+  "provenance_completeness_proof": "No claims were created or modified.",
+  "freshness_revocation_proof": "The current pointer and manifest were inspected locally from Train 29/Train 28 artifacts only. No live native revocation/freshness fetch was run.",
+  "lkg_rollback_proof": "No R2 pointer or LKG object changed. Train 29 upload/readback/LKG proof remains the current R2 operation proof.",
+  "native_offline_no_account_proof": "No app behavior changed. Train 30 remains the current offline/no-account repository-cache proof.",
+  "validation_run": [
+    {
+      "command": "wrangler r2 bucket domain list ambitions-source-atlas-prod",
+      "status": "passed"
+    },
+    {
+      "command": "wrangler r2 bucket info ambitions-source-atlas-prod",
+      "status": "passed"
+    },
+    {
+      "command": "wrangler r2 bucket dev-url get ambitions-source-atlas-prod",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/native/source-atlas-live-native-r2-urlsession-transport-train-33.json >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Live native URLSession fetch against R2, because no approved public HTTPS endpoint exists.",
+    "Public endpoint enablement, because that would change Cloudflare exposure policy and requires explicit approval artifact.",
+    "Full build-for-testing.",
+    "Full native XCTest suite.",
+    "Release umbrella proof."
+  ],
+  "production_non_claims": [
+    "Not live native URLSession Green.",
+    "Not R2 release readiness.",
+    "Not endpoint approval.",
+    "Not entitlement readiness.",
+    "Not full Source Atlas Green.",
+    "Not Visual Green.",
+    "Not Release Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not universal coverage."
+  ],
+  "known_risks": [
+    "Public HTTPS exposure policy remains undecided.",
+    "Native app endpoint configuration remains absent for production stable occupation_foundation.",
+    "Live URLSession cache-control, status-code, and CDN behavior remain unproven."
+  ],
+  "rollback_plan": [
+    "No production R2 or native runtime state changed.",
+    "Remove Train 33 blocker evidence docs if replaced by a later live endpoint proof."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.15287c66d2e4cd56",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "usa.gov.change_address",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.d952327697f76faf",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "state.travel.public_travel",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.da1775449f7f9e5e",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "state.travel.public_travel",
+      "status": "accepted_claim"
+    }
+  ]
+}

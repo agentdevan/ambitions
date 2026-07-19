@@ -1,0 +1,1588 @@
+{
+  "createdAt": "2026-06-29T12:00:00Z",
+  "sourceCandidates": [
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_certified_regulatory_history",
+        "partial_geographic_forecast_coverage"
+      ],
+      "evidence_hash": "d2a0572fef5faa9970355cc2ea1c9c4b755b320ef3c9362c8697913820cd8f51",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://docs.airnowapi.org/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "current_aqi",
+          "forecast_aqi",
+          "reporting_area_lookup",
+          "fire_smoke_context"
+        ],
+        "dataset_url": "https://docs.airnowapi.org/webservices",
+        "declared_jurisdiction": "US, Canada_partial, Mexico_partial",
+        "declared_license": "public_api_under_data_use_guidelines",
+        "declared_rights": "account_and_api_key_required; data_are_preliminary; not_for_regulation_guidance_or_government_decision_making",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://docs.airnowapi.org/webservices",
+          "https://docs.airnowapi.org/"
+        ],
+        "publisher_name": "U.S. EPA AirNow",
+        "publisher_url": "https://docs.airnowapi.org/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.airnow.gov/about-the-data",
+        "source_class_guess": "official_government",
+        "terms_url": "https://docs.airnowapi.org/faq"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "hourly_for_current; daily_for_forecasts",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "airnow",
+      "source_name": "AirNow API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_AIRNOW",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_best_for_live_AQI"
+      ],
+      "evidence_hash": "9ae9e8def5f94dae8e9ce4ddf58c5e4d98d505090501fd097cfdf0dcaafbebbe",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://aqs.epa.gov/aqsweb/documents/data_api.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "regulatory_air_quality_series",
+          "monitor_metadata",
+          "historical_pollutant_values"
+        ],
+        "dataset_url": "https://aqs.epa.gov/data/api",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_api_under_epa_site_terms",
+        "declared_rights": "key_required; certification_timing_depends_on_submission_cycle",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://aqs.epa.gov/data/api",
+          "https://aqs.epa.gov/aqsweb/documents/data_api.html"
+        ],
+        "publisher_name": "U.S. Environmental Protection Agency",
+        "publisher_url": "https://aqs.epa.gov/aqsweb/documents/data_api.html",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.epa.gov/outdoor-air-quality-data",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.epa.gov/outdoor-air-quality-data/airdata-basic-information"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_to_release_cycle_for_certified_history",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "aqs",
+      "source_name": "EPA AQS API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_AQS",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": "registration_key_for_version_2_0_features",
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "series_id_discovery_still_nontrivial",
+        "not_school_or_occupation_taxonomy_by_itself"
+      ],
+      "evidence_hash": "6e600cef7a86d6e93bccb96b572caddfd999fe0fbb65fe257bb0c8033b9d9121",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.bls.gov/bls/api_features.htm",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "published_labor_series_value",
+          "economic_indicator_series",
+          "time_series_metadata"
+        ],
+        "dataset_url": "https://api.bls.gov/publicAPI/v2/",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_api_under_terms_with_citation_and_logo_restrictions",
+        "declared_rights": "logo_cannot_be_used; registration_needed_for_v2_expanded_limits; must_cite_access_date_and_disclaimer",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.bls.gov/publicAPI/v2/",
+          "https://www.bls.gov/developers/"
+        ],
+        "publisher_name": "U.S. Bureau of Labor Statistics",
+        "publisher_url": "https://www.bls.gov/developers/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.bls.gov/developers/termsOfService.htm",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.bls.gov/developers/termsOfService.htm"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "align_to_series_release_calendar",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "bls.api",
+      "source_name": "BLS Public Data API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_BLS_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": "optional_for_many_datasets",
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_parcel_level",
+        "not_live_local_service_state"
+      ],
+      "evidence_hash": "e29457abb1519bf0ac5bb68e4b1d352e1b2bf87a22d7c65691be753af327e7b0",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.census.gov/data/developers/guidance/api-user-guide.Help_%26_Contact_Us.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "population_and_housing_reference",
+          "admin_hierarchy",
+          "acs_metrics",
+          "economic_census_metrics"
+        ],
+        "dataset_url": "https://api.census.gov/data.html",
+        "declared_jurisdiction": "US, territories_varies_by_dataset",
+        "declared_license": "public_data_api_under_terms_of_service_no_endorsement",
+        "declared_rights": "must_not_identify_respondents; no_false_representation; nonendorsement_notice_expected",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.census.gov/data.html",
+          "https://www.census.gov/data/developers.html"
+        ],
+        "publisher_name": "U.S. Census Bureau",
+        "publisher_url": "https://www.census.gov/data/developers.html",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.census.gov/about/policies.html",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.census.gov/data/developers/about/terms-of-service.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "follow_dataset_release_schedule",
+      "review_required": true,
+      "sensitive_data_risk": "low_to_moderate_if_miscombined",
+      "source_id": "census.api",
+      "source_name": "U.S. Census Bureau Data API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_CENSUS_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_property_line_truth",
+        "not_demographic_values_without_join"
+      ],
+      "evidence_hash": "fc9ec0c021c2aec990dbd5fa7101082d3101e21c631e06c8e20421c74ec8e1e5",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.census.gov/geographies/mapping-files.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "boundary_reference",
+          "geoid_linkage",
+          "zcta_reference",
+          "cartographic_boundary"
+        ],
+        "dataset_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html",
+        "declared_jurisdiction": "US, territories",
+        "declared_license": "not_copyrighted_per_metadata_except_trademark_limits_on_name_marks",
+        "declared_rights": "TIGER_and_Census_TIGER_are_registered_trademarks",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html",
+          "https://www.census.gov/geographies/mapping-files.html"
+        ],
+        "publisher_name": "U.S. Census Bureau",
+        "publisher_url": "https://www.census.gov/geographies/mapping-files.html",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://meta.geo.census.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.census.gov/about/policies.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "annual_refresh",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "census.tiger",
+      "source_name": "TIGER/Line and Cartographic Boundary Files",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_CENSUS_TIGER",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_personal_fit_or_admissions_probability",
+        "data_lag_inherent"
+      ],
+      "evidence_hash": "f15c2936ffd01ba2e7c91a54ea02ff7b036a97377e5b307920dd85a4513e80ce",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://collegescorecard.ed.gov/data/api-documentation/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "school_cost_metric",
+          "graduation_metric",
+          "earnings_metric",
+          "field_of_study_metric"
+        ],
+        "dataset_url": "https://collegescorecard.ed.gov/data/api-documentation/",
+        "declared_jurisdiction": "US_higher_education",
+        "declared_license": "public_federal_data_no_explicit_license_reviewed_here",
+        "declared_rights": "api credential required; metric_definitions_and_cohort_dates_must_be_preserved",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://collegescorecard.ed.gov/data/api-documentation/",
+          "https://collegescorecard.ed.gov/"
+        ],
+        "publisher_name": "U.S. Department of Education",
+        "publisher_url": "https://collegescorecard.ed.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://collegescorecard.ed.gov/data/data-documentation/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://collegescorecard.ed.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "track_change_log_each_release",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "college.scorecard",
+      "source_name": "College Scorecard API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_COLLEGE_SCORECARD",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_official_pdf_repository_for_every_use_case"
+      ],
+      "evidence_hash": "677a24918162c151f161f6583bf79fb650559e62c2caab9d3f41312f250b7c46",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://api.congress.gov/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "bill_status",
+          "bill_metadata",
+          "member_and_committee_reference"
+        ],
+        "dataset_url": "https://api.congress.gov/",
+        "declared_jurisdiction": "US_federal",
+        "declared_license": "public_congressional_data_api_requires_api_data_gov_key",
+        "declared_rights": "api_data_gov_key_required",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.congress.gov/"
+        ],
+        "publisher_name": "Library of Congress / Congress.gov",
+        "publisher_url": "https://api.congress.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.loc.gov/legal/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.loc.gov/legal/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_or_better_when_tracking_legislation",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "congress.api",
+      "source_name": "Congress.gov API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_CONGRESS_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_full_structured_api_reviewed_here"
+      ],
+      "evidence_hash": "4bc4b5a12d28b34f25dc4a17c639379e05b0662efcb99d01b3a640eeb60ec6d0",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.cpsc.gov/Newsroom/Downloadable-Data/widgets",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "consumer_product_recall_fact",
+          "remedy_type",
+          "units",
+          "hazard_summary"
+        ],
+        "dataset_url": "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_federal_content_no_explicit_api_license_reviewed",
+        "declared_rights": "rss_and_widget_based_discovery; remedy_data_can_change_daily",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed",
+          "https://www.cpsc.gov/Recalls"
+        ],
+        "publisher_name": "U.S. Consumer Product Safety Commission",
+        "publisher_url": "https://www.cpsc.gov/Recalls",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.cpsc.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.cpsc.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "cpsc.recalls",
+      "source_name": "CPSC Recall RSS and Recall Pages",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_CPSC_RECALLS",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_itself_the_operator_schedule_truth",
+        "realtime_not_guaranteed"
+      ],
+      "evidence_hash": "3c60edbc4d522f26e72cbaae6c02e598666535bc51f52c8f236b9092b4c39672",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://data.transportation.gov/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "feed_discovery",
+          "agency_feed_url_reference"
+        ],
+        "dataset_url": "https://data.transportation.gov/Public-Transit/2023-NTD-Annual-Data-General-Transit-Feed-Specific/venb-5asu",
+        "declared_jurisdiction": "US_public_transit_reporting_agencies",
+        "declared_license": "public_open_data_portal_dataset_terms",
+        "declared_rights": "underlying_feed_rights_vary_by_agency",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://data.transportation.gov/Public-Transit/2023-NTD-Annual-Data-General-Transit-Feed-Specific/venb-5asu",
+          "https://data.transportation.gov/"
+        ],
+        "publisher_name": "U.S. Department of Transportation",
+        "publisher_url": "https://data.transportation.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://data.transportation.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://data.transportation.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "refresh_catalog_periodically_and_validate_live_feed_headers",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "dot.ntd.gtfs.catalog",
+      "source_name": "U.S. DOT NTD GTFS Dataset",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_DOT_NTD_GTFS_CATALOG",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_legal_final_source",
+        "state_local_not_covered"
+      ],
+      "evidence_hash": "793eff100491ebdbed8266dff0309af699291d5cf830a0d3fbdff7fc542f3116",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.ecfr.gov/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "current_reg_text_reference",
+          "recent_changes_reference"
+        ],
+        "dataset_url": "https://www.ecfr.gov/",
+        "declared_jurisdiction": "US_federal",
+        "declared_license": "continuously_updated_online_version_not_official_legal_edition",
+        "declared_rights": "not_official_legal_edition",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.ecfr.gov/"
+        ],
+        "publisher_name": "Office of the Federal Register / Government Publishing Office",
+        "publisher_url": "https://www.ecfr.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.ecfr.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.ecfr.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "live",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "ecfr",
+      "source_name": "eCFR",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_ECFR",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_user_specific_insurance_coverage_without_balance_inputs"
+      ],
+      "evidence_hash": "04ea1caa53a57517cb37a38d5dcfe71e60221477740512fc97a51572b9fc77f0",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://api.fdic.gov/banks/docs",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "fdic_insured_status_reference",
+          "branch_location",
+          "bank_history",
+          "institution_metadata"
+        ],
+        "dataset_url": "https://api.fdic.gov/banks/",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_fdic_bank_data_api",
+        "declared_rights": "do_not_imply_fdic_endorsement; key_support_documented_but currently_not_required",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.fdic.gov/banks/",
+          "https://banks.data.fdic.gov/bankfind-suite/"
+        ],
+        "publisher_name": "Federal Deposit Insurance Corporation",
+        "publisher_url": "https://banks.data.fdic.gov/bankfind-suite/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.fdic.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.fdic.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "query_live_when institutional status matters",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "fdic.bankfind",
+      "source_name": "FDIC BankFind Suite API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_FDIC_BANKFIND",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_legal_final_source"
+      ],
+      "evidence_hash": "103c818aee18977769ebd6c4211654636d96c72635aa806715ef0c725e27263f",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "notice_presence",
+          "document_metadata",
+          "public_inspection",
+          "agency_publication_reference"
+        ],
+        "dataset_url": "https://www.federalregister.gov/api/v1/",
+        "declared_jurisdiction": "US_federal",
+        "declared_license": "public_api_no_key_unofficial_site_with_logo_restrictions",
+        "declared_rights": "not_official_legal_edition; verify_legal_research_against_official_edition; no_official_NARA_or_OFR_logos_or_seals",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.federalregister.gov/api/v1/",
+          "https://www.federalregister.gov/"
+        ],
+        "publisher_name": "Office of the Federal Register / NARA",
+        "publisher_url": "https://www.federalregister.gov/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_or_better_for_notice_monitoring",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "federal.register.api",
+      "source_name": "FederalRegister.gov API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_FEDERAL_REGISTER_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_simple_bulk_api_reviewed_here"
+      ],
+      "evidence_hash": "450538356b7b0c1d32f34782fe9fb0345f7e595a4017dc7779423ca89eb8f032",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://msc.fema.gov/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "official_flood_map_reference",
+          "effective_panel_lookup",
+          "flood_hazard_product_reference"
+        ],
+        "dataset_url": "https://msc.fema.gov/",
+        "declared_jurisdiction": "US",
+        "declared_license": "official_public_source_no_explicit_api_license_reviewed",
+        "declared_rights": "effective_map_information_can_change_or_be_superseded",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://msc.fema.gov/"
+        ],
+        "publisher_name": "Federal Emergency Management Agency",
+        "publisher_url": "https://msc.fema.gov/",
+        "redistribution_guess": "restricted",
+        "rights_url": "https://msc.fema.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://msc.fema.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "check_current_portal_at_use_time",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "fema.fmsc",
+      "source_name": "FEMA Flood Map Service Center",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_FEMA_FMSC",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": "username_required_for_webservices",
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_legal_boundary_source",
+        "quality_varies_by_country",
+        "mission_critical_use_prefers_paid_tier"
+      ],
+      "evidence_hash": "221f2c6a042575f2766776cc99f436f696617c4229d21f541cebc39fbe85ce76",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.geonames.org/export/web-services.html",
+        "authority_class_guess": "official_institution",
+        "claim_class_guess": [
+          "place_name_reference",
+          "postal_code_place_lookup",
+          "timezone_lookup",
+          "reverse_geocoding"
+        ],
+        "dataset_url": "https://download.geonames.org/export/dump/",
+        "declared_jurisdiction": "global",
+        "declared_license": "CC_BY",
+        "declared_rights": "attribution_required; postal_datasets_may_embed_third_party_country_specific_restrictions",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://download.geonames.org/export/dump/",
+          "https://www.geonames.org/"
+        ],
+        "publisher_name": "GeoNames",
+        "publisher_url": "https://www.geonames.org/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.geonames.org/about.html",
+        "source_class_guess": "official_institution",
+        "terms_url": "https://www.geonames.org/export/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_sync_if_used_for_live_geography",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "geonames",
+      "source_name": "GeoNames",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_GEONAMES",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_continuously_consolidated_current_reg_text_like_ecfr"
+      ],
+      "evidence_hash": "1e5b278f1dcb5961c487d598b68831f95407066526081e6066c0381fab37a966",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://api.govinfo.gov/docs/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "official_pdf_reference",
+          "bill_text_package",
+          "federal_register_official_package",
+          "public_law_package"
+        ],
+        "dataset_url": "https://api.govinfo.gov/",
+        "declared_jurisdiction": "US_federal",
+        "declared_license": "official_publications_api_requires_api_data_gov_key",
+        "declared_rights": "api_data_gov_key_required; some_collections_may_include_non_public_domain_material",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.govinfo.gov/",
+          "https://www.govinfo.gov/"
+        ],
+        "publisher_name": "U.S. Government Publishing Office",
+        "publisher_url": "https://www.govinfo.gov/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.govinfo.gov/help/copyright",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.govinfo.gov/help/terms-of-use"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "govinfo.api",
+      "source_name": "GovInfo API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_GOVINFO_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_a_data_source",
+        "no_operator_truth_by_itself"
+      ],
+      "evidence_hash": "165626bbf8f5b017946de35818656d61de9bda5bb19d67df4337f90d2244c3c0",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://gtfs.org/documentation/schedule/reference/ ; https://gtfs.org/documentation/realtime/reference/",
+        "authority_class_guess": "standards_body",
+        "claim_class_guess": [
+          "schedule_schema",
+          "realtime_schema",
+          "service_alert_schema"
+        ],
+        "dataset_url": "https://gtfs.org/documentation/",
+        "declared_jurisdiction": "global_standard",
+        "declared_license": "standard_documentation_site_license_not_confirmed_here",
+        "declared_rights": "actual_feed_licenses_are_operator_specific",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://gtfs.org/documentation/",
+          "https://gtfs.org/"
+        ],
+        "publisher_name": "MobilityData / GTFS community",
+        "publisher_url": "https://gtfs.org/",
+        "redistribution_guess": "unclear",
+        "rights_url": "https://gtfs.org/community/governance/",
+        "source_class_guess": "standards_body",
+        "terms_url": "https://gtfs.org/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "pin_spec_version_and operator feed version separately",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "gtfs.standards",
+      "source_name": "GTFS Schedule and GTFS Realtime Specifications",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_GTFS_STANDARDS",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": "unclear_from_reviewed_query_tool_page",
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "no_quality_ratings",
+        "service_capacity_not_guaranteed"
+      ],
+      "evidence_hash": "a38dc9e57025a86baa6129bf08ac0c383296d5d3086b527587fd5876ec4e4fed",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://data.hud.gov/housing_counseling.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "housing_counselor_presence",
+          "agency_lookup_by_location"
+        ],
+        "dataset_url": "https://data.hud.gov/housing_counseling.html",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_hud_directory_under_hud_terms",
+        "declared_rights": "HUD_User_nonendorsement_notice_if_API_backed",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://data.hud.gov/housing_counseling.html"
+        ],
+        "publisher_name": "U.S. Department of Housing and Urban Development",
+        "publisher_url": "https://data.hud.gov/housing_counseling.html",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "query_live",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "hud.counselor",
+      "source_name": "HUD Housing Counselor API / Query Tool",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_HUD_COUNSELOR",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_property_market_listing_data",
+        "not_user-specific_affordability"
+      ],
+      "evidence_hash": "a30fc07cfd55476fbba934583422e0dee8334a16411d9d28cbf75ade866cc4c4",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.huduser.gov/portal/dataset/fmr-api.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "fair_market_rent",
+          "income_limit_reference",
+          "county_or_metro_lookup"
+        ],
+        "dataset_url": "https://www.huduser.gov/hudapi/public/",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_api_under_hud_user_terms",
+        "declared_rights": "must_display_nonendorsement_notice; max_60_queries_per_minute; access_token_required",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.huduser.gov/hudapi/public/",
+          "https://www.huduser.gov/portal/dataset/fmr-api.html"
+        ],
+        "publisher_name": "HUD USER / HUD PD&R",
+        "publisher_url": "https://www.huduser.gov/portal/dataset/fmr-api.html",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "annual_refresh_and release-monitoring",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "hud.fmr.il",
+      "source_name": "HUD Fair Market Rents and Income Limits API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_HUD_FMR_IL",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_usps_delivery_validation",
+        "not_international"
+      ],
+      "evidence_hash": "81bd4700b15986592e836959a48d5a8e2d48b27cbefbbc9b2002fef7ba5f395f",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.huduser.gov/portal/dataset/uspszip-api.html",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "zip_to_tract",
+          "zip_to_county",
+          "zip_to_cbsa",
+          "geo_crosswalk"
+        ],
+        "dataset_url": "https://www.huduser.gov/hudapi/public/usps",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_api_under_hud_user_terms",
+        "declared_rights": "token_required_in_examples; must_display_nonendorsement_notice; uses_specific_vintage_crosswalks",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.huduser.gov/hudapi/public/usps",
+          "https://www.huduser.gov/portal/dataset/uspszip-api.html"
+        ],
+        "publisher_name": "HUD USER / HUD PD&R",
+        "publisher_url": "https://www.huduser.gov/portal/dataset/uspszip-api.html",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "refresh_with_dataset_vintage",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "hud.usps.crosswalk",
+      "source_name": "HUD USPS ZIP Code Crosswalk API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_HUD_USPS_CROSSWALK",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "no_address_geocoding",
+        "no_admin_boundaries"
+      ],
+      "evidence_hash": "57d8a93b8f538230e8c44170c35dc7be211d97322aca1d04cd04cabe183ae969",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.iana.org/time-zones/repository/tz-link.html",
+        "authority_class_guess": "standards_body",
+        "claim_class_guess": [
+          "timezone_assignment",
+          "utc_offset_rules",
+          "dst_rules",
+          "historical_time_rule_reference"
+        ],
+        "dataset_url": "https://data.iana.org/time-zones/",
+        "declared_jurisdiction": "global",
+        "declared_license": "public domain",
+        "declared_rights": "none_material_found",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://data.iana.org/time-zones/",
+          "https://www.iana.org/time-zones"
+        ],
+        "publisher_name": "Internet Assigned Numbers Authority",
+        "publisher_url": "https://www.iana.org/time-zones",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.iana.org/time-zones/repository/tz-link.html",
+        "source_class_guess": "standards_body",
+        "terms_url": "https://www.iana.org/time-zones/repository/tz-link.html"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "check_upstream_weekly_and_on_major_political_time_rule_changes",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "iana.tzdb",
+      "source_name": "IANA Time Zone Database",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_IANA_TZDB",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_personal_tax_advice",
+        "not_state_tax"
+      ],
+      "evidence_hash": "dd218e08bfa067b55e6c3d9892ffc6c7d0985edd5f88c705290f6940cf1ea4e5",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.irs.gov/publications/p505",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "tax_threshold_reference",
+          "publication_instruction_reference",
+          "topic_page_reference"
+        ],
+        "dataset_url": "https://www.irs.gov/publications",
+        "declared_jurisdiction": "US_federal_tax",
+        "declared_license": "public_federal_content_with_restrictions_on_seals_names_symbols",
+        "declared_rights": "no_endorsement_implication; seal_logo_symbol_restrictions",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.irs.gov/publications",
+          "https://www.irs.gov/"
+        ],
+        "publisher_name": "Internal Revenue Service",
+        "publisher_url": "https://www.irs.gov/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.irs.gov/about-irs/use-of-content-from-irsgov",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.irs.gov/about-irs/use-of-content-from-irsgov"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "pin_to_tax_year_and publication revision date",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "irs.pubs",
+      "source_name": "IRS Publications and Topic Pages",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_IRS_PUBS",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_recall_lifecycle_complete",
+        "not_vehicle_condition"
+      ],
+      "evidence_hash": "417f2132c367f7928913ae9ee682734493c15f28492b1fafed06e327e7452c32",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://vpic.nhtsa.dot.gov/api/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "vin_decode",
+          "manufacturer_reference",
+          "vehicle_attributes_reference"
+        ],
+        "dataset_url": "https://vpic.nhtsa.dot.gov/api/",
+        "declared_jurisdiction": "US_market_vehicles",
+        "declared_license": "public_nhtsa_data_under_site_terms",
+        "declared_rights": "automated_traffic_rate_control; VIN_decoding_best_for_model_year_1981_forward; manufacturer-reported data caveat",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://vpic.nhtsa.dot.gov/api/",
+          "https://vpic.nhtsa.dot.gov/"
+        ],
+        "publisher_name": "National Highway Traffic Safety Administration",
+        "publisher_url": "https://vpic.nhtsa.dot.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://vpic.nhtsa.dot.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://vpic.nhtsa.dot.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "query_live_when VIN facts matter",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "nhtsa.vpic",
+      "source_name": "NHTSA vPIC Vehicle API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_NHTSA_VPIC",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "no_timezone_mapping",
+        "no_local_calendar_rules"
+      ],
+      "evidence_hash": "3eea816dcb34d36fd5b1d14fca21135d15b62d4c5030aa58f38c95a95969e111",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.nist.gov/pml/time-and-frequency-division/time-distribution/internet-time-service-its",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "current_utc_reference",
+          "leap_second_handling_reference"
+        ],
+        "dataset_url": "https://time.nist.gov/",
+        "declared_jurisdiction": "global_time_reference",
+        "declared_license": "not_explicitly_stated_here_likely_us_gov_public_domain_except_marks",
+        "declared_rights": "do_not_imply_endorsement",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://time.nist.gov/",
+          "https://www.nist.gov/pml/time-and-frequency-division/time-distribution/internet-time-service-its"
+        ],
+        "publisher_name": "National Institute of Standards and Technology",
+        "publisher_url": "https://www.nist.gov/pml/time-and-frequency-division/time-distribution/internet-time-service-its",
+        "redistribution_guess": "unclear",
+        "rights_url": "https://www.nist.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.nist.gov/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "live",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "nist.time",
+      "source_name": "NIST Internet Time Service",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_NIST_TIME",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "no_quality_outcomes",
+        "no_network_coverage"
+      ],
+      "evidence_hash": "38ff58ba016e7f11e86291a8bb5709e17b8240d500734e68d70c9c960364a5ce",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://npiregistry.cms.hhs.gov/api-page",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "provider_identity",
+          "npi_status",
+          "taxonomy",
+          "address_reference"
+        ],
+        "dataset_url": "https://npiregistry.cms.hhs.gov/api-page",
+        "declared_jurisdiction": "US",
+        "declared_license": "public_data_api_no_explicit_license_reviewed",
+        "declared_rights": "200_results_per_request; skip_up_to_1000",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://npiregistry.cms.hhs.gov/api-page",
+          "https://npiregistry.cms.hhs.gov/"
+        ],
+        "publisher_name": "Centers for Medicare & Medicaid Services",
+        "publisher_url": "https://npiregistry.cms.hhs.gov/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://npiregistry.cms.hhs.gov/api-page",
+        "source_class_guess": "official_government",
+        "terms_url": "https://npiregistry.cms.hhs.gov/api-page"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "live",
+      "review_required": true,
+      "sensitive_data_risk": "moderate_public_provider_pii",
+      "source_id": "nppes",
+      "source_name": "NPPES NPI Registry API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_NPPES",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_global",
+        "radar_display_data_not_in_api"
+      ],
+      "evidence_hash": "04169c821aee68029f0fe31603ef8cd4d8074d5598b3ee5c3d8329106c6fd13d",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.weather.gov/documentation/services-web-api",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "forecast",
+          "alert",
+          "observation",
+          "zone_mapping"
+        ],
+        "dataset_url": "https://api.weather.gov/",
+        "declared_jurisdiction": "US, territories, marine_zones",
+        "declared_license": "open_data_free_to_use",
+        "declared_rights": "reasonable_rate_limits_not_public; User-Agent_required; API_key_may_replace_user_agent_in_future",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.weather.gov/",
+          "https://www.weather.gov/documentation/services-web-api"
+        ],
+        "publisher_name": "National Weather Service",
+        "publisher_url": "https://www.weather.gov/documentation/services-web-api",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.weather.gov/documentation/services-web-api",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.weather.gov/documentation/services-web-api"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "minutes_for_alerts_and_observations; hourly_for_forecasts",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "nws.api",
+      "source_name": "NWS API Web Service",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_NWS_API",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_live_labor_market_openings",
+        "license_more_complex_than_plain_cc_by_for_api_usage"
+      ],
+      "evidence_hash": "00f29af4201af330307a5fab5d5ba42e68972d9b0190c797cdb7d562b6756a64",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://services.onetcenter.org/reference/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "occupation_tasks_skills_knowledge",
+          "occupation_crosswalks",
+          "career_exploration_data"
+        ],
+        "dataset_url": "https://services.onetcenter.org/reference/",
+        "declared_jurisdiction": "US",
+        "declared_license": "CC_BY_4_0_with_web_services_specific_conditions_and_exceptions",
+        "declared_rights": "registered_developer_required; X_API_Key_header_required; web_services_license_non_transferable_for_downstream_publication; some_external_content_exceptions",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://services.onetcenter.org/reference/",
+          "https://services.onetcenter.org/"
+        ],
+        "publisher_name": "U.S. Department of Labor / National Center for O*NET Development",
+        "publisher_url": "https://services.onetcenter.org/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.onetcenter.org/license_agreements.html",
+        "source_class_guess": "official_government",
+        "terms_url": "https://services.onetcenter.org/help/license_data"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "refresh_per_onet_database_release",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "onet.ws",
+      "source_name": "O*NET Web Services",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_ONET_WS",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_full_recall_lifecycle_tracking",
+        "not_medical_advice",
+        "regulatory scope_only"
+      ],
+      "evidence_hash": "ed25c95478282c075f52578d14f69b4a26a7adc7aba8bbe8b8a536d13ae33a10",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://open.fda.gov/apis/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "drug_recall_fact",
+          "drug_shortage_presence",
+          "device_food_drug_enforcement_records",
+          "label_reference"
+        ],
+        "dataset_url": "https://api.fda.gov/",
+        "declared_jurisdiction": "US_regulated_products",
+        "declared_license": "CC0_1_0_except_marked_exceptions",
+        "declared_rights": "some_third_party_content_not_public_domain; GMDN_content_has_additional_license_limits; do_not_use_for_medical_decisions",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://api.fda.gov/",
+          "https://open.fda.gov/"
+        ],
+        "publisher_name": "U.S. Food and Drug Administration",
+        "publisher_url": "https://open.fda.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://open.fda.gov/license",
+        "source_class_guess": "official_government",
+        "terms_url": "https://open.fda.gov/terms/"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_for_shortages; weekly_for_recall_enforcement",
+      "review_required": true,
+      "sensitive_data_risk": "low_to_moderate_dataset_specific",
+      "source_id": "openfda",
+      "source_name": "openFDA",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_OPENFDA",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_property_specific_coverage",
+        "some pages_blocked_for_direct_fetch_during_review"
+      ],
+      "evidence_hash": "605639b0438d4dc142cb131bf2fe3dca0e32a09ea6bac27f4835155ed144da47",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://www.fema.gov/about/openfema/api",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "disaster_declaration",
+          "ipaws_archived_alerts",
+          "program_dataset_reference"
+        ],
+        "dataset_url": "https://www.fema.gov/about/openfema/api",
+        "declared_jurisdiction": "US, territories, tribal_where_applicable",
+        "declared_license": "fema_terms_conditions_public_dataset_program",
+        "declared_rights": "citation_requirements; dataset_specific_scope",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://www.fema.gov/about/openfema/api",
+          "https://www.fema.gov/about/openfema/data-sets"
+        ],
+        "publisher_name": "Federal Emergency Management Agency",
+        "publisher_url": "https://www.fema.gov/about/openfema/data-sets",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://www.fema.gov/about/openfema/data-sets",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.fema.gov/about/openfema/terms-conditions"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "daily_or_event_driven",
+      "review_required": true,
+      "sensitive_data_risk": "low_to_moderate_dataset_specific",
+      "source_id": "openfema",
+      "source_name": "OpenFEMA API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_OPENFEMA",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_official",
+        "quality_varies",
+        "not_suitable_for_unrestricted_public_domain_pack_outputs"
+      ],
+      "evidence_hash": "91a180045b140c9ca6539841d23135ffb9bc48e541797df6ad17ea562c275a08",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://wiki.openstreetmap.org/wiki/Planet.osm/diffs",
+        "authority_class_guess": "open_knowledge_graph",
+        "claim_class_guess": [
+          "street_and_poi_reference",
+          "routing_graph_input",
+          "building_and_feature_reference"
+        ],
+        "dataset_url": "https://planet.openstreetmap.org/",
+        "declared_jurisdiction": "global",
+        "declared_license": "ODbL_1_0",
+        "declared_rights": "attribution_required; share_alike_on_derivative_database; licensing_obligations_can_propagate",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://planet.openstreetmap.org/",
+          "https://www.openstreetmap.org/"
+        ],
+        "publisher_name": "OpenStreetMap contributors / OpenStreetMap Foundation",
+        "publisher_url": "https://www.openstreetmap.org/",
+        "redistribution_guess": "open_with_attribution",
+        "rights_url": "https://wiki.openstreetmap.org/wiki/Legal_FAQ",
+        "source_class_guess": "open_knowledge_graph",
+        "terms_url": "https://osmfoundation.org/wiki/Licence/Attribution_Guidelines"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "use_daily_or_faster_replication_if_osm_is_core",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "osm",
+      "source_name": "OpenStreetMap",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_OSM",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": true,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_restaurant_menu_truth_by_default",
+        "not_personalized_nutrition_advice"
+      ],
+      "evidence_hash": "0c156ecaca040430721536b896086a17c9e21c7707b6196b543c6c5eab292707",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://fdc.nal.usda.gov/data-documentation",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "nutrient_value",
+          "food_identity",
+          "food_component_reference",
+          "branded_food_label_reference"
+        ],
+        "dataset_url": "https://fdc.nal.usda.gov/api-guide",
+        "declared_jurisdiction": "US_primary, global_branded_partial",
+        "declared_license": "CC0_1_0_public_domain",
+        "declared_rights": "api credential required; data_type_update_cadence_varies; branded_data_originates_from_labels_or_partnerships",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://fdc.nal.usda.gov/api-guide",
+          "https://fdc.nal.usda.gov/"
+        ],
+        "publisher_name": "U.S. Department of Agriculture",
+        "publisher_url": "https://fdc.nal.usda.gov/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://fdc.nal.usda.gov/",
+        "source_class_guess": "official_government",
+        "terms_url": "https://fdc.nal.usda.gov/api-guide"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "refresh_by_data_type schedule; branded_monthly",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "usda.fdc",
+      "source_name": "USDA FoodData Central",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_USDA_FDC",
+      "update_cadence": ""
+    },
+    {
+      "api_key_required": false,
+      "blocking_reasons": [
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "api_governance_review_required",
+        "owner_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_authority_allowed": false,
+      "coverage_gaps": [
+        "not_building_damage_truth",
+        "review_status_varies_by_event"
+      ],
+      "evidence_hash": "f9ae83b873db3a05d5457805f2cb6d0174b029678f4215379843e34cdd1da852",
+      "frontier_candidate_source": {
+        "api_docs_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "authority_class_guess": "official_government",
+        "claim_class_guess": [
+          "earthquake_event_fact",
+          "magnitude_time_place",
+          "feed_geojson"
+        ],
+        "dataset_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "declared_jurisdiction": "global",
+        "declared_license": "US_gov_public_domain",
+        "declared_rights": "query_limit_20000_results",
+        "discovery_method": "deep_research_seed",
+        "distribution_urls": [
+          "https://earthquake.usgs.gov/fdsnws/event/1/"
+        ],
+        "publisher_name": "U.S. Geological Survey",
+        "publisher_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "redistribution_guess": "clearly_open",
+        "rights_url": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
+        "source_class_guess": "official_government",
+        "terms_url": "https://www.usgs.gov/faqs/are-usgs-reportspublications-copyrighted"
+      },
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "rate_limits": "",
+      "recommended_freshness_sla": "minutes",
+      "review_required": true,
+      "sensitive_data_risk": "low",
+      "source_id": "usgs.eq",
+      "source_name": "USGS Earthquake Catalog API",
+      "status_ceiling": "candidate_only",
+      "submitted_source_id": "SRC_USGS_EQ",
+      "update_cadence": ""
+    }
+  ]
+}

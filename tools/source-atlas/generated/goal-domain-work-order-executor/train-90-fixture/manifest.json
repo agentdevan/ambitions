@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "mode_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_lanes_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_stages_can_complete_without_live_or_execute",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_gates_remain_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upstream_gates_remain_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "executor_performs_no_live_write_claim_pack_r2_or_native_operations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainWorkOrderExecutorManifest.v1",
+  "mode": "fixture",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not native activation proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "executionRecords": "12035d0e4cfe1dfac3d028fbc6a8d5fbd5c533716af5c0cf31b5a9e7792457ba",
+    "executorReport": "f61f243394481e39f0c2a7163fe7cab37e0d225583b33a78a18e6aa40820deda",
+    "manifest": "a68656571d4200a093fa27737ed28dde5ff6cbb75391ea2d223d54504fae4a06"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/closeout.md",
+    "executionRecords": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/execution-records.json",
+    "executorReport": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/work-order-executor-report.json",
+    "manifest": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionLanesManifestPath": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/manifest.json",
+  "recordCounts": {
+    "blockedConfiguredFrontier": 0,
+    "blockedReviewRequired": 8,
+    "blockedUpstreamEvidenceRequired": 14,
+    "claims": 0,
+    "completedDryRunChecks": 0,
+    "completedFixtureChecks": 8,
+    "executeOperations": 0,
+    "executionRecords": 30,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "registryWriteOperations": 0,
+    "workOrders": 30
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; fixture/dry-run work-order executor only",
+  "status": "Source Green for goal-domain work-order fixture executor",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-work-order-executor-train-90"
+}

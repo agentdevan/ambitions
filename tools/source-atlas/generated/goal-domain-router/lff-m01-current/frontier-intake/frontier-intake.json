@@ -1,0 +1,156 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_institution",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.c7f392fa86635909",
+      "candidate_score": 30,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [],
+      "dataset_url": "",
+      "declared_jurisdiction": "",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-07-01T00:00:00Z",
+      "discovery_method": "manual_submission",
+      "distribution_urls": [],
+      "domain_guess": "space_weather_public_reference",
+      "evidence_hash": "c6318afc68e49a9822f6653125aa71c550c27138153ff42767215986ea0889e8",
+      "frontier_id": "space_weather_public_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "unknown-candidate-space-weather",
+      "publisher_name": "",
+      "publisher_url": "",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "unknown",
+      "terms_url": ""
+    }
+  ],
+  "createdAt": "2026-07-01T00:00:00Z",
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/goal-domain-router/lff-m01-current/candidate-intake-input.json",
+  "kind": "ambitions.sourceAtlas.frontierIntake.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "proposalSummaries": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "space_weather_public_reference",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "unknown-candidate-space-weather",
+      "review_required": true,
+      "status": "candidate_only"
+    }
+  ],
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.c7f392fa86635909"
+      ],
+      "claim_classes": [
+        "public_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "space_weather_public_reference",
+      "excluded_sources": [],
+      "freshness_slas": [],
+      "frontier_id": "space_weather_public_reference",
+      "goal_intent_classes": [
+        "space_weather_public_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate-only route from goal-domain router"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "unknown-candidate-space-weather",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "institutional_public_page",
+        "official_public_source"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ],
+  "recordCounts": {
+    "candidateSources": 1,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 1,
+    "proposedFrontiers": 1,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

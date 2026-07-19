@@ -1,0 +1,59 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "relationships_family",
+      "entity_id": "public_entity.1c54542bc0104733",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "The Administration for Children and Families publishes Healthy Marriage public program reference context for family and relationship education services, not therapy, legal advice, eligibility approval, relationship judgment, or a personalized relationship plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "acf.healthy_marriage_fatherhood"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "relationships_family",
+      "entity_id": "public_entity.1fd4f43f19882406",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "The Administration for Children and Families publishes Responsible Fatherhood public program reference context for family services and education, not custody advice, legal advice, therapy, eligibility approval, or a private family profile.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "acf.healthy_marriage_fatherhood"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "relationships_family",
+      "entity_id": "public_entity.5df74652d4fe8141",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Child Welfare Information Gateway publishes official public family-support and child-welfare information resources as sensitive support reference context, not legal custody advice, child protection advice, emergency intervention, therapy, or personalized family assessment.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "childwelfare.family_support"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "relationships_family",
+      "entity_id": "public_entity.9ee3706d2fcb51e9",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "CDC Positive Parenting Tips publishes age-based public parenting education context for general family reference only, not therapy, diagnosis, legal custody advice, a personalized parenting plan, or a judgment about a private relationship.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "cdc.positive_parenting"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "relationships_family",
+      "entity_id": "public_entity.b01ce76813332b94",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "CDC child development and positive parenting reference material can support local source inspection for general family context, not clinical treatment, emergency advice, child protection decisions, custody advice, or a personalized family assessment.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "cdc.positive_parenting"
+    }
+  ]
+}

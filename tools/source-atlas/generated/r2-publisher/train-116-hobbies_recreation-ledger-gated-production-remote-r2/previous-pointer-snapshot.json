@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": 1708,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+    "sha256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207"
+  },
+  "lastKnownGood": {
+    "bytes": 1247,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+    "sha256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "id": "AMB-1737",
+  "title": "Today Flagship Acceptance",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "61f43c345a1471deda275efc2c0e9d270f4e3a8d",
+  "scope": [
+    "Today source acceptance",
+    "Reality Meridian source evidence",
+    "Start here source evidence",
+    "capacity and reflow source evidence",
+    "proof and receipt source evidence",
+    "closure language cleanup"
+  ],
+  "source_changes": {
+    "changed_source_file_count": 5,
+    "change_type": "string-only Today closure language cleanup",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "model_enum_cases_changed": false,
+    "source_paths_moved": false
+  },
+  "acceptance_map": [
+    {
+      "criterion": "Today root / Reality Meridian",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/DayRailViewState.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Start Here / primary next action",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/TodayPanels+06-TodayPrimaryActionButton.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Useful without account sign-in",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureSnapshot.swift",
+        "Native/Ambitions/Surfaces/Today/TodayViewModel.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Captured items surface in intake/review lane",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector03-deeperSections.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Capacity/reflow feedback",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector02-contractEntries.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Proof/receipt inspection details",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift",
+        "Native/Ambitions/Surfaces/Today/Overlays/TodayActionClosureSheet.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/TodayReceiptCommandService.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionReceiptProofLedgerModels.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Empty, loading, error, offline, and completed-day states",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/ProductObjects/TodayRealityMeridianRows.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector03-deeperSections.swift",
+        "Native/Ambitions/Surfaces/Today/TodayViewModel.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/AsyncViewState.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift"
+      ],
+      "status": "source_present"
+    }
+  ],
+  "truth_claims": {
+    "allowed": [
+      "Today has source and projection evidence for a local Reality Meridian / Start here flow.",
+      "Today has source-level capture, capacity, recovery, proof, receipt, and degraded-state routes.",
+      "Today closure language was aligned to current locked copy for Still counts and Not needed."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "Runtime Green",
+      "Interaction Green",
+      "Release Green",
+      "screenshot proof",
+      "focused UI journey test proof",
+      "VoiceOver proof",
+      "Dynamic Type proof",
+      "Reduce Motion proof",
+      "Reduce Transparency proof",
+      "High Contrast proof",
+      "simulator proof",
+      "device proof",
+      "AMB-1479 closure"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Surfaces/Today",
+      "Core/LocalRuntimeOS/Inspection"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/today-flagship-acceptance.md",
+      "docs/audits/today-flagship-acceptance.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "AMB-1479 remains the visual-spec authority blocker."
+    ],
+    "next_repair_train": "AMB-1479 visual-spec authority repair; AMB-1744/AMB-1765 screenshot/device proof.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

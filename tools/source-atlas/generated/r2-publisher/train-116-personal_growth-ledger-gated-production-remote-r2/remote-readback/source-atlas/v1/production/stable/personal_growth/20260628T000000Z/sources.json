@@ -1,0 +1,84 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_institution",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "medlineplus_public_domain_topic_summary",
+      "non_claims": [
+        "not mental health treatment",
+        "not diagnosis",
+        "not clinical advice",
+        "not therapy",
+        "not emergency advice",
+        "not a personalized wellness plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "nih.medlineplus.wellness",
+      "source_name": "MedlinePlus wellness and lifestyle health topic summaries"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "scholarly_metadata",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "global",
+      "license_id": "openalex_cc0_metadata",
+      "non_claims": [
+        "not normative authority",
+        "not medical advice",
+        "not diagnosis",
+        "not treatment",
+        "not therapy",
+        "not high-volume approval",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed",
+      "redistribution_policy": "redistributable",
+      "review_status": "reviewed",
+      "source_id": "openalex.personal_growth_research",
+      "source_name": "OpenAlex personal-growth scholarly metadata reference"
+    }
+  ]
+}

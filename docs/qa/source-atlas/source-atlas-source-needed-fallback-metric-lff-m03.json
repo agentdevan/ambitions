@@ -1,0 +1,149 @@
+{
+  "allowedClaims": [
+    "source_needed_fallback_metric_measured",
+    "source_needed_fallback_under_5_percent_met"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "continuous_missing_shard_expansion",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "launch_floor_complete",
+    "outside_legal_approval",
+    "private_life_graph_in_source_atlas_or_r2",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "testflight_readiness"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "inputs_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "lawful_goal_denominator_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_needed_fallback_under_5_percent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_shard_events_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "schema_valid",
+      "passed": true
+    }
+  ],
+  "coverageLabelCounts": {
+    "candidate_only": 50,
+    "covered": 49800,
+    "insufficient_source": 50,
+    "source_needed": 50,
+    "stale_source": 50
+  },
+  "createdAt": "2026-07-01T00:00:00Z",
+  "evidencePaths": {
+    "goldenIntentCorpusReport": "docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json",
+    "missingShardEventLedger": "tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current/missing-shard-event-ledger.json",
+    "normalizedCorpus": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l02-current/launch-floor-golden-intent-corpus.json",
+    "previousMetric": null
+  },
+  "fallbackRate": 0.004,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.sourceNeededFallbackMetric.v1",
+  "metricID": "source_atlas.source_needed_fallback_metric.a33da817e1ec0c3e",
+  "nonClaims": [
+    "not launch-floor complete",
+    "not continuous missing-shard expansion proof by itself",
+    "not final user plans, schedules, or Steps",
+    "not private goal routing",
+    "not R2 production promotion proof",
+    "not Release Green, App Store readiness, TestFlight readiness, outside legal approval, or owner approval",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "markdownPayload": "ac895cc31db306f03959fa307f87a43b2b912a2eb2cdfd80654f38da20867cfd",
+    "missingShardEvents": "1ad76e742f26f2b2e71b46406c7d6a880d36d86f24206bffd0d06f7d4d232e0a",
+    "reportPayload": "3d8941fea125bd4bf4cb46b7e0e050ab6f46a0377d4d6420d7edbd71905e663b"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current/closeout.md",
+    "emitEvidence": "docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json",
+    "emitMarkdown": "docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.md",
+    "emitMissingShardEvents": "docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json",
+    "markdown": "tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current/source-needed-fallback-metric.md",
+    "missingShardEvents": "tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current/missing-shard-event-ledger.json",
+    "report": "tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current/source-needed-fallback-metric.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "recordCounts": {
+    "candidateOnlyFallbacks": 50,
+    "coveredLawfulGoals": 49800,
+    "finalOutputsGenerated": 0,
+    "illegalOutOfScopeControlsExcluded": 500,
+    "insufficientSourceFallbacks": 50,
+    "intentRecordsEvaluated": 51000,
+    "lawfulGoalDenominator": 50000,
+    "lawfulGoals": 50000,
+    "missingDomainFallbacks": 50,
+    "missingFreshnessFallbacks": 50,
+    "missingShardEventsEmitted": 200,
+    "missingShardFallbacks": 50,
+    "privacyIssues": 0,
+    "privateBlockedControlsExcluded": 500,
+    "sourceNeededFallbackNumerator": 200,
+    "sourceNeededFallbackRateBps": 40.0,
+    "sourceNeededFallbacks": 200,
+    "staleSourceFallbacks": 50
+  },
+  "regression": {
+    "currentDenominator": 50000,
+    "currentNumerator": 200,
+    "currentRate": 0.004,
+    "delta": null,
+    "previousDenominator": null,
+    "previousMetricPresent": false,
+    "previousNumerator": null,
+    "previousRate": null,
+    "regressionStatus": "no_previous_metric"
+  },
+  "runLabel": "current",
+  "schemaVersion": 1,
+  "sourceNeededCauseCounts": {
+    "insufficient_public_source": 50,
+    "missing_domain": 50,
+    "missing_freshness": 50,
+    "missing_shard": 50,
+    "not_required": 49800
+  },
+  "sourceNeededFallbackUnder5Percent": true,
+  "status": "Source Green for source-needed fallback metric",
+  "targetStatus": {
+    "lawfulGoalDenominatorPresent": true,
+    "missingShardEventsEmitted": true,
+    "privateAndUnlawfulControlsExcluded": true,
+    "sourceNeededFallbackNumeratorPresent": true,
+    "sourceNeededFallbackUnder5Percent": true
+  },
+  "valid": true,
+  "versionID": "source-atlas-source-needed-fallback-metric-lff-m03-l03"
+}

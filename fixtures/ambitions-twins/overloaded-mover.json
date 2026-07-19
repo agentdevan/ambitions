@@ -1,0 +1,16 @@
+{
+  "id": "overloaded-mover",
+  "goals": [
+    {"title": "Move apartments without losing work stability", "state": "active", "privacy": "private"}
+  ],
+  "captures": [
+    {"text": "Call movers about elevator reservation", "state": "needs_place"}
+  ],
+  "time_context": {"capacity": "overloaded", "constraints": ["packing", "lease deadline", "work calls"]},
+  "proof_receipts": [{"kind": "call_note", "state": "missing"}],
+  "recovery_state": {"mode": "degraded_manual_mode", "tone": "calm"},
+  "privacy_mode": "redacted_external",
+  "source_freshness_state": {"state": "stale", "review_required": true},
+  "accessibility_variant": {"dynamic_type": "accessibility_xl", "reduce_motion": true},
+  "expected_surface_states": {"Today": "overloaded", "Goals": "recovery", "Capture": "normal", "Time": "degraded", "You": "privacy_review"}
+}

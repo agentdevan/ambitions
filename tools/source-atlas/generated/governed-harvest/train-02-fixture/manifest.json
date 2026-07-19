@@ -1,0 +1,273 @@
+{
+  "apiPolicies": [
+    "api.bls_public_data.v1",
+    "api.onet_public_database.v1",
+    "api.openalex_snapshot.v1",
+    "api.usajobs_lookup_only.v1",
+    "api.wikidata_crosswalk.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 2
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.bls_public_data.v1",
+      "dailyBudgetLimit": 200,
+      "maxPagesPerRun": 10,
+      "maxRecordsPerRun": 1000,
+      "monthlyBudgetLimit": 2000,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "bls.public.data.api"
+    },
+    {
+      "apiPolicyID": "api.onet_public_database.v1",
+      "dailyBudgetLimit": 20,
+      "maxPagesPerRun": 3,
+      "maxRecordsPerRun": 25000,
+      "monthlyBudgetLimit": 200,
+      "rateLimitPerMinute": 10,
+      "rateLimitPerSecond": 1,
+      "sourceID": "onet.database"
+    },
+    {
+      "apiPolicyID": "api.openalex_snapshot.v1",
+      "dailyBudgetLimit": 1,
+      "maxPagesPerRun": 1,
+      "maxRecordsPerRun": 100000,
+      "monthlyBudgetLimit": 4,
+      "rateLimitPerMinute": 1,
+      "rateLimitPerSecond": 1,
+      "sourceID": "openalex.dataset"
+    },
+    {
+      "apiPolicyID": "api.usajobs_lookup_only.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 5,
+      "maxRecordsPerRun": 250,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 20,
+      "rateLimitPerSecond": 1,
+      "sourceID": "usajobs.search"
+    },
+    {
+      "apiPolicyID": "api.wikidata_crosswalk.v1",
+      "dailyBudgetLimit": 100,
+      "maxPagesPerRun": 9,
+      "maxRecordsPerRun": 100,
+      "monthlyBudgetLimit": 1000,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "wikidata.crosswalk"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "bls_public_labor_adapter",
+      "blockedReasons": [],
+      "claimCount": 9,
+      "evidencePath": "evidence/bls.public.data.api.json",
+      "evidenceSHA256": "0e22401e804b35470f65f21eec5d04b12f0aed09bba7abcfd037b7cb76396759",
+      "normalizedPath": "normalized/bls.public.data.api.json",
+      "normalizedSHA256": "f28b99a251261c8ddb559ed8f4541bd272f146a0c3fd41b106cedea252e81243",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "bls.public.data.api",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "onet_public_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 10,
+      "evidencePath": "evidence/onet.database.json",
+      "evidenceSHA256": "43561c77a566323bd5dfe1d58c26c9c7d7b005adf170e00abe3ba24fb37ff136",
+      "normalizedPath": "normalized/onet.database.json",
+      "normalizedSHA256": "09a39f3ef9033e1cd08bdf54f3bfe61a6c15d575fed7560095afbdcec29b0a6a",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "onet.database",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "openalex_research_context_adapter",
+      "blockedReasons": [],
+      "claimCount": 9,
+      "evidencePath": "evidence/openalex.dataset.json",
+      "evidenceSHA256": "c2708a44c40d6ab3d07a8c704d6bb3a7097e0a7982092dd49b72c2640a303b24",
+      "normalizedPath": "normalized/openalex.dataset.json",
+      "normalizedSHA256": "97d2d6241b1752046d52283397610e80e688a39c8f42e598678ad92ad6eacea6",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed",
+      "recordCount": 0,
+      "sourceID": "openalex.dataset",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "restricted_source_policy_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/usajobs.search.json",
+      "evidenceSHA256": "cb89244b06961f28720b536eb31ff2383f33dc92f54dffd56a49f142a7b4016b",
+      "normalizedPath": "normalized/usajobs.search.json",
+      "normalizedSHA256": "9a1c1f7327f668d6b75b11f5027e3537ec09cbae3d1fa61edc787c40db9ab612",
+      "packCandidateCount": 0,
+      "r2PackPolicy": "pack_blocked_restricted",
+      "recordCount": 0,
+      "sourceID": "usajobs.search",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "wikidata_crosswalk_adapter",
+      "blockedReasons": [],
+      "claimCount": 10,
+      "evidencePath": "evidence/wikidata.crosswalk.json",
+      "evidenceSHA256": "dd4fc501b22153cca1ccf15376e533af038f7d1acab6f13f64ffb59445340035",
+      "normalizedPath": "normalized/wikidata.crosswalk.json",
+      "normalizedSHA256": "09c4c39a5ae636323b936329af45e08e8ab5d3c7da660f7f65b70b31b4fb10cc",
+      "packCandidateCount": 0,
+      "r2PackPolicy": "pack_blocked_crosswalk_only",
+      "recordCount": 0,
+      "sourceID": "wikidata.crosswalk",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "e39ce381a4d2aafc28a73e74714b1268b0c43428d9afe6cd6431a5d6a754a243",
+      "sha256": "0e22401e804b35470f65f21eec5d04b12f0aed09bba7abcfd037b7cb76396759",
+      "sourceID": "bls.public.data.api"
+    },
+    {
+      "evidenceHash": "80d2c73e814a83799c7bcf6a1c8dd11fc2441853487d111f8ec121d35958655e",
+      "sha256": "43561c77a566323bd5dfe1d58c26c9c7d7b005adf170e00abe3ba24fb37ff136",
+      "sourceID": "onet.database"
+    },
+    {
+      "evidenceHash": "59dd1aca39bb410ee92025bac93e85bf5739e2fe4348f26d7fb2f58dffc55336",
+      "sha256": "c2708a44c40d6ab3d07a8c704d6bb3a7097e0a7982092dd49b72c2640a303b24",
+      "sourceID": "openalex.dataset"
+    },
+    {
+      "evidenceHash": "7bf5e6a4fac0c80edceaaf19f5c331515ee0dddde0ae1473d954997226b34f84",
+      "sha256": "cb89244b06961f28720b536eb31ff2383f33dc92f54dffd56a49f142a7b4016b",
+      "sourceID": "usajobs.search"
+    },
+    {
+      "evidenceHash": "090815ff278bd08d8523f286834de4c90c8c7a24c538b4be7f32ac237bf9ec5d",
+      "sha256": "dd4fc501b22153cca1ccf15376e533af038f7d1acab6f13f64ffb59445340035",
+      "sourceID": "wikidata.crosswalk"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-27T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "ab8895ab545b48852668b3c1179941c7aacc17e24a9c254c0356ac4140df8fba",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-02-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/bls.public.data.api.json",
+    "evidence/bls.public.data.api.json",
+    "normalized/onet.database.json",
+    "evidence/onet.database.json",
+    "normalized/openalex.dataset.json",
+    "evidence/openalex.dataset.json",
+    "normalized/usajobs.search.json",
+    "evidence/usajobs.search.json",
+    "normalized/wikidata.crosswalk.json",
+    "evidence/wikidata.crosswalk.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 39,
+    "packCandidates": 3,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 5,
+    "sourcesSelected": 5
+  },
+  "restrictedExclusions": [
+    {
+      "r2PackPolicy": "pack_blocked_restricted",
+      "reason": "source lane is not pack-allowed or has policy blockers",
+      "redistributionPolicy": "lookup_only",
+      "sourceID": "usajobs.search"
+    },
+    {
+      "r2PackPolicy": "pack_blocked_crosswalk_only",
+      "reason": "source lane is not pack-allowed or has policy blockers",
+      "redistributionPolicy": "crosswalk_only",
+      "sourceID": "wikidata.crosswalk"
+    }
+  ],
+  "runID": "train-02-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "bls.public.data.api",
+    "onet.database",
+    "openalex.dataset",
+    "usajobs.search",
+    "wikidata.crosswalk"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

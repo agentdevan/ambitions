@@ -1,0 +1,53 @@
+{
+  "approval_required": true,
+  "claim_ceiling": "Authorization proof for the exact synthetic CloudKit continuity scope only; no privacy/legal, production CloudKit, Runtime, or Release Green.",
+  "expected_failure_codes": {
+    "absent_finalization": "BENCHMARK_FINALIZATION_MISSING",
+    "base_movement": "AUTH_BASE_MOVED",
+    "command_manifest_drift": "AUTH_VALIDATION_MISMATCH",
+    "final_diff_drift": "AUTH_EVENT_STALE",
+    "head_replacement": "AUTH_EVENT_STALE",
+    "local_substitution": "AUTH_LOCAL_NOT_MERGE_AUTHORITY",
+    "missing_intake": "AUTH_INTAKE_FIELDS",
+    "re_attested_untrusted_green": "AUTH_VALIDATION_UNTRUSTED",
+    "stale_envelope": "AUTH_ENVELOPE_STALE",
+    "stale_intake": "AUTH_INTAKE_STALE",
+    "stale_skill": "AUTH_SNAPSHOT_STALE",
+    "workflow_drift": "AUTH_VALIDATION_MISMATCH"
+  },
+  "operations": [
+    {
+      "content": "struct CloudKitContinuityAuthorizationBenchmark {}\n",
+      "kind": "write",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityAuthorizationBenchmark.swift"
+    }
+  ],
+  "proof_obligations": [
+    "focused-tests",
+    "independent-review",
+    "offline-determinism",
+    "privacy-continuity-proof"
+  ],
+  "requested_changed_files": [
+    "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityAuthorizationBenchmark.swift"
+  ],
+  "requirement_ids": [
+    "SYSTEM-CONTINUITY-SEPARATION-001"
+  ],
+  "required_checks": [
+    "gate-b-cloudkit-continuity"
+  ],
+  "scenario_id": "cloudkit-continuity",
+  "schema_version": 1,
+  "scope": [
+    "system.continuity.user-owned-cloudkit"
+  ],
+  "skill_adapters": [
+    "ambitions-architecture-tree-enforcement",
+    "ambitions-release-proof-honesty",
+    "ambitions-runtime-contract-engineering",
+    "ambitions-source-truth-authority"
+  ],
+  "task_type": "privacy",
+  "title": "CloudKit continuity"
+}

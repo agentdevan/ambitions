@@ -1,0 +1,192 @@
+{
+  "apiPolicies": [
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "ready.gov.kit"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "energy.gov.energy_saver"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "usa.gov.home_repair"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "ready_gov_emergency_kit_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/ready.gov.kit.json",
+      "evidenceSHA256": "4be90db0bf431b3e40b680bd2912c30ea660370c6c749ce6069f27aee9c5132f",
+      "normalizedPath": "normalized/ready.gov.kit.json",
+      "normalizedSHA256": "c06b33a1a32248e791f0052b03f6d1eadebc4f6ac66f4d0f8401752fa14330e8",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "ready.gov.kit",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "energy_gov_energy_saver_adapter",
+      "blockedReasons": [],
+      "claimCount": 2,
+      "evidencePath": "evidence/energy.gov.energy_saver.json",
+      "evidenceSHA256": "1f6097129477fa58d3a41e482fa51cfe6e8defe6e36029015cce086d32b61285",
+      "normalizedPath": "normalized/energy.gov.energy_saver.json",
+      "normalizedSHA256": "bd6aae29c1bcaf5d732512528f510d5563fc3acf7b12743b7e25c09dc8a82437",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "energy.gov.energy_saver",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "usagov_home_repair_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/usa.gov.home_repair.json",
+      "evidenceSHA256": "5311d0c0880c36698502fffeceff84691708fb232ef56ef362622e9d6b8c1039",
+      "normalizedPath": "normalized/usa.gov.home_repair.json",
+      "normalizedSHA256": "77ad24965816ff6a9026c4dd9279cf5470aae478b781df0d7d91fd9eccffff85",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "usa.gov.home_repair",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "8c139a7f2b6b919a96b8f4a8ea4963292ca64bb626ce250d0fef49ed504f3634",
+      "sha256": "4be90db0bf431b3e40b680bd2912c30ea660370c6c749ce6069f27aee9c5132f",
+      "sourceID": "ready.gov.kit"
+    },
+    {
+      "evidenceHash": "4053ad4166fee6689670c721ca3f4bd673cb2d6183e65af8163f5311a5fc8e4c",
+      "sha256": "1f6097129477fa58d3a41e482fa51cfe6e8defe6e36029015cce086d32b61285",
+      "sourceID": "energy.gov.energy_saver"
+    },
+    {
+      "evidenceHash": "986dacf4f2e75b2a6605477ede2b73774dc192bc62d12243c7b57c251077c0a1",
+      "sha256": "5311d0c0880c36698502fffeceff84691708fb232ef56ef362622e9d6b8c1039",
+      "sourceID": "usa.gov.home_repair"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "bef4dd5b216c11650bb024555ca611b2edbb4c0b862a59849262f3b071313053",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-48-home-life-admin-fixture/train-48-home-life-admin-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/ready.gov.kit.json",
+    "evidence/ready.gov.kit.json",
+    "normalized/energy.gov.energy_saver.json",
+    "evidence/energy.gov.energy_saver.json",
+    "normalized/usa.gov.home_repair.json",
+    "evidence/usa.gov.home_repair.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 4,
+    "packCandidates": 3,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 3,
+    "sourcesSelected": 3
+  },
+  "restrictedExclusions": [],
+  "runID": "train-48-home-life-admin-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "ready.gov.kit",
+    "energy.gov.energy_saver",
+    "usa.gov.home_repair"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

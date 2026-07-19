@@ -1,0 +1,94 @@
+{
+  "blockedReviewCompletions": [
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.e8b59b9d072ebf49",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.4594db448db14d5b",
+      "packetID": "source_atlas_goal_domain_review_packet.48950138cdd652f9",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "direct_source_authority_resolution",
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.aa073480449f32c8",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.6ecddcacc172a148",
+      "packetID": "source_atlas_goal_domain_review_packet.6e1338bfad0ceaed",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "source_lane_governance",
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.a65916f66842be04",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.19c19add6d47c068",
+      "packetID": "source_atlas_goal_domain_review_packet.bcc6e1138b62b506",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "legal_terms_review",
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.8101c4acd8dba8c7",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.fe96b0b860bbd33d",
+      "packetID": "source_atlas_goal_domain_review_packet.a7108c4e85c9d74f",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "api_governance_review",
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "kind": "ambitions.sourceAtlas.blockedGoalDomainReviewCompletions.v1"
+}

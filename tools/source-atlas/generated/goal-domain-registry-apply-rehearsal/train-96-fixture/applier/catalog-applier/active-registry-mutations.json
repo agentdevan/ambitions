@@ -1,0 +1,74 @@
+{
+  "activeRegistryMutations": [
+    {
+      "active_registry_written": true,
+      "api_policy_id": "api.fixture_goal_domain_ambiguous_public_program_reference.v1",
+      "candidate_id": "ambiguous-public-program-reference",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "business_entrepreneurship",
+      "intake_id": "source_atlas_goal_domain_review_bundle.6df7d4db56f369d8",
+      "license_id": "fixture.goal_domain.ambiguous_public_program_reference.terms",
+      "mutation_id": "source_atlas_goal_domain_registry_mutation.c5ded93a5010bb3f",
+      "non_claims": [
+        "registry metadata activation only",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "registry_hashes_after": {
+        "apiGovernanceRegistry": "612ff7c784db89b316a62340162d88a7c490f98028220eb1623537f54db1da37",
+        "legalTermsRegistry": "a5b86429482badeb3c7a583fcd4a9b77b060e0c6bfdd9ce1c4f81481a38dc23f",
+        "sourceLaneRegistry": "3c7b73fecf3bb688722ff29f6800d8ae7f3bccc25ce6006d4730e3cb4f90a222"
+      },
+      "registry_hashes_before": {
+        "apiGovernanceRegistry": "12dfaacdbf2bde99581da104ec93bebbdd4ce43c654f971631f43d8a3f10dbe9",
+        "legalTermsRegistry": "77eb8c5ab28efdc9dd53e514459d5bd9e1055645b1add33d9106bdeaa4b9a59b",
+        "sourceLaneRegistry": "e125d2f2df679cc0454e0de922cc7eb68a9c3d0c85182cd6b0b15e955755e787"
+      },
+      "schema_version": "1.0.0",
+      "source_id": "fixture.goal_domain.ambiguous_public_program_reference",
+      "status": "active_registry_written",
+      "target_registry_paths": {
+        "apiGovernanceRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/api-governance-registry.json",
+        "legalTermsRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/legal-terms-registry.json",
+        "sourceLaneRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/source-lane-registry.json"
+      }
+    },
+    {
+      "active_registry_written": true,
+      "api_policy_id": "api.fixture_goal_domain_new_language_learning_public_reference.v1",
+      "candidate_id": "new-language-learning-public-reference",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "public_language_learning_reference",
+      "intake_id": "source_atlas_goal_domain_review_bundle.26d48f973e5270f6",
+      "license_id": "fixture.goal_domain.new_language_learning_public_reference.terms",
+      "mutation_id": "source_atlas_goal_domain_registry_mutation.1a5409111678293b",
+      "non_claims": [
+        "registry metadata activation only",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "registry_hashes_after": {
+        "apiGovernanceRegistry": "612ff7c784db89b316a62340162d88a7c490f98028220eb1623537f54db1da37",
+        "legalTermsRegistry": "a5b86429482badeb3c7a583fcd4a9b77b060e0c6bfdd9ce1c4f81481a38dc23f",
+        "sourceLaneRegistry": "3c7b73fecf3bb688722ff29f6800d8ae7f3bccc25ce6006d4730e3cb4f90a222"
+      },
+      "registry_hashes_before": {
+        "apiGovernanceRegistry": "12dfaacdbf2bde99581da104ec93bebbdd4ce43c654f971631f43d8a3f10dbe9",
+        "legalTermsRegistry": "77eb8c5ab28efdc9dd53e514459d5bd9e1055645b1add33d9106bdeaa4b9a59b",
+        "sourceLaneRegistry": "e125d2f2df679cc0454e0de922cc7eb68a9c3d0c85182cd6b0b15e955755e787"
+      },
+      "schema_version": "1.0.0",
+      "source_id": "fixture.goal_domain.new_language_learning_public_reference",
+      "status": "active_registry_written",
+      "target_registry_paths": {
+        "apiGovernanceRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/api-governance-registry.json",
+        "legalTermsRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/legal-terms-registry.json",
+        "sourceLaneRegistry": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/temp-registries/source-lane-registry.json"
+      }
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogActiveRegistryMutations.v1"
+}

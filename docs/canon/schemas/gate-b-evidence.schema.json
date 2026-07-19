@@ -1,0 +1,262 @@
+{
+  "$defs": {
+    "authorizationBenchmark": {
+      "additionalProperties": false,
+      "properties": {
+        "packages_root": {"minLength": 1, "type": "string"},
+        "report_path": {"minLength": 1, "type": "string"},
+        "report_sha256": {"$ref": "#/$defs/sha256"},
+        "source_sha": {"$ref": "#/$defs/gitSha"}
+      },
+      "required": ["report_path", "report_sha256", "packages_root", "source_sha"],
+      "type": "object"
+    },
+    "evidenceRegistry": {
+      "additionalProperties": false,
+      "properties": {
+        "base_sha": {"$ref": "#/$defs/gitSha"},
+        "path": {"minLength": 1, "type": "string"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "required": ["path", "sha256", "base_sha"],
+      "type": "object"
+    },
+    "gitSha": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "ownerDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_attestation_path": {"minLength": 1, "type": "string"},
+        "approval_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "approval_date": {"const": "2026-07-17"},
+        "approved": {"const": true},
+        "approved_scope": {
+          "items": false,
+          "maxItems": 5,
+          "minItems": 5,
+          "prefixItems": [
+            {"const": "Task 26 authority/routing cutover only"},
+            {"pattern": "^rollback-ref:refs/tags/.+$", "type": "string"},
+            {"pattern": "^rollback-commit-sha:[0-9a-f]{40}$", "type": "string"},
+            {"pattern": "^rollback-tree-sha:[0-9a-f]{40}$", "type": "string"},
+            {"pattern": "^rollback-restore-receipt-sha256:[0-9a-f]{64}$", "type": "string"}
+          ],
+          "type": "array",
+          "uniqueItems": true
+        },
+        "decision_id": {"const": "OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z"},
+        "delegated": {"const": false},
+        "request_path": {"minLength": 1, "type": "string"},
+        "request_sha256": {"$ref": "#/$defs/sha256"},
+        "waived_checks": {"const": false}
+      },
+      "required": ["approved", "decision_id", "approval_date", "approved_scope", "delegated", "waived_checks", "request_path", "request_sha256", "approval_attestation_path", "approval_attestation_sha256"],
+      "type": "object"
+    },
+    "protectedBoundary": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_routing_cutover_only": {"type": "boolean"},
+        "live_enforcement_proven": {"type": "boolean"},
+        "post_merge_receipt_required": {"type": "boolean"}
+      },
+      "required": ["authority_routing_cutover_only", "live_enforcement_proven", "post_merge_receipt_required"],
+      "type": "object"
+    },
+    "requirementEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_path": {"minLength": 1, "type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "authorization_path": {"minLength": 1, "type": "string"},
+        "authorization_sha256": {"$ref": "#/$defs/sha256"},
+        "approval_attestation_path": {"minLength": 1, "type": "string"},
+        "approval_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "checkout_tree_sha": {"$ref": "#/$defs/gitSha"},
+        "finalization_path": {"minLength": 1, "type": "string"},
+        "finalization_sha256": {"$ref": "#/$defs/sha256"},
+        "requirement_id": {"minLength": 1, "type": "string"},
+        "source_sha": {"$ref": "#/$defs/gitSha"},
+        "status": {"const": "green"},
+        "validation_attestation_path": {"minLength": 1, "type": "string"},
+        "validation_attestation_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "required": ["requirement_id", "status", "artifact_path", "artifact_sha256", "authorization_path", "authorization_sha256", "approval_attestation_path", "approval_attestation_sha256", "finalization_path", "finalization_sha256", "checkout_tree_sha", "source_sha", "validation_attestation_path", "validation_attestation_sha256"],
+      "type": "object"
+    },
+    "reviewDimension": {
+      "additionalProperties": false,
+      "properties": {
+        "dimension_id": {"minLength": 1, "type": "string"},
+        "verdict": {"minLength": 1, "type": "string"}
+      },
+      "required": ["dimension_id", "verdict"],
+      "type": "object"
+    },
+    "reviewEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_path": {"minLength": 1, "type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "base_sha": {"$ref": "#/$defs/gitSha"},
+        "commit_range": {"pattern": "^[0-9a-f]{40}\\.\\.[0-9a-f]{40}$", "type": "string"},
+        "critical_findings": {"minimum": 0, "type": "integer"},
+        "dimensions": {"items": {"$ref": "#/$defs/reviewDimension"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "head_sha": {"$ref": "#/$defs/gitSha"},
+        "important_findings": {"minimum": 0, "type": "integer"},
+        "review_id": {"minLength": 1, "type": "string"},
+        "review_attestation_path": {"minLength": 1, "type": "string"},
+        "review_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "reviewer_class": {"minLength": 1, "type": "string"},
+        "verdict": {"minLength": 1, "type": "string"},
+        "verdicts": {
+          "additionalProperties": false,
+          "properties": {
+            "code-quality-security": {"minLength": 1, "type": "string"},
+            "specification": {"minLength": 1, "type": "string"}
+          },
+          "required": ["specification", "code-quality-security"],
+          "type": "object"
+        }
+      },
+      "required": ["review_id", "reviewer_class", "verdict", "verdicts", "dimensions", "base_sha", "head_sha", "commit_range", "artifact_path", "artifact_sha256", "review_attestation_path", "review_attestation_sha256", "critical_findings", "important_findings"],
+      "type": "object"
+    },
+    "rollbackEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "commit_sha": {"$ref": "#/$defs/gitSha"},
+        "ref": {"minLength": 1, "type": "string"},
+        "restore_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "tag_object_sha": {"$ref": "#/$defs/gitSha"},
+        "tree_sha": {"$ref": "#/$defs/gitSha"}
+      },
+      "required": ["ref", "tag_object_sha", "commit_sha", "tree_sha", "restore_receipt_sha256"],
+      "type": "object"
+    },
+    "figmaDesignExport": {
+      "additionalProperties": false,
+      "properties": {
+        "accessibility_variants": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "artifact_path": {"minLength": 1, "type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "byte_size": {"minimum": 1, "type": "integer"},
+        "claim_ceiling": {"const": "Figma design authority only; no simulator, runtime, device, accessibility, privacy, or release proof."},
+        "evidence_kind": {"const": "figma-design-export"},
+        "figma_file_key": {"pattern": "^[A-Za-z0-9_-]+$", "type": "string"},
+        "figma_node_id": {"minLength": 1, "type": "string"},
+        "frame_id": {"minLength": 1, "type": "string"},
+        "frame_version": {"minLength": 1, "type": "string"},
+        "journey_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "media_type": {"minLength": 1, "type": "string"},
+        "merged_visual_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "object_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "screen_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "state_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "visual_requirement_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true}
+      },
+      "required": ["evidence_kind", "frame_id", "figma_file_key", "figma_node_id", "frame_version", "artifact_path", "artifact_sha256", "byte_size", "media_type", "merged_visual_ledger_sha256", "screen_ids", "state_ids", "journey_ids", "object_ids", "accessibility_variants", "visual_requirement_ids", "claim_ceiling"],
+      "type": "object"
+    },
+    "screenshotEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_path": {"minLength": 1, "type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "build_identity": {"minLength": 1, "type": "string"},
+        "byte_size": {"minimum": 1, "type": "integer"},
+        "capture_kind": {"minLength": 1, "type": "string"},
+        "device": {"minLength": 1, "type": "string"},
+        "frame_id": {"minLength": 1, "type": "string"},
+        "media_type": {"minLength": 1, "type": "string"},
+        "os_version": {"minLength": 1, "type": "string"},
+        "pixel_height": {"minimum": 1, "type": "integer"},
+        "pixel_width": {"minimum": 1, "type": "integer"},
+        "scale": {"minimum": 1, "type": "integer"},
+        "source_sha": {"$ref": "#/$defs/gitSha"},
+        "source_tree_sha": {"$ref": "#/$defs/gitSha"}
+      },
+      "required": ["frame_id", "artifact_path", "artifact_sha256", "media_type", "byte_size", "pixel_width", "pixel_height", "scale", "device", "os_version", "build_identity", "capture_kind", "source_sha", "source_tree_sha"],
+      "type": "object"
+    },
+    "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "verifier": {
+      "additionalProperties": false,
+      "properties": {
+        "base_sha": {"$ref": "#/$defs/gitSha"},
+        "base_tree_sha": {"$ref": "#/$defs/gitSha"},
+        "blob_sha256": {"$ref": "#/$defs/sha256"},
+        "check_identity": {"const": "gate-b-cutover-readiness"},
+        "integration_id": {"const": "isolated-base-checkout"},
+        "path": {"const": "tools/ambitions_canon/cutover_readiness.py"},
+        "ref": {"const": "refs/heads/main"}
+      },
+      "required": ["path", "ref", "base_sha", "base_tree_sha", "blob_sha256", "check_identity", "integration_id"],
+      "type": "object"
+    },
+    "visualOwnerApproval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_attestation_path": {"minLength": 1, "type": "string"},
+        "approval_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "canon_revision": {"minimum": 0, "type": "integer"},
+        "claim_ceiling": {"const": "Figma design authority only; no simulator, runtime, device, accessibility, privacy, or release proof."},
+        "decision_receipt_path": {"minLength": 1, "type": "string"},
+        "decision_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "delegated": {"type": "boolean"},
+        "evidence_kind": {"const": "figma-design-export"},
+        "figma_exports": {"items": {"$ref": "#/$defs/figmaDesignExport"}, "minItems": 1, "type": "array"},
+        "final_frame_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+        "gap_blocked_state_ids": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
+        "manifest_path": {"minLength": 1, "type": "string"},
+        "manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "merged_visual_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "review": {"$ref": "#/$defs/visualReview"},
+        "simulator_renders": {"items": {"$ref": "#/$defs/screenshotEvidence"}, "type": "array"},
+        "source_sha": {"$ref": "#/$defs/gitSha"}
+      },
+      "required": ["delegated", "canon_revision", "source_sha", "evidence_kind", "merged_visual_ledger_sha256", "manifest_path", "manifest_sha256", "review", "decision_receipt_path", "decision_receipt_sha256", "approval_attestation_path", "approval_attestation_sha256", "final_frame_ids", "figma_exports", "simulator_renders", "gap_blocked_state_ids", "claim_ceiling"],
+      "type": "object"
+    },
+    "visualReview": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_path": {"minLength": 1, "type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "attestation_path": {"minLength": 1, "type": "string"},
+        "attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "base_sha": {"$ref": "#/$defs/gitSha"},
+        "commit_range": {"pattern": "^[0-9a-f]{40}\\.\\.[0-9a-f]{40}$", "type": "string"},
+        "head_sha": {"$ref": "#/$defs/gitSha"}
+      },
+      "required": ["artifact_path", "artifact_sha256", "attestation_path", "attestation_sha256", "base_sha", "head_sha", "commit_range"],
+      "type": "object"
+    }
+  },
+  "$id": "https://ambitions.local/schemas/gate-b-evidence.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authorization_benchmark": {"$ref": "#/$defs/authorizationBenchmark"},
+    "bootstrap_approval_ceiling": {"const": "Gate B authorizes Task 26 authority/routing cutover by owner-approved direct integration under OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z only; exact SHA-bound local authorization, one exact high-risk review, rollback, and Gate C remain required; protected CI installation and protected enforcement are explicitly excluded, and live_enforcement_proven remains false."},
+    "canon_manifest_path": {"minLength": 1, "type": "string"},
+    "canon_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "canon_revision": {"minimum": 0, "type": "integer"},
+    "evidence_registry": {"$ref": "#/$defs/evidenceRegistry"},
+    "evidence_revision": {"minLength": 1, "type": "string"},
+    "expected_base_sha": {"$ref": "#/$defs/gitSha"},
+    "gate_b_requested_state": {"minLength": 1, "type": "string"},
+    "owner_decision": {"$ref": "#/$defs/ownerDecision"},
+    "protected_boundary": {"$ref": "#/$defs/protectedBoundary"},
+    "requirements": {"items": {"$ref": "#/$defs/requirementEvidence"}, "type": "array"},
+    "reviews": {"items": {"$ref": "#/$defs/reviewEvidence"}, "minItems": 1, "type": "array"},
+    "rollback": {"$ref": "#/$defs/rollbackEvidence"},
+    "schema_version": {"const": 1},
+    "source_sha": {"$ref": "#/$defs/gitSha"},
+    "source_tree_sha": {"$ref": "#/$defs/gitSha"},
+    "verifier": {"$ref": "#/$defs/verifier"},
+    "visual_owner_approval": {"$ref": "#/$defs/visualOwnerApproval"}
+  },
+  "required": ["schema_version", "evidence_revision", "canon_revision", "canon_manifest_path", "canon_manifest_sha256", "source_sha", "source_tree_sha", "expected_base_sha", "gate_b_requested_state", "bootstrap_approval_ceiling", "evidence_registry", "verifier", "requirements", "authorization_benchmark", "reviews", "owner_decision", "rollback", "protected_boundary", "visual_owner_approval"],
+  "title": "Ambitions Gate B Evidence",
+  "type": "object"
+}

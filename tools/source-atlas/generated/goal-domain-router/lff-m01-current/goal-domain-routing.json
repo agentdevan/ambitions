@@ -1,0 +1,160 @@
+{
+  "candidateIntake": {
+    "inputPath": "tools/source-atlas/generated/goal-domain-router/lff-m01-current/candidate-intake-input.json",
+    "manifestPath": "tools/source-atlas/generated/goal-domain-router/lff-m01-current/frontier-intake/manifest.json",
+    "recordCounts": {
+      "candidateSources": 1,
+      "claims": 0,
+      "packableClaims": 0,
+      "proposals": 1,
+      "proposedFrontiers": 1,
+      "r2PackableArtifacts": 0
+    },
+    "required": true,
+    "status": "Source Green for governed frontier intake tooling",
+    "valid": true
+  },
+  "createdAt": "2026-07-01T00:00:00Z",
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/fixtures/goal-domain-router/lff-m01-launch-floor-taxonomy-requests.json",
+  "kind": "ambitions.sourceAtlas.goalDomainRouter.v1",
+  "launchFloorTaxonomyPath": "tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate routes are not claim authority",
+    "candidate routes are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json",
+  "recordCounts": {
+    "blockedPrivateRoutes": 0,
+    "candidateIntakeRoutes": 1,
+    "claims": 0,
+    "configuredNotReadyRoutes": 1,
+    "finalOutputArtifacts": 0,
+    "launchFloorTaxonomyRoutes": 1,
+    "packableClaims": 0,
+    "productionTargetReadyRoutes": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "requests": 3,
+    "routes": 3
+  },
+  "routes": [
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockingReasons": [],
+      "candidateIntakeRequired": false,
+      "matchReasons": [
+        "exact_domain",
+        "goal_intent_overlap",
+        "claim_class_overlap",
+        "jurisdiction_overlap"
+      ],
+      "matchScore": 126,
+      "matchedDomainID": "education_credentialing",
+      "matchedFrontierID": "education_credentialing",
+      "nativeUsabilityReady": true,
+      "nonClaims": [
+        "bounded production-target route only",
+        "not literal universal coverage",
+        "not final user plans, schedules, or Steps",
+        "router does not publish to R2"
+      ],
+      "packOutputAllowed": true,
+      "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json",
+      "productionTargetReady": true,
+      "r2PublishAllowed": false,
+      "readinessStatus": "bounded_production_target_ready",
+      "requestID": "known-production-ready-education",
+      "requestedDomain": "education_credentialing",
+      "route": "configured_production_target_ready",
+      "taxonomyRoute": false
+    },
+    {
+      "allowedClaimScopes": [],
+      "blockingReasons": [
+        "launch_floor_taxonomy_domain_requires_source_lane_review",
+        "production_target_ledger_domain_not_ready"
+      ],
+      "candidateIntakeRequired": false,
+      "launchFloorTaxonomyPath": "tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+      "matchReasons": [
+        "launch_floor_taxonomy_exact_domain"
+      ],
+      "matchScore": 100,
+      "matchedDomainID": "language_learning_reference_requirements",
+      "matchedFrontierID": null,
+      "matchedTaxonomyDomainID": "language_learning_reference_requirements",
+      "nativeUsabilityReady": false,
+      "nonClaims": [
+        "accepted launch-floor taxonomy route only",
+        "configured-not-ready taxonomy record is not production proof",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 output",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packOutputAllowed": false,
+      "productionTargetReady": false,
+      "r2PublishAllowed": false,
+      "readinessStatus": "launch_floor_taxonomy_configured_not_ready",
+      "requestID": "taxonomy-configured-not-ready-language",
+      "requestedDomain": "language_learning_reference_requirements",
+      "route": "configured_frontier_not_production_ready",
+      "sourceLaneCoverageState": "source_lane_review_required",
+      "sourceLaneProfileIDs": [
+        "institutional_public_reference",
+        "standards_body_public_reference"
+      ],
+      "taxonomyRoute": true
+    },
+    {
+      "allowedClaimScopes": [],
+      "blockingReasons": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateIntakeRequired": true,
+      "matchReasons": [
+        "jurisdiction_overlap"
+      ],
+      "matchScore": 1,
+      "matchedDomainID": null,
+      "matchedFrontierID": null,
+      "nativeUsabilityReady": false,
+      "nonClaims": [
+        "candidate-only route",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packOutputAllowed": false,
+      "productionTargetReady": false,
+      "r2PublishAllowed": false,
+      "readinessStatus": "candidate_only",
+      "requestID": "unknown-candidate-space-weather",
+      "requestedDomain": "space_weather_public_reference",
+      "route": "candidate_frontier_intake_required",
+      "taxonomyRoute": false
+    }
+  ],
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-router-train-88"
+}

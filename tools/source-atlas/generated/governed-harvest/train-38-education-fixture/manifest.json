@@ -1,0 +1,128 @@
+{
+  "apiPolicies": [
+    "api.college_scorecard.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.college_scorecard.v1",
+      "dailyBudgetLimit": 100,
+      "maxPagesPerRun": 9,
+      "maxRecordsPerRun": 500,
+      "monthlyBudgetLimit": 1000,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "college-scorecard.api"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "college_scorecard_education_adapter",
+      "blockedReasons": [],
+      "claimCount": 6,
+      "evidencePath": "evidence/college-scorecard.api.json",
+      "evidenceSHA256": "4913314ad14f8878d5cb2669a294b189dd5dd5634d57281615a18c6690c63e3d",
+      "normalizedPath": "normalized/college-scorecard.api.json",
+      "normalizedSHA256": "89bb38459469fce80f936935e515eaed208eda6ff971f513a41bb62fd6626cca",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "college-scorecard.api",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "74ea933e38b886979d30dcd07ca9a9f7848a9e80f18150e95ec6e97ee5473760",
+      "sha256": "4913314ad14f8878d5cb2669a294b189dd5dd5634d57281615a18c6690c63e3d",
+      "sourceID": "college-scorecard.api"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "12456426b20796380230aa816b70a1f68f682e5f625dd5cf3e3e57631f815dc3",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-38-education-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/college-scorecard.api.json",
+    "evidence/college-scorecard.api.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 6,
+    "packCandidates": 1,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 1,
+    "sourcesSelected": 1
+  },
+  "restrictedExclusions": [],
+  "runID": "train-38-education-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "college-scorecard.api"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

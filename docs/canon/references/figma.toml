@@ -1,0 +1,177 @@
+schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA-CANDIDATE:Oik7612LSTUHWsNRFoTlTJ:37:438"
+source = "figma:Oik7612LSTUHWsNRFoTlTJ:37:438"
+revision = "R1"
+visual_authority_id = "VA-P4-RECONCILIATION-001"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["DESIGN-001", "DESIGN-002", "DESIGN-003", "PLATFORM-NATIVE-IPHONE-001"]
+authority_role = "candidate"
+approval_state = "unreviewed"
+swiftui_plausibility = "not_assessed"
+accessibility_variants = ["Dark", "Dynamic Type", "Light", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "Phase 3/4 visual-authority reconciliation candidate; selectable only after deterministic Gate B Green; not source implementation or rendered-app proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA-CANDIDATE:SWtHm9ouHTPbEFfNrrtZwv:250:104"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:250:104"
+revision = "250:104"
+visual_authority_id = "VSP-07"
+canon_revision = 1
+frame_version = "R1 selected direction"
+requirement_ids = ["SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "not_assessed"
+accessibility_variants = ["not_assessed"]
+implementation_status = "approved direction superseded as final target by node 257:93; retained as a non-authoritative candidate and not implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:160:93"
+revision = "160:93"
+visual_authority_id = "VSP-02"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy Today target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:177:93"
+revision = "177:93"
+visual_authority_id = "VSP-03"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy Goals target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:202:93"
+revision = "202:93"
+visual_authority_id = "VSP-04"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy Time target rejected as the final visual direction; retained as implementation-history evidence and not source parity or implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:217:93"
+revision = "217:93"
+visual_authority_id = "VSP-05"
+canon_revision = 1
+frame_version = "R3"
+requirement_ids = ["SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy Capture target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:240:93"
+revision = "240:93"
+visual_authority_id = "VSP-06"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy You target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:257:93"
+revision = "257:93"
+visual_authority_id = "VSP-07"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy Trust target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:272:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:272:93"
+revision = "272:93"
+visual_authority_id = "VSP-08"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SYSTEM-PRIVACY-EGRESS-001", "SYSTEM-SOURCE-ATLAS-FIREWALL-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy privacy-boundary target rejected as the final visual direction; retained as privacy-boundary evidence and not privacy, source, or release proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:87:2"
+revision = "87:2"
+visual_authority_id = "VSP-01"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["SPEC-APP-SHELL-FIRST-VIEWPORT-001", "SPEC-APP-SHELL-GLOBAL-ACTIONS-001", "SPEC-APP-SHELL-ROOT-NAVIGATION-001", "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "VoiceOver"]
+implementation_status = "legacy shell and Search target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof"
+reconciliation_status = "proposed_not_applied"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:92:2"
+revision = "92:2"
+visual_authority_id = "VSP-09"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["A11Y-DYNAMIC-TYPE-001", "A11Y-INPUT-EQUIVALENCE-001", "A11Y-PROOF-MATRIX-001", "A11Y-READING-FOCUS-001", "A11Y-REDUCED-EFFECTS-001", "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Differentiate Without Color", "Dynamic Type", "Haptics", "Hit Targets", "Increase Contrast", "Reduce Motion", "Reduce Transparency", "Static Equivalents", "Switch Control and Focus", "VoiceOver"]
+implementation_status = "legacy motion and accessibility rubric rejected as the final visual direction; retained as unique provenance and not accessibility conformance or source proof"
+reconciliation_status = "proposed_not_applied"

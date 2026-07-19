@@ -1,0 +1,29 @@
+{
+  "adapterID": "ready_gov_emergency_kit_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "8c139a7f2b6b919a96b8f4a8ea4963292ca64bb626ce250d0fef49ed504f3634",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "ready_public_web",
+  "normalizedPath": "normalized/ready.gov.kit.json",
+  "normalizedSHA256": "c06b33a1a32248e791f0052b03f6d1eadebc4f6ac66f4d0f8401752fa14330e8",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "ready.gov.kit",
+  "sourceLane": "ready.gov.kit"
+}

@@ -1,0 +1,196 @@
+{
+  "bucket": null,
+  "channel": "validation",
+  "checksumIssues": [],
+  "createdAt": "2026-06-27T15:47:56Z",
+  "dataClass": "public_provenance",
+  "gates": {
+    "checksumsGreen": true,
+    "dryRun": true,
+    "lastKnownGoodGreen": true,
+    "privacyGreen": true,
+    "productionR2UploadApproved": false,
+    "productionR2Uploaded": false,
+    "restrictedRecordsExcluded": true,
+    "reviewRequiredRecordsExcludedFromPackCandidates": true,
+    "revocationGreen": true,
+    "termsGreen": true
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.broadOccupationPackPromotionProof.v1",
+  "lastKnownGoodProof": {
+    "channel": "validation",
+    "dataClass": "public_freshness",
+    "manifestChecksum": "408c3981dafc545592deac1c6bef73ccf168504fdffb92d2dcbcbc5ff4806728",
+    "manifestVersionID": "source-atlas-broad-occupational-foundation-train-01",
+    "objectKey": "source-atlas/v1/validation/adapter-train-01/last-known-good/validation.json",
+    "present": true,
+    "publicReferenceOnly": true
+  },
+  "manifestPath": "tools/source-atlas/generated/broad-occupational-foundation/manifest.json",
+  "nonClaims": [
+    "does not upload to production R2",
+    "does not claim legal/privacy approval",
+    "does not claim full Source Atlas project Green",
+    "does not claim full Source Atlas project Green",
+    "does not claim release readiness, App Store readiness, account readiness, legal/privacy approval, or complete runtime Green",
+    "does not claim known issue closure",
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "objectKeyPrivacyIssues": [],
+  "objectKeys": [
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/manifest.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/coverage-report.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/freshness-states.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/license-terms-slice.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/non-claims.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/normalized-records.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/pack-readiness-verdict.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/provenance-receipts.json",
+    "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/source-registry-slice.json",
+    "source-atlas/v1/validation/adapter-train-01/channels/validation/manifest.json",
+    "source-atlas/v1/validation/adapter-train-01/revocations/source-atlas-broad-occupational-foundation-train-01.json",
+    "source-atlas/v1/validation/adapter-train-01/last-known-good/validation.json"
+  ],
+  "packRoot": "tools/source-atlas/generated/broad-occupational-foundation",
+  "privacyIssues": [],
+  "promotionArtifacts": [
+    {
+      "bytes": 4221,
+      "generated": false,
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/manifest.json",
+      "relativePath": "manifest.json",
+      "sha256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef"
+    },
+    {
+      "bytes": 42567,
+      "generated": false,
+      "label": "coverageReport",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/coverage-report.json",
+      "relativePath": "coverage-report.json",
+      "sha256": "3f77b3bb70c6b67179f92ce8fc143f3490b25ae59d22bfebeeff3222d9998d7d"
+    },
+    {
+      "bytes": 735,
+      "generated": false,
+      "label": "freshnessStates",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/freshness-states.json",
+      "relativePath": "freshness-states.json",
+      "sha256": "642f369593342183458325e4d4eb559252f3bc28ebdc48611a99efdc52e61506"
+    },
+    {
+      "bytes": 6957,
+      "generated": false,
+      "label": "licenseTermsSlice",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/license-terms-slice.json",
+      "relativePath": "license-terms-slice.json",
+      "sha256": "4ec358314eb6038c63779ca822c12b482f828b51951cbf20c43a0d81a10e7b38"
+    },
+    {
+      "bytes": 649,
+      "generated": false,
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/non-claims.json",
+      "relativePath": "non-claims.json",
+      "sha256": "683773f62dd20c6eeb411cfaa523f75f8dad3c4e356aad65c427a09daadb79ea"
+    },
+    {
+      "bytes": 155984,
+      "generated": false,
+      "label": "normalized",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/normalized-records.json",
+      "relativePath": "normalized-records.json",
+      "sha256": "578c490c70b8872e2fc274d7a82611ad80da777f785cf94811ac868390c1e39c"
+    },
+    {
+      "bytes": 1006,
+      "generated": false,
+      "label": "packReadinessVerdict",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/pack-readiness-verdict.json",
+      "relativePath": "pack-readiness-verdict.json",
+      "sha256": "a10e4bc3c3d27c7d729f0b7e2033617736d4813674a7c8f15bd1d4c531eac0c2"
+    },
+    {
+      "bytes": 3931,
+      "generated": false,
+      "label": "provenanceReceipts",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/provenance-receipts.json",
+      "relativePath": "provenance-receipts.json",
+      "sha256": "ba2e0ffcc5187856b480179881580768b1a8a31a0411ce5a1dbf5e13d221957f"
+    },
+    {
+      "bytes": 6718,
+      "generated": false,
+      "label": "sourceRegistrySlice",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/releases/source-atlas-broad-occupational-foundation-train-01/source-registry-slice.json",
+      "relativePath": "source-registry-slice.json",
+      "sha256": "d057f166c2a6d41449c5959c2ea99e542aac7ef3b2044c8b80c8c88530eb765d"
+    },
+    {
+      "bytes": 4221,
+      "generated": false,
+      "label": "channel-manifest",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/channels/validation/manifest.json",
+      "relativePath": "manifest.json",
+      "sha256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef"
+    },
+    {
+      "bytes": 219,
+      "generated": true,
+      "label": "revocation",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/revocations/source-atlas-broad-occupational-foundation-train-01.json",
+      "relativePath": "revocation.json",
+      "sha256": "122eff9471ffa86a0b2c03ec96e918a30e208658d62be331cd46f8d2017617e9"
+    },
+    {
+      "bytes": 377,
+      "generated": true,
+      "label": "last-known-good",
+      "objectKey": "source-atlas/v1/validation/adapter-train-01/last-known-good/validation.json",
+      "relativePath": "last-known-good.json",
+      "sha256": "60c892820a58d8f83cd114645f826de3cbe2668633ee68771461a9c11c47a5bc"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "r2ProofResult": "dry_run_only_no_upload",
+  "r2ValidationPrefix": "source-atlas/v1/validation/adapter-train-01",
+  "readbackChecksumResult": {
+    "executed": false,
+    "results": []
+  },
+  "readbackResult": {
+    "executed": false,
+    "results": []
+  },
+  "revocationProof": {
+    "currentManifestRevoked": false,
+    "dataClass": "public_freshness",
+    "present": true,
+    "publicReferenceOnly": true,
+    "revokedArtifacts": [],
+    "versionID": "source-atlas-broad-occupational-foundation-train-01"
+  },
+  "rollbackSelectResult": {
+    "lastKnownGoodObjectKey": "source-atlas/v1/validation/adapter-train-01/last-known-good/validation.json",
+    "passed": true,
+    "reason": "candidate passed AMB-1430 broad-pack privacy/freshness gates",
+    "selected": "candidate"
+  },
+  "schemaVersion": 1,
+  "status": "Green",
+  "statusReason": "dry-run promotion proof passed",
+  "termIssues": [],
+  "uploadResult": {
+    "executed": false,
+    "results": []
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "packet": "2026-06-29-vsp-code-connect-readiness",
+  "status": "Yellow",
+  "status_reason": "Existing Ambitions Figma component sets were reconciled to current SwiftUI source owners, missing VSP-01 shell and VSP-06 You component sets were added, and a readiness ledger was added, but Figma Code Connect publish is blocked by Figma account/seat capability and owner approval is not claimed.",
+  "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+  "figma_file_url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv",
+  "component_library_page": {
+    "node_id": "0:1",
+    "name": "CANDIDATE — 00 Ambitions Design System Library"
+  },
+  "readiness_ledger_frame": {
+    "node_id": "29:45",
+    "name": "CANDIDATE — VSP Code Connect Readiness Ledger — R2",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=29-45"
+  },
+  "supplemental_component_frame": {
+    "node_id": "29:2",
+    "name": "CANDIDATE — Component Library - Shell and You Source Primitives R1",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=29-2"
+  },
+  "owner_review_strengthening_page": {
+    "node_id": "22:2",
+    "name": "CANDIDATE — 18 VSP Owner Review Strengthening R1",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-2",
+    "frames": [
+      {
+        "node_id": "22:3",
+        "name": "CANDIDATE — VSP North Star Owner Review Strengthening — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-3"
+      },
+      {
+        "node_id": "22:36",
+        "name": "AUTHORITY — VSP-01 — approved shell readback — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-36"
+      },
+      {
+        "node_id": "22:60",
+        "name": "CANDIDATE — VSP-10 — Figma to SwiftUI handoff map — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-60"
+      },
+      {
+        "node_id": "22:142",
+        "name": "CANDIDATE — VSP-09 — accessibility motion haptics acceptance matrix — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-142"
+      },
+      {
+        "node_id": "22:170",
+        "name": "MARKETING_RENDER — VSP North Star owner review contact sheet — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-170"
+      },
+      {
+        "node_id": "22:492",
+        "name": "CANDIDATE — VSP Linear handoff matrix — R1",
+        "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=22-492"
+      }
+    ]
+  },
+  "code_connect": {
+    "attempted": true,
+    "published": false,
+    "blocker": "Figma Code Connect requires a Dev or Full seat on an Organization or Enterprise plan.",
+    "debug_uuid": "8b47e20d-2f28-45e9-a4c7-0110c547aa1d",
+    "framework": "SwiftUI",
+    "language": "Swift"
+  },
+  "component_mappings": [
+    {
+      "vsp": "VSP-01 Shell Authority",
+      "figma_node_id": "29:25",
+      "figma_component": "CANDIDATE — ApprovedShellObject",
+      "code_connect_target": "AmbitionsSurfaceShell / RootDestinationIdentityRail / ContextCrownHeader / SourceTrustChrome",
+      "source_owners": [
+        "Sources/Components/SurfaceShellPrimitives.swift",
+        "Sources/Components/NavigationPrimitives.swift",
+        "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift",
+        "Sources/Components/ShellChromeTrustPrimitives.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives; VSP-01 approved frame remains visual authority",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Reference shell mapping only. Must not mutate or reinterpret the approved VSP-01 shell."
+    },
+    {
+      "vsp": "VSP-02 Today Reality Window",
+      "figma_node_id": "11:25",
+      "figma_component": "CANDIDATE — TodayStepObject",
+      "code_connect_target": "StartHereProductProofStack / ProductObjectFrame",
+      "source_owners": [
+        "Sources/Components/StartHereProductPrimitives.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
+      ],
+      "provenance": "Existing SwiftUI primitive plus VSP object-state wrapper needs parity review",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Today content object only. Must not create shell chrome or Capture tab."
+    },
+    {
+      "vsp": "VSP-02 Today Reality Window",
+      "figma_node_id": "11:42",
+      "figma_component": "CANDIDATE — RealityWindowField",
+      "code_connect_target": "RealityMeridianHorizon / RealityMeridianCurrentTimeCursor / RealityMeridianScheduledNode",
+      "source_owners": [
+        "Sources/Components/LifeDirectionalIntegrationPrimitives.swift",
+        "Sources/Components/RealityMeridianTemporalPrimitives.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives; candidate field composition needs parity review",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Mount inside VSP-01 shell only. No dashboard/card-feed interpretation."
+    },
+    {
+      "vsp": "VSP-03 Goals Life Area Atlas",
+      "figma_node_id": "11:59",
+      "figma_component": "CANDIDATE — DirectionField",
+      "code_connect_target": "GoalsStageScene / FE09ComponentSystemRole.constellationAtlas",
+      "source_owners": [
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift",
+        "Sources/Components/FE09ComponentSystemPrimitives.swift"
+      ],
+      "provenance": "Partial SwiftUI/semantic support; dedicated Constellation Atlas field primitive still required",
+      "status": "Needs source primitive before full Code Connect",
+      "product_law": "Goals content object only. No Plan/Habits/Profile/Insights IA drift."
+    },
+    {
+      "vsp": "VSP-03 Goals Life Area Atlas",
+      "figma_node_id": "11:76",
+      "figma_component": "CANDIDATE — LifeAreaRowObject",
+      "code_connect_target": "GroupedNavigationRow / GroupedStatusNavigationRow / GoalsStageScene",
+      "source_owners": [
+        "Sources/Components/GroupedNavigationList.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"
+      ],
+      "provenance": "Partial existing row primitives; Goals-specific durable row wrapper needs parity review",
+      "status": "Needs source primitive before full Code Connect",
+      "product_law": "Native row anatomy only; no board, productivity score, or generic task row."
+    },
+    {
+      "vsp": "VSP-04 Time / LifeShape Week",
+      "figma_node_id": "11:103",
+      "figma_component": "CANDIDATE — LifeShapeFieldObject",
+      "code_connect_target": "LifeShapeField / RealityMeridianTimeBand / HorizonCapacityPrimitiveStage",
+      "source_owners": [
+        "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
+        "Sources/Components/RealityMeridianTimeBand.swift",
+        "Sources/Components/HorizonCapacityPrimitiveFamily.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives; state-object wrapper requires exact visual parity review",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Time content object only. Must not become a calendar clone."
+    },
+    {
+      "vsp": "VSP-07 Trust Inspection Seams",
+      "figma_node_id": "11:120",
+      "figma_component": "CANDIDATE — TrustSeamObject",
+      "code_connect_target": "SourceTrustReceiptStrip / TrustSeam / ProductObjectFrame",
+      "source_owners": [
+        "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Inspection details only. Proof/Source/Privacy/History/Receipts are not root surfaces."
+    },
+    {
+      "vsp": "VSP-05 Capture Global Composer",
+      "figma_node_id": "11:137",
+      "figma_component": "CANDIDATE — CaptureComposerObject",
+      "code_connect_target": "AtmosphereComposerCanvas / CaptureComposerSurface / CaptureAtmosphereComposer",
+      "source_owners": [
+        "Sources/Components/AmbitionsFlagshipTactilePrimitives+02-AtmosphereComposerCanvas.swift",
+        "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives and canonical Composer/Capture owner",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Global composer only. Never a tab, inbox, chatbot, or root destination."
+    },
+    {
+      "vsp": "VSP-06 You Native User System",
+      "figma_node_id": "29:44",
+      "figma_component": "CANDIDATE — UserSystemProfileObject",
+      "code_connect_target": "PersonalSystemCenterHeader / PersonalSystemCenterSetupCompleteness / YouRootSurface",
+      "source_owners": [
+        "Sources/Components/PersonalSystemCenterPrimitives.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives and canonical Surfaces/You owner",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "You is native user system/settings clarity, not old Profile IA or account-gated core."
+    },
+    {
+      "vsp": "VSP-08 External Boundaries",
+      "figma_node_id": "11:154",
+      "figma_component": "CANDIDATE — BoundaryStateObject",
+      "code_connect_target": "SourceAtlas UI/runtime boundary primitives",
+      "source_owners": [
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+        "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift"
+      ],
+      "provenance": "Existing boundary source; visual object still needs owner review and no-private-graph proof",
+      "status": "Needs privacy proof before full Code Connect",
+      "product_law": "Offline no-account core and R2 public/reference boundary are mandatory."
+    },
+    {
+      "vsp": "VSP-09 Accessibility / Motion / Haptics",
+      "figma_node_id": "11:166",
+      "figma_component": "CANDIDATE — MotionAccessibilityObject",
+      "code_connect_target": "StageMotionReductionPolicy / ReduceMotionPolicy / AmbitionsPrimitiveAccessibilityFallbackBehavior",
+      "source_owners": [
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift",
+        "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift"
+      ],
+      "provenance": "Existing policy/source primitives; haptics acceptance still needs explicit policy proof",
+      "status": "Code Connect-ready for motion/a11y policy; haptics proof still missing",
+      "product_law": "Motion is behavior across surfaces, not a destination."
+    }
+  ],
+  "validation": {
+    "figma_metadata_validation": "Passed for all eleven repaired or newly added component sets.",
+    "figma_readiness_ledger_validation": "Passed. Ledger text count 64; collapsed text count 0.",
+    "code_connect_validation": "Blocked before mapping publish by Figma account/seat capability."
+  },
+  "non_claims": [
+    "No Visual Green",
+    "No Done",
+    "No Release Green",
+    "No source implementation",
+    "No owner approval",
+    "No device proof",
+    "No accessibility conformance proof",
+    "No Code Connect publish completion"
+  ]
+}

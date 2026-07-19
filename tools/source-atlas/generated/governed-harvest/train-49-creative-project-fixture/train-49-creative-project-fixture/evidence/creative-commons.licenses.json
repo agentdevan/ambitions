@@ -1,0 +1,29 @@
+{
+  "adapterID": "creative_commons_licenses_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "c5809add3810acd7e93b8ce2c0403b5e2b810a16fff80dc8c3c9a0df38fc4816",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "creativecommons_site_cc_by_4_cc0_tools",
+  "normalizedPath": "normalized/creative-commons.licenses.json",
+  "normalizedSHA256": "4c9ed9bfe008d6c2e28ac8b9c64ebf480e8dd85e8765fec65c83b1e79e5c7a10",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "creative-commons.licenses",
+  "sourceLane": "creative-commons.licenses"
+}

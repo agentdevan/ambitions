@@ -1,0 +1,53 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "state_travel_public_web",
+      "license_name": "Travel.State.Gov public website text with copyright/disclaimer, third-party, trademark, and media caveats retained",
+      "license_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "non_claims": [
+        "not visa advice",
+        "not legal advice",
+        "not emergency advice",
+        "not a safety guarantee",
+        "not a custom itinerary",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "terms_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "license_name": "USA.gov public government-works text with third-party, trademark, and media caveats retained",
+      "license_url": "https://www.usa.gov/government-works",
+      "non_claims": [
+        "not address submission",
+        "not legal advice",
+        "not a custom moving plan",
+        "not private location inference",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "terms_url": "https://www.usa.gov/government-works"
+    }
+  ]
+}

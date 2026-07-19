@@ -1,0 +1,76 @@
+{
+  "activeRegistryMutations": [],
+  "allowActiveRegistryWrite": false,
+  "blockedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.e9bce2e272f52581",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "status": "blocked"
+    }
+  ],
+  "compatibleReviewCompletionIntakeVersionID": "source-atlas-goal-domain-review-completion-intake-train-93",
+  "createdAt": "2026-06-28T22:20:00Z",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.goalDomainRegistryMutationPlan.v1",
+  "nonClaims": [
+    "goal-domain registry mutation planning only",
+    "not active registry mutation",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "plannedRegistryMutations": [],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 1,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "plannedApiPolicyEntries": 0,
+    "plannedLegalTermsEntries": 0,
+    "plannedRegistryMutations": 0,
+    "plannedSourceLaneEntries": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewBundles": 1
+  },
+  "reviewCompletionsPath": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/01-review-completion-intake/goal-domain-review-completions.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-registry-mutation-plan-train-94"
+}

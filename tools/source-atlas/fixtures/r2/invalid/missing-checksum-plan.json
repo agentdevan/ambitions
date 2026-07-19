@@ -1,0 +1,19 @@
+{
+  "expectedBoundaryResult": "reject",
+  "expectedIssueCodes": [
+    "missing_sha256"
+  ],
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.r2StagingPlan",
+    "validForUpload": false,
+    "objects": [
+      {
+        "bucket": "ambitions-source-atlas-staging",
+        "objectKey": "source-atlas/v1/releases/source-atlas-2026-06-26/manifest.json",
+        "contentType": "application/json; charset=utf-8",
+        "bytes": 1234
+      }
+    ]
+  }
+}

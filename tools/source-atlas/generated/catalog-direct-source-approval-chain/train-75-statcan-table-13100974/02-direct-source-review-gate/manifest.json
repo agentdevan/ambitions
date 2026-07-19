@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "resolution_candidates_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "resolution_candidates_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "direct_source_review_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "direct_source_review_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_direct_reviews_block_without_approval",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_packets_require_direct_source_not_catalog",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_gate_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "directSourceReviewsPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/direct-source-review-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewGateManifest.v1",
+  "nonClaims": [
+    "direct-source review gate only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedDirectSourceReviews": "ffa3df18a9c7e85776a73f9dc084b3e7d57706b49b12226daebef7638c89ed56",
+    "catalogDirectSourceReviewGate": "59b4cee4c862a5c7c675051d28bd90bad480f2fbbbe8fcb80d0515e425bdea1b",
+    "manifest": "22b1c392b692011353e7d25e761d5e33748e29e00dbe8112d8181a9a55803f81",
+    "sourceReviewCompletionPackets": "05654b0fd33a0baec387d36f13eeec0e946f4cfa0791d531d581ace24f1ec8b5"
+  },
+  "outputPaths": {
+    "blockedDirectSourceReviews": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/blocked-direct-source-reviews.json",
+    "catalogDirectSourceReviewGate": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/catalog-direct-source-review-gate.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/closeout.md",
+    "sourceReviewCompletionPackets": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/source-review-completion-packets.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 3,
+    "blockedSourceReviewCompletionPackets": 3,
+    "claims": 0,
+    "completedSourceReviewCompletionPackets": 1,
+    "directSourceReviewPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4,
+    "sourceReviewCompletionPackets": 4
+  },
+  "resolutionCandidatesPath": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source review gate tooling only",
+  "status": "Source Green for catalog direct-source review gate tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-direct-source-review-gate-train-71"
+}

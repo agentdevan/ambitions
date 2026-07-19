@@ -1,0 +1,4287 @@
+{
+  "asOf": "2026-07-01T00:00:00Z",
+  "byDomain": [
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "accessibility_disability_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "agricultural_gardening_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "arts_culture_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "business_entrepreneurship",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "caregiving_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "childcare_family_services_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "chronic_condition_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "civic_participation_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "consumer_rights_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "creative_project_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "data_privacy_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "debt_credit_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "digital_security_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "disaster_preparedness_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "education_credentialing",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "eldercare_aging_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "environmental_sustainability_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "estate_planning_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "finance_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "food_nutrition_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "grants_funding_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "health_wellness_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "health_wellness_reference_ca_statistics_trusted_directories",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "hobbies_recreation",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "home_energy_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "home_life_admin",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "housing_tenancy_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "immigration_citizenship_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "insurance_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "language_learning_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "legal_information_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "local_services_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "mental_health_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "nonprofit_operations_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "occupation_foundation",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "parenting_education_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "personal_growth",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "pet_care_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "procurement_contracting_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "public_benefits_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "public_civic_requirements",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "public_safety_emergency_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "relationships_family",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "retirement_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "science_research_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "sports_fitness_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "tax_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "transportation_mobility_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "travel_relocation",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 4
+      },
+      "count": 4,
+      "key": "volunteering_public_reference",
+      "legalStates": {
+        "queued": 4
+      },
+      "sourceLaneStates": {
+        "queued": 4
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 4
+      }
+    }
+  ],
+  "byMissingReasonClass": {
+    "insufficient_public_source": 50,
+    "missing_corpus_shard": 50,
+    "missing_domain_or_subdomain_source_lane": 50,
+    "missing_freshness_review": 50
+  },
+  "bySourceLaneLegalApiState": [
+    {
+      "apiStates": {
+        "queued": 200
+      },
+      "count": 200,
+      "key": "queued|queued|queued",
+      "legalStates": {
+        "queued": 200
+      },
+      "sourceLaneStates": {
+        "queued": 200
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 200
+      }
+    }
+  ],
+  "bySubdomain": [
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "accessibility_disability_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "accessibility_disability_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "accessibility_disability_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "accessibility_disability_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "agricultural_gardening_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "agricultural_gardening_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "agricultural_gardening_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "agricultural_gardening_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "arts_culture_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "arts_culture_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "arts_culture_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "arts_culture_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "business_entrepreneurship_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "business_entrepreneurship_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "business_entrepreneurship_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "business_entrepreneurship_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "caregiving_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "caregiving_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "caregiving_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "caregiving_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "childcare_family_services_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "childcare_family_services_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "childcare_family_services_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "childcare_family_services_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "chronic_condition_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "chronic_condition_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "chronic_condition_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "chronic_condition_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "civic_participation_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "civic_participation_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "civic_participation_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "civic_participation_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "consumer_rights_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "consumer_rights_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "consumer_rights_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "consumer_rights_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "creative_project_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "creative_project_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "creative_project_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "creative_project_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "data_privacy_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "data_privacy_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "data_privacy_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "data_privacy_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "debt_credit_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "debt_credit_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "debt_credit_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "debt_credit_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "digital_security_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "digital_security_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "digital_security_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "digital_security_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "disaster_preparedness_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "disaster_preparedness_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "disaster_preparedness_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "disaster_preparedness_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "education_credentialing_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "education_credentialing_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "education_credentialing_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "education_credentialing_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "eldercare_aging_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "eldercare_aging_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "eldercare_aging_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "eldercare_aging_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "environmental_sustainability_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "environmental_sustainability_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "environmental_sustainability_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "environmental_sustainability_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "estate_planning_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "estate_planning_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "estate_planning_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "estate_planning_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "finance_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "finance_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "finance_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "finance_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "food_nutrition_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "food_nutrition_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "food_nutrition_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "food_nutrition_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "grants_funding_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "grants_funding_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "grants_funding_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "grants_funding_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_ca_statistics_trusted_directories_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_ca_statistics_trusted_directories_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_ca_statistics_trusted_directories_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_ca_statistics_trusted_directories_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "health_wellness_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "hobbies_recreation_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "hobbies_recreation_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "hobbies_recreation_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "hobbies_recreation_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_energy_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_energy_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_energy_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_energy_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_life_admin_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_life_admin_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_life_admin_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "home_life_admin_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "housing_tenancy_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "housing_tenancy_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "housing_tenancy_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "housing_tenancy_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "immigration_citizenship_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "immigration_citizenship_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "immigration_citizenship_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "immigration_citizenship_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "insurance_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "insurance_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "insurance_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "insurance_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "language_learning_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "language_learning_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "language_learning_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "language_learning_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "legal_information_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "legal_information_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "legal_information_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "legal_information_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "local_services_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "local_services_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "local_services_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "local_services_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "mental_health_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "mental_health_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "mental_health_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "mental_health_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "nonprofit_operations_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "nonprofit_operations_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "nonprofit_operations_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "nonprofit_operations_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "occupation_foundation_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "occupation_foundation_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "occupation_foundation_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "occupation_foundation_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "parenting_education_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "parenting_education_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "parenting_education_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "parenting_education_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "personal_growth_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "personal_growth_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "personal_growth_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "personal_growth_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "pet_care_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "pet_care_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "pet_care_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "pet_care_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "procurement_contracting_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "procurement_contracting_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "procurement_contracting_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "procurement_contracting_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_benefits_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_benefits_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_benefits_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_benefits_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_civic_requirements_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_civic_requirements_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_civic_requirements_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_civic_requirements_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_safety_emergency_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_safety_emergency_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_safety_emergency_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "public_safety_emergency_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "relationships_family_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "relationships_family_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "relationships_family_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "relationships_family_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "retirement_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "retirement_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "retirement_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "retirement_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "science_research_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "science_research_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "science_research_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "science_research_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "sports_fitness_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "sports_fitness_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "sports_fitness_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "sports_fitness_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "tax_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "tax_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "tax_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "tax_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "transportation_mobility_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "transportation_mobility_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "transportation_mobility_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "transportation_mobility_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "travel_relocation_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "travel_relocation_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "travel_relocation_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "travel_relocation_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "volunteering_public_reference_costs_fees_and_funding",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "volunteering_public_reference_documentation_and_source_citations",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "volunteering_public_reference_eligibility_and_scope",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    },
+    {
+      "apiStates": {
+        "queued": 1
+      },
+      "count": 1,
+      "key": "volunteering_public_reference_official_sources",
+      "legalStates": {
+        "queued": 1
+      },
+      "sourceLaneStates": {
+        "queued": 1
+      },
+      "staleEvents": 0,
+      "supervisorStates": {
+        "review_only": 1
+      }
+    }
+  ],
+  "bySupervisorState": {
+    "review_only": 200
+  },
+  "kind": "ambitions.sourceAtlas.missingShardBacklogByGovernanceState.v1",
+  "totalBacklogItems": 200
+}

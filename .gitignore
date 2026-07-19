@@ -1,0 +1,92 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+dist-export/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env
+.env.*
+!.env.example
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android
+/Ambitions.xcodeproj/
+
+# Xcode build artifacts
+DerivedData/
+output/DerivedData*/
+*.xcresult
+.swiftpm/xcode/xcuserdata/
+
+# generated and scratch artifacts
+/tmp/
+tmp/
+.generated/
+source-atlas/generated/scenario-specs/
+source-atlas/generated/candidates/
+source-atlas/generated/rejected/
+source-atlas/generated/accepted/
+source-atlas/generated/receipts/
+source-atlas/generated/proof/
+*.ndjson
+*.log
+*.tmp
+
+# local generated state and historical control-plane output
+.codex-artifacts/
+.wrangler/
+.codex/
+artifacts/
+prompts/
+trains/
+.linear/
+.linear-sync/
+output/logs/
+output/manual-audit/
+output/source-atlas/
+build/reports/
+
+# Build-lab artifacts
+runs/
+
+# Ambitions local repo-intelligence caches / generated sidecars
+.codegraph/
+.understand-anything/
+
+# Python runtime caches
+__pycache__/
+*.pyc
+build/reports/harness/
+build/reports/parallel-implementation-guard/

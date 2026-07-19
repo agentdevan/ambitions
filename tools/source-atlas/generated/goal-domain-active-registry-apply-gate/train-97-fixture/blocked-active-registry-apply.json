@@ -1,0 +1,31 @@
+{
+  "activeRegistryApplyAllowed": false,
+  "blockingReasons": [
+    "approval artifact contains fixture/rehearsal marker at $.approvalStatus",
+    "approval artifact contains fixture/rehearsal marker at $.approvedBy",
+    "approval artifact contains fixture/rehearsal marker at $.nonClaims[0]",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].apiPolicyEntry.api_mode",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].apiPolicyEntry.api_policy_id",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].apiPolicyEntry.source_id",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.license_id",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.license_name",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.license_url",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.review_owner",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.rights_url",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].legalTermsEntry.terms_url",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].sourceLaneEntry.api_mode",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].sourceLaneEntry.api_policy_id",
+    "fixture/rehearsal marker found at $.plan.plannedRegistryMutations[0].sourceLaneEntry.budget_policy_id",
+    "review_evidence_class_fixture_only_rehearsal"
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decision": "blocked_fixture_or_rehearsal_evidence",
+  "evidenceClass": "fixture_only_rehearsal",
+  "kind": "ambitions.sourceAtlas.goalDomainBlockedActiveRegistryApply.v1",
+  "nonClaims": [
+    "not active registry mutation",
+    "not source authority",
+    "not R2 publish"
+  ],
+  "targetClass": "active_repo_registries"
+}

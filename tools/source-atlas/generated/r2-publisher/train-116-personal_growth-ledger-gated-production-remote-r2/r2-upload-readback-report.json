@@ -1,0 +1,329 @@
+{
+  "bucket": "ambitions-source-atlas-prod",
+  "createdAt": "2026-06-29T00:28:00Z",
+  "currentPointer": {
+    "actualSHA256": "58016adbec60332d8fa690197f9b2e6a3647fb8c8dff214314e80ded6234eb49",
+    "blockedUntilReadback": true,
+    "expectedSHA256": "58016adbec60332d8fa690197f9b2e6a3647fb8c8dff214314e80ded6234eb49",
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "issues": [],
+    "key": "source-atlas/v1/production/stable/personal_growth/current.json",
+    "put": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/current.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    "updated": true
+  },
+  "dataClass": "public_r2_object_key",
+  "dryRun": false,
+  "executeRequested": true,
+  "executed": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+  "mode": "remote_r2",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "previousPointers": {
+    "current": {
+      "bytes": 1696,
+      "exists": true,
+      "get": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/current.json",
+      "sha256": "f7b5711f2430aecad73100b9836fb9daf5fff17c1e49694f7441032cd086e426"
+    },
+    "lastKnownGood": {
+      "bytes": 1238,
+      "exists": true,
+      "get": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "sha256": "d972073b53bfe1ec6f058a9214057d938db6dcd393a0cb4950ad3fdd488dcb6c"
+    }
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "readbackResults": [
+    {
+      "actualSHA256": "5b907b478bd4020e013f832a4e6406bd734822802c10193317f6dfc395f5bbad",
+      "expectedSHA256": "5b907b478bd4020e013f832a4e6406bd734822802c10193317f6dfc395f5bbad",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "7fde5cc1dcf5fa108774d4c4bcb62921e8d987db2b03d5f0e9a58b065c243d59",
+      "expectedSHA256": "7fde5cc1dcf5fa108774d4c4bcb62921e8d987db2b03d5f0e9a58b065c243d59",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "ef2c3ecac67aa20519f94dad88f877cc0ce5a41e3e9be79715b1cf1eafce4520",
+      "expectedSHA256": "ef2c3ecac67aa20519f94dad88f877cc0ce5a41e3e9be79715b1cf1eafce4520",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "fa807fc105e648463d50ee03058f6ab3f249cb8a0db1b2859bcdd0fd733d5036",
+      "expectedSHA256": "fa807fc105e648463d50ee03058f6ab3f249cb8a0db1b2859bcdd0fd733d5036",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "0254460fb4aec7e476c0b00bdb1d22a9a60bd6a85a0db560db31bfbe9d04d5f3",
+      "expectedSHA256": "0254460fb4aec7e476c0b00bdb1d22a9a60bd6a85a0db560db31bfbe9d04d5f3",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "f01b127f64039c8312aed8cf8df67caaf48feb91f45bb2f00433127461a1baf6",
+      "expectedSHA256": "f01b127f64039c8312aed8cf8df67caaf48feb91f45bb2f00433127461a1baf6",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "828383d3062292c78f92e61ee9237078a946edec9db90212160ca86efd820b60",
+      "expectedSHA256": "828383d3062292c78f92e61ee9237078a946edec9db90212160ca86efd820b60",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "d972073b53bfe1ec6f058a9214057d938db6dcd393a0cb4950ad3fdd488dcb6c",
+      "expectedSHA256": "d972073b53bfe1ec6f058a9214057d938db6dcd393a0cb4950ad3fdd488dcb6c",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+      "expectedSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "923f027c14eae38b1e1f4ead008b92e0ad73fb1d9e20be3052acc39005dc1a0a",
+      "expectedSHA256": "923f027c14eae38b1e1f4ead008b92e0ad73fb1d9e20be3052acc39005dc1a0a",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+      "expectedSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "67e17ee1f77674f60948c4b8f76a836d36600fc8e27d9911728536832edf8059",
+      "expectedSHA256": "67e17ee1f77674f60948c4b8f76a836d36600fc8e27d9911728536832edf8059",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/revocations.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    {
+      "actualSHA256": "15f70f0e4fda7ddfbcdfa004303e6c79f4e5000fa0f04aaf66dfa2ed642d78df",
+      "expectedSHA256": "15f70f0e4fda7ddfbcdfa004303e6c79f4e5000fa0f04aaf66dfa2ed642d78df",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json",
+      "passed": true,
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    }
+  ],
+  "readbackRoot": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/remote-readback",
+  "remoteR2": true,
+  "schemaVersion": 1,
+  "success": true,
+  "uploadResults": [
+    {
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "claims",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "entities",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/lkg.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "pack",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/revocations.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    },
+    {
+      "label": "sources",
+      "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json",
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+      "success": true
+    }
+  ]
+}

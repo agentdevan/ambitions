@@ -1,0 +1,102 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.fdf4da8412592b63",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "official_benefit_program_reference",
+        "public_eligibility_reference"
+      ],
+      "dataset_url": "https://www.usa.gov/benefits",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T21:20:00Z",
+      "discovery_method": "executor_seed",
+      "distribution_urls": [],
+      "domain_guess": "public_benefits_reference",
+      "evidence_hash": "6eda441610feb08545a64e3a27d1a2fa275633a84a46a248c8fd5c5b9d08e642",
+      "frontier_id": "public_benefits_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "publisher_name": "USA.gov",
+      "publisher_url": "https://www.usa.gov/benefits",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.usa.gov/about"
+    },
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.6fdef24bfb082cbc",
+      "candidate_score": 20,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "official_benefit_program_reference",
+        "public_deadline_reference",
+        "public_eligibility_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T21:20:00Z",
+      "discovery_method": "executor_seed",
+      "distribution_urls": [],
+      "domain_guess": "public_benefits_reference",
+      "evidence_hash": "df320397534ea1011fe56fafd7a79e60854e04d582782ef7f22ef0064b8be4e0",
+      "frontier_id": "public_benefits_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "publisher_name": "Data.gov Catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    }
+  ],
+  "createdAt": "2026-06-28T21:20:00Z",
+  "kind": "ambitions.sourceAtlas.frontierCandidateSources.v1"
+}

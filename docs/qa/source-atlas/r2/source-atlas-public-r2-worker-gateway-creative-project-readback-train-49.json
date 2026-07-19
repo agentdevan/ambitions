@@ -1,0 +1,438 @@
+{
+  "activeCurrentHeadResponses": [
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": null,
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/home_life_admin/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    }
+  ],
+  "allowedCreativeProjectReferenceResponses": [
+    {
+      "byteCount": 1740,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "10ae14040308a843aeeab459dd29a2d0f3f24532e06472abd67c69cc9097f4db",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-length": "1740",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "10ae14040308a843aeeab459dd29a2d0f3f24532e06472abd67c69cc9097f4db",
+      "status": 200
+    },
+    {
+      "byteCount": 1271,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "aeafe952f2f4b4c8c562f48c10938a2e2ad4ae66521a3027a9bdfadaddf5f71b",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "1271",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/lkg.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "aeafe952f2f4b4c8c562f48c10938a2e2ad4ae66521a3027a9bdfadaddf5f71b",
+      "status": 200
+    },
+    {
+      "byteCount": 1415,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "84028e93390066f20cfb1607367cb3762707ef34975b6ef009eab4e47d0dc5e5",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "1415",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/revocations.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "84028e93390066f20cfb1607367cb3762707ef34975b6ef009eab4e47d0dc5e5",
+      "status": 200
+    },
+    {
+      "byteCount": 8937,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "8937",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/manifest.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+      "status": 200
+    },
+    {
+      "byteCount": 20876,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "20876",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/pack.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+      "status": 200
+    }
+  ],
+  "blockedResponses": [
+    {
+      "byteCount": 9,
+      "contentType": "text/plain;charset=UTF-8",
+      "expectedSHA256": null,
+      "gatewayHeader": null,
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/current.json?goal_text=private",
+      "publicGatewayHeader": null,
+      "publicHeadersPresent": false,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    {
+      "byteCount": 9,
+      "contentType": "text/plain;charset=UTF-8",
+      "expectedSHA256": null,
+      "gatewayHeader": null,
+      "hashMatchesExpected": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/private_graph.json",
+      "publicGatewayHeader": null,
+      "publicHeadersPresent": false,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    {
+      "byteCount": 18,
+      "contentType": "text/plain;charset=UTF-8",
+      "expectedSHA256": null,
+      "gatewayHeader": null,
+      "hashMatchesExpected": null,
+      "headers": {
+        "allow": "GET, HEAD",
+        "cache-control": "no-store",
+        "content-length": "18",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "POST",
+      "path": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+      "publicGatewayHeader": null,
+      "publicHeadersPresent": false,
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405
+    }
+  ],
+  "checks": [
+    {
+      "name": "all_active_current_heads_return_200",
+      "passed": true
+    },
+    {
+      "name": "public_gateway_headers_present",
+      "passed": true
+    },
+    {
+      "name": "creative_hashes_match_expected",
+      "passed": true
+    },
+    {
+      "name": "query_strings_blocked",
+      "passed": true
+    },
+    {
+      "name": "private_marker_paths_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_get_head_methods_blocked",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "creative_project_reference",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayReadback.v1",
+  "manifestSHA256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+  "noPrivateGraphEgressProof": "Blocked route checks reject private-looking markers and internal slices remain unavailable through the public Worker allowlist.",
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not copyright permission",
+    "not license selection advice",
+    "not implementation advice",
+    "not source-use permission",
+    "not final user plans, schedules, or Steps",
+    "not private graph storage"
+  ],
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+    "currentPackSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+    "manifestPackSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+    "packBodyPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+    "packBodySHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+    "packHashConsistent": true,
+    "packIDConsistent": true,
+    "workerCurrentPointerSHA256": "10ae14040308a843aeeab459dd29a2d0f3f24532e06472abd67c69cc9097f4db"
+  },
+  "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+  "packSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no goals, captures, schedules, proof, receipts, account IDs, device IDs, behavior history, personalization data, private creative project details, or private life graph context may be sent to R2",
+  "r2RequestPrivacyProof": "Worker requests are path-only public object reads; query strings are rejected and no private user context is accepted.",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded creative_project_reference gateway HTTPS readback only",
+  "status": "green_for_bounded_creative_project_reference_gateway_https_readback_yellow_overall_source_atlas",
+  "valid": true,
+  "workerURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "workerVersionID": "183dab6c-bf2c-4940-b51a-724b071d54bb"
+}

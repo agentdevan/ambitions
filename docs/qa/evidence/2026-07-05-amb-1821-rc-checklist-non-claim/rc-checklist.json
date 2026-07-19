@@ -1,0 +1,204 @@
+{
+  "issue": "AMB-1821",
+  "title": "Release Candidate Leaf - RC checklist non-claim packet",
+  "status": "Blocked / Not Ready for Release Candidate; Implemented Yellow / Ready For Review for this checklist packet only",
+  "date": "2026-07-05T16:17:19Z",
+  "branch": "main",
+  "baseline_main_sha": "0081eb05c47f8ba38d90d4257169df01b7a79725",
+  "artifact_commit_sha": "recorded in Linear after commit/push",
+  "parent": "AMB-1700",
+  "release_metadata": {
+    "Branch": "main",
+    "Commit SHA": "artifact commit SHA is recorded in Linear after commit/push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "simulator tooling proof exists from the current XcodeBuildMCP/simulator preflight repair packet, but no app build, app launch, XCTest, focused test, UI screenshot run, archive, upload, or physical-device procedure is claimed for AMB-1821",
+    "Exit code": "listed in the Markdown manifest validation table and Linear closeout comment",
+    "Artifact paths": [
+      "docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/manifest.md",
+      "docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/rc-checklist.json"
+    ],
+    "Validation run": "static/control-plane validation only; listed in Markdown manifest and Linear closeout comment",
+    "Validation not run": "XcodeGen, xcodebuild package resolution, xcodebuild build/test, build-for-testing, focused tests, test plans, UI screenshots, app launch, simulator walkthrough, physical-device procedure, accessibility walkthrough, performance profiling, privacy/legal review, account/R2 production proof, signed archive, App Store validation, TestFlight upload, archive export, and release approval were not run",
+    "Non-Claims": "No Release Candidate readiness, Release Green, build success, test success, archive success, device proof, privacy/legal approval, TestFlight readiness, App Store readiness, or product completion is claimed"
+  },
+  "checklist": [
+    {
+      "gate": "metadata_bundle",
+      "required_proof": "Branch, commit, environment, Xcode, destination, commands, exit codes, artifacts, skipped checks, and non-claims.",
+      "current_state": "partial_for_packet_only",
+      "blocking_owner": "future RC evidence bundle"
+    },
+    {
+      "gate": "xcodegen_generation",
+      "required_proof": "xcodegen generate at the release candidate commit.",
+      "current_state": "not_run",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "package_resolution",
+      "required_proof": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies.",
+      "current_state": "not_run",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "simulator_preflight",
+      "required_proof": "scripts/ambitions-xcode-sim-health.sh --json --timeout 30s at the RC commit.",
+      "current_state": "tooling_preflight_verified_but_not_rc_app_proof",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "debug_simulator_build",
+      "required_proof": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination <simulator> build CODE_SIGNING_ALLOWED=NO.",
+      "current_state": "not_run",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "build_for_testing",
+      "required_proof": "scripts/ambitions-xcode-build-for-testing.sh --batch <RC_BATCH>.",
+      "current_state": "not_run",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "test_plans",
+      "required_proof": "Smoke, Runtime, Accessibility, Screenshots, and ReleaseCandidate plans configured and run.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1691"
+    },
+    {
+      "gate": "focused_runtime_and_system_tests",
+      "required_proof": "Current focused proof for runtime, storage, projection, adapter, privacy, and system-surface risks.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1665, AMB-1668, AMB-1687, AMB-1688, AMB-1690, AMB-1705"
+    },
+    {
+      "gate": "ui_screenshots_and_visual_review",
+      "required_proof": "Current screenshots tied to build SHA, target comparison, and independent visual acceptance.",
+      "current_state": "not_run",
+      "blocking_owner": "visual review owner and future screenshot packet"
+    },
+    {
+      "gate": "accessibility",
+      "required_proof": "VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast, accessible actions, and keyboard/safe-area proof where relevant.",
+      "current_state": "not_run",
+      "blocking_owner": "accessibility owner and future accessibility packet"
+    },
+    {
+      "gate": "physical_device_matrix",
+      "required_proof": "Physical-device or explicitly scoped device proof for release-sensitive behavior.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1701, AMB-1822"
+    },
+    {
+      "gate": "privacy_manifest_and_app_store_disclosure",
+      "required_proof": "Current data-flow inventory, PrivacyInfo.xcprivacy review, accessed API reasons, App Store disclosure mapping, and privacy/legal approval.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1683, AMB-1685, AMB-1758"
+    },
+    {
+      "gate": "account_and_identity",
+      "required_proof": "Sign in with Apple / Google Sign-In implementation and entitlement proof if claimed.",
+      "current_state": "not_run",
+      "blocking_owner": "account launch owner"
+    },
+    {
+      "gate": "source_atlas_r2_boundary",
+      "required_proof": "Public/reference/freshness-only request-shape proof; no private life graph egress; production credential/deployment proof if claimed.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1682, AMB-1725, AMB-1726, AMB-1727, AMB-1728, AMB-1762"
+    },
+    {
+      "gate": "system_surfaces",
+      "required_proof": "Widgets, App Intents, Share Extension, notifications, EventKit/Reminders, App Group, and lifecycle proof.",
+      "current_state": "not_run",
+      "blocking_owner": "AMB-1685, AMB-1687, AMB-1688, AMB-1690, AMB-1701, AMB-1822"
+    },
+    {
+      "gate": "archive_sanity",
+      "required_proof": "Unsigned archive or approved signed archive at the RC commit, with logs and exit code.",
+      "current_state": "not_run",
+      "blocking_owner": "future RC run"
+    },
+    {
+      "gate": "app_store_connect_validation",
+      "required_proof": "Human-approved signed archive validation in Xcode Organizer or equivalent App Store Connect proof.",
+      "current_state": "not_run",
+      "blocking_owner": "release owner"
+    },
+    {
+      "gate": "testflight_upload",
+      "required_proof": "Human-approved upload and processing proof.",
+      "current_state": "not_run",
+      "blocking_owner": "release owner"
+    },
+    {
+      "gate": "known_risk_delta",
+      "required_proof": "Current delta from risk ledger and accepted Yellow residuals.",
+      "current_state": "present_as_blocker_references_not_burndown",
+      "blocking_owner": "AMB-1824, AMB-1760, AMB-1705"
+    },
+    {
+      "gate": "rollback_plan",
+      "required_proof": "Rollback plan tied to exact RC artifact and commit.",
+      "current_state": "template_present_not_exercised",
+      "blocking_owner": "future RC owner"
+    },
+    {
+      "gate": "human_approvals",
+      "required_proof": "Release owner, privacy/legal, visual, accessibility, and device-proof approvals where required.",
+      "current_state": "not_obtained",
+      "blocking_owner": "required before release claims"
+    }
+  ],
+  "validation_run": [
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/rc-checklist.json",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 scripts/ambitions-release-non-claim-gate.py docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/manifest.md docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/rc-checklist.json",
+      "exit_code": 0,
+      "result": "Passed after packet creation; release_facing_packets_checked=2."
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/manifest.md docs/qa/evidence/2026-07-05-amb-1821-rc-checklist-non-claim/rc-checklist.json",
+      "exit_code": 0,
+      "result": "Passed after packet creation."
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "Passed after packet creation; changed_paths=2, production_swift_files=1421, overHardLineCapFiles=0."
+    }
+  ],
+  "validation_not_run": [
+    "XcodeGen, xcodebuild package resolution, xcodebuild build, xcodebuild test, build-for-testing, focused tests, test plans, UI screenshots, app launch, manual simulator walkthrough, physical-device procedure, accessibility walkthrough, performance profiling, privacy/legal review, account/R2 production proof, signed archive, App Store validation, TestFlight upload, archive export, and release approval were not run for AMB-1821 under the current user instruction authorizing issue completion without testing until advised otherwise."
+  ],
+  "non_claims": [
+    "No Release Candidate readiness.",
+    "No Release Green.",
+    "No build success, test success, build-for-testing success, archive success, app launch proof, screenshot proof, accessibility conformance, device proof, privacy/legal approval, account readiness, R2 readiness, Source Atlas production readiness, TestFlight readiness, App Store readiness, upload readiness, or product completion.",
+    "This packet creates a blocker checklist only. It does not satisfy the checklist.",
+    "AMB-1700 remains In Progress until the full release-candidate gate has executable/artifact proof, not just this checklist.",
+    "AMB-1705 remains Needs Repair."
+  ],
+  "proof_claim_labels_used": {
+    "release_proof": "not verified; blocked by missing current RC evidence",
+    "device_proof": "not verified; blocked by AMB-1701 / AMB-1822 and no physical-device procedure",
+    "privacy_proof": "not verified; blocked by AMB-1683, AMB-1685, and no privacy/legal approval",
+    "accessibility_proof": "not verified; no accessibility walkthrough or artifact proof",
+    "performance_proof": "not verified; no profiling or performance evidence"
+  },
+  "rollback": "Revert this evidence folder. Move AMB-1821 back to Ready For Codex or Needs Repair if the checklist no longer blocks unsupported RC/TestFlight/App Store claims."
+}

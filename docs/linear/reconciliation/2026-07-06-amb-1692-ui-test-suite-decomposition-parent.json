@@ -1,0 +1,196 @@
+{
+  "issue": "AMB-1692",
+  "title": "UI Test Suite Decomposition Parent",
+  "status": "Implemented Yellow / Accepted Yellow candidate",
+  "date": "2026-07-06",
+  "branch": "main",
+  "baseline_main_sha": "d1876be23d7b00df57813b3046080e27c9114714",
+  "commit_sha": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+  "project": {
+    "name": "Architecture Simplification + Flagship Readiness Remediation",
+    "id": "59c3917f-f662-4ca3-b412-b532613f3a7a"
+  },
+  "artifact_paths": [
+    "docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for builds, tests, runtime proof, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired Markdown packet."
+  },
+  "scope": {
+    "included": [
+      "Delete the catch-all UI test monolith",
+      "Move existing UI test methods into scenario-owned XCTest classes",
+      "Extract shared helpers into semantic support files",
+      "Verify static method parity and file-size cleanup"
+    ],
+    "excluded_by_instruction": [
+      "xcodebuild",
+      "XCTest execution",
+      "simulator launch",
+      "screenshot proof",
+      "device proof"
+    ]
+  },
+  "source_changes": {
+    "deleted": [
+      "Native/AmbitionsUITests/AmbitionsUITests.swift"
+    ],
+    "created": [
+      "Native/AmbitionsUITests/AmbitionsUITestCase.swift",
+      "Native/AmbitionsUITests/AmbitionsCaptureUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsGoalsUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsScrollingUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsTimeUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsTodayUITestSupport.swift",
+      "Native/AmbitionsUITests/AmbitionsYouUITestSupport.swift",
+      "Native/AmbitionsUITests/BootstrapShellUITests.swift",
+      "Native/AmbitionsUITests/CaptureComposerUITests.swift",
+      "Native/AmbitionsUITests/GoalsSurfaceUITests.swift",
+      "Native/AmbitionsUITests/TodaySurfaceUITests.swift",
+      "Native/AmbitionsUITests/TimeSurfaceUITests.swift",
+      "Native/AmbitionsUITests/YouSurfaceUITests.swift"
+    ]
+  },
+  "evidence": {
+    "old_monolith_test_count": 61,
+    "new_target_test_count": 68,
+    "preexisting_separate_test_count": 7,
+    "missing_old_monolith_tests": [],
+    "uitest_files_over_600_lines": [],
+    "largest_new_uitest_file": {
+      "path": "Native/AmbitionsUITests/TimeSurfaceUITests.swift",
+      "lines": 571
+    },
+    "support_over_hard_line_cap_before": 41,
+    "support_over_hard_line_cap_after": 40
+  },
+  "validation_run": [
+    {
+      "command": "python3 - <<'PY' ... old/new UI test method parity ... PY",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 - <<'PY' ... Native/AmbitionsUITests line-cap check ... PY",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "xcodegen generate --spec project.yml",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "xcrun swiftc -parse -sdk \"$SDKROOT\" -target arm64-apple-ios17.0-simulator Native/AmbitionsUITests/*.swift",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.md docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.json",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "scripts/release-claim-safety-scan.sh docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.md docs/linear/reconciliation/2026-07-06-amb-1692-ui-test-suite-decomposition-parent.json",
+      "exit_code": 0,
+      "result": "pass"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "pass"
+    }
+  ],
+  "validation": [
+    "See validation_run."
+  ],
+  "validation_not_run": [
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "XCTest",
+    "UI tests",
+    "GitHub Actions workflow execution",
+    "simulator app launch",
+    "deterministic screenshot capture",
+    "manual VoiceOver, Dynamic Type, Reduce Motion, or accessibility device proof",
+    "performance measurement",
+    "archive, TestFlight, App Store upload, or physical-device procedure"
+  ],
+  "non_claims": [
+    "No Implemented Green claim.",
+    "No CI Green claim.",
+    "No test pass claim.",
+    "No screenshot proof.",
+    "No rendered UI proof.",
+    "No accessibility conformance claim.",
+    "No performance readiness claim.",
+    "No device proof.",
+    "No release readiness.",
+    "No TestFlight or App Store readiness.",
+    "No privacy/legal approval."
+  ],
+  "proof_ceiling": "Accepted Yellow only: build, XCTest, simulator, screenshot, and device proof were skipped by instruction.",
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Native/AmbitionsUITests"
+    ],
+    "old_noncanonical_paths_removed": [
+      "Native/AmbitionsUITests/AmbitionsUITests.swift"
+    ],
+    "compatibility_shims_left": [],
+    "yellow_debt": "Runtime execution proof is missing because build proof is currently skipped.",
+    "next_repair_train": "Run the configured UI test plan and attach XCTest/simulator evidence when build proof is allowed.",
+    "equivalent_folder_path_interpretation_used": false
+  }
+}

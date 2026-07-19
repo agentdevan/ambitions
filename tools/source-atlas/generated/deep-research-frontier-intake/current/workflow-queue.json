@@ -1,0 +1,2476 @@
+{
+  "createdAt": "2026-06-29T12:00:00Z",
+  "workflowItems": [
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "cpsc.recalls"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fema.fmsc",
+        "openfema",
+        "usgs.eq"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "bls.api",
+        "college.scorecard",
+        "onet.ws"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "airnow",
+        "aqs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "fdic.bankfind"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_count": 1,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "usda.fdc"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "census.tiger",
+        "hud.usps.crosswalk",
+        "iana.tzdb"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nppes",
+        "openfda"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "hud.counselor",
+        "hud.fmr.il"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_count": 5,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "congress.api",
+        "ecfr",
+        "federal.register.api",
+        "govinfo.api",
+        "irs.pubs"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_count": 3,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "dot.ntd.gtfs.catalog",
+        "gtfs.standards",
+        "nhtsa.vpic"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "adapter_contract_planning"
+    },
+    {
+      "blocking_reasons": [
+        "api_credentials_or_budget_review_required",
+        "frontier_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required",
+        "source_lane_review_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "api_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "frontier_governance_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gated_r2_promotion_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "gold_claim_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "legal_terms_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "local_candidate_harvest_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "production_target_readiness_review"
+    },
+    {
+      "blocking_reasons": [
+        "frontier_review_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "production_target_readiness_required",
+        "r2_owner_approval_required"
+      ],
+      "candidate_only": true,
+      "claim_output_allowed": false,
+      "configured_frontier_overlap": false,
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_count": 2,
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "source_ids": [
+        "nws.api"
+      ],
+      "status": "blocked_review_required",
+      "work_type": "source_lane_review"
+    }
+  ]
+}

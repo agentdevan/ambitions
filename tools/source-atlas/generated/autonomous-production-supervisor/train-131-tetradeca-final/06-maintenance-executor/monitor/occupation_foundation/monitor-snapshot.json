@@ -1,0 +1,147 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.bls_public_data.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "bls.public.data.api"
+    },
+    {
+      "apiPolicyID": "api.onet_public_database.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "onet.database"
+    },
+    {
+      "apiPolicyID": "api.openalex_snapshot.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": true,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "openalex.dataset"
+    },
+    {
+      "apiPolicyID": "api.openalex_api.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": true,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "openalex.works"
+    }
+  ],
+  "createdAt": "2026-06-29T00:36:00Z",
+  "domainID": "occupation_foundation",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-12-27",
+      "licenseID": "bls_public_terms",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "bls.public.data.api",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-12-27",
+      "licenseID": "onet_cc_by_4",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "onet.database",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": false,
+      "expiresAt": "2026-12-27",
+      "licenseID": "openalex_cc0_metadata",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "openalex.dataset",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": false,
+      "expiresAt": "2026-12-27",
+      "licenseID": "openalex_cc0_metadata",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "openalex.works",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "bls.public.data.api",
+    "onet.database",
+    "openalex.dataset",
+    "openalex.works"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.bls_public_data.v1",
+      "freshnessSLA": "series_publication_schedule",
+      "licenseID": "bls_public_terms",
+      "nextReviewDueAt": "2026-12-27",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "bls.public.data.api",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.onet_public_database.v1",
+      "freshnessSLA": "track_release_quarterly_review",
+      "licenseID": "onet_cc_by_4",
+      "nextReviewDueAt": "2026-12-27",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "onet.database",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.openalex_snapshot.v1",
+      "freshnessSLA": "monthly_snapshot_or_api_review",
+      "licenseID": "openalex_cc0_metadata",
+      "nextReviewDueAt": "2026-12-27",
+      "r2PackPolicy": "pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewStatus": "reviewed",
+      "sourceID": "openalex.dataset",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.openalex_api.v1",
+      "freshnessSLA": "monthly_snapshot_or_api_review",
+      "licenseID": "openalex_cc0_metadata",
+      "nextReviewDueAt": "2026-12-27",
+      "r2PackPolicy": "pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewStatus": "reviewed",
+      "sourceID": "openalex.works",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

@@ -1,0 +1,391 @@
+{
+  "adapterID": "usagov_change_address_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_usagov_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_relocation_admin_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_relocation_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.6cd5836a901c2183",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "USA.gov change-address public reference page",
+      "provenanceIDs": [
+        "provenance.f35d13e2b4e2c944"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.change_address"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_relocation_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.b4061bd94ce3a598",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "change address",
+      "provenanceIDs": [
+        "provenance.f35d13e2b4e2c944"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.change_address"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.e565bb96d397b3eb",
+      "claimType": "relocation_admin_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly USA.gov change-address page and government-works terms re-review",
+      "id": "claim.a3cb32c12a77750f",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.usa.gov/government-works",
+      "provenanceIDs": [
+        "provenance.f35d13e2b4e2c944"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "USA.gov / General Services Administration",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.change_address",
+      "sourceIDs": [
+        "usa.gov.change_address"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.usa.gov/change-address",
+      "state": "source_backed",
+      "text": "USA.gov publishes public change-address reference context for USPS mail forwarding and other government services to update, not address submission, legal advice, or a custom moving plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "usagov_change_address_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "travel_relocation",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "usa.gov.change_address",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "relocation_admin_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateLegalAdvice": true,
+      "doesNotCreateMovingPlan": true,
+      "doesNotSubmitAddress": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.travelRelocationCoverage.v1",
+      "label": "USA.gov change-address public relocation admin reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.change_address",
+      "subject": "relocation_admin.change_address"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "travel_relocation",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.6cd5836a901c2183",
+      "id": "edge.29e27f12d860f9e6",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.f35d13e2b4e2c944"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_relocation_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.change_address"
+      ],
+      "toAtomID": "atom.b4061bd94ce3a598",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.6cd5836a901c2183",
+        "atom.b4061bd94ce3a598"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.29e27f12d860f9e6"
+      ],
+      "id": "lattice.bc1a1d0f5bf5a470",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "usagov_change_address_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "travel_relocation",
+      "id": "pack_candidate.2ebbc2f01032fa32",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.change_address",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "usa.gov.change_address"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "9f4df13c4d5f21ca739302b369c48b5b7a26b37747bee30e844f31a098034994",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly USA.gov change-address page and government-works terms re-review",
+      "id": "provenance.f35d13e2b4e2c944",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+      "locator": "https://www.usa.gov/change-address",
+      "publicReferenceOnly": true,
+      "publisher": "USA.gov / General Services Administration",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "usa.gov.change_address",
+      "sourceState": "current",
+      "sourceURL": "https://www.usa.gov/change-address",
+      "termsURL": "https://www.usa.gov/government-works",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.a3cb32c12a77750f",
+      "dataClass": "public_requirement",
+      "gateType": "public_relocation_admin_reference_only",
+      "id": "requirement.5f69b11045d920ea",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.f35d13e2b4e2c944"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "usa.gov.change_address"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "usa.gov.change_address",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly USA.gov change-address page and government-works terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current USA.gov government works posture",
+    "publisher": "USA.gov / General Services Administration",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "usa.gov.change_address",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.usa.gov/government-works"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "usa.gov.change_address"
+  }
+}

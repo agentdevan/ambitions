@@ -1,0 +1,158 @@
+{
+  "issue": "AMB-1770",
+  "title": "Capture Full-screen Composer Proof",
+  "status": "implemented_yellow_full_screen_source_proof_mapped_without_rendered_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "b3565302ab4619b3d5c1d853f2c09077c0e0879b",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "capture_keyboard_walkthrough": false,
+    "manual_accessibility_review": false,
+    "physical_device_proof": false,
+    "owner_visual_approval": false
+  },
+  "authority_inputs": [
+    "docs/audits/root-ia-stage-shell-acceptance.md",
+    "docs/audits/capture-global-composer-acceptance.md",
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+    "docs/audits/amb-1766-frontend-accessibility-acceptance.md",
+    "docs/audits/amb-1769-frontend-known-issue-mapping.md",
+    "Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift",
+    "Native/Ambitions/Stage/Overlays/ShellOverlayState.swift",
+    "Native/Ambitions/Stage/StagePathStore.swift",
+    "Native/Ambitions/Stage/Chrome/DockBehaviorPolicy.swift",
+    "Native/Ambitions/Stage/AmbitionsStage.swift",
+    "Native/Ambitions/Stage/StageStore.swift",
+    "Native/Ambitions/App/AppShellActivatedCaptureSeam.swift",
+    "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift"
+  ],
+  "source_proof_map": {
+    "capture_not_tab": "source_present_root_ia_exactly_today_goals_time_you",
+    "capture_not_fake_route": "source_present_stage_store_presents_quick_capture_overlay",
+    "capture_not_half_sheet_when_activated": "source_present_redirect_and_activated_capture_classification",
+    "full_screen_seam_exists": "source_present_activated_capture_overlay_frame_max_width_height_infinity",
+    "dock_chrome_not_fifth_root": "source_present_dock_visible_only_when_overlay_none",
+    "local_save_path": "source_present_shell_command_router_quick_capture_path",
+    "dismissal_rollback_path": "source_present_dismiss_overlay_actions",
+    "accessibility_source_hooks": "source_present_labels_hints_actions_identifiers",
+    "screenshot_proof": "required_not_captured"
+  },
+  "gate_decision": {
+    "claim_ceiling": "yellow_only",
+    "source_full_screen_route_present": true,
+    "rendered_full_screen_proof_added": false,
+    "screenshot_proof_added": false,
+    "keyboard_clearance_proof_added": false,
+    "manual_accessibility_proof_added": false,
+    "physical_device_proof_added": false,
+    "capture_green_blocked": true,
+    "visual_green_blocked": true
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1770_capture_full_screen_source_packet_present",
+      "capture_source_route_is_mapped_as_global_composer_not_root_tab",
+      "source_full_screen_seam_and_rollback_policy_are_documented"
+    ],
+    "forbidden_claims": [
+      "rendered_full_screen_capture_proof_exists",
+      "keyboard_clearance_proof_exists",
+      "capture_screenshot_proof_exists",
+      "manual_voiceover_proof_exists",
+      "dynamic_type_proof_exists",
+      "reduce_motion_proof_exists",
+      "hit_target_proof_exists",
+      "save_dismissal_runtime_verified_here",
+      "physical_device_proof_exists",
+      "capture_green",
+      "visual_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_validation_passed_runtime_testing_skipped_by_instruction",
+    "commands_run": [
+      "git diff --check",
+      "jq . docs/audits/amb-1770-capture-full-screen-composer-proof.json",
+      "npx markdownlint-cli2 --no-globs docs/audits/amb-1770-capture-full-screen-composer-proof.md",
+      "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1770-capture-full-screen-composer-proof.md docs/audits/amb-1770-capture-full-screen-composer-proof.json",
+      "scripts/release-claim-safety-scan.sh docs/audits/amb-1770-capture-full-screen-composer-proof.md docs/audits/amb-1770-capture-full-screen-composer-proof.json",
+      "python3 scripts/ambitions-screenshot-artifact-audit.py",
+      "python3 scripts/ambitions-device-proof-required.py",
+      "python3 scripts/ambitions-remediation-governance-check.py",
+      "python3 scripts/ambitions-architecture-inventory.py",
+      "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+      "python3 scripts/ambitions-green-standard-audit.py",
+      "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+      "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1770-capture-full-screen-composer-proof.md docs/audits/amb-1770-capture-full-screen-composer-proof.json",
+      "scripts/privacy-boundary-scan.sh docs/audits/amb-1770-capture-full-screen-composer-proof.md docs/audits/amb-1770-capture-full-screen-composer-proof.json",
+      "xcodegen generate --spec project.yml",
+      "scripts/ambitions-xcodegen-needed.sh"
+    ],
+    "hard_gate_result": "passed",
+    "xcodegen_needed": false,
+    "static_artifact_guards": {
+      "screenshot_artifact_audit": "passed_without_generating_screenshots",
+      "device_proof_required": "passed_without_generating_device_proof"
+    },
+    "advisory_reviews": {
+      "no_unsupported_ai_claim_scan": "yellow_context_hits_reviewed_no_unsupported_claim_in_packet",
+      "privacy_boundary_scan": "yellow_context_hits_reviewed_no_privacy_boundary_violation_in_packet"
+    },
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "capture_keyboard_walkthrough",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_inspected": [
+      "Stage",
+      "App",
+      "Composer/Capture",
+      "Quality",
+      "scripts",
+      "audit_docs"
+    ],
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1770-capture-full-screen-composer-proof.md",
+      "docs/audits/amb-1770-capture-full-screen-composer-proof.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "current_screenshot",
+      "keyboard",
+      "safe_area",
+      "dismissal",
+      "manual_accessibility",
+      "dynamic_type",
+      "reduce_motion",
+      "hit_target",
+      "physical_device",
+      "owner_visual_review",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

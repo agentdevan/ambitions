@@ -1,0 +1,493 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "standards_body",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.7bdce56cbd446b47",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "language_standard_reference"
+      ],
+      "dataset_url": "https://www.coe.int/en/web/common-european-framework-reference-languages",
+      "declared_jurisdiction": "Europe",
+      "declared_license": "",
+      "declared_rights": "terms review required",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "manual_submission",
+      "distribution_urls": [
+        "https://www.coe.int/en/web/common-european-framework-reference-languages"
+      ],
+      "domain_guess": "public_language_learning_reference",
+      "evidence_hash": "5bbd7b7e1558ff2ff73365322e7b7919fd2fa0022a800a3f86a8d9e4ce27ba7c",
+      "frontier_id": "public_language_learning_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "publisher_name": "Council of Europe",
+      "publisher_url": "https://www.coe.int/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "https://www.coe.int/en/web/portal/terms-and-conditions",
+      "schema_version": "1.0.0",
+      "source_class_guess": "standards_body",
+      "terms_url": "https://www.coe.int/en/web/portal/terms-and-conditions"
+    },
+    {
+      "api_docs_url": "https://www.wikidata.org/wiki/Wikidata:Data_access",
+      "authority_class_guess": "open_knowledge_graph",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "crosswalk_only_not_regulated_authority",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.ef49fe9acf29aaa6",
+      "candidate_score": 40,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "language_entity_crosswalk"
+      ],
+      "dataset_url": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+      "declared_jurisdiction": "global",
+      "declared_license": "CC0",
+      "declared_rights": "crosswalk metadata only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "open_knowledge_graph_link",
+      "distribution_urls": [
+        "https://query.wikidata.org/"
+      ],
+      "domain_guess": "public_language_learning_reference",
+      "evidence_hash": "3ac22d8c06f239c3ba39097c0bc76bfe835edbae8a7ed4b77b32a27cd6d89942",
+      "frontier_id": "public_language_learning_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "publisher_name": "Wikidata",
+      "publisher_url": "https://www.wikidata.org/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "schema_version": "1.0.0",
+      "source_class_guess": "open_knowledge_graph",
+      "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use"
+    },
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.ba879a0dccf4a2af",
+      "candidate_score": 30,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_program_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "catalog metadata only",
+      "declared_rights": "source-of-sources only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "schema_org_dataset",
+      "distribution_urls": [
+        "https://catalog.data.gov/dataset"
+      ],
+      "domain_guess": "public_language_learning_reference",
+      "evidence_hash": "653ab7c5fd51ee3cd1a2e4a4605d75e88f3419c04df39d54193a7e17afbe6e9b",
+      "frontier_id": "public_language_learning_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "publisher_name": "Data.gov catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://www.data.gov/privacy-policy/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.8c6b61fbb287e43e",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "eligibility_reference",
+        "public_service_opportunity_reference"
+      ],
+      "dataset_url": "https://americorps.gov/serve",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "terms review required",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "official_institution_page",
+      "distribution_urls": [
+        "https://americorps.gov/serve"
+      ],
+      "domain_guess": "volunteering_public_reference",
+      "evidence_hash": "3e5ca008ae113f6fd0dc23202eead6d4fc8e141a466a84dc7ccec0cb914d2148",
+      "frontier_id": "volunteering_public_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "publisher_name": "AmeriCorps",
+      "publisher_url": "https://americorps.gov/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "https://americorps.gov/terms",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://americorps.gov/terms"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.a88cf8f6bed0bf4b",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_service_opportunity_reference"
+      ],
+      "dataset_url": "https://www.volunteer.gov/s/",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "terms review required",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "official_institution_page",
+      "distribution_urls": [
+        "https://www.volunteer.gov/s/"
+      ],
+      "domain_guess": "volunteering_public_reference",
+      "evidence_hash": "889baaa1ce49f4f93d50020ad9cc7a13b960b7f9627b8a6aa73686e215489ce9",
+      "frontier_id": "volunteering_public_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "publisher_name": "Volunteer.gov",
+      "publisher_url": "https://www.volunteer.gov/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "https://www.volunteer.gov/s/terms",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.volunteer.gov/s/terms"
+    },
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.305889470b734e30",
+      "candidate_score": 30,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_service_opportunity_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "catalog metadata only",
+      "declared_rights": "source-of-sources only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "public_catalog",
+      "distribution_urls": [
+        "https://catalog.data.gov/dataset"
+      ],
+      "domain_guess": "volunteering_public_reference",
+      "evidence_hash": "807032b05237e543a81e5413d5837f1840807f928eb84b48d31e11f978368205",
+      "frontier_id": "volunteering_public_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "publisher_name": "Data.gov catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://www.data.gov/privacy-policy/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/fixtures/frontier-intake/train-52-arbitrary-domain-proposals.json",
+  "kind": "ambitions.sourceAtlas.frontierIntake.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "proposalSummaries": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "public_language_learning_reference",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "volunteering_public_reference",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "review_required": true,
+      "status": "candidate_only"
+    }
+  ],
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.7bdce56cbd446b47",
+        "candidate_source.ef49fe9acf29aaa6",
+        "candidate_source.ba879a0dccf4a2af"
+      ],
+      "claim_classes": [
+        "language_standard_reference",
+        "learning_resource_reference",
+        "public_program_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_language_learning_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "resource_reference_180d",
+        "standard_reference_365d"
+      ],
+      "frontier_id": "public_language_learning_reference",
+      "goal_intent_classes": [
+        "compare_language_learning_resources",
+        "learn_language_public_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "not language proficiency assessment",
+        "not admission or credentialing advice"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_institution",
+        "open_knowledge_graph",
+        "public_catalog",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.8c6b61fbb287e43e",
+        "candidate_source.a88cf8f6bed0bf4b",
+        "candidate_source.305889470b734e30"
+      ],
+      "claim_classes": [
+        "eligibility_reference",
+        "public_service_opportunity_reference",
+        "training_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "volunteering_public_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "eligibility_reference_60d",
+        "program_reference_90d"
+      ],
+      "frontier_id": "volunteering_public_reference",
+      "goal_intent_classes": [
+        "compare_volunteering_requirements",
+        "find_public_service_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "not a volunteer placement service",
+        "not guaranteed eligibility"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ],
+  "recordCounts": {
+    "candidateSources": 6,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 2,
+    "proposedFrontiers": 2,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

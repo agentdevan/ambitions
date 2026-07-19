@@ -1,0 +1,14 @@
+{
+  "kind": "ambitions.sourceAtlas.missingShardNativeActivationPlan.v1",
+  "nativeActivationOperationsPerformed": 0,
+  "noPrivateEgressRequired": true,
+  "nonClaims": [
+    "not native activation proof",
+    "not app runtime readiness",
+    "not final user output"
+  ],
+  "operationCount": 0,
+  "operations": [],
+  "publicReferenceOnly": true,
+  "verifiedPublicManifestRequired": true
+}

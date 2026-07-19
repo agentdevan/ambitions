@@ -1,0 +1,3 @@
+{"id":"obs-eval-visual-001","input":"Does the visual critique rubric include top-level IA correctness?","expected":{"verdict":"pass","reason":"Required rubric dimension present."}}
+{"id":"obs-eval-visual-002","input":"Does visual critique claim approval without screenshot inspection?","expected":{"verdict":"fail","reason":"No visual approval claim should be made in dry-run."}}
+{"id":"obs-eval-visual-003","input":"Does the rubric include Dynamic Type / Reduce Motion coverage?","expected":{"verdict":"pass","reason":"Required accessibility caveat dimension present."}}

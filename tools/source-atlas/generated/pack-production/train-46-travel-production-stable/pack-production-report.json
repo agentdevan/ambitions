@@ -1,0 +1,497 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "stable",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "travel_relocation",
+  "dryRunPlan": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "production",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 1140,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/adjudications.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json",
+        "sha256": "b5f8e86625b952a8966c87647d62c0e7686e0b4e633a4bdefbd195a1f40c0c62"
+      },
+      {
+        "bytes": 1119,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/attribution.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json",
+        "sha256": "c4cf9ef0a02267928c79f903769300cbcd226d165f3c56c77a10daead1487f02"
+      },
+      {
+        "bytes": 7460,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/claims.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+        "sha256": "4ce38faf7422dd70e33178c12acdda3029f3b25f2efc3812f220ceabb84d9a57"
+      },
+      {
+        "bytes": 4221,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/coverage.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json",
+        "sha256": "b3b497b2a20c2d1c765cf1f334bcfbbb93f551aa7409c1d90a6bf2998ae677de"
+      },
+      {
+        "bytes": 1733,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/entities.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json",
+        "sha256": "6def4024d15901cc45d3c0e52ef07b373231cd89cf53191d8860c21165d16ae7"
+      },
+      {
+        "bytes": 1696,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/freshness.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json",
+        "sha256": "23c683a39407f88d05791795221d8c0c47e6cbe35fa47a362323ea1b9fb44e6f"
+      },
+      {
+        "bytes": 2170,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/licenses.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json",
+        "sha256": "279e5057c92b462fef14348386a627d235502d88ad1cdcded785c8939d1d1da0"
+      },
+      {
+        "bytes": 1244,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/lkg.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+        "sha256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb"
+      },
+      {
+        "bytes": 8557,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/manifest.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "sha256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be"
+      },
+      {
+        "bytes": 1348,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/non_claims.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json",
+        "sha256": "b56113046c6e163e7c05d914e128347554e201674db6b1b25e90a732643b87a6"
+      },
+      {
+        "bytes": 18773,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+        "sha256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f"
+      },
+      {
+        "bytes": 1397,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/revocations.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+        "sha256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd"
+      },
+      {
+        "bytes": 2659,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/sources.json",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json",
+        "sha256": "b55cfbbd370efcb76137a3fd362094b3a79c0a1e512ae9788ff7a5655ba68c5a"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "production",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+    "packetSHA256": "6cf69d9db1d9a04b49dfdf7df3481ebadb90e81f1a6ab54f923c06c7b61eae8e",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "state.travel.public_travel",
+      "usa.gov.change_address"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "state.travel.public_travel",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "usa.gov.change_address",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "lkg": {
+    "channel": "stable",
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "travel_relocation",
+    "manifest_key": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/travel_relocation/current.json",
+    "entities": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+    "sources": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 3,
+    "licenses": 2,
+    "objectCount": 13,
+    "sources": 2
+  },
+  "revocation": {
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+      "manifest": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.0a91eaa04a64ff51",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "stable",
+        "created_at": "2026-06-28T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "travel_relocation",
+        "manifest_key": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

@@ -1,0 +1,327 @@
+{
+  "issue": "AMB-1775",
+  "title": "Shell Chrome Screenshot Matrix",
+  "status": "implemented_yellow_shell_matrix_indexed_rendered_proof_blocked",
+  "date": "2026-07-06",
+  "baseline_sha": "0bece62b10b05ac3d7fb66dd2127ec19c8699b00",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "keyboard_walkthrough": false,
+    "route_depth_walkthrough": false,
+    "overlay_walkthrough": false,
+    "manual_accessibility_review": false,
+    "physical_device_proof": false,
+    "owner_visual_acceptance": false
+  },
+  "authority_inputs": [
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+    "docs/truth/RELEASE_TRUTH.md",
+    "docs/qa/KNOWN_ISSUES.md",
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md",
+    "docs/audits/amb-1769-frontend-known-issue-mapping.md"
+  ],
+  "source_repair": {
+    "production_source_changes": true,
+    "tests_updated": true,
+    "stage_dock_selected_capsule_fill_removed": true,
+    "selection_visual_state": "icon_foreground_color_plus_accessibility_selected_trait",
+    "runtime_authority_added": false,
+    "files_changed": [
+      "Native/Ambitions/Stage/Chrome/StageDockRail.swift",
+      "Native/AmbitionsTests/App/AppShellChromeTests.swift"
+    ]
+  },
+  "static_shell_evidence": [
+    {
+      "contract": "root_dock_visibility",
+      "source": "DockBehaviorPolicy",
+      "current_state": "root_dock_shows_only_at_root_route_depth_with_no_overlay",
+      "proof_ceiling": "source_contract_only_rendered_proof_absent"
+    },
+    {
+      "contract": "drilldown_chrome",
+      "source": "StagePathStore and AmbitionsStage",
+      "current_state": "route_paths_drive_drilldown_state_and_stage_renders_dock_only_when_policy_allows",
+      "proof_ceiling": "source_contract_only_route_screenshots_absent"
+    },
+    {
+      "contract": "safe_area_clearance",
+      "source": "StageSafeAreaPolicy and AppShellScaffold",
+      "current_state": "root_dock_clearance_and_accessibility_size_clearance_are_reserved",
+      "proof_ceiling": "source_contract_only_no_overlap_proof_absent"
+    },
+    {
+      "contract": "overlay_chrome",
+      "source": "StagePathStore overlay presentation policy",
+      "current_state": "capture_sheet_create_goal_and_memory_lens_presentations_hide_root_dock",
+      "proof_ceiling": "source_contract_only_overlay_screenshots_absent"
+    },
+    {
+      "contract": "dock_anatomy",
+      "source": "StageDockRail",
+      "current_state": "visible_content_is_icon_only_with_accessibility_labels",
+      "proof_ceiling": "source_contract_only_rendered_visual_review_absent"
+    },
+    {
+      "contract": "selected_state",
+      "source": "StageDockRail",
+      "current_state": "selected_state_has_no_visible_capsule_fill",
+      "proof_ceiling": "source_contract_only_current_screenshots_absent"
+    }
+  ],
+  "required_screenshot_matrix": [
+    {
+      "lane": "root_shell",
+      "required_captures": [
+        "today_root",
+        "goals_root",
+        "time_root",
+        "you_root"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "route_depth",
+      "required_captures": [
+        "goals_detail",
+        "time_drilldown",
+        "you_detail",
+        "back_return",
+        "reselection_to_root"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "safe_area_no_overlap",
+      "required_captures": [
+        "small_supported_iphone",
+        "primary_current_iphone",
+        "keyboard_present",
+        "accessibility_dynamic_type_root"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "overlays",
+      "required_captures": [
+        "capture_composer",
+        "search_memory_lens_overlay",
+        "create_goal_sheet",
+        "continuity_receipt",
+        "dismiss_or_back_return_state"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "appearance",
+      "required_captures": [
+        "light_root",
+        "system_root",
+        "dark_root",
+        "drilldown_appearance_variant"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "accessibility_settings",
+      "required_captures": [
+        "dynamic_type_accessibility_size",
+        "reduce_motion",
+        "increase_contrast",
+        "differentiate_without_color"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "surface_transitions",
+      "required_captures": [
+        "today_to_goals",
+        "goals_to_time",
+        "time_to_you",
+        "you_to_today"
+      ],
+      "current_status": "required_not_captured"
+    },
+    {
+      "lane": "inspection_trust_entry",
+      "required_captures": [
+        "proof_entry",
+        "source_entry",
+        "privacy_entry",
+        "history_or_receipts_entry",
+        "return_to_shell"
+      ],
+      "current_status": "required_not_captured"
+    }
+  ],
+  "known_issue_mapping": {
+    "known_issue_rows_closed": false,
+    "rows": [
+      "AMB-ISSUE-0006",
+      "AMB-ISSUE-0007",
+      "AMB-ISSUE-0806",
+      "AMB-ISSUE-0901",
+      "AMB-ISSUE-0902",
+      "AMB-ISSUE-1011",
+      "AMB-ISSUE-1701-1709"
+    ],
+    "current_result": "source_regression_repaired_matrix_indexed_rows_unverified_until_current_rendered_proof_exists"
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1775_shell_matrix_index_present",
+      "stage_dock_selected_capsule_fill_removed_in_source",
+      "screenshot_device_accessibility_non_claims_recorded"
+    ],
+    "forbidden_claims": [
+      "shell_screenshots_were_captured",
+      "root_dock_no_overlap_proof_exists",
+      "route_depth_dock_hiding_rendered_proof_exists",
+      "keyboard_clearance_proof_exists",
+      "dynamic_type_shell_proof_exists",
+      "reduce_motion_shell_proof_exists",
+      "manual_voiceover_proof_exists",
+      "physical_device_shell_proof_exists",
+      "owner_visual_acceptance_exists",
+      "shell_visual_green",
+      "frontend_visual_green",
+      "accessibility_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_guards_passed_rendered_proof_not_run",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/audits/amb-1775-shell-chrome-screenshot-matrix.json >/dev/null",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1775-shell-chrome-screenshot-matrix.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1775-shell-chrome-screenshot-matrix.md docs/audits/amb-1775-shell-chrome-screenshot-matrix.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1775-shell-chrome-screenshot-matrix.md docs/audits/amb-1775-shell-chrome-screenshot-matrix.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed_static_guard_no_screenshot_artifact_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed_static_guard_no_device_proof_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed_final_tree_parity"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed_static_source_scan"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "rg -n \"theme\\\\.shell\\\\.controlBackground|Text\\\\(destination\\\\.title\\\\)|\\\\.stroke\\\\(|\\\\.background \\\\{\" Native/Ambitions/Stage/Chrome/StageDockRail.swift -S",
+        "result": "passed_0_hits"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1775-shell-chrome-screenshot-matrix.md docs/audits/amb-1775-shell-chrome-screenshot-matrix.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1775-shell-chrome-screenshot-matrix.md docs/audits/amb-1775-shell-chrome-screenshot-matrix.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed_no_xcodeproj_diff_after_generation"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "pre_commit_xcodegen_needed_1_due_dirty_swift_source_inputs_post_commit_xcodegen_needed_0"
+      }
+    ],
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "keyboard_walkthrough",
+      "route_depth_walkthrough",
+      "overlay_walkthrough",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Stage/Chrome",
+      "tests",
+      "audit_docs"
+    ],
+    "production_source_changes": true,
+    "files_created": [
+      "docs/audits/amb-1775-shell-chrome-screenshot-matrix.md",
+      "docs/audits/amb-1775-shell-chrome-screenshot-matrix.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "current_rendered_shell_screenshots",
+      "route_depth_screenshots",
+      "no_overlap_proof",
+      "keyboard_clearance_proof",
+      "dynamic_type_proof",
+      "reduce_motion_proof",
+      "manual_accessibility",
+      "physical_device_proof",
+      "owner_visual_acceptance",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

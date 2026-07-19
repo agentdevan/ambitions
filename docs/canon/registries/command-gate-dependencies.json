@@ -1,0 +1,28 @@
+{
+  "canon_content_sha256": "4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c",
+  "canon_revision": 1,
+  "dependencies": [
+    {
+      "activation_authorization": false,
+      "approval_receipt_id": null,
+      "canon_content_sha256": "4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c",
+      "command_id": "CMD-YOU-ENTITLEMENT-EXPIRED-002",
+      "dependency_id": "GATE-STOREKIT-PRODUCT-REGISTRY-001",
+      "dependency_kind": "storekit_product_registry",
+      "dependency_posture": "blocked",
+      "dependency_revision": 1,
+      "dependency_sha256": "6e7d0f42a4eb6d01bc452161ddccda93d6c51bcf60d20e62581548112dd488a2",
+      "exact_product_mappings": [],
+      "freshness": "absent",
+      "mapping_record_id": null,
+      "mapping_sha256": null,
+      "owner_approval_state": "withheld",
+      "owner_concept": "surface.you.entitlement-command-contract",
+      "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
+      "state_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"
+    }
+  ],
+  "registry_id": "COMMAND-GATE-DEPENDENCY-REGISTRY-001",
+  "registry_revision": 1,
+  "schema_version": 1
+}

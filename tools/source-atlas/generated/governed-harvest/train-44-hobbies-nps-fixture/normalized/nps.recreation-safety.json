@@ -1,0 +1,591 @@
+{
+  "adapterID": "nps_recreation_safety_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_nps_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_recreation_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "recreation_public_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.fd5fc35735885009",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "NPS Health & Safety public reference page",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "recreation_safety_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.11d4d768fe7224ed",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "trip planning",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "recreation_safety_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.8e32b215307a4d3b",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "recreate responsibly",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "recreation_safety_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.dfc0295b66f1d158",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "health and safety topics",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.5373fff9259afda3",
+      "claimType": "safety_guidance_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly NPS health and safety page and disclaimer re-review",
+      "id": "claim.ea9ed6e893531c9a",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Park Service",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "state": "source_backed",
+      "text": "The National Park Service Health & Safety page points visitors to trip planning and preparedness as public recreation safety context, not emergency advice or a personalized outdoor plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.36ff50748edc8b91",
+      "claimType": "public_rules_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly NPS health and safety page and disclaimer re-review",
+      "id": "claim.e85e9663e065f35f",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Park Service",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "state": "source_backed",
+      "text": "The National Park Service Health & Safety page references recreating responsibly, being prepared, and understanding limits as public recreation reference context, not unsafe instructions or a guarantee of safety.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.ed5d30b6c66ffe48",
+      "claimType": "learning_resource_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly NPS health and safety page and disclaimer re-review",
+      "id": "claim.69b781aecce98b40",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Park Service",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "state": "source_backed",
+      "text": "The National Park Service Health & Safety page lists public learning topics such as trip planning, severe weather, and healthy parks resources for general reference only.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "nps_recreation_safety_adapter",
+    "atomCount": 4,
+    "claimCount": 3,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "hobbies_recreation",
+    "edgeCount": 3,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 3,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "nps.recreation-safety",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "safety_guidance_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreatePersonalizedRecreationPlan": true,
+      "doesNotCreateUnsafeInstructions": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.hobbiesRecreationCoverage.v1",
+      "label": "NPS trip planning public recreation safety reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "subject": "recreation_safety.trip_planning"
+    },
+    {
+      "claimType": "public_rules_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreatePersonalizedRecreationPlan": true,
+      "doesNotCreateUnsafeInstructions": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.hobbiesRecreationCoverage.v1",
+      "label": "NPS recreate responsibly public reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "subject": "recreation_safety.recreate_responsibly"
+    },
+    {
+      "claimType": "learning_resource_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreatePersonalizedRecreationPlan": true,
+      "doesNotCreateUnsafeInstructions": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.hobbiesRecreationCoverage.v1",
+      "label": "NPS health and safety learning topics public reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "subject": "recreation_learning.health_and_safety_topics"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "hobbies_recreation",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.fd5fc35735885009",
+      "id": "edge.cf99bef3957379ab",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_recreation_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "toAtomID": "atom.11d4d768fe7224ed",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.fd5fc35735885009",
+      "id": "edge.e9a01af7a85b0b35",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_recreation_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "toAtomID": "atom.8e32b215307a4d3b",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.fd5fc35735885009",
+      "id": "edge.8e56f8786c38a515",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_recreation_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "toAtomID": "atom.dfc0295b66f1d158",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.fd5fc35735885009",
+        "atom.11d4d768fe7224ed",
+        "atom.8e32b215307a4d3b",
+        "atom.dfc0295b66f1d158"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.cf99bef3957379ab",
+        "edge.e9a01af7a85b0b35",
+        "edge.8e56f8786c38a515"
+      ],
+      "id": "lattice.2a791fffb935e236",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "nps_recreation_safety_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "hobbies_recreation",
+      "id": "pack_candidate.38f2cb74555e1712",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 4,
+        "claims": 3,
+        "crosswalks": 0,
+        "edges": 3,
+        "requirements": 3
+      },
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "nps.recreation-safety"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "405c6731e3547017c3d4fa92ff053cd6aa3e3556638d7c5728f2a6677639025f",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly NPS health and safety page and disclaimer re-review",
+      "id": "provenance.8d153d10654ce761",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with NPS disclaimer, third-party, trademark, and media caveats retained",
+      "locator": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "publicReferenceOnly": true,
+      "publisher": "National Park Service",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "nps.recreation-safety",
+      "sourceState": "current",
+      "sourceURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "termsURL": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.ea9ed6e893531c9a",
+      "dataClass": "public_requirement",
+      "gateType": "public_recreation_safety_reference_only",
+      "id": "requirement.1052d213206434f7",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.e85e9663e065f35f",
+      "dataClass": "public_requirement",
+      "gateType": "public_recreation_rules_reference_only",
+      "id": "requirement.bd8142c8f2aab3f5",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.69b781aecce98b40",
+      "dataClass": "public_requirement",
+      "gateType": "public_recreation_learning_reference_only",
+      "id": "requirement.1e675cb95521c08c",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.8d153d10654ce761"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "nps.recreation-safety",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly NPS health and safety page and disclaimer re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with NPS disclaimer, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current NPS.gov disclaimer posture",
+    "publisher": "National Park Service",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "nps.recreation-safety",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.nps.gov/aboutus/disclaimer.htm"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "nps.recreation-safety"
+  }
+}

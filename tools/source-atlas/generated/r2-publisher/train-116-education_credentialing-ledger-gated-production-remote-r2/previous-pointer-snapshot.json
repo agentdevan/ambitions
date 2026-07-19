@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": 1728,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+    "sha256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448"
+  },
+  "lastKnownGood": {
+    "bytes": 1262,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+    "sha256": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "issue": "AMB-1691",
+  "status": "Implemented Yellow parent closeout",
+  "date": "2026-07-06T03:22:00Z",
+  "branch": "main",
+  "baseline_main_sha": "58248dd65aea813c9f01acca8a61c1fb86d5a2a4",
+  "commit_sha": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+  "project": {
+    "name": "Architecture Simplification + Flagship Readiness Remediation",
+    "id": "59c3917f-f662-4ca3-b412-b532613f3a7a"
+  },
+  "artifact_paths": [
+    "docs/qa/test-plans/amb-1691-xcode-test-plan-suite.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for builds, tests, runtime proof, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file, the paired Markdown packet, and docs/qa/test-plans/amb-1691-xcode-test-plan-suite.md."
+  },
+  "test_plans": [
+    {
+      "plan": "Smoke",
+      "path": "Native/TestPlans/Smoke.xctestplan",
+      "scheme": "AmbitionsSmoke",
+      "scope": "Small launch/unit and launch-URL UI smoke selectors",
+      "run_policy": "Manual CI dispatch or local focused preflight after build proof is re-enabled"
+    },
+    {
+      "plan": "Runtime",
+      "path": "Native/TestPlans/Runtime.xctestplan",
+      "scheme": "AmbitionsRuntime",
+      "scope": "LocalRuntimeOS scenario, Source influence receipt, privacy/data class, app-group snapshot, export/import/reset, and runtime replay smoke selectors",
+      "run_policy": "Manual CI dispatch when runtime/local-first remediation needs focused proof"
+    },
+    {
+      "plan": "Accessibility",
+      "path": "Native/TestPlans/Accessibility.xctestplan",
+      "scheme": "AmbitionsAccessibility",
+      "scope": "Automated accessibility nutrition and flagship-surface accessibility state selectors",
+      "run_policy": "Manual CI dispatch when accessibility evidence needs source-level nutrition proof"
+    },
+    {
+      "plan": "Screenshots",
+      "path": "Native/TestPlans/Screenshots.xctestplan",
+      "scheme": "AmbitionsScreenshots",
+      "scope": "Deterministic screenshot UI lane selector",
+      "run_policy": "Manual CI dispatch when screenshot artifacts are needed after build proof is re-enabled"
+    },
+    {
+      "plan": "ReleaseCandidate",
+      "path": "Native/TestPlans/ReleaseCandidate.xctestplan",
+      "scheme": "AmbitionsReleaseCandidate",
+      "scope": "Aggregate AmbitionsTests and AmbitionsUITests targets with coverage enabled",
+      "run_policy": "Manual CI dispatch before release-candidate evidence is requested; not release proof until it runs and passes"
+    }
+  ],
+  "ci_wiring": {
+    "workflow": ".github/workflows/ambitions-xcode-test-plans.yml",
+    "trigger": "workflow_dispatch",
+    "execution_sequence": [
+      "Resolve selected plan to named scheme",
+      "Run scripts/ambitions-xcode-build-for-testing.sh",
+      "Run scripts/ambitions-xcode-test-plan.sh",
+      "Upload .codex/xcode-results, .codex/xcode-logs, and .codex/xcode-summaries artifacts"
+    ],
+    "executed_in_this_closeout": false
+  },
+  "validation_run": [
+    {
+      "command": "for f in Native/TestPlans/Smoke.xctestplan Native/TestPlans/Runtime.xctestplan Native/TestPlans/Accessibility.xctestplan Native/TestPlans/Screenshots.xctestplan Native/TestPlans/ReleaseCandidate.xctestplan; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done",
+      "exit_code": 0,
+      "result": "Every test-plan JSON file parsed"
+    },
+    {
+      "command": "python3 -m json.tool docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.json",
+      "exit_code": 0,
+      "result": "This packet JSON parsed"
+    },
+    {
+      "command": "xcodegen generate --spec project.yml",
+      "exit_code": 0,
+      "result": "Regenerated the Xcode project from project.yml"
+    },
+    {
+      "command": "xcodegen dump --type parsed-json selector audit",
+      "exit_code": 0,
+      "result": "Confirmed AmbitionsSmoke, AmbitionsRuntime, AmbitionsAccessibility, AmbitionsScreenshots, and AmbitionsReleaseCandidate each point at the expected default test plan"
+    },
+    {
+      "command": "Generated scheme inspection",
+      "exit_code": 0,
+      "result": "Confirmed the five generated .xcscheme files contain TestPlans references"
+    },
+    {
+      "command": "actionlint .github/workflows/ambitions-xcode-test-plans.yml",
+      "exit_code": 0,
+      "result": "Workflow syntax passed local actionlint"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "Passed; valid=true, findingCount=0, changedPathCount=9"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "Passed; all strict quality gates passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json",
+      "exit_code": 0,
+      "result": "Passed; invalidAcceptedYellowIssues=[]"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "Passed; final-tree parity achieved"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/qa/test-plans/amb-1691-xcode-test-plan-suite.md docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.md docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.json",
+      "exit_code": 0,
+      "result": "Passed for the test-plan suite doc, this packet, and paired JSON"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed"
+    }
+  ],
+  "validation_not_run": [
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "XCTest",
+    "UI tests",
+    "manual-dispatch GitHub Actions run",
+    "simulator app launch",
+    "deterministic screenshot capture",
+    "manual VoiceOver proof",
+    "Dynamic Type device proof",
+    "Reduce Motion device proof",
+    "performance measurement",
+    "archive",
+    "TestFlight upload",
+    "App Store upload",
+    "physical-device procedure"
+  ],
+  "non_claims": [
+    "Implemented Green",
+    "CI Green",
+    "test pass",
+    "screenshot proof",
+    "rendered UI proof",
+    "accessibility conformance",
+    "performance readiness",
+    "device proof",
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness",
+    "privacy/legal approval"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Quality/test-plan configuration",
+      "CI configuration"
+    ],
+    "files_created": [
+      "Native/TestPlans/Runtime.xctestplan",
+      "Native/TestPlans/Accessibility.xctestplan",
+      "Native/TestPlans/Screenshots.xctestplan",
+      "Native/TestPlans/ReleaseCandidate.xctestplan",
+      ".github/workflows/ambitions-xcode-test-plans.yml",
+      "docs/qa/test-plans/amb-1691-xcode-test-plan-suite.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1691-xcode-test-plans-parent.json"
+    ],
+    "project_source_edited": [
+      "project.yml"
+    ],
+    "source_files_edited": [],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "new_suffix_split_files_added": [],
+    "new_broad_models_files_added": [],
+    "new_runtime_or_source_atlas_authority_added": false,
+    "yellow_debt_remains": true,
+    "next_repair_train": "Execute the relevant plan workflow or local plan runner when build proof is re-enabled.",
+    "equivalent_folder_interpretation_used": false
+  },
+  "build_proof_instruction": "Build proof is skipped under the current user instruction until advised otherwise."
+}

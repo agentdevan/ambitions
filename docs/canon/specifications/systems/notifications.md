@@ -1,0 +1,913 @@
++++
+spec_id = "SYSTEM-NOTIFICATIONS"
+title = "Notifications"
+kind = "system"
+status = "normative"
+owner_domain = "system-notifications"
+canon_revision = 1
+profile = "system-v1"
+owns_concepts = [
+  "system.notifications.command-contract",
+  "system.notifications.external-effect",
+  "system.notifications.object-aware",
+]
+inherits = ["OBJECT-REMINDER-COMPLETION-001", "RUNTIME-MUTATION-SEQUENCE-001", "LAW-RUNTIME-DURABLE-SUCCESS-001", "PRIVACY-VISIBILITY-001", "PLATFORM-NATIVE-IPHONE-001"]
+depends_on = ["CONSTITUTION", "APP-PERMISSIONS", "OBJECT-NOTIFICATION-RULE", "SYSTEM-PRIVATE-LIFE-RUNTIME", "SYSTEM-PRIVACY-DATA-CLASSIFICATION"]
+source_owners = ["Native/Ambitions/Core/Permissions/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Projections/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Quality/"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-ACTED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Acted; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: A notification response was received. Saved Goals, Steps, and time remain unchanged.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Acted."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: A notification response was received. Saved Goals, Steps, and time remain unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: A notification response was received. Saved Goals, Steps, and time remain unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Done: No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: A notification response was received. Saved Goals, Steps, and time remain unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: A notification response was received. Saved Goals, Steps, and time remain unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Done announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Acted; rejection focuses the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Acted. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: A notification response was received. Saved Goals, Steps, and time remain unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-ACTED-001"
+label = "Done"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the originating You notification context from Notification rules and delivery state — Acted"
+destination_id = "DEST-YOU-NOTIFICATIONS-ACTED-001"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: A notification response was received. Saved Goals, Steps, and time remain unchanged."
+success_focus = "the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Acted"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-ACTED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Acted"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-ACTED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, complete, snooze, reschedule, or prove an owning object."
+rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-ACTED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Delivered; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Delivered.\nAdd Proof => destination: the resolved object owner’s Proof consequence preview; effect: No durable mutation occurs and no Receipt is created; the resolved owner validates proof requirements before exposing its typed Add Proof command; focus: the owning object or first consequence in its canonical preview.\nComplete => destination: the resolved Step or object closure consequence preview; effect: No durable mutation occurs and no Receipt is created; the resolved owner revalidates completion and proof requirements before exposing its typed closure command; focus: the owning object or first consequence in its canonical preview.\nOpen Event => destination: the resolved Event owner detail; effect: No durable mutation occurs and no Receipt is created; the Event opens for inspection without acknowledging or completing it; focus: the owning object or first consequence in its canonical preview.\nReschedule => destination: the resolved object owner’s scheduling consequence preview; effect: No durable mutation occurs and no Receipt is created; the scheduling owner revalidates revision, capacity, and reflow before exposing its typed move command; focus: the owning object or first consequence in its canonical preview.\nReview Reflow => destination: the resolved Time reflow consequence preview; effect: No durable mutation occurs and no Receipt is created; the Time owner shows the proposed reflow without committing it; focus: the owning object or first consequence in its canonical preview.\nSnooze => destination: the resolved Reminder or notification-rule timing preview; effect: No durable mutation occurs and no Receipt is created; the timing owner revalidates revision and authorization before exposing its typed Snooze command; focus: the owning object or first consequence in its canonical preview.\nStart => destination: the resolved Step execution consequence preview; effect: No durable mutation occurs and no Receipt is created; the Step owner revalidates execution state before exposing its typed Start command; focus: the owning object or first consequence in its canonical preview."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification reached the device; delivery alone does not mark work complete."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Done: No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification reached the device; delivery alone does not mark work complete."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification reached the device; delivery alone does not mark work complete."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Done announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Delivered; rejection focuses the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Delivered. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: The notification reached the device; delivery alone does not mark work complete."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-001"
+label = "Done"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the originating You notification context from Notification rules and delivery state — Delivered"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-001"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete."
+success_focus = "the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Delivered"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Delivered"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, complete, snooze, reschedule, or prove an owning object."
+rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-002"
+label = "Add Proof"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved object owner’s Proof consequence preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-002"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the resolved owner validates proof requirements before exposing its typed Add Proof command"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-002-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Add Proof action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-002-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-002"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-003"
+label = "Complete"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Step or object closure consequence preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-003"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the resolved owner revalidates completion and proof requirements before exposing its typed closure command"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-003-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Complete action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-003-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-003"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-004"
+label = "Open Event"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Event owner detail"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-004"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the Event opens for inspection without acknowledging or completing it"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-004-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Open Event action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-004-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-004"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-005"
+label = "Reschedule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved object owner’s scheduling consequence preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-005"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the scheduling owner revalidates revision, capacity, and reflow before exposing its typed move command"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-005-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Reschedule action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-005-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-005"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-006"
+label = "Review Reflow"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Time reflow consequence preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-006"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the Time owner shows the proposed reflow without committing it"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-006-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Review Reflow action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-006-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-006"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-007"
+label = "Snooze"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Reminder or notification-rule timing preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-007"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the timing owner revalidates revision and authorization before exposing its typed Snooze command"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-007-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Snooze action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-007-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-007"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-008"
+label = "Start"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Step execution consequence preview"
+destination_id = "DEST-YOU-NOTIFICATIONS-DELIVERED-008"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the Step owner revalidates execution state before exposing its typed Start command"
+success_focus = "the owning object or first consequence in its canonical preview"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-008-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Start action and opaque stale, authorization, or proof reason"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DELIVERED-008-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DELIVERED-008"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Settings => destination: the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Disabled; effect: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notifications are off. Goals, Steps, and time remain unchanged.; focus: the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Disabled."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Open Settings: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notifications are off. Goals, Steps, and time remain unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: Notifications are off. Goals, Steps, and time remain unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Open Settings: Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: Notifications are off. Goals, Steps, and time remain unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: Notifications are off. Goals, Steps, and time remain unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Open Settings announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Disabled; rejection focuses the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Disabled. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: Notifications are off. Goals, Steps, and time remain unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DISABLED-001"
+label = "Open Settings"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Disabled"
+destination_id = "DEST-YOU-NOTIFICATIONS-DISABLED-001"
+destination_posture = "current"
+effect = "The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notifications are off. Goals, Steps, and time remain unchanged."
+success_focus = "the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Disabled"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-DISABLED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Disabled"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-DISABLED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "External-result: system Settings owns authorization; foreground return re-reads permission before any separate local projection reconciliation."
+rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-DISABLED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Try Again => destination: the current-rule iOS scheduling or removal reconciliation result from Notification rules and delivery state — Externally Failed; effect: The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged.; focus: the changed Rule, owning object, or Try Again result heading in Notification rules and delivery state — Externally Failed.\nReconcile => destination: the reconciled local-rule and iOS-request status; effect: The Reconcile external result causes no local canonical mutation; the comparison reports current external results without completing work or mutating an owning object; focus: the first reconciled rule or remaining external failure."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Try Again: The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification could not be scheduled. The related Step remains unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Try Again: Cancellation leaves the local Rule and failed external identity unchanged; foreground reconciliation compares current committed rules with system requests before another retry. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification could not be scheduled. The related Step remains unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification could not be scheduled. The related Step remains unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Try Again announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Try Again result heading in Notification rules and delivery state — Externally Failed; rejection focuses the Try Again control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Externally Failed. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: The notification could not be scheduled. The related Step remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-001"
+label = "Try Again"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Only the failed external outbox identity for the current committed Rule may be retried", "Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the current-rule iOS scheduling or removal reconciliation result from Notification rules and delivery state — Externally Failed"
+destination_id = "DEST-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-001"
+destination_posture = "current"
+effect = "The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged."
+success_focus = "the changed Rule, owning object, or Try Again result heading in Notification rules and delivery state — Externally Failed"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Try Again control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Externally Failed"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "External-result: iOS scheduling or removal follows the accepted local Rule and cannot redefine or replay canonical success."
+rollback_undo = "Cancellation leaves the local Rule and failed external identity unchanged; foreground reconciliation compares current committed rules with system requests before another retry."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002"
+label = "Reconcile"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Committed local Notification Rule identities and revisions are current", "Current iOS request identities have been read without replaying a callback", "The comparison is idempotent and cannot duplicate scheduling"]
+destination = "the reconciled local-rule and iOS-request status"
+destination_id = "DEST-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002"
+destination_posture = "current"
+effect = "The Reconcile external result causes no local canonical mutation; the comparison reports current external results without completing work or mutating an owning object"
+success_focus = "the first reconciled rule or remaining external failure"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Reconcile control and exact rule or iOS request identity"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Only minimized rule identifiers and scheduling fields reach iOS; callback payloads disclose no private graph context."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-ALLOWED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Create Rule => destination: the locally committed Notification Rule status from Notification rules and delivery state — Permission Allowed; effect: A typed Create Rule Command validates object ownership, current revision, user policy, privacy, and permission posture; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before any separate iOS scheduling result. If permission is denied, the local rule remains retained and inactive. Visible evidence before commit remains: Notification access is allowed, subject to each rule and privacy choice.; focus: the changed Rule, owning object, or Create Rule result heading in Notification rules and delivery state — Permission Allowed."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Create Rule: A typed Create Rule Command validates object ownership, current revision, user policy, privacy, and permission posture; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before any separate iOS scheduling result. If permission is denied, the local rule remains retained and inactive. Visible evidence before commit remains: Notification access is allowed, subject to each rule and privacy choice. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: Notification access is allowed, subject to each rule and privacy choice."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Create Rule: Before commit, cancellation changes nothing; after local commit, Undo or a typed rule command reverses local policy while any iOS request removal reconciles separately. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: Notification access is allowed, subject to each rule and privacy choice."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: Notification access is allowed, subject to each rule and privacy choice."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Create Rule announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Create Rule result heading in Notification rules and delivery state — Permission Allowed; rejection focuses the Create Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Allowed. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: Notification access is allowed, subject to each rule and privacy choice."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+label = "Create Rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated", "The local rule consequence is accepted before any separate iOS scheduling or removal dispatch"]
+destination = "the locally committed Notification Rule status from Notification rules and delivery state — Permission Allowed"
+destination_id = "DEST-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+destination_posture = "current"
+effect = "A typed Create Rule Command validates object ownership, current revision, user policy, privacy, and permission posture; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before any separate iOS scheduling result. If permission is denied, the local rule remains retained and inactive. Visible evidence before commit remains: Notification access is allowed, subject to each rule and privacy choice."
+success_focus = "the changed Rule, owning object, or Create Rule result heading in Notification rules and delivery state — Permission Allowed"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Create Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Allowed"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Mutation: the local Notification Rule commits first through Event, Projection, Receipt, History, and replay-safe ownership; iOS scheduling follows as a separate external result."
+rollback_undo = "Before commit, cancellation changes nothing; after local commit, Undo or a typed rule command reverses local policy while any iOS request removal reconciles separately."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+inverse_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+label = "Remove created notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001 is the exact trigger command and its exact trigger Receipt is current", "The created local Rule identity, owning-object revision, permission posture, privacy policy, and iOS request reconciliation state are current"]
+destination = "You Notifications with the exact created local Rule removed from active policy and its owning Goal, Step, or time item unchanged"
+destination_id = "DEST-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact created Notification Rule from active local policy without deleting or completing its owning object, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Create Rule Receipt and History remain intact and any iOS request removal reconciles separately."
+success_focus = "the owning object notification summary showing no active local Rule, followed by reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Remove created notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the created Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Settings => destination: the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Permission Denied; effect: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access is off. Saved Goals, Steps, and time remain available.; focus: the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Denied."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Open Settings: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access is off. Saved Goals, Steps, and time remain available. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: Notification access is off. Saved Goals, Steps, and time remain available."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Open Settings: Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: Notification access is off. Saved Goals, Steps, and time remain available."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: Notification access is off. Saved Goals, Steps, and time remain available."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Open Settings announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Denied; rejection focuses the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Denied. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: Notification access is off. Saved Goals, Steps, and time remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-DENIED-001"
+label = "Open Settings"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Permission Denied"
+destination_id = "DEST-YOU-NOTIFICATIONS-PERMISSION-DENIED-001"
+destination_posture = "current"
+effect = "The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access is off. Saved Goals, Steps, and time remain available."
+success_focus = "the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Denied"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-DENIED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Denied"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-DENIED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "External-result: system Settings owns authorization; foreground return re-reads permission before any separate local projection reconciliation."
+rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-PERMISSION-DENIED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Settings => destination: the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Permission Not Requested; effect: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access has not been requested; Ambitions remains fully usable.; focus: the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Not Requested."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Open Settings: The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access has not been requested; Ambitions remains fully usable. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: Notification access has not been requested; Ambitions remains fully usable."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Open Settings: Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: Notification access has not been requested; Ambitions remains fully usable."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: Notification access has not been requested; Ambitions remains fully usable."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Open Settings announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Not Requested; rejection focuses the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Not Requested. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: Notification access has not been requested; Ambitions remains fully usable."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED-001"
+label = "Open Settings"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the Ambitions notification controls in iOS Settings from Notification rules and delivery state — Permission Not Requested"
+destination_id = "DEST-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED-001"
+destination_posture = "current"
+effect = "The Open Settings external result causes no local canonical mutation; it leaves the app for system authorization controls. Denial retains every local Rule as inactive and preserves the owning object. Visible evidence remains until foreground revalidation: Notification access has not been requested; Ambitions remains fully usable."
+success_focus = "the changed Rule, owning object, or Open Settings result heading in Notification rules and delivery state — Permission Not Requested"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Open Settings control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Permission Not Requested"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "External-result: system Settings owns authorization; foreground return re-reads permission before any separate local projection reconciliation."
+rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Reconciled; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification and its saved schedule now agree. The related Step remains unchanged.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Reconciled."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification and its saved schedule now agree. The related Step remains unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification and its saved schedule now agree. The related Step remains unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Done: No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification and its saved schedule now agree. The related Step remains unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification and its saved schedule now agree. The related Step remains unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Done announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Reconciled; rejection focuses the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Reconciled. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: The notification and its saved schedule now agree. The related Step remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-RECONCILED-001"
+label = "Done"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the originating You notification context from Notification rules and delivery state — Reconciled"
+destination_id = "DEST-YOU-NOTIFICATIONS-RECONCILED-001"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification and its saved schedule now agree. The related Step remains unchanged."
+success_focus = "the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Reconciled"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-RECONCILED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Reconciled"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-RECONCILED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, complete, snooze, reschedule, or prove an owning object."
+rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-RECONCILED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-REMOVED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Removed; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification request is gone. The related Goal, Step, or time item remains unchanged.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Removed."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification request is gone. The related Goal, Step, or time item remains unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification request is gone. The related Goal, Step, or time item remains unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Done: No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification request is gone. The related Goal, Step, or time item remains unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification request is gone. The related Goal, Step, or time item remains unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Done announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Removed; rejection focuses the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Removed. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: The notification request is gone. The related Goal, Step, or time item remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-REMOVED-001"
+label = "Done"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated"]
+destination = "the originating You notification context from Notification rules and delivery state — Removed"
+destination_id = "DEST-YOU-NOTIFICATIONS-REMOVED-001"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification request is gone. The related Goal, Step, or time item remains unchanged."
+success_focus = "the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Removed"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-REMOVED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Done control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Removed"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-REMOVED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, complete, snooze, reschedule, or prove an owning object."
+rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-REMOVED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SCHEDULED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit Rule => destination: the updated local Notification Rule and pending iOS reconciliation from Notification rules and delivery state — Scheduled; effect: A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete.; focus: the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Scheduled.\nRemove Rule => destination: the removed local Rule result and pending iOS removal status from Notification rules and delivery state — Scheduled; effect: A typed Remove Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. Remove Rule does not delete its Step, Event, Reminder, Goal, Proof, History, or Receipt. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete.; focus: the changed Rule, owning object, or Remove Rule result heading in Notification rules and delivery state — Scheduled.\nTurn Off => destination: the inactive local Notification Rule and pending iOS removal status from Notification rules and delivery state — Scheduled; effect: A typed Turn Off Command validates the current Rule revision; appends an Event; updates its active policy in the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. The owning object and completion state remain unchanged. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete.; focus: the changed Rule, owning object, or Turn Off result heading in Notification rules and delivery state — Scheduled."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Edit Rule: A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete. | Remove Rule: A typed Remove Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. Remove Rule does not delete its Step, Event, Reminder, Goal, Proof, History, or Receipt. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete. | Turn Off: A typed Turn Off Command validates the current Rule revision; appends an Event; updates its active policy in the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. The owning object and completion state remain unchanged. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Edit Rule: Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently. | Remove Rule: Before commit, cancellation preserves the rule; after commit, restoring notification policy is a separate typed command and cannot recreate or complete the owning object. | Turn Off: Before commit, cancellation preserves the active rule; after commit, re-enabling is a separate typed command and scheduling reconciles without duplicate requests. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Edit Rule announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Scheduled; rejection focuses the Edit Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled | Remove Rule announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Remove Rule result heading in Notification rules and delivery state — Scheduled; rejection focuses the Remove Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled | Turn Off announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Turn Off result heading in Notification rules and delivery state — Scheduled; rejection focuses the Turn Off control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
+label = "Edit Rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated", "The local rule consequence is accepted before any separate iOS scheduling or removal dispatch"]
+destination = "the updated local Notification Rule and pending iOS reconciliation from Notification rules and delivery state — Scheduled"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-001"
+destination_posture = "current"
+effect = "A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+success_focus = "the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Scheduled"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Edit Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Mutation: rule editing commits locally through Event, Projection, Receipt, History, and replay-safe ownership before external reconciliation."
+rollback_undo = "Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+label = "Restore prior notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-001 is the exact trigger command and its exact trigger Receipt is current", "The edited Rule revision, exact prior rule fields, owning-object revision, superseded iOS request identity, and replacement reconciliation state are current"]
+destination = "You Notifications with the exact prior Rule fields restored and replacement/superseded request reconciliation visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact pre-edit Notification Rule fields without changing the owning object's completion state, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Edit Rule Receipt and History remain intact and iOS request replacement/removal reconciles idempotently."
+success_focus = "the restored Rule schedule and policy summary followed by external-request reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore prior notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the edited Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002"
+label = "Remove Rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated", "The local rule consequence is accepted before any separate iOS scheduling or removal dispatch"]
+destination = "the removed local Rule result and pending iOS removal status from Notification rules and delivery state — Scheduled"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-002"
+destination_posture = "current"
+effect = "A typed Remove Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. Remove Rule does not delete its Step, Event, Reminder, Goal, Proof, History, or Receipt. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+success_focus = "the changed Rule, owning object, or Remove Rule result heading in Notification rules and delivery state — Scheduled"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Remove Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Mutation: local rule removal commits through Event, Projection, Receipt, History, and replay-safe ownership before the external request is removed."
+rollback_undo = "Before commit, cancellation preserves the rule; after commit, restoring notification policy is a separate typed command and cannot recreate or complete the owning object."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-002"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+recovery_handoff_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+label = "Review removed rule recovery"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-002 is the exact trigger command and its exact trigger Receipt is current", "The removed Rule identity, owning-object revision, local removal Receipt, and external iOS request-removal reconciliation state are current"]
+destination = "You Notifications rule-removal inspection for the exact removed Rule with its unchanged owning object, external request status, and separately authorized policy-restoration route visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to system.notifications.command-contract for removed-Rule recovery inspection, while the Rule remains removed, its Goal, Step, Event, Reminder, Proof, completion state, Projection, Receipt, History, and external request status remain unchanged."
+success_focus = "the removed Rule summary and unchanged owning-object status followed by the first separately authorized policy-restoration action"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the removed-Rule recovery control and exact Rule/object/request route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
+label = "Turn Off"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated", "The local rule consequence is accepted before any separate iOS scheduling or removal dispatch"]
+destination = "the inactive local Notification Rule and pending iOS removal status from Notification rules and delivery state — Scheduled"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-003"
+destination_posture = "current"
+effect = "A typed Turn Off Command validates the current Rule revision; appends an Event; updates its active policy in the Notification Rule Projection; and creates a Receipt and History entry before separate iOS removal. The owning object and completion state remain unchanged. Visible evidence before commit remains: A notification is scheduled. The related Goal, Step, or time item remains incomplete."
+success_focus = "the changed Rule, owning object, or Turn Off result heading in Notification rules and delivery state — Scheduled"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Turn Off control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Scheduled"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Mutation: turning a rule off commits locally through Event, Projection, Receipt, History, and replay-safe ownership before external removal."
+rollback_undo = "Before commit, cancellation preserves the active rule; after commit, re-enabling is a separate typed command and scheduling reconciles without duplicate requests."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-003"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+label = "Re-enable notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-003 is the exact trigger command and its exact trigger Receipt is current", "The inactive Rule revision, owning-object revision, permission/privacy posture, and external request-removal reconciliation state are current"]
+destination = "You Notifications with the exact local Rule active again and its iOS scheduling reconciliation status visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it re-enables the exact local Notification Rule without changing the owning object or completion state, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Turn Off Receipt and History remain intact and a new iOS request schedules separately without duplication."
+success_focus = "the re-enabled Rule status followed by the pending or completed iOS scheduling reconciliation and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Re-enable notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the Rule remains off and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED"
+requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit Rule => destination: the updated local Notification Rule and pending iOS reconciliation from Notification rules and delivery state — Superseded; effect: A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged.; focus: the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Superseded."
+durable_effect = "Exact local Rule and separate iOS-result consequences: Edit Rule: A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged."
+recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Edit Rule: Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged."
+offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged."
+accessibility_focus = "VoiceOver names Rule status, owning object, quiet-hours/privacy consequence, external failure, and available owner-routed actions: Edit Rule announces rule and owning-object consequence; success focuses the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Superseded; rejection focuses the Edit Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Superseded. Action labels remain available without color and Dynamic Type stacks rule details. The announcement first communicates: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
+label = "Edit Rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Proof requirements, quiet hours, privacy policy, and idempotency identity are current", "The current Notification Rule identity, local revision, owning object identity, and authorization have been revalidated", "The local rule consequence is accepted before any separate iOS scheduling or removal dispatch"]
+destination = "the updated local Notification Rule and pending iOS reconciliation from Notification rules and delivery state — Superseded"
+destination_id = "DEST-YOU-NOTIFICATIONS-SUPERSEDED-001"
+destination_posture = "current"
+effect = "A typed Edit Rule Command validates the current Rule and owning-object revision; appends an Event; updates the Notification Rule Projection; and creates a Receipt and History entry. Only after local success does the outbox schedule the replacement and remove or supersede the old iOS request without duplication. Visible evidence before commit remains: A newer notification request replaces the earlier request. The related Goal, Step, or time item remains unchanged."
+success_focus = "the changed Rule, owning object, or Edit Rule result heading in Notification rules and delivery state — Superseded"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Edit Rule control and exact permission, outbox, or owner-validation reason in Notification rules and delivery state — Superseded"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Mutation: rule editing commits locally through Event, Projection, Receipt, History, and replay-safe ownership before external reconciliation."
+rollback_undo = "Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SUPERSEDED-001"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+inverse_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+label = "Restore superseded rule version"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SUPERSEDED-001 is the exact trigger command and its exact trigger Receipt is current", "The current Rule revision, exact superseded rule fields, owning-object revision, old/new iOS request identities, and reconciliation state are current"]
+destination = "You Notifications with the exact superseded Rule version restored as current and both old/new request identities visible for reconciliation"
+destination_id = "DEST-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact superseded Notification Rule fields as current without changing the owning object, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while both rule-version Receipts and History remain intact and iOS request replacement/removal reconciles idempotently."
+success_focus = "the restored superseded Rule version followed by request-reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore superseded rule version control and exact unsafe, stale, or dependency-invalid Rule/version/request reason; the newer Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
++++
+
+# Notifications
+
+This shadow specification defines notification policy and external-effect boundaries. It does not claim permission, delivery, Lock Screen privacy, action, device, or release proof.
+
+## SYSTEM-NOTIFICATIONS-POLICY-001 — Notifications are contextual, object-aware, private, and non-coercive
+
+- **Concept:** `system.notifications.object-aware`
+- **Modality:** `MUST`
+- **Scope:** Reminder, Event, protected window, reflow/review, proof, quiet hours, previews, and actions
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SYSTEM-NOTIFICATIONS-POLICY-001`
+- **Supersedes:** none
+
+Notification permission MUST be requested only when a user chooses notification-dependent behavior, with purpose, fields, fallback, and settings path explained. Rules bind a canonical object and user policy; previews redact sensitive content by default; copy is calm and non-shaming; quiet hours and duplicate-source risk are honored. Generic return prompts, productivity pressure, learning insights, and hidden private detail are forbidden.
+
+Lock-screen notification copy SHOULD be private by default.
+
+Notifications MUST NOT be aggressive, overly personal, or emotionally interpretive.
+
+## SYSTEM-NOTIFICATIONS-EFFECT-001 — Scheduling and actions preserve local authority
+
+- **Concept:** `system.notifications.external-effect`
+- **Modality:** `MUST`
+- **Scope:** Notification scheduling/removal/reconciliation and Complete, Start, Snooze, Reschedule, Add Proof, Open, and Review actions
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SYSTEM-NOTIFICATIONS-EFFECT-001`
+- **Supersedes:** none
+
+Local validated commit of a Notification Rule or object mutation MUST precede notification scheduling/removal. Delivery state is an outbox result, not canonical success. Every mutating action preserves command/idempotency identity and follows validation through Event, Projection, Receipt, and Replay; Reminder acknowledgment alone never completes underlying work.
+
+Notifications MUST be object-aware and action-oriented.
+
+Notification actions MAY include Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow.
+
+## SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001 — Notification commands preserve local ownership before external effects
+
+- **Concept:** `system.notifications.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Notification Rule lifecycle, permission denial, iOS scheduling/removal, callback routing, foreground reconciliation, privacy-filtered payloads, focus, offline use, and accessibility
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Notification rules MUST expose `Create Rule`, `Edit Rule`, `Turn Off`, `Remove Rule`, `Try Again`, `Reconcile`, `Open Settings`, and `Done`.
+
+Create/edit/remove commits the local Notification Rule first through the canonical mutation sequence. Scheduling or removal through iOS is a separate external result. `Remove Rule` MUST NOT delete its Step, Event, Reminder, or Goal.
+
+Notification callbacks may offer `Complete`, `Start`, `Snooze`, `Reschedule`, `Add Proof`, `Open Event`, and `Review Reflow`, but each action MUST route to its canonical owner and revalidate object revision, authorization, proof requirements, and idempotency. Delivery or acknowledgment alone MUST NOT complete work.
+
+Permission denial leaves the rule local and inactive. Foreground reconciliation compares current committed rules with system requests without duplicate scheduling or action replay.
+
+
+Success focuses the changed rule/status; external failure focuses failed delivery state and `Try Again`; callback action focuses its owning object or consequence preview. Lock Screen payloads remain minimized and privacy-filtered.
+
+## Completeness contract
+
+<!-- canon-section: responsibility-non-responsibility -->
+Owns notification permission posture, rule-to-request derivation, privacy preview, quiet-hour/duplicate policy, delivery reconciliation, and action handoff. It does not own object completion, surface navigation, external calendar alerts, canonical mutation, or guaranteed delivery.
+
+<!-- canon-section: inputs-outputs -->
+The contract consumes Notification Rules, object projections, permission/privacy/quiet-hour state, locale/time-zone, and durable outbox intent. It emits minimized requests, removal/reconciliation work, delivery state, action Commands, Receipt linkage, and privacy-safe presentation.
+
+<!-- canon-section: authority-boundary -->
+Notification APIs and callbacks are external adapters. They never open unrestricted stores, decide product policy, or mutate canonical state; `Commands/` validates actions and `ExternalWrites/` owns effects.
+
+<!-- canon-section: data-classification -->
+Titles, schedules, proof state, rationale, Goal links, and actions are private. Lock Screen payloads use explicit sensitivity policy and minimum fields; diagnostics record identifiers/results, not private copy.
+
+<!-- canon-section: state-model -->
+Rule and effect state distinguishes disabled, permission-not-requested/denied/allowed, scheduled, superseded, removed, delivered, acted, externally failed, and reconciled while retaining canonical object/rule identity.
+
+<!-- canon-section: failure-recovery -->
+Permission denial, stale schedule, DST/time-zone change, duplicate request, callback replay, or delivery failure preserves local objects and exposes contextual retry/settings/reconcile behavior. Relaunch rebuilds requests from current committed rules without duplicate actions.
+
+<!-- canon-section: local-network-boundary -->
+Local notifications, rules, actions, and reconciliation require no account/network. Denial or platform failure degrades alerts only and never blocks local planning/execution; no private notification content is sent to Ambitions backend/R2/Source Atlas.
+
+<!-- canon-section: determinism -->
+Stable committed rules, object facts, permission/privacy/quiet-hour state, locale/time-zone, and policy select the same request set and redaction. Callback duplication yields one canonical mutation.
+
+<!-- canon-section: observability -->
+Local redacted traces bind rule/object/request/command IDs, permission/privacy policy, scheduled time, delivery/action/reconciliation result, Receipt, and retry without message content.
+
+<!-- canon-section: source-ownership -->
+Exact targets are `Core/Permissions/`, `Core/LocalRuntimeOS/ExternalWrites/`, `Commands/`, and `Projections/`; `Surfaces/You/` presents settings and `Quality/` proves device/privacy/action behavior. Current permission/runtime/outbox source is not complete app-wide or device proof.
+
+<!-- canon-section: tests-proof -->
+Exercise contextual ask/denial, every rule/object class and action, preview privacy states, quiet hours, duplicates/external alerts, DST/time-zone/locale/significant-time changes, removal/update, callback replay/spoof, offline/relaunch, outbox failure/reconcile, Reminder noncompletion, VoiceOver actions, and physical-device Lock Screen behavior.
+
+<!-- canon-section: performance-resource-constraints -->
+Scheduling and reconciliation are bounded, cancellable, batched, lifecycle-safe, and off-main where material; callbacks finish promptly with safe fallback. Article 31 calibration must declare representative rule/request scale, device/OS/build/tool, timing/energy measures, percentile/maximum, and regression threshold; no numeric budget or device proof is asserted.

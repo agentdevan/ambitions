@@ -1,0 +1,408 @@
+import XCTest
+
+@MainActor
+extension AmbitionsUITestCase {
+    func shellCommandButton(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.buttons["shell.global-entry-button"],
+            app.buttons["shell.header.action-cluster-menu"],
+            app.buttons["shell.today.capture-button"],
+            app.buttons["shell.goals.capture-button"],
+            app.buttons["shell.time.capture-button"],
+            app.buttons["shell.you.capture-button"],
+            app.buttons["Capture"],
+            app.buttons["Quick action Sheet"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            return candidate
+        }
+
+        let visibleFrame = app.windows.firstMatch.frame
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.frame.intersects(visibleFrame) {
+            return candidate
+        }
+
+        return app.buttons["shell.global-entry-button"]
+    }
+
+    func openCanonicalDestination(_ title: String, screenIdentifier: String, in app: XCUIApplication, timeout: TimeInterval = 20) -> Bool {
+        let screen = app.descendants(matching: .any)[screenIdentifier]
+        if screen.waitForExistence(timeout: 1) {
+            return true
+        }
+
+        guard tapCanonicalDestination(title, in: app) else {
+            return false
+        }
+
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if screen.waitForExistence(timeout: 1) {
+                return true
+            }
+        }
+
+        if title != "Today", tapCanonicalDestination("Today", in: app), tapCanonicalDestination(title, in: app) {
+            let retryDeadline = Date().addingTimeInterval(timeout)
+            while Date() < retryDeadline {
+                if screen.waitForExistence(timeout: 1) {
+                    return true
+                }
+            }
+        }
+
+        return screen.exists
+    }
+
+    func screenIdentifier(forTab title: String) -> String {
+        switch title {
+        case "Today": "today.screen"
+        case "Goals": "goals.screen"
+        case "Time": "time.screen"
+        case "You": "you.screen"
+        default: "\(title.lowercased()).screen"
+        }
+    }
+
+    func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
+        let dockButton = rootDestinationButton(title, in: app)
+        if dockButton.waitForExistence(timeout: 5) {
+            if dockButton.isHittable {
+                dockButton.tap()
+            } else {
+                dockButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+            return true
+        }
+
+        let labeledDockButton = app.buttons[title]
+        if labeledDockButton.waitForExistence(timeout: 2) {
+            if labeledDockButton.isHittable {
+                labeledDockButton.tap()
+            } else {
+                labeledDockButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+            return true
+        }
+
+        let meridianButton = app.buttons.matching(NSPredicate(format: "label == %@", title)).firstMatch
+        guard meridianButton.waitForExistence(timeout: 5) else {
+            return false
+        }
+        meridianButton.tap()
+        return true
+    }
+
+    func assertShellFloatingButtonDoesNotCoverRootDock(in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
+        let dockFrame = rootDockFrame(in: app)
+        let button = shellCommandButton(in: app)
+        XCTAssertFalse(dockFrame.isNull, file: file, line: line)
+        XCTAssertTrue(button.waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertFalse(dockFrame.intersects(button.frame), "Global add button overlaps the root Stage dock.", file: file, line: line)
+    }
+
+    func assertRootContentDoesNotIntersectDock(
+        identifier: String,
+        named name: String,
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10), file: file, line: line)
+
+        let dockFrame = rootDockFrame(in: app)
+        XCTAssertFalse(dockFrame.isNull, "Root dock frame should exist before checking \(name).", file: file, line: line)
+
+        let element = app.descendants(matching: .any)[identifier]
+        XCTAssertTrue(element.waitForExistence(timeout: 10), "\(name) should exist before dock-overlap validation.", file: file, line: line)
+        XCTAssertFalse(element.frame.isEmpty, "\(name) should expose a measurable frame.", file: file, line: line)
+
+        guard element.frame.intersects(window.frame) else { return }
+
+        let dockExclusionFrame = CGRect(
+            x: window.frame.minX,
+            y: dockFrame.minY - 8,
+            width: window.frame.width,
+            height: window.frame.maxY - dockFrame.minY + 8
+        )
+
+        guard element.frame.intersects(dockExclusionFrame) else { return }
+
+        XCTAssertFalse(
+            element.isHittable,
+            "\(name) remains hittable in the root dock exclusion zone. element=\(element.frame) dock=\(dockFrame)",
+            file: file,
+            line: line
+        )
+    }
+
+    func assertRenderedRootContentClearsChrome(
+        identifier: String,
+        named name: String,
+        in app: XCUIApplication,
+        minimumWidth: CGFloat = 80,
+        minimumHeight: CGFloat = 24,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10), file: file, line: line)
+
+        let headerFrame = shellHeaderFrame(in: app)
+        XCTAssertFalse(headerFrame.isNull, "Shell header frame should exist before checking \(name).", file: file, line: line)
+        let dockFrame = rootDockFrame(in: app)
+        XCTAssertFalse(dockFrame.isNull, "Root dock frame should exist before checking \(name).", file: file, line: line)
+
+        let element = app.descendants(matching: .any)[identifier]
+        XCTAssertTrue(element.waitForExistence(timeout: 10), "\(name) should exist before rendered chrome validation.", file: file, line: line)
+        XCTAssertFalse(element.frame.isEmpty, "\(name) should expose a measurable rendered frame.", file: file, line: line)
+        XCTAssertGreaterThanOrEqual(element.frame.width, minimumWidth, "\(name) should keep readable width in the rendered viewport.", file: file, line: line)
+        XCTAssertGreaterThanOrEqual(element.frame.height, minimumHeight, "\(name) should keep readable height in the rendered viewport.", file: file, line: line)
+        assertFrame(element.frame, isInside: window.frame, named: name, file: file, line: line)
+
+        let headerExclusionFrame = CGRect(
+            x: window.frame.minX,
+            y: window.frame.minY,
+            width: window.frame.width,
+            height: headerFrame.maxY - window.frame.minY + 6
+        )
+        XCTAssertFalse(
+            element.frame.intersects(headerExclusionFrame),
+            "\(name) intersects shell header exclusion zone. element=\(element.frame) header=\(headerFrame)",
+            file: file,
+            line: line
+        )
+
+        let dockExclusionFrame = CGRect(
+            x: window.frame.minX,
+            y: dockFrame.minY - 8,
+            width: window.frame.width,
+            height: window.frame.maxY - dockFrame.minY + 8
+        )
+        XCTAssertFalse(
+            element.frame.intersects(dockExclusionFrame),
+            "\(name) intersects root dock exclusion zone. element=\(element.frame) dock=\(dockFrame)",
+            file: file,
+            line: line
+        )
+    }
+
+    func assertContinuityReceiptClearsRootControls(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let receipt = app.descendants(matching: .any)["shell.continuity-receipt"]
+        XCTAssertTrue(receipt.waitForExistence(timeout: 10), "Continuity receipt should render before collision validation.", file: file, line: line)
+        XCTAssertFalse(receipt.frame.isEmpty, "Continuity receipt should expose a measurable rendered frame.", file: file, line: line)
+
+        let dockFrame = rootDockFrame(in: app)
+        XCTAssertFalse(dockFrame.isNull, "Root dock frame should exist before receipt collision validation.", file: file, line: line)
+        XCTAssertFalse(
+            receipt.frame.intersects(dockFrame),
+            "Continuity receipt intersects the root dock. receipt=\(receipt.frame) dock=\(dockFrame)",
+            file: file,
+            line: line
+        )
+
+        for title in ["Today", "Goals", "Time", "You"] {
+            let root = rootDestinationButton(title, in: app)
+            XCTAssertTrue(root.waitForExistence(timeout: 5), "Missing root destination \(title) before receipt collision validation.", file: file, line: line)
+            XCTAssertFalse(
+                receipt.frame.intersects(root.frame),
+                "Continuity receipt intersects \(title) root destination. receipt=\(receipt.frame) root=\(root.frame)",
+                file: file,
+                line: line
+            )
+        }
+
+        for identifier in ["shell.header.action-cluster-menu", "shell.global-entry-button"] {
+            let control = app.buttons[identifier]
+            guard control.waitForExistence(timeout: 1), control.frame.isEmpty == false else { continue }
+            XCTAssertFalse(
+                receipt.frame.intersects(control.frame),
+                "Continuity receipt intersects \(identifier). receipt=\(receipt.frame) control=\(control.frame)",
+                file: file,
+                line: line
+            )
+        }
+    }
+
+    func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        let stageHost = app.descendants(matching: .any)["shell.stage.host"]
+        let overlayForegrounds = [
+            app.descendants(matching: .any)["shell.activated-capture-seam"],
+            app.descendants(matching: .any)["create-goal.hero-card"],
+            app.descendants(matching: .any)["shell.command.sheet"]
+        ]
+
+        while Date() < deadline {
+            let hasStage = stageHost.waitForExistence(timeout: 1)
+            let hasDock = ["Today", "Goals", "Time", "You"].allSatisfy { rootDestinationButton($0, in: app).exists }
+            let hasOverlay = overlayForegrounds.contains { $0.exists }
+            if hasDock || hasOverlay || hasStage {
+                return true
+            }
+        }
+
+        return stageHost.exists
+            || ["Today", "Goals", "Time", "You"].allSatisfy { rootDestinationButton($0, in: app).exists }
+            || overlayForegrounds.contains { $0.exists }
+    }
+
+    func waitForSelectedTab(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        waitForSelectedSurface(title, in: app, timeout: timeout)
+    }
+
+    func waitForSelectedSurface(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        let button = rootDestinationButton(title, in: app)
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if button.waitForExistence(timeout: 1), button.isSelected || button.value as? String == "Selected" {
+                return true
+            }
+        }
+
+        return button.exists && (button.isSelected || button.value as? String == "Selected")
+    }
+
+    func rootDestinationButton(_ title: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any)["shell.meridian.destination.\(title.lowercased())"]
+    }
+
+    func waitForRootDestination(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
+        rootDestinationButton(title, in: app).waitForExistence(timeout: timeout)
+    }
+
+    func rootDestinationExists(_ title: String, in app: XCUIApplication) -> Bool {
+        let identifier = "shell.meridian.destination.\(title.lowercased())"
+        return app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@", identifier))
+            .count > 0
+    }
+
+    func renderedRootDestinationButtons(in app: XCUIApplication) -> [XCUIElement] {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", "shell.meridian.destination."))
+            .allElementsBoundByIndex
+            .filter(\.exists)
+    }
+
+    func rootDockFrame(in app: XCUIApplication) -> CGRect {
+        var frame = CGRect.null
+        for title in ["Today", "Goals", "Time", "You"] {
+            let button = rootDestinationButton(title, in: app)
+            if button.waitForExistence(timeout: 1) {
+                frame = frame.isNull ? button.frame : frame.union(button.frame)
+            }
+        }
+        return frame
+    }
+
+    func shellHeaderFrame(in app: XCUIApplication) -> CGRect {
+        var frame = CGRect.null
+        for identifier in [
+            "shell.header.rail",
+            "shell.flagship.chrome.header",
+            "shell.header.context-crown",
+            "shell.header.title",
+            "shell.header.action-cluster-menu"
+        ] {
+            let element = app.descendants(matching: .any)[identifier]
+            if element.waitForExistence(timeout: 1), element.frame.isEmpty == false {
+                frame = frame.isNull ? element.frame : frame.union(element.frame)
+            }
+        }
+        return frame
+    }
+
+    func assertCanonicalRootIALawRendered(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let expectedRootIdentifiers = [
+            "shell.meridian.destination.today",
+            "shell.meridian.destination.goals",
+            "shell.meridian.destination.time",
+            "shell.meridian.destination.you"
+        ]
+        let renderedRootButtons = renderedRootDestinationButtons(in: app)
+        XCTAssertEqual(
+            renderedRootButtons.count,
+            expectedRootIdentifiers.count,
+            "Root dock must expose exactly four rendered destinations: Today, Goals, Time, You.",
+            file: file,
+            line: line
+        )
+        XCTAssertEqual(
+            Set(renderedRootButtons.map(\.identifier)),
+            Set(expectedRootIdentifiers),
+            "Root dock rendered destination identifiers must stay locked to Today, Goals, Time, You.",
+            file: file,
+            line: line
+        )
+
+        for tab in ["Today", "Goals", "Time", "You"] {
+            let destination = rootDestinationButton(tab, in: app)
+            XCTAssertTrue(destination.waitForExistence(timeout: 10), "Missing canonical root \(tab).", file: file, line: line)
+            XCTAssertTrue(destination.isHittable, "Canonical root \(tab) should be hittable in rendered shell.", file: file, line: line)
+            XCTAssertGreaterThanOrEqual(destination.frame.width, 44, "\(tab) root hit target is too narrow.", file: file, line: line)
+            XCTAssertGreaterThanOrEqual(destination.frame.height, 44, "\(tab) root hit target is too short.", file: file, line: line)
+        }
+
+        for invalidRoot in [
+            "Capture",
+            "Search",
+            "Motion",
+            "Proof",
+            "Source",
+            "Privacy",
+            "History",
+            "Trust",
+            "Receipts",
+            "Plan",
+            "Profile",
+            "Habits",
+            "Insights"
+        ] {
+            XCTAssertFalse(rootDestinationExists(invalidRoot, in: app), "\(invalidRoot) must not become a persistent root destination.", file: file, line: line)
+        }
+    }
+
+    func dismissContinuityReceiptIfPresent(in app: XCUIApplication, timeout: TimeInterval = 4) {
+        let receipt = app.descendants(matching: .any)["shell.continuity-receipt"]
+        guard receipt.waitForExistence(timeout: timeout) else { return }
+
+        let shellDismissButton = app.buttons["action-closure-tray.dismiss-button"]
+        if shellDismissButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(shellDismissButton)
+            waitForContinuityReceiptToDisappear(receipt)
+            return
+        }
+
+        let identifiedButton = app.buttons["trust.receipt-toast.dismiss-button"]
+        if identifiedButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(identifiedButton)
+            waitForContinuityReceiptToDisappear(receipt)
+            return
+        }
+
+        let shellLabeledButton = app.buttons["Dismiss result"]
+        if shellLabeledButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(shellLabeledButton)
+            waitForContinuityReceiptToDisappear(receipt)
+            return
+        }
+
+        let labeledButton = app.buttons["Dismiss receipt"]
+        if labeledButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(labeledButton)
+            waitForContinuityReceiptToDisappear(receipt)
+        }
+    }
+}

@@ -1,0 +1,196 @@
+{
+  "id": "AMB-1741",
+  "title": "Visual System Hardening Source Acceptance",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "aa3eb8dc0cbe62db87ee0131a3f5afb15f0c9155",
+  "scope": [
+    "visual system source acceptance",
+    "runtime design-system adoption evidence",
+    "motion and haptic policy evidence",
+    "Dynamic Type and contrast source evidence",
+    "visual QA harness and Green gate evidence",
+    "prototype/debt replacement registry evidence"
+  ],
+  "source_changes": {
+    "changed_source_file_count": 0,
+    "change_type": "audit-only source acceptance packet",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "design_token_authority_changed": false,
+    "package_boundary_changed": false,
+    "source_paths_moved": false
+  },
+  "acceptance_map": [
+    {
+      "criterion": "Tokens and primitives are used by runtime screens",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/RealityMeridianView.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift",
+        "Native/Ambitions/Trust/InspectionSurface.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Typography, spacing, density, color, materials, and iconography have retained authority",
+      "evidence": [
+        "Sources/Theme/AmbitionTheme.swift",
+        "Sources/Theme/AmbitionTokens.generated.swift",
+        "Sources/Theme/SemanticDesignTokenCatalog.swift",
+        "Sources/Theme/SemanticDesignTokenCatalog+02-AmbitionFlagshipSemanticFoundationContract.swift",
+        "Sources/Theme/SemanticDesignTokenCatalog+03-AmbitionNativeChromePolicy.swift",
+        "Sources/Theme/PanelDensitySize.swift",
+        "Sources/Components/IconographyStatusPrimitives.swift",
+        "Sources/Components/ControlPrimitives.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Material/chrome choices are centrally constrained",
+      "evidence": [
+        "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SurfaceMorphBackdrop.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/DegradedStateSurface.swift",
+        "Native/Ambitions/App/AppShellView.swift",
+        "Native/Ambitions/Stage/Chrome/StageDockRail.swift"
+      ],
+      "status": "source_present_rendered_proof_absent"
+    },
+    {
+      "criterion": "Motion is restrained and honors Reduce Motion",
+      "evidence": [
+        "Sources/Components/MotionPrimitives+03-AnyTransition.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift",
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift"
+      ],
+      "status": "source_present_manual_walkthrough_absent"
+    },
+    {
+      "criterion": "Haptics are policy-owned",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/Foundations/AmbitionsHaptics.swift",
+        "Native/Ambitions/Interaction/HapticPolicy.swift",
+        "Sources/Components/MotionPrimitives+03-AnyTransition.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Dynamic Type does not rely on fixed preview-only layouts",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/Accessibility/DynamicTypePolicy.swift",
+        "Sources/Theme/PanelDensitySize.swift",
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift"
+      ],
+      "status": "source_present_dynamic_type_proof_absent"
+    },
+    {
+      "criterion": "Contrast and transparency fallback contracts exist",
+      "evidence": [
+        "Native/Ambitions/DesignSystem/Accessibility/ContrastPolicy.swift",
+        "Native/Ambitions/DesignSystem/Accessibility/ReduceTransparencyPolicy.swift",
+        "Sources/Theme/SemanticDesignTokenCatalog+02-AmbitionFlagshipSemanticFoundationContract.swift",
+        "Sources/Theme/SemanticDesignTokenCatalog+03-AmbitionNativeChromePolicy.swift"
+      ],
+      "status": "source_present_manual_proof_absent"
+    },
+    {
+      "criterion": "Visual QA baseline coverage is controlled",
+      "evidence": [
+        "docs/audits/amb-1749-frontend-evidence-harness.md",
+        "docs/audits/amb-1749-frontend-evidence-harness.json",
+        "scripts/ambitions-frontend-evidence-harness.py",
+        "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.md",
+        "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.json"
+      ],
+      "status": "harness_and_gate_present_screenshots_not_run"
+    },
+    {
+      "criterion": "Replacement list for cheap/prototype primitives exists",
+      "evidence": [
+        "docs/audits/amb-1800-design-system-token-primitive-duplicate-inventory.md",
+        "docs/audits/frontend-deletion-quarantine-candidates.md",
+        "docs/audits/frontend-screen-route-registry.md",
+        "docs/audits/frontend-journey-registry.md"
+      ],
+      "status": "source_and_debt_registry_present"
+    },
+    {
+      "criterion": "Screenshot proof exists before Visual Green",
+      "evidence": [
+        "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+        "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.md"
+      ],
+      "status": "gate_present_visual_green_forbidden"
+    }
+  ],
+  "replacement_and_debt_list": [
+    "Replace historical screenshot and VSP/Figma evidence with current rendered screenshot matrix artifacts before Visual Green.",
+    "Keep preview-only assets quarantined as development assets, not runtime proof.",
+    "Collapse remaining duplicate app-local design-system foundation wrappers only through scoped source trains.",
+    "Keep stale root labels in tests only when they are negative assertions.",
+    "Prove invocation paths for proof/privacy/receipt inspection wrappers before treating them as complete rendered trust journeys.",
+    "Review card density, material/chrome layering, Dynamic Type clipping, contrast, and reduced-motion behavior through screenshot/accessibility lanes before visual-quality claims."
+  ],
+  "truth_claims": {
+    "allowed": [
+      "Current source and static governance evidence show runtime adoption of retained visual primitives and visual proof gates.",
+      "AMB-1741 is Implemented Yellow under no-testing completion authorization."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "rendered visual quality",
+      "screenshot coverage for a current run",
+      "manual VoiceOver proof",
+      "Dynamic Type screenshot proof",
+      "Reduce Motion walkthrough proof",
+      "Reduce Transparency proof",
+      "contrast review proof",
+      "physical-device behavior",
+      "TestFlight readiness",
+      "App Store readiness",
+      "Release Green"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/amb-1741-visual-system-hardening-source-acceptance.md",
+      "docs/audits/amb-1741-visual-system-hardening-source-acceptance.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "Current rendered screenshots, manual accessibility review, independent visual approval, device proof, and duplicate wrapper collapse remain outside this no-testing source acceptance."
+    ],
+    "next_repair_train": "AMB-1749 screenshot/evidence lane; AMB-1750 Visual Green gate completion; AMB-1743 accessibility proof; AMB-1744 device proof; AMB-1800 follow-ups for remaining wrapper authority.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "visual_review_run": false,
+    "device_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

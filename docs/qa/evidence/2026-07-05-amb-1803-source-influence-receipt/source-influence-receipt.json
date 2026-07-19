@@ -1,0 +1,60 @@
+{
+  "issue": "AMB-1803",
+  "date": "2026-07-05",
+  "status": "Implemented Yellow",
+  "contract": {
+    "schemaVersion": "source_influence_receipt.native.v1",
+    "receiptKind": "sourceAtlasInfluenceReceiptRecorded",
+    "localOnly": true,
+    "privateInputIncluded": false,
+    "privateLifeGraphIncluded": false,
+    "sourceAtlasCreatesFinalSteps": false,
+    "sourceAtlasCreatesUserSchedule": false,
+    "sourceAtlasStoresRuntimeState": false,
+    "privateRuntimeOwnsPersonalization": true,
+    "privateRuntimeOwnsPathing": true,
+    "privateRuntimeOwnsScheduling": true,
+    "privateRuntimeOwnsReceipts": true
+  },
+  "filesChanged": [
+    "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasBridgeReceiptReplayModels.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasVerifiedPublicPlanningBridgeModels.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldVerifiedPublicContext.swift",
+    "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceInfluenceReceiptTests.swift",
+    "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPlanningBridgeTests.swift",
+    "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountPlanningScaleTests.swift"
+  ],
+  "staticValidation": {
+    "swiftParseChangedFiles": "passed",
+    "productionPrivateTokenScan": "passed",
+    "jsonParse": "passed",
+    "gitDiffCheck": "passed",
+    "xcodegenGenerate": "passed",
+    "sourceAtlasBoundaryAudit": "passed",
+    "sourceAtlasNoPrivateGraphEgressAudit": "passed",
+    "remediationGovernance": "passed",
+    "qualityGate": "passed",
+    "architectureInventory": "passed",
+    "greenStandardAudit": "passed",
+    "vocabularyDriftScan": "passed",
+    "localFirstBoundaryScan": "passed",
+    "releaseClaimSafetyScan": "passed",
+    "unsupportedAIClaimScan": "advisory_yellow_only",
+    "privacyBoundaryScan": "advisory_yellow_only"
+  },
+  "notRunUnderNoTestingInstruction": [
+    "XCTest",
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "xcodebuild test",
+    "archive",
+    "simulator runtime proof",
+    "physical-device proof"
+  ],
+  "nonClaims": [
+    "production R2 readiness",
+    "app-wide Source Atlas consumption",
+    "privacy/legal approval",
+    "release readiness"
+  ]
+}

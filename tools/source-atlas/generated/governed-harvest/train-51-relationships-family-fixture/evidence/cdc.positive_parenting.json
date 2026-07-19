@@ -1,0 +1,29 @@
+{
+  "adapterID": "cdc_positive_parenting_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 2,
+  "dataClass": "public_provenance",
+  "evidenceHash": "d7e9597dc68461286cc2a3779b08c365d6729bec388d6e66935c2a7385386b66",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "cdc_positive_parenting_public_web",
+  "normalizedPath": "normalized/cdc.positive_parenting.json",
+  "normalizedSHA256": "866dc6a3d6b955bc1d5013e5848eb64f80d5726b7ac16ad71f2a0829173ada42",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "cdc.positive_parenting",
+  "sourceLane": "cdc.positive_parenting"
+}

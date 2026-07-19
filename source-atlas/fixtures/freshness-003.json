@@ -1,0 +1,14 @@
+{
+  "id": "fixture.freshness.003",
+  "version": "runtime_fixture.v1",
+  "family": "freshness",
+  "candidate_id": "candidate.freshness.003",
+  "scenario_ids": ["scenario.freshness.003"],
+  "input_hash": "3434343434343434343434343434343434343434343434343434343434343434",
+  "candidate_score": 92,
+  "generated_derivative_notice": true,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Keeps freshness fixture validation separate from current-source claims.",
+  "privacy_boundary": "Abstract fixture metadata only.",
+  "local_only_requirement": "Local fixture input only; no resolved coverage claim is made."
+}

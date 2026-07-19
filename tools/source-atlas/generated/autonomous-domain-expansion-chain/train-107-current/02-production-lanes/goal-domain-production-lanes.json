@@ -1,0 +1,705 @@
+{
+  "createdAt": "2026-06-28T21:40:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainProductionLanes.v1",
+  "laneSummaries": [
+    {
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateIntakeRequired": true,
+      "candidateSourceCount": 2,
+      "lane": "candidate_domain_expansion_lane",
+      "ledgerEvidence": {
+        "claimGraphProofComplete": false,
+        "gatewayProofComplete": false,
+        "nativeUsabilityProofComplete": false,
+        "packProductionProofComplete": false,
+        "r2ProductionProofComplete": false
+      },
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work-order lane only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "productionTargetReady": false,
+      "readinessStatus": "candidate_only",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "route": "candidate_frontier_intake_required",
+      "status": "candidate_only_work_ordered",
+      "workOrderCount": 13
+    }
+  ],
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate work orders are not source authority",
+    "candidate work orders are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json",
+  "recordCounts": {
+    "blockedConfiguredWorkOrders": 0,
+    "candidateRoutes": 1,
+    "candidateWorkOrders": 13,
+    "claims": 0,
+    "configuredBlockedRoutes": 0,
+    "executeOperations": 0,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "maintenanceWorkOrders": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "productionReadyRoutes": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "routes": 1,
+    "workOrders": 13
+  },
+  "routerManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/manifest.json",
+  "routerOutputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/goal-domain-routing.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-production-lanes-train-89",
+  "workOrders": [
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Review candidate-only frontier shape and domain boundaries.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.82f86429b1eaf8f8",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "frontier_review",
+      "stageIndex": 1,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Discover direct public/reference sources and keep catalog metadata source-of-sources only.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.3a97a0bc3099ba3e",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "source_discovery",
+      "stageIndex": 2,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Resolve direct publisher authority before any claim authority is asserted.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.4594db448db14d5b",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Create or update source lane governance only after review evidence exists.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6ecddcacc172a148",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Classify redistribution, attribution, rights, and outside-legal requirements.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.19c19add6d47c068",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Define key, rate, budget, live, execute, retry, and redaction policy.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.fe96b0b860bbd33d",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Add deterministic fixture-backed adapter contract before live harvest.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.a318cc480d45782c",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "adapter_fixture_contract",
+      "stageIndex": 7,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Allow live harvest only with explicit live flags, governance, budgets, and source approval.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.4f9c7ebbf2ad9e93",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "live_harvest_gate",
+      "stageIndex": 8,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Emit claims only after source, legal, provenance, freshness, and conflict gates pass.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.2dc6d2636eedbe92",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "claim_graph_gate",
+      "stageIndex": 9,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Build pack only after complete public claim graph and non-private scan evidence.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.e4f75a4ea1904b88",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "pack_production_gate",
+      "stageIndex": 10,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Publish only with owner approval, execute flag, upload/readback hash proof, revocation, and rollback.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.5e5d14e2f552beb4",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "r2_publish_gate",
+      "stageIndex": 11,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Activate native public refresh target only after ledger, gateway, privacy, quarantine, and offline proof.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6f71a35854c1e021",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "native_activation_gate",
+      "stageIndex": 12,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "createdAt": "2026-06-28T21:40:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Use references inside Ambitions only as local public context, never as final plans or Steps.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.276a2555ff207d4d",
+      "publicReferenceOnly": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "local_composition_gate",
+      "stageIndex": 13,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    }
+  ]
+}

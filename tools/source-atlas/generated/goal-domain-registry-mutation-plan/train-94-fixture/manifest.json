@@ -1,0 +1,124 @@
+{
+  "allowActiveRegistryWrite": false,
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_bundles_required_for_planned_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "incomplete_bundles_block_without_mutation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_requires_separate_active_apply_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planned_mutations_are_dry_run_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations_written",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "registry_mutation_plan_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planning_fields_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRequested": false,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainRegistryMutationPlanManifest.v1",
+  "nonClaims": [
+    "goal-domain registry mutation planning only",
+    "not active registry mutation",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "activeRegistryMutations": "290eaed70bd02b1c4813b5163734c0c640cc6104aae176be35c3a36cdaa03305",
+    "blockedRegistryMutations": "59cf1bdde92103ee4fbc80832cdbfd687679716fda92deaa00dc676cb0b528bb",
+    "goalDomainRegistryMutationPlan": "c721361b089e09502125b902074ef0414de8bd88e74dbb4e6ba3b0bd97ca0aa8",
+    "manifest": "69c7348550474177952f95a68b4ed53affd9ddf84b29f94556cbc0506c96137d",
+    "plannedRegistryMutations": "1d8338969270e47ea6f93da1be231ade830f52bcff1ff3d5a53afe4d24bc1bff"
+  },
+  "outputPaths": {
+    "activeRegistryMutations": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/active-registry-mutations.json",
+    "blockedRegistryMutations": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/blocked-registry-mutations.json",
+    "closeout": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/closeout.md",
+    "goalDomainRegistryMutationPlan": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/goal-domain-registry-mutation-plan.json",
+    "manifest": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/manifest.json",
+    "plannedRegistryMutations": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/planned-registry-mutations.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 2,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "plannedApiPolicyEntries": 0,
+    "plannedLegalTermsEntries": 0,
+    "plannedRegistryMutations": 0,
+    "plannedSourceLaneEntries": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewBundles": 2
+  },
+  "reviewCompletionsPath": "tools/source-atlas/generated/goal-domain-review-completion-intake/train-93-fixture/goal-domain-review-completions.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; registry mutation planning only",
+  "status": "Source Green for goal-domain registry mutation planning",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-registry-mutation-plan-train-94"
+}

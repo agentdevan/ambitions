@@ -1,0 +1,53 @@
+{
+  "completedReviewPackets": [],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletions.v1",
+  "nonClaims": [
+    "goal-domain review completion records only",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 publish"
+  ],
+  "reviewBundles": [
+    {
+      "blockedReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+      "claimOutputAllowed": false,
+      "completedReviewLanes": [],
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "missingReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review bundle summary only",
+        "not registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "packOutputAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "registryMutationPlanningReady": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,620 @@
+import SwiftData
+import XCTest
+@testable import Ambitions
+
+final class PersistenceRepositoryTests: XCTestCase {
+    enum UnitOfWorkProbeError: Error, Equatable {
+        case intentionalRollback
+    }
+
+    func testGoalRepositoryRoundTripsGoalPlanAndSteps() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let goal = try XCTUnwrap(goalFromFixture(fixture))
+
+        try await repositories.goals.saveGoals([goal])
+        let loaded = try await repositories.goals.goal(id: goal.id)
+        let loadedSteps = try await repositories.goals.listSteps(goalID: goal.id)
+
+        XCTAssertEqual(loaded?.title, goal.title)
+        XCTAssertEqual(loaded?.plan?.sections.count, goal.plan?.sections.count)
+        XCTAssertEqual(loadedSteps.count, goal.plan?.sections.flatMap(\.steps).count)
+    }
+
+    func testGoalRepositoryCommonReadsUseNormalizedFieldsWhenSnapshotsAreUnavailable() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let goal = try XCTUnwrap(goalFromFixture(fixture))
+
+        try await repositories.goals.saveGoals([goal])
+        try await store.write { context in
+            try context.fetch(FetchDescriptor<GoalRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+            try context.fetch(FetchDescriptor<GoalPlanRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+            try context.fetch(FetchDescriptor<StepRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+        }
+
+        let listedGoals = try await repositories.goals.listGoals()
+        let listedSteps = try await repositories.goals.listSteps(goalID: goal.id)
+        let actionableSteps = try await repositories.goals.listActionableSteps()
+
+        XCTAssertEqual(listedGoals.map(\.id), [goal.id])
+        XCTAssertEqual(listedGoals.first?.title, goal.title)
+        XCTAssertEqual(listedGoals.first?.plan?.sections.count, goal.plan?.sections.count)
+        XCTAssertEqual(listedSteps.count, goal.plan?.sections.flatMap(\.steps).count)
+        XCTAssertFalse(actionableSteps.isEmpty)
+    }
+
+    func testGoalRepositoryLargeFixtureHasDeterministicOrderingAndBudget() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let baseGoal = try XCTUnwrap(goalFromFixture(fixture))
+        let orderedIDs = (0..<32).map { "budget-goal-\(String(format: "%02d", $0))" }
+        let shuffledGoals = orderedIDs.reversed().map {
+            deterministicGoal(from: baseGoal, id: $0, updatedAt: "2026-05-31T16:30:00Z")
+        }
+
+        try await repositories.goals.saveGoals(shuffledGoals)
+        let listed = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(listed.count, min(orderedIDs.count, RepositoryQueryBudget.maxGoalListResults))
+        XCTAssertEqual(listed.map(\.id), orderedIDs)
+    }
+
+    func testGoalRepositoryRoundTripsLifeGraphFromSnapshotStorage() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        var goal = try XCTUnwrap(goalFromFixture(fixture))
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: goal.relationshipKind,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: goal.plan,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                roles: [LifeRole(kind: .primary, title: "Founder")],
+                path: LifePathDescriptor(kind: .careerTrack, title: "Company path"),
+                stages: [LifePathStage(id: "foundation", title: "Foundation", orderIndex: 0)],
+                prerequisites: [LifePathPrerequisite(id: "launch-needs-foundation", title: "Launch depends on foundation", kind: .stage, stageID: "launch", requiredStageID: "foundation")],
+                milestones: [LifeGraphMilestone(id: "m1", title: "Launch v1", summary: nil, targetDate: "2026-12-01", stageID: "foundation", dependencyIDs: [])]
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        let loaded = try await repositories.goals.goal(id: goal.id)
+
+        XCTAssertEqual(loaded?.lifeGraph?.domains.map(\.domain), [.career])
+        XCTAssertEqual(loaded?.lifeGraph?.roles.map(\.title), ["Founder"])
+        XCTAssertEqual(loaded?.lifeGraph?.path?.title, "Company path")
+        XCTAssertEqual(loaded?.lifeGraph?.stages.map(\.id), ["foundation"])
+        XCTAssertEqual(loaded?.lifeGraph?.prerequisites.map(\.id), ["launch-needs-foundation"])
+        XCTAssertEqual(loaded?.lifeGraph?.milestones.map(\.id), ["m1"])
+    }
+
+    func testGoalRepositoryRoundTripsAdditiveSharedLifeMetadataFromSnapshotStorage() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        var goal = try XCTUnwrap(goalFromFixture(fixture))
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: .support,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: goal.plan,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .home)],
+                roles: [LifeRole(kind: .supporting, title: "Partner support")],
+                path: nil,
+                stages: [],
+                prerequisites: [],
+                milestones: [],
+                sharedLife: SharedLifeContext(
+                    participants: [SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")],
+                    responsibilities: [SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner")]
+                )
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        let loaded = try await repositories.goals.goal(id: goal.id)
+
+        XCTAssertEqual(loaded?.lifeGraph?.sharedLife?.participants.map(\.displayName), ["Alex"])
+        XCTAssertEqual(loaded?.lifeGraph?.sharedLife?.responsibilities.map(\.title), ["Groceries"])
+    }
+
+    func testDraftRepositoryPreservesStarterAndBlockedState() async throws {
+        let repositories = try await makeRepositories()
+        let starterFixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+        let blockedFixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "blocked-requiring-clarification"))
+
+        let storedDrafts = [storedDraft(id: "starter", fixture: starterFixture), storedDraft(id: "blocked", fixture: blockedFixture)].compactMap { $0 }
+        try await repositories.drafts.saveDrafts(storedDrafts)
+
+        let loaded = try await repositories.drafts.listDrafts()
+        XCTAssertEqual(loaded.count, storedDrafts.count)
+        XCTAssertTrue(loaded.contains(where: { $0.latestResultKind == .starterPlanned && !$0.assumptions.isEmpty }))
+        XCTAssertTrue(loaded.contains(where: { $0.latestResultKind == .clarificationRequired && $0.clarification != nil }))
+        XCTAssertTrue(loaded.allSatisfy { $0.metadata?.understanding != nil })
+    }
+
+    func testDraftRepositoryRoundTripsUnderstandingInsideEncodedMetadata() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+        guard let draft = storedDraft(id: "starter-understanding", fixture: fixture) else {
+            return XCTFail("Expected stored draft fixture.")
+        }
+
+        try await repositories.drafts.saveDrafts([draft])
+        let loaded = try await repositories.drafts.draft(id: "starter-understanding")
+
+        XCTAssertEqual(loaded?.metadata?.understanding, draft.metadata?.understanding)
+        XCTAssertEqual(loaded?.metadata?.understanding.primaryInterpretation.id, draft.metadata?.understanding.primaryInterpretation.id)
+        XCTAssertEqual(loaded?.metadata?.compiledPath, draft.metadata?.compiledPath)
+        XCTAssertEqual(loaded?.metadata?.resourceGraph, draft.metadata?.resourceGraph)
+        XCTAssertEqual(loaded?.metadata?.resourceGraph.freshness, draft.metadata?.resourceGraph.freshness)
+        XCTAssertEqual(loaded?.metadata?.energyModel, draft.metadata?.energyModel)
+        XCTAssertEqual(loaded?.metadata?.contradictionReport, draft.metadata?.contradictionReport)
+    }
+
+    func testEvidenceAndFeedbackRepositoriesPersistAdaptiveHistory() async throws {
+        let repositories = try await makeRepositories()
+        let feedbackFixture = try XCTUnwrap(GoalEngineFixtures.feedbackFixture(id: "achievement-avoidance"))
+        let goalID = feedbackFixture.input.currentResult.plan.goalID
+        let evidence = ProgressEvidence(
+            id: "evidence-1",
+            goalID: goalID,
+            stepID: feedbackFixture.input.selectedStep.id,
+            evidenceKind: .sessionLogged,
+            source: .manual,
+            capturedAt: GoalEngineFixtures.fixedNow,
+            progressDelta: 0.15,
+            confidenceDelta: -0.05,
+            minutesInvested: 20,
+            note: "Repository round-trip"
+        )
+
+        try await repositories.evidence.saveEvidence([evidence])
+        try await repositories.feedback.saveEvents(feedbackFixture.input.feedbackHistory, goalID: goalID)
+        let loadedEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let loadedFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+
+        XCTAssertEqual(loadedEvidence.first?.id, evidence.id)
+        XCTAssertEqual(loadedFeedback.count, feedbackFixture.input.feedbackHistory.count)
+    }
+
+    func testTeachingSignalRepositoryRoundTripsHistoricalSignals() async throws {
+        let repositories = try await makeRepositories()
+        let first = GoalTeachingSignal(
+            id: "teaching-first",
+            goalID: "goal-teaching",
+            createdAt: "2026-04-20T09:00:00Z",
+            updatedAt: "2026-04-20T09:00:00Z",
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: GoalTeachingStableAnchor(
+                artifactKind: .goalSubjectField,
+                canonicalField: .goalSubject,
+                candidateID: nil,
+                stageID: nil,
+                stepID: nil,
+                targetFingerprint: "goal_subject",
+                contradictionCode: nil,
+                contradictionArtifactRefs: []
+            ),
+            payload: .goalSubject(
+                GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: "Become an astronaut")
+            ),
+            applicationKey: "goal-teaching::goal-subject",
+            userNote: "First"
+        )
+        let second = GoalTeachingSignal(
+            id: "teaching-second",
+            goalID: "goal-teaching",
+            createdAt: "2026-04-20T10:00:00Z",
+            updatedAt: "2026-04-20T10:00:00Z",
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: first.anchor,
+            payload: first.payload,
+            applicationKey: first.applicationKey,
+            userNote: "Second"
+        )
+
+        try await repositories.teaching.saveSignals([first, second])
+        let loaded = try await repositories.teaching.listSignals(goalID: "goal-teaching")
+
+        XCTAssertEqual(loaded.map(\.id), ["teaching-second", "teaching-first"])
+    }
+
+    func testAppStateRepositoryPersistsPreferencesAndBootstrapFields() async throws {
+        let repositories = try await makeRepositories()
+        var state = try await repositories.appState.loadState()
+        state.preferredTab = .goals
+        state.userDisplayName = "Storage Test"
+        state.appearancePreference = .dark
+        state.hasCompletedBootstrap = true
+        state.lastBootstrapSource = .live
+        state.lastBootstrapAt = GoalEngineFixtures.fixedNow
+
+        try await repositories.appState.saveState(state)
+        let loaded = try await repositories.appState.loadState()
+
+        XCTAssertEqual(loaded.preferredTab, .goals)
+        XCTAssertEqual(loaded.userDisplayName, "Storage Test")
+        XCTAssertEqual(loaded.appearancePreference, .dark)
+        XCTAssertEqual(loaded.lastBootstrapSource, .live)
+    }
+
+    func testCaptureRepositoryPersistsAndSortsByUpdatedAt() async throws {
+        let repositories = try await makeRepositories()
+        let first = Capture(
+            id: "capture-first",
+            createdAt: "2026-04-15T10:00:00Z",
+            updatedAt: "2026-04-15T10:00:00Z",
+            rawText: "First capture",
+            sourceType: .todayQuickCapture,
+            status: .goalBound,
+            linkedGoalID: "goal-1",
+            triage: CaptureTriageMetadata(destination: .attachToGoal, hint: "Keep near the goal.")
+        )
+        let second = Capture(
+            id: "capture-second",
+            createdAt: "2026-04-15T11:00:00Z",
+            updatedAt: "2026-04-15T11:00:00Z",
+            rawText: "Second capture",
+            sourceType: nil,
+            status: .seed,
+            linkedGoalID: nil,
+            triage: CaptureTriageMetadata(destination: .saveAsSeed),
+            revisitAfter: "2026-04-22T09:00:00Z"
+        )
+
+        try await repositories.captures.saveCaptures([first, second])
+        let loaded = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(loaded.map(\.id), ["capture-second", "capture-first"])
+        XCTAssertEqual(loaded.first?.status, .seed)
+        XCTAssertEqual(loaded.first?.triage?.destination, .saveAsSeed)
+        XCTAssertEqual(loaded.first?.revisitAfter, "2026-04-22T09:00:00Z")
+        XCTAssertEqual(loaded.last?.sourceType, .todayQuickCapture)
+        XCTAssertEqual(loaded.last?.status, .goalBound)
+        XCTAssertEqual(loaded.last?.triage?.hint, "Keep near the goal.")
+    }
+
+    func testCaptureRepositoryRoundTripsAllStableSourceTypes() async throws {
+        let repositories = try await makeRepositories()
+        let captures = [
+            Capture(id: "capture-notification", createdAt: "2026-04-15T09:55:00Z", updatedAt: "2026-04-15T09:55:00Z", rawText: "Notification capture", sourceType: .notification, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-text", createdAt: "2026-04-15T10:00:00Z", updatedAt: "2026-04-15T10:00:00Z", rawText: "Shared text", sourceType: .shareExtensionText, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-url", createdAt: "2026-04-15T10:05:00Z", updatedAt: "2026-04-15T10:05:00Z", rawText: "https://example.com", sourceType: .shareExtensionURL, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-intent", createdAt: "2026-04-15T10:10:00Z", updatedAt: "2026-04-15T10:10:00Z", rawText: "Intent capture", sourceType: .appIntent, status: .actionable, linkedGoalID: nil)
+        ]
+
+        try await repositories.captures.saveCaptures(captures)
+        let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedByID = Dictionary(uniqueKeysWithValues: loadedCaptures.map { ($0.id, $0) })
+
+        XCTAssertEqual(loadedByID["capture-notification"]?.sourceType, .notification)
+        XCTAssertEqual(loadedByID["capture-text"]?.sourceType, .shareExtensionText)
+        XCTAssertEqual(loadedByID["capture-url"]?.sourceType, .shareExtensionURL)
+        XCTAssertEqual(loadedByID["capture-intent"]?.sourceType, .appIntent)
+    }
+
+    func testCaptureRepositoryRoundTripsCanonicalStates() async throws {
+        let repositories = try await makeRepositories()
+        let captures = CaptureStatus.allCasesForTests.enumerated().map { index, status in
+            Capture(
+                id: "capture-\(status.rawValue)",
+                createdAt: "2026-04-15T10:0\(index):00Z",
+                updatedAt: "2026-04-15T10:0\(index):00Z",
+                rawText: "Capture \(status.rawValue)",
+                sourceType: .todayQuickCapture,
+                status: status,
+                linkedGoalID: status == .goalBound ? "goal-bound" : nil
+            )
+        }
+
+        try await repositories.captures.saveCaptures(captures)
+        let loadedStatuses = Set(try await repositories.captures.listCaptures().map(\.status))
+
+        XCTAssertEqual(loadedStatuses, Set(CaptureStatus.allCasesForTests))
+    }
+
+    func testCaptureRepositoryMapsLegacyStatusRawValuesInOnePersistenceFallback() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+
+        try await store.write { context in
+            context.insert(
+                CaptureRecord(
+                    id: "legacy-pending",
+                    createdAt: "2026-04-15T10:00:00Z",
+                    updatedAt: "2026-04-15T10:00:00Z",
+                    rawText: "Legacy pending",
+                    sourceTypeRaw: CaptureSourceType.todayQuickCapture.rawValue,
+                    statusRaw: "pending",
+                    linkedGoalID: nil,
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+            context.insert(
+                CaptureRecord(
+                    id: "legacy-processed",
+                    createdAt: "2026-04-15T11:00:00Z",
+                    updatedAt: "2026-04-15T11:00:00Z",
+                    rawText: "Legacy processed",
+                    sourceTypeRaw: nil,
+                    statusRaw: "processed",
+                    linkedGoalID: "goal-legacy",
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+        }
+
+        let loadedByID = Dictionary(uniqueKeysWithValues: try await repositories.captures.listCaptures().map { ($0.id, $0) })
+
+        XCTAssertEqual(loadedByID["legacy-pending"]?.status, .actionable)
+        XCTAssertEqual(loadedByID["legacy-processed"]?.status, .goalBound)
+        XCTAssertEqual(loadedByID["legacy-processed"]?.linkedGoalID, "goal-legacy")
+    }
+
+    func testGoalRepositoryDegradesUnknownRawValuesWhenSnapshotCannotDecode() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let goal = try XCTUnwrap(goalFromFixture(fixture))
+
+        try await repositories.goals.saveGoals([goal])
+        try await store.write { context in
+            let records = try context.fetch(FetchDescriptor<GoalRecord>())
+            let record = try XCTUnwrap(records.first { $0.id == goal.id })
+            record.snapshotData = Data("{}".utf8)
+            record.stateRaw = "future_state"
+            record.modeRaw = "future_mode"
+            record.relationshipKindRaw = "future_relationship"
+            record.actorOwnershipRaw = "future_owner"
+            record.tempoRaw = "future_tempo"
+            record.timingTypeRaw = "future_timing"
+        }
+
+        let loadedGoal = try await repositories.goals.goal(id: goal.id)
+        let loaded = try XCTUnwrap(loadedGoal)
+
+        XCTAssertEqual(loaded.state, .active)
+        XCTAssertEqual(loaded.mode, .project)
+        XCTAssertEqual(loaded.relationshipKind, .independent)
+        XCTAssertEqual(loaded.actor.ownership, .self)
+        XCTAssertEqual(loaded.timing.tempo, .untimed)
+        XCTAssertEqual(loaded.timing.timingType, .logWhenDone)
+    }
+
+    func testAppStateRepositoryDegradesUnknownRawValuesWhenSnapshotCannotDecode() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+
+        try await store.write { context in
+            context.insert(
+                AppStateRecord(
+                    id: "default",
+                    preferredTabRaw: "future_tab",
+                    userDisplayName: "Taylor",
+                    appearancePreferenceRaw: "future_appearance",
+                    accentFamilyRaw: "future_accent",
+                    hasCompletedBootstrap: true,
+                    lastBootstrapSourceRaw: "future_source",
+                    lastBootstrapAt: "2026-05-08T12:00:00Z",
+                    lastSeedVersion: "seed.v1",
+                    lastSeededAt: "2026-05-08T12:00:00Z",
+                    lastOpenedGoalID: "goal-1",
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+        }
+
+        let loaded = try await repositories.appState.loadState()
+
+        XCTAssertEqual(loaded.preferredTab, .today)
+        XCTAssertEqual(loaded.userDisplayName, "Taylor")
+        XCTAssertEqual(loaded.appearancePreference, .system)
+        XCTAssertEqual(loaded.accentFamily, .sage)
+        XCTAssertNil(loaded.lastBootstrapSource)
+        XCTAssertEqual(loaded.lastOpenedGoalID, "goal-1")
+    }
+
+    func testAppUnitOfWorkCommitsMultipleRecordsThroughOneBoundary() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let unitOfWork = SwiftDataAppUnitOfWork(store: store)
+
+        let result = try await unitOfWork.perform(
+            id: "uow-commit",
+            timestampProvider: Self.unitOfWorkTimestampProvider()
+        ) { context in
+            context.insert(try Self.captureRecord(id: "uow-capture", rawText: "Unit of work capture"))
+            context.insert(try Self.appStateRecord(userDisplayName: "Unit Worker"))
+            return "committed"
+        }
+
+        let loadedCapture = try await repositories.captures.capture(id: "uow-capture")
+        let loadedState = try await repositories.appState.loadState()
+
+        XCTAssertEqual(result.value, "committed")
+        XCTAssertEqual(result.receipt.id, "uow-commit")
+        XCTAssertEqual(result.receipt.writeScope, AppUnitOfWorkWriteScope.localSwiftDataSingleContext)
+        XCTAssertTrue(result.receipt.didCommitChanges)
+        XCTAssertEqual(result.receipt.rollbackBehavior, AppUnitOfWorkReceipt.rollbackOnThrownError)
+        XCTAssertEqual(result.receipt.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+        XCTAssertEqual(loadedCapture?.rawText, "Unit of work capture")
+        XCTAssertEqual(loadedState.userDisplayName, "Unit Worker")
+    }
+
+    func testAppUnitOfWorkRollsBackUnsavedChangesWhenOperationThrows() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let unitOfWork = SwiftDataAppUnitOfWork(store: store)
+
+        do {
+            _ = try await unitOfWork.perform(
+                id: "uow-rollback",
+                timestampProvider: Self.unitOfWorkTimestampProvider()
+            ) { context in
+                context.insert(try Self.captureRecord(id: "uow-rollback-capture", rawText: "Should not persist"))
+                throw UnitOfWorkProbeError.intentionalRollback
+            }
+            XCTFail("Expected unit of work to throw before save.")
+        } catch let error as UnitOfWorkProbeError {
+            XCTAssertEqual(error, .intentionalRollback)
+        }
+
+        let loadedCapture = try await repositories.captures.capture(id: "uow-rollback-capture")
+        XCTAssertNil(loadedCapture)
+    }
+}
+
+private extension PersistenceRepositoryTests {
+    func deterministicGoal(from base: Goal, id: String, updatedAt: String) -> Goal {
+        Goal(
+            schemaVersion: base.schemaVersion,
+            id: id,
+            revision: base.revision,
+            createdAt: base.createdAt,
+            updatedAt: updatedAt,
+            state: base.state,
+            title: "Budget \(id)",
+            summary: base.summary,
+            mode: base.mode,
+            relationshipKind: base.relationshipKind,
+            actor: base.actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: base.tags,
+            timing: base.timing,
+            planningStrategy: base.planningStrategy,
+            progressStrategy: base.progressStrategy,
+            plan: nil,
+            lifeGraph: nil
+        )
+    }
+
+    func makeRepositories() async throws -> AppRepositories {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        return makeRepositories(store: store)
+    }
+
+    func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
+        return AppRepositories(
+            goals: SwiftDataGoalRepository(store: store),
+            drafts: SwiftDataGoalDraftRepository(store: store),
+            evidence: SwiftDataProgressEvidenceRepository(store: store),
+            feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
+            teaching: SwiftDataGoalTeachingSignalRepository(store: store),
+            appState: SwiftDataAppStateRepository(store: store)
+        )
+    }
+
+    func goalFromFixture(_ fixture: GoalEngineFixture) -> Goal? {
+        switch fixture.result {
+        case let .planned(result):
+            return Goal(schemaVersion: goalEngineSchemaVersion, id: result.plan.goalID, revision: 1, createdAt: GoalEngineFixtures.fixedNow, updatedAt: GoalEngineFixtures.fixedNow, state: .active, title: result.draft.title, summary: result.draft.summary, mode: result.draft.mode, relationshipKind: result.draft.relationshipKind, actor: result.draft.actor, parentGoalID: result.draft.parentGoalID, childGoalIDs: [], supportGoalIDs: [], tags: result.draft.tags, timing: result.draft.timing, planningStrategy: result.draft.planningStrategy, progressStrategy: result.draft.progressStrategy, plan: result.plan)
+        case let .starterPlanned(result):
+            return Goal(schemaVersion: goalEngineSchemaVersion, id: result.plan.goalID, revision: 1, createdAt: GoalEngineFixtures.fixedNow, updatedAt: GoalEngineFixtures.fixedNow, state: .active, title: result.draft.title, summary: result.draft.summary, mode: result.draft.mode, relationshipKind: result.draft.relationshipKind, actor: result.draft.actor, parentGoalID: result.draft.parentGoalID, childGoalIDs: [], supportGoalIDs: [], tags: result.draft.tags, timing: result.draft.timing, planningStrategy: result.draft.planningStrategy, progressStrategy: result.draft.progressStrategy, plan: result.plan)
+        case .clarificationRequired, .blocked:
+            return nil
+        }
+    }
+
+    func storedDraft(id: String, fixture: GoalEngineFixture) -> PersistedGoalDraft? {
+        switch fixture.result {
+        case let .starterPlanned(result):
+            return PersistedGoalDraft(id: id, createdAt: GoalEngineFixtures.fixedNow, updatedAt: GoalEngineFixtures.fixedNow, draft: result.draft, classification: nil, clarification: result.clarification, stagedPlan: result.plan, assumptions: result.assumptions, blockers: [], metadata: result.metadata, plannedGoalID: result.plan.goalID, latestResultKind: .starterPlanned)
+        case let .clarificationRequired(result):
+            return PersistedGoalDraft(id: id, createdAt: GoalEngineFixtures.fixedNow, updatedAt: GoalEngineFixtures.fixedNow, draft: result.draft, classification: nil, clarification: result.clarification, stagedPlan: nil, assumptions: result.metadata.reasoning.assumptions, blockers: [], metadata: result.metadata, plannedGoalID: nil, latestResultKind: .clarificationRequired)
+        default:
+            return nil
+        }
+    }
+
+    static func unitOfWorkTimestampProvider() -> @Sendable () -> String {
+        {
+            "2026-05-08T12:00:00Z"
+        }
+    }
+
+    static func captureRecord(id: String, rawText: String) throws -> CaptureRecord {
+        let capture = Capture(
+            id: id,
+            createdAt: "2026-05-08T12:00:00Z",
+            updatedAt: "2026-05-08T12:00:00Z",
+            rawText: rawText,
+            sourceType: .todayQuickCapture,
+            status: .actionable,
+            linkedGoalID: nil
+        )
+        return CaptureRecord(
+            id: capture.id,
+            createdAt: capture.createdAt,
+            updatedAt: capture.updatedAt,
+            rawText: capture.rawText,
+            sourceTypeRaw: capture.sourceType?.rawValue,
+            statusRaw: capture.status.rawValue,
+            linkedGoalID: capture.linkedGoalID,
+            snapshotData: try PersistenceCoding.encode(capture)
+        )
+    }
+
+    static func appStateRecord(userDisplayName: String) throws -> AppStateRecord {
+        var state = AppStateSnapshot.default
+        state.userDisplayName = userDisplayName
+        return AppStateRecord(
+            id: state.id,
+            preferredTabRaw: state.preferredTab.rawValue,
+            userDisplayName: state.userDisplayName,
+            appearancePreferenceRaw: state.appearancePreference.rawValue,
+            accentFamilyRaw: state.accentFamily.rawValue,
+            hasCompletedBootstrap: state.hasCompletedBootstrap,
+            lastBootstrapSourceRaw: state.lastBootstrapSource?.rawValue,
+            lastBootstrapAt: state.lastBootstrapAt,
+            lastSeedVersion: state.lastSeedVersion,
+            lastSeededAt: state.lastSeededAt,
+            lastOpenedGoalID: state.lastOpenedGoalID,
+            snapshotData: try PersistenceCoding.encode(state)
+        )
+    }
+}
+
+private extension CaptureStatus {
+    static let allCasesForTests: [CaptureStatus] = [.needsTriage, .seed, .actionable, .goalBound, .scheduled, .delegated, .waiting, .optionalSomeday, .archived]
+}

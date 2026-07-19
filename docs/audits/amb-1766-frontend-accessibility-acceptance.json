@@ -1,0 +1,145 @@
+{
+  "issue": "AMB-1766",
+  "title": "Frontend Accessibility Acceptance",
+  "status": "implemented_yellow_accessibility_lane_reconciled_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "3443c5dcbdbd75ffbebcdb3a71a0bcfcca47272c",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "voiceover_manual_proof": false,
+    "dynamic_type_runtime_proof": false,
+    "reduce_motion_runtime_proof": false,
+    "contrast_review": false,
+    "hit_target_device_proof": false,
+    "capture_keyboard_dictation_runtime_proof": false,
+    "physical_device_proof": false,
+    "owner_accessibility_approval": false
+  },
+  "accessibility_inputs": [
+    "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.md",
+    "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.json",
+    "docs/audits/amb-1748-design-system-adoption-proof.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.json",
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+    "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift"
+  ],
+  "required_acceptance": {
+    "voiceover_order": "required_not_manually_verified",
+    "semantic_labels": "source_coverage_only",
+    "adjustable_actions": "required_not_manually_verified",
+    "dynamic_type_layout": "required_not_rendered",
+    "reduce_motion_behavior": "required_not_rendered",
+    "contrast": "required_not_manually_reviewed",
+    "hit_targets": "required_not_device_verified",
+    "capture_keyboard_dictation": "required_not_runtime_verified"
+  },
+  "gate_decision": {
+    "parent_qa_packet": "AMB-1743",
+    "evidence_harness": "AMB-1749",
+    "new_rendered_accessibility_evidence_added": false,
+    "automation_source_coverage_claim_ceiling": "yellow_only",
+    "accessibility_green_blocked_until_manual_runtime_proof": true
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1766_leaf_accessibility_acceptance_packet_present",
+      "accessibility_lanes_are_linked_to_amb_1743_and_amb_1749",
+      "automation_source_coverage_is_scoped_to_yellow"
+    ],
+    "forbidden_claims": [
+      "manual_voiceover_proof_exists",
+      "rendered_dynamic_type_proof_exists",
+      "rendered_reduce_motion_proof_exists",
+      "contrast_proof_exists",
+      "hit_target_proof_exists",
+      "capture_keyboard_dictation_proof_exists",
+      "physical_device_accessibility_proof_exists",
+      "owner_accessibility_approval_exists",
+      "accessibility_green",
+      "visual_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_validation_passed_runtime_testing_skipped_by_instruction",
+    "commands_run": [
+      "git diff --check",
+      "jq . docs/audits/amb-1766-frontend-accessibility-acceptance.json",
+      "npx markdownlint-cli2 --no-globs docs/audits/amb-1766-frontend-accessibility-acceptance.md",
+      "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1766-frontend-accessibility-acceptance.md docs/audits/amb-1766-frontend-accessibility-acceptance.json",
+      "scripts/release-claim-safety-scan.sh docs/audits/amb-1766-frontend-accessibility-acceptance.md docs/audits/amb-1766-frontend-accessibility-acceptance.json",
+      "python3 scripts/ambitions-remediation-governance-check.py",
+      "python3 scripts/ambitions-architecture-inventory.py",
+      "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+      "python3 scripts/ambitions-green-standard-audit.py",
+      "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+      "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1766-frontend-accessibility-acceptance.md docs/audits/amb-1766-frontend-accessibility-acceptance.json",
+      "scripts/privacy-boundary-scan.sh docs/audits/amb-1766-frontend-accessibility-acceptance.md docs/audits/amb-1766-frontend-accessibility-acceptance.json",
+      "xcodegen generate --spec project.yml",
+      "scripts/ambitions-xcodegen-needed.sh"
+    ],
+    "hard_gate_result": "passed",
+    "xcodegen_needed": false,
+    "advisory_reviews": {
+      "no_unsupported_ai_claim_scan": "yellow_context_hits_reviewed_no_unsupported_claim_in_packet",
+      "privacy_boundary_scan": "yellow_context_hits_reviewed_no_privacy_boundary_violation_in_packet"
+    },
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_inspected": [
+      "Quality",
+      "Interaction",
+      "DesignSystem",
+      "App",
+      "Stage",
+      "Surfaces",
+      "Composer/Capture",
+      "Trust",
+      "scripts",
+      "audit_docs"
+    ],
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1766-frontend-accessibility-acceptance.md",
+      "docs/audits/amb-1766-frontend-accessibility-acceptance.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "manual_voiceover",
+      "dynamic_type",
+      "reduce_motion",
+      "contrast",
+      "hit_target",
+      "capture_keyboard_dictation",
+      "physical_device",
+      "owner_accessibility"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

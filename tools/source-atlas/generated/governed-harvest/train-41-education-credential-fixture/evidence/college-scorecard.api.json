@@ -1,0 +1,29 @@
+{
+  "adapterID": "college_scorecard_education_adapter",
+  "apiPolicyID": "api.college_scorecard.v1",
+  "budgetPolicyID": "budget.college_scorecard.v1",
+  "claimCount": 6,
+  "dataClass": "public_provenance",
+  "evidenceHash": "74ea933e38b886979d30dcd07ca9a9f7848a9e80f18150e95ec6e97ee5473760",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "education_public_data_review",
+  "normalizedPath": "normalized/college-scorecard.api.json",
+  "normalizedSHA256": "89bb38459469fce80f936935e515eaed208eda6ff971f513a41bb62fd6626cca",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.college_scorecard.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.college_scorecard_optional.v1",
+  "sourceID": "college-scorecard.api",
+  "sourceLane": "college-scorecard.api"
+}

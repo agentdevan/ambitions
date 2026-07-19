@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.contract.launchFloorShardCorpusManifest.v1",
+  "versionID": "source-atlas-launch-floor-shard-corpus-contract-lff-m02",
+  "artifactKind": "ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1",
+  "publicReferenceOnly": true,
+  "privateContextAllowed": false,
+  "finalOutputAllowed": false,
+  "description": "Canonical contract for counting Source Atlas public/reference shards toward the launch floor. The corpus count is accepted only from validated partition manifests with public object keys, source-lane registry links, legal/API/freshness posture, readback, rollback, gateway, and native compatibility proof.",
+  "requiredTopLevelFields": [
+    "schemaVersion",
+    "kind",
+    "versionID",
+    "createdAt",
+    "publicReferenceOnly",
+    "privateContextAllowed",
+    "finalOutputAllowed",
+    "partitions",
+    "nonClaims"
+  ],
+  "requiredPartitionFields": [
+    "partitionID",
+    "domainID",
+    "subdomainID",
+    "publicReferenceOnly",
+    "privateContextAllowed",
+    "finalOutputAllowed",
+    "countsTowardLaunchFloor",
+    "shardRangeStart",
+    "shardRangeEndInclusive",
+    "shardCount",
+    "indexObjectKey",
+    "indexSHA256",
+    "manifestObjectKey",
+    "manifestSHA256",
+    "sourceLane",
+    "legalPolicyState",
+    "apiPolicyState",
+    "freshnessSLA",
+    "revocationState",
+    "r2Layout",
+    "readbackProof",
+    "nativeCompatibility"
+  ],
+  "requiredR2LayoutKeys": [
+    "stagedPrefix",
+    "promotedPrefix",
+    "currentPointerKey",
+    "lastKnownGoodKey",
+    "revocationKey",
+    "rollbackKey",
+    "gatewayAllowlistKey"
+  ],
+  "requiredReadbackProof": [
+    "checksumVerified",
+    "rollbackVerified",
+    "gatewayAllowlistVerified"
+  ],
+  "requiredNativeCompatibility": {
+    "partitionedShardIndexV1": true,
+    "requestShape": "public_ids_hashes_only",
+    "privateContextAllowed": false
+  },
+  "counterContract": {
+    "publicReferenceShards": {
+      "source": "sum(partitions[?countsTowardLaunchFloor].shardCount)",
+      "threshold": 1000000,
+      "failClosedWhenMissing": true
+    }
+  },
+  "nonClaims": [
+    "not R2 production upload proof by itself",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not private user data storage",
+    "not Release Green, App Store readiness, or TestFlight readiness"
+  ]
+}

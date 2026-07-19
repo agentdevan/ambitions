@@ -1,0 +1,149 @@
+{
+  "channel": "candidate",
+  "createdAt": "2026-06-29T05:30:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "staging",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 1159,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/adjudications.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/adjudications.json",
+      "sha256": "08d339e3c7ebcdb2bd659394aa5fe61a757bb0d6c57d53f89a56e8d3917b64fe"
+    },
+    {
+      "bytes": 1112,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/attribution.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/attribution.json",
+      "sha256": "d25f84e1b67513162d43a7806f24e596f7daa5ce5639c50d2dd217ee8714039e"
+    },
+    {
+      "bytes": 7699,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/claims.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/claims.json",
+      "sha256": "1ed26a7bed2a36442f15843fe11b5eb0db3a44a86e7ff2d097b0291aa24ba0da"
+    },
+    {
+      "bytes": 4169,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/coverage.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/coverage.json",
+      "sha256": "b37e58fe394e7efe25781dc0288d45591ea4312db2e63616f7b6ab575f322129"
+    },
+    {
+      "bytes": 1940,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/entities.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/entities.json",
+      "sha256": "ab406a03a03158ca3f1edc8c2461fb3797f0c7678dfd0842e960512f2e68b6fa"
+    },
+    {
+      "bytes": 1659,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/freshness.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/freshness.json",
+      "sha256": "27bce05b7b1cc3ed2dbd93ebd261eff42eb3779899cde8eaae7d6b6b2b1e2b93"
+    },
+    {
+      "bytes": 1223,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/licenses.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/licenses.json",
+      "sha256": "4b5e316026b1df3a6193ff00a29ed80a5ebdce223e49f9a226bfad67da4021d4"
+    },
+    {
+      "bytes": 1283,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/lkg.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/lkg.json",
+      "sha256": "b3173f6eec05761bc5c02e454645c40856394536e4ba75ee0e3357d79c250148"
+    },
+    {
+      "bytes": 9191,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/manifest.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/manifest.json",
+      "sha256": "37db84a279bc3c07175dd81eedce8906b9e789b82bc71b88a88a61732dca04dc"
+    },
+    {
+      "bytes": 1314,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/non_claims.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/non_claims.json",
+      "sha256": "03b6c1ff66358a8c27921b3b02a9b23550b3f5d43f9106b4564b4ed09a539401"
+    },
+    {
+      "bytes": 16924,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/pack.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/pack.json",
+      "sha256": "b06651ced8f7baa97f30b9180728231aa5d3467f9ce257418b47483cd9799fba"
+    },
+    {
+      "bytes": 1421,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/revocations.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/revocations.json",
+      "sha256": "370a523e0e159c96a47ce3cf1d0a615adceee5170bee598615c7ffc67017b20e"
+    },
+    {
+      "bytes": 1339,
+      "cacheControl": "public, max-age=300",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/sources.json",
+      "objectKey": "source-atlas/v1/staging/candidate/volunteering_public_reference/20260629T053000Z/sources.json",
+      "sha256": "270a99e3254f17af97a2bcae1d4cd950da0d771f96620a04507c88b054686f23"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/volunteering-public-reference-activation/train-130-current/pack-production/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

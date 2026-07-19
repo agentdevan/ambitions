@@ -1,0 +1,471 @@
+{
+  "schema": "ambitions.scg-007a.known-issues-sync-report.v1",
+  "version": 1,
+  "issue": "AMB-1298 / SCG-007A",
+  "scg": "SCG-007A",
+  "title": "Known-issues sync audit and dedupe verification",
+  "branch": "main",
+  "input_commit": "45f51ac86874a8c09c4b5a2a3a6f17d4222693fe",
+  "generated_at_utc": "2026-06-24T01:39:00Z",
+  "scope": {
+    "production_behavior_changed": false,
+    "production_repair_started": false,
+    "scg_008_started": false,
+    "repair_child_issues_created": false,
+    "senior_readiness_claimed": false,
+    "known_issues_replaced": false
+  },
+  "required_inputs_reviewed": [
+    "docs/qa/KNOWN_ISSUES.md",
+    "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json",
+    "docs/quality/senior-review/FILE_INVENTORY.json",
+    "docs/quality/senior-review/AUTOMATED_FINDINGS.json",
+    "docs/quality/senior-review/AUTOMATED_FINDINGS.md",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.md",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_SUMMARY.md",
+    "docs/quality/senior-review/FLOW_TRACE_AUDIT.json",
+    "docs/quality/senior-review/FLOW_TRACE_AUDIT.md",
+    "docs/quality/senior-review/ROOT_CAUSE_MAP.json",
+    "docs/quality/senior-review/ROOT_CAUSE_MAP.md",
+    "docs/quality/senior-review/REPAIR_TRAINS.json",
+    "docs/quality/senior-review/REPAIR_TRAINS.md",
+    "docs/quality/senior-review/SCG_007_REPAIR_TRAIN_PLAN.md"
+  ],
+  "review_methodology": {
+    "total_records_reviewed": 2205,
+    "total_records_reviewed_breakdown": {
+      "scg_bg_001_rows": 1,
+      "scg_004_automated_findings": 29,
+      "scg_005_reviewed_file_rows": 2136,
+      "scg_006_flow_trace_rows": 16,
+      "scg_006_root_cause_rows": 10,
+      "scg_007_repair_train_rows": 13
+    },
+    "blocking_known_issue_rule": "Add or update docs/qa/KNOWN_ISSUES.md only for missing real Red/B0/B1/B2 findings. Yellow/B3/B4/Unknown findings remain in SCG artifacts unless they are concrete blockers requiring canonical runtime tracking.",
+    "dedupe_rule": "When a flow or root cause maps to an existing AMB-ISSUE row, treat the SCG finding as deduped and do not create a duplicate known-issues row.",
+    "fixture_rule": "Fixture-only SCG-004 findings prove audit detector behavior only and are excluded from known issues."
+  },
+  "known_issues_register": {
+    "path": "docs/qa/KNOWN_ISSUES.md",
+    "scg_bg_001_present": true,
+    "scg_bg_001_status": "Resolved by package-relative path audit; no Package.swift change required.",
+    "rows_already_present_count": 53,
+    "rows_added_count": 0,
+    "rows_updated_count": 0,
+    "rows_deduped_against_existing_qa_runtime_issues_count": 52,
+    "rows_exempted_yellow_b3_b4_non_blocking_count": 631,
+    "unknown_governance_rows_carried_forward_count": 117,
+    "fixture_only_findings_excluded_count": 16,
+    "notes": [
+      "SCG-BG-001 remains preserved as resolved.",
+      "No missing real Red/B0/B1/B2 known-issues row was found.",
+      "No duplicate rows were added for Yellow-only findings."
+    ]
+  },
+  "known_issue_rows_already_present": [
+    "SCG-BG-001",
+    "AMB-ISSUE-0003",
+    "AMB-ISSUE-0004",
+    "AMB-ISSUE-0005",
+    "AMB-ISSUE-0008",
+    "AMB-ISSUE-0009",
+    "AMB-ISSUE-0012",
+    "AMB-ISSUE-0014",
+    "AMB-ISSUE-0016",
+    "AMB-ISSUE-0501",
+    "AMB-ISSUE-0502",
+    "AMB-ISSUE-0503",
+    "AMB-ISSUE-0506",
+    "AMB-ISSUE-0507",
+    "AMB-ISSUE-0701",
+    "AMB-ISSUE-0806",
+    "AMB-ISSUE-0807",
+    "AMB-ISSUE-0913",
+    "AMB-ISSUE-1001",
+    "AMB-ISSUE-1002",
+    "AMB-ISSUE-1003",
+    "AMB-ISSUE-1004",
+    "AMB-ISSUE-1005",
+    "AMB-ISSUE-1006",
+    "AMB-ISSUE-1007",
+    "AMB-ISSUE-1101",
+    "AMB-ISSUE-1102",
+    "AMB-ISSUE-1103",
+    "AMB-ISSUE-1104",
+    "AMB-ISSUE-1105",
+    "AMB-ISSUE-1106",
+    "AMB-ISSUE-1107",
+    "AMB-ISSUE-1301",
+    "AMB-ISSUE-1302",
+    "AMB-ISSUE-1303",
+    "AMB-ISSUE-1304",
+    "AMB-ISSUE-1309",
+    "AMB-ISSUE-1401",
+    "AMB-ISSUE-1402",
+    "AMB-ISSUE-1403",
+    "AMB-ISSUE-1404",
+    "AMB-ISSUE-1601",
+    "AMB-ISSUE-1602",
+    "AMB-ISSUE-1603",
+    "AMB-ISSUE-1604",
+    "AMB-ISSUE-1605",
+    "AMB-ISSUE-1701",
+    "AMB-ISSUE-1702",
+    "AMB-ISSUE-1703",
+    "AMB-ISSUE-1706",
+    "AMB-ISSUE-1709",
+    "AMB-ISSUE-1801",
+    "AMB-ISSUE-1802"
+  ],
+  "rows_added": [],
+  "rows_updated": [],
+  "scg_004_automated_findings": {
+    "total_findings": 29,
+    "real_repo_findings": 13,
+    "fixture_only_findings": 16,
+    "severity_distribution": {
+      "B3": 11,
+      "B4": 18
+    },
+    "real_repo_severity_distribution": {
+      "B3": 11,
+      "B4": 2
+    },
+    "fixture_only_severity_distribution": {
+      "B4": 16
+    },
+    "red_b0_b1_b2_count": 0,
+    "known_issues_decision": "No known-issues rows added. Real repo findings are Yellow/B3/B4 only and are either governance intake, proof gap, or mapped to existing runtime rows through SCG-006. Fixture-only findings are detector proof only.",
+    "fixture_only_excluded_finding_ids": [
+      "SCG-004-900",
+      "SCG-004-901",
+      "SCG-004-902",
+      "SCG-004-903",
+      "SCG-004-904",
+      "SCG-004-905",
+      "SCG-004-906",
+      "SCG-004-907",
+      "SCG-004-908",
+      "SCG-004-909",
+      "SCG-004-910",
+      "SCG-004-911",
+      "SCG-004-912",
+      "SCG-004-913",
+      "SCG-004-914",
+      "SCG-004-915"
+    ],
+    "governance_only_findings_carried_forward": [
+      "SCG-004-001",
+      "SCG-004-002",
+      "SCG-004-012"
+    ],
+    "deduped_or_carried_forward_findings": [
+      "SCG-004-003",
+      "SCG-004-004",
+      "SCG-004-005",
+      "SCG-004-006",
+      "SCG-004-007",
+      "SCG-004-008",
+      "SCG-004-009",
+      "SCG-004-010",
+      "SCG-004-011",
+      "SCG-004-013"
+    ]
+  },
+  "scg_005_ledger_findings": {
+    "files_reviewed": 2136,
+    "red_count": 0,
+    "b0_count": 0,
+    "b1_count": 0,
+    "b2_count": 0,
+    "b3_count": 602,
+    "b4_count": 6,
+    "yellow_count": 361,
+    "unknown_count": 117,
+    "green_count": 1658,
+    "decision_counts": {
+      "Keep": 1465,
+      "Move": 445,
+      "Quarantine": 126,
+      "Split": 100
+    },
+    "known_issues_decision": "No known-issues rows added. SCG-005 found no new real Red/B0/B1/B2 findings; B3/B4 and Unknown rows remain ledger evidence and owner-train input."
+  },
+  "scg_006_flow_root_cause_findings": {
+    "flows_traced": 16,
+    "flow_statuses": {
+      "Yellow": 16
+    },
+    "root_causes_generated": 10,
+    "root_cause_severity_distribution": {
+      "B3": 9,
+      "B4": 1
+    },
+    "red_flow_count": 0,
+    "known_issues_decision": "No new known-issues rows added. Nine root causes dedupe to existing AMB-ISSUE rows; RC-SCG006-008 is governance-only and carried forward in SCG artifacts.",
+    "root_cause_dedupe_map": {
+      "RC-SCG006-001": [
+        "AMB-ISSUE-0014",
+        "AMB-ISSUE-0807",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "RC-SCG006-002": [
+        "AMB-ISSUE-0003",
+        "AMB-ISSUE-0008",
+        "AMB-ISSUE-0012",
+        "AMB-ISSUE-1101",
+        "AMB-ISSUE-1102",
+        "AMB-ISSUE-1103",
+        "AMB-ISSUE-1104",
+        "AMB-ISSUE-1105",
+        "AMB-ISSUE-1106",
+        "AMB-ISSUE-1107"
+      ],
+      "RC-SCG006-003": [
+        "AMB-ISSUE-1301",
+        "AMB-ISSUE-1302",
+        "AMB-ISSUE-1303",
+        "AMB-ISSUE-1304",
+        "AMB-ISSUE-1309",
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005"
+      ],
+      "RC-SCG006-004": [
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005",
+        "AMB-ISSUE-1001",
+        "AMB-ISSUE-1002",
+        "AMB-ISSUE-1003",
+        "AMB-ISSUE-1004",
+        "AMB-ISSUE-1005",
+        "AMB-ISSUE-1006",
+        "AMB-ISSUE-1007",
+        "AMB-ISSUE-0014",
+        "AMB-ISSUE-0807",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "RC-SCG006-005": [
+        "AMB-ISSUE-0009",
+        "AMB-ISSUE-0501",
+        "AMB-ISSUE-0502",
+        "AMB-ISSUE-0503",
+        "AMB-ISSUE-0506",
+        "AMB-ISSUE-0507",
+        "AMB-ISSUE-0913",
+        "AMB-ISSUE-1401",
+        "AMB-ISSUE-1402",
+        "AMB-ISSUE-1403",
+        "AMB-ISSUE-1404"
+      ],
+      "RC-SCG006-006": [
+        "AMB-ISSUE-0701",
+        "AMB-ISSUE-1601",
+        "AMB-ISSUE-1602",
+        "AMB-ISSUE-1603",
+        "AMB-ISSUE-1604",
+        "AMB-ISSUE-1605"
+      ],
+      "RC-SCG006-007": [
+        "AMB-ISSUE-0014",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "RC-SCG006-008": [
+        "governance-only; no runtime known-issues row"
+      ],
+      "RC-SCG006-009": [
+        "AMB-ISSUE-0014"
+      ],
+      "RC-SCG006-010": [
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0807",
+        "AMB-ISSUE-1706",
+        "AMB-ISSUE-1709",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ]
+    }
+  },
+  "scg_007_repair_train_sync": {
+    "repair_train_count": 13,
+    "root_causes_mapped_count": 10,
+    "root_causes_unmapped_count": 0,
+    "scg_007a_required_before_scg_008": true,
+    "every_train_has_known_issues_sync_requirement": true,
+    "child_issue_creation_recommendations_create_now": false,
+    "known_issues_sync_by_train": [
+      {
+        "train_id": "SCG-007A",
+        "root_cause_ids": [
+          "RC-SCG006-008"
+        ],
+        "known_issues_sync_requirement": "Required before SCG-008; add known-issues rows only for real Red/B0/B1/B2, otherwise record no new rows."
+      },
+      {
+        "train_id": "SCG-007B",
+        "root_cause_ids": [
+          "RC-SCG006-008"
+        ],
+        "known_issues_sync_requirement": "Update KNOWN_ISSUES only if ownership review discovers real Red/B0/B1/B2."
+      },
+      {
+        "train_id": "SCG-007C",
+        "root_cause_ids": [
+          "RC-SCG006-001",
+          "RC-SCG006-004",
+          "RC-SCG006-007"
+        ],
+        "known_issues_sync_requirement": "Update rows only for real B0/B1/B2; otherwise keep Yellow until flow proof."
+      },
+      {
+        "train_id": "SCG-007D",
+        "root_cause_ids": [
+          "RC-SCG006-002",
+          "RC-SCG006-001",
+          "RC-SCG006-010"
+        ],
+        "known_issues_sync_requirement": "Reconcile Capture rows; do not close without proof matrix."
+      },
+      {
+        "train_id": "SCG-007E",
+        "root_cause_ids": [
+          "RC-SCG006-003",
+          "RC-SCG006-004",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Reconcile Goals/Today rows; keep Yellow if visual/device/accessibility proof remains missing."
+      },
+      {
+        "train_id": "SCG-007F",
+        "root_cause_ids": [
+          "RC-SCG006-005",
+          "RC-SCG006-007",
+          "RC-SCG006-009",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Reconcile Time rows; keep Yellow if proof is simulator-only or manual accessibility proof absent."
+      },
+      {
+        "train_id": "SCG-007G",
+        "root_cause_ids": [
+          "RC-SCG006-006",
+          "RC-SCG006-007",
+          "RC-SCG006-009",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Reconcile Search rows; do not close without runtime/device evidence."
+      },
+      {
+        "train_id": "SCG-007H",
+        "root_cause_ids": [
+          "RC-SCG006-010",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Update AMB-ISSUE-0010 only with scan plus screenshot evidence."
+      },
+      {
+        "train_id": "SCG-007I",
+        "root_cause_ids": [
+          "RC-SCG006-010",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Reconcile shell/visual rows only with reviewable screenshots; keep Yellow without device/accessibility proof."
+      },
+      {
+        "train_id": "SCG-007J",
+        "root_cause_ids": [
+          "RC-SCG006-010",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Keep accessibility rows Yellow unless current manual/device evidence exists."
+      },
+      {
+        "train_id": "SCG-007K",
+        "root_cause_ids": [
+          "RC-SCG006-009",
+          "RC-SCG006-001"
+        ],
+        "known_issues_sync_requirement": "Update only if B0/B1/B2 discovered; otherwise record Yellow proof gaps."
+      },
+      {
+        "train_id": "SCG-007L",
+        "root_cause_ids": [
+          "RC-SCG006-001",
+          "RC-SCG006-002",
+          "RC-SCG006-003",
+          "RC-SCG006-004",
+          "RC-SCG006-005",
+          "RC-SCG006-006",
+          "RC-SCG006-007",
+          "RC-SCG006-008",
+          "RC-SCG006-009",
+          "RC-SCG006-010"
+        ],
+        "known_issues_sync_requirement": "Known-issues sync must happen before SCG-008; close rows only with row-specific proof."
+      },
+      {
+        "train_id": "SCG-007M",
+        "root_cause_ids": [
+          "RC-SCG006-001",
+          "RC-SCG006-010"
+        ],
+        "known_issues_sync_requirement": "Final sync/dedupe before SCG-008. No row closure from screenshot paths alone."
+      }
+    ]
+  },
+  "open_b_counts": {
+    "counting_basis": "SCG reviewed finding records, not unique production defects; train rows are owner routing and are excluded from these B counts.",
+    "B0": 0,
+    "B1": 0,
+    "B2": 0,
+    "B3": 622,
+    "B4": 25,
+    "by_source": {
+      "SCG-004": {
+        "B3": 11,
+        "B4": 18
+      },
+      "SCG-005": {
+        "B3": 602,
+        "B4": 6
+      },
+      "SCG-006-root-causes": {
+        "B3": 9,
+        "B4": 1
+      }
+    }
+  },
+  "owner_trains": [
+    "SCG-007A",
+    "SCG-007B",
+    "SCG-007C",
+    "SCG-007D",
+    "SCG-007E",
+    "SCG-007F",
+    "SCG-007G",
+    "SCG-007H",
+    "SCG-007I",
+    "SCG-007J",
+    "SCG-007K",
+    "SCG-007L",
+    "SCG-007M"
+  ],
+  "proof_gaps": [
+    "SCG-005 missing review ledger schema remains accepted Yellow/governance risk unless repaired or explicitly waived in SCG-007A successor scope.",
+    "SCG-005 carries 117 Unknown rows and 361 Yellow rows; no senior-readiness claim is allowed.",
+    "SCG-006 traces all 16 flows as Yellow; no flow is Green.",
+    "Current runtime/device/manual accessibility/offline/account proof remains absent or incomplete per known issues and release truth.",
+    "Visual Green, Release Green, app readiness, and senior-readiness remain unclaimed."
+  ],
+  "scg_008_readiness_verdict": "Ready for bounded child issue generation",
+  "scg_008_readiness_notes": [
+    "Known-issues sync/dedupe is complete for SCG-004 through SCG-007 inputs.",
+    "No missing real Red/B0/B1/B2 known-issues row was found.",
+    "Open Yellow/B3/B4 and Unknown risks are accepted only for bounded child issue generation, not production repair readiness or senior-readiness.",
+    "SCG-008 was not started in this pass."
+  ],
+  "rollback": "Remove docs/quality/senior-review/KNOWN_ISSUES_SYNC_REPORT.json and docs/quality/senior-review/KNOWN_ISSUES_SYNC_REPORT.md; no production files were changed."
+}

@@ -1,0 +1,1597 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Git-owned Code-Connect-free VSP provenance. This registry is not Figma Code Connect, Visual Green, source implementation, device proof, accessibility conformance, release proof, or owner approval.",
+  "authority_basis": [
+    "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+    "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+    "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
+    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+    "docs/truth/RELEASE_TRUTH.md",
+    "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+    "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md",
+    "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+    "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+    "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md",
+    "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+    "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+    "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
+  ],
+  "vsp_packets": [
+    {
+      "vsp_id": "VSP-01",
+      "title": "Root Shell / Stage / Chrome",
+      "category": "shell_authority",
+      "current_status_recommendation": "Ready For Review",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "87:2",
+        "frame_name": "AUTHORITY - VSP-01 - Nightglass Authority Shell - owner-approved shell authority - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": false,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "VSP-01 is the immutable shell authority. This provenance task records it and does not mutate it."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Stage/AmbitionsStage.swift",
+          "Native/Ambitions/Stage/AmbitionsSurface.swift",
+          "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift",
+          "Native/Ambitions/Stage/Chrome/StageDockRail.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Stage",
+          "Native/Ambitions/App",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/RootTab.swift",
+          "Native/Ambitions/Surfaces/Capture",
+          "Native/Ambitions/Surfaces/Motion",
+          "new shell chrome outside VSP-01 authority"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/SurfaceShellPrimitives.swift",
+          "Sources/Components/NavigationPrimitives.swift",
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift",
+          "Sources/Components/ShellChromeTrustPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+          "Native/AmbitionsTests/App/AppShellChromeTests.swift",
+          "Native/AmbitionsTests/App/ShellChromeAuditTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/SI03ShellNavigationPreviews.swift",
+          "Sources/Previews/RootDestinationIdentityPreviews.swift",
+          "Native/Ambitions/Quality/ShellChromeAudit.swift",
+          "Native/Ambitions/Quality/ShellPreviewMatrix.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1480",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "shell-authority",
+          "provenance",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": false,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Source shell may be product-law aligned but not visually parity-proven against the approved VSP-01 frame.",
+        "Later packets can accidentally invent shell chrome if they are not audited against this registry."
+      ],
+      "missing_evidence": [
+        "live SwiftUI shell parity screenshot",
+        "device shell screenshot",
+        "manual accessibility and haptics proof"
+      ],
+      "green_blockers": [
+        "No current rendered SwiftUI parity proof.",
+        "No device proof."
+      ],
+      "notes": [
+        "VSP-01 Nightglass Authority Shell is owner-approved shell authority for root shell, Stage, chrome, dock, Capture/Search placement, route depth, and root IA.",
+        "VSP-01 approved shell authority is immutable unless explicit owner evidence changes it."
+      ]
+    },
+    {
+      "vsp_id": "VSP-02",
+      "title": "Today Reality Window",
+      "category": "surface_content",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "134:44",
+        "frame_name": "CANDIDATE - VSP-02 - Rail-Attached Time Bands + Current Aperture - selected direction - R6",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-matrix-r1-readable-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-swiftui-anatomy.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-02-rail-aperture-state-matrix-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-02-owner-review-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Today candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+          "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+          "Native/Ambitions/Surfaces/Today/TodayAccessibility.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Today",
+          "Native/Ambitions/Surfaces/Today/Projection",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "dashboard/card-feed root pattern",
+          "task-list-only root pattern",
+          "Capture root/tab ownership"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/StartHereProductPrimitives.swift",
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
+          "Sources/Components/LifeDirectionalIntegrationPrimitives.swift",
+          "Sources/Components/RealityMeridianTemporalPrimitives.swift",
+          "Sources/Components/RealityMeridianTimeBand.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift",
+          "Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift",
+          "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift",
+          "Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/RealityMeridianRichnessPreviews.swift",
+          "Sources/Previews/RealityMeridianTemporalPreviews.swift",
+          "Native/Ambitions/Quality/ProductObjectDominanceAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1481",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "today",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": true
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into a dashboard, task list, calendar clone, KPI panel, or card-feed root pattern if analytics are detached from the timeline object.",
+        "R6 is a Figma-selected direction and proof-bounded candidate; it is not runtime behavior proof or SwiftUI implementation proof.",
+        "R1 state matrix is Figma target evidence only; it does not prove live SwiftUI Dynamic Type, VoiceOver, Reduce Motion, haptics, or runtime mutation behavior.",
+        "The current SwiftUI source has horizontal RealityMeridianTimeBand support, but the selected vertical rail-attached day bands and Current Aperture require a new or repaired Today primitive.",
+        "Figma screenshot export drops SF Pro/system-font text; readable proof uses a temporary Inter-font export clone while the live candidate remains system-font aligned."
+      ],
+      "missing_evidence": [
+        "live SwiftUI Today parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics",
+        "runtime mutation/proof receipt evidence"
+      ],
+      "green_blockers": [
+        "No live SwiftUI parity screenshot.",
+        "No accessibility proof.",
+        "No runtime mutation/proof receipt evidence."
+      ],
+      "notes": [
+        "Use Start here, Recommended step, Step, Start now, and Open step language where applicable.",
+        "R1 was reclassified as failure evidence because it read as stacked cards on a background.",
+        "R2 repaired the original card-stack issue but has been superseded as the current VSP-02 direction by R6.",
+        "R6 selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.",
+        "R6 remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "R6 Figma repair moved the current-time cursor right of the rail and shortened the time label to avoid marker/label collision.",
+        "Readable R6 screenshot proof uses a temporary Inter-font export clone because current Figma screenshot export drops SF Pro/system-font text. This is screenshot-proof scaffolding only; SwiftUI should remain system-font aligned.",
+        "R1 state matrix at Figma node 152:93 extends the selected R6 rail-aperture direction across calm, overloaded, protected, waiting/blocked, moved/still-counts, not-needed/recovery, Dynamic Type stress, and Reduce Motion static-proof states.",
+        "R1 keeps proof and analytics integrated in the Today condition ribbon instead of detached KPI or inspection panels.",
+        "Owner-review package at Figma node 160:93 explicitly packages the selected R6/R1 direction into hero, marketing crop, SwiftUI anatomy, accessibility matrix, state-matrix pointer, and non-claims frames.",
+        "The owner-review package keeps the selected Today direction content-only inside VSP-01 shell authority and records no source implementation or Visual Green claim.",
+        "The package uses readable Inter proof clones for exported screenshots because the current MCP screenshot pipeline drops SF Pro text; the selected live R6/R1 candidate remains system-font aligned for SwiftUI plausibility.",
+        "Owner approved VSP-02 on 2026-06-30 as the visual/Figma target for the Rail-Aperture Today direction. This approval does not claim source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior, Release Green, or Done."
+      ]
+    },
+    {
+      "vsp_id": "VSP-03",
+      "title": "Goals Life Area Atlas",
+      "category": "surface_content",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "177:93",
+        "frame_name": "CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-territory-refinements-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d1-continuous-territory-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d2-editable-atlas-boundaries-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d3-path-overlay-territory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d4-capacity-weather-map-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d5-focus-lens-territory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-non-claims.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-01-life-area-atlas-root-object-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-02-living-map-territory-refinements-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-02-D5-focus-lens-selection-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-D5-focus-lens-owner-review-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Goals candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+          "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+          "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Goals",
+          "Native/Ambitions/Surfaces/Goals/Projection",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "generic project-board root pattern",
+          "productivity-score or ranking root",
+          "stale top-level IA"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/FE09ComponentSystemPrimitives.swift",
+          "Sources/Components/GroupedNavigationList.swift",
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Goals/GoalsConstellationAtlasReconstructionTests.swift",
+          "Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift",
+          "Native/AmbitionsTests/Goals/GoalsShellIntegrationTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+          "Sources/Previews/TopLevelSurfaceCompositionPreviews.swift",
+          "Native/Ambitions/Quality/ProductObjectDominanceAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1482",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "goals",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": true
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into KPI dashboards, project boards, ranking layers, analytics, or scorecards.",
+        "Existing names must be treated as source/internal where canon says so.",
+        "Part 02 D-family territory refinements require careful follow-up to avoid map-as-project-board, edit-tool UI, or Capture/inbox drift.",
+        "D5 owner-approved package is Figma evidence only and still requires explicit implementation authorization and proof before source implementation Green."
+      ],
+      "missing_evidence": [
+        "live SwiftUI Goals parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "goal action runtime proof"
+      ],
+      "green_blockers": [
+        "No live SwiftUI parity screenshot.",
+        "No device/accessibility proof."
+      ],
+      "notes": [
+        "Goals implementation must remain a Life Area Atlas content object inside Goals, not a competing root model.",
+        "Part 01 exploration board at Figma node 164:93 provides six content-only root-object options for owner selection. It is not a candidate package, owner approval, source implementation, or Visual Green.",
+        "Owner direction selected the Part 01 D Living Map Territories concept family for refinement, not as final approval.",
+        "Part 02 exploration board at Figma node 169:93 refines D into six content-only territory-map options for owner selection. It is not a candidate package, owner approval, source implementation, or Visual Green.",
+        "Owner selected D5 Focus Lens Territory on 2026-06-30 as the VSP-03 Part 02 direction for candidate-package buildout. This is direction selection only, not final VSP-03 candidate approval.",
+        "D5 owner-review package at Figma node 177:93 packages the selected direction into hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames for owner review.",
+        "The D5 package remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "D5 owner-review package proof uses readable Inter export text because the current Figma screenshot pipeline can drop SF Pro/system-font text; SwiftUI implementation remains system-font aligned.",
+        "Owner approved VSP-03 on 2026-06-30 as the visual/Figma target for the D5 Focus Lens Territory direction. This approval does not claim source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior, Release Green, or Done."
+      ]
+    },
+    {
+      "vsp_id": "VSP-04",
+      "title": "Time / Native Month Life Calendar",
+      "category": "surface_content",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "202:93",
+        "frame_name": "CANDIDATE - VSP-04 - F Apple-Native Life Calendar owner review package - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-options-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-a-lifeshape-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-b-protected-time-weave-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-native-month-options-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-a-native-capacity-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-b-unequal-week-bands-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-c-current-aperture-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-d-protected-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-e-goal-fit-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selection-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
+          "docs/design/targets/time/lifeshape_field_visual_target.md",
+          "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-04-part-02-native-month-life-calendar-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Time candidate is content-only and must mount inside VSP-01 shell. Part 02 preserves native month calendar content without shell chrome."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+          "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+          "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Time",
+          "Native/Ambitions/Core/Time",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling",
+          "Native/Ambitions/DesignSystem/ProductObjects",
+          "Native/Ambitions/Rendering/CanvasPrimitives",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "calendar-clone-only root pattern",
+          "top-level stale planning IA",
+          "unproven external calendar dependency for core value",
+          "Today-owned day timeline duplication as Time root"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
+          "Sources/Components/RealityMeridianTimeBand.swift",
+          "Sources/Components/HorizonCapacityPrimitiveFamily.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeBlockGraph.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PlacementEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedTimeEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecoveryWindowEngine.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
+          "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift",
+          "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/SchedulingTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift",
+          "Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/RealityMeridianTemporalPreviews.swift",
+          "Native/Ambitions/Quality/LifeShapeConstructionAudit.swift",
+          "Native/Ambitions/Quality/VisualTargetArtifactAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1483",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "time",
+          "surface-content",
+          "yellow-proof",
+          "native-month-calendar",
+          "owner-approved-direction",
+          "owner-review-package",
+          "owner-approved-target"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into a generic calendar clone.",
+        "External calendar behavior cannot become required for offline core value.",
+        "A selected option must not be synthesized with other directions unless explicitly scoped as a new candidate pass.",
+        "Part 02 supersedes Part 01 root-object premise for owner selection: Time root should be month-level native Life Calendar, not an abstract day/week field.",
+        "Option C can drift into Today-owned day/current-step territory if aperture behavior becomes the root visual instead of a month-level behavior.",
+        "Goal/capacity/protection overlays can become KPI/dashboard clutter if they leave the month object or multiply as side panels.",
+        "The owner-review package can be mistaken for SwiftUI parity unless the Figma-only proof ceiling remains explicit."
+      ],
+      "missing_evidence": [
+        "live SwiftUI Time parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "reflow/protection runtime proof",
+        "VoiceOver month summary proof",
+        "Dynamic Type month-grid stress proof",
+        "Reduce Motion static reflow marker proof"
+      ],
+      "green_blockers": [
+        "No live SwiftUI parity screenshot.",
+        "No runtime/device/accessibility proof."
+      ],
+      "notes": [
+        "LifeShape-related source names are internal/source provenance and not top-level user IA.",
+        "Part 01 root object options at Figma node 182:93 are Yellow exploration evidence only and do not approve source implementation.",
+        "Part 02 Native Month Life Calendar options at Figma node 186:93 are the current VSP-04 owner-selection evidence.",
+        "Owner selected F Apple-Native Life Calendar on 2026-06-30 as the VSP-04 Part 02 direction for candidate-package buildout. This is direction selection only, not final VSP-04 candidate approval.",
+        "Owner approved the VSP-04/F Apple-Native Life Calendar direction lock on 2026-06-30. This approval does not claim a complete VSP-04/F candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior, Visual Green, Release Green, or Done.",
+        "F selection record at Figma node 196:93 packages the selected option, rationale, next candidate-package gate, shell boundary, product-law non-claims, and durable screenshot proof.",
+        "Part 02 proof PNGs use Inter because SF Pro text did not render in Figma export; SwiftUI implementation remains system-font/SF aligned.",
+        "Recommended current read: Option F is the strongest native bridge if the floor is replacing the user's month calendar plus reminders.",
+        "New SwiftUI primitive required after full VSP-04/F candidate-package approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay.",
+        "Full VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93 includes hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames.",
+        "State-matrix mini-calendar chip labels were widened and the protected/recovery subtitle was tightened before final export to avoid wrapped label defects.",
+        "VSP-04/F remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "New SwiftUI primitives required after full package approval: MonthLifeCalendarGrid, MonthLifeCalendarSemanticOverlay, MonthReflowProtectionMarker.",
+        "Owner approved the full VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93 on 2026-06-30 as visual/Figma target authority.",
+        "VSP-04 is Spec Ready for a future Codex implementation leaf, but remains Yellow because live SwiftUI parity, device, accessibility, haptics, runtime, and validation proof are missing.",
+        "This owner approval does not authorize shell mutation and does not claim source implementation, Visual Green, Release Green, or Done."
+      ]
+    },
+    {
+      "vsp_id": "VSP-05",
+      "title": "Capture Open Field Composer",
+      "category": "global_composer",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "217:93",
+        "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review owner review package - R3",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/vsp-05-part-01-options-board-r1.png"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Capture is global composer behavior and may not become a shell/root tab."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+          "Native/Ambitions/Composer/Capture/CaptureSurface.swift",
+          "Native/Ambitions/Composer/Capture/CaptureObjectView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Composer/Capture",
+          "Native/Ambitions/Stage/Overlays",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Surfaces/Capture",
+          "Capture root tab",
+          "Capture inbox/feed",
+          "chatbot composer as core architecture",
+          "persistent floating root affordance"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives+02-AtmosphereComposerCanvas.swift",
+          "Sources/Components/CaptureRoutingPrimitiveFamily.swift",
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift",
+          "Native/AmbitionsTests/Capture/CapturePlacementReviewStateTests.swift",
+          "Native/AmbitionsTests/ComposerCaptureCanonicalOwnershipTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/CoreReusableInteractionPrimitivePreviews.swift",
+          "Native/Ambitions/Quality/ShellContentSafetyAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1484",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "capture",
+          "global-composer",
+          "yellow-proof",
+          "owner-approved-direction",
+          "selected-f-quiet-placement",
+          "owner-review-package",
+          "owner-approved-target"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Highest IA drift risk after shell authority because Capture can become root-like if mounted incorrectly.",
+        "Keyboard, save, proposal, receipt, and offline proof are not established by Figma."
+      ],
+      "missing_evidence": [
+        "live SwiftUI Capture composer parity screenshot",
+        "device keyboard/composer screenshots",
+        "manual accessibility matrix",
+        "offline save/proposal/receipt runtime proof",
+        "Dynamic Type keyboard/composer stress proof",
+        "VoiceOver route-review order proof",
+        "Reduce Motion static proof-step walkthrough"
+      ],
+      "green_blockers": [
+        "No live SwiftUI Capture composer parity proof.",
+        "No global route/composer runtime proof.",
+        "No device keyboard proof.",
+        "No manual accessibility proof."
+      ],
+      "notes": [
+        "Capture remains the global composer and must not become a tab, inbox, chatbot, category wall, or root destination.",
+        "VSP-05 Part 01 R2 at Figma node 207:93 provides six owner-selection directions for the global Capture composer.",
+        "Owner approved F Quiet Placement Review as the VSP-05 Part 01 direction lock on 2026-06-30.",
+        "Owner approved the complete VSP-05/F owner-review package R3 at Figma node 217:93 on 2026-06-30; this moves the Figma target to Spec Ready / Yellow only.",
+        "R1 package at Figma node 212:93 was renamed failure evidence after text collapsed to 10px/non-rendered export.",
+        "R2 package at Figma node 213:93 was renamed failure evidence after SF-family text exported as zero-width; R3 uses readable Inter export text while preserving native San Francisco as the SwiftUI target.",
+        "No source implementation, live SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done is claimed."
+      ]
+    },
+    {
+      "vsp_id": "VSP-06",
+      "title": "You Native Settings",
+      "category": "surface_content",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "240:93",
+        "frame_name": "CANDIDATE - VSP-06 - Preference Weave final package - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-final-package-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-hero-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-state-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-accessibility-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-swiftui-anatomy-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-presentation-crop-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md",
+          "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
+          "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+          "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "You candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/You/YouSurface.swift",
+          "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+          "Native/Ambitions/Surfaces/You/YouObjectView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/You",
+          "Native/Ambitions/Trust",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "old profile IA as root",
+          "account-required core value",
+          "private runtime graph backend",
+          "generic settings dashboard without real controls"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/PersonalSystemCenterPrimitives.swift",
+          "Sources/Components/GroupedNavigationList.swift",
+          "Sources/Components/TrustReceiptLayerPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/You/YouUserSystemProfileReconstructionTests.swift",
+          "Native/AmbitionsTests/You/YouFeatureServiceTests.swift",
+          "Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/PersonalSystemCenterPreviews.swift",
+          "Native/Ambitions/Quality/UserLanguageCategoryAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1485",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "you",
+          "settings",
+          "owner-approved-direction",
+          "yellow-proof",
+          "figma-handoff",
+          "ready-for-review",
+          "owner-approved-package",
+          "spec-ready"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Part 02 was rejected because it copied the supplied references too literally.",
+        "Can drift into old Profile IA or account-gated core behavior.",
+        "Every visible row must open real controls or an honest unavailable state.",
+        "Figma uses Inter for render stability; SwiftUI target remains native system typography.",
+        "PreferenceWeaveField is a proposed primitive and must not become decorative-only Figma art.",
+        "Atmospheric star grain/glow is marketing-only or static decoration unless implemented with native accessibility-safe fallback."
+      ],
+      "missing_evidence": [
+        "live SwiftUI You parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "offline/account boundary proof"
+      ],
+      "green_blockers": [
+        "No live SwiftUI parity screenshot.",
+        "No account/offline boundary proof.",
+        "No accessibility proof."
+      ],
+      "notes": [
+        "Owner approved the final VSP-06 Preference Weave package R1 on 2026-07-01; proof ceiling remains Yellow until source/device/accessibility/runtime evidence exists.",
+        "Final candidate package R1 was built from owner-approved Option C Preference Weave on 2026-07-01 at Figma node 240:93.",
+        "Final package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, and presentation crop frames with durable repo screenshot proof.",
+        "Final package still needs explicit owner approval before source implementation begins.",
+        "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction on 2026-06-30.",
+        "Part 02 was rejected as too literal to the supplied Settings/Profile screenshots and is retained as failure evidence.",
+        "Option B Trust Meridian may inform ordering; Option D Local Control Observatory is non-selected context.",
+        "You is a native settings/user system surface. Account support must stay optional and cannot gate offline core value."
+      ]
+    },
+    {
+      "vsp_id": "VSP-07",
+      "title": "Trust Inspection Details",
+      "category": "contextual_inspection",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "257:93",
+        "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack final package - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-attached-receipt-stack-refinements-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-a-object-wake-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-b-receipt-aperture-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-c-mutation-ledger-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-final-package-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-hero-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-state-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-accessibility-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-swiftui-anatomy-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-presentation-crop-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-proof-nonclaims-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+          "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Trust must remain contextual inspection mounted from owning surfaces."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Trust/InspectionSurface.swift",
+          "Native/Ambitions/Trust/ProofInspectionView.swift",
+          "Native/Ambitions/Trust/SourceInspectionView.swift",
+          "Native/Ambitions/Trust/PrivacyInspectionView.swift",
+          "Native/Ambitions/Trust/ReceiptInspectionView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Trust",
+          "Native/Ambitions/Trust/Projection",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Trust root surface",
+          "Proof root surface",
+          "Source root surface",
+          "Privacy root surface",
+          "History root surface",
+          "Receipts root surface"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",
+          "Native/AmbitionsTests/TrustCanonicalOwnershipTests.swift",
+          "Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/TrustReceiptLayerPreviews.swift",
+          "Native/Ambitions/Quality/SourceInspectionAccessibilityProof.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1486",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "trust",
+          "inspection",
+          "yellow-proof",
+          "figma-exploration",
+          "owner-selected-direction",
+          "selected-f-attached-receipt-stack",
+          "part-02-refinement",
+          "owner-approved-direction",
+          "selected-a-object-wake-stack",
+          "part-02-approved",
+          "owner-review-package",
+          "ready-for-review",
+          "object-wake-stack",
+          "candidate-package",
+          "owner-approved-package",
+          "spec-ready"
+        ],
+        "should_create_or_update_now": true
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Inspection details can accidentally become architecture-as-UI or root navigation.",
+        "Source/trust copy can overclaim proof or privacy readiness.",
+        "Cross-object receipts can become activity-feed UI if not tied to an owning object.",
+        "Option F can become an activity feed, receipt destination, or History surface if Part 02 does not keep receipts attached to owning objects.",
+        "Cross-object receipt stacking can overexpose architecture if it is not scoped to changed objects and narrow reasons.",
+        "Part 02 Option E carries VSP-08 boundary risk and should not become VSP-07 source/account architecture.",
+        "Part 02 broader stack variants can become receipt-feed UI if the final candidate does not preserve single object ownership."
+      ],
+      "missing_evidence": [
+        "live SwiftUI inspection parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "privacy/trust disclosure proof"
+      ],
+      "green_blockers": [
+        "No live SwiftUI parity screenshot.",
+        "No contextual inspection proof.",
+        "No device/accessibility/runtime proof."
+      ],
+      "notes": [
+        "Part 01 exploration board created on 2026-07-01 at node 244:93 with six contextual inspection seam options.",
+        "Proof, Source, Privacy, History, and Receipts are contextual details only.",
+        "Owner selected Option F Attached Receipt Stack on 2026-07-01 as the VSP-07 Part 01 direction for Part 02 refinement.",
+        "Prior Option C recommendation remains a guardrail for object attachment, but Option F is the selected direction.",
+        "Option F must remain temporary contextual inspection state and must not become a root receipts, history, proof, privacy, source, or trust surface.",
+        "Part 01 direction approval did not claim final package approval, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done.",
+        "Part 02 refinement board created on 2026-07-01 at node 250:93 with six Attached Receipt Stack refinement directions.",
+        "Option E Private Source Veil remains VSP-08-adjacent boundary context unless explicitly selected for VSP-07.",
+        "Owner approved Part 02 Option A Object Wake Stack on 2026-07-01 as the VSP-07 direction for final candidate-package buildout.",
+        "Prior Codex recommendation for Option B Receipt Aperture is superseded by owner approval of Option A.",
+        "Final VSP-07 candidate package must be built from Object Wake Stack without merging multiple Part 02 options unless explicitly requested.",
+        "Option A must keep receipts attached to the changed object and must not become a receipt feed, history feed, root Trust surface, or shell mutation.",
+        "Part 02 direction approval remained Yellow until the final package was built and owner-approved; it did not claim source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done.",
+        "Final VSP-07 Object Wake Stack candidate package created on 2026-07-01 at node 257:93.",
+        "The final package is owner-approved as Figma design authority for a future implementation leaf, but it is not source implementation authority by itself and does not prove Visual Green, device behavior, accessibility conformance, runtime behavior, Release Green, or Done.",
+        "Durable repo PNG proof images are local render mirrors anchored to the Figma node IDs; direct Figma PNG export is not claimed.",
+        "Owner approved final VSP-07 Object Wake Stack package node 257:93 on 2026-07-01 as the Figma design target for a future implementation leaf.",
+        "VSP-07 is Spec Ready for a future bounded Codex implementation leaf but remains Yellow because live SwiftUI parity, device, accessibility, runtime, and privacy/trust proof are missing.",
+        "Figma node 257:93 was annotated with owner-approved package metadata on 2026-07-01."
+      ]
+    },
+    {
+      "vsp_id": "VSP-08",
+      "title": "External Boundaries",
+      "category": "external_boundary",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "272:93",
+        "frame_name": "CANDIDATE - VSP-08 - Airlock Review Gate final package - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-launch-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-part-01-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-a-local-first-membrane-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-b-airlock-review-gate-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-final-package-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-hero-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-state-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-accessibility-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+          "docs/qa/KNOWN_ISSUES.md",
+          "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "External boundary UI must be a content/inspection layer, never shell or root IA."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary",
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI",
+          "Native/Ambitions/Trust"
+        ],
+        "forbidden_implementation_areas": [
+          "R2 private life graph storage",
+          "account-required core value",
+          "external/cloud LLM core runtime",
+          "private user context in Source Atlas",
+          "network dependency for offline core value"
+        ],
+        "known_component_candidates": [
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasBoundary.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallback.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",
+          "scripts/ambitions-local-first-boundary-scan.py"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1487",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "external-boundary",
+          "privacy",
+          "yellow-proof",
+          "owner-approved-target",
+          "final-package",
+          "airlock-review-gate",
+          "spec-ready"
+        ],
+        "should_create_or_update_now": true
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Account, R2, Source Atlas, offline, and cloud AI boundaries carry privacy/product-law risk.",
+        "A Figma boundary object cannot prove request-shape or no-private-graph runtime behavior."
+      ],
+      "missing_evidence": [
+        "VSP-08A policy readback owner approval",
+        "VSP-08B implementation proof packet",
+        "live SwiftUI boundary parity screenshot",
+        "R2/Source Atlas request-shape proof",
+        "offline no-account runtime proof",
+        "privacy-boundary runtime proof",
+        "device screenshot proof",
+        "Dynamic Type proof",
+        "VoiceOver proof",
+        "Reduce Motion proof",
+        "Increase Contrast proof",
+        "Reduce Transparency proof"
+      ],
+      "green_blockers": [
+        "No privacy-boundary runtime proof.",
+        "No offline no-account runtime proof.",
+        "No R2 public/reference-only request proof.",
+        "No live SwiftUI/device/accessibility proof."
+      ],
+      "notes": [
+        "Split into VSP-08A policy readback and VSP-08B implementation proof before any source implementation.",
+        "No private life graph, private user context, goals, captures, schedule, receipts, proof, behavior, or inferred priorities may go to R2 or Source Atlas.",
+        "External/cloud LLMs are not core runtime architecture.",
+        "Part 01 external boundary directions board created on 2026-07-01 at node 264:93 with six owner-review options A-F.",
+        "Codex recommends Option B Airlock Review Gate because it converts external boundary law into a visible request review object without making Source Atlas, account, widgets, notifications, or cloud services into root surfaces.",
+        "Part 01 remains Needs Repair / Yellow: owner direction selection, policy readback approval, privacy boundary proof, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, and Done are not claimed.",
+        "Owner selected Part 01 Option B Airlock Review Gate on 2026-07-01 as the VSP-08 direction for final candidate-package buildout.",
+        "Option B must be built forward without merging multiple Part 01 options unless explicitly requested.",
+        "Part 01 owner direction approval remains Yellow: no final package approval, source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed.",
+        "Final candidate package R1 built from owner-selected Option B Airlock Review Gate on 2026-07-01 at Figma node 272:93.",
+        "Final package is Ready For Review / Yellow only until explicit owner package approval is recorded.",
+        "Package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, and package readback frames.",
+        "No source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed.",
+        "Owner approved final VSP-08 Airlock Review Gate package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf.",
+        "VSP-08 is Spec Ready / Yellow after owner package approval; runtime/privacy/request-shape/offline/device/accessibility proof remains missing."
+      ]
+    },
+    {
+      "vsp_id": "VSP-09",
+      "title": "Motion / Haptics / Accessibility Matrix",
+      "category": "motion_accessibility_haptics",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "92:2",
+        "frame_name": "CANDIDATE - VSP-09 - accessibility motion haptics matrix - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-09-accessibility-motion-haptics-approved.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-09-accessibility-motion-haptics-matrix-R1.md",
+          "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Motion/accessibility is a behavior/proof layer and may not become shell or root navigation."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+          "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift",
+          "Native/Ambitions/Interaction/HapticPolicy.swift",
+          "Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Stage/Motion",
+          "Native/Ambitions/Interaction",
+          "Native/Ambitions/DesignSystem/Accessibility",
+          "Sources/Accessibility",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Surfaces/Motion",
+          "Motion root destination",
+          "motion analytics dashboard",
+          "score/streak/XP layer"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift",
+          "Sources/Components/MotionPrimitives.swift",
+          "Sources/Components/CoreReusableInteractionPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift",
+          "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
+          "Native/AmbitionsTests/App/StageMotionRoutingTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift",
+          "Sources/Previews/InteractionMotionHapticsPreviews.swift",
+          "Native/Ambitions/Quality/MotionReductionAudit.swift",
+          "Native/Ambitions/Quality/AccessibilityAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1488",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "accessibility",
+          "motion",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Motion can become a destination if not kept under Stage/Motion behavior.",
+        "Haptic policy needs device proof, not source-only review."
+      ],
+      "missing_evidence": [
+        "live SwiftUI accessibility/motion screenshots",
+        "device haptic note",
+        "manual VoiceOver order",
+        "Dynamic Type matrix",
+        "Reduce Motion and Reduce Transparency walkthroughs"
+      ],
+      "green_blockers": [
+        "No manual accessibility proof.",
+        "No haptic device proof."
+      ],
+      "notes": [
+        "VSP-09 is the acceptance matrix for all later visual packets. Motion remains cross-surface behavior.",
+        "Delegated owner approval recorded on 2026-06-30 for governance authority only; proof ceiling remains Yellow."
+      ]
+    },
+    {
+      "vsp_id": "VSP-10",
+      "title": "Implementation Anatomy",
+      "category": "implementation_anatomy",
+      "current_status_recommendation": "Spec Ready",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "91:2",
+        "frame_name": "CANDIDATE - VSP-10 - implementation anatomy source-owner map - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-10-implementation-anatomy-approved.png"
+        ],
+        "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-10-implementation-anatomy-source-owner-map-R1.md",
+          "docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+          "docs/design/provenance/component-registry.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Implementation anatomy records handoff ownership and may not alter shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "docs/design/provenance/component-registry.json",
+          "docs/design/provenance/vsp-provenance.json",
+          "docs/design/provenance/generated/swift-component-inventory.generated.json"
+        ],
+        "allowed_implementation_areas": [
+          "docs/design/provenance",
+          "Sources/Components",
+          "Sources/Previews",
+          "Native/Ambitions/Quality"
+        ],
+        "forbidden_implementation_areas": [
+          "product UI implementation from anatomy board alone",
+          "shell mutation",
+          "Linear as source of truth",
+          "Code Connect completion claim"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/FE09ComponentSystemPrimitives.swift",
+          "Sources/Components/SurfaceShellPrimitives.swift",
+          "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+          "Native/Ambitions/Quality/ShellPreviewMatrix.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/FE09ComponentSystemTests.swift",
+          "Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift",
+          "Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/ComponentPreviews.swift",
+          "Sources/Previews/ComponentPreviewGallery+Density.swift",
+          "Native/Ambitions/Quality/VisualRegressionHarness.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1489",
+        "recommended_status": "Spec Ready",
+        "recommended_labels": [
+          "VSP",
+          "implementation-anatomy",
+          "provenance",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": false,
+        "device_screenshot": false,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": false,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md"
+        ],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Anatomy can be mistaken for implementation authority if not tied to source-owner paths and non-goals.",
+        "Generated inventory can contain stale/internal names that are not product IA."
+      ],
+      "missing_evidence": [
+        "component preview matrix proof",
+        "explicit stale-vocabulary cleanup plan for source-level compatibility names"
+      ],
+      "green_blockers": [
+        "No component preview proof."
+      ],
+      "notes": [
+        "VSP-10 is implementation anatomy and provenance. It is not user-facing product UI and cannot substitute for product hero proof.",
+        "Delegated owner approval recorded on 2026-06-30 for governance authority only; proof ceiling remains Yellow."
+      ]
+    }
+  ]
+}

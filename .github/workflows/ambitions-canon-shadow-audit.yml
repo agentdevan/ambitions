@@ -1,0 +1,60 @@
+name: Ambitions Canon Shadow Audit
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canon-shadow-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  canon-shadow-integrity:
+    name: Canon shadow integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Enforce authority freeze
+        run: python3 scripts/ambitions-authority-freeze-check.py
+
+      - name: Run canon compiler tests
+        run: python3 -m unittest discover -s tests/canon -p 'test_*.py' -v
+
+      - name: Run authority freeze tests
+        run: python3 -m unittest scripts/tests/test_ambitions_authority_freeze_check.py -v
+
+      - name: Compile canon compiler
+        run: python3 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py
+
+      - name: Verify tracked semantic comparison receipt
+        run: python3 scripts/ambitions-canon.py semantic-review --check-receipt
+
+      - name: Audit shadow canon
+        run: python3 scripts/ambitions-canon.py audit
+
+      - name: Enforce P0 specification completeness
+        run: python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap
+
+      - name: Verify generated projections
+        run: python3 scripts/ambitions-canon.py build --check
+
+      - name: Preserve active Constitution audit
+        run: python3 scripts/ambitions-constitution-audit.py
+
+      - name: Check patch whitespace
+        run: git diff --check

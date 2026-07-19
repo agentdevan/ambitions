@@ -1,0 +1,195 @@
+{
+  "adapterSelection": "statcan_table_13100974",
+  "createdAt": "2026-06-28T16:08:18Z",
+  "dataClass": "public_provenance",
+  "fixtureFallbackHidden": false,
+  "fixtureFallbackPolicy": "forbidden",
+  "kind": "ambitions.sourceAtlas.liveAdapterValidation.v1",
+  "noPack": true,
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal/privacy approval",
+    "does not claim production R2 promotion",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "packCandidatesRequested": false,
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "results": [
+    {
+      "adapter": "statcan_table_13100974",
+      "apiEndpointClass": "Statistics Canada public table HTML validation; no raw payload persisted",
+      "coverageDelta": {
+        "claimCount": 2,
+        "crosswalkCount": 0,
+        "packCandidateCount": 0,
+        "packEmission": "blocked_by_no_pack",
+        "requirementCount": 2
+      },
+      "credentialPosture": {
+        "apiModeUsed": "static_public_https_no_key",
+        "blocker": null,
+        "optionalEnv": [],
+        "requiredForThisValidation": []
+      },
+      "dataClass": "public_provenance",
+      "errors": [],
+      "fetchEvidence": {
+        "byteCountSampled": 121967,
+        "contentType": "text/html;charset=UTF-8",
+        "error": null,
+        "finalURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+        "ok": true,
+        "sha256": "fa8305552d9a905f6ebb48f0a9c626a0c69143633eedf9ab1807cc4ee24a0401",
+        "statusCode": 200
+      },
+      "fixtureFallbackUsed": false,
+      "nonClaims": [
+        "does not create final user paths",
+        "does not create final schedules",
+        "does not create Step lists",
+        "does not gather private user data",
+        "does not claim legal/privacy approval",
+        "does not claim production R2 promotion",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "privacyResult": {
+        "issues": [],
+        "passed": true
+      },
+      "publicReferenceOnly": true,
+      "rateLimitPosture": {
+        "limitHeaderPresent": false,
+        "policy": "static fixture tests offline; live static HTTPS downloads require --live, --execute, and static download budget policy",
+        "rateLimitSafe": true,
+        "remainingHeaderPresent": false,
+        "retryAfterPresent": false,
+        "statusCode": 200
+      },
+      "recordsBlocked": 0,
+      "recordsFetched": 1,
+      "recordsNormalized": 1,
+      "requestShape": {
+        "bodyPersisted": false,
+        "headers": {
+          "User-Agent": "AmbitionsSourceAtlasLiveValidation/1.0 (public-reference validation)"
+        },
+        "limit": 1,
+        "method": "GET",
+        "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401"
+      },
+      "result": "Green",
+      "sourceID": "official.statcan.table.13100974",
+      "sourceName": "Statistics Canada Table 13-10-0974-01",
+      "sourceURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "termsPolicyResult": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "official.statcan.table.13100974"
+      }
+    },
+    {
+      "adapter": "restricted",
+      "apiEndpointClass": "policy-only restricted source validation; no live restricted content fetch",
+      "coverageDelta": {
+        "claimCount": 0,
+        "crosswalkCount": 0,
+        "packEmission": "blocked_by_terms",
+        "requirementCount": 0
+      },
+      "credentialPosture": {
+        "blocker": "restricted_source_not_live_fetched_by_policy",
+        "requiredForThisValidation": []
+      },
+      "dataClass": "public_provenance",
+      "errors": [
+        "restricted_source_lookup_only_not_packable"
+      ],
+      "fetchEvidence": {
+        "byteCountSampled": 0,
+        "contentType": null,
+        "finalURL": null,
+        "ok": null,
+        "sha256": null,
+        "statusCode": null
+      },
+      "fixtureFallbackUsed": false,
+      "nonClaims": [
+        "does not create final user paths",
+        "does not create final schedules",
+        "does not create Step lists",
+        "does not gather private user data",
+        "does not claim legal/privacy approval",
+        "does not claim production R2 promotion",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "privacyResult": {
+        "issues": [],
+        "passed": true
+      },
+      "publicReferenceOnly": true,
+      "rateLimitPosture": {
+        "policy": "credentialed lookup only; no pack output without explicit terms review",
+        "rateLimitSafe": true
+      },
+      "recordsBlocked": 1,
+      "recordsFetched": 0,
+      "recordsNormalized": 0,
+      "requestShape": {
+        "bodyPersisted": false,
+        "method": "NONE"
+      },
+      "result": "Green",
+      "sourceID": "usajobs.search",
+      "sourceName": "USAJOBS current and historic job opportunity APIs",
+      "sourceURL": "https://developer.usajobs.gov/api-reference/",
+      "termsPolicyResult": {
+        "approvalPacketValidation": null,
+        "issues": [
+          "usajobs.search: lookup_only_not_packable blocks pack output",
+          "usajobs.search: r2_blocked blocks R2-ready pack output",
+          "usajobs.search: artifact classes not allowed by terms registry: public_freshness, public_reference_claim"
+        ],
+        "packable": false,
+        "r2PackPolicy": "r2_blocked",
+        "r2Ready": false,
+        "redistributionPolicy": "lookup_only_not_packable",
+        "sourceID": "usajobs.search"
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "status": "Green",
+  "summary": {
+    "adapterCount": 2,
+    "greenCount": 2,
+    "recordsBlocked": 1,
+    "recordsFetched": 1,
+    "recordsNormalized": 1,
+    "redCount": 0,
+    "yellowCount": 0
+  },
+  "versionID": "source-atlas-live-adapter-validation-v1"
+}

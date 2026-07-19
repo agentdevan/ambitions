@@ -1,0 +1,152 @@
+{
+  "roles": [
+    {
+      "role": "Implementation Agent",
+      "purpose": "Author and maintain OBS-layer docs/tooling scripts in allowed scope.",
+      "allowed_scope": [
+        "docs/codex",
+        "tools/openai",
+        "scripts"
+      ],
+      "forbidden_scope": [
+        "Native/Ambitions/**",
+        "Native/AmbitionsTests/**",
+        ".github/**"
+      ],
+      "required_checks": [
+        "make batch-self-check",
+        "make prompt-audit",
+        "python3 scripts/openai-build-suite-validate.py"
+      ],
+      "hard_red": ["Core runtime imports", "API key persistence", "Release claim without proof"]
+    },
+    {
+      "role": "Focused Test Agent",
+      "purpose": "Run local dry-run checks for each OBS utility module and report failures.",
+      "allowed_scope": [
+        "tools/openai",
+        "scripts"
+      ],
+      "forbidden_scope": [
+        ".codex/runs/**",
+        "Native/Ambitions/**"
+      ],
+      "required_checks": [
+        "python3 -m py_compile",
+        "python3 scripts/openai-build-suite-dry-run.py",
+        "python3 scripts/ambitions-prompt-queue-consistency.py PK28"
+      ],
+      "hard_red": ["Compilation failure", "Queue mismatch"]
+    },
+    {
+      "role": "State Advancement Agent",
+      "purpose": "Coordinate OBS follow-on prompt preparation and queue/lane validation.",
+      "allowed_scope": [
+        "prompts/batches/OBS*.md",
+        "tools/openai/prompt_repair"
+      ],
+      "forbidden_scope": [
+        ".codex/state/**",
+        "PK28"
+      ],
+      "required_checks": [
+        "scripts/ambitions-prompt-queue-consistency.py"
+      ],
+      "hard_red": ["Next batch conflict", "Non-executable prompt label"]
+    },
+    {
+      "role": "Claim Safety Agent",
+      "purpose": "Prevent unsupported claims in OBS documentation and reports.",
+      "allowed_scope": [
+        "docs/audits",
+        "docs/codex",
+        "prompts/batches"
+      ],
+      "forbidden_scope": [
+        "release proof",
+        "app runtime claims"
+      ],
+      "required_checks": [
+        "python3 scripts/ambitions-unsupported-claim-scan.py docs prompts .codex",
+        "python3 scripts/openai-build-suite-validate.py"
+      ],
+      "hard_red": ["Readiness claim without proof"]
+    },
+    {
+      "role": "Prompt Repair Agent",
+      "purpose": "Repair prompt scaffolds and local metadata, preserving runner header requirements.",
+      "allowed_scope": [
+        "prompts/batches/OBS*.md",
+        "tools/openai/prompt_repair"
+      ],
+      "forbidden_scope": [
+        "PK28",
+        "Native/Ambitions/**"
+      ],
+      "required_checks": [
+        "make prompt-audit"
+      ],
+      "hard_red": ["Missing runner header", "Queue classification contradiction"]
+    },
+    {
+      "role": "Batch Report Agent",
+      "purpose": "Summarize and classify closeout reports for proof-aware documentation output.",
+      "allowed_scope": [
+        "docs/audits",
+        "tools/openai/batch_report"
+      ],
+      "forbidden_scope": [
+        "unverified release assertions"
+      ],
+      "required_checks": [
+        "python3 tools/openai/batch_report/summarize_batch_report.py --help"
+      ],
+      "hard_red": ["Missing validation command extraction", "False closeout status"]
+    },
+    {
+      "role": "Visual Critic Agent",
+      "purpose": "Validate local visual critique packet structure against rubric definitions.",
+      "allowed_scope": [
+        "tools/openai/visual_critique",
+        "docs/codex/VISUAL_CRITIQUE_LAYER.md"
+      ],
+      "forbidden_scope": [
+        "automated screenshot uploads"
+      ],
+      "required_checks": [
+        "python3 tools/openai/visual_critique/critique_visual_packet.py --rubric tools/openai/visual_critique/rubrics/ambitions_visual_canon.json --dry-run"
+      ],
+      "hard_red": ["Missing rubric dimensions", "Upload attempt", "Visual approval claim"]
+    },
+    {
+      "role": "Repo Intelligence Agent",
+      "purpose": "Maintain safe local repo manifest for tool context and query flow.",
+      "allowed_scope": [
+        "tools/openai/repo_brain",
+        "tools/openai/config"
+      ],
+      "forbidden_scope": [
+        "private artifact indexing"
+      ],
+      "required_checks": [
+        "python3 tools/openai/repo_brain/build_repo_manifest.py --dry-run"
+      ],
+      "hard_red": ["Indexing secrets", "Indexing disallowed directories"]
+    },
+    {
+      "role": "Launch Docs Agent",
+      "purpose": "Draft launch packets from audit evidence without overclaiming readiness.",
+      "allowed_scope": [
+        "docs/audits",
+        "tools/openai/launch_docs"
+      ],
+      "forbidden_scope": [
+        "release claim statements without proof"
+      ],
+      "required_checks": [
+        "python3 tools/openai/launch_docs/generate_launch_packet.py --dry-run"
+      ],
+      "hard_red": ["Readiness claim with no proof", "Private data leakage"]
+    }
+  ]
+}

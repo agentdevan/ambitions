@@ -1,0 +1,161 @@
+{
+  "apiPolicies": [
+    "api.openalex_api.v1",
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "nih.medlineplus.wellness"
+    },
+    {
+      "apiPolicyID": "api.openalex_api.v1",
+      "dailyBudgetLimit": 100,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 200,
+      "monthlyBudgetLimit": 1000,
+      "rateLimitPerMinute": 20,
+      "rateLimitPerSecond": 1,
+      "sourceID": "openalex.personal_growth_research"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "nih_medlineplus_wellness_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 2,
+      "evidencePath": "evidence/nih.medlineplus.wellness.json",
+      "evidenceSHA256": "9cd99155231005bc4954478056600df86fa2dbe13ee16f1f64e80e694e3f090f",
+      "normalizedPath": "normalized/nih.medlineplus.wellness.json",
+      "normalizedSHA256": "90c758eaaca162df6159347e60a60f38f63939c32a5791538b72c4f6b25060eb",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "nih.medlineplus.wellness",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "openalex_personal_growth_research_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/openalex.personal_growth_research.json",
+      "evidenceSHA256": "b9a8365b5bc9a486f42cce79f86d8af41eb911462ee282a867060392126d5d18",
+      "normalizedPath": "normalized/openalex.personal_growth_research.json",
+      "normalizedSHA256": "4f85831ef98e1bc398973f61c9062370138cff62789e981a683401ac0562722b",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed",
+      "recordCount": 0,
+      "sourceID": "openalex.personal_growth_research",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "25fd50511ac7b88aa06d77bc5657a87b9e42f1fed3998c0aac22c1cb435b89b9",
+      "sha256": "9cd99155231005bc4954478056600df86fa2dbe13ee16f1f64e80e694e3f090f",
+      "sourceID": "nih.medlineplus.wellness"
+    },
+    {
+      "evidenceHash": "9a37fd6ff551b2153c14147ec29b8ba299fa2a334bbddfd7a409454c045c3afd",
+      "sha256": "b9a8365b5bc9a486f42cce79f86d8af41eb911462ee282a867060392126d5d18",
+      "sourceID": "openalex.personal_growth_research"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "22432445b8592cc18a296f8f603738bbc5b21623bec2cedcdf905f40946723b5",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-50-personal-growth-fixture/train-50-personal-growth-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/nih.medlineplus.wellness.json",
+    "evidence/nih.medlineplus.wellness.json",
+    "normalized/openalex.personal_growth_research.json",
+    "evidence/openalex.personal_growth_research.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 3,
+    "packCandidates": 2,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 2,
+    "sourcesSelected": 2
+  },
+  "restrictedExclusions": [],
+  "runID": "train-50-personal-growth-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "nih.medlineplus.wellness",
+    "openalex.personal_growth_research"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

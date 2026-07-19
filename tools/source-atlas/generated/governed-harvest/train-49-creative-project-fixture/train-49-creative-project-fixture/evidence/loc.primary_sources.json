@@ -1,0 +1,29 @@
+{
+  "adapterID": "library_of_congress_primary_sources_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "55f92111defd54649ce93188646d78d2397ab1214f595155a6de0b6181cf1e0e",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "loc_usgov_work",
+  "normalizedPath": "normalized/loc.primary_sources.json",
+  "normalizedSHA256": "c720476c649ee15090dcc94070b03c808d1659e51c9f303234e6d74ed2abc372",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "loc.primary_sources",
+  "sourceLane": "loc.primary_sources"
+}

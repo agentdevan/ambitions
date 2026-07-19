@@ -1,0 +1,40 @@
+{
+  "activeRegistryMutations": [
+    {
+      "active_registry_written": true,
+      "api_policy_id": "api.fixture_goal_domain_frontier_intake_proposal_2b62e995a7dfeaa9.v1",
+      "candidate_id": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "created_at": "2026-06-28T22:20:00Z",
+      "domain_guess": "public_benefits_reference",
+      "intake_id": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+      "license_id": "fixture.goal_domain.frontier_intake_proposal_2b62e995a7dfeaa9.terms",
+      "mutation_id": "source_atlas_goal_domain_registry_mutation.8a81532a34070d7d",
+      "non_claims": [
+        "registry metadata activation only",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "registry_hashes_after": {
+        "apiGovernanceRegistry": "c656190697aede2688200c4b1970b78a429b1736f39f0a77828ea6c7d3fc5aa5",
+        "legalTermsRegistry": "db4c0bee2de86a89d4cf268ef9ead2a829740f1bb5523efb91610fb6aad9df66",
+        "sourceLaneRegistry": "4ec7523fcab5a7ab22e5a9381a74c1070aae98e5216dc7ff3c6826c1ba50c6cb"
+      },
+      "registry_hashes_before": {
+        "apiGovernanceRegistry": "e44cedf4d824c31bcbbb9b2eda64af0fb0e36a501719821092514bbebcb4534e",
+        "legalTermsRegistry": "bd3b264ac69a8e6041b09a5c3fd684778043b8478da36060d3fbdd1b09371530",
+        "sourceLaneRegistry": "3653a53ca3c65be1bb79de19cfe852ee6007ba6847bc1ecc24698ea73c498b58"
+      },
+      "schema_version": "1.0.0",
+      "source_id": "fixture.goal_domain.frontier_intake_proposal_2b62e995a7dfeaa9",
+      "status": "active_registry_written",
+      "target_registry_paths": {
+        "apiGovernanceRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/temp-registries/api-governance-registry.json",
+        "legalTermsRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/temp-registries/legal-terms-registry.json",
+        "sourceLaneRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/temp-registries/source-lane-registry.json"
+      }
+    }
+  ],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "kind": "ambitions.sourceAtlas.catalogActiveRegistryMutations.v1"
+}

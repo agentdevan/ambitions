@@ -1,0 +1,85 @@
+{
+  "candidateIntake": {
+    "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias/01-goal-domain-router/candidate-intake-input.json",
+    "manifestPath": null,
+    "recordCounts": {
+      "claims": 0,
+      "packableClaims": 0,
+      "proposals": 0,
+      "r2PackableArtifacts": 0
+    },
+    "required": false,
+    "status": "not_required",
+    "valid": null
+  },
+  "createdAt": "2026-06-28T22:55:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias/goal-domain-router-input.json",
+  "kind": "ambitions.sourceAtlas.goalDomainRouter.v1",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate routes are not claim authority",
+    "candidate routes are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+  "recordCounts": {
+    "blockedPrivateRoutes": 0,
+    "candidateIntakeRoutes": 0,
+    "claims": 0,
+    "configuredNotReadyRoutes": 0,
+    "finalOutputArtifacts": 0,
+    "packableClaims": 0,
+    "productionTargetReadyRoutes": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "requests": 1,
+    "routes": 1
+  },
+  "routes": [
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockingReasons": [],
+      "candidateIntakeRequired": false,
+      "matchReasons": [
+        "goal_intent_overlap",
+        "claim_class_overlap",
+        "jurisdiction_overlap"
+      ],
+      "matchScore": 26,
+      "matchedDomainID": "finance_public_reference",
+      "matchedFrontierID": "finance_public_reference",
+      "nativeUsabilityReady": true,
+      "nonClaims": [
+        "bounded production-target route only",
+        "not literal universal coverage",
+        "not final user plans, schedules, or Steps",
+        "router does not publish to R2"
+      ],
+      "packOutputAllowed": true,
+      "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+      "productionTargetReady": true,
+      "r2PublishAllowed": false,
+      "readinessStatus": "bounded_production_target_ready",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "route": "configured_production_target_ready"
+    }
+  ],
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-router-train-88"
+}

@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "mode_supported",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "live_mode_requires_live_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "live_mode_requires_execute_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "plan_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "request_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "transport_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "snapshots_hash_verified",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalog_discovery_candidate_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "discoveryManifestPath": "tools/source-atlas/generated/catalog-transport/train-54-fixture/catalog-discovery/manifest.json",
+  "executeRequested": false,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogTransportManifest.v1",
+  "liveRequested": false,
+  "mode": "fixture",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogDiscovery": "1538bd53560f2fda1829b74b132962e0b444e0b9c0a3ab287b60e670888f7fb6",
+    "catalogTransport": "15c55e2497f5712fbeedeeeb8f12fe00502661a0dec1c3095e7543585fada80c",
+    "manifest": "fd956cde4aa4a680489011bc2168bb42c7daa6d0a729df7afe90fc3c452f7aff"
+  },
+  "outputPaths": {
+    "catalogTransport": "tools/source-atlas/generated/catalog-transport/train-54-fixture/catalog-transport.json",
+    "closeout": "tools/source-atlas/generated/catalog-transport/train-54-fixture/closeout.md",
+    "manifest": "tools/source-atlas/generated/catalog-transport/train-54-fixture/manifest.json"
+  },
+  "planPath": "tools/source-atlas/fixtures/catalog-transport/train-54-catalog-transport-plan.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 6,
+    "catalogs": 3,
+    "claims": 0,
+    "endpoints": 3,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "snapshots": 3
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; live-gated public catalog transport tooling only",
+  "status": "Source Green for live-gated catalog transport tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-transport-train-54"
+}

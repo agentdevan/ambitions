@@ -1,0 +1,771 @@
+{
+  "claim_dispositions_sha256": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+  "decision_evidence_fingerprint_sha256": "690dbeb5818e4034d242320460a49fd0a1b855c8987cd202afbad2eeaee77798",
+  "dockets": [
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:31",
+        "REPO-43E0D80464B2869224C805D8:line:1432",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:161"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0031",
+          "fingerprint_sha256": "866467b4ad5f68a5780418d533a81fe2b54e701afaaa119b8f52a5a982b62a21",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:31"
+        },
+        {
+          "claim_id": "CLAIM-STB-0135",
+          "fingerprint_sha256": "316475fd621dfdeea36cde2b9360c548a3a6c758147d1823f9a65dfe42da1f9a",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:1432"
+        },
+        {
+          "claim_id": "CLAIM-STB-0471",
+          "fingerprint_sha256": "b97efde7b46070e3fa7d6adf5daadd3dc4752417f4c9a9113f2dddc2cb608b97",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:161"
+        }
+      ],
+      "conflict_id": "CONFLICT-CALENDAR-REPLACEMENT-BAR",
+      "docket_sha256": "e402c870f5770661f63d6b9ef748dcc0c312d3a1196b551ca722144dbc3d2b37",
+      "owner_decision": "compose",
+      "removal_state_sha256": "4b02f13f5ae17ce3c069b8954f06db4bf4c5ed92dceee6d99b6f2ddbccb334e0",
+      "status": "resolved",
+      "target_requirement_id": "PLATFORM-CALENDAR-REPLACEMENT-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:38",
+        "LINEAR-CANON-V3:decision:93",
+        "LINEAR-CANON-V3:line:133",
+        "REPO-24AE31A618868443E87AFB86:line:249",
+        "REPO-30F82AEBB440C03C0671AE4A",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:1819"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0038",
+          "fingerprint_sha256": "2176af63c6653bb0ccc9fbf7b6ffd757d510e7288d38a268986f26f21fd6bb19",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:38"
+        },
+        {
+          "claim_id": "CLAIM-LFT-0093",
+          "fingerprint_sha256": "321a429e3804fc4ee841a24d9fd980073dc4a79160b8533f78fbbb2206ea3560",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:93"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0043",
+          "fingerprint_sha256": "54663d5c3a8dfef729287e55812c00ab713e83a5dcb80ea45d013647bc6f299b",
+          "source_id": "REPO-24AE31A618868443E87AFB86",
+          "source_location": "line:249"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0001",
+          "fingerprint_sha256": "a12fb471018a11b59abd6a34de47b847df2fbc70f8428c25809d7f720f95f276",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:133"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0014",
+          "fingerprint_sha256": "495fdc6a010bff3feecbe83e81203e9361b7a07823ce9690b346d69d51200bfc",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:949"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0017",
+          "fingerprint_sha256": "314dfebeb38a452e24f88afe10c4bf287d11518dfa727a045416eb60d5de675c",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:958"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0018",
+          "fingerprint_sha256": "d25ce773c0461ee4ad7cdb0cfacbad64c7df648083018054c9e18c2eb62e0225",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:977"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0050",
+          "fingerprint_sha256": "83eaad29de01b2557659f1ede9a9ca80ea8322ba33aa81616b0fc7a3a9a8f937",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:1"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0051",
+          "fingerprint_sha256": "3a82eac6d71d9e064acfb07fa8a2c4169135b5c7fdb81f413d3c99e64f3d3999",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:5"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0052",
+          "fingerprint_sha256": "aae4be01169f22dd2a23d73dfd9121f4c17730804e089f6a3688061f1fd74ad1",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:9"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0053",
+          "fingerprint_sha256": "c2f6b6ba1b954bef6ce615eb6d58422e0d7d88ea52e718a76307d50d468c6b2f",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:13"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0054",
+          "fingerprint_sha256": "de535c34d426f5bca385a69fd47654f1e66a3b788b595dbcf898c515c8aa182c",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:17"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0055",
+          "fingerprint_sha256": "8f3c53ba52b92a491c2c8f83a2192be19534be83cae5da6903044592b5a90c27",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:21"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0056",
+          "fingerprint_sha256": "bed091df0b97c0b37bd7ae915bf87816c4dad5afa44a3484a93bf8fa8640cd08",
+          "source_id": "REPO-30F82AEBB440C03C0671AE4A",
+          "source_location": "line:25"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0058",
+          "fingerprint_sha256": "8c0405bdc2f2139235080e79778328dfc062e61cec258b8c8586c08a8b188c78",
+          "source_id": "REPO-110D0BFC2660AF72E0673BBF",
+          "source_location": "document"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0065",
+          "fingerprint_sha256": "dbb130c64a6fbf26672572250ebd6b71631af87bf6cbd4522b4f1e11b2534eab",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:2084"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0067",
+          "fingerprint_sha256": "896f03d8da2f9426829b5b72492fbebe6fde5569b60802303c0149c5473cba49",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:1727"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0068",
+          "fingerprint_sha256": "f3c0c9537995ce37b3f6c27e0fae0a56695c1cb922451cefa85a440c0c07d7f3",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:1819"
+        }
+      ],
+      "conflict_id": "CONFLICT-CLOUDKIT-CONTINUITY",
+      "docket_sha256": "8813ca5754e22675d36bc3f0dc4e5c35114c55e02c66d97f6bcb98daf6e07103",
+      "owner_decision": "compose",
+      "removal_state_sha256": "4e2dc3f48ff8fe0261e6ef9d831f47aa536e01efe11445638f6ee34ba3bc5bbe",
+      "status": "resolved",
+      "target_requirement_id": "PRIVACY-CLOUDKIT-CONTINUITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:146",
+        "REPO-43E0D80464B2869224C805D8:line:1491"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0146",
+          "fingerprint_sha256": "4b5f8e5ee76217f32d04aae21aab1b6f1988b941b01d03e96125a52e134eebad",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:146"
+        },
+        {
+          "claim_id": "CLAIM-STB-0140",
+          "fingerprint_sha256": "0bb60f6500f2c539a127e4432ed71e4d63eac08b973fc5a25d0acd8f08875fe9",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:1491"
+        }
+      ],
+      "conflict_id": "CONFLICT-EXTERNAL-ONLY-VISIBILITY",
+      "docket_sha256": "3d3f4b54070963d7172cd70961e5f88250c1ec58e096d7370526dd9d2bc02866",
+      "owner_decision": "compose",
+      "removal_state_sha256": "da1085e0b893b75c25706e7b35a64f42a7bc3e69b1cb0a7fdee394ee71e77648",
+      "status": "resolved",
+      "target_requirement_id": "TIME-EXTERNAL-VISIBILITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104",
+        "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93",
+        "REPO-85E8FCCE72F548DEDB08341B:line:265"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-NAV-127",
+          "fingerprint_sha256": "35c959351bc19c3239266f7c8a3fa375a8dfbc95987ee15c8db46c571a977476",
+          "source_id": "REPO-85E8FCCE72F548DEDB08341B",
+          "source_location": "line:265"
+        },
+        {
+          "claim_id": "CLAIM-NAV-128",
+          "fingerprint_sha256": "bda225a8c7f00bfa7327361b8c256d8b71ae3b96e30c1833df4b908a179fb31c",
+          "source_id": "FIGMA-VSP07-PART02-OPTION-A-R1",
+          "source_location": "document"
+        }
+      ],
+      "conflict_id": "CONFLICT-FIGMA-AUTHORITY-STATE",
+      "docket_sha256": "d1ec77cc8ed9384af13e4858d6388b58776a8b09ef4b9ef123507c1660ac5814",
+      "owner_decision": "compose",
+      "removal_state_sha256": "dd70f2c36ccab0d5e83ea86faef7e47fb2752dc1ab5bc8b3f5d1842b21de6924",
+      "status": "resolved",
+      "target_requirement_id": "PROOF-FIGMA-AUTHORITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:2011",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:500"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-OBJ-058",
+          "fingerprint_sha256": "7f3bf3e5ab553671a92862fe80c830e42acebcd3ee850684c4873de79548f6c8",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:2011"
+        },
+        {
+          "claim_id": "CLAIM-STB-0551",
+          "fingerprint_sha256": "531053ecf2a6578a99fee98c7688cb27e62ef7a2e66bec8f774cae1459e36190",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:500"
+        }
+      ],
+      "conflict_id": "CONFLICT-FUTURE-STEP-IDENTITY",
+      "docket_sha256": "159b018d33664831a37fa115f26f88c618b998fceb0742c89f02fccf017ed941",
+      "owner_decision": "reject_both",
+      "removal_state_sha256": "1b696ceeeb7fbd1f74fded0f808f905ad23d83a713e9624d142fa1823d79befa",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-FUTURE-STEP-IDENTITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:line:300",
+        "REPO-43E0D80464B2869224C805D8:line:1134"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-OBJ-002",
+          "fingerprint_sha256": "322584e0aa3518aec4c6329a7d4a27cdb5c0f0e5a5085e66b5b149613a3760de",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:300"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-038",
+          "fingerprint_sha256": "cacfb11a00bd2735b71bc01b92a72b33604b6546ab8d6d104fda9554f66f7b75",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:1134"
+        }
+      ],
+      "conflict_id": "CONFLICT-GOAL-LIFECYCLE",
+      "docket_sha256": "94634096a321334b88198f5f20b6f9e1dc491a75eda397a9220c040a3bc77e21",
+      "owner_decision": "keep_b",
+      "removal_state_sha256": "ae020ba9eb07488af2b12772553f068666c743633dede61b53e551a7fba6a176",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-GOAL-LIFECYCLE-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:195",
+        "LINEAR-CANON-V3:line:340"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0195",
+          "fingerprint_sha256": "a6859d98d06e63c037be64e1a897b2b38d24f08136c8c4922e86aacf30c8efd7",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:195"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-024",
+          "fingerprint_sha256": "652959b737ad1dabb757a2f983d1dbc516a670f60d8d719b2f923ca1695f6e61",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:340"
+        }
+      ],
+      "conflict_id": "CONFLICT-GRAPH-HIERARCHY-PROJECTIONS",
+      "docket_sha256": "314dee511ed22b777bf9cd51574318bf4a951f0c33b4fdd42f509847f9eca643",
+      "owner_decision": "compose",
+      "removal_state_sha256": "028608feec7fbcc0a86d3c916aca8695cd912518b8277e877bdd7b6a97be39e9",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-CANONICAL-GRAPH-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:line:1283",
+        "LINEAR-DOC:5a259a56-ce24-46f3-bb36-f7e12ae2417f",
+        "LINEAR-DOC:95eae2b4-603f-49bb-b241-90fb8871c396",
+        "LINEAR-DOC:96b93346-271d-46fc-beab-43ff7e286b5d"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-PRC-033",
+          "fingerprint_sha256": "626d9104059d622568d98ec5594b0e09e78ad309d4c5300a138e9bf952851da9",
+          "source_id": "REPO-8E5E95467C0AAC813830AA24",
+          "source_location": "line:311"
+        },
+        {
+          "claim_id": "CLAIM-PRC-079",
+          "fingerprint_sha256": "2ad5f1bbb3b33b66973d6205d3337b86316873bc593b7dea795a46d6e33cb736",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:1283"
+        }
+      ],
+      "conflict_id": "CONFLICT-LINEAR-RETENTION",
+      "docket_sha256": "294111816dc4f4081f8e02809ace78998fdce6e30021bc57acfc088936d263c8",
+      "owner_decision": "compose",
+      "removal_state_sha256": "b2b712b635159fbb3048a7572b24c822ebcc1e8784f6885bf81eef7a08018339",
+      "status": "resolved",
+      "target_requirement_id": "GOVERNANCE-LINEAR-RETENTION-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:198",
+        "LINEAR-CANON-V3:line:140",
+        "REPO-43E0D80464B2869224C805D8:line:394",
+        "REPO-504B995D79E2B7561D320F50:line:31",
+        "REPO-A1371F8B6FCB79E60DD082A5:line:10"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0198",
+          "fingerprint_sha256": "140bb157df5df6856e0a8449735c84d2b3aefd3629d8e78cc7b85b8d56aefbd1",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:198"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0002",
+          "fingerprint_sha256": "d3ed6e2613c9b643905bcbf837822e18a0eb2462ddf4afa3f559b9eee927a354",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:140"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0027",
+          "fingerprint_sha256": "43eed08d0fe7373e2a2e8ed96b7329f681b7c3083afe8c369db502288f98d069",
+          "source_id": "REPO-A1371F8B6FCB79E60DD082A5",
+          "source_location": "line:10"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0069",
+          "fingerprint_sha256": "1fe2206683222dfa9cfff27fa8d6956888ce8721e77742dd75cac98b447fb9f5",
+          "source_id": "REPO-504B995D79E2B7561D320F50",
+          "source_location": "line:31"
+        },
+        {
+          "claim_id": "CLAIM-STB-0235",
+          "fingerprint_sha256": "ed5bb7fcb32ade9b7eec957b30ca5ff08021261826aa5be269aad38ab9289962",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:394"
+        }
+      ],
+      "conflict_id": "CONFLICT-MUTATION-SEQUENCE",
+      "docket_sha256": "8acc56466a0218cec6768a94a25d7cc5015621a34350509e08cff290c776906a",
+      "owner_decision": "compose",
+      "removal_state_sha256": "1d9785ba41eecd70a85d677b2e31fa7e02d4d806f7e64dc56d4c35e262d83bfd",
+      "status": "resolved",
+      "target_requirement_id": "RUNTIME-MUTATION-SEQUENCE-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:197",
+        "LINEAR-CANON-V3:line:399"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0197",
+          "fingerprint_sha256": "bad30feeac714f3768dedae5b73ef466f7ae8a5d46dfe08bed7c81ecaf2dc118",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:197"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-029",
+          "fingerprint_sha256": "d6f7035d802247bcad237b94a65ea9bdbaf5df7a54bb57126465e624a20196ab",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:399"
+        }
+      ],
+      "conflict_id": "CONFLICT-OBJECT-LIFECYCLE-DELETION",
+      "docket_sha256": "70757ba663f3c1d27683f7c7614538e49df2950945f47bb288591cfdf99ecadd",
+      "owner_decision": "compose",
+      "removal_state_sha256": "1404b24ff4a09eaaccfcacafa6b13f7c447d377d42999b66cc2522d1959377ab",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-LIFECYCLE-DELETION-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:193",
+        "REPO-B11ED8716F99F213DF6470B4:line:112"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0193",
+          "fingerprint_sha256": "ced9d09b5f814b138688c706968685cacc8b33eacf37136a05ece927d7209d4c",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:193"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0010",
+          "fingerprint_sha256": "40636c103b95c90281ba951914dd7378654478d2bf6b418a0f19cf289ecb37e1",
+          "source_id": "REPO-B11ED8716F99F213DF6470B4",
+          "source_location": "line:112"
+        }
+      ],
+      "conflict_id": "CONFLICT-OBJECT-TAXONOMY",
+      "docket_sha256": "7fce4434c31d1ef198f90a020783552d3c0b6ee9217434672398e70beff2d253",
+      "owner_decision": "reject_both",
+      "removal_state_sha256": "7d0ff8d01575d38d0aeb222b4096730c6220ce0f07752992fef15cfad96f410b",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-TAXONOMY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:70",
+        "LINEAR-CANON-V3:line:51",
+        "REPO-B11ED8716F99F213DF6470B4:line:35"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0070",
+          "fingerprint_sha256": "bff4d3c8516fa64726623f7567fdde507784e6cbd05d72fe4168b414999c29d9",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:70"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0005",
+          "fingerprint_sha256": "a29d9a863bc2c1d7bad291b46595bd9ed82c0a8fdc9059ad68b9e085077d59d8",
+          "source_id": "REPO-B11ED8716F99F213DF6470B4",
+          "source_location": "line:35"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0053",
+          "fingerprint_sha256": "8c4f053ade90ea1b6c98eeb346213c53dd5611b08ab08ffe697967b4a7716326",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:51"
+        }
+      ],
+      "conflict_id": "CONFLICT-ORCHESTRATION-LOOP",
+      "docket_sha256": "8935d2cd5960d120414c04082ed9299df678b34dc9cf979131240e87eedb4ab6",
+      "owner_decision": "compose",
+      "removal_state_sha256": "4f2b481872112ec65439ae2477a7e2c063290228d00e0a7721b20bab1b185eb3",
+      "status": "resolved",
+      "target_requirement_id": "MISSION-ORCHESTRATION-LOOP-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:line:942",
+        "REPO-504B995D79E2B7561D320F50:line:34"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-RPPS-0010",
+          "fingerprint_sha256": "ebf47c3535335f76188e4ad9520490338a042cf6d491ed6b33c2c4e12d0563bd",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:942"
+        },
+        {
+          "claim_id": "CLAIM-RPPS-0070",
+          "fingerprint_sha256": "7a03ff4fa0c7bd62b87130aa78b965f3d7e738f22e73e227d813beaf6f44a899",
+          "source_id": "REPO-504B995D79E2B7561D320F50",
+          "source_location": "line:34"
+        }
+      ],
+      "conflict_id": "CONFLICT-PERSISTENCE-SOURCE-OWNER",
+      "docket_sha256": "44523e55589b3f484742ecd70ba2f18820cce01df02bceaf1a2363e74adde277",
+      "owner_decision": "keep_b",
+      "removal_state_sha256": "4b46539dcbd945770c21b78b0afe7113c92922500efd769027bafaae8c2048d2",
+      "status": "resolved",
+      "target_requirement_id": "RUNTIME-SOURCE-OWNER-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:39",
+        "REPO-43E0D80464B2869224C805D8:line:2039"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0039",
+          "fingerprint_sha256": "c670cc3aff80ff27f73119822f3483d5fc2f21bd3e35670a646addb29714114f",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:39"
+        },
+        {
+          "claim_id": "CLAIM-STB-0179",
+          "fingerprint_sha256": "2b15aae995d451fc72facfbd81c406533a103c478e5cc65a589eee671da9beb1",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:2039"
+        }
+      ],
+      "conflict_id": "CONFLICT-PRIVACY-VISIBILITY",
+      "docket_sha256": "8da8154a5a738b85385ea18c4093db71337e53fd55a7a3635461d24274cefb34",
+      "owner_decision": "compose",
+      "removal_state_sha256": "cfb64c71f37bc11589b893d5825760cba6c2ad7dd514403313b538ca19fe1b60",
+      "status": "resolved",
+      "target_requirement_id": "PRIVACY-VISIBILITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:87",
+        "LINEAR-CANON-V3:line:307",
+        "REPO-43E0D80464B2869224C805D8:line:656",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:893"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0087",
+          "fingerprint_sha256": "24d598355244e5403695cca0eff60d243dbf4bd8bb03e1264b7d841016a6e79d",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:87"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-009",
+          "fingerprint_sha256": "88d3621be2c5a3fedc6755a1478f69442a5e6d4f53a3b6327a66e7c48acc0899",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:307"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-034",
+          "fingerprint_sha256": "78788a7cf209a2552802299f6c37c0a8f0bc024e9aefbc0bd55137832ecb54ec",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:656"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-055",
+          "fingerprint_sha256": "aad59d35650f9f781e813a39a1f575f78db5899687f5e7a6d5abe971a46a7584",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:893"
+        },
+        {
+          "claim_id": "CLAIM-STB-0500",
+          "fingerprint_sha256": "326f8736b2e986d70a0505cea9829c599ae4e0fdcf546382fa9b5bd74d46d9e8",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:2478"
+        },
+        {
+          "claim_id": "CLAIM-STB-0578",
+          "fingerprint_sha256": "bdf5fb2d549e7e67c386fc2648f21b06893a15a576a4f6ad981006abebb7fcd5",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:903"
+        }
+      ],
+      "conflict_id": "CONFLICT-PROOF-REQUIREMENT",
+      "docket_sha256": "9bf96bf3c4a2b98d9eba88a9b822ef3df7067d4a8a49bd7396dacb7b57f0c16a",
+      "owner_decision": "compose",
+      "removal_state_sha256": "6b9bdcb42ed72e631b6e7308154ec28e2a02c363d07d4057cecc12e101781be1",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-PROOF-REQUIREMENT-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:line:324",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:2405"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-OBJ-020",
+          "fingerprint_sha256": "a2bf34d36a94bb8e342237406d4f4efd1b0111eb254bbc32c98f6ce4731d3326",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:324"
+        },
+        {
+          "claim_id": "CLAIM-OBJ-060",
+          "fingerprint_sha256": "fa3a658eadc7a01d3fa539584d3d72ee32663e9a14365b307d258b61f44fb2d4",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:2405"
+        }
+      ],
+      "conflict_id": "CONFLICT-REMINDER-COMPLETION",
+      "docket_sha256": "f5f89e0781c7b1870889412b931a9f69ffc54caa49e3c22067a6e9b6d3729ecd",
+      "owner_decision": "reject_both",
+      "removal_state_sha256": "a06a231312a97edbca51d7e7214854d3ad6c968b03380d87c59d114ec2dc4bf1",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-REMINDER-COMPLETION-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:28",
+        "REPO-24AE31A618868443E87AFB86:line:186",
+        "REPO-24AE31A618868443E87AFB86:line:198",
+        "REPO-8AD090B849C0D640D8D8B4B1:line:238"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0028",
+          "fingerprint_sha256": "10d9c547532886e33ebb274d3961a3252a3bed0684c61db598bfbac12d4873da",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:28"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0041",
+          "fingerprint_sha256": "e1af26dd8b1a61654dd8412c76aaa46ed5da2a5ce4bbe99c5f18a88d6c3df181",
+          "source_id": "REPO-24AE31A618868443E87AFB86",
+          "source_location": "line:186"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0055",
+          "fingerprint_sha256": "feeb2589f2b498ca1dfed7b3738fbc492317a4cc3701e282cd641d56672c09ce",
+          "source_id": "REPO-24AE31A618868443E87AFB86",
+          "source_location": "line:198"
+        },
+        {
+          "claim_id": "CLAIM-NAV-034",
+          "fingerprint_sha256": "3667278a2698905087c2cb70467cf7e9eb825e568f16be0fb74e88220e84feaa",
+          "source_id": "REPO-8AD090B849C0D640D8D8B4B1",
+          "source_location": "line:238"
+        }
+      ],
+      "conflict_id": "CONFLICT-ROOT-BRANDED-NAMING",
+      "docket_sha256": "879e2dba6ef2e65aa51b59f79a6070f73a5e9a61b21f7f408a432dcee619801b",
+      "owner_decision": "compose",
+      "removal_state_sha256": "51de42889f723fa6922e70e8afc59e0fb8b00d29d1f53dd0ae547a156b47e60c",
+      "status": "resolved",
+      "target_requirement_id": "IA-PLAIN-BRANDED-NAMING-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "LINEAR-CANON-V3:decision:181",
+        "LINEAR-CANON-V3:decision:41"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-LFT-0041",
+          "fingerprint_sha256": "57c7794849834b7513232ad4ca9e6c6daf057ceca460f3aeb3bfb701f56a8474",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:41"
+        },
+        {
+          "claim_id": "CLAIM-LFT-0181",
+          "fingerprint_sha256": "6d54406cb28732f7f2d22143f781dce46b83676e2363589af7cde859f52a12c4",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:181"
+        }
+      ],
+      "conflict_id": "CONFLICT-SAVED-FOR-LATER",
+      "docket_sha256": "30ceb71f0ff9e47408701a29e9568209571b3f352b1dce22514735c8489a3b8c",
+      "owner_decision": "compose",
+      "removal_state_sha256": "a2200cb62526c8b6d302b92aa2d91bc1b11a46d38ac7cb5bd634b7610625eca8",
+      "status": "resolved",
+      "target_requirement_id": "OBJECT-SAVED-FOR-LATER-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "AGENTS.md:60",
+        "LINEAR-CANON-V3:decision:3",
+        "LINEAR-CANON-V3:decision:44",
+        "LINEAR-CANON-V3:line:109",
+        "REPO-24AE31A618868443E87AFB86:line:190",
+        "REPO-43E0D80464B2869224C805D8:line:145"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0007",
+          "fingerprint_sha256": "dd03a4b36a3061c1a55ee16cfbb5a4546dceb3f9d73abd7f2f663db70b2965a4",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "line:109"
+        },
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0043",
+          "fingerprint_sha256": "f5d5b06a2c2a9f22ea4a259ab8572bbfb9b181cb466cccc3070fcf3a9f0d2a8d",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:145"
+        },
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0052",
+          "fingerprint_sha256": "fe72b92a9db0260dcfeb78d6d8e384133e9b42fb60d778c64209164980881dc2",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:834"
+        },
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0053",
+          "fingerprint_sha256": "a3622ba4fbf5bdbcf01475957bd74471852812c038edda2c94742a062c44714f",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:870"
+        },
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0065",
+          "fingerprint_sha256": "b25a8b90a9d9d12ae8c64d21e6ad4af79d245dbb7b303477974ec139cd268df8",
+          "source_id": "REPO-A54FF182C7E8ACF56ACFD6E4",
+          "source_location": "line:60"
+        },
+        {
+          "claim_id": "CLAIM-LFT-0003",
+          "fingerprint_sha256": "a06019f217e581468d12faccba051e4e6e66239b567b6c41e5539c4eef04710d",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:3"
+        },
+        {
+          "claim_id": "CLAIM-LFT-0044",
+          "fingerprint_sha256": "2059826747842aedc3ab3dbba2c3390489f39d271d1d73385771cf226edcc47c",
+          "source_id": "LINEAR-CANON-V3",
+          "source_location": "decision:44"
+        },
+        {
+          "claim_id": "CLAIM-MOM-0042",
+          "fingerprint_sha256": "3e78dcbd80984a6f158e13284ebdfcacd44d0ea3aba70e6e9e036ee15e18c09c",
+          "source_id": "REPO-24AE31A618868443E87AFB86",
+          "source_location": "line:190"
+        }
+      ],
+      "conflict_id": "CONFLICT-TODAY-PRIMARY-IDENTITY",
+      "docket_sha256": "49596a11e5579ab848b54dc0402408ea49d9b28d61be2473c46e84df6f8745b0",
+      "owner_decision": "compose",
+      "removal_state_sha256": "f7345c825d8da2c09ec6dd763120fae0480396acd7876ecac2a3889df5a6d6d6",
+      "status": "resolved",
+      "target_requirement_id": "SURFACE-TODAY-IDENTITY-001",
+      "target_requirement_status": "created"
+    },
+    {
+      "artifacts_to_supersede": [
+        "REPO-43E0D80464B2869224C805D8:line:1671",
+        "REPO-AA88FA58EEA6FBA9BAB10270:line:1375"
+      ],
+      "claims": [
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0056",
+          "fingerprint_sha256": "d1be9ab5fbcb9b57fb5645046f10ff3abfe7960eabe3f75ff72e5fc389cc1470",
+          "source_id": "REPO-43E0D80464B2869224C805D8",
+          "source_location": "line:1671"
+        },
+        {
+          "claim_id": "CLAIM-IA-SHELL-SURFACES-0063",
+          "fingerprint_sha256": "153dcb4526dc7b54b7fc60c979296af8fbb3a3448026446db2dccdb7d2dfc1cd",
+          "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
+          "source_location": "line:1375"
+        }
+      ],
+      "conflict_id": "CONFLICT-YOU-STATS-DEPTH",
+      "docket_sha256": "eedebe3dc6b23c7febda5b111552112e62b11934e1c80da8b17330f762fd5e63",
+      "owner_decision": "compose",
+      "removal_state_sha256": "e7e6123da5e11c6843ff6e737b26ade3a483bd580345dcdf6bbda440295cd928",
+      "status": "resolved",
+      "target_requirement_id": "SURFACE-YOU-DEPTH-001",
+      "target_requirement_status": "created"
+    }
+  ],
+  "resolution_provenance": {
+    "decision_base_commit": "1fe828b57accfac0dfcb43a6e3d566c24b6867d5",
+    "decision_date": "2026-07-12",
+    "decision_source_sha256": "f38c924b78fea4d48fd2581a50c04fa373b177664f4e0a70c579c513cb2894a1",
+    "owner": "Devan Warner"
+  },
+  "schema_version": 1
+}

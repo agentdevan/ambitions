@@ -1,0 +1,185 @@
+{
+  "adapterCount": 8,
+  "certifiedAdapterCount": 8,
+  "configPath": "tools/source-atlas/config/source_api_governance.json",
+  "createdAt": "2026-06-27T16:29:58Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.apiRateGovernanceValidation",
+  "modeEvidence": [
+    {
+      "adapterID": "official_bls_public_api",
+      "budgetSummary": "daily=200; perRun=10",
+      "envVars": [
+        {
+          "name": "BLS_API_KEY",
+          "present": false
+        }
+      ],
+      "missingKeyBehavior": "fallback_to_v1_no_key",
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "timeoutSeconds": 120,
+      "v1NoKeyAllowed": true,
+      "v2KeyPresent": false
+    },
+    {
+      "adapterID": "official_college_scorecard_api",
+      "budgetSummary": "daily=100; perRun=9",
+      "envVars": [
+        {
+          "name": "COLLEGE_SCORECARD_API_KEY",
+          "present": true
+        },
+        {
+          "name": "DATAGOV_API_KEY",
+          "present": true
+        }
+      ],
+      "missingKeyBehavior": "use_demo_key_until_rate_limited_then_block_with_env_name",
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "timeoutSeconds": 120
+    },
+    {
+      "adapterID": "official_datagov_v4_search",
+      "budgetSummary": "daily=100; perRun=9",
+      "envVars": [
+        {
+          "name": "DATAGOV_API_KEY",
+          "present": true
+        }
+      ],
+      "missingKeyBehavior": "use_demo_key_until_rate_limited_then_block_with_env_name",
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "data.gov.catalog"
+      ],
+      "timeoutSeconds": 120
+    },
+    {
+      "adapterID": "official_onet_text_database",
+      "budgetSummary": "daily=20; perRun=3",
+      "envVars": [
+        {
+          "name": "ONET_WEB_SERVICES_USERNAME",
+          "present": false
+        },
+        {
+          "name": "ONET_WEB_SERVICES_PASSWORD",
+          "present": false
+        }
+      ],
+      "missingKeyBehavior": "use_public_database_route",
+      "rateLimitSummary": "captureHeaders=False; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "onet.database"
+      ],
+      "timeoutSeconds": 120
+    },
+    {
+      "adapterID": "official_openalex_api",
+      "budgetSummary": "daily=100; perRun=6; freeKey:daily=1000,perRun=20; noKey:daily=100,perRun=6",
+      "envVars": [
+        {
+          "name": "OPENALEX_API_KEY",
+          "present": false
+        },
+        {
+          "name": "OPENALEX_MAILTO",
+          "present": false
+        },
+        {
+          "name": "SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED",
+          "present": false
+        }
+      ],
+      "highVolumeApproved": false,
+      "highVolumeRequiresExplicitApproval": true,
+      "missingKeyBehavior": "use_no_key_low_budget_lane",
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "openalex.works"
+      ],
+      "timeoutSeconds": 60
+    },
+    {
+      "adapterID": "official_static_page",
+      "budgetSummary": "daily=50; perRun=6",
+      "envVars": [],
+      "missingKeyBehavior": "no_key_required",
+      "rateLimitSummary": "captureHeaders=False; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "nara.constitution.presidency",
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection"
+      ],
+      "timeoutSeconds": 120
+    },
+    {
+      "adapterID": "official_usajobs_authenticated_search",
+      "budgetSummary": "daily=50; perRun=5",
+      "envVars": [
+        {
+          "name": "USAJOBS_USER_AGENT",
+          "present": true
+        },
+        {
+          "name": "USAJOBS_AUTHORIZATION_KEY",
+          "present": true
+        }
+      ],
+      "missingKeyBehavior": "block_lookup_only_route",
+      "packModeAllowed": false,
+      "r2ModeAllowed": false,
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "usajobs.search"
+      ],
+      "timeoutSeconds": 60
+    },
+    {
+      "adapterID": "official_wikidata_entity_crosswalk",
+      "budgetSummary": "daily=100; perRun=9",
+      "envVars": [],
+      "missingKeyBehavior": "no_key_required",
+      "rateLimitSummary": "captureHeaders=True; backoffOn429=True; respectRetryAfter=True",
+      "regulatedAuthorityAllowed": false,
+      "retryBackoff": "exponential_jitter",
+      "sourceIDs": [
+        "wikidata.structured_crosswalk"
+      ],
+      "timeoutSeconds": 60
+    }
+  ],
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not outside legal approval",
+    "not unbounded high-volume production approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "redaction": {
+    "issues": [],
+    "passed": true
+  },
+  "schemaVersion": 1,
+  "status": "Green",
+  "valid": true
+}

@@ -1,0 +1,11 @@
+{
+  "category": "state",
+  "items": {
+    "protectedTime": {
+      "conflict": "protected time conflict",
+      "reschedule": "reschedule preview",
+      "reserved": "protected time reserved"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

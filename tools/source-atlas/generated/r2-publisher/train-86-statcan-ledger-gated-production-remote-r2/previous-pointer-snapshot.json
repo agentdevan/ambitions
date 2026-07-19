@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": 1792,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json",
+    "sha256": "4a98eea26b6955749b6eb7b81a6fa826b92f8c51e813e656a1176b61584df415"
+  },
+  "lastKnownGood": {
+    "bytes": 1310,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/lkg.json",
+    "sha256": "83f33a7ec1d66a0305ec204b8637aaaa686faf7e770d7666d76b49f0fc52d7ac"
+  }
+}

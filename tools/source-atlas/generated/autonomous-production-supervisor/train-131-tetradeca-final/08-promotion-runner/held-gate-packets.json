@@ -1,0 +1,31 @@
+{
+  "heldGates": [
+    {
+      "blockers": [
+        "review-only action cannot emit claims, packs, or R2 writes"
+      ],
+      "domainID": "community_volunteering_opportunities",
+      "finalOutputGenerated": false,
+      "gateID": "source_atlas.promotion_gate.309231b60e68b243",
+      "nativeRuntimeMutation": false,
+      "productionWriteExecuted": false,
+      "promotionState": "candidate_or_source_review_only",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review"
+    },
+    {
+      "blockers": [
+        "review-only action cannot emit claims, packs, or R2 writes"
+      ],
+      "domainID": "eldercare_local_services",
+      "finalOutputGenerated": false,
+      "gateID": "source_atlas.promotion_gate.bd154fed37612cb7",
+      "nativeRuntimeMutation": false,
+      "productionWriteExecuted": false,
+      "promotionState": "candidate_or_source_review_only",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review"
+    }
+  ],
+  "schemaVersion": 1
+}

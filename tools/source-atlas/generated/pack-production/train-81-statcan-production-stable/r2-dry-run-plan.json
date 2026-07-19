@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 782,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/adjudications.json",
+      "sha256": "ebb8b0d933a84aee6ee6730b9aef269d0cfd77da6ca770f9e49de9923ec34846"
+    },
+    {
+      "bytes": 734,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/attribution.json",
+      "sha256": "ab8c8f4326b1e6779b030cf002dcc2112f668025cd241e4ca441805e1041e13c"
+    },
+    {
+      "bytes": 4838,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/claims.json",
+      "sha256": "b26f6759f332136f02cdcb682b6802b0add7c288c6895811ecdf13553206111a"
+    },
+    {
+      "bytes": 2806,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/coverage.json",
+      "sha256": "758aa74ebee3945b00db9493ed8efa48a4b2c68f0de7514ec39d947b1dd642e1"
+    },
+    {
+      "bytes": 1274,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/entities.json",
+      "sha256": "8573c7d0a9a82b6e691a8f3d08e52eb8b78139a9292d6604084cbc3bc0b3e335"
+    },
+    {
+      "bytes": 1062,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/freshness.json",
+      "sha256": "e38098e29960a2826f502ffbbf770064566f9b2b6f1f3e39e641038eb03b63c3"
+    },
+    {
+      "bytes": 882,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/licenses.json",
+      "sha256": "7f5042c67817eda72deecaa22d3be37c75b9222a4bef74c391ec54cdb4e09a9a"
+    },
+    {
+      "bytes": 1310,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/lkg.json",
+      "sha256": "83f33a7ec1d66a0305ec204b8637aaaa686faf7e770d7666d76b49f0fc52d7ac"
+    },
+    {
+      "bytes": 9225,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/manifest.json",
+      "sha256": "f30bd907661126409596686b9402ed00b13743696e09d6804cf8aeb56ff3befa"
+    },
+    {
+      "bytes": 1267,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/non_claims.json",
+      "sha256": "f15ded50ab5f9eca454998fd67def9eebf2b2a5149bb69803e8b86d91dcfd906"
+    },
+    {
+      "bytes": 11849,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/pack.json",
+      "sha256": "30c129cc7cbd0ff1027cc57a6f611579a5c1562a91fe929440857e01bc6981ee"
+    },
+    {
+      "bytes": 1441,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/revocations.json",
+      "sha256": "14e893204ba80331d5fea97bba0b408798e59a57d23691470f56a427b2171d00"
+    },
+    {
+      "bytes": 1133,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/sources.json",
+      "sha256": "ff8d40b2bc8286902e8aca46f883cdf5215177fb9a00881562aec513ac9b5c4f"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

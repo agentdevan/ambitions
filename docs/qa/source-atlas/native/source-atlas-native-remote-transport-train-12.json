@@ -1,0 +1,171 @@
+{
+  "issue": "AMB-1498",
+  "train": "Source Atlas Production Finish-Line Train 12",
+  "title": "Anonymous public pack transport boundary",
+  "status": "Green for focused native anonymous public-pack transport tooling / Yellow overall Source Atlas",
+  "createdAt": "2026-06-27T21:45:00Z",
+  "scopeCompleted": [
+    "Added anonymous native public-pack remote transport for Source Atlas current pointer, publisher manifest, and pack bytes.",
+    "Built current-pointer object keys with the public shape source-atlas/v1/{environment}/{channel}/{domainID}/current.json.",
+    "Fetched only object-key-addressed public artifacts and handed bytes to the existing hash/cache/quarantine pipeline.",
+    "Skipped remote transport when the access boundary resolves to offline or local fallback.",
+    "Rejected private-looking manifest request shape and object keys before downstream pack use.",
+    "Exposed object_keys.pack from publisher manifests for deterministic native pack-object fetch.",
+    "Preserved local planning behavior when remote Source Atlas references are unavailable, invalid, or local-only."
+  ],
+  "filesChanged": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransport.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackCompatibility.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-remote-transport-train-12.json",
+    "docs/qa/source-atlas/native/source-atlas-native-remote-transport-train-12.md"
+  ],
+  "productLawPreserved": true,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas",
+  "r2RequestPrivacyProof": {
+    "status": "passed_focused",
+    "details": [
+      "Current-pointer object keys are built from environment, channel, domainID, and current.json only.",
+      "Manifest request shape remains domain/channel/schema/app-version/public-locale only.",
+      "Object-key requests are scanned through SourceAtlasNoPrivateGraphEgressAudit before fetch.",
+      "The private domain fixture rejects goal_text before any transport fetch.",
+      "The private pointer fixture rejects user_id in a manifest object key before manifest or pack fetch."
+    ]
+  },
+  "noPrivateGraphEgressProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest blocks private manifest request markers before object requests.",
+      "Focused XCTest blocks private pointer object keys before remote manifest or pack fetch.",
+      "No account, device, goal, capture, schedule, proof, receipt, behavior, personalization, or private graph fields are represented in remote transport input."
+    ]
+  },
+  "licenseTermsProof": {
+    "status": "not_claimed",
+    "details": [
+      "Native transport consumes publisher-approved manifest metadata but does not create legal approval.",
+      "Outside legal approval is not claimed."
+    ]
+  },
+  "restrictedSourceExclusionProof": {
+    "status": "inherited_from_pack_production",
+    "details": [
+      "Native transport fetches a pack object only after publisher manifest compatibility and downstream hash/cache validation.",
+      "Native transport does not re-admit restricted source lanes."
+    ]
+  },
+  "provenanceCompletenessProof": {
+    "status": "not_broadened",
+    "details": [
+      "Downstream publisher compatibility still maps published claim source IDs to native source records for inspection.",
+      "Train 12 does not broaden claim provenance readiness."
+    ]
+  },
+  "freshnessRevocationProof": {
+    "status": "passed_adjacent",
+    "details": [
+      "Downstream pipeline still derives native freshness manifest state from publisher manifest data.",
+      "Existing revoked manifest quarantine behavior remains covered by adjacent fetch pipeline tests."
+    ]
+  },
+  "lkgRollbackProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused remote transport test proves offline/no-account access skips remote fetch and uses last-known-good payload when available.",
+      "Train 12 does not claim production R2 rollback execution."
+    ]
+  },
+  "nativeOfflineNoAccountProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest keeps offline/no-account behavior local-only and unblocked.",
+      "Core local planning remains unblocked when remote Source Atlas fetch is skipped."
+    ]
+  },
+  "validationRun": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests",
+      "status": "passed",
+      "result": "5 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T21-37-40-397Z_pid24471_665f7067.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T21-37-40-397Z_pid24471_429a5af3.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackFetchPipelineTests",
+      "status": "passed",
+      "result": "8 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T21-41-18-985Z_pid24471_de9654f5.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T21-41-18-986Z_pid24471_00bc4081.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "result": "125 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "result": "PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "result": "FAILURE_CLASS=passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260627T214501Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Stable production promotion was not run.",
+    "Full native app runtime/release suite was not claimed.",
+    "Outside legal review was not run or claimed.",
+    "Rendered device/source inspection visual proof was not run."
+  ],
+  "knownRisks": [
+    "This proves static/deterministic and URL construction behavior; it does not prove live R2 credentials, production object availability, or CDN/cache behavior.",
+    "Production R2 promotion remains owner-approved tooling work, not native transport proof.",
+    "Entitlement policy remains outside this train.",
+    "Legal/terms approval remains governed by upstream registry and pack-production artifacts."
+  ],
+  "rollbackPlan": [
+    "Revert SourceAtlasPublicPackRemoteTransport.swift.",
+    "Revert the object_keys.pack bridge addition in SourceAtlasPublishedPackCompatibility.swift.",
+    "Revert focused remote transport XCTest additions and Train 12 QA evidence.",
+    "Keep Train 11 publisher compatibility and bundled/offline Source Atlas baseline behavior."
+  ],
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not legal approval",
+    "not release readiness",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not a private user-data backend",
+    "not private life graph storage"
+  ]
+}

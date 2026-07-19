@@ -1,0 +1,90 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "discoveryManifestPath": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/manifest.json",
+  "executeRequested": true,
+  "kind": "ambitions.sourceAtlas.catalogTransport.v1",
+  "liveRequested": true,
+  "mode": "live",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "planPath": "tools/source-atlas/fixtures/catalog-transport/train-55-live-data-gov-plan.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 4,
+    "catalogs": 2,
+    "claims": 0,
+    "endpoints": 2,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "snapshots": 2
+  },
+  "schemaVersion": 1,
+  "snapshotRoot": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots",
+  "transportEntries": [
+    {
+      "blocking_reasons": [],
+      "claim_authority_allowed": false,
+      "content_type": "application/json;charset=utf-8",
+      "endpoint_id": "australia-data-education-package-search",
+      "evidence_hash": "abb0aeafed8fc8795b8a33f7c5549d376ec92312ccd042b72793b83b2d1a4b80",
+      "http_status": 200,
+      "mode": "transport",
+      "non_claims": [
+        "catalog transport metadata only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output"
+      ],
+      "pack_output_allowed": false,
+      "public_contact_redaction_count": 8,
+      "retrieval_method": "live_http_get",
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "sha256": "91c73012ba387b491ff43cc063cce8598a4ac4faa0f6aa8acfcaf73b2bf5f1b1",
+      "snapshot_path": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/australia-data-education-package-search.json",
+      "status": "fetched",
+      "truncated": false,
+      "url": "https://data.gov.au/data/api/3/action/package_search?q=education&rows=2"
+    },
+    {
+      "blocking_reasons": [],
+      "claim_authority_allowed": false,
+      "content_type": "application/json;charset=utf-8",
+      "endpoint_id": "canada-open-data-health-package-search",
+      "evidence_hash": "9f996974e6216a5d0fc76e49557672046a8189256ef55ecf8f014f29ba1a74ea",
+      "http_status": 200,
+      "mode": "transport",
+      "non_claims": [
+        "catalog transport metadata only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output"
+      ],
+      "pack_output_allowed": false,
+      "public_contact_redaction_count": 8,
+      "retrieval_method": "live_http_get",
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "sha256": "5c57032b6a7977b51c3ec4b78e525e8ac33a7759fc686cb04e27c8e13c087027",
+      "snapshot_path": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/canada-open-data-health-package-search.json",
+      "status": "fetched",
+      "truncated": false,
+      "url": "https://open.canada.ca/data/api/3/action/package_search?q=health&rows=2"
+    }
+  ],
+  "versionID": "source-atlas-catalog-transport-train-54"
+}

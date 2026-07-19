@@ -1,0 +1,632 @@
+{
+  "actionResults": [
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake-input.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/manifest.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/proposed-frontiers.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/candidate-sources.json"
+      ],
+      "blockers": [
+        "coverage_frontier_missing"
+      ],
+      "childValid": true,
+      "domainID": "community_volunteering_opportunities",
+      "frontierConfigured": false,
+      "message": "candidate-only frontier intake generated",
+      "nextAction": "define_coverage_frontier",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "blocked",
+      "requested": true,
+      "requiredGate": "frontier_governance_review",
+      "safeAction": true,
+      "status": "executed_safe",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/frontier-intake-input.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/manifest.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/frontier-intake.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/proposed-frontiers.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/candidate-sources.json"
+      ],
+      "blockers": [
+        "coverage_frontier_missing"
+      ],
+      "childValid": true,
+      "domainID": "eldercare_local_services",
+      "frontierConfigured": false,
+      "message": "candidate-only frontier intake generated",
+      "nextAction": "define_coverage_frontier",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "blocked",
+      "requested": true,
+      "requiredGate": "frontier_governance_review",
+      "safeAction": true,
+      "status": "executed_safe",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/frontier-intake-input.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/manifest.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/frontier-intake.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/proposed-frontiers.json",
+        "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/candidate-sources.json"
+      ],
+      "blockers": [
+        "coverage_frontier_missing"
+      ],
+      "childValid": true,
+      "domainID": "public_safety_training_reference",
+      "frontierConfigured": false,
+      "message": "candidate-only frontier intake generated",
+      "nextAction": "define_coverage_frontier",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "blocked",
+      "requested": true,
+      "requiredGate": "frontier_governance_review",
+      "safeAction": true,
+      "status": "executed_safe",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "business_entrepreneurship",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "creative_project_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "education_credentialing",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "finance_public_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "health_wellness_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "health_wellness_reference_ca_statistics",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "hobbies_recreation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "home_life_admin",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "occupation_foundation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "personal_growth",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "public_civic_requirements",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "relationships_family",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "travel_relocation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "volunteering_public_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    }
+  ],
+  "allowFixtureDeliveryChainRequested": false,
+  "allowedClaims": [
+    "deterministic_gated_autonomous_operations_execution"
+  ],
+  "artifacts": [
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/candidate-sources.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake-input.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/manifest.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/proposed-frontiers.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/candidate-sources.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/frontier-intake-input.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/frontier-intake.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/manifest.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/eldercare_local_services/proposed-frontiers.json"
+    },
+    {
+      "domainID": "public_safety_training_reference",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/candidate-sources.json"
+    },
+    {
+      "domainID": "public_safety_training_reference",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/frontier-intake-input.json"
+    },
+    {
+      "domainID": "public_safety_training_reference",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/frontier-intake.json"
+    },
+    {
+      "domainID": "public_safety_training_reference",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/manifest.json"
+    },
+    {
+      "domainID": "public_safety_training_reference",
+      "kind": "frontier_intake",
+      "path": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/public_safety_training_reference/proposed-frontiers.json"
+    }
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "native_runtime_green_without_xcode_device_offline_proof",
+    "outside_legal_approval",
+    "release_green",
+    "uncontrolled_live_harvest",
+    "worker_deploy_without_execute"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "operations_plan_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "operations_plan_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_unsafe_actions_executed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_actions_blocked_without_production_gates",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_actions_require_execute_safe_actions",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:27:00Z",
+  "executeSafeActionsRequested": true,
+  "executionID": "source_atlas.autonomous_operations_execution.dc55562418436c49",
+  "executionMode": "execute_safe_actions",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousOperationsExecutor.v1",
+  "nonClaims": [
+    "gated autonomous operations executor only",
+    "not uncontrolled live harvest",
+    "not automatic production R2 write",
+    "not Worker deployment",
+    "not native runtime proof",
+    "not release readiness",
+    "not literal universal coverage",
+    "not outside legal approval",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "operations planner only",
+    "not an uncontrolled live harvester",
+    "not an automatic production R2 writer",
+    "not a Worker deployer by itself",
+    "not native runtime proof by itself",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "operationsPlanPath": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/02-unknown-domain-plan/autonomous-operations-plan.json",
+  "outputHashes": {
+    "community_volunteering_opportunities:frontier_intake:candidate-sources.json": "5151727a0b3905769a2d2cf64a240df7b0b3861a1fe21b6c3059b5f63b653bf4",
+    "community_volunteering_opportunities:frontier_intake:frontier-intake-input.json": "ba68ac08913dec03c848ac2cef363b10c41aad0717b783b885e7fc5567a10762",
+    "community_volunteering_opportunities:frontier_intake:frontier-intake.json": "415b1eb25201ac28013b19364a000ab540d1b102216ee56094b6c0a56685ef38",
+    "community_volunteering_opportunities:frontier_intake:manifest.json": "620eb21b9fc8bb5496dfca16b21668f4a3428aa7292ca131322acbc85db8334a",
+    "community_volunteering_opportunities:frontier_intake:proposed-frontiers.json": "21f0f4e62492dd08e9040d866c847db2a9098f6cbc3a5cfb3c40d1490bbb941d",
+    "eldercare_local_services:frontier_intake:candidate-sources.json": "a8a346a4f615911e9fffb9d2954207c0518ab9972e372e1af46c4ada93e7d9eb",
+    "eldercare_local_services:frontier_intake:frontier-intake-input.json": "023f8c7f60d48784a1bd732c5f9ff7a6b09b0ce7ee390b6c0d592601841f09ce",
+    "eldercare_local_services:frontier_intake:frontier-intake.json": "776e1e15c5a633a9124e77e9834baef7ac188c9713f986f37b4cbac593e6d7c8",
+    "eldercare_local_services:frontier_intake:manifest.json": "6fe59e93e534a7a01a7a691e5cade3d543a59a6c522edef33344272ee303116c",
+    "eldercare_local_services:frontier_intake:proposed-frontiers.json": "eab3157235a96bdcea39ec33aa336e55f85ebe8eb00eb2c76711805317e0e240",
+    "public_safety_training_reference:frontier_intake:candidate-sources.json": "08154d828578804e7f9a1f1ec620ff43e03c41f474199389407e32d260161a55",
+    "public_safety_training_reference:frontier_intake:frontier-intake-input.json": "3fbdd4daed03a6440276c224183f038219730157eb8696a20749b986ee0de549",
+    "public_safety_training_reference:frontier_intake:frontier-intake.json": "dce81469a43861f4bc5ad148c1240737ee3ab7c0278f5c0b2cd5f2e3d80d1085",
+    "public_safety_training_reference:frontier_intake:manifest.json": "8436ee10678d961f0c876bd72547016873714e37b49574e04a06d47a9e7a6f39",
+    "public_safety_training_reference:frontier_intake:proposed-frontiers.json": "da7ea3511be4006749c36545caf8851b0755875b16073709ad1af8164104cdd5",
+    "report": "5471623f29b26f191665f0d4440f6e1a6c727e4d1cad186ecf3d080c6d74d86f"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/closeout.md",
+    "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/autonomous-operations-execution-report.md",
+    "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/autonomous-operations-execution-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productionNonClaims": [
+    "no full Source Atlas Green",
+    "no literal universal coverage",
+    "no release Green",
+    "no App Store readiness",
+    "no outside legal approval",
+    "no final user plan, schedule, or Step generation",
+    "no live harvest execution",
+    "no Worker deployment",
+    "no native runtime/device/offline proof",
+    "no production Cloudflare R2 write executed by this executor"
+  ],
+  "recordCounts": {
+    "blockedByGate": 0,
+    "deliveryChainArtifacts": 0,
+    "failedActions": 0,
+    "frontierIntakeArtifacts": 15,
+    "observedDomains": 14,
+    "plannedDomains": 17,
+    "plannedNotExecuted": 0,
+    "productionWritesExecuted": 0,
+    "safeActionsExecuted": 3,
+    "unsafeExecutionAttempts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; gated autonomous execution tooling only",
+  "status": "Source Green for gated autonomous operations execution",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-operations-executor-train-106"
+}

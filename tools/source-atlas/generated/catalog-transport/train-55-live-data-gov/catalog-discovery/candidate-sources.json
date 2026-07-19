@@ -1,0 +1,209 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "candidate_score": 75,
+      "catalog_id": "catalog.5282df60b71fcaf6",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "graduates_reference",
+        "highereducation_reference",
+        "statisticalinformation_reference",
+        "statistics_reference"
+      ],
+      "dataset_url": "http://www.deewr.gov.au/HigherEducation/Pages/default.aspx",
+      "declared_jurisdiction": "",
+      "declared_license": "cc-by",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://data.gov.au/data/dataset/3488af44-4cfe-4e88-bd6e-532d0d06ae72/resource/7be27d60-d3a4-45ea-8b7b-ea4cc0c04ab6/download/tmpzsp5wvenrol.zip"
+      ],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "000190f7511a3a10492ad773b2ad7e683030ee452e502f6cb9cf5f42b6fcc344",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Department of Education",
+      "publisher_url": "",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": ""
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "candidate_score": 50,
+      "catalog_id": "catalog.5282df60b71fcaf6",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "education_reference",
+        "labour_reference",
+        "statistics_reference"
+      ],
+      "dataset_url": "Provides selected information on participation in education, highest educational attainment, transition from education to work and current labour force and demographic characteristics for the civilian population aged 15-74 years. Characteristics reported on include: type of educational institution attended or attending; level and main field of education of current study and highest level and main field of educational attainment.\nInformation on unsuccessful enrolment, and deferment of study, is included for persons not studying in the survey year. Data on apprenticeships are also provided.",
+      "declared_jurisdiction": "{\"type\": \"Point\",\"coordinates\": [135.866666,-29.383333]}",
+      "declared_license": "cc-by",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/6227.0Explanatory%20Notes1May%202016?OpenDocument",
+        "https://www.abs.gov.au/AUSSTATS/abs@.nsf/mf/6227.0"
+      ],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "94152c90411c26b8826d2cfc3cab4bf18c29facff8c9ebf64cf61c98944e1f60",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "ABS (SA Data)",
+      "publisher_url": "",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": ""
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "candidate_score": 40,
+      "catalog_id": "catalog.d4ba816f3ad83419",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_reference_metadata"
+      ],
+      "dataset_url": "{u'fr': u'http://www5.statcan.gc.ca/cansim/home-accueil?lang=fra', u'en': u'http://www5.statcan.gc.ca/cansim/home-accueil?lang=eng'}",
+      "declared_jurisdiction": "",
+      "declared_license": "ca-ogl-lgo",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-eng.zip",
+        "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-fra.zip",
+        "https://www150.statcan.gc.ca/n1/tbl/sdmx/13100974-SDMX.zip",
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=redacted-public-id",
+        "https://www150.statcan.gc.ca/t1/tbl1/fr/tv.action?pid=redacted-public-id"
+      ],
+      "domain_guess": "health_wellness_reference",
+      "evidence_hash": "a5c78cac3e7eb868d6583aef07731b7ae2a4fc5846b86b33fcb16f3febca92de",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Statistics Canada | Statistique Canada",
+      "publisher_url": "",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": ""
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "candidate_score": 40,
+      "catalog_id": "catalog.d4ba816f3ad83419",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_reference_metadata"
+      ],
+      "dataset_url": "Preconception health, or health before pregnancy, is the health of men and women during their reproductive years. Your health affects your fertility. It also influences the health of your children, during pregnancy, at birth and throughout their lives.",
+      "declared_jurisdiction": "",
+      "declared_license": "ca-ogl-lgo",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://www.canada.ca/en/public-health/services/pregnancy/preconception-health-before.html",
+        "https://www.canada.ca/fr/sante-publique/services/grossesse/sante-preconceptionnelle-avant.html"
+      ],
+      "domain_guess": "health_wellness_reference",
+      "evidence_hash": "56d0de2dd0dc738f3bbf9f7323ffd218605c3ddeeee9aaaaf315a9f05395d440",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+      "publisher_url": "",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": ""
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogCandidateSources.v1"
+}

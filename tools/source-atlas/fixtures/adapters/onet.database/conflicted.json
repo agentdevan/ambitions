@@ -1,0 +1,3182 @@
+{
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "kind": "ambitions.sourceAtlas.adapterFixture.v1",
+  "payload": {
+    "adapterID": "onet_public_reference_adapter",
+    "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+    "atoms": [
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.55391f4b7c83f387",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Software Developers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.69cb486c81aa50c7",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.3b1d8ccfc16fb39c",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.0a952000f655f116",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.264032e9f507c941",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.9279f5f990123164",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.8a46ad1561b5c383",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.5aa64601b3213b24",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Registered Nurses",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.a048f69da6a3937a",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.586d82539972fb8f",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.9ec83de9719cb98e",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.a7b5abfd9743973b",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.55607f8883589fb0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.20a09f44cb675667",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.d4fce80dd953c2ae",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Airline Pilots, Copilots, and Flight Engineers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4b2017735dac43dc",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.f34494eb8b6b8f87",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.8d34cea09cf7d56b",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.78c55aedc881419a",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.807327a42aca3ffb",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.5679648c165e2a02",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.61c416b538750850",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Secondary School Teachers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.24a44ee0edac518c",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.b3a3f7e0a81720fc",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.636c9de2fd335bef",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c06d23cb2f760873",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c42c6b4fc908eaca",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.078140d38b0a0363",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.1c9c2c44e131a780",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Electricians",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.ac4610fc86c1f1e3",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.48d12d474eefcffd",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.6ad03ac873c685f0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.d695933874d399e0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.1e728da78ac99969",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.037a4e97714f2b9a",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.2a2cd672818fc3f9",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Lawyers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.bacc0c3e68d91cb8",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c933377706059003",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.a30da6207e4a1162",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4a2ab35327a7cb76",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.b31351c3d44ebd35",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.713b053caf203789",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.915f74c958e27bdf",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Sound Engineering Technicians",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.35b08ee7839622a3",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.47751295d48b6b22",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.ea766673adc8b3c9",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c13c9f8bf6602e92",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.9a86d248c5e03b06",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.0fbc8a5cf649a534",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.a44091549fc2bfa6",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "General and Operations Managers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.e2c23016ea20b47e",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.fccb06907f5bfa5e",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.2e40a1d18b804d60",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.66fa3a8bf6e3b188",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.3c05fa6943708b5a",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.263f8fb6076d119d",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.461585099f420640",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Musicians and Singers",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.da9746843f26fba4",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.da6b4c2c2a5103fc",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.0be9e7b2d1b840b8",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.1d0a390dcd6faca4",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.ebf32a9a4061f295",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.862cc0c65725669a",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "occupation",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.630524d5bc15722b",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "Physicists and Astronomers / Astronaut candidate context",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.e2438fdda5a80e74",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "critical thinking",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.5848d5cdfe760e19",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "active learning",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.e7d40bf443decb6f",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "complex problem solving",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.422cce459ad0ab7c",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communication",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.61178ef699fd8404",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "systems analysis",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "skill",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.68d6066551bfacf8",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "monitoring",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.332e7c95c8ccb2d0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "engineering and technology",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4e0737455bcd67e0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "mathematics",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c56a8393ea20215c",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "medicine and dentistry",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4ff35c839a052b1b",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "education and training",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.70a38eb3197e9d36",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "law and government",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c0ef10d9d99d9323",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "business and management",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.868e8049c0083367",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communications and media",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "claims": [
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.05f9715a7cef3593",
+        "claimType": "occupation_taxonomy",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.b2901931b890a348",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Software Developers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.245d79389917748f",
+        "claimType": "occupation_taxonomy",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.89a194c1cb27c978",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Registered Nurses is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.90fc1c9a33220897",
+        "claimType": "occupation_taxonomy",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.a628a62b1d46c0b3",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Airline Pilots, Copilots, and Flight Engineers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.65aa08c53fb8c926",
+        "claimType": "occupation_taxonomy",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.6010ae8595e4240c",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Secondary School Teachers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.8de4f83716320246",
+        "claimType": "occupation_taxonomy",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.72fb909a9f7bb99b",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Electricians is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.994bfbfec220c622",
+        "claimType": "occupation_taxonomy",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.1b02dec63a92990c",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Lawyers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.86466ca3a2e6d68b",
+        "claimType": "occupation_taxonomy",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.1f4df98017815a48",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Sound Engineering Technicians is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.09364417980b8174",
+        "claimType": "occupation_taxonomy",
+        "confidence": "low",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.d2e6b6f5c99c6bc2",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": true,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "General and Operations Managers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.5559fea6994bf433",
+        "claimType": "occupation_taxonomy",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.fb542708ee790e89",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "source_backed",
+        "text": "Musicians and Singers is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "official_dataset",
+        "checksum": "checksum.3899d1c35d8bf99e",
+        "claimType": "occupation_taxonomy",
+        "confidence": "review_required",
+        "dataClass": "public_reference_claim",
+        "freshness": "conflicted",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "claim.a2e8c030721b94ff",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.onetcenter.org/overview.html#data",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "reviewRequirement": true,
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "state": "candidate",
+        "text": "Physicists and Astronomers / Astronaut candidate context is represented in O*NET occupation and skill taxonomy fixtures.",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "coverage": {
+      "adapter": "onet_public_reference_adapter",
+      "atomCount": 77,
+      "claimCount": 10,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "occupation",
+      "edgeCount": 60,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "conflicted",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "blocked",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "blocked",
+      "redistributionStatus": "redistributable_with_attribution",
+      "requirementCount": 10,
+      "reviewRequiredClaims": 2,
+      "scenarioCoverage": [
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "review required",
+          "doesNotCreateUserPath": true,
+          "reason": "conflicted source claims route to review",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_dataset",
+      "sourceCount": 1,
+      "sourceLane": "onet.database",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    "coverageRecords": [],
+    "createdAt": "2026-06-27T00:00:00Z",
+    "crosswalks": [],
+    "dataClass": "official_public_source",
+    "domain": "occupation",
+    "edges": [
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.55391f4b7c83f387",
+        "id": "edge.2a1e24ddb744db72",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.69cb486c81aa50c7",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.69cb486c81aa50c7",
+        "id": "edge.055183bf972fbafc",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.3b1d8ccfc16fb39c",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.3b1d8ccfc16fb39c",
+        "id": "edge.9d92771c8269feb7",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.0a952000f655f116",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.0a952000f655f116",
+        "id": "edge.0f12edf9c2dd6671",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.264032e9f507c941",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.264032e9f507c941",
+        "id": "edge.64a9149afabd2d52",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.9279f5f990123164",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.9279f5f990123164",
+        "id": "edge.21c046c24a41f048",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.8a46ad1561b5c383",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.5aa64601b3213b24",
+        "id": "edge.6e80bae6d8c2dbb2",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.a048f69da6a3937a",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.a048f69da6a3937a",
+        "id": "edge.63c59cc61160efac",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.586d82539972fb8f",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.586d82539972fb8f",
+        "id": "edge.8f7928c34bdf5c3b",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.9ec83de9719cb98e",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.9ec83de9719cb98e",
+        "id": "edge.dff5a31dc41c5b6c",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.a7b5abfd9743973b",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.a7b5abfd9743973b",
+        "id": "edge.0751e62fb3934ec2",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.55607f8883589fb0",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.55607f8883589fb0",
+        "id": "edge.8261a9a8feb76f2d",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.20a09f44cb675667",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.d4fce80dd953c2ae",
+        "id": "edge.42202f2ca078c06c",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.4b2017735dac43dc",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.4b2017735dac43dc",
+        "id": "edge.b6fcf764fc23af3d",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.f34494eb8b6b8f87",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.f34494eb8b6b8f87",
+        "id": "edge.56e4d897f9325798",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.8d34cea09cf7d56b",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.8d34cea09cf7d56b",
+        "id": "edge.b266bdb78efeba88",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.78c55aedc881419a",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.78c55aedc881419a",
+        "id": "edge.3203dfadcb851b20",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.807327a42aca3ffb",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.807327a42aca3ffb",
+        "id": "edge.71e6296c1e1e2f80",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.5679648c165e2a02",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.61c416b538750850",
+        "id": "edge.e8667e37f4bb79f4",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.24a44ee0edac518c",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.24a44ee0edac518c",
+        "id": "edge.c6f01e24d4693174",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.b3a3f7e0a81720fc",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.b3a3f7e0a81720fc",
+        "id": "edge.5314e1c9d1f4d007",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.636c9de2fd335bef",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.636c9de2fd335bef",
+        "id": "edge.104ffc7274e6fb6a",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.c06d23cb2f760873",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.c06d23cb2f760873",
+        "id": "edge.40d0d17002c9e4c8",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.c42c6b4fc908eaca",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.c42c6b4fc908eaca",
+        "id": "edge.360c9383b53a6974",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.078140d38b0a0363",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.1c9c2c44e131a780",
+        "id": "edge.69397977decdfb77",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.ac4610fc86c1f1e3",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.ac4610fc86c1f1e3",
+        "id": "edge.61f17a7a19149851",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.48d12d474eefcffd",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.48d12d474eefcffd",
+        "id": "edge.9442d581c532f4f7",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.6ad03ac873c685f0",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.6ad03ac873c685f0",
+        "id": "edge.ba8d7bae66a38652",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.d695933874d399e0",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.d695933874d399e0",
+        "id": "edge.066cd64ccb372fbc",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.1e728da78ac99969",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.1e728da78ac99969",
+        "id": "edge.c7cb80a91cc1ee1d",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.037a4e97714f2b9a",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.2a2cd672818fc3f9",
+        "id": "edge.8d5a3d1d72c56fcf",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.bacc0c3e68d91cb8",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.bacc0c3e68d91cb8",
+        "id": "edge.50c6545f810d0839",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.c933377706059003",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.c933377706059003",
+        "id": "edge.c571c8b8f7425e5b",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.a30da6207e4a1162",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.a30da6207e4a1162",
+        "id": "edge.8d7800975c60b9bc",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.4a2ab35327a7cb76",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.4a2ab35327a7cb76",
+        "id": "edge.0faf2044dbe2e385",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.b31351c3d44ebd35",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.b31351c3d44ebd35",
+        "id": "edge.89d18ce4a9fb328f",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.713b053caf203789",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.915f74c958e27bdf",
+        "id": "edge.b64dc58a7b88e153",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.35b08ee7839622a3",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.35b08ee7839622a3",
+        "id": "edge.0ba75c8b0b2ecdee",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.47751295d48b6b22",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.47751295d48b6b22",
+        "id": "edge.bf5ebd88934191fa",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.ea766673adc8b3c9",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.ea766673adc8b3c9",
+        "id": "edge.b1daa8bc486237a5",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.c13c9f8bf6602e92",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.c13c9f8bf6602e92",
+        "id": "edge.6db0bbb6a6223224",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.9a86d248c5e03b06",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.9a86d248c5e03b06",
+        "id": "edge.12658a53b50b7326",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.0fbc8a5cf649a534",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.a44091549fc2bfa6",
+        "id": "edge.7b6c14ffed63da00",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.e2c23016ea20b47e",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.e2c23016ea20b47e",
+        "id": "edge.3dda9cc556cd8e7c",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.fccb06907f5bfa5e",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.fccb06907f5bfa5e",
+        "id": "edge.ac3d6f702dd0a1af",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.2e40a1d18b804d60",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.2e40a1d18b804d60",
+        "id": "edge.a16349616c4b3e54",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.66fa3a8bf6e3b188",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.66fa3a8bf6e3b188",
+        "id": "edge.32d11dc5ec3d36b5",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.3c05fa6943708b5a",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.3c05fa6943708b5a",
+        "id": "edge.abafe8411e2e3aa9",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.263f8fb6076d119d",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.461585099f420640",
+        "id": "edge.47a76c6f48dcb4b4",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.da9746843f26fba4",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.da9746843f26fba4",
+        "id": "edge.2b222395717d0aef",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.da6b4c2c2a5103fc",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.da6b4c2c2a5103fc",
+        "id": "edge.7e4afa7c96723549",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.0be9e7b2d1b840b8",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.0be9e7b2d1b840b8",
+        "id": "edge.d0539aab4a703096",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.1d0a390dcd6faca4",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.1d0a390dcd6faca4",
+        "id": "edge.92b160ea429f2358",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.ebf32a9a4061f295",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.ebf32a9a4061f295",
+        "id": "edge.8e2340a165321aea",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.862cc0c65725669a",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.630524d5bc15722b",
+        "id": "edge.644c1630fd5dee0c",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.e2438fdda5a80e74",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.e2438fdda5a80e74",
+        "id": "edge.2c60efd08586830a",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.5848d5cdfe760e19",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.5848d5cdfe760e19",
+        "id": "edge.05073783fac5c62a",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.e7d40bf443decb6f",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.e7d40bf443decb6f",
+        "id": "edge.80a5954c1160fcd8",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.422cce459ad0ab7c",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.422cce459ad0ab7c",
+        "id": "edge.6e23080a6f21e3ec",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.61178ef699fd8404",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "dataClass": "public_atom_edge_lattice",
+        "fromAtomID": "atom.61178ef699fd8404",
+        "id": "edge.70babef8ac1341e4",
+        "kind": "ambitions.sourceAtlas.edge.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "relationship": "uses_skill",
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "toAtomID": "atom.68d6066551bfacf8",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+    "lattices": [
+      {
+        "atomIDs": [
+          "atom.55391f4b7c83f387",
+          "atom.69cb486c81aa50c7",
+          "atom.3b1d8ccfc16fb39c",
+          "atom.0a952000f655f116",
+          "atom.264032e9f507c941",
+          "atom.9279f5f990123164",
+          "atom.8a46ad1561b5c383",
+          "atom.5aa64601b3213b24",
+          "atom.a048f69da6a3937a",
+          "atom.586d82539972fb8f",
+          "atom.9ec83de9719cb98e",
+          "atom.a7b5abfd9743973b",
+          "atom.55607f8883589fb0",
+          "atom.20a09f44cb675667",
+          "atom.d4fce80dd953c2ae",
+          "atom.4b2017735dac43dc",
+          "atom.f34494eb8b6b8f87",
+          "atom.8d34cea09cf7d56b",
+          "atom.78c55aedc881419a",
+          "atom.807327a42aca3ffb",
+          "atom.5679648c165e2a02",
+          "atom.61c416b538750850",
+          "atom.24a44ee0edac518c",
+          "atom.b3a3f7e0a81720fc",
+          "atom.636c9de2fd335bef",
+          "atom.c06d23cb2f760873",
+          "atom.c42c6b4fc908eaca",
+          "atom.078140d38b0a0363",
+          "atom.1c9c2c44e131a780",
+          "atom.ac4610fc86c1f1e3",
+          "atom.48d12d474eefcffd",
+          "atom.6ad03ac873c685f0",
+          "atom.d695933874d399e0",
+          "atom.1e728da78ac99969",
+          "atom.037a4e97714f2b9a",
+          "atom.2a2cd672818fc3f9",
+          "atom.bacc0c3e68d91cb8",
+          "atom.c933377706059003",
+          "atom.a30da6207e4a1162",
+          "atom.4a2ab35327a7cb76",
+          "atom.b31351c3d44ebd35",
+          "atom.713b053caf203789",
+          "atom.915f74c958e27bdf",
+          "atom.35b08ee7839622a3",
+          "atom.47751295d48b6b22",
+          "atom.ea766673adc8b3c9",
+          "atom.c13c9f8bf6602e92",
+          "atom.9a86d248c5e03b06",
+          "atom.0fbc8a5cf649a534",
+          "atom.a44091549fc2bfa6",
+          "atom.e2c23016ea20b47e",
+          "atom.fccb06907f5bfa5e",
+          "atom.2e40a1d18b804d60",
+          "atom.66fa3a8bf6e3b188",
+          "atom.3c05fa6943708b5a",
+          "atom.263f8fb6076d119d",
+          "atom.461585099f420640",
+          "atom.da9746843f26fba4",
+          "atom.da6b4c2c2a5103fc",
+          "atom.0be9e7b2d1b840b8",
+          "atom.1d0a390dcd6faca4",
+          "atom.ebf32a9a4061f295",
+          "atom.862cc0c65725669a",
+          "atom.630524d5bc15722b",
+          "atom.e2438fdda5a80e74",
+          "atom.5848d5cdfe760e19",
+          "atom.e7d40bf443decb6f",
+          "atom.422cce459ad0ab7c",
+          "atom.61178ef699fd8404",
+          "atom.68d6066551bfacf8",
+          "atom.332e7c95c8ccb2d0",
+          "atom.4e0737455bcd67e0",
+          "atom.c56a8393ea20215c",
+          "atom.4ff35c839a052b1b",
+          "atom.70a38eb3197e9d36",
+          "atom.c0ef10d9d99d9323",
+          "atom.868e8049c0083367"
+        ],
+        "dataClass": "public_atom_edge_lattice",
+        "edgeIDs": [
+          "edge.2a1e24ddb744db72",
+          "edge.055183bf972fbafc",
+          "edge.9d92771c8269feb7",
+          "edge.0f12edf9c2dd6671",
+          "edge.64a9149afabd2d52",
+          "edge.21c046c24a41f048",
+          "edge.6e80bae6d8c2dbb2",
+          "edge.63c59cc61160efac",
+          "edge.8f7928c34bdf5c3b",
+          "edge.dff5a31dc41c5b6c",
+          "edge.0751e62fb3934ec2",
+          "edge.8261a9a8feb76f2d",
+          "edge.42202f2ca078c06c",
+          "edge.b6fcf764fc23af3d",
+          "edge.56e4d897f9325798",
+          "edge.b266bdb78efeba88",
+          "edge.3203dfadcb851b20",
+          "edge.71e6296c1e1e2f80",
+          "edge.e8667e37f4bb79f4",
+          "edge.c6f01e24d4693174",
+          "edge.5314e1c9d1f4d007",
+          "edge.104ffc7274e6fb6a",
+          "edge.40d0d17002c9e4c8",
+          "edge.360c9383b53a6974",
+          "edge.69397977decdfb77",
+          "edge.61f17a7a19149851",
+          "edge.9442d581c532f4f7",
+          "edge.ba8d7bae66a38652",
+          "edge.066cd64ccb372fbc",
+          "edge.c7cb80a91cc1ee1d",
+          "edge.8d5a3d1d72c56fcf",
+          "edge.50c6545f810d0839",
+          "edge.c571c8b8f7425e5b",
+          "edge.8d7800975c60b9bc",
+          "edge.0faf2044dbe2e385",
+          "edge.89d18ce4a9fb328f",
+          "edge.b64dc58a7b88e153",
+          "edge.0ba75c8b0b2ecdee",
+          "edge.bf5ebd88934191fa",
+          "edge.b1daa8bc486237a5",
+          "edge.6db0bbb6a6223224",
+          "edge.12658a53b50b7326",
+          "edge.7b6c14ffed63da00",
+          "edge.3dda9cc556cd8e7c",
+          "edge.ac3d6f702dd0a1af",
+          "edge.a16349616c4b3e54",
+          "edge.32d11dc5ec3d36b5",
+          "edge.abafe8411e2e3aa9",
+          "edge.47a76c6f48dcb4b4",
+          "edge.2b222395717d0aef",
+          "edge.7e4afa7c96723549",
+          "edge.d0539aab4a703096",
+          "edge.92b160ea429f2358",
+          "edge.8e2340a165321aea",
+          "edge.644c1630fd5dee0c",
+          "edge.2c60efd08586830a",
+          "edge.05073783fac5c62a",
+          "edge.80a5954c1160fcd8",
+          "edge.6e23080a6f21e3ec",
+          "edge.70babef8ac1341e4"
+        ],
+        "id": "lattice.5ced4529d85ab4a0",
+        "kind": "ambitions.sourceAtlas.lattice.v1",
+        "publicReferenceOnly": true,
+        "recipeIDs": [],
+        "schemaVersion": 1,
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "nonClaims": [
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "does not gather private user data",
+      "does not claim legal, privacy, release, or R2 production readiness"
+    ],
+    "packCandidates": [],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "provenance": [
+      {
+        "authorityTier": "official_dataset",
+        "contentHash": "358d0648a2b724168a088fce6079e486f4f78d3d34ebf9c3559a9a56cc13ebf9",
+        "dataClass": "public_provenance",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "provenance.a653bd18961eb17b",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.provenance.v1",
+        "license": "Creative Commons Attribution 4.0 International",
+        "locator": "https://www.onetcenter.org/database.html",
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "retrievedAt": "2026-06-27T00:00:00Z",
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceState": "conflicted",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "termsURL": "https://www.onetcenter.org/overview.html#data",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "publicReferenceOnly": true,
+    "recipes": [
+      {
+        "dataClass": "public_recipe",
+        "doesNotCreateFinalSchedule": true,
+        "doesNotStoreFinalUserPath": true,
+        "id": "recipe.e1bb018ff0f83a56",
+        "inputAtomIDs": [
+          "atom.55391f4b7c83f387",
+          "atom.69cb486c81aa50c7",
+          "atom.3b1d8ccfc16fb39c",
+          "atom.0a952000f655f116",
+          "atom.264032e9f507c941"
+        ],
+        "kind": "ambitions.sourceAtlas.recipe.v1",
+        "localRuntimeJoinRequired": true,
+        "outputAtomIDs": [
+          "atom.9279f5f990123164",
+          "atom.8a46ad1561b5c383",
+          "atom.5aa64601b3213b24",
+          "atom.a048f69da6a3937a",
+          "atom.586d82539972fb8f"
+        ],
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "requirementIDs": [
+          "requirement.dc08fb9371f20e49",
+          "requirement.9e5023e1d2928f95",
+          "requirement.6c7e0ae2683ef459",
+          "requirement.0a8832868cc7e48e",
+          "requirement.1baff26ea423948f",
+          "requirement.15ad07c9d6525fce",
+          "requirement.5b52b7b813217dd0",
+          "requirement.9b99ee17aeb8d7c7",
+          "requirement.d3c086340c48c321",
+          "requirement.7a7ba3c5f52ff977"
+        ],
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "title": "Broad occupational foundation recipe",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "requirements": [
+      {
+        "claimID": "claim.b2901931b890a348",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.dc08fb9371f20e49",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.89a194c1cb27c978",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.9e5023e1d2928f95",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.a628a62b1d46c0b3",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.6c7e0ae2683ef459",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.6010ae8595e4240c",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.0a8832868cc7e48e",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.72fb909a9f7bb99b",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.1baff26ea423948f",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.1b02dec63a92990c",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.15ad07c9d6525fce",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.1f4df98017815a48",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.5b52b7b813217dd0",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.d2e6b6f5c99c6bc2",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.9b99ee17aeb8d7c7",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.fb542708ee790e89",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.d3c086340c48c321",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "claimID": "claim.a2e8c030721b94ff",
+        "dataClass": "public_requirement",
+        "gateType": "public_occupation_context",
+        "id": "requirement.7a7ba3c5f52ff977",
+        "kind": "ambitions.sourceAtlas.requirement.v1",
+        "provenanceIDs": [
+          "provenance.2dee5e1cf4e4c4de"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "structuredRule": {
+          "doesNotCreateRuntimeStep": true,
+          "sourceState": "conflicted",
+          "type": "public_reference_only"
+        },
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceID": "onet.database",
+    "sourceState": {
+      "blockedReasons": [
+        "source_state_conflicted_blocks_pack_output"
+      ],
+      "dataClass": "public_freshness",
+      "packEligible": false,
+      "publicReferenceOnly": true,
+      "runtimeEligible": false,
+      "state": "conflicted"
+    },
+    "sourceStates": [
+      {
+        "blockedReasons": [
+          "source_state_conflicted_blocks_pack_output"
+        ],
+        "dataClass": "public_freshness",
+        "packEligible": false,
+        "publicReferenceOnly": true,
+        "runtimeEligible": false,
+        "state": "conflicted"
+      }
+    ],
+    "terms": {
+      "attributionRequired": true,
+      "authorityTier": "official_dataset",
+      "freshnessCadence": "track O*NET production database releases and quarterly review",
+      "lastTermsReviewed": "2026-06-27",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseVersion": "4.0",
+      "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewRequired": false,
+      "sourceID": "onet.database",
+      "termsReviewStatus": "reviewed",
+      "termsURL": "https://www.onetcenter.org/overview.html#data"
+    },
+    "termsValidation": {
+      "issues": [],
+      "packable": true,
+      "r2PackPolicy": "r2_pack_allowed",
+      "r2Ready": true,
+      "redistributionPolicy": "redistributable_with_attribution",
+      "sourceID": "onet.database"
+    }
+  },
+  "schemaVersion": 1
+}

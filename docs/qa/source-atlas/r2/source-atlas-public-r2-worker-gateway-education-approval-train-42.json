@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayApproval.v1",
+  "train": "42",
+  "created_at": "2026-06-28T00:00:00Z",
+  "status": "approved_for_bounded_public_education_gateway_allowlist",
+  "worker": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "r2_binding": "SOURCE_ATLAS_BUCKET"
+  },
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/education_credentialing/current.json",
+    "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+    "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+    "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json"
+  ],
+  "required_controls": [
+    "GET and HEAD only",
+    "no query string or URL fragment",
+    "exact object-key allowlist",
+    "private marker rejection",
+    "public/reference response headers",
+    "no claims, sources, or auxiliary slices exposed through Worker allowlist"
+  ],
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "User asked to continue fast mode toward Source Atlas completion."
+  ],
+  "non_claims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not broad runtime Green",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation",
+    "not a public browsing surface"
+  ]
+}

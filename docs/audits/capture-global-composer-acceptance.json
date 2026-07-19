@@ -1,0 +1,61 @@
+{
+  "issue": "AMB-1736",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baselineSHA": "5d08099531dc08570362cabd9c83a886b1463aea",
+  "scope": "Capture Global Composer Acceptance",
+  "acceptedAsYellow": true,
+  "sourceEvidence": {
+    "globalReachability": [
+      "Native/Ambitions/Stage/Chrome/AppShellContextualToolbarCatalog.swift",
+      "Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift",
+      "Native/Ambitions/Stage/AmbitionsStage.swift"
+    ],
+    "composer": [
+      "Native/Ambitions/App/AppShellActivatedCaptureSeam.swift",
+      "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+      "Native/Ambitions/Composer/Capture/CaptureViewModel.swift"
+    ],
+    "mutationPath": [
+      "Native/Ambitions/App/ShellCommandRouter.swift",
+      "Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CaptureCommands.swift",
+      "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureService.swift"
+    ],
+    "resurfacing": [
+      "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureSnapshot.swift",
+      "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift",
+      "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector03-deeperSections.swift",
+      "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService+SearchResults.swift"
+    ]
+  },
+  "noFakeYellowDecision": "source has composer, local command save, local persistence, Today projection, Memory Lens find-again, and receipt source; runtime proof was not executed",
+  "remainingYellowDebt": [
+    "AMB-1479 visual specification authority repair",
+    "runtime save proof",
+    "composer screenshots",
+    "receipt screenshots",
+    "Today resurfacing screenshot",
+    "VoiceOver proof",
+    "keyboard behavior proof",
+    "Dynamic Type proof",
+    "Reduce Motion proof",
+    "offline/no-account walkthrough",
+    "device proof",
+    "attach/route/park journey proof",
+    "surface:capture label cleanup"
+  ],
+  "testsRun": false,
+  "nonClaims": [
+    "Capture Green",
+    "rendered composer proof",
+    "successful runtime save proof",
+    "screenshot proof",
+    "accessibility conformance",
+    "keyboard behavior proof",
+    "offline/no-account proof",
+    "device proof",
+    "release readiness",
+    "App Store readiness",
+    "AMB-1479 closure"
+  ]
+}

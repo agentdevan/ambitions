@@ -1,0 +1,180 @@
+# Global shell full-bleed completion manifest
+# Status values: not_started, implemented, validated, attached, accepted
+# Codex may move routes to implemented/validated/attached when evidence exists.
+# Independent visual review is required for accepted.
+
+issue: AMB-1180
+status_authority: docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md
+visual_target: docs/design/targets/time/lifeshape_field_visual_target.md
+artifact_manifest: docs/validation/global_shell_artifacts.json
+
+completion_law:
+  global_green_requires_all_routes_accepted: true
+  codex_max_status: visual_review_ready
+  local_paths_are_not_proof: true
+  screenshot_artifacts_must_be_reviewable: true
+  physical_device_required_for_visual_green: true
+  no_partial_global_closeout: true
+
+required_gates:
+  source:
+    - GlobalShellCompletionAudit
+    - FullBleedSurfaceAudit
+    - SeamlessCrownAudit
+    - SeamlessDockAudit
+    - ShellUtilityValueAudit
+    - MaterialContainerBudgetAudit
+    - SurfaceAtmosphereAudit
+    - ShellContentSafetyAudit
+    - RouteDepthChromeAudit
+  scripts:
+    - scripts/ambitions-visual-proof-gate.py
+    - scripts/ambitions-global-shell-completion-gate.py
+
+routes:
+  - id: today.root
+    surface: Today
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: today_reality
+    primary_object: Reality Meridian
+    screenshots: [default, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    accessibility: [voiceover_summary, voiceover_primary_action]
+    status: not_started
+
+  - id: goals.root
+    surface: Goals
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: goals_direction
+    primary_object: Constellation Atlas
+    screenshots: [default, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    accessibility: [voiceover_summary, voiceover_primary_action]
+    status: not_started
+
+  - id: time.root
+    surface: Time
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: time_capacity
+    primary_object: LifeShape Field Band
+    screenshots: [open, protected, pressure, buffer, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    accessibility: [voiceover_summary, voiceover_bucket_actions]
+    status: not_started
+
+  - id: you.root
+    surface: You
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: you_profile
+    primary_object: User System Profile
+    screenshots: [default, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    accessibility: [voiceover_summary, settings_row_actions]
+    status: not_started
+
+  - id: today.step_detail
+    surface: Today
+    route_depth: object_detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: today_reality
+    primary_object: Step Detail
+    screenshots: [default]
+    accessibility: [voiceover_actions]
+    status: not_started
+
+  - id: goals.goal_detail
+    surface: Goals
+    route_depth: object_detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: goals_direction
+    primary_object: Goal Thread Detail
+    screenshots: [default]
+    accessibility: [voiceover_actions]
+    status: not_started
+
+  - id: time.bucket_detail
+    surface: Time
+    route_depth: object_detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: time_capacity
+    primary_object: LifeShape Bucket Detail
+    screenshots: [default, why_this, correction_menu]
+    accessibility: [voiceover_bucket_actions]
+    status: not_started
+
+  - id: you.settings_detail
+    surface: You
+    route_depth: object_detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: you_profile
+    primary_object: Settings Detail
+    screenshots: [default]
+    accessibility: [voiceover_settings_actions]
+    status: not_started
+
+  - id: capture.keyboard
+    surface: Capture
+    route_depth: composer_overlay
+    crown_mode: hidden
+    dock_mode: hidden
+    atmosphere_mode: capture_open_field
+    primary_object: Atmosphere Composer Field
+    screenshots: [collapsed, keyboard, expanded]
+    accessibility: [voiceover_composer, keyboard_safe_area]
+    status: not_started
+
+  - id: search.overlay
+    surface: Search
+    route_depth: search_overlay
+    crown_mode: hidden
+    dock_mode: hidden
+    atmosphere_mode: inspection
+    primary_object: Search Results
+    screenshots: [default]
+    accessibility: [voiceover_results]
+    status: not_started
+
+  - id: closure.overlay
+    surface: Closure
+    route_depth: closure_overlay
+    crown_mode: reduced_close
+    dock_mode: hidden
+    atmosphere_mode: inspection
+    primary_object: Closure Outcome
+    screenshots: [default, proof, undo]
+    accessibility: [voiceover_outcomes]
+    status: not_started
+
+  - id: inspection.proof
+    surface: Inspection
+    route_depth: inspection_overlay
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: inspection
+    primary_object: Proof Inspection
+    screenshots: [default]
+    accessibility: [voiceover_inspection]
+    status: not_started
+
+red_fixtures:
+  - docs/design/red_fixtures/time/current_failed_lifeshape_field.md
+  - docs/design/red_fixtures/time/lifeshape_open_ring_gauge_failure.md
+  - docs/design/red_fixtures/time/lifeshape_pressure_compression_ridge_failure.md
+  - docs/design/red_fixtures/time/lifeshape_context_carried_overlay_failure.md
+
+closeout_requires:
+  - route_evidence_table
+  - attached_or_committed_screenshots
+  - target_vs_actual_critique
+  - shell_integration_proof
+  - accessibility_proof
+  - device_proof_or_yellow_limitation
+  - independent_visual_reviewer_for_visual_green

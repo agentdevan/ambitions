@@ -1,0 +1,75 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-finance-legal-review-train-47.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "cfpb_public_web",
+      "license_name": "CFPB public website text with privacy, third-party, trademark, and media caveats retained",
+      "license_url": "https://www.consumerfinance.gov/privacy/",
+      "non_claims": [
+        "not investment advice",
+        "not tax advice",
+        "not debt advice",
+        "not a personalized financial plan",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.consumerfinance.gov/privacy/",
+      "terms_url": "https://www.consumerfinance.gov/privacy/"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-finance-legal-review-train-47.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "irs_public_web",
+      "license_name": "IRS public website text with privacy, disclosure, third-party, trademark, and media caveats retained",
+      "license_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "non_claims": [
+        "not tax advice",
+        "not legal advice",
+        "not a personalized filing strategy",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "terms_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "license_name": "USA.gov public government-works text with third-party, trademark, and media caveats retained",
+      "license_url": "https://www.usa.gov/government-works",
+      "non_claims": [
+        "not address submission",
+        "not legal advice",
+        "not a custom moving plan",
+        "not private location inference",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "terms_url": "https://www.usa.gov/government-works"
+    }
+  ]
+}

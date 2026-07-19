@@ -1,0 +1,131 @@
+import AmbitionsDesignSystem
+import Foundation
+import XCTest
+
+final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
+    func testAMB582ProofRelationshipTracePrimitiveFamilyContract() {
+        let contract = ProofRelationshipTracePrimitiveFamilyContract.current
+
+        XCTAssertEqual(contract.primitiveID, "proof-relationship-trace-family")
+        XCTAssertEqual(contract.ownerSurface, "Today / Goals / Motion")
+        XCTAssertEqual(contract.productObjects, ["Proof", "Relationship", "Trace", "Receipt"])
+        XCTAssertEqual(contract.stageName, "Proof / Relationship / Trace Primitive Family")
+        XCTAssertEqual(contract.screenshotIdentifier, "ProofRelationshipTracePrimitiveFamily")
+        XCTAssertTrue(contract.replacesStructures.contains("generic trace chips"))
+        XCTAssertTrue(contract.replacesStructures.contains("source proof receipt panels"))
+        XCTAssertTrue(contract.replacesStructures.contains("review trail cards"))
+        XCTAssertTrue(contract.replacesStructures.contains("receipt cards"))
+        XCTAssertEqual(contract.inspectionOrder, [
+            "source",
+            "relationship",
+            "proof",
+            "receipt",
+            "review path",
+            "user inspection"
+        ])
+        XCTAssertTrue(contract.forbiddenPatterns.contains("decorative proof"))
+        XCTAssertTrue(contract.forbiddenPatterns.contains("generic trace chip"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("VoiceOver") })
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.source.semanticState, .trust)
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.relationship.semanticState, .focus)
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.proof.semanticState, .success)
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.receipt.semanticState, .trust)
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.replayTrace.semanticState, .review)
+        XCTAssertEqual(ProofRelationshipTracePrimitiveRole.inspection.semanticState, .protected)
+    }
+
+    func testAMB582MotionCurrentUsesProofRelationshipTracePrimitiveFamily() throws {
+        let root = repoRoot()
+        let motionSource = [
+            try source("Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift", root: root),
+            try source("Native/Ambitions/Stage/Motion/StageMotionRenderer.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentContextViews.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentLaneViews.swift", root: root)
+        ].joined(separator: "\n")
+
+        XCTAssertTrue(motionSource.contains("MotionSourceReceiptAffordance"))
+        XCTAssertTrue(motionSource.contains("motion.current.history-review"))
+        XCTAssertTrue(motionSource.contains("motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole"))
+        XCTAssertTrue(motionSource.contains("return .source"))
+        XCTAssertTrue(motionSource.contains("return .proof"))
+        XCTAssertTrue(motionSource.contains("return .receipt"))
+        XCTAssertTrue(motionSource.contains("return .replayTrace"))
+        XCTAssertTrue(motionSource.contains("return .inspection"))
+
+        XCTAssertFalse(motionSource.contains("AmbitionChip(chip.title"))
+        XCTAssertFalse(motionSource.contains("AmbitionChip(marker.title"))
+        XCTAssertFalse(motionSource.contains("MotionTraceDatum"))
+        XCTAssertFalse(motionSource.contains("MotionFieldFactRow"))
+    }
+
+    func testAMB582GoalReviewTrailAndReceiptsUseProofRelationshipTracePrimitiveFamily() throws {
+        let root = repoRoot()
+        let reviewTrailSource = try source(
+            "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+02-GoalDetailBreadcrumbSurface.swift",
+            root: root
+        )
+        let proofRailAndReceiptsSource = try source(
+            "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+03-GoalDetailProofRailSurface.swift",
+            root: root
+        )
+        let receiptsSource = try section(
+            named: "struct GoalDetailReceiptsSurface",
+            endingBefore: "struct GoalAlternatePathDecisionSpine",
+            in: proofRailAndReceiptsSource
+        )
+
+        XCTAssertTrue(reviewTrailSource.contains("struct GoalDetailReviewTrailSurface"))
+        XCTAssertTrue(reviewTrailSource.contains("ProofRelationshipTracePrimitiveStage("))
+        XCTAssertTrue(reviewTrailSource.contains("ProofRelationshipTracePrimitiveLine("))
+        XCTAssertTrue(reviewTrailSource.contains("goal-detail.review-trail.\\(item.id)"))
+        XCTAssertFalse(reviewTrailSource.contains("WidgetCard(state: item.state)"))
+        XCTAssertFalse(reviewTrailSource.contains("TagPill(item.sourceLabel"))
+        XCTAssertFalse(reviewTrailSource.contains("Label(item.kind.title"))
+
+        XCTAssertTrue(proofRailAndReceiptsSource.contains("struct GoalDetailProofRailSurface"))
+        XCTAssertTrue(proofRailAndReceiptsSource.contains("ProofSpine("))
+        XCTAssertTrue(receiptsSource.contains("struct GoalDetailReceiptsSurface"))
+        XCTAssertTrue(receiptsSource.contains("ProofRelationshipTracePrimitiveStage("))
+        XCTAssertTrue(receiptsSource.contains("ProofRelationshipTracePrimitiveLine("))
+        XCTAssertTrue(receiptsSource.contains("goal-detail.receipts.\\(item.id)"))
+        XCTAssertTrue(receiptsSource.contains("goal-detail.receipts.empty"))
+        XCTAssertFalse(receiptsSource.contains("AppCard(state: item.state)"))
+        XCTAssertFalse(receiptsSource.contains("EmptyStateCard("))
+    }
+
+    func testAMB582PrimitiveRegistryIncludesProofRelationshipTraceFamilyEntry() throws {
+        let registryURL = repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+        guard FileManager.default.fileExists(atPath: registryURL.path) else {
+            throw XCTSkip("Historical primitive registry is not retained in current repo truth.")
+        }
+        let registry = try String(contentsOf: registryURL, encoding: .utf8)
+
+        XCTAssertTrue(registry.contains("| proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 |"))
+        XCTAssertTrue(registry.contains("### proof-relationship-trace-family"))
+        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/relationship-motion/AMB-582-proof-relationship-trace-family.md"))
+        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/proof-relationship-trace-family-amb-582.png"))
+    }
+
+    func section(named startMarker: String, endingBefore endMarker: String, in source: String) throws -> String {
+        let start = try XCTUnwrap(source.range(of: startMarker), "Source section start could not be located for \(startMarker).")
+        let end = try XCTUnwrap(
+            source.range(of: endMarker, range: start.lowerBound..<source.endIndex),
+            "Source section end could not be located for \(startMarker)."
+        )
+        return String(source[start.lowerBound..<end.lowerBound])
+    }
+
+    func source(_ relativePath: String, root: URL) throws -> String {
+        try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
+    func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
+}

@@ -1,0 +1,203 @@
+{
+  "domainProposals": [
+    {
+      "proposal_id": "language-learning-public-reference",
+      "domain": "public_language_learning_reference",
+      "goal_intent_classes": [
+        "learn_language_public_reference",
+        "compare_language_learning_resources"
+      ],
+      "claim_classes": [
+        "learning_resource_reference",
+        "language_standard_reference",
+        "public_program_reference"
+      ],
+      "jurisdictions": [
+        "global",
+        "US"
+      ],
+      "source_classes_required": [
+        "official_institution",
+        "standards_body",
+        "public_catalog",
+        "open_knowledge_graph"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "freshness_slas": [
+        "resource_reference_180d",
+        "standard_reference_365d"
+      ],
+      "candidate_sources": [
+        {
+          "discovery_method": "manual_submission",
+          "publisher_name": "Council of Europe",
+          "publisher_url": "https://www.coe.int/",
+          "declared_jurisdiction": "Europe",
+          "declared_license": "",
+          "declared_rights": "terms review required",
+          "terms_url": "https://www.coe.int/en/web/portal/terms-and-conditions",
+          "rights_url": "https://www.coe.int/en/web/portal/terms-and-conditions",
+          "dataset_url": "https://www.coe.int/en/web/common-european-framework-reference-languages",
+          "distribution_urls": [
+            "https://www.coe.int/en/web/common-european-framework-reference-languages"
+          ],
+          "api_docs_url": "",
+          "source_class_guess": "standards_body",
+          "authority_class_guess": "standards_body",
+          "claim_class_guess": [
+            "language_standard_reference"
+          ],
+          "redistribution_guess": "terms_sensitive"
+        },
+        {
+          "discovery_method": "schema_org_dataset",
+          "publisher_name": "Data.gov catalog",
+          "publisher_url": "https://catalog.data.gov/",
+          "declared_jurisdiction": "US",
+          "declared_license": "catalog metadata only",
+          "declared_rights": "source-of-sources only",
+          "terms_url": "https://www.data.gov/privacy-policy/",
+          "rights_url": "https://www.data.gov/privacy-policy/",
+          "dataset_url": "https://catalog.data.gov/dataset",
+          "distribution_urls": [
+            "https://catalog.data.gov/dataset"
+          ],
+          "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+          "source_class_guess": "public_catalog",
+          "authority_class_guess": "public_catalog",
+          "claim_class_guess": [
+            "public_program_reference"
+          ],
+          "redistribution_guess": "unclear"
+        },
+        {
+          "discovery_method": "open_knowledge_graph_link",
+          "publisher_name": "Wikidata",
+          "publisher_url": "https://www.wikidata.org/",
+          "declared_jurisdiction": "global",
+          "declared_license": "CC0",
+          "declared_rights": "crosswalk metadata only",
+          "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+          "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+          "dataset_url": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+          "distribution_urls": [
+            "https://query.wikidata.org/"
+          ],
+          "api_docs_url": "https://www.wikidata.org/wiki/Wikidata:Data_access",
+          "source_class_guess": "open_knowledge_graph",
+          "authority_class_guess": "open_knowledge_graph",
+          "claim_class_guess": [
+            "language_entity_crosswalk"
+          ],
+          "redistribution_guess": "open_with_attribution"
+        }
+      ],
+      "non_claims": [
+        "not language proficiency assessment",
+        "not admission or credentialing advice"
+      ]
+    },
+    {
+      "proposal_id": "public-service-volunteering-candidate-reference",
+      "domain": "public_service_volunteering_candidate_reference",
+      "goal_intent_classes": [
+        "find_public_service_reference",
+        "compare_volunteering_requirements"
+      ],
+      "claim_classes": [
+        "public_service_opportunity_reference",
+        "training_reference",
+        "eligibility_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "freshness_slas": [
+        "program_reference_90d",
+        "eligibility_reference_60d"
+      ],
+      "candidate_sources": [
+        {
+          "discovery_method": "official_institution_page",
+          "publisher_name": "AmeriCorps",
+          "publisher_url": "https://americorps.gov/",
+          "declared_jurisdiction": "US",
+          "declared_license": "",
+          "declared_rights": "terms review required",
+          "terms_url": "https://americorps.gov/terms",
+          "rights_url": "https://americorps.gov/terms",
+          "dataset_url": "https://americorps.gov/serve",
+          "distribution_urls": [
+            "https://americorps.gov/serve"
+          ],
+          "api_docs_url": "",
+          "source_class_guess": "official_government",
+          "authority_class_guess": "official_government",
+          "claim_class_guess": [
+            "public_service_opportunity_reference",
+            "eligibility_reference"
+          ],
+          "redistribution_guess": "terms_sensitive"
+        },
+        {
+          "discovery_method": "official_institution_page",
+          "publisher_name": "Volunteer.gov",
+          "publisher_url": "https://www.volunteer.gov/",
+          "declared_jurisdiction": "US",
+          "declared_license": "",
+          "declared_rights": "terms review required",
+          "terms_url": "https://www.volunteer.gov/s/terms",
+          "rights_url": "https://www.volunteer.gov/s/terms",
+          "dataset_url": "https://www.volunteer.gov/s/",
+          "distribution_urls": [
+            "https://www.volunteer.gov/s/"
+          ],
+          "api_docs_url": "",
+          "source_class_guess": "official_government",
+          "authority_class_guess": "official_government",
+          "claim_class_guess": [
+            "public_service_opportunity_reference"
+          ],
+          "redistribution_guess": "terms_sensitive"
+        },
+        {
+          "discovery_method": "public_catalog",
+          "publisher_name": "Data.gov catalog",
+          "publisher_url": "https://catalog.data.gov/",
+          "declared_jurisdiction": "US",
+          "declared_license": "catalog metadata only",
+          "declared_rights": "source-of-sources only",
+          "terms_url": "https://www.data.gov/privacy-policy/",
+          "rights_url": "https://www.data.gov/privacy-policy/",
+          "dataset_url": "https://catalog.data.gov/dataset",
+          "distribution_urls": [
+            "https://catalog.data.gov/dataset"
+          ],
+          "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+          "source_class_guess": "public_catalog",
+          "authority_class_guess": "public_catalog",
+          "claim_class_guess": [
+            "public_service_opportunity_reference"
+          ],
+          "redistribution_guess": "unclear"
+        }
+      ],
+      "non_claims": [
+        "not a volunteer placement service",
+        "not guaranteed eligibility"
+      ]
+    }
+  ]
+}

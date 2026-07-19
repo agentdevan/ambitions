@@ -1,0 +1,3816 @@
+{
+  "approvalArtifactID": "source_atlas.missing_shard_review_approval_template.9d58721a24ce073b",
+  "approvalStatus": "template_not_approved",
+  "approvedEvents": [
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.2ee2897f3cd35572",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "language_learning_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.8d79bd46d92dbd52",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "education_credentialing_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.662508c11399b44f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "legal_information_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.9b81cfca039e6ed7",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "occupation_foundation_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.e295e862edfd1a4c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "parenting_education_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.395cf5badae1e115",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "business_entrepreneurship_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b473e4e9b53e301d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "debt_credit_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.5106bf4470141139",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_energy_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.6326a62510584414",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "tax_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.4c9ccf6870bec7b3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_life_admin_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b6114c996c2f95fa",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "estate_planning_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ba8e385cd5a20abe",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "pet_care_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.5b9dba85ac00f2b9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "data_privacy_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.b08c7022119a4760",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "education_credentialing_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.f728b424f77d6521",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "relationships_family_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.c43395d0b26a8c48",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "mental_health_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.565960052c659537",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "occupation_foundation_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.2c3a85f8e285a81e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "digital_security_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.a5ac2dbc24a8bf5e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.dc6416ed6a8de77d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "science_research_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.dd51afaa766fb155",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "caregiving_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.df8d355d70ac122b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_civic_requirements_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.da4e527e5773e6ec",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "procurement_contracting_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.7fe5902c216c2f15",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "sports_fitness_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.50e0f8c72e417b7f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "caregiving_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e9cc883b0b7cbda9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "volunteering_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.32d05aa7f0aca91c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_benefits_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.328db4da75f44674",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "arts_culture_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.2072330feb6c8120",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_life_admin_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.355b51309dd9a20d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "parenting_education_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.446707c3bd8acf50",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "pet_care_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.350f677c4c351fd6",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "chronic_condition_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.5f4e9eb8646b2efa",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "immigration_citizenship_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.94ed4f854bf7c34f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "immigration_citizenship_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.ad0eca04a01a544a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "language_learning_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.3e8c6ca2138b14c5",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "transportation_mobility_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.99cd2f3c18f3ad54",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_life_admin_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.0d08014d35045651",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "language_learning_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.e7fcba8b755aa830",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "hobbies_recreation_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.eab8fa5e8e336e6b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "education_credentialing_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.3de03b977627ac8a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "finance_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.c4e9e31a65ebdae2",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "disaster_preparedness_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.e2b80757af61f700",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "consumer_rights_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.59b13a90c514e6c4",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "consumer_rights_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.b14a48cec6e16595",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "local_services_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.3fb65c7c91b17503",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "finance_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.244e743cf6f6688a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "local_services_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.5646e1a5d5bebf21",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "business_entrepreneurship_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.c34b3f422d178d7d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "accessibility_disability_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.da480d72ef79f212",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "hobbies_recreation_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.71f54210d061a478",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "accessibility_disability_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.35119a7e841989ce",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "retirement_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.a74e711d23118fa3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "parenting_education_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.ac4e2a4304e4609d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "housing_tenancy_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.d676b033926f9c6a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "language_learning_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.b65c5e8745a3ce78",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_civic_requirements_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.53ff83ca68f41b63",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "grants_funding_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.9b1d4c7e57fa2b6d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "accessibility_disability_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.3e244e2b14795813",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "arts_culture_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.25bd6995a2af251e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "food_nutrition_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.20c8a94064945d37",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "data_privacy_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.96cc4d06b2f30103",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "legal_information_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.c0bb2e18c0670769",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "personal_growth_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.6752a73de9748eea",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "legal_information_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.5e497726d05ed3ed",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.ea5b302b0ff63cb9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "housing_tenancy_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.05125ecbbb539e31",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "pet_care_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.9937af901b82e9e9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "transportation_mobility_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b928a2ec8b774d9e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "estate_planning_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.253f41ea2bb74c9b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "arts_culture_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.1c8c32572079ce29",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "data_privacy_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.cf763efd9a6b1309",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_energy_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.f0c04490208cfb14",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "disaster_preparedness_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.0e3cc619b0cd6141",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "mental_health_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.a8ee6ca5e7a78c71",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "procurement_contracting_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e471b0afc1e196ba",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "estate_planning_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.c96986ff09ffdfc7",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "environmental_sustainability_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.3457c578111b6d7d",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "eldercare_aging_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.a8af08f624b83fa5",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "creative_project_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.fb7bd475acc043ed",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "volunteering_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.ce1c8126ca1c2e5e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "environmental_sustainability_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.7ffe5a99357592a1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ec2a065f2cb06c09",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "finance_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.20550774a4ea85ba",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "nonprofit_operations_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.92952bef33958f34",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "creative_project_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.ec698aeecd66e720",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_safety_emergency_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.596b687d39d66259",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "procurement_contracting_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.4189e561695bdacb",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "volunteering_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.f8c79a61ff244e98",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "transportation_mobility_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.1d6d75e46e2c5ff3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_benefits_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.b1d3318bd589a516",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "creative_project_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.54ab39d96fc05420",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "arts_culture_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.29493d8d7665c526",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.adc74623ecac244e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "nonprofit_operations_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.dd3d11fc4b6daa57",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "civic_participation_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.ba999939e4094590",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "travel_relocation_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.b9b1bf879bfff99c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_benefits_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.fe0d87dc077402f9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "civic_participation_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.03c112414965fc2f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_safety_emergency_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.8f76159fc09dd1a0",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "education_credentialing_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.11b3b651e38a278f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "grants_funding_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.62c0ec149baa1168",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "science_research_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.9d659153d9160407",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "childcare_family_services_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.d390afaf33785328",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "hobbies_recreation_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.300cf0a20dbb02a4",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "disaster_preparedness_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.5ad57c1f666a26f1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "civic_participation_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.37564354cd8ee2d8",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.fffe69b25cbf3d63",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "mental_health_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.e33d16dc47fef4b1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "sports_fitness_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.803edf5a9f3b760a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "relationships_family_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.1832d26dabfcc42a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_energy_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.e7a2687692321a8a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "agricultural_gardening_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.e8f08a96d23af1a5",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "occupation_foundation_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.da3603617c91e0f8",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "nonprofit_operations_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.35bad766ec3378b1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "sports_fitness_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.19a5450bd0b7e6ea",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "disaster_preparedness_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.310a0c183bcafd9e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "agricultural_gardening_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.1babf69fe16adb1b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "childcare_family_services_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.6f96b1e005c71a47",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_civic_requirements_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.7ad2099461ee8507",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "grants_funding_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.46a29189e10c8850",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "tax_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.82bbd3b430d84a66",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "retirement_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.df43d887a9ae4ce3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "local_services_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.fd038d90daf7423e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "agricultural_gardening_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.984e332d56b8cd72",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "debt_credit_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.ee15feb5709d8001",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "immigration_citizenship_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.792ce43231820c22",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "agricultural_gardening_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.d2bef54322a34b5a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "childcare_family_services_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.ee50e7e6c37055db",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "procurement_contracting_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.8812bd37c3bd4b3f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "estate_planning_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.c6953d1ef93976e0",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_civic_requirements_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e90a2a9678c44e91",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "chronic_condition_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ead7ac17be5a0935",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "insurance_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.4a5dd9a9b682ef4e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "personal_growth_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.914a5510ea6fb350",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "digital_security_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.06982810fd5ea66e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "eldercare_aging_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.da13a498af183de3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "business_entrepreneurship_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.2eabb04de43a0dc3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "sports_fitness_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.52f0fc0f4f99e385",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "food_nutrition_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.27bd791dc443e7bb",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "immigration_citizenship_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.aa40eaf045dd172a",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "relationships_family_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.a7af78a01fab3cc7",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "retirement_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.f5e7185baba2a5b9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "insurance_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.9cf5e407889e010f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "civic_participation_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.98a56772ca5927b0",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "environmental_sustainability_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.a24dd6d98f1fe9db",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "mental_health_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.be5f9fb81c9f75bc",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "pet_care_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.69e7415270409e35",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "accessibility_disability_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.65cd2e542e2d7bd0",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "legal_information_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.d8df5c33d9633634",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "hobbies_recreation_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.1d1d7aec19fad2b9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "personal_growth_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.affad8b68b902db5",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "insurance_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.84b290f6322e5707",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_safety_emergency_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.294721ad480053ea",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "science_research_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.f226352be8b0530f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "consumer_rights_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.7242987078c36850",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "food_nutrition_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.7fc25991996031b1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "environmental_sustainability_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.9af3db315937ef28",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "digital_security_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.a056d947fafc3475",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "travel_relocation_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.f0b146657b31c158",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "parenting_education_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.f10fb4dd21b11dd4",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "business_entrepreneurship_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.9ad98c8595f8558f",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "housing_tenancy_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.3559bb79ec34f019",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "consumer_rights_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.41c2e53a843a5ceb",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "debt_credit_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.dd47b9b9e57793ca",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "science_research_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.fe3e062b53673107",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "eldercare_aging_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.c49ebd99d5ae60d9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "personal_growth_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.7c5050fb8ed06468",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "chronic_condition_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.815c37e1351a4d4b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "debt_credit_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.71fed4c903ae20cb",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "caregiving_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.4543d8b403b269e9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "childcare_family_services_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.4e55a80d858e896b",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "caregiving_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.f26f7cbcfe8b2ccd",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "data_privacy_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.05e29000f1dfbc49",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "chronic_condition_public_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.bd5eb16ede8bf1f4",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "relationships_family_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.373543cd2d8ee60c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "grants_funding_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.e894465adf717812",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.538a5ee8454c81b3",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "occupation_foundation_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.0b1d16bc22e4c8e6",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "travel_relocation_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.459d47ce19ba507c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "finance_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.615e4a551f857fe6",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_energy_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.d8547ec20bfe37c8",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "local_services_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.1a297942d2cb4a2c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "volunteering_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.1c790b526a84ef9e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "eldercare_aging_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.7f9209c20228ab66",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "tax_public_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.e20e0d4d936109e9",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "transportation_mobility_reference_official_sources"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.57b7b9a853451ac2",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "tax_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.dba43c7d1567b7ee",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "travel_relocation_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.e67cb7671b71fdc7",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "home_life_admin_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.344f0c8fecfcbd32",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "retirement_public_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.0fd126bb990ae90c",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "digital_security_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.7caf7ee0c97d50e1",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "housing_tenancy_reference_costs_fees_and_funding"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.6663baa363c85988",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_safety_emergency_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.25032cc10385d2ed",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "insurance_public_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.f400a708cf4548c7",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_eligibility_and_scope"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.999cc4e64f9517de",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "public_benefits_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.152be9502cda5b6e",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "health_wellness_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.633693499cf6ecef",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "nonprofit_operations_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.e78d4fe0ae505439",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "creative_project_reference_documentation_and_source_citations"
+    },
+    {
+      "candidateStateBeforeApproval": "candidate_only_until_approved",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.57d8a99f8c2ae2ad",
+      "requiredEntries": [
+        "sourceLaneEntry",
+        "legalTermsEntry",
+        "apiPolicyEntry"
+      ],
+      "requiredGateDecisions": {
+        "apiPolicyReview": "approved",
+        "legalTermsReview": "approved",
+        "noPrivateDataScan": "passed",
+        "ownerApproval": "approved_or_not_required",
+        "publicReferenceClassification": "passed",
+        "sourceLaneReview": "approved"
+      },
+      "subdomainID": "food_nutrition_reference_documentation_and_source_citations"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.missingShardReviewApproval.v1",
+  "nonClaims": [
+    "template only",
+    "not approval",
+    "not registry mutation"
+  ],
+  "outsideLegalStatus": "not_claimed",
+  "reviewOwner": "",
+  "reviewedAt": "",
+  "selectedEventIDs": []
+}

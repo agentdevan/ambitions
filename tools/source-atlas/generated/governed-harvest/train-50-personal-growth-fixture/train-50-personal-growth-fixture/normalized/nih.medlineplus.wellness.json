@@ -1,0 +1,495 @@
+{
+  "adapterID": "nih_medlineplus_wellness_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_medlineplus_wellness_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_wellness_topic_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_wellness_learning_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.1d7eb91dfd94ffb2",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "MedlinePlus wellness public reference pages",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "personal_growth_wellness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.6f17f9b7b64f88da",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "wellness and lifestyle topic summaries",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "personal_growth_wellness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.c3639f470775c82e",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "stress and sleep wellness topics",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_institution",
+      "checksum": "checksum.0d90b1247254b607",
+      "claimType": "public_learning_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly MedlinePlus wellness topic and content-use terms re-review",
+      "id": "claim.84f3def6d2624587",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://medlineplus.gov/about/using/usingcontent/",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Library of Medicine / National Institutes of Health",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://medlineplus.gov/",
+      "state": "source_backed",
+      "text": "MedlinePlus publishes public wellness and lifestyle topic summaries as official National Library of Medicine learning-reference context, not mental health treatment, diagnosis, a clinical recommendation, or a cloud-personalized self-improvement plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_institution",
+      "checksum": "checksum.197382cca27fc8d2",
+      "claimType": "sensitive_wellness_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly MedlinePlus wellness topic and content-use terms re-review",
+      "id": "claim.cf432cc92cd1aa2d",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://medlineplus.gov/about/using/usingcontent/",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Library of Medicine / National Institutes of Health",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://medlineplus.gov/",
+      "state": "source_backed",
+      "text": "MedlinePlus publishes public stress, sleep, and wellness topic summaries as sensitive wellness reference context that may inform local inspection, not diagnosis, treatment, emergency advice, therapy, or individualized health guidance.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "nih_medlineplus_wellness_reference_adapter",
+    "atomCount": 3,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "personal_growth",
+    "edgeCount": 2,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_institution",
+    "sourceCount": 1,
+    "sourceLane": "nih.medlineplus.wellness",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_learning_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateClinicalRecommendation": true,
+      "doesNotCreateCloudPersonalizedPlan": true,
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreateMentalHealthTreatment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.personalGrowthCoverage.v1",
+      "label": "MedlinePlus wellness and lifestyle public learning reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "subject": "personal_growth.medlineplus_wellness_topics"
+    },
+    {
+      "claimType": "sensitive_wellness_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateClinicalRecommendation": true,
+      "doesNotCreateCloudPersonalizedPlan": true,
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreateMentalHealthTreatment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.personalGrowthCoverage.v1",
+      "label": "MedlinePlus stress and sleep public wellness reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "subject": "personal_growth.medlineplus_stress_sleep_topics"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "personal_growth",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.1d7eb91dfd94ffb2",
+      "id": "edge.bcb03462400a2c53",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_wellness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "toAtomID": "atom.6f17f9b7b64f88da",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.1d7eb91dfd94ffb2",
+      "id": "edge.02da409f82acbb82",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_wellness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "toAtomID": "atom.c3639f470775c82e",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.1d7eb91dfd94ffb2",
+        "atom.6f17f9b7b64f88da",
+        "atom.c3639f470775c82e"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.bcb03462400a2c53",
+        "edge.02da409f82acbb82"
+      ],
+      "id": "lattice.b11591bff832f087",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "nih_medlineplus_wellness_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "personal_growth",
+      "id": "pack_candidate.032a5bd628785b52",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 3,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 2,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "nih.medlineplus.wellness"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_institution",
+      "contentHash": "1947c55afd47cc08b05694bb00fbbccef22ad84f5b98ae234d059664e0d4c319",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly MedlinePlus wellness topic and content-use terms re-review",
+      "id": "provenance.4f268be158e282d8",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "MedlinePlus health topic summaries are public-domain federal content with acknowledgement requested; copyrighted vendor drug, supplement, encyclopedia, image, and third-party content excluded",
+      "locator": "https://medlineplus.gov/",
+      "publicReferenceOnly": true,
+      "publisher": "National Library of Medicine / National Institutes of Health",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "nih.medlineplus.wellness",
+      "sourceState": "current",
+      "sourceURL": "https://medlineplus.gov/",
+      "termsURL": "https://medlineplus.gov/about/using/usingcontent/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.84f3def6d2624587",
+      "dataClass": "public_requirement",
+      "gateType": "public_personal_growth_learning_reference_only",
+      "id": "requirement.e23c156adaa7593f",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.cf432cc92cd1aa2d",
+      "dataClass": "public_requirement",
+      "gateType": "sensitive_wellness_reference_only",
+      "id": "requirement.302e80b7de0d64f8",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.4f268be158e282d8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nih.medlineplus.wellness"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "nih.medlineplus.wellness",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_institution",
+    "freshnessCadence": "quarterly MedlinePlus wellness topic and content-use terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "MedlinePlus health topic summaries are public-domain federal content with acknowledgement requested; copyrighted vendor drug, supplement, encyclopedia, image, and third-party content excluded",
+    "licenseVersion": "current MedlinePlus content reuse posture",
+    "publisher": "National Library of Medicine / National Institutes of Health",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "nih.medlineplus.wellness",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://medlineplus.gov/about/using/usingcontent/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "nih.medlineplus.wellness"
+  }
+}

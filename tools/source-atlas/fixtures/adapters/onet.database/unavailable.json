@@ -1,0 +1,394 @@
+{
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "kind": "ambitions.sourceAtlas.adapterFixture.v1",
+  "payload": {
+    "adapterID": "onet_public_reference_adapter",
+    "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+    "atoms": [
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.332e7c95c8ccb2d0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "engineering and technology",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4e0737455bcd67e0",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "mathematics",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c56a8393ea20215c",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "medicine and dentistry",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.4ff35c839a052b1b",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "education and training",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.70a38eb3197e9d36",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "law and government",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.c0ef10d9d99d9323",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "business and management",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "atomType": "knowledge",
+        "dataClass": "public_atom_edge_lattice",
+        "id": "atom.868e8049c0083367",
+        "kind": "ambitions.sourceAtlas.atom.v1",
+        "label": "communications and media",
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "claims": [],
+    "coverage": {
+      "adapter": "onet_public_reference_adapter",
+      "atomCount": 7,
+      "claimCount": 0,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "occupation",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "unavailable",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "blocked",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "blocked",
+      "redistributionStatus": "redistributable_with_attribution",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 0,
+      "scenarioCoverage": [
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state unavailable",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_dataset",
+      "sourceCount": 1,
+      "sourceLane": "onet.database",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    "coverageRecords": [],
+    "createdAt": "2026-06-27T00:00:00Z",
+    "crosswalks": [],
+    "dataClass": "official_public_source",
+    "domain": "occupation",
+    "edges": [],
+    "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+    "lattices": [
+      {
+        "atomIDs": [
+          "atom.332e7c95c8ccb2d0",
+          "atom.4e0737455bcd67e0",
+          "atom.c56a8393ea20215c",
+          "atom.4ff35c839a052b1b",
+          "atom.70a38eb3197e9d36",
+          "atom.c0ef10d9d99d9323",
+          "atom.868e8049c0083367"
+        ],
+        "dataClass": "public_atom_edge_lattice",
+        "edgeIDs": [],
+        "id": "lattice.538cce9965f54de7",
+        "kind": "ambitions.sourceAtlas.lattice.v1",
+        "publicReferenceOnly": true,
+        "recipeIDs": [],
+        "schemaVersion": 1,
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "nonClaims": [
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "does not gather private user data",
+      "does not claim legal, privacy, release, or R2 production readiness"
+    ],
+    "packCandidates": [],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "provenance": [
+      {
+        "authorityTier": "official_dataset",
+        "contentHash": "f013f044a1855767d53f4a51075d9f45d0da1b7a7d203fb83ac83228026e3130",
+        "dataClass": "public_provenance",
+        "freshnessCadence": "track O*NET production database releases and quarterly review",
+        "id": "provenance.a25c1112a4b24f8e",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.provenance.v1",
+        "license": "Creative Commons Attribution 4.0 International",
+        "locator": "https://www.onetcenter.org/database.html",
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+        "retrievedAt": "2026-06-27T00:00:00Z",
+        "schemaVersion": 1,
+        "sourceID": "onet.database",
+        "sourceState": "unavailable",
+        "sourceURL": "https://www.onetcenter.org/database.html",
+        "termsURL": "https://www.onetcenter.org/overview.html#data",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "publicReferenceOnly": true,
+    "recipes": [
+      {
+        "dataClass": "public_recipe",
+        "doesNotCreateFinalSchedule": true,
+        "doesNotStoreFinalUserPath": true,
+        "id": "recipe.e1bb018ff0f83a56",
+        "inputAtomIDs": [
+          "atom.332e7c95c8ccb2d0",
+          "atom.4e0737455bcd67e0",
+          "atom.c56a8393ea20215c",
+          "atom.4ff35c839a052b1b",
+          "atom.70a38eb3197e9d36"
+        ],
+        "kind": "ambitions.sourceAtlas.recipe.v1",
+        "localRuntimeJoinRequired": true,
+        "outputAtomIDs": [
+          "atom.c0ef10d9d99d9323",
+          "atom.868e8049c0083367"
+        ],
+        "provenanceIDs": [
+          "provenance.6c27ea4b39020693"
+        ],
+        "publicReferenceOnly": true,
+        "requirementIDs": [],
+        "schemaVersion": 1,
+        "sourceIDs": [
+          "onet.database"
+        ],
+        "title": "Broad occupational foundation recipe",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "requirements": [],
+    "schemaVersion": 1,
+    "sourceID": "onet.database",
+    "sourceState": {
+      "blockedReasons": [
+        "source_state_unavailable_blocks_pack_output"
+      ],
+      "dataClass": "public_freshness",
+      "packEligible": false,
+      "publicReferenceOnly": true,
+      "runtimeEligible": false,
+      "state": "unavailable"
+    },
+    "sourceStates": [
+      {
+        "blockedReasons": [
+          "source_state_unavailable_blocks_pack_output"
+        ],
+        "dataClass": "public_freshness",
+        "packEligible": false,
+        "publicReferenceOnly": true,
+        "runtimeEligible": false,
+        "state": "unavailable"
+      }
+    ],
+    "terms": {
+      "attributionRequired": true,
+      "authorityTier": "official_dataset",
+      "freshnessCadence": "track O*NET production database releases and quarterly review",
+      "lastTermsReviewed": "2026-06-27",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseVersion": "4.0",
+      "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewRequired": false,
+      "sourceID": "onet.database",
+      "termsReviewStatus": "reviewed",
+      "termsURL": "https://www.onetcenter.org/overview.html#data"
+    },
+    "termsValidation": {
+      "issues": [],
+      "packable": true,
+      "r2PackPolicy": "r2_pack_allowed",
+      "r2Ready": true,
+      "redistributionPolicy": "redistributable_with_attribution",
+      "sourceID": "onet.database"
+    }
+  },
+  "schemaVersion": 1
+}

@@ -1,0 +1,103 @@
+{
+  "admissionFallbackUsed": true,
+  "admissionGateValid": true,
+  "admissionPath": "tools/source-atlas/generated/production-domain-admission/train-131-volunteering-production/production-domain-admission-report.json",
+  "allowedClaims": [
+    "bounded_production_target_for_configured_frontiers",
+    "bounded_production_target_per_ready_frontier"
+  ],
+  "domain": "volunteering_public_reference",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionTargetLedgerOrAdmissionGate.v1",
+  "ledgerGate": {
+    "allowedClaims": [
+      "bounded_production_target_for_configured_frontiers",
+      "bounded_production_target_per_ready_frontier"
+    ],
+    "issues": [
+      "volunteering_public_reference: not bounded production target ready in production target ledger"
+    ],
+    "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+    "ledgerID": "source-atlas/production-target-ledger/c4a7286daa308aac",
+    "ledgerPath": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+    "missingDomains": [
+      "volunteering_public_reference"
+    ],
+    "nonClaims": [
+      "not literal universal coverage",
+      "not full Source Atlas Green",
+      "not Release Green",
+      "not outside legal approval",
+      "not final user plans, schedules, or Steps"
+    ],
+    "overallReadinessStatus": "configured_frontiers_bounded_production_target_ready",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "readyDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "requestedDomains": [
+      "volunteering_public_reference"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "valid": false
+  },
+  "ledgerGateValid": false,
+  "ledgerPath": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+  "missingDomains": [],
+  "nonClaims": [
+    "not production target ledger Green until post-R2 ledger is regenerated",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not outside legal approval",
+    "not final user plans, schedules, or Steps"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionDomainAdmissionValidation": {
+    "admissionDecision": "ready_for_initial_production_r2_upload",
+    "admissionID": "source_atlas.production_domain_admission.1da712f29c0b9c74",
+    "artifactSHA256": "f135e3f0565490a823b9a3d5da4a6b7b62cf4ff24355b25365bd3cb00d67edd3",
+    "domain": "volunteering_public_reference",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionDomainAdmission.v1",
+    "path": "tools/source-atlas/generated/production-domain-admission/train-131-volunteering-production/production-domain-admission-report.json",
+    "privacyIssues": [],
+    "schemaVersion": 1,
+    "status": "Green",
+    "valid": true
+  },
+  "readyDomains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "health_wellness_reference_ca_statistics",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "requestedDomains": [
+    "volunteering_public_reference"
+  ],
+  "required": true,
+  "schemaVersion": 1,
+  "valid": true
+}

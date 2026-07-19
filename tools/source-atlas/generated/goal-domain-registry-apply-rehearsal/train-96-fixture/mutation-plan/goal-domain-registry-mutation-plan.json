@@ -1,0 +1,331 @@
+{
+  "activeRegistryMutations": [],
+  "allowActiveRegistryWrite": false,
+  "blockedRegistryMutations": [],
+  "compatibleReviewCompletionIntakeVersionID": "source-atlas-goal-domain-review-completion-intake-train-93",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.goalDomainRegistryMutationPlan.v1",
+  "nonClaims": [
+    "goal-domain registry mutation planning only",
+    "not active registry mutation",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "plannedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "apiPolicyEntry": {
+        "api_mode": "static_https_fixture_first",
+        "api_policy_id": "api.fixture_goal_domain_ambiguous_public_program_reference.v1",
+        "backoff_policy": "exponential_jitter",
+        "budget_owner": "source-atlas-foundry",
+        "circuit_breaker_policy": "stop_after_retry_budget",
+        "daily_budget_limit": 10,
+        "env_var_name": "",
+        "evidence_output_policy": "public_reference_metadata_only",
+        "execute_flag_required": true,
+        "high_volume_review_required": false,
+        "key_required": false,
+        "live_flag_required": true,
+        "max_pages_per_run": 5,
+        "max_records_per_run": 5,
+        "missing_key_behavior": "no_key_required",
+        "monthly_budget_limit": 300,
+        "rate_limit_per_minute": 30,
+        "rate_limit_per_second": 1,
+        "retry_policy": "retry_429_500_502_503_504_only",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "fixture.goal_domain.ambiguous_public_program_reference",
+        "timeout_seconds": 120
+      },
+      "blockingReasons": [
+        "planner_does_not_write_active_registries",
+        "separate_registry_apply_required"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.6df7d4db56f369d8",
+      "claimOutputAllowed": false,
+      "completionStatus": "completed_review_ready_for_registry_apply_planning",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "legalTermsEntry": {
+        "approval_artifact_path": "",
+        "attribution_required": true,
+        "commercial_use_allowed": false,
+        "effective_date": "2026-06-28",
+        "expires_at": "2026-12-28",
+        "license_id": "fixture.goal_domain.ambiguous_public_program_reference.terms",
+        "license_name": "fixture.goal_domain.ambiguous_public_program_reference.terms",
+        "license_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/license",
+        "lookup_output_allowed": true,
+        "modification_allowed": false,
+        "non_claims": [
+          "planned legal/terms entry only",
+          "not legal approval by itself",
+          "not outside legal approval without artifact"
+        ],
+        "outside_legal_required": false,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": true,
+        "redistribution_allowed": true,
+        "review_owner": "Ambitions owner technical rehearsal fixture",
+        "review_required": false,
+        "reviewed_at": "2026-06-28",
+        "rights_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/rights",
+        "schema_version": "1.0.0",
+        "share_alike_required": false,
+        "source_specific_restrictions": [
+          "planned registry entry requires separate registry apply review"
+        ],
+        "terms_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/terms"
+      },
+      "matchedDomainID": "business_entrepreneurship",
+      "mutationID": "source_atlas_goal_domain_registry_mutation.c5ded93a5010bb3f",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "planned registry mutation only",
+        "not active registry mutation",
+        "not claim output",
+        "not R2 publish"
+      ],
+      "packOutputAllowed": false,
+      "publicReferenceOnly": true,
+      "r2PublishAllowed": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "sourceLaneEntry": {
+        "allowed_artifact_classes": [
+          "official_public_source",
+          "public_reference_claim",
+          "public_requirement",
+          "public_provenance"
+        ],
+        "api_mode": "static_https_fixture_first",
+        "api_policy_id": "api.fixture_goal_domain_ambiguous_public_program_reference.v1",
+        "attribution_required": true,
+        "authority_class": "official_government",
+        "budget_policy_id": "budget.fixture_goal_domain_ambiguous_public_program_reference.v1",
+        "claim_classes_allowed": [
+          "public_reference_claim"
+        ],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "personalized_plan"
+        ],
+        "crosswalk_policy": "not_crosswalk_source",
+        "domain_scope": [
+          "business_entrepreneurship"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "freshness_sla": "review_required_before_pack_output",
+        "jurisdiction": "US",
+        "last_reviewed_at": "2026-06-28",
+        "license_id": "fixture.goal_domain.ambiguous_public_program_reference.terms",
+        "license_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/license",
+        "lookup_policy": "lookup_allowed_public_reference_only",
+        "next_review_due_at": "2026-12-28",
+        "non_claims": [
+          "planned source-lane entry only",
+          "not active registry mutation",
+          "not legal approval"
+        ],
+        "r2_object_key_prefix": "source-atlas/v1/stable/goal-domain-rehearsal/ambiguous_public_program_reference",
+        "r2_pack_policy": "pack_allowed_with_attribution",
+        "rate_policy_id": "rate.fixture_goal_domain_ambiguous_public_program_reference.v1",
+        "redistribution_policy": "redistributable_with_attribution",
+        "review_owner": "Ambitions owner technical rehearsal fixture",
+        "review_required": false,
+        "review_status": "reviewed",
+        "rights_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/rights",
+        "schema_version": "1.0.0",
+        "secret_policy_id": "secret.no_secret_static_page.v1",
+        "source_class": "official_government",
+        "source_id": "fixture.goal_domain.ambiguous_public_program_reference",
+        "source_name": "Fixture Public Reference Publisher ambiguous_public_program_reference",
+        "terms_url": "https://example.gov/source-atlas/ambiguous_public_program_reference/terms"
+      },
+      "status": "dry_run_ready_for_separate_registry_apply"
+    },
+    {
+      "activeRegistryWritten": false,
+      "apiPolicyEntry": {
+        "api_mode": "static_https_fixture_first",
+        "api_policy_id": "api.fixture_goal_domain_new_language_learning_public_reference.v1",
+        "backoff_policy": "exponential_jitter",
+        "budget_owner": "source-atlas-foundry",
+        "circuit_breaker_policy": "stop_after_retry_budget",
+        "daily_budget_limit": 10,
+        "env_var_name": "",
+        "evidence_output_policy": "public_reference_metadata_only",
+        "execute_flag_required": true,
+        "high_volume_review_required": false,
+        "key_required": false,
+        "live_flag_required": true,
+        "max_pages_per_run": 5,
+        "max_records_per_run": 5,
+        "missing_key_behavior": "no_key_required",
+        "monthly_budget_limit": 300,
+        "rate_limit_per_minute": 30,
+        "rate_limit_per_second": 1,
+        "retry_policy": "retry_429_500_502_503_504_only",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "fixture.goal_domain.new_language_learning_public_reference",
+        "timeout_seconds": 120
+      },
+      "blockingReasons": [
+        "planner_does_not_write_active_registries",
+        "separate_registry_apply_required"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.26d48f973e5270f6",
+      "claimOutputAllowed": false,
+      "completionStatus": "completed_review_ready_for_registry_apply_planning",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "legalTermsEntry": {
+        "approval_artifact_path": "",
+        "attribution_required": true,
+        "commercial_use_allowed": false,
+        "effective_date": "2026-06-28",
+        "expires_at": "2026-12-28",
+        "license_id": "fixture.goal_domain.new_language_learning_public_reference.terms",
+        "license_name": "fixture.goal_domain.new_language_learning_public_reference.terms",
+        "license_url": "https://example.gov/source-atlas/new_language_learning_public_reference/license",
+        "lookup_output_allowed": true,
+        "modification_allowed": false,
+        "non_claims": [
+          "planned legal/terms entry only",
+          "not legal approval by itself",
+          "not outside legal approval without artifact"
+        ],
+        "outside_legal_required": false,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": true,
+        "redistribution_allowed": true,
+        "review_owner": "Ambitions owner technical rehearsal fixture",
+        "review_required": false,
+        "reviewed_at": "2026-06-28",
+        "rights_url": "https://example.gov/source-atlas/new_language_learning_public_reference/rights",
+        "schema_version": "1.0.0",
+        "share_alike_required": false,
+        "source_specific_restrictions": [
+          "planned registry entry requires separate registry apply review"
+        ],
+        "terms_url": "https://example.gov/source-atlas/new_language_learning_public_reference/terms"
+      },
+      "matchedDomainID": null,
+      "mutationID": "source_atlas_goal_domain_registry_mutation.1a5409111678293b",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "planned registry mutation only",
+        "not active registry mutation",
+        "not claim output",
+        "not R2 publish"
+      ],
+      "packOutputAllowed": false,
+      "publicReferenceOnly": true,
+      "r2PublishAllowed": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "sourceLaneEntry": {
+        "allowed_artifact_classes": [
+          "official_public_source",
+          "public_reference_claim",
+          "public_requirement",
+          "public_provenance"
+        ],
+        "api_mode": "static_https_fixture_first",
+        "api_policy_id": "api.fixture_goal_domain_new_language_learning_public_reference.v1",
+        "attribution_required": true,
+        "authority_class": "official_government",
+        "budget_policy_id": "budget.fixture_goal_domain_new_language_learning_public_reference.v1",
+        "claim_classes_allowed": [
+          "public_reference_claim"
+        ],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "personalized_plan"
+        ],
+        "crosswalk_policy": "not_crosswalk_source",
+        "domain_scope": [
+          "public_language_learning_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "freshness_sla": "review_required_before_pack_output",
+        "jurisdiction": "US",
+        "last_reviewed_at": "2026-06-28",
+        "license_id": "fixture.goal_domain.new_language_learning_public_reference.terms",
+        "license_url": "https://example.gov/source-atlas/new_language_learning_public_reference/license",
+        "lookup_policy": "lookup_allowed_public_reference_only",
+        "next_review_due_at": "2026-12-28",
+        "non_claims": [
+          "planned source-lane entry only",
+          "not active registry mutation",
+          "not legal approval"
+        ],
+        "r2_object_key_prefix": "source-atlas/v1/stable/goal-domain-rehearsal/new_language_learning_public_reference",
+        "r2_pack_policy": "pack_allowed_with_attribution",
+        "rate_policy_id": "rate.fixture_goal_domain_new_language_learning_public_reference.v1",
+        "redistribution_policy": "redistributable_with_attribution",
+        "review_owner": "Ambitions owner technical rehearsal fixture",
+        "review_required": false,
+        "review_status": "reviewed",
+        "rights_url": "https://example.gov/source-atlas/new_language_learning_public_reference/rights",
+        "schema_version": "1.0.0",
+        "secret_policy_id": "secret.no_secret_static_page.v1",
+        "source_class": "official_government",
+        "source_id": "fixture.goal_domain.new_language_learning_public_reference",
+        "source_name": "Fixture Public Reference Publisher new_language_learning_public_reference",
+        "terms_url": "https://example.gov/source-atlas/new_language_learning_public_reference/terms"
+      },
+      "status": "dry_run_ready_for_separate_registry_apply"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 0,
+    "claims": 0,
+    "completedReviewPackets": 8,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "plannedApiPolicyEntries": 2,
+    "plannedLegalTermsEntries": 2,
+    "plannedRegistryMutations": 2,
+    "plannedSourceLaneEntries": 2,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewBundles": 2
+  },
+  "reviewCompletionsPath": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/goal-domain-review-completions.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-registry-mutation-plan-train-94"
+}

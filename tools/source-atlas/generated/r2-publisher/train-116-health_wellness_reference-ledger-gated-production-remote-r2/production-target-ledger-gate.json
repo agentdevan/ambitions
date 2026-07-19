@@ -1,0 +1,41 @@
+{
+  "allowedClaims": [
+    "bounded_production_target_for_configured_frontiers",
+    "bounded_production_target_per_ready_frontier"
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+  "ledgerID": "source-atlas/production-target-ledger/fbc71d15fa21f502",
+  "ledgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+  "missingDomains": [],
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not outside legal approval",
+    "not final user plans, schedules, or Steps"
+  ],
+  "overallReadinessStatus": "configured_frontiers_bounded_production_target_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "readyDomains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "health_wellness_reference_ca_statistics",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "requestedDomains": [
+    "health_wellness_reference"
+  ],
+  "required": true,
+  "schemaVersion": 1,
+  "valid": true
+}

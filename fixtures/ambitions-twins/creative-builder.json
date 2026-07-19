@@ -1,0 +1,16 @@
+{
+  "id": "creative-builder",
+  "goals": [
+    {"title": "Launch a creative portfolio", "state": "warming", "privacy": "private"}
+  ],
+  "captures": [
+    {"text": "Collect three strongest project screenshots", "state": "ready_to_place"}
+  ],
+  "time_context": {"capacity": "variable", "constraints": ["evening energy"]},
+  "proof_receipts": [{"kind": "project_artifact", "state": "available"}],
+  "recovery_state": {"mode": "alternate_path", "tone": "encouraging"},
+  "privacy_mode": "standard",
+  "source_freshness_state": {"state": "user_confirmed", "review_required": false},
+  "accessibility_variant": {"dynamic_type": "large", "reduce_motion": false},
+  "expected_surface_states": {"Today": "first_useful_object", "Goals": "normal", "Capture": "normal", "Time": "normal", "You": "normal"}
+}

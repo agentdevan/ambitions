@@ -1,0 +1,1394 @@
+{
+  "allowedCategories": [
+    "canonical_entity",
+    "value_object",
+    "command_payload",
+    "event_payload",
+    "projection_dto",
+    "ui_model",
+    "adapter_dto",
+    "obsolete"
+  ],
+  "debt": {
+    "lowConfidenceDefaultFiles": [],
+    "mechanicalSuffixFiles": [],
+    "obsoleteBucketFiles": [],
+    "uiModelFilesStillInDomain": []
+  },
+  "entries": [
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ActionReceiptSourceDomain.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphConstraint.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphLineageModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphOperationalRecord.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionRecord.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStoreProjector.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphRecommendationTrace.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphRecoveryThread.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphSnapshot.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/CapacityShape.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/Capture.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/CaptureIntake.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureRoute.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceiptKind.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureSemanticExtraction.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureSemanticExtractionGoalDomainHints.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/CaptureStagedInputProjection.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Action",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/ClosureOutcome.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Time Fit",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/CommitmentWaitingModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ConflictPolicyModels.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CorrectionFoldModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/DomainFoundation.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/DomainPackageBoundaryModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Action",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/ExecutionResilienceModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FixedPoint.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextClassifier.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextClassifierAccessConstraintTerms.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextClassifierCandidateOutput.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextClassifierCaptureRuntimeFactoringCandidate.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalBelievabilityModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationModels.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationQuestionGenerator.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalCompiledPathCompilerCore.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalCompiledPathCompilerCoreCompile.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalCompiledPathCompilerCoreStageUncertaintyReasons.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalContradictionModels.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalDomainPackModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalDraft.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyFitModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyLearningModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineAdaptationService.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+ProgressStorageCoding.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts.swift",
+      "reason": "boundary-source-adapter-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedback.swift",
+      "reason": "domain-source-file-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFixtures.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntakeService.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntakeServiceBuildGoalDraft.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntakeServiceCreatePlanningStrategy.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntakeServiceInferMissingFields.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineOrchestrationContextSnapshot.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineOrchestrator.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlanSection.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlanner.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlannerLinter.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineStepRewriter.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalFeedbackEventBase.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalFreshnessUpdateModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCapacityEnvelope.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentDayCompilerInput.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalOrchestrationResult.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphBuilderCore.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphBuilderScoredResource.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalTeachingModels.swift",
+      "reason": "command-operation-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalUnderstandingModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/PathIntelligenceModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalRelevanceScan.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/GoalThread.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/HistoricalContextFact.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/KnowledgeBoundaryModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/KnowledgeIngestionModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Learning",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LearningAnticipationModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/LifeArea.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeAreaModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextBundle.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextBundleCodingAndLabels.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextBundleConstraints.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextBundleIdentity.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextEnergyPattern.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextFixtureCityWorkshopLaunchWithoutEquipment.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextFixtureMakerResidencyApplicationPathway.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextFixtureProfiles.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextFixtureTeenPortfolioLaunchWithGuardianTransport.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels.swift",
+      "reason": "boundary-source-adapter-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphDeltaReviewModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphEventLogModels.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphModels.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphResolver.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphSourceDomain.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeCollection.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationCompatibilityAliases.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationSchemaVersion.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationStore.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOptionalStringCompatibility.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeSearchDocument.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeSearchFilters.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeSearchStore.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifePathProgressionSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeBucket.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeConfidence.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeCorrection.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeDerivation.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeFallback.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeHorizon.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeInputRef.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeLayer.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeProjection.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeReading.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeRuleID.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/NorthStarModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalReferenceHooks.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Learning",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/PersonalRuntimeLearningSignal.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/PlanInsertionCandidate.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepGoalThreadUpdate.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Proof",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/ProofEvent.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProofMode/AppDrivingProofModeRouter.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProofResourceGraphModels.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProofTrustReceipt.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/ProtectedBoundary.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/RealityWindow.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RecommendationEvidenceBoundarySummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanation.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationMutationLabModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTrace.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTraceCodingKeys.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTraceCounterfactualDiff.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTraceIdentity.swift",
+      "reason": "domain-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTraceReasonGraph.swift",
+      "reason": "domain-extension-target-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Proof",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationTrustSeamSectionState.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Reflow",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/RecoveryState.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "high",
+      "loopRole": "Time Fit",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/ReminderModels.swift",
+      "reason": "boundary-source-adapter-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ReminderNaturalLanguageCaptureParser.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/Reschedule/RescheduleEngine.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "high",
+      "loopRole": "Time Fit",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RitualModels.swift",
+      "reason": "projection-declaration-evidence"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerEnvelope.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerEnvelopeHashing.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Action",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Action",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SafeAutomationProposedAction.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Action",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentActionLabel.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentCaptureRuntimeDetectedSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentCaptureRuntimeReceiptBuilder.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentCaptureRuntimeReplayTrace.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels.swift",
+      "reason": "command-operation-declaration-evidence"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentPlacementPreview.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "value_object",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentResult.swift",
+      "reason": "domain-value-protocol-conformance-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/Step.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/StepReallocationApprovedDecision.swift",
+      "reason": "event-proof-receipt-declaration-evidence"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/TimeContextAvailabilityAndReflow.swift",
+      "reason": "domain-behavior-declaration-evidence"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/TimeContextHierarchy.swift",
+      "reason": "boundary-source-adapter-declaration-evidence"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Learning",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/UserSystemProfile.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    }
+  ],
+  "issue": "AMB-1676",
+  "schema": "ambitions.domain-object-classification.v1",
+  "screenContractOwnerStatus": {
+    "oldDomainFiles": [],
+    "passed": true,
+    "qualityFiles": [
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractModels.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+Contracts.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+DetailContracts.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractValidator.swift"
+    ]
+  },
+  "sourceRoot": "Native/Ambitions/Core/Domain",
+  "status": "passed",
+  "summary": {
+    "categoryCounts": {
+      "adapter_dto": 15,
+      "canonical_entity": 10,
+      "command_payload": 46,
+      "event_payload": 26,
+      "projection_dto": 35,
+      "value_object": 34
+    },
+    "loopRoleCounts": {
+      "Action": 5,
+      "Context": 60,
+      "Intent": 22,
+      "Learning": 3,
+      "Path": 60,
+      "Proof": 7,
+      "Reflow": 4,
+      "Time Fit": 5
+    },
+    "lowConfidenceDefaultCount": 0,
+    "mechanicalSuffixDebtCount": 0,
+    "migrationActionCounts": {
+      "keep-in-core-domain": 10,
+      "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched": 15,
+      "move-to-projection-or-feature-local-projection-when-touched": 35,
+      "review-for-semantic-file-name-or-keep-as-domain-value": 106
+    },
+    "obsoleteBucketDebtCount": 0,
+    "totalDomainSwiftFiles": 166,
+    "uiModelDebtCount": 0
+  }
+}

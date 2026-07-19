@@ -1,0 +1,166 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "directSourceReviewEvidence": [
+    {
+      "api_policy_entry": {
+        "api_mode": "static_https_download",
+        "api_policy_id": "api.official.statcan.table.13100974.v1",
+        "backoff_policy": "exponential_jitter",
+        "budget_owner": "source-atlas-foundry",
+        "circuit_breaker_policy": "stop_after_retry_budget",
+        "daily_budget_limit": 10,
+        "env_var_name": "",
+        "evidence_output_policy": "metadata_only_no_response_body_logs",
+        "execute_flag_required": true,
+        "high_volume_review_required": false,
+        "key_required": false,
+        "live_flag_required": true,
+        "max_pages_per_run": 1,
+        "max_records_per_run": 100000,
+        "missing_key_behavior": "no_key_required",
+        "monthly_budget_limit": 100,
+        "rate_limit_per_minute": 30,
+        "rate_limit_per_second": 1,
+        "retry_policy": "retry_429_500_502_503_504_only",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "official.statcan.table.13100974",
+        "timeout_seconds": 60
+      },
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "completion_status": "completed",
+      "direct_source_review_packet_id": "direct_source_review.statcan.table.13100974",
+      "legal_terms_entry": {
+        "approval_artifact_path": "",
+        "attribution_required": true,
+        "commercial_use_allowed": true,
+        "effective_date": "2026-06-28",
+        "expires_at": "2026-09-28",
+        "license_id": "statcan.open-licence.2026-06-28",
+        "license_name": "Statistics Canada Open Licence",
+        "license_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+        "lookup_output_allowed": true,
+        "modification_allowed": true,
+        "non_claims": [
+          "source-specific internal terms posture only",
+          "not legal advice",
+          "not outside legal approval"
+        ],
+        "outside_legal_required": false,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": true,
+        "redistribution_allowed": true,
+        "review_owner": "Codex internal Source Atlas source and terms reviewer",
+        "review_required": false,
+        "reviewed_at": "2026-06-28",
+        "rights_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+        "schema_version": "1.0.0",
+        "share_alike_required": false,
+        "source_specific_restrictions": [
+          "Acknowledge Statistics Canada as source.",
+          "Do not imply Statistics Canada endorsement.",
+          "Do not misrepresent source information.",
+          "Do not attempt to re-identify anonymized information.",
+          "Respect third-party rights exclusions when present."
+        ],
+        "terms_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+      },
+      "non_claims": [
+        "review evidence for one public official table only",
+        "not outside legal approval",
+        "not medical advice",
+        "not diagnosis",
+        "not treatment planning",
+        "not source authority beyond the listed Statistics Canada table",
+        "not claim output",
+        "not pack output by itself",
+        "not R2 readiness",
+        "not universal coverage"
+      ],
+      "outside_legal_approval_artifact": "",
+      "outside_legal_status": "not_claimed",
+      "resolution_id": "catalog_direct_source_resolution.869c97443588283f",
+      "review_artifacts": [
+        "docs/qa/source-atlas/legal/source-atlas-statcan-table-13100974-review-train-75.md",
+        "docs/qa/source-atlas/legal/source-atlas-statcan-table-13100974-review-train-75.json"
+      ],
+      "review_owner": "Codex internal Source Atlas source and terms reviewer",
+      "reviewed_at": "2026-06-28",
+      "source_lane_entry": {
+        "allowed_artifact_classes": [
+          "official_public_source",
+          "public_reference_claim",
+          "public_provenance"
+        ],
+        "api_mode": "static_https_download",
+        "api_policy_id": "api.official.statcan.table.13100974.v1",
+        "attribution_required": true,
+        "authority_class": "official_government",
+        "budget_policy_id": "budget.official.statcan.table.13100974.v1",
+        "claim_classes_allowed": [
+          "public_statistical_reference",
+          "public_health_statistical_context"
+        ],
+        "claim_classes_forbidden": [
+          "medical_advice",
+          "diagnosis",
+          "treatment_plan",
+          "personalized_health_recommendation",
+          "legal_advice",
+          "financial_advice"
+        ],
+        "crosswalk_policy": "not_crosswalk_source",
+        "domain_scope": [
+          "health_wellness_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "freshness_sla": "quarterly_source_and_terms_review",
+        "jurisdiction": "CA",
+        "last_reviewed_at": "2026-06-28",
+        "license_id": "statcan.open-licence.2026-06-28",
+        "license_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+        "lookup_policy": "lookup_allowed_public_reference_only",
+        "next_review_due_at": "2026-09-28",
+        "non_claims": [
+          "not medical advice",
+          "not diagnosis",
+          "not treatment planning",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "r2_object_key_prefix": "source-atlas/v1/stable/health-wellness-reference/statcan-table-13100974",
+        "r2_pack_policy": "pack_allowed_with_attribution",
+        "rate_policy_id": "rate.official.statcan.table.13100974.v1",
+        "redistribution_policy": "redistributable_with_attribution",
+        "review_owner": "Codex internal Source Atlas source and terms reviewer",
+        "review_required": false,
+        "review_status": "reviewed",
+        "rights_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+        "schema_version": "1.0.0",
+        "secret_policy_id": "secret.no_secret_static_download.v1",
+        "source_class": "official_government",
+        "source_id": "official.statcan.table.13100974",
+        "source_name": "Statistics Canada Table 13-10-0974-01",
+        "terms_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+      }
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewEvidence.v1",
+  "nonClaims": [
+    "direct-source review evidence only",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not app runtime readiness",
+    "not release readiness",
+    "not universal coverage"
+  ]
+}

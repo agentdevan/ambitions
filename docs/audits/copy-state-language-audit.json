@@ -1,0 +1,123 @@
+{
+  "id": "AMB-1776",
+  "title": "Copy / State Language Audit",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "cf478400de1dfa5f0bc18868957cea7ef75b7c2a",
+  "scope": [
+    "user-facing copy cleanup",
+    "state-language audit",
+    "residual stale-language classification"
+  ],
+  "source_cleanup": {
+    "changed_file_count": 38,
+    "change_type": "string-only copy cleanup",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "model_enum_cases_changed": false,
+    "source_paths_moved": false
+  },
+  "cleaned_terms": [
+    {
+      "term": "Profile",
+      "replacement_policy": "Use Personal system, Personal context, or canonical User System Profile."
+    },
+    {
+      "term": "Plan",
+      "replacement_policy": "Use Goals, Path, Goal path, or Ambitions when not referring to an internal model."
+    },
+    {
+      "term": "Captures",
+      "replacement_policy": "Use Captured items for visible rows or filters."
+    },
+    {
+      "term": "Default landing tab",
+      "replacement_policy": "Use Default starting surface."
+    },
+    {
+      "term": "dashboard",
+      "replacement_policy": "Use detached reporting or abstract number in visible copy."
+    },
+    {
+      "term": "shame/guilt",
+      "replacement_policy": "Use blame or pressure in visible recovery copy."
+    }
+  ],
+  "residuals": [
+    {
+      "term": "User System Profile",
+      "classification": "allowed",
+      "reason": "Canonical You primary object."
+    },
+    {
+      "term": "ForbiddenTopLevelTerms banned strings",
+      "classification": "allowed_policy_guard",
+      "reason": "Negative copy policy, not product copy."
+    },
+    {
+      "term": "CaptureCopyPolicy banned strings",
+      "classification": "allowed_policy_guard",
+      "reason": "Negative capture copy policy, not product copy."
+    },
+    {
+      "term": "AccessibilityLabelPolicy banned strings",
+      "classification": "allowed_policy_guard",
+      "reason": "Negative accessibility label policy, not product copy."
+    },
+    {
+      "term": "Dashboard type identifiers",
+      "classification": "internal_naming_debt",
+      "reason": "Internal model/API names remain and need a separate broad rename if required."
+    }
+  ],
+  "truth_claims": {
+    "allowed": [
+      "Current user-facing source copy was scanned and cleaned for AMB-1776 banned language classes.",
+      "Residual stale terms are classified as canonical, policy guards, or internal naming debt."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "Release Green",
+      "screenshot proof",
+      "accessibility proof",
+      "device proof",
+      "runtime behavior proof",
+      "full internal naming cleanup"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Language",
+      "Stage/Overlays",
+      "Surfaces/Today",
+      "Surfaces/Goals",
+      "Surfaces/Time",
+      "Surfaces/You",
+      "Scenarios",
+      "Core/LocalRuntimeOS"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/copy-state-language-audit.md",
+      "docs/audits/copy-state-language-audit.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "Existing Dashboard type names remain internal naming debt."
+    ],
+    "next_repair_train": "Internal naming collapse train if broad Dashboard API rename becomes required.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

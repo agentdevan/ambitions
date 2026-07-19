@@ -1,0 +1,122 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.proposedCoverageFrontiers.v1",
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "claim_classes": [
+        "language_standard_reference",
+        "learning_resource_reference",
+        "public_program_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_language_learning_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "resource_reference_180d",
+        "standard_reference_365d"
+      ],
+      "frontier_id": "public_language_learning_reference",
+      "goal_intent_classes": [
+        "compare_language_learning_resources",
+        "learn_language_public_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate-only route from goal-domain router",
+        "not language proficiency assessment",
+        "not admission or credentialing advice"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "new-language-learning-public-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_institution",
+        "open_knowledge_graph",
+        "public_catalog",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "claim_classes": [],
+      "claim_output_allowed": false,
+      "domain": "public_program_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "program_reference_180d"
+      ],
+      "frontier_id": "public_program_reference",
+      "goal_intent_classes": [
+        "benefit_program_reference",
+        "entrepreneurship_public_program_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate-only route from goal-domain router",
+        "not benefit eligibility"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "ambiguous-public-program-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

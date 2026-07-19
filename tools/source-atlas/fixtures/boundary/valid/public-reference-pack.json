@@ -1,0 +1,27 @@
+{
+  "caseID": "valid.public_reference_pack",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "appCacheAllowed": true,
+    "dataClass": "public_reference_claim",
+    "displayName": "Synthetic public reference pack",
+    "fixtureAllowed": "public_synthetic_only",
+    "id": "pack.synthetic.public_reference",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "logAllowed": "metadata_only",
+    "metadata": {
+      "freshnessState": "candidate",
+      "localPersonalizationRequired": true,
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "runtimeRole": "reference_enrichment_only",
+      "sourceAtlasInvisibleByDefault": true
+    },
+    "nonClaims": [
+      "not a private user-data backend"
+    ],
+    "r2Allowed": true,
+    "schemaVersion": 1,
+    "versionID": "fixture-v1"
+  }
+}

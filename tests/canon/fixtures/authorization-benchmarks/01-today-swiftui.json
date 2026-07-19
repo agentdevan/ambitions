@@ -1,0 +1,53 @@
+{
+  "approval_required": false,
+  "claim_ceiling": "Source Green for the exact authorized synthetic Today SwiftUI scope only; no Runtime, Visual, Accessibility, Device, or Release Green.",
+  "expected_failure_codes": {
+    "absent_finalization": "BENCHMARK_FINALIZATION_MISSING",
+    "base_movement": "AUTH_BASE_MOVED",
+    "command_manifest_drift": "AUTH_VALIDATION_MISMATCH",
+    "final_diff_drift": "AUTH_EVENT_STALE",
+    "head_replacement": "AUTH_EVENT_STALE",
+    "local_substitution": "AUTH_LOCAL_NOT_MERGE_AUTHORITY",
+    "missing_intake": "AUTH_INTAKE_FIELDS",
+    "re_attested_untrusted_green": "AUTH_VALIDATION_UNTRUSTED",
+    "stale_envelope": "AUTH_ENVELOPE_STALE",
+    "stale_intake": "AUTH_INTAKE_STALE",
+    "stale_skill": "AUTH_SNAPSHOT_STALE",
+    "workflow_drift": "AUTH_VALIDATION_MISMATCH"
+  },
+  "operations": [
+    {
+      "content": "struct TodayAuthorizationBenchmark {}\n",
+      "kind": "write",
+      "path": "Native/Ambitions/Surfaces/Today/TodayAuthorizationBenchmark.swift"
+    }
+  ],
+  "proof_obligations": [
+    "focused-tests",
+    "independent-review",
+    "native-ui-proof",
+    "offline-determinism"
+  ],
+  "requested_changed_files": [
+    "Native/Ambitions/Surfaces/Today/TodayAuthorizationBenchmark.swift"
+  ],
+  "requirement_ids": [
+    "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001"
+  ],
+  "required_checks": [
+    "gate-b-today-swiftui"
+  ],
+  "scenario_id": "today-swiftui",
+  "schema_version": 1,
+  "scope": [
+    "surface.today.first-viewport"
+  ],
+  "skill_adapters": [
+    "ambitions-architecture-tree-enforcement",
+    "ambitions-ios-quality-gate",
+    "ambitions-release-proof-honesty",
+    "ambitions-source-truth-authority"
+  ],
+  "task_type": "swiftui",
+  "title": "Today SwiftUI"
+}

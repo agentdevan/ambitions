@@ -1,0 +1,1071 @@
+#!/usr/bin/env python3
+"""Diff-scoped remediation governance guard for architecture cleanup work.
+
+This guard enforces the AMB-1658 freeze rules against newly changed files. It
+does not scan the whole repository as if existing AMB-1657 baseline debt were
+already fixed.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import tempfile
+from dataclasses import asdict, dataclass
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+PRODUCTION_SWIFT_ROOTS = (
+    "Native/Ambitions/",
+    "Native/AmbitionsWidgetExtension/",
+    "Native/AmbitionsShareExtension/",
+    "Packages/AmbitionsDesignSystem/Sources/",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources/",
+    "Packages/AmbitionsExperienceKernel/Sources/",
+)
+
+SUPPORT_SWIFT_ROOTS = (
+    "Native/AmbitionsTests/",
+    "Native/AmbitionsUITests/",
+    "Native/Ambitions/PreviewSupport/",
+    "Packages/AmbitionsDesignSystem/Sources/Previews/",
+)
+
+NON_RUNTIME_MUTATION_TERMS = (
+    "Command",
+    "Event",
+    "Receipt",
+    "Replay",
+    "Mutation",
+    "Transaction",
+    "Ledger",
+    "Store",
+    "Repository",
+    "Persistence",
+    "SideEffect",
+)
+
+ARCHITECTURE_NOUNS = (
+    "Engine",
+    "Kernel",
+    "System",
+    "Runtime",
+    "Service",
+    "Ledger",
+    "Manager",
+    "Coordinator",
+    "Lens",
+    "Scene",
+    "OS",
+)
+
+MUTATION_WRITE_PATTERNS = (
+    r"\bimport\s+SwiftData\b",
+    r"\bModelContext\b",
+    r"\bFileManager\b",
+    r"\bUserDefaults\b",
+    r"\.write\s*\(",
+    r"\.save\s*\(",
+    r"\.insert\s*\(",
+    r"\.delete\s*\(",
+    r"\btry\s+(?:await\s+)?[A-Za-z0-9_\.]*save\s*\(",
+)
+
+CUSTOM_STAGE_PATTERNS = (
+    r"\bimport\s+UIKit\b",
+    r"\bUIViewRepresentable\b",
+    r"\bUIViewControllerRepresentable\b",
+    r"\bCALayer\b",
+    r"\bCADisplayLink\b",
+    r"\bCoreAnimation\b",
+)
+
+SOURCE_ATLAS_PATTERNS = (
+    r"\bSourceAtlas\b",
+    r"\bSource Atlas\b",
+    r"\bR2\b",
+)
+
+CENTRAL_PROJECTION_REHOME_OLD_PREFIXES = (
+    "Native/Ambitions/Projection/SurfaceLenses/",
+    "Native/Ambitions/Projection/StageScenes/",
+    "Native/Ambitions/Projection/OverlayLenses/",
+    "Native/Ambitions/Projection/OverlayScenes/",
+)
+
+CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Composer/Capture/Projection/",
+    "Native/Ambitions/Surfaces/Goals/Projection/",
+    "Native/Ambitions/Surfaces/Time/Projection/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
+    "Native/Ambitions/Trust/Projection/",
+)
+
+STAGE_OVERLAY_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Surfaces/Today/Overlays/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
+)
+
+APP_BOOTSTRAP_WIRING_FILES = {
+    "Native/Ambitions/App/AppContainerFactory.swift",
+    "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
+    "Native/Ambitions/App/Bootstrap/RuntimeBootstrap.swift",
+    "Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift",
+}
+
+SWIFT_HARD_LINE_CAP = 600
+LARGEST_FILE_REPORT_LIMIT = 10
+SUPPORT_FILE_REPORT_LIMIT = 15
+
+
+@dataclass(frozen=True)
+class ChangedPath:
+    status: str
+    path: str
+    old_path: str | None = None
+    untracked: bool = False
+
+
+@dataclass(frozen=True)
+class Finding:
+    rule: str
+    path: str
+    detail: str
+
+
+@dataclass(frozen=True)
+class GitDiffSpec:
+    arguments: tuple[str, ...]
+    old_revision: str
+
+
+def run_git(args: list[str], root: Path = ROOT) -> str:
+    return subprocess.check_output(["git", *args], cwd=root, text=True)
+
+
+def normalize_diff_spec(base: str | None, root: Path = ROOT) -> GitDiffSpec:
+    if not base:
+        return GitDiffSpec(("HEAD",), "HEAD")
+    if "..." in base:
+        left, right = base.split("...", 1)
+        right = right or "HEAD"
+        return GitDiffSpec(
+            (base,),
+            run_git(["merge-base", left, right], root).strip(),
+        )
+    if ".." in base:
+        left, _ = base.split("..", 1)
+        return GitDiffSpec((base,), run_git(["rev-parse", left], root).strip())
+    return GitDiffSpec(
+        (base, "HEAD"),
+        run_git(["rev-parse", base], root).strip(),
+    )
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
+
+
+def parse_name_status(output: str) -> list[ChangedPath]:
+    changed: list[ChangedPath] = []
+    for raw in output.splitlines():
+        if not raw.strip():
+            continue
+        parts = raw.split("\t")
+        status = parts[0]
+        code = status[0]
+        if code in {"R", "C"} and len(parts) >= 3:
+            changed.append(ChangedPath(code, parts[2], parts[1]))
+        elif len(parts) >= 2:
+            changed.append(ChangedPath(code, parts[1]))
+    return changed
+
+
+def introduces_new_filename(item: ChangedPath) -> bool:
+    if item.status == "A":
+        return True
+    if item.status != "R" or not item.old_path:
+        return False
+    return Path(item.old_path).name != Path(item.path).name
+
+
+def diff_changed_paths(
+    spec: GitDiffSpec,
+    include_untracked: bool,
+    root: Path = ROOT,
+) -> list[ChangedPath]:
+    args = ["diff", "--name-status", "-M", "--diff-filter=ACMRD"]
+    args.extend([*spec.arguments, "--"])
+    changed = parse_name_status(run_git(args, root))
+
+    if include_untracked:
+        for raw in run_git(["ls-files", "--others", "--exclude-standard"], root).splitlines():
+            if raw:
+                changed.append(ChangedPath("A", raw, untracked=True))
+
+    deduped: dict[str, ChangedPath] = {}
+    for item in changed:
+        deduped[item.path] = item
+    return sorted(deduped.values(), key=lambda item: item.path)
+
+
+def added_lines(
+    path: str,
+    spec: GitDiffSpec,
+    untracked: bool,
+    old_path: str | None = None,
+    root: Path = ROOT,
+) -> list[str]:
+    full_path = root / path
+    if untracked:
+        if full_path.exists() and full_path.is_file():
+            return full_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        return []
+
+    args = ["diff", "--unified=0"]
+    args.extend([*spec.arguments, "--"])
+    if old_path:
+        args.append(old_path)
+    args.append(path)
+    try:
+        diff = run_git(args, root)
+    except subprocess.CalledProcessError:
+        return []
+
+    lines: list[str] = []
+    for raw in diff.splitlines():
+        if raw.startswith("+++") or not raw.startswith("+"):
+            continue
+        lines.append(raw[1:])
+    return lines
+
+
+def is_swift(path: str) -> bool:
+    return path.endswith(".swift")
+
+
+def is_production_swift(path: str) -> bool:
+    if not is_swift(path):
+        return False
+    if "Previews" in Path(path).parts:
+        return False
+    if "/Tests/" in path or path.startswith("Native/AmbitionsTests/") or path.startswith("Native/AmbitionsUITests/"):
+        return False
+    if path.startswith("Native/Ambitions/PreviewSupport/"):
+        return False
+    return path.startswith(PRODUCTION_SWIFT_ROOTS)
+
+
+def is_support_swift(path: str) -> bool:
+    if not is_swift(path):
+        return False
+    return path.startswith(SUPPORT_SWIFT_ROOTS)
+
+
+def is_local_runtime(path: str) -> bool:
+    return path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
+
+
+def is_app_bootstrap_wiring(path: str) -> bool:
+    return path in APP_BOOTSTRAP_WIRING_FILES
+
+
+def has_mutation_authority_type(text: str) -> bool:
+    term_pattern = "|".join(NON_RUNTIME_MUTATION_TERMS)
+    declaration_pattern = re.compile(
+        rf"\b(?P<kind>struct|class|actor|enum|protocol)\s+(?P<name>\w*(?:{term_pattern})\w*)[^{{]*{{"
+    )
+    for match in declaration_pattern.finditer(text):
+        kind = match.group("kind")
+        name = match.group("name")
+        if kind == "struct" and name.endswith("Result"):
+            body_start = match.end()
+            body_end = text.find("}", body_start)
+            body = text[body_start:] if body_end < 0 else text[body_start:body_end]
+            if re.search(r"\bvar\s+\w+\s*:", body) is None:
+                continue
+        return True
+    return False
+
+
+def is_suffix_split_name(name: str) -> bool:
+    return any(suffix in name for suffix in ("+02", "+03", "+04"))
+
+
+def is_legacy_runtime_to_localruntimeos_suffix_move(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and item.old_path.startswith("Native/Ambitions/Core/Runtime/")
+        and item.path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
+        and is_suffix_split_name(Path(item.old_path).name)
+        and is_suffix_split_name(Path(item.path).name)
+    )
+
+
+def is_central_projection_rehome(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and is_production_swift(item.old_path)
+        and is_production_swift(item.path)
+        and any(item.old_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_OLD_PREFIXES)
+        and any(item.path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_NEW_PREFIXES)
+    )
+
+
+def is_stage_overlay_surface_rehome(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and is_production_swift(item.old_path)
+        and is_production_swift(item.path)
+        and item.old_path.startswith("Native/Ambitions/Stage/Overlays/")
+        and any(item.path.startswith(prefix) for prefix in STAGE_OVERLAY_REHOME_NEW_PREFIXES)
+    )
+
+
+def has_any(patterns: tuple[str, ...], text: str) -> bool:
+    return any(re.search(pattern, text) for pattern in patterns)
+
+
+def added_text(item: ChangedPath, spec: GitDiffSpec) -> str:
+    return "\n".join(added_lines(item.path, spec, item.untracked, item.old_path))
+
+
+def source_deletion_present(changed: list[ChangedPath]) -> bool:
+    for item in changed:
+        if item.status == "D" and is_production_swift(item.path):
+            return True
+        if item.status == "R" and item.old_path and is_production_swift(item.old_path):
+            return True
+    return False
+
+
+def is_behavior_neutral_package_relocation(
+    changed: list[ChangedPath],
+    spec: GitDiffSpec,
+) -> bool:
+    manifest_move = next(
+        (
+            item
+            for item in changed
+            if item.status == "R"
+            and item.old_path == "Package.swift"
+            and item.path == "Packages/AmbitionsDesignSystem/Package.swift"
+        ),
+        None,
+    )
+    if manifest_move is None:
+        return False
+    try:
+        previous = subprocess.check_output(
+            ["git", "show", f"{spec.old_revision}:Package.swift"], cwd=ROOT
+        )
+        current = (ROOT / manifest_move.path).read_bytes()
+    except (subprocess.CalledProcessError, OSError):
+        return False
+    return previous == current
+
+
+def production_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for prefix in PRODUCTION_SWIFT_ROOTS:
+        root = ROOT / prefix
+        if not root.exists():
+            continue
+        if root.is_file() and root.suffix == ".swift":
+            files.append(root)
+            continue
+        for path in root.rglob("*.swift"):
+            relative = rel(path)
+            if is_production_swift(relative):
+                files.append(path)
+    return sorted(set(files))
+
+
+def support_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for prefix in SUPPORT_SWIFT_ROOTS:
+        root = ROOT / prefix
+        if not root.exists():
+            continue
+        if root.is_file() and root.suffix == ".swift":
+            files.append(root)
+            continue
+        for path in root.rglob("*.swift"):
+            files.append(path)
+    return sorted(set(files))
+
+
+def swift_line_count(path: Path) -> int:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return text.count("\n") + (0 if text.endswith("\n") else 1)
+
+
+def source_root(relative: str) -> str:
+    parts = Path(relative).parts
+    if relative.startswith("Native/Ambitions/") and len(parts) >= 3:
+        return "/".join(parts[:3])
+    if relative.startswith("Native/AmbitionsWidgetExtension/"):
+        return "Native/AmbitionsWidgetExtension"
+    if relative.startswith("Native/AmbitionsShareExtension/"):
+        return "Native/AmbitionsShareExtension"
+    if relative.startswith("Packages/AmbitionsDesignSystem/AppUI/Sources/"):
+        return "Packages/AmbitionsDesignSystem/AppUI/Sources"
+    if relative.startswith("Packages/AmbitionsExperienceKernel/Sources/"):
+        return "Packages/AmbitionsExperienceKernel/Sources"
+    if relative.startswith("Packages/AmbitionsDesignSystem/Sources/") and len(parts) >= 4:
+        return "Packages/AmbitionsDesignSystem/Sources" if len(parts) == 4 else "/".join(parts[:4])
+    return parts[0] if parts else relative
+
+
+def changed_owner(path: str) -> str:
+    parts = Path(path).parts
+    if is_support_swift(path):
+        if path.startswith("Native/AmbitionsTests/"):
+            return "Native/AmbitionsTests"
+        if path.startswith("Native/AmbitionsUITests/"):
+            return "Native/AmbitionsUITests"
+        if path.startswith("Native/Ambitions/PreviewSupport/"):
+            return "Native/Ambitions/PreviewSupport"
+        if path.startswith("Packages/AmbitionsDesignSystem/Sources/Previews/"):
+            return "Packages/AmbitionsDesignSystem/Sources/Previews"
+    if is_production_swift(path):
+        return source_root(path)
+    if path.startswith("scripts/"):
+        return "scripts"
+    if path.startswith("docs/") and len(parts) >= 2:
+        return "/".join(parts[:2])
+    return parts[0] if parts else path
+
+
+def changed_owner_summary(changed: list[ChangedPath]) -> list[dict[str, object]]:
+    owners: dict[str, dict[str, object]] = {}
+    for item in changed:
+        owner = changed_owner(item.path)
+        entry = owners.setdefault(
+            owner,
+            {
+                "owner": owner,
+                "paths": [],
+                "productionSwift": 0,
+                "supportSwift": 0,
+            },
+        )
+        entry["paths"].append(item.path)  # type: ignore[index,union-attr]
+        if is_production_swift(item.path):
+            entry["productionSwift"] = int(entry["productionSwift"]) + 1
+        if is_support_swift(item.path):
+            entry["supportSwift"] = int(entry["supportSwift"]) + 1
+
+    rows: list[dict[str, object]] = []
+    for owner in sorted(owners):
+        entry = owners[owner]
+        paths = sorted(str(path) for path in entry["paths"])  # type: ignore[index]
+        rows.append(
+            {
+                "owner": owner,
+                "count": len(paths),
+                "productionSwift": entry["productionSwift"],
+                "supportSwift": entry["supportSwift"],
+                "paths": paths,
+            }
+        )
+    return rows
+
+
+def is_source_atlas_scope(path: str, text: str) -> bool:
+    if path.startswith("docs/adr/"):
+        return False
+    lowered_path = path.lower()
+    if (
+        "sourceatlas" in lowered_path
+        or "source-atlas" in lowered_path
+        or "source_atlas" in lowered_path
+        or "SOURCE_ATLAS" in path
+    ):
+        return True
+    return is_production_swift(path) and has_any(SOURCE_ATLAS_PATTERNS, text)
+
+
+def parse_source_atlas_allowlist(text: str) -> set[str]:
+    allowlist: set[str] = set()
+    for line in text.splitlines():
+        if "Source Atlas growth allowlist:" not in line:
+            continue
+        _, raw_value = line.split("Source Atlas growth allowlist:", 1)
+        raw_value = raw_value.strip()
+        if not raw_value:
+            continue
+        path_match = re.search(r"`([^`]+)`", raw_value)
+        value = path_match.group(1) if path_match else raw_value.split()[0]
+        allowlist.add(value.rstrip(".,;"))
+    return allowlist
+
+
+def source_atlas_adr_allowlist() -> set[str]:
+    allowlist: set[str] = set()
+    adr_root = ROOT / "docs" / "adr"
+    if not adr_root.exists():
+        return allowlist
+    for path in sorted(adr_root.glob("*.md")):
+        allowlist.update(parse_source_atlas_allowlist(path.read_text(encoding="utf-8", errors="replace")))
+    return allowlist
+
+
+def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
+    root_loc: dict[str, dict[str, int]] = {}
+    largest: list[dict[str, object]] = []
+    support_largest: list[dict[str, object]] = []
+    naming_counts = {
+        "suffixSplitFiles": 0,
+        "blockedSuffixSplitFiles": 0,
+        "broadModelsFiles": 0,
+        "architectureNounFiles": 0,
+        "sourceAtlasFiles": 0,
+        "overHardLineCapFiles": 0,
+    }
+
+    swift_files = production_swift_files()
+    support_files = support_swift_files()
+    for path in swift_files:
+        relative = rel(path)
+        line_count = swift_line_count(path)
+        root = source_root(relative)
+        root_entry = root_loc.setdefault(root, {"files": 0, "loc": 0})
+        root_entry["files"] += 1
+        root_entry["loc"] += line_count
+
+        largest.append({"path": relative, "lines": line_count})
+
+        name = path.name
+        if re.search(r"\+\d{2}", name):
+            naming_counts["suffixSplitFiles"] += 1
+        if is_suffix_split_name(name):
+            naming_counts["blockedSuffixSplitFiles"] += 1
+        if name == "Models.swift":
+            naming_counts["broadModelsFiles"] += 1
+        if any(noun in path.stem for noun in ARCHITECTURE_NOUNS):
+            naming_counts["architectureNounFiles"] += 1
+        if is_source_atlas_scope(relative, path.read_text(encoding="utf-8", errors="replace")):
+            naming_counts["sourceAtlasFiles"] += 1
+        if line_count > SWIFT_HARD_LINE_CAP:
+            naming_counts["overHardLineCapFiles"] += 1
+
+    support_over_hard_line_cap = 0
+    for path in support_files:
+        relative = rel(path)
+        line_count = swift_line_count(path)
+        support_largest.append({"path": relative, "lines": line_count})
+        if line_count > SWIFT_HARD_LINE_CAP:
+            support_over_hard_line_cap += 1
+
+    largest = sorted(largest, key=lambda row: (-int(row["lines"]), str(row["path"])))[:LARGEST_FILE_REPORT_LIMIT]
+    support_largest = sorted(support_largest, key=lambda row: (-int(row["lines"]), str(row["path"])))[:SUPPORT_FILE_REPORT_LIMIT]
+    sorted_root_loc = {
+        root: root_loc[root]
+        for root in sorted(root_loc, key=lambda key: (-root_loc[key]["loc"], key))
+    }
+    return {
+        "changedPathCount": len(changed),
+        "changedOwners": changed_owner_summary(changed),
+        "productionSwiftFileCount": len(swift_files),
+        "supportSwiftFileCount": len(support_files),
+        "rootLOC": sorted_root_loc,
+        "largestFiles": largest,
+        "supportLargestFiles": support_largest,
+        "supportOverHardLineCapFiles": support_over_hard_line_cap,
+        "namingCounts": naming_counts,
+        "swiftHardLineCap": SWIFT_HARD_LINE_CAP,
+    }
+
+
+def check_source_atlas_audits() -> list[Finding]:
+    findings: list[Finding] = []
+    for script in [
+        "scripts/source-atlas-boundary-audit.py",
+        "scripts/source-atlas-no-private-graph-egress-audit.py",
+    ]:
+        result = subprocess.run(
+            [sys.executable, script],
+            cwd=ROOT,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if result.returncode != 0:
+            output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+            findings.append(
+                Finding(
+                    "source-atlas-boundary",
+                    script,
+                    output[:300] if output else "Source Atlas boundary audit failed",
+                )
+            )
+    return findings
+
+
+def source_atlas_growth_guard(
+    item: ChangedPath,
+    text: str,
+    source_atlas_allowlist: set[str],
+) -> tuple[bool, Finding | None]:
+    if not is_source_atlas_scope(item.path, text):
+        return False, None
+    if is_central_projection_rehome(item):
+        return False, None
+    if introduces_new_filename(item) and item.path not in source_atlas_allowlist:
+        return True, Finding(
+            "source-atlas-growth-adr",
+            item.path,
+            "new Source Atlas scope requires ADR allowlist line: Source Atlas growth allowlist: `path/to/file`",
+        )
+    return True, None
+
+
+def check_legacy_runtime_guard(args: argparse.Namespace) -> list[Finding]:
+    command = [sys.executable, "scripts/ambitions-legacy-runtime-production-use-guard.py"]
+    if args.base:
+        command.extend(["--base", args.base])
+    if args.no_untracked:
+        command.append("--no-untracked")
+
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "legacy-runtime-production-use-guard",
+            "scripts/ambitions-legacy-runtime-production-use-guard.py",
+            output[:300] if output else "legacy runtime production-use guard failed",
+        )
+    ]
+
+
+def check_accepted_yellow_misuse_guard() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-accepted-yellow-misuse-audit.py"
+    if not script.exists():
+        return [
+            Finding(
+                "accepted-yellow-misuse",
+                rel(script),
+                "accepted-yellow misuse guard is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "accepted-yellow-misuse",
+            rel(script),
+            output[:500] if output else "accepted-yellow misuse guard failed",
+        )
+    ]
+
+
+def governance_findings(
+    args: argparse.Namespace,
+    spec: GitDiffSpec,
+) -> list[Finding]:
+    changed = diff_changed_paths(spec, not args.no_untracked)
+    findings: list[Finding] = []
+    deletion_present = source_deletion_present(changed)
+    behavior_neutral_package_relocation = is_behavior_neutral_package_relocation(changed, spec)
+    source_atlas_scope_changed = False
+    source_atlas_allowlist = source_atlas_adr_allowlist()
+
+    for item in changed:
+        path = item.path
+        path_obj = Path(path)
+        text = added_text(item, spec)
+
+        if introduces_new_filename(item) and is_production_swift(path):
+            if (
+                is_suffix_split_name(path_obj.name)
+                and not is_legacy_runtime_to_localruntimeos_suffix_move(item)
+                and not is_central_projection_rehome(item)
+                and not is_stage_overlay_surface_rehome(item)
+            ):
+                findings.append(
+                    Finding(
+                        "no-new-suffix-splits",
+                        path,
+                        "new +02/+03/+04 split files are blocked by AMB-1658/AMB-1662",
+                    )
+                )
+
+            if path_obj.name == "Models.swift":
+                findings.append(
+                    Finding(
+                        "no-new-broad-models",
+                        path,
+                        "new broad Models.swift files are blocked by AMB-1658",
+                    )
+                )
+
+            if (
+                any(noun in path_obj.stem for noun in ARCHITECTURE_NOUNS)
+                and not deletion_present
+                and not is_app_bootstrap_wiring(path)
+            ):
+                findings.append(
+                    Finding(
+                        "delete-before-naming",
+                        path,
+                        "new architecture noun in source filename requires deletion/collapse evidence in the same diff",
+                    )
+                )
+
+            if path.startswith("Native/Ambitions/Projection/SurfaceLenses/") and not args.allow_central_lens:
+                findings.append(
+                    Finding(
+                        "feature-local-projection",
+                        path,
+                        "new central SurfaceLenses files require explicit canon exception or feature-local projection proof",
+                    )
+                )
+
+        if is_production_swift(path):
+            full_path = ROOT / path
+            if item.status != "D" and full_path.exists():
+                line_count = swift_line_count(full_path)
+                if line_count > SWIFT_HARD_LINE_CAP:
+                    findings.append(
+                        Finding(
+                            "swift-file-size-cap",
+                            path,
+                            f"{line_count} lines exceeds diff-scoped hard cap {SWIFT_HARD_LINE_CAP}",
+                        )
+                    )
+
+            if (path.startswith("Native/Ambitions/Stage/") or path.startswith("Native/Ambitions/Surfaces/") or path.startswith("Native/Ambitions/Composer/") or path.startswith("Native/Ambitions/DesignSystem/")) and has_any(CUSTOM_STAGE_PATTERNS, text):
+                findings.append(
+                    Finding(
+                        "swiftui-native-default",
+                        path,
+                        "new UIKit/custom rendering additions require explicit product-law and Apple-source justification",
+                    )
+                )
+
+            if (
+                not is_local_runtime(path)
+                and not is_app_bootstrap_wiring(path)
+                and (has_mutation_authority_type(text) or has_any(MUTATION_WRITE_PATTERNS, text))
+            ):
+                findings.append(
+                    Finding(
+                        "no-new-mutation-authority-outside-localruntimeos",
+                        path,
+                        "new mutation/storage/receipt authority markers outside Core/LocalRuntimeOS require a scoped Yellow exception and follow-up",
+                    )
+                )
+
+            if "adapter" in path.lower() and has_any(MUTATION_WRITE_PATTERNS, text):
+                findings.append(
+                    Finding(
+                        "adapters-cannot-mutate-canonical-state",
+                        path,
+                        "adapter changes include write/persistence markers",
+                    )
+                )
+
+        if is_support_swift(path):
+            full_path = ROOT / path
+            if item.status != "D" and full_path.exists():
+                line_count = swift_line_count(full_path)
+                if line_count > SWIFT_HARD_LINE_CAP:
+                    findings.append(
+                        Finding(
+                            "support-swift-file-size-cap",
+                            path,
+                            f"{line_count} lines exceeds diff-scoped support hard cap {SWIFT_HARD_LINE_CAP}",
+                        )
+                    )
+
+        changed_source_atlas_scope, source_atlas_growth_finding = source_atlas_growth_guard(
+            item,
+            text,
+            source_atlas_allowlist,
+        )
+        if changed_source_atlas_scope:
+            source_atlas_scope_changed = True
+        if source_atlas_growth_finding:
+            findings.append(source_atlas_growth_finding)
+
+        package_boundary_text = text if path == "project.yml" else path
+        project_package_boundary = path == "project.yml" and has_any(
+            (
+                r"^\s*packages\s*:",
+                r"^\s*package\s*:",
+                r"\bPackages/",
+                r"\bpath:\s*Packages/",
+                r"\bproduct\s*:",
+            ),
+            package_boundary_text,
+        )
+        if (
+            path == "Packages/AmbitionsDesignSystem/Package.swift"
+            or project_package_boundary
+            or path.startswith("Packages/AmbitionsDesignSystem/AppUI/Package.swift")
+        ) and not args.allow_package_boundary and not behavior_neutral_package_relocation:
+            findings.append(
+                Finding(
+                    "no-package-extraction-theater",
+                    path,
+                    "package/project boundary changes require a linked package boundary decision and explicit validation",
+                )
+            )
+
+    if source_atlas_scope_changed:
+        findings.extend(check_source_atlas_audits())
+
+    findings.extend(check_legacy_runtime_guard(args))
+    findings.extend(check_accepted_yellow_misuse_guard())
+
+    return findings
+
+
+def assert_diff_spec_end_to_end() -> None:
+    with tempfile.TemporaryDirectory(prefix="ambitions-governance-diff-") as raw_root:
+        root = Path(raw_root)
+        run_git(["init", "-q"], root)
+        run_git(["config", "user.email", "governance@example.invalid"], root)
+        run_git(["config", "user.name", "Governance Fixture"], root)
+        (root / "Package.swift").write_text("manifest\n", encoding="utf-8")
+        (root / "tracked.txt").write_text("base\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "base"], root)
+        base = run_git(["rev-parse", "HEAD"], root).strip()
+
+        (root / "Packages/AmbitionsDesignSystem").mkdir(parents=True)
+        run_git(["mv", "Package.swift", "Packages/AmbitionsDesignSystem/Package.swift"], root)
+        (root / "tracked.txt").write_text("first\n", encoding="utf-8")
+        (root / "first.txt").write_text("first\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "first"], root)
+        first = run_git(["rev-parse", "HEAD"], root).strip()
+
+        (root / "second.txt").write_text("second\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "second"], root)
+
+        plain_spec = normalize_diff_spec(base, root)
+        plain_paths = {item.path for item in diff_changed_paths(plain_spec, False, root)}
+        assert "first.txt" in plain_paths and "second.txt" in plain_paths
+        assert "Packages/AmbitionsDesignSystem/Package.swift" in plain_paths
+
+        two_dot_spec = normalize_diff_spec(f"{base}..{first}", root)
+        two_dot_paths = {item.path for item in diff_changed_paths(two_dot_spec, False, root)}
+        assert "first.txt" in two_dot_paths and "second.txt" not in two_dot_paths
+        assert added_lines("first.txt", two_dot_spec, False, root=root) == ["first"]
+
+        three_dot_spec = normalize_diff_spec(f"{base}...{first}", root)
+        three_dot_paths = {item.path for item in diff_changed_paths(three_dot_spec, False, root)}
+        assert three_dot_paths == two_dot_paths
+        assert three_dot_spec.old_revision == base
+
+
+def self_test() -> int:
+    assert introduces_new_filename(ChangedPath("A", "Sources/New.swift"))
+    assert not introduces_new_filename(ChangedPath("R", "Packages/Design/Sources/Old.swift", "Sources/Old.swift"))
+    assert introduces_new_filename(ChangedPath("R", "Sources/New.swift", "Sources/Old.swift"))
+    assert_diff_spec_end_to_end()
+    parent = run_git(["rev-parse", "HEAD^"]).strip()
+    manifest_relocation = ChangedPath(
+        "R",
+        "Packages/AmbitionsDesignSystem/Package.swift",
+        "Package.swift",
+    )
+    if subprocess.run(
+        ["git", "cat-file", "-e", f"{parent}:Package.swift"],
+        cwd=ROOT,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0:
+        assert is_behavior_neutral_package_relocation(
+            [manifest_relocation],
+            normalize_diff_spec(parent),
+        )
+    assert is_production_swift("Native/Ambitions/App/AmbitionsApp.swift")
+    assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
+    assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
+    assert not is_production_swift("Packages/AmbitionsDesignSystem/Sources/Previews/ThemePreview.swift")
+    assert is_support_swift("Native/AmbitionsTests/AppTests.swift")
+    assert is_support_swift("Native/AmbitionsUITests/AppUITests.swift")
+    assert is_support_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
+    assert not is_support_swift("Native/Ambitions/App/AmbitionsApp.swift")
+    owner_rows = changed_owner_summary(
+        [
+            ChangedPath("M", "Native/Ambitions/App/AmbitionsApp.swift"),
+            ChangedPath("A", "Native/AmbitionsTests/AppTests.swift", untracked=True),
+            ChangedPath("M", "docs/qa/KNOWN_ISSUES.md"),
+            ChangedPath("M", "scripts/ambitions-remediation-governance-check.py"),
+        ]
+    )
+    owner_map = {str(row["owner"]): row for row in owner_rows}
+    assert owner_map["Native/Ambitions/App"]["productionSwift"] == 1
+    assert owner_map["Native/AmbitionsTests"]["supportSwift"] == 1
+    assert owner_map["docs/qa"]["count"] == 1
+    assert owner_map["scripts"]["count"] == 1
+    assert rel(ROOT / "Native/AmbitionsTests/AppTests.swift").startswith("Native/AmbitionsTests/")
+    assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift")
+    assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
+    assert is_app_bootstrap_wiring("Native/Ambitions/App/AppContainerFactory.swift")
+    assert not has_mutation_authority_type(
+        "struct TimeFeatureMutationResult: Sendable { let receiptID: String; let projectionVersion: Int64 }"
+    )
+    assert has_mutation_authority_type(
+        "struct MutableMutationResult { var projectionVersion: Int64 }"
+    )
+    assert has_mutation_authority_type("actor TimeMutationCoordinator {}")
+    assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
+    assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
+    assert is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "R",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/LegacyRuntimeOwner+02-Split.swift",
+            old_path="Native/Ambitions/Core/Runtime/LegacyRuntimeOwner+02-Split.swift",
+        )
+    )
+    assert not is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "A",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/NewPlanningOwner+02-NewSplit.swift",
+            untracked=True,
+        )
+    )
+    assert not is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "R",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/LegacyRuntimeOwner+02-Split.swift",
+            old_path="Native/Ambitions/Core/Domain/GoalEngine/LegacyRuntimeOwner+02-Split.swift",
+        )
+    )
+    allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")
+    assert "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift" in allowlist
+    source_atlas_new_file = ChangedPath(
+        "A",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift",
+        untracked=True,
+    )
+    changed_scope, finding = source_atlas_growth_guard(
+        source_atlas_new_file,
+        "struct SourceAtlasNewPack {}",
+        set(),
+    )
+    assert changed_scope
+    assert finding is not None
+    assert finding.rule == "source-atlas-growth-adr"
+    changed_scope, finding = source_atlas_growth_guard(
+        source_atlas_new_file,
+        "struct SourceAtlasNewPack {}",
+        {"Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift"},
+    )
+    assert changed_scope
+    assert finding is None
+    changed_scope, finding = source_atlas_growth_guard(
+        ChangedPath("A", "docs/adr/ADR-2099-source-atlas-test.md", untracked=True),
+        "Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`",
+        set(),
+    )
+    assert not changed_scope
+    assert finding is None
+    assert check_legacy_runtime_guard(argparse.Namespace(base=None, no_untracked=True)) == []
+    assert check_accepted_yellow_misuse_guard() == []
+    print("ambitions-remediation-governance-check self-test passed")
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Check AMB-1658 remediation governance rules against changed files.")
+    parser.add_argument("--base", help="Optional base commit/ref for branch-style validation.")
+    parser.add_argument("--no-untracked", action="store_true", help="Ignore untracked files.")
+    parser.add_argument("--json", action="store_true", help="Emit JSON.")
+    parser.add_argument("--allow-package-boundary", action="store_true", help="Allow package/project boundary changes after a linked decision record.")
+    parser.add_argument("--allow-central-lens", action="store_true", help="Allow new central SurfaceLenses files after a canon exception.")
+    parser.add_argument("--self-test", action="store_true", help="Run script self-tests.")
+    args = parser.parse_args()
+
+    if args.self_test:
+        return self_test()
+
+    spec = normalize_diff_spec(args.base)
+    changed = diff_changed_paths(spec, not args.no_untracked)
+    findings = governance_findings(args, spec)
+    report = governance_report(changed)
+    payload = {
+        "valid": not findings,
+        "findingCount": len(findings),
+        "findings": [asdict(finding) for finding in findings],
+        "report": report,
+    }
+
+    if args.json:
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0 if payload["valid"] else 1
+
+    print("ambitions-remediation-governance-check")
+    print(f"changed_paths={report['changedPathCount']}")
+    print(f"production_swift_files={report['productionSwiftFileCount']}")
+    print(f"support_swift_files={report['supportSwiftFileCount']}")
+    print(f"swift_hard_line_cap={report['swiftHardLineCap']}")
+    print("root_loc:")
+    for root, data in report["rootLOC"].items():
+        print(f"  {root}: files={data['files']} loc={data['loc']}")
+    print("largest_files:")
+    for row in report["largestFiles"]:
+        print(f"  {row['lines']} {row['path']}")
+    print("support_largest_files:")
+    for row in report["supportLargestFiles"]:
+        print(f"  {row['lines']} {row['path']}")
+    print(f"support_over_hard_line_cap_files={report['supportOverHardLineCapFiles']}")
+    print("changed_owners:")
+    for row in report["changedOwners"]:
+        print(
+            f"  {row['owner']}: paths={row['count']} "
+            f"productionSwift={row['productionSwift']} supportSwift={row['supportSwift']}"
+        )
+    print("naming_counts:")
+    for key, value in report["namingCounts"].items():
+        print(f"  {key}={value}")
+    if findings:
+        print(f"RED {len(findings)} remediation governance finding(s)")
+        for finding in findings:
+            print(f"[{finding.rule}] {finding.path}: {finding.detail}")
+        return 1
+
+    print("GREEN remediation governance guard passed")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

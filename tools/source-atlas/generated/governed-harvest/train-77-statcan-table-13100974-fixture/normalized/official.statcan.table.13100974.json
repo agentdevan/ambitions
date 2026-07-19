@@ -1,0 +1,493 @@
+{
+  "adapterID": "statcan_table_13100974_health_provider_ehi_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_statcan_table_reference",
+    "liveMode": "requires_live_flag_execute_flag_and_static_download_budget",
+    "packOutput": "allowed_for_bounded_public_statistical_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_statistical_table",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.125210daa54a0ae9",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Statistics Canada Table 13-10-0974-01",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_health_statistics_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.a568782735e80803",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "electronic health information indicators",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_health_statistics_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.05a6591490fb0e66",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "health care provider public context",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.1ee8ac54deb02c0a",
+      "claimType": "public_statistical_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly Statistics Canada table and open licence re-review",
+      "id": "claim.83fac9fec17698bf",
+      "jurisdiction": "CA",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Government of Canada, Statistics Canada",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "state": "source_backed",
+      "text": "Statistics Canada Table 13-10-0974-01 publishes annual public aggregate statistics for electronic health information indicators among health care providers, with Canada and provincial breakdown context for public statistical reference only.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.a91242a44a30787c",
+      "claimType": "public_health_statistical_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly Statistics Canada table and open licence re-review",
+      "id": "claim.fc641a63ebf6a987",
+      "jurisdiction": "CA",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Government of Canada, Statistics Canada",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "state": "source_backed",
+      "text": "Statistics Canada Table 13-10-0974-01 describes aggregate health care provider electronic health information context; Source Atlas must not use it for medical advice, diagnosis, treatment planning, or personal health recommendations.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "statcan_table_13100974_health_provider_ehi_adapter",
+    "atomCount": 3,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "health_wellness_reference",
+    "edgeCount": 2,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "CA",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "official.statcan.table.13100974",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "aggregateStatisticsOnly": true,
+      "claimType": "public_statistical_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateMedicalAdvice": true,
+      "doesNotCreatePersonalHealthRecommendation": true,
+      "doesNotCreateTreatmentPlan": true,
+      "jurisdiction": "CA",
+      "kind": "ambitions.sourceAtlas.healthWellnessStatisticalReferenceCoverage.v1",
+      "label": "Statistics Canada health care provider EHI indicator table reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "subject": "statcan.table_13_10_0974_01.ehi_indicators"
+    },
+    {
+      "aggregateStatisticsOnly": true,
+      "claimType": "public_health_statistical_context",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateMedicalAdvice": true,
+      "doesNotCreatePersonalHealthRecommendation": true,
+      "doesNotCreateTreatmentPlan": true,
+      "jurisdiction": "CA",
+      "kind": "ambitions.sourceAtlas.healthWellnessStatisticalReferenceCoverage.v1",
+      "label": "Statistics Canada health care provider public context reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "subject": "statcan.table_13_10_0974_01.provider_context"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "health_wellness_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.125210daa54a0ae9",
+      "id": "edge.6f46ebfd2cbbf7b8",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_health_statistical_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "toAtomID": "atom.a568782735e80803",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.125210daa54a0ae9",
+      "id": "edge.e9ecb7c93b633068",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_health_statistical_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "toAtomID": "atom.05a6591490fb0e66",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.125210daa54a0ae9",
+        "atom.a568782735e80803",
+        "atom.05a6591490fb0e66"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.6f46ebfd2cbbf7b8",
+        "edge.e9ecb7c93b633068"
+      ],
+      "id": "lattice.4f8af87e5cd39527",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "statcan_table_13100974_health_provider_ehi_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "health_wellness_reference",
+      "id": "pack_candidate.b517cfa7d351dd66",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 3,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 2,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "official.statcan.table.13100974"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "fb331989f3ffdf2c41cde6b790c40e338f5a284b82749de76419b23ba86d1041",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly Statistics Canada table and open licence re-review",
+      "id": "provenance.a97b9289f7b21f21",
+      "jurisdiction": "CA",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "Statistics Canada Open Licence with source acknowledgement, no-endorsement, no-misrepresentation, no-reidentification, and third-party rights caveats retained",
+      "locator": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "publicReferenceOnly": true,
+      "publisher": "Government of Canada, Statistics Canada",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "official.statcan.table.13100974",
+      "sourceState": "current",
+      "sourceURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "termsURL": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.83fac9fec17698bf",
+      "dataClass": "public_requirement",
+      "gateType": "public_health_statistical_reference_only",
+      "id": "requirement.21de5a37f8544b89",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.fc641a63ebf6a987",
+      "dataClass": "public_requirement",
+      "gateType": "public_health_context_reference_only",
+      "id": "requirement.5793df8f55a9ebb0",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.a97b9289f7b21f21"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "official.statcan.table.13100974",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly Statistics Canada table and open licence re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "Statistics Canada Open Licence with source acknowledgement, no-endorsement, no-misrepresentation, no-reidentification, and third-party rights caveats retained",
+    "licenseVersion": "current Statistics Canada open licence posture reviewed 2026-06-28",
+    "publisher": "Government of Canada, Statistics Canada",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "official.statcan.table.13100974",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "official.statcan.table.13100974"
+  }
+}

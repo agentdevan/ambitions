@@ -1,0 +1,87 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.college_scorecard.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": true,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "college-scorecard.api"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "westpoint.redbook.computer_science_major"
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "domainID": "education_credentialing",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "education_public_data_review",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "college-scorecard.api",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-12-27",
+      "licenseID": "us_federal_public_source",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "college-scorecard.api",
+    "westpoint.redbook.computer_science_major"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.college_scorecard.v1",
+      "freshnessSLA": "college_scorecard_release_quarterly_review",
+      "licenseID": "education_public_data_review",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "college-scorecard.api",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "catalog_year_review_quarterly_institutional_recheck",
+      "licenseID": "us_federal_public_source",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

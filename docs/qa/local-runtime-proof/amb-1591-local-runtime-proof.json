@@ -1,0 +1,110 @@
+{
+  "allowedClaims": [
+    "LocalRuntimeOS source-present owner inventory can be reported when architecture_inventory passes.",
+    "LocalRuntimeProof Green can be claimed only when this gate is green and current focused runtime tests also pass."
+  ],
+  "blockedClaims": [
+    "all meaningful Ambitions state changes route only through Command -> Event -> Projection -> Receipt -> Replay",
+    "LocalRuntimeOS is complete",
+    "app-wide command-only mutation is proven",
+    "app-wide event replay and projection consumption are proven",
+    "full side-effect outbox enforcement is proven",
+    "privacy/legal, Visual Green, Release Green, TestFlight, or App Store readiness"
+  ],
+  "checks": [
+    {
+      "checkId": "architecture_inventory",
+      "findings": [],
+      "status": "pass",
+      "summary": "Final architecture tree source parity is green."
+    },
+    {
+      "checkId": "owner_directories",
+      "findings": [],
+      "status": "pass",
+      "summary": "All 19 LocalRuntimeOS owners are source-present."
+    },
+    {
+      "checkId": "integration_markers",
+      "findings": [],
+      "status": "pass",
+      "summary": "Core command, event, projection, replay, search, and outbox integration markers are present."
+    },
+    {
+      "checkId": "live_event_store_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory."
+    },
+    {
+      "checkId": "command_event_reconciliation",
+      "findings": [],
+      "status": "pass",
+      "summary": "Command journal/runtime event linkage and drift diagnostics are present."
+    },
+    {
+      "checkId": "meaningful_mutation_commit_policy",
+      "findings": [],
+      "status": "pass",
+      "summary": "Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed."
+    },
+    {
+      "checkId": "transaction_coordinator_commit_ownership",
+      "findings": [],
+      "status": "pass",
+      "summary": "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path."
+    },
+    {
+      "checkId": "projection_store_surface_read_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present."
+    },
+    {
+      "checkId": "external_surface_sanitized_projection_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "Widget/runtime readers use safe AppGroup snapshot records; writer consumes sanitized projections; App Intents/share use sanitized or durable-intake bridges."
+    },
+    {
+      "checkId": "side_effect_local_commit_receipt_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "External side effects require local runtime commit receipt evidence before attempt."
+    },
+    {
+      "checkId": "runtime_mutation_context_boundaries",
+      "findings": [],
+      "status": "pass",
+      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext."
+    },
+    {
+      "checkId": "mutation_bypass_scan",
+      "findings": [],
+      "status": "pass",
+      "summary": "No high-risk mutation or external-write bypass candidates were found."
+    },
+    {
+      "checkId": "feature_service_mutation_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical."
+    },
+    {
+      "checkId": "truth_file_no_claim_gaps",
+      "findings": [],
+      "status": "pass",
+      "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
+    }
+  ],
+  "generatedAt": "2026-07-01T08:49:34+00:00",
+  "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
+  "status": "green",
+  "summary": {
+    "blockers": 0,
+    "checks": 14,
+    "green": true,
+    "passed": 14,
+    "warnings": 0
+  }
+}

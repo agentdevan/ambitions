@@ -1,0 +1,13 @@
+{
+  "kind": "ambitions.sourceAtlas.missingShardR2OperationPlan.v1",
+  "nonClaims": [
+    "not R2 publication proof",
+    "not production R2 upload",
+    "not release readiness"
+  ],
+  "operationCount": 0,
+  "operations": [],
+  "publicReferenceOnly": true,
+  "rollbackRequiredIfExecuted": false,
+  "writeOperationsPerformed": 0
+}

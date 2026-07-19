@@ -1,0 +1,76 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-creative-project-legal-review-train-49.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "creativecommons_site_cc_by_4_cc0_tools",
+      "license_name": "Creative Commons website content CC BY 4.0 unless otherwise marked; CC legal tools, deeds, and notices CC0 with trademark and third-party caveats retained",
+      "license_url": "https://creativecommons.org/policies/",
+      "non_claims": [
+        "not copyright permission",
+        "not license selection advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://creativecommons.org/policies/",
+      "terms_url": "https://creativecommons.org/terms/"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-creative-project-legal-review-train-49.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "loc_usgov_work",
+      "license_name": "Library of Congress page text marked U.S. Government Work with collection-item, third-party, media, and rights caveats retained",
+      "license_url": "https://www.loc.gov/legal/",
+      "non_claims": [
+        "not copyright clearance",
+        "not source-use permission",
+        "not a content reuse decision",
+        "not legal advice",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "http://www.loc.gov/text-us-government-work",
+      "terms_url": "https://www.loc.gov/legal/"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-creative-project-legal-review-train-49.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "w3c_document_license_public_web",
+      "license_name": "W3C public standards and website reference posture with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+      "license_url": "https://www.w3.org/copyright/",
+      "non_claims": [
+        "not implementation advice",
+        "not patent advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.w3.org/copyright/",
+      "terms_url": "https://www.w3.org/copyright/"
+    }
+  ]
+}

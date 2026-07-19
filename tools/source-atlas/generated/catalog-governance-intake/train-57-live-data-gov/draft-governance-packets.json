@@ -1,0 +1,426 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "draftGovernancePackets": [
+    {
+      "active_registry_mutation_allowed": false,
+      "api_governance_draft": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "review_required.catalog.candidate.096325a6a5ca",
+        "budget_policy_required": true,
+        "credential_posture": "review_required",
+        "evidence_output_policy": "candidate_metadata_only_until_review",
+        "execute_allowed": false,
+        "live_harvest_allowed": false,
+        "rate_policy_required": true
+      },
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "legal_terms_draft": {
+        "approval_artifact_path": "",
+        "attribution_required": "review_required",
+        "commercial_use_allowed": false,
+        "license_id": "review_required.catalog.candidate.096325a6a5ca",
+        "license_url": "cc-by",
+        "modification_allowed": false,
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_required": true,
+        "rights_url": "",
+        "terms_url": ""
+      },
+      "non_claims": [
+        "draft governance intake only",
+        "not active registry mutation",
+        "not legal approval",
+        "not API approval",
+        "not source authority",
+        "not pack output"
+      ],
+      "packet_id": "catalog_candidate_review_packet.cebc1c509a1decb0",
+      "packet_issues": [],
+      "required_decisions": [
+        "confirm publisher authority and jurisdiction",
+        "review source-specific terms and redistribution posture",
+        "decide lookup-only, crosswalk-only, blocked, or pack-eligible policy",
+        "create API rate, budget, retry, and credential policy before live harvest",
+        "approve artifact classes before any registry mutation"
+      ],
+      "review_status": "review_required",
+      "schema_version": "1.0.0",
+      "source_lane_draft": {
+        "active_registry_entry": false,
+        "allowed_artifact_classes": [
+          "candidate_source_record",
+          "discovery_metadata"
+        ],
+        "authority_class": "official_government",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "regulated_requirement",
+          "legal_advice",
+          "medical_advice",
+          "financial_advice",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "education_credentialing"
+        ],
+        "forbidden_artifact_classes": [
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "jurisdiction": "unknown",
+        "lookup_policy": "review_required",
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_status": "review_required",
+        "source_class": "public_catalog",
+        "source_id": "catalog.candidate.096325a6a5ca",
+        "source_name": "Department of Education"
+      }
+    },
+    {
+      "active_registry_mutation_allowed": false,
+      "api_governance_draft": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "review_required.catalog.candidate.1b56977db7b8",
+        "budget_policy_required": true,
+        "credential_posture": "review_required",
+        "evidence_output_policy": "candidate_metadata_only_until_review",
+        "execute_allowed": false,
+        "live_harvest_allowed": false,
+        "rate_policy_required": true
+      },
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "legal_terms_draft": {
+        "approval_artifact_path": "",
+        "attribution_required": "review_required",
+        "commercial_use_allowed": false,
+        "license_id": "review_required.catalog.candidate.1b56977db7b8",
+        "license_url": "cc-by",
+        "modification_allowed": false,
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_required": true,
+        "rights_url": "",
+        "terms_url": ""
+      },
+      "non_claims": [
+        "draft governance intake only",
+        "not active registry mutation",
+        "not legal approval",
+        "not API approval",
+        "not source authority",
+        "not pack output"
+      ],
+      "packet_id": "catalog_candidate_review_packet.63d91c03ab918eae",
+      "packet_issues": [],
+      "required_decisions": [
+        "confirm publisher authority and jurisdiction",
+        "review source-specific terms and redistribution posture",
+        "decide lookup-only, crosswalk-only, blocked, or pack-eligible policy",
+        "create API rate, budget, retry, and credential policy before live harvest",
+        "approve artifact classes before any registry mutation"
+      ],
+      "review_status": "review_required",
+      "schema_version": "1.0.0",
+      "source_lane_draft": {
+        "active_registry_entry": false,
+        "allowed_artifact_classes": [
+          "candidate_source_record",
+          "discovery_metadata"
+        ],
+        "authority_class": "public_catalog",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "regulated_requirement",
+          "legal_advice",
+          "medical_advice",
+          "financial_advice",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "education_credentialing"
+        ],
+        "forbidden_artifact_classes": [
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "jurisdiction": "{\"type\": \"Point\",\"coordinates\": [135.866666,-29.383333]}",
+        "lookup_policy": "review_required",
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_status": "review_required",
+        "source_class": "public_catalog",
+        "source_id": "catalog.candidate.1b56977db7b8",
+        "source_name": "ABS (SA Data)"
+      }
+    },
+    {
+      "active_registry_mutation_allowed": false,
+      "api_governance_draft": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "review_required.catalog.candidate.b73f9f0ebbed",
+        "budget_policy_required": true,
+        "credential_posture": "review_required",
+        "evidence_output_policy": "candidate_metadata_only_until_review",
+        "execute_allowed": false,
+        "live_harvest_allowed": false,
+        "rate_policy_required": true
+      },
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "legal_terms_draft": {
+        "approval_artifact_path": "",
+        "attribution_required": "review_required",
+        "commercial_use_allowed": false,
+        "license_id": "review_required.catalog.candidate.b73f9f0ebbed",
+        "license_url": "ca-ogl-lgo",
+        "modification_allowed": false,
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_required": true,
+        "rights_url": "",
+        "terms_url": ""
+      },
+      "non_claims": [
+        "draft governance intake only",
+        "not active registry mutation",
+        "not legal approval",
+        "not API approval",
+        "not source authority",
+        "not pack output"
+      ],
+      "packet_id": "catalog_candidate_review_packet.3009135e7d0b463b",
+      "packet_issues": [],
+      "required_decisions": [
+        "confirm publisher authority and jurisdiction",
+        "review source-specific terms and redistribution posture",
+        "decide lookup-only, crosswalk-only, blocked, or pack-eligible policy",
+        "create API rate, budget, retry, and credential policy before live harvest",
+        "approve artifact classes before any registry mutation"
+      ],
+      "review_status": "review_required",
+      "schema_version": "1.0.0",
+      "source_lane_draft": {
+        "active_registry_entry": false,
+        "allowed_artifact_classes": [
+          "candidate_source_record",
+          "discovery_metadata"
+        ],
+        "authority_class": "public_catalog",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "regulated_requirement",
+          "legal_advice",
+          "medical_advice",
+          "financial_advice",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "health_wellness_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "jurisdiction": "unknown",
+        "lookup_policy": "review_required",
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_status": "review_required",
+        "source_class": "public_catalog",
+        "source_id": "catalog.candidate.b73f9f0ebbed",
+        "source_name": "Statistics Canada | Statistique Canada"
+      }
+    },
+    {
+      "active_registry_mutation_allowed": false,
+      "api_governance_draft": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "review_required.catalog.candidate.43ed3a73ccc5",
+        "budget_policy_required": true,
+        "credential_posture": "review_required",
+        "evidence_output_policy": "candidate_metadata_only_until_review",
+        "execute_allowed": false,
+        "live_harvest_allowed": false,
+        "rate_policy_required": true
+      },
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "legal_terms_draft": {
+        "approval_artifact_path": "",
+        "attribution_required": "review_required",
+        "commercial_use_allowed": false,
+        "license_id": "review_required.catalog.candidate.43ed3a73ccc5",
+        "license_url": "ca-ogl-lgo",
+        "modification_allowed": false,
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_required": true,
+        "rights_url": "",
+        "terms_url": ""
+      },
+      "non_claims": [
+        "draft governance intake only",
+        "not active registry mutation",
+        "not legal approval",
+        "not API approval",
+        "not source authority",
+        "not pack output"
+      ],
+      "packet_id": "catalog_candidate_review_packet.a361aaefa37c0d83",
+      "packet_issues": [],
+      "required_decisions": [
+        "confirm publisher authority and jurisdiction",
+        "review source-specific terms and redistribution posture",
+        "decide lookup-only, crosswalk-only, blocked, or pack-eligible policy",
+        "create API rate, budget, retry, and credential policy before live harvest",
+        "approve artifact classes before any registry mutation"
+      ],
+      "review_status": "review_required",
+      "schema_version": "1.0.0",
+      "source_lane_draft": {
+        "active_registry_entry": false,
+        "allowed_artifact_classes": [
+          "candidate_source_record",
+          "discovery_metadata"
+        ],
+        "authority_class": "public_catalog",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "regulated_requirement",
+          "legal_advice",
+          "medical_advice",
+          "financial_advice",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "health_wellness_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "jurisdiction": "unknown",
+        "lookup_policy": "review_required",
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_status": "review_required",
+        "source_class": "public_catalog",
+        "source_id": "catalog.candidate.43ed3a73ccc5",
+        "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada"
+      }
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.catalogGovernanceDraftPackets.v1"
+}

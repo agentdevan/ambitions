@@ -1,0 +1,242 @@
+{
+  "allowedClaims": [
+    "source_atlas_terms_gate_green",
+    "bounded_production_r2_write",
+    "bounded_live_native_transport",
+    "bounded_production_target"
+  ],
+  "blockedClaims": [
+    "unqualified_legal_approval",
+    "outside_legal_approval",
+    "source_atlas_runtime_green",
+    "release_green",
+    "universal_coverage"
+  ],
+  "claimEvaluations": [
+    {
+      "allowed": true,
+      "allowedScope": "bounded internal Source Atlas terms-review gate for listed sources",
+      "claimID": "source_atlas_terms_gate_green",
+      "evidence": [
+        "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json"
+      ],
+      "issues": [],
+      "nonClaims": [
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "status": "allowed"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked; only bounded internal terms-review may be claimed",
+      "claimID": "unqualified_legal_approval",
+      "evidence": [
+        "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json"
+      ],
+      "issues": [
+        "unqualified legal approval requires a current source-specific legal/privacy approval artifact and cannot be inferred from internal terms review"
+      ],
+      "nonClaims": [
+        "internal terms review is not outside legal approval"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "outside_legal_approval",
+      "evidence": [
+        "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json"
+      ],
+      "issues": [
+        "outside legal approval is not proven by a source-specific artifact and hash"
+      ],
+      "nonClaims": [
+        "not outside legal approval"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "specific production stable home_life_admin R2 upload/readback proof",
+      "claimID": "bounded_production_r2_write",
+      "evidence": [
+        "docs/qa/source-atlas/r2/source-atlas-home-life-admin-r2-publisher-remote-r2-train-48.json"
+      ],
+      "issues": [],
+      "nonClaims": [
+        "not R2 release readiness",
+        "not native runtime readiness"
+      ],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "bounded production stable business_entrepreneurship, education_credentialing, finance_public_reference, health_wellness_reference, hobbies_recreation, home_life_admin, occupation_foundation, public_civic_requirements, travel_relocation Worker gateway and native URLSession/lifecycle proof",
+      "claimID": "bounded_live_native_transport",
+      "evidence": [
+        "docs/qa/source-atlas/native/source-atlas-native-nona-domain-live-worker-proof-train-48.json"
+      ],
+      "issues": [],
+      "nonClaims": [
+        "not custom-domain production readiness",
+        "not Release Green"
+      ],
+      "status": "allowed"
+    },
+    {
+      "allowed": true,
+      "allowedScope": "specific production stable home_life_admin pack target",
+      "claimID": "bounded_production_target",
+      "evidence": [
+        "docs/qa/source-atlas/r2/source-atlas-home-life-admin-r2-publisher-remote-r2-train-48.json",
+        "docs/qa/source-atlas/native/source-atlas-native-nona-domain-live-worker-proof-train-48.json"
+      ],
+      "issues": [],
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green"
+      ],
+      "status": "allowed"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked; requires full runtime scenario proof across Source Atlas composition, offline fallback, inspection, and release gates",
+      "claimID": "source_atlas_runtime_green",
+      "evidence": [
+        "docs/qa/source-atlas/native/source-atlas-native-nona-domain-live-worker-proof-train-48.json"
+      ],
+      "issues": [
+        "current evidence proves bounded transport/lifecycle behavior, not broad Source Atlas Runtime Green"
+      ],
+      "nonClaims": [
+        "not broad Runtime Green",
+        "not Release Green"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "release_green",
+      "evidence": [],
+      "issues": [
+        "Codex cannot self-certify Release Green; release umbrella/device/accessibility/privacy/legal approval evidence is missing"
+      ],
+      "nonClaims": [
+        "not Release Green"
+      ],
+      "status": "blocked"
+    },
+    {
+      "allowed": false,
+      "allowedScope": "blocked",
+      "claimID": "universal_coverage",
+      "evidence": [
+        "tools/source-atlas/generated/claim-frontier/train-48-home-life-admin/coverage-report.json"
+      ],
+      "issues": [
+        "literal or unbounded universal coverage is not proven; use governed coverage-frontier scope instead"
+      ],
+      "nonClaims": [
+        "not universal coverage"
+      ],
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "gateID": "source-atlas/legal-release-claim-gate/a8c4e34f7a702bbc",
+  "gateIssues": [],
+  "kind": "ambitions.sourceAtlas.legalReleaseClaimGate.v1",
+  "nonClaims": [
+    "not outside legal approval unless an outside approval artifact is validated",
+    "not unqualified legal approval",
+    "not Release Green",
+    "not Visual Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not entitlement readiness",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "requestedClaims": [
+    "source_atlas_terms_gate_green",
+    "unqualified_legal_approval",
+    "outside_legal_approval",
+    "bounded_production_r2_write",
+    "bounded_live_native_transport",
+    "bounded_production_target",
+    "source_atlas_runtime_green",
+    "release_green",
+    "universal_coverage"
+  ],
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; see per-claim evaluations",
+  "sourceIDs": [
+    "energy.gov.energy_saver",
+    "ready.gov.kit",
+    "usa.gov.home_repair"
+  ],
+  "status": "Source Green for release-claim gate",
+  "termsValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "energy.gov.energy_saver",
+      "ready.gov.kit",
+      "usa.gov.home_repair"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "energy.gov.energy_saver",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "ready.gov.kit",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "usa.gov.home_repair",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "valid": true,
+  "versionID": "source-atlas-legal-release-claim-gate-v1"
+}

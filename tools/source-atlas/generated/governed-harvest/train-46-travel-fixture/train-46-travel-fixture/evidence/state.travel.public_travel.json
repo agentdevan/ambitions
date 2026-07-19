@@ -1,0 +1,29 @@
+{
+  "adapterID": "state_travel_public_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 2,
+  "dataClass": "public_provenance",
+  "evidenceHash": "149fe0f13f1342d0e652bc1daf926a495efff808c553073ef71e911fdbb50521",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "state_travel_public_web",
+  "normalizedPath": "normalized/state.travel.public_travel.json",
+  "normalizedSHA256": "560cb530e8eb6b5bcdd6f2f0cea4864ec18160fe38a80d8dab6a1e84e69b2d97",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "state.travel.public_travel",
+  "sourceLane": "state.travel.public_travel"
+}

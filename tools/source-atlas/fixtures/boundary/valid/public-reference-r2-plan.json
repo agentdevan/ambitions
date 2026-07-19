@@ -1,0 +1,20 @@
+{
+  "caseID": "valid.public_reference_r2_plan",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "bucket": "ambitions-source-atlas-staging",
+    "dataClass": "public_r2_object_key",
+    "kind": "ambitions.sourceAtlas.r2StagingPlan",
+    "objects": [
+      {
+        "objectKey": "source-atlas/v1/releases/fixture-v1/manifest.json"
+      },
+      {
+        "objectKey": "source-atlas/v1/channels/staging/manifest.json"
+      }
+    ],
+    "schemaVersion": 1,
+    "validForUpload": true
+  }
+}

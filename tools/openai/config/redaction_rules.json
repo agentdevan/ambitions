@@ -1,0 +1,28 @@
+{
+  "patterns": [
+    {
+      "category": "API keys",
+      "pattern": "(?i)sk-[A-Za-z0-9]{20,}"
+    },
+    {
+      "category": "Environment files",
+      "pattern": "\\.env"
+    },
+    {
+      "category": "Signing/provisioning files",
+      "pattern": "(\\.p12|\\.mobileprovision|provisioning|entitlements|identity)"
+    },
+    {
+      "category": "Personal screenshots",
+      "pattern": "(screenshot|screen_capture|screen\\.png)"
+    },
+    {
+      "category": "Private user data",
+      "pattern": "(diary|journal|private_data|private_user|user_profile|health|contact)"
+    },
+    {
+      "category": "Runner logs",
+      "pattern": "\\.codex/runs/"
+    }
+  ]
+}

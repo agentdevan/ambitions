@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "feature_service_mutation_authority.v1",
+  "summary": "Production service repository writes must be command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical legacy compatibility debt.",
+  "scanIncludedPrefixes": [
+    "Native/Ambitions/App/",
+    "Native/Ambitions/Interaction/",
+    "Native/Ambitions/Projection/Contracts/",
+    "Native/Ambitions/Surfaces/",
+    "Native/Ambitions/Composer/",
+    "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+    "Native/Ambitions/Core/Permissions/",
+    "Native/AmbitionsWidgetExtension/",
+    "Native/AmbitionsShareExtension/"
+  ],
+  "allowedClassifications": [
+    "command_owned",
+    "transaction_owned",
+    "migration_owned",
+    "test_only",
+    "explicitly_non_canonical"
+  ],
+  "allowedWritePaths": [
+    {
+      "path": "Native/Ambitions/App/Onboarding/ProgressiveIntelligenceOnboarding.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["appStateRepository.saveState"],
+      "rationale": "Legacy onboarding app-state compatibility write; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
+      "classification": "test_only",
+      "allowedCalls": ["repositories.captures.saveCaptures"],
+      "rationale": "DEBUG-only preview capture seed guarded by AMBITIONS_UI_SEED_CAPTURES; persistence bootstrap owns repository setup after AMB-1675."
+    },
+    {
+      "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift",
+      "classification": "command_owned",
+      "allowedCalls": ["repositories.commandJournal.append"],
+      "rationale": "Today action handler appends the command envelope before mutation handling."
+    },
+    {
+      "path": "Native/Ambitions/Interaction/TodayCommandActionHandler+Evidence.swift",
+      "classification": "command_owned",
+      "allowedCalls": ["repositories.eventLedger.append"],
+      "rationale": "Command evidence emission follows the Today command action handler."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+02-Snapshot.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.goals.saveGoals",
+        "repositories.drafts.saveDrafts",
+        "repositories.appState.saveState"
+      ],
+      "rationale": "Legacy Goals feature-service creation compatibility writes; canonical object-state authority remains LocalRuntimeOS."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+10-performMutation.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.goals.saveGoals",
+        "repositories.feedback.saveEvents",
+        "repositories.evidence.saveEvidence"
+      ],
+      "rationale": "Legacy Goals detail mutation compatibility writes pending Commands migration."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+11-applyAdaptiveRecommendation.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.goals.saveGoals",
+        "repositories.appState.saveState"
+      ],
+      "rationale": "Legacy adaptive recommendation compatibility writes pending Commands migration."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Time/Projection/RepositoryBackedTimeService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["repositories.eventLedger.append"],
+      "rationale": "Legacy Time projection ledger mirror; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsProjectionService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.feedback.saveEvents",
+        "repositories.evidence.saveEvidence",
+        "repositories.goals.saveGoals"
+      ],
+      "rationale": "Legacy Time ritual compatibility writes pending Scheduling/Commands migration."
+    },
+    {
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.feedback.saveEvents",
+        "repositories.evidence.saveEvidence",
+        "repositories.goals.saveGoals"
+      ],
+      "rationale": "Legacy Today inline feedback compatibility writes pending Commands migration."
+    },
+    {
+      "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["reminderRepository.saveReminders"],
+      "rationale": "Legacy reminder mirror behind the permissions service; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AppServices.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["appStateRepository.saveState"],
+      "rationale": "Moved AMB-1730 startup app-state compatibility write; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repository.saveCaptures",
+        "capturePromotionUnitOfWork.saveCapturePromotion"
+      ],
+      "rationale": "Moved AMB-1730 capture repository compatibility writes; promotion unit of work is tracked separately from canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureServiceRouting.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["eventLedger.append"],
+      "rationale": "Moved AMB-1730 capture event-ledger mirror; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": ["repository.saveSignals"],
+      "rationale": "Moved AMB-1730 teaching-signal repository compatibility write; not canonical object-state authority."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.goals.saveGoals",
+        "repositories.eventLedger.append",
+        "repositories.feedback.saveEvents"
+      ],
+      "rationale": "Moved AMB-1730 simple-step lifecycle compatibility writes pending Commands migration."
+    },
+    {
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService+Recurring.swift",
+      "classification": "explicitly_non_canonical",
+      "allowedCalls": [
+        "repositories.goals.saveGoals",
+        "repositories.feedback.saveEvents",
+        "repositories.evidence.saveEvidence"
+      ],
+      "rationale": "Moved AMB-1730 recurring-step lifecycle compatibility writes pending Commands migration."
+    }
+  ]
+}

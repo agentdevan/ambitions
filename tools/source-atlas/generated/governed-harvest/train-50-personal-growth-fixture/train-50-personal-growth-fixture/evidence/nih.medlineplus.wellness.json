@@ -1,0 +1,29 @@
+{
+  "adapterID": "nih_medlineplus_wellness_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 2,
+  "dataClass": "public_provenance",
+  "evidenceHash": "25fd50511ac7b88aa06d77bc5657a87b9e42f1fed3998c0aac22c1cb435b89b9",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "medlineplus_public_domain_topic_summary",
+  "normalizedPath": "normalized/nih.medlineplus.wellness.json",
+  "normalizedSHA256": "90c758eaaca162df6159347e60a60f38f63939c32a5791538b72c4f6b25060eb",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "nih.medlineplus.wellness",
+  "sourceLane": "nih.medlineplus.wellness"
+}

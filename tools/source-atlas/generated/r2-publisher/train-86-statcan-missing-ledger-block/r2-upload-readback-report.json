@@ -1,0 +1,42 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "currentPointer": {
+    "blockedUntilReadback": true,
+    "key": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json",
+    "updated": false
+  },
+  "dataClass": "public_r2_object_key",
+  "dryRun": false,
+  "executeRequested": true,
+  "executed": false,
+  "issues": [
+    "production target ledger is required for this activation path"
+  ],
+  "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+  "mode": "local_simulation",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not real R2 credentials proof",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "schemaVersion": 1,
+  "success": false,
+  "wouldUpdateCurrentPointer": false,
+  "wouldUploadObjectCount": 13
+}

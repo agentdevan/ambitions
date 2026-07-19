@@ -1,0 +1,278 @@
+{
+  "approvalID": "source_atlas.r2_owner_approval.eb7f033244d7e869",
+  "approvalStatus": "approved_for_future_bounded_configured_public_reference_r2_write_preflight",
+  "approvalType": "bounded_configured_public_reference_production_r2_write_preflight",
+  "approved": true,
+  "bucket": "ambitions-source-atlas-prod",
+  "channel": "stable",
+  "createdAt": "2026-06-28T18:24:00Z",
+  "domainScopes": [
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/business_entrepreneurship/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json",
+      "channel": "stable",
+      "domainID": "business_entrepreneurship",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/creative_project_reference/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/creative_project_reference/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/creative_project_reference/revocations.json",
+      "channel": "stable",
+      "domainID": "creative_project_reference",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/education_credentialing/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+      "channel": "stable",
+      "domainID": "education_credentialing",
+      "environment": "production",
+      "packableClaimCountAtApproval": 8,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/finance_public_reference/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/finance_public_reference/revocations.json",
+      "channel": "stable",
+      "domainID": "finance_public_reference",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/health_wellness_reference/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/health_wellness_reference/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/health_wellness_reference/revocations.json",
+      "channel": "stable",
+      "domainID": "health_wellness_reference",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/revocations.json",
+      "channel": "stable",
+      "domainID": "health_wellness_reference_ca_statistics",
+      "environment": "production",
+      "packableClaimCountAtApproval": 2,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/hobbies_recreation/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+      "channel": "stable",
+      "domainID": "hobbies_recreation",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/home_life_admin/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/home_life_admin/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+      "channel": "stable",
+      "domainID": "home_life_admin",
+      "environment": "production",
+      "packableClaimCountAtApproval": 4,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/occupation_foundation/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/occupation_foundation/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/occupation_foundation/revocations.json",
+      "channel": "stable",
+      "domainID": "occupation_foundation",
+      "environment": "production",
+      "packableClaimCountAtApproval": 26,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/personal_growth/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/personal_growth/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+      "channel": "stable",
+      "domainID": "personal_growth",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/public_civic_requirements/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+      "channel": "stable",
+      "domainID": "public_civic_requirements",
+      "environment": "production",
+      "packableClaimCountAtApproval": 2,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/relationships_family/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/relationships_family/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/relationships_family/revocations.json",
+      "channel": "stable",
+      "domainID": "relationships_family",
+      "environment": "production",
+      "packableClaimCountAtApproval": 5,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/travel_relocation/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+      "channel": "stable",
+      "domainID": "travel_relocation",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    },
+    {
+      "approvedCurrentPointerKey": "source-atlas/v1/production/stable/volunteering_public_reference/current.json",
+      "approvedLKGPointerKey": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+      "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/volunteering_public_reference/",
+      "approvedRevocationKey": "source-atlas/v1/production/stable/volunteering_public_reference/revocations.json",
+      "channel": "stable",
+      "domainID": "volunteering_public_reference",
+      "environment": "production",
+      "packableClaimCountAtApproval": 3,
+      "readinessStatusAtApproval": "bounded_production_target_ready",
+      "sourceIDs": [
+        "americorps.volunteer_rate_state"
+      ]
+    }
+  ],
+  "environment": "production",
+  "evidenceInputs": {
+    "productionFinishLineGate": "docs/qa/source-atlas/source-atlas-production-finish-line-gate-train-117.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-131.json"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionR2OwnerApproval.v1",
+  "literalUniversalCoverageClaimed": false,
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not native device proof",
+    "not independent accessibility proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "approvalPayload": "aff517e0e48388b8876f1da0f304aa86eab3c270990f58d8b2419e15d4ee91b1",
+    "report": "18a9e0835ddd5cbf117087187510dbb829a1d682b6a3bd0e879c20132bda3b8d"
+  },
+  "outputPaths": {
+    "markdown": "tools/source-atlas/generated/r2-owner-approval/train-131-tetradeca-ledger-gated/r2-owner-approval.md",
+    "report": "tools/source-atlas/generated/r2-owner-approval/train-131-tetradeca-ledger-gated/r2-owner-approval.json"
+  },
+  "outsideLegalApprovalClaimed": false,
+  "owner": "Ambitions owner technical authorization captured in current Source Atlas goal thread",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "releaseGreenClaimed": false,
+  "requiredExecutionGates": [
+    "budget policy",
+    "current pointer after readback only",
+    "execute flag",
+    "legal/terms approval packet",
+    "non-private payload scan",
+    "owner approval artifact",
+    "public object keys",
+    "rollback/LKG/revocation plan",
+    "upload/readback SHA-256 verification"
+  ],
+  "schemaVersion": 1,
+  "status": "Source Green for scoped owner R2 write preflight approval",
+  "userAuthorizationBasis": [
+    "User requested continued implementation of Source Atlas as an autonomous public/reference harvesting, R2-production, Ambitions-usable system.",
+    "User authorized work needed in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "This artifact is owner technical authorization for future bounded configured public/reference R2 write preflight only; it is not outside legal approval."
+  ],
+  "valid": true,
+  "versionID": "source-atlas-r2-owner-approval-train-118"
+}

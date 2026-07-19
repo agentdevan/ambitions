@@ -1,0 +1,4806 @@
+{
+  "blockedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.2ee2897f3cd35572",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.77a7677d2e00c213",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "language_learning_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.2ee2897f3cd35572"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.8d79bd46d92dbd52",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bdd13e402737550d",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "education_credentialing_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.8d79bd46d92dbd52"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.662508c11399b44f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2e504b02d1459fd1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "legal_information_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.662508c11399b44f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.9b81cfca039e6ed7",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4ebf89003f844d93",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "occupation_foundation_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.9b81cfca039e6ed7"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.e295e862edfd1a4c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.84cebe1b72be0e7b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "parenting_education_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.e295e862edfd1a4c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.395cf5badae1e115",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.5f62059b2826dbf8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "business_entrepreneurship_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.395cf5badae1e115"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b473e4e9b53e301d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.cdac650d1bdec9dc",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "debt_credit_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.b473e4e9b53e301d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.5106bf4470141139",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d22a9629f58fa0b2",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_energy_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.5106bf4470141139"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.6326a62510584414",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.1d24cdca43273c7a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "tax_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.6326a62510584414"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.4c9ccf6870bec7b3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.a6a0e659c08b4483",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_life_admin_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.4c9ccf6870bec7b3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b6114c996c2f95fa",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d92c74d096321c98",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "estate_planning_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.b6114c996c2f95fa"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ba8e385cd5a20abe",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c73e2e52235ee7c0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "pet_care_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.ba8e385cd5a20abe"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.5b9dba85ac00f2b9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.00d9f8d0d76f9d12",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "data_privacy_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.5b9dba85ac00f2b9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.b08c7022119a4760",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.a4739ada3ae55164",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "education_credentialing_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.b08c7022119a4760"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.f728b424f77d6521",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.9dcc3c77ebdbd6c2",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "relationships_family_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.f728b424f77d6521"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.c43395d0b26a8c48",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f97e0af58e20697a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "mental_health_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.c43395d0b26a8c48"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.565960052c659537",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.dcd4e35c24f13c87",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "occupation_foundation_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.565960052c659537"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.2c3a85f8e285a81e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bcfa7abf318064d1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "digital_security_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.2c3a85f8e285a81e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.a5ac2dbc24a8bf5e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d18a144e60896e57",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.a5ac2dbc24a8bf5e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.dc6416ed6a8de77d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ffb85562157a0b2d",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "science_research_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.dc6416ed6a8de77d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.dd51afaa766fb155",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d70dc0df2e18ad9b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "caregiving_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.dd51afaa766fb155"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.df8d355d70ac122b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.91d27d3752c5b3b6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_civic_requirements_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.df8d355d70ac122b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.da4e527e5773e6ec",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b1d255d489798ee9",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "procurement_contracting_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.da4e527e5773e6ec"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.7fe5902c216c2f15",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4d0bd7404a4406c5",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "sports_fitness_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.7fe5902c216c2f15"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.50e0f8c72e417b7f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.259b91c423955f97",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "caregiving_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.50e0f8c72e417b7f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e9cc883b0b7cbda9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3f628f292fe5babe",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "volunteering_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.e9cc883b0b7cbda9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.32d05aa7f0aca91c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.a8c507c3b79228e8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_benefits_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.32d05aa7f0aca91c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.328db4da75f44674",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.71e4883b3b005eef",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "arts_culture_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.328db4da75f44674"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.2072330feb6c8120",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.37377741f50546ee",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_life_admin_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.2072330feb6c8120"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.355b51309dd9a20d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.83969b86ee651d1f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "parenting_education_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.355b51309dd9a20d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.446707c3bd8acf50",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f5a935c24ec65e72",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "pet_care_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.446707c3bd8acf50"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.350f677c4c351fd6",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.04024dd5a10cb1b5",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "chronic_condition_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.350f677c4c351fd6"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.5f4e9eb8646b2efa",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3eae53da54893ae8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "immigration_citizenship_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.5f4e9eb8646b2efa"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.94ed4f854bf7c34f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.07c240cedad80b26",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "immigration_citizenship_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.94ed4f854bf7c34f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.ad0eca04a01a544a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c8f6f3c3183c2c4c",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "language_learning_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.ad0eca04a01a544a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.3e8c6ca2138b14c5",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ad2d1aa51d2eb206",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "transportation_mobility_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.3e8c6ca2138b14c5"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.99cd2f3c18f3ad54",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f6307dcd8a183ce0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_life_admin_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.99cd2f3c18f3ad54"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.0d08014d35045651",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.1036632b53386273",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "language_learning_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.0d08014d35045651"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.e7fcba8b755aa830",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.27d238ff5f5cc087",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "hobbies_recreation_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.e7fcba8b755aa830"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.eab8fa5e8e336e6b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ee5631a2011a66e0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "education_credentialing_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.eab8fa5e8e336e6b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.3de03b977627ac8a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b95a84904bfaa7f9",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "finance_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.3de03b977627ac8a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.c4e9e31a65ebdae2",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.92f4563ab78c697b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "disaster_preparedness_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.c4e9e31a65ebdae2"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.e2b80757af61f700",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7d07732b4d42d495",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "consumer_rights_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.e2b80757af61f700"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.59b13a90c514e6c4",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.553ee65abf6d6d89",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "consumer_rights_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.59b13a90c514e6c4"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.b14a48cec6e16595",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bdb71ba97e7eff58",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "local_services_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.b14a48cec6e16595"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.3fb65c7c91b17503",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.5591744a2f3cc34c",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "finance_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.3fb65c7c91b17503"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.244e743cf6f6688a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f68ea9c64e59d686",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "local_services_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.244e743cf6f6688a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.5646e1a5d5bebf21",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.fdaf1bc2024df322",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "business_entrepreneurship_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.5646e1a5d5bebf21"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.c34b3f422d178d7d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.584197a14b62393b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "accessibility_disability_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.c34b3f422d178d7d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.da480d72ef79f212",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c3206dc3f14b8af0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "hobbies_recreation_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.da480d72ef79f212"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.71f54210d061a478",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3abb6f118ccd0f26",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "accessibility_disability_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.71f54210d061a478"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.35119a7e841989ce",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.62f549725795e5b8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "retirement_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.35119a7e841989ce"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.a74e711d23118fa3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4a8b934837f12570",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "parenting_education_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.a74e711d23118fa3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.ac4e2a4304e4609d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4bfe772cf5fe6448",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "housing_tenancy_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.ac4e2a4304e4609d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "language_learning_reference",
+      "eventID": "source_atlas.missing_shard_event.d676b033926f9c6a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ad422c93f64ddccd",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "language_learning_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.d676b033926f9c6a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.b65c5e8745a3ce78",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.75aa60f9fec31106",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_civic_requirements_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.b65c5e8745a3ce78"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.53ff83ca68f41b63",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2b4171ab64686989",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "grants_funding_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.53ff83ca68f41b63"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.9b1d4c7e57fa2b6d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e4192057ac196a47",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "accessibility_disability_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.9b1d4c7e57fa2b6d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.3e244e2b14795813",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e7babcb58efae7fc",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "arts_culture_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.3e244e2b14795813"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.25bd6995a2af251e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.df57fbb6dd7d41db",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "food_nutrition_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.25bd6995a2af251e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.20c8a94064945d37",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.fab6bd76c525059b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "data_privacy_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.20c8a94064945d37"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.96cc4d06b2f30103",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.00403ea1b2e991f1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "legal_information_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.96cc4d06b2f30103"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.c0bb2e18c0670769",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b8417b4fd1e62a72",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "personal_growth_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.c0bb2e18c0670769"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.6752a73de9748eea",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.a945ec444ee7d2ed",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "legal_information_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.6752a73de9748eea"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.5e497726d05ed3ed",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c6f85f20d8d7f185",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.5e497726d05ed3ed"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.ea5b302b0ff63cb9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d29c2bec2eed6247",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "housing_tenancy_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.ea5b302b0ff63cb9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.05125ecbbb539e31",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.11157f1151ffdfc4",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "pet_care_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.05125ecbbb539e31"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.9937af901b82e9e9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3f572e327e7ea3a5",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "transportation_mobility_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.9937af901b82e9e9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.b928a2ec8b774d9e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.fc00f064af3db17e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "estate_planning_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.b928a2ec8b774d9e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.253f41ea2bb74c9b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.64bc5f1b1058ba6f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "arts_culture_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.253f41ea2bb74c9b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.1c8c32572079ce29",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.174b264cef82845f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "data_privacy_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.1c8c32572079ce29"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.cf763efd9a6b1309",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f10f143eb17e25e8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_energy_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.cf763efd9a6b1309"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.f0c04490208cfb14",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.552e7f39d36741b6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "disaster_preparedness_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.f0c04490208cfb14"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.0e3cc619b0cd6141",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c6117129571f016b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "mental_health_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.0e3cc619b0cd6141"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.a8ee6ca5e7a78c71",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.1beb93de07658aaf",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "procurement_contracting_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.a8ee6ca5e7a78c71"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e471b0afc1e196ba",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.596c60e836849724",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "estate_planning_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.e471b0afc1e196ba"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.c96986ff09ffdfc7",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.9f3b15519a06d040",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "environmental_sustainability_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.c96986ff09ffdfc7"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.3457c578111b6d7d",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.63d365254847d7e0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "eldercare_aging_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.3457c578111b6d7d"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.a8af08f624b83fa5",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.6158a6a417ec1263",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "creative_project_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.a8af08f624b83fa5"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.fb7bd475acc043ed",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f079c9276784344e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "volunteering_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.fb7bd475acc043ed"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.ce1c8126ca1c2e5e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.8e19796c293316c1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "environmental_sustainability_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.ce1c8126ca1c2e5e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.7ffe5a99357592a1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.dbe748a00936f201",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.7ffe5a99357592a1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ec2a065f2cb06c09",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.29d860ad4ee11878",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "finance_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.ec2a065f2cb06c09"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.20550774a4ea85ba",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.210497296b46c8e4",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "nonprofit_operations_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.20550774a4ea85ba"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.92952bef33958f34",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f15f909d6ba74202",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "creative_project_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.92952bef33958f34"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.ec698aeecd66e720",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.add0a99a978f4361",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_safety_emergency_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.ec698aeecd66e720"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.596b687d39d66259",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.210a390b7c65e3e0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "procurement_contracting_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.596b687d39d66259"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.4189e561695bdacb",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.59c698a6744e8fff",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "volunteering_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.4189e561695bdacb"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.f8c79a61ff244e98",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b9afd4a6110f1100",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "transportation_mobility_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.f8c79a61ff244e98"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.1d6d75e46e2c5ff3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.df2fa3425f03e2b8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_benefits_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.1d6d75e46e2c5ff3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.b1d3318bd589a516",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.01c991259dc49873",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "creative_project_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.b1d3318bd589a516"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "arts_culture_reference",
+      "eventID": "source_atlas.missing_shard_event.54ab39d96fc05420",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.57fe96a4a869c948",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "arts_culture_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.54ab39d96fc05420"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.29493d8d7665c526",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ca10b06cd14ed60b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.29493d8d7665c526"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.adc74623ecac244e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4ff06ccbb54500ce",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "nonprofit_operations_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.adc74623ecac244e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.dd3d11fc4b6daa57",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f5367fb8817a2844",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "civic_participation_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.dd3d11fc4b6daa57"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.ba999939e4094590",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.66ccfa2c07fb6713",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "travel_relocation_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.ba999939e4094590"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.b9b1bf879bfff99c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.6cf7f4c463f297f3",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_benefits_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.b9b1bf879bfff99c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.fe0d87dc077402f9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.27e69cbd5b7e403a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "civic_participation_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.fe0d87dc077402f9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.03c112414965fc2f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.86690fb5f1020f1f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_safety_emergency_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.03c112414965fc2f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "education_credentialing",
+      "eventID": "source_atlas.missing_shard_event.8f76159fc09dd1a0",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7a300ed84d8563d0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "education_credentialing_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.8f76159fc09dd1a0"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.11b3b651e38a278f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f0f6ba1af58f7ade",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "grants_funding_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.11b3b651e38a278f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.62c0ec149baa1168",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.81583ea38e51d9c7",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "science_research_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.62c0ec149baa1168"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.9d659153d9160407",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.200880be949cb678",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "childcare_family_services_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.9d659153d9160407"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.d390afaf33785328",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4c19d6b9e8b102b0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "hobbies_recreation_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.d390afaf33785328"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.300cf0a20dbb02a4",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.609c116d5f29885e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "disaster_preparedness_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.300cf0a20dbb02a4"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.5ad57c1f666a26f1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d7277ddb86d0bf67",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "civic_participation_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.5ad57c1f666a26f1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference_ca_statistics_trusted_directories",
+      "eventID": "source_atlas.missing_shard_event.37564354cd8ee2d8",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bbdf394cd77e68a6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_ca_statistics_trusted_directories_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.37564354cd8ee2d8"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.fffe69b25cbf3d63",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.33b3556b23e48c4b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "mental_health_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.fffe69b25cbf3d63"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.e33d16dc47fef4b1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7475d21032c3e43f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "sports_fitness_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.e33d16dc47fef4b1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.803edf5a9f3b760a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2bafb5e09cf10b54",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "relationships_family_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.803edf5a9f3b760a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.1832d26dabfcc42a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b49b2e5bbdaf7ee3",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_energy_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.1832d26dabfcc42a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.e7a2687692321a8a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.8c7621a4243c340d",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "agricultural_gardening_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.e7a2687692321a8a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.e8f08a96d23af1a5",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b754c82c0e6d273e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "occupation_foundation_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.e8f08a96d23af1a5"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.da3603617c91e0f8",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bb7eec5fd5de81a1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "nonprofit_operations_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.da3603617c91e0f8"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.35bad766ec3378b1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.73d6efa536e93196",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "sports_fitness_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.35bad766ec3378b1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "disaster_preparedness_reference",
+      "eventID": "source_atlas.missing_shard_event.19a5450bd0b7e6ea",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d0907f9c31bdfd79",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "disaster_preparedness_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.19a5450bd0b7e6ea"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.310a0c183bcafd9e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.8e8e93d15187a923",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "agricultural_gardening_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.310a0c183bcafd9e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.1babf69fe16adb1b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e18cfc977dd47896",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "childcare_family_services_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.1babf69fe16adb1b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.6f96b1e005c71a47",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.260e3b8e8c8ec670",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_civic_requirements_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.6f96b1e005c71a47"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.7ad2099461ee8507",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.9f4206cbe6afb432",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "grants_funding_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.7ad2099461ee8507"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.46a29189e10c8850",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3d1fae2e53870f67",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "tax_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.46a29189e10c8850"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.82bbd3b430d84a66",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4985025f69f29f1d",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "retirement_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.82bbd3b430d84a66"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.df43d887a9ae4ce3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.de1da29d9704578c",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "local_services_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.df43d887a9ae4ce3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.fd038d90daf7423e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.0977fd2c6b8a33ed",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "agricultural_gardening_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.fd038d90daf7423e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.984e332d56b8cd72",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.28208f116c2b3699",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "debt_credit_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.984e332d56b8cd72"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.ee15feb5709d8001",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.8a0dbd3da7bff3da",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "immigration_citizenship_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.ee15feb5709d8001"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "agricultural_gardening_reference",
+      "eventID": "source_atlas.missing_shard_event.792ce43231820c22",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.1bfb758ef850f087",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "agricultural_gardening_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.792ce43231820c22"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.d2bef54322a34b5a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2f26364c8f0bb9cd",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "childcare_family_services_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.d2bef54322a34b5a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "procurement_contracting_reference",
+      "eventID": "source_atlas.missing_shard_event.ee50e7e6c37055db",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7de4bece7db5d6f6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "procurement_contracting_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.ee50e7e6c37055db"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "estate_planning_public_reference",
+      "eventID": "source_atlas.missing_shard_event.8812bd37c3bd4b3f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e10ed49819e91744",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "estate_planning_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.8812bd37c3bd4b3f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_civic_requirements",
+      "eventID": "source_atlas.missing_shard_event.c6953d1ef93976e0",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c6a9def1be46fdd4",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_civic_requirements_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.c6953d1ef93976e0"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.e90a2a9678c44e91",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.29963b6915e9782a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "chronic_condition_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.e90a2a9678c44e91"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.ead7ac17be5a0935",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d26c636268464ae2",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "insurance_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.ead7ac17be5a0935"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.4a5dd9a9b682ef4e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d24c77b41f399e39",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "personal_growth_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.4a5dd9a9b682ef4e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.914a5510ea6fb350",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.5c60a7e4ec142007",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "digital_security_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.914a5510ea6fb350"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.06982810fd5ea66e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.94dcd75ff3e20055",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "eldercare_aging_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.06982810fd5ea66e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.da13a498af183de3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.be112bdb29b8d665",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "business_entrepreneurship_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.da13a498af183de3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "sports_fitness_reference",
+      "eventID": "source_atlas.missing_shard_event.2eabb04de43a0dc3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.eae854431fecd1a2",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "sports_fitness_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.2eabb04de43a0dc3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.52f0fc0f4f99e385",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3101a1ebb010f998",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "food_nutrition_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.52f0fc0f4f99e385"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "immigration_citizenship_reference",
+      "eventID": "source_atlas.missing_shard_event.27bd791dc443e7bb",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c19fe6cf66c4110a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "immigration_citizenship_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.27bd791dc443e7bb"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.aa40eaf045dd172a",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.51e84c855317a5eb",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "relationships_family_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.aa40eaf045dd172a"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.a7af78a01fab3cc7",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d2a983f64a1b22c4",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "retirement_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.a7af78a01fab3cc7"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.f5e7185baba2a5b9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.a35658ebadd05465",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "insurance_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.f5e7185baba2a5b9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "civic_participation_reference",
+      "eventID": "source_atlas.missing_shard_event.9cf5e407889e010f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.525eda38d89dde83",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "civic_participation_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.9cf5e407889e010f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.98a56772ca5927b0",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.67337a25c68e87a0",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "environmental_sustainability_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.98a56772ca5927b0"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "mental_health_public_reference",
+      "eventID": "source_atlas.missing_shard_event.a24dd6d98f1fe9db",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f81b13568082946a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "mental_health_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.a24dd6d98f1fe9db"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "pet_care_public_reference",
+      "eventID": "source_atlas.missing_shard_event.be5f9fb81c9f75bc",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.19d8b9a57d19303a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "pet_care_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.be5f9fb81c9f75bc"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "accessibility_disability_reference",
+      "eventID": "source_atlas.missing_shard_event.69e7415270409e35",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.20994eaea729008e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "accessibility_disability_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.69e7415270409e35"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "legal_information_reference",
+      "eventID": "source_atlas.missing_shard_event.65cd2e542e2d7bd0",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.0b35b9c7f240bd80",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "legal_information_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.65cd2e542e2d7bd0"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "hobbies_recreation",
+      "eventID": "source_atlas.missing_shard_event.d8df5c33d9633634",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f17597086e4e8dc8",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "hobbies_recreation_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.d8df5c33d9633634"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.1d1d7aec19fad2b9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7a4d832a72835fea",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "personal_growth_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.1d1d7aec19fad2b9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.affad8b68b902db5",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.30e0d05486afb826",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "insurance_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.affad8b68b902db5"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.84b290f6322e5707",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.0ae5d73a075fba80",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_safety_emergency_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.84b290f6322e5707"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.294721ad480053ea",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.996a7e9d9157fb0d",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "science_research_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.294721ad480053ea"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.f226352be8b0530f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.605a4fe7222ee589",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "consumer_rights_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.f226352be8b0530f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.7242987078c36850",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3fe8e20c385b5e57",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "food_nutrition_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.7242987078c36850"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "environmental_sustainability_reference",
+      "eventID": "source_atlas.missing_shard_event.7fc25991996031b1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.7cf885d459cc25f6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "environmental_sustainability_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.7fc25991996031b1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.9af3db315937ef28",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.f85495fae65afb38",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "digital_security_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.9af3db315937ef28"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.a056d947fafc3475",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.61cf9d7035105c4b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "travel_relocation_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.a056d947fafc3475"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "parenting_education_reference",
+      "eventID": "source_atlas.missing_shard_event.f0b146657b31c158",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.de670d3e67a53e45",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "parenting_education_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.f0b146657b31c158"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "business_entrepreneurship",
+      "eventID": "source_atlas.missing_shard_event.f10fb4dd21b11dd4",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.75b61a0fcfa3fc37",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "business_entrepreneurship_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.f10fb4dd21b11dd4"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.9ad98c8595f8558f",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3033e14656349a1b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "housing_tenancy_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.9ad98c8595f8558f"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "consumer_rights_reference",
+      "eventID": "source_atlas.missing_shard_event.3559bb79ec34f019",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.43a237ce7c727026",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "consumer_rights_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.3559bb79ec34f019"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.41c2e53a843a5ceb",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2e7fcacc6bde09b1",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "debt_credit_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.41c2e53a843a5ceb"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "science_research_reference",
+      "eventID": "source_atlas.missing_shard_event.dd47b9b9e57793ca",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.fd1c5a1696e1cf54",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "science_research_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.dd47b9b9e57793ca"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.fe3e062b53673107",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.71614c4bcdb31a43",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "eldercare_aging_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.fe3e062b53673107"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "personal_growth",
+      "eventID": "source_atlas.missing_shard_event.c49ebd99d5ae60d9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.8f0fc54325fdbdf4",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "personal_growth_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.c49ebd99d5ae60d9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.7c5050fb8ed06468",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.4ce2428c41259b64",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "chronic_condition_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.7c5050fb8ed06468"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "debt_credit_public_reference",
+      "eventID": "source_atlas.missing_shard_event.815c37e1351a4d4b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.61919e8cef767b95",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "debt_credit_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.815c37e1351a4d4b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.71fed4c903ae20cb",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.9cd472abb197d468",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "caregiving_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.71fed4c903ae20cb"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "childcare_family_services_reference",
+      "eventID": "source_atlas.missing_shard_event.4543d8b403b269e9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.736b3556c1892b4a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "childcare_family_services_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.4543d8b403b269e9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "caregiving_reference",
+      "eventID": "source_atlas.missing_shard_event.4e55a80d858e896b",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.de1d7fa19fcf06bc",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "caregiving_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.4e55a80d858e896b"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "data_privacy_reference",
+      "eventID": "source_atlas.missing_shard_event.f26f7cbcfe8b2ccd",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c56b49c8df02445f",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "data_privacy_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.f26f7cbcfe8b2ccd"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "chronic_condition_public_reference",
+      "eventID": "source_atlas.missing_shard_event.05e29000f1dfbc49",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.bd2ecb9cb03be28b",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "chronic_condition_public_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.05e29000f1dfbc49"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "relationships_family",
+      "eventID": "source_atlas.missing_shard_event.bd5eb16ede8bf1f4",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e988dca7c8bc58bb",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "relationships_family_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.bd5eb16ede8bf1f4"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "grants_funding_reference",
+      "eventID": "source_atlas.missing_shard_event.373543cd2d8ee60c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2535ffd816245330",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "grants_funding_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.373543cd2d8ee60c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.e894465adf717812",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d3c81578e49c4b9e",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.e894465adf717812"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "occupation_foundation",
+      "eventID": "source_atlas.missing_shard_event.538a5ee8454c81b3",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d74a48c091b61b92",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "occupation_foundation_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.538a5ee8454c81b3"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.0b1d16bc22e4c8e6",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.c2468763cc706592",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "travel_relocation_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.0b1d16bc22e4c8e6"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "finance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.459d47ce19ba507c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.d34c95b2e188f5dd",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "finance_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.459d47ce19ba507c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_energy_reference",
+      "eventID": "source_atlas.missing_shard_event.615e4a551f857fe6",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.acc30ace71de4cdf",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_energy_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.615e4a551f857fe6"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "local_services_reference",
+      "eventID": "source_atlas.missing_shard_event.d8547ec20bfe37c8",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.61985f2b0a622265",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "local_services_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.d8547ec20bfe37c8"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "volunteering_public_reference",
+      "eventID": "source_atlas.missing_shard_event.1a297942d2cb4a2c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.de030dca7316f516",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "volunteering_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.1a297942d2cb4a2c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "eldercare_aging_reference",
+      "eventID": "source_atlas.missing_shard_event.1c790b526a84ef9e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.fc7adbbef675a4c6",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "eldercare_aging_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.1c790b526a84ef9e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.7f9209c20228ab66",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e074a971ed4f4579",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "tax_public_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.7f9209c20228ab66"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "transportation_mobility_reference",
+      "eventID": "source_atlas.missing_shard_event.e20e0d4d936109e9",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.919e3b3cfb74ba44",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "transportation_mobility_reference_official_sources",
+      "workItemID": "source_atlas.expansion_work_item.e20e0d4d936109e9"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "tax_public_reference",
+      "eventID": "source_atlas.missing_shard_event.57b7b9a853451ac2",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.04d3e18a828d837a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "tax_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.57b7b9a853451ac2"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "travel_relocation",
+      "eventID": "source_atlas.missing_shard_event.dba43c7d1567b7ee",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.3617d822617cf0db",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "travel_relocation_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.dba43c7d1567b7ee"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "home_life_admin",
+      "eventID": "source_atlas.missing_shard_event.e67cb7671b71fdc7",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.ff527e6d177aafea",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "home_life_admin_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.e67cb7671b71fdc7"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "retirement_public_reference",
+      "eventID": "source_atlas.missing_shard_event.344f0c8fecfcbd32",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.0b6b0ccb1120f9ff",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "retirement_public_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.344f0c8fecfcbd32"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "digital_security_reference",
+      "eventID": "source_atlas.missing_shard_event.0fd126bb990ae90c",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e4ede032c432166c",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "digital_security_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.0fd126bb990ae90c"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "housing_tenancy_reference",
+      "eventID": "source_atlas.missing_shard_event.7caf7ee0c97d50e1",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.2ca3c1dd795a7415",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "housing_tenancy_reference_costs_fees_and_funding",
+      "workItemID": "source_atlas.expansion_work_item.7caf7ee0c97d50e1"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_safety_emergency_reference",
+      "eventID": "source_atlas.missing_shard_event.6663baa363c85988",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b4cb3501872772c5",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_safety_emergency_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.6663baa363c85988"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "insurance_public_reference",
+      "eventID": "source_atlas.missing_shard_event.25032cc10385d2ed",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e076603447404ded",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "insurance_public_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.25032cc10385d2ed"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.f400a708cf4548c7",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.0bf5369c6add7303",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_eligibility_and_scope",
+      "workItemID": "source_atlas.expansion_work_item.f400a708cf4548c7"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "public_benefits_reference",
+      "eventID": "source_atlas.missing_shard_event.999cc4e64f9517de",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.14ed9d41d706166a",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "public_benefits_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.999cc4e64f9517de"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "health_wellness_reference",
+      "eventID": "source_atlas.missing_shard_event.152be9502cda5b6e",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.547948bda5245525",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "health_wellness_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.152be9502cda5b6e"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "nonprofit_operations_reference",
+      "eventID": "source_atlas.missing_shard_event.633693499cf6ecef",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.e8ddcc8c6e5281be",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "nonprofit_operations_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.633693499cf6ecef"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "creative_project_reference",
+      "eventID": "source_atlas.missing_shard_event.e78d4fe0ae505439",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.409c9998b4dfc774",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "creative_project_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.e78d4fe0ae505439"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockingReasons": [
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "legal_terms_review_required",
+        "no_private_data_scan_required",
+        "source_lane_review_required"
+      ],
+      "coverageCountersAffected": false,
+      "createdAt": "2026-07-01T00:00:00Z",
+      "domainID": "food_nutrition_reference",
+      "eventID": "source_atlas.missing_shard_event.57d8a99f8c2ae2ad",
+      "nonClaims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not coverage credit"
+      ],
+      "queueItemID": "source_atlas.missing_shard_queue_item.b2a3c78d12de4853",
+      "status": "blocked_pending_review_legal_api_approval",
+      "subdomainID": "food_nutrition_reference_documentation_and_source_citations",
+      "workItemID": "source_atlas.expansion_work_item.57d8a99f8c2ae2ad"
+    }
+  ],
+  "createdAt": "2026-07-01T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.missingShardBlockedRegistryMutations.v1"
+}

@@ -1,0 +1,57 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "nps.recreation-safety"
+    }
+  ],
+  "createdAt": "2026-06-29T03:30:00Z",
+  "domainID": "hobbies_recreation",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "nps_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "nps.recreation-safety",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "nps.recreation-safety"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_nps_health_safety_and_disclaimer_recheck",
+      "licenseID": "nps_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "nps.recreation-safety",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

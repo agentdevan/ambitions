@@ -1,0 +1,19 @@
+{
+  "approvalID": "source_atlas.production_domain_initial_r2_approval.ad46fdb8e654c411",
+  "approvedDomains": [
+    "volunteering_public_reference"
+  ],
+  "artifactSHA256": "f135e3f0565490a823b9a3d5da4a6b7b62cf4ff24355b25365bd3cb00d67edd3",
+  "domainCount": 1,
+  "domainIDs": [
+    "volunteering_public_reference"
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionDomainAdmission.v1",
+  "path": "tools/source-atlas/generated/production-domain-admission/train-131-volunteering-production/production-domain-admission-report.json",
+  "privacyIssues": [],
+  "required": true,
+  "schemaVersion": 1,
+  "status": "Green",
+  "valid": true
+}

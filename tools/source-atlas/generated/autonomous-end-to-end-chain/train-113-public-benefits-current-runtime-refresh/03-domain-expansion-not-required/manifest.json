@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "executor_emitted_no_candidate_frontier_intake_artifacts",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_candidate_expansion_or_review_artifacts_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T23:55:00Z",
+  "executorReportPath": "tools/source-atlas/generated/autonomous-end-to-end-chain/train-113-public-benefits-current-runtime-refresh/02-autonomous-operations-execution/autonomous-operations-execution-report.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousDomainExpansionNotRequired.v1",
+  "nonClaims": [
+    "domain-expansion-not-required marker only",
+    "not source approval",
+    "not legal approval",
+    "not registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 publish",
+    "not native activation",
+    "not release readiness"
+  ],
+  "operationsPlanPath": "tools/source-atlas/generated/autonomous-end-to-end-chain/train-113-public-benefits-current-runtime-refresh/01-autonomous-operations-plan/autonomous-operations-plan.json",
+  "outputHashes": {
+    "manifest": "cc70547df2fe0184493fe87c8f57d8acf9044e0872c9e09232d60ea7b98d4271"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-end-to-end-chain/train-113-public-benefits-current-runtime-refresh/03-domain-expansion-not-required/closeout.md",
+    "manifest": "tools/source-atlas/generated/autonomous-end-to-end-chain/train-113-public-benefits-current-runtime-refresh/03-domain-expansion-not-required/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "candidateExpansionStages": 0,
+    "claims": 0,
+    "finalOutputArtifacts": 0,
+    "frontierIntakeArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "requestedDomains": 1
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; no-expansion evidence only",
+  "status": "Source Green for domain-expansion-not-required route evidence",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-end-to-end-chain-train-113"
+}

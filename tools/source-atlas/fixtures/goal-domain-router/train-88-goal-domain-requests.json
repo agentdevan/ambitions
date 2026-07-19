@@ -1,0 +1,161 @@
+{
+  "goalDomainRequests": [
+    {
+      "request_id": "known-education-credentialing",
+      "domain": "education_credentialing",
+      "goal_intent_classes": [
+        "credential_requirement_reference"
+      ],
+      "claim_classes": [
+        "credential_requirement_reference",
+        "public_program_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "source_classes_required": [
+        "official_government",
+        "official_institution"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "freshness_slas": [
+        "credential_reference_180d"
+      ],
+      "candidate_sources": [],
+      "non_claims": [
+        "not admissions advice",
+        "not credential eligibility guarantee"
+      ]
+    },
+    {
+      "request_id": "new-language-learning-public-reference",
+      "domain": "public_language_learning_reference",
+      "goal_intent_classes": [
+        "learn_language_public_reference",
+        "compare_language_learning_resources"
+      ],
+      "claim_classes": [
+        "learning_resource_reference",
+        "language_standard_reference",
+        "public_program_reference"
+      ],
+      "jurisdictions": [
+        "global",
+        "US"
+      ],
+      "source_classes_required": [
+        "official_institution",
+        "standards_body",
+        "public_catalog",
+        "open_knowledge_graph"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "freshness_slas": [
+        "resource_reference_180d",
+        "standard_reference_365d"
+      ],
+      "candidate_sources": [
+        {
+          "api_docs_url": "",
+          "authority_class_guess": "standards_body",
+          "claim_class_guess": [
+            "language_standard_reference"
+          ],
+          "dataset_url": "https://www.coe.int/en/web/common-european-framework-reference-languages",
+          "declared_jurisdiction": "Europe",
+          "declared_license": "",
+          "declared_rights": "terms review required",
+          "discovery_method": "manual_submission",
+          "distribution_urls": [
+            "https://www.coe.int/en/web/common-european-framework-reference-languages"
+          ],
+          "publisher_name": "Council of Europe",
+          "publisher_url": "https://www.coe.int/",
+          "redistribution_guess": "terms_sensitive",
+          "rights_url": "https://www.coe.int/en/web/portal/terms-and-conditions",
+          "source_class_guess": "standards_body",
+          "terms_url": "https://www.coe.int/en/web/portal/terms-and-conditions"
+        },
+        {
+          "api_docs_url": "https://www.wikidata.org/wiki/Wikidata:Data_access",
+          "authority_class_guess": "open_knowledge_graph",
+          "claim_class_guess": [
+            "language_entity_crosswalk"
+          ],
+          "dataset_url": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+          "declared_jurisdiction": "global",
+          "declared_license": "CC0",
+          "declared_rights": "crosswalk metadata only",
+          "discovery_method": "open_knowledge_graph_link",
+          "distribution_urls": [
+            "https://query.wikidata.org/"
+          ],
+          "publisher_name": "Wikidata",
+          "publisher_url": "https://www.wikidata.org/",
+          "redistribution_guess": "open_with_attribution",
+          "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+          "source_class_guess": "open_knowledge_graph",
+          "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use"
+        }
+      ],
+      "non_claims": [
+        "not language proficiency assessment",
+        "not admission or credentialing advice"
+      ]
+    },
+    {
+      "request_id": "ambiguous-public-program-reference",
+      "domain": "public_program_reference",
+      "goal_intent_classes": [
+        "entrepreneurship_public_program_reference",
+        "benefit_program_reference"
+      ],
+      "claim_classes": [],
+      "jurisdictions": [
+        "US"
+      ],
+      "source_classes_required": [
+        "official_government"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "freshness_slas": [
+        "program_reference_180d"
+      ],
+      "candidate_sources": [
+        {
+          "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+          "authority_class_guess": "public_catalog",
+          "claim_class_guess": [
+            "public_program_reference"
+          ],
+          "dataset_url": "https://catalog.data.gov/dataset",
+          "declared_jurisdiction": "US",
+          "declared_license": "catalog metadata only",
+          "declared_rights": "source-of-sources only",
+          "discovery_method": "public_catalog",
+          "distribution_urls": [
+            "https://catalog.data.gov/dataset"
+          ],
+          "publisher_name": "Data.gov catalog",
+          "publisher_url": "https://catalog.data.gov/",
+          "redistribution_guess": "unclear",
+          "rights_url": "https://www.data.gov/privacy-policy/",
+          "source_class_guess": "public_catalog",
+          "terms_url": "https://www.data.gov/privacy-policy/"
+        }
+      ],
+      "non_claims": [
+        "not source authority",
+        "not benefit eligibility"
+      ]
+    }
+  ]
+}

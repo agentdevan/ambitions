@@ -1,0 +1,34 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "standards_body",
+      "claim_id": "canonical_claim.0e6204e9b9b2ab39",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "w3c.web-standards",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_institution",
+      "claim_id": "canonical_claim.49099b83a7471fcc",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "creative-commons.licenses",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.4976b4128f0dc75a",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "loc.primary_sources",
+      "status": "accepted_claim"
+    }
+  ]
+}

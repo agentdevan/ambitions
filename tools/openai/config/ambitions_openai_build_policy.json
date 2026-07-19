@@ -1,0 +1,8 @@
+{
+  "runtime_policy": {
+    "native_app_openai_dependency_allowed": false,
+    "core_runtime_openai_allowed": false,
+    "dev_tooling_openai_allowed": true,
+    "user_private_data_upload_allowed_by_default": false
+  }
+}

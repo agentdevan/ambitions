@@ -1,0 +1,166 @@
+{
+  "authority_state": "candidate_shadow",
+  "file_key": "Oik7612LSTUHWsNRFoTlTJ",
+  "page_id": "215:2",
+  "pixel_equivalence_renders": [
+    {
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/270-1430-today-accessibility-dark-before.png",
+      "role": "before",
+      "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+    },
+    {
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+      "role": "after",
+      "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+    }
+  ],
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "node_id": "270:1430",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+      "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+    },
+    {
+      "node_id": "296:60",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
+      "sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+    },
+    {
+      "node_id": "296:84",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
+      "sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+    },
+    {
+      "node_id": "327:1603",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
+      "sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+    },
+    {
+      "node_id": "329:1635",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
+      "sha256": "d88a9f64c7ac6a780be443ed01a52834246caa7d470b3cd90c34694fd6514440",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    },
+    {
+      "node_id": "327:1648",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+      "sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "node_id": "266:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+      "sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b",
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "node_id": "266:1709",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
+      "sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114",
+      "visual_authority_id": "VA-P4-CANDIDATE-002"
+    },
+    {
+      "node_id": "272:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+      "sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090",
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "node_id": "275:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+      "sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47",
+      "visual_authority_id": "VA-P4-CANDIDATE-004"
+    },
+    {
+      "node_id": "278:1449",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
+      "sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    },
+    {
+      "node_id": "281:1465",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
+      "sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
+      "visual_authority_id": "VA-P4-CANDIDATE-006"
+    },
+    {
+      "node_id": "288:41",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
+      "sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
+      "visual_authority_id": "VA-P4-CANDIDATE-007"
+    },
+    {
+      "node_id": "288:156",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
+      "sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
+      "visual_authority_id": "VA-P4-CANDIDATE-008"
+    },
+    {
+      "node_id": "293:23",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
+      "sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0",
+      "visual_authority_id": "VA-P4-CANDIDATE-009"
+    },
+    {
+      "node_id": "293:141",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
+      "sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f",
+      "visual_authority_id": "VA-P4-CANDIDATE-010"
+    },
+    {
+      "node_id": "293:164",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
+      "sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af",
+      "visual_authority_id": "VA-P4-CANDIDATE-011"
+    },
+    {
+      "node_id": "293:83",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
+      "sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8",
+      "visual_authority_id": "VA-P4-CANDIDATE-012"
+    }
+  ],
+  "source_records": [
+    {
+      "path": "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md",
+      "sha256": "041df54645639df8c23b37ed5ca19f0c4453110cbcd40e36645c00cf9c608567"
+    },
+    {
+      "path": "docs/canon/migration/visual-authority-r1-node-snapshot.json",
+      "sha256": "c9315d380bbc30bf2d9bc076740efdc055abb69a1c5f23e71dd987e21143dfb6"
+    },
+    {
+      "path": "docs/canon/migration/visual-authority-rebaseline.json",
+      "sha256": "619de77f5887779ddb150b9cba1bfd00edf13b02be7068aff3e6d42389979696"
+    },
+    {
+      "path": "docs/canon/schemas/visual-authority-r1-node-snapshot.schema.json",
+      "sha256": "99e352a75061c63b9172d68d69c4d487ed1212537f4764829cd9a5b620af0c01"
+    },
+    {
+      "path": "docs/canon/schemas/visual-authority-rebaseline.schema.json",
+      "sha256": "cba080996f7c72e918f380b6916f377170e896da369727e5579c92f7933090c7"
+    },
+    {
+      "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/OWNER_REVIEW_PACKAGE.json",
+      "sha256": "081246575d24886123a570504ce85c2187c3cef4eafce93f0c89c0d6d19e1019"
+    },
+    {
+      "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/OWNER_REVIEW_PACKAGE.md",
+      "sha256": "1891bf0065ddc95b70fa65316c5411e32ca89f786bc8b676c986d472f829b635"
+    },
+    {
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/RECEIPT.json",
+      "sha256": "e94effd4fedf6eceec0e3e1ed561c683929cca42d57a0b2dbc3d12b5f38a9ab7"
+    },
+    {
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/REPORT.md",
+      "sha256": "28670552136684e7c5b6c3fcac2a35d661db9593c1f2759bb913b5b6b016ec3d"
+    }
+  ]
+}

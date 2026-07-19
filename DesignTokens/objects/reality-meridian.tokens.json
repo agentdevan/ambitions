@@ -1,0 +1,19 @@
+{
+  "category": "object",
+  "items": {
+    "realityMeridian": {
+      "primary_token": "todayFocus",
+      "proof": "source / proof / receipt clarity",
+      "states": [
+        "clear day",
+        "recovery day",
+        "high pressure",
+        "stale source",
+        "protected time",
+        "no schedule data"
+      ],
+      "surface": "Today"
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

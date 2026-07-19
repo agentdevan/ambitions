@@ -1,0 +1,218 @@
+{
+  "issue": "AMB-1765",
+  "title": "Frontend Screenshot / Device Proof Matrix",
+  "status": "implemented_yellow_duplicate_proof_lane_reconciled_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "7d66a83e31fe860dd3791fdc1c96376ba6ea5eb1",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "dynamic_type_runtime_proof": false,
+    "reduce_motion_runtime_proof": false,
+    "safe_area_runtime_proof": false,
+    "route_depth_runtime_proof": false,
+    "physical_device_proof": false,
+    "owner_visual_approval": false
+  },
+  "matrix_inputs": [
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.json",
+    "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.json",
+    "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.md",
+    "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+    "Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift",
+    "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift"
+  ],
+  "required_matrix": [
+    "shell_root",
+    "drilldown_route_depth",
+    "today",
+    "goals",
+    "time",
+    "you",
+    "capture",
+    "search",
+    "light_system_dark",
+    "dynamic_type",
+    "reduce_motion",
+    "first_viewport",
+    "safe_area",
+    "real_device_proof"
+  ],
+  "current_status": {
+    "shell_root": "required_not_captured",
+    "drilldown_route_depth": "required_not_run",
+    "today": "required_not_captured",
+    "goals": "required_not_captured",
+    "time": "required_not_captured",
+    "you": "required_not_captured",
+    "capture": "required_not_captured",
+    "search": "required_not_captured",
+    "light_system_dark": "required_not_captured",
+    "dynamic_type": "required_not_runtime_verified",
+    "reduce_motion": "required_not_runtime_verified",
+    "first_viewport": "required_not_captured",
+    "safe_area": "required_not_captured",
+    "real_device_proof": "required_not_produced"
+  },
+  "gate_decision": {
+    "parent_matrix": "AMB-1744",
+    "leaf_reconciled": true,
+    "new_device_evidence_added": false,
+    "amb_1479_remains_visual_green_blocker": true,
+    "amb_1751_route_screen_journey_input_only": true
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1765_leaf_matrix_reconciled_to_amb_1744",
+      "required_screenshot_device_scopes_enumerated",
+      "visual_device_release_claims_blocked_until_current_artifacts_exist"
+    ],
+    "forbidden_claims": [
+      "screenshots_captured",
+      "device_proof_exists",
+      "safe_area_proof_exists",
+      "dynamic_type_proof_exists",
+      "reduce_motion_proof_exists",
+      "manual_accessibility_proof_exists",
+      "owner_visual_approval_exists",
+      "frontend_visual_green",
+      "accessibility_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_validation_complete_runtime_testing_skipped",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq . docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "passed_XCODEGEN_NEEDED_0"
+      }
+    ],
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_inspected": [
+      "Quality",
+      "Support",
+      "App",
+      "Stage",
+      "Surfaces/Today",
+      "Surfaces/Goals",
+      "Surfaces/Time",
+      "Surfaces/You",
+      "Composer/Capture",
+      "Trust",
+      "audit_docs"
+    ],
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.md",
+      "docs/audits/amb-1765-frontend-screenshot-device-proof-matrix.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "current_screenshots",
+      "physical_device_proof",
+      "manual_accessibility",
+      "dynamic_type",
+      "reduce_motion",
+      "safe_area",
+      "route_depth",
+      "owner_visual_review",
+      "signed_archive",
+      "app_store_connect_validation"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

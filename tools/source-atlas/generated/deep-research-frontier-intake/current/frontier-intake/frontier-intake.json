@@ -1,0 +1,2460 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "https://www.cpsc.gov/Newsroom/Downloadable-Data/widgets",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.4ea9dadbc2d0d20c",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "consumer_product_recall_fact",
+        "hazard_summary",
+        "remedy_type",
+        "units"
+      ],
+      "dataset_url": "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_federal_content_no_explicit_api_license_reviewed",
+      "declared_rights": "rss_and_widget_based_discovery; remedy_data_can_change_daily",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed",
+        "https://www.cpsc.gov/Recalls"
+      ],
+      "domain_guess": "consumer_product_and_vehicle_safety",
+      "evidence_hash": "09980d9502898a0b92b72d664843de927ca21056584e7a53ba43b08130f3601c",
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "consumer_product_and_vehicle_safety",
+      "publisher_name": "U.S. Consumer Product Safety Commission",
+      "publisher_url": "https://www.cpsc.gov/Recalls",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.cpsc.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.cpsc.gov/"
+    },
+    {
+      "api_docs_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.428f14633cca001f",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "earthquake_event_fact",
+        "feed_geojson",
+        "magnitude_time_place"
+      ],
+      "dataset_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "declared_jurisdiction": "global",
+      "declared_license": "US_gov_public_domain",
+      "declared_rights": "query_limit_20000_results",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://earthquake.usgs.gov/fdsnws/event/1/"
+      ],
+      "domain_guess": "disaster_flood_seismic",
+      "evidence_hash": "89354fa5185943b82a9a575f37a95a4db2e029767a3f82c74bac2fee63a5feab",
+      "frontier_id": "disaster_flood_seismic",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "publisher_name": "U.S. Geological Survey",
+      "publisher_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.usgs.gov/faqs/are-usgs-reportspublications-copyrighted"
+    },
+    {
+      "api_docs_url": "https://www.fema.gov/about/openfema/api",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.93fe617c50ea25d4",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "disaster_declaration",
+        "ipaws_archived_alerts",
+        "program_dataset_reference"
+      ],
+      "dataset_url": "https://www.fema.gov/about/openfema/api",
+      "declared_jurisdiction": "US, territories, tribal_where_applicable",
+      "declared_license": "fema_terms_conditions_public_dataset_program",
+      "declared_rights": "citation_requirements; dataset_specific_scope",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.fema.gov/about/openfema/api",
+        "https://www.fema.gov/about/openfema/data-sets"
+      ],
+      "domain_guess": "disaster_flood_seismic",
+      "evidence_hash": "f66b9de9f68a28f0d98367758cdc15b8a02c2ab30164c06c58bc0eaa4b0617d1",
+      "frontier_id": "disaster_flood_seismic",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "publisher_name": "Federal Emergency Management Agency",
+      "publisher_url": "https://www.fema.gov/about/openfema/data-sets",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.fema.gov/about/openfema/data-sets",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.fema.gov/about/openfema/terms-conditions"
+    },
+    {
+      "api_docs_url": "https://msc.fema.gov/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.b891ed4e483eca45",
+      "candidate_score": 65,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "effective_panel_lookup",
+        "flood_hazard_product_reference",
+        "official_flood_map_reference"
+      ],
+      "dataset_url": "https://msc.fema.gov/",
+      "declared_jurisdiction": "US",
+      "declared_license": "official_public_source_no_explicit_api_license_reviewed",
+      "declared_rights": "effective_map_information_can_change_or_be_superseded",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://msc.fema.gov/"
+      ],
+      "domain_guess": "disaster_flood_seismic",
+      "evidence_hash": "c95ccf53b384fe5acf9f89fb05700b9b5f5d1383a3ed879e9329e4e70ea82427",
+      "frontier_id": "disaster_flood_seismic",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "publisher_name": "Federal Emergency Management Agency",
+      "publisher_url": "https://msc.fema.gov/",
+      "redistribution_guess": "restricted",
+      "review_required": true,
+      "rights_url": "https://msc.fema.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://msc.fema.gov/"
+    },
+    {
+      "api_docs_url": "https://services.onetcenter.org/reference/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.50df28ca830a9d78",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "career_exploration_data",
+        "occupation_crosswalks",
+        "occupation_tasks_skills_knowledge"
+      ],
+      "dataset_url": "https://services.onetcenter.org/reference/",
+      "declared_jurisdiction": "US",
+      "declared_license": "CC_BY_4_0_with_web_services_specific_conditions_and_exceptions",
+      "declared_rights": "registered_developer_required; X_API_Key_header_required; web_services_license_non_transferable_for_downstream_publication; some_external_content_exceptions",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://services.onetcenter.org/",
+        "https://services.onetcenter.org/reference/"
+      ],
+      "domain_guess": "education_career_labor",
+      "evidence_hash": "c32a3046b1441629ce939d5a5419c7962a26bbcb447e7c67ac9e32e74b62af62",
+      "frontier_id": "education_career_labor",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "publisher_name": "U.S. Department of Labor / National Center for O*NET Development",
+      "publisher_url": "https://services.onetcenter.org/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.onetcenter.org/license_agreements.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://services.onetcenter.org/help/license_data"
+    },
+    {
+      "api_docs_url": "https://www.bls.gov/bls/api_features.htm",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.564b244b7a4eeffc",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "economic_indicator_series",
+        "published_labor_series_value",
+        "time_series_metadata"
+      ],
+      "dataset_url": "https://api.bls.gov/publicAPI/v2/",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_api_under_terms_with_citation_and_logo_restrictions",
+      "declared_rights": "logo_cannot_be_used; registration_needed_for_v2_expanded_limits; must_cite_access_date_and_disclaimer",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.bls.gov/publicAPI/v2/",
+        "https://www.bls.gov/developers/"
+      ],
+      "domain_guess": "education_career_labor",
+      "evidence_hash": "093d78cf49b9f0267edbdf90c3566b7747d9dceb2b7460438962791205bbfc1c",
+      "frontier_id": "education_career_labor",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "publisher_name": "U.S. Bureau of Labor Statistics",
+      "publisher_url": "https://www.bls.gov/developers/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.bls.gov/developers/termsOfService.htm",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.bls.gov/developers/termsOfService.htm"
+    },
+    {
+      "api_docs_url": "https://collegescorecard.ed.gov/data/api-documentation/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.e31698be695f9759",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "earnings_metric",
+        "field_of_study_metric",
+        "graduation_metric",
+        "school_cost_metric"
+      ],
+      "dataset_url": "https://collegescorecard.ed.gov/data/api-documentation/",
+      "declared_jurisdiction": "US_higher_education",
+      "declared_license": "public_federal_data_no_explicit_license_reviewed_here",
+      "declared_rights": "api credential required; metric_definitions_and_cohort_dates_must_be_preserved",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://collegescorecard.ed.gov/",
+        "https://collegescorecard.ed.gov/data/api-documentation/"
+      ],
+      "domain_guess": "education_career_labor",
+      "evidence_hash": "c3951855412243b53db6cb0c7112dc7a9901dc1db545a00a27c79e4e1f69f32a",
+      "frontier_id": "education_career_labor",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "publisher_name": "U.S. Department of Education",
+      "publisher_url": "https://collegescorecard.ed.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://collegescorecard.ed.gov/data/data-documentation/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://collegescorecard.ed.gov/"
+    },
+    {
+      "api_docs_url": "https://aqs.epa.gov/aqsweb/documents/data_api.html",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.0f09b992d8e46639",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "historical_pollutant_values",
+        "monitor_metadata",
+        "regulatory_air_quality_series"
+      ],
+      "dataset_url": "https://aqs.epa.gov/data/api",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_api_under_epa_site_terms",
+      "declared_rights": "key_required; certification_timing_depends_on_submission_cycle",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://aqs.epa.gov/aqsweb/documents/data_api.html",
+        "https://aqs.epa.gov/data/api"
+      ],
+      "domain_guess": "environmental_exposure",
+      "evidence_hash": "f6e319924be73ea9f81c8434a5f01fdf521803939b29597a0d464f641a743e1f",
+      "frontier_id": "environmental_exposure",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "environmental_exposure",
+      "publisher_name": "U.S. Environmental Protection Agency",
+      "publisher_url": "https://aqs.epa.gov/aqsweb/documents/data_api.html",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.epa.gov/outdoor-air-quality-data",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.epa.gov/outdoor-air-quality-data/airdata-basic-information"
+    },
+    {
+      "api_docs_url": "https://docs.airnowapi.org/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.9719d11cf7492848",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "current_aqi",
+        "fire_smoke_context",
+        "forecast_aqi",
+        "reporting_area_lookup"
+      ],
+      "dataset_url": "https://docs.airnowapi.org/webservices",
+      "declared_jurisdiction": "US, Canada_partial, Mexico_partial",
+      "declared_license": "public_api_under_data_use_guidelines",
+      "declared_rights": "account_and_api_key_required; data_are_preliminary; not_for_regulation_guidance_or_government_decision_making",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://docs.airnowapi.org/",
+        "https://docs.airnowapi.org/webservices"
+      ],
+      "domain_guess": "environmental_exposure",
+      "evidence_hash": "8c41e3f5c74f942a7cea32b6f0e1a5e91487e978c2b05b082ae79c07ac12af12",
+      "frontier_id": "environmental_exposure",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "environmental_exposure",
+      "publisher_name": "U.S. EPA AirNow",
+      "publisher_url": "https://docs.airnowapi.org/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.airnow.gov/about-the-data",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://docs.airnowapi.org/faq"
+    },
+    {
+      "api_docs_url": "https://api.fdic.gov/banks/docs",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.01cc73560b6c7b1f",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "bank_history",
+        "branch_location",
+        "fdic_insured_status_reference",
+        "institution_metadata"
+      ],
+      "dataset_url": "https://api.fdic.gov/banks/",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_fdic_bank_data_api",
+      "declared_rights": "do_not_imply_fdic_endorsement; key_support_documented_but currently_not_required",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.fdic.gov/banks/",
+        "https://banks.data.fdic.gov/bankfind-suite/"
+      ],
+      "domain_guess": "financial_institution_verification",
+      "evidence_hash": "1463d754e45af426f7f6112f2ddf5940b05d24ca3871d3b7d38c29891105a48a",
+      "frontier_id": "financial_institution_verification",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "financial_institution_verification",
+      "publisher_name": "Federal Deposit Insurance Corporation",
+      "publisher_url": "https://banks.data.fdic.gov/bankfind-suite/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.fdic.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.fdic.gov/"
+    },
+    {
+      "api_docs_url": "https://fdc.nal.usda.gov/data-documentation",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.fada70800a432ba1",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "branded_food_label_reference",
+        "food_component_reference",
+        "food_identity",
+        "nutrient_value"
+      ],
+      "dataset_url": "https://fdc.nal.usda.gov/api-guide",
+      "declared_jurisdiction": "US_primary, global_branded_partial",
+      "declared_license": "CC0_1_0_public_domain",
+      "declared_rights": "api credential required; data_type_update_cadence_varies; branded_data_originates_from_labels_or_partnerships",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://fdc.nal.usda.gov/",
+        "https://fdc.nal.usda.gov/api-guide"
+      ],
+      "domain_guess": "food_nutrition_reference",
+      "evidence_hash": "2a3250961ed8fe6dd9d6c0e79bf6627519eea5e9e13b3b3d5b002c340c60bebe",
+      "frontier_id": "food_nutrition_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "food_nutrition_reference",
+      "publisher_name": "U.S. Department of Agriculture",
+      "publisher_url": "https://fdc.nal.usda.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://fdc.nal.usda.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://fdc.nal.usda.gov/api-guide"
+    },
+    {
+      "api_docs_url": "https://www.census.gov/geographies/mapping-files.html",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.795de8900ca160f0",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "boundary_reference",
+        "cartographic_boundary",
+        "geoid_linkage",
+        "zcta_reference"
+      ],
+      "dataset_url": "https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html",
+      "declared_jurisdiction": "US, territories",
+      "declared_license": "not_copyrighted_per_metadata_except_trademark_limits_on_name_marks",
+      "declared_rights": "TIGER_and_Census_TIGER_are_registered_trademarks",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.census.gov/geographies/mapping-files.html",
+        "https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html"
+      ],
+      "domain_guess": "geo_temporal_reference",
+      "evidence_hash": "498898f2b9e04b77b2c5ea161e2d95a6a7908c56f8253280d8a42ad0b409325c",
+      "frontier_id": "geo_temporal_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "publisher_name": "U.S. Census Bureau",
+      "publisher_url": "https://www.census.gov/geographies/mapping-files.html",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://meta.geo.census.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.census.gov/about/policies.html"
+    },
+    {
+      "api_docs_url": "https://www.iana.org/time-zones/repository/tz-link.html",
+      "authority_class_guess": "standards_body",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.9522d809d8983cc4",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "dst_rules",
+        "historical_time_rule_reference",
+        "timezone_assignment",
+        "utc_offset_rules"
+      ],
+      "dataset_url": "https://data.iana.org/time-zones/",
+      "declared_jurisdiction": "global",
+      "declared_license": "public domain",
+      "declared_rights": "none_material_found",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://data.iana.org/time-zones/",
+        "https://www.iana.org/time-zones"
+      ],
+      "domain_guess": "geo_temporal_reference",
+      "evidence_hash": "93766800102a110f77e685a958695ce87d9036bf95f8d17b8cbed99ae93a04b0",
+      "frontier_id": "geo_temporal_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "publisher_name": "Internet Assigned Numbers Authority",
+      "publisher_url": "https://www.iana.org/time-zones",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.iana.org/time-zones/repository/tz-link.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "standards_body",
+      "terms_url": "https://www.iana.org/time-zones/repository/tz-link.html"
+    },
+    {
+      "api_docs_url": "https://www.huduser.gov/portal/dataset/uspszip-api.html",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.a6ac12427c831c8d",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "geo_crosswalk",
+        "zip_to_cbsa",
+        "zip_to_county",
+        "zip_to_tract"
+      ],
+      "dataset_url": "https://www.huduser.gov/hudapi/public/usps",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_api_under_hud_user_terms",
+      "declared_rights": "token_required_in_examples; must_display_nonendorsement_notice; uses_specific_vintage_crosswalks",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.huduser.gov/hudapi/public/usps",
+        "https://www.huduser.gov/portal/dataset/uspszip-api.html"
+      ],
+      "domain_guess": "geo_temporal_reference",
+      "evidence_hash": "124ef96d7c68d59ee879ee6fd55f6ea7edf756b7d41f26fd820237a166d1596d",
+      "frontier_id": "geo_temporal_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "publisher_name": "HUD USER / HUD PD&R",
+      "publisher_url": "https://www.huduser.gov/portal/dataset/uspszip-api.html",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+    },
+    {
+      "api_docs_url": "https://open.fda.gov/apis/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.3f11d6d913f16d43",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "device_food_drug_enforcement_records",
+        "drug_recall_fact",
+        "drug_shortage_presence",
+        "label_reference"
+      ],
+      "dataset_url": "https://api.fda.gov/",
+      "declared_jurisdiction": "US_regulated_products",
+      "declared_license": "CC0_1_0_except_marked_exceptions",
+      "declared_rights": "some_third_party_content_not_public_domain; GMDN_content_has_additional_license_limits; do_not_use_for_medical_decisions",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.fda.gov/",
+        "https://open.fda.gov/"
+      ],
+      "domain_guess": "health_provider_medication",
+      "evidence_hash": "12c0c7d5fb3290d93a5c51cf1c41776dea77ea2f4a3092799dc63783b60e3f6e",
+      "frontier_id": "health_provider_medication",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "health_provider_medication",
+      "publisher_name": "U.S. Food and Drug Administration",
+      "publisher_url": "https://open.fda.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://open.fda.gov/license",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://open.fda.gov/terms/"
+    },
+    {
+      "api_docs_url": "https://npiregistry.cms.hhs.gov/api-page",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.be7fdde59e645f76",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "address_reference",
+        "npi_status",
+        "provider_identity",
+        "taxonomy"
+      ],
+      "dataset_url": "https://npiregistry.cms.hhs.gov/api-page",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_data_api_no_explicit_license_reviewed",
+      "declared_rights": "200_results_per_request; skip_up_to_1000",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://npiregistry.cms.hhs.gov/",
+        "https://npiregistry.cms.hhs.gov/api-page"
+      ],
+      "domain_guess": "health_provider_medication",
+      "evidence_hash": "c73f10defe11a677da78271f7942c45adeecee593ee8e4eb387f476d1abfd928",
+      "frontier_id": "health_provider_medication",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "health_provider_medication",
+      "publisher_name": "Centers for Medicare & Medicaid Services",
+      "publisher_url": "https://npiregistry.cms.hhs.gov/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://npiregistry.cms.hhs.gov/api-page",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://npiregistry.cms.hhs.gov/api-page"
+    },
+    {
+      "api_docs_url": "https://www.huduser.gov/portal/dataset/fmr-api.html",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.3a77f6765040a3ff",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "county_or_metro_lookup",
+        "fair_market_rent",
+        "income_limit_reference"
+      ],
+      "dataset_url": "https://www.huduser.gov/hudapi/public/",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_api_under_hud_user_terms",
+      "declared_rights": "must_display_nonendorsement_notice; max_60_queries_per_minute; access_token_required",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.huduser.gov/hudapi/public/",
+        "https://www.huduser.gov/portal/dataset/fmr-api.html"
+      ],
+      "domain_guess": "housing_costs_and_local_help",
+      "evidence_hash": "9861c95c68c0a4ee17731e30a4c45ebede764c0e3ca40bb6e7693f31f5744c1a",
+      "frontier_id": "housing_costs_and_local_help",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "housing_costs_and_local_help",
+      "publisher_name": "HUD USER / HUD PD&R",
+      "publisher_url": "https://www.huduser.gov/portal/dataset/fmr-api.html",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+    },
+    {
+      "api_docs_url": "https://data.hud.gov/housing_counseling.html",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.b8cc31124e900bee",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "agency_lookup_by_location",
+        "housing_counselor_presence"
+      ],
+      "dataset_url": "https://data.hud.gov/housing_counseling.html",
+      "declared_jurisdiction": "US",
+      "declared_license": "public_hud_directory_under_hud_terms",
+      "declared_rights": "HUD_User_nonendorsement_notice_if_API_backed",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://data.hud.gov/housing_counseling.html"
+      ],
+      "domain_guess": "housing_costs_and_local_help",
+      "evidence_hash": "4b8d3747c090ea00a8fb18d6f0e2ee1e1932b243fe68c8041d892998ab9da25a",
+      "frontier_id": "housing_costs_and_local_help",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "housing_costs_and_local_help",
+      "publisher_name": "U.S. Department of Housing and Urban Development",
+      "publisher_url": "https://data.hud.gov/housing_counseling.html",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.huduser.gov/portal/dataset/api-terms-of-service.html"
+    },
+    {
+      "api_docs_url": "https://www.ecfr.gov/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.0694e80c56a388e8",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "current_reg_text_reference",
+        "recent_changes_reference"
+      ],
+      "dataset_url": "https://www.ecfr.gov/",
+      "declared_jurisdiction": "US_federal",
+      "declared_license": "continuously_updated_online_version_not_official_legal_edition",
+      "declared_rights": "not_official_legal_edition",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.ecfr.gov/"
+      ],
+      "domain_guess": "law_regulation_and_tax",
+      "evidence_hash": "131d7622705ed9fe7f913bb5992d2f035dd77fa9ca39d0545d6ff4a8764bbfc3",
+      "frontier_id": "law_regulation_and_tax",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "publisher_name": "Office of the Federal Register / Government Publishing Office",
+      "publisher_url": "https://www.ecfr.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.ecfr.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.ecfr.gov/"
+    },
+    {
+      "api_docs_url": "https://www.irs.gov/publications/p505",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.5ebbd3b60dfdc500",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "publication_instruction_reference",
+        "tax_threshold_reference",
+        "topic_page_reference"
+      ],
+      "dataset_url": "https://www.irs.gov/publications",
+      "declared_jurisdiction": "US_federal_tax",
+      "declared_license": "public_federal_content_with_restrictions_on_seals_names_symbols",
+      "declared_rights": "no_endorsement_implication; seal_logo_symbol_restrictions",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.irs.gov/",
+        "https://www.irs.gov/publications"
+      ],
+      "domain_guess": "law_regulation_and_tax",
+      "evidence_hash": "4f37d369ce78112cb7d03f7e65554624cf3aca710f4c85260bbe6e1dcac34daf",
+      "frontier_id": "law_regulation_and_tax",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "publisher_name": "Internal Revenue Service",
+      "publisher_url": "https://www.irs.gov/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.irs.gov/about-irs/use-of-content-from-irsgov",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.irs.gov/about-irs/use-of-content-from-irsgov"
+    },
+    {
+      "api_docs_url": "https://api.govinfo.gov/docs/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.9bbc05b1a931e503",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "bill_text_package",
+        "federal_register_official_package",
+        "official_pdf_reference",
+        "public_law_package"
+      ],
+      "dataset_url": "https://api.govinfo.gov/",
+      "declared_jurisdiction": "US_federal",
+      "declared_license": "official_publications_api_requires_api_data_gov_key",
+      "declared_rights": "api_data_gov_key_required; some_collections_may_include_non_public_domain_material",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.govinfo.gov/",
+        "https://www.govinfo.gov/"
+      ],
+      "domain_guess": "law_regulation_and_tax",
+      "evidence_hash": "f1d362e2c6248357c132ded9d7e56aa0c6eff385967d6659f5ebd43ff59f0079",
+      "frontier_id": "law_regulation_and_tax",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "publisher_name": "U.S. Government Publishing Office",
+      "publisher_url": "https://www.govinfo.gov/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.govinfo.gov/help/copyright",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.govinfo.gov/help/terms-of-use"
+    },
+    {
+      "api_docs_url": "https://api.congress.gov/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.b42938ebc2cfa0b8",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "bill_metadata",
+        "bill_status",
+        "member_and_committee_reference"
+      ],
+      "dataset_url": "https://api.congress.gov/",
+      "declared_jurisdiction": "US_federal",
+      "declared_license": "public_congressional_data_api_requires_api_data_gov_key",
+      "declared_rights": "api_data_gov_key_required",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.congress.gov/"
+      ],
+      "domain_guess": "law_regulation_and_tax",
+      "evidence_hash": "4760ee72da14ec0096ca17b4c0cfe8be7b2ea3c9978150739399ecbfdcff27f1",
+      "frontier_id": "law_regulation_and_tax",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "publisher_name": "Library of Congress / Congress.gov",
+      "publisher_url": "https://api.congress.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.loc.gov/legal/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.loc.gov/legal/"
+    },
+    {
+      "api_docs_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.fbe21c8f6d7ae281",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "agency_publication_reference",
+        "document_metadata",
+        "notice_presence",
+        "public_inspection"
+      ],
+      "dataset_url": "https://www.federalregister.gov/api/v1/",
+      "declared_jurisdiction": "US_federal",
+      "declared_license": "public_api_no_key_unofficial_site_with_logo_restrictions",
+      "declared_rights": "not_official_legal_edition; verify_legal_research_against_official_edition; no_official_NARA_or_OFR_logos_or_seals",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://www.federalregister.gov/",
+        "https://www.federalregister.gov/api/v1/"
+      ],
+      "domain_guess": "law_regulation_and_tax",
+      "evidence_hash": "e7d8723e2005074453bd22f5efddfa8291011cb7169848e0d8c596ee4b28afc5",
+      "frontier_id": "law_regulation_and_tax",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "publisher_name": "Office of the Federal Register / NARA",
+      "publisher_url": "https://www.federalregister.gov/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.federalregister.gov/reader-aids/developer-resources/rest-api"
+    },
+    {
+      "api_docs_url": "https://vpic.nhtsa.dot.gov/api/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.be280adc6dad6373",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "manufacturer_reference",
+        "vehicle_attributes_reference",
+        "vin_decode"
+      ],
+      "dataset_url": "https://vpic.nhtsa.dot.gov/api/",
+      "declared_jurisdiction": "US_market_vehicles",
+      "declared_license": "public_nhtsa_data_under_site_terms",
+      "declared_rights": "automated_traffic_rate_control; VIN_decoding_best_for_model_year_1981_forward; manufacturer-reported data caveat",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://vpic.nhtsa.dot.gov/",
+        "https://vpic.nhtsa.dot.gov/api/"
+      ],
+      "domain_guess": "mobility_transit_travel",
+      "evidence_hash": "b30e437f3d66c6c9240ee1cb5c1fb08bb2bb1e722eacaf7201bf3522bdf96c84",
+      "frontier_id": "mobility_transit_travel",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "publisher_name": "National Highway Traffic Safety Administration",
+      "publisher_url": "https://vpic.nhtsa.dot.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://vpic.nhtsa.dot.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://vpic.nhtsa.dot.gov/"
+    },
+    {
+      "api_docs_url": "https://data.transportation.gov/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.d3c1a9dfe9589457",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "agency_feed_url_reference",
+        "feed_discovery"
+      ],
+      "dataset_url": "https://data.transportation.gov/Public-Transit/2023-NTD-Annual-Data-General-Transit-Feed-Specific/venb-5asu",
+      "declared_jurisdiction": "US_public_transit_reporting_agencies",
+      "declared_license": "public_open_data_portal_dataset_terms",
+      "declared_rights": "underlying_feed_rights_vary_by_agency",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://data.transportation.gov/",
+        "https://data.transportation.gov/Public-Transit/2023-NTD-Annual-Data-General-Transit-Feed-Specific/venb-5asu"
+      ],
+      "domain_guess": "mobility_transit_travel",
+      "evidence_hash": "fdec4b8ec41069c4b1b60fd5d6009c8611461a30f8a7043fa7823ea34e46954d",
+      "frontier_id": "mobility_transit_travel",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "publisher_name": "U.S. Department of Transportation",
+      "publisher_url": "https://data.transportation.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://data.transportation.gov/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://data.transportation.gov/"
+    },
+    {
+      "api_docs_url": "https://gtfs.org/documentation/schedule/reference/ ; https://gtfs.org/documentation/realtime/reference/",
+      "authority_class_guess": "standards_body",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.8a8ef3a1137954ae",
+      "candidate_score": 85,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "realtime_schema",
+        "schedule_schema",
+        "service_alert_schema"
+      ],
+      "dataset_url": "https://gtfs.org/documentation/",
+      "declared_jurisdiction": "global_standard",
+      "declared_license": "standard_documentation_site_license_not_confirmed_here",
+      "declared_rights": "actual_feed_licenses_are_operator_specific",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://gtfs.org/",
+        "https://gtfs.org/documentation/"
+      ],
+      "domain_guess": "mobility_transit_travel",
+      "evidence_hash": "cd9cd020d674e2301781bc0951861028890667a9df6f6b808c58b0a12a59df0e",
+      "frontier_id": "mobility_transit_travel",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "publisher_name": "MobilityData / GTFS community",
+      "publisher_url": "https://gtfs.org/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://gtfs.org/community/governance/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "standards_body",
+      "terms_url": "https://gtfs.org/"
+    },
+    {
+      "api_docs_url": "https://www.weather.gov/documentation/services-web-api",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.113f160dd0e6c7d8",
+      "candidate_score": 95,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "alert",
+        "forecast",
+        "observation",
+        "zone_mapping"
+      ],
+      "dataset_url": "https://api.weather.gov/",
+      "declared_jurisdiction": "US, territories, marine_zones",
+      "declared_license": "open_data_free_to_use",
+      "declared_rights": "reasonable_rate_limits_not_public; User-Agent_required; API_key_may_replace_user_agent_in_future",
+      "discovered_at": "2026-06-29T12:00:00Z",
+      "discovery_method": "deep_research_seed",
+      "distribution_urls": [
+        "https://api.weather.gov/",
+        "https://www.weather.gov/documentation/services-web-api"
+      ],
+      "domain_guess": "weather_and_public_alerts",
+      "evidence_hash": "e241fea60b55f60442e2fa6de9f8909109662bc7003b2aa2f0f0c0326e9ce51d",
+      "frontier_id": "weather_and_public_alerts",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "weather_and_public_alerts",
+      "publisher_name": "National Weather Service",
+      "publisher_url": "https://www.weather.gov/documentation/services-web-api",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.weather.gov/documentation/services-web-api",
+      "schema_version": "1.0.0",
+      "source_class_guess": "official_government",
+      "terms_url": "https://www.weather.gov/documentation/services-web-api"
+    }
+  ],
+  "createdAt": "2026-06-29T12:00:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/deep-research-frontier-intake/current/frontier-intake-input.json",
+  "kind": "ambitions.sourceAtlas.frontierIntake.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "proposalSummaries": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "consumer_product_and_vehicle_safety",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "disaster_flood_seismic",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "education_career_labor",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 2,
+      "frontier_id": "environmental_exposure",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "environmental_exposure",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "financial_institution_verification",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "financial_institution_verification",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "food_nutrition_reference",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "food_nutrition_reference",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "geo_temporal_reference",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 2,
+      "frontier_id": "health_provider_medication",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "health_provider_medication",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 2,
+      "frontier_id": "housing_costs_and_local_help",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "housing_costs_and_local_help",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 5,
+      "frontier_id": "law_regulation_and_tax",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 3,
+      "frontier_id": "mobility_transit_travel",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "review_required": true,
+      "status": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "weather_and_public_alerts",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "weather_and_public_alerts",
+      "review_required": true,
+      "status": "candidate_only"
+    }
+  ],
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.4ea9dadbc2d0d20c"
+      ],
+      "claim_classes": [
+        "consumer_product_recall_fact",
+        "recall_remedy_type",
+        "vehicle_recall_or_defect_reference",
+        "vin_decode_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "consumer_and_vehicle_recalls",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "daily_to_weekly"
+      ],
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "dispose",
+        "monitor",
+        "repair",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "buy/don't buy recommendations",
+        "mechanic advice",
+        "explicit exclusion: repair eligibility promises",
+        "explicit exclusion: warranty advice",
+        "explicit exclusion: marketplace seller authenticity",
+        "forbidden claim: product is safe because not found",
+        "forbidden claim: repair completed or remedy available without source",
+        "forbidden claim: counterfeit detection from listing text",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "consumer_product_and_vehicle_safety",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.428f14633cca001f",
+        "candidate_source.93fe617c50ea25d4",
+        "candidate_source.b891ed4e483eca45"
+      ],
+      "claim_classes": [
+        "county_disaster_status",
+        "disaster_declaration_presence",
+        "earthquake_event_fact",
+        "flood_zone_lookup",
+        "map_effective_date"
+      ],
+      "claim_output_allowed": false,
+      "domain": "hazard_disaster_resilience",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "declarations_daily",
+        "earthquakes_near_real_time",
+        "flood_maps_as_posted"
+      ],
+      "frontier_id": "disaster_flood_seismic",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "document",
+        "insure",
+        "prepare",
+        "relocate"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "repair advice",
+        "engineering advice",
+        "insurance underwriting outcomes",
+        "explicit exclusion: insured loss estimates",
+        "explicit exclusion: parcel-specific engineering conclusions",
+        "explicit exclusion: structural safety certifications",
+        "forbidden claim: property is safe",
+        "forbidden claim: claim is covered by insurance",
+        "forbidden claim: evacuation order unless directly sourced",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.50df28ca830a9d78",
+        "candidate_source.564b244b7a4eeffc",
+        "candidate_source.e31698be695f9759"
+      ],
+      "claim_classes": [
+        "field_of_study_metric",
+        "occupation_crosswalk",
+        "occupation_task_skill_knowledge",
+        "published_labor_series_value",
+        "school_outcome_metric"
+      ],
+      "claim_output_allowed": false,
+      "domain": "education_workforce_labor_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "bls_as_series_release",
+        "onet_by_database_release",
+        "scorecard_as_released"
+      ],
+      "frontier_id": "education_career_labor",
+      "goal_intent_classes": [
+        "budget",
+        "compare",
+        "learn",
+        "plan",
+        "reskill"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "subjective rankings",
+        "personality-based job prescriptions",
+        "explicit exclusion: admissions probability",
+        "explicit exclusion: career fit diagnosis",
+        "explicit exclusion: salary promises",
+        "explicit exclusion: employer reviews",
+        "forbidden claim: best school for you",
+        "forbidden claim: guaranteed job placement",
+        "forbidden claim: guaranteed salary outcome",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.0f09b992d8e46639",
+        "candidate_source.9719d11cf7492848"
+      ],
+      "claim_classes": [
+        "current_aqi_category",
+        "current_aqi_value",
+        "historical_monitor_value",
+        "regulatory_quality_series",
+        "reporting_area_mapping"
+      ],
+      "claim_output_allowed": false,
+      "domain": "air_quality_exposure",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "certified_history_as_published",
+        "current_hourly",
+        "forecasts_daily"
+      ],
+      "frontier_id": "environmental_exposure",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "caregiving",
+        "exercise",
+        "plan"
+      ],
+      "jurisdictions": [
+        "North_America_partial",
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "individual health prognosis",
+        "best air purifier recommendation",
+        "explicit exclusion: medical diagnosis",
+        "explicit exclusion: worker-safety compliance",
+        "explicit exclusion: regulatory enforcement determinations from preliminary data",
+        "forbidden claim: safe_for_everyone statements",
+        "forbidden claim: clinical advice",
+        "forbidden claim: regulatory exceedance from preliminary feeds",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "environmental_exposure",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.01cc73560b6c7b1f"
+      ],
+      "claim_classes": [
+        "bank_identity",
+        "branch_location",
+        "fdic_insured_status_reference",
+        "institution_history"
+      ],
+      "claim_output_allowed": false,
+      "domain": "bank_and_institution_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "as_posted_by_fdic"
+      ],
+      "frontier_id": "financial_institution_verification",
+      "goal_intent_classes": [
+        "choose",
+        "de-risk",
+        "document",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best bank",
+        "yield recommendations",
+        "explicit exclusion: investment advice",
+        "explicit exclusion: fraud certainty",
+        "explicit exclusion: account coverage calculation without user balances",
+        "explicit exclusion: creditworthiness scoring",
+        "forbidden claim: bank is safe",
+        "forbidden claim: deposits are fully covered for the user",
+        "forbidden claim: scam determination as certainty",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "financial_institution_verification",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.fada70800a432ba1"
+      ],
+      "claim_classes": [
+        "branded_food_label_reference",
+        "food_component_reference",
+        "food_identity",
+        "nutrient_value"
+      ],
+      "claim_output_allowed": false,
+      "domain": "food_nutrition_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "monthly_to_biannually_by_data_type"
+      ],
+      "frontier_id": "food_nutrition_reference",
+      "goal_intent_classes": [
+        "compare",
+        "cook",
+        "document",
+        "shop",
+        "track"
+      ],
+      "jurisdictions": [
+        "US_primary",
+        "global_branded_partial"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "personalized meal plans",
+        "clinical nutrition advice",
+        "explicit exclusion: dietary advice",
+        "explicit exclusion: allergy-safe guarantees",
+        "explicit exclusion: restaurant-specific menu truth absent source linkage",
+        "forbidden claim: healthy for user",
+        "forbidden claim: weight-loss effect",
+        "forbidden claim: medical nutrition therapy",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "food_nutrition_reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.795de8900ca160f0",
+        "candidate_source.9522d809d8983cc4",
+        "candidate_source.a6ac12427c831c8d"
+      ],
+      "claim_classes": [
+        "admin_hierarchy_mapping",
+        "latlon_to_jurisdiction",
+        "place_canonicalization",
+        "timezone_assignment",
+        "zip_to_geo_crosswalk"
+      ],
+      "claim_output_allowed": false,
+      "domain": "place_time_identity",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "boundaries_annual",
+        "crosswalks_monthly_to_annual",
+        "timezone_changes_within_7d_of_upstream_release"
+      ],
+      "frontier_id": "geo_temporal_reference",
+      "goal_intent_classes": [
+        "archive",
+        "locate",
+        "normalize",
+        "orient",
+        "schedule"
+      ],
+      "jurisdictions": [
+        "US_enhanced",
+        "global_baseline"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best route",
+        "best neighborhood",
+        "business hours",
+        "door-level access instructions",
+        "explicit exclusion: parcel ownership or title",
+        "explicit exclusion: USPS-certified deliverability",
+        "explicit exclusion: exact rooftop or entrance certainty",
+        "explicit exclusion: routing correctness",
+        "explicit exclusion: tax domicile or legal residency determinations",
+        "forbidden claim: mail deliverability guarantee",
+        "forbidden claim: legal address entitlement",
+        "forbidden claim: property ownership",
+        "forbidden claim: identity verification",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.3f11d6d913f16d43",
+        "candidate_source.be7fdde59e645f76"
+      ],
+      "claim_classes": [
+        "drug_recall_fact",
+        "drug_shortage_presence",
+        "npi_status",
+        "provider_identity",
+        "provider_taxonomy"
+      ],
+      "claim_output_allowed": false,
+      "domain": "healthcare_reference_and_drug_safety",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "provider_directory_near_real_time_to_batch",
+        "recalls_weekly",
+        "shortages_daily"
+      ],
+      "frontier_id": "health_provider_medication",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "document",
+        "find_care",
+        "refill",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best doctor",
+        "safe alternative medication",
+        "coverage approval",
+        "explicit exclusion: diagnosis",
+        "explicit exclusion: treatment recommendation",
+        "explicit exclusion: insurance network status unless explicitly sourced",
+        "explicit exclusion: prescribing advice",
+        "forbidden claim: provider quality ranking as fact",
+        "forbidden claim: medical care advice",
+        "forbidden claim: medication substitution advice",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "health_provider_medication",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.3a77f6765040a3ff",
+        "candidate_source.b8cc31124e900bee"
+      ],
+      "claim_classes": [
+        "fair_market_rent",
+        "housing_counselor_presence",
+        "income_limit_reference",
+        "zip_to_tract_or_cbsa_crosswalk"
+      ],
+      "claim_output_allowed": false,
+      "domain": "housing_reference_assistance",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "annual_with_in-year_dataset_updates",
+        "counselor_directory_as_posted"
+      ],
+      "frontier_id": "housing_costs_and_local_help",
+      "goal_intent_classes": [
+        "budget",
+        "compare",
+        "document",
+        "relocate",
+        "seek_help"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "move recommendation",
+        "fair housing legal determination",
+        "explicit exclusion: property valuations",
+        "explicit exclusion: tenant legal advice",
+        "explicit exclusion: landlord quality ratings",
+        "explicit exclusion: lease interpretation",
+        "forbidden claim: affordable for user",
+        "forbidden claim: eligibility approved",
+        "forbidden claim: housing counselor quality ranking",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "housing_costs_and_local_help",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.0694e80c56a388e8",
+        "candidate_source.5ebbd3b60dfdc500",
+        "candidate_source.9bbc05b1a931e503",
+        "candidate_source.b42938ebc2cfa0b8",
+        "candidate_source.fbe21c8f6d7ae281"
+      ],
+      "claim_classes": [
+        "bill_status_or_text_reference",
+        "current_reg_text_reference",
+        "federal_register_notice_presence",
+        "official_pdf_reference",
+        "tax_threshold_or_instruction_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_law_regulation_tax_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "ecfr_continuous",
+        "federal_register_daily",
+        "legislative_daily",
+        "tax_publications_as_issued"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "goal_intent_classes": [
+        "calculate_reference",
+        "comply",
+        "document",
+        "monitor_change",
+        "research"
+      ],
+      "jurisdictions": [
+        "US_federal_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "interpretive legal conclusions",
+        "case-specific tax advice",
+        "explicit exclusion: state and local law completeness",
+        "explicit exclusion: legal advice",
+        "explicit exclusion: tax preparation outcomes",
+        "explicit exclusion: personalized eligibility for deductions or credits",
+        "forbidden claim: this is legal advice",
+        "forbidden claim: this is the official legal edition when not",
+        "forbidden claim: tax filing recommendation as certainty",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.be280adc6dad6373",
+        "candidate_source.d3c1a9dfe9589457",
+        "candidate_source.8a8ef3a1137954ae"
+      ],
+      "claim_classes": [
+        "feed_discovery",
+        "scheduled_departure_arrival",
+        "service_alert_or_delay",
+        "vehicle_position_or_eta",
+        "vehicle_vin_decode"
+      ],
+      "claim_output_allowed": false,
+      "domain": "movement_schedule_vehicle",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "VIN_reference_as_posted",
+        "realtime_subminute_to_minutes",
+        "static_schedule_daily_or_better"
+      ],
+      "frontier_id": "mobility_transit_travel",
+      "goal_intent_classes": [
+        "commute",
+        "coordinate",
+        "plan",
+        "travel",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_feed_discovery_enhanced",
+        "global_pattern"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best route preference",
+        "ride-booking availability",
+        "fare optimization",
+        "explicit exclusion: fare payment accounts",
+        "explicit exclusion: ticketing/booking",
+        "explicit exclusion: ETA guarantees",
+        "explicit exclusion: crowding predictions unless operator-sourced",
+        "forbidden claim: guaranteed trip arrival",
+        "forbidden claim: unlicensed redistribution of agency data",
+        "forbidden claim: vehicle safety certification from VIN alone",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.113f160dd0e6c7d8"
+      ],
+      "claim_classes": [
+        "active_alert_presence",
+        "affected_area",
+        "hourly_forecast",
+        "observation_station_value",
+        "seven_day_forecast"
+      ],
+      "claim_output_allowed": false,
+      "domain": "weather_alerts",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "alerts_subhourly",
+        "forecasts_hourly_to_daily",
+        "observations_near_real_time"
+      ],
+      "frontier_id": "weather_and_public_alerts",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "commute",
+        "notify",
+        "plan",
+        "travel"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best outing recommendation",
+        "crop advice",
+        "medical heat-risk diagnosis",
+        "explicit exclusion: insurance-loss estimates",
+        "explicit exclusion: building-level hazard modeling",
+        "explicit exclusion: medical interpretation of exposure",
+        "forbidden claim: guaranteed future weather",
+        "forbidden claim: shelter-in-place or evacuation advice beyond official wording",
+        "forbidden claim: property safety certification",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "weather_and_public_alerts",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ],
+  "recordCounts": {
+    "candidateSources": 27,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 12,
+    "proposedFrontiers": 12,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

@@ -1,0 +1,67 @@
+{
+  "help": "https://catalog.example.gov/api/3/action/help_show?name=package_search",
+  "result": {
+    "count": 2,
+    "results": [
+      {
+        "id": "volunteer-service-opportunities",
+        "license_id": "",
+        "license_title": "",
+        "name": "volunteer-service-opportunities",
+        "notes": "Public catalog metadata for volunteer service opportunity references.",
+        "organization": {
+          "title": "Volunteer.gov",
+          "url": "https://www.volunteer.gov/"
+        },
+        "resources": [
+          {
+            "name": "Volunteer.gov public site",
+            "url": "https://www.volunteer.gov/s/"
+          }
+        ],
+        "rights": "https://www.volunteer.gov/s/terms",
+        "tags": [
+          {
+            "name": "volunteer"
+          },
+          {
+            "name": "service"
+          }
+        ],
+        "terms_url": "https://www.volunteer.gov/s/terms",
+        "title": "Public Volunteer Service Opportunities",
+        "url": "https://www.volunteer.gov/s/"
+      },
+      {
+        "id": "public-transit-service-reference",
+        "license_id": "cc-by",
+        "license_title": "Creative Commons Attribution",
+        "name": "public-transit-service-reference",
+        "notes": "Public catalog metadata for transit service references.",
+        "organization": {
+          "title": "U.S. Department of Transportation",
+          "url": "https://www.transportation.gov/"
+        },
+        "resources": [
+          {
+            "name": "Reference feed",
+            "url": "https://example.gov/public-transit-reference.json"
+          }
+        ],
+        "rights": "https://www.transportation.gov/privacy",
+        "tags": [
+          {
+            "name": "transit"
+          },
+          {
+            "name": "transportation"
+          }
+        ],
+        "terms_url": "https://www.transportation.gov/privacy",
+        "title": "Public Transit Service Reference Feed",
+        "url": "https://www.transportation.gov/"
+      }
+    ]
+  },
+  "success": true
+}

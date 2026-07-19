@@ -1,0 +1,490 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/task-pack.schema.json",
+  "title": "Ambitions Canon Task Pack",
+  "description": "Machine contract for deterministic bounded Codex task-pack content and stale-state rejection.",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"task_type": {"const": "mechanical"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "mechanical"}, "token_budget": {"const": 8000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"const": "docs"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "normal"}, "token_budget": {"const": 16000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"enum": ["release", "swiftui", "runtime", "privacy"]}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "complex"}, "token_budget": {"const": 30000}}}
+    },
+    {
+      "if": {"properties": {"task_type": {"const": "constitutional-audit"}}, "required": ["task_type"]},
+      "then": {"properties": {"budget_class": {"const": "constitutional-audit"}, "token_budget": {"const": null}}}
+    }
+  ],
+  "required": [
+    "schema_version",
+    "canon_revision",
+    "canon_sha",
+    "repository_sha",
+    "intake_sha",
+    "compiler_version",
+    "authority_state",
+    "issue_id",
+    "task_type",
+    "budget_class",
+    "token_budget",
+    "estimated_tokens",
+    "scope",
+    "changed_files",
+    "claim_type",
+    "known_issue_ids",
+    "intake_path",
+    "constitutional_laws",
+    "applicable_requirement_ids",
+    "specifications",
+    "object_lifecycles",
+    "journeys",
+    "standards",
+    "source_owners",
+    "implementation_posture",
+    "command_authorizations",
+    "known_risks",
+    "visual_authority",
+    "required_tests",
+    "required_validation",
+    "required_proof",
+    "forbidden_changes",
+    "open_conflicts",
+    "claim_ceiling",
+    "rollback_requirements"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Task-pack contract version.",
+      "type": "integer",
+      "const": 1
+    },
+    "canon_revision": {
+      "description": "Canon revision from which the pack was compiled.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "canon_sha": {
+      "description": "Content SHA for the exact normative canon snapshot.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "repository_sha": {
+      "description": "Git HEAD plus any tracked or untracked diff state used to detect stale packs.",
+      "type": "string",
+      "minLength": 1
+    },
+    "intake_sha": {
+      "description": "SHA-256 of the normalized closed issue-intake contract.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "compiler_version": {
+      "description": "Compiler version that generated the pack.",
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_state": {
+      "description": "Whether the source canon is shadow or active.",
+      "type": "string",
+      "enum": ["shadow", "active"]
+    },
+    "issue_id": {
+      "description": "Execution issue identity used for the bounded task.",
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "description": "Bounded implementation or inspection task classification.",
+      "type": "string",
+      "enum": ["mechanical", "docs", "release", "swiftui", "runtime", "privacy", "constitutional-audit"]
+    },
+    "budget_class": {
+      "type": "string",
+      "enum": ["mechanical", "normal", "complex", "constitutional-audit"]
+    },
+    "token_budget": {
+      "description": "Fail-closed token ceiling, or null for an explicit full-corpus audit.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "estimated_tokens": {
+      "description": "Deterministic four-characters-per-token estimate for the Markdown pack.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "scope": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "changed_files": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "claim_type": {
+      "description": "Evidence claim class requested by the intake.",
+      "type": "string",
+      "minLength": 1
+    },
+    "known_issue_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "intake_path": {
+      "description": "Repository-relative or explicit path to the hashed task intake.",
+      "type": "string",
+      "minLength": 1
+    },
+    "constitutional_laws": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "applicable_requirement_ids": {
+      "description": "Complete exact requirement and owning-document identifier set; constitutional laws are listed separately.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "specifications": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "object_lifecycles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "journeys": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "standards": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "source_owners": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "implementation_posture": {
+      "description": "Evidence-bounded current implementation status text.",
+      "type": "string",
+      "minLength": 1
+    },
+    "command_authorizations": {
+      "description": "Identity-bound current and future command authorization records. Requirement prose remains unmodified.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "activation_authorized",
+          "activation_posture",
+          "command_id",
+          "gate_dependencies",
+          "gate_requirement_ids",
+          "label",
+          "machine_contract",
+          "requirement_id",
+          "state_id"
+        ],
+        "properties": {
+          "activation_authorized": {"type": "boolean"},
+          "activation_posture": {"type": "string", "enum": ["active", "future_gated"]},
+          "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+          "gate_dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "activation_authorization",
+                "approval_receipt",
+                "approval_receipt_id",
+                "approval_receipt_registry_id",
+                "approval_receipt_registry_revision",
+                "approval_receipt_source_sha256",
+                "canon_content_sha256",
+                "dependency_id",
+                "dependency_kind",
+                "dependency_posture",
+                "dependency_revision",
+                "dependency_sha256",
+                "exact_product_mappings",
+                "freshness",
+                "mapping_sha256",
+                "mapping_record_id",
+                "owner_approval_state",
+                "owner_approval_registry_id",
+                "owner_approval_registry_revision",
+                "owner_approval_source_sha256",
+                "registry_id",
+                "registry_revision",
+                "source_sha256"
+              ],
+              "properties": {
+                "activation_authorization": {"type": "boolean"},
+                "approval_receipt": {"anyOf": [{"$ref": "#/$defs/approvalReceipt"}, {"type": "null"}]},
+                "approval_receipt_id": {"type": ["string", "null"], "pattern": "^APPROVAL-RECEIPT-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+                "approval_receipt_registry_id": {"const": "COMMAND-GATE-APPROVAL-RECEIPT-REGISTRY-001"},
+                "approval_receipt_registry_revision": {"type": "integer", "minimum": 1},
+                "approval_receipt_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "dependency_kind": {"type": "string", "minLength": 1},
+                "dependency_posture": {"type": "string", "enum": ["blocked", "ready"]},
+                "dependency_revision": {"type": "integer", "minimum": 1},
+                "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "exact_product_mappings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "freshness": {"type": "string", "enum": ["absent", "current", "stale"]},
+                "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+                "mapping_record_id": {"type": ["string", "null"], "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+                "owner_approval_state": {"type": "string", "enum": ["approved", "withheld"]},
+                "owner_approval_registry_id": {"const": "COMMAND-GATE-OWNER-APPROVAL-REGISTRY-001"},
+                "owner_approval_registry_revision": {"type": "integer", "minimum": 1},
+                "owner_approval_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "registry_id": {"type": "string", "minLength": 1},
+                "registry_revision": {"type": "integer", "minimum": 1},
+                "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+              }
+            }
+          },
+          "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "label": {"type": "string", "minLength": 1},
+          "machine_contract": {"$ref": "#/$defs/machineCommandContract"},
+          "requirement_id": {"type": "string", "minLength": 1},
+          "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+        }
+      }
+    },
+    "known_risks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "visual_authority": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_tests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_validation": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_proof": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "forbidden_changes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "open_conflicts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "claim_ceiling": {
+      "description": "Highest evidence-supported claim permitted from this pack.",
+      "type": "string",
+      "minLength": 1
+    },
+    "rollback_requirements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "nonempty": {"type": "string", "minLength": 1},
+    "machineTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["detail", "id", "posture", "resolution_record"],
+      "properties": {
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^(?:DEST|FOCUS)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "resolution_record": {"$ref": "#/$defs/resolutionRecord"}
+      }
+    },
+    "machineRecovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint_id", "detail", "id", "inverse_command_id", "irreversible_confirmation_id", "irreversible_receipt_id", "mechanism_commands", "mechanism_records", "owner", "posture", "recovery_handoff_command_id", "resolution_record", "rollback_posture"],
+      "properties": {
+        "checkpoint_id": {"type": ["string", "null"], "pattern": "^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "inverse_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_confirmation_id": {"type": ["string", "null"], "pattern": "^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_receipt_id": {"type": ["string", "null"], "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "mechanism_commands": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/recoveryMechanismCommand"}},
+        "mechanism_records": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/resolutionRecord"}},
+        "owner": {"$ref": "#/$defs/nonempty"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "recovery_handoff_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "resolution_record": {"$ref": "#/$defs/resolutionRecord"},
+        "rollback_posture": {"type": ["string", "null"], "enum": ["checkpoint_restore", "confirmed_irreversible", "inverse_command", "owner_recovery_handoff", null]}
+      }
+    },
+    "recoveryMechanismCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["behavior", "mechanism_kind", "redo", "state_command_record_sha256", "trigger_command_id"],
+      "properties": {
+        "behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["activation_posture", "canonical_owner", "command_id", "commit_boundary", "effect", "failure_focus", "gate_dependency_ids", "gate_requirement_ids", "label", "preconditions", "presentation", "privacy_egress", "recovery_id", "recovery_owner", "recovery_posture", "rollback_undo", "verification_ids"],
+          "properties": {
+            "activation_posture": {"enum": ["active", "future_gated"]},
+            "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+            "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+            "commit_boundary": {"$ref": "#/$defs/nonempty"},
+            "effect": {"$ref": "#/$defs/nonempty"},
+            "failure_focus": {"$ref": "#/$defs/nonempty"},
+            "gate_dependency_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}},
+            "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}},
+            "label": {"$ref": "#/$defs/nonempty"},
+            "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}},
+            "presentation": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["destination", "destination_id", "destination_posture", "failure_focus_id", "failure_focus_posture", "success_focus", "success_focus_id", "success_focus_posture"],
+              "properties": {
+                "destination": {"$ref": "#/$defs/nonempty"},
+                "destination_id": {"type": "string", "pattern": "^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "destination_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "failure_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "failure_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "success_focus": {"$ref": "#/$defs/nonempty"},
+                "success_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "success_focus_posture": {"enum": ["current", "deferred", "unavailable"]}
+              }
+            },
+            "privacy_egress": {"$ref": "#/$defs/nonempty"},
+            "recovery_id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+            "recovery_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+            "recovery_posture": {"enum": ["current", "deferred", "unavailable"]},
+            "rollback_undo": {"$ref": "#/$defs/nonempty"},
+            "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}}
+          }
+        },
+        "mechanism_kind": {"enum": ["inverse_command", "recovery_handoff_command"]},
+        "redo": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["authorization_posture", "command_id", "receipt_posture", "revision_posture"],
+              "properties": {
+                "authorization_posture": {"const": "fresh_task_authorization_required"},
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "receipt_posture": {"const": "current_inverse_receipt_required"},
+                "revision_posture": {"const": "current_revision_required"}
+              }
+            }
+          ]
+        },
+        "state_command_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trigger_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+      }
+    },
+    "machineCommandContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activation_posture", "command_id", "destination", "failure_focus", "label", "recovery", "resolution_registry", "success_focus"],
+      "properties": {
+        "activation_posture": {"enum": ["active", "future_gated"]},
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "destination": {"$ref": "#/$defs/machineTarget"},
+        "failure_focus": {"$ref": "#/$defs/machineTarget"},
+        "label": {"$ref": "#/$defs/nonempty"},
+        "recovery": {"$ref": "#/$defs/machineRecovery"},
+        "resolution_registry": {"$ref": "#/$defs/resolutionRegistry"},
+        "success_focus": {"$ref": "#/$defs/machineTarget"}
+      }
+    },
+    "resolutionRegistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registry_id", "registry_revision", "source_sha256"],
+      "properties": {
+        "registry_id": {"const": "COMMAND-RESOLUTION-REGISTRY-001"},
+        "registry_revision": {"type": "integer", "minimum": 1},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "resolutionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_sha256", "resolution_id"],
+      "properties": {
+        "record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "resolution_id": {"type": "string", "pattern": "^(?:DEST|FOCUS|RECOVERY|CMD|CHECKPOINT|CONFIRMATION|RECEIPT)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_command_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "approvalScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command_id", "owner_concept", "requirement_id", "state_id"],
+      "properties": {
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "owner_concept": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+      }
+    },
+    "approvalReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval_attestation_sha256", "approval_identity", "approval_state", "approved_scope", "approved_scope_sha256", "canon_content_sha256", "dependency_id", "dependency_revision", "dependency_sha256", "exact_product_mappings", "mapping_record_id", "mapping_sha256", "previous_receipt_sha256", "receipt_id", "receipt_revision", "receipt_sha256"],
+      "properties": {
+        "approval_attestation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "approval_identity": {"type": "string", "pattern": "^OWNER-APPROVAL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "approval_state": {"const": "approved"},
+        "approved_scope": {"$ref": "#/$defs/approvalScope"},
+        "approved_scope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "dependency_revision": {"type": "integer", "minimum": 2},
+        "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "exact_product_mappings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "mapping_record_id": {"type": "string", "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+        "mapping_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "previous_receipt_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "receipt_id": {"type": "string", "pattern": "^APPROVAL-RECEIPT-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+        "receipt_revision": {"type": "integer", "minimum": 2},
+        "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

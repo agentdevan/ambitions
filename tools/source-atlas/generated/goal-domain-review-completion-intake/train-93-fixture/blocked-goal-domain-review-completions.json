@@ -1,0 +1,182 @@
+{
+  "blockedReviewCompletions": [
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.9f77c75ab4973fd5",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.6e875bf6d72cd2fa",
+      "packetID": "source_atlas_goal_domain_review_packet.b0585ad33e6a87d7",
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "reviewLane": "direct_source_authority_resolution",
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.bebc9d4090044343",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.0328597888090db2",
+      "packetID": "source_atlas_goal_domain_review_packet.a1c27b68bd6e2ac3",
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "reviewLane": "source_lane_governance",
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.7da644486227bd8b",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.740b7396b3fc17c7",
+      "packetID": "source_atlas_goal_domain_review_packet.329409f8dc9fd3b1",
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "reviewLane": "legal_terms_review",
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.6428c217258b0f3b",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.1c1eb626d0c8af1e",
+      "packetID": "source_atlas_goal_domain_review_packet.438ae70e1dd81b6e",
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "reviewLane": "api_governance_review",
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.f044ee2337868958",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.72fa5812590ce0e8",
+      "packetID": "source_atlas_goal_domain_review_packet.86bdd75c21d4e8de",
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "reviewLane": "direct_source_authority_resolution",
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.a1b25a6505f920a7",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.9ece7bd3c3b31b0c",
+      "packetID": "source_atlas_goal_domain_review_packet.7282a16c7b364eb7",
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "reviewLane": "source_lane_governance",
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.30228dcf5e0c9942",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.6c65eea262d95ff6",
+      "packetID": "source_atlas_goal_domain_review_packet.f08927486345d24b",
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "reviewLane": "legal_terms_review",
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.1ebf5cd2bc34472c",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.48ef5ba98771d7e6",
+      "packetID": "source_atlas_goal_domain_review_packet.073c28f82a28d9f5",
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "reviewLane": "api_governance_review",
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.blockedGoalDomainReviewCompletions.v1"
+}

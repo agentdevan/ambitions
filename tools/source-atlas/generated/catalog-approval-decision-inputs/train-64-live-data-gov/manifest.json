@@ -1,0 +1,106 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_owner_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_input_packets_cover_all_preflight_records",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_input_packets_are_not_approvals",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_inputs_emit_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionOwner": "Ambitions source review",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogApprovalDecisionInputsManifest.v1",
+  "nonClaims": [
+    "reviewer input packets only",
+    "not an approval artifact",
+    "not legal approval",
+    "not outside legal approval",
+    "not source authority",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedDecisionInputs": "2b1ab0d6cc538a5ee2661ad57228c79769ea08360695e198eaecad06ed6709b4",
+    "catalogApprovalDecisionInputs": "71e5a13c38afc03a188abe1560fc372b0752c32ea4ce1382417c030b4fef5558",
+    "completedApprovalArtifacts": "2e289aa3ac9e3ec248775c436e66365d5722dd97035b717b449b02928ef78681",
+    "decisionInputPackets": "1cbc7b3cecc06704b3e04a4cf3f42bb2df8bd790860b0f339fa1f14b7f11ca81",
+    "manifest": "5768cc0417669001943ebc64bf0dca2aba84fdec6f9bda3ca4790b0c072130df"
+  },
+  "outputPaths": {
+    "blockedDecisionInputs": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/blocked-decision-inputs.json",
+    "catalogApprovalDecisionInputs": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/catalog-approval-decision-inputs.json",
+    "closeout": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/closeout.md",
+    "completedApprovalArtifacts": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/completed-approval-artifacts.json",
+    "decisionInputPackets": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json"
+  },
+  "preflightRecordsPath": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/decision-preflight-records.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDecisionInputs": 4,
+    "claims": 0,
+    "completedApprovalArtifacts": 0,
+    "decisionInputPackets": 4,
+    "decisionInputReadyForCompletion": 0,
+    "packableClaims": 0,
+    "preflightRecords": 4,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; decision input tooling only",
+  "status": "Source Green for catalog approval decision input tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-approval-decision-inputs-train-64"
+}

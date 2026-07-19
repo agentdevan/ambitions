@@ -1,0 +1,135 @@
+{
+  "train": "source-atlas-live-public-catalog-transport-train-55",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "status": "Source Green for live-gated public catalog transport evidence / Yellow overall Source Atlas",
+  "scopeCompleted": [
+    "Ran approved live-gated public catalog transport with --live --execute against keyless public CKAN catalog endpoints.",
+    "Added live public catalog transport plan for Australia data.gov.au and Canada open.canada.ca CKAN package_search metadata slices.",
+    "Hardened catalog transport sanitization so public catalog contact emails, catalog user/revision identifiers, and phone-shaped public URL IDs are redacted before snapshots feed discovery.",
+    "Added focused regression coverage for live-fetch failure reporting and public catalog contact/identifier redaction.",
+    "Generated live transport evidence with snapshot SHA-256 proof and candidate-only catalog discovery handoff."
+  ],
+  "filesChanged": [
+    "tools/source-atlas/foundry/catalog_transport.py",
+    "tools/source-atlas/foundry/tests/test_catalog_transport_train_54.py",
+    "tools/source-atlas/fixtures/catalog-transport/train-55-live-data-gov-plan.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-transport.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/closeout.md",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/australia-data-education-package-search.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/canada-open-data-health-package-search.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/*",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-live-public-catalog-transport-train-55-closeout.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-live-public-catalog-transport-train-55-closeout.md"
+  ],
+  "liveTransportEvidence": {
+    "mode": "live",
+    "liveRequested": true,
+    "executeRequested": true,
+    "endpoints": [
+      "https://data.gov.au/data/api/3/action/package_search?q=education&rows=2",
+      "https://open.canada.ca/data/api/3/action/package_search?q=health&rows=2"
+    ],
+    "httpStatus": [
+      200,
+      200
+    ],
+    "snapshots": 2,
+    "catalogs": 2,
+    "candidateSources": 4,
+    "claims": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "redactions": {
+      "australia-data-education-package-search": 8,
+      "canada-open-data-health-package-search": 8
+    },
+    "snapshotSHA256": {
+      "australia-data-education-package-search": "91c73012ba387b491ff43cc063cce8598a4ac4faa0f6aa8acfcaf73b2bf5f1b1",
+      "canada-open-data-health-package-search": "5c57032b6a7977b51c3ec4b78e525e8ac33a7759fc686cb04e27c8e13c087027"
+    }
+  },
+  "productLawPreserved": [
+    "Catalog transport emits public/reference snapshots only.",
+    "No private user context is accepted into valid transport requests or output.",
+    "Public catalog contact fields and unsafe-looking catalog identifiers are redacted before candidate discovery.",
+    "No claims, packs, R2 objects, native runtime behavior, final plans, schedules, Steps, or personalized paths are emitted.",
+    "R2 remains public/reference/freshness infrastructure only."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_transport_train_54.py -q -> 8 passed",
+    "python3 tools/source-atlas/source-atlas-foundry.py catalog-transport --plan tools/source-atlas/fixtures/catalog-transport/train-55-live-data-gov-plan.json --output-root tools/source-atlas/generated/catalog-transport/train-55-live-data-gov --mode live --live --execute --created-at 2026-06-28T00:00:00Z --emit-evidence docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.json --markdown docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.md -> valid true",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 227 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "git diff --check -> pass"
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not run because this train changed Source Atlas tooling, fixtures, live generated evidence, and QA evidence only.",
+    "Outside legal approval was not run or claimed.",
+    "Data.gov/GSA keyed API path was not used because the request-shape scanner correctly rejects api_key query material."
+  ],
+  "proofArtifacts": [
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-live-data-gov-train-55.md",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-transport.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/manifest.json",
+    "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/candidate-sources.json"
+  ],
+  "knownRisks": [
+    "Live endpoints can drift or rate-limit; this train proves the current run only.",
+    "Live catalog snapshots remain source-of-sources candidate records only; they require source-lane review, legal/terms review, API governance, adapters, claim graph, pack production, R2 proof, and native/runtime proof before readiness claims.",
+    "Existing dirty native/tooling work from previous Source Atlas trains remains in the worktree and is outside this train closeout."
+  ],
+  "followUpRequired": [
+    "Promote approved live catalog candidates into reviewed source-lane/legal/API review packets.",
+    "Add scheduled dry-run/live-run policy only after explicit budget/rate/freshness governance.",
+    "Keep literal universal coverage blocked; live catalog metadata transport is not coverage proof."
+  ],
+  "rollbackPlan": [
+    "Remove Train 55 live plan and generated live evidence.",
+    "Revert catalog transport redaction hardening and regression tests if needed.",
+    "Keep Train 54 fixture transport proof as fallback."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Green only for current live-gated public catalog transport evidence.",
+  "r2RequestPrivacyProof": "No R2 request path, object key, upload, or readback is emitted or executed by catalog transport.",
+  "noPrivateGraphEgressProof": "Plan privacy scan, request-shape privacy scan, emitted artifact privacy scan, Source Atlas boundary audit, and no-private-graph egress audit pass.",
+  "licenseTermsProof": "Catalog transport does not approve terms or redistribution; downstream catalog candidates remain review-required and pack-blocked.",
+  "restrictedSourceExclusionProof": "Transport output feeds source-of-sources catalog candidates only; no claim authority or pack output is allowed.",
+  "provenanceCompletenessProof": "Not claimed; catalog transport emits zero claims and zero packable claims.",
+  "freshnessRevocationProof": "Not claimed; no pack, revocation manifest, or LKG pointer is emitted.",
+  "lkgRollbackProof": "Not claimed; no R2 or native pack lifecycle changed in this train.",
+  "nativeOfflineNoAccountProof": "Not claimed; no native files changed in this train.",
+  "productionNonClaims": [
+    "No production R2 readiness.",
+    "No app runtime Green.",
+    "No release Green.",
+    "No legal or outside legal approval.",
+    "No universal coverage.",
+    "No source authority.",
+    "No claim graph or pack readiness."
+  ],
+  "architectureCloseout": {
+    "finalArchitectureTreeInspected": true,
+    "canonicalOwnersTouched": [
+      "tools/source-atlas",
+      "docs/qa/source-atlas"
+    ],
+    "filesMovedOrCreated": [
+      "tools/source-atlas/fixtures/catalog-transport/train-55-live-data-gov-plan.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-live-public-catalog-transport-train-55-closeout.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-live-public-catalog-transport-train-55-closeout.md"
+    ],
+    "oldNonCanonicalPathsRemoved": [],
+    "compatibilityShimsLeftBehind": [],
+    "yellowArchitectureDebt": "Live catalog candidates remain source-of-sources input until reviewed governance, legal/API, adapter, claim, pack, R2, and native proofs exist.",
+    "nextRepairTrain": "Governed live-catalog candidate promotion into source-lane review packets.",
+    "noEquivalentFolderInterpretationUsed": true
+  }
+}

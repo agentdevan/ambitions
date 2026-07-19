@@ -1,0 +1,1902 @@
+{
+  "authority_state": "active",
+  "canon_content_sha": "4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c",
+  "canon_revision": 1,
+  "compiler_version": "0.2.0",
+  "concepts": [
+    {
+      "concept": "accessibility.dynamic-type",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.input-equivalence",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.proof-matrix",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.reading-focus",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.reduced-effects",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.semantic-equivalence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "accessibility.semantic-equivalence.application",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.status-errors",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "account.boundary",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "account.command-contract",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "account.launch-commitment",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.deep-linking.command-contract",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.external-entry",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.fallback",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.privacy",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.resolution",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.state",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.degraded.command-contract",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.failure-taxonomy",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.input-preservation",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.presentation",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.recovery",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.state",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.launch-setup.command-contract",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.launch.readiness",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.launch.recovery",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.navigation.ia-map",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.presentation",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.restoration",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.root-interaction",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.state",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.permissions.command-contract",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.contextual-request",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.denied-fallback",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.reconciliation",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.recovery",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.state",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.setup.interruption-resume",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.setup.progress",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.setup.progressive-first-use",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.setup.state",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.shell.command-contract",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.failure-recovery",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.first-viewport",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.global-actions",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.root-navigation",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.state",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "authority.amendment",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.migration-corpus",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.mission",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.moat",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.origin",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.product-definition",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.destructive-supersession",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.external-linear-retention",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.no-active-graveyard",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.force-nothing",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.material-confirmation",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.undo-recovery",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "copy.visibility-classification",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "data.loss-stop-ship",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "engineering.codex.issue-readiness",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.codex.preflight",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.concurrency.backpressure",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.cancellation",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.clock",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.isolation",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.main-actor",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.race-proof",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.reentrancy",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.sendable",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.tasks",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.design.change-control",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.component-maturity",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.constant-audit",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.positive-target",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.theme-completeness",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.token-domains",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.tokens",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.determinism.causal-order",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.decisions",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.golden-corpus",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.idempotency",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.policy-version",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.randomness",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.replay",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.entitlement.ethics",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.offline-data",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.purchase",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.states",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.frontend.abstraction",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.assets",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.body-purity",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.component-contract",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.exhaustive-state",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.layout",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.navigation",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.presentation-state",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.preview-matrix",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.view-responsibility",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.governance.amendment",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.architecture-ownership",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.audit",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.change-manifest",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.evidence-amendment",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.evolution-horizon",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.handoff",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.independent-acceptance",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.periodic-audit",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.registry",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.registry-integrity",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.role-separation",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.stable-ids",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.stop-conditions",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.validation-state",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.lifecycle.background",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.extension",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.scene",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.system-change",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.performance.calibration-gap",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.claim-proof",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.context",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.registry",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.regression",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.resource-aware",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.release.claim-ceiling",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.domains",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.identity",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.rollout",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.reliability.crash-hang",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.diagnostics",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.failure-taxonomy",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.health",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.incident",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.no-silent-repair",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.security.abuse-proof",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.dependencies",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.hostile-input",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.secrets-keys",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.sensitive-surfaces",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.threat-model",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.admission",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.egress",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.minimal",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.sbom",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.testing.coverage-meaning",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.failure-injection",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.fixtures",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.lanes",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.no-theater",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.property-priorities",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.regression",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "global.capture.attachment-intake",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.classification",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.close-behavior",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.command-contract",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.draft-recovery",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.identity",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.keyboard",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.proposal-flow",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.saved-for-later",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.visual-authority",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.completed.contextual-placement",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.motion.accessibility",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.motion.responsibility",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.motion.state-continuity",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.search.answer-evidence",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask-activation-gate",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask-command-contract",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.canonical-actions",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.capture-handoff",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.command-contract",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.find",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.first-viewport",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.identity",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.index-actions",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.index-ranking",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.input",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.inspect",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.placement",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.presentation",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.private-command-layer",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.search.session-history",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.visual-authority",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.trust-ownership",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.trust.command-contract",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.identity",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.layers",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.proportional-receipts",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.visual-authority",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "history.supersession",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.nonroot-ownership",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.plain-language",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.root-labels",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.root-state-invariance",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.root-surfaces",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "journey.calendar-diff.conflict-choice",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-diff.grouping",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-diff.no-silent-mutation",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-diff.notification-handoff",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.candidate",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.command-contract",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.commit",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-invite-diff",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.capture.commit-boundary",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.delete-restore.trash",
+      "spec_id": "JOURNEY-BACKUP-RESTORE-RESET"
+    },
+    {
+      "concept": "journey.first-use.trigger",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.goal-activation.route-generation",
+      "spec_id": "JOURNEY-GOAL-CREATION-AND-ACTIVATION"
+    },
+    {
+      "concept": "journey.offline-create.trigger",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.recovery.material-confirmation",
+      "spec_id": "JOURNEY-MISSED-WORK-RECOVERY"
+    },
+    {
+      "concept": "journey.saved-for-later.durable-save",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.search.find-act-inspect",
+      "spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT"
+    },
+    {
+      "concept": "journey.search.find-ask-act-inspect",
+      "spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT"
+    },
+    {
+      "concept": "journey.step-closure.required-proof",
+      "spec_id": "JOURNEY-CLOSURE-AND-PROOF"
+    },
+    {
+      "concept": "journey.step.start-complete",
+      "spec_id": "JOURNEY-START-AND-COMPLETE-STEP"
+    },
+    {
+      "concept": "journey.time-direct-manipulation.conflict-preview",
+      "spec_id": "JOURNEY-SCHEDULE-REFLOW"
+    },
+    {
+      "concept": "language.humane-tone",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.layout-resilience",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.localization-construction",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.locked-vocabulary",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.root-labels",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "language.state-consequence",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.store-localization",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.temporal-locale",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "mission.anti-metrics",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.capabilities",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.capability-meaning",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.category",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.core-loop",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.foundation-runtime",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.function",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.hard-red",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.integration",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.launch-bar",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.moat",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.moat-continuity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.naming-stack",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.non-commodity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-outcome",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-problem",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-structure",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.reflow",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.runtime-relation",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.success",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.user",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.archive.planning-influence",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.attachment.identity-privacy",
+      "spec_id": "OBJECT-ATTACHMENT"
+    },
+    {
+      "concept": "object.boundary.conversion",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.boundary.recurrence",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.boundary.shared-metadata",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.canonical-graph",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.capture-draft.identity-lifecycle",
+      "spec_id": "OBJECT-SAVED-FOR-LATER-DRAFT"
+    },
+    {
+      "concept": "object.closure.identity-lifecycle",
+      "spec_id": "OBJECT-CLOSURE"
+    },
+    {
+      "concept": "object.closure.separation",
+      "spec_id": "OBJECT-CLOSURE"
+    },
+    {
+      "concept": "object.event.all-day-capacity",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.identity-lifecycle",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.multi-day",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.recurrence-edit",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.source-selection",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.time-zone",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.future-step-identity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.future-step.near-term",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.future-step.receipt",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.goal-lifecycle",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.goal-link.primary",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.goal-path.accessibility",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.adaptation-boundary",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.adaptation-triggers",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.emotional-posture",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.identity-lifecycle",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.receipt",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.strategy",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal.automation-ladder",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.creation-failure",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.form",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.identity",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.priority",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.graph.projection-ownership",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.graph.single-canonical",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.history-event.identity",
+      "spec_id": "OBJECT-HISTORY-EVENT"
+    },
+    {
+      "concept": "object.identity-common-fields",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.identity.canonical",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.import-diff-record.identity-lifecycle",
+      "spec_id": "OBJECT-IMPORT-DIFF-RECORD"
+    },
+    {
+      "concept": "object.life-area.identity",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-area.suggested-defaults",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-capital.anti-gamification",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-capital.editability",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.lifecycle-deletion",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.lifecycle.conversion-deletion-restore",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.lifecycle.semantic-separation",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.memory.lifecycle-retention",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.note.identity-execution",
+      "spec_id": "OBJECT-NOTE"
+    },
+    {
+      "concept": "object.notification-rule.identity",
+      "spec_id": "OBJECT-NOTIFICATION-RULE"
+    },
+    {
+      "concept": "object.owner.mutation",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.proof-requirement",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.proof.identity",
+      "spec_id": "OBJECT-PROOF"
+    },
+    {
+      "concept": "object.receipt.identity-lifecycle",
+      "spec_id": "OBJECT-RECEIPT"
+    },
+    {
+      "concept": "object.recovery-segment.identity",
+      "spec_id": "OBJECT-RECOVERY-SEGMENT"
+    },
+    {
+      "concept": "object.recurrence.series-model",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.reminder-completion",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.reminder.identity-capacity",
+      "spec_id": "OBJECT-REMINDER"
+    },
+    {
+      "concept": "object.reminder.replacement-target",
+      "spec_id": "OBJECT-REMINDER"
+    },
+    {
+      "concept": "object.saved-for-later",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.schedule-change-set.identity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.schedule-placement.atomicity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.schedule-placement.identity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.schedule-state.orthogonality",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.scheduling.exactness",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.source-reference.identity-visibility",
+      "spec_id": "OBJECT-SOURCE-REFERENCE"
+    },
+    {
+      "concept": "object.state.orthogonal-axes",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.step.identity-lifecycle",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.step.urgency-metadata",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.substep.identity-scheduling",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.taxonomy",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "platform.calendar-replacement",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "platform.native-iphone",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.cloudkit-continuity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.local-authority",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.no-account-core",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.r2-public-only",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.visibility",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "proof.evidence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "proof.figma-authority",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.durable-success",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.mutation-invariant",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.mutation-sequence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.no-direct-write",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.source-owner",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "shell.stage",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "standard.acceptance.accessibility",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "standard.acceptance.build",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.documentation",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.first-viewports",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.ia",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.interaction",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.object-model",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.proof",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.replacement",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.scenario-proof",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.source",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.status",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.visual",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.visual-copy",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.interaction.dismissal",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.drag",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.focus",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.long-press",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.native-equivalence",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.swipe",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.tap",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.spacing-corners.semantic-rhythm",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.typography.copy-budget",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.visual-proof.screenshot-matrix",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.visual.independent-review",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.visual.package-readiness",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "surface.goal-detail.viewport",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.anti-patterns",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.closure",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.command-contract",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.detail",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.execution-stack",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.first-viewport",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.identity",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.path-interaction",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.path-visual",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.purpose",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.reviews",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.root-viewport",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.screen-inventory",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.visual-authority",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.time-external-visibility",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.time.creation-routes",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.day",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.degraded-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.detail-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.first-viewport",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.imported-source",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.list",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.month",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.object-detail",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.primary-identity",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.purpose",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.search",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.step-membership",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.today-control",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.view-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.view-switching",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.views",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.visual-authority",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.visual-geometry",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.week",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.year",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.today-primary-identity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.today.command-contract",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.eligibility",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.first-viewport",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.missed-placement-continuity",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.object-row",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.purpose",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.screen-inventory",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.states",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.temporal-rail",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.visual-authority",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.you-depth",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.you.appearance",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.command-contract",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.contextual-education",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.data-controls",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.depth",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.entitlement-command-contract",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.first-viewport",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.identity",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.no-knowledge-model",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.privacy-data-boundary",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.profile",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.screen-inventory",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.settings-drilldown",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.time-preferences",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.visual-authority",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "system.apple.command-handoff",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.intents",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.platform-baseline",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.projection",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.share-handoff",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.widget-action",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.widget-projection",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.continuity.command-contract",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.conflict",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.control-center",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.disabled-gate",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.environment",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.failure",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.record-identity",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.restore",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.user-owned-cloudkit",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.data.export",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.data.repair",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.diagnostics.command-contract",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "concept": "system.diagnostics.non-authority",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "concept": "system.diagnostics.redacted-health",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "concept": "system.imported-source.no-silent-change",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.learning.capability-retention",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.learning.goal-suggestion",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.learning.local-inspectable",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.learning.user-control",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.notifications.command-contract",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "concept": "system.notifications.external-effect",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "concept": "system.notifications.object-aware",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "concept": "system.persistence.atomicity",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.compaction",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.corruption",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.migration",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.replay",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.privacy.classification",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.privacy.egress-firewall",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.privacy.external-assistance",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.runtime.cloud-independence",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.command-validation",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.local-orchestration",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.mutation-sequence",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.proof-bar",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.simulation",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.scheduling.capacity",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.fit",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.infeasibility",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.reflow",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.transition-buffer",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.source-atlas.egress-firewall",
+      "spec_id": "SYSTEM-SOURCE-ATLAS"
+    },
+    {
+      "concept": "system.source-atlas.public-reference",
+      "spec_id": "SYSTEM-SOURCE-ATLAS"
+    },
+    {
+      "concept": "test.runtime-contract",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "test.scenario-executability",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "test.scope-matrix",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    }
+  ],
+  "schema_version": 1,
+  "traceability_input_sha": "2a498a0c103cbb297b4ca489982b820e1e14f915a56656989fdf21ddfa09e723"
+}

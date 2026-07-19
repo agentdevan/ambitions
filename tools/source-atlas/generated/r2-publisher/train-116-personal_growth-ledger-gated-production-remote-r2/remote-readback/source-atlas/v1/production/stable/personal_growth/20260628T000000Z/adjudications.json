@@ -1,0 +1,34 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_institution",
+      "claim_id": "canonical_claim.4795642673cfd1e9",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "nih.medlineplus.wellness",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_scholarly_metadata_context",
+      "authority_class": "scholarly_metadata",
+      "claim_id": "canonical_claim.54fc606fc6964686",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "openalex.personal_growth_research",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_institution",
+      "claim_id": "canonical_claim.c5b7cb6b3e5307ca",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "nih.medlineplus.wellness",
+      "status": "accepted_claim"
+    }
+  ]
+}

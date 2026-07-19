@@ -1,0 +1,403 @@
+{
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/education_credentialing/current.json",
+    "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+    "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+    "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json"
+  ],
+  "approvalArtifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-education-approval-train-42.json",
+  "artifactID": "source_atlas_public_r2_worker_gateway_education_readback.train42",
+  "blockedRouteProof": [
+    {
+      "actualStatus": 404,
+      "expectedStatus": 404,
+      "method": "GET",
+      "name": "blocked_education_claims",
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json"
+    },
+    {
+      "actualStatus": 404,
+      "expectedStatus": 404,
+      "method": "GET",
+      "name": "blocked_private_query",
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json?goal_text=private"
+    },
+    {
+      "actualStatus": 405,
+      "expectedStatus": 405,
+      "method": "POST",
+      "name": "blocked_post",
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json"
+    }
+  ],
+  "blocked_route_proof": [
+    {
+      "probe": "blocked_education_claims",
+      "status": 404
+    },
+    {
+      "probe": "blocked_private_query",
+      "status": 404
+    },
+    {
+      "probe": "blocked_post",
+      "status": 405
+    }
+  ],
+  "channel": "stable",
+  "checks": {
+    "hashes": {
+      "currentManifestSHA256MatchesBody": true,
+      "currentPackSHA256MatchesBody": true,
+      "currentPointerSHA256MatchesPublisherReport": true,
+      "lkgPackIDMatchesCurrentPointer": true,
+      "manifestPackSHA256MatchesCurrentPointer": true,
+      "manifestSHA256MatchesBody": true,
+      "packIDMatchesCurrentPointer": true,
+      "packIDMatchesManifest": true,
+      "revocationsHaveNoCurrentRevocations": true,
+      "revocationsLKGKeyIsEducation": true,
+      "revocationsManifestKeyIsEducation": true
+    },
+    "headers": {
+      "allowedResponsesCarryGatewayHeader": true,
+      "allowedResponsesCarryPublicReferenceHeader": true,
+      "blockedRoutesDoNotExposePublicReferenceHeader": true
+    },
+    "statuses": {
+      "blocked_education_claims": true,
+      "blocked_post": true,
+      "blocked_private_query": true,
+      "civic_current": true,
+      "education_current": true,
+      "education_lkg": true,
+      "education_manifest": true,
+      "education_pack": true,
+      "education_revocations": true,
+      "occupation_current": true
+    }
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "deployedVersionID": "c6d98458-d8fa-415c-949c-b3bf0a568026",
+  "domain": "education_credentialing",
+  "environment": "production",
+  "gatewayURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "generatedAt": "2026-06-28T05:56:35Z",
+  "https_readback": {
+    "blocked_education_claims": {
+      "byteSize": 9,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "blocked_post": {
+      "byteSize": 18,
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405
+    },
+    "blocked_private_query": {
+      "byteSize": 9,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "civic_current": {
+      "byteSize": 1736,
+      "sha256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "status": 200
+    },
+    "education_current": {
+      "byteSize": 1728,
+      "sha256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "status": 200
+    },
+    "education_lkg": {
+      "byteSize": 1262,
+      "sha256": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f",
+      "status": 200
+    },
+    "education_manifest": {
+      "byteSize": 8771,
+      "sha256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+      "status": 200
+    },
+    "education_pack": {
+      "byteSize": 36468,
+      "sha256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+      "status": 200
+    },
+    "education_revocations": {
+      "byteSize": 1409,
+      "sha256": "373b2b3011cbd6806e6dae4a206a4641dd37a163d9ffb074df0cfdcd4fea42ae",
+      "status": 200
+    },
+    "occupation_current": {
+      "byteSize": 1720,
+      "sha256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "status": 200
+    }
+  },
+  "knownLimits": [
+    "Worker exposes only current, LKG, revocations, manifest, and pack objects for this bounded education domain.",
+    "Legal posture is an internal terms review under user authorization, not outside legal approval.",
+    "Native runtime proof must still validate education target fetch/cache/quarantine/offline behavior before any bounded runtime claim for this domain."
+  ],
+  "manifestID": "source_atlas_pack_manifest.de2f97fae1ef998a",
+  "no_private_graph_egress_proof": "No goal, capture, schedule, proof, receipt, account, device, private graph, personalization, or behavior fields are present in gateway object keys or requests.",
+  "objectKeys": {
+    "current": "source-atlas/v1/production/stable/education_credentialing/current.json",
+    "lkg": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+    "pack": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/education_credentialing/revocations.json"
+  },
+  "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+    "currentPackSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+    "packBodySHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+    "packHashConsistent": true,
+    "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+    "workerCurrentPointerSHA256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448"
+  },
+  "product_law_preserved": true,
+  "productionNonClaims": [
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not a Source Atlas product center or pack browser",
+    "not a final user plan, schedule, Step list, or personalized path generator"
+  ],
+  "r2Bucket": "ambitions-source-atlas-prod",
+  "r2PublisherEvidence": "docs/qa/source-atlas/r2/source-atlas-education-r2-publisher-remote-r2-train-42.json",
+  "r2RequestPrivacyProof": {
+    "noPrivateContextObservedInAllowedURLs": true,
+    "nonAllowlistedPackSliceRejected": true,
+    "privateMarkersRejectedByWorker": [
+      "account_id",
+      "capture",
+      "device_id",
+      "goal_text",
+      "private_graph",
+      "proof_id",
+      "receipt",
+      "schedule",
+      "user_id"
+    ],
+    "privateQueryMarkerRejected": true,
+    "requestShape": "fixed public object-key GET/HEAD requests through exact allowlist",
+    "writeMethodRejected": true
+  },
+  "r2_request_privacy_proof": "Worker requests use public object keys only and no query strings. Private-looking query markers are rejected with 404; POST is rejected with 405.",
+  "requests": [
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 1728,
+      "bodySHA256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "education_current",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 1262,
+      "bodySHA256": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=3600",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "education_lkg",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/lkg.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 1409,
+      "bodySHA256": "373b2b3011cbd6806e6dae4a206a4641dd37a163d9ffb074df0cfdcd4fea42ae",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=3600",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "education_revocations",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/revocations.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 8771,
+      "bodySHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=3600",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "education_manifest",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 36468,
+      "bodySHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=3600",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "education_pack",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 1720,
+      "bodySHA256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "occupation_current",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/occupation_foundation/current.json"
+    },
+    {
+      "actualStatus": 200,
+      "allowed": true,
+      "bodyByteSize": 1736,
+      "bodySHA256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "expectedStatus": 200,
+      "headers": {
+        "allow": null,
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "name": "civic_current",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/public_civic_requirements/current.json"
+    },
+    {
+      "actualStatus": 404,
+      "allowed": false,
+      "bodyByteSize": 9,
+      "bodySHA256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "expectedStatus": 404,
+      "headers": {
+        "allow": null,
+        "cache-control": "no-store",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-source-atlas-gateway": null,
+        "x-source-atlas-public-reference": null
+      },
+      "method": "GET",
+      "name": "blocked_education_claims",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json"
+    },
+    {
+      "actualStatus": 404,
+      "allowed": false,
+      "bodyByteSize": 9,
+      "bodySHA256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "expectedStatus": 404,
+      "headers": {
+        "allow": null,
+        "cache-control": "no-store",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-source-atlas-gateway": null,
+        "x-source-atlas-public-reference": null
+      },
+      "method": "GET",
+      "name": "blocked_private_query",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json?goal_text=private"
+    },
+    {
+      "actualStatus": 405,
+      "allowed": false,
+      "bodyByteSize": 18,
+      "bodySHA256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "expectedStatus": 405,
+      "headers": {
+        "allow": "GET, HEAD",
+        "cache-control": "no-store",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-source-atlas-gateway": null,
+        "x-source-atlas-public-reference": null
+      },
+      "method": "POST",
+      "name": "blocked_post",
+      "statusMatches": true,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "sha256": {
+    "currentPointer": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+    "lkgPointer": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f",
+    "manifest": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+    "pack": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+    "revocations": "373b2b3011cbd6806e6dae4a206a4641dd37a163d9ffb074df0cfdcd4fea42ae"
+  },
+  "source_atlas_status_ceiling": "Green for bounded education Worker HTTPS readback only. Overall Source Atlas remains Yellow.",
+  "status": "green_for_bounded_education_gateway_https_readback_yellow_overall_source_atlas",
+  "title": "Source Atlas public Worker gateway education HTTPS readback proof",
+  "train": "42",
+  "valid": true,
+  "worker_gateway": {
+    "approval_artifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-education-approval-train-42.json",
+    "deployed_version_id": "c6d98458-d8fa-415c-949c-b3bf0a568026",
+    "name": "ambitions-source-atlas-public-gateway",
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true
+  }
+}

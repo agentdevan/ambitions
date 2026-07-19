@@ -1,0 +1,13 @@
+{
+  "caseID": "invalid.capture_text_pack",
+  "expectedIssueCodes": [
+    "capture_text"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "captureText": "I captured a private thought.",
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "schemaVersion": 1
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "AMB-1738",
+  "title": "Goals Flagship Acceptance",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "eb3f64d7bb8d42b9aa45f34850fe6b274bb77ad2",
+  "scope": [
+    "Goals source acceptance",
+    "Constellation Atlas source evidence",
+    "life-area detail source evidence",
+    "goal detail source evidence",
+    "local create and detail mutation source evidence",
+    "proof and history source evidence",
+    "visible Goals label cleanup"
+  ],
+  "source_changes": {
+    "changed_source_file_count": 4,
+    "change_type": "string-only Goals visible label cleanup",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "model_enum_cases_changed": false,
+    "source_paths_moved": false
+  },
+  "acceptance_map": [
+    {
+      "criterion": "Goals root / Constellation Atlas",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Life area detail",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/AreaDetailScreen.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsLifeAreaAtlasModels.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Goal detail",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalDetailPathJournalSurfaces.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+02-GoalDetailBreadcrumbSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+04-GoalTrustWhisperSurface.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Goal creation/editing local mutation",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/CreateGoalScreen.swift",
+        "Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+16-repositories.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+02-Snapshot.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Detail action local mutation",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+10-performMutation.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+11-applyAdaptiveRecommendation.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Today linkage",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+07-GoalDetailMissionControlState.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Proof/history inspection details",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+03-GoalDetailProofRailSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalDetailPathJournalSurfaces.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+06-GoalFeedbackItem.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Empty, loading, error, offline, archived, and completed states",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift",
+        "Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+03-GoalDetailProofRailSurface.swift"
+      ],
+      "status": "source_present_runtime_proof_absent"
+    }
+  ],
+  "truth_claims": {
+    "allowed": [
+      "Goals has source and projection evidence for a local Constellation Atlas / life-area / goal-detail flow.",
+      "Goals has source-level local create/edit/detail mutation paths through repositories and optional unit-of-work receipts.",
+      "Goals proof/history stays in inspection detail source paths rather than becoming a persistent root surface.",
+      "Goals visible labels were normalized to sentence case in this slice."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "Runtime Green",
+      "Interaction Green",
+      "Release Green",
+      "screenshot proof",
+      "focused UI journey test proof",
+      "VoiceOver proof",
+      "Dynamic Type proof",
+      "Reduce Motion proof",
+      "Reduce Transparency proof",
+      "High Contrast proof",
+      "simulator proof",
+      "device proof",
+      "airplane-mode proof"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Surfaces/Goals"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/goals-flagship-acceptance.md",
+      "docs/audits/goals-flagship-acceptance.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "Screenshot, accessibility, device, and full UI journey proof remain outside this no-testing source acceptance."
+    ],
+    "next_repair_train": "AMB-1744/AMB-1765 screenshot and device proof; AMB-1743/AMB-1766 accessibility proof.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "airplane_mode_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

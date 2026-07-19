@@ -1,0 +1,28 @@
+{
+  "domains": [
+    {
+      "code": "finance",
+      "title": "Personal Finance",
+      "description": "Budgeting, saving, debt reduction, and long-term asset building goals.",
+      "categories": ["budgeting", "saving", "investing", "debt_reduction"]
+    },
+    {
+      "code": "health",
+      "title": "Physical Health & Fitness",
+      "description": "Cardio training, strength building, flexibility, meal planning, and rest routines.",
+      "categories": ["cardio", "strength", "flexibility", "nutrition", "sleep"]
+    },
+    {
+      "code": "career",
+      "title": "Career & Professional Development",
+      "description": "Skill acquisition, networking, resume building, and job performance goals.",
+      "categories": ["skills", "networking", "performance", "credentials"]
+    },
+    {
+      "code": "mindfulness",
+      "title": "Mindfulness & Mental Health",
+      "description": "Daily meditation, stress management, journaling, and cognitive exercises.",
+      "categories": ["meditation", "stress_management", "journaling"]
+    }
+  ]
+}

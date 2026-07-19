@@ -1,0 +1,196 @@
+{
+  "issue": "AMB-1681",
+  "status": "Implemented Yellow parent closeout",
+  "date": "2026-07-06T03:32:00Z",
+  "branch": "main",
+  "baseline_main_sha": "61d85db3367475f063e1dd2b5f8962acb420e470",
+  "commit_sha": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+  "project": {
+    "name": "Architecture Simplification + Flagship Readiness Remediation",
+    "id": "59c3917f-f662-4ca3-b412-b532613f3a7a"
+  },
+  "artifact_paths": [
+    "docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for builds, tests, package resolve, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired Markdown packet."
+  },
+  "child_issues": [
+    {
+      "issue": "AMB-1802",
+      "status": "Done",
+      "evidence": "docs/adr/ADR-2026-07-05-active-package-boundary.md"
+    }
+  ],
+  "current_package_graph": {
+    "package_swift_products": [
+      "AmbitionsDesignSystem",
+      "AmbitionsWidgetUI"
+    ],
+    "packages_directory": "empty",
+    "ambitions_runtime_package_present": false,
+    "ambitions_testing_support_package_present": false,
+    "ambitions_runtime_note": "AmbitionsRuntime is currently an Xcode test-plan scheme only, not a package product or runtime authority."
+  },
+  "acceptance_mapping": [
+    {
+      "requirement": "Create package boundary ADR",
+      "status": "docs/adr/ADR-2026-07-05-active-package-boundary.md is accepted",
+      "proof_ceiling": "Docs/source configuration proof only"
+    },
+    {
+      "requirement": "Keep or rationalize AmbitionsDesignSystem if deduplicated",
+      "status": "ADR keeps AmbitionsDesignSystem as shared design-system primitives and tokens with no private runtime authority",
+      "proof_ceiling": "No build proof in this closeout"
+    },
+    {
+      "requirement": "Keep AmbitionsWidgetUI only as a widget-safe subset",
+      "status": "ADR keeps AmbitionsWidgetUI under AppUI/Sources, dependent on AmbitionsDesignSystem, with no canonical app projection or mutation authority",
+      "proof_ceiling": "No widget/runtime execution proof"
+    },
+    {
+      "requirement": "Create AmbitionsTestingSupport only if it reduces fixture duplication",
+      "status": "No AmbitionsTestingSupport package/product exists; ADR does not authorize creating one",
+      "proof_ceiling": "Static source scan only"
+    },
+    {
+      "requirement": "Do not create AmbitionsRuntime until authority migration proves it is appropriate",
+      "status": "No AmbitionsRuntime package/product exists. Current AmbitionsRuntime is an Xcode test-plan scheme only",
+      "proof_ceiling": "Static package/project scan only"
+    },
+    {
+      "requirement": "List forbidden package extractions and validation requirements",
+      "status": "ADR requires future package changes to have a linked ADR, dependency graph, validation commands, rollback plan, and non-claims",
+      "proof_ceiling": "ADR/source proof only"
+    }
+  ],
+  "validation_run": [
+    {
+      "command": "find Packages -maxdepth 2 -type f -o -type d",
+      "exit_code": 0,
+      "result": "Packages directory exists but contains no package files"
+    },
+    {
+      "command": "python3 package manifest audit",
+      "exit_code": 0,
+      "result": "Package.swift products are exactly AmbitionsDesignSystem and AmbitionsWidgetUI; no AmbitionsRuntime or AmbitionsTestingSupport"
+    },
+    {
+      "command": "! rg -n \"AmbitionsTestingSupport|package.*AmbitionsRuntime|name: \\\"AmbitionsRuntime\\\"|product: AmbitionsRuntime\" Package.swift project.yml",
+      "exit_code": 0,
+      "result": "No forbidden package/product entries found"
+    },
+    {
+      "command": "python3 -m json.tool docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.json",
+      "exit_code": 0,
+      "result": "This packet JSON parsed"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "Passed; valid=true, findingCount=0, changedPathCount=2"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "Passed; all strict quality gates passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json",
+      "exit_code": 0,
+      "result": "Passed; invalidAcceptedYellowIssues=[]"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "Passed; final-tree parity achieved"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.md docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.json",
+      "exit_code": 0,
+      "result": "Passed for this packet and paired JSON"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed"
+    }
+  ],
+  "validation_not_run": [
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "SwiftPM build/test",
+    "XCTest",
+    "package resolve",
+    "simulator app launch",
+    "archive",
+    "TestFlight upload",
+    "App Store upload",
+    "physical-device procedure"
+  ],
+  "non_claims": [
+    "Implemented Green",
+    "full package-boundary Green",
+    "build/test pass",
+    "Design System visual Green",
+    "WidgetUI runtime/device Green",
+    "AmbitionsTestingSupport implementation",
+    "AmbitionsRuntime package implementation",
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched_by_source_implementation": [],
+    "files_created": [
+      "docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1681-package-boundary-parent-closeout.json"
+    ],
+    "existing_decision_evidence": [
+      "docs/adr/ADR-2026-07-05-active-package-boundary.md"
+    ],
+    "source_files_edited_in_this_packet": [],
+    "files_moved": [],
+    "old_noncanonical_paths_removed_by_related_evidence": [
+      "Packages/AmbitionsExperienceKernel/**"
+    ],
+    "compatibility_shims_left": [],
+    "new_suffix_split_files_added": [],
+    "new_broad_models_files_added": [],
+    "new_package_boundary_added": false,
+    "new_runtime_or_source_atlas_authority_added_in_this_packet": false,
+    "yellow_debt_remains": true,
+    "next_repair_train": "Rerun package resolve/build proof when build proof is re-enabled; keep any future package-boundary change blocked on a linked ADR and validation plan.",
+    "equivalent_folder_interpretation_used": false
+  },
+  "build_proof_instruction": "Build proof is skipped under the current user instruction until advised otherwise."
+}

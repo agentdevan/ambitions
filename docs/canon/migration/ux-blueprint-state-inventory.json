@@ -1,0 +1,3557 @@
+{
+  "matrix_sha256": "f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe",
+  "schema_version": 1,
+  "setup_subordinate_content": [
+    {
+      "content_id": "optional-account",
+      "purpose": "Present the optional account choice as revisitable setup content, never as lifecycle completion.",
+      "requirement_ids": [
+        "APP-ACCOUNT-LAUNCH-001"
+      ]
+    },
+    {
+      "content_id": "permissions-choice",
+      "purpose": "Present contextual permission choices as subordinate setup content without changing lifecycle identity.",
+      "requirement_ids": [
+        "APP-PERMISSIONS-CONTRACT-001"
+      ]
+    },
+    {
+      "content_id": "welcome",
+      "purpose": "Introduce local-first value as subordinate content before any optional setup choice.",
+      "requirement_ids": [
+        "APP-SETUP-PROGRESSIVE-FIRST-USE-001"
+      ]
+    }
+  ],
+  "state_variants": [
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
+      "state_axis": "presentation",
+      "variant_key": "account-identity-only"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
+      "state_axis": "availability",
+      "variant_key": "continuity-conflicted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
+      "state_axis": "presentation",
+      "variant_key": "continuity-disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
+      "state_axis": "presentation",
+      "variant_key": "local-only"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-APPLE-IN-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "operation",
+      "variant_key": "apple-in-progress"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "interruption",
+      "variant_key": "cancelled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "availability",
+      "variant_key": "failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-GOOGLE-IN-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "operation",
+      "variant_key": "google-in-progress"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-PROVIDER-CHOICE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "presentation",
+      "variant_key": "provider-choice"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-SIGNED-IN",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-SIGN-IN",
+      "state_axis": "presentation",
+      "variant_key": "signed-in"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-STATUS-CONTINUITY-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-STATUS",
+      "state_axis": "presentation",
+      "variant_key": "continuity-disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-STATUS",
+      "state_axis": "presentation",
+      "variant_key": "signed-in"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-ACCOUNT-STATUS",
+      "state_axis": "presentation",
+      "variant_key": "signed-out"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED",
+      "generic_kind": "resting",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "consumed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED",
+      "generic_kind": "resting",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "presented"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-QUEUED",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "queued"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RECOVERABLE",
+      "generic_kind": "recovery",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "recoverable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-REJECTED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "rejected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RESOLVING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+      "state_axis": "lifecycle",
+      "variant_key": "resolving"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-CHECKING-LOCAL-READINESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "checking-local-readiness"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-QUARANTINED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "quarantined"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-READY",
+      "generic_kind": "resting",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-REPAIR-REQUIRED",
+      "generic_kind": "recovery",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "repair-required"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-RETRYABLE-DELAY",
+      "generic_kind": "degraded",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "retryable-delay"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-STOP-SHIP-DATA-RISK",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-LAUNCH-GATE",
+      "state_axis": "lifecycle",
+      "variant_key": "stop-ship-data-risk"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-COMPACT-MODAL",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "presentation",
+      "variant_key": "compact-modal"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-DEEP-INSPECTION",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "presentation",
+      "variant_key": "deep-inspection"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-DRILLDOWN",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "presentation",
+      "variant_key": "drilldown"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-FULL-SCREEN-OVERLAY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "presentation",
+      "variant_key": "full-screen-overlay"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-RESTORATION",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "recovery",
+      "variant_key": "restoration"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-UNAVAILABLE-ROUTE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-DRILLDOWN",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-GOALS-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "goals-selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-TIME-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "time-selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-TODAY-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "today-selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-DUPLICATE-PRESENTATION-OWNER",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route-duplicate-presentation-owner"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-ORPHAN-DEPTH",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route-orphan-depth"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-STALE-OBJECT-REFERENCE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route-stale-object-reference"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-UNAUTHORIZED-TARGET",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route-unauthorized-target"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-UNKNOWN-OWNER",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-route-unknown-owner"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-ROOT-YOU-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "you-selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-CAPTURE-PRESENTED",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+      "state_axis": "presentation",
+      "variant_key": "capture-presented"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-IDLE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+      "state_axis": "presentation",
+      "variant_key": "idle"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+      "state_axis": "recovery",
+      "variant_key": "returning-focus"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-SEARCH-PRESENTED",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+      "state_axis": "presentation",
+      "variant_key": "search-presented"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-CAPTURE-ATTACHMENT",
+      "state_axis": "availability",
+      "variant_key": "attachment-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-CAPTURE-ATTACHMENT",
+      "state_axis": "availability",
+      "variant_key": "attachment-permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-PROCESSING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-ATTACHMENT",
+      "state_axis": "operation",
+      "variant_key": "attachment-processing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-READY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-ATTACHMENT",
+      "state_axis": "presentation",
+      "variant_key": "attachment-ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-AMBIGUOUS-TYPE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "availability",
+      "variant_key": "ambiguous-type"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-BLANK",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "blank"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-COMPOSING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "composing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-CONFIRMATION-REQUIRED",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "confirmation-required"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-DEGRADED-STORE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "availability",
+      "variant_key": "degraded-store"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-DICTATING",
+      "generic_kind": "transitional",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "dictating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "discard-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-INVALID-METADATA",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "availability",
+      "variant_key": "invalid-metadata"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-OFFLINE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "availability",
+      "variant_key": "offline"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-PARTIAL-ROUTING",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "partial-routing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-RECOVERED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "recovery",
+      "variant_key": "recovered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-RESTORING",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "recovery",
+      "variant_key": "restoring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-ROUTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "routing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "saved"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "recovery",
+      "variant_key": "saved-undo-eligible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "availability",
+      "variant_key": "saved-undo-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "saving"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SCAN-IMPORTING",
+      "generic_kind": "transitional",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "scan-importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-TYPED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "presentation",
+      "variant_key": "typed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-VALIDATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
+      "state_axis": "operation",
+      "variant_key": "validating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-PROPOSAL-CLASSIFYING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-PROPOSAL",
+      "state_axis": "operation",
+      "variant_key": "classifying"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-PROPOSAL-FIT-PROPOSING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-CAPTURE-PROPOSAL",
+      "state_axis": "operation",
+      "variant_key": "fit-proposing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-CONFLICT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-PROPOSAL",
+      "state_axis": "availability",
+      "variant_key": "proposal-conflict"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-PROPOSAL",
+      "state_axis": "presentation",
+      "variant_key": "proposal-ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-SAVED-FOR-LATER-SAVED-FOR-LATER",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-CAPTURE-SAVED-FOR-LATER",
+      "state_axis": "presentation",
+      "variant_key": "saved-for-later"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-CLOSURE-COMPLETED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-CLOSURE",
+      "state_axis": "presentation",
+      "variant_key": "completed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-CLOSURE-ENDED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-CLOSURE",
+      "state_axis": "presentation",
+      "variant_key": "ended"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-CLOSURE",
+      "state_axis": "availability",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVATING",
+      "generic_kind": "transitional",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "lifecycle",
+      "variant_key": "activating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "active"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-ARCHIVED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "archived"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-BLOCKED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "availability",
+      "variant_key": "blocked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-CLARIFYING",
+      "generic_kind": "transitional",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "lifecycle",
+      "variant_key": "clarifying"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-COMPLETED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "completed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-DRAFT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "draft"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-ENDED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "ended"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-GENERATION-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "operation",
+      "variant_key": "generation-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "availability",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-PAUSED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "paused"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-PREVIEW-REJECTED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "operation",
+      "variant_key": "preview-rejected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-READY-TO-ACTIVATE",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "ready-to-activate"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-RECOVERING",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "recovery",
+      "variant_key": "recovering"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-WAITING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "waiting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-LIFE-AREA-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-LIFE-AREA",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-LIFE-AREA-EMPTY-DIRECTION",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-LIFE-AREA",
+      "state_axis": "presentation",
+      "variant_key": "empty-direction"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-LIFE-AREA",
+      "state_axis": "availability",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-LIFE-AREA-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-LIFE-AREA",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-ACTIVE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "active"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-BLOCKED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "blocked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-COMPLETED",
+      "generic_kind": "resting",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "completed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-DRAFT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "draft"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-MISSING-REFERENCE-CONTEXT",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "availability",
+      "variant_key": "missing-reference-context"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-PARTIAL-SIMULATION",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "operation",
+      "variant_key": "partial-simulation"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-PATH-ADJUSTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "operation",
+      "variant_key": "path-adjusting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-PATH-GENERATION-UNCERTAIN",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "operation",
+      "variant_key": "path-generation-uncertain"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-PAUSED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "paused"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-READY-TO-ACTIVATE",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "ready-to-activate"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-RECOVERING",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "recovering"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-RESTORING",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "restoring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-ROLLED-BACK",
+      "generic_kind": "rollback",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "rolled-back"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-ROUTE-GENERATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "operation",
+      "variant_key": "route-generating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-SELECTED-NODE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "presentation",
+      "variant_key": "selected-node"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-SIMULATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "operation",
+      "variant_key": "simulating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-WAITING",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-PATH",
+      "state_axis": "lifecycle",
+      "variant_key": "waiting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-BLOCKED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "availability",
+      "variant_key": "blocked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-LOCAL-STORE-DEGRADED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "availability",
+      "variant_key": "local-store-degraded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "availability",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-PARTIAL-SCHEDULE-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "operation",
+      "variant_key": "partial-schedule-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-PROOF-TRANSFERRING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "operation",
+      "variant_key": "proof-transferring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-RECOVERING",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "recovery",
+      "variant_key": "recovering"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-SCHEDULE-CONFLICT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "availability",
+      "variant_key": "schedule-conflict"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-WAITING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-RECOVERY",
+      "state_axis": "presentation",
+      "variant_key": "waiting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-ROOT-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-ROOT-EMPTY-DIRECTION",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "empty-direction"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-ROOT",
+      "state_axis": "availability",
+      "variant_key": "needs-attention"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-ROOT-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-GOALS-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-CONFLICT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "continuity-conflict"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "continuity-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "external-write-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "operation",
+      "variant_key": "import-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-LOCAL-STORE-DEGRADATION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "local-store-degradation"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "operation",
+      "variant_key": "partial-operation"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PROTECTED-DATA-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "protected-data-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "stale-external-source"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "storage-pressure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+      "state_axis": "availability",
+      "variant_key": "unavailable-permission"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "availability",
+      "variant_key": "export-only"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-QUARANTINE-INSPECTION",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "presentation",
+      "variant_key": "quarantine-inspection"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-AVAILABLE",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "recovery",
+      "variant_key": "repair-available"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-COMPLETE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "presentation",
+      "variant_key": "repair-complete"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "availability",
+      "variant_key": "repair-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-RUNNING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+      "state_axis": "operation",
+      "variant_key": "repair-running"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-AUTHORIZED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "presentation",
+      "variant_key": "authorized"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-DENIED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-ELIGIBILITY-CHECK",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "operation",
+      "variant_key": "eligibility-check"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-LIMITED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "limited"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-LOCAL-FALLBACK",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "recovery",
+      "variant_key": "local-fallback"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-NOT-DETERMINED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "presentation",
+      "variant_key": "not-determined"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-PARTIAL-EXTERNAL-ACCESS",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "partial-external-access"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RECONCILING",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "presentation",
+      "variant_key": "reconciling"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-REQUEST-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "request-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RESTRICTED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "restricted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-REVOKED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "revoked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-SETTINGS-RETURN-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "settings-return-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-CALENDAR",
+      "state_axis": "availability",
+      "variant_key": "unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-AUTHORIZED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "presentation",
+      "variant_key": "authorized"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-DENIED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-ELIGIBILITY-CHECK",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "operation",
+      "variant_key": "eligibility-check"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-LIMITED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "limited"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-LOCAL-FALLBACK",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "recovery",
+      "variant_key": "local-fallback"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-NOT-DETERMINED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "presentation",
+      "variant_key": "not-determined"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-PARTIAL-EXTERNAL-ACCESS",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "partial-external-access"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RECONCILING",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "presentation",
+      "variant_key": "reconciling"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-REQUEST-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "request-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RESTRICTED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "restricted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-REVOKED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "revoked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-SETTINGS-RETURN-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "settings-return-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+      "state_axis": "availability",
+      "variant_key": "unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "action-complete"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-ELIGIBLE",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "recovery",
+      "variant_key": "action-complete-undo-eligible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "availability",
+      "variant_key": "action-complete-undo-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-PREVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "action-preview"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "ask-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "interruption",
+      "variant_key": "ask-interrupted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "recovery",
+      "variant_key": "ask-recovered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "recovery",
+      "variant_key": "ask-resumed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "availability",
+      "variant_key": "ask-unavailable-offline-fallback"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "capture-handoff"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "filtered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "grounded-answer"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-NO-RESULTS",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "no-results"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-RESULTS",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "results"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "synthesis-in-progress"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING",
+      "generic_kind": "transitional",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "action-mutating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-REJECTED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "action-rejected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-VALIDATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "action-validating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-CORRUPT-INDEX",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "corrupt-index"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-EMPTY-QUERY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "empty-query"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF",
+      "generic_kind": "transitional",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "inspection-handoff"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-PARTIAL-RESULTS",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "partial-results"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-PRIVACY-SUPPRESSED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "privacy-suppressed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-QUERYING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "querying"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-REBUILDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "operation",
+      "variant_key": "rebuilding"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-RECENT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "recent"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-STALE-INDEX",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "stale-index"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-UNAVAILABLE-PROJECTION",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-ROOT",
+      "state_axis": "availability",
+      "variant_key": "unavailable-projection"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-IN-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SETUP-FIRST-USE",
+      "state_axis": "lifecycle",
+      "variant_key": "in-progress"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-NOT-STARTED",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SETUP-FIRST-USE",
+      "state_axis": "lifecycle",
+      "variant_key": "not-started"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-REVISITABLE",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SETUP-FIRST-USE",
+      "state_axis": "lifecycle",
+      "variant_key": "revisitable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-SKIPPED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SETUP-FIRST-USE",
+      "state_axis": "lifecycle",
+      "variant_key": "skipped"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-SUFFICIENT-FOR-LOCAL-USE",
+      "generic_kind": "resting",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-SETUP-FIRST-USE",
+      "state_axis": "lifecycle",
+      "variant_key": "sufficient-for-local-use"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SETUP-RESUME",
+      "state_axis": "checkpoint",
+      "variant_key": "checkpoint-found"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-INVALID",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SETUP-RESUME",
+      "state_axis": "checkpoint",
+      "variant_key": "checkpoint-invalid"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-RESUMED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SETUP-RESUME",
+      "state_axis": "checkpoint",
+      "variant_key": "resumed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-REVALIDATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SETUP-RESUME",
+      "state_axis": "checkpoint",
+      "variant_key": "revalidating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-START-OVER",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-SETUP-RESUME",
+      "state_axis": "checkpoint",
+      "variant_key": "start-over"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-CONFLICTING",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "availability",
+      "variant_key": "conflicting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-EXTERNAL-HIDDEN-CAPACITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "external-hidden-capacity"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-IMPORTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "operation",
+      "variant_key": "importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-NOW-ANCHORED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "now-anchored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-PREVIEWING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "operation",
+      "variant_key": "previewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DAY",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-EXTERNAL-WRITE-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "external-write-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-LOCAL-STORE-DEGRADATION",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "local-store-degradation"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-PARTIAL-IMPORT",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "partial-import"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-PENDING-EXTERNAL-DIFF",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "pending-external-diff"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-STALE-SOURCE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "stale-source"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-SYNC-CONFLICT",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "sync-conflict"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-SYNC-PENDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-DEGRADED",
+      "state_axis": "availability",
+      "variant_key": "sync-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "availability",
+      "variant_key": "conflict-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-SAVED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "saved"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-UNDO-ELIGIBLE",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "recovery",
+      "variant_key": "undo-eligible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-UNDO-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "availability",
+      "variant_key": "undo-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "viewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-COMMITTING-IMPORT",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "committing-import"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-SOURCE-UNCHANGED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "presentation",
+      "variant_key": "external-source-unchanged"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-WRITE-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "availability",
+      "variant_key": "external-write-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "import-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-UNDO-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "import-undo-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-NATIVE-IMPORT-UNDO",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "native-import-undo"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-PARTIAL-IMPORT",
+      "generic_kind": "degraded",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "partial-import"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-RECONCILING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "operation",
+      "variant_key": "reconciling"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-IMPORT",
+      "state_axis": "presentation",
+      "variant_key": "reviewing-diff"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-CONFLICTING",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "availability",
+      "variant_key": "conflicting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-EXTERNAL-HIDDEN-CAPACITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "external-hidden-capacity"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-IMPORTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "operation",
+      "variant_key": "importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-NOW-ANCHORED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "now-anchored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-PREVIEWING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "operation",
+      "variant_key": "previewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-LIST",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-CONFLICTING",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "availability",
+      "variant_key": "conflicting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-EXTERNAL-HIDDEN-CAPACITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "external-hidden-capacity"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-IMPORTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "operation",
+      "variant_key": "importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-NOW-ANCHORED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "now-anchored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-PREVIEWING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "operation",
+      "variant_key": "previewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-MONTH-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-MONTH",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-CONFLICTING",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "availability",
+      "variant_key": "conflicting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-EXTERNAL-HIDDEN-CAPACITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "external-hidden-capacity"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-IMPORTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "operation",
+      "variant_key": "importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-NOW-ANCHORED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "now-anchored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-PREVIEWING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "operation",
+      "variant_key": "previewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-WEEK-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-WEEK",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-CONFLICTING",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "availability",
+      "variant_key": "conflicting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EDITING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "operation",
+      "variant_key": "editing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EXTERNAL-HIDDEN-CAPACITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "external-hidden-capacity"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-IMPORTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "operation",
+      "variant_key": "importing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-NOW-ANCHORED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "now-anchored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-PREVIEWING",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "operation",
+      "variant_key": "previewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-SELECTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TIME-YEAR",
+      "state_axis": "presentation",
+      "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-ACTIVE-EXECUTION",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "active-execution"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-CLOSURE-REVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "closure-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-DETAIL",
+      "state_axis": "recovery",
+      "variant_key": "recovery"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-STALE-EXTERNAL-CONTEXT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-DETAIL",
+      "state_axis": "availability",
+      "variant_key": "stale-external-context"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-VIEWING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-DETAIL",
+      "state_axis": "presentation",
+      "variant_key": "viewing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-CONFLICT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "availability",
+      "variant_key": "conflict"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-DENSE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "dense"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "destructive-confirmation"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-LOADING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "operation",
+      "variant_key": "loading"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-LOW-DENSITY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "low-density"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-OFFLINE-HEALTHY",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-PARTIAL-FAILURE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "availability",
+      "variant_key": "partial-failure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "availability",
+      "variant_key": "permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-RECOVERY",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "recovery",
+      "variant_key": "recovery"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "recovery",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-ROOT-STALE-EXTERNAL-CONTEXT",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-ROOT",
+      "state_axis": "availability",
+      "variant_key": "stale-external-context"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-START-HERE",
+      "state_axis": "presentation",
+      "variant_key": "active-execution"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-START-HERE",
+      "state_axis": "presentation",
+      "variant_key": "closure-ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TODAY-START-HERE",
+      "state_axis": "recovery",
+      "variant_key": "recovery-needed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-CORRECTING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "operation",
+      "variant_key": "correcting"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-COMPLETE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "correction-complete"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-REQUIRED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "recovery",
+      "variant_key": "correction-required"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "history-empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-PAGINATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "operation",
+      "variant_key": "history-paginating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "history-populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-LOCAL-STORE-DEGRADED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "local-store-degraded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-MISSING-PROOF",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "missing-proof"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PARTIAL-HISTORY",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "partial-history"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-BOUNDARY-REVIEW",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "privacy-boundary-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-PREVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "privacy-preview"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-REDACTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "privacy-redacted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-PROOF-LOADING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "operation",
+      "variant_key": "proof-loading"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-RESTORING",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "recovery",
+      "variant_key": "restoring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-CHECKING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "operation",
+      "variant_key": "source-checking"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-CURRENT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "presentation",
+      "variant_key": "source-current"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-STALE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "source-stale"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-DEEP",
+      "state_axis": "availability",
+      "variant_key": "source-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-MARKER-PRESENT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "marker-present"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "no-disclosure"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-OPTIONAL",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "proof-optional"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-REQUIRED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "proof-required"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-SATISFIED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "proof-satisfied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-SUGGESTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-INLINE",
+      "state_axis": "presentation",
+      "variant_key": "proof-suggested"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-ABSENT-RECEIPT-DETAIL",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "presentation",
+      "variant_key": "absent-receipt-detail"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-LOCAL-STORE-DEGRADED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "availability",
+      "variant_key": "local-store-degraded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-OFFLINE-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "availability",
+      "variant_key": "offline-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "presentation",
+      "variant_key": "receipt-committed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "recovery",
+      "variant_key": "receipt-committed-undo-eligible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "availability",
+      "variant_key": "receipt-committed-undo-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-EXTERNAL-FAILED",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "recovery",
+      "variant_key": "receipt-external-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-PENDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "operation",
+      "variant_key": "receipt-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-RESOLVING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "operation",
+      "variant_key": "receipt-resolving"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-UNDONE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "presentation",
+      "variant_key": "receipt-undone"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RESTORING",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "recovery",
+      "variant_key": "restoring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-UNDOING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-TRUST-RECEIPT",
+      "state_axis": "operation",
+      "variant_key": "undoing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-BLOCKED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "blocked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "conflicted-quarantined"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ELIGIBLE-NOT-ENABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "eligible-not-enabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ENABLED-IDLE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "enabled-idle"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "ineligible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-LOCAL-PENDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "local-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MERGING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "merging"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MIGRATING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "migrating"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-PAUSED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "paused"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-REMOTE-PENDING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "remote-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RESTORING",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "restoring"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RETRYING",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "retrying"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-SIGNED-OUT",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "signed-out"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UNAVAILABLE",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UPLOADING",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-CONTINUITY-CONTROL",
+      "state_axis": "lifecycle",
+      "variant_key": "uploading"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-BACKUP-READY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "backup-ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "diagnostics-redacted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-EXPORT-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "availability",
+      "variant_key": "export-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-EXPORT-PREVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "operation",
+      "variant_key": "export-preview"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "operation",
+      "variant_key": "export-progress"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "permanent-delete-irreversible"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-REVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "permanent-delete-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-RESET-REVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "reset-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "recovery",
+      "variant_key": "reset-rollback"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "restore-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "trash-empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "presentation",
+      "variant_key": "trash-populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE",
+      "generic_kind": "rollback",
+      "operation_phase": "rolling_back",
+      "screen_id": "UX-SCREEN-YOU-DATA",
+      "state_axis": "recovery",
+      "variant_key": "trash-restore"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-BLOCKED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "availability",
+      "variant_key": "blocked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-DEGRADED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "availability",
+      "variant_key": "degraded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-DIAGNOSIS-READY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "presentation",
+      "variant_key": "diagnosis-ready"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-EXPORT-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "availability",
+      "variant_key": "export-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-EXPORT-PREVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "operation",
+      "variant_key": "export-preview"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "presentation",
+      "variant_key": "healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-QUARANTINED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "availability",
+      "variant_key": "quarantined"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-RECOVERABLE",
+      "generic_kind": "recovery",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "recovery",
+      "variant_key": "recoverable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-REPAIR-PREVIEW",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "operation",
+      "variant_key": "repair-preview"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-UNKNOWN",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-DIAGNOSTICS",
+      "state_axis": "availability",
+      "variant_key": "unknown"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-ACTIVE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "active"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "expired"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-GRACE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "grace"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-MISMATCH",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "mismatch"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-OFFLINE-CACHED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "offline-cached"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-RESTORED",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "restored"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-RETRY",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "retry"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-REVOKED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "revoked"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-SUPPORTED-SHARING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "supported-sharing"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-TRIAL",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "trial"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-UNKNOWN",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ENTITLEMENT",
+      "state_axis": "lifecycle",
+      "variant_key": "unknown"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-ACTED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "acted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "delivered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "externally-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-ALLOWED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "permission-allowed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "permission-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "permission-not-requested"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "reconciled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-REMOVED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "removed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SCHEDULED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "scheduled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-NOTIFICATIONS",
+      "state_axis": "lifecycle",
+      "variant_key": "superseded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-IN",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "account-signed-in"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-OUT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "account-signed-out"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-ACTION-REQUIRED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "action-required"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-CONFLICTED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "availability",
+      "variant_key": "continuity-conflicted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "continuity-disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-PENDING",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "continuity-pending"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-DEGRADED",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "availability",
+      "variant_key": "diagnostics-degraded"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "diagnostics-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-EMPTY",
+      "generic_kind": "empty",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "life-capital-empty"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-POPULATED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "life-capital-populated"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-NO-ACCOUNT-HEALTHY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "no-account-healthy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-NORMAL",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "normal"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-AVAILABLE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "permissions-available"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-DENIED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "permissions-denied"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-SETUP-COMPLETE",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "setup-complete"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-SETUP-PARTIAL",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-ROOT",
+      "state_axis": "presentation",
+      "variant_key": "setup-partial"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-DISABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "app-lock-disabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-ENABLED",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "app-lock-enabled"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-DARK",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "appearance-dark"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-LIGHT",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "appearance-light"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-OLED-DARK",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "appearance-oled-dark"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-SYSTEM",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "appearance-system"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-AUTOMATION-POLICY",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "automation-policy"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-BIOMETRIC-UNAVAILABLE",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "availability",
+      "variant_key": "biometric-unavailable"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-INCREASE-CONTRAST",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "increase-contrast"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-NOTIFICATION-CONTROLS",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "notification-controls"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-PRIVACY-REVIEW",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "privacy-review"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-TIME-PREFERENCES",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-YOU-SETTINGS",
+      "state_axis": "presentation",
+      "variant_key": "time-preferences"
+    }
+  ]
+}

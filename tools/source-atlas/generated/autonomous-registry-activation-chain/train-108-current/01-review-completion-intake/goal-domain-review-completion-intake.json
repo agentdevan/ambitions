@@ -1,0 +1,191 @@
+{
+  "activeRegistryMutations": [],
+  "blockedReviewCompletions": [
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.e8b59b9d072ebf49",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.4594db448db14d5b",
+      "packetID": "source_atlas_goal_domain_review_packet.48950138cdd652f9",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "direct_source_authority_resolution",
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.aa073480449f32c8",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.6ecddcacc172a148",
+      "packetID": "source_atlas_goal_domain_review_packet.6e1338bfad0ceaed",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "source_lane_governance",
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.a65916f66842be04",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.19c19add6d47c068",
+      "packetID": "source_atlas_goal_domain_review_packet.bcc6e1138b62b506",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "legal_terms_review",
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "blocked"
+    },
+    {
+      "blockedReviewCompletionID": "source_atlas_goal_domain_review_completion_block.8101c4acd8dba8c7",
+      "blockingReasons": [
+        "completion_evidence_required"
+      ],
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked review completion only",
+        "not approval",
+        "not registry mutation",
+        "not claim output"
+      ],
+      "orderID": "source_atlas_domain_work_order.fe96b0b860bbd33d",
+      "packetID": "source_atlas_goal_domain_review_packet.a7108c4e85c9d74f",
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewLane": "api_governance_review",
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "blocked"
+    }
+  ],
+  "compatibleReviewPacketVersionID": "source-atlas-goal-domain-review-packets-train-92",
+  "completionEvidencePath": "",
+  "createdAt": "2026-06-28T22:20:00Z",
+  "goalDomainReviewCompletions": {
+    "completedReviewPackets": [],
+    "createdAt": "2026-06-28T22:20:00Z",
+    "kind": "ambitions.sourceAtlas.goalDomainReviewCompletions.v1",
+    "nonClaims": [
+      "goal-domain review completion records only",
+      "not active registry mutation",
+      "not claim output",
+      "not pack output",
+      "not R2 publish"
+    ],
+    "reviewBundles": [
+      {
+        "blockedReviewLanes": [
+          "api_governance_review",
+          "direct_source_authority_resolution",
+          "legal_terms_review",
+          "source_lane_governance"
+        ],
+        "bundleID": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+        "claimOutputAllowed": false,
+        "completedReviewLanes": [],
+        "completionStatus": "blocked_review_required",
+        "createdAt": "2026-06-28T22:20:00Z",
+        "matchedDomainID": null,
+        "missingReviewLanes": [
+          "api_governance_review",
+          "direct_source_authority_resolution",
+          "legal_terms_review",
+          "source_lane_governance"
+        ],
+        "nativeActivationAllowed": false,
+        "nonClaims": [
+          "review bundle summary only",
+          "not registry mutation",
+          "not source authority",
+          "not claim output"
+        ],
+        "packOutputAllowed": false,
+        "r2PublishAllowed": false,
+        "registryMutationAllowed": false,
+        "registryMutationPlanningReady": false,
+        "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+        "requestedDomain": "public_benefits_reference",
+        "requiredReviewLanes": [
+          "api_governance_review",
+          "direct_source_authority_resolution",
+          "legal_terms_review",
+          "source_lane_governance"
+        ]
+      }
+    ]
+  },
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletionIntake.v1",
+  "nonClaims": [
+    "goal-domain review completion intake only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "blockedReviewCompletions": 4,
+    "claims": 0,
+    "completedReviewBundles": 0,
+    "completedReviewPackets": 0,
+    "completionEvidenceRecords": 0,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPacketTemplates": 4
+  },
+  "reviewTemplatesPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/review-packet-templates.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-review-completion-intake-train-93"
+}

@@ -1,0 +1,26 @@
+{
+  "allowedClaims": [],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+  "ledgerID": null,
+  "ledgerPath": null,
+  "missingDomains": [
+    "occupation_foundation"
+  ],
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not outside legal approval",
+    "not final user plans, schedules, or Steps"
+  ],
+  "overallReadinessStatus": null,
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "readyDomains": [],
+  "requestedDomains": [
+    "occupation_foundation"
+  ],
+  "required": false,
+  "schemaVersion": 1,
+  "valid": true
+}

@@ -1,0 +1,142 @@
+{
+  "blockedRegistryMutations": [
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_approval_required",
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_approval_required",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_specific_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_approval_required",
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_approval_required",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_specific_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_approval_required",
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_approval_required",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_specific_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_approval_required",
+        "api_policy_review_required",
+        "approval_artifact_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "draft_governance_intake_only",
+        "legal_terms_approval_required",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "r2_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_specific_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "non_claims": [
+        "blocked mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogBlockedRegistryMutations.v1"
+}

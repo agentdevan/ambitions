@@ -1,0 +1,481 @@
+{
+  "activeRegistryApplyAllowed": true,
+  "activeRegistryApplyDecision": "ready_for_active_registry_apply",
+  "allowActiveRegistryWrite": true,
+  "approvalArtifact": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-registry-apply-approval.json",
+  "blockingReasons": [],
+  "checks": [
+    {
+      "issues": [],
+      "name": "plan_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_evidence_loaded_when_provided",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_artifact_loaded_when_provided",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "fixture_or_rehearsal_evidence_blocks_active_apply",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_specific_review_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_artifact_required_for_active_apply",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "explicit_active_registry_targets_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "active_registry_write_flag_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "dry_run_applier_validation_completed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "gate_emits_no_writes_claims_packs_r2_or_native_activation",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dryRunApplier": {
+    "activeRegistryMutations": [],
+    "allowActiveRegistryWrite": false,
+    "approvalArtifact": "",
+    "catalogApplier": {
+      "activeRegistryMutations": [],
+      "allowActiveRegistryWrite": false,
+      "blockedRegistryMutations": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "plan_shape_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "plan_privacy_scan_passed",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "target_registries_loaded",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "planned_mutations_complete",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "duplicate_ids_blocked",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "execute_gate",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "candidate_governance_registry_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "candidate_privacy_scan_passed",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "dry_run_writes_no_active_registries",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "execute_writes_only_after_validation",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "applier_emits_no_claims_or_packs",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "no_final_plan_schedule_step_output",
+          "passed": true
+        }
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeRequested": false,
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.catalogRegistryApplier.v1",
+      "manifestPath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/catalog-registry-applier-report.json",
+      "nonClaims": [
+        "not source authority without completed approval artifact",
+        "not outside legal approval",
+        "not claim output",
+        "not pack output",
+        "not R2 readiness",
+        "not universal coverage",
+        "not app runtime readiness",
+        "not release readiness",
+        "not final user plans, schedules, or Steps",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "outputHashes": {
+        "candidateApiGovernanceRegistry": "62a5d86f326e95fbf0cef16d2667d6a6465006831f8a45a4f608adfde9e12960",
+        "candidateLegalTermsRegistry": "e619ac5aad19fc585857a9ca5571019075283ea4744d0765a464428666c66382",
+        "candidateSourceLaneRegistry": "470cb52cb5e0fd8d420d0c45438b1c09a1a2574e16affe0b4cdef1c467727a84",
+        "report": "4ee588b5cc0bda915827354147f0e60b8bbe0496a9752e1f62cdd30344a11161"
+      },
+      "outputPaths": {
+        "activeRegistryMutations": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/active-registry-mutations.json",
+        "blockedRegistryMutations": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/blocked-registry-mutations.json",
+        "candidateApiGovernanceRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-api-governance-registry.json",
+        "candidateLegalTermsRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-legal-terms-registry.json",
+        "candidateSourceLaneRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-source-lane-registry.json",
+        "closeout": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/closeout.md",
+        "report": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/catalog-registry-applier-report.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier",
+      "planPath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/normalized-planned-registry-mutations.json",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "productionNonClaims": [
+        "no production R2 upload",
+        "no app runtime Green",
+        "no release Green",
+        "no universal coverage",
+        "no outside legal approval",
+        "no final user plan, schedule, or Step generation"
+      ],
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "blockedRegistryMutations": 0,
+        "candidateRegistryMutations": 1,
+        "claims": 0,
+        "packableClaims": 0,
+        "plannedRegistryMutations": 1,
+        "r2PackableArtifacts": 0
+      },
+      "registryValidation": {
+        "apiPolicyCount": 11,
+        "checks": [
+          {
+            "name": "source_lane_registry_schema_exists",
+            "passed": true
+          },
+          {
+            "name": "legal_terms_registry_schema_exists",
+            "passed": true
+          },
+          {
+            "name": "api_governance_registry_schema_exists",
+            "passed": true
+          },
+          {
+            "name": "source_lanes_have_required_posture",
+            "passed": true
+          },
+          {
+            "name": "legal_terms_have_required_posture",
+            "passed": true
+          },
+          {
+            "name": "api_policies_have_required_posture",
+            "passed": true
+          },
+          {
+            "name": "wikidata_crosswalk_only",
+            "passed": true
+          },
+          {
+            "name": "openalex_high_volume_gated",
+            "passed": true
+          },
+          {
+            "name": "bls_v1_v2_modes_represented",
+            "passed": true
+          },
+          {
+            "name": "usajobs_r2_pack_blocked",
+            "passed": true
+          },
+          {
+            "name": "legal_registry_present",
+            "passed": true
+          },
+          {
+            "name": "private_r2_key_validation",
+            "passed": true
+          },
+          {
+            "name": "no_final_plan_schedule_step_output",
+            "passed": true
+          }
+        ],
+        "createdAt": "2026-06-28T19:16:09Z",
+        "issues": [],
+        "kind": "ambitions.sourceAtlas.governanceRegistryValidation.v1",
+        "legalEntryCount": 27,
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "schemaPaths": {
+          "apiGovernance": "tools/source-atlas/governance/schemas/api-governance-registry.schema.json",
+          "legalTerms": "tools/source-atlas/governance/schemas/legal-terms-registry.schema.json",
+          "sourceLane": "tools/source-atlas/governance/schemas/source-lane-registry.schema.json"
+        },
+        "schemaVersion": 1,
+        "sourceLaneCount": 34,
+        "status": "Source Green for governance tooling",
+        "statusCeiling": "Yellow overall Source Atlas; governance tooling only",
+        "valid": true
+      },
+      "schemaVersion": 1,
+      "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; registry applier tooling only",
+      "status": "Source Green for approval-gated catalog registry applier tooling",
+      "targetRegistryPaths": {
+        "apiGovernanceRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/api-governance-registry.json",
+        "legalTermsRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/legal-terms-registry.json",
+        "sourceLaneRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/source-lane-registry.json"
+      },
+      "valid": true,
+      "versionID": "source-atlas-catalog-registry-applier-train-60"
+    },
+    "catalogExecuteRequested": false,
+    "checks": [
+      {
+        "issues": [],
+        "name": "goal_domain_plan_loaded",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "goal_domain_plan_privacy_scan_passed",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "approval_gate_passed",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "normalized_plan_emitted",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "catalog_applier_reused",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "catalog_applier_valid",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "dry_run_writes_no_active_registries",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "execute_blocked_until_wrapper_gates_pass",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "applier_emits_no_claims_packs_r2_or_native_activation",
+        "passed": true
+      }
+    ],
+    "createdAt": "2026-06-28T00:00:00Z",
+    "executeRequested": false,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.goalDomainRegistryApplier.v1",
+    "manifestPath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/goal-domain-registry-applier-report.json",
+    "nonClaims": [
+      "goal-domain registry apply gate only",
+      "not source authority without completed review evidence",
+      "not legal approval by itself",
+      "not outside legal approval without artifact",
+      "not claim output",
+      "not pack output",
+      "not R2 readiness",
+      "not production R2 upload",
+      "not native activation proof",
+      "not universal coverage",
+      "not app runtime readiness",
+      "not release readiness",
+      "not final user plans, schedules, or Steps",
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval"
+    ],
+    "outputHashes": {
+      "normalizedPlan": "469b3987dc2a118ae6862fefc2a8b33c478d81df62e377f089fdaf2af021b179",
+      "report": "9e9c3678d876dcc0cfbd5892f6af4036c012dff4427244fcf6f98dc793f2f3ab"
+    },
+    "outputPaths": {
+      "activeRegistryMutations": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/active-registry-mutations.json",
+      "blockedRegistryMutations": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/blocked-registry-mutations.json",
+      "candidateApiGovernanceRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-api-governance-registry.json",
+      "candidateLegalTermsRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-legal-terms-registry.json",
+      "candidateSourceLaneRegistry": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/candidate-source-lane-registry.json",
+      "catalogApplierReport": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/catalog-applier/catalog-registry-applier-report.json",
+      "closeout": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/closeout.md",
+      "normalizedPlan": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/normalized-planned-registry-mutations.json",
+      "report": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/goal-domain-registry-applier-report.json"
+    },
+    "outputRoot": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run",
+    "planPath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/planned-registry-mutations.json",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "productionNonClaims": [
+      "no production R2 upload",
+      "no app runtime Green",
+      "no release Green",
+      "no universal coverage",
+      "no outside legal approval without artifact",
+      "no final user plan, schedule, or Step generation"
+    ],
+    "recordCounts": {
+      "activeRegistryMutations": 0,
+      "blockedRegistryMutations": 0,
+      "candidateRegistryMutations": 1,
+      "claims": 0,
+      "finalOutputArtifacts": 0,
+      "goalDomainPlannedRegistryMutations": 1,
+      "nativeActivationOperations": 0,
+      "normalizedRegistryMutations": 1,
+      "packableClaims": 0,
+      "r2PackableArtifacts": 0,
+      "r2PublishOperations": 0
+    },
+    "schemaVersion": 1,
+    "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; goal-domain registry applier tooling only",
+    "status": "Source Green for goal-domain registry applier tooling",
+    "valid": true,
+    "versionID": "source-atlas-goal-domain-registry-applier-train-95"
+  },
+  "evaluationIssues": [],
+  "evidenceClass": "source_specific_review",
+  "executeRequested": true,
+  "kind": "ambitions.sourceAtlas.goalDomainActiveRegistryApplyGate.v1",
+  "nonClaims": [
+    "active registry apply readiness gate only",
+    "not active registry mutation",
+    "not source authority without source-specific review evidence",
+    "not legal approval by itself",
+    "not outside legal approval without artifact",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedActiveRegistryApply": "c1d9c13cddab03bfb48e88dfa568fdd80266a47cc80ede093c30fc92dbef3c06",
+    "dryRunApplier": "196187b7e319b0440864c4cfc981597ccf7fe8794f9ace69580bb093e5193a8e",
+    "report": "40ba7b820dedf4908e27332e7ccf1c6216e289263c38efe06fb0a1e36e50d1cc"
+  },
+  "outputPaths": {
+    "applierDryRun": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/applier-dry-run/goal-domain-registry-applier-report.json",
+    "blockedActiveRegistryApply": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/blocked-active-registry-apply.json",
+    "closeout": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/closeout.md",
+    "report": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/active-apply-gate/goal-domain-active-registry-apply-gate-report.json"
+  },
+  "planPath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/planned-registry-mutations.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionNonClaims": [
+    "no active registry mutation",
+    "no production R2 upload",
+    "no app runtime Green",
+    "no release Green",
+    "no universal coverage",
+    "no outside legal approval without artifact",
+    "no final user plan, schedule, or Step generation"
+  ],
+  "recordCounts": {
+    "activeRegistryApplyOperations": 0,
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 0,
+    "candidateRegistryMutations": 1,
+    "claims": 0,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0
+  },
+  "reviewEvidencePath": "tools/source-atlas/generated/goal-domain-source-specific-apply-packet/train-98-source-specific/source-specific-review-evidence.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; active registry apply readiness gate only",
+  "status": "Source Green for goal-domain active registry apply gate tooling",
+  "targetClass": "active_repo_registries",
+  "targetRegistryPaths": {
+    "apiGovernanceRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/api-governance-registry.json",
+    "legalTermsRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/legal-terms-registry.json",
+    "sourceLaneRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-active-registry-apply-gate-train-97"
+}

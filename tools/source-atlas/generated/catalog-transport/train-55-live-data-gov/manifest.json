@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "mode_supported",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "live_mode_requires_live_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "live_mode_requires_execute_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "plan_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "request_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "transport_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "snapshots_hash_verified",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalog_discovery_candidate_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "discoveryManifestPath": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/manifest.json",
+  "executeRequested": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogTransportManifest.v1",
+  "liveRequested": true,
+  "mode": "live",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogDiscovery": "b4f25fef0a0b124ffa7a5557a5bd2bf6c4dde968e85f3ce2205098c3bfa3803f",
+    "catalogTransport": "21670a1fde0318bbdccc121b849447962fa15961357cbcec8d6b4e9af32a8f3e",
+    "manifest": "3dc37f9e4aa84f8f06b599cc68665ddf4e67cf5de71f3833ced510b39ec90fbd"
+  },
+  "outputPaths": {
+    "catalogTransport": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-transport.json",
+    "closeout": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/closeout.md",
+    "manifest": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/manifest.json"
+  },
+  "planPath": "tools/source-atlas/fixtures/catalog-transport/train-55-live-data-gov-plan.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 4,
+    "catalogs": 2,
+    "claims": 0,
+    "endpoints": 2,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "snapshots": 2
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; live-gated public catalog transport tooling only",
+  "status": "Source Green for live-gated catalog transport tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-transport-train-54"
+}

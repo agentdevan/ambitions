@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 1140,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json",
+      "sha256": "b5f8e86625b952a8966c87647d62c0e7686e0b4e633a4bdefbd195a1f40c0c62"
+    },
+    {
+      "bytes": 1119,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json",
+      "sha256": "c4cf9ef0a02267928c79f903769300cbcd226d165f3c56c77a10daead1487f02"
+    },
+    {
+      "bytes": 7460,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+      "sha256": "4ce38faf7422dd70e33178c12acdda3029f3b25f2efc3812f220ceabb84d9a57"
+    },
+    {
+      "bytes": 4221,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json",
+      "sha256": "b3b497b2a20c2d1c765cf1f334bcfbbb93f551aa7409c1d90a6bf2998ae677de"
+    },
+    {
+      "bytes": 1733,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json",
+      "sha256": "6def4024d15901cc45d3c0e52ef07b373231cd89cf53191d8860c21165d16ae7"
+    },
+    {
+      "bytes": 1696,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json",
+      "sha256": "23c683a39407f88d05791795221d8c0c47e6cbe35fa47a362323ea1b9fb44e6f"
+    },
+    {
+      "bytes": 2170,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json",
+      "sha256": "279e5057c92b462fef14348386a627d235502d88ad1cdcded785c8939d1d1da0"
+    },
+    {
+      "bytes": 1244,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+      "sha256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb"
+    },
+    {
+      "bytes": 8557,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+      "sha256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be"
+    },
+    {
+      "bytes": 1348,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json",
+      "sha256": "b56113046c6e163e7c05d914e128347554e201674db6b1b25e90a732643b87a6"
+    },
+    {
+      "bytes": 18773,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+      "sha256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f"
+    },
+    {
+      "bytes": 1397,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+      "sha256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd"
+    },
+    {
+      "bytes": 2659,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json",
+      "sha256": "b55cfbbd370efcb76137a3fd362094b3a79c0a1e512ae9788ff7a5655ba68c5a"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

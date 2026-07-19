@@ -1,0 +1,136 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government",
+        "regulated_body"
+      ],
+      "required": [
+        "official_government",
+        "regulated_body"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "official_benefit_program_reference",
+      "public_financial_education",
+      "tax_deadline_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "official_benefit_program_reference",
+      "public_financial_education",
+      "tax_deadline_reference"
+    ],
+    "domain": "finance_public_reference",
+    "freshness_compliance": {
+      "claimCount": 3,
+      "complete": true,
+      "freshCount": 3,
+      "percent": 1.0
+    },
+    "frontier_id": "finance_public_reference",
+    "goal_intent_classes": [
+      "financial_education_reference",
+      "benefit_program_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.finance_public_reference.irs_cfpb_usagov_public_reference.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.87ec1949cc7a3ce6",
+          "claimType": "public_financial_education",
+          "goldClaimID": "gold.finance.cfpb.financial_education",
+          "jurisdiction": "US",
+          "sourceID": "cfpb.adult_financial_education"
+        },
+        {
+          "claimID": "canonical_claim.0224a650cb82b0e2",
+          "claimType": "tax_deadline_reference",
+          "goldClaimID": "gold.finance.irs.when_to_file",
+          "jurisdiction": "US",
+          "sourceID": "irs.when_to_file"
+        },
+        {
+          "claimID": "canonical_claim.26a332a4ffb4d579",
+          "claimType": "official_benefit_program_reference",
+          "goldClaimID": "gold.finance.usagov.benefits",
+          "jurisdiction": "US",
+          "sourceID": "usa.gov.benefits"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a personalized financial plan",
+        "not benefit eligibility or approval",
+        "not final user plans, schedules, or Steps",
+        "not investment advice",
+        "not legal advice",
+        "not release readiness",
+        "not tax advice",
+        "not universal coverage"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 3,
+      "laneCount": 3,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a personalized financial plan",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not account data storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not benefit eligibility or approval",
+      "not full Source Atlas Green",
+      "not investment advice",
+      "not legal advice",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not tax advice",
+      "not transaction profiling",
+      "not universal goal coverage"
+    ],
+    "packable_claim_count": 3,
+    "provenance_completeness": {
+      "claimCount": 3,
+      "complete": true,
+      "completeTupleCount": 3,
+      "packableClaimCount": 3,
+      "packableCompleteTupleCount": 3,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "cfpb.adult_financial_education",
+      "irs.when_to_file",
+      "usa.gov.benefits"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

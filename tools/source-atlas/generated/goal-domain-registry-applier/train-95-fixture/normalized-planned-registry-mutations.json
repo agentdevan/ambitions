@@ -1,0 +1,12 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainNormalizedRegistryMutations.v1",
+  "nonClaims": [
+    "normalized apply input only",
+    "not active registry mutation by itself",
+    "not claim output",
+    "not R2 publish"
+  ],
+  "plannedRegistryMutations": [],
+  "sourcePlanPath": "tools/source-atlas/generated/goal-domain-registry-mutation-plan/train-94-fixture/planned-registry-mutations.json"
+}

@@ -1,0 +1,76 @@
+# Source Proof Receipt Coverage Matrix
+
+status: scaffold
+sections:
+  - name: Today
+    states:
+      - key: source
+        value: required
+      - key: proof
+        value: required
+      - key: receipt
+        value: required
+      - key: correction
+        value: required
+      - key: stale
+        value: required
+      - key: local_only
+        value: required
+  - name: Goals
+    states:
+      - key: source
+        value: required
+      - key: proof
+        value: required
+      - key: receipt
+        value: required
+      - key: correction
+        value: required
+      - key: stale
+        value: required
+      - key: local_only
+        value: required
+  - name: Capture
+    states:
+      - key: source
+        value: required
+      - key: proof
+        value: required
+      - key: receipt
+        value: required
+      - key: correction
+        value: required
+      - key: stale
+        value: required
+      - key: local_only
+        value: required
+  - name: Time
+    states:
+      - key: source
+        value: required
+      - key: proof
+        value: required
+      - key: receipt
+        value: required
+      - key: correction
+        value: required
+      - key: stale
+        value: required
+      - key: local_only
+        value: required
+  - name: You
+    states:
+      - key: source
+        value: required
+      - key: proof
+        value: required
+      - key: receipt
+        value: required
+      - key: correction
+        value: required
+      - key: stale
+        value: required
+      - key: local_only
+        value: required
+
+Coverage is an explicit contract, not implementation proof.

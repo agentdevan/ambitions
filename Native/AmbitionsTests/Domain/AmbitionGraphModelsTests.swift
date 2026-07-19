@@ -1,0 +1,618 @@
+import Foundation
+import XCTest
+@testable import Ambitions
+
+final class AmbitionGraphModelsTests: XCTestCase {
+    func testAmbitionGraphSnapshotCapturesHierarchyAndTraceability() {
+        let ambitionID = "ambition-1"
+        let commitmentID = "commitment-1"
+        let threadID = "thread-1"
+        let proofID = "proof-1"
+        let constraintID = "constraint-1"
+        let recoveryID = "recovery-1"
+        let traceID = "trace-1"
+        let ambiguityReflectionID = "reflection-1"
+        let adaptationID = "adaptation-1"
+
+        let ambition = Ambition(
+            id: ambitionID,
+            title: "Build a personal operating system",
+            identityStatement: "Move from scattered effort to proof-backed continuity.",
+            lifeAreaID: "life-identity",
+            desiredOutcome: "Sustained weekly progress with less reset.",
+            desiredProofDescription: "Evidence of closed and reviewed commitments.",
+            activeGoalThreadID: threadID,
+            activeCommitmentID: commitmentID,
+            knownConstraintIDs: [constraintID],
+            recoveryPolicy: "Use smallest credible continuation by default.",
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let thread = GoalThread(
+            id: threadID,
+            ambitionID: ambitionID,
+            name: "Life direction thread",
+            goalIDs: ["goal-1"],
+            isActive: true,
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let commitment = Commitment(
+            id: commitmentID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            stepID: "step-1",
+            promisedFor: "2026-01-02",
+            expectedEffort: "20 min",
+            minimumProofDescription: "Show a short completion note with evidence.",
+            fitReason: "Fits today with protected time.",
+            recoveryPolicy: "Restart with one smaller commitment.",
+            status: .stillCounts,
+            createdAt: "2026-01-01T09:00:00Z",
+            updatedAt: "2026-01-01T09:00:00Z"
+        )
+
+        let identityDirection = IdentityDirection(
+            id: "identity-direction-1",
+            ambitionID: ambitionID,
+            title: "Steadily present",
+            statement: "Show up consistently in high-leverage routines.",
+            priority: .primary,
+            createdAt: "2026-01-01T08:30:00Z",
+            updatedAt: "2026-01-01T08:30:00Z"
+        )
+
+        let outcome = Outcome(
+            id: "outcome-1",
+            ambitionID: ambitionID,
+            identityDirectionID: "identity-direction-1",
+            goalThreadID: threadID,
+            title: "Weekly continuity proof",
+            detail: "Complete one continuity anchor each week.",
+            targetAt: "2026-01-07T00:00:00Z",
+            kind: .capacity,
+            isPrimary: true,
+            metric: "frequency: 4/4 weeks",
+            createdAt: "2026-01-01T08:45:00Z",
+            updatedAt: "2026-01-01T08:45:00Z"
+        )
+
+        let step = AmbitionGraphStep(
+            id: "step-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            outcomeID: "outcome-1",
+            name: "Open capture",
+            description: "Record a short proof intent at beginning of day.",
+            targetOrder: 1,
+            expectedEffortMinutes: 10,
+            isMilestone: true,
+            createdAt: "2026-01-01T08:50:00Z",
+            updatedAt: "2026-01-01T08:50:00Z"
+        )
+
+        let proof = Proof(
+            id: proofID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            commitmentID: commitmentID,
+            closureEventID: "closure-1",
+            proofType: .text,
+            artifactReference: nil,
+            text: "Saved a proof reflection note.",
+            source: "Today capture",
+            createdAt: "2026-01-01T09:30:00Z"
+        )
+
+        let closureEvent = ClosureEvent(
+            id: "closure-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            ambitionGraphStepID: "step-1",
+            commitmentID: commitmentID,
+            proofID: proofID,
+            closureState: .stillCounts,
+            reason: "Moved from a broader weekly plan to a smaller continuation.",
+            followUpPlan: "Hold continuity check next session.",
+            createdAt: "2026-01-01T10:00:00Z"
+        )
+
+        let constraint = Constraint(
+            id: constraintID,
+            ambitionID: ambitionID,
+            label: "Focused block window",
+            patternDescription: "Two-hour meeting window on Fridays.",
+            patternType: .environment,
+            evidenceCount: 2,
+            lastObservedAt: "2026-01-01T10:00:00Z",
+            userConfirmed: true,
+            mitigation: "Shift to a protected 30-minute slot.",
+            createdAt: "2026-01-01T10:00:00Z",
+            updatedAt: "2026-01-01T10:00:00Z"
+        )
+
+        let recovery = RecoveryThread(
+            id: recoveryID,
+            ambitionID: ambitionID,
+            trigger: "Blocked by recurring meeting",
+            priorProofRefs: [proofID],
+            whatChanged: "Reduce ambition from 60 to 20 minutes",
+            newSmallestCommitment: "Commitment-1-mini",
+            status: .active,
+            receiptID: "receipt-1",
+            createdAt: "2026-01-01T10:15:00Z",
+            updatedAt: "2026-01-01T10:15:00Z"
+        )
+
+        let trace = AmbitionGraphRecommendationTrace(
+            id: traceID,
+            recommendedObjectID: commitmentID,
+            sourceRefs: ["source-1", "source-2"],
+            reasonCodes: ["proof_gap", "time_fit", "constraint_overlap"],
+            uncertainty: 0.19,
+            userAction: .wrongRecommendation,
+            createdAt: "2026-01-01T10:30:00Z",
+            sourceLabels: ["Reality Meridian", "Local proof signal"]
+        )
+
+        let reflection = Reflection(
+            id: ambiguityReflectionID,
+            ambitionID: ambitionID,
+            proofID: proofID,
+            closureEventID: "closure-1",
+            text: "Reduced scope and kept momentum through Still Counts.",
+            learnedSignal: "Smaller commitments improve continuity.",
+            createdAt: "2026-01-01T10:45:00Z"
+        )
+
+        let adaptation = AdaptationPivot(
+            id: adaptationID,
+            ambitionID: ambitionID,
+            triggerProofID: proofID,
+            sourceThreadID: threadID,
+            proposedChange: "Move to a 20-minute minimum viable commitment.",
+            resultingCommitmentID: commitmentID,
+            createdAt: "2026-01-01T11:00:00Z",
+            updatedAt: "2026-01-01T11:00:00Z"
+        )
+
+        let snapshot = AmbitionGraphSnapshot(
+            id: "snapshot-1",
+            ambition: ambition,
+            commitments: [commitment],
+            proofs: [proof],
+            constraints: [constraint],
+            recoveryThreads: [recovery],
+            recommendationTraces: [trace],
+            identityDirections: [identityDirection],
+            outcomes: [outcome],
+            steps: [step],
+            closureEvents: [closureEvent]
+        )
+
+        XCTAssertEqual(snapshot.ambition.id, ambitionID)
+        XCTAssertEqual(snapshot.commitments.map(\.id), [commitmentID])
+        XCTAssertEqual(snapshot.proofs.first?.proofType, .text)
+        XCTAssertEqual(snapshot.constraints.first?.patternType, .environment)
+        XCTAssertTrue(snapshot.recoveryThreads.first?.isRecoverable ?? false)
+        XCTAssertEqual(snapshot.identityDirections.map(\.priority), [.primary])
+        XCTAssertEqual(snapshot.outcomes.map(\.kind), [.capacity])
+        XCTAssertEqual(snapshot.steps.map(\.targetOrder), [1])
+        XCTAssertEqual(snapshot.closureEvents.map(\.closureState), [.stillCounts])
+        XCTAssertEqual(recovery.status, .active)
+        XCTAssertEqual(reflection.learnedSignal, "Smaller commitments improve continuity.")
+        XCTAssertTrue(adaptation.proposedChange.contains("20-minute"))
+        XCTAssertEqual(thread.goalIDs, ["goal-1"])
+    }
+
+    func testCanonicalGoalThreadHierarchyPreservesAmbitionLifeAreaStepCommitmentProofAndReceiptReferences() throws {
+        let ambitionID = "ambition-2"
+        let threadID = "thread-2"
+        let commitmentID = "commitment-2"
+        let proofID = "proof-2"
+        let receiptID = "receipt-2"
+
+        let ambition = Ambition(
+            id: ambitionID,
+            title: "Shape the next goal thread",
+            identityStatement: "Keep goals, steps, proof, and recovery attached to the same thread.",
+            lifeAreaID: "career",
+            desiredOutcome: "A single thread stays canonical.",
+            desiredProofDescription: "The thread path keeps its source, step, commitment, proof, and receipt references.",
+            activeGoalThreadID: threadID,
+            activeCommitmentID: commitmentID,
+            knownConstraintIDs: [],
+            recoveryPolicy: "Keep the thread visible and resumable.",
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let thread = GoalThread(
+            id: threadID,
+            ambitionID: ambitionID,
+            lifeAreaID: ambition.lifeAreaID,
+            name: "Career thread",
+            goalIDs: ["goal-1", "goal-2"],
+            isActive: true,
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let commitment = Commitment(
+            id: commitmentID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            stepID: "step-1",
+            promisedFor: "2026-01-02",
+            expectedEffort: "20 min",
+            minimumProofDescription: "Show the smallest proof that the step happened.",
+            fitReason: "Fits the thread without forcing a larger plan.",
+            recoveryPolicy: "Restart with a smaller continuation.",
+            status: .promised,
+            createdAt: "2026-01-01T09:00:00Z",
+            updatedAt: "2026-01-01T09:00:00Z"
+        )
+
+        let step = AmbitionGraphStep(
+            id: "step-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            outcomeID: nil,
+            name: "Open the thread's next step",
+            description: "Keep the path local and inspectable.",
+            targetOrder: 1,
+            expectedEffortMinutes: 15,
+            isMilestone: true,
+            createdAt: "2026-01-01T09:10:00Z",
+            updatedAt: "2026-01-01T09:10:00Z"
+        )
+
+        let proof = Proof(
+            id: proofID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            commitmentID: commitmentID,
+            closureEventID: "closure-2",
+            proofType: .text,
+            artifactReference: nil,
+            text: "Saved a proof note for the thread.",
+            source: "Goals overview",
+            createdAt: "2026-01-01T09:20:00Z"
+        )
+
+        let recovery = RecoveryThread(
+            id: "recovery-2",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            trigger: "A continuation needed a receipt.",
+            priorProofRefs: [proofID],
+            preservedProofRefs: [proofID],
+            receiptBehavior: .createOnReentry,
+            whatChanged: "Kept the path small and traceable.",
+            newSmallestCommitment: "commitment-2-mini",
+            status: .active,
+            receiptID: receiptID,
+            createdAt: "2026-01-01T09:30:00Z",
+            updatedAt: "2026-01-01T09:30:00Z"
+        )
+
+        let snapshot = AmbitionGraphSnapshot(
+            id: "snapshot-2",
+            ambition: ambition,
+            goalThreads: [thread],
+            commitments: [commitment],
+            proofs: [proof],
+            recoveryThreads: [recovery],
+            steps: [step]
+        )
+
+        let hierarchy = try XCTUnwrap(snapshot.canonicalGoalThreadHierarchy)
+
+        XCTAssertEqual(hierarchy.goalThread.id, threadID)
+        XCTAssertEqual(hierarchy.goalThread.lifeAreaID, ambition.lifeAreaID)
+        XCTAssertEqual(hierarchy.ambitionReference.id, ambitionID)
+        XCTAssertEqual(hierarchy.threadReference.id, threadID)
+        XCTAssertEqual(hierarchy.goalReferences.map(\.id), ["goal-1", "goal-2"])
+        XCTAssertEqual(hierarchy.commitmentReferences.map(\.id), [commitmentID])
+        XCTAssertEqual(hierarchy.stepReferences.map(\.id), ["step-1"])
+        XCTAssertEqual(hierarchy.proofReferences.map(\.id), [proofID])
+        XCTAssertEqual(hierarchy.receiptReferences.map(\.id), [receiptID])
+        XCTAssertEqual(
+            hierarchy.canonicalPath.map(\.id),
+            [ambitionID, threadID, "goal-1", commitmentID, "step-1", proofID, receiptID]
+        )
+        XCTAssertTrue(hierarchy.pathSummary.contains("Career thread"))
+        XCTAssertTrue(snapshot.canonicalGoalThreadPath.map(\.id).contains(threadID))
+    }
+
+    func testAmbitionGraphSnapshotDecodesLegacyPayloadWithNewGraphFieldsAsDefaults() throws {
+        let payload = """
+        {
+          "id": "snapshot-legacy",
+          "ambition": {
+            "id": "ambition-legacy",
+            "title": "Legacy ambition contract",
+            "identityStatement": "Ground continuity through daily proof.",
+            "lifeAreaID": "life-legacy",
+            "desiredOutcome": "Maintain continuity.",
+            "desiredProofDescription": "One proof each day.",
+            "activeGoalThreadID": "thread-legacy",
+            "activeCommitmentID": "commitment-legacy",
+            "knownConstraintIDs": [],
+            "privacyClass": "private_user_text",
+            "createdAt": "2026-01-01T00:00:00Z",
+            "updatedAt": "2026-01-01T00:00:00Z"
+          },
+          "commitments": [],
+          "proofs": [],
+          "constraints": [],
+          "recoveryThreads": [],
+          "recommendationTraces": []
+        }
+        """
+
+        let snapshot = try JSONDecoder().decode(AmbitionGraphSnapshot.self, from: Data(payload.utf8))
+
+        XCTAssertEqual(snapshot.id, "snapshot-legacy")
+        XCTAssertEqual(snapshot.ambition.id, "ambition-legacy")
+        XCTAssertTrue(snapshot.goalThreads.isEmpty)
+        XCTAssertTrue(snapshot.identityDirections.isEmpty)
+        XCTAssertTrue(snapshot.outcomes.isEmpty)
+        XCTAssertTrue(snapshot.steps.isEmpty)
+        XCTAssertTrue(snapshot.closureEvents.isEmpty)
+        XCTAssertEqual(snapshot.schemaVersion, ambitionGraphSchemaVersion)
+    }
+
+    func testRecommendationTraceEnforcesExplainabilityAndNoAiCopyDefaults() {
+        let trace = AmbitionGraphRecommendationTrace(
+            id: "trace-1",
+            recommendedObjectID: "obj-1",
+            sourceRefs: ["source-1", "source-1", "source-2"],
+            reasonCodes: ["closure_pressure", "proof_gap", "proof_gap"],
+            uncertainty: 1.25,
+            userAction: .none,
+            createdAt: "2026-01-01T11:15:00Z",
+            sourceLabels: ["Source Index", "Proof Index"]
+        )
+
+        XCTAssertEqual(trace.sourceRefs, ["source-1", "source-2"])
+        XCTAssertEqual(trace.reasonCodes, ["closure_pressure", "proof_gap"])
+        XCTAssertEqual(trace.userAction, .none)
+        XCTAssertEqual(trace.uncertainty, 1.0)
+        XCTAssertTrue(trace.isAiCopySuppressed)
+        XCTAssertEqual(
+            Set(trace.controlOptions),
+            Set([.startNow, .openStep, .shorten, .move, .stillCounts, .notToday, .wrongRecommendation, .forgetPattern])
+        )
+    }
+
+    func testCommitmentRequiresProofLanguageAndClosureStatesAvoidShameTerms() {
+        XCTAssertEqual(AmbitionCommitmentStatus.allCases.map(\.rawValue).sorted(), [
+            "completed",
+            "held",
+            "in_flight",
+            "blocked",
+            "moved",
+            "not_needed",
+            "open",
+            "shortened",
+            "promised",
+            "still_counts",
+            "stalled",
+            "waiting",
+        ].sorted())
+
+        let closureLabels = AmbitionClosureState.allCases.map(\.displayLabel).joined(separator: " ")
+        XCTAssertFalse(closureLabels.localizedCaseInsensitiveContains("Overdue"))
+        XCTAssertFalse(closureLabels.localizedCaseInsensitiveContains("Failed"))
+        XCTAssertEqual(AmbitionClosureState.stillCounts.displayLabel, "Still Counts")
+        XCTAssertEqual(AmbitionClosureState.noLongerTrue.isClosureForRecovery, true)
+        XCTAssertEqual(AmbitionClosureState.completed.isClosureForRecovery, false)
+    }
+
+    func testCommitmentLifecycleTransitionCompletedPreservesProofAndClosesWithoutRecovery() {
+        let transition = AmbitionClosureState.completed.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .completed)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionWaitingHoldsCommitmentAndStartsRecovery() {
+        let transition = AmbitionClosureState.waiting.transition(hasProof: false)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .waiting)
+        XCTAssertFalse(transition.preservesProof)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionBlockedCreatesRecoveryThreadAndReentryPath() {
+        let transition = AmbitionClosureState.blocked.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .blocked)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionMovedKeepsTraceableStatusWithoutRecovery() {
+        let transition = AmbitionClosureState.moved.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .moved)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionShortenedKeepsTraceableStatus() {
+        let transition = AmbitionClosureState.shortened.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .shortened)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionStillCountsPreservesProofWithoutRecovery() {
+        let transition = AmbitionClosureState.stillCounts.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .stillCounts)
+        XCTAssertTrue(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionNotNeededDoesNotPreserveProofOrRecover() {
+        let transition = AmbitionClosureState.notNeeded.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .notNeeded)
+        XCTAssertFalse(transition.preservesProof)
+        XCTAssertFalse(transition.shouldCreateRecoveryThread)
+        XCTAssertFalse(transition.allowsReentry)
+    }
+
+    func testCommitmentLifecycleTransitionNeedsRecoveryMapCreatesRecoveryThreadAndReentry() {
+        let transition = AmbitionClosureState.needsRecovery.transition(hasProof: true)
+
+        XCTAssertEqual(transition.nextCommitmentStatus, .waiting)
+        XCTAssertTrue(transition.shouldCreateRecoveryThread)
+        XCTAssertTrue(transition.allowsReentry)
+    }
+
+    func testRecoveryThreadPreservesLastHonestPointProofAndReentryStep() {
+        let lastHonestPoint = RecoveryLastHonestPoint(
+            commitmentID: "commitment-1",
+            closureEventID: "closure-1",
+            stepID: "step-1",
+            summary: "Work paused after the evidence note was saved.",
+            capturedAt: "2026-05-13T00:10:00Z"
+        )
+        let reentryStep = RecoveryReentryStep(
+            id: "reentry-1",
+            commitmentID: "commitment-1",
+            stepID: "step-2",
+            title: "Restart with the smallest useful next step",
+            reason: "Keeps the proof and lowers the commitment size.",
+            estimatedEffortMinutes: 10
+        )
+
+        let thread = RecoveryThread(
+            id: "recovery-1",
+            ambitionID: "ambition-1",
+            trigger: "Blocked by a dependency",
+            priorProofRefs: ["proof-1", "proof-1", "proof-2"],
+            lastHonestPoint: lastHonestPoint,
+            preservedProofRefs: ["proof-2", "proof-3", "proof-3"],
+            reentryStep: reentryStep,
+            receiptBehavior: .createOnReentry,
+            whatChanged: "The next commitment became smaller.",
+            newSmallestCommitment: "commitment-1-small",
+            status: .active,
+            createdAt: "2026-05-13T00:12:00Z",
+            updatedAt: "2026-05-13T00:12:00Z"
+        )
+
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-2", "proof-3"])
+        XCTAssertEqual(thread.effectiveProofRefs, ["proof-1", "proof-2", "proof-3"])
+        XCTAssertEqual(thread.lastHonestPoint, lastHonestPoint)
+        XCTAssertEqual(thread.reentryStep, reentryStep)
+        XCTAssertTrue(thread.hasReentryStep)
+        XCTAssertTrue(thread.isReceiptReady)
+    }
+
+    func testRecoveryThreadRecoverableStatesAreExplicit() {
+        let recoverableStatuses: [AmbitionRecoveryStatus] = [
+            .active,
+            .held,
+            .paused,
+            .stalled,
+            .interruptedButStillUseful
+        ]
+        let closedStatuses: [AmbitionRecoveryStatus] = [.notNeeded, .complete]
+
+        for status in recoverableStatuses {
+            let thread = RecoveryThread(
+                id: "recovery-\(status.rawValue)",
+                ambitionID: "ambition-1",
+                trigger: "Reality changed",
+                status: status,
+                createdAt: "2026-05-13T00:20:00Z",
+                updatedAt: "2026-05-13T00:20:00Z"
+            )
+            XCTAssertTrue(thread.isRecoverable, "\(status.rawValue) should allow recovery")
+        }
+
+        for status in closedStatuses {
+            let thread = RecoveryThread(
+                id: "recovery-\(status.rawValue)",
+                ambitionID: "ambition-1",
+                trigger: "No re-entry needed",
+                status: status,
+                createdAt: "2026-05-13T00:20:00Z",
+                updatedAt: "2026-05-13T00:20:00Z"
+            )
+            XCTAssertFalse(thread.isRecoverable, "\(status.rawValue) should not allow recovery")
+        }
+    }
+
+    func testRecoveryThreadDefaultsPreservedProofRefsFromPriorProofRefs() {
+        let thread = RecoveryThread(
+            id: "recovery-default-proof",
+            ambitionID: "ambition-1",
+            trigger: "Blocked by a dependency",
+            priorProofRefs: ["proof-1", "proof-1", "proof-2"],
+            createdAt: "2026-05-13T00:22:00Z",
+            updatedAt: "2026-05-13T00:22:00Z"
+        )
+
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.effectiveProofRefs, ["proof-1", "proof-2"])
+    }
+
+    func testRecoveryThreadReceiptBehaviorIsExplicitAndNonShaming() {
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.createOnReentry.isReceiptReady)
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.preserveExistingReceipt.isReceiptReady)
+        XCTAssertTrue(AmbitionRecoveryReceiptBehavior.receiptAlreadyRecorded.isReceiptReady)
+        XCTAssertFalse(AmbitionRecoveryReceiptBehavior.receiptNotNeeded.isReceiptReady)
+
+        let labels = AmbitionRecoveryReceiptBehavior.allCases.map(\.rawValue).joined(separator: " ")
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("overdue"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("failed"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("streak"))
+        XCTAssertFalse(labels.localizedCaseInsensitiveContains("productivity"))
+    }
+
+    func testRecoveryThreadDecodesLegacyPayloadWithRuntimeDefaults() throws {
+        let payload = """
+        {
+          "id": "recovery-legacy",
+          "ambitionID": "ambition-legacy",
+          "trigger": "Blocked by a dependency",
+          "priorProofRefs": ["proof-1", "proof-1", "proof-2"],
+          "whatChanged": "Use a smaller restart.",
+          "newSmallestCommitment": "commitment-small",
+          "status": "active",
+          "receiptID": "receipt-1",
+          "createdAt": "2026-05-13T00:30:00Z",
+          "updatedAt": "2026-05-13T00:30:00Z"
+        }
+        """
+
+        let thread = try JSONDecoder().decode(RecoveryThread.self, from: Data(payload.utf8))
+
+        XCTAssertEqual(thread.id, "recovery-legacy")
+        XCTAssertEqual(thread.priorProofRefs, ["proof-1", "proof-2"])
+        XCTAssertEqual(thread.preservedProofRefs, ["proof-1", "proof-2"])
+        XCTAssertNil(thread.lastHonestPoint)
+        XCTAssertNil(thread.reentryStep)
+        XCTAssertEqual(thread.receiptBehavior, .createOnReentry)
+        XCTAssertTrue(thread.hasReentryStep)
+        XCTAssertTrue(thread.isReceiptReady)
+    }
+}

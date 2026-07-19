@@ -1,0 +1,501 @@
+{
+  "allowedClaims": [
+    "autonomous_operations_cycle_ready_for_recurring_public_reference_runs",
+    "configured_domain_monitor_actions_emitted",
+    "execute_gated_r2_actions_held",
+    "unknown_domain_candidate_intake_cycle_controlled"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "new_remote_r2_write_executed_by_cycle_runner",
+    "outside_legal_approval",
+    "release_green",
+    "runtime_release_green",
+    "source_atlas_private_goal_text_processing",
+    "testflight_readiness"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "control_loop_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "control_loop_required_claims_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "control_loop_blocked_claims_enforced",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "configured_domain_monitor_actions_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_automatic_write_actions_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_write_execute_gate_held",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unknown_domain_candidate_only_cycle_action",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "release_legal_universal_holds_carried_forward",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "cycle_fingerprint_stable",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "previous_cycle_valid_when_supplied",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T02:00:00Z",
+  "cycleDelta": {
+    "currentCycleFingerprint": "2633263eb13c6ebfba026db90b6edb928bc94788a86d66d25f5e2ba93d8c68af",
+    "issues": [],
+    "previousCycleFingerprint": null,
+    "previousCycleSupplied": false,
+    "unchangedFromPrevious": false,
+    "valid": true
+  },
+  "cycleFingerprint": "2633263eb13c6ebfba026db90b6edb928bc94788a86d66d25f5e2ba93d8c68af",
+  "cycleID": "source_atlas.autonomous_cycle.38c26045c954f241",
+  "cycleLabel": "train-120-current",
+  "evidencePaths": {
+    "controlLoop": "docs/qa/source-atlas/source-atlas-autonomous-control-loop-train-119.json",
+    "previousCycle": null
+  },
+  "executionMode": "cycle_decision_only_no_mutation",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousCycleRunner.v1",
+  "nonClaims": [
+    "autonomous operations cycle runner only",
+    "not a live harvest executor",
+    "not an automatic production R2 writer",
+    "not a Worker deployer",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "operationActions": [
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.76d5a396a8d65984",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "business_entrepreneurship",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1001,
+      "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.9f40a88e54995f4c",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "creative_project_reference",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1002,
+      "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.aff1ad213b1675dc",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "education_credentialing",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1003,
+      "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.c5c5672c39c70607",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "finance_public_reference",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1004,
+      "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.df1da93a0a53a5bc",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "health_wellness_reference",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1005,
+      "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.ad38501154f4e8cd",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "health_wellness_reference_ca_statistics",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1006,
+      "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.afe9b66386078c08",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "hobbies_recreation",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1007,
+      "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.2c6b5e5df4ccfd33",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "home_life_admin",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1008,
+      "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.3a2416aee590987a",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "occupation_foundation",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1009,
+      "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.95a8f575318e5424",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "personal_growth",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1010,
+      "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.a950ade841a229c7",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "public_civic_requirements",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1011,
+      "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "packVersion": "20260628T041500Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.095c865a742ca8fa",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "relationships_family",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1012,
+      "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.domain_monitor.fad560672ebbd96b",
+      "actionKind": "monitor_current_production_runtime",
+      "automaticWriteAllowed": false,
+      "domainID": "travel_relocation",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "manifestKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 1013,
+      "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+      "packVersion": "20260628T000000Z",
+      "requiresExecute": false,
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "state": "ready"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.r2_execute_gate.b23e34aa144a3367",
+      "actionKind": "hold_new_remote_r2_write_until_execute_gate",
+      "automaticWriteAllowed": false,
+      "domainID": null,
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "newRemoteWriteExecuted": false,
+      "order": 3000,
+      "requiresBudgetPolicy": true,
+      "requiresExecute": true,
+      "requiresLegalTermsPacket": true,
+      "requiresOwnerApproval": true,
+      "state": "held_execute_required"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.unknown_candidate.1f0308f3527df1a7",
+      "actionKind": "route_unknown_public_reference_domain_to_candidate_intake",
+      "automaticWriteAllowed": false,
+      "domainID": "unknown_public_reference_domain",
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "emitsPack": false,
+      "issues": [],
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 4000,
+      "requiresExecute": false,
+      "state": "candidate_only"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.claim_hold.d592f4af9e5ab99b",
+      "actionKind": "hold_release_green",
+      "automaticWriteAllowed": false,
+      "claimID": "release_green",
+      "domainID": null,
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 5000,
+      "requiresExecute": false,
+      "state": "held"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.claim_hold.57c1df3e7cefacea",
+      "actionKind": "hold_outside_legal_approval",
+      "automaticWriteAllowed": false,
+      "claimID": "outside_legal_approval",
+      "domainID": null,
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 5010,
+      "requiresExecute": false,
+      "state": "held"
+    },
+    {
+      "actionID": "source_atlas.cycle_action.claim_hold.188a4bef100b7a7f",
+      "actionKind": "hold_literal_universal_coverage",
+      "automaticWriteAllowed": false,
+      "claimID": "literal_universal_coverage",
+      "domainID": null,
+      "emitsClaims": false,
+      "emitsFinalOutput": false,
+      "issues": [],
+      "mutatesNativeRuntime": false,
+      "mutatesRemote": false,
+      "order": 5020,
+      "requiresExecute": false,
+      "state": "held"
+    }
+  ],
+  "outputHashes": {
+    "report": "a3b0141310db26af93365cdf77fb7cd32fd110807e517d268f8070ab4f35aef4",
+    "reportPayload": "ce2c31157527bbbab7a3f40ec2c40d1c982fbbd8882510772f435a62f267938e"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-cycle-runner/train-120-current/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-cycle-runner/train-120-current/autonomous-cycle-runner-report.md",
+    "report": "tools/source-atlas/generated/autonomous-cycle-runner/train-120-current/autonomous-cycle-runner-report.json"
+  },
+  "overallReadinessStatus": "autonomous_operations_cycle_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "recordCounts": {
+    "automaticWriteActions": 0,
+    "configuredDomainMonitorActions": 13,
+    "finalOutputsGenerated": 0,
+    "newRemoteWritesExecuted": 0,
+    "operationActions": 18,
+    "privacyIssues": 0,
+    "r2ExecuteGateHoldActions": 1,
+    "releaseLegalUniversalHoldActions": 3,
+    "unknownCandidateOnlyActions": 1
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; recurring autonomous cycle tooling for current configured public/reference domains only",
+  "status": "Source Green for autonomous Source Atlas operations cycle tooling",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-cycle-runner-train-120"
+}

@@ -1,0 +1,29 @@
+{
+  "adapterID": "childwelfare_family_support_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "ad4c0489f8fb68a9a2a9c0fdb1b0920abbb31d7afca2e275de48f88c7dc210db",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "childwelfare_public_web",
+  "normalizedPath": "normalized/childwelfare.family_support.json",
+  "normalizedSHA256": "8251b3b416656234bbcdc8af13292e9ee3b224bc2692fe8d5689a5d8a98f6cfc",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "childwelfare.family_support",
+  "sourceLane": "childwelfare.family_support"
+}

@@ -1,0 +1,1010 @@
+{
+  "activeRegistryMutations": [],
+  "compatibleGateVersionID": "source-atlas-catalog-direct-source-review-gate-train-71",
+  "completedDirectSourceReviews": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "directSourceReviewPacketTemplates": [
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "api_governance_review_required",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_required",
+        "jurisdiction_evidence_missing",
+        "legal_terms_review_required",
+        "packability_decision_required",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_lane_review_required",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "candidate_locators": [
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[0]",
+          "url": "https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/6227.0Explanatory%20Notes1May%202016?OpenDocument"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[1]",
+          "url": "https://www.abs.gov.au/AUSSTATS/abs@.nsf/mf/6227.0"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_rights_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.rights_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_terms_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.terms_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_license_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.license_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+        }
+      ],
+      "completion_checklist": [
+        {
+          "missing_locator_classes": [
+            "api_docs_url_or_no_api_evidence",
+            "authority_class_evidence",
+            "dataset_url",
+            "jurisdiction_evidence",
+            "publisher_url",
+            "source_class_evidence",
+            "source_specific_rights_url",
+            "source_specific_terms_url"
+          ],
+          "required_action": "confirm direct publisher/source authority from source-controlled evidence",
+          "section": "direct_source",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_source_lane_entry with completed source_lane_entry only after source authority, jurisdiction, freshness, artifact classes, and non-claims are reviewed",
+          "section": "source_lane",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_legal_terms_entry with completed legal_terms_entry only after source-specific redistribution, attribution, pack-output, and outside-legal artifact posture are reviewed",
+          "section": "legal_terms",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_api_policy_entry with completed api_policy_entry before live harvest; live and execute flags plus secret redaction must stay required",
+          "section": "api_governance",
+          "status": "blocked"
+        },
+        {
+          "required_action": "keep pack output blocked unless legal/terms and packability posture are explicitly approved",
+          "section": "packability",
+          "status": "blocked"
+        }
+      ],
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_template.036cca7bc23b4d3a",
+      "domain_guess": "education_credentialing",
+      "draft_api_policy_entry": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "",
+        "backoff_policy": "",
+        "budget_owner": "",
+        "candidate_api_docs_url": "",
+        "circuit_breaker_policy": "",
+        "daily_budget_limit": null,
+        "env_var_name": "",
+        "evidence_output_policy": "metadata_only_no_response_body_logs",
+        "execute_flag_required": true,
+        "high_volume_review_required": null,
+        "key_required": null,
+        "live_flag_required": true,
+        "max_pages_per_run": null,
+        "max_records_per_run": null,
+        "missing_key_behavior": "",
+        "monthly_budget_limit": null,
+        "rate_limit_per_minute": null,
+        "rate_limit_per_second": null,
+        "retry_policy": "",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "",
+        "timeout_seconds": null
+      },
+      "draft_legal_terms_entry": {
+        "approval_artifact_path": "",
+        "attribution_required": null,
+        "license_id": "",
+        "license_name": "",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+        "non_claims": [
+          "draft legal terms only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_owner": "",
+        "review_required": true,
+        "reviewed_at": "",
+        "rights_url": "https://creativecommons.org/licenses/by/4.0/",
+        "schema_version": "1.0.0",
+        "terms_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+      },
+      "draft_source_lane_entry": {
+        "allowed_artifact_classes": [],
+        "attribution_required": null,
+        "authority_class": "",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "medical_advice",
+          "financial_advice"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "education_credentialing"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "jurisdiction": "",
+        "license_id": "",
+        "license_url": "",
+        "lookup_policy": "review_required",
+        "non_claims": [
+          "draft source lane only",
+          "not authority",
+          "not approval"
+        ],
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_required": true,
+        "review_status": "review_required",
+        "rights_url": "",
+        "schema_version": "1.0.0",
+        "source_class": "",
+        "source_id": "",
+        "source_name": "ABS (SA Data)",
+        "terms_url": ""
+      },
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "missing_locator_classes": [
+        "api_docs_url_or_no_api_evidence",
+        "authority_class_evidence",
+        "dataset_url",
+        "jurisdiction_evidence",
+        "publisher_url",
+        "source_class_evidence",
+        "source_specific_rights_url",
+        "source_specific_terms_url"
+      ],
+      "non_claims": [
+        "direct-source review packet template only",
+        "not completed review",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "required_evidence": [
+        "api_docs_or_no_api_evidence",
+        "api_governance_policy_record",
+        "api_surface_resolution",
+        "direct_source_authority_evidence",
+        "direct_source_locator",
+        "jurisdiction_and_authority_class_review",
+        "legal_terms_review_record",
+        "packability_decision_record",
+        "source_specific_terms_or_rights_locator",
+        "source_specific_terms_rights_license_snapshot"
+      ],
+      "resolution_id": "catalog_direct_source_resolution.b4f2d14840e3d73b",
+      "review_owner": "Ambitions source review",
+      "reviewed_at": "",
+      "reviewer_only_fields": [
+        "review_owner",
+        "reviewed_at",
+        "source_lane_entry",
+        "legal_terms_entry",
+        "api_policy_entry",
+        "outside_legal_status",
+        "outside_legal_approval_artifact"
+      ],
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_name": "ABS (SA Data)"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "api_governance_review_required",
+        "authority_class_evidence_missing",
+        "direct_source_review_required",
+        "jurisdiction_evidence_missing",
+        "legal_terms_review_required",
+        "packability_decision_required",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_lane_review_required",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "candidate_locators": [
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "direct_dataset_url",
+          "review_required": true,
+          "source_field": "candidate_review.dataset_url",
+          "url": "http://www.deewr.gov.au/HigherEducation/Pages/default.aspx"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[0]",
+          "url": "https://data.gov.au/data/dataset/3488af44-4cfe-4e88-bd6e-532d0d06ae72/resource/7be27d60-d3a4-45ea-8b7b-ea4cc0c04ab6/download/tmpzsp5wvenrol.zip"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_rights_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.rights_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_terms_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.terms_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_license_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.license_url",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+        }
+      ],
+      "completion_checklist": [
+        {
+          "missing_locator_classes": [
+            "api_docs_url_or_no_api_evidence",
+            "authority_class_evidence",
+            "jurisdiction_evidence",
+            "publisher_url",
+            "source_class_evidence",
+            "source_specific_rights_url",
+            "source_specific_terms_url"
+          ],
+          "required_action": "confirm direct publisher/source authority from source-controlled evidence",
+          "section": "direct_source",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_source_lane_entry with completed source_lane_entry only after source authority, jurisdiction, freshness, artifact classes, and non-claims are reviewed",
+          "section": "source_lane",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_legal_terms_entry with completed legal_terms_entry only after source-specific redistribution, attribution, pack-output, and outside-legal artifact posture are reviewed",
+          "section": "legal_terms",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_api_policy_entry with completed api_policy_entry before live harvest; live and execute flags plus secret redaction must stay required",
+          "section": "api_governance",
+          "status": "blocked"
+        },
+        {
+          "required_action": "keep pack output blocked unless legal/terms and packability posture are explicitly approved",
+          "section": "packability",
+          "status": "blocked"
+        }
+      ],
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_template.371ee7caf2f8aaa2",
+      "domain_guess": "education_credentialing",
+      "draft_api_policy_entry": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "",
+        "backoff_policy": "",
+        "budget_owner": "",
+        "candidate_api_docs_url": "",
+        "circuit_breaker_policy": "",
+        "daily_budget_limit": null,
+        "env_var_name": "",
+        "evidence_output_policy": "metadata_only_no_response_body_logs",
+        "execute_flag_required": true,
+        "high_volume_review_required": null,
+        "key_required": null,
+        "live_flag_required": true,
+        "max_pages_per_run": null,
+        "max_records_per_run": null,
+        "missing_key_behavior": "",
+        "monthly_budget_limit": null,
+        "rate_limit_per_minute": null,
+        "rate_limit_per_second": null,
+        "retry_policy": "",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "",
+        "timeout_seconds": null
+      },
+      "draft_legal_terms_entry": {
+        "approval_artifact_path": "",
+        "attribution_required": null,
+        "license_id": "",
+        "license_name": "",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+        "non_claims": [
+          "draft legal terms only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_owner": "",
+        "review_required": true,
+        "reviewed_at": "",
+        "rights_url": "https://creativecommons.org/licenses/by/4.0/",
+        "schema_version": "1.0.0",
+        "terms_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en"
+      },
+      "draft_source_lane_entry": {
+        "allowed_artifact_classes": [],
+        "attribution_required": null,
+        "authority_class": "",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "medical_advice",
+          "financial_advice"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "education_credentialing"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "jurisdiction": "",
+        "license_id": "",
+        "license_url": "",
+        "lookup_policy": "review_required",
+        "non_claims": [
+          "draft source lane only",
+          "not authority",
+          "not approval"
+        ],
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_required": true,
+        "review_status": "review_required",
+        "rights_url": "",
+        "schema_version": "1.0.0",
+        "source_class": "",
+        "source_id": "",
+        "source_name": "Department of Education",
+        "terms_url": ""
+      },
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "missing_locator_classes": [
+        "api_docs_url_or_no_api_evidence",
+        "authority_class_evidence",
+        "jurisdiction_evidence",
+        "publisher_url",
+        "source_class_evidence",
+        "source_specific_rights_url",
+        "source_specific_terms_url"
+      ],
+      "non_claims": [
+        "direct-source review packet template only",
+        "not completed review",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "required_evidence": [
+        "api_docs_or_no_api_evidence",
+        "api_governance_policy_record",
+        "api_surface_resolution",
+        "direct_source_authority_evidence",
+        "direct_source_locator",
+        "jurisdiction_and_authority_class_review",
+        "legal_terms_review_record",
+        "packability_decision_record",
+        "source_specific_terms_or_rights_locator",
+        "source_specific_terms_rights_license_snapshot"
+      ],
+      "resolution_id": "catalog_direct_source_resolution.1c0251ba96c44307",
+      "review_owner": "Ambitions source review",
+      "reviewed_at": "",
+      "reviewer_only_fields": [
+        "review_owner",
+        "reviewed_at",
+        "source_lane_entry",
+        "legal_terms_entry",
+        "api_policy_entry",
+        "outside_legal_status",
+        "outside_legal_approval_artifact"
+      ],
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_name": "Department of Education"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "api_governance_review_required",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_required",
+        "jurisdiction_evidence_missing",
+        "legal_terms_review_required",
+        "packability_decision_required",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_lane_review_required",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "candidate_locators": [
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[0]",
+          "url": "https://www.canada.ca/en/public-health/services/pregnancy/preconception-health-before.html"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[1]",
+          "url": "https://www.canada.ca/fr/sante-publique/services/grossesse/sante-preconceptionnelle-avant.html"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_rights_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.rights_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_terms_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.terms_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_license_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.license_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        }
+      ],
+      "completion_checklist": [
+        {
+          "missing_locator_classes": [
+            "api_docs_url_or_no_api_evidence",
+            "authority_class_evidence",
+            "dataset_url",
+            "jurisdiction_evidence",
+            "publisher_url",
+            "source_class_evidence",
+            "source_specific_rights_url",
+            "source_specific_terms_url"
+          ],
+          "required_action": "confirm direct publisher/source authority from source-controlled evidence",
+          "section": "direct_source",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_source_lane_entry with completed source_lane_entry only after source authority, jurisdiction, freshness, artifact classes, and non-claims are reviewed",
+          "section": "source_lane",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_legal_terms_entry with completed legal_terms_entry only after source-specific redistribution, attribution, pack-output, and outside-legal artifact posture are reviewed",
+          "section": "legal_terms",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_api_policy_entry with completed api_policy_entry before live harvest; live and execute flags plus secret redaction must stay required",
+          "section": "api_governance",
+          "status": "blocked"
+        },
+        {
+          "required_action": "keep pack output blocked unless legal/terms and packability posture are explicitly approved",
+          "section": "packability",
+          "status": "blocked"
+        }
+      ],
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_template.264fbf78c3336d22",
+      "domain_guess": "health_wellness_reference",
+      "draft_api_policy_entry": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "",
+        "backoff_policy": "",
+        "budget_owner": "",
+        "candidate_api_docs_url": "",
+        "circuit_breaker_policy": "",
+        "daily_budget_limit": null,
+        "env_var_name": "",
+        "evidence_output_policy": "metadata_only_no_response_body_logs",
+        "execute_flag_required": true,
+        "high_volume_review_required": null,
+        "key_required": null,
+        "live_flag_required": true,
+        "max_pages_per_run": null,
+        "max_records_per_run": null,
+        "missing_key_behavior": "",
+        "monthly_budget_limit": null,
+        "rate_limit_per_minute": null,
+        "rate_limit_per_second": null,
+        "retry_policy": "",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "",
+        "timeout_seconds": null
+      },
+      "draft_legal_terms_entry": {
+        "approval_artifact_path": "",
+        "attribution_required": null,
+        "license_id": "",
+        "license_name": "",
+        "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "non_claims": [
+          "draft legal terms only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_owner": "",
+        "review_required": true,
+        "reviewed_at": "",
+        "rights_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "schema_version": "1.0.0",
+        "terms_url": "https://open.canada.ca/en/open-government-licence-canada"
+      },
+      "draft_source_lane_entry": {
+        "allowed_artifact_classes": [],
+        "attribution_required": null,
+        "authority_class": "",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "medical_advice",
+          "financial_advice"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "health_wellness_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "jurisdiction": "",
+        "license_id": "",
+        "license_url": "",
+        "lookup_policy": "review_required",
+        "non_claims": [
+          "draft source lane only",
+          "not authority",
+          "not approval"
+        ],
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_required": true,
+        "review_status": "review_required",
+        "rights_url": "",
+        "schema_version": "1.0.0",
+        "source_class": "",
+        "source_id": "",
+        "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+        "terms_url": ""
+      },
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "missing_locator_classes": [
+        "api_docs_url_or_no_api_evidence",
+        "authority_class_evidence",
+        "dataset_url",
+        "jurisdiction_evidence",
+        "publisher_url",
+        "source_class_evidence",
+        "source_specific_rights_url",
+        "source_specific_terms_url"
+      ],
+      "non_claims": [
+        "direct-source review packet template only",
+        "not completed review",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "required_evidence": [
+        "api_docs_or_no_api_evidence",
+        "api_governance_policy_record",
+        "api_surface_resolution",
+        "direct_source_authority_evidence",
+        "direct_source_locator",
+        "jurisdiction_and_authority_class_review",
+        "legal_terms_review_record",
+        "packability_decision_record",
+        "source_specific_terms_or_rights_locator",
+        "source_specific_terms_rights_license_snapshot"
+      ],
+      "resolution_id": "catalog_direct_source_resolution.b1675472d6807d33",
+      "review_owner": "Ambitions source review",
+      "reviewed_at": "",
+      "reviewer_only_fields": [
+        "review_owner",
+        "reviewed_at",
+        "source_lane_entry",
+        "legal_terms_entry",
+        "api_policy_entry",
+        "outside_legal_status",
+        "outside_legal_approval_artifact"
+      ],
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "api_governance_review_required",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_required",
+        "jurisdiction_evidence_missing",
+        "legal_terms_review_required",
+        "packability_decision_required",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_lane_review_required",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "candidate_locators": [
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[0]",
+          "url": "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-eng.zip"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[1]",
+          "url": "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-fra.zip"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[2]",
+          "url": "https://www150.statcan.gc.ca/n1/tbl/sdmx/13100974-SDMX.zip"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[3]",
+          "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=redacted-public-id"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "distribution_url",
+          "review_required": true,
+          "source_field": "candidate_review.distribution_urls[4]",
+          "url": "https://www150.statcan.gc.ca/t1/tbl1/fr/tv.action?pid=redacted-public-id"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_rights_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.rights_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_legal_terms_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.terms_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        },
+        {
+          "authority_use_allowed": false,
+          "evidence_role": "candidate_locator_only",
+          "locator_class": "draft_license_url",
+          "review_required": true,
+          "source_field": "decision_input.legal_terms_decision.current_entry.license_url",
+          "url": "https://open.canada.ca/en/open-government-licence-canada"
+        }
+      ],
+      "completion_checklist": [
+        {
+          "missing_locator_classes": [
+            "api_docs_url_or_no_api_evidence",
+            "authority_class_evidence",
+            "dataset_url",
+            "jurisdiction_evidence",
+            "publisher_url",
+            "source_class_evidence",
+            "source_specific_rights_url",
+            "source_specific_terms_url"
+          ],
+          "required_action": "confirm direct publisher/source authority from source-controlled evidence",
+          "section": "direct_source",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_source_lane_entry with completed source_lane_entry only after source authority, jurisdiction, freshness, artifact classes, and non-claims are reviewed",
+          "section": "source_lane",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_legal_terms_entry with completed legal_terms_entry only after source-specific redistribution, attribution, pack-output, and outside-legal artifact posture are reviewed",
+          "section": "legal_terms",
+          "status": "blocked"
+        },
+        {
+          "required_action": "replace draft_api_policy_entry with completed api_policy_entry before live harvest; live and execute flags plus secret redaction must stay required",
+          "section": "api_governance",
+          "status": "blocked"
+        },
+        {
+          "required_action": "keep pack output blocked unless legal/terms and packability posture are explicitly approved",
+          "section": "packability",
+          "status": "blocked"
+        }
+      ],
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_template.8060bf9bad637530",
+      "domain_guess": "health_wellness_reference",
+      "draft_api_policy_entry": {
+        "api_mode": "review_required_before_live_harvest",
+        "api_policy_id": "",
+        "backoff_policy": "",
+        "budget_owner": "",
+        "candidate_api_docs_url": "",
+        "circuit_breaker_policy": "",
+        "daily_budget_limit": null,
+        "env_var_name": "",
+        "evidence_output_policy": "metadata_only_no_response_body_logs",
+        "execute_flag_required": true,
+        "high_volume_review_required": null,
+        "key_required": null,
+        "live_flag_required": true,
+        "max_pages_per_run": null,
+        "max_records_per_run": null,
+        "missing_key_behavior": "",
+        "monthly_budget_limit": null,
+        "rate_limit_per_minute": null,
+        "rate_limit_per_second": null,
+        "retry_policy": "",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "",
+        "timeout_seconds": null
+      },
+      "draft_legal_terms_entry": {
+        "approval_artifact_path": "",
+        "attribution_required": null,
+        "license_id": "",
+        "license_name": "",
+        "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "non_claims": [
+          "draft legal terms only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_required": true,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": false,
+        "redistribution_allowed": false,
+        "review_owner": "",
+        "review_required": true,
+        "reviewed_at": "",
+        "rights_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "schema_version": "1.0.0",
+        "terms_url": "https://open.canada.ca/en/open-government-licence-canada"
+      },
+      "draft_source_lane_entry": {
+        "allowed_artifact_classes": [],
+        "attribution_required": null,
+        "authority_class": "",
+        "claim_classes_allowed": [],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "medical_advice",
+          "financial_advice"
+        ],
+        "crosswalk_policy": "review_required",
+        "domain_scope": [
+          "health_wellness_reference"
+        ],
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "jurisdiction": "",
+        "license_id": "",
+        "license_url": "",
+        "lookup_policy": "review_required",
+        "non_claims": [
+          "draft source lane only",
+          "not authority",
+          "not approval"
+        ],
+        "r2_pack_policy": "pack_blocked_unknown_terms",
+        "redistribution_policy": "review_required",
+        "review_required": true,
+        "review_status": "review_required",
+        "rights_url": "",
+        "schema_version": "1.0.0",
+        "source_class": "",
+        "source_id": "",
+        "source_name": "Statistics Canada | Statistique Canada",
+        "terms_url": ""
+      },
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "missing_locator_classes": [
+        "api_docs_url_or_no_api_evidence",
+        "authority_class_evidence",
+        "dataset_url",
+        "jurisdiction_evidence",
+        "publisher_url",
+        "source_class_evidence",
+        "source_specific_rights_url",
+        "source_specific_terms_url"
+      ],
+      "non_claims": [
+        "direct-source review packet template only",
+        "not completed review",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "required_evidence": [
+        "api_docs_or_no_api_evidence",
+        "api_governance_policy_record",
+        "api_surface_resolution",
+        "direct_source_authority_evidence",
+        "direct_source_locator",
+        "jurisdiction_and_authority_class_review",
+        "legal_terms_review_record",
+        "packability_decision_record",
+        "source_specific_terms_or_rights_locator",
+        "source_specific_terms_rights_license_snapshot"
+      ],
+      "resolution_id": "catalog_direct_source_resolution.869c97443588283f",
+      "review_owner": "Ambitions source review",
+      "reviewed_at": "",
+      "reviewer_only_fields": [
+        "review_owner",
+        "reviewed_at",
+        "source_lane_entry",
+        "legal_terms_entry",
+        "api_policy_entry",
+        "outside_legal_status",
+        "outside_legal_approval_artifact"
+      ],
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.b73f9f0ebbed",
+      "source_name": "Statistics Canada | Statistique Canada"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewTemplate.v1",
+  "nonClaims": [
+    "direct-source review packet templates only",
+    "not completed direct-source review packets",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "claims": 0,
+    "completedDirectSourceReviews": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPacketTemplates": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4
+  },
+  "resolutionCandidatesPath": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json",
+  "reviewer": "Ambitions source review",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-catalog-direct-source-review-template-train-72"
+}

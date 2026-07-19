@@ -1,0 +1,517 @@
+{
+  "channel": "stable",
+  "checks": [
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payloads_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_license_slices_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "local_checksums_match_manifest",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "remote_r2_public_reference_transport_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upload_readback_checksums",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "current_pointer_after_readback_only",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "currentPointer": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.currentPackPointer.v1",
+    "lastKnownGoodKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+    "manifestKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+    "manifestSHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+    "packSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+    "packVersion": "20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "publishGate": "current pointer may update only after upload, readback, checksum, revocation, LKG, and rollback checks pass",
+    "revocationManifestKey": "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+    "schemaVersion": 1
+  },
+  "environment": "production",
+  "executeRequested": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PackPublisherReport.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-education-train-42.json",
+    "packetSHA256": "561fd342d105e1adf3ad843a814f43d7a78e37c581d599b38ebd9beab4e3e01f",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "college-scorecard.api",
+      "westpoint.redbook.computer_science_major"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "college-scorecard.api",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "westpoint.redbook.computer_science_major",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "mode": "remote_r2",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "objectCount": 13,
+  "operation": {
+    "bucket": "ambitions-source-atlas-prod",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "currentPointer": {
+      "actualSHA256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "blockedUntilReadback": true,
+      "expectedSHA256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "get": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      "issues": [],
+      "key": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "put": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/current.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      "updated": true
+    },
+    "dataClass": "public_r2_object_key",
+    "dryRun": false,
+    "executeRequested": true,
+    "executed": true,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+    "mode": "remote_r2",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "previousPointers": {
+      "current": {
+        "bytes": null,
+        "exists": false,
+        "get": {
+          "returnCode": 1,
+          "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_05-47-45_334.log\"\n",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/current.json\" from \"ambitions-source-atlas-prod\".\n\n",
+          "success": false
+        },
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+        "sha256": null
+      },
+      "lastKnownGood": {
+        "bytes": null,
+        "exists": false,
+        "get": {
+          "returnCode": 1,
+          "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_05-47-47_147.log\"\n",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/lkg.json\" from \"ambitions-source-atlas-prod\".\n\n",
+          "success": false
+        },
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+        "sha256": null
+      }
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "readbackResults": [
+      {
+        "actualSHA256": "e24c41b3081bf08dbe02dd67a817ea85f87e93b9d23b2b5960b9e46d1353b0a5",
+        "expectedSHA256": "e24c41b3081bf08dbe02dd67a817ea85f87e93b9d23b2b5960b9e46d1353b0a5",
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/adjudications.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/adjudications.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "88309da72fadaf2e4abb87b4dc88caf837c37fb5e55925fe27d144d72c40e101",
+        "expectedSHA256": "88309da72fadaf2e4abb87b4dc88caf837c37fb5e55925fe27d144d72c40e101",
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/attribution.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/attribution.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "8c5498261398cb19541b54ae1418d7c6416ab37b5c7fc8c6cef57ed8184cda67",
+        "expectedSHA256": "8c5498261398cb19541b54ae1418d7c6416ab37b5c7fc8c6cef57ed8184cda67",
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "840b4c89a6d99bad40cc1bee9109d901b7f58eb4b7321bcba968a03ce2b57082",
+        "expectedSHA256": "840b4c89a6d99bad40cc1bee9109d901b7f58eb4b7321bcba968a03ce2b57082",
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/coverage.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/coverage.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "a1758cccb22b505a9ad9a337e04cb894e5ecf96c56529d5e85566412190168e9",
+        "expectedSHA256": "a1758cccb22b505a9ad9a337e04cb894e5ecf96c56529d5e85566412190168e9",
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/entities.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/entities.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "2bfe4c1a23bf17cd04911090ff4223e5aca1e7cef149620584bce8695095bcf5",
+        "expectedSHA256": "2bfe4c1a23bf17cd04911090ff4223e5aca1e7cef149620584bce8695095bcf5",
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/freshness.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/freshness.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "a2766a2a973b88a5edbc3030ac9cc19ca9fe6ef104af3a7ee691365864f9c9a2",
+        "expectedSHA256": "a2766a2a973b88a5edbc3030ac9cc19ca9fe6ef104af3a7ee691365864f9c9a2",
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/licenses.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/licenses.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f",
+        "expectedSHA256": "89f044c7511cfc709a0af553f50ab473342d0e9b6ff267c70dfe68ecb72d684f",
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+        "expectedSHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387",
+        "expectedSHA256": "f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387",
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/non_claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/non_claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+        "expectedSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "373b2b3011cbd6806e6dae4a206a4641dd37a163d9ffb074df0cfdcd4fea42ae",
+        "expectedSHA256": "373b2b3011cbd6806e6dae4a206a4641dd37a163d9ffb074df0cfdcd4fea42ae",
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/revocations.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "87d076246dcac7fffbbe46ec621f3a11acee792f3b3bdf84bf51aed53025cffa",
+        "expectedSHA256": "87d076246dcac7fffbbe46ec621f3a11acee792f3b3bdf84bf51aed53025cffa",
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/sources.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/sources.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      }
+    ],
+    "readbackRoot": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2-readback",
+    "remoteR2": true,
+    "schemaVersion": 1,
+    "success": true,
+    "uploadResults": [
+      {
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/adjudications.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/adjudications.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/attribution.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/attribution.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/coverage.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/coverage.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/entities.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/entities.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/freshness.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/freshness.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/licenses.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/licenses.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/lkg.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/non_claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/non_claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/revocations.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/sources.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/sources.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      }
+    ]
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/closeout.md",
+    "currentPointer": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/current-pointer.json",
+    "report": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-publisher-report.json",
+    "requestPrivacy": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-request-privacy-report.json",
+    "uploadReadback": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-upload-readback-report.json"
+  },
+  "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionR2Uploaded": true,
+  "realR2CredentialsUsed": true,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; R2 publisher tooling only",
+  "status": "Source Green for R2 publisher gate harness",
+  "valid": true,
+  "versionID": "source-atlas-r2-publisher-train-10"
+}

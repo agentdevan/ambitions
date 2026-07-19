@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Linear mirror/spec registry only. Do not create, update, close, or mark Linear objects from this file without explicit owner authorization.",
+  "linear_items": [
+    {
+      "vsp_id": "VSP-01",
+      "likely_parent_issue": "AMB-1480",
+      "recommended_parent_title": "VSP-01 Shell Authority Reconfirmation",
+      "recommended_status": "Ready For Review",
+      "recommended_labels": [
+        "VSP",
+        "shell-authority",
+        "figma-handoff",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Audit approved VSP-01 shell against current SwiftUI shell",
+          "scope": "analysis and screenshot parity only; no shell mutation",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Attach owner-approved shell readback frames before implementation",
+          "scope": "Figma/owner review proof only",
+          "recommended_status": "Spec Ready"
+        }
+      ],
+      "blocked_by": [
+        "live SwiftUI parity screenshot",
+        "device and accessibility proof"
+      ],
+      "acceptance_summary": [
+        "VSP-01 approved shell frame remains immutable.",
+        "No later VSP may mutate shell.",
+        "Codex implementation leaf can only repair shell after explicit owner approval."
+      ],
+      "validation_summary": [
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "exact frame ID and screenshot proof",
+        "no Visual Green without runtime and accessibility proof",
+        "rollback plan for source leaf if later authorized"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-02",
+      "likely_parent_issue": "AMB-1481",
+      "recommended_parent_title": "VSP-02 Today Reality Window",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "today",
+        "surface-content",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Today rail-attached timeline SwiftUI parity leaf from approved R6 frame",
+          "scope": "Today content only inside VSP-01 shell; implement vertical rail-attached time bands, current aperture, integrated condition ribbon, and proof seam",
+          "recommended_status": "Spec Ready after owner implementation approval"
+        },
+        {
+          "title": "Capture Today rail/aperture accessibility and state matrix proof",
+          "scope": "Dynamic Type, VoiceOver order/actions, Reduce Motion static aperture step, Reduce Transparency, Increase Contrast, haptics, screenshots",
+          "recommended_status": "Spec Ready"
+        }
+      ],
+      "blocked_by": [
+        "live SwiftUI parity screenshot",
+        "accessibility and reduced-motion proof",
+        "runtime mutation/proof receipt evidence"
+      ],
+      "acceptance_summary": [
+        "Current selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.",
+        "R1 state matrix at Figma node 152:93 extends the selected R6 direction across calm, overloaded, protected, waiting/blocked, moved/still-counts, not-needed/recovery, Dynamic Type stress, and Reduce Motion static-proof states.",
+        "Today remains Reality Window / Start here content and replaces schedule/reminder utility through a living vertical day rail, not cards on a background.",
+        "Analytics, risk, open time, drive, and proof signals must be integrated into the viewport object, not detached KPI dashboard rows.",
+        "No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.",
+        "Implementation leaf must list exact source owners, new vertical rail/current-aperture primitive requirements, non-goals, and proof artifacts.",
+        "Owner-review package at Figma node 160:93 explicitly provides hero, marketing crop, SwiftUI anatomy, accessibility matrix, state-matrix pointer, and non-claims frames for the selected R6/R1 direction.",
+        "Owner approved node 160:93 together with R6 selected direction node 134:44/134:48 and R1 state matrix node 152:93 on 2026-06-30 for visual/Figma target authority."
+      ],
+      "validation_summary": [
+        "Figma Production Gate review and owner approval recorded before source implementation",
+        "focused Today tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "screenshot/a11y matrix after SwiftUI implementation"
+      ],
+      "closeout_required": [
+        "owner-approved R6 frame ID 134:44 / viewport 134:48",
+        "R1 state matrix frame ID 152:93 and durable readable proof paths",
+        "durable readable screenshot proof path or Linear attachment",
+        "live SwiftUI screenshot matrix after implementation",
+        "owner approval evidence path",
+        "owner-review package frame ID 160:93 and durable proof paths",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-03",
+      "likely_parent_issue": "AMB-1482",
+      "recommended_parent_title": "VSP-03 Goals Life Area Atlas",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "goals",
+        "surface-content",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Goals Life Area Atlas SwiftUI parity leaf",
+          "scope": "Goals content object only inside VSP-01 shell from owner-approved D5 Focus Lens Territory package",
+          "recommended_status": "Spec Ready after implementation authorization"
+        },
+        {
+          "title": "Prove Goals object accessibility and no-dashboard shape",
+          "scope": "state matrix, Dynamic Type, VoiceOver order, Reduce Motion, Reduce Transparency, Increase Contrast, haptics, and screenshot proof",
+          "recommended_status": "Ready For Review"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "Current review package is D5 Focus Lens Territory at Figma node 177:93.",
+        "Owner approved node 177:93 on 2026-06-30 for visual/Figma target authority.",
+        "Goals remains Life Area Atlas content.",
+        "The selected life area expands as a focus lens while neighboring life areas remain spatially present and subordinate.",
+        "No project board, scorecard, analytics root, or stale IA.",
+        "No VSP-01 shell mutation, no Capture tab/inbox, no Motion destination, no cloud LLM core, and no R2/private graph behavior.",
+        "Source implementation still requires a bounded Codex leaf with exact source owners, non-goals, validation commands, and proof artifacts."
+      ],
+      "validation_summary": [
+        "focused Goals tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "D5 owner-review package frame ID 177:93 and durable proof paths",
+        "owner approval evidence path",
+        "live SwiftUI screenshot matrix",
+        "accessibility and reduced-motion proof after source implementation",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-04",
+      "likely_parent_issue": "AMB-1483",
+      "recommended_parent_title": "VSP-04 Time / LifeShape Week",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "time",
+        "surface-content",
+        "yellow-proof",
+        "native-month-calendar",
+        "owner-approved-direction",
+        "owner-review-package",
+        "owner-approved-target"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Build VSP-04/F Apple-Native Life Calendar candidate package",
+          "scope": "Figma-only owner-review package with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof at node 202:93",
+          "recommended_status": "Spec Ready"
+        },
+        {
+          "title": "Produce Time LifeShape SwiftUI parity leaf",
+          "scope": "Time content object only inside VSP-01 shell from owner-approved VSP-04/F Apple-Native Life Calendar package",
+          "recommended_status": "Spec Ready after implementation authorization"
+        },
+        {
+          "title": "Prove Time reflow/protected-time accessibility matrix",
+          "scope": "state matrix, Reduce Motion static proof step, Dynamic Type month-grid stress, VoiceOver month summary, proof receipt, haptics/static confirmation",
+          "recommended_status": "Spec Ready"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix"
+      ],
+      "acceptance_summary": [
+        "Current owner-approved review package is VSP-04/F Apple-Native Life Calendar at Figma node 202:93.",
+        "Owner approved node 202:93 on 2026-06-30 for visual/Figma target authority.",
+        "Time remains a month-first native Life Calendar / LifeShape content object inside VSP-01 shell authority.",
+        "Analytics are integrated as seams, bands, apertures, markers, and a single month readout rather than side KPI rails or dashboard cards.",
+        "No calendar-clone-only implementation, no Today-owned current-step timeline, no Plan/Profile/Habits/Insights top-level IA, no Capture tab, and no Motion destination.",
+        "No external calendar dependency for offline core value and no cloud/R2/private graph behavior.",
+        "Source implementation still requires a bounded Codex leaf with exact source owners, non-goals, validation commands, and proof artifacts."
+      ],
+      "validation_summary": [
+        "focused Time tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "VSP-04/F owner-review package frame ID 202:93 and durable proof paths",
+        "owner approval evidence path",
+        "live SwiftUI screenshot matrix after source implementation",
+        "accessibility and reduced-motion proof after source implementation",
+        "runtime mutation proof when source changes",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-05",
+      "likely_parent_issue": "AMB-1484",
+      "recommended_parent_title": "VSP-05 Capture Open Field Composer",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "capture",
+        "global-composer",
+        "yellow-proof",
+        "owner-approved-direction",
+        "selected-f-quiet-placement",
+        "owner-review-package",
+        "owner-approved-target"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Capture SwiftUI parity leaf from owner-approved VSP-05/F package",
+          "scope": "Composer/Capture and Stage overlay routing only, preserving VSP-01 shell; implement the approved F Quiet Placement Review package after explicit source authorization",
+          "recommended_status": "Spec Ready after implementation authorization"
+        },
+        {
+          "title": "Prove Capture keyboard, route preview, receipt, and accessibility states",
+          "scope": "Dynamic Type, VoiceOver order/actions, Reduce Motion static proof step, Reduce Transparency, Increase Contrast, haptics, keyboard/device screenshots, offline save/proposal/receipt proof",
+          "recommended_status": "Spec Ready after source leaf exists"
+        }
+      ],
+      "blocked_by": [
+        "source implementation authorization",
+        "keyboard/device proof after source implementation",
+        "accessibility and reduced-motion proof after source implementation",
+        "offline save/proposal/receipt runtime proof after source implementation"
+      ],
+      "acceptance_summary": [
+        "Owner-approved visual/Figma target is VSP-05/F Quiet Placement Review owner-review package R3 at node 217:93.",
+        "Use F as the Capture implementation target; D may inform keyboard/focus implementation expectations, but the approved target is not a B/D/F synthesis.",
+        "Capture remains global composer.",
+        "No tab, root surface, inbox, notes feed, category wall, chatbot, persistent floating plus surface, or competing shell affordance.",
+        "Approved package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshots.",
+        "Offline save/proposal/receipt states must be proven before Green.",
+        "No VSP-01 shell mutation, no Motion destination, no cloud LLM core, and no R2/private graph behavior."
+      ],
+      "validation_summary": [
+        "Figma Production Gate review and owner package approval recorded before implementation",
+        "focused Capture tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "VSP-05/F owner-review package node 217:93 and child frame IDs",
+        "owner direction and package approval evidence paths",
+        "keyboard/device screenshot proof after source implementation",
+        "runtime proof for save/proposal/receipt after source implementation",
+        "explicit non-claims for no Visual Green, no runtime/device/accessibility proof, no Release Green, no Done, and no shell mutation until actually proven"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-06",
+      "likely_parent_issue": "AMB-1485",
+      "recommended_parent_title": "VSP-06 You Native Settings",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "you",
+        "settings",
+        "owner-approved-direction",
+        "yellow-proof",
+        "figma-handoff",
+        "ready-for-review",
+        "owner-approved-package",
+        "spec-ready"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Owner-review VSP-06 Preference Weave final package R1",
+          "scope": "Review Figma node 240:93, durable screenshots, state matrix, accessibility matrix, SwiftUI anatomy, and non-claims; approve, repair, or reject before implementation",
+          "recommended_status": "Ready For Review"
+        },
+        {
+          "title": "Produce You SwiftUI parity leaf from approved VSP-06 package",
+          "scope": "Surfaces/You only; native settings rows, PreferenceWeaveField if approved, offline/account/privacy boundaries, and screenshot/a11y proof",
+          "recommended_status": "Spec Ready after final package approval"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell authority",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "live SwiftUI/accessibility/device proof after source implementation"
+      ],
+      "acceptance_summary": [
+        "Owner approved Part 03 Option C Preference Weave as VSP-06 direction.",
+        "Part 02 is rejected as too literal to supplied references.",
+        "Part 03 keeps only reference intent and uses Ambitions-owned object language.",
+        "You remains native settings/user system.",
+        "No old Profile root IA and no account-gated core value.",
+        "Every visible row opens real detail or an honest unavailable state.",
+        "Final candidate package R1 is Figma node 240:93 with child frames 240:103, 240:220, 240:583, 240:946, and 240:1110.",
+        "Package is Yellow / Ready For Review only; it does not claim source implementation, Visual Green, device proof, accessibility conformance, runtime proof, account readiness, or R2 readiness.",
+        "PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow.",
+        "Owner approved final package node 240:93 on 2026-07-01 for future implementation handoff; proof ceiling remains Yellow."
+      ],
+      "validation_summary": [
+        "focused You tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "final package frame ID 240:93 and durable proof paths",
+        "owner approval, repair request, or rejection for node 240:93",
+        "live SwiftUI screenshot matrix after source implementation",
+        "accessibility and reduced-motion proof after source implementation",
+        "offline/account/privacy boundary proof after source implementation",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-07",
+      "likely_parent_issue": "AMB-1486",
+      "recommended_parent_title": "VSP-07 Trust Inspection Details",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "trust",
+        "inspection",
+        "yellow-proof",
+        "figma-exploration",
+        "owner-selected-direction",
+        "selected-f-attached-receipt-stack",
+        "part-02-refinement",
+        "owner-approved-direction",
+        "selected-a-object-wake-stack",
+        "part-02-approved",
+        "owner-review-package",
+        "ready-for-review",
+        "object-wake-stack",
+        "candidate-package",
+        "owner-approved-package",
+        "spec-ready"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Build final VSP-07 Object Wake Stack candidate package",
+          "scope": "Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots from owner-approved node 250:104",
+          "recommended_status": "Complete in repo evidence; pending owner review"
+        },
+        {
+          "title": "Owner-review final VSP-07 Object Wake Stack package",
+          "scope": "Owner approves, repairs, or rejects the final package before any source implementation issue is created",
+          "recommended_status": "Complete in repo evidence; owner approved"
+        },
+        {
+          "title": "Produce Trust inspection SwiftUI parity leaf",
+          "scope": "Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces",
+          "recommended_status": "Spec Ready after implementation authorization"
+        }
+      ],
+      "blocked_by": [
+        "surface object existence from VSP-02 through VSP-06",
+        "VSP-09 accessibility matrix",
+        "live SwiftUI/device/accessibility/runtime proof"
+      ],
+      "acceptance_summary": [
+        "Trust remains contextual inspection detail.",
+        "No Proof, Source, Privacy, History, or Receipts root surfaces.",
+        "Copy cannot overclaim proof or privacy readiness.",
+        "Part 01 exploration board is node 244:93 with options A-F.",
+        "Option E Privacy Boundary is retained as VSP-08 context because it carries account/R2/Source Atlas boundary risk.",
+        "Owner selected Option F Attached Receipt Stack as the VSP-07 Part 01 direction on 2026-07-01.",
+        "Part 02 must keep receipts attached to owning objects and prevent activity-feed/history/root-surface drift.",
+        "Option C remains a historical guardrail for object attachment; it is not the selected direction.",
+        "Part 02 refinement board is node 250:93 with options A-F derived from owner-selected Option F Attached Receipt Stack.",
+        "Owner approved Option A Object Wake Stack as the VSP-07 Part 02 direction on 2026-07-01.",
+        "Prior Codex recommendation for Option B is superseded by owner approval of Option A.",
+        "Final package must keep receipts attached to the changed object and prevent receipt-feed/history/root-surface drift.",
+        "Final Object Wake Stack candidate package is node 257:93 with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, package readback, and durable repo proof images.",
+        "Owner approved final VSP-07 Object Wake Stack package node 257:93 on 2026-07-01.",
+        "VSP-07 is Spec Ready for a future bounded implementation leaf but remains Yellow until live SwiftUI/device/accessibility/runtime/privacy proof exists."
+      ],
+      "validation_summary": [
+        "focused Trust tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "Part 01 frame ID 244:93 and durable proof paths",
+        "approved frame ID",
+        "contextual inspection screenshot proof",
+        "privacy/trust disclosure proof",
+        "Option F selection proof",
+        "Part 02 owner-review package",
+        "Part 02 frame ID 250:93 and durable proof paths",
+        "Option A owner approval proof",
+        "node 257:93 package proof paths",
+        "live SwiftUI parity proof after implementation",
+        "device/accessibility/runtime proof after implementation"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-08",
+      "likely_parent_issue": "AMB-1487",
+      "recommended_parent_title": "VSP-08 External Boundaries",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "external-boundary",
+        "privacy",
+        "yellow-proof",
+        "owner-approved-target",
+        "final-package",
+        "airlock-review-gate",
+        "spec-ready"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "VSP-08A policy readback for account, offline, R2, Source Atlas, AI boundary",
+          "scope": "docs/Figma/owner review only",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "VSP-08B implementation proof after policy approval",
+          "scope": "public/reference-only R2 and offline no-account proof",
+          "recommended_status": "Backlog"
+        }
+      ],
+      "blocked_by": [
+        "privacy-boundary proof",
+        "offline no-account proof",
+        "R2 request-shape proof",
+        "live SwiftUI/device/accessibility proof"
+      ],
+      "acceptance_summary": [
+        "Final VSP-08 Airlock Review Gate candidate package R1 is node 272:93.",
+        "Package is built from owner-selected Part 01 Option B Airlock Review Gate only.",
+        "Offline no-account core value remains usable.",
+        "Ambitions Account is optional identity, entitlement, recovery, and support only.",
+        "R2/Source Atlas is public/reference/freshness only.",
+        "No private graph egress and no external/cloud LLM core runtime.",
+        "Widgets, shortcuts, share, notifications, calendar/EventKit, and deep links are inspectable boundaries, not root surfaces.",
+        "No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.",
+        "Owner approved final VSP-08 Airlock Review Gate package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf.",
+        "Spec Ready does not claim privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done."
+      ],
+      "validation_summary": [
+        "privacy/request-shape proof after source implementation",
+        "python3 scripts/ambitions-local-first-boundary-scan.py when applicable",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "owner approval evidence path",
+        "approved policy readback",
+        "request-shape artifacts",
+        "offline no-account proof",
+        "privacy-boundary proof",
+        "final package frame ID 272:93 and durable proof paths"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-09",
+      "likely_parent_issue": "AMB-1488",
+      "recommended_parent_title": "VSP-09 Motion / Haptics / Accessibility Matrix",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "accessibility",
+        "motion",
+        "haptics",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Define cross-VSP accessibility/motion/haptics acceptance matrix",
+          "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, transparency, haptics",
+          "recommended_status": "Spec Ready"
+        },
+        {
+          "title": "Attach manual/device proof for accessibility and haptics",
+          "scope": "proof only; no product UI Green without proof",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "manual accessibility proof",
+        "device haptic note"
+      ],
+      "acceptance_summary": [
+        "Motion remains behavior, not destination.",
+        "Every major VSP has static/reduced-motion equivalent.",
+        "No visual Green without accessibility matrix proof."
+      ],
+      "validation_summary": [
+        "focused accessibility tests after source implementation",
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "owner-approved accessibility matrix",
+        "Reduce Motion walkthrough",
+        "haptic device note"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-10",
+      "likely_parent_issue": "AMB-1489",
+      "recommended_parent_title": "VSP-10 Implementation Anatomy",
+      "recommended_status": "Spec Ready",
+      "recommended_labels": [
+        "VSP",
+        "implementation-anatomy",
+        "provenance",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Maintain Git-owned VSP SwiftUI source-owner registry",
+          "scope": "docs/design/provenance only",
+          "recommended_status": "Spec Ready"
+        },
+        {
+          "title": "Generate source inventory and provenance audit",
+          "scope": "scripts and generated docs only",
+          "recommended_status": "Spec Ready"
+        }
+      ],
+      "blocked_by": [
+        "component preview proof"
+      ],
+      "acceptance_summary": [
+        "Git registry is canonical for Codex source ownership.",
+        "Linear is mirror only.",
+        "Figma annotations are generated/manual and Code-Connect-free."
+      ],
+      "validation_summary": [
+        "python3 scripts/ambitions-component-inventory-generate.py",
+        "python3 scripts/ambitions-provenance-report-generate.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "generated inventories",
+        "audit report",
+        "owner approval record",
+        "non-claims for Code Connect and Visual Green"
+      ],
+      "do_not_create_now": true
+    }
+  ]
+}

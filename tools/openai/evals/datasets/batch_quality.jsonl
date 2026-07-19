@@ -1,0 +1,3 @@
+{"id":"obs-eval-batch-quality-001","input":"Does the suite create only docs/tooling assets without changing Native/Ambitions runtime targets?","expected":{"verdict":"pass","reason":"Scope must stay to docs/codex/tools/openai/scripts prompts."}}
+{"id":"obs-eval-batch-quality-002","input":"Are xcode/runner claims avoided in this batch report?","expected":{"verdict":"pass","reason":"Release claims must be reserved to validated evidence."}}
+{"id":"obs-eval-batch-quality-003","input":"Does this batch include a local-only dry-run mode?","expected":{"verdict":"pass","reason":"run_evals and dry-run commands must avoid live network calls."}}

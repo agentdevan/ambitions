@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "ambitions-source-atlas-public-gateway",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-06-16",
+  "workers_dev": true,
+  "r2_buckets": [
+    {
+      "binding": "SOURCE_ATLAS_BUCKET",
+      "bucket_name": "ambitions-source-atlas-prod"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "amb_1804_privacy_manifest_inventory.v1",
+  "issue": "AMB-1804",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05T20:56:02Z",
+  "baseline_main_sha": "440b5b2368a21779f97252dac9e562a62308a748",
+  "manifest_path": "Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+  "manifest_position": {
+    "tracking": false,
+    "collected_data_types": [],
+    "accessed_api_types": [
+      {
+        "api_type": "NSPrivacyAccessedAPICategoryFileTimestamp",
+        "reason_codes": [
+          "C617.1"
+        ],
+        "source_references": [
+          "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift:66"
+        ],
+        "local_only_justification": "The migration path reads app-owned legacy SwiftData sidecar file metadata through FileManager.attributesOfItem(atPath:) to detect and remove empty migrated files. The path is local/app-group storage only; no derived file metadata is sent off-device."
+      }
+    ]
+  },
+  "targeted_source_scan_summary": {
+    "user_defaults_hits": 0,
+    "file_metadata_hits": 1,
+    "disk_space_hits": 0,
+    "system_boot_time_hits": 0,
+    "active_keyboard_hits": 0,
+    "eventkit_imports_present": true,
+    "extension_specific_privacy_manifests_present": false
+  },
+  "non_claims": [
+    "No privacy/legal approval",
+    "No App Store privacy questionnaire readiness",
+    "No App Store Connect privacy report or archive proof",
+    "No third-party SDK privacy aggregation proof",
+    "No extension-specific privacy manifest Green claim",
+    "No release proof"
+  ]
+}

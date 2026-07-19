@@ -1,0 +1,310 @@
+name: Ambitions
+options:
+  minimumXcodeGenVersion: 2.38.0
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    SWIFT_STRICT_CONCURRENCY: complete
+    IPHONEOS_DEPLOYMENT_TARGET: 26.0
+packages:
+  AmbitionsPackages:
+    path: Packages/AmbitionsDesignSystem
+targets:
+  Ambitions:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/Ambitions
+        excludes:
+          - "**/*.md"
+          - "Resources/**"
+          - "Support/Info.plist"
+          - "Core/Time/AmbitionsClock.swift"
+          - "Core/Time/DayBoundaryScheduler.swift"
+          - "Core/Time/PreviewClock.swift"
+          - "Core/Time/RuntimeTickPolicy.swift"
+          - "Core/Time/SystemClock.swift"
+          - "Core/Time/TimeZoneProvider.swift"
+          - "Core/Time/TodayDayBoundaryRefreshPolicy.swift"
+      - path: Native/Ambitions/Resources/Assets.xcassets
+        buildPhase: resources
+      - path: Native/Ambitions/Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
+      - path: Native/Ambitions/Resources/source-atlas-public-refresh-targets.json
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios
+        PRODUCT_NAME: Ambitions
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Native/Ambitions/Support/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        DEVELOPMENT_ASSET_PATHS: Native/Ambitions/PreviewSupport
+        CODE_SIGN_ENTITLEMENTS: Native/Ambitions/Support/Ambitions.entitlements
+    dependencies:
+      - target: AmbitionsTimeFoundation
+      - package: AmbitionsPackages
+        product: AmbitionsDesignSystem
+      - package: AmbitionsPackages
+        product: AmbitionsWidgetUI
+      - target: AmbitionsWidgetExtension
+        embed: true
+      - target: AmbitionsShareExtension
+        embed: true
+  AmbitionsTimeFoundation:
+    type: framework
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/Ambitions/Core/Time/AmbitionsClock.swift
+      - path: Native/Ambitions/Core/Time/DayBoundaryScheduler.swift
+      - path: Native/Ambitions/Core/Time/PreviewClock.swift
+      - path: Native/Ambitions/Core/Time/RuntimeTickPolicy.swift
+      - path: Native/Ambitions/Core/Time/SystemClock.swift
+      - path: Native/Ambitions/Core/Time/TimeZoneProvider.swift
+      - path: Native/Ambitions/Core/Time/TodayDayBoundaryRefreshPolicy.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.timefoundation
+        GENERATE_INFOPLIST_FILE: YES
+        MACH_O_TYPE: staticlib
+        SKIP_INSTALL: YES
+  AmbitionsWidgetExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsWidgetExtension
+        excludes:
+          - "**/*.md"
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceScopeAllowlist.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.widgetextension
+        PRODUCT_NAME: AmbitionsWidgetExtension
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Native/AmbitionsWidgetExtension/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        CODE_SIGN_ENTITLEMENTS: Native/AmbitionsWidgetExtension/AmbitionsWidgetExtension.entitlements
+  AmbitionsShareExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsShareExtension
+        excludes:
+          - "**/*.md"
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.shareextension
+        PRODUCT_NAME: AmbitionsShareExtension
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Native/AmbitionsShareExtension/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        CODE_SIGN_ENTITLEMENTS: Native/AmbitionsShareExtension/AmbitionsShareExtension.entitlements
+    dependencies:
+      - sdk: AppIntents.framework
+  AmbitionsTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsTests
+        excludes:
+          - "**/*.md"
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: Ambitions
+      - target: AmbitionsTimeFoundation
+      - package: AmbitionsPackages
+        product: AmbitionsDesignSystem
+  AmbitionsModuleTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsModuleTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: AmbitionsTimeFoundation
+  AmbitionsUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsUITests
+        excludes:
+          - "**/*.md"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.uitests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: Ambitions
+      - sdk: AppIntents.framework
+schemes:
+  Ambitions:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsWidgetExtension: all
+        AmbitionsShareExtension: all
+        AmbitionsTests: [test]
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    archive:
+      config: Release
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - name: AmbitionsTests
+        - name: AmbitionsUITests
+  AmbitionsUnitTests:
+    build:
+      targets:
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+  AmbitionsModuleTests:
+    build:
+      targets:
+        AmbitionsModuleTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsModuleTests
+  AmbitionsSmoke:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/Smoke.xctestplan
+          defaultPlan: true
+  AmbitionsRuntime:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+      testPlans:
+        - path: Native/TestPlans/Runtime.xctestplan
+          defaultPlan: true
+  AmbitionsAccessibility:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+      testPlans:
+        - path: Native/TestPlans/Accessibility.xctestplan
+          defaultPlan: true
+  AmbitionsScreenshots:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/Screenshots.xctestplan
+          defaultPlan: true
+  AmbitionsReleaseCandidate:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsWidgetExtension: all
+        AmbitionsShareExtension: all
+        AmbitionsTests: [test]
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    archive:
+      config: Release
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - name: AmbitionsTests
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/ReleaseCandidate.xctestplan
+          defaultPlan: true
+  AmbitionsUITests:
+    build:
+      targets:
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsUITests

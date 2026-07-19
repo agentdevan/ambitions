@@ -1,0 +1,12 @@
+{
+  "category": "haptics",
+  "items": {
+    "completion": "completion",
+    "correction": "correction",
+    "reschedule": "reschedule",
+    "routeChange": "route change",
+    "selection": "selection",
+    "warning": "warning"
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

@@ -1,0 +1,46 @@
+{
+  "category": "component",
+  "items": {
+    "ctaPrimary": {
+      "meaning": "primary action",
+      "padding": 16,
+      "radius": 999
+    },
+    "ctaSecondary": {
+      "meaning": "secondary action",
+      "padding": 14,
+      "radius": 18
+    },
+    "disclosureRow": {
+      "meaning": "source / proof / receipt row",
+      "padding": 12,
+      "radius": 16
+    },
+    "panelCompact": {
+      "meaning": "dense secondary panel",
+      "padding": 16,
+      "radius": 18
+    },
+    "panelHero": {
+      "meaning": "hero object panel",
+      "padding": 24,
+      "radius": 30
+    },
+    "panelStandard": {
+      "meaning": "standard rich panel",
+      "padding": 20,
+      "radius": 24
+    },
+    "proofChip": {
+      "meaning": "proof summary chip",
+      "padding": 10,
+      "radius": 16
+    },
+    "sourceBadge": {
+      "meaning": "source freshness badge",
+      "padding": 10,
+      "radius": 999
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

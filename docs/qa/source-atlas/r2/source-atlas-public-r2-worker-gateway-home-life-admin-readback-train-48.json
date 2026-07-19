@@ -1,0 +1,409 @@
+{
+  "activeCurrentHeadResponses": [
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    },
+    {
+      "byteCount": 0,
+      "contentType": "application/json; charset=utf-8",
+      "gatewayHeader": "production-stable-public-reference",
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "HEAD",
+      "path": "source-atlas/v1/production/stable/home_life_admin/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": null,
+      "status": 200
+    }
+  ],
+  "allowedHomeLifeAdminResponses": [
+    {
+      "byteCount": 1696,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "17d107a20ba1fc06b087b3e4c0b0b6bba5bb13facc66a1767cdef40422630d67",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=120",
+        "content-length": "1696",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/current.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "17d107a20ba1fc06b087b3e4c0b0b6bba5bb13facc66a1767cdef40422630d67",
+      "status": 200
+    },
+    {
+      "byteCount": 1238,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "d34d9a61dd9b3c3b28ae8bc33ed6e2b161480168c0a18990e96ea767965f28aa",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "1238",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "d34d9a61dd9b3c3b28ae8bc33ed6e2b161480168c0a18990e96ea767965f28aa",
+      "status": 200
+    },
+    {
+      "byteCount": 1393,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "920ddbace8ccc6c7998fcbce731d0751fbc3a58d1d4d014325552923bbf7ddda",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "1393",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "920ddbace8ccc6c7998fcbce731d0751fbc3a58d1d4d014325552923bbf7ddda",
+      "status": 200
+    },
+    {
+      "byteCount": 8596,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "8596",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+      "status": 200
+    },
+    {
+      "byteCount": 24573,
+      "contentType": "application/json; charset=utf-8",
+      "expectedSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "cache-control": "public, max-age=3600",
+        "content-length": "24573",
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+      "publicGatewayHeader": "true",
+      "publicHeadersPresent": true,
+      "sha256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+      "status": 200
+    }
+  ],
+  "blockedRouteResponses": [
+    {
+      "blockedAsExpected": true,
+      "byteCount": 9,
+      "contentType": "text/plain;charset=UTF-8",
+      "gatewayHeader": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/current.json?goal_text=replace_sink",
+      "publicGatewayHeader": null,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    {
+      "blockedAsExpected": true,
+      "byteCount": 9,
+      "contentType": "text/plain;charset=UTF-8",
+      "gatewayHeader": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/claims.json",
+      "publicGatewayHeader": null,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    {
+      "blockedAsExpected": true,
+      "byteCount": 9,
+      "contentType": "text/plain;charset=UTF-8",
+      "gatewayHeader": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/home_life_admin/private_graph.json",
+      "publicGatewayHeader": null,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    {
+      "blockedAsExpected": true,
+      "byteCount": 18,
+      "contentType": "text/plain;charset=UTF-8",
+      "gatewayHeader": null,
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "18",
+        "content-type": "text/plain;charset=UTF-8",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "POST",
+      "path": "source-atlas/v1/production/stable/home_life_admin/current.json",
+      "publicGatewayHeader": null,
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405
+    }
+  ],
+  "checks": [
+    {
+      "name": "allowed_public_objects_hash_match",
+      "passed": true
+    },
+    {
+      "name": "public_gateway_headers_present",
+      "passed": true
+    },
+    {
+      "name": "blocked_routes_rejected",
+      "passed": true
+    },
+    {
+      "name": "active_current_heads_available",
+      "passed": true
+    },
+    {
+      "name": "pack_consistency",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "home_life_admin",
+  "freshnessRevocationProof": "Current pointer, revocation manifest, and LKG pointer are public and SHA-256 verified through Worker readback.",
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayHomeLifeAdminReadbackProof.v1",
+  "licenseTermsProof": "Ready.gov, Energy.gov, and USA.gov legal/terms packet is Green for internal Ambitions technical review; outside legal approval is not claimed.",
+  "lkgRollbackProof": "LKG object is allowlisted, read back, and hash-verified for native fallback use.",
+  "manifestSHA256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+  "noPrivateGraphEgressProof": "Blocked route checks reject private-looking markers and internal slices remain unavailable through the public Worker allowlist.",
+  "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+  "packSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "currentPackSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "manifestPackSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+    "packBodyPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "packBodySHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+    "packHashConsistent": true,
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "17d107a20ba1fc06b087b3e4c0b0b6bba5bb13facc66a1767cdef40422630d67",
+    "workerCurrentPointerSHA256": "17d107a20ba1fc06b087b3e4c0b0b6bba5bb13facc66a1767cdef40422630d67"
+  },
+  "productionNonClaims": [
+    "not outside legal approval",
+    "not full Source Atlas Green",
+    "not universal goal coverage",
+    "not release readiness",
+    "not App Store readiness",
+    "not private life graph storage",
+    "not a final user plan, timetable, or Step generator",
+    "not emergency response advice",
+    "not unsafe repair guidance",
+    "not eligibility, loan, or contractor advice"
+  ],
+  "provenanceCompletenessProof": "Pack manifest and pack body are consistent with four packable home_life_admin claims with complete provenance from the claim frontier report.",
+  "r2PublisherReport": "docs/qa/source-atlas/r2/source-atlas-home-life-admin-r2-publisher-remote-r2-train-48.json",
+  "r2RequestPrivacyProof": "Worker requests are path-only public object reads; query strings are rejected and no private user context is accepted.",
+  "restrictedSourceExclusionProof": "Only approved public-government source lanes are in the pack; restricted or lookup-only sources are not exposed.",
+  "status": "green_for_bounded_home_life_admin_gateway_https_readback_yellow_overall_source_atlas",
+  "valid": true,
+  "workerURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "workerVersionID": "07c47553-733f-45a7-9b26-6fe19a33d40a"
+}

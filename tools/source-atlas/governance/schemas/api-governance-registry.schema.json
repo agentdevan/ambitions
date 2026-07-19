@@ -1,0 +1,64 @@
+{
+  "$id": "ambitions.sourceAtlas.apiGovernanceRegistry.schema.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "api_policies": {
+      "items": {
+        "required": [
+          "api_policy_id",
+          "source_id",
+          "api_mode",
+          "key_required",
+          "env_var_name",
+          "missing_key_behavior",
+          "rate_limit_per_second",
+          "rate_limit_per_minute",
+          "daily_budget_limit",
+          "monthly_budget_limit",
+          "max_records_per_run",
+          "max_pages_per_run",
+          "timeout_seconds",
+          "retry_policy",
+          "backoff_policy",
+          "circuit_breaker_policy",
+          "live_flag_required",
+          "execute_flag_required",
+          "secret_redaction_required",
+          "high_volume_review_required",
+          "budget_owner",
+          "review_owner",
+          "review_status",
+          "last_reviewed_at",
+          "next_review_due_at",
+          "approval_status",
+          "approval_artifact_path",
+          "evidence_output_policy",
+          "schema_version"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "kind": {
+      "const": "ambitions.sourceAtlas.apiGovernanceRegistry.v1"
+    },
+    "registries_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "registries_version",
+    "updated_at",
+    "api_policies"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,46 @@
+name: Ambitions Constitution Audit
+
+on:
+  pull_request:
+    paths:
+      - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+      - "docs/constitution/**"
+      - "scripts/ambitions-constitution-audit.py"
+      - ".github/workflows/ambitions-constitution-audit.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+      - "docs/constitution/**"
+      - "scripts/ambitions-constitution-audit.py"
+      - ".github/workflows/ambitions-constitution-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: constitution-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  constitutional-registry:
+    name: Constitutional registry integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+
+      - name: Use Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile audit
+        run: python3 -m py_compile scripts/ambitions-constitution-audit.py
+
+      - name: Run fail-closed constitutional audit
+        run: python3 scripts/ambitions-constitution-audit.py

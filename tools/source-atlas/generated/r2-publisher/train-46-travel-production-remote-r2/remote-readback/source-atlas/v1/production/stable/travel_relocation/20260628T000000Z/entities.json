@@ -1,0 +1,37 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "travel_relocation",
+      "entity_id": "public_entity.15287c66d2e4cd56",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "USA.gov publishes public change-address reference context for USPS mail forwarding and other government services to update, not address submission, legal advice, or a custom moving plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "usa.gov.change_address"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "travel_relocation",
+      "entity_id": "public_entity.d952327697f76faf",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Travel.State.Gov publishes destination Travel Advisories with risk level indicators and issue dates as public safety notice context, not emergency advice, a safety guarantee, or itinerary planning.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "state.travel.public_travel"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "travel_relocation",
+      "entity_id": "public_entity.da1775449f7f9e5e",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Travel.State.Gov publishes U.S. passport application help and resources as official public travel document reference context, not visa advice, legal advice, guaranteed eligibility, or a custom itinerary.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "state.travel.public_travel"
+    }
+  ]
+}

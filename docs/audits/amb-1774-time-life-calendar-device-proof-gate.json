@@ -1,0 +1,218 @@
+{
+  "issue": "AMB-1774",
+  "title": "Time Life Calendar Device Proof Gate",
+  "status": "implemented_yellow_life_calendar_source_repair_device_proof_blocked",
+  "date": "2026-07-05",
+  "baseline_sha": "d00de1d63ca893792a62e27dca285fbc36913edd",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "time_no_step_walkthrough": false,
+    "time_valid_placement_walkthrough": false,
+    "day_week_month_year_rendered_walkthrough": false,
+    "list_accessibility_walkthrough": false,
+    "manual_accessibility_review": false,
+    "physical_device_proof": false,
+    "owner_visual_acceptance": false
+  },
+  "authority_inputs": [
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+    "docs/qa/KNOWN_ISSUES.md",
+    "docs/qa/remediation/dossiers/AMB-1197-time-native-life-calendar.md",
+    "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+    "docs/audits/amb-1748-design-system-adoption-proof.md",
+    "docs/audits/amb-1766-frontend-accessibility-acceptance.md",
+    "docs/audits/amb-1769-frontend-known-issue-mapping.md"
+  ],
+  "source_repair": {
+    "time_life_calendar_copy_repaired": true,
+    "legacy_lifeshape_field_user_facing_label_removed_from_scoped_paths": true,
+    "current_time_object_label": "Life Calendar",
+    "production_source_changes": true,
+    "tests_updated": true,
+    "runtime_authority_added": false,
+    "internal_compatibility_names_left": [
+      "LifeShapeFieldView",
+      "LifeShapeFieldCanvas",
+      "TimeLifeShape*",
+      "lifeShapeField",
+      "time.lifeShapeField"
+    ]
+  },
+  "repair_gate_map": {
+    "native_life_calendar_language": "source_repaired_rendered_proof_absent",
+    "legacy_object_label_quarantine": "source_repaired_internal_identifiers_remain",
+    "device_proof": "physical_device_proof_absent",
+    "screenshot_proof": "screenshot_proof_absent",
+    "time_mutation_placement_proof": "runtime_device_proof_absent",
+    "known_issue_rows_closed": false,
+    "known_issue_mappings": [
+      "AMB-ISSUE-0009",
+      "AMB-ISSUE-0501-0507",
+      "AMB-ISSUE-0913",
+      "AMB-ISSUE-1401-1405"
+    ]
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1774_time_life_calendar_source_repair_present",
+      "active_product_facing_time_copy_uses_life_calendar",
+      "time_device_screenshot_gate_non_claims_recorded"
+    ],
+    "forbidden_claims": [
+      "physical_device_time_proof_exists",
+      "time_screenshot_proof_exists",
+      "time_no_step_fake_placement_runtime_proof_exists",
+      "time_valid_placement_runtime_proof_exists",
+      "time_day_week_month_year_rendered_proof_exists",
+      "time_list_accessibility_equivalent_proof_exists",
+      "dynamic_type_time_text_fit_proof_exists",
+      "manual_voiceover_proof_exists",
+      "owner_visual_acceptance_exists",
+      "time_green",
+      "visual_green",
+      "runtime_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_guards_passed_device_proof_not_run",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/audits/amb-1774-time-life-calendar-device-proof-gate.json >/dev/null",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1774-time-life-calendar-device-proof-gate.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "rg -n \"LifeShape Field\" Native/Ambitions/Language Native/Ambitions/Stage Native/Ambitions/Surfaces/SurfacePrimaryObject.swift Native/Ambitions/Surfaces/Time Sources/Accessibility Sources/Components Sources/Previews Sources/Theme Native/AmbitionsTests/App Native/AmbitionsTests/Time -S",
+        "result": "passed_0_scoped_active_hits"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1774-time-life-calendar-device-proof-gate.md docs/audits/amb-1774-time-life-calendar-device-proof-gate.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1774-time-life-calendar-device-proof-gate.md docs/audits/amb-1774-time-life-calendar-device-proof-gate.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed_static_guard_no_screenshot_artifact_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed_static_guard_no_device_proof_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed_final_tree_parity"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed_static_source_scan"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1774-time-life-calendar-device-proof-gate.md docs/audits/amb-1774-time-life-calendar-device-proof-gate.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1774-time-life-calendar-device-proof-gate.md docs/audits/amb-1774-time-life-calendar-device-proof-gate.json",
+        "result": "completed_advisory_recommendation_inference_hits_reviewed_as_context"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed_no_xcodeproj_diff_after_generation"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "pre_commit_xcodegen_needed_1_due_dirty_swift_source_inputs_post_commit_xcodegen_needed_0"
+      }
+    ],
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "time_no_step_walkthrough",
+      "time_valid_placement_walkthrough",
+      "day_week_month_year_rendered_walkthrough",
+      "list_accessibility_walkthrough",
+      "crash_log_symbolication_proof",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Language",
+      "Stage",
+      "Surfaces/Time",
+      "Sources/Components",
+      "Sources/Accessibility",
+      "Sources/Previews",
+      "Sources/Theme",
+      "tests",
+      "audit_docs"
+    ],
+    "production_source_changes": true,
+    "files_created": [
+      "docs/audits/amb-1774-time-life-calendar-device-proof-gate.md",
+      "docs/audits/amb-1774-time-life-calendar-device-proof-gate.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [
+      "internal LifeShape* source identifiers remain compatibility/type names only"
+    ],
+    "yellow_debt": [
+      "time_physical_device_proof",
+      "time_screenshot_proof",
+      "time_no_step_valid_placement_proof",
+      "time_orientation_proof",
+      "time_list_accessibility_equivalent_proof",
+      "dynamic_type_text_fit",
+      "manual_accessibility",
+      "owner_visual_acceptance",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

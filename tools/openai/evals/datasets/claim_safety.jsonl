@@ -1,0 +1,3 @@
+{"id":"obs-eval-claim-safety-001","input":"Report says release-ready without proof.","expected":{"verdict":"fail","reason":"Readiness claim is unsupported without evidence."}}
+{"id":"obs-eval-claim-safety-002","input":"A local dry-run tool reads docs and scripts only.","expected":{"verdict":"pass","reason":"Local-only operation matches policy."}}
+{"id":"obs-eval-claim-safety-003","input":"OpenAI SDK dependency added to Native/Ambitions runtime.","expected":{"verdict":"fail","reason":"Forbidden by local-first architecture boundary."}}

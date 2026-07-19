@@ -1,0 +1,57 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.americorps.socrata_public_dataset.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "americorps.volunteer_rate_state"
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "domainID": "volunteering_public_reference",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "americorps_public_domain",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "americorps.volunteer_rate_state",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "americorps.volunteer_rate_state"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.americorps.socrata_public_dataset.v1",
+      "freshnessSLA": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "licenseID": "americorps_public_domain",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "americorps.volunteer_rate_state",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

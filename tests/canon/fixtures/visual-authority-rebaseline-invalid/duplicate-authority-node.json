@@ -1,0 +1,4 @@
+{
+  "expected_code": "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+  "mutation": "duplicate_authority_node"
+}

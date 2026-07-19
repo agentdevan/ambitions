@@ -1,0 +1,615 @@
+# AMB-1669 LocalRuntimeOS Rename Plan
+
+Status: Done / Source Green for rename-plan scope
+Date: 2026-07-04
+Scope: AMB-1669 M03 Runtime Simplification
+Baseline: `main` / `origin/main` `6bfac0ec7f054dcbfa0597fe3b9452d00e1b4a5c`
+Decision-record baseline: `main` / `origin/main` `348d7e4786c50cbec2e9f0ea7ca6786e528e487a`
+Final-review baseline: `main` / `origin/main` `f8f76ac0db2b406230ff3475a8ffc4f0729c44ea`
+
+## Purpose
+
+AMB-1669 keeps the LocalRuntimeOS mutation law while reducing architecture lore:
+
+```text
+Command -> Event -> Projection -> Receipt -> Replay
+```
+
+This artifact records the current folder/type dependency graph, target runtime map, API exposure posture, and applied rename slices.
+
+## Current Owner Graph
+
+Current source owner count after the `Continuity` slice: 19.
+
+| Current owner | Swift files | Target owner | Status |
+| --- | ---: | --- | --- |
+| Boundary | 18 | Boundary | First slice renamed from `RuntimeBoundary` |
+| Commands | 25 | Commands | Second slice renamed from `CommandSpine` |
+| Transactions | 12 | Transactions | Third slice renamed from `TransactionKernel` |
+| EventJournal | 10 | EventJournal | Retain name - decision recorded |
+| State | 4 | State | Ninth slice renamed from `ObjectState` |
+| Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
+| PrivateLifeRuntimeKernel | 37 | PrivateLifeRuntimeKernel | Retain name - decision recorded |
+| Planning | 68 | Planning | Tenth slice renamed from `PlanningEngine` |
+| Scheduling | 35 | Scheduling | Eleventh slice renamed from `TimeEngine` and collapsed numbered ScheduleInstall split filenames |
+| CaptureRouting | 20 | CaptureRouting | Twelfth slice renamed from `CaptureRouteGraph` |
+| Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
+| Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
+| ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
+| Continuity | 10 | Continuity | Thirteenth slice renamed from `SyncContinuity` |
+| SourceAtlas | 80 | SourceAtlas | Retain name - decision recorded |
+| PrivacySecurity | 12 | PrivacySecurity | Retain name - decision recorded |
+| Storage | 27 | Storage | Retain name |
+| Repair | 20 | Repair | Eighth slice renamed from `MigrationRepair` and split over-cap RuntimeDoctor repair operator types |
+| Diagnostics | 8 | Diagnostics | Retain name |
+
+## First Rename Slice
+
+Applied first:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/
+Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Boundary/
+Native/AmbitionsTests/LocalRuntimeOS/Boundary/
+```
+
+Reason:
+
+- `Boundary` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level architecture noun, not a behavior type.
+- The move changes canonical ownership without changing runtime behavior.
+- Behavior types such as `PrivateLifeRuntimeBoundary`, `SourceAtlasBoundary`, and `NetworkEgressPolicy` remain intact because they are concrete contract types, not folder owners.
+
+## Second Rename Slice
+
+Applied second:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/
+Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Commands/
+Native/AmbitionsTests/LocalRuntimeOS/Commands/
+```
+
+Reason:
+
+- `Commands` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level lore noun; retained Swift types such as
+  `AmbitionsCommand`, `CommandJournal`, and `CommandCompiler` already carry the
+  behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Commands` files exist and the old
+  `CommandSpine` production/test owner paths are gone.
+
+## Third Rename Slice
+
+Applied third:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/
+Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Transactions/
+Native/AmbitionsTests/LocalRuntimeOS/Transactions/
+```
+
+Reason:
+
+- `Transactions` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level architecture noun; retained Swift types such
+  as `RuntimeTransaction`, `RuntimeTransactionCoordinator`, and
+  `RuntimeMutationPlan` already carry the behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Transactions` files exist and the old
+  `TransactionKernel` production/test owner paths are gone.
+
+## Fourth Rename Slice
+
+Applied fourth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/
+Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Projections/
+Native/AmbitionsTests/LocalRuntimeOS/Projections/
+```
+
+Reason:
+
+- `Projections` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level architecture noun; retained Swift types such
+  as `ProjectionDefinition`, `ProjectionMaterializer`, and
+  `ProjectionStoreSurfaceReadAdapter` already carry the behavior contract
+  plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Projections` files exist and the old
+  `ProjectionEngine` production/test owner paths are gone.
+- The slice also renames the moved projector extension shards away from
+  `+02/+03/+04` filenames into descriptive owner-local filenames, so the move
+  does not introduce new blocked suffix-split files under the new owner.
+
+## Fifth Rename Slice
+
+Applied fifth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/
+Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/
+Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/
+```
+
+Reason:
+
+- `ExternalWrites` is explicitly named by AMB-1670's retained-owner test scope
+  and is the clearer half of AMB-1669's `ExternalWrites/Outbox` target.
+- `Outbox` would be too narrow for the owner because the folder also owns App
+  Intent handoff, Share Extension intake, external reconciliation, and
+  external-creation import source.
+- Concrete behavior types such as `SideEffectOutbox`, `NotificationOutbox`,
+  `EventKitOutbox`, `WidgetRefreshOutbox`, and side-effect ledger records remain
+  intact because they name behavior, not the folder owner.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `ExternalWrites` files exist and the
+  old `SideEffectSystem` production/test owner paths are gone.
+
+## Sixth Rename Slice
+
+Applied sixth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/
+Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Inspection/
+Native/AmbitionsTests/LocalRuntimeOS/Inspection/
+```
+
+Reason:
+
+- `Inspection` is the clearer half of AMB-1669's `Inspection/Receipts` target.
+- `Receipts` would be too narrow for the owner because the folder also owns
+  proof, source records, audit, undo, history, replay, tombstones, and
+  repository contracts.
+- The move changes canonical ownership without changing runtime behavior.
+- The moved owner-local commit-planner types now use `Inspection` names.
+- The ownership test now proves required `Inspection` files exist and the old
+  `TrustSystem` production/test owner paths are gone.
+- The slice also renames the moved receipt and event-ledger shard files away
+  from `+02/+03/+04/+05/+06/+07/+08` filenames into descriptive owner-local
+  filenames, so the move does not introduce new blocked suffix-split files
+  under the new owner.
+
+## Seventh Rename Slice
+
+Applied seventh:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/
+Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Search/
+Native/AmbitionsTests/LocalRuntimeOS/Search/
+```
+
+Reason:
+
+- `Search` is explicitly named by AMB-1669 target direction.
+- The old owner paired search with recall as folder-level lore; retained Swift
+  types such as `LocalSearchIndex`, `FTSIndex`, `MemoryLensService`, and
+  `FindActInspectResult` already carry the concrete behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing API types now use `Search*` names instead of `SearchRecall*`
+  names, and receipt/schema strings use `search` instead of `search_recall`.
+- The ownership test now proves required `Search` files exist and the old
+  `SearchRecall` production/test owner paths are gone.
+
+## Eighth Rename Slice
+
+Applied eighth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/
+Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Repair/
+Native/AmbitionsTests/LocalRuntimeOS/Repair/
+```
+
+Reason:
+
+- `Repair` is explicitly named by AMB-1669 target direction and AMB-1670's
+  retained-owner test scope.
+- The old owner paired migration and repair as a folder-level name; retained
+  Swift types such as `MigrationDSL`, `MigrationPlanner`, `RuntimeDoctor`,
+  `RepairPlanEngine`, and `RestoreRollback` already carry the concrete
+  behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing repair proof API types now use `RepairProof*` names instead of
+  `MigrationRepairProof*` names, and the DSL schema string uses `repair_dsl`
+  instead of `migration_repair_dsl`.
+- The ownership test now proves required `Repair` files exist and the old
+  `MigrationRepair` production/test owner paths are gone.
+- The slice also splits the touched `RuntimeDoctorRepairOperator.swift` type
+  cluster into descriptive owner-local files, so the moved owner does not leave
+  a diff-scoped Swift file above the 600-line remediation cap.
+
+## Ninth Rename Slice
+
+Applied ninth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ObjectState/
+Native/AmbitionsTests/LocalRuntimeOS/ObjectState/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/State/
+Native/AmbitionsTests/LocalRuntimeOS/State/
+```
+
+Reason:
+
+- `State` is explicitly named by AMB-1669 target direction.
+- The old owner used `ObjectState` as a folder-level architecture name; retained
+  Swift types such as `ObjectStateFamily`, `ObjectStateRegistry`, and
+  `ObjectStateWriteReceipt` still carry the concrete behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `State` files exist and the old
+  `ObjectState` production/test owner paths are gone.
+
+## Tenth Rename Slice
+
+Applied tenth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/
+Native/AmbitionsTests/LocalRuntimeOS/PlanningEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Planning/
+Native/AmbitionsTests/LocalRuntimeOS/Planning/
+```
+
+Reason:
+
+- `Planning` is explicitly named by AMB-1669 target direction.
+- The old owner used `PlanningEngine` as a folder-level architecture name;
+  retained Swift types such as `GoalPathPlanner`, `PlanRepairEngine`,
+  `SmallerStepEngine`, `StepElasticityEngine`, and `StepGraphCompiler` still
+  carry concrete behavior contracts plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace API now uses `PlanningRuntimeTrace` instead of
+  `PlanningEngineRuntimeTrace`.
+- The touched `+02` / `+03` / `+04` split filenames in this owner were renamed
+  to descriptive owner-local filenames in the same slice to comply with the
+  AMB-1658 remediation freeze.
+- The ownership test now proves required `Planning` files exist and the old
+  `PlanningEngine` production/test owner paths are gone.
+
+## Eleventh Rename Slice
+
+Applied eleventh:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/
+Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Scheduling/
+Native/AmbitionsTests/LocalRuntimeOS/Scheduling/
+```
+
+Reason:
+
+- `Scheduling` is explicitly named by AMB-1669 target direction.
+- The old owner used `TimeEngine` as a folder-level architecture name; retained
+  Swift types such as `PlacementEngine`, `RecurrenceEngine`,
+  `ProtectedTimeEngine`, and `TimeBlockGraph` still carry concrete behavior
+  contracts plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace API now uses `SchedulingRuntimeTrace` and
+  `SchedulingStableID` instead of `TimeEngineRuntimeTrace` and
+  `TimeEngineStableID`.
+- The touched ScheduleInstall `+02` / `+03` / `+04` split filenames were
+  renamed to descriptive owner-local filenames in the same slice to comply
+  with the AMB-1658 remediation freeze.
+- The ownership test now proves required `Scheduling` files exist and the old
+  `TimeEngine` production/test owner paths are gone.
+
+## Twelfth Rename Slice
+
+Applied twelfth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/
+Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/
+Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/
+```
+
+Reason:
+
+- `CaptureRouting` is explicitly named by AMB-1669 target direction.
+- The old owner used `CaptureRouteGraph` as a folder-level architecture name;
+  retained Swift types such as `CaptureRouteResolver` and
+  `CaptureRouteCommandMapping` still carry concrete routing behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace, service container, stable ID, file store, default
+  persistence folder, and test APIs now use `CaptureRouting*` names instead of
+  `CaptureRouteGraph*` names.
+- The ownership test now proves required `CaptureRouting` files exist and the
+  old `CaptureRouteGraph` production/test owner paths are gone.
+
+## Thirteenth Rename Slice
+
+Applied thirteenth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/
+Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Continuity/
+Native/AmbitionsTests/LocalRuntimeOS/Continuity/
+```
+
+Reason:
+
+- `Continuity` is explicitly named by AMB-1669 target direction.
+- The old owner used `SyncContinuity` as a folder-level architecture name;
+  retained Swift types such as `SyncEnvelope`, `SyncEligibilityPolicy`,
+  `CloudKitContinuityAdapter`, and `LivingPlanContinuitySync` still carry
+  concrete sync/CloudKit behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing authority gate, proof/check naming, RuntimeDoctor domain, and
+  tests now use `Continuity*` / `continuity` names.
+- The ownership test now proves required `Continuity` files exist and the old
+  `SyncContinuity` production/test owner paths are gone.
+
+## Retain/Collapse Decision Records
+
+These records close the AMB-1669 decision gap for remaining owner names after
+inspection of the Final Architecture Tree, implementation truth, current source,
+and owner tests. They do not move source, add runtime authority, widen API
+exposure, or claim AMB-1670 ownership-test completion.
+
+### EventJournal - retain
+
+Decision: retain `EventJournal`.
+
+Reason:
+
+- The Final Architecture Tree names `EventJournal/` under
+  `Core/LocalRuntimeOS/` with event, envelope, store, cursor, compactor, replay,
+  checksum, causal-clock, and tombstone-ledger responsibilities.
+- Current source has 10 owner-local Swift files for runtime event records,
+  append/replay, checksums, cursors, compaction, causal clocks, and tombstones.
+- Collapsing to `Events` would make the owner less concrete and would not
+  remove duplicate authority, because there is no separate retained `Events`
+  owner in the current tree.
+- This owner is the event leg of `Command -> Event -> Projection -> Receipt ->
+  Replay`, so the journal/replay wording is useful runtime law, not lore.
+
+Follow-up: executable ownership proof belongs in the next ownership-test train;
+this record only decides that AMB-1669 should not rename the folder.
+
+### PrivateLifeRuntimeKernel - retain
+
+Decision: retain `PrivateLifeRuntimeKernel`.
+
+Reason:
+
+- The Final Architecture Tree names `PrivateLifeRuntimeKernel/` with decision,
+  recommendation, capacity-fit, recovery, closure, proof, adaptation,
+  explanation, replayable-decision-trace, and personalization-ledger
+  responsibilities.
+- Current source has 37 owner-local Swift files for the private life decision
+  runtime and its typed local-runtime signals.
+- Renaming to `RuntimeKernel` would reduce product-law specificity without
+  deleting or collapsing duplicate authority.
+- Collapsing the owner into Planning, Scheduling, Inspection, or State would mix
+  decision/recommendation/capacity/recovery behavior into owners that already
+  have narrower canonical responsibilities.
+
+Follow-up: this owner still has source hygiene debt, including descriptive split
+cleanup in some files, but that requires a scoped source repair train rather
+than a folder-level AMB-1669 rename.
+
+### SourceAtlas - retain
+
+Decision: retain `SourceAtlas`.
+
+Reason:
+
+- Product and implementation truth define Source Atlas as the public/reference
+  pack and freshness boundary; the Final Architecture Tree names
+  `SourceAtlas/` with public-pack request, manifest, signature, cache,
+  freshness, last-known-good, R2 gateway, public-only firewall, and projection
+  responsibilities.
+- Current source has 80 owner-local Swift files and corresponding focused test
+  owners for public-only request compilation, private-graph rejection, manifest
+  verification, freshness evaluation, last-known-good cache selection,
+  SourceAtlas projection materialization, and bounded R2 request metadata.
+- Renaming to `ReferencePacks` would hide the broader Source Atlas boundary,
+  projection, ingestion, freshness, and public-only firewall responsibilities.
+- No new Source Atlas scope is approved here; this record retains the existing
+  canonical owner only.
+
+Follow-up: Source Atlas remains bounded to local source/test behavior. This
+record does not prove production R2 deployment, transparency logs, signing
+operations, app-wide Source Atlas consumption, or release readiness.
+
+### PrivacySecurity - retain
+
+Decision: retain `PrivacySecurity`.
+
+Reason:
+
+- The Final Architecture Tree names `PrivacySecurity/` with privacy
+  classification, redaction, egress firewall, export policy, local auth, file
+  protection, encrypted blob vault, privacy manifest, and sensitive-surface
+  responsibilities.
+- Current source has 12 owner-local Swift files for privacy classification,
+  redaction, egress, export review, local auth, file protection, encrypted
+  storage, privacy manifests, sensitive surfaces, safety jurisdiction gating,
+  and the moved storage privacy/security boundary.
+- Collapsing this owner into `Boundary` would blur runtime privacy/security
+  policy with account, network, source-atlas, and local-only boundary decisions.
+- Renaming to `Privacy` would drop security responsibilities that are already
+  source-present and explicitly named by current implementation truth.
+
+Follow-up: broader app-wide privacy firewall, network-egress enforcement, and
+privacy/legal approval remain outside AMB-1669.
+
+## API Exposure
+
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`,
+`ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`,
+`Scheduling`, `CaptureRouting`, and `Continuity` source contains no `public` or
+`open` Swift API declarations.
+
+The retained `EventJournal`, `PrivateLifeRuntimeKernel`, and `PrivacySecurity`
+source contains no `public` or `open` Swift API declarations. The retained
+`SourceAtlas` owner has existing public freshness-manifest model declarations in
+`SourceAtlasFreshnessBrokerModels.swift`; this decision-record slice does not
+add, remove, or widen that exposure.
+
+Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
+
+Known direct consumers of the moved and retained LocalRuntimeOS owners remain
+same-module, except for the existing `SourceAtlas` public freshness-manifest
+models noted above:
+
+- `Boundary`
+- `Commands`
+- `Transactions`
+- `EventJournal`
+- `Projections`
+- `ExternalWrites`
+- `Inspection`
+- `Search`
+- `Repair`
+- `State`
+- `Planning`
+- `Scheduling`
+- `CaptureRouting`
+- `Continuity`
+- `PrivateLifeRuntimeKernel`
+- `PrivacySecurity`
+- `SourceAtlas`
+- runtime/domain tests
+
+## Final Review
+
+AMB-1669 acceptance review on 2026-07-04:
+
+| Acceptance requirement | Current evidence |
+| --- | --- |
+| Generate current folder/type dependency graph. | Current Owner Graph above lists all 19 LocalRuntimeOS owners, Swift file counts, target owners, and status. |
+| Draft target runtime map. | Current Owner Graph and Retain/Collapse Decision Records define the target map. No direct rename candidate remains approved by this plan. |
+| Identify API exposure. | API Exposure section records moved/retained owner exposure and the one existing `SourceAtlas` public freshness-manifest model exposure. |
+| Rename one compartment at a time with no behavior changes. | Thirteen bounded rename slices are recorded above and in Linear comments, each preserving behavior names unless the name was owner-level lore. |
+| Use temporary typealiases only with expiry. | Current scan of `Native/Ambitions/Core/LocalRuntimeOS` and `Native/AmbitionsTests/LocalRuntimeOS` found no old-owner compatibility typealias shim from AMB-1669. Existing typealiases are same-owner or concrete store/type aliases, not temporary rename bridges. |
+| Update tests and docs. | LocalRuntimeOS tests, truth docs, source inventories, LocalRuntimeProof, and this audit were updated across the rename slices. |
+| Delete old names. | Current directory scan found no production/test LocalRuntimeOS owner directories named `RuntimeBoundary`, `CommandSpine`, `TransactionKernel`, `ProjectionEngine`, `SideEffectSystem`, `TrustSystem`, `SearchRecall`, `MigrationRepair`, `ObjectState`, `PlanningEngine`, `TimeEngine`, `CaptureRouteGraph`, or `SyncContinuity`. |
+| Final runtime map is smaller, concrete, documented, and import-clean. | Current owner graph is reduced to concrete owners; retained owner decisions are documented; `scripts/ambitions-xcode-build-for-testing.sh --batch AMB_1669_FINAL_REVIEW --timeout 45m --kill-after 60s` passed on current `main`. |
+
+Final-review validation:
+
+- Retired LocalRuntimeOS owner directory scan: passed, no retired
+  production/test owner directories found.
+- Temporary rename shim scan: passed, no AMB-1669 old-owner typealias shims
+  found.
+- `python3 scripts/ambitions-remediation-governance-check.py`: passed,
+  `GREEN remediation governance guard passed`, `changed_paths=0`.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py`: passed,
+  `valid=true`, `invalidAcceptedYellowIssues=0`.
+- `python3 scripts/ambitions-local-runtime-proof.py --json`: passed,
+  `status=green`, `checklistPassed=20/20`, `blockers=0`.
+- `scripts/ambitions-xcode-build-for-testing.sh --batch AMB_1669_FINAL_REVIEW --timeout 45m --kill-after 60s`: passed,
+  summary `.codex/xcode-summaries/AMB_1669_FINAL_REVIEW/20260704T121010Z/extract/summary.json`.
+
+## Proof Ceiling
+
+The applied rename slices can support Source Green for the folder-owner renames
+when their validation evidence is present. The final review above supports
+AMB-1669 Done / Source Green for the LocalRuntimeOS rename-plan scope:
+documented owner graph, target map, API exposure posture, one-compartment
+renames, no temporary rename shims, deleted retired owner directories, updated
+tests/docs, and import-clean current build proof. It does not claim:
+
+- all LocalRuntimeOS names simplified
+- AMB-1670 ownership-test completion
+- app-wide runtime completion
+- Visual Green
+- Release Green
+- device proof
+- accessibility proof
+- privacy/legal approval
+- TestFlight or App Store readiness
+- production R2 or CloudKit readiness
+
+## Next Rename Candidates
+
+No additional direct rename candidate remains approved by this plan.
+
+The `EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and
+`PrivacySecurity` retain/collapse decisions are recorded above. Any future move
+inside those owners must be a scoped source remediation or ownership-proof train,
+not another AMB-1669 folder-name cleanup. Such a train must update tests,
+current truth/proof references, and the LocalRuntimeProof owner list before
+closeout when source behavior or owner contracts change.

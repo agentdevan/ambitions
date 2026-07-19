@@ -1,0 +1,26 @@
+{
+  "category": "motion",
+  "items": {
+    "emphasis": {
+      "meaning": "important emphasis",
+      "seconds": 0.3
+    },
+    "micro": {
+      "meaning": "micro feedback",
+      "seconds": 0.12
+    },
+    "regular": {
+      "meaning": "standard object transition",
+      "seconds": 0.22
+    },
+    "route": {
+      "meaning": "route change",
+      "seconds": 0.28
+    },
+    "settle": {
+      "meaning": "settle animation",
+      "seconds": 0.18
+    }
+  },
+  "source_manifest_hash": "7e080c08ea5d211a71b5ccd60f1991f1ff2f6324d5682f276bbb4c9d5c2fb048"
+}

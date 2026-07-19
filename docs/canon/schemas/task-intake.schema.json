@@ -1,0 +1,38 @@
+{
+  "$id": "https://ambitions.local/canon/schemas/task-intake.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Untrusted request-only ChatGPT-to-Codex task intake. This document never authorizes implementation or merge.",
+  "properties": {
+    "intake_id": {"minLength": 1, "type": "string"},
+    "issue_reference": {"minLength": 1, "type": "string"},
+    "requested_changed_files": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_claim_ceiling": {"minLength": 1, "type": "string"},
+    "requested_proof": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_requirement_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_rollback": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_scope": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_skill_adapters": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
+    "requested_task_type": {"minLength": 1, "type": "string"},
+    "requested_validation": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "schema_version": {"const": 1, "type": "integer"},
+    "task_id": {"minLength": 1, "type": "string"}
+  },
+  "required": [
+    "schema_version",
+    "intake_id",
+    "task_id",
+    "issue_reference",
+    "requested_task_type",
+    "requested_scope",
+    "requested_requirement_ids",
+    "requested_changed_files",
+    "requested_validation",
+    "requested_proof",
+    "requested_rollback",
+    "requested_claim_ceiling",
+    "requested_skill_adapters"
+  ],
+  "title": "Ambitions Task Intake",
+  "type": "object"
+}

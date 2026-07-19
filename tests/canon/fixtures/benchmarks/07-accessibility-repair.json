@@ -1,0 +1,67 @@
+{
+  "applicable_requirement_ids": [
+    "A11Y-002",
+    "A11Y-DYNAMIC-TYPE-001",
+    "A11Y-INPUT-EQUIVALENCE-001",
+    "A11Y-PROOF-MATRIX-001",
+    "A11Y-READING-FOCUS-001",
+    "A11Y-REDUCED-EFFECTS-001",
+    "A11Y-STATUS-ERRORS-001",
+    "STANDARD-ACCEPTANCE-ACCESSIBILITY-001",
+    "STANDARD-ACCESSIBILITY"
+  ],
+  "approved_budget": 30000,
+  "approved_budget_class": "complex",
+  "expected_proof": [
+    "Current source, focused tests, regression tests, and claim-specific proof.",
+    "Claim-specific proof for claim_type=accessibility-proof must cover changed-file boundary Native/Ambitions/Interaction/Accessibility/, Native/Ambitions/Quality/Accessibility/ and applicable requirements A11Y-002, A11Y-DYNAMIC-TYPE-001, A11Y-INPUT-EQUIVALENCE-001, A11Y-PROOF-MATRIX-001, A11Y-READING-FOCUS-001, A11Y-REDUCED-EFFECTS-001, A11Y-STATUS-ERRORS-001, STANDARD-ACCEPTANCE-ACCESSIBILITY-001, STANDARD-ACCESSIBILITY."
+  ],
+  "expected_source_owners": [
+    "Native/Ambitions/Composer/",
+    "Native/Ambitions/DesignSystem/",
+    "Native/Ambitions/Interaction/Accessibility/",
+    "Native/Ambitions/Quality/Accessibility/",
+    "Native/Ambitions/Rendering/",
+    "Native/Ambitions/Stage/",
+    "Native/Ambitions/Surfaces/"
+  ],
+  "expected_validation": [
+    "Execute selected verification contracts: AUDIT-A11Y-PROOF-MATRIX-001, PROOF-A11Y-DYNAMIC-TYPE-001, PROOF-A11Y-REDUCED-EFFECTS-001, PROOF-A11Y-SEMANTIC-EQUIVALENCE-001, REVIEW-A11Y-CLAIM-CEILING-001, STANDARD-ACCESSIBILITY-001, STANDARD-NATIVE-IOS-001, TEST-A11Y-INPUT-EQUIVALENCE-001, TEST-A11Y-READING-FOCUS-001, TEST-A11Y-STATUS-ERRORS-001.",
+    "python3 scripts/ambitions-canon.py audit",
+    "python3 scripts/ambitions-canon.py build --check",
+    "git diff --check"
+  ],
+  "expected_verification_ids": [
+    "AUDIT-A11Y-PROOF-MATRIX-001",
+    "PROOF-A11Y-DYNAMIC-TYPE-001",
+    "PROOF-A11Y-REDUCED-EFFECTS-001",
+    "PROOF-A11Y-SEMANTIC-EQUIVALENCE-001",
+    "REVIEW-A11Y-CLAIM-CEILING-001",
+    "STANDARD-ACCESSIBILITY-001",
+    "STANDARD-NATIVE-IOS-001",
+    "TEST-A11Y-INPUT-EQUIVALENCE-001",
+    "TEST-A11Y-READING-FOCUS-001",
+    "TEST-A11Y-STATUS-ERRORS-001"
+  ],
+  "intake": {
+    "changed_files": [
+      "Native/Ambitions/Interaction/Accessibility/",
+      "Native/Ambitions/Quality/Accessibility/"
+    ],
+    "claim_type": "accessibility-proof",
+    "issue_id": "CANON-BENCH-07",
+    "known_issue_ids": [],
+    "schema_version": 1,
+    "scope": [
+      "STANDARD-ACCESSIBILITY"
+    ],
+    "task_type": "swiftui"
+  },
+  "scenario_id": "accessibility-repair",
+  "schema_version": 2,
+  "shared_law_allowlist": [
+    "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001",
+    "PLATFORM-NATIVE-IPHONE-001"
+  ],
+  "title": "Accessibility repair"
+}

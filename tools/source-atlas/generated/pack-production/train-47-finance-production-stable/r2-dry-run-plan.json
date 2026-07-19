@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 1118,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/adjudications.json",
+      "sha256": "08190d6e5a6f830ecdf11d2f46d1decedaf5f40c6c7bf6cb621db5d757d4932f"
+    },
+    {
+      "bytes": 1054,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/attribution.json",
+      "sha256": "0c607fceb08e364e474d898c573ce242008fe44714ff5fa62fe11a4fb1a5ccea"
+    },
+    {
+      "bytes": 7229,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/claims.json",
+      "sha256": "cf7b75e5fd230781c19afa3263605fb4e33b5c76693eaa50fe8171cda3ff2614"
+    },
+    {
+      "bytes": 4133,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/coverage.json",
+      "sha256": "4a138b4a6c22aff77904acb39a70ca7a4ee01be29bbf6d5f687ef21195e5b76e"
+    },
+    {
+      "bytes": 1891,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/entities.json",
+      "sha256": "0f198cb850f12e935ed2f0d88ed20c7b5ec2126543120a971832dd9c0d4d60cb"
+    },
+    {
+      "bytes": 1617,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/freshness.json",
+      "sha256": "7b9590cfa8a3272fb5367cf423e2138f47250a3525913967174d28b3fc964c2d"
+    },
+    {
+      "bytes": 3063,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/licenses.json",
+      "sha256": "9840d5d036befebf2f43a714506ea9e04ce1c85dbc721510f6a7aaa3b12e0d0c"
+    },
+    {
+      "bytes": 1265,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+      "sha256": "9ba5302638450c14dcee969abf02df289930dbfcdc3634ca9e03ddbed878af9f"
+    },
+    {
+      "bytes": 8778,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+      "sha256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405"
+    },
+    {
+      "bytes": 1292,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/non_claims.json",
+      "sha256": "51e9a35fe191629c72b984604c3b1bd19a55811f8a300d2673e5c8f83749b488"
+    },
+    {
+      "bytes": 20295,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json",
+      "sha256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19"
+    },
+    {
+      "bytes": 1411,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/revocations.json",
+      "sha256": "7b1fd0b7fb329140a9eb21b3a7685df1d9fa53bcdee8a857916a28843805a464"
+    },
+    {
+      "bytes": 3504,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/sources.json",
+      "sha256": "e59370e0be81d7c041e76b88f2ea5ae73594cca02ab7c2425a28a76e4a7f0ee2"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

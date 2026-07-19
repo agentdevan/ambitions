@@ -1,0 +1,32 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainSourceSpecificReviewEvidence.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not claim output",
+    "not R2 publish"
+  ],
+  "reviewDecisions": [
+    {
+      "apiPolicyID": "api.approved_source_specific_train99_evidence.v1",
+      "decision": "source_specific_registry_activation_reviewed",
+      "licenseID": "approved_source_specific_train99_evidence_terms",
+      "mutationID": "source-specific-registry-mutation.evidence",
+      "nonClaims": [
+        "not outside legal approval",
+        "not claim output",
+        "not R2 publish"
+      ],
+      "reviewOwner": "Ambitions owner source review",
+      "sourceID": "approved.source_specific.train99_evidence"
+    }
+  ],
+  "reviewEvidenceClass": "source_specific_review",
+  "reviewScope": "source_lane_legal_api_registry_activation",
+  "reviewedAt": "2026-06-28",
+  "reviewedBy": "Ambitions owner source review",
+  "sourceIDs": [
+    "approved.source_specific.train99_evidence"
+  ],
+  "sourceSpecificReviewID": "source-specific-review.evidence"
+}

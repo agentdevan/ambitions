@@ -1,0 +1,73 @@
+{
+  "$id": "https://ambitions.local/canon/schemas/trusted-event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Platform-owned immutable repository and pull-request event projection.",
+  "properties": {
+    "base_ref": {"minLength": 1, "type": "string"},
+    "event_projection_digest": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "event_attestation_origin": {"enum": ["trusted-ci", "local-advisory"], "type": "string"},
+    "event_provider": {"const": "github", "type": "string"},
+    "issue_state_transition": {
+      "additionalProperties": false,
+      "properties": {
+        "base_issue_state_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "completed_task_receipts": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "finalization_receipt_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+              "task_id": {"minLength": 1, "type": "string"}
+            },
+            "required": ["task_id", "finalization_receipt_sha256"],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "schema_version": {"const": 1, "type": "integer"},
+        "snapshot_revision": {"minLength": 1, "type": "string"}
+      },
+      "required": ["schema_version", "snapshot_revision", "base_issue_state_sha256", "completed_task_receipts"],
+      "type": "object"
+    },
+    "merge_base_sha": {"pattern": "^[0-9a-f]{40,64}$", "type": "string"},
+    "pull_request_number": {"minimum": 1, "type": "integer"},
+    "repository_full_name": {"minLength": 1, "type": "string"},
+    "repository_id": {"minLength": 1, "type": "string"},
+    "schema_version": {"const": 1, "type": "integer"},
+    "signature_algorithm": {"enum": ["rsa-pkcs1v15-sha256", null], "type": ["string", "null"]},
+    "signature_base64url": {"type": ["string", "null"]},
+    "trust_anchor_id": {"type": ["string", "null"]},
+    "trust_anchor_sha256": {"type": ["string", "null"]},
+    "trusted_base_sha": {"pattern": "^[0-9a-f]{40,64}$", "type": "string"},
+    "trusted_head_sha": {"pattern": "^[0-9a-f]{40,64}$", "type": "string"},
+    "verification_epoch": {"minimum": 1, "type": "integer"},
+    "workflow_run_attempt": {"minimum": 0, "type": "integer"},
+    "workflow_run_id": {"minimum": 0, "type": "integer"},
+    "consumption_generation": {"minimum": 1, "type": "integer"}
+  },
+  "required": [
+    "schema_version",
+    "event_provider",
+    "event_attestation_origin",
+    "repository_id",
+    "repository_full_name",
+    "pull_request_number",
+    "base_ref",
+    "trusted_base_sha",
+    "trusted_head_sha",
+    "merge_base_sha",
+    "verification_epoch",
+    "workflow_run_id",
+    "workflow_run_attempt",
+    "consumption_generation",
+    "issue_state_transition",
+    "trust_anchor_id",
+    "trust_anchor_sha256",
+    "signature_algorithm",
+    "signature_base64url",
+    "event_projection_digest"
+  ],
+  "title": "Ambitions Trusted Event Projection",
+  "type": "object"
+}

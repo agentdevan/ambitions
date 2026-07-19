@@ -1,0 +1,36 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from USA.gov government home repair assistance public reference page.",
+      "claim_id": "canonical_claim.cb2a736af232d258",
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "usa.gov.home_repair"
+    },
+    {
+      "attribution_text": "Based on public reference data from Department of Energy Energy Saver public home energy reference pages.",
+      "claim_id": "canonical_claim.6af618c18ad764c6",
+      "dataClass": "public_provenance",
+      "license_id": "doe_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "energy.gov.energy_saver"
+    },
+    {
+      "attribution_text": "Based on public reference data from Department of Energy Energy Saver public home energy reference pages.",
+      "claim_id": "canonical_claim.47605fb30fd2b2d9",
+      "dataClass": "public_provenance",
+      "license_id": "doe_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "energy.gov.energy_saver"
+    },
+    {
+      "attribution_text": "Based on public reference data from Ready.gov Build A Kit public preparedness reference page.",
+      "claim_id": "canonical_claim.4afa1eb2ec18b66f",
+      "dataClass": "public_provenance",
+      "license_id": "ready_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "ready.gov.kit"
+    }
+  ]
+}

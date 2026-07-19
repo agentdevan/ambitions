@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-07-11",
+  "commit": "f2de23dd5",
+  "captureBasis": "Current graph and superseding decomposition decision captured from the rebased implementation-start commit; this document commit does not claim to be its own future commit SHA.",
+  "branch": "main",
+  "authorities": {
+    "appAndExtensionGraph": "project.yml",
+    "reusableModuleGraph": "Packages/AmbitionsDesignSystem/Package.swift"
+  },
+  "nodes": [
+    {"name": "Ambitions", "kind": "xcode-application"},
+    {"name": "AmbitionsWidgetExtension", "kind": "xcode-extension"},
+    {"name": "AmbitionsShareExtension", "kind": "xcode-extension"},
+    {"name": "AmbitionsTests", "kind": "xcode-unit-tests"},
+    {"name": "AmbitionsModuleTests", "kind": "xcode-unit-tests"},
+    {"name": "AmbitionsUITests", "kind": "xcode-ui-tests"},
+    {"name": "AmbitionsTimeFoundation", "kind": "xcode-static-framework"},
+    {"name": "AmbitionsDesignSystem", "kind": "swift-package-library"},
+    {"name": "AmbitionsWidgetUI", "kind": "swift-package-library"}
+  ],
+  "edges": [
+    {"from": "Ambitions", "to": "AmbitionsDesignSystem"},
+    {"from": "Ambitions", "to": "AmbitionsWidgetUI"},
+    {"from": "Ambitions", "to": "AmbitionsWidgetExtension"},
+    {"from": "Ambitions", "to": "AmbitionsShareExtension"},
+    {"from": "Ambitions", "to": "AmbitionsTimeFoundation"},
+    {"from": "AmbitionsTests", "to": "Ambitions"},
+    {"from": "AmbitionsTests", "to": "AmbitionsDesignSystem"},
+    {"from": "AmbitionsTests", "to": "AmbitionsTimeFoundation"},
+    {"from": "AmbitionsModuleTests", "to": "AmbitionsTimeFoundation"},
+    {"from": "AmbitionsUITests", "to": "Ambitions"},
+    {"from": "AmbitionsWidgetUI", "to": "AmbitionsDesignSystem"}
+  ],
+  "currentCompileBoundary": {
+    "nativeProductionSwiftFilesInSourceRoot": 1337,
+    "nativeAppSwiftFiles": 1330,
+    "extractedPilotSwiftFiles": 7,
+    "description": "The generated target-membership inventory records 1,330 Swift files in Ambitions and seven Core/Time pilot files only in AmbitionsTimeFoundation; most canonical folders remain outside compiler-enforced feature/runtime modules.",
+    "extensionSourceFileCherryPicking": true
+  },
+  "pilotBoundary": {
+    "module": "AmbitionsTimeFoundation",
+    "moduleTests": "AmbitionsModuleTests",
+    "productionFileCount": 7,
+    "singleProductionMembershipVerified": true,
+    "publicApiDelta": "The seven formerly app-internal time files now expose the declarations required by app and test consumers across the framework boundary; this is a reviewed pilot API surface, not authorization for another extraction.",
+    "nestedPackageAuthority": "Packages/AmbitionsDesignSystem/Package.swift",
+    "benchmarkEvidence": ".codex/xcode-benchmarks/BUILD-ARCH-PILOT/report.json",
+    "dispositionEvidence": ".codex/architecture/source-disposition.json"
+  },
+  "decompositionPolicy": {
+    "status": "active",
+    "authority": "docs/qa/architecture/module-candidate-policy.json",
+    "authorizedFutureTargets": [],
+    "timeFoundationPilotStatus": "observed",
+    "wholeDomainCandidateStatus": "rejected",
+    "wholeDomainExtractionAuthorized": false,
+    "domainCensusEvidence": "docs/qa/architecture/domain-module-boundary.json",
+    "domainCensusFileCount": 166,
+    "domainCompilerBlocker": {
+      "failedFileCount": 11,
+      "diagnosticCount": 123,
+      "firstReverseOwnedTypeCount": 12,
+      "conservativeIndependentlySeparableFileCount": 45,
+      "claimBoundary": "The compiler blocker is current failed-boundary evidence and the 45-file lexical estimate is triage evidence only; neither authorizes an AmbitionsDomain target."
+    },
+    "futureCandidateRequirements": "All prospective status, evidence, and numeric authorization requirements are owned exclusively by docs/qa/architecture/module-candidate-policy.json and evaluated by scripts/ambitions-module-candidate-gate.py.",
+    "authorizationEvidenceModel": "Pointer-only candidate rows reference typed JSON artifacts that remain untrusted inputs. On a clean tracked worktree, the default provider runs XcodeGen with environment expansion disabled, requires the proposed target to be a framework, derives every target product type and graph role, generates ephemeral source-truth PBX evidence, and compares its complete nodes, edges, product types, and source memberships with the ignored/untracked current generated Ambitions.xcodeproj derivative. It also re-plans each source through the live changed-file router including suite validation. Compiler/symbolgraph, xcresult, benchmark, and external-review conclusions remain observed unless a caller-controlled trusted provider rederives them; the provider execution environment is an external trust precondition.",
+    "authorizationReviewBinding": "Artifact fingerprints and distinct reviewer strings preserve integrity metadata but do not establish external review trust. Repository Git authorship, unsigned notes, and artifact allowlists cannot authorize a candidate. The CLI/default provider has no external review attestation authority, so every current candidate remains observed or rejected and zero future targets are authorized.",
+    "futureTargetTree": "none predetermined; only a policy-authorized explicit source cohort may justify a proposed target",
+    "coldBuildSeparation": "The 439-second cache-invalidated build is a separate optimization from the verified 8-second warm build and 21.262-second health-selected hosted focused test."
+  },
+  "duplicateCompilationRiskCount": 11,
+  "duplicateCompilationRisks": [
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceScopeAllowlist.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", "targets": ["Ambitions", "AmbitionsShareExtension"]}
+  ],
+  "assessment": {
+    "status": "yellow",
+    "reason": "The seven-file TimeFoundation pilot and its module tests are compiler-enforced and acyclic, and the warm focused loop is within its provisional target on the configured healthy simulator. Broader decomposition remains unimplemented; whole-folder Domain extraction is superseded as a speed prerequisite, the cache-invalidated app build remains expensive, and extension targets still compile selected app source files directly."
+  }
+}

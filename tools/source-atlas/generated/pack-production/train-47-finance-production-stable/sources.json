@@ -1,0 +1,113 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "authority_class": "regulated_body",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "cfpb_public_web",
+      "non_claims": [
+        "not investment advice",
+        "not tax advice",
+        "not debt advice",
+        "not a personalized financial plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "cfpb.adult_financial_education",
+      "source_name": "CFPB adult financial education tools and resources"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "authority_class": "regulated_body",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "irs_public_web",
+      "non_claims": [
+        "not tax advice",
+        "not legal advice",
+        "not a personalized filing strategy",
+        "not investment advice",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "irs.when_to_file",
+      "source_name": "IRS When to File individual return public reference page"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "usagov_public_web",
+      "non_claims": [
+        "not a benefits eligibility guarantee",
+        "not an application decision",
+        "not legal advice",
+        "not a personalized financial plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "usa.gov.benefits",
+      "source_name": "USA.gov government benefits public reference page"
+    }
+  ]
+}

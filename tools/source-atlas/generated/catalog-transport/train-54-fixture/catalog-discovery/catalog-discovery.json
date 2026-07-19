@@ -1,0 +1,381 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.5b67cc5e68fab8e3",
+      "candidate_score": 85,
+      "catalog_id": "catalog.01cb60b06d29df20",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "education_reference",
+        "program_reference",
+        "training_reference"
+      ],
+      "dataset_url": "https://www.ed.gov/",
+      "declared_jurisdiction": "018:00",
+      "declared_license": "public domain",
+      "declared_rights": "https://www.usa.gov/government-works",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "dcat_data_json",
+      "distribution_urls": [
+        "https://example.gov/adult-education-program-directory.csv"
+      ],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "e8237370da92153d9707f542e79c6d197b778e475bc888f6dac57339133fbd2e",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "U.S. Department of Education",
+      "publisher_url": "https://www.ed.gov/",
+      "redistribution_guess": "clearly_open",
+      "review_required": true,
+      "rights_url": "https://www.usa.gov/government-works",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.ed.gov/notices"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_institution",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.f21e85463655d4be",
+      "candidate_score": 85,
+      "catalog_id": "catalog.a8875ebfa1aababf",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "education_reference",
+        "language_reference",
+        "learning_reference"
+      ],
+      "dataset_url": "https://example.edu/public-learning-resources/language-index",
+      "declared_jurisdiction": "",
+      "declared_license": "CC-BY-4.0",
+      "declared_rights": "https://example.edu/terms",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "schema_org",
+      "distribution_urls": [
+        "https://example.edu/public-learning-resources/language-index.json"
+      ],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "0ae6202bd90fab18a68b7e9cd5dc55eaf50b32878ef6ceb57703a61161fcfe89",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Example Public University",
+      "publisher_url": "https://example.edu/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://example.edu/terms",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://example.edu/terms"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.3045cf0f91dc30e1",
+      "candidate_score": 65,
+      "catalog_id": "catalog.01cb60b06d29df20",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "exercise_reference",
+        "health_reference",
+        "wellness_reference"
+      ],
+      "dataset_url": "https://www.cdc.gov/physicalactivity/",
+      "declared_jurisdiction": "009:20",
+      "declared_license": "",
+      "declared_rights": "https://www.cdc.gov/Other/policies.html",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "dcat_data_json",
+      "distribution_urls": [
+        "https://www.cdc.gov/physicalactivity/basics/"
+      ],
+      "domain_guess": "health_wellness_reference",
+      "evidence_hash": "3a9bc4bb1e84f08a5e3643f4cd243a233f2161c512d565ff02fb4b9b8d4925c7",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Centers for Disease Control and Prevention",
+      "publisher_url": "https://www.cdc.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://www.cdc.gov/Other/policies.html",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.cdc.gov/Other/policies.html"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.4cfb683e7b260e21",
+      "candidate_score": 55,
+      "catalog_id": "catalog.a8875ebfa1aababf",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "civic_reference",
+        "form_reference",
+        "government_reference"
+      ],
+      "dataset_url": "https://example.gov/public-civic-form-reference",
+      "declared_jurisdiction": "",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "schema_org",
+      "distribution_urls": [
+        "https://example.gov/public-civic-form-reference.json"
+      ],
+      "domain_guess": "public_civic_requirements",
+      "evidence_hash": "d36c2e87eb479b0085991eb6415feb1ba06ef4d46ef960b40ae04c3c710d0943",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Example City Government",
+      "publisher_url": "https://example.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": ""
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.b7212dade4fabc6b",
+      "candidate_score": 85,
+      "catalog_id": "catalog.622fe5e781692dc7",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "transit_reference",
+        "transportation_reference"
+      ],
+      "dataset_url": "https://www.transportation.gov/",
+      "declared_jurisdiction": "",
+      "declared_license": "cc-by",
+      "declared_rights": "https://www.transportation.gov/privacy",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://example.gov/public-transit-reference.json"
+      ],
+      "domain_guess": "travel_relocation",
+      "evidence_hash": "f9be12ce2fd2d75afe84a19ae617df2407739df0906bf3c2f140424226eadbe7",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "U.S. Department of Transportation",
+      "publisher_url": "https://www.transportation.gov/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.transportation.gov/privacy",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.transportation.gov/privacy"
+    },
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.6307275508668da9",
+      "candidate_score": 65,
+      "catalog_id": "catalog.622fe5e781692dc7",
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "service_reference",
+        "volunteer_reference"
+      ],
+      "dataset_url": "https://www.volunteer.gov/s/",
+      "declared_jurisdiction": "",
+      "declared_license": "",
+      "declared_rights": "https://www.volunteer.gov/s/terms",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "ckan_package_search",
+      "distribution_urls": [
+        "https://www.volunteer.gov/s/"
+      ],
+      "domain_guess": "volunteering_public_reference",
+      "evidence_hash": "f2f387dbac940778be41f8f3fe6ff0ef619ee7d4767d5f66db014dc06963ad62",
+      "non_claims": [
+        "catalog candidate source record only",
+        "catalog metadata is not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "publisher_name": "Volunteer.gov",
+      "publisher_url": "https://www.volunteer.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://www.volunteer.gov/s/terms",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.volunteer.gov/s/terms"
+    }
+  ],
+  "catalogRecords": [
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.01cb60b06d29df20",
+      "catalog_kind": "dcat_data_json",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/data-json-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "495c3b75a78f619aac0316fd5d976b5016f9b1e68b2179a622890f49d9be1002",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.622fe5e781692dc7",
+      "catalog_kind": "ckan_package_search",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/ckan-package-search-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "45a09983184d5c0109460933dd72ee65d4c97744231a657450a16a085d4ecb40",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.a8875ebfa1aababf",
+      "catalog_kind": "schema_org",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/schema-org-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "a84f5b1ba1da2654c0236ffc140afbfe67a4a97623b6aa09b1d02fee2bfe3a9a",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "inputRoot": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots",
+  "kind": "ambitions.sourceAtlas.catalogDiscovery.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not live network discovery",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 6,
+    "catalogs": 3,
+    "claims": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "versionID": "source-atlas-catalog-discovery-train-53"
+}

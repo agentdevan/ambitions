@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from CFPB adult financial education tools and resources.",
+      "claim_id": "canonical_claim.87ec1949cc7a3ce6",
+      "dataClass": "public_provenance",
+      "license_id": "cfpb_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "cfpb.adult_financial_education"
+    },
+    {
+      "attribution_text": "Based on public reference data from USA.gov government benefits public reference page.",
+      "claim_id": "canonical_claim.26a332a4ffb4d579",
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "usa.gov.benefits"
+    },
+    {
+      "attribution_text": "Based on public reference data from IRS When to File individual return public reference page.",
+      "claim_id": "canonical_claim.0224a650cb82b0e2",
+      "dataClass": "public_provenance",
+      "license_id": "irs_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "irs.when_to_file"
+    }
+  ]
+}

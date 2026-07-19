@@ -1,0 +1,13 @@
+{
+  "caseID": "invalid.schedule_capacity_pack",
+  "expectedIssueCodes": [
+    "schedule_or_capacity"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "capacityWindow": "Tuesday 8 AM after school pickup",
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "schemaVersion": 1
+  }
+}

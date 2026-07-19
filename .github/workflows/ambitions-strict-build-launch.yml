@@ -1,0 +1,105 @@
+name: Ambitions Strict Build Launch
+
+on:
+  workflow_dispatch:
+    inputs:
+      scheme:
+        required: true
+        default: Ambitions
+        type: string
+      destination:
+        required: false
+        default: ''
+        type: string
+      simulator_name:
+        required: true
+        default: 'iPhone 17'
+        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/ambitions-strict-build-launch.yml'
+      - 'Native/**'
+      - 'Packages/**'
+      - 'Packages/AmbitionsDesignSystem/Sources/**'
+      - 'scripts/ci/**'
+      - 'scripts/release_recovery/**'
+      - 'project.yml'
+      - 'Packages/AmbitionsDesignSystem/Package.swift'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ambitions-strict-build-launch-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  strict-build-launch:
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 180
+    env:
+      SCHEME: ${{ github.event_name == 'workflow_dispatch' && inputs.scheme || 'Ambitions' }}
+      DESTINATION: ${{ github.event_name == 'workflow_dispatch' && inputs.destination || '' }}
+      SIMULATOR_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.simulator_name || 'iPhone 17' }}
+      RUN_STAMP: strict-${{ github.run_id }}-${{ github.run_attempt }}
+      OUTPUT_ROOT: artifacts/strict-build-launch/strict-${{ github.run_id }}-${{ github.run_attempt }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Toolchain header
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "event=${GITHUB_EVENT_NAME}"
+          echo "ref=${GITHUB_REF}"
+          echo "sha=${GITHUB_SHA}"
+          echo "scheme=${SCHEME}"
+          echo "destination=${DESTINATION}"
+          echo "simulator_name=${SIMULATOR_NAME}"
+          sw_vers || true
+          xcodebuild -version
+          xcode-select -p
+
+      - name: Strict build and launch
+        id: strict
+        shell: bash
+        run: |
+          set +e
+          bash scripts/ci/strict_build_launch.sh
+          strict_exit=$?
+          echo "strict_exit=${strict_exit}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload strict build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-strict-build-launch-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            artifacts/strict-build-launch/**/*.log
+            artifacts/strict-build-launch/**/*.txt
+            artifacts/strict-build-launch/**/*.json
+            artifacts/strict-build-launch/**/*.md
+            artifacts/strict-build-launch/**/*.png
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Fail on strict build or launch failure
+        if: always()
+        shell: bash
+        run: |
+          strict_exit='${{ steps.strict.outputs.strict_exit }}'
+          if [[ -z "${strict_exit}" ]]; then
+            echo "Strict build step did not produce an exit code."
+            exit 1
+          fi
+          if [[ "${strict_exit}" != "0" ]]; then
+            echo "Strict build/launch failed with exit ${strict_exit}. Download the strict build artifact for exact diagnostics."
+            exit "${strict_exit}"
+          fi
+          echo "Strict build/launch passed."

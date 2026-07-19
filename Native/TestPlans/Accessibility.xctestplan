@@ -1,0 +1,42 @@
+{
+  "configurations" : [
+    {
+      "id" : "16910000-0000-4000-8000-000000000002",
+      "name" : "Accessibility",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "enabled" : true,
+            "key" : "AMBITIONS_TEST_PLAN",
+            "value" : "Accessibility"
+          }
+        ],
+        "testTimeoutsEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "AccessibilityNutritionChecklistTests/testChecklistCoversBatch64RequiredCategories()",
+        "AccessibilityNutritionChecklistTests/testEveryCategoryHasReadableLabelAndVerificationGuidance()",
+        "AccessibilityNutritionChecklistTests/testNoCategoryReliesOnColorOnlyState()",
+        "AccessibilityNutritionChecklistTests/testAMB1814AutomatedNutritionGateCoversVoiceOverDynamicTypeAndReduceMotionOnly()",
+        "AccessibilityNutritionChecklistTests/testAMB1814AutomatedNutritionGateKeepsManualAndDeviceProofBoundariesExplicit()",
+        "AccessibilityNutritionChecklistTests/testAFI12AccessibilityStateProofLocksActiveFlagshipSurfaces()",
+        "AccessibilityNutritionChecklistTests/testAFI12SurfaceProofsPreserveMeaningWithoutPublicClaims()",
+        "AccessibilityNutritionChecklistTests/testAFI12SurfaceProofsSpellOutFallbacksAndReceiptsForActiveSurfaces()"
+      ],
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "6B452B4FF95B016DF4E6415D",
+        "name" : "AmbitionsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

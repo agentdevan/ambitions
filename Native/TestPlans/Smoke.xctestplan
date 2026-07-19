@@ -1,0 +1,46 @@
+{
+  "configurations" : [
+    {
+      "id" : "18120000-0000-4000-8000-000000000001",
+      "name" : "Smoke",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "enabled" : true,
+            "key" : "AMBITIONS_TEST_PLAN",
+            "value" : "Smoke"
+          }
+        ],
+        "testTimeoutsEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "AppReleaseConfigurationTests/testLaunchBuildAdvertisesIPhoneOnlyPortraitOnlyScope()"
+      ],
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "6B452B4FF95B016DF4E6415D",
+        "name" : "AmbitionsTests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "LaunchURLFocusedUITests/testLaunchURLCanLandOnCanonicalTimeSurface()"
+      ],
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "A0FFD943C238642233FECEA5",
+        "name" : "AmbitionsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

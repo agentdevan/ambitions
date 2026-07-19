@@ -1,0 +1,217 @@
+#if canImport(SwiftUI)
+import SwiftUI
+
+public enum AmbitionCardStyle: Sendable {
+    case app
+    case widget
+    case hero
+    case band
+}
+
+public struct AmbitionSurfaceModifier: ViewModifier {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private let style: AmbitionCardStyle
+    private let state: AmbitionVisualState
+    private let accent: Color?
+
+    public init(style: AmbitionCardStyle, state: AmbitionVisualState = .default, accent: Color? = nil) {
+        self.style = style
+        self.state = state
+        self.accent = accent
+    }
+
+    public func body(content: Content) -> some View {
+        let resolved = theme.stateStyle(for: state, accent: accent)
+        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+
+        Group {
+            switch style {
+            case .app, .widget, .hero:
+                QuietGlass(cornerRadius: cornerRadius) {
+                    content
+                        .padding(contentPadding)
+                }
+                .luminousTrace(isShimmering: state == .selected || state == .celebration, accentColor: accent)
+            case .band:
+                GraphiteRecess(cornerRadius: cornerRadius) {
+                    content
+                        .padding(contentPadding)
+                }
+            }
+        }
+        .shadow(color: shadow.color.opacity(state == .selected ? 1.05 : 1), radius: shadow.radius, x: shadow.x, y: shadow.y)
+        .overlay {
+            if (state == .selected || state == .celebration) && style != .band {
+                shape
+                    .fill(resolved.glow.opacity(theme.glow.opacity))
+                    .blur(radius: theme.glow.radius)
+                    .allowsHitTesting(false)
+            }
+        }
+        .scaleEffect(resolved.scale)
+        .opacity(resolved.opacity)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: style == .hero), value: state)
+    }
+
+    private var cornerRadius: CGFloat {
+        switch style {
+        case .app: theme.radius.lg
+        case .widget: theme.radius.md
+        case .hero: theme.radius.xl
+        case .band: theme.radius.band
+        }
+    }
+
+    private var contentPadding: CGFloat {
+        switch style {
+        case .app: theme.spacing.lg
+        case .widget: theme.spacing.sm
+        case .hero: theme.spacing.xl
+        case .band: theme.spacing.md
+        }
+    }
+
+    private var shadow: AmbitionTheme.Shadow {
+        switch style {
+        case .app: theme.elevation.resting
+        case .widget: theme.elevation.resting
+        case .hero: theme.elevation.hero
+        case .band: theme.depth.raised
+        }
+    }
+
+    private var background: LinearGradient {
+        switch style {
+        case .app:
+            theme.surfaces.elevatedGradient
+        case .widget:
+            theme.surfaces.widgetGradient
+        case .hero:
+            theme.surfaces.heroGradient
+        case .band:
+            theme.surfaces.bandGradient
+        }
+    }
+}
+
+public extension View {
+    /// Applies shared Ambitions card chrome to arbitrary content.
+    func ambitionSurface(
+        _ style: AmbitionCardStyle,
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil
+    ) -> some View {
+        modifier(AmbitionSurfaceModifier(style: style, state: state, accent: accent))
+    }
+
+    func ambitionPanelAccessibility() -> some View {
+        accessibilityElement(children: .contain)
+    }
+
+    func ambitionPanelAccessibility(
+        label: String,
+        value: String? = nil,
+        hint: String? = nil
+    ) -> some View {
+        accessibilityElement(children: .contain)
+            .accessibilityLabel(label)
+            .accessibilityValue(value ?? "")
+            .accessibilityHint(hint ?? "")
+    }
+
+    func ambitionMinimumTapTarget(_ size: CGFloat = 44) -> some View {
+        frame(minWidth: size, minHeight: size)
+            .contentShape(Rectangle())
+    }
+}
+
+/// General-purpose content container for primary in-app modules.
+public struct AppCard<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
+    private let content: Content
+
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
+        self.content = content()
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) { content }
+            .ambitionSurface(.app, state: state, accent: accent)
+    }
+}
+
+/// Smaller container for glanceable modules or future widget-style sections.
+public struct WidgetCard<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
+    private let content: Content
+
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
+        self.content = content()
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) { content }
+            .ambitionSurface(.widget, state: state, accent: accent)
+    }
+}
+
+/// High-emphasis surface for top-level moments such as weekly summaries.
+public struct HeroCard<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
+    private let content: Content
+
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
+        self.content = content()
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) { content }
+            .ambitionSurface(.hero, state: state, accent: accent)
+    }
+}
+
+/// Lighter structural band used for carried context, not heavy module chrome.
+public struct ContextBand<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
+    private let content: Content
+
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
+        self.content = content()
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) { content }
+            .ambitionSurface(.band, state: state, accent: accent)
+    }
+}
+#endif

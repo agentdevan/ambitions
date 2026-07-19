@@ -1,0 +1,66 @@
+{
+  "$id": "ambitions.sourceAtlas.sourceLaneRegistry.schema.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "kind": {
+      "const": "ambitions.sourceAtlas.sourceLaneRegistry.v1"
+    },
+    "registries_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "source_lanes": {
+      "items": {
+        "required": [
+          "source_id",
+          "source_name",
+          "source_class",
+          "authority_class",
+          "jurisdiction",
+          "domain_scope",
+          "claim_classes_allowed",
+          "claim_classes_forbidden",
+          "license_id",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "attribution_required",
+          "redistribution_policy",
+          "r2_pack_policy",
+          "lookup_policy",
+          "crosswalk_policy",
+          "review_status",
+          "review_owner",
+          "last_reviewed_at",
+          "next_review_due_at",
+          "freshness_sla",
+          "api_mode",
+          "api_policy_id",
+          "rate_policy_id",
+          "budget_policy_id",
+          "secret_policy_id",
+          "allowed_artifact_classes",
+          "forbidden_artifact_classes",
+          "non_claims",
+          "schema_version"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "registries_version",
+    "updated_at",
+    "source_lanes"
+  ],
+  "type": "object"
+}

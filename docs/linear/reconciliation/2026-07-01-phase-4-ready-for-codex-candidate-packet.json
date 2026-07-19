@@ -1,0 +1,1678 @@
+{
+  "title": "Phase 4 Ready For Codex Candidate Packet — 2026-07-01",
+  "date": "2026-07-01",
+  "status": "Candidate queue only",
+  "candidates": [
+    {
+      "candidate_title": "VSP-10 source-owner registry reconciliation",
+      "classification": "READY_FOR_CODEX_CANDIDATE",
+      "target_project": "VSP-10 Implementation Anatomy / Source Owner Map",
+      "aspect_refs": [
+        "Product Object Grammar",
+        "Design System / Visual Language"
+      ],
+      "why": "Docs/control-plane leaf to reconcile source-owner registry, stale vocabulary, and proof gate references only.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-10",
+        "VSP-01",
+        "VSP-10"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Projection/",
+        "docs/design/provenance/component-registry.json",
+        "docs/design/provenance/vsp-provenance.json",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/AmbitionsSurface.swift",
+        "docs/design/provenance/component-registry.json",
+        "docs/design/provenance/vsp-provenance.json"
+      ],
+      "bounded_implementation_scope": "Docs/control-plane leaf to reconcile source-owner registry, stale vocabulary, and proof gate references only.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0802",
+        "AMB-ISSUE-1503",
+        "AMB-ISSUE-1901-1906",
+        "AMB-ISSUE-0802",
+        "AMB-ISSUE-1503",
+        "AMB-ISSUE-1901-1906"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Actual Linear Ready For Codex promotion still requires owner review and Linear hierarchy mutation."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "VSP-01 shell parity audit packet",
+      "classification": "READY_FOR_CODEX_CANDIDATE",
+      "target_project": "VSP-01 Stage OS Shell Authority",
+      "aspect_refs": [
+        "Stage / Shell / Root routing",
+        "Context Crown",
+        "Continuity Dock"
+      ],
+      "why": "Docs/proof leaf to collect current shell parity evidence requirements and missing proof without changing SwiftUI.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-01",
+        "VSP-01",
+        "VSP-01"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/AmbitionsSurface.swift",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/AmbitionsSurface.swift",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/AmbitionsSurface.swift"
+      ],
+      "bounded_implementation_scope": "Docs/proof leaf to collect current shell parity evidence requirements and missing proof without changing SwiftUI.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0006",
+        "AMB-ISSUE-0007",
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0901",
+        "AMB-ISSUE-0902",
+        "AMB-ISSUE-1011",
+        "AMB-ISSUE-1701-1709",
+        "AMB-ISSUE-0006",
+        "AMB-ISSUE-0007",
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0901",
+        "AMB-ISSUE-0902",
+        "AMB-ISSUE-1011",
+        "AMB-ISSUE-1701-1709",
+        "AMB-ISSUE-0006",
+        "AMB-ISSUE-0007",
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0901",
+        "AMB-ISSUE-0902",
+        "AMB-ISSUE-1011",
+        "AMB-ISSUE-1701-1709"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Yellow",
+      "blockers": [
+        "Does not implement shell parity; future UI work needs screenshots and accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "LocalRuntimeOS proof-gate maintenance",
+      "classification": "READY_FOR_CODEX_CANDIDATE",
+      "target_project": "LocalRuntimeOS Runtime Spine",
+      "aspect_refs": [
+        "Private Life Runtime",
+        "LocalRuntimeOS",
+        "CommandSpine",
+        "EventJournal",
+        "ProjectionEngine"
+      ],
+      "why": "Runtime/source proof maintenance leaf bounded to validation artifacts and no app-wide Runtime Green or product-wide Green claim.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/"
+      ],
+      "bounded_implementation_scope": "Runtime/source proof maintenance leaf bounded to validation artifacts and no app-wide Runtime Green or product-wide Green claim.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-2001",
+        "AMB-ISSUE-2010",
+        "AMB-ISSUE-2011",
+        "AMB-ISSUE-2001",
+        "AMB-ISSUE-2010",
+        "AMB-ISSUE-2011"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Yellow",
+      "blockers": [
+        "App-wide runtime/device/release proof remains missing."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Today VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-02 Today Reality Window",
+      "aspect_refs": [
+        "Today"
+      ],
+      "why": "Future implementation candidate for Today parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-02"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/Surfaces/Today/TodayObjectView.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Today parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0001",
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005",
+        "AMB-ISSUE-0016",
+        "AMB-ISSUE-0101-0108",
+        "AMB-ISSUE-1001-1011",
+        "AMB-ISSUE-1201"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Goals VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-03 Goals Life Area Atlas",
+      "aspect_refs": [
+        "Goals"
+      ],
+      "why": "Future implementation candidate for Goals parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-03"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Goals parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0401-0406",
+        "AMB-ISSUE-1301-1309"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Time VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-04 Time Native Life Calendar",
+      "aspect_refs": [
+        "Time"
+      ],
+      "why": "Future implementation candidate for Time parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-04"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Time parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0009",
+        "AMB-ISSUE-0501-0507",
+        "AMB-ISSUE-0913",
+        "AMB-ISSUE-1401-1405"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Capture VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-05 Global Capture Composer",
+      "aspect_refs": [
+        "Capture"
+      ],
+      "why": "Future implementation candidate for Capture parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-05"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureSurface.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Capture parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0002",
+        "AMB-ISSUE-0003",
+        "AMB-ISSUE-0008",
+        "AMB-ISSUE-0012",
+        "AMB-ISSUE-0201-0205",
+        "AMB-ISSUE-1101-1111",
+        "AMB-ISSUE-2002",
+        "AMB-ISSUE-2003"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "You VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-06 You Native Settings",
+      "aspect_refs": [
+        "You"
+      ],
+      "why": "Future implementation candidate for You parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-06"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for You parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0601-0607",
+        "AMB-ISSUE-1501-1505",
+        "AMB-ISSUE-2004",
+        "AMB-ISSUE-2005",
+        "AMB-ISSUE-2007"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Trust / Proof / Source / Privacy / History / Receipts VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-07 Trust Inspection Details",
+      "aspect_refs": [
+        "Trust / Proof / Source / Privacy / History / Receipts"
+      ],
+      "why": "Future implementation candidate for Trust / Proof / Source / Privacy / History / Receipts parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-07"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Trust/InspectionSurface.swift",
+        "Native/Ambitions/Trust/ProofInspectionView.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Trust / Proof / Source / Privacy / History / Receipts parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-2004-2009",
+        "AMB-ISSUE-2012"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Motion VSP parity implementation candidate",
+      "classification": "NEEDS_PHASE_3_HIERARCHY_REPAIR",
+      "target_project": "VSP-09 Motion Haptics Accessibility",
+      "aspect_refs": [
+        "Motion"
+      ],
+      "why": "Future implementation candidate for Motion parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-09"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift"
+      ],
+      "bounded_implementation_scope": "Future implementation candidate for Motion parity against VSP authority after Linear hierarchy, proof gate, screenshots, accessibility, rollback, and known issue mapping exist.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Spec Ready",
+      "blockers": [
+        "Phase 2 dossier and Phase 3 parent/leaf hierarchy not yet applied in Linear.",
+        "Current VSP evidence is Figma/provenance only, not SwiftUI/device/accessibility proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Optional account implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "VSP-06 You Native Settings",
+      "aspect_refs": [
+        "Optional account"
+      ],
+      "why": "Optional account needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-06",
+        "VSP-08"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+      ],
+      "bounded_implementation_scope": "Optional account needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Backlog",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Entitlements / subscription implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "VSP-06 You Native Settings",
+      "aspect_refs": [
+        "Entitlements / subscription"
+      ],
+      "why": "Entitlements / subscription needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-06"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
+      ],
+      "bounded_implementation_scope": "Entitlements / subscription needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Backlog",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Account deletion / erasure implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "VSP-08 External Boundary / Account / R2 / Source Atlas",
+      "aspect_refs": [
+        "Account deletion / erasure"
+      ],
+      "why": "Account deletion / erasure needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/"
+      ],
+      "bounded_implementation_scope": "Account deletion / erasure needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Backlog",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "CloudKit / continuity implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "VSP-08 External Boundary / Account / R2 / Source Atlas",
+      "aspect_refs": [
+        "CloudKit / continuity"
+      ],
+      "why": "CloudKit / continuity needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+      ],
+      "bounded_implementation_scope": "CloudKit / continuity needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Backlog",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Legal / terms / privacy policy implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "VSP-08 External Boundary / Account / R2 / Source Atlas",
+      "aspect_refs": [
+        "Legal / terms / privacy policy"
+      ],
+      "why": "Legal / terms / privacy policy needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "docs/qa/"
+      ],
+      "bounded_implementation_scope": "Legal / terms / privacy policy needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Unknown",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Pricing / paywall implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "QA Release Governance",
+      "aspect_refs": [
+        "Pricing / paywall"
+      ],
+      "why": "Pricing / paywall needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "bounded_implementation_scope": "Pricing / paywall needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Unknown",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Release train / TestFlight / App Store implementation candidate",
+      "classification": "DO_NOT_PROMOTE",
+      "target_project": "QA Release Governance",
+      "aspect_refs": [
+        "Release train / TestFlight / App Store"
+      ],
+      "why": "Release train / TestFlight / App Store needs owner/legal/release review and proof definition before any implementation promotion.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "docs/truth/RELEASE_TRUTH.md"
+      ],
+      "bounded_implementation_scope": "Release train / TestFlight / App Store needs owner/legal/release review and proof definition before any implementation promotion.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-2001-2012"
+      ],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Missing or backlog proof; external release/privacy/account/legal authority not complete."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "WidgetKit proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "iOS External Surfaces",
+      "aspect_refs": [
+        "WidgetKit"
+      ],
+      "why": "WidgetKit has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08",
+        "VSP-09"
+      ],
+      "source_owner_paths": [
+        "Native/AmbitionsWidgetExtension/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift"
+      ],
+      "bounded_implementation_scope": "WidgetKit has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Share Extension proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "VSP-05 Global Capture Composer",
+      "aspect_refs": [
+        "Share Extension"
+      ],
+      "why": "Share Extension has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-05"
+      ],
+      "source_owner_paths": [
+        "Native/AmbitionsShareExtension/",
+        "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureSurface.swift"
+      ],
+      "bounded_implementation_scope": "Share Extension has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "App Intents / Shortcuts / Siri proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "iOS External Surfaces",
+      "aspect_refs": [
+        "App Intents / Shortcuts / Siri"
+      ],
+      "why": "App Intents / Shortcuts / Siri has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/AppIntents/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+      ],
+      "bounded_implementation_scope": "App Intents / Shortcuts / Siri has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Notifications proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "iOS External Surfaces",
+      "aspect_refs": [
+        "Notifications"
+      ],
+      "why": "Notifications has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08",
+        "VSP-09"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift"
+      ],
+      "bounded_implementation_scope": "Notifications has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "EventKit / Reminders proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "VSP-04 Time Native Life Calendar",
+      "aspect_refs": [
+        "EventKit / Reminders"
+      ],
+      "why": "EventKit / Reminders has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+      ],
+      "bounded_implementation_scope": "EventKit / Reminders has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Deep links / URL routing proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "iOS External Surfaces",
+      "aspect_refs": [
+        "Deep links / URL routing"
+      ],
+      "why": "Deep links / URL routing has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+      ],
+      "bounded_implementation_scope": "Deep links / URL routing has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Live Activities proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "iOS External Surfaces",
+      "aspect_refs": [
+        "Live Activities"
+      ],
+      "why": "Live Activities has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [
+        "VSP-08",
+        "VSP-09"
+      ],
+      "source_owner_paths": [
+        "Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift"
+      ],
+      "bounded_implementation_scope": "Live Activities has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Import / export / reset proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "Import / export / reset"
+      ],
+      "why": "Import / export / reset has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/"
+      ],
+      "bounded_implementation_scope": "Import / export / reset has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Yellow",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Store health / repair proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "Store health / repair"
+      ],
+      "why": "Store health / repair has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/"
+      ],
+      "bounded_implementation_scope": "Store health / repair has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Yellow",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Local auth / file protection proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "Local auth / file protection"
+      ],
+      "why": "Local auth / file protection has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/"
+      ],
+      "bounded_implementation_scope": "Local auth / file protection has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Privacy manifest proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "Privacy manifest"
+      ],
+      "why": "Privacy manifest has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Resources/PrivacyInfo.xcprivacy"
+      ],
+      "bounded_implementation_scope": "Privacy manifest has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "App Group data proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "App Group data"
+      ],
+      "why": "App Group data has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "bounded_implementation_scope": "App Group data has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Logging / telemetry / crash privacy proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Persistence Privacy Account Boundary",
+      "aspect_refs": [
+        "Logging / telemetry / crash privacy"
+      ],
+      "why": "Logging / telemetry / crash privacy has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Diagnostics/"
+      ],
+      "bounded_implementation_scope": "Logging / telemetry / crash privacy has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Onboarding proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Onboarding Reviews Guidance",
+      "aspect_refs": [
+        "Onboarding"
+      ],
+      "why": "Onboarding has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Scenarios/"
+      ],
+      "bounded_implementation_scope": "Onboarding has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Daily / weekly / monthly review proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "VSP-02 Today Reality Window",
+      "aspect_refs": [
+        "Daily / weekly / monthly review"
+      ],
+      "why": "Daily / weekly / monthly review has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "bounded_implementation_scope": "Daily / weekly / monthly review has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Empty states proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "Onboarding Reviews Guidance",
+      "aspect_refs": [
+        "Empty states"
+      ],
+      "why": "Empty states has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Language/"
+      ],
+      "bounded_implementation_scope": "Empty states has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Recovery / re-entry proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "VSP-02 Today Reality Window",
+      "aspect_refs": [
+        "Recovery / re-entry"
+      ],
+      "why": "Recovery / re-entry has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Stage/Motion/"
+      ],
+      "bounded_implementation_scope": "Recovery / re-entry has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    },
+    {
+      "candidate_title": "Product education proof-gated candidate",
+      "classification": "OWNER_REVIEW_REQUIRED",
+      "target_project": "VSP-06 You Native Settings",
+      "aspect_refs": [
+        "Product education"
+      ],
+      "why": "Product education has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "required_hierarchy": [
+        "initiative",
+        "project",
+        "milestone",
+        "parent feature",
+        "bounded Codex leaf"
+      ],
+      "vsp_authority": [],
+      "source_owner_paths": [
+        "Native/Ambitions/Language/"
+      ],
+      "bounded_implementation_scope": "Product education has repo evidence or product need but requires owner-reviewed hierarchy, validation gate, and proof artifacts before implementation.",
+      "validation_commands": [
+        "git diff --check",
+        "python3 scripts/ambitions-green-standard-audit.py || true",
+        "python3 scripts/ambitions-architecture-inventory.py || true"
+      ],
+      "accessibility_screenshot_requirements": [
+        "Required for UI-affecting scope; otherwise explicitly not applicable."
+      ],
+      "known_issue_mapping": [],
+      "rollback_plan": "Revert candidate-specific commit or Linear mutation only; preserve unrelated changes and truth canon.",
+      "proof_ceiling": "Designing",
+      "blockers": [
+        "Source-owner proof or external proof gate incomplete.",
+        "No current Green proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ]
+    }
+  ],
+  "non_claims": [
+    "No source implementation is authorized by this packet.",
+    "No Linear status movement is authorized by this packet.",
+    "No Linear object creation is performed by this packet.",
+    "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+  ]
+}

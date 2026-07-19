@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_frontiers_candidate_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_sources_review_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_source_claim_authority_asserted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "pack_output_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:27:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake-input.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.frontierIntakeManifest.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "candidateSources": "5151727a0b3905769a2d2cf64a240df7b0b3861a1fe21b6c3059b5f63b653bf4",
+    "frontierIntake": "415b1eb25201ac28013b19364a000ab540d1b102216ee56094b6c0a56685ef38",
+    "manifest": "884623d932afe938414177b291ec134704060ea9b59ec38b574702a609ac1b02",
+    "proposedFrontiers": "21f0f4e62492dd08e9040d866c847db2a9098f6cbc3a5cfb3c40d1490bbb941d"
+  },
+  "outputPaths": {
+    "candidateSources": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/candidate-sources.json",
+    "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/closeout.md",
+    "frontierIntake": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/frontier-intake.json",
+    "proposedFrontiers": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/frontier-intake/community_volunteering_opportunities/proposed-frontiers.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 1,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 1,
+    "proposedFrontiers": 1,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; candidate-only arbitrary-domain frontier intake only",
+  "status": "Source Green for governed frontier intake tooling",
+  "valid": true,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

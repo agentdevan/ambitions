@@ -1,0 +1,137 @@
+{
+  "createdAt": "2026-06-29T12:00:00Z",
+  "frontiers": [
+    {
+      "claim_output_allowed": false,
+      "domain": "consumer_and_vehicle_recalls",
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "pack_output_allowed": false,
+      "priority": "P0",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F01_GEO_TEMPORAL_REFERENCE"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "hazard_disaster_resilience",
+      "frontier_id": "disaster_flood_seismic",
+      "pack_output_allowed": false,
+      "priority": "P0",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F02_WEATHER_AND_PUBLIC_ALERTS"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "education_workforce_labor_reference",
+      "frontier_id": "education_career_labor",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F03_ENVIRONMENTAL_EXPOSURE"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "air_quality_exposure",
+      "frontier_id": "environmental_exposure",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F04_DISASTER_FLOOD_SEISMIC"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "bank_and_institution_reference",
+      "frontier_id": "financial_institution_verification",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F05_MOBILITY_TRANSIT_TRAVEL"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "food_nutrition_reference",
+      "frontier_id": "food_nutrition_reference",
+      "pack_output_allowed": false,
+      "priority": "P0",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F06_HEALTH_PROVIDER_MEDICATION"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "place_time_identity",
+      "frontier_id": "geo_temporal_reference",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F07_CONSUMER_PRODUCT_AND_VEHICLE_SAFETY"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "healthcare_reference_and_drug_safety",
+      "frontier_id": "health_provider_medication",
+      "pack_output_allowed": false,
+      "priority": "P0",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "housing_reference_assistance",
+      "frontier_id": "housing_costs_and_local_help",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F09_EDUCATION_CAREER_LABOR"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "public_law_regulation_tax_reference",
+      "frontier_id": "law_regulation_and_tax",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F10_HOUSING_COSTS_AND_LOCAL_HELP"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "movement_schedule_vehicle",
+      "frontier_id": "mobility_transit_travel",
+      "pack_output_allowed": false,
+      "priority": "P1",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F11_FINANCIAL_INSTITUTION_VERIFICATION"
+    },
+    {
+      "claim_output_allowed": false,
+      "domain": "weather_alerts",
+      "frontier_id": "weather_and_public_alerts",
+      "pack_output_allowed": false,
+      "priority": "P2",
+      "r2_output_allowed": false,
+      "review_required": true,
+      "status_ceiling": "candidate_only",
+      "submitted_frontier_id": "F12_FOOD_NUTRITION_REFERENCE"
+    }
+  ]
+}

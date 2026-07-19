@@ -1,0 +1,464 @@
+import AmbitionsDesignSystem
+import SwiftUI
+
+struct AmbitionsStage: View {
+    @Environment(\.colorScheme) private var systemColorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    private let container: AppContainer
+    private let appFeatureFlags: AppFeatureFlags
+    @State private var navigation: StageStore
+    @State private var stageOwner = StageOwner()
+    @State private var creationMessage: GoalDetailInlineMessage?
+    @State private var goalsRefreshID = 0
+    @State private var isOnboardingPresented: Bool
+    @State private var onboardingError: String?
+    @State private var motionCurrentActionObserver: NSObjectProtocol?
+
+    init(container: AppContainer, appFeatureFlags: AppFeatureFlags = .current) {
+        self.container = container
+        self.appFeatureFlags = appFeatureFlags
+        _navigation = State(initialValue: container.navigation)
+        _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
+    }
+
+    var body: some View {
+        let systemColorSchemeForTheme = effectiveSystemColorScheme
+        let preferredColorSchemeForStage = effectivePreferredColorScheme
+        let resolvedTheme = container.appearancePreference.resolveTheme(
+            systemColorScheme: systemColorSchemeForTheme,
+            accentFamily: container.accentFamily
+        )
+        let stageModel = navigation.stageModel(
+            dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
+        let chromePolicy = stageModel.chromePolicy
+
+        ZStack(alignment: .bottom) {
+            stageSurfaceHost
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .environment(
+                    \.appShellAdditionalRootBottomClearance,
+                    rootContinuityReceiptClearance(policy: chromePolicy)
+                )
+            if chromePolicy.showsRootDock {
+                shellRootDockLayer(theme: resolvedTheme, policy: chromePolicy)
+            }
+            shellSearchSeam(theme: resolvedTheme)
+            shellActivatedCaptureComposerSeam(theme: resolvedTheme, policy: chromePolicy)
+            shellContinuityReceipt(theme: resolvedTheme, policy: chromePolicy)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
+        .onAppear {
+            validateExternalNavigationGraph()
+            configureStageMotionBehavior()
+            registerMotionCurrentActionObserver()
+        }
+        .onDisappear {
+            unregisterMotionCurrentActionObserver()
+        }
+        .onChange(of: reduceMotion) { _, isReduced in
+            stageOwner.setReduceMotionEnabled(isReduced)
+        }
+        .sheet(item: activeSheetOverlayBinding, onDismiss: {
+            guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
+            navigation.selectToday(entryContext: entryContext)
+        }) { overlay in
+            AppShellOverlayView(
+                overlay: overlay,
+                onDismiss: {
+                    navigation.dismissOverlay()
+                },
+                onGoalCreated: { overlayState, response in
+                    Task {
+                        await handleCreatedGoal(response, from: overlayState)
+                    }
+                }
+            )
+        }
+        .fullScreenCover(isPresented: $isOnboardingPresented) {
+            ProgressiveIntelligenceOnboardingView { choice in
+                Task {
+                    await completeOnboarding(choice: choice)
+                }
+            }
+            .interactiveDismissDisabled()
+            .appContainer(container)
+            .preferredColorScheme(preferredColorSchemeForStage)
+            .ambitionTheme(
+                container.appearancePreference.resolveTheme(
+                    systemColorScheme: systemColorSchemeForTheme,
+                    accentFamily: container.accentFamily
+                )
+            )
+        }
+        .appContainer(container)
+        .preferredColorScheme(preferredColorSchemeForStage)
+        .ambitionTheme(resolvedTheme)
+    }
+
+    private var effectiveSystemColorScheme: ColorScheme {
+        #if DEBUG
+        if let override = container.debugSystemThemeModeOverride {
+            return override == .dark ? .dark : .light
+        }
+        #endif
+        return systemColorScheme
+    }
+
+    private var effectivePreferredColorScheme: ColorScheme? {
+        #if DEBUG
+        if container.appearancePreference == .system,
+           let override = container.debugSystemThemeModeOverride {
+            return override == .dark ? .dark : .light
+        }
+        #endif
+        return container.appearancePreference.preferredColorScheme
+    }
+
+    @ViewBuilder
+    private var stageSurfaceHost: some View {
+        AmbitionsRootStageSurfaceHost(
+            navigation: $navigation,
+            creationMessage: creationMessage,
+            goalsRefreshID: goalsRefreshID,
+            onCreateGoal: { source, seedText, captureID in
+                presentCreateGoal(from: source, seedText: seedText, captureID: captureID)
+            },
+            onToolbarAction: { action, tab in
+                handleContextualToolbarAction(action, for: tab)
+            }
+        )
+    }
+
+    private var activeSheetOverlayBinding: Binding<ShellOverlayState?> {
+        Binding(
+            get: {
+                guard navigation.activeOverlay?.isActivatedCaptureComposer != true,
+                      navigation.activeOverlay?.kind != .memoryLens else {
+                    return nil
+                }
+                return navigation.activeOverlay
+            },
+            set: { newValue in
+                if newValue == nil,
+                   navigation.activeOverlay?.isActivatedCaptureComposer == true
+                    || navigation.activeOverlay?.kind == .memoryLens {
+                    return
+                }
+                navigation.activeOverlay = newValue
+            }
+        )
+    }
+
+    @ViewBuilder
+    private func shellSearchSeam(theme: AmbitionTheme) -> some View {
+        if let overlay = navigation.activeOverlay, overlay.kind == .memoryLens {
+            AppShellOverlayView(
+                overlay: overlay,
+                onDismiss: {
+                    navigation.dismissOverlay()
+                },
+                onGoalCreated: { overlayState, response in
+                    Task {
+                        await handleCreatedGoal(response, from: overlayState)
+                    }
+                }
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(theme.colors.canvas.ignoresSafeArea())
+            .transition(.opacity)
+            .zIndex(3)
+        }
+    }
+
+    private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AmbitionsSurface) {
+        switch action.id {
+        case "today-start-here":
+            navigation.selectToday(entryContext: .standard)
+        case "goals-create-goal":
+            navigation.presentTypedCaptureComposer(kind: .goalSeed, source: .goalsCreate)
+        case "time-weekly-review":
+            navigation.openWeeklyReview()
+        case "you-history", "motion-memory-lens":
+            navigation.presentMemoryLens(source: .shellUtility)
+        default:
+            presentSurfaceCapture(for: tab)
+        }
+    }
+
+    @ViewBuilder
+    private func shellActivatedCaptureComposerSeam(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
+        if let overlay = navigation.activeOverlay, overlay.isActivatedCaptureComposer {
+            AppShellActivatedCaptureSeam(
+                overlay: overlay,
+                onDismiss: {
+                    navigation.dismissOverlay()
+                },
+                onCreateGoal: { seedText, captureID in
+                    presentCreateGoal(from: overlay.entrySource, seedText: seedText, captureID: captureID)
+                }
+            )
+            .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .transition(.opacity)
+            .zIndex(2)
+        }
+    }
+
+    private func shellVisibleDock(theme: AmbitionTheme) -> some View {
+        StageDockRail(
+            theme: theme,
+            selectedTab: navigation.selectedTab
+        ) { tab in
+            navigation.selectRootSurfaceFromDock(tab)
+        }
+        .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.md)
+        .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xxl)
+    }
+
+    private func shellRootDockLayer(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
+        shellVisibleDock(theme: theme)
+            .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private func shellContinuityReceipt(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
+        // Display-only shell receipt chrome; SourceRecord and ReplayTrace wiring stay in runtime/proof owners.
+        if let receipt = navigation.continuityReceipt {
+            ShellContinuityBanner(receipt: receipt) {
+                navigation.continuityReceipt = nil
+            }
+            .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 400 : 380, alignment: .leading)
+            .padding(.trailing, 20)
+            .padding(.bottom, policy.continuityReceiptBottomClearance)
+            .accessibilityIdentifier("shell.continuity-receipt")
+            .zIndex(4)
+        }
+    }
+
+    private func rootContinuityReceiptClearance(policy: StageChromePolicy) -> CGFloat {
+        guard policy.showsRootDock, navigation.continuityReceipt != nil else { return 0 }
+        return dynamicTypeSize.isAccessibilitySize ? 132 : 88
+    }
+
+    private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {
+        var body: String = {
+            switch response.resultKind {
+            case .planned:
+                return "\(response.blueprint.title) is now in Goals with a plan."
+            case .starterPlanned:
+                return "\(response.blueprint.title) is now in Goals with a starter plan."
+            case .clarificationRequired:
+                return "\(response.blueprint.title) needs one clarification before it becomes a live goal."
+            case .blocked:
+                return "\(response.blueprint.title) was saved as a blocked draft with the missing piece visible."
+            }
+        }()
+
+        if let captureID = overlay.captureID, let goalID = response.target.goalID {
+            do {
+                let binding = try await attachCaptureToCreatedGoal(captureID: captureID, goalID: goalID)
+                if binding != nil {
+                    body += " The capture stayed connected to this goal."
+                }
+            } catch {
+                body += " The goal was created, but the capture could not be attached yet."
+            }
+        }
+
+        creationMessage = GoalDetailInlineMessage(
+            title: "Goal created",
+            body: body,
+            state: .success
+        )
+        goalsRefreshID += 1
+        navigation.dismissOverlay()
+        switch response.resultKind {
+        case .planned, .starterPlanned:
+            navigation.selectTab(.goals)
+        case .clarificationRequired, .blocked:
+            navigation.openGoalDetail(response.target)
+        }
+    }
+
+    private func presentCreateGoal(
+        from source: ShellCommandEntrySource,
+        seedText: String = "",
+        captureID: String? = nil
+    ) {
+        creationMessage = nil
+        container.commandRouter.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
+    }
+
+    private func attachCaptureToCreatedGoal(captureID: String, goalID: String) async throws -> CaptureGoalBinding? {
+        do {
+            return try await container.captureService.attachCaptureToGoal(
+                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
+                now: .now
+            )
+        } catch let error as CaptureServiceError {
+            guard case let .invalidTransition(from, to) = error,
+                  from == .seed,
+                  to == .goalBound else {
+                throw error
+            }
+
+            _ = try await container.captureService.updateCaptureState(
+                CaptureStateUpdateRequest(id: captureID, status: .actionable),
+                now: .now
+            )
+            return try await container.captureService.attachCaptureToGoal(
+                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
+                now: .now
+            )
+        }
+    }
+
+    private func presentCommandSheet(from source: ShellCommandEntrySource) {
+        container.commandRouter.presentCommandSheet(
+            intent: nil,
+            source: source,
+            presentationContext: .neutral
+        )
+    }
+
+    private func presentSurfaceCapture(for tab: AmbitionsSurface) {
+        container.commandRouter.presentCommandSheet(
+            intent: .quickCapture,
+            source: AppShellCaptureAccessModel.source(for: tab),
+            presentationContext: .quickCapture
+        )
+    }
+
+    private func completeOnboarding(choice: OnboardingEntryChoice) async {
+        do {
+            let decision = try await container.onboardingService.complete(choice: choice, now: .now)
+            onboardingError = nil
+            isOnboardingPresented = false
+            navigation.selectTab(decision.selectedTab)
+            switch decision.choice {
+            case .createFirstGoal:
+                presentCreateGoal(from: decision.overlaySource ?? .shellCompose)
+            case .captureFirst:
+                container.commandRouter.presentCommandSheet(
+                    intent: decision.overlayIntent,
+                    source: decision.overlaySource ?? .shellCompose,
+                    presentationContext: decision.presentationContext
+                )
+            case .enterToday:
+                navigation.selectToday(entryContext: .standard)
+            }
+        } catch {
+            onboardingError = "Unable to finish onboarding: \(error.localizedDescription)"
+        }
+    }
+
+    private func validateExternalNavigationGraph() {
+        assert(appFeatureFlags.validationIssues.isEmpty, "App feature flags violate final-canon architecture.")
+        assert(AppDeepLinkRegistry.validationIssues().isEmpty, "Deep-link registry contains unsupported routes.")
+        assert(AppNavigationGraph.nodes.allSatisfy(\.canOpenFromExternalSurface), "Navigation graph contains a dead-end external route.")
+    }
+
+    private func configureStageMotionBehavior() {
+        stageOwner.setReduceMotionEnabled(reduceMotion)
+    }
+
+    private func registerMotionCurrentActionObserver() {
+        motionCurrentActionObserver = NotificationCenter.default.addObserver(
+            forName: MotionCurrentAction.notificationName,
+            object: nil,
+            queue: .main
+        ) { notification in
+            guard let action = notification.ambitionsMotionCurrentAction else { return }
+            let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "stage.motion"
+            Task { @MainActor in
+                routeStageMotionAction(action, source: source)
+            }
+        }
+    }
+
+    private func unregisterMotionCurrentActionObserver() {
+        guard let motionCurrentActionObserver else { return }
+        NotificationCenter.default.removeObserver(motionCurrentActionObserver)
+        self.motionCurrentActionObserver = nil
+    }
+
+    private func routeStageMotionAction(_ action: MotionCurrentAction, source: String) {
+        let route = stageOwner.route(for: action, source: source)
+        switch route {
+        case let .returnToToday(entryContext):
+            navigation.selectToday(entryContext: entryContext)
+        case .openGoals:
+            navigation.selectTab(.goals)
+        case .openTime:
+            navigation.selectTab(.time)
+        case .openTrust:
+            navigation.openHistory()
+        case let .presentOverlay(overlay):
+            if overlay.kind == .memoryLens {
+                navigation.presentMemoryLens(
+                    intent: overlay.intent,
+                    source: overlay.entrySource,
+                    presentationContext: overlay.presentationContext,
+                    query: overlay.query,
+                    goalID: overlay.goalID,
+                    captureID: overlay.captureID
+                )
+            } else {
+                navigation.activeOverlay = overlay
+            }
+        case .none:
+            break
+        }
+    }
+
+}
+
+private struct ShellContinuityBanner: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let receipt: ShellContinuityReceipt
+    let onDismiss: () -> Void
+
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: "checkmark.circle")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+                .frame(width: 20)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(receipt.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                Text(receipt.body)
+                    .font(.caption2)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+            }
+
+            Spacer(minLength: theme.spacing.xs)
+
+            Button(action: onDismiss) {
+                Image(systemName: "xmark")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(theme.colors.textSecondary)
+            .accessibilityIdentifier("shell.continuity-receipt.dismiss-button")
+            .accessibilityLabel("Dismiss receipt")
+        }
+        .padding(.leading, theme.spacing.sm)
+        .padding(.trailing, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xs)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.ribbonMaterial))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(receipt.title). \(receipt.body)")
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "freshness": [
+    {
+      "claim_id": "canonical_claim.4795642673cfd1e9",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.54fc606fc6964686",
+      "dataClass": "public_freshness",
+      "freshness_sla": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.c5b7cb6b3e5307ca",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    }
+  ]
+}

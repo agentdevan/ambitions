@@ -1,0 +1,37 @@
+{
+  "bucket": "ambitions-source-atlas-prod",
+  "classificationRules": [
+    {
+      "classification": "production_stable_noncurrent",
+      "prefix": "source-atlas/v1/production/stable/",
+      "reason": "Production stable objects outside the current target ledger are non-current production objects.",
+      "severity": "Red"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "prefix": "source-atlas/v1/staging/",
+      "reason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "severity": "Red"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "prefix": "source-atlas/v1/validation/",
+      "reason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "severity": "Red"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "prefix": "source-atlas/v1/stable/",
+      "reason": "Legacy stable namespace is not the current configured production namespace.",
+      "severity": "Red"
+    }
+  ],
+  "currentConfiguredProductionRule": "Only objects enumerated by the current production target ledger are Green production objects.",
+  "inventoryPrefix": "source-atlas/",
+  "kind": "ambitions.sourceAtlas.r2ProductionHygienePolicy.v1",
+  "policyID": "source-atlas/r2-production-hygiene/strict-current-configured-production",
+  "retentionApprovals": [],
+  "schemaVersion": 1,
+  "status": "strict_current_configured_production",
+  "unexpectedObjectDefaultSeverity": "Red"
+}

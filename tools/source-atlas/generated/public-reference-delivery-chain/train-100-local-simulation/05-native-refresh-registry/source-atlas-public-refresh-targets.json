@@ -1,0 +1,61 @@
+{
+  "artifactID": "source_atlas_public_refresh_targets.6a368d9c57306898",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "nonClaims": [
+    "not an R2 private-data backend",
+    "not runtime profile storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final path or timetable generator",
+    "not a bundled production refresh target approval",
+    "not real background execution proof"
+  ],
+  "publicReferenceOnly": true,
+  "registry": {
+    "entries": [
+      {
+        "allowedModes": [
+          "startup",
+          "active_lifecycle",
+          "background"
+        ],
+        "nonClaims": [
+          "not an R2 private-data backend",
+          "not runtime profile storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final path or timetable generator",
+          "not a bundled production refresh target approval",
+          "not real background execution proof"
+        ],
+        "reviewArtifactID": "tools/source-atlas/generated/public-reference-delivery-chain/train-100-local-simulation/04-r2-publisher/r2-publisher-report.json",
+        "status": "review_required",
+        "target": {
+          "appVersion": "1.0",
+          "channel": "candidate",
+          "domainID": "occupation_foundation",
+          "environment": "staging",
+          "id": "source-atlas-refresh-target.occupation_foundation.candidate.20260628T000000Z",
+          "publicLocale": "en-US",
+          "schemaVersion": "1.0.0",
+          "targetPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z"
+        }
+      }
+    ]
+  },
+  "schemaVersion": "1.0.0"
+}

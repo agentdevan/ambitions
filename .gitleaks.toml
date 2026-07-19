@@ -1,0 +1,35 @@
+title = "Ambitions local secrets scan"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Clearly synthetic placeholders used in docs and fixtures"
+regexes = [
+  '''(?i)example(_|-)?(token|secret|key|password)''',
+  '''(?i)(dummy|fake|synthetic|placeholder)[-_ ]?(token|secret|key|password)''',
+  '''sk-test-[A-Za-z0-9_-]{12,}''',
+  '''ghp_example[A-Za-z0-9_]*''',
+]
+paths = [
+  '''(^|/)README\.md$''',
+  '''(^|/)docs/.*''',
+  '''(^|/)tools/source-atlas/.*/README\.md$''',
+  '''(^|/)tools/source-atlas/.*/\.env\.example$''',
+]
+
+[[allowlists]]
+description = "Deterministic Ambitions test decision keys, not credentials"
+regexes = [
+  '''decisionKey:\s*"[a-z0-9_.-]+\.contract"''',
+]
+paths = [
+  '''(^|/)Native/AmbitionsTests/.*\.swift$''',
+]
+
+[[allowlists]]
+description = "Exact reviewed public Figma document key"
+regexTarget = "secret"
+regexes = [
+  '''^SWtHm9ouHTPbEFfNrrtZwv$''',
+]

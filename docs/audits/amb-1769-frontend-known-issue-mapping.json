@@ -1,0 +1,276 @@
+{
+  "issue": "AMB-1769",
+  "title": "Frontend Known-Issue Mapping",
+  "status": "implemented_yellow_mapping_complete_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "44f0671407619de4429dc1f163b0a7e9d940709a",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "physical_device_proof": false
+  },
+  "authority_inputs": [
+    "docs/qa/KNOWN_ISSUES.md",
+    "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+    "docs/linear/reconciliation/2026-07-01-repo-to-linear-app-aspect-coverage-matrix.json",
+    "docs/linear/current-state/2026-07-01-linear-coverage-map.md",
+    "docs/audits/frontend-product-law-drift-scan.md",
+    "docs/audits/amb-1764-search-find-act-inspect-acceptance.md",
+    "docs/audits/amb-1771-search-functionality-repair-gate.md"
+  ],
+  "mapping_rules": [
+    "packet_is_crosswalk_not_second_register",
+    "do_not_create_duplicate_linear_issues_when_row_group_exists",
+    "do_not_mark_closed_verified_without_live_register_closure_law",
+    "source_acceptance_can_support_candidate_or_gate_only",
+    "rendered_device_accessibility_release_rows_stay_open_until_current_proof_exists"
+  ],
+  "active_frontend_mapping": [
+    {
+      "linear_issue": "AMB-1735",
+      "workstream": "Root IA / Stage shell acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0006", "AMB-ISSUE-0007", "AMB-ISSUE-0806", "AMB-ISSUE-0901", "AMB-ISSUE-0902", "AMB-ISSUE-1011", "AMB-ISSUE-1701-1709"],
+      "closure_boundary": "source_acceptance_only_shell_visual_device_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1736",
+      "workstream": "Capture global composer acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0002", "AMB-ISSUE-0003", "AMB-ISSUE-0008", "AMB-ISSUE-0012", "AMB-ISSUE-0201-0205", "AMB-ISSUE-1101-1111", "AMB-ISSUE-2002", "AMB-ISSUE-2003"],
+      "closure_boundary": "source_acceptance_only_capture_rendered_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1737",
+      "workstream": "Today flagship acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0001", "AMB-ISSUE-0004", "AMB-ISSUE-0005", "AMB-ISSUE-0016", "AMB-ISSUE-0101-0108", "AMB-ISSUE-1001-1011", "AMB-ISSUE-1201"],
+      "closure_boundary": "source_acceptance_only_today_runtime_device_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1738",
+      "workstream": "Goals flagship acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0401-0406", "AMB-ISSUE-1301-1309"],
+      "closure_boundary": "source_acceptance_only_goals_crash_device_visual_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1739",
+      "workstream": "Time flagship acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0009", "AMB-ISSUE-0501-0507", "AMB-ISSUE-0913", "AMB-ISSUE-1401-1405"],
+      "closure_boundary": "source_acceptance_only_time_device_placement_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1740",
+      "workstream": "You trust privacy acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0601-0607", "AMB-ISSUE-1501-1505", "AMB-ISSUE-2004", "AMB-ISSUE-2005", "AMB-ISSUE-2007"],
+      "closure_boundary": "source_acceptance_only_account_privacy_legal_offline_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1741",
+      "workstream": "Visual system hardening",
+      "known_issue_mapping": ["AMB-ISSUE-0802", "AMB-ISSUE-1503", "AMB-ISSUE-1901-1906", "AMB-ISSUE-0013-0015", "AMB-ISSUE-0801-0807", "AMB-ISSUE-0903-0912", "AMB-ISSUE-1801", "AMB-ISSUE-1802"],
+      "closure_boundary": "visual_green_blocked_until_screenshots_accessibility_owner_review_and_device_proof"
+    },
+    {
+      "linear_issue": "AMB-1764",
+      "workstream": "Search Find Act Inspect acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0701", "AMB-ISSUE-1601-1605"],
+      "closure_boundary": "source_acceptance_only_search_screenshot_route_device_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1765",
+      "workstream": "Frontend screenshot device proof matrix",
+      "known_issue_mapping": ["AMB-ISSUE-0013-0015", "AMB-ISSUE-0801-0807", "AMB-ISSUE-0903-0912", "AMB-ISSUE-1801", "AMB-ISSUE-1802", "AMB-ISSUE-2001-2012"],
+      "closure_boundary": "future_proof_lane_no_known_issue_closes_without_artifacts"
+    },
+    {
+      "linear_issue": "AMB-1766",
+      "workstream": "Frontend accessibility acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0013-0015", "AMB-ISSUE-0801-0807", "AMB-ISSUE-0903-0912", "AMB-ISSUE-1801", "AMB-ISSUE-1802"],
+      "closure_boundary": "future_proof_lane_automation_alone_not_green"
+    },
+    {
+      "linear_issue": "AMB-1767",
+      "workstream": "Offline no-account frontend acceptance",
+      "known_issue_mapping": ["AMB-ISSUE-0014", "AMB-ISSUE-0807", "AMB-ISSUE-2004", "AMB-ISSUE-2005", "AMB-ISSUE-2007"],
+      "closure_boundary": "future_proof_lane_source_local_first_posture_not_offline_runtime_proof"
+    },
+    {
+      "linear_issue": "AMB-1770",
+      "workstream": "Capture full-screen composer proof",
+      "known_issue_mapping": ["AMB-ISSUE-0002", "AMB-ISSUE-0003", "AMB-ISSUE-0008", "AMB-ISSUE-0012", "AMB-ISSUE-0201-0205", "AMB-ISSUE-1101-1111"],
+      "closure_boundary": "future_proof_lane_capture_rendered_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1771",
+      "workstream": "Search functionality repair gate",
+      "known_issue_mapping": ["AMB-ISSUE-0701", "AMB-ISSUE-1601-1605"],
+      "closure_boundary": "repair_gate_only_rendered_search_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1772",
+      "workstream": "Goals crash usability repair gate",
+      "known_issue_mapping": ["AMB-ISSUE-0401-0406", "AMB-ISSUE-1301-1309"],
+      "closure_boundary": "future_proof_lane_current_device_no_crash_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1773",
+      "workstream": "Today Reality Window repair gate",
+      "known_issue_mapping": ["AMB-ISSUE-0001", "AMB-ISSUE-0004", "AMB-ISSUE-0005", "AMB-ISSUE-0016", "AMB-ISSUE-0101-0108", "AMB-ISSUE-1001-1011", "AMB-ISSUE-1201"],
+      "closure_boundary": "future_proof_lane_rendered_today_mutation_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1774",
+      "workstream": "Time Life Calendar device proof gate",
+      "known_issue_mapping": ["AMB-ISSUE-0009", "AMB-ISSUE-0501-0507", "AMB-ISSUE-0913", "AMB-ISSUE-1401-1405"],
+      "closure_boundary": "future_proof_lane_time_device_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1775",
+      "workstream": "Shell chrome screenshot matrix",
+      "known_issue_mapping": ["AMB-ISSUE-0006", "AMB-ISSUE-0007", "AMB-ISSUE-0806", "AMB-ISSUE-0901", "AMB-ISSUE-0902", "AMB-ISSUE-1011", "AMB-ISSUE-1701-1709"],
+      "closure_boundary": "future_proof_lane_no_overlap_route_depth_proof_required"
+    },
+    {
+      "linear_issue": "AMB-1776",
+      "workstream": "Copy state language audit",
+      "known_issue_mapping": ["AMB-ISSUE-0010", "AMB-ISSUE-0802", "AMB-ISSUE-1503", "AMB-ISSUE-1901-1906"],
+      "closure_boundary": "copy_ledger_only_rendered_screenshot_review_required"
+    }
+  ],
+  "duplicate_prevention": [
+    "search_work_maps_to_AMB_ISSUE_0701_and_1601_1605",
+    "capture_work_maps_to_existing_capture_rows",
+    "shell_work_maps_to_AMB_ISSUE_0806_1011_and_1701_1709",
+    "proof_work_maps_to_accessibility_final_proof_and_imported_release_rows",
+    "account_offline_work_maps_to_AMB_ISSUE_2004_2005_2007"
+  ],
+  "proof_ceiling": {
+    "allowed_claims": [
+      "frontend_known_issue_crosswalk_present",
+      "active_frontend_linear_issues_mapped_to_retained_known_issue_row_groups",
+      "duplicate_issue_creation_guard_present",
+      "unsupported_known_issue_closure_guard_present"
+    ],
+    "forbidden_claims": [
+      "any_known_issue_row_closed",
+      "visual_green",
+      "accessibility_green",
+      "runtime_green",
+      "release_green",
+      "testflight_readiness",
+      "app_store_readiness",
+      "privacy_legal_approval",
+      "current_device_proof",
+      "current_screenshot_proof",
+      "owner_acceptance"
+    ]
+  },
+  "validation": {
+    "status": "static_validation_complete_runtime_testing_skipped",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq . docs/audits/amb-1769-frontend-known-issue-mapping.json",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1769-frontend-known-issue-mapping.md",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1769-frontend-known-issue-mapping.md docs/audits/amb-1769-frontend-known-issue-mapping.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1769-frontend-known-issue-mapping.md docs/audits/amb-1769-frontend-known-issue-mapping.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1769-frontend-known-issue-mapping.md docs/audits/amb-1769-frontend-known-issue-mapping.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1769-frontend-known-issue-mapping.md docs/audits/amb-1769-frontend-known-issue-mapping.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "passed_XCODEGEN_NEEDED_0"
+      }
+    ],
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_inspected": [
+      "docs/qa",
+      "docs/linear/reconciliation",
+      "docs/linear/current-state",
+      "truth",
+      "frontend_audit_docs"
+    ],
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1769-frontend-known-issue-mapping.md",
+      "docs/audits/amb-1769-frontend-known-issue-mapping.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "known_issue_row_closure_requires_live_register_law",
+      "current_artifacts_required",
+      "owner_acceptance_required"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

@@ -1,0 +1,664 @@
+{
+  "allowedClaims": [
+    "bounded_production_target"
+  ],
+  "blockedClaims": [
+    "release_green",
+    "source_atlas_runtime_green",
+    "universal_coverage"
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "evidencePaths": {
+    "claim_frontier_reports": "tools/source-atlas/generated/claim-frontier/train-03-fixture/coverage-frontier-report.json, tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/coverage-frontier-report.json, tools/source-atlas/generated/claim-frontier/train-41-education-credential-fixture/coverage-frontier-report.json, tools/source-atlas/generated/claim-frontier/train-43-business-sba-fixture/coverage-frontier-report.json, tools/source-atlas/generated/claim-frontier/train-44-hobbies-nps-fixture/coverage-frontier-report.json",
+    "domain_scorecards": "tools/source-atlas/generated/broad-domain-discovery/train-07-fixture/domain-scorecards.json",
+    "frontier_config": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "gateway_readback_reports": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-civic-readback-train-37.json, docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-education-readback-train-42.json, docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-business-readback-train-43.json, docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-hobbies-readback-train-44.json",
+    "legal_release_claim_gate": "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-hobbies-train-44.json",
+    "native_transport_report": "docs/qa/source-atlas/native/source-atlas-native-penta-domain-live-worker-proof-train-44.json",
+    "r2_report": "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-publisher-report.json",
+    "r2_reports": "tools/source-atlas/generated/r2-publisher/train-37-civic-production-remote-r2/r2-publisher-report.json, tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-publisher-report.json, tools/source-atlas/generated/r2-publisher/train-43-business-production-remote-r2/r2-publisher-report.json, tools/source-atlas/generated/r2-publisher/train-44-hobbies-production-remote-r2/r2-publisher-report.json",
+    "source_lane_registry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "frontiers": [
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "authorityCoverageComplete": true,
+      "blockedClaimCount": 0,
+      "blockedReasons": [],
+      "candidateCount": 1,
+      "claimClassCoverageComplete": true,
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domain": "business_entrepreneurship",
+      "frontierID": "business_entrepreneurship",
+      "gatewayTransportProofComplete": true,
+      "goldSetComplete": true,
+      "goldSetStatus": "passed",
+      "legalPostureComplete": true,
+      "missingClaimClasses": [],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "claim_graph_ready",
+      "packOutputAllowed": true,
+      "packableClaimCount": 3,
+      "productionR2ProofComplete": true,
+      "provenanceComplete": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ],
+      "sourceLanePolicies": [
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "sba.business_guide.start_business"
+        }
+      ]
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "creative_project_reference",
+      "frontierID": "creative_project_reference",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": true,
+      "goldSetStatus": "not_required",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "authorityCoverageComplete": true,
+      "blockedClaimCount": 0,
+      "blockedReasons": [],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": true,
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domain": "education_credentialing",
+      "frontierID": "education_credentialing",
+      "gatewayTransportProofComplete": true,
+      "goldSetComplete": true,
+      "goldSetStatus": "passed",
+      "legalPostureComplete": true,
+      "missingClaimClasses": [],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "claim_graph_ready",
+      "packOutputAllowed": true,
+      "packableClaimCount": 8,
+      "productionR2ProofComplete": true,
+      "provenanceComplete": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "sourceLanePolicies": [
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "college-scorecard.api"
+        },
+        {
+          "authorityClass": "official_institution",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "westpoint.redbook.computer_science_major"
+        }
+      ]
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "gold_set_required_not_present",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "finance_public_reference",
+      "frontierID": "finance_public_reference",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": false,
+      "goldSetStatus": "required_not_present",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "gold_set_required_not_present",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "health_wellness_reference",
+      "frontierID": "health_wellness_reference",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": false,
+      "goldSetStatus": "required_not_present",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "authorityCoverageComplete": true,
+      "blockedClaimCount": 0,
+      "blockedReasons": [],
+      "candidateCount": 1,
+      "claimClassCoverageComplete": true,
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domain": "hobbies_recreation",
+      "frontierID": "hobbies_recreation",
+      "gatewayTransportProofComplete": true,
+      "goldSetComplete": true,
+      "goldSetStatus": "passed",
+      "legalPostureComplete": true,
+      "missingClaimClasses": [],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "claim_graph_ready",
+      "packOutputAllowed": true,
+      "packableClaimCount": 3,
+      "productionR2ProofComplete": true,
+      "provenanceComplete": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceLanePolicies": [
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "nps.recreation-safety"
+        }
+      ]
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "home_life_admin",
+      "frontierID": "home_life_admin",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": true,
+      "goldSetStatus": "not_required",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "authorityCoverageComplete": true,
+      "blockedClaimCount": 2,
+      "blockedReasons": [],
+      "candidateCount": 0,
+      "claimClassCoverageComplete": true,
+      "configuredStatusCeiling": "claim_graph_ready",
+      "domain": "occupation_foundation",
+      "frontierID": "occupation_foundation",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": true,
+      "goldSetStatus": "not_required",
+      "legalPostureComplete": true,
+      "missingClaimClasses": [],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "claim_graph_ready",
+      "packOutputAllowed": true,
+      "packableClaimCount": 26,
+      "productionR2ProofComplete": true,
+      "provenanceComplete": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "sourceLanePolicies": [
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "bls.public.data.api"
+        },
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "onet.database"
+        },
+        {
+          "authorityClass": "scholarly_metadata",
+          "r2PackPolicy": "pack_allowed",
+          "redistributionPolicy": "redistributable",
+          "reviewStatus": "reviewed",
+          "sourceID": "openalex.dataset"
+        },
+        {
+          "authorityClass": "scholarly_metadata",
+          "r2PackPolicy": "pack_allowed",
+          "redistributionPolicy": "redistributable",
+          "reviewStatus": "reviewed",
+          "sourceID": "openalex.works"
+        }
+      ]
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "crosswalk_only",
+        "crosswalk_only_not_regulated_authority",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "personal_growth",
+      "frontierID": "personal_growth",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": true,
+      "goldSetStatus": "not_required",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "authorityCoverageComplete": true,
+      "blockedClaimCount": 0,
+      "blockedReasons": [],
+      "candidateCount": 2,
+      "claimClassCoverageComplete": true,
+      "configuredStatusCeiling": "claim_graph_ready",
+      "domain": "public_civic_requirements",
+      "frontierID": "public_civic_requirements",
+      "gatewayTransportProofComplete": true,
+      "goldSetComplete": true,
+      "goldSetStatus": "passed",
+      "legalPostureComplete": true,
+      "missingClaimClasses": [],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "claim_graph_ready",
+      "packOutputAllowed": true,
+      "packableClaimCount": 2,
+      "productionR2ProofComplete": true,
+      "provenanceComplete": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "sourceLanePolicies": [
+        {
+          "authorityClass": "official_government",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "nara.constitution.presidency"
+        }
+      ]
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "gold_set_required_not_present",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 1,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "relationships_family",
+      "frontierID": "relationships_family",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": false,
+      "goldSetStatus": "required_not_present",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    },
+    {
+      "allowedClaimScopes": [],
+      "authorityCoverageComplete": false,
+      "blockedClaimCount": 0,
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "candidate_only_not_claim_authority",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "gold_set_required_not_present",
+        "legal_posture_incomplete",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "no_packable_claims",
+        "no_registered_source_lanes",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidateCount": 1,
+      "claimClassCoverageComplete": false,
+      "configuredStatusCeiling": "candidate_only",
+      "domain": "travel_relocation",
+      "frontierID": "travel_relocation",
+      "gatewayTransportProofComplete": false,
+      "goldSetComplete": false,
+      "goldSetStatus": "required_not_present",
+      "legalPostureComplete": false,
+      "missingClaimClasses": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "missingSourceIDs": [],
+      "nativeTransportProofComplete": false,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observedStatus": "not_started",
+      "packOutputAllowed": false,
+      "packableClaimCount": 0,
+      "productionR2ProofComplete": false,
+      "provenanceComplete": true,
+      "readinessStatus": "not_started",
+      "sourceIDs": [],
+      "sourceLanePolicies": []
+    }
+  ],
+  "gateID": "source-atlas/coverage-readiness-gate/2526965674f6752a",
+  "gateIssues": [],
+  "kind": "ambitions.sourceAtlas.coverageReadinessGate.v1",
+  "nonClaims": [
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not Visual Green",
+    "not App Store readiness",
+    "not outside legal approval",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "boundedProductionR2Ready": 0,
+    "boundedProductionTargetReady": 5,
+    "candidateOnlyOrNotStarted": 7,
+    "claimGraphReady": 0,
+    "configuredFrontiers": 12,
+    "gatewayReadyFrontiers": 4,
+    "packReadyFrontiers": 5,
+    "runtimeReadyFrontiers": 5
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; per-frontier readiness only",
+  "status": "Source Green for coverage readiness gate",
+  "universalCoverageClaimAllowed": false,
+  "universalCoverageIssues": [
+    "creative_project_reference: legal posture incomplete",
+    "creative_project_reference: not production/runtime ready",
+    "creative_project_reference: pack output not production-approved",
+    "finance_public_reference: legal posture incomplete",
+    "finance_public_reference: not production/runtime ready",
+    "finance_public_reference: pack output not production-approved",
+    "health_wellness_reference: legal posture incomplete",
+    "health_wellness_reference: not production/runtime ready",
+    "health_wellness_reference: pack output not production-approved",
+    "home_life_admin: legal posture incomplete",
+    "home_life_admin: not production/runtime ready",
+    "home_life_admin: pack output not production-approved",
+    "personal_growth: legal posture incomplete",
+    "personal_growth: not production/runtime ready",
+    "personal_growth: pack output not production-approved",
+    "relationships_family: legal posture incomplete",
+    "relationships_family: not production/runtime ready",
+    "relationships_family: pack output not production-approved",
+    "travel_relocation: legal posture incomplete",
+    "travel_relocation: not production/runtime ready",
+    "travel_relocation: pack output not production-approved"
+  ],
+  "valid": true,
+  "versionID": "source-atlas-coverage-readiness-gate-train-41"
+}
