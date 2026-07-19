@@ -141,6 +141,8 @@
         "docs/canon/generated/specification-coverage.md",
         "docs/canon/generated/supersession-manifest.json",
         "docs/canon/generated/unresolved-conflicts.md",
+        "docs/canon/migration/impact-reference-index.json",
+        "docs/canon/references/skill-dependencies.json",
         "docs/canon/references/research/cebr-01/CEBR-01_Codex_Design_Technical_Manual.md",
         "docs/canon/references/research/cebr-01/CEBR-01_Invention_Disclosure_Package.docx",
         "docs/canon/references/research/cebr-01/CEBR-01_Machine_Contract.yaml",
