@@ -554,6 +554,7 @@
         "tests/canon/test_search_consolidated_docket.py",
         "tests/canon/test_skill_conformance.py",
         "tests/canon/test_task29_antiregression.py",
+        "tests/canon/test_traceability.py",
         "tools/ambitions_canon/audit.py",
         "tools/ambitions_canon/authorization.py",
         "tools/ambitions_canon/benchmark.py",
@@ -562,6 +563,7 @@
         "tools/ambitions_canon/purge.py",
         "tools/ambitions_canon/render.py",
         "tools/ambitions_canon/skill_conformance.py",
+        "tools/ambitions_canon/traceability.py",
         "tools/mcp/ambitions_native_mcp/Sources/AmbitionsNativeMCPCore/AmbitionsNativeMCPCore.swift",
         "tools/openai/repo_brain/README.md"
       ],

@@ -347,13 +347,18 @@ def _implementation_files(repo_root: Path) -> tuple[PurePosixPath, ...]:
         root = repo_root / scan_root
         if root.is_symlink() or not root.is_dir():
             continue
-        files.extend(
-            PurePosixPath(item.relative_to(repo_root).as_posix())
-            for item in root.rglob("*")
-            if not item.is_symlink()
-            and item.is_file()
-            and item.suffix.lower() in IMPLEMENTATION_SUFFIXES
-        )
+        for directory, children, names in os.walk(root, followlinks=False):
+            children[:] = sorted(
+                child for child in children if not child.startswith(".")
+            )
+            current = Path(directory)
+            files.extend(
+                PurePosixPath((current / name).relative_to(repo_root).as_posix())
+                for name in sorted(names)
+                if not (current / name).is_symlink()
+                and (current / name).is_file()
+                and (current / name).suffix.lower() in IMPLEMENTATION_SUFFIXES
+            )
     return tuple(sorted(set(files), key=lambda item: item.as_posix()))
 
 

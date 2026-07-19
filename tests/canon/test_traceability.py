@@ -158,6 +158,34 @@ class TraceabilityTests(unittest.TestCase):
             )
         )
 
+    def test_hidden_build_artifacts_are_not_implementation_inventory(self):
+        source = self.root / "Native/Ambitions/Surfaces/Today/TodayView.swift"
+        source.parent.mkdir(parents=True)
+        source.write_text("struct TodayView {}\n", encoding="utf-8")
+        artifact = self.root / "tools/mcp/ambitions_native_mcp/.build/Leak.swift"
+        artifact.parent.mkdir(parents=True)
+        artifact.write_text("struct Leak {}\n", encoding="utf-8")
+        item = requirement("TODAY-001")
+        current = registry(
+            (
+                document(
+                    "SURFACE-TODAY",
+                    (item,),
+                    source_owners=("Native/Ambitions/Surfaces/Today/",),
+                ),
+            )
+        )
+
+        report = build_traceability(current, self.root, ())
+
+        self.assertEqual(
+            report.records[0].source_mappings[0].implementation_files,
+            (source.relative_to(self.root).as_posix(),),
+        )
+        self.assertFalse(
+            any(".build/Leak.swift" in finding.message for finding in report.findings)
+        )
+
     def test_requirement_verification_and_stable_references_feed_separate_maps(self):
         test_path = self.root / "tests/canon/test_traceability.py"
         test_path.parent.mkdir(parents=True)
