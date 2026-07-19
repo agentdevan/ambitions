@@ -81,7 +81,7 @@
       "required_for_task_types": []
     },
     {
-      "argv": ["python3", "scripts/ambitions-canon.py", "independent-review", "--check"],
+      "argv": ["python3", "scripts/ambitions-canon.py", "conflicts", "report"],
       "command_id": "independent-review-evidence",
       "evidence_class": "independent-review",
       "proof_obligation_ids": ["independent-review"],
