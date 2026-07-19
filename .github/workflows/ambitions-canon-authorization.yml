@@ -114,8 +114,7 @@ jobs:
           HEAD_SHA: ${{ steps.metadata.outputs.head_sha }}
           PR_NUMBER: ${{ inputs.pull_request_number }}
         run: |
-          python3 scripts/ambitions-canon-platform-attest.py start \
-            --repo-root . \
+          python3 scripts/ambitions-canon-platform-attest.py --repo-root . start \
             --intake-json "$RUNNER_TEMP/task-intake.json" \
             --base-ref refs/heads/main \
             --base-sha "$BASE_SHA" \
@@ -286,8 +285,7 @@ jobs:
         env:
           AMBITIONS_CANON_ATTESTATION_PRIVATE_KEY: ${{ secrets.AMBITIONS_CANON_ATTESTATION_PRIVATE_KEY }}
         run: |
-          python3 scripts/ambitions-canon-platform-attest.py finalize \
-            --repo-root . \
+          python3 scripts/ambitions-canon-platform-attest.py --repo-root . finalize \
             --authorization canon-start/task-authorization.json \
             --trusted-event canon-start/trusted-event.json \
             --approval-attestation canon-start/approval-attestation.json \
