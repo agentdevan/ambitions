@@ -1699,7 +1699,7 @@ def _check_pack_path(root: Path, pack_path: Path) -> int:
             raise CanonError(
                 "PACK_INTAKE_STALE", "stored task-pack intake root changed", issue_path
             )
-        intake = TaskIntake.from_json(intake_data).with_source_path(intake_value)
+        intake = _task_pack_intake(intake_data).with_source_path(intake_value)
         try:
             manifest = load_manifest(root)
             registry = build_registry(manifest, load_documents(root, manifest))

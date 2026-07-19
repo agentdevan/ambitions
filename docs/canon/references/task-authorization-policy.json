@@ -15,9 +15,9 @@
       "policy_revision": "1"
     }
   ],
-  "approval_trust_anchor_id": "platform-approval-v1",
+  "approval_trust_anchor_id": "platform-approval-v2",
   "compiler_version": "0.2.0",
-  "event_trust_anchor_id": "trusted-ci-validation-v1",
+  "event_trust_anchor_id": "trusted-ci-validation-v2",
   "issue_state": {
     "issues": [
       {
@@ -83,12 +83,21 @@
         "task_ids": [
           "TASK-29"
         ]
+      },
+      {
+        "issue_reference": "CEBR-01-CANON-INTEGRATION",
+        "prerequisite_task_ids": [],
+        "revision": "cebr-01-canon-integration-v1",
+        "state": "approved",
+        "task_ids": [
+          "CEBR-01-CANON-INTEGRATION"
+        ]
       }
     ],
     "schema_version": 1,
-    "snapshot_revision": "canon-train-5-task-sequence-v2"
+    "snapshot_revision": "canon-cebr-01-admission-v1"
   },
-  "policy_revision": "authorization-v1",
+  "policy_revision": "authorization-v2",
   "repository_identity": {
     "repository_full_name": "agentdevan/ambitions",
     "repository_id": "R_kgDOSAFvNw"
@@ -112,6 +121,74 @@
     "source_ownership": "docs/canon/generated/concept-ownership.json"
   },
   "task_rules": [
+    {
+      "approval_policy_ids": [
+        "owner-gate@1"
+      ],
+      "approval_required": true,
+      "authorized_files": [
+        "docs/canon/MANIFEST.toml",
+        "docs/canon/generated/CODEX_START_HERE.md",
+        "docs/canon/generated/INDEX.md",
+        "docs/canon/generated/canon-index.json",
+        "docs/canon/generated/concept-ownership.json",
+        "docs/canon/generated/external-reference-impact.md",
+        "docs/canon/generated/law-proof-map.json",
+        "docs/canon/generated/law-source-map.json",
+        "docs/canon/generated/law-test-map.json",
+        "docs/canon/generated/object-boundary-matrix.md",
+        "docs/canon/generated/requirement-graph.json",
+        "docs/canon/generated/specification-coverage.md",
+        "docs/canon/generated/supersession-manifest.json",
+        "docs/canon/generated/unresolved-conflicts.md",
+        "docs/canon/references/research/cebr-01/CEBR-01_Codex_Design_Technical_Manual.md",
+        "docs/canon/references/research/cebr-01/CEBR-01_Invention_Disclosure_Package.docx",
+        "docs/canon/references/research/cebr-01/CEBR-01_Machine_Contract.yaml",
+        "docs/canon/references/research/cebr-01/README.md",
+        "docs/canon/specifications/global/trust-inspection.md",
+        "docs/canon/specifications/journeys/life-branch-reconciliation.md",
+        "docs/canon/specifications/objects/branch-viability-certificate.md",
+        "docs/canon/specifications/objects/life-branch.md",
+        "docs/canon/specifications/surfaces/goals.md",
+        "docs/canon/specifications/surfaces/time.md",
+        "docs/canon/specifications/surfaces/today.md",
+        "docs/canon/specifications/surfaces/you.md",
+        "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md"
+      ],
+      "issue_reference": "CEBR-01-CANON-INTEGRATION",
+      "maximum_claim_ceiling": "Canon design-intent integration for exact CEBR-01 files only; no source implementation, runtime, visual, accessibility, performance, device, patentability, release, merge, or external-system claim",
+      "proof_obligations": [
+        "focused-red-green",
+        "independent-review",
+        "offline-determinism",
+        "one-covering-set"
+      ],
+      "required_checks": [
+        "authority-sprawl",
+        "canon-audit",
+        "canon-build-check",
+        "canon-unit",
+        "git-diff-check",
+        "independent-review-evidence",
+        "skill-conformance"
+      ],
+      "requirement_ids": [
+        "AUTHORITY-AMENDMENT-001",
+        "CONST-PROOF-EVIDENCE-001",
+        "MISSION-ORCHESTRATION-LOOP-001",
+        "MISSION-REFLOW-001",
+        "OBJECT-CANONICAL-GRAPH-001",
+        "RUNTIME-MUTATION-SEQUENCE-001"
+      ],
+      "scopes": [
+        "MISSION-REFLOW-001"
+      ],
+      "source_owner": "canon-governance",
+      "task_id": "CEBR-01-CANON-INTEGRATION",
+      "task_types": [
+        "release"
+      ]
+    },
     {
       "approval_policy_ids": [
         "owner-gate@1"
@@ -605,8 +682,8 @@
     "anchors": [
       {
         "algorithm": "rsa-pkcs1v15-sha256",
-        "anchor_id": "platform-approval-v1",
-        "modulus_hex": "d37e6a2a4579fd64594650131d274143569b6f4836bbbdf04ebb94ea110c244fdaf81ae7414af7da9d626e6e7ca725a573c925a3c26fec35388287addf71c32e1911c966391e144fbcd6aacae4adc4cb0c7d36e3e3b5072aed2720d4f7dac64fef89794cbb7273f6834faafbe1f1dff629644b3efdd0277b92ee841e7737addfa58765a71392400b7bd697a0ec8c2a0fe0e1160822f851dc414ab3c54c869953fdfa921657cb775947aa6ab24c5dadf39f82663a3a96e98f393613fb1826e2fbb6843bb9df01ba114ff3cec1c864e527a08e6b11eb4997f1638cf45787e048b3e8c54510ae5b0f77b9e0f449f33428b37b9f0dbeb86047d12421f9af57a65237",
+        "anchor_id": "platform-approval-v2",
+        "modulus_hex": "ad7b7e21c0e8815b1baee489f48a3d06bce280f73ab9f376c5b65a9edce8c6cdfd75f812d46d516d8d6933c78f576f918b9ed3fc992ac567684adc20bad42b3c2873eba9901d4d68814f9f33a805f38afc84ed4afd16b5921e0d49e8b8498478841b08564ab8395c4f1be3b13a69ad015c86790cdb702bad94e5d18382bb929d9b059b1f786d24719e4572ae51697bdc9d9f0f69b6104ba36ce5d06545b30b9fa9b85208b01693ca0aa0dc81dff1d11bfcaa595bbcb7b4552156c708bec9d358edbaeddbb97b7ebb595c682c9ae3a7073d5efc506b1d06cb1c12a5b843fc91ccb564ae4abd9abb1d508bf44cb6bca09ab488967e46d5bed80112173f96383bf95ca9ea24cbe5013f9629760001341fd2fac782255616257c574d52ab021f5973e2552b98b2ab95460607c1046b6eb6715ede7d9232c621d1ee2f4e84d22a1289012ace128da1c066a5d7fbb655712603c0064003528d3675886900b56c2ecd75155c6c1ab4673da829debc6d8c8ad7f439fc790635d65d43ebffc98aecf0fe2f",
         "public_exponent": 65537,
         "purposes": [
           "approval"
@@ -614,8 +691,8 @@
       },
       {
         "algorithm": "rsa-pkcs1v15-sha256",
-        "anchor_id": "trusted-ci-validation-v1",
-        "modulus_hex": "dcb83e3bc960381154815a989690b16445db1f188e7babfb8b8c1679bd168636635475a0af4a2cb836651ea70982d72252e1ab52ed5a573289a5bcb526d5a204c85f930322f46c3662207b29c0138fb357fdc12204f8bc116a3b9ad10cfb04d0c6df020e38ddd41187fa2936c9b3ea278ad3e8f799df06035448c7c9e49ed6e4643e10b7ae3c1557f3c920b7dfc5ab4fca27a9740e7b96fd8d7cf97ed68548f09a231ba6f361f8d3acb5fefe0de018e00a07990a5d5bdebb106ad88e1d87e58db01f5b88f9ccaeb5d3d6c6826de96afcbc9e65dafbdd4c3b0458706a9d1d6fb6ed9930992f493bba5c07d060f5cf0d4f2dfde65388fa8f25323b448dc3fad267",
+        "anchor_id": "trusted-ci-validation-v2",
+        "modulus_hex": "a43d771a60ed2b22ab6b647edea9da91545663a11eaf45684e5cb6e59f20f3fbfea83fc4711761825866cd084fb07d9075a3ff49bec73900d985fc51d926ed60f7a217c03cfe52f3cbb8045be030d68ee7baa0dcbdb21e030e11d41c00b0886b51725cc04bebc3679b87d899400be880af86d53b8efd9fa774bde33a396168e052a56c054bd49b92ef74b40e8637f56f26f12485aef852124293e879ed4413b2f97348648ffc6da2c02fd96b8eb9c203e20f4ef44d5bc00662a78363cc9bb28c903db448945e04d160565325ec523ae9e67b59d6387f3431589677eec7d9ecb21a1dc86c700c99a1d1105347a8ab0cfd67f1b7d67493c9d77980e1c21075c2242980fd7c0180ac0478f71bc9dc2fd9b1d12f230bfcfcebcf1b71052377f39b466f31eddaa91f51d3d06c10089e7d5293a460a21ca2f93d89ffd4b89fbaa63ea98a0951b8b73b9ce1bd69e204fcca49a0af09e2a6eea63579ed572756295fb397ecc91fb4549c8067419db31edc21e5fe2485ab54aa06eb456bc2670888dabc65",
         "public_exponent": 65537,
         "purposes": [
           "event",
@@ -623,12 +700,12 @@
         ]
       }
     ],
-    "registry_revision": "authorization-trust-anchors-v1",
+    "registry_revision": "authorization-trust-anchors-v2",
     "repository_identity": {
       "repository_full_name": "agentdevan/ambitions",
       "repository_id": "R_kgDOSAFvNw"
     },
     "schema_version": 1
   },
-  "validation_trust_anchor_id": "trusted-ci-validation-v1"
+  "validation_trust_anchor_id": "trusted-ci-validation-v2"
 }

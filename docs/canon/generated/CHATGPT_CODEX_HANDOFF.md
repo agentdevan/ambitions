@@ -13,7 +13,7 @@ This handoff is request-only and cannot authorize tracked changes, approval, pro
 ## Governed Project Instructions
 
 - Path: `docs/canon/references/chatgpt-project-instructions.md`
-- Byte-for-byte SHA-256: `97ff5129fd5ba353958ebe9e24a97eb72ff4675c31df7f19119ff898998c1b23`
+- Byte-for-byte SHA-256: `0bcce7e6b8a1784c704e614f932dd78d0f707630d7fd8b5ed275ea2e0f2efe20`
 - Authority: `none`
 
 ## Flow

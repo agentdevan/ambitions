@@ -89,14 +89,14 @@
       "required_for_task_types": ["privacy", "release", "runtime", "swiftui"]
     }
   ],
-  "manifest_revision": "validation-commands-v1",
+  "manifest_revision": "validation-commands-v2",
   "schema_version": 1,
   "trusted_workflow": {
     "app_id": "15368",
     "check_identity": "ambitions-canon-authorization",
-    "digest": "56535473ee18ff45d8db037bf9ba26ef7d0c62671a08db356c7e29a012dfdf12",
+    "digest": "90e66d77efbe2a349a5e6d4aa66eff72c531b23e237a6234764db3ad65478ef1",
     "integration_id": "github-actions",
-    "path": ".github/workflows/ambitions-canon-shadow-audit.yml",
+    "path": ".github/workflows/ambitions-canon-authorization.yml",
     "ref": "refs/heads/main"
   }
 }

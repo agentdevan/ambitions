@@ -188,5 +188,19 @@ class SkillConformanceTests(unittest.TestCase):
         )
 
 
+class RepositorySkillConformanceTests(unittest.TestCase):
+    def test_committed_requirement_index_digest_matches_registry(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        registry_path = root / "docs/canon/references/skill-dependencies.json"
+        registry_data = json.loads(registry_path.read_text(encoding="utf-8"))
+        requirement_index_path = root / registry_data["requirement_index_path"]
+
+        self.assertEqual(
+            registry_data["requirement_index_sha256"],
+            sha(requirement_index_path),
+            "retained skill registry must be rebound whenever canon-index.json changes",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -13,7 +13,7 @@ from unittest import mock
 from tools.ambitions_canon import build as canon_build
 from tools.ambitions_canon import cli as canon_cli
 from tools.ambitions_canon import task_pack as task_pack_module
-from tools.ambitions_canon.cli import _pack
+from tools.ambitions_canon.cli import _check_pack_path, _pack
 from tools.ambitions_canon.model import (
     AuthorityClass,
     AuthorityReference,
@@ -409,6 +409,40 @@ class TaskPackTests(unittest.TestCase):
             intake_path = initialize_empty_cli_root(root)
 
             self.assertEqual(_pack(root, intake_path, check=False), 0)
+
+    def test_pack_check_reparses_authorization_intake_schema(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_empty_cli_root(root)
+            intake_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "intake_id": "INTAKE-CEBR-01",
+                        "task_id": "CEBR-01-CANON-INTEGRATION",
+                        "issue_reference": "CEBR-01-CANON-INTEGRATION",
+                        "requested_task_type": "release",
+                        "requested_scope": ["MISSION-REFLOW-001"],
+                        "requested_requirement_ids": ["MISSION-REFLOW-001"],
+                        "requested_changed_files": ["docs/canon/MANIFEST.toml"],
+                        "requested_validation": ["canon-audit"],
+                        "requested_proof": ["canon-compiler-green"],
+                        "requested_rollback": ["git-revert"],
+                        "requested_claim_ceiling": "Canon design intent only",
+                        "requested_skill_adapters": [
+                            "ambitions-source-truth-authority"
+                        ],
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+            pack_path = next((root / ".codex/canon-packs").glob("*/*.json"))
+            self.assertEqual(_check_pack_path(root, pack_path), 0)
 
     def test_optional_visual_manifest_detects_absent_to_present_mutation(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
