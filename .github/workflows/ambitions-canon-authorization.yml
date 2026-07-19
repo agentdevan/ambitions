@@ -189,9 +189,23 @@ jobs:
           name: canon-start-${{ github.run_id }}-${{ github.run_attempt }}
           path: canon-start
 
-      - name: Run exact base-owned command
+      - name: Run candidate validation command
+        if: matrix.command_id != 'independent-review-evidence'
         env:
           COMMAND_ID: ${{ matrix.command_id }}
+        run: |
+          cd trusted
+          python3 scripts/ambitions-canon-platform-run-command.py \
+            --repo-root . \
+            --candidate-root ../candidate \
+            --authorization ../canon-start/task-authorization.json \
+            --command-id "$COMMAND_ID"
+
+      - name: Run trusted independent-review verifier
+        if: matrix.command_id == 'independent-review-evidence'
+        env:
+          COMMAND_ID: ${{ matrix.command_id }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           cd trusted
           python3 scripts/ambitions-canon-platform-run-command.py \

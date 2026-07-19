@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -21,6 +22,51 @@ from tools.ambitions_canon.authorization import (
     load_base_policy,
     validate_task_authorization,
 )
+
+
+_INDEPENDENT_REVIEW_COMMAND = "independent-review-evidence"
+_INDEPENDENT_REVIEW_ARGV = [
+    "python3",
+    "scripts/ambitions-canon-independent-review-evidence.py",
+]
+
+
+def resolve_validation_execution(
+    *,
+    command_id: str,
+    manifest_argv: list[str],
+    trusted_root: Path,
+    candidate_root: Path,
+) -> tuple[list[str], Path]:
+    if command_id != _INDEPENDENT_REVIEW_COMMAND:
+        return list(manifest_argv), candidate_root
+    if manifest_argv != _INDEPENDENT_REVIEW_ARGV:
+        raise AuthorizationError(
+            "AUTH_PLATFORM_COMMAND",
+            "independent-review command does not name the fixed trusted verifier",
+        )
+    return (
+        [
+            sys.executable,
+            str(
+                trusted_root.resolve()
+                / "scripts/ambitions-canon-independent-review-evidence.py"
+            ),
+        ],
+        trusted_root,
+    )
+
+
+def resolve_validation_environment(
+    *,
+    command_id: str,
+    source_environment: dict[str, str],
+) -> dict[str, str]:
+    environment = dict(source_environment)
+    github_token = environment.pop("GH_TOKEN", None)
+    if command_id == _INDEPENDENT_REVIEW_COMMAND and github_token:
+        environment["GH_TOKEN"] = github_token
+    return environment
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -76,10 +122,37 @@ def main(argv: list[str] | None = None) -> int:
             raise AuthorizationError(
                 "AUTH_PLATFORM_COMMAND", "command argv digest changed"
             )
+        manifest_argv = command["argv"]
+        assert isinstance(manifest_argv, list)
+        execution_argv, execution_root = resolve_validation_execution(
+            command_id=arguments.command_id,
+            manifest_argv=[str(item) for item in manifest_argv],
+            trusted_root=arguments.repo_root,
+            candidate_root=arguments.candidate_root,
+        )
+        environment = resolve_validation_environment(
+            command_id=arguments.command_id,
+            source_environment=dict(os.environ),
+        )
+        if arguments.command_id == _INDEPENDENT_REVIEW_COMMAND:
+            environment.update(
+                {
+                    "AMBITIONS_CANON_REVIEW_REPOSITORY": str(
+                        event["repository_full_name"]
+                    ),
+                    "AMBITIONS_CANON_REVIEW_PULL_REQUEST": str(
+                        event["pull_request_number"]
+                    ),
+                    "AMBITIONS_CANON_REVIEW_HEAD_SHA": str(
+                        event["trusted_head_sha"]
+                    ),
+                }
+            )
         completed = subprocess.run(
-            command["argv"],
-            cwd=arguments.candidate_root,
+            execution_argv,
+            cwd=execution_root,
             check=False,
+            env=environment,
         )
         if completed.returncode != 0:
             print(

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import importlib.util
+import io
 import json
 import os
 import stat
@@ -9,7 +11,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from contextlib import nullcontext
+from contextlib import nullcontext, redirect_stdout
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -31,6 +33,14 @@ from tools.ambitions_canon.authorization import (
     validate_task_authorization,
     write_authorization_output,
     write_json_atomic,
+)
+from tools.ambitions_canon.independent_review import (
+    CODEX_REVIEWER_ID,
+    CODEX_REVIEWER_LOGIN,
+    IndependentReviewError,
+    fetch_independent_review_evidence,
+    main as independent_review_main,
+    validate_independent_review_payload,
 )
 
 
@@ -1965,20 +1975,41 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
             ],
         }
 
-    def test_policy_has_owner_gated_issue_state_routes_for_tasks_25_through_29(self) -> None:
+    def test_policy_preserves_train_routes_and_admits_autonomous_repair_delegation(self) -> None:
         policy = json.loads(
             (ROOT / "docs/canon/references/task-authorization-policy.json").read_text(
                 encoding="utf-8"
             )
         )
         rules = {item["task_id"]: item for item in policy["task_rules"]}
-        self.assertEqual(set(rules), {f"TASK-{number}" for number in range(24, 30)})
+        historical_tasks = {f"TASK-{number}" for number in range(24, 30)}
+        self.assertEqual(
+            set(rules),
+            historical_tasks
+            | {
+                "CEBR-01-CANON-INTEGRATION",
+                "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+            },
+        )
         for number in range(24, 30):
             rule = rules[f"TASK-{number}"]
             self.assertTrue(rule["approval_required"])
             self.assertTrue(rule["authorized_files"])
             self.assertTrue(rule["required_checks"])
             self.assertTrue(rule["proof_obligations"])
+
+        delegation = rules["CODEX-AUTONOMOUS-REPAIR-DELEGATION"]
+        self.assertTrue(delegation["approval_required"])
+        self.assertEqual(delegation["approval_policy_ids"], ["owner-gate@1"])
+        self.assertEqual(delegation["scopes"], ["AUTHORITY-AMENDMENT-001"])
+        self.assertIn(
+            "docs/canon/references/task-authorization-policy.json",
+            delegation["authorized_files"],
+        )
+        self.assertIn(
+            ".github/workflows/ambitions-canon-authorization.yml",
+            delegation["authorized_files"],
+        )
 
         issue_snapshot = policy["issue_state"]
         issues = {
@@ -2635,6 +2666,382 @@ class ExactScopeAndClosedContractTests(unittest.TestCase):
             tampered["tree_delta"]["digest"] = "0" * 64
             with self.assertRaisesRegex(AuthorizationError, "AUTH_ENVELOPE_FIELDS"):
                 validate_task_authorization(tampered)
+
+
+REVIEW_HEAD_SHA = "a" * 40
+REVIEW_STALE_SHA = "b" * 40
+
+
+def load_platform_runner():
+    path = ROOT / "scripts/ambitions-canon-platform-run-command.py"
+    spec = importlib.util.spec_from_file_location("platform_run_command", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def codex_review(
+    *,
+    commit_id: str = REVIEW_HEAD_SHA,
+    reviewer_id: int = CODEX_REVIEWER_ID,
+    reviewer_login: str = CODEX_REVIEWER_LOGIN,
+    state: str = "COMMENTED",
+) -> dict[str, object]:
+    return {
+        "id": 42,
+        "commit_id": commit_id,
+        "state": state,
+        "body": f"### Codex Review\n\n**Reviewed commit:** `{commit_id[:10]}`",
+        "user": {
+            "id": reviewer_id,
+            "login": reviewer_login,
+            "type": "Bot",
+        },
+    }
+
+
+def owner_review_request(
+    *,
+    head_sha: str = REVIEW_HEAD_SHA,
+    created_at: str = "2026-07-19T20:00:00Z",
+) -> dict[str, object]:
+    return {
+        "id": 84,
+        "created_at": created_at,
+        "body": (
+            "CODEX-INDEPENDENT-REVIEW-REQUEST\n"
+            f"head={head_sha}\n"
+            "required=zero-critical-zero-important"
+        ),
+        "user": {"id": 529921, "login": "agentdevan", "type": "User"},
+    }
+
+
+def codex_clean_reaction(
+    *, created_at: str = "2026-07-19T20:01:00Z"
+) -> dict[str, object]:
+    return {
+        "id": 126,
+        "created_at": created_at,
+        "content": "+1",
+        "user": {
+            "id": CODEX_REVIEWER_ID,
+            "login": CODEX_REVIEWER_LOGIN,
+            "type": "Bot",
+        },
+    }
+
+
+class IndependentReviewEvidenceTests(unittest.TestCase):
+    def test_manifest_and_workflow_bind_real_independent_review_verifier(self) -> None:
+        manifest = json.loads(
+            (
+                ROOT
+                / "docs/canon/references/validation-command-manifest.json"
+            ).read_text(encoding="utf-8")
+        )
+        command = next(
+            item
+            for item in manifest["commands"]
+            if item["command_id"] == "independent-review-evidence"
+        )
+        self.assertEqual(
+            command["argv"],
+            [
+                "python3",
+                "scripts/ambitions-canon-independent-review-evidence.py",
+            ],
+        )
+        self.assertEqual(command["proof_obligation_ids"], ["independent-review"])
+        workflow = (
+            ROOT / ".github/workflows/ambitions-canon-authorization.yml"
+        ).read_text(encoding="utf-8")
+        ordinary_step = workflow.split(
+            "- name: Run candidate validation command", 1
+        )[1].split("- name: Run trusted independent-review verifier", 1)[0]
+        trusted_step = workflow.split(
+            "- name: Run trusted independent-review verifier", 1
+        )[1].split("\n  attest:", 1)[0]
+        self.assertNotIn("GH_TOKEN:", ordinary_step)
+        self.assertIn("GH_TOKEN: ${{ github.token }}", trusted_step)
+
+    def test_platform_runner_uses_trusted_script_not_candidate_substitute(self) -> None:
+        runner = load_platform_runner()
+        trusted = Path("/trusted")
+        candidate = Path("/candidate")
+        argv, cwd = runner.resolve_validation_execution(
+            command_id="independent-review-evidence",
+            manifest_argv=[
+                "python3",
+                "scripts/ambitions-canon-independent-review-evidence.py",
+            ],
+            trusted_root=trusted,
+            candidate_root=candidate,
+        )
+        self.assertEqual(
+            argv,
+            [
+                sys.executable,
+                str(
+                    trusted
+                    / "scripts/ambitions-canon-independent-review-evidence.py"
+                ),
+            ],
+        )
+        self.assertEqual(cwd, trusted)
+
+        ordinary_argv, ordinary_cwd = runner.resolve_validation_execution(
+            command_id="canon-audit",
+            manifest_argv=["python3", "scripts/ambitions-canon.py", "audit"],
+            trusted_root=trusted,
+            candidate_root=candidate,
+        )
+        self.assertEqual(
+            ordinary_argv, ["python3", "scripts/ambitions-canon.py", "audit"]
+        )
+        self.assertEqual(ordinary_cwd, candidate)
+
+        source_environment = {"GH_TOKEN": "secret", "PATH": "/usr/bin"}
+        self.assertEqual(
+            runner.resolve_validation_environment(
+                command_id="canon-audit",
+                source_environment=source_environment,
+            ),
+            {"PATH": "/usr/bin"},
+        )
+        self.assertEqual(
+            runner.resolve_validation_environment(
+                command_id="independent-review-evidence",
+                source_environment=source_environment,
+            ),
+            source_environment,
+        )
+
+    def test_comment_review_without_owner_request_and_reaction_fails(self) -> None:
+        with self.assertRaisesRegex(
+            IndependentReviewError, "REVIEW_EXACT_HEAD_MISSING"
+        ):
+            validate_independent_review_payload(
+                [codex_review()],
+                {42: []},
+                expected_head_sha=REVIEW_HEAD_SHA,
+                reviews_has_next_page=False,
+                comments_with_next_page=frozenset(),
+            )
+
+    def test_live_clean_reaction_after_owner_exact_head_request_is_green(self) -> None:
+        result = validate_independent_review_payload(
+            [],
+            {},
+            expected_head_sha=REVIEW_HEAD_SHA,
+            reviews_has_next_page=False,
+            comments_with_next_page=frozenset(),
+            review_requests=[owner_review_request()],
+            clean_reactions=[codex_clean_reaction()],
+        )
+        self.assertEqual(result["review_id"], 126)
+        self.assertEqual(result["review_request_id"], 84)
+        self.assertEqual(
+            result["evidence_kind"], "owner-request-clean-reaction"
+        )
+
+    def test_clean_reaction_wrong_order_stale_request_or_wrong_actor_fails(self) -> None:
+        cases = (
+            (
+                [owner_review_request(created_at="2026-07-19T20:02:00Z")],
+                [codex_clean_reaction()],
+                "REVIEW_CLEAN_REACTION_MISSING",
+            ),
+            (
+                [owner_review_request(head_sha=REVIEW_STALE_SHA)],
+                [codex_clean_reaction()],
+                "REVIEW_EXACT_HEAD_MISSING",
+            ),
+            (
+                [owner_review_request()],
+                [
+                    {
+                        **codex_clean_reaction(),
+                        "user": {
+                            "id": 1,
+                            "login": "attacker",
+                            "type": "User",
+                        },
+                    }
+                ],
+                "REVIEW_CLEAN_REACTION_MISSING",
+            ),
+        )
+        for requests, reactions, code in cases:
+            with self.subTest(code=code), self.assertRaisesRegex(
+                IndependentReviewError, code
+            ):
+                validate_independent_review_payload(
+                    [],
+                    {},
+                    expected_head_sha=REVIEW_HEAD_SHA,
+                    reviews_has_next_page=False,
+                    comments_with_next_page=frozenset(),
+                    review_requests=requests,
+                    clean_reactions=reactions,
+                )
+
+    def test_missing_wrong_reviewer_stale_head_and_wrong_state_fail_closed(self) -> None:
+        cases = (
+            ([], "REVIEW_EXACT_HEAD_MISSING"),
+            ([codex_review(reviewer_id=1)], "REVIEW_EXACT_HEAD_MISSING"),
+            (
+                [codex_review(reviewer_login="agentdevan")],
+                "REVIEW_EXACT_HEAD_MISSING",
+            ),
+            (
+                [codex_review(commit_id=REVIEW_STALE_SHA)],
+                "REVIEW_EXACT_HEAD_MISSING",
+            ),
+            ([codex_review(state="APPROVED")], "REVIEW_STATE_INVALID"),
+        )
+        for reviews, code in cases:
+            with self.subTest(code=code), self.assertRaisesRegex(
+                IndependentReviewError, code
+            ):
+                validate_independent_review_payload(
+                    reviews,
+                    {42: []},
+                    expected_head_sha=REVIEW_HEAD_SHA,
+                    reviews_has_next_page=False,
+                    comments_with_next_page=frozenset(),
+                )
+
+    def test_inline_finding_and_pagination_ambiguity_fail_closed(self) -> None:
+        with self.assertRaisesRegex(
+            IndependentReviewError, "REVIEW_FINDINGS_PRESENT"
+        ):
+            validate_independent_review_payload(
+                [codex_review()],
+                {42: [{"id": 99, "body": "blocking finding"}]},
+                expected_head_sha=REVIEW_HEAD_SHA,
+                reviews_has_next_page=False,
+                comments_with_next_page=frozenset(),
+            )
+        with self.assertRaisesRegex(
+            IndependentReviewError, "REVIEW_PAGINATION_AMBIGUOUS"
+        ):
+            validate_independent_review_payload(
+                [codex_review()],
+                {42: []},
+                expected_head_sha=REVIEW_HEAD_SHA,
+                reviews_has_next_page=True,
+                comments_with_next_page=frozenset(),
+            )
+        with self.assertRaisesRegex(
+            IndependentReviewError, "REVIEW_PAGINATION_AMBIGUOUS"
+        ):
+            validate_independent_review_payload(
+                [codex_review()],
+                {42: []},
+                expected_head_sha=REVIEW_HEAD_SHA,
+                reviews_has_next_page=False,
+                comments_with_next_page=frozenset({42}),
+            )
+
+    def test_github_fetch_uses_exact_repository_pr_and_token(self) -> None:
+        responses = (
+            subprocess.CompletedProcess(
+                args=(),
+                returncode=0,
+                stdout=(f"[[{json.dumps(codex_review())}]]\n").encode(),
+                stderr=b"",
+            ),
+            subprocess.CompletedProcess(
+                args=(),
+                returncode=0,
+                stdout=b"[[]]\n",
+                stderr=b"",
+            ),
+            subprocess.CompletedProcess(
+                args=(),
+                returncode=0,
+                stdout=(
+                    f"[[{json.dumps(owner_review_request())}]]\n"
+                ).encode(),
+                stderr=b"",
+            ),
+            subprocess.CompletedProcess(
+                args=(),
+                returncode=0,
+                stdout=(
+                    f"[[{json.dumps(codex_clean_reaction())}]]\n"
+                ).encode(),
+                stderr=b"",
+            ),
+        )
+        with mock.patch(
+            "tools.ambitions_canon.independent_review.subprocess.run",
+            side_effect=responses,
+        ) as run:
+            result = fetch_independent_review_evidence(
+                repository="agentdevan/ambitions",
+                pull_request_number=38,
+                expected_head_sha=REVIEW_HEAD_SHA,
+                github_token="token",
+            )
+        self.assertEqual(result["review_id"], 126)
+        self.assertEqual(run.call_count, 4)
+        first = run.call_args_list[0]
+        self.assertEqual(
+            first.args[0],
+            [
+                "gh",
+                "api",
+                "--paginate",
+                "--slurp",
+                "repos/agentdevan/ambitions/pulls/38/reviews?per_page=100",
+            ],
+        )
+        self.assertEqual(first.kwargs["env"]["GH_TOKEN"], "token")
+
+    def test_github_fetch_rejects_malformed_or_multipage_payload(self) -> None:
+        for stdout, code in (
+            (b"not-json", "REVIEW_API_INVALID"),
+            (b"[[],[]]", "REVIEW_PAGINATION_AMBIGUOUS"),
+        ):
+            with self.subTest(code=code), mock.patch(
+                "tools.ambitions_canon.independent_review.subprocess.run",
+                return_value=subprocess.CompletedProcess(
+                    args=(), returncode=0, stdout=stdout, stderr=b""
+                ),
+            ), self.assertRaisesRegex(IndependentReviewError, code):
+                fetch_independent_review_evidence(
+                    repository="agentdevan/ambitions",
+                    pull_request_number=38,
+                    expected_head_sha=REVIEW_HEAD_SHA,
+                    github_token="token",
+                )
+
+    def test_cli_environment_is_closed_and_reports_green_or_blocker(self) -> None:
+        environment = {
+            "AMBITIONS_CANON_REVIEW_REPOSITORY": "agentdevan/ambitions",
+            "AMBITIONS_CANON_REVIEW_PULL_REQUEST": "38",
+            "AMBITIONS_CANON_REVIEW_HEAD_SHA": REVIEW_HEAD_SHA,
+            "GH_TOKEN": "token",
+        }
+        output = io.StringIO()
+        with mock.patch.dict(os.environ, environment, clear=True), mock.patch(
+            "tools.ambitions_canon.independent_review.fetch_independent_review_evidence",
+            return_value={"review_id": 42},
+        ), redirect_stdout(output):
+            self.assertEqual(independent_review_main(), 0)
+        self.assertEqual(
+            output.getvalue().strip(),
+            "GREEN independent review evidence "
+            f"review_id=42 head={REVIEW_HEAD_SHA}",
+        )
+
+        output = io.StringIO()
+        with mock.patch.dict(os.environ, {}, clear=True), redirect_stdout(output):
+            self.assertEqual(independent_review_main(), 1)
+        self.assertIn("P0_BLOCKER INDEPENDENT_REVIEW_FAILED", output.getvalue())
 
 
 if __name__ == "__main__":

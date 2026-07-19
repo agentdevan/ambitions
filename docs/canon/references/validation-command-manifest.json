@@ -81,7 +81,7 @@
       "required_for_task_types": []
     },
     {
-      "argv": ["python3", "scripts/ambitions-canon.py", "conflicts", "report"],
+      "argv": ["python3", "scripts/ambitions-canon-independent-review-evidence.py"],
       "command_id": "independent-review-evidence",
       "evidence_class": "independent-review",
       "proof_obligation_ids": ["independent-review"],
@@ -89,12 +89,12 @@
       "required_for_task_types": ["privacy", "release", "runtime", "swiftui"]
     }
   ],
-  "manifest_revision": "validation-commands-v2",
+  "manifest_revision": "validation-commands-v3-independent-review",
   "schema_version": 1,
   "trusted_workflow": {
     "app_id": "15368",
     "check_identity": "ambitions-canon-authorization",
-    "digest": "3c14f6cb267e1c1c6ff324fd959f0c5f669f61892fb0eac063784ac20472278a",
+    "digest": "1844787ea9a707819f3f7e0fd99fce3eee01c147122109ea3d784a2ba031214c",
     "integration_id": "github-actions",
     "path": ".github/workflows/ambitions-canon-authorization.yml",
     "ref": "refs/heads/main"

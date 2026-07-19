@@ -92,12 +92,21 @@
         "task_ids": [
           "CEBR-01-CANON-INTEGRATION"
         ]
+      },
+      {
+        "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+        "prerequisite_task_ids": [],
+        "revision": "codex-autonomous-repair-delegation-admission-v1",
+        "state": "approved",
+        "task_ids": [
+          "CODEX-AUTONOMOUS-REPAIR-DELEGATION"
+        ]
       }
     ],
     "schema_version": 1,
-    "snapshot_revision": "canon-cebr-01-admission-v1"
+    "snapshot_revision": "canon-autonomous-repair-delegation-admission-v1"
   },
-  "policy_revision": "authorization-v2",
+  "policy_revision": "authorization-v3-admission",
   "repository_identity": {
     "repository_full_name": "agentdevan/ambitions",
     "repository_id": "R_kgDOSAFvNw"
@@ -121,6 +130,67 @@
     "source_ownership": "docs/canon/generated/concept-ownership.json"
   },
   "task_rules": [
+    {
+      "approval_policy_ids": [
+        "owner-gate@1"
+      ],
+      "approval_required": true,
+      "authorized_files": [
+        ".github/workflows/ambitions-canon-authorization.yml",
+        "AGENTS.md",
+        "docs/canon/generated/AUTHORIZATION_GATE_TRANSITION.md",
+        "docs/canon/references/task-authorization-policy.json",
+        "docs/canon/references/validation-command-manifest.json",
+        "docs/canon/schemas/approval-attestation.schema.json",
+        "docs/canon/schemas/task-authorization.schema.json",
+        "docs/canon/schemas/task-intake.schema.json",
+        "docs/canon/schemas/task-pack.schema.json",
+        "docs/canon/schemas/trusted-event.schema.json",
+        "docs/canon/schemas/validation-attestation.schema.json",
+        "scripts/ambitions-canon-independent-review-evidence.py",
+        "scripts/ambitions-canon-platform-attest.py",
+        "scripts/ambitions-canon-platform-run-command.py",
+        "tests/canon/test_authorization.py",
+        "tests/canon/test_authorization_benchmark.py",
+        "tests/canon/test_integration.py",
+        "tests/canon/test_platform_signing.py",
+        "tests/canon/test_task_pack.py",
+        "tools/ambitions_canon/authorization.py",
+        "tools/ambitions_canon/cli.py",
+        "tools/ambitions_canon/independent_review.py",
+        "tools/ambitions_canon/platform_attestations.py",
+        "tools/ambitions_canon/task_pack.py"
+      ],
+      "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+      "maximum_claim_ceiling": "Governance-only autonomous-repair delegation; no product implementation, runtime, release, deployment, destructive action, external mutation, or reusable self-authorization claim",
+      "proof_obligations": [
+        "focused-red-green",
+        "independent-review",
+        "offline-determinism",
+        "one-covering-set"
+      ],
+      "required_checks": [
+        "authority-sprawl",
+        "canon-audit",
+        "canon-build-check",
+        "canon-unit",
+        "git-diff-check",
+        "independent-review-evidence",
+        "skill-conformance"
+      ],
+      "requirement_ids": [
+        "AUTHORITY-AMENDMENT-001",
+        "CONST-PROOF-EVIDENCE-001"
+      ],
+      "scopes": [
+        "AUTHORITY-AMENDMENT-001"
+      ],
+      "source_owner": "canon-governance",
+      "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+      "task_types": [
+        "release"
+      ]
+    },
     {
       "approval_policy_ids": [
         "owner-gate@1"

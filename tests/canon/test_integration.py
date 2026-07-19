@@ -127,9 +127,17 @@ class Task24CliIntegrationTests(unittest.TestCase):
         rules = {
             rule["task_id"]: rule for rule in policy["task_rules"]
         }
+        expected_task_types = {
+            "CEBR-01-CANON-INTEGRATION": ["release"],
+            "CODEX-AUTONOMOUS-REPAIR-DELEGATION": ["release"],
+            **{f"TASK-{number}": ["release"] for number in range(24, 30)},
+        }
         self.assertEqual(
-            {task_id: rules[task_id]["task_types"] for task_id in rules},
-            {f"TASK-{number}": ["release"] for number in range(24, 30)},
+            {
+                task_id: rules[task_id]["task_types"]
+                for task_id in rules
+            },
+            expected_task_types,
         )
         self.assertEqual(TASK_TYPE_BUDGET_CLASS["release"], "complex")
         self.assertEqual(PACK_BUDGETS["complex"], 30_000)
