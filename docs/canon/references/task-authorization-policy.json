@@ -549,6 +549,7 @@
         "tests/canon/canon_test_support.py",
         "tests/canon/test_authorization.py",
         "tests/canon/test_atlas_standards.py",
+        "tests/canon/test_build.py",
         "tests/canon/fixtures/authorization-benchmarks/07-accessibility-repair.json",
         "tests/canon/test_legacy_semantic_migration.py",
         "tests/canon/test_search_consolidated_docket.py",

@@ -158,13 +158,17 @@ class BuildTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("- Reconciliation entities: `285`", rendered)
         self.assertIn(
-            "- Reconciliation disposition: `initiative_applied_verified_broader_withheld`",
+            "- Reconciliation disposition: `initiative_applied_verified_task28_terminal_archival_broader_withheld`",
             rendered,
         )
         self.assertIn("- External mutations applied: `true`", rendered)
         self.assertIn("- Owner gate required: `true`", rendered)
         self.assertIn("- Reconciliation status `applied_verified`: `1`", rendered)
-        self.assertIn("- Reconciliation status `proposed_not_applied`: `284`", rendered)
+        self.assertIn(
+            "- Reconciliation status `owner_approved_terminal_archival`: `3`",
+            rendered,
+        )
+        self.assertIn("- Reconciliation status `proposed_not_applied`: `281`", rendered)
         self.assertRegex(rendered, r"- Linear reconciliation SHA: `[0-9a-f]{64}`")
 
     def test_live_linear_reconciliation_records_exact_initiative_only_receipt(self):
@@ -175,7 +179,7 @@ class BuildTests(unittest.TestCase):
         )
         self.assertEqual(
             data["disposition_state"],
-            "initiative_applied_verified_broader_withheld",
+            "initiative_applied_verified_task28_terminal_archival_broader_withheld",
         )
         self.assertIs(data["external_mutations_applied"], True)
         applied = [
@@ -237,7 +241,7 @@ class BuildTests(unittest.TestCase):
                 continue
             self.assertEqual(
                 batch["status"],
-                "withheld_gate_c"
+                "owner_approved_terminal_archival"
                 if batch["action"] in {"delete_after_extraction", "archive_after_extraction"}
                 else "withheld_not_authorized",
             )
