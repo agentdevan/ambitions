@@ -8,7 +8,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -895,17 +896,15 @@ def build_scenario_packages(
     root: Path, scenarios, *, source_root: Path = ROOT
 ) -> None:
     with detached_exact_source(source_root) as exact_source:
-        with ThreadPoolExecutor(max_workers=min(4, len(scenarios))) as executor:
+        build_package = partial(
+            build_scenario_package,
+            root,
+            source_root=exact_source,
+            source_is_exact=True,
+        )
+        with ProcessPoolExecutor(max_workers=min(4, len(scenarios))) as executor:
             list(
-                executor.map(
-                    lambda scenario: build_scenario_package(
-                        root,
-                        scenario,
-                        source_root=exact_source,
-                        source_is_exact=True,
-                    ),
-                    scenarios,
-                )
+                executor.map(build_package, scenarios)
             )
 
 
