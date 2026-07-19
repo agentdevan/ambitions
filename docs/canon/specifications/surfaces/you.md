@@ -8,6 +8,7 @@ canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
   "surface.you.appearance",
+  "surface.you.cebr-trust",
   "surface.you.command-contract",
   "surface.you.contextual-education",
   "surface.you.data-controls",
@@ -2363,3 +2364,19 @@ Major settings areas MUST open as focused full-screen native drilldowns with low
 - **Supersedes:** none
 
 You MUST expose searchable Time preferences for week start, time format, working bounds, default duration, alerts, schedule state/reflow rule, time zone, transition buffers, import sources, and visual density.
+
+## SPEC-SURFACE-YOU-CEBR-TRUST-001 — You exposes branch trust controls
+
+- **Concept:** `surface.you.cebr-trust`
+- **Modality:** `MUST`
+- **Scope:** Branch assumptions, authority, privacy, receipts, history, and reset
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-YOU-CEBR-TRUST-001`
+- **Supersedes:** none
+
+You/Trust MUST provide the inspection route for branch assumptions, source and
+policy revisions, authority partitions, privacy classification, receipts,
+history, replay, correction, reset, and deletion where applicable. It MUST
+not present model confidence or a universal life score as authority, and it
+MUST preserve local/offline access to trust facts without uploading private
+branch context.

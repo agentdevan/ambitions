@@ -8,6 +8,7 @@ canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
   "surface.time.creation-routes",
+  "surface.time.cebr-fit",
   "surface.time.day",
   "surface.time.degraded-command-contract",
   "surface.time.detail-command-contract",
@@ -4171,3 +4172,18 @@ Calendar replacement claims require current calendar-grade scenario, migration, 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
 Time range loading, recurrence expansion, scrolling, direct manipulation, named-edit preview, and List search MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative temporal/recurrence data scale, warm/cold state, measurement tool, percentile/maximum, frame/scroll metric, and regression threshold.
+
+## SPEC-SURFACE-TIME-CEBR-FIT-001 — Time shows fit consequences
+
+- **Concept:** `surface.time.cebr-fit`
+- **Modality:** `MUST`
+- **Scope:** Branch placement, capacity, protected boundaries, and conflict review
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-TIME-CEBR-FIT-001`
+- **Supersedes:** none
+
+Time MAY present branch placement and capacity consequences in the existing
+reflow/conflict review. It MUST retain canonical placement identity, recurrence
+scope, protected/fixed boundaries, and named alternatives; a candidate preview
+is non-durable and cannot mutate the calendar grid without the owning command,
+confirmation, and local receipt sequence.

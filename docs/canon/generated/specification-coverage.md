@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `active`
 - Compiler version: `0.2.0`
-- Canon content SHA: `a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13`
+- Canon content SHA: `76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a`
 
 | Specification | Profile | Section markers |
 | --- | --- | ---: |
@@ -26,12 +26,14 @@
 | `JOURNEY-CLOSURE-AND-PROOF` | journey-v1 | 14 |
 | `JOURNEY-EXTERNAL-CALENDAR-IMPORT` | journey-v1 | 14 |
 | `JOURNEY-GOAL-CREATION-AND-ACTIVATION` | journey-v1 | 14 |
+| `JOURNEY-LIFE-BRANCH-RECONCILIATION` | journey-v1 | 5 |
 | `JOURNEY-MISSED-WORK-RECOVERY` | journey-v1 | 14 |
 | `JOURNEY-SCHEDULE-REFLOW` | journey-v1 | 14 |
 | `JOURNEY-SEARCH-FIND-ACT-INSPECT` | journey-v1 | 14 |
 | `JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT` | journey-v1 | 14 |
 | `JOURNEY-START-AND-COMPLETE-STEP` | journey-v1 | 14 |
 | `OBJECT-ATTACHMENT` | object-v1 | 15 |
+| `OBJECT-BRANCH-VIABILITY-CERTIFICATE` | object-v1 | 5 |
 | `OBJECT-CLOSURE` | object-v1 | 15 |
 | `OBJECT-EVENT` | object-v1 | 15 |
 | `OBJECT-GOAL` | object-v1 | 15 |
@@ -39,6 +41,7 @@
 | `OBJECT-HISTORY-EVENT` | object-v1 | 15 |
 | `OBJECT-IMPORT-DIFF-RECORD` | object-v1 | 15 |
 | `OBJECT-LIFE-AREA` | object-v1 | 15 |
+| `OBJECT-LIFE-BRANCH` | object-v1 | 5 |
 | `OBJECT-NOTE` | object-v1 | 15 |
 | `OBJECT-NOTIFICATION-RULE` | object-v1 | 15 |
 | `OBJECT-PROOF` | object-v1 | 15 |
@@ -62,6 +65,7 @@
 | `SURFACE-TODAY` | surface-v1 | 22 |
 | `SURFACE-YOU` | surface-v1 | 22 |
 | `SYSTEM-APPLE-ECOSYSTEM` | system-v1 | 12 |
+| `SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION` | system-v1 | 6 |
 | `SYSTEM-DIAGNOSTICS` | system-v1 | 12 |
 | `SYSTEM-IMPORT-EXPORT-REPAIR` | system-v1 | 12 |
 | `SYSTEM-LOCAL-LEARNING` | system-v1 | 12 |

@@ -3740,6 +3740,15 @@
     {
       "blueprint_ids": [],
       "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Trust inspection MUST expose the current branch identity, base revision, certificate result, source and policy revisions, protected and relaxable conditions, authority partition, unresolved questions, candidate comparison, decision basis, Receipt, and rollback lineage. It MUST distinguish design proposal, local fact, user decision, recipient proposal, and external result. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "79889d5bf9038d6ae924684da39945db6dc2031d862562aa3eb64efc166a2929",
+      "requirement_id": "GLOBAL-TRUST-CEBR-BRANCH-001",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
       "rationale": "The migration MUST preserve decision provenance through stable IDs, hashes, dispositions, replacement requirements, supersession metadata, and rollback history; superseded external doctrine MUST NOT remain an active authority after owner-approved destructive cleanup. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "GOVERNANCE-LINEAR-RETENTION-001",
       "requirement_text_sha256": "8e742dd2d3edc5440d008b45cfa82364bd2d4a409ef217affecb3c2f9dea383e",
@@ -3937,6 +3946,42 @@
       "requirement_id": "JOURNEY-GOAL-ACTIVATION-001",
       "requirement_text_sha256": "174e9b6570fa83a2b47c1150b56a9ebd89f919ece1b335d93e1766446cf8a3b4",
       "source_path": "docs/canon/specifications/journeys/goal-creation-and-activation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because After explicit user selection, the runtime MUST revalidate graph revision, certificate, current authority, protected boundaries, and materiality. A confirmed selection commits through one parent local transaction, then updates projections and creates a truthful Receipt and History Event. External or recipient effects remain separately labeled proposals/outbox intents and may not determine local success. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "553971b0ead67ce794cdaf4498c1d537b2d4405b3eff296db70b69ade25731cd",
+      "requirement_id": "JOURNEY-LIFE-BRANCH-PROMOTION-001",
+      "source_path": "docs/canon/specifications/journeys/life-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because If a review becomes stale, a candidate fails validation, the user rejects all options, or a commit is interrupted, the journey preserves the last honest state and explains the exact reason. Recovery offers refresh, inspect, choose a different correction, defer, undo/rollback where safe, or return to the owning object. It uses calm recovery language and never labels an honest no-fit result as user failure. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "ba86cbcfa3eff7ce80afad2c9a259335ecd076f7ed2c06015f4ecd990d7e4168",
+      "requirement_id": "JOURNEY-LIFE-BRANCH-RECOVERY-001",
+      "source_path": "docs/canon/specifications/journeys/life-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Reconciliation begins from a known trigger and current graph revision: changed fact, policy, authority, capacity, operating condition, user request, or review condition. The entry shows what changed, what remains protected, the current branch and certificate status, and why review is needed. It does not pretend that a forecast or model proposal is a committed fact. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "8b5386c4245c4f88c3c8d174914c3a9fd38b6e203cea606571cfa49459fbfd20",
+      "requirement_id": "JOURNEY-LIFE-BRANCH-REVIEW-001",
+      "source_path": "docs/canon/specifications/journeys/life-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because When the current branch cannot remain valid, the journey presents bounded, complete candidates derived from policy-distinct correction sets. Each option states what it protects, changes, costs, assumes, leaves unresolved, and would affect in Goals, Today, Time, proof, recovery, recipients, or external systems. The user may inspect, edit, reject all, keep the conflict, choose a lighter path, or defer review. No option is selected from hidden model scores. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "a34902f19460c0b103f5eeab38f7cf55777390189acde8e021859355e7a034de",
+      "requirement_id": "JOURNEY-LIFE-BRANCH-SELECTION-001",
+      "source_path": "docs/canon/specifications/journeys/life-branch-reconciliation.md",
       "state_blueprint_ids": []
     },
     {
@@ -4768,6 +4813,42 @@
       ]
     },
     {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because When a certificate is blocked or invalid, the result MUST preserve sufficient conflicting conditions, fixed conditions, relaxable conditions, minimality posture, and a plain-language explanation. Correction sets MUST identify required authority, protected invariants, sacrificed invariants, expected typed delta kinds, and semantic fingerprint. Unknowns remain explicit rather than being converted to a confidence number. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "9710e997e476c0c487e4720578cd9ad788a85e6f09e3d6dc8a8cb0ef0983b5af",
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-CONFLICT-001",
+      "source_path": "docs/canon/specifications/objects/branch-viability-certificate.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Each certificate component and branch operation MUST expose the revisioned conditions it depends on and whether each relation is hard or relaxable. A revision event MUST identify the dependent component set through this index; absence of an index is a conservative invalidation, not permission to reuse stale evidence. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "210da1a6f7d41641f9ebacd908c09a291b16fc83057e43741b35d405f2893eb9",
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-DEPENDENCY-001",
+      "source_path": "docs/canon/specifications/objects/branch-viability-certificate.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Only a current `valid` certificate may gate an active or promotable branch. `fragile` and `blocked` results remain inspectable and may produce bounded repair candidates, but they cannot be represented as a valid success. A stale or superseded certificate cannot authorize mutation. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "2c7b52cde45ced243294aa70e912a96bb3133f0b24bb691e3b402a7c095ecea7",
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-GATE-001",
+      "source_path": "docs/canon/specifications/objects/branch-viability-certificate.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because A certificate MUST bind one branch identifier and base graph revision to the evaluation time, bounded horizon, source/fact revision IDs, policy revision, authority result, capacity result, protected-invariant results, unresolved questions, invalidation conditions, status, and deterministic fingerprint. Equivalent inputs and seed MUST produce the same certificate fingerprint. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "587420b9a89072c8e7d4b4f2b0fef421d0afe228bef7c20f87a52b96a60a567c",
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/branch-viability-certificate.md",
+      "state_blueprint_ids": []
+    },
+    {
       "blueprint_ids": [
         "UX-OBJECT-LIFE-AREA",
         "UX-SCREEN-GOALS-LIFE-AREA"
@@ -5180,6 +5261,42 @@
       "requirement_id": "OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001",
       "requirement_text_sha256": "dc9dca78bcf8b33608a8722cf886ad1c43aa587eaa5364066cff4a6a4d487312",
       "source_path": "docs/canon/specifications/objects/life-area.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Every material branch operation MUST identify the authority partition it would affect. User-owned effects may be committed only through the local mutation sequence; recipient-owned effects remain proposals; external effects remain post-commit outbox intents. No branch status may imply completion of an effect owned by another principal or system. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "76610be31cdd9efc0653280febf75e9e9ce3e23f2bccd183f6614492a6f1bb3f",
+      "requirement_id": "OBJ-LIFE-BRANCH-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/objects/life-branch.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Branch deltas MUST be typed, ordered, revision-aware operations against existing canonical object identities. Each operation records its human consequence, protected invariants, dependency conditions, authority owner, materiality, and reversibility. Untyped payloads, duplicate object authority, silent object copies, and timeslot-only alternatives are invalid. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "ce730b467876d811a571f23f40b5fa242fbdf4e726c2d918e86831475176df3f",
+      "requirement_id": "OBJ-LIFE-BRANCH-DELTA-001",
+      "source_path": "docs/canon/specifications/objects/life-branch.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because A Life Branch MUST have a stable identifier, parent branch or source identity, base graph revision, bounded horizon, explicit trigger, governing policy revision, certificate reference, status, and lineage. A branch lifecycle MUST distinguish candidate, selected, committing, active-local, active, stale, superseded, rolled-back, and expired states where those states apply. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "e8ce80ea3397ae2a88c979952ea0594531ccd031e97fbda8afdf476d63e5fb5f",
+      "requirement_id": "OBJ-LIFE-BRANCH-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/life-branch.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Promotion, supersession, rollback, and expiry MUST retain prior branch identity, certificate, decision basis, user confirmation, Receipt, History Event, replay fingerprint, and rollback or compensation target. Later facts may invalidate a branch but may not rewrite the historical reason it was accepted. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "cfcb82668c006b12c3703f8c1b9a4170b4f97f9070019780e081bf9a2d6eaf39",
+      "requirement_id": "OBJ-LIFE-BRANCH-LINEAGE-001",
+      "source_path": "docs/canon/specifications/objects/life-branch.md",
       "state_blueprint_ids": []
     },
     {
@@ -6825,6 +6942,15 @@
       "state_blueprint_ids": []
     },
     {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Goals MAY present a branch review inside the owning Goal/Path context. It MUST show complete candidate consequences, protected and sacrificed conditions, proof/recovery impact, and lineage while preserving Goal and Goal Path identity. Candidate review remains non-durable until the user confirms a canonical command; Goals does not own certificate computation or branch mutation. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "127969b313b7cc6cd9e7d011d3376408202b88e33a7b27bdd39cb42dd7065e22",
+      "requirement_id": "SPEC-SURFACE-GOALS-CEBR-BRANCH-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "state_blueprint_ids": []
+    },
+    {
       "blueprint_ids": [
         "UX-SCREEN-GOALS-CLOSURE"
       ],
@@ -7126,6 +7252,15 @@
       "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
       "requirement_text_sha256": "c0ef31ac6e6e0586999ad0f3c21e70b73b6ecacf4aa9676e0859b4e4bce8e593",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Time MAY present branch placement and capacity consequences in the existing reflow/conflict review. It MUST retain canonical placement identity, recurrence scope, protected/fixed boundaries, and named alternatives; a candidate preview is non-durable and cannot mutate the calendar grid without the owning command, confirmation, and local receipt sequence. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "ff401d08594f43ed2acc30faad58eb3570ef7972642bee12fa86fa40fe814763",
+      "requirement_id": "SPEC-SURFACE-TIME-CEBR-FIT-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
       "state_blueprint_ids": []
     },
     {
@@ -7586,6 +7721,15 @@
     },
     {
       "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because When a current Life Branch is stale, fragile, blocked, or newly promoted, Today MAY present the plain-language trigger, current consequence, and route to inspect complete ways forward. It MUST preserve the existing Today Reality Window, never expose branch IDs as primary labels, never silently commit a candidate, and keep Start/Review/Still counts/Blocked/Undo actions routed to canonical owners. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "7d3254aa151d9719a477fcc3f483c13d7dc7baf1a2b20b518126483c322a852d",
+      "requirement_id": "SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
       "disposition": "visual_mapping_required",
       "rationale": "The owning specification MUST authorize only the state-bound command labels `Cancel`, `Not needed`, `Open Settings`, `Open step`, `Review`, `Review calendar access`, `Review recovery`, `Still counts` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract. This law maps UX-STATE-VARIANT-TODAY-DETAIL-ACTIVE-EXECUTION, UX-STATE-VARIANT-TODAY-DETAIL-CLOSURE-REVIEW, UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY, UX-STATE-VARIANT-TODAY-DETAIL-STALE-EXTERNAL-CONTEXT, UX-STATE-VARIANT-TODAY-DETAIL-VIEWING, UX-STATE-VARIANT-TODAY-ROOT-CONFLICT, UX-STATE-VARIANT-TODAY-ROOT-DENSE, UX-STATE-VARIANT-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION, UX-STATE-VARIANT-TODAY-ROOT-EMPTY, UX-STATE-VARIANT-TODAY-ROOT-LOADING, UX-STATE-VARIANT-TODAY-ROOT-LOW-DENSITY, UX-STATE-VARIANT-TODAY-ROOT-OFFLINE-HEALTHY, UX-STATE-VARIANT-TODAY-ROOT-PARTIAL-FAILURE, UX-STATE-VARIANT-TODAY-ROOT-PERMISSION-DENIED, UX-STATE-VARIANT-TODAY-ROOT-POPULATED, UX-STATE-VARIANT-TODAY-ROOT-RECOVERY, UX-STATE-VARIANT-TODAY-ROOT-RESTORED, UX-STATE-VARIANT-TODAY-ROOT-STALE-EXTERNAL-CONTEXT, UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION, UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY, UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED.",
       "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
@@ -7768,6 +7912,15 @@
         "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-SYSTEM",
         "UX-STATE-VARIANT-YOU-SETTINGS-INCREASE-CONTRAST"
       ]
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because You/Trust MUST provide the inspection route for branch assumptions, source and policy revisions, authority partitions, privacy classification, receipts, history, replay, correction, reset, and deletion where applicable. It MUST not present model confidence or a universal life score as authority, and it MUST preserve local/offline access to trust facts without uploading private branch context. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "b2ff8d7601dc6d2dc85420040f3dd00cd984f53d77fc8a0a98d49120b5a1d782",
+      "requirement_id": "SPEC-SURFACE-YOU-CEBR-TRUST-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "state_blueprint_ids": []
     },
     {
       "blueprint_ids": [],
@@ -8648,6 +8801,51 @@
       "requirement_id": "SYSTEM-APPLE-WIDGET-PROJECTION-001",
       "requirement_text_sha256": "5ac4af4b1be741240248f5735152d830de65792265725fd3cd42b778d87ec627",
       "source_path": "docs/canon/specifications/systems/apple-ecosystem.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because For one canonical personal-state graph, at most one branch may be active. An active branch is a typed semantic delta bound to a canonical graph revision; it is not a copy of Goals, Steps, placements, history, or receipts. Candidate branches remain non-durable until the owning runtime command commits one. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "a24898563cf09b8c75deb36bb200f12754dbb5728c9ef36449ea3c0e2b06f424",
+      "requirement_id": "SYSTEM-CEBR-ACTIVE-BRANCH-001",
+      "source_path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because If recertification cannot produce a valid branch, reconciliation MUST preserve the conflict core and derive bounded correction sets under current policy. Complete candidates MAY be materialized from triggered contingency policies, but timeslot-only or consequence-equivalent candidates MUST be suppressed. Each candidate exposes what it protects, changes, sacrifices, assumes, and requires from the user; no generative model may certify, authorize, or commit it. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "57fcd3a91516f7bc1ad0c87bb40f0282673fb710834191ecac2e4ab3c5fcca2e",
+      "requirement_id": "SYSTEM-CEBR-CANDIDATE-MATERIALIZATION-001",
+      "source_path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Every active or promotable branch MUST reference an immutable, revision-bound viability certificate. The certificate records the facts, policies, authority partition, capacity, protected boundaries, unresolved questions, and invalidation conditions that support its result. A branch MUST not be presented as feasible or promoted when its certificate is stale, blocked, or invalid. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "0407301bc72712df7a1b5c9c97fd2b998cb38fbbc862d6d09f42293318be8b1c",
+      "requirement_id": "SYSTEM-CEBR-CERTIFICATE-001",
+      "source_path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because When a revision arrives, reconciliation MUST traverse the declared dependency index and recertify the affected causal impact cone. Unrelated certificate components and canonical objects remain unchanged unless a declared full-rebuild condition applies. Traversal order and cycle handling MUST be bounded and deterministic. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "4880c700442003f1fd7520be8b54ba8ce0b58c78e0f09f8a28a82f074fd23421",
+      "requirement_id": "SYSTEM-CEBR-IMPACT-CONE-001",
+      "source_path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "This design-only requirement remains nonvisual because Selection MUST revalidate the candidate against the current graph revision, certificate, authority, and user confirmation scope. Promotion MUST use the canonical Command → Event → Projection → Receipt → Replay sequence and one parent semantic transaction. User-owned mutations commit locally first; recipient-owned proposals and external effects remain separate intents after local commit. Prior branch, certificate, decision basis, receipt, and rollback lineage remain inspectable. It has no UX blueprint record and does not claim rendered behavior.",
+      "requirement_text_sha256": "532b66267febc7d42fc1a3da089594b267820308318a30df573588f5e82699b5",
+      "requirement_id": "SYSTEM-CEBR-PROMOTION-001",
+      "source_path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
       "state_blueprint_ids": []
     },
     {
@@ -11564,23 +11762,23 @@
     },
     {
       "path": "docs/canon/specifications/global",
-      "sha256": "24ceb7d37f4f5006ef237e0a6b8569bb7d2a888d97c0b258541bcfabc330cc8f"
+      "sha256": "f3e8f07bb1b03641ec764c345c607ded97345c1fb4fd18702ad7a1d02feb763c"
     },
     {
       "path": "docs/canon/specifications/journeys",
-      "sha256": "370801d6547e71fc8b0ff7a8fd4aa6ebe50c7ef7f32ea90280998c04810036ee"
+      "sha256": "5e8bd3463ae19ba94c98382d906b86f5438da36f271e7b3b2dbbf33033a0a8cd"
     },
     {
       "path": "docs/canon/specifications/objects",
-      "sha256": "6aabf2ec31daa81271b669fbb6011180cb473acd797c4564e7c88afc57a1305a"
+      "sha256": "0b424f5666a7c766bb500e8810ef414c52ff70d589ae985bb606090a36998675"
     },
     {
       "path": "docs/canon/specifications/surfaces",
-      "sha256": "1563218a0cae87ef31b30a0ed0198fe7cd44627330ea45dd249c46832769b9c5"
+      "sha256": "61fa740a93e65c971cb0bfd85758948da75ac95a0f6b463f9979822b9440c077"
     },
     {
       "path": "docs/canon/specifications/systems",
-      "sha256": "c321a39799c2b40fb4e1bba9b09416c5ded220e0ae23a3ed914bc4f495c66226"
+      "sha256": "3a62603a3773abdc09cce2aedc181af7625b74e599a8e1a3b6dbe13143931597"
     },
     {
       "path": "docs/canon/standards",

@@ -1,6 +1,6 @@
 {
   "authority_state": "active",
-  "canon_content_sha": "a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13",
+  "canon_content_sha": "76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "mappings": [
@@ -928,6 +928,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "GLOBAL-TRUST-CEBR-BRANCH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "GOVERNANCE-LINEAR-RETENTION-001"
     },
     {
@@ -1033,6 +1041,38 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "JOURNEY-GOAL-ACTIVATION-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-PROMOTION-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-RECOVERY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-REVIEW-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-SELECTION-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -1478,6 +1518,38 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-CONFLICT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-DEPENDENCY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-GATE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-IDENTITY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "OBJ-CANONICAL-IDENTITY-001"
     },
     {
@@ -1735,6 +1807,38 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-LIFE-BRANCH-AUTHORITY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-LIFE-BRANCH-DELTA-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-LIFE-BRANCH-IDENTITY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "OBJ-LIFE-BRANCH-LINEAGE-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2650,6 +2754,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-GOALS-CEBR-BRANCH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-GOALS-CLOSURE-001"
     },
     {
@@ -2762,6 +2874,14 @@
         "PROOF-GOALS-VISUAL-MAPPING-001"
       ],
       "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TIME-CEBR-FIT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2952,6 +3072,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001"
     },
     {
@@ -3046,6 +3174,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-YOU-APPEARANCE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-YOU-CEBR-TRUST-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -3505,6 +3641,46 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SYSTEM-APPLE-WIDGET-PROJECTION-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CEBR-ACTIVE-BRANCH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CEBR-CANDIDATE-MATERIALIZATION-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CEBR-CERTIFICATE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CEBR-IMPACT-CONE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CEBR-PROMOTION-001"
     },
     {
       "current_claim_posture": "no_current_evidence",

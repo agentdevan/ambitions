@@ -9,7 +9,7 @@
 - Source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`
 - Authority state: `shadow`
 - Specification gaps: `0`; all gap-blocked behavior is ineligible for Phase 2 authority and task-pack selection.
-- Requirement dispositions: `473` total; `346` visual; `127` nonvisual; SHA-256 `f22d4f288655b13933e1afdb29f4833e69fd0bbfab211db83c52f752c2458c19`
+- Requirement dispositions: `495` total; `346` visual; `149` nonvisual; SHA-256 `df7f2c7f140497451cbe8adf0bf72f8d9f7702c8315125e8ea55be5192ff52e3`
 - Claim ceiling: Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.
 
 ## Screens and presentations

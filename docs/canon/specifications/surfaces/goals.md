@@ -11,6 +11,7 @@ owns_concepts = [
   "surface.goals.anti-patterns",
   "surface.goals.closure",
   "surface.goals.command-contract",
+  "surface.goals.cebr-branch",
   "surface.goals.detail",
   "surface.goals.execution-stack",
   "surface.goals.first-viewport",
@@ -2264,3 +2265,19 @@ Goals root, path materialization, selection, and semantic-node lookup MUST remai
 - **Supersedes:** none
 
 Goal detail MUST expose current, next scheduled, and unscheduled upcoming Steps, Substep groups, Proof, schedule and recovery state, and actions to inspect, schedule, complete, or revise work linked to the Goal Path.
+
+## SPEC-SURFACE-GOALS-CEBR-BRANCH-001 — Goals explains ways forward
+
+- **Concept:** `surface.goals.cebr-branch`
+- **Modality:** `MUST`
+- **Scope:** Branch candidates, protections, tradeoffs, and lineage
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-GOALS-CEBR-BRANCH-001`
+- **Supersedes:** none
+
+Goals MAY present a branch review inside the owning Goal/Path context. It MUST
+show complete candidate consequences, protected and sacrificed conditions,
+proof/recovery impact, and lineage while preserving Goal and Goal Path
+identity. Candidate review remains non-durable until the user confirms a
+canonical command; Goals does not own certificate computation or branch
+mutation.
