@@ -1414,6 +1414,26 @@ class StartFinalizeTests(unittest.TestCase):
                     approval_attestations=(),
                     verification_epoch=1_900_000_000,
                 )
+            for dotted_boundary in ("authority.amendment", "trust.anchor"):
+                with self.subTest(dotted_boundary=dotted_boundary):
+                    dotted_intake = root_intake("src")
+                    dotted_intake["requested_scope"] = [dotted_boundary]
+                    dotted_bindings, dotted_policy = trusted_context(
+                        repo, base, dotted_intake
+                    )
+                    with self.assertRaisesRegex(
+                        AuthorizationError, "AUTH_BOUNDARY_APPROVAL_REQUIRED"
+                    ):
+                        task_start(
+                            repo_root=repo,
+                            mode="ci-pr-range",
+                            intake_data=dotted_intake,
+                            trusted_event_data=event(repo, base, head),
+                            trusted_bindings=dotted_bindings,
+                            policy_data=dotted_policy,
+                            approval_attestations=(),
+                            verification_epoch=1_900_000_000,
+                        )
             unknown_scope_intake = root_intake("src")
             unknown_scope_intake["requested_scope"] = ["privacy-critical"]
             unknown_bindings, unknown_policy = trusted_context(

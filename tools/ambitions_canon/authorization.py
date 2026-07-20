@@ -3107,7 +3107,12 @@ def _requests_hard_boundary_scope(intake: Mapping[str, object]) -> bool:
         str(intake["requested_task_type"]),
         *(str(item) for item in intake["requested_scope"]),
     ]
-    normalized = " ".join(values).casefold().replace("_", "-")
+    normalized = (
+        " ".join(values)
+        .casefold()
+        .replace("_", "-")
+        .replace(".", "-")
+    )
     return any(
         marker in normalized
         for marker in (
