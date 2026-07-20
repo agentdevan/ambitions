@@ -3138,6 +3138,10 @@ def _requests_hard_boundary_scope(intake: Mapping[str, object]) -> bool:
             "history-rewrite",
             "production-deploy",
             "external-mutation",
+            "external-writes",
+            "externalwrites",
+            "external-effect",
+            "externaleffect",
             "release",
             "testflight",
             "app-store",
@@ -4024,6 +4028,10 @@ def _is_hard_delegation_boundary(
             "destructive-migration",
             "production-deploy",
             "external-mutation",
+            "external-writes",
+            "externalwrites",
+            "external-effect",
+            "externaleffect",
             "release",
             "testflight",
             "app-store",
@@ -4042,7 +4050,7 @@ def _is_hard_delegation_boundary(
         return True
     if name.startswith("ssh_host_") and name.endswith("_key"):
         return True
-    return PurePosixPath(path).suffix.casefold() in {
+    sensitive_suffixes = {
         ".cer",
         ".crt",
         ".der",
@@ -4056,6 +4064,10 @@ def _is_hard_delegation_boundary(
         ".pfx",
         ".mobileprovision",
     }
+    return any(
+        suffix.casefold() in sensitive_suffixes
+        for suffix in PurePosixPath(path).suffixes
+    )
 
 
 def _path_matches_delegated_root(path: str, root: str) -> bool:

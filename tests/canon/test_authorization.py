@@ -1128,6 +1128,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "certificate bytes\n",
             ),
             (
+                "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "struct EventKitOutbox {}\n",
+            ),
+            (
+                "scripts/ios_distribution.p12.enc",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "encrypted credential bytes\n",
+            ),
+            (
                 "scripts/.env",
                 "scripts",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",
