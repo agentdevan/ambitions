@@ -6,7 +6,7 @@ DesignTokens is the formal token source tree for the design-system install.
 
     ## Source Truth
 
-    - `docs/canon/migration/legacy-semantic-migration.json`
+    - `docs/canon/CONSTITUTION.md`
     - `Sources/Theme/AmbitionTheme.swift`
     - `frontend/visual-encyclopedia/primitives/*`
 

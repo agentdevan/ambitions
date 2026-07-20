@@ -67,7 +67,6 @@
         "app runtime claims"
       ],
       "required_checks": [
-        "python3 scripts/ambitions-unsupported-claim-scan.py docs prompts .codex",
         "python3 scripts/openai-build-suite-validate.py"
       ],
       "hard_red": ["Readiness claim without proof"]

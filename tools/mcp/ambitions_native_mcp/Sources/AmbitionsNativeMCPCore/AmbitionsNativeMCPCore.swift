@@ -42,7 +42,7 @@ public struct RepoContext: Sendable {
         let fileManager = FileManager.default
         var candidate = URL(fileURLWithPath: fileManager.currentDirectoryPath).standardizedFileURL
         while candidate.path != "/" {
-            let marker = candidate.appendingPathComponent("docs/canon/MANIFEST.toml")
+            let marker = candidate.appendingPathComponent("docs/canon/CONSTITUTION.md")
             if fileManager.fileExists(atPath: marker.path) {
                 return RepoContext(repoRoot: candidate)
             }
@@ -287,7 +287,7 @@ private func repoTools(context: RepoContext) -> [NativeTool] {
                         "exists": .bool(context.exists(path)),
                     ])
                 }),
-                "precedence": .string("docs/canon/* wins conflicts; AGENTS.md routes agents; live source/tests/logs own implementation evidence."),
+                "precedence": .string("Product documentation guides intent; live source, tests, and build output determine behavior."),
             ]))
         },
         NativeTool(
@@ -354,7 +354,7 @@ private func repoTools(context: RepoContext) -> [NativeTool] {
         ) { args in
             let paths = stringArray(args["paths"])
             return jsonString(.object([
-                "finalArchitectureTreeInspected": .bool(context.exists("docs/canon/MANIFEST.toml")),
+                "finalArchitectureTreeInspected": .bool(context.exists("docs/canon/CONSTITUTION.md")),
                 "paths": .array(paths.map { path in
                     let owner = architectureOwner(for: path)
                     return .object([
@@ -369,21 +369,6 @@ private func repoTools(context: RepoContext) -> [NativeTool] {
                     .string("Motion belongs under Stage/Motion, not a root surface."),
                     .string("Capture belongs under Composer/Capture, not Surfaces/Capture or a tab."),
                 ]),
-            ]))
-        },
-        NativeTool(
-            name: "repo_skill_registry_status",
-            description: "Inspect repo-local skill registry consistency at a lightweight read-only level."
-        ) { _ in
-            let skillFiles = context.safeListFiles(roots: [".agents/skills"], extensions: ["md"])
-                .filter { $0.hasSuffix("/SKILL.md") }
-            let retained = parseRetainedSkillRows(context: context)
-            return jsonString(.object([
-                "registryExists": .bool(context.exists(".agents/skills/README.md")),
-                "skillFiles": .array(skillFiles.map { .string($0) }),
-                "retainedRows": .array(retained.map { .string($0) }),
-                "count": .int(skillFiles.count),
-                "note": .string("Authoritative validation remains scripts/ambitions-skill-registry-check.py."),
             ]))
         },
     ]
@@ -1174,8 +1159,6 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
 }
 
 private let truthStack = [
-    "docs/canon/generated/CODEX_START_HERE.md",
-    "docs/canon/MANIFEST.toml",
     "docs/canon/CONSTITUTION.md",
     "docs/canon/specifications/global/capture.md",
     "docs/canon/specifications/global/search.md",
@@ -1190,7 +1173,6 @@ private let truthStack = [
     "docs/README.md",
     "project.yml",
     "Package.swift",
-    ".agents/skills/README.md",
     "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md",
 ]
 
@@ -1260,11 +1242,8 @@ private func architectureOwner(for path: String) -> (owner: String, status: Stri
     if normalized.hasPrefix("tools/mcp/") {
         return ("Tooling/MCP", "repo tooling", false, ["MCP self-test", "swift test or pytest"])
     }
-    if normalized.hasPrefix(".agents/skills/") {
-        return ("Agent Skills", "operating support, not truth", false, ["skill registry check"])
-    }
     if normalized.hasPrefix("docs/canon/") {
-        return ("Truth", "canonical documentation", false, ["claim scan", "truth consistency review"])
+        return ("Product documentation", "product and engineering reference", false, ["relevant source and test validation"])
     }
     return ("unclassified", "review required", false, ["owner-specific validation"])
 }
@@ -1349,25 +1328,6 @@ private func scanForbiddenClaims(context: RepoContext, paths: [String]) -> [Find
         }
     }
     return findings
-}
-
-private func parseRetainedSkillRows(context: RepoContext) -> [String] {
-    guard let text = try? context.readText(".agents/skills/README.md", maxBytes: 250_000) else { return [] }
-    var rows: [String] = []
-    var inRetained = false
-    for line in text.split(separator: "\n", omittingEmptySubsequences: false).map(String.init) {
-        if line == "## Retained Skills" {
-            inRetained = true
-            continue
-        }
-        if inRetained, line.hasPrefix("## ") {
-            break
-        }
-        if inRetained, line.contains(".agents/skills/"), line.contains("/SKILL.md") {
-            rows.append(line)
-        }
-    }
-    return rows
 }
 
 private func visualCoverage(files: [String]) -> Value {

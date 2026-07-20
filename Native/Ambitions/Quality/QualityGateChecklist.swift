@@ -38,7 +38,7 @@ struct QualityGateContract: Identifiable, Sendable, Hashable {
 }
 
 enum QualityGateChecklist {
-    static let executableScript = "scripts/ambitions-quality-gate.sh"
+    static let executableScript = ".github/workflows/code-quality.yml"
 
     static let contracts: [QualityGateContract] = [
         QualityGateContract(id: .architecture, owner: "Quality/Architecture", executableCheck: executableScript, failureIsGreenBlocker: true),
