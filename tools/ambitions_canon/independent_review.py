@@ -108,7 +108,7 @@ def validate_independent_review_payload(
         if (
             user.get("id") == CODEX_REVIEWER_ID
             and user.get("login") == CODEX_REVIEWER_LOGIN
-            and user.get("type") == "Bot"
+            and user.get("type") in {"Bot", "User"}
             and raw.get("content") == "+1"
         ):
             reaction_id = raw.get("id")

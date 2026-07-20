@@ -3622,7 +3622,7 @@ def codex_clean_reaction(
         "user": {
             "id": CODEX_REVIEWER_ID,
             "login": CODEX_REVIEWER_LOGIN,
-            "type": "Bot",
+            "type": "User",
         },
     }
 
