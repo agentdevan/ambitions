@@ -1142,6 +1142,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "certificate bytes\n",
             ),
             (
+                "Native/Ambitions/Support/Ambitions.entitlements",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "<plist><dict/></plist>\n",
+            ),
+            (
+                "Native/Resources/App.provisionprofile",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "provisioning profile bytes\n",
+            ),
+            (
                 "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift",
                 "Native",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",

@@ -4107,6 +4107,7 @@ def _is_hard_delegation_boundary(
         ".cer",
         ".crt",
         ".der",
+        ".entitlements",
         ".jks",
         ".key",
         ".keystore",
@@ -4116,6 +4117,7 @@ def _is_hard_delegation_boundary(
         ".p12",
         ".pfx",
         ".mobileprovision",
+        ".provisionprofile",
     }
     return any(
         suffix.casefold() in sensitive_suffixes
