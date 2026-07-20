@@ -1,7 +1,0 @@
-brew "xcodegen"
-brew "ripgrep"
-brew "gh"
-brew "jq"
-brew "xcbeautify"
-brew "markdownlint-cli2"
-brew "lychee"
