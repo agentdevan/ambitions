@@ -1177,6 +1177,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "allow = True\n",
             ),
             (
+                "scripts/trust.anchor.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "anchor = 'replacement'\n",
+            ),
+            (
+                "scripts/external mutation.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "mutate_external_system()\n",
+            ),
+            (
                 "Native/Resources/auth.plist",
                 "Native",
                 "AUTH_APPROVAL_MISSING",

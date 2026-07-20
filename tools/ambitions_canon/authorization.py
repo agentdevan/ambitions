@@ -3999,7 +3999,7 @@ def _is_hard_delegation_boundary(
     ):
         return True
     parts = tuple(part.casefold() for part in PurePosixPath(path).parts)
-    flattened = "-".join(parts).replace("_", "-")
+    flattened = re.sub(r"[^a-z0-9]+", "-", "-".join(parts)).strip("-")
     path_tokens = {
         token
         for part in parts
