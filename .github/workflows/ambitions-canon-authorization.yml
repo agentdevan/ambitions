@@ -401,6 +401,15 @@ jobs:
             --evidence "$RUNNER_TEMP/validation-evidence.json" \
             --output-dir "$RUNNER_TEMP/canon-finalization" \
             "${delegation_args[@]}"
+          if [[ -n "$START_RUN_ID" ]]; then
+            mkdir -p "$RUNNER_TEMP/canon-finalization/delegation-start"
+            cp delegation-start/task-authorization.json \
+              "$RUNNER_TEMP/canon-finalization/delegation-start/"
+            cp delegation-start/trusted-event.json \
+              "$RUNNER_TEMP/canon-finalization/delegation-start/"
+            cp delegation-start/approval-attestation.json \
+              "$RUNNER_TEMP/canon-finalization/delegation-start/"
+          fi
 
       - name: Reverify final PR and main identity after signing
         env:

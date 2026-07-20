@@ -3669,6 +3669,12 @@ class IndependentReviewEvidenceTests(unittest.TestCase):
         self.assertIn("--delegation-authorization", workflow)
         self.assertIn("--delegation-event", workflow)
         self.assertIn("--delegation-approval", workflow)
+        self.assertIn(
+            'canon-finalization/delegation-start', workflow
+        )
+        self.assertIn(
+            "cp delegation-start/task-authorization.json", workflow
+        )
 
     def test_platform_runner_uses_trusted_script_not_candidate_substitute(self) -> None:
         runner = load_platform_runner()
