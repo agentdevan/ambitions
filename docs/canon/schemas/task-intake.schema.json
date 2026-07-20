@@ -29,7 +29,16 @@
         "properties": {"requested_changed_files": {"maxItems": 0}},
         "required": ["requested_path_roots", "requested_max_changed_files", "requested_max_changed_bytes"]
       },
-      "else": {"properties": {"requested_changed_files": {"minItems": 1}}}
+      "else": {
+        "not": {
+          "anyOf": [
+            {"required": ["requested_path_roots"]},
+            {"required": ["requested_max_changed_files"]},
+            {"required": ["requested_max_changed_bytes"]}
+          ]
+        },
+        "properties": {"requested_changed_files": {"minItems": 1}}
+      }
     }
   ],
   "required": [

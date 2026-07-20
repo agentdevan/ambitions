@@ -814,6 +814,18 @@ class AuthorizationSchemaTests(unittest.TestCase):
             },
         )
         self.assertTrue(all(name.startswith("requested_") for name in allowed - {"schema_version", "intake_id", "task_id", "issue_reference"}))
+        exact_file_forbidden = {
+            item["required"][0]
+            for item in intake_schema["allOf"][0]["else"]["not"]["anyOf"]
+        }
+        self.assertEqual(
+            exact_file_forbidden,
+            {
+                "requested_path_roots",
+                "requested_max_changed_files",
+                "requested_max_changed_bytes",
+            },
+        )
         for forbidden in (
             "owner_approved",
             "computed_authorized_files",
@@ -2820,6 +2832,10 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
         self.assertIn(
             ".github/workflows/ambitions-canon-authorization.yml",
             delegation["authorized_files"],
+        )
+        self.assertIn(
+            "docs/canon/references/task-25-authorization-benchmark-policy.json",
+            delegation["protected_paths"],
         )
 
         issue_snapshot = policy["issue_state"]
