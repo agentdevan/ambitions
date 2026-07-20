@@ -19,9 +19,26 @@ purge. They must not direct new work or override `docs/canon/`.
 Every task that may create a tracked change requires a current
 `python3 scripts/ambitions-canon.py task start` result before the first edit and
 an exact-diff `python3 scripts/ambitions-canon.py task finalize` result before
-commit or review. Resume, interruption, or context compaction invalidates stale
-local state; re-run repository orientation, inspect the current diff, regenerate
-the pack, and obtain a new task start result.
+final review or merge. Resume, interruption, or context compaction requires
+repository reorientation, current-diff inspection, and pack regeneration; stale
+or invalid authorization must be replaced before work continues.
+
+A platform-signed `path-roots` repair delegation streamlines ordinary repair
+work: one current delegation may cover the commits in one branch or pull-request
+series, and exact-file prediction is not required. Reorientation after an
+interruption must revalidate the signed base, expiry, intake, selected roots,
+budgets, and current diff, but does not require a new signature merely because an
+in-root commit was added. Finalization remains once-per-final-diff before merge
+and must list every changed path exactly. Every path-root session requires a
+platform-authenticated owner approval before edits and a second, distinct owner
+approval bound to the exact final head; the pre-edit approval cannot be replayed
+as final approval. This closed renewal rule covers semantic destructive,
+production, external-mutation, credential, signing, and release implications
+without relying on API-name or keyword denylists. Structurally identified
+authorization policy, trust-anchor, signer, protected-workflow, ruleset,
+credential/signing-material, mass-deletion, release, and outside-root paths
+remain ineligible for path-root delegation and require exact-file admission
+before editing.
 
 For Tasks 24–29 only, owner decision
 `OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z` permits one deterministic,

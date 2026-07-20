@@ -155,6 +155,10 @@ def write_trusted_state(
     *,
     approval_required: bool = False,
     consumed_nonces: tuple[str, ...] = (),
+    authorized_path_roots: tuple[str, ...] = (),
+    protected_paths: tuple[str, ...] = (),
+    maximum_changed_files: int = 128,
+    maximum_changed_bytes: int = 16 * 1024 * 1024,
 ) -> None:
     (root / "docs/canon").mkdir(parents=True, exist_ok=True)
     (root / "docs/canon/MANIFEST.toml").write_text(
@@ -172,7 +176,16 @@ def write_trusted_state(
     write_json(
         root,
         "docs/canon/generated/concept-ownership.json",
-        {**projection_base, "owners": []},
+        {
+            **projection_base,
+            "concepts": [
+                {"concept": "authorization", "spec_id": "TEST-AUTHORIZATION"},
+                {
+                    "concept": "engineering.release.rollout",
+                    "spec_id": "TEST-RELEASE",
+                },
+            ],
+        },
     )
     issue_state = {
         "schema_version": 1,
@@ -208,7 +221,15 @@ def write_trusted_state(
         "consumption_generation": 1,
         "consumed_nonces": sorted(consumed_nonces),
     }
-    requirement_index = {"requirements": [{"requirement_id": "AUTH-001"}]}
+    requirement_index = {
+        "requirements": [
+            {"requirement_id": "AUTH-001", "concept": "authorization"},
+            {
+                "requirement_id": "RELEASE-003",
+                "concept": "engineering.release.rollout",
+            },
+        ]
+    }
     write_json(root, "docs/canon/generated/canon-index.json", requirement_index)
     constitution = root / "docs/canon/CONSTITUTION.md"
     constitution.write_text("# Test constitution\n", encoding="utf-8")
@@ -354,6 +375,25 @@ def write_trusted_state(
                     "maximum_claim_ceiling": "Governance Green for exact scope",
                     "approval_required": approval_required,
                     "approval_policy_ids": ["owner-gate@1"],
+                    **(
+                        {
+                            "authorization_modes": [
+                                "exact-files",
+                                "path-roots",
+                            ],
+                            "delegated_task_types": ["governance"],
+                            "delegated_scope_mode": "base-canon-concepts",
+                            "delegated_requirement_mode": "base-canon-requirements",
+                            "authorized_path_roots": sorted(
+                                authorized_path_roots
+                            ),
+                            "protected_paths": sorted(protected_paths),
+                            "maximum_changed_files": maximum_changed_files,
+                            "maximum_changed_bytes": maximum_changed_bytes,
+                        }
+                        if authorized_path_roots
+                        else {}
+                    ),
                 }
             ],
             "approval_trust_anchor_id": TEST_ANCHOR_ID,
@@ -450,6 +490,21 @@ def intake(*files: str) -> dict[str, object]:
         "requested_rollback": ["git-revert"],
         "requested_claim_ceiling": "Governance Green for exact scope",
         "requested_skill_adapters": ["ambitions-source-truth-authority"],
+    }
+
+
+def root_intake(
+    *roots: str,
+    maximum_changed_files: int = 32,
+    maximum_changed_bytes: int = 1024 * 1024,
+) -> dict[str, object]:
+    return {
+        **intake(),
+        "requested_changed_files": [],
+        "requested_authorization_mode": "path-roots",
+        "requested_path_roots": list(roots),
+        "requested_max_changed_files": maximum_changed_files,
+        "requested_max_changed_bytes": maximum_changed_bytes,
     }
 
 
@@ -559,6 +614,7 @@ def event(
         "trusted_head_sha": head,
         "merge_base_sha": run(repo, "merge-base", base, head),
         "verification_epoch": verification_epoch,
+        "expires_at_epoch": verification_epoch + 3600,
         "workflow_run_id": workflow_run_id,
         "workflow_run_attempt": workflow_run_attempt,
         "consumption_generation": consumption_generation,
@@ -621,6 +677,7 @@ def approval(
     task_id: str = "TASK-24",
     intake_id: str = "INTAKE-24",
     approved_scope: tuple[str, ...] = ("authorization",),
+    one_time_use_nonce: str = "nonce-24",
 ) -> dict[str, object]:
     trusted_event = event_data or event(repo, base, head)
     return sign({
@@ -652,10 +709,12 @@ def approval(
         "approval_policy_revision": "1",
         "authenticated_principal": "owner:devan",
         "approved_scope": list(approved_scope),
-        "one_time_use_nonce": "nonce-24",
-        "verification_epoch": 1_900_000_000,
+        "one_time_use_nonce": one_time_use_nonce,
+        "verification_epoch": trusted_event["verification_epoch"],
         "consumed": False,
-        "expires_at_epoch": 2_000_000_000,
+        "expires_at_epoch": trusted_event.get(
+            "expires_at_epoch", trusted_event["verification_epoch"] + 3600
+        ),
         "revoked": False,
         "break_glass": False,
         "incident_id": None,
@@ -716,6 +775,15 @@ def validation(
 
 class AuthorizationSchemaTests(unittest.TestCase):
     def test_schemas_are_closed_and_intake_is_request_only(self) -> None:
+        optional_fields = {
+            "task-intake.schema.json": {
+                "requested_authorization_mode",
+                "requested_path_roots",
+                "requested_max_changed_files",
+                "requested_max_changed_bytes",
+            },
+            "trusted-event.schema.json": {"expires_at_epoch"},
+        }
         for name in (
             "task-intake.schema.json",
             "task-authorization.schema.json",
@@ -726,12 +794,25 @@ class AuthorizationSchemaTests(unittest.TestCase):
             payload = json.loads((SCHEMAS / name).read_text(encoding="utf-8"))
             self.assertFalse(payload["additionalProperties"], name)
             self.assertEqual(payload["type"], "object", name)
-            self.assertEqual(set(payload["required"]), set(payload["properties"]), name)
+            self.assertEqual(
+                set(payload["properties"]) - set(payload["required"]),
+                optional_fields.get(name, set()),
+                name,
+            )
 
         intake_schema = json.loads(
             (SCHEMAS / "task-intake.schema.json").read_text(encoding="utf-8")
         )
         allowed = set(intake_schema["properties"])
+        self.assertEqual(
+            allowed - set(intake_schema["required"]),
+            {
+                "requested_authorization_mode",
+                "requested_path_roots",
+                "requested_max_changed_files",
+                "requested_max_changed_bytes",
+            },
+        )
         self.assertTrue(all(name.startswith("requested_") for name in allowed - {"schema_version", "intake_id", "task_id", "issue_reference"}))
         for forbidden in (
             "owner_approved",
@@ -901,6 +982,697 @@ class DeterminismAndTreeDeltaTests(unittest.TestCase):
 
 
 class StartFinalizeTests(unittest.TestCase):
+    def _root_delegation_repo(
+        self,
+        directory: str,
+        changed_path: str,
+        *,
+        content: str = "repair\n",
+        approval_required: bool = False,
+        maximum_changed_files: int = 32,
+        maximum_changed_bytes: int = 1024 * 1024,
+    ) -> tuple[Path, str, str]:
+        repo = Path(directory)
+        run(repo, "init", "-q", "-b", "main")
+        run(repo, "config", "user.name", "Canon Test")
+        run(repo, "config", "user.email", "canon@example.invalid")
+        (repo / "README.md").write_text("base\n", encoding="utf-8")
+        write_trusted_state(
+            repo,
+            ["README.md"],
+            authorized_path_roots=(
+                "Native",
+                "project.yml",
+                "scripts",
+                "src",
+                "tests",
+            ),
+            protected_paths=("src/protected",),
+            maximum_changed_files=maximum_changed_files,
+            maximum_changed_bytes=maximum_changed_bytes,
+            approval_required=approval_required,
+        )
+        run(repo, "add", "-A")
+        run(repo, "commit", "-qm", "base")
+        base = run(repo, "rev-parse", "HEAD")
+        run(repo, "checkout", "-qb", "topic")
+        target = repo / changed_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
+        run(repo, "add", changed_path)
+        run(repo, "commit", "-qm", "repair")
+        return repo, base, run(repo, "rev-parse", "HEAD")
+
+    def test_signed_path_root_delegation_captures_new_file_exactly(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo, base, head = self._root_delegation_repo(
+                directory, "src/new.py"
+            )
+            intake_data = root_intake("src")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            trusted_event = event(repo, base, head)
+            signed_approval = approval(
+                repo,
+                base,
+                head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=trusted_event,
+            )
+            result = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=trusted_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(signed_approval,),
+                verification_epoch=1_900_000_000,
+            )
+            self.assertEqual(result["computed_authorized_files"], ["src/new.py"])
+            self.assertEqual(
+                result["intake"]["requested_authorization_mode"], "path-roots"
+            )
+
+    def test_path_root_delegation_rejects_outside_protected_and_over_budget(self) -> None:
+        cases = (
+            (
+                "outside/new.py",
+                "src",
+                "AUTH_FILE_POLICY",
+                1024 * 1024,
+                "too-large\n",
+            ),
+            (
+                "src/protected/key.py",
+                "src",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "too-large\n",
+            ),
+            (
+                "src/secrets.yml",
+                "src",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "value: ordinary\n",
+            ),
+            (
+                "Native/Networking/Configuration.swift",
+                "Native",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "let productionToken = \"value\"\n",
+            ),
+            (
+                "scripts/ship.py",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "requests.post(production_url)\n",
+            ),
+            (
+                "scripts/urllib_ship.py",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "urllib.request.urlopen(production_url, data=payload)\n",
+            ),
+            (
+                "scripts/cleanup.py",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "shutil.rmtree(target)\n",
+            ),
+            (
+                "Native/Resources/client.der",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "certificate bytes\n",
+            ),
+            (
+                "scripts/.env",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "PASSWORD=hunter2\n",
+            ),
+            (
+                "Native/Resources/auth.plist",
+                "Native",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "<key>Password</key><string>value</string>\n",
+            ),
+            (
+                "scripts/path_cleanup.py",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "Path(target).unlink()\n",
+            ),
+            (
+                "scripts/cloud_copy.sh",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "aws s3 cp artifact s3://bucket/object\n",
+            ),
+            (
+                "Native/Networking/Write.swift",
+                "Native",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                'request.httpMethod = "POST"\nURLSession.shared.dataTask(with: request)\n',
+            ),
+            (
+                "scripts/ship.js",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                'fetch(url, { method: "POST", body: payload })\n',
+            ),
+            (
+                "scripts/quoted_cloud_copy.py",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                'subprocess.run(["aws", "s3", "cp", artifact, destination])\n',
+            ),
+            (
+                "scripts/find_cleanup.sh",
+                "scripts",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                'find build -type f -delete\n',
+            ),
+            (
+                "project.yml",
+                "project.yml",
+                "AUTH_APPROVAL_MISSING",
+                1024 * 1024,
+                "CODE_SIGN_IDENTITY: iPhone Distribution\n",
+            ),
+            (
+                "src/large.py",
+                "src",
+                "AUTH_DELEGATION_BUDGET",
+                4,
+                "too-large\n",
+            ),
+        )
+        for changed_path, root, code, byte_budget, content in cases:
+            with self.subTest(changed_path=changed_path), tempfile.TemporaryDirectory() as directory:
+                repo, base, head = self._root_delegation_repo(
+                    directory,
+                    changed_path,
+                    content=content,
+                    maximum_changed_bytes=byte_budget,
+                )
+                intake_data = root_intake(
+                    root, maximum_changed_bytes=byte_budget
+                )
+                trusted_bindings, trusted_policy = trusted_context(
+                    repo, base, intake_data
+                )
+                with self.assertRaisesRegex(AuthorizationError, code):
+                    task_start(
+                        repo_root=repo,
+                        mode="ci-pr-range",
+                        intake_data=intake_data,
+                        trusted_event_data=event(repo, base, head),
+                        trusted_bindings=trusted_bindings,
+                        policy_data=trusted_policy,
+                        approval_attestations=(),
+                        verification_epoch=1_900_000_000,
+                    )
+
+    def test_path_root_delegation_rejects_noncanonical_utf8_tree_path(self) -> None:
+        delta = {
+            "records": [
+                {
+                    "path_display_utf8": "Native/..",
+                    "path_raw_base64url": "TmF0aXZlLy4u",
+                    "status": "added",
+                    "old_mode": None,
+                    "old_object_type": None,
+                    "old_object_id": None,
+                    "old_blob_size": None,
+                    "new_mode": "160000",
+                    "new_object_type": "commit",
+                    "new_object_id": "a" * 40,
+                    "new_blob_size": None,
+                }
+            ]
+        }
+        with tempfile.TemporaryDirectory() as directory, self.assertRaisesRegex(
+            AuthorizationError, "AUTH_FILE_POLICY"
+        ):
+            authorization_module._validate_path_root_delta(
+                Path(directory),
+                delta,
+                selected_roots=("Native",),
+                protected_paths=(),
+                maximum_changed_files=32,
+                maximum_changed_bytes=1024 * 1024,
+            )
+
+        indirect_delta = {
+            "records": [
+                {
+                    "path_display_utf8": "scripts/helper",
+                    "path_raw_base64url": "c2NyaXB0cy9oZWxwZXI",
+                    "status": "added",
+                    "old_mode": None,
+                    "old_object_type": None,
+                    "old_object_id": None,
+                    "old_blob_size": None,
+                    "new_mode": "120000",
+                    "new_object_type": "blob",
+                    "new_object_id": "b" * 40,
+                    "new_blob_size": 48,
+                }
+            ]
+        }
+        with tempfile.TemporaryDirectory() as directory, self.assertRaisesRegex(
+            AuthorizationError, "AUTH_BOUNDARY_APPROVAL_REQUIRED"
+        ):
+            authorization_module._validate_path_root_delta(
+                Path(directory),
+                indirect_delta,
+                selected_roots=("scripts",),
+                protected_paths=(),
+                maximum_changed_files=32,
+                maximum_changed_bytes=1024 * 1024,
+            )
+
+    def test_path_root_delegation_rejects_unsigned_event(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo, base, head = self._root_delegation_repo(
+                directory, "src/new.py"
+            )
+            intake_data = root_intake("src")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            unsigned_event = event(repo, base, head)
+            unsigned_event["event_attestation_origin"] = "local-advisory"
+            unsigned_event["workflow_run_id"] = 0
+            unsigned_event["workflow_run_attempt"] = 0
+            for field in (
+                "trust_anchor_id",
+                "trust_anchor_sha256",
+                "signature_algorithm",
+                "signature_base64url",
+            ):
+                unsigned_event[field] = None
+            unsigned_event["event_projection_digest"] = (
+                authorization_module.trusted_event_projection_digest(unsigned_event)
+            )
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_SIGNATURE"):
+                task_start(
+                    repo_root=repo,
+                    mode="local-advisory",
+                    intake_data=intake_data,
+                    trusted_event_data=unsigned_event,
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+
+    def test_path_root_delegation_allows_contextual_design_token(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo, base, head = self._root_delegation_repo(
+                directory,
+                "Native/Design/Spacing.swift",
+                content="let spacingToken = 8\n",
+            )
+            intake_data = root_intake("Native")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            trusted_event = event(repo, base, head)
+            signed_approval = approval(
+                repo,
+                base,
+                head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=trusted_event,
+            )
+            result = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=trusted_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(signed_approval,),
+                verification_epoch=1_900_000_000,
+            )
+            self.assertEqual(
+                result["computed_authorized_files"],
+                ["Native/Design/Spacing.swift"],
+            )
+
+    def test_path_root_delegation_rejects_replay_expiry_and_hard_boundaries(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo, base, head = self._root_delegation_repo(
+                directory,
+                "src/new.py",
+                approval_required=True,
+            )
+            intake_data = root_intake("src")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            first_event = event(repo, base, head, workflow_run_id=24001)
+            signed_approval = approval(
+                repo,
+                base,
+                head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=first_event,
+            )
+            first = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=first_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(signed_approval,),
+                verification_epoch=1_900_000_000,
+            )
+            self.assertEqual(first["computed_authorized_files"], ["src/new.py"])
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_APPROVAL_MISMATCH"):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(
+                        repo, base, head, workflow_run_id=24002
+                    ),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(signed_approval,),
+                    verification_epoch=1_900_000_000,
+                )
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_EXPIRED"):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                    evaluation_epoch=1_900_003_600,
+                )
+            release_intake = root_intake("src")
+            release_intake["requested_scope"] = ["release"]
+            release_bindings, release_policy = trusted_context(
+                repo, base, release_intake
+            )
+            with self.assertRaisesRegex(
+                AuthorizationError, "AUTH_BOUNDARY_APPROVAL_REQUIRED"
+            ):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=release_intake,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=release_bindings,
+                    policy_data=release_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+            unknown_scope_intake = root_intake("src")
+            unknown_scope_intake["requested_scope"] = ["privacy-critical"]
+            unknown_bindings, unknown_policy = trusted_context(
+                repo, base, unknown_scope_intake
+            )
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_SCOPE_POLICY"):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=unknown_scope_intake,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=unknown_bindings,
+                    policy_data=unknown_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+            incoherent_intake = root_intake("src")
+            incoherent_intake["requested_requirement_ids"] = ["RELEASE-003"]
+            incoherent_bindings, incoherent_policy = trusted_context(
+                repo, base, incoherent_intake
+            )
+            with self.assertRaisesRegex(
+                AuthorizationError, "AUTH_REQUIREMENT_POLICY"
+            ):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=incoherent_intake,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=incoherent_bindings,
+                    policy_data=incoherent_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            run(repo, "init", "-q", "-b", "main")
+            run(repo, "config", "user.name", "Canon Test")
+            run(repo, "config", "user.email", "canon@example.invalid")
+            for index in range(9):
+                target = repo / "src" / f"item-{index}.txt"
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("base\n", encoding="utf-8")
+            write_trusted_state(
+                repo,
+                ["README.md"],
+                authorized_path_roots=("src",),
+            )
+            run(repo, "add", "-A")
+            run(repo, "commit", "-qm", "base")
+            base = run(repo, "rev-parse", "HEAD")
+            run(repo, "checkout", "-qb", "topic")
+            for target in (repo / "src").iterdir():
+                target.unlink()
+            run(repo, "add", "-A")
+            run(repo, "commit", "-qm", "mass delete")
+            head = run(repo, "rev-parse", "HEAD")
+            intake_data = root_intake("src")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            with self.assertRaisesRegex(
+                AuthorizationError, "AUTH_BOUNDARY_APPROVAL_REQUIRED"
+            ):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+
+    def test_path_root_finalization_records_each_scope_expansion(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            run(repo, "init", "-q", "-b", "main")
+            run(repo, "config", "user.name", "Canon Test")
+            run(repo, "config", "user.email", "canon@example.invalid")
+            (repo / "README.md").write_text("base\n", encoding="utf-8")
+            write_trusted_state(
+                repo,
+                ["README.md"],
+                authorized_path_roots=("src", "tests"),
+                approval_required=True,
+            )
+            run(repo, "add", "-A")
+            run(repo, "commit", "-qm", "base")
+            base = run(repo, "rev-parse", "HEAD")
+            run(repo, "checkout", "-qb", "topic")
+            run(repo, "commit", "--allow-empty", "-qm", "delegation seed")
+            delegation_head = run(repo, "rev-parse", "HEAD")
+            intake_data = root_intake("src", "tests")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            delegation_event = event(
+                repo,
+                base,
+                delegation_head,
+                workflow_run_id=24001,
+            )
+            delegation_approval = approval(
+                repo,
+                base,
+                delegation_head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=delegation_event,
+                one_time_use_nonce="nonce-delegation-start",
+            )
+            delegation_start = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=delegation_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(delegation_approval,),
+                verification_epoch=1_900_000_000,
+            )
+            self.assertEqual(delegation_start["computed_authorized_files"], [])
+            for path in ("src/new.py", "tests/test_new.py"):
+                target = repo / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("repair\n", encoding="utf-8")
+                run(repo, "add", path)
+                run(repo, "commit", "-qm", f"add {path}")
+            head = run(repo, "rev-parse", "HEAD")
+            trusted_event = event(
+                repo,
+                base,
+                head,
+                verification_epoch=1_900_000_100,
+                workflow_run_id=24002,
+            )
+            final_approval = approval(
+                repo,
+                base,
+                head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=trusted_event,
+                one_time_use_nonce="nonce-finalization",
+            )
+            start = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=trusted_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(final_approval,),
+                verification_epoch=1_900_000_100,
+            )
+            authorization_digest = hashlib.sha256(
+                canonical_json_bytes(start)
+            ).hexdigest()
+            validations = (
+                validation(
+                    authorization_digest,
+                    repo,
+                    base,
+                    head,
+                    str(start["intake_digest"]),
+                    trusted_bindings,
+                    str(start["computed_command_digests"]["canon-unit"]),
+                ),
+                validation(
+                    authorization_digest,
+                    repo,
+                    base,
+                    head,
+                    str(start["intake_digest"]),
+                    trusted_bindings,
+                    str(
+                        start["computed_command_digests"][
+                            "independent-review-evidence"
+                        ]
+                    ),
+                    command_id="independent-review-evidence",
+                    proof_obligation_ids=["independent-review"],
+                    artifact_digest="c" * 64,
+                ),
+            )
+            receipt = task_finalize(
+                repo_root=repo,
+                authorization=start,
+                intake_data=intake_data,
+                trusted_event_data=trusted_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(final_approval,),
+                validation_attestations=validations,
+                verification_epoch=1_900_000_100,
+                evaluation_epoch=1_900_000_100,
+                delegation_start_authorization=delegation_start,
+                delegation_start_event=delegation_event,
+                delegation_start_approval=delegation_approval,
+            )
+            records = receipt["scope_expansion_records"]
+            self.assertEqual(len(records), 3)
+            self.assertEqual([record["sequence"] for record in records], [1, 2, 3])
+            self.assertEqual(records[-1]["changed_files"], [
+                "src/new.py",
+                "tests/test_new.py",
+            ])
+            self.assertEqual(
+                records[-1]["tree_delta_digest"],
+                receipt["final_tree_delta"]["digest"],
+            )
+            self.assertEqual(
+                receipt["delegation_start_authorization_digest"],
+                hashlib.sha256(canonical_json_bytes(delegation_start)).hexdigest(),
+            )
+            tampered_receipt = dict(receipt)
+            tampered_receipt["exact_changed_files"] = []
+            with self.assertRaisesRegex(
+                AuthorizationError, "exact changed files do not match"
+            ):
+                authorization_module.validate_task_finalization_receipt(
+                    tampered_receipt
+                )
+
+            with self.assertRaisesRegex(
+                AuthorizationError, "AUTH_DELEGATION_START_MISSING"
+            ):
+                task_finalize(
+                    repo_root=repo,
+                    authorization=start,
+                    intake_data=intake_data,
+                    trusted_event_data=trusted_event,
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(final_approval,),
+                    validation_attestations=validations,
+                    verification_epoch=1_900_000_100,
+                    evaluation_epoch=1_900_000_100,
+                )
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_EXPIRED"):
+                task_finalize(
+                    repo_root=repo,
+                    authorization=start,
+                    intake_data=intake_data,
+                    trusted_event_data=trusted_event,
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(final_approval,),
+                    validation_attestations=validations,
+                    verification_epoch=1_900_000_100,
+                    evaluation_epoch=1_900_003_600,
+                    delegation_start_authorization=delegation_start,
+                    delegation_start_event=delegation_event,
+                    delegation_start_approval=delegation_approval,
+                )
+
     def test_start_is_deterministic_and_computes_exact_policy_bounded_files(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)
@@ -2001,7 +2773,26 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
         delegation = rules["CODEX-AUTONOMOUS-REPAIR-DELEGATION"]
         self.assertTrue(delegation["approval_required"])
         self.assertEqual(delegation["approval_policy_ids"], ["owner-gate@1"])
-        self.assertEqual(delegation["scopes"], ["AUTHORITY-AMENDMENT-001"])
+        self.assertEqual(
+            delegation["scopes"],
+            ["AUTHORITY-AMENDMENT-001", "ordinary-repair"],
+        )
+        self.assertEqual(
+            delegation["authorization_modes"], ["exact-files", "path-roots"]
+        )
+        self.assertEqual(
+            delegation["delegated_task_types"],
+            ["docs", "mechanical", "runtime", "swiftui"],
+        )
+        self.assertEqual(
+            delegation["delegated_scope_mode"], "base-canon-concepts"
+        )
+        self.assertEqual(
+            delegation["delegated_requirement_mode"],
+            "base-canon-requirements",
+        )
+        self.assertGreater(delegation["maximum_changed_files"], 0)
+        self.assertGreater(delegation["maximum_changed_bytes"], 0)
         self.assertIn(
             "docs/canon/references/task-authorization-policy.json",
             delegation["authorized_files"],
@@ -2765,6 +3556,16 @@ class IndependentReviewEvidenceTests(unittest.TestCase):
         )[1].split("\n  attest:", 1)[0]
         self.assertNotIn("GH_TOKEN:", ordinary_step)
         self.assertIn("GH_TOKEN: ${{ github.token }}", trusted_step)
+        self.assertEqual(
+            manifest["trusted_workflow"]["digest"],
+            hashlib.sha256(workflow.encode("utf-8")).hexdigest(),
+        )
+        self.assertIn("operation:", workflow)
+        self.assertIn("if: inputs.operation == 'finalize'", workflow)
+        self.assertIn("delegation_start_run_id:", workflow)
+        self.assertIn("--delegation-authorization", workflow)
+        self.assertIn("--delegation-event", workflow)
+        self.assertIn("--delegation-approval", workflow)
 
     def test_platform_runner_uses_trusted_script_not_candidate_substitute(self) -> None:
         runner = load_platform_runner()

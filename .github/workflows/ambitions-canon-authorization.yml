@@ -11,6 +11,23 @@ on:
         description: Exact canonical task-intake JSON
         required: true
         type: string
+      operation:
+        description: Start a pre-edit session or finalize its exact diff
+        required: true
+        default: finalize
+        type: choice
+        options:
+          - start
+          - finalize
+      delegation_start_run_id:
+        description: Pre-edit workflow run ID required by path-root finalization
+        required: false
+        type: string
+      delegation_start_run_attempt:
+        description: Pre-edit workflow run attempt
+        required: false
+        default: "1"
+        type: string
 
 permissions:
   actions: read
@@ -155,6 +172,7 @@ jobs:
   validate:
     name: Validate ${{ matrix.command_id }}
     needs: authorize
+    if: inputs.operation == 'finalize'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
@@ -219,7 +237,7 @@ jobs:
     needs:
       - authorize
       - validate
-    if: success()
+    if: inputs.operation == 'finalize' && needs.authorize.result == 'success' && needs.validate.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: Ambitions Canon Authorization
@@ -242,6 +260,20 @@ jobs:
         with:
           name: canon-start-${{ github.run_id }}-${{ github.run_attempt }}
           path: canon-start
+
+      - name: Download signed pre-edit delegation
+        if: inputs.delegation_start_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          START_RUN_ATTEMPT: ${{ inputs.delegation_start_run_attempt }}
+          START_RUN_ID: ${{ inputs.delegation_start_run_id }}
+        run: |
+          [[ "$START_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$START_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          gh run download "$START_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "canon-start-$START_RUN_ID-$START_RUN_ATTEMPT" \
+            --dir delegation-start
 
       - name: Fetch candidate object as data
         env:
@@ -298,16 +330,128 @@ jobs:
           )
           PY
 
+      - name: Reverify final PR and main identity before signing
+        env:
+          BASE_SHA: ${{ needs.authorize.outputs.base_sha }}
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ needs.authorize.outputs.head_sha }}
+          PR_NUMBER: ${{ inputs.pull_request_number }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+
+          repository = os.environ["GITHUB_REPOSITORY"]
+          pull_number = os.environ["PR_NUMBER"]
+          pull = json.loads(
+              subprocess.run(
+                  ["gh", "api", f"repos/{repository}/pulls/{pull_number}"],
+                  check=True,
+                  capture_output=True,
+                  text=True,
+              ).stdout
+          )
+          main = json.loads(
+              subprocess.run(
+                  ["gh", "api", f"repos/{repository}/git/ref/heads/main"],
+                  check=True,
+                  capture_output=True,
+                  text=True,
+              ).stdout
+          )
+          expected = {
+              "state": "open",
+              "base_ref": "main",
+              "base_sha": os.environ["BASE_SHA"],
+              "head_sha": os.environ["HEAD_SHA"],
+              "main_sha": os.environ["BASE_SHA"],
+          }
+          actual = {
+              "state": pull.get("state"),
+              "base_ref": pull.get("base", {}).get("ref"),
+              "base_sha": pull.get("base", {}).get("sha"),
+              "head_sha": pull.get("head", {}).get("sha"),
+              "main_sha": main.get("object", {}).get("sha"),
+          }
+          if actual != expected:
+              raise SystemExit(
+                  "final PR or main identity changed: "
+                  + json.dumps({"expected": expected, "actual": actual}, sort_keys=True)
+              )
+          PY
+
       - name: Sign validations and finalize exact range
         env:
           AMBITIONS_CANON_ATTESTATION_PRIVATE_KEY: ${{ secrets.AMBITIONS_CANON_ATTESTATION_PRIVATE_KEY }}
+          START_RUN_ID: ${{ inputs.delegation_start_run_id }}
         run: |
+          delegation_args=()
+          if [[ -n "$START_RUN_ID" ]]; then
+            delegation_args=(
+              --delegation-authorization delegation-start/task-authorization.json
+              --delegation-event delegation-start/trusted-event.json
+              --delegation-approval delegation-start/approval-attestation.json
+            )
+          fi
           python3 scripts/ambitions-canon-platform-attest.py --repo-root . finalize \
             --authorization canon-start/task-authorization.json \
             --trusted-event canon-start/trusted-event.json \
             --approval-attestation canon-start/approval-attestation.json \
             --evidence "$RUNNER_TEMP/validation-evidence.json" \
-            --output-dir "$RUNNER_TEMP/canon-finalization"
+            --output-dir "$RUNNER_TEMP/canon-finalization" \
+            "${delegation_args[@]}"
+
+      - name: Reverify final PR and main identity after signing
+        env:
+          BASE_SHA: ${{ needs.authorize.outputs.base_sha }}
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ needs.authorize.outputs.head_sha }}
+          PR_NUMBER: ${{ inputs.pull_request_number }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+
+          repository = os.environ["GITHUB_REPOSITORY"]
+          pull_number = os.environ["PR_NUMBER"]
+          pull = json.loads(
+              subprocess.run(
+                  ["gh", "api", f"repos/{repository}/pulls/{pull_number}"],
+                  check=True,
+                  capture_output=True,
+                  text=True,
+              ).stdout
+          )
+          main = json.loads(
+              subprocess.run(
+                  ["gh", "api", f"repos/{repository}/git/ref/heads/main"],
+                  check=True,
+                  capture_output=True,
+                  text=True,
+              ).stdout
+          )
+          expected = {
+              "state": "open",
+              "base_ref": "main",
+              "base_sha": os.environ["BASE_SHA"],
+              "head_sha": os.environ["HEAD_SHA"],
+              "main_sha": os.environ["BASE_SHA"],
+          }
+          actual = {
+              "state": pull.get("state"),
+              "base_ref": pull.get("base", {}).get("ref"),
+              "base_sha": pull.get("base", {}).get("sha"),
+              "head_sha": pull.get("head", {}).get("sha"),
+              "main_sha": main.get("object", {}).get("sha"),
+          }
+          if actual != expected:
+              raise SystemExit(
+                  "final PR or main identity changed: "
+                  + json.dumps({"expected": expected, "actual": actual}, sort_keys=True)
+              )
+          PY
 
       - name: Upload signed finalization artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

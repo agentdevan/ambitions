@@ -100,6 +100,7 @@ def create_start_attestations(
         "trusted_head_sha": trusted_head_sha,
         "merge_base_sha": merge_base_sha,
         "verification_epoch": verification_epoch,
+        "expires_at_epoch": verification_epoch + 3600,
         "workflow_run_id": workflow_run_id,
         "workflow_run_attempt": workflow_run_attempt,
         "consumption_generation": nonce_state["consumption_generation"],

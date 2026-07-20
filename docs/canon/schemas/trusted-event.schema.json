@@ -8,6 +8,7 @@
     "event_projection_digest": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
     "event_attestation_origin": {"enum": ["trusted-ci", "local-advisory"], "type": "string"},
     "event_provider": {"const": "github", "type": "string"},
+    "expires_at_epoch": {"minimum": 1, "type": "integer"},
     "issue_state_transition": {
       "additionalProperties": false,
       "properties": {

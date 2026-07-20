@@ -133,6 +133,8 @@
         "authorization_digest": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
         "claim_ceiling": {"minLength": 1, "type": "string"},
         "computed_authorized_files": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
+        "delegation_start_authorization_digest": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+        "delegation_start_event_provenance": {"oneOf": [{"type": "null"}, {"$ref": "trusted-event.schema.json"}]},
         "exact_changed_files": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
         "exact_diff_authorized": {"const": true, "type": "boolean"},
         "final_tree_delta": {"$ref": "#/properties/tree_delta"},
@@ -142,12 +144,30 @@
         "proof_obligation_evidence": {"additionalProperties": {"items": {"pattern": "^[0-9a-f]{64}$", "type": "string"}, "type": "array", "uniqueItems": true}, "type": "object"},
         "receipt_type": {"const": "task-finalization", "type": "string"},
         "schema_version": {"const": 1, "type": "integer"},
+        "scope_expansion_records": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "changed_bytes": {"minimum": 0, "type": "integer"},
+              "changed_file_count": {"minimum": 0, "type": "integer"},
+              "changed_files": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
+              "head_sha": {"pattern": "^[0-9a-f]{40,64}$", "type": "string"},
+              "previous_record_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+              "record_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+              "sequence": {"minimum": 1, "type": "integer"},
+              "tree_delta_digest": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+            },
+            "required": ["sequence", "head_sha", "tree_delta_digest", "changed_files", "changed_file_count", "changed_bytes", "previous_record_sha256", "record_sha256"],
+            "type": "object"
+          },
+          "type": "array"
+        },
         "starting_tree_delta": {"$ref": "#/properties/tree_delta"},
         "trusted_bindings": {"$ref": "#/properties/trusted_bindings"},
         "trusted_event_provenance": {"$ref": "trusted-event.schema.json"},
         "validation_attestation_digests": {"items": {"pattern": "^[0-9a-f]{64}$", "type": "string"}, "type": "array", "uniqueItems": true}
       },
-      "required": ["schema_version", "receipt_type", "mode", "authority_class", "authorization_digest", "intake_digest", "trusted_event_provenance", "trusted_bindings", "starting_tree_delta", "final_tree_delta", "computed_authorized_files", "exact_changed_files", "validation_attestation_digests", "approval_nonce_consumptions", "proof_obligation_evidence", "exact_diff_authorized", "merge_authorized", "claim_ceiling"],
+      "required": ["schema_version", "receipt_type", "mode", "authority_class", "authorization_digest", "intake_digest", "trusted_event_provenance", "trusted_bindings", "starting_tree_delta", "final_tree_delta", "computed_authorized_files", "exact_changed_files", "validation_attestation_digests", "approval_nonce_consumptions", "proof_obligation_evidence", "scope_expansion_records", "delegation_start_authorization_digest", "delegation_start_event_provenance", "exact_diff_authorized", "merge_authorized", "claim_ceiling"],
       "type": "object"
     }
   },

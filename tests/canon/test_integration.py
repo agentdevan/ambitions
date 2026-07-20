@@ -129,7 +129,13 @@ class Task24CliIntegrationTests(unittest.TestCase):
         }
         expected_task_types = {
             "CEBR-01-CANON-INTEGRATION": ["release"],
-            "CODEX-AUTONOMOUS-REPAIR-DELEGATION": ["release"],
+            "CODEX-AUTONOMOUS-REPAIR-DELEGATION": [
+                "docs",
+                "mechanical",
+                "runtime",
+                "swiftui",
+                "release",
+            ],
             **{f"TASK-{number}": ["release"] for number in range(24, 30)},
         }
         self.assertEqual(
@@ -217,6 +223,10 @@ class Task24CliIntegrationTests(unittest.TestCase):
                 ROOT / "scripts/ambitions-canon.py",
                 source / "scripts/ambitions-canon.py",
             )
+            shutil.copy2(
+                ROOT / ".github/workflows/ambitions-canon-authorization.yml",
+                source / ".github/workflows/ambitions-canon-authorization.yml",
+            )
             subprocess.run(["git", "add", "-A"], cwd=source, check=True)
             subprocess.run(
                 ["git", "commit", "-qm", "exact live Task24 policy base"],
@@ -248,6 +258,8 @@ class Task24CliIntegrationTests(unittest.TestCase):
                     encoding="utf-8"
                 )
             )
+            authorization_scope = list(intake["requested_scope"])
+            intake["requested_scope"] = ["AUTHORITY-AMENDMENT-001"]
             intake["requested_changed_files"] = [
                 "docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md"
             ]
@@ -277,6 +289,11 @@ class Task24CliIntegrationTests(unittest.TestCase):
                 ("release", "complex", 30_000),
             )
 
+            intake["requested_scope"] = authorization_scope
+            intake_path.write_text(
+                json.dumps(intake, sort_keys=True, separators=(",", ":")) + "\n",
+                encoding="utf-8",
+            )
             envelope = source / "authorization.json"
             started = cli(
                 "task",
