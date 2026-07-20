@@ -17,7 +17,7 @@ source_owners = ["Native/Ambitions/Core/Time/", "Native/Ambitions/Core/LocalRunt
 
 # Scheduling and Capacity
 
-This shadow system target defines capacity and reflow behavior; object and journey specifications retain identity and user-flow law.
+This system target defines capacity and reflow behavior; object and journey specifications retain identity and user-flow law.
 
 ## SYSTEM-SCHEDULING-CAPACITY-001 — Capacity is honest and semantically unequal
 
@@ -128,4 +128,4 @@ Exact target owners are `Core/Time/`, `Core/LocalRuntimeOS/Scheduling/`, `Comman
 Cover Protected/Fixed/Flexible/Suggested rules, overload, impossible deadline, recurrence/exception scopes, DST/time-zone/calendar/locale, external-hidden-capacity, conflict and no-safe-fit, material confirmation, cancellation/interruption, duplicate commands, replay/undo, notification/external-write failure, offline, accessibility summaries, and historical policy replay.
 
 <!-- canon-section: performance-resource-constraints -->
-Expansion, simulation, search, and reflow are bounded, cancellable, off-main where material, and use explicit product-scale caps without inventing values here. Article 31 calibration must define representative horizon/object/recurrence/conflict scale, device/OS/build/tool, warm/cold state, percentile/maximum, energy/memory, and regression threshold before implementation authorization or performance Green.
+Expansion, simulation, search, and reflow are bounded, cancellable, off-main where material, and use explicit product-scale caps without inventing values here. Performance validation must define representative horizon/object/recurrence/conflict scale, device/OS/build/tool, warm/cold state, percentile/maximum, energy/memory, and regression threshold before affected performance tests can pass.

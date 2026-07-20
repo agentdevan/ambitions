@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Am
 
 # Source Atlas
 
-This shadow target constrains Source Atlas and R2 to public/reference/freshness infrastructure.
+This target constrains Source Atlas and R2 to public/reference/freshness infrastructure.
 
 ## SYSTEM-SOURCE-ATLAS-PUBLIC-001 — Source Atlas supplies verified public context only
 

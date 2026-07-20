@@ -410,7 +410,7 @@ inverse_command_id = "CMD-YOU-DATA-RESET-REVIEW-001-INVERSE"
 trigger_command_id = "CMD-YOU-DATA-RESET-REVIEW-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-DATA-RESET-REVIEW-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-DATA-RESET-REVIEW-001-INVERSE"
 label = "Restore reviewed preferences"
 canonical_owner = "surface.you.command-contract"
@@ -476,7 +476,7 @@ inverse_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
 trigger_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
 label = "Restore rollback preference set"
 canonical_owner = "surface.you.command-contract"
@@ -611,7 +611,7 @@ inverse_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001-INVERSE"
 trigger_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-DATA-TRASH-POPULATED-001-INVERSE"
 label = "Return restored object to Trash"
 canonical_owner = "surface.you.command-contract"
@@ -749,7 +749,7 @@ gate_requirement_ids = []
 command_id = "CMD-YOU-ENTITLEMENT-EXPIRED-002"
 label = "Purchase"
 canonical_owner = "surface.you.entitlement-command-contract"
-preconditions = ["A separately registered and owner-approved StoreKit product registry exists", "The current signed StoreKit and account-association evidence has been revalidated", "The selected registered product resolves without inventing a SKU, price, plan, trial, paywall, or paid-feature boundary"]
+preconditions = ["A separately registered and validated StoreKit product registry exists", "The current signed StoreKit and account-association evidence has been revalidated", "The selected registered product resolves without inventing a SKU, price, plan, trial, paywall, or paid-feature boundary"]
 destination = "the Apple-owned purchase sheet for the separately registered product"
 destination_id = "DEST-YOU-ENTITLEMENT-EXPIRED-002"
 destination_posture = "current"
@@ -1028,8 +1028,8 @@ state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-TRIAL"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "View Plans => destination: the non-merchandising plan-status explanation in Entitlement status and recovery — Trial; effect: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure.; focus: the verified View Plans result or current status heading in Entitlement status and recovery — Trial."
-durable_effect = "Exact entitlement status and external-result consequences: View Plans: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Trial access is active, with its end condition stated without pressure."
+transition_exit = "View Plans => destination: the non-merchandising plan-status explanation in Entitlement status and recovery — Trial; effect: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current validated registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure.; focus: the verified View Plans result or current status heading in Entitlement status and recovery — Trial."
+durable_effect = "Exact entitlement status and external-result consequences: View Plans: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current validated registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Trial access is active, with its end condition stated without pressure."
 recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: View Plans: No Undo is required; dismissal restores the observed status and never changes local data, entitlement state, or core availability. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Trial access is active, with its end condition stated without pressure."
 offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Trial access is active, with its end condition stated without pressure."
 accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: View Plans announces verified status and consequence; success focuses the verified View Plans result or current status heading in Entitlement status and recovery — Trial; rejection focuses the View Plans control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Trial. Dynamic Type stacks status and explanation. The announcement first communicates: Trial access is active, with its end condition stated without pressure."
@@ -1038,11 +1038,11 @@ accessibility_focus = "VoiceOver announces status, freshness, account mismatch, 
 command_id = "CMD-YOU-ENTITLEMENT-TRIAL-001"
 label = "View Plans"
 canonical_owner = "surface.you.entitlement-command-contract"
-preconditions = ["No separately registered, owner-approved current StoreKit product registry exists, so Purchase remains unavailable", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+preconditions = ["No separately registered, validated current StoreKit product registry exists, so Purchase remains unavailable", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
 destination = "the non-merchandising plan-status explanation in Entitlement status and recovery — Trial"
 destination_id = "DEST-YOU-ENTITLEMENT-TRIAL-001"
 destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure."
+effect = "No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current validated registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure."
 success_focus = "the verified View Plans result or current status heading in Entitlement status and recovery — Trial"
 success_focus_id = "FOCUS-YOU-ENTITLEMENT-TRIAL-001-SUCCESS"
 success_focus_posture = "current"
@@ -1663,7 +1663,7 @@ inverse_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
 trigger_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
 label = "Restore App Lock off"
 canonical_owner = "surface.you.command-contract"
@@ -1729,7 +1729,7 @@ inverse_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
 trigger_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
 label = "Restore App Lock on"
 canonical_owner = "surface.you.command-contract"
@@ -2170,7 +2170,7 @@ Life Capital, broad Patterns, learning controls, receipts/history, sync conflict
 - **Verification:** `PROOF-YOU-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Owner-approved VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target.
+Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Selected VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target.
 
 ## SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001 — Data control without an AI-memory dashboard
 - **Concept:** `surface.you.no-knowledge-model`
@@ -2261,7 +2261,7 @@ The owning specification MUST authorize only the state-bound command labels `Cre
 
 `You → Account & Sync → Plan & Purchases` MUST expose `View Plans`, `Purchase`, `Restore Purchases`, `Check Again`, `Review Account`, `Manage Subscription`, and `Done`.
 
-`Purchase` is authorized only for a separately registered, owner-approved StoreKit product. This contract MUST NOT create a SKU, price, plan, paywall, trial promise, or paid-feature boundary. StoreKit owns the purchase sheet; cancellation changes nothing. Verified success may persist only non-sensitive transaction/entitlement state and a Receipt.
+`Purchase` is authorized only for a separately registered, validated StoreKit product. This contract MUST NOT create a SKU, price, plan, paywall, trial promise, or paid-feature boundary. StoreKit owns the purchase sheet; cancellation changes nothing. Verified success may persist only non-sensitive transaction/entitlement state and a Receipt.
 
 `Restore Purchases` MUST validate current signed StoreKit transactions. Account mismatch MUST NOT switch accounts, transfer private data, or bind the graph automatically; `Review Account` explains the mismatch and routes to the separate account flow.
 
@@ -2337,11 +2337,11 @@ Canonical target ownership is exact: `Surfaces/You/` owns presentation; `Core/Lo
 Tests cover grouping/search/deep links, no-account use, privacy boundaries, permission recovery, automation scope, Life Capital impact/archive/delete, sign-out local retention, continuity conflict, export/diagnostic redaction, destructive previews, offline, VoiceOver order/actions, Dynamic Type, reduced effects, contrast, and focus.
 
 <!-- canon-section: proof -->
-Required proof includes state/scenario logs, privacy-boundary evidence, redacted export/diagnostics fixtures, receipts/replay, screenshot/accessibility matrices, independent visual mapping/acceptance, exact commands/exits, current environment, skipped checks, known risks, and rollback. No readiness is inferred from this spec.
+Applicable validation includes state scenarios, privacy-boundary tests, redacted export/diagnostics fixtures, receipts/replay, rendered-state/accessibility matrices, visual comparison, and rollback.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-You root loading, settings search, Life Capital/history access, and redacted diagnostics refresh MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative settings/Life Capital/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+You root loading, settings search, Life Capital/history access, and redacted diagnostics refresh MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative settings/Life Capital/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
 
 ## SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001 — Settings drilldown presentation
 

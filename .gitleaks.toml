@@ -4,27 +4,20 @@ title = "Ambitions local secrets scan"
 useDefault = true
 
 [[allowlists]]
-description = "Clearly synthetic placeholders used in docs and fixtures"
+description = "Clearly synthetic placeholder values"
+regexTarget = "secret"
 regexes = [
   '''(?i)example(_|-)?(token|secret|key|password)''',
   '''(?i)(dummy|fake|synthetic|placeholder)[-_ ]?(token|secret|key|password)''',
   '''sk-test-[A-Za-z0-9_-]{12,}''',
   '''ghp_example[A-Za-z0-9_]*''',
 ]
-paths = [
-  '''(^|/)README\.md$''',
-  '''(^|/)docs/.*''',
-  '''(^|/)tools/source-atlas/.*/README\.md$''',
-  '''(^|/)tools/source-atlas/.*/\.env\.example$''',
-]
 
 [[allowlists]]
 description = "Deterministic Ambitions test decision keys, not credentials"
+regexTarget = "match"
 regexes = [
   '''decisionKey:\s*"[a-z0-9_.-]+\.contract"''',
-]
-paths = [
-  '''(^|/)Native/AmbitionsTests/.*\.swift$''',
 ]
 
 [[allowlists]]
@@ -32,4 +25,30 @@ description = "Exact reviewed public Figma document key"
 regexTarget = "secret"
 regexes = [
   '''^SWtHm9ouHTPbEFfNrrtZwv$''',
+  '''^Oik7612LSTUHWsNRFoTlTJ$''',
+  '''^hnVi8KV2SAuWP3V5hV160W$''',
+  '''^syAY6U5srUCifJgKq0wSSH$''',
+  '''^lDslntJK8Xtmap7paJz7f5$''',
+  '''^TgKZkoanB1hLaSYbthAIr3$''',
+  '''^tJzwkJCg7piFbb3LGy91vD$''',
+  '''^XSpaP7NkB2efoTgSy0KpFq$''',
+  '''^9FhOWjt1KGmDg31rq2XP9e$''',
+]
+
+[[allowlists]]
+description = "Deterministic Source Atlas registry SHA-256 content hashes"
+targetRules = ["generic-api-key"]
+regexTarget = "match"
+regexes = [
+  '''(?i)(apiGovernanceRegistry|candidateApiGovernanceRegistry|api_registry_hash)["']?\s*:\s*["'][0-9a-f]{64}["']''',
+]
+
+[[allowlists]]
+description = "Git commit SHAs in explicit audit and verification metadata"
+targetRules = ["sourcegraph-access-token"]
+regexTarget = "line"
+regexes = [
+  '''(?i)(baseline(?: main)? SHA|repo state(?: inspected)?|evidence baseline|last audited commit):[^\r\n]*\b[0-9a-f]{40}\b''',
+  '''(?i)\b(baseline_main_sha|baseline_sha|last_verified_commit)["']?\s*:\s*["']?[0-9a-f]{40}\b''',
+  '''(?i)\bAMB-[0-9]+(?: baseline| repair run)?[^\r\n]*\b[0-9a-f]{40}\b''',
 ]

@@ -478,7 +478,7 @@ gate_requirement_ids = []
 
 # Diagnostics
 
-This shadow target specifies private, local, redacted diagnostics and user-understandable health. It does not establish analytics, telemetry, implementation completeness, privacy approval, incident closure, or release proof.
+This target specifies private, local, redacted diagnostics and user-understandable health. It does not establish analytics, telemetry, implementation completeness, privacy approval, incident closure, or release proof.
 
 ## SYSTEM-DIAGNOSTICS-HEALTH-001 — Health is evidence-backed, scoped, and redacted
 

@@ -110,7 +110,7 @@ inverse_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
 trigger_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
 label = "Reopen Still counts Step"
 canonical_owner = "surface.today.command-contract"
@@ -346,7 +346,7 @@ inverse_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
 trigger_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
 label = "Reopen Not needed Step"
 canonical_owner = "surface.today.command-contract"
@@ -809,7 +809,7 @@ inverse_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
 trigger_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
 label = "Return Still counts Step to Start here"
 canonical_owner = "surface.today.command-contract"
@@ -872,7 +872,7 @@ verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
 
 # Today
 
-This shadow specification defines the intended Today surface.
+This specification defines the intended Today surface.
 
 ## SPEC-SURFACE-TODAY-PURPOSE-001 — Reality around now
 
@@ -979,7 +979,7 @@ Today MUST distinguish loading, low-density, empty, populated, dense, stale exte
 - **Verification:** `PROOF-TODAY-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Owner-approved VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target.
+Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Selected VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target.
 
 ## SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001 — Missed time preserves history and current status
 - **Concept:** `surface.today.missed-placement-continuity`
@@ -1077,12 +1077,12 @@ Canonical target ownership is exact: `Surfaces/Today/` owns presentation; `Core/
 Tests cover eligibility and exclusion, one-suggestion threshold, state matrix, Start here actions, completion/proof/undo/replay, restoration, dense data, offline, stale external facts, VoiceOver order/actions, list equivalence, Dynamic Type, Reduce Motion/Transparency, contrast, and focus.
 
 <!-- canon-section: proof -->
-Evidence artifacts bind executed scenarios to exact source revisions and environments.
-Required proof includes current-revision scenario logs, receipts/replay evidence, density and accessibility screenshot matrices, semantic action output, focus restoration, independent visual mapping/acceptance, exact commands and exits, and explicit skipped checks. This spec itself proves none of them.
+Scenario results are meaningful only for the source revision and environment that was actually exercised.
+Applicable validation includes current-revision scenarios, receipts/replay, density and accessibility rendered-state matrices, semantic action output, focus restoration, and visual comparison.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Today projection, refresh, and primary-action work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Today data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+Today projection, refresh, and primary-action work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative Today data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
 
 ## SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001 — Today presents branch consequence
 

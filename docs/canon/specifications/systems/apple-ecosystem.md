@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/App/", "Native/Ambitions/App/Intents/", "Nati
 
 # Apple Ecosystem
 
-This shadow target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Share, Spotlight, deep links, and lifecycle handoffs.
+This target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Share, Spotlight, deep links, and lifecycle handoffs.
 
 ## SYSTEM-APPLE-PLATFORM-BASELINE-001 — iOS 26 native baseline
 
@@ -84,10 +84,10 @@ Unavailable API/permission/data, stale snapshot, malformed/spoofed input, timeou
 Core ecosystem projection, Capture, commands, routes, and fallbacks work locally/no-account. Optional public-reference refresh is separately firewalled; ecosystem payloads never send private graph data to Ambitions services.
 
 <!-- canon-section: determinism -->
-Stable approved Projection, policy, API availability, permission, and route/command input produce the same snapshot, action set, redaction, and fallback. Duplicate invocations resolve idempotently.
+Stable approved Projection, policy, availability of required Apple frameworks, permission, and route/command input produce the same snapshot, action set, redaction, and fallback. Duplicate invocations resolve idempotently.
 
 <!-- canon-section: observability -->
-Local redacted evidence binds entry/snapshot/route/command IDs, schema/API availability, permission/privacy state, timing/cancellation, result, fallback, Receipt, and refresh without private payload values.
+Local redacted evidence binds entry/snapshot/route/command IDs, schema/framework availability, permission/privacy state, timing/cancellation, result, fallback, Receipt, and refresh without private payload values.
 
 <!-- canon-section: source-ownership -->
 Canonical ownership is divided among App bridges, LocalRuntimeOS projections/effects, extension targets, and Quality.

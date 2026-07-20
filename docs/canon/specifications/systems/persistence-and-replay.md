@@ -17,7 +17,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Transactions/", "Native/A
 
 # Persistence and Replay
 
-This shadow specification defines intended persistence semantics independently of SwiftData, SQLite, files, or another substrate.
+This specification defines intended persistence semantics independently of SwiftData, SQLite, files, or another substrate.
 
 ## SYSTEM-PERSISTENCE-ATOMIC-001 — Accepted local intent is atomic and crash-consistent
 

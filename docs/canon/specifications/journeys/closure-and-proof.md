@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Stage/Motion/", "Native/Ambitions/Trust/", "N
 
 # Closure and Proof
 
-This shadow journey coordinates closure evidence; owning object specifications retain completion, closure, ending, archive, deletion, Proof, and Receipt semantics.
+This journey coordinates closure evidence; owning object specifications retain completion, closure, ending, archive, deletion, Proof, and Receipt semantics.
 
 ## JOURNEY-STEP-CLOSURE-001 — Required Proof is known before closure
 

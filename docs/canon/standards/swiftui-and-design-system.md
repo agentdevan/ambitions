@@ -27,8 +27,8 @@ owns_concepts = [
   "standard.typography.copy-budget",
   "standard.spacing-corners.semantic-rhythm",
   "standard.interaction.native-equivalence",
-  "standard.visual.package-readiness",
-  "standard.visual.independent-review",
+  "standard.visual.target-completeness",
+  "standard.visual.rendered-comparison",
   "standard.interaction.tap",
   "standard.interaction.long-press",
   "standard.interaction.swipe",
@@ -43,7 +43,7 @@ source_owners = ["Native/Ambitions/DesignSystem/", "Native/Ambitions/Interaction
 
 # SwiftUI and Design System
 
-This shadow standard owns reusable presentation engineering and semantic design primitives, not product-specific first viewports or surface behavior.
+This standard owns reusable presentation engineering and semantic design primitives, not product-specific first viewports or surface behavior.
 
 ## FRONTEND-001 — Views render and emit intent
 - **Concept:** `engineering.frontend.view-responsibility`
@@ -245,7 +245,7 @@ Component maturity MUST be explicit; Stable requires one owner, documentation, p
 - **Verification:** `PROOF-POSITIVE-VISUAL-TARGET-001`
 - **Supersedes:** none
 
-Visual package, review, surface-specific geometry, hierarchy, viewport, and implementation-evidence behavior MUST remain in their exact child contracts; this aggregate MUST only coordinate those dependencies and their shared claim ceiling.
+Visual package, review, surface-specific geometry, hierarchy, viewport, and implementation-evidence behavior MUST remain in their exact child contracts; this aggregate MUST only coordinate those dependencies and their shared evidence boundary.
 
 ## STANDARD-TYPOGRAPHY-001 — Semantic typography and copy budget
 - **Concept:** `standard.typography.copy-budget`
@@ -279,27 +279,27 @@ Spacing and corner treatment MUST express grouping, containment, hierarchy, and 
 
 Native interaction equivalence MUST be implemented through the separate tap, long-press, swipe, drag, focus, dismissal, keyboard, reduced-effects, and state-continuity contracts without collapsing independently verifiable behavior.
 
-## STANDARD-VISUAL-PACKAGE-001 — Visual package readiness
+## STANDARD-VISUAL-PACKAGE-001 — Visual target completeness
 
-- **Concept:** `standard.visual.package-readiness`
+- **Concept:** `standard.visual.target-completeness`
 - **Modality:** `MUST`
-- **Scope:** Approved visual packages
+- **Scope:** Selected visual targets
 - **Status:** `normative`
-- **Verification:** `REVIEW-VISUAL-PACKAGE-001`
+- **Verification:** `TEST-VISUAL-TARGET-COVERAGE-001`
 - **Supersedes:** none
 
-A visual package MUST bind stable external identity, coverage, states, accessibility variants, critique, reviewer, and disposition before it can govern a scoped visual target.
+A visual target MUST identify its stable reference, covered states, accessibility variants, and intended disposition before implementation uses it as product direction.
 
-## STANDARD-VISUAL-REVIEW-001 — Independent visual review
+## STANDARD-VISUAL-REVIEW-001 — Rendered implementation comparison
 
-- **Concept:** `standard.visual.independent-review`
+- **Concept:** `standard.visual.rendered-comparison`
 - **Modality:** `MUST`
-- **Scope:** Visual review
+- **Scope:** Changed visual implementation
 - **Status:** `normative`
-- **Verification:** `REVIEW-VISUAL-INDEPENDENT-001`
+- **Verification:** `TEST-VISUAL-RENDERED-COMPARISON-001`
 - **Supersedes:** none
 
-Visual review MUST compare current rendered evidence with approved authority and record independent findings and the exact claim ceiling.
+Changed visual implementation MUST be compared with the selected design direction and applicable state and accessibility variants; concrete discrepancies are defects.
 
 ## STD-INTERACTION-TAP-001 — Tap equivalence
 
@@ -376,12 +376,12 @@ Applies cross-cutting presentation-wide; exact surface/object/journey behavior a
 <!-- canon-section: requirements -->
 The requirements consolidate useful Articles 29–30 and accepted cross-cutting v3 presentation standards.
 <!-- canon-section: exceptions -->
-Custom rendering or interaction requires an explicit owner, native-alternative analysis, accessibility and performance proof, failure behavior, removal plan, and amendment.
+Custom rendering or interaction requires native-alternative analysis, accessibility and performance tests, failure behavior, and a removal or fallback plan.
 <!-- canon-section: verification -->
-Verify with static audits, previews, interaction tests, screenshot matrices, accessibility matrices, and independent target-versus-actual review.
+Verify with static audits, previews, interaction tests, screenshot matrices, accessibility matrices, and target-versus-actual comparison.
 <!-- canon-section: source-ownership -->
 Target owners are `DesignSystem/`, `Interaction/`, `Rendering/`, thin `Stage/`, exact surface owners, and `Quality/`.
 <!-- canon-section: proof -->
-This file is not Visual Green, accessibility proof, device proof, or implementation parity.
+This file defines design-system behavior; source, rendered, accessibility, and device behavior remain testable implementation concerns.
 <!-- canon-section: amendment-impact -->
-Amendments list affected tokens, components, surfaces, visuals, accessibility states, tests, performance, source owners, migrations, proof, claim ceiling, and rollback.
+When presentation behavior changes, update affected tokens, components, surfaces, accessibility states, tests, performance budgets, migrations, and rollback handling.

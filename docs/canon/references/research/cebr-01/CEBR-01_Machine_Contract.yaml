@@ -1,0 +1,459 @@
+schema_version: "1.0"
+artifact:
+  id: "CEBR-01-MACHINE-CONTRACT"
+  title: "Certified Executable Branch Reconciliation Machine Contract"
+  parent_candidate: "CHLB-01"
+  status: "research-design"
+  normative: false
+  repository: "agentdevan/ambitions"
+  repository_revision: "7dbf554876c686e62525a85d762fec04b67a4af4"
+  canon_revision: 1
+  canon_content_sha: "a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13"
+  created: "2026-07-19"
+
+usage:
+  normative_root: "docs/canon/"
+  before_implementation:
+    - "query the owning canon requirements"
+    - "inspect current source, project configuration, and tests"
+    - "define a bounded dependency and rollback surface"
+    - "run focused executable validation"
+  note: "This research contract does not establish current implementation state."
+
+mission:
+  kernel: >-
+    Maintain one revision-bound active personal-state branch and an operational
+    viability certificate; incrementally invalidate only dependent certificate
+    components when reality changes; materialize policy-distinct candidate
+    deltas from latent contingencies and correction sets; and promote the
+    selected branch through one causal transaction while preserving prior
+    branch lineage.
+  user_facing_promise: >-
+    When life changes, show complete ways forward, what each protects and costs,
+    and make the selected way real without losing history or authority.
+
+invariants:
+  - id: "CEBR-INV-001"
+    statement: "Exactly one branch may be activeLocal or active for one canonical personal-state graph."
+  - id: "CEBR-INV-002"
+    statement: "A branch is a revision-bound semantic delta and must not duplicate canonical object authority."
+  - id: "CEBR-INV-003"
+    statement: "Candidate branches are non-durable with respect to canonical life state."
+  - id: "CEBR-INV-004"
+    statement: "A branch cannot be feasible or promotable without a current operational certificate."
+  - id: "CEBR-INV-005"
+    statement: "Equivalent inputs, policy revision, clock, and recorded seed yield replay-equivalent results."
+  - id: "CEBR-INV-006"
+    statement: "A revision invalidates only declared dependent scope unless a full-rebuild condition applies."
+  - id: "CEBR-INV-007"
+    statement: "Candidate alternatives correspond to materially distinct correction sets, not timeslot-only differences."
+  - id: "CEBR-INV-008"
+    statement: "Branch selection commits through one parent causal transaction."
+  - id: "CEBR-INV-009"
+    statement: "Recipient-owned effects remain proposals and external effects remain post-local outbox intents."
+  - id: "CEBR-INV-010"
+    statement: "Prior branch, certificate, decision basis, Receipt, and rollback lineage remain inspectable."
+  - id: "CEBR-INV-011"
+    statement: "A generative model may propose but cannot certify, authorize, or commit."
+  - id: "CEBR-INV-012"
+    statement: "No universal life score is used as product authority or explanation."
+
+entities:
+  LifeBranch:
+    identity: stable
+    schema_versioned: true
+    fields:
+      id: string
+      parent_branch_id: string?
+      base_graph_revision: string
+      horizon_start: instant
+      horizon_end: instant
+      trigger_id: string
+      policy_family: enum
+      governing_policy_revision: string
+      law_ids: [string]
+      waiver_ids: [string]
+      delta_set_id: string
+      certificate_id: string
+      authority_partition_id: string
+      review_condition_id: string
+      reversibility: enum
+      status: enum
+      created_at: instant
+      expires_at: instant?
+      lineage_id: string
+    statuses:
+      - materializing
+      - candidate_feasible
+      - candidate_fragile
+      - candidate_blocked
+      - candidate_infeasible
+      - selected
+      - stale
+      - committing
+      - active_local
+      - active
+      - superseded
+      - rolled_back
+      - expired
+
+  BranchDeltaOperation:
+    identity: stable
+    fields:
+      id: string
+      kind: enum
+      object_kind: string
+      object_id: string
+      expected_object_revision: string?
+      typed_payload_schema: string
+      human_consequence: string
+      protected_invariant_ids: [string]
+      dependency_ids: [string]
+      authority_owner_id: string
+      materiality: enum
+      reversibility: enum
+      stable_order: integer
+    operation_kinds:
+      - activate_goal
+      - pause_goal
+      - end_goal
+      - select_goal_path
+      - supersede_goal_path
+      - create_step
+      - revise_step
+      - defer_step
+      - place_step
+      - move_placement
+      - resize_placement
+      - remove_placement
+      - protect_time
+      - revise_recovery_thread
+      - create_review_condition
+      - create_shared_proposal
+      - revoke_pending_proposal
+
+  BranchViabilityCertificate:
+    identity: immutable_revision
+    fields:
+      id: string
+      branch_id: string
+      base_graph_revision: string
+      evaluated_at: instant
+      horizon_start: instant
+      horizon_end: instant
+      fact_revision_ids: [string]
+      condition_result_ids: [string]
+      law_satisfaction_ids: [string]
+      operating_envelope_result_ids: [string]
+      authority_result_id: string
+      capacity_result_id: string
+      protected_invariant_result_ids: [string]
+      robustness_id: string
+      unresolved_question_ids: [string]
+      conflict_core_id: string?
+      invalidation_condition_ids: [string]
+      status: enum
+      confidence: enum
+      fingerprint: sha256
+    statuses:
+      - building
+      - valid
+      - fragile
+      - blocked
+      - invalid
+      - stale
+      - superseded
+    operational_gate: true
+
+  ViabilityCondition:
+    identity: stable
+    fields:
+      id: string
+      kind: enum
+      source_revision_id: string
+      strength: enum
+      evaluation_state: enum
+      effective_start: instant?
+      effective_end: instant?
+      confidence: enum
+      dependency_ids: [string]
+      relaxable: boolean
+      waiver_policy_id: string?
+    kinds:
+      - canonical_fact
+      - provisional_fact
+      - forecast
+      - capacity
+      - temporal_constraint
+      - dependency
+      - policy_constraint
+      - operating_envelope
+      - authority
+      - privacy
+      - external_availability
+      - waiver
+
+  CertificateDependency:
+    identity: derived_or_durable_by_evidence
+    fields:
+      id: string
+      source_revision_id: string
+      target_kind: enum
+      target_id: string
+      relation: enum
+      hard: boolean
+
+  BranchContingencyPolicy:
+    identity: stable
+    fields:
+      id: string
+      trigger_predicate: object
+      policy_family: enum
+      correction_precedence: [enum]
+      protected_invariant_ids: [string]
+      allowed_degradation_ladder_ids: [string]
+      disallowed_effect_kinds: [string]
+      validity_start: instant?
+      validity_end: instant?
+      enabled: boolean
+    policy_families:
+      - preserve_continuity
+      - concentrate_temporarily
+      - reduce_or_defer_scope
+      - no_honest_fit
+
+  BranchConflictCore:
+    identity: certificate_scoped
+    fields:
+      id: string
+      condition_ids: [string]
+      fixed_condition_ids: [string]
+      relaxable_condition_ids: [string]
+      minimality: enum
+      explanation: string
+    minimality_states:
+      - sufficient
+      - irreducible
+      - proven_minimal
+
+  BranchCorrectionSet:
+    identity: stable_within_conflict
+    fields:
+      id: string
+      conflict_core_id: string
+      policy_family: enum
+      relaxation_ids: [string]
+      required_authority_id: string
+      protected_invariant_ids: [string]
+      sacrificed_invariant_ids: [string]
+      expected_delta_kinds: [enum]
+      semantic_fingerprint: sha256
+
+  BranchPromotionTransaction:
+    identity: stable
+    fields:
+      id: string
+      selected_branch_id: string
+      prior_active_branch_id: string
+      expected_base_graph_revision: string
+      expected_certificate_fingerprint: sha256
+      read_set_ids: [string]
+      write_operation_ids: [string]
+      meaning_record_ids: [string]
+      authority_partition_id: string
+      child_proposal_ids: [string]
+      external_effect_intent_ids: [string]
+      rollback_plan_id: string
+      policy_revision: string
+      recorded_seed: uint64
+
+commands:
+  RequestLifeBranchMaterializationCommand:
+    mutation: false
+    side_effect_free: true
+    required_inputs:
+      - trigger
+      - base_graph_revision
+      - active_branch_id
+      - governing_policy_revision
+      - horizon
+  SelectLifeBranchCommand:
+    mutation: true
+    parent_semantic_transaction: true
+    required_inputs:
+      - selected_branch_id
+      - expected_certificate_fingerprint
+      - expected_base_graph_revision
+      - confirmation_scope
+  RollbackLifeBranchPromotionCommand:
+    mutation: true
+    required_inputs:
+      - promotion_receipt_id
+      - expected_current_revision
+      - rollback_or_compensation_scope
+
+algorithms:
+  build_certificate:
+    deterministic: true
+    steps:
+      - resolve revisioned read set
+      - build viability conditions
+      - evaluate conditions in stable order
+      - evaluate policies and waivers
+      - evaluate operating envelopes with hysteresis
+      - evaluate authority partition
+      - invoke scheduling fit without mutation
+      - verify protected invariants
+      - derive conflict core when needed
+      - compute structured robustness
+      - derive status
+      - derive invalidation conditions
+      - canonicalize and fingerprint
+  handle_revision_event:
+    deterministic: true
+    steps:
+      - lookup dependency index
+      - traverse stable impact cone
+      - return no-impact result when empty
+      - invalidate impacted certificate components
+      - recompute impacted components
+      - merge unchanged components
+      - rebuild fingerprint
+      - persist replacement certificate or trigger materialization
+  derive_correction_sets:
+    deterministic: true
+    bounded: true
+    steps:
+      - derive sufficient or minimal conflict core
+      - separate fixed and relaxable conditions
+      - activate eligible contingencies
+      - generate correction sets in stable precedence
+      - validate protected invariants
+      - normalize and fingerprint
+      - suppress semantic duplicates
+      - enforce product candidate limit
+  promote_branch:
+    deterministic: true
+    atomic_local_commit: true
+    steps:
+      - reload candidate and certificate
+      - re-read current revisions
+      - reject stale basis
+      - revalidate certificate
+      - calculate material confirmation
+      - prepare parent transaction and rollback
+      - atomically commit user-owned changes and lineage
+      - create recipient proposals
+      - queue external intents
+      - materialize projections
+      - issue Receipt
+      - set active_local then reconcile to active
+
+full_rebuild_conditions:
+  - incompatible schema or policy compiler revision
+  - missing or corrupt dependency index
+  - dependency cycle fails bounded convergence
+  - canonical migration changes identity semantics
+  - impact cone exceeds calibrated bound
+
+recommendation_precedence:
+  - privacy_and_authority_invariants
+  - nonwaivable_hard_policies
+  - accepted_safety_and_recovery
+  - fixed_external_commitments
+  - protected_human_functions
+  - user_declared_branch_objective
+  - reversibility
+  - minimal_disruption
+  - soft_preferences
+  - schedule_aesthetics
+
+failure_contract:
+  stale_base_revision: "reject or regenerate candidate"
+  missing_dependency_index: "full rebuild or block; never assume valid"
+  contradictory_facts: "block or invalidate with explicit conflict"
+  no_correction_set: "return no_honest_fit"
+  all_candidates_infeasible: "preserve current state and expose conflict core"
+  unresolved_recipient_authority: "candidate blocked or selected branch active_local"
+  external_write_failure: "preserve local commit; expose reconcile/retry/rollback"
+  projection_failure: "preserve authority; rebuild projections"
+  crash_during_promotion: "resume durable phase idempotently"
+  model_unavailable: "use deterministic contingencies and policies"
+  certificate_corrupt: "quarantine, rebuild, block promotion"
+  performance_bound_exceeded: "cancel and return bounded fallback"
+
+test_suites:
+  model:
+    - stable encoding and fingerprints
+    - state transition legality
+    - semantic duplicate detection
+    - schema migration
+  certificate:
+    - valid fragile blocked invalid states
+    - waiver and expiry
+    - stale missing contradictory facts
+    - full rebuild equivalence
+  impact_cone:
+    - unrelated revision no impact
+    - single-hop and multi-hop dependency
+    - cycles and convergence failure
+    - stable traversal order
+  correction_sets:
+    - fixed versus relaxable conditions
+    - distinct policy families
+    - timeslot-only duplicate suppression
+    - no honest fit
+    - bounded candidate count
+  promotion:
+    - stale selection rejection
+    - atomic user-owned commit
+    - recipient proposal pending
+    - external effect after local commit
+    - parent Receipt and lineage
+    - replay equivalence
+    - rollback and compensation
+    - crash at every phase
+    - duplicate command idempotency
+  end_to_end:
+    - promotion pregnancy wedding baby ambitions continuity fixture
+
+acceptance_gates:
+  - one active branch and no duplicate authority
+  - operational certificate gates status and promotion
+  - incremental and full rebuild replay equivalence
+  - correct causal impact cone
+  - correction-derived candidate diversity
+  - no honest fit behavior
+  - one parent promotion transaction
+  - truthful shared and external effect partitioning
+  - preserved prior branch lineage
+  - deterministic replay
+  - accessibility decision equivalence
+  - calibrated bounded performance
+
+non_goals:
+  - lifetime outcome prediction
+  - happiness or life score
+  - clinical inference
+  - binding law inferred from behavior
+  - continuous full alternate futures
+  - cloud private-graph authority
+  - autonomous branch commitment
+  - arbitrary third-party app observation
+  - fifth root or intelligence dashboard
+  - universal policy language
+  - general multi-user synchronization
+
+candidate_source_map:
+  values: "Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/Branching/"
+  planning: "Core/LocalRuntimeOS/Planning/Branching/"
+  commands: "Core/LocalRuntimeOS/Commands/"
+  transactions: "Core/LocalRuntimeOS/Transactions/Branching/"
+  events: "Core/LocalRuntimeOS/EventJournal/Branching/"
+  projections: "Core/LocalRuntimeOS/Projections/Branching/"
+  inspection: "Core/LocalRuntimeOS/Inspection/Branching/"
+  time_surface: "Surfaces/Time/"
+  today_surface: "Surfaces/Today/"
+  you_surface: "Surfaces/You/"
+  quality: "Quality/"
+  note: "Candidate placement only; current product canon and live source determine actual ownership."

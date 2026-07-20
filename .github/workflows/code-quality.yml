@@ -61,6 +61,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install Gitleaks
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install github.com/zricethezav/gitleaks/v8@v8.30.1
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - name: Whitespace and secrets
         env:
           GITHUB_BASE_SHA: ${{ needs.changes.outputs.base }}
@@ -69,8 +75,26 @@ jobs:
           set -euo pipefail
           git diff --check "${GITHUB_BASE_SHA}" HEAD
           bash scripts/ci/ambitions-gitleaks-scan.sh --range-only
+      - name: Product canon integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/ambitions-canon.py check
+          python3 -m unittest discover -s tools/tests -p 'test_ambitions_canon_compiler.py'
       - name: SwiftLint
-        run: docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/realm/swiftlint:latest swiftlint lint --strict --reporter github-actions-logging
+        if: needs.changes.outputs.native == 'true'
+        env:
+          GITHUB_BASE_SHA: ${{ needs.changes.outputs.base }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' files < <(git diff --name-only -z "$GITHUB_BASE_SHA" HEAD -- '*.swift')
+          if (( ${#files[@]} == 0 )); then
+            echo "No Swift files changed."
+            exit 0
+          fi
+          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/realm/swiftlint:latest \
+            swiftlint lint --strict --reporter github-actions-logging "${files[@]}"
       - name: Source-bound static checks
         if: needs.changes.outputs.native == 'true'
         shell: bash

@@ -2090,7 +2090,7 @@ Onboarding progress SHOULD show as a percentage.
 - **Verification:** `PROOF-GOALS-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual mapping MUST use stable external IDs and distinguish approved design target from implementation proof. Owner-approved VSP-03 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` is the Goals visual target. Candidate naming does not weaken the durable owner approval, and approval does not prove SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+Visual mapping MUST use stable external IDs and distinguish selected design target from current implementation behavior. Selected VSP-03 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` is the Goals visual target. Candidate naming does not change the selected product direction, and the package does not demonstrate current SwiftUI, accessibility, device, or runtime behavior.
 
 The horizontal Goal Path MUST communicate meaning through restrained shape, weight, material, micro-symbol, and line treatment.
 
@@ -2249,11 +2249,11 @@ Canonical target ownership is exact: `Surfaces/Goals/` owns presentation; `Core/
 Tests cover Life Area organization, path generation/clarification, material confirmation, activation, Future Steps, conflict, priority override, proof transfer, recovery, closure, archive/Trash/restore, replay, offline, Goal Path semantic list/actions, Dynamic Type, reduced effects, focus, and non-color encoding.
 
 <!-- canon-section: proof -->
-Required proof includes path and lifecycle scenario logs, receipts/replay, screenshot matrices for root/detail/path/recovery/closure, VoiceOver scripts, semantic parity, current visual mapping and independent acceptance, exact commands/exits, known gaps, and rollback. Canon text is not that proof.
+Applicable validation includes path and lifecycle scenarios, receipts/replay, rendered-state matrices for root/detail/path/recovery/closure, VoiceOver behavior, semantic parity, current visual comparison, and rollback.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Goals root, path materialization, selection, and semantic-node lookup MUST remain bounded, cancellable, and deterministically paged; perform no interaction-path network gating or synchronous disk I/O; use no polling or unbounded background loop; and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Life Area/Goal/path data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+Goals root, path materialization, selection, and semantic-node lookup MUST remain bounded, cancellable, and deterministically paged; perform no interaction-path network gating or synchronous disk I/O; use no polling or unbounded background loop; and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative Life Area/Goal/path data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
 
 ## SPEC-SURFACE-GOALS-EXECUTION-STACK-001 — Goal execution stack
 

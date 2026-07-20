@@ -81,7 +81,7 @@ inverse_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
 trigger_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
 label = "Restore failed attachment"
 canonical_owner = "global.capture.command-contract"
@@ -136,7 +136,7 @@ inverse_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
 trigger_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
 label = "Restore prior attachment"
 canonical_owner = "global.capture.command-contract"
@@ -497,7 +497,7 @@ inverse_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
 trigger_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
 label = "Remove inserted transcript"
 canonical_owner = "global.capture.command-contract"
@@ -860,7 +860,7 @@ inverse_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
 trigger_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
 label = "Restore saved Capture"
 canonical_owner = "global.capture.command-contract"
@@ -1318,7 +1318,7 @@ Events, Reminders, Steps, Goals, and Proof MUST each expose controls relevant to
 
 When enough information exists, Capture MUST preselect one recommended placement with fit rationale and MUST expose alternatives on demand.
 
-## SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001 — Approved Capture package, separate implementation proof
+## SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001 — Selected Capture package and implementation behavior
 
 - **Concept:** `global.capture.visual-authority`
 - **Modality:** `MUST`
@@ -1327,7 +1327,7 @@ When enough information exists, Capture MUST preselect one recommended placement
 - **Verification:** `PROOF-CAPTURE-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual review MUST reference stable external IDs and separate approved package authority from implementation proof. Owner-approved VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target.
+Visual review MUST reference stable external IDs and keep the selected product direction distinct from current implementation behavior. Selected VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target.
 
 ## SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001 — Capture classification
 
@@ -1422,20 +1422,20 @@ Use Capture, Goal, Step, Reminder, Event, Proof, Note, Save for Later, Review, a
 
 <!-- canon-section: visual-authority -->
 The named package controls geometry, hierarchy, composition, states, and adaptive layout.
-Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` supplies approved Capture design authority. Draft/runtime behavior, source rendering, accessibility/device evidence, implementation parity, and release proof remain separate.
+Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` supplies the selected Capture design direction. Draft/runtime behavior, source rendering, accessibility, and device behavior remain separately testable.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Composer/Capture/` owns presentation; `Core/LocalRuntimeOS/CaptureRouting/` owns durable intake/classification/routing; `Commands/` owns accepted mutation; `Inspection/` owns receipts/history; `Quality/` owns proof.
+Canonical target ownership is exact: `Composer/Capture/` owns presentation; `Core/LocalRuntimeOS/CaptureRouting/` owns durable intake/classification/routing; `Commands/` owns accepted mutation; `Inspection/` owns receipts/history; `Quality/` owns validation.
 
 <!-- canon-section: tests -->
 Tests cover simple/complex proposals, type correction, draft persistence across every failure, Saved for Later reachability/promotion, attachment per-part failure, conflict confirmation, idempotent save, undo/replay, offline, privacy denial, keyboard/focus, VoiceOver actions/order, Dynamic Type, reduced effects, contrast, and return context.
 
 <!-- canon-section: proof -->
-Required proof includes crash/interruption recovery, attachment/permission failure fixtures, command/receipt/replay logs, screenshot and keyboard matrices, accessibility scripts, privacy-boundary evidence, scoped visual approval, exact commands/exits, and rollback. No proof is inferred from this file.
+Applicable validation includes crash/interruption recovery, attachment/permission failure fixtures, command/receipt/replay tests, rendered-state and keyboard matrices, accessibility checks, privacy-boundary tests, visual comparison, and rollback.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Capture draft restoration, classification, proposal, attachment streaming, and local save acknowledgement MUST remain bounded and cancellable, use bounded media buffers, perform no core-path network gating or interaction-path synchronous disk I/O, use no polling or unbounded background loop, and preserve original input under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative draft/attachment/proposal data scale, warm/cold state, measurement tool, percentile/maximum, memory and storage-pressure measures, and regression threshold.
+Capture draft restoration, classification, proposal, attachment streaming, and local save acknowledgement MUST remain bounded and cancellable, use bounded media buffers, perform no core-path network gating or interaction-path synchronous disk I/O, use no polling or unbounded background loop, and preserve original input under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative draft/attachment/proposal data scale, warm/cold state, measurement tool, percentile/maximum, memory and storage-pressure measures, and regression threshold.
 
 ## SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001 — Capture close behavior
 

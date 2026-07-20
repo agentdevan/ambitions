@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/manifest.schema.json",
+  "title": "Ambitions Canon Manifest",
+  "description": "Machine-readable inventory for normative canon and durable design references.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_revision",
+    "normative_files",
+    "generated_files",
+    "reference_files"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 2
+    },
+    "canon_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "normative_files": {
+      "description": "Unique normative Markdown paths relative to docs/canon.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(CONSTITUTION\\.md|specifications/.+\\.md|standards/.+\\.md)$"
+      }
+    },
+    "generated_files": {
+      "description": "Useful deterministic product/design projections, never authorization artifacts.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^generated/.+"
+      }
+    },
+    "reference_files": {
+      "description": "Durable design, research, and architecture references relative to docs/canon.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

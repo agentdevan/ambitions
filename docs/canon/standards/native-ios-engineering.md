@@ -35,7 +35,7 @@ source_owners = ["Native/Ambitions/App/", "Native/Ambitions/Core/LocalRuntimeOS/
 
 # Native iOS Engineering
 
-This shadow standard consolidates cross-cutting native engineering law.
+This standard consolidates cross-cutting native engineering law.
 
 ## CONCURRENCY-001 — Explicit isolation ownership
 - **Concept:** `engineering.concurrency.isolation`
@@ -273,7 +273,7 @@ Applies to native iPhone source and extensions; product meaning, object lifecycl
 The stable requirements above consolidate useful Articles 26, 27, and 40 without preserving article topology.
 
 <!-- canon-section: exceptions -->
-An exception requires a narrower explicit standard amendment with owner, safety, privacy, accessibility, performance, test, migration, and rollback impact; convenience is insufficient.
+An exception requires a narrow technical rationale with safety, privacy, accessibility, performance, test, migration, and rollback impact; convenience is insufficient.
 
 <!-- canon-section: verification -->
 Verify through compiler audit plus applicable concurrency, replay, lifecycle, extension, cancellation, stress, and sanitizer lanes.
@@ -282,7 +282,7 @@ Verify through compiler audit plus applicable concurrency, replay, lifecycle, ex
 Target ownership is `App/`, exact `Core/LocalRuntimeOS/` subsystem owners, and `Quality/`;
 
 <!-- canon-section: proof -->
-Exact-commit evidence includes isolation analysis, concurrency/replay/lifecycle/extension commands and results, fixtures, sanitizer output where applicable, failures, and artifacts.
+Verification includes isolation analysis, concurrency/replay/lifecycle/extension test results, deterministic fixtures, and sanitizer output where applicable.
 
 <!-- canon-section: amendment-impact -->
-Amendments must identify affected requirement and specification IDs, sources, tests, data classes, extensions, migrations, proof, external references, claim ceiling, and rollback.
+When native execution behavior changes, update affected requirements, source, tests, data classes, extensions, migrations, and rollback handling.
