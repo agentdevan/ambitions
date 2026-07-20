@@ -9,6 +9,7 @@ profile = "surface-v1"
 owns_concepts = [
   "global.completed.contextual-placement",
   "global.trust.command-contract",
+  "global.trust-inspection.cebr-branch",
   "global.trust.identity",
   "global.trust.layers",
   "global.trust.proportional-receipts",
@@ -1542,3 +1543,22 @@ Trust detail, proof/receipt/history paging, correction/undo validation, and fres
 - **Supersedes:** none
 
 Completed MUST remain contextual across Today recent activity, Goals proof/history, Time past context, and You Receipts/History; it MUST NOT become a fifth root or mere completed bin.
+
+## GLOBAL-TRUST-CEBR-BRANCH-001 — Branch decisions are inspectable
+
+- **Concept:** `global.trust-inspection.cebr-branch`
+- **Modality:** `MUST`
+- **Scope:** Life Branch and Branch Viability Certificate inspection
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GLOBAL-TRUST-CEBR-BRANCH-001`
+- **Supersedes:** none
+
+Trust inspection MUST expose the current branch identity, base revision,
+certificate result, source and policy revisions, protected and relaxable
+conditions, authority partition, unresolved questions, candidate comparison,
+decision basis, Receipt, and rollback lineage. It MUST distinguish design
+proposal, local fact, user decision, recipient proposal, and external result.
+
+Trust inspection is a projection of canonical branch/certificate records; it
+does not become a second branch store or mutation authority. Private branch
+context remains local and redacted from diagnostics and exports by default.

@@ -1,6 +1,6 @@
 {
   "authority_state": "active",
-  "canon_content_sha": "a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13",
+  "canon_content_sha": "76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "finding_inventory": [
@@ -16271,6 +16271,67 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Language/",
+          "source_inventory_ref": "Native/Ambitions/Language/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "GLOBAL-TRUST-CEBR-BRANCH-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
       "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=GOVERNANCE-LINEAR-RETENTION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
@@ -17240,6 +17301,450 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-PROMOTION-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-RECOVERY-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-REVIEW-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "JOURNEY-LIFE-BRANCH-SELECTION-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
       ]
     },
     {
@@ -18688,6 +19193,250 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-CONFLICT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-DEPENDENCY-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-GATE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-BRANCH-CERTIFICATE-IDENTITY-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
       ]
     },
     {
@@ -22031,6 +22780,290 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-LIFE-BRANCH-AUTHORITY-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-LIFE-BRANCH-DELTA-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-LIFE-BRANCH-IDENTITY-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "OBJ-LIFE-BRANCH-LINEAGE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
       ]
     },
     {
@@ -29274,6 +30307,87 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
+      "requirement_id": "SPEC-SURFACE-GOALS-CEBR-BRANCH-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
       "requirement_id": "SPEC-SURFACE-GOALS-CLOSURE-001",
       "source_owners": [
         "Native/Ambitions/Core/Domain/",
@@ -30255,6 +31369,87 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Time/",
+          "source_inventory_ref": "Native/Ambitions/Core/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-CEBR-FIT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
       ]
     },
     {
@@ -32028,6 +33223,87 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Surfaces/Today/"
       ],
+      "requirement_id": "SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Surfaces/Today/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/DesignSystem/",
+          "source_inventory_ref": "Native/Ambitions/DesignSystem/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
       "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
@@ -32839,6 +34115,87 @@
         "Native/Ambitions/Surfaces/You/"
       ],
       "requirement_id": "SPEC-SURFACE-YOU-APPEARANCE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-CEBR-TRUST-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
         "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
@@ -36489,6 +37846,611 @@
         "Native/Ambitions/Quality/",
         "Native/AmbitionsShareExtension/",
         "Native/AmbitionsWidgetExtension/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CEBR-ACTIVE-BRANCH-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CEBR-CANDIDATE-MATERIALIZATION-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CEBR-CERTIFICATE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CEBR-IMPACT-CONE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Domain/",
+          "source_inventory_ref": "Native/Ambitions/Core/Domain/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CEBR-PROMOTION-001",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
       ]
     },
     {

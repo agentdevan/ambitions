@@ -4,7 +4,7 @@
   ],
   "registry_revision": "skill-dependencies-v3-admission",
   "requirement_index_path": "docs/canon/generated/canon-index.json",
-  "requirement_index_sha256": "db78005f6c38cb710eb872b5839626275d7f8dd0a37d61bae29cb74d24bdfc06",
+  "requirement_index_sha256": "d221a0574e785e3f5b490a1c5cf2c6fbf059093a2a7fbec74a58623b06711fb8",
   "schema_version": 1,
   "skills": [
     {

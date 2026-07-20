@@ -3,7 +3,7 @@
 > Deterministic offline benchmark evidence; not product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release proof.
 
 - Canon revision: `1`
-- Canon SHA: `7112e7bb2e52a8c8d516442378e4646ac0c0e053660b7fd74816860eaacc2403`
+- Canon SHA: `5e2c2ce9fab990e3cb019bb3f66e93dcc34c5d5e83f4a82002741ba46ddab8d6`
 - Authority state: `active`
 - Token estimate: deterministic four-characters-per-token ceiling
 
@@ -11,7 +11,7 @@
 
 | Scenario | Characters (informational) | Estimated tokens | Budget class | Token ceiling | Requirement recall | Requirement precision | Shared laws | Contradictions | Owner recall | Owner precision | Verification | Validation | Proof | Result |
 | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
-| `today-swiftui` | 14827 | 3707 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
+| `today-swiftui` | 15681 | 3921 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
 | `time-recurrence` | 22153 | 5539 | `complex` | 30000 | 6/6 | 6/6 | 7/7 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
 | `capture-proposal` | 17223 | 4306 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 13/13 | 13/13 | exact | present | present | PASS |
 | `local-runtime-mutation` | 14210 | 3553 | `complex` | 30000 | 2/2 | 2/2 | 6/6 | 0 | 9/9 | 9/9 | exact | present | present | PASS |

@@ -1,6 +1,6 @@
 {
   "authority_state": "active",
-  "canon_content_sha": "a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13",
+  "canon_content_sha": "76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "concepts": [
@@ -745,6 +745,10 @@
       "spec_id": "GLOBAL-SEARCH"
     },
     {
+      "concept": "global.trust-inspection.cebr-branch",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
       "concept": "global.trust-ownership",
       "spec_id": "CONSTITUTION"
     },
@@ -839,6 +843,22 @@
     {
       "concept": "journey.goal-activation.route-generation",
       "spec_id": "JOURNEY-GOAL-CREATION-AND-ACTIVATION"
+    },
+    {
+      "concept": "journey.life-branch-reconciliation.promotion",
+      "spec_id": "JOURNEY-LIFE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "journey.life-branch-reconciliation.recovery",
+      "spec_id": "JOURNEY-LIFE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "journey.life-branch-reconciliation.review",
+      "spec_id": "JOURNEY-LIFE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "journey.life-branch-reconciliation.selection",
+      "spec_id": "JOURNEY-LIFE-BRANCH-RECONCILIATION"
     },
     {
       "concept": "journey.offline-create.trigger",
@@ -1009,6 +1029,22 @@
       "spec_id": "OBJECT-STEP"
     },
     {
+      "concept": "object.branch-certificate.conflict-core",
+      "spec_id": "OBJECT-BRANCH-VIABILITY-CERTIFICATE"
+    },
+    {
+      "concept": "object.branch-certificate.dependency-index",
+      "spec_id": "OBJECT-BRANCH-VIABILITY-CERTIFICATE"
+    },
+    {
+      "concept": "object.branch-certificate.identity",
+      "spec_id": "OBJECT-BRANCH-VIABILITY-CERTIFICATE"
+    },
+    {
+      "concept": "object.branch-certificate.operational-gate",
+      "spec_id": "OBJECT-BRANCH-VIABILITY-CERTIFICATE"
+    },
+    {
       "concept": "object.canonical-graph",
       "spec_id": "CONSTITUTION"
     },
@@ -1147,6 +1183,22 @@
     {
       "concept": "object.life-area.suggested-defaults",
       "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-branch.authority-partition",
+      "spec_id": "OBJECT-LIFE-BRANCH"
+    },
+    {
+      "concept": "object.life-branch.delta",
+      "spec_id": "OBJECT-LIFE-BRANCH"
+    },
+    {
+      "concept": "object.life-branch.identity",
+      "spec_id": "OBJECT-LIFE-BRANCH"
+    },
+    {
+      "concept": "object.life-branch.lineage",
+      "spec_id": "OBJECT-LIFE-BRANCH"
     },
     {
       "concept": "object.life-capital.anti-gamification",
@@ -1437,6 +1489,10 @@
       "spec_id": "SURFACE-GOALS"
     },
     {
+      "concept": "surface.goals.cebr-branch",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
       "concept": "surface.goals.closure",
       "spec_id": "SURFACE-GOALS"
     },
@@ -1491,6 +1547,10 @@
     {
       "concept": "surface.time-external-visibility",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.time.cebr-fit",
+      "spec_id": "SURFACE-TIME"
     },
     {
       "concept": "surface.time.creation-routes",
@@ -1581,6 +1641,10 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "surface.today.cebr-current-branch",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
       "concept": "surface.today.command-contract",
       "spec_id": "SURFACE-TODAY"
     },
@@ -1626,6 +1690,10 @@
     },
     {
       "concept": "surface.you.appearance",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.cebr-trust",
       "spec_id": "SURFACE-YOU"
     },
     {
@@ -1711,6 +1779,26 @@
     {
       "concept": "system.apple.widget-projection",
       "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.cebr.active-branch",
+      "spec_id": "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "system.cebr.candidate-materialization",
+      "spec_id": "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "system.cebr.impact-cone",
+      "spec_id": "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "system.cebr.promotion",
+      "spec_id": "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION"
+    },
+    {
+      "concept": "system.cebr.viability-certificate",
+      "spec_id": "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION"
     },
     {
       "concept": "system.continuity.command-contract",

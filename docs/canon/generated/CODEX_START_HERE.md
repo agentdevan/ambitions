@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `active`
 - Compiler version: `0.2.0`
-- Canon content SHA: `a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13`
+- Canon content SHA: `76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a`
 
 `docs/canon/` is the sole normative repository authority.
 This file is a generated router, not a second authority root.
@@ -25,6 +25,6 @@ Legacy authority content is retained only in the canonical semantic-migration le
 
 ## Registry summary
 
-- Specifications: 62
-- Requirements: 473
-- Concept owners: 473
+- Specifications: 66
+- Requirements: 495
+- Concept owners: 495

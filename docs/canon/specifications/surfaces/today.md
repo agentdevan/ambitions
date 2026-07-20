@@ -8,6 +8,7 @@ canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
   "surface.today.command-contract",
+  "surface.today.cebr-current-branch",
   "surface.today.eligibility",
   "surface.today.first-viewport",
   "surface.today.missed-placement-continuity",
@@ -1082,3 +1083,19 @@ Required proof includes current-revision scenario logs, receipts/replay evidence
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
 Today projection, refresh, and primary-action work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Today data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+
+## SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001 — Today presents branch consequence
+
+- **Concept:** `surface.today.cebr-current-branch`
+- **Modality:** `MUST`
+- **Scope:** Current branch, changed reality, and selected executable consequence
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001`
+- **Supersedes:** none
+
+When a current Life Branch is stale, fragile, blocked, or newly promoted,
+Today MAY present the plain-language trigger, current consequence, and route
+to inspect complete ways forward. It MUST preserve the existing Today Reality
+Window, never expose branch IDs as primary labels, never silently commit a
+candidate, and keep Start/Review/Still counts/Blocked/Undo actions routed to
+canonical owners.
