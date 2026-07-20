@@ -1290,6 +1290,32 @@ class StartFinalizeTests(unittest.TestCase):
                 maximum_changed_bytes=1024 * 1024,
             )
 
+    def test_path_root_delegation_rejects_protected_requested_root_before_delta(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo, base, head = self._root_delegation_repo(
+                directory, "src/new.py"
+            )
+            intake_data = root_intake("src/protected")
+            trusted_bindings, trusted_policy = trusted_context(
+                repo, base, intake_data
+            )
+            with self.assertRaisesRegex(
+                AuthorizationError,
+                "requested root crosses a renewed-approval boundary",
+            ):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
+
     def test_path_root_delegation_rejects_unsigned_event(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo, base, head = self._root_delegation_repo(
@@ -2845,6 +2871,7 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
             "docs/canon/references/task-25-authorization-benchmark-policy.json",
             delegation["protected_paths"],
         )
+        self.assertIn("docs/canon", delegation["protected_paths"])
         self.assertIn(
             "scripts/ambitions-canon.py",
             delegation["protected_paths"],

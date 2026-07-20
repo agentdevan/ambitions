@@ -1507,6 +1507,7 @@ def task_start(
         for path in normalized_intake["requested_changed_files"]
     }
     selected_roots: tuple[str, ...] = ()
+    protected_paths = tuple(str(item) for item in task_rule["protected_paths"])
     if authorization_mode == "exact-files":
         outside_policy = sorted(requested_files - policy_allowed_files)
         if outside_policy:
@@ -1529,6 +1530,16 @@ def task_start(
             raise AuthorizationError(
                 "AUTH_FILE_POLICY",
                 f"requested root is outside trusted policy: {outside_roots[0]}",
+            )
+        protected_roots = sorted(
+            root
+            for root in selected_roots
+            if _is_hard_delegation_boundary(root, protected_paths)
+        )
+        if protected_roots:
+            raise AuthorizationError(
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                f"requested root crosses a renewed-approval boundary: {protected_roots[0]}",
             )
         if (
             int(normalized_intake["requested_max_changed_files"])
@@ -1561,7 +1572,6 @@ def task_start(
         delta = local_state["head_to_worktree_delta"]
     changed_files = sorted(_record_path(record) for record in delta["records"])
     requested = set(computed_authorized_files)
-    protected_paths = tuple(str(item) for item in task_rule["protected_paths"])
     for record in delta["records"]:
         path = _record_path(record)
         if authorization_mode != "path-roots":
