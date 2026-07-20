@@ -1163,6 +1163,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "def sign(payload): ...\n",
             ),
             (
+                "scripts/sign.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "def sign(payload): ...\n",
+            ),
+            (
+                "Native/Ambitions/Trust/PlatformSigner.swift",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "struct PlatformSigner {}\n",
+            ),
+            (
                 "scripts/trust-anchor-rotation.py",
                 "scripts",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",

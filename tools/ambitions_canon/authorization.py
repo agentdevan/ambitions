@@ -4002,15 +4002,19 @@ def _is_hard_delegation_boundary(
         _path_matches_policy_prefix(path, protected) for protected in protected_paths
     ):
         return True
-    parts = tuple(part.casefold() for part in PurePosixPath(path).parts)
+    raw_parts = PurePosixPath(path).parts
+    parts = tuple(part.casefold() for part in raw_parts)
     flattened = re.sub(r"[^a-z0-9]+", "-", "-".join(parts)).strip("-")
     path_tokens = {
         token
-        for part in parts
-        for token in re.split(r"[^a-z0-9]+", part)
+        for part in raw_parts
+        for token in re.split(
+            r"[^a-z0-9]+",
+            re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "-", part).casefold(),
+        )
         if token
     }
-    if path_tokens & {"signer", "signing"}:
+    if path_tokens & {"sign", "signer", "signing"}:
         return True
     if any(
         marker in flattened
