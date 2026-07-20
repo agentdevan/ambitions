@@ -3143,6 +3143,7 @@ def _requests_hard_boundary_scope(intake: Mapping[str, object]) -> bool:
             "production-deploy",
             "external-mutation",
             "externalmutation",
+            "external-write",
             "externalwrite",
             "external-writes",
             "externalwrites",
@@ -4005,14 +4006,22 @@ def _is_hard_delegation_boundary(
     ):
         return True
     raw_parts = PurePosixPath(path).parts
-    parts = tuple(part.casefold() for part in raw_parts)
+    camel_split_parts = tuple(
+        re.sub(
+            r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])",
+            "-",
+            part,
+        )
+        for part in raw_parts
+    )
+    parts = tuple(part.casefold() for part in camel_split_parts)
     flattened = re.sub(r"[^a-z0-9]+", "-", "-".join(parts)).strip("-")
     path_tokens = {
         token
-        for part in raw_parts
+        for part in camel_split_parts
         for token in re.split(
             r"[^a-z0-9]+",
-            re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "-", part).casefold(),
+            part.casefold(),
         )
         if token
     }
@@ -4041,6 +4050,7 @@ def _is_hard_delegation_boundary(
             "production-deploy",
             "external-mutation",
             "externalmutation",
+            "external-write",
             "externalwrite",
             "external-writes",
             "externalwrites",

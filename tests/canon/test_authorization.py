@@ -1170,6 +1170,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "private key bytes\n",
             ),
             (
+                "Native/Auth/PrivateKeyStore.swift",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "struct PrivateKeyStore {}\n",
+            ),
+            (
+                "scripts/privateKeyRotation.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "rotate_private_key()\n",
+            ),
+            (
                 "scripts/canon-signer.py",
                 "scripts",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",
