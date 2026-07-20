@@ -1135,6 +1135,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "struct EventKitOutbox {}\n",
             ),
             (
+                "Native/ExternalMutationClient.swift",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "struct ExternalMutationClient {}\n",
+            ),
+            (
+                "Native/ExternalWriteClient.swift",
+                "Native",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "struct ExternalWriteClient {}\n",
+            ),
+            (
                 "scripts/ios_distribution.p12.enc",
                 "scripts",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",
