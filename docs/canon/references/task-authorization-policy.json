@@ -101,12 +101,39 @@
         "task_ids": [
           "CODEX-AUTONOMOUS-REPAIR-DELEGATION"
         ]
+      },
+      {
+        "issue_reference": "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+        "prerequisite_task_ids": [],
+        "revision": "pr37-local-runtime-proof-repair-v1",
+        "state": "approved",
+        "task_ids": [
+          "PR37-LOCAL-RUNTIME-PROOF-REPAIR"
+        ]
+      },
+      {
+        "issue_reference": "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+        "prerequisite_task_ids": [],
+        "revision": "pr37-remediation-governance-repair-v1",
+        "state": "approved",
+        "task_ids": [
+          "PR37-REMEDIATION-GOVERNANCE-REPAIR"
+        ]
+      },
+      {
+        "issue_reference": "PR37-SHADOW-INTEGRITY-REPAIR",
+        "prerequisite_task_ids": [],
+        "revision": "pr37-shadow-integrity-repair-v1",
+        "state": "approved",
+        "task_ids": [
+          "PR37-SHADOW-INTEGRITY-REPAIR"
+        ]
       }
     ],
     "schema_version": 1,
-    "snapshot_revision": "canon-autonomous-repair-delegation-v1"
+    "snapshot_revision": "pr37-repair-authorization-admission-v1"
   },
-  "policy_revision": "authorization-v4-path-root-delegation",
+  "policy_revision": "authorization-v5-pr37-repairs",
   "repository_identity": {
     "repository_full_name": "agentdevan/ambitions",
     "repository_id": "R_kgDOSAFvNw"
@@ -240,6 +267,127 @@
         "runtime",
         "swiftui",
         "release"
+      ]
+    },
+    {
+      "approval_policy_ids": [
+        "owner-gate@1"
+      ],
+      "approval_required": true,
+      "authorized_files": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift",
+        "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService.swift",
+        "docs/qa/KNOWN_ISSUES.md"
+      ],
+      "issue_reference": "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+      "maximum_claim_ceiling": "Exact LocalRuntimeProof source and known-issues repair proof only; unresolved audit blockers remain blocking; no app-wide runtime, device, external-system execution, release, merge-readiness, or readiness claim",
+      "proof_obligations": [
+        "focused-red-green",
+        "independent-review",
+        "offline-determinism",
+        "one-covering-set"
+      ],
+      "required_checks": [
+        "authority-sprawl",
+        "canon-audit",
+        "canon-build-check",
+        "canon-unit",
+        "git-diff-check",
+        "independent-review-evidence",
+        "skill-conformance"
+      ],
+      "requirement_ids": [
+        "CONST-PROOF-EVIDENCE-001",
+        "CONST-RUNTIME-MUTATION-001",
+        "LAW-RUNTIME-DURABLE-SUCCESS-001",
+        "RUNTIME-MUTATION-SEQUENCE-001"
+      ],
+      "scopes": [
+        "runtime.durable-success",
+        "runtime.mutation-invariant",
+        "runtime.mutation-sequence"
+      ],
+      "source_owner": "canon-governance",
+      "task_id": "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+      "task_types": [
+        "runtime"
+      ]
+    },
+    {
+      "approval_policy_ids": [
+        "owner-gate@1"
+      ],
+      "approval_required": true,
+      "authorized_files": [
+        "docs/canon/CONSTITUTION.md",
+        "docs/canon/standards/validation-and-release.md"
+      ],
+      "issue_reference": "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+      "maximum_claim_ceiling": "Exact remediation-governance wording repair proof only; no evidence rewrite, gate weakening, runtime, release, merge-readiness, or readiness claim",
+      "proof_obligations": [
+        "focused-red-green",
+        "independent-review",
+        "offline-determinism",
+        "one-covering-set"
+      ],
+      "required_checks": [
+        "authority-sprawl",
+        "canon-audit",
+        "canon-build-check",
+        "canon-unit",
+        "git-diff-check",
+        "independent-review-evidence",
+        "skill-conformance"
+      ],
+      "requirement_ids": [
+        "AUTHORITY-AMENDMENT-001",
+        "CONST-PROOF-EVIDENCE-001"
+      ],
+      "scopes": [
+        "proof.evidence"
+      ],
+      "source_owner": "canon-governance",
+      "task_id": "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+      "task_types": [
+        "docs"
+      ]
+    },
+    {
+      "approval_policy_ids": [
+        "owner-gate@1"
+      ],
+      "approval_required": true,
+      "authorized_files": [
+        "docs/canon/migration/authority-freeze-baseline.json"
+      ],
+      "issue_reference": "PR37-SHADOW-INTEGRITY-REPAIR",
+      "maximum_claim_ceiling": "Exact authority-freeze baseline repair proof only; no authorization-policy, trust-anchor, signer, protected-workflow, ruleset, credential, destructive, release, merge-readiness, or readiness claim",
+      "proof_obligations": [
+        "focused-red-green",
+        "independent-review",
+        "offline-determinism",
+        "one-covering-set"
+      ],
+      "required_checks": [
+        "authority-sprawl",
+        "canon-audit",
+        "canon-build-check",
+        "canon-unit",
+        "git-diff-check",
+        "independent-review-evidence",
+        "skill-conformance"
+      ],
+      "requirement_ids": [
+        "AUTHORITY-AMENDMENT-001",
+        "CONST-PROOF-EVIDENCE-001"
+      ],
+      "scopes": [
+        "authority.amendment"
+      ],
+      "source_owner": "canon-governance",
+      "task_id": "PR37-SHADOW-INTEGRITY-REPAIR",
+      "task_types": [
+        "docs"
       ]
     },
     {

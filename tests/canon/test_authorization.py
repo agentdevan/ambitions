@@ -3109,6 +3109,9 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
             | {
                 "CEBR-01-CANON-INTEGRATION",
                 "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+                "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+                "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+                "PR37-SHADOW-INTEGRITY-REPAIR",
             },
         )
         for number in range(24, 30):
@@ -3227,6 +3230,256 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
             ),
             "Task 29 legacy deletions must be authorized only by its bound purge plan",
         )
+
+    def test_pr37_repair_routes_are_exact_file_only_and_preserve_boundaries(self) -> None:
+        policy = json.loads(
+            (ROOT / "docs/canon/references/task-authorization-policy.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        rules = {item["task_id"]: item for item in policy["task_rules"]}
+        required_checks = [
+            "authority-sprawl",
+            "canon-audit",
+            "canon-build-check",
+            "canon-unit",
+            "git-diff-check",
+            "independent-review-evidence",
+            "skill-conformance",
+        ]
+        proof_obligations = [
+            "focused-red-green",
+            "independent-review",
+            "offline-determinism",
+            "one-covering-set",
+        ]
+        expected = {
+            "PR37-SHADOW-INTEGRITY-REPAIR": {
+                "approval_policy_ids": ["owner-gate@1"],
+                "approval_required": True,
+                "authorized_files": [
+                    "docs/canon/migration/authority-freeze-baseline.json"
+                ],
+                "issue_reference": "PR37-SHADOW-INTEGRITY-REPAIR",
+                "maximum_claim_ceiling": (
+                    "Exact authority-freeze baseline repair proof only; no "
+                    "authorization-policy, trust-anchor, signer, protected-workflow, "
+                    "ruleset, credential, destructive, release, merge-readiness, or "
+                    "readiness claim"
+                ),
+                "proof_obligations": proof_obligations,
+                "required_checks": required_checks,
+                "requirement_ids": [
+                    "AUTHORITY-AMENDMENT-001",
+                    "CONST-PROOF-EVIDENCE-001",
+                ],
+                "scopes": ["authority.amendment"],
+                "source_owner": "canon-governance",
+                "task_id": "PR37-SHADOW-INTEGRITY-REPAIR",
+                "task_types": ["docs"],
+            },
+            "PR37-REMEDIATION-GOVERNANCE-REPAIR": {
+                "approval_policy_ids": ["owner-gate@1"],
+                "approval_required": True,
+                "authorized_files": [
+                    "docs/canon/CONSTITUTION.md",
+                    "docs/canon/standards/validation-and-release.md",
+                ],
+                "issue_reference": "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+                "maximum_claim_ceiling": (
+                    "Exact remediation-governance wording repair proof only; no "
+                    "evidence rewrite, gate weakening, runtime, release, "
+                    "merge-readiness, or readiness claim"
+                ),
+                "proof_obligations": proof_obligations,
+                "required_checks": required_checks,
+                "requirement_ids": [
+                    "AUTHORITY-AMENDMENT-001",
+                    "CONST-PROOF-EVIDENCE-001",
+                ],
+                "scopes": ["proof.evidence"],
+                "source_owner": "canon-governance",
+                "task_id": "PR37-REMEDIATION-GOVERNANCE-REPAIR",
+                "task_types": ["docs"],
+            },
+            "PR37-LOCAL-RUNTIME-PROOF-REPAIR": {
+                "approval_policy_ids": ["owner-gate@1"],
+                "approval_required": True,
+                "authorized_files": [
+                    "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift",
+                    "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService.swift",
+                    "docs/qa/KNOWN_ISSUES.md",
+                ],
+                "issue_reference": "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+                "maximum_claim_ceiling": (
+                    "Exact LocalRuntimeProof source and known-issues repair proof only; "
+                    "unresolved audit blockers remain blocking; no app-wide runtime, "
+                    "device, external-system execution, release, merge-readiness, or "
+                    "readiness claim"
+                ),
+                "proof_obligations": proof_obligations,
+                "required_checks": required_checks,
+                "requirement_ids": [
+                    "CONST-PROOF-EVIDENCE-001",
+                    "CONST-RUNTIME-MUTATION-001",
+                    "LAW-RUNTIME-DURABLE-SUCCESS-001",
+                    "RUNTIME-MUTATION-SEQUENCE-001",
+                ],
+                "scopes": [
+                    "runtime.durable-success",
+                    "runtime.mutation-invariant",
+                    "runtime.mutation-sequence",
+                ],
+                "source_owner": "canon-governance",
+                "task_id": "PR37-LOCAL-RUNTIME-PROOF-REPAIR",
+                "task_types": ["runtime"],
+            },
+        }
+        self.assertEqual(policy["policy_revision"], "authorization-v5-pr37-repairs")
+        self.assertEqual(
+            policy["issue_state"]["snapshot_revision"],
+            "pr37-repair-authorization-admission-v1",
+        )
+        normalized = authorization_module._validate_policy(policy)
+        normalized_rules = {
+            item["task_id"]: item for item in normalized["task_rules"]
+        }
+        issues = {
+            item["task_ids"][0]: item for item in policy["issue_state"]["issues"]
+        }
+        for task_id, expected_rule in expected.items():
+            with self.subTest(task_id=task_id):
+                self.assertEqual(rules[task_id], expected_rule)
+                self.assertEqual(
+                    issues[task_id],
+                    {
+                        "issue_reference": expected_rule["issue_reference"],
+                        "prerequisite_task_ids": [],
+                        "revision": f"{task_id.lower()}-v1",
+                        "state": "approved",
+                        "task_ids": [task_id],
+                    },
+                )
+                normalized_rule = normalized_rules[task_id]
+                self.assertEqual(normalized_rule["authorization_modes"], ["exact-files"])
+                self.assertEqual(normalized_rule["authorized_path_roots"], [])
+                self.assertEqual(normalized_rule["protected_paths"], [])
+                self.assertEqual(normalized_rule["delegated_task_types"], [])
+                self.assertEqual(normalized_rule["maximum_changed_files"], 0)
+                self.assertEqual(normalized_rule["maximum_changed_bytes"], 0)
+                valid_intake = {
+                    "task_id": task_id,
+                    "issue_reference": expected_rule["issue_reference"],
+                    "requested_task_type": expected_rule["task_types"][0],
+                    "requested_scope": expected_rule["scopes"],
+                    "requested_requirement_ids": expected_rule["requirement_ids"],
+                }
+                self.assertEqual(
+                    authorization_module._task_rule(normalized, valid_intake)["task_id"],
+                    task_id,
+                )
+                with self.assertRaisesRegex(
+                    AuthorizationError, "AUTH_BOUNDARY_APPROVAL_REQUIRED"
+                ):
+                    authorization_module._task_rule(
+                        normalized,
+                        {**valid_intake, "requested_authorization_mode": "path-roots"},
+                    )
+
+        delegation = rules["CODEX-AUTONOMOUS-REPAIR-DELEGATION"]
+        boundary_fields = (
+            "authorization_modes",
+            "authorized_path_roots",
+            "delegated_task_types",
+            "delegated_scope_mode",
+            "delegated_requirement_mode",
+            "maximum_changed_files",
+            "maximum_changed_bytes",
+            "maximum_claim_ceiling",
+            "protected_paths",
+        )
+        boundary_payload = {
+            "approval_policies": policy["approval_policies"],
+            "approval_trust_anchor_id": policy["approval_trust_anchor_id"],
+            "event_trust_anchor_id": policy["event_trust_anchor_id"],
+            "validation_trust_anchor_id": policy["validation_trust_anchor_id"],
+            "trust_anchors": policy["trust_anchors"],
+            "repository_identity": policy["repository_identity"],
+            "delegation_boundaries": {
+                field: delegation[field] for field in boundary_fields
+            },
+        }
+        self.assertEqual(
+            hashlib.sha256(canonical_json_bytes(boundary_payload)).hexdigest(),
+            "0b8f85527b0a088159454d0b164e90faa33a0eab9dacd74b29f56e90dc1031b1",
+        )
+
+    def test_each_pr37_repair_route_rejects_a_file_outside_its_exact_allowlist(self) -> None:
+        task_files = {
+            "PR37-SHADOW-INTEGRITY-REPAIR": [
+                "docs/canon/migration/authority-freeze-baseline.json"
+            ],
+            "PR37-REMEDIATION-GOVERNANCE-REPAIR": [
+                "docs/canon/CONSTITUTION.md",
+                "docs/canon/standards/validation-and-release.md",
+            ],
+            "PR37-LOCAL-RUNTIME-PROOF-REPAIR": [
+                "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift",
+                "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService.swift",
+                "docs/qa/KNOWN_ISSUES.md",
+            ],
+        }
+        for task_id, authorized_files in task_files.items():
+            with self.subTest(task_id=task_id), tempfile.TemporaryDirectory() as directory:
+                repo = Path(directory)
+                run(repo, "init", "-q", "-b", "main")
+                run(repo, "config", "user.name", "PR37 Authorization Test")
+                run(repo, "config", "user.email", "pr37-authorization@example.invalid")
+                (repo / "outside.txt").write_text("base\n", encoding="utf-8")
+                write_trusted_state(repo, authorized_files, approval_required=True)
+                policy_path = repo / "docs/canon/references/task-authorization-policy.json"
+                policy = json.loads(policy_path.read_text(encoding="utf-8"))
+                rule = policy["task_rules"][0]
+                rule["task_id"] = task_id
+                rule["issue_reference"] = task_id
+                issue = policy["issue_state"]["issues"][0]
+                issue["task_ids"] = [task_id]
+                issue["issue_reference"] = task_id
+                write_json(repo, policy_path.relative_to(repo).as_posix(), policy)
+                run(repo, "add", "-A")
+                run(repo, "commit", "-qm", "trusted exact-file policy")
+                base = run(repo, "rev-parse", "HEAD")
+                run(repo, "checkout", "-qb", "candidate")
+                (repo / "outside.txt").write_text("changed\n", encoding="utf-8")
+                run(repo, "add", "outside.txt")
+                run(repo, "commit", "-qm", "outside exact allowlist")
+                head = run(repo, "rev-parse", "HEAD")
+                request = intake("outside.txt")
+                request["task_id"] = task_id
+                request["issue_reference"] = task_id
+                bindings, trusted_policy = trusted_context(repo, base, request)
+                trusted_event = event(repo, base, head)
+                current_approval = approval(
+                    repo,
+                    base,
+                    head,
+                    hashlib.sha256(canonical_json_bytes(request)).hexdigest(),
+                    bindings,
+                    trusted_event,
+                    task_id=task_id,
+                    one_time_use_nonce=f"nonce-{task_id}",
+                )
+                with self.assertRaisesRegex(AuthorizationError, "AUTH_FILE_POLICY"):
+                    task_start(
+                        repo_root=repo,
+                        mode="ci-pr-range",
+                        intake_data=request,
+                        trusted_event_data=trusted_event,
+                        trusted_bindings=bindings,
+                        policy_data=trusted_policy,
+                        approval_attestations=(current_approval,),
+                        verification_epoch=1_900_000_000,
+                    )
 
     def test_task_26_and_29_forbid_protected_enforcement_scope_and_files(self) -> None:
         policy = json.loads(
