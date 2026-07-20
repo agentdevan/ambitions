@@ -4025,7 +4025,22 @@ def _is_hard_delegation_boundary(
         )
         if token
     }
-    if path_tokens & {"sign", "signer", "signing"}:
+    if path_tokens & {
+        "credential",
+        "credentials",
+        "deploy",
+        "deployment",
+        "passphrase",
+        "password",
+        "publish",
+        "publishing",
+        "secret",
+        "secrets",
+        "sign",
+        "signer",
+        "signing",
+        "token",
+    }:
         return True
     if any(
         marker in flattened
@@ -4040,13 +4055,26 @@ def _is_hard_delegation_boundary(
             "signing-key",
             "signing-material",
             "private-key",
+            "public-key",
+            "secret-key",
+            "encryption-key",
+            "decryption-key",
+            "crypto-key",
+            "cryptographic-key",
+            "key-store",
+            "keystore",
             "trust-anchor",
             "trustanchor",
             "api-key",
             "apikey",
             "access-token",
             "ruleset",
+            "rule-set",
             "destructive-migration",
+            "mass-deletion",
+            "mass-delete",
+            "bulk-delete",
+            "history-rewrite",
             "production-deploy",
             "external-mutation",
             "externalmutation",
@@ -4058,6 +4086,7 @@ def _is_hard_delegation_boundary(
             "externaleffect",
             "release",
             "testflight",
+            "test-flight",
             "app-store",
         )
     ):
