@@ -1014,6 +1014,7 @@ class StartFinalizeTests(unittest.TestCase):
             ["README.md"],
             authorized_path_roots=(
                 "Native",
+                "docs",
                 "project.yml",
                 "scripts",
                 "src",
@@ -1188,6 +1189,13 @@ class StartFinalizeTests(unittest.TestCase):
                 "AUTH_APPROVAL_MISSING",
                 1024 * 1024,
                 "CODE_SIGN_IDENTITY: iPhone Distribution\n",
+            ),
+            (
+                "docs/foo/release/notes.md",
+                "docs",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "ordinary-looking notes\n",
             ),
             (
                 "src/large.py",

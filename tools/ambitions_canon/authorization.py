@@ -4000,6 +4000,7 @@ def _is_hard_delegation_boundary(
             "destructive-migration",
             "production-deploy",
             "external-mutation",
+            "release",
             "testflight",
             "app-store",
         )
