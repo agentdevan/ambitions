@@ -4021,7 +4021,9 @@ def _is_hard_delegation_boundary(
         for marker in (
             "authority-amendment",
             "authorization-policy",
+            "authorization-policies",
             "authorizationpolicy",
+            "authorizationpolicies",
             "credential",
             "secret",
             "signing-key",

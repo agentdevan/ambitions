@@ -174,7 +174,7 @@ jobs:
     needs: authorize
     if: inputs.operation == 'finalize'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 55
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.authorize.outputs.matrix) }}

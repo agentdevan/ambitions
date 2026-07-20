@@ -1191,6 +1191,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "allow = True\n",
             ),
             (
+                "scripts/authorization-policies.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "allow = True\n",
+            ),
+            (
+                "scripts/AuthorizationPolicies.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "allow = True\n",
+            ),
+            (
                 "scripts/trust.anchor.py",
                 "scripts",
                 "AUTH_BOUNDARY_APPROVAL_REQUIRED",
@@ -3741,6 +3755,10 @@ class IndependentReviewEvidenceTests(unittest.TestCase):
         )
         self.assertIn("operation:", workflow)
         self.assertIn("if: inputs.operation == 'finalize'", workflow)
+        validate_job = workflow.split("\n  validate:\n", 1)[1].split(
+            "\n  attest:\n", 1
+        )[0]
+        self.assertIn("timeout-minutes: 55", validate_job)
         self.assertIn("delegation_start_run_id:", workflow)
         self.assertIn("--delegation-authorization", workflow)
         self.assertIn("--delegation-event", workflow)
