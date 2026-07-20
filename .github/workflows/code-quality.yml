@@ -1,0 +1,138 @@
+name: Code Quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: code-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      native: ${{ steps.scope.outputs.native }}
+      source_atlas: ${{ steps.scope.outputs.source_atlas }}
+      shell: ${{ steps.scope.outputs.shell }}
+      workflow: ${{ steps.scope.outputs.workflow }}
+      base: ${{ steps.scope.outputs.base }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            git fetch --no-tags origin "$GITHUB_BASE_REF"
+            base="$(git merge-base HEAD "origin/$GITHUB_BASE_REF")"
+          elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            base="${{ github.event.before }}"
+          else
+            base="$(git rev-parse HEAD^)"
+          fi
+          paths="$RUNNER_TEMP/changed-paths"
+          git diff --name-only "$base" HEAD > "$paths"
+          cat "$paths"
+          has() { rg -q "$1" "$paths"; }
+          has '^(Native/|Packages/|project\.yml$|Package\.swift$|Package\.resolved$|scripts/ambitions-xcode)' && native=true || native=false
+          has '^(tools/source-atlas/|requirements-ci\.txt$)' && source_atlas=true || source_atlas=false
+          has '^scripts/.*\.sh$' && shell=true || shell=false
+          has '^\.github/workflows/' && workflow=true || workflow=false
+          {
+            echo "native=$native"
+            echo "source_atlas=$source_atlas"
+            echo "shell=$shell"
+            echo "workflow=$workflow"
+            echo "base=$base"
+          } >> "$GITHUB_OUTPUT"
+
+  fast-checks:
+    needs: changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Whitespace and secrets
+        env:
+          GITHUB_BASE_SHA: ${{ needs.changes.outputs.base }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check "${GITHUB_BASE_SHA}" HEAD
+          bash scripts/ci/ambitions-gitleaks-scan.sh --range-only
+      - name: SwiftLint
+        run: docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/realm/swiftlint:latest swiftlint lint --strict --reporter github-actions-logging
+      - name: Source-bound static checks
+        if: needs.changes.outputs.native == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/ambitions-local-first-boundary-scan.py
+          python3 scripts/ambitions-runtime-direct-write-audit.py
+          python3 scripts/ci/ambitions-no-weak-implementation-scan.py
+      - name: Source Atlas static checks
+        if: needs.changes.outputs.source_atlas == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/source-atlas-boundary-audit.py
+          python3 scripts/source-atlas-no-private-graph-egress-audit.py
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests
+      - name: ShellCheck
+        if: needs.changes.outputs.shell == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          git diff --name-only "${{ needs.changes.outputs.base }}" HEAD | rg '^scripts/.*\.sh$' | xargs -r shellcheck
+      - name: Actionlint
+        if: needs.changes.outputs.workflow == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install github.com/rhysd/actionlint/cmd/actionlint@latest
+          "$(go env GOPATH)/bin/actionlint"
+
+  ios-build-and-tests:
+    needs: changes
+    if: needs.changes.outputs.native == 'true'
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate project and reject drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodegen generate
+          git diff --exit-code -- Ambitions.xcodeproj
+      - name: Build for testing
+        shell: bash
+        run: scripts/ambitions-xcode-build-for-testing.sh --batch code-quality --scheme AmbitionsSmoke --timeout 35m --kill-after 120s
+
+  Code-Quality:
+    name: Code Quality
+    needs: [fast-checks, ios-build-and-tests]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require applicable checks
+        env:
+          FAST: ${{ needs.fast-checks.result }}
+          IOS: ${{ needs.ios-build-and-tests.result }}
+        run: |
+          test "$FAST" = success
+          test "$IOS" = success || test "$IOS" = skipped

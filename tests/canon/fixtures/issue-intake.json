@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "issue_id": "AMB-1842",
-  "task_type": "swiftui",
-  "scope": ["surface.today"],
-  "changed_files": ["Native/Ambitions/Surfaces/Today"],
-  "claim_type": "source",
-  "known_issue_ids": []
-}

@@ -92,7 +92,7 @@ public enum AMB1814AutomatedNutritionGate {
         owner: "Accessibility",
         title: "Automated accessibility nutrition gate",
         sourceTruth: [
-            "docs/canon/migration/legacy-semantic-migration.json",
+            "docs/canon/standards/accessibility.md",
             "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md",
             "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift",
             "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
