@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
@@ -113,6 +114,21 @@ def finalize(arguments: argparse.Namespace) -> None:
     authorization = read_object(arguments.authorization)
     event = read_object(arguments.trusted_event)
     approval = read_object(arguments.approval_attestation)
+    delegation_authorization = (
+        read_object(arguments.delegation_authorization)
+        if arguments.delegation_authorization is not None
+        else None
+    )
+    delegation_event = (
+        read_object(arguments.delegation_event)
+        if arguments.delegation_event is not None
+        else None
+    )
+    delegation_approval = (
+        read_object(arguments.delegation_approval)
+        if arguments.delegation_approval is not None
+        else None
+    )
     intake = authorization.get("intake")
     if not isinstance(intake, dict):
         raise AuthorizationError(
@@ -149,6 +165,10 @@ def finalize(arguments: argparse.Namespace) -> None:
         approval_attestations=(approval,),
         validation_attestations=validations,
         verification_epoch=int(event["verification_epoch"]),
+        evaluation_epoch=int(time.time()),
+        delegation_start_authorization=delegation_authorization,
+        delegation_start_event=delegation_event,
+        delegation_start_approval=delegation_approval,
     )
     arguments.output_dir.mkdir(parents=True, exist_ok=True)
     for index, validation in enumerate(validations, start=1):
@@ -180,6 +200,9 @@ def parser() -> argparse.ArgumentParser:
     finalize_parser.add_argument("--authorization", type=Path, required=True)
     finalize_parser.add_argument("--trusted-event", type=Path, required=True)
     finalize_parser.add_argument("--approval-attestation", type=Path, required=True)
+    finalize_parser.add_argument("--delegation-authorization", type=Path)
+    finalize_parser.add_argument("--delegation-event", type=Path)
+    finalize_parser.add_argument("--delegation-approval", type=Path)
     finalize_parser.add_argument("--evidence", type=Path, required=True)
     finalize_parser.add_argument("--output-dir", type=Path, required=True)
     finalize_parser.set_defaults(function=finalize)

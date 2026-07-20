@@ -270,13 +270,16 @@ class TaskIntake:
         from tools.ambitions_canon.authorization import validate_task_intake
 
         normalized = validate_task_intake(data)
+        changed_files = normalized["requested_changed_files"]
+        if normalized.get("requested_authorization_mode") == "path-roots":
+            changed_files = normalized["requested_path_roots"]
         return cls.from_json(
             {
                 "schema_version": 1,
                 "issue_id": normalized["task_id"],
                 "task_type": normalized["requested_task_type"],
                 "scope": normalized["requested_scope"],
-                "changed_files": normalized["requested_changed_files"],
+                "changed_files": changed_files,
                 "claim_type": normalized["requested_claim_ceiling"],
                 "known_issue_ids": [],
             }

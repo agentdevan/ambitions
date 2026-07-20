@@ -17,6 +17,7 @@ import shutil
 import stat
 import subprocess
 import tempfile
+import time
 import tomllib
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PurePosixPath
@@ -44,6 +45,14 @@ _INTAKE_FIELDS = frozenset(
         "requested_skill_adapters",
     }
 )
+_INTAKE_DELEGATION_FIELDS = frozenset(
+    {
+        "requested_authorization_mode",
+        "requested_path_roots",
+        "requested_max_changed_files",
+        "requested_max_changed_bytes",
+    }
+)
 _EVENT_FIELDS = frozenset(
     {
         "schema_version",
@@ -68,6 +77,7 @@ _EVENT_FIELDS = frozenset(
         "signature_base64url",
     }
 )
+_EVENT_DELEGATION_FIELDS = frozenset({"expires_at_epoch"})
 _BINDING_FIELDS = frozenset(
     {
         "canon_revision",
@@ -134,7 +144,19 @@ _TASK_RULE_FIELDS = frozenset(
         "approval_policy_ids",
     }
 )
-_TASK_RULE_OPTIONAL_FIELDS = frozenset({"authorized_deletion_manifest"})
+_TASK_RULE_OPTIONAL_FIELDS = frozenset(
+    {
+        "authorized_deletion_manifest",
+        "authorization_modes",
+        "delegated_task_types",
+        "delegated_scope_mode",
+        "delegated_requirement_mode",
+        "authorized_path_roots",
+        "protected_paths",
+        "maximum_changed_files",
+        "maximum_changed_bytes",
+    }
+)
 _APPROVAL_FIELDS = frozenset(
     {
         "schema_version",
@@ -244,6 +266,8 @@ _SHA256_DIGEST_INFO_PREFIX = bytes.fromhex("3031300d0609608648016503040201050004
 _MAX_LOCAL_UNTRACKED_FILES = 256
 _MAX_LOCAL_UNTRACKED_FILE_BYTES = 8 * 1024 * 1024
 _MAX_LOCAL_UNTRACKED_TOTAL_BYTES = 64 * 1024 * 1024
+_MAX_DELEGATED_DELETIONS = 8
+_MAX_DELEGATION_LIFETIME_SECONDS = 7200
 _OUTPUT_ROOTS = {
     "authorization": PurePosixPath(".codex/task-authorization"),
     "finalization": PurePosixPath(".codex/task-finalization"),
@@ -301,6 +325,9 @@ _FINALIZATION_RECEIPT_FIELDS = frozenset(
         "validation_attestation_digests",
         "approval_nonce_consumptions",
         "proof_obligation_evidence",
+        "scope_expansion_records",
+        "delegation_start_authorization_digest",
+        "delegation_start_event_provenance",
         "exact_diff_authorized",
         "merge_authorized",
         "claim_ceiling",
@@ -571,8 +598,22 @@ def _is_regular_mode(mode: int) -> bool:
 def validate_task_intake(data: Mapping[str, object]) -> dict[str, object]:
     """Validate and normalize the closed request-only intake contract."""
 
-    _require_closed_mapping(data, _INTAKE_FIELDS, "AUTH_INTAKE_FIELDS")
+    fields = frozenset(data) if isinstance(data, Mapping) else frozenset()
+    if fields not in {_INTAKE_FIELDS, _INTAKE_FIELDS | _INTAKE_DELEGATION_FIELDS}:
+        raise AuthorizationError(
+            "AUTH_INTAKE_FIELDS", "fields do not match closed contract"
+        )
     _require_version(data)
+    authorization_mode = str(data.get("requested_authorization_mode", "exact-files"))
+    if authorization_mode not in {"exact-files", "path-roots"}:
+        raise AuthorizationError(
+            "AUTH_INTAKE_FIELDS", "requested authorization mode is invalid"
+        )
+    requested_files = _string_list(
+        data,
+        "requested_changed_files",
+        allow_empty=authorization_mode == "path-roots",
+    )
     normalized: dict[str, object] = {
         "schema_version": 1,
         "intake_id": _string(data, "intake_id"),
@@ -583,9 +624,7 @@ def validate_task_intake(data: Mapping[str, object]) -> dict[str, object]:
         "requested_requirement_ids": _string_list(
             data, "requested_requirement_ids", allow_empty=False
         ),
-        "requested_changed_files": _string_list(
-            data, "requested_changed_files", allow_empty=False
-        ),
+        "requested_changed_files": requested_files,
         "requested_validation": _string_list(
             data, "requested_validation", allow_empty=False
         ),
@@ -598,6 +637,30 @@ def validate_task_intake(data: Mapping[str, object]) -> dict[str, object]:
             data, "requested_skill_adapters", allow_empty=True
         ),
     }
+    if fields == _INTAKE_FIELDS | _INTAKE_DELEGATION_FIELDS:
+        roots = _string_list(data, "requested_path_roots", allow_empty=False)
+        if authorization_mode != "path-roots" or requested_files:
+            raise AuthorizationError(
+                "AUTH_INTAKE_FIELDS",
+                "path-root delegation requires roots and no exact file forecast",
+            )
+        maximum_files = _positive_integer(
+            data.get("requested_max_changed_files"), "AUTH_INTAKE_FIELDS"
+        )
+        maximum_bytes = _positive_integer(
+            data.get("requested_max_changed_bytes"), "AUTH_INTAKE_FIELDS"
+        )
+        normalized.update(
+            {
+                "requested_authorization_mode": authorization_mode,
+                "requested_path_roots": [
+                    _canonical_repo_path(root, "AUTH_INTAKE_FIELDS")
+                    for root in roots
+                ],
+                "requested_max_changed_files": maximum_files,
+                "requested_max_changed_bytes": maximum_bytes,
+            }
+        )
     return normalized
 
 
@@ -618,7 +681,9 @@ def validate_task_authorization(
         raise AuthorizationError(
             "AUTH_ENVELOPE_FIELDS", "authority class does not match mode"
         )
-    validate_task_intake(_mapping(data["intake"], "AUTH_ENVELOPE_FIELDS"))
+    normalized_intake = validate_task_intake(
+        _mapping(data["intake"], "AUTH_ENVELOPE_FIELDS")
+    )
     _sha256(data["intake_digest"], "AUTH_ENVELOPE_FIELDS")
     _validate_trusted_bindings_contract(data["trusted_bindings"])
     _validate_tree_delta_contract(data["tree_delta"], "AUTH_ENVELOPE_FIELDS")
@@ -636,9 +701,18 @@ def validate_task_authorization(
         "resolved_skill_adapters",
         "approval_attestation_digests",
     ):
-        _string_list(data, field, allow_empty=field in {
-            "resolved_skill_adapters", "approval_attestation_digests"
-        })
+        _string_list(
+            data,
+            field,
+            allow_empty=(
+                field in {"resolved_skill_adapters", "approval_attestation_digests"}
+                or (
+                    field == "computed_authorized_files"
+                    and normalized_intake.get("requested_authorization_mode")
+                    == "path-roots"
+                )
+            ),
+        )
     for digest in data["approval_attestation_digests"]:
         _sha256(digest, "AUTH_ENVELOPE_FIELDS")
     command_digests = _mapping(
@@ -736,6 +810,18 @@ def validate_task_finalization_receipt(
         _string_list(data, field, allow_empty=True)
     for digest in data["validation_attestation_digests"]:
         _sha256(digest, "AUTH_RECEIPT_FIELDS")
+    final_records = data["final_tree_delta"]["records"]
+    assert isinstance(final_records, list)
+    expected_exact_changed_files = sorted(
+        _record_path(record)
+        for record in final_records
+        if isinstance(record, Mapping)
+    )
+    if data["exact_changed_files"] != expected_exact_changed_files:
+        raise AuthorizationError(
+            "AUTH_RECEIPT_FIELDS",
+            "exact changed files do not match the final tree delta",
+        )
     if not set(data["exact_changed_files"]) <= set(data["computed_authorized_files"]):
         raise AuthorizationError(
             "AUTH_RECEIPT_FIELDS", "final changed files exceed computed authorization"
@@ -751,6 +837,36 @@ def validate_task_finalization_receipt(
         )
     _string(data, "claim_ceiling")
     _validate_nonce_consumptions(data["approval_nonce_consumptions"])
+    _validate_scope_expansion_records(data["scope_expansion_records"])
+    delegation_digest = data["delegation_start_authorization_digest"]
+    delegation_event = data["delegation_start_event_provenance"]
+    if delegation_digest is None or delegation_event is None:
+        if delegation_digest is not None or delegation_event is not None:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS",
+                "delegation start digest and event must appear together",
+            )
+        if data["scope_expansion_records"]:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS",
+                "scope expansion records require a signed delegation start",
+            )
+    else:
+        _sha256(delegation_digest, "AUTH_RECEIPT_FIELDS")
+        if not isinstance(delegation_event, Mapping):
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "delegation start event must be an object"
+            )
+        event_fields = frozenset(delegation_event)
+        if event_fields != _EVENT_FIELDS | _EVENT_DELEGATION_FIELDS:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "delegation start event fields are invalid"
+            )
+        if not data["scope_expansion_records"]:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS",
+                "delegated finalization requires append-only scope records",
+            )
     evidence = data["proof_obligation_evidence"]
     if not isinstance(evidence, Mapping):
         raise AuthorizationError(
@@ -768,6 +884,60 @@ def validate_task_finalization_receipt(
         for digest in digests:
             _sha256(digest, "AUTH_RECEIPT_FIELDS")
     return dict(data)
+
+
+def _validate_scope_expansion_records(value: object) -> None:
+    if not isinstance(value, list):
+        raise AuthorizationError(
+            "AUTH_RECEIPT_FIELDS", "scope expansion records must be an array"
+        )
+    previous_digest: str | None = None
+    for expected_sequence, record in enumerate(value, start=1):
+        fields = {
+            "sequence",
+            "head_sha",
+            "tree_delta_digest",
+            "changed_files",
+            "changed_file_count",
+            "changed_bytes",
+            "previous_record_sha256",
+            "record_sha256",
+        }
+        if not isinstance(record, Mapping) or set(record) != fields:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion record fields are invalid"
+            )
+        if record["sequence"] != expected_sequence:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion sequence is not append-only"
+            )
+        _git_oid(record["head_sha"], "AUTH_RECEIPT_FIELDS")
+        _sha256(record["tree_delta_digest"], "AUTH_RECEIPT_FIELDS")
+        changed_files = _string_list(record, "changed_files", allow_empty=True)
+        if changed_files != sorted(changed_files) or len(changed_files) != len(
+            set(changed_files)
+        ):
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion paths are not canonical"
+            )
+        if record["changed_file_count"] != len(changed_files):
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion path count is invalid"
+            )
+        _nonnegative_integer(record["changed_bytes"], "AUTH_RECEIPT_FIELDS")
+        if record["previous_record_sha256"] != previous_digest:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion hash chain is invalid"
+            )
+        _sha256(record["record_sha256"], "AUTH_RECEIPT_FIELDS")
+        unsigned = dict(record)
+        unsigned.pop("record_sha256")
+        expected_digest = hashlib.sha256(canonical_json_bytes(unsigned)).hexdigest()
+        if record["record_sha256"] != expected_digest:
+            raise AuthorizationError(
+                "AUTH_RECEIPT_FIELDS", "scope expansion record digest is invalid"
+            )
+        previous_digest = str(record["record_sha256"])
 
 
 def _validate_local_state_contract(value: object) -> None:
@@ -1176,6 +1346,7 @@ def task_start(
     policy_data: Mapping[str, object],
     approval_attestations: Sequence[Mapping[str, object]],
     verification_epoch: int,
+    evaluation_epoch: int | None = None,
 ) -> dict[str, object]:
     """Compute a deterministic advisory/local or CI-candidate authorization."""
 
@@ -1242,6 +1413,17 @@ def task_start(
             "AUTH_VERIFICATION_EPOCH",
             "verification epoch must match the positive platform event epoch",
         )
+    if evaluation_epoch is None:
+        evaluation_epoch = max(verification_epoch, int(time.time()))
+    if (
+        isinstance(evaluation_epoch, bool)
+        or not isinstance(evaluation_epoch, int)
+        or evaluation_epoch < verification_epoch
+    ):
+        raise AuthorizationError(
+            "AUTH_VERIFICATION_EPOCH",
+            "evaluation epoch must not precede the signed event epoch",
+        )
     repository_identity = normalized_policy["repository_identity"]
     assert isinstance(repository_identity, Mapping)
     if (
@@ -1263,6 +1445,9 @@ def task_start(
             "AUTH_SNAPSHOT_STALE",
             "caller bindings do not match base-trusted snapshot bytes",
         )
+    authorization_mode = str(
+        normalized_intake.get("requested_authorization_mode", "exact-files")
+    )
     task_rule = _task_rule(normalized_policy, normalized_intake)
     issue_state = normalized_policy["issue_state"]
     assert isinstance(issue_state, Mapping)
@@ -1282,6 +1467,35 @@ def task_start(
     resolved_skill_adapters = _resolve_skill_request(
         normalized_intake, skill_context
     )
+    if authorization_mode not in task_rule["authorization_modes"]:
+        raise AuthorizationError(
+            "AUTH_MODE_POLICY", "requested authorization mode is outside trusted policy"
+        )
+    if authorization_mode == "path-roots":
+        expiry = normalized_event.get("expires_at_epoch")
+        if (
+            isinstance(expiry, bool)
+            or not isinstance(expiry, int)
+            or expiry <= evaluation_epoch
+            or expiry - verification_epoch > _MAX_DELEGATION_LIFETIME_SECONDS
+        ):
+            raise AuthorizationError(
+                "AUTH_EVENT_EXPIRED",
+                "path-root delegation is missing a current signed expiry",
+            )
+        _validate_delegated_canon_domains(
+            repo_root,
+            str(normalized_event["trusted_base_sha"]),
+            normalized_policy,
+            normalized_intake,
+        )
+    if (
+        authorization_mode == "path-roots"
+        and normalized_event["event_attestation_origin"] != "trusted-ci"
+    ):
+        raise AuthorizationError(
+            "AUTH_EVENT_SIGNATURE", "path-root delegation requires a signed platform event"
+        )
     static_policy_allowed_files = set(task_rule["authorized_files"])
     manifest_deletion_files = _approved_manifest_deletion_paths(
         repo_root,
@@ -1293,13 +1507,51 @@ def task_start(
         _canonical_authorized_file(path)
         for path in normalized_intake["requested_changed_files"]
     }
-    outside_policy = sorted(requested_files - policy_allowed_files)
-    if outside_policy:
-        raise AuthorizationError(
-            "AUTH_FILE_POLICY",
-            f"requested file is outside trusted policy: {outside_policy[0]}",
+    selected_roots: tuple[str, ...] = ()
+    protected_paths = tuple(str(item) for item in task_rule["protected_paths"])
+    if authorization_mode == "exact-files":
+        outside_policy = sorted(requested_files - policy_allowed_files)
+        if outside_policy:
+            raise AuthorizationError(
+                "AUTH_FILE_POLICY",
+                f"requested file is outside trusted policy: {outside_policy[0]}",
+            )
+        computed_authorized_files = sorted(requested_files & policy_allowed_files)
+    else:
+        policy_roots = tuple(str(item) for item in task_rule["authorized_path_roots"])
+        selected_roots = tuple(
+            str(item) for item in normalized_intake["requested_path_roots"]
         )
-    computed_authorized_files = sorted(requested_files & policy_allowed_files)
+        outside_roots = sorted(
+            root
+            for root in selected_roots
+            if not any(_path_matches_delegated_root(root, allowed) for allowed in policy_roots)
+        )
+        if outside_roots:
+            raise AuthorizationError(
+                "AUTH_FILE_POLICY",
+                f"requested root is outside trusted policy: {outside_roots[0]}",
+            )
+        protected_roots = sorted(
+            root
+            for root in selected_roots
+            if _is_hard_delegation_boundary(root, protected_paths)
+        )
+        if protected_roots:
+            raise AuthorizationError(
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                f"requested root crosses a renewed-approval boundary: {protected_roots[0]}",
+            )
+        if (
+            int(normalized_intake["requested_max_changed_files"])
+            > int(task_rule["maximum_changed_files"])
+            or int(normalized_intake["requested_max_changed_bytes"])
+            > int(task_rule["maximum_changed_bytes"])
+        ):
+            raise AuthorizationError(
+                "AUTH_DELEGATION_BUDGET", "requested delegation budget exceeds policy"
+            )
+        computed_authorized_files = []
     if mode == "ci-pr-range":
         delta = canonical_tree_delta(
             repo_root,
@@ -1308,8 +1560,11 @@ def task_start(
         )
         local_state = None
     else:
+        local_requested_paths = computed_authorized_files
+        if authorization_mode == "path-roots":
+            local_requested_paths = _local_untracked_displays(repo_root)
         local_state = canonical_local_state(
-            repo_root, requested_paths=computed_authorized_files
+            repo_root, requested_paths=local_requested_paths
         )
         if local_state["head_sha"] != normalized_event["trusted_head_sha"]:
             raise AuthorizationError(
@@ -1320,10 +1575,11 @@ def task_start(
     requested = set(computed_authorized_files)
     for record in delta["records"]:
         path = _record_path(record)
-        if path not in policy_allowed_files:
-            raise AuthorizationError("AUTH_FILE_POLICY", f"tree change is outside trusted policy: {path}")
-        if path not in requested:
-            raise AuthorizationError("AUTH_FILE_UNREQUESTED", f"tree change was not requested: {path}")
+        if authorization_mode != "path-roots":
+            if path not in policy_allowed_files:
+                raise AuthorizationError("AUTH_FILE_POLICY", f"tree change is outside trusted policy: {path}")
+            if path not in requested:
+                raise AuthorizationError("AUTH_FILE_UNREQUESTED", f"tree change was not requested: {path}")
         if (
             path in manifest_deletion_files
             and path not in static_policy_allowed_files
@@ -1333,6 +1589,19 @@ def task_start(
                 "AUTH_FILE_POLICY",
                 f"purge-manifest authorization permits deletion only: {path}",
             )
+    if authorization_mode == "path-roots":
+        computed_authorized_files = _validate_path_root_delta(
+            repo_root,
+            delta,
+            selected_roots=selected_roots,
+            protected_paths=protected_paths,
+            maximum_changed_files=int(
+                normalized_intake["requested_max_changed_files"]
+            ),
+            maximum_changed_bytes=int(
+                normalized_intake["requested_max_changed_bytes"]
+            ),
+        )
 
     intake_digest = hashlib.sha256(canonical_json_bytes(normalized_intake)).hexdigest()
     required_checks, command_digests, proof_command_bindings = _required_validation_commands(
@@ -1391,9 +1660,13 @@ def task_start(
                 ),
             }
         )
-    approval_required = bool(task_rule["approval_required"]) or any(
-        _is_sensitive_authorization_path(path)
-        for path in computed_authorized_files
+    approval_required = (
+        authorization_mode == "path-roots"
+        or bool(task_rule["approval_required"])
+        or any(
+            _is_sensitive_authorization_path(path)
+            for path in computed_authorized_files
+        )
     )
     if approval_required and not approval_digests:
         raise AuthorizationError("AUTH_APPROVAL_MISSING", "trusted approval is required")
@@ -1437,6 +1710,10 @@ def task_finalize(
     approval_attestations: Sequence[Mapping[str, object]],
     validation_attestations: Sequence[Mapping[str, object]],
     verification_epoch: int,
+    evaluation_epoch: int | None = None,
+    delegation_start_authorization: Mapping[str, object] | None = None,
+    delegation_start_event: Mapping[str, object] | None = None,
+    delegation_start_approval: Mapping[str, object] | None = None,
 ) -> dict[str, object]:
     """Recompute every binding and authorize only the exact final tree delta."""
 
@@ -1446,6 +1723,11 @@ def task_finalize(
     if dict(trusted_bindings) != authorization.get("trusted_bindings"):
         raise AuthorizationError("AUTH_BINDING_STALE", "trusted state changed after task start")
     normalized_intake = validate_task_intake(intake_data)
+    effective_evaluation_epoch = (
+        max(verification_epoch, int(time.time()))
+        if evaluation_epoch is None
+        else evaluation_epoch
+    )
     intake_digest = hashlib.sha256(canonical_json_bytes(normalized_intake)).hexdigest()
     if intake_digest != authorization.get("intake_digest"):
         raise AuthorizationError("AUTH_INTAKE_STALE", "request changed after task start")
@@ -1460,6 +1742,7 @@ def task_finalize(
         policy_data=policy_data,
         approval_attestations=approval_attestations,
         verification_epoch=verification_epoch,
+        evaluation_epoch=effective_evaluation_epoch,
     )
     immutable_keys = (
         "schema_version",
@@ -1492,6 +1775,19 @@ def task_finalize(
         raise AuthorizationError(
             "AUTH_ENVELOPE_STALE", "authorization no longer regenerates exactly"
         )
+
+    (
+        delegation_start_authorization_digest,
+        delegation_start_event_provenance,
+    ) = _validate_delegation_start(
+        repo_root=repo_root,
+        current_authorization=recomputed,
+        policy_data=policy_data,
+        evaluation_epoch=effective_evaluation_epoch,
+        delegation_start_authorization=delegation_start_authorization,
+        delegation_start_event=delegation_start_event,
+        delegation_start_approval=delegation_start_approval,
+    )
 
     required_checks = set(recomputed["computed_required_checks"])
     by_command: dict[str, Mapping[str, object]] = {}
@@ -1635,6 +1931,16 @@ def task_finalize(
             "approval_nonce_consumptions"
         ],
         "proof_obligation_evidence": proof_evidence,
+        "scope_expansion_records": _scope_expansion_records(
+            repo_root,
+            recomputed,
+        ),
+        "delegation_start_authorization_digest": (
+            delegation_start_authorization_digest
+        ),
+        "delegation_start_event_provenance": (
+            delegation_start_event_provenance
+        ),
         "exact_diff_authorized": True,
         "merge_authorized": recomputed["mode"] == "ci-pr-range",
         "claim_ceiling": recomputed["computed_claim_ceiling"],
@@ -1646,7 +1952,11 @@ def _validate_trusted_event(
     repo_root: Path,
     data: Mapping[str, object],
 ) -> dict[str, object]:
-    _require_closed_mapping(data, _EVENT_FIELDS, "AUTH_EVENT_FIELDS")
+    fields = frozenset(data) if isinstance(data, Mapping) else frozenset()
+    if fields not in {_EVENT_FIELDS, _EVENT_FIELDS | _EVENT_DELEGATION_FIELDS}:
+        raise AuthorizationError(
+            "AUTH_EVENT_FIELDS", "fields do not match closed contract"
+        )
     _require_version(data)
     normalized = dict(data)
     for field in (
@@ -1674,6 +1984,16 @@ def _validate_trusted_event(
             "AUTH_VERIFICATION_EPOCH",
             "trusted event verification epoch must be positive",
         )
+    if "expires_at_epoch" in data:
+        expiry = data["expires_at_epoch"]
+        if (
+            isinstance(expiry, bool)
+            or not isinstance(expiry, int)
+            or expiry <= data["verification_epoch"]
+        ):
+            raise AuthorizationError(
+                "AUTH_EVENT_FIELDS", "signed event expiry must follow its epoch"
+            )
     for field in (
         "workflow_run_id",
         "workflow_run_attempt",
@@ -1870,10 +2190,11 @@ def _validate_policy(data: Mapping[str, object]) -> dict[str, object]:
     task_ids: set[str] = set()
     for raw in raw_rules:
         raw_fields = frozenset(raw) if isinstance(raw, Mapping) else frozenset()
-        if not isinstance(raw, Mapping) or raw_fields not in {
-            _TASK_RULE_FIELDS,
-            _TASK_RULE_FIELDS | _TASK_RULE_OPTIONAL_FIELDS,
-        }:
+        if (
+            not isinstance(raw, Mapping)
+            or not _TASK_RULE_FIELDS <= raw_fields
+            or not raw_fields <= _TASK_RULE_FIELDS | _TASK_RULE_OPTIONAL_FIELDS
+        ):
             raise AuthorizationError(
                 "AUTH_POLICY_FIELDS", "task rule fields do not match contract"
             )
@@ -1890,6 +2211,101 @@ def _validate_policy(data: Mapping[str, object]) -> dict[str, object]:
         if any(item in {"", "."} for item in authorized_files):
             raise AuthorizationError(
                 "AUTH_POLICY_PATH_ROOT", "repository-root authorization is forbidden"
+            )
+        authorization_modes = _string_list(
+            raw,
+            "authorization_modes",
+            allow_empty=False,
+        ) if "authorization_modes" in raw else ["exact-files"]
+        if not set(authorization_modes) <= {"exact-files", "path-roots"}:
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS", "task authorization mode is invalid"
+            )
+        delegated_task_types = (
+            _string_list(
+                raw,
+                "delegated_task_types",
+                allow_empty="path-roots" not in authorization_modes,
+            )
+            if "delegated_task_types" in raw
+            else []
+        )
+        if not set(delegated_task_types) <= set(
+            _string_list(raw, "task_types", allow_empty=False)
+        ):
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS",
+                "delegated task types must be a subset of task rule types",
+            )
+        delegated_scope_mode = (
+            _string(raw, "delegated_scope_mode")
+            if "delegated_scope_mode" in raw
+            else "exact-rule-subset"
+        )
+        delegated_requirement_mode = (
+            _string(raw, "delegated_requirement_mode")
+            if "delegated_requirement_mode" in raw
+            else "exact-rule-subset"
+        )
+        if delegated_scope_mode not in {
+            "exact-rule-subset",
+            "base-canon-concepts",
+        } or delegated_requirement_mode not in {
+            "exact-rule-subset",
+            "base-canon-requirements",
+        }:
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS", "delegated canon domain mode is invalid"
+            )
+        authorized_path_roots = [
+            _canonical_repo_path(item, "AUTH_POLICY_PATH")
+            for item in _string_list(
+                raw,
+                "authorized_path_roots",
+                allow_empty="path-roots" not in authorization_modes,
+            )
+        ] if "authorized_path_roots" in raw else []
+        protected_paths = [
+            _canonical_repo_path(item, "AUTH_POLICY_PATH")
+            for item in _string_list(
+                raw, "protected_paths", allow_empty=True
+            )
+        ] if "protected_paths" in raw else []
+        if "path-roots" in authorization_modes and not authorized_path_roots:
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS", "path-root mode requires bounded roots"
+            )
+        if "path-roots" in authorization_modes and not delegated_task_types:
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS", "path-root mode requires delegated task types"
+            )
+        if "path-roots" in authorization_modes and (
+            delegated_scope_mode != "base-canon-concepts"
+            or delegated_requirement_mode != "base-canon-requirements"
+        ):
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS",
+                "path-root mode requires base-canon scope and requirement domains",
+            )
+        maximum_changed_files = (
+            _nonnegative_integer(
+                raw.get("maximum_changed_files"), "AUTH_POLICY_FIELDS"
+            )
+            if "maximum_changed_files" in raw
+            else 0
+        )
+        maximum_changed_bytes = (
+            _nonnegative_integer(
+                raw.get("maximum_changed_bytes"), "AUTH_POLICY_FIELDS"
+            )
+            if "maximum_changed_bytes" in raw
+            else 0
+        )
+        if "path-roots" in authorization_modes and (
+            maximum_changed_files == 0 or maximum_changed_bytes == 0
+        ):
+            raise AuthorizationError(
+                "AUTH_POLICY_FIELDS", "path-root mode requires change budgets"
             )
         approval_required = raw["approval_required"]
         if not isinstance(approval_required, bool):
@@ -1936,6 +2352,14 @@ def _validate_policy(data: Mapping[str, object]) -> dict[str, object]:
                 "maximum_claim_ceiling": _string(raw, "maximum_claim_ceiling"),
                 "approval_required": approval_required,
                 "approval_policy_ids": task_approval_policy_ids,
+                "authorization_modes": authorization_modes,
+                "delegated_task_types": delegated_task_types,
+                "delegated_scope_mode": delegated_scope_mode,
+                "delegated_requirement_mode": delegated_requirement_mode,
+                "authorized_path_roots": sorted(authorized_path_roots),
+                "protected_paths": sorted(protected_paths),
+                "maximum_changed_files": maximum_changed_files,
+                "maximum_changed_bytes": maximum_changed_bytes,
                 "authorized_deletion_manifest": (
                     _canonical_repo_path(
                         _string(raw, "authorized_deletion_manifest"),
@@ -2568,20 +2992,168 @@ def _task_rule(
         raise AuthorizationError(
             "AUTH_ISSUE_MISMATCH", "task rule and intake issue differ"
         )
+    authorization_mode = str(
+        intake.get("requested_authorization_mode", "exact-files")
+    )
     if intake["requested_task_type"] not in rule["task_types"]:
         raise AuthorizationError(
             "AUTH_TASK_TYPE_POLICY", "task type is outside trusted rule"
         )
-    if not set(intake["requested_scope"]) <= set(rule["scopes"]):
+    if (
+        authorization_mode == "path-roots"
+        and intake["requested_task_type"] not in rule["delegated_task_types"]
+    ):
+        raise AuthorizationError(
+            "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+            "task type requires renewed exact-file owner approval",
+        )
+    if authorization_mode == "path-roots" and _requests_hard_boundary_scope(intake):
+        raise AuthorizationError(
+            "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+            "requested scope crosses a renewed-approval boundary",
+        )
+    if authorization_mode != "path-roots" and not set(
+        intake["requested_scope"]
+    ) <= set(rule["scopes"]):
         raise AuthorizationError(
             "AUTH_SCOPE_POLICY", "requested scope is outside trusted rule"
         )
-    if not set(intake["requested_requirement_ids"]) <= set(rule["requirement_ids"]):
+    if authorization_mode != "path-roots" and not set(
+        intake["requested_requirement_ids"]
+    ) <= set(rule["requirement_ids"]):
         raise AuthorizationError(
             "AUTH_REQUIREMENT_POLICY",
             "requested requirement is outside trusted rule",
         )
     return rule
+
+
+def _validate_delegated_canon_domains(
+    repo_root: Path,
+    trusted_base_sha: str,
+    policy: Mapping[str, object],
+    intake: Mapping[str, object],
+) -> None:
+    snapshot_paths = _mapping(policy["snapshot_paths"], "AUTH_SCOPE_POLICY")
+    source_ownership_path = str(snapshot_paths["source_ownership"])
+    source_ownership = _json_mapping(
+        _git_blob_at_revision(repo_root, trusted_base_sha, source_ownership_path),
+        "AUTH_SCOPE_POLICY",
+        source_ownership_path,
+    )
+    raw_concepts = source_ownership.get("concepts")
+    if not isinstance(raw_concepts, list):
+        raise AuthorizationError(
+            "AUTH_SCOPE_POLICY", "base source-ownership concepts are unavailable"
+        )
+    concept_spec_ids = {
+        str(item["concept"]): str(item["spec_id"])
+        for item in raw_concepts
+        if isinstance(item, Mapping)
+        and isinstance(item.get("concept"), str)
+        and str(item["concept"]).strip()
+        and isinstance(item.get("spec_id"), str)
+        and str(item["spec_id"]).strip()
+    }
+    requested_scopes = set(str(item) for item in intake["requested_scope"])
+    missing_scopes = sorted(requested_scopes - set(concept_spec_ids))
+    if missing_scopes:
+        raise AuthorizationError(
+            "AUTH_SCOPE_POLICY",
+            f"delegated scope is outside base canon: {missing_scopes[0]}",
+        )
+    skill_dependencies_path = str(snapshot_paths["skill_dependencies"])
+    skill_dependencies = _json_mapping(
+        _git_blob_at_revision(repo_root, trusted_base_sha, skill_dependencies_path),
+        "AUTH_REQUIREMENT_POLICY",
+        skill_dependencies_path,
+    )
+    requirement_index_path = skill_dependencies.get("requirement_index_path")
+    if not isinstance(requirement_index_path, str):
+        raise AuthorizationError(
+            "AUTH_REQUIREMENT_POLICY",
+            "base requirement index path is unavailable",
+        )
+    requirement_index_path = _canonical_repo_path(
+        requirement_index_path, "AUTH_REQUIREMENT_POLICY"
+    )
+    requirement_index = _json_mapping(
+        _git_blob_at_revision(repo_root, trusted_base_sha, requirement_index_path),
+        "AUTH_REQUIREMENT_POLICY",
+        requirement_index_path,
+    )
+    raw_requirements = requirement_index.get("requirements")
+    if not isinstance(raw_requirements, list):
+        raise AuthorizationError(
+            "AUTH_REQUIREMENT_POLICY", "base requirements are unavailable"
+        )
+    requirement_concepts = {
+        str(item["requirement_id"]): str(item["concept"])
+        for item in raw_requirements
+        if isinstance(item, Mapping)
+        and isinstance(item.get("requirement_id"), str)
+        and isinstance(item.get("concept"), str)
+    }
+    requested_requirements = set(
+        str(item) for item in intake["requested_requirement_ids"]
+    )
+    unknown_requirements = sorted(requested_requirements - set(requirement_concepts))
+    if unknown_requirements:
+        raise AuthorizationError(
+            "AUTH_REQUIREMENT_POLICY",
+            f"delegated requirement is outside base canon: {unknown_requirements[0]}",
+        )
+    incoherent_requirements = sorted(
+        requirement_id
+        for requirement_id in requested_requirements
+        if requirement_concepts[requirement_id] not in requested_scopes
+    )
+    if incoherent_requirements:
+        raise AuthorizationError(
+            "AUTH_REQUIREMENT_POLICY",
+            "delegated requirement is outside the requested canon scope: "
+            f"{incoherent_requirements[0]}",
+        )
+
+
+def _requests_hard_boundary_scope(intake: Mapping[str, object]) -> bool:
+    values = [
+        str(intake["requested_task_type"]),
+        *(str(item) for item in intake["requested_scope"]),
+    ]
+    normalized = (
+        " ".join(values)
+        .casefold()
+        .replace("_", "-")
+        .replace(".", "-")
+    )
+    return any(
+        marker in normalized
+        for marker in (
+            "authority-amendment",
+            "authorization-policy",
+            "trust-anchor",
+            "ruleset",
+            "credential",
+            "secret",
+            "signing-material",
+            "destructive",
+            "mass-deletion",
+            "history-rewrite",
+            "production-deploy",
+            "external-mutation",
+            "externalmutation",
+            "external-write",
+            "externalwrite",
+            "external-writes",
+            "externalwrites",
+            "external-effect",
+            "externaleffect",
+            "release",
+            "testflight",
+            "app-store",
+        )
+    )
 
 
 def _validate_issue_snapshot(
@@ -3150,6 +3722,415 @@ def canonical_local_state(
     }
 
 
+def _local_untracked_displays(repo_root: Path) -> list[str]:
+    values: list[str] = []
+    for raw_path in _git(
+        repo_root.resolve(), "ls-files", "--others", "--exclude-standard", "-z", "--"
+    ).split(b"\0"):
+        if not raw_path:
+            continue
+        try:
+            values.append(raw_path.decode("utf-8"))
+        except UnicodeDecodeError:
+            values.append(f"raw-base64url:{_base64url(raw_path)}")
+    return sorted(values)
+
+
+def _tree_delta_changed_bytes(delta: Mapping[str, object]) -> int:
+    records = delta["records"]
+    assert isinstance(records, list)
+    return sum(
+        max(int(record.get("old_blob_size") or 0), int(record.get("new_blob_size") or 0))
+        for record in records
+        if isinstance(record, Mapping)
+    )
+
+
+def _validate_path_root_delta(
+    repo_root: Path,
+    delta: Mapping[str, object],
+    *,
+    selected_roots: Sequence[str],
+    protected_paths: Sequence[str],
+    maximum_changed_files: int,
+    maximum_changed_bytes: int,
+) -> list[str]:
+    records = delta["records"]
+    assert isinstance(records, list)
+    changed_files = sorted(_record_path(record) for record in records)
+    for record in records:
+        assert isinstance(record, Mapping)
+        path = _record_path(record)
+        if path.startswith("raw-base64url:"):
+            raise AuthorizationError(
+                "AUTH_FILE_POLICY", f"tree change is outside delegated roots: {path}"
+            )
+        path = _canonical_repo_path(path, "AUTH_FILE_POLICY")
+        present_modes = tuple(
+            str(record[field])
+            for field in ("old_mode", "new_mode")
+            if record.get(field) is not None
+        )
+        if any(mode not in {"100644", "100755"} for mode in present_modes):
+            raise AuthorizationError(
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                f"delegated roots permit regular files only: {path}",
+            )
+        if not any(
+            _path_matches_delegated_root(path, root) for root in selected_roots
+        ):
+            raise AuthorizationError(
+                "AUTH_FILE_POLICY", f"tree change is outside delegated roots: {path}"
+            )
+        if _is_hard_delegation_boundary(path, protected_paths):
+            raise AuthorizationError(
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                f"tree change crosses a renewed-approval boundary: {path}",
+            )
+    deleted_count = sum(
+        1
+        for record in records
+        if isinstance(record, Mapping) and record["status"] == "deleted"
+    )
+    if deleted_count > _MAX_DELEGATED_DELETIONS:
+        raise AuthorizationError(
+            "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+            "delegation exceeds the mass-deletion boundary",
+        )
+    if (
+        len(changed_files) > maximum_changed_files
+        or _tree_delta_changed_bytes(delta) > maximum_changed_bytes
+    ):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_BUDGET", "tree delta exceeds delegation budget"
+        )
+    return changed_files
+
+
+def _scope_expansion_records(
+    repo_root: Path,
+    authorization: Mapping[str, object],
+) -> list[dict[str, object]]:
+    intake = _mapping(authorization["intake"], "AUTH_RECEIPT_FIELDS")
+    if intake.get("requested_authorization_mode") != "path-roots":
+        return []
+    event = _mapping(
+        authorization["trusted_event_provenance"], "AUTH_RECEIPT_FIELDS"
+    )
+    base_sha = str(event["trusted_base_sha"])
+    head_sha = str(event["trusted_head_sha"])
+    policy = load_base_policy(repo_root, base_sha)
+    task_rule = _task_rule(policy, intake)
+    protected_paths = tuple(str(item) for item in task_rule["protected_paths"])
+    selected_roots = tuple(str(item) for item in intake["requested_path_roots"])
+    revision_list = _git(
+        repo_root.resolve(),
+        "rev-list",
+        "--reverse",
+        "--topo-order",
+        f"{base_sha}..{head_sha}",
+    ).decode().splitlines()
+    records: list[dict[str, object]] = []
+    previous_digest: str | None = None
+    for sequence, commit_sha in enumerate(revision_list, start=1):
+        delta = canonical_tree_delta(repo_root, base_sha, commit_sha)
+        changed_files = _validate_path_root_delta(
+            repo_root,
+            delta,
+            selected_roots=selected_roots,
+            protected_paths=protected_paths,
+            maximum_changed_files=int(intake["requested_max_changed_files"]),
+            maximum_changed_bytes=int(intake["requested_max_changed_bytes"]),
+        )
+        record: dict[str, object] = {
+            "sequence": sequence,
+            "head_sha": commit_sha,
+            "tree_delta_digest": delta["digest"],
+            "changed_files": changed_files,
+            "changed_file_count": len(changed_files),
+            "changed_bytes": _tree_delta_changed_bytes(delta),
+            "previous_record_sha256": previous_digest,
+        }
+        record["record_sha256"] = hashlib.sha256(
+            canonical_json_bytes(record)
+        ).hexdigest()
+        records.append(record)
+        previous_digest = str(record["record_sha256"])
+    return records
+
+
+def _validate_delegation_start(
+    *,
+    repo_root: Path,
+    current_authorization: Mapping[str, object],
+    policy_data: Mapping[str, object],
+    evaluation_epoch: int,
+    delegation_start_authorization: Mapping[str, object] | None,
+    delegation_start_event: Mapping[str, object] | None,
+    delegation_start_approval: Mapping[str, object] | None,
+) -> tuple[str | None, dict[str, object] | None]:
+    current_intake = _mapping(
+        current_authorization["intake"], "AUTH_DELEGATION_START"
+    )
+    is_delegated = current_intake.get("requested_authorization_mode") == "path-roots"
+    supplied = (
+        delegation_start_authorization,
+        delegation_start_event,
+        delegation_start_approval,
+    )
+    if not is_delegated:
+        if any(item is not None for item in supplied):
+            raise AuthorizationError(
+                "AUTH_DELEGATION_START",
+                "exact-file finalization cannot consume a root delegation",
+            )
+        return None, None
+    if any(item is None for item in supplied):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START_MISSING",
+            "path-root finalization requires its signed pre-edit delegation",
+        )
+    assert delegation_start_authorization is not None
+    assert delegation_start_event is not None
+    assert delegation_start_approval is not None
+    prior = validate_task_authorization(delegation_start_authorization)
+    prior_event = _validate_trusted_event(repo_root, delegation_start_event)
+    if prior["trusted_event_provenance"] != prior_event:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "delegation event differs from its authorization"
+        )
+    if prior["mode"] != "ci-pr-range" or prior["authority_class"] != "ci-candidate":
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "pre-edit delegation is not platform-owned"
+        )
+    if prior["intake"] != current_intake or prior["intake_digest"] != (
+        current_authorization["intake_digest"]
+    ):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "delegation intake changed before finalization"
+        )
+    current_event = _mapping(
+        current_authorization["trusted_event_provenance"],
+        "AUTH_DELEGATION_START",
+    )
+    stable_event_fields = (
+        "repository_id",
+        "repository_full_name",
+        "pull_request_number",
+        "base_ref",
+        "trusted_base_sha",
+        "merge_base_sha",
+        "consumption_generation",
+        "issue_state_transition",
+    )
+    if any(prior_event[field] != current_event[field] for field in stable_event_fields):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "delegation session identity changed"
+        )
+    if (
+        prior_event["workflow_run_id"] == current_event["workflow_run_id"]
+        and prior_event["workflow_run_attempt"]
+        == current_event["workflow_run_attempt"]
+    ):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_REPLAY",
+            "finalization cannot replay the pre-edit workflow run",
+        )
+    if prior_event["trusted_head_sha"] == current_event["trusted_head_sha"]:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "delegated repair has no post-start commit"
+        )
+    try:
+        _git(
+            repo_root.resolve(),
+            "merge-base",
+            "--is-ancestor",
+            str(prior_event["trusted_head_sha"]),
+            str(current_event["trusted_head_sha"]),
+        )
+    except AuthorizationError as exc:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_HISTORY",
+            "final head does not append to the signed pre-edit head",
+        ) from exc
+    if prior["computed_authorized_files"] or prior["tree_delta"]["records"]:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START",
+            "pre-edit delegation was issued after repair changes existed",
+        )
+    if prior["trusted_bindings"] != current_authorization["trusted_bindings"]:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "base-owned delegation bindings changed"
+        )
+    prior_nonces = {
+        str(item["nonce"])
+        for item in prior["approval_nonce_consumptions"]
+        if isinstance(item, Mapping)
+    }
+    current_nonces = {
+        str(item["nonce"])
+        for item in current_authorization["approval_nonce_consumptions"]
+        if isinstance(item, Mapping)
+    }
+    if not prior_nonces or prior_nonces & current_nonces:
+        raise AuthorizationError(
+            "AUTH_DELEGATION_REPLAY",
+            "pre-edit and final approval nonces must be distinct",
+        )
+    regenerated = task_start(
+        repo_root=repo_root,
+        mode="ci-pr-range",
+        intake_data=current_intake,
+        trusted_event_data=prior_event,
+        trusted_bindings=_mapping(prior["trusted_bindings"], "AUTH_DELEGATION_START"),
+        policy_data=policy_data,
+        approval_attestations=(delegation_start_approval,),
+        verification_epoch=int(prior_event["verification_epoch"]),
+        evaluation_epoch=evaluation_epoch,
+    )
+    if canonical_json_bytes(regenerated) != canonical_json_bytes(prior):
+        raise AuthorizationError(
+            "AUTH_DELEGATION_START", "pre-edit delegation does not regenerate exactly"
+        )
+    return (
+        hashlib.sha256(canonical_json_bytes(prior)).hexdigest(),
+        dict(prior_event),
+    )
+
+
+def _is_hard_delegation_boundary(
+    path: str, protected_paths: Sequence[str]
+) -> bool:
+    if _is_sensitive_authorization_path(path) or any(
+        _path_matches_policy_prefix(path, protected) for protected in protected_paths
+    ):
+        return True
+    raw_parts = PurePosixPath(path).parts
+    camel_split_parts = tuple(
+        re.sub(
+            r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])",
+            "-",
+            part,
+        )
+        for part in raw_parts
+    )
+    parts = tuple(part.casefold() for part in camel_split_parts)
+    flattened = re.sub(r"[^a-z0-9]+", "-", "-".join(parts)).strip("-")
+    path_tokens = {
+        token
+        for part in camel_split_parts
+        for token in re.split(
+            r"[^a-z0-9]+",
+            part.casefold(),
+        )
+        if token
+    }
+    if path_tokens & {
+        "credential",
+        "credentials",
+        "deploy",
+        "deployment",
+        "passphrase",
+        "password",
+        "publish",
+        "publishing",
+        "secret",
+        "secrets",
+        "sign",
+        "signer",
+        "signing",
+        "token",
+    }:
+        return True
+    if any(
+        marker in flattened
+        for marker in (
+            "authority-amendment",
+            "authorization-policy",
+            "authorization-policies",
+            "authorizationpolicy",
+            "authorizationpolicies",
+            "credential",
+            "secret",
+            "signing-key",
+            "signing-material",
+            "private-key",
+            "public-key",
+            "secret-key",
+            "encryption-key",
+            "decryption-key",
+            "crypto-key",
+            "cryptographic-key",
+            "key-store",
+            "keystore",
+            "trust-anchor",
+            "trustanchor",
+            "api-key",
+            "apikey",
+            "access-token",
+            "ruleset",
+            "rule-set",
+            "destructive-migration",
+            "mass-deletion",
+            "mass-delete",
+            "bulk-delete",
+            "history-rewrite",
+            "production-deploy",
+            "external-mutation",
+            "externalmutation",
+            "external-write",
+            "externalwrite",
+            "external-writes",
+            "externalwrites",
+            "external-effect",
+            "externaleffect",
+            "release",
+            "testflight",
+            "test-flight",
+            "app-store",
+        )
+    ):
+        return True
+    if any(
+        marker in PurePosixPath(path).name.casefold()
+        for marker in ("deploy", "publish", "release", "testflight", "app-store")
+    ):
+        return True
+    name = PurePosixPath(path).name.casefold()
+    if name.startswith(".env"):
+        return True
+    if name in {"id_dsa", "id_ecdsa", "id_ed25519", "id_rsa"}:
+        return True
+    if name.startswith("ssh_host_") and name.endswith("_key"):
+        return True
+    sensitive_suffixes = {
+        ".cer",
+        ".crt",
+        ".der",
+        ".entitlements",
+        ".jks",
+        ".key",
+        ".keystore",
+        ".pem",
+        ".p7b",
+        ".p8",
+        ".p12",
+        ".pfx",
+        ".mobileprovision",
+        ".provisionprofile",
+    }
+    return any(
+        suffix.casefold() in sensitive_suffixes
+        for suffix in PurePosixPath(path).suffixes
+    )
+
+
+def _path_matches_delegated_root(path: str, root: str) -> bool:
+    if root in {"Package.resolved", "Package.swift", "project.yml"}:
+        return path == root
+    return _path_matches_policy_prefix(path, root)
+
+
 def _validate_local_untracked_files(
     repo: Path, untracked: Sequence[tuple[bytes, str]]
 ) -> None:
@@ -3545,6 +4526,18 @@ def _string(data: Mapping[str, object], field: str) -> str:
     value = data[field]
     if not isinstance(value, str) or not value.strip():
         raise AuthorizationError("AUTH_FIELD_TYPE", f"{field} must be a non-empty string")
+    return value
+
+
+def _positive_integer(value: object, code: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise AuthorizationError(code, "expected positive integer")
+    return value
+
+
+def _nonnegative_integer(value: object, code: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise AuthorizationError(code, "expected nonnegative integer")
     return value
 
 

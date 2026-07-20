@@ -6,10 +6,14 @@
   "properties": {
     "intake_id": {"minLength": 1, "type": "string"},
     "issue_reference": {"minLength": 1, "type": "string"},
-    "requested_changed_files": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_authorization_mode": {"const": "path-roots", "type": "string"},
+    "requested_changed_files": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
     "requested_claim_ceiling": {"minLength": 1, "type": "string"},
     "requested_proof": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
     "requested_requirement_ids": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_path_roots": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
+    "requested_max_changed_files": {"minimum": 1, "type": "integer"},
+    "requested_max_changed_bytes": {"minimum": 1, "type": "integer"},
     "requested_rollback": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
     "requested_scope": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true},
     "requested_skill_adapters": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
@@ -18,6 +22,25 @@
     "schema_version": {"const": 1, "type": "integer"},
     "task_id": {"minLength": 1, "type": "string"}
   },
+  "allOf": [
+    {
+      "if": {"required": ["requested_authorization_mode"]},
+      "then": {
+        "properties": {"requested_changed_files": {"maxItems": 0}},
+        "required": ["requested_path_roots", "requested_max_changed_files", "requested_max_changed_bytes"]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            {"required": ["requested_path_roots"]},
+            {"required": ["requested_max_changed_files"]},
+            {"required": ["requested_max_changed_bytes"]}
+          ]
+        },
+        "properties": {"requested_changed_files": {"minItems": 1}}
+      }
+    }
+  ],
   "required": [
     "schema_version",
     "intake_id",

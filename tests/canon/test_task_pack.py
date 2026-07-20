@@ -401,6 +401,29 @@ class TaskIntakeTests(unittest.TestCase):
                     TaskIntake.from_json(data)
                 self.assertEqual(raised.exception.code, "PACK_INTAKE_INVALID")
 
+    def test_authorization_path_roots_become_bounded_pack_scope(self):
+        data = {
+            "schema_version": 1,
+            "intake_id": "INTAKE-REPAIR",
+            "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+            "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+            "requested_task_type": "mechanical",
+            "requested_scope": ["proof.evidence"],
+            "requested_requirement_ids": ["CONST-PROOF-EVIDENCE-001"],
+            "requested_changed_files": [],
+            "requested_validation": ["canon-unit"],
+            "requested_proof": ["offline-determinism"],
+            "requested_rollback": ["git-revert"],
+            "requested_claim_ceiling": "Ordinary repair only",
+            "requested_skill_adapters": [],
+            "requested_authorization_mode": "path-roots",
+            "requested_path_roots": ["Native", "tests"],
+            "requested_max_changed_files": 32,
+            "requested_max_changed_bytes": 1048576,
+        }
+        value = TaskIntake.from_authorization_intake(data)
+        self.assertEqual(value.changed_files, ("Native", "tests"))
+
 
 class TaskPackTests(unittest.TestCase):
     def test_optional_visual_manifest_absence_skips_full_ux_inputs(self):
@@ -698,7 +721,18 @@ class TaskPackTests(unittest.TestCase):
                 )
                 self.assertIn(exact_body, pack.to_markdown())
 
-            shadow_pack = build_task_pack(current, current_intake, "repo-sha", ())
+            shadow_pack = build_task_pack(
+                replace(
+                    current,
+                    manifest=replace(
+                        current.manifest,
+                        authority_state=AuthorityState.SHADOW,
+                    ),
+                ),
+                current_intake,
+                "repo-sha",
+                (),
+            )
             shadow_records = tuple(
                 record
                 for record in shadow_pack.command_authorizations
@@ -1639,7 +1673,7 @@ class TaskPackTests(unittest.TestCase):
             root = Path(temporary_directory)
             intake_path = initialize_live_conflict_cli_root(
                 root,
-                scope="surface.unrelated",
+                scope="surface.today",
             )
             remove_first_supersession_entry(root)
             output = io.StringIO()
@@ -1653,7 +1687,7 @@ class TaskPackTests(unittest.TestCase):
             root = Path(temporary_directory)
             intake_path = initialize_live_conflict_cli_root(
                 root,
-                scope="surface.unrelated",
+                scope="surface.today",
             )
             self.assertEqual(_pack(root, intake_path, check=False), 0)
             remove_first_supersession_entry(root)
@@ -1667,7 +1701,7 @@ class TaskPackTests(unittest.TestCase):
             root = Path(temporary_directory)
             intake_path = initialize_live_conflict_cli_root(
                 root,
-                scope="surface.unrelated",
+                scope="surface.today",
             )
             self.assertEqual(_pack(root, intake_path, check=False), 0)
             original_require = canon_cli._require_source_snapshot

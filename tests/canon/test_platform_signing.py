@@ -162,6 +162,7 @@ class PlatformSigningTests(unittest.TestCase):
                 event_private_key_pem=self.other_private_key,
                 approval_private_key_pem=self.private_key,
             )
+            self.assertEqual(event["expires_at_epoch"], 1_900_007_200)
             validations = create_validation_attestations(
                 repo_root=root,
                 authorization=authorization,

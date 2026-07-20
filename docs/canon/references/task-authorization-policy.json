@@ -96,7 +96,7 @@
       {
         "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
         "prerequisite_task_ids": [],
-        "revision": "codex-autonomous-repair-delegation-admission-v1",
+        "revision": "codex-autonomous-repair-delegation-v1",
         "state": "approved",
         "task_ids": [
           "CODEX-AUTONOMOUS-REPAIR-DELEGATION"
@@ -104,14 +104,14 @@
       }
     ],
     "schema_version": 1,
-    "snapshot_revision": "canon-autonomous-repair-delegation-admission-v1"
+    "snapshot_revision": "canon-autonomous-repair-delegation-v1"
   },
-  "policy_revision": "authorization-v3-admission",
+  "policy_revision": "authorization-v4-path-root-delegation",
   "repository_identity": {
     "repository_full_name": "agentdevan/ambitions",
     "repository_id": "R_kgDOSAFvNw"
   },
-  "schema_revision": "authorization-schema-v1",
+  "schema_revision": "authorization-schema-v2-path-root-delegation",
   "schema_version": 1,
   "snapshot_paths": {
     "authorization_schemas": [
@@ -135,6 +135,20 @@
         "owner-gate@1"
       ],
       "approval_required": true,
+      "authorization_modes": [
+        "exact-files",
+        "path-roots"
+      ],
+      "authorized_path_roots": [
+        "Native",
+        "Package.resolved",
+        "Package.swift",
+        "Packages",
+        "docs",
+        "project.yml",
+        "scripts",
+        "tests"
+      ],
       "authorized_files": [
         ".github/workflows/ambitions-canon-authorization.yml",
         "AGENTS.md",
@@ -161,8 +175,41 @@
         "tools/ambitions_canon/platform_attestations.py",
         "tools/ambitions_canon/task_pack.py"
       ],
+      "delegated_requirement_mode": "base-canon-requirements",
+      "delegated_scope_mode": "base-canon-concepts",
+      "delegated_task_types": [
+        "docs",
+        "mechanical",
+        "runtime",
+        "swiftui"
+      ],
       "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
-      "maximum_claim_ceiling": "Governance-only autonomous-repair delegation; no product implementation, runtime, release, deployment, destructive action, external mutation, or reusable self-authorization claim",
+      "maximum_changed_bytes": 16777216,
+      "maximum_changed_files": 128,
+      "maximum_claim_ceiling": "Ordinary repair within signed path roots with exact final-diff proof; no authorization-policy, trust-anchor, signer, protected-workflow, ruleset, credential, secret, destructive, production, external-mutation, release, TestFlight, App Store, or readiness claim",
+      "protected_paths": [
+        "docs/canon",
+        "docs/canon/references/task-25-authorization-benchmark-policy.json",
+        "docs/canon/references/task-authorization-policy.json",
+        "docs/canon/references/validation-command-manifest.json",
+        "docs/canon/schemas/approval-attestation.schema.json",
+        "docs/canon/schemas/task-authorization.schema.json",
+        "docs/canon/schemas/task-intake.schema.json",
+        "docs/canon/schemas/trusted-event.schema.json",
+        "docs/canon/schemas/validation-attestation.schema.json",
+        "scripts/ambitions-canon.py",
+        "scripts/ambitions-canon-independent-review-evidence.py",
+        "scripts/ambitions-canon-platform-attest.py",
+        "scripts/ambitions-canon-platform-run-command.py",
+        "scripts/ambitions-canon-platform-sign.py",
+        "scripts/ambitions-release-evidence-summary.py",
+        "scripts/ambitions-release-non-claim-gate.py",
+        "scripts/release-claim-safety-scan.sh",
+        "tools/ambitions_canon/authorization.py",
+        "tools/ambitions_canon/independent_review.py",
+        "tools/ambitions_canon/platform_attestations.py",
+        "tools/ambitions_canon/platform_signing.py"
+      ],
       "proof_obligations": [
         "focused-red-green",
         "independent-review",
@@ -188,6 +235,10 @@
       "source_owner": "canon-governance",
       "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
       "task_types": [
+        "docs",
+        "mechanical",
+        "runtime",
+        "swiftui",
         "release"
       ]
     },
