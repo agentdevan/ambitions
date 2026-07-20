@@ -13,15 +13,65 @@
 - Active authority is `docs/canon/`; this plan is guidance, not authority, task authorization, owner approval, or finalization.
 - Baseline evidence is the 2026-07-20 reconciliation at source head `26a4eee7c98ba62fb92caaac564a58344295656f`.
 - Applicable obligations are `CONST-PROOF-EVIDENCE-001`, `CONST-RUNTIME-MUTATION-001`, `CONSTITUTION`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, and `SYSTEM-PERSISTENCE-REPLAY`.
-- Before each source-changing child, admit only its listed paths, generate a fresh pack with `python3 scripts/ambitions-canon.py pack`, and obtain current authorization with `python3 scripts/ambitions-canon.py task start`.
+- Before each source-changing child, admit only its listed paths, materialize its exact intake JSON, and follow the argument-complete authorization contract below.
 - Revalidate each named cohort against live canon, registry rows, and current source. If a path moved, produce a corrected child plan and obtain fresh authority; do not substitute an unnamed path.
-- Run exact-diff `python3 scripts/ambitions-canon.py task finalize` only after implementation, tests, and independent review for that child's final diff.
+- Run the argument-complete exact-diff finalization contract below only after implementation, tests, and independent review for that child's final diff.
 - Keep XcodeGen authoritative: edit `project.yml` when configuration changes, regenerate, and never hand-edit the generated Xcode project.
 - Use the complete per-task `python3 scripts/ambitions-changed-file-test-router.py ... --execute` invocations below and run every command and broader trigger they emit.
 - Runtime, persistence, navigation, topology, and proof-gate changes require a reviewer who did not author the change.
 - No train may claim device, simulator, visual, accessibility, privacy/security, release, App Store, TestFlight, architecture completion, or 10/10 without separate current evidence and authority.
 - This document is not an exact-tree law, does not authorize later source edits, and must be re-derived whenever live evidence or canon changes.
 - New compiler boundaries are candidate-driven and separate-PR by default; no target creation is implied or authorized here.
+
+### Authorization command contract for every child
+
+Set `INTAKE` to the child's exact intake JSON, `START_DIR` to the downloaded `canon-start-<run-id>-<attempt>` artifact, and `START_AUTH`/`FINAL_AUTH` to ignored output paths under `.codex/task-authorization/`. The required local commands are:
+
+```sh
+python3 scripts/ambitions-canon.py pack --issue-json "$INTAKE"
+python3 scripts/ambitions-canon.py task start \
+  --mode ci-pr-range \
+  --intake-json "$INTAKE" \
+  --output "$START_AUTH" \
+  --trusted-event "$START_DIR/trusted-event.json" \
+  --approval-attestation "$START_DIR/approval-attestation.json"
+```
+
+The concrete platform wrapper that produces the signed start artifact is:
+
+```sh
+gh workflow run ambitions-canon-authorization.yml \
+  --ref main \
+  -f pull_request_number=<child-pr-number> \
+  -f intake_json="$(jq -c . "$INTAKE")" \
+  -f operation=start
+```
+
+After exact-head independent review, dispatch `operation=finalize` with the start run identity so the workflow obtains a distinct final-head owner approval, runs the signed validation matrix, and emits the exact finalization artifact:
+
+```sh
+gh workflow run ambitions-canon-authorization.yml \
+  --ref main \
+  -f pull_request_number=<child-pr-number> \
+  -f intake_json="$(jq -c . "$INTAKE")" \
+  -f operation=finalize \
+  -f delegation_start_run_id=<start-run-id> \
+  -f delegation_start_run_attempt=<start-run-attempt>
+```
+
+If finalization is invoked directly from already downloaded signed artifacts, the CLI requires all of these bindings; omit none:
+
+```sh
+python3 scripts/ambitions-canon.py task finalize \
+  --authorization "$START_AUTH" \
+  --intake-json "$INTAKE" \
+  --output "$FINAL_AUTH" \
+  --trusted-event <final-trusted-event.json> \
+  --approval-attestation <distinct-final-approval-attestation.json> \
+  --validation-attestation <validation-attestation.json>
+```
+
+Path-root finalization also supplies the original signed delegation through `--delegation-authorization`, `--delegation-event`, and `--delegation-approval`; `.github/workflows/ambitions-canon-authorization.yml` is the canonical concrete wrapper. A bare `pack`, `task start`, or `task finalize` invocation is invalid and must not be used.
 
 ---
 

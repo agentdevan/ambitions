@@ -10,6 +10,34 @@
 
 This document reconciles the historical 2026-07-09 architecture plan with active canon and current repository evidence. It is an evidence projection, not product law, a task authorization, or an architecture-completion claim. It does not establish runtime Green, device or simulator proof, visual or accessibility approval, privacy/security approval, release readiness, or a 10/10 result.
 
+### Reproducible pack binding
+
+The `.codex/` pack is an ignored execution artifact, not a tracked authority source. Its review binding at program head `02e5474e667243c74184da25723fe97343d9466d` was: canon pack digest `5e2c2ce9fab990e3cb019bb3f66e93dcc34c5d5e83f4a82002741ba46ddab8d6`, semantic intake digest `e244aff6e1489c71a8d78a9aa05b8bf32f85db578ea65a1ea982fa44f7286af2`, issue `CODEX-AUTONOMOUS-REPAIR-DELEGATION`, and authority state `active`. The exact normalized intake needed to reproduce the pack is recorded here so a clean checkout does not depend on the ignored file:
+
+```json
+{
+  "intake_id": "ARCH-MOD-POST-CUTOVER-2026-07-20",
+  "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
+  "requested_authorization_mode": "path-roots",
+  "requested_changed_files": [],
+  "requested_claim_ceiling": "Architecture reconciliation and successor planning for exact evidence-backed scope only; no runtime, device, visual, accessibility, privacy, security, TestFlight, App Store, release, or readiness claim",
+  "requested_max_changed_bytes": 1048576,
+  "requested_max_changed_files": 8,
+  "requested_path_roots": ["docs/qa", "docs/superpowers/plans"],
+  "requested_proof": ["focused-red-green", "independent-review", "offline-determinism", "one-covering-set"],
+  "requested_requirement_ids": ["CONST-PROOF-EVIDENCE-001", "CONST-RUNTIME-MUTATION-001", "RUNTIME-MUTATION-SEQUENCE-001", "SYSTEM-PERSISTENCE-ATOMIC-001"],
+  "requested_rollback": ["close the draft program pull request without merge", "revert the reconciliation and successor-plan commits"],
+  "requested_scope": ["proof.evidence", "runtime.mutation-invariant", "runtime.mutation-sequence", "system.persistence.atomicity"],
+  "requested_skill_adapters": ["ambitions-architecture-tree-enforcement", "ambitions-ios-quality-gate", "ambitions-release-proof-honesty", "ambitions-source-truth-authority"],
+  "requested_task_type": "docs",
+  "requested_validation": ["authority-sprawl", "canon-audit", "canon-build-check", "canon-unit", "git-diff-check", "independent-review-evidence", "skill-conformance"],
+  "schema_version": 1,
+  "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION"
+}
+```
+
+Materialize that JSON as `<intake.json>`, then reproduce and validate the bounded pack with `python3 scripts/ambitions-canon.py pack --issue-json <intake.json>` and `python3 scripts/ambitions-canon.py pack --check .codex/canon-packs/5e2c2ce9fab990e3cb019bb3f66e93dcc34c5d5e83f4a82002741ba46ddab8d6/codex-autonomous-repair-delegation-docs.json`. The generated pack remains procedural evidence only; active `docs/canon/`, a platform-signed task authorization, and exact finalization remain controlling.
+
 ## Evidence taxonomy
 
 | Evidence class | Meaning in this reconciliation | Current posture |
