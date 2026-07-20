@@ -347,6 +347,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     task_finalize_parser.add_argument(
         "--validation-attestation", type=Path, action="append", default=[]
     )
+    task_finalize_parser.add_argument("--delegation-authorization", type=Path)
+    task_finalize_parser.add_argument("--delegation-event", type=Path)
+    task_finalize_parser.add_argument("--delegation-approval", type=Path)
     amend_parser = subparsers.add_parser(
         "amend", help="prepare a governed temporary canon amendment"
     )
@@ -1354,6 +1357,31 @@ def _task(root: Path, arguments: argparse.Namespace) -> int:
             _read_json_argument(root, path, "AUTH_VALIDATION_READ")
             for path in arguments.validation_attestation
         )
+        delegation_authorization = (
+            None
+            if arguments.delegation_authorization is None
+            else _read_json_argument(
+                root,
+                arguments.delegation_authorization,
+                "AUTH_DELEGATION_START_READ",
+            )
+        )
+        delegation_event = (
+            None
+            if arguments.delegation_event is None
+            else _read_json_argument(
+                root, arguments.delegation_event, "AUTH_DELEGATION_EVENT_READ"
+            )
+        )
+        delegation_approval = (
+            None
+            if arguments.delegation_approval is None
+            else _read_json_argument(
+                root,
+                arguments.delegation_approval,
+                "AUTH_DELEGATION_APPROVAL_READ",
+            )
+        )
         receipt = task_finalize(
             repo_root=root,
             authorization=authorization,
@@ -1364,6 +1392,9 @@ def _task(root: Path, arguments: argparse.Namespace) -> int:
             approval_attestations=approvals,
             validation_attestations=validations,
             verification_epoch=verification_epoch,
+            delegation_start_authorization=delegation_authorization,
+            delegation_start_event=delegation_event,
+            delegation_start_approval=delegation_approval,
         )
         write_authorization_output(
             root, arguments.output, receipt, kind="finalization"

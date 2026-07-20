@@ -197,6 +197,9 @@ class Task24CliIntegrationTests(unittest.TestCase):
         self.assertIn("--output", start_help)
         finalize_help = cli("task", "finalize", "--help").stdout
         self.assertIn("--authorization", finalize_help)
+        self.assertIn("--delegation-authorization", finalize_help)
+        self.assertIn("--delegation-event", finalize_help)
+        self.assertIn("--delegation-approval", finalize_help)
         self.assertIn("--output", finalize_help)
 
     def test_exact_live_task24_policy_builds_release_pack_and_start_fails_without_platform_approval(

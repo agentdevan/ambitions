@@ -1142,6 +1142,13 @@ class StartFinalizeTests(unittest.TestCase):
                 "private key bytes\n",
             ),
             (
+                "scripts/canon-signer.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "def sign(payload): ...\n",
+            ),
+            (
                 "Native/Resources/auth.plist",
                 "Native",
                 "AUTH_APPROVAL_MISSING",
