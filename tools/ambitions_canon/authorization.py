@@ -17,6 +17,7 @@ import shutil
 import stat
 import subprocess
 import tempfile
+import time
 import tomllib
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PurePosixPath
@@ -1413,7 +1414,7 @@ def task_start(
             "verification epoch must match the positive platform event epoch",
         )
     if evaluation_epoch is None:
-        evaluation_epoch = verification_epoch
+        evaluation_epoch = max(verification_epoch, int(time.time()))
     if (
         isinstance(evaluation_epoch, bool)
         or not isinstance(evaluation_epoch, int)
@@ -1722,6 +1723,11 @@ def task_finalize(
     if dict(trusted_bindings) != authorization.get("trusted_bindings"):
         raise AuthorizationError("AUTH_BINDING_STALE", "trusted state changed after task start")
     normalized_intake = validate_task_intake(intake_data)
+    effective_evaluation_epoch = (
+        max(verification_epoch, int(time.time()))
+        if evaluation_epoch is None
+        else evaluation_epoch
+    )
     intake_digest = hashlib.sha256(canonical_json_bytes(normalized_intake)).hexdigest()
     if intake_digest != authorization.get("intake_digest"):
         raise AuthorizationError("AUTH_INTAKE_STALE", "request changed after task start")
@@ -1736,7 +1742,7 @@ def task_finalize(
         policy_data=policy_data,
         approval_attestations=approval_attestations,
         verification_epoch=verification_epoch,
-        evaluation_epoch=evaluation_epoch,
+        evaluation_epoch=effective_evaluation_epoch,
     )
     immutable_keys = (
         "schema_version",
@@ -1777,9 +1783,7 @@ def task_finalize(
         repo_root=repo_root,
         current_authorization=recomputed,
         policy_data=policy_data,
-        evaluation_epoch=(
-            verification_epoch if evaluation_epoch is None else evaluation_epoch
-        ),
+        evaluation_epoch=effective_evaluation_epoch,
         delegation_start_authorization=delegation_start_authorization,
         delegation_start_event=delegation_start_event,
         delegation_start_approval=delegation_start_approval,

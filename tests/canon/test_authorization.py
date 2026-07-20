@@ -1498,6 +1498,21 @@ class StartFinalizeTests(unittest.TestCase):
                     verification_epoch=1_900_000_000,
                     evaluation_epoch=1_900_003_600,
                 )
+            with mock.patch.object(
+                authorization_module.time,
+                "time",
+                return_value=1_900_003_600,
+            ), self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_EXPIRED"):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(repo, base, head),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
             release_intake = root_intake("src")
             release_intake["requested_scope"] = ["release"]
             release_bindings, release_policy = trusted_context(
@@ -1790,6 +1805,25 @@ class StartFinalizeTests(unittest.TestCase):
                     validation_attestations=validations,
                     verification_epoch=1_900_000_100,
                     evaluation_epoch=1_900_003_600,
+                    delegation_start_authorization=delegation_start,
+                    delegation_start_event=delegation_event,
+                    delegation_start_approval=delegation_approval,
+                )
+            with mock.patch.object(
+                authorization_module.time,
+                "time",
+                return_value=1_900_003_600,
+            ), self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_EXPIRED"):
+                task_finalize(
+                    repo_root=repo,
+                    authorization=start,
+                    intake_data=intake_data,
+                    trusted_event_data=trusted_event,
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(final_approval,),
+                    validation_attestations=validations,
+                    verification_epoch=1_900_000_100,
                     delegation_start_authorization=delegation_start,
                     delegation_start_event=delegation_event,
                     delegation_start_approval=delegation_approval,
