@@ -267,7 +267,7 @@ _MAX_LOCAL_UNTRACKED_FILES = 256
 _MAX_LOCAL_UNTRACKED_FILE_BYTES = 8 * 1024 * 1024
 _MAX_LOCAL_UNTRACKED_TOTAL_BYTES = 64 * 1024 * 1024
 _MAX_DELEGATED_DELETIONS = 8
-_MAX_DELEGATION_LIFETIME_SECONDS = 3600
+_MAX_DELEGATION_LIFETIME_SECONDS = 7200
 _OUTPUT_ROOTS = {
     "authorization": PurePosixPath(".codex/task-authorization"),
     "finalization": PurePosixPath(".codex/task-finalization"),

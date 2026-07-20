@@ -599,6 +599,7 @@ def event(
     workflow_run_id: int = 24001,
     workflow_run_attempt: int = 1,
     consumption_generation: int = 1,
+    expires_in_seconds: int = 3600,
     completed_task_receipts: tuple[tuple[str, str], ...] = (),
 ) -> dict[str, object]:
     policy = load_base_policy(repo, base)
@@ -614,7 +615,7 @@ def event(
         "trusted_head_sha": head,
         "merge_base_sha": run(repo, "merge-base", base, head),
         "verification_epoch": verification_epoch,
-        "expires_at_epoch": verification_epoch + 3600,
+        "expires_at_epoch": verification_epoch + expires_in_seconds,
         "workflow_run_id": workflow_run_id,
         "workflow_run_attempt": workflow_run_attempt,
         "consumption_generation": consumption_generation,
@@ -1620,6 +1621,50 @@ class StartFinalizeTests(unittest.TestCase):
                 verification_epoch=1_900_000_000,
             )
             self.assertEqual(first["computed_authorized_files"], ["src/new.py"])
+            two_hour_event = event(
+                repo,
+                base,
+                head,
+                workflow_run_id=24003,
+                expires_in_seconds=7200,
+            )
+            two_hour_approval = approval(
+                repo,
+                base,
+                head,
+                hashlib.sha256(canonical_json_bytes(intake_data)).hexdigest(),
+                trusted_bindings,
+                event_data=two_hour_event,
+                one_time_use_nonce="nonce-two-hour",
+            )
+            two_hour = task_start(
+                repo_root=repo,
+                mode="ci-pr-range",
+                intake_data=intake_data,
+                trusted_event_data=two_hour_event,
+                trusted_bindings=trusted_bindings,
+                policy_data=trusted_policy,
+                approval_attestations=(two_hour_approval,),
+                verification_epoch=1_900_000_000,
+            )
+            self.assertEqual(two_hour["computed_authorized_files"], ["src/new.py"])
+            with self.assertRaisesRegex(AuthorizationError, "AUTH_EVENT_EXPIRED"):
+                task_start(
+                    repo_root=repo,
+                    mode="ci-pr-range",
+                    intake_data=intake_data,
+                    trusted_event_data=event(
+                        repo,
+                        base,
+                        head,
+                        workflow_run_id=24004,
+                        expires_in_seconds=7201,
+                    ),
+                    trusted_bindings=trusted_bindings,
+                    policy_data=trusted_policy,
+                    approval_attestations=(),
+                    verification_epoch=1_900_000_000,
+                )
             with self.assertRaisesRegex(AuthorizationError, "AUTH_APPROVAL_MISMATCH"):
                 task_start(
                     repo_root=repo,
@@ -3887,7 +3932,7 @@ class IndependentReviewEvidenceTests(unittest.TestCase):
         validate_job = workflow.split("\n  validate:\n", 1)[1].split(
             "\n  attest:\n", 1
         )[0]
-        self.assertIn("timeout-minutes: 55", validate_job)
+        self.assertIn("timeout-minutes: 90", validate_job)
         self.assertIn("delegation_start_run_id:", workflow)
         self.assertIn("--delegation-authorization", workflow)
         self.assertIn("--delegation-event", workflow)
