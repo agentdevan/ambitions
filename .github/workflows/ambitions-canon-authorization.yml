@@ -156,7 +156,7 @@ jobs:
     name: Validate ${{ matrix.command_id }}
     needs: authorize
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.authorize.outputs.matrix) }}

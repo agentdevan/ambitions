@@ -94,7 +94,7 @@
   "trusted_workflow": {
     "app_id": "15368",
     "check_identity": "ambitions-canon-authorization",
-    "digest": "1844787ea9a707819f3f7e0fd99fce3eee01c147122109ea3d784a2ba031214c",
+    "digest": "4329d168c952cad144aaa7e477f8bc5cb5c7165074763b392c73bb70df34e982",
     "integration_id": "github-actions",
     "path": ".github/workflows/ambitions-canon-authorization.yml",
     "ref": "refs/heads/main"
