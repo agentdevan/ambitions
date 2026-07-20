@@ -1135,6 +1135,13 @@ class StartFinalizeTests(unittest.TestCase):
                 "PASSWORD=hunter2\n",
             ),
             (
+                "scripts/id_rsa",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "private key bytes\n",
+            ),
+            (
                 "Native/Resources/auth.plist",
                 "Native",
                 "AUTH_APPROVAL_MISSING",

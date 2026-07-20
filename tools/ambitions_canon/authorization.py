@@ -4003,6 +4003,7 @@ def _is_hard_delegation_boundary(
             "secret",
             "signing-key",
             "signing-material",
+            "private-key",
             "api-key",
             "apikey",
             "access-token",
@@ -4021,7 +4022,12 @@ def _is_hard_delegation_boundary(
         for marker in ("deploy", "publish", "release", "testflight", "app-store")
     ):
         return True
-    if PurePosixPath(path).name.casefold().startswith(".env"):
+    name = PurePosixPath(path).name.casefold()
+    if name.startswith(".env"):
+        return True
+    if name in {"id_dsa", "id_ecdsa", "id_ed25519", "id_rsa"}:
+        return True
+    if name.startswith("ssh_host_") and name.endswith("_key"):
         return True
     return PurePosixPath(path).suffix.casefold() in {
         ".cer",
