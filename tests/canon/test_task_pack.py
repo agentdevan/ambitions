@@ -408,7 +408,7 @@ class TaskIntakeTests(unittest.TestCase):
             "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
             "issue_reference": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
             "requested_task_type": "mechanical",
-            "requested_scope": ["ordinary-repair"],
+            "requested_scope": ["proof.evidence"],
             "requested_requirement_ids": ["CONST-PROOF-EVIDENCE-001"],
             "requested_changed_files": [],
             "requested_validation": ["canon-unit"],

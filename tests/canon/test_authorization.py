@@ -2959,8 +2959,9 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
         self.assertEqual(delegation["approval_policy_ids"], ["owner-gate@1"])
         self.assertEqual(
             delegation["scopes"],
-            ["AUTHORITY-AMENDMENT-001", "ordinary-repair"],
+            ["AUTHORITY-AMENDMENT-001"],
         )
+        self.assertNotIn("ordinary-repair", delegation["scopes"])
         self.assertEqual(
             delegation["authorization_modes"], ["exact-files", "path-roots"]
         )
@@ -2974,6 +2975,15 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
         self.assertEqual(
             delegation["delegated_requirement_mode"],
             "base-canon-requirements",
+        )
+        authorization_module._validate_delegated_canon_domains(
+            ROOT,
+            run(ROOT, "rev-parse", "HEAD"),
+            policy,
+            {
+                "requested_scope": ["proof.evidence"],
+                "requested_requirement_ids": ["CONST-PROOF-EVIDENCE-001"],
+            },
         )
         self.assertGreater(delegation["maximum_changed_files"], 0)
         self.assertGreater(delegation["maximum_changed_bytes"], 0)

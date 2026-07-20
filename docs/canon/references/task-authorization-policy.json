@@ -230,8 +230,7 @@
         "CONST-PROOF-EVIDENCE-001"
       ],
       "scopes": [
-        "AUTHORITY-AMENDMENT-001",
-        "ordinary-repair"
+        "AUTHORITY-AMENDMENT-001"
       ],
       "source_owner": "canon-governance",
       "task_id": "CODEX-AUTONOMOUS-REPAIR-DELEGATION",
