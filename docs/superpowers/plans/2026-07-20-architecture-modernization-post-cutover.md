@@ -4,441 +4,317 @@
 
 **Goal:** Close the smallest evidence-backed architecture gaps after the canon cutover without widening authority, inventing a fixed target tree, or claiming runtime or release readiness before current proof exists.
 
-**Architecture:** Work proceeds from inventory truth to mutation authority, owner-bounded compatibility migrations, external-effect reconciliation, proof normalization, composition and navigation repair, one measured compiler-boundary candidate, and final evidence reconciliation. Every train begins with a new child intake and canon pack, uses RED → GREEN → REFACTOR, and remains independently reviewable and reversible.
+**Architecture:** Work proceeds from inventory truth to mutation authority, owner-bounded compatibility migrations, external-effect reconciliation, proof normalization, composition and navigation repair, one measured compiler-boundary candidate, and final evidence reconciliation. Every source-changing child uses its own intake, fresh canon pack, RED → GREEN → REFACTOR loop, review, finalization, and reversible commit.
 
 **Tech Stack:** Swift 6.3.3, SwiftUI Observation, actor-isolated SwiftData, LocalRuntimeOS command/event/replay infrastructure, XCTest, Xcode 26.6 build 17F113, XcodeGen 2.45.4, and Python repository gates.
 
 ## Global Constraints
 
-- Active authority is `docs/canon/`; this plan is guidance, not authority or task authorization.
+- Active authority is `docs/canon/`; this plan is guidance, not authority, task authorization, owner approval, or finalization.
 - Baseline evidence is the 2026-07-20 reconciliation at source head `26a4eee7c98ba62fb92caaac564a58344295656f`.
 - Applicable obligations are `CONST-PROOF-EVIDENCE-001`, `CONST-RUNTIME-MUTATION-001`, `CONSTITUTION`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, and `SYSTEM-PERSISTENCE-REPLAY`.
-- Before each train, create a child intake for only that train and generate a fresh bounded pack with `python3 scripts/ambitions-canon.py pack`; no source edit is authorized by this document.
-- Re-derive path scope, tests, gates, and claim ceiling from live canon and current source before the first edit; stop if either differs from this plan.
-- Run `python3 scripts/ambitions-canon.py task start` before tracked edits and exact-diff `python3 scripts/ambitions-canon.py task finalize` before final review.
-- Keep XcodeGen authoritative: edit `project.yml` when configuration changes, then regenerate; never hand-edit the generated Xcode project.
-- Route every changed file through `python3 scripts/ambitions-changed-file-test-router.py`; run the union of its focused lanes and every broader trigger it reports.
-- Runtime, persistence, navigation, topology, and proof-gate changes require an independent reviewer who did not author the train.
+- Before each source-changing child, admit only its listed paths, generate a fresh pack with `python3 scripts/ambitions-canon.py pack`, and obtain current authorization with `python3 scripts/ambitions-canon.py task start`.
+- Revalidate each named cohort against live canon, registry rows, and current source. If a path moved, produce a corrected child plan and obtain fresh authority; do not substitute an unnamed path.
+- Run exact-diff `python3 scripts/ambitions-canon.py task finalize` only after implementation, tests, and independent review for that child's final diff.
+- Keep XcodeGen authoritative: edit `project.yml` when configuration changes, regenerate, and never hand-edit the generated Xcode project.
+- Route concrete changed paths with repeated `--path` arguments to `python3 scripts/ambitions-changed-file-test-router.py --execute`; run every command and broader trigger it emits.
+- Runtime, persistence, navigation, topology, and proof-gate changes require a reviewer who did not author the change.
 - No train may claim device, simulator, visual, accessibility, privacy/security, release, App Store, TestFlight, architecture completion, or 10/10 without separate current evidence and authority.
-- This document is not an exact-tree law and must be re-derived whenever live evidence or canon changes.
+- This document is not an exact-tree law, does not authorize later source edits, and must be re-derived whenever live evidence or canon changes.
 - New compiler boundaries are candidate-driven and separate-PR by default; no target creation is implied or authorized here.
 
 ---
 
 ### Task 1: Normalize the Mutation Inventory Without Behavior Change
 
-**Dominant objective:** Make the mutation registry and direct-write inventory a precise, fail-closed work queue by removing only source-proven obsolete rows, consolidating exact duplicates, and correcting classifications only when exact source and tests support the change.
+**Dominant objective:** Make the mutation registry and direct-write inventory a precise, fail-closed work queue by removing only source-proven obsolete rows, consolidating identical rows, and correcting classifications only when named executable tests support the change.
 
-**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, and `CONST-PROOF-EVIDENCE-001`; preserve exhaustive enumeration and prove that every removed or merged row maps to the same live mutation or to source that no longer exists.
+**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, and `CONST-PROOF-EVIDENCE-001`; every removed or merged row must map to absent source or the same owner, mutation identity, and source location.
 
-**Files:**
-Modify `Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift` and `Native/AmbitionsTests/LocalRuntimeOS/Commands/MeaningfulMutationRegistryTests.swift`; modify `scripts/ambitions-runtime-direct-write-audit.py` only if the registry contract itself is wrong; inspect but do not regenerate `docs/qa/local-runtime-proof/current-local-runtime-proof.json`.
+**Child intake and exact scope:** Admit `Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Commands/MeaningfulMutationRegistryTests.swift`, and `scripts/ambitions-runtime-direct-write-audit.py`. Do not regenerate `docs/qa/local-runtime-proof/current-local-runtime-proof.json`.
 
-**Interfaces:**
-- Consumes: current mutation descriptors in `MeaningfulMutationRegistry` and write-path findings from `ambitions-runtime-direct-write-audit.py`.
-- Produces: one canonical registry row per live mutation identity, deterministic duplicate detection, and exact evidence links usable by later owner migrations.
+**Interfaces:** Consume `MeaningfulMutationRegistry` descriptors and audit findings; produce deterministic row identity, duplicate detection, and evidence links for Tasks 2–5.
 
-**Scope and non-goals:** The LocalRuntimeOS registry and its tests are the sole source-edit scope. Do not alter mutation behavior, command execution, storage, feature code, generated proof, or any classification merely because a helper name looks durable.
+**Direct RED/GREEN:** RED is `python3 scripts/ambitions-runtime-direct-write-audit.py` exiting nonzero with 154 unresolved/unproven combined rows. Task-local GREEN is all registry tests passing and the audit reporting an exact, explained delta; the overall audit may remain Red for genuine unproven rows.
 
-**Current failing executable gate:** `python3 scripts/ambitions-runtime-direct-write-audit.py` is Red at the reconciled head; the combined inventory contains 154 unresolved/unproven rows.
+**Focused commands:** `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-01 --scheme AmbitionsUnitTests --test MeaningfulMutationRegistryTests`; `python3 scripts/ambitions-runtime-direct-write-audit.py`; `python3 scripts/ambitions-changed-file-test-router.py --path Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift --path Native/AmbitionsTests/LocalRuntimeOS/Commands/MeaningfulMutationRegistryTests.swift --execute`.
 
-- [ ] **Step 1: Start the bounded child**
+**Scope and non-goals:** No command execution, feature, storage, proof-artifact, or product-behavior change. A shared helper or favorable name is not durability evidence.
 
-  Record a child intake limited to the listed registry files, run `python3 scripts/ambitions-canon.py pack`, and run `python3 scripts/ambitions-canon.py task start` before editing.
+- [ ] **Step 1: Start the child** — Create the bounded intake, fresh pack, and current authorization for the three admitted paths.
+- [ ] **Step 2: RED** — Add table-driven cases for every proven obsolete row, duplicate identity, and unsupported upgraded class; retain failing case names and exit codes.
+- [ ] **Step 3: GREEN** — Remove only source-absent rows, merge only identical identities, and reclassify only rows named by passing executable tests.
+- [ ] **Step 4: REFACTOR** — Centralize deterministic row-identity assertions without changing production behavior.
+- [ ] **Step 5: Verify** — Run all focused commands, canon checks, `git diff --check`, independent runtime-inventory review, exact-diff finalization, and a standalone commit.
 
-- [ ] **Step 2: RED — encode exact stale and duplicate cases**
+**Build/test non-regression:** `MeaningfulMutationRegistryTests` and every concrete router command pass; blocker reduction equals the reviewed stale/duplicate rows and no live mutation disappears.
 
-  Add table-driven tests in `MeaningfulMutationRegistryTests.swift` that fail for each proven obsolete row, duplicate identity, or unsupported upgraded classification. Run the focused registry test through the changed-file router and retain the failing case names and exit code.
+**Rollback:** Revert the standalone commit and discard its lower inventory count from downstream evidence.
 
-- [ ] **Step 3: GREEN — make the minimum registry correction**
-
-  Remove only rows whose referenced source is absent, merge only rows with identical owner, mutation identity, and source location, and reclassify only rows whose existing executable test proves the declared durability class.
-
-- [ ] **Step 4: REFACTOR — enforce deterministic uniqueness**
-
-  Centralize the row-identity assertion in the registry test without changing production behavior; rerun the focused tests and `python3 scripts/ambitions-runtime-direct-write-audit.py`.
-
-- [ ] **Step 5: Route, review, and commit separately**
-
-  Run the changed-file router, canon audit/build checks, skill conformance, authority sprawl, `git diff --check`, and an independent runtime-inventory review. Commit only this train after exact-diff finalization.
-
-**Build/test expectation:** Registry tests and every router-selected app-unit lane pass; the direct-write blocker count may fall only by the number of source-proven stale or duplicate rows, with no new row omitted.
-
-**Rollback:** Revert this train's single commit; do not manually reconstruct deleted rows or carry its lower count into later evidence.
-
-**Maximum evidence claim:** Source-level mutation inventory normalization is complete for the reviewed rows; no mutation is newly proven durable and runtime remains Red unless separately established.
+**Maximum evidence claim:** Source-level inventory normalization is complete for the named rows; no mutation is newly durable and runtime remains Red unless separately established.
 
 ---
 
 ### Task 2: Repair Atomic Mutation Authority in the Committer and Today
 
-**Dominant objective:** Replace pre-authority canonical mutation with one plan → authoritative commit → materialize lineage in `RuntimeCommandMutationCommitter` and the bounded Today flows.
+**Dominant objective:** Replace pre-authority canonical mutation with one plan → authoritative commit → materialize lineage in the committer and the currently observed Today mutation seams.
 
-**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, and `CONST-PROOF-EVIDENCE-001`; prove no canonical state becomes visible before authority and replay converges without duplicate effects.
+**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, and `CONST-PROOF-EVIDENCE-001`; no canonical state becomes visible before authority and replay converges without duplicate effects.
 
-**Files:**
-Modify `Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeCommandMutationCommitter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeTransactionCommitPolicy.swift` as required by the lineage, and only Today owners selected under `Native/Ambitions/Surfaces/Today/`; test with `Native/AmbitionsTests/LocalRuntimeOS/Transactions/RuntimeAtomicCommitTests.swift` and current durable action/receipt tests under `Native/AmbitionsTests/Today/`.
+**Child intake and exact source scope:** Admit `Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeCommandMutationCommitter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeTransactionCommitPolicy.swift`, `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`, `Native/Ambitions/Interaction/TodayCommandActionHandler.swift`, `Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`, and `Native/Ambitions/Core/LocalRuntimeOS/Inspection/TodayReceiptCommandService.swift`.
 
-**Interfaces:**
-- Consumes: `RuntimeCommandMutationCommitter`, `RuntimeTransactionCommitPolicy`, the event journal, and Today command plans.
-- Produces: a single authoritative plan/commit/materialize result whose receipt and replay cursor identify the committed event lineage.
+**Exact tests:** Modify `Native/AmbitionsTests/LocalRuntimeOS/Transactions/RuntimeAtomicCommitTests.swift`, `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`, `Native/AmbitionsTests/Today/TodayClosureRuntimeTests.swift`, `Native/AmbitionsTests/Today/TodayDurableActionMutationIntegrationTests.swift`, `Native/AmbitionsTests/Today/TodayDurableReceiptMutationIntegrationTests.swift`, and `Native/AmbitionsTests/Today/TodayGoalStepActionAtomicityTests.swift`; create `Native/AmbitionsTests/Today/TodayAuthorityLineageFailureInjectionTests.swift`.
 
-**Scope and non-goals:** Limit work to the committer and Today rows named by the fresh child intake. Do not migrate Capture, Goals, Time, You, external effects, or create a second transaction abstraction.
+**Interfaces:** Consume `RuntimeCommandMutationCommitter`, `RuntimeTransactionCommitPolicy`, event journal, Today command handlers, and receipts; produce one committed event lineage with stable command/event identity and replay cursor.
 
-**Current failing executable gate:** `python3 scripts/ambitions-local-runtime-proof.py` and `python3 scripts/ambitions-runtime-direct-write-audit.py` are Red; live inspection identified pre-authority canonical mutation in the committer and Today.
+**Direct RED/GREEN:** RED is `TodayAuthorityLineageFailureInjectionTests` showing visible canonical change on authority failure or double materialization after replay. GREEN is zero pre-authority visibility, one event/receipt/materialization for duplicates, and identical post-relaunch projection.
 
-- [ ] **Step 1: Start the bounded child and freeze row identities**
+**Focused commands:** `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-02 --scheme AmbitionsUnitTests --test RuntimeAtomicCommitTests --test TodayAuthorityLineageFailureInjectionTests --test TodayGoalStepActionAtomicityTests --test TodayDurableActionMutationIntegrationTests --test TodayDurableReceiptMutationIntegrationTests`; `python3 scripts/ambitions-runtime-direct-write-audit.py`; `python3 scripts/ambitions-local-runtime-proof.py`.
 
-  Generate a fresh pack and authorization for the committer plus exact Today rows; record each registry identity before editing so no adjacent mutation is silently absorbed.
+**Scope and non-goals:** Do not migrate Capture, Goals, Time, You, or external effects and do not create a second transaction abstraction.
 
-- [ ] **Step 2: RED — inject failure at every authority boundary**
+- [ ] **Step 1: Start the child** — Freeze the exact Today registry identities, then obtain the child intake, pack, and authorization for the listed files.
+- [ ] **Step 2: RED** — Inject failure before journal write, after journal write before materialization, during materialization, on duplicate command identity, and on relaunch replay.
+- [ ] **Step 3: GREEN** — Calculate without canonical writes, atomically commit authority, then materialize only from the committed result while retaining stable identifiers.
+- [ ] **Step 4: REFACTOR** — Remove the now-unreachable pre-authority branch and keep one narrow committer interface.
+- [ ] **Step 5: Verify** — Run focused tests, both runtime gates, a concrete changed-file router invocation for every modified path, canon checks, independent runtime/persistence review, finalization, and one commit.
 
-  Extend `RuntimeAtomicCommitTests.swift` and the selected Today tests for crash/failure before journal write, after journal write before materialization, materialization retry, duplicate command identity, and replay after relaunch. Verify each new case fails for the pre-authority path.
+**Build/test non-regression:** Focused tests and emitted broader build-for-testing commands pass; every injected failure leaves the exact expected durable and projected state.
 
-- [ ] **Step 3: GREEN — establish one lineage**
+**Rollback:** Revert the commit and its Today registry upgrades together.
 
-  Change the committer and selected Today callers so they calculate a mutation plan without canonical writes, atomically commit authority, then materialize from the committed result. Preserve stable command/event identifiers across retries.
-
-- [ ] **Step 4: REFACTOR — remove the bypass**
-
-  Delete only the now-unreachable pre-authority branch, keep the narrow public interface, and prove ordinary replay does not reissue external work or apply the canonical mutation twice.
-
-- [ ] **Step 5: Route and independently review**
-
-  Run focused transaction and Today tests, both Red gates, the changed-file router union, canon checks, and independent runtime/persistence review before exact-diff finalization and a standalone commit.
-
-**Build/test expectation:** All selected atomic and Today tests pass, router-selected build-for-testing does not regress, and failure injection leaves no pre-authority canonical state at every tested boundary.
-
-**Rollback:** Revert the standalone commit and restore the pre-train registry classifications; never retain new durable labels if the authority repair is reverted.
-
-**Maximum evidence claim:** The named committer and Today rows use the tested authoritative lineage at the reviewed revision; no other domain or app-wide atomicity is proven.
+**Maximum evidence claim:** The named Today paths use the tested lineage at the reviewed revision; no other domain or app-wide atomicity is proven.
 
 ---
 
-### Task 3: Migrate Compatibility Paths in Five Owner-Bounded Subtrains
+### Task 3: Produce and Execute Five Owner-Bounded Compatibility Children
 
-**Dominant objective:** Replace remaining compatibility mutations with the authoritative command lineage without combining independent owners into a mega-diff.
+**Dominant objective:** Turn the current registry rows into five exact child plans, then migrate each owner independently through the Task 2 lineage without a mega-diff.
 
-**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, and `CONST-PROOF-EVIDENCE-001`; every migrated row needs exact failure, retry, restart, and replay evidence.
+**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, and `CONST-PROOF-EVIDENCE-001`; each migrated row needs named failure, retry, restart, receipt, and replay evidence.
 
-**Files and subtrain order:**
-3A is the Today remainder under `Native/Ambitions/Surfaces/Today/` with `Native/AmbitionsTests/Today/`; 3B is Capture under `Native/Ambitions/Surfaces/Capture/` with `Native/AmbitionsTests/Capture/`; 3C is Goals under `Native/Ambitions/Surfaces/Goals/` with `Native/AmbitionsTests/Goals/`; 3D is Time rituals/step lifecycle in `Native/Ambitions/Surfaces/Time/`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+TimeCommands.swift`, and current Time tests; 3E is You preferences/onboarding/startup under `Native/Ambitions/Surfaces/You/` with matching app/startup tests. Each may update `MeaningfulMutationRegistry.swift` only for proven rows.
+**Current cohorts and child-plan outputs:**
 
-**Interfaces:**
-- Consumes: the Task 2 authoritative committer, `RuntimeCommandClient`, domain command executor entry points, and stable command identifiers.
-- Produces: owner-local command plans and receipts with no feature-side canonical write before the authoritative commit.
+| Child plan | Current source cohort | Existing focused tests | Concrete baseline command |
+| --- | --- | --- | --- |
+| `docs/superpowers/plans/2026-07-20-architecture-modernization-today-remainder.md` | `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`, `Native/Ambitions/Interaction/TodayCommandActionHandler.swift`, `Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Inspection/TodayReceiptCommandService.swift` | Existing `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`, `Native/AmbitionsTests/Today/TodayClosureRuntimeTests.swift`, `Native/AmbitionsTests/Today/TodayServiceProjectionTests.swift`; new `Native/AmbitionsTests/Today/TodayRemainderAuthorityLineageTests.swift` | `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-03A --scheme AmbitionsUnitTests --test TodayCommandHandlerTests --test TodayClosureRuntimeTests --test TodayServiceProjectionTests --test TodayRemainderAuthorityLineageTests` |
+| `docs/superpowers/plans/2026-07-20-architecture-modernization-capture.md` | `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureServiceRouting.swift` | Existing `Native/AmbitionsTests/Capture/CaptureViewModelTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/CaptureRoutingTests.swift`, `Native/AmbitionsTests/Persistence/CaptureServiceTests.swift`; new `Native/AmbitionsTests/Capture/CaptureAuthorityLineageTests.swift` | `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-03B --scheme AmbitionsUnitTests --test CaptureViewModelTests --test CaptureRoutingTests --test CaptureServiceTests --test CaptureAuthorityLineageTests` |
+| `docs/superpowers/plans/2026-07-20-architecture-modernization-goals.md` | `Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift`, `Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift`, `Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+10-performMutation.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift` | Existing `Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift`, `Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift`, `Native/AmbitionsTests/Goals/GoalDetailExplainabilityActionTests.swift`, `Native/AmbitionsTests/Services/GoalTeachingSignalServiceTests.swift`; new `Native/AmbitionsTests/Goals/GoalsAuthorityLineageTests.swift` | `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-03C --scheme AmbitionsUnitTests --test CreateGoalViewModelTests --test GoalCreationServiceTests --test GoalDetailExplainabilityActionTests --test GoalTeachingSignalServiceTests --test GoalsAuthorityLineageTests` |
+| `docs/superpowers/plans/2026-07-20-architecture-modernization-time-lifecycle.md` | `Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift`, `Native/Ambitions/Surfaces/Time/Projection/TimeRitualsMutationHelpers.swift`, `Native/Ambitions/Surfaces/Time/Projection/TimeRitualsProjectionService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService+Recurring.swift` | Existing `Native/AmbitionsTests/Time/TimeRitualsProjectionServiceTests.swift`, `Native/AmbitionsTests/Runtime/RecurringStepLifecycleServiceTests.swift`, `Native/AmbitionsTests/Time/TimeDurableMutationIntegrationTests.swift`; new `Native/AmbitionsTests/Time/TimeLifecycleAuthorityLineageTests.swift` | `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-03D --scheme AmbitionsUnitTests --test TimeRitualsProjectionServiceTests --test RecurringStepLifecycleServiceTests --test TimeDurableMutationIntegrationTests --test TimeLifecycleAuthorityLineageTests` |
+| `docs/superpowers/plans/2026-07-20-architecture-modernization-you-startup.md` | `Native/Ambitions/Surfaces/You/YouViewModel.swift`, `Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/State/YouPreferencesCommandService.swift`, `Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift` | Existing `Native/AmbitionsTests/You/YouFeatureServiceTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/State/ObjectStateTests.swift`, `Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift`; new `Native/AmbitionsTests/You/YouStartupAuthorityLineageTests.swift` | `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-03E --scheme AmbitionsUnitTests --test YouFeatureServiceTests --test ObjectStateTests --test OnboardingAndDegradedStateTests --test YouStartupAuthorityLineageTests` |
 
-**Scope and non-goals:** One live owner is one reviewable subtrain, pack, finalization, and commit. Do not share a diff across 3A–3E, move UI ownership, redesign features, or upgrade rows outside the selected owner.
+**Interfaces:** Each child consumes the Task 2 committer, `RuntimeCommandClient`, domain executor, and stable command identities; it produces owner-local plans/receipts with no feature-side canonical write before commit.
 
-**Current failing executable gate:** `python3 scripts/ambitions-runtime-direct-write-audit.py` is Red; the reconciled unproven totals include Today 7, Capture 31, Goals 18, Time 16, and You 9.
+**Direct RED/GREEN:** RED is `python3 scripts/ambitions-runtime-direct-write-audit.py` naming the child's registry rows as unproven, plus a new owner test that fails at a named authority/replay boundary. GREEN is that exact test matrix passing and only its named registry rows upgraded; unrelated blockers remain Red.
 
-- [ ] **Step 1: Start subtrain 3A with exact rows and fresh authority**
+**Focused commands:** Run the applicable table command, `python3 scripts/ambitions-runtime-direct-write-audit.py`, and `python3 scripts/ambitions-local-runtime-proof.py`. Each evidence/design operation writes repeated literal `--path` arguments for every source and test path in its table row into the fixed-path child plan before that plan can request authorization.
 
-  Create a Today-only intake and pack, select only currently live remainder rows, and repeat the following RED → GREEN → REFACTOR cycle before proceeding to 3B.
+**Scope and non-goals:** The parent operation is evidence/design work. Each child plan must name registry IDs, full source paths, test method names, RED reason, GREEN result, and literal router command before any source authorization. Never combine two table rows in one pack, diff, review, or commit.
 
-- [ ] **Step 2: RED — prove the selected owner's failure boundaries**
+- [ ] **Step 1: Produce 03A** — Revalidate Today rows and write the complete Today child plan; stop if any owner or test path differs.
+- [ ] **Step 2: Execute 03A independently** — Obtain its pack/authorization, run TDD, independent review, finalization, and commit.
+- [ ] **Step 3: Repeat in order** — Produce and execute 03B Capture, 03C Goals, 03D Time, and 03E You with separate authorization and commits.
+- [ ] **Step 4: REFACTOR per child** — Delete only that owner's obsolete compatibility branch after replay evidence passes.
+- [ ] **Step 5: Verify parent result** — Run all table commands and both runtime gates; reconcile exact blocker deltas after every child.
 
-  Add focused tests for pre-write failure, post-write/pre-materialize failure, duplicate identity, relaunch replay, and receipt equivalence; retain the expected failures against the compatibility path.
+**Build/test non-regression:** Each child passes its concrete focused and changed-file commands before the next starts; blocker reductions equal exact proven rows.
 
-- [ ] **Step 3: GREEN — route the owner through the authoritative client**
+**Rollback:** Revert only the failing owner's commit and its registry changes; earlier owner commits remain independently reversible.
 
-  Replace only the selected direct mutation with `RuntimeCommandClient`/executor planning and the Task 2 committer lineage; preserve feature-visible behavior and stable identifiers.
-
-- [ ] **Step 4: REFACTOR — delete the selected compatibility path**
-
-  Remove the obsolete branch, update only its exact registry rows, run the owner-focused tests, direct-write audit, LocalRuntimeProof audit, and changed-file router union.
-
-- [ ] **Step 5: Review, finalize, and commit the owner independently**
-
-  Obtain independent runtime/persistence review, finalize the exact diff, and commit before starting the next owner. Repeat Steps 1–5 for 3B Capture, 3C Goals, 3D Time, and 3E You with separate packs and commits.
-
-**Build/test expectation:** Each owner subtrain passes its focused tests and router-selected broader lanes before the next begins; existing app-unit build-for-testing must not regress and blocker reductions must equal exact proven rows.
-
-**Rollback:** Revert only the failing owner's commit and restore only its registry rows; completed earlier owners remain independently revertible and reviewable.
-
-**Maximum evidence claim:** Only the named rows in each committed owner subtrain are proven migrated; the remaining inventory and app-wide runtime posture keep their prior status.
+**Maximum evidence claim:** Only registry rows named in each completed child are migrated; all other rows retain their prior status.
 
 ---
 
-### Task 4: Reconcile External Ingestion and Effects
+### Task 4: Reconcile External Ingestion and Effects in Three Children
 
-**Dominant objective:** Make Share and App Intent intake durably acknowledge or remove input only after command success, then prove EventKit, notification, widget, and other external-effect ordering.
+**Dominant objective:** Acknowledge Share/App Intent input only after command success, then prove durable, idempotent EventKit/notification/widget/external effects.
 
-**Requirements and proof obligations:** `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, `CONST-RUNTIME-MUTATION-001`, and `CONST-PROOF-EVIDENCE-001`; external work must be durable, deduplicated, replay-safe, and offline-safe.
+**Requirements and proof obligations:** `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, `CONST-RUNTIME-MUTATION-001`, and `CONST-PROOF-EVIDENCE-001`; prove crash-before-write, crash-after-write-before-ack, duplicate, timeout, offline relaunch, and ordinary replay non-reissue.
 
-**Files:**
-Modify exact Share/App Intent owners selected from `Native/Ambitions/`, exact adapters selected from `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/`, and notification/EventKit clients only when named by intake; test under `Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/`; update `MeaningfulMutationRegistry.swift` only for exact proven rows.
+**Exact children:** 04A Share owns `Native/AmbitionsShareExtension/ShareIntakeView.swift`, `Native/AmbitionsShareExtension/ShareViewController.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ShareExtensionIntake.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift`, `Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift`, and new `Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/ExternalIngestionAcknowledgementTests.swift`; 04B App Intent owns `Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift`, `Native/AmbitionsTests/App/AppIntentRoutingTests.swift`, `Native/AmbitionsTests/App/AppIntentCommandRoutingInventoryTests.swift`, and new `Native/AmbitionsTests/App/AppIntentAcknowledgementReplayTests.swift`; 04C effects owns `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/NotificationOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalReconciliation.swift`, `Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/ExternalWritesTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/SideEffectLedgerRepositoryTests.swift`, `Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift`, `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift`, and new `Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/ExternalEffectReplayTests.swift`.
 
-**Interfaces:**
-- Consumes: durable command receipts, stable ingestion identifiers, external-write intent records, and replay cursors.
-- Produces: acknowledgement/removal after command success and idempotent external-effect dispatch keyed by the durable intent identity.
+**Interfaces:** Consume durable command receipts, stable ingestion IDs, side-effect intent records, and replay cursors; produce acknowledgement/removal after success and idempotent effect completion keyed by durable intent identity.
 
-**Scope and non-goals:** Start with Share/App Intent acknowledgement, then review EventKit, notifications, widgets, and remaining adapters as separately reviewable children. Do not place external APIs inside the atomic local store transaction or claim network delivery.
+**Direct RED/GREEN:** RED is new `ExternalIngestionAcknowledgementTests` or `ExternalWritesTests` proving premature acknowledgement or duplicate dispatch in one of the six required scenarios. GREEN is retained intake until success, one durable completion identity, and zero ordinary-replay reissue in all six cases.
 
-**Current failing executable gate:** `python3 scripts/ambitions-local-runtime-proof.py` is Red and external-effect coverage is incomplete; the registry retains unproven App Intents, notifications, widgets/extensions, and external-adapter rows.
+**Focused commands:** 04A: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-04A --scheme AmbitionsUnitTests --test ExternalCreationImportServiceTests --test ExternalIngestionAcknowledgementTests`; 04B: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-04B --scheme AmbitionsUnitTests --test AppIntentRoutingTests --test AppIntentCommandRoutingInventoryTests --test AppIntentAcknowledgementReplayTests`; 04C: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-04C --scheme AmbitionsUnitTests --test ExternalWritesTests --test SideEffectLedgerRepositoryTests --test EventKitIntegrationServiceTests --test LocalNotificationFoundationTests --test ExternalEffectReplayTests`.
 
-- [ ] **Step 1: Authorize one ingestion or effect child**
+**Scope and non-goals:** Use `docs/superpowers/plans/2026-07-20-architecture-modernization-external-share.md`, `docs/superpowers/plans/2026-07-20-architecture-modernization-external-app-intent.md`, and `docs/superpowers/plans/2026-07-20-architecture-modernization-external-effects.md`. Each receives a separate intake, pack, authorization, review, finalization, and commit. Do not place external APIs inside the local atomic transaction or claim third-party delivery.
 
-  Generate a fresh pack naming one live owner, its adapter, exact tests, and exact registry rows; never combine all external surfaces in one diff.
+- [ ] **Step 1: RED** — Create the exact new acknowledgement test and six-case failure matrix before changing source.
+- [ ] **Step 2: GREEN** — Commit local authority, dispatch through the narrow adapter, persist completion, then acknowledge/remove intake.
+- [ ] **Step 3: REFACTOR** — Remove feature-side retry flags only after the durable intent owns retries.
+- [ ] **Step 4: Verify each child** — Run its focused command, both runtime gates, literal changed-path router command, canon checks, and independent runtime/persistence review.
+- [ ] **Step 5: Commit separately** — Complete 04A, then 04B, then 04C without shared diffs.
 
-- [ ] **Step 2: RED — encode the complete failure matrix**
+**Build/test non-regression:** All six failure/replay cases pass per child, existing feature tests pass, and ordinary replay emits no duplicate external call.
 
-  Add executable cases for crash-before-write, crash-after-write-before-ack, duplicate delivery, timeout, offline relaunch, and ordinary replay non-reissue. Verify the current path fails the relevant case before implementation.
+**Rollback:** Revert one child and its registry classifications; do not retain completion fixtures written by an incompatible schema.
 
-- [ ] **Step 3: GREEN — persist intent and acknowledge after success**
-
-  Give ingestion and effect records stable identities, commit local authority first, dispatch through the narrow adapter, persist completion, and remove or acknowledge intake only after the command receipt succeeds.
-
-- [ ] **Step 4: REFACTOR — unify idempotency at the adapter seam**
-
-  Remove duplicate feature-side retry flags only after tests prove the durable intent owns retry state; retain cancellation and timeout semantics.
-
-- [ ] **Step 5: Route, review, and repeat by live owner**
-
-  Run external-write tests, focused ingestion tests, both runtime gates, router-selected lanes, and independent runtime/persistence review; finalize and commit one owner before authorizing the next.
-
-**Build/test expectation:** The six required failure/replay cases pass for each owner, existing focused feature behavior passes, and ordinary replay issues no duplicate external call.
-
-**Rollback:** Revert one owner commit and restore its prior acknowledgement plus registry state; do not preserve completion markers written by an incompatible schema in test fixtures.
-
-**Maximum evidence claim:** Durable ordering and replay behavior are proven only for the reviewed external owner under tested failures; third-party delivery, device behavior, and all other adapters remain unproven.
+**Maximum evidence claim:** Ordering and replay are proven only for each completed child; device delivery and other adapters remain unproven.
 
 ---
 
 ### Task 5: Normalize Crash, Replay, Migration, Corruption, and Proof Gates
 
-**Dominant objective:** Repair stale or circular proof checks, run current executable evidence at one revision, and regenerate LocalRuntimeProof only after every required check is Green.
+**Dominant objective:** Repair stale/circular checks, run current executable evidence at one revision, and regenerate LocalRuntimeProof only after every required input is Green.
 
-**Requirements and proof obligations:** `CONST-PROOF-EVIDENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, `RUNTIME-MUTATION-SEQUENCE-001`, and `CONST-RUNTIME-MUTATION-001`; proof producers may consume source and executed results, never their own prior Green artifact.
+**Requirements and proof obligations:** `CONST-PROOF-EVIDENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, `SYSTEM-PERSISTENCE-REPLAY`, `RUNTIME-MUTATION-SEQUENCE-001`, and `CONST-RUNTIME-MUTATION-001`; proof producers never consume their own prior Green artifact.
 
-**Files:**
-Modify `scripts/ambitions-local-runtime-proof.py` and only stale runtime gate dependencies identified by executable failure under `scripts/`; test `RuntimeAtomicCommitTests.swift`, `RuntimeDomainEventReplayTests.swift`, and exact migration/repair/corruption suites under `Native/AmbitionsTests/LocalRuntimeOS/`; regenerate `docs/qa/local-runtime-proof/current-local-runtime-proof.json` only after Green.
+**Child intake and exact scope:** Admit `scripts/ambitions-local-runtime-proof.py`, new `scripts/tests/test_ambitions_local_runtime_proof.py`, `Native/AmbitionsTests/LocalRuntimeOS/Transactions/RuntimeAtomicCommitTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/EventJournal/RuntimeDomainEventReplayTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Repair/DryRunMigrationTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Repair/MigrationPlannerTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Repair/RestoreRollbackTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Repair/StoreInvariantCheckerTests.swift`, and—only after computed Green—`docs/qa/local-runtime-proof/current-local-runtime-proof.json`.
 
-**Interfaces:**
-- Consumes: current test results, mutation registry output, direct-write audit output, migration/corruption evidence, revision, toolchain, and destination metadata.
-- Produces: a non-circular LocalRuntimeProof artifact bound to the exact source SHA and executable result set.
+**Interfaces:** Consume current command results, registry/direct-write output, revision, toolchain, destination, migration, rollback, and corruption evidence; produce a deterministic non-circular artifact bound to those inputs.
 
-**Scope and non-goals:** Repair only failing proof dependencies demonstrated at current HEAD. Do not hand-edit Green status, suppress blockers, accept ancestor output, or regenerate while any required check is Red.
+**Direct RED/GREEN:** RED is `python3 scripts/ambitions-local-runtime-proof.py` reporting 17/20 checks and 157 blockers, or unit tests accepting a stale SHA, missing result, or circular artifact. GREEN is all required inputs passing at one SHA and deterministic regeneration; any missing input exits nonzero.
 
-**Current failing executable gate:** `python3 scripts/ambitions-local-runtime-proof.py` reports Red with 20 checks, 17 pass, 3 fail, and 157 blockers; the checked-in July 4 Green artifact is stale.
+**Focused commands:** `python3 -m unittest scripts.tests.test_ambitions_local_runtime_proof`; `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-05 --scheme AmbitionsUnitTests --test RuntimeAtomicCommitTests --test RuntimeDomainEventReplayTests --test DryRunMigrationTests --test MigrationPlannerTests --test RestoreRollbackTests --test StoreInvariantCheckerTests`; `python3 scripts/ambitions-local-runtime-proof.py`.
 
-- [ ] **Step 1: Start the proof-normalization child**
+**Scope and non-goals:** Repair only failures reproduced by these commands. Do not hand-edit Green, suppress blockers, accept ancestor output, or regenerate while a required input is Red.
 
-  Generate a pack naming the proof script, exact failing dependencies, exact executable suites, and the generated artifact; record current SHA and toolchain before edits.
+- [ ] **Step 1: Start the child** — Bind intake/pack/authorization to the listed script, tests, and conditional generated artifact.
+- [ ] **Step 2: RED** — Prove ancestor SHA, missing result, circular self-consumption, migration failure, rollback failure, and corruption failure each force Red.
+- [ ] **Step 3: GREEN** — Bind proof to structured current results, SHA, toolchain, and destination while preserving every unresolved blocker.
+- [ ] **Step 4: REFACTOR** — Normalize input ordering and run the complete matrix once at one revision.
+- [ ] **Step 5: Verify** — Regenerate only after computed Green; run concrete router paths, canon checks, and independent provenance review before finalization and commit.
 
-- [ ] **Step 2: RED — prove stale and circular inputs fail closed**
+**Build/test non-regression:** Script and XCTest suites pass at one SHA; generation is deterministic and stale/missing inputs return nonzero.
 
-  Add or extend script tests so an ancestor artifact, missing command result, mismatched SHA, circular self-consumption, and failed migration/corruption lane each force Red.
+**Rollback:** Revert script and generated artifact together; label the restored artifact stale.
 
-- [ ] **Step 3: GREEN — bind gates to current executable inputs**
-
-  Replace purged paths and circular artifact reads with current source, command exit codes, structured results, revision, toolchain, and destination metadata; preserve all blockers until their evidence passes.
-
-- [ ] **Step 4: REFACTOR — execute the current proof matrix once**
-
-  Run atomic, replay, restart, migration, corruption, duplicate, direct-write, and registry lanes at one revision. Regenerate `current-local-runtime-proof.json` only if the gate independently computes Green.
-
-- [ ] **Step 5: Independently review proof provenance**
-
-  Have a non-author verify every artifact input and claim ceiling, run canon checks plus the changed-file router, finalize the exact diff, and commit proof normalization separately.
-
-**Build/test expectation:** All proof-script tests and required runtime suites pass at one SHA; generation is deterministic and a missing or stale input returns nonzero rather than retaining Green.
-
-**Rollback:** Revert script and generated artifact together; restore the prior artifact only as explicitly stale historical evidence, never as current Green.
-
-**Maximum evidence claim:** LocalRuntimeProof is current and Green only for its enumerated checks at the bound revision; it does not prove simulator, device, visual, accessibility, security, or release readiness.
+**Maximum evidence claim:** LocalRuntimeProof is Green only for enumerated checks at the bound revision; no simulator, device, visual, accessibility, security, or release claim follows.
 
 ---
 
-### Task 6: Repair Composition Boundaries
+### Task 6: Repair the Four Observed Composition Bypasses
 
-**Dominant objective:** Remove feature-level raw container reach-through, optional live dependencies, default live runtime construction, globals, and NotificationCenter product routing through narrow injected clients and typed actions.
+**Dominant objective:** Replace the observed raw container, optional runtime, and NotificationCenter dependencies with narrow injected clients/actions constructed at the app root.
 
-**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `CONSTITUTION`, and `CONST-PROOF-EVIDENCE-001`; preserve centralized construction while proving no replacement creates a second runtime authority.
+**Requirements and proof obligations:** `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `CONSTITUTION`, and `CONST-PROOF-EVIDENCE-001`; replacement seams must not create a second runtime authority.
 
-**Files:**
-Modify `Native/Ambitions/App/AppContainerFactory.swift`, `RuntimeCommandClient.swift`, `AmbitionsRuntimeServices.swift`, and one exact owner under `Native/Ambitions/Surfaces/`; test `Native/AmbitionsTests/App/AppContainerFactoryTests.swift` and `Native/AmbitionsTests/LocalRuntimeOS/Boundary/RuntimeCommandClientTests.swift`.
+**Exact children:** 06A owns `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`, `Native/Ambitions/Stage/Overlays/QuietCommandSheetView.swift`, `Native/Ambitions/App/AppContainerFactory.swift`, `Native/AmbitionsTests/App/AppContainerFactoryTests.swift`, and `Native/AmbitionsTests/App/GlobalComposerHardeningTests.swift`; 06B owns `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimeCommandClient.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift`, `Native/AmbitionsTests/LocalRuntimeOS/Boundary/RuntimeCommandClientTests.swift`, and `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`; 06C owns `Native/Ambitions/Surfaces/You/YouScreen+04-YouLifeContextSurface.swift` and new `Native/AmbitionsTests/You/YouLifeContextRoutingTests.swift`.
 
-**Interfaces:**
-- Consumes: `RuntimeCommandClient`, `AmbitionsRuntimeServices`, and `AppContainerFactory` composition roots.
-- Produces: non-optional feature dependencies and typed injected actions/events whose live implementations are constructed only at the app root.
+**Interfaces:** Consume `RuntimeCommandClient`, `AmbitionsRuntimeServices`, typed shell/navigation actions, and `AppContainerFactory`; produce non-optional injected values whose live forms are constructed only at the app root.
 
-**Scope and non-goals:** Migrate one reach-through/global/routing owner per child. Do not move canonical state into view models, introduce a service locator, rewrite unrelated views, or combine navigation ownership with composition work.
+**Direct RED/GREEN:** Run `test -z "$(rg -n '@Environment\(\\\.appContainer\)|RuntimeCommandClient\? = nil|NotificationCenter\.default' Native/Ambitions/App/AppShellActivatedCaptureSeam.swift Native/Ambitions/Stage/Overlays/QuietCommandSheetView.swift Native/Ambitions/Surfaces/Today/TodayViewModel.swift Native/Ambitions/Surfaces/You/YouScreen+04-YouLifeContextSurface.swift)"`. RED is exit 1 with hits in all four current files; GREEN is exit 0 with no hit in those files plus passing injected-client tests.
 
-**Current failing executable gate:** `python3 scripts/ambitions-architecture-10-scorecard-check.py` is Red at the reconciled head; source inspection records direct container reach-through, optional/default-live/global dependencies, and NotificationCenter routing.
+**Focused commands:** 06A: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-06A --scheme AmbitionsUnitTests --test AppContainerFactoryTests --test GlobalComposerHardeningTests`; 06B: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-06B --scheme AmbitionsUnitTests --test RuntimeCommandClientTests --test TodayCommandHandlerTests`; 06C: `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-06C --scheme AmbitionsUnitTests --test YouLifeContextRoutingTests`.
 
-- [ ] **Step 1: Select and authorize one composition bypass**
+**Scope and non-goals:** Use `docs/superpowers/plans/2026-07-20-architecture-modernization-composition-container.md`, `docs/superpowers/plans/2026-07-20-architecture-modernization-composition-today-runtime.md`, and `docs/superpowers/plans/2026-07-20-architecture-modernization-composition-you-routing.md`. Do not move canonical state into views, create a service locator, or combine navigation ownership changes.
 
-  Use source plus tests to name one exact owner, dependency, factory construction point, and focused test files in a fresh child intake and pack.
+- [ ] **Step 1: RED** — Run the source audit and add recording-client tests that expose each implicit dependency.
+- [ ] **Step 2: GREEN** — Add the smallest typed interface, construct it in `AppContainerFactory`, and require explicit injection.
+- [ ] **Step 3: REFACTOR** — Delete the admitted bypass and give previews explicit inert fixtures.
+- [ ] **Step 4: Verify per child** — Run the source audit, child focused command, literal router command, canon checks, and independent runtime/composition review.
+- [ ] **Step 5: Commit separately** — Finish 06A, 06B, and 06C with separate packs, finalizations, and commits.
 
-- [ ] **Step 2: RED — make implicit live construction observable**
+**Build/test non-regression:** The direct audit exits 0 only after all three children, focused tests pass, and emitted build-for-testing commands pass.
 
-  Add focused tests that omit the dependency or install a recording client and fail when the feature constructs a live runtime, reaches through the container, reads a global, or posts product routing through NotificationCenter.
+**Rollback:** Revert the affected child including factory wiring and tests; remove any unused public interface introduced by that child.
 
-- [ ] **Step 3: GREEN — inject the narrow dependency**
-
-  Add the smallest typed query, command, or action interface to the existing boundary, construct its live value in `AppContainerFactory`, and require the feature to receive it explicitly.
-
-- [ ] **Step 4: REFACTOR — remove the bypass**
-
-  Delete the selected optional/default/global/NotificationCenter path, keep previews supplied with explicit inert fixtures, and ensure only the app root constructs live implementations.
-
-- [ ] **Step 5: Route and independently review**
-
-  Run factory and boundary tests, selected feature tests, architecture check, direct-write audit, changed-file router union, and independent runtime/composition review before a standalone commit; repeat with a new child for the next owner.
-
-**Build/test expectation:** Focused dependency tests pass, preview/test construction stays explicit, router-selected build-for-testing passes, and no new container reach-through or global live constructor appears.
-
-**Rollback:** Revert the one-owner commit, including its factory wiring and tests; do not leave an unused public client interface behind.
-
-**Maximum evidence claim:** The reviewed feature owner uses explicit narrow composition; app-wide dependency cleanup and runtime behavior outside the focused tests remain unproven.
+**Maximum evidence claim:** The four named bypasses are removed; app-wide composition and runtime behavior outside these files remain unproven.
 
 ---
 
-### Task 7: Repair Navigation Responsibility Without Moving Authority
+### Task 7: Repair the Observed Navigation Responsibility Bypasses
 
-**Dominant objective:** Preserve Stage canonical ownership while making navigation presentation-only and routing all transitions through one typed reducer/action boundary.
+**Dominant objective:** Preserve Stage canonical ownership while replacing direct Stage property writes and NotificationCenter product routing with typed reducer actions.
 
-**Requirements and proof obligations:** `CONSTITUTION`, `CONST-PROOF-EVIDENCE-001`, and where a transition triggers commands, `CONST-RUNTIME-MUTATION-001` plus `RUNTIME-MUTATION-SEQUENCE-001`; prove presentation cannot mutate canonical domain state directly.
+**Requirements and proof obligations:** `CONSTITUTION`, `CONST-PROOF-EVIDENCE-001`, and for command-triggering transitions `CONST-RUNTIME-MUTATION-001` plus `RUNTIME-MUTATION-SEQUENCE-001`; presentation cannot mutate canonical domain state.
 
-**Files:**
-Modify exact owners under `Native/Ambitions/Stage/`, including `StageReducer.swift` and `StageStore.swift`, plus one proven direct-mutation/NotificationCenter caller at a time; test `Native/AmbitionsTests/App/StageThinnessOwnershipTests.swift`.
+**Child intake and exact scope:** Admit `Native/Ambitions/Stage/AmbitionsStage.swift`, `Native/Ambitions/Stage/StageReducer.swift`, `Native/Ambitions/Stage/StageStore.swift`, `Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift`, `Native/AmbitionsTests/App/StageThinnessOwnershipTests.swift`, `Native/AmbitionsTests/App/StageMotionRoutingTests.swift`, and `Native/AmbitionsTests/App/AppShellNavigationTests.swift`.
 
-**Interfaces:**
-- Consumes: typed Stage actions and current `StageReducer` transitions.
-- Produces: presentation-only navigation intents reduced by Stage, with command work delegated through injected runtime actions rather than navigation state.
+**Interfaces:** Consume typed Stage actions and reducer transitions; produce presentation-only intents reduced by Stage, with domain mutation delegated through injected runtime actions.
 
-**Scope and non-goals:** Keep `Native/Ambitions/Stage/` as canonical owner. Do not create a `Navigation/` authority, move domain state into routes, alter deep-link behavior without a failing test, or amend canon inside this train.
+**Direct RED/GREEN:** Run `test -z "$(rg -n 'navigation\.(activeOverlay|continuityReceipt)[[:space:]]*=|NotificationCenter\.default' Native/Ambitions/Stage/AmbitionsStage.swift Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift)"`. RED is exit 1 for current direct writes and notification routing; GREEN is exit 0 plus passing reducer, motion, restoration, and shell-navigation tests.
 
-**Current failing executable gate:** `python3 scripts/ambitions-architecture-10-scorecard-check.py` is Red; current source evidence records split navigation ownership, direct Stage mutations, and NotificationCenter routing.
+**Focused commands:** `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-07 --scheme AmbitionsUnitTests --test StageThinnessOwnershipTests --test StageMotionRoutingTests --test AppShellNavigationTests`; `python3 scripts/ambitions-changed-file-test-router.py --path Native/Ambitions/Stage/AmbitionsStage.swift --path Native/Ambitions/Stage/StageReducer.swift --path Native/Ambitions/Stage/StageStore.swift --path Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift --execute`.
 
-- [ ] **Step 1: Authorize one direct transition bypass**
+**Scope and non-goals:** Keep `Native/Ambitions/Stage/` canonical. Do not create a `Navigation/` authority, store domain state in routes, or change deep-link/restoration behavior without a failing test.
 
-  Generate a fresh pack naming the exact caller, Stage action/reducer/store files, focused test, and any runtime action boundary touched.
+- [ ] **Step 1: RED** — Retain the direct-audit result and add reducer tests for overlay, continuity-receipt, and motion-current-action transitions.
+- [ ] **Step 2: GREEN** — Add minimum typed actions and deterministic reducer transitions; inject the motion action sink.
+- [ ] **Step 3: REFACTOR** — Delete property assignment and notification routes while preserving deep-link/restoration semantics.
+- [ ] **Step 4: Verify** — Run direct audit, focused and router commands, direct-write audit, canon checks, and independent navigation/runtime review.
+- [ ] **Step 5: Finish** — Finalize the exact diff and commit this navigation child alone.
 
-- [ ] **Step 2: RED — prove the bypass violates one reducer transition**
+**Build/test non-regression:** Direct audit exits 0, all three focused suites and emitted broader builds pass, and no `Navigation/` target/path appears.
 
-  Extend `StageThinnessOwnershipTests.swift` and the caller's focused test so direct Stage mutation or NotificationCenter routing fails while a typed Stage action remains observable.
+**Rollback:** Revert the navigation commit; never leave both notification and typed-action routes active.
 
-- [ ] **Step 3: GREEN — route through the typed action**
-
-  Add the minimum Stage action and deterministic reducer transition, inject it into the caller, and delegate any domain mutation to the existing runtime command boundary.
-
-- [ ] **Step 4: REFACTOR — remove duplicate route ownership**
-
-  Delete the selected direct mutation/notification observer, preserve deep-link and restoration semantics, and keep navigation models free of canonical domain storage.
-
-- [ ] **Step 5: Route and independently review**
-
-  Run Stage ownership tests, caller tests, architecture and direct-write audits, router-selected broader lanes, and independent navigation/runtime review before a standalone commit.
-
-**Build/test expectation:** The selected transition passes reducer, restoration, and caller tests; no new `Navigation/` target/path authority exists and build-for-testing does not regress.
-
-**Rollback:** Revert the single transition commit and restore the exact prior route; do not leave duplicate notification and typed-action routes enabled together.
-
-**Maximum evidence claim:** The reviewed transition is presentation-only under Stage ownership; broader navigation consistency, simulator behavior, and visual correctness remain unproven.
+**Maximum evidence claim:** The named transitions are presentation-only under Stage; broader navigation, simulator behavior, and visual correctness remain unproven.
 
 ---
 
-### Task 8: Evaluate One Measured Compiler-Boundary Candidate
+### Task 8: Evaluate the Eleven-File External-Surface Compiler Candidate
 
-**Dominant objective:** Evaluate one dependency-closed cohort—prefer the duplicated external-surface contracts if still live—through current candidate policy before any target creation.
+**Dominant objective:** Evaluate the current duplicated external-surface cohort through candidate policy before any target creation.
 
-**Requirements and proof obligations:** `CONSTITUTION` and `CONST-PROOF-EVIDENCE-001`; demonstrate dependency closure, ownership compatibility, compile duplication reduction, focused test viability, and measured build impact without weakening LocalRuntimeOS authority.
+**Requirements and proof obligations:** `CONSTITUTION` and `CONST-PROOF-EVIDENCE-001`; prove dependency closure, ownership compatibility, duplicate reduction, focused-test viability, and measured build impact without weakening LocalRuntimeOS ownership.
 
-**Files:**
-Modify evaluation data only in `docs/qa/architecture/current-module-graph.json`, `module-candidate-policy.json` when its live schema requires it, and `domain-module-boundary.json`; inspect `project.yml`, `Packages/AmbitionsDesignSystem/`, `Native/Ambitions/Core/Time/`, and selected cohort paths; run `scripts/ambitions-module-candidate-gate.py`.
+**Exact operation scope:** Update only `docs/qa/architecture/current-module-graph.json`, `docs/qa/architecture/module-candidate-policy.json`, and `docs/qa/architecture/domain-module-boundary.json`. Evaluate the 11 current `duplicateCompilationRisks` paths under `Native/Ambitions/Projection/ExternalSnapshots/`: `ExternalSurfaceSnapshotContracts.swift`, `ExternalSurfaceContractModels.swift`, `ExternalWidgetProjection.swift`, `SharedExternalSnapshotStore.swift`, `ExternalSurfaceActionPayloads.swift`, `ExternalObjectReopeningProjector.swift`, `ExternalSurfaceGlanceState.swift`, `ExternalSurfaceControlContracts.swift`, `ExternalSurfaceScopeAllowlist.swift`, `NextStepActivityAttributes.swift`, and `ExternalCreationContracts.swift`.
 
-**Interfaces:**
-- Consumes: current module graph, candidate-policy schema, source-consumer graph, compile-inclusion graph, focused tests, and baseline timing metadata.
-- Produces: one accepted or rejected candidate record with exact cohort paths, consumers, ownership result, measurement protocol, results, blockers, and rollback decision.
+**Interfaces:** Consume graph/policy schemas, compile inclusions, outside consumers, focused tests, and timing metadata; produce one reproducible accepted or rejected candidate record.
 
-**Scope and non-goals:** This train evaluates one cohort in one PR. Do not create a target, edit `project.yml`, move/delete source, select generic `Features/`, or infer approval from the 45/166 lexical separability triage.
+**Initial condition and exits:** `python3 -c 'import json; d=json.load(open("docs/qa/architecture/current-module-graph.json")); assert d["duplicateCompilationRiskCount"] == 11'` confirms the current duplicate-membership finding. Acceptable exit A is evidence-backed rejection with no topology change. Acceptable exit B is measured policy acceptance followed by a new separately authorized extraction plan/PR; this operation never creates the target.
 
-**Current failing executable gate:** `python3 scripts/ambitions-module-candidate-gate.py` currently authorizes zero future targets and rejects the whole-domain candidate; 11 production paths are multiply compiled with 17 extra inclusions.
+**Focused commands:** `bash scripts/ambitions-xcode-test-focused.sh --batch ARCH-MOD-08 --scheme AmbitionsUnitTests --test ExternalSurfaceSnapshotBoundaryTests --test ExternalSurfaceActionPayloadTests --test ExternalSurfaceControlContractsTests --test ExternalWidgetProjectionTests --test AppGroupSnapshotWriterInventoryTests`; `python3 scripts/ambitions-module-candidate-gate.py --policy docs/qa/architecture/module-candidate-policy.json --root . --json`; `python3 scripts/ambitions-changed-file-test-router.py --path docs/qa/architecture/current-module-graph.json --path docs/qa/architecture/module-candidate-policy.json --path docs/qa/architecture/domain-module-boundary.json --execute`.
 
-- [ ] **Step 1: Authorize an evaluation-only child**
+**Scope and non-goals:** Evaluation only in one PR. Do not edit `project.yml`, create a target, move/delete source, evaluate generic `Features/`, or treat 45/166 lexical separability as compiler proof.
 
-  Generate a fresh pack naming the exact cohort and the three QA data files. If duplicated external-surface contracts are no longer dependency-closed, record that rejection and stop rather than substituting an unreviewed cohort.
+- [ ] **Step 1: Start the evidence child** — Obtain a fresh pack and authorization for the three QA files and the fixed 11-file read-only cohort.
+- [ ] **Step 2: RED evidence gap** — Record missing dependency, ownership, test, or measurement fields; do not call candidate rejection a failure.
+- [ ] **Step 3: GREEN operation** — Add exact consumers, compile inclusions, clean baseline, repeated build samples, variance, and independent ownership review.
+- [ ] **Step 4: REFACTOR** — Normalize ordering/metadata and reproduce the policy result from a clean checkout without configuration edits.
+- [ ] **Step 5: Choose an allowed exit** — Commit evidence-backed rejection, or commit acceptance evidence and create `docs/superpowers/plans/2026-07-20-architecture-modernization-external-surface-extraction.md` under separate future authorization.
 
-- [ ] **Step 2: RED — run policy on current evidence**
+**Build/test non-regression:** Current targets stay configured identically; test and measurement results record revision, compiler, cache state, command, repetitions, and variance.
 
-  Refresh the current graph inputs without changing targets, run `python3 scripts/ambitions-module-candidate-gate.py`, and retain the exact rejection reasons for dependency closure, ownership, consumers, tests, or measurements.
+**Rollback:** Revert the evaluation-data commit; no target or source move exists to unwind.
 
-- [ ] **Step 3: GREEN — complete evidence, not implementation**
-
-  Add only missing measured facts: exact paths, compile inclusions, outside consumers, focused tests, clean baseline, repeated candidate build samples, and independent ownership review. A valid rejection is Green for this evaluation train.
-
-- [ ] **Step 4: REFACTOR — make the decision reproducible**
-
-  Normalize candidate data ordering and metadata, rerun the gate from a clean checkout state, and confirm the same accept/reject result without editing project configuration.
-
-- [ ] **Step 5: Independently review and close the candidate PR**
-
-  Obtain topology and ownership review, run canon checks, architecture inventory, changed-file routing, and exact-diff finalization. If accepted, create a separate future PR and fresh authorization for target work.
-
-**Build/test expectation:** Existing targets and tests remain byte-for-byte configured; measurements identify compiler, revision, cache state, command, repetitions, and variance, and the candidate gate result is reproducible.
-
-**Rollback:** Revert only the evaluation-data commit; no target or source move exists to unwind.
-
-**Maximum evidence claim:** One candidate is measured and accepted or rejected by current policy; acceptance is not authorization to create a target and rejection is not a whole-app topology conclusion.
+**Maximum evidence claim:** This 11-file cohort is measured and accepted or rejected; acceptance is not target authorization and rejection is not a whole-app topology conclusion.
 
 ---
 
 ### Task 9: Reconcile Architecture Closeout Evidence
 
-**Dominant objective:** Re-derive current scorecards and the whole-program obligation map from live canon, current source, current executable evidence, and independent review without collapsing dimensions into an artificial score.
+**Dominant objective:** Re-derive scorecards and the requirement/owner/blocker map from active canon, current source, executable evidence, and independent review without an artificial aggregate score.
 
-**Requirements and proof obligations:** `CONST-PROOF-EVIDENCE-001`, `CONSTITUTION`, `CONST-RUNTIME-MUTATION-001`, `RUNTIME-MUTATION-SEQUENCE-001`, `SYSTEM-PERSISTENCE-ATOMIC-001`, and `SYSTEM-PERSISTENCE-REPLAY`; every status must identify current evidence, owner, blocker, and proof ceiling.
+**Requirements and proof obligations:** All six global IDs; every status names current evidence, owner, blocker, unblock condition, and proof ceiling.
 
-**Files:**
-Modify `docs/qa/architecture/architecture-10-scorecard.md`, `architecture-10-scorecard.json`, `current-module-graph.json`, and `scripts/ambitions-architecture-10-scorecard-check.py`; update `architecture-modernization-current-state.md` only if current evidence changes it.
+**Child intake and exact scope:** Admit `docs/qa/architecture/architecture-10-scorecard.md`, `docs/qa/architecture/architecture-10-scorecard.json`, `docs/qa/architecture/current-module-graph.json`, `scripts/ambitions-architecture-10-scorecard-check.py`, new `scripts/tests/test_ambitions_architecture_10_scorecard_check.py`, and `docs/qa/architecture/architecture-modernization-current-state.md` only when current evidence changes it.
 
-**Interfaces:**
-- Consumes: canon traceability, authority checks, architecture inventory, mutation/direct-write results, LocalRuntimeProof, module-candidate decisions, changed-scope validation, build/test artifacts, and independent review findings.
-- Produces: a deterministic dimensioned scorecard plus one requirement/owner/blocker map with explicit Source, Build, Runtime, Simulator, Visual, and Unverified evidence classes.
+**Interfaces:** Consume canon traceability, architecture inventory, mutation/direct-write results, LocalRuntimeProof, candidate decision, changed-scope validation, build/test artifacts, and review findings; produce a deterministic dimensioned scorecard and obligation map.
 
-**Scope and non-goals:** Repair stale purged-path derivation and reconcile current evidence only. Do not force Green, average unlike proof dimensions, delete historical plans, claim release readiness, or label the program 10/10.
+**Direct RED/GREEN:** RED is the scorecard checker citing purged paths or tests accepting ancestor evidence, missing owner/blocker/unblock fields, unsupported Green, missing proof taxonomy, or 10/10. GREEN is deterministic derivation at one SHA even when evidence dimensions remain Red/Yellow/Unverified.
 
-**Current failing executable gate:** `python3 scripts/ambitions-architecture-10-scorecard-check.py` is Red because current derivation still references stale purged paths; strict quality, direct-write, and LocalRuntimeProof are also Red at the reconciliation head.
+**Focused commands:** `python3 -m unittest scripts.tests.test_ambitions_architecture_10_scorecard_check`; `python3 scripts/ambitions-architecture-10-scorecard-check.py --self-test`; `python3 scripts/ambitions-architecture-10-scorecard-check.py --scorecard docs/qa/architecture/architecture-10-scorecard.json`; `python3 scripts/ambitions-architecture-inventory.py --json`; all four canon checks and `git diff --check`.
 
-- [ ] **Step 1: Start the closeout child at the final program head**
+**Binding completion rule:** Begin closeout only when every retained Task 1–8 train is implemented or explicitly blocked by a named owner-only decision or external dependency. Every blocked row must include the exact requirement ID, named owner/dependency, current evidence path/result, and objective unblock condition; “deferred,” “later,” or scheduling preference is not a blocker.
 
-  After Tasks 1–8 are merged or explicitly deferred, generate a fresh pack naming exact scorecard files, derivation script, current evidence inputs, and the changed-scope validation union.
+**Scope and non-goals:** Repair stale derivation and reconcile current evidence. Do not force Green, average unlike dimensions, delete history, claim release readiness, or label the program 10/10.
 
-- [ ] **Step 2: RED — assert active-canon and current-evidence derivation**
+- [ ] **Step 1: Start at the final program head** — Verify the binding completion rule, then generate the closeout intake, pack, and authorization.
+- [ ] **Step 2: RED** — Add tests for purged paths, ancestor-as-current evidence, incomplete blocker rows, unsupported Green, missing taxonomy, and aggregate 10/10.
+- [ ] **Step 3: GREEN** — Use active canon/current results, preserve every unproven dimension, and map every remaining requirement to owner/dependency, evidence, and unblock condition.
+- [ ] **Step 4: REFACTOR** — Run canon audit/build/skill/authority/conflict/traceability, architecture inventory/scorecard, strict quality, direct-write, LocalRuntimeProof, candidate gate, concrete router commands, and current build/test lanes.
+- [ ] **Step 5: Review and finish** — Give an independent reviewer the final diff, commands, artifact SHAs, unresolved map, and claim ceiling; correct findings before finalization and commit.
 
-  Add checker cases that fail on purged authority paths, ancestor evidence presented as current, missing owner/blocker fields, unsupported Green, missing proof taxonomy, or any aggregate 10/10 claim.
+**Build/test non-regression:** Derivation checks are deterministic; every lane records command, SHA, toolchain/destination when applicable, exit code, and retained result.
 
-- [ ] **Step 3: GREEN — re-derive every dimension**
+**Rollback:** Revert scorecard, graph, checker, tests, and reconciliation together; retain prior projections only with stale/ancestor labels.
 
-  Replace stale inputs with active canon and current executable results, preserve Red/Yellow/Unverified wherever evidence is incomplete, and map every remaining requirement to an exact owner and blocker.
-
-- [ ] **Step 4: REFACTOR — run the changed-scope validation union**
-
-  Run canon audit/build/skill/authority/conflict/traceability gates, architecture inventory and scorecard checks, strict quality, direct-write audit, LocalRuntimeProof, module candidate gate, changed-file router union, and current build/test lanes required by touched scope.
-
-- [ ] **Step 5: Obtain independent whole-program review**
-
-  Give the reviewer the final diff, all current command results, artifact SHAs, unresolved map, and claim ceiling. Correct every unsupported claim before exact-diff finalization and the closeout commit.
-
-**Build/test expectation:** The scorecard check is deterministic and Green as a derivation check even when individual dimensions remain Red; every executed lane records command, revision, toolchain/destination where applicable, exit code, and retained result.
-
-**Rollback:** Revert scorecard, graph, checker, and reconciliation changes together; retain prior projections only with their original stale/ancestor labels.
-
-**Maximum evidence claim:** The architecture program is reconciled at the named revision with dimension-specific status, owners, blockers, and current evidence. Architecture completion, 10/10, runtime Green, simulator/device proof, visual/accessibility approval, privacy/security approval, and release readiness remain unavailable unless each is independently proven.
+**Maximum evidence claim:** The program is reconciled at the named revision with dimensioned status, owners, blockers, and current evidence; completion, 10/10, runtime Green, device/simulator, visual/accessibility, privacy/security, and release claims remain unavailable unless independently proven.
 
 ---
 
-## Program Execution Order and Stop Conditions
+## Program Order and Stop Conditions
 
-- [ ] Complete Task 1 before using registry totals to authorize later owner migrations.
-- [ ] Complete Task 2 before any compatibility subtrain depends on the authoritative committer.
-- [ ] Complete Task 3 owner subtrains separately; a blocked owner does not authorize widening another owner.
-- [ ] Complete Task 4 only after its selected domain command path is authoritative.
-- [ ] Complete Task 5 after required runtime implementations are merged, because proof regeneration must observe the final executable lineage.
-- [ ] Execute Tasks 6 and 7 as separate one-owner commits; neither may create new canonical authority.
-- [ ] Execute Task 8 as evaluation-only and use a separate PR for any accepted implementation.
-- [ ] Execute Task 9 last against the actual final head and unresolved queue.
+- [ ] Complete Task 1 before using inventory totals in later child plans.
+- [ ] Complete Task 2 before compatibility children depend on its committer lineage.
+- [ ] Complete Tasks 3 and 4 in their listed child order with separate packs and commits.
+- [ ] Complete Task 5 only after required runtime children are integrated at one revision.
+- [ ] Complete Tasks 6 and 7 as separate children; neither may create canonical authority.
+- [ ] Complete Task 8 as evidence-only; any target implementation requires its own plan, authorization, and PR.
+- [ ] Complete Task 9 last and enforce its binding implemented-or-named-blocker rule.
 
-Stop immediately when canon, the generated pack, live source ownership, a failing gate, or independent review contradicts the planned scope. Replace the child intake and pack rather than widening a diff. A successful local test never waives authorization, and an accepted source review never upgrades absent runtime, simulator, visual, accessibility, security, or release evidence.
+Stop when canon, pack, source ownership, a direct gate, or independent review contradicts scope. Replace the child plan and authority rather than widening a diff. Local tests do not waive authorization, and source review does not upgrade absent runtime, simulator, visual, accessibility, security, or release evidence.
