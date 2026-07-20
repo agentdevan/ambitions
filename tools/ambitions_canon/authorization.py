@@ -4007,11 +4007,16 @@ def _is_hard_delegation_boundary(
     if any(
         marker in flattened
         for marker in (
+            "authority-amendment",
+            "authorization-policy",
+            "authorizationpolicy",
             "credential",
             "secret",
             "signing-key",
             "signing-material",
             "private-key",
+            "trust-anchor",
+            "trustanchor",
             "api-key",
             "apikey",
             "access-token",

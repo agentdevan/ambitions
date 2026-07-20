@@ -1149,6 +1149,20 @@ class StartFinalizeTests(unittest.TestCase):
                 "def sign(payload): ...\n",
             ),
             (
+                "scripts/trust-anchor-rotation.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "anchor = 'replacement'\n",
+            ),
+            (
+                "scripts/authorization-policy.py",
+                "scripts",
+                "AUTH_BOUNDARY_APPROVAL_REQUIRED",
+                1024 * 1024,
+                "allow = True\n",
+            ),
+            (
                 "Native/Resources/auth.plist",
                 "Native",
                 "AUTH_APPROVAL_MISSING",
