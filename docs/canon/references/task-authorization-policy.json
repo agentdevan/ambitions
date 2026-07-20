@@ -196,6 +196,7 @@
         "docs/canon/schemas/task-intake.schema.json",
         "docs/canon/schemas/trusted-event.schema.json",
         "docs/canon/schemas/validation-attestation.schema.json",
+        "scripts/ambitions-canon.py",
         "scripts/ambitions-canon-independent-review-evidence.py",
         "scripts/ambitions-canon-platform-attest.py",
         "scripts/ambitions-canon-platform-run-command.py",

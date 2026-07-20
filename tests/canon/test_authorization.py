@@ -2837,6 +2837,10 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
             "docs/canon/references/task-25-authorization-benchmark-policy.json",
             delegation["protected_paths"],
         )
+        self.assertIn(
+            "scripts/ambitions-canon.py",
+            delegation["protected_paths"],
+        )
 
         issue_snapshot = policy["issue_state"]
         issues = {
