@@ -29,7 +29,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Nativ
 
 # Security and Privacy
 
-This shadow standard owns cross-cutting threat, hostile-input, dependency, secret, entitlement-safety, and abuse-proof obligations. Data classification and egress decisions remain with the owning system specification.
+This standard owns cross-cutting threat, hostile-input, dependency, secret, entitlement-safety, and abuse-proof obligations. Data classification and egress decisions remain with the owning system specification.
 
 ## SECURITY-001 — Threat-model coverage
 - **Concept:** `engineering.security.threat-model`
@@ -125,11 +125,11 @@ A dependency MUST have a named owner, product need, native-alternative review, l
 - **Verification:** `REVIEW-DEPENDENCY-MINIMAL-001`
 - **Supersedes:** none
 
-A dependency MUST NOT be added for trivial convenience or architecture theater; binaries require explicit approval.
+A dependency MUST NOT be added for trivial convenience or architecture theater. Binary dependencies MUST have verifiable provenance and integrity, license and privacy review, vulnerability scanning, version pinning, tests, and a removal plan.
 
 Minimal dependency posture MUST NOT add a dependency for trivial convenience or architecture theater.
 
-Binary dependencies MUST require explicit approval.
+Unknown, unverifiable, or unscannable binary dependencies MUST NOT ship.
 
 ## SUPPLY-003 — SBOM and vulnerability response
 - **Concept:** `engineering.supply.sbom`
@@ -208,12 +208,12 @@ Applies to every trust boundary while exact data handling, continuity, account, 
 <!-- canon-section: requirements -->
 The requirements consolidate useful Articles 33, 38, and 39 without duplicating system-specific privacy law.
 <!-- canon-section: exceptions -->
-Exceptions require owner-approved threat analysis, minimum scope, expiry/removal, tests, privacy impact, proof, claim ceiling, and rollback; no exception permits private graph egress to forbidden destinations.
+Exceptions require documented threat analysis, minimum scope, removal conditions, tests, privacy impact, and rollback; no exception permits private graph egress to forbidden destinations.
 <!-- canon-section: verification -->
-Verify with threat review, scanners, fuzz/abuse tests, dependency inventory, egress inspection, entitlement state tests, and exact-scope independent security review.
+Verify with threat analysis, scanners, fuzz/abuse tests, dependency inventory, egress inspection, and entitlement-state tests.
 <!-- canon-section: source-ownership -->
 Target owners are `PrivacySecurity/`, `Boundary/`, exact adapters, and `Quality/Security/`;
 <!-- canon-section: proof -->
-Exact-commit evidence includes threat review, abuse/fuzz results, secret and dependency scans, SBOM, egress inspection, entitlement-state fixtures, incidents, reviewers, and artifacts.
+Verification includes threat analysis, abuse/fuzz results, secret and dependency scans, SBOM, egress inspection, entitlement-state fixtures, and incident regressions.
 <!-- canon-section: amendment-impact -->
-Amendments identify assets, threats, destinations, data classes, secrets, dependencies, entitlements, source/tests, incidents, proof, approvals, migration, claim ceiling, and rollback.
+When security or privacy behavior changes, update affected assets, threats, destinations, data classes, secrets, dependencies, entitlements, source/tests, migrations, and rollback handling.

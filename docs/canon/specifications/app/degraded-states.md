@@ -800,7 +800,7 @@ gate_requirement_ids = []
 
 # App Degraded States
 
-This shadow specification defines a shared classification and presentation contract for whole-app degradation. Owning features retain their specific failure semantics.
+This specification defines a shared classification and presentation contract for whole-app degradation. Owning features retain their specific failure semantics.
 
 ## APP-DEGRADED-FAILURE-TAXONOMY-001 — Failures keep distinct user consequences
 

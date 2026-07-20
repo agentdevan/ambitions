@@ -1170,7 +1170,7 @@ gate_requirement_ids = []
 
 # Contextual Permissions
 
-This shadow specification defines permission request, denial, recovery, and reconciliation behavior.
+This specification defines permission request, denial, recovery, and reconciliation behavior.
 
 ## APP-PERMISSIONS-CONTRACT-001 — Every request explains its boundary
 

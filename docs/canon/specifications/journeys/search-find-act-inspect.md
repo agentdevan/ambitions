@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Stage/", "Native/Ambitions/Core/LocalRuntimeO
 
 # Search Find Act Inspect
 
-This shadow journey coordinates Search routing and canonical-owner actions without duplicating object lifecycle or Trust disclosure law.
+This journey coordinates Search routing and canonical-owner actions without duplicating object lifecycle or Trust disclosure law.
 
 ## JOURNEY-SEARCH-FIND-ACT-INSPECT-001 — Search never becomes mutation authority
 

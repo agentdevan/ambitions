@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Stage/Moti
 
 # Schedule Reflow
 
-This shadow journey coordinates changed-time consequences without redefining Step, Event, placement, recurrence, or recovery lifecycle.
+This journey coordinates changed-time consequences without redefining Step, Event, placement, recurrence, or recovery lifecycle.
 
 ## JOURNEY-TIME-DIRECT-MANIPULATION-001 — Spatial change previews conflict before commit
 

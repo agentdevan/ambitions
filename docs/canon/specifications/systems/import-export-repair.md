@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native
 
 # Import Export and Repair
 
-This shadow target coordinates hostile-input import, reviewed export, and protected repair.
+This target coordinates hostile-input import, reviewed export, and protected repair.
 
 ## SYSTEM-IMPORTED-SOURCE-001 — Imported source changes never silently alter native truth
 

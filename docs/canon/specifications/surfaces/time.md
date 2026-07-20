@@ -1207,7 +1207,7 @@ inverse_command_id = "CMD-TIME-DETAIL-EDITING-002-INVERSE"
 trigger_command_id = "CMD-TIME-DETAIL-EDITING-002"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TIME-DETAIL-EDITING-002"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TIME-DETAIL-EDITING-002-INVERSE"
 label = "Restore prior time values"
 canonical_owner = "surface.time.detail-command-contract"
@@ -1408,7 +1408,7 @@ inverse_command_id = "CMD-TIME-DETAIL-VIEWING-002-INVERSE"
 trigger_command_id = "CMD-TIME-DETAIL-VIEWING-002"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TIME-DETAIL-VIEWING-002"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TIME-DETAIL-VIEWING-002-INVERSE"
 label = "Restore trashed time item"
 canonical_owner = "surface.time.detail-command-contract"
@@ -1593,7 +1593,7 @@ inverse_command_id = "CMD-TIME-DETAIL-VIEWING-008-INVERSE"
 trigger_command_id = "CMD-TIME-DETAIL-VIEWING-008"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TIME-DETAIL-VIEWING-008"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TIME-DETAIL-VIEWING-008-INVERSE"
 label = "Return time item to Trash"
 canonical_owner = "surface.time.detail-command-contract"
@@ -3834,7 +3834,7 @@ verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
 
 # Time
 
-This shadow specification defines Time as the intended first-class temporal operating surface.
+This specification defines Time as the intended first-class temporal operating surface.
 
 ## SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001 — First-class Life Calendar target
 
@@ -3918,7 +3918,7 @@ Apple Calendar bridge, routing, and external-diff failures MUST affect only thei
 - **Verification:** `PROOF-TIME-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual authority MUST use stable external IDs and keep approved package authority and implementation evidence distinct. Owner-approved VSP-04 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` is the Time visual target. Candidate naming does not weaken its durable owner approval. The package does not prove calendar parity, direct-manipulation behavior, SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+Visual references MUST use stable external IDs and keep the selected package direction distinct from current implementation behavior. Selected VSP-04 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` is the Time visual target. Candidate naming does not change the selected product direction. The package does not demonstrate current calendar parity, direct-manipulation, SwiftUI, accessibility, device, or runtime behavior.
 
 ## SPEC-SURFACE-TIME-TODAY-CONTROL-001 — Return to current temporal context
 - **Concept:** `surface.time.today-control`
@@ -4171,7 +4171,7 @@ Calendar replacement claims require current calendar-grade scenario, migration, 
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Time range loading, recurrence expansion, scrolling, direct manipulation, named-edit preview, and List search MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative temporal/recurrence data scale, warm/cold state, measurement tool, percentile/maximum, frame/scroll metric, and regression threshold.
+Time range loading, recurrence expansion, scrolling, direct manipulation, named-edit preview, and List search MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative temporal/recurrence data scale, warm/cold state, measurement tool, percentile/maximum, frame/scroll metric, and regression threshold.
 
 ## SPEC-SURFACE-TIME-CEBR-FIT-001 — Time shows fit consequences
 

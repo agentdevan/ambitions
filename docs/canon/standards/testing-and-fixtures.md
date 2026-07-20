@@ -31,7 +31,7 @@ source_owners = ["Native/Ambitions/Quality/", "Native/Ambitions/Diagnostics/"]
 
 # Testing and Fixtures
 
-This shadow standard owns cross-cutting executable evidence, fixture integrity, failure injection, and reliability evidence rules. It does not turn tests into product or release proof beyond their exact lane.
+This standard owns cross-cutting executable validation, fixture integrity, failure injection, and reliability rules.
 
 ## TEST-001 — Applicable evidence lanes
 - **Concept:** `engineering.testing.lanes`
@@ -41,9 +41,7 @@ This shadow standard owns cross-cutting executable evidence, fixture integrity, 
 - **Verification:** `AUDIT-TEST-LANES-001`
 - **Supersedes:** none
 
-Work MUST identify and run applicable unit, property, runtime integration, persistence/migration, concurrency, UI, accessibility, visual, performance, security/fuzz, and release lanes or record an honest blocker and claim ceiling.
-
-A test-passing claim MUST require all applicable evidence lanes.
+Changed-file routing MUST run the applicable unit, property, runtime integration, persistence/migration, concurrency, UI, accessibility, visual, performance, security/fuzz, and release lanes. A skipped applicable lane is a validation failure unless the lane is unavailable and the affected behavior remains explicitly unverified.
 
 ## TEST-002 — Deterministic privacy-safe fixtures
 - **Concept:** `engineering.testing.fixtures`
@@ -67,7 +65,7 @@ Production data MUST NOT leak into test fixtures.
 - **Verification:** `AUDIT-BUG-REGRESSION-001`
 - **Supersedes:** none
 
-Each reproducible escape MUST receive a test that fails before repair or an explicit owner-reviewed reason automation is impossible plus replacement proof.
+Each reproducible escape MUST receive a regression test that fails before repair or a documented technical reason automation is impossible plus a repeatable manual regression protocol.
 
 ## TEST-004 — Failure injection
 - **Concept:** `engineering.testing.failure-injection`
@@ -87,11 +85,11 @@ Critical paths MUST inject interruption and failure at every material phase and 
 - **Verification:** `AUDIT-NO-PROOF-THEATER-001`
 - **Supersedes:** none
 
-Blind sleeps, retry-until-pass, expected-failure completion, optional lookup that hides failure, source-string-only UI checks, or unrelated aggregate coverage MUST NOT support Green.
+Blind sleeps, retry-until-pass, expected-failure completion, optional lookup that hides failure, source-string-only UI checks, or unrelated aggregate coverage MUST NOT pass the applicable validation lane.
 
-A policy change that reduces constraint preservation, correction compliance, explanation quality, or scenario success MUST receive explicit review and MUST NOT be hidden by aggregate pass counts.
+A policy change that reduces constraint preservation, correction compliance, explanation quality, or scenario success MUST fail targeted regression coverage and MUST NOT be hidden by aggregate pass counts.
 
-A silent quality regression MUST NOT pass tests or support Green.
+A silent quality regression MUST NOT pass tests.
 
 ## TEST-006 — Property-based priorities
 - **Concept:** `engineering.testing.property-priorities`
@@ -129,7 +127,7 @@ Required behaviors and failure states MUST be explicitly mapped to tests and pro
 
 Failures MUST have explicit severity, user consequence, containment, recovery, owner, evidence, and stop-ship posture.
 
-If a Proof artifact reveals product-quality failure, the issue MUST become Red or Yellow immediately.
+If a test, trace, or direct inspection reveals a product-quality failure, the applicable validation MUST fail until the defect is repaired.
 
 ## RELIABILITY-002 — Structured private-safe diagnostics
 - **Concept:** `engineering.reliability.diagnostics`
@@ -190,15 +188,15 @@ Source, specifications, migrations, extensions, and incident work use the applic
 <!-- canon-section: requirements -->
 The requirements consolidate useful Articles 32 and 35 while system-specific observability and recovery remain in owning specifications.
 <!-- canon-section: exceptions -->
-Unautomatable proof requires an explicit rationale, owner, manual protocol, artifact retention, expiry/revisit point, claim ceiling, and rollback.
+Unautomatable behavior requires a documented technical rationale and repeatable manual protocol with environment, fixtures, expected result, and rollback handling.
 <!-- canon-section: verification -->
-Verify with deterministic test discovery, fixture audits, mutation/failure injection, scenario maps, logs/artifacts, and independent review where required.
+Verify with deterministic test discovery, fixture audits, mutation/failure injection, scenario maps, logs, and direct inspection where automation cannot cover behavior.
 <!-- canon-section: source-ownership -->
 `Quality/` owns test/proof infrastructure, exact subsystem owners provide fixtures and hooks, and `Diagnostics/` owns redacted observability;
 <!-- canon-section: proof -->
-Exact-commit evidence includes commands, exits, logs, fixture identity, injected failures, mapped requirements, artifacts, not-run lanes, findings, and rollback.
+Validation records include commands, exits, logs, fixture identity, injected failures, mapped requirements, skipped applicable lanes, and defects.
 <!-- canon-section: amendment-impact -->
-Amendments identify behaviors, failures, fixtures, privacy, lanes, source owners, CI, evidence retention, incidents, claim ceiling, migration, and rollback.
+When test behavior changes, update affected fixtures, privacy handling, lanes, CI routing, incident regressions, migrations, and rollback handling.
 
 ## TEST-SCOPE-MATRIX-001 — Test scope matrix
 
@@ -209,7 +207,7 @@ Amendments identify behaviors, failures, fixtures, privacy, lanes, source owners
 - **Verification:** `AUDIT-TEST-SCOPE-MATRIX-001`
 - **Supersedes:** none
 
-Each implementation scope MUST declare and execute the applicable domain, projection, UI, accessibility, migration, recurrence, time-zone, import, sync, and extension tests.
+Each changed scope MUST execute the applicable domain, projection, UI, accessibility, migration, recurrence, time-zone, import, sync, and extension tests.
 
 ## TEST-RUNTIME-CONTRACT-001 — Runtime contract proof
 

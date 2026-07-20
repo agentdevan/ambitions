@@ -31,7 +31,7 @@ source_owners = [
 
 # App Navigation
 
-This shadow specification owns route relationships and presentation semantics, not the root IA itself.
+This specification owns route relationships and presentation semantics, not the root IA itself.
 
 ## SPEC-APP-NAVIGATION-IA-MAP-001 — Navigation maps constitutional owners
 

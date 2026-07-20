@@ -97,11 +97,11 @@ Canonical semantics belong to `Core/Domain/`; trigger/recurrence/notification mu
 
 
 
-## OBJ-REMINDER-REPLACEMENT-TARGET-001 — Reminder replacement target and claim ceiling
+## OBJ-REMINDER-REPLACEMENT-TARGET-001 — Reminder replacement target and evidence boundary
 
 - **Concept:** `object.reminder.replacement-target`
 - **Modality:** `MUST NOT`
-- **Scope:** Reminder replacement target and claim ceiling
+- **Scope:** Reminder replacement target and evidence boundary
 - **Status:** `normative`
 - **Verification:** `REVIEW-OBJ-REMINDER-REPLACEMENT-TARGET-001`
 - **Supersedes:** none

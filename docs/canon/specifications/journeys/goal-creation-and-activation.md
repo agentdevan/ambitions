@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Surfaces/Goals/", "Native/Ambitions/Core/Loca
 
 # Goal Creation and Activation
 
-This shadow journey composes Goal, Goal Path, Step, and placement owners without copying their lifecycle laws or asserting implementation.
+This journey composes Goal, Goal Path, Step, and placement owners without copying their lifecycle laws or asserting implementation.
 
 ## JOURNEY-GOAL-ACTIVATION-001 — Activation follows reviewed route generation
 

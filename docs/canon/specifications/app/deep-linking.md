@@ -323,7 +323,7 @@ gate_requirement_ids = []
 
 # Deep Linking and External Route Entry
 
-This shadow specification defines how trusted local route requests and external ecosystem entry resolve into app navigation.
+This specification defines how trusted local route requests and external ecosystem entry resolve into app navigation.
 
 ## APP-DEEP-LINK-EXTERNAL-ENTRY-001 — External entry preserves owning-system boundaries
 

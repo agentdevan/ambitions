@@ -19,7 +19,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambit
 
 # Private Life Runtime
 
-This shadow target specifies intended local runtime behavior.
+This target specifies intended local runtime behavior.
 
 ## SYSTEM-RUNTIME-MUTATION-001 — Meaningful change follows one ordered local sequence
 
@@ -145,7 +145,7 @@ Redacted traces correlate Command, transaction, Event, object revision, Projecti
 Canonical target owners are exactly `Core/LocalRuntimeOS/Commands/`, `Transactions/`, `EventJournal/`, `State/`, `Projections/`, `Inspection/`, and `PrivateLifeRuntimeKernel/` for Command, Event, object-state, Projection, Receipt/History, replay, and orchestration authority; `ExternalWrites/` owns only durable outbox dispatch and reconciliation after local commit; `Quality/` owns executable proof.
 
 <!-- canon-section: tests-proof -->
-Required proof includes validation/rejection, authorization, transaction conflict, crash at every phase, duplicate/idempotent entry, replay equivalence, rollback, projection rebuild, receipt/history lineage, external-before-local prohibition, external retry without duplicate, offline relaunch, privacy egress denial, policy versioning, and correction/reset scenarios. This specification alone proves none of them.
+Applicable tests cover command validation/rejection, user and system authorization, transaction conflict, crash at every phase, duplicate/idempotent entry, replay equivalence, rollback, projection rebuild, receipt/history lineage, external-before-local prohibition, external retry without duplication, offline relaunch, privacy egress denial, policy versioning, and correction/reset scenarios.
 
 <!-- canon-section: performance-resource-constraints -->
-Work is bounded, cancellable, off the main actor where material, backpressured, and free of polling or unbounded queues. No numeric budget is authorized here: Article 31 calibration must declare device/OS/build, representative graph and event scale, warm/cold state, tool, percentile/maximum, energy/memory/storage measures, and regression threshold before implementation or performance Green.
+Work is bounded, cancellable, off the main actor where material, backpressured, and free of polling or unbounded queues. This document invents no numeric budget: performance validation must declare device/OS/build, representative graph and event scale, warm/cold state, tool, percentile/maximum, energy/memory/storage measures, and regression threshold before affected performance tests can pass.

@@ -21,7 +21,7 @@ source_owners = ["Native/Ambitions/Quality/Performance/", "Native/Ambitions/Diag
 
 # Performance and Energy
 
-This shadow standard defines measurable resource governance. It invents no numeric threshold where no approved budget exists.
+This standard defines measurable resource behavior. It invents no numeric threshold where no measured budget exists.
 
 ## PERF-001 — Product-wide budget registry
 - **Concept:** `engineering.performance.registry`
@@ -31,7 +31,7 @@ This shadow standard defines measurable resource governance. It invents no numer
 - **Verification:** `AUDIT-PERFORMANCE-REGISTRY-001`
 - **Supersedes:** none
 
-Every material operation MUST resolve to one owner-approved budget record or a structured calibration gap that blocks an unsupported performance claim.
+Every material operation MUST resolve to a measured budget or a structured calibration gap. Missing measurements MUST NOT be replaced with invented numbers.
 
 The repository MUST maintain measured budgets for launch, first interaction, root switching, mutation, projection refresh, Search, Time scrolling, Goal Path interaction, Capture opening and draft save, recurrence, import, sync, migration, backup and restore, attachments, widgets, App Intents, memory, disk growth, and energy.
 
@@ -53,7 +53,7 @@ Each budget MUST state device floor, OS, build configuration, representative dat
 - **Verification:** `REVIEW-PERFORMANCE-CLAIM-001`
 - **Supersedes:** none
 
-Unmeasured language such as fast, instant, efficient, lightweight, or device-ready MUST NOT support Green; evidence must bind exact commit, environment, tool, fixture scale, samples, and result.
+Unmeasured language such as fast, instant, efficient, lightweight, or device-ready MUST NOT substitute for current measurements tied to the tested commit, environment, tool, fixture scale, samples, and result.
 
 Performance claims MUST require current measurements tied to commit and environment.
 
@@ -69,7 +69,7 @@ Performance proof MUST record the current tool or procedure, device or simulator
 - **Verification:** `TEST-PERFORMANCE-REGRESSION-001`
 - **Supersedes:** none
 
-A required budget regression beyond declared tolerance MUST block the affected claim until repaired or explicitly amended with evidence and owner approval.
+A required budget regression beyond declared tolerance MUST fail the affected performance validation until repaired or the budget is changed using current measurements and documented user impact.
 
 ## PERF-005 — Resource-aware scheduling
 - **Concept:** `engineering.performance.resource-aware`
@@ -84,16 +84,14 @@ Work MUST be bounded and cancellable and respect foreground responsiveness, Low 
 ## GAP-PERFORMANCE-CALIBRATION-ATLAS-001 — Missing budgets remain structured gaps
 - **Concept:** `engineering.performance.calibration-gap`
 - **Modality:** `MUST`
-- **Scope:** Atlas specifications without approved numeric budgets
+- **Scope:** Atlas specifications without measured numeric budgets
 - **Status:** `normative`
 - **Verification:** `AUDIT-PERFORMANCE-CALIBRATION-GAPS-001`
 - **Supersedes:** none
 
-Where current authority supplies no approved numeric budget, the Atlas MUST retain a structured P1 calibration gap with operation, owner, device/OS/build/tool, data scale, percentile/maximum, resource measures, regression rule, required proof, and claim ceiling; it MUST NOT invent a number.
+Where no measured numeric budget exists, the Atlas MUST retain a calibration gap with operation, device/OS/build/tool, data scale, percentile/maximum, resource measures, and regression rule; it MUST NOT invent a number.
 
-Budget change requires current measurements, user impact, affected IDs, owner approval, regression comparison, proof, and rollback; implementation difficulty alone is insufficient.
-
-implementation difficulty alone is insufficient.
+Budget changes require current measurements, user impact, regression comparison, and rollback handling; implementation difficulty alone is insufficient.
 
 <!-- canon-section: purpose -->
 Make latency, responsiveness, memory, disk, scale, and energy obligations measurable and honest.
@@ -108,6 +106,6 @@ Verify with the deterministic budget/gap registry and exact-commit instrument, m
 <!-- canon-section: source-ownership -->
 `Quality/Performance/` owns evidence lanes, `Diagnostics/` owns safe instrumentation, and each subsystem owns its budget;
 <!-- canon-section: proof -->
-Exact-commit evidence includes device/OS/build, tool, fixture scale, warm/cold state, samples, percentile/maximum, memory/energy/storage where relevant, result, comparison, and artifact.
+Verification includes device/OS/build, tool, fixture scale, warm/cold state, samples, percentile/maximum, memory/energy/storage where relevant, result, and comparison.
 <!-- canon-section: amendment-impact -->
-Amendments identify operations, users, device floor, fixtures, tools, source/tests, power/thermal/storage impact, proof, claim ceiling, and rollback.
+When performance behavior changes, update affected budgets, fixtures, tools, source/tests, power/thermal/storage impact, and rollback handling.

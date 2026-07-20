@@ -65,7 +65,7 @@ Motion MUST use object transforms when object identity persists and MUST use nat
 
 Every motion cue MUST have equivalent state text, VoiceOver announcement where useful, predictable focus, non-color encoding, and Reduce Motion behavior. Drag, resize, path travel, ghost preview, object transform, and schedule movement MUST have explicit non-spatial controls and verbal consequence summaries. Haptics may reinforce but never carry meaning alone.
 
-Owner-approved VSP-09 rubric `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2` is the cross-surface accessibility, motion, haptics, contrast, transparency, focus, and static-equivalent design authority.
+Selected VSP-09 rubric `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2` is the cross-surface accessibility, motion, haptics, contrast, transparency, focus, and static-equivalent design authority.
 
 ## Completeness contract
 
@@ -105,4 +105,4 @@ Tests cover every semantic transition family, preview/commit/reject/undo, interr
 
 <!-- canon-section: performance-resource-constraints -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Motion transition selection, coalescing, interruption, static substitution, focus, and announcement work MUST remain bounded and cancellable, perform no disk or network I/O, use no polling or autonomous background loop, and resolve immediately to durable semantic state when presentation is interrupted. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative transition data scale, warm/cold state, measurement tool, percentile/maximum, named display refresh target, frame/energy measures, and regression threshold.
+Motion transition selection, coalescing, interruption, static substitution, focus, and announcement work MUST remain bounded and cancellable, perform no disk or network I/O, use no polling or autonomous background loop, and resolve immediately to durable semantic state when presentation is interrupted. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative transition data scale, warm/cold state, measurement tool, percentile/maximum, named display refresh target, frame/energy measures, and regression threshold.

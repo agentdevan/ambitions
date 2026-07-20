@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambit
 
 # Privacy and Data Classification
 
-This shadow specification defines intended privacy controls and exhaustive egress law.
+This specification defines intended privacy controls and exhaustive egress law.
 
 ## SYSTEM-PRIVACY-CLASSIFICATION-001 — Every datum and derived fact has one handling class
 

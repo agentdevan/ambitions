@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Stage/", "Native/Ambitions/Core/LocalRuntimeO
 
 # Search Find Ask Act Inspect
 
-This shadow journey composes with the preserved `JOURNEY-SEARCH-FIND-ACT-INSPECT-001` deterministic fallback and adds the owner-approved Ask and Capture-routing behavior without replacing that fallback or inventing mutation, creation, or disclosure authority.
+This journey composes with the preserved `JOURNEY-SEARCH-FIND-ACT-INSPECT-001` deterministic fallback and adds the selected Ask and Capture-routing behavior without replacing that fallback or inventing mutation, creation, or disclosure authority.
 
 ## JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001 — One input, grounded understanding, owner-routed consequence
 

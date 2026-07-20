@@ -7,7 +7,7 @@ owner_domain = "system-certified-executable-branch-reconciliation"
 canon_revision = 1
 profile = "system-v1"
 owns_concepts = ["system.cebr.active-branch", "system.cebr.viability-certificate", "system.cebr.impact-cone", "system.cebr.candidate-materialization", "system.cebr.promotion"]
-inherits = ["AUTHORITY-AMENDMENT-001", "MISSION-ORCHESTRATION-LOOP-001", "MISSION-REFLOW-001", "OBJECT-CANONICAL-GRAPH-001", "RUNTIME-MUTATION-SEQUENCE-001", "CONST-PROOF-EVIDENCE-001"]
+inherits = ["MISSION-ORCHESTRATION-LOOP-001", "MISSION-REFLOW-001", "OBJECT-CANONICAL-GRAPH-001", "RUNTIME-MUTATION-SEQUENCE-001", "CONST-PROOF-EVIDENCE-001"]
 depends_on = ["CONSTITUTION", "SYSTEM-PRIVATE-LIFE-RUNTIME", "SYSTEM-SCHEDULING-CAPACITY", "SYSTEM-PERSISTENCE-REPLAY", "GLOBAL-TRUST-INSPECTION", "OBJECT-GOAL-PATH", "JOURNEY-SCHEDULE-REFLOW"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Transactions/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Surfaces/Goals/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Quality/"]
 +++
@@ -16,7 +16,7 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 This specification records the CEBR-01 design intent as a bounded extension of
 the existing local life graph. It does not create a second runtime, a fifth
-surface, an alternate object store, or implementation authorization.
+surface, an alternate object store, or a claim of implementation completeness.
 
 ## SYSTEM-CEBR-ACTIVE-BRANCH-001 — One active branch is a revision-bound delta
 

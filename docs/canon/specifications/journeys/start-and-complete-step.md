@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Stage/Mot
 
 # Start and Complete Step
 
-This shadow journey coordinates execution entry and completion while Step, Closure, and Proof specifications retain lifecycle authority.
+This journey coordinates execution entry and completion while Step, Closure, and Proof specifications retain lifecycle authority.
 
 ## JOURNEY-STEP-START-COMPLETE-001 — Start now preserves honest completion
 

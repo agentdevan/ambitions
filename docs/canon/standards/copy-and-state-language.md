@@ -23,7 +23,7 @@ source_owners = ["Native/Ambitions/Language/", "Native/Ambitions/DesignSystem/",
 
 # Copy and State Language
 
-This shadow standard owns reusable vocabulary, tone, localization, and state-copy constraints. Exact object and surface copy stays with its specification owner.
+This standard owns reusable vocabulary, tone, localization, and state-copy constraints. Exact object and surface copy stays with its specification owner.
 
 ## COPY-LOCKED-VOCABULARY-001 — Locked product terms
 - **Concept:** `language.locked-vocabulary`
@@ -126,15 +126,15 @@ Applies cross-cutting language rules; object-specific labels and state transitio
 <!-- canon-section: requirements -->
 The requirements consolidate useful Article 37 and accepted language laws without a separate engineering constitution.
 <!-- canon-section: exceptions -->
-An exception requires explicit owner-approved copy rationale, localized and accessible alternatives, affected requirement IDs, tests, proof, and rollback.
+An exception requires a documented product rationale plus localized and accessible alternatives and applicable tests.
 <!-- canon-section: verification -->
 Verify with lexical scans, state/copy review, localization fixtures, pseudolocalization, RTL, Dynamic Type, and VoiceOver evidence.
 <!-- canon-section: source-ownership -->
 Target owners are `Language/`, relevant presentation owners, `DesignSystem/`, and `Quality/`;
 <!-- canon-section: proof -->
-Exact-commit evidence includes lexical results, reviewed state strings, locale/RTL/pseudolocalization fixtures, assistive speech, screenshots, findings, and artifacts.
+Verification includes lexical results, state strings, locale/RTL/pseudolocalization fixtures, assistive speech, and screenshots where layout behavior matters.
 <!-- canon-section: amendment-impact -->
-Amendments identify affected terms, objects, states, surfaces, locales, accessibility, tests, proof, migration, external references, claim ceiling, and rollback.
+When language behavior changes, update affected terms, states, locales, accessibility behavior, tests, and migration handling.
 
 ## COPY-VISIBILITY-CLASSIFICATION-001 — Visibility classification language
 

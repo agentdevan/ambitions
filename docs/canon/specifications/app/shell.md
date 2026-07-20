@@ -817,7 +817,7 @@ verification_ids = ["SCENARIO-APP-SHELL-COMMAND-CONTRACT-001"]
 
 # App Shell
 
-This shadow specification defines intended app-shell composition.
+This specification defines intended app-shell composition.
 
 ## SPEC-APP-SHELL-ROOT-NAVIGATION-001 — Root-depth shell ownership
 

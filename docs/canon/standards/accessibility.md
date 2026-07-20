@@ -23,7 +23,7 @@ source_owners = ["Native/Ambitions/Interaction/Accessibility/", "Native/Ambition
 
 # Accessibility
 
-This shadow standard defines cross-cutting semantic equivalence. It does not certify accessibility conformance.
+This standard defines cross-cutting semantic equivalence. It does not certify accessibility conformance.
 
 ## A11Y-002 — Equivalent identity, state, value, action, and consequence
 - **Concept:** `accessibility.semantic-equivalence.application`
@@ -135,7 +135,7 @@ State changes MUST expose semantic status, next action, retry/cancel behavior, a
 
 Accessibility acceptance MUST bind exact commit, device/OS, content/state fixtures, VoiceOver order/actions, Dynamic Type, reduced effects, contrast, keyboard/input, localization, failures, and known gaps.
 
-Product and IA accessibility acceptance MUST require preview matrices, VoiceOver scripts, motion alternatives, screenshot proof, large-text layouts, tap-target audits, reduced-effects checks, contrast, haptic alternatives, and proof artifacts.
+Product and IA accessibility acceptance MUST require preview matrices, VoiceOver scripts, motion alternatives, large-text layouts, tap-target audits, reduced-effects checks, contrast, haptic alternatives, and direct test results for the affected behavior.
 
 Accessibility evidence MUST NOT impede comprehension of the underlying product state.
 
@@ -149,17 +149,17 @@ Product truth MUST require accessibility and flagship visual quality, but releas
 
 Automated accessibility checks MUST NOT be treated as sufficient proof on their own.
 
-## STANDARD-ACCEPTANCE-ACCESSIBILITY-001 — Accessibility Green requires independent evidence
+## STANDARD-ACCEPTANCE-ACCESSIBILITY-001 — Accessibility requires direct verification
 - **Concept:** `standard.acceptance.accessibility`
 - **Modality:** `MUST NOT`
-- **Scope:** Accessibility readiness claims
+- **Scope:** Accessibility behavior affected by a change
 - **Status:** `normative`
-- **Verification:** `REVIEW-A11Y-CLAIM-CEILING-001`
+- **Verification:** `TEST-A11Y-DIRECT-001`
 - **Supersedes:** none
 
-Canon, source presence, unit tests, or screenshots alone MUST NOT be reported as Accessibility Green; current exact-scope evidence and required independent review are mandatory.
+Source presence, unit tests, or screenshots alone are insufficient when changed interaction requires direct assistive-technology verification. The affected behavior MUST pass the applicable VoiceOver, Dynamic Type, reduced-effects, contrast, focus, and input checks.
 
-Accessibility acceptance MUST independently verify VoiceOver order and actions.
+Accessibility acceptance MUST directly verify VoiceOver order and actions.
 
 <!-- canon-section: purpose -->
 Preserve equivalent meaning, control, recovery, and trust for disabled users.
@@ -170,10 +170,10 @@ The requirements above are conjunctive for the affected scope.
 <!-- canon-section: exceptions -->
 Unsupported behavior requires an explicit blocker and accessible alternative; silent omission is forbidden.
 <!-- canon-section: verification -->
-Use semantic tests, assistive-technology inspection, device matrices, screenshots/video where useful, and independent review.
+Use semantic tests, assistive-technology inspection, device matrices, and screenshots or video where useful.
 <!-- canon-section: source-ownership -->
 Target owners are `Interaction/Accessibility/`, `DesignSystem/`, each presenting owner, and `Quality/Accessibility/`;
 <!-- canon-section: proof -->
-Exact-commit evidence includes assistive-technology transcripts, focus/order/action results, Dynamic Type and reduced-effect matrices, device/OS, fixtures, findings, reviewer, and artifacts.
+Verification includes assistive-technology results, focus/order/action behavior, Dynamic Type and reduced-effect matrices, device/OS, and deterministic fixtures.
 <!-- canon-section: amendment-impact -->
-Amendments identify affected semantics, assistive technologies, surfaces, actions, focus, tests, devices, visuals, privacy, performance, proof, claim ceiling, and rollback.
+When accessibility behavior changes, update the affected semantics, tests, fixtures, focus behavior, visual alternatives, and rollback or migration handling.

@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/specification.schema.json",
+  "title": "Ambitions Canon Specification Front Matter",
+  "description": "Machine documentation for accepted TOML front-matter fields in a normative Markdown specification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec_id",
+    "title",
+    "kind",
+    "status",
+    "owner_domain",
+    "canon_revision",
+    "owns_concepts",
+    "inherits",
+    "depends_on",
+    "source_owners"
+  ],
+  "properties": {
+    "spec_id": {
+      "description": "Globally unique stable specification identifier.",
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "description": "Human-readable specification title.",
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "description": "Completeness and ownership profile used by the specification.",
+      "type": "string",
+      "enum": ["constitution", "app", "surface", "global", "object", "journey", "system", "standard"]
+    },
+    "status": {
+      "description": "Declared normative lifecycle status.",
+      "type": "string",
+      "minLength": 1
+    },
+    "owner_domain": {
+      "description": "Domain accountable for the specification's concepts.",
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_revision": {
+      "description": "Canon revision in which this specification content is declared.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "profile": {
+      "description": "Optional named completeness profile refinement.",
+      "type": "string",
+      "minLength": 1
+    },
+    "owns_concepts": {
+      "description": "Normalized concepts owned exclusively by this specification.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+      }
+    },
+    "inherits": {
+      "description": "Active requirement IDs whose laws this specification inherits.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "depends_on": {
+      "description": "Specification IDs required to interpret this specification.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "not_applicable": {
+      "description": "Required completeness cells explicitly waived with accountable rationale.",
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rationale", "owner"],
+          "properties": {
+            "rationale": {
+              "type": "string",
+              "minLength": 1
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "object_boundary": {
+      "description": "Structured Step, Event, Reminder, or Note boundary cells and stable owning-law references.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable_completable", "occupies_duration", "consumes_capacity", "due_date", "recurrence", "substeps", "goal_path_node", "proof_requirement", "attendees_rsvp", "alerts", "type_conversion", "laws"],
+      "properties": {
+        "executable_completable": {"type": "string", "minLength": 1},
+        "occupies_duration": {"type": "string", "minLength": 1},
+        "consumes_capacity": {"type": "string", "minLength": 1},
+        "due_date": {"type": "string", "minLength": 1},
+        "recurrence": {"type": "string", "minLength": 1},
+        "substeps": {"type": "string", "minLength": 1},
+        "goal_path_node": {"type": "string", "minLength": 1},
+        "proof_requirement": {"type": "string", "minLength": 1},
+        "attendees_rsvp": {"type": "string", "minLength": 1},
+        "alerts": {"type": "string", "minLength": 1},
+        "type_conversion": {"type": "string", "minLength": 1},
+        "laws": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schedule_placement_nonduplication", "future_step_singularity", "reminder_acknowledgement_noncompletion", "proof_receipt_separation"],
+          "properties": {
+            "schedule_placement_nonduplication": {"type": "string", "minLength": 1},
+            "future_step_singularity": {"type": "string", "minLength": 1},
+            "reminder_acknowledgement_noncompletion": {"type": "string", "minLength": 1},
+            "proof_receipt_separation": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "state_command_contracts": {
+      "description": "Closed normative ownership for exact UX blueprint state commands.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "patternProperties": {
+                "^state_id$": {"const": "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"}
+              },
+              "required": ["state_id"]
+            },
+            "then": {
+              "patternProperties": {
+                "^commands$": {"maxItems": 0}
+              }
+            },
+            "else": {
+              "patternProperties": {
+                "^commands$": {"minItems": 1}
+              }
+            }
+          }
+        ],
+        "required": ["state_id", "requirement_id", "activation_posture", "gate_requirement_ids", "transition_exit", "durable_effect", "recovery_rollback", "offline_behavior", "accessibility_focus", "commands"],
+        "properties": {
+          "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+          "requirement_id": {"type": "string", "minLength": 1},
+          "activation_posture": {"type": "string", "enum": ["active", "future_gated"]},
+          "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "transition_exit": {"type": "string", "minLength": 1},
+          "durable_effect": {"type": "string", "minLength": 1},
+          "recovery_rollback": {"type": "string", "minLength": 1},
+          "offline_behavior": {"type": "string", "minLength": 1},
+          "accessibility_focus": {"type": "string", "minLength": 1},
+          "commands": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["command_id", "label", "canonical_owner", "destination_id", "destination_posture", "success_focus_id", "success_focus_posture", "failure_focus_id", "failure_focus_posture", "recovery_id", "recovery_posture", "recovery_owner", "preconditions", "destination", "effect", "success_focus", "failure_focus", "commit_boundary", "rollback_undo", "privacy_egress", "verification_ids"],
+              "properties": {
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "label": {"type": "string", "minLength": 1},
+                "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "destination_id": {"type": "string", "pattern": "^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "destination_posture": {"type": "string", "enum": ["current", "deferred", "unavailable"]},
+                "success_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "success_focus_posture": {"type": "string", "enum": ["current", "deferred", "unavailable"]},
+                "failure_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "failure_focus_posture": {"type": "string", "enum": ["current", "deferred", "unavailable"]},
+                "recovery_id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "recovery_posture": {"type": "string", "enum": ["current", "deferred", "unavailable"]},
+                "recovery_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "destination": {"type": "string", "minLength": 1},
+                "effect": {"type": "string", "minLength": 1},
+                "success_focus": {"type": "string", "minLength": 1},
+                "failure_focus": {"type": "string", "minLength": 1},
+                "commit_boundary": {"type": "string", "minLength": 1},
+                "rollback_undo": {"type": "string", "minLength": 1},
+                "privacy_egress": {"type": "string", "minLength": 1},
+                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "activation_posture": {"type": "string", "enum": ["active", "future_gated"]},
+                "gate_dependency_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}},
+                "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "rollback_posture": {"type": "string", "enum": ["inverse_command", "checkpoint_restore", "owner_recovery_handoff", "confirmed_irreversible"]},
+                "inverse_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "checkpoint_id": {"type": "string", "pattern": "^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "recovery_handoff_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "irreversible_confirmation_id": {"type": "string", "pattern": "^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "irreversible_receipt_id": {"type": "string", "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+              }
+            }
+          },
+          "recovery_commands": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["trigger_command_id", "mechanism_kind", "command_id", "label", "canonical_owner", "destination_id", "destination_posture", "success_focus_id", "success_focus_posture", "failure_focus_id", "failure_focus_posture", "recovery_id", "recovery_posture", "recovery_owner", "preconditions", "destination", "effect", "success_focus", "failure_focus", "commit_boundary", "rollback_undo", "privacy_egress", "verification_ids", "activation_posture", "gate_requirement_ids"],
+              "properties": {
+                "trigger_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "mechanism_kind": {"enum": ["inverse_command", "recovery_handoff_command"]},
+                "redo_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "redo_preconditions": {"type": "array", "const": ["current inverse Receipt", "current revision", "fresh command authorization"]},
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "label": {"type": "string", "minLength": 1},
+                "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "destination_id": {"type": "string", "pattern": "^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "destination_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "success_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "success_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "failure_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "failure_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "recovery_id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "recovery_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "recovery_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "destination": {"type": "string", "minLength": 1},
+                "effect": {"type": "string", "minLength": 1},
+                "success_focus": {"type": "string", "minLength": 1},
+                "failure_focus": {"type": "string", "minLength": 1},
+                "commit_boundary": {"type": "string", "minLength": 1},
+                "rollback_undo": {"type": "string", "minLength": 1},
+                "privacy_egress": {"type": "string", "minLength": 1},
+                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "activation_posture": {"enum": ["active", "future_gated"]},
+                "gate_dependency_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}},
+                "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+              },
+              "allOf": [
+                {
+                  "if": {"patternProperties": {"^mechanism_kind$": {"const": "inverse_command"}}},
+                  "then": {"required": ["redo_command_id", "redo_preconditions"]},
+                  "else": {"not": {"anyOf": [{"required": ["redo_command_id"]}, {"required": ["redo_preconditions"]}]}}
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "source_owners": {
+      "description": "Current source ownership paths relevant to implementation mapping.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

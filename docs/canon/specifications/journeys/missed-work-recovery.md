@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Surfaces/
 
 # Missed Work Recovery
 
-This shadow journey coordinates humane recovery choices while owning objects retain lifecycle, placement, and path semantics.
+This journey coordinates humane recovery choices while owning objects retain lifecycle, placement, and path semantics.
 
 ## JOURNEY-RECOVERY-001 — Material recovery requires confirmation
 

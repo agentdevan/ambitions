@@ -400,7 +400,7 @@ inverse_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
 trigger_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
 label = "Remove created notification rule"
 canonical_owner = "system.notifications.command-contract"
@@ -612,7 +612,7 @@ inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
 trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
 label = "Restore prior notification rule"
 canonical_owner = "system.notifications.command-contract"
@@ -724,7 +724,7 @@ inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
 trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
 label = "Re-enable notification rule"
 canonical_owner = "system.notifications.command-contract"
@@ -792,7 +792,7 @@ inverse_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
 trigger_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
 label = "Restore superseded rule version"
 canonical_owner = "system.notifications.command-contract"
@@ -822,7 +822,7 @@ gate_dependency_ids = []
 
 # Notifications
 
-This shadow specification defines notification policy and external-effect boundaries. It does not claim permission, delivery, Lock Screen privacy, action, device, or release proof.
+This specification defines notification policy and external-effect boundaries. It does not claim permission, delivery, Lock Screen privacy, action, device, or release proof.
 
 ## SYSTEM-NOTIFICATIONS-POLICY-001 — Notifications are contextual, object-aware, private, and non-coercive
 

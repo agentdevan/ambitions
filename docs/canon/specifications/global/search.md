@@ -1267,18 +1267,18 @@ Ask MAY provide conversational, on-device synthesis grounded only in privacy-aut
 - **Verification:** `SCENARIO-SEARCH-ASK-GROUNDING-001`, `SCENARIO-SEARCH-ASK-UNAVAILABLE-001`, `SCENARIO-SEARCH-CAPTURE-HANDOFF-001`, `SCENARIO-SEARCH-SESSION-HISTORY-001`
 - **Supersedes:** none
 
-Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-authorized source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract authorizes no current implementation behavior.
+Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-safe source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract specifies no active current behavior.
 
-## SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001 — Ask remains non-authorizing until exact proof is current
+## SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001 — Ask remains disabled until executable safeguards pass
 
 - **Concept:** `global.search.ask-activation-gate`
 - **Modality:** `MUST`
-- **Scope:** Current implementation authorization for Ask and Search-to-Capture handoff state commands
+- **Scope:** Ask and Search-to-Capture handoff activation
 - **Status:** `normative`
-- **Verification:** `AUDIT-SEARCH-ASK-ACTIVATION-GATE-001`
+- **Verification:** `TEST-SEARCH-ASK-ACTIVATION-001`, `TEST-SEARCH-NO-EGRESS-001`, `TEST-SEARCH-DETERMINISTIC-FALLBACK-001`
 - **Supersedes:** none
 
-Ask and Search-to-Capture handoff states and commands MUST remain future-gated and non-authorizing. A posture transition is invalid unless a closed, base-owned evidence registry and verifier is already merged; every affected command has nonempty exact command dependency bindings to that base-owned evidence; current source and runtime proof, no-egress and privacy proof, grounding and deterministic-fallback proof, accessibility and visual proof, and performance proof are all current for the same canon revision and source revision; and the owner has explicitly approved the exact final Figma frame IDs. Intended canon, state mappings, command metadata, generated projections, unverified dependency text, or visual candidates MUST NOT satisfy this gate. The Search amendment creates no evidence registry, verifier, dependency kind, authorization policy, or Task 24/25 implementation. Until the base-owned mechanism and every named proof class exist and pass, deterministic Find, Act, and Inspect remain the only active Search command contract.
+Ask and Search-to-Capture handoff states and commands MUST remain disabled until the implementation passes current source/runtime, local-only no-egress, privacy, grounding, deterministic-fallback, cancellation, accessibility, visual-state, and performance tests. Canon text, command metadata, generated indexes, or a Figma frame alone cannot enable the feature. Until every applicable executable safeguard passes, deterministic Find, Act, and Inspect remain the only active Search command contract.
 
 ## SPEC-GLOBAL-SEARCH-INPUT-001 — One input, immediate results, progressive enhancement
 
@@ -1381,7 +1381,7 @@ Search index and canonical actions MUST remain separate child contracts: SPEC-GL
 - **Verification:** `PROOF-SEARCH-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Owner-approved VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only.
+Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Selected VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only.
 
 ## SPEC-GLOBAL-SEARCH-INDEX-001 — Search index and ranking
 
@@ -1494,11 +1494,11 @@ Tests cover exact/prefix/typo/date/context ranking, immediate while-typing resul
 
 <!-- canon-section: proof -->
 Proof binds declared-corpus ranking, privacy filtering, local execution, grounded Ask fallback, owner Receipts, recovery, and accessibility evidence.
-Required proof includes declared-corpus ranking metrics, privacy/filter fixtures, on-device and no-egress evidence, Ask-grounding and unavailable-fallback fixtures, session-expiry/persistence proof, Capture handoff, action Receipts/replay, corruption recovery, screenshot/accessibility matrices, scoped visual approval, exact commands/exits, environment, known gaps, and rollback. Current posture is canon-and-mapping-only: generated index maps, normative Ask wording, target source ownership, and state contracts do not prove or implement on-device Ask, rendered Search UI, accessibility behavior, or runtime performance.
+Applicable validation includes declared-corpus ranking metrics, privacy/filter fixtures, on-device no-egress tests, Ask grounding and unavailable-fallback fixtures, session expiry/persistence, Capture handoff, action Receipts/replay, corruption recovery, rendered-state/accessibility matrices, visual comparison, performance, and rollback. Generated indexes, wording, source ownership, and state contracts alone do not implement on-device Ask or demonstrate current Search behavior.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Search query, ranking, on-device synthesis, supporting-evidence resolution, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result/answer/context caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, preserve immediate deterministic results while optional synthesis runs, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative indexed-record/query/result/answer/context data scale, warm/cold state, measurement tool, percentile/maximum, synthesis and rebuild resource measures, and regression threshold.
+Search query, ranking, on-device synthesis, supporting-evidence resolution, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result/answer/context caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, preserve immediate deterministic results while optional synthesis runs, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative indexed-record/query/result/answer/context data scale, warm/cold state, measurement tool, percentile/maximum, synthesis and rebuild resource measures, and regression threshold.
 
 ## SPEC-GLOBAL-SEARCH-PLACEMENT-001 — Global Search placement
 

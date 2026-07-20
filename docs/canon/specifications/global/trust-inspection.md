@@ -93,7 +93,7 @@ inverse_command_id = "CMD-TRUST-DEEP-CORRECTING-002-INVERSE"
 trigger_command_id = "CMD-TRUST-DEEP-CORRECTING-002"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TRUST-DEEP-CORRECTING-002"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TRUST-DEEP-CORRECTING-002-INVERSE"
 label = "Reverse correction"
 canonical_owner = "global.trust.command-contract"
@@ -1123,7 +1123,7 @@ inverse_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVE
 trigger_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001"
 mechanism_kind = "inverse_command"
 redo_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001"
-redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh command authorization"]
 command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE"
 label = "Restore undone result"
 canonical_owner = "global.trust.command-contract"
@@ -1445,7 +1445,7 @@ Every accepted mutation MUST create its durable Receipt while disclosure remains
 - **Verification:** `PROOF-TRUST-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish approved direction, successor final package, implementation proof, and the evidence being inspected. `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` remains direction only; owner-approved VSP-07 successor package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` is the contextual Trust target. Neither node proves SwiftUI parity, accessibility, device/runtime behavior, Visual Green, or release status.
+Visual references MUST use stable external IDs and distinguish selected direction, successor package, and current implementation behavior. `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` remains direction only; selected VSP-07 successor package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` is the contextual Trust target. Neither node demonstrates current SwiftUI, accessibility, device, or runtime behavior.
 
 ## SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001 — Exact state command ownership
 
@@ -1516,22 +1516,21 @@ Use Proof, Source, Privacy, History, Receipt, Changed by, Used for planning, Sti
 
 <!-- canon-section: visual-authority -->
 The named successor package controls geometry, hierarchy, composition, states, and adaptive layout.
-Stable IDs `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` and `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` preserve direction/successor provenance. Source rendering, evidence correctness, accessibility/device behavior, implementation parity, and release proof remain separate.
+Stable IDs `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` and `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` preserve direction/successor provenance. Current source rendering, evidence correctness, accessibility, and device behavior remain separately testable.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Trust/` owns contextual presentation/disclosure policy; `Core/LocalRuntimeOS/Inspection/` owns facts, receipts, proof, undo, and history; `PrivacySecurity/` owns classification/egress; `Language/` owns humane copy; `Quality/` owns proof.
+Canonical target ownership is exact: `Trust/` owns contextual presentation/disclosure policy; `Core/LocalRuntimeOS/Inspection/` owns facts, receipts, proof, undo, and history; `PrivacySecurity/` owns classification/egress; `Language/` owns humane copy; `Quality/` owns validation.
 
 <!-- canon-section: tests -->
 The scenario matrix spans disclosure, evidence, source, receipt, privacy, correction, history, replay, accessibility, and focus behavior.
 Tests cover every trust layer/category/state, proof-before-completion, source stale/unavailable, receipt external failure/undo, privacy denial, correction, history order/pagination, redaction, offline/replay, Search/You entry, VoiceOver semantics/order/actions, Dynamic Type, reduced effects, contrast, and focus return.
 
 <!-- canon-section: proof -->
-Evidence artifacts bind executed scenarios to exact source revisions and environments.
-Required proof includes object-scoped receipts/history/proof fixtures, privacy and redaction evidence, failure/recovery logs, screenshot/accessibility matrices, scoped visual approval, exact commands/exits, source revision, known gaps, and rollback. Trust UI cannot self-certify the claims it displays.
+Applicable validation includes object-scoped receipt/history/Proof fixtures, privacy and redaction tests, failure/recovery behavior, rendered-state and accessibility matrices, visual comparison, and rollback. Trust UI cannot self-certify the information it displays.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Trust detail, proof/receipt/history paging, correction/undo validation, and freshness work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve the originating object and foreground responsiveness under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative proof/receipt/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+Trust detail, proof/receipt/history paging, correction/undo validation, and freshness work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve the originating object and foreground responsiveness under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative proof/receipt/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
 
 ## SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001 — Contextual Completed placement
 
