@@ -228,11 +228,15 @@ class Task24CliIntegrationTests(unittest.TestCase):
                 source / ".github/workflows/ambitions-canon-authorization.yml",
             )
             subprocess.run(["git", "add", "-A"], cwd=source, check=True)
-            subprocess.run(
-                ["git", "commit", "-qm", "exact live Task24 policy base"],
-                cwd=source,
-                check=True,
+            staged = subprocess.run(
+                ["git", "diff", "--cached", "--quiet"], cwd=source
             )
+            if staged.returncode:
+                subprocess.run(
+                    ["git", "commit", "-qm", "exact live Task24 policy base"],
+                    cwd=source,
+                    check=True,
+                )
             subprocess.run(
                 ["git", "checkout", "-qb", "task24-proof"],
                 cwd=source,
