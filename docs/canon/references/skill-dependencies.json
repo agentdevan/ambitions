@@ -2,9 +2,9 @@
   "compiler_compatibility": [
     "0.2.0"
   ],
-  "registry_revision": "skill-dependencies-v2",
+  "registry_revision": "skill-dependencies-v3-admission",
   "requirement_index_path": "docs/canon/generated/canon-index.json",
-  "requirement_index_sha256": "ebacbaf60ddd8efe1cf60547bd066c30c37f65db0af6d5325fbd227ec36333a1",
+  "requirement_index_sha256": "d221a0574e785e3f5b490a1c5cf2c6fbf059093a2a7fbec74a58623b06711fb8",
   "schema_version": 1,
   "skills": [
     {
