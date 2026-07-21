@@ -338,7 +338,7 @@ final class MutationCommitterReplayTests: RuntimeCommandMutationCommitterTestCas
         XCTAssertNil(replay.metadata["captureMaterializationError"])
         XCTAssertEqual(probeSnapshot.attemptCount, 2)
         XCTAssertEqual(probeSnapshot.state, "changed")
-        XCTAssertFalse(firstAuthorityEvents.isEmpty)
+        XCTAssertEqual(repairedRecord?.command, command)
         XCTAssertEqual(events.map(\.id), firstAuthorityEvents.map(\.id))
         XCTAssertEqual(repairedRecord?.result, replay)
     }
@@ -350,7 +350,7 @@ private enum RuntimeCommandMutationCommitterTestError: Error {
     case runtimeEventAppendUnavailable
 }
 
-private actor RuntimeCommandMaterializationProbe {
+actor RuntimeCommandMaterializationProbe {
     private(set) var attemptCount = 0
     private(set) var state = "unchanged"
     private var failuresRemaining: Int

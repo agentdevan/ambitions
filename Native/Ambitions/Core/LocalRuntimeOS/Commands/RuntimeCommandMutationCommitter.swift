@@ -213,8 +213,15 @@ private extension RuntimeCommandMutationCommitter {
     ) async -> AmbitionsCommandExecutionResult? {
         switch lookup {
         case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let recordStatus):
+            if let commandRecord, commandRecord.command != command {
+                return adapter.incompatibleCommandReplayResult(
+                    recordedCommand: commandRecord.command,
+                    recordedResult: commandRecord.result
+                )
+            }
+            let authoritativeCommand = commandRecord?.command ?? command
             let result = adapter.replayResult(
-                for: command,
+                for: authoritativeCommand,
                 projection: projection,
                 authorityReceipt: authorityReceipt,
                 commandRecord: commandRecord,
@@ -222,7 +229,7 @@ private extension RuntimeCommandMutationCommitter {
             )
             guard RuntimeTransactionCommitPolicy.hasCommittedEvidence(result) else { return result }
             return await materializeAndUpsertReplayIfNeeded(
-                command: command,
+                command: authoritativeCommand,
                 result: result,
                 materialization: materialization,
                 recordedAt: commandRecord?.recordedAt ?? projection.recordedAt
@@ -381,19 +388,5 @@ private extension RuntimeCommandMutationCommitter {
                 "\(materialization.statusMetadataKey)Error": String(describing: error)
             ])
         }
-    }
-}
-
-private extension AmbitionsCommandExecutionResult {
-    func replacingMetadata(_ metadata: [String: String]) -> AmbitionsCommandExecutionResult {
-        AmbitionsCommandExecutionResult(
-            status: status,
-            summary: summary,
-            route: route,
-            target: target,
-            eventLedgerEntryIDs: eventLedgerEntryIDs,
-            recommendationExplanationIDs: recommendationExplanationIDs,
-            metadata: metadata
-        )
     }
 }
