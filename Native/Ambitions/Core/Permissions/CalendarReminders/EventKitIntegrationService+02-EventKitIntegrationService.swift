@@ -80,6 +80,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         )
         let claim = try await eventKitOutbox.claimCalendarSideEffect(
             requestID: externalEffectRequestID(kind: "reminder", operationID: operation.id),
+            operationID: operation.id,
             localCommit: localCommit,
             now: now
         )
@@ -87,8 +88,12 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
         }
         if case let .terminal(attempt) = claim, let identifier = attempt.ledgerRecord.receiptID {
-            try await pendingOperationStore.complete(fingerprint: operation.fingerprint, operationID: operation.id)
-            return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
+            return try await completeReminderSuccess(
+                identifier: identifier,
+                selection: selection,
+                operation: operation,
+                now: now
+            )
         }
         if case let .reconciliationRequired(existing) = claim {
             let reconciled = try await reconcileReminder(
@@ -97,11 +102,12 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 selection: selection,
                 now: now
             )
-            try await pendingOperationStore.complete(
-                fingerprint: operation.fingerprint,
-                operationID: operation.id
+            return try await completeReminderSuccess(
+                identifier: reconciled.identifier,
+                selection: selection,
+                operation: operation,
+                now: now
             )
-            return reconciled
         }
         let attempt = claim.attempt
         let identifier: String
@@ -130,16 +136,12 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 externalIdentifier: identifier
             )
         }
-        try await pendingOperationStore.complete(
-            fingerprint: operation.fingerprint,
-            operationID: operation.id
+        return try await completeReminderSuccess(
+            identifier: identifier,
+            selection: selection,
+            operation: operation,
+            now: now
         )
-        if let reminderRepository {
-            try? await reminderRepository.saveReminders([
-                makeReminder(identifier: identifier, selection: selection, now: now)
-            ])
-        }
-        return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
     }
 
     func createCalendarEvent(
@@ -207,6 +209,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         )
         let claim = try await eventKitOutbox.claimCalendarSideEffect(
             requestID: externalEffectRequestID(kind: "calendar-event", operationID: operation.id),
+            operationID: operation.id,
             localCommit: localCommit,
             now: now
         )
@@ -325,6 +328,38 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.reconciliationRequired(scope: .reminders)
         }
         try await finalizeReconciled(identifier: identifier, existing: existing, now: now)
+        return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
+    }
+
+    private func materializeReminderMirror(
+        identifier: String,
+        selection: NextStepSchedulingSelection,
+        now: Date
+    ) async throws {
+        guard let reminderRepository else { return }
+        do {
+            try await reminderRepository.saveReminders([
+                makeReminder(identifier: identifier, selection: selection, now: now)
+            ])
+        } catch {
+            throw CalendarRemindersError.mirrorMaterializationPending(
+                scope: .reminders,
+                externalIdentifier: identifier
+            )
+        }
+    }
+
+    private func completeReminderSuccess(
+        identifier: String,
+        selection: NextStepSchedulingSelection,
+        operation: (id: String, fingerprint: String),
+        now: Date
+    ) async throws -> CreatedReminderRecord {
+        try await materializeReminderMirror(identifier: identifier, selection: selection, now: now)
+        try await pendingOperationStore.complete(
+            fingerprint: operation.fingerprint,
+            operationID: operation.id
+        )
         return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
     }
 

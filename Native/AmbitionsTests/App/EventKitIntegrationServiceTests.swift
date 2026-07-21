@@ -29,13 +29,103 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
         }
-
         let saveCount = await store.currentSaveReminderCount()
         let records = try await ledger.fetchRecords(status: .blocked)
         XCTAssertEqual(saveCount, 0)
         XCTAssertEqual(records.count, 1)
         XCTAssertNil(records.first?.claimToken)
         XCTAssertNil(records.first?.leaseID)
+    }
+
+    func testDeniedSameIDPreservesExistingLeasedAndSucceededRecords() async throws {
+        for existingStatus in [SideEffectLedgerStatus.leased, .succeeded] {
+            let store = RecordingEventKitStoreClient()
+            await store.setAuthorization(state: .fullAccess, for: .reminders)
+            let ledger = InMemorySideEffectLedgerRepository()
+            let operationID = operationID("preserve-\(existingStatus.rawValue)")
+            let requestID = "calendar.reminder.\(operationID.lowercased())"
+            let existing = existingRecord(
+                id: requestID,
+                operationID: operationID.lowercased(),
+                status: existingStatus
+            )
+            try await ledger.append(existing)
+            let malformed = SideEffectLocalCommitEvidence(
+                authorityCommandID: "authority.denied",
+                operationID: operationID.lowercased(),
+                receiptID: "malformed",
+                writeScope: .localSwiftDataSingleContext,
+                committedAt: "2026-04-16T09:00:00Z",
+                didCommitChanges: false,
+                sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects
+            )
+            let service = EventKitIntegrationService(
+                storeClient: store,
+                eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger))
+            )
+            do {
+                _ = try await service.createReminder(
+                    for: fixtureSelection(),
+                    now: fixtureNow(),
+                    operationID: operationID,
+                    localCommit: malformed
+                )
+                XCTFail("Expected denied evidence to block EventKit.")
+            } catch let error as CalendarRemindersError {
+                XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
+            }
+            let persisted = try await ledger.fetchRecord(id: requestID)
+            let saveCount = await store.currentSaveReminderCount()
+            XCTAssertEqual(persisted, existing)
+            XCTAssertEqual(saveCount, 0)
+        }
+    }
+
+    func testAuthorityEvidenceForOperationACannotAuthorizeOperationB() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let ledger = InMemorySideEffectLedgerRepository()
+        let operationA = operationID("authority-a")
+        let operationB = operationID("authority-b")
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger))
+        )
+        do {
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: operationB,
+                localCommit: runtimeLocalCommitEvidence("authority-a", operationID: operationA)
+            )
+            XCTFail("Expected mismatched operation lineage to be denied.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
+        }
+        let saveCount = await store.currentSaveReminderCount()
+        let blocked = try await ledger.fetchRecords(status: .blocked)
+        XCTAssertEqual(saveCount, 0)
+        XCTAssertEqual(blocked.first?.operationID, operationB.lowercased())
+        XCTAssertTrue(
+            blocked.first?.blockedFacts.contains(
+                "External side effect authority evidence does not match the requested command and operation."
+            ) == true
+        )
+    }
+
+    func testLegacyEvidenceWithoutAuthorityLineageFailsClosedDuringDecode() throws {
+        let legacyJSON = """
+        {
+          "receiptID":"receipt",
+          "writeScope":"local_swift_data_single_context",
+          "committedAt":"2026-04-16T09:00:00Z",
+          "didCommitChanges":true,
+          "sideEffectPolicy":"no_external_side_effects"
+        }
+        """
+        XCTAssertThrowsError(
+            try JSONDecoder().decode(SideEffectLocalCommitEvidence.self, from: Data(legacyJSON.utf8))
+        )
     }
 
     func testIndependentFileRepositoriesGrantExactlyOneDurableClaim() async throws {
@@ -168,7 +258,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
                 for: fixtureSelection(),
                 now: fixtureNow(),
                 operationID: operationID,
-                localCommit: runtimeLocalCommitEvidence("interrupted")
+                localCommit: runtimeLocalCommitEvidence("interrupted", operationID: operationID.lowercased())
             )
             XCTFail("Expected interrupted result recording to fail closed.")
         } catch let error as CalendarRemindersError {
@@ -182,7 +272,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             for: fixtureSelection(),
             now: fixtureNow().addingTimeInterval(60),
             operationID: operationID,
-            localCommit: runtimeLocalCommitEvidence("interrupted")
+            localCommit: runtimeLocalCommitEvidence("interrupted", operationID: operationID.lowercased())
         )
 
         XCTAssertEqual(recovered.identifier, "reminder-1")
@@ -196,9 +286,13 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let ledger = InMemorySideEffectLedgerRepository()
         let outbox = SideEffectOutbox(ledger: ledger)
         let operationID = "85575be5-c078-46a1-9129-39b239178c68"
-        let commit = runtimeLocalCommitEvidence("write-only")
+        let commit = runtimeLocalCommitEvidence("write-only", operationID: operationID)
         _ = try await outbox.claim(
-            sideEffectRequest(id: "calendar.calendar-event.\(operationID)", localCommit: commit)
+            sideEffectRequest(
+                id: "calendar.calendar-event.\(operationID)",
+                operationID: operationID,
+                localCommit: commit
+            )
         )
         let service = EventKitIntegrationService(
             storeClient: store,
@@ -266,11 +360,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
+        let operationID = operationID("reminder")
         let record = try await service.createReminder(
             for: fixtureSelection(),
             now: fixtureNow(),
-            operationID: "operation-reminder",
-            localCommit: runtimeLocalCommitEvidence("reminder")
+            operationID: operationID,
+            localCommit: runtimeLocalCommitEvidence("reminder", operationID: operationID)
         )
         let payload = await store.lastReminderPayload
 
@@ -305,11 +400,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             reminderRepository: reminderRepository
         )
 
+        let operationID = operationID("reminder-persist")
         let record = try await service.createReminder(
             for: fixtureSelection(),
             now: fixtureNow(),
-            operationID: "operation-reminder-persist",
-            localCommit: runtimeLocalCommitEvidence("reminder-persist")
+            operationID: operationID,
+            localCommit: runtimeLocalCommitEvidence("reminder-persist", operationID: operationID)
         )
         let loadedReminder = try await reminderRepository.reminder(id: record.identifier)
         let loaded = try XCTUnwrap(loadedReminder)
@@ -325,6 +421,53 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(loaded.state.isActive)
         XCTAssertFalse(loaded.state.isTerminal)
         XCTAssertTrue(loaded.deliveryPolicy.usesLocalNotificationDelivery)
+    }
+
+    func testReminderMirrorFailureRetriesWithoutSecondEventKitSave() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let ledger = InMemorySideEffectLedgerRepository()
+        let mirror = FailOnceReminderRepository()
+        let pending = MemoryPendingEventKitOperationStore()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger)),
+            reminderRepository: mirror,
+            pendingOperationStore: pending
+        )
+        let operationID = operationID("mirror-recovery")
+        let evidence = runtimeLocalCommitEvidence("mirror-recovery", operationID: operationID)
+        do {
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: operationID,
+                localCommit: evidence
+            )
+            XCTFail("Expected first local mirror materialization to fail.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(
+                error,
+                .mirrorMaterializationPending(scope: .reminders, externalIdentifier: "reminder-1")
+            )
+        }
+
+        let terminalBeforeRetry = try await ledger.fetchRecords(status: .succeeded)
+        let firstSaveCount = await store.currentSaveReminderCount()
+        XCTAssertEqual(terminalBeforeRetry.first?.receiptID, "reminder-1")
+        XCTAssertEqual(firstSaveCount, 1)
+
+        let recovered = try await service.createReminder(
+            for: fixtureSelection(),
+            now: fixtureNow().addingTimeInterval(60),
+            operationID: operationID,
+            localCommit: evidence
+        )
+        let mirrored = try await mirror.reminder(id: recovered.identifier)
+        let finalSaveCount = await store.currentSaveReminderCount()
+        XCTAssertEqual(recovered.identifier, "reminder-1")
+        XCTAssertNotNil(mirrored)
+        XCTAssertEqual(finalSaveCount, 1)
     }
 
     func testCreateReminderRequiresLocalCommitReceiptBeforeSaving() async throws {
@@ -366,11 +509,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         do {
+            let operationID = operationID("reminder-save-failure")
             _ = try await service.createReminder(
                 for: fixtureSelection(),
                 now: fixtureNow(),
-                operationID: "operation-reminder-save-failure",
-                localCommit: runtimeLocalCommitEvidence("reminder-save-failure")
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence("reminder-save-failure", operationID: operationID)
             )
             XCTFail("Expected reminder save failure to throw.")
         } catch let error as CalendarRemindersError {
@@ -602,12 +746,13 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         do {
+            let operationID = operationID("calendar-save-failure")
             _ = try await service.createCalendarEvent(
                 for: fixtureSelection(),
                 durationMinutes: 45,
                 now: fixtureNow(),
-                operationID: "operation-calendar-save-failure",
-                localCommit: runtimeLocalCommitEvidence("calendar-save-failure")
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence("calendar-save-failure", operationID: operationID)
             )
             XCTFail("Expected calendar event save failure to throw.")
         } catch let error as CalendarRemindersError {
@@ -635,12 +780,13 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
+        let operationID = operationID("calendar-event")
         let record = try await service.createCalendarEvent(
             for: fixtureSelection(),
             durationMinutes: 45,
             now: fixtureNow(),
-            operationID: "operation-calendar-event",
-            localCommit: runtimeLocalCommitEvidence("calendar-event")
+            operationID: operationID,
+            localCommit: runtimeLocalCommitEvidence("calendar-event", operationID: operationID)
         )
 
         let records = await sideEffectLedger.records
@@ -672,19 +818,21 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
+        let firstOperationID = operationID("calendar-event-repeat-1")
         _ = try await service.createCalendarEvent(
             for: fixtureSelection(),
             durationMinutes: 45,
             now: fixtureNow(),
-            operationID: "operation-calendar-event-repeat-1",
-            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-1")
+            operationID: firstOperationID,
+            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-1", operationID: firstOperationID)
         )
+        let secondOperationID = operationID("calendar-event-repeat-2")
         _ = try await service.createCalendarEvent(
             for: fixtureSelection(),
             durationMinutes: 45,
             now: fixtureNow(),
-            operationID: "operation-calendar-event-repeat-2",
-            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-2")
+            operationID: secondOperationID,
+            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-2", operationID: secondOperationID)
         )
 
         let records = await sideEffectLedger.records
@@ -700,18 +848,26 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 private extension EventKitIntegrationServiceTests {
     func sideEffectRequest(
         id: String,
+        operationID: String? = nil,
         localCommit: SideEffectLocalCommitEvidence? = nil
     ) -> SideEffectOutboxRequest {
-        SideEffectOutboxRequest(
+        let resolvedOperationID = operationID ?? self.operationID("concurrent")
+        let resolvedCommit = localCommit ?? runtimeLocalCommitEvidence(
+            "concurrent",
+            operationID: resolvedOperationID
+        )
+        return SideEffectOutboxRequest(
             id: id,
             effectKind: .calendar,
             actionKind: .writeCalendarBlock,
             sourceDomain: .time,
+            commandID: resolvedCommit.authorityCommandID,
+            operationID: resolvedOperationID,
             requestedAt: fixtureNow(),
             externalEffect: true,
             requiresConfirmation: false,
             commitRequirement: .localCommitRequired,
-            localCommit: localCommit ?? runtimeLocalCommitEvidence("concurrent"),
+            localCommit: resolvedCommit,
             requestedStatus: .queued,
             requestedBoundary: .externalEffect
         )
@@ -757,8 +913,10 @@ private extension EventKitIntegrationServiceTests {
         )
     }
 
-    func runtimeLocalCommitEvidence(_ suffix: String) -> SideEffectLocalCommitEvidence {
+    func runtimeLocalCommitEvidence(_ suffix: String, operationID: String) -> SideEffectLocalCommitEvidence {
         SideEffectLocalCommitEvidence(
+            authorityCommandID: "authority.command.\(suffix).\(operationID)",
+            operationID: operationID,
             receiptID: "runtime.commit-receipt.\(suffix)",
             writeScope: .localSwiftDataSingleContext,
             committedAt: "2026-04-16T09:00:00Z",
@@ -768,6 +926,34 @@ private extension EventKitIntegrationServiceTests {
             runtimeEventID: "runtime.event.\(suffix)",
             runtimeReceiptID: "runtime.receipt.\(suffix)",
             rollbackPlanID: "runtime.rollback.\(suffix)"
+        )
+    }
+
+    func operationID(_ suffix: String) -> String {
+        let scalarTotal = suffix.unicodeScalars.reduce(0) { ($0 + Int($1.value)) % 0xFFFFFF }
+        return String(format: "00000000-0000-4000-8000-%012x", scalarTotal)
+    }
+
+    func existingRecord(
+        id: String,
+        operationID: String,
+        status: SideEffectLedgerStatus
+    ) -> SideEffectLedgerRecord {
+        SideEffectLedgerRecord(
+            id: id,
+            effectKind: .calendar,
+            status: status,
+            boundary: .externalEffect,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            commandID: "authority.existing",
+            operationID: operationID,
+            claimToken: status == .leased ? "existing-token" : nil,
+            occurredAt: DomainTimestamp.string(from: fixtureNow()),
+            localOnly: false,
+            requiresConfirmation: false,
+            externalEffect: true,
+            receiptID: status == .succeeded ? "existing-reminder" : nil
         )
     }
 }

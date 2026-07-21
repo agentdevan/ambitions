@@ -130,6 +130,7 @@ enum CalendarRemindersError: LocalizedError, Equatable {
     case missingLocalCommitReceipt(scope: CalendarRemindersScope)
     case reconciliationRequired(scope: CalendarRemindersScope)
     case resultRecordingIndeterminate(scope: CalendarRemindersScope, externalIdentifier: String)
+    case mirrorMaterializationPending(scope: CalendarRemindersScope, externalIdentifier: String)
     case saveFailed(String)
 
     var errorDescription: String? {
@@ -163,7 +164,10 @@ enum CalendarRemindersError: LocalizedError, Equatable {
                 : "This calendar write needs reconciliation before it can be retried safely."
         case let .resultRecordingIndeterminate(scope, externalIdentifier):
             let item = scope == .reminders ? "reminder" : "calendar event"
-            return "The (item) was saved as (externalIdentifier), but its durable completion record needs reconciliation."
+            return "The \(item) was saved as \(externalIdentifier), but its durable completion record needs reconciliation."
+        case let .mirrorMaterializationPending(scope, externalIdentifier):
+            let item = scope == .reminders ? "reminder" : "calendar event"
+            return "The \(item) was saved as \(externalIdentifier), but its local mirror still needs recovery."
         case let .saveFailed(message):
             return "Unable to save to EventKit: \(message)"
         }

@@ -53,6 +53,20 @@ actor FileSideEffectLedgerRepository: SideEffectLedgerRepository {
         return result
     }
 
+    func insertIfAbsent(_ record: SideEffectLedgerRecord) async throws -> SideEffectLedgerClaimResult {
+        var result: SideEffectLedgerClaimResult?
+        try coordinatedWrite { envelope in
+            if let existing = envelope.records.first(where: { $0.id == record.id }) {
+                result = .existing(existing)
+                return
+            }
+            envelope.records.append(record)
+            result = .claimed(record)
+        }
+        guard let result else { throw CocoaError(.fileWriteUnknown) }
+        return result
+    }
+
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
         var didFinalize = false
         try coordinatedWrite { envelope in

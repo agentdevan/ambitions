@@ -21,6 +21,7 @@ struct RuntimeExternalEffectRequest: Sendable {
 
 struct RuntimeExternalEffectAuthorization: Sendable {
     let operationID: String
+    let commandID: String
     let localCommit: SideEffectLocalCommitEvidence
 }
 
@@ -68,14 +69,21 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
         }
         let command = command(for: resolvedRequest)
         let result = await commit(command: command, request: resolvedRequest)
+        let authorityCommandID = commandID(for: resolvedRequest)
         guard let evidence = SideEffectLocalCommitEvidence(
             committedResult: result,
-            committedAt: request.requestedAt
+            committedAt: request.requestedAt,
+            authorityCommandID: authorityCommandID,
+            operationID: operationID
         ) else {
             try? await pendingOperationStore.complete(fingerprint: fingerprint, operationID: operationID)
             throw RuntimeExternalEffectAuthorizationError.authorityDidNotCommit
         }
-        return RuntimeExternalEffectAuthorization(operationID: operationID, localCommit: evidence)
+        return RuntimeExternalEffectAuthorization(
+            operationID: operationID,
+            commandID: authorityCommandID,
+            localCommit: evidence
+        )
     }
 
     private func command(for request: RuntimeExternalEffectRequest) -> AmbitionsCommand {
@@ -141,9 +149,15 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
             )
             guard let evidence = SideEffectLocalCommitEvidence(
                 committedResult: result,
-                committedAt: DomainTimestamp.date(from: envelope.event.occurredAt) ?? request.requestedAt
+                committedAt: DomainTimestamp.date(from: envelope.event.occurredAt) ?? request.requestedAt,
+                authorityCommandID: commandID(for: request),
+                operationID: request.operationID
             ) else { continue }
-            return RuntimeExternalEffectAuthorization(operationID: request.operationID, localCommit: evidence)
+            return RuntimeExternalEffectAuthorization(
+                operationID: request.operationID,
+                commandID: commandID(for: request),
+                localCommit: evidence
+            )
         }
         return nil
     }

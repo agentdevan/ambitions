@@ -149,3 +149,39 @@ actor RecordingEventKitSideEffectLedgerRepository: SideEffectLedgerRepository {
         return lhs.id < rhs.id
     }
 }
+
+actor FailOnceReminderRepository: ReminderRepository {
+    private enum Failure: Error { case unavailable }
+
+    private var shouldFailSave = true
+    private var reminders: [String: ReminderTrigger] = [:]
+
+    func listReminders() async throws -> [ReminderTrigger] { Array(reminders.values) }
+
+    func reminder(id: String) async throws -> ReminderTrigger? { reminders[id] }
+
+    func saveReminders(_ reminders: [ReminderTrigger]) async throws {
+        if shouldFailSave {
+            shouldFailSave = false
+            throw Failure.unavailable
+        }
+        reminders.forEach { self.reminders[$0.id] = $0 }
+    }
+
+    func deleteReminder(id: String, at timestamp: String) async throws {
+        _ = timestamp
+        reminders.removeValue(forKey: id)
+    }
+
+    func deleteReminders(attachedTo objectID: String) async throws {
+        reminders = reminders.filter { $0.value.attachedObjectID != objectID }
+    }
+
+    func exportReminders() async throws -> ReminderRepositoryExport {
+        ReminderRepositoryExport(exportedAt: "2026-04-16T09:00:00Z", reminders: Array(reminders.values))
+    }
+
+    func importReminders(_ export: ReminderRepositoryExport) async throws {
+        try await saveReminders(export.reminders)
+    }
+}

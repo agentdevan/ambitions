@@ -218,7 +218,7 @@ actor SideEffectOutbox: SideEffectOutboxing {
                     lease: nil,
                     claimToken: nil
                 )
-                return existing.status == .succeeded ? .terminal(attempt) : .reconciliationRequired(attempt)
+                return classifyExisting(attempt)
             case let .claimed(claimed):
                 let attempt = SideEffectAttempt(
                     id: request.id,
@@ -239,19 +239,30 @@ actor SideEffectOutbox: SideEffectOutboxing {
         }
     }
 
+    private func classifyExisting(_ attempt: SideEffectAttempt) -> SideEffectClaim {
+        let existing = attempt.ledgerRecord
+        guard existing.commandID == attempt.request.commandID,
+              existing.operationID == attempt.request.operationID else { return .denied(attempt) }
+        return existing.status == .succeeded ? .terminal(attempt) : .reconciliationRequired(attempt)
+    }
+
     private func deny(
         request: SideEffectOutboxRequest,
         decision: SideEffectPolicyDecision,
         record: SideEffectLedgerRecord
     ) async throws -> SideEffectClaim {
-        try await ledger.append(record)
+        let persisted: SideEffectLedgerRecord
+        switch try await ledger.insertIfAbsent(record) {
+        case let .claimed(inserted), let .existing(inserted):
+            persisted = inserted
+        }
         finishClaim(id: request.id)
         return .denied(
             SideEffectAttempt(
                 id: request.id,
                 request: request,
                 decision: decision,
-                ledgerRecord: record,
+                ledgerRecord: persisted,
                 lease: nil,
                 claimToken: nil
             )
@@ -285,6 +296,7 @@ actor SideEffectOutbox: SideEffectOutboxing {
             actionKind: attempt.request.actionKind,
             sourceDomain: attempt.request.sourceDomain,
             commandID: attempt.request.commandID,
+            operationID: attempt.request.operationID,
             targetObjects: attempt.request.targetObjects,
             occurredAt: recordedAt,
             localOnly: attempt.request.externalEffect == false,
@@ -340,6 +352,7 @@ actor SideEffectOutbox: SideEffectOutboxing {
             actionKind: request.actionKind,
             sourceDomain: request.sourceDomain,
             commandID: request.commandID,
+            operationID: request.operationID,
             leaseID: lease?.id,
             leasedAt: lease?.leasedAt,
             leaseExpiresAt: lease?.expiresAt,

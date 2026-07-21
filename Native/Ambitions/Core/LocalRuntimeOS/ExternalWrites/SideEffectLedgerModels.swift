@@ -45,6 +45,7 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
     let actionKind: SafeAutomationActionKind
     let sourceDomain: ActionReceiptSourceDomain
     let commandID: String?
+    let operationID: String?
     let claimToken: String?
     let leaseID: String?
     let leasedAt: String?
@@ -68,6 +69,7 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
         actionKind: SafeAutomationActionKind,
         sourceDomain: ActionReceiptSourceDomain,
         commandID: String? = nil,
+        operationID: String? = nil,
         claimToken: String? = nil,
         leaseID: String? = nil,
         leasedAt: String? = nil,
@@ -90,6 +92,7 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
         self.actionKind = actionKind
         self.sourceDomain = sourceDomain
         self.commandID = commandID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.operationID = operationID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.claimToken = claimToken?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.leaseID = leaseID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.leasedAt = leasedAt?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
@@ -261,7 +264,18 @@ protocol SideEffectLedgerRepository: Sendable {
     func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord]
     func fetchRecord(id: String) async throws -> SideEffectLedgerRecord?
     func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult
+    func insertIfAbsent(_ record: SideEffectLedgerRecord) async throws -> SideEffectLedgerClaimResult
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool
+}
+
+extension SideEffectLedgerRepository {
+    func insertIfAbsent(_ record: SideEffectLedgerRecord) async throws -> SideEffectLedgerClaimResult {
+        if let existing = try await fetchRecord(id: record.id) {
+            return .existing(existing)
+        }
+        try await append(record)
+        return .claimed(record)
+    }
 }
 
 enum SideEffectLedgerClaimResult: Sendable, Equatable {
@@ -299,6 +313,14 @@ actor InMemorySideEffectLedgerRepository: SideEffectLedgerRepository {
         return .claimed(claimed)
     }
 
+    func insertIfAbsent(_ record: SideEffectLedgerRecord) async throws -> SideEffectLedgerClaimResult {
+        if let existing = records.first(where: { $0.id == record.id }) {
+            return .existing(existing)
+        }
+        records.append(record)
+        return .claimed(record)
+    }
+
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
         guard let index = records.firstIndex(where: { $0.id == record.id }),
               records[index].claimToken == token else { return false }
@@ -324,6 +346,7 @@ extension SideEffectLedgerRecord {
             actionKind: actionKind,
             sourceDomain: sourceDomain,
             commandID: commandID,
+            operationID: operationID,
             claimToken: token,
             leaseID: leaseID,
             leasedAt: leasedAt,
@@ -350,6 +373,7 @@ extension SideEffectLedgerRecord {
             actionKind: actionKind,
             sourceDomain: sourceDomain,
             commandID: commandID,
+            operationID: operationID,
             targetObjects: targetObjects,
             occurredAt: occurredAt,
             localOnly: localOnly,

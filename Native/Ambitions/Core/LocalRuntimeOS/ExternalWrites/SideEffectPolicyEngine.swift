@@ -8,6 +8,8 @@ enum SideEffectCommitRequirement: String, Codable, Sendable, Equatable, Hashable
 }
 
 struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
+    let authorityCommandID: String
+    let operationID: String
     let receiptID: String
     let writeScope: AppUnitOfWorkWriteScope
     let committedAt: String
@@ -19,6 +21,8 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
     let rollbackPlanID: String?
 
     init(
+        authorityCommandID: String = "",
+        operationID: String = "",
         receiptID: String,
         writeScope: AppUnitOfWorkWriteScope,
         committedAt: String,
@@ -29,6 +33,8 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
         runtimeReceiptID: String? = nil,
         rollbackPlanID: String? = nil
     ) {
+        self.authorityCommandID = authorityCommandID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.operationID = operationID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.receiptID = receiptID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.writeScope = writeScope
         self.committedAt = committedAt.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -40,8 +46,10 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
         self.rollbackPlanID = rollbackPlanID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
     }
 
-    init(receipt: AppUnitOfWorkReceipt) {
+    init(receipt: AppUnitOfWorkReceipt, authorityCommandID: String = "", operationID: String = "") {
         self.init(
+            authorityCommandID: authorityCommandID,
+            operationID: operationID,
             receiptID: receipt.id,
             writeScope: receipt.writeScope,
             committedAt: receipt.completedAt,
@@ -50,8 +58,15 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
         )
     }
 
-    init(runtimeReceipt: RuntimeCommitReceipt, writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext) {
+    init(
+        runtimeReceipt: RuntimeCommitReceipt,
+        authorityCommandID: String = "",
+        operationID: String = "",
+        writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext
+    ) {
         self.init(
+            authorityCommandID: authorityCommandID,
+            operationID: operationID,
             receiptID: runtimeReceipt.id,
             writeScope: writeScope,
             committedAt: runtimeReceipt.committedAt,
@@ -67,6 +82,8 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
     init?(
         committedResult: AmbitionsCommandExecutionResult,
         committedAt: Date,
+        authorityCommandID: String,
+        operationID: String,
         writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext
     ) {
         guard RuntimeTransactionCommitPolicy.hasCommittedEvidence(committedResult),
@@ -77,6 +94,8 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
             return nil
         }
         self.init(
+            authorityCommandID: authorityCommandID,
+            operationID: operationID,
             receiptID: receiptID,
             writeScope: writeScope,
             committedAt: DomainTimestamp.string(from: committedAt),
@@ -91,6 +110,8 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
 
     var provesCommittedLocalMutationWithoutExternalEffects: Bool {
         receiptID.isEmpty == false &&
+            authorityCommandID.isEmpty == false &&
+            operationID.isEmpty == false &&
             committedAt.isEmpty == false &&
             didCommitChanges &&
             sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects &&
@@ -107,6 +128,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
     let actionKind: SafeAutomationActionKind
     let sourceDomain: ActionReceiptSourceDomain
     let commandID: String?
+    let operationID: String?
     let targetObjects: [LifeGraphObjectReference]
     let requestedAt: Date
     let externalEffect: Bool
@@ -126,6 +148,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
         actionKind: SafeAutomationActionKind,
         sourceDomain: ActionReceiptSourceDomain,
         commandID: String? = nil,
+        operationID: String? = nil,
         targetObjects: [LifeGraphObjectReference] = [],
         requestedAt: Date,
         externalEffect: Bool,
@@ -144,6 +167,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
         self.actionKind = actionKind
         self.sourceDomain = sourceDomain
         self.commandID = commandID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.operationID = operationID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.targetObjects = targetObjects
         self.requestedAt = requestedAt
         self.externalEffect = externalEffect
@@ -191,6 +215,7 @@ struct SideEffectPolicyEngine: Sendable {
         if request.commitRequirement == .localCommitRequired && localCommitIsValid == false {
             blockedFacts.append("External side effect cannot be attempted before a committed local mutation receipt.")
         }
+        blockedFacts.append(contentsOf: authorityLineageBlockedFacts(for: request))
 
         if request.externalEffect {
             reasons.append(.externalSideEffect)
@@ -250,6 +275,18 @@ struct SideEffectPolicyEngine: Sendable {
             blockedFacts: normalizedStrings(blockedFacts),
             degradedFacts: normalizedStrings(degradedFacts)
         )
+    }
+
+    private func authorityLineageBlockedFacts(for request: SideEffectOutboxRequest) -> [String] {
+        guard request.externalEffect else { return [] }
+        guard let commandID = request.commandID,
+              let operationID = request.operationID,
+              let localCommit = request.localCommit,
+              localCommit.authorityCommandID == commandID,
+              localCommit.operationID == operationID else {
+            return ["External side effect authority evidence does not match the requested command and operation."]
+        }
+        return []
     }
 
     private func normalizedReasons(_ reasons: [SafeAutomationPolicyReason]) -> [SafeAutomationPolicyReason] {

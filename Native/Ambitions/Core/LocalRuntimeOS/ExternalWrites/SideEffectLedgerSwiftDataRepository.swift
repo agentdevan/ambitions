@@ -44,6 +44,17 @@ struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
         }
     }
 
+    func insertIfAbsent(_ record: SideEffectLedgerRecord) async throws -> SideEffectLedgerClaimResult {
+        try await store.write { context in
+            if let storage = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .first(where: { $0.id == record.id }) {
+                return .existing(try RepositoryMapping.sideEffectLedgerRecord(from: storage))
+            }
+            context.insert(try RepositoryMapping.sideEffectLedgerStorageRecord(from: record))
+            return .claimed(record)
+        }
+    }
+
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
         try await store.write { context in
             guard let storage = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())

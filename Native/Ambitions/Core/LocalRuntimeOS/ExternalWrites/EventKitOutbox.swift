@@ -32,6 +32,8 @@ struct EventKitOutbox: Sendable {
             effectKind: .calendar,
             actionKind: actionKind,
             sourceDomain: .time,
+            commandID: localCommit?.authorityCommandID,
+            operationID: localCommit?.operationID,
             requestedAt: now,
             externalEffect: externalEffect,
             requiresConfirmation: requiresConfirmation,
@@ -59,6 +61,7 @@ struct EventKitOutbox: Sendable {
 
     func claimCalendarSideEffect(
         requestID: String,
+        operationID: String,
         localCommit: SideEffectLocalCommitEvidence,
         now: Date
     ) async throws -> SideEffectClaim {
@@ -68,6 +71,8 @@ struct EventKitOutbox: Sendable {
             effectKind: .calendar,
             actionKind: .writeCalendarBlock,
             sourceDomain: .time,
+            commandID: localCommit.authorityCommandID,
+            operationID: operationID,
             requestedAt: now,
             externalEffect: true,
             requiresConfirmation: false,
