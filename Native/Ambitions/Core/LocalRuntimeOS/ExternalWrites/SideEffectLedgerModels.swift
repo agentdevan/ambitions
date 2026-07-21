@@ -45,6 +45,10 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
     let actionKind: SafeAutomationActionKind
     let sourceDomain: ActionReceiptSourceDomain
     let commandID: String?
+    let claimToken: String?
+    let leaseID: String?
+    let leasedAt: String?
+    let leaseExpiresAt: String?
     let targetObjects: [LifeGraphObjectReference]
     let occurredAt: String
     let localOnly: Bool
@@ -64,6 +68,10 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
         actionKind: SafeAutomationActionKind,
         sourceDomain: ActionReceiptSourceDomain,
         commandID: String? = nil,
+        claimToken: String? = nil,
+        leaseID: String? = nil,
+        leasedAt: String? = nil,
+        leaseExpiresAt: String? = nil,
         targetObjects: [LifeGraphObjectReference] = [],
         occurredAt: String,
         localOnly: Bool = true,
@@ -82,6 +90,10 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
         self.actionKind = actionKind
         self.sourceDomain = sourceDomain
         self.commandID = commandID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.claimToken = claimToken?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.leaseID = leaseID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.leasedAt = leasedAt?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.leaseExpiresAt = leaseExpiresAt?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.targetObjects = Self.orderedUniqueTargets(targetObjects)
         self.occurredAt = occurredAt.trimmingCharacters(in: .whitespacesAndNewlines)
         self.localOnly = localOnly
@@ -158,7 +170,10 @@ struct SideEffectLedgerRecord: Codable, Sendable, Equatable, Hashable, Identifia
     }
 
     private static func normalizedUnique(_ values: [String]) -> [String] {
-        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+        let normalized = values
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.isEmpty == false }
+        return Array(Set(normalized)).sorted()
     }
 }
 
@@ -177,7 +192,11 @@ extension SideEffectLedgerEffectKind {
             self = .privacyMemory
         case .externalCommand:
             self = .commandBridge
-        case .createCapture, .routeCapture, .attachToGoal, .detachFromGoal, .archiveItem, .unarchiveItem, .markWaiting, .markDone, .moveActionLater, .changePriority, .changeDeadline, .changeTimeWindow, .shrinkAction, .splitAction, .dropAction, .deferAction, .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
+        case .createCapture, .routeCapture, .attachToGoal, .detachFromGoal,
+             .archiveItem, .unarchiveItem, .markWaiting, .markDone,
+             .moveActionLater, .changePriority, .changeDeadline, .changeTimeWindow,
+             .shrinkAction, .splitAction, .dropAction, .deferAction,
+             .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
             self = .localOnly
         }
     }
@@ -195,20 +214,24 @@ extension SideEffectLedgerStatus {
         case .noOp:
             self = .recordedLocalOnly
         default:
-            switch decision.permissionLevel {
-            case .executeLocalOnly:
-                self = .recordedLocalOnly
-            case .prepareDraft:
-                self = .preparedDraft
-            case .requiresConfirmation:
-                self = .confirmationRequired
-            case .neverAutomate:
-                self = .blocked
-            case .notSupportedYet:
-                self = .unsupported
-            case .suggestOnly:
-                self = .proposed
-            }
+            self = Self(permissionLevel: decision.permissionLevel)
+        }
+    }
+
+    private init(permissionLevel: SafeAutomationPermissionLevel) {
+        switch permissionLevel {
+        case .executeLocalOnly:
+            self = .recordedLocalOnly
+        case .prepareDraft:
+            self = .preparedDraft
+        case .requiresConfirmation:
+            self = .confirmationRequired
+        case .neverAutomate:
+            self = .blocked
+        case .notSupportedYet:
+            self = .unsupported
+        case .suggestOnly:
+            self = .proposed
         }
     }
 }
@@ -278,8 +301,8 @@ actor InMemorySideEffectLedgerRepository: SideEffectLedgerRepository {
 
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
         guard let index = records.firstIndex(where: { $0.id == record.id }),
-              records[index].commandID == token else { return false }
-        records[index] = record.claiming(token: token)
+              records[index].claimToken == token else { return false }
+        records[index] = record.finalized()
         return true
     }
 
@@ -296,11 +319,37 @@ extension SideEffectLedgerRecord {
         SideEffectLedgerRecord(
             id: id,
             effectKind: effectKind,
+            status: .leased,
+            boundary: boundary,
+            actionKind: actionKind,
+            sourceDomain: sourceDomain,
+            commandID: commandID,
+            claimToken: token,
+            leaseID: leaseID,
+            leasedAt: leasedAt,
+            leaseExpiresAt: leaseExpiresAt,
+            targetObjects: targetObjects,
+            occurredAt: occurredAt,
+            localOnly: localOnly,
+            requiresConfirmation: requiresConfirmation,
+            externalEffect: externalEffect,
+            reasons: reasons,
+            blockedFacts: blockedFacts,
+            degradedFacts: degradedFacts,
+            receiptID: receiptID,
+            schemaVersion: schemaVersion
+        )
+    }
+
+    func finalized() -> SideEffectLedgerRecord {
+        SideEffectLedgerRecord(
+            id: id,
+            effectKind: effectKind,
             status: status,
             boundary: boundary,
             actionKind: actionKind,
             sourceDomain: sourceDomain,
-            commandID: token,
+            commandID: commandID,
             targetObjects: targetObjects,
             occurredAt: occurredAt,
             localOnly: localOnly,

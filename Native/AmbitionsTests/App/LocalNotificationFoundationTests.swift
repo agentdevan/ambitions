@@ -708,8 +708,8 @@ private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
     }
 
     func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
-        guard let index = records.firstIndex(where: { $0.id == record.id }), records[index].commandID == token else { return false }
-        records[index] = record.claiming(token: token)
+        guard let index = records.firstIndex(where: { $0.id == record.id }), records[index].claimToken == token else { return false }
+        records[index] = record.finalized()
         return true
     }
 

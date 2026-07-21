@@ -2,6 +2,143 @@ import XCTest
 @testable import Ambitions
 
 final class EventKitIntegrationServiceTests: XCTestCase {
+    func testMalformedCommitEvidenceIsDeniedBeforeClaimOrEventKitSave() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let ledger = InMemorySideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger))
+        )
+        let malformed = SideEffectLocalCommitEvidence(
+            receiptID: "receipt",
+            writeScope: .localSwiftDataSingleContext,
+            committedAt: "2026-04-16T09:00:00Z",
+            didCommitChanges: false,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects
+        )
+
+        do {
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: UUID().uuidString,
+                localCommit: malformed
+            )
+            XCTFail("Expected malformed evidence to be denied.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
+        }
+
+        let saveCount = await store.currentSaveReminderCount()
+        let records = try await ledger.fetchRecords(status: .blocked)
+        XCTAssertEqual(saveCount, 0)
+        XCTAssertEqual(records.count, 1)
+        XCTAssertNil(records.first?.claimToken)
+        XCTAssertNil(records.first?.leaseID)
+    }
+
+    func testIndependentFileRepositoriesGrantExactlyOneDurableClaim() async throws {
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let url = directory.appendingPathComponent("ledger.json")
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let first = FileSideEffectLedgerRepository(fileURL: url)
+        let second = FileSideEffectLedgerRepository(fileURL: url)
+        let request = sideEffectRequest(id: "calendar.concurrent.file")
+        let proposed = SideEffectLedgerRecord(
+            id: request.id,
+            effectKind: .calendar,
+            status: .queued,
+            boundary: .externalEffect,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            commandID: "authority-command",
+            occurredAt: DomainTimestamp.string(from: fixtureNow()),
+            localOnly: false,
+            requiresConfirmation: false,
+            externalEffect: true
+        )
+
+        async let firstResult = first.claim(proposed, token: "token-a")
+        async let secondResult = second.claim(proposed, token: "token-b")
+        let results = try await [firstResult, secondResult]
+
+        XCTAssertEqual(results.filter(\.isNewClaim).count, 1)
+        let persisted = try await FileSideEffectLedgerRepository(fileURL: url)
+            .fetchRecord(id: request.id)
+        XCTAssertEqual(persisted?.commandID, "authority-command")
+        XCTAssertNotNil(persisted?.claimToken)
+    }
+
+    func testFileLedgerRestartPreservesLineageAndRejectsWrongFinalizeToken() async throws {
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let url = directory.appendingPathComponent("ledger.json")
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let proposed = SideEffectLedgerRecord(
+            id: "calendar.restart",
+            effectKind: .calendar,
+            status: .queued,
+            boundary: .externalEffect,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            commandID: "authority-command",
+            occurredAt: DomainTimestamp.string(from: fixtureNow()),
+            localOnly: false,
+            requiresConfirmation: false,
+            externalEffect: true
+        )
+        let first = FileSideEffectLedgerRepository(fileURL: url)
+        _ = try await first.claim(proposed, token: "right-token")
+        let restarted = FileSideEffectLedgerRepository(fileURL: url)
+        let terminal = SideEffectLedgerRecord(
+            id: proposed.id,
+            effectKind: .calendar,
+            status: .succeeded,
+            boundary: .externalEffect,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            commandID: proposed.commandID,
+            occurredAt: DomainTimestamp.string(from: fixtureNow()),
+            localOnly: false,
+            requiresConfirmation: false,
+            externalEffect: true,
+            receiptID: "event-1"
+        )
+
+        let wrongTokenFinalized = try await restarted.finalize(terminal, token: "wrong-token")
+        let rightTokenFinalized = try await restarted.finalize(terminal, token: "right-token")
+        XCTAssertFalse(wrongTokenFinalized)
+        XCTAssertTrue(rightTokenFinalized)
+        let persisted = try await restarted.fetchRecord(id: proposed.id)
+        XCTAssertEqual(persisted?.commandID, "authority-command")
+        XCTAssertNil(persisted?.claimToken)
+        XCTAssertEqual(persisted?.status, .succeeded)
+    }
+
+    func testPendingOperationIdentitySurvivesRestartUntilDurableCompletion() async throws {
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let url = directory.appendingPathComponent("pending.json")
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let fingerprint = FilePendingEventKitOperationStore.fingerprint(
+            kind: "reminder",
+            goalID: "goal-1",
+            stepID: "step-1"
+        )
+        let first = FilePendingEventKitOperationStore(fileURL: url)
+        let initial = try await first.resolve(fingerprint: fingerprint, proposedOperationID: "ignored")
+        let restarted = FilePendingEventKitOperationStore(fileURL: url)
+        let replay = try await restarted.resolve(fingerprint: fingerprint, proposedOperationID: "also-ignored")
+        XCTAssertEqual(replay, initial)
+
+        try await restarted.complete(fingerprint: fingerprint, operationID: initial)
+        let deliberateNext = try await FilePendingEventKitOperationStore(fileURL: url)
+            .resolve(fingerprint: fingerprint, proposedOperationID: "ignored-again")
+        XCTAssertNotEqual(deliberateNext, initial)
+    }
+
     func testTwoOutboxesSharingLedgerGrantOnlyOneDurableClaim() async throws {
         let ledger = InMemorySideEffectLedgerRepository()
         let first = SideEffectOutbox(ledger: ledger)
@@ -24,7 +161,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger))
         )
-        let operationID = "interrupted-reminder-operation"
+        let operationID = "56A02B42-C5A5-43E8-B7B7-CBBE837CA792"
 
         do {
             _ = try await service.createReminder(
@@ -34,7 +171,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
                 localCommit: runtimeLocalCommitEvidence("interrupted")
             )
             XCTFail("Expected interrupted result recording to fail closed.")
-        } catch {}
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(
+                error,
+                .resultRecordingIndeterminate(scope: .reminders, externalIdentifier: "reminder-1")
+            )
+        }
 
         let recovered = try await service.createReminder(
             for: fixtureSelection(),
@@ -53,7 +195,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         await store.setAuthorization(state: .writeOnly, for: .calendarEvents)
         let ledger = InMemorySideEffectLedgerRepository()
         let outbox = SideEffectOutbox(ledger: ledger)
-        let operationID = "write-only-calendar-operation"
+        let operationID = "85575be5-c078-46a1-9129-39b239178c68"
         let commit = runtimeLocalCommitEvidence("write-only")
         _ = try await outbox.claim(
             sideEffectRequest(id: "calendar.calendar-event.\(operationID)", localCommit: commit)
@@ -638,6 +780,13 @@ private extension SideEffectClaim {
 
     var requiresReconciliation: Bool {
         if case .reconciliationRequired = self { return true }
+        return false
+    }
+}
+
+private extension SideEffectLedgerClaimResult {
+    var isNewClaim: Bool {
+        if case .claimed = self { return true }
         return false
     }
 }

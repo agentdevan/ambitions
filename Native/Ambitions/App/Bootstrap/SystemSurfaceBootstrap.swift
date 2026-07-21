@@ -26,9 +26,13 @@ enum SystemSurfaceBootstrap {
         let notificationService = LocalNotificationFoundation(
             notificationOutbox: NotificationOutbox(recorder: sideEffectOutbox)
         )
+        let eventKitSideEffectOutbox = SideEffectOutbox(
+            ledger: FileSideEffectLedgerRepository.defaultEventKitLedger()
+        )
         let calendarRemindersService = EventKitIntegrationService(
-            eventKitOutbox: EventKitOutbox(recorder: sideEffectOutbox),
-            reminderRepository: repositories.reminders
+            eventKitOutbox: EventKitOutbox(recorder: eventKitSideEffectOutbox),
+            reminderRepository: repositories.reminders,
+            pendingOperationStore: FilePendingEventKitOperationStore.defaultStore()
         )
         return SystemSurfacePlatformServices(
             notificationService: notificationService,

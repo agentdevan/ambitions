@@ -45,10 +45,11 @@ enum SideEffectClaim: Sendable, Equatable {
     case claimed(SideEffectAttempt)
     case terminal(SideEffectAttempt)
     case reconciliationRequired(SideEffectAttempt)
+    case denied(SideEffectAttempt)
 
     var attempt: SideEffectAttempt {
         switch self {
-        case let .claimed(attempt), let .terminal(attempt), let .reconciliationRequired(attempt):
+        case let .claimed(attempt), let .terminal(attempt), let .reconciliationRequired(attempt), let .denied(attempt):
             return attempt
         }
     }
@@ -72,8 +73,13 @@ struct SideEffectAttemptResult: Sendable, Equatable {
         degradedFacts: [String] = []
     ) {
         self.state = state
-        self.externalReceiptID = externalReceiptID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
-        self.degradedFacts = Array(Set(degradedFacts.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+        self.externalReceiptID = externalReceiptID?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .nilIfEmpty
+        let normalizedFacts = degradedFacts
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.isEmpty == false }
+        self.degradedFacts = Array(Set(normalizedFacts)).sorted()
     }
 }
 
@@ -94,7 +100,11 @@ struct SideEffectReceipt: Codable, Sendable, Equatable, Hashable {
 
 protocol SideEffectOutboxing: Sendable {
     func enqueue(_ request: SideEffectOutboxRequest) async throws -> SideEffectAttempt
-    func recordResult(_ result: SideEffectAttemptResult, for attempt: SideEffectAttempt, occurredAt: Date) async throws -> SideEffectReceipt
+    func recordResult(
+        _ result: SideEffectAttemptResult,
+        for attempt: SideEffectAttempt,
+        occurredAt: Date
+    ) async throws -> SideEffectReceipt
     func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt?
     func claim(_ request: SideEffectOutboxRequest) async throws -> SideEffectClaim
 }
@@ -143,10 +153,24 @@ actor SideEffectOutbox: SideEffectOutboxing {
         if request.commitRequirement == .localCommitRequired &&
             request.externalEffect &&
             request.localCommit?.provesCommittedLocalMutationWithoutExternalEffects != true {
-            return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: nil, claimToken: nil)
+            return SideEffectAttempt(
+                id: request.id,
+                request: request,
+                decision: decision,
+                ledgerRecord: record,
+                lease: nil,
+                claimToken: nil
+            )
         }
 
-        return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: lease, claimToken: nil)
+        return SideEffectAttempt(
+            id: request.id,
+            request: request,
+            decision: decision,
+            ledgerRecord: record,
+            lease: lease,
+            claimToken: nil
+        )
     }
 
     func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt? {
@@ -179,6 +203,9 @@ actor SideEffectOutbox: SideEffectOutboxing {
             let decision = policyEngine.evaluate(request)
             let lease = makeLease(for: request, decision: decision)
             let proposed = makeRecord(request: request, decision: decision, lease: lease)
+            guard decision.mayAttemptExternalWrite else {
+                return try await deny(request: request, decision: decision, record: proposed)
+            }
             let token = UUID().uuidString.lowercased()
             switch try await ledger.claim(proposed, token: token) {
             case let .existing(existing):
@@ -210,6 +237,25 @@ actor SideEffectOutbox: SideEffectOutboxing {
             finishClaim(id: request.id)
             throw error
         }
+    }
+
+    private func deny(
+        request: SideEffectOutboxRequest,
+        decision: SideEffectPolicyDecision,
+        record: SideEffectLedgerRecord
+    ) async throws -> SideEffectClaim {
+        try await ledger.append(record)
+        finishClaim(id: request.id)
+        return .denied(
+            SideEffectAttempt(
+                id: request.id,
+                request: request,
+                decision: decision,
+                ledgerRecord: record,
+                lease: nil,
+                claimToken: nil
+            )
+        )
     }
 
     func recordResult(
@@ -281,7 +327,9 @@ actor SideEffectOutbox: SideEffectOutboxing {
             degradedFacts.append("External write lease \(lease.id) expires at \(lease.expiresAt).")
         }
         if let localCommit = request.localCommit {
-            degradedFacts.append("Local commit receipt \(localCommit.receiptID) completed before side-effect recording.")
+            degradedFacts.append(
+                "Local commit receipt \(localCommit.receiptID) completed before side-effect recording."
+            )
         }
 
         return SideEffectLedgerRecord(
@@ -292,6 +340,9 @@ actor SideEffectOutbox: SideEffectOutboxing {
             actionKind: request.actionKind,
             sourceDomain: request.sourceDomain,
             commandID: request.commandID,
+            leaseID: lease?.id,
+            leasedAt: lease?.leasedAt,
+            leaseExpiresAt: lease?.expiresAt,
             targetObjects: request.targetObjects,
             occurredAt: DomainTimestamp.string(from: request.requestedAt),
             localOnly: decision.localOnly,

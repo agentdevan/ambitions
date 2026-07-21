@@ -209,7 +209,7 @@ extension RepositoryBackedGoalsService {
                 )
             }
 
-            let localCommit = try await externalEffectCommitEvidence(
+            let externalAuthorization = try await externalEffectCommitEvidence(
                 operationID: request.operationID,
                 kind: .reminder,
                 goal: goal,
@@ -219,8 +219,8 @@ extension RepositoryBackedGoalsService {
             _ = try await calendarRemindersService.createReminder(
                 for: selection,
                 now: now,
-                operationID: request.operationID,
-                localCommit: localCommit
+                operationID: externalAuthorization.operationID,
+                localCommit: externalAuthorization.localCommit
             )
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
@@ -243,7 +243,7 @@ extension RepositoryBackedGoalsService {
             }
 
             let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
-            let localCommit = try await externalEffectCommitEvidence(
+            let externalAuthorization = try await externalEffectCommitEvidence(
                 operationID: request.operationID,
                 kind: .calendarEvent,
                 goal: goal,
@@ -254,8 +254,8 @@ extension RepositoryBackedGoalsService {
                 for: selection,
                 durationMinutes: 45,
                 now: now,
-                operationID: request.operationID,
-                localCommit: localCommit
+                operationID: externalAuthorization.operationID,
+                localCommit: externalAuthorization.localCommit
             )
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
@@ -482,7 +482,7 @@ extension RepositoryBackedGoalsService {
         goal: Goal,
         step: Step,
         now: Date
-    ) async throws -> SideEffectLocalCommitEvidence {
+    ) async throws -> RuntimeExternalEffectAuthorization {
         return try await externalEffectAuthorizer.authorize(
             RuntimeExternalEffectRequest(
                 operationID: operationID,

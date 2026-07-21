@@ -286,7 +286,7 @@ extension RepositoryBackedTodayService {
                 break
             }
 
-            let localCommit = try await externalEffectCommitEvidence(
+            let externalAuthorization = try await externalEffectCommitEvidence(
                 operationID: action.operationID,
                 kind: .reminder,
                 goalID: goalID,
@@ -296,8 +296,8 @@ extension RepositoryBackedTodayService {
             _ = try await calendarRemindersService.createReminder(
                 for: selection,
                 now: now,
-                operationID: action.operationID,
-                localCommit: localCommit
+                operationID: externalAuthorization.operationID,
+                localCommit: externalAuthorization.localCommit
             )
             message = TodayInlineMessage(
                 title: "Reminder created",
@@ -482,7 +482,7 @@ extension RepositoryBackedTodayService {
         goalID: String,
         step: Step,
         now: Date
-    ) async throws -> SideEffectLocalCommitEvidence {
+    ) async throws -> RuntimeExternalEffectAuthorization {
         return try await externalEffectAuthorizer.authorize(
             RuntimeExternalEffectRequest(
                 operationID: operationID,

@@ -5,17 +5,21 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     let storeClient: any EventKitStoreClient
     let eventKitOutbox: EventKitOutbox
     let reminderRepository: (any ReminderRepository)?
+    let pendingOperationStore: any PendingEventKitOperationStoring
     let calendar: Calendar
 
     init(
         storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
         eventKitOutbox: EventKitOutbox = EventKitOutbox(recorder: nil),
         reminderRepository: (any ReminderRepository)? = nil,
+        pendingOperationStore: any PendingEventKitOperationStoring =
+            MemoryPendingEventKitOperationStore(),
         calendar: Calendar = Calendar.current
     ) {
         self.storeClient = storeClient
         self.eventKitOutbox = eventKitOutbox
         self.reminderRepository = reminderRepository
+        self.pendingOperationStore = pendingOperationStore
         self.calendar = calendar
     }
 
@@ -63,26 +67,54 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         guard let localCommit else {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
         }
-        let marker = externalEffectMarker(operationID: operationID)
+        let operation = try await resolveOperationIdentity(
+            kind: "reminder",
+            selection: selection,
+            proposedOperationID: operationID
+        )
+        let marker = externalEffectMarker(operationID: operation.id)
         let payload = EventKitReminderPayload(
             title: selection.stepTitle,
             notes: explicitRequestNotes(from: selection, itemKind: "reminder") + "\n" + marker,
             dueDate: selection.suggestedDate
         )
         let claim = try await eventKitOutbox.claimCalendarSideEffect(
-            requestID: externalEffectRequestID(kind: "reminder", operationID: operationID),
+            requestID: externalEffectRequestID(kind: "reminder", operationID: operation.id),
             localCommit: localCommit,
             now: now
         )
+        if case .denied = claim {
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
+        }
         if case let .terminal(attempt) = claim, let identifier = attempt.ledgerRecord.receiptID {
+            try await pendingOperationStore.complete(fingerprint: operation.fingerprint, operationID: operation.id)
             return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
         }
         if case let .reconciliationRequired(existing) = claim {
-            return try await reconcileReminder(existing: existing, marker: marker, selection: selection, now: now)
+            let reconciled = try await reconcileReminder(
+                existing: existing,
+                marker: marker,
+                selection: selection,
+                now: now
+            )
+            try await pendingOperationStore.complete(
+                fingerprint: operation.fingerprint,
+                operationID: operation.id
+            )
+            return reconciled
         }
         let attempt = claim.attempt
+        let identifier: String
         do {
-            let identifier = try await storeClient.saveReminder(payload)
+            identifier = try await storeClient.saveReminder(payload)
+        } catch let error as CalendarRemindersError {
+            try? await recordFailedExternalWrite(for: attempt, item: "Reminder", now: now)
+            throw error
+        } catch {
+            try? await recordFailedExternalWrite(for: attempt, item: "Reminder", now: now)
+            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+        }
+        do {
             try await eventKitOutbox.recordCalendarResultStrict(
                 SideEffectAttemptResult(
                     state: .succeeded,
@@ -92,40 +124,29 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 for: attempt,
                 now: now
             )
-            if let reminderRepository {
-                try? await reminderRepository.saveReminders([
-                    makeReminder(
-                        identifier: identifier,
-                        selection: selection,
-                        now: now
-                    )
-                ])
-            }
-            return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
-        } catch let error as CalendarRemindersError {
-            try? await eventKitOutbox.recordCalendarResultStrict(
-                SideEffectAttemptResult(
-                    state: .failedSafely,
-                    degradedFacts: ["Reminder write could not be completed safely."]
-                ),
-                for: attempt,
-                now: now
-            )
-            throw error
         } catch {
-            try? await eventKitOutbox.recordCalendarResultStrict(
-                SideEffectAttemptResult(
-                    state: .failedSafely,
-                    degradedFacts: ["Reminder write could not be completed safely."]
-                ),
-                for: attempt,
-                now: now
+            throw CalendarRemindersError.resultRecordingIndeterminate(
+                scope: .reminders,
+                externalIdentifier: identifier
             )
-            throw CalendarRemindersError.saveFailed(error.localizedDescription)
         }
+        try await pendingOperationStore.complete(
+            fingerprint: operation.fingerprint,
+            operationID: operation.id
+        )
+        if let reminderRepository {
+            try? await reminderRepository.saveReminders([
+                makeReminder(identifier: identifier, selection: selection, now: now)
+            ])
+        }
+        return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
     }
 
-    func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
+    func createCalendarEvent(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date
+    ) async throws -> CreatedCalendarEventRecord {
         throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
     }
 
@@ -172,7 +193,12 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         guard let localCommit else {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
         }
-        let marker = externalEffectMarker(operationID: operationID)
+        let operation = try await resolveOperationIdentity(
+            kind: "calendar-event",
+            selection: selection,
+            proposedOperationID: operationID
+        )
+        let marker = externalEffectMarker(operationID: operation.id)
         let payload = EventKitEventPayload(
             title: selection.stepTitle,
             notes: explicitRequestNotes(from: selection, itemKind: "calendar event") + "\n" + marker,
@@ -180,11 +206,15 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             endDate: interval.end
         )
         let claim = try await eventKitOutbox.claimCalendarSideEffect(
-            requestID: externalEffectRequestID(kind: "calendar-event", operationID: operationID),
+            requestID: externalEffectRequestID(kind: "calendar-event", operationID: operation.id),
             localCommit: localCommit,
             now: now
         )
+        if case .denied = claim {
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
+        }
         if case let .terminal(attempt) = claim, let identifier = attempt.ledgerRecord.receiptID {
+            try await pendingOperationStore.complete(fingerprint: operation.fingerprint, operationID: operation.id)
             return CreatedCalendarEventRecord(
                 identifier: identifier,
                 title: selection.stepTitle,
@@ -193,17 +223,31 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             )
         }
         if case let .reconciliationRequired(existing) = claim {
-            return try await reconcileCalendarEvent(
+            let reconciled = try await reconcileCalendarEvent(
                 existing: existing,
                 marker: marker,
                 selection: selection,
                 interval: interval,
                 now: now
             )
+            try await pendingOperationStore.complete(
+                fingerprint: operation.fingerprint,
+                operationID: operation.id
+            )
+            return reconciled
         }
         let attempt = claim.attempt
+        let identifier: String
         do {
-            let identifier = try await storeClient.saveEvent(payload)
+            identifier = try await storeClient.saveEvent(payload)
+        } catch let error as CalendarRemindersError {
+            try? await recordFailedExternalWrite(for: attempt, item: "Calendar event", now: now)
+            throw error
+        } catch {
+            try? await recordFailedExternalWrite(for: attempt, item: "Calendar event", now: now)
+            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+        }
+        do {
             try await eventKitOutbox.recordCalendarResultStrict(
                 SideEffectAttemptResult(
                     state: .succeeded,
@@ -213,36 +257,29 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 for: attempt,
                 now: now
             )
-            return CreatedCalendarEventRecord(
-                identifier: identifier,
-                title: selection.stepTitle,
-                startDate: interval.start,
-                endDate: interval.end
-            )
-        } catch let error as CalendarRemindersError {
-            try? await eventKitOutbox.recordCalendarResultStrict(
-                SideEffectAttemptResult(
-                    state: .failedSafely,
-                    degradedFacts: ["Calendar event write could not be completed safely."]
-                ),
-                for: attempt,
-                now: now
-            )
-            throw error
         } catch {
-            try? await eventKitOutbox.recordCalendarResultStrict(
-                SideEffectAttemptResult(
-                    state: .failedSafely,
-                    degradedFacts: ["Calendar event write could not be completed safely."]
-                ),
-                for: attempt,
-                now: now
+            throw CalendarRemindersError.resultRecordingIndeterminate(
+                scope: .calendarEvents,
+                externalIdentifier: identifier
             )
-            throw CalendarRemindersError.saveFailed(error.localizedDescription)
         }
+        try await pendingOperationStore.complete(
+            fingerprint: operation.fingerprint,
+            operationID: operation.id
+        )
+        return CreatedCalendarEventRecord(
+            identifier: identifier,
+            title: selection.stepTitle,
+            startDate: interval.start,
+            endDate: interval.end
+        )
     }
 
-    func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
+    func detectConflicts(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date
+    ) async -> CalendarConflictReport? {
         let authorization = await authorizationState(for: .calendarEvents)
         guard authorization.canReadCalendarContext else {
             return nil
@@ -326,7 +363,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             decision: existing.decision,
             ledgerRecord: existing.ledgerRecord,
             lease: nil,
-            claimToken: existing.ledgerRecord.commandID
+            claimToken: existing.ledgerRecord.claimToken
         )
         try await eventKitOutbox.recordCalendarResultStrict(
             SideEffectAttemptResult(
@@ -335,6 +372,41 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 degradedFacts: ["Recovered an EventKit write by exact operation marker."]
             ),
             for: owned,
+            now: now
+        )
+    }
+
+    private func resolveOperationIdentity(
+        kind: String,
+        selection: NextStepSchedulingSelection,
+        proposedOperationID: String
+    ) async throws -> (id: String, fingerprint: String) {
+        let fingerprint = FilePendingEventKitOperationStore.fingerprint(
+            kind: kind,
+            goalID: selection.goalID,
+            stepID: selection.stepID
+        )
+        let operationID = try await pendingOperationStore.resolve(
+            fingerprint: fingerprint,
+            proposedOperationID: proposedOperationID
+        )
+        guard UUID(uuidString: operationID) != nil else {
+            throw SideEffectOutboxError.missingDurableID
+        }
+        return (operationID.lowercased(), fingerprint)
+    }
+
+    private func recordFailedExternalWrite(
+        for attempt: SideEffectAttempt,
+        item: String,
+        now: Date
+    ) async throws {
+        try await eventKitOutbox.recordCalendarResultStrict(
+            SideEffectAttemptResult(
+                state: .failedSafely,
+                degradedFacts: ["\(item) write could not be completed safely."]
+            ),
+            for: attempt,
             now: now
         )
     }
@@ -359,7 +431,10 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         let end = start.addingTimeInterval(TimeInterval(effectiveDuration * 60))
         if end <= now {
             let fallbackStart = now.addingTimeInterval(1_800)
-            return DateInterval(start: fallbackStart, end: fallbackStart.addingTimeInterval(TimeInterval(effectiveDuration * 60)))
+            return DateInterval(
+                start: fallbackStart,
+                end: fallbackStart.addingTimeInterval(TimeInterval(effectiveDuration * 60))
+            )
         }
         return DateInterval(start: start, end: end)
     }

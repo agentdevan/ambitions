@@ -37,7 +37,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 
 enum MeaningfulMutationRegistry {
     static let declaredMutationRowCount = 117
-    static let declaredWritePathRowCount = 51
+    static let declaredWritePathRowCount = 52
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
@@ -351,6 +351,11 @@ enum MeaningfulMutationRegistry {
             ]
         ),
         writePath(sourcePath: "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift", status: .unproven, rationale: "Notification support file access lacks row-specific adapter lifecycle proof."),
+        writePath(
+            sourcePath: "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitPendingOperationIdentityStore.swift",
+            status: .unproven,
+            rationale: "Pending EventKit operation identity is durable adapter state, not meaningful user-state authority."
+        ),
         writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .previewOnly, rationale: "DEBUG preview temporary storage is not production mutation authority."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", status: .unproven, rationale: "External creation handoff lacks row-specific terminated-app adapter proof."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift", status: .unproven, rationale: "External snapshot writes lack row-specific projection-only lineage proof."),
