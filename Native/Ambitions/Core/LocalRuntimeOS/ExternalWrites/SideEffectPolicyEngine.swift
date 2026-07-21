@@ -7,6 +7,11 @@ enum SideEffectCommitRequirement: String, Codable, Sendable, Equatable, Hashable
     case resultObservation = "result_observation"
 }
 
+enum SideEffectAuthorityLineageRequirement: String, Codable, Sendable, Equatable, Hashable {
+    case notRequired = "not_required"
+    case required
+}
+
 struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
     let authorityCommandID: String
     let operationID: String
@@ -110,8 +115,6 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
 
     var provesCommittedLocalMutationWithoutExternalEffects: Bool {
         receiptID.isEmpty == false &&
-            authorityCommandID.isEmpty == false &&
-            operationID.isEmpty == false &&
             committedAt.isEmpty == false &&
             didCommitChanges &&
             sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects &&
@@ -134,6 +137,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
     let externalEffect: Bool
     let requiresConfirmation: Bool
     let commitRequirement: SideEffectCommitRequirement
+    let authorityLineageRequirement: SideEffectAuthorityLineageRequirement
     let localCommit: SideEffectLocalCommitEvidence?
     let requestedStatus: SideEffectLedgerStatus?
     let requestedBoundary: SideEffectLedgerBoundary?
@@ -154,6 +158,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
         externalEffect: Bool,
         requiresConfirmation: Bool,
         commitRequirement: SideEffectCommitRequirement,
+        authorityLineageRequirement: SideEffectAuthorityLineageRequirement = .notRequired,
         localCommit: SideEffectLocalCommitEvidence? = nil,
         requestedStatus: SideEffectLedgerStatus? = nil,
         requestedBoundary: SideEffectLedgerBoundary? = nil,
@@ -173,6 +178,7 @@ struct SideEffectOutboxRequest: Sendable, Equatable {
         self.externalEffect = externalEffect
         self.requiresConfirmation = requiresConfirmation
         self.commitRequirement = commitRequirement
+        self.authorityLineageRequirement = authorityLineageRequirement
         self.localCommit = localCommit
         self.requestedStatus = requestedStatus
         self.requestedBoundary = requestedBoundary
@@ -278,7 +284,8 @@ struct SideEffectPolicyEngine: Sendable {
     }
 
     private func authorityLineageBlockedFacts(for request: SideEffectOutboxRequest) -> [String] {
-        guard request.externalEffect else { return [] }
+        guard request.externalEffect,
+              request.authorityLineageRequirement == .required else { return [] }
         guard let commandID = request.commandID,
               let operationID = request.operationID,
               let localCommit = request.localCommit,
