@@ -11,7 +11,7 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
         let reservation = try await coordinator.reserveStaging(
             migrationIdentity: "migration.initial"
         )
-        XCTAssertEqual(reservation.schemaVersion, 1)
+        XCTAssertEqual(reservation.schemaVersion, 2)
         XCTAssertEqual(reservation.migrationIdentity, "migration.initial")
         XCTAssertEqual(
             reservation.stagedStoreURL.lastPathComponent,
@@ -36,7 +36,7 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
             reservation: reservation,
             expectations: expectations
         )
-        XCTAssertEqual(report.schemaVersion, 1)
+        XCTAssertEqual(report.schemaVersion, 2)
         XCTAssertEqual(report.counts, expectations.counts)
         XCTAssertEqual(report.checksums, expectations.checksums)
         XCTAssertEqual(report.sqliteIntegrityResult, "ok")
@@ -435,10 +435,7 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
         )
 
         await assertMigrationError(
-            .reservationPathMismatch(
-                expected: reservation.stagingDirectoryURL,
-                actual: outsideDirectory
-            )
+            .unsafeFilesystemEntry("migration.symlink-swap")
         ) {
             _ = try await coordinator.verify(
                 reservation: reservation,
@@ -446,6 +443,287 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
             )
         }
         XCTAssertEqual(try Data(contentsOf: sourceURL), sourceBefore)
+    }
+
+    func testReservationDoesNotCreateThroughPreexistingStagingRootSymlink() async throws {
+        let root = temporaryRootURL()
+        let outsideDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        try FileManager.default.createDirectory(
+            at: outsideDirectory,
+            withIntermediateDirectories: true
+        )
+        try FileManager.default.createSymbolicLink(
+            at: root.appendingPathComponent("MigrationStaging"),
+            withDestinationURL: outsideDirectory
+        )
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+
+        await assertMigrationError(
+            .unsafeFilesystemEntry("MigrationStaging")
+        ) {
+            _ = try await coordinator.reserveStaging(
+                migrationIdentity: "migration.preexisting-symlink"
+            )
+        }
+
+        XCTAssertFalse(
+            FileManager.default.fileExists(
+                atPath: outsideDirectory.appendingPathComponent(
+                    "migration.preexisting-symlink"
+                ).path
+            )
+        )
+    }
+
+    func testActivationPublishesSealedVerifiedBytesAfterStagingMutation() async throws {
+        let root = temporaryRootURL()
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let prepared = try await prepareStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.sealed",
+            commandID: "command.verified",
+            revision: 1
+        )
+        let mutableStagingStore = try RuntimeStoreSQLite(
+            databaseURL: prepared.reservation.stagedStoreURL
+        )
+        _ = try await mutableStagingStore.commit(
+            makeTransition(
+                commandID: "command.unverified",
+                aggregateID: "migration.sealed",
+                expectedRevision: 0,
+                newRevision: 1
+            ),
+            idempotencyKey: "migration.sealed.2"
+        )
+
+        let pointer = try await coordinator.activate(
+            reservation: prepared.reservation,
+            verifiedReport: prepared.report,
+            activatedAt: Date(timeIntervalSince1970: 4_000)
+        )
+        let activeURL = try await coordinator.resolveActiveStore()
+        let activeStore = try RuntimeStoreSQLite(databaseURL: activeURL)
+        let snapshot = try await activeStore.snapshot()
+
+        XCTAssertEqual(snapshot.canonicalRevision, 1)
+        XCTAssertEqual(snapshot.events.map(\.id), ["event.command.verified"])
+        XCTAssertEqual(try fileDigest(activeURL), pointer.currentStore.digest)
+    }
+
+    func testActivationIgnoresReplacedStagingPathAndDoesNotMutateOutsideSource() async throws {
+        let root = temporaryRootURL()
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let prepared = try await prepareStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.sealed-swap",
+            commandID: "command.verified",
+            revision: 1
+        )
+        let outsideDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let outsideStoreURL = outsideDirectory.appendingPathComponent(
+            "RuntimeStore.sqlite.next"
+        )
+        let outsideStore = try RuntimeStoreSQLite(databaseURL: outsideStoreURL)
+        _ = try await outsideStore.commit(
+            makeTransition(commandID: "command.outside"),
+            idempotencyKey: "outside"
+        )
+        let outsideBefore = try fileDigest(outsideStoreURL)
+        try FileManager.default.removeItem(
+            at: prepared.reservation.stagingDirectoryURL
+        )
+        try FileManager.default.createSymbolicLink(
+            at: prepared.reservation.stagingDirectoryURL,
+            withDestinationURL: outsideDirectory
+        )
+
+        _ = try await coordinator.activate(
+            reservation: prepared.reservation,
+            verifiedReport: prepared.report,
+            activatedAt: Date(timeIntervalSince1970: 5_000)
+        )
+
+        XCTAssertEqual(try fileDigest(outsideStoreURL), outsideBefore)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: outsideStoreURL.path))
+    }
+
+    func testForgedAndConsumedVerificationReportsAreRejected() async throws {
+        let root = temporaryRootURL()
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let prepared = try await prepareStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.issued-report",
+            commandID: "command.issued-report",
+            revision: 1
+        )
+        let forgedIdentity = "verification.forged"
+        let forged = RuntimeStoreVerificationReport(
+            schemaVersion: prepared.report.schemaVersion,
+            reservationIdentity: prepared.report.reservationIdentity,
+            verificationIdentity: forgedIdentity,
+            migrationIdentity: prepared.report.migrationIdentity,
+            canonicalRevision: prepared.report.canonicalRevision,
+            counts: prepared.report.counts,
+            checksums: prepared.report.checksums,
+            sqliteIntegrityResult: prepared.report.sqliteIntegrityResult,
+            restartEquivalent: prepared.report.restartEquivalent,
+            candidateDigest: prepared.report.candidateDigest
+        )
+
+        await assertMigrationError(.verificationNotIssued(forgedIdentity)) {
+            _ = try await coordinator.activate(
+                reservation: prepared.reservation,
+                verifiedReport: forged,
+                activatedAt: Date(timeIntervalSince1970: 6_000)
+            )
+        }
+
+        let alteredIssuedReport = RuntimeStoreVerificationReport(
+            schemaVersion: prepared.report.schemaVersion,
+            reservationIdentity: prepared.report.reservationIdentity,
+            verificationIdentity: prepared.report.verificationIdentity,
+            migrationIdentity: prepared.report.migrationIdentity,
+            canonicalRevision: prepared.report.canonicalRevision + 1,
+            counts: prepared.report.counts,
+            checksums: prepared.report.checksums,
+            sqliteIntegrityResult: prepared.report.sqliteIntegrityResult,
+            restartEquivalent: prepared.report.restartEquivalent,
+            candidateDigest: prepared.report.candidateDigest,
+            expectationsDigest: prepared.report.expectationsDigest
+        )
+        await assertMigrationError(.verificationIdentityMismatch) {
+            _ = try await coordinator.activate(
+                reservation: prepared.reservation,
+                verifiedReport: alteredIssuedReport,
+                activatedAt: Date(timeIntervalSince1970: 6_500)
+            )
+        }
+
+        _ = try await coordinator.activate(
+            reservation: prepared.reservation,
+            verifiedReport: prepared.report,
+            activatedAt: Date(timeIntervalSince1970: 7_000)
+        )
+        await assertMigrationError(
+            .verificationAlreadyConsumed(prepared.report.verificationIdentity)
+        ) {
+            _ = try await coordinator.activate(
+                reservation: prepared.reservation,
+                verifiedReport: prepared.report,
+                activatedAt: Date(timeIntervalSince1970: 8_000)
+            )
+        }
+    }
+
+    func testOlderIssuedReportIsStaleAfterReplacementVerification() async throws {
+        let root = temporaryRootURL()
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let first = try await prepareStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.stale-report",
+            commandID: "command.first-report",
+            revision: 1
+        )
+        let replacementStore = try RuntimeStoreSQLite(
+            databaseURL: first.reservation.stagedStoreURL
+        )
+        _ = try await replacementStore.commit(
+            makeTransition(
+                commandID: "command.replacement-report",
+                aggregateID: "migration.stale-report"
+            ),
+            idempotencyKey: "migration.stale-report.replacement"
+        )
+        let replacementExpectations = try await makeExpectations(
+            migrationIdentity: first.reservation.migrationIdentity,
+            store: replacementStore
+        )
+        let replacementReport = try await coordinator.verify(
+            reservation: first.reservation,
+            expectations: replacementExpectations
+        )
+
+        await assertMigrationError(
+            .verificationAlreadyConsumed(first.report.verificationIdentity)
+        ) {
+            _ = try await coordinator.activate(
+                reservation: first.reservation,
+                verifiedReport: first.report,
+                activatedAt: Date(timeIntervalSince1970: 9_000)
+            )
+        }
+        let pointer = try await coordinator.activate(
+            reservation: first.reservation,
+            verifiedReport: replacementReport,
+            activatedAt: Date(timeIntervalSince1970: 10_000)
+        )
+        XCTAssertEqual(pointer.migrationIdentity, "migration.stale-report")
+    }
+
+    func testConcurrentCoordinatorsPreserveBothNewestAuthorities() async throws {
+        let root = temporaryRootURL()
+        let firstCoordinator = try RuntimeStoreMigrationCoordinator(
+            rootDirectoryURL: root
+        )
+        let secondCoordinator = try RuntimeStoreMigrationCoordinator(
+            rootDirectoryURL: root
+        )
+        _ = try await activateStore(
+            coordinator: firstCoordinator,
+            migrationIdentity: "migration.base",
+            commandID: "command.base",
+            revision: 1,
+            activatedAt: Date(timeIntervalSince1970: 1_000)
+        )
+        let firstPrepared = try await prepareStore(
+            coordinator: firstCoordinator,
+            migrationIdentity: "migration.concurrent-a",
+            commandID: "command.concurrent-a",
+            revision: 2
+        )
+        let secondPrepared = try await prepareStore(
+            coordinator: secondCoordinator,
+            migrationIdentity: "migration.concurrent-b",
+            commandID: "command.concurrent-b",
+            revision: 2
+        )
+
+        async let firstActivation = firstCoordinator.activate(
+            reservation: firstPrepared.reservation,
+            verifiedReport: firstPrepared.report,
+            activatedAt: Date(timeIntervalSince1970: 2_000)
+        )
+        async let secondActivation = secondCoordinator.activate(
+            reservation: secondPrepared.reservation,
+            verifiedReport: secondPrepared.report,
+            activatedAt: Date(timeIntervalSince1970: 3_000)
+        )
+        _ = try await (firstActivation, secondActivation)
+
+        let pointer = try decodePointer(root: root)
+        let retainedIdentities = Set(
+            [pointer.currentStore.migrationIdentity]
+                + [pointer.previousStore?.migrationIdentity].compactMap { $0 }
+        )
+        XCTAssertEqual(
+            retainedIdentities,
+            Set(["migration.concurrent-a", "migration.concurrent-b"])
+        )
+        _ = try await firstCoordinator.resolveActiveStore()
+        let rolledBack = try await secondCoordinator.rollback(
+            activatedAt: Date(timeIntervalSince1970: 4_000)
+        )
+        XCTAssertTrue(retainedIdentities.contains(rolledBack.currentStore.migrationIdentity))
+        XCTAssertTrue(retainedIdentities.contains(try XCTUnwrap(
+            rolledBack.previousStore
+        ).migrationIdentity))
     }
 
     private func activateStore(

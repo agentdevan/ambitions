@@ -4,17 +4,20 @@ import AmbitionsRuntimeCore
 
 public struct RuntimeStoreMigrationReservation: Codable, Sendable, Equatable {
     public let schemaVersion: Int
+    public let reservationIdentity: String
     public let migrationIdentity: String
     public let stagingDirectoryURL: URL
     public let stagedStoreURL: URL
 
     public init(
-        schemaVersion: Int = 1,
+        schemaVersion: Int = 2,
+        reservationIdentity: String = "",
         migrationIdentity: String,
         stagingDirectoryURL: URL,
         stagedStoreURL: URL
     ) {
         self.schemaVersion = schemaVersion
+        self.reservationIdentity = reservationIdentity
         self.migrationIdentity = migrationIdentity
         self.stagingDirectoryURL = stagingDirectoryURL
         self.stagedStoreURL = stagedStoreURL
@@ -116,29 +119,41 @@ public struct RuntimeStoreVerificationExpectations: Codable, Sendable, Equatable
 
 public struct RuntimeStoreVerificationReport: Codable, Sendable, Equatable {
     public let schemaVersion: Int
+    public let reservationIdentity: String
+    public let verificationIdentity: String
     public let migrationIdentity: String
     public let canonicalRevision: Int64
     public let counts: RuntimeStoreVerificationCounts
     public let checksums: RuntimeStoreStableChecksums
     public let sqliteIntegrityResult: String
     public let restartEquivalent: Bool
+    public let candidateDigest: String
+    public let expectationsDigest: String
 
     public init(
-        schemaVersion: Int = 1,
+        schemaVersion: Int = 2,
+        reservationIdentity: String,
+        verificationIdentity: String,
         migrationIdentity: String,
         canonicalRevision: Int64,
         counts: RuntimeStoreVerificationCounts,
         checksums: RuntimeStoreStableChecksums,
         sqliteIntegrityResult: String,
-        restartEquivalent: Bool
+        restartEquivalent: Bool,
+        candidateDigest: String,
+        expectationsDigest: String = ""
     ) {
         self.schemaVersion = schemaVersion
+        self.reservationIdentity = reservationIdentity
+        self.verificationIdentity = verificationIdentity
         self.migrationIdentity = migrationIdentity
         self.canonicalRevision = canonicalRevision
         self.counts = counts
         self.checksums = checksums
         self.sqliteIntegrityResult = sqliteIntegrityResult
         self.restartEquivalent = restartEquivalent
+        self.candidateDigest = candidateDigest
+        self.expectationsDigest = expectationsDigest
     }
 }
 
@@ -202,6 +217,12 @@ public enum RuntimeStoreMigrationError: Error, Sendable, Equatable {
     case digestMismatch(filename: String, expected: String, actual: String)
     case finalStoreAlreadyExists(String)
     case invalidPointer(String)
+    case unsafeFilesystemEntry(String)
+    case reservationNotIssued(String)
+    case verificationNotIssued(String)
+    case verificationAlreadyConsumed(String)
+    case verificationIdentityMismatch
+    case authorityConflict(expectedGeneration: Int64, actualGeneration: Int64)
     case injectedFailure(RuntimeStoreMigrationFailurePoint)
     case fileOperationFailed(operation: String, description: String)
 }

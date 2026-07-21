@@ -447,6 +447,65 @@ public actor RuntimeStoreSQLite {
     }
 }
 
+struct RuntimeStoreSQLiteMigrationObservation {
+    let snapshot: RuntimeStoreSnapshot
+    let outbox: [RuntimeExternalEffectRecord]
+    let integrityResult: String
+}
+
+extension RuntimeStoreSQLite {
+    static func migrationObservation(
+        at immutableDatabaseURL: URL
+    ) throws -> RuntimeStoreSQLiteMigrationObservation {
+        let database = try SQLiteConnection(
+            url: immutableDatabaseURL,
+            access: .readOnlyImmutable
+        )
+        try database.execute("BEGIN")
+        do {
+            let snapshot = RuntimeStoreSnapshot(
+                canonicalRevision: try canonicalRevision(database),
+                stateChanges: try records(
+                    RuntimeStateChange.self,
+                    sql: "SELECT state_json FROM runtime_state ORDER BY aggregate_kind, aggregate_id",
+                    database: database
+                ),
+                events: try records(
+                    RuntimeEvent.self,
+                    sql: "SELECT event_json FROM runtime_events ORDER BY rowid",
+                    database: database
+                ),
+                projectionChanges: try records(
+                    RuntimeProjectionChange.self,
+                    sql: "SELECT projection_json FROM runtime_projections ORDER BY projection_id",
+                    database: database
+                ),
+                receipts: try records(
+                    RuntimeReceipt.self,
+                    sql: "SELECT receipt_json FROM runtime_receipts ORDER BY rowid",
+                    database: database
+                ),
+                externalEffects: try records(
+                    RuntimeExternalEffectEnvelope.self,
+                    sql: "SELECT effect_json FROM runtime_external_effects ORDER BY rowid",
+                    database: database
+                )
+            )
+            let outbox = try externalEffectRecords(database: database)
+            let integrity = try database.pragmaIntegrityCheck()
+            try database.execute("COMMIT")
+            return RuntimeStoreSQLiteMigrationObservation(
+                snapshot: snapshot,
+                outbox: outbox,
+                integrityResult: integrity
+            )
+        } catch {
+            try? database.execute("ROLLBACK")
+            throw error
+        }
+    }
+}
+
 private extension RuntimeStoreSQLite {
     static func createSchema(_ database: SQLiteConnection) throws {
         try database.execute("PRAGMA journal_mode=WAL")
@@ -891,19 +950,39 @@ private enum SQLiteBinding {
 }
 
 private final class SQLiteConnection {
+    enum Access {
+        case createReadWrite
+        case readOnlyImmutable
+    }
+
     private(set) var handle: OpaquePointer?
 
     var message: String {
         handle.map { String(cString: sqlite3_errmsg($0)) } ?? "SQLite unavailable"
     }
 
-    init(url: URL) throws {
-        try FileManager.default.createDirectory(
-            at: url.deletingLastPathComponent(),
-            withIntermediateDirectories: true
-        )
-        let flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX
-        guard sqlite3_open_v2(url.path, &handle, flags, nil) == SQLITE_OK,
+    init(
+        url: URL,
+        access: Access = .createReadWrite
+    ) throws {
+        let filename: String
+        let flags: Int32
+        switch access {
+        case .createReadWrite:
+            try FileManager.default.createDirectory(
+                at: url.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
+            filename = url.path
+            flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX
+        case .readOnlyImmutable:
+            let escapedPath = url.path.addingPercentEncoding(
+                withAllowedCharacters: .urlPathAllowed
+            ) ?? url.path
+            filename = "file:\(escapedPath)?immutable=1"
+            flags = SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_URI
+        }
+        guard sqlite3_open_v2(filename, &handle, flags, nil) == SQLITE_OK,
               handle != nil
         else {
             let error = RuntimeStoreError.sqlite(message)
@@ -937,6 +1016,27 @@ private final class SQLiteConnection {
             throw RuntimeStoreError.sqlite(message)
         }
         return statement
+    }
+
+    func pragmaIntegrityCheck() throws -> String {
+        let statement = try prepare("PRAGMA integrity_check")
+        defer { sqlite3_finalize(statement) }
+        var results: [String] = []
+        while true {
+            switch sqlite3_step(statement) {
+            case SQLITE_ROW:
+                guard let value = sqlite3_column_text(statement, 0) else {
+                    throw RuntimeStoreError.sqlite(
+                        "SQLite integrity check returned an empty result."
+                    )
+                }
+                results.append(String(cString: value))
+            case SQLITE_DONE:
+                return results.joined(separator: "\n")
+            default:
+                throw RuntimeStoreError.sqlite(message)
+            }
+        }
     }
 
 }

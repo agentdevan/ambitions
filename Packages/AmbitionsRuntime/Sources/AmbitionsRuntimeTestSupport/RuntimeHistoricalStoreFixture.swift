@@ -17,12 +17,35 @@ public struct RuntimeHistoricalStoreFixture: Codable, Sendable, Equatable {
         expectedDigest: String
     ) throws -> Self {
         let url = immutableURL.standardizedFileURL
-        guard try isRegularFileWithoutFollowingLinks(url) else {
+        let descriptor = url.path.withCString { path -> Int32 in
+            #if canImport(Darwin)
+            Darwin.open(path, O_RDONLY | O_NOFOLLOW)
+            #else
+            Glibc.open(path, O_RDONLY | O_NOFOLLOW)
+            #endif
+        }
+        guard descriptor >= 0 else {
+            throw RuntimeHistoricalStoreFixtureError.notRegularFile(url)
+        }
+        defer {
+            #if canImport(Darwin)
+            _ = Darwin.close(descriptor)
+            #else
+            _ = Glibc.close(descriptor)
+            #endif
+        }
+        var status = stat()
+        #if canImport(Darwin)
+        let statusResult = Darwin.fstat(descriptor, &status)
+        #else
+        let statusResult = Glibc.fstat(descriptor, &status)
+        #endif
+        guard statusResult == 0, status.st_mode & S_IFMT == S_IFREG else {
             throw RuntimeHistoricalStoreFixtureError.notRegularFile(url)
         }
         let observedDigest: String
         do {
-            observedDigest = try digest(url)
+            observedDigest = try digest(descriptor)
         } catch {
             throw RuntimeHistoricalStoreFixtureError.fileReadFailed(
                 String(describing: error)
@@ -41,23 +64,28 @@ public struct RuntimeHistoricalStoreFixture: Codable, Sendable, Equatable {
         )
     }
 
-    private static func isRegularFileWithoutFollowingLinks(_ url: URL) throws -> Bool {
-        var fileStatus = stat()
-        let result = url.path.withCString { path in
-            lstat(path, &fileStatus)
+    private static func digest(_ descriptor: Int32) throws -> String {
+        #if canImport(Darwin)
+        guard Darwin.lseek(descriptor, 0, SEEK_SET) >= 0 else {
+            throw POSIXError(.EIO)
         }
-        guard result == 0 else { return false }
-        return fileStatus.st_mode & S_IFMT == S_IFREG
-    }
-
-    private static func digest(_ url: URL) throws -> String {
-        let handle = try FileHandle(forReadingFrom: url)
-        defer { try? handle.close() }
+        #else
+        guard Glibc.lseek(descriptor, 0, SEEK_SET) >= 0 else {
+            throw POSIXError(.EIO)
+        }
+        #endif
         var hasher = SHA256()
+        var buffer = [UInt8](repeating: 0, count: 1_048_576)
         while true {
-            let data = try handle.read(upToCount: 1_048_576) ?? Data()
-            guard !data.isEmpty else { break }
-            hasher.update(data: data)
+            let count: Int
+            #if canImport(Darwin)
+            count = Darwin.read(descriptor, &buffer, buffer.count)
+            #else
+            count = Glibc.read(descriptor, &buffer, buffer.count)
+            #endif
+            guard count >= 0 else { throw POSIXError(.EIO) }
+            guard count > 0 else { break }
+            hasher.update(data: Data(buffer[0..<count]))
         }
         return hasher.finalize()
             .map { String(format: "%02x", $0) }
