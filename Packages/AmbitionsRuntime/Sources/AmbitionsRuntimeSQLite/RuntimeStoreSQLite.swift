@@ -492,29 +492,35 @@ private extension RuntimeStoreSQLite {
             );
             """
         )
-        try addExternalEffectColumnIfNeeded(
+        let addedReconciliationStatus = try addExternalEffectColumnIfNeeded(
             "reconciliation_status TEXT NOT NULL DEFAULT 'pending' "
                 + "CHECK(reconciliation_status IN "
                 + "('pending', 'claimed', 'reconciled', 'failed'))",
             named: "reconciliation_status",
             database: database
         )
-        try addExternalEffectColumnIfNeeded(
+        if addedReconciliationStatus {
+            try database.execute(
+                "UPDATE runtime_external_effects "
+                    + "SET reconciliation_status = status"
+            )
+        }
+        _ = try addExternalEffectColumnIfNeeded(
             "attempt_count INTEGER NOT NULL DEFAULT 0",
             named: "attempt_count",
             database: database
         )
-        try addExternalEffectColumnIfNeeded(
+        _ = try addExternalEffectColumnIfNeeded(
             "claim_id TEXT",
             named: "claim_id",
             database: database
         )
-        try addExternalEffectColumnIfNeeded(
+        _ = try addExternalEffectColumnIfNeeded(
             "claimed_at REAL",
             named: "claimed_at",
             database: database
         )
-        try addExternalEffectColumnIfNeeded(
+        _ = try addExternalEffectColumnIfNeeded(
             "failure_description TEXT",
             named: "failure_description",
             database: database
@@ -525,14 +531,15 @@ private extension RuntimeStoreSQLite {
         _ definition: String,
         named columnName: String,
         database: SQLiteConnection
-    ) throws {
+    ) throws -> Bool {
         guard try !columns(
             in: "runtime_external_effects",
             database: database
-        ).contains(columnName) else { return }
+        ).contains(columnName) else { return false }
         try database.execute(
             "ALTER TABLE runtime_external_effects ADD COLUMN \(definition)"
         )
+        return true
     }
 
     static func columns(

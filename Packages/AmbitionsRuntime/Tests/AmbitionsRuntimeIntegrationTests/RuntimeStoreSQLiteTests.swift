@@ -389,6 +389,103 @@ final class RuntimeStoreSQLiteTests: XCTestCase {
         XCTAssertEqual(claimed?.attemptCount, 1)
     }
 
+    func testLegacyExternalEffectStatusesBackfillOnceAndPreserveEligibilityAcrossReopens() async throws {
+        let databaseURL = temporaryDatabaseURL()
+        try FileManager.default.createDirectory(
+            at: databaseURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+        var database: OpaquePointer?
+        XCTAssertEqual(
+            sqlite3_open_v2(
+                databaseURL.path,
+                &database,
+                SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE,
+                nil
+            ),
+            SQLITE_OK
+        )
+        let legacySchema = """
+        CREATE TABLE runtime_external_effects (
+            effect_id TEXT PRIMARY KEY,
+            command_id TEXT NOT NULL,
+            effect_json BLOB NOT NULL,
+            status TEXT NOT NULL CHECK(
+                status IN ('pending', 'reconciled', 'failed')
+            )
+        );
+        """
+        XCTAssertEqual(
+            sqlite3_exec(database, legacySchema, nil, nil, nil),
+            SQLITE_OK
+        )
+
+        let effects = makeTransition(
+            effectIDs: [
+                "effect.legacy.pending",
+                "effect.legacy.reconciled",
+                "effect.legacy.failed"
+            ]
+        ).externalEffects
+        let statuses = ["pending", "reconciled", "failed"]
+        for (effect, status) in zip(effects, statuses) {
+            let encodedEffect = try JSONEncoder().encode(effect)
+                .map { String(format: "%02x", $0) }
+                .joined()
+            let insert = """
+            INSERT INTO runtime_external_effects (
+                effect_id, command_id, effect_json, status
+            ) VALUES (
+                '\(effect.id)', 'command.legacy', X'\(encodedEffect)', '\(status)'
+            );
+            """
+            XCTAssertEqual(sqlite3_exec(database, insert, nil, nil, nil), SQLITE_OK)
+        }
+        XCTAssertEqual(sqlite3_close(database), SQLITE_OK)
+        database = nil
+
+        let migrated = try RuntimeStoreSQLite(databaseURL: databaseURL)
+        let initialRecords = try await migrated.externalEffectRecords()
+        XCTAssertEqual(
+            initialRecords.map(\.status),
+            [.pending, .reconciled, .failed]
+        )
+        XCTAssertEqual(initialRecords.map(\.attemptCount), [0, 0, 0])
+
+        let pendingClaimResult = try await migrated.claimNextExternalEffect(
+            claimID: "worker.pending",
+            claimedAt: Date(timeIntervalSince1970: 1_000)
+        )
+        let pendingClaim = try XCTUnwrap(pendingClaimResult)
+        XCTAssertEqual(pendingClaim.envelope.id, "effect.legacy.pending")
+        XCTAssertEqual(pendingClaim.status, .claimed)
+
+        let reopenedAfterClaim = try RuntimeStoreSQLite(databaseURL: databaseURL)
+        let recordsAfterClaim = try await reopenedAfterClaim.externalEffectRecords()
+        XCTAssertEqual(recordsAfterClaim[0], pendingClaim)
+        XCTAssertEqual(recordsAfterClaim[1].status, .reconciled)
+        XCTAssertEqual(recordsAfterClaim[2].status, .failed)
+
+        _ = try await reopenedAfterClaim.markExternalEffectReconciled(
+            effectID: pendingClaim.envelope.id,
+            claimID: "worker.pending"
+        )
+        let failedClaimResult = try await reopenedAfterClaim.claimNextExternalEffect(
+            claimID: "worker.failed",
+            claimedAt: Date(timeIntervalSince1970: 1_001)
+        )
+        let failedClaim = try XCTUnwrap(failedClaimResult)
+        XCTAssertEqual(failedClaim.envelope.id, "effect.legacy.failed")
+        XCTAssertEqual(failedClaim.status, .claimed)
+        XCTAssertEqual(failedClaim.attemptCount, 1)
+
+        let noEligibleEffects = try await reopenedAfterClaim.claimNextExternalEffect(
+            claimID: "worker.unexpected",
+            claimedAt: Date(timeIntervalSince1970: 1_002)
+        )
+        XCTAssertNil(noEligibleEffects)
+    }
+
     private func temporaryDatabaseURL() -> URL {
         FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString, isDirectory: true)
