@@ -24,6 +24,7 @@ final class AppBootstrapper {
     var phase: Phase = .idle
 
     private let mode: BootstrapMode
+    private let appIntentLaunchRouter: any AppIntentPendingLaunchRouting
     private var hasStarted = false
     private var pendingDeepLinks: [URL] = []
     private var didQueueConfiguredLaunchURL = false
@@ -31,8 +32,12 @@ final class AppBootstrapper {
     private(set) var latestSourceAtlasBackgroundRefreshInput: SourceAtlasPublicPackLifecycleRefreshInput?
     private(set) var latestSourceAtlasBackgroundRefreshResolution: SourceAtlasPublicPackLifecycleRefreshResolution?
 
-    init(mode: BootstrapMode = .automatic) {
+    init(
+        mode: BootstrapMode = .automatic,
+        appIntentLaunchRouter: any AppIntentPendingLaunchRouting = AppIntentLaunchRouter.shared
+    ) {
         self.mode = mode
+        self.appIntentLaunchRouter = appIntentLaunchRouter
     }
 
     func start() async {
@@ -71,8 +76,9 @@ final class AppBootstrapper {
     }
 
     func consumePendingAppIntentLaunchIfNeeded() {
-        guard let url = AppIntentLaunchRouter.shared.consumePendingURL() else { return }
-        handleDeepLink(url)
+        while let url = appIntentLaunchRouter.consumePendingURL() {
+            handleDeepLink(url)
+        }
     }
 
     func consumePendingExternalCreationsIfNeeded() {

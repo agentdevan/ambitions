@@ -246,13 +246,42 @@ final class AppIntentRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testIntentLaunchRouterQueuesAndConsumesOnePendingURL() throws {
-        let router = AppIntentLaunchRouter.shared
+    func testIntentLaunchRouterConsumesQueuedURLsInFirstInFirstOutOrder() throws {
+        let router = AppIntentLaunchRouter()
+        let firstURL = try XCTUnwrap(URL(string: "ambitions://tab/time"))
+        let secondURL = try XCTUnwrap(URL(string: "ambitions://tab/today"))
+
+        router.queue(firstURL)
+        router.queue(secondURL)
+
+        XCTAssertEqual(router.consumePendingURL(), firstURL)
+        XCTAssertEqual(router.consumePendingURL(), secondURL)
+        XCTAssertNil(router.consumePendingURL())
+    }
+
+    @MainActor
+    func testIntentLaunchRouterInstancesDoNotSharePendingURLs() throws {
+        let firstRouter = AppIntentLaunchRouter()
+        let secondRouter = AppIntentLaunchRouter()
         let url = try XCTUnwrap(URL(string: "ambitions://tab/time"))
 
-        router.queue(url)
+        firstRouter.queue(url)
 
-        XCTAssertEqual(router.consumePendingURL(), url)
+        XCTAssertNil(secondRouter.consumePendingURL())
+        XCTAssertEqual(firstRouter.consumePendingURL(), url)
+    }
+
+    @MainActor
+    func testBootstrapperConsumesItsInjectedIntentLaunchRouter() throws {
+        let router = AppIntentLaunchRouter()
+        let bootstrapper = AppBootstrapper(appIntentLaunchRouter: router)
+        let firstURL = try XCTUnwrap(URL(string: "ambitions://tab/time"))
+        let secondURL = try XCTUnwrap(URL(string: "ambitions://tab/today"))
+
+        router.queue(firstURL)
+        router.queue(secondURL)
+        bootstrapper.consumePendingAppIntentLaunchIfNeeded()
+
         XCTAssertNil(router.consumePendingURL())
     }
 }
