@@ -26,7 +26,7 @@ final class AppContainer {
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
     #if DEBUG
-    var debugSystemThemeModeOverride: AmbitionThemeMode? = nil
+    var debugSystemThemeModeOverride: AmbitionThemeMode?
     #endif
     let navigation: StageStore
     let todayService: any TodayServicing
@@ -78,7 +78,8 @@ final class AppContainer {
         ),
         commandRouter: any ShellCommandRouting,
         memoryLensService: any MemoryLensServicing,
-        onboardingService: any OnboardingServicing
+        onboardingService: any OnboardingServicing,
+        captureGoalHandoffCommands: CaptureGoalHandoffService
     ) {
         self.shell = AppShellCapability(
             navigation: navigation,
@@ -97,7 +98,8 @@ final class AppContainer {
             timeService: timeService,
             insightsService: insightsService,
             youService: youService,
-            youPreferencesCommands: youPreferencesCommands
+            youPreferencesCommands: youPreferencesCommands,
+            captureGoalHandoffCommands: captureGoalHandoffCommands
         )
         self.persistence = AppPersistenceCapability(
             bootstrapConfiguration: bootstrapConfiguration,

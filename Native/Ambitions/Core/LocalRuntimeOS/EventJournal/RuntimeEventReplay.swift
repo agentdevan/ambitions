@@ -74,7 +74,8 @@ struct RuntimeDomainEventCodec: Sendable {
         "ambitions.time.window_protected", "ambitions.time.window_corrected", "ambitions.mutation.undone",
         "ambitions.today.receipt_recorded",
         "ambitions.today.goal_step_action_applied",
-        "ambitions.time.ritual_action_applied"
+        "ambitions.time.ritual_action_applied",
+        "ambitions.capture.goal_handoff_applied"
     ]
 }
 
@@ -152,10 +153,18 @@ struct RuntimeDomainEventReplay: Sendable {
             guard case let .domainMutation(record) = envelope.event.payload else { return nil }
             return try? record.decodedEvent()
         }
-        let captures = events.compactMap { event -> CaptureCreatedDomainEvent? in
-            guard case let .captureCreated(value) = event else { return nil }
-            return value
-        }.sorted { $0.captureID < $1.captureID }
+        var capturesByID: [String: CaptureCreatedDomainEvent] = [:]
+        for event in events {
+            switch event {
+            case let .captureCreated(value):
+                capturesByID[value.captureID] = value
+            case let .captureGoalHandoffApplied(plan):
+                capturesByID[plan.captureID] = CaptureCreatedDomainEvent(capture: plan.updatedCapture)
+            default:
+                break
+            }
+        }
+        let captures = capturesByID.values.sorted { $0.captureID < $1.captureID }
         let placements = events.compactMap { event -> StepPlacedDomainEvent? in
             guard case let .stepPlaced(value) = event else { return nil }
             return value

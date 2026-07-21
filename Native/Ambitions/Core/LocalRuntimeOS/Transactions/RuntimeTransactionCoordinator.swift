@@ -199,6 +199,26 @@ struct RuntimeTransactionCoordinator: Sendable {
             )
         }
 
+        if eventStore.storeKind == .inMemory,
+           command.isCaptureGoalHandoffMutation,
+           let semanticEvent = executionResult.flatMap({
+               RuntimeDomainEvent.semanticEvent(
+                   command: command,
+                   result: $0,
+                   occurredAt: committedAt
+               )
+           }) {
+            _ = try await eventStore.append(RuntimeEvent(
+                commandID: command.id,
+                actor: command.actor,
+                source: command.source,
+                target: command.target,
+                privacy: command.privacy,
+                localOnly: true,
+                occurredAt: committedAt,
+                payload: .domainMutation(try RuntimeDomainEventRecord(semanticEvent))
+            ))
+        }
         let envelope = try await eventStore.append(transaction.writeSet.event)
         let materialized = try await ProjectionMaterializer(store: eventStore).materializeAll(
             previousCursors: projectionCursors,

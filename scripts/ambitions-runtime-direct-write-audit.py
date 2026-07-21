@@ -181,7 +181,7 @@ def proof_test_is_executable(proof_test_id: str) -> bool:
 SEMANTIC_MUTATION_SINK_PATTERNS = tuple(
     re.compile(pattern)
     for pattern in (
-        r"\b(?:commandRouter|commandExecutor|externalActionService|runtimeExecutor|actionExecutor)\.execute\s*\(",
+        r"\b(?:commandRouter|commandExecutor|externalActionService|runtimeExecutor|actionExecutor|runtimeClient)\.execute\s*\(",
         r"\bTimeFieldMutationCoordinator\(\)\.(?:perform|undo)\s*\(",
         r"\b(?:captureService|service|receiptCommands|preferencesCommands)\.(?:createGoal|createCapture|performAction|submitClarificationAnswer|submitExplainabilityCorrection|saveYouPreferences|makeTimeCalendarAware|updateCaptureState|routeToTimeSeed|markAsWaiting|markAsOptionalSomeday|markAsDeliverableSeed|attachCaptureToGoal|turnCaptureIntoGoal)\s*\(",
         r"\b(?:repositories\.[A-Za-z0-9_]+|repository|appStateRepository|eventLedger|recorder|outbox)\.(?:save[A-Za-z0-9_]*|append|insert|delete|record[A-Za-z0-9_]*|enqueue[A-Za-z0-9_]*)\s*\(",

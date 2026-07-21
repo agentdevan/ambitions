@@ -115,7 +115,11 @@ enum AppContainerFactory {
             sourceAtlasLifecycleRefreshService: surfaceServices.sourceAtlasLifecycleRefreshService,
             commandRouter: surfaceServices.commandRouter,
             memoryLensService: surfaceServices.memoryLensService,
-            onboardingService: surfaceServices.onboardingService
+            onboardingService: surfaceServices.onboardingService,
+            captureGoalHandoffCommands: CaptureGoalHandoffService(
+                repositories: repositories,
+                runtimeClient: runtimeCommandClient
+            )
         )
     }
 
@@ -152,7 +156,9 @@ enum AppContainerFactory {
             todayActionMaterializer: repositories.todayGoalStepActionMaterializer
                 ?? RepositoryTodayGoalStepActionMaterializer(repositories: repositories),
             timeRitualActionMaterializer: repositories.timeRitualActionMaterializer
-                ?? RepositoryTimeRitualActionMaterializer(repositories: repositories)
+                ?? RepositoryTimeRitualActionMaterializer(repositories: repositories),
+            captureGoalHandoffMaterializer: repositories.captureGoalHandoffMaterializer
+                ?? RepositoryCaptureGoalHandoffMaterializer(repositories: repositories)
         )
         let projectionStore = repositories.projectionStore
 

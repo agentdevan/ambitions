@@ -36,8 +36,8 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 117
-    static let declaredWritePathRowCount = 53
+    static let declaredMutationRowCount = 120
+    static let declaredWritePathRowCount = 55
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
@@ -249,6 +249,37 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TimeRitualOwnerWriteTests/testRepositoryFallbackFailsClosedWithoutPartialWrites"
             ]
         ),
+        mutation(
+            id: "time.ritual-view-model-adapter",
+            sourcePath: "TimeRitualsViewModel.perform",
+            commandKind: .updateGoal,
+            status: .adapter,
+            rationale: "The Time Ritual ViewModel executes the authority-owned command and requires its receipt, materialization, and exact Time projection cursor before success.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.time.ritual_action_applied",
+            projectionOwner: "TimeProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeRitualOwnerWriteTests/testAuthorityReplayAfterRestartMaterializesExactlyOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testViewModelPublishesSuccessOnlyForMatchingMaterializedTimeCursor"
+            ]
+        ),
+        mutation(
+            id: "time.command-view-model-adapter",
+            sourcePath: "TimeViewModel.executeTimeCommand",
+            commandKind: .placeStepInTime,
+            status: .adapter,
+            rationale: "The Time ViewModel delegates to the authority-owned runtime command and accepts visible success only for matching committed Time projection lineage.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.time.window_protected",
+            projectionOwner: "TimeProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeDurableMutationIntegrationTests/testPlaceStepSurvivesRuntimeRestartWithIdenticalProjectionReceiptAndSchedule",
+            proofTestIDs: [
+                "AmbitionsTests/TimeDurableMutationIntegrationTests/testRealExecutorProjectionClientAndViewModelAcceptMatchingCursorLineage",
+                "AmbitionsTests/TimeDurableMutationIntegrationTests/testStaleProjectionCannotBePresentedAsSuccessForNewReceipt"
+            ]
+        ),
         mutation(id: "step.create", sourcePath: "SimpleStepLifecycleService.createSimpleStep", commandKind: .addGoalScopeItem, status: .unproven, rationale: "Simple Step creation lacks row-specific atomic replay proof."),
         mutation(id: "step.place", sourcePath: "SimpleStepLifecycleService.placeStepInTime", commandKind: .placeStepInTime, status: .unproven, rationale: "Step placement lacks authoritative scheduling event proof."),
         mutation(id: "step.recover", sourcePath: "SimpleStepLifecycleService.markMissedStepForRecovery", commandKind: .recoverAction, status: .unproven, rationale: "Missed-step recovery lacks durable restart proof."),
@@ -311,7 +342,43 @@ enum MeaningfulMutationRegistry {
             ]
         ),
         mutation(id: "runtime.route-commitment", sourcePath: "AmbitionsCommandExecutor.executeRouteCommitment", commandKind: .routeCommitment, status: .unproven, rationale: "Commitment routing execution lacks row-specific atomic replay proof."),
-        mutation(id: "stage.capture-attachment", sourcePath: "AmbitionsStage.attachCaptureToCreatedGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Stage capture attachment lacks row-specific restart and cross-object replay proof."),
+        mutation(
+            id: "stage.capture-attachment",
+            sourcePath: "CaptureGoalHandoffService.perform",
+            commandKind: .attachToGoal,
+            status: .durable,
+            rationale: "Stage renders the typed result of an authority-first Capture-to-Goal handoff; the semantic event and atomic SwiftData materializer own replay and projection.",
+            executorOwner: "AmbitionsCommandExecutor",
+            durableStores: ["EventStoreSQLite", "CaptureRepository"],
+            eventKind: "ambitions.capture.goal_handoff_applied",
+            projectionOwner: "GoalsProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testDuplicateExecutionAndRestartReplayApplyTransitionOnce",
+            proofTestIDs: [
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testAuthoritySuccessAtomicallyConnectsSeedCaptureAndCreatedGoalIDs",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testJournalFailureAndTypedOutcomePreventFalseStageSuccess",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testFreshServiceRetryAfterRestartIsLogicalSuccessAndDifferentGoalCannotRebind",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testPreviewContainerExecutesEndToEndWithRealProjectionAndMaterializer"
+            ]
+        ),
+        mutation(
+            id: "stage.capture-attachment-materialization",
+            sourcePath: "SwiftDataCaptureGoalHandoffMaterializer.materialize",
+            commandKind: .attachToGoal,
+            status: .projectionOnly,
+            rationale: "The atomic Capture transition materializes only after the semantic authority event commits and converges idempotently on replay.",
+            executorOwner: "AmbitionsCommandExecutor",
+            durableStores: ["CaptureRepository"],
+            eventKind: "ambitions.capture.goal_handoff_applied",
+            projectionOwner: "GoalsProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testDuplicateExecutionAndRestartReplayApplyTransitionOnce",
+            proofTestIDs: [
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testInjectedMaterializerFailureRollsBackCaptureTransition",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testConcurrentGoalEditIsPreservedBecauseHandoffOwnsOnlyCaptureState",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testMissingOrRecreatedGoalBlocksInitialCommitBeforeIdempotentCaptureReturn"
+            ]
+        ),
         mutation(id: "prototype.runtime-perform", sourcePath: "DedicatedDevicePrototypeRuntime.perform", commandKind: .updateGoal, status: .unproven, rationale: "Prototype runtime mutation lacks production durable lineage and replay proof."),
         mutation(id: "capture.event-append", sourcePath: "DefaultCaptureService.appendCaptureEvent", commandKind: .quickCapture, status: .unproven, rationale: "Capture event append lacks row-specific projection, receipt, and replay proof."),
         mutation(id: "external-action.execute", sourcePath: "DefaultExternalActionCommandService.execute", commandKind: .completeAction, status: .unproven, rationale: "External action execution lacks row-specific durable reconciliation and replay proof."),
@@ -415,11 +482,31 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TimeRitualOwnerWriteTests/testCompleteMinimumSkipAndNeedsEasierMaterializeTheirExactOwnedChanges"
             ]
         ),
+        writePath(
+            sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/CaptureGoalHandoffMaterializer.swift",
+            status: .projectionOnly,
+            rationale: "The authority-owned Capture-to-Goal transition materializes atomically and advances the Goals projection cursor only after semantic commit.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.capture.goal_handoff_applied",
+            projectionOwner: "GoalsProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testDuplicateExecutionAndRestartReplayApplyTransitionOnce",
+            proofTestIDs: [
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testInjectedMaterializerFailureRollsBackCaptureTransition",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testConcurrentGoalEditIsPreservedBecauseHandoffOwnsOnlyCaptureState",
+                "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testMissingOrRecreatedGoalBlocksInitialCommitBeforeIdempotentCaptureReturn"
+            ]
+        ),
         writePath(sourcePath: "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift", status: .unproven, rationale: "Notification support file access lacks row-specific adapter lifecycle proof."),
         writePath(
             sourcePath: "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitPendingOperationIdentityStore.swift",
             status: .unproven,
             rationale: "Pending EventKit operation identity is durable adapter state, not meaningful user-state authority."
+        ),
+        writePath(
+            sourcePath: "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
+            status: .previewOnly,
+            rationale: "Preview and demo composition create UUID-isolated projection stores; production mutation authority remains in the runtime event journal."
         ),
         writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .previewOnly, rationale: "DEBUG preview temporary storage is not production mutation authority."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", status: .unproven, rationale: "External creation handoff lacks row-specific terminated-app adapter proof."),

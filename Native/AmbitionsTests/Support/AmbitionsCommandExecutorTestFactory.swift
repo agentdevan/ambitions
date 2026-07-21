@@ -19,7 +19,8 @@ extension AmbitionsCommandExecutor {
         receiptFactory: CommandReceiptFactory = CommandReceiptFactory(),
         scheduleStoreFileURL: URL? = nil,
         todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
-        timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil
+        timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil,
+        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil
     ) -> AmbitionsCommandExecutor {
         AmbitionsCommandExecutor(
             captureService: captureService,
@@ -38,7 +39,8 @@ extension AmbitionsCommandExecutor {
             receiptFactory: receiptFactory,
             scheduleStoreFileURL: scheduleStoreFileURL,
             todayActionMaterializer: todayActionMaterializer,
-            timeRitualActionMaterializer: timeRitualActionMaterializer
+            timeRitualActionMaterializer: timeRitualActionMaterializer,
+            captureGoalHandoffMaterializer: captureGoalHandoffMaterializer
         )
     }
 }

@@ -40,7 +40,10 @@ enum PreviewAppContainerFactory {
                 searchIndex: runtime.repositories.searchIndex,
                 commandJournal: runtime.repositories.commandJournal,
                 runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
-                receiptFactory: CommandReceiptFactory()
+                receiptFactory: CommandReceiptFactory(),
+                todayActionMaterializer: runtime.repositories.todayGoalStepActionMaterializer,
+                timeRitualActionMaterializer: runtime.repositories.timeRitualActionMaterializer,
+                captureGoalHandoffMaterializer: runtime.repositories.captureGoalHandoffMaterializer
         )
         let runtimeCommandClient = RuntimeCommandClient(
             execute: { command, context in
@@ -129,24 +132,20 @@ enum PreviewAppContainerFactory {
             ),
             commandRouter: commandRouter,
             memoryLensService: memoryLensService,
-            onboardingService: RepositoryBackedOnboardingService(appStateRepository: runtime.repositories.appState)
+            onboardingService: RepositoryBackedOnboardingService(appStateRepository: runtime.repositories.appState),
+            captureGoalHandoffCommands: CaptureGoalHandoffService(
+                repositories: runtime.repositories,
+                runtimeClient: runtimeCommandClient
+            )
         )
     }
 
     @MainActor
     private static func makePreviewRuntime(clock: any AmbitionsClock) -> AmbitionsRuntime {
-        let store = try! AmbitionsPersistenceStore(inMemory: true)
-        let repositories = AppRepositories(
-            goals: SwiftDataGoalRepository(store: store),
-            drafts: SwiftDataGoalDraftRepository(store: store),
-            evidence: SwiftDataProgressEvidenceRepository(store: store),
-            feedback: SwiftDataFeedbackEventRepository(store: store),
-            captures: SwiftDataCaptureRepository(store: store),
-            teaching: SwiftDataGoalTeachingSignalRepository(store: store),
-            goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
-            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
-            appState: SwiftDataAppStateRepository(store: store)
-        )
+        guard let store = try? AmbitionsPersistenceStore(inMemory: true) else {
+            preconditionFailure("Preview persistence must remain available")
+        }
+        let repositories = PersistenceBootstrap.makeRepositories(store: store, configuration: .preview)
         return AmbitionsRuntimeFactory.make(
             repositories: repositories,
             clock: clock,

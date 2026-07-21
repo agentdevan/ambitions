@@ -171,6 +171,7 @@ struct AppRepositories: Sendable {
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let todayGoalStepActionMaterializer: (any TodayGoalStepActionMaterializing)?
     let timeRitualActionMaterializer: (any TimeRitualActionMaterializing)?
+    let captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)?
     let appState: any AppStateRepository
 
     init(
@@ -201,6 +202,7 @@ struct AppRepositories: Sendable {
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         todayGoalStepActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
         timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil,
+        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil,
         appState: any AppStateRepository
     ) {
         self.goals = goals
@@ -230,6 +232,7 @@ struct AppRepositories: Sendable {
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.todayGoalStepActionMaterializer = todayGoalStepActionMaterializer
         self.timeRitualActionMaterializer = timeRitualActionMaterializer
+        self.captureGoalHandoffMaterializer = captureGoalHandoffMaterializer
         self.appState = appState
     }
 }

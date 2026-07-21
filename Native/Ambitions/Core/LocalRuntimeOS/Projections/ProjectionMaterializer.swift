@@ -193,6 +193,8 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
             [value.goalID, value.stepID]
         case let .timeRitualActionApplied(value):
             [value.goalID, value.stepID]
+        case let .captureGoalHandoffApplied(value):
+            [value.captureID, value.goalID]
         }
     }
 }

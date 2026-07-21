@@ -111,7 +111,10 @@ extension ProjectionDefinition {
             return ProjectionDefinition(
                 id: .goals,
                 family: .surface,
-                consumesEventKinds: [.commandExecution, .closureRecorded, .correctionRecorded, .proofAttached, .tombstoneRecorded],
+                consumesEventKinds: [
+                    .commandExecution, .closureRecorded, .correctionRecorded, .domainMutation,
+                    .proofAttached, .tombstoneRecorded
+                ],
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift", responsibility: "Goals overview board projection", migrationTarget: .goals),
                     .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift", responsibility: "Repository-backed Goals surface read path", migrationTarget: .goals),

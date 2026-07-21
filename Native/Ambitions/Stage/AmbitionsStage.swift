@@ -64,7 +64,7 @@ struct AmbitionsStage: View {
         .sheet(item: activeSheetOverlayBinding, onDismiss: {
             guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
             navigation.selectToday(entryContext: entryContext)
-        }) { overlay in
+        }, content: { overlay in
             AppShellOverlayView(
                 overlay: overlay,
                 onDismiss: {
@@ -76,7 +76,7 @@ struct AmbitionsStage: View {
                     }
                 }
             )
-        }
+        })
         .fullScreenCover(isPresented: $isOnboardingPresented) {
             ProgressiveIntelligenceOnboardingView { choice in
                 Task {
@@ -258,12 +258,13 @@ struct AmbitionsStage: View {
         }()
 
         if let captureID = overlay.captureID, let goalID = response.target.goalID {
-            do {
-                let binding = try await attachCaptureToCreatedGoal(captureID: captureID, goalID: goalID)
-                if binding != nil {
-                    body += " The capture stayed connected to this goal."
-                }
-            } catch {
+            let outcome = await container.runtimeCapability.captureGoalHandoffCommands.perform(
+                CaptureGoalHandoffRequest(captureID: captureID, goalID: goalID),
+                now: .now
+            )
+            if outcome.isAttached {
+                body += " The capture stayed connected to this goal."
+            } else {
                 body += " The goal was created, but the capture could not be attached yet."
             }
         }
@@ -290,30 +291,6 @@ struct AmbitionsStage: View {
     ) {
         creationMessage = nil
         container.commandRouter.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
-    }
-
-    private func attachCaptureToCreatedGoal(captureID: String, goalID: String) async throws -> CaptureGoalBinding? {
-        do {
-            return try await container.captureService.attachCaptureToGoal(
-                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
-                now: .now
-            )
-        } catch let error as CaptureServiceError {
-            guard case let .invalidTransition(from, to) = error,
-                  from == .seed,
-                  to == .goalBound else {
-                throw error
-            }
-
-            _ = try await container.captureService.updateCaptureState(
-                CaptureStateUpdateRequest(id: captureID, status: .actionable),
-                now: .now
-            )
-            return try await container.captureService.attachCaptureToGoal(
-                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
-                now: .now
-            )
-        }
     }
 
     private func presentCommandSheet(from source: ShellCommandEntrySource) {

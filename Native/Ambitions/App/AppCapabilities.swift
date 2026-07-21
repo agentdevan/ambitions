@@ -21,6 +21,7 @@ struct AppRuntimeCapability {
     let insightsService: any InsightsServicing
     let youService: any YouServicing
     let youPreferencesCommands: any YouPreferencesCommanding
+    let captureGoalHandoffCommands: CaptureGoalHandoffService
 }
 
 struct AppPersistenceCapability {

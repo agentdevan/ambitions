@@ -49,6 +49,7 @@ enum PersistenceBootstrap {
             capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
             todayGoalStepActionMaterializer: SwiftDataTodayGoalStepActionMaterializer(store: store),
             timeRitualActionMaterializer: SwiftDataTimeRitualActionMaterializer(store: store),
+            captureGoalHandoffMaterializer: SwiftDataCaptureGoalHandoffMaterializer(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }
@@ -62,7 +63,12 @@ enum PersistenceBootstrap {
 
     static func projectionStore(for configuration: AppBootstrapConfiguration) -> ProjectionStoreSQLite? {
         if configuration.usesInMemoryStore {
-            return nil
+            return ProjectionStoreSQLite(
+                databaseURL: FileManager.default.temporaryDirectory
+                    .appendingPathComponent("AmbitionsPreviewProjectionStores", isDirectory: true)
+                    .appendingPathComponent(UUID().uuidString, isDirectory: true)
+                    .appendingPathComponent("ProjectionStore.sqlite", isDirectory: false)
+            )
         }
         return ProjectionStoreSQLite.defaultLiveStore()
     }
