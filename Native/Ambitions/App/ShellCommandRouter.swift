@@ -231,7 +231,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                   let typedRoute = FlagshipQuickCaptureRoute(rawValue: decision.routeType.rawValue) else {
                 return rejectedQuickCaptureResult(
                     intent: intent,
-                    title: "Capture source is unavailable."
+                    title: "Capture could not be saved."
                 )
             }
             let intentResult = await intentSender.send(
@@ -276,7 +276,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             guard let captureID = receipt.affectedObjects.first(where: { $0.kind == .capture })?.id else {
                 return rejectedQuickCaptureResult(
                     intent: intent,
-                    title: "Capture proof is still unavailable."
+                    title: "Capture could not be saved."
                 )
             }
 
@@ -299,11 +299,9 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     commandValidation: .satisfied("Capture save command has non-empty user text."),
                     runtimeMutation: .satisfied("Typed runtime intent committed local capture \(captureID)."),
                     visibleMutation: .satisfied("Stage opened the global Capture composer after save."),
-                    proofReceipt: .satisfied(
-                        projectionReady
-                            ? "Runtime persisted receipt \(receipt.id) with ready projection cursors."
-                            : "Runtime persisted receipt \(receipt.id); projection catch-up remains explicit."
-                    ),
+                    proofReceipt: projectionReady
+                        ? .satisfied("Runtime returned persisted receipt \(receipt.id) with ready projection cursors.")
+                        : .unavailable("Runtime receipt and projection evidence remain pending catch-up."),
                     accessibility: .satisfied("Capture composer opens with an accessible route label."),
                     fallbackUndo: .satisfied("Placement remains editable if the route proposal is wrong.")
                 )

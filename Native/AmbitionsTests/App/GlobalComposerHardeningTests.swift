@@ -54,7 +54,11 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertEqual(command.payload.metadata["captureCommandPath"], "shell_command_router")
         XCTAssertEqual(result.createdCaptureID, "capture-recorded")
         XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
-        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(
+            result.pipelineTrace?.proofReceipt.summary,
+            "Runtime receipt and projection evidence remain pending catch-up."
+        )
     }
 
     func testAMB1674CaptureViewModelAcceptedSaveUsesCommandRouter() async throws {
@@ -85,6 +89,52 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertEqual(viewModel.actionMessage?.title, "Saved through command")
         XCTAssertEqual(viewModel.draftText, "")
         XCTAssertNil(viewModel.draftError)
+    }
+
+    func testCaptureViewModelRotatesSaveAttemptForRouteChangeButKeepsRetryStable() async throws {
+        let executor = FailingRecordingCaptureCommandExecutor()
+        let router = DefaultShellCommandRouter(
+            navigation: StageStore(selectedSurface: .today),
+            intentSender: flagshipIntentSender(executor: executor)
+        )
+        let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
+
+        viewModel.updateDraftText("Book dentist")
+        viewModel.selectDraftRoute(.task)
+        await viewModel.createQuickCapture(
+            commandRouter: router,
+            captureService: StubCaptureService(captures: []),
+            goalsService: EmptyAMB1674GoalsService(),
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+        viewModel.selectDraftRoute(.goal)
+        await viewModel.createQuickCapture(
+            commandRouter: router,
+            captureService: StubCaptureService(captures: []),
+            goalsService: EmptyAMB1674GoalsService(),
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+        await viewModel.createQuickCapture(
+            commandRouter: router,
+            captureService: StubCaptureService(captures: []),
+            goalsService: EmptyAMB1674GoalsService(),
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+
+        let commands = await executor.capturedCommands()
+        XCTAssertEqual(commands.count, 3)
+        XCTAssertNotEqual(commands[0].id, commands[1].id)
+        XCTAssertEqual(commands[1].id, commands[2].id)
+        XCTAssertEqual(commands[0].payload.metadata["captureRouteType"], SmartAttachmentRouteType.task.rawValue)
+        XCTAssertEqual(commands[1].payload.metadata["captureRouteType"], SmartAttachmentRouteType.goal.rawValue)
+    }
+
+    func testActivatedCaptureSeamRotatesSaveAttemptOnlyWhenSelectedRouteChanges() throws {
+        let seam = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift", root: repoRoot())
+
+        XCTAssertGreaterThanOrEqual(seam.components(separatedBy: "updateSelectedDraftRoute(routeType)").count - 1, 2)
+        XCTAssertTrue(seam.contains("guard routeType != selectedDraftRouteType else { return }"))
+        XCTAssertTrue(seam.contains("draftID = DomainIdentifier.prefixed(\"shell.capture.draft\")"))
     }
 
     func testAMB1674RealShellCapturePersistsLocalOnlyRawCaptureThroughCommandPath() async throws {
@@ -183,6 +233,9 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertTrue(router.contains("intentSender.send("))
         XCTAssertFalse(router.contains("commandExecutor.execute("))
         XCTAssertFalse(router.contains("captureService.createCapture("))
+        XCTAssertFalse(router.contains("Capture source is unavailable."))
+        XCTAssertFalse(router.contains("Capture proof is still unavailable."))
+        XCTAssertTrue(router.contains("Capture could not be saved."))
         XCTAssertTrue(CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.contains { $0.contains("VoiceOver") })
         XCTAssertTrue(CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.contains { $0.contains("Reduce Motion") })
     }
@@ -263,6 +316,33 @@ private actor RecordingCaptureCommandExecutor: CommandExecuting {
                 "captureLocalOnly": "true",
                 "captureMaturityState": CaptureMaturityState.raw.rawValue
             ]
+        )
+    }
+
+    func capturedCommands() -> [AmbitionsCommand] {
+        commands
+    }
+}
+
+private actor FailingRecordingCaptureCommandExecutor: CommandExecuting {
+    private var commands: [AmbitionsCommand] = []
+
+    nonisolated func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
+        AmbitionsCommandValidator().validate(command)
+    }
+
+    func execute(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext
+    ) async -> AmbitionsCommandExecutionResult {
+        _ = context
+        commands.append(command)
+        return AmbitionsCommandExecutionResult(
+            status: .failed,
+            summary: "Capture could not be saved.",
+            route: nil,
+            target: nil,
+            metadata: [:]
         )
     }
 

@@ -144,7 +144,8 @@ struct FlagshipRuntimeIntentAdapter: FlagshipIntentSending {
               let checksums = metadata["runtimeProjectionCursorChecksums"]?.split(separator: ",").map(String.init),
               ids.count == expectedCount,
               sequences.count == expectedCount,
-              checksums.count == expectedCount else {
+              checksums.count == expectedCount,
+              Set(ids).count == expectedCount else {
             return [:]
         }
 

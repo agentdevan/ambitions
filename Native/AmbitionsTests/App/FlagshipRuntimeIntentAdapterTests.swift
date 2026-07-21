@@ -124,6 +124,23 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
         XCTAssertEqual(receipt.affectedObjects.first?.id, "capture.recorded")
     }
 
+    func testDuplicateProjectionCursorIDsFailClosedAsCatchUpRequired() async {
+        let recorder = RuntimeCommandRecorder(result: .duplicateProjectionCursorIDs)
+        let adapter = FlagshipRuntimeIntentAdapter(runtimeCommandClient: recorder.client)
+
+        let result = await adapter.send(
+            makeIntent(draftID: "draft.duplicate-cursors"),
+            idempotencyKey: "capture-save-attempt.duplicate-cursors",
+            expectedRevision: nil
+        )
+
+        guard case let .committedCatchUpRequired(receipt) = result else {
+            return XCTFail("Duplicate cursor identifiers must not claim projection readiness")
+        }
+        XCTAssertTrue(receipt.projectionCursors.isEmpty)
+        XCTAssertEqual(receipt.recoveryAction, .waitForProjection)
+    }
+
     func testSuccessMissingReceiptOrCaptureIdentityIsNeverProjectionReady() async {
         for resultTemplate in [RecordedCommandResult.missingReceipt, .missingCapture] {
             let recorder = RuntimeCommandRecorder(result: resultTemplate)
@@ -245,6 +262,7 @@ private extension FlagshipIntentResult {
 private enum RecordedCommandResult: Equatable {
     case projectionReady
     case needsRecovery
+    case duplicateProjectionCursorIDs
     case missingReceipt
     case missingCapture
     case failed
@@ -260,6 +278,12 @@ private enum RecordedCommandResult: Equatable {
         ]
         if self == .needsRecovery {
             metadata["captureMaterialization"] = "needs_recovery"
+        }
+        if self == .duplicateProjectionCursorIDs {
+            metadata["runtimeProjectionCursorCount"] = "2"
+            metadata["runtimeProjectionCursorIDs"] = "today,today"
+            metadata["runtimeProjectionCursorSequences"] = "12,13"
+            metadata["runtimeProjectionCursorChecksums"] = "cursor.today.12,cursor.today.13"
         }
         if self == .missingReceipt {
             metadata.removeValue(forKey: "commandReceiptID")

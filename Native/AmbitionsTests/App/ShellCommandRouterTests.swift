@@ -1,3 +1,4 @@
+import AmbitionsPresentationContracts
 import XCTest
 @testable import Ambitions
 
@@ -99,6 +100,65 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .blocked)
         XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
         XCTAssertEqual(result.pipelineTrace?.fallbackUndo.state, .satisfied)
+    }
+
+    func testCommittedCatchUpUnderclaimsReceiptProofUntilEvidenceIsReady() async throws {
+        let navigation = StageStore(selectedSurface: .today)
+        let receipt = FlagshipReceiptReference(
+            id: "command.receipt.derived",
+            projectionCursors: [:],
+            recoveryAction: .waitForProjection,
+            semanticUndoEligible: false,
+            summary: "Saved locally",
+            affectedObjects: [FlagshipObjectReference(kind: .capture, id: "capture.derived")]
+        )
+        let router = DefaultShellCommandRouter(
+            navigation: navigation,
+            intentSender: FixedFlagshipIntentSender(result: .committedCatchUpRequired(receipt))
+        )
+
+        let result = await router.execute(
+            intent: .quickCapture,
+            text: "Book dentist",
+            goalID: nil,
+            captureID: nil,
+            source: .shellCompose,
+            draftID: "draft.catch-up",
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+
+        let proof = try XCTUnwrap(result.pipelineTrace?.proofReceipt)
+        XCTAssertEqual(proof.state, .unavailable)
+        XCTAssertEqual(proof.summary, "Runtime receipt and projection evidence remain pending catch-up.")
+        XCTAssertFalse(proof.summary.localizedCaseInsensitiveContains("persisted"))
+    }
+
+    func testIncompleteCommittedEvidenceUsesExistingGenericCaptureFailureCopy() async {
+        let navigation = StageStore(selectedSurface: .today)
+        let receipt = FlagshipReceiptReference(
+            id: "command.receipt.incomplete",
+            projectionCursors: [:],
+            recoveryAction: .waitForProjection,
+            semanticUndoEligible: false,
+            summary: "Saved locally"
+        )
+        let router = DefaultShellCommandRouter(
+            navigation: navigation,
+            intentSender: FixedFlagshipIntentSender(result: .committedCatchUpRequired(receipt))
+        )
+
+        let result = await router.execute(
+            intent: .quickCapture,
+            text: "Book dentist",
+            goalID: nil,
+            captureID: nil,
+            source: .shellCompose,
+            draftID: "draft.incomplete",
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+
+        XCTAssertEqual(result.title, "Capture could not be saved.")
+        XCTAssertNil(result.createdCaptureID)
     }
 
     func testRouteToGlobalCaptureComposerUsesGlobalCaptureOverlay() {
@@ -333,5 +393,20 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("Capture") == true)
         XCTAssertFalse(navigation.continuityReceipt?.body.contains("Global Capture") == true)
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
+    }
+}
+
+private struct FixedFlagshipIntentSender: FlagshipIntentSending {
+    let result: FlagshipIntentResult
+
+    func send(
+        _ intent: FlagshipIntent,
+        idempotencyKey: String,
+        expectedRevision: Int64?
+    ) async -> FlagshipIntentResult {
+        _ = intent
+        _ = idempotencyKey
+        _ = expectedRevision
+        return result
     }
 }

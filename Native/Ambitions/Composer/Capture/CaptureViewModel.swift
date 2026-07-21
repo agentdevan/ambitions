@@ -134,7 +134,10 @@ final class CaptureViewModel {
     }
 
     func selectDraftRoute(_ routeType: SmartAttachmentRouteType) {
-        selectedDraftRouteType = routeType
+        if routeType != selectedDraftRouteType {
+            selectedDraftRouteType = routeType
+            draftID = DomainIdentifier.prefixed("shell.capture.draft")
+        }
         refreshDraftRoutingPreview()
     }
 

@@ -85,7 +85,7 @@ struct AppShellActivatedCaptureSeam: View {
                                 Task { await saveCapture() }
                             },
                             onChangeDestination: { routeType in
-                                selectedDraftRouteType = routeType
+                                updateSelectedDraftRoute(routeType)
                             },
                             onCancel: {
                                 isProposalPresented = false
@@ -168,7 +168,7 @@ struct AppShellActivatedCaptureSeam: View {
                 presentProposal()
             },
             onRouteChoice: { routeType in
-                selectedDraftRouteType = routeType
+                updateSelectedDraftRoute(routeType)
                 isProposalPresented = true
             },
             accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs(
@@ -251,6 +251,12 @@ struct AppShellActivatedCaptureSeam: View {
         let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard rawText.isEmpty == false else { return }
         isProposalPresented = routePreview != nil
+    }
+
+    private func updateSelectedDraftRoute(_ routeType: SmartAttachmentRouteType) {
+        guard routeType != selectedDraftRouteType else { return }
+        selectedDraftRouteType = routeType
+        draftID = DomainIdentifier.prefixed("shell.capture.draft")
     }
 
     @MainActor
