@@ -25,6 +25,11 @@ struct MeaningfulMutationDescriptor: Sendable, Hashable {
 
 struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
     let sourcePath: String
+    let executorOwner: String?
+    let eventKind: String?
+    let projectionOwner: String?
+    let receiptOwner: String?
+    let replayTestID: String?
     let status: MeaningfulMutationStatus
     let proofTestIDs: [String]
     let rationale: String
@@ -32,7 +37,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 
 enum MeaningfulMutationRegistry {
     static let declaredMutationRowCount = 115
-    static let declaredWritePathRowCount = 50
+    static let declaredWritePathRowCount = 51
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
@@ -87,7 +92,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
         mutation(
-            id: "today.goal-step-action", sourcePath: "SwiftDataTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
+            id: "today.goal-step-action", sourcePath: "RepositoryTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
             status: .durable, rationale: "The six scoped Today goal-step actions validate revision before authority, commit one semantic event and runtime receipt, then atomically and idempotently materialize goal, feedback, and evidence from committed authority.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
@@ -306,6 +311,25 @@ enum MeaningfulMutationRegistry {
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRepositoryMappingFeedbackRecord.swift", status: .unproven, rationale: "Feedback mapping lacks row-specific mutation lineage proof."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRepositoryMappingPersisted.swift", status: .unproven, rationale: "Persisted mapping helpers do not prove command-only writes."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRuntimeSnapshotLedgerRepository.swift", status: .unproven, rationale: "Runtime snapshot ledger writes lack row-specific replay equivalence proof."),
+        writePath(
+            sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift",
+            status: .projectionOnly,
+            rationale: "SwiftData materialization is a derived Today projection write path with row-specific authority, restart, replay, idempotency, and atomicity proof.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.today.goal_step_action_applied",
+            projectionOwner: "TodayProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testStaleRevisionBlocksBeforeAuthorityCommit",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence",
+            ]
+        ),
         writePath(sourcePath: "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift", status: .unproven, rationale: "Notification support file access lacks row-specific adapter lifecycle proof."),
         writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .previewOnly, rationale: "DEBUG preview temporary storage is not production mutation authority."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", status: .unproven, rationale: "External creation handoff lacks row-specific terminated-app adapter proof."),
@@ -347,10 +371,20 @@ enum MeaningfulMutationRegistry {
         sourcePath: String,
         status: MeaningfulMutationStatus,
         rationale: String,
+        executorOwner: String? = nil,
+        eventKind: String? = nil,
+        projectionOwner: String? = nil,
+        receiptOwner: String? = nil,
+        replayTestID: String? = nil,
         proofTestIDs: [String] = []
     ) -> MeaningfulMutationWritePathDescriptor {
         MeaningfulMutationWritePathDescriptor(
             sourcePath: sourcePath,
+            executorOwner: executorOwner,
+            eventKind: eventKind,
+            projectionOwner: projectionOwner,
+            receiptOwner: receiptOwner,
+            replayTestID: replayTestID,
             status: status,
             proofTestIDs: proofTestIDs,
             rationale: rationale

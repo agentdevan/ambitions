@@ -92,10 +92,55 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
             XCTAssertNil(descriptor.replayTestID, descriptor.sourcePath)
             XCTAssertTrue(descriptor.proofTestIDs.isEmpty, descriptor.sourcePath)
         }
-        for writePath in MeaningfulMutationRegistry.writePaths where writePath.status != .previewOnly {
-            XCTAssertEqual(writePath.status, .unproven, writePath.sourcePath)
-            XCTAssertTrue(writePath.proofTestIDs.isEmpty, writePath.sourcePath)
+        for writePath in MeaningfulMutationRegistry.writePaths {
+            if [.durable, .projectionOnly, .adapter].contains(writePath.status) {
+                XCTAssertFalse(writePath.proofTestIDs.isEmpty, writePath.sourcePath)
+            } else if writePath.status != .previewOnly {
+                XCTAssertEqual(writePath.status, .unproven, writePath.sourcePath)
+                XCTAssertTrue(writePath.proofTestIDs.isEmpty, writePath.sourcePath)
+            }
         }
+    }
+
+    func testTodayGoalStepActionDescriptorUsesRepositoryMaterializerIdentity() throws {
+        let descriptor = try XCTUnwrap(
+            MeaningfulMutationRegistry.descriptors.first {
+                $0.sourcePath == "RepositoryTodayGoalStepActionMaterializer.materialize"
+            }
+        )
+
+        XCTAssertEqual(descriptor.id, "today.goal-step-action")
+        XCTAssertEqual(descriptor.status, .durable)
+        XCTAssertEqual(descriptor.replayTestID, "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce")
+        XCTAssertFalse(descriptor.proofTestIDs.isEmpty)
+    }
+
+    func testTodayGoalStepActionDescriptorRejectsStaleSwiftDataMaterializerIdentity() {
+        XCTAssertFalse(
+            MeaningfulMutationRegistry.descriptors.contains {
+                $0.sourcePath == "SwiftDataTodayGoalStepActionMaterializer.materialize"
+            }
+        )
+    }
+
+    func testSwiftDataTodayGoalStepActionWritePathIsEvidenceBackedProjectionOnly() throws {
+        let descriptor = try XCTUnwrap(
+            MeaningfulMutationRegistry.descriptors.first { $0.id == "today.goal-step-action" }
+        )
+        let writePath = try XCTUnwrap(
+            MeaningfulMutationRegistry.writePaths.first {
+                $0.sourcePath == "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift"
+            }
+        )
+
+        XCTAssertEqual(writePath.status, .projectionOnly)
+        XCTAssertEqual(writePath.executorOwner, descriptor.executorOwner)
+        XCTAssertEqual(writePath.eventKind, descriptor.eventKind)
+        XCTAssertEqual(writePath.projectionOwner, descriptor.projectionOwner)
+        XCTAssertEqual(writePath.receiptOwner, descriptor.receiptOwner)
+        XCTAssertEqual(writePath.replayTestID, descriptor.replayTestID)
+        XCTAssertEqual(Set(writePath.proofTestIDs), Set(descriptor.proofTestIDs))
+        XCTAssertEqual(MeaningfulMutationRegistry.writePaths.filter { $0.status == .unproven }.count, 49)
     }
 
     func testRegistrySourceRequiresExplicitStatusAndRationaleForEveryRow() throws {

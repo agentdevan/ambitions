@@ -467,9 +467,29 @@ def run_self_test() -> int:
     }
     assert required_production_entries <= default_discovered
     production_registry = parse_registry_file(MUTATION_REGISTRY)
+    assert not production_registry.issues
     registered_production_entries = {row.source_path for row in production_registry.mutations}
     for source in required_production_entries:
         assert semantic_entrypoint_findings({source}, registered_production_entries - {source})
+    production_write_paths = {row.source_path: row for row in production_registry.write_paths}
+    today_descriptor = next(
+        row for row in production_registry.mutations
+        if row.fields.get("id") == '"today.goal-step-action"'
+    )
+    assert today_descriptor.source_path == "RepositoryTodayGoalStepActionMaterializer.materialize"
+    assert "SwiftDataTodayGoalStepActionMaterializer.materialize" not in registered_production_entries
+    today_projection_path = "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift"
+    today_projection_row = production_write_paths[today_projection_path]
+    assert today_projection_row.status == "projectionOnly"
+    assert set(today_projection_row.proof_test_ids) == set(today_descriptor.proof_test_ids)
+    assert classify(today_projection_path, {
+        today_projection_path: RegistryWritePath(
+            today_projection_row.source_path,
+            today_projection_row.status,
+            tuple(today_projection_row.proof_test_ids),
+            today_projection_row.rationale,
+        )
+    })[0] == PROJECTION_CLASSIFICATION
     with tempfile.TemporaryDirectory() as temporary_directory:
         unseen_root = Path(temporary_directory) / "PreviouslyUnseen" / "NestedMutationDirectory"
         unseen_root.mkdir(parents=True)
