@@ -476,8 +476,19 @@ def run_self_test() -> int:
         row for row in production_registry.mutations
         if row.fields.get("id") == '"today.goal-step-action"'
     )
-    assert today_descriptor.source_path == "RepositoryTodayGoalStepActionMaterializer.materialize"
-    assert "SwiftDataTodayGoalStepActionMaterializer.materialize" not in registered_production_entries
+    assert today_descriptor.source_path == "SwiftDataTodayGoalStepActionMaterializer.materialize"
+    repository_descriptor = next(
+        row for row in production_registry.mutations
+        if row.fields.get("id") == '"today.goal-step-action.repository-materializer"'
+    )
+    assert repository_descriptor.source_path == "RepositoryTodayGoalStepActionMaterializer.materialize"
+    assert repository_descriptor.status == "projectionOnly"
+    assert set(repository_descriptor.proof_test_ids) == {
+        "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+        "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
+        "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
+        "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+    }
     today_projection_path = "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift"
     today_projection_row = production_write_paths[today_projection_path]
     assert today_projection_row.status == "projectionOnly"

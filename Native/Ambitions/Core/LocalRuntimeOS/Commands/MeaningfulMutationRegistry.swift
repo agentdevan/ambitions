@@ -36,7 +36,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 115
+    static let declaredMutationRowCount = 116
     static let declaredWritePathRowCount = 51
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -92,7 +92,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
         mutation(
-            id: "today.goal-step-action", sourcePath: "RepositoryTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
+            id: "today.goal-step-action", sourcePath: "SwiftDataTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
             status: .durable, rationale: "The six scoped Today goal-step actions validate revision before authority, commit one semantic event and runtime receipt, then atomically and idempotently materialize goal, feedback, and evidence from committed authority.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
@@ -105,6 +105,19 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testStaleRevisionBlocksBeforeAuthorityCommit",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence",
+            ]
+        ),
+        mutation(
+            id: "today.goal-step-action.repository-materializer", sourcePath: "RepositoryTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
+            status: .projectionOnly, rationale: "The repository materializer is the fallback for AppRepositories compositions without an injected SwiftData materializer; in-memory repository integration proves post-authority idempotent projection updates, not live SwiftData storage ownership or mutation authority.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
             ]
         ),
         mutation(id: "today.feature-action", sourcePath: "RepositoryBackedTodayService.performAction", commandKind: .completeAction, status: .unproven, rationale: "Repository-backed Today action still has legacy repository mutation paths."),

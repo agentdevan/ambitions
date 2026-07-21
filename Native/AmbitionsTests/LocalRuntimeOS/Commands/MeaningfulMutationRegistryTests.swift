@@ -102,25 +102,46 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         }
     }
 
-    func testTodayGoalStepActionDescriptorUsesRepositoryMaterializerIdentity() throws {
+    func testTodayGoalStepActionDurableDescriptorUsesLiveSwiftDataMaterializerIdentity() throws {
         let descriptor = try XCTUnwrap(
-            MeaningfulMutationRegistry.descriptors.first {
-                $0.sourcePath == "RepositoryTodayGoalStepActionMaterializer.materialize"
-            }
+            MeaningfulMutationRegistry.descriptors.first { $0.id == "today.goal-step-action" }
         )
 
-        XCTAssertEqual(descriptor.id, "today.goal-step-action")
+        XCTAssertEqual(descriptor.sourcePath, "SwiftDataTodayGoalStepActionMaterializer.materialize")
         XCTAssertEqual(descriptor.status, .durable)
         XCTAssertEqual(descriptor.replayTestID, "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce")
         XCTAssertFalse(descriptor.proofTestIDs.isEmpty)
     }
 
-    func testTodayGoalStepActionDescriptorRejectsStaleSwiftDataMaterializerIdentity() {
-        XCTAssertFalse(
-            MeaningfulMutationRegistry.descriptors.contains {
-                $0.sourcePath == "SwiftDataTodayGoalStepActionMaterializer.materialize"
+    func testRepositoryTodayGoalStepActionMaterializerHasDistinctProjectionOnlyDescriptor() throws {
+        let durableDescriptor = try XCTUnwrap(
+            MeaningfulMutationRegistry.descriptors.first { $0.id == "today.goal-step-action" }
+        )
+        let repositoryDescriptor = try XCTUnwrap(
+            MeaningfulMutationRegistry.descriptors.first {
+                $0.sourcePath == "RepositoryTodayGoalStepActionMaterializer.materialize"
             }
         )
+
+        XCTAssertEqual(repositoryDescriptor.id, "today.goal-step-action.repository-materializer")
+        XCTAssertNotEqual(repositoryDescriptor.id, durableDescriptor.id)
+        XCTAssertEqual(repositoryDescriptor.status, .projectionOnly)
+        XCTAssertEqual(repositoryDescriptor.executorOwner, durableDescriptor.executorOwner)
+        XCTAssertEqual(repositoryDescriptor.eventKind, durableDescriptor.eventKind)
+        XCTAssertEqual(repositoryDescriptor.projectionOwner, durableDescriptor.projectionOwner)
+        XCTAssertEqual(repositoryDescriptor.receiptOwner, durableDescriptor.receiptOwner)
+        XCTAssertEqual(repositoryDescriptor.replayTestID, durableDescriptor.replayTestID)
+        XCTAssertEqual(
+            Set(repositoryDescriptor.proofTestIDs),
+            Set([
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+            ])
+        )
+        XCTAssertTrue(repositoryDescriptor.rationale.contains("fallback"))
+        XCTAssertTrue(repositoryDescriptor.rationale.contains("in-memory"))
     }
 
     func testSwiftDataTodayGoalStepActionWritePathIsEvidenceBackedProjectionOnly() throws {
