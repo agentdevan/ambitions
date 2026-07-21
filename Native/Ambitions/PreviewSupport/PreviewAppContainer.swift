@@ -103,6 +103,7 @@ enum PreviewAppContainerFactory {
             insightsService: StubInsightsService(fixtures: fixtures),
             youService: youService,
             youPreferencesCommands: youPreferencesCommands,
+            systemSettingsOpener: .unavailable,
             notificationService: StubNotificationService(),
             calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),

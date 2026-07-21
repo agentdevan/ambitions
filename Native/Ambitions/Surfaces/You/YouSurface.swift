@@ -114,11 +114,8 @@ struct YouSurface: View {
     }
 
     func openSystemSettingsIfAvailable() {
-        #if canImport(UIKit)
-        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         announce(YouInteractions.accessibilityAnnouncement(for: .openSystemSettings))
-        UIApplication.shared.open(url)
-        #endif
+        platform.systemSettingsOpener.openSystemSettings()
     }
 
     func openDetail(_ detail: YouRootDetail) {

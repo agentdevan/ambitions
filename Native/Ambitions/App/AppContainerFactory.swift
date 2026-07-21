@@ -106,6 +106,7 @@ enum AppContainerFactory {
             insightsService: runtime.insightsService,
             youService: runtime.youService,
             youPreferencesCommands: surfaceServices.youPreferencesCommands,
+            systemSettingsOpener: .live,
             notificationService: platformServices.notificationService,
             calendarRemindersService: platformServices.calendarRemindersService,
             actionRouter: surfaceServices.actionRouter,

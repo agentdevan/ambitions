@@ -20,7 +20,7 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
             "sources",
             "receipts and history",
             "accessibility",
-            "about",
+            "about"
         ])
     }
 
@@ -80,24 +80,25 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         XCTAssertTrue(rootSource.contains("RootSettingsRow("))
         XCTAssertTrue(rootSource.contains("NativeSettingsGroup(title: group.title)"))
         XCTAssertTrue(rootSource.contains("Text(\"Your settings\")"))
-        XCTAssertTrue(rootSource.contains("title: \"Account & local settings\""))
-        XCTAssertTrue(rootSource.contains("title: \"Appearance\""))
-        XCTAssertTrue(rootSource.contains("title: \"Capture\""))
-        XCTAssertTrue(rootSource.contains("title: \"Life Areas\""))
-        XCTAssertTrue(rootSource.contains("title: \"Permissions\""))
-        XCTAssertTrue(rootSource.contains("title: \"Local Data\""))
-        XCTAssertTrue(rootSource.contains("title: \"Accessibility\""))
-        XCTAssertTrue(rootSource.contains("title: \"About\""))
+        XCTAssertTrue(rootSource.contains("title: \"Account & Local Data\""))
+        XCTAssertTrue(rootSource.contains("title: \"Life Settings\""))
+        XCTAssertTrue(rootSource.contains("title: \"Privacy & History\""))
+        XCTAssertTrue(rootSource.contains("title: \"App Support\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"appearance\", title: \"Appearance\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"life-areas\", title: \"Life Areas\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"local-data-controls\", title: \"Local Data\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"accessibility\", title: \"Accessibility\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"about\", title: \"About\""))
         XCTAssertFalse(rootSource.contains("PersonalSystemCenterRootView"))
         XCTAssertFalse(rootSource.contains("YouPersonalSystemNavigation("))
-        XCTAssertFalse(rootSource.contains("id: \"source-settings\""))
-        XCTAssertFalse(rootSource.contains("id: \"receipts-history\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"source-settings\", title: \"Sources\""))
+        XCTAssertTrue(rootSource.contains("row(id: \"receipts-history\", title: \"Receipts & History\""))
     }
 
     func testAMB1198DetailsExposeHonestUnavailableAndConfirmationBoundaries() throws {
         let detailSource = try [
             source("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift"),
-            source("Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift"),
+            source("Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift")
         ].joined(separator: "\n")
 
         XCTAssertTrue(detailSource.contains("Gesture teaching reset"))
@@ -115,6 +116,44 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         XCTAssertTrue(detailRouteSource.contains(".onChange(of: viewModel.accentFamily)"))
         XCTAssertTrue(detailRouteSource.contains("applyAppearancePreviewFromEditor()"))
         XCTAssertTrue(detailRouteSource.contains("userSystem.applyAppearancePreference("))
+    }
+
+    func testLifeContextActionsCarryFactIdentityAndRemainUnavailableWithoutCanonicalOwner() {
+        let actions = YouLifeContextAction.Kind.allCases.map {
+            YouLifeContextAction(factID: "fact.local-context", kind: $0)
+        }
+
+        XCTAssertEqual(actions.map(\.factID), Array(repeating: "fact.local-context", count: 5))
+        XCTAssertEqual(Set(actions.map(\.kind)), Set(YouLifeContextAction.Kind.allCases))
+        XCTAssertTrue(actions.allSatisfy { $0.isSupported == false })
+        XCTAssertTrue(actions.allSatisfy { $0.unavailableReason == "Unavailable until a canonical Life Context mutation owner is implemented." })
+    }
+
+    @MainActor
+    func testSystemSettingsClientExecutesInjectedPlatformAction() {
+        var openCount = 0
+        let client = SystemSettingsOpeningClient {
+            openCount += 1
+        }
+
+        client.openSystemSettings()
+
+        XCTAssertEqual(openCount, 1)
+    }
+
+    func testYouPresentationHasNoObserverlessActionOrDirectSettingsGlobal() throws {
+        let lifeContextSource = try source("Native/Ambitions/Surfaces/You/YouScreen+04-YouLifeContextSurface.swift")
+        let youSurfaceSource = try source("Native/Ambitions/Surfaces/You/YouSurface.swift")
+        let detailRouteSource = try source("Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift")
+
+        XCTAssertFalse(lifeContextSource.contains("AmbitionsYouPlaceholderActionSelected"))
+        XCTAssertFalse(lifeContextSource.contains("NotificationCenter.default"))
+        XCTAssertTrue(lifeContextSource.contains("onAction: (YouLifeContextAction) -> Void"))
+        XCTAssertTrue(lifeContextSource.contains(".disabled(action.isSupported == false)"))
+        XCTAssertFalse(youSurfaceSource.contains("UIApplication.shared"))
+        XCTAssertFalse(detailRouteSource.contains("UIApplication.shared"))
+        XCTAssertTrue(youSurfaceSource.contains("platform.systemSettingsOpener.openSystemSettings()"))
+        XCTAssertTrue(detailRouteSource.contains("platform.systemSettingsOpener.openSystemSettings()"))
     }
 
     private func source(_ relativePath: String) throws -> String {

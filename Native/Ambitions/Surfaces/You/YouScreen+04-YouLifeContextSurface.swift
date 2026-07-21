@@ -1,14 +1,41 @@
 import AmbitionsDesignSystem
 import Foundation
 import SwiftUI
-import UIKit
 
-// Mutation/accessibility/proof contract: life-context actions mutate User System Profile state, update the visible profile stage, announce save/recovery, and preserve proof history references.
+struct YouLifeContextAction: Hashable, Sendable {
+    enum Kind: String, CaseIterable, Hashable, Sendable {
+        case edit
+        case pause
+        case delete
+        case review
+        case confirm
+    }
+
+    let factID: String
+    let kind: Kind
+
+    var isSupported: Bool { false }
+
+    var unavailableReason: String {
+        "Unavailable until a canonical Life Context mutation owner is implemented."
+    }
+}
+
+// Life Context mutations remain unavailable until a canonical User System Profile command owner exists.
 struct YouLifeContextSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var expandedSectionIDs: Set<String> = ["life-context-basics", "life-context-schedule-availability"]
 
     let lifeContext: YouLifeContextState
+    let onAction: (YouLifeContextAction) -> Void
+
+    init(
+        lifeContext: YouLifeContextState,
+        onAction: @escaping (YouLifeContextAction) -> Void = { _ in }
+    ) {
+        self.lifeContext = lifeContext
+        self.onAction = onAction
+    }
 
     var body: some View {
         ProductObjectFrame {
@@ -51,7 +78,8 @@ struct YouLifeContextSurface: View {
                     ForEach(lifeContext.sections) { section in
                         YouLifeContextSectionDisclosure(
                             section: section,
-                            isExpanded: expansionBinding(for: section.id)
+                            isExpanded: expansionBinding(for: section.id),
+                            onAction: onAction
                         )
                     }
                 }
@@ -64,9 +92,15 @@ struct YouLifeContextSurface: View {
         }
         .ambitionPanelAccessibility(
             label: lifeContext.title,
-            value: "\(lifeContext.sections.count) sections, \(lifeContext.sections.flatMap(\.factRows).count) facts, \(lifeContext.sections.flatMap(\.factRows).filter { $0.runtimeUseState == .needsReview }.count) need review.",
+            value: lifeContextAccessibilityValue,
             hint: "Review local life context before Ambitions uses it to fit steps to real life."
         )
+    }
+
+    var lifeContextAccessibilityValue: String {
+        let facts = lifeContext.sections.flatMap(\.factRows)
+        let reviewCount = facts.filter { $0.runtimeUseState == .needsReview }.count
+        return "\(lifeContext.sections.count) sections, \(facts.count) facts, \(reviewCount) need review."
     }
 
     func expansionBinding(for sectionID: String) -> Binding<Bool> {
@@ -96,6 +130,7 @@ struct YouLifeContextSectionDisclosure: View {
 
     let section: YouLifeContextSection
     @Binding var isExpanded: Bool
+    let onAction: (YouLifeContextAction) -> Void
 
     var body: some View {
         ProductObjectFrame {
@@ -134,7 +169,7 @@ struct YouLifeContextSectionDisclosure: View {
                 if isExpanded {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(section.factRows) { factRow in
-                            YouLifeContextFactRowView(factRow: factRow)
+                            YouLifeContextFactRowView(factRow: factRow, onAction: onAction)
                         }
                     }
                 }
@@ -148,6 +183,7 @@ struct YouLifeContextFactRowView: View {
     @Environment(\.ambitionTheme) private var theme
 
     let factRow: YouLifeContextFactRow
+    let onAction: (YouLifeContextAction) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -186,39 +222,44 @@ struct YouLifeContextFactRowView: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     YouLifeContextFactActionButton(
+                        action: YouLifeContextAction(factID: factRow.id, kind: .edit),
                         title: factRow.editLabel,
                         systemImage: "pencil",
                         state: .default,
                         identifier: "you.life-context.fact.\(factRow.id).edit",
-                        hint: factRow.editPath
+                        onAction: onAction
                     )
                     YouLifeContextFactActionButton(
+                        action: YouLifeContextAction(factID: factRow.id, kind: .pause),
                         title: factRow.pauseLabel,
                         systemImage: "pause.circle",
                         state: .warning,
                         identifier: "you.life-context.fact.\(factRow.id).pause",
-                        hint: factRow.pausePath
+                        onAction: onAction
                     )
                     YouLifeContextFactActionButton(
+                        action: YouLifeContextAction(factID: factRow.id, kind: .delete),
                         title: factRow.deleteLabel,
                         systemImage: "trash.slash",
                         state: .warning,
                         identifier: "you.life-context.fact.\(factRow.id).delete",
-                        hint: factRow.deletePath
+                        onAction: onAction
                     )
                     YouLifeContextFactActionButton(
+                        action: YouLifeContextAction(factID: factRow.id, kind: .review),
                         title: factRow.reviewLabel,
                         systemImage: "checkmark.shield",
                         state: .selected,
                         identifier: "you.life-context.fact.\(factRow.id).review",
-                        hint: factRow.reviewPath
+                        onAction: onAction
                     )
                     YouLifeContextFactActionButton(
+                        action: YouLifeContextAction(factID: factRow.id, kind: .confirm),
                         title: factRow.confirmLabel,
                         systemImage: "checkmark.circle",
                         state: .success,
                         identifier: "you.life-context.fact.\(factRow.id).confirm",
-                        hint: factRow.confirmPath
+                        onAction: onAction
                     )
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -245,26 +286,25 @@ struct YouLifeContextFactRowView: View {
 struct YouLifeContextFactActionButton: View {
     @Environment(\.ambitionTheme) private var theme
 
+    let action: YouLifeContextAction
     let title: String
     let systemImage: String
     let state: AmbitionVisualState
     let identifier: String
-    let hint: String
+    let onAction: (YouLifeContextAction) -> Void
 
     var body: some View {
         Button {
-            NotificationCenter.default.post(
-                name: Notification.Name("AmbitionsYouPlaceholderActionSelected"),
-                object: nil
-            )
+            onAction(action)
         } label: {
-            Label(title, systemImage: systemImage)
+            Label("\(title) — Unavailable", systemImage: systemImage)
                 .font(theme.typography.caption.weight(.semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .buttonStyle(AmbitionButtonStyle(tier: .tertiary, state: state))
+        .disabled(action.isSupported == false)
         .accessibilityIdentifier(identifier)
-        .accessibilityHint(hint)
+        .accessibilityHint(action.unavailableReason)
     }
 }
 

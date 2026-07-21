@@ -67,6 +67,7 @@ final class AppContainer {
         insightsService: any InsightsServicing,
         youService: any YouServicing,
         youPreferencesCommands: any YouPreferencesCommanding,
+        systemSettingsOpener: SystemSettingsOpeningClient,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
@@ -106,6 +107,7 @@ final class AppContainer {
             usesInMemoryStore: bootstrapConfiguration.usesInMemoryStore
         )
         self.platform = AppPlatformCapability(
+            systemSettingsOpener: systemSettingsOpener,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             externalRouter: externalRouter,
