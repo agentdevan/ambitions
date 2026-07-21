@@ -4,6 +4,44 @@ enum RuntimeCommandMutationCommitterError: Error, Sendable, Equatable {
     case commandJournalAppendFailed
 }
 
+struct RuntimeCommandMaterialization: Sendable {
+    let statusMetadataKey: String
+    let apply: @Sendable (AmbitionsCommandExecutionResult) async throws -> [String: String]
+
+    init(
+        statusMetadataKey: String,
+        apply: @escaping @Sendable (AmbitionsCommandExecutionResult) async throws -> [String: String]
+    ) {
+        precondition(statusMetadataKey.isEmpty == false, "Materialization status metadata key cannot be empty.")
+        self.statusMetadataKey = statusMetadataKey
+        self.apply = apply
+    }
+}
+
+private enum RuntimeCommandJournalPreparation {
+    case appended(CommandJournalAppendReceipt)
+    case blocked(AmbitionsCommandExecutionResult)
+}
+
+private struct RuntimeCommandPersistenceInput {
+    let command: AmbitionsCommand
+    let result: AmbitionsCommandExecutionResult
+    let timestamp: Date
+    let compilation: CommandCompilation?
+    let journalReceipt: CommandJournalAppendReceipt?
+    let materialization: RuntimeCommandMaterialization?
+}
+
+private struct RuntimeCommandUnreplayedInput {
+    let command: AmbitionsCommand
+    let context: CommandExecutionContext
+    let plannedResult: AmbitionsCommandExecutionResult
+    let validation: AmbitionsCommandValidationState
+    let compilation: CommandCompilation
+    let preparation: RuntimeCommandJournalPreparation
+    let materialization: RuntimeCommandMaterialization?
+}
+
 struct RuntimeCommandMutationCommitter: Sendable {
     let commandJournal: any CommandJournal
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
@@ -40,141 +78,78 @@ struct RuntimeCommandMutationCommitter: Sendable {
     func commit(
         command: AmbitionsCommand,
         context: CommandExecutionContext,
-        mutation: () async throws -> AmbitionsCommandExecutionResult
+        plannedResult: AmbitionsCommandExecutionResult,
+        materialization: RuntimeCommandMaterialization? = nil
     ) async -> AmbitionsCommandExecutionResult {
         let replayAdapter = RuntimeEventCommandReplayAdapter(
             runtimeEvents: runtimeEvents,
             commandExecutionRecords: commandExecutionRecords
         )
-        switch await replayAdapter.lookup(command) {
-        case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let commandRecordMaterialization):
-            return replayAdapter.replayResult(
-                for: command,
-                projection: projection,
-                authorityReceipt: authorityReceipt,
-                commandRecord: commandRecord,
-                commandRecordMaterialization: commandRecordMaterialization
-            )
-        case .commandRecordWithoutRuntimeEvent(let record):
-            return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
-        case .sqliteDiagnosticWithoutAuthority(let projection):
-            return replayAdapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
-        case .lookupUnavailable:
-            return await persist(
-                command: command,
-                result: replayAdapter.lookupUnavailableResult(for: command),
-                at: context.now
-            )
-        case .noRecord:
-            break
+        let lookup = await replayAdapter.lookup(command)
+        if let replayResult = await replayResult(
+            lookup,
+            adapter: replayAdapter,
+            command: command,
+            context: context,
+            materialization: materialization
+        ) {
+            return replayResult
         }
-
         let validation = runtimeValidator.validate(command).validationState
         let compilation = compiler.compile(command, context: context, validation: validation)
-        let journalReceipt: CommandJournalAppendReceipt
+        let preparation: RuntimeCommandJournalPreparation
         do {
-            journalReceipt = try await commandJournal.append(compilation.envelope)
+            preparation = .appended(try await commandJournal.append(compilation.envelope))
         } catch {
-            let result = AmbitionsCommandExecutionResult(
-                status: .blocked,
-                summary: "Command journal append failed before mutation, so Ambitions skipped execution to preserve replay safety.",
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: [
-                    "blockedBy": "command_journal_append_failed",
-                    "commandJournalError": String(describing: error),
-                ]
-            )
-            .mergingMetadata(compilation.resultMetadata)
-            return await persist(
+            preparation = .blocked(journalAppendFailureResult(
                 command: command,
-                result: result,
-                at: context.now,
-                compilation: compilation
-            )
-        }
-
-        guard validation == .valid else {
-            let result = blockedResult(for: validation, command: command)
-                .mergingMetadata(compilation.resultMetadata)
-                .mergingMetadata(journalReceipt.resultMetadata)
-            return await persist(
-                command: command,
-                result: result,
-                at: context.now,
                 compilation: compilation,
-                journalReceipt: journalReceipt
-            )
+                error: error
+            ))
         }
-
-        guard compilation.authorization.isAuthorized else {
-            let result = compiler.authorizer.blockedResult(
-                command: command,
-                authorization: compilation.authorization
-            )
-            .mergingMetadata(compilation.resultMetadata)
-            .mergingMetadata(journalReceipt.resultMetadata)
-            return await persist(
-                command: command,
-                result: result,
-                at: context.now,
-                compilation: compilation,
-                journalReceipt: journalReceipt
-            )
-        }
-
-        let result: AmbitionsCommandExecutionResult
-        do {
-            result = try await mutation()
-        } catch {
-            result = AmbitionsCommandExecutionResult(
-                status: .failed,
-                summary: error.localizedDescription,
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: ["error": String(describing: error)]
-            )
-        }
-
-        return await persist(
+        return await commitUnreplayed(RuntimeCommandUnreplayedInput(
             command: command,
-            result: result
-                .mergingMetadata(compilation.resultMetadata)
-                .mergingMetadata(journalReceipt.resultMetadata),
-            at: context.now,
+            context: context,
+            plannedResult: plannedResult,
+            validation: validation,
             compilation: compilation,
-            journalReceipt: journalReceipt
-        )
+            preparation: preparation,
+            materialization: materialization
+        ))
     }
 
-    private func persist(
-        command: AmbitionsCommand,
-        result: AmbitionsCommandExecutionResult,
-        at timestamp: Date,
-        compilation: CommandCompilation? = nil,
-        journalReceipt: CommandJournalAppendReceipt? = nil
-    ) async -> AmbitionsCommandExecutionResult {
-        let recordedAt = DomainTimestamp.string(from: timestamp)
-        let recordID = "command.execution.\(command.id)"
-        let transactionResult = await resultByCommittingRuntimeTransaction(
-            command: command,
-            result: result,
+    private func persist(_ input: RuntimeCommandPersistenceInput) async -> AmbitionsCommandExecutionResult {
+        let recordedAt = DomainTimestamp.string(from: input.timestamp)
+        let recordID = "command.execution.\(input.command.id)"
+        let transactionResult = await RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction(
+            command: input.command,
+            result: input.result,
             recordedAt: recordedAt,
             commandRecordID: recordID,
-            timestamp: timestamp,
-            journalReceipt: journalReceipt
+            timestamp: input.timestamp,
+            runtimeEvents: runtimeEvents,
+            projectionStore: projectionStore,
+            searchIndex: searchIndex,
+            runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
+            runtimeValidator: runtimeValidator,
+            commandJournal: commandJournal,
+            journalReceipt: input.journalReceipt
+        )
+        let materializedResult = await materializeIfCommitted(
+            result: transactionResult,
+            materialization: input.materialization
         )
         let commandReceipt = receiptFactory.makeReceipt(
-            command: command,
-            result: transactionResult,
-            compilation: compilation,
-            journalReceipt: journalReceipt,
+            command: input.command,
+            result: materializedResult,
+            compilation: input.compilation,
+            journalReceipt: input.journalReceipt,
             issuedAt: recordedAt
         )
-        let enrichedResult = transactionResult.mergingMetadata(commandReceipt.resultMetadata)
+        let enrichedResult = materializedResult.mergingMetadata(commandReceipt.resultMetadata)
         let record = AmbitionsCommandExecutionRecord(
             id: recordID,
-            command: command,
+            command: input.command,
             result: enrichedResult,
             recordedAt: recordedAt
         )
@@ -184,35 +159,11 @@ struct RuntimeCommandMutationCommitter: Sendable {
             } catch {
                 return enrichedResult.mergingMetadata([
                     "commandRecordMaterialization": "needs_recovery",
-                    "commandRecordMaterializationError": String(describing: error),
+                    "commandRecordMaterializationError": String(describing: error)
                 ])
             }
         }
         return enrichedResult
-    }
-
-    private func resultByCommittingRuntimeTransaction(
-        command: AmbitionsCommand,
-        result: AmbitionsCommandExecutionResult,
-        recordedAt: String,
-        commandRecordID: String,
-        timestamp: Date,
-        journalReceipt: CommandJournalAppendReceipt?
-    ) async -> AmbitionsCommandExecutionResult {
-        await RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction(
-            command: command,
-            result: result,
-            recordedAt: recordedAt,
-            commandRecordID: commandRecordID,
-            timestamp: timestamp,
-            runtimeEvents: runtimeEvents,
-            projectionStore: projectionStore,
-            searchIndex: searchIndex,
-            runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
-            runtimeValidator: runtimeValidator,
-            commandJournal: commandJournal,
-            journalReceipt: journalReceipt
-        )
     }
 
     private func blockedResult(
@@ -248,6 +199,201 @@ struct RuntimeCommandMutationCommitter: Sendable {
             target: command.target,
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
             metadata: ["validation": validation.rawValue]
+        )
+    }
+}
+
+private extension RuntimeCommandMutationCommitter {
+    func replayResult(
+        _ lookup: RuntimeEventCommandReplayLookupResult,
+        adapter: RuntimeEventCommandReplayAdapter,
+        command: AmbitionsCommand,
+        context: CommandExecutionContext,
+        materialization: RuntimeCommandMaterialization?
+    ) async -> AmbitionsCommandExecutionResult? {
+        switch lookup {
+        case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let recordStatus):
+            let result = adapter.replayResult(
+                for: command,
+                projection: projection,
+                authorityReceipt: authorityReceipt,
+                commandRecord: commandRecord,
+                commandRecordMaterialization: recordStatus
+            )
+            guard RuntimeTransactionCommitPolicy.hasCommittedEvidence(result) else { return result }
+            return await materializeAndUpsertReplayIfNeeded(
+                command: command,
+                result: result,
+                materialization: materialization,
+                recordedAt: commandRecord?.recordedAt ?? projection.recordedAt
+            )
+        case .commandRecordWithoutRuntimeEvent(let record):
+            return adapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+        case .sqliteDiagnosticWithoutAuthority(let projection):
+            return adapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
+        case .lookupUnavailable:
+            return await persist(RuntimeCommandPersistenceInput(
+                command: command,
+                result: adapter.lookupUnavailableResult(for: command),
+                timestamp: context.now,
+                compilation: nil,
+                journalReceipt: nil,
+                materialization: nil
+            ))
+        case .noRecord:
+            return nil
+        }
+    }
+
+    func commitUnreplayed(_ input: RuntimeCommandUnreplayedInput) async -> AmbitionsCommandExecutionResult {
+        guard case .appended(let journalReceipt) = input.preparation else {
+            guard case .blocked(let result) = input.preparation else { preconditionFailure() }
+            return await persist(RuntimeCommandPersistenceInput(
+                command: input.command,
+                result: result,
+                timestamp: input.context.now,
+                compilation: input.compilation,
+                journalReceipt: nil,
+                materialization: nil
+            ))
+        }
+        if let blocked = preAuthorityBlockedResult(
+            command: input.command,
+            validation: input.validation,
+            compilation: input.compilation,
+            journalReceipt: journalReceipt
+        ) {
+            return await persist(RuntimeCommandPersistenceInput(
+                command: input.command,
+                result: blocked,
+                timestamp: input.context.now,
+                compilation: input.compilation,
+                journalReceipt: journalReceipt,
+                materialization: nil
+            ))
+        }
+        let result = input.plannedResult
+            .mergingMetadata(input.compilation.resultMetadata)
+            .mergingMetadata(journalReceipt.resultMetadata)
+        return await persist(RuntimeCommandPersistenceInput(
+            command: input.command,
+            result: result,
+            timestamp: input.context.now,
+            compilation: input.compilation,
+            journalReceipt: journalReceipt,
+            materialization: input.materialization
+        ))
+    }
+
+    func journalAppendFailureResult(
+        command: AmbitionsCommand,
+        compilation: CommandCompilation,
+        error: any Error
+    ) -> AmbitionsCommandExecutionResult {
+        let result = AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "Command journal append failed before mutation, " +
+                "so Ambitions skipped execution to preserve replay safety.",
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "blockedBy": "command_journal_append_failed",
+                "commandJournalError": String(describing: error)
+            ]
+        )
+        return result.mergingMetadata(compilation.resultMetadata)
+    }
+
+    func preAuthorityBlockedResult(
+        command: AmbitionsCommand,
+        validation: AmbitionsCommandValidationState,
+        compilation: CommandCompilation,
+        journalReceipt: CommandJournalAppendReceipt
+    ) -> AmbitionsCommandExecutionResult? {
+        let result: AmbitionsCommandExecutionResult
+        if validation != .valid {
+            result = blockedResult(for: validation, command: command)
+        } else if compilation.authorization.isAuthorized == false {
+            result = compiler.authorizer.blockedResult(
+                command: command,
+                authorization: compilation.authorization
+            )
+        } else {
+            return nil
+        }
+        return result
+            .mergingMetadata(compilation.resultMetadata)
+            .mergingMetadata(journalReceipt.resultMetadata)
+    }
+
+    func materializeAndUpsertReplayIfNeeded(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        materialization: RuntimeCommandMaterialization?,
+        recordedAt: String
+    ) async -> AmbitionsCommandExecutionResult {
+        guard let materialization,
+              result.metadata[materialization.statusMetadataKey] != "saved_post_authority" else {
+            return result
+        }
+        let repairedResult = await materializeIfCommitted(
+            result: result,
+            materialization: materialization
+        )
+        guard let commandExecutionRecords else { return repairedResult }
+        do {
+            try await commandExecutionRecords.append(
+                AmbitionsCommandExecutionRecord(
+                    id: "command.execution.\(command.id)",
+                    command: command,
+                    result: repairedResult,
+                    recordedAt: recordedAt
+                )
+            )
+            return repairedResult
+        } catch {
+            return repairedResult.mergingMetadata([
+                "commandRecordMaterialization": "needs_recovery",
+                "commandRecordMaterializationError": String(describing: error)
+            ])
+        }
+    }
+
+    func materializeIfCommitted(
+        result: AmbitionsCommandExecutionResult,
+        materialization: RuntimeCommandMaterialization?
+    ) async -> AmbitionsCommandExecutionResult {
+        guard RuntimeTransactionCommitPolicy.hasCommittedEvidence(result),
+              let materialization else {
+            return result
+        }
+
+        do {
+            let evidence = try await materialization.apply(result)
+            var metadata = result.metadata
+            metadata.merge(evidence) { _, new in new }
+            metadata[materialization.statusMetadataKey] = "saved_post_authority"
+            metadata.removeValue(forKey: "\(materialization.statusMetadataKey)Error")
+            return result.replacingMetadata(metadata)
+        } catch {
+            return result.mergingMetadata([
+                materialization.statusMetadataKey: "needs_recovery",
+                "\(materialization.statusMetadataKey)Error": String(describing: error)
+            ])
+        }
+    }
+}
+
+private extension AmbitionsCommandExecutionResult {
+    func replacingMetadata(_ metadata: [String: String]) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: status,
+            summary: summary,
+            route: route,
+            target: target,
+            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            recommendationExplanationIDs: recommendationExplanationIDs,
+            metadata: metadata
         )
     }
 }
