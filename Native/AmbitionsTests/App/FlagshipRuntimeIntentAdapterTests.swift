@@ -118,7 +118,7 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
         )
 
         guard case let .committedCatchUpRequired(receipt) = result else {
-            return XCTFail("Expected committed catch-up, got \(result.state.rawValue)")
+            return XCTFail("Expected committed projection recovery, got \(result.state.rawValue)")
         }
         XCTAssertEqual(receipt.recoveryAction, .waitForProjection)
         XCTAssertEqual(receipt.affectedObjects.first?.id, "capture.recorded")
@@ -153,7 +153,7 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
             )
 
             guard case let .committedCatchUpRequired(receipt) = result else {
-                return XCTFail("Expected committed catch-up for incomplete returned evidence")
+                return XCTFail("Expected committed projection recovery for incomplete returned evidence")
             }
             XCTAssertEqual(receipt.recoveryAction, .waitForProjection)
             if resultTemplate == .missingReceipt {
