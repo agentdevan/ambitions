@@ -18,6 +18,8 @@ struct EventKitOutbox: Sendable {
         blockedFacts: [String] = [],
         degradedFacts: [String] = [],
         localCommit: SideEffectLocalCommitEvidence? = nil,
+        commandID: String? = nil,
+        operationID: String? = nil,
         requestID: String? = nil,
         now: Date = Date()
     ) async -> SideEffectAttempt? {
@@ -32,8 +34,8 @@ struct EventKitOutbox: Sendable {
             effectKind: .calendar,
             actionKind: actionKind,
             sourceDomain: .time,
-            commandID: localCommit?.authorityCommandID,
-            operationID: localCommit?.operationID,
+            commandID: commandID ?? localCommit?.authorityCommandID,
+            operationID: operationID ?? localCommit?.operationID,
             requestedAt: now,
             externalEffect: externalEffect,
             requiresConfirmation: requiresConfirmation,

@@ -276,16 +276,6 @@ extension RepositoryBackedTodayService {
             )
         case .createReminder:
             let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
-            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .reminders)
-            guard authorization.canWrite else {
-                message = TodayInlineMessage(
-                    title: "Reminders permission needed",
-                    body: "Enable Reminders access to create next-step reminders from Ambitions.",
-                    state: .warning
-                )
-                break
-            }
-
             let externalAuthorization = try await externalEffectCommitEvidence(
                 operationID: action.operationID,
                 kind: .reminder,
@@ -293,12 +283,21 @@ extension RepositoryBackedTodayService {
                 step: selectedStep,
                 now: now
             )
-            _ = try await calendarRemindersService.createReminder(
-                for: selection,
-                now: now,
-                operationID: externalAuthorization.operationID,
-                localCommit: externalAuthorization.localCommit
-            )
+            do {
+                _ = try await calendarRemindersService.createReminder(
+                    for: selection,
+                    now: now,
+                    operationID: externalAuthorization.operationID,
+                    localCommit: externalAuthorization.localCommit
+                )
+            } catch CalendarRemindersError.authorizationDenied(scope: .reminders) {
+                message = TodayInlineMessage(
+                    title: "Reminders permission needed",
+                    body: "Enable Reminders access to create next-step reminders from Ambitions.",
+                    state: .warning
+                )
+                break
+            }
             message = TodayInlineMessage(
                 title: "Reminder created",
                 body: "\"\(selectedStep.title)\" was added to Reminders.",

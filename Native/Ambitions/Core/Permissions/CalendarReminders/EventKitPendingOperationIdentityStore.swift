@@ -42,7 +42,8 @@ actor FilePendingEventKitOperationStore: PendingEventKitOperationStoring {
             if let existing = envelope.operationIDs[fingerprint] {
                 resolved = existing
             } else {
-                resolved = UUID().uuidString.lowercased()
+                resolved = UUID(uuidString: proposedOperationID)?.uuidString.lowercased()
+                    ?? UUID().uuidString.lowercased()
                 envelope.operationIDs[fingerprint] = resolved
             }
         }

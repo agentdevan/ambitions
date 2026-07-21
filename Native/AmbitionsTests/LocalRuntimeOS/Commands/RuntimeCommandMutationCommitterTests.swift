@@ -225,6 +225,7 @@ final class MutationCommitterReplayTests: RuntimeCommandMutationCommitterTestCas
 
         XCTAssertEqual(first.status, .succeeded)
         XCTAssertEqual(second.status, .succeeded)
+        XCTAssertTrue(RuntimeTransactionCommitPolicy.hasCommittedEvidence(second))
         XCTAssertEqual(second.summary, "Replayed runtime event receipt: Saved once.")
         XCTAssertEqual(materializationExecutionCount, 1)
         XCTAssertEqual(events.count, 1)

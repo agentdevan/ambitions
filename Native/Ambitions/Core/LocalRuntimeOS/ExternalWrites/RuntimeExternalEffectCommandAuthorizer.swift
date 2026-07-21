@@ -30,9 +30,13 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
     private let runtimeEvents: (any RuntimeEventStore)?
     private let pendingOperationStore: any PendingEventKitOperationStoring
 
-    init(repositories: AppRepositories) {
+    init(
+        repositories: AppRepositories,
+        pendingOperationStore: any PendingEventKitOperationStoring =
+            FilePendingEventKitOperationStore.defaultStore()
+    ) {
         runtimeEvents = repositories.runtimeEvents
-        pendingOperationStore = FilePendingEventKitOperationStore.defaultStore()
+        self.pendingOperationStore = pendingOperationStore
         committer = RuntimeCommandMutationCommitter(
             commandJournal: repositories.commandJournal,
             commandExecutionRecords: repositories.commandExecutionRecords,

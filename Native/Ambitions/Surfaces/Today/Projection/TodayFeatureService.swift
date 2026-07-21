@@ -34,14 +34,16 @@ struct RepositoryBackedTodayService: TodayServicing {
         goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
         derivedReadModelCache: TodayDerivedReadModelCache = TodayDerivedReadModelCache(),
         lifeCalendarStoreFileURL: URL? = nil,
-        clock: any AmbitionsClock = SystemClock()
+        clock: any AmbitionsClock = SystemClock(),
+        externalEffectAuthorizer: RuntimeExternalEffectCommandAuthorizer? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
         self.rescheduleEngine = rescheduleEngine
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
-        self.externalEffectAuthorizer = RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
+        self.externalEffectAuthorizer = externalEffectAuthorizer ??
+            RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
         self.ritualService = ritualService
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService

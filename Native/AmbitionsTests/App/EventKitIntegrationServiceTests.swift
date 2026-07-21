@@ -4,7 +4,6 @@ import XCTest
 final class EventKitIntegrationServiceTests: XCTestCase {
     func testMalformedCommitEvidenceIsDeniedBeforeClaimOrEventKitSave() async throws {
         let store = RecordingEventKitStoreClient()
-        await store.setAuthorization(state: .fullAccess, for: .reminders)
         let ledger = InMemorySideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
@@ -30,8 +29,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
         }
         let saveCount = await store.currentSaveReminderCount()
+        let authorizationRequestCount = await store.currentAuthorizationRequestCount()
         let records = try await ledger.fetchRecords(status: .blocked)
         XCTAssertEqual(saveCount, 0)
+        XCTAssertEqual(authorizationRequestCount, 0)
         XCTAssertEqual(records.count, 1)
         XCTAssertNil(records.first?.claimToken)
         XCTAssertNil(records.first?.leaseID)
@@ -111,6 +112,53 @@ final class EventKitIntegrationServiceTests: XCTestCase {
                 "External side effect authority evidence does not match the requested command and operation."
             ) == true
         )
+    }
+
+    func testDeniedAuthorityEvidenceDoesNotPoisonValidSameOperationRetry() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let ledger = InMemorySideEffectLedgerRepository()
+        let operationID = operationID("authority-recovery")
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: ledger))
+        )
+        let malformed = SideEffectLocalCommitEvidence(
+            authorityCommandID: "authority.denied",
+            operationID: operationID,
+            receiptID: "malformed",
+            writeScope: .localSwiftDataSingleContext,
+            committedAt: "2026-04-16T09:00:00Z",
+            didCommitChanges: false,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects
+        )
+
+        do {
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: operationID,
+                localCommit: malformed
+            )
+            XCTFail("Expected malformed authority evidence to fail closed.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
+        }
+
+        let created = try await service.createReminder(
+            for: fixtureSelection(),
+            now: fixtureNow(),
+            operationID: operationID,
+            localCommit: runtimeLocalCommitEvidence("authority-recovery", operationID: operationID)
+        )
+        let blocked = try await ledger.fetchRecords(status: .blocked)
+        let succeeded = try await ledger.fetchRecords(status: .succeeded)
+        let saveCount = await store.currentSaveReminderCount()
+        XCTAssertEqual(created.identifier, "reminder-1")
+        XCTAssertEqual(saveCount, 1)
+        XCTAssertEqual(blocked.count, 1)
+        XCTAssertEqual(succeeded.count, 1)
+        XCTAssertTrue(blocked.first?.id.hasSuffix(".authority-denied") == true)
     }
 
     func testLegacyEvidenceWithoutAuthorityLineageFailsClosedDuringDecode() throws {
@@ -284,19 +332,20 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .writeOnly, for: .calendarEvents)
         let ledger = InMemorySideEffectLedgerRepository()
-        let outbox = SideEffectOutbox(ledger: ledger)
+        let interruptedOutbox = SideEffectOutbox(ledger: ledger)
         let operationID = "85575be5-c078-46a1-9129-39b239178c68"
         let commit = runtimeLocalCommitEvidence("write-only", operationID: operationID)
-        _ = try await outbox.claim(
+        _ = try await interruptedOutbox.claim(
             sideEffectRequest(
                 id: "calendar.calendar-event.\(operationID)",
                 operationID: operationID,
                 localCommit: commit
             )
         )
+        let restartedOutbox = SideEffectOutbox(ledger: ledger)
         let service = EventKitIntegrationService(
             storeClient: store,
-            eventKitOutbox: EventKitOutbox(recorder: outbox)
+            eventKitOutbox: EventKitOutbox(recorder: restartedOutbox)
         )
 
         do {
@@ -323,8 +372,17 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
+        let operationID = operationID("reminder-authorization-denied")
         do {
-            _ = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence(
+                    "reminder-authorization-denied",
+                    operationID: operationID
+                )
+            )
             XCTFail("Expected denied authorization to throw.")
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .authorizationDenied(scope: .reminders))
@@ -472,7 +530,6 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
     func testCreateReminderRequiresLocalCommitReceiptBeforeSaving() async throws {
         let store = RecordingEventKitStoreClient()
-        await store.setAuthorization(state: .fullAccess, for: .reminders)
         let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
@@ -480,7 +537,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         do {
-            _ = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                operationID: operationID("reminder-missing-commit"),
+                localCommit: nil
+            )
             XCTFail("Expected missing local commit receipt to throw.")
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
@@ -489,8 +551,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         }
 
         let payload = await store.lastReminderPayload
+        let authorizationRequestCount = await store.currentAuthorizationRequestCount()
         let record = await sideEffectLedger.lastRecord
         XCTAssertNil(payload)
+        XCTAssertEqual(authorizationRequestCount, 0)
         XCTAssertEqual(record?.effectKind, .calendar)
         XCTAssertEqual(record?.status, .blocked)
         XCTAssertEqual(record?.boundary, .externalEffect)
@@ -654,8 +718,15 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             suggestedDate: nil
         )
 
+        let operationID = operationID("calendar-missing-date")
         do {
-            _ = try await service.createCalendarEvent(for: selection, durationMinutes: 45, now: fixtureNow())
+            _ = try await service.createCalendarEvent(
+                for: selection,
+                durationMinutes: 45,
+                now: fixtureNow(),
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence("calendar-missing-date", operationID: operationID)
+            )
             XCTFail("Expected missing date to throw.")
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .missingEventStartDate)
@@ -681,8 +752,18 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
+        let operationID = operationID("calendar-authorization-denied")
         do {
-            _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+            _ = try await service.createCalendarEvent(
+                for: fixtureSelection(),
+                durationMinutes: 45,
+                now: fixtureNow(),
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence(
+                    "calendar-authorization-denied",
+                    operationID: operationID
+                )
+            )
             XCTFail("Expected denied authorization to throw.")
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .authorizationDenied(scope: .calendarEvents))
@@ -709,7 +790,6 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
     func testCreateCalendarEventRequiresLocalCommitReceiptBeforeSaving() async throws {
         let store = RecordingEventKitStoreClient()
-        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
         let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
@@ -717,7 +797,13 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         do {
-            _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+            _ = try await service.createCalendarEvent(
+                for: fixtureSelection(),
+                durationMinutes: 45,
+                now: fixtureNow(),
+                operationID: operationID("calendar-missing-commit"),
+                localCommit: nil
+            )
             XCTFail("Expected missing local commit receipt to throw.")
         } catch let error as CalendarRemindersError {
             XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .calendarEvents))
@@ -726,8 +812,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         }
 
         let saveCount = await store.currentSaveEventCount()
+        let authorizationRequestCount = await store.currentAuthorizationRequestCount()
         let record = await sideEffectLedger.lastRecord
         XCTAssertEqual(saveCount, 0)
+        XCTAssertEqual(authorizationRequestCount, 0)
         XCTAssertEqual(record?.effectKind, .calendar)
         XCTAssertEqual(record?.status, .blocked)
         XCTAssertEqual(record?.boundary, .externalEffect)
@@ -841,7 +929,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(records.allSatisfy { $0.effectKind == .calendar })
         XCTAssertEqual(records.filter { $0.status == .succeeded }.count, 2)
         XCTAssertTrue(records.allSatisfy { $0.externalEffect })
-        XCTAssertEqual(Set(records.compactMap(\.receiptID)), ["event-1"])
+        XCTAssertEqual(Set(records.compactMap(\.receiptID)), ["event-1", "event-2"])
     }
 }
 

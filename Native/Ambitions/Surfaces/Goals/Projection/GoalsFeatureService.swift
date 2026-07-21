@@ -34,7 +34,8 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
         learningService: LearningAnticipationService = LearningAnticipationService(),
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
         teachingService: (any GoalTeachingSignalReading & GoalTeachingSignalCapturing)? = nil,
-        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil
+        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
+        externalEffectAuthorizer: RuntimeExternalEffectCommandAuthorizer? = nil
     ) {
         let compatibilityTeachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
         self.repositories = repositories
@@ -43,7 +44,8 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
         self.rescheduleEngine = rescheduleEngine
         self.orchestrator = orchestrator
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
-        self.externalEffectAuthorizer = RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
+        self.externalEffectAuthorizer = externalEffectAuthorizer ??
+            RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
         self.learningService = learningService
         self.explainabilityProjector = explainabilityProjector
         self.teachingService = teachingService ?? compatibilityTeachingService

@@ -1,0 +1,41 @@
+included:
+  - Native
+  - Sources
+  - Packages
+  - AppUI
+
+excluded:
+  - .build
+  - build
+  - DerivedData
+  - .codex
+  - tools/mcp/ambitions_native_mcp/.build
+  - "**/*.xcresult"
+
+# These ceilings reflect the largest live legacy owners. Modernization trains
+# should ratchet them down as those owners are decomposed; no rule is disabled.
+file_length:
+  warning: 1200
+  error: 1500
+
+type_body_length:
+  warning: 900
+  error: 1100
+
+function_body_length:
+  warning: 500
+  error: 550
+
+cyclomatic_complexity:
+  warning: 30
+  error: 35
+
+line_length:
+  warning: 220
+  error: 260
+
+type_name:
+  min_length: 3
+  max_length:
+    warning: 60
+    error: 80

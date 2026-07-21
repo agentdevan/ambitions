@@ -221,10 +221,18 @@ private extension RuntimeCommandMutationCommitter {
                 )
             }
             let authoritativeCommand = commandRecord?.command ?? command
+            let recoveredAuthorityReceipt: RuntimeCommitReceipt?
+            if let authorityReceipt {
+                recoveredAuthorityReceipt = authorityReceipt
+            } else {
+                recoveredAuthorityReceipt = await runtimeTransactionIdempotencyStore.receipt(
+                    for: LedgerIdempotencyKey(command.id)
+                )
+            }
             let result = adapter.replayResult(
                 for: authoritativeCommand,
                 projection: projection,
-                authorityReceipt: authorityReceipt,
+                authorityReceipt: recoveredAuthorityReceipt,
                 commandRecord: commandRecord,
                 commandRecordMaterialization: recordStatus
             )

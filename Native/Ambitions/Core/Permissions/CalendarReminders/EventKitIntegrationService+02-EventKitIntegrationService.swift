@@ -43,6 +43,13 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         operationID: String,
         localCommit: SideEffectLocalCommitEvidence?
     ) async throws -> CreatedReminderRecord {
+        let localCommit = try await requireAuthorityEvidence(
+            localCommit,
+            operationID: operationID,
+            kind: "reminder",
+            scope: .reminders,
+            now: now
+        )
         let state = await requestAuthorizationIfNeeded(for: .reminders)
         guard state.canWrite else {
             let attempt = await recordCalendarSideEffect(
@@ -64,9 +71,6 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.authorizationDenied(scope: .reminders)
         }
 
-        guard let localCommit else {
-            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
-        }
         let operation = try await resolveOperationIdentity(
             kind: "reminder",
             selection: selection,
@@ -159,6 +163,13 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         operationID: String,
         localCommit: SideEffectLocalCommitEvidence?
     ) async throws -> CreatedCalendarEventRecord {
+        let localCommit = try await requireAuthorityEvidence(
+            localCommit,
+            operationID: operationID,
+            kind: "calendar-event",
+            scope: .calendarEvents,
+            now: now
+        )
         let state = await requestAuthorizationIfNeeded(for: .calendarEvents)
         guard state.canWrite else {
             let attempt = await recordCalendarSideEffect(
@@ -192,11 +203,8 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.missingEventStartDate
         }
 
-        guard let localCommit else {
-            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
-        }
         let operation = try await resolveOperationIdentity(
-            kind: "calendar-event",
+            kind: RuntimeExternalEffectKind.calendarEvent.rawValue,
             selection: selection,
             proposedOperationID: operationID
         )
@@ -409,6 +417,43 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             for: owned,
             now: now
         )
+    }
+
+    private func requireAuthorityEvidence(
+        _ evidence: SideEffectLocalCommitEvidence?,
+        operationID: String,
+        kind: String,
+        scope: CalendarRemindersScope,
+        now: Date
+    ) async throws -> SideEffectLocalCommitEvidence {
+        let provesCommit = evidence?.provesCommittedLocalMutationWithoutExternalEffects == true &&
+            evidence?.authorityCommandID.isEmpty == false
+        let lineageMatches = UUID(uuidString: operationID) != nil &&
+            evidence?.operationID.caseInsensitiveCompare(operationID) == .orderedSame
+        guard let evidence, provesCommit, lineageMatches else {
+            var blockedFacts = [
+                "External side effect cannot be attempted before a committed local mutation receipt."
+            ]
+            if provesCommit && lineageMatches == false {
+                blockedFacts.append(
+                    "External side effect authority evidence does not match the requested command and operation."
+                )
+            }
+            _ = await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .blocked,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                blockedFacts: blockedFacts,
+                commandID: evidence?.authorityCommandID,
+                operationID: operationID.lowercased(),
+                requestID: externalEffectRequestID(kind: kind, operationID: operationID) + ".authority-denied",
+                now: now
+            )
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: scope)
+        }
+        return evidence
     }
 
     private func resolveOperationIdentity(

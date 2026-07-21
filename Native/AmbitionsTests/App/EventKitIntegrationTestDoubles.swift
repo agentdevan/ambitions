@@ -8,6 +8,7 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
     private(set) var lastEventPayload: EventKitEventPayload?
     private(set) var saveReminderCount = 0
     private(set) var saveEventCount = 0
+    private(set) var authorizationRequestCount = 0
     private var reminderSaveFailure: CalendarRemindersError?
     private var eventSaveFailure: CalendarRemindersError?
     private var events: [EventKitCalendarEventSnapshot] = []
@@ -19,12 +20,14 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
     }
 
     func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+        authorizationRequestCount += 1
         let response = authorizationResponseByScope[key(for: scope)] ?? .denied
         authorizationByScope[key(for: scope)] = response
         return response
     }
 
     func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+        authorizationRequestCount += 1
         let response = authorizationResponseByScope[key(for: .calendarEvents)] ?? .denied
         authorizationByScope[key(for: .calendarEvents)] = response
         return response
@@ -93,6 +96,10 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
 
     func currentSaveReminderCount() -> Int {
         saveReminderCount
+    }
+
+    func currentAuthorizationRequestCount() -> Int {
+        authorizationRequestCount
     }
 
     private func key(for scope: CalendarRemindersScope) -> String {

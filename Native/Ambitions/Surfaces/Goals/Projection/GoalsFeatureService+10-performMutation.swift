@@ -198,8 +198,21 @@ extension RepositoryBackedGoalsService {
             )
         case .createReminder:
             let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
-            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .reminders)
-            guard authorization.canWrite else {
+            let externalAuthorization = try await externalEffectCommitEvidence(
+                operationID: request.operationID,
+                kind: .reminder,
+                goal: goal,
+                step: selectedStep,
+                now: now
+            )
+            do {
+                _ = try await calendarRemindersService.createReminder(
+                    for: selection,
+                    now: now,
+                    operationID: externalAuthorization.operationID,
+                    localCommit: externalAuthorization.localCommit
+                )
+            } catch CalendarRemindersError.authorizationDenied(scope: .reminders) {
                 return GoalDetailActionResponse(
                     message: GoalDetailInlineMessage(
                         title: "Reminders permission needed",
@@ -208,20 +221,6 @@ extension RepositoryBackedGoalsService {
                     )
                 )
             }
-
-            let externalAuthorization = try await externalEffectCommitEvidence(
-                operationID: request.operationID,
-                kind: .reminder,
-                goal: goal,
-                step: selectedStep,
-                now: now
-            )
-            _ = try await calendarRemindersService.createReminder(
-                for: selection,
-                now: now,
-                operationID: externalAuthorization.operationID,
-                localCommit: externalAuthorization.localCommit
-            )
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Reminder created",
