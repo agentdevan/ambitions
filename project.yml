@@ -8,6 +8,8 @@ settings:
     SWIFT_STRICT_CONCURRENCY: complete
     IPHONEOS_DEPLOYMENT_TARGET: 26.0
 packages:
+  AmbitionsExternalContracts:
+    path: Packages/AmbitionsExternalContracts
   AmbitionsPackages:
     path: Packages/AmbitionsDesignSystem
 targets:
@@ -50,6 +52,8 @@ targets:
         CODE_SIGN_ENTITLEMENTS: Native/Ambitions/Support/Ambitions.entitlements
     dependencies:
       - target: AmbitionsTimeFoundation
+      - package: AmbitionsExternalContracts
+        product: AmbitionsExternalContracts
       - package: AmbitionsPackages
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
@@ -104,6 +108,9 @@ targets:
         CURRENT_PROJECT_VERSION: 1
         MARKETING_VERSION: 1.0
         CODE_SIGN_ENTITLEMENTS: Native/AmbitionsWidgetExtension/AmbitionsWidgetExtension.entitlements
+    dependencies:
+      - package: AmbitionsExternalContracts
+        product: AmbitionsExternalContracts
   AmbitionsShareExtension:
     type: app-extension
     platform: iOS
@@ -130,6 +137,8 @@ targets:
         MARKETING_VERSION: 1.0
         CODE_SIGN_ENTITLEMENTS: Native/AmbitionsShareExtension/AmbitionsShareExtension.entitlements
     dependencies:
+      - package: AmbitionsExternalContracts
+        product: AmbitionsExternalContracts
       - sdk: AppIntents.framework
   AmbitionsTests:
     type: bundle.unit-test
@@ -145,6 +154,8 @@ targets:
     dependencies:
       - target: Ambitions
       - target: AmbitionsTimeFoundation
+      - package: AmbitionsExternalContracts
+        product: AmbitionsExternalContracts
       - package: AmbitionsPackages
         product: AmbitionsDesignSystem
   AmbitionsModuleTests:

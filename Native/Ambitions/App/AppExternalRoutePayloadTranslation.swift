@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import Foundation
 
 extension AppExternalRouteTranslator {

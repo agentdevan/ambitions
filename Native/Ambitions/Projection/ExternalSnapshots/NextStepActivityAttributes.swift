@@ -1,4 +1,5 @@
 import ActivityKit
+import AmbitionsExternalContracts
 import Foundation
 
 struct NextStepActivityAttributes: ActivityAttributes {
@@ -99,6 +100,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             )
         }
 
+        // swiftlint:disable:next nesting
         enum CodingKeys: String, CodingKey {
             case goalID
             case stepID

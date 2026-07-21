@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import XCTest
 @testable import Ambitions
 

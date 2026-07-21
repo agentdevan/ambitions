@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import XCTest
 @testable import Ambitions
 
@@ -9,7 +10,7 @@ final class ExternalSurfaceVerificationChecklistTests: XCTestCase {
             .liveActivities,
             .appIntents,
             .shortcuts,
-            .sharedSnapshotContainer,
+            .sharedSnapshotContainer
         ])
 
         for record in ExternalSurfaceVerificationChecklist.records {

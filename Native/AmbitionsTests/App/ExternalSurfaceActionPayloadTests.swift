@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import XCTest
 @testable import Ambitions
 
@@ -95,7 +96,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
                 openCaptureUrgency: .low,
                 blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 1, blockedCount: 2),
                 supportedCommands: [
-                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false)
                 ]
             )
         )
@@ -138,7 +139,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
                 openCaptureUrgency: .none,
                 blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
                 supportedCommands: [
-                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false)
                 ]
             )
         )
@@ -207,7 +208,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
                 ExternalObjectReopeningCandidate(kind: .goal, id: "goal-1", title: "Goal", detail: "Goal detail", goalID: "goal-1", isSensitive: false),
                 ExternalObjectReopeningCandidate(kind: .currentStep, id: "step-1", title: "Step", detail: "Step detail", goalID: "goal-1", stepID: "step-1", isSensitive: false),
                 ExternalObjectReopeningCandidate(kind: .receipt, id: "receipt-1", title: "Receipt", detail: "Receipt detail", receiptID: "receipt-1", isSensitive: true),
-                ExternalObjectReopeningCandidate(kind: .capture, id: "capture-1", title: "Capture", detail: "Capture detail", captureID: "capture-1", isSensitive: true),
+                ExternalObjectReopeningCandidate(kind: .capture, id: "capture-1", title: "Capture", detail: "Capture detail", captureID: "capture-1", isSensitive: true)
             ],
             gate: .internalOptIn
         )

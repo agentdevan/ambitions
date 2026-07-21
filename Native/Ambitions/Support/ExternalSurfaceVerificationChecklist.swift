@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import Foundation
 
 enum ExternalSurfaceVerificationSurface: String, CaseIterable, Codable, Sendable, Equatable {
@@ -22,6 +23,7 @@ struct ExternalSurfaceVerificationRecord: Codable, Sendable, Equatable, Identifi
     let activeLimitations: [String]
     let readinessClaim: String
 
+    // swiftlint:disable:next identifier_name
     var requiresDeviceEvidenceBeforeReadinessClaim: Bool {
         manualVerificationRequired.isEmpty == false
     }

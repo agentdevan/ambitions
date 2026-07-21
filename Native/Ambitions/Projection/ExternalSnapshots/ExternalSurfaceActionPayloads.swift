@@ -1,42 +1,5 @@
+import AmbitionsExternalContracts
 import Foundation
-
-enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
-    case open
-    case complete
-    case snooze
-    case delay
-    case askForSmallerStep = "ask-for-smaller-step"
-    case openToday = "open-today"
-    case openCaptureComposer = "open-capture-composer"
-    case openMemoryLens = "open-memory-lens"
-
-    init(rawAction: String) {
-        switch rawAction.lowercased() {
-        case "complete":
-            self = .complete
-        case "delay":
-            self = .delay
-        case "snooze":
-            self = .snooze
-        case "ask-for-smaller-step", "smaller-step":
-            self = .askForSmallerStep
-        case "open-today":
-            self = .openToday
-        case "open-capture-composer":
-            self = .openCaptureComposer
-        case "open-memory-lens", "memory-lens":
-            self = .openMemoryLens
-        default:
-            self = .open
-        }
-    }
-}
-
-enum ExternalSurfacePayloadSurface: String, Codable, Sendable, Equatable {
-    case tab
-    case goalDetail = "goal-detail"
-    case captureComposer = "capture-composer"
-}
 
 enum ExternalSurfaceActionPayload {
     enum Key {
@@ -81,7 +44,7 @@ enum ExternalSurfaceActionPayload {
         tab: String? = nil
     ) -> [String: String] {
         var payload: [String: String] = [
-            Key.surface: surface.rawValue,
+            Key.surface: surface.rawValue
         ]
 
         if let goalID, goalID.isEmpty == false {

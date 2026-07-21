@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import AppIntents
 import Foundation
 
@@ -35,7 +36,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .saveTheDay: DisplayRepresentation(title: "Make today doable"),
             .quickRecovery: DisplayRepresentation(title: "Make today doable"),
             .quickFocus: DisplayRepresentation(title: "Start now"),
-            .quickTimePatch: DisplayRepresentation(title: "Shape Time"),
+            .quickTimePatch: DisplayRepresentation(title: "Shape Time")
         ]
     }
 

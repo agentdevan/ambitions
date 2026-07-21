@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import Foundation
 
 struct ExternalWidgetProjection: Sendable, Equatable {
@@ -62,7 +63,7 @@ struct ExternalWidgetProjection: Sendable, Equatable {
             ambientState.todayPressure,
             ambientState.protectedTime,
             ambientState.captureEntry,
-            ambientState.recovery,
+            ambientState.recovery
         ].compactMap(\.self)
         let baselineRows = [ambientState.today, ambientState.focus, ambientState.goal, ambientState.timeShape]
         return (flagshipRows + baselineRows)

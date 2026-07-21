@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import AppIntents
 import Foundation
 
@@ -21,7 +22,7 @@ enum AmbitionsDeepActionShortcut: String, CaseIterable, AppEnum {
             .startCurrentStep: DisplayRepresentation(title: "Start now"),
             .guardedCloseStep: DisplayRepresentation(title: "Close step"),
             .showReceipt: DisplayRepresentation(title: "Show receipt"),
-            .inspectLocalKnowledge: DisplayRepresentation(title: "What Ambitions Knows"),
+            .inspectLocalKnowledge: DisplayRepresentation(title: "What Ambitions Knows")
         ]
     }
 }

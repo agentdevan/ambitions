@@ -1,36 +1,5 @@
+import AmbitionsExternalContracts
 import Foundation
-
-enum ExternalSurfaceKind: String, CaseIterable, Codable, Sendable, Equatable {
-    case notifications
-    case widgets
-    case liveActivities = "live_activities"
-    case appIntents = "app_intents"
-    case shortcuts
-    case focusFilters = "focus_filters"
-}
-
-enum ExternalSurfacePrivacyDefault: String, Codable, Sendable, Equatable {
-    case sparse
-    case detailsHidden = "details_hidden"
-    case glanceablePrivate = "glanceable_private"
-    case minimalPayload = "minimal_payload"
-    case conservative
-    case optIn = "opt_in"
-}
-
-struct ExternalSurfacePrivacySnapshotPolicy: Codable, Sendable, Equatable {
-    static let safeDefault = ExternalSurfacePrivacySnapshotPolicy(
-        defaultVisibility: .detailsHidden,
-        sensitiveDetailLabel: "Details stay private until you open Ambitions.",
-        unavailableLabel: "Open Ambitions to confirm the latest local state.",
-        staleLabel: "This may be behind. Open Ambitions to refresh."
-    )
-
-    let defaultVisibility: ExternalSurfacePrivacyDefault
-    let sensitiveDetailLabel: String
-    let unavailableLabel: String
-    let staleLabel: String
-}
 
 struct ExternalSurfaceContract: Codable, Sendable, Equatable {
     let kind: ExternalSurfaceKind
@@ -45,6 +14,7 @@ struct ExternalSurfaceContract: Codable, Sendable, Equatable {
     let degradedStateLabel: String
     let requiresSharedCommandPipeline: Bool
     let requiresReceiptForMutation: Bool
+    // swiftlint:disable:next identifier_name
     let requiresConfirmationForSensitiveExternalDestructiveEffects: Bool
     let accessibilityRequirement: String
 }

@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import Foundation
 
 enum ExternalWidgetFamilyIdentifier: String, CaseIterable, Codable, Sendable, Equatable {
@@ -44,7 +45,7 @@ enum ExternalSurfaceScopeAllowlist {
             .systemLarge,
             .accessoryInline,
             .accessoryCircular,
-            .accessoryRectangular,
+            .accessoryRectangular
         ],
         allowedVariantKinds: [
             .currentStep,
@@ -55,7 +56,7 @@ enum ExternalSurfaceScopeAllowlist {
             .today,
             .focus,
             .goal,
-            .timeShape,
+            .timeShape
         ],
         snapshotKind: SharedExternalSnapshotStore.snapshotKind,
         projectionTypeName: "ExternalWidgetProjection",
@@ -74,7 +75,7 @@ enum ExternalSurfaceScopeAllowlist {
             hasBoundedEndTime: true,
             isPlatformReady: false,
             productionReadinessClaim: "Not platform-ready until ActivityKit start, update, end, Lock Screen, and Dynamic Island behavior are verified on device."
-        ),
+        )
     ]
 
     static let firstAllowedSnapshotSurfaceID = nextStepWidget.surfaceID

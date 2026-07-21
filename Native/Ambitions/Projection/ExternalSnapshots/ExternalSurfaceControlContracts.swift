@@ -1,3 +1,4 @@
+import AmbitionsExternalContracts
 import Foundation
 
 enum ExternalSurfaceControlID: String, CaseIterable, Codable, Sendable, Equatable, Hashable {
