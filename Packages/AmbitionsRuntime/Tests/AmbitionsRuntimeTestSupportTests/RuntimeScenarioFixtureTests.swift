@@ -113,4 +113,26 @@ final class RuntimeScenarioFixtureTests: XCTestCase {
         XCTAssertEqual(decoded.eventChecksum, "events-1")
         XCTAssertEqual(decoded.receiptIDs, ["receipt.command.0"])
     }
+
+    func testAfterCommitFailurePointRoundTripsInDeterministicFixtures() throws {
+        let fixture = RuntimeScenarioFixture.generated(
+            id: "restart.after-commit",
+            seed: 102,
+            commandCount: 1,
+            faultSchedule: [
+                RuntimeScenarioFault(commandIndex: 0, point: .afterCommit)
+            ]
+        )
+
+        let data = try fixture.serializedData()
+        let decoded = try JSONDecoder().decode(
+            RuntimeScenarioFixture.self,
+            from: data
+        )
+
+        XCTAssertEqual(decoded.faultSchedule, fixture.faultSchedule)
+        XCTAssertEqual(decoded.faultSchedule.first?.point, .afterCommit)
+        let serialized = try XCTUnwrap(String(data: data, encoding: .utf8))
+        XCTAssertTrue(serialized.contains("after_commit"))
+    }
 }

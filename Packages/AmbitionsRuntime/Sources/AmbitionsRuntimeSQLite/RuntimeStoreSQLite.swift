@@ -8,6 +8,7 @@ public enum RuntimeStoreFailurePoint: String, Sendable, Codable, Equatable {
     case afterProjections = "after_projections"
     case afterReceipt = "after_receipt"
     case afterExternalEffects = "after_external_effects"
+    case afterCommit = "after_commit"
 }
 
 public enum RuntimeStoreError: Error, Sendable, Equatable {
@@ -86,6 +87,7 @@ public actor RuntimeStoreSQLite {
                 database: database
             ) {
                 try database.execute("COMMIT")
+                try failIfRequested(.afterCommit)
                 return receipt
             }
 
@@ -198,6 +200,7 @@ public actor RuntimeStoreSQLite {
                 database: database
             )
             try database.execute("COMMIT")
+            try failIfRequested(.afterCommit)
             return transition.receipt
         } catch {
             try? database.execute("ROLLBACK")
@@ -249,9 +252,197 @@ public actor RuntimeStoreSQLite {
         )
     }
 
+    public func externalEffectRecords() throws -> [RuntimeExternalEffectRecord] {
+        let database = try SQLiteConnection(url: databaseURL)
+        try Self.createSchema(database)
+        return try Self.externalEffectRecords(database: database)
+    }
+
+    public func claimNextExternalEffect(
+        claimID: String,
+        claimedAt: Date,
+        recoveringClaimsAtOrBefore recoveryCutoff: Date? = nil
+    ) throws -> RuntimeExternalEffectRecord? {
+        let database = try SQLiteConnection(url: databaseURL)
+        try Self.createSchema(database)
+        try database.execute("BEGIN IMMEDIATE")
+        do {
+            let effectID: String?
+            if let recoveryCutoff {
+                effectID = try Self.text(
+                    sql: """
+                    SELECT effect_id
+                    FROM runtime_external_effects
+                    WHERE reconciliation_status IN ('pending', 'failed')
+                       OR (
+                           reconciliation_status = 'claimed'
+                           AND claimed_at <= ?
+                       )
+                    ORDER BY rowid
+                    LIMIT 1
+                    """,
+                    bindings: [
+                        .double(recoveryCutoff.timeIntervalSince1970)
+                    ],
+                    database: database
+                )
+            } else {
+                effectID = try Self.text(
+                    sql: """
+                    SELECT effect_id
+                    FROM runtime_external_effects
+                    WHERE reconciliation_status IN ('pending', 'failed')
+                    ORDER BY rowid
+                    LIMIT 1
+                    """,
+                    bindings: [],
+                    database: database
+                )
+            }
+            guard let effectID else {
+                try database.execute("COMMIT")
+                return nil
+            }
+
+            try Self.execute(
+                """
+                UPDATE runtime_external_effects
+                SET status = 'pending',
+                    reconciliation_status = 'claimed',
+                    attempt_count = attempt_count + 1,
+                    claim_id = ?,
+                    claimed_at = ?,
+                    failure_description = NULL
+                WHERE effect_id = ?
+                """,
+                bindings: [
+                    .text(claimID),
+                    .double(claimedAt.timeIntervalSince1970),
+                    .text(effectID)
+                ],
+                database: database
+            )
+            let record = try Self.externalEffectRecord(
+                effectID: effectID,
+                database: database
+            )
+            try database.execute("COMMIT")
+            return record
+        } catch {
+            try? database.execute("ROLLBACK")
+            throw error
+        }
+    }
+
+    public func markExternalEffectFailed(
+        effectID: String,
+        claimID: String,
+        failureDescription: String
+    ) throws -> RuntimeExternalEffectRecord {
+        try updateClaimedExternalEffect(
+            effectID: effectID,
+            claimID: claimID,
+            status: .failed,
+            failureDescription: failureDescription
+        )
+    }
+
+    public func markExternalEffectReconciled(
+        effectID: String,
+        claimID: String
+    ) throws -> RuntimeExternalEffectRecord {
+        try updateClaimedExternalEffect(
+            effectID: effectID,
+            claimID: claimID,
+            status: .reconciled,
+            failureDescription: nil
+        )
+    }
+
     private func failIfRequested(_ point: RuntimeStoreFailurePoint) throws {
         if failurePoint == point {
             throw RuntimeStoreError.injectedFailure(point)
+        }
+    }
+
+    private func updateClaimedExternalEffect(
+        effectID: String,
+        claimID: String,
+        status: RuntimeExternalEffectStatus,
+        failureDescription: String?
+    ) throws -> RuntimeExternalEffectRecord {
+        let database = try SQLiteConnection(url: databaseURL)
+        try Self.createSchema(database)
+        try database.execute("BEGIN IMMEDIATE")
+        do {
+            guard let current = try Self.externalEffectRecord(
+                effectID: effectID,
+                database: database
+            ) else {
+                throw RuntimeExternalEffectError.effectNotFound(
+                    effectID: effectID
+                )
+            }
+            if status == .reconciled, current.status == .reconciled {
+                try database.execute("COMMIT")
+                return current
+            }
+            guard current.status == .claimed, let claim = current.claim else {
+                throw RuntimeExternalEffectError.invalidTransition(
+                    effectID: effectID,
+                    status: current.status
+                )
+            }
+            guard claim.id == claimID else {
+                throw RuntimeExternalEffectError.claimMismatch(
+                    effectID: effectID,
+                    expectedClaimID: claim.id,
+                    actualClaimID: claimID
+                )
+            }
+
+            let bindings: [SQLiteBinding]
+            if let failureDescription {
+                bindings = [
+                    .text(status.rawValue),
+                    .text(status.rawValue),
+                    .text(failureDescription),
+                    .text(effectID)
+                ]
+            } else {
+                bindings = [
+                    .text(status.rawValue),
+                    .text(status.rawValue),
+                    .null,
+                    .text(effectID)
+                ]
+            }
+            try Self.execute(
+                """
+                UPDATE runtime_external_effects
+                SET status = ?,
+                    reconciliation_status = ?,
+                    claim_id = NULL,
+                    claimed_at = NULL,
+                    failure_description = ?
+                WHERE effect_id = ?
+                """,
+                bindings: bindings,
+                database: database
+            )
+            guard let updated = try Self.externalEffectRecord(
+                effectID: effectID,
+                database: database
+            ) else {
+                throw RuntimeExternalEffectError.effectNotFound(
+                    effectID: effectID
+                )
+            }
+            try database.execute("COMMIT")
+            return updated
+        } catch {
+            try? database.execute("ROLLBACK")
+            throw error
         }
     }
 }
@@ -295,10 +486,75 @@ private extension RuntimeStoreSQLite {
                 command_id TEXT NOT NULL,
                 effect_json BLOB NOT NULL,
                 status TEXT NOT NULL CHECK(status IN ('pending', 'reconciled', 'failed')),
+                reconciliation_status TEXT NOT NULL DEFAULT 'pending'
+                    CHECK(reconciliation_status IN ('pending', 'claimed', 'reconciled', 'failed')),
                 FOREIGN KEY(command_id) REFERENCES runtime_receipts(command_id)
             );
             """
         )
+        try addExternalEffectColumnIfNeeded(
+            "reconciliation_status TEXT NOT NULL DEFAULT 'pending' "
+                + "CHECK(reconciliation_status IN "
+                + "('pending', 'claimed', 'reconciled', 'failed'))",
+            named: "reconciliation_status",
+            database: database
+        )
+        try addExternalEffectColumnIfNeeded(
+            "attempt_count INTEGER NOT NULL DEFAULT 0",
+            named: "attempt_count",
+            database: database
+        )
+        try addExternalEffectColumnIfNeeded(
+            "claim_id TEXT",
+            named: "claim_id",
+            database: database
+        )
+        try addExternalEffectColumnIfNeeded(
+            "claimed_at REAL",
+            named: "claimed_at",
+            database: database
+        )
+        try addExternalEffectColumnIfNeeded(
+            "failure_description TEXT",
+            named: "failure_description",
+            database: database
+        )
+    }
+
+    static func addExternalEffectColumnIfNeeded(
+        _ definition: String,
+        named columnName: String,
+        database: SQLiteConnection
+    ) throws {
+        guard try !columns(
+            in: "runtime_external_effects",
+            database: database
+        ).contains(columnName) else { return }
+        try database.execute(
+            "ALTER TABLE runtime_external_effects ADD COLUMN \(definition)"
+        )
+    }
+
+    static func columns(
+        in table: String,
+        database: SQLiteConnection
+    ) throws -> Set<String> {
+        let statement = try database.prepare("PRAGMA table_info(\(table))")
+        defer { sqlite3_finalize(statement) }
+        var result: Set<String> = []
+        while true {
+            switch sqlite3_step(statement) {
+            case SQLITE_ROW:
+                guard let value = sqlite3_column_text(statement, 1) else {
+                    throw RuntimeStoreError.sqlite(database.message)
+                }
+                result.insert(String(cString: value))
+            case SQLITE_DONE:
+                return result
+            default:
+                throw RuntimeStoreError.sqlite(database.message)
+            }
+        }
     }
 
     static func currentRevision(
@@ -334,6 +590,24 @@ private extension RuntimeStoreSQLite {
             throw RuntimeStoreError.sqlite(database.message)
         }
         return sqlite3_column_int64(statement, 0)
+    }
+
+    static func text(
+        sql: String,
+        bindings: [SQLiteBinding],
+        database: SQLiteConnection
+    ) throws -> String? {
+        let statement = try database.prepare(sql)
+        defer { sqlite3_finalize(statement) }
+        try bind(bindings, to: statement, database: database)
+        let result = sqlite3_step(statement)
+        if result == SQLITE_DONE { return nil }
+        guard result == SQLITE_ROW,
+              let value = sqlite3_column_text(statement, 0)
+        else {
+            throw RuntimeStoreError.sqlite(database.message)
+        }
+        return String(cString: value)
     }
 
     static func execute(
@@ -391,6 +665,130 @@ private extension RuntimeStoreSQLite {
         }
     }
 
+    static func externalEffectRecords(
+        database: SQLiteConnection
+    ) throws -> [RuntimeExternalEffectRecord] {
+        let statement = try database.prepare(
+            """
+            SELECT effect_json, reconciliation_status, attempt_count,
+                   claim_id, claimed_at, failure_description
+            FROM runtime_external_effects
+            ORDER BY rowid
+            """
+        )
+        defer { sqlite3_finalize(statement) }
+        var result: [RuntimeExternalEffectRecord] = []
+        while true {
+            switch sqlite3_step(statement) {
+            case SQLITE_ROW:
+                result.append(
+                    try externalEffectRecord(
+                        statement: statement,
+                        database: database
+                    )
+                )
+            case SQLITE_DONE:
+                return result
+            default:
+                throw RuntimeStoreError.sqlite(database.message)
+            }
+        }
+    }
+
+    static func externalEffectRecord(
+        effectID: String,
+        database: SQLiteConnection
+    ) throws -> RuntimeExternalEffectRecord? {
+        let statement = try database.prepare(
+            """
+            SELECT effect_json, reconciliation_status, attempt_count,
+                   claim_id, claimed_at, failure_description
+            FROM runtime_external_effects
+            WHERE effect_id = ?
+            LIMIT 1
+            """
+        )
+        defer { sqlite3_finalize(statement) }
+        try bind([.text(effectID)], to: statement, database: database)
+        let result = sqlite3_step(statement)
+        if result == SQLITE_DONE { return nil }
+        guard result == SQLITE_ROW else {
+            throw RuntimeStoreError.sqlite(database.message)
+        }
+        return try externalEffectRecord(
+            statement: statement,
+            database: database
+        )
+    }
+
+    static func externalEffectRecord(
+        statement: OpaquePointer,
+        database: SQLiteConnection
+    ) throws -> RuntimeExternalEffectRecord {
+        let envelope = try JSONDecoder().decode(
+            RuntimeExternalEffectEnvelope.self,
+            from: try blob(statement, column: 0)
+        )
+        let persistedStatus = try requiredText(
+            statement,
+            column: 1,
+            database: database
+        )
+        guard let storedStatus = RuntimeExternalEffectStatus(
+            rawValue: persistedStatus
+        ) else {
+            throw RuntimeStoreError.sqlite(
+                "Unknown external effect status: \(persistedStatus)"
+            )
+        }
+        let attemptCount = sqlite3_column_int64(statement, 2)
+        let claimID = optionalText(statement, column: 3)
+        let claim: RuntimeExternalEffectClaim?
+        if let claimID {
+            guard sqlite3_column_type(statement, 4) != SQLITE_NULL else {
+                throw RuntimeStoreError.sqlite(
+                    "Claimed external effect is missing its claim date"
+                )
+            }
+            claim = RuntimeExternalEffectClaim(
+                id: claimID,
+                claimedAt: Date(
+                    timeIntervalSince1970: sqlite3_column_double(statement, 4)
+                )
+            )
+        } else {
+            claim = nil
+        }
+        return RuntimeExternalEffectRecord(
+            envelope: envelope,
+            status: storedStatus,
+            attemptCount: attemptCount,
+            claim: claim,
+            failureDescription: optionalText(statement, column: 5)
+        )
+    }
+
+    static func requiredText(
+        _ statement: OpaquePointer,
+        column: Int32,
+        database: SQLiteConnection
+    ) throws -> String {
+        guard let value = sqlite3_column_text(statement, column) else {
+            throw RuntimeStoreError.sqlite(database.message)
+        }
+        return String(cString: value)
+    }
+
+    static func optionalText(
+        _ statement: OpaquePointer,
+        column: Int32
+    ) -> String? {
+        guard sqlite3_column_type(statement, column) != SQLITE_NULL,
+              let value = sqlite3_column_text(statement, column)
+        else { return nil }
+        return String(cString: value)
+    }
+
     static func encode<Value: Encodable>(_ value: Value) throws -> Data {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys]
@@ -416,6 +814,8 @@ private extension RuntimeStoreSQLite {
             switch binding {
             case let .integer(value):
                 result = sqlite3_bind_int64(statement, index, value)
+            case let .double(value):
+                result = sqlite3_bind_double(statement, index, value)
             case let .text(value):
                 result = sqlite3_bind_text(
                     statement,
@@ -434,6 +834,8 @@ private extension RuntimeStoreSQLite {
                         sqliteTransient
                     )
                 }
+            case .null:
+                result = sqlite3_bind_null(statement, index)
             }
             guard result == SQLITE_OK else {
                 throw RuntimeStoreError.sqlite(database.message)
@@ -444,8 +846,10 @@ private extension RuntimeStoreSQLite {
 
 private enum SQLiteBinding {
     case integer(Int64)
+    case double(Double)
     case text(String)
     case blob(Data)
+    case null
 }
 
 private final class SQLiteConnection {
