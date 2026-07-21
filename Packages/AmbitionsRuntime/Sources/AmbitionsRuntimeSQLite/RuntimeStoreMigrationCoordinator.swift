@@ -20,8 +20,19 @@ public actor RuntimeStoreMigrationCoordinator {
 
     let rootDescriptor: Int32
     let controlDatabase: RuntimeStoreMigrationControlDatabase
+    private let verificationIssuanceHook: (@Sendable () async -> Void)?
 
     public init(rootDirectoryURL: URL) throws {
+        try self.init(
+            rootDirectoryURL: rootDirectoryURL,
+            verificationIssuanceHook: nil
+        )
+    }
+
+    init(
+        rootDirectoryURL: URL,
+        verificationIssuanceHook: (@Sendable () async -> Void)?
+    ) throws {
         let standardizedRoot = rootDirectoryURL.standardizedFileURL
         do {
             try FileManager.default.createDirectory(
@@ -53,6 +64,7 @@ public actor RuntimeStoreMigrationCoordinator {
             self.rootDirectoryURL = pinnedRoot
             rootDescriptor = descriptor
             controlDatabase = database
+            self.verificationIssuanceHook = verificationIssuanceHook
         } catch {
             RuntimeStoreMigrationFileSystem.close(descriptor)
             throw error
@@ -174,7 +186,15 @@ public actor RuntimeStoreMigrationCoordinator {
             candidateDigest: first.digest,
             expectationsDigest: expectationsDigest
         )
+        if let verificationIssuanceHook {
+            await verificationIssuanceHook()
+        }
         try controlDatabase.withImmediateTransaction { connection in
+            if let pending = try reconcilePendingIntent(connection: connection) {
+                throw RuntimeStoreMigrationError.pendingAuthorityIntent(
+                    pending.intentIdentity
+                )
+            }
             try connection.requireReservation(reservation)
             try connection.insertVerification(
                 report: report,

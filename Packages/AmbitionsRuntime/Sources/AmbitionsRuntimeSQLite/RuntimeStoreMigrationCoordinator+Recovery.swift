@@ -142,19 +142,25 @@ extension RuntimeStoreMigrationCoordinator {
     func reconcilePendingIntent() throws
         -> RuntimeStoreMigrationPendingIntent? {
         try controlDatabase.withImmediateTransaction { connection in
-            guard let intent = try connection.pendingIntent() else { return nil }
-            let pointer = try readPointerIfPresent()
-            if pointer == intent.newPointer {
-                try finalize(intent, connection: connection)
-                return nil
-            }
-            guard pointer == intent.oldPointer else {
-                throw RuntimeStoreMigrationError.pendingAuthorityDivergence(
-                    intent.intentIdentity
-                )
-            }
-            return intent
+            try reconcilePendingIntent(connection: connection)
         }
+    }
+
+    func reconcilePendingIntent(
+        connection: RuntimeStoreMigrationControlConnection
+    ) throws -> RuntimeStoreMigrationPendingIntent? {
+        guard let intent = try connection.pendingIntent() else { return nil }
+        let pointer = try readPointerIfPresent()
+        if pointer == intent.newPointer {
+            try finalize(intent, connection: connection)
+            return nil
+        }
+        guard pointer == intent.oldPointer else {
+            throw RuntimeStoreMigrationError.pendingAuthorityDivergence(
+                intent.intentIdentity
+            )
+        }
+        return intent
     }
 
     func requireNoPendingIntent() throws {

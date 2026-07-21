@@ -286,6 +286,80 @@ final class RuntimeStoreMigrationDurabilityTests: XCTestCase {
         XCTAssertEqual(try Data(contentsOf: destinationURL), destinationBytes)
     }
 
+    func testPreparedActivationPreventsLateVerificationFromConsumingReport() async throws {
+        let root = temporaryRootURL()
+        let activationCoordinator = try RuntimeStoreMigrationCoordinator(
+            rootDirectoryURL: root
+        )
+        let reservation = try await activationCoordinator.reserveStaging(
+            migrationIdentity: "migration.verification-race"
+        )
+        let firstStore = try RuntimeStoreSQLite(
+            databaseURL: reservation.stagedStoreURL
+        )
+        _ = try await firstStore.commit(
+            makeTransition(commandID: "command.verification-race-a"),
+            idempotencyKey: "verification-race-a"
+        )
+        let firstExpectations = try await makeExpectations(
+            migrationIdentity: reservation.migrationIdentity,
+            store: firstStore
+        )
+        let firstReport = try await activationCoordinator.verify(
+            reservation: reservation,
+            expectations: firstExpectations
+        )
+        let secondStore = try RuntimeStoreSQLite(
+            databaseURL: reservation.stagedStoreURL
+        )
+        _ = try await secondStore.commit(
+            makeTransition(commandID: "command.verification-race-b"),
+            idempotencyKey: "verification-race-b"
+        )
+        let secondExpectations = try await makeExpectations(
+            migrationIdentity: reservation.migrationIdentity,
+            store: secondStore
+        )
+        let gate = RuntimeStoreMigrationVerificationIssuanceGate()
+        let verificationCoordinator = try RuntimeStoreMigrationCoordinator(
+            rootDirectoryURL: root,
+            verificationIssuanceHook: { await gate.pause() }
+        )
+
+        async let secondReport = verificationCoordinator.verify(
+            reservation: reservation,
+            expectations: secondExpectations
+        )
+        await gate.waitUntilPaused()
+        await assertMigrationError(.injectedFailure(.beforePointerRename)) {
+            _ = try await activationCoordinator.activate(
+                reservation: reservation,
+                verifiedReport: firstReport,
+                activatedAt: Date(timeIntervalSince1970: 13_000),
+                failurePoint: .beforePointerRename
+            )
+        }
+        await gate.release()
+        do {
+            _ = try await secondReport
+            XCTFail("Expected verification to reject the prepared activation")
+        } catch let error as RuntimeStoreMigrationError {
+            guard case .pendingAuthorityIntent = error else {
+                return XCTFail("Unexpected migration error: \(error)")
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let restarted = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let pointer = try await restarted.activate(
+            reservation: reservation,
+            verifiedReport: firstReport,
+            activatedAt: Date(timeIntervalSince1970: 13_000)
+        )
+        XCTAssertEqual(pointer.migrationIdentity, reservation.migrationIdentity)
+    }
+
     private func makeExpectations(
         migrationIdentity: String,
         store: RuntimeStoreSQLite
@@ -401,5 +475,35 @@ final class RuntimeStoreMigrationDurabilityTests: XCTestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+    }
+}
+
+private actor RuntimeStoreMigrationVerificationIssuanceGate {
+    private var paused = false
+    private var released = false
+    private var pauseWaiters: [CheckedContinuation<Void, Never>] = []
+    private var releaseWaiters: [CheckedContinuation<Void, Never>] = []
+
+    func pause() async {
+        paused = true
+        pauseWaiters.forEach { $0.resume() }
+        pauseWaiters.removeAll()
+        guard !released else { return }
+        await withCheckedContinuation { continuation in
+            releaseWaiters.append(continuation)
+        }
+    }
+
+    func waitUntilPaused() async {
+        guard !paused else { return }
+        await withCheckedContinuation { continuation in
+            pauseWaiters.append(continuation)
+        }
+    }
+
+    func release() {
+        released = true
+        releaseWaiters.forEach { $0.resume() }
+        releaseWaiters.removeAll()
     }
 }
