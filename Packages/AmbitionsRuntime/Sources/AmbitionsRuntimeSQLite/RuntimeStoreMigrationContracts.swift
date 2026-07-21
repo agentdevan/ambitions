@@ -223,6 +223,8 @@ public enum RuntimeStoreMigrationError: Error, Sendable, Equatable {
     case verificationAlreadyConsumed(String)
     case verificationIdentityMismatch
     case authorityConflict(expectedGeneration: Int64, actualGeneration: Int64)
+    case pendingAuthorityIntent(String)
+    case pendingAuthorityDivergence(String)
     case injectedFailure(RuntimeStoreMigrationFailurePoint)
     case fileOperationFailed(operation: String, description: String)
 }

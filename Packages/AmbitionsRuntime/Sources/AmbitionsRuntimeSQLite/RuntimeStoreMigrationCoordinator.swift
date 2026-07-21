@@ -4,6 +4,13 @@ import SQLite3
 
 #if canImport(Darwin)
 import Darwin
+
+@_silgen_name("fcntl")
+private func runtimeStoreMigrationFcntlPath(
+    _ descriptor: Int32,
+    _ command: Int32,
+    _ path: UnsafeMutablePointer<CChar>
+) -> Int32
 #else
 import Glibc
 #endif
@@ -27,20 +34,23 @@ public actor RuntimeStoreMigrationCoordinator {
                 description: String(describing: error)
             )
         }
-        let resolvedRoot = standardizedRoot.resolvingSymlinksInPath()
         let descriptor = try RuntimeStoreMigrationFileSystem.openDirectory(
-            at: resolvedRoot
+            at: standardizedRoot
         )
         do {
+            let pinnedRoot = URL(
+                fileURLWithPath: try RuntimeStoreMigrationFileSystem
+                    .canonicalPath(descriptor),
+                isDirectory: true
+            )
             try RuntimeStoreMigrationFileSystem.ensureControlDatabaseFile(
                 rootDescriptor: descriptor
             )
             let database = try RuntimeStoreMigrationControlDatabase(
-                url: resolvedRoot.appendingPathComponent(
-                    ".RuntimeStore.migration-control.sqlite"
-                )
+                rootDescriptor: descriptor,
+                rootDirectoryURL: pinnedRoot
             )
-            self.rootDirectoryURL = resolvedRoot
+            self.rootDirectoryURL = pinnedRoot
             rootDescriptor = descriptor
             controlDatabase = database
         } catch {
@@ -56,6 +66,7 @@ public actor RuntimeStoreMigrationCoordinator {
     public func reserveStaging(
         migrationIdentity: String
     ) throws -> RuntimeStoreMigrationReservation {
+        try requireNoPendingIntent()
         try Self.validateMigrationIdentity(migrationIdentity)
         let stagingRootDescriptor = try RuntimeStoreMigrationFileSystem
             .ensureDirectory(
@@ -94,6 +105,7 @@ public actor RuntimeStoreMigrationCoordinator {
         reservation: RuntimeStoreMigrationReservation,
         expectations: RuntimeStoreVerificationExpectations
     ) async throws -> RuntimeStoreVerificationReport {
+        try requireNoPendingIntent()
         try validateReservationStructure(reservation)
         guard expectations.schemaVersion == 1 else {
             throw RuntimeStoreMigrationError.unsupportedVerificationSchemaVersion(
@@ -192,103 +204,16 @@ public actor RuntimeStoreMigrationCoordinator {
             )
         }
 
-        let result = try controlDatabase.withImmediateTransaction { connection in
-            try connection.requireReservation(reservation)
-            let issuance = try connection.requireVerification(
-                identity: verifiedReport.verificationIdentity
-            )
-            guard !issuance.consumed else {
-                throw RuntimeStoreMigrationError.verificationAlreadyConsumed(
-                    verifiedReport.verificationIdentity
-                )
-            }
-            guard issuance.report == verifiedReport,
-                  issuance.report.reservationIdentity
-                    == reservation.reservationIdentity,
-                  issuance.report.migrationIdentity
-                    == reservation.migrationIdentity,
-                  try Self.stableDigest(issuance.expectations)
-                    == verifiedReport.expectationsDigest
-            else {
-                throw RuntimeStoreMigrationError.verificationIdentityMismatch
-            }
-
-            let sealedCandidate = try inspectRootStore(
-                filename: issuance.candidateFilename
-            )
-            guard sealedCandidate.digest == verifiedReport.candidateDigest else {
-                throw RuntimeStoreMigrationError.digestMismatch(
-                    filename: issuance.candidateFilename,
-                    expected: verifiedReport.candidateDigest,
-                    actual: sealedCandidate.digest
-                )
-            }
-            try Self.compare(
-                sealedCandidate.observation,
-                with: issuance.expectations
-            )
-
-            let existingPointer = try readPointerIfPresent()
-            if let existingPointer {
-                _ = try validateStore(existingPointer.currentStore)
-            }
-            let generation = try connection.authorityGeneration()
-            let finalFilename = "RuntimeStore.\(reservation.migrationIdentity)."
-                + "\(sealedCandidate.digest).sqlite"
-            try Self.validateStoreFilename(finalFilename)
-            guard !RuntimeStoreMigrationFileSystem.entryExists(
-                parentDescriptor: rootDescriptor,
-                name: finalFilename
-            ) else {
-                throw RuntimeStoreMigrationError.finalStoreAlreadyExists(
-                    finalFilename
-                )
-            }
-
-            try RuntimeStoreMigrationFileSystem.rename(
-                sourceParentDescriptor: rootDescriptor,
-                sourceName: issuance.candidateFilename,
-                destinationParentDescriptor: rootDescriptor,
-                destinationName: finalFilename,
-                operation: "promote sealed runtime-store candidate"
-            )
-            let promoted = try inspectRootStore(filename: finalFilename)
-            guard promoted.fileIdentity == sealedCandidate.fileIdentity,
-                  promoted.digest == sealedCandidate.digest,
-                  promoted.observation == sealedCandidate.observation
-            else {
-                throw RuntimeStoreMigrationError.verificationIdentityMismatch
-            }
-            try RuntimeStoreMigrationFileSystem.syncDescriptor(
-                rootDescriptor,
-                operation: "sync promoted runtime-store directory"
-            )
-
-            let currentStore = RuntimeStoreFileIdentity(
-                filename: finalFilename,
-                digest: promoted.digest,
-                migrationIdentity: reservation.migrationIdentity
-            )
-            let pointer = RuntimeStoreActivePointer(
-                currentStore: currentStore,
-                previousStore: existingPointer?.currentStore,
-                migrationIdentity: reservation.migrationIdentity,
-                activatedAt: activatedAt
-            )
-            try writePointer(
-                pointer,
-                injectBeforeRename: failurePoint == .beforePointerRename
-            )
-            try connection.consumeVerification(
-                identity: verifiedReport.verificationIdentity
-            )
-            try connection.advanceAuthorityGeneration(expected: generation)
-            return pointer
-        }
-        if failurePoint == .afterPointerRename {
-            throw RuntimeStoreMigrationError.injectedFailure(.afterPointerRename)
-        }
-        return result
+        let intent = try prepareOrResumeActivation(
+            reservation: reservation,
+            verifiedReport: verifiedReport,
+            activatedAt: activatedAt
+        )
+        return try publishActivation(
+            intent,
+            verifiedReport: verifiedReport,
+            failurePoint: failurePoint
+        )
     }
 
 }
@@ -325,17 +250,30 @@ struct RuntimeStoreVerificationIssuance {
 
 struct RuntimeStoreMigrationControlDatabase {
     let url: URL
+    let rootDescriptor: Int32
 
-    init(url: URL) throws {
-        self.url = url
-        let connection = try RuntimeStoreMigrationControlConnection(url: url)
+    init(
+        rootDescriptor: Int32,
+        rootDirectoryURL: URL
+    ) throws {
+        self.rootDescriptor = rootDescriptor
+        url = rootDirectoryURL.appendingPathComponent(
+            RuntimeStoreMigrationFileSystem.controlDatabaseFilename
+        )
+        let connection = try RuntimeStoreMigrationControlConnection(
+            url: url,
+            rootDescriptor: rootDescriptor
+        )
         try connection.installSchema()
     }
 
     func withImmediateTransaction<Value>(
         _ body: (RuntimeStoreMigrationControlConnection) throws -> Value
     ) throws -> Value {
-        let connection = try RuntimeStoreMigrationControlConnection(url: url)
+        let connection = try RuntimeStoreMigrationControlConnection(
+            url: url,
+            rootDescriptor: rootDescriptor
+        )
         try connection.execute("BEGIN IMMEDIATE")
         do {
             let value = try body(connection)
@@ -349,26 +287,100 @@ struct RuntimeStoreMigrationControlDatabase {
 }
 
 final class RuntimeStoreMigrationControlConnection {
-    private var database: OpaquePointer?
+    var database: OpaquePointer?
+    private var pinnedDescriptor: Int32 = -1
 
-    init(url: URL) throws {
+    init(
+        url: URL,
+        rootDescriptor: Int32
+    ) throws {
+        let rootIdentity = try RuntimeStoreMigrationFileSystem.identity(
+            rootDescriptor
+        )
+        try RuntimeStoreMigrationFileSystem.requireStableDirectory(
+            at: url.deletingLastPathComponent(),
+            expected: rootIdentity
+        )
+        let descriptor = try RuntimeStoreMigrationFileSystem.openRegularFile(
+            parentDescriptor: rootDescriptor,
+            name: RuntimeStoreMigrationFileSystem.controlDatabaseFilename,
+            flags: O_RDWR
+        )
+        let expectedIdentity = try RuntimeStoreMigrationFileSystem.identity(
+            descriptor
+        )
         let flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE
-            | SQLITE_OPEN_FULLMUTEX
+            | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_NOFOLLOW
         let result = sqlite3_open_v2(url.path, &database, flags, nil)
         guard result == SQLITE_OK, database != nil else {
             let description = message
             if let database { sqlite3_close(database) }
             database = nil
+            RuntimeStoreMigrationFileSystem.close(descriptor)
             throw RuntimeStoreMigrationError.fileOperationFailed(
                 operation: "open migration control database",
                 description: description
             )
         }
+        do {
+            try RuntimeStoreMigrationFileSystem.requireStableDirectory(
+                at: url.deletingLastPathComponent(),
+                expected: rootIdentity
+            )
+        } catch {
+            sqlite3_close(database)
+            database = nil
+            RuntimeStoreMigrationFileSystem.close(descriptor)
+            throw error
+        }
+        let reopenedDescriptor: Int32
+        do {
+            reopenedDescriptor = try RuntimeStoreMigrationFileSystem.openRegularFile(
+                parentDescriptor: rootDescriptor,
+                name: RuntimeStoreMigrationFileSystem.controlDatabaseFilename,
+                flags: O_RDWR
+            )
+        } catch {
+            sqlite3_close(database)
+            database = nil
+            RuntimeStoreMigrationFileSystem.close(descriptor)
+            throw error
+        }
+        let reopenedIdentity = try RuntimeStoreMigrationFileSystem.identity(
+            reopenedDescriptor
+        )
+        RuntimeStoreMigrationFileSystem.close(reopenedDescriptor)
+        do {
+            guard expectedIdentity == reopenedIdentity else {
+                throw RuntimeStoreMigrationError.unsafeFilesystemEntry(
+                    RuntimeStoreMigrationFileSystem.controlDatabaseFilename
+                )
+            }
+            try RuntimeStoreMigrationFileSystem.requireSQLiteFileNotMoved(
+                database,
+                operation: "pin migration control database"
+            )
+        } catch {
+            sqlite3_close(database)
+            database = nil
+            RuntimeStoreMigrationFileSystem.close(descriptor)
+            throw error
+        }
+        pinnedDescriptor = descriptor
         sqlite3_busy_timeout(database, 30_000)
+        do {
+            try configureDurability()
+        } catch {
+            sqlite3_close(database)
+            database = nil
+            RuntimeStoreMigrationFileSystem.close(descriptor)
+            throw error
+        }
     }
 
     deinit {
         if let database { sqlite3_close(database) }
+        RuntimeStoreMigrationFileSystem.close(pinnedDescriptor)
     }
 
     var message: String {
@@ -377,8 +389,6 @@ final class RuntimeStoreMigrationControlConnection {
     }
 
     func installSchema() throws {
-        try execute("PRAGMA journal_mode=WAL")
-        try execute("PRAGMA synchronous=FULL")
         try execute(
             """
             CREATE TABLE IF NOT EXISTS migration_reservations (
@@ -398,6 +408,10 @@ final class RuntimeStoreMigrationControlConnection {
             CREATE TABLE IF NOT EXISTS migration_authority (
                 singleton INTEGER PRIMARY KEY CHECK(singleton = 1),
                 generation INTEGER NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS migration_pending_intent (
+                singleton INTEGER PRIMARY KEY CHECK(singleton = 1),
+                intent_json BLOB NOT NULL
             );
             INSERT INTO migration_authority(singleton, generation)
             VALUES (1, 0)
@@ -588,7 +602,7 @@ final class RuntimeStoreMigrationControlConnection {
         }
     }
 
-    private func prepare(
+    func prepare(
         _ sql: String,
         bindings: [RuntimeStoreMigrationControlBinding] = []
     ) throws -> OpaquePointer {
@@ -648,7 +662,7 @@ final class RuntimeStoreMigrationControlConnection {
         }
     }
 
-    private static func blob(
+    static func blob(
         _ statement: OpaquePointer,
         column: Int32
     ) throws -> Data {
@@ -684,6 +698,41 @@ enum RuntimeStoreMigrationFileSystem {
             throw posixError(operation: "open coordinator root directory")
         }
         return descriptor
+    }
+
+    static func canonicalPath(_ descriptor: Int32) throws -> String {
+        #if canImport(Darwin)
+        var buffer = [CChar](repeating: 0, count: Int(PATH_MAX))
+        let result = buffer.withUnsafeMutableBufferPointer { storage in
+            runtimeStoreMigrationFcntlPath(
+                descriptor,
+                F_GETPATH,
+                storage.baseAddress!
+            )
+        }
+        guard result == 0 else {
+            throw posixError(operation: "resolve pinned coordinator root")
+        }
+        let terminator = buffer.firstIndex(of: 0) ?? buffer.endIndex
+        let bytes = buffer[..<terminator].map(UInt8.init(bitPattern:))
+        guard let path = String(bytes: bytes, encoding: .utf8) else {
+            throw RuntimeStoreMigrationError.fileOperationFailed(
+                operation: "decode pinned coordinator root",
+                description: "The filesystem returned a non-UTF-8 path."
+            )
+        }
+        return path
+        #else
+        let link = "/proc/self/fd/\(descriptor)"
+        do {
+            return try FileManager.default.destinationOfSymbolicLink(atPath: link)
+        } catch {
+            throw RuntimeStoreMigrationError.fileOperationFailed(
+                operation: "resolve pinned coordinator root",
+                description: String(describing: error)
+            )
+        }
+        #endif
     }
 
     static func ensureDirectory(
@@ -804,6 +853,49 @@ enum RuntimeStoreMigrationFileSystem {
         }
     }
 
+    static func openRegularFile(
+        at url: URL,
+        flags: Int32
+    ) throws -> Int32 {
+        let descriptor = url.path.withCString { path in
+            systemOpen(path, flags | O_NOFOLLOW, 0)
+        }
+        guard descriptor >= 0 else {
+            if errno == ENOENT { throw MissingEntry() }
+            if errno == ELOOP {
+                throw RuntimeStoreMigrationError.storeIsNotRegularFile(
+                    url.lastPathComponent
+                )
+            }
+            throw posixError(
+                operation: "open regular file \(url.lastPathComponent)"
+            )
+        }
+        do {
+            try requireRegularDescriptor(
+                descriptor,
+                name: url.lastPathComponent
+            )
+            return descriptor
+        } catch {
+            close(descriptor)
+            throw error
+        }
+    }
+
+    static func requireStableDirectory(
+        at url: URL,
+        expected: RuntimeStoreMigrationFileIdentity
+    ) throws {
+        let descriptor = try openDirectory(at: url)
+        defer { close(descriptor) }
+        guard try identity(descriptor) == expected else {
+            throw RuntimeStoreMigrationError.unsafeFilesystemEntry(
+                url.lastPathComponent
+            )
+        }
+    }
+
     static func requireRegularEntry(
         parentDescriptor: Int32,
         name: String
@@ -892,120 +984,6 @@ enum RuntimeStoreMigrationFileSystem {
             .joined()
     }
 
-    static func backupSQLiteStore(
-        sourceURL: URL,
-        destinationURL: URL
-    ) throws {
-        var source: OpaquePointer?
-        var destination: OpaquePointer?
-        let sourceFlags = SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX
-        let destinationFlags = SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX
-        guard sqlite3_open_v2(
-            sourceURL.path,
-            &source,
-            sourceFlags,
-            nil
-        ) == SQLITE_OK, let source else {
-            let description = source.map { String(cString: sqlite3_errmsg($0)) }
-                ?? "Unable to open captured staged store."
-            if let source { sqlite3_close(source) }
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "open captured staged store",
-                description: description
-            )
-        }
-        defer { sqlite3_close(source) }
-        guard sqlite3_open_v2(
-            destinationURL.path,
-            &destination,
-            destinationFlags,
-            nil
-        ) == SQLITE_OK, let destination else {
-            let description = destination.map { String(cString: sqlite3_errmsg($0)) }
-                ?? "Unable to open sealed candidate."
-            if let destination { sqlite3_close(destination) }
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "open sealed runtime-store candidate",
-                description: description
-            )
-        }
-        defer { sqlite3_close(destination) }
-        guard let backup = sqlite3_backup_init(
-            destination,
-            "main",
-            source,
-            "main"
-        ) else {
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "initialize SQLite backup",
-                description: String(cString: sqlite3_errmsg(destination))
-            )
-        }
-        let stepResult = sqlite3_backup_step(backup, -1)
-        let finishResult = sqlite3_backup_finish(backup)
-        guard stepResult == SQLITE_DONE, finishResult == SQLITE_OK else {
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "seal SQLite verification candidate",
-                description: String(cString: sqlite3_errmsg(destination))
-            )
-        }
-    }
-
-    static func checkpointAndTruncateWAL(at url: URL) throws {
-        var database: OpaquePointer?
-        let result = sqlite3_open_v2(
-            url.path,
-            &database,
-            SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX,
-            nil
-        )
-        guard result == SQLITE_OK, let database else {
-            let description = database.map { String(cString: sqlite3_errmsg($0)) }
-                ?? "SQLite open failed with code \(result)."
-            if let database { sqlite3_close(database) }
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "open sealed store for WAL checkpoint",
-                description: description
-            )
-        }
-        defer { sqlite3_close(database) }
-        var logFrames: Int32 = 0
-        var checkpointedFrames: Int32 = 0
-        let checkpointResult = sqlite3_wal_checkpoint_v2(
-            database,
-            nil,
-            SQLITE_CHECKPOINT_TRUNCATE,
-            &logFrames,
-            &checkpointedFrames
-        )
-        guard checkpointResult == SQLITE_OK else {
-            throw RuntimeStoreMigrationError.fileOperationFailed(
-                operation: "checkpoint and truncate sealed store WAL",
-                description: String(cString: sqlite3_errmsg(database))
-            )
-        }
-    }
-
-    static func rename(
-        sourceParentDescriptor: Int32,
-        sourceName: String,
-        destinationParentDescriptor: Int32,
-        destinationName: String,
-        operation: String
-    ) throws {
-        let result = sourceName.withCString { source in
-            destinationName.withCString { destination in
-                systemRenameAt(
-                    sourceParentDescriptor,
-                    source,
-                    destinationParentDescriptor,
-                    destination
-                )
-            }
-        }
-        guard result == 0 else { throw posixError(operation: operation) }
-    }
-
     static func descriptorPath(_ descriptor: Int32) -> String {
         #if canImport(Darwin)
         "/dev/fd/\(descriptor)"
@@ -1040,7 +1018,7 @@ enum RuntimeStoreMigrationFileSystem {
         }
     }
 
-    private static func posixError(
+    static func posixError(
         operation: String
     ) -> RuntimeStoreMigrationError {
         .fileOperationFailed(
@@ -1110,7 +1088,7 @@ enum RuntimeStoreMigrationFileSystem {
         #endif
     }
 
-    private static func systemRenameAt(
+    static func systemRenameAt(
         _ sourceDescriptor: Int32,
         _ source: UnsafePointer<CChar>,
         _ destinationDescriptor: Int32,

@@ -8,6 +8,7 @@ import Glibc
 
 extension RuntimeStoreMigrationCoordinator {
     public func resolveActiveStore() throws -> URL {
+        _ = try reconcilePendingIntent()
         guard let pointer = try readPointerIfPresent() else {
             throw RuntimeStoreMigrationError.noActiveStore
         }
@@ -20,28 +21,11 @@ extension RuntimeStoreMigrationCoordinator {
     }
 
     public func rollback(
-        activatedAt: Date
+        activatedAt: Date,
+        failurePoint: RuntimeStoreMigrationFailurePoint? = nil
     ) throws -> RuntimeStoreActivePointer {
-        try controlDatabase.withImmediateTransaction { connection in
-            guard let pointer = try readPointerIfPresent() else {
-                throw RuntimeStoreMigrationError.noActiveStore
-            }
-            _ = try validateStore(pointer.currentStore)
-            guard let previousStore = pointer.previousStore else {
-                throw RuntimeStoreMigrationError.noPreviousStore
-            }
-            _ = try validateStore(previousStore)
-            let generation = try connection.authorityGeneration()
-            let rolledBack = RuntimeStoreActivePointer(
-                currentStore: previousStore,
-                previousStore: pointer.currentStore,
-                migrationIdentity: previousStore.migrationIdentity,
-                activatedAt: activatedAt
-            )
-            try writePointer(rolledBack, injectBeforeRename: false)
-            try connection.advanceAuthorityGeneration(expected: generation)
-            return rolledBack
-        }
+        let intent = try prepareOrResumeRollback(activatedAt: activatedAt)
+        return try publishRollback(intent, failurePoint: failurePoint)
     }
 
     func expectedReservation(
@@ -76,14 +60,16 @@ extension RuntimeStoreMigrationCoordinator {
             reservationIdentity: reservation.reservationIdentity
         )
         let actualStore = reservation.stagedStoreURL.standardizedFileURL
-        guard actualStore == expected.stagedStoreURL else {
+        let expectedStore = expected.stagedStoreURL.standardizedFileURL
+        guard actualStore == expectedStore else {
             throw RuntimeStoreMigrationError.reservationPathMismatch(
                 expected: expected.stagedStoreURL,
                 actual: actualStore
             )
         }
         let actualDirectory = reservation.stagingDirectoryURL.standardizedFileURL
-        guard actualDirectory == expected.stagingDirectoryURL else {
+        let expectedDirectory = expected.stagingDirectoryURL.standardizedFileURL
+        guard actualDirectory == expectedDirectory else {
             throw RuntimeStoreMigrationError.reservationPathMismatch(
                 expected: expected.stagingDirectoryURL,
                 actual: actualDirectory
@@ -271,7 +257,7 @@ extension RuntimeStoreMigrationCoordinator {
 
     func writePointer(
         _ pointer: RuntimeStoreActivePointer,
-        injectBeforeRename: Bool
+        failurePoint: RuntimeStoreMigrationFailurePoint?
     ) throws {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
@@ -301,10 +287,10 @@ extension RuntimeStoreMigrationCoordinator {
             RuntimeStoreMigrationFileSystem.close(descriptor)
             throw error
         }
-        if injectBeforeRename {
+        if failurePoint == .beforePointerRename {
             throw RuntimeStoreMigrationError.injectedFailure(.beforePointerRename)
         }
-        try RuntimeStoreMigrationFileSystem.rename(
+        try RuntimeStoreMigrationFileSystem.replace(
             sourceParentDescriptor: rootDescriptor,
             sourceName: temporaryName,
             destinationParentDescriptor: rootDescriptor,
@@ -315,5 +301,8 @@ extension RuntimeStoreMigrationCoordinator {
             rootDescriptor,
             operation: "sync active-store pointer directory"
         )
+        if failurePoint == .afterPointerRename {
+            throw RuntimeStoreMigrationError.injectedFailure(.afterPointerRename)
+        }
     }
 }

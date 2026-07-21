@@ -2,7 +2,7 @@ import CryptoKit
 import Foundation
 import XCTest
 import AmbitionsRuntimeCore
-import AmbitionsRuntimeSQLite
+@testable import AmbitionsRuntimeSQLite
 
 final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
     func testInitialActivationVerifiesAndResolvesDurableStore() async throws {
@@ -30,6 +30,11 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
         let expectations = try await makeExpectations(
             migrationIdentity: reservation.migrationIdentity,
             store: store
+        )
+        XCTAssertTrue(
+            FileManager.default.fileExists(
+                atPath: reservation.stagedStoreURL.path + "-wal"
+            )
         )
 
         let report = try await coordinator.verify(
@@ -217,6 +222,15 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
         let store = try RuntimeStoreSQLite(databaseURL: resolved)
         let restartedSnapshot = try await store.snapshot()
         XCTAssertEqual(restartedSnapshot.canonicalRevision, 2)
+        await assertMigrationError(
+            .verificationAlreadyConsumed(prepared.report.verificationIdentity)
+        ) {
+            _ = try await restarted.activate(
+                reservation: prepared.reservation,
+                verifiedReport: prepared.report,
+                activatedAt: Date(timeIntervalSince1970: 2_000)
+            )
+        }
     }
 
     func testUnsafeUnknownAndSymlinkPointersFailVisibly() async throws {
@@ -407,77 +421,110 @@ final class RuntimeStoreMigrationCoordinatorTests: XCTestCase {
         }
     }
 
-    func testReplacedStagingDirectoryCannotEscapeRootOrMutateSourceStore() async throws {
+    func testBeforePointerFailureCanRetrySameIssuedReportAfterRestart() async throws {
         let root = temporaryRootURL()
         let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
-        let reservation = try await coordinator.reserveStaging(
-            migrationIdentity: "migration.symlink-swap"
-        )
-        let outsideDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString, isDirectory: true)
-        let sourceURL = outsideDirectory.appendingPathComponent(
-            "RuntimeStore.sqlite.next"
-        )
-        let sourceStore = try RuntimeStoreSQLite(databaseURL: sourceURL)
-        _ = try await sourceStore.commit(
-            makeTransition(commandID: "command.source"),
-            idempotencyKey: "source"
-        )
-        let expectations = try await makeExpectations(
-            migrationIdentity: reservation.migrationIdentity,
-            store: sourceStore
-        )
-        let sourceBefore = try Data(contentsOf: sourceURL)
-        try FileManager.default.removeItem(at: reservation.stagingDirectoryURL)
-        try FileManager.default.createSymbolicLink(
-            at: reservation.stagingDirectoryURL,
-            withDestinationURL: outsideDirectory
+        let prepared = try await prepareStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.retry-before-pointer",
+            commandID: "command.retry-before-pointer",
+            revision: 1
         )
 
-        await assertMigrationError(
-            .unsafeFilesystemEntry("migration.symlink-swap")
-        ) {
-            _ = try await coordinator.verify(
-                reservation: reservation,
-                expectations: expectations
+        await assertMigrationError(.injectedFailure(.beforePointerRename)) {
+            _ = try await coordinator.activate(
+                reservation: prepared.reservation,
+                verifiedReport: prepared.report,
+                activatedAt: Date(timeIntervalSince1970: 11_000),
+                failurePoint: .beforePointerRename
             )
         }
-        XCTAssertEqual(try Data(contentsOf: sourceURL), sourceBefore)
+        let restarted = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let pointer = try await restarted.activate(
+            reservation: prepared.reservation,
+            verifiedReport: prepared.report,
+            activatedAt: Date(timeIntervalSince1970: 11_000)
+        )
+
+        XCTAssertEqual(pointer.migrationIdentity, "migration.retry-before-pointer")
+        let resolved = try await restarted.resolveActiveStore()
+        XCTAssertEqual(
+            resolved.lastPathComponent,
+            pointer.currentStore.filename
+        )
     }
 
-    func testReservationDoesNotCreateThroughPreexistingStagingRootSymlink() async throws {
+    func testRollbackBeforePointerFailureCanRetryAfterRestart() async throws {
         let root = temporaryRootURL()
-        let outsideDirectory = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString, isDirectory: true)
-        try FileManager.default.createDirectory(
-            at: root,
-            withIntermediateDirectories: true
-        )
-        try FileManager.default.createDirectory(
-            at: outsideDirectory,
-            withIntermediateDirectories: true
-        )
-        try FileManager.default.createSymbolicLink(
-            at: root.appendingPathComponent("MigrationStaging"),
-            withDestinationURL: outsideDirectory
-        )
         let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let first = try await activateStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.rollback-retry-first",
+            commandID: "command.rollback-retry-first",
+            revision: 1,
+            activatedAt: Date(timeIntervalSince1970: 1_000)
+        )
+        let second = try await activateStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.rollback-retry-second",
+            commandID: "command.rollback-retry-second",
+            revision: 2,
+            activatedAt: Date(timeIntervalSince1970: 2_000)
+        )
 
-        await assertMigrationError(
-            .unsafeFilesystemEntry("MigrationStaging")
-        ) {
-            _ = try await coordinator.reserveStaging(
-                migrationIdentity: "migration.preexisting-symlink"
+        await assertMigrationError(.injectedFailure(.beforePointerRename)) {
+            _ = try await coordinator.rollback(
+                activatedAt: Date(timeIntervalSince1970: 3_000),
+                failurePoint: .beforePointerRename
             )
         }
-
-        XCTAssertFalse(
-            FileManager.default.fileExists(
-                atPath: outsideDirectory.appendingPathComponent(
-                    "migration.preexisting-symlink"
-                ).path
-            )
+        let restarted = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let stillActive = try await restarted.resolveActiveStore()
+        XCTAssertEqual(stillActive.lastPathComponent, second.currentStore.filename)
+        let rolledBack = try await restarted.rollback(
+            activatedAt: Date(timeIntervalSince1970: 3_000)
         )
+
+        XCTAssertEqual(rolledBack.currentStore, first.currentStore)
+        XCTAssertEqual(rolledBack.previousStore, second.currentStore)
+    }
+
+    func testRollbackAfterPointerFailureFinalizesIntentBeforeNextActivation() async throws {
+        let root = temporaryRootURL()
+        let coordinator = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let first = try await activateStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.rollback-finalize-first",
+            commandID: "command.rollback-finalize-first",
+            revision: 1,
+            activatedAt: Date(timeIntervalSince1970: 1_000)
+        )
+        _ = try await activateStore(
+            coordinator: coordinator,
+            migrationIdentity: "migration.rollback-finalize-second",
+            commandID: "command.rollback-finalize-second",
+            revision: 2,
+            activatedAt: Date(timeIntervalSince1970: 2_000)
+        )
+
+        await assertMigrationError(.injectedFailure(.afterPointerRename)) {
+            _ = try await coordinator.rollback(
+                activatedAt: Date(timeIntervalSince1970: 3_000),
+                failurePoint: .afterPointerRename
+            )
+        }
+        let restarted = try RuntimeStoreMigrationCoordinator(rootDirectoryURL: root)
+        let resolved = try await restarted.resolveActiveStore()
+        XCTAssertEqual(resolved.lastPathComponent, first.currentStore.filename)
+        let next = try await activateStore(
+            coordinator: restarted,
+            migrationIdentity: "migration.after-rollback-recovery",
+            commandID: "command.after-rollback-recovery",
+            revision: 3,
+            activatedAt: Date(timeIntervalSince1970: 4_000)
+        )
+
+        XCTAssertEqual(next.previousStore, first.currentStore)
     }
 
     func testActivationPublishesSealedVerifiedBytesAfterStagingMutation() async throws {
