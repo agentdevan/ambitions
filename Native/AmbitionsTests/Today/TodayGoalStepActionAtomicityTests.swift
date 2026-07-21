@@ -64,6 +64,82 @@ final class TodayGoalStepActionAtomicityTests: XCTestCase {
         XCTAssertEqual(repairedSteps.first?.state, .completed)
     }
 
+    func testQuickLogCaptureFailureRollsBackCaptureAndEvidenceTogether() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Atomic quick log", now: fixedNow)
+        let action = TodayInlineAction(
+            operationID: "atomic-quick-log",
+            kind: .quickLog,
+            title: "Quick log",
+            systemImage: "plus.bubble",
+            state: .selected,
+            target: TodayActionTarget(goalID: created.goalID, stepID: created.stepID)
+        )
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(action, now: fixedNow)
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+
+        do {
+            try await SwiftDataTodayGoalStepActionMaterializer(
+                store: store,
+                failurePoint: .afterCapture
+            ).materialize(plan)
+            XCTFail("Expected injected transaction failure")
+        } catch TodayGoalStepActionStorageError.injectedFailure(.afterCapture) {}
+
+        let rolledBackEvidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let rolledBackCaptures = try await repositories.captures.listCaptures()
+        XCTAssertTrue(rolledBackEvidence.isEmpty)
+        XCTAssertTrue(rolledBackCaptures.isEmpty)
+
+        let materializer = SwiftDataTodayGoalStepActionMaterializer(store: store)
+        try await materializer.materialize(plan)
+        try await materializer.materialize(plan)
+        let repairedEvidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let repairedCaptures = try await repositories.captures.listCaptures()
+        XCTAssertEqual(repairedEvidence, plan.evidence)
+        XCTAssertEqual(repairedCaptures, [try XCTUnwrap(plan.capture)])
+    }
+
+    func testQuickLogSwiftDataMaterializationNeverOverwritesNewerGoal() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store)
+        let lifecycle = SimpleStepLifecycleService(repositories: repositories)
+        let created = try await lifecycle.createSimpleStep(title: "Keep newer Step", now: fixedNow)
+        let quickLog = TodayInlineAction(
+            operationID: "swiftdata-concurrent-log",
+            kind: .quickLog,
+            title: "Quick log",
+            systemImage: "plus.bubble",
+            state: .selected,
+            target: TodayActionTarget(goalID: created.goalID, stepID: created.stepID)
+        )
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(quickLog, now: fixedNow)
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+        _ = try await lifecycle.markMissedStepForRecovery(
+            goalID: created.goalID,
+            stepID: created.stepID,
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let newerGoal = try await repositories.goals.goal(id: created.goalID)
+        let materializer = SwiftDataTodayGoalStepActionMaterializer(store: store)
+
+        try await materializer.validate(plan)
+        try await materializer.materialize(plan)
+        try await materializer.materialize(plan)
+
+        let currentGoal = try await repositories.goals.goal(id: created.goalID)
+        let captures = try await repositories.captures.listCaptures()
+        let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        XCTAssertFalse(plan.shouldWriteGoal)
+        XCTAssertEqual(currentGoal, newerGoal)
+        XCTAssertEqual(captures, [try XCTUnwrap(plan.capture)])
+        XCTAssertEqual(evidence.filter { $0.id == plan.evidence.first?.id }, plan.evidence)
+    }
+
     func testRecurringCompletionPreservesStepAndAdvancesCadence() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store)

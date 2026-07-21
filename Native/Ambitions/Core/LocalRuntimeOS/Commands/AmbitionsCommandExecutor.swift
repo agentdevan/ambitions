@@ -99,21 +99,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 commandRecord: commandRecord,
                 commandRecordMaterialization: commandRecordMaterialization
             )
-            if command.kind == .quickCapture, authorityReceipt != nil {
-                let materialized = await materializeQuickCapture(command, context: context, committedResult: replayed)
-                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
-            }
-            if command.kind.isTimeMutation, authorityReceipt != nil {
-                let materialized = await materializeTime(command, context: context, committedResult: replayed)
-                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
-            }
-            if command.isTodayReceiptMutation, authorityReceipt != nil {
-                let materialized = await materializeTodayReceipt(command, committedResult: replayed)
-                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
-            }
-            if command.isTodayGoalStepActionMutation, authorityReceipt != nil {
-                let materialized = await materializeTodayGoalStepAction(command, committedResult: replayed)
-                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+            if authorityReceipt != nil {
+                return await materializeCommittedCommand(command, context: context, result: replayed)
             }
             return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
@@ -192,7 +179,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 recommendationExplanationIDs: command.relations.recommendationExplanationIDs
             )
         case .quickCapture:
-            result = await executeQuickCapture(command, context: context)
+            result = await executeOwnedQuickCapture(command, context: context)
         case .routeCommitment:
             result = await executeRouteCommitment(command, context: context)
         case .markWaiting:
@@ -244,31 +231,41 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             compilation: compilation,
             journalReceipt: journalReceipt
         )
-        if command.kind == .quickCapture,
-           persistedResult.status == .succeeded,
-           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
-            let materialized = await materializeQuickCapture(command, context: context, committedResult: persistedResult)
-            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        guard persistedResult.status == .succeeded,
+              RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) else {
+            return persistedResult
         }
-        if command.kind.isTimeMutation,
-           persistedResult.status == .succeeded,
-           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
-            let materialized = await materializeTime(command, context: context, committedResult: persistedResult)
-            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        return await materializeCommittedCommand(command, context: context, result: persistedResult)
+    }
+
+    private func materializeCommittedCommand(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext,
+        result: AmbitionsCommandExecutionResult
+    ) async -> AmbitionsCommandExecutionResult {
+        let materialized: AmbitionsCommandExecutionResult
+        if command.isTodayGoalStepActionMutation {
+            materialized = await materializeTodayGoalStepAction(command, committedResult: result)
+        } else if command.kind == .quickCapture {
+            materialized = await materializeQuickCapture(command, context: context, committedResult: result)
+        } else if command.kind.isTimeMutation {
+            materialized = await materializeTime(command, context: context, committedResult: result)
+        } else if command.isTodayReceiptMutation {
+            materialized = await materializeTodayReceipt(command, committedResult: result)
+        } else {
+            return result
         }
-        if command.isTodayReceiptMutation,
-           persistedResult.status == .succeeded,
-           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
-            let materialized = await materializeTodayReceipt(command, committedResult: persistedResult)
-            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+    }
+
+    private func executeOwnedQuickCapture(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext
+    ) async -> AmbitionsCommandExecutionResult {
+        if command.isTodayGoalStepActionMutation {
+            return await executeTodayGoalStepAction(command)
         }
-        if command.isTodayGoalStepActionMutation,
-           persistedResult.status == .succeeded,
-           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
-            let materialized = await materializeTodayGoalStepAction(command, committedResult: persistedResult)
-            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
-        }
-        return persistedResult
+        return await executeQuickCapture(command, context: context)
     }
 
 }

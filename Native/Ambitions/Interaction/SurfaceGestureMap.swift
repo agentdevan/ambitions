@@ -15,8 +15,7 @@ enum SurfaceGestureMap {
         .reschedule,
         .split,
         .askForHelp,
-        .askWhyThisMatters,
-        .quickLog,
+        .quickLog
     ]
 
     static func primaryGrammar(for surface: StageMutationTargetSurface) -> GestureGrammar {

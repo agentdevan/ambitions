@@ -6,7 +6,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         let expected = Set([
             "TimeViewModel.performLifeShapeMutation",
             "TimeViewModel.approveProtectedPlacementReview",
-            "TimeViewModel.undoLastLifeShapeMutation",
+            "TimeViewModel.undoLastLifeShapeMutation"
         ])
         let registered = MeaningfulMutationRegistry.descriptors.filter { expected.contains($0.sourcePath) }
 
@@ -60,7 +60,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
             "CaptureViewModel.markOptionalSomeday",
             "CaptureViewModel.markDeliverableSeed",
             "CaptureViewModel.attachToGoal",
-            "CaptureViewModel.turnIntoGoal",
+            "CaptureViewModel.turnIntoGoal"
         ]
         let registered = Set(MeaningfulMutationRegistry.descriptors.map(\.sourcePath))
 
@@ -71,7 +71,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         let expected = [
             "AppShellActivatedCaptureSeam.saveCapture",
             "EventKitOutbox.recordCalendarResult",
-            "ShareViewController.save",
+            "ShareViewController.save"
         ]
         let registered = Set(
             MeaningfulMutationRegistry.descriptors
@@ -138,6 +138,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogRepositoryFallbackIsIdempotent"
             ])
         )
         XCTAssertTrue(repositoryDescriptor.rationale.contains("fallback"))
@@ -161,7 +162,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         XCTAssertEqual(writePath.receiptOwner, descriptor.receiptOwner)
         XCTAssertEqual(writePath.replayTestID, descriptor.replayTestID)
         XCTAssertEqual(Set(writePath.proofTestIDs), Set(descriptor.proofTestIDs))
-        XCTAssertEqual(MeaningfulMutationRegistry.writePaths.filter { $0.status == .unproven }.count, 49)
+        XCTAssertEqual(MeaningfulMutationRegistry.writePaths.filter { $0.status == .unproven }.count, 50)
     }
 
     func testRegistrySourceRequiresExplicitStatusAndRationaleForEveryRow() throws {

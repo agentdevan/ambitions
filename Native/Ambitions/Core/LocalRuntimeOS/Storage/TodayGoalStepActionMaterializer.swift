@@ -5,6 +5,7 @@ enum TodayGoalStepActionFailurePoint: Sendable, Equatable {
     case none
     case afterFeedback
     case afterEvidence
+    case afterCapture
 }
 
 enum TodayGoalStepActionStorageError: Error, Equatable {
@@ -16,6 +17,7 @@ struct SwiftDataTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializin
     var failurePoint: TodayGoalStepActionFailurePoint = .none
 
     func validate(_ plan: TodayGoalStepActionPlan) async throws {
+        guard plan.shouldWriteGoal else { return }
         let current = try await SwiftDataGoalRepository(store: store).goal(id: plan.goalID)
         guard let current else { return }
         guard current.revision == plan.expectedGoalRevision || current == plan.updatedGoal else {
@@ -28,8 +30,13 @@ struct SwiftDataTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializin
 
     func materialize(_ plan: TodayGoalStepActionPlan) async throws {
         _ = try await store.transaction(id: "today-goal-step-action-\(plan.goalID)-\(plan.stepID)") { context in
-            let currentGoal = try loadGoal(id: plan.goalID, context: context)
-            let goalToSave = try convergedGoal(current: currentGoal, plan: plan)
+            let goalToSave: Goal?
+            if plan.shouldWriteGoal {
+                let currentGoal = try loadGoal(id: plan.goalID, context: context)
+                goalToSave = try convergedGoal(current: currentGoal, plan: plan)
+            } else {
+                goalToSave = nil
+            }
 
             var feedbackByID = Dictionary(uniqueKeysWithValues:
                 try context.fetch(FetchDescriptor<FeedbackEventRecord>())
@@ -55,6 +62,13 @@ struct SwiftDataTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializin
             }
             if failurePoint == .afterEvidence {
                 throw TodayGoalStepActionStorageError.injectedFailure(.afterEvidence)
+            }
+
+            if let capture = plan.capture {
+                try SwiftDataCapturePersistence.saveCaptures([capture], in: context)
+            }
+            if failurePoint == .afterCapture {
+                throw TodayGoalStepActionStorageError.injectedFailure(.afterCapture)
             }
 
             guard let goalToSave else { return }

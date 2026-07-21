@@ -9,8 +9,12 @@ struct TodayGoalStepActionPlan: Sendable, Codable, Equatable {
     let stepID: String
     let expectedGoalRevision: Int
     let updatedGoal: Goal
+    let writesGoal: Bool?
     let feedbackEvents: [StoredGoalFeedbackEvent]
     let evidence: [ProgressEvidence]
+    let capture: Capture?
+
+    var shouldWriteGoal: Bool { writesGoal ?? true }
 
     func encoded() throws -> String {
         let encoder = JSONEncoder()
@@ -36,6 +40,7 @@ struct TodayGoalStepActionRequest: Sendable {
     let title: String
     let goalID: String
     let stepID: String
+    let operationID: String
     let context: TodayGoalStepActionContext?
 }
 
@@ -57,7 +62,10 @@ struct TodayGoalStepActionPlanner: Sendable {
             throw TodayDurableActionError.unavailable
         }
         let expectedRevision = goal.revision
-        let commandID = "command.today.goal-step.\(request.kind).\(request.goalID).\(request.stepID).revision-\(expectedRevision)"
+        let baseCommandID = "command.today.goal-step.\(request.kind).\(request.goalID).\(request.stepID).revision-\(expectedRevision)"
+        let commandID = request.kind == "quickLog"
+            ? "\(baseCommandID).operation-\(request.operationID)"
+            : baseCommandID
         let timestamp = DomainTimestamp.string(from: now)
         let base = GoalFeedbackEventBase(
             id: "\(commandID).feedback",
@@ -67,6 +75,7 @@ struct TodayGoalStepActionPlanner: Sendable {
         )
         var feedback: [GoalFeedbackEvent] = []
         var evidence: [ProgressEvidence] = []
+        var capture: Capture?
         let context = request.context
 
         switch request.kind {
@@ -136,6 +145,43 @@ struct TodayGoalStepActionPlanner: Sendable {
                 } ?? step.timing
                 return copied(step, timing: timing, summary: context.recoverySummary ?? context.smallerStepSummary)
             }
+        case "quickLog":
+            let rawText = "Quick log for \"\(selectedStep.title)\"."
+            let classification = CaptureClassifier.classify(
+                text: rawText,
+                requestedKind: .goalSupportingTask,
+                requestedRoute: .captureInbox,
+                deadlineText: nil,
+                contextLensHint: nil,
+                priorityHints: CapturePriorityHints()
+            )
+            evidence = [ProgressEvidence(
+                id: "\(commandID).evidence", goalID: request.goalID, stepID: request.stepID,
+                evidenceKind: .sessionLogged, source: .manual, capturedAt: timestamp,
+                progressDelta: 0.08, confidenceDelta: 0.04, minutesInvested: 10,
+                note: "Quick log from Today."
+            )]
+            capture = Capture(
+                id: "capture.\(commandID)", createdAt: timestamp, updatedAt: timestamp,
+                rawText: rawText, sourceType: .todayQuickCapture,
+                status: .actionable, linkedGoalID: request.goalID,
+                triage: CaptureTriageMetadata(
+                    destination: classification.route.triageDestination,
+                    hint: classification.assumptionSummary
+                ),
+                kind: classification.kind, route: classification.route,
+                triageStatus: classification.triageStatus,
+                commitmentKind: classification.commitmentKind,
+                deadlineText: classification.deadlineText,
+                deadlineKind: classification.deadlineKind,
+                contextLensHint: classification.contextLensHint,
+                priorityHints: classification.priorityHints,
+                goalRelationship: CaptureGoalRelationship(
+                    goalID: request.goalID,
+                    relationshipKind: .nextAction
+                ),
+                assumptionSummary: classification.assumptionSummary
+            )
         default:
             throw TodayDurableActionError.unavailable
         }
@@ -143,15 +189,22 @@ struct TodayGoalStepActionPlanner: Sendable {
         let plan = TodayGoalStepActionPlan(
             actionKind: request.kind, goalID: request.goalID, stepID: request.stepID,
             expectedGoalRevision: expectedRevision, updatedGoal: goal,
-            feedbackEvents: feedback.map(StoredGoalFeedbackEvent.init(event:)), evidence: evidence
+            writesGoal: request.kind != "quickLog",
+            feedbackEvents: feedback.map(StoredGoalFeedbackEvent.init(event:)), evidence: evidence,
+            capture: capture
         )
         let command = AmbitionsCommand(
             id: commandID, kind: commandKind(for: request.kind), source: .today,
-            target: AmbitionsCommandTarget(goalID: request.goalID, stepID: request.stepID, destination: .today),
-            payload: AmbitionsCommandPayload(title: request.title, metadata: [
+            target: AmbitionsCommandTarget(
+                goalID: request.goalID,
+                captureID: capture?.id,
+                stepID: request.stepID,
+                destination: .today
+            ),
+            payload: AmbitionsCommandPayload(rawText: capture?.rawText, title: request.title, metadata: [
                 TodayGoalStepActionPlan.mutationMarkerKey: "true",
                 TodayGoalStepActionPlan.metadataKey: try plan.encoded(),
-                "todayActionKind": request.kind,
+                "todayActionKind": request.kind
             ]),
             createdAt: timestamp, actor: .user, sourceSurface: "Today", privacy: .privateUserText
         )
@@ -165,6 +218,7 @@ struct TodayGoalStepActionPlanner: Sendable {
         case "markNotRelevant": .updateGoal
         case "split": .splitAction
         case "askForHelp": .recoverAction
+        case "quickLog": .quickCapture
         default: .recoverAction
         }
     }
@@ -243,6 +297,7 @@ struct RepositoryTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializi
     let repositories: AppRepositories
 
     func validate(_ plan: TodayGoalStepActionPlan) async throws {
+        guard plan.shouldWriteGoal else { return }
         guard let current = try await repositories.goals.goal(id: plan.goalID) else { return }
         guard current.revision == plan.expectedGoalRevision || current == plan.updatedGoal else {
             throw TodayDurableActionMaterializationError.staleGoalRevision(
@@ -253,8 +308,9 @@ struct RepositoryTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializi
     }
 
     func materialize(_ plan: TodayGoalStepActionPlan) async throws {
-        var goalNeedsSave = true
-        if let currentGoal = try await repositories.goals.goal(id: plan.goalID) {
+        var goalNeedsSave = plan.shouldWriteGoal
+        if plan.shouldWriteGoal,
+           let currentGoal = try await repositories.goals.goal(id: plan.goalID) {
             if currentGoal == plan.updatedGoal {
                 goalNeedsSave = false
             } else if currentGoal.revision != plan.expectedGoalRevision {
@@ -276,6 +332,9 @@ struct RepositoryTodayGoalStepActionMaterializer: TodayGoalStepActionMaterializi
         try await repositories.feedback.saveEvents(mergedFeedback, goalID: plan.goalID)
         if plan.evidence.isEmpty == false {
             try await repositories.evidence.saveEvidence(plan.evidence)
+        }
+        if let capture = plan.capture {
+            try await repositories.captures.saveCaptures([capture])
         }
         if goalNeedsSave {
             try await repositories.goals.saveGoals([plan.updatedGoal])
@@ -337,7 +396,7 @@ extension AmbitionsCommandExecutor {
             metadata: [
                 "todayActionKind": plan.actionKind,
                 "todayActionMaterialization": "pending_authority_commit",
-                "projectionReloadRequired": "true",
+                "projectionReloadRequired": "true"
             ]
         )
     }
@@ -349,7 +408,7 @@ extension AmbitionsCommandExecutor {
         guard let todayActionMaterializer else {
             return committedResult.mergingMetadata([
                 "todayActionMaterialization": "needs_recovery",
-                "todayActionMaterializationError": "materializer_unavailable",
+                "todayActionMaterializationError": "materializer_unavailable"
             ])
         }
         do {
@@ -361,7 +420,7 @@ extension AmbitionsCommandExecutor {
             }).first else {
                 return committedResult.mergingMetadata([
                     "todayActionMaterialization": "needs_recovery",
-                    "todayActionMaterializationError": "semantic_today_action_missing",
+                    "todayActionMaterializationError": "semantic_today_action_missing"
                 ])
             }
             try await todayActionMaterializer.materialize(plan)
@@ -369,7 +428,7 @@ extension AmbitionsCommandExecutor {
         } catch {
             return committedResult.mergingMetadata([
                 "todayActionMaterialization": "needs_recovery",
-                "todayActionMaterializationError": String(describing: error),
+                "todayActionMaterializationError": String(describing: error)
             ])
         }
     }

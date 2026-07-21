@@ -244,35 +244,10 @@ extension RepositoryBackedTodayService {
                 state: .warning
             )
         case .quickLog:
-            try await repositories.evidence.saveEvidence([
-                ProgressEvidence(
-                    id: "evidence-\(UUID().uuidString)",
-                    goalID: goalID,
-                    stepID: stepID,
-                    evidenceKind: .sessionLogged,
-                    source: .manual,
-                    capturedAt: timestamp,
-                    progressDelta: 0.08,
-                    confidenceDelta: 0.04,
-                    minutesInvested: 10,
-                    note: "Quick log from Today."
-                )
-            ])
-            _ = try await captureService.createCapture(
-                CreateCaptureRequest(
-                    rawText: "Quick log for \"\(selectedStep.title)\".",
-                    sourceType: .todayQuickCapture,
-                    linkedGoalID: goalID,
-                    kind: .goalSupportingTask,
-                    route: .captureInbox,
-                    goalRelationship: CaptureGoalRelationship(goalID: goalID, relationshipKind: .nextAction)
-                ),
-                now: now
-            )
             message = TodayInlineMessage(
-                title: "Signal saved",
-                body: "Today recorded a quick bit of evidence without creating fake urgency.",
-                state: .success
+                title: "Action needs the runtime",
+                body: "This quick log is available only through the committed Today runtime path.",
+                state: .warning
             )
         case .createReminder:
             let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
@@ -425,8 +400,6 @@ extension RepositoryBackedTodayService {
                 state: .selected
             )
         case .askWhyThisMatters:
-            events.append(.askedWhyThisMatters(base: base))
-            try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
             let intelligenceSummary = try await goalIntelligenceService?.loadContext(
                 RuntimeGoalIntelligenceRequest(

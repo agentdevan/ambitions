@@ -135,6 +135,8 @@ final class TodayViewModel {
             TodayInlineMessage(title: "Smaller version ready", body: "A smaller Step is ready.", state: .selected)
         case .askForHelp:
             TodayInlineMessage(title: "A calmer next step is ready", body: "Ambitions kept the Step visible and made the ask smaller.", state: .selected)
+        case .quickLog:
+            TodayInlineMessage(title: "Signal saved", body: "Today recorded a quick bit of evidence without creating fake urgency.", state: .success)
         default:
             TodayInlineMessage(title: "Action saved", body: "The change is committed.", state: .selected)
         }
@@ -145,9 +147,11 @@ final class TodayViewModel {
         client: RuntimeCommandClient
     ) async -> Bool {
         guard let projection = try? await client.projection(.today) else { return false }
-        let ids = result.metadata["runtimeProjectionCursorIDs"]?.split(separator: ",").map(String.init) ?? []
-        let sequences = result.metadata["runtimeProjectionCursorSequences"]?.split(separator: ",").compactMap { Int64($0) } ?? []
-        let checksums = result.metadata["runtimeProjectionCursorChecksums"]?.split(separator: ",").map(String.init) ?? []
+        let usesMaterializedCursor = result.metadata["runtimeMaterializedProjectionCursorIDs"]?.isEmpty == false
+        let cursorPrefix = usesMaterializedCursor ? "runtimeMaterializedProjectionCursor" : "runtimeProjectionCursor"
+        let ids = result.metadata["\(cursorPrefix)IDs"]?.split(separator: ",").map(String.init) ?? []
+        let sequences = result.metadata["\(cursorPrefix)Sequences"]?.split(separator: ",").compactMap { Int64($0) } ?? []
+        let checksums = result.metadata["\(cursorPrefix)Checksums"]?.split(separator: ",").map(String.init) ?? []
         guard ids.count == sequences.count, ids.count == checksums.count,
               let index = ids.firstIndex(of: ProjectionID.today.rawValue) else { return false }
         return projection.projectionID == ProjectionID.today.rawValue &&

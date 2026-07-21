@@ -23,6 +23,246 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
         XCTAssertTrue(evidence.isEmpty)
     }
 
+    func testLegacyFeedbackEntryCannotMutateQuickLog() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "No quick-log alternate writer", now: fixedNow)
+        let service = RepositoryBackedTodayService(repositories: repositories)
+
+        _ = try await service.performFeedbackAction(
+            makeAction(.quickLog, goalID: created.goalID, stepID: created.stepID),
+            now: fixedNow
+        )
+
+        let feedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let captures = try await repositories.captures.listCaptures()
+        XCTAssertTrue(feedback.isEmpty)
+        XCTAssertTrue(evidence.isEmpty)
+        XCTAssertTrue(captures.isEmpty)
+    }
+
+    func testQuickLogPlanCarriesExactDeterministicCaptureWithoutPreparingWrites() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Capture this session", now: fixedNow)
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let action = makeAction(
+            .quickLog,
+            goalID: created.goalID,
+            stepID: created.stepID,
+            operationID: "quick-log-invocation-1"
+        )
+
+        let first = try await service.prepareDurableGoalStepAction(action, now: fixedNow)
+        let second = try await service.prepareDurableGoalStepAction(action, now: fixedNow)
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: first.command))
+        let capture = try XCTUnwrap(plan.capture)
+
+        XCTAssertEqual(first.command.id, second.command.id)
+        XCTAssertTrue(first.command.id.contains(action.operationID))
+        XCTAssertEqual(plan, TodayGoalStepActionPlan.decode(command: second.command))
+        XCTAssertEqual(first.command.kind, .quickCapture)
+        XCTAssertEqual(capture.id, "capture.\(first.command.id)")
+        XCTAssertEqual(capture.rawText, "Quick log for \"Capture this session\".")
+        XCTAssertEqual(capture.sourceType, .todayQuickCapture)
+        XCTAssertEqual(capture.status, .actionable)
+        XCTAssertEqual(capture.route, .captureInbox)
+        XCTAssertEqual(capture.triageStatus, .assumedRoute)
+        XCTAssertEqual(capture.commitmentKind, .goalSupporting)
+        XCTAssertEqual(capture.priorityHints.goalSupporting, true)
+        XCTAssertEqual(capture.linkedGoalID, created.goalID)
+        XCTAssertEqual(capture.goalRelationship, CaptureGoalRelationship(goalID: created.goalID, relationshipKind: .nextAction))
+        XCTAssertEqual(plan.evidence.map(\.id), ["\(first.command.id).evidence"])
+        XCTAssertEqual(plan.evidence.map(\.evidenceKind), [.sessionLogged])
+        XCTAssertTrue(plan.feedbackEvents.isEmpty)
+        let feedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let captures = try await repositories.captures.listCaptures()
+        XCTAssertTrue(feedback.isEmpty)
+        XCTAssertTrue(evidence.isEmpty)
+        XCTAssertTrue(captures.isEmpty)
+    }
+
+    func testDistinctQuickLogInvocationIDsCreateDistinctCommandIdentitiesAtSameRevision() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Log two sessions", now: fixedNow)
+        let service = RepositoryBackedTodayService(repositories: repositories)
+
+        let first = try await service.prepareDurableGoalStepAction(
+            makeAction(.quickLog, goalID: created.goalID, stepID: created.stepID, operationID: "invocation-a"),
+            now: fixedNow
+        )
+        let second = try await service.prepareDurableGoalStepAction(
+            makeAction(.quickLog, goalID: created.goalID, stepID: created.stepID, operationID: "invocation-b"),
+            now: fixedNow
+        )
+
+        XCTAssertNotEqual(first.command.id, second.command.id)
+        XCTAssertNotEqual(
+            TodayGoalStepActionPlan.decode(command: first.command)?.capture?.id,
+            TodayGoalStepActionPlan.decode(command: second.command)?.capture?.id
+        )
+    }
+
+    func testNonQuickLogIdentityRemainsRevisionBasedAcrossInvocationIDs() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Deduplicate one mutation", now: fixedNow)
+        let service = RepositoryBackedTodayService(repositories: repositories)
+
+        let first = try await service.prepareDurableGoalStepAction(
+            makeAction(.complete, goalID: created.goalID, stepID: created.stepID, operationID: "invocation-a"),
+            now: fixedNow
+        )
+        let second = try await service.prepareDurableGoalStepAction(
+            makeAction(.complete, goalID: created.goalID, stepID: created.stepID, operationID: "invocation-b"),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(first.command.id, second.command.id)
+        XCTAssertFalse(first.command.id.contains("invocation-a"))
+        XCTAssertFalse(second.command.id.contains("invocation-b"))
+    }
+
+    func testLegacyPlanWithoutWritesGoalDefaultsToGoalWrite() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Decode legacy authority", now: fixedNow)
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(
+                makeAction(.complete, goalID: created.goalID, stepID: created.stepID),
+                now: fixedNow
+            )
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+        let encoded = try JSONEncoder().encode(plan)
+        var object = try XCTUnwrap(
+            JSONSerialization.jsonObject(with: encoded) as? [String: Any]
+        )
+        object.removeValue(forKey: "writesGoal")
+        let legacyData = try JSONSerialization.data(withJSONObject: object)
+
+        let legacy = try JSONDecoder().decode(TodayGoalStepActionPlan.self, from: legacyData)
+
+        XCTAssertNil(legacy.writesGoal)
+        XCTAssertTrue(legacy.shouldWriteGoal)
+    }
+
+    func testQuickLogRepositoryFallbackIsIdempotent() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "Replay one log", now: fixedNow)
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(
+                makeAction(.quickLog, goalID: created.goalID, stepID: created.stepID, operationID: "replay-one"),
+                now: fixedNow
+            )
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+        let materializer = RepositoryTodayGoalStepActionMaterializer(repositories: repositories)
+
+        try await materializer.materialize(plan)
+        try await materializer.materialize(plan)
+
+        let captures = try await repositories.captures.listCaptures()
+        let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        XCTAssertEqual(captures, [try XCTUnwrap(plan.capture)])
+        XCTAssertEqual(evidence, plan.evidence)
+    }
+
+    func testQuickLogAuthorityReplayPreservesConcurrentlyAdvancedGoal() async throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("today-quick-log-concurrency-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let lifecycle = SimpleStepLifecycleService(repositories: repositories)
+        let created = try await lifecycle.createSimpleStep(
+            title: "Preserve newer recovery",
+            now: fixedNow
+        )
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(
+                makeAction(
+                    .quickLog,
+                    goalID: created.goalID,
+                    stepID: created.stepID,
+                    operationID: "concurrent-log"
+                ),
+                now: fixedNow
+            )
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+        XCTAssertFalse(plan.shouldWriteGoal)
+        _ = try await lifecycle.markMissedStepForRecovery(
+            goalID: created.goalID,
+            stepID: created.stepID,
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let newerGoal = try await repositories.goals.goal(id: created.goalID)
+        let events = EventStoreSQLite(databaseURL: root.appendingPathComponent("EventStore.sqlite"))
+        let executor = AmbitionsCommandExecutor.test(
+            runtimeEvents: events,
+            projectionStore: ProjectionStoreSQLite(
+                databaseURL: root.appendingPathComponent("ProjectionStore.sqlite")
+            ),
+            todayActionMaterializer: RepositoryTodayGoalStepActionMaterializer(
+                repositories: repositories
+            )
+        )
+
+        let first = await executor.execute(prepared.command, context: prepared.context)
+        let replay = await executor.execute(prepared.command, context: prepared.context)
+        let currentGoal = try await repositories.goals.goal(id: created.goalID)
+        let captures = try await repositories.captures.listCaptures()
+        let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let authority = try await events.fetchEvents(matching: .kind(.domainMutation), limit: nil)
+
+        XCTAssertEqual(first.status, .succeeded)
+        XCTAssertEqual(replay.metadata["runtimeReceiptID"], first.metadata["runtimeReceiptID"])
+        XCTAssertEqual(currentGoal, newerGoal)
+        XCTAssertEqual(captures, [try XCTUnwrap(plan.capture)])
+        XCTAssertEqual(evidence.filter { $0.id == plan.evidence.first?.id }, plan.evidence)
+        XCTAssertEqual(authority.count, 1)
+    }
+
+    func testQuickLogUsesCompositeSemanticEventInsteadOfGenericCaptureEvent() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let created = try await SimpleStepLifecycleService(repositories: repositories)
+            .createSimpleStep(title: "One composite event", now: fixedNow)
+        let prepared = try await RepositoryBackedTodayService(repositories: repositories)
+            .prepareDurableGoalStepAction(
+                makeAction(.quickLog, goalID: created.goalID, stepID: created.stepID, operationID: "semantic-one"),
+                now: fixedNow
+            )
+        let plan = try XCTUnwrap(TodayGoalStepActionPlan.decode(command: prepared.command))
+        let result = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Prepared",
+            target: AmbitionsCommandTarget(
+                goalID: created.goalID,
+                captureID: plan.capture?.id,
+                stepID: created.stepID,
+                destination: .today
+            )
+        )
+
+        let event = RuntimeDomainEvent.semanticEvent(
+            command: prepared.command,
+            result: result,
+            occurredAt: DomainTimestamp.string(from: fixedNow)
+        )
+
+        XCTAssertEqual(event, .todayGoalStepActionApplied(plan))
+    }
+
     func testContextualRescheduleDecisionIsCarriedIntoDeterministicPlan() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
@@ -161,7 +401,7 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
     }
 
     func testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites() async throws {
-        for kind in [TodayActionKind.complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp] {
+        for kind in [TodayActionKind.complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp, .quickLog] {
             let store = try AmbitionsPersistenceStore(inMemory: true)
             let repositories = makeRepositories(store: store)
             let created = try await SimpleStepLifecycleService(repositories: repositories)
@@ -175,17 +415,19 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
             let afterSteps = try await repositories.goals.listSteps(goalID: created.goalID)
             let feedback = try await repositories.feedback.listEvents(goalID: created.goalID)
             let evidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+            let captures = try await repositories.captures.listCaptures()
 
             XCTAssertEqual(first.command.id, second.command.id)
             XCTAssertEqual(first.command.payload.metadata[TodayGoalStepActionPlan.metadataKey], second.command.payload.metadata[TodayGoalStepActionPlan.metadataKey])
             XCTAssertEqual(afterSteps, beforeSteps)
             XCTAssertTrue(feedback.isEmpty)
             XCTAssertTrue(evidence.isEmpty)
+            XCTAssertTrue(captures.isEmpty)
         }
     }
 
     func testEveryHandledKindReopensAndReplaysExactAuthorityOnce() async throws {
-        for kind in [TodayActionKind.complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp] {
+        for kind in [TodayActionKind.complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp, .quickLog] {
             let root = FileManager.default.temporaryDirectory
                 .appendingPathComponent("today-action-restart-\(kind.rawValue)-\(UUID().uuidString)")
             defer { try? FileManager.default.removeItem(at: root) }
@@ -218,6 +460,7 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
                 .fetchEvents(matching: .kind(.domainMutation), limit: nil)
             let feedback = try await clean.feedback.listEvents(goalID: created.goalID)
             let evidence = try await clean.evidence.listEvidence(goalID: created.goalID)
+            let captures = try await clean.captures.listCaptures()
             let step = try await clean.goals.listSteps(goalID: created.goalID).first
 
             XCTAssertEqual(first.status, .succeeded, kind.rawValue)
@@ -234,13 +477,18 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
             case .askForHelp: 3
             default: 1
             }
-            XCTAssertEqual(feedback.count, expectedFeedbackCount, kind.rawValue)
-            XCTAssertEqual(evidence.count, kind == .complete ? 1 : 0, kind.rawValue)
-            XCTAssertEqual(
-                step?.state,
-                kind == .complete ? .completed : (kind == .markNotRelevant ? .cancelled : .planned),
-                kind.rawValue
-            )
+            XCTAssertEqual(feedback.count, kind == .quickLog ? 0 : expectedFeedbackCount, kind.rawValue)
+            XCTAssertEqual(evidence.count, [.complete, .quickLog].contains(kind) ? 1 : 0, kind.rawValue)
+            XCTAssertEqual(captures.count, kind == .quickLog ? 1 : 0, kind.rawValue)
+            if kind == .quickLog {
+                XCTAssertNil(step, "A no-Goal-write replay must not synthesize a Goal from its stale snapshot.")
+            } else {
+                XCTAssertEqual(
+                    step?.state,
+                    kind == .complete ? .completed : (kind == .markNotRelevant ? .cancelled : .planned),
+                    kind.rawValue
+                )
+            }
         }
     }
 
@@ -391,8 +639,20 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
 
     private var fixedNow: Date { Date(timeIntervalSince1970: 1_777_113_600) }
 
-    private func makeAction(_ kind: TodayActionKind, goalID: String, stepID: String) -> TodayInlineAction {
-        TodayInlineAction(kind: kind, title: kind.rawValue, systemImage: "circle", state: .selected, target: TodayActionTarget(goalID: goalID, stepID: stepID))
+    private func makeAction(
+        _ kind: TodayActionKind,
+        goalID: String,
+        stepID: String,
+        operationID: String = "today-test-invocation"
+    ) -> TodayInlineAction {
+        TodayInlineAction(
+            operationID: operationID,
+            kind: kind,
+            title: kind.rawValue,
+            systemImage: "circle",
+            state: .selected,
+            target: TodayActionTarget(goalID: goalID, stepID: stepID)
+        )
     }
 
     private func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {

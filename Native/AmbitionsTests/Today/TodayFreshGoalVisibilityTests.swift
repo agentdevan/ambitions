@@ -68,10 +68,45 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         })
     }
 
+    @MainActor
     func testQuickLogActionCreatesPersistedCapture() async throws {
-        let repositories = try await makeRepositories()
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("today-quick-log-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         let todayService = RepositoryBackedTodayService(repositories: repositories)
+        let projections = ProjectionStoreSQLite(
+            databaseURL: root.appendingPathComponent("ProjectionStore.sqlite")
+        )
+        let executor = AmbitionsCommandExecutor.test(
+            runtimeEvents: EventStoreSQLite(databaseURL: root.appendingPathComponent("EventStore.sqlite")),
+            projectionStore: projections,
+            todayActionMaterializer: SwiftDataTodayGoalStepActionMaterializer(store: store)
+        )
+        let resultRecorder = TodayCommandResultRecorder()
+        let runtimeClient = RuntimeCommandClient(
+            execute: { command, context in
+                let result = await executor.execute(command, context: context)
+                await resultRecorder.record(result)
+                return result
+            },
+            projection: { request in
+                guard let record = try await projections.fetchRecord(id: request.projectionID) else {
+                    throw RuntimeProjectionClientError.projectionUnavailable(request)
+                }
+                return RuntimeProjectionSnapshot(
+                    projectionID: record.id.rawValue,
+                    payload: record.payloadData,
+                    eventSequence: record.cursor.sequence,
+                    cursorChecksum: record.cursor.checksum,
+                    payloadChecksum: record.payloadChecksum,
+                    materializedAt: record.materializedAt
+                )
+            }
+        )
 
         let created = try await goalsService.createGoal(
             CreateGoalRequest(title: "Ship capture persistence"),
@@ -82,20 +117,35 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         let goal = try XCTUnwrap(fetchedGoal)
         let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
         let priorEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let initialRevision = goal.revision
+        let viewModel = TodayViewModel(state: .loaded(PreviewTodayScenarios.empty))
 
-        _ = try await todayService.performAction(
+        await viewModel.handle(
             TodayInlineAction(
+                operationID: "fresh-goal-quick-log",
                 kind: .quickLog,
                 title: "Quick log",
                 systemImage: "plus.bubble",
                 state: .success,
                 target: TodayActionTarget(goalID: goalID, stepID: step.id)
             ),
-            now: fixedNow
+            using: todayService,
+            runtimeClient: runtimeClient,
+            userDisplayName: "Sample User",
+            now: fixedNow,
+            calendar: PreviewClock.utcCalendar
         )
         let captures = try await repositories.captures.listCaptures()
         let evidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let updatedGoal = try await repositories.goals.goal(id: goalID)
+        let recordedResult = await resultRecorder.latest()
+        let result = try XCTUnwrap(recordedResult)
 
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertNotNil(result.metadata["runtimeReceiptID"])
+        XCTAssertEqual(result.metadata["todayActionMaterialization"], "saved_post_authority")
+        XCTAssertEqual(result.metadata["runtimeProjectionStoreStatus"], "saved")
+        XCTAssertEqual(viewModel.transientMessage?.title, "Signal saved")
         XCTAssertEqual(captures.count, 1)
         XCTAssertEqual(captures.first?.status, .actionable)
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
@@ -103,6 +153,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         XCTAssertEqual(evidence.count, priorEvidence.count + 1)
         XCTAssertTrue(evidence.contains(where: { $0.evidenceKind == .sessionLogged }))
         XCTAssertTrue(evidence.contains(where: { $0.goalID == goalID && $0.stepID == step.id && $0.source == .manual }))
+        XCTAssertEqual(updatedGoal?.revision, initialRevision)
     }
 
     func testNavigationOnlyActionsDoNotCreateMutationsInTodayData() async throws {
@@ -276,6 +327,18 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         XCTAssertEqual(refreshedExperience.hero.truth.posture, .recovering)
         XCTAssertEqual(refreshedExperience.hero.truth.nowTitle, "Split the next step")
         XCTAssertNotNil(refreshedExperience.support.recoveryBloom)
+    }
+}
+
+private actor TodayCommandResultRecorder {
+    private var result: AmbitionsCommandExecutionResult?
+
+    func record(_ result: AmbitionsCommandExecutionResult) {
+        self.result = result
+    }
+
+    func latest() -> AmbitionsCommandExecutionResult? {
+        result
     }
 }
 

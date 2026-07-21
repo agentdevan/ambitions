@@ -488,6 +488,7 @@ def run_self_test() -> int:
         "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
         "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
         "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+        "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogRepositoryFallbackIsIdempotent",
     }
     today_projection_path = "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift"
     today_projection_row = production_write_paths[today_projection_path]

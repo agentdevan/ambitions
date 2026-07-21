@@ -26,7 +26,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         assertNoShameOrPressureCopy(in: [
             recovery.promptTitle,
             recovery.promptBody,
-            recovery.primaryActionTitle,
+            recovery.primaryActionTitle
         ] + recovery.secondaryActionTitles)
 
         let reloadedRepositories = try await makeRepositories(store: store)
@@ -56,7 +56,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
     }
 
-    func testQuickLogCommandWritesCaptureEvidenceAndCommandRecord() async throws {
+    func testQuickLogLegacyServiceEntryRequiresRuntimeAndWritesNothing() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
@@ -80,32 +80,17 @@ final class TodayCommandHandlerTests: XCTestCase {
             state: .success,
             target: TodayActionTarget(goalID: goalID, stepID: stepID)
         )
-        let commandID = "command.today2.\(action.id).\(AmbitionsCommandKind.quickCapture.rawValue)"
-
         let response = try await todayService.performAction(action, now: fixedNow)
 
-        XCTAssertEqual(response.message?.title, "Signal saved")
+        XCTAssertEqual(response.message?.title, "Action needs the runtime")
         let captures = try await repositories.captures.listCaptures()
         let updatedEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
-        XCTAssertEqual(captures.count, baselineCaptures.count + 1)
-        XCTAssertEqual(updatedEvidence.count, baselineEvidence.count + 1)
-        let capture = try XCTUnwrap(captures.first(where: { $0.sourceType == .todayQuickCapture && $0.linkedGoalID == goalID }))
-        XCTAssertEqual(capture.sourceType, .todayQuickCapture)
-        XCTAssertEqual(capture.linkedGoalID, goalID)
-        XCTAssertTrue(updatedEvidence.contains(where: { $0.evidenceKind == .sessionLogged && $0.stepID == stepID }))
-
-        let commandRecord = try await commandRecordRepository.fetchRecord(commandID: commandID)
-        let record = try XCTUnwrap(commandRecord)
-        XCTAssertEqual(record.result.status, .succeeded)
-        XCTAssertEqual(record.result.target?.goalID, goalID)
-        XCTAssertEqual(record.result.target?.captureID, capture.id)
-        XCTAssertFalse(record.result.eventLedgerEntryIDs.isEmpty)
-        let ledgerEntries = try await ledger.fetchRecent(limit: 30)
-        XCTAssertTrue(
-            Set(record.result.eventLedgerEntryIDs).isSubset(of: Set(ledgerEntries.map(\.id)))
-        )
-        XCTAssertTrue(ledgerEntries.contains(where: { $0.kind == .captureCreated && $0.captureID == capture.id }))
-        XCTAssertTrue(ledgerEntries.contains(where: { $0.kind == .goalUpdated || $0.kind == .actionCompleted }))
+        XCTAssertEqual(captures, baselineCaptures)
+        XCTAssertEqual(updatedEvidence, baselineEvidence)
+        let commandRecords = try await commandRecordRepository.fetchRecent(limit: 10)
+        let ledgerEntries = try await ledger.fetchRecent(limit: 10)
+        XCTAssertTrue(commandRecords.isEmpty)
+        XCTAssertTrue(ledgerEntries.isEmpty)
     }
 
     func testNavigationOnlyActionMutatesNothingAndDoesNotEmitCommandEvidence() async throws {
@@ -186,11 +171,12 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(envelopes.first?.phase, .rejectedBeforeMutation)
     }
 
-    func testAskWhyThisMattersCommandPreservesFeedbackShapeAndRecordsExecution() async throws {
+    func testAskWhyThisMattersIsRepeatableReadOnlyInspection() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
         let commandJournal = try XCTUnwrap(repositories.commandJournal as? InMemoryCommandJournal)
+        let runtimeEvents = try XCTUnwrap(repositories.runtimeEvents as? InMemoryRuntimeEventStore)
         let ledger = try XCTUnwrap(repositories.eventLedger as? InMemoryEventLedgerRepository)
         let todayService = RepositoryBackedTodayService(repositories: repositories)
 
@@ -208,40 +194,34 @@ final class TodayCommandHandlerTests: XCTestCase {
             state: .default,
             target: TodayActionTarget(goalID: goalID, stepID: stepID)
         )
-        let commandID = "command.today2.\(action.id).ask_why"
         let beforeFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+        let beforeEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let beforeGoal = try await repositories.goals.goal(id: goalID)
 
-        let response = try await todayService.performAction(action, now: fixedNow)
+        let first = try await todayService.performAction(action, now: fixedNow)
+        let second = try await todayService.performAction(action, now: fixedNow)
 
-        XCTAssertEqual(response.message?.title, "Why this matters")
-        XCTAssertFalse(response.message?.body.isEmpty ?? true)
+        XCTAssertEqual(first.message?.title, "Why this matters")
+        XCTAssertEqual(second.message?.title, first.message?.title)
+        XCTAssertEqual(second.message?.body, first.message?.body)
+        XCTAssertFalse(first.message?.body.isEmpty ?? true)
         let afterFeedback = try await repositories.feedback.listEvents(goalID: goalID)
-        let beforeAskedWhyEvents = beforeFeedback.filter {
-            if case .askedWhyThisMatters(let base) = $0, base.stepID == stepID { return true }
-            return false
-        }
-        let askedWhyEvents = afterFeedback.filter {
-            if case .askedWhyThisMatters(let base) = $0, base.stepID == stepID { return true }
-            return false
-        }
-        XCTAssertEqual(askedWhyEvents.count, beforeAskedWhyEvents.count + 1)
-        let record = try await commandRecordRepository.fetchRecord(commandID: commandID)
-        let execution = try XCTUnwrap(record)
-        XCTAssertEqual(execution.result.status, .succeeded)
-        XCTAssertEqual(execution.result.target?.goalID, goalID)
-        XCTAssertFalse(execution.result.eventLedgerEntryIDs.isEmpty)
-        XCTAssertEqual(execution.result.metadata["commandEnvelopePhase"], CommandEnvelopePhase.acceptedBeforeMutation.rawValue)
-        XCTAssertEqual(execution.result.metadata["commandReceiptID"], "command.receipt.\(commandID)")
-        XCTAssertEqual(execution.result.metadata["commandJournalSequence"], "1")
-        let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(commandID), limit: nil)
-        XCTAssertEqual(envelopes.count, 1)
-        XCTAssertEqual(envelopes.first?.phase, .acceptedBeforeMutation)
+        let afterEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let commandRecords = try await commandRecordRepository.fetchRecent(limit: 10)
+        let commandEnvelopes = try await commandJournal.fetchEnvelopes(matching: .all, limit: nil)
         let ledgerEntries = try await ledger.fetchRecent(limit: 20)
-        XCTAssertTrue(
-            execution.result.eventLedgerEntryIDs.allSatisfy { id in
-                ledgerEntries.contains(where: { $0.id == id })
-            }
-        )
+        let runtimeEventEntries = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
+        let afterGoal = try await repositories.goals.goal(id: goalID)
+        XCTAssertEqual(afterFeedback, beforeFeedback)
+        XCTAssertEqual(afterEvidence, beforeEvidence)
+        XCTAssertEqual(afterCaptures, beforeCaptures)
+        XCTAssertEqual(afterGoal, beforeGoal)
+        XCTAssertTrue(commandRecords.isEmpty)
+        XCTAssertTrue(commandEnvelopes.isEmpty)
+        XCTAssertTrue(ledgerEntries.isEmpty)
+        XCTAssertTrue(runtimeEventEntries.isEmpty)
     }
 }
 

@@ -1,3 +1,5 @@
+baseline: .swiftlint-baseline.json
+
 included:
   - Native
   - Sources

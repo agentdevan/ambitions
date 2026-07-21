@@ -55,7 +55,7 @@ enum MeaningfulMutationRegistry {
             replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
             proofTestIDs: [
                 "AmbitionsTests/TimeDurableMutationIntegrationTests/testPlaceStepSurvivesRuntimeRestartWithIdenticalProjectionReceiptAndSchedule",
-                "AmbitionsTests/TimeDurableMutationIntegrationTests/testDuplicateCommandReturnsOneReceiptOneJournalEnvelopeAndOneScheduleBlock",
+                "AmbitionsTests/TimeDurableMutationIntegrationTests/testDuplicateCommandReturnsOneReceiptOneJournalEnvelopeAndOneScheduleBlock"
             ]
         ),
         mutation(
@@ -74,7 +74,7 @@ enum MeaningfulMutationRegistry {
             replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
             proofTestIDs: [
                 "AmbitionsTests/TimeCommandReplayTests/testUndoRejectsStaleProjectionVersionWithoutChangingSchedule",
-                "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
+                "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice"
             ]
         ),
         mutation(id: "time.calendar-aware-view-model", sourcePath: "TimeViewModel.makeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Time ViewModel calendar-aware action delegates to a legacy projection service."),
@@ -87,13 +87,14 @@ enum MeaningfulMutationRegistry {
             replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
             proofTestIDs: [
                 "AmbitionsTests/TodayClosureRuntimeTests/testActionClosureRefreshIgnoresSyntheticStageMutationFromCommandResponse",
-                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization",
+                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization"
             ]
         ),
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
         mutation(
             id: "today.goal-step-action", sourcePath: "SwiftDataTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
-            status: .durable, rationale: "The six scoped Today goal-step actions validate revision before authority, commit one semantic event and runtime receipt, then atomically and idempotently materialize goal, feedback, and evidence from committed authority.",
+            status: .durable,
+            rationale: "Seven Today goal-step actions validate revision, commit one semantic event and receipt, then idempotently materialize exact post-authority snapshots.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
@@ -102,14 +103,18 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogPlanCarriesExactDeterministicCaptureWithoutPreparingWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogUsesCompositeSemanticEventInsteadOfGenericCaptureEvent",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testStaleRevisionBlocksBeforeAuthorityCommit",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
-                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testQuickLogCaptureFailureRollsBackCaptureAndEvidenceTogether",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence"
             ]
         ),
         mutation(
             id: "today.goal-step-action.repository-materializer", sourcePath: "RepositoryTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
-            status: .projectionOnly, rationale: "The repository materializer is the fallback for AppRepositories compositions without an injected SwiftData materializer; in-memory repository integration proves post-authority idempotent projection updates, not live SwiftData storage ownership or mutation authority.",
+            status: .projectionOnly,
+            rationale: "The in-memory repository fallback has post-authority idempotency proof, but it does not own live SwiftData storage or mutation authority.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
@@ -118,6 +123,7 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogRepositoryFallbackIsIdempotent"
             ]
         ),
         mutation(id: "today.feature-action", sourcePath: "RepositoryBackedTodayService.performAction", commandKind: .completeAction, status: .unproven, rationale: "Repository-backed Today action still has legacy repository mutation paths."),
@@ -139,7 +145,7 @@ enum MeaningfulMutationRegistry {
             replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
             proofTestIDs: [
                 "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testAuthorityFailureLeavesHistoryAndProjectionEmpty",
-                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization",
+                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization"
             ]
         ),
         mutation(id: "goals.view-model-action", sourcePath: "GoalDetailViewModel.perform", commandKind: .updateGoal, status: .unproven, rationale: "Goal Detail action delegates to legacy feature-service mutation."),
@@ -180,7 +186,7 @@ enum MeaningfulMutationRegistry {
             proofTestIDs: [
                 "AmbitionsTests/RuntimeAtomicCommitTests/testQuickCaptureAuthorityFailureLeavesNoCaptureMaterialization",
                 "AmbitionsTests/RuntimeAtomicCommitTests/testPublicExecutorRestartReplaysExactAuthorityReceiptAndOneSemanticTransition",
-                "AmbitionsTests/RuntimeDomainEventReplayTests/testEmptyDerivedStoresReconstructFromPersistedSemanticJournal",
+                "AmbitionsTests/RuntimeDomainEventReplayTests/testEmptyDerivedStoresReconstructFromPersistedSemanticJournal"
             ]
         ),
         mutation(id: "capture.update-state", sourcePath: "DefaultCaptureService.updateCaptureState", commandKind: .updateGoal, status: .unproven, rationale: "Capture state update lacks event-first reconstruction proof."),
@@ -263,7 +269,7 @@ enum MeaningfulMutationRegistry {
             replayTestID: "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay",
             proofTestIDs: [
                 "AmbitionsTests/RuntimeAtomicCommitTests/testQuickCaptureAuthorityFailureLeavesNoCaptureMaterialization",
-                "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay",
+                "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay"
             ]
         ),
         mutation(id: "runtime.route-commitment", sourcePath: "AmbitionsCommandExecutor.executeRouteCommitment", commandKind: .routeCommitment, status: .unproven, rationale: "Commitment routing execution lacks row-specific atomic replay proof."),
@@ -282,7 +288,7 @@ enum MeaningfulMutationRegistry {
         mutation(id: "runtime.transaction-commit", sourcePath: "RuntimeTransactionCoordinator.commit", commandKind: .updateGoal, status: .unproven, rationale: "Runtime transaction commit lacks row-specific crash-boundary and replay proof."),
         mutation(id: "share.save", sourcePath: "ShareViewController.save", commandKind: .quickCapture, status: .unproven, rationale: "External durable enqueue lacks app-process replay proof."),
         mutation(id: "app-state.swiftdata-save", sourcePath: "SwiftDataAppStateStore.save", commandKind: .updateGoal, status: .unproven, rationale: "SwiftData app-state save lacks row-specific command, receipt, and replay proof."),
-        mutation(id: "today.command-evidence", sourcePath: "TodayCommandActionHandler.emitTodayCommandEvidence", commandKind: .completeAction, status: .unproven, rationale: "Today command evidence append lacks row-specific durable receipt and replay proof."),
+        mutation(id: "today.command-evidence", sourcePath: "TodayCommandActionHandler.emitTodayCommandEvidence", commandKind: .completeAction, status: .unproven, rationale: "Today command evidence append lacks row-specific durable receipt and replay proof.")
     ]
 
     static let writePaths: [MeaningfulMutationWritePathDescriptor] = [
@@ -345,9 +351,12 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
                 "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogPlanCarriesExactDeterministicCaptureWithoutPreparingWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testQuickLogUsesCompositeSemanticEventInsteadOfGenericCaptureEvent",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testStaleRevisionBlocksBeforeAuthorityCommit",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
-                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testQuickLogCaptureFailureRollsBackCaptureAndEvidenceTogether",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence"
             ]
         ),
         writePath(sourcePath: "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift", status: .unproven, rationale: "Notification support file access lacks row-specific adapter lifecycle proof."),
@@ -359,7 +368,7 @@ enum MeaningfulMutationRegistry {
         writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .previewOnly, rationale: "DEBUG preview temporary storage is not production mutation authority."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", status: .unproven, rationale: "External creation handoff lacks row-specific terminated-app adapter proof."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift", status: .unproven, rationale: "External snapshot writes lack row-specific projection-only lineage proof."),
-        writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", status: .unproven, rationale: "Shared snapshot storage lacks row-specific projection lifecycle proof."),
+        writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", status: .unproven, rationale: "Shared snapshot storage lacks row-specific projection lifecycle proof.")
     ]
 
     private static func mutation(

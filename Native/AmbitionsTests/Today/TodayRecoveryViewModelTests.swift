@@ -164,9 +164,9 @@ final class TodayRecoveryViewModelTests: TodayViewModelTestCase {
 
         await viewModel.handle(
             TodayInlineAction(
-                kind: .quickLog,
-                title: "Quick log",
-                systemImage: "plus.bubble",
+                kind: .openTime,
+                title: "Open Time",
+                systemImage: "calendar",
                 state: .success,
                 target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")
             ),

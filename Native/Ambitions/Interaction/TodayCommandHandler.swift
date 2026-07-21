@@ -68,22 +68,6 @@ struct TodayCommandHandler {
                 sourceSurface: "today"
             )
         }
-        if action.kind == .askWhyThisMatters {
-            return AmbitionsCommand(
-                id: "command.today2.\(action.id).\(AmbitionsCommandKind.askWhy.rawValue)",
-                kind: .askWhy,
-                source: .today,
-                target: AmbitionsCommandTarget(
-                    goalID: action.target.goalID,
-                    stepID: action.target.stepID,
-                    destination: .goalDetail
-                ),
-                payload: AmbitionsCommandPayload(title: action.title),
-                createdAt: createdAt,
-                sourceSurface: "today"
-            )
-        }
-
         return TodayExecutionViewState.command(
             for: action,
             explanations: [],

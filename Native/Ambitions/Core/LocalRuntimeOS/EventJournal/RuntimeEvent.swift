@@ -192,6 +192,9 @@ struct RuntimeDomainEventRecord: Sendable, Codable, Equatable, Hashable {
 
 extension RuntimeDomainEvent {
     static func semanticEvent(command: AmbitionsCommand, result: AmbitionsCommandExecutionResult, occurredAt: String) -> RuntimeDomainEvent? {
+        if let plan = TodayGoalStepActionPlan.decode(command: command), result.status == .succeeded {
+            return .todayGoalStepActionApplied(plan)
+        }
         switch command.kind {
         case .quickCapture:
             guard let captureID = result.target?.captureID ?? result.metadata["captureID"],
@@ -250,12 +253,8 @@ extension RuntimeDomainEvent {
                 windowID: windowID, start: start, end: end,
                 reason: command.payload.metadata["correctionKind"] ?? "corrected"
             ))
-        case .completeAction, .updateGoal, .delayAction, .splitAction, .recoverAction, .archiveItem:
-            if let plan = TodayGoalStepActionPlan.decode(command: command), result.status == .succeeded {
-                return .todayGoalStepActionApplied(plan)
-            }
-            fallthrough
-        case .dismissRecommendation:
+        case .completeAction, .updateGoal, .delayAction, .splitAction, .recoverAction, .archiveItem,
+             .dismissRecommendation:
             guard result.status == .succeeded,
                   let receipt = TodayReceiptDomainEvent.decode(command: command) else { return nil }
             return .todayReceiptRecorded(receipt)
@@ -488,7 +487,7 @@ struct RuntimeEvent: Codable, Equatable, Hashable {
             ),
             metadata: [
                 "commandSchemaVersion": command.schemaVersion,
-                "resultStatus": result.status.rawValue,
+                "resultStatus": result.status.rawValue
             ]
         )
     }

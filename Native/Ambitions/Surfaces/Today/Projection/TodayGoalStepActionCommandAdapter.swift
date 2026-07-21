@@ -41,6 +41,7 @@ extension RepositoryBackedTodayService: TodayDurableGoalStepActionPreparing {
                 title: action.title,
                 goalID: goalID,
                 stepID: stepID,
+                operationID: action.operationID,
                 context: context
             ),
             now: now
@@ -48,7 +49,7 @@ extension RepositoryBackedTodayService: TodayDurableGoalStepActionPreparing {
     }
 
     static let durableGoalStepActionKinds: Set<TodayActionKind> = [
-        .complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp,
+        .complete, .defer, .reschedule, .markNotRelevant, .split, .askForHelp, .quickLog
     ]
 }
 
