@@ -18,7 +18,7 @@ owns_concepts = [
 ]
 inherits = ["ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001", "PLATFORM-NATIVE-IPHONE-001"]
 depends_on = ["CONSTITUTION"]
-source_owners = ["Native/Ambitions/Interaction/Accessibility/", "Native/Ambitions/DesignSystem/", "Native/Ambitions/Stage/", "Native/Ambitions/Rendering/", "Native/Ambitions/Surfaces/", "Native/Ambitions/Composer/", "Native/Ambitions/Quality/Accessibility/"]
+source_owners = ["Native/Ambitions/Interaction/", "Native/Ambitions/DesignSystem/Accessibility/", "Native/Ambitions/Stage/", "Native/Ambitions/Rendering/", "Native/Ambitions/Surfaces/", "Native/Ambitions/Composer/", "Native/Ambitions/Quality/"]
 +++
 
 # Accessibility

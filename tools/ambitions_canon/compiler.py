@@ -27,6 +27,7 @@ GENERATED_PATHS = (
     "generated/canon-index.json",
     "generated/object-boundary-matrix.md",
     "generated/requirement-graph.json",
+    "generated/requirement-traceability.json",
 )
 
 REQUIRED_FRONTMATTER = {
@@ -64,6 +65,10 @@ FIELD_RE = re.compile(
 )
 CONCEPT_RE = re.compile(r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$")
 MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
+HISTORICAL_CLAIM_RE = re.compile(r"^CLAIM-[A-Z0-9-]+$")
+KNOWN_RETIRED_REQUIREMENT_IDS = {
+    "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+}
 
 REQUIRED_CONSTITUTION_IDS = {
     "MISSION-CATEGORY-001",
@@ -498,6 +503,48 @@ def validate_documents(documents: tuple[Document, ...]) -> None:
         raise CanonError("\n".join(errors))
 
 
+def validate_repository_bindings(
+    root: Path,
+    documents: tuple[Document, ...],
+) -> None:
+    """Validate live source ownership and explicit historical supersession."""
+    repository_root = root.resolve(strict=True)
+    active_requirement_ids = {
+        requirement.requirement_id
+        for document in documents
+        for requirement in document.requirements
+    }
+    errors: list[str] = []
+    for document in documents:
+        for source_owner in document.source_owners:
+            try:
+                owner_path = _confined_path(
+                    repository_root,
+                    Path(source_owner),
+                )
+            except CanonError as exc:
+                errors.append(f"{document.spec_id}: {exc}")
+                continue
+            if not owner_path.exists():
+                errors.append(
+                    f"{document.spec_id}: missing source owner: {source_owner}"
+                )
+        for requirement in document.requirements:
+            for superseded in requirement.supersedes:
+                if (
+                    superseded in active_requirement_ids
+                    or HISTORICAL_CLAIM_RE.fullmatch(superseded)
+                    or superseded in KNOWN_RETIRED_REQUIREMENT_IDS
+                ):
+                    continue
+                errors.append(
+                    f"{requirement.requirement_id}: unknown superseded "
+                    f"requirement: {superseded}"
+                )
+    if errors:
+        raise CanonError("\n".join(errors))
+
+
 def _manifest_markdown_paths(root: Path, manifest: Manifest) -> Iterable[Path]:
     canon_root = _confined_path(root, CANON_ROOT_PATH)
     for value in (*manifest.normative_files, *manifest.reference_files):
@@ -584,7 +631,156 @@ def validate_design_direction(root: Path) -> tuple[int, int]:
     return len(screens), len(contracts)
 
 
+def validate_design_artifacts(compilation: Compilation) -> None:
+    """Validate active UX and visual-design artifacts against compiled canon."""
+    root = compilation.root
+
+    def load(relative_path: str) -> dict[str, Any]:
+        path = _confined_path(root, Path(relative_path))
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise CanonError(f"{relative_path}: invalid JSON: {exc}") from exc
+        if not isinstance(payload, dict):
+            raise CanonError(f"{relative_path}: root must be an object")
+        return payload
+
+    blueprint_path = "docs/canon/migration/ux-blueprint.json"
+    dispositions_path = (
+        "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
+    )
+    visual_manifest_path = "docs/canon/generated/visual-authority-manifest.json"
+    blueprint = load(blueprint_path)
+    dispositions = load(dispositions_path)
+    visual_manifest = load(visual_manifest_path)
+
+    revision = compilation.manifest.canon_revision
+    digest = compilation.canon_digest
+    for label, payload in (
+        ("UX Blueprint", blueprint),
+        ("UX Blueprint dispositions", dispositions),
+        ("visual authority manifest", visual_manifest),
+    ):
+        if payload.get("canon_revision") != revision:
+            raise CanonError(
+                f"{label} canon_revision must be {revision}; "
+                f"found {payload.get('canon_revision')!r}"
+            )
+        if payload.get("canon_content_sha") != digest:
+            raise CanonError(
+                f"{label} canon_content_sha must match compiled canon digest"
+            )
+
+    active_requirement_ids = {
+        requirement.requirement_id for requirement in compilation.requirements
+    }
+
+    def disposition_ids(payload: Any, *, label: str) -> set[str]:
+        if not isinstance(payload, list):
+            raise CanonError(f"{label} must be a list")
+        values = [
+            item.get("requirement_id")
+            for item in payload
+            if isinstance(item, dict)
+        ]
+        if len(values) != len(payload) or not all(
+            isinstance(value, str) for value in values
+        ):
+            raise CanonError(f"{label} contains an invalid requirement_id")
+        if len(values) != len(set(values)):
+            raise CanonError(f"{label} contains duplicate requirement IDs")
+        return set(values)
+
+    blueprint_dispositions = blueprint.get("requirement_dispositions")
+    disposition_records = dispositions.get("dispositions")
+    for label, payload in (
+        ("UX Blueprint requirement dispositions", blueprint_dispositions),
+        ("requirement dispositions", disposition_records),
+    ):
+        if disposition_ids(payload, label=label) != active_requirement_ids:
+            raise CanonError(
+                "requirement dispositions do not match active canon"
+            )
+    if blueprint_dispositions != disposition_records:
+        raise CanonError(
+            "UX Blueprint Markdown/JSON disposition sources disagree"
+        )
+
+    authorities = visual_manifest.get("authorities")
+    if not isinstance(authorities, list) or not authorities:
+        raise CanonError("visual authority manifest authorities must be a list")
+    for authority in authorities:
+        if not isinstance(authority, dict):
+            raise CanonError("visual authority manifest has an invalid authority")
+        if authority.get("canon_revision") != revision:
+            raise CanonError(
+                "visual authority entry canon_revision does not match active canon"
+            )
+        requirement_ids = authority.get("requirement_ids")
+        if not isinstance(requirement_ids, list) or not all(
+            isinstance(value, str) for value in requirement_ids
+        ):
+            raise CanonError(
+                "visual authority entry requirement_ids must be a string list"
+            )
+        inactive = sorted(set(requirement_ids) - active_requirement_ids)
+        if inactive:
+            raise CanonError(
+                "visual authority references inactive requirement: "
+                f"{inactive[0]}"
+            )
+
+    blueprint_markdown = _confined_path(
+        root, Path("docs/canon/migration/UX_BLUEPRINT.md")
+    ).read_text(encoding="utf-8")
+    visual_system = _confined_path(
+        root, Path("docs/canon/design/VISUAL_SYSTEM_R1.md")
+    ).read_text(encoding="utf-8")
+    markdown_contracts = (
+        (
+            blueprint_markdown,
+            f"- Canon revision: `{revision}`",
+            "UX Blueprint Markdown canon revision",
+        ),
+        (
+            blueprint_markdown,
+            f"- Canon content SHA: `{digest}`",
+            "UX Blueprint Markdown canon digest",
+        ),
+        (
+            visual_system,
+            f"- canon revision: `{revision}`;",
+            "Visual System canon revision",
+        ),
+        (
+            visual_system,
+            f"- canon content SHA: `{digest}`;",
+            "Visual System canon digest",
+        ),
+    )
+    for text, expected, label in markdown_contracts:
+        if expected not in text:
+            raise CanonError(f"{label} does not match active canon")
+
+    json_screen_ids = {
+        item.get("blueprint_id")
+        for item in blueprint.get("screens", [])
+        if isinstance(item, dict)
+    }
+    markdown_screen_ids = set(
+        re.findall(r"\bUX-SCREEN-[A-Z0-9-]+", blueprint_markdown)
+    )
+    if json_screen_ids != markdown_screen_ids:
+        raise CanonError("UX Blueprint Markdown/JSON screen identities disagree")
+
+
 def _canon_digest(root: Path, manifest: Manifest, documents: tuple[Document, ...]) -> str:
+    """Digest the normative product canon without creating reference-file cycles.
+
+    Reference artifacts bind this digest and are validated separately. Including
+    their bytes here would make it impossible for those artifacts to embed the
+    digest deterministically.
+    """
     digest = hashlib.sha256()
     digest.update(b"ambitions-product-canon-v1\0")
     digest.update(manifest.source_bytes)
@@ -593,13 +789,6 @@ def _canon_digest(root: Path, manifest: Manifest, documents: tuple[Document, ...
         digest.update(document.source_path.encode("utf-8"))
         digest.update(b"\0")
         digest.update(document.source_bytes)
-        digest.update(b"\0")
-    canon_root = _confined_path(root, CANON_ROOT_PATH)
-    for relative_path in sorted(manifest.reference_files):
-        path = _confined_path(root, Path(relative_path), base=canon_root)
-        digest.update(relative_path.encode("utf-8"))
-        digest.update(b"\0")
-        digest.update(path.read_bytes())
         digest.update(b"\0")
     return digest.hexdigest()
 
@@ -617,10 +806,11 @@ def compile_repository(root: Path) -> Compilation:
         )
     )
     validate_documents(documents)
+    validate_repository_bindings(root, documents)
     local_links = validate_local_links(root, manifest)
     json_count = validate_structured_references(root)
     screen_count, visual_contract_count = validate_design_direction(root)
-    return Compilation(
+    compilation = Compilation(
         root=root,
         manifest=manifest,
         documents=documents,
@@ -630,6 +820,8 @@ def compile_repository(root: Path) -> Compilation:
         ux_screen_count=screen_count,
         visual_contract_count=visual_contract_count,
     )
+    validate_design_artifacts(compilation)
+    return compilation
 
 
 def _requirement_record(requirement: Requirement) -> dict[str, Any]:
@@ -883,6 +1075,60 @@ def render_object_boundary(compilation: Compilation) -> bytes:
     return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
 
 
+def render_requirement_traceability(compilation: Compilation) -> bytes:
+    """Render structural product traceability without manufacturing test proof."""
+    dispositions_path = _confined_path(
+        compilation.root,
+        Path(
+            "docs/canon/migration/"
+            "ux-blueprint-requirement-dispositions.json"
+        ),
+    )
+    disposition_document = json.loads(
+        dispositions_path.read_text(encoding="utf-8")
+    )
+    blueprint_ids_by_requirement = {
+        item["requirement_id"]: item["blueprint_ids"]
+        for item in disposition_document["dispositions"]
+    }
+    payload = {
+        "canon_digest": compilation.canon_digest,
+        "canon_revision": compilation.manifest.canon_revision,
+        "executable_resolution_policy": {
+            "binding_source": "executed test result manifests",
+            "required_phase": 8,
+            "structural_traceability_is_runtime_proof": False,
+        },
+        "requirements": [
+            {
+                "blueprint_ids": blueprint_ids_by_requirement[
+                    requirement.requirement_id
+                ],
+                "concept": requirement.concept,
+                "executable_bindings": [],
+                "executable_resolution": "not_evaluated_by_canon_compiler",
+                "intended_outcome": _first_paragraph(requirement.body),
+                "modality": requirement.modality,
+                "owner_spec_id": requirement.owner_spec_id,
+                "requirement_id": requirement.requirement_id,
+                "scope": requirement.scope,
+                "source_owners": list(requirement.source_owners),
+                "source_path": requirement.source_path,
+                "verification_declarations": list(requirement.verification),
+            }
+            for requirement in sorted(
+                compilation.requirements,
+                key=lambda item: item.requirement_id,
+            )
+        ],
+        "schema_version": 1,
+    }
+    return (
+        json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)
+        + "\n"
+    ).encode("utf-8")
+
+
 def render_outputs(compilation: Compilation) -> dict[str, bytes]:
     return {
         "generated/CODEX_START_HERE.md": render_codex_start(compilation),
@@ -890,6 +1136,9 @@ def render_outputs(compilation: Compilation) -> dict[str, bytes]:
         "generated/canon-index.json": render_index_json(compilation),
         "generated/object-boundary-matrix.md": render_object_boundary(compilation),
         "generated/requirement-graph.json": render_graph_json(compilation),
+        "generated/requirement-traceability.json": (
+            render_requirement_traceability(compilation)
+        ),
     }
 
 

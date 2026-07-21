@@ -9,15 +9,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "unreviewed",
-      "approved_by": null,
       "authority_role": "candidate",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
-      "implementation_status": "Phase 3/4 visual-authority reconciliation candidate; selectable only after deterministic Gate B Green; not source implementation or rendered-app proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
+      "implementation_status": "Unselected visual-direction candidate retained for comparison; not source implementation or rendered-app proof",
       "reference_id": "FIGMA-CANDIDATE:Oik7612LSTUHWsNRFoTlTJ:37:438",
       "requirement_ids": [
         "DESIGN-001",
@@ -34,15 +30,11 @@
       "accessibility_variants": [
         "not_assessed"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1 selected direction",
-      "implementation_status": "approved direction superseded as final target by node 257:93; retained as a non-authoritative candidate and not implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
+      "implementation_status": "previously selected direction superseded as final target by node 257:93; retained as a non-authoritative candidate and not implementation proof",
       "reference_id": "FIGMA-CANDIDATE:SWtHm9ouHTPbEFfNrrtZwv:250:104",
       "requirement_ids": [
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
@@ -60,15 +52,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy Today target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93",
       "requirement_ids": [
         "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
@@ -86,15 +74,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy Goals target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93",
       "requirement_ids": [
         "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
@@ -112,15 +96,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy Time target rejected as the final visual direction; retained as implementation-history evidence and not source parity or implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93",
       "requirement_ids": [
         "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
@@ -138,15 +118,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R3",
       "implementation_status": "legacy Capture target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93",
       "requirement_ids": [
         "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
@@ -164,15 +140,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy You target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93",
       "requirement_ids": [
         "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
@@ -190,15 +162,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy Trust target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93",
       "requirement_ids": [
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
@@ -216,15 +184,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy privacy-boundary target rejected as the final visual direction; retained as privacy-boundary evidence and not privacy, source, or release proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:272:93",
       "requirement_ids": [
         "SYSTEM-PRIVACY-EGRESS-001",
@@ -243,15 +207,11 @@
         "Reduce Transparency",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy shell and Search target rejected as the final visual direction; retained as implementation-history evidence and not source implementation proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2",
       "requirement_ids": [
         "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
@@ -277,15 +237,11 @@
         "Switch Control and Focus",
         "VoiceOver"
       ],
-      "approval_state": "stale",
-      "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
-      "canon_revision": 1,
+      "canon_revision": 2,
       "frame_version": "R1",
       "implementation_status": "legacy motion and accessibility rubric rejected as the final visual direction; retained as unique provenance and not accessibility conformance or source proof",
-      "reconciliation_action": null,
-      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2",
       "requirement_ids": [
         "A11Y-DYNAMIC-TYPE-001",
@@ -302,12 +258,9 @@
     }
   ],
   "authority_state": "active",
-  "canon_content_sha": "76361a57b770ec79e15748e5c46d100ffa3068e7f3f67ef3d7ac27bbb7f1761a",
-  "canon_revision": 1,
+  "canon_content_sha": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
+  "canon_revision": 2,
   "compiler_version": "0.2.0",
-  "owner_approval_complete": false,
   "schema_version": 1,
-  "traceability_input_sha": "20a8bfe8b7f6709244097d3bc5dd368148f27bb2b445798d8458ef2a1ec04eee",
-  "ui_readiness": false,
-  "ui_readiness_reason": "visual authority references do not prove implementation, accessibility, device, visual, or release readiness"
+  "traceability_input_sha": "20a8bfe8b7f6709244097d3bc5dd368148f27bb2b445798d8458ef2a1ec04eee"
 }

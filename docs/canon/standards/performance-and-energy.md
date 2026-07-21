@@ -16,7 +16,7 @@ owns_concepts = [
 ]
 inherits = ["CONST-PROOF-EVIDENCE-001"]
 depends_on = ["CONSTITUTION"]
-source_owners = ["Native/Ambitions/Quality/Performance/", "Native/Ambitions/Diagnostics/"]
+source_owners = ["Native/Ambitions/Quality/", "Native/Ambitions/Diagnostics/"]
 +++
 
 # Performance and Energy

@@ -1,10 +1,10 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe",
-  "canon_revision": 1,
+  "canon_content_sha": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
+  "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
-  "disposition_sha256": "df7f2c7f140497451cbe8adf0bf72f8d9f7702c8315125e8ea55be5192ff52e3",
+  "disposition_sha256": "92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb",
   "dispositions": [
     {
       "blueprint_ids": [
@@ -48,7 +48,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Accessibility acceptance MUST bind exact commit, device/OS, content/state fixtures, VoiceOver order/actions, Dynamic Type, reduced effects, contrast, keyboard/input, localization, failures, and known gaps. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "A11Y-PROOF-MATRIX-001",
-      "requirement_text_sha256": "10d0779c2c83ccacbb9b589b1e523a5433bcceb1f70bf0b92838b5bc20d8682e",
+      "requirement_text_sha256": "00fd11c576d0216a7cb3fededd40a26dc74d12b99674d2a1897c14fe30fe8ddb",
       "source_path": "docs/canon/standards/accessibility.md",
       "state_blueprint_ids": []
     },
@@ -970,27 +970,9 @@
     {
       "blueprint_ids": [],
       "disposition": "nonvisual_with_rationale",
-      "rationale": "A constitutional amendment MUST identify affected law IDs and concepts, state the owner decision and rationale, analyze product, runtime, privacy, accessibility, proof, external-reference, and migration consequences, update all owning specifications, record supersession where applicable, and provide a rollback plan. Stable IDs may not be silently repurposed. Editorial clarification may preserve an ID only when modality, scope, exceptions, and user consequence remain unchanged. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "AUTHORITY-AMENDMENT-001",
-      "requirement_text_sha256": "12339877834f53f622e8ccf95397dc2b9e85c6b44d045865546517d1fc87832e",
-      "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "The owner-directed Linear v3 product, IA, and object-model document MUST be treated as the primary migration corpus, not as the final monolithic authority. Every accepted claim requires a disposition to a stable constitutional law, owning specification, standard, provenance record, approved conflict resolution, or explicit rejection. The raw corpus remains protected until coverage and owner review are complete. After a proven cutover, its active doctrinal role may be destructively superseded according to Article 10; until then, shadow writing may not demote it. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "AUTHORITY-MIGRATION-CORPUS-001",
-      "requirement_text_sha256": "8054d78ab7568b8bd8f317828e8d69f17cea263a7eb2f28b9eb14860831061bf",
-      "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
       "rationale": "Every Ambitions decision MUST be interpreted through the supreme mission: Ambitions is a private Personal Life OS for contextual life orchestration. A narrower surface, feature, or technical objective may not weaken the integrated movement from intent through context, path, time fit, adaptation, action, proof, and learning. This mission is intended product law, not an implementation claim. When detailed requirements appear to conflict, the interpretation that preserves private, inspectable, user-controlled orchestration wins unless the owner explicitly amends this Constitution. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "AUTHORITY-MISSION-001",
-      "requirement_text_sha256": "9b60ea16dc0adb5e82331f8d83dd3349e671554b9d27dcf46781df65ee867a1f",
+      "requirement_text_sha256": "7481679159f4ecee8409fc7e6898cd08db7f672f34417e1bdc96220cad81d828",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -999,7 +981,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "The Private Life Runtime is the strategic and technical moat only insofar as it serves the mission locally, inspectably, and under user control. Moat doctrine may define continuity, accountability, proof, and recovery obligations, but it MUST NOT override root IA, privacy firewalls, confirmation rules, or evidence ceilings. A named runtime, graph, kernel, or source file is not moat proof. The moat exists as product law when local history improves fit and continuity; implementation claims require current behavior and evidence. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "AUTHORITY-MOAT-001",
-      "requirement_text_sha256": "d0fb04da7e057e41764f058dd15ff634ccc3e5975bea5dd8cdbc982f40c64a09",
+      "requirement_text_sha256": "04922385cd2d9e49252a5deec1e368eaa5d5bb2530aa06cf2e0ea2c64198e949",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -1008,71 +990,8 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "The sanitized origin doctrine MUST explain why Ambitions exists and whom it serves without exposing private founder details or overriding product law. It preserves the problem of high-agency people having more ambition than operating structure. Origin material may guide priorities, scenarios, and copy, but it MUST NOT claim implementation, release readiness, or private personal history. When origin rhetoric conflicts with mission, privacy, root IA, or user control, the stricter constitutional law governs. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "AUTHORITY-ORIGIN-001",
-      "requirement_text_sha256": "e4315b53f976eb0aedf373cad91e0708db481434bea83fcac2937002550d6917",
+      "requirement_text_sha256": "144a548aec17d03d9af202549a2250ff3ee4ee60159295f8c9ef25afe37e5650",
       "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "No shadow task MAY delete, demote, or rewrite active authority merely because replacement text exists. Destructive supersession requires complete claim dispositions, zero unresolved constitutional P0 conflicts, one owner per concept, deterministic build and check, semantic-loss review, reference impact proof, representative task-pack validation, current owner approval, and a proven rollback. Cutover and cleanup are distinct gates; success in one does not silently authorize the next. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CANON-DESTRUCTIVE-SUPERSESSION-001",
-      "requirement_text_sha256": "bc983ac219254ae3d158cd144c262ec27d2e7edc5d8587b3c953b5f91aa2d5ce",
-      "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Applicable product, frontend, runtime, persistence, privacy/security, QA/reliability, accessibility, performance, release, and governance responsibilities MUST have named owners and independent review boundaries. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-DEPT-001",
-      "requirement_text_sha256": "60ac06b90807a97221f32d18e91060d3a77ac86b6051eba71331dc7d20270e05",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "An author MUST NOT self-accept a scope requiring independent or owner approval. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-DEPT-002",
-      "requirement_text_sha256": "870a06819c897b24d334b46fc67b41c406740bb8bb96cf1492c3298079209db0",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Handoffs MUST state laws/specs, source owners, source readback, changes, invariants, tests run/not run, proof, unsupported claims, risks, external actions, rollback, and claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-DEPT-003",
-      "requirement_text_sha256": "df17ce8359fbcaf4006a2d712452c20a2cec320177dfb77e07b37ef444e1611e",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Work MUST stop on data-loss risk, privacy breach, unresolved duplicate authority/material conflict, failing required lane, unreviewable required evidence, unapproved destructive migration, or unsupported readiness claim. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-DEPT-004",
-      "requirement_text_sha256": "ef48bf6e8cce596b313525095f241d53a72ebcc81efcd6d2111f0c2692fa91e6",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "A Codex implementation issue MUST bind current canon scope, source ownership, required tests, forbidden changes, proof ceiling, and rollback before source edits are authorized. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-ISSUE-READINESS-001",
-      "requirement_text_sha256": "3ce55ec435bfe5d3d97ce81bce7c4eaca2a935bbcb5fcc00668afd0ac91745f1",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Codex MUST refresh canon revision, Git state, issue scope, ownership, known gaps, and proof posture before source edits or resumed work. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CODEX-PREFLIGHT-001",
-      "requirement_text_sha256": "b2a5773a852ef792868b6a930ee06183248d8a9102ba46bb21173b493e0c80a7",
-      "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
     {
@@ -1157,24 +1076,6 @@
       "state_blueprint_ids": []
     },
     {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Ambitions MUST NOT maintain an active archive or graveyard of superseded doctrine. Git history, stable supersession metadata, tracked dispositions, and named rollback points preserve provenance. Generated caches, raw exports, task packs, and working reports remain ignored unless a specific evidence contract promotes a compact artifact. Old proof is not current proof, and deleted authority identifiers may never be reused for a different law. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CONST-HISTORY-NO-GRAVEYARD-001",
-      "requirement_text_sha256": "6aaa7ef928b5cd261e3be01ca798c56049804a1705f761288b1dc2d32ff71cad",
-      "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "An authority artifact that becomes inaccurate or duplicate MUST be rewritten into current owning canon or destructively superseded after the required gate. It must not remain active for searchability, nostalgia, or speculative future use. Supersession records preserve stable IDs, provenance, decision source, replacement law, affected artifacts, the truthful decision base, deterministic integration evidence, and rollback history without retaining a second doctrinal root. Until cutover, current active authority remains untouched. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "CONST-HISTORY-SUPERSESSION-001",
-      "requirement_text_sha256": "01208a390dde7388699e7753940dbf1e27081919c73ff8297b0b1e5fb5b87784",
-      "source_path": "docs/canon/CONSTITUTION.md",
-      "state_blueprint_ids": []
-    },
-    {
       "blueprint_ids": [
         "UX-SCREEN-APP-SHELL-ROOT",
         "UX-SCREEN-GOALS-ROOT",
@@ -1199,7 +1100,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "If current proof is absent, the corresponding readiness claim is absent. Canon, plans, issue comments, source names, test names, generated maps, screenshot paths, and prior closeouts cannot manufacture Green. Claims must be tied to current source revision, exact commands or procedures, exit codes, environment, artifacts, skipped checks, known limitations, rollback, and required approval. A narrower focused proof may support a narrower claim without implying full-product or release readiness. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "CONST-PROOF-EVIDENCE-001",
-      "requirement_text_sha256": "b53caa31bce7374a24c07aea7e0934f3a1a712a10be11c86b1853bf4e3ced5b0",
+      "requirement_text_sha256": "ad7f902ddbb1f3116503d0edb20e1d90f7b6bbdfeb84993c6ecc949805880e36",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -1732,7 +1633,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual package, review, surface-specific geometry, hierarchy, viewport, and implementation-evidence behavior MUST remain in their exact child contracts; this aggregate MUST only coordinate those dependencies and their shared claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "DESIGN-007",
-      "requirement_text_sha256": "e143d770338c24bc0829638362198c9c3a1cbac10cd9927dae600fb09d6dc07b",
+      "requirement_text_sha256": "2bf466aa13a18ebcae260c3bc93a2335a1193a6ff52350674967f6978a2b3321",
       "source_path": "docs/canon/standards/swiftui-and-design-system.md",
       "state_blueprint_ids": []
     },
@@ -1800,60 +1701,6 @@
       "state_blueprint_ids": []
     },
     {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Normative Markdown, manifest, schemas, mappings, ledgers, and deterministic projections MUST form one closed graph and MUST NOT create a parallel engineering constitution. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-001",
-      "requirement_text_sha256": "d1f884d55506fc5dc54f7ed16e1aef57ba2878f708c2e4e73c563c89f1b56c54",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Every requirement MUST have stable identity, one concept owner, modality/priority, dependencies, source/test/proof ownership, status, and claim ceiling where applicable. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-002",
-      "requirement_text_sha256": "667b538acc12903acc40f5b1cbeea9fe4ad5dba012d0d3471dae5bbda6c7e39a",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Audit/build MUST run offline on Python 3.12 standard library, fail closed on graph/coverage/semantic-loss defects, and emit sorted atomic newline-terminated output without volatile timestamps. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-003",
-      "requirement_text_sha256": "f824b082a9f3eac2a6469cc6bc2c17b804bb4c2aff08399391c21e610ce5a074",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Substantive changes MUST report affected IDs/concepts, owners, migrations, data classes, tests, proof, gaps, external impact, rollback, and exact claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-004",
-      "requirement_text_sha256": "5d1b2e6dd4c5655987f63437f797d63a1b8cb717daf005dcfe6a1a732970faba",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Architecture enforcement MUST reject new or moved authority outside its exact canonical owner and MUST expose unresolved compatibility debt. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001",
-      "requirement_text_sha256": "6039eed798fc306b377f9b76f8eaa25efcd78795e6652d25c5db818ff0ac8f0d",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Validation reporting MUST record exact command, exit code, output artifact, not-run reason, failure disposition, and claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "ENFORCEMENT-VALIDATION-STATE-001",
-      "requirement_text_sha256": "89a012f9eeb545f8b6418ca2c721d9bc2f79897bb9e8be6771c2afe62a2d90fa",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
       "blueprint_ids": [
         "UX-SCREEN-ACCOUNT-BOUNDARY",
         "UX-SCREEN-YOU-ENTITLEMENT"
@@ -1918,53 +1765,8 @@
       "disposition": "visual_mapping_required",
       "rationale": "Monetization MUST NOT use dark patterns, fake urgency, shame, blocked deletion, misleading comparisons, or erosion of the offline-core guarantee. Visual mapping records: UX-SCREEN-YOU-ENTITLEMENT.",
       "requirement_id": "ENTITLEMENT-004",
-      "requirement_text_sha256": "c845293d339a226c0e4b6b9c44db4017b1faf8f744487ec6c33717d29c82a1a7",
+      "requirement_text_sha256": "de6a62c6a792b305289724611dac0c5efb382c95bc2297bbfc2ad1068afcd80c",
       "source_path": "docs/canon/standards/security-and-privacy.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Amendments MUST state problem, current/proposed law, rationale, supersession, affected product/source/tests, migration, privacy/accessibility/performance/proof impact, owner decision, and rollback. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "EVOLUTION-001",
-      "requirement_text_sha256": "87d71d2f163b9429c2216da53a0eb965e7cd525749b59aa7c7094bfe053ea055",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Retired IDs MUST NOT be reused; replacement and provenance MUST remain in the supersession ledger and Git history. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "EVOLUTION-002",
-      "requirement_text_sha256": "09c0bebdf4701ef313feda52488e8c51be1c9f057cab8bc6a9677c40989572fb",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Audit MUST cover law/profile completeness, registry/source-owner drift, semantic loss, tests/proof, dependency/security, accessibility, performance, privacy, and stale or contradictory authority. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "EVOLUTION-003",
-      "requirement_text_sha256": "536662a5afd1f07e8372674faf18c48df1d505d033d7ee8de69a5d3d6ed9ef54",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Implementation difficulty alone MUST NOT weaken law; amendment requires product, safety, user-consequence, compatibility, evidence, migration, and rollback reasoning. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "EVOLUTION-004",
-      "requirement_text_sha256": "44b0f2d90f135d998e6ff71ce72323737cf5902cf168460423143a5bedd7e3a1",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "A canon amendment MUST state its compatibility horizon, supersession effects, migration obligations, validation plan, and rollback. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "EVOLUTION-HORIZON-001",
-      "requirement_text_sha256": "2743572a30495d366f71582ce3c5415a32f720aed8ea24c838f52d7b9ec3a15b",
-      "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
     {
@@ -2362,7 +2164,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Where current authority supplies no approved numeric budget, the Atlas MUST retain a structured P1 calibration gap with operation, owner, device/OS/build/tool, data scale, percentile/maximum, resource measures, regression rule, required proof, and claim ceiling; it MUST NOT invent a number. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "GAP-PERFORMANCE-CALIBRATION-ATLAS-001",
-      "requirement_text_sha256": "8a509f69c5a13de23d16852b01791f16c5f54b2974b7f61db652025ad012ceaf",
+      "requirement_text_sha256": "f3864ca5b5b5ba6b240c9b1e2e490024660b3d504889dcbf711a1f75fef5f769",
       "source_path": "docs/canon/standards/performance-and-energy.md",
       "state_blueprint_ids": []
     },
@@ -2373,15 +2175,6 @@
       "requirement_id": "GLOBAL-TRUST-CEBR-BRANCH-001",
       "requirement_text_sha256": "79889d5bf9038d6ae924684da39945db6dc2031d862562aa3eb64efc166a2929",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "The migration MUST preserve decision provenance through stable IDs, hashes, dispositions, replacement requirements, supersession metadata, and rollback history; superseded external doctrine MUST NOT remain an active authority after owner-approved destructive cleanup. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "GOVERNANCE-LINEAR-RETENTION-001",
-      "requirement_text_sha256": "8e742dd2d3edc5440d008b45cfa82364bd2d4a409ef217affecb3c2f9dea383e",
-      "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
     {
@@ -2513,7 +2306,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Import MUST NOT silently alter Apple Calendar alerts or create duplicate notifications. Review shows existing alerts, proposed Ambitions rules, and duplication risk and offers Import with Ambitions notifications, Import without them, Edit notification rules, or Keep external. Visual mapping records: UX-JOURNEY-EXTERNAL-CALENDAR.",
       "requirement_id": "JOURNEY-CALENDAR-NOTIFICATION-HANDOFF-001",
-      "requirement_text_sha256": "88b0b9c658593a4150887b9d84ba973bff44a64d5e176c1ee24aa6a6b82e8c4c",
+      "requirement_text_sha256": "21d1e00b871b09ffe1c1917c1b46d7364376080b3e413a7a7fc58892f4c12cf9",
       "source_path": "docs/canon/specifications/journeys/external-calendar-import.md",
       "state_blueprint_ids": []
     },
@@ -2536,7 +2329,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Trash MUST remain recoverable and distinct from permanent deletion or reset. Backup MUST be a verified restorable recovery artifact before it may satisfy a safe-recovery-point precondition. No cited owning contract declares ordinary data export restorable, so export in this journey is a scoped, previewed egress package and is explicitly not restorable. Export cannot serve as a backup or recovery point. Restore and reset previews are non-durable until validation and explicit scope confirmation; irreversible operations require precise consequence, retained/excluded data, rollback limit, account/continuity distinction, and proof of a safe local boundary before success. Visual mapping records: UX-JOURNEY-BACKUP-RESTORE, UX-SCREEN-YOU-DATA, UX-STATE-VARIANT-YOU-DATA-BACKUP-READY, UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED, UX-STATE-VARIANT-YOU-DATA-EXPORT-FAILED, UX-STATE-VARIANT-YOU-DATA-EXPORT-PREVIEW, UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS, UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE, UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-REVIEW, UX-STATE-VARIANT-YOU-DATA-RESET-REVIEW, UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK, UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW, UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY, UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED, UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE.",
       "requirement_id": "JOURNEY-DELETE-RESTORE-001",
-      "requirement_text_sha256": "194c66de09b42aa4dc542f2fc0aeaaefc2921ccf4662539873770b74773b614a",
+      "requirement_text_sha256": "3fca654af5ccc62546a8e004390baba698f9e21957f584140e133ae87fee3d22",
       "source_path": "docs/canon/specifications/journeys/backup-restore-reset.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-YOU-DATA-BACKUP-READY",
@@ -2573,7 +2366,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Goal creation MUST first commit a typed durable provisional Goal shell and original intent with Receipt/replay. Accepted clarification edits are separate typed durable Goal commits. Generated Goal Path versions, Steps, dates, proof expectations, and placements remain non-durable proposals until reviewed; activation is a later confirmed commit, and optional scheduling is distinct again. Visual mapping records: UX-JOURNEY-GOAL-ACTIVATION.",
       "requirement_id": "JOURNEY-GOAL-ACTIVATION-001",
-      "requirement_text_sha256": "174e9b6570fa83a2b47c1150b56a9ebd89f919ece1b335d93e1766446cf8a3b4",
+      "requirement_text_sha256": "a3119417de6a4ad4f06f096ad3e1666f06b63406fd2f0859709ef7f9ac5059da",
       "source_path": "docs/canon/specifications/journeys/goal-creation-and-activation.md",
       "state_blueprint_ids": []
     },
@@ -2621,7 +2414,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "An offline Capture MUST use the same local validation, confirmation, commit, Receipt, replay, and recovery path as online use; optional reference assistance may be unavailable but cannot gate creation. Visual mapping records: UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-OFFLINE-CREATE.",
       "requirement_id": "JOURNEY-OFFLINE-CREATE-001",
-      "requirement_text_sha256": "8af096613fab3bdad6c9863923cb85d7ce8d9edc20debda81df7812fc77cfcc7",
+      "requirement_text_sha256": "15a4d1b77065841528f8202f7c3120d374e4a337797d13f93217a6636283cbc5",
       "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
       "state_blueprint_ids": []
     },
@@ -2634,7 +2427,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Recovery MUST preserve the last honest state and present non-shaming choices. Moving committed time, changing required work, altering a path, or affecting protected boundaries remains a non-durable proposal until materially confirmed; missed work never authorizes silent reflow. Visual mapping records: UX-JOURNEY-MISSED-RECOVERY, UX-OBJECT-RECOVERY-SEGMENT, UX-SCREEN-GOALS-RECOVERY, UX-STATE-VARIANT-GOALS-RECOVERY-BLOCKED, UX-STATE-VARIANT-GOALS-RECOVERY-LOCAL-STORE-DEGRADED, UX-STATE-VARIANT-GOALS-RECOVERY-NEEDS-ATTENTION, UX-STATE-VARIANT-GOALS-RECOVERY-OFFLINE-HEALTHY, UX-STATE-VARIANT-GOALS-RECOVERY-PARTIAL-SCHEDULE-FAILURE, UX-STATE-VARIANT-GOALS-RECOVERY-PROOF-TRANSFERRING, UX-STATE-VARIANT-GOALS-RECOVERY-RECOVERING, UX-STATE-VARIANT-GOALS-RECOVERY-SCHEDULE-CONFLICT, UX-STATE-VARIANT-GOALS-RECOVERY-WAITING, UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED.",
       "requirement_id": "JOURNEY-RECOVERY-001",
-      "requirement_text_sha256": "cd6e12d4ed265ea9ef88a35ab771f2306ba0d2a0d07c59377e3fb64972ff8d78",
+      "requirement_text_sha256": "7a27b1d4995bd5f789396c00a422637a7229b6024b8ce6c0008c97fc9236f1ab",
       "source_path": "docs/canon/specifications/journeys/missed-work-recovery.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-GOALS-RECOVERY-BLOCKED",
@@ -2669,7 +2462,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Search MUST resolve local canonical identities, then route Open, Act, or Inspect to the owning destination. Query, ranking, selection, and action preview are non-durable; material action commits only after canonical revalidation and confirmation, and inspection itself never mutates. Visual mapping records: UX-JOURNEY-SEARCH.",
       "requirement_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
-      "requirement_text_sha256": "0347f993154022cea22d6cc43c1617b0713553684aa4ccffa31492af4b73a235",
+      "requirement_text_sha256": "ad4d4b41892d93736a8adaabe489efcdea58a4d11588dbd2c7522d09a9001fcc",
       "source_path": "docs/canon/specifications/journeys/search-find-act-inspect.md",
       "state_blueprint_ids": []
     },
@@ -2678,7 +2471,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Search MUST accept one input, return immediate deterministic Find results, MAY progressively add an optional grounded Ask answer, present only owner-routed action proposals, hand creation intent to Capture, and keep Inspect in relevant context. Ask history stays session-local unless explicit user action routes a question, answer, proposal, or derived object to an identified canonical owner. The user MUST distinguish retrieved fact, inferred interpretation, and proposed change, and Ask unavailability MUST preserve a deterministic Find / Act / Inspect fallback. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK, UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER.",
       "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
-      "requirement_text_sha256": "adeef5dfe6ccf9a8b8266195dce5b2c33e8da2eb6f66db938b4d2bfb8bc9a877",
+      "requirement_text_sha256": "ee6b9ebaf287f0627232d321cd893dedaf5e8b5fab45e2a09234107eaa822540",
       "source_path": "docs/canon/specifications/journeys/search-find-ask-act-inspect.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
@@ -2695,7 +2488,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Closure MUST apply the Proof rule disclosed before the current work began. Required Proof blocks validated closure until user-approved evidence is attached; it cannot appear as a surprise, be graded, be replaced by an automatic Receipt, or be weakened during closure. A predeclared-rule edit applies only to future work because no cited owning law authorizes a current-closure override. Visual mapping records: UX-JOURNEY-CLOSURE-PROOF, UX-SCREEN-GOALS-CLOSURE, UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY.",
       "requirement_id": "JOURNEY-STEP-CLOSURE-001",
-      "requirement_text_sha256": "f2d94f64185a10ab62e3dc92da48d6747e20292cecdbc06887fff0f7277735bb",
+      "requirement_text_sha256": "1a676f7b0b3a53c7c573f74cc459db54aacfd4810046ec888cb5625ab6f1a6d7",
       "source_path": "docs/canon/specifications/journeys/closure-and-proof.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY"
@@ -2709,7 +2502,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Open step MUST only navigate to the selected canonical Step and cannot change execution state. Start now MUST issue a typed Start command that durably records Started execution through Event, Projection, Receipt, and Replay. Completion remains a later validated command, not an animation, timer expiry, Reminder acknowledgement, recommendation acceptance, or consequence of opening detail. Visual mapping records: UX-JOURNEY-STEP-EXECUTION, UX-SCREEN-TODAY-START-HERE, UX-STATE-VARIANT-TODAY-DETAIL-ACTIVE-EXECUTION, UX-STATE-VARIANT-TODAY-DETAIL-CLOSURE-REVIEW, UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY, UX-STATE-VARIANT-TODAY-DETAIL-VIEWING, UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION.",
       "requirement_id": "JOURNEY-STEP-START-COMPLETE-001",
-      "requirement_text_sha256": "1b945623d120dbdd7dbe509d000582c0f097dd35ef57470f26be7287a21f2eac",
+      "requirement_text_sha256": "4f94e24bcc8fb36a5af74bf11269cf8904f0f43b3ce6432fb20dde9fde6662a1",
       "source_path": "docs/canon/specifications/journeys/start-and-complete-step.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-TODAY-DETAIL-ACTIVE-EXECUTION",
@@ -2726,7 +2519,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Direct manipulation or its named alternative MUST produce a non-durable preview of conflicts, protected/fixed boundaries, affected objects, capacity, recurrence scope, and external effects. No drop gesture commits a material change without valid confirmation or an exact revocable rule. Visual mapping records: UX-JOURNEY-SCHEDULE-REFLOW.",
       "requirement_id": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
-      "requirement_text_sha256": "784b622842233da8a87e692e1252c7c78aa92777f2c099656e3f052d04a81763",
+      "requirement_text_sha256": "f554c132bd32daeb6f23912ab376f96d90d43137fab3250054d333537b3165d6",
       "source_path": "docs/canon/specifications/journeys/schedule-reflow.md",
       "state_blueprint_ids": []
     },
@@ -2748,7 +2541,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "The Constitution MUST own only stable product and engineering invariants. Owning specifications and standards refine those invariants without weakening them. Current source, tests, runtime logs, proof, and release evidence determine what is implemented or proven; they do not redefine intended product law. Linear owns execution, risk, acceptance work, and evidence links. Figma owns approved visual direction and visual evidence. Generated projections own navigation and analysis only. No subordinate artifact may acquire authority by repeating doctrine, and no implementation difference may be treated as a silent constitutional amendment. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "LAW-AUTHORITY-PRODUCT-DEFINITION-001",
-      "requirement_text_sha256": "5ad088710f4c793bbc582ab8bc4962492325ca1837e7c5cfb62abcada362542f",
+      "requirement_text_sha256": "1e530b7ea97f44e02bbcd630a0b2d4eac5616be539c4ea9bbb116c0af0a8188f",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -2757,7 +2550,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Any reproducible path that can silently discard accepted, unsynced, unexported, or unrestorable canonical user data MUST be classified P0 Red and MUST block release until repaired and proven. Documentation, an Accepted Yellow label, or a successful happy-path build cannot close required data-safety scope. The owning work must provide executable failure, rollback, migration, and recovery evidence or remain explicitly incomplete. This law establishes a release-blocking predicate; it does not assert that such a path currently exists or that current release status is Red or Green. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "LAW-DATA-LOSS-STOP-SHIP-001",
-      "requirement_text_sha256": "e200e26b95eeca0280f61ce75b1fa7528b150aa04315932d95911cb23867537a",
+      "requirement_text_sha256": "288e643397025c419b5c0bf6f87a99818836d91f0d35b847401ff30d01704bf2",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -2870,7 +2663,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Ambitions MUST remain fully useful for core value without account sign-in and without network access. Permission denial, unavailable public references, sign-out, or service outage must degrade optional features rather than block local planning and execution. “Offline core” is a required product behavior, not a release claim; current evidence must separately prove any implementation or readiness assertion. Visual mapping records: UX-SCREEN-ACCOUNT-BOUNDARY, UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH.",
       "requirement_id": "LAW-OFFLINE-NO-ACCOUNT-001",
-      "requirement_text_sha256": "a7e8bef24f07c70d4c2e67d8e863f65f782eca65a1463d7855bb7edcc3efaf75",
+      "requirement_text_sha256": "fc7bb575811c08e777b5af7da26cb4ca0a0d84e1b21557e42eba97078dc9644a",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -2965,7 +2758,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Extension handoffs MUST preserve command identity, minimum data, timeout behavior, local authority, and safe fallback. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "LIFECYCLE-004",
-      "requirement_text_sha256": "4525d0aa302955696194185aead79aee69563ac516246516ef041dd826eb6c11",
+      "requirement_text_sha256": "7d353047fbf9ba3d1fda0aba0ff0403d93f68dc6805134aa72ce497530fc43bd",
       "source_path": "docs/canon/standards/native-ios-engineering.md",
       "state_blueprint_ids": []
     },
@@ -3007,7 +2800,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Localized store content MUST preserve the same product, privacy, accessibility, evidence, and claim boundaries as the app. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "LOCALIZATION-004",
-      "requirement_text_sha256": "a32190c777b4d00befb4f7fc099513d6571d22bb461bb5d2e31f41a5bbeaf697",
+      "requirement_text_sha256": "a75017a75f1f0c2492a5fdd8a448c20a36cd973263f2e54ef55ab81011a8f42b",
       "source_path": "docs/canon/standards/copy-and-state-language.md",
       "state_blueprint_ids": []
     },
@@ -3198,7 +2991,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "The launch bar MUST be an operating orchestration loop, not a collection of visible destinations or source-present models. Ambitions must safely accept intent, preserve it, establish a useful path, fit an actionable next step into time reality, recover from change, and retain proof and learning. If a required part is absent, unproven, or fixture-only, the product-completeness claim remains below Green. Canon may require the bar without pretending current implementation has reached it. Visual mapping records: UX-JOURNEY-BACKUP-RESTORE, UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-EXTERNAL-CALENDAR, UX-JOURNEY-FIRST-USE, UX-JOURNEY-GOAL-ACTIVATION, UX-JOURNEY-MISSED-RECOVERY, UX-JOURNEY-OFFLINE-CREATE, UX-JOURNEY-SAVED-FOR-LATER, UX-JOURNEY-SCHEDULE-REFLOW, UX-JOURNEY-SEARCH, UX-JOURNEY-STEP-EXECUTION, UX-SCREEN-APP-LAUNCH-GATE, UX-SCREEN-TODAY-START-HERE.",
       "requirement_id": "MISSION-LAUNCH-BAR-001",
-      "requirement_text_sha256": "9f780d195b8934b411c4bac5203932effe3d58df6f7f474fe53e4ae6c74e2f6d",
+      "requirement_text_sha256": "7827c8c9abab3fe322f9381ed28ffa319816569f6da7031e65cc9db414d27d48",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -3396,7 +3189,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Ambitions succeeds when the user can see a meaningful future, understand the path, start what fits, recover when life changes, and retain evidence that progress still counts. Success is not measured constitutionally by task count, schedule density, engagement, streak, model usage, or account conversion. Product metrics may support operations, but they cannot replace the human outcome or pressure the user into behavior that conflicts with reality. Visual mapping records: UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-MISSED-RECOVERY, UX-SCREEN-GOALS-ROOT, UX-SCREEN-TIME-DAY, UX-SCREEN-TODAY-ROOT, UX-SCREEN-TRUST-RECEIPT, UX-SCREEN-YOU-ROOT.",
       "requirement_id": "MISSION-SUCCESS-001",
-      "requirement_text_sha256": "e2379e6b94f84fa1b337691a204f2aaa90233acb550550356638e8ca9ad5586a",
+      "requirement_text_sha256": "a941e5867a2d53ac18058bc45a8a1b2215044ec60815d94d7a5568b5be051cdf",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -3435,7 +3228,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "An Attachment MUST be one durable local media, file, or link record associated with an object, draft, or Proof through explicit relationships. It is export-controlled, independently inspectable, and deletable without becoming a copy of its parent. Visual mapping records: UX-OBJECT-ATTACHMENT, UX-SCREEN-CAPTURE-ATTACHMENT, UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-READY.",
       "requirement_id": "OBJ-ATTACHMENT-IDENTITY-001",
-      "requirement_text_sha256": "39ae3adfefb191d2a87ad32d9ad64a3e042c8682876daea65b68ddd4eb0b455b",
+      "requirement_text_sha256": "a82f784ced4715218ae99d4890490c01f4a4cb62db651d7b9d2011d3b9dbb5df",
       "source_path": "docs/canon/specifications/objects/attachment.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-READY"
@@ -3506,7 +3299,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Saved-for-Later Draft MUST be one durable uncommitted-input identity preserving original Capture text, attachments, source, inferred route, uncertainty, and recovery state. It remains explicitly reachable through Search/contextual review and never becomes a root Inbox, Today backlog, notes feed, or generic destination. Visual mapping records: UX-OBJECT-SAVED-FOR-LATER-DRAFT, UX-SCREEN-CAPTURE-SAVED-FOR-LATER, UX-STATE-VARIANT-CAPTURE-SAVED-FOR-LATER-SAVED-FOR-LATER.",
       "requirement_id": "OBJ-CAPTURE-DRAFT-IDENTITY-001",
-      "requirement_text_sha256": "5fe1c41defc6097e5664fb6e5ce0890f897fcc30e6f18088ac312e398f72bfc6",
+      "requirement_text_sha256": "2d13903f0afb6d45411e2aeefe5f024d59549667d57fae9eb26d0982d0a5d14c",
       "source_path": "docs/canon/specifications/objects/saved-for-later-draft.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-CAPTURE-SAVED-FOR-LATER-SAVED-FOR-LATER"
@@ -3520,7 +3313,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Closure MUST be one honest outcome record for a Step or Goal, using Completed, Not needed, Still counts, or Closed with risk as applicable, with optional reflection/Proof and the automatic Receipt of the resulting mutation kept separate. Visual mapping records: UX-OBJECT-CLOSURE, UX-SCREEN-GOALS-CLOSURE.",
       "requirement_id": "OBJ-CLOSURE-IDENTITY-001",
-      "requirement_text_sha256": "ca82fdc124d180c9ce68aed50e8ca67fa8e3eade2e9b344186a3b0d201643a2f",
+      "requirement_text_sha256": "b1c33c3004b80ca3fddf7275a4c1b5da33ad4f42f29badac49d64f45fea13538",
       "source_path": "docs/canon/specifications/objects/closure.md",
       "state_blueprint_ids": []
     },
@@ -3639,7 +3432,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A timed Event MUST store whether it is anchored to an event zone, floating local time, or following the device zone; an all-day Event remains date-based. Display uses the active view zone while Detail exposes the stored zone and original time. Zone changes preview results, and DST ambiguity or missing local time uses system calendar APIs and a Receipt for any visible change. Visual mapping records: UX-OBJECT-EVENT, UX-SCREEN-TIME-DETAIL.",
       "requirement_id": "OBJ-EVENT-TIME-ZONE-001",
-      "requirement_text_sha256": "ffc764cf4bcd6ae96b1fea8810da6bc8cd2a35aaabf11f3e928ef57c57998d89",
+      "requirement_text_sha256": "c8808d5636d3be9924d8b44f3bad933d42fdd436b8044e9522efe38cec82e55b",
       "source_path": "docs/canon/specifications/objects/event.md",
       "state_blueprint_ids": []
     },
@@ -3688,7 +3481,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "If pathing cannot complete, Ambitions MUST durably retain a provisional Goal shell and original intent, identify the missing clarification, and allow manual continuation, retry, or safe reversal without fabricating a finished path. Visual mapping records: UX-JOURNEY-GOAL-ACTIVATION, UX-OBJECT-GOAL, UX-SCREEN-GOALS-DETAIL.",
       "requirement_id": "OBJ-GOAL-CREATION-FAILURE-001",
-      "requirement_text_sha256": "175774cc24b9efe787533d50f73caf4ced366accbd49f86b17590c23802346ca",
+      "requirement_text_sha256": "713be72f89e042baa618a0f8ba421c4abc9e62873d8d1bf42ebf9317f85d9be1",
       "source_path": "docs/canon/specifications/objects/goal.md",
       "state_blueprint_ids": []
     },
@@ -3772,7 +3565,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Goal Path MUST feel like a personal, alive, inspectable proof trail with calm forward motion through action, recovery, schedule reality, and accumulated proof. It MUST NOT use quest, points, levels, badges, streak anxiety, childish progression, or other game-pressure framing. Visual mapping records: UX-OBJECT-GOAL-PATH, UX-SCREEN-GOALS-PATH.",
       "requirement_id": "OBJ-GOAL-PATH-EMOTIONAL-POSTURE-001",
-      "requirement_text_sha256": "45f40cfbf1c7fb199e50919dfb18d98f244fb611fdb53df2852e1381dc8f9f46",
+      "requirement_text_sha256": "46178fc2c6db86c38c928c41880b5b1a68df7d0c70dec5b34d26eabc1cd89a5d",
       "source_path": "docs/canon/specifications/objects/goal-path.md",
       "state_blueprint_ids": []
     },
@@ -3852,7 +3645,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A History Event MUST be one immutable before-and-after mutation fact linked to affected object/relationship, actor, timestamp/order, command/idempotency key, source, reversal/correction, Receipt, and replay/conflict metadata. Visual mapping records: UX-OBJECT-HISTORY-EVENT, UX-SCREEN-TRUST-DEEP.",
       "requirement_id": "OBJ-HISTORY-EVENT-IDENTITY-001",
-      "requirement_text_sha256": "644b711401bf8d68c0232aa3490ac4ca949eec747fcfe08e10574e61b08b4c31",
+      "requirement_text_sha256": "9d8badc8ba753af532512b4e2bb2e4e81a12966c4e880917a05fb1db81f8b148",
       "source_path": "docs/canon/specifications/objects/history-event.md",
       "state_blueprint_ids": []
     },
@@ -3864,7 +3657,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "An Import / Diff Record MUST be one durable review identity linking an external source item/fingerprint, privacy-filtered fact, native candidate or linked object, field-level diff, user decision, schedule/capacity impact, Source Reference, Receipt, and rollback. Its state is unreviewed, imported, linked, kept external, ignored, or replaced with lineage. Visual mapping records: UX-OBJECT-IMPORT-DIFF-RECORD, UX-SCREEN-TIME-IMPORT.",
       "requirement_id": "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
-      "requirement_text_sha256": "3485de94cd5f96d01cd2f1e137e582d5674037f760eeca4e6722f2f0c6f7461d",
+      "requirement_text_sha256": "7546b6e5b48742fbbb12681915a4c0d21ac2af330fca9cf26a0f540ca7e027e2",
       "source_path": "docs/canon/specifications/objects/import-diff-record.md",
       "state_blueprint_ids": []
     },
@@ -3888,7 +3681,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Ambitions MAY offer suggested Life Areas as a starting point. The user can rename, hide, reorder, replace, or remove every suggestion; no default silently becomes identity, planning priority, or permanent taxonomy. Visual mapping records: UX-OBJECT-LIFE-AREA, UX-SCREEN-GOALS-LIFE-AREA.",
       "requirement_id": "OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001",
-      "requirement_text_sha256": "dc9dca78bcf8b33608a8722cf886ad1c43aa587eaa5364066cff4a6a4d487312",
+      "requirement_text_sha256": "4d9ff7522f3b102327b234fe7e7b76127bb0c501efecb246d099cc6fb86e3789",
       "source_path": "docs/canon/specifications/objects/life-area.md",
       "state_blueprint_ids": []
     },
@@ -4002,7 +3795,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Note is one durable non-executable information object optionally linked to a Life Area, Goal, source, or attachments. It MUST NOT gain execution, capacity, recurrence, due-date, attendee, alert, completion, or Goal Path Step semantics until explicit receipt-backed promotion. Visual mapping records: UX-OBJECT-NOTE, UX-SCREEN-SEARCH-RESULTS.",
       "requirement_id": "OBJ-NOTE-IDENTITY-001",
-      "requirement_text_sha256": "a974ef54816eef44884febb0bbf79a158f0f468b2e821ae8bdc76b46720df89a",
+      "requirement_text_sha256": "c7f280c771f437f72a5cb15fe879347d4dd8be274d165840ec357c23c5b7af00",
       "source_path": "docs/canon/specifications/objects/note.md",
       "state_blueprint_ids": []
     },
@@ -4016,7 +3809,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Notification Rule MUST be one editable local-first alert-behavior identity linking a canonical object or object class, trigger, authorization boundary, quiet-hour behavior, privacy presentation, and fallback. It never completes work or replaces Reminder identity. Visual mapping records: UX-OBJECT-NOTIFICATION-RULE, UX-SCREEN-PERMISSIONS-NOTIFICATIONS, UX-SCREEN-YOU-NOTIFICATIONS, UX-SCREEN-YOU-SETTINGS.",
       "requirement_id": "OBJ-NOTIFICATION-RULE-IDENTITY-001",
-      "requirement_text_sha256": "923c2ac2812095b18f0f35f4bd0f5a12baef0b8d7ee7a74c0ccf2269d1b486bc",
+      "requirement_text_sha256": "713f351d19a85c22da2a55b1d38988084ee00a70caa9706dcffc3de325286a06",
       "source_path": "docs/canon/specifications/objects/notification-rule.md",
       "state_blueprint_ids": []
     },
@@ -4028,7 +3821,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Proof MUST be one user-approved evidence or reflection object linked to a Step, Goal, Closure, or Life Capital context. It works on the honor system, is never graded by strength, and remains distinct from the automatic Receipt that attests to a system mutation. Visual mapping records: UX-OBJECT-PROOF, UX-SCREEN-TRUST-DEEP, UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY.",
       "requirement_id": "OBJ-PROOF-IDENTITY-001",
-      "requirement_text_sha256": "369b7cdf0e3a35e295e0a5557088ca4daf714180324de2497011f408b77f9ec4",
+      "requirement_text_sha256": "ca042968d0a7be7ac056bd91a4f9bbb6dac408defa61c5a0022de36a6a48ba52",
       "source_path": "docs/canon/specifications/objects/proof.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY"
@@ -4042,7 +3835,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Receipt MUST be one durable, searchable, user-readable automatic record of a meaningful mutation, linked to command, accepted/rejected result, affected objects, History Events, source/actor, consequence, external-effect status, replay, and rollback. It attests to system behavior and remains separate from user Proof. Visual mapping records: UX-OBJECT-RECEIPT, UX-SCREEN-TRUST-RECEIPT.",
       "requirement_id": "OBJ-RECEIPT-IDENTITY-001",
-      "requirement_text_sha256": "19ca8719d76b30489a5e07474f37c67ba3ed7ec59bece4a6b2bb8851129d41b8",
+      "requirement_text_sha256": "aca6dd0ca363f0d19942ce8431a91730211c6f070cb875f1ea0c07a795365cd5",
       "source_path": "docs/canon/specifications/objects/receipt.md",
       "state_blueprint_ids": []
     },
@@ -4055,7 +3848,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Recovery Segment MUST be one non-shaming inspectable path segment linked to a Goal Path, affected missed/blocked Step or reality change, recommendation with rationale, user choice, accepted path/placement effects, Receipt, and rollback. Visual mapping records: UX-JOURNEY-MISSED-RECOVERY, UX-OBJECT-RECOVERY-SEGMENT, UX-SCREEN-GOALS-RECOVERY, UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED.",
       "requirement_id": "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
-      "requirement_text_sha256": "1b23606066010f16b6c916505ff9c0f1bdf46d279ecff94ee8528329e957d036",
+      "requirement_text_sha256": "7f2387e4a3e40170d53c4bec80364b6e6e9517ce926fede5d1a07c4dc56bb49c",
       "source_path": "docs/canon/specifications/objects/recovery-segment.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED"
@@ -4093,7 +3886,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Reminder is one notification intent that may link to a Step, Event, or Goal and may carry time/location triggers. It MUST NOT consume capacity independently or complete user work; linkage preserves the capacity and completion authority of the linked object. Visual mapping records: UX-OBJECT-REMINDER, UX-SCREEN-TIME-DETAIL.",
       "requirement_id": "OBJ-REMINDER-IDENTITY-001",
-      "requirement_text_sha256": "365cb4b5b79b9fdfb6bb5157a9b8406e4e4c82c7b902c92e97bd7dea8fa788a3",
+      "requirement_text_sha256": "9f5b07a9274d5a2ee536b78a57ca518c45159d96553ac0bd2a82a59e1fc1bc5a",
       "source_path": "docs/canon/specifications/objects/reminder.md",
       "state_blueprint_ids": []
     },
@@ -4178,7 +3971,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Source Reference MUST be one provenance record for an imported, shared, captured, or approved public-reference input, linked to its native candidate/object and available for inspection after native import/link. It never makes an external system the private-graph authority. Visual mapping records: UX-OBJECT-SOURCE-REFERENCE, UX-SCREEN-TRUST-DEEP.",
       "requirement_id": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
-      "requirement_text_sha256": "34f688da18ca6f0e3a512b8ac2a4b425102637b606cce5c015eb34d18adaba28",
+      "requirement_text_sha256": "fefc393643bff13c0911e70d184428a4b49a5ba0dcaece047d4eed36f2ff02f9",
       "source_path": "docs/canon/specifications/objects/source-reference.md",
       "state_blueprint_ids": []
     },
@@ -4215,7 +4008,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A Step MAY carry Flagged or Urgent metadata and expose it contextually across Today, Goals, Time, and Search. This metadata does not create a root, score, streak, rank, shame signal, or automatic priority override; presentation remains legible and subordinate to the Step's actual constraints and user choices. Visual mapping records: UX-OBJECT-STEP, UX-SCREEN-TODAY-START-HERE.",
       "requirement_id": "OBJ-STEP-URGENCY-METADATA-001",
-      "requirement_text_sha256": "d68c7f7e1d2d0efddf63caa53ca2dc6af90121558f804af55dbcbac5df90db88",
+      "requirement_text_sha256": "7d8f1b7efe152bf77624241862c6368aa90788d16d0e0805aa4f7ebf60750fd4",
       "source_path": "docs/canon/specifications/objects/step.md",
       "state_blueprint_ids": []
     },
@@ -4389,7 +4182,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Every material operation MUST resolve to one owner-approved budget record or a structured calibration gap that blocks an unsupported performance claim. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "PERF-001",
-      "requirement_text_sha256": "ce0307a918c9b35d86db81a5b5d103e85ad0ea9e83cb4e0f28fd05d76b094e31",
+      "requirement_text_sha256": "3eff434b7168be1e7c80816d5e4f086a0ecea842894c5eebab7563bd4912c46d",
       "source_path": "docs/canon/standards/performance-and-energy.md",
       "state_blueprint_ids": []
     },
@@ -4407,7 +4200,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Unmeasured language such as fast, instant, efficient, lightweight, or device-ready MUST NOT support Green; evidence must bind exact commit, environment, tool, fixture scale, samples, and result. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "PERF-003",
-      "requirement_text_sha256": "b589d76f3e6e878f02d15fb8e570ce413274d607435c3592a7e7ab4cd15a70e8",
+      "requirement_text_sha256": "221bbadac5dbd4b027fb5bddbb8d1e58397d122f1c938b2ce8d4c7bcd66f44bb",
       "source_path": "docs/canon/standards/performance-and-energy.md",
       "state_blueprint_ids": []
     },
@@ -4416,7 +4209,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "A required budget regression beyond declared tolerance MUST block the affected claim until repaired or explicitly amended with evidence and owner approval. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "PERF-004",
-      "requirement_text_sha256": "9d135b20de494f6df99cc112d1ff8b7a6eb63df20a4b7669fd8071a0dcf906a4",
+      "requirement_text_sha256": "10d28b6e73c08d0079beebfec56675b74b893513b8d3ef6a38fa4ec40fefd250",
       "source_path": "docs/canon/standards/performance-and-energy.md",
       "state_blueprint_ids": []
     },
@@ -4443,7 +4236,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Time MUST target first-class replacement of ordinary personal calendar planning, but Ambitions MUST NOT claim replacement or deprecate external fallback until every calendar-grade behavior, accessibility, privacy, migration, performance, and proof obligation is current and satisfied. Visual mapping records: UX-SCREEN-TIME-DAY, UX-SCREEN-TIME-DEGRADED, UX-SCREEN-TIME-DETAIL, UX-SCREEN-TIME-IMPORT, UX-SCREEN-TIME-LIST, UX-SCREEN-TIME-MONTH, UX-SCREEN-TIME-WEEK, UX-SCREEN-TIME-YEAR.",
       "requirement_id": "PLATFORM-CALENDAR-REPLACEMENT-001",
-      "requirement_text_sha256": "f8df4b39c0fb3b1721c99452089117ddf6c7aa846125f8c795d3d10fa04ddba6",
+      "requirement_text_sha256": "21a3954e075f243e7202ea775eb56ae6c615949fa258c08e2849bd7592b62754",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -4467,7 +4260,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Ambitions MUST remain fully usable locally without an account or network; Ambitions Account and R2 MUST NOT store the private graph, and user-owned CloudKit continuity MUST remain disabled until its explicit privacy, conflict, recovery, migration, and proof requirements are approved and satisfied. Visual mapping records: UX-SCREEN-ACCOUNT-BOUNDARY, UX-SCREEN-YOU-CONTINUITY-CONTROL, UX-SCREEN-YOU-DATA.",
       "requirement_id": "PRIVACY-CLOUDKIT-CONTINUITY-001",
-      "requirement_text_sha256": "3ebdf246bb770afa70efb22c10296e42071c31b0f93f9e320092dbf8e746fa12",
+      "requirement_text_sha256": "288fa2eb629856af7079fe8cad7f3203d8e30e53bc769a52dc867bb8702e81eb",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -4503,7 +4296,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Figma visual authority MUST distinguish approved direction from approved final package and implementation proof; node 250:104 MUST NOT be treated as the final target when successor package node 257:93 applies. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "PROOF-FIGMA-AUTHORITY-001",
-      "requirement_text_sha256": "29cf18b0793aca5b51bdd4db6c6c768e9f51a6a14c4e353c8881fa9afe0fc81f",
+      "requirement_text_sha256": "488ce70005d69d106357776304d1e07fbaa0176c424aadb6b182acae4eb8405f",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -4512,7 +4305,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "A release candidate MUST bind one commit, generated project state, dependency locks, build number, configuration, signing identity, environments, and evidence manifest. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RELEASE-001",
-      "requirement_text_sha256": "f1742af7b2a9e1111e42e1e944185720ff398d5c9be5a8d7e3be2107c8313985",
+      "requirement_text_sha256": "7e191b331cee8cffe1b7503a978fac9aaae8d55db9c9daafb621f1c0e81df0c9",
       "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
@@ -4521,7 +4314,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Release review MUST cover build, tests, migration, accessibility, privacy manifest and required-reason APIs, security, performance, device matrix, extensions, account/entitlement, archive/export, store metadata/URLs/notes, and rollback. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RELEASE-002",
-      "requirement_text_sha256": "f97e8ebff4acf868c496aaa187e28de3b06cf2ef77b9365597fa1d536335896f",
+      "requirement_text_sha256": "11b6d51611bcfebba20d7722c082696725b01c0f767fe84d6a8cba508d92dc47",
       "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
@@ -4530,16 +4323,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Distribution MUST define staged rollout, monitoring, stop criteria, rollback/forward-fix, migration constraints, and emergency path. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RELEASE-003",
-      "requirement_text_sha256": "b15c2fb68625f53fa3402f1b613fee97a8902c902662260ac949adb5b4e0da12",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "TestFlight, App Store, privacy, accessibility, performance, CloudKit, R2, account, device, Product, Runtime, or Visual readiness MUST NOT be claimed without exact current evidence and required independent/owner approval. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "RELEASE-004",
-      "requirement_text_sha256": "bd346759af4669654ae5aedcf16915db1c0aabacbf3ef50244accb67b106ac15",
+      "requirement_text_sha256": "5008a680ad029bbf9f53f5337ced752ef68e5ea2731f2eefbf58aaee5ed8b88a",
       "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
@@ -4548,7 +4332,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Failures MUST have explicit severity, user consequence, containment, recovery, owner, evidence, and stop-ship posture. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RELIABILITY-001",
-      "requirement_text_sha256": "0c2b39f0981f2df90deccfddcf10249b89d6a4ab8e756b50dc27e0f0aace09fc",
+      "requirement_text_sha256": "d11ce963e0867c910b05e9b50037846b2c23a86b1599f65f7f61da09c64c6c08",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -4593,7 +4377,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Canonical repair MUST provide preview, backup or rollback protection, explicit commit, Receipt/History, and post-repair invariant proof. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RELIABILITY-006",
-      "requirement_text_sha256": "21a71909943c585404461eecde5720928d21a97049bc8ff079c93460e127132d",
+      "requirement_text_sha256": "ed23796142e598280baf9be8df47ac5faa39cfcb7aed5f0f4d205650dbbe98ad",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -4621,7 +4405,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Canonical private-data mutation and storage authority MUST live under Core/LocalRuntimeOS; Core/Persistence MUST NOT gain new authority and MAY remain only as bounded migration scaffolding with a removal target. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "RUNTIME-SOURCE-OWNER-001",
-      "requirement_text_sha256": "7cc27b1249813304061f990d6a0a9f26dbe42dc528a218d4ce6e356675ba569a",
+      "requirement_text_sha256": "8497549da689ace19792e880671feb1e1562378a7bf4fed14ac85f24eafab8f3",
       "source_path": "docs/canon/CONSTITUTION.md",
       "state_blueprint_ids": []
     },
@@ -5031,7 +4815,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual review MUST reference stable external IDs and separate approved package authority from implementation proof. Owner-approved VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "9f2fb91768a51462333fb4484ebe0093a744e57e9ecd77102d29e289803bea91",
+      "requirement_text_sha256": "7f4be50df0240080d6511ebc9bc089cb16a908d5742ae47d2b41e77c9e27ebc8",
       "source_path": "docs/canon/specifications/global/capture.md",
       "state_blueprint_ids": []
     },
@@ -5043,7 +4827,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Every motion cue MUST have equivalent state text, VoiceOver announcement where useful, predictable focus, non-color encoding, and Reduce Motion behavior. Drag, resize, path travel, ghost preview, object transform, and schedule movement MUST have explicit non-spatial controls and verbal consequence summaries. Haptics may reinforce but never carry meaning alone. Visual mapping records: UX-CROSS-MOTION-HAPTICS, UX-CROSS-REDUCE-MOTION.",
       "requirement_id": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
-      "requirement_text_sha256": "b87868c4d70564da7494dbf52154d2a070940a69179e55ff9e899efda9bc976d",
+      "requirement_text_sha256": "61d12d1c68971552ce24807caa03f9b1cfcc1e3dfc7b2c671bb5de72fcae1de9",
       "source_path": "docs/canon/specifications/global/motion.md",
       "state_blueprint_ids": []
     },
@@ -5126,7 +4910,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Ask and Search-to-Capture handoff states and commands MUST remain future-gated and non-authorizing. A posture transition is invalid unless a closed, base-owned evidence registry and verifier is already merged; every affected command has nonempty exact command dependency bindings to that base-owned evidence; current source and runtime proof, no-egress and privacy proof, grounding and deterministic-fallback proof, accessibility and visual proof, and performance proof are all current for the same canon revision and source revision; and the owner has explicitly approved the exact final Figma frame IDs. Intended canon, state mappings, command metadata, generated projections, unverified dependency text, or visual candidates MUST NOT satisfy this gate. The Search amendment creates no evidence registry, verifier, dependency kind, authorization policy, or Task 24/25 implementation. Until the base-owned mechanism and every named proof class exist and pass, deterministic Find, Act, and Inspect remain the only active Search command contract. This current-implementation authorization gate is nonvisual and maps no visual record.",
       "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
-      "requirement_text_sha256": "6391f864a6f1ae109e97002afce8f4b8dd96c47f849297c65bc51992bf2f83ce",
+      "requirement_text_sha256": "83f84a080b28d4bbb16500feb1e1032077c04d0c62ec4ff09817a778e3448487",
       "source_path": "docs/canon/specifications/global/search.md",
       "state_blueprint_ids": []
     },
@@ -5135,7 +4919,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-authorized source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract authorizes no current implementation behavior. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK, UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER, UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS.",
       "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
-      "requirement_text_sha256": "decbc0a7d96ce11c166ff01f242cbb79f054772365cb8a3ab85aa0616444dd96",
+      "requirement_text_sha256": "e4f53d2c92688603e6e26c57ac11492666e0ba502d1848143e240031b007b494",
       "source_path": "docs/canon/specifications/global/search.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
@@ -5365,7 +5149,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Owner-approved VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "b73b568a1f505bfef27f6bd36f08aad4684ff71503d720cd76dc5bd1cfa8c87a",
+      "requirement_text_sha256": "36f2cfc33115d0ebaf408f9df755ec28d67eb3ecab918131e2caf80b4433cfb0",
       "source_path": "docs/canon/specifications/global/search.md",
       "state_blueprint_ids": []
     },
@@ -5531,7 +5315,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual references MUST use stable external IDs and distinguish approved direction, successor final package, implementation proof, and the evidence being inspected. `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` remains direction only; owner-approved VSP-07 successor package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` is the contextual Trust target. Neither node proves SwiftUI parity, accessibility, device/runtime behavior, Visual Green, or release status. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "3197c49284a6a9c8cfa80eee3b693d580386379e241cfd94f8cf19a1d287a648",
+      "requirement_text_sha256": "e8c75a9264248d7077d4a2950813c6992be1f8c7e0e9d71b5edf67627490d83c",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
       "state_blueprint_ids": []
     },
@@ -5879,7 +5663,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual mapping MUST use stable external IDs and distinguish approved design target from implementation proof. Owner-approved VSP-03 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` is the Goals visual target. Candidate naming does not weaken the durable owner approval, and approval does not prove SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "c0ef31ac6e6e0586999ad0f3c21e70b73b6ecacf4aa9676e0859b4e4bce8e593",
+      "requirement_text_sha256": "d12b11b2d712218836e0274f7cdb9f168c8d597eb5e1052312978fafdcee5822",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
       "state_blueprint_ids": []
     },
@@ -6284,7 +6068,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual authority MUST use stable external IDs and keep approved package authority and implementation evidence distinct. Owner-approved VSP-04 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` is the Time visual target. Candidate naming does not weaken its durable owner approval. The package does not prove calendar parity, direct-manipulation behavior, SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "d9ebfdadcd4c1a92b53150baab6be705bce4c2fe75efc32e97d77a10efe0b965",
+      "requirement_text_sha256": "36c2cad8c6f36c76a221ab2416b0d898c26054fc43d8ee107ba11d7b43b5feca",
       "source_path": "docs/canon/specifications/surfaces/time.md",
       "state_blueprint_ids": []
     },
@@ -6521,7 +6305,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Owner-approved VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "34b29c9226341f1b8d1381c2a826f832b2fd1c5d7c851f52ec1e7b0c4515ff9f",
+      "requirement_text_sha256": "49aec2099838c48caac22838f4dacc2062cd86825e16df248ec833d2455e7722",
       "source_path": "docs/canon/specifications/surfaces/today.md",
       "state_blueprint_ids": []
     },
@@ -6661,7 +6445,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "`You → Account & Sync → Plan & Purchases` MUST expose `View Plans`, `Purchase`, `Restore Purchases`, `Check Again`, `Review Account`, `Manage Subscription`, and `Done`. Visual mapping records: UX-STATE-VARIANT-YOU-ENTITLEMENT-ACTIVE, UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED, UX-STATE-VARIANT-YOU-ENTITLEMENT-GRACE, UX-STATE-VARIANT-YOU-ENTITLEMENT-MISMATCH, UX-STATE-VARIANT-YOU-ENTITLEMENT-OFFLINE-CACHED, UX-STATE-VARIANT-YOU-ENTITLEMENT-RESTORED, UX-STATE-VARIANT-YOU-ENTITLEMENT-RETRY, UX-STATE-VARIANT-YOU-ENTITLEMENT-REVOKED, UX-STATE-VARIANT-YOU-ENTITLEMENT-SUPPORTED-SHARING, UX-STATE-VARIANT-YOU-ENTITLEMENT-TRIAL, UX-STATE-VARIANT-YOU-ENTITLEMENT-UNKNOWN.",
       "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
-      "requirement_text_sha256": "5cfe83108c7dd9eb4c4587b5d8223002a71762d923b7e2976cca661d65b2b4c7",
+      "requirement_text_sha256": "b04f95def97a48b73ee2e6b20c259bfe76108cf624fc8bceab407da166ad66b1",
       "source_path": "docs/canon/specifications/surfaces/you.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-YOU-ENTITLEMENT-ACTIVE",
@@ -6850,7 +6634,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Owner-approved VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
-      "requirement_text_sha256": "05295ffdbe53561f65f60e49539dd59451a6f3001d3badc77c68199d0716bc46",
+      "requirement_text_sha256": "f9c7e35dde0c949b6956e8583df1f01167b8ce92d2a4a2fd239395f1148faae8",
       "source_path": "docs/canon/specifications/surfaces/you.md",
       "state_blueprint_ids": []
     },
@@ -6859,38 +6643,135 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Canon, source presence, unit tests, or screenshots alone MUST NOT be reported as Accessibility Green; current exact-scope evidence and required independent review are mandatory. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "STANDARD-ACCEPTANCE-ACCESSIBILITY-001",
-      "requirement_text_sha256": "32dfa7419e58d5326d975def9f886031023e38dbce491fdeb3e4a9bc853e8df8",
+      "requirement_text_sha256": "865a3e3c149502b28b45508c044c142c00f03bbb4d6f55112016ce1e6839091a",
       "source_path": "docs/canon/standards/accessibility.md",
       "state_blueprint_ids": []
     },
     {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Build acceptance MUST bind the exact commit, generated project state, configuration, command, result, readable logs, and unexpected-failure count. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-BUILD-001",
-      "requirement_text_sha256": "7939ac838e49dde80e7acc34780e1c4917688f21b802a68af2a5428da5972428",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Documentation acceptance MUST prove authority consistency, exact diffs, relevant checks, and clean patch state while remaining below implementation and release claims. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-DOCS-001",
-      "requirement_text_sha256": "cf81b8f2fd201d2ea211a38148eb9d3316046493f2df91dfc234db6dbd2b1d7c",
-      "source_path": "docs/canon/standards/validation-and-release.md",
+      "blueprint_ids": [
+        "UX-CROSS-SWIFTUI-ANATOMY"
+      ],
+      "disposition": "visual_mapping_required",
+      "rationale": "Spacing and corner treatment MUST express grouping, containment, hierarchy, and action semantics through approved tokens rather than decorative inconsistency. Visual mapping records: UX-CROSS-SWIFTUI-ANATOMY.",
+      "requirement_id": "STANDARD-SPACING-CORNERS-001",
+      "requirement_text_sha256": "d179cc0e1ea32cf5188fd0db7f9f8877755b12ccb721dc15a11b96a0d2970139",
+      "source_path": "docs/canon/standards/swiftui-and-design-system.md",
       "state_blueprint_ids": []
     },
     {
       "blueprint_ids": [
-        "UX-SCREEN-APP-SHELL-DRILLDOWN",
-        "UX-SCREEN-APP-SHELL-ROOT",
-        "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE"
+        "UX-CROSS-DYNAMIC-TYPE",
+        "UX-CROSS-SWIFTUI-ANATOMY"
       ],
       "disposition": "visual_mapping_required",
-      "rationale": "IA acceptance MUST prove exactly Today, Goals, Time, You roots; Capture global composition; Motion behavior; Trust inspection; correct routing/restoration; and no legacy root authority. Visual mapping records: UX-SCREEN-APP-SHELL-DRILLDOWN, UX-SCREEN-APP-SHELL-ROOT, UX-SCREEN-APP-SHELL-SEARCH-CAPTURE.",
-      "requirement_id": "STANDARD-ACCEPTANCE-IA-001",
-      "requirement_text_sha256": "791ade4ee149fa939c8150ececbfe7da1ceaf39b166f6a028afaa532cf717965",
+      "rationale": "Typography MUST use semantic roles, reflow at accessibility sizes, preserve hierarchy without fixed-height clipping, and keep first-viewport copy within the owning surface's approved information budget. Visual mapping records: UX-CROSS-DYNAMIC-TYPE, UX-CROSS-SWIFTUI-ANATOMY.",
+      "requirement_id": "STANDARD-TYPOGRAPHY-001",
+      "requirement_text_sha256": "e6699c43b683d2ad4dd9dd5395aded78ccc8930cee89af93f4df13f442099e3c",
+      "source_path": "docs/canon/standards/swiftui-and-design-system.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [
+        "UX-JOURNEY-BACKUP-RESTORE",
+        "UX-JOURNEY-CAPTURE-PLACEMENT",
+        "UX-JOURNEY-CLOSURE-PROOF",
+        "UX-JOURNEY-EXTERNAL-CALENDAR",
+        "UX-JOURNEY-FIRST-USE",
+        "UX-JOURNEY-GOAL-ACTIVATION",
+        "UX-JOURNEY-MISSED-RECOVERY",
+        "UX-JOURNEY-OFFLINE-CREATE",
+        "UX-JOURNEY-SAVED-FOR-LATER",
+        "UX-JOURNEY-SCHEDULE-REFLOW",
+        "UX-JOURNEY-SEARCH",
+        "UX-JOURNEY-STEP-EXECUTION",
+        "UX-OBJECT-ATTACHMENT",
+        "UX-OBJECT-CLOSURE",
+        "UX-OBJECT-EVENT",
+        "UX-OBJECT-GOAL",
+        "UX-OBJECT-GOAL-PATH",
+        "UX-OBJECT-HISTORY-EVENT",
+        "UX-OBJECT-IMPORT-DIFF-RECORD",
+        "UX-OBJECT-LIFE-AREA",
+        "UX-OBJECT-NOTE",
+        "UX-OBJECT-NOTIFICATION-RULE",
+        "UX-OBJECT-PROOF",
+        "UX-OBJECT-RECEIPT",
+        "UX-OBJECT-RECOVERY-SEGMENT",
+        "UX-OBJECT-REMINDER",
+        "UX-OBJECT-SAVED-FOR-LATER-DRAFT",
+        "UX-OBJECT-SCHEDULE-PLACEMENT",
+        "UX-OBJECT-SOURCE-REFERENCE",
+        "UX-OBJECT-STEP",
+        "UX-SCREEN-TRUST-DEEP",
+        "UX-SCREEN-YOU-DATA"
+      ],
+      "disposition": "visual_mapping_required",
+      "rationale": "Changed logic MUST have focused tests for its successful path, invalid inputs, meaningful failure paths, cancellation, retry/idempotency, and recovery where applicable. Tests must assert observable state and durable effects rather than source strings, filenames, or the presence of declarations. A failing test may be fixed only by correcting the product or the test's genuinely stale contract; tests must not be weakened merely to make CI pass. Visual mapping records: UX-JOURNEY-BACKUP-RESTORE, UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-EXTERNAL-CALENDAR, UX-JOURNEY-FIRST-USE, UX-JOURNEY-GOAL-ACTIVATION, UX-JOURNEY-MISSED-RECOVERY, UX-JOURNEY-OFFLINE-CREATE, UX-JOURNEY-SAVED-FOR-LATER, UX-JOURNEY-SCHEDULE-REFLOW, UX-JOURNEY-SEARCH, UX-JOURNEY-STEP-EXECUTION, UX-OBJECT-ATTACHMENT, UX-OBJECT-CLOSURE, UX-OBJECT-EVENT, UX-OBJECT-GOAL, UX-OBJECT-GOAL-PATH, UX-OBJECT-HISTORY-EVENT, UX-OBJECT-IMPORT-DIFF-RECORD, UX-OBJECT-LIFE-AREA, UX-OBJECT-NOTE, UX-OBJECT-NOTIFICATION-RULE, UX-OBJECT-PROOF, UX-OBJECT-RECEIPT, UX-OBJECT-RECOVERY-SEGMENT, UX-OBJECT-REMINDER, UX-OBJECT-SAVED-FOR-LATER-DRAFT, UX-OBJECT-SCHEDULE-PLACEMENT, UX-OBJECT-SOURCE-REFERENCE, UX-OBJECT-STEP, UX-SCREEN-TRUST-DEEP, UX-SCREEN-YOU-DATA.",
+      "requirement_id": "STANDARD-VALIDATION-BEHAVIOR-001",
+      "requirement_text_sha256": "10126a10c3f055573bf26dc058fe7ee171a63b9788619b142296953132c6bc5b",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Applicable changes MUST compile with the supported Swift/Xcode toolchain and a no-sign build or build-for-testing lane. `project.yml` remains XcodeGen source authority; regeneration MUST leave no unexplained `Ambitions.xcodeproj` drift. Dependency locks and generated project state must match the source revision being built. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-BUILD-001",
+      "requirement_text_sha256": "0f173cc7e2ae63cfdbf82c43489bfc4a21e156cd201f33a969fda7c3b80a9195",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Every change MUST pass `git diff --check`, secrets scanning, and the applicable changed-file route. SwiftLint and meaningful static analysis remain enabled. Run broader lanes only when dependency impact or release scope requires them; changed-file routing must never skip a test that covers affected behavior. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-CHANGED-SCOPE-001",
+      "requirement_text_sha256": "60a3076de4be5c8581b3cc1d83475c1f2d103601998e64d466ba8630a605b120",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Concurrency changes MUST compile under the repository's strict-concurrency settings and test cancellation, reentrancy, ordering, duplicate execution, stale revisions, and race-prone boundaries where applicable. Production code must not add unchecked isolation or `Sendable` escapes merely to silence the compiler. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-CONCURRENCY-001",
+      "requirement_text_sha256": "ebb5b0120ad417d4ce3404b25cc9d3e923ac7b52fe3af7922240c3199c530205",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Data-affecting changes MUST test prior-version migration, default values, atomic failure, restart/replay convergence, duplicate delivery, interruption, rollback or forward repair, deletion/restore, and corruption handling as applicable. Accepted local state must not become visible before its durable authority commits. Command, Event, Projection, Receipt, and Replay identity must remain deterministic and idempotent. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-DATA-SAFETY-001",
+      "requirement_text_sha256": "5382cf5a8dea36cb5a398106a2e0d8a9ad84f67a93b90e9fb96a30dd2e6ee88f",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Validation MUST NOT require task starts or finalizations, signatures, intake packs, path authorization, environment approvals, attestations, receipts, ledgers, bot reactions, owner self-approval, issue links, proof packs, or status wording. A gate remains only when its failure identifies a concrete product, source, build, generated-project, test, security, privacy, accessibility, performance, persistence, migration, replay, concurrency, or data-integrity defect. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-NO-CEREMONY-001",
+      "requirement_text_sha256": "38c5b0c494123054a6a69e47ea4f143f10f097b07ada91580180db62320935f0",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Changes likely to affect latency, frame pacing, memory, storage, energy, or background execution MUST run the relevant measured lane on a stable fixture and environment. A regression outside the declared tolerance is a product defect and blocks the affected change until repaired or the budget is changed for a concrete user-facing reason. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-PERFORMANCE-001",
+      "requirement_text_sha256": "280a38a8b447d761ca7fea2ffdd2e83dd4bd148b70965b9d775c57094df772cf",
+      "source_path": "docs/canon/standards/validation-and-release.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Secrets scanning remains mandatory. Changes touching private data, network requests, permissions, logging, account behavior, extensions, exports, R2, or Source Atlas MUST test allowlisted fields, rejection of private-graph data, least-privilege behavior, denial/recovery paths, redaction, and offline behavior as applicable. Source Atlas and R2 remain public/reference-only. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "STANDARD-VALIDATION-SECURITY-PRIVACY-001",
+      "requirement_text_sha256": "815a438da1cbaf8e687eb123289936ca6170915463728ac612aa63d2c05106a9",
       "source_path": "docs/canon/standards/validation-and-release.md",
       "state_blueprint_ids": []
     },
@@ -6909,6 +6790,16 @@
         "UX-JOURNEY-SCHEDULE-REFLOW",
         "UX-JOURNEY-SEARCH",
         "UX-JOURNEY-STEP-EXECUTION",
+        "UX-SCREEN-APP-SHELL-DRILLDOWN",
+        "UX-SCREEN-APP-SHELL-ROOT",
+        "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+        "UX-SCREEN-CAPTURE-COMPOSER",
+        "UX-SCREEN-GOALS-ROOT",
+        "UX-SCREEN-SEARCH-ROOT",
+        "UX-SCREEN-TIME-DAY",
+        "UX-SCREEN-TODAY-ROOT",
+        "UX-SCREEN-TRUST-DEEP",
+        "UX-SCREEN-YOU-ROOT",
         "UX-STATE-MODEL-ACCOUNT-BOUNDARY",
         "UX-STATE-MODEL-ACCOUNT-SIGN-IN",
         "UX-STATE-MODEL-ACCOUNT-STATUS",
@@ -6958,165 +6849,10 @@
         "UX-STATE-MODEL-YOU-SETTINGS"
       ],
       "disposition": "visual_mapping_required",
-      "rationale": "Interaction acceptance MUST prove preview/validation where material, deterministic durable effect, Receipt/History, cancellation, interruption/resume, failure/recovery, undo/rollback, accessibility, offline behavior, and focus continuity. Visual mapping records: UX-CROSS-FOCUS-KEYBOARD, UX-JOURNEY-BACKUP-RESTORE, UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-EXTERNAL-CALENDAR, UX-JOURNEY-FIRST-USE, UX-JOURNEY-GOAL-ACTIVATION, UX-JOURNEY-MISSED-RECOVERY, UX-JOURNEY-OFFLINE-CREATE, UX-JOURNEY-SAVED-FOR-LATER, UX-JOURNEY-SCHEDULE-REFLOW, UX-JOURNEY-SEARCH, UX-JOURNEY-STEP-EXECUTION, UX-STATE-MODEL-ACCOUNT-BOUNDARY, UX-STATE-MODEL-ACCOUNT-SIGN-IN, UX-STATE-MODEL-ACCOUNT-STATUS, UX-STATE-MODEL-APP-DEEP-LINK-INTAKE, UX-STATE-MODEL-APP-LAUNCH-GATE, UX-STATE-MODEL-APP-SHELL-DRILLDOWN, UX-STATE-MODEL-APP-SHELL-ROOT, UX-STATE-MODEL-APP-SHELL-SEARCH-CAPTURE, UX-STATE-MODEL-CAPTURE-ATTACHMENT, UX-STATE-MODEL-CAPTURE-COMPOSER, UX-STATE-MODEL-CAPTURE-PROPOSAL, UX-STATE-MODEL-CAPTURE-SAVED-FOR-LATER, UX-STATE-MODEL-GOALS-CLOSURE, UX-STATE-MODEL-GOALS-DETAIL, UX-STATE-MODEL-GOALS-LIFE-AREA, UX-STATE-MODEL-GOALS-PATH, UX-STATE-MODEL-GOALS-RECOVERY, UX-STATE-MODEL-GOALS-ROOT, UX-STATE-MODEL-OFFLINE-DEGRADED-LOCAL-HEALTH, UX-STATE-MODEL-OFFLINE-DEGRADED-REPAIR, UX-STATE-MODEL-PERMISSIONS-CALENDAR, UX-STATE-MODEL-PERMISSIONS-NOTIFICATIONS, UX-STATE-MODEL-SEARCH-RESULTS, UX-STATE-MODEL-SEARCH-ROOT, UX-STATE-MODEL-SETUP-FIRST-USE, UX-STATE-MODEL-SETUP-RESUME, UX-STATE-MODEL-TIME-DAY, UX-STATE-MODEL-TIME-DEGRADED, UX-STATE-MODEL-TIME-DETAIL, UX-STATE-MODEL-TIME-IMPORT, UX-STATE-MODEL-TIME-LIST, UX-STATE-MODEL-TIME-MONTH, UX-STATE-MODEL-TIME-WEEK, UX-STATE-MODEL-TIME-YEAR, UX-STATE-MODEL-TODAY-DETAIL, UX-STATE-MODEL-TODAY-ROOT, UX-STATE-MODEL-TODAY-START-HERE, UX-STATE-MODEL-TRUST-DEEP, UX-STATE-MODEL-TRUST-INLINE, UX-STATE-MODEL-TRUST-RECEIPT, UX-STATE-MODEL-YOU-CONTINUITY-CONTROL, UX-STATE-MODEL-YOU-DATA, UX-STATE-MODEL-YOU-DIAGNOSTICS, UX-STATE-MODEL-YOU-ENTITLEMENT, UX-STATE-MODEL-YOU-NOTIFICATIONS, UX-STATE-MODEL-YOU-ROOT, UX-STATE-MODEL-YOU-SETTINGS.",
-      "requirement_id": "STANDARD-ACCEPTANCE-INTERACTION-001",
-      "requirement_text_sha256": "ba3de6a505759a60c9722ba2d7a4016ab94fc3fe95dc0b0d40154220f4bf671e",
+      "rationale": "UI changes MUST test affected navigation, interaction, focus, state, and degraded behavior. Visual changes must be inspected against the relevant design reference at representative light/dark and content states. Dynamic Type, VoiceOver semantics and order, hit targets, contrast, Reduce Motion, Reduce Transparency, and non-color state communication are required when the changed scope affects them. Screenshots alone cannot certify nonvisual behavior. Visual mapping records: UX-CROSS-FOCUS-KEYBOARD, UX-JOURNEY-BACKUP-RESTORE, UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-EXTERNAL-CALENDAR, UX-JOURNEY-FIRST-USE, UX-JOURNEY-GOAL-ACTIVATION, UX-JOURNEY-MISSED-RECOVERY, UX-JOURNEY-OFFLINE-CREATE, UX-JOURNEY-SAVED-FOR-LATER, UX-JOURNEY-SCHEDULE-REFLOW, UX-JOURNEY-SEARCH, UX-JOURNEY-STEP-EXECUTION, UX-SCREEN-APP-SHELL-DRILLDOWN, UX-SCREEN-APP-SHELL-ROOT, UX-SCREEN-APP-SHELL-SEARCH-CAPTURE, UX-SCREEN-CAPTURE-COMPOSER, UX-SCREEN-GOALS-ROOT, UX-SCREEN-SEARCH-ROOT, UX-SCREEN-TIME-DAY, UX-SCREEN-TODAY-ROOT, UX-SCREEN-TRUST-DEEP, UX-SCREEN-YOU-ROOT, UX-STATE-MODEL-ACCOUNT-BOUNDARY, UX-STATE-MODEL-ACCOUNT-SIGN-IN, UX-STATE-MODEL-ACCOUNT-STATUS, UX-STATE-MODEL-APP-DEEP-LINK-INTAKE, UX-STATE-MODEL-APP-LAUNCH-GATE, UX-STATE-MODEL-APP-SHELL-DRILLDOWN, UX-STATE-MODEL-APP-SHELL-ROOT, UX-STATE-MODEL-APP-SHELL-SEARCH-CAPTURE, UX-STATE-MODEL-CAPTURE-ATTACHMENT, UX-STATE-MODEL-CAPTURE-COMPOSER, UX-STATE-MODEL-CAPTURE-PROPOSAL, UX-STATE-MODEL-CAPTURE-SAVED-FOR-LATER, UX-STATE-MODEL-GOALS-CLOSURE, UX-STATE-MODEL-GOALS-DETAIL, UX-STATE-MODEL-GOALS-LIFE-AREA, UX-STATE-MODEL-GOALS-PATH, UX-STATE-MODEL-GOALS-RECOVERY, UX-STATE-MODEL-GOALS-ROOT, UX-STATE-MODEL-OFFLINE-DEGRADED-LOCAL-HEALTH, UX-STATE-MODEL-OFFLINE-DEGRADED-REPAIR, UX-STATE-MODEL-PERMISSIONS-CALENDAR, UX-STATE-MODEL-PERMISSIONS-NOTIFICATIONS, UX-STATE-MODEL-SEARCH-RESULTS, UX-STATE-MODEL-SEARCH-ROOT, UX-STATE-MODEL-SETUP-FIRST-USE, UX-STATE-MODEL-SETUP-RESUME, UX-STATE-MODEL-TIME-DAY, UX-STATE-MODEL-TIME-DEGRADED, UX-STATE-MODEL-TIME-DETAIL, UX-STATE-MODEL-TIME-IMPORT, UX-STATE-MODEL-TIME-LIST, UX-STATE-MODEL-TIME-MONTH, UX-STATE-MODEL-TIME-WEEK, UX-STATE-MODEL-TIME-YEAR, UX-STATE-MODEL-TODAY-DETAIL, UX-STATE-MODEL-TODAY-ROOT, UX-STATE-MODEL-TODAY-START-HERE, UX-STATE-MODEL-TRUST-DEEP, UX-STATE-MODEL-TRUST-INLINE, UX-STATE-MODEL-TRUST-RECEIPT, UX-STATE-MODEL-YOU-CONTINUITY-CONTROL, UX-STATE-MODEL-YOU-DATA, UX-STATE-MODEL-YOU-DIAGNOSTICS, UX-STATE-MODEL-YOU-ENTITLEMENT, UX-STATE-MODEL-YOU-NOTIFICATIONS, UX-STATE-MODEL-YOU-ROOT, UX-STATE-MODEL-YOU-SETTINGS.",
+      "requirement_id": "STANDARD-VALIDATION-UI-ACCESSIBILITY-001",
+      "requirement_text_sha256": "50e77737361c867a8fd57353b6b2796b5bf09c0c5ce620963b9aad811bb55a69",
       "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [
-        "UX-OBJECT-ATTACHMENT",
-        "UX-OBJECT-CLOSURE",
-        "UX-OBJECT-EVENT",
-        "UX-OBJECT-GOAL",
-        "UX-OBJECT-GOAL-PATH",
-        "UX-OBJECT-HISTORY-EVENT",
-        "UX-OBJECT-IMPORT-DIFF-RECORD",
-        "UX-OBJECT-LIFE-AREA",
-        "UX-OBJECT-NOTE",
-        "UX-OBJECT-NOTIFICATION-RULE",
-        "UX-OBJECT-PROOF",
-        "UX-OBJECT-RECEIPT",
-        "UX-OBJECT-RECOVERY-SEGMENT",
-        "UX-OBJECT-REMINDER",
-        "UX-OBJECT-SAVED-FOR-LATER-DRAFT",
-        "UX-OBJECT-SCHEDULE-PLACEMENT",
-        "UX-OBJECT-SOURCE-REFERENCE",
-        "UX-OBJECT-STEP",
-        "UX-SCREEN-TRUST-DEEP",
-        "UX-SCREEN-YOU-DATA"
-      ],
-      "disposition": "visual_mapping_required",
-      "rationale": "Object acceptance MUST prove stable identity, one mutation owner, valid/invalid lifecycle, relationships, deletion/restore/archive, history/receipts, privacy/sync class, import/export, projections, accessibility, and migration. Visual mapping records: UX-OBJECT-ATTACHMENT, UX-OBJECT-CLOSURE, UX-OBJECT-EVENT, UX-OBJECT-GOAL, UX-OBJECT-GOAL-PATH, UX-OBJECT-HISTORY-EVENT, UX-OBJECT-IMPORT-DIFF-RECORD, UX-OBJECT-LIFE-AREA, UX-OBJECT-NOTE, UX-OBJECT-NOTIFICATION-RULE, UX-OBJECT-PROOF, UX-OBJECT-RECEIPT, UX-OBJECT-RECOVERY-SEGMENT, UX-OBJECT-REMINDER, UX-OBJECT-SAVED-FOR-LATER-DRAFT, UX-OBJECT-SCHEDULE-PLACEMENT, UX-OBJECT-SOURCE-REFERENCE, UX-OBJECT-STEP, UX-SCREEN-TRUST-DEEP, UX-SCREEN-YOU-DATA.",
-      "requirement_id": "STANDARD-ACCEPTANCE-OBJECTS-001",
-      "requirement_text_sha256": "f0736f319579e1b3b6bc27a4cebfe647ada1fc5a17157daca53085c6e443f58c",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Governance completion MUST NOT claim Product, Runtime, Visual, Accessibility, Privacy/legal, Device, TestFlight, App Store, or Release Green. Each claim requires current exact-scope evidence, environment, command/result, artifact, owner/reviewer where required, gaps, rollback, and ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-PROOF-001",
-      "requirement_text_sha256": "a6def980563cf53f5bfd3ce7dc3af76b3574898cb600daf09857e6087af29831",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Replacement acceptance MUST prove disposition of every prior authority, preservation of accepted unique concepts, inbound-reference rewrites, reproducibility, and rollback. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-REPLACEMENT-001",
-      "requirement_text_sha256": "b46054e6a59eeb1a78b22033a229a2a4bb192defaed407a6d5e93e15397bfcf1",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [
-        "UX-JOURNEY-BACKUP-RESTORE",
-        "UX-JOURNEY-CAPTURE-PLACEMENT",
-        "UX-JOURNEY-CLOSURE-PROOF",
-        "UX-JOURNEY-EXTERNAL-CALENDAR",
-        "UX-JOURNEY-FIRST-USE",
-        "UX-JOURNEY-GOAL-ACTIVATION",
-        "UX-JOURNEY-MISSED-RECOVERY",
-        "UX-JOURNEY-OFFLINE-CREATE",
-        "UX-JOURNEY-SAVED-FOR-LATER",
-        "UX-JOURNEY-SCHEDULE-REFLOW",
-        "UX-JOURNEY-SEARCH",
-        "UX-JOURNEY-STEP-EXECUTION"
-      ],
-      "disposition": "visual_mapping_required",
-      "rationale": "Scenario acceptance MUST exercise the canonical orchestration scenarios and preserve their explicit claim ceiling. Visual mapping records: UX-JOURNEY-BACKUP-RESTORE, UX-JOURNEY-CAPTURE-PLACEMENT, UX-JOURNEY-CLOSURE-PROOF, UX-JOURNEY-EXTERNAL-CALENDAR, UX-JOURNEY-FIRST-USE, UX-JOURNEY-GOAL-ACTIVATION, UX-JOURNEY-MISSED-RECOVERY, UX-JOURNEY-OFFLINE-CREATE, UX-JOURNEY-SAVED-FOR-LATER, UX-JOURNEY-SCHEDULE-REFLOW, UX-JOURNEY-SEARCH, UX-JOURNEY-STEP-EXECUTION.",
-      "requirement_id": "STANDARD-ACCEPTANCE-SCENARIOS-001",
-      "requirement_text_sha256": "3002fc69af78a8888952159a867f5a8fc01b287c52b34c8fd42d91db27433d91",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Source acceptance MUST bind canonical owner paths, compiled code, focused tests, and absence of forbidden authority drift. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-SOURCE-001",
-      "requirement_text_sha256": "be784caf249e637eee8ddb71e07ecc1a4236d0e2e5a2f6957e2efd43f666c229",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Status acceptance MUST use the approved scoped taxonomy and MUST NOT upgrade missing, stale, failed, or not-run evidence. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-STATUS-001",
-      "requirement_text_sha256": "8d68fe01b5532d7da00758edff3311c38faf7d9ccc79d08e8682f11d22c17b91",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [
-        "UX-SCREEN-CAPTURE-COMPOSER",
-        "UX-SCREEN-GOALS-ROOT",
-        "UX-SCREEN-SEARCH-ROOT",
-        "UX-SCREEN-TIME-DAY",
-        "UX-SCREEN-TODAY-ROOT",
-        "UX-SCREEN-TRUST-DEEP",
-        "UX-SCREEN-YOU-ROOT"
-      ],
-      "disposition": "visual_mapping_required",
-      "rationale": "First viewports MUST foreground the owning object/question, useful state and action, calm hierarchy, integrated shell, and truthful empty/degraded/failure behavior without exposing architecture taxonomy. Visual mapping records: UX-SCREEN-CAPTURE-COMPOSER, UX-SCREEN-GOALS-ROOT, UX-SCREEN-SEARCH-ROOT, UX-SCREEN-TIME-DAY, UX-SCREEN-TODAY-ROOT, UX-SCREEN-TRUST-DEEP, UX-SCREEN-YOU-ROOT.",
-      "requirement_id": "STANDARD-ACCEPTANCE-VIEWPORTS-001",
-      "requirement_text_sha256": "9712b14a8d8055660641a9c7fbb7b559dd822c38d335470bdb798e9a5a1aaebf",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Visual acceptance MUST bind approved authority, current rendered evidence, accessibility variants, critique, and independent review without allowing screenshots alone to certify nonvisual claims. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-001",
-      "requirement_text_sha256": "34dd59836e5babfcc9e9c83b64d0958ad1a0b635a0d8b85d2a73a73403670646",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Visual/copy acceptance MUST compare current renders with stable approved authority, preserve semantic tokens and locked language, cover accessibility states, and record independent findings without turning target existence into parity proof. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-COPY-001",
-      "requirement_text_sha256": "99ee97e86e53c7522ea43e8ee500a2d6cdfc74cf3592f74ad972d480cdf922d0",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Visual evidence MUST bind exact commit, approved stable target IDs, actual renders, named states/data, device/OS, appearance, Dynamic Type, reduced effects, contrast, critique, reviewer, gaps, and claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
-      "requirement_id": "STANDARD-SCREENSHOT-MATRIX-001",
-      "requirement_text_sha256": "6c15bc11e2128aa3f17eecd652750eba1a2815e14d1f17ffc7c1d2bedf6e3f31",
-      "source_path": "docs/canon/standards/validation-and-release.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [
-        "UX-CROSS-SWIFTUI-ANATOMY"
-      ],
-      "disposition": "visual_mapping_required",
-      "rationale": "Spacing and corner treatment MUST express grouping, containment, hierarchy, and action semantics through approved tokens rather than decorative inconsistency. Visual mapping records: UX-CROSS-SWIFTUI-ANATOMY.",
-      "requirement_id": "STANDARD-SPACING-CORNERS-001",
-      "requirement_text_sha256": "d179cc0e1ea32cf5188fd0db7f9f8877755b12ccb721dc15a11b96a0d2970139",
-      "source_path": "docs/canon/standards/swiftui-and-design-system.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [
-        "UX-CROSS-DYNAMIC-TYPE",
-        "UX-CROSS-SWIFTUI-ANATOMY"
-      ],
-      "disposition": "visual_mapping_required",
-      "rationale": "Typography MUST use semantic roles, reflow at accessibility sizes, preserve hierarchy without fixed-height clipping, and keep first-viewport copy within the owning surface's approved information budget. Visual mapping records: UX-CROSS-DYNAMIC-TYPE, UX-CROSS-SWIFTUI-ANATOMY.",
-      "requirement_id": "STANDARD-TYPOGRAPHY-001",
-      "requirement_text_sha256": "e6699c43b683d2ad4dd9dd5395aded78ccc8930cee89af93f4df13f442099e3c",
-      "source_path": "docs/canon/standards/swiftui-and-design-system.md",
       "state_blueprint_ids": []
     },
     {
@@ -7124,7 +6860,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "A visual package MUST bind stable external identity, coverage, states, accessibility variants, critique, reviewer, and disposition before it can govern a scoped visual target. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "STANDARD-VISUAL-PACKAGE-001",
-      "requirement_text_sha256": "eab120f4c6d6c56c4864c574f7284cf730dda6957cac2f7c12cc3fe6f5d80365",
+      "requirement_text_sha256": "511185b52ee54e602b7d6a217592aa32913352c60068c72043442135a0b1625f",
       "source_path": "docs/canon/standards/swiftui-and-design-system.md",
       "state_blueprint_ids": []
     },
@@ -7133,7 +6869,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Visual review MUST compare current rendered evidence with approved authority and record independent findings and the exact claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "STANDARD-VISUAL-REVIEW-001",
-      "requirement_text_sha256": "35a751cd8574db08e97bbdaf0cefcd095a4996cbc5a0ffe941c5d2883ecce7c9",
+      "requirement_text_sha256": "eac75280886bd23c2e03817694a7bf61dabb6fe1f4c0cfa939ff84c740653f3e",
       "source_path": "docs/canon/standards/swiftui-and-design-system.md",
       "state_blueprint_ids": []
     },
@@ -7235,7 +6971,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "A dependency MUST NOT be added for trivial convenience or architecture theater; binaries require explicit approval. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SUPPLY-002",
-      "requirement_text_sha256": "f7c0920754ce7525b12770fcff98131eea4b766ebe34c88adae196219ebe0b1f",
+      "requirement_text_sha256": "23b22a4572e1ed61d62cb7ac79e34c65279580f46e023da172bb5c05dbb80cb3",
       "source_path": "docs/canon/standards/security-and-privacy.md",
       "state_blueprint_ids": []
     },
@@ -7339,7 +7075,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "A projection MUST NOT own a divergent object copy or mutate canonical state directly. An actionable projection carries canonical object/relationship identifiers and routes a typed command to the owning runtime authority. Visual mapping records: UX-OBJECT-ATTACHMENT, UX-OBJECT-CLOSURE, UX-OBJECT-EVENT, UX-OBJECT-GOAL, UX-OBJECT-GOAL-PATH, UX-OBJECT-HISTORY-EVENT, UX-OBJECT-IMPORT-DIFF-RECORD, UX-OBJECT-LIFE-AREA, UX-OBJECT-NOTE, UX-OBJECT-NOTIFICATION-RULE, UX-OBJECT-PROOF, UX-OBJECT-RECEIPT, UX-OBJECT-RECOVERY-SEGMENT, UX-OBJECT-REMINDER, UX-OBJECT-SAVED-FOR-LATER-DRAFT, UX-OBJECT-SCHEDULE-PLACEMENT, UX-OBJECT-SOURCE-REFERENCE, UX-OBJECT-STEP, UX-SCREEN-SEARCH-RESULTS, UX-SCREEN-TIME-DETAIL.",
       "requirement_id": "SYS-PROJECTION-OWNERSHIP-001",
-      "requirement_text_sha256": "659216e0c9af4773dda00f295bdd26da35ded9307f7a5c8b45b4f07586646d93",
+      "requirement_text_sha256": "23d3f26eb556fe651b513fca163509c4d7e89d814c4036777360bc3b0c806d51",
       "source_path": "docs/canon/specifications/objects/schedule-placement.md",
       "state_blueprint_ids": []
     },
@@ -7482,7 +7218,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "While `PRIVACY-CLOUDKIT-CONTINUITY-001` or `SYSTEM-CONTINUITY-DISABLED-001` remains unsatisfied, the only active continuity behavior is a non-mutating `Review Continuity Status` route showing that continuity is disabled. No enable, upload, download, merge, restore, migration, remote deletion, conflict-choice, pause, resume, or retry command may be active, emitted by a task pack, or represented as implementation-ready visual authority. Visual mapping records: UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-BLOCKED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-DISABLED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ELIGIBLE-NOT-ENABLED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ENABLED-IDLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-LOCAL-PENDING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MERGING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MIGRATING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-PAUSED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-REMOTE-PENDING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RESTORING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RETRYING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-SIGNED-OUT, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UNAVAILABLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UPLOADING.",
       "requirement_id": "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001",
-      "requirement_text_sha256": "687fd5bc1cd264a778af0783eb9da2705f323ca65ff4f08a932db89ea1dfcd6d",
+      "requirement_text_sha256": "4da4e7f3a85d073243a02673326c9b5d650af14ef0ea9f794256059fa068cdaf",
       "source_path": "docs/canon/specifications/systems/sync-and-continuity.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-BLOCKED",
@@ -7538,7 +7274,7 @@
       "disposition": "visual_mapping_required",
       "rationale": "Continuity MUST stay disabled until owner-approved design and executable exact-revision proof cover: data classification and explicit consent; local source-of-truth authority; user-private container, encryption/key and Ambitions Account separation; stable record/schema/causal identity; deterministic merge and human conflict quarantine; tombstones/deletion propagation; offline divergence; retry, batching, quotas, token expiry and partial failure; iCloud unavailable/disabled/account change/device removal; backup/restore and duplicate prevention; sign-out/delete/reset; old-client compatibility and minimum upgrade; development/production environment separation; schema migration and rollback; privacy/security/threat review; interruption/relaunch; diagnostics/observability; and release rollback. Every cell is conjunctive; scaffolding, prose, or partial tests cannot enable a subset. Visual mapping records: UX-SCREEN-ACCOUNT-BOUNDARY, UX-SCREEN-YOU-CONTINUITY-CONTROL, UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED, UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-CONFLICT, UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING, UX-STATE-VARIANT-TIME-DEGRADED-SYNC-CONFLICT, UX-STATE-VARIANT-TIME-DEGRADED-SYNC-PENDING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-BLOCKED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-DISABLED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ELIGIBLE-NOT-ENABLED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ENABLED-IDLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-LOCAL-PENDING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MERGING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MIGRATING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-PAUSED, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-REMOTE-PENDING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RESTORING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RETRYING, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-SIGNED-OUT, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UNAVAILABLE, UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UPLOADING, UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-CONFLICTED, UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-PENDING.",
       "requirement_id": "SYSTEM-CONTINUITY-DISABLED-001",
-      "requirement_text_sha256": "039127b76ced741e17badb36e20812e4ea27f3fb9889220175641eb42b41d431",
+      "requirement_text_sha256": "fe875a3e22ee27791c29b86cfb49f532799d0287d407a3ff7c3b3b2135ca4c19",
       "source_path": "docs/canon/specifications/systems/sync-and-continuity.md",
       "state_blueprint_ids": [
         "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED",
@@ -8177,7 +7913,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Work MUST identify and run applicable unit, property, runtime integration, persistence/migration, concurrency, UI, accessibility, visual, performance, security/fuzz, and release lanes or record an honest blocker and claim ceiling. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "TEST-001",
-      "requirement_text_sha256": "c76d55fc717ec00f1200a9e28881d65a450ba082aef9d46dd00d47c0b2f4d910",
+      "requirement_text_sha256": "d96c95285a949359e2fb207bc63cfb4a1833dfb8124b0f6204231411273036d8",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -8195,7 +7931,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Each reproducible escape MUST receive a test that fails before repair or an explicit owner-reviewed reason automation is impossible plus replacement proof. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "TEST-003",
-      "requirement_text_sha256": "4fd7e1c4f27b75e290c69b6d8def432e71afa5a617f4ca5c609fe68781800d53",
+      "requirement_text_sha256": "8e622df58a1d13a3e2c23f2670f574bf2f83ddea294ec485883f6d3256dcb4d9",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -8213,7 +7949,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Blind sleeps, retry-until-pass, expected-failure completion, optional lookup that hides failure, source-string-only UI checks, or unrelated aggregate coverage MUST NOT support Green. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "TEST-005",
-      "requirement_text_sha256": "b65758dff7bd065e13b7770abc77b0797bf3fed39db67f1bfa2debc264cb3376",
+      "requirement_text_sha256": "59ef7959e938326981f10ce3ef19418cb50792b76f6df4f2a594c08cdbc3c41a",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -8258,7 +7994,7 @@
       "disposition": "nonvisual_with_rationale",
       "rationale": "Each implementation scope MUST declare and execute the applicable domain, projection, UI, accessibility, migration, recurrence, time-zone, import, sync, and extension tests. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "TEST-SCOPE-MATRIX-001",
-      "requirement_text_sha256": "d5e7eb6ae03b8593b2eafa44f6f820cd774612f6adf8754a5857a6f8c4370d15",
+      "requirement_text_sha256": "e641925eccaf00932f3f6e778e9e5c82738b079ad9a2a4f8415959181768fcdd",
       "source_path": "docs/canon/standards/testing-and-fixtures.md",
       "state_blueprint_ids": []
     },
@@ -8280,9 +8016,9 @@
       ]
     }
   ],
-  "nonvisual_count": 149,
-  "requirement_count": 495,
+  "nonvisual_count": 123,
+  "requirement_count": 466,
   "schema_version": 1,
-  "source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-  "visual_mapping_count": 346
+  "source_sha": "e5d08c2d538277fc2ae7c6fd9fa09595f6e72973",
+  "visual_mapping_count": 343
 }

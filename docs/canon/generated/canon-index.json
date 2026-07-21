@@ -1,5 +1,5 @@
 {
-  "canon_digest": "883848bbb205ba3e63804eca4acb87672b110d9fd281e06dd0e9b53541aed693",
+  "canon_digest": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
   "canon_revision": 2,
   "documents": [
     {
@@ -6456,13 +6456,13 @@
           "modality": "MUST",
           "scope": "Every perceivable and actionable product state",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6478,13 +6478,13 @@
           "modality": "MUST",
           "scope": "Navigation, overlays, updates, errors, and recovery",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6500,13 +6500,13 @@
           "modality": "MUST",
           "scope": "User-facing text and actions",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6522,13 +6522,13 @@
           "modality": "MUST",
           "scope": "Motion, transparency, contrast, differentiation, and haptics",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6544,13 +6544,13 @@
           "modality": "MUST",
           "scope": "Touch, keyboard, Switch Control, Voice Control, and assistive actions",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6566,13 +6566,13 @@
           "modality": "MUST",
           "scope": "Loading, progress, validation, degraded, failure, recovery, and completion",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6588,13 +6588,13 @@
           "modality": "MUST",
           "scope": "Acceptance evidence",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6610,13 +6610,13 @@
           "modality": "MUST NOT",
           "scope": "Accessibility behavior affected by a change",
           "source_owners": [
-            "Native/Ambitions/Interaction/Accessibility/",
-            "Native/Ambitions/DesignSystem/",
+            "Native/Ambitions/Interaction/",
+            "Native/Ambitions/DesignSystem/Accessibility/",
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Rendering/",
             "Native/Ambitions/Surfaces/",
             "Native/Ambitions/Composer/",
-            "Native/Ambitions/Quality/Accessibility/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/accessibility.md",
           "supersedes": [],
@@ -6627,13 +6627,13 @@
         }
       ],
       "source_owners": [
-        "Native/Ambitions/Interaction/Accessibility/",
-        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/DesignSystem/Accessibility/",
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Rendering/",
         "Native/Ambitions/Surfaces/",
         "Native/Ambitions/Composer/",
-        "Native/Ambitions/Quality/Accessibility/"
+        "Native/Ambitions/Quality/"
       ],
       "spec_id": "STANDARD-ACCESSIBILITY",
       "title": "Accessibility"
@@ -7246,7 +7246,7 @@
           "modality": "MUST",
           "scope": "Launch, interaction, navigation, mutations, projections, Search, Time, Goal Path, Capture, recurrence, import, continuity, migration, backup/restore, attachments, extensions, memory, disk, and energy",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7263,7 +7263,7 @@
           "modality": "MUST",
           "scope": "Performance and energy budgets",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7280,7 +7280,7 @@
           "modality": "MUST NOT",
           "scope": "Performance, responsiveness, scale, memory, disk, and energy claims",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7297,7 +7297,7 @@
           "modality": "MUST",
           "scope": "Approved required budgets",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7314,7 +7314,7 @@
           "modality": "MUST",
           "scope": "Material foreground and background work",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7331,7 +7331,7 @@
           "modality": "MUST",
           "scope": "Atlas specifications without measured numeric budgets",
           "source_owners": [
-            "Native/Ambitions/Quality/Performance/",
+            "Native/Ambitions/Quality/",
             "Native/Ambitions/Diagnostics/"
           ],
           "source_path": "standards/performance-and-energy.md",
@@ -7343,7 +7343,7 @@
         }
       ],
       "source_owners": [
-        "Native/Ambitions/Quality/Performance/",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Diagnostics/"
       ],
       "spec_id": "STANDARD-PERFORMANCE-ENERGY",
@@ -7389,7 +7389,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7407,7 +7407,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7425,7 +7425,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7443,7 +7443,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7461,7 +7461,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7479,7 +7479,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7497,7 +7497,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7515,7 +7515,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7533,7 +7533,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7551,7 +7551,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7569,7 +7569,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7587,7 +7587,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7605,7 +7605,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7623,7 +7623,7 @@
           "source_owners": [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-            "Native/Ambitions/Quality/Security/"
+            "Native/Ambitions/Quality/"
           ],
           "source_path": "standards/security-and-privacy.md",
           "supersedes": [],
@@ -7636,7 +7636,7 @@
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-        "Native/Ambitions/Quality/Security/"
+        "Native/Ambitions/Quality/"
       ],
       "spec_id": "STANDARD-SECURITY-PRIVACY",
       "title": "Security and Privacy"

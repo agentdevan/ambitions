@@ -12,6 +12,10 @@ packages:
     path: Packages/AmbitionsExternalContracts
   AmbitionsPackages:
     path: Packages/AmbitionsDesignSystem
+  AmbitionsRuntime:
+    path: Packages/AmbitionsRuntime
+  AmbitionsPresentation:
+    path: Packages/AmbitionsPresentation
 targets:
   Ambitions:
     type: application
@@ -58,6 +62,16 @@ targets:
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
         product: AmbitionsWidgetUI
+      - package: AmbitionsRuntime
+        product: AmbitionsRuntimeCore
+      - package: AmbitionsRuntime
+        product: AmbitionsRuntimeSQLite
+      - package: AmbitionsPresentation
+        product: AmbitionsPresentationContracts
+      - package: AmbitionsPresentation
+        product: AmbitionsFlagshipFoundation
+      - package: AmbitionsPresentation
+        product: AmbitionsFlagshipUI
       - target: AmbitionsWidgetExtension
         embed: true
       - target: AmbitionsShareExtension

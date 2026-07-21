@@ -75,6 +75,7 @@ generated_files = [
   "generated/canon-index.json",
   "generated/object-boundary-matrix.md",
   "generated/requirement-graph.json",
+  "generated/requirement-traceability.json",
 ]
 
 reference_files = [

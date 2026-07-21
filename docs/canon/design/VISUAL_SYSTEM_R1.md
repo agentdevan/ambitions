@@ -8,17 +8,17 @@ Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 
 Design-input provenance:
 
-- canon revision: `1`;
-- canon content SHA: `0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb`;
-- canon source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`;
+- canon revision: `2`;
+- canon content SHA: `db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de`;
+- canon source SHA: `e5d08c2d538277fc2ae7c6fd9fa09595f6e72973`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `004c3b4648148982a44900e1d898e69751924b0198d5062bbedb019abc0159dd`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `e78f95a2d55f909d7ba8807e56646f435131fc7470a979c0cadc6c744cb6a3a5`;
-- state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `414a3009ff71439780d6ddb3c5a1739377a978c45ae2d72cf5f9a5b7bb6bc6d1`;
+- UX blueprint Markdown SHA-256: `a11cdc896c7e1f55b8f84e986e1d6d5db1158daba1fa02b45041624c5eda611e`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `86e914ebe89b3eb28fcf5f06c67d1b388050b888b95dac04010fbc3d8ddb2173`;
+- state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `1df949c4a6de627f19952a5dd1b508c0885bcc8b2a34254b8256df3ceb12fb3a`;
-- requirement-disposition matrix SHA-256: `f4d6eb1c741bf110b00d8cd90bbeabfd925008169c036ebdd5569531fe1ae4b8`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `288f6b7cc0d73d6b7e8135e652cc0dea0a498c64ad756305866cd9ba64100568`.
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `fb1e9e590db58e1de7c7de1995862b781b61bb52d4a065e41a2e4e6a1b242a55`;
+- requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `a60bed058a216b18a9b7fd885bbf8fe1ae91af37909cdac8eb63b61933e4a67c`;
 
 This document is the active design direction for Ambitions. It defines visual
 language, component semantics, cross-surface composition, appearance behavior,
@@ -725,7 +725,7 @@ The specified extractor contract normalizes orientation and sRGB, applies the ex
 
 The seed maps to the nearest authored family anchor in OKLab using six-decimal components and ascending family ID as the exact tie-break: Linen `#C6A77D`, Hearth `#C85F36`, Grove `#71824E`, Coast `#3E8490`, Dusk `#7E5A91`, Mineral `#67717D`. Authored family surfaces stay unchanged; only the accent candidate and low-area ambient wash derive from the seed. The custom-accent validator resolves interaction roles. The wash composites the seed over the authored canvas in linear sRGB at 8% Light and 12% Dark. Increase Contrast removes the wash; Reduce Transparency replaces it with one opaque composited tint. With no chromatic candidate, average relative luminance at least 0.5 selects Linen; otherwise it selects Mineral, using the family's authored accent.
 
-The current visual branch does not implement photo analysis. Any later repository-side extractor must be a separately authorized, deterministic, tested tool that consumes a frozen image fixture and emits canonical JSON containing input digest, crop, colorspace, selected seed, mapped family, resolved role values, contrast results, algorithm revision, and terminal newline. A Figma prototype must never imply that this future computation exists.
+The current visual branch does not implement photo analysis. Any later repository-side extractor must be a deterministic, tested tool that consumes a frozen image fixture and emits canonical JSON containing input digest, crop, colorspace, selected seed, mapped family, resolved role values, contrast results, algorithm revision, and terminal newline. A Figma prototype must never imply that this future computation exists.
 
 ### `VAD-R1-APPEARANCE-006` — Command, state, and failure lifecycle
 

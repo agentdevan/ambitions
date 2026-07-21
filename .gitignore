@@ -49,6 +49,7 @@ DerivedData/
 output/DerivedData*/
 *.xcresult
 .swiftpm/xcode/xcuserdata/
+.build/
 
 # generated and scratch artifacts
 /tmp/

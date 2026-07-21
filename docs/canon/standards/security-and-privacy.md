@@ -24,7 +24,7 @@ owns_concepts = [
 ]
 inherits = ["LAW-LOCAL-AUTHORITY-001", "LAW-R2-PUBLIC-ONLY-001", "LAW-OFFLINE-NO-ACCOUNT-001"]
 depends_on = ["CONSTITUTION", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SYSTEM-SYNC-CONTINUITY"]
-source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Quality/Security/"]
+source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Quality/"]
 +++
 
 # Security and Privacy

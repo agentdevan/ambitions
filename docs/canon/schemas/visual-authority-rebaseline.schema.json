@@ -58,7 +58,7 @@
           "const": 441
         },
         "visual_requirement_count": {
-          "const": 346
+          "const": 343
         },
         "visual_requirement_ids": {
           "$ref": "#/$defs/stringSet"

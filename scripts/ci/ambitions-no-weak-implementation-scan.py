@@ -113,6 +113,8 @@ def merge_changed_lines() -> dict[str, set[int]]:
 
 
 def is_text_path(path: str) -> bool:
+    if path.startswith("docs/canon/generated/"):
+        return False
     suffix = Path(path).suffix.lower()
     return suffix in {".swift", ".py", ".sh", ".md", ".yml", ".yaml", ".json", ".toml", ".txt", ".rb"}
 
