@@ -64,6 +64,31 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
         )
     }
 
+    init?(
+        committedResult: AmbitionsCommandExecutionResult,
+        committedAt: Date,
+        writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext
+    ) {
+        guard RuntimeTransactionCommitPolicy.hasCommittedEvidence(committedResult),
+              let transactionID = committedResult.metadata["runtimeTransactionID"],
+              let eventID = committedResult.metadata["runtimeEventID"],
+              let receiptID = committedResult.metadata["runtimeReceiptID"],
+              let rollbackPlanID = committedResult.metadata["runtimeRollbackPlanID"] else {
+            return nil
+        }
+        self.init(
+            receiptID: receiptID,
+            writeScope: writeScope,
+            committedAt: DomainTimestamp.string(from: committedAt),
+            didCommitChanges: true,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects,
+            runtimeTransactionID: transactionID,
+            runtimeEventID: eventID,
+            runtimeReceiptID: receiptID,
+            rollbackPlanID: rollbackPlanID
+        )
+    }
+
     var provesCommittedLocalMutationWithoutExternalEffects: Bool {
         receiptID.isEmpty == false &&
             committedAt.isEmpty == false &&

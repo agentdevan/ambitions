@@ -214,7 +214,8 @@ extension EventKitIntegrationService {
         reasons: [SafeAutomationPolicyReason] = [],
         blockedFacts: [String] = [],
         degradedFacts: [String] = [],
-        localCommit: SideEffectLocalCommitEvidence? = nil
+        localCommit: SideEffectLocalCommitEvidence? = nil,
+        requestID: String? = nil
     ) async -> SideEffectAttempt? {
         return await eventKitOutbox.recordCalendarSideEffect(
             actionKind: actionKind,
@@ -225,7 +226,8 @@ extension EventKitIntegrationService {
             reasons: reasons,
             blockedFacts: blockedFacts,
             degradedFacts: degradedFacts,
-            localCommit: localCommit
+            localCommit: localCommit,
+            requestID: requestID
         )
     }
 

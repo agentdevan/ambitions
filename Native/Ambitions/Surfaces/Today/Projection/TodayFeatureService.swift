@@ -7,6 +7,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let rescheduleEngine: any GoalRescheduling
     let captureService: any CaptureServicing
     let calendarRemindersService: any CalendarRemindersServicing
+    let externalEffectAuthorizer: RuntimeExternalEffectCommandAuthorizer
     let ritualService: RitualOrchestrationService
     let learningService: LearningAnticipationService
     let sharedLifeService: SharedLifeCoordinationService
@@ -40,6 +41,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.rescheduleEngine = rescheduleEngine
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+        self.externalEffectAuthorizer = RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
         self.ritualService = ritualService
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService

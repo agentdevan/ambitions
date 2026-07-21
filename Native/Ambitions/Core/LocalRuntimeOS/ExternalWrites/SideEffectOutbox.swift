@@ -78,6 +78,14 @@ struct SideEffectReceipt: Codable, Sendable, Equatable, Hashable {
 protocol SideEffectOutboxing: Sendable {
     func enqueue(_ request: SideEffectOutboxRequest) async throws -> SideEffectAttempt
     func recordResult(_ result: SideEffectAttemptResult, for attempt: SideEffectAttempt, occurredAt: Date) async throws -> SideEffectReceipt
+    func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt?
+}
+
+extension SideEffectOutboxing {
+    func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt? {
+        _ = request
+        return nil
+    }
 }
 
 actor SideEffectOutbox: SideEffectOutboxing {
@@ -112,6 +120,19 @@ actor SideEffectOutbox: SideEffectOutboxing {
         }
 
         return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: lease)
+    }
+
+    func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt? {
+        guard let existing = try await ledger.fetchRecord(id: request.id), existing.status == .succeeded else {
+            return nil
+        }
+        return SideEffectAttempt(
+            id: request.id,
+            request: request,
+            decision: policyEngine.evaluate(request),
+            ledgerRecord: existing,
+            lease: nil
+        )
     }
 
     func recordResult(

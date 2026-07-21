@@ -286,7 +286,17 @@ extension RepositoryBackedTodayService {
                 break
             }
 
-            _ = try await calendarRemindersService.createReminder(for: selection, now: now)
+            let localCommit = try await externalEffectCommitEvidence(
+                kind: .reminder,
+                goalID: goalID,
+                step: selectedStep,
+                now: now
+            )
+            _ = try await calendarRemindersService.createReminder(
+                for: selection,
+                now: now,
+                localCommit: localCommit
+            )
             message = TodayInlineMessage(
                 title: "Reminder created",
                 body: "\"\(selectedStep.title)\" was added to Reminders.",
@@ -464,4 +474,22 @@ extension RepositoryBackedTodayService {
         return TodayActionResponse(message: message)
     }
 
+    private func externalEffectCommitEvidence(
+        kind: RuntimeExternalEffectKind,
+        goalID: String,
+        step: Step,
+        now: Date
+    ) async throws -> SideEffectLocalCommitEvidence? {
+        guard calendarRemindersService.requiresLocalCommitEvidence else { return nil }
+        return try await externalEffectAuthorizer.authorize(
+            RuntimeExternalEffectRequest(
+                kind: kind,
+                source: .today,
+                goalID: goalID,
+                stepID: step.id,
+                title: step.title,
+                requestedAt: now
+            )
+        )
+    }
 }

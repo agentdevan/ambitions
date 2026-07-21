@@ -14,6 +14,8 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
 
     let calendarRemindersService: any CalendarRemindersServicing
 
+    let externalEffectAuthorizer: RuntimeExternalEffectCommandAuthorizer
+
     let learningService: LearningAnticipationService
 
     let explainabilityProjector: any GoalExplainabilityProjecting
@@ -41,6 +43,7 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
         self.rescheduleEngine = rescheduleEngine
         self.orchestrator = orchestrator
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+        self.externalEffectAuthorizer = RuntimeExternalEffectCommandAuthorizer(repositories: repositories)
         self.learningService = learningService
         self.explainabilityProjector = explainabilityProjector
         self.teachingService = teachingService ?? compatibilityTeachingService

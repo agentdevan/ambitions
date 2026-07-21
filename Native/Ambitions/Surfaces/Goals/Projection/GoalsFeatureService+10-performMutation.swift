@@ -209,7 +209,17 @@ extension RepositoryBackedGoalsService {
                 )
             }
 
-            _ = try await calendarRemindersService.createReminder(for: selection, now: now)
+            let localCommit = try await externalEffectCommitEvidence(
+                kind: .reminder,
+                goal: goal,
+                step: selectedStep,
+                now: now
+            )
+            _ = try await calendarRemindersService.createReminder(
+                for: selection,
+                now: now,
+                localCommit: localCommit
+            )
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Reminder created",
@@ -231,7 +241,18 @@ extension RepositoryBackedGoalsService {
             }
 
             let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
-            let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
+            let localCommit = try await externalEffectCommitEvidence(
+                kind: .calendarEvent,
+                goal: goal,
+                step: selectedStep,
+                now: now
+            )
+            let event = try await calendarRemindersService.createCalendarEvent(
+                for: selection,
+                durationMinutes: 45,
+                now: now,
+                localCommit: localCommit
+            )
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Calendar event created",
@@ -449,5 +470,24 @@ extension RepositoryBackedGoalsService {
         case .showPath, .showSupportMode, .raisePriority, .lowerPriority:
             return GoalDetailActionResponse(message: nil)
         }
+    }
+
+    private func externalEffectCommitEvidence(
+        kind: RuntimeExternalEffectKind,
+        goal: Goal,
+        step: Step,
+        now: Date
+    ) async throws -> SideEffectLocalCommitEvidence? {
+        guard calendarRemindersService.requiresLocalCommitEvidence else { return nil }
+        return try await externalEffectAuthorizer.authorize(
+            RuntimeExternalEffectRequest(
+                kind: kind,
+                source: .goalDetail,
+                goalID: goal.id,
+                stepID: step.id,
+                title: step.title,
+                requestedAt: now
+            )
+        )
     }
 }

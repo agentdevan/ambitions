@@ -2,6 +2,7 @@ import EventKit
 import Foundation
 
 actor EventKitIntegrationService: CalendarRemindersServicing {
+    nonisolated var requiresLocalCommitEvidence: Bool { true }
     let storeClient: any EventKitStoreClient
     let eventKitOutbox: EventKitOutbox
     let reminderRepository: (any ReminderRepository)?
@@ -72,8 +73,17 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             externalEffect: true,
             reasons: [.externalSideEffect],
             degradedFacts: ["Reminder write queued after explicit user request."],
-            localCommit: localCommit
+            localCommit: localCommit,
+            requestID: externalEffectRequestID(
+                kind: "reminder",
+                selection: selection,
+                localCommit: localCommit
+            )
         )
+        if let identifier = attempt?.ledgerRecord.receiptID,
+           attempt?.ledgerRecord.status == .succeeded {
+            return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
+        }
         guard attempt?.mayAttemptExternalWrite == true else {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
         }
@@ -178,8 +188,22 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             externalEffect: true,
             reasons: [.externalSideEffect],
             degradedFacts: ["Calendar event write queued after explicit user request."],
-            localCommit: localCommit
+            localCommit: localCommit,
+            requestID: externalEffectRequestID(
+                kind: "calendar-event",
+                selection: selection,
+                localCommit: localCommit
+            )
         )
+        if let identifier = attempt?.ledgerRecord.receiptID,
+           attempt?.ledgerRecord.status == .succeeded {
+            return CreatedCalendarEventRecord(
+                identifier: identifier,
+                title: selection.stepTitle,
+                startDate: interval.start,
+                endDate: interval.end
+            )
+        }
         guard attempt?.mayAttemptExternalWrite == true else {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
         }
@@ -241,6 +265,15 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 return lhs.startDate < rhs.startDate
             }
         return makeConflictReport(events: events, proposed: interval)
+    }
+
+    private func externalEffectRequestID(
+        kind: String,
+        selection: NextStepSchedulingSelection,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) -> String? {
+        guard let receiptID = localCommit?.receiptID else { return nil }
+        return "calendar.\(kind).\(selection.stepID).\(receiptID)"
     }
 
     func explicitRequestNotes(

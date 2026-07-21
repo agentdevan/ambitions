@@ -18,11 +18,17 @@ struct EventKitOutbox: Sendable {
         blockedFacts: [String] = [],
         degradedFacts: [String] = [],
         localCommit: SideEffectLocalCommitEvidence? = nil,
+        requestID: String? = nil,
         now: Date = Date()
     ) async -> SideEffectAttempt? {
         guard let recorder else { return nil }
         let request = SideEffectOutboxRequest(
-            id: "calendar.\(actionKind.rawValue).\(status.rawValue).\(UUID().uuidString.lowercased())",
+            id: requestID ?? [
+                "calendar",
+                actionKind.rawValue,
+                status.rawValue,
+                UUID().uuidString.lowercased()
+            ].joined(separator: "."),
             effectKind: .calendar,
             actionKind: actionKind,
             sourceDomain: .time,
@@ -35,8 +41,12 @@ struct EventKitOutbox: Sendable {
             requestedBoundary: boundary,
             reasons: reasons,
             blockedFacts: blockedFacts,
-            degradedFacts: degradedFacts
+            degradedFacts: degradedFacts,
+            receiptID: localCommit?.receiptID
         )
+        if let completed = try? await recorder.completedAttempt(for: request) {
+            return completed
+        }
         return try? await recorder.enqueue(request)
     }
 

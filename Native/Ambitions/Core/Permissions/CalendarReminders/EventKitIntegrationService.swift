@@ -162,11 +162,46 @@ enum CalendarRemindersError: LocalizedError, Equatable {
 }
 
 protocol CalendarRemindersServicing: Sendable {
+    var requiresLocalCommitEvidence: Bool { get }
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord
+    func createReminder(
+        for selection: NextStepSchedulingSelection,
+        now: Date,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedReminderRecord
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
+    func createCalendarEvent(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedCalendarEventRecord
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
+}
+
+extension CalendarRemindersServicing {
+    var requiresLocalCommitEvidence: Bool { false }
+
+    func createReminder(
+        for selection: NextStepSchedulingSelection,
+        now: Date,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedReminderRecord {
+        _ = localCommit
+        return try await createReminder(for: selection, now: now)
+    }
+
+    func createCalendarEvent(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedCalendarEventRecord {
+        _ = localCommit
+        return try await createCalendarEvent(for: selection, durationMinutes: durationMinutes, now: now)
+    }
 }
 
 protocol CalendarPermissionServicing: Sendable {
