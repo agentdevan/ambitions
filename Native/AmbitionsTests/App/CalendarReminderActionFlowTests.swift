@@ -199,6 +199,17 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
         return CreatedReminderRecord(identifier: "reminder-test", title: selection.stepTitle)
     }
 
+    func createReminder(
+        for selection: NextStepSchedulingSelection,
+        now: Date,
+        operationID: String,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedReminderRecord {
+        _ = operationID
+        _ = localCommit
+        return try await createReminder(for: selection, now: now)
+    }
+
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
         calendarWriteAttemptCount += 1
         _ = durationMinutes
@@ -211,6 +222,19 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
             startDate: start,
             endDate: start.addingTimeInterval(45 * 60)
         )
+    }
+
+
+    func createCalendarEvent(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date,
+        operationID: String,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedCalendarEventRecord {
+        _ = operationID
+        _ = localCommit
+        return try await createCalendarEvent(for: selection, durationMinutes: durationMinutes, now: now)
     }
 
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {

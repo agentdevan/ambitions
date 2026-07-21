@@ -12,10 +12,15 @@ final class OwnerExternalEffectAuthorityTests: XCTestCase {
         let fetchedGoal = try await fixture.repositories.goals.goal(id: goalID)
         let goal = try XCTUnwrap(fetchedGoal)
         let step = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
-        let request = GoalDetailActionRequest(target: created.target, kind: .createReminder, stepID: step.id)
+        let request = GoalDetailActionRequest(
+            operationID: "goal-reminder-operation",
+            target: created.target,
+            kind: .createReminder,
+            stepID: step.id
+        )
 
         let first = try await fixture.goals.performAction(request, now: fixture.now)
-        let replay = try await fixture.goals.performAction(request, now: fixture.now)
+        let replay = try await fixture.goals.performAction(request, now: fixture.now.addingTimeInterval(90))
 
         XCTAssertEqual(first.message?.title, "Reminder created")
         XCTAssertEqual(replay.message?.title, "Reminder created")
@@ -25,6 +30,32 @@ final class OwnerExternalEffectAuthorityTests: XCTestCase {
         XCTAssertEqual(reminderSaveCount, 1)
         XCTAssertEqual(authorityEvents.count, 1)
         XCTAssertEqual(succeededSideEffects.count, 1)
+    }
+
+    func testGoalCalendarEventVaryingTimeRetryUsesStableOperationIdentity() async throws {
+        let fixture = try await makeFixture(runtimeEvents: InMemoryRuntimeEventStore())
+        let created = try await fixture.goals.createGoal(
+            CreateGoalRequest(title: "Schedule architecture review 2026-09-01"),
+            now: fixture.now
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let loadedGoal = try await fixture.repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(loadedGoal)
+        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
+        let request = GoalDetailActionRequest(
+            operationID: "goal-calendar-operation",
+            target: created.target,
+            kind: .createCalendarEvent,
+            stepID: step.id
+        )
+
+        _ = try await fixture.goals.performAction(request, now: fixture.now)
+        _ = try await fixture.goals.performAction(request, now: fixture.now.addingTimeInterval(120))
+
+        let eventSaveCount = await fixture.eventKitStore.eventSaveCount
+        XCTAssertEqual(eventSaveCount, 1)
+        let authorityEvents = try await fixture.runtimeEvents.fetchEvents(matching: .all, limit: nil)
+        XCTAssertEqual(authorityEvents.count, 1)
     }
 
     func testTodayReminderAuthorityFailureNeverWritesEventKitOrSuccessReceipt() async throws {
@@ -107,6 +138,7 @@ private extension OwnerExternalEffectAuthorityTests {
 
 private actor OwnerExternalEffectEventKitStore: EventKitStoreClient {
     private(set) var reminderSaveCount = 0
+    private(set) var eventSaveCount = 0
 
     func authorizationState(for scope: CalendarRemindersScope) -> CalendarRemindersAuthorizationState {
         _ = scope
@@ -128,7 +160,8 @@ private actor OwnerExternalEffectEventKitStore: EventKitStoreClient {
 
     func saveEvent(_ payload: EventKitEventPayload) -> String {
         _ = payload
-        return "event-1"
+        eventSaveCount += 1
+        return "event-\(eventSaveCount)"
     }
 
     func fetchEvents(in interval: DateInterval) -> [EventKitCalendarEventSnapshot] {

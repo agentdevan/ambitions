@@ -46,6 +46,50 @@ actor EventKitStoreClientLive: EventKitStoreClient {
         try await saveEventThroughExternalWrites(payload)
     }
 
+    func reconcileExternalItem(
+        kind: EventKitExternalItemKind,
+        operationMarker: String,
+        interval: DateInterval?
+    ) async -> EventKitReconciliationResult {
+        let scope: CalendarRemindersScope = kind == .reminder ? .reminders : .calendarEvents
+        let state = await authorizationState(for: scope)
+        guard state == .fullAccess || state == .authorized else { return .unavailable }
+        let identifiers: [String]
+        switch kind {
+        case .reminder:
+            let predicate = store.predicateForReminders(in: nil)
+            identifiers = await withCheckedContinuation { continuation in
+                store.fetchReminders(matching: predicate) { reminders in
+                    let identifiers = (reminders ?? []).compactMap { reminder in
+                        reminder.notes?.split(whereSeparator: \.isNewline)
+                            .contains(where: { String($0) == operationMarker }) == true
+                            ? reminder.calendarItemIdentifier
+                            : nil
+                    }
+                    continuation.resume(returning: identifiers)
+                }
+            }
+        case .calendarEvent:
+            guard let interval else { return .unavailable }
+            let predicate = store.predicateForEvents(
+                withStart: interval.start.addingTimeInterval(-86_400),
+                end: interval.end.addingTimeInterval(86_400),
+                calendars: nil
+            )
+            identifiers = store.events(matching: predicate).compactMap { event in
+                hasExactMarker(event.notes, marker: operationMarker) ? event.calendarItemIdentifier : nil
+            }
+        }
+        let unique = Array(Set(identifiers))
+        if unique.isEmpty { return .none }
+        if unique.count == 1, let identifier = unique.first { return .one(identifier) }
+        return .ambiguous
+    }
+
+    private func hasExactMarker(_ notes: String?, marker: String) -> Bool {
+        notes?.split(whereSeparator: \.isNewline).contains { String($0) == marker } == true
+    }
+
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
         let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
         return store.events(matching: predicate).flatMap { event in

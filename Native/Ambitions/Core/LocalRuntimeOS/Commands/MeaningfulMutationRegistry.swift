@@ -36,7 +36,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 116
+    static let declaredMutationRowCount = 117
     static let declaredWritePathRowCount = 51
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -219,6 +219,13 @@ enum MeaningfulMutationRegistry {
         mutation(id: "share.intake", sourcePath: "ShareExtensionIntake.recordDurableIntake", commandKind: .quickCapture, status: .unproven, rationale: "Share intake lacks row-specific extension lifecycle and replay proof."),
         mutation(id: "eventkit.outbox", sourcePath: "EventKitOutbox.recordCalendarSideEffect", commandKind: .scheduleItem, status: .unproven, rationale: "EventKit outbox path lacks row-specific end-to-end replay proof."),
         mutation(id: "eventkit.outbox-result", sourcePath: "EventKitOutbox.recordCalendarResult", commandKind: .scheduleItem, status: .unproven, rationale: "External result receipt mutation lacks row-specific replay and reconciliation proof."),
+        mutation(
+            id: "eventkit.outbox-result-strict",
+            sourcePath: "EventKitOutbox.recordCalendarResultStrict",
+            commandKind: .scheduleItem,
+            status: .unproven,
+            rationale: "Strict external result finalization has focused CAS and reconciliation tests but lacks device proof."
+        ),
         mutation(id: "widget.outbox", sourcePath: "WidgetRefreshOutbox.recordSnapshotRefresh", commandKind: .openDestination, status: .unproven, rationale: "Widget refresh outbox lacks row-specific reconstruction proof."),
         mutation(id: "repair.portable-snapshot", sourcePath: "PortableSnapshotService.importSnapshot", commandKind: .updateGoal, status: .unproven, rationale: "Portable snapshot import lacks complete migration and replay proof."),
         mutation(id: "shell.activated-capture", sourcePath: "AppShellActivatedCaptureSeam.saveCapture", commandKind: .quickCapture, status: .unproven, rationale: "Global shell command execution lacks row-specific restart and replay proof."),

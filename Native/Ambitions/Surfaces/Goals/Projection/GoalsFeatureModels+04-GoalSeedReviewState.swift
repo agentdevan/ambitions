@@ -110,9 +110,22 @@ struct GoalClarificationAnswerRequest: Sendable {
 }
 
 struct GoalDetailActionRequest: Sendable {
+    let operationID: String
     let target: GoalRouteTarget
     let kind: GoalDetailActionKind
     let stepID: String?
+
+    init(
+        operationID: String = UUID().uuidString.lowercased(),
+        target: GoalRouteTarget,
+        kind: GoalDetailActionKind,
+        stepID: String?
+    ) {
+        self.operationID = operationID
+        self.target = target
+        self.kind = kind
+        self.stepID = stepID
+    }
 }
 
 enum GoalExplainabilityCorrectionControlKind: String, Sendable {

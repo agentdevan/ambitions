@@ -11,6 +11,8 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
     private var reminderSaveFailure: CalendarRemindersError?
     private var eventSaveFailure: CalendarRemindersError?
     private var events: [EventKitCalendarEventSnapshot] = []
+    private var savedReminderNotesByIdentifier: [String: String] = [:]
+    private var savedEventNotesByIdentifier: [String: String] = [:]
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
         authorizationByScope[key(for: scope)] ?? .notDetermined
@@ -32,14 +34,33 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
         if let reminderSaveFailure { throw reminderSaveFailure }
         saveReminderCount += 1
         lastReminderPayload = payload
-        return "reminder-1"
+        let identifier = "reminder-\(saveReminderCount)"
+        savedReminderNotesByIdentifier[identifier] = payload.notes
+        return identifier
     }
 
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
         if let eventSaveFailure { throw eventSaveFailure }
         saveEventCount += 1
         lastEventPayload = payload
-        return "event-1"
+        let identifier = "event-\(saveEventCount)"
+        savedEventNotesByIdentifier[identifier] = payload.notes
+        return identifier
+    }
+
+    func reconcileExternalItem(
+        kind: EventKitExternalItemKind,
+        operationMarker: String,
+        interval: DateInterval?
+    ) async -> EventKitReconciliationResult {
+        _ = interval
+        let source = kind == .reminder ? savedReminderNotesByIdentifier : savedEventNotesByIdentifier
+        let matches = source.compactMap { identifier, notes in
+            notes.split(whereSeparator: \.isNewline).contains { String($0) == operationMarker } ? identifier : nil
+        }
+        if matches.isEmpty { return .none }
+        if matches.count == 1, let identifier = matches.first { return .one(identifier) }
+        return .ambiguous
     }
 
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
@@ -106,6 +127,19 @@ actor RecordingEventKitSideEffectLedgerRepository: SideEffectLedgerRepository {
 
     func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
         records.first { $0.id == id }
+    }
+
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult {
+        if let existing = records.first(where: { $0.id == record.id }) { return .existing(existing) }
+        let claimed = record.claiming(token: token)
+        records.append(claimed)
+        return .claimed(claimed)
+    }
+
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
+        guard let index = records.firstIndex(where: { $0.id == record.id }), records[index].commandID == token else { return false }
+        records[index] = record.claiming(token: token)
+        return true
     }
 
     private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {

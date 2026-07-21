@@ -38,6 +38,26 @@ actor FileSideEffectLedgerRepository: SideEffectLedgerRepository {
         try loadEnvelope().records.first { $0.id == id }
     }
 
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult {
+        var envelope = try loadEnvelope()
+        if let existing = envelope.records.first(where: { $0.id == record.id }) {
+            return .existing(existing)
+        }
+        let claimed = record.claiming(token: token)
+        envelope.records.append(claimed)
+        try saveEnvelope(envelope)
+        return .claimed(claimed)
+    }
+
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
+        var envelope = try loadEnvelope()
+        guard let index = envelope.records.firstIndex(where: { $0.id == record.id }),
+              envelope.records[index].commandID == token else { return false }
+        envelope.records[index] = record.claiming(token: token)
+        try saveEnvelope(envelope)
+        return true
+    }
+
     func drainRecords() async throws -> [SideEffectLedgerRecord] {
         let records = try loadEnvelope().records.sorted(by: Self.sort)
         guard records.isEmpty == false else { return [] }

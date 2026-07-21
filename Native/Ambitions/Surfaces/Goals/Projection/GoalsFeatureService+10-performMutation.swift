@@ -210,6 +210,7 @@ extension RepositoryBackedGoalsService {
             }
 
             let localCommit = try await externalEffectCommitEvidence(
+                operationID: request.operationID,
                 kind: .reminder,
                 goal: goal,
                 step: selectedStep,
@@ -218,6 +219,7 @@ extension RepositoryBackedGoalsService {
             _ = try await calendarRemindersService.createReminder(
                 for: selection,
                 now: now,
+                operationID: request.operationID,
                 localCommit: localCommit
             )
             return GoalDetailActionResponse(
@@ -242,6 +244,7 @@ extension RepositoryBackedGoalsService {
 
             let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
             let localCommit = try await externalEffectCommitEvidence(
+                operationID: request.operationID,
                 kind: .calendarEvent,
                 goal: goal,
                 step: selectedStep,
@@ -251,6 +254,7 @@ extension RepositoryBackedGoalsService {
                 for: selection,
                 durationMinutes: 45,
                 now: now,
+                operationID: request.operationID,
                 localCommit: localCommit
             )
             return GoalDetailActionResponse(
@@ -473,14 +477,15 @@ extension RepositoryBackedGoalsService {
     }
 
     private func externalEffectCommitEvidence(
+        operationID: String,
         kind: RuntimeExternalEffectKind,
         goal: Goal,
         step: Step,
         now: Date
-    ) async throws -> SideEffectLocalCommitEvidence? {
-        guard calendarRemindersService.requiresLocalCommitEvidence else { return nil }
+    ) async throws -> SideEffectLocalCommitEvidence {
         return try await externalEffectAuthorizer.authorize(
             RuntimeExternalEffectRequest(
+                operationID: operationID,
                 kind: kind,
                 source: .goalDetail,
                 goalID: goal.id,

@@ -128,6 +128,7 @@ enum CalendarRemindersError: LocalizedError, Equatable {
     case authorizationDenied(scope: CalendarRemindersScope)
     case missingDefaultCalendar(scope: CalendarRemindersScope)
     case missingLocalCommitReceipt(scope: CalendarRemindersScope)
+    case reconciliationRequired(scope: CalendarRemindersScope)
     case saveFailed(String)
 
     var errorDescription: String? {
@@ -155,6 +156,10 @@ enum CalendarRemindersError: LocalizedError, Equatable {
             case .calendarEvents:
                 return "Save the local change before creating calendar events."
             }
+        case let .reconciliationRequired(scope):
+            return scope == .reminders
+                ? "This reminder write needs reconciliation before it can be retried safely."
+                : "This calendar write needs reconciliation before it can be retried safely."
         case let .saveFailed(message):
             return "Unable to save to EventKit: \(message)"
         }
@@ -162,13 +167,13 @@ enum CalendarRemindersError: LocalizedError, Equatable {
 }
 
 protocol CalendarRemindersServicing: Sendable {
-    var requiresLocalCommitEvidence: Bool { get }
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord
     func createReminder(
         for selection: NextStepSchedulingSelection,
         now: Date,
+        operationID: String,
         localCommit: SideEffectLocalCommitEvidence?
     ) async throws -> CreatedReminderRecord
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
@@ -176,31 +181,28 @@ protocol CalendarRemindersServicing: Sendable {
         for selection: NextStepSchedulingSelection,
         durationMinutes: Int,
         now: Date,
+        operationID: String,
         localCommit: SideEffectLocalCommitEvidence?
     ) async throws -> CreatedCalendarEventRecord
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
 }
 
 extension CalendarRemindersServicing {
-    var requiresLocalCommitEvidence: Bool { false }
-
-    func createReminder(
-        for selection: NextStepSchedulingSelection,
-        now: Date,
-        localCommit: SideEffectLocalCommitEvidence?
-    ) async throws -> CreatedReminderRecord {
-        _ = localCommit
-        return try await createReminder(for: selection, now: now)
+    func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord {
+        _ = selection
+        _ = now
+        throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
     }
 
     func createCalendarEvent(
         for selection: NextStepSchedulingSelection,
         durationMinutes: Int,
-        now: Date,
-        localCommit: SideEffectLocalCommitEvidence?
+        now: Date
     ) async throws -> CreatedCalendarEventRecord {
-        _ = localCommit
-        return try await createCalendarEvent(for: selection, durationMinutes: durationMinutes, now: now)
+        _ = selection
+        _ = durationMinutes
+        _ = now
+        throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
     }
 }
 
@@ -249,6 +251,17 @@ struct StubCalendarRemindersService: CalendarRemindersServicing {
         return reminderResult ?? CreatedReminderRecord(identifier: "stub-reminder", title: "Stub reminder")
     }
 
+    func createReminder(
+        for selection: NextStepSchedulingSelection,
+        now: Date,
+        operationID: String,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedReminderRecord {
+        _ = operationID
+        _ = localCommit
+        return try await createReminder(for: selection, now: now)
+    }
+
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
         _ = selection
         _ = durationMinutes
@@ -261,6 +274,19 @@ struct StubCalendarRemindersService: CalendarRemindersServicing {
             startDate: now,
             endDate: now.addingTimeInterval(3_600)
         )
+    }
+
+
+    func createCalendarEvent(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date,
+        operationID: String,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> CreatedCalendarEventRecord {
+        _ = operationID
+        _ = localCommit
+        return try await createCalendarEvent(for: selection, durationMinutes: durationMinutes, now: now)
     }
 
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {

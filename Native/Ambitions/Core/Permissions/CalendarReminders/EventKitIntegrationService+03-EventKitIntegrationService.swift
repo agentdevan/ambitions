@@ -310,14 +310,44 @@ struct EventKitCalendarEventSnapshot: Sendable, Equatable {
     let isAllDay: Bool
 }
 
+enum EventKitExternalItemKind: Sendable, Equatable {
+    case reminder
+    case calendarEvent
+}
+
+enum EventKitReconciliationResult: Sendable, Equatable {
+    case none
+    case one(String)
+    case ambiguous
+    case unavailable
+}
+
 protocol EventKitStoreClient: Sendable {
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String
+    func reconcileExternalItem(
+        kind: EventKitExternalItemKind,
+        operationMarker: String,
+        interval: DateInterval?
+    ) async -> EventKitReconciliationResult
     // Reserved for future calendar read-path work. The current integration does not call this.
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot]
+}
+
+extension EventKitStoreClient {
+    func reconcileExternalItem(
+        kind: EventKitExternalItemKind,
+        operationMarker: String,
+        interval: DateInterval?
+    ) async -> EventKitReconciliationResult {
+        _ = kind
+        _ = operationMarker
+        _ = interval
+        return .unavailable
+    }
 }
 
 func normalizedBusyWindows(

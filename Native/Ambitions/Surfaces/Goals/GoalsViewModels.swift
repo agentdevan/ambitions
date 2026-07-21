@@ -60,6 +60,7 @@ final class GoalDetailViewModel {
     var clarificationAnswers: [String: String]
 
     private var hasLoaded = false
+    private var pendingOperationIDs: [String: String] = [:]
 
     var stateKey: String {
         switch state {
@@ -125,10 +126,14 @@ final class GoalDetailViewModel {
         }()
 
         do {
+            let operationKey = "\(action.rawValue).\(stepID ?? "none")"
+            let operationID = pendingOperationIDs[operationKey] ?? UUID().uuidString.lowercased()
+            pendingOperationIDs[operationKey] = operationID
             let response = try await service.performAction(
-                GoalDetailActionRequest(target: target, kind: action, stepID: stepID),
+                GoalDetailActionRequest(operationID: operationID, target: target, kind: action, stepID: stepID),
                 now: now
             )
+            pendingOperationIDs.removeValue(forKey: operationKey)
             inlineMessage = response.message
             await refresh(using: service)
         } catch {

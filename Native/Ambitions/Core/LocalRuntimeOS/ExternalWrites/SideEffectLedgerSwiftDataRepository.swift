@@ -32,6 +32,27 @@ struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
         }
     }
 
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult {
+        try await store.write { context in
+            if let storage = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .first(where: { $0.id == record.id }) {
+                return .existing(try RepositoryMapping.sideEffectLedgerRecord(from: storage))
+            }
+            let claimed = record.claiming(token: token)
+            context.insert(try RepositoryMapping.sideEffectLedgerStorageRecord(from: claimed))
+            return .claimed(claimed)
+        }
+    }
+
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
+        try await store.write { context in
+            guard let storage = try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
+                .first(where: { $0.id == record.id }), storage.commandID == token else { return false }
+            try RepositoryMapping.apply(record.claiming(token: token), to: storage)
+            return true
+        }
+    }
+
     private func fetchAll(where isIncluded: @escaping @Sendable (SideEffectLedgerStorageRecord) -> Bool) async throws -> [SideEffectLedgerRecord] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())

@@ -85,11 +85,28 @@ struct TodayActionTarget: Hashable, Sendable {
 }
 
 struct TodayInlineAction: Identifiable, Hashable, Sendable {
+    let operationID: String
     let kind: TodayActionKind
     let title: String
     let systemImage: String
     let state: AmbitionVisualState
     let target: TodayActionTarget
+
+    init(
+        operationID: String = UUID().uuidString.lowercased(),
+        kind: TodayActionKind,
+        title: String,
+        systemImage: String,
+        state: AmbitionVisualState,
+        target: TodayActionTarget
+    ) {
+        self.operationID = operationID
+        self.kind = kind
+        self.title = title
+        self.systemImage = systemImage
+        self.state = state
+        self.target = target
+    }
 
     var id: String { "\(kind.rawValue)-\(title)-\(target.goalID ?? "none")-\(target.stepID ?? "none")" }
 }

@@ -44,10 +44,7 @@ struct EventKitOutbox: Sendable {
             degradedFacts: degradedFacts,
             receiptID: localCommit?.receiptID
         )
-        if let completed = try? await recorder.completedAttempt(for: request) {
-            return completed
-        }
-        return try? await recorder.enqueue(request)
+        return try? await recorder.claim(request).attempt
     }
 
     @discardableResult
@@ -58,5 +55,39 @@ struct EventKitOutbox: Sendable {
     ) async -> SideEffectReceipt? {
         guard let recorder, let attempt else { return nil }
         return try? await recorder.recordResult(result, for: attempt, occurredAt: now)
+    }
+
+    func claimCalendarSideEffect(
+        requestID: String,
+        localCommit: SideEffectLocalCommitEvidence,
+        now: Date
+    ) async throws -> SideEffectClaim {
+        guard let recorder else { throw SideEffectOutboxError.missingDurableID }
+        let request = SideEffectOutboxRequest(
+            id: requestID,
+            effectKind: .calendar,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            requestedAt: now,
+            externalEffect: true,
+            requiresConfirmation: false,
+            commitRequirement: .localCommitRequired,
+            localCommit: localCommit,
+            requestedStatus: .queued,
+            requestedBoundary: .externalEffect,
+            reasons: [.externalSideEffect],
+            degradedFacts: ["EventKit write queued after explicit user request."],
+            receiptID: localCommit.receiptID
+        )
+        return try await recorder.claim(request)
+    }
+
+    func recordCalendarResultStrict(
+        _ result: SideEffectAttemptResult,
+        for attempt: SideEffectAttempt,
+        now: Date
+    ) async throws -> SideEffectReceipt {
+        guard let recorder else { throw SideEffectOutboxError.missingDurableID }
+        return try await recorder.recordResult(result, for: attempt, occurredAt: now)
     }
 }

@@ -10,6 +10,7 @@ enum RuntimeExternalEffectKind: String, Sendable {
 }
 
 struct RuntimeExternalEffectRequest: Sendable {
+    let operationID: String
     let kind: RuntimeExternalEffectKind
     let source: AmbitionsCommandSource
     let goalID: String
@@ -71,14 +72,13 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
     }
 
     private func commandID(for request: RuntimeExternalEffectRequest) -> String {
-        let instant = Int64(request.requestedAt.timeIntervalSince1970 * 1_000)
         return [
             "external-effect",
             request.source.rawValue,
             request.kind.rawValue,
             request.goalID,
             request.stepID,
-            String(instant)
+            request.operationID
         ].joined(separator: ".")
     }
 }

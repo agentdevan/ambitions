@@ -317,6 +317,19 @@ private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
         records.first { $0.id == id }
     }
 
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult {
+        if let existing = records.first(where: { $0.id == record.id }) { return .existing(existing) }
+        let claimed = record.claiming(token: token)
+        records.append(claimed)
+        return .claimed(claimed)
+    }
+
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
+        guard let index = records.firstIndex(where: { $0.id == record.id }), records[index].commandID == token else { return false }
+        records[index] = record.claiming(token: token)
+        return true
+    }
+
     private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
         if lhs.occurredAt != rhs.occurredAt {
             return lhs.occurredAt > rhs.occurredAt

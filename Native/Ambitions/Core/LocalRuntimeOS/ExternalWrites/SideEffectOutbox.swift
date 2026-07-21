@@ -3,6 +3,7 @@ import Foundation
 enum SideEffectOutboxError: LocalizedError, Sendable, Equatable {
     case missingDurableID
     case missingLocalCommitReceipt
+    case invalidClaimToken
 
     var errorDescription: String? {
         switch self {
@@ -10,6 +11,8 @@ enum SideEffectOutboxError: LocalizedError, Sendable, Equatable {
             return "Side-effect requests require a durable id."
         case .missingLocalCommitReceipt:
             return "External side-effect attempts require a committed local mutation receipt."
+        case .invalidClaimToken:
+            return "The durable side-effect claim no longer belongs to this attempt."
         }
     }
 }
@@ -31,9 +34,23 @@ struct SideEffectAttempt: Sendable, Equatable {
     let decision: SideEffectPolicyDecision
     let ledgerRecord: SideEffectLedgerRecord
     let lease: ExternalWriteLease?
+    let claimToken: String?
 
     var mayAttemptExternalWrite: Bool {
         decision.mayAttemptExternalWrite
+    }
+}
+
+enum SideEffectClaim: Sendable, Equatable {
+    case claimed(SideEffectAttempt)
+    case terminal(SideEffectAttempt)
+    case reconciliationRequired(SideEffectAttempt)
+
+    var attempt: SideEffectAttempt {
+        switch self {
+        case let .claimed(attempt), let .terminal(attempt), let .reconciliationRequired(attempt):
+            return attempt
+        }
     }
 }
 
@@ -79,6 +96,7 @@ protocol SideEffectOutboxing: Sendable {
     func enqueue(_ request: SideEffectOutboxRequest) async throws -> SideEffectAttempt
     func recordResult(_ result: SideEffectAttemptResult, for attempt: SideEffectAttempt, occurredAt: Date) async throws -> SideEffectReceipt
     func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt?
+    func claim(_ request: SideEffectOutboxRequest) async throws -> SideEffectClaim
 }
 
 extension SideEffectOutboxing {
@@ -86,12 +104,21 @@ extension SideEffectOutboxing {
         _ = request
         return nil
     }
+
+    func claim(_ request: SideEffectOutboxRequest) async throws -> SideEffectClaim {
+        if let completed = try await completedAttempt(for: request) {
+            return .terminal(completed)
+        }
+        return .claimed(try await enqueue(request))
+    }
 }
 
 actor SideEffectOutbox: SideEffectOutboxing {
     private let ledger: any SideEffectLedgerRepository
     private let policyEngine: SideEffectPolicyEngine
     private let leaseDuration: TimeInterval
+    private var activeClaimIDs = Set<String>()
+    private var claimWaiters: [String: [CheckedContinuation<Void, Never>]] = [:]
 
     init(
         ledger: any SideEffectLedgerRepository,
@@ -116,10 +143,10 @@ actor SideEffectOutbox: SideEffectOutboxing {
         if request.commitRequirement == .localCommitRequired &&
             request.externalEffect &&
             request.localCommit?.provesCommittedLocalMutationWithoutExternalEffects != true {
-            return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: nil)
+            return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: nil, claimToken: nil)
         }
 
-        return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: lease)
+        return SideEffectAttempt(id: request.id, request: request, decision: decision, ledgerRecord: record, lease: lease, claimToken: nil)
     }
 
     func completedAttempt(for request: SideEffectOutboxRequest) async throws -> SideEffectAttempt? {
@@ -131,8 +158,58 @@ actor SideEffectOutbox: SideEffectOutboxing {
             request: request,
             decision: policyEngine.evaluate(request),
             ledgerRecord: existing,
-            lease: nil
+            lease: nil,
+            claimToken: nil
         )
+    }
+
+    func claim(_ request: SideEffectOutboxRequest) async throws -> SideEffectClaim {
+        guard request.id.isEmpty == false else {
+            throw SideEffectOutboxError.missingDurableID
+        }
+        if activeClaimIDs.contains(request.id) {
+            await withCheckedContinuation { continuation in
+                claimWaiters[request.id, default: []].append(continuation)
+            }
+            return try await claim(request)
+        }
+
+        activeClaimIDs.insert(request.id)
+        do {
+            let decision = policyEngine.evaluate(request)
+            let lease = makeLease(for: request, decision: decision)
+            let proposed = makeRecord(request: request, decision: decision, lease: lease)
+            let token = UUID().uuidString.lowercased()
+            switch try await ledger.claim(proposed, token: token) {
+            case let .existing(existing):
+                finishClaim(id: request.id)
+                let attempt = SideEffectAttempt(
+                    id: request.id,
+                    request: request,
+                    decision: decision,
+                    ledgerRecord: existing,
+                    lease: nil,
+                    claimToken: nil
+                )
+                return existing.status == .succeeded ? .terminal(attempt) : .reconciliationRequired(attempt)
+            case let .claimed(claimed):
+                let attempt = SideEffectAttempt(
+                    id: request.id,
+                    request: request,
+                    decision: decision,
+                    ledgerRecord: claimed,
+                    lease: lease,
+                    claimToken: token
+                )
+                if lease == nil {
+                    finishClaim(id: request.id)
+                }
+                return .claimed(attempt)
+            }
+        } catch {
+            finishClaim(id: request.id)
+            throw error
+        }
     }
 
     func recordResult(
@@ -172,8 +249,26 @@ actor SideEffectOutbox: SideEffectOutboxing {
             degradedFacts: result.degradedFacts.isEmpty ? attempt.decision.degradedFacts : result.degradedFacts,
             receiptID: receipt.id
         )
-        try await ledger.append(updated)
-        return receipt
+        do {
+            if let token = attempt.claimToken {
+                guard try await ledger.finalize(updated, token: token) else {
+                    throw SideEffectOutboxError.invalidClaimToken
+                }
+            } else {
+                try await ledger.append(updated)
+            }
+            finishClaim(id: attempt.id)
+            return receipt
+        } catch {
+            finishClaim(id: attempt.id)
+            throw error
+        }
+    }
+
+    private func finishClaim(id: String) {
+        activeClaimIDs.remove(id)
+        let waiters = claimWaiters.removeValue(forKey: id) ?? []
+        waiters.forEach { $0.resume() }
     }
 
     private func makeRecord(

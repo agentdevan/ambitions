@@ -237,6 +237,13 @@ protocol SideEffectLedgerRepository: Sendable {
     func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord]
     func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord]
     func fetchRecord(id: String) async throws -> SideEffectLedgerRecord?
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool
+}
+
+enum SideEffectLedgerClaimResult: Sendable, Equatable {
+    case claimed(SideEffectLedgerRecord)
+    case existing(SideEffectLedgerRecord)
 }
 
 actor InMemorySideEffectLedgerRepository: SideEffectLedgerRepository {
@@ -260,11 +267,51 @@ actor InMemorySideEffectLedgerRepository: SideEffectLedgerRepository {
         records.first { $0.id == id }
     }
 
+    func claim(_ record: SideEffectLedgerRecord, token: String) async throws -> SideEffectLedgerClaimResult {
+        if let existing = records.first(where: { $0.id == record.id }) {
+            return .existing(existing)
+        }
+        let claimed = record.claiming(token: token)
+        records.append(claimed)
+        return .claimed(claimed)
+    }
+
+    func finalize(_ record: SideEffectLedgerRecord, token: String) async throws -> Bool {
+        guard let index = records.firstIndex(where: { $0.id == record.id }),
+              records[index].commandID == token else { return false }
+        records[index] = record.claiming(token: token)
+        return true
+    }
+
     private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
         if lhs.occurredAt != rhs.occurredAt {
             return lhs.occurredAt > rhs.occurredAt
         }
         return lhs.id < rhs.id
+    }
+}
+
+extension SideEffectLedgerRecord {
+    func claiming(token: String) -> SideEffectLedgerRecord {
+        SideEffectLedgerRecord(
+            id: id,
+            effectKind: effectKind,
+            status: status,
+            boundary: boundary,
+            actionKind: actionKind,
+            sourceDomain: sourceDomain,
+            commandID: token,
+            targetObjects: targetObjects,
+            occurredAt: occurredAt,
+            localOnly: localOnly,
+            requiresConfirmation: requiresConfirmation,
+            externalEffect: externalEffect,
+            reasons: reasons,
+            blockedFacts: blockedFacts,
+            degradedFacts: degradedFacts,
+            receiptID: receiptID,
+            schemaVersion: schemaVersion
+        )
     }
 }
 
