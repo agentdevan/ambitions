@@ -213,7 +213,8 @@ private extension RuntimeCommandMutationCommitter {
     ) async -> AmbitionsCommandExecutionResult? {
         switch lookup {
         case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let recordStatus):
-            if let commandRecord, commandRecord.command != command {
+            if let commandRecord,
+               commandRecord.command.hasSameReplaySemanticIdentity(as: command) == false {
                 return adapter.incompatibleCommandReplayResult(
                     recordedCommand: commandRecord.command,
                     recordedResult: commandRecord.result
