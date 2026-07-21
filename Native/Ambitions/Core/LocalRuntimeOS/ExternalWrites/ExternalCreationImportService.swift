@@ -47,7 +47,7 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
 
         let requests: [ExternalCreationRequest]
         do {
-            requests = try store.drain()
+            requests = try store.pendingRequests()
         } catch {
             return ExternalCreationImportResult(importedCaptureIDs: [], preferredLanding: nil, source: nil)
         }
@@ -55,8 +55,11 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
         var importedIDs: [String] = []
         var preferredLanding: ExternalCreationLanding?
         var source: ExternalCreationSource?
+        var handledRequestIDs: Set<ExternalCreationRequest.ID> = []
+        var acknowledgedRequestIDs: Set<ExternalCreationRequest.ID> = []
 
         for request in requests {
+            guard handledRequestIDs.insert(request.id).inserted else { continue }
             let command = command(for: request, now: now)
             let result = await commandExecutor.execute(
                 command,
@@ -67,16 +70,31 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
                 )
             )
             guard result.status == .succeeded,
-                  let captureID = result.target?.captureID
+                  let captureID = result.target?.captureID,
+                  RuntimeTransactionCommitPolicy.hasCommittedEvidence(result)
             else {
                 continue
             }
             importedIDs.append(captureID)
             preferredLanding = preferredLanding ?? request.landing
             source = source ?? request.source
+            acknowledgedRequestIDs.insert(request.id)
         }
 
-        return ExternalCreationImportResult(importedCaptureIDs: importedIDs, preferredLanding: preferredLanding, source: source)
+        if acknowledgedRequestIDs.isEmpty == false {
+            do {
+                try store.acknowledge(requestIDs: acknowledgedRequestIDs)
+            } catch {
+                // A committed command remains replay-safe under its stable command ID.
+                // Preserve the queue rows so a later import can retry acknowledgement.
+            }
+        }
+
+        return ExternalCreationImportResult(
+            importedCaptureIDs: importedIDs,
+            preferredLanding: preferredLanding,
+            source: source
+        )
     }
 
     private func reconcileExternalSurfaceSideEffects() async {
@@ -111,7 +129,7 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
             ExternalCreationCommandMetadataKey.requestID: request.id,
             ExternalCreationCommandMetadataKey.source: request.source.rawValue,
             ExternalCreationCommandMetadataKey.sourceType: sourceType.rawValue,
-            ExternalCreationCommandMetadataKey.landing: request.landing.rawValue,
+            ExternalCreationCommandMetadataKey.landing: request.landing.rawValue
         ]
         metadata[ExternalCreationCommandMetadataKey.sourceApplication] = request.sourceApplication
         metadata[ExternalCreationCommandMetadataKey.sourceURL] = request.sourceURL

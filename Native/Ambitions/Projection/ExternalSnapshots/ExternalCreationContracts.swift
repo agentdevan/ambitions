@@ -64,11 +64,14 @@ struct ExternalCreationQueue: Codable, Sendable, Equatable {
 
 enum SharedExternalCreationStoreError: LocalizedError {
     case emptyText
+    case fileCoordinationFailed
 
     var errorDescription: String? {
         switch self {
         case .emptyText:
             return "Capture text cannot be empty."
+        case .fileCoordinationFailed:
+            return "External creation queue file coordination did not complete."
         }
     }
 }
@@ -88,7 +91,9 @@ struct SharedExternalCreationStore {
 
     func queueFileURL() -> URL {
         let baseURL = baseURLOverride
-            ?? fileManager.containerURL(forSecurityApplicationGroupIdentifier: SharedExternalSnapshotStore.appGroupIdentifier)
+            ?? fileManager.containerURL(
+                forSecurityApplicationGroupIdentifier: SharedExternalSnapshotStore.appGroupIdentifier
+            )
             ?? fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? fileManager.temporaryDirectory
 
@@ -109,24 +114,48 @@ struct SharedExternalCreationStore {
             throw SharedExternalCreationStoreError.emptyText
         }
 
-        let url = queueFileURL()
-        try fileManager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        var queue = try loadQueue(from: url)
-        queue.requests.append(request)
-        let data = try Self.encoder.encode(queue)
-        try data.write(to: url, options: [.atomic])
+        let directoryURL = queueFileURL().deletingLastPathComponent()
+        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
+        try coordinateWriting(directoryURL: directoryURL) { coordinatedDirectoryURL in
+            let url = coordinatedDirectoryURL.appendingPathComponent(Self.fileName)
+            var queue = try loadQueue(from: url)
+            queue.requests.append(request)
+            let data = try Self.encoder.encode(queue)
+            try data.write(to: url, options: [.atomic])
+        }
     }
 
-    func drain() throws -> [ExternalCreationRequest] {
-        let url = queueFileURL()
-        let queue = try loadQueue(from: url)
-        guard queue.requests.isEmpty == false else { return [] }
-        try? fileManager.removeItem(at: url)
-        return queue.requests
+    func pendingRequests() throws -> [ExternalCreationRequest] {
+        let directoryURL = queueFileURL().deletingLastPathComponent()
+        guard fileManager.fileExists(atPath: directoryURL.path) else { return [] }
+        return try coordinateReading(directoryURL: directoryURL) { coordinatedDirectoryURL in
+            try loadQueue(from: coordinatedDirectoryURL.appendingPathComponent(Self.fileName)).requests
+        }
+    }
+
+    func acknowledge(requestIDs: Set<ExternalCreationRequest.ID>) throws {
+        guard requestIDs.isEmpty == false else { return }
+        let directoryURL = queueFileURL().deletingLastPathComponent()
+        guard fileManager.fileExists(atPath: directoryURL.path) else { return }
+
+        try coordinateWriting(directoryURL: directoryURL) { coordinatedDirectoryURL in
+            let url = coordinatedDirectoryURL.appendingPathComponent(Self.fileName)
+            var queue = try loadQueue(from: url)
+            let remainingRequests = queue.requests.filter { requestIDs.contains($0.id) == false }
+            guard remainingRequests.count != queue.requests.count else { return }
+
+            if remainingRequests.isEmpty {
+                try fileManager.removeItem(at: url)
+            } else {
+                queue.requests = remainingRequests
+                let data = try Self.encoder.encode(queue)
+                try data.write(to: url, options: [.atomic])
+            }
+        }
     }
 
     func peek() throws -> [ExternalCreationRequest] {
-        try loadQueue(from: queueFileURL()).requests
+        try pendingRequests()
     }
 
     private func loadQueue(from url: URL) throws -> ExternalCreationQueue {
@@ -137,6 +166,51 @@ struct SharedExternalCreationStore {
         return try Self.decoder.decode(ExternalCreationQueue.self, from: data)
     }
 
+    private func coordinateReading<ResultValue>(
+        directoryURL: URL,
+        accessor: @escaping (URL) throws -> ResultValue
+    ) throws -> ResultValue {
+        let resultBox = FileCoordinationResultBox<ResultValue>()
+        var coordinationError: NSError?
+        NSFileCoordinator(filePresenter: nil).coordinate(
+            readingItemAt: directoryURL,
+            options: [],
+            error: &coordinationError
+        ) { coordinatedDirectoryURL in
+            resultBox.result = Result { try accessor(coordinatedDirectoryURL) }
+        }
+        return try coordinatedValue(from: resultBox, coordinationError: coordinationError)
+    }
+
+    private func coordinateWriting<ResultValue>(
+        directoryURL: URL,
+        accessor: @escaping (URL) throws -> ResultValue
+    ) throws -> ResultValue {
+        let resultBox = FileCoordinationResultBox<ResultValue>()
+        var coordinationError: NSError?
+        NSFileCoordinator(filePresenter: nil).coordinate(
+            writingItemAt: directoryURL,
+            options: [],
+            error: &coordinationError
+        ) { coordinatedDirectoryURL in
+            resultBox.result = Result { try accessor(coordinatedDirectoryURL) }
+        }
+        return try coordinatedValue(from: resultBox, coordinationError: coordinationError)
+    }
+
+    private func coordinatedValue<ResultValue>(
+        from resultBox: FileCoordinationResultBox<ResultValue>,
+        coordinationError: NSError?
+    ) throws -> ResultValue {
+        if let coordinationError {
+            throw coordinationError
+        }
+        guard let result = resultBox.result else {
+            throw SharedExternalCreationStoreError.fileCoordinationFailed
+        }
+        return try result.get()
+    }
+
     private static let encoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys]
@@ -144,4 +218,8 @@ struct SharedExternalCreationStore {
     }()
 
     private static let decoder = JSONDecoder()
+}
+
+private final class FileCoordinationResultBox<Value>: @unchecked Sendable {
+    var result: Result<Value, Error>?
 }
