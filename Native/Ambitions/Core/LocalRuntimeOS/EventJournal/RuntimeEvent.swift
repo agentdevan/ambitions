@@ -11,6 +11,7 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable {
     case mutationUndone(MutationUndoneDomainEvent)
     case todayReceiptRecorded(TodayReceiptDomainEvent)
     case todayGoalStepActionApplied(TodayGoalStepActionPlan)
+    case timeRitualActionApplied(TimeRitualActionPlan)
 
     var typeID: String {
         switch self {
@@ -21,6 +22,7 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable {
         case .mutationUndone: "ambitions.mutation.undone"
         case .todayReceiptRecorded: "ambitions.today.receipt_recorded"
         case .todayGoalStepActionApplied: "ambitions.today.goal_step_action_applied"
+        case .timeRitualActionApplied: "ambitions.time.ritual_action_applied"
         }
     }
 
@@ -192,6 +194,9 @@ struct RuntimeDomainEventRecord: Sendable, Codable, Equatable, Hashable {
 
 extension RuntimeDomainEvent {
     static func semanticEvent(command: AmbitionsCommand, result: AmbitionsCommandExecutionResult, occurredAt: String) -> RuntimeDomainEvent? {
+        if let plan = TimeRitualActionPlan.decode(command: command), result.status == .succeeded {
+            return .timeRitualActionApplied(plan)
+        }
         if let plan = TodayGoalStepActionPlan.decode(command: command), result.status == .succeeded {
             return .todayGoalStepActionApplied(plan)
         }

@@ -157,7 +157,12 @@ struct TimeRitualsSurface: View {
         }
 
         Task {
-            await viewModel.perform(action, using: featureFactory.timeRitualsService, now: clock.now)
+            await viewModel.perform(
+                action,
+                using: featureFactory.timeRitualsService,
+                runtimeClient: featureFactory.runtimeCommandClient,
+                now: clock.now
+            )
         }
     }
 

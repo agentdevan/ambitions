@@ -59,7 +59,7 @@ enum TimeRitualState: String, Sendable {
     }
 }
 
-enum TimeRitualActionKind: String, Sendable {
+enum TimeRitualActionKind: String, Sendable, Codable, Equatable {
     case complete
     case skip
     case delay
@@ -89,6 +89,17 @@ struct TimeRitualActionState: Identifiable, Sendable {
 struct TimeRitualActionRequest: Sendable {
     let kind: TimeRitualActionKind
     let target: TimeRitualActionTarget
+    let operationID: String
+
+    init(
+        kind: TimeRitualActionKind,
+        target: TimeRitualActionTarget,
+        operationID: String = UUID().uuidString
+    ) {
+        self.kind = kind
+        self.target = target
+        self.operationID = operationID
+    }
 }
 
 struct TimeRitualInlineMessage: Identifiable, Sendable {

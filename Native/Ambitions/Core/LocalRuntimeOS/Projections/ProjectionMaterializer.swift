@@ -39,7 +39,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
         metadata = payloadSummary.metadata.merging([
             "localOnly": String(envelope.event.localOnly),
             "runtimeEventChecksum": envelope.checksum,
-            "runtimeEventSequence": String(envelope.sequence),
+            "runtimeEventSequence": String(envelope.sequence)
         ], uniquingKeysWith: { _, new in new })
     }
 
@@ -62,7 +62,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
             target.deliverableID,
             target.scopeItemID,
             target.recommendationID,
-            target.explanationID,
+            target.explanationID
         ].compactMap { $0 }
     }
 
@@ -70,6 +70,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
         Array(Set(values.filter { $0.isEmpty == false })).sorted()
     }
 
+    // swiftlint:disable:next large_tuple
     private static func summary(for payload: RuntimeEventPayload) -> (
         summary: String,
         resultStatus: AmbitionsCommandExecutionStatus?,
@@ -88,7 +89,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 command.eventLedgerEntryIDs + command.recommendationExplanationIDs,
                 command.resultMetadata.merging([
                     "commandKind": command.commandKind.rawValue,
-                    "resultStatus": command.resultStatus.rawValue,
+                    "resultStatus": command.resultStatus.rawValue
                 ], uniquingKeysWith: { _, new in new })
             )
         case let .closureRecorded(closure):
@@ -118,7 +119,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 [],
                 [
                     "captureRoute": route.route.rawValue,
-                    "captureKind": route.kind.rawValue,
+                    "captureKind": route.kind.rawValue
                 ]
             )
         case let .timePlacementProposed(placement):
@@ -131,7 +132,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 [
                     "proposalID": placement.proposalID,
                     "stepID": placement.stepID ?? "",
-                    "timeBlockID": placement.timeBlockID ?? "",
+                    "timeBlockID": placement.timeBlockID ?? ""
                 ].filter { $0.value.isEmpty == false }
             )
         case let .proofAttached(proof):
@@ -152,7 +153,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 [tombstone.lineageID, tombstone.supersededByObjectID].compactMap { $0 },
                 [
                     "objectFamily": tombstone.objectFamily.rawValue,
-                    "objectID": tombstone.objectID,
+                    "objectID": tombstone.objectID
                 ]
             )
         case let .compactionSnapshot(snapshot):
@@ -164,7 +165,7 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 [snapshot.cursor.eventID],
                 [
                     "eventCount": String(snapshot.eventCount),
-                    "checksumHead": snapshot.checksumHead,
+                    "checksumHead": snapshot.checksumHead
                 ]
             )
         case let .domainMutation(record):
@@ -189,6 +190,8 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
         case let .todayReceiptRecorded(value):
             value.receipt.affectedObjects.map(\.id)
         case let .todayGoalStepActionApplied(value):
+            [value.goalID, value.stepID]
+        case let .timeRitualActionApplied(value):
             [value.goalID, value.stepID]
         }
     }
@@ -261,7 +264,7 @@ struct ProjectionMaterializationBatch: Equatable {
             .widget: widget.cursor,
             .appIntent: appIntent.cursor,
             .receipt: receipt.cursor,
-            .privacy: privacy.cursor,
+            .privacy: privacy.cursor
         ]
     }
 }
@@ -311,7 +314,7 @@ struct ProjectionMaterializer {
             try context(for: .widget),
             try context(for: .appIntent),
             try context(for: .receipt),
-            try context(for: .privacy),
+            try context(for: .privacy)
         ]
         let cursors = [
             today.cursor,
@@ -322,7 +325,7 @@ struct ProjectionMaterializer {
             widget.cursor,
             appIntent.cursor,
             receipt.cursor,
-            privacy.cursor,
+            privacy.cursor
         ]
 
         return ProjectionMaterializationBatch(

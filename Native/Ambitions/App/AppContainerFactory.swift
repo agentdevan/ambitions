@@ -150,7 +150,9 @@ enum AppContainerFactory {
             receiptFactory: CommandReceiptFactory(),
             scheduleStoreFileURL: scheduleStoreFileURL,
             todayActionMaterializer: repositories.todayGoalStepActionMaterializer
-                ?? RepositoryTodayGoalStepActionMaterializer(repositories: repositories)
+                ?? RepositoryTodayGoalStepActionMaterializer(repositories: repositories),
+            timeRitualActionMaterializer: repositories.timeRitualActionMaterializer
+                ?? RepositoryTimeRitualActionMaterializer(repositories: repositories)
         )
         let projectionStore = repositories.projectionStore
 

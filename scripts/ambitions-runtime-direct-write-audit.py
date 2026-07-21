@@ -502,6 +502,34 @@ def run_self_test() -> int:
             today_projection_row.rationale,
         )
     })[0] == PROJECTION_CLASSIFICATION
+    time_ritual_descriptor = next(
+        row for row in production_registry.mutations
+        if row.fields.get("id") == '"time.ritual-action"'
+    )
+    assert time_ritual_descriptor.source_path == "SwiftDataTimeRitualActionMaterializer.materialize"
+    assert time_ritual_descriptor.status == "durable"
+    assert time_ritual_descriptor.fields.get("eventKind") == '"ambitions.time.ritual_action_applied"'
+    time_ritual_repository_descriptor = next(
+        row for row in production_registry.mutations
+        if row.fields.get("id") == '"time.ritual-action.repository-materializer"'
+    )
+    assert time_ritual_repository_descriptor.source_path == "RepositoryTimeRitualActionMaterializer.materialize"
+    assert time_ritual_repository_descriptor.status == "projectionOnly"
+    assert set(time_ritual_repository_descriptor.proof_test_ids) == {
+        "AmbitionsTests/TimeRitualOwnerWriteTests/testRepositoryFallbackFailsClosedWithoutPartialWrites",
+    }
+    time_ritual_projection_path = "Native/Ambitions/Core/LocalRuntimeOS/Storage/TimeRitualActionMaterializer.swift"
+    time_ritual_projection_row = production_write_paths[time_ritual_projection_path]
+    assert time_ritual_projection_row.status == "projectionOnly"
+    assert set(time_ritual_projection_row.proof_test_ids) <= set(time_ritual_descriptor.proof_test_ids)
+    assert classify(time_ritual_projection_path, {
+        time_ritual_projection_path: RegistryWritePath(
+            time_ritual_projection_row.source_path,
+            time_ritual_projection_row.status,
+            tuple(time_ritual_projection_row.proof_test_ids),
+            time_ritual_projection_row.rationale,
+        )
+    })[0] == PROJECTION_CLASSIFICATION
     with tempfile.TemporaryDirectory() as temporary_directory:
         unseen_root = Path(temporary_directory) / "PreviouslyUnseen" / "NestedMutationDirectory"
         unseen_root.mkdir(parents=True)

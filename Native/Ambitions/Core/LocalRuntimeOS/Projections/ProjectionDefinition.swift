@@ -72,7 +72,7 @@ struct ProjectionDefinition: Codable, Equatable, Hashable, Identifiable {
             .sensitive,
             .privateUserText,
             .calendarDerived,
-            .syncMetadata,
+            .syncMetadata
         ],
         readModelInventory: [ProjectionReadModelInventoryEntry],
         schemaVersion: String = projectionDefinitionSchemaVersion
@@ -104,7 +104,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift", responsibility: "Today execution read model assembly", migrationTarget: .today),
                     .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift", responsibility: "Today Stage execution projection", migrationTarget: .today),
-                    .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService.swift", responsibility: "Repository-backed Today read path", migrationTarget: .today),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService.swift", responsibility: "Repository-backed Today read path", migrationTarget: .today)
                 ]
             )
         case .goals:
@@ -115,18 +115,18 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift", responsibility: "Goals overview board projection", migrationTarget: .goals),
                     .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift", responsibility: "Repository-backed Goals surface read path", migrationTarget: .goals),
-                    .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Projections/LifeAreaAtlasProjector.swift", responsibility: "Life area atlas projector scaffold", migrationTarget: .goals),
+                    .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Projections/LifeAreaAtlasProjector.swift", responsibility: "Life area atlas projector scaffold", migrationTarget: .goals)
                 ]
             )
         case .time:
             return ProjectionDefinition(
                 id: .time,
                 family: .surface,
-                consumesEventKinds: [.commandExecution, .correctionRecorded, .timePlacementProposed, .tombstoneRecorded],
+                consumesEventKinds: [.commandExecution, .correctionRecorded, .domainMutation, .timePlacementProposed, .tombstoneRecorded],
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionService.swift", responsibility: "Time projection service source reads", migrationTarget: .time),
                     .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceProjectionAssembly.swift", responsibility: "Time surface assembly", migrationTarget: .time),
-                    .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteProjector.swift", responsibility: "Life calendar suite projection", migrationTarget: .time),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteProjector.swift", responsibility: "Life calendar suite projection", migrationTarget: .time)
                 ]
             )
         case .you:
@@ -137,7 +137,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift", responsibility: "You surface repository read path", migrationTarget: .you),
                     .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionService.swift", responsibility: "You history projection service", migrationTarget: .you),
-                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceTrustProjection.swift", responsibility: "You trust read model projection", migrationTarget: .you),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceTrustProjection.swift", responsibility: "You trust read model projection", migrationTarget: .you)
                 ]
             )
         case .search:
@@ -147,7 +147,7 @@ extension ProjectionDefinition {
                 consumesEventKinds: RuntimeEventKind.allCases.filter { $0 != .compactionSnapshot },
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),
-                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift", responsibility: "Everything search projection scaffold", migrationTarget: .search),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift", responsibility: "Everything search projection scaffold", migrationTarget: .search)
                 ]
             )
         case .widget:
@@ -158,7 +158,7 @@ extension ProjectionDefinition {
                 materializationMode: .privacyFiltered,
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift", responsibility: "Widget-safe projection scaffold", migrationTarget: .widget),
-                    .init(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift", responsibility: "External snapshot builder", migrationTarget: .widget),
+                    .init(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift", responsibility: "External snapshot builder", migrationTarget: .widget)
                 ]
             )
         case .appIntent:
@@ -170,7 +170,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/App/AppIntentLaunchRouter.swift", responsibility: "App Intent launch routing", migrationTarget: .appIntent),
                     .init(sourcePath: "Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift", responsibility: "Creation App Intents", migrationTarget: .appIntent),
-                    .init(sourcePath: "Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift", responsibility: "Step inspection App Intents", migrationTarget: .appIntent),
+                    .init(sourcePath: "Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift", responsibility: "Step inspection App Intents", migrationTarget: .appIntent)
                 ]
             )
         case .receipt:
@@ -181,7 +181,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionReceiptClosureStateProjection.swift", responsibility: "Action receipt projection scaffold", migrationTarget: .receipt),
                     .init(sourcePath: "Native/Ambitions/Projection/Mutations/MutationReceipt.swift", responsibility: "Mutation receipt projection", migrationTarget: .receipt),
-                    .init(sourcePath: "Native/Ambitions/Trust/ReceiptInspectionView.swift", responsibility: "Receipt inspection surface", migrationTarget: .receipt),
+                    .init(sourcePath: "Native/Ambitions/Trust/ReceiptInspectionView.swift", responsibility: "Receipt inspection surface", migrationTarget: .receipt)
                 ]
             )
         case .privacy:
@@ -193,7 +193,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/PrivacyBoundary.swift", responsibility: "Runtime privacy boundary scaffold", migrationTarget: .privacy),
                     .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/StoragePrivacySecurityBoundary.swift", responsibility: "Storage privacy boundary validation", migrationTarget: .privacy),
-                    .init(sourcePath: "Native/Ambitions/Trust/PrivacyInspectionView.swift", responsibility: "Privacy inspection surface", migrationTarget: .privacy),
+                    .init(sourcePath: "Native/Ambitions/Trust/PrivacyInspectionView.swift", responsibility: "Privacy inspection surface", migrationTarget: .privacy)
                 ]
             )
         }

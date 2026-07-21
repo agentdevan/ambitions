@@ -24,13 +24,16 @@ final class TimeRitualsProjectionServiceTests: XCTestCase {
         formatter.formatOptions = [.withInternetDateTime]
         let now = try XCTUnwrap(formatter.date(from: GoalEngineFixtures.fixedNow))
 
-        _ = try await service.performAction(
+        let prepared = try await service.prepareDurableAction(
             TimeRitualActionRequest(
                 kind: .quickLog,
-                target: TimeRitualActionTarget(goalID: goal.id, stepID: step.id, draftID: nil)
+                target: TimeRitualActionTarget(goalID: goal.id, stepID: step.id, draftID: nil),
+                operationID: "projection-quick-log"
             ),
             now: now
         )
+        let plan = try XCTUnwrap(TimeRitualActionPlan.decode(command: prepared.command))
+        try await SwiftDataTimeRitualActionMaterializer(store: store).materialize(plan)
 
         let evidence = try await repositories.evidence.listEvidence(goalID: goal.id)
         let dashboard = try await service.loadDashboard(now: now)

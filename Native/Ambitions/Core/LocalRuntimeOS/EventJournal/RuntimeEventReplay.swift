@@ -74,6 +74,7 @@ struct RuntimeDomainEventCodec: Sendable {
         "ambitions.time.window_protected", "ambitions.time.window_corrected", "ambitions.mutation.undone",
         "ambitions.today.receipt_recorded",
         "ambitions.today.goal_step_action_applied",
+        "ambitions.time.ritual_action_applied"
     ]
 }
 
@@ -114,7 +115,7 @@ struct RuntimeCommandReplayProjection: Equatable, Identifiable {
         metadata = payload.resultMetadata.merging([
             "runtimeEventID": envelope.id,
             "runtimeEventSequence": String(envelope.sequence),
-            "runtimeEventChecksum": envelope.checksum,
+            "runtimeEventChecksum": envelope.checksum
         ], uniquingKeysWith: { _, new in new })
     }
 }

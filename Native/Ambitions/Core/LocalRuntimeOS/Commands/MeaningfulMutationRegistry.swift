@@ -37,7 +37,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 
 enum MeaningfulMutationRegistry {
     static let declaredMutationRowCount = 117
-    static let declaredWritePathRowCount = 52
+    static let declaredWritePathRowCount = 53
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
@@ -209,8 +209,46 @@ enum MeaningfulMutationRegistry {
         mutation(id: "you.preferences-command", sourcePath: "YouPreferencesCommandService.saveYouPreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "Command service source presence lacks row-specific reconstruction proof."),
         mutation(id: "onboarding.complete", sourcePath: "RepositoryBackedOnboardingService.complete", commandKind: .updateUserPreferences, status: .unproven, rationale: "Onboarding completion writes app state through compatibility storage."),
         mutation(id: "time.calendar-aware", sourcePath: "RepositoryBackedTimeService.makeTimeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Calendar-aware service appends a legacy projection ledger mirror."),
-        mutation(id: "time.ritual-view-model", sourcePath: "TimeRitualsViewModel.perform", commandKind: .updateGoal, status: .unproven, rationale: "Time ritual ViewModel delegates to legacy repository mutation."),
-        mutation(id: "time.ritual-action", sourcePath: "RepositoryBackedTimeRitualsService.performAction", commandKind: .updateGoal, status: .unproven, rationale: "Time ritual service mutates goal, feedback, and evidence repositories."),
+        mutation(
+            id: "time.ritual-action",
+            sourcePath: "SwiftDataTimeRitualActionMaterializer.materialize",
+            commandKind: .updateGoal,
+            status: .durable,
+            rationale: "Seven Time ritual actions commit one semantic authority event before atomic, target-validated SwiftData materialization.",
+            executorOwner: "AmbitionsCommandExecutor",
+            durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
+            eventKind: "ambitions.time.ritual_action_applied",
+            projectionOwner: "TimeProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeRitualOwnerWriteTests/testAuthorityReplayAfterRestartMaterializesExactlyOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testPreparationIsDeterministicAndDoesNotWriteRepositories",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testDuplicateCompletionAtSameRevisionUsesOneCommandIdentity",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testDistinctQuickLogInvocationsFromSameLoadedRowHaveDistinctAuthorityIdentity",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testAuthorityReplayAfterRestartMaterializesExactlyOnce",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testAtomicFailureRollsBackGoalFeedbackAndEvidence",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testDeletedGoalRaceCannotInsertQuickLogEvidence",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testRemovedStepRaceCannotInsertArtifactsOrRestoreStep",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testCompleteMinimumSkipAndNeedsEasierMaterializeTheirExactOwnedChanges",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testJournalFailureProducesNoAuthorityOrDerivedWrites",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testViewModelPublishesSuccessOnlyForMatchingMaterializedTimeCursor"
+            ]
+        ),
+        mutation(
+            id: "time.ritual-action.repository-materializer",
+            sourcePath: "RepositoryTimeRitualActionMaterializer.materialize",
+            commandKind: .updateGoal,
+            status: .projectionOnly,
+            rationale: "The non-transactional repository fallback fails closed and never claims atomic materialization.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.time.ritual_action_applied",
+            projectionOwner: "TimeProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeRitualOwnerWriteTests/testRepositoryFallbackFailsClosedWithoutPartialWrites",
+            proofTestIDs: [
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testRepositoryFallbackFailsClosedWithoutPartialWrites"
+            ]
+        ),
         mutation(id: "step.create", sourcePath: "SimpleStepLifecycleService.createSimpleStep", commandKind: .addGoalScopeItem, status: .unproven, rationale: "Simple Step creation lacks row-specific atomic replay proof."),
         mutation(id: "step.place", sourcePath: "SimpleStepLifecycleService.placeStepInTime", commandKind: .placeStepInTime, status: .unproven, rationale: "Step placement lacks authoritative scheduling event proof."),
         mutation(id: "step.recover", sourcePath: "SimpleStepLifecycleService.markMissedStepForRecovery", commandKind: .recoverAction, status: .unproven, rationale: "Missed-step recovery lacks durable restart proof."),
@@ -357,6 +395,24 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testQuickLogCaptureFailureRollsBackCaptureAndEvidenceTogether",
                 "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence"
+            ]
+        ),
+        writePath(
+            sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/TimeRitualActionMaterializer.swift",
+            status: .projectionOnly,
+            rationale: "SwiftData materialization is a derived Time projection write path with authority, replay, atomicity, target-existence, and idempotency proof.",
+            executorOwner: "AmbitionsCommandExecutor",
+            eventKind: "ambitions.time.ritual_action_applied",
+            projectionOwner: "TimeProjection",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeRitualOwnerWriteTests/testAuthorityReplayAfterRestartMaterializesExactlyOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testAuthorityReplayAfterRestartMaterializesExactlyOnce",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testDuplicateCompletionAtSameRevisionUsesOneCommandIdentity",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testAtomicFailureRollsBackGoalFeedbackAndEvidence",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testDeletedGoalRaceCannotInsertQuickLogEvidence",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testRemovedStepRaceCannotInsertArtifactsOrRestoreStep",
+                "AmbitionsTests/TimeRitualOwnerWriteTests/testCompleteMinimumSkipAndNeedsEasierMaterializeTheirExactOwnedChanges"
             ]
         ),
         writePath(sourcePath: "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift", status: .unproven, rationale: "Notification support file access lacks row-specific adapter lifecycle proof."),

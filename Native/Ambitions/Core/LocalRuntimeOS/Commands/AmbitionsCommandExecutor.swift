@@ -41,6 +41,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let receiptFactory: CommandReceiptFactory
     let scheduleStoreFileURL: URL?
     let todayActionMaterializer: (any TodayGoalStepActionMaterializing)?
+    let timeRitualActionMaterializer: (any TimeRitualActionMaterializing)?
 
     init(
         captureService: (any CaptureServicing)? = nil,
@@ -58,7 +59,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         compiler: CommandCompiler? = nil,
         receiptFactory: CommandReceiptFactory,
         scheduleStoreFileURL: URL? = nil,
-        todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil
+        todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
+        timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
@@ -76,6 +78,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.receiptFactory = receiptFactory
         self.scheduleStoreFileURL = scheduleStoreFileURL
         self.todayActionMaterializer = todayActionMaterializer
+        self.timeRitualActionMaterializer = timeRitualActionMaterializer
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
@@ -166,6 +169,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         let result: AmbitionsCommandExecutionResult
 
         switch command.kind {
+        case _ where command.isTimeRitualActionMutation:
+            result = await executeTimeRitualAction(command)
         case .openDestination:
             guard let destination = command.target.destination else {
                 result = blockedResult(for: .needsMissingTarget, command: command)
@@ -244,7 +249,9 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         result: AmbitionsCommandExecutionResult
     ) async -> AmbitionsCommandExecutionResult {
         let materialized: AmbitionsCommandExecutionResult
-        if command.isTodayGoalStepActionMutation {
+        if command.isTimeRitualActionMutation {
+            materialized = await materializeTimeRitualAction(command, committedResult: result)
+        } else if command.isTodayGoalStepActionMutation {
             materialized = await materializeTodayGoalStepAction(command, committedResult: result)
         } else if command.kind == .quickCapture {
             materialized = await materializeQuickCapture(command, context: context, committedResult: result)
