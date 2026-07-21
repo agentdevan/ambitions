@@ -9,13 +9,7 @@ struct StageMotionCurrentView: View {
 
     init(
         projection: MotionCurrentProjection,
-        onAction: @escaping (MotionCurrentAction) -> Void = { action in
-            NotificationCenter.default.post(
-                name: MotionCurrentAction.notificationName,
-                object: nil,
-                userInfo: action.toNotificationPayload()
-            )
-        }
+        onAction: @escaping (MotionCurrentAction) -> Void
     ) {
         self.projection = projection
         self.onAction = onAction
@@ -24,13 +18,7 @@ struct StageMotionCurrentView: View {
     #if DEBUG
         init(
             renderState: MotionCurrentRenderState = .launchArgument,
-            onAction: @escaping (MotionCurrentAction) -> Void = { action in
-                NotificationCenter.default.post(
-                    name: MotionCurrentAction.notificationName,
-                    object: nil,
-                    userInfo: action.toNotificationPayload()
-                )
-            }
+            onAction: @escaping (MotionCurrentAction) -> Void
         ) {
             self.init(projection: .debugFixture(renderState: renderState), onAction: onAction)
         }

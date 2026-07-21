@@ -1,11 +1,18 @@
 import Foundation
 
+enum StageNavigationPath {
+    case goals([GoalRouteTarget])
+    case time([TimeRouteTarget])
+    case you([YouRouteTarget])
+}
+
 enum StageAction {
     case selectSurface(AmbitionsSurface)
     case selectToday(TodayEntryContext)
     case selectRootSurfaceFromDock(AmbitionsSurface, now: Date)
     case handleCurrentSurfaceReselection(now: Date)
     case openGoalDetail(GoalRouteTarget)
+    case replaceNavigationPath(StageNavigationPath)
     case popFocusedRoute
     case resetGoalsPath
     case openTimeRoute(TimeRouteTarget)
@@ -38,6 +45,7 @@ enum StageAction {
     )
     case fallbackExternalLanding
     case noteExternalRoute(AppExternalRoute, AppExternalRouteSource)
+    case setContinuityReceipt(ShellContinuityReceipt?)
     case clearContinuityReceipt
     case consumeTodayEntryContext
     case consumePendingTodayEntryContext

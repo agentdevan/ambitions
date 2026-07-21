@@ -3,24 +3,58 @@ import XCTest
 
 @MainActor
 final class StageMotionRoutingTests: XCTestCase {
-    func testMotionCurrentActionNotificationPayloadRoundTripsThroughCanonicalPayload() {
-        let actions: [MotionCurrentAction] = [
-            .openToday,
-            .openGoals,
-            .openTime,
-            .openTrust,
-            .reviewHistory("review-visible"),
-            .openHistory("history-visible"),
-            .returnToThread("return-to-thread")
-        ]
+    func testMotionRoutingUsesExplicitTypedDispatchWithoutGlobalNotifications() throws {
+        let root = repoRoot()
+        let eventSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionEvent.swift"),
+            encoding: .utf8
+        )
+        let viewSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift"),
+            encoding: .utf8
+        )
+        let stageSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Stage/AmbitionsStage.swift"),
+            encoding: .utf8
+        )
 
-        for action in actions {
-            let notification = Notification(
-                name: MotionCurrentAction.notificationName,
-                object: nil,
-                userInfo: action.toNotificationPayload()
-            )
-            XCTAssertEqual(notification.ambitionsMotionCurrentAction, action)
+        XCTAssertFalse(eventSource.contains("Notification"))
+        XCTAssertFalse(viewSource.contains("NotificationCenter"))
+        XCTAssertFalse(viewSource.contains("onAction: @escaping (MotionCurrentAction) -> Void ="))
+        XCTAssertFalse(stageSource.contains("NotificationCenter"))
+        XCTAssertFalse(stageSource.contains("motionCurrentActionObserver"))
+    }
+
+    func testEveryMotionActionDispatchesThroughTypedReducerOwnedStageRoutes() {
+        let owner = StageOwner()
+
+        let today = StageStore(selectedSurface: .time)
+        today.handleMotionAction(.openToday, owner: owner, source: "test")
+        XCTAssertEqual(today.selectedTab, .today)
+        XCTAssertEqual(today.lastEffectRun.proofArtifactIDs, ["stage.surface.today"])
+
+        let goals = StageStore(selectedSurface: .today)
+        goals.handleMotionAction(.openGoals, owner: owner, source: "test")
+        XCTAssertEqual(goals.selectedTab, .goals)
+        XCTAssertEqual(goals.lastStageFocusPlan.target, .rootObject(.goals))
+
+        let time = StageStore(selectedSurface: .today)
+        time.handleMotionAction(.openTime, owner: owner, source: "test")
+        XCTAssertEqual(time.selectedTab, .time)
+
+        let trust = StageStore(selectedSurface: .today)
+        trust.handleMotionAction(.openTrust, owner: owner, source: "test")
+        XCTAssertEqual(trust.youPath, [.history])
+
+        for action in [
+            MotionCurrentAction.reviewHistory("review"),
+            .openHistory("history"),
+            .returnToThread("thread")
+        ] {
+            let navigation = StageStore(selectedSurface: .today)
+            navigation.handleMotionAction(action, owner: owner, source: "test")
+            XCTAssertEqual(navigation.activeOverlay?.kind, .memoryLens)
+            XCTAssertEqual(navigation.lastStageFocusPlan.target, .overlay("memory-lens"))
         }
     }
 
@@ -127,5 +161,13 @@ final class StageMotionRoutingTests: XCTestCase {
         default:
             XCTFail("Expected presentOverlay memory lens route")
         }
+    }
+
+    private func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
     }
 }

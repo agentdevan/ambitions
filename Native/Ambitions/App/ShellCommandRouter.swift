@@ -156,12 +156,12 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         }
 
         route(to: result.destination, source: source)
-        navigation.continuityReceipt = ShellContinuityReceipt(
+        navigation.setContinuityReceipt(ShellContinuityReceipt(
             title: "Search opened",
             body: handoff.body,
             source: source,
             destinationLabel: result.destination.displayLabel
-        )
+        ))
         return handoff
     }
 

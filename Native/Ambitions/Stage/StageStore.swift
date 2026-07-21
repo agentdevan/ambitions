@@ -30,63 +30,51 @@ final class StageStore {
     }
 
     var selectedTab: AmbitionsSurface {
-        get { state.selectedSurface }
-        set { state.selectedSurface = newValue.canonicalTopLevelTab }
+        state.selectedSurface
     }
 
     var selectedSurface: AmbitionsSurface {
-        get { state.selectedSurface }
-        set { state.selectedSurface = newValue.canonicalTopLevelTab }
+        state.selectedSurface
     }
 
     var goalsPath: [GoalRouteTarget] {
-        get { state.goalsPath }
-        set { state.goalsPath = newValue }
+        state.goalsPath
     }
 
     var timePath: [TimeRouteTarget] {
-        get { state.timePath }
-        set { state.timePath = newValue }
+        state.timePath
     }
 
     var youPath: [YouRouteTarget] {
-        get { state.youPath }
-        set { state.youPath = newValue }
+        state.youPath
     }
 
     var todayEntryContext: TodayEntryContext {
-        get { state.todayEntryContext }
-        set { state.todayEntryContext = newValue }
+        state.todayEntryContext
     }
 
     var pendingTodayEntryContext: TodayEntryContext? {
-        get { state.pendingTodayEntryContext }
-        set { state.pendingTodayEntryContext = newValue }
+        state.pendingTodayEntryContext
     }
 
     var activeOverlay: ShellOverlayState? {
-        get { state.activeOverlay }
-        set { state.activeOverlay = newValue }
+        state.activeOverlay
     }
 
     var lastExternalRoute: AppExternalRoute? {
-        get { state.lastExternalRoute }
-        set { state.lastExternalRoute = newValue }
+        state.lastExternalRoute
     }
 
     var lastExternalRouteSource: AppExternalRouteSource? {
-        get { state.lastExternalRouteSource }
-        set { state.lastExternalRouteSource = newValue }
+        state.lastExternalRouteSource
     }
 
     var recentCommandHistory: [ShellCommandHistoryEntry] {
-        get { state.recentCommandHistory }
-        set { state.recentCommandHistory = newValue }
+        state.recentCommandHistory
     }
 
     var continuityReceipt: ShellContinuityReceipt? {
-        get { state.continuityReceipt }
-        set { state.continuityReceipt = newValue }
+        state.continuityReceipt
     }
 
     var isActivatedCaptureComposerVisible: Bool {
@@ -189,6 +177,10 @@ final class StageStore {
         dispatch(.resetGoalsPath)
     }
 
+    func updateGoalsPathFromNavigation(_ path: [GoalRouteTarget]) {
+        dispatch(.replaceNavigationPath(.goals(path)))
+    }
+
     func popFocusedRoute() {
         dispatch(.popFocusedRoute)
     }
@@ -201,6 +193,10 @@ final class StageStore {
         dispatch(.resetTimePath)
     }
 
+    func updateTimePathFromNavigation(_ path: [TimeRouteTarget]) {
+        dispatch(.replaceNavigationPath(.time(path)))
+    }
+
     func openYouRoute(_ target: YouRouteTarget) {
         dispatch(.openYouRoute(target))
     }
@@ -209,13 +205,17 @@ final class StageStore {
         dispatch(.resetYouPath)
     }
 
+    func updateYouPathFromNavigation(_ path: [YouRouteTarget]) {
+        dispatch(.replaceNavigationPath(.you(path)))
+    }
+
     func openCaptureComposer() {
-        presentGlobalCaptureComposer(source: .globalCaptureComposer)
+        openCaptureComposer(source: .globalCaptureComposer)
     }
 
     func openCaptureComposer(source: ShellCommandEntrySource) {
+        dispatch(.resetTimePath)
         presentGlobalCaptureComposer(source: source)
-        state.timePath = []
     }
 
     func openRituals() {
@@ -332,6 +332,15 @@ final class StageStore {
         dispatch(.dismissOverlay)
     }
 
+    func updateSheetOverlayFromPresentation(_ overlay: ShellOverlayState?) {
+        guard overlay != state.activeOverlay else { return }
+        if let overlay {
+            presentOverlay(overlay)
+        } else {
+            dismissOverlay()
+        }
+    }
+
     func recordRoute(
         title: String,
         source: ShellCommandEntrySource,
@@ -358,12 +367,52 @@ final class StageStore {
         dispatch(.clearContinuityReceipt).consumedContinuityReceipt
     }
 
+    func setContinuityReceipt(_ receipt: ShellContinuityReceipt?) {
+        dispatch(.setContinuityReceipt(receipt))
+    }
+
     func fallbackExternalLanding() {
         dispatch(.fallbackExternalLanding)
     }
 
     func takeTodayEntryContext() -> TodayEntryContext {
         dispatch(.consumeTodayEntryContext).consumedTodayEntryContext ?? .standard
+    }
+
+    func performToolbarAction(_ action: AppShellContextualToolbarAction) {
+        switch action.route {
+        case .selectToday:
+            selectToday(entryContext: .standard)
+        case .createGoal:
+            presentTypedCaptureComposer(kind: .goalSeed, source: .goalsCreate)
+        case .weeklyReview:
+            openWeeklyReview()
+        case .memoryLens:
+            presentMemoryLens(source: .shellUtility)
+        case let .capture(surface):
+            presentSurfaceCapture(for: surface)
+        }
+    }
+
+    func handleMotionAction(
+        _ action: MotionCurrentAction,
+        owner: StageOwner,
+        source: String = "stage.motion"
+    ) {
+        switch owner.route(for: action, source: source) {
+        case let .returnToToday(entryContext):
+            selectToday(entryContext: entryContext)
+        case .openGoals:
+            selectTab(.goals)
+        case .openTime:
+            selectTab(.time)
+        case .openTrust:
+            openHistory()
+        case let .presentOverlay(overlay):
+            presentOverlay(overlay)
+        case .none:
+            break
+        }
     }
 }
 import AmbitionsTimeFoundation

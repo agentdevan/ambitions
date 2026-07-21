@@ -77,6 +77,27 @@ enum StageEffect: Equatable {
         ]
     }
 
+    static func routeChanged(on surface: AmbitionsSurface) -> [StageEffect] {
+        let objectID = "surface.\(surface.rawValue)"
+        return [
+            .visibleObjectMutation(
+                id: "\(objectID).route-changed",
+                affectedObjectIDs: [objectID],
+                consequence: "\(surface.title) navigation changed"
+            ),
+            .announcement(
+                id: "\(objectID).route-changed.announcement",
+                message: "\(surface.title) navigation updated",
+                affectedObjectIDs: [objectID]
+            ),
+            .proofReference(
+                id: "stage.route.\(surface.rawValue).changed",
+                affectedObjectIDs: [objectID],
+                inspectionTarget: "\(objectID).route-history"
+            )
+        ]
+    }
+
     static func visibleObjectMutation(
         id: String,
         affectedObjectIDs: [String],

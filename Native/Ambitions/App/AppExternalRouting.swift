@@ -76,8 +76,7 @@ final class DefaultAppExternalRouter: AppExternalRouting {
     }
 
     func dispatch(_ route: AppExternalRoute, source: AppExternalRouteSource) {
-        navigation.lastExternalRoute = route
-        navigation.lastExternalRouteSource = source
+        navigation.noteExternalRoute(route, source: source)
         let entrySource = source.entrySource
 
         switch route {

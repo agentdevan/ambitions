@@ -3,17 +3,14 @@ import SwiftUI
 
 struct AmbitionsStage: View {
     @Environment(\.colorScheme) private var systemColorScheme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
     private let appFeatureFlags: AppFeatureFlags
     @State private var navigation: StageStore
-    @State private var stageOwner = StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
     @State private var isOnboardingPresented: Bool
     @State private var onboardingError: String?
-    @State private var motionCurrentActionObserver: NSObjectProtocol?
 
     init(container: AppContainer, appFeatureFlags: AppFeatureFlags = .current) {
         self.container = container
@@ -52,14 +49,6 @@ struct AmbitionsStage: View {
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
             validateExternalNavigationGraph()
-            configureStageMotionBehavior()
-            registerMotionCurrentActionObserver()
-        }
-        .onDisappear {
-            unregisterMotionCurrentActionObserver()
-        }
-        .onChange(of: reduceMotion) { _, isReduced in
-            stageOwner.setReduceMotionEnabled(isReduced)
         }
         .sheet(item: activeSheetOverlayBinding, onDismiss: {
             guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
@@ -120,14 +109,14 @@ struct AmbitionsStage: View {
     @ViewBuilder
     private var stageSurfaceHost: some View {
         AmbitionsRootStageSurfaceHost(
-            navigation: $navigation,
+            navigation: navigation,
             creationMessage: creationMessage,
             goalsRefreshID: goalsRefreshID,
             onCreateGoal: { source, seedText, captureID in
                 presentCreateGoal(from: source, seedText: seedText, captureID: captureID)
             },
-            onToolbarAction: { action, tab in
-                handleContextualToolbarAction(action, for: tab)
+            onToolbarAction: { action in
+                navigation.performToolbarAction(action)
             }
         )
     }
@@ -147,7 +136,7 @@ struct AmbitionsStage: View {
                     || navigation.activeOverlay?.kind == .memoryLens {
                     return
                 }
-                navigation.activeOverlay = newValue
+                navigation.updateSheetOverlayFromPresentation(newValue)
             }
         )
     }
@@ -170,21 +159,6 @@ struct AmbitionsStage: View {
             .background(theme.colors.canvas.ignoresSafeArea())
             .transition(.opacity)
             .zIndex(3)
-        }
-    }
-
-    private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AmbitionsSurface) {
-        switch action.id {
-        case "today-start-here":
-            navigation.selectToday(entryContext: .standard)
-        case "goals-create-goal":
-            navigation.presentTypedCaptureComposer(kind: .goalSeed, source: .goalsCreate)
-        case "time-weekly-review":
-            navigation.openWeeklyReview()
-        case "you-history", "motion-memory-lens":
-            navigation.presentMemoryLens(source: .shellUtility)
-        default:
-            presentSurfaceCapture(for: tab)
         }
     }
 
@@ -228,7 +202,7 @@ struct AmbitionsStage: View {
         // Display-only shell receipt chrome; SourceRecord and ReplayTrace wiring stay in runtime/proof owners.
         if let receipt = navigation.continuityReceipt {
             ShellContinuityBanner(receipt: receipt) {
-                navigation.continuityReceipt = nil
+                _ = navigation.takeContinuityReceipt()
             }
             .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 400 : 380, alignment: .leading)
             .padding(.trailing, 20)
@@ -336,59 +310,6 @@ struct AmbitionsStage: View {
         assert(appFeatureFlags.validationIssues.isEmpty, "App feature flags violate final-canon architecture.")
         assert(AppDeepLinkRegistry.validationIssues().isEmpty, "Deep-link registry contains unsupported routes.")
         assert(AppNavigationGraph.nodes.allSatisfy(\.canOpenFromExternalSurface), "Navigation graph contains a dead-end external route.")
-    }
-
-    private func configureStageMotionBehavior() {
-        stageOwner.setReduceMotionEnabled(reduceMotion)
-    }
-
-    private func registerMotionCurrentActionObserver() {
-        motionCurrentActionObserver = NotificationCenter.default.addObserver(
-            forName: MotionCurrentAction.notificationName,
-            object: nil,
-            queue: .main
-        ) { notification in
-            guard let action = notification.ambitionsMotionCurrentAction else { return }
-            let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "stage.motion"
-            Task { @MainActor in
-                routeStageMotionAction(action, source: source)
-            }
-        }
-    }
-
-    private func unregisterMotionCurrentActionObserver() {
-        guard let motionCurrentActionObserver else { return }
-        NotificationCenter.default.removeObserver(motionCurrentActionObserver)
-        self.motionCurrentActionObserver = nil
-    }
-
-    private func routeStageMotionAction(_ action: MotionCurrentAction, source: String) {
-        let route = stageOwner.route(for: action, source: source)
-        switch route {
-        case let .returnToToday(entryContext):
-            navigation.selectToday(entryContext: entryContext)
-        case .openGoals:
-            navigation.selectTab(.goals)
-        case .openTime:
-            navigation.selectTab(.time)
-        case .openTrust:
-            navigation.openHistory()
-        case let .presentOverlay(overlay):
-            if overlay.kind == .memoryLens {
-                navigation.presentMemoryLens(
-                    intent: overlay.intent,
-                    source: overlay.entrySource,
-                    presentationContext: overlay.presentationContext,
-                    query: overlay.query,
-                    goalID: overlay.goalID,
-                    captureID: overlay.captureID
-                )
-            } else {
-                navigation.activeOverlay = overlay
-            }
-        case .none:
-            break
-        }
     }
 
 }

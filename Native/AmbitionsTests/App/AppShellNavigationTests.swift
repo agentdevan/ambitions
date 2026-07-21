@@ -280,6 +280,52 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.overlay.dismissed"])
     }
 
+    @MainActor
+    func testNavigationPathBindingsDispatchReducerEffectsAndFocusPlans() {
+        let navigation = StageStore(selectedSurface: .goals)
+        let goal = GoalRouteTarget(goalID: "goal-binding", draftID: nil)
+
+        navigation.updateGoalsPathFromNavigation([goal])
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .drilldownPush)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .drilldownBackButton(.goals))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.route.goals.changed"])
+
+        navigation.updateGoalsPathFromNavigation([])
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .rootReturn)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .rootObject(.goals))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.route.goals.changed"])
+
+        navigation.selectTab(.time)
+        navigation.updateTimePathFromNavigation([.weeklyReview])
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .drilldownBackButton(.time))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.route.time.changed"])
+
+        navigation.selectTab(.you)
+        navigation.updateYouPathFromNavigation([.history])
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .drilldownBackButton(.you))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.route.you.changed"])
+    }
+
+    @MainActor
+    func testSheetOverlayBindingDispatchesPresentationAndDismissalSemantics() {
+        let navigation = StageStore(selectedSurface: .today)
+        let overlay = ShellOverlayState.memoryLens(entrySource: .shellUtility)
+
+        navigation.updateSheetOverlayFromPresentation(overlay)
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .overlayPresentation)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .overlay("memory-lens"))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.overlay.memory-lens"])
+
+        navigation.updateSheetOverlayFromPresentation(nil)
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .overlayDismissal)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .rootObject(.today))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.overlay.dismissed"])
+    }
+
     func testStageMorphCoordinatorUsesRestrainedReduceMotionTransition() {
         let previous = StageScene(
             surface: .today,
@@ -312,6 +358,7 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testOpenCaptureComposerPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
         let navigation = StageStore(selectedSurface: .time)
+        navigation.openTimeRoute(.weeklyReview)
 
         navigation.openCaptureComposer()
 
@@ -322,6 +369,9 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Capture")
         XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+        XCTAssertEqual(navigation.lastStageTransition.kind, .overlayPresentation)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .overlay("quiet-command-sheet"))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.overlay.quiet-command-sheet"])
     }
 
     @MainActor

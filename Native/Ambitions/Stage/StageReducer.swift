@@ -18,6 +18,15 @@ struct StageReduction {
     }
 }
 
+private struct StageCommandHistoryInput {
+    let title: String
+    let subtitle: String
+    let source: ShellCommandEntrySource
+    let presentationContext: ShellCommandPresentationContext
+    let destinationLabel: String
+    let recordedAt: Date
+}
+
 enum StageReducer {
     private static let surfaceReselectionRootThreshold: TimeInterval = 0.8
 
@@ -42,6 +51,8 @@ enum StageReducer {
             state.selectedSurface = .goals
             state.goalsPath = [target]
             return .none(effects: StageEffect.surfaceChanged(to: .goals))
+        case let .replaceNavigationPath(path):
+            return replaceNavigationPath(path, state: &state)
         case .popFocusedRoute:
             return popFocusedRoute(state: &state)
         case .resetGoalsPath:
@@ -84,12 +95,14 @@ enum StageReducer {
         case let .presentOverlay(overlay):
             state.activeOverlay = overlay
             recordCommandHistory(
-                title: overlay.intent?.title ?? overlay.kind.id.replacingOccurrences(of: "-", with: " ").capitalized,
-                subtitle: overlay.presentationContext.historySubtitle,
-                source: overlay.entrySource,
-                presentationContext: overlay.presentationContext,
-                destinationLabel: ShellCommandDestination.overlay(overlay).displayLabel,
-                recordedAt: now,
+                StageCommandHistoryInput(
+                    title: overlay.intent?.title ?? overlay.kind.id.replacingOccurrences(of: "-", with: " ").capitalized,
+                    subtitle: overlay.presentationContext.historySubtitle,
+                    source: overlay.entrySource,
+                    presentationContext: overlay.presentationContext,
+                    destinationLabel: ShellCommandDestination.overlay(overlay).displayLabel,
+                    recordedAt: now
+                ),
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -101,16 +114,18 @@ enum StageReducer {
             )
             state.activeOverlay = overlay
             recordCommandHistory(
-                title: intent?.title ?? "Add something",
-                subtitle: presentationContext.historySubtitle,
-                source: source,
-                presentationContext: presentationContext,
-                destinationLabel: commandSheetDestinationLabel(
-                    intent: intent,
+                StageCommandHistoryInput(
+                    title: intent?.title ?? "Add something",
+                    subtitle: presentationContext.historySubtitle,
                     source: source,
-                    presentationContext: presentationContext
+                    presentationContext: presentationContext,
+                    destinationLabel: commandSheetDestinationLabel(
+                        intent: intent,
+                        source: source,
+                        presentationContext: presentationContext
+                    ),
+                    recordedAt: now
                 ),
-                recordedAt: now,
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -125,12 +140,14 @@ enum StageReducer {
             )
             state.activeOverlay = overlay
             recordCommandHistory(
-                title: intent?.title ?? "Search Ambitions",
-                subtitle: query.isEmpty ? presentationContext.historySubtitle : "Looked up \"\(query)\".",
-                source: source,
-                presentationContext: presentationContext,
-                destinationLabel: "Search Ambitions",
-                recordedAt: now,
+                StageCommandHistoryInput(
+                    title: intent?.title ?? "Search Ambitions",
+                    subtitle: query.isEmpty ? presentationContext.historySubtitle : "Looked up \"\(query)\".",
+                    source: source,
+                    presentationContext: presentationContext,
+                    destinationLabel: "Search Ambitions",
+                    recordedAt: now
+                ),
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -138,12 +155,14 @@ enum StageReducer {
             let overlay = ShellOverlayState.createGoal(entrySource: source, query: seedText, captureID: captureID)
             state.activeOverlay = overlay
             recordCommandHistory(
-                title: "New goal",
-                subtitle: seedText.isEmpty ? "Opened goal setup from \(source.displayTitle)." : "Started from saved context.",
-                source: source,
-                presentationContext: .createGoal,
-                destinationLabel: "Create Goal",
-                recordedAt: now,
+                StageCommandHistoryInput(
+                    title: "New goal",
+                    subtitle: seedText.isEmpty ? "Opened goal setup from \(source.displayTitle)." : "Started from saved context.",
+                    source: source,
+                    presentationContext: .createGoal,
+                    destinationLabel: "Create Goal",
+                    recordedAt: now
+                ),
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -161,12 +180,14 @@ enum StageReducer {
             return .none(effects: StageEffect.overlayChanged(nil))
         case let .recordRoute(title, source, presentationContext, destination, receiptBody):
             recordCommandHistory(
-                title: title,
-                subtitle: presentationContext.historySubtitle,
-                source: source,
-                presentationContext: presentationContext,
-                destinationLabel: destination.displayLabel,
-                recordedAt: now,
+                StageCommandHistoryInput(
+                    title: title,
+                    subtitle: presentationContext.historySubtitle,
+                    source: source,
+                    presentationContext: presentationContext,
+                    destinationLabel: destination.displayLabel,
+                    recordedAt: now
+                ),
                 state: &state
             )
             if let receiptBody {
@@ -197,6 +218,15 @@ enum StageReducer {
                     id: "stage.external-route.\(String(describing: source))",
                     affectedObjectIDs: ["stage.external-route"],
                     inspectionTarget: "stage.external-route.history"
+                )
+            ])
+        case let .setContinuityReceipt(receipt):
+            state.continuityReceipt = receipt
+            return .none(effects: [
+                .proofReference(
+                    id: receipt == nil ? "stage.continuity-receipt.cleared" : "stage.continuity-receipt.set",
+                    affectedObjectIDs: ["stage.continuity-receipt"],
+                    inspectionTarget: "stage.continuity-receipt.history"
                 )
             ])
         case .clearContinuityReceipt:
@@ -350,6 +380,28 @@ enum StageReducer {
         state.youPath = []
     }
 
+    private static func replaceNavigationPath(
+        _ path: StageNavigationPath,
+        state: inout StageState
+    ) -> StageReduction {
+        let surface: AmbitionsSurface
+        switch path {
+        case let .goals(value):
+            guard value != state.goalsPath else { return .none() }
+            state.goalsPath = value
+            surface = .goals
+        case let .time(value):
+            guard value != state.timePath else { return .none() }
+            state.timePath = value
+            surface = .time
+        case let .you(value):
+            guard value != state.youPath else { return .none() }
+            state.youPath = value
+            surface = .you
+        }
+        return .none(effects: StageEffect.routeChanged(on: surface))
+    }
+
     private static func popFocusedRoute(state: inout StageState) -> StageReduction {
         let surface = state.selectedSurface
         switch surface {
@@ -366,22 +418,14 @@ enum StageReducer {
         return .none(effects: StageEffect.routePopped(to: surface))
     }
 
-    private static func recordCommandHistory(
-        title: String,
-        subtitle: String,
-        source: ShellCommandEntrySource,
-        presentationContext: ShellCommandPresentationContext,
-        destinationLabel: String,
-        recordedAt: Date,
-        state: inout StageState
-    ) {
+    private static func recordCommandHistory(_ input: StageCommandHistoryInput, state: inout StageState) {
         let entry = ShellCommandHistoryEntry(
-            title: title,
-            subtitle: subtitle,
-            source: source,
-            presentationContext: presentationContext,
-            destinationLabel: destinationLabel,
-            recordedAt: ISO8601DateFormatter().string(from: recordedAt)
+            title: input.title,
+            subtitle: input.subtitle,
+            source: input.source,
+            presentationContext: input.presentationContext,
+            destinationLabel: input.destinationLabel,
+            recordedAt: ISO8601DateFormatter().string(from: input.recordedAt)
         )
         state.recentCommandHistory.removeAll {
             $0.title == entry.title && $0.source == entry.source && $0.destinationLabel == entry.destinationLabel

@@ -7,8 +7,27 @@ struct AppShellContextualToolbarAction: Hashable, Identifiable, Sendable {
         case inspection
     }
 
+    enum Route: Hashable, Sendable, CustomStringConvertible {
+        case selectToday
+        case createGoal
+        case weeklyReview
+        case memoryLens
+        case capture(AmbitionsSurface)
+
+        var description: String {
+            switch self {
+            case .selectToday: "selectToday"
+            case .createGoal: "createGoal"
+            case .weeklyReview: "weeklyReview"
+            case .memoryLens: "memoryLens"
+            case let .capture(surface): "capture(\(surface.canonicalTopLevelTab.rawValue))"
+            }
+        }
+    }
+
     let id: String
     let kind: Kind
+    let route: Route
     let title: String
     let systemImage: String
     let accessibilityIdentifier: String
@@ -19,6 +38,7 @@ struct AppShellContextualToolbarAction: Hashable, Identifiable, Sendable {
     init(
         id: String,
         kind: Kind,
+        route: Route,
         title: String,
         systemImage: String,
         accessibilityIdentifier: String,
@@ -28,6 +48,7 @@ struct AppShellContextualToolbarAction: Hashable, Identifiable, Sendable {
     ) {
         self.id = id
         self.kind = kind
+        self.route = route
         self.title = title
         self.systemImage = systemImage
         self.accessibilityIdentifier = accessibilityIdentifier
@@ -59,6 +80,7 @@ enum AppShellContextualToolbarCatalog {
             return AppShellContextualToolbarAction(
                 id: "today-start-here",
                 kind: .surfacePrimary,
+                route: .selectToday,
                 title: "Start here",
                 systemImage: "bolt.fill",
                 accessibilityIdentifier: "shell.today.start-here-button",
@@ -68,6 +90,7 @@ enum AppShellContextualToolbarCatalog {
             return AppShellContextualToolbarAction(
                 id: "goals-create-goal",
                 kind: .surfacePrimary,
+                route: .createGoal,
                 title: "Create goal",
                 systemImage: "plus",
                 accessibilityIdentifier: "shell.goals.create-goal-button",
@@ -77,6 +100,7 @@ enum AppShellContextualToolbarCatalog {
             return AppShellContextualToolbarAction(
                 id: "time-weekly-review",
                 kind: .surfacePrimary,
+                route: .weeklyReview,
                 title: "Review week",
                 systemImage: "calendar.badge.clock",
                 accessibilityIdentifier: "shell.time.weekly-review-button",
@@ -86,6 +110,7 @@ enum AppShellContextualToolbarCatalog {
             return AppShellContextualToolbarAction(
                 id: "you-history",
                 kind: .inspection,
+                route: .memoryLens,
                 title: "History",
                 systemImage: "clock.arrow.circlepath",
                 accessibilityIdentifier: "shell.you.history-button",
@@ -98,6 +123,7 @@ enum AppShellContextualToolbarCatalog {
         AppShellContextualToolbarAction(
             id: "\(tab.canonicalTopLevelTab.rawValue)-capture",
             kind: .captureFallback,
+            route: .capture(tab.canonicalTopLevelTab),
             title: AppShellCaptureAccessModel.toolbarTitle,
             systemImage: "square.and.pencil",
             accessibilityIdentifier: AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: tab),

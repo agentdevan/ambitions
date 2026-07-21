@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct AmbitionsRootStageSurfaceHost: View {
-    @Binding var navigation: StageStore
+    let navigation: StageStore
 
     let creationMessage: GoalDetailInlineMessage?
     let goalsRefreshID: Int
     let onCreateGoal: (ShellCommandEntrySource, String, String?) -> Void
-    let onToolbarAction: (AppShellContextualToolbarAction, AmbitionsSurface) -> Void
+    let onToolbarAction: (AppShellContextualToolbarAction) -> Void
 
     var body: some View {
         Group {
@@ -43,7 +43,10 @@ struct AmbitionsRootStageSurfaceHost: View {
     }
 
     private var goalsNavigation: some View {
-        NavigationStack(path: $navigation.goalsPath) {
+        NavigationStack(path: Binding(
+            get: { navigation.goalsPath },
+            set: { navigation.updateGoalsPathFromNavigation($0) }
+        )) {
             AppShellScaffold(
                 title: "Goals",
                 subtitle: nil,
@@ -76,7 +79,10 @@ struct AmbitionsRootStageSurfaceHost: View {
     }
 
     private var timeNavigation: some View {
-        NavigationStack(path: $navigation.timePath) {
+        NavigationStack(path: Binding(
+            get: { navigation.timePath },
+            set: { navigation.updateTimePathFromNavigation($0) }
+        )) {
             AppShellScaffold(
                 title: "Time",
                 subtitle: nil,
@@ -118,7 +124,10 @@ struct AmbitionsRootStageSurfaceHost: View {
     }
 
     private var youNavigation: some View {
-        NavigationStack(path: $navigation.youPath) {
+        NavigationStack(path: Binding(
+            get: { navigation.youPath },
+            set: { navigation.updateYouPathFromNavigation($0) }
+        )) {
             AppShellScaffold(
                 title: "You",
                 subtitle: nil,
@@ -243,7 +252,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 accessibilityHint: action.accessibilityHint,
                 keyboardShortcut: action.kind == .captureFallback ? AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command]) : nil
             ) {
-                onToolbarAction(action, tab)
+                onToolbarAction(action)
             }
         }
     }
