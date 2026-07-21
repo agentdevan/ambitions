@@ -444,13 +444,26 @@ final class RuntimeStoreSQLiteTests: XCTestCase {
         XCTAssertEqual(sqlite3_close(database), SQLITE_OK)
         database = nil
 
-        let migrated = try RuntimeStoreSQLite(databaseURL: databaseURL)
-        let initialRecords = try await migrated.externalEffectRecords()
+        async let firstMigration = RuntimeStoreSQLite(databaseURL: databaseURL)
+        async let secondMigration = RuntimeStoreSQLite(databaseURL: databaseURL)
+        let (migrated, concurrentlyOpened) = try await (
+            firstMigration,
+            secondMigration
+        )
+        let (initialRecords, concurrentInitialRecords) = try await (
+            migrated.externalEffectRecords(),
+            concurrentlyOpened.externalEffectRecords()
+        )
         XCTAssertEqual(
             initialRecords.map(\.status),
             [.pending, .reconciled, .failed]
         )
         XCTAssertEqual(initialRecords.map(\.attemptCount), [0, 0, 0])
+        XCTAssertEqual(
+            initialRecords[2].failureDescription,
+            "Legacy failure details are unavailable."
+        )
+        XCTAssertEqual(concurrentInitialRecords, initialRecords)
 
         let pendingClaimResult = try await migrated.claimNextExternalEffect(
             claimID: "worker.pending",
