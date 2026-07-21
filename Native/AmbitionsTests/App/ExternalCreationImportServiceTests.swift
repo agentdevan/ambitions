@@ -27,20 +27,49 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(try store.pendingRequests(), [])
     }
 
-    func testIndependentStoresCoordinateInterleavedEnqueueAndAcknowledgement() throws {
+    func testIndependentStoresSerializeOverlappingQueueMutationsWithoutLostUpdate() async throws {
         let root = temporaryDirectory()
-        let appStore = SharedExternalCreationStore(baseURL: root)
-        let extensionStore = SharedExternalCreationStore(baseURL: root)
+        let firstWriterLoadedQueue = DispatchSemaphore(value: 0)
+        let releaseFirstWriter = DispatchSemaphore(value: 0)
+        let secondWriterStarted = DispatchSemaphore(value: 0)
+        let secondWriterLoadedQueue = DispatchSemaphore(value: 0)
+        let appStore = SharedExternalCreationStore(
+            baseURL: root,
+            coordinatedMutationDidLoadQueue: {
+                firstWriterLoadedQueue.signal()
+                releaseFirstWriter.wait()
+            }
+        )
+        let extensionStore = SharedExternalCreationStore(
+            baseURL: root,
+            coordinatedMutationDidLoadQueue: {
+                secondWriterLoadedQueue.signal()
+            }
+        )
         let first = makeRequest(id: "first", text: "From app", source: .appIntent)
         let second = makeRequest(id: "second", text: "From share", source: .shareExtensionText)
 
-        try appStore.enqueueDurableRequest(first)
-        XCTAssertEqual(try extensionStore.pendingRequests(), [first])
+        let firstWriter = Task.detached(priority: .high) {
+            try appStore.enqueueDurableRequest(first)
+        }
+        XCTAssertEqual(firstWriterLoadedQueue.wait(timeout: .now() + 2), .success)
 
-        try extensionStore.enqueueDurableRequest(second)
-        try appStore.acknowledge(requestIDs: [first.id])
+        let secondWriter = Task.detached(priority: .high) {
+            secondWriterStarted.signal()
+            try extensionStore.enqueueDurableRequest(second)
+        }
+        XCTAssertEqual(secondWriterStarted.wait(timeout: .now() + 2), .success)
+        XCTAssertEqual(secondWriterLoadedQueue.wait(timeout: .now() + 0.2), .timedOut)
 
-        XCTAssertEqual(try extensionStore.pendingRequests(), [second])
+        releaseFirstWriter.signal()
+        try await firstWriter.value
+        try await secondWriter.value
+
+        XCTAssertEqual(secondWriterLoadedQueue.wait(timeout: .now() + 2), .success)
+        XCTAssertEqual(
+            try SharedExternalCreationStore(baseURL: root).pendingRequests(),
+            [first, second]
+        )
     }
 
     func testImportServiceCreatesNormalCapturesAndPreservesProvenanceHint() async throws {
@@ -145,34 +174,76 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(result.importedCaptureIDs, [])
         XCTAssertEqual(try store.pendingRequests(), [request])
     }
+}
 
-    func testReplayedSuccessIsAcknowledgedWithoutDoubleCapture() async throws {
+extension ExternalCreationImportServiceTests {
+    func testSQLiteAuthorityReplayAcknowledgesWithoutDoubleCapture() async throws {
         let root = temporaryDirectory()
+        let databaseURL = root.appendingPathComponent("EventStore.sqlite")
         let failedAcknowledgementStore = SharedExternalCreationStore(
             fileManager: RemoveFailingFileManager(),
             baseURL: root
         )
         let retryStore = SharedExternalCreationStore(baseURL: root)
-        let executor = ReplayAwareCreationExecutor()
-        let firstService = DefaultExternalCreationImportService(
+        let repository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: repository)
+        let firstAuthority = EventStoreSQLite(databaseURL: databaseURL, deviceID: "external-import-first")
+        let firstService = makeImportService(
             store: failedAcknowledgementStore,
-            commandExecutor: executor
+            captureService: captureService,
+            commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
+            authority: firstAuthority
         )
-        let retryService = DefaultExternalCreationImportService(store: retryStore, commandExecutor: executor)
-        let request = makeRequest(text: "Replay safely", source: .appIntent)
+        let request = makeRequest(id: "sqlite-replay", text: "Replay safely", source: .appIntent)
+        let commandID = "external.creation.command.sqlite-replay"
+        let captureID = "capture.\(commandID)"
 
         try failedAcknowledgementStore.enqueueDurableRequest(request)
         let firstResult = await firstService.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
         XCTAssertEqual(try retryStore.pendingRequests(), [request])
 
+        let replayRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let replayAuthority = EventStoreSQLite(databaseURL: databaseURL, deviceID: "external-import-replay")
+        let retryService = makeImportService(
+            store: retryStore,
+            captureService: captureService,
+            commandExecutionRecords: replayRecords,
+            authority: replayAuthority
+        )
         let replayResult = await retryService.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_860))
-        let counts = await executor.counts()
+        let captures = try await repository.listCaptures()
+        let commandEvents = try await replayAuthority.fetchEvents(matching: .commandID(commandID), limit: nil)
+        let captureMutationCount = captureMutationCount(in: commandEvents)
+        let replayRecord = try await replayRecords.fetchRecord(commandID: commandID)
+        let authorityReceipt = try await replayAuthority.authorityReceipt(commandID: commandID)
 
-        XCTAssertEqual(firstResult.importedCaptureIDs, ["capture-replayed"])
-        XCTAssertEqual(replayResult.importedCaptureIDs, ["capture-replayed"])
-        XCTAssertEqual(counts.executions, 2)
-        XCTAssertEqual(counts.captureMutations, 1)
+        XCTAssertEqual(firstResult.importedCaptureIDs, [captureID])
+        XCTAssertEqual(replayResult.importedCaptureIDs, [captureID])
+        XCTAssertEqual(captures.map(\.id), [captureID])
+        XCTAssertEqual(commandEvents.count, 2)
+        XCTAssertEqual(captureMutationCount, 1)
+        XCTAssertNotNil(authorityReceipt)
+        XCTAssertEqual(
+            replayRecord?.result.metadata["runtimeTransactionDisposition"],
+            RuntimeTransactionCommitDisposition.replayedExistingReceipt.rawValue
+        )
         XCTAssertEqual(try retryStore.pendingRequests(), [])
+    }
+
+    func testSucceededImportWithoutCommittedEvidenceRemainsQueued() async throws {
+        let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
+        let service = DefaultExternalCreationImportService(
+            store: store,
+            commandExecutor: UnverifiedSuccessExecutor()
+        )
+        let request = makeRequest(text: "Wait for committed evidence", source: .appIntent)
+
+        try store.enqueueDurableRequest(request)
+
+        let result = await service.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
+
+        XCTAssertEqual(result.importedCaptureIDs, [])
+        XCTAssertEqual(try store.pendingRequests(), [request])
     }
 
     func testDuplicateRowsExecuteAndReportOnceUsingFirstQueuedValue() async throws {
@@ -229,6 +300,32 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertThrowsError(try store.acknowledge(requestIDs: [request.id]))
     }
 
+    private func makeImportService(
+        store: SharedExternalCreationStore,
+        captureService: DefaultCaptureService,
+        commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository,
+        authority: EventStoreSQLite
+    ) -> DefaultExternalCreationImportService {
+        DefaultExternalCreationImportService(
+            store: store,
+            commandExecutor: AmbitionsCommandExecutor.test(
+                captureService: captureService,
+                commandExecutionRecords: commandExecutionRecords,
+                runtimeEvents: authority
+            )
+        )
+    }
+
+    private func captureMutationCount(in events: [RuntimeEventEnvelope]) -> Int {
+        events.filter { envelope in
+            guard case let .domainMutation(record) = envelope.event.payload,
+                  let event = try? record.decodedEvent(),
+                  case .captureCreated = event
+            else { return false }
+            return true
+        }.count
+    }
+
     private func makeRequest(
         id: String = "external-request",
         text: String,
@@ -260,12 +357,8 @@ private final class RemoveFailingFileManager: FileManager, @unchecked Sendable {
     }
 }
 
-private actor ReplayAwareCreationExecutor: CommandExecuting {
-    private var executionCount = 0
-    private var captureMutationCount = 0
-    private var commandIDs: Set<String> = []
-
-    nonisolated func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
+private struct UnverifiedSuccessExecutor: CommandExecuting {
+    func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
         .valid
     }
 
@@ -273,28 +366,10 @@ private actor ReplayAwareCreationExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
-        executionCount += 1
-        let isReplay = commandIDs.insert(command.id).inserted == false
-        if isReplay == false {
-            captureMutationCount += 1
-        }
-        var metadata = Dictionary(
-            uniqueKeysWithValues: RuntimeTransactionCommitPolicy.requiredEvidenceKeys.map { key in
-                (key, "evidence.\(key)")
-            }
-        )
-        metadata["runtimeTransactionDisposition"] = isReplay ? "replayed_existing_receipt" : "committed"
-        metadata["replayDecision"] = isReplay ? LedgerReplayDecision.replayExistingReceipt.rawValue : "execute"
-
-        return AmbitionsCommandExecutionResult(
+        AmbitionsCommandExecutionResult(
             status: .succeeded,
-            summary: isReplay ? "Replayed committed capture" : "Committed capture",
-            target: AmbitionsCommandTarget(captureID: "capture-replayed", destination: .captureInbox),
-            metadata: metadata
+            summary: "Unverified capture result",
+            target: AmbitionsCommandTarget(captureID: "capture-unverified", destination: .captureInbox)
         )
-    }
-
-    func counts() -> (executions: Int, captureMutations: Int) {
-        (executionCount, captureMutationCount)
     }
 }

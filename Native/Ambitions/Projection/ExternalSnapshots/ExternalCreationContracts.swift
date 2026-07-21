@@ -83,10 +83,16 @@ struct SharedExternalCreationStore {
 
     var fileManager: FileManager = .default
     var baseURLOverride: URL?
+    let coordinatedMutationDidLoadQueue: (@Sendable () -> Void)?
 
-    init(fileManager: FileManager = .default, baseURL: URL? = nil) {
+    init(
+        fileManager: FileManager = .default,
+        baseURL: URL? = nil,
+        coordinatedMutationDidLoadQueue: (@Sendable () -> Void)? = nil
+    ) {
         self.fileManager = fileManager
         self.baseURLOverride = baseURL
+        self.coordinatedMutationDidLoadQueue = coordinatedMutationDidLoadQueue
     }
 
     func queueFileURL() -> URL {
@@ -119,6 +125,7 @@ struct SharedExternalCreationStore {
         try coordinateWriting(directoryURL: directoryURL) { coordinatedDirectoryURL in
             let url = coordinatedDirectoryURL.appendingPathComponent(Self.fileName)
             var queue = try loadQueue(from: url)
+            coordinatedMutationDidLoadQueue?()
             queue.requests.append(request)
             let data = try Self.encoder.encode(queue)
             try data.write(to: url, options: [.atomic])
@@ -141,6 +148,7 @@ struct SharedExternalCreationStore {
         try coordinateWriting(directoryURL: directoryURL) { coordinatedDirectoryURL in
             let url = coordinatedDirectoryURL.appendingPathComponent(Self.fileName)
             var queue = try loadQueue(from: url)
+            coordinatedMutationDidLoadQueue?()
             let remainingRequests = queue.requests.filter { requestIDs.contains($0.id) == false }
             guard remainingRequests.count != queue.requests.count else { return }
 
