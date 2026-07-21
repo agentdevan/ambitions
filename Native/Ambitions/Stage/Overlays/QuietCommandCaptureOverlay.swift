@@ -11,7 +11,7 @@ extension QuietCommandSheetView {
 
             Button("Open Capture") {
                 onDismiss()
-                appContainer?.navigation.presentGlobalCaptureComposer(source: overlay.entrySource)
+                actions.presentGlobalCapture(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
             .accessibilityIdentifier("shell.command.action.quick_capture")

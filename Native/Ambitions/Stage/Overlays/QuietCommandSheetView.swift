@@ -2,10 +2,10 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct QuietCommandSheetView: View {
-    @Environment(\.appContainer) var appContainer
     @Environment(\.ambitionTheme) var theme
 
     let overlay: ShellOverlayState
+    let actions: ShellOverlayActions
     let onDismiss: () -> Void
 
     @State var selectedIntent: ShellCommandIntent?
@@ -101,7 +101,7 @@ struct QuietCommandSheetView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Button("Continue to Goal draft") {
                 onDismiss()
-                appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: overlay.query, captureID: overlay.captureID)
+                actions.presentCreateGoal(source: overlay.entrySource, seedText: overlay.query, captureID: overlay.captureID)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
             .accessibilityIdentifier("shell.command.action.new_goal")
@@ -116,7 +116,7 @@ struct QuietCommandSheetView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Button("Open Today") {
                 onDismiss()
-                appContainer?.navigation.selectToday(entryContext: .standard)
+                actions.selectToday(entryContext: .standard)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
             .accessibilityIdentifier("shell.command.action.quick_recovery")
@@ -131,7 +131,7 @@ struct QuietCommandSheetView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Button("Start here") {
                 onDismiss()
-                appContainer?.navigation.selectToday(entryContext: .stepSession)
+                actions.selectToday(entryContext: .stepSession)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
             .accessibilityIdentifier("shell.command.action.quick_focus")
@@ -146,7 +146,7 @@ struct QuietCommandSheetView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Button("Open Time") {
                 onDismiss()
-                appContainer?.commandRouter.route(to: .tab(.time), source: overlay.entrySource)
+                actions.route(to: .tab(.time), source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
             .accessibilityIdentifier("shell.command.action.open_week")
@@ -157,13 +157,13 @@ struct QuietCommandSheetView: View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             Button("Capture") {
                 onDismiss()
-                appContainer?.navigation.presentGlobalCaptureComposer(source: overlay.entrySource)
+                actions.presentGlobalCapture(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             .accessibilityIdentifier("shell.command.action.quick_capture")
             Button("Create Goal") {
                 onDismiss()
-                appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource)
+                actions.presentCreateGoal(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             .accessibilityIdentifier("shell.command.action.new_goal")

@@ -1,15 +1,46 @@
 import AmbitionsDesignSystem
+import AmbitionsTimeFoundation
 import SwiftUI
 
+struct ActivatedCaptureCommandRequest: Sendable {
+    let text: String
+    let goalID: String?
+    let captureID: String?
+    let source: ShellCommandEntrySource
+    let selectedCaptureRouteType: SmartAttachmentRouteType
+}
+
+@MainActor
+struct ActivatedCaptureCommand {
+    private let commandRouter: any ShellCommandRouting
+    private let clock: any AmbitionsClock
+
+    init(commandRouter: any ShellCommandRouting, clock: any AmbitionsClock) {
+        self.commandRouter = commandRouter
+        self.clock = clock
+    }
+
+    func execute(_ request: ActivatedCaptureCommandRequest) async -> ShellCommandExecutionResult {
+        await commandRouter.execute(
+            intent: .quickCapture,
+            text: request.text,
+            goalID: request.goalID,
+            captureID: request.captureID,
+            source: request.source,
+            selectedCaptureRouteType: request.selectedCaptureRouteType,
+            now: clock.now
+        )
+    }
+}
+
 struct AppShellActivatedCaptureSeam: View {
-    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let overlay: ShellOverlayState
+    let command: ActivatedCaptureCommand
     let onDismiss: () -> Void
-    let onCreateGoal: (String, String?) -> Void
 
     @State private var captureText: String = ""
     @State private var saveState: SaveState = .idle
@@ -220,7 +251,6 @@ struct AppShellActivatedCaptureSeam: View {
 
     @MainActor
     private func saveCapture() async {
-        guard let appContainer else { return }
         let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard rawText.isEmpty == false else { return }
         let decision = draftRouteService.draftRouteDecision(
@@ -230,15 +260,13 @@ struct AppShellActivatedCaptureSeam: View {
             selectedDraftRouteType: selectedDraftRouteType
         )
         saveState = .saving
-        let result = await appContainer.commandRouter.execute(
-            intent: .quickCapture,
+        let result = await command.execute(ActivatedCaptureCommandRequest(
             text: rawText,
             goalID: overlay.goalID,
             captureID: overlay.captureID,
             source: overlay.entrySource,
-            selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType,
-            now: appContainer.clock.now
-        )
+            selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType
+        ))
 
         if let title = result.title, result.createdCaptureID != nil {
             saveState = .saved(title)

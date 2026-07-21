@@ -56,6 +56,7 @@ struct AmbitionsStage: View {
         }, content: { overlay in
             AppShellOverlayView(
                 overlay: overlay,
+                actions: shellOverlayActions,
                 onDismiss: {
                     navigation.dismissOverlay()
                 },
@@ -146,6 +147,7 @@ struct AmbitionsStage: View {
         if let overlay = navigation.activeOverlay, overlay.kind == .memoryLens {
             AppShellOverlayView(
                 overlay: overlay,
+                actions: shellOverlayActions,
                 onDismiss: {
                     navigation.dismissOverlay()
                 },
@@ -167,11 +169,12 @@ struct AmbitionsStage: View {
         if let overlay = navigation.activeOverlay, overlay.isActivatedCaptureComposer {
             AppShellActivatedCaptureSeam(
                 overlay: overlay,
+                command: ActivatedCaptureCommand(
+                    commandRouter: container.commandRouter,
+                    clock: container.clock
+                ),
                 onDismiss: {
                     navigation.dismissOverlay()
-                },
-                onCreateGoal: { seedText, captureID in
-                    presentCreateGoal(from: overlay.entrySource, seedText: seedText, captureID: captureID)
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
@@ -190,6 +193,14 @@ struct AmbitionsStage: View {
         }
         .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.md)
         .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xxl)
+    }
+
+    private var shellOverlayActions: ShellOverlayActions {
+        ShellOverlayActions(
+            navigation: navigation,
+            commandRouter: container.commandRouter,
+            searchService: container.memoryLensService
+        )
     }
 
     private func shellRootDockLayer(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {

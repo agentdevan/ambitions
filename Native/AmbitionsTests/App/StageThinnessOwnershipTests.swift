@@ -72,6 +72,31 @@ final class StageThinnessOwnershipTests: XCTestCase {
         XCTAssertEqual(policy.motionQuery(label: "review", action: .reviewHistory("review-id")), "review:review-id")
     }
 
+    func testShellPresentationViewsRequireExplicitNarrowDependencies() throws {
+        let activatedCapture = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift")
+        let overlayHost = try source("Native/Ambitions/Stage/Overlays/AppShellOverlayView.swift")
+        let commandSheet = try source("Native/Ambitions/Stage/Overlays/QuietCommandSheetView.swift")
+        let captureOverlay = try source("Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift")
+        let memoryOverlay = try source("Native/Ambitions/Stage/Overlays/QuietCommandMemoryLensOverlay.swift")
+        let stage = try source("Native/Ambitions/Stage/AmbitionsStage.swift")
+        let presentationSources = [activatedCapture, overlayHost, commandSheet, captureOverlay, memoryOverlay]
+
+        for viewSource in presentationSources {
+            XCTAssertFalse(viewSource.contains("@Environment(\\.appContainer)"))
+            XCTAssertFalse(viewSource.contains("appContainer?"))
+            XCTAssertFalse(viewSource.contains("guard let appContainer"))
+        }
+
+        XCTAssertTrue(activatedCapture.contains("let command: ActivatedCaptureCommand"))
+        XCTAssertTrue(activatedCapture.contains("await command.execute("))
+        XCTAssertTrue(overlayHost.contains("let actions: ShellOverlayActions"))
+        XCTAssertTrue(commandSheet.contains("let actions: ShellOverlayActions"))
+        XCTAssertTrue(memoryOverlay.contains("await actions.search("))
+        XCTAssertTrue(memoryOverlay.contains("guard query == memoryQuery else"))
+        XCTAssertTrue(stage.contains("ShellOverlayActions("))
+        XCTAssertTrue(stage.contains("ActivatedCaptureCommand("))
+    }
+
     func testStageThinnessInventoryCoversRequiredLeakageCategories() throws {
         let inventory = try source("docs/audits/amb-1673-stage-thinness-inventory.md")
 

@@ -36,7 +36,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 120
+    static let declaredMutationRowCount = 121
     static let declaredWritePathRowCount = 55
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -304,6 +304,13 @@ enum MeaningfulMutationRegistry {
         mutation(id: "widget.outbox", sourcePath: "WidgetRefreshOutbox.recordSnapshotRefresh", commandKind: .openDestination, status: .unproven, rationale: "Widget refresh outbox lacks row-specific reconstruction proof."),
         mutation(id: "repair.portable-snapshot", sourcePath: "PortableSnapshotService.importSnapshot", commandKind: .updateGoal, status: .unproven, rationale: "Portable snapshot import lacks complete migration and replay proof."),
         mutation(id: "shell.activated-capture", sourcePath: "AppShellActivatedCaptureSeam.saveCapture", commandKind: .quickCapture, status: .unproven, rationale: "Global shell command execution lacks row-specific restart and replay proof."),
+        mutation(
+            id: "shell.activated-capture-command",
+            sourcePath: "ActivatedCaptureCommand.execute",
+            commandKind: .quickCapture,
+            status: .unproven,
+            rationale: "The typed presentation adapter forwards exact input and time to the registered shell command router; durable restart and replay proof remains owned by that downstream authority."
+        ),
         mutation(id: "app-intent.bridge-enqueue", sourcePath: "AppIntentBridge.enqueueExternalCreation", commandKind: .quickCapture, status: .unproven, rationale: "App Intent bridge enqueue lacks row-specific terminated-app replay and reconciliation proof."),
         mutation(id: "app-intent.bridge-command", sourcePath: "AppIntentBridge.recordCommandBridge", commandKind: .quickCapture, status: .unproven, rationale: "App Intent command bridge lacks row-specific durable receipt and replay proof."),
         mutation(id: "external-creation.import", sourcePath: "DefaultExternalCreationImportService.importPendingCreations", commandKind: .quickCapture, status: .unproven, rationale: "External creation import lacks row-specific idempotent restart and reconciliation proof."),

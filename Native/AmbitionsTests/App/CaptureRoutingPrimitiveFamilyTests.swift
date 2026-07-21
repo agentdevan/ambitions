@@ -21,7 +21,7 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
             "review state",
             "correction control",
             "saved state",
-            "no silent placement",
+            "no silent placement"
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("fake confidence theater"))
         XCTAssertTrue(contract.forbiddenPatterns.contains("category grid"))
@@ -47,13 +47,13 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(seamSource.contains("CaptureObjectView("))
         XCTAssertTrue(seamSource.contains("CaptureDraftRouteService"))
         XCTAssertTrue(seamSource.contains("selectedDraftRouteType"))
-        XCTAssertTrue(seamSource.contains("appContainer.commandRouter.execute("))
+        XCTAssertTrue(seamSource.contains("await command.execute("))
         XCTAssertTrue(seamSource.contains("selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType"))
         XCTAssertFalse(seamSource.contains("appContainer.captureService.createCapture("))
         XCTAssertTrue(seamSource.contains("sourceType: sourceType"))
         XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
         XCTAssertTrue(seamSource.contains("presentProposal()"))
-        XCTAssertTrue(seamSource.contains("appContainer.clock.now"))
+        XCTAssertTrue(seamSource.contains("let command: ActivatedCaptureCommand"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture-seam"))
         XCTAssertFalse(seamSource.contains("shell.activated-capture.receipt"))
 
@@ -80,11 +80,11 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(seamSource.contains("CaptureObjectView("))
         XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
         XCTAssertTrue(seamSource.contains("selectedDraftRouteType"))
-        XCTAssertTrue(seamSource.contains("appContainer.commandRouter.execute("))
+        XCTAssertTrue(seamSource.contains("await command.execute("))
         XCTAssertTrue(seamSource.contains("selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType"))
         XCTAssertFalse(seamSource.contains("appContainer.captureService.createCapture("))
         XCTAssertTrue(quietSource.contains("captureComposerRedirect"))
-        XCTAssertTrue(quietSource.contains("presentGlobalCaptureComposer"))
+        XCTAssertTrue(quietSource.contains("actions.presentGlobalCapture"))
         XCTAssertFalse(quietSource.contains("CaptureObjectView("))
         XCTAssertFalse(quietSource.contains("saveCapture()"))
         XCTAssertFalse(seamSource.contains("presentationDetents"))
@@ -103,9 +103,9 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertFalse(seamSource.contains("Destination: \\(savedCapture.route.title)"))
         XCTAssertFalse(seamSource.contains("shell.activated-capture.receipt.change-destination"))
         XCTAssertTrue(seamSource.contains("draftRouteService.draftRouteDecision"))
-        XCTAssertTrue(seamSource.contains("appContainer.commandRouter.execute("))
-        XCTAssertTrue(routerSource.contains("Saved locally in Capture through the shared command path. Placement stays editable."))
-        XCTAssertTrue(seamSource.contains("appContainer.clock.now"))
+        XCTAssertTrue(seamSource.contains("await command.execute("))
+        XCTAssertTrue(routerSource.contains("Saved locally in Capture. Placement stays editable."))
+        XCTAssertTrue(seamSource.contains("let command: ActivatedCaptureCommand"))
         XCTAssertTrue(sourcePolicy.contains("return .shellComposer"))
         XCTAssertTrue(sourcePolicy.contains("return .todayQuickCapture"))
     }

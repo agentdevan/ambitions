@@ -11,7 +11,7 @@ final class GlobalComposerHardeningTests: XCTestCase {
             .shareExtension,
             .appIntent,
             .notificationAction,
-            .deepLink,
+            .deepLink
         ])
         XCTAssertTrue(contracts.allSatisfy(\.requiresSharedCommandExecutor))
         XCTAssertTrue(contracts.allSatisfy(\.mutatesOnlyAfterLocalCommand))
@@ -118,7 +118,8 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let commandRecords = try await records.fetchRecent(limit: 10)
         let commandRecord = try XCTUnwrap(commandRecords.first)
 
-        XCTAssertEqual(result.createdCaptureID, "capture-raw-local")
+        XCTAssertEqual(result.createdCaptureID, capture.id)
+        XCTAssertTrue(capture.id.hasPrefix("capture.shell.capture.command-"))
         XCTAssertEqual(capture.rawText, "NASA")
         XCTAssertEqual(capture.sourceType, .shellComposer)
         XCTAssertEqual(capture.route, .captureInbox)
@@ -154,7 +155,7 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let composerModeCopy = [
             CaptureComposerPresentationMode.globalComposer.subtitle,
             CaptureInteractions.routeReceiptMessage(for: .goal),
-            CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.joined(separator: " "),
+            CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.joined(separator: " ")
         ].joined(separator: " ")
 
         XCTAssertTrue(CaptureCopyPolicy.violations(in: copySamples).isEmpty)
@@ -168,7 +169,8 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let router = try source("Native/Ambitions/App/ShellCommandRouter.swift", root: root)
         let composer = try source("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", root: root)
 
-        XCTAssertTrue(seam.contains("appContainer.commandRouter.execute("))
+        XCTAssertTrue(seam.contains("await command.execute("))
+        XCTAssertFalse(seam.contains("@Environment(\\.appContainer)"))
         XCTAssertFalse(seam.contains("appContainer.captureService.createCapture("))
         XCTAssertTrue(seam.contains("selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType"))
         XCTAssertTrue(composer.contains("viewModel.createQuickCapture("))
@@ -286,7 +288,7 @@ private actor EmptyAMB1674GoalsService: GoalsServicing {
             lifecycleRail: [
                 GoalLifecycleRailSegment(id: "previous", title: "Previous", count: 0, subtitle: "None", state: .default),
                 GoalLifecycleRailSegment(id: "active", title: "Active", count: 0, subtitle: "None", state: .selected),
-                GoalLifecycleRailSegment(id: "future", title: "Future", count: 0, subtitle: "None", state: .default),
+                GoalLifecycleRailSegment(id: "future", title: "Future", count: 0, subtitle: "None", state: .default)
             ],
             stateChips: [],
             atlasPreview: nil,

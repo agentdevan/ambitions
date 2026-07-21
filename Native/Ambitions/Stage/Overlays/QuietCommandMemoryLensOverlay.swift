@@ -105,11 +105,7 @@ extension QuietCommandSheetView {
                 Button {
                     let seedText = memoryQuery
                     onDismiss()
-                    appContainer?.navigation.presentTypedCaptureComposer(
-                        kind: .noteThought,
-                        source: overlay.entrySource,
-                        seedText: seedText
-                    )
+                    actions.presentNoteCapture(source: overlay.entrySource, seedText: seedText)
                 } label: {
                     Label("Capture this", systemImage: "square.and.pencil")
                 }
@@ -123,8 +119,8 @@ extension QuietCommandSheetView {
         let handoff = result.trustedSearchHandoff(source: overlay.entrySource)
         return Button {
             onDismiss()
-            let routedHandoff = appContainer?.commandRouter.route(searchResult: result, source: overlay.entrySource)
-            memoryStatusMessage = routedHandoff?.body ?? handoff.body
+            let routedHandoff = actions.route(searchResult: result, source: overlay.entrySource)
+            memoryStatusMessage = routedHandoff.body
         } label: {
             HStack(alignment: .top, spacing: theme.spacing.sm) {
                 Image(systemName: result.systemImage)
@@ -187,7 +183,7 @@ extension QuietCommandSheetView {
         .accessibilityHint("Opens this local result without changing saved data.")
         .accessibilityAction(named: Text(result.inspectActionTitle ?? "Open")) {
             onDismiss()
-            _ = appContainer?.commandRouter.route(searchResult: result, source: overlay.entrySource)
+            _ = actions.route(searchResult: result, source: overlay.entrySource)
         }
         .accessibilityIdentifier("shell.memory-lens.result.\(result.id)")
         .disabled(handoff.isTrusted == false)
@@ -195,14 +191,9 @@ extension QuietCommandSheetView {
 
     @MainActor
     func refreshMemoryResults() async {
-        guard let appContainer else {
-            memoryResults = []
-            memoryStatusMessage = "Search is unavailable without the app container."
-            return
-        }
         let query = memoryQuery
         isMemorySearchLoading = true
-        let results = await appContainer.memoryLensService.search(
+        let results = await actions.search(
             query: query,
             seedIntent: overlay.intent ?? .memoryLens,
             origin: overlay.entrySource.originSurface
