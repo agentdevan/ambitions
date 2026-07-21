@@ -3,6 +3,7 @@ import AmbitionsTimeFoundation
 import SwiftUI
 
 struct ActivatedCaptureCommandRequest: Sendable {
+    let draftID: String
     let text: String
     let goalID: String?
     let captureID: String?
@@ -28,6 +29,7 @@ struct ActivatedCaptureCommand {
             captureID: request.captureID,
             source: request.source,
             selectedCaptureRouteType: request.selectedCaptureRouteType,
+            draftID: request.draftID,
             now: clock.now
         )
     }
@@ -43,6 +45,7 @@ struct AppShellActivatedCaptureSeam: View {
     let onDismiss: () -> Void
 
     @State private var captureText: String = ""
+    @State private var draftID = DomainIdentifier.prefixed("shell.capture.draft")
     @State private var saveState: SaveState = .idle
     @State private var selectedDraftRouteType: SmartAttachmentRouteType?
     @State private var isProposalPresented = false
@@ -110,6 +113,7 @@ struct AppShellActivatedCaptureSeam: View {
             selectedDraftRouteType = overlay.typedCaptureRoute?.kind.smartAttachmentRouteType
         }
         .onChange(of: captureText) { _, newValue in
+            draftID = DomainIdentifier.prefixed("shell.capture.draft")
             if newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 selectedDraftRouteType = nil
                 isProposalPresented = false
@@ -261,6 +265,7 @@ struct AppShellActivatedCaptureSeam: View {
         )
         saveState = .saving
         let result = await command.execute(ActivatedCaptureCommandRequest(
+            draftID: draftID,
             text: rawText,
             goalID: overlay.goalID,
             captureID: overlay.captureID,
@@ -270,6 +275,7 @@ struct AppShellActivatedCaptureSeam: View {
 
         if let title = result.title, result.createdCaptureID != nil {
             saveState = .saved(title)
+            draftID = DomainIdentifier.prefixed("shell.capture.draft")
             selectedDraftRouteType = nil
             isProposalPresented = false
         } else {

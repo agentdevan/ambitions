@@ -17,6 +17,7 @@ final class ShellPresentationDependencyTests: XCTestCase {
             clock: TestClock(now: now)
         )
         let request = ActivatedCaptureCommandRequest(
+            draftID: "shell.capture.draft.test",
             text: "Book dentist",
             goalID: "goal.health",
             captureID: "capture.draft",
@@ -29,6 +30,7 @@ final class ShellPresentationDependencyTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
         let invocation = try XCTUnwrap(router.executionInvocation)
         XCTAssertEqual(invocation.intent, .quickCapture)
+        XCTAssertEqual(invocation.draftID, request.draftID)
         XCTAssertEqual(invocation.text, request.text)
         XCTAssertEqual(invocation.goalID, request.goalID)
         XCTAssertEqual(invocation.captureID, request.captureID)
@@ -114,6 +116,7 @@ private final class ShellPresentationCommandRouterSpy: ShellCommandRouting {
         let captureID: String?
         let source: ShellCommandEntrySource
         let selectedCaptureRouteType: SmartAttachmentRouteType?
+        let draftID: String?
         let now: Date
     }
 
@@ -187,6 +190,7 @@ private final class ShellPresentationCommandRouterSpy: ShellCommandRouting {
         captureID: String?,
         source: ShellCommandEntrySource,
         selectedCaptureRouteType: SmartAttachmentRouteType?,
+        draftID: String?,
         now: Date
     ) async -> ShellCommandExecutionResult {
         executionInvocation = ExecutionInvocation(
@@ -196,6 +200,7 @@ private final class ShellPresentationCommandRouterSpy: ShellCommandRouting {
             captureID: captureID,
             source: source,
             selectedCaptureRouteType: selectedCaptureRouteType,
+            draftID: draftID,
             now: now
         )
         return executionResult

@@ -256,8 +256,75 @@ public struct FlagshipProjectionEnvelope: Codable, Sendable, Equatable {
     }
 }
 
+public enum FlagshipQuickCaptureEntryPoint: String, Codable, Sendable, CaseIterable {
+    case shellCompose
+    case shellUtility
+    case goalsCreate
+    case todayQuickCapture
+    case goalsQuickCapture
+    case timeQuickCapture
+    case youQuickCapture
+    case globalCaptureComposer
+    case deepLink
+    case appIntent
+    case notification
+    case widget
+    case shareExtension
+    case external
+}
+
+public enum FlagshipCaptureSourceType: String, Codable, Sendable, CaseIterable {
+    case todayQuickCapture = "today_quick_capture"
+    case shellComposer = "shell_composer"
+    case notification
+    case shareExtensionText = "share_extension_text"
+    case shareExtensionURL = "share_extension_url"
+    case appIntent = "app_intent"
+}
+
+public enum FlagshipQuickCaptureRoute: String, Codable, Sendable, CaseIterable {
+    case task
+    case goal
+    case idea
+    case proofItem = "proof_item"
+    case waitingItem = "waiting_item"
+    case plan
+    case contextualNote = "contextual_note"
+    case reminder
+    case ritual
+    case archive
+    case decision
+}
+
+public struct FlagshipQuickCaptureContext: Codable, Sendable, Equatable {
+    public let entryPoint: FlagshipQuickCaptureEntryPoint
+    public let sourceType: FlagshipCaptureSourceType
+    public let sourceSurface: String
+    public let route: FlagshipQuickCaptureRoute
+    public let requestedAt: Date
+
+    public init(
+        entryPoint: FlagshipQuickCaptureEntryPoint,
+        sourceType: FlagshipCaptureSourceType,
+        sourceSurface: String,
+        route: FlagshipQuickCaptureRoute,
+        requestedAt: Date
+    ) {
+        self.entryPoint = entryPoint
+        self.sourceType = sourceType
+        self.sourceSurface = sourceSurface
+        self.route = route
+        self.requestedAt = requestedAt
+    }
+}
+
 public enum FlagshipIntent: Codable, Sendable, Equatable {
-    case quickCapture(draftID: String, text: String, placementID: String?)
+    case quickCapture(
+        draftID: String,
+        text: String,
+        placementID: String?,
+        context: FlagshipQuickCaptureContext
+    )
     case createGoal(id: String, title: String)
     case updateGoal(id: String, title: String, completed: Bool)
     case schedule(objectID: String, start: Date, end: Date)
@@ -266,22 +333,45 @@ public enum FlagshipIntent: Codable, Sendable, Equatable {
     case retryExternalEffect(receiptID: String, effectID: String)
 }
 
+public enum FlagshipObjectKind: String, Codable, Sendable, CaseIterable {
+    case capture
+    case goal
+    case timeItem = "time-item"
+    case receipt
+}
+
+public struct FlagshipObjectReference: Codable, Sendable, Equatable {
+    public let kind: FlagshipObjectKind
+    public let id: String
+
+    public init(kind: FlagshipObjectKind, id: String) {
+        self.kind = kind
+        self.id = id
+    }
+}
+
 public struct FlagshipReceiptReference: Codable, Sendable, Equatable {
     public let id: String
     public let projectionCursors: [String: String]
     public let recoveryAction: FlagshipRecoveryAction?
     public let semanticUndoEligible: Bool
+    public let summary: String?
+    public let affectedObjects: [FlagshipObjectReference]
 
     public init(
         id: String,
         projectionCursors: [String: String],
         recoveryAction: FlagshipRecoveryAction?,
-        semanticUndoEligible: Bool
+        semanticUndoEligible: Bool,
+        summary: String? = nil,
+        affectedObjects: [FlagshipObjectReference] = []
     ) {
         self.id = id
         self.projectionCursors = projectionCursors
         self.recoveryAction = recoveryAction
         self.semanticUndoEligible = semanticUndoEligible
+        self.summary = summary
+        self.affectedObjects = affectedObjects
     }
 }
 

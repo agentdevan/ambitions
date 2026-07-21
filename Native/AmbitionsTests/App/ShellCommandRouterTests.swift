@@ -6,9 +6,19 @@ private extension DefaultShellCommandRouter {
         navigation: StageStore,
         captureService: any CaptureServicing
     ) {
+        let executor = AmbitionsCommandExecutor.test(captureService: captureService)
         self.init(
             navigation: navigation,
-            commandExecutor: AmbitionsCommandExecutor.test(captureService: captureService)
+            intentSender: FlagshipRuntimeIntentAdapter(
+                runtimeCommandClient: RuntimeCommandClient(
+                    execute: { command, context in
+                        await executor.execute(command, context: context)
+                    },
+                    projection: { request in
+                        throw RuntimeProjectionClientError.projectionUnavailable(request)
+                    }
+                )
+            )
         )
     }
 }

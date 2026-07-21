@@ -56,6 +56,7 @@ enum SystemSurfaceBootstrap {
     }
 
     @MainActor
+    // swiftlint:disable:next function_parameter_count
     static func makeServices(
         repositories: AppRepositories,
         runtime: AmbitionsRuntime,
@@ -100,7 +101,9 @@ enum SystemSurfaceBootstrap {
             sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService,
             commandRouter: DefaultShellCommandRouter(
                 navigation: navigation,
-                commandExecutor: runtimeCommandClient
+                intentSender: FlagshipRuntimeIntentAdapter(
+                    runtimeCommandClient: runtimeCommandClient
+                )
             ),
             memoryLensService: DefaultMemoryLensService(repositories: repositories),
             onboardingService: RepositoryBackedOnboardingService(appStateRepository: repositories.appState)

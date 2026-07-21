@@ -70,7 +70,9 @@ enum PreviewAppContainerFactory {
         )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
-            commandExecutor: commandExecutor
+            intentSender: FlagshipRuntimeIntentAdapter(
+                runtimeCommandClient: runtimeCommandClient
+            )
         )
         let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
         return AppContainer(

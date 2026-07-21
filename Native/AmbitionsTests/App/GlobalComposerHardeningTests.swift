@@ -28,7 +28,7 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let executor = RecordingCaptureCommandExecutor()
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            commandExecutor: executor
+            intentSender: flagshipIntentSender(executor: executor)
         )
 
         let result = await router.execute(
@@ -62,7 +62,7 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let executor = RecordingCaptureCommandExecutor()
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            commandExecutor: executor
+            intentSender: flagshipIntentSender(executor: executor)
         )
         let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
 
@@ -100,7 +100,7 @@ final class GlobalComposerHardeningTests: XCTestCase {
         )
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            commandExecutor: executor
+            intentSender: flagshipIntentSender(executor: executor)
         )
 
         let result = await router.execute(
@@ -180,7 +180,8 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertTrue(seam.contains("@Environment(\\.accessibilityReduceMotion)"))
         XCTAssertTrue(seam.contains(".accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)"))
         XCTAssertTrue(seam.contains("selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType"))
-        XCTAssertTrue(router.contains("commandExecutor.execute("))
+        XCTAssertTrue(router.contains("intentSender.send("))
+        XCTAssertFalse(router.contains("commandExecutor.execute("))
         XCTAssertFalse(router.contains("captureService.createCapture("))
         XCTAssertTrue(CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.contains { $0.contains("VoiceOver") })
         XCTAssertTrue(CaptureObjectStagePrimitiveContract.current.accessibilityFallbacks.contains { $0.contains("Reduce Motion") })
@@ -221,6 +222,21 @@ final class GlobalComposerHardeningTests: XCTestCase {
             url.deleteLastPathComponent()
         }
         return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+    }
+
+    private func flagshipIntentSender(
+        executor: any CommandExecuting
+    ) -> FlagshipRuntimeIntentAdapter {
+        FlagshipRuntimeIntentAdapter(
+            runtimeCommandClient: RuntimeCommandClient(
+                execute: { command, context in
+                    await executor.execute(command, context: context)
+                },
+                projection: { request in
+                    throw RuntimeProjectionClientError.projectionUnavailable(request)
+                }
+            )
+        )
     }
 }
 

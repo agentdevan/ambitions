@@ -49,7 +49,11 @@ final class FlagshipContractsTests: XCTestCase {
             id: "receipt.001",
             projectionCursors: ["today": "cursor.1"],
             recoveryAction: nil,
-            semanticUndoEligible: true
+            semanticUndoEligible: true,
+            summary: "Saved locally",
+            affectedObjects: [
+                FlagshipObjectReference(kind: .capture, id: "capture.001")
+            ]
         )
         let results: [FlagshipIntentResult] = [
             .committedProjectionReady(receipt),
@@ -73,6 +77,29 @@ final class FlagshipContractsTests: XCTestCase {
         ]
 
         XCTAssertEqual(Set(results.map(\.state)), Set(FlagshipIntentState.allCases))
+        XCTAssertEqual(receipt.summary, "Saved locally")
+        XCTAssertEqual(receipt.affectedObjects.first?.kind, .capture)
+        XCTAssertEqual(receipt.affectedObjects.first?.id, "capture.001")
+    }
+
+    func testQuickCaptureIntentRoundTripsTypedOriginAndDraftIdentity() throws {
+        let intent = FlagshipIntent.quickCapture(
+            draftID: "draft.save-attempt.001",
+            text: "Book dentist",
+            placementID: "reminder",
+            context: FlagshipQuickCaptureContext(
+                entryPoint: .shareExtension,
+                sourceType: .shareExtensionText,
+                sourceSurface: "Share",
+                route: .reminder,
+                requestedAt: Date(timeIntervalSince1970: 1_712_692_800)
+            )
+        )
+
+        let data = try JSONEncoder().encode(intent)
+        let decoded = try JSONDecoder().decode(FlagshipIntent.self, from: data)
+
+        XCTAssertEqual(decoded, intent)
     }
 
     func testProjectionEnvelopeCarriesCursorAndDegradedState() throws {

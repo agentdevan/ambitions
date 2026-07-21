@@ -79,6 +79,7 @@ final class CaptureViewModel {
     var draftError: String?
     var draftRoutePreview: CaptureDraftRoutePreview?
     var isProposalPresented = false
+    private var draftID = DomainIdentifier.prefixed("shell.capture.draft")
     private var selectedDraftRouteType: SmartAttachmentRouteType?
     private let draftRouteService: CaptureDraftRouteService
 
@@ -118,6 +119,9 @@ final class CaptureViewModel {
     }
 
     func updateDraftText(_ text: String) {
+        if text != draftText {
+            draftID = DomainIdentifier.prefixed("shell.capture.draft")
+        }
         draftText = text
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             selectedDraftRouteType = nil
@@ -206,6 +210,7 @@ final class CaptureViewModel {
             captureID: nil,
             source: source,
             selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType,
+            draftID: draftID,
             now: now
         )
 
@@ -215,6 +220,7 @@ final class CaptureViewModel {
         }
 
         draftText = ""
+        draftID = DomainIdentifier.prefixed("shell.capture.draft")
         draftError = nil
         selectedDraftRouteType = nil
         draftRoutePreview = nil
