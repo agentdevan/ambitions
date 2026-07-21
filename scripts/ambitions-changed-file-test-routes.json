@@ -109,6 +109,15 @@
       ]
     }
   ],
+  "swiftPackageRoutes": [
+    {
+      "id": "external-contracts-hostless",
+      "patterns": [
+        "Packages/AmbitionsExternalContracts/**"
+      ],
+      "packagePath": "Packages/AmbitionsExternalContracts"
+    }
+  ],
   "testTargets": {
     "AmbitionsModuleTests": {
       "kind": "module",

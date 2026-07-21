@@ -137,6 +137,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Hostless external contract tests
+        shell: bash
+        run: swift test --package-path Packages/AmbitionsExternalContracts
       - name: Generate project and reject drift
         shell: bash
         run: |

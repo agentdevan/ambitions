@@ -18,7 +18,7 @@ from typing import Callable, NamedTuple, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "scripts/ambitions-changed-file-test-routes.json"
-LANE_ORDER = ("script", "module", "integration", "ui")
+LANE_ORDER = ("script", "package", "module", "integration", "ui")
 SWIFT_TEST_TARGETS = {
     "Native/AmbitionsModuleTests": "AmbitionsModuleTests",
     "Native/AmbitionsTests": "AmbitionsTests",
@@ -217,6 +217,20 @@ def load_config(path: Path) -> dict:
         tooling_ids.add(route["id"])
         require_strings(route.get("patterns"), f"tooling route {route['id']} patterns", allow_empty=False)
         require_strings(route.get("pythonTests"), f"tooling route {route['id']} pythonTests", allow_empty=False)
+    swift_package_routes = payload.get("swiftPackageRoutes", [])
+    if not isinstance(swift_package_routes, list):
+        raise ConfigurationError("swiftPackageRoutes must be a list")
+    swift_package_ids: set[str] = set()
+    for route in swift_package_routes:
+        if not isinstance(route, dict) or not isinstance(route.get("id"), str) or not route["id"]:
+            raise ConfigurationError("each Swift package route requires an id")
+        if route["id"] in swift_package_ids:
+            raise ConfigurationError(f"duplicate Swift package route id: {route['id']}")
+        swift_package_ids.add(route["id"])
+        require_strings(route.get("patterns"), f"Swift package route {route['id']} patterns", allow_empty=False)
+        package_path = route.get("packagePath")
+        if not isinstance(package_path, str) or _normalized(package_path) != package_path:
+            raise ConfigurationError(f"Swift package route {route['id']} requires a normalized packagePath")
     membership_routes = payload.get("membershipRoutes", [])
     if not isinstance(membership_routes, list):
         raise ConfigurationError("membershipRoutes must be a list")
@@ -347,6 +361,13 @@ def _tooling_route_for_path(path: str, config: dict) -> tuple[dict | None, str |
     matches = [route for route in config.get("toolingRoutes", []) if _matches(path, route["patterns"])]
     if len(matches) > 1:
         return None, "ambiguous_tooling_route"
+    return (matches[0], None) if matches else (None, None)
+
+
+def _swift_package_route_for_path(path: str, config: dict) -> tuple[dict | None, str | None]:
+    matches = [route for route in config.get("swiftPackageRoutes", []) if _matches(path, route["patterns"])]
+    if len(matches) > 1:
+        return None, "ambiguous_swift_package_route"
     return (matches[0], None) if matches else (None, None)
 
 
@@ -490,6 +511,17 @@ def plan_changes(
             _append_unique(script_modules, tooling_route["pythonTests"])
             return
         if _matches(normalized, config.get("documentationPatterns", [])):
+            return
+        package_route, package_error = _swift_package_route_for_path(normalized, config)
+        if package_error:
+            findings.append(_finding(package_error, normalized, "multiple Swift package routes matched"))
+            return
+        if package_route is not None:
+            package_path = package_route["packagePath"]
+            if not (root / package_path / "Package.swift").is_file():
+                findings.append(_finding("swift_package_manifest_missing", package_path, "Package.swift is absent"))
+                return
+            _append_unique(lane_tests["package"], [package_path])
             return
         if normalized.startswith("scripts/tests/") and normalized.endswith(".py"):
             module = normalized[:-3].replace("/", ".")
@@ -671,6 +703,20 @@ def plan_changes(
         command = ["python3", "-m", "unittest", *script_modules, "-v"]
         lanes.append({"kind": "script", "scheme": None, "tests": list(script_modules), "commands": [command]})
         commands.append(command)
+    if lane_tests["package"]:
+        package_commands = [
+            ["swift", "test", "--package-path", package_path]
+            for package_path in lane_tests["package"]
+        ]
+        lanes.append(
+            {
+                "kind": "package",
+                "scheme": None,
+                "tests": list(lane_tests["package"]),
+                "commands": package_commands,
+            }
+        )
+        commands.extend(package_commands)
     scheme_by_lane = {
         target["kind"]: target["scheme"]
         for target in config["testTargets"].values()

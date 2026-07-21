@@ -139,6 +139,35 @@ class ChangedFileTestRouterTests(unittest.TestCase):
         self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["module"])
         self.assertEqual(self.filters(plan, "module"), ["AmbitionsModuleTests/TimeFoundationModuleTests"])
 
+    def test_external_contract_package_change_routes_exact_hostless_command(self):
+        plan = self.plan_live(
+            ROUTER.Change(
+                "M",
+                "Packages/AmbitionsExternalContracts/Sources/AmbitionsExternalContracts/AmbitionsExternalContracts.swift",
+            )
+        )
+
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["package"])
+        self.assertEqual(
+            plan["commands"],
+            [["swift", "test", "--package-path", "Packages/AmbitionsExternalContracts"]],
+        )
+
+    def test_hostless_package_lane_precedes_hosted_integration(self):
+        plan = self.plan_live(
+            ROUTER.Change("M", "Packages/AmbitionsExternalContracts/Package.swift"),
+            ROUTER.Change("M", "Native/Ambitions/Core/Domain/FixedPoint.swift"),
+        )
+
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["package", "integration"])
+        self.assertEqual(
+            plan["commands"][0],
+            ["swift", "test", "--package-path", "Packages/AmbitionsExternalContracts"],
+        )
+        self.assertIn("scripts/ambitions-xcode-build-for-testing.sh", plan["commands"][1])
+
     def test_direct_unit_and_ui_test_files_derive_declared_suites(self):
         unit = self.plan_live(ROUTER.Change("M", "Native/AmbitionsTests/Domain/CoreDomainCanonicalOwnershipTests.swift"))
         ui = self.plan_live(ROUTER.Change("M", "Native/AmbitionsUITests/TodaySurfaceUITests.swift"))
