@@ -1,8 +1,10 @@
+<!-- markdownlint-disable MD013 -->
+
 # Reconciled Flagship Reconstruction Plan
 
-Status: Current planning authority; implementation entry is closed
+Status: Current planning authority; Wave 1 foundation closed; implementation entry is closed
 Date: 2026-07-22
-Baseline: `0e894407a38759f69d2a3e48111bae67720794b0` or later on `main`
+Baseline: `5ba9814f2636f148eb5e455b0a791299dcab0849` or later on `main`
 Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
 
 ## Purpose and boundary
@@ -24,8 +26,10 @@ Canon/architecture authority
   -> You capability pruning
   -> persistence/recovery capability gates
   -> accessibility/localization infrastructure
-  -> reconciled visual closure studies
-  -> VC-14 matched baseline
+  -> R10 Wave 1 shared visual foundation [COMPLETE]
+  -> R10 Wave 2 surfaces and journeys [OPEN]
+  -> R10 Wave 3 stress and matched baseline [OPEN]
+  -> VC-14 reconciled matched-baseline closure [NOT COMPLETE]
   -> Figma authorization
   -> Figma journey specification
   -> SwiftUI approval
@@ -48,8 +52,10 @@ No milestone may treat a later arrow as evidence for an earlier dependency.
 | R7 You pruning | Nine-group local/no-account surface; accent migration | Capability inventory, absence, preference migration tests | Planning only |
 | R8 Persistence/recovery gates | Only approved durable drafts/outboxes/recovery | Interruption, retry, cancel, publication, conflict tests | Planning only |
 | R9 Accessibility/localization | Focus, announcements, catalogs, RTL and input equivalence | Automated plus direct device matrix | Planning only |
-| R10 Visual closure studies | Reconciled directions only | Updated closure records; no implementation claim | **READY FOR RECONCILED VISUAL CLOSURE** |
-| R11 VC-14 matched baseline | Cross-direction matched reference baseline | Owner review of matched study | Not authorized |
+| R10 / Wave 1 shared visual foundation | Typography, appearance, crown, dock, state, and foundational grammar | `VC_WAVE_1_FOUNDATION_CLOSURE.md`, JSON peer, compiler validation, generated manifest | **COMPLETE** |
+| R10 / Wave 2 surfaces and journeys | Surface and journey studies using the closed foundation | VC-07 through VC-12 closure records with matched target/capability boundaries | **OPEN** |
+| R10 / Wave 3 stress and matched baseline | Cross-surface stress, accessibility transformation, and matched-baseline preparation | VC-13 stress closure and matched reference input | **OPEN** |
+| R11 VC-14 reconciled matched-baseline closure | Cross-direction matched reference baseline | Completed VC-14 record and owner review of the matched study | **NOT COMPLETE** |
 | R12 Figma entry | Owner explicitly declares `SELECTED FOR FIGMA` | Separate owner record | Authorization false |
 | R13 Figma journeys | Journey-level design/QA | Authorized Figma proof | Blocked |
 | R14 SwiftUI entry | Owner explicitly declares `APPROVED FOR SWIFTUI` | Separate owner record | Approval false |
@@ -108,20 +114,25 @@ no remaining live references.
 
 ### Reconciled visual closure and VC-14
 
-R10 is **READY FOR RECONCILED VISUAL CLOSURE**. The accepted ADRs, canonical UX
-Blueprint, accessibility/platform proof plan, source-owned
-`VISUAL_CLOSURE_INPUT_CONTRACT.md` and JSON peer, and generated visual-authority
-manifest now define enough target ownership, capability boundaries,
-supersession, and proof ceilings for VC-01 through VC-13 to proceed without
-depicting unsupported behavior as current functionality. Runtime implementation
-is not an R10 prerequisite; target-only behavior must remain labelled target,
-planned, unavailable, or capability-gated.
+R10 / Wave 1 shared visual foundation is **COMPLETE**. The source-owned
+`VC_WAVE_1_FOUNDATION_CLOSURE.md` and JSON peer install the closed VC-01 through
+VC-06 typography, appearance, crown, dock, state, and foundational grammar
+decisions beneath the unchanged active AVF direction set. This is documentation
+and authority closure only. It is not a final design system, component library,
+Figma artifact, rendered baseline, runtime capability claim, or implementation
+approval.
 
-The two authorized branches and six revisions are the only current structural
-branch/revision IDs. Exact tokens, Figma collections, component variables,
-component APIs, and matched frames remain unresolved visual-validation output.
-R10 readiness does not complete VC-14 and does not authorize Figma, SwiftUI, or
-implementation.
+R10 / Wave 2 surfaces and journeys is **OPEN**. VC-07 through VC-12 must consume
+the closed foundation without reopening it, adding product scope, or depicting
+unsupported behavior as current capability. R10 / Wave 3 stress and matched
+baseline is **OPEN**; VC-13 remains open and must preserve the same capability
+and proof ceilings.
+
+VC-14 is **NOT COMPLETE** and remains `NOT_STARTED`. The two authorized branches
+and six revisions remain the only current structural branch/revision IDs. Exact
+tokens, Figma collections, component variables, component APIs, final component
+library structure, and matched frames remain deferred. Wave 1 completion does
+not authorize Figma, SwiftUI, or implementation.
 
 ### Figma
 
@@ -157,12 +168,15 @@ plan intentionally contains no task-level SwiftUI steps or component APIs.
 | --- | --- | --- |
 | Owner choices | Ready | D-DEV-01 through D-DEV-10 are controlling and closed. |
 | Architecture contracts | Ready for implementation planning | Accepted ADRs define owners and boundaries; runtime proof absent. |
-| Canon/UX direction | Ready for reconciled specification use | Normative owners and provisional direction IDs are aligned. |
-| Reconciled visual closure | Ready | VC input contract normalizes active directions, typography, appearance, material, exclusions, and proof ceilings. |
+| Canon/UX direction | Ready for reconciled specification use | Normative owners and active direction IDs are aligned. |
+| R10 / Wave 1 shared visual foundation | Complete | VC-01 through VC-06 are closed in the source-owned human and machine package and projected into generated authority. |
+| R10 / Wave 2 surfaces and journeys | Open | VC-07 through VC-12 remain open and must consume the closed foundation. |
+| R10 / Wave 3 stress and matched baseline | Open | VC-13 remains open; matched-baseline preparation has not completed. |
+| VC-14 | Not complete | Status remains `NOT_STARTED`; no reconciled matched baseline is selected. |
 | Identity migrations | Not implementation-ready | Designs exist; schemas/migrations/tests do not. |
 | Runtime capability | Not implementation-ready | Registry closure, typed states, and proof are incomplete. |
 | Accessibility/localization | Ready for infrastructure planning | Proof plan exists; implementation/direct evidence absent. |
-| Figma | Not authorized | Required closure/VC-14 gate and owner declaration absent. |
+| Figma | Not authorized | Wave 2, Wave 3, VC-14, and the required owner declaration remain incomplete or absent. |
 | SwiftUI | Not approved | Figma journey authority and owner approval absent. |
 | Legacy deletion | Not ready | Replacement parity does not exist. |
 

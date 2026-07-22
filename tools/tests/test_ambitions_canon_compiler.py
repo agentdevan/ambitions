@@ -24,10 +24,48 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 ACTIVE_DESIGN_PATHS = (
     Path("docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md"),
     Path("docs/canon/design/visual-closure-input-contract.json"),
+    Path("docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md"),
+    Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
     Path("docs/canon/migration/ux-blueprint-requirement-dispositions.json"),
     Path("docs/canon/design/VISUAL_SYSTEM_R1.md"),
+    Path(
+        "docs/audits/rp-01-08-evidence-audit/"
+        "13-owner-reconciliation-decisions.md"
+    ),
+    Path(
+        "docs/adr/"
+        "ADR-2026-07-22-shell-navigation-restoration-reconciliation.md"
+    ),
+    Path(
+        "docs/adr/"
+        "ADR-2026-07-22-canonical-identity-ownership-projection.md"
+    ),
+    Path(
+        "docs/adr/"
+        "ADR-2026-07-22-truth-mutation-and-global-authority.md"
+    ),
+    Path(
+        "docs/adr/"
+        "ADR-2026-07-22-local-first-recovery-accessibility-platform.md"
+    ),
+    Path(
+        "docs/qa/frontend-flagship-shippability-remediation/"
+        "RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md"
+    ),
+    Path(
+        "docs/qa/frontend-flagship-shippability-remediation/"
+        "RP_RECONCILIATION_TRACEABILITY.md"
+    ),
+    Path(
+        "docs/qa/frontend-flagship-shippability-remediation/"
+        "RP_RECONCILIATION_SUPERSESSION_REGISTER.md"
+    ),
+    Path(
+        "docs/qa/frontend-flagship-shippability-remediation/"
+        "rp-reconciliation-index.json"
+    ),
 )
 
 
@@ -289,8 +327,145 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         )
         self.assertFalse(contract["active_baseline"]["typography"]["serif_active"])
         self.assertEqual(
+            contract["active_baseline"]["typography"]["core_family"],
+            "San Francisco",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["typography"]["interface_roles"],
+            "SF Pro",
+        )
+        self.assertEqual(
             contract["active_baseline"]["appearance"]["choices"],
             ["System", "Light", "Dark"],
+        )
+        self.assertEqual(
+            contract["active_baseline"]["appearance"]["selected_synthesis"],
+            "Mineral Relief Continuum",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["accent"]["exact_values_status"],
+            "deferred_calibration",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["dock"]["expanded"],
+            "one_compact_articulated_edge_tray_overlay",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["dock"]["adaptive_equivalent"],
+            "VC04-DOCK-D06 — Adaptive Navigation Passage",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["state_grammar"]["primary_study"],
+            "VC05-STATE-D04 — Semantic State Covenant",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["foundational_grammar"]["primary_study"],
+            "VC06-GRAMMAR-D04 — Articulated Native Grammar",
+        )
+        self.assertEqual(
+            contract["active_baseline"]["foundational_grammar"]
+            ["minimum_interaction_target_points"],
+            {"height": 44, "width": 44},
+        )
+        self.assertEqual(
+            contract["closure_packages"]["package_statuses"],
+            canon_compiler.WAVE_1_PACKAGE_STATUSES,
+        )
+        self.assertEqual(
+            manifest["wave_1_foundation_closure"]["package_statuses"],
+            canon_compiler.WAVE_1_PACKAGE_STATUSES,
+        )
+        self.assertEqual(
+            manifest["wave_1_foundation_closure"]["source_contract"],
+            "docs/canon/design/vc-wave-1-foundation-closure.json",
+        )
+
+    def test_wave_1_foundation_closure_is_complete_and_bounded(self) -> None:
+        closure = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "docs/canon/design/vc-wave-1-foundation-closure.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(closure["status"], "CLOSED")
+        self.assertEqual(
+            closure["active_direction_ids"],
+            list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
+        )
+        self.assertEqual(
+            closure["package_statuses"],
+            canon_compiler.WAVE_1_PACKAGE_STATUSES,
+        )
+        self.assertEqual(
+            closure["wave_status"],
+            {
+                "wave_1_shared_visual_foundation": "CLOSED",
+                "wave_2_surfaces_and_journeys": "OPEN",
+                "wave_3_stress_and_matched_baseline": "OPEN",
+            },
+        )
+        self.assertEqual(
+            closure["authorization_state"],
+            {"figma": False, "implementation": False, "swiftui": False},
+        )
+
+        required_fields = {
+            "package_id",
+            "status",
+            "selected_study_or_synthesis",
+            "required_transformation",
+            "applies_to_avf_ids",
+            "locked_decisions",
+            "rejected_alternatives",
+            "deferred_calibration",
+            "validation_requirements",
+            "architecture_dependencies",
+            "authorization_state",
+            "source_paths",
+        }
+        packages = closure["packages"]
+        self.assertEqual(
+            [package["package_id"] for package in packages],
+            [f"VC-{number:02d}" for number in range(1, 7)],
+        )
+        self.assertTrue(
+            all(
+                package["status"] == "CLOSED"
+                and required_fields.issubset(package)
+                and package["authorization_state"]
+                == {"figma": False, "implementation": False, "swiftui": False}
+                for package in packages
+            )
+        )
+        self.assertEqual(
+            [
+                (
+                    package["selected_study_or_synthesis"].get("id"),
+                    package["selected_study_or_synthesis"]["name"],
+                )
+                for package in packages
+            ],
+            list(canon_compiler.WAVE_1_SELECTED_RECORDS.values()),
+        )
+        self.assertEqual(
+            packages[3]["selected_study_or_synthesis"]["name"],
+            "Articulated Edge Tray",
+        )
+        self.assertEqual(
+            packages[3]["required_transformation"]["name"],
+            "Adaptive Navigation Passage",
+        )
+        self.assertEqual(
+            packages[4]["selected_study_or_synthesis"]["name"],
+            "Semantic State Covenant",
+        )
+        self.assertEqual(
+            packages[5]["selected_study_or_synthesis"]["name"],
+            "Articulated Native Grammar",
+        )
+        self.assertEqual(
+            packages[5]["locked_decisions"]["interaction_target_points"],
+            {"height_minimum": 44, "width_minimum": 44},
         )
 
     def test_generated_outputs_are_current_and_deterministic(self) -> None:
@@ -493,6 +668,28 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                     ],
                 },
                 "visual authority references inactive requirement",
+            ),
+            (
+                Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-01": "OPEN",
+                    },
+                },
+                "Wave 1 closure package statuses",
+            ),
+            (
+                Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
+                lambda payload: {
+                    **payload,
+                    "active_direction_ids": [
+                        *payload["active_direction_ids"],
+                        "AVF-UNAUTHORIZED-S01-R00",
+                    ],
+                },
+                "Wave 1 closure active direction IDs",
             ),
         )
 

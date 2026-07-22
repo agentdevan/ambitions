@@ -83,6 +83,8 @@ reference_files = [
   "design/VISUAL_SYSTEM_R1.md",
   "design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
   "design/visual-closure-input-contract.json",
+  "design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+  "design/vc-wave-1-foundation-closure.json",
   "migration/UX_BLUEPRINT.md",
   "migration/ux-blueprint.json",
   "migration/ux-blueprint-state-inventory.json",

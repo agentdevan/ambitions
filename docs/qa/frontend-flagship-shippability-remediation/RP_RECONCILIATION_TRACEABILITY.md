@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # RP-01–RP-08 Reconciliation Traceability
 
 Status: Current authority map
@@ -15,13 +17,15 @@ accepted reconciliation ADRs (architecture/runtime decisions)
         v
 canonical UX Blueprint requirements (design input, not proof)
         v
-VC-01–VC-14 visual closure input contract (active provisional baseline)
+VC-01–VC-14 visual closure input contract (active reconciled baseline)
+        v
+Wave 1 foundation closure (VC-01..VC-06 closed authority)
         v
 reconciled flagship reconstruction plan (sequencing)
         v
 proof gates (future evidence)
         v
-provisional visual directions (no Figma/SwiftUI authorization)
+Wave 2/3 and VC-14 remain open (no Figma/SwiftUI authorization)
 ```
 
 When implementation and accepted future canon differ, source remains evidence
@@ -70,6 +74,28 @@ side may be silently described as the other.
 | `AVF-SEARCH-D07-R01` | Typed results/failures and owner transfer | Revision authorized; Act not current mutation capability |
 | `AVF-YOU-D07-R02` | Local capability inventory and accent migration | Revision authorized; migration not implemented |
 | `AVF-RECOVERY-S07-R01` | Typed runtime state, Receipt/Undo/pending gates | Revision authorized; coverage is operation-specific |
+
+## Wave 1 foundation-closure traceability
+
+The active closure package is
+`docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md` with machine peer
+`docs/canon/design/vc-wave-1-foundation-closure.json`. The compiler projects
+that source into `docs/canon/generated/visual-authority-manifest.json`.
+
+| VC package | Closed record | Applies to active direction authority | Controlling architecture/product sources | Status |
+| --- | --- | --- | --- | --- |
+| `VC-01` | `VC01-TYPE-STUDY-D — Semantic Cadence` | DNA, shell, accessibility, coherence | Owner record, UX Blueprint, VC input contract | `CLOSED` |
+| `VC-02` | `Mineral Relief Continuum` | DNA, You, accessibility, coherence | D-DEV-08/09, local-first ADR, VC input contract | `CLOSED` |
+| `VC-03` | `VC03-CROWN-D04` + required `VC03-CROWN-D06` | Shell, accessibility, coherence | Shell/navigation/restoration ADR and UX Blueprint shell overlay | `CLOSED` |
+| `VC-04` | `VC04-DOCK-D04` + required `VC04-DOCK-D06` | Shell, accessibility, coherence | D-DEV-01, shell ADR dock posture machine, UX Blueprint | `CLOSED` |
+| `VC-05` | `VC05-STATE-D04` + required `VC05-STATE-D06` | DNA, recovery, accessibility, coherence | Truth/mutation ADR, local-first recovery ADR, UX Blueprint states | `CLOSED` |
+| `VC-06` | `VC06-GRAMMAR-D04`, `D01` substrate, required `D06` | DNA, shell, recovery, accessibility, coherence | All four reconciliation ADRs, UX Blueprint, VC input contract | `CLOSED` |
+
+Wave 1 completion does not change the architecture-to-capability columns above.
+Target-only shell, identity, mutation, pending, Receipt, Undo, conflict,
+recovery, accessibility, localization, and platform behavior still requires its
+named runtime and proof work. VC-07 through VC-13 remain `OPEN`; VC-14 remains
+`NOT_STARTED` and not complete.
 
 ## Unresolved decisions
 

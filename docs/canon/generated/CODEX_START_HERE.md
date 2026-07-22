@@ -33,6 +33,7 @@ python3 scripts/ambitions-canon.py query "migration replay integrity"
 - [Full canon index](INDEX.md)
 - [Canon README and reading order](../README.md)
 - [Visual System R1](../design/VISUAL_SYSTEM_R1.md)
+- [Wave 1 Foundation Closure](../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)
 - [Canonical UX Blueprint](../migration/UX_BLUEPRINT.md)
 - [Object Boundary Matrix](object-boundary-matrix.md)
 - [Requirement graph](requirement-graph.json)

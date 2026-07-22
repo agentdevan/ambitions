@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 MD060 -->
+
 # Ambitions Canonical UX Blueprint — RP-01–RP-08 Reconciled
 
 > Comprehensive screen, presentation, state, action, and requirement map for
@@ -7,7 +9,7 @@
 
 - Blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001`
 - Canon revision: `2`
-- Canon content SHA: `57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2`
+- Canon content SHA: `18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f`
 - Source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`
 - Coverage: `0` unresolved specification gaps at generation time.
 - Requirement dispositions: `466` total; `343` visual; `123` nonvisual; SHA-256 `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`

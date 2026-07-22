@@ -47,6 +47,10 @@ for implementation agents and repository tooling.
 - [VC-01–VC-14 Visual Closure Input Contract](design/VISUAL_CLOSURE_INPUT_CONTRACT.md)
   and its JSON peer are the sole active visual-closure baseline. The compiler
   projects that source into the generated visual-authority manifest.
+- [Wave 1 Foundation Closure](design/VC_WAVE_1_FOUNDATION_CLOSURE.md) and its
+  JSON peer install the closed VC-01 through VC-06 decisions beneath the input
+  contract. Wave 2, Wave 3, VC-14, Figma, SwiftUI, and implementation remain
+  open, incomplete, or unauthorized as recorded there.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;

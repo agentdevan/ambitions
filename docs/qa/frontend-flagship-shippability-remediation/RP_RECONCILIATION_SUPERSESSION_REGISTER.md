@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # RP Reconciliation Supersession and Unsupported-Capability Register
 
 Status: Current authority classification
@@ -22,6 +24,7 @@ Date: 2026-07-22
 | `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md` | Current owner authority | Controls D-DEV-01 through D-DEV-10. |
 | Four 2026-07-22 reconciliation ADRs | Current architecture/runtime authority | Target contracts; no implementation claim. |
 | `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md` and JSON peer | Current visual-closure input authority | Sole active VC-01–VC-14 baseline; authorization flags remain false. |
+| `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md` and JSON peer | Current Wave 1 closure authority | VC-01 through VC-06 are closed beneath the unchanged active AVF set; exact calibration and implementation remain deferred. |
 | `docs/canon/migration/UX_BLUEPRINT.md` and JSON peer | Current shadow design input | Reconciled overlay controls current UX direction; legacy inventory remains traceable. |
 | `docs/canon/generated/*`, including `visual-authority-manifest.json` | Generated | Regenerate through canon compiler; never hand-edit. |
 | This register, reconciliation traceability, and reconstruction plan | Current planning authority | Sequencing and authority cleanup only. |
@@ -48,6 +51,12 @@ Date: 2026-07-22
 | Exact Revision 1 Figma collections, variables, component APIs, and token values | Implementation detail not authorized | VC input exact-token boundary | May be evaluated during closure but cannot be treated as active authority. |
 | Legacy accent families | Deferred candidates requiring owner review | Restrained violet-indigo default plus VC-02 review | No candidate is active merely because historical exact values exist. |
 | Bottom-rail geometry and legacy Today rail/root anatomy | Superseded | Crowned Edge Dock plus `AVF-TODAY-S10-R00` | Historical frame geometry remains evidence only. |
+| Serif, New York, editorial-hero, custom-tracking, and uppercase-state typography proposals | Superseded as active foundation | VC-01 Semantic Cadence | Preserve specimens as historical evidence; San Francisco alone is active. |
+| Purely flat D01 or strongly sculpted D04 calibration | Superseded as active foundation | VC-02 Mineral Relief Continuum | Preserve both studies as synthesis provenance; neither exact calibration becomes a token set. |
+| Hero/content-card crowns, metric/status crowns, and duplicate floating crowns | Superseded as active foundation | VC-03 Compact Semantic Stack plus Adaptive Semantic Passage | Preserve old studies as evidence only. |
+| Symbol-only expanded rail, permanent drawer/sidebar, detached controls, and bottom-tab fallback | Superseded as active foundation | VC-04 Articulated Edge Tray plus Adaptive Navigation Passage | Current runtime rail remains implementation evidence, not target visual authority. |
+| Detached status pills, universal spinner/Undo, toast cascade, celebration, warning-card grids, and simulated pending | Superseded as active foundation | VC-05 Semantic State Covenant plus Explicit Stress Scaffold | Historical treatments cannot imply runtime capability. |
+| Universal rounded containers/radius, routine elevation, decorative motion/haptics, and root-assigned colors | Superseded as active foundation | VC-06 Articulated Native Grammar with Native Minimal Substrate and Explicit Accessible Structure | Preserve provenance; exact calibration stays deferred. |
 
 ## Unsupported current capability
 
@@ -83,6 +92,18 @@ placement aliases, duplicate Search projections, fictional You rows/routes,
 synthetic Receipt/Undo labels, stale architecture checkers, and superseded
 frontend/visual control documents. Audit evidence and owner records are never
 deleted merely to make current authority appear conflict-free.
+
+## Wave status
+
+- Wave 1 shared visual foundation: `CLOSED`.
+- Wave 2 surfaces and journeys: `OPEN`.
+- Wave 3 stress and matched baseline: `OPEN`.
+- `VC-14`: `NOT_STARTED` and not complete.
+
+Wave 1 closure is not a final design system or component library. Exact type,
+color, material, divider, radius, shadow, geometry, motion, haptic, Figma, and
+component-token choices remain deferred rather than silently promoted from the
+historical Revision 1 corpus.
 
 ## Duplicate-authority rule
 

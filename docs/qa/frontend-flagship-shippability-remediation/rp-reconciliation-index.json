@@ -93,13 +93,15 @@
   "planning_records": [
     "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
     "docs/canon/design/visual-closure-input-contract.json",
+    "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+    "docs/canon/design/vc-wave-1-foundation-closure.json",
     "docs/qa/accessibility/RP_RECONCILIATION_ACCESSIBILITY_PLATFORM_PLAN.md",
     "docs/qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md",
     "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_SUPERSESSION_REGISTER.md",
     "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_TRACEABILITY.md"
   ],
-  "reconciliation_baseline": "0e894407a38759f69d2a3e48111bae67720794b0",
-  "schema_version": 1,
+  "reconciliation_baseline": "5ba9814f2636f148eb5e455b0a791299dcab0849",
+  "schema_version": 2,
   "status": "current_planning_authority",
   "traceability": [
     {
@@ -238,8 +240,40 @@
     ],
     "generated_manifest": "docs/canon/generated/visual-authority-manifest.json",
     "human_contract": "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+    "human_wave_1_closure": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
     "machine_contract": "docs/canon/design/visual-closure-input-contract.json",
-    "r10_status": "READY FOR RECONCILED VISUAL CLOSURE",
-    "vc14_complete": false
+    "machine_wave_1_closure": "docs/canon/design/vc-wave-1-foundation-closure.json",
+    "package_statuses": {
+      "VC-01": "CLOSED",
+      "VC-02": "CLOSED",
+      "VC-03": "CLOSED",
+      "VC-04": "CLOSED",
+      "VC-05": "CLOSED",
+      "VC-06": "CLOSED",
+      "VC-07": "OPEN",
+      "VC-08": "OPEN",
+      "VC-09": "OPEN",
+      "VC-10": "OPEN",
+      "VC-11": "OPEN",
+      "VC-12": "OPEN",
+      "VC-13": "OPEN",
+      "VC-14": "NOT_STARTED"
+    },
+    "r10": {
+      "wave_1_shared_visual_foundation": "COMPLETE",
+      "wave_2_surfaces_and_journeys": "OPEN",
+      "wave_3_stress_and_matched_baseline": "OPEN"
+    },
+    "vc14_complete": false,
+    "vc14_status": "NOT_STARTED",
+    "wave_1_package_id": "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+    "wave_1_selected_records": {
+      "VC-01": "VC01-TYPE-STUDY-D — Semantic Cadence",
+      "VC-02": "Mineral Relief Continuum",
+      "VC-03": "VC03-CROWN-D04 — Compact Semantic Stack / VC03-CROWN-D06 — Adaptive Semantic Passage",
+      "VC-04": "VC04-DOCK-D04 — Articulated Edge Tray / VC04-DOCK-D06 — Adaptive Navigation Passage",
+      "VC-05": "VC05-STATE-D04 — Semantic State Covenant / VC05-STATE-D06 — Explicit Stress Scaffold",
+      "VC-06": "VC06-GRAMMAR-D04 — Articulated Native Grammar / VC06-GRAMMAR-D01 — Native Minimal Substrate / VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+    }
   }
 }

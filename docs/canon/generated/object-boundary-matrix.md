@@ -1,9 +1,11 @@
+<!-- markdownlint-disable MD013 -->
+
 # Object Boundary Matrix
 
 > Generated from normative object specifications. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2`
+- Canon digest: `18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f`
 
 | Capability | Step | Event | Reminder | Note |
 | --- | --- | --- | --- | --- |

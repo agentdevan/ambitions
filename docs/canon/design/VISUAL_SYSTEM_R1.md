@@ -1,6 +1,8 @@
+<!-- markdownlint-disable MD013 MD038 MD056 MD060 -->
+
 # Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
-Status: `PROVISIONAL_VISUAL_EXPLORATION / FIGMA_NOT_AUTHORIZED`
+Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_FOUNDATION_CLOSED / FIGMA_NOT_AUTHORIZED`
 
 Date: 2026-07-22
 
@@ -9,25 +11,28 @@ Historical Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2`;
+- canon content SHA: `18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `52be42d72234d2c72ae01d8179b5e8526567d420b003af4acff120da0704b1d7`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `9a85acea7e6ba38ada3d98e48894c89f33d6e67dada2c37b3fa2d07df36031cf`;
+- UX blueprint Markdown SHA-256: `e1090840d2cb23c606ab1efc323194e8582c33c73ba9ba0020feda57758713f5`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `f0808bf7c787334eacd08451c4dfc190b4b5a2b79d9b916beebf2f0cb2865475`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `7c2636b5bd3299be74b59529cadebf80d0fc021583706a10aa159c498b6bd505`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `16866bfddf97966799fc0458442aa2f75b421b569f7fbb302371cbf9659e9281`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
-- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `c368175f8cf2ed5ee49ca78eedc6ff2de073392f866bedb2630377f97ed7e928`;
-- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `99873944434b2e1bdd190ad1476c62c30d5b72ae0a2e8cc8172b785d5bddf3ee`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `d16652c0a83f3adb1c76bf4d35cd608eda66a434ae4809e7465c100672c37240`;
+- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `fef08a88418026df730feba9b3a276e7afdd9cc76395dd6b23b9b50621cd8c92`;
+- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54`;
+- Wave 1 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`: `7273a1c320f7e13f694d6bad07ee15586b675d9ae72688361217ee51a4b8e3bd`;
+- Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `03d946e200e8b0183821b62f231a9c52915d1494b4a10c382257215bac2e7a42`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
-to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract and its
-machine peer are the only active input to VC-01 through VC-14. The Figma frames,
-exact tokens, component descriptions, and archived appearance studies below are
-historical or deferred according to their explicit classification; none is a
-current selection, component API, implementation instruction, or proof.
+to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
+machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md` package define
+the active baseline. The Figma frames, exact tokens, component descriptions,
+and archived appearance studies below are historical or deferred according to
+their explicit classification; none is a current selection, component API,
+implementation instruction, or proof.
 
 ## 1. Active reconciled VC baseline
 
@@ -40,26 +45,88 @@ It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
 `AVF-SEARCH-D07-R01`, `AVF-YOU-D07-R02`, and `AVF-RECOVERY-S07-R01`. No
 additional direction ID is created by this document.
 
+Wave 1 shared visual foundation is closed. `VC-01` through `VC-06` are closed;
+`VC-07` through `VC-13` remain open; `VC-14` is not started. Wave 2 surfaces and
+journeys and Wave 3 stress and matched baseline remain open.
+
+The active Wave 1 selections are:
+
+- `VC01-TYPE-STUDY-D — Semantic Cadence`;
+- `Mineral Relief Continuum`;
+- `VC03-CROWN-D04 — Compact Semantic Stack`, transformed by
+  `VC03-CROWN-D06 — Adaptive Semantic Passage`;
+- `VC04-DOCK-D04 — Articulated Edge Tray`, transformed by
+  `VC04-DOCK-D06 — Adaptive Navigation Passage`;
+- `VC05-STATE-D04 — Semantic State Covenant`, stressed by
+  `VC05-STATE-D06 — Explicit Stress Scaffold`;
+- `VC06-GRAMMAR-D04 — Articulated Native Grammar`, retaining
+  `VC06-GRAMMAR-D01 — Native Minimal Substrate` and transforming through
+  `VC06-GRAMMAR-D06 — Explicit Accessible Structure`.
+
+San Francisco is the sole active interface family. Root and focused-object
+identity use SF Pro Display Semibold; object identity, current truth,
+consequence, chronology, state, and evidence use their locked SF Pro Text roles.
+Semantic cadence orders identity, current truth, consequence, qualifying state,
+evidence, then action or return. No serif, ceremonial hero, branded button
+typeface, detached uppercase status system, or exact typography token is active.
+
+System, Light, and Dark remain the only appearances. Mineral Relief Continuum
+uses a mineral-neutral Light plane and deep-graphite Dark plane with comparable,
+localized articulation, identical anatomy and meaning, no pure-black/glow or
+parchment treatment, and no appearance-dependent hierarchy. Restrained
+violet-indigo is the action accent; it never identifies roots or replaces
+semantic language and structure.
+
+The crown is a Compact Semantic Stack with an Adaptive Semantic Passage under
+pressure. It preserves native Back, root or focused-object identity, at most one
+material qualification, native owner actions, and reachable Cancel/Save or the
+required action. Search and Capture never enter the crown.
+
+The dock state family is Hidden, Peek, Expanded, and Adaptive labelled
+equivalent. Expanded uses one compact Articulated Edge Tray with Today, Goals,
+Time, and You grouped above Search and Capture. The Adaptive Navigation Passage
+keeps the same six commands, order, grouping, and ownership in a wider, fully
+labelled, opaque, larger-targeted form. Peek and every visible command preserve
+at least a 44-point interaction envelope.
+
+The Semantic State Covenant keeps interaction posture, truth status, and
+operational status separate. Explicit language and structure remain sufficient
+without color, depth, transparency, or motion. Preview, saving, pending,
+settlement, block, failure, irreversibility, Undo, conflict, and recovery follow
+canonical-owner and capability boundaries. Under stress, Explicit Stress
+Scaffold converts relief to labelled structure, ordered comparisons, vertical
+current/proposed sequences, result groups, and reachable native actions.
+
+The Articulated Native Grammar has three material roles: opaque matte Semantic
+Plane, localized pressure-flattening Local Articulation, and justified
+Functional Transient Material with an authored opaque Reduce Transparency
+equivalent. Native controls retain native shapes; routine content has no rounded
+container or universal brand radius. SF Symbols are the default. Appearance,
+action accent, and immutable semantic colors remain separate. Motion is sparse
+and causal; haptics are semantic, never decorative or continuous. Spatial
+rhythm follows the 4, 8, 12, 16, 20, 24, 32 progression with 40, 48, and 64 for
+larger separation as a philosophy, not a finalized token set. The minimum
+interaction target is 44 by 44 points.
+
 The Crowned Edge Dock remains the target shell. Goals is Life-Area-led with
 Goal-owned Linked Goal Lens depth. Today has one dominant Start Here projection
 and at most one earned Also Fits Now projection. Week is the first-use Time
 default and later restores the last-used supported scale. Search Act transfers
 to the canonical owner. Partial settlement requires typed per-scope outcomes;
-Receipts and Undo are capability-gated. Restrained violet-indigo is the default
-action accent. You is local/no-account. Current platform scope is iPhone,
-portrait, and single scene.
+Receipts and Undo are capability-gated. You is local/no-account. Current
+platform scope is iPhone, portrait, and single scene.
 
 Figma authorization is false. SwiftUI approval is false. Implementation
 authorization is false.
 
-The complete active typography, appearance, accent, material, platform,
-capability, exclusion, and visual-validation boundary is defined in
+The complete active decisions, rejections, deferred calibration, architecture
+dependencies, and validation requirements are defined in
+`VC_WAVE_1_FOUNDATION_CLOSURE.md` and
+`vc-wave-1-foundation-closure.json`, under
 `VISUAL_CLOSURE_INPUT_CONTRACT.md` and
-`visual-closure-input-contract.json`. San Francisco is the sole active core
-interface family. System, Light, and Dark are the only active appearance
-choices. Restrained violet-indigo is the default action accent. Primary content
-is opaque, matte, and continuous; functional material is limited to justified
-chrome with an authored opaque Reduce Transparency equivalent.
+`visual-closure-input-contract.json`. Exact type metrics, colors, relief,
+dividers, material recipes, radii, shadows, crown and dock geometry, motion,
+haptics, Figma variables, component tokens, and component APIs remain deferred.
 
 Every `VAD-R1-*` contract below carries one classification from the closed
 vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
@@ -67,7 +134,7 @@ vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
 `IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
 contract remains evidence only even when its original prose uses imperative or
 present-tense language. Only clauses repeated in the visual-closure input
-contract may control VC-01 through VC-14.
+contract or installed Wave 1 closure may control VC-01 through VC-14.
 
 ### Historical Revision 1 synthesis — `HISTORICAL_REFERENCE`
 

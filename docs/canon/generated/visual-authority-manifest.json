@@ -3,13 +3,19 @@
     "accent": {
       "allowed_uses": [
         "actionable_tint",
-        "selected_control_emphasis"
+        "selected_control_emphasis",
+        "native_active_input_focus",
+        "current_timeline_position",
+        "proposed_action_path",
+        "links"
       ],
       "default_family": "restrained_violet_indigo",
-      "exact_values_status": "visual_validation_required",
+      "exact_values_status": "deferred_calibration",
       "existing_candidates_status": "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
       "forbidden_uses": [
         "glow",
+        "ambient_page_coloration",
+        "decorative_gradients",
         "root_identity",
         "semantic_state_alone",
         "semantic_color_replacement"
@@ -39,6 +45,10 @@
         "Light",
         "Dark"
       ],
+      "dark": "deep_graphite_controlled_luminance_localized_tonal_and_structural_relief_no_glow_or_violet_wash",
+      "light": "mineral_neutral_deep_graphite_restrained_dividers_and_localized_articulation_not_stark_white_or_parchment",
+      "selected_synthesis": "Mineral Relief Continuum",
+      "shared_law": "identical_anatomy_hierarchy_state_meaning_ownership_and_accessibility_with_comparable_relief",
       "system_definition": "follows_operating_system_light_or_dark",
       "system_is_distinct_palette": false
     },
@@ -48,6 +58,16 @@
       "recovery": "matching_runtime_data_required",
       "search": "find_grounded_understand_owner_routed_act",
       "you": "settings_first_local_no_account"
+    },
+    "crown": {
+      "primary_study": "VC03-CROWN-D04 — Compact Semantic Stack",
+      "required_transformation": "VC03-CROWN-D06 — Adaptive Semantic Passage",
+      "root_anatomy": [
+        "root_identity",
+        "at_most_one_material_context_line",
+        "native_trailing_contextual_actions"
+      ],
+      "search_and_capture_present": false
     },
     "directions": [
       "AVF-DNA-S07-R00",
@@ -62,6 +82,61 @@
       "AVF-A11Y-S07-R00",
       "AVF-COHERENCE-S07-R00"
     ],
+    "dock": {
+      "adaptive_equivalent": "VC04-DOCK-D06 — Adaptive Navigation Passage",
+      "command_order": [
+        "Today",
+        "Goals",
+        "Time",
+        "You",
+        "Search",
+        "Capture"
+      ],
+      "expanded": "one_compact_articulated_edge_tray_overlay",
+      "minimum_interaction_envelope_points": 44,
+      "primary_study": "VC04-DOCK-D04 — Articulated Edge Tray",
+      "state_family": [
+        "Hidden",
+        "Peek",
+        "Expanded",
+        "Adaptive labelled equivalent"
+      ]
+    },
+    "foundational_grammar": {
+      "color_roles": [
+        "appearance_environment",
+        "violet_indigo_action_accent",
+        "immutable_semantic_colors"
+      ],
+      "haptics": "selection_consequential_confirmation_warning_threshold_and_genuine_error_only",
+      "icons": "SF_Symbols_default_with_label_trait_and_structure_for_selection",
+      "material_roles": [
+        "Role 0 — Semantic Plane",
+        "Role 1 — Local Articulation",
+        "Role 2 — Functional Transient Material"
+      ],
+      "minimum_interaction_target_points": {
+        "height": 44,
+        "width": 44
+      },
+      "motion": "micro_feedback_local_transition_spatial_continuity_and_sparse_meaning_transformation_only",
+      "native_substrate": "VC06-GRAMMAR-D01 — Native Minimal Substrate",
+      "primary_study": "VC06-GRAMMAR-D04 — Articulated Native Grammar",
+      "shape": "native_controls_no_routine_rounded_container_or_universal_brand_radius",
+      "spatial_rhythm_philosophy": [
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        32,
+        40,
+        48,
+        64
+      ],
+      "stress_transformation": "VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+    },
     "goals_hierarchy": [
       "editable_life_area_index",
       "selected_life_area",
@@ -80,6 +155,7 @@
         "transient_consequence_review",
         "other_justified_chrome"
       ],
+      "local_articulation": "localized_and_pressure_flattening",
       "primary_content": "opaque_matte_continuous",
       "reduce_transparency": "authored_opaque_equivalent"
     },
@@ -117,6 +193,21 @@
       ],
       "target": "Crowned Edge Dock"
     },
+    "state_grammar": {
+      "axes": [
+        "interaction_posture",
+        "truth_status",
+        "operational_status"
+      ],
+      "expression_order": [
+        "explicit_language",
+        "typography",
+        "local_geometry",
+        "supporting_color_or_material"
+      ],
+      "primary_study": "VC05-STATE-D04 — Semantic State Covenant",
+      "stress_transformation": "VC05-STATE-D06 — Explicit Stress Scaffold"
+    },
     "time_scale": {
       "first_use": "Week",
       "later_entry": "last_used_implemented_supported_scale",
@@ -132,6 +223,25 @@
       "core_family": "San Francisco",
       "interface_roles": "SF Pro",
       "monospaced_digits": "San Francisco family only",
+      "roles": {
+        "actions": "native_control_typography",
+        "chronology": "SF_Pro_Text_monospaced_or_tabular_digits",
+        "consequence": "SF_Pro_Text_Regular_or_Medium_body_or_callout",
+        "current_truth": "SF_Pro_Text_Regular_body",
+        "focused_object_identity": "SF_Pro_Display_Semibold_multiline_before_truncation",
+        "object_identity": "SF_Pro_Text_Medium_or_Semibold",
+        "root_identity": "SF_Pro_Display_Semibold_compact_left_aligned_native_title",
+        "state_and_uncertainty": "SF_Pro_Text_subheadline_or_footnote_attached_language"
+      },
+      "selected_study": "VC01-TYPE-STUDY-D — Semantic Cadence",
+      "semantic_cadence": [
+        "identity",
+        "current_truth",
+        "consequence",
+        "qualifying_state",
+        "evidence",
+        "action_or_return"
+      ],
       "serif_active": false
     }
   },
@@ -284,7 +394,7 @@
     "swiftui": false,
     "visual_closure_planning": true
   },
-  "canon_content_sha": "57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2",
+  "canon_content_sha": "18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f",
   "canon_revision": 2,
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",
@@ -293,7 +403,41 @@
     "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
     "SUPERSEDED"
   ],
-  "compiler_version": "0.3.0",
+  "closure_packages": {
+    "package_statuses": {
+      "VC-01": "CLOSED",
+      "VC-02": "CLOSED",
+      "VC-03": "CLOSED",
+      "VC-04": "CLOSED",
+      "VC-05": "CLOSED",
+      "VC-06": "CLOSED",
+      "VC-07": "OPEN",
+      "VC-08": "OPEN",
+      "VC-09": "OPEN",
+      "VC-10": "OPEN",
+      "VC-11": "OPEN",
+      "VC-12": "OPEN",
+      "VC-13": "OPEN",
+      "VC-14": "NOT_STARTED"
+    },
+    "wave_1": {
+      "human_record": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-wave-1-foundation-closure.json",
+      "package_id": "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+      "selected_records": {
+        "VC-01": "VC01-TYPE-STUDY-D — Semantic Cadence",
+        "VC-02": "Mineral Relief Continuum",
+        "VC-03": "VC03-CROWN-D04 — Compact Semantic Stack / VC03-CROWN-D06 — Adaptive Semantic Passage",
+        "VC-04": "VC04-DOCK-D04 — Articulated Edge Tray / VC04-DOCK-D06 — Adaptive Navigation Passage",
+        "VC-05": "VC05-STATE-D04 — Semantic State Covenant / VC05-STATE-D06 — Explicit Stress Scaffold",
+        "VC-06": "VC06-GRAMMAR-D04 — Articulated Native Grammar / VC06-GRAMMAR-D01 — Native Minimal Substrate / VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+      },
+      "status": "CLOSED"
+    },
+    "wave_2_surfaces_and_journeys": "OPEN",
+    "wave_3_stress_and_matched_baseline": "OPEN"
+  },
+  "compiler_version": "0.4.0",
   "contract_id": "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
   "historical_figma_references": [
     {
@@ -393,7 +537,7 @@
     "VAD-R1-TODAY-005": "SUPERSEDED",
     "VAD-R1-TYPE-001": "SUPERSEDED"
   },
-  "schema_version": 2,
+  "schema_version": 3,
   "source_contract": "docs/canon/design/visual-closure-input-contract.json",
   "supersessions": [
     {
@@ -407,7 +551,7 @@
       "superseded": "AVF-TODAY-S09-R00"
     }
   ],
-  "traceability_input_sha": "99873944434b2e1bdd190ad1476c62c30d5b72ae0a2e8cc8172b785d5bddf3ee",
+  "traceability_input_sha": "3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54",
   "unsupported_visual_behaviors": [
     "active_serif_interface_type",
     "oled_dark",
@@ -433,7 +577,7 @@
     "unsupported_permission_or_platform"
   ],
   "visual_validation_decisions": [
-    "sf_pro_role_hierarchy_and_metrics",
+    "sf_pro_exact_metrics_named_styles_and_dynamic_type_mappings_within_closed_roles",
     "light_dark_canvas_and_surface_relationships",
     "violet_indigo_exact_values_and_existing_accent_candidate_disposition",
     "functional_material_opacity_blur_candidate_and_opaque_substitution",
@@ -442,5 +586,945 @@
     "crowned_edge_dock_geometry_within_accepted_shell_contract",
     "dense_large_text_rtl_handedness_and_recovery_composition",
     "matched_cross_root_state_appearance_and_accessibility_coverage"
-  ]
+  ],
+  "wave_1_foundation_closure": {
+    "active_direction_ids": [
+      "AVF-DNA-S07-R00",
+      "AVF-SHELL-S07-R01",
+      "AVF-CAPTURE-S07-R01",
+      "AVF-GOALS-S08-R00",
+      "AVF-TIME-S07-R01",
+      "AVF-TODAY-S10-R00",
+      "AVF-SEARCH-D07-R01",
+      "AVF-YOU-D07-R02",
+      "AVF-RECOVERY-S07-R01",
+      "AVF-A11Y-S07-R00",
+      "AVF-COHERENCE-S07-R00"
+    ],
+    "architecture_dependencies": [
+      "single_shell_owner_and_independent_root_paths",
+      "native_back_focus_safe_area_keyboard_and_presentation_ownership",
+      "canonical_identity_and_single_mutation_owner",
+      "current_proposed_accepted_external_stale_unknown_and_historical_truth_separation",
+      "owner_routed_search_and_capture_mutation",
+      "capability_gated_pending_receipt_undo_conflict_and_recovery",
+      "accessibility_focus_localization_rtl_keyboard_and_device_proof"
+    ],
+    "authorization_state": {
+      "figma": false,
+      "implementation": false,
+      "swiftui": false
+    },
+    "deferred_calibration_register": [
+      "exact_typography_sizes",
+      "exact_line_heights",
+      "exact_tracking",
+      "final_named_figma_text_styles",
+      "exact_dynamic_type_mappings",
+      "exact_light_canvas_values",
+      "exact_dark_graphite_values",
+      "exact_violet_indigo_values",
+      "exact_semantic_color_values",
+      "exact_relief_intensity",
+      "exact_tonal_transitions",
+      "exact_divider_contrast_and_weight",
+      "exact_blur_and_opacity",
+      "exact_opaque_material_substitutions",
+      "exact_radii",
+      "exact_shadows",
+      "exact_crown_geometry_and_spacing",
+      "exact_dock_tray_passage_seam_and_lower_reach_geometry",
+      "exact_dock_control_spacing_expansion_duration_and_inactivity_timeout",
+      "exact_state_type_metrics_and_progress_indicator_implementation",
+      "exact_motion_durations_easing_distance_and_scale",
+      "exact_haptic_apis",
+      "exact_figma_variables_collections_and_named_components",
+      "exact_component_tokens_apis_and_library_structure"
+    ],
+    "package_id": "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+    "package_statuses": {
+      "VC-01": "CLOSED",
+      "VC-02": "CLOSED",
+      "VC-03": "CLOSED",
+      "VC-04": "CLOSED",
+      "VC-05": "CLOSED",
+      "VC-06": "CLOSED",
+      "VC-07": "OPEN",
+      "VC-08": "OPEN",
+      "VC-09": "OPEN",
+      "VC-10": "OPEN",
+      "VC-11": "OPEN",
+      "VC-12": "OPEN",
+      "VC-13": "OPEN",
+      "VC-14": "NOT_STARTED"
+    },
+    "packages": [
+      {
+        "applies_to_avf_ids": [
+          "AVF-DNA-S07-R00",
+          "AVF-SHELL-S07-R01",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "native_dynamic_type_and_control_typography",
+          "canonical_identity_stable_across_owner_and_projection",
+          "localized_semantic_copy_and_accessibility_reading_order"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_sizes",
+          "exact_line_heights",
+          "exact_tracking",
+          "final_named_figma_text_styles",
+          "exact_dynamic_type_mappings"
+        ],
+        "locked_decisions": {
+          "actions": {
+            "family": "native_control_typography",
+            "forbidden": "branded_button_typeface"
+          },
+          "chronology": {
+            "family": "SF Pro Text",
+            "numeric_treatment": "monospaced_or_tabular_digits",
+            "rule": "exact_without_dominating_object_identity"
+          },
+          "compression_order": [
+            "repeated_context",
+            "repeated_ownership",
+            "secondary_symbols",
+            "supporting_provenance",
+            "secondary_chronology",
+            "preview_breadth",
+            "secondary_relationships"
+          ],
+          "consequence": {
+            "family": "SF Pro Text",
+            "relationship": "body_or_callout",
+            "rule": "regular_or_medium_separated_primarily_by_spacing_and_present_only_when_material"
+          },
+          "core_interface_family": "San Francisco",
+          "current_truth": {
+            "family": "SF Pro Text",
+            "relationship": "body",
+            "rule": "regular_primary_changing_semantic_voice"
+          },
+          "focused_object_identity": {
+            "family": "SF Pro Display",
+            "rule": "multiline_before_truncation_and_more_prominent_than_state_chronology_or_action",
+            "weight": "Semibold"
+          },
+          "never_compress": [
+            "place",
+            "identity",
+            "current_truth",
+            "applicable_state",
+            "consequence",
+            "required_action",
+            "conflict",
+            "return"
+          ],
+          "object_identity": {
+            "family": "SF Pro Text",
+            "rule": "stable_across_canonical_owner_and_projections",
+            "weight": "Medium_or_Semibold"
+          },
+          "ordinary_semantic_cadence": [
+            "identity",
+            "current_truth",
+            "consequence",
+            "qualifying_state",
+            "evidence",
+            "action_or_return"
+          ],
+          "root_identity": {
+            "alignment": "left",
+            "family": "SF Pro Display",
+            "relationship": "native_large_title_or_title",
+            "rule": "compact_never_ceremonial_hero",
+            "weight": "Semibold"
+          },
+          "state_and_uncertainty": {
+            "family": "SF Pro Text",
+            "relationship": "subheadline_or_footnote",
+            "rule": "explicit_language_attached_to_qualified_content_never_detached_status_pills"
+          },
+          "supporting_evidence": {
+            "relationship": "secondary_semantic_styles",
+            "rule": "disclosed_proportionally_and_compressed_before_identity_truth_state_consequence_or_action"
+          }
+        },
+        "package_id": "VC-01",
+        "rejected_alternatives": [
+          "serif_accents",
+          "New_York",
+          "oversized_editorial_root_titles",
+          "instrument_typography_as_universal_character",
+          "permanent_accessibility_scaffolding",
+          "all_regular_low_contrast_hierarchy",
+          "custom_tracking_as_brand_identity",
+          "microcopy_dependent_layouts",
+          "uppercase_state_systems"
+        ],
+        "required_transformation": null,
+        "selected_study_or_synthesis": {
+          "id": "VC01-TYPE-STUDY-D",
+          "kind": "study",
+          "name": "Semantic Cadence"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+          "docs/canon/design/VISUAL_SYSTEM_R1.md",
+          "docs/canon/migration/UX_BLUEPRINT.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "san_francisco_is_only_active_interface_family",
+          "serif_is_not_active",
+          "semantic_cadence_is_ordering_not_fixed_row_template",
+          "exact_typography_tokens_remain_deferred"
+        ]
+      },
+      {
+        "applies_to_avf_ids": [
+          "AVF-DNA-S07-R00",
+          "AVF-YOU-D07-R02",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "system_light_dark_appearance_resolution",
+          "deterministic_violet_indigo_preference_migration",
+          "reduce_transparency_opaque_equivalence",
+          "semantic_color_independence"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_light_canvas_values",
+          "exact_dark_graphite_values",
+          "exact_violet_indigo_values",
+          "exact_relief_intensity",
+          "exact_shadows",
+          "exact_divider_contrast",
+          "exact_opaque_material_substitutions"
+        ],
+        "locked_decisions": {
+          "accent": {
+            "default": "restrained_violet_indigo",
+            "forbidden_uses": [
+              "root_identity",
+              "semantic_status_alone",
+              "ambient_page_coloration",
+              "glow",
+              "decorative_gradients"
+            ],
+            "uses": [
+              "primary_actionable_tint",
+              "selected_control_emphasis",
+              "active_input_focus_where_native_behavior_permits",
+              "current_timeline_position",
+              "proposed_action_path",
+              "links"
+            ]
+          },
+          "dark": {
+            "environment": "deep_graphite_not_pure_black",
+            "functional_chrome": "slightly_clearer_than_content",
+            "glowing_edges": false,
+            "luminance": "controlled",
+            "relief": "localized_tonal_transitions_and_structural_edges",
+            "violet_environmental_wash": false
+          },
+          "light": {
+            "environment": "mineral_neutral_not_stark_productivity_white",
+            "functional_chrome": "slightly_clearer_than_content",
+            "relief": "small_tonal_and_structural_articulation",
+            "text": "deep_graphite",
+            "warm_editorial_parchment": false
+          },
+          "material": {
+            "functional_material": "justified_chrome_and_transient_interaction_only",
+            "primary_content": "opaque_matte",
+            "reduce_transparency": "authored_opaque_equivalent",
+            "relief": "visible_but_restrained"
+          },
+          "shared_light_dark_law": [
+            "identical_object_anatomy",
+            "identical_hierarchy",
+            "identical_state_meaning",
+            "comparable_relief_intensity",
+            "identical_ownership",
+            "identical_accessibility_transformation"
+          ],
+          "synthesis_law": "D01_calm_matte_continuous_environment_plus_D04_slightly_stronger_localized_articulation_without_theatrical_material"
+        },
+        "package_id": "VC-02",
+        "rejected_alternatives": [
+          "purely_flat_D01_calibration",
+          "strongly_sculpted_D04_calibration",
+          "OLED_Dark",
+          "atmosphere_families",
+          "photography_derived_appearance",
+          "decorative_gradients",
+          "glow",
+          "glass_content_panels",
+          "appearance_dependent_hierarchy"
+        ],
+        "required_transformation": null,
+        "selected_study_or_synthesis": {
+          "inputs": [
+            "AVF-APPEARANCE-D01-R00",
+            "AVF-APPEARANCE-D04-R00"
+          ],
+          "kind": "synthesis",
+          "name": "Mineral Relief Continuum"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+          "docs/canon/design/VISUAL_SYSTEM_R1.md",
+          "docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "mineral_relief_continuum_is_selected_synthesis",
+          "system_light_dark_are_only_active_appearance_choices",
+          "violet_indigo_is_action_accent_not_semantic_status",
+          "exact_appearance_tokens_remain_deferred"
+        ]
+      },
+      {
+        "applies_to_avf_ids": [
+          "AVF-SHELL-S07-R01",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "single_shell_owner",
+          "framework_back_and_native_toolbar_ownership",
+          "object_owner_supplied_identity_state_and_actions",
+          "accessibility_focus_direction_keyboard_and_dynamic_type"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_height",
+          "exact_title_context_spacing",
+          "exact_toolbar_spacing",
+          "exact_tonal_separation",
+          "exact_transition_duration"
+        ],
+        "locked_decisions": {
+          "accessibility_transformation_order": [
+            "remove_decorative_symbol",
+            "remove_repeated_context",
+            "move_secondary_actions_to_overflow",
+            "wrap_identity",
+            "increase_height",
+            "stack_context_beneath_identity",
+            "preserve_back_cancel_save_or_required_action"
+          ],
+          "conflict": "identity_plus_at_most_one_concise_qualification_with_full_participants_in_content",
+          "consequential_review": "affected_object_or_operation_plus_review_posture_plus_native_cancel_or_return",
+          "editing": "focused_identity_native_cancel_native_done_or_save_and_only_material_blocked_or_unsaved_state",
+          "focused_object": "framework_back_available_focused_identity_primary_root_through_navigation_continuity_one_material_state_only_when_interpretation_changes",
+          "material": "restrained_functional_separation_not_content_card",
+          "recovery": "at_most_one_material_recovery_qualification_local_failures_local_system_unsafe_state_dedicated_shell_gate",
+          "root_browsing_anatomy": [
+            "root_identity",
+            "at_most_one_material_context_line",
+            "native_contextual_actions_at_trailing_edge"
+          ],
+          "root_crown": "compact_left_aligned_SF_Pro_Display_Semibold_without_hero_root_icon_metrics_recommendations_or_status_collection",
+          "rtl_and_keyboard": "native_direction_back_and_reading_order_with_reachable_required_actions_and_unobscured_input",
+          "scroll": "native_inline_title_context_collapses_first_identity_explicit_actions_native_or_overflow_no_duplicate_crown",
+          "search_and_capture_in_crown": false
+        },
+        "package_id": "VC-03",
+        "rejected_alternatives": [
+          "centered_hero_crown",
+          "large_decorative_root_icon",
+          "crown_metrics_or_recommendations",
+          "status_collection_in_crown",
+          "duplicate_floating_crown",
+          "crown_as_content_card",
+          "search_or_capture_in_crown"
+        ],
+        "required_transformation": {
+          "id": "VC03-CROWN-D06",
+          "name": "Adaptive Semantic Passage"
+        },
+        "selected_study_or_synthesis": {
+          "id": "VC03-CROWN-D04",
+          "kind": "primary_study",
+          "name": "Compact Semantic Stack"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md",
+          "docs/canon/migration/UX_BLUEPRINT.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "compact_semantic_stack_is_primary",
+          "adaptive_semantic_passage_is_required_transformation",
+          "native_back_cancel_save_and_required_action_survive_pressure",
+          "exact_crown_calibration_remains_deferred"
+        ]
+      },
+      {
+        "applies_to_avf_ids": [
+          "AVF-SHELL-S07-R01",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "single_shell_owned_dock_posture_machine",
+          "native_root_selection_semantics",
+          "gesture_arbitration_safe_areas_keyboard_and_focus",
+          "rtl_assistive_input_and_lower_reach_equivalence"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_tray_width",
+          "exact_passage_width",
+          "exact_visible_seam_width",
+          "exact_vertical_position",
+          "exact_control_spacing",
+          "exact_expansion_duration",
+          "exact_inactivity_timeout",
+          "exact_lower_reach_geometry"
+        ],
+        "locked_decisions": {
+          "adaptive_navigation_passage": {
+            "characteristics": [
+              "wider",
+              "fully_labelled",
+              "opaque",
+              "larger_targets",
+              "same_six_commands",
+              "same_order",
+              "same_grouping",
+              "same_ownership",
+              "one_dock_not_second_navigation_system"
+            ],
+            "triggers": [
+              "large_dynamic_type",
+              "voiceover_or_voice_control_clarity",
+              "switch_control",
+              "full_keyboard_access",
+              "long_localization",
+              "rtl",
+              "keyboard_pressure",
+              "comprehension_requirements",
+              "lower_reach_requirements"
+            ]
+          },
+          "expanded": {
+            "anatomy": "one_compact_articulated_edge_tray_overlay_preserving_most_content",
+            "command_order": [
+              "Today",
+              "Goals",
+              "Time",
+              "You",
+              "Search",
+              "Capture"
+            ],
+            "grouping": "four_roots_upper_search_and_capture_lower",
+            "labels": "selective_compact",
+            "selection": "localized_articulated_relief_with_optional_violet_indigo_and_noncolor_structure",
+            "symbols": "always_visible"
+          },
+          "hidden": "full_screen_search_capture_immersive_depth_or_unsafe_gesture_keyboard_overlap",
+          "peek": {
+            "expression": "narrow_material_seam",
+            "interaction_envelope_points_minimum": 44,
+            "meaning": "availability_not_repeated_root_identity",
+            "ordinary_posture": "eligible_root_browsing"
+          },
+          "state_family": [
+            "Hidden",
+            "Peek",
+            "Expanded",
+            "Adaptive_labelled_equivalent"
+          ]
+        },
+        "package_id": "VC-04",
+        "rejected_alternatives": [
+          "symbol_only_rail_as_primary_expanded_state",
+          "permanent_labelled_drawer",
+          "full_height_sidebar",
+          "detached_floating_controls",
+          "bottom_tabs_as_fallback",
+          "gesture_only_access",
+          "search_or_capture_outside_dock"
+        ],
+        "required_transformation": {
+          "id": "VC04-DOCK-D06",
+          "name": "Adaptive Navigation Passage"
+        },
+        "selected_study_or_synthesis": {
+          "id": "VC04-DOCK-D04",
+          "kind": "primary_study",
+          "name": "Articulated Edge Tray"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md",
+          "docs/canon/migration/UX_BLUEPRINT.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "articulated_edge_tray_is_ordinary_expanded_dock",
+          "adaptive_navigation_passage_is_required_equivalent",
+          "same_six_commands_order_grouping_and_ownership_survive_transformation",
+          "minimum_interaction_envelope_is_44_points",
+          "exact_dock_calibration_remains_deferred"
+        ]
+      },
+      {
+        "applies_to_avf_ids": [
+          "AVF-DNA-S07-R00",
+          "AVF-RECOVERY-S07-R01",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "shared_truth_state_algebra",
+          "canonical_owner_mutation_lifecycle",
+          "durable_operation_identity_for_pending",
+          "typed_receipt_and_undo_capability",
+          "modeled_conflict_and_recovery_owners"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_relief_intensity",
+          "exact_divider_weight",
+          "exact_state_type_metrics",
+          "exact_semantic_color_values",
+          "progress_indicator_implementation",
+          "exact_transition_timing"
+        ],
+        "locked_decisions": {
+          "combined_state_reading_order": [
+            "identity",
+            "current_authoritative_truth",
+            "genuine_conflict",
+            "unknown_or_partial_authority",
+            "failed_or_blocked_operation",
+            "pending_or_recovering_operation",
+            "permission_or_authentication_limitation",
+            "stale_external_or_offline_qualification",
+            "historical_context",
+            "supporting_evidence"
+          ],
+          "expression_channels": [
+            "explicit_language",
+            "typography",
+            "local_geometry",
+            "supporting_color_or_material"
+          ],
+          "interaction_postures": {
+            "editing": "native_focus_cancel_save_or_done_accepted_truth_distinct_consequential_review_separate",
+            "focused": "primary_spatial_attention_focused_title_expanded_meaning_origin_and_return",
+            "resting": "matte_plane_no_default_elevation_full_identity_and_truth",
+            "selected": "localized_relief_or_edge_stronger_identity_truth_context_visible_optional_violet_indigo_no_editing_implication",
+            "sensitive_reveal": "hidden_explicit_deliberate_reveal_or_authentication_rehide_available_selection_never_reveals"
+          },
+          "mutation_postures": {
+            "pending": "durable_operation_identity_and_proven_owner_persistence_recovery_only",
+            "preview_order": [
+              "current_truth",
+              "proposed_truth",
+              "change",
+              "consequence",
+              "protected_meaning",
+              "uncertainty_or_external_effect",
+              "commit",
+              "cancel"
+            ],
+            "saving": "operation_identified_current_accepted_truth_authoritative_until_commit_publication"
+          },
+          "outcomes": {
+            "blocked": "no_commit_current_truth_unchanged_exact_prerequisite_local_only_valid_resolutions",
+            "failed": "state_truth_change_and_commit_boundary_preserve_work_one_truthful_recovery",
+            "irreversible": "exact_scope_before_commit_no_undo_implication",
+            "settled_changed": "new_truth_primary_relief_recedes_receipt_and_undo_capability_gated_no_celebration",
+            "settled_unchanged": "existing_truth_explicit_no_change_no_fake_success",
+            "undo_available": "near_result_names_reversal_new_typed_mutation_history_retained"
+          },
+          "recovery": "available_truth_and_repair_scope_visible_recovered_truth_primary_only_after_verification_no_celebration",
+          "state_axes": [
+            "interaction_posture",
+            "truth_status",
+            "operational_status"
+          ],
+          "stress_transformation": [
+            "relief_to_rule_spacing_or_labelled_structure",
+            "spatial_conflict_to_ordered_comparison",
+            "preview_to_vertical_current_proposed_sequence",
+            "settlement_to_explicit_result_grouping",
+            "recovery_to_ordered_passage",
+            "required_actions_to_reachable_native_regions"
+          ],
+          "truth_qualifiers": [
+            "External",
+            "Stale",
+            "Unknown",
+            "Historical"
+          ]
+        },
+        "package_id": "VC-05",
+        "rejected_alternatives": [
+          "detached_status_pills",
+          "universal_progress_spinner",
+          "success_celebration",
+          "warning_card_grid",
+          "toast_cascade",
+          "color_only_state",
+          "error_replacement_container",
+          "universal_undo",
+          "pending_without_ownership"
+        ],
+        "required_transformation": {
+          "id": "VC05-STATE-D06",
+          "name": "Explicit Stress Scaffold"
+        },
+        "selected_study_or_synthesis": {
+          "id": "VC05-STATE-D04",
+          "kind": "primary_study",
+          "name": "Semantic State Covenant"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/adr/ADR-2026-07-22-truth-mutation-and-global-authority.md",
+          "docs/adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md",
+          "docs/canon/migration/UX_BLUEPRINT.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "semantic_state_covenant_is_active",
+          "explicit_stress_scaffold_is_required_transformation",
+          "interaction_truth_and_operation_axes_remain_separate",
+          "pending_receipt_and_undo_remain_capability_gated",
+          "exact_state_calibration_remains_deferred"
+        ]
+      },
+      {
+        "applies_to_avf_ids": [
+          "AVF-DNA-S07-R00",
+          "AVF-SHELL-S07-R01",
+          "AVF-RECOVERY-S07-R01",
+          "AVF-A11Y-S07-R00",
+          "AVF-COHERENCE-S07-R00"
+        ],
+        "architecture_dependencies": [
+          "native_control_and_symbol_substrate",
+          "semantic_color_and_noncolor_equivalence",
+          "reduce_motion_and_reduce_transparency_equivalence",
+          "shell_owned_functional_chrome",
+          "canonical_state_and_recovery_ownership"
+        ],
+        "authorization_state": {
+          "figma": false,
+          "implementation": false,
+          "swiftui": false
+        },
+        "deferred_calibration": [
+          "exact_type_metrics",
+          "exact_colors",
+          "exact_violet_indigo_values",
+          "exact_semantic_colors",
+          "exact_blur_and_opacity",
+          "exact_divider_weights",
+          "exact_radii",
+          "exact_shadows",
+          "exact_motion_durations_and_easing",
+          "exact_haptic_apis",
+          "exact_figma_variables",
+          "exact_component_tokens_and_apis"
+        ],
+        "locked_decisions": {
+          "color": {
+            "roots_have_assigned_colors": false,
+            "separate_roles": [
+              "appearance_environment",
+              "violet_indigo_action_accent",
+              "immutable_semantic_colors"
+            ],
+            "state_requires_noncolor_equivalent": true
+          },
+          "dividers": [
+            "sequence",
+            "ownership_boundary",
+            "temporal_separation",
+            "state_transition",
+            "meaningful_grouping"
+          ],
+          "haptics": {
+            "allowed": [
+              "selection",
+              "consequential_confirmation",
+              "warning_threshold",
+              "genuine_interaction_error"
+            ],
+            "rejected": [
+              "decorative",
+              "continuous"
+            ]
+          },
+          "icons": {
+            "custom_symbol_rule": "genuine_canonical_semantic_gap_only",
+            "default": "SF Symbols",
+            "preferred_rendering": "monochrome_or_hierarchical",
+            "selection_rule": "fill_or_weight_plus_label_trait_and_structure"
+          },
+          "interaction_target_points": {
+            "height_minimum": 44,
+            "width_minimum": 44
+          },
+          "material_roles": {
+            "role_0_semantic_plane": "opaque_matte_continuous_stable_typography_led_no_blur_or_shadow_dependency_primary_content_default",
+            "role_1_local_articulation": {
+              "channels": [
+                "small_tonal_shift",
+                "structural_edge",
+                "local_relief",
+                "controlled_recess",
+                "divider_emphasis",
+                "increased_spacing"
+              ],
+              "rule": "part_of_surrounding_plane_and_flattens_under_pressure",
+              "uses": [
+                "selection",
+                "focus",
+                "proposal",
+                "protection",
+                "pending",
+                "recovery",
+                "current_timeline_position",
+                "selected_dock_command",
+                "sensitive_boundary"
+              ]
+            },
+            "role_2_functional_transient_material": {
+              "hosts": [
+                "crown",
+                "dock",
+                "search",
+                "capture",
+                "menus",
+                "popovers",
+                "sheets",
+                "consequence_review",
+                "temporary_editing_controls"
+              ],
+              "reduce_transparency": "authored_opaque_equivalent"
+            }
+          },
+          "motion": {
+            "allowed": [
+              "micro_feedback",
+              "local_state_transition",
+              "spatial_continuity",
+              "sparse_meaning_transformation"
+            ],
+            "purpose": "continuity_or_causality",
+            "reduce_motion": "direct_replacement_or_short_crossfade_static_current_proposed_and_conflict_no_semantic_loss",
+            "rejected": [
+              "pulsing",
+              "breathing_glow",
+              "continuous_floating",
+              "decorative_parallax",
+              "celebration",
+              "error_shaking",
+              "long_cinematic_transitions",
+              "motion_on_every_update"
+            ]
+          },
+          "radius_philosophy": [
+            "native_control_radius",
+            "compact_functional_radius",
+            "focused_transient_surface_radius"
+          ],
+          "relief": {
+            "active_chrome": "restrained_elevation_permitted",
+            "conflict": "discontinuity_not_warning_elevation",
+            "focused": "spatial_and_tonal_separation",
+            "proposed": "distinct_from_accepted_truth",
+            "resting": "none_by_default",
+            "selected": "slight_local_articulation",
+            "settlement": "articulation_recedes"
+          },
+          "shadow_philosophy": "optional_floating_chrome_or_temporary_presentation_only_tonal_separation_and_structural_edge_first",
+          "shape": {
+            "boundary_rule": "independent_interaction_or_atomic_operation_only",
+            "native_controls": "retain_native_shapes",
+            "pill_rule": "native_compact_controls_and_true_binary_choices_only",
+            "routine_content": "no_rounded_container",
+            "universal_brand_radius": false
+          },
+          "spatial_rhythm": {
+            "larger_separation": [
+              40,
+              48,
+              64
+            ],
+            "primary_progression": [
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              32
+            ],
+            "status": "philosophy_not_final_token_set"
+          }
+        },
+        "native_substrate": {
+          "id": "VC06-GRAMMAR-D01",
+          "name": "Native Minimal Substrate"
+        },
+        "package_id": "VC-06",
+        "rejected_alternatives": [
+          "rounded_container_for_routine_content",
+          "universal_brand_radius",
+          "decorative_dividers",
+          "routine_elevation",
+          "root_assigned_colors",
+          "semantic_state_by_color_only",
+          "decorative_motion",
+          "decorative_or_continuous_haptics"
+        ],
+        "required_transformation": {
+          "id": "VC06-GRAMMAR-D06",
+          "name": "Explicit Accessible Structure"
+        },
+        "selected_study_or_synthesis": {
+          "id": "VC06-GRAMMAR-D04",
+          "kind": "primary_study",
+          "name": "Articulated Native Grammar"
+        },
+        "source_paths": [
+          "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+          "docs/canon/design/VISUAL_SYSTEM_R1.md",
+          "docs/adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md",
+          "docs/canon/migration/UX_BLUEPRINT.md"
+        ],
+        "status": "CLOSED",
+        "validation_requirements": [
+          "articulated_native_grammar_is_active",
+          "native_minimal_substrate_is_preserved",
+          "explicit_accessible_structure_is_required_transformation",
+          "minimum_target_is_44_by_44_points",
+          "spatial_progression_is_philosophy_not_final_token_set",
+          "exact_grammar_calibration_remains_deferred"
+        ]
+      }
+    ],
+    "schema_version": 1,
+    "shared_protected_characteristics": [
+      "articulated_relief_and_native_semantic_continuum",
+      "identity_truth_consequence_state_conflict_action_and_return_survive_compression",
+      "system_light_dark_share_anatomy_hierarchy_meaning_ownership_and_accessibility",
+      "opaque_matte_semantic_plane_with_local_articulation_and_transient_functional_material",
+      "four_roots_with_search_and_capture_global_non_roots",
+      "native_back_focus_safe_area_keyboard_direction_and_input_equivalence",
+      "separate_interaction_truth_and_operation_axes",
+      "canonical_identity_and_mutation_ownership_across_projections",
+      "accessibility_equivalence_is_required_not_proven",
+      "unsupported_capability_absent_or_target_only"
+    ],
+    "shared_rejected_patterns": [
+      "serif_interface_accents",
+      "ceremonial_root_heroes",
+      "uppercase_state_systems",
+      "custom_branded_action_typography",
+      "stark_productivity_white",
+      "pure_black_or_glowing_dark_environment",
+      "appearance_dependent_hierarchy",
+      "decorative_gradients_atmosphere_wash_or_glass_content_panels",
+      "content_card_or_duplicate_floating_crowns",
+      "full_height_sidebars_detached_dock_buttons_or_bottom_tab_fallback",
+      "gesture_only_access_or_second_adaptive_navigation_system",
+      "detached_status_pills_universal_spinners_universal_undo_or_toast_cascade",
+      "celebration_warning_card_grids_color_only_state_or_simulated_pending",
+      "universal_rounded_containers_brand_radius_or_routine_elevation",
+      "decorative_motion_or_haptics",
+      "new_active_avf_direction_id",
+      "expanded_product_scope_or_fictional_capability"
+    ],
+    "source_contract": "docs/canon/design/vc-wave-1-foundation-closure.json",
+    "source_input_sha": "5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640",
+    "source_paths": [
+      "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+      "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+      "docs/canon/design/visual-closure-input-contract.json",
+      "docs/canon/design/VISUAL_SYSTEM_R1.md",
+      "docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md",
+      "docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md",
+      "docs/adr/ADR-2026-07-22-canonical-identity-ownership-projection.md",
+      "docs/adr/ADR-2026-07-22-truth-mutation-and-global-authority.md",
+      "docs/adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md",
+      "docs/canon/migration/UX_BLUEPRINT.md",
+      "docs/qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md",
+      "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_TRACEABILITY.md",
+      "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_SUPERSESSION_REGISTER.md",
+      "docs/qa/frontend-flagship-shippability-remediation/rp-reconciliation-index.json"
+    ],
+    "status": "CLOSED",
+    "validation_requirements": [
+      "vc_01_through_vc_06_closed",
+      "vc_07_through_vc_13_open",
+      "vc_14_not_started",
+      "active_direction_ids_exact_and_unchanged",
+      "san_francisco_only_active_interface_family",
+      "serif_inactive",
+      "mineral_relief_continuum_selected",
+      "articulated_edge_tray_ordinary_expanded_dock",
+      "adaptive_navigation_passage_required_equivalent",
+      "semantic_state_covenant_active",
+      "articulated_native_grammar_active",
+      "exact_tokens_deferred",
+      "minimum_interaction_target_44_by_44_points",
+      "figma_authorization_false",
+      "swiftui_approval_false",
+      "implementation_authorization_false"
+    ],
+    "wave_2_entry_criteria": [
+      "preserve_wave_1_typography_appearance_crown_dock_state_and_grammar",
+      "remain_within_canonical_screen_object_owner_and_journey_boundaries",
+      "label_target_only_or_unsupported_capability",
+      "exercise_system_light_dark_dense_long_and_accessibility_transformations",
+      "keep_exact_token_and_component_calibration_deferred",
+      "create_no_figma_swiftui_implementation_or_new_direction_authorization",
+      "keep_vc_14_incomplete_until_matched_baseline_closure"
+    ],
+    "wave_status": {
+      "wave_1_shared_visual_foundation": "CLOSED",
+      "wave_2_surfaces_and_journeys": "OPEN",
+      "wave_3_stress_and_matched_baseline": "OPEN"
+    }
+  }
 }

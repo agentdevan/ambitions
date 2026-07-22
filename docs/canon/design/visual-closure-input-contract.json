@@ -21,13 +21,19 @@
     "accent": {
       "allowed_uses": [
         "actionable_tint",
-        "selected_control_emphasis"
+        "selected_control_emphasis",
+        "native_active_input_focus",
+        "current_timeline_position",
+        "proposed_action_path",
+        "links"
       ],
       "default_family": "restrained_violet_indigo",
-      "exact_values_status": "visual_validation_required",
+      "exact_values_status": "deferred_calibration",
       "existing_candidates_status": "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
       "forbidden_uses": [
         "glow",
+        "ambient_page_coloration",
+        "decorative_gradients",
         "root_identity",
         "semantic_state_alone",
         "semantic_color_replacement"
@@ -39,6 +45,10 @@
         "Light",
         "Dark"
       ],
+      "dark": "deep_graphite_controlled_luminance_localized_tonal_and_structural_relief_no_glow_or_violet_wash",
+      "light": "mineral_neutral_deep_graphite_restrained_dividers_and_localized_articulation_not_stark_white_or_parchment",
+      "selected_synthesis": "Mineral Relief Continuum",
+      "shared_law": "identical_anatomy_hierarchy_state_meaning_ownership_and_accessibility_with_comparable_relief",
       "system_definition": "follows_operating_system_light_or_dark",
       "system_is_distinct_palette": false
     },
@@ -62,6 +72,61 @@
       "AVF-A11Y-S07-R00",
       "AVF-COHERENCE-S07-R00"
     ],
+    "dock": {
+      "adaptive_equivalent": "VC04-DOCK-D06 — Adaptive Navigation Passage",
+      "command_order": [
+        "Today",
+        "Goals",
+        "Time",
+        "You",
+        "Search",
+        "Capture"
+      ],
+      "expanded": "one_compact_articulated_edge_tray_overlay",
+      "minimum_interaction_envelope_points": 44,
+      "primary_study": "VC04-DOCK-D04 — Articulated Edge Tray",
+      "state_family": [
+        "Hidden",
+        "Peek",
+        "Expanded",
+        "Adaptive labelled equivalent"
+      ]
+    },
+    "foundational_grammar": {
+      "color_roles": [
+        "appearance_environment",
+        "violet_indigo_action_accent",
+        "immutable_semantic_colors"
+      ],
+      "haptics": "selection_consequential_confirmation_warning_threshold_and_genuine_error_only",
+      "icons": "SF_Symbols_default_with_label_trait_and_structure_for_selection",
+      "material_roles": [
+        "Role 0 — Semantic Plane",
+        "Role 1 — Local Articulation",
+        "Role 2 — Functional Transient Material"
+      ],
+      "minimum_interaction_target_points": {
+        "height": 44,
+        "width": 44
+      },
+      "motion": "micro_feedback_local_transition_spatial_continuity_and_sparse_meaning_transformation_only",
+      "native_substrate": "VC06-GRAMMAR-D01 — Native Minimal Substrate",
+      "primary_study": "VC06-GRAMMAR-D04 — Articulated Native Grammar",
+      "shape": "native_controls_no_routine_rounded_container_or_universal_brand_radius",
+      "spatial_rhythm_philosophy": [
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        32,
+        40,
+        48,
+        64
+      ],
+      "stress_transformation": "VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+    },
     "goals_hierarchy": [
       "editable_life_area_index",
       "selected_life_area",
@@ -80,6 +145,7 @@
         "transient_consequence_review",
         "other_justified_chrome"
       ],
+      "local_articulation": "localized_and_pressure_flattening",
       "primary_content": "opaque_matte_continuous",
       "reduce_transparency": "authored_opaque_equivalent"
     },
@@ -117,6 +183,21 @@
       ],
       "target": "Crowned Edge Dock"
     },
+    "state_grammar": {
+      "axes": [
+        "interaction_posture",
+        "truth_status",
+        "operational_status"
+      ],
+      "expression_order": [
+        "explicit_language",
+        "typography",
+        "local_geometry",
+        "supporting_color_or_material"
+      ],
+      "primary_study": "VC05-STATE-D04 — Semantic State Covenant",
+      "stress_transformation": "VC05-STATE-D06 — Explicit Stress Scaffold"
+    },
     "time_scale": {
       "first_use": "Week",
       "later_entry": "last_used_implemented_supported_scale",
@@ -132,7 +213,36 @@
       "core_family": "San Francisco",
       "interface_roles": "SF Pro",
       "monospaced_digits": "San Francisco family only",
+      "roles": {
+        "actions": "native_control_typography",
+        "chronology": "SF_Pro_Text_monospaced_or_tabular_digits",
+        "consequence": "SF_Pro_Text_Regular_or_Medium_body_or_callout",
+        "current_truth": "SF_Pro_Text_Regular_body",
+        "focused_object_identity": "SF_Pro_Display_Semibold_multiline_before_truncation",
+        "object_identity": "SF_Pro_Text_Medium_or_Semibold",
+        "root_identity": "SF_Pro_Display_Semibold_compact_left_aligned_native_title",
+        "state_and_uncertainty": "SF_Pro_Text_subheadline_or_footnote_attached_language"
+      },
+      "selected_study": "VC01-TYPE-STUDY-D — Semantic Cadence",
+      "semantic_cadence": [
+        "identity",
+        "current_truth",
+        "consequence",
+        "qualifying_state",
+        "evidence",
+        "action_or_return"
+      ],
       "serif_active": false
+    },
+    "crown": {
+      "primary_study": "VC03-CROWN-D04 — Compact Semantic Stack",
+      "required_transformation": "VC03-CROWN-D06 — Adaptive Semantic Passage",
+      "root_anatomy": [
+        "root_identity",
+        "at_most_one_material_context_line",
+        "native_trailing_contextual_actions"
+      ],
+      "search_and_capture_present": false
     }
   },
   "architecture_sensitive_requirements": [
@@ -160,6 +270,40 @@
     "SUPERSEDED"
   ],
   "contract_id": "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
+  "closure_packages": {
+    "package_statuses": {
+      "VC-01": "CLOSED",
+      "VC-02": "CLOSED",
+      "VC-03": "CLOSED",
+      "VC-04": "CLOSED",
+      "VC-05": "CLOSED",
+      "VC-06": "CLOSED",
+      "VC-07": "OPEN",
+      "VC-08": "OPEN",
+      "VC-09": "OPEN",
+      "VC-10": "OPEN",
+      "VC-11": "OPEN",
+      "VC-12": "OPEN",
+      "VC-13": "OPEN",
+      "VC-14": "NOT_STARTED"
+    },
+    "wave_1": {
+      "human_record": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-wave-1-foundation-closure.json",
+      "package_id": "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+      "selected_records": {
+        "VC-01": "VC01-TYPE-STUDY-D — Semantic Cadence",
+        "VC-02": "Mineral Relief Continuum",
+        "VC-03": "VC03-CROWN-D04 — Compact Semantic Stack / VC03-CROWN-D06 — Adaptive Semantic Passage",
+        "VC-04": "VC04-DOCK-D04 — Articulated Edge Tray / VC04-DOCK-D06 — Adaptive Navigation Passage",
+        "VC-05": "VC05-STATE-D04 — Semantic State Covenant / VC05-STATE-D06 — Explicit Stress Scaffold",
+        "VC-06": "VC06-GRAMMAR-D04 — Articulated Native Grammar / VC06-GRAMMAR-D01 — Native Minimal Substrate / VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+      },
+      "status": "CLOSED"
+    },
+    "wave_2_surfaces_and_journeys": "OPEN",
+    "wave_3_stress_and_matched_baseline": "OPEN"
+  },
   "historical_figma_references": [
     {
       "reference_id": "FIGMA-CANDIDATE:Oik7612LSTUHWsNRFoTlTJ:37:438",
@@ -295,7 +439,7 @@
     "unsupported_time_scale_as_current",
     "unsupported_permission_or_platform"
   ],
-  "version": 1,
+  "version": 2,
   "visual_requirement_mappings": [
     {
       "direction_id": "AVF-DNA-S07-R00",
@@ -385,7 +529,7 @@
     }
   ],
   "visual_validation_decisions": [
-    "sf_pro_role_hierarchy_and_metrics",
+    "sf_pro_exact_metrics_named_styles_and_dynamic_type_mappings_within_closed_roles",
     "light_dark_canvas_and_surface_relationships",
     "violet_indigo_exact_values_and_existing_accent_candidate_disposition",
     "functional_material_opacity_blur_candidate_and_opaque_substitution",
