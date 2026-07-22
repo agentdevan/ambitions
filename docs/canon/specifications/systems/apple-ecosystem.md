@@ -25,7 +25,13 @@ This target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Share, Spot
 - **Verification:** `AUDIT-SYSTEM-APPLE-PLATFORM-BASELINE-001`
 - **Supersedes:** none
 
-Ambitions MUST target iOS 26 as its native platform baseline. Every selected Apple API MUST be valid for that deployment target; a newer API requires an availability-gated fallback that preserves the owning product, privacy, accessibility, and failure contract.
+Ambitions MUST target iOS 26 or the repository-approved successor floor. The
+current flagship implementation scope is iPhone, portrait, and single scene.
+Landscape, iPad, Mac/Catalyst, visionOS, multiple windows, and external display
+are outside current flagship scope and require a new product/platform decision.
+Every selected Apple API MUST be valid for the approved floor; a newer API
+requires an availability-gated fallback that preserves the owning product,
+privacy, accessibility, and failure contract.
 
 ## SYSTEM-APPLE-PROJECTION-001 — Ecosystem surfaces use minimized disposable projections
 
@@ -53,7 +59,12 @@ Extensions MUST NOT open unrestricted canonical stores or become independent mut
 - **Verification:** `SCENARIO-SYSTEM-APPLE-HANDOFF-001`
 - **Supersedes:** none
 
-A mutating handoff MUST preserve minimum payload, source, stable command/idempotency identity, privacy and confirmation requirements, timeout/cancellation behavior, and safe open-app fallback. Share intake durably preserves original input before classification; deep links and Spotlight resolve identifiers and permitted actions separately; external callbacks never mutate canonical state directly.
+A mutating handoff MUST preserve minimum payload, source, stable command/
+idempotency identity, privacy and confirmation requirements, timeout/
+cancellation behavior, and safe open-app fallback. Widget, Live Activity,
+Notification, App Intent, Siri/Shortcuts, and Share extension are separate
+source-backed surfaces and require direct target/device proof. Spotlight is
+planned only. External callbacks never mutate canonical state directly.
 
 Supported categories SHOULD include Capture, Start, Complete, Add Proof, Show Today, Show next Event, schedule/reschedule with confirmation, and review pending external diffs.
 
@@ -119,7 +130,11 @@ App Intents MUST use canonical objects and validated runtime commands for Captur
 - **Verification:** `REVIEW-SYSTEM-APPLE-SHARE-HANDOFF-001`
 - **Supersedes:** none
 
-Share intake MUST create a durable offline Capture draft with source reference and attachments before classification, then continue through the in-app proposal flow; it MUST NOT become an alternate private-graph store.
+Share intake remains separately capability-gated. When enabled, it MUST preserve
+a bounded source reference and supported attachment before classification,
+continue through the in-app Capture/owner proposal flow, and MUST NOT become an
+alternate private-graph store. Durable draft and attachment claims require
+direct extension, interruption, privacy, and device proof.
 
 ## SYSTEM-APPLE-WIDGET-ACTION-001 — Widget action boundary
 
@@ -130,7 +145,10 @@ Share intake MUST create a durable offline Capture draft with source reference a
 - **Verification:** `REVIEW-SYSTEM-APPLE-WIDGET-ACTION-001`
 - **Supersedes:** none
 
-Every interactive widget action MUST validate and mutate the canonical local object through the runtime command sequence, preserve idempotency, and create a Receipt.
+Every interactive widget action MUST validate through the canonical owner and
+runtime sequence, preserve idempotency, and create a Receipt only when the
+operation’s registry row requires one. Widget source presence alone does not
+establish action, privacy, accessibility, device, or release proof.
 
 ## SYSTEM-APPLE-WIDGET-PROJECTION-001 — Widget projection boundary
 

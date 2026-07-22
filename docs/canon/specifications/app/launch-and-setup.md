@@ -1331,7 +1331,7 @@ gate_requirement_ids = []
 
 
 
-## APP-ACCOUNT-LAUNCH-001 — Optional account support ships at launch
+## APP-ACCOUNT-LAUNCH-001 — Account support is outside the current flagship
 
 - **Concept:** `account.launch-commitment`
 - **Modality:** `MUST`
@@ -1340,19 +1340,13 @@ gate_requirement_ids = []
 - **Verification:** `SCENARIO-APP-ACCOUNT-OPTIONAL-001`
 - **Supersedes:** none
 
-Ambitions Account support MUST be available at launch while remaining optional. The user MUST be able to enter and use the complete local core without creating or signing into an account; account availability does not weaken the local-authority, private-data, or network boundaries.
-
-Ambitions Account MAY support Sign in with Apple, Google Sign-In, identity, entitlement, approved recovery/support, and future approved services.
-
-Ambitions Account MAY support continuity, sync, and account-backed capabilities but MUST NOT gate the local core.
-
-Ambitions Account MUST NOT gate Today, Goals, Time, Capture, Search, or local data.
-
-Ambitions Account MUST NOT gate the local core or become the private-graph backend.
-
-Ambitions Account MAY support identity, entitlements, approved recovery or support, and non-sensitive service state.
-
-Account status and sign-out consequences MUST be explicit.
+The current flagship MUST remain local/no-account. Sign-in, account recovery,
+devices, subscriptions/entitlements, sign-out, account deletion, connected
+cloud continuity, and cross-device account controls MUST NOT appear at launch or
+in You, including as disabled rows. Account support may return only after a
+separate product and architecture decision; this historical requirement ID does
+not authorize it. Today, Goals, Time, Capture, Search, and local data remain
+usable without an account or network.
 
 ## APP-SETUP-PROGRESSIVE-FIRST-USE-001 — Local core precedes optional setup
 
@@ -1363,7 +1357,13 @@ Account status and sign-out consequences MUST be explicit.
 - **Verification:** `SCENARIO-APP-FIRST-USE-001`, `SCENARIO-APP-SETUP-SKIP-001`
 - **Supersedes:** none
 
-First use MUST open a useful local core before account sign-in or optional network access. Setup asks only for context that improves the next useful action, saves each accepted answer durably, permits every nonessential question to be skipped, and keeps skipped work reachable later through the owning You setup surface. Account, notification, calendar, reminders, speech, health, and other optional integrations are requested only when their value is contextual and their denied fallback is already defined.
+First use MUST open a useful local core without account sign-in or network
+access. Setup asks only for context that improves the next useful action, saves
+each accepted answer durably, permits every nonessential question to be skipped,
+and keeps skipped work reachable later through the owning You surface. Calendar,
+Reminders, Notifications, and local authentication where used are requested only
+when their value is contextual and their denied fallback is already defined.
+Other permissions remain absent until a shipping feature owns them.
 
 Setup may encourage a first Goal and may preview a first Path when enough information exists; it cannot require either before the local app becomes usable. It must not present a long mandatory permission wall, chatbot center, or static completion checklist as the product.
 
@@ -1443,14 +1443,17 @@ Setup MUST disclose bounded progress for work that is not immediate, remain resu
 - **Verification:** `SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-Account and Sync MUST expose explicit Local Only, provider choice, provider-in-progress, cancelled, failed, signed-in, and signed-out behavior. The only launch providers are `Sign in with Apple` and `Sign in with Google`. Opening provider UI, `Cancel`, `Try Again`, `Continue Without an Account`, and `Done` are non-canonical navigation or provider effects.
+This structured account command inventory is future-only and inactive. The
+current flagship exposes no Account and Sync route, provider choice, sign-in,
+sign-out, recovery, entitlement, device, or account deletion command.
 
 Successful sign-in MAY commit only account identity, protected provider/session material, entitlement/service association, and an account-action Receipt. It MUST NOT upload, attach, migrate, inspect, or grant the account authority over the private graph.
 
 `Sign Out` MUST invalidate local account credentials and pause account-only services while retaining all local Goals, Captures, Time, settings, Proof, History, and Receipts. It MUST NOT delete local data or continuity data. Deletion requires a separately routed destructive command.
 
 
-`You → Account & Sync → Account`; provider authentication uses a native sheet. Entry focuses provider choice or current account status. Success focuses signed-in status; failure focuses the failed provider and `Try Again`; cancellation returns focus to that provider; sign-out focuses signed-out/local-only status.
+Any future account reintroduction requires a new product/architecture decision,
+updated privacy/egress and focus contracts, and direct implementation proof.
 
 
 Provider cancellation or failure makes no local product-state change. Offline use remains Local Only; provider controls are unavailable with a plain reason and core use continues. Provider egress is restricted to identity/authentication fields.

@@ -258,7 +258,7 @@
     }
   ],
   "authority_state": "active",
-  "canon_content_sha": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
+  "canon_content_sha": "24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994",
   "canon_revision": 2,
   "compiler_version": "0.2.0",
   "schema_version": 1,

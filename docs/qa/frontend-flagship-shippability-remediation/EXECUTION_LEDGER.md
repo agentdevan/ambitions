@@ -1,6 +1,13 @@
 # Ambitions Frontend Flagship Shippability Remediation Execution Ledger
 
-Status: Active execution ledger
+Status: Historical execution evidence; active sequencing superseded 2026-07-22
+
+> Current sequencing authority is
+> `RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md`. The packet history and proof
+> below remain implementation evidence, but its P0 queue does not authorize
+> work and must not override the RP-01–RP-08 owner reconciliation, accepted
+> architecture ADRs, or current canon. Figma authorization, SwiftUI approval,
+> and implementation authorization remain false.
 Installed: 2026-07-07
 Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
@@ -208,9 +215,10 @@ Surface maturity acceptance:
 - Scheduled owner review is not required during automated packet work, but owner real-device review may override simulator-Yellow, Ready For Review, or self-scored packet status at any time.
 - Codex must self-score and run repair cycles until the packet meets the contract or a hard stop rule applies.
 
-## 4. Active Owner-Rejection P0 Queue
+## 4. Historical Owner-Rejection P0 Queue — Superseded
 
-This is the active implementation queue after owner real-device rejection.
+This was the active implementation queue after owner real-device rejection. It
+is now historical and does not authorize implementation.
 
 The historical pre-rebaseline packet queue below is frozen. Do not resume old Packet 4.2 until the P0 owner-rejection sequence is complete or the owner explicitly re-authorizes a narrower sequence.
 

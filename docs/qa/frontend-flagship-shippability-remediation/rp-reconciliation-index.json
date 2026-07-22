@@ -1,0 +1,223 @@
+{
+  "architecture_records": [
+    "docs/adr/ADR-2026-07-22-canonical-identity-ownership-projection.md",
+    "docs/adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md",
+    "docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md",
+    "docs/adr/ADR-2026-07-22-truth-mutation-and-global-authority.md"
+  ],
+  "audit_baseline": "29872755f705f6bd8e276aeac86dcf376ac5f0d8",
+  "audit_package": "docs/audits/rp-01-08-evidence-audit",
+  "authority_state": {
+    "figma_authorization": false,
+    "implementation_authorization": false,
+    "owner_decisions_reopened": false,
+    "planning_authorization": true,
+    "swiftui_approval": false
+  },
+  "current_platform_scope": {
+    "device_family": "iPhone",
+    "orientation": "portrait",
+    "scene_model": "single_scene"
+  },
+  "directions": {
+    "foundations": [
+      "AVF-A11Y-S07-R00",
+      "AVF-COHERENCE-S07-R00",
+      "AVF-DNA-S07-R00"
+    ],
+    "structural_branches": [
+      "AVF-GOALS-S08-R00",
+      "AVF-TODAY-S10-R00"
+    ],
+    "targeted_revisions": [
+      "AVF-CAPTURE-S07-R01",
+      "AVF-RECOVERY-S07-R01",
+      "AVF-SEARCH-D07-R01",
+      "AVF-SHELL-S07-R01",
+      "AVF-TIME-S07-R01",
+      "AVF-YOU-D07-R02"
+    ]
+  },
+  "owner_decisions": [
+    {
+      "decision_id": "D-DEV-01",
+      "outcome": "Crowned Edge Dock remains the target shell with native-compatible semantics and one shell owner.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-02",
+      "outcome": "Goals is Life-Area-led and preserves Goal-owned Linked Goal Lens depth.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-03",
+      "outcome": "Today has one Start Here projection and at most one earned Also Fits Now projection.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-04",
+      "outcome": "Today priority is a typed admission/projection relation, never a duplicate canonical object.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-05",
+      "outcome": "Week is the first-use Time default and the last-used supported scale is restored later.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-06",
+      "outcome": "Search Act prepares and transfers to the canonical owner for revalidation, confirmation, commit, and settlement.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-07",
+      "outcome": "Partial settlement requires typed independent scopes; Receipts and Undo are capability-gated.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-08",
+      "outcome": "Restrained violet-indigo is the default action accent with deterministic migration.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-09",
+      "outcome": "The current flagship You baseline is local/no-account.",
+      "status": "RESOLVED_BY_OWNER"
+    },
+    {
+      "decision_id": "D-DEV-10",
+      "outcome": "Current flagship scope is iPhone, portrait, and single scene; external surfaces require separate proof.",
+      "status": "RESOLVED_BY_OWNER"
+    }
+  ],
+  "planning_records": [
+    "docs/qa/accessibility/RP_RECONCILIATION_ACCESSIBILITY_PLATFORM_PLAN.md",
+    "docs/qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md",
+    "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_SUPERSESSION_REGISTER.md",
+    "docs/qa/frontend-flagship-shippability-remediation/RP_RECONCILIATION_TRACEABILITY.md"
+  ],
+  "reconciliation_baseline": "0e894407a38759f69d2a3e48111bae67720794b0",
+  "schema_version": 1,
+  "status": "current_planning_authority",
+  "traceability": [
+    {
+      "architecture_record": "docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md",
+      "direction_ids": [
+        "AVF-SHELL-S07-R01",
+        "AVF-CAPTURE-S07-R01",
+        "AVF-SEARCH-D07-R01"
+      ],
+      "owner_decision_ids": [
+        "D-DEV-01"
+      ],
+      "proof_gate": "shell_restoration_and_physical_gesture_proof",
+      "reconstruction_milestone": "R3",
+      "rp_ids": [
+        "RP-01",
+        "RP-08"
+      ],
+      "runtime_contract": "versioned_shell_state_and_restoration"
+    },
+    {
+      "architecture_record": "docs/adr/ADR-2026-07-22-canonical-identity-ownership-projection.md",
+      "direction_ids": [
+        "AVF-GOALS-S08-R00",
+        "AVF-TODAY-S10-R00",
+        "AVF-TIME-S07-R01",
+        "AVF-SEARCH-D07-R01"
+      ],
+      "owner_decision_ids": [
+        "D-DEV-02",
+        "D-DEV-03",
+        "D-DEV-04",
+        "D-DEV-05"
+      ],
+      "proof_gate": "identity_migration_and_projection_lineage",
+      "reconstruction_milestone": "R2_R5",
+      "rp_ids": [
+        "RP-02",
+        "RP-04"
+      ],
+      "runtime_contract": "one_identity_one_owner_typed_projection"
+    },
+    {
+      "architecture_record": "docs/adr/ADR-2026-07-22-truth-mutation-and-global-authority.md",
+      "direction_ids": [
+        "AVF-CAPTURE-S07-R01",
+        "AVF-SEARCH-D07-R01",
+        "AVF-RECOVERY-S07-R01"
+      ],
+      "owner_decision_ids": [
+        "D-DEV-06",
+        "D-DEV-07"
+      ],
+      "proof_gate": "mutation_registry_receipt_undo_and_owner_transfer",
+      "reconstruction_milestone": "R4_R6",
+      "rp_ids": [
+        "RP-03",
+        "RP-05",
+        "RP-07"
+      ],
+      "runtime_contract": "shared_truth_algebra_and_owner_commit"
+    },
+    {
+      "architecture_record": "docs/adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md",
+      "direction_ids": [
+        "AVF-YOU-D07-R02",
+        "AVF-RECOVERY-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "owner_decision_ids": [
+        "D-DEV-08",
+        "D-DEV-09",
+        "D-DEV-10"
+      ],
+      "proof_gate": "you_capability_absence_recovery_accessibility_and_device_matrix",
+      "reconstruction_milestone": "R7_R9",
+      "rp_ids": [
+        "RP-06",
+        "RP-07",
+        "RP-08"
+      ],
+      "runtime_contract": "local_no_account_capability_negotiation"
+    }
+  ],
+  "unresolved_decisions": [
+    {
+      "authority": "Architecture",
+      "decision_id": "R-ARCH-01",
+      "question": "Which concrete native root-selection container passes the accepted shell boundary prototype?"
+    },
+    {
+      "authority": "Architecture",
+      "decision_id": "R-ARCH-02",
+      "question": "Which concrete schema encodings implement the accepted canonical identity model?"
+    },
+    {
+      "authority": "Runtime",
+      "decision_id": "R-RUNTIME-01",
+      "question": "Which individual domains, if any, justify a bounded durable outbox?"
+    },
+    {
+      "authority": "Runtime/privacy",
+      "decision_id": "R-RUNTIME-02",
+      "question": "What operation-specific Receipt retention and Undo expiry policies apply?"
+    },
+    {
+      "authority": "UX Blueprint",
+      "decision_id": "R-UX-01",
+      "question": "What exact localized copy and state layouts implement the locked hierarchy?"
+    },
+    {
+      "authority": "Reconstruction planning",
+      "decision_id": "R-RECON-01",
+      "question": "What bounded cutover slices are safe after schema and proof prerequisites exist?"
+    },
+    {
+      "authority": "Accessibility/platform",
+      "decision_id": "R-A11Y-01",
+      "question": "Which keyboard shortcuts pass platform and localization collision testing?"
+    }
+  ]
+}

@@ -1234,7 +1234,12 @@ Search uses `surface-v1` because it presents one full-screen Find, Ask, Act, and
 - **Verification:** `SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001`
 - **Supersedes:** `CLAIM-LFT-0163`, `CLAIM-LFT-0182`, `CLAIM-STB-0306`, `SPEC-GLOBAL-SEARCH-IDENTITY-001`
 
-Search MUST be one unified, local-first Find / Ask / Act / Inspect surface. Search offline degradation MUST return gracefully to deterministic Find / Act / Inspect behavior, and Search MUST remain fully useful without conversational intelligence. Search MUST NOT use hosted AI, MUST NOT perform cloud profiling, and MUST NOT transfer the private life graph. It is not command-line theater, a shallow utility sheet, a root, an alternate canonical store, or a generic AI destination.
+Search MUST be one unified, local-first Find / grounded Understand /
+owner-routed Act / Inspect surface. The current baseline is Find, Open, Inspect,
+and bounded object-backed current/history labels. Understand and Act appear only
+to the depth proven by their capability contracts. Search MUST NOT use hosted
+AI, perform cloud profiling, transfer the private life graph, become a root or
+alternate canonical store, or present command-line/chatbot theater.
 
 ## SPEC-GLOBAL-SEARCH-FIND-001 — Immediate deterministic local retrieval
 
@@ -1245,7 +1250,12 @@ Search MUST be one unified, local-first Find / Ask / Act / Inspect surface. Sear
 - **Verification:** `SCENARIO-SEARCH-FIND-001`, `TEST-SEARCH-RANKING-001`
 - **Supersedes:** none
 
-Find MUST provide immediate, deterministic, offline retrieval across privacy-authorized local objects and projections while the user types. Exact, prefix, typo-tolerant, date, status, context, and approved semantic matches remain projection-fed, measurable, privacy-filtered, and useful without Ask, an account, a network, or a model.
+Find MUST provide immediate deterministic local retrieval across explicitly
+indexed, privacy-authorized canonical identities and projections. Every result
+retains canonical ID, owner, index revision, provenance, and freshness. Exact,
+prefix, typo-tolerant, date, status, context, and approved semantic matching is
+enabled only where implemented and measured; cross-root consolidation applies
+only to canonical identities with a proven bridge.
 
 ## SPEC-GLOBAL-SEARCH-ASK-001 — Optional grounded on-device synthesis
 
@@ -1278,7 +1288,14 @@ Ask state controls MUST remain local, session-bound, non-mutating, and subordina
 - **Verification:** `TEST-SEARCH-ASK-ACTIVATION-001`, `TEST-SEARCH-NO-EGRESS-001`, `TEST-SEARCH-DETERMINISTIC-FALLBACK-001`
 - **Supersedes:** none
 
-Ask and Search-to-Capture handoff states and commands MUST remain disabled until the implementation passes current source/runtime, local-only no-egress, privacy, grounding, deterministic-fallback, cancellation, accessibility, visual-state, and performance tests. Canon text, command metadata, generated indexes, or a Figma frame alone cannot enable the feature. Until every applicable executable safeguard passes, deterministic Find, Act, and Inspect remain the only active Search command contract.
+Ask and Search-to-Capture handoff states and commands MUST remain disabled until
+the implementation passes current source/runtime, local-only no-egress,
+privacy, grounding, deterministic-fallback, cancellation, accessibility,
+visual-state, and performance tests. Canon text, command metadata, generated
+indexes, or a Figma frame alone cannot enable the feature. Until every
+applicable executable safeguard passes, deterministic Find, Open, Inspect, and
+bounded object-backed Understand are the only active Search command contract;
+Act is owner-routed and not activated by this requirement.
 
 ## SPEC-GLOBAL-SEARCH-INPUT-001 — One input, immediate results, progressive enhancement
 
@@ -1333,7 +1350,11 @@ Inspect MUST allow the user to examine Source, Privacy, History, Proof, and Rece
 - **Verification:** `SCENARIO-SEARCH-CAPTURE-HANDOFF-001`
 - **Supersedes:** none
 
-Creation intent MUST hand off seamlessly to Capture with the accepted source context and user-entered intent preserved. Search MUST NOT duplicate Capture's creation policy and MUST NOT become a parallel composer; Capture remains responsible for type, draft durability, consequences, confirmation, canonical-owner routing, Receipt, and Undo.
+Creation intent MUST hand off to Capture with accepted minimum source context
+and user-entered intent preserved. Search MUST NOT duplicate Capture policy or
+become a parallel composer. Capture prepares its bounded proposal; the
+destination owner remains responsible for validation, confirmation, commit,
+settlement, capability-gated Receipt, and capability-gated Undo.
 
 ## SPEC-GLOBAL-SEARCH-PRESENTATION-001 — Ambitions-native understanding, not generic AI theater
 
@@ -1381,7 +1402,11 @@ Search index and canonical actions MUST remain separate child contracts: SPEC-GL
 - **Verification:** `PROOF-SEARCH-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Selected VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only.
+Visual references MUST distinguish shell placement, owner-authorized
+provisional Search direction, historical provenance, and implementation proof.
+`AVF-SEARCH-D07-R01 — Owner-Routed Semantic Command Field` is the current
+provisional direction. Earlier VSP-01 references remain historical placement
+provenance and grant no Figma, SwiftUI, runtime, or implementation approval.
 
 ## SPEC-GLOBAL-SEARCH-INDEX-001 — Search index and ranking
 
@@ -1403,9 +1428,12 @@ Search MUST index approved local object identity, state, synonyms, and privacy-s
 - **Verification:** `SCENARIO-SEARCH-ACTION-001`
 - **Supersedes:** none
 
-Search MUST only propose actions. Search MUST NOT silently mutate canonical state and MUST NOT own a generic mutation path. Every material action MUST route through the relevant canonical owner with current-state validation, a visible consequence preview, explicit confirmation, and applicable History, Receipt, and Undo behavior; accepted commands preserve return context and refresh the same stable result identity.
-
-Search actions MUST resolve the current canonical object, validate through its owner, preview material consequences, commit through canonical commands, and preserve Receipt, undo, and return context.
+Search MUST only prepare material actions. It resolves the canonical object,
+shows supported current truth, prepares the requested operation and consequence,
+then transfers a typed envelope to the owner. The owner re-resolves identity and
+revision, revalidates, confirms where required, commits, settles, and returns.
+Search may settle only non-mutating Open, Inspect, Compare, or Navigate.
+Receipt and Undo appear only when the owner result proves them.
 
 ## SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001 — Search commands preserve owner authority and derived-index safety
 
@@ -1416,11 +1444,24 @@ Search actions MUST resolve the current canonical object, validate through its o
 - **Verification:** `SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-Search MUST remain a local full-screen Find, Act, and Inspect overlay. It exposes query editing, `Clear Search`, `Filters`, `Apply Filters`, `Clear Filters`, result selection, owner-provided safe actions, `Inspect Source`, `Inspect Privacy`, `Inspect History`, `Inspect Receipt`, `Rebuild Search`, `Cancel Rebuild`, and owner-provided `Undo`.
+Search MUST remain a local full-screen non-root Find, bounded Understand,
+owner-routed Act, and Inspect presentation. Active controls are limited by the
+capability registry; an owner-provided Undo control appears only for an
+executable inverse command returned by that owner.
 
-Querying, filtering, selection, and action preview are non-mutating. Selecting a result routes to its canonical owner. A material action routes to an owner-owned preview, re-resolves current object revision, then commits only through that owner’s typed command. Search MUST NOT own a generic mutation path.
+Querying, filtering, selection, understanding, and action preparation are
+non-mutating. Selecting a result routes to its canonical owner. A material
+action transfers object identity, owner, source revision, origin, requested
+action, preview, consequence, uncertainty, confirmation requirement, and return
+target; commit/result/Receipt/Undo fields are populated only by the owner.
+Search MUST NOT own a generic mutation path.
 
 `Rebuild Search` may rebuild only the derived local index from canonical projections. It MUST NOT repair or mutate canonical objects. The prior valid index remains available until replacement validation succeeds; corrupt output is quarantined. Cancel retains the prior valid index.
+
+No result, read failure, index unavailable, index stale, permission limitation,
+unsupported query, ambiguous object, conflict, and partial coverage are distinct
+states. Repository or index failure MUST NOT collapse to no result. Search query
+persistence across relaunch is not promised.
 
 ## Completeness contract
 

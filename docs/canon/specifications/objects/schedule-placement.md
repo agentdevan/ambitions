@@ -27,13 +27,20 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 - **Verification:** `SCENARIO-SCHEDULE-PLACEMENT-ORTHOGONAL-001`
 - **Supersedes:** none
 
-A Schedule Placement is one identified relationship between a canonical capacity-bearing object and Time, containing range/window, fixed/flexible/protected state, fit assumptions, and reflow rule. It MUST NOT duplicate the Step or Event or acquire its lifecycle/execution identity.
+A Schedule Placement is one stable identified relationship between a canonical
+capacity-bearing object and Time, containing temporal range/window and zone,
+authority state, source, fixed/flexible/protected state, fit assumptions,
+expected revisions, conflicts, history, and reflow rule. Authority distinguishes
+at least proposed, accepted, external, and stale. It MUST NOT duplicate the Step
+or Event or acquire its lifecycle/execution identity.
 
 Goals MAY have target dates or windows, while Steps, Reminders, and Events MUST carry exact scheduling when scheduled.
 
 A Schedule Placement MUST relate one object to Time.
 
 A Placement MUST be the relationship between an object and time reality.
+Computed Goal timing remains proposed and MUST NOT appear as accepted placement
+until the Time owner commits the relation.
 
 Ambitions MUST NOT create vague someday goals.
 

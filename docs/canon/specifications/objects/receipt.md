@@ -23,9 +23,17 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 - **Verification:** `SCENARIO-RUNTIME-MUTATION-001`
 - **Supersedes:** none
 
-A Receipt MUST be one durable, searchable, user-readable automatic record of a meaningful mutation, linked to command, accepted/rejected result, affected objects, History Events, source/actor, consequence, external-effect status, replay, and rollback. It attests to system behavior and remains separate from user Proof.
+A Receipt MUST be one durable, searchable, user-readable automatic record for a
+mutation-registry-covered meaningful result, linked to command, owning domain,
+accepted/rejected result, affected objects and revisions, History Events,
+source/actor, consequence, external-effect status, replay, retention/privacy
+class, and reversibility metadata. It attests to system behavior and remains
+separate from user Proof. Navigation, selection, query, preview, refresh, and
+cancellation do not create Receipts.
 
-A Receipt MUST expose Undo when the owning mutation is reversible.
+A Receipt MUST expose Undo only while an implemented typed inverse or
+compensating command is eligible. A rollback ID, snapshot, or prior value is not
+proof of Undo.
 
 A Schedule Change Set MUST be a proposed or accepted group of placement changes with rationale, affected objects, confirmation state, receipt, and rollback context.
 
@@ -50,7 +58,12 @@ Valid transitions append external-effect/reconciliation/correction facts to the 
 Invalid transitions include editing accepted facts in place, issuing success before durable local commit, deleting failure/rejection history to appear successful, using Receipt as Proof, or external success rewriting local acceptance time. Validators preserve truthful lineage.
 
 <!-- canon-section: commands -->
-Receipts are emitted automatically by every meaningful `Command → Event → Projection → Receipt → Replay` result; user actions may inspect, search, export, invoke linked Undo/rollback, or request governed deletion/redaction through new commands. Receipt issuance cannot be bypassed.
+Receipts are emitted automatically only for operations whose mutation-registry
+row requires them. User actions may inspect, search where approved, invoke a
+proven linked Undo, or request governed deletion/redaction through supported
+commands. Unsupported export or rollback controls remain absent. A Receipt
+cannot synthesize partial settlement; independently settling scope results must
+exist first.
 
 <!-- canon-section: recurrence-scheduling -->
 Receipts do not recur or consume capacity. A recurrence/placement mutation Receipt records series/occurrence scope and affected placement identifiers; it never becomes a schedule item.

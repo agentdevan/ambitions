@@ -1,33 +1,58 @@
 # Ambitions Visual System Revision 1
 
-Status: `ACTIVE_DESIGN_DIRECTION / REFERENCE_FRAMES_EVOLVING`
+Status: `PROVISIONAL_VISUAL_EXPLORATION / FIGMA_NOT_AUTHORIZED`
 
-Date: 2026-07-15
+Date: 2026-07-22
 
 Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de`;
-- canon source SHA: `e5d08c2d538277fc2ae7c6fd9fa09595f6e72973`;
+- canon content SHA: `24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994`;
+- canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `a11cdc896c7e1f55b8f84e986e1d6d5db1158daba1fa02b45041624c5eda611e`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `86e914ebe89b3eb28fcf5f06c67d1b388050b888b95dac04010fbc3d8ddb2173`;
+- UX blueprint Markdown SHA-256: `f4463d2c772e1dbbbc604178f7524eeb48e3d5c9aa6ff5b7082124508a8ab3ec`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `c3b103948719645e574e33527aae402db6f079129cbf3a50a22aaafd3e100564`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `fb1e9e590db58e1de7c7de1995862b781b61bb52d4a065e41a2e4e6a1b242a55`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `8e37965e38cde71a274e9225d04c9976b28b6b24b33bcd19b244bd9e4df30db8`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `a60bed058a216b18a9b7fd885bbf8fe1ae91af37909cdac8eb63b61933e4a67c`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `cc45b2b6937d50c26fe841ce2d02ee476a95313b0609b7678afbf8c956242a49`;
 
-This document is the active design direction for Ambitions. It defines visual
+This document is the provisional design direction for Ambitions. It defines visual
 language, component semantics, cross-surface composition, appearance behavior,
 motion, and accessibility intent. The linked Figma frames and repository images
-are design references, not merge approvals. Live implementation still has to
+are historical design references, not current selection or merge approvals. Live implementation still has to
 compile and satisfy the applicable behavioral, accessibility, privacy,
 performance, and rendered-UI checks.
 
-## 1. Selected direction
+## 1. Reconciled provisional direction
+
+The controlling owner record is
+`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`.
+It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
+`AVF-A11Y-S07-R00`; authorizes provisional structural branches
+`AVF-GOALS-S08-R00` and `AVF-TODAY-S10-R00`; and authorizes targeted revisions
+`AVF-SHELL-S07-R01`, `AVF-CAPTURE-S07-R01`, `AVF-TIME-S07-R01`,
+`AVF-SEARCH-D07-R01`, `AVF-YOU-D07-R02`, and `AVF-RECOVERY-S07-R01`. No
+additional direction ID is created by this document.
+
+The Crowned Edge Dock remains the target shell. Goals is Life-Area-led with
+Goal-owned Linked Goal Lens depth. Today has one dominant Start Here projection
+and at most one earned Also Fits Now projection. Week is the first-use Time
+default and later restores the last-used supported scale. Search Act transfers
+to the canonical owner. Partial settlement requires typed per-scope outcomes;
+Receipts and Undo are capability-gated. Restrained violet-indigo is the default
+action accent. You is local/no-account. Current platform scope is iPhone,
+portrait, and single scene.
+
+Figma authorization is false. SwiftUI approval is false. Implementation
+authorization is false. Historical Figma references and VAD contracts below are
+provenance and feasibility inputs; they do not override the reconciled
+directions or activate an unsupported capability.
+
+### Historical Revision 1 synthesis
 
 The owner rejected all three earlier workshop directions as final visual authority and later reviewed three additional Today treatments. The owner liked all three later treatments but did not love any one of them. The owner then approved the following synthesis:
 
@@ -39,8 +64,9 @@ The owner rejected all three earlier workshop directions as final visual authori
 - Provide a robust Appearance Studio with governed accents and authored atmospheres.
 - Support photo-derived atmospheres processed locally; do not place literal user photographs behind operational content.
 
-This synthesis is the selected design direction. Individual reference frames
-may continue to evolve without changing the system principles below.
+This synthesis remains historical input where it does not conflict with the
+reconciled directions. Individual reference frames cannot change owner choices,
+current capability, or authorization state.
 
 ## 2. Design objective
 

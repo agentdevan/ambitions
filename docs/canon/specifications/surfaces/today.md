@@ -919,7 +919,13 @@ Time order MUST remain the temporal rail’s legibility law.
 - **Verification:** `TEST-TODAY-ELIGIBILITY-001`, `TEST-TODAY-NO-BACKLOG-001`
 - **Supersedes:** none
 
-Today MUST project only execution-relevant scheduled Steps, Reminders, Events, all-day or due items, recovery-eligible flexible work, and at most one earned fit suggestion. It MUST exclude broad backlog, unscheduled Goal inventory, Saved for Later inventory, and unreviewed external candidates.
+Today MUST project only execution-relevant scheduled Steps, Reminders, Events,
+all-day or due items, recovery-eligible flexible work, and at most one earned
+`Also Fits Now` projection. Membership is a typed day admission relation that
+retains canonical source ID, owner, why-now reason, current-day consequence,
+local permitted action, owner route, derivation revision, and expiry. It is not
+a copied Today object. Today MUST exclude broad backlog, unscheduled Goal
+inventory, Saved for Later inventory, and unreviewed external candidates.
 
 Today MUST contain only execution-relevant objects, not broad backlog or project inventory.
 
@@ -934,11 +940,18 @@ Today MUST NOT show broad backlog, unscheduled goal inventory, future project li
 - **Verification:** `AUDIT-TODAY-ROUTES-001`
 - **Supersedes:** none
 
-Today owns its root Reality Window, Start here object presentation, supporting temporal rail, compact closure/recovery affordances, and Today-specific empty or degraded states. Object detail, complex rescheduling, recurrence, multi-item adjustment, and long-range editing hand off to their canonical object, Time, Motion, or Trust owners; they do not become duplicate Today stores or routes.
+Today owns its root Reality Window, one `Start Here` admission, at most one
+earned `Also Fits Now` admission, supporting timeline, compact execution and
+recovery affordances, and Today-specific quiet or degraded states. Object
+editing, complex scheduling, recurrence, multi-item adjustment, and long-range
+editing hand off to Goals, Time, or another canonical owner; Trust owns
+inspection. They do not become duplicate Today stores or routes.
 
 Each Today row MUST have an explicit primary action.
 
-Today MUST use a compact reschedule sheet offering later today, tomorrow, pick time, flexible or Fixed state, and a suggested slot for low-risk single-object changes.
+Today may invoke only narrow typed local actions that the source owner exposes.
+Complex scheduling transfers to Time, full Goal editing transfers to Goals, and
+Capture remains shell-owned.
 
 ## SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001 — Start here dominates
 
@@ -949,9 +962,17 @@ Today MUST use a compact reschedule sheet offering later today, tomorrow, pick t
 - **Verification:** `PROOF-TODAY-FIRST-VIEWPORT-001`, `A11Y-TODAY-ORDER-001`
 - **Supersedes:** none
 
-When available, the first viewport MUST communicate Now, usable capacity, one dominant `Start here` Step or action, protected boundaries, the next fixed point, why the Step fits, and current closure, proof, or recovery state. `Start here` is a real best executable fit, not an enlarged task row. The semantic order presents context, Start here identity and reason, primary action, boundaries, next fixed point, then supporting rail.
+When available, the first viewport MUST communicate Now, usable capacity, one
+dominant `Start Here` canonical-object projection, protected boundaries, the
+next fixed point, why the object fits, and current closure, proof, or recovery
+state. `Start Here` is a real best executable fit, not an enlarged task row or
+Today-owned task. Zero or one `Also Fits Now` projection follows only when its
+eligibility and fit are grounded. The semantic order is crown/date, Start Here
+identity/reason/consequence/action, optional Also Fits Now, boundaries/next
+fixed point, then Today’s Timeline and See Full Day.
 
-Today MUST present one object-led current-reality viewport centered on `Start here`.
+Today MUST present one object-led current-reality viewport centered on
+`Start Here` and MUST NOT present three equal root priorities.
 
 Today’s first viewport MUST NOT show a broad backlog, motivational paragraph, score, or multiple suggestion cards.
 
@@ -968,9 +989,16 @@ Today SHOULD use one shared object-row system exposing time, object title, prima
 - **Verification:** `SCENARIO-TODAY-STATES-001`
 - **Supersedes:** none
 
-Today MUST distinguish loading, low-density, empty, populated, dense, stale external context, offline-healthy, permission denied, conflict, partial failure, recovery, destructive confirmation, and restored state. Empty space remains calm and may offer Capture, View Time, or Review Goals; it MUST NOT be filled with backlog or low-confidence suggestions.
+Today MUST distinguish loading, low-density, empty, populated, dense, stale
+external context, offline-healthy, permission denied, conflict, whole-result
+failure, recovery, destructive confirmation, and restored state. Empty space
+remains a quiet-day state and may offer Capture, View Time, or Review Goals; it
+MUST NOT be filled with backlog or low-confidence suggestions. Preview, saving,
+settlement, and owner-handoff states use the shared truth contract and preserve
+source identity. Partial settlement appears only for a typed independently
+settling scope model.
 
-## SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001 — Approved Today package, separate implementation proof
+## SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001 — Provisional Today branch, separate implementation proof
 
 - **Concept:** `surface.today.visual-authority`
 - **Modality:** `MUST`
@@ -979,7 +1007,12 @@ Today MUST distinguish loading, low-density, empty, populated, dense, stale exte
 - **Verification:** `PROOF-TODAY-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Selected VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target.
+Today visual review MUST distinguish owner-authorized provisional direction,
+historical provenance, implementation evidence, and future Figma authorization.
+`AVF-TODAY-S10-R00 — Start Here Contextual Command` is the current provisional
+structural branch. The earlier VSP-02 package and `AVF-TODAY-S09-R00` remain
+historical provenance. None demonstrates current SwiftUI, accessibility,
+device, runtime, Figma, or implementation approval.
 
 ## SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001 — Missed time preserves history and current status
 - **Concept:** `surface.today.missed-placement-continuity`

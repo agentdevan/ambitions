@@ -1,5 +1,5 @@
 {
-  "canon_digest": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
+  "canon_digest": "24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994",
   "canon_revision": 2,
   "documents": [
     {
@@ -383,7 +383,7 @@
           ],
           "source_path": "specifications/app/launch-and-setup.md",
           "supersedes": [],
-          "title": "Optional account support ships at launch",
+          "title": "Account support is outside the current flagship",
           "verification": [
             "SCENARIO-APP-ACCOUNT-OPTIONAL-001"
           ]
@@ -391,7 +391,7 @@
         {
           "concept": "app.setup.progressive-first-use",
           "id": "APP-SETUP-PROGRESSIVE-FIRST-USE-001",
-          "line": 1357,
+          "line": 1351,
           "modality": "MUST",
           "scope": "First launch and later setup continuation",
           "source_owners": [
@@ -543,7 +543,7 @@
         {
           "concept": "app.launch-setup.command-contract",
           "id": "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001",
-          "line": 1458,
+          "line": 1461,
           "modality": "MUST",
           "scope": "Launch readiness, progressive setup, checkpoint recovery, interruption, skip, resume, and offline entry",
           "source_owners": [
@@ -638,7 +638,7 @@
         {
           "concept": "app.navigation.root-interaction",
           "id": "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001",
-          "line": 60,
+          "line": 67,
           "modality": "MUST",
           "scope": "Tap, re-tap, long-press disclosure, and assistive root activation",
           "source_owners": [
@@ -657,7 +657,7 @@
         {
           "concept": "app.navigation.restoration",
           "id": "APP-NAVIGATION-RESTORATION-001",
-          "line": 75,
+          "line": 88,
           "modality": "MUST",
           "scope": "Relaunch, interruption, memory pressure, and invalidated route restoration",
           "source_owners": [
@@ -676,7 +676,7 @@
         {
           "concept": "app.navigation.state",
           "id": "APP-NAVIGATION-STATE-001",
-          "line": 88,
+          "line": 117,
           "modality": "MUST",
           "scope": "Route stack, overlays, modal presentation, and dismissal",
           "source_owners": [
@@ -911,7 +911,7 @@
         {
           "concept": "app.shell.global-actions",
           "id": "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
-          "line": 851,
+          "line": 852,
           "modality": "MUST",
           "scope": "Shell access points for global Capture and Search",
           "source_owners": [
@@ -931,7 +931,7 @@
         {
           "concept": "app.shell.first-viewport",
           "id": "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
-          "line": 866,
+          "line": 870,
           "modality": "MUST",
           "scope": "Every root first viewport",
           "source_owners": [
@@ -951,7 +951,7 @@
         {
           "concept": "app.shell.state",
           "id": "APP-SHELL-STATE-001",
-          "line": 881,
+          "line": 888,
           "modality": "MUST",
           "scope": "Root, drilldown, overlay, inspection, restoration, and unavailable-route states",
           "source_owners": [
@@ -971,7 +971,7 @@
         {
           "concept": "app.shell.failure-recovery",
           "id": "APP-SHELL-FAILURE-001",
-          "line": 892,
+          "line": 909,
           "modality": "MUST",
           "scope": "Shell composition, route-presentation, focus, and chrome failures",
           "source_owners": [
@@ -991,7 +991,7 @@
         {
           "concept": "app.shell.command-contract",
           "id": "SPEC-APP-SHELL-COMMAND-CONTRACT-001",
-          "line": 903,
+          "line": 920,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -2162,7 +2162,7 @@
         {
           "concept": "global.capture.keyboard",
           "id": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
-          "line": 1257,
+          "line": 1266,
           "modality": "MUST",
           "scope": "Keyboard, dictation, attachment, and focus presentation",
           "source_owners": [
@@ -2190,7 +2190,7 @@
         {
           "concept": "global.capture.saved-for-later",
           "id": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
-          "line": 1270,
+          "line": 1283,
           "modality": "MUST",
           "scope": "Durable unresolved intake",
           "source_owners": [
@@ -2218,7 +2218,7 @@
         {
           "concept": "global.capture.draft-recovery",
           "id": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
-          "line": 1283,
+          "line": 1296,
           "modality": "MUST",
           "scope": "Interruption, crash, denial, attachment, validation, routing, and discard",
           "source_owners": [
@@ -2246,7 +2246,7 @@
         {
           "concept": "global.capture.proposal-flow",
           "id": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
-          "line": 1302,
+          "line": 1311,
           "modality": "MUST",
           "scope": "Classification, metadata, placement, conflict, confirmation, and receipt",
           "source_owners": [
@@ -2274,7 +2274,7 @@
         {
           "concept": "global.capture.visual-authority",
           "id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
-          "line": 1321,
+          "line": 1338,
           "modality": "MUST",
           "scope": "Full-screen composer visual authority",
           "source_owners": [
@@ -2294,7 +2294,7 @@
           ],
           "source_path": "specifications/global/capture.md",
           "supersedes": [],
-          "title": "Selected Capture package and implementation behavior",
+          "title": "Provisional Capture revision and implementation boundary",
           "verification": [
             "PROOF-CAPTURE-VISUAL-MAPPING-001"
           ]
@@ -2302,7 +2302,7 @@
         {
           "concept": "global.capture.classification",
           "id": "SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001",
-          "line": 1332,
+          "line": 1353,
           "modality": "MUST",
           "scope": "Captured drafts",
           "source_owners": [
@@ -2330,7 +2330,7 @@
         {
           "concept": "global.capture.attachment-intake",
           "id": "SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001",
-          "line": 1343,
+          "line": 1364,
           "modality": "MUST",
           "scope": "Capture attachments",
           "source_owners": [
@@ -2358,7 +2358,7 @@
         {
           "concept": "global.capture.command-contract",
           "id": "SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001",
-          "line": 1354,
+          "line": 1379,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -2386,7 +2386,7 @@
         {
           "concept": "global.capture.close-behavior",
           "id": "SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001",
-          "line": 1440,
+          "line": 1474,
           "modality": "MUST",
           "scope": "Capture close behavior",
           "source_owners": [
@@ -2584,7 +2584,7 @@
         {
           "concept": "global.search.find",
           "id": "SPEC-GLOBAL-SEARCH-FIND-001",
-          "line": 1239,
+          "line": 1244,
           "modality": "MUST",
           "scope": "Exact and natural-language retrieval before optional synthesis",
           "source_owners": [
@@ -2606,7 +2606,7 @@
         {
           "concept": "global.search.ask",
           "id": "SPEC-GLOBAL-SEARCH-ASK-001",
-          "line": 1250,
+          "line": 1260,
           "modality": "MAY",
           "scope": "Conversational interpretation and synthesis inside Global Search",
           "source_owners": [
@@ -2628,7 +2628,7 @@
         {
           "concept": "global.search.ask-command-contract",
           "id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
-          "line": 1261,
+          "line": 1271,
           "modality": "MUST",
           "scope": "Optional on-device synthesis, interruption, fallback, evidence inspection, and Capture transition",
           "source_owners": [
@@ -2652,7 +2652,7 @@
         {
           "concept": "global.search.ask-activation-gate",
           "id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
-          "line": 1272,
+          "line": 1282,
           "modality": "MUST",
           "scope": "Ask and Search-to-Capture handoff activation",
           "source_owners": [
@@ -2675,7 +2675,7 @@
         {
           "concept": "global.search.input",
           "id": "SPEC-GLOBAL-SEARCH-INPUT-001",
-          "line": 1283,
+          "line": 1300,
           "modality": "MUST",
           "scope": "Query entry, exact retrieval, questions, action intent, and progressive answer presentation",
           "source_owners": [
@@ -2696,7 +2696,7 @@
         {
           "concept": "global.search.answer-evidence",
           "id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
-          "line": 1294,
+          "line": 1311,
           "modality": "MUST",
           "scope": "Every result, substantive answer, interpretation, and action proposal",
           "source_owners": [
@@ -2718,7 +2718,7 @@
         {
           "concept": "global.search.session-history",
           "id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001",
-          "line": 1305,
+          "line": 1322,
           "modality": "MUST",
           "scope": "Questions, answers, proposals, derived objects, dismissal, interruption, and explicit persistence",
           "source_owners": [
@@ -2739,7 +2739,7 @@
         {
           "concept": "global.search.inspect",
           "id": "SPEC-GLOBAL-SEARCH-INSPECT-001",
-          "line": 1316,
+          "line": 1333,
           "modality": "MUST",
           "scope": "Search results, answers, interpretations, and action proposals",
           "source_owners": [
@@ -2760,7 +2760,7 @@
         {
           "concept": "global.search.capture-handoff",
           "id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
-          "line": 1327,
+          "line": 1344,
           "modality": "MUST",
           "scope": "Any Search input, result, answer, or proposal that expresses creation intent",
           "source_owners": [
@@ -2781,7 +2781,7 @@
         {
           "concept": "global.search.presentation",
           "id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
-          "line": 1338,
+          "line": 1359,
           "modality": "MUST NOT",
           "scope": "Search layout, answer composition, conversation affordances, branding, and interaction rhythm",
           "source_owners": [
@@ -2803,7 +2803,7 @@
         {
           "concept": "global.search.first-viewport",
           "id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
-          "line": 1349,
+          "line": 1370,
           "modality": "MUST",
           "scope": "Search first visible and semantic viewport",
           "source_owners": [
@@ -2824,7 +2824,7 @@
         {
           "concept": "global.search.index-actions",
           "id": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
-          "line": 1364,
+          "line": 1385,
           "modality": "MUST",
           "scope": "Index, ranking, result presentation, actions, and inspection",
           "source_owners": [
@@ -2846,7 +2846,7 @@
         {
           "concept": "global.search.visual-authority",
           "id": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
-          "line": 1375,
+          "line": 1396,
           "modality": "MUST",
           "scope": "Search overlay, results, actions, and inspection visuals",
           "source_owners": [
@@ -2867,7 +2867,7 @@
         {
           "concept": "global.search.index-ranking",
           "id": "SPEC-GLOBAL-SEARCH-INDEX-001",
-          "line": 1386,
+          "line": 1411,
           "modality": "MUST",
           "scope": "Local search index",
           "source_owners": [
@@ -2888,7 +2888,7 @@
         {
           "concept": "global.search.canonical-actions",
           "id": "SPEC-GLOBAL-SEARCH-ACTIONS-001",
-          "line": 1397,
+          "line": 1422,
           "modality": "MUST",
           "scope": "Search result actions",
           "source_owners": [
@@ -2909,7 +2909,7 @@
         {
           "concept": "global.search.command-contract",
           "id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
-          "line": 1410,
+          "line": 1438,
           "modality": "MUST",
           "scope": "Local query, filters, selection, owner action preview, Trust inspection, stale/deleted/privacy-suppressed results, derived-index rebuild, semantic Undo handoff, focus, offline use, and accessibility",
           "source_owners": [
@@ -2930,7 +2930,7 @@
         {
           "concept": "global.search.placement",
           "id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
-          "line": 1503,
+          "line": 1544,
           "modality": "MUST",
           "scope": "Global Search placement",
           "source_owners": [
@@ -4385,7 +4385,7 @@
         {
           "concept": "object.event.source-selection",
           "id": "OBJ-EVENT-SOURCE-SELECTION-001",
-          "line": 51,
+          "line": 60,
           "modality": "MUST",
           "scope": "Event creation from Time",
           "source_owners": [
@@ -4413,7 +4413,7 @@
         {
           "concept": "object.event.all-day-capacity",
           "id": "OBJ-EVENT-ALL-DAY-CAPACITY-001",
-          "line": 61,
+          "line": 70,
           "modality": "MUST",
           "scope": "Imported and native all-day Events",
           "source_owners": [
@@ -4441,7 +4441,7 @@
         {
           "concept": "object.event.time-zone",
           "id": "OBJ-EVENT-TIME-ZONE-001",
-          "line": 75,
+          "line": 84,
           "modality": "MUST",
           "scope": "Timed and all-day Event storage, display, edit, recurrence, and import",
           "source_owners": [
@@ -4469,7 +4469,7 @@
         {
           "concept": "object.event.multi-day",
           "id": "OBJ-EVENT-MULTI-DAY-001",
-          "line": 134,
+          "line": 143,
           "modality": "MUST",
           "scope": "Multi-day Event identity",
           "source_owners": [
@@ -4497,7 +4497,7 @@
         {
           "concept": "object.event.recurrence-edit",
           "id": "OBJ-EVENT-RECURRENCE-EDIT-001",
-          "line": 145,
+          "line": 154,
           "modality": "MUST",
           "scope": "Recurring Event edit scope",
           "source_owners": [
@@ -5043,7 +5043,7 @@
         {
           "concept": "object.identity-common-fields",
           "id": "OBJ-COMMON-ENVELOPE-001",
-          "line": 43,
+          "line": 46,
           "modality": "MUST",
           "scope": "Every applicable canonical object family",
           "source_owners": [
@@ -5064,7 +5064,7 @@
         {
           "concept": "object.identity.canonical",
           "id": "OBJ-CANONICAL-IDENTITY-001",
-          "line": 54,
+          "line": 57,
           "modality": "MUST",
           "scope": "Canonical object identity",
           "source_owners": [
@@ -5085,7 +5085,7 @@
         {
           "concept": "object.owner.mutation",
           "id": "OBJ-CANONICAL-OWNER-001",
-          "line": 65,
+          "line": 68,
           "modality": "MUST",
           "scope": "Canonical mutation routing",
           "source_owners": [
@@ -5106,7 +5106,7 @@
         {
           "concept": "object.state.orthogonal-axes",
           "id": "OBJ-STATE-AXES-001",
-          "line": 76,
+          "line": 79,
           "modality": "MUST NOT",
           "scope": "Lifecycle, placement, time, execution, proof, recovery, source, and sync state",
           "source_owners": [
@@ -5127,7 +5127,7 @@
         {
           "concept": "object.memory.lifecycle-retention",
           "id": "OBJ-MEMORY-RETENTION-001",
-          "line": 87,
+          "line": 90,
           "modality": "MUST",
           "scope": "Canonical local memory and deletion",
           "source_owners": [
@@ -5148,7 +5148,7 @@
         {
           "concept": "object.archive.planning-influence",
           "id": "OBJ-ARCHIVE-SEMANTICS-001",
-          "line": 100,
+          "line": 103,
           "modality": "MUST",
           "scope": "Archived object behavior",
           "source_owners": [
@@ -5169,7 +5169,7 @@
         {
           "concept": "object.life-area.suggested-defaults",
           "id": "OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001",
-          "line": 111,
+          "line": 114,
           "modality": "MAY",
           "scope": "First-use Life Area suggestions and later organization",
           "source_owners": [
@@ -5190,7 +5190,7 @@
         {
           "concept": "object.life-capital.editability",
           "id": "OBJ-LIFE-CAPITAL-EDITABILITY-001",
-          "line": 170,
+          "line": 179,
           "modality": "MUST",
           "scope": "Life Capital records",
           "source_owners": [
@@ -5211,7 +5211,7 @@
         {
           "concept": "object.life-capital.anti-gamification",
           "id": "OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001",
-          "line": 181,
+          "line": 190,
           "modality": "MUST NOT",
           "scope": "Life Capital presentation and use",
           "source_owners": [
@@ -5812,7 +5812,7 @@
         {
           "concept": "object.graph.single-canonical",
           "id": "SYS-CANONICAL-GRAPH-001",
-          "line": 40,
+          "line": 47,
           "modality": "MUST",
           "scope": "Canonical object graph",
           "source_owners": [
@@ -5833,7 +5833,7 @@
         {
           "concept": "object.graph.projection-ownership",
           "id": "SYS-PROJECTION-OWNERSHIP-001",
-          "line": 53,
+          "line": 60,
           "modality": "MUST NOT",
           "scope": "Read projection and mutation routing",
           "source_owners": [
@@ -5854,7 +5854,7 @@
         {
           "concept": "object.schedule-change-set.identity",
           "id": "OBJ-SCHEDULE-CHANGE-SET-IDENTITY-001",
-          "line": 113,
+          "line": 120,
           "modality": "MUST",
           "scope": "Schedule mutation proposals",
           "source_owners": [
@@ -5875,7 +5875,7 @@
         {
           "concept": "object.scheduling.exactness",
           "id": "OBJ-SCHEDULING-EXACTNESS-001",
-          "line": 124,
+          "line": 131,
           "modality": "MUST",
           "scope": "Accepted schedule placements",
           "source_owners": [
@@ -5896,7 +5896,7 @@
         {
           "concept": "object.schedule-placement.atomicity",
           "id": "OBJ-SCHEDULE-PLACEMENT-ATOMICITY-001",
-          "line": 135,
+          "line": 142,
           "modality": "MUST",
           "scope": "Schedule placement mutation",
           "source_owners": [
@@ -6496,7 +6496,7 @@
         {
           "concept": "accessibility.dynamic-type",
           "id": "A11Y-DYNAMIC-TYPE-001",
-          "line": 56,
+          "line": 65,
           "modality": "MUST",
           "scope": "User-facing text and actions",
           "source_owners": [
@@ -6518,7 +6518,7 @@
         {
           "concept": "accessibility.reduced-effects",
           "id": "A11Y-REDUCED-EFFECTS-001",
-          "line": 70,
+          "line": 79,
           "modality": "MUST",
           "scope": "Motion, transparency, contrast, differentiation, and haptics",
           "source_owners": [
@@ -6540,7 +6540,7 @@
         {
           "concept": "accessibility.input-equivalence",
           "id": "A11Y-INPUT-EQUIVALENCE-001",
-          "line": 96,
+          "line": 105,
           "modality": "MUST",
           "scope": "Touch, keyboard, Switch Control, Voice Control, and assistive actions",
           "source_owners": [
@@ -6562,7 +6562,7 @@
         {
           "concept": "accessibility.status-errors",
           "id": "A11Y-STATUS-ERRORS-001",
-          "line": 118,
+          "line": 130,
           "modality": "MUST",
           "scope": "Loading, progress, validation, degraded, failure, recovery, and completion",
           "source_owners": [
@@ -6584,7 +6584,7 @@
         {
           "concept": "accessibility.proof-matrix",
           "id": "A11Y-PROOF-MATRIX-001",
-          "line": 128,
+          "line": 140,
           "modality": "MUST",
           "scope": "Acceptance evidence",
           "source_owners": [
@@ -6606,7 +6606,7 @@
         {
           "concept": "standard.acceptance.accessibility",
           "id": "STANDARD-ACCEPTANCE-ACCESSIBILITY-001",
-          "line": 152,
+          "line": 169,
           "modality": "MUST NOT",
           "scope": "Accessibility behavior affected by a change",
           "source_owners": [
@@ -8881,7 +8881,7 @@
         {
           "concept": "surface.goals.anti-patterns",
           "id": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
-          "line": 2026,
+          "line": 2029,
           "modality": "MUST NOT",
           "scope": "Goals root, detail, and path presentation",
           "source_owners": [
@@ -8903,7 +8903,7 @@
         {
           "concept": "surface.goals.screen-inventory",
           "id": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
-          "line": 2037,
+          "line": 2040,
           "modality": "MUST",
           "scope": "Goals root and owned drilldowns",
           "source_owners": [
@@ -8925,7 +8925,7 @@
         {
           "concept": "surface.goals.first-viewport",
           "id": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
-          "line": 2058,
+          "line": 2066,
           "modality": "MUST",
           "scope": "Goals root and Goal detail first viewport",
           "source_owners": [
@@ -8947,7 +8947,7 @@
         {
           "concept": "surface.goals.purpose",
           "id": "SPEC-SURFACE-GOALS-PURPOSE-001",
-          "line": 2069,
+          "line": 2077,
           "modality": "MUST",
           "scope": "Path generation, activation, adaptation, recovery, and closure",
           "source_owners": [
@@ -8969,7 +8969,7 @@
         {
           "concept": "surface.goals.visual-authority",
           "id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
-          "line": 2084,
+          "line": 2092,
           "modality": "MUST",
           "scope": "Goals and Goal Path visual authority",
           "source_owners": [
@@ -8983,7 +8983,7 @@
           ],
           "source_path": "specifications/surfaces/goals.md",
           "supersedes": [],
-          "title": "Approved Goals package, separate implementation proof",
+          "title": "Provisional Goals branch, separate implementation proof",
           "verification": [
             "PROOF-GOALS-VISUAL-MAPPING-001"
           ]
@@ -8991,7 +8991,7 @@
         {
           "concept": "surface.goals.path-visual",
           "id": "SPEC-SURFACE-GOALS-PATH-VISUAL-001",
-          "line": 2097,
+          "line": 2110,
           "modality": "MUST",
           "scope": "Goal Path presentation",
           "source_owners": [
@@ -9013,7 +9013,7 @@
         {
           "concept": "surface.goals.closure",
           "id": "SPEC-SURFACE-GOALS-CLOSURE-001",
-          "line": 2108,
+          "line": 2121,
           "modality": "MUST",
           "scope": "Goals closure controls",
           "source_owners": [
@@ -9035,7 +9035,7 @@
         {
           "concept": "surface.goals.detail",
           "id": "SPEC-SURFACE-GOALS-DETAIL-001",
-          "line": 2119,
+          "line": 2132,
           "modality": "MUST",
           "scope": "Life Area and Goal detail",
           "source_owners": [
@@ -9057,7 +9057,7 @@
         {
           "concept": "surface.goals.path-interaction",
           "id": "SPEC-SURFACE-GOALS-PATH-INTERACTION-001",
-          "line": 2130,
+          "line": 2143,
           "modality": "MUST",
           "scope": "Goal Path at rest and drilldown",
           "source_owners": [
@@ -9079,7 +9079,7 @@
         {
           "concept": "surface.goals.reviews",
           "id": "SPEC-SURFACE-GOALS-REVIEWS-001",
-          "line": 2141,
+          "line": 2154,
           "modality": "MUST",
           "scope": "Goal review states",
           "source_owners": [
@@ -9101,7 +9101,7 @@
         {
           "concept": "surface.goals.root-viewport",
           "id": "SPEC-SURFACE-GOALS-ROOT-VIEWPORT-001",
-          "line": 2152,
+          "line": 2165,
           "modality": "MUST",
           "scope": "Goals root first viewport",
           "source_owners": [
@@ -9123,7 +9123,7 @@
         {
           "concept": "surface.goal-detail.viewport",
           "id": "SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001",
-          "line": 2163,
+          "line": 2180,
           "modality": "MUST",
           "scope": "Goal detail first viewport",
           "source_owners": [
@@ -9145,7 +9145,7 @@
         {
           "concept": "surface.goals.command-contract",
           "id": "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001",
-          "line": 2174,
+          "line": 2195,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -9167,7 +9167,7 @@
         {
           "concept": "surface.goals.execution-stack",
           "id": "SPEC-SURFACE-GOALS-EXECUTION-STACK-001",
-          "line": 2258,
+          "line": 2279,
           "modality": "MUST",
           "scope": "Goal execution stack",
           "source_owners": [
@@ -9189,7 +9189,7 @@
         {
           "concept": "surface.goals.cebr-branch",
           "id": "SPEC-SURFACE-GOALS-CEBR-BRANCH-001",
-          "line": 2269,
+          "line": 2290,
           "modality": "MUST",
           "scope": "Branch candidates, protections, tradeoffs, and lineage",
           "source_owners": [
@@ -9288,7 +9288,7 @@
         {
           "concept": "surface.time.views",
           "id": "SPEC-SURFACE-TIME-VIEWS-001",
-          "line": 3858,
+          "line": 3864,
           "modality": "MUST",
           "scope": "Day, Week, Month, Year, and List",
           "source_owners": [
@@ -9311,7 +9311,7 @@
         {
           "concept": "surface.time.day",
           "id": "SPEC-SURFACE-TIME-DAY-001",
-          "line": 3869,
+          "line": 3879,
           "modality": "MUST",
           "scope": "Day view and temporal object manipulation",
           "source_owners": [
@@ -9334,7 +9334,7 @@
         {
           "concept": "surface.time.first-viewport",
           "id": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
-          "line": 3884,
+          "line": 3894,
           "modality": "MUST",
           "scope": "Time first visible and semantic viewport",
           "source_owners": [
@@ -9356,7 +9356,7 @@
         {
           "concept": "surface.time.purpose",
           "id": "SPEC-SURFACE-TIME-PURPOSE-001",
-          "line": 3897,
+          "line": 3907,
           "modality": "MUST",
           "scope": "Placement, creation, conflict, adjustment, and import review",
           "source_owners": [
@@ -9378,7 +9378,7 @@
         {
           "concept": "surface.time.visual-authority",
           "id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
-          "line": 3912,
+          "line": 3929,
           "modality": "MUST",
           "scope": "Time grid, list, and direct-manipulation visual authority",
           "source_owners": [
@@ -9392,7 +9392,7 @@
           ],
           "source_path": "specifications/surfaces/time.md",
           "supersedes": [],
-          "title": "Approved Time package, separate implementation proof",
+          "title": "Provisional Time revision, separate implementation proof",
           "verification": [
             "PROOF-TIME-VISUAL-MAPPING-001"
           ]
@@ -9400,7 +9400,7 @@
         {
           "concept": "surface.time.today-control",
           "id": "SPEC-SURFACE-TIME-TODAY-CONTROL-001",
-          "line": 3923,
+          "line": 3945,
           "modality": "MUST",
           "scope": "Day, Week, Month, Year, and List navigation away from now",
           "source_owners": [
@@ -9422,7 +9422,7 @@
         {
           "concept": "surface.time.creation-routes",
           "id": "SPEC-SURFACE-TIME-CREATION-ROUTES-001",
-          "line": 3935,
+          "line": 3957,
           "modality": "SHOULD",
           "scope": "Top action and direct creation from a Time position",
           "source_owners": [
@@ -9444,7 +9444,7 @@
         {
           "concept": "surface.time.step-membership",
           "id": "SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001",
-          "line": 3951,
+          "line": 3973,
           "modality": "MUST",
           "scope": "Goal-linked Steps in Time",
           "source_owners": [
@@ -9466,7 +9466,7 @@
         {
           "concept": "surface.time.visual-geometry",
           "id": "SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001",
-          "line": 3965,
+          "line": 3987,
           "modality": "MUST",
           "scope": "Time grids and temporal objects",
           "source_owners": [
@@ -9488,7 +9488,7 @@
         {
           "concept": "surface.time.imported-source",
           "id": "SPEC-SURFACE-TIME-IMPORTED-SOURCE-001",
-          "line": 3976,
+          "line": 3998,
           "modality": "MUST",
           "scope": "Imported temporal records",
           "source_owners": [
@@ -9510,7 +9510,7 @@
         {
           "concept": "surface.time.search",
           "id": "SPEC-SURFACE-TIME-SEARCH-001",
-          "line": 3987,
+          "line": 4012,
           "modality": "MUST",
           "scope": "Temporal search",
           "source_owners": [
@@ -9532,7 +9532,7 @@
         {
           "concept": "surface.time.view-switching",
           "id": "SPEC-SURFACE-TIME-VIEW-SWITCHING-001",
-          "line": 3998,
+          "line": 4023,
           "modality": "MUST",
           "scope": "Day, Week, Month, Year, and List navigation",
           "source_owners": [
@@ -9554,7 +9554,7 @@
         {
           "concept": "surface.time.week",
           "id": "SPEC-SURFACE-TIME-WEEK-001",
-          "line": 4009,
+          "line": 4038,
           "modality": "MUST",
           "scope": "Time Week view",
           "source_owners": [
@@ -9576,7 +9576,7 @@
         {
           "concept": "surface.time.month",
           "id": "SPEC-SURFACE-TIME-MONTH-001",
-          "line": 4020,
+          "line": 4049,
           "modality": "MUST",
           "scope": "Time Month view",
           "source_owners": [
@@ -9598,7 +9598,7 @@
         {
           "concept": "surface.time.year",
           "id": "SPEC-SURFACE-TIME-YEAR-001",
-          "line": 4031,
+          "line": 4060,
           "modality": "MUST",
           "scope": "Time Year view",
           "source_owners": [
@@ -9620,7 +9620,7 @@
         {
           "concept": "surface.time.list",
           "id": "SPEC-SURFACE-TIME-LIST-001",
-          "line": 4042,
+          "line": 4071,
           "modality": "MUST",
           "scope": "Time chronological list",
           "source_owners": [
@@ -9642,7 +9642,7 @@
         {
           "concept": "surface.time.object-detail",
           "id": "SPEC-SURFACE-TIME-OBJECT-DETAIL-001",
-          "line": 4053,
+          "line": 4082,
           "modality": "MUST",
           "scope": "Temporal object detail",
           "source_owners": [
@@ -9664,7 +9664,7 @@
         {
           "concept": "surface.time.view-command-contract",
           "id": "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001",
-          "line": 4064,
+          "line": 4093,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -9686,7 +9686,7 @@
         {
           "concept": "surface.time.degraded-command-contract",
           "id": "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001",
-          "line": 4075,
+          "line": 4104,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -9708,7 +9708,7 @@
         {
           "concept": "surface.time.detail-command-contract",
           "id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
-          "line": 4086,
+          "line": 4115,
           "modality": "MUST",
           "scope": "Time object detail, edit, recurrence scope, Trash, restore, permanent deletion, source handoff, external failure, focus, offline use, and rollback",
           "source_owners": [
@@ -9730,7 +9730,7 @@
         {
           "concept": "surface.time.cebr-fit",
           "id": "SPEC-SURFACE-TIME-CEBR-FIT-001",
-          "line": 4176,
+          "line": 4205,
           "modality": "MUST",
           "scope": "Branch placement, capacity, protected boundaries, and conflict review",
           "source_owners": [
@@ -9863,7 +9863,7 @@
         {
           "concept": "surface.today.screen-inventory",
           "id": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
-          "line": 928,
+          "line": 934,
           "modality": "MUST",
           "scope": "Today root and contextual depth",
           "source_owners": [
@@ -9885,7 +9885,7 @@
         {
           "concept": "surface.today.first-viewport",
           "id": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
-          "line": 943,
+          "line": 956,
           "modality": "MUST",
           "scope": "First visible and semantic viewport",
           "source_owners": [
@@ -9908,7 +9908,7 @@
         {
           "concept": "surface.today.states",
           "id": "SPEC-SURFACE-TODAY-STATES-001",
-          "line": 962,
+          "line": 983,
           "modality": "MUST",
           "scope": "Resting, transitional, degraded, and recovery states",
           "source_owners": [
@@ -9930,7 +9930,7 @@
         {
           "concept": "surface.today.visual-authority",
           "id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
-          "line": 973,
+          "line": 1001,
           "modality": "MUST",
           "scope": "Today visual direction, final target, and implementation evidence",
           "source_owners": [
@@ -9944,7 +9944,7 @@
           ],
           "source_path": "specifications/surfaces/today.md",
           "supersedes": [],
-          "title": "Approved Today package, separate implementation proof",
+          "title": "Provisional Today branch, separate implementation proof",
           "verification": [
             "PROOF-TODAY-VISUAL-MAPPING-001"
           ]
@@ -9952,7 +9952,7 @@
         {
           "concept": "surface.today.missed-placement-continuity",
           "id": "SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001",
-          "line": 984,
+          "line": 1017,
           "modality": "MUST",
           "scope": "A Today item that did not happen at its planned time",
           "source_owners": [
@@ -9974,7 +9974,7 @@
         {
           "concept": "surface.today.object-row",
           "id": "SPEC-SURFACE-TODAY-ROW-001",
-          "line": 994,
+          "line": 1027,
           "modality": "MUST",
           "scope": "Today object rows",
           "source_owners": [
@@ -9996,7 +9996,7 @@
         {
           "concept": "surface.today.command-contract",
           "id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
-          "line": 1005,
+          "line": 1038,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -10018,7 +10018,7 @@
         {
           "concept": "surface.today.cebr-current-branch",
           "id": "SPEC-SURFACE-TODAY-CEBR-CURRENT-BRANCH-001",
-          "line": 1087,
+          "line": 1120,
           "modality": "MUST",
           "scope": "Current branch, changed reality, and selected executable consequence",
           "source_owners": [
@@ -10112,7 +10112,7 @@
         {
           "concept": "surface.you.screen-inventory",
           "id": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
-          "line": 2109,
+          "line": 2113,
           "modality": "MUST",
           "scope": "You root and owned settings/review routes",
           "source_owners": [
@@ -10134,7 +10134,7 @@
         {
           "concept": "surface.you.first-viewport",
           "id": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
-          "line": 2140,
+          "line": 2156,
           "modality": "MUST",
           "scope": "You first visible and semantic viewport",
           "source_owners": [
@@ -10156,7 +10156,7 @@
         {
           "concept": "surface.you.depth",
           "id": "SPEC-SURFACE-YOU-DEPTH-001",
-          "line": 2153,
+          "line": 2175,
           "modality": "MUST",
           "scope": "Stats, Life Capital, learning, diagnostics, and history",
           "source_owners": [
@@ -10178,7 +10178,7 @@
         {
           "concept": "surface.you.visual-authority",
           "id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
-          "line": 2164,
+          "line": 2186,
           "modality": "MUST",
           "scope": "You root and settings visual authority",
           "source_owners": [
@@ -10192,7 +10192,7 @@
           ],
           "source_path": "specifications/surfaces/you.md",
           "supersedes": [],
-          "title": "Approved You package, separate implementation proof",
+          "title": "Provisional You revision, separate implementation proof",
           "verification": [
             "PROOF-YOU-VISUAL-MAPPING-001"
           ]
@@ -10200,7 +10200,7 @@
         {
           "concept": "surface.you.no-knowledge-model",
           "id": "SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001",
-          "line": 2175,
+          "line": 2201,
           "modality": "MUST NOT",
           "scope": "You, Search, setup, privacy, and learning controls",
           "source_owners": [
@@ -10222,7 +10222,7 @@
         {
           "concept": "surface.you.profile",
           "id": "SPEC-SURFACE-YOU-PROFILE-001",
-          "line": 2187,
+          "line": 2216,
           "modality": "MUST",
           "scope": "User profile controls",
           "source_owners": [
@@ -10244,7 +10244,7 @@
         {
           "concept": "surface.you.appearance",
           "id": "SPEC-SURFACE-YOU-APPEARANCE-001",
-          "line": 2198,
+          "line": 2229,
           "modality": "MUST",
           "scope": "Appearance preferences",
           "source_owners": [
@@ -10266,7 +10266,7 @@
         {
           "concept": "surface.you.data-controls",
           "id": "SPEC-SURFACE-YOU-DATA-CONTROLS-001",
-          "line": 2209,
+          "line": 2244,
           "modality": "MUST",
           "scope": "User data management",
           "source_owners": [
@@ -10288,7 +10288,7 @@
         {
           "concept": "surface.you.privacy-data-boundary",
           "id": "SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001",
-          "line": 2220,
+          "line": 2258,
           "modality": "MUST",
           "scope": "Privacy and continuity controls",
           "source_owners": [
@@ -10310,7 +10310,7 @@
         {
           "concept": "surface.you.contextual-education",
           "id": "SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001",
-          "line": 2231,
+          "line": 2272,
           "modality": "SHOULD",
           "scope": "Settings and unfamiliar states",
           "source_owners": [
@@ -10332,7 +10332,7 @@
         {
           "concept": "surface.you.command-contract",
           "id": "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001",
-          "line": 2242,
+          "line": 2283,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -10354,7 +10354,7 @@
         {
           "concept": "surface.you.entitlement-command-contract",
           "id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
-          "line": 2253,
+          "line": 2301,
           "modality": "MUST",
           "scope": "Entitlement status, plan viewing, retry, restore, account mismatch, Apple subscription management, offline access, privacy, focus, and product-registry gating",
           "source_owners": [
@@ -10376,7 +10376,7 @@
         {
           "concept": "surface.you.settings-drilldown",
           "id": "SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001",
-          "line": 2346,
+          "line": 2401,
           "modality": "MUST",
           "scope": "Settings drilldown presentation",
           "source_owners": [
@@ -10398,7 +10398,7 @@
         {
           "concept": "surface.you.time-preferences",
           "id": "SPEC-SURFACE-YOU-TIME-PREFERENCES-001",
-          "line": 2357,
+          "line": 2412,
           "modality": "MUST",
           "scope": "Time preference inventory",
           "source_owners": [
@@ -10420,7 +10420,7 @@
         {
           "concept": "surface.you.cebr-trust",
           "id": "SPEC-SURFACE-YOU-CEBR-TRUST-001",
-          "line": 2368,
+          "line": 2427,
           "modality": "MUST",
           "scope": "Branch assumptions, authority, privacy, receipts, history, and reset",
           "source_owners": [
@@ -10505,7 +10505,7 @@
         {
           "concept": "system.apple.projection",
           "id": "SYSTEM-APPLE-PROJECTION-001",
-          "line": 30,
+          "line": 36,
           "modality": "MUST",
           "scope": "Widget, Lock Screen, Spotlight, App Group, shortcut/entity display, and app-switcher-sensitive presentation",
           "source_owners": [
@@ -10528,7 +10528,7 @@
         {
           "concept": "system.apple.command-handoff",
           "id": "SYSTEM-APPLE-HANDOFF-001",
-          "line": 47,
+          "line": 53,
           "modality": "MUST",
           "scope": "Widget, notification, App Intent, Shortcut/Siri, Share, Spotlight, deep link, and background/lifecycle handoff",
           "source_owners": [
@@ -10551,7 +10551,7 @@
         {
           "concept": "system.apple.intents",
           "id": "SYSTEM-APPLE-INTENTS-001",
-          "line": 102,
+          "line": 113,
           "modality": "MUST NOT",
           "scope": "App Intents command boundary",
           "source_owners": [
@@ -10574,7 +10574,7 @@
         {
           "concept": "system.apple.share-handoff",
           "id": "SYSTEM-APPLE-SHARE-HANDOFF-001",
-          "line": 113,
+          "line": 124,
           "modality": "MUST NOT",
           "scope": "Share handoff draft intake",
           "source_owners": [
@@ -10597,7 +10597,7 @@
         {
           "concept": "system.apple.widget-action",
           "id": "SYSTEM-APPLE-WIDGET-ACTION-001",
-          "line": 124,
+          "line": 139,
           "modality": "MUST",
           "scope": "Widget action boundary",
           "source_owners": [
@@ -10620,7 +10620,7 @@
         {
           "concept": "system.apple.widget-projection",
           "id": "SYSTEM-APPLE-WIDGET-PROJECTION-001",
-          "line": 135,
+          "line": 153,
           "modality": "MUST NOT",
           "scope": "Widget projection boundary",
           "source_owners": [
@@ -11302,7 +11302,7 @@
         {
           "concept": "system.persistence.replay",
           "id": "SYSTEM-PERSISTENCE-REPLAY-001",
-          "line": 39,
+          "line": 44,
           "modality": "MUST",
           "scope": "Events, object revisions, tombstones, projections, receipts, migrations, and compaction",
           "source_owners": [
@@ -11325,7 +11325,7 @@
         {
           "concept": "system.persistence.compaction",
           "id": "SYSTEM-PERSISTENCE-COMPACTION-001",
-          "line": 70,
+          "line": 80,
           "modality": "MUST",
           "scope": "Event and projection compaction",
           "source_owners": [
@@ -11347,7 +11347,7 @@
         {
           "concept": "system.persistence.migration",
           "id": "SYSTEM-PERSISTENCE-MIGRATION-001",
-          "line": 81,
+          "line": 91,
           "modality": "MUST",
           "scope": "Schema and event migration",
           "source_owners": [
@@ -11369,7 +11369,7 @@
         {
           "concept": "system.persistence.corruption",
           "id": "SYSTEM-PERSISTENCE-CORRUPTION-001",
-          "line": 131,
+          "line": 141,
           "modality": "MUST NOT",
           "scope": "Persistence corruption containment",
           "source_owners": [
@@ -11554,7 +11554,7 @@
         {
           "concept": "system.runtime.local-orchestration",
           "id": "SYSTEM-RUNTIME-ORCHESTRATION-001",
-          "line": 45,
+          "line": 70,
           "modality": "MUST",
           "scope": "Intent, context, path, time fit, reflow, action, proof, learning, and recovery",
           "source_owners": [
@@ -11578,7 +11578,7 @@
         {
           "concept": "system.runtime.proof-bar",
           "id": "SYSTEM-RUNTIME-PROOF-001",
-          "line": 66,
+          "line": 91,
           "modality": "MUST",
           "scope": "Private Life Runtime",
           "source_owners": [
@@ -11602,7 +11602,7 @@
         {
           "concept": "system.runtime.command-validation",
           "id": "SYSTEM-RUNTIME-COMMAND-VALIDATION-001",
-          "line": 77,
+          "line": 102,
           "modality": "MUST",
           "scope": "Canonical runtime commands",
           "source_owners": [
@@ -11626,7 +11626,7 @@
         {
           "concept": "system.runtime.cloud-independence",
           "id": "SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001",
-          "line": 88,
+          "line": 113,
           "modality": "MUST",
           "scope": "Core Private Life Runtime",
           "source_owners": [
@@ -11650,7 +11650,7 @@
         {
           "concept": "system.runtime.simulation",
           "id": "SYSTEM-RUNTIME-SIMULATION-001",
-          "line": 99,
+          "line": 128,
           "modality": "MUST",
           "scope": "Runtime planning and recovery",
           "source_owners": [

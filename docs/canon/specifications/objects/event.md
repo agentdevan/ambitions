@@ -36,9 +36,18 @@ laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-00
 - **Verification:** `SCENARIO-EVENT-BOUNDARY-001`
 - **Supersedes:** none
 
-An Event is one fixed-by-default time-range commitment with recurrence, attendees, location, alerts, source, and Schedule Placement. It MUST NOT be completed like a Step; occurrence elapsed/cancelled/attended state never fabricates user-work completion.
+An Event is one fixed-by-default time-range commitment with stable local ID,
+optional series ID, occurrence identity, external source identity/revision,
+recurrence, attendees, location, alerts, time-zone mode, edit authority,
+cancellation, history, and Schedule Placement. It MUST NOT be completed like a
+Step; occurrence elapsed/cancelled/attended state never fabricates user-work
+completion.
 
-When an Apple Calendar item is imported into Ambitions Time, it MUST become an Ambitions-native Fixed Event by default.
+An Apple Calendar observation becomes an Ambitions-native Event only through an
+explicit import/reconciliation command. Re-import resolves the stable external
+source/calendar/event/occurrence key and MUST NOT create a duplicate. External
+deletion or cancellation updates source state without silently erasing local
+history.
 
 An Event MUST occupy a time range.
 

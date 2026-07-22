@@ -34,7 +34,10 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 - **Verification:** `SCENARIO-LIFE-AREA-LIFECYCLE-001`
 - **Supersedes:** none
 
-A Life Area MUST be one stable, editable region of life that contains Goals and may relate free Steps or Notes. Active, hidden, archived, restored, and Trashed presentations retain that identity and do not create per-surface copies.
+A Life Area MUST be one locally persisted stable, editable region of life with
+user-owned name and meaning, explicit order, visibility, lifecycle, revisions,
+and Goal membership references. Active, hidden, archived, restored, and Trashed
+presentations retain that identity and do not create per-surface copies.
 
 Life Areas MUST remain a broad editable atlas rather than ranked score cards.
 
@@ -119,6 +122,12 @@ Archive MUST stop the archived object from influencing ordinary future planning 
 Ambitions MAY offer suggested Life Areas as a starting point. The user can rename, hide, reorder, replace, or remove every suggestion; no default silently becomes identity, planning priority, or permanent taxonomy.
 
 Ambitions MUST start with suggested Life Area defaults, and the user MAY rename, hide, reorder, or customize them.
+
+Fixed enum-derived values are migration inputs, not target identity. Migration
+MUST deterministically create records in former display order, map Goal
+membership without duplication, preserve source values for rollback, and remain
+idempotent across interruption and replay. Archive removes planning influence;
+removal requires an explicit member-Goal outcome.
 
 <!-- canon-section: stable-identity -->
 Life Area identity is generated locally once and survives rename, hide, archive, restore, reordering, and projection changes. A title, color, icon, or Goals grouping is not identity.

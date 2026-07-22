@@ -3,7 +3,7 @@
 > Generated from normative object specifications. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de`
+- Canon digest: `24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994`
 
 | Capability | Step | Event | Reminder | Note |
 | --- | --- | --- | --- | --- |
@@ -24,4 +24,4 @@
 - **Future Step identity must be singular** (`OBJECT-FUTURE-STEP-IDENTITY-001`): Future Step MUST be specified as exactly one canonical Step role, placement state, path-node subtype, or distinct object before implementation; it MUST NOT create duplicate identity or lineage.
 - **Proof choice and advance notice** (`OBJECT-PROOF-REQUIREMENT-001`): User-supplied Proof MAY be optional, suggested, or explicitly required before work begins; required Proof MUST NOT appear as a surprise at completion, and system mutation receipts MUST remain a separate automatic obligation.
 - **Reminder acknowledgement is not work completion** (`OBJECT-REMINDER-COMPLETION-001`): A Reminder MUST NOT independently complete user work unless canonical law defines its relationship to a Step; notification acknowledgement, linked-Step completion, Reminder state, and recurrence scope MUST remain distinct transitions.
-- **Relationship between object and Time** (`OBJ-SCHEDULE-PLACEMENT-IDENTITY-001`): A Schedule Placement is one identified relationship between a canonical capacity-bearing object and Time, containing range/window, fixed/flexible/protected state, fit assumptions, and reflow rule. It MUST NOT duplicate the Step or Event or acquire its lifecycle/execution identity.
+- **Relationship between object and Time** (`OBJ-SCHEDULE-PLACEMENT-IDENTITY-001`): A Schedule Placement is one stable identified relationship between a canonical capacity-bearing object and Time, containing temporal range/window and zone, authority state, source, fixed/flexible/protected state, fit assumptions, expected revisions, conflicts, history, and reflow rule. Authority distinguishes at least proposed, accepted, external, and stale. It MUST NOT duplicate the Step or Event or acquire its lifecycle/execution identity.

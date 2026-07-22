@@ -1240,15 +1240,24 @@ Capture uses `surface-v1` because it presents a full-screen, user-operated compo
 - **Verification:** `SCENARIO-CAPTURE-IDENTITY-001`
 - **Supersedes:** none
 
-Capture MUST be a global full-screen composer that preserves intent, allows or infers type, previews material consequences, and routes accepted objects to canonical owners. A Search creation-intent handoff MUST preserve accepted source context and user-entered intent, and Capture alone MUST own composition, draft durability, type, consequences, confirmation, and canonical-owner routing. Capture MUST NOT become a root, tab, half-sheet quick box, inbox, category wall, chatbot, notes feed, or permanent floating control.
+Capture MUST be a global full-screen temporary composer that preserves intent,
+performs only capability-backed bounded interpretation, previews material
+consequences, and transfers accepted proposals to canonical owners. A Search
+creation-intent handoff preserves accepted source context and user-entered
+intent. Capture owns the session draft, correction, proposal, origin, and
+handoff; the destination owner revalidates and alone commits canonical data.
+Capture MUST NOT become a root, tab, half-sheet quick box, inbox, category wall,
+chatbot, notes feed, or permanent floating control.
 
-Capture MUST be full-screen, durable, field-first, and multi-surface.
+The approved current baseline is full-screen text input, deterministic bounded
+extraction, simple time extraction, destination proposal, Accept, Change,
+Cancel, proven Quick Capture creation, and proven Capture-to-Goal handoff.
 
 Capture SHOULD NOT primarily be a bottom floating composer.
 
-Capture MUST start as a blank full-screen composer with quick chips/actions for Step, Goal, Reminder, Event, Proof, Note, and Save for Later.
-
-Capture attachment intake MUST support Camera, Photos, Files, Scan Document, Scan Text, Voice, web links, and a proof-specific attachment mode.
+Capture MUST show only destination routes proven by the owner capability
+registry. A Goal, Step, Reminder, Event, Proof, Note, attachment, or Saved for
+Later type is hidden when its owner acceptance and settlement path is unproven.
 
 Capture MUST use a global typed route graph and a full-screen Stage composer instead of a tab, inbox, or note feed.
 
@@ -1263,7 +1272,11 @@ Simple captures MUST save quickly.
 - **Verification:** `PROOF-CAPTURE-KEYBOARD-001`
 - **Supersedes:** none
 
-Keyboard presentation MUST preserve the text field, visible type override, primary save/continue action, attachment access, cancellation, validation feedback, and safe-area clearance without shrinking Capture into a utility sheet. Hardware keyboard, dictation, Switch Control, and VoiceOver actions provide equivalent entry and focus behavior.
+Keyboard presentation MUST preserve the text field, supported type/destination
+override, primary continue action, cancellation, validation feedback, and safe-
+area clearance without shrinking Capture into a utility sheet. Hardware
+keyboard, Switch Control, and VoiceOver provide equivalent entry and focus
+behavior. Dictation is not a current Capture capability.
 
 The Capture field MUST rise above the keyboard, expand cleanly, and then scroll internally.
 
@@ -1289,15 +1302,11 @@ Save for Later bypasses the proposal wizard, stores the current input and attach
 - **Verification:** `SCENARIO-CAPTURE-DRAFT-RECOVERY-001`
 - **Supersedes:** none
 
-The original Capture Draft MUST survive navigation away, app interruption, crash, permission denial, attachment failure, validation failure, and routing failure. Recovery restores text, type choice, metadata, attachment states, proposal state, prior context, and focus. Explicit discard confirmation is required; no failure may destroy original input.
-
-A Capture Draft MUST durably save each accepted edit before dismissal or route transition.
-
-Ambitions MAY infer Goal, Step, Reminder, Event, Proof, Note, or Attachment intake from content and context.
-
-A Capture Draft MUST be durable unresolved input.
-
-Every answer MUST save immediately.
+The original expression and unaffected interpretation MUST survive every
+in-session correction and owner handoff. Durable draft recovery across crash or
+relaunch is optional and MUST NOT be promised until an owning draft store,
+retention/deletion policy, migration, restoration, privacy behavior, and proof
+exist. Exact cursor, field-focus, and keyboard restoration remain best effort.
 
 ## SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001 — Adaptive complexity without interrogation
 
@@ -1308,17 +1317,25 @@ Every answer MUST save immediately.
 - **Verification:** `SCENARIO-CAPTURE-PROPOSAL-001`
 - **Supersedes:** none
 
-Simple input MUST save quickly. Complexity introduces only the required type/destination, metadata, schedule proposal, conflict check, confirmation, and receipt steps. Classification is visible, editable, deterministic, and local for core paths. Material interpretation or placement never commits silently; alternatives remain available without an interrogation wizard.
+Simple supported input MUST prepare quickly. Complexity introduces only the
+supported destination, simple time, ambiguity correction, consequence,
+confirmation, and owner handoff steps. Interpretation is visible, editable,
+deterministic, bounded, and local. Material interpretation never commits
+silently.
 
-Step, Goal, Reminder, Event, Proof, and Note saves MUST proceed through a proposal flow that routes or confirms the owning Today, Goals, Time, You, Proof, Receipt, or inspection destination.
+Only proven Quick Capture and Capture-to-Goal paths are current baseline.
+Additional destinations require capability proof before they appear.
 
 The Capture proposal flow MUST use native controls, preserve its draft locally, and provide reversible navigation.
 
 Events, Reminders, Steps, Goals, and Proof MUST each expose controls relevant to that object type.
 
-When enough information exists, Capture MUST preselect one recommended placement with fit rationale and MUST expose alternatives on demand.
+Capture may propose a destination or simple time only within implemented rules.
+It MUST NOT claim arbitrary semantic understanding, universal conflict
+detection, coordinated multi-root mutation, partial settlement, or
+Capture-specific Undo.
 
-## SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001 — Selected Capture package and implementation behavior
+## SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001 — Provisional Capture revision and implementation boundary
 
 - **Concept:** `global.capture.visual-authority`
 - **Modality:** `MUST`
@@ -1327,7 +1344,11 @@ When enough information exists, Capture MUST preselect one recommended placement
 - **Verification:** `PROOF-CAPTURE-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual review MUST reference stable external IDs and keep the selected product direction distinct from current implementation behavior. Selected VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target.
+Visual review MUST keep owner-authorized provisional direction distinct from
+historical package provenance and current implementation. `AVF-CAPTURE-S07-R01
+— Bounded Adaptive Meaning Fold` is the current provisional direction. The
+earlier VSP-05 package remains historical and establishes no current SwiftUI,
+accessibility, device, runtime, or Figma approval.
 
 ## SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001 — Capture classification
 
@@ -1349,7 +1370,11 @@ Capture classification MUST remain local, inspectable, reversible, and nonmutati
 - **Verification:** `TEST-CAPTURE-ATTACHMENT-INTAKE-001`
 - **Supersedes:** none
 
-Capture attachment intake MUST preserve original bytes and draft linkage, stream within bounded resources, disclose failure per attachment, and remain local by default.
+Attachment intake is absent from the current baseline except for individually
+proven external/share routes. Any future adapter MUST preserve original bytes
+and draft linkage, stream within bounded resources, disclose per-attachment
+failure, remain local by default, and pass capability/privacy proof before its
+control appears.
 
 ## SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001 — Exact state command ownership
 
@@ -1360,7 +1385,16 @@ Capture attachment intake MUST preserve original bytes and draft linkage, stream
 - **Verification:** `SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-The owning specification MUST authorize only the state-bound command labels `Cancel`, `Continue`, `Discard`, `Done`, `Keep editing`, `Remove`, `Replace`, `Retry`, `Retry routing`, `Review`, `Review permission`, `Stop dictation`, `Undo`, `View all saved for later` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract.
+Structured state contracts describe the maximum named design inventory; they do
+not activate a capability. The current baseline exposes only Cancel, Change,
+Continue/Accept, and the proven destination-owner result actions. Every active
+command MUST bind stable session/object identity, revision, owner, preconditions,
+destination, consequence, and focus targets. Capture cannot commit a destination
+mutation; owner handoff follows the shared mutation lifecycle. Receipt and Undo
+appear only when the destination owner’s registry proves them. VoiceOver
+announces interpretation, correction, owner destination, accepted/rejected
+result, consequence, recovery, and focus without relying on color, motion,
+gesture, or position.
 
 ## Completeness contract
 

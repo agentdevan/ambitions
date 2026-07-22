@@ -53,7 +53,14 @@ The navigation graph MUST map each constitutional root to its owning root presen
 - **Verification:** `SCENARIO-APP-NAVIGATION-PRESENTATION-001`, `AUDIT-APP-NAVIGATION-DEPTH-001`
 - **Supersedes:** none
 
-A root route MUST present at Stage root with root switching available. A normal drilldown uses native full-screen depth and native return. Compact object detail, small choices, and contextual inspection use the smallest native presentation that preserves clarity and accessibility. Complex review, Capture, and Search use full-screen presentation with their own cancellation and recovery contracts. Root chrome visibility is delegated to `APP-SHELL`; presentation choice may not create an alternate root.
+A root route MUST present at Stage root with Crowned Edge Dock root switching
+available through shell-owned visual and semantic equivalents. A normal
+drilldown uses framework-owned stack mechanics, Back affordance, and interactive
+Back gesture. Compact object detail, small choices, and contextual inspection
+use the smallest native presentation that preserves clarity and accessibility.
+Complex review, Capture, and Search use full-screen presentation with their own
+cancellation and recovery contracts. Root chrome visibility is delegated to
+`APP-SHELL`; presentation choice may not create an alternate root.
 
 Root navigation MAY appear at root depth.
 
@@ -66,7 +73,13 @@ Root navigation MAY appear at root depth.
 - **Verification:** `SCENARIO-APP-NAVIGATION-ROOT-SWITCH-001`, `SCENARIO-APP-NAVIGATION-ROOT-RESET-001`
 - **Supersedes:** none
 
-Activating a different root MUST switch to that root while preserving reasonable per-root navigation and content state. Re-activating the current root returns to the canonical anchor defined by that surface specification, without deleting drafts or accepted state. Long press may disclose a label and description but is never required. Assistive activation exposes the same roots, labels, selection state, and predictable result.
+Activating a different root MUST switch to that root while preserving its own
+ordered path and surface selection. Every root has an independent path,
+including Today. Re-activating the current root returns to the canonical anchor
+defined by that surface specification without deleting drafts or accepted
+state. Long press may disclose a label and description but is never required.
+Assistive activation exposes the same roots, labels, selection state, and
+predictable result.
 
 Tapping a root icon MUST switch roots while preserving each root’s reasonable state.
 
@@ -81,7 +94,23 @@ Ambitions MUST support thin use and deep use.
 - **Verification:** `SCENARIO-APP-NAVIGATION-RESTORE-001`, `SCENARIO-APP-NAVIGATION-INVALIDATED-001`
 - **Supersedes:** none
 
-Navigation restoration MUST validate that the target owner and referenced local object still exist and remain eligible before presenting depth. A valid route restores the prior root, depth, selection, and focus as far as product meaning permits. An invalid or unavailable target degrades to the nearest valid owning context with a calm explanation and repair action; it must not fabricate an object, reveal a private fallback, or trap the user at an empty route.
+Navigation restoration MUST use a versioned persistable record containing the
+selected root, four root-local paths, focused canonical object where still
+valid, active global presentation origin, and pending authoritative operation
+ID where that operation is itself durable. It validates record version, owner,
+route kind, authorization, object identity, and expected revision before
+presenting depth.
+
+An active Search query, active Capture expression, and surface-owned selection
+are in-session state unless an owning contract separately makes them durable.
+Scroll position, text cursor, field focus, keyboard visibility, animation, and
+pixel position are best effort and MUST NOT be promised across relaunch.
+
+An invalid path is truncated at the first stale component and restores the
+deepest truthful surviving owner context, then the selected root, then Today as
+the final safe fallback. Recovery explains what could not be restored without
+guessing an object, revealing private content, replaying a mutation, or trapping
+the user.
 
 Required proof MUST be visible before completion.
 
@@ -94,7 +123,17 @@ Required proof MUST be visible before completion.
 - **Verification:** `AUDIT-APP-NAVIGATION-SINGLE-OWNER-001`, `SCENARIO-APP-NAVIGATION-DISMISSAL-001`
 - **Supersedes:** none
 
-Navigation state MUST distinguish the selected root, ordered drilldown path, optional presentation, return target, and focus target. Only one owner may control a given presentation layer. Dismissal returns through the recorded parent or owner-defined safe fallback. Route state is not canonical object state and cannot bypass mutation, confirmation, receipt, or replay law.
+Navigation state MUST distinguish the selected root, four independent ordered
+drilldown paths, root-local selected object references, optional global or local
+presentation, return target, focus target, external origin, and resolution
+status. Selected-root-aware depth is computed from only the selected root path.
+Only one owner may control a given presentation layer. Dismissal returns through
+the recorded valid parent or the restoration fallback. Route state is not
+canonical object state and cannot bypass mutation, confirmation, Receipt, Undo,
+or replay law.
+
+The accepted schema and native/custom boundary are defined in
+`docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md`.
 
 ## Completeness contract
 

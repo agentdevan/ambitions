@@ -28,7 +28,12 @@ This specification defines intended persistence semantics independently of Swift
 - **Verification:** `SCENARIO-SYSTEM-PERSISTENCE-CRASH-001`
 - **Supersedes:** none
 
-A declared local transaction MUST durably commit its complete write set or none. Partial durable stages are permitted only when explicitly modeled with a recovery path and truthful Receipt. The last honest store remains readable across interruption, migration, compaction, backup, restore, projection rebuild, and storage pressure.
+A declared local transaction MUST durably commit its complete write set or none.
+Partial durable stages are permitted only for typed independently settling
+scopes with explicit owner, recovery, replay, cancellation, and truthful
+settlement contracts. The last honest store remains readable across
+interruption, migration, compaction, supported backup/restore, projection
+rebuild, and storage pressure.
 
 Storage failure MUST preserve input or MUST provide a safe export or recovery path.
 
@@ -65,7 +70,12 @@ External effects MUST NOT be automatically reissued during ordinary replay.
 
 Relaunch MUST reconstruct the same local recommendations, placements, closure, Receipts, and recovery state unless source data changed.
 
-Interrupted commands MUST roll back or resume from an inspectable pending state.
+Interrupted commands MUST roll back before acceptance or resume only from an
+approved inspectable durable pending state. Pending requires an accepted
+operation ID, owner, persistence, idempotent retry/backoff, cancellation,
+terminal state, later publication, recovery entry, and applicable Receipt
+linkage. No generic queue or “will finish later” promise follows from local
+storage alone.
 
 ## SYSTEM-PERSISTENCE-COMPACTION-001 — Persistence compaction
 

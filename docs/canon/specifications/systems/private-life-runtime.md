@@ -30,7 +30,21 @@ This target specifies intended local runtime behavior.
 - **Verification:** `SCENARIO-SYSTEM-RUNTIME-ATOMIC-001`, `AUDIT-RUNTIME-DIRECT-WRITE-001`
 - **Supersedes:** none
 
-Every meaningful mutation MUST: validate and authorize a typed Command; prepare the declared transaction and rollback; durably commit the canonical Event, object state, projection invalidations, Receipt metadata, History lineage, and external-effect intent atomically; materialize or invalidate Projections; finalize a truthful Receipt and replayable result; and only then attempt any external effect through a durable outbox. Rejection commits no requested object mutation. No adapter, store, callback, projection, view, extension, or external result may bypass or reorder this law.
+Every meaningful mutation MUST follow Intent → Preparation → Validation →
+Preview → required Confirmation → Authority Commit → Projection Materialization
+→ declared External Side Effects → Settlement → capability-gated Receipt →
+optional proven Undo → Recovery. The canonical owner alone crosses the commit
+boundary. Rejection commits no requested object mutation. No adapter, store,
+callback, projection, view, extension, Search, Capture, or external result may
+bypass or reorder this law.
+
+Atomic single-owner operations settle changed, unchanged, blocked, failed, or
+unsupported as a whole. Partial settlement and a Settlement Ledger require
+stable independently settling scope IDs, owners, revisions, commit boundaries,
+terminal results, retry/cancel/replay semantics, per-scope reversibility, and
+tests. Until then, multi-owner work splits into atomic owner commits or stops at
+handoff. A generic durable outbox is not implied; a domain may accept pending
+external work only through an approved durable pending-operation contract.
 
 A Step and its Schedule Placement MUST commit atomically.
 
@@ -38,7 +52,18 @@ Models, parsers, semantic indexes, assistant behavior, planners, schedulers, and
 
 Commands MUST validate object state, permissions, privacy, conflicts, recurrence scope, schedule rules, and idempotency before mutation.
 
-Every user-visible life-state mutation MUST define command validation, event or ledger append semantics, projection consequences, Receipt, Undo and Proof behavior, replay and idempotency, and any deliberately documented exception.
+Every user-visible life-state mutation MUST define command validation, event or
+ledger append semantics, projection consequences, settlement, Receipt policy,
+Undo capability, Proof behavior, replay and idempotency, and any deliberately
+documented exception. A Receipt is shown only for registry-covered durable
+operations. Undo is shown only for an executable typed inverse or compensating
+command; a rollback identifier is insufficient.
+
+The shared truth algebra distinguishes Current, Proposed, Accepted, External,
+Stale, Unknown, Historical, Saving, Pending, Settled changed, Settled unchanged,
+Blocked, Failed, Conflict, Recovering, Recovered, Irreversible, and Undo
+available. Domain extensions retain a named owner and MUST NOT collapse
+proposed/external/stale/pending state into current accepted truth.
 
 Views, presentation models, repository adapters, widgets, extensions, App Intents, notification callbacks, import callbacks, sync callbacks, and external-service callbacks MUST NOT mutate canonical Ambitions state directly.
 
@@ -94,7 +119,11 @@ Every command MUST validate identity, authorization, lifecycle, preconditions, i
 - **Verification:** `TEST-RUNTIME-CLOUD-INDEPENDENCE-001`
 - **Supersedes:** none
 
-Core Private Life Runtime behavior MUST work offline without account, hosted AI, cloud model, network service, or remote private-graph authority.
+Core local canonical reads and registered local owner commands MUST work offline
+without account, hosted AI, cloud model, network service, or remote private-
+graph authority. This does not claim offline parity for external observation,
+external mutation, Search coverage, draft recovery, pending work, or ecosystem
+surfaces. Each such capability declares its own offline and freshness boundary.
 
 ## SYSTEM-RUNTIME-SIMULATION-001 — Runtime simulation
 

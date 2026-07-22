@@ -47,11 +47,20 @@ Spatial or visual systems MUST expose equivalent semantics and actions.
 - **Verification:** `TEST-A11Y-READING-FOCUS-001`
 - **Supersedes:** none
 
-Reading order, headings, rotor grouping, announcements, modal containment, and focus restoration MUST be deterministic and return the user to the initiating context.
+Reading order, headings, rotor grouping, announcements, modal containment, and
+focus restoration MUST be deterministic. Shell/navigation owns cross-
+presentation focus return through stable semantic focus IDs; each surface owns
+in-surface focus; mutation and recovery owners announce their outcomes. Return
+targets resolve to the initiating control/object, owner primary control, root
+primary object, then root heading without guessing stale identity.
 
 VoiceOver MUST expose labels, values, hints, actions, and a predictable reading order.
 
-Root VoiceOver order MUST proceed from title to context, primary object, primary action, remaining objects, and root navigation.
+Root VoiceOver order MUST proceed from semantic crown/title to context, primary
+object, primary action, remaining objects, then root navigation. The Crowned
+Edge Dock is one labelled navigation group; Search and Capture are a separate
+global-actions group. Hidden, Peek, and Expanded geometry cannot remove a
+semantic command.
 
 ## A11Y-DYNAMIC-TYPE-001 — Dynamic Type without hidden meaning
 - **Concept:** `accessibility.dynamic-type`
@@ -111,7 +120,10 @@ A nonvisual chronological equivalent MUST support complete inspection without ho
 
 Jump controls MUST expose Start / Now / Next / Finish.
 
-Every command MUST support applicable Switch Control, Voice Control, hardware keyboard and focus access, native dictation, and minimum hit targets.
+Every command MUST support applicable Switch Control, Voice Control, hardware
+keyboard and focus access, and minimum hit targets. Dictation is supported only
+where the owning capability and permission contract explicitly enables it; it
+is not inferred as a Capture feature from system availability.
 
 Every gesture capability MUST expose a non-gesture equivalent.
 
@@ -133,7 +145,12 @@ State changes MUST expose semantic status, next action, retry/cancel behavior, a
 - **Verification:** `AUDIT-A11Y-PROOF-MATRIX-001`
 - **Supersedes:** none
 
-Accessibility acceptance MUST bind exact commit, device/OS, content/state fixtures, VoiceOver order/actions, Dynamic Type, reduced effects, contrast, keyboard/input, localization, failures, and known gaps.
+Accessibility acceptance MUST bind exact commit, device/OS, content/state
+fixtures, VoiceOver order/actions, Voice Control, Switch Control, Full Keyboard
+Access, hardware keyboard, Dynamic Type, reduced effects, contrast, Bold Text,
+Button Shapes, reach/handedness, RTL/localization, sensitive locked-device
+behavior, failures, and known gaps. External surfaces require their own direct
+target/device proof.
 
 Product and IA accessibility acceptance MUST require preview matrices, VoiceOver scripts, motion alternatives, large-text layouts, tap-target audits, reduced-effects checks, contrast, haptic alternatives, and direct test results for the affected behavior.
 
@@ -158,6 +175,11 @@ Automated accessibility checks MUST NOT be treated as sufficient proof on their 
 - **Supersedes:** none
 
 Source presence, unit tests, or screenshots alone are insufficient when changed interaction requires direct assistive-technology verification. The affected behavior MUST pass the applicable VoiceOver, Dynamic Type, reduced-effects, contrast, focus, and input checks.
+
+The executable planning matrix is maintained at
+`docs/qa/accessibility/RP_RECONCILIATION_ACCESSIBILITY_PLATFORM_PLAN.md`; it
+defines source, unit/integration, simulator, physical-device/manual, screenshot,
+and release proof without claiming current completion.
 
 Accessibility acceptance MUST directly verify VoiceOver order and actions.
 

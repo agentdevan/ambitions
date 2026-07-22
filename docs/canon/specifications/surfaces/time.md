@@ -3845,7 +3845,13 @@ This specification defines Time as the intended first-class temporal operating s
 - **Verification:** `PROOF-CALENDAR-GRADE-001`
 - **Supersedes:** none
 
-Time MUST target first-class replacement of ordinary personal calendar planning while expressing Protected, Fixed, Flexible, and Suggested time, capacity, conflict, and adjustment. It is neither an anti-calendar nor a calendar clone.
+Time MUST target first-class replacement of ordinary personal calendar planning
+while expressing Protected, Fixed, Flexible, and Suggested time, capacity,
+conflict, transition friction, recovery, and adjustment. It is neither an
+anti-calendar nor a calendar clone. Complete replacement is a target contract,
+not a present implementation claim; canonical Event and Schedule Placement
+identity, source operations, recurrence, and proof must exist before parity is
+claimed.
 
 Time MUST provide first-class native calendar behavior and a complete temporal operating surface.
 
@@ -3864,7 +3870,11 @@ Time MUST distinguish Protected, Fixed, flexible, capacity, and reflow states wh
 - **Verification:** `SCENARIO-TIME-VIEWS-001`, `A11Y-TIME-LIST-PARITY-001`
 - **Supersedes:** none
 
-Time view-family behavior MUST be owned by the separate switching, Day, Week, Month, Year, List, Today-control, and reduced-effects contracts and MUST preserve their independent verification boundaries.
+Week is the first-use default. After the person selects another implemented and
+supported scale, Time restores that last-used scale. Day, Week, Month, Year, and
+List remain the target family, but an unimplemented or unproven scale MUST NOT
+appear selectable. Each visible scale preserves an equivalent chronological
+list and its independent verification boundary.
 
 ## SPEC-SURFACE-TIME-DAY-001 — Direct, inspectable day planning
 
@@ -3903,13 +3913,20 @@ Ambitions Time semantics MUST alter weight, material, edge treatment, and line t
 - **Verification:** `SCENARIO-TIME-FIT-001`
 - **Supersedes:** none
 
-Time MUST answer how time is arranged, what is protected or fixed, what can move, and what happens when reality changes. It previews conflict, recurrence, deadline, external-write, and adjustment consequences before material commit. External visibility and capacity reservation remain separate; an unreviewed external candidate never appears as an Ambitions Event.
+Time MUST answer how time is arranged, what is protected or fixed, what can move,
+and what happens when reality changes. It distinguishes persisted local temporal
+records, external busy observations, proposed Goal timing, accepted Schedule
+Placements, and historical or stale chronology. It previews conflict,
+recurrence, deadline, external-write, and adjustment consequences before
+material commit. External visibility and capacity reservation remain separate;
+an unreviewed external candidate never appears as an Ambitions Event and
+computed Goal timing never appears as accepted placement.
 
 Time MUST own schedule reality, capacity, conflicts, and planning changes.
 
 Apple Calendar bridge, routing, and external-diff failures MUST affect only their related controls and MUST NOT block Ambitions-native calendar use.
 
-## SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001 — Approved Time package, separate implementation proof
+## SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001 — Provisional Time revision, separate implementation proof
 
 - **Concept:** `surface.time.visual-authority`
 - **Modality:** `MUST`
@@ -3918,7 +3935,12 @@ Apple Calendar bridge, routing, and external-diff failures MUST affect only thei
 - **Verification:** `PROOF-TIME-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and keep the selected package direction distinct from current implementation behavior. Selected VSP-04 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` is the Time visual target. Candidate naming does not change the selected product direction. The package does not demonstrate current calendar parity, direct-manipulation, SwiftUI, accessibility, device, or runtime behavior.
+Visual references MUST keep owner-authorized provisional direction distinct from
+historical packages and current implementation behavior. `AVF-TIME-S07-R01 —
+Integrated Period Atlas, Capability-Bounded` is the current provisional
+direction. The earlier VSP-04 package remains provenance only. Neither the
+direction nor the package demonstrates current calendar parity,
+direct-manipulation, SwiftUI, accessibility, device, runtime, or Figma approval.
 
 ## SPEC-SURFACE-TIME-TODAY-CONTROL-001 — Return to current temporal context
 - **Concept:** `surface.time.today-control`
@@ -3982,7 +4004,10 @@ Time visual geometry MUST preserve calendar comprehension while distinguishing t
 - **Verification:** `SCENARIO-TIME-IMPORTED-SOURCE-001`
 - **Supersedes:** none
 
-Time MUST distinguish external source facts, local candidates, accepted Ambitions Events, and pending outbound changes.
+Time MUST distinguish external source facts, proposed local candidates,
+accepted Schedule Placements, accepted Ambitions Events, historical truth,
+stale external truth, unknown truth, and pending outbound changes only when a
+durable pending-operation contract exists.
 
 ## SPEC-SURFACE-TIME-SEARCH-001 — Time search
 
@@ -4004,7 +4029,11 @@ Time search MUST be local and object-first and MUST preserve selected temporal c
 - **Verification:** `A11Y-TIME-VIEW-SWITCHING-001`
 - **Supersedes:** none
 
-Time MUST expose visible, discoverable, accessible Day, Week, Month, Year, and List switching, remember the last-used view, preserve intentional range context, and keep gestures optional accelerators.
+Time MUST expose only implemented, discoverable, accessible scales. Week is the
+first-use default; after an intentional selection, Time remembers the last-used
+supported scale, preserves range context, and keeps gestures optional
+accelerators. The future Day, Week, Month, Year, and List family may remain
+explicitly planned but unimplemented scales are not selectable.
 
 ## SPEC-SURFACE-TIME-WEEK-001 — Week view
 

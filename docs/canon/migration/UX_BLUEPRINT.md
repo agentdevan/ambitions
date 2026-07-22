@@ -1,4 +1,4 @@
-# Ambitions Canonical UX Blueprint
+# Ambitions Canonical UX Blueprint — RP-01–RP-08 Reconciled
 
 > Comprehensive screen, presentation, state, action, and requirement map for
 > product design. Legacy migration labels in this document record how the map
@@ -7,12 +7,168 @@
 
 - Blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001`
 - Canon revision: `2`
-- Canon content SHA: `db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de`
-- Source SHA: `e5d08c2d538277fc2ae7c6fd9fa09595f6e72973`
+- Canon content SHA: `24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994`
+- Source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`
 - Coverage: `0` unresolved specification gaps at generation time.
 - Requirement dispositions: `466` total; `343` visual; `123` nonvisual; SHA-256 `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`
 - Evidence boundary: this design map does not prove current source, runtime,
   accessibility, device, privacy, distribution, or release behavior.
+
+## RP-01–RP-08 owner reconciliation overlay
+
+This overlay controls current UX interpretation of the legacy screen/state
+inventory below. The inventory is retained for traceability; account,
+continuity, unsupported Capture/You, and superseded visual rows do not become
+active UI merely because their IDs remain recorded. Normative requirements and
+the accepted 2026-07-22 ADRs control behavior. Figma authorization, SwiftUI
+approval, and implementation authorization are false.
+
+### Shell and global presentation
+
+`AVF-SHELL-S07-R01` uses one shell owner for selected root, independent
+Today/Goals/Time/You paths and selections, crown, Crowned Edge Dock posture,
+global presentation, selected-root-aware depth, restoration, focus return, and
+external origin. Search and Capture are full-screen temporary global systems,
+not roots. Hidden, Peek, Expanded, labelled, opaque, mirrored, RTL,
+keyboard-aware, and lower-reach dock equivalents expose the same semantic
+commands. Framework Back, interactive Back, focus, safe areas, keyboard, and
+presentation mechanics remain intact under the explicit shell ADR boundary.
+
+Restoration has durable, in-session, and best-effort tiers. Invalid routes
+restore the deepest truthful surviving owner context and explain the fallback;
+exact scroll, cursor, field focus, keyboard, animation, and pixels are never a
+durable promise.
+
+### Goals — `AVF-GOALS-S08-R00`
+
+The current Goals anatomy is:
+
+```text
+editable Life Area index -> selected Life Area -> Goal identities
+-> inline Linked Goal Lens -> focused pursuit timeline
+```
+
+Life Area editing, order, visibility, lifecycle, and Goal membership belong to
+Goals. Goal identity precedes status. The inline lens appears below the selected
+Goal, shows at most one consequential relationship at overview depth, and
+preserves Goal ownership. Focused depth distinguishes one or multiple active
+Steps, planned uncertainty, completed/settled continuity, relationships,
+conflict, dense/very-dense chronology, Proof, recovery, and history. Search,
+Today, and Time retain canonical Goal/Step identity and route editing to Goals.
+
+### Today — `AVF-TODAY-S10-R00`
+
+The current Today anatomy is:
+
+```text
+compact crown/date -> one Start Here projection
+-> zero or one earned Also Fits Now projection
+-> Today’s Timeline -> See Full Day
+-> focused execution or owner handoff -> settlement and return
+```
+
+Start Here and Also Fits Now are typed day admissions against canonical source
+objects. They retain owner, why-now reason, day consequence, local action,
+owner route, derivation revision, and expiry. Today owns the projection and
+narrow execution affordance, not Goal/Event/Placement editing. Complex
+scheduling transfers to Time; full Goal editing transfers to Goals. Interruption,
+quiet day, stale, conflict, preview, saving, settlement, and return preserve the
+source identity. Today is not a task list, full calendar, second owner, or
+three-priority dashboard.
+
+### Time — `AVF-TIME-S07-R01`
+
+Week is the first-use default. Time restores the last-used implemented and
+supported scale after intentional selection. Day, Week, Month, Year, and List
+remain the target family; unimplemented scales are absent from selection.
+
+Time owns exact chronology, Event and Schedule Placement target identity,
+placement mutation, recurrence policy, external-source reconciliation,
+protection, flexibility, personally usable openings, transition friction,
+recovery, over-capacity, and calendar conflict. Presentation distinguishes:
+
+| Term | UX meaning |
+| --- | --- |
+| Current | Latest authoritative owner value. |
+| Proposed placement | Simulated or suggested time; not scheduled truth. |
+| Accepted placement | Time-owner commit linking object and interval. |
+| External observation | Named source fact, distinct from Ambitions acceptance. |
+| Stale external truth | Prior observation beyond its freshness rule. |
+| Historical | Former chronology retained for inspection. |
+
+Complete calendar replacement remains a target contract, never a present
+implementation claim. Search and Capture transfer temporal mutation to Time.
+
+### You — `AVF-YOU-D07-R02`
+
+The current settings-first order is Identity & Local Data; Personalization;
+Privacy & Data; Appearance; Notifications & Attention; Connections &
+Permissions; Accessibility & Interaction; App Behavior; About Ambitions.
+Ambitions is local/no-account in current flagship scope.
+
+Active rows are limited to supported display/local identity, default root,
+review cadence, on-device status, supported protected inspection, implemented
+preferences, local history/Receipt inspection, supported visibility/retention,
+System/Light/Dark, approved accents, supported notifications, Calendar,
+Reminders, Notifications, local authentication where used, system Settings
+handoff, app-specific privacy behavior, and truthful About/support data.
+Restrained violet-indigo is the default accent.
+
+Sign-in, recovery, devices, subscriptions, sign-out, account deletion,
+connected continuity, cross-device controls, What Ambitions Knows, a dedicated
+Help center, Search preferences, broad permissions, source add/remove, broad
+reset/export/delete/erase, unsupported notification controls, density,
+typography/material customization, and cross-device appearance are absent—not
+disabled rows.
+
+### Capture and Search
+
+`AVF-CAPTURE-S07-R01` is text-first and bounded: deterministic extraction,
+simple time, destination proposal, Accept/Change/Cancel, proven Quick Capture,
+and proven Capture-to-Goal handoff. Dictation, broad attachments, arbitrary
+semantics, universal conflict detection, coordinated multi-root mutation,
+partial settlement, Capture Undo, durable relaunch resume, and exact focus/
+keyboard restoration are not current baseline.
+
+`AVF-SEARCH-D07-R01` supports Find/Open/Inspect and bounded object-backed
+Understand. Act prepares and transfers a typed envelope to the canonical owner,
+which revalidates, confirms, commits, settles, and returns. Search distinguishes
+no result, read failure, unavailable/stale index, permission limitation,
+unsupported query, ambiguous object, conflict, and partial coverage.
+
+### Cross-root action boundary
+
+| Projection context | Permitted local action | Required owner handoff |
+| --- | --- | --- |
+| Today Goal/Step | Start/complete or another explicitly registered narrow command | Goal/path editing → Goals; placement → Time |
+| Today Event | Inspect or registered attendance/status action | Event/recurrence/time edit → Time |
+| Goals time context | Inspect placement/fit | Placement/conflict mutation → Time |
+| Time Goal/Step | Inspect source object | Goal/path mutation → Goals |
+| Search result | Open, Inspect, Compare, Navigate | Any domain mutation → canonical owner |
+| Capture proposal | Correct, accept handoff, change, cancel | Canonical creation/mutation → destination owner |
+| You preference projection | Inspect supported value | Preference mutation → named preference owner |
+
+### Dense and accessibility states
+
+Dense and very-dense layouts preserve object identity, consequence, owner route,
+primary action, conflict/freshness, and nonvisual chronological order. Dynamic
+Type may stack and scroll; it may not hide meaning. VoiceOver reads crown,
+context, primary object/action, secondary object, timeline, then root/global
+groups. Voice Control, Switch Control, Full Keyboard Access, hardware keyboard,
+RTL, handedness, Reduce Motion, Reduce Transparency, Increased Contrast,
+Differentiate Without Color, Bold Text, and Button Shapes receive equivalent
+semantics. Direct proof remains required.
+
+### Reconciled journey inventory
+
+1. Launch or restore → selected root → deepest truthful surviving object.
+2. Dock Peek/Expanded → root switch → independent path preservation.
+3. Global Search/Capture → owner handoff → settlement → origin return.
+4. Life Area → Goal → inline lens → pursuit timeline → owner edit/history.
+5. Today Start Here → narrow action or Goals/Time handoff → truthful settlement.
+6. Time proposed versus accepted/external placement → owner preview/commit.
+7. You supported setting → consequence/confirmation → capability-gated Receipt.
+8. Stale/conflict/failure → smallest matching recovery → focus return.
 
 ## Screens and presentations
 

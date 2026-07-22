@@ -1,11 +1,16 @@
-# Owner Rejection Rebaseline: Active Frontend Control Plane
+# Owner Rejection Rebaseline: Historical Frontend Control Plane
 
-Status: Active governance override  
+Status: Historical owner evidence; conflicting direction superseded 2026-07-22
 Installed: July 2026  
 Scope: Ambitions frontend remediation  
 Authority: Owner real-device review superseding simulator-Yellow packet closeouts
 
-This document is the active rebaseline for frontend implementation. It freezes the old Packet 4.2 continuation path and redirects future work to the P0 owner-rejection repair sequence.
+This document preserves the July 2026 real-device rejection evidence. Its shell,
+Goals, and Today prescriptions are superseded where they conflict with
+`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md` and
+`RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md`. The evidence and non-conflicting
+quality findings remain historical inputs; this file no longer authorizes an
+implementation queue.
 
 ## 1. Purpose
 
@@ -63,7 +68,7 @@ Prior Yellow / Ready For Review statuses remain historical evidence, but they ar
 - Created-object discoverability: **Red blocker**.
 - You Native Settings / Privacy Controls: **Yellow retained only for structural direction**; copy/runtime repair remains required.
 
-## 5. Active product decisions
+## 5. Historical product decisions
 
 ### 5.1 Capture is first-class but not a root tab
 

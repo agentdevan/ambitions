@@ -2100,7 +2100,11 @@ verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 - **Verification:** `SCENARIO-YOU-COMMAND-CENTER-001`
 - **Supersedes:** none
 
-You MUST be a low-scroll, searchable command center for identity, Setup & Personalization, Life Capital, preferences, automation, privacy, data, security, continuity, notifications, sources, receipts, history, and redacted diagnostics. It is not a profile feed, manifesto, help center, memory dossier, or debug console.
+You MUST be a settings-first, local/no-account personal control index for local
+identity, personalization, privacy/data, appearance, notifications, supported
+connections/permissions, accessibility interaction, app behavior, and About.
+It is not a profile feed, manifesto, help center, account console, memory
+dossier, or debug console.
 
 The local profile MUST contain the user’s name, image, preferences, and personal presentation.
 
@@ -2115,19 +2119,29 @@ You MUST represent a high-agency user who lacks a reliable life operating system
 - **Verification:** `AUDIT-YOU-ROUTES-001`
 - **Supersedes:** none
 
-You owns Account & Sync, Privacy & Security, Automation & Behavior, Notifications & Presence, Appearance, Data & Storage, Sources & Imports, Receipts & History, Diagnostics, Setup & Personalization, and Life Capital entry. Contextual Trust details remain owned by Trust inspection even when searchable archives are reachable through You.
+The root order MUST be: Identity & Local Data; Personalization; Privacy & Data;
+Appearance; Notifications & Attention; Connections & Permissions;
+Accessibility & Interaction; App Behavior; About Ambitions. Contextual Trust
+details remain owned by Trust inspection even when supported local Receipt or
+history inspection is reachable through You.
 
 Top-level sections MUST be concise and organized.
 
-Appearance SHOULD offer color, material, mood, and photo options through constrained semantic design-system controls.
+Appearance MUST offer System, Light, Dark, and approved accent families through
+constrained semantic controls. Restrained violet-indigo is the default for new
+or reset state. Density, typography, material, photo, and cross-device controls
+are absent until separately supported.
 
-You MUST provide a Data center for export, import, reset, deletion, sync, backup, storage, Receipts, History, and account data.
-
-Privacy and Data controls MUST remain distinct in You and MUST use low-scroll drilldowns.
+Privacy & Data exposes local posture, source status, supported Receipt/history
+inspection, visibility, retention, and data actions only when a shipping owner
+command exists. Broad export, erase, reset, source add/remove, backup, sync, and
+account data controls MUST NOT appear merely because future canon mentions them.
 
 You MUST NOT add a dedicated Help section.
 
-You MUST expose sync status, account status, export, account/data controls, diagnostics, and recovery controls.
+Sign-in, account recovery, devices, subscriptions, sign-out, account deletion,
+connected cloud continuity, and cross-device account controls MUST NOT appear in
+the current flagship baseline, including as disabled rows.
 
 Each level MUST be intentionally shallow and compact, usually one viewport or a short grouped list.
 
@@ -2135,7 +2149,9 @@ You’s plain groups MUST NOT obscure hierarchy or object meaning.
 
 You MUST embed education contextually and MUST NOT create a standalone Help destination.
 
-Appearance controls MUST use semantic design-system controls and MAY offer system, light, dark, accent, material-intensity, built-in-theme, photo-theme, custom-photo, and accessibility appearance choices.
+Current approved permissions are Calendar, Reminders, Notifications, and local
+authentication where used. Other permission rows remain absent until a shipping
+feature owns them.
 
 ## SPEC-SURFACE-YOU-FIRST-VIEWPORT-001 — Identity and current state first
 
@@ -2146,9 +2162,15 @@ Appearance controls MUST use semantic design-system controls and MAY offer syste
 - **Verification:** `PROOF-YOU-FIRST-VIEWPORT-001`
 - **Supersedes:** none
 
-The first viewport MUST show a quiet identity/profile summary, optional account and continuity state, privacy state, automation posture, notification state, data/security shortcuts, and settings search. Only current problems or required actions are elevated; broad stats, patterns, and diagnostics remain deeper and object-specific.
+The first viewport MUST begin with Identity & Local Data and proceed through the
+nine ordered groups. It may show display name, local profile identity, default
+root, review cadence, on-device status, and supported protected inspection.
+Only current problems or required actions are elevated; no account/continuity
+state or unsupported administration row is synthesized.
 
-You MUST prioritize local settings, personalization, privacy, learning, Source, Receipts, and account control over social, admin, or generic profile framing.
+You MUST prioritize local settings, personalization, privacy, supported source
+status, and capability-gated Receipts over social, account, admin, or generic
+profile framing.
 
 ## SPEC-SURFACE-YOU-DEPTH-001 — Useful depth without dashboard drift
 
@@ -2161,7 +2183,7 @@ You MUST prioritize local settings, personalization, privacy, learning, Source, 
 
 Life Capital, broad Patterns, learning controls, receipts/history, sync conflict, and redacted diagnostics MAY have deep inspectable routes. They MUST NOT dominate the root, expose a psychological dossier or runtime architecture, create productivity scoring, or imply account/network ownership of the private graph.
 
-## SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001 — Approved You package, separate implementation proof
+## SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001 — Provisional You revision, separate implementation proof
 
 - **Concept:** `surface.you.visual-authority`
 - **Modality:** `MUST`
@@ -2170,7 +2192,11 @@ Life Capital, broad Patterns, learning controls, receipts/history, sync conflict
 - **Verification:** `PROOF-YOU-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Selected VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target.
+Visual references MUST distinguish owner-authorized provisional direction,
+historical package provenance, and implementation evidence.
+`AVF-YOU-D07-R02 — Local Personal Control Index` is the current provisional
+direction. The earlier VSP-06 package remains historical and does not establish
+current SwiftUI, accessibility, device, runtime, or Figma approval.
 
 ## SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001 — Data control without an AI-memory dashboard
 - **Concept:** `surface.you.no-knowledge-model`
@@ -2180,7 +2206,10 @@ Visual references MUST use stable external IDs and distinguish approved design t
 - **Verification:** `AUDIT-YOU-NO-KNOWLEDGE-MODEL-001`
 - **Supersedes:** none
 
-You MUST NOT expose a user-facing model of “what Ambitions knows” or present private context as an AI memory dashboard. Searchable privacy, data, learning, automation, export, reset, deletion, sync, backup, storage, Receipt, and History controls remain available through their plain owning sections.
+You MUST NOT expose a user-facing model of “what Ambitions knows” or present
+private context as an AI memory dashboard. Only supported privacy, data,
+learning, storage, Receipt, and History controls are available through their
+plain owning sections; unsupported controls remain absent.
 
 You MUST expose privacy and data controls without presenting an explicit knowledge model that creates anxiety or resembles an AI memory dashboard.
 
@@ -2193,7 +2222,9 @@ You MUST expose privacy and data controls without presenting an explicit knowled
 - **Verification:** `SCENARIO-YOU-PROFILE-001`
 - **Supersedes:** none
 
-You MUST present user-owned profile, preference, privacy, continuity, and support controls without turning identity into hosted product authority.
+You MUST present user-owned local profile, preference, privacy, and truthful
+support controls without turning identity into hosted product authority or
+implying an Ambitions account.
 
 ## SPEC-SURFACE-YOU-APPEARANCE-001 — Appearance controls
 
@@ -2204,7 +2235,11 @@ You MUST present user-owned profile, preference, privacy, continuity, and suppor
 - **Verification:** `SCENARIO-YOU-APPEARANCE-001`
 - **Supersedes:** none
 
-Appearance controls MUST preserve system defaults, explicit user overrides, accessibility settings, preview, persistence, reset, and offline behavior.
+Appearance controls MUST preserve System, Light, Dark, approved accent choices,
+accessibility settings, persistence, reset, and offline behavior. Existing
+accent values migrate deterministically; only values that pass light/dark,
+contrast, monochrome, and state-separation review remain selectable. Accent
+cannot identify roots or semantic state alone.
 
 ## SPEC-SURFACE-YOU-DATA-CONTROLS-001 — Data controls
 
@@ -2215,7 +2250,10 @@ Appearance controls MUST preserve system defaults, explicit user overrides, acce
 - **Verification:** `SCENARIO-YOU-DATA-CONTROLS-001`
 - **Supersedes:** none
 
-You data controls MUST expose export, backup, restore, Trash, reset, diagnostics, and continuity consequences with confirmation, progress, recovery, and proof.
+You data controls MUST expose only operations with a canonical command owner,
+confirmation, progress, recovery, and proof. Unsupported broad export, backup,
+restore, erase, reset, source removal, and continuity actions remain absent;
+this requirement does not manufacture them.
 
 ## SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001 — Privacy and data boundary
 
@@ -2226,7 +2264,10 @@ You data controls MUST expose export, backup, restore, Trash, reset, diagnostics
 - **Verification:** `SCENARIO-YOU-PRIVACY-DATA-001`
 - **Supersedes:** none
 
-You MUST distinguish local private data, optional account identity, optional continuity, public reference infrastructure, and external-platform data before user action.
+You MUST distinguish local private data, supported external-source status,
+public reference infrastructure, and external-platform data before user action.
+Account identity and connected continuity are outside the current flagship
+scope and MUST NOT appear as active or disabled controls.
 
 ## SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001 — Contextual education
 
@@ -2248,7 +2289,14 @@ You SHOULD provide concise contextual education at the relevant control or state
 - **Verification:** `SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-The owning specification MUST authorize only the state-bound command labels `Create Backup`, `Delete local data permanently`, `Done`, `Export Data`, `Life Capital`, `Open diagnostics`, `Open settings`, `Reset preferences`, `Restore`, `Restore Backup`, `Review conflict`, `Review continuity status`, `Try again`, `Turn off App Lock`, `Turn on App Lock` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract.
+Structured states record a maximum design inventory and do not activate rows or
+commands. The current flagship exposes only commands with a shipping canonical
+owner and executable validation, consequence, settlement, privacy, focus, and
+proof contract. Broad backup, restore, export, permanent deletion, reset,
+continuity, account, entitlement, and unsupported diagnostic commands remain
+absent. Supported App Lock and system Settings handoffs may appear when their
+owners exist. Receipt and Undo follow the operation registry and cannot be
+inferred from a structured label.
 
 ## SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001 — Entitlement commands fail closed without a product registry
 
@@ -2259,7 +2307,11 @@ The owning specification MUST authorize only the state-bound command labels `Cre
 - **Verification:** `SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-`You → Account & Sync → Plan & Purchases` MUST expose `View Plans`, `Purchase`, `Restore Purchases`, `Check Again`, `Review Account`, `Manage Subscription`, and `Done`.
+This entitlement contract is future-only historical design inventory. The
+current local/no-account flagship MUST NOT expose Account & Sync, plans,
+purchase, restore, account review, subscription management, or entitlement
+status, including as disabled rows. Reactivation requires a separate product
+and architecture decision; the contract below does not create that approval.
 
 `Purchase` is authorized only for a separately registered, validated StoreKit product. This contract MUST NOT create a SKU, price, plan, paywall, trial promise, or paid-feature boundary. StoreKit owns the purchase sheet; cancellation changes nothing. Verified success may persist only non-sensitive transaction/entitlement state and a Receipt.
 
@@ -2273,7 +2325,10 @@ Entry focuses current status. Purchase/restore success focuses verified status; 
 ## Completeness contract
 
 <!-- canon-section: purpose-user-question -->
-You answers what Ambitions knows or is allowed to do, what the user controls, how private data is handled, and where personal-system settings and evidence can be inspected or changed.
+You answers which supported local capabilities Ambitions is allowed to use,
+what the user controls, how private data is handled, and where supported
+personal settings and evidence can be inspected or changed. It does not expose
+a “what Ambitions knows” model.
 
 <!-- canon-section: entry-exit -->
 Entry is root selection, settings Search, permission/account/diagnostic handoff, notification deep link, or restoration. Exit uses native back/root switching while preserving query, group, detail state, unsaved edits, and focus.
@@ -2363,7 +2418,11 @@ Major settings areas MUST open as focused full-screen native drilldowns with low
 - **Verification:** `REVIEW-SPEC-SURFACE-YOU-TIME-PREFERENCES-001`
 - **Supersedes:** none
 
-You MUST expose searchable Time preferences for week start, time format, working bounds, default duration, alerts, schedule state/reflow rule, time zone, transition buffers, import sources, and visual density.
+You MUST expose only implemented searchable Time preferences with a canonical
+preference owner. Week start, time format, working bounds, default duration,
+alerts, schedule/reflow rule, time zone, transition buffers, and import-source
+preferences appear only where supported. Visual density is not in the current
+flagship baseline.
 
 ## SPEC-SURFACE-YOU-CEBR-TRUST-001 — You exposes branch trust controls
 

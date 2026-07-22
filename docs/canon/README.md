@@ -40,10 +40,10 @@ for implementation agents and repository tooling.
 
 ## Design canon and references
 
-- [Visual System R1](design/VISUAL_SYSTEM_R1.md) is the selected cross-surface
-  visual direction: stable anatomy, structure/semantics/atmosphere layers,
-  typography, spatial rhythm, component grammar, appearance, motion, and
-  accessibility.
+- [Visual System R1](design/VISUAL_SYSTEM_R1.md) records the reconciled
+  provisional cross-surface direction and historical Revision 1 provenance.
+  Figma authorization, SwiftUI approval, and implementation authorization are
+  false.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;
@@ -62,6 +62,15 @@ must still pass the applicable build, behavioral, UI, accessibility, privacy,
 data-safety, and performance checks.
 
 ## Research and architecture references
+
+- The accepted 2026-07-22 reconciliation ADRs define
+  [shell/navigation/restoration](../adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md),
+  [canonical identity and projection](../adr/ADR-2026-07-22-canonical-identity-ownership-projection.md),
+  [truth/mutation/global authority](../adr/ADR-2026-07-22-truth-mutation-and-global-authority.md),
+  and [local-first recovery/accessibility/platform scope](../adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md).
+- The [reconciled flagship reconstruction plan](../qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md)
+  owns dependency sequencing; the adjacent traceability and supersession
+  registers preserve the authority graph and historical evidence.
 
 - [CEBR-01 research package](references/research/cebr-01/README.md) preserves
   the product invention and technical design behind certified executable

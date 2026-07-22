@@ -828,25 +828,26 @@ This specification defines intended app-shell composition.
 - **Verification:** `SCENARIO-APP-SHELL-ROOT-001`, `SCENARIO-APP-SHELL-DEPTH-002`
 - **Supersedes:** none
 
-The shell MUST render one root-dock instance for the persistent roots declared by `CONST-IA-ROOT-001`. It must not redefine, rename, reorder by inference, or add to that constitutional set. The dock is present only at root depth and leaves when the route enters a drilldown, full-screen Capture, deep inspection, or a deep Time state whose owning specification requires immersive presentation. Native back behavior and edge-swipe return remain available at drilldown depth.
+The shell MUST have one state owner for the selected root, four independent
+root-local paths and selections, global presentation, crown context, dock
+posture, selected-root-aware depth, editing presentation, restoration, focus
+return, and external origin. Depth and chrome MUST derive only from the selected
+root path; an inactive root cannot drive active-root chrome.
 
-The default root treatment is icon-only. Plain accessible labels remain available to assistive technology and may become visible only for onboarding, long-press disclosure, or an evidence-backed comprehension fallback. Long press is never the only way to learn or activate a root.
+The target root selector is the right-edge Crowned Edge Dock defined by
+`AVF-SHELL-S07-R01`. It exposes Today, Goals, Time, and You in constitutional
+order and separately exposes global Search and Capture. Search and Capture are
+full-screen temporary presentations, never roots, tabs, inboxes, or canonical
+stores. The dock is planned architecture until reconstruction and direct proof;
+current source presence does not establish compliance.
 
-Capture MUST NOT be a tab.
-
-The root dock MUST contain four icon-only root controls and MUST appear only at root depth.
-
-Capture MUST NOT be a tab, destination, inbox, or permanent root state.
-
-Capture MUST NOT become a root destination or content category.
-
-The root dock MUST contain four icon-only controls for Today, Goals, Time, and You.
-
-The root dock MUST appear only at root and MUST dissolve or leave in drilldowns, full-screen Capture, deep inspection, and appropriate deep Time states.
-
-The root shell MUST NOT add roots beyond Today, Goals, Time, and You.
-
-Root MUST have bottom navigation at rest, but it collapses/dissolves in drilldowns, composer, inspection, and Time zoom.
+The dock MUST implement Hidden, Peek, Expanded, labelled accessibility, opaque
+Reduce Transparency, mirrored handedness, RTL, keyboard-aware, and lower-reach
+equivalents through one shell-owned posture model. Assistive use MUST expose
+labelled selection and actions without requiring edge discovery, drag, long
+press, position, color, material, or motion. Native Back and the leading-edge
+interactive gesture remain framework-owned and cannot be intercepted by dock
+geometry after mirroring.
 
 ## SPEC-APP-SHELL-GLOBAL-ACTIONS-001 — Integrated global-action access
 
@@ -857,11 +858,14 @@ Root MUST have bottom navigation at rest, but it collapses/dissolves in drilldow
 - **Verification:** `SCENARIO-APP-SHELL-GLOBAL-ACTIONS-001`, `AUDIT-APP-SHELL-DUPLICATE-CONTROL-001`
 - **Supersedes:** none
 
-The shell MUST provide integrated, context-appropriate access to the constitutionally non-root global systems. It MUST NOT create an additional dock position, persistent floating button, duplicate first-viewport control, or alternate mutation owner. The global system specifications own their behavior and data; the shell owns only entry, presentation handoff, return context, focus transfer, and duplicate-control prevention.
+The shell MUST provide Crowned Edge Dock access to the constitutionally
+non-root global systems without making either a root or alternate mutation
+owner. The shell owns entry, full-screen presentation containment, origin,
+return context, focus transfer, and duplicate-control prevention. Search and
+Capture own their session state and transfer mutations to canonical owners.
 
-Capture SHOULD use a root-chrome action and MUST NOT use a persistent floating-plus control that obscures content.
-
-Capture MAY remain visible at root depth and MUST hide in drilldowns.
+No duplicate first-viewport or floating action may obscure content. Alternate
+keyboard and accessibility commands invoke the same global presentation owner.
 
 ## SPEC-APP-SHELL-FIRST-VIEWPORT-001 — Product object dominates shell chrome
 
@@ -876,7 +880,10 @@ The shell MUST reserve system safe areas for status, compact contextual actions,
 
 A floating plus button MUST NOT obscure content.
 
-A product object MUST dominate shell chrome, and the first viewport MUST avoid a heavy header or context crown.
+A product object MUST dominate shell chrome. The compact semantic crown may
+identify the selected root or focused object and its contextual actions, but it
+must not become a heavy header, duplicate owner, or obstacle to native Back,
+Dynamic Type, safe areas, keyboard focus, or localization.
 
 ## APP-SHELL-STATE-001 — Shell state follows route state
 
@@ -887,7 +894,17 @@ A product object MUST dominate shell chrome, and the first viewport MUST avoid a
 - **Verification:** `SCENARIO-APP-SHELL-STATE-001`, `SCENARIO-APP-SHELL-RESTORE-001`
 - **Supersedes:** none
 
-Shell state MUST be derived from the current route and presentation depth. It distinguishes root, drilldown, full-screen overlay, compact modal, deep inspection, restoration, and unavailable-route states. It preserves the prior root and return focus while a non-root presentation is active. A shell transition cannot mutate canonical product data; accepted product actions remain subject to the constitutional runtime sequence.
+Shell state MUST distinguish selected root, each root-local path and selection,
+global Search/Capture presentation, crown, dock posture, selected-root-aware
+depth, editing presentation, restoration, focus return, and external origin. It
+also distinguishes root, drilldown, full-screen overlay, compact modal, deep
+inspection, restoration, and unavailable-route presentation states. A shell
+transition cannot mutate canonical product data; accepted product actions
+remain subject to the constitutional runtime sequence.
+
+Detailed native/custom ownership, dock state, gesture arbitration, restoration,
+external-entry, and focus contracts are accepted in
+`docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md`.
 
 ## APP-SHELL-FAILURE-001 — Shell failure preserves a usable local root
 

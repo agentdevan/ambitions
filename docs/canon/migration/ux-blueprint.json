@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "db368baa635607989140edc8c48c9575dc5ab035eb5b857c5d13cf3b94b7e2de",
+  "canon_content_sha": "24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994",
   "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [
@@ -9613,24 +9613,27 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: active primary object before Capture, Search, and root navigation; active destination and state are announced.",
-        "Keyboard and focus: Root app shell enters at the active primary object; Capture, Search, and root navigation follow in the same semantic order, and dismissal restores the invoking object.",
-        "Large text: the root stage reflows Capture action, Search action, active root, root dock and every command without horizontal scrolling",
-        "Reduced effects: Root app shell keeps its Capture action hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: semantic crown, active primary object, root content, labelled root-navigation group, then separate Search and Capture global-actions group.",
+        "Focus: cross-presentation return uses a stable semantic focus ID and deepest truthful fallback; geometry never removes a command.",
+        "Large text and keyboard: content reflows and remains unobscured; dock posture adapts without changing ownership.",
+        "Reduced effects: opaque, labelled, non-motion equivalents preserve selected root and every action."
       ],
       "blueprint_id": "UX-SCREEN-APP-SHELL-ROOT",
       "entry": "Successful local launch or return from depth.",
       "exit": "Switch root, open Capture or Search, or enter object depth.",
       "implementation_status": "design_input_only",
       "objects": [
-        "Capture action",
-        "Search action",
         "active root",
-        "root dock"
+        "semantic crown",
+        "Crowned Edge Dock",
+        "Search action",
+        "Capture action",
+        "root-local path",
+        "restoration record"
       ],
       "presentation": "root stage",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Hold exactly Today, Goals, Time, and You in one native object Stage with integrated global actions.",
+      "purpose": "Hold Today, Goals, Time, and You under one shell owner with a Crowned Edge Dock target, independent paths, semantic crown, and separate global Search and Capture presentations.",
       "requirement_ids": [
         "APP-NAVIGATION-RESTORATION-001",
         "APP-NAVIGATION-STATE-001",
@@ -9662,7 +9665,7 @@
       ],
       "scope": "app-shell",
       "state_model_id": "UX-STATE-MODEL-APP-SHELL-ROOT",
-      "swiftui_anatomy": "Stage container with one root NavigationStack per restoration contract, safe-area-aware content, and semantic root controls.",
+      "swiftui_anatomy": "Architecture input only: one native-compatible root-selection owner, independent native navigation stacks, shell-owned crown/dock/global presentation, and typed restoration; no implementation is authorized.",
       "title": "Root app shell"
     },
     {
@@ -9738,24 +9741,26 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: Capture composer, Capture draft, attachment, editable type, plain text, current consequence, then Add attachment",
-        "Keyboard and focus: Capture composer enters at Capture draft; dismissal follows Save, Save for Later, keep draft, or confirmed discard returns to exact prior context.",
-        "Large text: the full-screen composer reflows Capture draft, attachment, editable type, plain text and every command without horizontal scrolling",
-        "Reduced effects: Capture composer keeps its Capture draft hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: expression, bounded interpretation, uncertainty, destination, consequence, Change, Accept, Cancel.",
+        "Focus: correction returns to the disputed fragment; dismissal returns to the valid origin or owner fallback.",
+        "Large text and keyboard: expression, consequence, and all actions remain visible or scrollable above the keyboard.",
+        "Reduced effects: interpretation and settlement changes are immediate, labelled, and non-color-dependent."
       ],
       "blueprint_id": "UX-SCREEN-CAPTURE-COMPOSER",
       "entry": "Global create action or context-specific creation route.",
-      "exit": "Save, Save for Later, keep draft, or confirmed discard returns to exact prior context.",
+      "exit": "Accept a proven owner handoff, Change the interpretation, Cancel to the deepest truthful origin, or receive an owner settlement result.",
       "implementation_status": "design_input_only",
       "objects": [
-        "Capture draft",
-        "attachment",
-        "editable type",
-        "plain text"
+        "Capture session draft",
+        "original expression",
+        "bounded interpretation",
+        "destination proposal",
+        "origin",
+        "owner-transfer envelope"
       ],
       "presentation": "full-screen composer",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Preserve messy life intent immediately in a calm plain-text-first composer with visible editable interpretation.",
+      "purpose": "Provide bounded text-first interpretation, correction, consequence preview, and transfer to a proven canonical owner without becoming a mutation owner.",
       "requirement_ids": [
         "FRONTEND-005",
         "LAW-IA-NONROOT-001",
@@ -9775,7 +9780,7 @@
       ],
       "scope": "capture",
       "state_model_id": "UX-STATE-MODEL-CAPTURE-COMPOSER",
-      "swiftui_anatomy": "Full-screen NavigationStack with TextEditor, FocusState, attachment strip, type menu, and bottom safe-area actions.",
+      "swiftui_anatomy": "Full-screen temporary composer target with text entry and owner transfer; dictation, broad attachments, arbitrary semantics, partial settlement, Capture Undo, and durable relaunch recovery are absent from the current baseline.",
       "title": "Capture composer"
     },
     {
@@ -10036,24 +10041,25 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: Goals root, Goal, Life Area, Proof, Recovery Segment, current consequence, then Create Goal",
-        "Keyboard and focus: Goals root enters at Goal; dismissal follows Switch root, open Capture or Search, select Life Area, or create Goal.",
-        "Large text: the root surface reflows Goal, Life Area, Proof, Recovery Segment and every command without horizontal scrolling",
-        "Reduced effects: Goals root keeps its Goal hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: Goals crown, Life Area identity, Goal identity, selected Goal lens, active/planned/completed pursuit state, then actions.",
+        "Focus: return resolves the selected Goal or Life Area without substituting another object.",
+        "Large text: dense and very-dense paths become an ordered vertical chronology with no hidden status or action.",
+        "Reduced effects: completion, conflict, and continuity use labels and structure rather than motion or color alone."
       ],
       "blueprint_id": "UX-SCREEN-GOALS-ROOT",
       "entry": "Select Goals from root dock or return from Goals depth.",
-      "exit": "Switch root, open Capture or Search, select Life Area, or create Goal.",
+      "exit": "Select a Life Area, select a Goal, reveal its inline lens, enter focused pursuit depth, or invoke global Search/Capture.",
       "implementation_status": "design_input_only",
       "objects": [
-        "Goal",
         "Life Area",
-        "Proof",
-        "Recovery Segment"
+        "Goal",
+        "Goal Path",
+        "Step",
+        "Linked Goal Lens"
       ],
       "presentation": "root surface",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Present a calm life-area-first direction index with current and Recommended step rather than metrics, boards, or a dashboard.",
+      "purpose": "Present an editable Life Area index leading to selected-area Goal identities, inline Linked Goal Lens, and focused pursuit continuity.",
       "requirement_ids": [
         "CONST-IA-ROOT-001",
         "FRONTEND-005",
@@ -10090,7 +10096,7 @@
       ],
       "scope": "goals",
       "state_model_id": "UX-STATE-MODEL-GOALS-ROOT",
-      "swiftui_anatomy": "Root NavigationStack with native ScrollView or List, semantic Life Area rows, and integrated shell actions.",
+      "swiftui_anatomy": "Blueprint anatomy: editable Life Area index, selected Life Area depth, Goal identity rows, one inline Linked Goal Lens, and an ordered semantic pursuit timeline; no UI implementation is authorized.",
       "title": "Goals root"
     },
     {
@@ -10278,24 +10284,26 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: Search entry, local suggestion, query, recent context, search scope, current consequence, then Close Search",
-        "Keyboard and focus: Search entry enters at local suggestion; dismissal follows Dismiss to exact origin or proceed to results and object depth.",
-        "Large text: the full-screen non-root search reflows local suggestion, query, recent context, search scope and every command without horizontal scrolling",
-        "Reduced effects: Search entry keeps its local suggestion hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: query, coverage/freshness, result identity and owner, consequence, available non-mutating or owner-transfer actions.",
+        "Focus: owner return resolves the stable result or truthful origin fallback.",
+        "Large text: result provenance, failure, and actions reflow without semantic truncation.",
+        "Reduced effects: result/failure/transfer changes are labelled and announced without motion dependence."
       ],
       "blueprint_id": "UX-SCREEN-SEARCH-ROOT",
       "entry": "Integrated global Search or owning-surface scoped Search.",
-      "exit": "Dismiss to exact origin or proceed to results and object depth.",
+      "exit": "Open or inspect a canonical result, transfer prepared action to its owner, or dismiss to the deepest truthful origin.",
       "implementation_status": "design_input_only",
       "objects": [
-        "local suggestion",
         "query",
-        "recent context",
-        "search scope"
+        "canonical result",
+        "owner identity",
+        "provenance",
+        "freshness",
+        "owner-transfer envelope"
       ],
       "presentation": "full-screen non-root search",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Begin local Find / Act / Inspect with query focus and useful local suggestions rather than chatbot framing.",
+      "purpose": "Provide local Find, bounded object-backed Understand, Inspect, and owner-routed Act with distinct empty, failure, stale, permission, ambiguity, conflict, and partial-coverage states.",
       "requirement_ids": [
         "FRONTEND-005",
         "LAW-IA-NONROOT-001",
@@ -10312,7 +10320,7 @@
       ],
       "scope": "search",
       "state_model_id": "UX-STATE-MODEL-SEARCH-ROOT",
-      "swiftui_anatomy": "NavigationStack with searchable modifier, FocusState, search scopes or filters, and deterministic suggestion list.",
+      "swiftui_anatomy": "Full-screen non-root Search target with deterministic results and typed owner handoff; Search never commits a domain mutation and query relaunch persistence is not promised.",
       "title": "Search entry"
     },
     {
@@ -10643,24 +10651,25 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: Time Week, Event, Reminder, Schedule Placement, Step, current consequence, then Create Event",
-        "Keyboard and focus: Time Week enters at Event; dismissal follows Open object, create, manipulate, switch view, or return Today.",
-        "Large text: the native week grid with semantic alternatives reflows Event, Reminder, Schedule Placement, Step and every command without horizontal scrolling",
-        "Reduced effects: Time Week keeps its Event hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: selected week, chronological object identity, accepted/proposed/external/stale state, protection/flexibility, consequence, actions.",
+        "Focus: view changes and owner transfers preserve the selected temporal range or truthful current-period fallback.",
+        "Large text: the semantic chronological list is complete and does not require grid interpretation.",
+        "Reduced effects: temporal state and conflicts use labels, boundaries, and values rather than motion/material alone."
       ],
       "blueprint_id": "UX-SCREEN-TIME-WEEK",
-      "entry": "Select Week from Time view switcher or navigate from Day.",
+      "entry": "First use of Time, explicit Week selection, or restoration of Week as the last-used supported scale.",
       "exit": "Open object, create, manipulate, switch view, or return Today.",
       "implementation_status": "design_input_only",
       "objects": [
         "Event",
-        "Reminder",
+        "Event occurrence",
         "Schedule Placement",
-        "Step"
+        "Step reference",
+        "external observation"
       ],
       "presentation": "native week grid with semantic alternatives",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Compare protected, fixed, flexible, suggested, capacity, conflict, recovery, and movement across a week.",
+      "purpose": "Use Week as the first-use Time scale and distinguish accepted placement, proposed placement, external observation, stale truth, protection, flexibility, capacity, recovery, and conflict.",
       "requirement_ids": [
         "FRONTEND-005",
         "PLATFORM-CALENDAR-REPLACEMENT-001",
@@ -10672,7 +10681,7 @@
       ],
       "scope": "time",
       "state_model_id": "UX-STATE-MODEL-TIME-WEEK",
-      "swiftui_anatomy": "ScrollView-based grid with native gestures, accessible move and resize actions, and conflict preview sheets.",
+      "swiftui_anatomy": "Target native week chronology with a complete semantic list equivalent; unimplemented scales and canonical Event/Placement operations remain capability-gated.",
       "title": "Time Week"
     },
     {
@@ -10745,24 +10754,25 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: context, Start here and fit, primary action, boundaries, next fixed point, then temporal rail.",
-        "Keyboard and focus: Today Reality Window enters at Start here; dismissal follows Switch root, open Capture or Search, select object, Start now, or hand off to Time.",
-        "Large text: the root surface reflows Start here, fixed point, protected boundary, temporal rail and every command without horizontal scrolling",
-        "Reduced effects: Today Reality Window keeps its Start here hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order: crown/date, Start Here identity/reason/consequence/action, optional Also Fits Now, boundaries, timeline, See Full Day, root navigation.",
+        "Focus: settlement or owner return resolves the same canonical source object or deepest truthful fallback.",
+        "Large text: projections and timeline stack without creating equal-priority cards or hiding the owner route.",
+        "Reduced effects: interruption, stale, conflict, and settlement remain explicit without motion or color dependence."
       ],
       "blueprint_id": "UX-SCREEN-TODAY-ROOT",
       "entry": "Select Today from root dock or launch into the restored root.",
-      "exit": "Switch root, open Capture or Search, select object, Start now, or hand off to Time.",
+      "exit": "Invoke a narrow registered action, hand Goal editing to Goals, hand scheduling to Time, open full-day chronology, or invoke global Search/Capture.",
       "implementation_status": "design_input_only",
       "objects": [
-        "Start here",
-        "fixed point",
+        "Start Here admission",
+        "Also Fits Now admission",
+        "canonical source object",
         "protected boundary",
-        "temporal rail"
+        "Today timeline"
       ],
       "presentation": "root surface",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Answer what reality can hold around now and what the user should act on next through one calm Reality Window.",
+      "purpose": "Present one dominant Start Here admission, at most one earned Also Fits Now admission, Today’s Timeline, focused execution, and canonical-owner handoff.",
       "requirement_ids": [
         "CONST-IA-ROOT-001",
         "FRONTEND-005",
@@ -10798,7 +10808,7 @@
       ],
       "scope": "today",
       "state_model_id": "UX-STATE-MODEL-TODAY-ROOT",
-      "swiftui_anatomy": "Root NavigationStack with ScrollView, primary Start here component, compressed temporal rail, and integrated shell actions.",
+      "swiftui_anatomy": "Blueprint anatomy: compact crown/date, one Start Here projection, zero or one Also Fits Now projection, timeline overview, and See Full Day; Today stores no duplicate task.",
       "title": "Today Reality Window"
     },
     {
@@ -11170,26 +11180,29 @@
     },
     {
       "accessibility": [
-        "VoiceOver order: You root, account status, automation posture, identity summary, notification status, privacy state, settings search, current consequence, then Open Account and Sync",
-        "Keyboard and focus: You root enters at account status; dismissal follows Switch root, Search settings, or open a specific group.",
-        "Large text: the root command center reflows account status, automation posture, identity summary, notification status, privacy state, settings search and every command without horizontal scrolling",
-        "Reduced effects: You root keeps its account status hierarchy and consequence with immediate state changes and opaque grouping"
+        "VoiceOver order follows the nine locked groups and announces only supported value, consequence, and action.",
+        "Focus: return resolves the initiating setting or group heading.",
+        "Large text: title, subtitle, value, consequence, and control stack without trailing-value noise.",
+        "Reduced effects: selection and changed state use native labels/values and opaque grouping."
       ],
       "blueprint_id": "UX-SCREEN-YOU-ROOT",
       "entry": "Select You from root dock or return from settings depth.",
-      "exit": "Switch root, Search settings, or open a specific group.",
+      "exit": "Open a supported setting or system Settings handoff, Search supported settings, or switch root.",
       "implementation_status": "design_input_only",
       "objects": [
-        "account status",
-        "automation posture",
-        "identity summary",
-        "notification status",
-        "privacy state",
-        "settings search"
+        "Identity & Local Data",
+        "Personalization",
+        "Privacy & Data",
+        "Appearance",
+        "Notifications & Attention",
+        "Connections & Permissions",
+        "Accessibility & Interaction",
+        "App Behavior",
+        "About Ambitions"
       ],
       "presentation": "root command center",
       "proof_ceiling": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof.",
-      "purpose": "Show identity, preferences, automation, privacy, data, security, sync, notifications, sources, receipts, history, and diagnostics with quiet hierarchy.",
+      "purpose": "Provide a local/no-account settings-first control index with only supported identity, personalization, privacy/data, appearance, notifications, permissions, accessibility, behavior, and About capabilities.",
       "requirement_ids": [
         "CONST-IA-ROOT-001",
         "FRONTEND-005",
@@ -11227,7 +11240,7 @@
       ],
       "scope": "you",
       "state_model_id": "UX-STATE-MODEL-YOU-ROOT",
-      "swiftui_anatomy": "Root NavigationStack with searchable List or Form groups and contextual status rows.",
+      "swiftui_anatomy": "Native settings hierarchy in the nine locked groups; unsupported account, permission, data, notification, Help, knowledge-model, and appearance rows are absent rather than disabled.",
       "title": "You root"
     },
     {
@@ -11465,13 +11478,6 @@
     },
     "subordinate_content": [
       {
-        "content_id": "optional-account",
-        "purpose": "Present the optional account choice as revisitable setup content, never as lifecycle completion.",
-        "requirement_ids": [
-          "APP-ACCOUNT-LAUNCH-001"
-        ]
-      },
-      {
         "content_id": "permissions-choice",
         "purpose": "Present contextual permission choices as subordinate setup content without changing lifecycle identity.",
         "requirement_ids": [
@@ -11502,11 +11508,11 @@
     },
     {
       "path": "docs/canon/specifications/app/launch-and-setup.md",
-      "sha256": "e9c45663b40068e68085f9c9a8e6b9853a3e6f37ec71e09c6caa108e7bf3a13e"
+      "sha256": "5fc9b04bf6f6f858503dcec837ae59899882b98445d39d42e14d8e8012ef1cae"
     },
     {
       "path": "docs/canon/specifications/app/navigation.md",
-      "sha256": "2fb7280f07513fe7b878f706a6ff403cb58f676eb464e5be980831fb078a2bb8"
+      "sha256": "738c9896d94223306b090dfa96ac9100a2ff7d0ba9b908022df88dc660d77f18"
     },
     {
       "path": "docs/canon/specifications/app/permissions.md",
@@ -11514,11 +11520,11 @@
     },
     {
       "path": "docs/canon/specifications/app/shell.md",
-      "sha256": "1d2add768b106a74e8fd01c70f98287ed8e1999e67cf2ccf0ebf2277944388a9"
+      "sha256": "1c4af75a97c91e9324f9d66ee8409facb2fd738f495ad5895832e09645310d36"
     },
     {
       "path": "docs/canon/specifications/global/capture.md",
-      "sha256": "f9b4068055b1ae411709c6e9c6b1d2e1eb68488fdbcfe67b69f78706cfb75bce"
+      "sha256": "c2267372adce783060b6e94ccb56ac69d0621fb52ef23eddee9ff7f9000241a3"
     },
     {
       "path": "docs/canon/specifications/global/motion.md",
@@ -11526,7 +11532,7 @@
     },
     {
       "path": "docs/canon/specifications/global/search.md",
-      "sha256": "ce5ab2105d986e235a8fda76b4ba96f84efea3fe7af30f18abb3e4e9bdfc28be"
+      "sha256": "0a5abee22fb11809f7f85f9e5ba0ea841e6ce89ce40d3a66eb9896067f8bfc26"
     },
     {
       "path": "docs/canon/specifications/global/trust-inspection.md",
@@ -11590,7 +11596,7 @@
     },
     {
       "path": "docs/canon/specifications/objects/event.md",
-      "sha256": "8bf29b807797dc6a6a9d1ea958357192cc004a276592ccacd5047c84233bfa63"
+      "sha256": "64f30d6edb541b52f054f1215968fe5fe7bf283979d368013b725fd7f6e63120"
     },
     {
       "path": "docs/canon/specifications/objects/goal-path.md",
@@ -11610,7 +11616,7 @@
     },
     {
       "path": "docs/canon/specifications/objects/life-area.md",
-      "sha256": "a6f61332dab58c2dacb8fdf8bb95f92128120681961a0f56e6e3175e06e104a2"
+      "sha256": "b067320fcda2e24e311fd0f97261a5dd097e1032a23780b6c2517dd2230df1ea"
     },
     {
       "path": "docs/canon/specifications/objects/life-branch.md",
@@ -11630,7 +11636,7 @@
     },
     {
       "path": "docs/canon/specifications/objects/receipt.md",
-      "sha256": "ec7e1cd1772756d4157f220f17c91b140c7e47ccec35f9db916930c176cd0677"
+      "sha256": "fd16293116f079923ac7e84f572d34b0baf4164e9a72503a1af1f6b0a53c3ada"
     },
     {
       "path": "docs/canon/specifications/objects/recovery-segment.md",
@@ -11646,7 +11652,7 @@
     },
     {
       "path": "docs/canon/specifications/objects/schedule-placement.md",
-      "sha256": "15c90632cd22a7b9c1ae2cd3001a71a0a162f808c342d25ee7697d9e821b3dfd"
+      "sha256": "9a0d65a77b7f09b3f6276c0b3443f114d1e713b148845d8aa243dd26e4de54ef"
     },
     {
       "path": "docs/canon/specifications/objects/source-reference.md",
@@ -11658,23 +11664,23 @@
     },
     {
       "path": "docs/canon/specifications/surfaces/goals.md",
-      "sha256": "8498fe67257d0375e5fbfc01a989aff4aec18f7214f0e5563495b689d3483273"
+      "sha256": "a11daed14e56dd7e2a5675e78aa19d73e027f7f951be1abedd8d77ac47261192"
     },
     {
       "path": "docs/canon/specifications/surfaces/time.md",
-      "sha256": "30c27a2ebfc583121b753620dd703043de43374efc711c6a1743c71a08f61ea6"
+      "sha256": "245fd7732fc9ede5fce0dda8904bc5f41c7772cd66e532c6a012a8147b3c2780"
     },
     {
       "path": "docs/canon/specifications/surfaces/today.md",
-      "sha256": "aa9c88bb5c52fe19882a9b55f01dc09f9da9583d6dbfa4df298e121a725dc67a"
+      "sha256": "c7d08aaa9967ced5c9e9a38ca95ab9e799a06b4d42b6d11f872380389f1260ed"
     },
     {
       "path": "docs/canon/specifications/surfaces/you.md",
-      "sha256": "c51a5874ab05855e0d074ecb16b71e3750c3f6812c354453f2fd0bdbb0c77723"
+      "sha256": "93e50abee99fa8904c06fe6265563e940404e41cbd17940d343c7015bb38434b"
     },
     {
       "path": "docs/canon/specifications/systems/apple-ecosystem.md",
-      "sha256": "d8c0bcdaf849b6c4fe1fec5f960e56b994d8329d502a1c1cfa05b95673c0945b"
+      "sha256": "89f18c0aecd1823136b4b8d21163f03ea00d80d859593909c20a58c37a2b0e30"
     },
     {
       "path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md",
@@ -11698,7 +11704,7 @@
     },
     {
       "path": "docs/canon/specifications/systems/persistence-and-replay.md",
-      "sha256": "bc90325417bb10624defb66f383e7b2dcce5dd04e5394f66dd52d5c781070f4a"
+      "sha256": "99ba89414c1078d192c2c26f40b22089886f8ae2ff991b0761635f3be4504f79"
     },
     {
       "path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
@@ -11706,7 +11712,7 @@
     },
     {
       "path": "docs/canon/specifications/systems/private-life-runtime.md",
-      "sha256": "eba07c64799ac1f3ecb5f4615a1a0f811ac5ea52499627ba15c358bcc40bbe54"
+      "sha256": "38affb3836f6fec3b05857a4755e9b0b6e9948c18ec85e0f1c6d69cffa2def3c"
     },
     {
       "path": "docs/canon/specifications/systems/scheduling-and-capacity.md",
@@ -11722,7 +11728,7 @@
     },
     {
       "path": "docs/canon/standards/accessibility.md",
-      "sha256": "be52f87ee431739924e8f90d79a559ecd9f1299967e6bbef5d1fa043ae546aaf"
+      "sha256": "4ee9e7d249562e445520bc37e83773ee19702de8d459dc3561ddf34363b057a8"
     },
     {
       "path": "docs/canon/standards/copy-and-state-language.md",
@@ -11753,7 +11759,7 @@
       "sha256": "dbe65a4eecca76a869b5bcf550b3ca9806fabe51714fcb481b65ad6ce325919f"
     }
   ],
-  "source_sha": "e5d08c2d538277fc2ae7c6fd9fa09595f6e72973",
+  "source_sha": "0e894407a38759f69d2a3e48111bae67720794b0",
   "specification_gaps": [],
   "state_models": [
     {
@@ -74580,5 +74586,5 @@
     }
   ],
   "status": "design_input_non_authoritative",
-  "title": "Ambitions requirement-linked canonical UX blueprint"
+  "title": "Ambitions Canonical UX Blueprint — RP-01–RP-08 Reconciled"
 }

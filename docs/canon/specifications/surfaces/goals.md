@@ -2019,9 +2019,12 @@ verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
 
 Goals MUST organize direction through editable Life Areas and living Goal Paths, answering what the user is building, where they are on the path, and the next meaningful movement. It must preserve proof, recovery, Future Steps, schedule fit, and closure without exposing runtime architecture.
 
-Goals MUST begin with editable Life Areas, MUST open into Life Area operating pages, and MUST expose each Goal as a living operating object with a horizontal Goal Path.
-
-Goals SHOULD combine grouped Life Area sections, a visual overview, and drilldown lists and details.
+Goals MUST begin with a living editable Life Area index, open a selected Life
+Area, present stable Goal identities within it, reveal an inline Linked Goal
+Lens beneath the selected Goal, and then enter a focused continuous pursuit
+timeline. The lens preserves Goal ownership and shows at most one consequential
+relationship at overview depth. It cannot become a separate root, object owner,
+or decorative constellation.
 
 ## SPEC-SURFACE-GOALS-ANTI-PATTERNS-001 — No dashboard or project board drift
 
@@ -2043,11 +2046,16 @@ Goals MUST NOT become a metrics dashboard, project-management board, generic lis
 - **Verification:** `AUDIT-GOALS-ROUTES-001`
 - **Supersedes:** none
 
-Goals owns the Life Area index and detail, Goal creation/review/activation, Goal detail, full Goal Path, recovery packet, and Goal closure. Time owns calendar editing; Today owns the execution slice; Trust owns contextual receipts/source/privacy/history inspection; Capture owns global intake.
+Goals owns the Life Area index and editing, Life Area detail and Goal membership,
+Goal creation/review/activation, Goal detail, inline Linked Goal Lens, full Goal
+Path/pursuit timeline, recovery packet, and Goal closure. Time owns calendar and
+placement editing; Today owns the day admission/execution projection; Trust owns
+contextual Receipt/source/privacy/history inspection; Capture owns global intake.
 
 Goal detail MUST combine native task metadata with Ambitions direction, Proof, and current-Step layers.
 
-The full Goal Path SHOULD use a horizontal, scrollable path timeline.
+The full Goal Path SHOULD use a continuous, scrollable pursuit timeline with an
+ordered semantic equivalent.
 
 The horizontal Goal Path MUST snap to nodes, anchor on the current position by default, provide haptic selection feedback, support semantic node types, show selected-node detail, and provide a compact jump control for Start, Now, Next, and Finish.
 
@@ -2081,7 +2089,7 @@ Goals SHOULD show direction, goal paths, Life Capital relevance, proof, mileston
 
 Onboarding progress SHOULD show as a percentage.
 
-## SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001 — Approved Goals package, separate implementation proof
+## SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001 — Provisional Goals branch, separate implementation proof
 
 - **Concept:** `surface.goals.visual-authority`
 - **Modality:** `MUST`
@@ -2090,7 +2098,12 @@ Onboarding progress SHOULD show as a percentage.
 - **Verification:** `PROOF-GOALS-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual mapping MUST use stable external IDs and distinguish selected design target from current implementation behavior. Selected VSP-03 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` is the Goals visual target. Candidate naming does not change the selected product direction, and the package does not demonstrate current SwiftUI, accessibility, device, or runtime behavior.
+Visual mapping MUST use stable direction IDs and distinguish owner-authorized
+provisional direction from current implementation behavior and future Figma
+authorization. `AVF-GOALS-S08-R00 — Life Area Linked Goal Lens` is the current
+provisional structural branch. The earlier VSP-03 package and
+`AVF-GOALS-S07-R01` remain historical provenance and do not demonstrate current
+SwiftUI, accessibility, device, runtime, Figma, or implementation approval.
 
 The horizontal Goal Path MUST communicate meaning through restrained shape, weight, material, micro-symbol, and line treatment.
 
@@ -2158,7 +2171,11 @@ Goals reviews MUST present due context, affected Goal and path state, recommende
 - **Verification:** `PROOF-GOALS-ROOT-VIEWPORT-001`
 - **Supersedes:** none
 
-The Goals root first viewport MUST foreground editable Life Areas, current direction, meaningful Goal movement, next Step, Proof or recovery state, and quiet path health.
+The Goals root first viewport MUST foreground the editable Life Area index and
+current direction. Selected Life Area depth foregrounds Goal identities; Goal
+selection reveals the inline Linked Goal Lens; focused depth foregrounds active,
+planned, completed, uncertain, conflict, dense, and very dense pursuit
+continuity without converting status into a dashboard.
 
 ## SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001 — Goal detail viewport
 
@@ -2169,7 +2186,11 @@ The Goals root first viewport MUST foreground editable Life Areas, current direc
 - **Verification:** `PROOF-GOAL-DETAIL-VIEWPORT-001`
 - **Supersedes:** none
 
-Goal detail first viewport MUST foreground Goal identity and status, current route, next Step, Proof requirement or status, schedule fit, and a compact path preview.
+Goal detail first viewport MUST foreground Goal identity before status, Life
+Area membership, active Step or multiple active Steps, current route, planned
+uncertainty, next movement, Proof or settled completion, schedule fit, and an
+inline Linked Goal Lens. Editing remains Goals-owned; Today and Time projections
+retain the Goal/Step ID and route back to this owner.
 
 ## SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001 — Exact state command ownership
 
