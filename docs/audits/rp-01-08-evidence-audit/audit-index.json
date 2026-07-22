@@ -1,0 +1,699 @@
+{
+  "audit_metadata": {
+    "audit_date": "2026-07-22",
+    "branch": "main",
+    "commit_sha": "29872755f705f6bd8e276aeac86dcf376ac5f0d8",
+    "output_directory": "docs/audits/rp-01-08-evidence-audit",
+    "repository": "https://github.com/agentdevan/ambitions",
+    "runtime_proof_ceiling": "Targeted XCTest batch failed before execution with simulator_boot_failure; EXECUTED_TESTS=0.",
+    "scope": [
+      "RP-01",
+      "RP-02",
+      "RP-03",
+      "RP-04",
+      "RP-05",
+      "RP-06",
+      "RP-07",
+      "RP-08"
+    ]
+  },
+  "capability_status_vocabulary": [
+    "SUPPORTED",
+    "PARTIALLY_SUPPORTED",
+    "PLANNED_NOT_IMPLEMENTED",
+    "ABSENT",
+    "CONTRADICTED",
+    "DEPRECATED_OR_SUPERSEDED",
+    "DEBUG_OR_FIXTURE_ONLY",
+    "UNKNOWN"
+  ],
+  "finding_disposition_vocabulary": [
+    "VISUAL_DIRECTION_SURVIVES",
+    "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+    "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED",
+    "ARCHITECTURE_DECISION_REQUIRED",
+    "UX_BLUEPRINT_DECISION_REQUIRED",
+    "RUNTIME_CAPABILITY_REQUIRED",
+    "RECONSTRUCTION_PLAN_ACTION_REQUIRED",
+    "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE",
+    "IMPLEMENTATION_DETAIL_DEFERRED"
+  ],
+  "packet_files": [
+    "00-audit-manifest.md",
+    "01-rp-01-shell-navigation-restoration.md",
+    "02-rp-02-object-identity-ownership-projection.md",
+    "03-rp-03-mutation-trust-receipt-undo.md",
+    "04-rp-04-goals-today-time-boundaries.md",
+    "05-rp-05-capture-search-authority.md",
+    "06-rp-06-you-capability-inventory.md",
+    "07-rp-07-persistence-offline-recovery.md",
+    "08-rp-08-accessibility-platform-adaptation.md",
+    "09-cross-packet-contradiction-register.md",
+    "10-reconciliation-decision-register.md",
+    "11-unsupported-visual-assumptions.md",
+    "12-reconstruction-impact-register.md",
+    "audit-index.json"
+  ],
+  "findings": [
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-CAPTURE-S07-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED",
+        "ARCHITECTURE_DECISION_REQUIRED",
+        "UX_BLUEPRINT_DECISION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/app/shell.md",
+        "Native/Ambitions/Stage/Chrome/StageDockRail.swift",
+        "docs/audits/rp-01-08-evidence-audit/01-rp-01-shell-navigation-restoration.md"
+      ],
+      "id": "F-001",
+      "severity": "critical",
+      "title": "Selected edge dock conflicts with current four-root bottom navigation"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "capability_status": "ABSENT",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Accessibility/platform planning"
+      ],
+      "dispositions": [
+        "RUNTIME_CAPABILITY_REQUIRED",
+        "UX_BLUEPRINT_DECISION_REQUIRED",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Stage/Chrome/StageDockRail.swift",
+        "Native/Ambitions/DesignSystem/Accessibility/VoiceOverFocusPolicy.swift",
+        "docs/audits/rp-01-08-evidence-audit/08-rp-08-accessibility-platform-adaptation.md"
+      ],
+      "id": "F-002",
+      "severity": "critical",
+      "title": "No selected dock posture or accessibility-equivalent owner"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-01"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime"
+      ],
+      "dispositions": [
+        "ARCHITECTURE_DECISION_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Stage/StagePathStore.swift",
+        "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift"
+      ],
+      "id": "F-003",
+      "severity": "high",
+      "title": "Inactive-root paths can drive global depth"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-CAPTURE-S07-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "capability_status": "ABSENT",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-05",
+        "RP-07",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "UX Blueprint",
+        "Accessibility/platform planning"
+      ],
+      "dispositions": [
+        "RUNTIME_CAPABILITY_REQUIRED",
+        "UX_BLUEPRINT_DECISION_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Composer/Capture/CaptureViewModel.swift",
+        "Native/Ambitions/Stage/Overlays/QuietCommandSheetView.swift",
+        "docs/audits/rp-01-08-evidence-audit/01-rp-01-shell-navigation-restoration.md"
+      ],
+      "id": "F-004",
+      "severity": "critical",
+      "title": "Exact-context restoration is not durably represented"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-GOALS-S07-R01",
+        "AVF-TIME-S07-R00",
+        "AVF-TODAY-S09-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-04",
+        "RP-05"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "ARCHITECTURE_DECISION_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeBlockGraph.swift",
+        "docs/canon/generated/object-boundary-matrix.md"
+      ],
+      "id": "F-005",
+      "severity": "critical",
+      "title": "Canonical cross-root identity is bounded to implemented object families"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-GOALS-S07-R01"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-04"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "UX Blueprint",
+        "Runtime"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED",
+        "ARCHITECTURE_DECISION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/goals.md",
+        "docs/canon/specifications/objects/life-area.md",
+        "Native/Ambitions/Core/Domain/LifeArea.swift"
+      ],
+      "id": "F-006",
+      "severity": "critical",
+      "title": "Goal-led provisional root conflicts with Life-Area-led canon"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TODAY-S09-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-04"
+      ],
+      "decision_authority": [
+        "Devan",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED",
+        "UX_BLUEPRINT_DECISION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/today.md",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository06-adjustmentPayload.swift"
+      ],
+      "id": "F-007",
+      "severity": "critical",
+      "title": "Three-object Today priority region conflicts with current canon"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-GOALS-S07-R01",
+        "AVF-TIME-S07-R00",
+        "AVF-TODAY-S09-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-03",
+        "RP-04"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/time.md",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeWeekShapeProjection.swift"
+      ],
+      "id": "F-008",
+      "severity": "critical",
+      "title": "Computed Goal timing lacks accepted-versus-proposed placement state"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TIME-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-04",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Devan",
+        "UX Blueprint",
+        "Runtime"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/time.md",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeWeekShapeProjection.swift"
+      ],
+      "id": "F-009",
+      "severity": "high",
+      "title": "Week is strongest current scale but full view family and retention are incomplete"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TIME-S07-R00",
+        "AVF-TODAY-S09-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PLANNED_NOT_IMPLEMENTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-04",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "RUNTIME_CAPABILITY_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED",
+        "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/objects/event.md",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeBlockGraph.swift"
+      ],
+      "id": "F-010",
+      "severity": "critical",
+      "title": "Complete calendar replacement lacks canonical Event and Placement implementation"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-CAPTURE-S07-R00",
+        "AVF-TIME-S07-R00",
+        "AVF-TODAY-S09-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-YOU-D07-R01",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-03",
+        "RP-05",
+        "RP-06",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLiteAtomicCommit.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift"
+      ],
+      "id": "F-011",
+      "severity": "critical",
+      "title": "Durable Receipts exist but coverage is not universal"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-CAPTURE-S07-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "ABSENT",
+      "cross_packet_dependencies": [
+        "RP-03",
+        "RP-05",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "Runtime",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "ARCHITECTURE_DECISION_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandResult.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerModels.swift"
+      ],
+      "id": "F-012",
+      "severity": "critical",
+      "title": "Multi-scope Settlement Ledger state is absent"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-CAPTURE-S07-R00",
+        "AVF-TIME-S07-R00",
+        "AVF-TODAY-S09-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-RECOVERY-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-03",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Runtime",
+        "UX Blueprint",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionClosureReceiptModels.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift"
+      ],
+      "id": "F-013",
+      "severity": "high",
+      "title": "Undo availability exceeds executable inverse proof"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-CAPTURE-S07-R00",
+        "AVF-RECOVERY-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-03",
+        "RP-05",
+        "RP-06",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Composer/Capture/CaptureViewModel.swift",
+        "Native/Ambitions/Core/Permissions/SpeechPermission.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift"
+      ],
+      "id": "F-014",
+      "severity": "high",
+      "title": "Capture supports bounded text and Goal handoff, not broad staged settlement"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SEARCH-D07-R00",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-05",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "Runtime",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED",
+        "RUNTIME_CAPABILITY_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift",
+        "Native/Ambitions/Stage/Overlays/QuietCommandSheetView.swift"
+      ],
+      "id": "F-015",
+      "severity": "critical",
+      "title": "Search implements local Find but not full-screen Understand and Act"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-RECOVERY-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-03",
+        "RP-05",
+        "RP-07"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityClient.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift"
+      ],
+      "id": "F-016",
+      "severity": "critical",
+      "title": "Local persistence does not establish a generic durable queue or sync"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-YOU-D07-R01",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-02",
+        "RP-06"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Reconstruction planning"
+      ],
+      "dispositions": [
+        "ARCHITECTURE_DECISION_REQUIRED",
+        "UX_BLUEPRINT_DECISION_REQUIRED",
+        "NEW_VISUAL_BRANCH_MAY_BE_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/you.md",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceMemoryVaultProjection.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent.swift"
+      ],
+      "id": "F-017",
+      "severity": "critical",
+      "title": "Production knowledge dashboard conflicts with current You canon"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-DNA-S07-R00",
+        "AVF-YOU-D07-R01",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "CONTRADICTED",
+      "cross_packet_dependencies": [
+        "RP-06",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture"
+      ],
+      "dispositions": [
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "ARCHITECTURE_DECISION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "Packages/AmbitionsDesignSystem/Sources/Theme/AmbitionTheme.swift",
+        "Native/Ambitions/Core/Persistence/PersistenceContracts.swift"
+      ],
+      "id": "F-018",
+      "severity": "high",
+      "title": "Locked violet-indigo accent is absent from current persisted accents"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-YOU-D07-R01",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-06",
+        "RP-07",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "Runtime",
+        "UX Blueprint"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "TARGETED_VISUAL_REFINEMENT_REQUIRED",
+        "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE"
+      ],
+      "evidence_paths": [
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift",
+        "Native/Ambitions/Support/Info.plist"
+      ],
+      "id": "F-019",
+      "severity": "high",
+      "title": "Settings-first You survives but much of its provisional inventory is unsupported"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-05",
+        "RP-07",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Architecture",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "RUNTIME_CAPABILITY_REQUIRED",
+        "RECONSTRUCTION_PLAN_ACTION_REQUIRED"
+      ],
+      "evidence_paths": [
+        "docs/canon/standards/accessibility.md",
+        "Native/Ambitions/DesignSystem/Accessibility/VoiceOverFocusPolicy.swift",
+        "Native/Ambitions/Quality/AFEP021AccessibilityCertificationProgram.swift"
+      ],
+      "id": "F-020",
+      "severity": "critical",
+      "title": "Accessibility semantics exist without complete runtime or direct proof"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "capability_status": "PARTIALLY_SUPPORTED",
+      "cross_packet_dependencies": [
+        "RP-01",
+        "RP-08"
+      ],
+      "decision_authority": [
+        "Devan",
+        "Architecture",
+        "Accessibility/platform planning"
+      ],
+      "dispositions": [
+        "VISUAL_DIRECTION_SURVIVES",
+        "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE",
+        "IMPLEMENTATION_DETAIL_DEFERRED"
+      ],
+      "evidence_paths": [
+        "project.yml",
+        "Native/Ambitions/Support/Info.plist",
+        "Native/Ambitions/Support/ExternalSurfaceVerificationChecklist.swift"
+      ],
+      "id": "F-021",
+      "severity": "high",
+      "title": "Platform support is iPhone-only and external surfaces are not device-proven"
+    }
+  ]
+}
