@@ -30,6 +30,33 @@ ACTIVE_DESIGN_PATHS = (
 )
 
 
+def mutate_first_taxonomy(
+    payload: dict[str, object],
+    **changes: object,
+) -> dict[str, object]:
+    state_models = payload["state_models"]
+    assert isinstance(state_models, list)
+    first_model = state_models[0]
+    assert isinstance(first_model, dict)
+    taxonomy = first_model["taxonomy"]
+    assert isinstance(taxonomy, list)
+    first_taxonomy = taxonomy[0]
+    assert isinstance(first_taxonomy, dict)
+    return {
+        **payload,
+        "state_models": [
+            {
+                **first_model,
+                "taxonomy": [
+                    {**first_taxonomy, **changes},
+                    *taxonomy[1:],
+                ],
+            },
+            *state_models[1:],
+        ],
+    }
+
+
 class AmbitionsCanonCompilerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -123,6 +150,69 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             ]["const"],
             343,
         )
+
+    def test_active_ux_taxonomy_matches_named_variants(self) -> None:
+        blueprint = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "docs/canon/migration/ux-blueprint.json"
+            ).read_text(encoding="utf-8")
+        )
+        generic_kinds = (
+            "degraded",
+            "empty",
+            "failure",
+            "interruption",
+            "loading",
+            "recovery",
+            "resting",
+            "rollback",
+            "transitional",
+        )
+
+        for state_model in blueprint["state_models"]:
+            variants_by_kind = {
+                generic_kind: sorted(
+                    variant["blueprint_id"]
+                    for variant in state_model["variants"]
+                    if variant["generic_kind"] == generic_kind
+                )
+                for generic_kind in generic_kinds
+            }
+            screen_title = state_model["title"].removesuffix(
+                " explicit state contract"
+            )
+            for taxonomy in state_model["taxonomy"]:
+                generic_kind = taxonomy["generic_kind"]
+                variant_ids = variants_by_kind[generic_kind]
+                if variant_ids:
+                    expected_applicability = "applicable"
+                    expected_rationale = (
+                        f"{screen_title} maps {generic_kind} only through the "
+                        "listed exact named variants; no anonymous or inferred "
+                        f"{generic_kind} presentation is authorized."
+                    )
+                else:
+                    expected_applicability = "not_applicable"
+                    expected_rationale = (
+                        f"{screen_title} declares no canonical named "
+                        f"{generic_kind} state in this blueprint; no synthetic "
+                        f"{generic_kind} screen is authorized."
+                    )
+
+                with self.subTest(
+                    state_model=state_model["blueprint_id"],
+                    generic_kind=generic_kind,
+                ):
+                    self.assertEqual(taxonomy["variant_ids"], variant_ids)
+                    self.assertEqual(
+                        taxonomy["applicability"],
+                        expected_applicability,
+                    )
+                    self.assertEqual(
+                        taxonomy["rationale"],
+                        expected_rationale,
+                    )
 
     def test_active_visual_authority_has_no_process_gate_vocabulary(self) -> None:
         visual_manifest = json.loads(
@@ -315,6 +405,30 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 "UX Blueprint canon_revision",
             ),
             (
+                Path("docs/canon/migration/ux-blueprint.json"),
+                lambda payload: mutate_first_taxonomy(
+                    payload,
+                    rationale="Contradictory taxonomy rationale.",
+                ),
+                "UX Blueprint taxonomy rationale",
+            ),
+            (
+                Path("docs/canon/migration/ux-blueprint.json"),
+                lambda payload: mutate_first_taxonomy(
+                    payload,
+                    variant_ids=[],
+                ),
+                "UX Blueprint taxonomy variant_ids",
+            ),
+            (
+                Path("docs/canon/migration/ux-blueprint.json"),
+                lambda payload: mutate_first_taxonomy(
+                    payload,
+                    applicability="not_applicable",
+                ),
+                "UX Blueprint taxonomy applicability",
+            ),
+            (
                 Path(
                     "docs/canon/migration/"
                     "ux-blueprint-requirement-dispositions.json"
@@ -369,6 +483,41 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                         expected_error,
                     ):
                         canon_compiler.validate_design_artifacts(isolated)
+
+    def test_design_artifact_validation_rejects_taxonomy_markdown_drift(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+
+            markdown_path = (
+                isolated_root / "docs/canon/migration/UX_BLUEPRINT.md"
+            )
+            markdown = markdown_path.read_text(encoding="utf-8")
+            expected = (
+                "Account and continuity boundary maps degraded only through "
+                "the listed exact named variants; no anonymous or inferred "
+                "degraded presentation is authorized."
+            )
+            markdown_path.write_text(
+                markdown.replace(
+                    expected,
+                    "Contradictory taxonomy rationale.",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "UX Blueprint Markdown/JSON taxonomy rows disagree",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
 
     def test_query_resolves_exact_requirement_and_multiword_text(self) -> None:
         exact = query(self.compilation, "LAW-LOCAL-AUTHORITY-001", mode="id")

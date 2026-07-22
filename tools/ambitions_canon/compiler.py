@@ -51,6 +51,17 @@ REQUIREMENT_FIELDS = (
     "Supersedes",
 )
 MODALITIES = {"MUST", "MUST NOT", "MAY", "SHOULD"}
+UX_STATE_GENERIC_KINDS = (
+    "degraded",
+    "empty",
+    "failure",
+    "interruption",
+    "loading",
+    "recovery",
+    "resting",
+    "rollback",
+    "transitional",
+)
 SPEC_ID_RE = re.compile(r"^[A-Z][A-Z0-9-]+$")
 REQUIREMENT_ID_PATTERN = r"[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*-[0-9]{3}"
 REQUIREMENT_HEADING_RE = re.compile(
@@ -654,6 +665,99 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     dispositions = load(dispositions_path)
     visual_manifest = load(visual_manifest_path)
 
+    state_models = blueprint.get("state_models")
+    if not isinstance(state_models, list):
+        raise CanonError("UX Blueprint state_models must be a list")
+    for state_model in state_models:
+        if not isinstance(state_model, dict):
+            raise CanonError("UX Blueprint has an invalid state model")
+        state_model_id = state_model.get("blueprint_id")
+        title = state_model.get("title")
+        variants = state_model.get("variants")
+        taxonomy_rows = state_model.get("taxonomy")
+        if not isinstance(state_model_id, str) or not isinstance(title, str):
+            raise CanonError("UX Blueprint state model identity is invalid")
+        if not title.endswith(" explicit state contract"):
+            raise CanonError(
+                f"UX Blueprint state model title is invalid: {state_model_id}"
+            )
+        if not isinstance(variants, list) or not isinstance(taxonomy_rows, list):
+            raise CanonError(
+                f"UX Blueprint state model variants/taxonomy are invalid: "
+                f"{state_model_id}"
+            )
+
+        variants_by_kind = {kind: [] for kind in UX_STATE_GENERIC_KINDS}
+        for variant in variants:
+            if not isinstance(variant, dict):
+                raise CanonError(
+                    f"UX Blueprint state model has an invalid variant: "
+                    f"{state_model_id}"
+                )
+            generic_kind = variant.get("generic_kind")
+            variant_id = variant.get("blueprint_id")
+            if (
+                generic_kind not in variants_by_kind
+                or not isinstance(variant_id, str)
+            ):
+                raise CanonError(
+                    f"UX Blueprint state model variant identity is invalid: "
+                    f"{state_model_id}"
+                )
+            variants_by_kind[generic_kind].append(variant_id)
+
+        taxonomy_kinds: list[str] = []
+        screen_title = title.removesuffix(" explicit state contract")
+        for taxonomy in taxonomy_rows:
+            if not isinstance(taxonomy, dict):
+                raise CanonError(
+                    f"UX Blueprint has an invalid taxonomy row: {state_model_id}"
+                )
+            generic_kind = taxonomy.get("generic_kind")
+            if generic_kind not in variants_by_kind:
+                raise CanonError(
+                    f"UX Blueprint taxonomy kind is invalid: {state_model_id}"
+                )
+            taxonomy_kinds.append(generic_kind)
+            expected_variant_ids = sorted(variants_by_kind[generic_kind])
+            expected_applicability = (
+                "applicable" if expected_variant_ids else "not_applicable"
+            )
+            if expected_variant_ids:
+                expected_rationale = (
+                    f"{screen_title} maps {generic_kind} only through the listed "
+                    "exact named variants; no anonymous or inferred "
+                    f"{generic_kind} presentation is authorized."
+                )
+            else:
+                expected_rationale = (
+                    f"{screen_title} declares no canonical named {generic_kind} "
+                    "state in this blueprint; no synthetic "
+                    f"{generic_kind} screen is authorized."
+                )
+
+            if taxonomy.get("variant_ids") != expected_variant_ids:
+                raise CanonError(
+                    "UX Blueprint taxonomy variant_ids do not match named "
+                    f"variants: {state_model_id}/{generic_kind}"
+                )
+            if taxonomy.get("applicability") != expected_applicability:
+                raise CanonError(
+                    "UX Blueprint taxonomy applicability contradicts named "
+                    f"variants: {state_model_id}/{generic_kind}"
+                )
+            if taxonomy.get("rationale") != expected_rationale:
+                raise CanonError(
+                    "UX Blueprint taxonomy rationale contradicts named "
+                    f"variants: {state_model_id}/{generic_kind}"
+                )
+
+        if sorted(taxonomy_kinds) != sorted(UX_STATE_GENERIC_KINDS):
+            raise CanonError(
+                "UX Blueprint taxonomy must cover each generic kind exactly "
+                f"once: {state_model_id}"
+            )
+
     revision = compilation.manifest.canon_revision
     digest = compilation.canon_digest
     for label, payload in (
@@ -761,6 +865,24 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     for text, expected, label in markdown_contracts:
         if expected not in text:
             raise CanonError(f"{label} does not match active canon")
+
+    for state_model in state_models:
+        state_model_id = state_model["blueprint_id"]
+        for taxonomy in state_model["taxonomy"]:
+            variant_ids = ", ".join(
+                f"`{variant_id}`"
+                for variant_id in taxonomy["variant_ids"]
+            )
+            expected_row = (
+                f"| `{taxonomy['generic_kind']}` | "
+                f"`{taxonomy['applicability']}` | {variant_ids} | "
+                f"{taxonomy['rationale']} |"
+            )
+            if expected_row not in blueprint_markdown:
+                raise CanonError(
+                    "UX Blueprint Markdown/JSON taxonomy rows disagree: "
+                    f"{state_model_id}/{taxonomy['generic_kind']}"
+                )
 
     json_screen_ids = {
         item.get("blueprint_id")

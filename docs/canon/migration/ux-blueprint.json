@@ -13107,7 +13107,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "interruption",
-          "rationale": "Account and Sync status maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized.",
+          "rationale": "Account and Sync status declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized.",
           "variant_ids": []
         },
         {
@@ -13579,7 +13579,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "resting",
-          "rationale": "Deep-link intake and resolution declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized.",
+          "rationale": "Deep-link intake and resolution maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED",
             "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED"
@@ -16006,7 +16006,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "resting",
-          "rationale": "Root app shell declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized.",
+          "rationale": "Root app shell maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-APP-SHELL-ROOT-GOALS-SELECTED",
             "UX-STATE-VARIANT-APP-SHELL-ROOT-TIME-SELECTED",
@@ -16023,7 +16023,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "transitional",
-          "rationale": "Root app shell maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
+          "rationale": "Root app shell declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
           "variant_ids": []
         }
       ],
@@ -17339,7 +17339,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "recovery",
-          "rationale": "Global action placement declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized.",
+          "rationale": "Global action placement maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS"
           ]
@@ -21055,7 +21055,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "resting",
-          "rationale": "Capture proposal and placement maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized.",
+          "rationale": "Capture proposal and placement declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized.",
           "variant_ids": []
         },
         {
@@ -21067,7 +21067,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "Capture proposal and placement declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "Capture proposal and placement maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY"
           ]
@@ -21721,7 +21721,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "Goal closure declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "Goal closure maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION"
           ]
@@ -22129,7 +22129,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "Goal detail declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "Goal detail maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-GOALS-DETAIL-BLOCKED",
             "UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION"
@@ -22153,7 +22153,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "interruption",
-          "rationale": "Goal detail maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized.",
+          "rationale": "Goal detail declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized.",
           "variant_ids": []
         },
         {
@@ -24049,7 +24049,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "Life Area detail declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "Life Area detail maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION"
           ]
@@ -24643,7 +24643,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "Full Goal Path maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "Full Goal Path declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {
@@ -27952,7 +27952,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "Goals root declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "Goals root maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION"
           ]
@@ -30158,7 +30158,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "Recovery and repair declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "Recovery and repair maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY"
           ]
@@ -30961,7 +30961,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "Calendar permission declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "Calendar permission maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RECONCILING"
           ]
@@ -32707,7 +32707,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "Notification permission declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "Notification permission maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RECONCILING"
           ]
@@ -36406,7 +36406,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "empty",
-          "rationale": "Search entry maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized.",
+          "rationale": "Search entry declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized.",
           "variant_ids": []
         },
         {
@@ -36463,7 +36463,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "Search entry declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "Search entry maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING",
             "UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF"
@@ -39209,7 +39209,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "interruption",
-          "rationale": "Setup interruption and resume declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized.",
+          "rationale": "Setup interruption and resume maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND"
           ]
@@ -39225,7 +39225,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "recovery",
-          "rationale": "Setup interruption and resume declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized.",
+          "rationale": "Setup interruption and resume maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-SETUP-RESUME-RESUMED"
           ]
@@ -39233,13 +39233,13 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "resting",
-          "rationale": "Setup interruption and resume maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized.",
+          "rationale": "Setup interruption and resume declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized.",
           "variant_ids": []
         },
         {
           "applicability": "applicable",
           "generic_kind": "rollback",
-          "rationale": "Setup interruption and resume declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized.",
+          "rationale": "Setup interruption and resume maps rollback only through the listed exact named variants; no anonymous or inferred rollback presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-SETUP-RESUME-START-OVER"
           ]
@@ -39909,7 +39909,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "loading",
-          "rationale": "Time Day declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
+          "rationale": "Time Day maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-DAY-IMPORTING"
           ]
@@ -43080,7 +43080,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "Time object detail maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "Time object detail declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {
@@ -44664,7 +44664,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "External calendar review declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "External calendar review maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-IMPORT-COMMITTING-IMPORT"
           ]
@@ -47613,7 +47613,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "loading",
-          "rationale": "Time List declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
+          "rationale": "Time List maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-LIST-IMPORTING"
           ]
@@ -49435,7 +49435,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "loading",
-          "rationale": "Time Month declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
+          "rationale": "Time Month maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-MONTH-IMPORTING"
           ]
@@ -51257,7 +51257,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "loading",
-          "rationale": "Time Week declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
+          "rationale": "Time Week maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-WEEK-IMPORTING"
           ]
@@ -53080,7 +53080,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "loading",
-          "rationale": "Time Year declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
+          "rationale": "Time Year maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TIME-YEAR-IMPORTING"
           ]
@@ -55452,7 +55452,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "transitional",
-          "rationale": "Today Reality Window declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
+          "rationale": "Today Reality Window maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION"
           ]
@@ -57052,7 +57052,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "resting",
-          "rationale": "Start here declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized.",
+          "rationale": "Start here maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION"
           ]
@@ -60574,7 +60574,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "Receipt and Undo maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "Receipt and Undo declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {
@@ -64577,7 +64577,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "recovery",
-          "rationale": "Data and Storage maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized.",
+          "rationale": "Data and Storage declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized.",
           "variant_ids": []
         },
         {
@@ -64593,7 +64593,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "rollback",
-          "rationale": "Data and Storage declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized.",
+          "rationale": "Data and Storage maps rollback only through the listed exact named variants; no anonymous or inferred rollback presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK",
             "UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE"
@@ -67794,7 +67794,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "Entitlement status and recovery maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "Entitlement status and recovery declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {
@@ -69160,7 +69160,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "interruption",
-          "rationale": "Notification rules and delivery state declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized.",
+          "rationale": "Notification rules and delivery state maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED"
           ]
@@ -69174,7 +69174,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "recovery",
-          "rationale": "Notification rules and delivery state declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized.",
+          "rationale": "Notification rules and delivery state maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED"
           ]
@@ -69201,7 +69201,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "transitional",
-          "rationale": "Notification rules and delivery state maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized.",
+          "rationale": "Notification rules and delivery state declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized.",
           "variant_ids": []
         }
       ],
@@ -71243,19 +71243,19 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "You root maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "You root declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {
           "applicability": "not_applicable",
           "generic_kind": "interruption",
-          "rationale": "You root maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized.",
+          "rationale": "You root declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized.",
           "variant_ids": []
         },
         {
           "applicability": "not_applicable",
           "generic_kind": "loading",
-          "rationale": "You root maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized.",
+          "rationale": "You root declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized.",
           "variant_ids": []
         },
         {
@@ -73092,7 +73092,7 @@
         {
           "applicability": "applicable",
           "generic_kind": "degraded",
-          "rationale": "You settings drilldown declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized.",
+          "rationale": "You settings drilldown maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized.",
           "variant_ids": [
             "UX-STATE-VARIANT-YOU-SETTINGS-BIOMETRIC-UNAVAILABLE"
           ]
@@ -73106,7 +73106,7 @@
         {
           "applicability": "not_applicable",
           "generic_kind": "failure",
-          "rationale": "You settings drilldown maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized.",
+          "rationale": "You settings drilldown declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized.",
           "variant_ids": []
         },
         {

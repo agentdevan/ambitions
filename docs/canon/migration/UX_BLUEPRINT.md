@@ -111,7 +111,7 @@ Screen: `UX-SCREEN-ACCOUNT-STATUS`
 | `degraded` | `not_applicable` |  | Account and Sync status declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
 | `empty` | `not_applicable` |  | Account and Sync status declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `not_applicable` |  | Account and Sync status declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
-| `interruption` | `not_applicable` |  | Account and Sync status maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
+| `interruption` | `not_applicable` |  | Account and Sync status declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Account and Sync status declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `not_applicable` |  | Account and Sync status declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-ACCOUNT-STATUS-CONTINUITY-DISABLED`, `UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN`, `UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT` | Account and Sync status maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
@@ -130,7 +130,7 @@ Screen: `UX-SCREEN-APP-DEEP-LINK-INTAKE`
 | `interruption` | `not_applicable` |  | Deep-link intake and resolution declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RESOLVING` | Deep-link intake and resolution maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RECOVERABLE` | Deep-link intake and resolution maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
-| `resting` | `applicable` | `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED`, `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED` | Deep-link intake and resolution declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized. |
+| `resting` | `applicable` | `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED`, `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED` | Deep-link intake and resolution maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Deep-link intake and resolution declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
 | `transitional` | `applicable` | `UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-QUEUED` | Deep-link intake and resolution maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
@@ -178,9 +178,9 @@ Screen: `UX-SCREEN-APP-SHELL-ROOT`
 | `interruption` | `not_applicable` |  | Root app shell declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Root app shell declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `not_applicable` |  | Root app shell declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
-| `resting` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-ROOT-GOALS-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-TIME-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-TODAY-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-YOU-SELECTED` | Root app shell declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized. |
+| `resting` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-ROOT-GOALS-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-TIME-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-TODAY-SELECTED`, `UX-STATE-VARIANT-APP-SHELL-ROOT-YOU-SELECTED` | Root app shell maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Root app shell declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `not_applicable` |  | Root app shell maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
+| `transitional` | `not_applicable` |  | Root app shell declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
 
 ### `UX-STATE-MODEL-APP-SHELL-SEARCH-CAPTURE` — Global action placement explicit state contract
 
@@ -193,7 +193,7 @@ Screen: `UX-SCREEN-APP-SHELL-SEARCH-CAPTURE`
 | `failure` | `not_applicable` |  | Global action placement declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Global action placement declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Global action placement declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
-| `recovery` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS` | Global action placement declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
+| `recovery` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS` | Global action placement maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-IDLE` | Global action placement maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Global action placement declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
 | `transitional` | `applicable` | `UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-CAPTURE-PRESENTED`, `UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-SEARCH-PRESENTED` | Global action placement maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
@@ -242,9 +242,9 @@ Screen: `UX-SCREEN-CAPTURE-PROPOSAL`
 | `interruption` | `not_applicable` |  | Capture proposal and placement declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-CAPTURE-PROPOSAL-CLASSIFYING`, `UX-STATE-VARIANT-CAPTURE-PROPOSAL-FIT-PROPOSING` | Capture proposal and placement maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `not_applicable` |  | Capture proposal and placement declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
-| `resting` | `not_applicable` |  | Capture proposal and placement maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
+| `resting` | `not_applicable` |  | Capture proposal and placement declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized. |
 | `rollback` | `not_applicable` |  | Capture proposal and placement declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY` | Capture proposal and placement declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY` | Capture proposal and placement maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-CAPTURE-SAVED-FOR-LATER` — Saved for Later explicit state contract
 
@@ -268,7 +268,7 @@ Screen: `UX-SCREEN-GOALS-CLOSURE`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION` | Goal closure declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION` | Goal closure maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | Goal closure declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `not_applicable` |  | Goal closure declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Goal closure declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
@@ -284,10 +284,10 @@ Screen: `UX-SCREEN-GOALS-DETAIL`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-DETAIL-BLOCKED`, `UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION` | Goal detail declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-DETAIL-BLOCKED`, `UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION` | Goal detail maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | Goal detail declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `applicable` | `UX-STATE-VARIANT-GOALS-DETAIL-GENERATION-FAILED`, `UX-STATE-VARIANT-GOALS-DETAIL-PREVIEW-REJECTED` | Goal detail maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
-| `interruption` | `not_applicable` |  | Goal detail maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
+| `interruption` | `not_applicable` |  | Goal detail declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Goal detail declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-GOALS-DETAIL-RECOVERING` | Goal detail maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-GOALS-DETAIL-ACTIVE`, `UX-STATE-VARIANT-GOALS-DETAIL-ARCHIVED`, `UX-STATE-VARIANT-GOALS-DETAIL-COMPLETED`, `UX-STATE-VARIANT-GOALS-DETAIL-DENSE`, `UX-STATE-VARIANT-GOALS-DETAIL-DRAFT`, `UX-STATE-VARIANT-GOALS-DETAIL-ENDED`, `UX-STATE-VARIANT-GOALS-DETAIL-PAUSED`, `UX-STATE-VARIANT-GOALS-DETAIL-WAITING` | Goal detail maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
@@ -300,7 +300,7 @@ Screen: `UX-SCREEN-GOALS-LIFE-AREA`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION` | Life Area detail declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION` | Life Area detail maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-GOALS-LIFE-AREA-EMPTY-DIRECTION` | Life Area detail maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Life Area detail declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Life Area detail declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
@@ -318,7 +318,7 @@ Screen: `UX-SCREEN-GOALS-PATH`
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-PATH-BLOCKED`, `UX-STATE-VARIANT-GOALS-PATH-NEEDS-ATTENTION`, `UX-STATE-VARIANT-GOALS-PATH-PARTIAL-SIMULATION`, `UX-STATE-VARIANT-GOALS-PATH-PATH-GENERATION-UNCERTAIN` | Full Goal Path maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-GOALS-PATH-MISSING-REFERENCE-CONTEXT` | Full Goal Path maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
-| `failure` | `not_applicable` |  | Full Goal Path maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
+| `failure` | `not_applicable` |  | Full Goal Path declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `applicable` | `UX-STATE-VARIANT-GOALS-PATH-PAUSED`, `UX-STATE-VARIANT-GOALS-PATH-WAITING` | Full Goal Path maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-GOALS-PATH-PATH-ADJUSTING`, `UX-STATE-VARIANT-GOALS-PATH-ROUTE-GENERATING`, `UX-STATE-VARIANT-GOALS-PATH-SIMULATING` | Full Goal Path maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-GOALS-PATH-RECOVERING`, `UX-STATE-VARIANT-GOALS-PATH-RESTORING` | Full Goal Path maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
@@ -348,7 +348,7 @@ Screen: `UX-SCREEN-GOALS-ROOT`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION` | Goals root declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION` | Goals root maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-GOALS-ROOT-EMPTY-DIRECTION` | Goals root maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Goals root declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Goals root declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
@@ -380,7 +380,7 @@ Screen: `UX-SCREEN-OFFLINE-DEGRADED-REPAIR`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY` | Recovery and repair declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY` | Recovery and repair maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | Recovery and repair declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `applicable` | `UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-FAILED` | Recovery and repair maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
 | `interruption` | `not_applicable` |  | Recovery and repair declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
@@ -404,7 +404,7 @@ Screen: `UX-SCREEN-PERMISSIONS-CALENDAR`
 | `recovery` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-CALENDAR-LOCAL-FALLBACK` | Calendar permission maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-CALENDAR-AUTHORIZED`, `UX-STATE-VARIANT-PERMISSIONS-CALENDAR-NOT-DETERMINED` | Calendar permission maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Calendar permission declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RECONCILING` | Calendar permission declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RECONCILING` | Calendar permission maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-PERMISSIONS-NOTIFICATIONS` — Notification permission explicit state contract
 
@@ -420,7 +420,7 @@ Screen: `UX-SCREEN-PERMISSIONS-NOTIFICATIONS`
 | `recovery` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-LOCAL-FALLBACK` | Notification permission maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-AUTHORIZED`, `UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-NOT-DETERMINED` | Notification permission maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Notification permission declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RECONCILING` | Notification permission declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RECONCILING` | Notification permission maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-SEARCH-RESULTS` — Search results explicit state contract
 
@@ -445,14 +445,14 @@ Screen: `UX-SCREEN-SEARCH-ROOT`
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-PARTIAL-RESULTS`, `UX-STATE-VARIANT-SEARCH-ROOT-PRIVACY-SUPPRESSED`, `UX-STATE-VARIANT-SEARCH-ROOT-STALE-INDEX` | Search entry maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
-| `empty` | `not_applicable` |  | Search entry maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
+| `empty` | `not_applicable` |  | Search entry declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-ACTION-REJECTED`, `UX-STATE-VARIANT-SEARCH-ROOT-CORRUPT-INDEX`, `UX-STATE-VARIANT-SEARCH-ROOT-PERMISSION-DENIED`, `UX-STATE-VARIANT-SEARCH-ROOT-UNAVAILABLE-PROJECTION` | Search entry maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
 | `interruption` | `not_applicable` |  | Search entry declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-ACTION-VALIDATING`, `UX-STATE-VARIANT-SEARCH-ROOT-QUERYING`, `UX-STATE-VARIANT-SEARCH-ROOT-REBUILDING` | Search entry maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-RESTORED` | Search entry maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-EMPTY-QUERY`, `UX-STATE-VARIANT-SEARCH-ROOT-OFFLINE-HEALTHY`, `UX-STATE-VARIANT-SEARCH-ROOT-RECENT` | Search entry maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Search entry declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING`, `UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF` | Search entry declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING`, `UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF` | Search entry maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-SETUP-FIRST-USE` — Progressive first use explicit state contract
 
@@ -479,11 +479,11 @@ Screen: `UX-SCREEN-SETUP-RESUME`
 | `degraded` | `not_applicable` |  | Setup interruption and resume declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
 | `empty` | `not_applicable` |  | Setup interruption and resume declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
 | `failure` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-INVALID` | Setup interruption and resume maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
-| `interruption` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND` | Setup interruption and resume declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
+| `interruption` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND` | Setup interruption and resume maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-REVALIDATING` | Setup interruption and resume maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
-| `recovery` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-RESUMED` | Setup interruption and resume declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
-| `resting` | `not_applicable` |  | Setup interruption and resume maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
-| `rollback` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-START-OVER` | Setup interruption and resume declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
+| `recovery` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-RESUMED` | Setup interruption and resume maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
+| `resting` | `not_applicable` |  | Setup interruption and resume declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized. |
+| `rollback` | `applicable` | `UX-STATE-VARIANT-SETUP-RESUME-START-OVER` | Setup interruption and resume maps rollback only through the listed exact named variants; no anonymous or inferred rollback presentation is authorized. |
 | `transitional` | `not_applicable` |  | Setup interruption and resume declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
 
 ### `UX-STATE-MODEL-TIME-DAY` — Time Day explicit state contract
@@ -496,7 +496,7 @@ Screen: `UX-SCREEN-TIME-DAY`
 | `empty` | `applicable` | `UX-STATE-VARIANT-TIME-DAY-EMPTY` | Time Day maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Time Day declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time Day declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
-| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-DAY-IMPORTING` | Time Day declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
+| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-DAY-IMPORTING` | Time Day maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-DAY-RESTORED` | Time Day maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-DAY-DENSE`, `UX-STATE-VARIANT-TIME-DAY-EXTERNAL-HIDDEN-CAPACITY`, `UX-STATE-VARIANT-TIME-DAY-NOW-ANCHORED`, `UX-STATE-VARIANT-TIME-DAY-POPULATED`, `UX-STATE-VARIANT-TIME-DAY-SELECTED` | Time Day maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Time Day declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -526,7 +526,7 @@ Screen: `UX-SCREEN-TIME-DETAIL`
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW`, `UX-STATE-VARIANT-TIME-DETAIL-UNDO-UNAVAILABLE` | Time object detail maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | Time object detail declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
-| `failure` | `not_applicable` |  | Time object detail maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
+| `failure` | `not_applicable` |  | Time object detail declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time object detail declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Time object detail declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `not_applicable` |  | Time object detail declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
@@ -548,7 +548,7 @@ Screen: `UX-SCREEN-TIME-IMPORT`
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-IMPORT-RESTORED` | External calendar review maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-SOURCE-UNCHANGED`, `UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF` | External calendar review maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `applicable` | `UX-STATE-VARIANT-TIME-IMPORT-NATIVE-IMPORT-UNDO` | External calendar review maps rollback only through the listed exact named variants; no anonymous or inferred rollback presentation is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-TIME-IMPORT-COMMITTING-IMPORT` | External calendar review declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-TIME-IMPORT-COMMITTING-IMPORT` | External calendar review maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-TIME-LIST` — Time List explicit state contract
 
@@ -560,7 +560,7 @@ Screen: `UX-SCREEN-TIME-LIST`
 | `empty` | `applicable` | `UX-STATE-VARIANT-TIME-LIST-EMPTY` | Time List maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Time List declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time List declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
-| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-LIST-IMPORTING` | Time List declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
+| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-LIST-IMPORTING` | Time List maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-LIST-RESTORED` | Time List maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-LIST-DENSE`, `UX-STATE-VARIANT-TIME-LIST-EXTERNAL-HIDDEN-CAPACITY`, `UX-STATE-VARIANT-TIME-LIST-NOW-ANCHORED`, `UX-STATE-VARIANT-TIME-LIST-POPULATED`, `UX-STATE-VARIANT-TIME-LIST-SELECTED` | Time List maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Time List declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -576,7 +576,7 @@ Screen: `UX-SCREEN-TIME-MONTH`
 | `empty` | `applicable` | `UX-STATE-VARIANT-TIME-MONTH-EMPTY` | Time Month maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Time Month declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time Month declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
-| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-MONTH-IMPORTING` | Time Month declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
+| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-MONTH-IMPORTING` | Time Month maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-MONTH-RESTORED` | Time Month maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-MONTH-DENSE`, `UX-STATE-VARIANT-TIME-MONTH-EXTERNAL-HIDDEN-CAPACITY`, `UX-STATE-VARIANT-TIME-MONTH-NOW-ANCHORED`, `UX-STATE-VARIANT-TIME-MONTH-POPULATED`, `UX-STATE-VARIANT-TIME-MONTH-SELECTED` | Time Month maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Time Month declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -592,7 +592,7 @@ Screen: `UX-SCREEN-TIME-WEEK`
 | `empty` | `applicable` | `UX-STATE-VARIANT-TIME-WEEK-EMPTY` | Time Week maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Time Week declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time Week declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
-| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-WEEK-IMPORTING` | Time Week declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
+| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-WEEK-IMPORTING` | Time Week maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-WEEK-RESTORED` | Time Week maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-WEEK-DENSE`, `UX-STATE-VARIANT-TIME-WEEK-EXTERNAL-HIDDEN-CAPACITY`, `UX-STATE-VARIANT-TIME-WEEK-NOW-ANCHORED`, `UX-STATE-VARIANT-TIME-WEEK-POPULATED`, `UX-STATE-VARIANT-TIME-WEEK-SELECTED` | Time Week maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Time Week declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -608,7 +608,7 @@ Screen: `UX-SCREEN-TIME-YEAR`
 | `empty` | `applicable` | `UX-STATE-VARIANT-TIME-YEAR-EMPTY` | Time Year maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `not_applicable` |  | Time Year declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Time Year declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
-| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-YEAR-IMPORTING` | Time Year declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
+| `loading` | `applicable` | `UX-STATE-VARIANT-TIME-YEAR-IMPORTING` | Time Year maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TIME-YEAR-RESTORED` | Time Year maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TIME-YEAR-DENSE`, `UX-STATE-VARIANT-TIME-YEAR-EXTERNAL-HIDDEN-CAPACITY`, `UX-STATE-VARIANT-TIME-YEAR-NOW-ANCHORED`, `UX-STATE-VARIANT-TIME-YEAR-POPULATED`, `UX-STATE-VARIANT-TIME-YEAR-SELECTED` | Time Year maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Time Year declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -644,7 +644,7 @@ Screen: `UX-SCREEN-TODAY-ROOT`
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TODAY-ROOT-RECOVERY`, `UX-STATE-VARIANT-TODAY-ROOT-RESTORED` | Today Reality Window maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-TODAY-ROOT-DENSE`, `UX-STATE-VARIANT-TODAY-ROOT-LOW-DENSITY`, `UX-STATE-VARIANT-TODAY-ROOT-POPULATED` | Today Reality Window maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Today Reality Window declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `applicable` | `UX-STATE-VARIANT-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION` | Today Reality Window declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
+| `transitional` | `applicable` | `UX-STATE-VARIANT-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION` | Today Reality Window maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-TODAY-START-HERE` — Start here explicit state contract
 
@@ -658,7 +658,7 @@ Screen: `UX-SCREEN-TODAY-START-HERE`
 | `interruption` | `not_applicable` |  | Start here declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Start here declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED` | Start here maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
-| `resting` | `applicable` | `UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION` | Start here declares no canonical named resting state in this blueprint; no synthetic resting screen is authorized. |
+| `resting` | `applicable` | `UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION` | Start here maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Start here declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
 | `transitional` | `applicable` | `UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY` | Start here maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
@@ -702,7 +702,7 @@ Screen: `UX-SCREEN-TRUST-RECEIPT`
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-TRUST-RECEIPT-LOCAL-STORE-DEGRADED`, `UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-UNAVAILABLE` | Receipt and Undo maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-TRUST-RECEIPT-ABSENT-RECEIPT-DETAIL` | Receipt and Undo maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
-| `failure` | `not_applicable` |  | Receipt and Undo maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
+| `failure` | `not_applicable` |  | Receipt and Undo declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Receipt and Undo declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-PENDING`, `UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-RESOLVING`, `UX-STATE-VARIANT-TRUST-RECEIPT-UNDOING` | Receipt and Undo maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-EXTERNAL-FAILED`, `UX-STATE-VARIANT-TRUST-RECEIPT-RESTORING` | Receipt and Undo maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
@@ -737,9 +737,9 @@ Screen: `UX-SCREEN-YOU-DATA`
 | `failure` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-EXPORT-FAILED` | Data and Storage maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
 | `interruption` | `not_applicable` |  | Data and Storage declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS` | Data and Storage maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
-| `recovery` | `not_applicable` |  | Data and Storage maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
+| `recovery` | `not_applicable` |  | Data and Storage declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-BACKUP-READY`, `UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED`, `UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED` | Data and Storage maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
-| `rollback` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK`, `UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE` | Data and Storage declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
+| `rollback` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK`, `UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE` | Data and Storage maps rollback only through the listed exact named variants; no anonymous or inferred rollback presentation is authorized. |
 | `transitional` | `applicable` | `UX-STATE-VARIANT-YOU-DATA-EXPORT-PREVIEW`, `UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE`, `UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-REVIEW`, `UX-STATE-VARIANT-YOU-DATA-RESET-REVIEW`, `UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW` | Data and Storage maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
 
 ### `UX-STATE-MODEL-YOU-DIAGNOSTICS` — Diagnostics and repair inspection explicit state contract
@@ -766,7 +766,7 @@ Screen: `UX-SCREEN-YOU-ENTITLEMENT`
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-GRACE`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-MISMATCH`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-OFFLINE-CACHED`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-REVOKED`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-UNKNOWN` | Entitlement status and recovery maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | Entitlement status and recovery declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
-| `failure` | `not_applicable` |  | Entitlement status and recovery maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
+| `failure` | `not_applicable` |  | Entitlement status and recovery declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | Entitlement status and recovery declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | Entitlement status and recovery declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `applicable` | `UX-STATE-VARIANT-YOU-ENTITLEMENT-RESTORED`, `UX-STATE-VARIANT-YOU-ENTITLEMENT-RETRY` | Entitlement status and recovery maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
@@ -783,12 +783,12 @@ Screen: `UX-SCREEN-YOU-NOTIFICATIONS`
 | `degraded` | `not_applicable` |  | Notification rules and delivery state declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED` | Notification rules and delivery state maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
 | `failure` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED` | Notification rules and delivery state maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
-| `interruption` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED` | Notification rules and delivery state declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
+| `interruption` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED` | Notification rules and delivery state maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
 | `loading` | `not_applicable` |  | Notification rules and delivery state declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
-| `recovery` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED` | Notification rules and delivery state declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
+| `recovery` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED` | Notification rules and delivery state maps recovery only through the listed exact named variants; no anonymous or inferred recovery presentation is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-YOU-NOTIFICATIONS-ACTED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-ALLOWED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-REMOVED`, `UX-STATE-VARIANT-YOU-NOTIFICATIONS-SCHEDULED` | Notification rules and delivery state maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | Notification rules and delivery state declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
-| `transitional` | `not_applicable` |  | Notification rules and delivery state maps transitional only through the listed exact named variants; no anonymous or inferred transitional presentation is authorized. |
+| `transitional` | `not_applicable` |  | Notification rules and delivery state declares no canonical named transitional state in this blueprint; no synthetic transitional screen is authorized. |
 
 ### `UX-STATE-MODEL-YOU-ROOT` — You root explicit state contract
 
@@ -798,9 +798,9 @@ Screen: `UX-SCREEN-YOU-ROOT`
 | --- | --- | --- | --- |
 | `degraded` | `applicable` | `UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-CONFLICTED`, `UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-DEGRADED` | You root maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `applicable` | `UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-EMPTY` | You root maps empty only through the listed exact named variants; no anonymous or inferred empty presentation is authorized. |
-| `failure` | `not_applicable` |  | You root maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
-| `interruption` | `not_applicable` |  | You root maps interruption only through the listed exact named variants; no anonymous or inferred interruption presentation is authorized. |
-| `loading` | `not_applicable` |  | You root maps loading only through the listed exact named variants; no anonymous or inferred loading presentation is authorized. |
+| `failure` | `not_applicable` |  | You root declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
+| `interruption` | `not_applicable` |  | You root declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
+| `loading` | `not_applicable` |  | You root declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `not_applicable` |  | You root declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
 | `resting` | `applicable` | `UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-IN`, `UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-OUT`, `UX-STATE-VARIANT-YOU-ROOT-ACTION-REQUIRED`, `UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-DISABLED`, `UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-PENDING`, `UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-HEALTHY`, `UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-POPULATED`, `UX-STATE-VARIANT-YOU-ROOT-NO-ACCOUNT-HEALTHY`, `UX-STATE-VARIANT-YOU-ROOT-NORMAL`, `UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-AVAILABLE`, `UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-DENIED`, `UX-STATE-VARIANT-YOU-ROOT-SETUP-COMPLETE`, `UX-STATE-VARIANT-YOU-ROOT-SETUP-PARTIAL` | You root maps resting only through the listed exact named variants; no anonymous or inferred resting presentation is authorized. |
 | `rollback` | `not_applicable` |  | You root declares no canonical named rollback state in this blueprint; no synthetic rollback screen is authorized. |
@@ -812,9 +812,9 @@ Screen: `UX-SCREEN-YOU-SETTINGS`
 
 | Generic kind | Applicability | Named variant IDs | Rationale |
 | --- | --- | --- | --- |
-| `degraded` | `applicable` | `UX-STATE-VARIANT-YOU-SETTINGS-BIOMETRIC-UNAVAILABLE` | You settings drilldown declares no canonical named degraded state in this blueprint; no synthetic degraded screen is authorized. |
+| `degraded` | `applicable` | `UX-STATE-VARIANT-YOU-SETTINGS-BIOMETRIC-UNAVAILABLE` | You settings drilldown maps degraded only through the listed exact named variants; no anonymous or inferred degraded presentation is authorized. |
 | `empty` | `not_applicable` |  | You settings drilldown declares no canonical named empty state in this blueprint; no synthetic empty screen is authorized. |
-| `failure` | `not_applicable` |  | You settings drilldown maps failure only through the listed exact named variants; no anonymous or inferred failure presentation is authorized. |
+| `failure` | `not_applicable` |  | You settings drilldown declares no canonical named failure state in this blueprint; no synthetic failure screen is authorized. |
 | `interruption` | `not_applicable` |  | You settings drilldown declares no canonical named interruption state in this blueprint; no synthetic interruption screen is authorized. |
 | `loading` | `not_applicable` |  | You settings drilldown declares no canonical named loading state in this blueprint; no synthetic loading screen is authorized. |
 | `recovery` | `not_applicable` |  | You settings drilldown declares no canonical named recovery state in this blueprint; no synthetic recovery screen is authorized. |
