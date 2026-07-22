@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "claim_boundary": "Known Figma/VSP evidence index only. This file does not mutate Figma, does not claim Code Connect, and does not prove Visual Green.",
+  "claim_boundary": "HISTORICAL_REFERENCE. Known Figma/VSP evidence index only. Historical selected or approved node text is not current selection. This file does not mutate Figma, claim Code Connect, authorize Figma, or prove Visual Green.",
   "nodes": [
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",

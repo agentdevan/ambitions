@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "claim_boundary": "Git-owned Code-Connect-free VSP provenance. This registry is not Figma Code Connect, Visual Green, source implementation, device proof, accessibility conformance, release proof, or owner approval.",
+  "claim_boundary": "HISTORICAL_REFERENCE. Git-owned Code-Connect-free VSP provenance. Historical selected or approved fields record state at the time and are not current Figma selection, VC baseline authority, source implementation, device proof, accessibility conformance, release proof, or owner approval.",
   "authority_basis": [
     "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
     "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json",

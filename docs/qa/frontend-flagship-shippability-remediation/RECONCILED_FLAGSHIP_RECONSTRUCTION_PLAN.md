@@ -48,7 +48,7 @@ No milestone may treat a later arrow as evidence for an earlier dependency.
 | R7 You pruning | Nine-group local/no-account surface; accent migration | Capability inventory, absence, preference migration tests | Planning only |
 | R8 Persistence/recovery gates | Only approved durable drafts/outboxes/recovery | Interruption, retry, cancel, publication, conflict tests | Planning only |
 | R9 Accessibility/localization | Focus, announcements, catalogs, RTL and input equivalence | Automated plus direct device matrix | Planning only |
-| R10 Visual closure studies | Reconciled directions only | Updated closure records; no implementation claim | Blocked by R1–R9 contracts/proof definitions |
+| R10 Visual closure studies | Reconciled directions only | Updated closure records; no implementation claim | **READY FOR RECONCILED VISUAL CLOSURE** |
 | R11 VC-14 matched baseline | Cross-direction matched reference baseline | Owner review of matched study | Not authorized |
 | R12 Figma entry | Owner explicitly declares `SELECTED FOR FIGMA` | Separate owner record | Authorization false |
 | R13 Figma journeys | Journey-level design/QA | Authorized Figma proof | Blocked |
@@ -108,10 +108,20 @@ no remaining live references.
 
 ### Reconciled visual closure and VC-14
 
-R1–R9 contracts must be stable enough to prevent visual work from depicting an
-unsupported owner, object, state, platform, permission, restoration promise, or
-settlement. The two authorized branches and six revisions are the only current
-direction IDs.
+R10 is **READY FOR RECONCILED VISUAL CLOSURE**. The accepted ADRs, canonical UX
+Blueprint, accessibility/platform proof plan, source-owned
+`VISUAL_CLOSURE_INPUT_CONTRACT.md` and JSON peer, and generated visual-authority
+manifest now define enough target ownership, capability boundaries,
+supersession, and proof ceilings for VC-01 through VC-13 to proceed without
+depicting unsupported behavior as current functionality. Runtime implementation
+is not an R10 prerequisite; target-only behavior must remain labelled target,
+planned, unavailable, or capability-gated.
+
+The two authorized branches and six revisions are the only current structural
+branch/revision IDs. Exact tokens, Figma collections, component variables,
+component APIs, and matched frames remain unresolved visual-validation output.
+R10 readiness does not complete VC-14 and does not authorize Figma, SwiftUI, or
+implementation.
 
 ### Figma
 
@@ -148,6 +158,7 @@ plan intentionally contains no task-level SwiftUI steps or component APIs.
 | Owner choices | Ready | D-DEV-01 through D-DEV-10 are controlling and closed. |
 | Architecture contracts | Ready for implementation planning | Accepted ADRs define owners and boundaries; runtime proof absent. |
 | Canon/UX direction | Ready for reconciled specification use | Normative owners and provisional direction IDs are aligned. |
+| Reconciled visual closure | Ready | VC input contract normalizes active directions, typography, appearance, material, exclusions, and proof ceilings. |
 | Identity migrations | Not implementation-ready | Designs exist; schemas/migrations/tests do not. |
 | Runtime capability | Not implementation-ready | Registry closure, typed states, and proof are incomplete. |
 | Accessibility/localization | Ready for infrastructure planning | Proof plan exists; implementation/direct evidence absent. |

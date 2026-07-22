@@ -44,13 +44,17 @@ for implementation agents and repository tooling.
   provisional cross-surface direction and historical Revision 1 provenance.
   Figma authorization, SwiftUI approval, and implementation authorization are
   false.
+- [VC-01–VC-14 Visual Closure Input Contract](design/VISUAL_CLOSURE_INPUT_CONTRACT.md)
+  and its JSON peer are the sole active visual-closure baseline. The compiler
+  projects that source into the generated visual-authority manifest.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;
   it is a design reference, not a migration gate.
 - [Visual Authority Rebaseline](migration/VISUAL_AUTHORITY_REBASELINE.md) and
-  [Phase 2 Direction](migration/VISUAL_DIRECTION_PHASE_2.md) preserve the
-  visual-reconciliation reasoning that led to Revision 1.
+  [Phase 2 Direction](migration/VISUAL_DIRECTION_PHASE_2.md) are historical
+  references preserving the reasoning that led to Revision 1; they do not
+  control the current VC baseline.
 - [VSP design provenance](../design/provenance/README.md) preserves selected
   package decisions, component mappings, Figma nodes, and reference images.
 - [Object Boundary Matrix](generated/object-boundary-matrix.md) is a compact

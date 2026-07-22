@@ -1,8 +1,11 @@
 # Ambitions visual design provenance
 
+Status: `HISTORICAL_REFERENCE`
+
 This directory is the durable visual-reference library for Ambitions. It keeps
-selected Figma directions, component anatomy, SwiftUI mappings, accessibility
-matrices, and the reasoning behind product-specific visual choices.
+directions selected at the time, component anatomy, SwiftUI mappings,
+accessibility matrices, and the reasoning behind historical product-specific
+visual choices. No Figma frame in this directory is currently selected.
 
 It is not an approval system. The former `owner-approvals/` attestations were
 not restored; their actual product selections are consolidated in the package
@@ -13,8 +16,8 @@ requirements.
 
 1. Product behavior and boundaries come from
    [the Constitution](../../canon/CONSTITUTION.md) and owning specifications.
-2. The selected cross-surface visual language comes from
-   [Visual System R1](../../canon/design/VISUAL_SYSTEM_R1.md).
+2. The sole active VC-01–VC-14 baseline is the
+   [Visual Closure Input Contract](../../canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md).
 3. The VSP packages below preserve detailed object composition and historical
    design decisions. Where an older VSP styling choice conflicts with Visual
    System R1, Revision 1 governs the new styling while the owning product
@@ -23,7 +26,11 @@ requirements.
    visual references and provenance, not evidence that the current app matches
    them.
 
-## Selected VSP package map
+## Historical VSP package map
+
+“Selected” or “approved” inside a package records its historical state at the
+time. It does not survive as current selection, Figma authorization, SwiftUI
+approval, implementation authority, or VC baseline input.
 
 | VSP | Design direction | Figma file/node | Detailed package |
 | --- | --- | --- | --- |

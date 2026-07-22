@@ -22,10 +22,11 @@ from tools.ambitions_canon.compiler import (
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 ACTIVE_DESIGN_PATHS = (
+    Path("docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md"),
+    Path("docs/canon/design/visual-closure-input-contract.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
     Path("docs/canon/migration/ux-blueprint-requirement-dispositions.json"),
-    Path("docs/canon/generated/visual-authority-manifest.json"),
     Path("docs/canon/design/VISUAL_SYSTEM_R1.md"),
 )
 
@@ -224,6 +225,12 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         visual_system = (
             REPOSITORY_ROOT / "docs/canon/design/VISUAL_SYSTEM_R1.md"
         ).read_text(encoding="utf-8")
+        visual_contract = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "docs/canon/design/visual-closure-input-contract.json"
+            ).read_text(encoding="utf-8")
+        )
 
         forbidden_keys = {
             "approval_state",
@@ -246,11 +253,45 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                     collect_keys(child)
 
         collect_keys(visual_manifest)
+        collect_keys(visual_contract)
         self.assertEqual(found_keys & forbidden_keys, set())
         serialized_manifest = json.dumps(visual_manifest).casefold()
         self.assertNotIn("gate b", serialized_manifest)
         self.assertNotIn("task pack", serialized_manifest)
         self.assertNotIn("separately authorized", visual_system.casefold())
+
+    def test_visual_closure_contract_renders_exact_active_baseline(self) -> None:
+        contract = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "docs/canon/design/visual-closure-input-contract.json"
+            ).read_text(encoding="utf-8")
+        )
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        self.assertEqual(
+            contract["active_baseline"]["directions"],
+            list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
+        )
+        self.assertEqual(
+            [item["visual_authority_id"] for item in manifest["authorities"]],
+            list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
+        )
+        self.assertEqual(
+            manifest["authority_state"],
+            {
+                "figma": False,
+                "implementation": False,
+                "swiftui": False,
+                "visual_closure_planning": True,
+            },
+        )
+        self.assertFalse(contract["active_baseline"]["typography"]["serif_active"])
+        self.assertEqual(
+            contract["active_baseline"]["appearance"]["choices"],
+            ["System", "Light", "Dark"],
+        )
 
     def test_generated_outputs_are_current_and_deterministic(self) -> None:
         self.assertEqual(output_drift(self.compilation, self.outputs), ())
@@ -440,15 +481,15 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 "requirement dispositions do not match active canon",
             ),
             (
-                Path("docs/canon/generated/visual-authority-manifest.json"),
+                Path("docs/canon/design/visual-closure-input-contract.json"),
                 lambda payload: {
                     **payload,
-                    "authorities": [
+                    "visual_requirement_mappings": [
                         {
-                            **payload["authorities"][0],
+                            **payload["visual_requirement_mappings"][0],
                             "requirement_ids": ["RETIRED-REQUIREMENT-001"],
                         },
-                        *payload["authorities"][1:],
+                        *payload["visual_requirement_mappings"][1:],
                     ],
                 },
                 "visual authority references inactive requirement",

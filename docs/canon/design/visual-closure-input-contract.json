@@ -1,20 +1,5 @@
 {
   "active_baseline": {
-    "accent": {
-      "allowed_uses": [
-        "actionable_tint",
-        "selected_control_emphasis"
-      ],
-      "default_family": "restrained_violet_indigo",
-      "exact_values_status": "visual_validation_required",
-      "existing_candidates_status": "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
-      "forbidden_uses": [
-        "glow",
-        "root_identity",
-        "semantic_state_alone",
-        "semantic_color_replacement"
-      ]
-    },
     "accessibility_doctrine": {
       "direction_id": "AVF-A11Y-S07-R00",
       "meaning_must_survive": [
@@ -32,6 +17,21 @@
         "VoiceOver"
       ],
       "proof_status": "required_not_complete"
+    },
+    "accent": {
+      "allowed_uses": [
+        "actionable_tint",
+        "selected_control_emphasis"
+      ],
+      "default_family": "restrained_violet_indigo",
+      "exact_values_status": "visual_validation_required",
+      "existing_candidates_status": "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
+      "forbidden_uses": [
+        "glow",
+        "root_identity",
+        "semantic_state_alone",
+        "semantic_color_replacement"
+      ]
     },
     "appearance": {
       "choices": [
@@ -135,157 +135,23 @@
       "serif_active": false
     }
   },
-  "authorities": [
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "DESIGN-001",
-        "DESIGN-002",
-        "DESIGN-003"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-DNA-S07-R00"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
-        "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
-        "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-SHELL-S07-R01"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-CAPTURE-S07-R01"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-GOALS-S08-R00"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-TIME-S07-R01"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-TODAY-S10-R00"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-SEARCH-D07-R01"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-YOU-D07-R02"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-RECOVERY-S07-R01"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "A11Y-DYNAMIC-TYPE-001",
-        "A11Y-INPUT-EQUIVALENCE-001",
-        "A11Y-PROOF-MATRIX-001",
-        "A11Y-READING-FOCUS-001",
-        "A11Y-REDUCED-EFFECTS-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-A11Y-S07-R00"
-    },
-    {
-      "authority_role": "active_reconciled_direction",
-      "authority_status": "provisional",
-      "canon_revision": 2,
-      "classification": "ACTIVE_RECONCILED_BASELINE",
-      "implementation_status": "target contract only; runtime and rendered proof required",
-      "requirement_ids": [
-        "DESIGN-003",
-        "PLATFORM-NATIVE-IPHONE-001"
-      ],
-      "source": "docs/canon/design/visual-closure-input-contract.json",
-      "visual_authority_id": "AVF-COHERENCE-S07-R00"
-    }
+  "architecture_sensitive_requirements": [
+    "single_shell_owner_and_independent_root_paths",
+    "dock_posture_gesture_and_accessibility_equivalence",
+    "versioned_restoration_and_stale_target_fallback",
+    "canonical_life_area_event_schedule_placement_today_admission_and_receipt_identity",
+    "current_proposed_accepted_external_stale_truth_separation",
+    "canonical_owner_mutation_settlement_receipt_and_executable_undo",
+    "search_capture_owner_transfer",
+    "operation_specific_pending_and_recovery_data",
+    "accessibility_focus_localization_rtl_and_device_proof"
   ],
-  "authority_state": {
+  "authorization": {
     "figma": false,
     "implementation": false,
     "swiftui": false,
     "visual_closure_planning": true
   },
-  "canon_content_sha": "57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2",
-  "canon_revision": 2,
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",
     "HISTORICAL_REFERENCE",
@@ -293,7 +159,6 @@
     "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
     "SUPERSEDED"
   ],
-  "compiler_version": "0.3.0",
   "contract_id": "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
   "historical_figma_references": [
     {
@@ -393,8 +258,7 @@
     "VAD-R1-TODAY-005": "SUPERSEDED",
     "VAD-R1-TYPE-001": "SUPERSEDED"
   },
-  "schema_version": 2,
-  "source_contract": "docs/canon/design/visual-closure-input-contract.json",
+  "status": "ACTIVE_RECONCILED_BASELINE",
   "supersessions": [
     {
       "replacement": "AVF-GOALS-S08-R00",
@@ -407,7 +271,6 @@
       "superseded": "AVF-TODAY-S09-R00"
     }
   ],
-  "traceability_input_sha": "99873944434b2e1bdd190ad1476c62c30d5b72ae0a2e8cc8172b785d5bddf3ee",
   "unsupported_visual_behaviors": [
     "active_serif_interface_type",
     "oled_dark",
@@ -431,6 +294,95 @@
     "generic_pending_or_later_settlement",
     "unsupported_time_scale_as_current",
     "unsupported_permission_or_platform"
+  ],
+  "version": 1,
+  "visual_requirement_mappings": [
+    {
+      "direction_id": "AVF-DNA-S07-R00",
+      "requirement_ids": [
+        "DESIGN-001",
+        "DESIGN-002",
+        "DESIGN-003"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-SHELL-S07-R01",
+      "requirement_ids": [
+        "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
+        "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
+        "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-CAPTURE-S07-R01",
+      "requirement_ids": [
+        "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-GOALS-S08-R00",
+      "requirement_ids": [
+        "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-TIME-S07-R01",
+      "requirement_ids": [
+        "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-TODAY-S10-R00",
+      "requirement_ids": [
+        "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-SEARCH-D07-R01",
+      "requirement_ids": [
+        "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-YOU-D07-R02",
+      "requirement_ids": [
+        "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-RECOVERY-S07-R01",
+      "requirement_ids": [
+        "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-A11Y-S07-R00",
+      "requirement_ids": [
+        "A11Y-DYNAMIC-TYPE-001",
+        "A11Y-INPUT-EQUIVALENCE-001",
+        "A11Y-PROOF-MATRIX-001",
+        "A11Y-READING-FOCUS-001",
+        "A11Y-REDUCED-EFFECTS-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    },
+    {
+      "direction_id": "AVF-COHERENCE-S07-R00",
+      "requirement_ids": [
+        "DESIGN-003",
+        "PLATFORM-NATIVE-IPHONE-001"
+      ],
+      "status": "ACTIVE_RECONCILED_BASELINE"
+    }
   ],
   "visual_validation_decisions": [
     "sf_pro_role_hierarchy_and_metrics",

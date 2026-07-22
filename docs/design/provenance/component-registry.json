@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "claim_boundary": "Curated source-owner/component registry only. Source presence is not SwiftUI render proof, Visual Green, accessibility conformance, device proof, release proof, or owner approval.",
+  "claim_boundary": "HISTORICAL_REFERENCE. Curated source-owner/component registry only. Historical component and Figma mappings are not active component APIs or current selection. Source presence is not SwiftUI render proof, Visual Green, accessibility conformance, device proof, release proof, or owner approval.",
   "components": [
     {
       "component_id": "shell-stage-root",

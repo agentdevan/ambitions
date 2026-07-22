@@ -76,11 +76,13 @@ generated_files = [
   "generated/object-boundary-matrix.md",
   "generated/requirement-graph.json",
   "generated/requirement-traceability.json",
+  "generated/visual-authority-manifest.json",
 ]
 
 reference_files = [
   "design/VISUAL_SYSTEM_R1.md",
-  "generated/visual-authority-manifest.json",
+  "design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+  "design/visual-closure-input-contract.json",
   "migration/UX_BLUEPRINT.md",
   "migration/ux-blueprint.json",
   "migration/ux-blueprint-state-inventory.json",

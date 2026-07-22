@@ -21,8 +21,9 @@ Date: 2026-07-22
 | `docs/audits/rp-01-08-evidence-audit/00-audit-manifest.md` through `12-*` | Historical evidence | Preserve findings, baseline, contradictions, and proof ceiling intact. |
 | `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md` | Current owner authority | Controls D-DEV-01 through D-DEV-10. |
 | Four 2026-07-22 reconciliation ADRs | Current architecture/runtime authority | Target contracts; no implementation claim. |
+| `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md` and JSON peer | Current visual-closure input authority | Sole active VC-01–VC-14 baseline; authorization flags remain false. |
 | `docs/canon/migration/UX_BLUEPRINT.md` and JSON peer | Current shadow design input | Reconciled overlay controls current UX direction; legacy inventory remains traceable. |
-| `docs/canon/generated/*` | Generated | Regenerate through canon compiler. |
+| `docs/canon/generated/*`, including `visual-authority-manifest.json` | Generated | Regenerate through canon compiler; never hand-edit. |
 | This register, reconciliation traceability, and reconstruction plan | Current planning authority | Sequencing and authority cleanup only. |
 | Current Swift source/tests | Implementation evidence | Establish current capability, not visual approval or future product authority. |
 
@@ -41,6 +42,12 @@ Date: 2026-07-22
 | Audit unresolved D-DEV-01..10 rows | Superseded only as unresolved status | File 13 resolutions | Original question/evidence remains intact. |
 | Account/cloud-continuity You screens as current flagship baseline | Superseded | D-DEV-09 and `AVF-YOU-D07-R02` | Future concept records do not authorize active rows. |
 | iPad/Mac/visionOS/landscape/multiwindow flagship implications | Superseded for current scope | D-DEV-10 | Cross-device principles remain future-only. |
+| New York or other serif as interface type | Superseded | VC input typography contract | Historical specimens remain provenance only; San Francisco is the sole active family. |
+| OLED Dark as an approved appearance | Superseded | System/Light/Dark baseline | Historical tokens and frames remain non-authoritative. |
+| Atmosphere families, photo-derived atmosphere, and sensory/text-comfort modes | Superseded as active controls | D-DEV-09 and VC input appearance boundary | May remain historical evidence; not disabled or selectable rows. |
+| Exact Revision 1 Figma collections, variables, component APIs, and token values | Implementation detail not authorized | VC input exact-token boundary | May be evaluated during closure but cannot be treated as active authority. |
+| Legacy accent families | Deferred candidates requiring owner review | Restrained violet-indigo default plus VC-02 review | No candidate is active merely because historical exact values exist. |
+| Bottom-rail geometry and legacy Today rail/root anatomy | Superseded | Crowned Edge Dock plus `AVF-TODAY-S10-R00` | Historical frame geometry remains evidence only. |
 
 ## Unsupported current capability
 

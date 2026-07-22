@@ -1,33 +1,35 @@
-# Ambitions Visual System Revision 1
+# Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
 Status: `PROVISIONAL_VISUAL_EXPLORATION / FIGMA_NOT_AUTHORIZED`
 
 Date: 2026-07-22
 
-Figma file: `Oik7612LSTUHWsNRFoTlTJ`
+Historical Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `24e895c6c9b8802a8c2a86cd82532bbb9ce73b1667899f3f69a21453c10b3994`;
+- canon content SHA: `57177cb04c6431ec39b4f39a6b6931833d712c89bb4a6b09497084d5ecc98ea2`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `f4463d2c772e1dbbbc604178f7524eeb48e3d5c9aa6ff5b7082124508a8ab3ec`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `c3b103948719645e574e33527aae402db6f079129cbf3a50a22aaafd3e100564`;
+- UX blueprint Markdown SHA-256: `52be42d72234d2c72ae01d8179b5e8526567d420b003af4acff120da0704b1d7`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `9a85acea7e6ba38ada3d98e48894c89f33d6e67dada2c37b3fa2d07df36031cf`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `8e37965e38cde71a274e9225d04c9976b28b6b24b33bcd19b244bd9e4df30db8`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `7c2636b5bd3299be74b59529cadebf80d0fc021583706a10aa159c498b6bd505`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `cc45b2b6937d50c26fe841ce2d02ee476a95313b0609b7678afbf8c956242a49`;
+- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `c368175f8cf2ed5ee49ca78eedc6ff2de073392f866bedb2630377f97ed7e928`;
+- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `99873944434b2e1bdd190ad1476c62c30d5b72ae0a2e8cc8172b785d5bddf3ee`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `d16652c0a83f3adb1c76bf4d35cd608eda66a434ae4809e7465c100672c37240`;
 
-This document is the provisional design direction for Ambitions. It defines visual
-language, component semantics, cross-surface composition, appearance behavior,
-motion, and accessibility intent. The linked Figma frames and repository images
-are historical design references, not current selection or merge approvals. Live implementation still has to
-compile and satisfy the applicable behavioral, accessibility, privacy,
-performance, and rendered-UI checks.
+This document preserves the Revision 1 corpus and routes current visual closure
+to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract and its
+machine peer are the only active input to VC-01 through VC-14. The Figma frames,
+exact tokens, component descriptions, and archived appearance studies below are
+historical or deferred according to their explicit classification; none is a
+current selection, component API, implementation instruction, or proof.
 
-## 1. Reconciled provisional direction
+## 1. Active reconciled VC baseline
 
 The controlling owner record is
 `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`.
@@ -48,11 +50,26 @@ action accent. You is local/no-account. Current platform scope is iPhone,
 portrait, and single scene.
 
 Figma authorization is false. SwiftUI approval is false. Implementation
-authorization is false. Historical Figma references and VAD contracts below are
-provenance and feasibility inputs; they do not override the reconciled
-directions or activate an unsupported capability.
+authorization is false.
 
-### Historical Revision 1 synthesis
+The complete active typography, appearance, accent, material, platform,
+capability, exclusion, and visual-validation boundary is defined in
+`VISUAL_CLOSURE_INPUT_CONTRACT.md` and
+`visual-closure-input-contract.json`. San Francisco is the sole active core
+interface family. System, Light, and Dark are the only active appearance
+choices. Restrained violet-indigo is the default action accent. Primary content
+is opaque, matte, and continuous; functional material is limited to justified
+chrome with an authored opaque Reduce Transparency equivalent.
+
+Every `VAD-R1-*` contract below carries one classification from the closed
+vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
+`DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW`,
+`IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
+contract remains evidence only even when its original prose uses imperative or
+present-tense language. Only clauses repeated in the visual-closure input
+contract may control VC-01 through VC-14.
+
+### Historical Revision 1 synthesis — `HISTORICAL_REFERENCE`
 
 The owner rejected all three earlier workshop directions as final visual authority and later reviewed three additional Today treatments. The owner liked all three later treatments but did not love any one of them. The owner then approved the following synthesis:
 
@@ -64,9 +81,11 @@ The owner rejected all three earlier workshop directions as final visual authori
 - Provide a robust Appearance Studio with governed accents and authored atmospheres.
 - Support photo-derived atmospheres processed locally; do not place literal user photographs behind operational content.
 
-This synthesis remains historical input where it does not conflict with the
-reconciled directions. Individual reference frames cannot change owner choices,
-current capability, or authorization state.
+This synthesis is provenance only. Its serif, atmosphere, photo-derived,
+Appearance Studio, sensory, density, material, OLED Dark, exact-token, and
+component-library implications are superseded or deferred by the closure input
+contract. Individual reference frames cannot change owner choices, current
+capability, or authorization state.
 
 ## 2. Design objective
 
@@ -90,7 +109,12 @@ Stable blueprint screen and state IDs remain the product-mapping anchors. The `V
 
 ### `VAD-R1-SYS-001` — One stable anatomy
 
-Light, dark, atmosphere, accent, and material variants use the same component semantics, logical hierarchy, interaction roles, reading order, and object meaning. Accessibility variants preserve those invariants while allowing geometry to recompose: columns may stack, groups may split, chrome may simplify, and controls may move into a logical linear order when space or text size requires it.
+System-resolved Light/Dark appearance and the approved action accent use the
+same component semantics, logical hierarchy, interaction roles, reading order,
+and object meaning. Accessibility variants preserve those invariants while
+allowing geometry to recompose: columns may stack, groups may split, chrome may
+simplify, and controls may move into a logical linear order when space or text
+size requires it.
 
 An appearance change must never feel like switching to another application.
 

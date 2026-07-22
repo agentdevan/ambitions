@@ -1,14 +1,16 @@
 # Visual Direction Phase 2 — Quiet Field Decision
 
-Status: retained design-direction decision
-Selected direction: C4 — Quiet Field
+Status: `HISTORICAL_REFERENCE`
+Selected direction at the time: C4 — Quiet Field
 Figma: [Ambitions Canonical Visual Direction — Phase 2](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ)
 
 This record preserves why Quiet Field was selected and where its source frames
 live. It is product-design context, not repository authorization. Current
 implementation direction is owned by
 `docs/canon/design/VISUAL_SYSTEM_R1.md` and the applicable product
-specification.
+specification. The current VC baseline is
+`docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`; C4 does not supply active
+serif, atmosphere, OLED, appearance-control, token, or component authority.
 
 ## Decision
 

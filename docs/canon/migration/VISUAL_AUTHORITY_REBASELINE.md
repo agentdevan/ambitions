@@ -1,13 +1,13 @@
 # Ambitions Visual Reference Rebaseline
 
-Status: retained design-decision and visual-reference history
-Selected visual language: C4 — Quiet Field
+Status: `HISTORICAL_REFERENCE`
+Selected visual language at the time: C4 — Quiet Field
 
 This record indexes the durable product-design material produced during the
 visual rebaseline. Historical machine records retain their original field
 names for byte-level provenance, but those fields create no task, approval,
 authorization, status, or merge process. Current visual direction is routed by
-`docs/canon/design/VISUAL_SYSTEM_R1.md`.
+`docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`.
 
 ## Reference corpus
 

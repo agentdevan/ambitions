@@ -15,6 +15,8 @@ accepted reconciliation ADRs (architecture/runtime decisions)
         v
 canonical UX Blueprint requirements (design input, not proof)
         v
+VC-01–VC-14 visual closure input contract (active provisional baseline)
+        v
 reconciled flagship reconstruction plan (sequencing)
         v
 proof gates (future evidence)
@@ -83,7 +85,7 @@ their named authority and do not change product meaning:
 | R-ARCH-02 | Select schema encodings for the accepted identity models; recommend opaque UUIDs plus explicit source keys/version lineage. | Natural/composite canonical IDs make migration and source change brittle. | Architecture | R2 implementation entry |
 | R-RUNTIME-01 | Approve individual bounded outboxes only when a domain needs accepted offline external work; recommend none by default. | A generic queue widens semantics and privacy risk. | Runtime | Pending UI in that domain |
 | R-RUNTIME-02 | Set operation-specific Receipt retention/Undo expiry from privacy and external constraints; recommend registry-owned values. | One global duration overstates uniform reversibility. | Runtime/privacy | R4 registry closure |
-| R-UX-01 | Specify exact localized copy and state layout within locked hierarchy; recommend object-first, consequence-explicit language. | Denser status-first copy weakens protected hierarchy. | UX Blueprint | Visual closure studies |
+| R-UX-01 | Specify exact localized copy and state layout within locked hierarchy; recommend object-first, consequence-explicit language. | Denser status-first copy weakens protected hierarchy. | UX Blueprint | VC detail validation, not R10 entry |
 | R-RECON-01 | Choose bounded cutover slices only after schemas/tests exist; recommend identity before projections and shell before visual cutover. | Surface-first cutover creates adapters/duplicate owners. | Reconstruction planning | Implementation packets |
 | R-A11Y-01 | Assign actual shortcut combinations after system/localization collision testing; recommend platform conventions. | Custom chords harm discoverability and conflict risk. | Accessibility/platform | Keyboard implementation |
 

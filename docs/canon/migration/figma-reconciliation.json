@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "canon_revision": 1,
-  "authority_state": "active",
-  "disposition_state": "authority_metadata_and_text_applied_verified",
+  "authority_state": "historical_reference",
+  "disposition_state": "historical_metadata_and_text_evidence",
   "external_mutations_applied": true,
   "execution_receipt": {
     "approval_authority": "controller_on_owner_behalf_under_tasks_22_29_delegation",

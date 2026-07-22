@@ -36,7 +36,7 @@
       "state_authority"
     ]
   },
-  "authority_state": "shadow_non_authoritative",
+  "authority_state": "historical_reference",
   "blueprint": {
     "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
     "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
@@ -110,7 +110,7 @@
     "figma_section_node_id": "11:2",
     "name": "Quiet Field",
     "revision": "C4",
-    "status": "approved_visual_language_only"
+    "status": "historical_selection_at_time"
   },
   "status": "complete_with_phase_3_authority_blocker"
 }

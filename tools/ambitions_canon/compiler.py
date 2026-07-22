@@ -28,6 +28,28 @@ GENERATED_PATHS = (
     "generated/object-boundary-matrix.md",
     "generated/requirement-graph.json",
     "generated/requirement-traceability.json",
+    "generated/visual-authority-manifest.json",
+)
+
+VISUAL_CLASSIFICATIONS = {
+    "ACTIVE_RECONCILED_BASELINE",
+    "HISTORICAL_REFERENCE",
+    "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
+    "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
+    "SUPERSEDED",
+}
+ACTIVE_VISUAL_DIRECTIONS = (
+    "AVF-DNA-S07-R00",
+    "AVF-SHELL-S07-R01",
+    "AVF-CAPTURE-S07-R01",
+    "AVF-GOALS-S08-R00",
+    "AVF-TIME-S07-R01",
+    "AVF-TODAY-S10-R00",
+    "AVF-SEARCH-D07-R01",
+    "AVF-YOU-D07-R02",
+    "AVF-RECOVERY-S07-R01",
+    "AVF-A11Y-S07-R00",
+    "AVF-COHERENCE-S07-R00",
 )
 
 REQUIRED_FRONTMATTER = {
@@ -603,6 +625,7 @@ def validate_local_links(root: Path, manifest: Manifest) -> int:
 def validate_structured_references(root: Path) -> int:
     repository_root = root.resolve(strict=True)
     roots = (
+        repository_root / "docs/canon/design",
         repository_root / "docs/canon/migration",
         repository_root / "docs/canon/schemas",
         repository_root / "docs/design/provenance",
@@ -660,10 +683,10 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     dispositions_path = (
         "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
     )
-    visual_manifest_path = "docs/canon/generated/visual-authority-manifest.json"
+    visual_contract_path = "docs/canon/design/visual-closure-input-contract.json"
     blueprint = load(blueprint_path)
     dispositions = load(dispositions_path)
-    visual_manifest = load(visual_manifest_path)
+    visual_contract = load(visual_contract_path)
 
     state_models = blueprint.get("state_models")
     if not isinstance(state_models, list):
@@ -763,7 +786,6 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     for label, payload in (
         ("UX Blueprint", blueprint),
         ("UX Blueprint dispositions", dispositions),
-        ("visual authority manifest", visual_manifest),
     ):
         if payload.get("canon_revision") != revision:
             raise CanonError(
@@ -810,23 +832,66 @@ def validate_design_artifacts(compilation: Compilation) -> None:
             "UX Blueprint Markdown/JSON disposition sources disagree"
         )
 
-    authorities = visual_manifest.get("authorities")
-    if not isinstance(authorities, list) or not authorities:
-        raise CanonError("visual authority manifest authorities must be a list")
-    for authority in authorities:
-        if not isinstance(authority, dict):
-            raise CanonError("visual authority manifest has an invalid authority")
-        if authority.get("canon_revision") != revision:
-            raise CanonError(
-                "visual authority entry canon_revision does not match active canon"
-            )
-        requirement_ids = authority.get("requirement_ids")
-        if not isinstance(requirement_ids, list) or not all(
+    if visual_contract.get("status") != "ACTIVE_RECONCILED_BASELINE":
+        raise CanonError("visual closure input status must be active reconciled")
+    if set(visual_contract.get("classification_vocabulary", [])) != (
+        VISUAL_CLASSIFICATIONS
+    ):
+        raise CanonError("visual closure classification vocabulary is invalid")
+    authorization = visual_contract.get("authorization")
+    if authorization != {
+        "figma": False,
+        "implementation": False,
+        "swiftui": False,
+        "visual_closure_planning": True,
+    }:
+        raise CanonError("visual closure authorization state is invalid")
+    active_baseline = visual_contract.get("active_baseline")
+    if not isinstance(active_baseline, dict):
+        raise CanonError("visual closure active_baseline must be an object")
+    if active_baseline.get("directions") != list(ACTIVE_VISUAL_DIRECTIONS):
+        raise CanonError("visual closure active direction IDs are invalid")
+    typography = active_baseline.get("typography")
+    if not isinstance(typography, dict) or typography != {
+        "core_family": "San Francisco",
+        "interface_roles": "SF Pro",
+        "monospaced_digits": "San Francisco family only",
+        "serif_active": False,
+    }:
+        raise CanonError("visual closure typography baseline is invalid")
+    appearance = active_baseline.get("appearance")
+    if not isinstance(appearance, dict) or appearance.get("choices") != [
+        "System",
+        "Light",
+        "Dark",
+    ]:
+        raise CanonError("visual closure active appearance choices are invalid")
+    accent = active_baseline.get("accent")
+    if not isinstance(accent, dict) or accent.get("default_family") != (
+        "restrained_violet_indigo"
+    ):
+        raise CanonError("visual closure default accent is invalid")
+
+    mappings = visual_contract.get("visual_requirement_mappings")
+    if not isinstance(mappings, list) or not mappings:
+        raise CanonError("visual closure requirement mappings must be a list")
+    mapping_directions = [
+        mapping.get("direction_id")
+        for mapping in mappings
+        if isinstance(mapping, dict)
+    ]
+    if mapping_directions != list(ACTIVE_VISUAL_DIRECTIONS):
+        raise CanonError("visual closure mappings do not match active directions")
+    for mapping in mappings:
+        if not isinstance(mapping, dict):
+            raise CanonError("visual closure has an invalid requirement mapping")
+        if mapping.get("status") != "ACTIVE_RECONCILED_BASELINE":
+            raise CanonError("active visual mapping has a non-active status")
+        requirement_ids = mapping.get("requirement_ids")
+        if not isinstance(requirement_ids, list) or not requirement_ids or not all(
             isinstance(value, str) for value in requirement_ids
         ):
-            raise CanonError(
-                "visual authority entry requirement_ids must be a string list"
-            )
+            raise CanonError("visual closure mapping requirement_ids are invalid")
         inactive = sorted(set(requirement_ids) - active_requirement_ids)
         if inactive:
             raise CanonError(
@@ -834,11 +899,20 @@ def validate_design_artifacts(compilation: Compilation) -> None:
                 f"{inactive[0]}"
             )
 
-    blueprint_markdown = _confined_path(
-        root, Path("docs/canon/migration/UX_BLUEPRINT.md")
-    ).read_text(encoding="utf-8")
+    classifications = visual_contract.get("legacy_contract_classifications")
+    if not isinstance(classifications, dict):
+        raise CanonError("visual closure legacy classifications must be an object")
     visual_system = _confined_path(
         root, Path("docs/canon/design/VISUAL_SYSTEM_R1.md")
+    ).read_text(encoding="utf-8")
+    legacy_contract_ids = set(re.findall(r"\bVAD-R1-[A-Z0-9-]+", visual_system))
+    if set(classifications) != legacy_contract_ids:
+        raise CanonError("visual closure legacy classification coverage is incomplete")
+    if not all(value in VISUAL_CLASSIFICATIONS for value in classifications.values()):
+        raise CanonError("visual closure contains an invalid legacy classification")
+
+    blueprint_markdown = _confined_path(
+        root, Path("docs/canon/migration/UX_BLUEPRINT.md")
     ).read_text(encoding="utf-8")
     markdown_contracts = (
         (
@@ -1251,6 +1325,58 @@ def render_requirement_traceability(compilation: Compilation) -> bytes:
     ).encode("utf-8")
 
 
+def render_visual_authority_manifest(compilation: Compilation) -> bytes:
+    """Render the active visual authority from its source-owned VC contract."""
+    relative_source = Path(
+        "docs/canon/design/visual-closure-input-contract.json"
+    )
+    source_path = _confined_path(compilation.root, relative_source)
+    source_bytes = source_path.read_bytes()
+    contract = json.loads(source_bytes.decode("utf-8"))
+    payload = {
+        "active_baseline": contract["active_baseline"],
+        "authorities": [
+            {
+                "authority_role": "active_reconciled_direction",
+                "authority_status": "provisional",
+                "canon_revision": compilation.manifest.canon_revision,
+                "classification": mapping["status"],
+                "implementation_status": (
+                    "target contract only; runtime and rendered proof required"
+                ),
+                "requirement_ids": mapping["requirement_ids"],
+                "source": relative_source.as_posix(),
+                "visual_authority_id": mapping["direction_id"],
+            }
+            for mapping in contract["visual_requirement_mappings"]
+        ],
+        "authority_state": contract["authorization"],
+        "canon_content_sha": compilation.canon_digest,
+        "canon_revision": compilation.manifest.canon_revision,
+        "classification_vocabulary": contract["classification_vocabulary"],
+        "compiler_version": "0.3.0",
+        "contract_id": contract["contract_id"],
+        "historical_figma_references": contract["historical_figma_references"],
+        "legacy_contract_classifications": contract[
+            "legacy_contract_classifications"
+        ],
+        "schema_version": 2,
+        "source_contract": relative_source.as_posix(),
+        "supersessions": contract["supersessions"],
+        "traceability_input_sha": hashlib.sha256(source_bytes).hexdigest(),
+        "unsupported_visual_behaviors": contract[
+            "unsupported_visual_behaviors"
+        ],
+        "visual_validation_decisions": contract[
+            "visual_validation_decisions"
+        ],
+    }
+    return (
+        json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)
+        + "\n"
+    ).encode("utf-8")
+
+
 def render_outputs(compilation: Compilation) -> dict[str, bytes]:
     return {
         "generated/CODEX_START_HERE.md": render_codex_start(compilation),
@@ -1260,6 +1386,9 @@ def render_outputs(compilation: Compilation) -> dict[str, bytes]:
         "generated/requirement-graph.json": render_graph_json(compilation),
         "generated/requirement-traceability.json": (
             render_requirement_traceability(compilation)
+        ),
+        "generated/visual-authority-manifest.json": (
+            render_visual_authority_manifest(compilation)
         ),
     }
 
