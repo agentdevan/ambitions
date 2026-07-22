@@ -14,6 +14,12 @@
 | Output directory | `docs/audits/rp-01-08-evidence-audit/` |
 | Scope | RP-01 through RP-08, evidence production only |
 
+## Later owner reconciliation layer
+
+RP-01 through RP-08 remains the evidence-only audit at the audit date, baseline, and proof ceiling recorded above. `13-owner-reconciliation-decisions.md` is a later controlling owner reconciliation layered over that evidence; it does not rewrite, invalidate, or upgrade the evidence packets.
+
+The reconciliation resolves D-DEV-01 through D-DEV-10 and authorizes the remaining Architecture, UX Blueprint, Runtime, Reconstruction planning, and Accessibility/platform planning work. It does not authorize Figma, SwiftUI, frontend implementation, product-code modification, or any claim that the selected future architecture already exists.
+
 ## Working-tree and baseline chronology
 
 Initial orientation found four pre-existing modified files on `main`:
@@ -107,7 +113,20 @@ The first Markdown lint pass exposed line-length/table-style noise and three une
 | `10-reconciliation-decision-register.md` | Complete | Unresolved decisions by authority |
 | `11-unsupported-visual-assumptions.md` | Complete | Unsupported provisional behaviors and disposition |
 | `12-reconstruction-impact-register.md` | Complete | Reconstruction implications and dependencies, not an implementation plan |
+| `13-owner-reconciliation-decisions.md` | Owner reconciliation complete | Later controlling owner decisions layered over the evidence-only audit; planning authority only |
 | `audit-index.json` | Complete | Deterministic machine-readable findings index |
+
+## Owner reconciliation installation validation
+
+| Check | Result |
+| --- | --- |
+| `git status --short` scope review | Exactly `00-audit-manifest.md`, `10-reconciliation-decision-register.md`, `13-owner-reconciliation-decisions.md`, and `audit-index.json` changed |
+| `git diff --check` | Passed |
+| Repository Markdown lint | Passed: 14 Markdown files, zero errors |
+| `python3 -m json.tool` and targeted `jq` assertions | Passed; ten owner decisions resolved, eight authorized direction records present, and all three implementation authorization flags false |
+| Original audit identity/proof assertions | Passed; audit date, baseline SHA, and simulator proof ceiling unchanged |
+| Non-owner decision-section comparison | Passed; Architecture, UX Blueprint, Runtime, Reconstruction planning, and Accessibility/platform sections preserved |
+| `python3 scripts/ambitions-canon.py check` | Passed: 66 documents, 466 requirements, 47 UX screens, 39 visual contracts, 16 local links, 18 JSON files |
 
 ## Integrity statement
 

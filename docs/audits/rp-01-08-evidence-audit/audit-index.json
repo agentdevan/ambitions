@@ -17,6 +17,16 @@
       "RP-08"
     ]
   },
+  "authorization": {
+    "accessibility_platform_planning": true,
+    "architecture_planning": true,
+    "figma_authorization": false,
+    "implementation_authorization": false,
+    "reconstruction_planning": true,
+    "runtime_planning": true,
+    "swiftui_approval": false,
+    "ux_blueprint_planning": true
+  },
   "capability_status_vocabulary": [
     "SUPPORTED",
     "PARTIALLY_SUPPORTED",
@@ -38,6 +48,293 @@
     "UNSUPPORTED_VISUAL_BEHAVIOR_REMOVE",
     "IMPLEMENTATION_DETAIL_DEFERRED"
   ],
+  "owner_resolution_status_vocabulary": [
+    "RESOLVED_BY_OWNER"
+  ],
+  "owner_reconciliation": {
+    "audit_evidence_preserved": true,
+    "controlling_record": "13-owner-reconciliation-decisions.md",
+    "remaining_decision_authority": [
+      "Architecture",
+      "UX Blueprint",
+      "Runtime",
+      "Reconstruction planning",
+      "Accessibility/platform planning"
+    ],
+    "resolved_decision_ids": [
+      "D-DEV-01",
+      "D-DEV-02",
+      "D-DEV-03",
+      "D-DEV-04",
+      "D-DEV-05",
+      "D-DEV-06",
+      "D-DEV-07",
+      "D-DEV-08",
+      "D-DEV-09",
+      "D-DEV-10"
+    ],
+    "status": "OWNER_RECONCILIATION_COMPLETE",
+    "visual_operating_mode": "Provisional Visual Exploration Mode"
+  },
+  "owner_decisions": [
+    {
+      "affected_direction_ids": [
+        "AVF-SHELL-S07-R00",
+        "AVF-CAPTURE-S07-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "decision_id": "D-DEV-01",
+      "downstream_dependencies": [
+        "root-container and dock ownership",
+        "native and custom navigation boundary",
+        "tiered restoration contract",
+        "dock accessibility equivalents"
+      ],
+      "new_direction_ids": [
+        "AVF-SHELL-S07-R01"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "The Crowned Edge Dock remains the target flagship shell; native-compatible semantics and a named return to Devan are required if architecture proves it infeasible.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-GOALS-S07-R01",
+        "AVF-SEARCH-D07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-02",
+      "downstream_dependencies": [
+        "canonical Life Area identity",
+        "Goal membership",
+        "enum-derived Life Area migration",
+        "Search and projection identity"
+      ],
+      "new_direction_ids": [
+        "AVF-GOALS-S08-R00"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Goals becomes Life-Area-led while preserving the Linked Goal Lens inside Goal-owned depth.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TODAY-S09-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-03",
+      "downstream_dependencies": [
+        "Start Here projection eligibility",
+        "Also Fits Now earned-fit contract",
+        "Today timeline hierarchy",
+        "owner handoff"
+      ],
+      "new_direction_ids": [
+        "AVF-TODAY-S10-R00"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Today uses one dominant Start Here projection and at most one earned Also Fits Now projection.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TODAY-S09-R00",
+        "AVF-TODAY-S10-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-04",
+      "downstream_dependencies": [
+        "typed day-specific projection or admission relation",
+        "canonical source object linkage",
+        "owner route and local action contract"
+      ],
+      "new_direction_ids": [
+        "AVF-TODAY-S10-R00"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "A Today priority is a day-specific projection or admission relation against a canonical object, not a duplicate canonical object.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-TIME-S07-R00"
+      ],
+      "decision_id": "D-DEV-05",
+      "downstream_dependencies": [
+        "supported Time scale inventory",
+        "last-used scale persistence",
+        "view parity gates"
+      ],
+      "new_direction_ids": [
+        "AVF-TIME-S07-R01"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Week is the first-use Time default; the last-used supported scale is restored after selection when runtime support exists.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-SEARCH-D07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-06",
+      "downstream_dependencies": [
+        "global owner-transfer envelope",
+        "owner revalidation and confirmation",
+        "Search return context",
+        "grounded Understand contract"
+      ],
+      "new_direction_ids": [
+        "AVF-SEARCH-D07-R01"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Search is not a mutation owner; Search Act prepares and transfers to the canonical owner.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-CAPTURE-S07-R00",
+        "AVF-SEARCH-D07-R00",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-07",
+      "downstream_dependencies": [
+        "typed per-scope settlement",
+        "atomic owner commit boundaries",
+        "Settlement Ledger capability gate",
+        "whole-result fallback states"
+      ],
+      "new_direction_ids": [
+        "AVF-RECOVERY-S07-R01"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Partial settlement appears only for genuinely independent scopes backed by a typed per-scope model; other operations split or use whole-result outcomes.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-DNA-S07-R00",
+        "AVF-YOU-D07-R01",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-08",
+      "downstream_dependencies": [
+        "canonical appearance model",
+        "deterministic preference migration",
+        "light and dark contrast review",
+        "monochrome and state-separation review"
+      ],
+      "new_direction_ids": [],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Restrained violet-indigo becomes the default Ambitions action accent and never carries root or semantic-state identity alone.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-YOU-D07-R01",
+        "AVF-RECOVERY-S07-R00",
+        "AVF-A11Y-S07-R00"
+      ],
+      "decision_id": "D-DEV-09",
+      "downstream_dependencies": [
+        "local-only You inventory",
+        "Identity and Local Data hierarchy",
+        "unsupported account-row removal",
+        "capability-gated local authentication"
+      ],
+      "new_direction_ids": [
+        "AVF-YOU-D07-R02"
+      ],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "The current flagship You baseline is local and no-account; account, continuity, subscription, and cross-device administration are removed from current scope.",
+      "source": "13-owner-reconciliation-decisions.md"
+    },
+    {
+      "affected_direction_ids": [
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "decision_id": "D-DEV-10",
+      "downstream_dependencies": [
+        "iPhone portrait device matrix",
+        "single-scene shell contract",
+        "external-surface device proof",
+        "Spotlight planned-only boundary"
+      ],
+      "new_direction_ids": [],
+      "remaining_decision_authority": [
+        "Architecture",
+        "UX Blueprint",
+        "Runtime",
+        "Reconstruction planning",
+        "Accessibility/platform planning"
+      ],
+      "resolution_status": "RESOLVED_BY_OWNER",
+      "selected_outcome": "Current flagship scope is iPhone, portrait, and single scene; other platforms remain future-only and source-backed external surfaces require direct proof.",
+      "source": "13-owner-reconciliation-decisions.md"
+    }
+  ],
   "packet_files": [
     "00-audit-manifest.md",
     "01-rp-01-shell-navigation-restoration.md",
@@ -52,7 +349,60 @@
     "10-reconciliation-decision-register.md",
     "11-unsupported-visual-assumptions.md",
     "12-reconstruction-impact-register.md",
+    "13-owner-reconciliation-decisions.md",
     "audit-index.json"
+  ],
+  "visual_direction_records": [
+    {
+      "id": "AVF-GOALS-S08-R00",
+      "kind": "NEW_STRUCTURAL_BRANCH",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "supersedes_scope": "AVF-GOALS-S07-R01 root structure",
+      "title": "Life Area Linked Goal Lens"
+    },
+    {
+      "id": "AVF-TODAY-S10-R00",
+      "kind": "NEW_STRUCTURAL_BRANCH",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "supersedes_scope": "AVF-TODAY-S09-R00 first-viewport hierarchy",
+      "title": "Start Here Contextual Command"
+    },
+    {
+      "id": "AVF-SHELL-S07-R01",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Crowned Edge Dock, Native-Semantics Reconciled"
+    },
+    {
+      "id": "AVF-CAPTURE-S07-R01",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Bounded Adaptive Meaning Fold"
+    },
+    {
+      "id": "AVF-TIME-S07-R01",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Integrated Period Atlas, Capability-Bounded"
+    },
+    {
+      "id": "AVF-SEARCH-D07-R01",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Owner-Routed Semantic Command Field"
+    },
+    {
+      "id": "AVF-YOU-D07-R02",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Local Personal Control Index"
+    },
+    {
+      "id": "AVF-RECOVERY-S07-R01",
+      "kind": "TARGETED_RECONCILIATION_REVISION",
+      "owner_status": "RESOLVED_BY_OWNER",
+      "title": "Capability-Negotiated Contextual Truth"
+    }
   ],
   "findings": [
     {

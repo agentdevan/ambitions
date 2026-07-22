@@ -4,22 +4,37 @@
 
 ## Purpose
 
-This register records decisions the repository cannot make on its own. It does not select outcomes, revise canon, approve a visual direction, or create an implementation plan. Evidence IDs refer to the eight packets and the cross-packet register.
+This register records decisions the repository cannot make on its own. Evidence IDs refer to the eight packets and the cross-packet register. D-DEV-01 through D-DEV-10 retain their original audit questions and evidence below, but are now resolved by the later controlling owner record. Architecture, UX Blueprint, Runtime, Reconstruction planning, and Accessibility/platform decisions remain unresolved and unchanged.
 
 ## Devan
 
-| ID | Unresolved decision | Evidence | Packets / directions | Downstream dependency |
-| --- | --- | --- | --- | --- |
-| D-DEV-01 | Whether the locked right-edge six-control Crowned Edge Dock may supersede the current four-root bottom-navigation canon, or remains a separate visual branch pending a later canon change. | X-01; RP-01 E-RP01-011 | RP-01, RP-08; `AVF-SHELL-S07-R00` | Shell architecture, UX Blueprint, Figma later |
-| D-DEV-02 | Whether the provisional Goal-led root or current canon’s editable Life-Area-led root is the intended future product authority. | X-06; RP-04 E-RP04-02 | RP-02, RP-04; `AVF-GOALS-S07-R01` | Life Area ontology, Goals reconstruction |
-| D-DEV-03 | Whether Today retains the locked maximum-three “What Matters Today” region or reconciles to canon’s one dominant `Start here` plus at most one suggestion. | X-07; RP-04 E-RP04-04 | RP-04; `AVF-TODAY-S09-R00` | Today priority ontology and first viewport |
-| D-DEV-04 | Whether a Today priority is always a projection of an existing canonical object or a new day-specific relation/object. | RP-02 canonical inventory; RP-04 Required decisions | RP-02, RP-04; `AVF-TODAY-S09-R00` | Identity, history, mutation owner |
-| D-DEV-05 | Whether Week is only the first-use default while last-used view is retained, or a stronger reset/root rule. | X-09 | RP-04; `AVF-TIME-S07-R00` | Time preference contract |
-| D-DEV-06 | Whether Search “Act” must feel in-place or may visibly transfer to an owning root while preserving Search identity and return context. | X-15; RP-05 Find/Understand/Act matrix | RP-05; `AVF-SEARCH-D07-R00` | Global action transfer UX |
-| D-DEV-07 | Whether multi-scope partial settlement is an essential protected behavior or remains explicitly provisional/omitted until runtime representation exists. | X-12 | RP-03, RP-05, RP-07; `AVF-RECOVERY-S07-R00` | Settlement architecture and visual states |
-| D-DEV-08 | Whether restrained violet-indigo replaces or augments the current accent families, or remains future visual intent. | X-18; RP-06 Y07–Y08 | RP-06; `AVF-DNA-S07-R00`, `AVF-YOU-D07-R01` | Appearance migration and token work |
-| D-DEV-09 | Whether optional account/continuity/subscription capabilities belong in the selected You baseline. | RP-06 Y04, Y06, Y14 | RP-06; `AVF-YOU-D07-R01` | Account/entitlement IA and runtime scope |
-| D-DEV-10 | Whether Ambitions remains strictly iPhone/portrait or any iPad, Mac, landscape, multi-window, or other platform adaptation becomes product scope. | X-21; RP-08 E-RP08-012 | RP-08; `AVF-COHERENCE-S07-R00` | Platform architecture and proof matrix |
+| ID | Original unresolved decision | Evidence | Packets / directions | Original downstream dependency | Resolution status | Selected decision | Owner record |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| D-DEV-01 | Whether the locked right-edge six-control Crowned Edge Dock may supersede the current four-root bottom-navigation canon, or remains a separate visual branch pending a later canon change. | X-01; RP-01 E-RP01-011 | RP-01, RP-08; `AVF-SHELL-S07-R00` | Shell architecture, UX Blueprint, Figma later | `RESOLVED_BY_OWNER` | Preserve Crowned Edge Dock as the target flagship shell; require native-compatible semantics and `AVF-SHELL-S07-R01`; return to Devan if architecture proves it infeasible. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-02 | Whether the provisional Goal-led root or current canon’s editable Life-Area-led root is the intended future product authority. | X-06; RP-04 E-RP04-02 | RP-02, RP-04; `AVF-GOALS-S07-R01` | Life Area ontology, Goals reconstruction | `RESOLVED_BY_OWNER` | Goals becomes Life-Area-led; preserve Goal-owned Linked Goal Lens depth in `AVF-GOALS-S08-R00`. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-03 | Whether Today retains the locked maximum-three “What Matters Today” region or reconciles to canon’s one dominant `Start here` plus at most one suggestion. | X-07; RP-04 E-RP04-04 | RP-04; `AVF-TODAY-S09-R00` | Today priority ontology and first viewport | `RESOLVED_BY_OWNER` | Use one dominant Start Here projection and zero or one earned Also Fits Now projection in `AVF-TODAY-S10-R00`. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-04 | Whether a Today priority is always a projection of an existing canonical object or a new day-specific relation/object. | RP-02 canonical inventory; RP-04 Required decisions | RP-02, RP-04; `AVF-TODAY-S09-R00` | Identity, history, mutation owner | `RESOLVED_BY_OWNER` | A Today priority is a day-specific projection/admission relation against a canonical object, never a copied canonical object. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-05 | Whether Week is only the first-use default while last-used view is retained, or a stronger reset/root rule. | X-09 | RP-04; `AVF-TIME-S07-R00` | Time preference contract | `RESOLVED_BY_OWNER` | Week is the first-use default; restore the last-used supported scale later; record `AVF-TIME-S07-R01`. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-06 | Whether Search “Act” must feel in-place or may visibly transfer to an owning root while preserving Search identity and return context. | X-15; RP-05 Find/Understand/Act matrix | RP-05; `AVF-SEARCH-D07-R00` | Global action transfer UX | `RESOLVED_BY_OWNER` | Search is not a mutation owner; Act prepares and transfers to the canonical owner under `AVF-SEARCH-D07-R01`. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-07 | Whether multi-scope partial settlement is an essential protected behavior or remains explicitly provisional/omitted until runtime representation exists. | X-12 | RP-03, RP-05, RP-07; `AVF-RECOVERY-S07-R00` | Settlement architecture and visual states | `RESOLVED_BY_OWNER` | Show partial settlement only for genuinely independent typed scopes; otherwise split owner commits or use whole-result outcomes. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-08 | Whether restrained violet-indigo replaces or augments the current accent families, or remains future visual intent. | X-18; RP-06 Y07–Y08 | RP-06; `AVF-DNA-S07-R00`, `AVF-YOU-D07-R01` | Appearance migration and token work | `RESOLVED_BY_OWNER` | Restrained violet-indigo becomes the default action accent with deterministic preference migration and accessibility constraints. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-09 | Whether optional account/continuity/subscription capabilities belong in the selected You baseline. | RP-06 Y04, Y06, Y14 | RP-06; `AVF-YOU-D07-R01` | Account/entitlement IA and runtime scope | `RESOLVED_BY_OWNER` | Current flagship You is local/no-account; remove account, continuity, subscription, and cross-device administration; record `AVF-YOU-D07-R02`. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+| D-DEV-10 | Whether Ambitions remains strictly iPhone/portrait or any iPad, Mac, landscape, multi-window, or other platform adaptation becomes product scope. | X-21; RP-08 E-RP08-012 | RP-08; `AVF-COHERENCE-S07-R00` | Platform architecture and proof matrix | `RESOLVED_BY_OWNER` | Current flagship scope is iPhone, portrait, single scene; other platforms remain future-only and external surfaces require direct proof. | [13-owner-reconciliation-decisions.md](13-owner-reconciliation-decisions.md) |
+
+## Owner-authorized provisional direction outcomes
+
+| Direction record | Treatment | Remaining decision authority / downstream dependency |
+| --- | --- | --- |
+| `AVF-GOALS-S08-R00 — Life Area Linked Goal Lens` | New structural branch authorized by D-DEV-02; supersedes `AVF-GOALS-S07-R01` only for Goals root structure. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-TODAY-S10-R00 — Start Here Contextual Command` | New structural branch authorized by D-DEV-03; supersedes `AVF-TODAY-S09-R00` only for first-viewport hierarchy. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-SHELL-S07-R01` | Targeted shell reconciliation revision authorized by D-DEV-01. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-CAPTURE-S07-R01` | Targeted bounded Capture revision authorized by the owner reconciliation. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-TIME-S07-R01` | Targeted capability-bounded Time revision authorized by D-DEV-05. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-SEARCH-D07-R01` | Targeted owner-routed Search revision authorized by D-DEV-06. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-YOU-D07-R02` | Targeted local/no-account You revision authorized by D-DEV-09. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+| `AVF-RECOVERY-S07-R01` | Targeted capability-negotiated recovery revision authorized by D-DEV-07. | Architecture, UX Blueprint, Runtime, Reconstruction planning, Accessibility/platform planning |
+
+Figma authorization remains false. SwiftUI approval remains false. Implementation authorization remains false.
 
 ## Architecture
 
@@ -98,7 +113,7 @@ This register records decisions the repository cannot make on its own. It does n
 
 ## Figma later
 
-Figma has no current decision authority in this audit. Later design work must wait for D-DEV-01–10, D-ARC-01–17, and D-UX-01–12 as applicable, and must not depict unsupported capability as current. It may document alternatives only after the owning authority requests them.
+Figma has no current decision authority in this audit. D-DEV-01 through D-DEV-10 are resolved by `13-owner-reconciliation-decisions.md`; later design work must still wait for D-ARC-01–17, D-UX-01–12, the applicable Runtime/Reconstruction/Accessibility decisions, and explicit Figma authorization. It must not depict unsupported capability as current.
 
 ## SwiftUI implementation later
 
