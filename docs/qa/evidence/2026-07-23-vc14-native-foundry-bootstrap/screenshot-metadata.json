@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "captured_at_timezone": "America/New_York",
+  "fixture": {
+    "id": "today-bootstrap/preparing-for-baby/typical/v1",
+    "synthetic": true,
+    "copy_is_canon": false
+  },
+  "environment": {
+    "device": "iPhone 17 Pro Max Simulator",
+    "udid": "DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "xcode_version": "26.6",
+    "xcode_build": "17F113",
+    "reduce_motion": false,
+    "grayscale": false,
+    "increase_contrast": "not explicitly enabled",
+    "reduce_transparency": "not explicitly enabled",
+    "voiceover": "not explicitly enabled"
+  },
+  "baseline_policy": "Evaluation references only; not final production baselines.",
+  "screenshots": [
+    {
+      "variant": "Today Bootstrap — Typical Light",
+      "path": "screens/today-bootstrap-typical-light.png",
+      "captured_at": "2026-07-23T04:15:04-04:00",
+      "appearance": "light",
+      "dynamic_type": "large",
+      "width_pixels": 1320,
+      "height_pixels": 2868,
+      "byte_size": 275409,
+      "sha256": "b3853a458efac8a9f3054eda4bbfb06be9a6127d64f5d94b5b66e7c9a9cdc097"
+    },
+    {
+      "variant": "Today Bootstrap — Typical Dark",
+      "path": "screens/today-bootstrap-typical-dark.png",
+      "captured_at": "2026-07-23T04:15:22-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1320,
+      "height_pixels": 2868,
+      "byte_size": 274441,
+      "sha256": "bfcdf79f2625b925aa875ccda0a174b6acbe012e0f62341adb4ef6cf8a82e364"
+    },
+    {
+      "variant": "Today Bootstrap — Accessibility Dynamic Type Dark",
+      "path": "screens/today-bootstrap-accessibility-dynamic-type-dark.png",
+      "captured_at": "2026-07-23T04:16:38-04:00",
+      "appearance": "dark",
+      "dynamic_type": "accessibility1",
+      "width_pixels": 1320,
+      "height_pixels": 2868,
+      "byte_size": 343523,
+      "sha256": "d7656fb1f716b7c764eab1bceecbccfdf56540acb783443d5d33f5f1c7f1f6b2"
+    }
+  ]
+}

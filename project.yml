@@ -17,6 +17,25 @@ packages:
   AmbitionsPresentation:
     path: Packages/AmbitionsPresentation
 targets:
+  AmbitionsNativeFoundryHost:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsNativeFoundryHost
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.nativefoundry
+        PRODUCT_NAME: AmbitionsNativeFoundryHost
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+    dependencies:
+      - package: AmbitionsPresentation
+        product: AmbitionsNativeVisualFoundry
   Ambitions:
     type: application
     platform: iOS
@@ -199,6 +218,12 @@ targets:
       - target: Ambitions
       - sdk: AppIntents.framework
 schemes:
+  AmbitionsNativeFoundryHost:
+    build:
+      targets:
+        AmbitionsNativeFoundryHost: all
+    run:
+      config: Debug
   Ambitions:
     build:
       targets:
