@@ -256,4 +256,3 @@ git status --short
   architectural defect, or claim beyond fixture/Simulator evidence.
 - Stop and report rather than bypassing any requirement that crosses this
   boundary.
-

@@ -36,6 +36,18 @@ targets:
     dependencies:
       - package: AmbitionsPresentation
         product: AmbitionsNativeVisualFoundry
+  AmbitionsNativeFoundryHostUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsNativeFoundryHostUITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.nativefoundry.uitests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: AmbitionsNativeFoundryHost
   Ambitions:
     type: application
     platform: iOS
@@ -222,8 +234,14 @@ schemes:
     build:
       targets:
         AmbitionsNativeFoundryHost: all
+        AmbitionsNativeFoundryHostUITests: [test]
     run:
       config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsNativeFoundryHostUITests
   Ambitions:
     build:
       targets:
