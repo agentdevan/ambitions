@@ -1195,6 +1195,78 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             ):
                 canon_compiler.validate_design_artifacts(isolated)
 
+    def test_wave_2_closure_rejects_human_direction_package_and_selection_drift(
+        self,
+    ) -> None:
+        cases = (
+            (
+                "changed_active_direction",
+                lambda markdown: markdown.replace(
+                    "1. `AVF-DNA-S07-R00`",
+                    "1. `AVF-UNAUTHORIZED-S01-R00`",
+                    1,
+                ),
+            ),
+            (
+                "reordered_active_directions",
+                lambda markdown: markdown.replace(
+                    "1. `AVF-DNA-S07-R00`\n2. `AVF-SHELL-S07-R01`",
+                    "1. `AVF-SHELL-S07-R01`\n2. `AVF-DNA-S07-R00`",
+                    1,
+                ),
+            ),
+            (
+                "package_status_row",
+                lambda markdown: markdown.replace(
+                    "| `VC-07` | `CLOSED` | Today |",
+                    "| `VC-07` | `OPEN` | Today |",
+                    1,
+                ),
+            ),
+            (
+                "selected_direction_identifier",
+                lambda markdown: markdown.replace(
+                    "`AVF-GOALS-S08-R00 — Life Area Linked Goal Lens`",
+                    "`AVF-GOALS-S99-R99 — Life Area Linked Goal Lens`",
+                    1,
+                ),
+            ),
+            (
+                "selected_identifier",
+                lambda markdown: markdown.replace(
+                    "`VC08-GOALS-S07-R00 — Singular Living Pursuit Passage`",
+                    "`VC08-GOALS-S99-R99 — Singular Living Pursuit Passage`",
+                    1,
+                ),
+            ),
+        )
+
+        for label, mutate in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+
+                    markdown_path = (
+                        isolated_root
+                        / "docs/canon/design/"
+                        "VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+                    )
+                    markdown = markdown_path.read_text(encoding="utf-8")
+                    mutated = mutate(markdown)
+                    self.assertNotEqual(mutated, markdown)
+                    markdown_path.write_text(mutated, encoding="utf-8")
+
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 2 closure human/machine mismatch",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
     def test_query_resolves_exact_requirement_and_multiword_text(self) -> None:
         exact = query(self.compilation, "LAW-LOCAL-AUTHORITY-001", mode="id")
         self.assertEqual(len(exact), 1)

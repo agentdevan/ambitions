@@ -14,11 +14,11 @@ Design-input provenance:
 - canon content SHA: `eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `e1090840d2cb23c606ab1efc323194e8582c33c73ba9ba0020feda57758713f5`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `f0808bf7c787334eacd08451c4dfc190b4b5a2b79d9b916beebf2f0cb2865475`;
+- UX blueprint Markdown SHA-256: `94cfaf128beba264d9af10126751a1ef1e1573850e4dd348c2480bd1dfc2e90d`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `be27b50a717f28d752aff9d560531b5b34f1afa92b8d2745d8226643452d8419`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `16866bfddf97966799fc0458442aa2f75b421b569f7fbb302371cbf9659e9281`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `5cb4f8fd4c5c5d0ceff7d82c51c3af832e7b2435ee8b2e1bcb885776cc995e59`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
 - VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `fef08a88418026df730feba9b3a276e7afdd9cc76395dd6b23b9b50621cd8c92`;
 - VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54`;
@@ -26,7 +26,7 @@ Design-input provenance:
 - Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
 - Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `d7978fd3a28889feb88dc261f7108f114c2f40afa61083f6bc250af2e9614e6f`;
 - Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `03d946e200e8b0183821b62f231a9c52915d1494b4a10c382257215bac2e7a42`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `b05a06a19538a648b37596ddcb07ba2181b66ace5520da120915bdd4adcc1d74`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its

@@ -587,6 +587,85 @@ def _validate_wave_2_closure(
         raise CanonError("Wave 2 closure capability boundary is invalid")
 
     human_markdown = _confined_path(root, human_path).read_text(encoding="utf-8")
+    expected_direction_block = "\n".join(
+        f"{index}. `{direction_id}`"
+        for index, direction_id in enumerate(
+            wave_2_closure["active_direction_ids"],
+            start=1,
+        )
+    )
+    if expected_direction_block not in human_markdown:
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: active directions"
+        )
+
+    expected_package_rows = tuple(
+        f"| `{package_id}` | `"
+        f"{wave_2_closure['package_statuses'][package_id]}` |"
+        for package_id in (f"VC-{number:02d}" for number in range(7, 13))
+    )
+    if any(row not in human_markdown for row in expected_package_rows):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: package statuses"
+        )
+
+    shared_direction_ids = {
+        "AVF-SHELL-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    }
+    for package in packages:
+        package_id = package["package_id"]
+        section_match = re.search(
+            rf"(?ms)^## \d+\. {re.escape(package_id)}\b.*?"
+            r"(?=^## \d+\.|\Z)",
+            human_markdown,
+        )
+        if section_match is None or any(
+            direction_id not in section_match.group(0)
+            for direction_id in package["applies_to_avf_ids"]
+            if direction_id not in shared_direction_ids
+        ):
+            raise CanonError(
+                "Wave 2 closure human/machine mismatch: "
+                f"package directions for {package_id}"
+            )
+
+    selected_identifiers: list[str] = []
+    for package in packages:
+        package_id = package["package_id"]
+        selection = package["selected_study_or_synthesis"]
+        if package_id == "VC-07":
+            input_labels = " + ".join(
+                item.rsplit("-", 1)[-1] for item in selection["inputs"]
+            )
+            selected_identifiers.append(
+                f"`{input_labels} — {selection['name']}`"
+            )
+        elif package_id == "VC-10":
+            selected_identifiers.extend(
+                f"`{record['id']} — {record['name']}`"
+                for record in selection["records"]
+            )
+        elif package_id == "VC-11":
+            selected_identifiers.extend(
+                f"`{record['id']} — {record['name']}`"
+                for record in (
+                    selection["primary"],
+                    selection["native_substrate"],
+                )
+            )
+        else:
+            selected_identifiers.append(
+                f"`{selection['id']} — {selection['name']}`"
+            )
+    if any(
+        identifier not in human_markdown for identifier in selected_identifiers
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: selected identifiers"
+        )
+
     required_human_text = (
         "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`",
         "- Wave 1: `CLOSED`.",
