@@ -5,7 +5,7 @@
 > Generated from normative object specifications. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e`
+- Canon digest: `0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0`
 
 | Capability | Step | Event | Reminder | Note |
 | --- | --- | --- | --- | --- |
