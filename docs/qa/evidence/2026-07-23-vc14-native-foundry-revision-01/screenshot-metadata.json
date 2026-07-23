@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "captured_at_timezone": "America/New_York",
+  "fixture": {
+    "id": "today-bootstrap/preparing-for-baby/typical/v1",
+    "synthetic": true,
+    "copy_is_canon": false,
+    "visible_fixture_metadata": false
+  },
+  "environment": {
+    "device": "iPhone 17 Pro Simulator",
+    "udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "xcode_version": "26.6",
+    "xcode_build": "17F113",
+    "reduce_motion": false,
+    "grayscale": false,
+    "increase_contrast": false,
+    "reduce_transparency": "not explicitly enabled",
+    "voiceover": "not explicitly enabled"
+  },
+  "baseline_policy": "Evaluation references only; not final production baselines.",
+  "screenshots": [
+    {
+      "variant": "Owner-reviewed before — Typical Light",
+      "path": "screens/before/today-bootstrap-before-typical-light-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:27:46-04:00",
+      "appearance": "light",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 266400,
+      "sha256": "31e0db14f11c36fbeedd4b8bb4fe4a0e42f9c4216a781ac9229805019cb5d327"
+    },
+    {
+      "variant": "Today Bootstrap — Revised Typical Light",
+      "path": "screens/revised/today-bootstrap-revised-typical-light-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:36:20-04:00",
+      "appearance": "light",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 237920,
+      "sha256": "97cf04d05c533f80de5ab549167510681dd07f2687bd95ffa8d99f23facb925e"
+    },
+    {
+      "variant": "Today Bootstrap — Revised Typical Dark",
+      "path": "screens/revised/today-bootstrap-revised-typical-dark-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:36:11-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 236472,
+      "sha256": "599965f814782c1856d443cc07254db630a19f1e46d6b0ddc2b9fea4611dbc68"
+    },
+    {
+      "variant": "Today Bootstrap — Revised Accessibility Dynamic Type Dark",
+      "path": "screens/revised/today-bootstrap-revised-accessibility-dynamic-type-dark-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:47:45-04:00",
+      "appearance": "dark",
+      "dynamic_type": "accessibility1",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 278573,
+      "sha256": "dd105dbfbe34be0a09db51e27d62d749cc1433019ef7e2dbc41dcdc2264dbffa"
+    },
+    {
+      "variant": "Today Bootstrap — Revised Accessibility scroll continuation",
+      "path": "screens/revised/today-bootstrap-revised-accessibility-scroll-continuation-dark-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:47:50-04:00",
+      "appearance": "dark",
+      "dynamic_type": "accessibility1",
+      "interaction": "real native vertical drag",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 291180,
+      "sha256": "d489c899a0ccf36a26eeee633d8808a3961b7692d98c45f494db99d9a99a1667"
+    },
+    {
+      "variant": "Before/revised Typical Light comparison",
+      "path": "screens/comparisons/today-bootstrap-before-after-typical-light-iphone-17-pro.png",
+      "captured_at": "2026-07-23T08:40:52-04:00",
+      "appearance": "light",
+      "dynamic_type": "large",
+      "layout": "before left, revised right",
+      "width_pixels": 2412,
+      "height_pixels": 2622,
+      "byte_size": 396647,
+      "sha256": "7f185f8494cde605b018fd1900e275bf25e01de61304088c5cd433e9350d286d"
+    }
+  ]
+}
