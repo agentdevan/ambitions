@@ -2,7 +2,7 @@
 
 # Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
-Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_FOUNDATION_CLOSED / FIGMA_NOT_AUTHORIZED`
+Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_AND_2_CLOSED / FIGMA_NOT_AUTHORIZED`
 
 Date: 2026-07-22
 
@@ -24,15 +24,18 @@ Design-input provenance:
 - VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54`;
 - Wave 1 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`: `7273a1c320f7e13f694d6bad07ee15586b675d9ae72688361217ee51a4b8e3bd`;
 - Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
+- Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `d7978fd3a28889feb88dc261f7108f114c2f40afa61083f6bc250af2e9614e6f`;
+- Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
 - visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `03d946e200e8b0183821b62f231a9c52915d1494b4a10c382257215bac2e7a42`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
-machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md` package define
-the active baseline. The Figma frames, exact tokens, component descriptions,
-and archived appearance studies below are historical or deferred according to
-their explicit classification; none is a current selection, component API,
-implementation instruction, or proof.
+machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md` and
+`VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md` packages define the active baseline. The
+Figma frames, exact tokens, component descriptions, and archived appearance
+studies below are historical or deferred according to their explicit
+classification; none is a current selection, component API, implementation
+instruction, or proof.
 
 ## 1. Active reconciled VC baseline
 
@@ -45,9 +48,12 @@ It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
 `AVF-SEARCH-D07-R01`, `AVF-YOU-D07-R02`, and `AVF-RECOVERY-S07-R01`. No
 additional direction ID is created by this document.
 
-Wave 1 shared visual foundation is closed. `VC-01` through `VC-06` are closed;
-`VC-07` through `VC-13` remain open; `VC-14` is not started. Wave 2 surfaces and
-journeys and Wave 3 stress and matched baseline remain open.
+VC-01 through VC-12: CLOSED.
+VC-13: OPEN.
+VC-14: NOT_STARTED.
+Wave 1 shared visual foundation: CLOSED.
+Wave 2 surfaces and journeys: CLOSED.
+Wave 3 stress and matched baseline: OPEN.
 
 The active Wave 1 selections are:
 
@@ -121,8 +127,9 @@ authorization is false.
 
 The complete active decisions, rejections, deferred calibration, architecture
 dependencies, and validation requirements are defined in
-`VC_WAVE_1_FOUNDATION_CLOSURE.md` and
-`vc-wave-1-foundation-closure.json`, under
+`VC_WAVE_1_FOUNDATION_CLOSURE.md`, `vc-wave-1-foundation-closure.json`,
+`VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
+`vc-wave-2-surface-journey-closure.json`, under
 `VISUAL_CLOSURE_INPUT_CONTRACT.md` and
 `visual-closure-input-contract.json`. Exact type metrics, colors, relief,
 dividers, material recipes, radii, shadows, crown and dock geometry, motion,
@@ -134,7 +141,8 @@ vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
 `IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
 contract remains evidence only even when its original prose uses imperative or
 present-tense language. Only clauses repeated in the visual-closure input
-contract or installed Wave 1 closure may control VC-01 through VC-14.
+contract or installed Wave 1 and Wave 2 closures may control VC-01 through
+VC-14.
 
 ### Historical Revision 1 synthesis — `HISTORICAL_REFERENCE`
 

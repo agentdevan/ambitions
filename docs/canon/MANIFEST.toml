@@ -85,6 +85,8 @@ reference_files = [
   "design/visual-closure-input-contract.json",
   "design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
   "design/vc-wave-1-foundation-closure.json",
+  "design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+  "design/vc-wave-2-surface-journey-closure.json",
   "migration/UX_BLUEPRINT.md",
   "migration/ux-blueprint.json",
   "migration/ux-blueprint-state-inventory.json",

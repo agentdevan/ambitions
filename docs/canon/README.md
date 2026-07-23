@@ -49,8 +49,12 @@ for implementation agents and repository tooling.
   projects that source into the generated visual-authority manifest.
 - [Wave 1 Foundation Closure](design/VC_WAVE_1_FOUNDATION_CLOSURE.md) and its
   JSON peer install the closed VC-01 through VC-06 decisions beneath the input
-  contract. Wave 2, Wave 3, VC-14, Figma, SwiftUI, and implementation remain
-  open, incomplete, or unauthorized as recorded there.
+  contract.
+- [Wave 2 Surface and Journey Closure](design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)
+  and its JSON peer install the closed VC-07 through VC-12 decisions beneath the
+  input contract and closed Wave 1 foundation. Wave 3 and VC-14 remain
+  incomplete, and every Figma, SwiftUI, and implementation authorization remains
+  false.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;
