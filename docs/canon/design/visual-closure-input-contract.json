@@ -257,10 +257,21 @@
     "accessibility_focus_localization_rtl_and_device_proof"
   ],
   "authorization": {
+    "approved_for_swiftui": false,
+    "broad_frontend_reconstruction": false,
+    "broad_production_implementation": false,
+    "calibration": {
+      "fixture_driven_preview_construction": true,
+      "native_visual_foundry_bootstrap": true,
+      "screenshot_based_owner_review": true,
+      "today_flagship_calibration_slice": true
+    },
     "figma": false,
     "implementation": false,
+    "legacy_frontend_cutover": false,
     "swiftui": false,
-    "visual_closure_planning": true
+    "visual_closure_planning": false,
+    "visual_closure_planning_program_closed": true
   },
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",
@@ -278,14 +289,14 @@
       "VC-04": "CLOSED",
       "VC-05": "CLOSED",
       "VC-06": "CLOSED",
-      "VC-07": "OPEN",
-      "VC-08": "OPEN",
-      "VC-09": "OPEN",
-      "VC-10": "OPEN",
-      "VC-11": "OPEN",
-      "VC-12": "OPEN",
-      "VC-13": "OPEN",
-      "VC-14": "NOT_STARTED"
+      "VC-07": "CLOSED",
+      "VC-08": "CLOSED",
+      "VC-09": "CLOSED",
+      "VC-10": "CLOSED",
+      "VC-11": "CLOSED",
+      "VC-12": "CLOSED",
+      "VC-13": "CLOSED",
+      "VC-14": "CLOSED"
     },
     "wave_1": {
       "human_record": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
@@ -301,8 +312,26 @@
       },
       "status": "CLOSED"
     },
-    "wave_2_surfaces_and_journeys": "OPEN",
-    "wave_3_stress_and_matched_baseline": "OPEN"
+    "wave_2": {
+      "human_record": "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+      "package_id": "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE",
+      "status": "CLOSED"
+    },
+    "wave_3": {
+      "human_record": "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-wave-3-accessibility-stress-closure.json",
+      "package_id": "AMB-VC-WAVE-3-ACCESSIBILITY-STRESS-CLOSURE",
+      "status": "CLOSED"
+    },
+    "vc_14": {
+      "human_record": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-14-native-matched-closure.json",
+      "package_id": "AMB-VC-14-NATIVE-MATCHED-CLOSURE",
+      "selected_record": "VC14-NATIVE-S01 — Matched Native Flagship Proof",
+      "status": "CLOSED"
+    },
+    "visual_closure_planning_program": "CLOSED"
   },
   "historical_figma_references": [
     {
@@ -402,7 +431,7 @@
     "VAD-R1-TODAY-005": "SUPERSEDED",
     "VAD-R1-TYPE-001": "SUPERSEDED"
   },
-  "status": "ACTIVE_RECONCILED_BASELINE",
+  "status": "ACTIVE_RECONCILED_BASELINE_VISUAL_CLOSURE_CLOSED",
   "supersessions": [
     {
       "replacement": "AVF-GOALS-S08-R00",
@@ -439,7 +468,7 @@
     "unsupported_time_scale_as_current",
     "unsupported_permission_or_platform"
   ],
-  "version": 2,
+  "version": 3,
   "visual_requirement_mappings": [
     {
       "direction_id": "AVF-DNA-S07-R00",

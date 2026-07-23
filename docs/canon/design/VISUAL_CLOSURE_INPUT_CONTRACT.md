@@ -1,18 +1,21 @@
 # Ambitions VC-01–VC-14 Visual Closure Input Contract
 
-Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_FOUNDATION_CLOSED / FIGMA_NOT_AUTHORIZED`
+Status: `ACTIVE_RECONCILED_BASELINE / VISUAL_CLOSURE_PROGRAM_CLOSED / NATIVE_PROVING_ACTIVE`
 
-Date: 2026-07-22
+Date: 2026-07-23
 
 Machine peer: `docs/canon/design/visual-closure-input-contract.json`
 
 This contract is the sole active visual input for VC-01 through VC-14. It
 normalizes the provisional visual system against the controlling owner record,
 accepted reconciliation ADRs, canonical UX Blueprint, and reconstruction plan.
-`VC_WAVE_1_FOUNDATION_CLOSURE.md` and its JSON peer install the completed
-VC-01 through VC-06 decisions beneath this contract. The remaining packages
-stay open or not started as recorded below. Nothing here selects Figma work,
-approves SwiftUI, authorizes implementation, or proves runtime capability.
+The Wave 1, Wave 2, Wave 3, and VC-14 human and machine peers install the
+completed VC-01 through VC-14 decisions beneath this contract. Figma is not
+visual authority; native SwiftUI previews and the running native application
+are the primary proving environments. The final closure authorizes only the
+bounded native calibration permissions recorded below. It does not approve
+SwiftUI broadly, authorize production implementation or frontend
+reconstruction, permit legacy cutover, or prove runtime capability.
 
 ## Classification vocabulary
 
@@ -73,24 +76,24 @@ The active set is exact and closed:
 | `VC-04` | `CLOSED` | `VC04-DOCK-D04`, transformed by `VC04-DOCK-D06` |
 | `VC-05` | `CLOSED` | `VC05-STATE-D04`, stressed by `VC05-STATE-D06` |
 | `VC-06` | `CLOSED` | `VC06-GRAMMAR-D04` with `D01` base and `D06` stress |
-| `VC-07` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-08` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-09` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-10` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-11` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-12` | `OPEN` | Wave 2 surfaces and journeys |
-| `VC-13` | `OPEN` | Wave 3 stress and matched baseline |
-| `VC-14` | `NOT_STARTED` | Reconciled matched-baseline closure |
+| `VC-07` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-08` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-09` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-10` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-11` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-12` | `CLOSED` | Wave 2 surfaces and journeys |
+| `VC-13` | `CLOSED` | Wave 3 accessibility and content stress |
+| `VC-14` | `CLOSED` | `VC14-NATIVE-S01 — Matched Native Flagship Proof` |
 
 - Wave 1 shared visual foundation: `CLOSED`.
-- Wave 2 surfaces and journeys: `OPEN`.
-- Wave 3 stress and matched baseline: `OPEN`.
+- Wave 2 surfaces and journeys: `CLOSED`.
+- Wave 3 accessibility and content stress validation: `CLOSED`.
+- Visual-closure planning program: `CLOSED`.
 
 The complete locked decisions, rejections, deferrals, validation requirements,
-architecture dependencies, and source paths are in
-`VC_WAVE_1_FOUNDATION_CLOSURE.md` and
-`vc-wave-1-foundation-closure.json`. The VC study and synthesis labels do not
-create active AVF direction IDs.
+architecture dependencies, and source paths are in the Wave 1–3 and VC-14
+human and machine records. The VC study and synthesis labels do not create
+active AVF direction IDs.
 
 ## Protected characteristics
 
@@ -359,11 +362,11 @@ Receipts or Undo; untyped Settlement Ledger; generic pending/later-settlement
 claims; unsupported Time scales or calendar replacement as present behavior;
 unsupported permissions; and out-of-scope platforms.
 
-## Visual validation still required
+## Post-closure native calibration
 
-VC-01 through VC-06 are closed and may not be reopened by later calibration.
-VC-07 through VC-13 and the eventual VC-14 matched baseline may resolve only
-these bounded details while preserving the closed foundation:
+VC-01 through VC-14 are closed and may not be reopened by later calibration.
+The native proving program may calibrate only these bounded details while
+preserving the closed foundation:
 
 - exact SF Pro sizes, line heights, tracking, named styles, and Dynamic Type
   mappings within the closed role hierarchy and weights;
@@ -377,16 +380,26 @@ these bounded details while preserving the closed foundation:
 - dense, very-dense, large-text, RTL, handedness, and recovery compositions;
 - matched cross-root state, appearance, and accessibility coverage.
 
-These are visual-validation choices, not permission to change product meaning,
-add appearance axes, create component APIs, or introduce another direction ID.
+These are calibration choices, not permission to change product meaning, add
+appearance axes, create component APIs, introduce another direction ID, or
+claim broad implementation authorization.
 
 ## Authorization state
 
 - Figma authorization: false.
-- SwiftUI approval: false.
-- Implementation authorization: false.
-- Visual-closure planning input: active.
+- `APPROVED FOR SWIFTUI`: false.
+- Broad production implementation authorization: false.
+- Broad frontend reconstruction authorization: false.
+- Legacy frontend cutover authorization: false.
+- Visual-closure planning program: closed.
 - Wave 1 shared visual foundation: closed.
-- Wave 2 surfaces and journeys: open.
-- Wave 3 stress and matched baseline: open.
-- `VC-14`: not started and not complete.
+- Wave 2 surfaces and journeys: closed.
+- Wave 3 accessibility and content stress validation: closed.
+- `VC-14`: closed by `VC14-NATIVE-S01 — Matched Native Flagship Proof`.
+- Direct-device proof: required and incomplete.
+
+The following separate, narrow permissions are true: Native Visual Foundry
+bootstrap, fixture-driven preview construction, the Today flagship calibration
+slice, and screenshot-based owner review. They do not redefine any broad
+authorization as true. See `VC_14_NATIVE_MATCHED_CLOSURE.md` and its machine
+peer for the exact bounded authorization and explicit exclusions.
