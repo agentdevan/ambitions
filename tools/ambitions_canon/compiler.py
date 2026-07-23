@@ -38,7 +38,12 @@ VISUAL_CLASSIFICATIONS = {
     "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
     "SUPERSEDED",
 }
-ACTIVE_VISUAL_DIRECTIONS = (
+VISUAL_CLOSURE_MACHINE_PATHS = (
+    Path("docs/canon/design/visual-closure-input-contract.json"),
+    Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
+    Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
+)
+EXPECTED_ACTIVE_VISUAL_DIRECTIONS = (
     "AVF-DNA-S07-R00",
     "AVF-SHELL-S07-R01",
     "AVF-CAPTURE-S07-R01",
@@ -51,10 +56,85 @@ ACTIVE_VISUAL_DIRECTIONS = (
     "AVF-A11Y-S07-R00",
     "AVF-COHERENCE-S07-R00",
 )
+ACTIVE_VISUAL_DIRECTIONS = EXPECTED_ACTIVE_VISUAL_DIRECTIONS
 WAVE_1_PACKAGE_STATUSES = {
     **{f"VC-{number:02d}": "CLOSED" for number in range(1, 7)},
     **{f"VC-{number:02d}": "OPEN" for number in range(7, 14)},
     "VC-14": "NOT_STARTED",
+}
+EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 13)},
+    "VC-13": "OPEN",
+    "VC-14": "NOT_STARTED",
+}
+FALSE_IMPLEMENTATION_AUTHORIZATION = {
+    "figma": False,
+    "implementation": False,
+    "swiftui": False,
+}
+EXPECTED_WAVE_2_SUMMARIES = {
+    "today": {
+        "package_id": "VC-07",
+        "selected_name": "Balanced Semantic Execution Day",
+    },
+    "goals": {
+        "package_id": "VC-08",
+        "selected_name": "Singular Living Pursuit Passage",
+    },
+    "time": {
+        "package_id": "VC-09",
+        "selected_name": "Adaptive Dual-Truth Period Passage",
+    },
+    "capture": {
+        "package_id": "VC-10",
+        "selected_name": "Full-Screen Adaptive Meaning Passage",
+    },
+    "search": {
+        "package_id": "VC-10",
+        "selected_name": "Full-Screen Semantic Command Passage",
+    },
+    "you": {
+        "package_id": "VC-11",
+        "selected_name": "Personal Control Passage",
+    },
+    "resilience": {
+        "package_id": "VC-12",
+        "selected_name": "Contextual Combined-State Passage",
+    },
+}
+EXPECTED_WAVE_2_AVF_MAPPINGS = {
+    "VC-07": (
+        "AVF-TODAY-S10-R00",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
+    "VC-08": (
+        "AVF-GOALS-S08-R00",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
+    "VC-09": (
+        "AVF-TIME-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
+    "VC-10": (
+        "AVF-CAPTURE-S07-R01",
+        "AVF-SEARCH-D07-R01",
+        "AVF-SHELL-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
+    "VC-11": (
+        "AVF-YOU-D07-R02",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
+    "VC-12": (
+        "AVF-RECOVERY-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00",
+    ),
 }
 WAVE_1_SELECTED_RECORDS = {
     "VC-01": ("VC01-TYPE-STUDY-D", "Semantic Cadence"),
@@ -173,6 +253,27 @@ class CanonError(Exception):
     """A concrete source or generated-canon defect."""
 
 
+def load_visual_closure_records(root: Path) -> tuple[dict[str, Any], ...]:
+    """Load ordered visual-closure JSON records from the repository."""
+    records: list[dict[str, Any]] = []
+    for relative_path in VISUAL_CLOSURE_MACHINE_PATHS:
+        path = _confined_path(root, relative_path)
+        try:
+            source = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            raise CanonError(
+                f"unable to load visual closure record {relative_path}: {exc}"
+            ) from exc
+        try:
+            payload = json.loads(source)
+        except json.JSONDecodeError as exc:
+            raise CanonError(f"{relative_path}: invalid JSON: {exc}") from exc
+        if not isinstance(payload, dict):
+            raise CanonError(f"{relative_path}: root must be an object")
+        records.append(payload)
+    return tuple(records)
+
+
 @dataclass(frozen=True, slots=True)
 class Requirement:
     requirement_id: str
@@ -262,6 +363,251 @@ def _confined_path(root: Path, relative_path: Path, *, base: Path | None = None)
     except ValueError as exc:
         raise CanonError(f"path escapes repository: {relative_path.as_posix()}") from exc
     return candidate
+
+
+def _wave_2_surface_summaries(
+    wave_2_closure: dict[str, Any],
+) -> dict[str, dict[str, str]]:
+    packages = wave_2_closure.get("packages")
+    if not isinstance(packages, list) or not all(
+        isinstance(package, dict) for package in packages
+    ):
+        raise CanonError("Wave 2 closure packages must be a list of objects")
+    by_id = {package.get("package_id"): package for package in packages}
+    try:
+        vc_10_records = by_id["VC-10"]["selected_study_or_synthesis"][
+            "records"
+        ]
+        summaries = {
+            "today": {
+                "package_id": "VC-07",
+                "selected_name": by_id["VC-07"][
+                    "selected_study_or_synthesis"
+                ]["name"],
+            },
+            "goals": {
+                "package_id": "VC-08",
+                "selected_name": by_id["VC-08"][
+                    "selected_study_or_synthesis"
+                ]["name"],
+            },
+            "time": {
+                "package_id": "VC-09",
+                "selected_name": by_id["VC-09"][
+                    "selected_study_or_synthesis"
+                ]["name"],
+            },
+            "capture": {
+                "package_id": "VC-10",
+                "selected_name": vc_10_records[0]["name"],
+            },
+            "search": {
+                "package_id": "VC-10",
+                "selected_name": vc_10_records[1]["name"],
+            },
+            "you": {
+                "package_id": "VC-11",
+                "selected_name": by_id["VC-11"][
+                    "selected_study_or_synthesis"
+                ]["primary"]["name"],
+            },
+            "resilience": {
+                "package_id": "VC-12",
+                "selected_name": by_id["VC-12"][
+                    "selected_study_or_synthesis"
+                ]["name"],
+            },
+        }
+    except (KeyError, IndexError, TypeError) as exc:
+        raise CanonError("Wave 2 closure selected records are invalid") from exc
+    if summaries != EXPECTED_WAVE_2_SUMMARIES:
+        raise CanonError("Wave 2 closure selected records are invalid")
+    return summaries
+
+
+def _validate_wave_2_closure(
+    root: Path,
+    manifest: Manifest,
+    wave_2_closure: dict[str, Any],
+) -> None:
+    human_path = Path(
+        "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+    )
+    wave_2_machine_path = VISUAL_CLOSURE_MACHINE_PATHS[2]
+    if wave_2_closure.get("schema_version") != 1:
+        raise CanonError("Wave 2 closure schema version is invalid")
+    if wave_2_closure.get("package_id") != (
+        "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE"
+    ):
+        raise CanonError("Wave 2 closure package ID is invalid")
+    if wave_2_closure.get("status") != "CLOSED":
+        raise CanonError("Wave 2 closure status must be closed")
+    if wave_2_closure.get("active_direction_ids") != list(
+        EXPECTED_ACTIVE_VISUAL_DIRECTIONS
+    ):
+        raise CanonError("Wave 2 closure active direction IDs are invalid")
+    if (
+        wave_2_closure.get("package_statuses")
+        != EXPECTED_EFFECTIVE_PACKAGE_STATUSES
+    ):
+        raise CanonError("Wave 2 closure package statuses are invalid")
+    if wave_2_closure.get("wave_statuses") != {
+        "vc_14_reconciled_matched_baseline": "NOT_STARTED",
+        "wave_1_shared_foundation": "CLOSED",
+        "wave_2_surfaces_and_journeys": "CLOSED",
+        "wave_3_stress_and_matched_baseline": "OPEN",
+    }:
+        raise CanonError("Wave 2 closure wave statuses are invalid")
+    if (
+        wave_2_closure.get("authorization_state")
+        != FALSE_IMPLEMENTATION_AUTHORIZATION
+    ):
+        raise CanonError("Wave 2 closure authorization state is invalid")
+    if wave_2_closure.get("human_peer") != human_path.as_posix():
+        raise CanonError("Wave 2 closure human peer is invalid")
+    if wave_2_closure.get("inherits") != {
+        "human": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+        "machine": VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix(),
+    }:
+        raise CanonError("Wave 2 closure Wave 1 inheritance is invalid")
+
+    required_references = {
+        human_path.relative_to(CANON_ROOT_PATH).as_posix(),
+        wave_2_machine_path.relative_to(CANON_ROOT_PATH).as_posix(),
+    }
+    if not required_references.issubset(set(manifest.reference_files)):
+        raise CanonError("Wave 2 closure human/machine peers are not manifested")
+
+    packages = wave_2_closure.get("packages")
+    if not isinstance(packages, list):
+        raise CanonError("Wave 2 closure packages must be a list")
+    package_ids = [
+        package.get("package_id")
+        for package in packages
+        if isinstance(package, dict)
+    ]
+    if package_ids != [f"VC-{number:02d}" for number in range(7, 13)] or len(
+        package_ids
+    ) != len(packages):
+        raise CanonError("Wave 2 closure package identities are invalid")
+
+    required_fields = {
+        "applies_to_avf_ids",
+        "architecture_dependencies",
+        "authorization_state",
+        "deferred_calibration",
+        "locked_decisions",
+        "package_id",
+        "rejected_alternatives",
+        "required_transformation",
+        "selected_study_or_synthesis",
+        "status",
+    }
+    for package in packages:
+        package_id = package["package_id"]
+        if not required_fields.issubset(package):
+            raise CanonError(
+                f"Wave 2 closure package fields are incomplete: {package_id}"
+            )
+        if package.get("status") != "CLOSED":
+            raise CanonError(
+                f"Wave 2 closure package must be closed: {package_id}"
+            )
+        if (
+            package.get("authorization_state")
+            != FALSE_IMPLEMENTATION_AUTHORIZATION
+        ):
+            raise CanonError(
+                f"Wave 2 closure package authorization is invalid: {package_id}"
+            )
+        if package.get("applies_to_avf_ids") != list(
+            EXPECTED_WAVE_2_AVF_MAPPINGS[package_id]
+        ):
+            raise CanonError(
+                f"Wave 2 closure AVF mapping is invalid: {package_id}"
+            )
+        for field in (
+            "architecture_dependencies",
+            "deferred_calibration",
+            "rejected_alternatives",
+        ):
+            value = package.get(field)
+            if not isinstance(value, list) or not value:
+                raise CanonError(
+                    f"Wave 2 closure {field} is invalid: {package_id}"
+                )
+        if not isinstance(package.get("locked_decisions"), dict) or not package[
+            "locked_decisions"
+        ]:
+            raise CanonError(
+                f"Wave 2 closure locked decisions are invalid: {package_id}"
+            )
+        if not isinstance(package.get("selected_study_or_synthesis"), dict):
+            raise CanonError(
+                f"Wave 2 closure selected record is invalid: {package_id}"
+            )
+        if not isinstance(package.get("required_transformation"), dict):
+            raise CanonError(
+                f"Wave 2 closure transformation is invalid: {package_id}"
+            )
+
+    _wave_2_surface_summaries(wave_2_closure)
+    by_id = {package["package_id"]: package for package in packages}
+    if by_id["VC-07"]["locked_decisions"].get("ownership") != {
+        "goals": "pursuit_progression",
+        "mutation": "owner_routed",
+        "time": "exact_chronology_and_temporal_mutation",
+        "today": "immediate_execution_projection",
+    }:
+        raise CanonError("Wave 2 closure ownership boundary is invalid")
+    if by_id["VC-07"]["locked_decisions"].get("density_law") != (
+        "normal_readable_type_and_natural_scroll"
+    ) or by_id["VC-08"]["locked_decisions"].get("density_law") != (
+        "compress_preview_breadth_and_secondary_evidence_before_identity_or_type_size"
+    ):
+        raise CanonError("Wave 2 closure density boundary is invalid")
+    if by_id["VC-09"]["locked_decisions"].get("truth_statuses") != [
+        "accepted",
+        "proposed",
+        "external",
+        "stale",
+        "unknown",
+        "historical",
+    ]:
+        raise CanonError("Wave 2 closure truth boundary is invalid")
+    if by_id["VC-10"]["locked_decisions"].get("capability_gates") != [
+        "dictation",
+        "attachments",
+        "direct_mutation",
+        "pending",
+        "partial_settlement",
+        "receipt",
+        "undo",
+    ]:
+        raise CanonError("Wave 2 closure capability boundary is invalid")
+
+    human_markdown = _confined_path(root, human_path).read_text(encoding="utf-8")
+    required_human_text = (
+        "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`",
+        "- Wave 1: `CLOSED`.",
+        "- Wave 2: `CLOSED`.",
+        "- Wave 3: `OPEN`.",
+        "- `VC-13`: `OPEN`.",
+        "- `VC-14`: `NOT_STARTED`.",
+        "- Figma authorization: `false`.",
+        "- SwiftUI approval: `false`.",
+        "- Implementation authorization: `false`.",
+        *(summary["selected_name"] for summary in EXPECTED_WAVE_2_SUMMARIES.values()),
+    )
+    missing_human_text = next(
+        (text for text in required_human_text if text not in human_markdown),
+        None,
+    )
+    if missing_human_text is not None:
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: "
+            f"missing {missing_human_text}"
+        )
 
 
 def load_manifest(root: Path) -> Manifest:
@@ -704,14 +1050,13 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     dispositions_path = (
         "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
     )
-    visual_contract_path = "docs/canon/design/visual-closure-input-contract.json"
-    wave_1_closure_path = (
-        "docs/canon/design/vc-wave-1-foundation-closure.json"
-    )
+    visual_contract_path = VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix()
+    wave_1_closure_path = VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix()
     blueprint = load(blueprint_path)
     dispositions = load(dispositions_path)
-    visual_contract = load(visual_contract_path)
-    wave_1_closure = load(wave_1_closure_path)
+    visual_contract, wave_1_closure, wave_2_closure = (
+        load_visual_closure_records(root)
+    )
 
     state_models = blueprint.get("state_models")
     if not isinstance(state_models, list):
@@ -1144,6 +1489,8 @@ def validate_design_artifacts(compilation: Compilation) -> None:
             raise CanonError(
                 f"Wave 1 closure Markdown is missing: {required_text}"
             )
+
+    _validate_wave_2_closure(root, compilation.manifest, wave_2_closure)
 
     mappings = visual_contract.get("visual_requirement_mappings")
     if not isinstance(mappings, list) or not mappings:
@@ -1603,22 +1950,28 @@ def render_requirement_traceability(compilation: Compilation) -> bytes:
 
 def render_visual_authority_manifest(compilation: Compilation) -> bytes:
     """Render the active visual authority from its source-owned VC contract."""
-    relative_source = Path(
-        "docs/canon/design/visual-closure-input-contract.json"
+    contract, wave_1_closure, wave_2_closure = load_visual_closure_records(
+        compilation.root
     )
-    source_path = _confined_path(compilation.root, relative_source)
-    source_bytes = source_path.read_bytes()
-    contract = json.loads(source_bytes.decode("utf-8"))
-    wave_1_relative_source = Path(
-        "docs/canon/design/vc-wave-1-foundation-closure.json"
+    source_bytes = tuple(
+        _confined_path(compilation.root, relative_path).read_bytes()
+        for relative_path in VISUAL_CLOSURE_MACHINE_PATHS
     )
-    wave_1_source_path = _confined_path(
-        compilation.root, wave_1_relative_source
-    )
-    wave_1_source_bytes = wave_1_source_path.read_bytes()
-    wave_1_closure = json.loads(wave_1_source_bytes.decode("utf-8"))
+
+    def project_record(index: int, record: dict[str, Any]) -> dict[str, Any]:
+        return {
+            **record,
+            "source_contract": VISUAL_CLOSURE_MACHINE_PATHS[index].as_posix(),
+            "source_input_sha": hashlib.sha256(source_bytes[index]).hexdigest(),
+        }
+
+    wave_1_projection = project_record(1, wave_1_closure)
+    wave_2_projection = project_record(2, wave_2_closure)
     payload = {
-        "active_baseline": contract["active_baseline"],
+        "active_baseline": {
+            **contract["active_baseline"],
+            "wave_2_summaries": _wave_2_surface_summaries(wave_2_closure),
+        },
         "authorities": [
             {
                 "authority_role": "active_reconciled_direction",
@@ -1629,7 +1982,7 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
                     "target contract only; runtime and rendered proof required"
                 ),
                 "requirement_ids": mapping["requirement_ids"],
-                "source": relative_source.as_posix(),
+                "source": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
                 "visual_authority_id": mapping["direction_id"],
             }
             for mapping in contract["visual_requirement_mappings"]
@@ -1638,30 +1991,30 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         "canon_content_sha": compilation.canon_digest,
         "canon_revision": compilation.manifest.canon_revision,
         "classification_vocabulary": contract["classification_vocabulary"],
-        "closure_packages": contract["closure_packages"],
-        "compiler_version": "0.4.0",
+        "closure_packages": {
+            "package_statuses": EXPECTED_EFFECTIVE_PACKAGE_STATUSES,
+            "wave_1": wave_1_projection,
+            "wave_2": wave_2_projection,
+            "wave_3_stress_and_matched_baseline": "OPEN",
+        },
+        "compiler_version": "0.5.0",
         "contract_id": contract["contract_id"],
         "historical_figma_references": contract["historical_figma_references"],
         "legacy_contract_classifications": contract[
             "legacy_contract_classifications"
         ],
         "schema_version": 3,
-        "source_contract": relative_source.as_posix(),
+        "source_contract": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
         "supersessions": contract["supersessions"],
-        "traceability_input_sha": hashlib.sha256(source_bytes).hexdigest(),
+        "traceability_input_sha": hashlib.sha256(source_bytes[0]).hexdigest(),
         "unsupported_visual_behaviors": contract[
             "unsupported_visual_behaviors"
         ],
         "visual_validation_decisions": contract[
             "visual_validation_decisions"
         ],
-        "wave_1_foundation_closure": {
-            **wave_1_closure,
-            "source_contract": wave_1_relative_source.as_posix(),
-            "source_input_sha": hashlib.sha256(
-                wave_1_source_bytes
-            ).hexdigest(),
-        },
+        "wave_1_foundation_closure": wave_1_projection,
+        "wave_2_surface_journey_closure": wave_2_projection,
     }
     return (
         json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)

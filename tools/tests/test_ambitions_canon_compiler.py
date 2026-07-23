@@ -26,6 +26,8 @@ ACTIVE_DESIGN_PATHS = (
     Path("docs/canon/design/visual-closure-input-contract.json"),
     Path("docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md"),
     Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
+    Path("docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"),
+    Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
     Path("docs/canon/migration/ux-blueprint-requirement-dispositions.json"),
@@ -67,6 +69,57 @@ ACTIVE_DESIGN_PATHS = (
         "rp-reconciliation-index.json"
     ),
 )
+
+EXPECTED_ACTIVE_VISUAL_DIRECTIONS = [
+    "AVF-DNA-S07-R00",
+    "AVF-SHELL-S07-R01",
+    "AVF-CAPTURE-S07-R01",
+    "AVF-GOALS-S08-R00",
+    "AVF-TIME-S07-R01",
+    "AVF-TODAY-S10-R00",
+    "AVF-SEARCH-D07-R01",
+    "AVF-YOU-D07-R02",
+    "AVF-RECOVERY-S07-R01",
+    "AVF-A11Y-S07-R00",
+    "AVF-COHERENCE-S07-R00",
+]
+
+EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 13)},
+    "VC-13": "OPEN",
+    "VC-14": "NOT_STARTED",
+}
+
+EXPECTED_WAVE_2_SUMMARIES = {
+    "capture": {
+        "package_id": "VC-10",
+        "selected_name": "Full-Screen Adaptive Meaning Passage",
+    },
+    "goals": {
+        "package_id": "VC-08",
+        "selected_name": "Singular Living Pursuit Passage",
+    },
+    "resilience": {
+        "package_id": "VC-12",
+        "selected_name": "Contextual Combined-State Passage",
+    },
+    "search": {
+        "package_id": "VC-10",
+        "selected_name": "Full-Screen Semantic Command Passage",
+    },
+    "time": {
+        "package_id": "VC-09",
+        "selected_name": "Adaptive Dual-Truth Period Passage",
+    },
+    "today": {
+        "package_id": "VC-07",
+        "selected_name": "Balanced Semantic Execution Day",
+    },
+    "you": {
+        "package_id": "VC-11",
+        "selected_name": "Personal Control Passage",
+    },
+}
 
 
 def mutate_first_taxonomy(
@@ -468,6 +521,173 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             {"height_minimum": 44, "width_minimum": 44},
         )
 
+    def test_visual_closure_loader_preserves_order_and_rejects_bad_records(
+        self,
+    ) -> None:
+        records = canon_compiler.load_visual_closure_records(REPOSITORY_ROOT)
+        self.assertEqual(
+            [
+                records[0]["contract_id"],
+                records[1]["package_id"],
+                records[2]["package_id"],
+            ],
+            [
+                "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
+                "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+                "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE",
+            ],
+        )
+
+        wave_2_path = Path(
+            "docs/canon/design/vc-wave-2-surface-journey-closure.json"
+        )
+        cases = (
+            ("missing", None, "unable to load visual closure record"),
+            ("invalid", "{not json}\n", "invalid JSON"),
+            ("non_object", "[]\n", "root must be an object"),
+        )
+        for label, replacement, expected_error in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for relative_path in (
+                        canon_compiler.VISUAL_CLOSURE_MACHINE_PATHS
+                    ):
+                        if label == "missing" and relative_path == wave_2_path:
+                            continue
+                        target = isolated_root / relative_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / relative_path, target)
+                    if replacement is not None:
+                        (isolated_root / wave_2_path).write_text(
+                            replacement,
+                            encoding="utf-8",
+                        )
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        expected_error,
+                    ):
+                        canon_compiler.load_visual_closure_records(
+                            isolated_root
+                        )
+
+    def test_wave_2_closure_projects_effective_package_and_wave_state(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        closure_packages = manifest["closure_packages"]
+        self.assertEqual(
+            closure_packages["package_statuses"],
+            EXPECTED_EFFECTIVE_PACKAGE_STATUSES,
+        )
+        self.assertEqual(
+            closure_packages["wave_1"]["package_statuses"],
+            canon_compiler.WAVE_1_PACKAGE_STATUSES,
+        )
+        self.assertEqual(closure_packages["wave_1"]["status"], "CLOSED")
+        self.assertEqual(
+            [
+                package["package_id"]
+                for package in closure_packages["wave_2"]["packages"]
+            ],
+            [f"VC-{number:02d}" for number in range(7, 13)],
+        )
+        self.assertEqual(
+            closure_packages["wave_2"]["status"],
+            "CLOSED",
+        )
+        self.assertEqual(
+            closure_packages["wave_3_stress_and_matched_baseline"],
+            "OPEN",
+        )
+        self.assertEqual(
+            manifest["wave_2_surface_journey_closure"]["source_contract"],
+            "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+        )
+
+    def test_wave_2_closure_projects_exact_active_directions(self) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        self.assertEqual(
+            manifest["active_baseline"]["directions"],
+            EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
+        )
+        self.assertEqual(
+            [item["visual_authority_id"] for item in manifest["authorities"]],
+            EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
+        )
+
+    def test_wave_2_closure_keeps_all_implementation_authorization_false(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        expected = {"figma": False, "implementation": False, "swiftui": False}
+        self.assertEqual(
+            {
+                key: manifest["authority_state"][key]
+                for key in expected
+            },
+            expected,
+        )
+        for wave_key in ("wave_1", "wave_2"):
+            wave = manifest["closure_packages"][wave_key]
+            self.assertEqual(wave["authorization_state"], expected)
+            self.assertTrue(
+                all(
+                    package["authorization_state"] == expected
+                    for package in wave["packages"]
+                )
+            )
+
+    def test_wave_2_closure_projects_structured_surface_summaries(self) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        summaries = manifest["active_baseline"]["wave_2_summaries"]
+        self.assertEqual(summaries, EXPECTED_WAVE_2_SUMMARIES)
+        self.assertTrue(all(isinstance(value, dict) for value in summaries.values()))
+        self.assertEqual(
+            manifest["closure_packages"]["wave_2"]["packages"][0]
+            ["locked_decisions"]["ownership"]["mutation"],
+            "owner_routed",
+        )
+        self.assertEqual(
+            manifest["closure_packages"]["wave_2"]["packages"][0]
+            ["locked_decisions"]["density_law"],
+            "normal_readable_type_and_natural_scroll",
+        )
+        self.assertIn(
+            "accepted",
+            manifest["closure_packages"]["wave_2"]["packages"][2]
+            ["locked_decisions"]["truth_statuses"],
+        )
+        self.assertIn(
+            "direct_mutation",
+            manifest["closure_packages"]["wave_2"]["packages"][3]
+            ["locked_decisions"]["capability_gates"],
+        )
+        self.assertTrue(
+            all(
+                "AVF-A11Y-S07-R00" in package["applies_to_avf_ids"]
+                for package in manifest["closure_packages"]["wave_2"]
+                ["packages"]
+            )
+        )
+
+    def test_visual_closure_manifest_rendering_is_deterministic(self) -> None:
+        first = canon_compiler.render_visual_authority_manifest(
+            self.compilation
+        )
+        second = canon_compiler.render_visual_authority_manifest(
+            self.compilation
+        )
+        self.assertEqual(first, second)
+
     def test_generated_outputs_are_current_and_deterministic(self) -> None:
         self.assertEqual(output_drift(self.compilation, self.outputs), ())
         self.assertEqual(render_outputs(self.compilation), self.outputs)
@@ -691,6 +911,199 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 },
                 "Wave 1 closure active direction IDs",
             ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "active_direction_ids": [
+                        "AVF-UNAUTHORIZED-S01-R00",
+                        *payload["active_direction_ids"][1:],
+                    ],
+                },
+                "Wave 2 closure active direction IDs",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "active_direction_ids": [
+                        payload["active_direction_ids"][1],
+                        payload["active_direction_ids"][0],
+                        *payload["active_direction_ids"][2:],
+                    ],
+                },
+                "Wave 2 closure active direction IDs",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-07": "OPEN",
+                    },
+                },
+                "Wave 2 closure package statuses",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-13": "CLOSED",
+                    },
+                },
+                "Wave 2 closure package statuses",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-14": "CLOSED",
+                    },
+                },
+                "Wave 2 closure package statuses",
+            ),
+            *(
+                (
+                    Path(
+                        "docs/canon/design/"
+                        "vc-wave-2-surface-journey-closure.json"
+                    ),
+                    lambda payload, authorization_key=authorization_key: {
+                        **payload,
+                        "authorization_state": {
+                            **payload["authorization_state"],
+                            authorization_key: True,
+                        },
+                    },
+                    "Wave 2 closure authorization",
+                )
+                for authorization_key in ("figma", "swiftui", "implementation")
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        {
+                            **payload["packages"][0],
+                            "authorization_state": {
+                                **payload["packages"][0]["authorization_state"],
+                                "implementation": True,
+                            },
+                        },
+                        *payload["packages"][1:],
+                    ],
+                },
+                "Wave 2 closure package authorization",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        payload["packages"][0],
+                        {**payload["packages"][1], "package_id": "VC-07"},
+                        *payload["packages"][2:],
+                    ],
+                },
+                "Wave 2 closure package identities",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        {**payload["packages"][0], "package_id": "VC-06"},
+                        *payload["packages"][1:],
+                    ],
+                },
+                "Wave 2 closure package identities",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    key: value
+                    for key, value in payload.items()
+                    if key != "human_peer"
+                },
+                "Wave 2 closure human peer",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "human_peer": (
+                        "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md"
+                    ),
+                },
+                "Wave 2 closure human peer",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "inherits": {"human": payload["inherits"]["human"]},
+                },
+                "Wave 2 closure Wave 1 inheritance",
+            ),
+            (
+                Path(
+                    "docs/canon/design/"
+                    "vc-wave-2-surface-journey-closure.json"
+                ),
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        {
+                            **payload["packages"][0],
+                            "applies_to_avf_ids": [
+                                *payload["packages"][0]["applies_to_avf_ids"],
+                                "AVF-NEW-S01-R00",
+                            ],
+                        },
+                        *payload["packages"][1:],
+                    ],
+                },
+                "Wave 2 closure AVF mapping",
+            ),
         )
 
         for relative_path, mutate, expected_error in cases:
@@ -754,6 +1167,31 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 canon_compiler.CanonError,
                 "UX Blueprint Markdown/JSON taxonomy rows disagree",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_closure_rejects_human_machine_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+
+            markdown_path = (
+                isolated_root
+                / "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+            )
+            markdown = markdown_path.read_text(encoding="utf-8")
+            markdown_path.write_text(
+                markdown.replace("- Wave 2: `CLOSED`.", "- Wave 2: `OPEN`.", 1),
+                encoding="utf-8",
+            )
+
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "Wave 2 closure human/machine mismatch",
             ):
                 canon_compiler.validate_design_artifacts(isolated)
 
