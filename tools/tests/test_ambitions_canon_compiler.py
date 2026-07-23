@@ -1267,6 +1267,96 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                     ):
                         canon_compiler.validate_design_artifacts(isolated)
 
+    def test_wave_2_closure_rejects_masked_human_duplicates_extras_and_misplacement(
+        self,
+    ) -> None:
+        vc_07_closed_row = "| `VC-07` | `CLOSED` | Today |"
+        vc_08_selection = (
+            "`VC08-GOALS-S07-R00 — Singular Living Pursuit Passage`"
+        )
+        cases = (
+            (
+                "contradictory_duplicate_status",
+                lambda markdown: markdown.replace(
+                    vc_07_closed_row,
+                    vc_07_closed_row
+                    + "\n| `VC-07` | `OPEN` | Contradictory duplicate |",
+                    1,
+                ),
+            ),
+            (
+                "extra_package_avf",
+                lambda markdown: markdown.replace(
+                    "`AVF-GOALS-S08-R00 — Life Area Linked Goal Lens`",
+                    "`AVF-GOALS-S08-R00 — Life Area Linked Goal Lens`"
+                    "\n\n`AVF-NEW-S01-R00 — Unauthorized extra direction`",
+                    1,
+                ),
+            ),
+            (
+                "changed_shared_package_avf",
+                lambda markdown: markdown.replace(
+                    "`AVF-A11Y-S07-R00 — Adaptive Semantic Continuity`",
+                    "`AVF-A11Y-S99-R99 — Adaptive Semantic Continuity`",
+                    1,
+                ),
+            ),
+            (
+                "misplaced_selected_identifier",
+                lambda markdown: markdown.replace(
+                    vc_08_selection,
+                    "`VC08-GOALS-S99-R99 — Singular Living Pursuit Passage`",
+                    1,
+                )
+                + "\n\nRetained outside the owning package: "
+                + vc_08_selection
+                + "\n",
+            ),
+            (
+                "duplicate_selected_declaration",
+                lambda markdown: markdown.replace(
+                    vc_08_selection,
+                    vc_08_selection + "\n\n" + vc_08_selection,
+                    1,
+                ),
+            ),
+            (
+                "extra_selected_declaration",
+                lambda markdown: markdown.replace(
+                    vc_08_selection,
+                    vc_08_selection
+                    + "\n\n`VC08-GOALS-S99-R99 — Unauthorized extra selection`",
+                    1,
+                ),
+            ),
+        )
+
+        for label, mutate in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+
+                    markdown_path = (
+                        isolated_root
+                        / "docs/canon/design/"
+                        "VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+                    )
+                    markdown = markdown_path.read_text(encoding="utf-8")
+                    mutated = mutate(markdown)
+                    self.assertNotEqual(mutated, markdown)
+                    markdown_path.write_text(mutated, encoding="utf-8")
+
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 2 closure human/machine mismatch",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
     def test_query_resolves_exact_requirement_and_multiword_text(self) -> None:
         exact = query(self.compilation, "LAW-LOCAL-AUTHORITY-001", mode="id")
         self.assertEqual(len(exact), 1)

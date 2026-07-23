@@ -599,21 +599,38 @@ def _validate_wave_2_closure(
             "Wave 2 closure human/machine mismatch: active directions"
         )
 
+    package_status_section = re.search(
+        r"(?ms)^## 3\. Package status$.*?(?=^## 4\.)",
+        human_markdown,
+    )
+    actual_package_rows = (
+        tuple(
+            re.findall(
+                r"(?m)^\| `(VC-(?:0[7-9]|1[0-2]))` \| `([^`]+)` \|",
+                package_status_section.group(0),
+            )
+        )
+        if package_status_section is not None
+        else ()
+    )
     expected_package_rows = tuple(
-        f"| `{package_id}` | `"
-        f"{wave_2_closure['package_statuses'][package_id]}` |"
+        (package_id, wave_2_closure["package_statuses"][package_id])
         for package_id in (f"VC-{number:02d}" for number in range(7, 13))
     )
-    if any(row not in human_markdown for row in expected_package_rows):
+    if actual_package_rows != expected_package_rows:
         raise CanonError(
             "Wave 2 closure human/machine mismatch: package statuses"
         )
 
-    shared_direction_ids = {
-        "AVF-SHELL-S07-R01",
-        "AVF-A11Y-S07-R00",
-        "AVF-COHERENCE-S07-R00",
+    human_direction_positions = {
+        "VC-07": (0,),
+        "VC-08": (0,),
+        "VC-09": (0,),
+        "VC-10": (0, 1),
+        "VC-11": (0,),
+        "VC-12": (0, 1),
     }
+    package_sections: dict[str, str] = {}
     for package in packages:
         package_id = package["package_id"]
         section_match = re.search(
@@ -621,17 +638,21 @@ def _validate_wave_2_closure(
             r"(?=^## \d+\.|\Z)",
             human_markdown,
         )
-        if section_match is None or any(
-            direction_id not in section_match.group(0)
-            for direction_id in package["applies_to_avf_ids"]
-            if direction_id not in shared_direction_ids
-        ):
+        section = section_match.group(0) if section_match is not None else ""
+        package_sections[package_id] = section
+        actual_directions = tuple(
+            re.findall(r"\bAVF-[A-Z0-9-]+\b", section)
+        )
+        expected_directions = tuple(
+            package["applies_to_avf_ids"][position]
+            for position in human_direction_positions[package_id]
+        )
+        if actual_directions != expected_directions:
             raise CanonError(
                 "Wave 2 closure human/machine mismatch: "
                 f"package directions for {package_id}"
             )
 
-    selected_identifiers: list[str] = []
     for package in packages:
         package_id = package["package_id"]
         selection = package["selected_study_or_synthesis"]
@@ -639,32 +660,74 @@ def _validate_wave_2_closure(
             input_labels = " + ".join(
                 item.rsplit("-", 1)[-1] for item in selection["inputs"]
             )
-            selected_identifiers.append(
-                f"`{input_labels} — {selection['name']}`"
+            expected_declarations = (
+                (
+                    "Selected synthesis",
+                    f"`{input_labels} — {selection['name']}`",
+                ),
             )
+            expected_record_ids: tuple[str, ...] = ()
         elif package_id == "VC-10":
-            selected_identifiers.extend(
-                f"`{record['id']} — {record['name']}`"
-                for record in selection["records"]
-            )
-        elif package_id == "VC-11":
-            selected_identifiers.extend(
-                f"`{record['id']} — {record['name']}`"
-                for record in (
-                    selection["primary"],
-                    selection["native_substrate"],
+            expected_declarations = tuple(
+                (
+                    label,
+                    f"`{record['id']} — {record['name']}`",
+                )
+                for label, record in zip(
+                    ("Capture closure", "Search closure"),
+                    selection["records"],
+                    strict=True,
                 )
             )
-        else:
-            selected_identifiers.append(
-                f"`{selection['id']} — {selection['name']}`"
+            expected_record_ids = tuple(
+                record["id"] for record in selection["records"]
             )
-    if any(
-        identifier not in human_markdown for identifier in selected_identifiers
-    ):
-        raise CanonError(
-            "Wave 2 closure human/machine mismatch: selected identifiers"
+        elif package_id == "VC-11":
+            expected_declarations = tuple(
+                (
+                    label,
+                    f"`{record['id']} — {record['name']}`",
+                )
+                for label, record in zip(
+                    ("Selected root structure", "Native substrate"),
+                    (selection["primary"], selection["native_substrate"]),
+                    strict=True,
+                )
+            )
+            expected_record_ids = (
+                selection["primary"]["id"],
+                selection["native_substrate"]["id"],
+                package["required_transformation"]["id"],
+            )
+        else:
+            expected_declarations = (
+                (
+                    "Locked closure",
+                    f"`{selection['id']} — {selection['name']}`",
+                ),
+            )
+            expected_record_ids = (selection["id"],)
+        section = package_sections[package_id]
+        for label, expected_identifier in expected_declarations:
+            actual_identifiers = re.findall(
+                rf"(?m)^{re.escape(label)}:\n\n(`[^`\n]+`)$",
+                section,
+            )
+            if actual_identifiers != [expected_identifier] or section.count(
+                expected_identifier
+            ) != 1:
+                raise CanonError(
+                    "Wave 2 closure human/machine mismatch: "
+                    f"selected identifiers for {package_id}"
+                )
+        actual_record_ids = tuple(
+            re.findall(r"\bVC(?:0[7-9]|1[0-2])-[A-Z0-9-]+\b", section)
         )
+        if actual_record_ids != expected_record_ids:
+            raise CanonError(
+                "Wave 2 closure human/machine mismatch: "
+                f"selected record set for {package_id}"
+            )
 
     required_human_text = (
         "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`",
