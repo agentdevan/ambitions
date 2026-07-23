@@ -80,6 +80,22 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.focusAnchor, .settledTruth)
     }
 
+    func testHistoryDisclosureRoundTripDoesNotChangeSettledTruth() {
+        var state = settledState()
+        let settledTruth = state.acceptedTruth
+
+        XCTAssertTrue(state.openHistory())
+        XCTAssertTrue(state.isHistoryExpanded)
+        XCTAssertEqual(state.phase, .settled)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+
+        XCTAssertTrue(state.closeHistory())
+        XCTAssertFalse(state.isHistoryExpanded)
+        XCTAssertEqual(state.phase, .settled)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+        XCTAssertTrue(state.hasCommittedMutation)
+    }
+
     func testReturnProjectsSettledStepAndNewTruthfulStartHereWithContinuityFocus() {
         var state = settledState()
 

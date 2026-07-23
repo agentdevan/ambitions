@@ -37,12 +37,22 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let crown = todayCrown()
         let dock = app.buttons["Open global navigation"]
         let crownY = crown.frame.minY
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.30))
 
-        app.swipeUp()
+        start.press(forDuration: 0.05, thenDragTo: end)
 
         XCTAssertEqual(crown.frame.minY, crownY, accuracy: 1)
         XCTAssertTrue(dock.exists)
-        XCTAssertTrue(app.staticTexts["Family dinner"].isHittable)
+        XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].isHittable)
+        let timelineTitle = app.staticTexts["Today’s Timeline"]
+        XCTAssertTrue(timelineTitle.isHittable)
+        XCTAssertTrue(app.staticTexts["Bring appointment notes"].isHittable)
+
+        let evidence = XCTAttachment(screenshot: app.screenshot())
+        evidence.name = "TFCS-F03-intentional-scrolled-today-dark"
+        evidence.lifetime = .keepAlways
+        add(evidence)
     }
 
     func testPrimaryStillCountsJourneyAndCancellationRemainTruthful() {
@@ -57,8 +67,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(element("tfcs-review-current-truth").exists)
         XCTAssertTrue(element("tfcs-proposed-truth").exists)
 
-        let cancel = app.buttons["Cancel"]
+        let cancel = app.buttons["Not now"]
         XCTAssertTrue(cancel.exists)
+        XCTAssertTrue(cancel.isHittable)
         cancel.tap()
         XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 3))
         XCTAssertFalse(element("tfcs-settled-truth").exists)
@@ -71,6 +82,14 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(element("tfcs-settled-truth").waitForExistence(timeout: 5))
         XCTAssertTrue(element("tfcs-recorded-acknowledgment").exists)
 
+        let history = app.buttons["View history"]
+        XCTAssertTrue(history.exists)
+        history.tap()
+        XCTAssertTrue(app.staticTexts["Meaningful nursery progress recorded"].isHittable)
+        app.buttons["View history"].tap()
+        XCTAssertFalse(app.staticTexts["Meaningful nursery progress recorded"].isHittable)
+        XCTAssertTrue(element("tfcs-settled-truth").exists)
+
         let returnToToday = element("tfcs-return-to-today")
         XCTAssertTrue(returnToToday.exists)
         assertMinimumTarget(returnToToday)
@@ -79,6 +98,96 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 3))
         XCTAssertTrue(element("tfcs-start-here").exists)
         XCTAssertTrue(app.buttons["Open global navigation"].exists)
+    }
+
+    func testReviewFirstViewportContainsDecisionWithoutScrolling() {
+        launch("tfcs-f07")
+
+        let requiredElements = [
+            element("tfcs-step-identity"),
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth"),
+            element("tfcs-review-consequence"),
+            element("tfcs-review-relationship"),
+            element("tfcs-review-trust-cue"),
+            element("tfcs-review-details"),
+            element("tfcs-commit-still-counts")
+        ]
+        assertExists(requiredElements)
+        for element in requiredElements {
+            XCTAssertTrue(element.isHittable, "Review element begins outside the first viewport: \(element)")
+        }
+
+        let commit = element("tfcs-commit-still-counts")
+        let cancel = app.buttons["Not now"]
+        assertMinimumTarget(commit)
+        assertMinimumTarget(cancel)
+        XCTAssertTrue(commit.isHittable)
+        XCTAssertTrue(cancel.isHittable)
+        XCTAssertFalse(app.staticTexts["Done · Move it · Waiting · Blocked · Not needed"].exists)
+        XCTAssertFalse(app.buttons["Other outcomes"].exists)
+        XCTAssertFalse(app.buttons["Choose another outcome"].exists)
+    }
+
+    func testReturnedTodayPromotedStepAppearsOnceAndSettledStepRemainsVisible() {
+        launch("tfcs-f09")
+
+        let promotedIdentity = app.staticTexts.matching(
+            NSPredicate(format: "label == %@", "Send the launch brief")
+        )
+        XCTAssertEqual(promotedIdentity.count, 1)
+        XCTAssertFalse(element("tfcs-timeline-object-step.send-launch-brief").exists)
+        XCTAssertTrue(element("tfcs-returned-settled-step").exists)
+        XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].exists)
+        XCTAssertTrue(element("tfcs-returned-start-here-time").exists)
+    }
+
+    func testAccessibilityReviewKeepsCommitAndCancelReachable() {
+        launch("tfcs-review-accessibility")
+
+        let commit = element("tfcs-commit-still-counts")
+        let cancel = app.buttons["Not now"]
+        XCTAssertTrue(commit.waitForExistence(timeout: 3))
+        XCTAssertTrue(cancel.exists)
+        assertMinimumTarget(commit)
+        assertMinimumTarget(cancel)
+
+        if commit.isHittable == false {
+            app.swipeUp()
+        }
+        XCTAssertTrue(commit.isHittable)
+        XCTAssertTrue(cancel.isHittable)
+    }
+
+    func testArabicSaudiFixtureRendersGenuineRTLAndLocalizedReviewCopy() {
+        launch("tfcs-stress-long-rtl")
+
+        XCTAssertTrue(app.staticTexts["جهّز زاوية سرير الطفل في Ambitions S10"].exists)
+        XCTAssertTrue(app.staticTexts["نستقبل طفلنا في منزلنا"].exists)
+        XCTAssertTrue(app.staticTexts["الآن"].exists)
+        XCTAssertTrue(app.staticTexts["قبل وقت العائلة"].exists)
+
+        let stillCounts = app.buttons["ما زال يُحتسب"]
+        XCTAssertTrue(stillCounts.exists)
+        stillCounts.tap()
+
+        XCTAssertTrue(app.navigationBars["هل تريد تسجيل هذا التقدّم؟"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["ما الذي سيتغيّر"].exists)
+        XCTAssertTrue(app.staticTexts["يحدّث أيضًا"].exists)
+        XCTAssertTrue(app.buttons["سجّل التقدّم"].exists)
+        XCTAssertTrue(app.buttons["ليس الآن"].exists)
+    }
+
+    func testRecoveryContinuationAndDeferralKeepFixtureSemantics() {
+        launch("tfcs-f10")
+
+        let deferChoice = element("recovery.keep-step")
+        XCTAssertEqual(deferChoice.label, "Leave this for later")
+        deferChoice.tap()
+
+        XCTAssertTrue(element("tfcs-interruption-seam").waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Your saved progress is still here."].exists)
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
     }
 
     func testAdaptiveNavigationAndRecoveryExposeDistinctValidActions() {

@@ -21,7 +21,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
         XCTAssertEqual(
             step.currentAcceptedTruth,
-            "The home corner is clear and the paint sample is ready."
+            "The corner is cleared and the paint sample is chosen."
         )
         XCTAssertEqual(
             step.stillCountsProposal.proposedTruth,
@@ -29,11 +29,86 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
         XCTAssertEqual(
             step.stillCountsProposal.settledTruth,
-            "The cleared corner and paint sample count as progress toward the nursery."
+            "The cleared corner and paint sample now count toward the nursery."
         )
         XCTAssertNotEqual(step.currentAcceptedTruth, step.stillCountsProposal.proposedTruth)
         XCTAssertNotEqual(step.currentAcceptedTruth, step.stillCountsProposal.settledTruth)
         XCTAssertEqual(step.stillCountsProposal.outcomeTitle, "Still counts")
+    }
+
+    func testR02ProductLanguagePreservesMeaningWithoutInternalPhrases() throws {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let step = fixture.primaryStep
+
+        XCTAssertEqual(step.title, "Make the nursery ready for the crib")
+        XCTAssertEqual(
+            step.whyItFitsNow,
+            "This is the smallest useful step before protected family time."
+        )
+        XCTAssertEqual(
+            step.materialConsequence,
+            "It keeps the room moving without taking over the evening."
+        )
+        XCTAssertEqual(step.temporalContext.relationship, "Before family time")
+        XCTAssertEqual(step.stillCountsProposal.commitActionTitle, "Record progress")
+        XCTAssertEqual(
+            fixture.recovery.availableChoices.map(\.title),
+            ["Continue where you left off", "Leave this for later"]
+        )
+
+        let prohibited = [
+            "Exact Step",
+            "Current · Accepted",
+            "Proposed · Not yet accepted",
+            "Exact consequence",
+            "Affected relationship",
+            "Proof posture",
+            "Time-owned",
+            "authoritative until",
+            "Receipt and History",
+            "Added to Proof"
+        ]
+        let visibleFixtureCopy = [
+            step.title,
+            step.currentAcceptedTruth,
+            step.whyItFitsNow,
+            step.materialConsequence,
+            step.temporalContext.relationship,
+            step.primaryActionTitle,
+            step.stillCountsProposal.proposedTruth,
+            step.stillCountsProposal.settledTruth,
+            step.stillCountsProposal.exactConsequence,
+            step.stillCountsProposal.affectedLineage,
+            step.stillCountsProposal.proofRequirement,
+            step.stillCountsProposal.commitActionTitle,
+            fixture.receipt.recordedLabel,
+            fixture.receipt.receiptSummary,
+            fixture.receipt.historySummary,
+            fixture.receipt.proofLabel,
+            fixture.recovery.interruptionTitle,
+            fixture.recovery.interruptionDetail,
+            fixture.recovery.lastSavedProgress
+        ] + fixture.recovery.availableChoices.flatMap { [$0.title, $0.consequence] }
+
+        let visibleViews = try primaryViewSource()
+        for phrase in prohibited {
+            XCTAssertFalse(
+                visibleFixtureCopy.contains(where: { $0.localizedCaseInsensitiveContains(phrase) }),
+                "Fixture product copy exposes prohibited phrase: \(phrase)"
+            )
+            XCTAssertFalse(
+                visibleViews.localizedCaseInsensitiveContains(phrase),
+                "Primary view source exposes prohibited phrase: \(phrase)"
+            )
+        }
+    }
+
+    func testR02FocusedStepDoesNotExposePassiveAlternativeOutcomeNames() throws {
+        let visibleViews = try primaryViewSource()
+
+        XCTAssertFalse(visibleViews.contains("Done · Move it · Waiting · Blocked · Not needed"))
+        XCTAssertFalse(visibleViews.contains("Other outcomes"))
+        XCTAssertFalse(visibleViews.contains("Choose another outcome"))
     }
 
     func testFixtureRetainsLineageConsequenceTimeProofAndReceiptHistoryCapability() {
@@ -64,6 +139,27 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertEqual(timeline.first?.timeLabel, "10:30 AM")
         XCTAssertTrue(timeline.contains(where: { $0.isProtected }))
         XCTAssertTrue(timeline.contains(where: { $0.isFixed }))
+    }
+
+    func testReturnedTodayProjectionShowsPromotedStepOnlyAsStartHere() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+
+        XCTAssertEqual(
+            fixture.timeline.filter {
+                $0.canonicalObjectID == fixture.revealedStartHereStep.id
+            }.count,
+            1
+        )
+        XCTAssertFalse(
+            fixture.returnedTodayTimeline.contains {
+                $0.canonicalObjectID == fixture.revealedStartHereStep.id
+            }
+        )
+        XCTAssertTrue(
+            fixture.returnedTodayTimeline.contains {
+                $0.canonicalObjectID == "step.nursery-paint-sample"
+            }
+        )
     }
 
     func testReturnAndRecoveryContractsUseStableObjectScopedAnchors() {
@@ -100,6 +196,36 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertTrue(fixture.denseToday.timeline.contains(where: \.isFixed))
     }
 
+    func testArabicSaudiEvaluationFixtureUsesRealLocalizedRTLContent() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
+        let combined = [
+            fixture.presentContext.crownTitle,
+            fixture.presentContext.relationship,
+            fixture.interfaceCopy.startHereTitle,
+            fixture.interfaceCopy.rightNowTitle,
+            fixture.interfaceCopy.reviewTitle,
+            fixture.interfaceCopy.reviewChangeTitle,
+            fixture.interfaceCopy.reviewRelationshipTitle,
+            fixture.interfaceCopy.cancelTitle,
+            fixture.primaryStep.title,
+            fixture.primaryStep.currentAcceptedTruth,
+            fixture.primaryStep.whyItFitsNow,
+            fixture.primaryStep.materialConsequence,
+            fixture.primaryStep.temporalContext.relationship,
+            fixture.primaryStep.primaryActionTitle,
+            fixture.primaryStep.stillCountsProposal.outcomeTitle,
+            fixture.primaryStep.stillCountsProposal.commitActionTitle
+        ].joined(separator: " ")
+
+        XCTAssertEqual(fixture.familyID, "today-flagship/preparing-for-baby/still-counts/v1")
+        XCTAssertEqual(fixture.interfaceCopy.localeIdentifier, "ar-SA")
+        XCTAssertTrue(combined.unicodeScalars.contains(where: { (0x0600...0x06FF).contains($0.value) }))
+        XCTAssertTrue(fixture.primaryStep.title.contains("Ambitions S10"))
+        XCTAssertGreaterThan(fixture.primaryStep.materialConsequence.count, 80)
+        XCTAssertNotEqual(fixture.primaryStep.temporalContext.exactTime, "4:30 PM")
+        XCTAssertTrue(fixture.presentContext.relationship.contains("2026") == false)
+    }
+
     func testNavigationOrderRemainsLockedAcrossOrdinaryAndAdaptiveChrome() {
         XCTAssertEqual(
             TodayFlagshipNavigationCommand.roots.map(\.title),
@@ -114,5 +240,26 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             TodayFlagshipNavigationCommand.roots.filter(\.isSelectedRoot),
             [.today]
         )
+    }
+
+    private func primaryViewSource() throws -> String {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let sourceRoot = packageRoot
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let files = [
+            "TodayFlagshipCalibrationView.swift",
+            "TodayFlagshipFocusedStepView.swift",
+            "TodayFlagshipRecoveryReviewView.swift",
+            "TodayFlagshipReviewView.swift"
+        ]
+        return try files.map { file in
+            try String(
+                contentsOf: sourceRoot.appendingPathComponent(file),
+                encoding: .utf8
+            )
+        }.joined(separator: "\n")
     }
 }
