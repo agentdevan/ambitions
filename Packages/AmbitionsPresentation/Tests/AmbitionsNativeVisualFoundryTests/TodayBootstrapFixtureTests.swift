@@ -45,4 +45,20 @@ final class TodayBootstrapFixtureTests: XCTestCase {
         XCTAssertEqual(Set(entries.map(\.id)).count, entries.count)
         XCTAssertTrue(entries.allSatisfy { !$0.timeLabel.isEmpty })
     }
+
+    func testAdaptiveNavigationPassageKeepsLockedOrderAndGrouping() {
+        XCTAssertEqual(
+            TodayBootstrapNavigationCommand.roots.map(\.title),
+            ["Today", "Goals", "Time", "You"]
+        )
+        XCTAssertEqual(
+            TodayBootstrapNavigationCommand.globalActions.map(\.title),
+            ["Search", "Capture"]
+        )
+        XCTAssertTrue(TodayBootstrapNavigationCommand.today.isSelectedRoot)
+        XCTAssertEqual(
+            TodayBootstrapNavigationCommand.roots.filter(\.isSelectedRoot),
+            [.today]
+        )
+    }
 }
