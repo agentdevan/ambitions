@@ -2,7 +2,7 @@
 
 Date: 2026-07-23
 
-Status: Revision 02 ready for owner visual review; not owner-approved
+Status: Revision 02 accepted as VC-14 Native Visual Foundry bootstrap evidence
 
 Authority: `VC14-NATIVE-S01 — Matched Native Flagship Proof` (unchanged)
 
@@ -10,6 +10,8 @@ Fixture: `today-bootstrap/preparing-for-baby/typical/v1`
 
 Fixture copy is synthetic evaluation content, not canon. These screenshots are
 evaluation references, not final production screenshot baselines.
+
+Owner review: `owner-review.md`
 
 ## Preserve exactly
 
@@ -129,4 +131,6 @@ full-app dock behavior, runtime navigation, Search/Capture presentation, other
 roots, the matched matrix, the complete Today journey, or production screenshot
 baselines.
 
-Stop here for owner visual review.
+Owner acceptance closes only the Native Visual Foundry bootstrap evidence gate.
+Today remains pending complete flagship calibration-slice review; no further
+calibration work begins in this closeout.
