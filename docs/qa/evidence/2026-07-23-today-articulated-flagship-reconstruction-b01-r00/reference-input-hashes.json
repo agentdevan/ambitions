@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "production_baseline": false,
+  "inputs": [
+    {
+      "id": "owner-intended-eight-screen-graphite-reference",
+      "path": "reference-inputs/owner-intended-eight-screen-graphite-reference.jpg",
+      "width_pixels": 1202,
+      "height_pixels": 1280,
+      "sha256": "536377f7877411821f2c6a2827d6c4d36ed699f78b0ddeca41c5f9804841e151",
+      "role": "caliber and visual grammar reference; not IA authority"
+    },
+    {
+      "id": "r02-complete-16-frame-board",
+      "path": "baseline/r02-complete-16-frame-board.png",
+      "width_pixels": 1364,
+      "height_pixels": 2776,
+      "sha256": "0127da85d99962df3fa61845836b8f80a90aea4d51a52588b4778930566568cf",
+      "role": "derived comparison aid from immutable R02 Foundry evidence"
+    }
+  ],
+  "excluded_inputs": [
+    "existing/live app screenshots",
+    "legacy frontend views",
+    "Figma"
+  ]
+}
