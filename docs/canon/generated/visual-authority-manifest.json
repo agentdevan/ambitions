@@ -451,6 +451,20 @@
       "VC-14": "NOT_STARTED"
     },
     "wave_1": {
+      "human_record": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+      "machine_record": "docs/canon/design/vc-wave-1-foundation-closure.json",
+      "package_id": "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+      "selected_records": {
+        "VC-01": "VC01-TYPE-STUDY-D — Semantic Cadence",
+        "VC-02": "Mineral Relief Continuum",
+        "VC-03": "VC03-CROWN-D04 — Compact Semantic Stack / VC03-CROWN-D06 — Adaptive Semantic Passage",
+        "VC-04": "VC04-DOCK-D04 — Articulated Edge Tray / VC04-DOCK-D06 — Adaptive Navigation Passage",
+        "VC-05": "VC05-STATE-D04 — Semantic State Covenant / VC05-STATE-D06 — Explicit Stress Scaffold",
+        "VC-06": "VC06-GRAMMAR-D04 — Articulated Native Grammar / VC06-GRAMMAR-D01 — Native Minimal Substrate / VC06-GRAMMAR-D06 — Explicit Accessible Structure"
+      },
+      "status": "CLOSED"
+    },
+    "wave_1_record": {
       "active_direction_ids": [
         "AVF-DNA-S07-R00",
         "AVF-SHELL-S07-R01",
@@ -2148,6 +2162,7 @@
         "wave_3_stress_and_matched_baseline": "OPEN"
       }
     },
+    "wave_2_surfaces_and_journeys": "CLOSED",
     "wave_3_stress_and_matched_baseline": "OPEN"
   },
   "compiler_version": "0.5.0",

@@ -30,7 +30,9 @@ ACTIVE_DESIGN_PATHS = (
     Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
+    Path("docs/canon/migration/ux-blueprint-state-inventory.json"),
     Path("docs/canon/migration/ux-blueprint-requirement-dispositions.json"),
+    Path("docs/canon/generated/visual-authority-manifest.json"),
     Path("docs/canon/design/VISUAL_SYSTEM_R1.md"),
     Path(
         "docs/audits/rp-01-08-evidence-audit/"
@@ -583,10 +585,24 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             EXPECTED_EFFECTIVE_PACKAGE_STATUSES,
         )
         self.assertEqual(
-            closure_packages["wave_1"]["package_statuses"],
+            closure_packages["wave_1_record"]["package_statuses"],
             canon_compiler.WAVE_1_PACKAGE_STATUSES,
         )
-        self.assertEqual(closure_packages["wave_1"]["status"], "CLOSED")
+        self.assertEqual(closure_packages["wave_1_record"]["status"], "CLOSED")
+        contract = json.loads(
+            (
+                REPOSITORY_ROOT
+                / "docs/canon/design/visual-closure-input-contract.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            closure_packages["wave_1"],
+            contract["closure_packages"]["wave_1"],
+        )
+        self.assertEqual(
+            closure_packages["wave_2_surfaces_and_journeys"],
+            "CLOSED",
+        )
         self.assertEqual(
             [
                 package["package_id"]
@@ -634,7 +650,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             },
             expected,
         )
-        for wave_key in ("wave_1", "wave_2"):
+        for wave_key in ("wave_1_record", "wave_2"):
             wave = manifest["closure_packages"][wave_key]
             self.assertEqual(wave["authorization_state"], expected)
             self.assertTrue(
@@ -691,6 +707,20 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
     def test_generated_outputs_are_current_and_deterministic(self) -> None:
         self.assertEqual(output_drift(self.compilation, self.outputs), ())
         self.assertEqual(render_outputs(self.compilation), self.outputs)
+
+    def test_generated_router_lists_both_visual_closure_waves_adjacent(self) -> None:
+        router = self.outputs["generated/CODEX_START_HERE.md"].decode("utf-8")
+        wave_1 = (
+            "- [Wave 1 Foundation Closure]"
+            "(../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)"
+        )
+        wave_2 = (
+            "- [Wave 2 Surface and Journey Closure]"
+            "(../design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)"
+        )
+        self.assertEqual(router.count(wave_1), 1)
+        self.assertEqual(router.count(wave_2), 1)
+        self.assertIn(wave_1 + "\n" + wave_2, router)
 
     def test_generated_traceability_is_structural_and_non_proof(self) -> None:
         self.assertEqual(set(self.outputs), set(GENERATED_PATHS))
@@ -1416,6 +1446,393 @@ Applies within:
                         "Wave 2 closure human/machine mismatch",
                     ):
                         canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_machine_semantics_are_independently_locked(self) -> None:
+        wave_2_json = Path(
+            "docs/canon/design/vc-wave-2-surface-journey-closure.json"
+        )
+        wave_2_markdown = Path(
+            "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+        )
+        cases = (
+            (
+                "coordinated_vc08_selection_change",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        payload["packages"][0],
+                        {
+                            **payload["packages"][1],
+                            "selected_study_or_synthesis": {
+                                **payload["packages"][1][
+                                    "selected_study_or_synthesis"
+                                ],
+                                "id": "VC08-GOALS-S99-R99",
+                            },
+                        },
+                        *payload["packages"][2:],
+                    ],
+                },
+                lambda markdown: markdown.replace(
+                    "VC08-GOALS-S07-R00",
+                    "VC08-GOALS-S99-R99",
+                ),
+            ),
+            (
+                "machine_only_transformation_change",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        payload["packages"][0],
+                        {
+                            **payload["packages"][1],
+                            "required_transformation": {
+                                **payload["packages"][1][
+                                    "required_transformation"
+                                ],
+                                "id": "VC08-GOALS-D99",
+                            },
+                        },
+                        *payload["packages"][2:],
+                    ],
+                },
+                lambda markdown: markdown,
+            ),
+            (
+                "changed_wave_1_inheritance",
+                lambda payload: {
+                    **payload,
+                    "inherits": {
+                        **payload["inherits"],
+                        "machine": (
+                            "docs/canon/design/"
+                            "visual-closure-input-contract.json"
+                        ),
+                    },
+                },
+                lambda markdown: markdown,
+            ),
+        )
+
+        for label, mutate_json, mutate_markdown in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+                    json_target = isolated_root / wave_2_json
+                    payload = json.loads(json_target.read_text(encoding="utf-8"))
+                    json_target.write_text(
+                        json.dumps(mutate_json(payload), indent=2, sort_keys=True)
+                        + "\n",
+                        encoding="utf-8",
+                    )
+                    markdown_target = isolated_root / wave_2_markdown
+                    markdown = markdown_target.read_text(encoding="utf-8")
+                    markdown_target.write_text(
+                        mutate_markdown(markdown),
+                        encoding="utf-8",
+                    )
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 2 closure",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_human_global_authority_is_exact(self) -> None:
+        cases = (
+            (
+                "appended_global_active_direction",
+                lambda markdown: markdown
+                + "\n12. `AVF-UNAUTHORIZED-S01-R00`\n",
+            ),
+            (
+                "extra_active_direction",
+                lambda markdown: markdown.replace(
+                    "11. `AVF-COHERENCE-S07-R00`",
+                    "11. `AVF-COHERENCE-S07-R00`\n"
+                    "12. `AVF-UNAUTHORIZED-S01-R00`",
+                    1,
+                ),
+            ),
+            (
+                "contradictory_vc01_status",
+                lambda markdown: markdown.replace(
+                    "| `VC-01`–`VC-06` | `CLOSED` | Wave 1 shared foundation |",
+                    "| `VC-01`–`VC-06` | `CLOSED` | Wave 1 shared foundation |\n"
+                    "| `VC-01` | `OPEN` | Contradictory duplicate |",
+                    1,
+                ),
+            ),
+            (
+                "contradictory_vc13_status",
+                lambda markdown: markdown.replace(
+                    "| `VC-13` | `OPEN` | Extreme accessibility and content validation |",
+                    "| `VC-13` | `OPEN` | Extreme accessibility and content validation |\n"
+                    "| `VC-13` | `CLOSED` | Contradictory duplicate |",
+                    1,
+                ),
+            ),
+            (
+                "misplaced_contradictory_vc13_status",
+                lambda markdown: markdown
+                + "\n| `VC-13` | `CLOSED` | Misplaced contradiction |\n",
+            ),
+            (
+                "extra_shared_law",
+                lambda markdown: markdown.replace(
+                    "12. No Wave 2 package authorizes Figma, SwiftUI, "
+                    "implementation, or final tokens.",
+                    "12. No Wave 2 package authorizes Figma, SwiftUI, "
+                    "implementation, or final tokens.\n"
+                    "13. Unauthorized additive shared law.",
+                    1,
+                ),
+            ),
+            *(
+                (
+                    f"additive_true_{label}",
+                    lambda markdown, false_line=false_line, true_line=true_line: (
+                        markdown.replace(
+                            false_line,
+                            false_line + "\n" + true_line,
+                            1,
+                        )
+                    ),
+                )
+                for label, false_line, true_line in (
+                    (
+                        "figma",
+                        "- Figma authorization: `false`.",
+                        "- Figma authorization: `true`.",
+                    ),
+                    (
+                        "swiftui",
+                        "- SwiftUI approval: `false`.",
+                        "- SwiftUI approval: `true`.",
+                    ),
+                    (
+                        "implementation",
+                        "- Implementation authorization: `false`.",
+                        "- Implementation authorization: `true`.",
+                    ),
+                )
+            ),
+            (
+                "appended_true_implementation",
+                lambda markdown: markdown
+                + "\n- Implementation authorization: `true`.\n",
+            ),
+            (
+                "duplicate_shared_law_heading",
+                lambda markdown: markdown + "\n## 4. Shared Wave 2 law\n\nDuplicate.\n",
+            ),
+            (
+                "duplicate_authorization_heading",
+                lambda markdown: markdown + "\n## 16. Authorization state\n\n"
+                "- Figma authorization: `true`.\n",
+            ),
+        )
+
+        for label, mutate in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+                    markdown_path = (
+                        isolated_root
+                        / "docs/canon/design/"
+                        "VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+                    )
+                    markdown = markdown_path.read_text(encoding="utf-8")
+                    mutated = mutate(markdown)
+                    self.assertNotEqual(mutated, markdown)
+                    markdown_path.write_text(mutated, encoding="utf-8")
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 2 closure human/machine mismatch",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_machine_json_rejects_duplicate_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+            json_path = (
+                isolated_root
+                / "docs/canon/design/"
+                "vc-wave-2-surface-journey-closure.json"
+            )
+            source = json_path.read_text(encoding="utf-8")
+            mutated = source.replace(
+                '  "status": "CLOSED",',
+                '  "status": "CLOSED",\n  "status": "CLOSED",',
+                1,
+            )
+            self.assertNotEqual(mutated, source)
+            json_path.write_text(mutated, encoding="utf-8")
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "duplicate JSON key",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_machine_json_rejects_unknown_and_malformed_records(
+        self,
+    ) -> None:
+        cases = (
+            (
+                "unknown_top_level",
+                lambda payload: {**payload, "implementation_authorized": True},
+            ),
+            (
+                "unknown_package",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        {
+                            **payload["packages"][0],
+                            "implementation_authorized": True,
+                        },
+                        *payload["packages"][1:],
+                    ],
+                },
+            ),
+            (
+                "unknown_nested_selection",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        payload["packages"][0],
+                        {
+                            **payload["packages"][1],
+                            "selected_study_or_synthesis": {
+                                **payload["packages"][1][
+                                    "selected_study_or_synthesis"
+                                ],
+                                "implementation_authorized": True,
+                            },
+                        },
+                        *payload["packages"][2:],
+                    ],
+                },
+            ),
+            (
+                "traversal_source_path",
+                lambda payload: {
+                    **payload,
+                    "source_paths": ["../outside.md", *payload["source_paths"][1:]],
+                },
+            ),
+            (
+                "extra_vc10_record",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        *payload["packages"][:3],
+                        {
+                            **payload["packages"][3],
+                            "selected_study_or_synthesis": {
+                                **payload["packages"][3][
+                                    "selected_study_or_synthesis"
+                                ],
+                                "records": [
+                                    *payload["packages"][3][
+                                        "selected_study_or_synthesis"
+                                    ]["records"],
+                                    {"id": "EXTRA", "name": "Extra"},
+                                ],
+                            },
+                        },
+                        *payload["packages"][4:],
+                    ],
+                },
+            ),
+            (
+                "missing_vc08_selection_id",
+                lambda payload: {
+                    **payload,
+                    "packages": [
+                        payload["packages"][0],
+                        {
+                            **payload["packages"][1],
+                            "selected_study_or_synthesis": {
+                                key: value
+                                for key, value in payload["packages"][1][
+                                    "selected_study_or_synthesis"
+                                ].items()
+                                if key != "id"
+                            },
+                        },
+                        *payload["packages"][2:],
+                    ],
+                },
+            ),
+            (
+                "wrong_packages_type",
+                lambda payload: {**payload, "packages": "invalid"},
+            ),
+        )
+
+        for label, mutate in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+                    json_path = (
+                        isolated_root
+                        / "docs/canon/design/"
+                        "vc-wave-2-surface-journey-closure.json"
+                    )
+                    payload = json.loads(json_path.read_text(encoding="utf-8"))
+                    json_path.write_text(
+                        json.dumps(mutate(payload), indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaises(canon_compiler.CanonError):
+                        canon_compiler.validate_design_artifacts(isolated)
+
+    def test_visual_system_provenance_rejects_stale_current_source_sha(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+            visual_system_path = (
+                isolated_root / "docs/canon/design/VISUAL_SYSTEM_R1.md"
+            )
+            source = visual_system_path.read_text(encoding="utf-8")
+            mutated = re.sub(
+                r"(?m)(^- Wave 2 closure JSON SHA-256 for `[^`]+`: `)"
+                r"[0-9a-f]{64}(`;)$",
+                r"\g<1>" + "0" * 64 + r"\2",
+                source,
+                count=1,
+            )
+            self.assertNotEqual(mutated, source)
+            visual_system_path.write_text(mutated, encoding="utf-8")
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "Visual System provenance",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
 
     def test_query_resolves_exact_requirement_and_multiword_text(self) -> None:
         exact = query(self.compilation, "LAW-LOCAL-AUTHORITY-001", mode="id")

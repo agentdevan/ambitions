@@ -72,6 +72,41 @@ FALSE_IMPLEMENTATION_AUTHORIZATION = {
     "implementation": False,
     "swiftui": False,
 }
+EXPECTED_WAVE_2_CANONICAL_SHA256 = (
+    "a7adda3b7dc609e1626bc9456ad05ded0aea4d8619416db055d547e4790cb323"
+)
+WAVE_2_TOP_LEVEL_FIELDS = {
+    "active_direction_ids",
+    "architecture_dependencies",
+    "authorization_state",
+    "date",
+    "deferred_calibration_register",
+    "human_peer",
+    "inherits",
+    "package_id",
+    "package_statuses",
+    "packages",
+    "schema_version",
+    "shared_protected_characteristics",
+    "shared_rejected_patterns",
+    "source_paths",
+    "status",
+    "validation_requirements",
+    "wave_3_entry_criteria",
+    "wave_statuses",
+}
+WAVE_2_PACKAGE_FIELDS = {
+    "applies_to_avf_ids",
+    "architecture_dependencies",
+    "authorization_state",
+    "deferred_calibration",
+    "locked_decisions",
+    "package_id",
+    "rejected_alternatives",
+    "required_transformation",
+    "selected_study_or_synthesis",
+    "status",
+}
 EXPECTED_WAVE_2_SUMMARIES = {
     "today": {
         "package_id": "VC-07",
@@ -253,6 +288,17 @@ class CanonError(Exception):
     """A concrete source or generated-canon defect."""
 
 
+def _json_object_without_duplicate_keys(
+    pairs: list[tuple[str, Any]],
+) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise CanonError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def load_visual_closure_records(root: Path) -> tuple[dict[str, Any], ...]:
     """Load ordered visual-closure JSON records from the repository."""
     records: list[dict[str, Any]] = []
@@ -265,7 +311,10 @@ def load_visual_closure_records(root: Path) -> tuple[dict[str, Any], ...]:
                 f"unable to load visual closure record {relative_path}: {exc}"
             ) from exc
         try:
-            payload = json.loads(source)
+            payload = json.loads(
+                source,
+                object_pairs_hook=_json_object_without_duplicate_keys,
+            )
         except json.JSONDecodeError as exc:
             raise CanonError(f"{relative_path}: invalid JSON: {exc}") from exc
         if not isinstance(payload, dict):
@@ -425,6 +474,78 @@ def _wave_2_surface_summaries(
     return summaries
 
 
+def _validate_wave_2_machine_schema(
+    root: Path,
+    wave_2_closure: dict[str, Any],
+) -> None:
+    if set(wave_2_closure) - WAVE_2_TOP_LEVEL_FIELDS:
+        raise CanonError("Wave 2 closure top-level fields are invalid")
+
+    source_paths = wave_2_closure.get("source_paths")
+    if not isinstance(source_paths, list) or not source_paths:
+        raise CanonError("Wave 2 closure source paths are invalid")
+    for source_path in source_paths:
+        if not isinstance(source_path, str):
+            raise CanonError("Wave 2 closure source paths are invalid")
+        relative_path = Path(source_path)
+        if (
+            relative_path.is_absolute()
+            or ".." in relative_path.parts
+            or relative_path.as_posix() != source_path
+            or not _confined_path(root, relative_path).is_file()
+        ):
+            raise CanonError(f"Wave 2 closure source path is invalid: {source_path}")
+
+    packages = wave_2_closure.get("packages")
+    if not isinstance(packages, list) or len(packages) != 6:
+        raise CanonError("Wave 2 closure packages must be a six-object list")
+    selection_fields = {
+        "VC-07": {"inputs", "kind", "name"},
+        "VC-08": {"id", "inputs", "kind", "name"},
+        "VC-09": {"id", "inputs", "kind", "name"},
+        "VC-10": {"kind", "records"},
+        "VC-11": {"kind", "name", "native_substrate", "primary"},
+        "VC-12": {"id", "inputs", "kind", "name"},
+    }
+    for index, package in enumerate(packages, start=7):
+        package_id = f"VC-{index:02d}"
+        if not isinstance(package, dict) or set(package) != WAVE_2_PACKAGE_FIELDS:
+            raise CanonError(f"Wave 2 closure package fields are invalid: {package_id}")
+        selection = package.get("selected_study_or_synthesis")
+        transformation = package.get("required_transformation")
+        if not isinstance(selection, dict) or set(selection) != selection_fields[
+            package_id
+        ]:
+            raise CanonError(f"Wave 2 closure selected record is invalid: {package_id}")
+        expected_transformation_fields = (
+            {"name"} if package_id == "VC-10" else {"id", "name"}
+        )
+        if (
+            not isinstance(transformation, dict)
+            or set(transformation) != expected_transformation_fields
+        ):
+            raise CanonError(f"Wave 2 closure transformation is invalid: {package_id}")
+        if package_id == "VC-10":
+            records = selection.get("records")
+            if (
+                not isinstance(records, list)
+                or len(records) != 2
+                or not all(
+                    isinstance(record, dict) and set(record) == {"id", "name"}
+                    for record in records
+                )
+            ):
+                raise CanonError(
+                    "Wave 2 closure selected record is invalid: VC-10"
+                )
+        if package_id == "VC-11":
+            for key in ("primary", "native_substrate"):
+                record = selection.get(key)
+                if not isinstance(record, dict) or set(record) != {"id", "name"}:
+                    raise CanonError(
+                        "Wave 2 closure selected record is invalid: VC-11"
+                    )
+
 def _validate_wave_2_closure(
     root: Path,
     manifest: Manifest,
@@ -434,6 +555,7 @@ def _validate_wave_2_closure(
         "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
     )
     wave_2_machine_path = VISUAL_CLOSURE_MACHINE_PATHS[2]
+    _validate_wave_2_machine_schema(root, wave_2_closure)
     if wave_2_closure.get("schema_version") != 1:
         raise CanonError("Wave 2 closure schema version is invalid")
     if wave_2_closure.get("package_id") != (
@@ -551,6 +673,15 @@ def _validate_wave_2_closure(
                 f"Wave 2 closure transformation is invalid: {package_id}"
             )
 
+    canonical = json.dumps(
+        wave_2_closure,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    if hashlib.sha256(canonical).hexdigest() != EXPECTED_WAVE_2_CANONICAL_SHA256:
+        raise CanonError("Wave 2 closure semantic content is invalid")
+
     _wave_2_surface_summaries(wave_2_closure)
     by_id = {package["package_id"]: package for package in packages}
     if by_id["VC-07"]["locked_decisions"].get("ownership") != {
@@ -587,18 +718,6 @@ def _validate_wave_2_closure(
         raise CanonError("Wave 2 closure capability boundary is invalid")
 
     human_markdown = _confined_path(root, human_path).read_text(encoding="utf-8")
-    expected_direction_block = "\n".join(
-        f"{index}. `{direction_id}`"
-        for index, direction_id in enumerate(
-            wave_2_closure["active_direction_ids"],
-            start=1,
-        )
-    )
-    if expected_direction_block not in human_markdown:
-        raise CanonError(
-            "Wave 2 closure human/machine mismatch: active directions"
-        )
-
     numbered_sections = tuple(
         re.finditer(
             r"(?ms)^## (?P<number>\d+)\. (?P<title>[^\n]+)$.*?"
@@ -606,6 +725,196 @@ def _validate_wave_2_closure(
             human_markdown,
         )
     )
+    authority_section_specs = (
+        ("2", "Active AVF direction set"),
+        ("3", "Package status"),
+        ("4", "Shared Wave 2 law"),
+        ("16", "Authorization state"),
+    )
+    authority_sections: dict[str, str] = {}
+    authority_positions: list[int] = []
+    for expected_number, expected_title in authority_section_specs:
+        matches = tuple(
+            (position, section)
+            for position, section in enumerate(numbered_sections)
+            if section.group("number") == expected_number
+            or section.group("title") == expected_title
+        )
+        if (
+            len(matches) != 1
+            or matches[0][1].group("number") != expected_number
+            or matches[0][1].group("title") != expected_title
+        ):
+            raise CanonError(
+                "Wave 2 closure human/machine mismatch: "
+                f"section {expected_number} authority"
+            )
+        authority_positions.append(matches[0][0])
+        authority_sections[expected_number] = matches[0][1].group(0)
+    if authority_positions != sorted(authority_positions):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: authority section order"
+        )
+
+    actual_directions = tuple(
+        match.group(2)
+        for match in re.finditer(
+            r"(?m)^(\d+)\. `(AVF-[A-Z0-9-]+)`$",
+            authority_sections["2"],
+        )
+    )
+    expected_directions = tuple(wave_2_closure["active_direction_ids"])
+    actual_direction_numbers = tuple(
+        int(match.group(1))
+        for match in re.finditer(
+            r"(?m)^(\d+)\. `(AVF-[A-Z0-9-]+)`$",
+            authority_sections["2"],
+        )
+    )
+    all_section_direction_ids = tuple(
+        re.findall(r"\bAVF-[A-Z0-9-]+\b", authority_sections["2"])
+    )
+    global_direction_declarations = tuple(
+        (int(match.group(1)), match.group(2))
+        for match in re.finditer(
+            r"(?m)^(\d+)\. `(AVF-[A-Z0-9-]+)`$",
+            human_markdown,
+        )
+    )
+    if (
+        actual_directions != expected_directions
+        or actual_direction_numbers != tuple(range(1, 12))
+        or all_section_direction_ids != expected_directions
+        or global_direction_declarations
+        != tuple(enumerate(expected_directions, start=1))
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: active directions"
+        )
+
+    expected_status_rows = (
+        "| `VC-01`–`VC-06` | `CLOSED` | Wave 1 shared foundation |",
+        "| `VC-07` | `CLOSED` | Today |",
+        "| `VC-08` | `CLOSED` | Goals |",
+        "| `VC-09` | `CLOSED` | Time |",
+        "| `VC-10` | `CLOSED` | Capture and Search |",
+        "| `VC-11` | `CLOSED` | You and Appearance Studio |",
+        "| `VC-12` | `CLOSED` | Resilience combined states |",
+        "| `VC-13` | `OPEN` | Extreme accessibility and content validation |",
+        "| `VC-14` | `NOT_STARTED` | Reconciled matched-baseline closure |",
+    )
+    actual_status_rows = tuple(
+        line
+        for line in human_markdown.splitlines()
+        if line.startswith("| `VC-")
+    )
+    expected_status_summary = (
+        "- Wave 1 shared foundation: `CLOSED`.",
+        "- Wave 2 surfaces and journeys: `CLOSED`.",
+        "- Wave 3 stress and matched baseline: `OPEN`.",
+        "- `VC-14`: `NOT_STARTED`.",
+    )
+    actual_status_summary = tuple(
+        line
+        for line in authority_sections["3"].splitlines()
+        if line.startswith("- ")
+    )
+    if (
+        actual_status_rows != expected_status_rows
+        or actual_status_summary != expected_status_summary
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: package statuses"
+        )
+
+    expected_inherited_law = (
+        "VC01-TYPE-STUDY-D — Semantic Cadence",
+        "Mineral Relief Continuum",
+        "VC03-CROWN-D04 — Compact Semantic Stack",
+        "VC03-CROWN-D06 — Adaptive Semantic Passage",
+        "VC04-DOCK-D04 — Articulated Edge Tray",
+        "VC04-DOCK-D06 — Adaptive Navigation Passage",
+        "VC05-STATE-D04 — Semantic State Covenant",
+        "VC05-STATE-D06 — Explicit Stress Scaffold",
+        "VC06-GRAMMAR-D04 — Articulated Native Grammar",
+        "VC06-GRAMMAR-D01 — Native Minimal Substrate",
+        "VC06-GRAMMAR-D06 — Explicit Accessible Structure",
+    )
+    actual_inherited_law = tuple(
+        re.findall(r"(?m)^- `([^`]+)`$", authority_sections["4"])
+    )
+    expected_shared_requirements = (
+        "Primary content is an opaque matte semantic plane.",
+        "Identity precedes status, metrics, chronology, and action.",
+        "Content uses readable production-scale typography and natural scrolling.",
+        "Dense never means shrinking the entire model into one viewport.",
+        "The crown remains compact.",
+        "Peek is the ordinary eligible root-browsing dock posture.",
+        "Search and Capture remain dock-owned global non-roots.",
+        "Focused depth preserves native Back, editing, keyboard, focus, safe area, "
+        "and dismissal.",
+        "Current, proposed, accepted, external, stale, unknown, historical, saving, "
+        "pending, settlement, conflict, and recovery truth remain distinct.",
+        "Meaning survives Dynamic Type, VoiceOver, Increased Contrast, Reduce "
+        "Transparency, Reduce Motion, localization, RTL, keyboard pressure, and "
+        "one-handed reach.",
+        "Receipt, Undo, pending, partial settlement, external mutation, and recovery "
+        "remain capability-gated.",
+        "No Wave 2 package authorizes Figma, SwiftUI, implementation, or final tokens.",
+    )
+    shared_requirement_matches = tuple(
+        re.finditer(
+            r"(?ms)^(\d+)\. (.*?)(?=^\d+\. |\Z)",
+            authority_sections["4"],
+        )
+    )
+    actual_shared_numbers = tuple(
+        int(match.group(1)) for match in shared_requirement_matches
+    )
+    actual_shared_requirements = tuple(
+        " ".join(match.group(2).split())
+        for match in shared_requirement_matches
+    )
+    if (
+        actual_inherited_law != expected_inherited_law
+        or actual_shared_numbers != tuple(range(1, 13))
+        or actual_shared_requirements != expected_shared_requirements
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: shared Wave 2 law"
+        )
+
+    expected_authorization_rows = (
+        "- Figma authorization: `false`.",
+        "- SwiftUI approval: `false`.",
+        "- Implementation authorization: `false`.",
+        "- Wave 1: `CLOSED`.",
+        "- Wave 2: `CLOSED`.",
+        "- Wave 3: `OPEN`.",
+        "- `VC-13`: `OPEN`.",
+        "- `VC-14`: `NOT_STARTED`.",
+    )
+    actual_authorization_rows = tuple(
+        line
+        for line in authority_sections["16"].splitlines()
+        if line.startswith("- ")
+    )
+    global_authorization_declarations = tuple(
+        match.group(0)
+        for match in re.finditer(
+            r"(?m)^- (?:Figma authorization|SwiftUI approval|"
+            r"Implementation authorization): `(?:true|false)`\.$",
+            human_markdown,
+        )
+    )
+    if (
+        actual_authorization_rows != expected_authorization_rows
+        or global_authorization_declarations != expected_authorization_rows[:3]
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: authorization state"
+        )
+
     package_status_sections = tuple(
         section
         for section in numbered_sections
@@ -750,26 +1059,10 @@ def _validate_wave_2_closure(
                 f"selected record set for {package_id}"
             )
 
-    required_human_text = (
-        "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`",
-        "- Wave 1: `CLOSED`.",
-        "- Wave 2: `CLOSED`.",
-        "- Wave 3: `OPEN`.",
-        "- `VC-13`: `OPEN`.",
-        "- `VC-14`: `NOT_STARTED`.",
-        "- Figma authorization: `false`.",
-        "- SwiftUI approval: `false`.",
-        "- Implementation authorization: `false`.",
-        *(summary["selected_name"] for summary in EXPECTED_WAVE_2_SUMMARIES.values()),
-    )
-    missing_human_text = next(
-        (text for text in required_human_text if text not in human_markdown),
-        None,
-    )
-    if missing_human_text is not None:
+    expected_status_line = "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`"
+    if human_markdown.splitlines().count(expected_status_line) != 1:
         raise CanonError(
-            "Wave 2 closure human/machine mismatch: "
-            f"missing {missing_human_text}"
+            "Wave 2 closure human/machine mismatch: authority status"
         )
 
 
@@ -1193,6 +1486,64 @@ def validate_design_direction(root: Path) -> tuple[int, int]:
         if vsp not in provenance:
             raise CanonError(f"visual provenance index is missing {vsp}")
     return len(screens), len(contracts)
+
+
+def _validate_visual_system_provenance(
+    root: Path,
+    visual_system: str,
+) -> None:
+    provenance_matches = tuple(
+        re.finditer(
+            r"(?m)^- [^;\n]* SHA-256 for `(?P<path>[^`]+)`: "
+            r"`(?P<sha>[0-9a-f]{64})`;$",
+            visual_system,
+        )
+    )
+    expected_paths = {
+        "docs/canon/migration/ux-blueprint.json",
+        "docs/canon/migration/ux-blueprint-state-inventory.json",
+        "docs/canon/migration/ux-blueprint-requirement-dispositions.json",
+        "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+        "docs/canon/design/visual-closure-input-contract.json",
+        "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+        "docs/canon/design/vc-wave-1-foundation-closure.json",
+        "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+        "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+        "docs/canon/generated/visual-authority-manifest.json",
+    }
+    provenance_by_path = {
+        match.group("path"): match.group("sha") for match in provenance_matches
+    }
+    if (
+        set(provenance_by_path) != expected_paths
+        or len(provenance_matches) != len(expected_paths)
+    ):
+        raise CanonError("Visual System provenance declarations are invalid")
+    ux_markdown_matches = re.findall(
+        r"(?m)^- UX blueprint Markdown SHA-256: `([0-9a-f]{64})`;$",
+        visual_system,
+    )
+    if len(ux_markdown_matches) != 1:
+        raise CanonError("Visual System provenance declarations are invalid")
+    provenance_by_path["docs/canon/migration/UX_BLUEPRINT.md"] = (
+        ux_markdown_matches[0]
+    )
+    for source_path, declared_sha in provenance_by_path.items():
+        relative_path = Path(source_path)
+        if relative_path.is_absolute() or ".." in relative_path.parts:
+            raise CanonError(
+                f"Visual System provenance path is invalid: {source_path}"
+            )
+        source_file = _confined_path(root, relative_path)
+        if not source_file.is_file():
+            raise CanonError(
+                f"Visual System provenance source is missing: {source_path}"
+            )
+        actual_sha = hashlib.sha256(source_file.read_bytes()).hexdigest()
+        if actual_sha != declared_sha:
+            raise CanonError(
+                f"Visual System provenance SHA is stale: {source_path}"
+            )
 
 
 def validate_design_artifacts(compilation: Compilation) -> None:
@@ -1752,6 +2103,8 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     if json_screen_ids != markdown_screen_ids:
         raise CanonError("UX Blueprint Markdown/JSON screen identities disagree")
 
+    _validate_visual_system_provenance(root, visual_system)
+
 
 def _canon_digest(root: Path, manifest: Manifest, documents: tuple[Document, ...]) -> str:
     """Digest the normative product canon without creating reference-file cycles.
@@ -1981,6 +2334,8 @@ def render_codex_start(compilation: Compilation) -> bytes:
         "- [Canon README and reading order](../README.md)",
         "- [Visual System R1](../design/VISUAL_SYSTEM_R1.md)",
         "- [Wave 1 Foundation Closure](../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)",
+        "- [Wave 2 Surface and Journey Closure]"
+        "(../design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)",
         "- [Canonical UX Blueprint](../migration/UX_BLUEPRINT.md)",
         "- [Object Boundary Matrix](object-boundary-matrix.md)",
         "- [Requirement graph](requirement-graph.json)",
@@ -2116,6 +2471,11 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
     contract, wave_1_closure, wave_2_closure = load_visual_closure_records(
         compilation.root
     )
+    _validate_wave_2_closure(
+        compilation.root,
+        compilation.manifest,
+        wave_2_closure,
+    )
     source_bytes = tuple(
         _confined_path(compilation.root, relative_path).read_bytes()
         for relative_path in VISUAL_CLOSURE_MACHINE_PATHS
@@ -2156,8 +2516,10 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         "classification_vocabulary": contract["classification_vocabulary"],
         "closure_packages": {
             "package_statuses": EXPECTED_EFFECTIVE_PACKAGE_STATUSES,
-            "wave_1": wave_1_projection,
+            "wave_1": contract["closure_packages"]["wave_1"],
+            "wave_1_record": wave_1_projection,
             "wave_2": wave_2_projection,
+            "wave_2_surfaces_and_journeys": "CLOSED",
             "wave_3_stress_and_matched_baseline": "OPEN",
         },
         "compiler_version": "0.5.0",
