@@ -4,10 +4,20 @@ Date: 2026-07-23
 
 Revision: `AVF-TODAY-S10-R01`
 
-Decision: **UNDECIDED — READY FOR OWNER REVIEW**
+Decision: **REQUESTED_NARROW_REVISION**
 
-The branch proposes one complete fixture-driven Today calibration slice and one
-interrupted/recovery branch. It does not mark itself accepted.
+Revision target: `AVF-TODAY-S10-R02`
+
+The owner retained the R01 journey architecture and requested six bounded
+corrections: remove internal semantic terminology from product UI, compress the
+consequential review, remove inert outcome names, de-duplicate the promoted
+Start Here object on returned Today, replace the orphaned scrolled proof, and
+replace mirrored English with genuine RTL evaluation content.
+
+R02 evidence: [2026-07-23 Today flagship calibration slice R02](../2026-07-23-today-flagship-calibration-slice-r02/README.md)
+
+R01 remains historical evidence. Its screenshots, recordings, hashes, and
+metadata are unchanged. The narrow revision does not mark R01 or R02 accepted.
 
 ## Available owner decisions
 

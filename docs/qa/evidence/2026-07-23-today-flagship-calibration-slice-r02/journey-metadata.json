@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-flagship-calibration-slice-r02",
+  "revision_id": "AVF-TODAY-S10-R02",
+  "rendered_source_sha": "64d1a63954cb1f63c1750f4dd203155989b1b8a1",
+  "production_baseline": false,
+  "fixture_family_id": "today-flagship/preparing-for-baby/still-counts/v1",
+  "environment": {
+    "device": "VC14 iPhone 17 Pro Simulator",
+    "udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "orientation": "portrait",
+    "direct_device_proof_complete": false
+  },
+  "recordings": [
+    {
+      "id": "TFCS-J01",
+      "path": "recordings/TFCS-J01-successful-complete-journey.mov",
+      "captured_at": "2026-07-23T18:30:30-04:00",
+      "duration_seconds": 30.255,
+      "byte_size": 3720986,
+      "sha256": "e6a59b8d8c89e95474762c3876b9d4f8142efc9a50bf81c5613651946597f819",
+      "dynamic_type": "large",
+      "appearance": "dark",
+      "driver": "deterministic fixture-host semantic walkthrough",
+      "sequence": ["Today", "focused current Step", "proposed Still counts review", "saving with accepted truth retained", "settled accepted truth", "View history open and return", "truthful returned Today with unique Start Here"]
+    },
+    {
+      "id": "TFCS-J02",
+      "path": "recordings/TFCS-J02-interrupted-recovery-journey.mov",
+      "captured_at": "2026-07-23T18:31:02-04:00",
+      "duration_seconds": 21.962,
+      "byte_size": 2336088,
+      "sha256": "164bfdf369fc26e274b1d23fca152101bbe879cbbd4b7a90e1a13f349406a3aa",
+      "dynamic_type": "large",
+      "appearance": "dark",
+      "driver": "deterministic fixture-host semantic walkthrough",
+      "sequence": ["Today", "focused current Step", "interrupted with saved progress", "object-scoped recovery review", "truthful saved-progress continuation"]
+    },
+    {
+      "id": "TFCS-J03",
+      "path": "recordings/TFCS-J03-accessibility-dynamic-type-journey.mov",
+      "captured_at": "2026-07-23T18:31:38-04:00",
+      "duration_seconds": 27.738,
+      "byte_size": 4699982,
+      "sha256": "d9a0833e2cc621c890b3ee617b305012fa5b6e73c890096ff806af51a66942d1",
+      "dynamic_type": "accessibility1",
+      "appearance": "dark",
+      "driver": "deterministic fixture-host semantic walkthrough",
+      "sequence": ["Adaptive Navigation Passage and Today", "focused current Step", "proposed Still counts review", "saving with accepted truth retained", "settled accepted truth", "View history open and return", "truthful returned Today"]
+    }
+  ],
+  "proof_ceiling": "Simulator recordings prove fixture-host visual and semantic continuity only. They do not prove live persistence, direct-device behavior, production runtime integration, or owner acceptance."
+}
