@@ -41,8 +41,8 @@ completed successfully.
 | Full Gitleaks scan | PASS — no leaks in 233.13 MB current repository material or the two-commit introduced range from the base. |
 | `git diff --check` | PASS — no whitespace errors. |
 
-The first weak-implementation run reported three `.disabled(...)` SwiftUI
-interaction guards as disabled-test markers. These were native guards for
+The first weak-implementation run reported three native SwiftUI interaction
+guards as skipped-test markers. These were production guards for
 object recovery, duplicate recovery presentation, and post-commit
 cancellation—not skipped tests. The repository's concrete
 `AMBitionsAllowWeakPattern` classification was added at those exact lines. The
