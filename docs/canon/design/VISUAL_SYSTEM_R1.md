@@ -2,7 +2,7 @@
 
 # Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
-Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_AND_2_CLOSED / FIGMA_NOT_AUTHORIZED`
+Status: `ACTIVE_RECONCILED_BASELINE / WAVE_1_THROUGH_3_CLOSED / FIGMA_NOT_AUTHORIZED`
 
 Date: 2026-07-22
 
@@ -26,14 +26,17 @@ Design-input provenance:
 - Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
 - Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `d7978fd3a28889feb88dc261f7108f114c2f40afa61083f6bc250af2e9614e6f`;
 - Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
+- Wave 3 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`: `bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437`;
+- Wave 3 closure JSON SHA-256 for `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`: `e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44`;
 - visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `fd7ad1e1ceb6545af6d01611c2f1fe0c1ed3b645369ec35d6713731b3ebb7a2d`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
-machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md` and
-`VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md` packages define the active baseline. The
-Figma frames, exact tokens, component descriptions, and archived appearance
-studies below are historical or deferred according to their explicit
+machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md`,
+`VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
+`VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md` packages define the active
+baseline. The Figma frames, exact tokens, component descriptions, and archived
+appearance studies below are historical or deferred according to their explicit
 classification; none is a current selection, component API, implementation
 instruction, or proof.
 
@@ -48,12 +51,15 @@ It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
 `AVF-SEARCH-D07-R01`, `AVF-YOU-D07-R02`, and `AVF-RECOVERY-S07-R01`. No
 additional direction ID is created by this document.
 
-VC-01 through VC-12: CLOSED.
-VC-13: OPEN.
+VC-01 through VC-13: CLOSED.
 VC-14: NOT_STARTED.
 Wave 1 shared visual foundation: CLOSED.
 Wave 2 surfaces and journeys: CLOSED.
-Wave 3 stress and matched baseline: OPEN.
+Wave 3 accessibility/content stress validation: CLOSED.
+Overall visual-closure program: OPEN pending VC-14.
+Figma: false.
+SwiftUI: false.
+Implementation: false.
 
 The active Wave 1 selections are:
 
@@ -129,7 +135,9 @@ The complete active decisions, rejections, deferred calibration, architecture
 dependencies, and validation requirements are defined in
 `VC_WAVE_1_FOUNDATION_CLOSURE.md`, `vc-wave-1-foundation-closure.json`,
 `VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
-`vc-wave-2-surface-journey-closure.json`, under
+`vc-wave-2-surface-journey-closure.json`,
+`VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`, and
+`vc-wave-3-accessibility-stress-closure.json`, under
 `VISUAL_CLOSURE_INPUT_CONTRACT.md` and
 `visual-closure-input-contract.json`. Exact type metrics, colors, relief,
 dividers, material recipes, radii, shadows, crown and dock geometry, motion,
@@ -141,8 +149,59 @@ vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
 `IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
 contract remains evidence only even when its original prose uses imperative or
 present-tense language. Only clauses repeated in the visual-closure input
-contract or installed Wave 1 and Wave 2 closures may control VC-01 through
-VC-14.
+contract or installed Wave 1, Wave 2, and Wave 3 closures may control VC-01
+through VC-14.
+
+### Wave 3 accessibility and content stress refinement
+
+`VC13-A11Y-S01 — Stress-Proven Adaptive Semantic Continuity` closes the visual
+validation of the locked system under expansion, assistive input, reduced
+effects, density, combined truth under failure, and input, direction, and reach
+pressure. It installs targeted accessibility refinements beneath the existing
+Wave 1 and Wave 2 packages; it does not alter active AVF IDs, root ownership,
+selected surface hierarchy, appearance doctrine, or any authorization.
+
+The closed validation requires orientation before the fold, then completion
+through scrolling and focused depth. Identity, accepted truth, applicable state,
+material consequence, required action, authority where material, and return
+remain preserved as repeated context, decoration, supporting provenance,
+secondary chronology, preview breadth, and secondary relationships move deeper.
+
+### Wave 3 direct-device proof register
+
+Direct-device proof remains required and incomplete before implementation
+approval or production-baseline closure. The remaining proof register is:
+
+1. Left-handed and lower-reach dock usability.
+2. Dock and system edge-gesture competition.
+3. Keyboard avoidance across every active editor.
+4. VoiceOver reading order and focus restoration.
+5. Switch Control scanning and grouping.
+6. Full Keyboard Access traversal and shortcuts.
+7. Voice Control visible naming.
+8. RTL on-device inspection.
+9. Long localization.
+10. Dynamic Type through accessibility sizes.
+11. Increased Contrast and Differentiate Without Color.
+12. Reduce Transparency opaque equivalents.
+13. Reduce Motion static continuity.
+14. Reduced-effects Appearance specimen.
+15. Low-brightness Dark contrast.
+16. Sensitive-value accessibility exclusion.
+17. Live-announcement timing.
+18. Exact scroll and object restoration.
+19. Safe areas across the supported iPhone portrait range.
+20. Native Back, dismissal, context-menu, selection, and sheet coexistence.
+
+### Wave 3 traceability
+
+Wave 3 is interpreted with the VC input contract and its machine peer; the
+closed Wave 1 and Wave 2 human and machine records; the owner reconciliation
+decisions; the reconciled shell, identity, truth, and local-first accessibility
+ADRs; the Canonical UX Blueprint; the accessibility/platform proof plan; and
+the reconciled flagship reconstruction traceability. Its machine peer is
+projected into generated canon; generated records remain non-authoritative and
+are never hand-edited.
 
 ### Historical Revision 1 synthesis — `HISTORICAL_REFERENCE`
 

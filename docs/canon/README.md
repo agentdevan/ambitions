@@ -55,6 +55,10 @@ for implementation agents and repository tooling.
   input contract and closed Wave 1 foundation. Wave 3 and VC-14 remain
   incomplete, and every Figma, SwiftUI, and implementation authorization remains
   false.
+- [Wave 3 Accessibility and Content Stress Closure](design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)
+  and its JSON peer install the closed VC-13 validation beneath the Wave 1 and
+  Wave 2 authority. VC-14 remains not started; Figma, SwiftUI, and
+  implementation remain unauthorized.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;
