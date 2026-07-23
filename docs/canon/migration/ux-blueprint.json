@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f",
+  "canon_content_sha": "eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e",
   "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [

@@ -11,7 +11,7 @@ Historical Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `18f1050efe7f50565c140fd2ba215ef93f501a84523220fa20cadbfb710efa8f`;
+- canon content SHA: `eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
 - UX blueprint Markdown SHA-256: `e1090840d2cb23c606ab1efc323194e8582c33c73ba9ba0020feda57758713f5`;
