@@ -4,10 +4,16 @@ Date: 2026-07-23
 
 Revision: `AVF-TODAY-S10-R02`
 
-Decision: **UNDECIDED — READY FOR OWNER REVIEW**
+Decision: **REQUEST_NEW_STRUCTURAL_BRANCH**
 
-R02 proposes only the six owner-directed narrow corrections. This record does
-not mark the revision accepted.
+R02 preserves the accepted semantic, interaction, fixture, accessibility, and
+validation harness, but it did not meet the owner flagship visual bar. The
+owner requested structural branch `AVF-TODAY-S10-B01-R00 — Articulated Flagship
+Reconstruction`. R02 media, hashes, metadata, and validation records remain
+immutable historical evidence.
+
+The B01 evidence package is
+`docs/qa/evidence/2026-07-23-today-articulated-flagship-reconstruction-b01-r00/`.
 
 ## Available owner decisions
 
