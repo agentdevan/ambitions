@@ -658,7 +658,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         )
         self.assertEqual(
             closure_packages["wave_3_stress_and_matched_baseline"],
-            "OPEN",
+            "OPEN_PENDING_VC_14",
         )
         self.assertEqual(
             manifest["wave_2_surface_journey_closure"]["source_contract"],
