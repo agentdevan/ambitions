@@ -28,7 +28,7 @@ Design-input provenance:
 - Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
 - Wave 3 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`: `bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437`;
 - Wave 3 closure JSON SHA-256 for `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`: `e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `fd7ad1e1ceb6545af6d01611c2f1fe0c1ed3b645369ec35d6713731b3ebb7a2d`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `b62727f02fb2faf0dc1a4360c8e2867eb4fd1895b9b6795902b09b4c5eb58ad2`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
