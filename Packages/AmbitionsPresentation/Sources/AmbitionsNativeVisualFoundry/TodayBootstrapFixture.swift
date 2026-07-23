@@ -33,7 +33,7 @@ public enum TodayBootstrapFixture {
                 timeLabel: "5:30 PM",
                 title: "Take the prenatal walk together",
                 relationship: "Family time · Health"
-            ),
+            )
         ]
     )
 }

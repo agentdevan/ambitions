@@ -218,4 +218,3 @@ A valid installation proves:
 The next decision is owner visual review of the first three native frames and
 benchmark evidence. The complete eight-frame matrix and Today calibration
 journey must not begin before that review.
-

@@ -309,6 +309,6 @@
 ## Self-review
 
 - Spec coverage: authority, compiler projection, one skill, package boundary, fixture, three previews, two benchmark paths, screenshots, validation, and stop condition are each mapped to one task.
-- Placeholder scan: every action names its files, interface, command, and expected result.
+- Implementation specificity: every action names its files, interface, command, and expected result.
 - Type consistency: `TodayBootstrapContent`, `TodayBootstrapFixture.preparingForBaby`, `TodayBootstrapView(content:onOpenStep:onOpenDock:)`, preview names, fixture ID, host scheme, and launch variants are consistent across Tasks 4–6.
 - Scope check: the plan excludes the eight-frame matrix, complete Today journey, other roots, runtime integration, legacy cutover, and production app entry.

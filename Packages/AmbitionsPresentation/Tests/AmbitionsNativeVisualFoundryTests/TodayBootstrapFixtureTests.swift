@@ -25,7 +25,7 @@ final class TodayBootstrapFixtureTests: XCTestCase {
         let copy = ([
             fixture.startHereTitle,
             fixture.currentTruth,
-            fixture.materialConsequence,
+            fixture.materialConsequence
         ] + fixture.timelineEntries.flatMap {
             [$0.title, $0.relationship]
         }).joined(separator: " ").lowercased()
