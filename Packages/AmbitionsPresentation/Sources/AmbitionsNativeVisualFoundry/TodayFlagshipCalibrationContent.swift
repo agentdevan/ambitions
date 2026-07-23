@@ -12,6 +12,79 @@ public struct TodayFlagshipPresentContext: Equatable, Sendable {
     }
 }
 
+public struct TodayFlagshipInterfaceCopy: Equatable, Sendable {
+    public let localeIdentifier: String
+    public let startHereTitle: String
+    public let stepTitle: String
+    public let rightNowTitle: String
+    public let whyItFitsTitle: String
+    public let consequenceTitle: String
+    public let reviewTitle: String
+    public let reviewChangeTitle: String
+    public let reviewRelationshipTitle: String
+    public let detailsTitle: String
+    public let historyTrustCue: String
+    public let cancelTitle: String
+    public let savingTitle: String
+    public let savingBody: String
+    public let settlementTitle: String
+    public let settlementRelationshipPrefix: String
+    public let viewHistoryTitle: String
+    public let returnTodayTitle: String
+    public let recoveryEntryTitle: String
+    public let recoveryTitle: String
+    public let recoveryBody: String
+    public let timelineTitle: String
+
+    public init(
+        localeIdentifier: String,
+        startHereTitle: String,
+        stepTitle: String,
+        rightNowTitle: String,
+        whyItFitsTitle: String,
+        consequenceTitle: String,
+        reviewTitle: String,
+        reviewChangeTitle: String,
+        reviewRelationshipTitle: String,
+        detailsTitle: String,
+        historyTrustCue: String,
+        cancelTitle: String,
+        savingTitle: String,
+        savingBody: String,
+        settlementTitle: String,
+        settlementRelationshipPrefix: String,
+        viewHistoryTitle: String,
+        returnTodayTitle: String,
+        recoveryEntryTitle: String,
+        recoveryTitle: String,
+        recoveryBody: String,
+        timelineTitle: String
+    ) {
+        self.localeIdentifier = localeIdentifier
+        self.startHereTitle = startHereTitle
+        self.stepTitle = stepTitle
+        self.rightNowTitle = rightNowTitle
+        self.whyItFitsTitle = whyItFitsTitle
+        self.consequenceTitle = consequenceTitle
+        self.reviewTitle = reviewTitle
+        self.reviewChangeTitle = reviewChangeTitle
+        self.reviewRelationshipTitle = reviewRelationshipTitle
+        self.detailsTitle = detailsTitle
+        self.historyTrustCue = historyTrustCue
+        self.cancelTitle = cancelTitle
+        self.savingTitle = savingTitle
+        self.savingBody = savingBody
+        self.settlementTitle = settlementTitle
+        self.settlementRelationshipPrefix = settlementRelationshipPrefix
+        self.viewHistoryTitle = viewHistoryTitle
+        self.returnTodayTitle = returnTodayTitle
+        self.recoveryEntryTitle = recoveryEntryTitle
+        self.recoveryTitle = recoveryTitle
+        self.recoveryBody = recoveryBody
+        self.timelineTitle = timelineTitle
+    }
+}
+
 public struct TodayFlagshipTemporalContext: Equatable, Sendable {
     public let exactTime: String
     public let relationship: String
@@ -103,6 +176,7 @@ public struct TodayFlagshipStepSnapshot: Equatable, Identifiable, Sendable {
 
 public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
     public let id: String
+    public let canonicalObjectID: String
     public let objectTitle: String
     public let timeLabel: String
     public let relationship: String
@@ -112,6 +186,7 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
 
     public init(
         id: String,
+        canonicalObjectID: String,
         objectTitle: String,
         timeLabel: String,
         relationship: String,
@@ -120,6 +195,7 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
         isFixed: Bool = false
     ) {
         self.id = id
+        self.canonicalObjectID = canonicalObjectID
         self.objectTitle = objectTitle
         self.timeLabel = timeLabel
         self.relationship = relationship
@@ -212,6 +288,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
 
     public let familyID: String
     public let isSynthetic: Bool
+    public let interfaceCopy: TodayFlagshipInterfaceCopy
     public let presentContext: TodayFlagshipPresentContext
     public let primaryStep: TodayFlagshipStepSnapshot
     public let revealedStartHereStep: TodayFlagshipStepSnapshot
@@ -223,6 +300,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
     public init(
         familyID: String,
         isSynthetic: Bool,
+        interfaceCopy: TodayFlagshipInterfaceCopy,
         presentContext: TodayFlagshipPresentContext,
         primaryStep: TodayFlagshipStepSnapshot,
         revealedStartHereStep: TodayFlagshipStepSnapshot,
@@ -233,6 +311,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
     ) {
         self.familyID = familyID
         self.isSynthetic = isSynthetic
+        self.interfaceCopy = interfaceCopy
         self.presentContext = presentContext
         self.primaryStep = primaryStep
         self.revealedStartHereStep = revealedStartHereStep
@@ -240,6 +319,10 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         self.receipt = receipt
         self.returnContract = returnContract
         self.recovery = recovery
+    }
+
+    public var returnedTodayTimeline: [TodayFlagshipTimelineObject] {
+        timeline.filter { $0.canonicalObjectID != revealedStartHereStep.id }
     }
 }
 

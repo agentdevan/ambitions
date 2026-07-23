@@ -13,10 +13,12 @@ struct TodayFlagshipRecoveryReviewView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     VStack(alignment: .leading, spacing: 7) {
-                        TodayFlagshipSectionLabel("Affected Step", palette: palette)
                         Text(content.primaryStep.title)
                             .font(.title3.weight(.semibold))
                             .fixedSize(horizontal: false, vertical: true)
+                        Text(content.interfaceCopy.recoveryBody)
+                            .font(.subheadline)
+                            .foregroundStyle(palette.secondaryInk)
                     }
 
                     TodayFlagshipLocalSeam(palette: palette) {
@@ -29,15 +31,10 @@ struct TodayFlagshipRecoveryReviewView: View {
                             Text(content.recovery.lastSavedProgress)
                                 .font(.body)
                                 .fixedSize(horizontal: false, vertical: true)
-                            Text("Accepted truth has not changed.")
-                                .font(.footnote)
-                                .foregroundStyle(palette.secondaryInk)
                         }
                     }
 
                     VStack(alignment: .leading, spacing: 12) {
-                        TodayFlagshipSectionLabel("Recovery choices", palette: palette)
-
                         ForEach(content.recovery.availableChoices) { choice in
                             recoveryChoice(choice)
                         }
@@ -51,16 +48,8 @@ struct TodayFlagshipRecoveryReviewView: View {
             .scrollIndicators(.hidden)
             .background(palette.semanticPlane.ignoresSafeArea())
             .foregroundStyle(palette.primaryInk)
-            .navigationTitle("Recovery review")
+            .navigationTitle(content.interfaceCopy.recoveryTitle)
             .todayFlagshipInlineNavigationTitle()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") {
-                        _ = state.dismissRecovery()
-                    }
-                    .accessibilityHint("Keeps this Step and its saved progress")
-                }
-            }
         }
         .onAppear {
             accessibilityFocus = .recoveryReview

@@ -190,7 +190,7 @@ public struct TodayFlagshipCalibrationView: View {
 
     private func startHere(step: TodayFlagshipStepSnapshot) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Start Here")
+            Text(content.interfaceCopy.startHereTitle)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(palette.articulationAccent)
 
@@ -215,18 +215,29 @@ public struct TodayFlagshipCalibrationView: View {
                         .foregroundStyle(palette.secondaryInk)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Button {
-                        _ = state.openStartHere()
-                    } label: {
-                        Text(step.primaryActionTitle)
-                            .foregroundStyle(palette.actionInk)
+                    if state.phase == .todayReturned {
+                        Label(
+                            "\(step.temporalContext.exactTime) · \(step.temporalContext.relationship)",
+                            systemImage: "clock"
+                        )
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(palette.secondaryInk)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("tfcs-returned-start-here-time")
+                    } else {
+                        Button {
+                            _ = state.openStartHere()
+                        } label: {
+                            Text(step.primaryActionTitle)
+                                .foregroundStyle(palette.actionInk)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.roundedRectangle(radius: 7))
+                        .controlSize(.large)
+                        .frame(minHeight: 44, alignment: .leading)
+                        .accessibilityHint("Opens this Step without changing it")
+                        .accessibilityIdentifier("tfcs-open-start-here")
                     }
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.roundedRectangle(radius: 7))
-                    .controlSize(.large)
-                    .frame(minHeight: 44, alignment: .leading)
-                    .accessibilityHint("Opens this Step without changing it")
-                    .accessibilityIdentifier("tfcs-open-start-here")
                 }
             }
         }
@@ -262,16 +273,20 @@ public struct TodayFlagshipCalibrationView: View {
 
     private var timeline: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("Today’s Timeline")
+            Text(content.interfaceCopy.timelineTitle)
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
 
-            ForEach(content.timeline) { item in
+            ForEach(visibleTimeline) { item in
                 timelineItem(item)
             }
         }
         .padding(.top, 2)
         .accessibilityIdentifier("tfcs-timeline")
+    }
+
+    private var visibleTimeline: [TodayFlagshipTimelineObject] {
+        state.phase == .todayReturned ? content.returnedTodayTimeline : content.timeline
     }
 
     private func timelineItem(_ item: TodayFlagshipTimelineObject) -> some View {
@@ -301,6 +316,7 @@ public struct TodayFlagshipCalibrationView: View {
         .accessibilityLabel(
             "\(item.objectTitle), \(item.timeLabel), \(item.relationship), \(item.acceptedState)"
         )
+        .accessibilityIdentifier("tfcs-timeline-object-\(item.canonicalObjectID)")
     }
 
     private var truthfulFallback: some View {

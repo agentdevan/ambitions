@@ -33,6 +33,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     public private(set) var proposedTruth: String?
     public private(set) var focusAnchor: TodayFlagshipFocusAnchor
     public private(set) var hasCommittedMutation: Bool
+    public private(set) var isHistoryExpanded: Bool
 
     private let primaryStepID: String
     private let revealedStartHereStepID: String
@@ -50,6 +51,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         proposedTruth = nil
         focusAnchor = .startHere
         hasCommittedMutation = false
+        isHistoryExpanded = false
         primaryStepID = content.primaryStep.id
         revealedStartHereStepID = content.revealedStartHereStep.id
         proposalTruth = content.primaryStep.stillCountsProposal.proposedTruth
@@ -149,6 +151,21 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         phase = .todayReturned
         navigationPath = []
         focusAnchor = .returnedSettledStep
+        isHistoryExpanded = false
+        return true
+    }
+
+    @discardableResult
+    public mutating func openHistory() -> Bool {
+        guard phase == .settled else { return false }
+        isHistoryExpanded = true
+        return true
+    }
+
+    @discardableResult
+    public mutating func closeHistory() -> Bool {
+        guard phase == .settled, isHistoryExpanded else { return false }
+        isHistoryExpanded = false
         return true
     }
 

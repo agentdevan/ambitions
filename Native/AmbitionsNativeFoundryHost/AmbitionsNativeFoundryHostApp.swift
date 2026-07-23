@@ -27,6 +27,7 @@ private struct FoundryHostRoot: View {
         }
         .preferredColorScheme(variant.colorScheme)
         .dynamicTypeSize(variant.dynamicTypeSize)
+        .environment(\.locale, Locale(identifier: variant.localeIdentifier))
         .environment(\.layoutDirection, variant.rightToLeft ? .rightToLeft : .leftToRight)
     }
 }
@@ -77,7 +78,11 @@ private struct TodayFlagshipCalibrationHost: View {
             _ = state.beginCommit()
             await pause(2_000)
             _ = state.settle()
-            await pause(2_600)
+            await pause(1_600)
+            _ = state.openHistory()
+            await pause(1_800)
+            _ = state.closeHistory()
+            await pause(900)
             _ = state.returnToToday()
             await pause(3_000)
         case .interrupted:
@@ -126,6 +131,7 @@ private enum FoundryVariant: String {
     case stateDense = "tfcs-state-dense"
     case stressLongRTL = "tfcs-stress-long-rtl"
     case stressContrast = "tfcs-stress-contrast"
+    case reviewAccessibility = "tfcs-review-accessibility"
     case journeySuccessful = "tfcs-j01"
     case journeyInterrupted = "tfcs-j02"
     case journeyAccessibility = "tfcs-j03"
@@ -155,7 +161,7 @@ private enum FoundryVariant: String {
 
     var dynamicTypeSize: DynamicTypeSize {
         switch self {
-        case .accessibilityDark, .tfcsF05, .journeyAccessibility:
+        case .accessibilityDark, .tfcsF05, .reviewAccessibility, .journeyAccessibility:
             .accessibility1
         default:
             .large
@@ -166,7 +172,7 @@ private enum FoundryVariant: String {
         switch self {
         case .tfcsF06, .stateCancelled, .stressLongRTL:
             .focusedCurrent
-        case .tfcsF07, .stressContrast:
+        case .tfcsF07, .stressContrast, .reviewAccessibility:
             .reviewingProposal
         case .tfcsF08:
             .settled
@@ -188,7 +194,7 @@ private enum FoundryVariant: String {
         case .tfcsF03, .stateDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
         case .stressLongRTL:
-            TodayFlagshipCalibrationFixture.preparingForBaby.longContent
+            TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
         }
@@ -197,6 +203,10 @@ private enum FoundryVariant: String {
     var dockExpanded: Bool { self == .tfcsF04 }
 
     var rightToLeft: Bool { self == .stressLongRTL }
+
+    var localeIdentifier: String {
+        self == .stressLongRTL ? "ar-SA" : "en-US"
+    }
 
     var demoJourney: FoundryDemoJourney {
         switch self {

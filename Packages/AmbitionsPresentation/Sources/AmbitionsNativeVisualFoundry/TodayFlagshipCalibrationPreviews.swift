@@ -103,10 +103,11 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
 
 #Preview("Stress · Long content RTL") {
     TodayFlagshipCalibrationPreviewHost(
-        content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
         phase: .focusedCurrent
     )
     .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
     .environment(\.layoutDirection, .rightToLeft)
 }
 

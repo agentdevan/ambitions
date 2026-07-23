@@ -33,7 +33,11 @@ struct TodayFlagshipFocusedStepView: View {
         .scrollIndicators(.hidden)
         .background(palette.semanticPlane.ignoresSafeArea())
         .foregroundStyle(palette.primaryInk)
-        .navigationTitle(state.phase == .settled ? "Recorded" : "Start Here")
+        .navigationTitle(
+            state.phase == .settled
+                ? content.interfaceCopy.settlementTitle
+                : content.interfaceCopy.startHereTitle
+        )
         .todayFlagshipInlineNavigationTitle()
         .todayFlagshipBackButtonHidden(state.phase == .settled)
         .onAppear {
@@ -48,7 +52,7 @@ struct TodayFlagshipFocusedStepView: View {
     private var identity: some View {
         VStack(alignment: .leading, spacing: 8) {
             TodayFlagshipSectionLabel(
-                "Step",
+                content.interfaceCopy.stepTitle,
                 symbol: "circle.dashed.inset.filled",
                 palette: palette
             )
@@ -73,28 +77,27 @@ struct TodayFlagshipFocusedStepView: View {
     private var currentStep: some View {
         VStack(alignment: .leading, spacing: 25) {
             TodayFlagshipTruthBlock(
-                label: "Current · Accepted",
+                label: content.interfaceCopy.rightNowTitle,
                 symbol: "checkmark.seal",
                 truth: state.acceptedTruth,
-                supportingText: "This remains authoritative until a reviewed outcome settles.",
+                supportingText: nil,
                 isProposed: false,
                 palette: palette
             )
             .accessibilityIdentifier("tfcs-current-truth")
 
             semanticRelationship(
-                label: "Why it fits now",
+                label: content.interfaceCopy.whyItFitsTitle,
                 text: content.primaryStep.whyItFitsNow
             )
 
             semanticRelationship(
-                label: "What this protects",
+                label: content.interfaceCopy.consequenceTitle,
                 text: content.primaryStep.materialConsequence
             )
 
             temporalContext
             availableOutcomes
-            proofPosture
         }
     }
 
@@ -110,32 +113,28 @@ struct TodayFlagshipFocusedStepView: View {
 
     private var temporalContext: some View {
         VStack(alignment: .leading, spacing: 7) {
-            TodayFlagshipSectionLabel("Time relationship", palette: palette)
+            TodayFlagshipSectionLabel(
+                content.primaryStep.temporalContext.relationship,
+                palette: palette
+            )
 
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text(content.primaryStep.temporalContext.exactTime)
                     .font(.headline.monospacedDigit())
-                Text(content.primaryStep.temporalContext.relationship)
-                    .font(.subheadline)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
             }
-
-            Text("Exact chronology remains \(content.primaryStep.temporalContext.owner)-owned.")
-                .font(.caption)
-                .foregroundStyle(palette.tertiaryInk)
         }
         .accessibilityElement(children: .combine)
     }
 
     private var availableOutcomes: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            TodayFlagshipSectionLabel("Available outcomes", palette: palette)
-
+        VStack(alignment: .leading, spacing: 0) {
             Button {
                 _ = state.selectStillCounts()
             } label: {
-                Label("Still counts", systemImage: "checkmark.circle")
+                Label(
+                    content.primaryStep.stillCountsProposal.outcomeTitle,
+                    systemImage: "checkmark.circle"
+                )
                     .font(.body.weight(.semibold))
                     .foregroundStyle(palette.actionInk)
             }
@@ -147,29 +146,7 @@ struct TodayFlagshipFocusedStepView: View {
             .disabled(state.phase == .interrupted || state.phase == .recoveryReview)
             .accessibilityHint("Reviews meaningful progress before anything changes")
             .accessibilityIdentifier("tfcs-select-still-counts")
-
-            Text("Done · Move it · Waiting · Blocked · Not needed")
-                .font(.footnote)
-                .foregroundStyle(palette.secondaryInk)
-                .fixedSize(horizontal: false, vertical: true)
         }
-    }
-
-    private var proofPosture: some View {
-        TodayFlagshipLocalSeam(palette: palette) {
-            VStack(alignment: .leading, spacing: 6) {
-                TodayFlagshipSectionLabel(
-                    "Proof posture",
-                    symbol: "lock.shield",
-                    palette: palette
-                )
-                Text("No new Proof or Receipt exists before an outcome settles.")
-                    .font(.subheadline)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityElement(children: .combine)
     }
 
     private var interruptionSeam: some View {
@@ -187,7 +164,7 @@ struct TodayFlagshipFocusedStepView: View {
                 .font(.callout.weight(.medium))
                 .fixedSize(horizontal: false, vertical: true)
 
-            Button("Review recovery choices") {
+            Button(content.interfaceCopy.recoveryEntryTitle) {
                 _ = state.openRecoveryReview()
             }
             .buttonStyle(.bordered)
@@ -213,14 +190,14 @@ struct TodayFlagshipFocusedStepView: View {
         TodayFlagshipLocalSeam(palette: palette) {
             VStack(alignment: .leading, spacing: 6) {
                 TodayFlagshipSectionLabel(
-                    "Saved progress restored",
+                    content.interfaceCopy.recoveryTitle,
                     symbol: "arrow.clockwise",
                     palette: palette
                 )
                 Text(content.recovery.lastSavedProgress)
                     .font(.body)
                     .fixedSize(horizontal: false, vertical: true)
-                Text("Accepted truth is unchanged.")
+                Text(content.interfaceCopy.recoveryBody)
                     .font(.footnote)
                     .foregroundStyle(palette.secondaryInk)
             }
@@ -232,47 +209,53 @@ struct TodayFlagshipFocusedStepView: View {
     private var settlement: some View {
         VStack(alignment: .leading, spacing: 22) {
             TodayFlagshipTruthBlock(
-                label: "New · Accepted",
+                label: content.interfaceCopy.settlementTitle,
                 symbol: "checkmark.seal.fill",
                 truth: state.acceptedTruth,
-                supportingText: content.primaryStep.stillCountsProposal.exactConsequence,
+                supportingText: nil,
                 isProposed: false,
                 palette: palette
             )
             .accessibilityFocused($accessibilityFocus, equals: .settledTruth)
             .accessibilityIdentifier("tfcs-settled-truth")
 
-            TodayFlagshipLocalSeam(palette: palette) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Label(content.receipt.recordedLabel, systemImage: "doc.badge.checkmark")
-                        .font(.subheadline.weight(.semibold))
-                    Text(content.receipt.proofLabel)
-                        .font(.footnote)
-                        .foregroundStyle(palette.secondaryInk)
-                }
-            }
+            Text(
+                "\(content.interfaceCopy.settlementRelationshipPrefix) "
+                    + content.primaryStep.parentPursuitTitle
+            )
+            .font(.body.weight(.medium))
+            .fixedSize(horizontal: false, vertical: true)
+
+            Label(content.receipt.recordedLabel, systemImage: "checkmark.seal")
+                .font(.subheadline)
+                .foregroundStyle(palette.secondaryInk)
             .accessibilityElement(children: .combine)
             .accessibilityIdentifier("tfcs-recorded-acknowledgment")
 
-            DisclosureGroup("Receipt and History") {
+            DisclosureGroup(
+                content.interfaceCopy.viewHistoryTitle,
+                isExpanded: historyDisclosure
+            ) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(content.receipt.receiptSummary)
                     Text(content.receipt.historySummary)
-                    Text("Receipt ID: \(content.receipt.id)")
+                    Text(content.receipt.recordedLabel)
+                    Text("Record: \(content.receipt.id)")
                         .font(.caption.monospaced())
                         .foregroundStyle(palette.tertiaryInk)
                 }
                 .font(.subheadline)
                 .foregroundStyle(palette.secondaryInk)
                 .padding(.top, 8)
+                .accessibilityIdentifier("tfcs-history-detail")
             }
             .font(.body.weight(.medium))
-            .accessibilityIdentifier("tfcs-receipt-history-disclosure")
+            .accessibilityIdentifier("tfcs-view-history")
 
             Button {
                 _ = state.returnToToday()
             } label: {
-                Text("Return to Today")
+                Text(content.interfaceCopy.returnTodayTitle)
                     .foregroundStyle(palette.actionInk)
             }
             .buttonStyle(.borderedProminent)
@@ -282,6 +265,19 @@ struct TodayFlagshipFocusedStepView: View {
             .accessibilityHint("Returns to the settled Step and the next Start Here")
             .accessibilityIdentifier("tfcs-return-to-today")
         }
+    }
+
+    private var historyDisclosure: Binding<Bool> {
+        Binding(
+            get: { state.isHistoryExpanded },
+            set: { isExpanded in
+                if isExpanded {
+                    _ = state.openHistory()
+                } else {
+                    _ = state.closeHistory()
+                }
+            }
+        )
     }
 
     private var palette: TodayFlagshipPalette {
