@@ -2,40 +2,44 @@
 
 # Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
-Status: `ACTIVE_RECONCILED_BASELINE / VC_01_THROUGH_VC_13_CLOSED / VC_14_NOT_STARTED / FIGMA_NOT_AUTHORIZED`
+Status: `ACTIVE_RECONCILED_BASELINE / VC_01_THROUGH_VC_14_CLOSED / NATIVE_PROVING_ACTIVE / FIGMA_NOT_AUTHORIZED`
 
-Date: 2026-07-22
+Date: 2026-07-23
 
 Historical Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0`;
+- canon content SHA: `ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `c48d4ba671feba818a78351d49b94d965ccb4bd92859f9940e0e40a7f2668cb0`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `472bfd5136b9e162653396c6b939af49b5cbb06888a63007d4c473657341f334`;
+- UX blueprint Markdown SHA-256: `f9d989cdee49137134833617b55d93ad589283115db970123b887f08bf43a120`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `53e0de07ca1b698e8b0235d15ba250932a7de0680fe48b211e9f257cd87c1b03`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `86043aa16ed3b5f303b8465fe83f062068ab4940ced658a77562109df8c4051a`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `064cffbc2b87696f562ad6a7146ec42a347fc04e2b1f1a4a39577c9e5ce33dc6`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
-- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `fef08a88418026df730feba9b3a276e7afdd9cc76395dd6b23b9b50621cd8c92`;
-- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54`;
+- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `e3bfdcddc436d56937fa8f07c95c66b61a9fecb268fabcff9908f265fe5190bb`;
+- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `e2faa95083302b10ef7604bd1325e156aaab799214f71ed31e891b242dd60457`;
 - Wave 1 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`: `7273a1c320f7e13f694d6bad07ee15586b675d9ae72688361217ee51a4b8e3bd`;
 - Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
 - Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `d7978fd3a28889feb88dc261f7108f114c2f40afa61083f6bc250af2e9614e6f`;
 - Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
 - Wave 3 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`: `bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437`;
 - Wave 3 closure JSON SHA-256 for `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`: `e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `b62727f02fb2faf0dc1a4360c8e2867eb4fd1895b9b6795902b09b4c5eb58ad2`;
+- VC-14 closure Markdown SHA-256 for `docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md`: `9f1de007bf6e068dc884039dcde6aac56c49bd2302c38bb07c0c5370620435eb`;
+- VC-14 closure JSON SHA-256 for `docs/canon/design/vc-14-native-matched-closure.json`: `9e77f9ebb92620a9ec3a95f6dfb65fc747efe166d2ff1a194c3309875c6ed0d1`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `aea14dec025284a9849db30d7189bfe9e7c5baa1c0fef9a4dbfb2edd80162f1e`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
 machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md`,
 `VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
-`VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md` packages define the active
-baseline. The Figma frames, exact tokens, component descriptions, and archived
+`VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`, and
+`VC_14_NATIVE_MATCHED_CLOSURE.md` packages define the active baseline. Native
+SwiftUI previews and the running native application are the primary visual
+proving environments. The Figma frames, exact tokens, component descriptions, and archived
 appearance studies below are historical or deferred according to their explicit
 classification; none is a current selection, component API, implementation
 instruction, or proof.
@@ -51,15 +55,22 @@ It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
 `AVF-SEARCH-D07-R01`, `AVF-YOU-D07-R02`, and `AVF-RECOVERY-S07-R01`. No
 additional direction ID is created by this document.
 
-VC-01 through VC-13: CLOSED.
-VC-14: NOT_STARTED.
+VC-01 through VC-14: CLOSED.
 Wave 1 shared visual foundation: CLOSED.
 Wave 2 surfaces and journeys: CLOSED.
 Wave 3 accessibility/content stress validation: CLOSED.
-Overall visual-closure program: OPEN pending VC-14.
+Overall visual-closure planning program: CLOSED.
 Figma: false.
-SwiftUI: false.
-Implementation: false.
+APPROVED FOR SWIFTUI: false.
+Broad production implementation: false.
+Broad frontend reconstruction: false.
+Legacy frontend cutover: false.
+Direct-device proof: required and incomplete.
+
+Native Visual Foundry bootstrap, fixture-driven preview construction, the
+Today flagship calibration slice, and screenshot-based owner review are
+separately true. These narrow permissions do not redefine a broad
+authorization as true.
 
 The active Wave 1 selections are:
 
@@ -128,8 +139,9 @@ to the canonical owner. Partial settlement requires typed per-scope outcomes;
 Receipts and Undo are capability-gated. You is local/no-account. Current
 platform scope is iPhone, portrait, and single scene.
 
-Figma authorization is false. SwiftUI approval is false. Implementation
-authorization is false.
+Figma authorization is false. `APPROVED FOR SWIFTUI`, broad production
+implementation, broad frontend reconstruction, and legacy frontend cutover
+authorization are false.
 
 The complete active decisions, rejections, deferred calibration, architecture
 dependencies, and validation requirements are defined in
@@ -137,7 +149,9 @@ dependencies, and validation requirements are defined in
 `VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
 `vc-wave-2-surface-journey-closure.json`,
 `VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`, and
-`vc-wave-3-accessibility-stress-closure.json`, under
+`vc-wave-3-accessibility-stress-closure.json`, and
+`VC_14_NATIVE_MATCHED_CLOSURE.md` and
+`vc-14-native-matched-closure.json`, under
 `VISUAL_CLOSURE_INPUT_CONTRACT.md` and
 `visual-closure-input-contract.json`. Exact type metrics, colors, relief,
 dividers, material recipes, radii, shadows, crown and dock geometry, motion,
@@ -149,8 +163,23 @@ vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
 `IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
 contract remains evidence only even when its original prose uses imperative or
 present-tense language. Only clauses repeated in the visual-closure input
-contract or installed Wave 1, Wave 2, and Wave 3 closures may control VC-01
-through VC-14.
+contract or installed Wave 1, Wave 2, Wave 3, and VC-14 closures may control
+VC-01 through VC-14.
+
+### VC-14 native matched closure
+
+`VC14-NATIVE-S01 — Matched Native Flagship Proof` closes the planning program
+without changing the active AVF direction set. The primary path is the Today
+Flagship Vertical Slice, supported later by a restrained Matched Native Proof
+Matrix. Shell proof remains limited to behavior needed by a slice; state proof
+targets current/proposed, blocked or failed, settlement, and recovery states.
+
+The first native proving step is one production-intended, fixture-driven Today
+composition in Typical Light, Typical Dark, and Accessibility Dynamic Type
+Dark. A valid proving frame must show a real native view rendered in a preview
+host or running application. Figma is optional documentation and comparison
+only; Code Connect is outside the program. Evaluation screenshots are not
+production baselines, and direct-device proof remains incomplete.
 
 ### Wave 3 accessibility and content stress refinement
 

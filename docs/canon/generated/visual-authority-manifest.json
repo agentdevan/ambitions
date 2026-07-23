@@ -159,6 +159,20 @@
       "primary_content": "opaque_matte_continuous",
       "reduce_transparency": "authored_opaque_equivalent"
     },
+    "native_visual_foundry": {
+      "code_connect_in_program": false,
+      "direct_device_proof": {
+        "complete": false,
+        "required": true
+      },
+      "figma_role": "optional_documentation_and_comparison_only",
+      "primary_proving_environments": [
+        "native_swiftui_previews",
+        "running_native_application"
+      ],
+      "real_native_frame_required": true,
+      "selected_record": "VC14-NATIVE-S01 — Matched Native Flagship Proof"
+    },
     "platform_scope": {
       "device_family": "iPhone",
       "orientation": "portrait",
@@ -739,12 +753,23 @@
     }
   ],
   "authority_state": {
+    "approved_for_swiftui": false,
+    "broad_frontend_reconstruction": false,
+    "broad_production_implementation": false,
+    "calibration": {
+      "fixture_driven_preview_construction": true,
+      "native_visual_foundry_bootstrap": true,
+      "screenshot_based_owner_review": true,
+      "today_flagship_calibration_slice": true
+    },
     "figma": false,
     "implementation": false,
+    "legacy_frontend_cutover": false,
     "swiftui": false,
-    "visual_closure_planning": true
+    "visual_closure_planning": false,
+    "visual_closure_planning_program_closed": true
   },
-  "canon_content_sha": "0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0",
+  "canon_content_sha": "ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916",
   "canon_revision": 2,
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",
@@ -768,8 +793,179 @@
       "VC-11": "CLOSED",
       "VC-12": "CLOSED",
       "VC-13": "CLOSED",
-      "VC-14": "NOT_STARTED"
+      "VC-14": "CLOSED"
     },
+    "vc_14": {
+      "active_direction_ids": [
+        "AVF-DNA-S07-R00",
+        "AVF-SHELL-S07-R01",
+        "AVF-CAPTURE-S07-R01",
+        "AVF-GOALS-S08-R00",
+        "AVF-TIME-S07-R01",
+        "AVF-TODAY-S10-R00",
+        "AVF-SEARCH-D07-R01",
+        "AVF-YOU-D07-R02",
+        "AVF-RECOVERY-S07-R01",
+        "AVF-A11Y-S07-R00",
+        "AVF-COHERENCE-S07-R00"
+      ],
+      "authorization_state": {
+        "approved_for_swiftui": false,
+        "broad_frontend_reconstruction": false,
+        "broad_production_implementation": false,
+        "figma": false,
+        "implementation": false,
+        "legacy_frontend_cutover": false,
+        "swiftui": false
+      },
+      "authorized_work": [
+        "one_repository_local_foundry_orchestration_skill",
+        "one_preview_loop_feasibility_benchmark",
+        "one_small_production_intended_preview_slice",
+        "synthetic_fixture_infrastructure",
+        "evaluation_screenshots",
+        "later_eight_frame_matched_native_preview_family_after_owner_review",
+        "later_today_flagship_calibration_journey_after_owner_review"
+      ],
+      "calibration_authorization": {
+        "fixture_driven_preview_construction": true,
+        "native_visual_foundry_bootstrap": true,
+        "screenshot_based_owner_review": true,
+        "today_flagship_calibration_slice": true
+      },
+      "date": "2026-07-23",
+      "direct_device_proof": {
+        "complete": false,
+        "register": [
+          "left_handed_and_lower_reach_dock_usability",
+          "dock_and_system_edge_gesture_competition",
+          "keyboard_avoidance_across_active_editors",
+          "voiceover_reading_order_and_focus_restoration",
+          "switch_control_scanning_and_grouping",
+          "full_keyboard_access_traversal_and_shortcuts",
+          "voice_control_visible_naming",
+          "rtl_on_device_inspection",
+          "long_localization",
+          "dynamic_type_through_accessibility_sizes",
+          "increased_contrast_and_differentiate_without_color",
+          "reduce_transparency_opaque_equivalents",
+          "reduce_motion_static_continuity",
+          "low_brightness_dark_contrast",
+          "sensitive_value_accessibility_exclusion",
+          "live_announcement_timing",
+          "exact_scroll_and_object_restoration",
+          "safe_areas_across_supported_iphone_portrait_range",
+          "native_back_dismissal_context_menu_selection_and_sheet_coexistence"
+        ],
+        "required": true
+      },
+      "human_peer": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+      "human_record": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+      "inherits": {
+        "input_contract_human": "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+        "input_contract_machine": "docs/canon/design/visual-closure-input-contract.json",
+        "wave_1_human": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+        "wave_1_machine": "docs/canon/design/vc-wave-1-foundation-closure.json",
+        "wave_2_human": "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+        "wave_2_machine": "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+        "wave_3_human": "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
+        "wave_3_machine": "docs/canon/design/vc-wave-3-accessibility-stress-closure.json"
+      },
+      "machine_record": "docs/canon/design/vc-14-native-matched-closure.json",
+      "package": {
+        "bootstrap_preview_family": [
+          "Today Bootstrap — Typical Light",
+          "Today Bootstrap — Typical Dark",
+          "Today Bootstrap — Accessibility Dynamic Type Dark"
+        ],
+        "fixture_copy_is_canon": false,
+        "package_id": "VC-14",
+        "primary_path": "Today Flagship Vertical Slice",
+        "selected_record": {
+          "id": "VC14-NATIVE-S01",
+          "kind": "native_matched_closure_synthesis",
+          "name": "Matched Native Flagship Proof"
+        },
+        "shell_proof": "minimum_shell_behavior_required_by_slice",
+        "state_proof": [
+          "current_and_proposed",
+          "blocked_or_failed",
+          "settlement",
+          "recovery"
+        ],
+        "status": "CLOSED",
+        "supporting_set": "restrained Matched Native Proof Matrix"
+      },
+      "package_id": "AMB-VC-14-NATIVE-MATCHED-CLOSURE",
+      "package_statuses": {
+        "VC-01": "CLOSED",
+        "VC-02": "CLOSED",
+        "VC-03": "CLOSED",
+        "VC-04": "CLOSED",
+        "VC-05": "CLOSED",
+        "VC-06": "CLOSED",
+        "VC-07": "CLOSED",
+        "VC-08": "CLOSED",
+        "VC-09": "CLOSED",
+        "VC-10": "CLOSED",
+        "VC-11": "CLOSED",
+        "VC-12": "CLOSED",
+        "VC-13": "CLOSED",
+        "VC-14": "CLOSED"
+      },
+      "proving_environment": {
+        "code_connect_in_program": false,
+        "figma_role": "optional_documentation_and_comparison_only",
+        "primary": [
+          "native_swiftui_previews",
+          "running_native_application"
+        ],
+        "real_native_frame_required": true
+      },
+      "repository_baseline": "8ae1a587fa6400cbf5495dd0c6457e8cb17016f3",
+      "schema_version": 1,
+      "selected_record": "VC14-NATIVE-S01 — Matched Native Flagship Proof",
+      "source_contract": "docs/canon/design/vc-14-native-matched-closure.json",
+      "source_input_sha": "9e77f9ebb92620a9ec3a95f6dfb65fc747efe166d2ff1a194c3309875c6ed0d1",
+      "status": "CLOSED",
+      "unauthorized_work": [
+        "full_frontend_reconstruction",
+        "runtime_integration",
+        "legacy_frontend_replacement",
+        "app_entry_cutover",
+        "figma_authority",
+        "code_connect",
+        "final_design_tokens",
+        "final_component_library",
+        "custom_mcp",
+        "custom_foundry_cli",
+        "hot_injection_dependency",
+        "snapshot_testing_dependency",
+        "production_screenshot_baselines",
+        "other_roots_beyond_tiny_cross_root_shell_context"
+      ],
+      "validation_requirements": [
+        "active_direction_ids_exact",
+        "vc_01_through_vc_14_closed",
+        "visual_closure_planning_program_closed",
+        "broad_authorization_false",
+        "narrow_calibration_authorization_true",
+        "direct_device_proof_required_and_incomplete",
+        "human_machine_peers_manifested",
+        "generated_manifest_projects_vc_14",
+        "generated_files_rebuilt_not_hand_edited",
+        "canon_build_and_check_pass",
+        "focused_compiler_tests_pass",
+        "no_live_app_entry_legacy_frontend_runtime_or_dependency_integration"
+      ],
+      "wave_statuses": {
+        "visual_closure_planning_program": "CLOSED",
+        "wave_1_shared_foundation": "CLOSED",
+        "wave_2_surfaces_and_journeys": "CLOSED",
+        "wave_3_accessibility_content_stress_validation": "CLOSED"
+      }
+    },
+    "visual_closure_planning_program": "CLOSED",
     "wave_1": {
       "human_record": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
       "machine_record": "docs/canon/design/vc-wave-1-foundation-closure.json",
@@ -2886,7 +3082,7 @@
       "selected_record": "VC13-A11Y-S01 — Stress-Proven Adaptive Semantic Continuity",
       "source_contract": "docs/canon/design/vc-wave-3-accessibility-stress-closure.json",
       "source_input_sha": "e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44",
-      "status": "ACCESSIBILITY_STRESS_CLOSED_VC14_NOT_STARTED",
+      "status": "ACCESSIBILITY_STRESS_CLOSED",
       "validation_requirements": [
         "active_direction_ids_exact",
         "vc_01_through_vc_13_closed",
@@ -2920,9 +3116,9 @@
         "wave_3_overall_stress_and_matched_baseline": "OPEN_PENDING_VC_14"
       }
     },
-    "wave_3_stress_and_matched_baseline": "OPEN_PENDING_VC_14"
+    "wave_3_stress_and_matched_baseline": "CLOSED"
   },
-  "compiler_version": "0.5.0",
+  "compiler_version": "0.6.0",
   "contract_id": "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
   "historical_figma_references": [
     {
@@ -3022,7 +3218,7 @@
     "VAD-R1-TODAY-005": "SUPERSEDED",
     "VAD-R1-TYPE-001": "SUPERSEDED"
   },
-  "schema_version": 3,
+  "schema_version": 4,
   "source_contract": "docs/canon/design/visual-closure-input-contract.json",
   "supersessions": [
     {
@@ -3036,7 +3232,7 @@
       "superseded": "AVF-TODAY-S09-R00"
     }
   ],
-  "traceability_input_sha": "3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54",
+  "traceability_input_sha": "e2faa95083302b10ef7604bd1325e156aaab799214f71ed31e891b242dd60457",
   "unsupported_visual_behaviors": [
     "active_serif_interface_type",
     "oled_dark",
@@ -3061,6 +3257,176 @@
     "unsupported_time_scale_as_current",
     "unsupported_permission_or_platform"
   ],
+  "vc_14_native_matched_closure": {
+    "active_direction_ids": [
+      "AVF-DNA-S07-R00",
+      "AVF-SHELL-S07-R01",
+      "AVF-CAPTURE-S07-R01",
+      "AVF-GOALS-S08-R00",
+      "AVF-TIME-S07-R01",
+      "AVF-TODAY-S10-R00",
+      "AVF-SEARCH-D07-R01",
+      "AVF-YOU-D07-R02",
+      "AVF-RECOVERY-S07-R01",
+      "AVF-A11Y-S07-R00",
+      "AVF-COHERENCE-S07-R00"
+    ],
+    "authorization_state": {
+      "approved_for_swiftui": false,
+      "broad_frontend_reconstruction": false,
+      "broad_production_implementation": false,
+      "figma": false,
+      "implementation": false,
+      "legacy_frontend_cutover": false,
+      "swiftui": false
+    },
+    "authorized_work": [
+      "one_repository_local_foundry_orchestration_skill",
+      "one_preview_loop_feasibility_benchmark",
+      "one_small_production_intended_preview_slice",
+      "synthetic_fixture_infrastructure",
+      "evaluation_screenshots",
+      "later_eight_frame_matched_native_preview_family_after_owner_review",
+      "later_today_flagship_calibration_journey_after_owner_review"
+    ],
+    "calibration_authorization": {
+      "fixture_driven_preview_construction": true,
+      "native_visual_foundry_bootstrap": true,
+      "screenshot_based_owner_review": true,
+      "today_flagship_calibration_slice": true
+    },
+    "date": "2026-07-23",
+    "direct_device_proof": {
+      "complete": false,
+      "register": [
+        "left_handed_and_lower_reach_dock_usability",
+        "dock_and_system_edge_gesture_competition",
+        "keyboard_avoidance_across_active_editors",
+        "voiceover_reading_order_and_focus_restoration",
+        "switch_control_scanning_and_grouping",
+        "full_keyboard_access_traversal_and_shortcuts",
+        "voice_control_visible_naming",
+        "rtl_on_device_inspection",
+        "long_localization",
+        "dynamic_type_through_accessibility_sizes",
+        "increased_contrast_and_differentiate_without_color",
+        "reduce_transparency_opaque_equivalents",
+        "reduce_motion_static_continuity",
+        "low_brightness_dark_contrast",
+        "sensitive_value_accessibility_exclusion",
+        "live_announcement_timing",
+        "exact_scroll_and_object_restoration",
+        "safe_areas_across_supported_iphone_portrait_range",
+        "native_back_dismissal_context_menu_selection_and_sheet_coexistence"
+      ],
+      "required": true
+    },
+    "human_peer": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+    "human_record": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+    "inherits": {
+      "input_contract_human": "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
+      "input_contract_machine": "docs/canon/design/visual-closure-input-contract.json",
+      "wave_1_human": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+      "wave_1_machine": "docs/canon/design/vc-wave-1-foundation-closure.json",
+      "wave_2_human": "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+      "wave_2_machine": "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+      "wave_3_human": "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
+      "wave_3_machine": "docs/canon/design/vc-wave-3-accessibility-stress-closure.json"
+    },
+    "machine_record": "docs/canon/design/vc-14-native-matched-closure.json",
+    "package": {
+      "bootstrap_preview_family": [
+        "Today Bootstrap — Typical Light",
+        "Today Bootstrap — Typical Dark",
+        "Today Bootstrap — Accessibility Dynamic Type Dark"
+      ],
+      "fixture_copy_is_canon": false,
+      "package_id": "VC-14",
+      "primary_path": "Today Flagship Vertical Slice",
+      "selected_record": {
+        "id": "VC14-NATIVE-S01",
+        "kind": "native_matched_closure_synthesis",
+        "name": "Matched Native Flagship Proof"
+      },
+      "shell_proof": "minimum_shell_behavior_required_by_slice",
+      "state_proof": [
+        "current_and_proposed",
+        "blocked_or_failed",
+        "settlement",
+        "recovery"
+      ],
+      "status": "CLOSED",
+      "supporting_set": "restrained Matched Native Proof Matrix"
+    },
+    "package_id": "AMB-VC-14-NATIVE-MATCHED-CLOSURE",
+    "package_statuses": {
+      "VC-01": "CLOSED",
+      "VC-02": "CLOSED",
+      "VC-03": "CLOSED",
+      "VC-04": "CLOSED",
+      "VC-05": "CLOSED",
+      "VC-06": "CLOSED",
+      "VC-07": "CLOSED",
+      "VC-08": "CLOSED",
+      "VC-09": "CLOSED",
+      "VC-10": "CLOSED",
+      "VC-11": "CLOSED",
+      "VC-12": "CLOSED",
+      "VC-13": "CLOSED",
+      "VC-14": "CLOSED"
+    },
+    "proving_environment": {
+      "code_connect_in_program": false,
+      "figma_role": "optional_documentation_and_comparison_only",
+      "primary": [
+        "native_swiftui_previews",
+        "running_native_application"
+      ],
+      "real_native_frame_required": true
+    },
+    "repository_baseline": "8ae1a587fa6400cbf5495dd0c6457e8cb17016f3",
+    "schema_version": 1,
+    "selected_record": "VC14-NATIVE-S01 — Matched Native Flagship Proof",
+    "source_contract": "docs/canon/design/vc-14-native-matched-closure.json",
+    "source_input_sha": "9e77f9ebb92620a9ec3a95f6dfb65fc747efe166d2ff1a194c3309875c6ed0d1",
+    "status": "CLOSED",
+    "unauthorized_work": [
+      "full_frontend_reconstruction",
+      "runtime_integration",
+      "legacy_frontend_replacement",
+      "app_entry_cutover",
+      "figma_authority",
+      "code_connect",
+      "final_design_tokens",
+      "final_component_library",
+      "custom_mcp",
+      "custom_foundry_cli",
+      "hot_injection_dependency",
+      "snapshot_testing_dependency",
+      "production_screenshot_baselines",
+      "other_roots_beyond_tiny_cross_root_shell_context"
+    ],
+    "validation_requirements": [
+      "active_direction_ids_exact",
+      "vc_01_through_vc_14_closed",
+      "visual_closure_planning_program_closed",
+      "broad_authorization_false",
+      "narrow_calibration_authorization_true",
+      "direct_device_proof_required_and_incomplete",
+      "human_machine_peers_manifested",
+      "generated_manifest_projects_vc_14",
+      "generated_files_rebuilt_not_hand_edited",
+      "canon_build_and_check_pass",
+      "focused_compiler_tests_pass",
+      "no_live_app_entry_legacy_frontend_runtime_or_dependency_integration"
+    ],
+    "wave_statuses": {
+      "visual_closure_planning_program": "CLOSED",
+      "wave_1_shared_foundation": "CLOSED",
+      "wave_2_surfaces_and_journeys": "CLOSED",
+      "wave_3_accessibility_content_stress_validation": "CLOSED"
+    }
+  },
   "visual_validation_decisions": [
     "sf_pro_exact_metrics_named_styles_and_dynamic_type_mappings_within_closed_roles",
     "light_dark_canvas_and_surface_relationships",
@@ -5173,7 +5539,7 @@
     "selected_record": "VC13-A11Y-S01 — Stress-Proven Adaptive Semantic Continuity",
     "source_contract": "docs/canon/design/vc-wave-3-accessibility-stress-closure.json",
     "source_input_sha": "e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44",
-    "status": "ACCESSIBILITY_STRESS_CLOSED_VC14_NOT_STARTED",
+    "status": "ACCESSIBILITY_STRESS_CLOSED",
     "validation_requirements": [
       "active_direction_ids_exact",
       "vc_01_through_vc_13_closed",

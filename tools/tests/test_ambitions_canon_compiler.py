@@ -31,6 +31,8 @@ ACTIVE_DESIGN_PATHS = (
     Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
     Path("docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"),
     Path("docs/canon/design/vc-wave-3-accessibility-stress-closure.json"),
+    Path("docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md"),
+    Path("docs/canon/design/vc-14-native-matched-closure.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
     Path("docs/canon/migration/ux-blueprint-state-inventory.json"),
@@ -90,8 +92,7 @@ EXPECTED_ACTIVE_VISUAL_DIRECTIONS = [
 ]
 
 EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
-    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 14)},
-    "VC-14": "NOT_STARTED",
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 15)},
 }
 
 EXPECTED_WAVE_2_SUMMARIES = {
@@ -175,7 +176,7 @@ def refresh_visual_system_source_sha(
 
 
 class Wave3VisualClosureLoaderTests(unittest.TestCase):
-    def test_visual_closure_loader_includes_wave_3_in_order(self) -> None:
+    def test_visual_closure_loader_includes_vc_14_in_order(self) -> None:
         records = canon_compiler.load_visual_closure_records(REPOSITORY_ROOT)
         self.assertEqual(
             [
@@ -183,12 +184,14 @@ class Wave3VisualClosureLoaderTests(unittest.TestCase):
                 records[1]["package_id"],
                 records[2]["package_id"],
                 records[3]["package_id"],
+                records[4]["package_id"],
             ],
             [
                 "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
                 "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
                 "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE",
                 "AMB-VC-WAVE-3-ACCESSIBILITY-STRESS-CLOSURE",
+                "AMB-VC-14-NATIVE-MATCHED-CLOSURE",
             ],
         )
 
@@ -413,13 +416,23 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             [item["visual_authority_id"] for item in manifest["authorities"]],
             list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
         )
+        authority = manifest["authority_state"]
+        self.assertFalse(authority["approved_for_swiftui"])
+        self.assertFalse(authority["broad_frontend_reconstruction"])
+        self.assertFalse(authority["broad_production_implementation"])
+        self.assertFalse(authority["figma"])
+        self.assertFalse(authority["implementation"])
+        self.assertFalse(authority["legacy_frontend_cutover"])
+        self.assertFalse(authority["swiftui"])
+        self.assertFalse(authority["visual_closure_planning"])
+        self.assertTrue(authority["visual_closure_planning_program_closed"])
         self.assertEqual(
-            manifest["authority_state"],
+            authority["calibration"],
             {
-                "figma": False,
-                "implementation": False,
-                "swiftui": False,
-                "visual_closure_planning": True,
+                "fixture_driven_preview_construction": True,
+                "native_visual_foundry_bootstrap": True,
+                "screenshot_based_owner_review": True,
+                "today_flagship_calibration_slice": True,
             },
         )
         self.assertFalse(contract["active_baseline"]["typography"]["serif_active"])
@@ -466,7 +479,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         )
         self.assertEqual(
             contract["closure_packages"]["package_statuses"],
-            canon_compiler.WAVE_1_PACKAGE_STATUSES,
+            EXPECTED_EFFECTIVE_PACKAGE_STATUSES,
         )
         self.assertEqual(
             manifest["wave_1_foundation_closure"]["package_statuses"],
@@ -658,7 +671,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         )
         self.assertEqual(
             closure_packages["wave_3_stress_and_matched_baseline"],
-            "OPEN_PENDING_VC_14",
+            "CLOSED",
         )
         self.assertEqual(
             manifest["wave_2_surface_journey_closure"]["source_contract"],
@@ -737,17 +750,45 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             )
         )
 
-    def test_visual_manifest_closes_vc_13_and_leaves_vc_14_unstarted(
+    def test_visual_manifest_closes_vc_14_without_broad_authorization(
         self,
     ) -> None:
         manifest = json.loads(
             self.outputs["generated/visual-authority-manifest.json"]
         )
         statuses = manifest["closure_packages"]["package_statuses"]
-        self.assertTrue(
-            all(statuses[f"VC-{number:02d}"] == "CLOSED" for number in range(1, 14))
+        self.assertEqual(statuses, EXPECTED_EFFECTIVE_PACKAGE_STATUSES)
+        vc_14 = manifest["closure_packages"]["vc_14"]
+        self.assertEqual(vc_14["status"], "CLOSED")
+        self.assertEqual(
+            vc_14["selected_record"],
+            "VC14-NATIVE-S01 — Matched Native Flagship Proof",
         )
-        self.assertEqual(statuses["VC-14"], "NOT_STARTED")
+        self.assertEqual(
+            manifest["active_baseline"]["native_visual_foundry"],
+            {
+                "code_connect_in_program": False,
+                "direct_device_proof": {
+                    "complete": False,
+                    "required": True,
+                },
+                "figma_role": "optional_documentation_and_comparison_only",
+                "primary_proving_environments": [
+                    "native_swiftui_previews",
+                    "running_native_application",
+                ],
+                "real_native_frame_required": True,
+                "selected_record": (
+                    "VC14-NATIVE-S01 — Matched Native Flagship Proof"
+                ),
+            },
+        )
+        authority = manifest["authority_state"]
+        self.assertFalse(authority["approved_for_swiftui"])
+        self.assertFalse(authority["broad_frontend_reconstruction"])
+        self.assertFalse(authority["broad_production_implementation"])
+        self.assertFalse(authority["legacy_frontend_cutover"])
+        self.assertTrue(all(authority["calibration"].values()))
 
     def test_wave_3_projects_stress_closure_without_authorizing_implementation(
         self,
@@ -1048,12 +1089,20 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             "- [Wave 3 Accessibility and Content Stress Closure]"
             "(../design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)"
         )
+        vc_14 = (
+            "- [VC-14 Native Matched Closure]"
+            "(../design/VC_14_NATIVE_MATCHED_CLOSURE.md)"
+        )
         self.assertEqual(router.count(wave_1), 1)
         self.assertEqual(router.count(wave_2), 1)
         self.assertEqual(router.count(wave_3), 1)
-        self.assertIn(wave_1 + "\n" + wave_2 + "\n" + wave_3, router)
+        self.assertEqual(router.count(vc_14), 1)
+        self.assertIn(
+            wave_1 + "\n" + wave_2 + "\n" + wave_3 + "\n" + vc_14,
+            router,
+        )
 
-    def test_visual_system_status_does_not_overclaim_wave_3_program_closure(
+    def test_visual_system_status_closes_vc_14_without_broad_authorization(
         self,
     ) -> None:
         visual_system = (
@@ -1061,11 +1110,11 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         expected = (
             "Status: `ACTIVE_RECONCILED_BASELINE / "
-            "VC_01_THROUGH_VC_13_CLOSED / VC_14_NOT_STARTED / "
+            "VC_01_THROUGH_VC_14_CLOSED / NATIVE_PROVING_ACTIVE / "
             "FIGMA_NOT_AUTHORIZED`"
         )
         self.assertEqual(visual_system.count(expected), 1)
-        self.assertNotIn("WAVE_1_THROUGH_3_CLOSED", visual_system)
+        self.assertIn("Broad production implementation: false.", visual_system)
 
     def test_generated_traceability_is_structural_and_non_proof(self) -> None:
         self.assertEqual(set(self.outputs), set(GENERATED_PATHS))
@@ -1478,6 +1527,28 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                     ],
                 },
                 "Wave 2 closure AVF mapping",
+            ),
+            (
+                Path("docs/canon/design/vc-14-native-matched-closure.json"),
+                lambda payload: {
+                    **payload,
+                    "authorization_state": {
+                        **payload["authorization_state"],
+                        "broad_production_implementation": True,
+                    },
+                },
+                "VC-14 broad authorization state",
+            ),
+            (
+                Path("docs/canon/design/vc-14-native-matched-closure.json"),
+                lambda payload: {
+                    **payload,
+                    "calibration_authorization": {
+                        **payload["calibration_authorization"],
+                        "native_visual_foundry_bootstrap": False,
+                    },
+                },
+                "VC-14 calibration authorization",
             ),
         )
 

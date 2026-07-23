@@ -89,6 +89,8 @@ reference_files = [
   "design/vc-wave-2-surface-journey-closure.json",
   "design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
   "design/vc-wave-3-accessibility-stress-closure.json",
+  "design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+  "design/vc-14-native-matched-closure.json",
   "migration/UX_BLUEPRINT.md",
   "migration/ux-blueprint.json",
   "migration/ux-blueprint-state-inventory.json",

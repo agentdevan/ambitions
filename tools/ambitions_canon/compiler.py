@@ -43,6 +43,7 @@ VISUAL_CLOSURE_MACHINE_PATHS = (
     Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
     Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
     Path("docs/canon/design/vc-wave-3-accessibility-stress-closure.json"),
+    Path("docs/canon/design/vc-14-native-matched-closure.json"),
 )
 EXPECTED_ACTIVE_VISUAL_DIRECTIONS = (
     "AVF-DNA-S07-R00",
@@ -68,14 +69,50 @@ WAVE_2_PACKAGE_STATUSES = {
     "VC-13": "OPEN",
     "VC-14": "NOT_STARTED",
 }
-EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+WAVE_3_EFFECTIVE_PACKAGE_STATUSES = {
     **{f"VC-{number:02d}": "CLOSED" for number in range(1, 14)},
     "VC-14": "NOT_STARTED",
+}
+EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 15)},
 }
 FALSE_IMPLEMENTATION_AUTHORIZATION = {
     "figma": False,
     "implementation": False,
     "swiftui": False,
+}
+NARROW_CALIBRATION_AUTHORIZATION = {
+    "fixture_driven_preview_construction": True,
+    "native_visual_foundry_bootstrap": True,
+    "screenshot_based_owner_review": True,
+    "today_flagship_calibration_slice": True,
+}
+VC_14_BROAD_AUTHORIZATION = {
+    "approved_for_swiftui": False,
+    "broad_frontend_reconstruction": False,
+    "broad_production_implementation": False,
+    "figma": False,
+    "implementation": False,
+    "legacy_frontend_cutover": False,
+    "swiftui": False,
+}
+FINAL_AUTHORIZATION = {
+    "approved_for_swiftui": VC_14_BROAD_AUTHORIZATION["approved_for_swiftui"],
+    "broad_frontend_reconstruction": VC_14_BROAD_AUTHORIZATION[
+        "broad_frontend_reconstruction"
+    ],
+    "broad_production_implementation": VC_14_BROAD_AUTHORIZATION[
+        "broad_production_implementation"
+    ],
+    "calibration": NARROW_CALIBRATION_AUTHORIZATION,
+    "figma": VC_14_BROAD_AUTHORIZATION["figma"],
+    "implementation": VC_14_BROAD_AUTHORIZATION["implementation"],
+    "legacy_frontend_cutover": VC_14_BROAD_AUTHORIZATION[
+        "legacy_frontend_cutover"
+    ],
+    "swiftui": VC_14_BROAD_AUTHORIZATION["swiftui"],
+    "visual_closure_planning": False,
+    "visual_closure_planning_program_closed": True,
 }
 EXPECTED_WAVE_2_CANONICAL_SHA256 = (
     "a7adda3b7dc609e1626bc9456ad05ded0aea4d8619416db055d547e4790cb323"
@@ -85,6 +122,12 @@ EXPECTED_WAVE_3_CANONICAL_SHA256 = (
 )
 EXPECTED_WAVE_3_HUMAN_SHA256 = (
     "bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437"
+)
+EXPECTED_VC_14_CANONICAL_SHA256 = (
+    "981e301d1c96071128cb1c22eee25c9670382fe45d69fb28f85ed6864f4ec0fe"
+)
+EXPECTED_VC_14_HUMAN_SHA256 = (
+    "9f1de007bf6e068dc884039dcde6aac56c49bd2302c38bb07c0c5370620435eb"
 )
 WAVE_2_TOP_LEVEL_FIELDS = {
     "active_direction_ids",
@@ -1112,7 +1155,7 @@ def _validate_wave_3_closure(
         raise CanonError("Wave 3 closure active direction IDs are invalid")
     if (
         wave_3_closure.get("package_statuses")
-        != EXPECTED_EFFECTIVE_PACKAGE_STATUSES
+        != WAVE_3_EFFECTIVE_PACKAGE_STATUSES
     ):
         raise CanonError("Wave 3 closure package statuses are invalid")
     if (
@@ -1241,6 +1284,119 @@ def _wave_3_accessibility_stress(
         ],
         "vc_14_entry_criteria": wave_3_closure["vc_14_entry_criteria"],
     }
+
+
+def _validate_vc_14_closure(
+    root: Path,
+    manifest: Manifest,
+    closure: dict[str, Any],
+) -> None:
+    human_path = Path("docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md")
+    machine_path = VISUAL_CLOSURE_MACHINE_PATHS[4]
+    if closure.get("schema_version") != 1:
+        raise CanonError("VC-14 closure schema version is invalid")
+    if closure.get("package_id") != "AMB-VC-14-NATIVE-MATCHED-CLOSURE":
+        raise CanonError("VC-14 closure package ID is invalid")
+    if closure.get("status") != "CLOSED":
+        raise CanonError("VC-14 closure status must be closed")
+    if closure.get("active_direction_ids") != list(
+        EXPECTED_ACTIVE_VISUAL_DIRECTIONS
+    ):
+        raise CanonError("VC-14 closure active direction IDs are invalid")
+    if closure.get("package_statuses") != EXPECTED_EFFECTIVE_PACKAGE_STATUSES:
+        raise CanonError("VC-14 closure package statuses are invalid")
+    if closure.get("authorization_state") != VC_14_BROAD_AUTHORIZATION:
+        raise CanonError("VC-14 broad authorization state is invalid")
+    if (
+        closure.get("calibration_authorization")
+        != NARROW_CALIBRATION_AUTHORIZATION
+    ):
+        raise CanonError("VC-14 calibration authorization is invalid")
+    if closure.get("human_peer") != human_path.as_posix():
+        raise CanonError("VC-14 closure human peer is invalid")
+    if closure.get("inherits") != {
+        "input_contract_human": (
+            "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md"
+        ),
+        "input_contract_machine": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
+        "wave_1_human": "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md",
+        "wave_1_machine": VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix(),
+        "wave_2_human": (
+            "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+        ),
+        "wave_2_machine": VISUAL_CLOSURE_MACHINE_PATHS[2].as_posix(),
+        "wave_3_human": (
+            "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"
+        ),
+        "wave_3_machine": VISUAL_CLOSURE_MACHINE_PATHS[3].as_posix(),
+    }:
+        raise CanonError("VC-14 closure inheritance is invalid")
+
+    package = closure.get("package")
+    expected_selection = {
+        "id": "VC14-NATIVE-S01",
+        "kind": "native_matched_closure_synthesis",
+        "name": "Matched Native Flagship Proof",
+    }
+    if (
+        not isinstance(package, dict)
+        or package.get("package_id") != "VC-14"
+        or package.get("status") != "CLOSED"
+        or package.get("selected_record") != expected_selection
+    ):
+        raise CanonError("VC-14 selected native matched record is invalid")
+
+    proving = closure.get("proving_environment")
+    if proving != {
+        "code_connect_in_program": False,
+        "figma_role": "optional_documentation_and_comparison_only",
+        "primary": [
+            "native_swiftui_previews",
+            "running_native_application",
+        ],
+        "real_native_frame_required": True,
+    }:
+        raise CanonError("VC-14 native proving environment is invalid")
+    device_proof = closure.get("direct_device_proof")
+    if (
+        not isinstance(device_proof, dict)
+        or device_proof.get("required") is not True
+        or device_proof.get("complete") is not False
+        or not isinstance(device_proof.get("register"), list)
+        or not device_proof["register"]
+    ):
+        raise CanonError("VC-14 direct-device proof state is invalid")
+    if closure.get("wave_statuses") != {
+        "visual_closure_planning_program": "CLOSED",
+        "wave_1_shared_foundation": "CLOSED",
+        "wave_2_surfaces_and_journeys": "CLOSED",
+        "wave_3_accessibility_content_stress_validation": "CLOSED",
+    }:
+        raise CanonError("VC-14 wave status is invalid")
+
+    required_references = {
+        human_path.relative_to(CANON_ROOT_PATH).as_posix(),
+        machine_path.relative_to(CANON_ROOT_PATH).as_posix(),
+    }
+    if not required_references.issubset(set(manifest.reference_files)):
+        raise CanonError("VC-14 closure human/machine peers are not manifested")
+
+    canonical = json.dumps(
+        closure,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    if hashlib.sha256(canonical).hexdigest() != EXPECTED_VC_14_CANONICAL_SHA256:
+        raise CanonError("VC-14 closure semantic content is invalid")
+    try:
+        human_sha = hashlib.sha256(
+            _confined_path(root, human_path).read_bytes()
+        ).hexdigest()
+    except OSError as exc:
+        raise CanonError("VC-14 closure human peer is missing") from exc
+    if human_sha != EXPECTED_VC_14_HUMAN_SHA256:
+        raise CanonError("VC-14 closure human/machine mismatch")
 
 
 def load_manifest(root: Path) -> Manifest:
@@ -1688,6 +1844,8 @@ def _validate_visual_system_provenance(
         "docs/canon/design/vc-wave-2-surface-journey-closure.json",
         "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
         "docs/canon/design/vc-wave-3-accessibility-stress-closure.json",
+        "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+        "docs/canon/design/vc-14-native-matched-closure.json",
         "docs/canon/generated/visual-authority-manifest.json",
     }
     provenance_by_path = {
@@ -1747,9 +1905,13 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     wave_1_closure_path = VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix()
     blueprint = load(blueprint_path)
     dispositions = load(dispositions_path)
-    visual_contract, wave_1_closure, wave_2_closure, wave_3_closure = (
-        load_visual_closure_records(root)
-    )
+    (
+        visual_contract,
+        wave_1_closure,
+        wave_2_closure,
+        wave_3_closure,
+        vc_14_closure,
+    ) = load_visual_closure_records(root)
 
     state_models = blueprint.get("state_models")
     if not isinstance(state_models, list):
@@ -1895,19 +2057,16 @@ def validate_design_artifacts(compilation: Compilation) -> None:
             "UX Blueprint Markdown/JSON disposition sources disagree"
         )
 
-    if visual_contract.get("status") != "ACTIVE_RECONCILED_BASELINE":
+    if visual_contract.get("status") != (
+        "ACTIVE_RECONCILED_BASELINE_VISUAL_CLOSURE_CLOSED"
+    ):
         raise CanonError("visual closure input status must be active reconciled")
     if set(visual_contract.get("classification_vocabulary", [])) != (
         VISUAL_CLASSIFICATIONS
     ):
         raise CanonError("visual closure classification vocabulary is invalid")
     authorization = visual_contract.get("authorization")
-    if authorization != {
-        "figma": False,
-        "implementation": False,
-        "swiftui": False,
-        "visual_closure_planning": True,
-    }:
+    if authorization != FINAL_AUTHORIZATION:
         raise CanonError("visual closure authorization state is invalid")
     active_baseline = visual_contract.get("active_baseline")
     if not isinstance(active_baseline, dict):
@@ -1953,7 +2112,10 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     closure_packages = visual_contract.get("closure_packages")
     if not isinstance(closure_packages, dict):
         raise CanonError("visual closure package registry must be an object")
-    if closure_packages.get("package_statuses") != WAVE_1_PACKAGE_STATUSES:
+    if (
+        closure_packages.get("package_statuses")
+        != EXPECTED_EFFECTIVE_PACKAGE_STATUSES
+    ):
         raise CanonError("visual closure package statuses are invalid")
     contract_wave_1 = closure_packages.get("wave_1")
     if not isinstance(contract_wave_1, dict) or contract_wave_1 != {
@@ -1984,10 +2146,39 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         "status": "CLOSED",
     }:
         raise CanonError("visual closure Wave 1 registry is invalid")
-    if closure_packages.get("wave_2_surfaces_and_journeys") != "OPEN":
-        raise CanonError("visual closure Wave 2 status must remain open")
-    if closure_packages.get("wave_3_stress_and_matched_baseline") != "OPEN":
-        raise CanonError("visual closure Wave 3 status must remain open")
+    expected_closure_registry = {
+        "wave_2": {
+            "human_record": (
+                "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+            ),
+            "machine_record": VISUAL_CLOSURE_MACHINE_PATHS[2].as_posix(),
+            "package_id": "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE",
+            "status": "CLOSED",
+        },
+        "wave_3": {
+            "human_record": (
+                "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"
+            ),
+            "machine_record": VISUAL_CLOSURE_MACHINE_PATHS[3].as_posix(),
+            "package_id": "AMB-VC-WAVE-3-ACCESSIBILITY-STRESS-CLOSURE",
+            "status": "CLOSED",
+        },
+        "vc_14": {
+            "human_record": "docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md",
+            "machine_record": VISUAL_CLOSURE_MACHINE_PATHS[4].as_posix(),
+            "package_id": "AMB-VC-14-NATIVE-MATCHED-CLOSURE",
+            "selected_record": (
+                "VC14-NATIVE-S01 — Matched Native Flagship Proof"
+            ),
+            "status": "CLOSED",
+        },
+        "visual_closure_planning_program": "CLOSED",
+    }
+    if any(
+        closure_packages.get(key) != value
+        for key, value in expected_closure_registry.items()
+    ):
+        raise CanonError("visual closure final package registry is invalid")
 
     if wave_1_closure.get("schema_version") != 1:
         raise CanonError("Wave 1 closure schema version is invalid")
@@ -2185,6 +2376,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
 
     _validate_wave_2_closure(root, compilation.manifest, wave_2_closure)
     _validate_wave_3_closure(root, compilation.manifest, wave_3_closure)
+    _validate_vc_14_closure(root, compilation.manifest, vc_14_closure)
 
     mappings = visual_contract.get("visual_requirement_mappings")
     if not isinstance(mappings, list) or not mappings:
@@ -2518,6 +2710,8 @@ def render_codex_start(compilation: Compilation) -> bytes:
         "(../design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)",
         "- [Wave 3 Accessibility and Content Stress Closure]"
         "(../design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)",
+        "- [VC-14 Native Matched Closure]"
+        "(../design/VC_14_NATIVE_MATCHED_CLOSURE.md)",
         "- [Canonical UX Blueprint](../migration/UX_BLUEPRINT.md)",
         "- [Object Boundary Matrix](object-boundary-matrix.md)",
         "- [Requirement graph](requirement-graph.json)",
@@ -2650,9 +2844,13 @@ def render_requirement_traceability(compilation: Compilation) -> bytes:
 
 def render_visual_authority_manifest(compilation: Compilation) -> bytes:
     """Render the active visual authority from its source-owned VC contract."""
-    contract, wave_1_closure, wave_2_closure, wave_3_closure = (
-        load_visual_closure_records(compilation.root)
-    )
+    (
+        contract,
+        wave_1_closure,
+        wave_2_closure,
+        wave_3_closure,
+        vc_14_closure,
+    ) = load_visual_closure_records(compilation.root)
     _validate_wave_2_closure(
         compilation.root,
         compilation.manifest,
@@ -2662,6 +2860,11 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         compilation.root,
         compilation.manifest,
         wave_3_closure,
+    )
+    _validate_vc_14_closure(
+        compilation.root,
+        compilation.manifest,
+        vc_14_closure,
     )
     source_bytes = tuple(
         _confined_path(compilation.root, relative_path).read_bytes()
@@ -2685,11 +2888,41 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         "selected_record": (
             f"{wave_3_selected['id']} — {wave_3_selected['name']}"
         ),
-        "status": "ACCESSIBILITY_STRESS_CLOSED_VC14_NOT_STARTED",
+        "status": "ACCESSIBILITY_STRESS_CLOSED",
+    }
+    vc_14_selected = vc_14_closure["package"]["selected_record"]
+    vc_14_projection = {
+        **project_record(4, vc_14_closure),
+        "human_record": vc_14_closure["human_peer"],
+        "machine_record": VISUAL_CLOSURE_MACHINE_PATHS[4].as_posix(),
+        "selected_record": (
+            f"{vc_14_selected['id']} — {vc_14_selected['name']}"
+        ),
     }
     payload = {
         "active_baseline": {
             **contract["active_baseline"],
+            "native_visual_foundry": {
+                "code_connect_in_program": False,
+                "direct_device_proof": {
+                    "complete": vc_14_closure["direct_device_proof"][
+                        "complete"
+                    ],
+                    "required": vc_14_closure["direct_device_proof"][
+                        "required"
+                    ],
+                },
+                "figma_role": vc_14_closure["proving_environment"][
+                    "figma_role"
+                ],
+                "primary_proving_environments": vc_14_closure[
+                    "proving_environment"
+                ]["primary"],
+                "real_native_frame_required": vc_14_closure[
+                    "proving_environment"
+                ]["real_native_frame_required"],
+                "selected_record": vc_14_projection["selected_record"],
+            },
             "wave_2_summaries": _wave_2_surface_summaries(wave_2_closure),
             "wave_3_accessibility_stress": _wave_3_accessibility_stress(
                 wave_3_closure
@@ -2721,15 +2954,17 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
             "wave_2": wave_2_projection,
             "wave_2_surfaces_and_journeys": "CLOSED",
             "wave_3": wave_3_projection,
-            "wave_3_stress_and_matched_baseline": "OPEN_PENDING_VC_14",
+            "wave_3_stress_and_matched_baseline": "CLOSED",
+            "vc_14": vc_14_projection,
+            "visual_closure_planning_program": "CLOSED",
         },
-        "compiler_version": "0.5.0",
+        "compiler_version": "0.6.0",
         "contract_id": contract["contract_id"],
         "historical_figma_references": contract["historical_figma_references"],
         "legacy_contract_classifications": contract[
             "legacy_contract_classifications"
         ],
-        "schema_version": 3,
+        "schema_version": 4,
         "source_contract": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
         "supersessions": contract["supersessions"],
         "traceability_input_sha": hashlib.sha256(source_bytes[0]).hexdigest(),
@@ -2742,6 +2977,7 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         "wave_1_foundation_closure": wave_1_projection,
         "wave_2_surface_journey_closure": wave_2_projection,
         "wave_3_accessibility_stress_closure": wave_3_projection,
+        "vc_14_native_matched_closure": vc_14_projection,
     }
     return (
         json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)

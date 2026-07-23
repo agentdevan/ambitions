@@ -3,7 +3,7 @@
 > Generated from normative product canon. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0`
+- Canon digest: `ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916`
 - Documents: `66`
 - Requirements: `466`
 

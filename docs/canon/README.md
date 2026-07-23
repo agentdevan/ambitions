@@ -42,8 +42,8 @@ for implementation agents and repository tooling.
 
 - [Visual System R1](design/VISUAL_SYSTEM_R1.md) records the reconciled
   provisional cross-surface direction and historical Revision 1 provenance.
-  Figma authorization, SwiftUI approval, and implementation authorization are
-  false.
+  Figma authorization, `APPROVED FOR SWIFTUI`, broad implementation, broad
+  frontend reconstruction, and legacy cutover authorization are false.
 - [VC-01–VC-14 Visual Closure Input Contract](design/VISUAL_CLOSURE_INPUT_CONTRACT.md)
   and its JSON peer are the sole active visual-closure baseline. The compiler
   projects that source into the generated visual-authority manifest.
@@ -52,12 +52,16 @@ for implementation agents and repository tooling.
   contract.
 - [Wave 2 Surface and Journey Closure](design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)
   and its JSON peer install the closed VC-07 through VC-12 decisions beneath the
-  input contract and closed Wave 1 foundation. VC-14 remains not started, and
-  every Figma, SwiftUI, and implementation authorization remains false.
+  input contract and closed Wave 1 foundation.
 - [Wave 3 Accessibility and Content Stress Closure](design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)
   and its JSON peer install the closed VC-13 validation beneath the Wave 1 and
-  Wave 2 authority. VC-14 remains not started; Figma, SwiftUI, and
-  implementation remain unauthorized.
+  Wave 2 authority.
+- [VC-14 Native Matched Closure](design/VC_14_NATIVE_MATCHED_CLOSURE.md) and its
+  JSON peer install `VC14-NATIVE-S01 — Matched Native Flagship Proof`, close
+  the visual-closure planning program, and make native SwiftUI previews and the
+  running native application the primary proving environments. Its four narrow
+  calibration permissions do not authorize broad implementation or cutover;
+  Figma remains optional documentation and comparison only.
 - [Canonical UX Blueprint](migration/UX_BLUEPRINT.md) maps the full screen,
   presentation, state, command, recovery, privacy, and accessibility surface
   back to requirement IDs. Its `migration/` path is retained for link stability;

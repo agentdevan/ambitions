@@ -36,6 +36,7 @@ python3 scripts/ambitions-canon.py query "migration replay integrity"
 - [Wave 1 Foundation Closure](../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)
 - [Wave 2 Surface and Journey Closure](../design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)
 - [Wave 3 Accessibility and Content Stress Closure](../design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)
+- [VC-14 Native Matched Closure](../design/VC_14_NATIVE_MATCHED_CLOSURE.md)
 - [Canonical UX Blueprint](../migration/UX_BLUEPRINT.md)
 - [Object Boundary Matrix](object-boundary-matrix.md)
 - [Requirement graph](requirement-graph.json)
