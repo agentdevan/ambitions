@@ -19,6 +19,10 @@ let package = Package(
         .library(
             name: "AmbitionsFlagshipUI",
             targets: ["AmbitionsFlagshipUI"]
+        ),
+        .library(
+            name: "AmbitionsNativeVisualFoundry",
+            targets: ["AmbitionsNativeVisualFoundry"]
         )
     ],
     targets: [
@@ -31,9 +35,14 @@ let package = Package(
                 "AmbitionsFlagshipFoundation"
             ]
         ),
+        .target(name: "AmbitionsNativeVisualFoundry"),
         .testTarget(
             name: "AmbitionsPresentationContractsTests",
             dependencies: ["AmbitionsPresentationContracts"]
+        ),
+        .testTarget(
+            name: "AmbitionsNativeVisualFoundryTests",
+            dependencies: ["AmbitionsNativeVisualFoundry"]
         )
     ]
 )
