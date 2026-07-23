@@ -1,4 +1,6 @@
 import importlib.util
+import json
+import signal
 import sys
 import tempfile
 import unittest
@@ -14,6 +16,227 @@ spec.loader.exec_module(server)
 
 
 class ProofMCPServerToolTests(unittest.TestCase):
+    def _write_job_fixture(
+        self,
+        root: Path,
+        *,
+        job_id: str = "xcode-20260723T014000Z-deadbeef",
+        status: str = "running",
+        worker_pid: int = 4321,
+        worker_pgid: int = 4321,
+        result: dict | None = None,
+    ) -> tuple[str, Path]:
+        job_dir = root / job_id
+        job_dir.mkdir(parents=True)
+        log_path = job_dir / "job.log"
+        log_path.write_text("build progress\n", encoding="utf-8")
+        result_path = job_dir / "result.json"
+        state = {
+            "schema_version": 1,
+            "job_id": job_id,
+            "status": status,
+            "validation": "xcode_validate_build",
+            "batch_id": "RESUME-SMOKE-01",
+            "args": ["--batch", "RESUME-SMOKE-01"],
+            "command": [
+                "scripts/ambitions-xcode-validate.sh",
+                "--lane",
+                "build",
+                "--json",
+                "--batch",
+                "RESUME-SMOKE-01",
+            ],
+            "source": {"branch": "main", "sha": "abc123", "status": ""},
+            "created_at": "2026-07-23T01:40:00+00:00",
+            "started_at": "2026-07-23T01:40:01+00:00",
+            "finished_at": None,
+            "worker_pid": worker_pid,
+            "worker_pgid": worker_pgid,
+            "command_pid": None,
+            "log_path": str(log_path),
+            "result_path": str(result_path),
+            "cancel_requested_at": None,
+        }
+        (job_dir / "job.json").write_text(json.dumps(state), encoding="utf-8")
+        if result is not None:
+            result_path.write_text(json.dumps(result), encoding="utf-8")
+        return job_id, job_dir
+
+    def test_registers_resumable_xcode_job_tools(self):
+        expected = {
+            "xcode_job_submit",
+            "xcode_job_status",
+            "xcode_job_result",
+            "xcode_job_cancel",
+        }
+        self.assertTrue(expected.issubset(server.TOOLS))
+
+    def test_xcode_job_submit_persists_source_and_returns_job_id(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(
+                    server,
+                    "_git_context",
+                    return_value={"branch": "main", "sha": "abc123", "status": ""},
+                    create=True,
+                ),
+                mock.patch.object(server, "_spawn_xcode_job_worker", return_value=4321, create=True) as spawn,
+            ):
+                result = server.tool_xcode_job_submit(
+                    {
+                        "validation": "xcode_validate_build",
+                        "args": ["--batch", "RESUME-SMOKE-01"],
+                    }
+                )
+
+            self.assertEqual(result["status"], "queued")
+            self.assertEqual(result["source"]["sha"], "abc123")
+            self.assertEqual(result["batch_id"], "RESUME-SMOKE-01")
+            self.assertEqual(result["worker_pid"], 4321)
+            self.assertTrue((job_root / result["job_id"] / "job.json").exists())
+            spawn.assert_called_once_with(result["job_id"])
+
+    def test_xcode_job_submit_rejects_non_xcode_validation(self):
+        with self.assertRaisesRegex(ValueError, "Xcode Build Lab"):
+            server.tool_xcode_job_submit({"validation": "git_status_summary", "args": []})
+
+    def test_xcode_job_status_is_resumable_and_returns_log_tail(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, _ = self._write_job_fixture(job_root)
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(server, "_job_process_matches", return_value=True, create=True),
+            ):
+                result = server.tool_xcode_job_status({"job_id": job_id})
+
+            self.assertEqual(result["status"], "running")
+            self.assertTrue(result["active"])
+            self.assertTrue(result["resumable"])
+            self.assertIn("build progress", result["output_tail"])
+
+    def test_xcode_job_result_reports_pending_then_returns_terminal_result(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, job_dir = self._write_job_fixture(job_root)
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(server, "_job_process_matches", return_value=True, create=True),
+            ):
+                pending = server.tool_xcode_job_result({"job_id": job_id})
+                self.assertFalse(pending["ready"])
+
+                state_path = job_dir / "job.json"
+                state = json.loads(state_path.read_text(encoding="utf-8"))
+                state["status"] = "succeeded"
+                state["finished_at"] = "2026-07-23T01:41:00+00:00"
+                state_path.write_text(json.dumps(state), encoding="utf-8")
+                terminal_result = {
+                    "job_id": job_id,
+                    "status": "succeeded",
+                    "passed": True,
+                    "exit_code": 0,
+                }
+                (job_dir / "result.json").write_text(json.dumps(terminal_result), encoding="utf-8")
+                completed = server.tool_xcode_job_result({"job_id": job_id})
+
+            self.assertTrue(completed["ready"])
+            self.assertEqual(completed["result"], terminal_result)
+
+    def test_xcode_job_result_does_not_trust_terminal_state_without_result(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, _ = self._write_job_fixture(job_root, status="succeeded")
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(
+                    server,
+                    "_git_context",
+                    return_value={"branch": "main", "sha": "abc123", "status": ""},
+                ),
+                mock.patch.object(server, "_latest_xcode_summary", return_value=None),
+            ):
+                completed = server.tool_xcode_job_result({"job_id": job_id})
+
+            self.assertTrue(completed["ready"])
+            self.assertEqual(completed["job"]["status"], "interrupted")
+            self.assertEqual(completed["result"]["failure_category"], "terminal_result_missing")
+
+    def test_xcode_job_cancel_targets_only_the_owned_worker_group(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, job_dir = self._write_job_fixture(job_root, worker_pid=4321, worker_pgid=8765)
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(server, "_job_process_matches", return_value=True, create=True),
+                mock.patch.object(server.os, "getpgid", return_value=8765),
+                mock.patch.object(server.os, "killpg") as killpg,
+            ):
+                result = server.tool_xcode_job_cancel({"job_id": job_id})
+
+            self.assertTrue(result["cancellation_requested"])
+            killpg.assert_called_once_with(8765, signal.SIGTERM)
+            state = json.loads((job_dir / "job.json").read_text(encoding="utf-8"))
+            self.assertEqual(state["status"], "cancelling")
+            self.assertIsNotNone(state["cancel_requested_at"])
+
+    def test_xcode_job_cancel_rejects_changed_process_group(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, _ = self._write_job_fixture(job_root, worker_pid=4321, worker_pgid=8765)
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(server, "_job_process_matches", return_value=True, create=True),
+                mock.patch.object(server.os, "getpgid", return_value=9999),
+                mock.patch.object(server.os, "killpg") as killpg,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "process-group ownership"):
+                    server.tool_xcode_job_cancel({"job_id": job_id})
+
+            killpg.assert_not_called()
+
+    def test_xcode_job_worker_persists_successful_result(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            job_root = Path(tmp) / "xcode-jobs"
+            job_id, job_dir = self._write_job_fixture(job_root, status="queued", worker_pid=0, worker_pgid=0)
+            validation = server.VALIDATIONS["xcode_validate_build"]
+            command = [sys.executable, "-c", "print('job-ok')"]
+            with (
+                mock.patch.object(server, "XCODE_JOB_ROOT", job_root, create=True),
+                mock.patch.object(
+                    server,
+                    "_prepare_xcode_job_request",
+                    return_value=(validation, command, "RESUME-SMOKE-01"),
+                    create=True,
+                ),
+                mock.patch.object(
+                    server,
+                    "_git_context",
+                    return_value={"branch": "main", "sha": "abc123", "status": ""},
+                    create=True,
+                ),
+                mock.patch.object(
+                    server,
+                    "_latest_xcode_summary",
+                    return_value={
+                        "found": True,
+                        "batch": "RESUME-SMOKE-01",
+                        "summary": {"status": "passed", "failure_category": "passed", "exit_code": 0},
+                    },
+                ),
+            ):
+                exit_code = server._run_xcode_job(job_id)
+
+            self.assertEqual(exit_code, 0)
+            state = json.loads((job_dir / "job.json").read_text(encoding="utf-8"))
+            result = json.loads((job_dir / "result.json").read_text(encoding="utf-8"))
+            self.assertEqual(state["status"], "succeeded")
+            self.assertTrue(result["passed"])
+            self.assertEqual(result["source"]["start"]["sha"], "abc123")
+            self.assertIn("job-ok", (job_dir / "job.log").read_text(encoding="utf-8"))
+
     def test_lists_allowlisted_validations_only(self):
         result = server.tool_list_available_validations({})
         names = {item["name"] for item in result["validations"]}
@@ -67,6 +290,7 @@ class ProofMCPServerToolTests(unittest.TestCase):
                 mock.patch.object(server, "MCP_LOG_ROOT", tmp_path / ".codex" / "logs" / "mcp"),
                 mock.patch.object(server, "XCODE_LOG_ROOT", tmp_path / ".codex" / "xcode-logs"),
                 mock.patch.object(server, "XCODE_SUMMARY_ROOT", tmp_path / ".codex" / "xcode-summaries"),
+                mock.patch.object(server, "XCODE_JOB_ROOT", tmp_path / ".codex" / "xcode-jobs"),
             ):
                 result = server.tool_generate_proof_packet({"title": "Test Packet", "validations": ["git_status_summary"]})
                 self.assertTrue(result["packet_path"].startswith(".codex/logs/proof/"))
