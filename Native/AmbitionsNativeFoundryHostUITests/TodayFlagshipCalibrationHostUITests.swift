@@ -40,7 +40,12 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
         let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.30))
 
-        start.press(forDuration: 0.05, thenDragTo: end)
+        start.press(
+            forDuration: 0.05,
+            thenDragTo: end,
+            withVelocity: 100,
+            thenHoldForDuration: 0.15
+        )
 
         XCTAssertEqual(crown.frame.minY, crownY, accuracy: 1)
         XCTAssertTrue(dock.exists)
