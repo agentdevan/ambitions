@@ -1357,6 +1357,66 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                     ):
                         canon_compiler.validate_design_artifacts(isolated)
 
+    def test_wave_2_closure_rejects_duplicate_human_authority_sections(
+        self,
+    ) -> None:
+        duplicate_status_section = """
+
+## 3. Package status
+
+| Package | Status | Wave |
+| --- | --- | --- |
+| `VC-07` | `OPEN` | Contradictory duplicate |
+| `VC-08` | `OPEN` | Contradictory duplicate |
+| `VC-09` | `OPEN` | Contradictory duplicate |
+| `VC-10` | `OPEN` | Contradictory duplicate |
+| `VC-11` | `OPEN` | Contradictory duplicate |
+| `VC-12` | `OPEN` | Contradictory duplicate |
+"""
+        duplicate_vc_08_section = """
+
+## 60. VC-08 — Unauthorized Duplicate Authority
+
+Locked closure:
+
+`VC08-GOALS-S99-R99 — Unauthorized Duplicate Selection`
+
+Applies within:
+
+`AVF-NEW-S01-R00 — Unauthorized Duplicate Direction`
+"""
+        cases = (
+            ("duplicate_package_status_section", duplicate_status_section),
+            ("duplicate_vc_08_section", duplicate_vc_08_section),
+        )
+
+        for label, duplicate_section in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+
+                    markdown_path = (
+                        isolated_root
+                        / "docs/canon/design/"
+                        "VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+                    )
+                    markdown = markdown_path.read_text(encoding="utf-8")
+                    markdown_path.write_text(
+                        markdown + duplicate_section,
+                        encoding="utf-8",
+                    )
+
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 2 closure human/machine mismatch",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
     def test_query_resolves_exact_requirement_and_multiword_text(self) -> None:
         exact = query(self.compilation, "LAW-LOCAL-AUTHORITY-001", mode="id")
         self.assertEqual(len(exact), 1)

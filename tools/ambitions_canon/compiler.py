@@ -599,19 +599,32 @@ def _validate_wave_2_closure(
             "Wave 2 closure human/machine mismatch: active directions"
         )
 
-    package_status_section = re.search(
-        r"(?ms)^## 3\. Package status$.*?(?=^## 4\.)",
-        human_markdown,
-    )
-    actual_package_rows = (
-        tuple(
-            re.findall(
-                r"(?m)^\| `(VC-(?:0[7-9]|1[0-2]))` \| `([^`]+)` \|",
-                package_status_section.group(0),
-            )
+    numbered_sections = tuple(
+        re.finditer(
+            r"(?ms)^## (?P<number>\d+)\. (?P<title>[^\n]+)$.*?"
+            r"(?=^## \d+\.|\Z)",
+            human_markdown,
         )
-        if package_status_section is not None
-        else ()
+    )
+    package_status_sections = tuple(
+        section
+        for section in numbered_sections
+        if section.group("title") == "Package status"
+    )
+    if (
+        len(package_status_sections) != 1
+        or package_status_sections[0].group("number") != "3"
+    ):
+        raise CanonError(
+            "Wave 2 closure human/machine mismatch: "
+            "Package status authority section"
+        )
+    package_status_section = package_status_sections[0]
+    actual_package_rows = tuple(
+        re.findall(
+            r"(?m)^\| `(VC-(?:0[7-9]|1[0-2]))` \| `([^`]+)` \|",
+            package_status_section.group(0),
+        )
     )
     expected_package_rows = tuple(
         (package_id, wave_2_closure["package_statuses"][package_id])
@@ -633,12 +646,20 @@ def _validate_wave_2_closure(
     package_sections: dict[str, str] = {}
     for package in packages:
         package_id = package["package_id"]
-        section_match = re.search(
-            rf"(?ms)^## \d+\. {re.escape(package_id)}\b.*?"
-            r"(?=^## \d+\.|\Z)",
-            human_markdown,
+        section_matches = tuple(
+            section
+            for section in numbered_sections
+            if re.match(
+                rf"{re.escape(package_id)}\b",
+                section.group("title"),
+            )
         )
-        section = section_match.group(0) if section_match is not None else ""
+        if len(section_matches) != 1:
+            raise CanonError(
+                "Wave 2 closure human/machine mismatch: "
+                f"owning authority section for {package_id}"
+            )
+        section = section_matches[0].group(0)
         package_sections[package_id] = section
         actual_directions = tuple(
             re.findall(r"\bAVF-[A-Z0-9-]+\b", section)
