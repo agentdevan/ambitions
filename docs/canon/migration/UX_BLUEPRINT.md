@@ -9,7 +9,7 @@
 
 - Blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001`
 - Canon revision: `2`
-- Canon content SHA: `eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e`
+- Canon content SHA: `0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0`
 - Source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`
 - Coverage: `0` unresolved specification gaps at generation time.
 - Requirement dispositions: `466` total; `343` visual; `123` nonvisual; SHA-256 `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`

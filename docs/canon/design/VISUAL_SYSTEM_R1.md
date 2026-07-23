@@ -11,14 +11,14 @@ Historical Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 Design-input provenance:
 
 - canon revision: `2`;
-- canon content SHA: `eca87f80951e4845f5497738413f14542344d28177450e4e13eba7ed2985f37e`;
+- canon content SHA: `0113617be10670e7cf5eedf64f3440fb9ca690218b9db8aa4ce0af4c645868c0`;
 - canon source SHA: `0e894407a38759f69d2a3e48111bae67720794b0`;
 - UX blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001` from `docs/canon/migration/UX_BLUEPRINT.md`;
-- UX blueprint Markdown SHA-256: `94cfaf128beba264d9af10126751a1ef1e1573850e4dd348c2480bd1dfc2e90d`;
-- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `be27b50a717f28d752aff9d560531b5b34f1afa92b8d2745d8226643452d8419`;
+- UX blueprint Markdown SHA-256: `c48d4ba671feba818a78351d49b94d965ccb4bd92859f9940e0e40a7f2668cb0`;
+- UX blueprint JSON SHA-256 for `docs/canon/migration/ux-blueprint.json`: `472bfd5136b9e162653396c6b939af49b5cbb06888a63007d4c473657341f334`;
 - state-inventory file SHA-256 for `docs/canon/migration/ux-blueprint-state-inventory.json`: `023310067f1664a139e245d589e044985b9991f37456793855f121b0b81e441a`;
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
-- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `5cb4f8fd4c5c5d0ceff7d82c51c3af832e7b2435ee8b2e1bcb885776cc995e59`;
+- requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `86043aa16ed3b5f303b8465fe83f062068ab4940ced658a77562109df8c4051a`;
 - requirement-disposition matrix SHA-256: `92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb`;
 - VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `fef08a88418026df730feba9b3a276e7afdd9cc76395dd6b23b9b50621cd8c92`;
 - VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `3626e915f3f4afc273ccd622727b27dcd8657f181425463ad96f315ea4dcef54`;
