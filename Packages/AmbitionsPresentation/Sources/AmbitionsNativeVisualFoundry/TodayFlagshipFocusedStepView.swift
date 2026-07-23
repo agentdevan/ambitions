@@ -143,6 +143,7 @@ struct TodayFlagshipFocusedStepView: View {
             .buttonBorderShape(.roundedRectangle(radius: 8))
             .controlSize(.large)
             .frame(minHeight: 44, alignment: .leading)
+            // AMBitionsAllowWeakPattern(reason: "SwiftUI interaction state prevents mutation during object recovery")
             .disabled(state.phase == .interrupted || state.phase == .recoveryReview)
             .accessibilityHint("Reviews meaningful progress before anything changes")
             .accessibilityIdentifier("tfcs-select-still-counts")
@@ -192,6 +193,7 @@ struct TodayFlagshipFocusedStepView: View {
             .buttonStyle(.bordered)
             .controlSize(.large)
             .frame(minHeight: 44, alignment: .leading)
+            // AMBitionsAllowWeakPattern(reason: "SwiftUI interaction state prevents a duplicate recovery presentation")
             .disabled(state.phase == .recoveryReview)
         }
         .padding(14)

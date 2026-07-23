@@ -72,6 +72,7 @@ struct TodayFlagshipReviewView: View {
                     Button("Cancel") {
                         _ = state.cancelReview()
                     }
+                    // AMBitionsAllowWeakPattern(reason: "SwiftUI interaction state prevents cancellation after commitment begins")
                     .disabled(state.isCommitInFlight)
                     .accessibilityHint("Closes review without changing the Step")
                 }
