@@ -894,10 +894,14 @@ def _validate_wave_2_closure(
         "- `VC-13`: `OPEN`.",
         "- `VC-14`: `NOT_STARTED`.",
     )
-    actual_authorization_rows = tuple(
+    actual_authorization_block = tuple(
         line
         for line in authority_sections["16"].splitlines()
-        if line.startswith("- ")
+        if line
+    )
+    expected_authorization_block = (
+        "## 16. Authorization state",
+        *expected_authorization_rows,
     )
     global_authorization_declarations = tuple(
         match.group(0)
@@ -908,7 +912,7 @@ def _validate_wave_2_closure(
         )
     )
     if (
-        actual_authorization_rows != expected_authorization_rows
+        actual_authorization_block != expected_authorization_block
         or global_authorization_declarations != expected_authorization_rows[:3]
     ):
         raise CanonError(
@@ -1019,8 +1023,16 @@ def _validate_wave_2_closure(
                     f"`{record['id']} — {record['name']}`",
                 )
                 for label, record in zip(
-                    ("Selected root structure", "Native substrate"),
-                    (selection["primary"], selection["native_substrate"]),
+                    (
+                        "Selected root structure",
+                        "Native substrate",
+                        "Required transformation",
+                    ),
+                    (
+                        selection["primary"],
+                        selection["native_substrate"],
+                        package["required_transformation"],
+                    ),
                     strict=True,
                 )
             )

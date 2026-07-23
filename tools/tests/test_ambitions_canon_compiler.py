@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -149,6 +150,27 @@ def mutate_first_taxonomy(
             *state_models[1:],
         ],
     }
+
+
+def refresh_visual_system_source_sha(
+    root: Path,
+    relative_path: Path,
+) -> None:
+    source_sha = hashlib.sha256((root / relative_path).read_bytes()).hexdigest()
+    visual_system_path = root / "docs/canon/design/VISUAL_SYSTEM_R1.md"
+    visual_system = visual_system_path.read_text(encoding="utf-8")
+    pattern = (
+        rf"(?m)(SHA-256 for `{re.escape(relative_path.as_posix())}`: `)"
+        r"[0-9a-f]{64}(`;)$"
+    )
+    refreshed, count = re.subn(
+        pattern,
+        rf"\g<1>{source_sha}\2",
+        visual_system,
+        count=1,
+    )
+    assert count == 1
+    visual_system_path.write_text(refreshed, encoding="utf-8")
 
 
 class AmbitionsCanonCompilerTests(unittest.TestCase):
@@ -1446,6 +1468,69 @@ Applies within:
                         "Wave 2 closure human/machine mismatch",
                     ):
                         canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_closure_rejects_human_transformation_name_drift(
+        self,
+    ) -> None:
+        human_path = Path(
+            "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+            human_target = isolated_root / human_path
+            source = human_target.read_text(encoding="utf-8")
+            mutated = source.replace(
+                "`VC11-YOU-D06 — Explicit Adaptive Control Passage`",
+                "`VC11-YOU-D06 — Contradictory Control Passage`",
+                1,
+            )
+            self.assertNotEqual(mutated, source)
+            human_target.write_text(mutated, encoding="utf-8")
+            refresh_visual_system_source_sha(isolated_root, human_path)
+
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "Wave 2 closure human/machine mismatch",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_2_closure_rejects_contradictory_section_16_prose(
+        self,
+    ) -> None:
+        human_path = Path(
+            "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+            human_target = isolated_root / human_path
+            source = human_target.read_text(encoding="utf-8")
+            mutated = source.replace(
+                "- Implementation authorization: `false`.\n"
+                "- Wave 1: `CLOSED`.",
+                "- Implementation authorization: `false`.\n\n"
+                "Implementation authorization is also `true`.\n\n"
+                "- Wave 1: `CLOSED`.",
+                1,
+            )
+            self.assertNotEqual(mutated, source)
+            human_target.write_text(mutated, encoding="utf-8")
+            refresh_visual_system_source_sha(isolated_root, human_path)
+
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "Wave 2 closure human/machine mismatch",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
 
     def test_wave_2_machine_semantics_are_independently_locked(self) -> None:
         wave_2_json = Path(
