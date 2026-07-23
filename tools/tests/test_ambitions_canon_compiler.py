@@ -29,6 +29,8 @@ ACTIVE_DESIGN_PATHS = (
     Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
     Path("docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"),
     Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
+    Path("docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"),
+    Path("docs/canon/design/vc-wave-3-accessibility-stress-closure.json"),
     Path("docs/canon/migration/UX_BLUEPRINT.md"),
     Path("docs/canon/migration/ux-blueprint.json"),
     Path("docs/canon/migration/ux-blueprint-state-inventory.json"),
@@ -88,8 +90,7 @@ EXPECTED_ACTIVE_VISUAL_DIRECTIONS = [
 ]
 
 EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
-    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 13)},
-    "VC-13": "OPEN",
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 14)},
     "VC-14": "NOT_STARTED",
 }
 
@@ -171,6 +172,25 @@ def refresh_visual_system_source_sha(
     )
     assert count == 1
     visual_system_path.write_text(refreshed, encoding="utf-8")
+
+
+class Wave3VisualClosureLoaderTests(unittest.TestCase):
+    def test_visual_closure_loader_includes_wave_3_in_order(self) -> None:
+        records = canon_compiler.load_visual_closure_records(REPOSITORY_ROOT)
+        self.assertEqual(
+            [
+                records[0]["contract_id"],
+                records[1]["package_id"],
+                records[2]["package_id"],
+                records[3]["package_id"],
+            ],
+            [
+                "AMB-VISUAL-CLOSURE-INPUT-VC-01-14",
+                "AMB-VC-WAVE-1-FOUNDATION-CLOSURE",
+                "AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE",
+                "AMB-VC-WAVE-3-ACCESSIBILITY-STRESS-CLOSURE",
+            ],
+        )
 
 
 class AmbitionsCanonCompilerTests(unittest.TestCase):
@@ -716,6 +736,279 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 ["packages"]
             )
         )
+
+    def test_visual_manifest_closes_vc_13_and_leaves_vc_14_unstarted(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        statuses = manifest["closure_packages"]["package_statuses"]
+        self.assertTrue(
+            all(statuses[f"VC-{number:02d}"] == "CLOSED" for number in range(1, 14))
+        )
+        self.assertEqual(statuses["VC-14"], "NOT_STARTED")
+
+    def test_wave_3_projects_stress_closure_without_authorizing_implementation(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        wave_3 = manifest["closure_packages"]["wave_3"]
+        self.assertEqual(
+            wave_3["selected_record"],
+            "VC13-A11Y-S01 — Stress-Proven Adaptive Semantic Continuity",
+        )
+        self.assertFalse(manifest["authority_state"]["figma"])
+        self.assertFalse(manifest["authority_state"]["swiftui"])
+        self.assertFalse(manifest["authority_state"]["implementation"])
+
+    def test_wave_3_closure_projects_exact_active_directions(self) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        self.assertEqual(
+            manifest["active_baseline"]["directions"],
+            EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
+        )
+        self.assertEqual(
+            manifest["closure_packages"]["wave_3"]["active_direction_ids"],
+            EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
+        )
+
+    def test_wave_3_projects_structured_accessibility_stress_baseline(self) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        stress = manifest["active_baseline"]["wave_3_accessibility_stress"]
+        for field in (
+            "shared_first_viewport_doctrine",
+            "compression_order",
+            "never_compress",
+            "surface_results",
+            "shell_results",
+            "keyboard_safe_action_boundary",
+            "reduced_effects_contract",
+            "rtl_semantic_invariants",
+            "focus_entry",
+            "focus_return_priority",
+            "hidden_sensitive_value_contract",
+            "combined_state_order",
+            "combined_state_precedence",
+            "architecture_dependency_register",
+            "direct_device_proof_register",
+            "vc_14_entry_criteria",
+        ):
+            self.assertIn(field, stress)
+            self.assertTrue(stress[field])
+
+    def test_wave_3_direct_device_proof_register_is_explicit_and_incomplete(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            self.outputs["generated/visual-authority-manifest.json"]
+        )
+        proof_register = manifest["active_baseline"][
+            "wave_3_accessibility_stress"
+        ]["direct_device_proof_register"]
+        self.assertTrue(proof_register)
+        for obligation in (
+            "left_handed_and_lower_reach_dock_usability",
+            "voiceover_reading_order_and_focus_restoration",
+            "rtl_on_device_inspection",
+            "reduced_effects_appearance_specimen",
+            "sensitive_value_accessibility_exclusion",
+        ):
+            self.assertIn(obligation, proof_register)
+        self.assertTrue(
+            manifest["closure_packages"]["wave_3"]["package"]
+            ["overall_result"]["direct_device_proof_required"]
+        )
+
+    def test_wave_3_closure_rejects_authority_regressions(self) -> None:
+        wave_3_path = Path(
+            "docs/canon/design/vc-wave-3-accessibility-stress-closure.json"
+        )
+        cases = (
+            (
+                "changed_active_direction",
+                lambda payload: {
+                    **payload,
+                    "active_direction_ids": [
+                        "AVF-UNAUTHORIZED-S01-R00",
+                        *payload["active_direction_ids"][1:],
+                    ],
+                },
+            ),
+            (
+                "vc_13_open",
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-13": "OPEN",
+                    },
+                },
+            ),
+            (
+                "vc_14_closed",
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-14": "CLOSED",
+                    },
+                },
+            ),
+            (
+                "reordered_active_directions",
+                lambda payload: {
+                    **payload,
+                    "active_direction_ids": [
+                        payload["active_direction_ids"][1],
+                        payload["active_direction_ids"][0],
+                        *payload["active_direction_ids"][2:],
+                    ],
+                },
+            ),
+            *(
+                (
+                    f"{authorization_key}_authorization_true",
+                    lambda payload, key=authorization_key: {
+                        **payload,
+                        "authorization_state": {
+                            **payload["authorization_state"],
+                            key: True,
+                        },
+                    },
+                )
+                for authorization_key in ("figma", "swiftui", "implementation")
+            ),
+            (
+                "human_peer_missing",
+                lambda payload: {**payload, "human_peer": None},
+            ),
+            (
+                "wave_2_inheritance_missing",
+                lambda payload: {
+                    **payload,
+                    "inherits": {
+                        key: value
+                        for key, value in payload["inherits"].items()
+                        if key not in {"wave_2_human", "wave_2_machine"}
+                    },
+                },
+            ),
+            (
+                "structural_branch_required",
+                lambda payload: {
+                    **payload,
+                    "package": {
+                        **payload["package"],
+                        "failure_classification": {
+                            **payload["package"]["failure_classification"],
+                            "structural_branch_required": True,
+                        },
+                    },
+                },
+            ),
+            (
+                "proof_register_missing",
+                lambda payload: {
+                    key: value
+                    for key, value in payload.items()
+                    if key != "direct_device_proof_register"
+                },
+            ),
+            (
+                "wave_1_status_regression",
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-01": "OPEN",
+                    },
+                },
+            ),
+            (
+                "wave_2_status_regression",
+                lambda payload: {
+                    **payload,
+                    "package_statuses": {
+                        **payload["package_statuses"],
+                        "VC-07": "OPEN",
+                    },
+                },
+            ),
+            (
+                "new_active_avf_through_selected_closure",
+                lambda payload: {
+                    **payload,
+                    "package": {
+                        **payload["package"],
+                        "applies_to_avf_ids": [
+                            *payload["package"]["applies_to_avf_ids"],
+                            "AVF-UNAUTHORIZED-S01-R00",
+                        ],
+                    },
+                },
+            ),
+        )
+
+        for label, mutate in cases:
+            with self.subTest(label=label):
+                with tempfile.TemporaryDirectory() as directory:
+                    isolated_root = Path(directory)
+                    for design_path in ACTIVE_DESIGN_PATHS:
+                        target = isolated_root / design_path
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(REPOSITORY_ROOT / design_path, target)
+                    target = isolated_root / wave_3_path
+                    payload = json.loads(target.read_text(encoding="utf-8"))
+                    target.write_text(
+                        json.dumps(
+                            mutate(payload),
+                            indent=2,
+                            sort_keys=True,
+                            ensure_ascii=False,
+                        )
+                        + "\n",
+                        encoding="utf-8",
+                    )
+                    isolated = replace(self.compilation, root=isolated_root)
+                    with self.assertRaisesRegex(
+                        canon_compiler.CanonError,
+                        "Wave 3 closure",
+                    ):
+                        canon_compiler.validate_design_artifacts(isolated)
+
+    def test_wave_3_closure_rejects_human_machine_peer_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_root = Path(directory)
+            for design_path in ACTIVE_DESIGN_PATHS:
+                target = isolated_root / design_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(REPOSITORY_ROOT / design_path, target)
+            human_path = (
+                isolated_root
+                / "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"
+            )
+            source = human_path.read_text(encoding="utf-8")
+            human_path.write_text(
+                source.replace(
+                    "Implementation authorization: `false`.",
+                    "Implementation authorization: `true`.",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            isolated = replace(self.compilation, root=isolated_root)
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "Wave 3 closure human/machine mismatch",
+            ):
+                canon_compiler.validate_design_artifacts(isolated)
 
     def test_visual_closure_manifest_rendering_is_deterministic(self) -> None:
         first = canon_compiler.render_visual_authority_manifest(

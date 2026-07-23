@@ -42,6 +42,7 @@ VISUAL_CLOSURE_MACHINE_PATHS = (
     Path("docs/canon/design/visual-closure-input-contract.json"),
     Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
     Path("docs/canon/design/vc-wave-2-surface-journey-closure.json"),
+    Path("docs/canon/design/vc-wave-3-accessibility-stress-closure.json"),
 )
 EXPECTED_ACTIVE_VISUAL_DIRECTIONS = (
     "AVF-DNA-S07-R00",
@@ -62,9 +63,13 @@ WAVE_1_PACKAGE_STATUSES = {
     **{f"VC-{number:02d}": "OPEN" for number in range(7, 14)},
     "VC-14": "NOT_STARTED",
 }
-EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+WAVE_2_PACKAGE_STATUSES = {
     **{f"VC-{number:02d}": "CLOSED" for number in range(1, 13)},
     "VC-13": "OPEN",
+    "VC-14": "NOT_STARTED",
+}
+EXPECTED_EFFECTIVE_PACKAGE_STATUSES = {
+    **{f"VC-{number:02d}": "CLOSED" for number in range(1, 14)},
     "VC-14": "NOT_STARTED",
 }
 FALSE_IMPLEMENTATION_AUTHORIZATION = {
@@ -74,6 +79,12 @@ FALSE_IMPLEMENTATION_AUTHORIZATION = {
 }
 EXPECTED_WAVE_2_CANONICAL_SHA256 = (
     "a7adda3b7dc609e1626bc9456ad05ded0aea4d8619416db055d547e4790cb323"
+)
+EXPECTED_WAVE_3_CANONICAL_SHA256 = (
+    "4d68629ba6da8d9d2b04f39ebf1b1ca189fe81f3b40bdd0fa91d4524eb1f240e"
+)
+EXPECTED_WAVE_3_HUMAN_SHA256 = (
+    "bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437"
 )
 WAVE_2_TOP_LEVEL_FIELDS = {
     "active_direction_ids",
@@ -570,7 +581,7 @@ def _validate_wave_2_closure(
         raise CanonError("Wave 2 closure active direction IDs are invalid")
     if (
         wave_2_closure.get("package_statuses")
-        != EXPECTED_EFFECTIVE_PACKAGE_STATUSES
+        != WAVE_2_PACKAGE_STATUSES
     ):
         raise CanonError("Wave 2 closure package statuses are invalid")
     if wave_2_closure.get("wave_statuses") != {
@@ -1078,6 +1089,160 @@ def _validate_wave_2_closure(
         )
 
 
+def _validate_wave_3_closure(
+    root: Path,
+    manifest: Manifest,
+    wave_3_closure: dict[str, Any],
+) -> None:
+    human_path = Path(
+        "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"
+    )
+    machine_path = VISUAL_CLOSURE_MACHINE_PATHS[3]
+    if wave_3_closure.get("schema_version") != 1:
+        raise CanonError("Wave 3 closure schema version is invalid")
+    if wave_3_closure.get("package_id") != (
+        "AMB-VC-WAVE-3-ACCESSIBILITY-STRESS-CLOSURE"
+    ):
+        raise CanonError("Wave 3 closure package ID is invalid")
+    if wave_3_closure.get("status") != "CLOSED":
+        raise CanonError("Wave 3 closure status must be closed")
+    if wave_3_closure.get("active_direction_ids") != list(
+        EXPECTED_ACTIVE_VISUAL_DIRECTIONS
+    ):
+        raise CanonError("Wave 3 closure active direction IDs are invalid")
+    if (
+        wave_3_closure.get("package_statuses")
+        != EXPECTED_EFFECTIVE_PACKAGE_STATUSES
+    ):
+        raise CanonError("Wave 3 closure package statuses are invalid")
+    if (
+        wave_3_closure.get("authorization_state")
+        != FALSE_IMPLEMENTATION_AUTHORIZATION
+    ):
+        raise CanonError("Wave 3 closure authorization state is invalid")
+    if wave_3_closure.get("human_peer") != human_path.as_posix():
+        raise CanonError("Wave 3 closure human peer is invalid")
+    if wave_3_closure.get("inherits") != {
+        "input_contract_human": (
+            "docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md"
+        ),
+        "input_contract_machine": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
+        "wave_1_human": (
+            "docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md"
+        ),
+        "wave_1_machine": VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix(),
+        "wave_2_human": (
+            "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+        ),
+        "wave_2_machine": VISUAL_CLOSURE_MACHINE_PATHS[2].as_posix(),
+    }:
+        raise CanonError("Wave 3 closure Wave 1/Wave 2 inheritance is invalid")
+    if wave_3_closure.get("wave_statuses") != {
+        "vc_14_reconciled_matched_baseline": "NOT_STARTED",
+        "wave_1_shared_foundation": "CLOSED",
+        "wave_2_surfaces_and_journeys": "CLOSED",
+        "wave_3_accessibility_content_stress_validation": "CLOSED",
+        "wave_3_overall_stress_and_matched_baseline": "OPEN_PENDING_VC_14",
+    }:
+        raise CanonError("Wave 3 closure wave statuses are invalid")
+
+    required_references = {
+        human_path.relative_to(CANON_ROOT_PATH).as_posix(),
+        machine_path.relative_to(CANON_ROOT_PATH).as_posix(),
+    }
+    if not required_references.issubset(set(manifest.reference_files)):
+        raise CanonError("Wave 3 closure human/machine peers are not manifested")
+
+    package = wave_3_closure.get("package")
+    if not isinstance(package, dict) or package.get("package_id") != "VC-13":
+        raise CanonError("Wave 3 closure VC-13 package is invalid")
+    if package.get("status") != "CLOSED":
+        raise CanonError("Wave 3 closure VC-13 package must be closed")
+    if package.get("selected_closure") != {
+        "id": "VC13-A11Y-S01",
+        "kind": "validation_synthesis",
+        "name": "Stress-Proven Adaptive Semantic Continuity",
+    }:
+        raise CanonError("Wave 3 closure selected record is invalid")
+    applies_to = package.get("applies_to_avf_ids")
+    if (
+        not isinstance(applies_to, list)
+        or not applies_to
+        or len(applies_to) != len(set(applies_to))
+        or set(applies_to) - set(EXPECTED_ACTIVE_VISUAL_DIRECTIONS)
+    ):
+        raise CanonError("Wave 3 closure selected record AVF mapping is invalid")
+    failure = package.get("failure_classification")
+    overall = package.get("overall_result")
+    if (
+        not isinstance(failure, dict)
+        or failure.get("structural_branch_required") is not False
+        or not isinstance(overall, dict)
+        or overall.get("structural_branch_required") is not False
+        or overall.get("active_direction_change") is not False
+        or overall.get("wave_1_or_wave_2_reopened") is not False
+        or overall.get("direct_device_proof_required") is not True
+    ):
+        raise CanonError("Wave 3 closure structural result is invalid")
+    for field in (
+        "shared_first_viewport_doctrine",
+        "compression_order",
+        "never_compress",
+        "surface_results",
+        "shell_results",
+        "keyboard_safe_action_boundary",
+        "reduced_effects_contract",
+        "rtl_semantic_invariants",
+        "focus_entry",
+        "focus_return_priority",
+        "hidden_sensitive_value_contract",
+        "combined_state_order",
+        "combined_state_precedence",
+    ):
+        if not package.get(field):
+            raise CanonError(f"Wave 3 closure structured field is invalid: {field}")
+    for field in (
+        "architecture_dependencies",
+        "direct_device_proof_register",
+        "vc_14_entry_criteria",
+    ):
+        value = wave_3_closure.get(field)
+        if not isinstance(value, list) or not value:
+            raise CanonError(f"Wave 3 closure register is invalid: {field}")
+
+    canonical = json.dumps(
+        wave_3_closure,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    if hashlib.sha256(canonical).hexdigest() != EXPECTED_WAVE_3_CANONICAL_SHA256:
+        raise CanonError("Wave 3 closure semantic content is invalid")
+    try:
+        human_sha = hashlib.sha256(
+            _confined_path(root, human_path).read_bytes()
+        ).hexdigest()
+    except OSError as exc:
+        raise CanonError("Wave 3 closure human peer is missing") from exc
+    if human_sha != EXPECTED_WAVE_3_HUMAN_SHA256:
+        raise CanonError("Wave 3 closure human/machine mismatch")
+
+
+def _wave_3_accessibility_stress(
+    wave_3_closure: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        **wave_3_closure["package"],
+        "architecture_dependency_register": wave_3_closure[
+            "architecture_dependencies"
+        ],
+        "direct_device_proof_register": wave_3_closure[
+            "direct_device_proof_register"
+        ],
+        "vc_14_entry_criteria": wave_3_closure["vc_14_entry_criteria"],
+    }
+
+
 def load_manifest(root: Path) -> Manifest:
     path = _confined_path(root, MANIFEST_PATH)
     try:
@@ -1521,6 +1686,8 @@ def _validate_visual_system_provenance(
         "docs/canon/design/vc-wave-1-foundation-closure.json",
         "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
         "docs/canon/design/vc-wave-2-surface-journey-closure.json",
+        "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md",
+        "docs/canon/design/vc-wave-3-accessibility-stress-closure.json",
         "docs/canon/generated/visual-authority-manifest.json",
     }
     provenance_by_path = {
@@ -1580,7 +1747,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     wave_1_closure_path = VISUAL_CLOSURE_MACHINE_PATHS[1].as_posix()
     blueprint = load(blueprint_path)
     dispositions = load(dispositions_path)
-    visual_contract, wave_1_closure, wave_2_closure = (
+    visual_contract, wave_1_closure, wave_2_closure, wave_3_closure = (
         load_visual_closure_records(root)
     )
 
@@ -2017,6 +2184,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
             )
 
     _validate_wave_2_closure(root, compilation.manifest, wave_2_closure)
+    _validate_wave_3_closure(root, compilation.manifest, wave_3_closure)
 
     mappings = visual_contract.get("visual_requirement_mappings")
     if not isinstance(mappings, list) or not mappings:
@@ -2480,13 +2648,18 @@ def render_requirement_traceability(compilation: Compilation) -> bytes:
 
 def render_visual_authority_manifest(compilation: Compilation) -> bytes:
     """Render the active visual authority from its source-owned VC contract."""
-    contract, wave_1_closure, wave_2_closure = load_visual_closure_records(
-        compilation.root
+    contract, wave_1_closure, wave_2_closure, wave_3_closure = (
+        load_visual_closure_records(compilation.root)
     )
     _validate_wave_2_closure(
         compilation.root,
         compilation.manifest,
         wave_2_closure,
+    )
+    _validate_wave_3_closure(
+        compilation.root,
+        compilation.manifest,
+        wave_3_closure,
     )
     source_bytes = tuple(
         _confined_path(compilation.root, relative_path).read_bytes()
@@ -2502,10 +2675,23 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
 
     wave_1_projection = project_record(1, wave_1_closure)
     wave_2_projection = project_record(2, wave_2_closure)
+    wave_3_selected = wave_3_closure["package"]["selected_closure"]
+    wave_3_projection = {
+        **project_record(3, wave_3_closure),
+        "human_record": wave_3_closure["human_peer"],
+        "machine_record": VISUAL_CLOSURE_MACHINE_PATHS[3].as_posix(),
+        "selected_record": (
+            f"{wave_3_selected['id']} — {wave_3_selected['name']}"
+        ),
+        "status": "ACCESSIBILITY_STRESS_CLOSED_VC14_NOT_STARTED",
+    }
     payload = {
         "active_baseline": {
             **contract["active_baseline"],
             "wave_2_summaries": _wave_2_surface_summaries(wave_2_closure),
+            "wave_3_accessibility_stress": _wave_3_accessibility_stress(
+                wave_3_closure
+            ),
         },
         "authorities": [
             {
@@ -2532,7 +2718,8 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
             "wave_1_record": wave_1_projection,
             "wave_2": wave_2_projection,
             "wave_2_surfaces_and_journeys": "CLOSED",
-            "wave_3_stress_and_matched_baseline": "OPEN",
+            "wave_3": wave_3_projection,
+            "wave_3_stress_and_matched_baseline": "OPEN_PENDING_VC_14",
         },
         "compiler_version": "0.5.0",
         "contract_id": contract["contract_id"],
@@ -2552,6 +2739,7 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         ],
         "wave_1_foundation_closure": wave_1_projection,
         "wave_2_surface_journey_closure": wave_2_projection,
+        "wave_3_accessibility_stress_closure": wave_3_projection,
     }
     return (
         json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)
