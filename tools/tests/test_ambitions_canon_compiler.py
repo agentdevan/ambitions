@@ -901,6 +901,17 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 },
             ),
             (
+                "wave_1_inheritance_missing",
+                lambda payload: {
+                    **payload,
+                    "inherits": {
+                        key: value
+                        for key, value in payload["inherits"].items()
+                        if key not in {"wave_1_human", "wave_1_machine"}
+                    },
+                },
+            ),
+            (
                 "structural_branch_required",
                 lambda payload: {
                     **payload,
@@ -1023,7 +1034,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         self.assertEqual(output_drift(self.compilation, self.outputs), ())
         self.assertEqual(render_outputs(self.compilation), self.outputs)
 
-    def test_generated_router_lists_both_visual_closure_waves_adjacent(self) -> None:
+    def test_generated_router_lists_all_visual_closure_waves_adjacent(self) -> None:
         router = self.outputs["generated/CODEX_START_HERE.md"].decode("utf-8")
         wave_1 = (
             "- [Wave 1 Foundation Closure]"
@@ -1033,9 +1044,28 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             "- [Wave 2 Surface and Journey Closure]"
             "(../design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md)"
         )
+        wave_3 = (
+            "- [Wave 3 Accessibility and Content Stress Closure]"
+            "(../design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)"
+        )
         self.assertEqual(router.count(wave_1), 1)
         self.assertEqual(router.count(wave_2), 1)
-        self.assertIn(wave_1 + "\n" + wave_2, router)
+        self.assertEqual(router.count(wave_3), 1)
+        self.assertIn(wave_1 + "\n" + wave_2 + "\n" + wave_3, router)
+
+    def test_visual_system_status_does_not_overclaim_wave_3_program_closure(
+        self,
+    ) -> None:
+        visual_system = (
+            REPOSITORY_ROOT / "docs/canon/design/VISUAL_SYSTEM_R1.md"
+        ).read_text(encoding="utf-8")
+        expected = (
+            "Status: `ACTIVE_RECONCILED_BASELINE / "
+            "VC_01_THROUGH_VC_13_CLOSED / VC_14_NOT_STARTED / "
+            "FIGMA_NOT_AUTHORIZED`"
+        )
+        self.assertEqual(visual_system.count(expected), 1)
+        self.assertNotIn("WAVE_1_THROUGH_3_CLOSED", visual_system)
 
     def test_generated_traceability_is_structural_and_non_proof(self) -> None:
         self.assertEqual(set(self.outputs), set(GENERATED_PATHS))
