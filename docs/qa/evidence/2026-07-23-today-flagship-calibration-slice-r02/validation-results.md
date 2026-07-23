@@ -38,7 +38,7 @@ and assertions completed.
 | Runtime direct-write audit | PASS — no unsafe/unknown production rows; 55 classified markers (`preview-only`: 2, `projection-only`: 3, `unproven`: 50). |
 | Weak-implementation scan | PASS — no newly introduced weak patterns. |
 | Full current-material Gitleaks | PASS — no leaks in 243.98 MB; base-to-branch history also clean. |
-| R01→R02 Gitleaks range | PASS — 3 commits, 50.90 KB, no leaks. |
+| R01→R02 Gitleaks range | PASS — no leaks in the exact range from the R01 HEAD through the final R02 documentation commit. |
 | `git diff --check` | PASS — no whitespace errors before evidence commit; repeated on the final staged and committed tree. |
 
 ## Media integrity
