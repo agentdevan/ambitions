@@ -3,7 +3,8 @@ import SwiftUI
 public struct TodayBootstrapView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorScheme) private var colorScheme
-    @ScaledMetric(relativeTo: .body) private var sectionSpacing = 28.0
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .body) private var sectionSpacing = 24.0
 
     private let content: TodayBootstrapContent
     private let onOpenStep: () -> Void
@@ -27,18 +28,24 @@ public struct TodayBootstrapView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: sectionSpacing) {
                     crown
+                    if usesAdaptiveNavigation {
+                        adaptiveNavigationPassage
+                    }
                     startHere
                     timeline
                 }
                 .frame(maxWidth: 560, alignment: .leading)
-                .padding(.horizontal, 24)
+                .padding(.leading, 24)
+                .padding(.trailing, usesAdaptiveNavigation ? 24 : 68)
                 .padding(.top, 12)
                 .padding(.bottom, 44)
             }
             .scrollIndicators(.hidden)
 
-            peekDock
-                .padding(.trailing, 8)
+            if !usesAdaptiveNavigation {
+                peekDock
+                    .padding(.trailing, 2)
+            }
         }
         .foregroundStyle(palette.primaryInk)
         .tint(palette.actionAccent)
@@ -46,31 +53,50 @@ public struct TodayBootstrapView: View {
     }
 
     private var crown: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(content.crownTitle)
-                .font(.largeTitle.weight(.semibold))
-                .accessibilityAddTraits(.isHeader)
-
-            Text(content.dateRelationship)
-                .font(.subheadline)
-                .foregroundStyle(palette.secondaryInk)
-
-            Text(content.fixtureLabel)
-                .font(.footnote)
-                .foregroundStyle(palette.tertiaryInk)
+        Group {
+            if usesAdaptiveNavigation {
+                VStack(alignment: .leading, spacing: 4) {
+                    crownTitle
+                    crownRelationship
+                }
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    crownTitle
+                    crownRelationship
+                }
+            }
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("today-bootstrap-crown")
     }
 
+    private var crownTitle: some View {
+        Text(content.crownTitle)
+            .font(.title3.weight(.semibold))
+            .accessibilityAddTraits(.isHeader)
+    }
+
+    private var crownRelationship: some View {
+        Text(content.dateRelationship)
+            .font(.caption)
+            .foregroundStyle(palette.secondaryInk)
+    }
+
     private var startHere: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text(content.startHereEyebrow)
-                .font(.headline)
-                .foregroundStyle(palette.actionAccent)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                RoundedRectangle(cornerRadius: 1)
+                    .fill(palette.actionAccent)
+                    .frame(width: 20, height: 2)
+                    .accessibilityHidden(true)
+
+                Text(content.startHereEyebrow)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(palette.actionAccent)
+            }
 
             Text(content.startHereTitle)
-                .font(.title.weight(.semibold))
+                .font(.title2.weight(.semibold))
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
 
@@ -79,44 +105,38 @@ public struct TodayBootstrapView: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Text(content.materialConsequence)
-                .font(.body.weight(.medium))
+                .font(.callout.weight(.medium))
                 .foregroundStyle(palette.secondaryInk)
                 .fixedSize(horizontal: false, vertical: true)
 
             Button(action: onOpenStep) {
                 Text(content.primaryActionTitle)
                     .foregroundStyle(.white)
+                    .frame(
+                        maxWidth: usesAdaptiveNavigation ? .infinity : nil
+                    )
             }
                 .buttonStyle(.borderedProminent)
-                .controlSize(.large)
+                .buttonBorderShape(.roundedRectangle(radius: 10))
+                .controlSize(.regular)
                 .accessibilityIdentifier("today-bootstrap-open-step")
-        }
-        .padding(.leading, 18)
-        .overlay(alignment: .leading) {
-            Rectangle()
-                .fill(palette.actionAccent)
-                .frame(width: 3)
-                .accessibilityHidden(true)
         }
         .accessibilityIdentifier("today-bootstrap-start-here")
     }
 
     private var timeline: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 24) {
             Text(content.timelineTitle)
-                .font(.title3.weight(.semibold))
-                .padding(.bottom, 12)
+                .font(.headline)
                 .accessibilityAddTraits(.isHeader)
 
             ForEach(content.timelineEntries) { entry in
-                Divider()
-                    .overlay(palette.divider)
-
-                HStack(alignment: .firstTextBaseline, spacing: 16) {
-                    Text(entry.timeLabel)
-                        .font(.subheadline.monospacedDigit())
-                        .foregroundStyle(palette.secondaryInk)
-                        .frame(width: 76, alignment: .leading)
+                HStack(alignment: .top, spacing: 12) {
+                    Circle()
+                        .fill(palette.tertiaryInk)
+                        .frame(width: 5, height: 5)
+                        .padding(.top, 7)
+                        .accessibilityHidden(true)
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(entry.title)
@@ -127,24 +147,41 @@ public struct TodayBootstrapView: View {
                             .font(.subheadline)
                             .foregroundStyle(palette.secondaryInk)
                             .fixedSize(horizontal: false, vertical: true)
+
+                        Text(entry.timeLabel)
+                            .font(.caption.monospacedDigit().weight(.medium))
+                            .foregroundStyle(palette.tertiaryInk)
                     }
                 }
-                .padding(.vertical, 14)
                 .accessibilityElement(children: .combine)
             }
         }
         .accessibilityIdentifier("today-bootstrap-timeline")
     }
 
+    private var adaptiveNavigationPassage: some View {
+        Button(action: onOpenDock) {
+            Text("Open navigation")
+                .font(.body.weight(.medium))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.roundedRectangle(radius: 10))
+        .controlSize(.large)
+        .accessibilityHint("Shows the Crowned Edge Dock")
+        .accessibilityIdentifier("today-bootstrap-adaptive-navigation")
+    }
+
     private var peekDock: some View {
         Button(action: onOpenDock) {
-            Image(systemName: "chevron.left")
-                .font(.headline.weight(.semibold))
-                .frame(width: 44, height: 72)
-                .contentShape(.capsule)
+            ZStack {
+                Color.clear
+                dockChrome
+            }
+            .frame(width: 44, height: 88)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .background { dockChrome }
         .accessibilityLabel("Open navigation")
         .accessibilityHint("Shows the Crowned Edge Dock")
         .accessibilityIdentifier("today-bootstrap-peek-dock")
@@ -152,15 +189,17 @@ public struct TodayBootstrapView: View {
 
     @ViewBuilder
     private var dockChrome: some View {
-        let shape = Capsule()
+        let shape = RoundedRectangle(cornerRadius: 7, style: .continuous)
         if reduceTransparency {
             shape
                 .fill(palette.opaqueChrome)
                 .overlay { shape.stroke(palette.divider, lineWidth: 1) }
+                .frame(width: 14, height: 72)
         } else if #available(iOS 26.0, macOS 26.0, *) {
             Color.clear
+                .frame(width: 14, height: 72)
                 .glassEffect(
-                    .regular.tint(palette.actionAccent.opacity(0.10)),
+                    .regular.interactive(),
                     in: shape
                 )
                 .overlay { shape.stroke(palette.divider, lineWidth: 1) }
@@ -168,7 +207,12 @@ public struct TodayBootstrapView: View {
             shape
                 .fill(palette.opaqueChrome)
                 .overlay { shape.stroke(palette.divider, lineWidth: 1) }
+                .frame(width: 14, height: 72)
         }
+    }
+
+    private var usesAdaptiveNavigation: Bool {
+        dynamicTypeSize.isAccessibilitySize
     }
 
     private var palette: TodayBootstrapPalette {

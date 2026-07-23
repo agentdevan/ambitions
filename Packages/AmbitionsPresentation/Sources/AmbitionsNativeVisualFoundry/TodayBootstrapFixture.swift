@@ -13,7 +13,7 @@ public enum TodayBootstrapFixture {
             "Finish this pass by 4:30 to protect family dinner and the "
             + "evening health walk."
         ),
-        primaryActionTitle: "Open step",
+        primaryActionTitle: "Continue nursery setup",
         timelineTitle: "Today’s Timeline",
         timelineEntries: [
             TodayBootstrapTimelineEntry(
