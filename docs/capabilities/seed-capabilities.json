@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_discovery_input",
+  "owner": "Devan",
+  "captured_on": "2026-07-24",
+  "implementation_assessment": "intentionally_not_assessed",
+  "seeds": [
+    {
+      "seed_id": "SEED-001",
+      "owner_wording": "Skill transference",
+      "proposed_name": "Skill Transference",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-002",
+      "owner_wording": "Unique generative goal pathing based on personal context and learned behaviors",
+      "proposed_name": "Contextual Generative Goal Pathing",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-003",
+      "owner_wording": "Alternate career pathing simulation",
+      "proposed_name": "Alternate Career Path Simulation",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-004",
+      "owner_wording": "Step reflow upon new step placement",
+      "proposed_name": "Step Placement Reflow",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-005",
+      "owner_wording": "Raycast-like Ambitions native search",
+      "proposed_name": "Ambitions Native Search and Command",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation",
+      "note": "Raycast-like is preserved as owner intent and must be translated into durable Ambitions-native behavior rather than copied as product identity."
+    },
+    {
+      "seed_id": "SEED-006",
+      "owner_wording": "First class appearance studio",
+      "proposed_name": "First-Class Appearance Studio",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-007",
+      "owner_wording": "First class content share studio",
+      "proposed_name": "First-Class Content Share Studio",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    },
+    {
+      "seed_id": "SEED-008",
+      "owner_wording": "File storage attached to goals",
+      "proposed_name": "Goal-Attached File Storage",
+      "authority_status": "owner_seed",
+      "specification_maturity": "unframed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed",
+      "disposition": "preserve_for_repository_reconciliation"
+    }
+  ]
+}
