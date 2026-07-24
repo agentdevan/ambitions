@@ -22,6 +22,9 @@ PATH_REFERENCE_PATTERN = re.compile(
 BARE_IDENTIFIER_PATTERN = re.compile(
     r"^[\"'`]?(?:[A-Z][A-Z0-9]*(?:-[A-Z0-9]+){2,}|[a-z][a-z0-9]*(?:[._][a-z0-9]+){2,})[\"'`]?,?$"
 )
+REQUIREMENT_HEADING_PATTERN = re.compile(
+    r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+\s+[—:-]\s+"
+)
 ISSUE_OR_PACKET_PATTERN = re.compile(
     r"^(?:#+\s*)?(?:AMB-\d+|VC-\d+|VSP-\d+|RP-\d+|CEBR-\d+)\b",
     re.IGNORECASE,
@@ -29,6 +32,26 @@ ISSUE_OR_PACKET_PATTERN = re.compile(
 AUDIT_TABLE_PATTERN = re.compile(r"\|.*\|")
 NORMATIVE_CONSTRAINT_PATTERN = re.compile(
     r"\b(?:MUST|MUST NOT|SHALL|SHALL NOT|REQUIRED|FORBIDDEN)\b"
+)
+NORMATIVE_OWNERSHIP_PATTERN = re.compile(
+    r"\b(?:owns?|ownership|distinguishes?|triggers?|classif(?:y|ies)|requires?|"
+    r"transfers?|SHOULD|MUST|MAY|is distinct|are distinct|remains canonical)\b",
+    re.IGNORECASE,
+)
+NON_CAPABILITY_HEADING_PATTERN = re.compile(
+    r"\b(?:requirements?|policy|rules?|law|thresholds?|lineage|correctness|scope|"
+    r"scenario|interop|projection|operations?|authority|ownership|contract|matrix|"
+    r"inventory|gating|tests?)\b",
+    re.IGNORECASE,
+)
+SYSTEM_HEADING_PATTERN = re.compile(
+    r"\b(?:lineage|projection|interop|operations?|adapter|runtime|engine|store|"
+    r"coordinator|service|pipeline|registry)\b",
+    re.IGNORECASE,
+)
+EVIDENCE_HEADING_PATTERN = re.compile(
+    r"\b(?:scenario|matrix|inventory|gating|tests?|acceptance|evidence|proof)\b",
+    re.IGNORECASE,
 )
 GOVERNANCE_OR_DELIVERY_PATTERN = re.compile(
     r"\b(?:acceptance|audit|evidence|proof|gate|packet|dossier|remediation|"
@@ -56,6 +79,7 @@ NORMATIVE_FAMILIES = frozenset(
         "SRC-STANDARDS",
     }
 )
+DECISION_FAMILIES = frozenset({"SRC-ADRS"})
 
 
 def _decision(
@@ -119,6 +143,15 @@ def refine_classification(
             confidence=0.98,
         )
 
+    if REQUIREMENT_HEADING_PATTERN.search(cleaned):
+        return _decision(
+            classification="requirement",
+            qualification_status="supporting",
+            reason_code="requirement_heading_identity",
+            rationale="The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+            confidence=0.98,
+        )
+
     if ISSUE_OR_PACKET_PATTERN.search(cleaned):
         return _decision(
             classification="project",
@@ -163,18 +196,58 @@ def refine_classification(
             confidence=0.7,
         )
 
+    if base.classification == "capability" and evidence.extraction_kind == "capability_heading_hint":
+        if NON_CAPABILITY_HEADING_PATTERN.search(cleaned):
+            if EVIDENCE_HEADING_PATTERN.search(cleaned):
+                classification = "evidence"
+            elif SYSTEM_HEADING_PATTERN.search(cleaned):
+                classification = "system"
+            else:
+                classification = "requirement"
+            return _decision(
+                classification=classification,
+                qualification_status="supporting",
+                reason_code="non_capability_governance_or_mechanism_heading",
+                rationale="The heading names policy, scope, correctness, system mechanism, scenario, or governance rather than durable person-facing value.",
+                confidence=0.9,
+            )
+        if family_id in DECISION_FAMILIES:
+            return _decision(
+                classification="ambiguous",
+                qualification_status="ambiguous",
+                reason_code="decision_heading_requires_product_promise_reconciliation",
+                rationale="The accepted decision heading may imply a capability, but the heading alone does not state the durable person-facing promise.",
+                confidence=0.67,
+            )
+
     if (
         family_id in NORMATIVE_FAMILIES
         and base.classification == "capability"
         and evidence.extraction_kind == "person_facing_promise_hint"
-        and NORMATIVE_CONSTRAINT_PATTERN.search(text)
+        and (
+            NORMATIVE_CONSTRAINT_PATTERN.search(text)
+            or NORMATIVE_OWNERSHIP_PATTERN.search(text)
+        )
     ):
         return _decision(
             classification="requirement",
             qualification_status="supporting",
             reason_code="normative_constraint_not_capability_identity",
-            rationale="The statement is an enforceable MUST/SHALL constraint. It should trace to a capability but is not itself the stable capability identity.",
+            rationale="The statement is an enforceable constraint, ownership law, or behavior rule. It should trace to a capability but is not itself the stable capability identity.",
             confidence=0.88,
+        )
+
+    if (
+        family_id in DECISION_FAMILIES
+        and base.classification == "capability"
+        and NORMATIVE_OWNERSHIP_PATTERN.search(text)
+    ):
+        return _decision(
+            classification="requirement",
+            qualification_status="supporting",
+            reason_code="decision_ownership_or_transfer_rule",
+            rationale="The accepted decision states an ownership, transfer, or interaction rule rather than a durable product capability.",
+            confidence=0.84,
         )
 
     if (
