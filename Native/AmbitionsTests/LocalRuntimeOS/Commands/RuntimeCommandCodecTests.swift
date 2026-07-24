@@ -393,7 +393,7 @@ final class RuntimeCommandCodecTests: XCTestCase {
         XCTAssertEqual(intent.operationIdentityProvenance, .legacyExplicit)
         XCTAssertEqual(intent.displacedDisposition, .notDisplaced)
         XCTAssertEqual(intent.lifeshapeImpact, .recalculatedBeforeCommit)
-        XCTAssertEqual(AmbitionsCommandValidator().validate(command), .valid)
+        XCTAssertEqual(AmbitionsCommandValidator().validate(command), .needsConfirmation)
         let plan = CommandReducer().reduce(command: command, validation: .valid)
         XCTAssertEqual(plan.mutationKind, .runtimeMutation)
         XCTAssertEqual(plan.sideEffectPolicy, .localOnly)
@@ -417,14 +417,14 @@ final class RuntimeCommandCodecTests: XCTestCase {
         XCTAssertNil(intent.operationID)
         XCTAssertEqual(intent.operationIdentityProvenance, .legacyAbsent)
         XCTAssertEqual(intent.scheduleBlockID?.rawValue, "schedule-v1")
-        XCTAssertEqual(AmbitionsCommandValidator().validate(command), .valid)
+        XCTAssertEqual(AmbitionsCommandValidator().validate(command), .needsConfirmation)
         let plan = CommandReducer().reduce(command: command, validation: .valid)
         XCTAssertEqual(plan.mutationKind, .runtimeMutation)
         XCTAssertEqual(plan.sideEffectPolicy, .localOnly)
         XCTAssertThrowsError(try RuntimeCommandCodec().encode(command))
     }
 
-    func testV1CalendarIdentityVariantsExecuteThroughJournalAndPreserveHistoricalMutation() async throws {
+    func testV1CalendarIdentityVariantsRejectBeforeMutationAndPreserveHistoricalIntent() async throws {
         let fixtures: [(label: String, operationID: String?, provenance: CalendarWriteCommandIntent.OperationIdentityProvenance)] = [
             ("explicit", "calendar-operation-v1", .legacyExplicit),
             ("absent", nil, .legacyAbsent),
@@ -469,25 +469,14 @@ final class RuntimeCommandCodecTests: XCTestCase {
                 )
             )
 
-            XCTAssertEqual(result.status, .succeeded)
-            XCTAssertEqual(result.target?.timeID, "legacy-schedule-\(fixture.label)")
-            XCTAssertEqual(result.metadata["calendarOperationIdentityProvenance"], fixture.provenance.rawValue)
-            XCTAssertEqual(result.metadata["externalEffectOperationID"], fixture.operationID)
-            XCTAssertEqual(result.metadata["sourceRecordID"], "SourceRecord.local-schedule.legacy-schedule-\(fixture.label)")
-            XCTAssertEqual(result.metadata["receiptID"], "Receipt.local-schedule.legacy-schedule-\(fixture.label).save")
-
-            let blocks = try loadLocalScheduleBlocks(from: scheduleFileURL)
-            XCTAssertEqual(blocks.count, 1)
-            XCTAssertEqual(blocks.first?.id, "legacy-schedule-\(fixture.label)")
-            XCTAssertEqual(blocks.first?.title, "Legacy text")
-            XCTAssertEqual(blocks.first?.relatedGoalID, "goal-1")
-            XCTAssertEqual(blocks.first?.relatedCaptureID, "capture-1")
-            XCTAssertEqual(blocks.first?.contextLens, .work)
-            XCTAssertEqual(blocks.first?.isUserConfirmed, true)
+            XCTAssertEqual(result.status, .requiresConfirmation)
+            XCTAssertEqual(result.metadata["validation"], AmbitionsCommandValidationState.needsConfirmation.rawValue)
+            XCTAssertFalse(FileManager.default.fileExists(atPath: scheduleFileURL.path))
 
             let entries = try await journal.fetchEntries(matching: .commandID(command.id), limit: nil)
             XCTAssertEqual(entries.count, 1)
             guard let entry = entries.first else { continue }
+            XCTAssertEqual(entry.envelope.phase, .rejectedBeforeMutation)
             XCTAssertTrue(CommandJournalChecksum.isValid(entry))
             let persisted = try JSONDecoder().decode(
                 CommandJournalEntry.self,

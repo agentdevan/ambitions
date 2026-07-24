@@ -20,7 +20,8 @@ extension AmbitionsCommandExecutor {
         scheduleStoreFileURL: URL? = nil,
         todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
         timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil,
-        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil
+        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil,
+        mutationPreparer: (any RuntimeMutationPreparing)? = nil
     ) -> AmbitionsCommandExecutor {
         AmbitionsCommandExecutor(
             captureService: captureService,
@@ -40,7 +41,8 @@ extension AmbitionsCommandExecutor {
             scheduleStoreFileURL: scheduleStoreFileURL,
             todayActionMaterializer: todayActionMaterializer,
             timeRitualActionMaterializer: timeRitualActionMaterializer,
-            captureGoalHandoffMaterializer: captureGoalHandoffMaterializer
+            captureGoalHandoffMaterializer: captureGoalHandoffMaterializer,
+            mutationPreparer: mutationPreparer
         )
     }
 }

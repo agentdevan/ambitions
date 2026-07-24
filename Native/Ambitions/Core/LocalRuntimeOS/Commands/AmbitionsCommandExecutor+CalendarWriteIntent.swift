@@ -3,7 +3,7 @@ import Foundation
 extension AmbitionsCommandExecutor {
     func executeConfirmedCalendarWriteIntent(
         _ command: AmbitionsCommand,
-        context: CommandExecutionContext
+        context _: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
         guard let calendarWrite = command.calendarWriteCommandIntent else {
             return blockedResult(for: .needsMissingTarget, command: command)
@@ -52,83 +52,9 @@ extension AmbitionsCommandExecutor {
             isUserConfirmed: true
         )
 
-        let sourceRecordID = scheduleBlock.localScheduleSourceRecordID
-        do {
-            let scheduleRepository = FileLocalScheduleBlockRepository(fileURL: scheduleStoreURL())
-            _ = try await scheduleRepository.upsertBlock(scheduleBlock)
-        } catch {
-            return AmbitionsCommandExecutionResult(
-                status: .blocked,
-                summary: "Calendar write intent could not be written locally.",
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: [
-                    "blockedBy": "calendar_write_store_error",
-                    "calendarWriteIntent": "true",
-                    "error": String(describing: error)
-                ]
-            )
-        }
-
-        var eventLedgerEntryIDs: [String] = []
-        let scheduleReceiptID = scheduleBlock.localScheduleReceiptID(action: "save")
-        let replayTraceID = scheduleBlock.localScheduleReplayTraceID(action: "save")
-        if context.allowsEventLedgerEmission, let eventLedger {
-            let event = EventLedgerEntry(
-                id: "ledger.schedule.mutation.\(command.id)",
-                kind: .planScheduled,
-                occurredAt: DomainTimestamp.string(from: context.now),
-                source: .plan,
-                goalID: command.target.goalID,
-                captureID: command.target.captureID,
-                planID: command.target.timeID,
-                title: "Schedule mutation recorded",
-                summary: "Time mutation was confirmed and persisted locally.",
-                semanticState: command.operation.rawValue,
-                tone: .neutral,
-                trust: EventLedgerTrustMetadata(
-                    isUserConfirmed: true,
-                    requiresReview: false
-                ),
-                evidenceReferences: [
-                    EventLedgerEvidenceReference(
-                        id: scheduleBlock.id,
-                        kind: .plan,
-                        occurredAt: DomainTimestamp.string(from: context.now),
-                        summary: "schedule block mutation"
-                    )
-                ],
-                metadata: [
-                    "sourceRecordID": sourceRecordID,
-                    "receiptID": scheduleReceiptID,
-                    "replayTraceID": replayTraceID,
-                    "calendarOperationIdentityProvenance": calendarWrite.operationIdentityProvenance.rawValue,
-                    "externalEffectOperationID": calendarWrite.operationID?.rawValue ?? ""
-                ].filter { $0.value.isEmpty == false }
-                    .merging(intent.metadata, uniquingKeysWith: { _, new in new }),
-                payload: [
-                    "receipt": scheduleReceiptID,
-                    "replayTrace": replayTraceID,
-                    "destinationStepID": destinationStepID ?? "",
-                    "originalBlockID": originalBlockID ?? "",
-                    "displacedDisposition": displacedDisposition,
-                    "start": DomainTimestamp.string(from: intent.start),
-                    "end": DomainTimestamp.string(from: intent.end),
-                    "lifeshapeImpact": lifeshapeImpact
-                ].filter { $0.value.isEmpty == false }
-            )
-            do {
-                try await eventLedger.append(event)
-                eventLedgerEntryIDs = [event.id]
-            } catch {
-                // Preserve local safety contract: no mutation without local receipt,
-                // but event projection is best-effort when storage is unavailable.
-            }
-        }
-
         return AmbitionsCommandExecutionResult(
-            status: .succeeded,
-            summary: "Schedule mutation was written locally after confirmation.",
+            status: .noOp,
+            summary: "Calendar mutation was prepared; an accepted runtime authority transaction is still required.",
             target: AmbitionsCommandTarget(
                 goalID: command.target.goalID,
                 captureID: command.target.captureID,
@@ -136,18 +62,16 @@ extension AmbitionsCommandExecutor {
                 stepID: destinationStepID,
                 destination: .time
             ),
-            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            eventLedgerEntryIDs: [],
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
             metadata: [
                 "commandID": command.id,
                 "calendarWriteIntent": "true",
-                "approvalState": "confirmed",
+                "preparationState": "authority_required",
                 "userConfirmed": calendarWrite.userConfirmed ? "true" : "false",
                 "calendarOperationIdentityProvenance": calendarWrite.operationIdentityProvenance.rawValue,
                 "externalEffectOperationID": calendarWrite.operationID?.rawValue ?? "",
-                "sourceRecordID": sourceRecordID,
-                "receiptID": scheduleReceiptID,
-                "replayTraceID": replayTraceID,
+                "proposedScheduleBlockID": scheduleBlock.id,
                 "approvedDurationMinutes": String(intent.approvedDurationMinutes),
                 "originalBlockID": originalBlockID ?? "",
                 "destinationStepID": destinationStepID ?? "",

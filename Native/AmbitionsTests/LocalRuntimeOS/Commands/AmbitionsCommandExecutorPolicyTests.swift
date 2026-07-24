@@ -233,7 +233,7 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
         XCTAssertEqual(unconfirmedResult.status, .requiresConfirmation)
     }
 
-    func testScheduleCalendarWriteIntentWritesAndReceiptsAreRecordedAfterUserConfirmation() async throws {
+    func testScheduleCalendarWriteIntentPreparesWithoutPreCommitFileOrEventWrite() async throws {
         let root = FileManager.default.temporaryDirectory
             .appendingPathComponent("ambitions-calendar-write-tests-\(UUID().uuidString)")
         let fileURL = root.appendingPathComponent("local-schedule-blocks.json")
@@ -286,24 +286,12 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
             context: CommandExecutionContext(now: now, sourceSurface: "time")
         )
 
-        let blocks = try loadLocalScheduleBlocks(from: fileURL)
         let events = try await ledger.fetchRecent(limit: 10)
 
-        XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.summary, "Schedule mutation was written locally after confirmation.")
-        XCTAssertEqual(result.target?.timeID, "schedule-block-1")
-        XCTAssertEqual(result.target?.destination, .time)
-        XCTAssertEqual(result.eventLedgerEntryIDs, ["ledger.schedule.mutation.command-calendar-write-confirmed"])
-        XCTAssertEqual(result.metadata["runtimeTransactionDisposition"], RuntimeTransactionCommitDisposition.committed.rawValue)
-        XCTAssertEqual(result.metadata["runtimeTransactionID"], "runtime.transaction.command-calendar-write-confirmed")
-        XCTAssertNotNil(result.metadata["runtimeEventID"])
-        XCTAssertEqual(result.metadata["runtimeReceiptID"], "runtime.receipt.command-calendar-write-confirmed")
-        XCTAssertEqual(result.metadata["runtimeRollbackPlanID"], "runtime.rollback.command-calendar-write-confirmed")
-        XCTAssertEqual(result.metadata["runtimeReplayTraceID"], "runtime.replay.command-calendar-write-confirmed")
-        XCTAssertEqual(result.metadata["approvalState"], "confirmed")
-        XCTAssertEqual(result.metadata["sourceRecordID"], "SourceRecord.local-schedule.schedule-block-1")
-        XCTAssertEqual(result.metadata["receiptID"], "Receipt.local-schedule.schedule-block-1.save")
-        XCTAssertEqual(result.metadata["replayTraceID"], "ReplayTrace.local-schedule.schedule-block-1.save")
+        XCTAssertEqual(result.status, .requiresConfirmation)
+        XCTAssertEqual(result.target?.timeID, "time-block-preview")
+        XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
+        XCTAssertEqual(result.metadata["validation"], AmbitionsCommandValidationState.needsConfirmation.rawValue)
         XCTAssertEqual(result.metadata["approvedDurationMinutes"], "15")
         XCTAssertEqual(result.metadata["originalBlockID"], "time-block-preview")
         XCTAssertEqual(result.metadata["destinationStepID"], "step-active")
@@ -313,19 +301,8 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
         XCTAssertEqual(result.metadata["originStepPressure"], "4/10")
         XCTAssertEqual(result.metadata["lifeshapeImpact"], "recalculated_before_commit")
 
-        XCTAssertEqual(blocks.count, 1)
-        XCTAssertEqual(blocks.first?.id, "schedule-block-1")
-        XCTAssertEqual(blocks.first?.title, "Draft proposal")
-        XCTAssertEqual(blocks.first?.relatedGoalID, "goal-active")
-        XCTAssertEqual(blocks.first?.relatedCaptureID, "capture-active")
-        XCTAssertEqual(blocks.first?.isUserConfirmed, true)
-        XCTAssertEqual(blocks.first?.start, now)
-        XCTAssertEqual(blocks.first?.end, now.addingTimeInterval(1_200))
-        XCTAssertEqual(blocks.first?.contextLens, .all)
-        XCTAssertEqual(blocks.first?.localScheduleSourceRecordID, "SourceRecord.local-schedule.schedule-block-1")
-        XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(events.first?.id, "ledger.schedule.mutation.command-calendar-write-confirmed")
-        XCTAssertEqual(events.first?.kind, .planScheduled)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: fileURL.path))
+        XCTAssertTrue(events.isEmpty)
 
         let missingMetadata = AmbitionsCommand(
             id: "command-calendar-write-confirmed-missing",
@@ -348,7 +325,7 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
         XCTAssertTrue(missingMetadataResult.eventLedgerEntryIDs.isEmpty)
     }
 
-    func testScheduleCalendarWriteIntentSuccessWithDurationFallsBackToApprovedMinutesWhenEndMissing() async throws {
+    func testScheduleCalendarWritePreparationDerivesDurationWithoutWritingFile() async throws {
         let root = FileManager.default.temporaryDirectory
             .appendingPathComponent("ambitions-calendar-write-tests-duration-\(UUID().uuidString)")
         let fileURL = root.appendingPathComponent("local-schedule-blocks.json")
@@ -377,11 +354,9 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
             context: CommandExecutionContext(now: start)
         )
 
-        let blocks = try loadLocalScheduleBlocks(from: fileURL)
-        XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.metadata["approvedDurationMinutes"], "25")
-        XCTAssertEqual(blocks.first?.end, start.addingTimeInterval(1_500))
-        XCTAssertEqual(blocks.count, 1)
+        XCTAssertEqual(result.status, .requiresConfirmation)
+        XCTAssertEqual(result.metadata["validation"], AmbitionsCommandValidationState.needsConfirmation.rawValue)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: fileURL.path))
     }
 
     func testDataControlCommandsRemainInPolicyDomainWithoutExecution() async {

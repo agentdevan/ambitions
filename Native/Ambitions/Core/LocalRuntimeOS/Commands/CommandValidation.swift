@@ -56,13 +56,18 @@ struct AmbitionsCommandValidator: Sendable {
             case .ritual: return schedule.target.goalID == nil || schedule.target.stepID == nil ? .needsMissingTarget : .valid
             case let .calendarWrite(intent):
                 switch intent.operationIdentityProvenance {
-                case .currentRequired, .legacyExplicit:
+                case .currentRequired:
+                    guard intent.operationID != nil else { return .blockedByMissingFoundation }
+                    return .needsConfirmation
+                case .legacyExplicit:
                     guard intent.operationID != nil else { return .blockedByMissingFoundation }
                 case .legacyAbsent:
                     guard intent.operationID == nil else { return .invalid }
                 }
-                guard intent.userConfirmed else { return .needsConfirmation }
-                return schedule.target.captureID == nil && schedule.target.timeID == nil && schedule.content.primaryText == nil ? .needsMissingTarget : .valid
+                guard schedule.target.captureID != nil || schedule.target.timeID != nil || schedule.content.primaryText != nil else {
+                    return .needsMissingTarget
+                }
+                return .needsConfirmation
             }
         case let .reminder(reminder):
             switch reminder.action {

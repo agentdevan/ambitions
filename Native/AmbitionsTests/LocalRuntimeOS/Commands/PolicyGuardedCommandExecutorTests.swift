@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class PolicyGuardedCommandExecutorTests: XCTestCase {
-    func testExternalSurfaceMutationIsRecordedAndNotDelegated() async throws {
+    func testExternalSurfaceMutationIsPreparedWithoutPreAuthorityLedgerArtifact() async throws {
         let counter = ExecutionCounter()
         let base = RecordingCommandExecutor(counter: counter)
         let ledger = InMemorySideEffectLedgerRepository()
@@ -25,17 +25,15 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.status, .requiresConfirmation)
         XCTAssertEqual(result.metadata["guardedBy"], "side_effect_policy")
         XCTAssertEqual(result.metadata["permissionLevel"], SafeAutomationPermissionLevel.requiresConfirmation.rawValue)
+        XCTAssertEqual(result.metadata["sideEffectLedgerStatus"], "deferred_until_authority_acceptance")
         let executionCount = await counter.value()
         XCTAssertEqual(executionCount, 0)
 
         let records = try await ledger.fetchRecent(limit: 10)
-        XCTAssertEqual(records.count, 1)
-        XCTAssertEqual(records.first?.commandID, "command-widget-archive")
-        XCTAssertEqual(records.first?.status, .confirmationRequired)
-        XCTAssertEqual(records.first?.boundary, .externalEffect)
+        XCTAssertTrue(records.isEmpty)
     }
 
-    func testLocalReversibleMutationIsRecordedThenDelegated() async throws {
+    func testLocalReversibleMutationDelegatesWithoutPreAuthorityLedgerArtifact() async throws {
         let counter = ExecutionCounter()
         let base = RecordingCommandExecutor(counter: counter)
         let ledger = InMemorySideEffectLedgerRepository()
@@ -59,9 +57,7 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
         XCTAssertEqual(executionCount, 1)
 
         let records = try await ledger.fetchRecent(limit: 10)
-        XCTAssertEqual(records.first?.status, .recordedLocalOnly)
-        XCTAssertEqual(records.first?.boundary, .localOnly)
-        XCTAssertEqual(records.first?.mayExecuteWithoutUserConfirmation, true)
+        XCTAssertTrue(records.isEmpty)
     }
 
     func testDataControlCommandsNeverExecuteWithoutReviewAndDoNotMutateState() async throws {
@@ -114,10 +110,6 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
             context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_778_000_300))
         )
         let records = try await ledger.fetchRecent(limit: 10)
-        let prepareRecord = records.first(where: { $0.commandID == "command-prepare-export" })
-        let performRecord = records.first(where: { $0.commandID == "command-perform-export" })
-        let deleteRecord = records.first(where: { $0.commandID == "command-delete-object" })
-        let forgetRecord = records.first(where: { $0.commandID == "command-forget-memory" })
 
         XCTAssertEqual(prepareResult.status, .noOp)
         XCTAssertEqual(performResult.status, .requiresConfirmation)
@@ -125,11 +117,7 @@ final class PolicyGuardedCommandExecutorTests: XCTestCase {
         XCTAssertEqual(forgetResult.status, .blocked)
         let executionCount = await counter.value()
         XCTAssertEqual(executionCount, 0)
-        XCTAssertEqual(records.count, 4)
-        XCTAssertEqual(prepareRecord?.status, .preparedDraft)
-        XCTAssertEqual(performRecord?.status, .confirmationRequired)
-        XCTAssertEqual(deleteRecord?.status, .failedSafely)
-        XCTAssertEqual(forgetRecord?.status, .failedSafely)
+        XCTAssertTrue(records.isEmpty)
     }
 
     func testAutomaticProtectedPlacementInsideSevenDaysIsNotDelegated() async throws {

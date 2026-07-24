@@ -43,6 +43,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let todayActionMaterializer: (any TodayGoalStepActionMaterializing)?
     let timeRitualActionMaterializer: (any TimeRitualActionMaterializing)?
     let captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)?
+    let mutationPreparer: (any RuntimeMutationPreparing)?
 
     init(
         captureService: (any CaptureServicing)? = nil,
@@ -62,7 +63,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         scheduleStoreFileURL: URL? = nil,
         todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
         timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil,
-        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil
+        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil,
+        mutationPreparer: (any RuntimeMutationPreparing)? = nil
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
@@ -82,6 +84,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.todayActionMaterializer = todayActionMaterializer
         self.timeRitualActionMaterializer = timeRitualActionMaterializer
         self.captureGoalHandoffMaterializer = captureGoalHandoffMaterializer
+        self.mutationPreparer = mutationPreparer
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
@@ -92,6 +95,9 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
+        if let mutationPreparer {
+            return await PreparedMutationCommandExecutor(preparer: mutationPreparer).execute(command, context: context)
+        }
         let replayAdapter = RuntimeEventCommandReplayAdapter(
             runtimeEvents: runtimeEvents,
             commandExecutionRecords: commandExecutionRecords

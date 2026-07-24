@@ -183,7 +183,7 @@ struct CommandReducer: Sendable {
         case .readOnlyInspect:
             return .none
         case .externalSideEffect:
-            return command.calendarWriteCommandIntent?.userConfirmed == true ? .outboxRequired : .requiresUserConfirmation
+            return .requiresUserConfirmation
         case .export, .destructive:
             return .requiresUserConfirmation
         case .runtimeMutation:
@@ -198,8 +198,6 @@ struct CommandReducer: Sendable {
         mutationKind: CommandMutationKind
     ) -> CommandRequiredConfirmation {
         switch mutationKind {
-        case .externalSideEffect where command.calendarWriteCommandIntent?.userConfirmed == true:
-            return .alreadyConfirmed
         case .externalSideEffect, .export, .destructive:
             return .requiredBeforeMutation
         case .readOnlyInspect, .runtimeMutation, .unsupported:
