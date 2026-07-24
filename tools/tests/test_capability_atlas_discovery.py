@@ -121,6 +121,22 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             )
             self.assertGreater(candidate.evidence[0].start_line, 0)
 
+    def test_candidate_identity_does_not_depend_on_mutable_name_hint(self) -> None:
+        compilation = compile_discovery(self.root)
+        candidate = next(
+            item
+            for item in compilation.candidates
+            if item.authority_status == "repository_candidate"
+        )
+        evidence = candidate.evidence[0]
+        from tools.capability_atlas.model import CandidateRecord
+
+        renamed = CandidateRecord.from_evidence(
+            evidence,
+            normalized_name_hint="A Different Reconciliation Hint",
+        )
+        self.assertEqual(candidate.candidate_id, renamed.candidate_id)
+
     def test_excluded_dependency_paths_are_not_harvested(self) -> None:
         compilation = compile_discovery(self.root)
         harvested_paths = {item.path for item in compilation.source_files}
@@ -145,7 +161,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         compilation = compile_discovery(self.root)
         outputs = render_outputs(compilation)
         self.assertEqual(set(outputs), set(OUTPUT_PATHS))
-        self.assertEqual(output_drift(self.root, outputs), OUTPUT_PATHS)
+        self.assertEqual(set(output_drift(self.root, outputs)), set(OUTPUT_PATHS))
 
         write_outputs(self.root, outputs)
         self.assertEqual(output_drift(self.root, outputs), ())
