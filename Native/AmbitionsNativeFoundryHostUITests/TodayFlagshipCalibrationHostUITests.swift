@@ -13,7 +13,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         launch("tfcs-f01")
 
         let crown = todayCrown()
-        let startHere = element("tfcs-start-here")
+        let startHere = element("tfcs-start-here-object")
         let primaryAction = element("tfcs-open-start-here")
         let timeline = element("tfcs-timeline")
         let dock = app.buttons["Open global navigation"]
@@ -27,7 +27,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         primaryAction.tap()
         XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 3))
-        XCTAssertTrue(element("tfcs-step-identity").exists)
+        XCTAssertTrue(element("tfcs-focused-object-field").exists)
         XCTAssertTrue(element("tfcs-current-truth").exists)
     }
 
@@ -101,7 +101,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         returnToToday.tap()
 
         XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 3))
-        XCTAssertTrue(element("tfcs-start-here").exists)
+        XCTAssertTrue(element("tfcs-start-here-object").exists)
         XCTAssertTrue(app.buttons["Open global navigation"].exists)
     }
 
@@ -225,6 +225,76 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         continueChoice.tap()
         XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 3))
         XCTAssertFalse(element("tfcs-settled-truth").exists)
+    }
+
+    func testB01RootExposesOneArticulatedStartHereTimelineAndIntentionalShellPeek() {
+        launch("tfcs-f01")
+
+        let startHereObject = element("tfcs-start-here-object")
+        let action = element("tfcs-open-start-here")
+        let timeline = element("tfcs-timeline")
+        let firstTimelineRow = element("tfcs-timeline-row-step.nursery-paint-sample")
+        let dockPeek = app.buttons["Open global navigation"]
+
+        assertExists([startHereObject, action, timeline, firstTimelineRow, dockPeek])
+        XCTAssertEqual(
+            app.descendants(matching: .any)
+                .matching(identifier: "tfcs-start-here-object").count,
+            1
+        )
+        XCTAssertLessThan(startHereObject.frame.minY, firstTimelineRow.frame.minY)
+        XCTAssertTrue(action.isHittable)
+        assertMinimumTarget(action)
+        assertMinimumTarget(dockPeek)
+        XCTAssertTrue(firstTimelineRow.label.contains("Paint the nursery sample"))
+        XCTAssertTrue(firstTimelineRow.label.contains("10:30 AM"))
+        XCTAssertTrue(firstTimelineRow.label.contains("Ready now"))
+        XCTAssertFalse(app.tabBars.firstMatch.exists)
+    }
+
+    func testB01FocusedReviewSettlementAndRecoveryExposeSharedObjectGrammar() {
+        launch("tfcs-f06")
+
+        let focusedField = element("tfcs-focused-object-field")
+        assertExists([focusedField, element("tfcs-current-truth")])
+        XCTAssertTrue(focusedField.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(focusedField.label.contains("Welcome our baby home"))
+        XCTAssertEqual(app.buttons.matching(identifier: "tfcs-select-still-counts").count, 1)
+
+        element("tfcs-select-still-counts").tap()
+        let comparison = element("tfcs-review-comparison")
+        assertExists([
+            comparison,
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth"),
+            element("tfcs-commit-still-counts")
+        ])
+        XCTAssertNotEqual(
+            element("tfcs-review-current-truth").label,
+            element("tfcs-proposed-truth").label
+        )
+
+        app.terminate()
+        launch("tfcs-f08")
+        assertExists([
+            element("tfcs-settlement-field"),
+            element("tfcs-recorded-acknowledgment"),
+            element("tfcs-return-to-today")
+        ])
+
+        app.terminate()
+        launch("tfcs-f10")
+        let recoveryField = element("tfcs-recovery-progress-field")
+        assertExists([
+            recoveryField,
+            element("recovery.continue-saved-progress"),
+            element("recovery.keep-step")
+        ])
+        XCTAssertTrue(
+            app.staticTexts[
+                "Cleared the crib corner and kept the paint sample decision."
+            ].exists
+        )
     }
 
     private func launch(_ variant: String) {

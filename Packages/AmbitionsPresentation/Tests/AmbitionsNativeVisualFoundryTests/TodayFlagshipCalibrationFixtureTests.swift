@@ -242,6 +242,32 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
     }
 
+    func testB01SourceDeclaresArticulatedSemanticAnatomyWithoutObsoleteShellControls() throws {
+        let visibleViews = try primaryViewSource()
+
+        let requiredSemanticIdentifiers = [
+            "tfcs-start-here-object",
+            "tfcs-timeline-row-",
+            "tfcs-dock-shell-peek",
+            "tfcs-focused-object-field",
+            "tfcs-review-comparison",
+            "tfcs-settlement-field",
+            "tfcs-recovery-progress-field"
+        ]
+        for identifier in requiredSemanticIdentifiers {
+            XCTAssertTrue(
+                visibleViews.contains(identifier),
+                "B01 semantic anatomy is missing \(identifier)"
+            )
+        }
+
+        XCTAssertFalse(visibleViews.contains("TabView("))
+        XCTAssertFalse(visibleViews.contains("case inbox"))
+        XCTAssertFalse(visibleViews.contains("case calendar"))
+        XCTAssertFalse(visibleViews.contains("Search in crown"))
+        XCTAssertFalse(visibleViews.contains("Capture in crown"))
+    }
+
     private func primaryViewSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
@@ -250,8 +276,10 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         let sourceRoot = packageRoot
             .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
         let files = [
+            "TodayFlagshipArticulatedAnatomy.swift",
             "TodayFlagshipCalibrationView.swift",
             "TodayFlagshipFocusedStepView.swift",
+            "TodayFlagshipNavigationChrome.swift",
             "TodayFlagshipRecoveryReviewView.swift",
             "TodayFlagshipReviewView.swift"
         ]
