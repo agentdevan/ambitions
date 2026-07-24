@@ -21,7 +21,9 @@
         "docs/canon/MANIFEST.toml"
       ],
       "authority_class": "normative_or_authority_control",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 3,
+      "extracted_candidate_count": 30
     },
     {
       "id": "SRC-NORMATIVE-SPECS",
@@ -30,7 +32,9 @@
         "docs/canon/specifications/**/*.md"
       ],
       "authority_class": "normative",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 57,
+      "extracted_candidate_count": 788
     },
     {
       "id": "SRC-STANDARDS",
@@ -39,7 +43,9 @@
         "docs/canon/standards/**/*.md"
       ],
       "authority_class": "normative_constraint",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 8,
+      "extracted_candidate_count": 22
     },
     {
       "id": "SRC-DESIGN-CANON",
@@ -50,7 +56,9 @@
         "docs/design/provenance/**/*"
       ],
       "authority_class": "mixed_reference_and_closed_design_input",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 52,
+      "extracted_candidate_count": 1150
     },
     {
       "id": "SRC-ADRS",
@@ -59,7 +67,9 @@
         "docs/adr/**/*.md"
       ],
       "authority_class": "accepted_decision",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 8,
+      "extracted_candidate_count": 31
     },
     {
       "id": "SRC-RESEARCH",
@@ -70,7 +80,10 @@
         "docs/invention/**/*"
       ],
       "authority_class": "research_or_reference",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 4,
+      "extracted_candidate_count": 8,
+      "coverage_note": "Text sources were harvested. One DOCX package remains represented through its adjacent Markdown, YAML, and README sources and is recorded as an unsupported direct-text input."
     },
     {
       "id": "SRC-AUDITS",
@@ -79,7 +92,9 @@
         "docs/audits/**/*"
       ],
       "authority_class": "audit_evidence",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 117,
+      "extracted_candidate_count": 306
     },
     {
       "id": "SRC-QA-REMEDIATION",
@@ -88,7 +103,10 @@
         "docs/qa/**/*"
       ],
       "authority_class": "mixed_operational_evidence",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 927,
+      "extracted_candidate_count": 352,
+      "coverage_note": "All eligible text sources were harvested. Binary screenshots and other non-text proof assets are fingerprint-excluded from semantic extraction and remain listed in discovery-coverage.json."
     },
     {
       "id": "SRC-LINEAR-MIRRORS",
@@ -97,7 +115,9 @@
         "docs/linear/**/*"
       ],
       "authority_class": "planning_and_traceability_evidence",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 4,
+      "extracted_candidate_count": 40
     },
     {
       "id": "SRC-PLATFORM",
@@ -106,7 +126,9 @@
         "docs/platform/**/*"
       ],
       "authority_class": "platform_reference",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 5,
+      "extracted_candidate_count": 14
     },
     {
       "id": "SRC-PRODUCTION",
@@ -116,7 +138,9 @@
         "Sources/**/*.swift"
       ],
       "authority_class": "implementation_evidence_only",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 1803,
+      "extracted_candidate_count": 304
     },
     {
       "id": "SRC-TESTS",
@@ -128,7 +152,9 @@
         "scripts/**/*test*"
       ],
       "authority_class": "verification_evidence_only",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 584,
+      "extracted_candidate_count": 114
     },
     {
       "id": "SRC-HISTORICAL",
@@ -141,7 +167,9 @@
         "docs/superpowers/plans/**/*"
       ],
       "authority_class": "historical_evidence_only",
-      "status": "pending"
+      "status": "covered",
+      "harvested_path_count": 4,
+      "extracted_candidate_count": 6
     },
     {
       "id": "SRC-OWNER-SEEDS",
@@ -151,6 +179,8 @@
       ],
       "authority_class": "owner_seed_non_normative",
       "status": "covered",
+      "harvested_path_count": 1,
+      "extracted_candidate_count": 8,
       "coverage_note": "Eight seeds preserved on 2026-07-24 before repository reconciliation."
     }
   ]
