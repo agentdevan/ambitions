@@ -327,6 +327,7 @@ public struct TodayFlagshipStepSnapshot: Equatable, Identifiable, Sendable {
     public let currentAcceptedTruth: String
     public let whyItFitsNow: String
     public let materialConsequence: String
+    public let startHereSummary: String
     public let temporalContext: TodayFlagshipTemporalContext
     public let primaryActionTitle: String
     public let stillCountsProposal: TodayFlagshipStillCountsProposal
@@ -339,6 +340,7 @@ public struct TodayFlagshipStepSnapshot: Equatable, Identifiable, Sendable {
         currentAcceptedTruth: String,
         whyItFitsNow: String,
         materialConsequence: String,
+        startHereSummary: String,
         temporalContext: TodayFlagshipTemporalContext,
         primaryActionTitle: String,
         stillCountsProposal: TodayFlagshipStillCountsProposal
@@ -350,6 +352,7 @@ public struct TodayFlagshipStepSnapshot: Equatable, Identifiable, Sendable {
         self.currentAcceptedTruth = currentAcceptedTruth
         self.whyItFitsNow = whyItFitsNow
         self.materialConsequence = materialConsequence
+        self.startHereSummary = startHereSummary
         self.temporalContext = temporalContext
         self.primaryActionTitle = primaryActionTitle
         self.stillCountsProposal = stillCountsProposal
@@ -365,6 +368,7 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
     public let acceptedState: String
     public let isProtected: Bool
     public let isFixed: Bool
+    public let isOpenLane: Bool
 
     public init(
         id: String,
@@ -374,7 +378,8 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
         relationship: String,
         acceptedState: String,
         isProtected: Bool = false,
-        isFixed: Bool = false
+        isFixed: Bool = false,
+        isOpenLane: Bool = false
     ) {
         self.id = id
         self.canonicalObjectID = canonicalObjectID
@@ -384,6 +389,7 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
         self.acceptedState = acceptedState
         self.isProtected = isProtected
         self.isFixed = isFixed
+        self.isOpenLane = isOpenLane
     }
 }
 

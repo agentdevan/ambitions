@@ -33,6 +33,7 @@ public enum TodayFlagshipCalibrationFixture {
             currentAcceptedTruth: "The corner is cleared and the paint sample is chosen.",
             whyItFitsNow: "This is the smallest useful step before protected family time.",
             materialConsequence: "It keeps the room moving without taking over the evening.",
+            startHereSummary: "A small move now keeps the nursery moving and family time protected.",
             temporalContext: TodayFlagshipTemporalContext(
                 exactTime: "4:30 PM",
                 relationship: "Before family time",
@@ -51,6 +52,7 @@ public enum TodayFlagshipCalibrationFixture {
             currentAcceptedTruth: "The brief is drafted and waiting for one final read.",
             whyItFitsNow: "The nursery progress is recorded and the 2:00 PM handoff is next.",
             materialConsequence: "Sending it protects the work promise without entering family time.",
+            startHereSummary: "One final read protects the work promise before family time.",
             temporalContext: TodayFlagshipTemporalContext(
                 exactTime: "2:00 PM",
                 relationship: "Fixed work handoff",
@@ -407,6 +409,7 @@ private extension TodayFlagshipCalibrationFixture {
                 "تحافظ هذه الخطوة الهادئة على تقدّم تجهيز الغرفة من دون أن تستحوذ على المساء، "
                     + "وتترك وقت العائلة والمشي الصحي كما خُطّط لهما."
             ),
+            startHereSummary: "خطوة صغيرة الآن تحافظ على تقدّم الغرفة ووقت العائلة المحمي.",
             temporalContext: TodayFlagshipTemporalContext(
                 exactTime: localizedTime(hour: 16, minute: 30),
                 relationship: "قبل وقت العائلة",
@@ -423,6 +426,7 @@ private extension TodayFlagshipCalibrationFixture {
             currentAcceptedTruth: "الموجز مكتوب وينتظر مراجعة أخيرة.",
             whyItFitsNow: "سُجّل تقدّم الغرفة، والتسليم التالي في الموعد المحدد.",
             materialConsequence: "إرساله يحمي وعد العمل من دون أن يدخل في وقت العائلة.",
+            startHereSummary: "مراجعة أخيرة تحمي وعد العمل قبل وقت العائلة.",
             temporalContext: TodayFlagshipTemporalContext(
                 exactTime: localizedTime(hour: 14, minute: 0),
                 relationship: "لاحقًا اليوم",

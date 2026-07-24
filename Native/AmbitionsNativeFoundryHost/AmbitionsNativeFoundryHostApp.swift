@@ -143,6 +143,10 @@ private enum FoundryVariant: String {
     case journeyAccessibility = "tfcs-j03"
     case journeyInterruptedManual = "tfcs-j02-manual"
     case journeyAccessibilityManual = "tfcs-j03-manual"
+    case b02RootLight = "b02-root-light"
+    case b02RootDark = "b02-root-dark"
+    case b02RootCompact = "b02-root-compact"
+    case b02RootProMax = "b02-root-pro-max"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -164,7 +168,7 @@ private enum FoundryVariant: String {
     }
 
     var colorScheme: ColorScheme {
-        self == .typicalLight || self == .tfcsF01 ? .light : .dark
+        self == .typicalLight || self == .tfcsF01 || self == .b02RootLight ? .light : .dark
     }
 
     var dynamicTypeSize: DynamicTypeSize {

@@ -49,6 +49,16 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("B02 Root · Compact iPhone · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Root · Pro Max · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
+        .preferredColorScheme(.dark)
+}
+
 #Preview("TFCS-F04 · Dock expanded · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayInitial,

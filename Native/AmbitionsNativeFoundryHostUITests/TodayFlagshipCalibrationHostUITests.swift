@@ -36,7 +36,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         let crown = todayCrown()
         let dock = element("tfcs-dock-shell-peek")
-        let crownY = crown.frame.minY
+        let crownFrame = crown.frame
+        let dockFrame = dock.frame
         let startHere = element("tfcs-start-here-object")
         let startHereY = startHere.frame.minY
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
@@ -49,8 +50,10 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
             thenHoldForDuration: 0.15
         )
 
-        XCTAssertEqual(crown.frame.minY, crownY, accuracy: 1)
+        XCTAssertEqual(crown.label, "Today")
+        XCTAssertLessThan(crown.frame.height, crownFrame.height)
         XCTAssertTrue(dock.exists)
+        XCTAssertEqual(dock.frame.minY, dockFrame.minY, accuracy: 1)
         XCTAssertLessThan(startHere.frame.minY, startHereY - 5)
         XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].isHittable)
         let timelineTitle = app.staticTexts["Today’s Timeline"]
@@ -235,7 +238,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let startHereObject = element("tfcs-start-here-object")
         let action = element("tfcs-open-start-here")
         let timeline = element("tfcs-timeline")
-        let firstTimelineRow = element("tfcs-timeline-row-step.nursery-paint-sample")
+        let firstTimelineRow = element("tfcs-overview-row-step.nursery-paint-sample")
         let dockPeek = element("tfcs-dock-shell-peek")
 
         assertExists([startHereObject, action, timeline, firstTimelineRow, dockPeek])
@@ -438,6 +441,42 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(shellSource.contains(".frame(width: 14, height: 52)"))
         XCTAssertTrue(shellSource.contains("Image(systemName: \"sun.max.fill\")"))
         XCTAssertTrue(shellSource.contains(".frame(width: 44, height: 64)"))
+    }
+
+    func testB02RootUsesOneStartHereAndThreeTruthfulOverviewAnchors() {
+        launch("tfcs-f01")
+
+        let startHere = element("tfcs-start-here-object")
+        let action = element("tfcs-open-start-here")
+        let overview = element("tfcs-today-overview")
+        let firstAnchor = element("tfcs-overview-row-step.nursery-paint-sample")
+        let dock = element("tfcs-dock-shell-peek")
+
+        assertExists([startHere, action, overview, firstAnchor, dock])
+        XCTAssertEqual(
+            app.descendants(matching: .any)
+                .matching(identifier: "tfcs-start-here-object").count,
+            1
+        )
+        XCTAssertTrue(startHere.value as? String == "Now")
+        XCTAssertTrue(action.isHittable)
+        XCTAssertTrue(firstAnchor.isHittable)
+        assertMinimumTarget(action)
+        assertMinimumTarget(dock)
+
+        let overviewRows = overview.descendants(matching: .any)
+            .allElementsBoundByIndex
+            .filter { $0.identifier.hasPrefix("tfcs-overview-row-") }
+        XCTAssertEqual(overviewRows.count, 3)
+        XCTAssertFalse(
+            overviewRows.contains {
+                $0.identifier.contains("step.nursery-ready-for-crib")
+            }
+        )
+        XCTAssertLessThan(startHere.frame.minY, firstAnchor.frame.minY)
+        XCTAssertFalse(app.buttons["Search"].exists)
+        XCTAssertFalse(app.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.firstMatch.exists)
     }
 
     func testB02OwnedJourneyViewsUseFixtureCopyInsteadOfLiteralProductStrings() throws {

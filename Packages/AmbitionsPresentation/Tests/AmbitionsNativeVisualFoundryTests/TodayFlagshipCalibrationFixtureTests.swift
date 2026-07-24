@@ -304,6 +304,100 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertFalse(grammarSources.contains("let differentiateWithoutColor"))
     }
 
+    func testB02OverviewSelectionIsDeterministicAndBounded() throws {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let overview = todayOverviewObjects(
+            content: fixture,
+            visibleStartHereID: fixture.primaryStep.id
+        )
+
+        XCTAssertLessThanOrEqual(overview.count, 4)
+        XCTAssertEqual(overview.count, 3)
+        XCTAssertFalse(
+            overview.contains { $0.canonicalObjectID == fixture.primaryStep.id }
+        )
+        XCTAssertEqual(
+            Set(overview.map(\.id)),
+            Set([
+                "timeline.work-launch-brief",
+                "timeline.family-prenatal-walk",
+                "timeline.nursery-paint-sample"
+            ])
+        )
+        XCTAssertEqual(
+            overview.map(\.id),
+            fixture.timeline.filter {
+                Set([
+                    "timeline.work-launch-brief",
+                    "timeline.family-prenatal-walk",
+                    "timeline.nursery-paint-sample"
+                ]).contains($0.id)
+            }.map(\.id),
+            "Selected anchors preserve fixture chronology after deterministic priority selection"
+        )
+        XCTAssertEqual(overview.filter(\.isFixed).count, 1)
+        XCTAssertEqual(overview.filter(\.isProtected).count, 1)
+
+        let denseOverview = todayOverviewObjects(
+            content: fixture.denseToday,
+            visibleStartHereID: fixture.primaryStep.id
+        )
+        XCTAssertLessThanOrEqual(denseOverview.count, 4)
+        XCTAssertEqual(denseOverview.filter(\.isFixed).count, 1)
+        XCTAssertEqual(denseOverview.filter(\.isProtected).count, 1)
+
+        let duplicateCanonicalObject = TodayFlagshipTimelineObject(
+            id: "timeline.work-launch-brief-projection",
+            canonicalObjectID: "step.send-launch-brief",
+            objectTitle: "Launch brief continuity projection",
+            timeLabel: "2:05 PM",
+            relationship: "Same canonical work commitment",
+            acceptedState: "Fixed",
+            isFixed: true
+        )
+        let duplicateContent = fixture.replacingTimeline(
+            fixture.timeline + [duplicateCanonicalObject]
+        )
+        let deDuplicatedOverview = todayOverviewObjects(
+            content: duplicateContent,
+            visibleStartHereID: fixture.primaryStep.id
+        )
+        XCTAssertEqual(
+            deDuplicatedOverview.filter {
+                $0.canonicalObjectID == duplicateCanonicalObject.canonicalObjectID
+            }.count,
+            1,
+            "Overview selection de-duplicates multiple projections of one canonical object"
+        )
+
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let sourceRoot = packageRoot
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let rootSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityRoot.swift"),
+            encoding: .utf8
+        )
+        let timelineSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityTimeline.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(rootSource.components(separatedBy: "ScrollView {").count - 1, 1)
+        XCTAssertFalse(timelineSource.contains("ScrollView"))
+        XCTAssertFalse(rootSource.contains("content.timeline"))
+        XCTAssertFalse(rootSource.contains("TodayFlagshipNavigationCommand.search"))
+        XCTAssertFalse(rootSource.contains("TodayFlagshipNavigationCommand.capture"))
+        XCTAssertTrue(rootSource.contains(".onScrollGeometryChange"))
+        XCTAssertTrue(rootSource.contains("onCrownScrollProgress"))
+        XCTAssertTrue(timelineSource.contains(".lineLimit(1)"))
+        XCTAssertTrue(timelineSource.contains(".fixedSize(horizontal: true"))
+        XCTAssertTrue(timelineSource.contains("ViewThatFits(in: .horizontal)"))
+        XCTAssertTrue(timelineSource.contains(".lineLimit(2)"))
+    }
+
     private func primaryViewSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
@@ -314,6 +408,8 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         let files = [
             "TodayFlagshipArticulatedAnatomy.swift",
             "TodayFlagshipCalibrationView.swift",
+            "TodayOpenContinuityRoot.swift",
+            "TodayOpenContinuityTimeline.swift",
             "TodayFlagshipFocusedStepView.swift",
             "TodayFlagshipNavigationChrome.swift",
             "TodayFlagshipRecoveryReviewView.swift",
@@ -325,5 +421,22 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
                 encoding: .utf8
             )
         }.joined(separator: "\n")
+    }
+}
+
+private extension TodayFlagshipCalibrationContent {
+    func replacingTimeline(_ timeline: [TodayFlagshipTimelineObject]) -> Self {
+        Self(
+            familyID: familyID,
+            isSynthetic: isSynthetic,
+            interfaceCopy: interfaceCopy,
+            presentContext: presentContext,
+            primaryStep: primaryStep,
+            revealedStartHereStep: revealedStartHereStep,
+            timeline: timeline,
+            receipt: receipt,
+            returnContract: returnContract,
+            recovery: recovery
+        )
     }
 }
