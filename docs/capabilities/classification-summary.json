@@ -1,0 +1,114 @@
+{
+  "authority": "non_normative_phase_b_classification_summary",
+  "baseline_ref": "main",
+  "classification_counts": {
+    "ambiguous": 298,
+    "behavior": 95,
+    "capability": 13,
+    "design_language": 6,
+    "evidence": 2179,
+    "implementation": 163,
+    "object": 21,
+    "project": 30,
+    "requirement": 347,
+    "system": 23
+  },
+  "classification_method": "deterministic_rule_based_preserving_uncertainty",
+  "qualification_counts": {
+    "ambiguous": 298,
+    "qualified": 13,
+    "supporting": 2864
+  },
+  "reason_counts": {
+    "bare_identifier_reference": 310,
+    "bounded_user_interaction_or_state_change": 95,
+    "canonical_object_identity": 21,
+    "capability_claim_in_operational_evidence": 40,
+    "capability_governance_heading": 19,
+    "capability_like_evidence_requires_authority_source": 50,
+    "decision_fragment_requires_semantic_reconciliation": 1,
+    "decision_heading_requires_product_promise_reconciliation": 1,
+    "decision_ownership_or_transfer_rule": 2,
+    "delivery_or_review_container": 8,
+    "design_expression_without_product_promise": 2,
+    "design_implied_capability_requires_product_authority": 19,
+    "direct_owner_seed": 8,
+    "durable_person_facing_promise": 5,
+    "enabling_system_without_product_promise": 12,
+    "evidence_or_validation_record": 117,
+    "file_or_artifact_reference": 107,
+    "governance_or_delivery_claim": 7,
+    "historical_planning_source": 1,
+    "implementation_evidence_source": 153,
+    "insufficient_durable_promise_evidence": 227,
+    "issue_packet_or_campaign_reference": 21,
+    "machine_metadata_or_command": 1413,
+    "mechanism_or_architecture_record": 15,
+    "non_capability_governance_or_mechanism_heading": 11,
+    "normative_behavior_constraint": 85,
+    "normative_constraint_not_capability_identity": 47,
+    "operational_table_or_acceptance_row": 86,
+    "requirement_heading_identity": 204,
+    "scope_statement_not_capability": 1,
+    "system_specification_identity": 3,
+    "test_evidence_source": 80,
+    "visual_or_interaction_expression": 4
+  },
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "source_family_qualification_counts": {
+    "SRC-ADRS": {
+      "ambiguous": 9,
+      "supporting": 22
+    },
+    "SRC-AUDITS": {
+      "ambiguous": 50,
+      "supporting": 256
+    },
+    "SRC-CONSTITUTION": {
+      "ambiguous": 1,
+      "supporting": 29
+    },
+    "SRC-DESIGN-CANON": {
+      "ambiguous": 61,
+      "supporting": 1089
+    },
+    "SRC-HISTORICAL": {
+      "supporting": 6
+    },
+    "SRC-LINEAR-MIRRORS": {
+      "ambiguous": 5,
+      "supporting": 35
+    },
+    "SRC-NORMATIVE-SPECS": {
+      "ambiguous": 11,
+      "qualified": 5,
+      "supporting": 772
+    },
+    "SRC-OWNER-SEEDS": {
+      "qualified": 8
+    },
+    "SRC-PLATFORM": {
+      "ambiguous": 4,
+      "supporting": 10
+    },
+    "SRC-PRODUCTION": {
+      "supporting": 304
+    },
+    "SRC-QA-REMEDIATION": {
+      "ambiguous": 155,
+      "supporting": 197
+    },
+    "SRC-RESEARCH": {
+      "ambiguous": 2,
+      "supporting": 6
+    },
+    "SRC-STANDARDS": {
+      "supporting": 22
+    },
+    "SRC-TESTS": {
+      "supporting": 116
+    }
+  },
+  "total_candidates": 3175
+}

@@ -1739,11 +1739,11 @@
     },
     {
       "authority_class": "verification_evidence_only",
-      "byte_count": 8325,
+      "byte_count": 12645,
       "family_id": "SRC-TESTS",
-      "line_count": 198,
+      "line_count": 296,
       "path": "tools/tests/test_capability_atlas_discovery.py",
-      "sha256": "c8efe16e88115fc1806eb28fa3c75e45142b4ae5647da9493f739da46c7c3058"
+      "sha256": "122870baacbef605713f5d2dc252ebb4caf9260f6ebd5622038401e2d683516c"
     }
   ]
 }

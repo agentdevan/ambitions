@@ -1,0 +1,299 @@
+{
+  "authority": "non_normative_qualified_capability_candidate_shard",
+  "baseline_ref": "main",
+  "candidate_count": 13,
+  "candidates": [
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-B2F829141E0DD9A3",
+      "classification": "capability",
+      "classification_confidence": 0.82,
+      "classification_rationale": "The record states meaningful person-facing value using capability-level terminology and is not bound to one mechanism or control.",
+      "classification_reason_code": "durable_person_facing_promise",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "# Search Find Act Inspect",
+      "normalized_name_hint": "# Search Find Act Inspect",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "normative",
+        "end_line": 15,
+        "evidence_fingerprint": "9e0304c6578c6b7eabf519d08d87d1bc4e7a4f2e150cbcb13e7d2a7fd261b819",
+        "extraction_kind": "person_facing_promise_hint",
+        "family_id": "SRC-NORMATIVE-SPECS",
+        "path": "docs/canon/specifications/journeys/search-find-act-inspect.md",
+        "start_line": 15
+      }
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-939873A894F75DC1",
+      "classification": "capability",
+      "classification_confidence": 0.82,
+      "classification_rationale": "The record states meaningful person-facing value using capability-level terminology and is not bound to one mechanism or control.",
+      "classification_reason_code": "durable_person_facing_promise",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "# Search Find Ask Act Inspect",
+      "normalized_name_hint": "# Search Find Ask Act Inspect",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "normative",
+        "end_line": 15,
+        "evidence_fingerprint": "c467397aacd1ae8680e81b27647357f59c9f099d31312110899602a7976b65ca",
+        "extraction_kind": "person_facing_promise_hint",
+        "family_id": "SRC-NORMATIVE-SPECS",
+        "path": "docs/canon/specifications/journeys/search-find-ask-act-inspect.md",
+        "start_line": 15
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-003",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Alternate career pathing simulation",
+      "normalized_name_hint": "Alternate Career Path Simulation",
+      "owner_seed_id": "SEED-003",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "5b485484bc85371a520e29d56ca0dfe34f10a7eb738aa00bcbbe71c416537be0",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-005",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Raycast-like Ambitions native search",
+      "normalized_name_hint": "Ambitions Native Search and Command",
+      "note": "Raycast-like is preserved as owner intent and must be translated into durable Ambitions-native behavior rather than copied as product identity.",
+      "owner_seed_id": "SEED-005",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "46825d9bae234adb5d6a02173f14ac566d7d1cbae6b3be743c69c4fb1014438e",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-002",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Unique generative goal pathing based on personal context and learned behaviors",
+      "normalized_name_hint": "Contextual Generative Goal Pathing",
+      "owner_seed_id": "SEED-002",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "6c47a1f1b96d7c2fe8151f47a8af4832c28c86ba288f40d257a060e620eb62b8",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-006",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "First class appearance studio",
+      "normalized_name_hint": "First-Class Appearance Studio",
+      "owner_seed_id": "SEED-006",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "c7c2da95c49c7898a7695ffc82f2c56a2dd9de0c1cbec693a0c677e5e3ca5741",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-007",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "First class content share studio",
+      "normalized_name_hint": "First-Class Content Share Studio",
+      "owner_seed_id": "SEED-007",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "4ead6befc44d869f0126709981d67042308a8202fe69238b67fd60ce5fd7a1be",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-008",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "File storage attached to goals",
+      "normalized_name_hint": "Goal-Attached File Storage",
+      "owner_seed_id": "SEED-008",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "5abd435fc80c8060a5ee0fdc136ff617271e591db496fbb70e73b6b50d9a877d",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-FA37F984A251FF01",
+      "classification": "capability",
+      "classification_confidence": 0.82,
+      "classification_rationale": "The record states meaningful person-facing value using capability-level terminology and is not bound to one mechanism or control.",
+      "classification_reason_code": "durable_person_facing_promise",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Goals shows the full path, Today shows executable now context, Time shows placements, Motion communicates accepted consequence, and Search/Trust inspect versions. Every projection retains Goal Path and referenced canonical IDs.",
+      "normalized_name_hint": "Goals shows the full path, Today shows executable now context, Time shows placements, Motion communicates accepted consequence, and Searc...",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "normative",
+        "end_line": 118,
+        "evidence_fingerprint": "b68a45403079e69ea0d2574b35dc28407fb4a64d2466657cbd2d15efdb5b4170",
+        "extraction_kind": "person_facing_promise_hint",
+        "family_id": "SRC-NORMATIVE-SPECS",
+        "path": "docs/canon/specifications/objects/goal-path.md",
+        "start_line": 118
+      }
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-C6F2EE04321B7240",
+      "classification": "capability",
+      "classification_confidence": 0.82,
+      "classification_rationale": "The record states meaningful person-facing value using capability-level terminology and is not bound to one mechanism or control.",
+      "classification_reason_code": "durable_person_facing_promise",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Offline local Today remains usable. Stale external facts are disclosed only when interpretation changes. Permission or projection failure preserves local objects and offers retry, Time, Capture, or diagnostics without fabricating a recommendation.",
+      "normalized_name_hint": "Offline local Today remains usable. Stale external facts are disclosed only when interpretation changes. Permission or projection failure...",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "normative",
+        "end_line": 1070,
+        "evidence_fingerprint": "d75098216ed2aab353c9af477cb763562e4ac246119eb337ed02f065d710b2d7",
+        "extraction_kind": "person_facing_promise_hint",
+        "family_id": "SRC-NORMATIVE-SPECS",
+        "path": "docs/canon/specifications/surfaces/today.md",
+        "start_line": 1070
+      }
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-71C0E590F9213175",
+      "classification": "capability",
+      "classification_confidence": 0.82,
+      "classification_rationale": "The record states meaningful person-facing value using capability-level terminology and is not bound to one mechanism or control.",
+      "classification_reason_code": "durable_person_facing_promise",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Offline Search preserves deterministic local Find, Act, Inspect, Receipt, replay, and index-rebuild behavior.",
+      "normalized_name_hint": "Offline Search preserves deterministic local Find, Act, Inspect, Receipt, replay, and index-rebuild behavior",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "normative",
+        "end_line": 1503,
+        "evidence_fingerprint": "87de32f6d6e19b89debfcc055512c30be62ebc111270ef8866e55eba366d7a11",
+        "extraction_kind": "person_facing_promise_hint",
+        "family_id": "SRC-NORMATIVE-SPECS",
+        "path": "docs/canon/specifications/global/search.md",
+        "start_line": 1503
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-001",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Skill transference",
+      "normalized_name_hint": "Skill Transference",
+      "owner_seed_id": "SEED-001",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "a0f11919f8932f049e2e3de085a25e759ea470e5abcb8ed69adc9e705a8901da",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-004",
+      "classification": "capability",
+      "classification_confidence": 1.0,
+      "classification_rationale": "Direct owner-originated product promise; preserved for reconciliation without assuming canonization.",
+      "classification_reason_code": "direct_owner_seed",
+      "disposition": "retain_as_qualified_capability_candidate",
+      "exact_terminology": "Step reflow upon new step placement",
+      "normalized_name_hint": "Step Placement Reflow",
+      "owner_seed_id": "SEED-004",
+      "qualification_status": "qualified",
+      "source": {
+        "authority_class": "owner_seed_non_normative",
+        "end_line": 1,
+        "evidence_fingerprint": "85ff79db9e4c4c983ef6dbef055d7607a7e3aa9bb51173f0e900f30a5bf4575d",
+        "extraction_kind": "owner_seed",
+        "family_id": "SRC-OWNER-SEEDS",
+        "path": "docs/capabilities/seed-capabilities.json",
+        "start_line": 1
+      }
+    }
+  ],
+  "classification_counts": {
+    "capability": 13
+  },
+  "reason_counts": {
+    "direct_owner_seed": 8,
+    "durable_person_facing_promise": 5
+  },
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "shard_index": 1
+}

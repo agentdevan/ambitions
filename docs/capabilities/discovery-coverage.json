@@ -522,6 +522,7 @@
       "extracted_candidate_count": 352,
       "family_id": "SRC-QA-REMEDIATION",
       "matched_path_count": 927,
+      "note": "All eligible text sources were harvested. Binary screenshots and other non-text proof assets are fingerprint-excluded from semantic extraction and remain listed in discovery-coverage.json.",
       "source_inventory_shards": [
         "docs/capabilities/sources/source-files-0002.json"
       ],
@@ -538,6 +539,7 @@
       "extracted_candidate_count": 8,
       "family_id": "SRC-RESEARCH",
       "matched_path_count": 4,
+      "note": "Text sources were harvested. One DOCX package remains represented through its adjacent Markdown, YAML, and README sources and is recorded as an unsupported direct-text input.",
       "source_inventory_shards": [
         "docs/capabilities/sources/source-files-0002.json"
       ],
@@ -563,7 +565,7 @@
       "candidate_shards": [
         "docs/capabilities/candidates/repository-0007.json"
       ],
-      "extracted_candidate_count": 114,
+      "extracted_candidate_count": 116,
       "family_id": "SRC-TESTS",
       "matched_path_count": 584,
       "source_inventory_shards": [

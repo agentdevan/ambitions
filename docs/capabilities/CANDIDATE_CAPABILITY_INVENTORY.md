@@ -9,7 +9,7 @@ shards referenced by `candidate-capabilities.json` and `discovery-sources.json`.
 ## Discovery summary
 
 - Owner-originated seeds: **8**
-- Repository-derived candidate hints: **3165**
+- Repository-derived candidate hints: **3167**
 - Fingerprinted source files: **3217**
 - Candidate shards: **7**
 - Source fingerprint shards: **3**
@@ -32,7 +32,7 @@ shards referenced by `candidate-capabilities.json` and `discovery-sources.json`.
 | `SRC-QA-REMEDIATION` | covered | 927 | 352 | 359 |
 | `SRC-RESEARCH` | covered | 4 | 8 | 1 |
 | `SRC-STANDARDS` | covered | 8 | 22 | 0 |
-| `SRC-TESTS` | covered | 584 | 114 | 0 |
+| `SRC-TESTS` | covered | 584 | 116 | 0 |
 
 ## Owner-originated seeds
 
@@ -40,49 +40,49 @@ shards referenced by `candidate-capabilities.json` and `discovery-sources.json`.
 
 - Owner wording: Alternate career pathing simulation
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-005 — Ambitions Native Search and Command
 
 - Owner wording: Raycast-like Ambitions native search
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-002 — Contextual Generative Goal Pathing
 
 - Owner wording: Unique generative goal pathing based on personal context and learned behaviors
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-006 — First-Class Appearance Studio
 
 - Owner wording: First class appearance studio
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-007 — First-Class Content Share Studio
 
 - Owner wording: First class content share studio
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-008 — Goal-Attached File Storage
 
 - Owner wording: File storage attached to goals
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-001 — Skill Transference
 
 - Owner wording: Skill transference
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ### CAND-SEED-004 — Step Placement Reflow
 
 - Owner wording: Step reflow upon new step placement
 - Authority: `owner_seed`
-- Disposition: `preserve_for_repository_reconciliation`
+- Disposition: `retain_as_qualified_capability_candidate`
 
 ## Repository-derived candidate families
 
@@ -294,12 +294,12 @@ shards referenced by `candidate-capabilities.json` and `discovery-sources.json`.
 
 ### SRC-TESTS
 
-- Candidate hints: **114**
+- Candidate hints: **116**
 - Fingerprinted source files: **584**
 - Representative sample:
-  - "// Ambitions can provide contextual search commands without making code authoritative.\n", — `tools/tests/test_capability_atlas_discovery.py:93`
-  - "// Ambitions can provide fake search capability from dependencies.\n", — `tools/tests/test_capability_atlas_discovery.py:97`
-  - "\n\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\n", — `tools/tests/test_capability_atlas_discovery.py:89`
+  - "// Ambitions can provide contextual search commands without making code authoritative.\n", — `tools/tests/test_capability_atlas_discovery.py:102`
+  - "// Ambitions can provide fake search capability from dependencies.\n", — `tools/tests/test_capability_atlas_discovery.py:106`
+  - "\n\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\n", — `tools/tests/test_capability_atlas_discovery.py:98`
   - "Activated Capture should recover full-screen height after keyboard dismissal." — `Native/AmbitionsUITests/BootstrapShellUITests.swift:414`
   - "Capture proposal must not expose classifier or holding-bin language: \(forbidden)" — `Native/AmbitionsUITests/CaptureComposerUITests.swift:111`
   - "Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/Search." — `Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift:33`
@@ -312,16 +312,16 @@ shards referenced by `candidate-capabilities.json` and `discovery-sources.json`.
 
 ## Candidate shard manifest
 
-- `docs/capabilities/candidates/repository-0001.json` — 500 candidates — SHA-256 `9a77d21cce5bfab1cc5d039088a3d5fc068477c69bd6a321323e2b836be388db`
-- `docs/capabilities/candidates/repository-0002.json` — 500 candidates — SHA-256 `44720ae2abb9f4b9cc8ecda86c0d29f92b8bb439aee402da808c57e15f2630d7`
-- `docs/capabilities/candidates/repository-0003.json` — 500 candidates — SHA-256 `8470eab7322955b493781d5d1f348595d1f93170c12e8f6be89805b827e3029c`
-- `docs/capabilities/candidates/repository-0004.json` — 500 candidates — SHA-256 `e4070acae96b6f0ce79b6a8c7cebefe7e1df591a6ca6adf7ac11d87d5f03e7f5`
-- `docs/capabilities/candidates/repository-0005.json` — 500 candidates — SHA-256 `b7539fa0133ac48f364b75f84cc7a8dd3d8cc62fae3d498cf1c5cbdf9a531802`
-- `docs/capabilities/candidates/repository-0006.json` — 500 candidates — SHA-256 `a54b9df46dd3742520761e451d683ac71e77f9d3b859593b0e30c0ae0bdb91ae`
-- `docs/capabilities/candidates/repository-0007.json` — 165 candidates — SHA-256 `7b64845424ad103e91a16a94979f3034fdec435b43f5575e570c3fec8de5edc8`
+- `docs/capabilities/candidates/repository-0001.json` — 500 candidates — SHA-256 `f444c9106fc4a851f36c1e6c21b8d3feb79ec78eb74d7f0c93c8ce43261e8212`
+- `docs/capabilities/candidates/repository-0002.json` — 500 candidates — SHA-256 `a6aca4c2e95fac01393e624f9488bda09071ad37bb1bf4556557a5c22edfe3b0`
+- `docs/capabilities/candidates/repository-0003.json` — 500 candidates — SHA-256 `9274a8db5af85f7ddab616b8e7198da884128ff681344e248ec0a9954230b0ae`
+- `docs/capabilities/candidates/repository-0004.json` — 500 candidates — SHA-256 `b25e268dbdaf0914f8669a559d6f746924dd76f3119896534533e3e3b3d083dc`
+- `docs/capabilities/candidates/repository-0005.json` — 500 candidates — SHA-256 `cace946959968e63bafd980282be97de2dc617a85d5cc6cd4cc862e7c448b956`
+- `docs/capabilities/candidates/repository-0006.json` — 500 candidates — SHA-256 `1abaaeb87643cadb59f867cd26f6d172f259cdb92da0f5af22b3aaef88a97ef0`
+- `docs/capabilities/candidates/repository-0007.json` — 167 candidates — SHA-256 `7e32a6ecfdfad1a3d5b7493df284a75bdad628e8d0ee61976e4257f07fe66224`
 
 ## Source fingerprint shard manifest
 
 - `docs/capabilities/sources/source-files-0001.json` — 1500 files — SHA-256 `48fcaa688ba2f6a5261e624e44f1d667ea456b8bfe8d81721c0ace8d23bac0e9`
 - `docs/capabilities/sources/source-files-0002.json` — 1500 files — SHA-256 `3f1f81de03df2780554f4941a5c10489d051cad922f7d10b4b4398bdf7a3ec70`
-- `docs/capabilities/sources/source-files-0003.json` — 217 files — SHA-256 `c39cd56ce2d3e732f0c70ee2f272dca2ccd9400941e3b1bacdb2b1258694744a`
+- `docs/capabilities/sources/source-files-0003.json` — 217 files — SHA-256 `da29dba3cc2377bb3415f6e20597edc83f004d2d5e8344d920e4ed3cfa3b6ca4`

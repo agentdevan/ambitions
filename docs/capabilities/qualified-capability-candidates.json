@@ -1,0 +1,29 @@
+{
+  "authority": "non_normative_qualified_capability_index",
+  "baseline_ref": "main",
+  "candidate_count": 13,
+  "classification_counts": {
+    "capability": 13
+  },
+  "reason_counts": {
+    "direct_owner_seed": 8,
+    "durable_person_facing_promise": 5
+  },
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "shards": [
+    {
+      "candidate_count": 13,
+      "classification_counts": {
+        "capability": 13
+      },
+      "path": "docs/capabilities/qualified/qualified-0001.json",
+      "reason_counts": {
+        "direct_owner_seed": 8,
+        "durable_person_facing_promise": 5
+      },
+      "sha256": "4927ce77f3cdeab0b2127d74024b3b53fdc8e50b1bedb1cdff557b16d6caeb5b",
+      "shard_index": 1
+    }
+  ]
+}

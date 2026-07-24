@@ -1,0 +1,35 @@
+{
+  "authority": "non_normative_ambiguous_capability_index",
+  "baseline_ref": "main",
+  "candidate_count": 298,
+  "classification_counts": {
+    "ambiguous": 298
+  },
+  "reason_counts": {
+    "capability_like_evidence_requires_authority_source": 50,
+    "decision_fragment_requires_semantic_reconciliation": 1,
+    "decision_heading_requires_product_promise_reconciliation": 1,
+    "design_implied_capability_requires_product_authority": 19,
+    "insufficient_durable_promise_evidence": 227
+  },
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "shards": [
+    {
+      "candidate_count": 298,
+      "classification_counts": {
+        "ambiguous": 298
+      },
+      "path": "docs/capabilities/ambiguous/ambiguous-0001.json",
+      "reason_counts": {
+        "capability_like_evidence_requires_authority_source": 50,
+        "decision_fragment_requires_semantic_reconciliation": 1,
+        "decision_heading_requires_product_promise_reconciliation": 1,
+        "design_implied_capability_requires_product_authority": 19,
+        "insufficient_durable_promise_evidence": 227
+      },
+      "sha256": "e928f9fd9f8cb8edf1fb695446cec6e51c8b7a096845ee1dfb5308e9a2d060ed",
+      "shard_index": 1
+    }
+  ]
+}

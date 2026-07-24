@@ -1,13 +1,16 @@
 {
   "authority": "non_normative_repository_candidate_shard",
   "baseline_ref": "main",
-  "candidate_count": 165,
+  "candidate_count": 167,
   "candidates": [
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-472F0F55CC7EE3C6",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "behavior",
+      "classification_confidence": 0.78,
+      "classification_rationale": "The record describes a bounded user action, mutation, transfer, or interaction that supports a broader capability.",
+      "classification_reason_code": "bounded_user_interaction_or_state_change",
+      "disposition": "preserve_as_supporting_behavior",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -24,14 +27,18 @@
       "exact_terminology": "Today action depth is Yellow, not complete product acceptance; later packets must still prove persistence, undo/control richness, broader light/dark overlay appearance, and final material/copy polish.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today action depth is Yellow, not complete product acceptance",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BD5D7B3D38D695B3",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.87,
+      "classification_rationale": "The record describes proof, audit, traceability, or validation material rather than a user-facing capability.",
+      "classification_reason_code": "evidence_or_validation_record",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -48,14 +55,18 @@
       "exact_terminology": "Today must prove Start Here, action, closure, proof, and receipt depth.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today must prove Start Here, action, closure, proof, and receipt depth",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-ECD0457A3F3B968B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "behavior",
+      "classification_confidence": 0.78,
+      "classification_rationale": "The record describes a bounded user action, mutation, transfer, or interaction that supports a broader capability.",
+      "classification_reason_code": "bounded_user_interaction_or_state_change",
+      "disposition": "preserve_as_supporting_behavior",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -72,14 +83,18 @@
       "exact_terminology": "Today must prove the actionable loop after the Start Here object exists: start/open the step, pause/defer or move without shame, close the step, undo/control where available, show receipt, and expose proof/source inspection.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today must prove the actionable loop after the Start Here object exists: start/open the step, pause/defer or move without shame, close th...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F10F090F0DC000BB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The record is phrased as a normative behavior constraint and requires grouping beneath a broader capability promise.",
+      "classification_reason_code": "normative_behavior_constraint",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -96,14 +111,18 @@
       "exact_terminology": "Today must prove the core product thesis: show the step that fits when one exists, and show a useful no-step/recovery state when no real step exists.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today must prove the core product thesis: show the step that fits when one exists, and show a useful no-step/recovery state when no real...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-6F21B6C31E8A8930",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.94,
+      "classification_rationale": "The record is an operational, audit, coverage, or acceptance table row. It can support later traceability but does not independently define a capability.",
+      "classification_reason_code": "operational_table_or_acceptance_row",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -120,14 +139,18 @@
       "exact_terminology": "Today recovery | 51:100 | Preserves agency, closure language, receipts, and Undo without shame. | Reads as a conventional card/list state detached from the Reality Window.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today recovery | 51:100 | Preserves agency, closure language, receipts, and Undo without shame. | Reads as a conventional card/list state...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-35763446F60EDC2D",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "behavior",
+      "classification_confidence": 0.78,
+      "classification_rationale": "The record describes a bounded user action, mutation, transfer, or interaction that supports a broader capability.",
+      "classification_reason_code": "bounded_user_interaction_or_state_change",
+      "disposition": "preserve_as_supporting_behavior",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -144,14 +167,18 @@
       "exact_terminology": "Today shares placement/protection truth with Time. Time Fit and Protect Window are focused subflows. Review/explanation behavior belongs behind inspection glyphs or long press, not dead buttons.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today shares placement/protection truth with Time. Time Fit and Protect Window are focused subflows. Review/explanation behavior belongs...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-8F9F39E62CBE118E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The record is phrased as a normative behavior constraint and requires grouping beneath a broader capability promise.",
+      "classification_reason_code": "normative_behavior_constraint",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -168,14 +195,18 @@
       "exact_terminology": "Today, Goals, Time, You, Capture, and Search must show materially distinct light and dark treatment while preserving root law and non-chatbot grammar.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Today, Goals, Time, You, Capture, and Search must show materially distinct light and dark treatment while preserving root law and non-cha...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9992586B50613E97",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -192,14 +223,18 @@
       "exact_terminology": "todayshowsonlyrelevantschedule_slice | Today shows the current slice, not the entire long-term path. | Partial | Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift | Today scenario test and screenshot proof",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Todayshowsonlyrelevantschedule_slice | Today shows the current slice, not the entire long-term path. | Partial | Native/Ambitions/Surface...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C55E17FF8EBC08A1",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "ambiguous",
+      "classification_confidence": 0.45,
+      "classification_rationale": "The record cannot be safely promoted or excluded as a capability without semantic reconciliation against neighboring evidence.",
+      "classification_reason_code": "insufficient_durable_promise_evidence",
+      "disposition": "preserve_for_manual_capability_reconciliation",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -216,14 +251,18 @@
       "exact_terminology": "Unsupported current capability",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Unsupported current capability",
+      "qualification_status": "ambiguous",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0E47D5CAC7317630",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.94,
+      "classification_rationale": "The record is an operational, audit, coverage, or acceptance table row. It can support later traceability but does not independently define a capability.",
+      "classification_reason_code": "operational_table_or_acceptance_row",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -240,14 +279,18 @@
       "exact_terminology": "Unsupported You surfaces | Current capability inventory and absence policy | Route/row absence plus migration of valid preferences | Preserve data, not fictional rows",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Unsupported You surfaces | Current capability inventory and absence policy | Route/row absence plus migration of valid preferences | Pres...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7D41A3AB3AF0734B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -264,14 +307,18 @@
       "exact_terminology": "uservisiblebehavior: \"Search finds goals, Steps, proof, Life Capital, and settings.\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Uservisiblebehavior: \"Search finds goals, Steps, proof, Life Capital, and settings.\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-110028715977A736",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.92,
+      "classification_rationale": "The source records an operational capability claim, acceptance state, gap, or proof statement. An owning product source is required before qualification.",
+      "classification_reason_code": "capability_claim_in_operational_evidence",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -288,14 +335,18 @@
       "exact_terminology": "Valid drilldowns: personal system/local context, appearance, life areas, schedule/availability, planning defaults, privacy, local data, receipts/history, sources, Capture preferences as a preference detail only, notifications, accessibility, and about/support.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Valid drilldowns: personal system/local context, appearance, life areas, schedule/availability, planning defaults, privacy, local data, r...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-19A325DF53555886",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "ambiguous",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The evidence source appears to describe person-facing value, but implementation, audit, QA, or planning evidence cannot independently authorize a capability.",
+      "classification_reason_code": "capability_like_evidence_requires_authority_source",
+      "disposition": "preserve_for_manual_capability_reconciliation",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -312,14 +363,18 @@
       "exact_terminology": "Valid drilldowns: time block detail, protected window detail, placement review, reflow review, conflict review, recovery review, source detail, receipt/history detail, and goal/step-linked landing from Time.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Valid drilldowns: time block detail, protected window detail, placement review, reflow review, conflict review, recovery review, source d...",
+      "qualification_status": "ambiguous",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BDB08EECD9A710C0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.87,
+      "classification_rationale": "The record describes proof, audit, traceability, or validation material rather than a user-facing capability.",
+      "classification_reason_code": "evidence_or_validation_record",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -336,14 +391,18 @@
       "exact_terminology": "Validation Command Ledger",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Validation Command Ledger",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-66CA97FFE6F4CB12",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.87,
+      "classification_rationale": "The record describes proof, audit, traceability, or validation material rather than a user-facing capability.",
+      "classification_reason_code": "evidence_or_validation_record",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -360,14 +419,18 @@
       "exact_terminology": "Validation Commands",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Validation Commands",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-99942B61263C3F26",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "project",
+      "classification_confidence": 0.96,
+      "classification_rationale": "The record is anchored to an issue, packet, campaign, or delivery identifier rather than stable person-facing value.",
+      "classification_reason_code": "issue_packet_or_campaign_reference",
+      "disposition": "preserve_as_supporting_project",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -384,14 +447,18 @@
       "exact_terminology": "VSP-05 Capture Open Field Composer Leaf",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "VSP-05 Capture Open Field Composer Leaf",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-1A68AC4C03A93A2E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "project",
+      "classification_confidence": 0.96,
+      "classification_rationale": "The record is anchored to an issue, packet, campaign, or delivery identifier rather than stable person-facing value.",
+      "classification_reason_code": "issue_packet_or_campaign_reference",
+      "disposition": "preserve_as_supporting_project",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -408,14 +475,18 @@
       "exact_terminology": "VSP-05 should run after the core surfaces so Capture can mutate real object paths without becoming a root surface.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "VSP-05 should run after the core surfaces so Capture can mutate real object paths without becoming a root surface",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DC5497B0F516C4B3",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "project",
+      "classification_confidence": 0.96,
+      "classification_rationale": "The record is anchored to an issue, packet, campaign, or delivery identifier rather than stable person-facing value.",
+      "classification_reason_code": "issue_packet_or_campaign_reference",
+      "disposition": "preserve_as_supporting_project",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -432,14 +503,18 @@
       "exact_terminology": "VSP-06 should run after core object surfaces and Capture so You can inspect preferences, identity, privacy, and history without becoming a generic profile dashboard.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "VSP-06 should run after core object surfaces and Capture so You can inspect preferences, identity, privacy, and history without becoming...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DAEF0368BC1B0E16",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "project",
+      "classification_confidence": 0.96,
+      "classification_rationale": "The record is anchored to an issue, packet, campaign, or delivery identifier rather than stable person-facing value.",
+      "classification_reason_code": "issue_packet_or_campaign_reference",
+      "disposition": "preserve_as_supporting_project",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -456,14 +531,18 @@
       "exact_terminology": "VSP-07 Trust Inspection Seams Leaf",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "VSP-07 Trust Inspection Seams Leaf",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-4CA0DA12956807BB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "ambiguous",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The evidence source appears to describe person-facing value, but implementation, audit, QA, or planning evidence cannot independently authorize a capability.",
+      "classification_reason_code": "capability_like_evidence_requires_authority_source",
+      "disposition": "preserve_for_manual_capability_reconciliation",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -480,14 +559,18 @@
       "exact_terminology": "You must prove local-first privacy/account/data-control depth.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "You must prove local-first privacy/account/data-control depth",
+      "qualification_status": "ambiguous",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F8DE437E9389FDDE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.94,
+      "classification_rationale": "The record is an operational, audit, coverage, or acceptance table row. It can support later traceability but does not independently define a capability.",
+      "classification_reason_code": "operational_table_or_acceptance_row",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "mixed_operational_evidence",
@@ -504,14 +587,18 @@
       "exact_terminology": "You | 52:57 | Makes local data, optional identity, continuity, privacy, diagnostics, and export inspectable. | Settings-list posture feels generic and exposes too much system organization in the first viewport.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "You | 52:57 | Makes local data, optional identity, continuity, privacy, diagnostics, and export inspectable. | Settings-list posture feel...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-B50FED53CE57AF27",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "system",
+      "classification_confidence": 0.9,
+      "classification_rationale": "The heading names policy, scope, correctness, system mechanism, scenario, or governance rather than durable person-facing value.",
+      "classification_reason_code": "non_capability_governance_or_mechanism_heading",
+      "disposition": "preserve_as_supporting_system",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -528,14 +615,18 @@
       "exact_terminology": "6.8 Branch inspection projection",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Branch inspection projection",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-8905AA2BB847F6AF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "ambiguous",
+      "classification_confidence": 0.45,
+      "classification_rationale": "The record cannot be safely promoted or excluded as a capability without semantic reconciliation against neighboring evidence.",
+      "classification_reason_code": "insufficient_durable_promise_evidence",
+      "disposition": "preserve_for_manual_capability_reconciliation",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -552,14 +643,18 @@
       "exact_terminology": "Changed-reality detection | Time reality reflow projection | Heuristic reason and local actions",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Changed-reality detection | Time reality reflow projection | Heuristic reason and local actions",
+      "qualification_status": "ambiguous",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-AC22E662114351A0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.9,
+      "classification_rationale": "The heading names policy, scope, correctness, system mechanism, scenario, or governance rather than durable person-facing value.",
+      "classification_reason_code": "non_capability_governance_or_mechanism_heading",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -576,14 +671,18 @@
       "exact_terminology": "22.6 End-to-end scenario",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "End-to-end scenario",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-1C946EFE8AEE7171",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "ambiguous",
+      "classification_confidence": 0.45,
+      "classification_rationale": "The record cannot be safely promoted or excluded as a capability without semantic reconciliation against neighboring evidence.",
+      "classification_reason_code": "insufficient_durable_promise_evidence",
+      "disposition": "preserve_for_manual_capability_reconciliation",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -600,14 +699,18 @@
       "exact_terminology": "Events and Commands",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Events and Commands",
+      "qualification_status": "ambiguous",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-A53F0E6B79732E20",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.83,
+      "classification_rationale": "The heading concerns capability governance, inventory, authority, or evidence rather than a product promise.",
+      "classification_reason_code": "capability_governance_heading",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -624,14 +727,18 @@
       "exact_terminology": "Failure and recovery matrix",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Failure and recovery matrix",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-E5EE34C6CE41BEAE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.83,
+      "classification_rationale": "The heading concerns capability governance, inventory, authority, or evidence rather than a product promise.",
+      "classification_reason_code": "capability_governance_heading",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -648,14 +755,18 @@
       "exact_terminology": "Privacy and authority",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Privacy and authority",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-29F95E5846A35B2E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.9,
+      "classification_rationale": "The heading names policy, scope, correctness, system mechanism, scenario, or governance rather than durable person-facing value.",
+      "classification_reason_code": "non_capability_governance_or_mechanism_heading",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -672,14 +783,18 @@
       "exact_terminology": "6.6 Recommendation policy",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Recommendation policy",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-45DE0E76ADBEF43D",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.9,
+      "classification_rationale": "The heading names policy, scope, correctness, system mechanism, scenario, or governance rather than durable person-facing value.",
+      "classification_reason_code": "non_capability_governance_or_mechanism_heading",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "research_or_reference",
@@ -696,14 +811,18 @@
       "exact_terminology": "Recommendation policy",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Recommendation policy",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-95AD0E9C5A55BC20",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -720,14 +839,18 @@
       "exact_terminology": "A11Y-INPUT-EQUIVALENCE-001 — No gesture-only command",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "A11Y-INPUT-EQUIVALENCE-001 — No gesture-only command",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-5B25C7E65502A289",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -744,14 +867,18 @@
       "exact_terminology": "A11Y-PROOF-MATRIX-001 — Accessibility evidence matrix",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "A11Y-PROOF-MATRIX-001 — Accessibility evidence matrix",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-96A1C119FBD33AEF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -768,14 +895,18 @@
       "exact_terminology": "SECURITY-006 — Abuse-case proof",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Abuse-case proof",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-34B03A77B37B4224",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The record is phrased as a normative behavior constraint and requires grouping beneath a broader capability promise.",
+      "classification_reason_code": "normative_behavior_constraint",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -792,14 +923,18 @@
       "exact_terminology": "Business policy MUST receive an injectable clock, calendar, locale, and time-zone context; uncontrolled wall-clock reads MUST NOT decide canonical behavior.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Business policy MUST receive an injectable clock, calendar, locale, and time-zone context",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D02C9D36DDEA2BE1",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -816,14 +951,18 @@
       "exact_terminology": "PERF-002 — Complete budget context",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Complete budget context",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-498ED1BC6AF038AB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -840,14 +979,18 @@
       "exact_terminology": "CONCURRENCY-007 — Injected temporal context",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "CONCURRENCY-007 — Injected temporal context",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-364536FFAA67C885",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -864,14 +1007,18 @@
       "exact_terminology": "CONCURRENCY-009 — Race proof",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "CONCURRENCY-009 — Race proof",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-646113E4516A84C2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -888,14 +1035,18 @@
       "exact_terminology": "DETERMINISM-005 — Policy version capture",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "DETERMINISM-005 — Policy version capture",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-98E18876BD990C6F",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -912,14 +1063,18 @@
       "exact_terminology": "TEST-002 — Deterministic privacy-safe fixtures",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Deterministic privacy-safe fixtures",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-32FA3CC78C2F0F19",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "behavior",
+      "classification_confidence": 0.78,
+      "classification_rationale": "The record describes a bounded user action, mutation, transfer, or interaction that supports a broader capability.",
+      "classification_reason_code": "bounded_user_interaction_or_state_change",
+      "disposition": "preserve_as_supporting_behavior",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -936,14 +1091,18 @@
       "exact_terminology": "Dismissal MUST preserve validated user intent, restore the originating context and focus, and never report an uncommitted action as durable.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Dismissal MUST preserve validated user intent, restore the originating context and focus, and never report an uncommitted action as durable",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0C1952D2C43F4DA9",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "system",
+      "classification_confidence": 0.84,
+      "classification_rationale": "The record is dominated by mechanism, code, schema, or architecture terminology rather than durable person-facing value.",
+      "classification_reason_code": "mechanism_or_architecture_record",
+      "disposition": "preserve_as_supporting_system",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -960,14 +1119,18 @@
       "exact_terminology": "Each changed scope MUST execute the applicable domain, projection, UI, accessibility, migration, recurrence, time-zone, import, sync, and extension tests.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Each changed scope MUST execute the applicable domain, projection, UI, accessibility, migration, recurrence, time-zone, import, sync, and...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-CAFA717AACF33A2E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.72,
+      "classification_rationale": "The record is phrased as a normative behavior constraint and requires grouping beneath a broader capability promise.",
+      "classification_reason_code": "normative_behavior_constraint",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -984,14 +1147,18 @@
       "exact_terminology": "Equivalent canonical inputs, policy version, user rules, temporal context, and seed MUST produce equivalent decisions independent of collection order, process scheduling, or hash randomization.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Equivalent canonical inputs, policy version, user rules, temporal context, and seed MUST produce equivalent decisions independent of coll...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-AEA9165A84DB5F85",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "implementation",
+      "classification_confidence": 0.84,
+      "classification_rationale": "The record is dominated by mechanism, code, schema, or architecture terminology rather than durable person-facing value.",
+      "classification_reason_code": "mechanism_or_architecture_record",
+      "disposition": "preserve_as_supporting_implementation",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1008,14 +1175,18 @@
       "exact_terminology": "Fixtures MUST declare schema, clock, calendar, locale, time zone, seed, privacy class, origin, expected state, and scale where relevant; real private user data MUST NOT be used.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Fixtures MUST declare schema, clock, calendar, locale, time zone, seed, privacy class, origin, expected state, and scale where relevant",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-91F7B797C2034531",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1032,14 +1203,18 @@
       "exact_terminology": "TEST-005 — No proof theater",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "No proof theater",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0C9E770D9E210CE7",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1056,14 +1231,18 @@
       "exact_terminology": "PERF-005 — Resource-aware scheduling",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Resource-aware scheduling",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7F1C5B093D0B9AB5",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1080,14 +1259,18 @@
       "exact_terminology": "FRONTEND-004 — Shared component contracts",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Shared component contracts",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-34207BA8417B8F71",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1104,14 +1287,18 @@
       "exact_terminology": "STANDARD-VALIDATION-SECURITY-PRIVACY-001 — Security and privacy boundaries",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "STANDARD-VALIDATION-SECURITY-PRIVACY-001 — Security and privacy boundaries",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F4020AB9020BE85F",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1128,14 +1315,18 @@
       "exact_terminology": "STD-INTERACTION-DISMISSAL-001 — Dismissal continuity",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "STD-INTERACTION-DISMISSAL-001 — Dismissal continuity",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BDBA836B8D20DEDA",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1152,14 +1343,18 @@
       "exact_terminology": "STD-INTERACTION-FOCUS-001 — Focus continuity",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "STD-INTERACTION-FOCUS-001 — Focus continuity",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F8869A7EC4BFA80C",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1176,14 +1371,18 @@
       "exact_terminology": "TEST-RUNTIME-CONTRACT-001 — Runtime contract proof",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "TEST-RUNTIME-CONTRACT-001 — Runtime contract proof",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D1022EF9A3782DD4",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "requirement",
+      "classification_confidence": 0.98,
+      "classification_rationale": "The record is an identified law, policy, or requirement heading and should trace beneath a broader capability.",
+      "classification_reason_code": "requirement_heading_identity",
+      "disposition": "preserve_as_supporting_requirement",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1200,14 +1399,18 @@
       "exact_terminology": "TEST-SCENARIO-EXECUTABILITY-001 — Scenario executability",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "TEST-SCENARIO-EXECUTABILITY-001 — Scenario executability",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-A640B5F24741439E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "implementation",
+      "classification_confidence": 0.84,
+      "classification_rationale": "The record is dominated by mechanism, code, schema, or architecture terminology rather than durable person-facing value.",
+      "classification_reason_code": "mechanism_or_architecture_record",
+      "disposition": "preserve_as_supporting_implementation",
       "evidence": [
         {
           "authority_class": "normative_constraint",
@@ -1224,86 +1427,102 @@
       "exact_terminology": "UI presentation MUST run on @MainActor; storage, event journal, projection materialization, Search indexing, CloudKit reconciliation, attachment processing, and external-write coordination MUST use dedicated isolation appropriate to their responsibilities.",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "UI presentation MUST run on @MainActor",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
-      "candidate_id": "CAND-525A2ED41FD88A15",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "candidate_id": "CAND-15A67F557AD87782",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
-          "end_line": 93,
-          "evidence_fingerprint": "e92f15436efc5ea50a695fd22b50c79f25f5853c7210d1abc2c1964181a9d402",
+          "end_line": 102,
+          "evidence_fingerprint": "50f61492c83de46207a2fdd3fab9d852e205866cace7987cb1680fff82191268",
           "exact_text": "\"// Ambitions can provide contextual search commands without making code authoritative.\\n\",",
           "extraction_kind": "person_facing_promise_hint",
           "extraction_rationale": "Sentence combines an Ambitions/person-facing subject, an enabling verb, and capability-oriented terminology.",
           "family_id": "SRC-TESTS",
           "source_path": "tools/tests/test_capability_atlas_discovery.py",
-          "start_line": 93
+          "start_line": 102
         }
       ],
       "exact_terminology": "\"// Ambitions can provide contextual search commands without making code authoritative.\\n\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"// Ambitions can provide contextual search commands without making code authoritative.\\n\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
-      "candidate_id": "CAND-55DDCAD22E5EAD0B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "candidate_id": "CAND-45FE8E2B37CE1044",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
-          "end_line": 97,
-          "evidence_fingerprint": "9c7b5d95f543cf195df1b0aaaf1398673611b63f9ad9c77a7b6e09df7b4920ee",
+          "end_line": 106,
+          "evidence_fingerprint": "82a2ddeb4a22f26f04d1285ae7e62ec3cbc0a482098ef8723a35198f15cd9234",
           "exact_text": "\"// Ambitions can provide fake search capability from dependencies.\\n\",",
           "extraction_kind": "person_facing_promise_hint",
           "extraction_rationale": "Sentence combines an Ambitions/person-facing subject, an enabling verb, and capability-oriented terminology.",
           "family_id": "SRC-TESTS",
           "source_path": "tools/tests/test_capability_atlas_discovery.py",
-          "start_line": 97
+          "start_line": 106
         }
       ],
       "exact_terminology": "\"// Ambitions can provide fake search capability from dependencies.\\n\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"// Ambitions can provide fake search capability from dependencies.\\n\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
-      "candidate_id": "CAND-67ABAF0990FE2E70",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "candidate_id": "CAND-93D7E5AAAAD556C2",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
-          "end_line": 89,
-          "evidence_fingerprint": "070be6f316b54e845422c25cce854e8cf19403ac80f74cdd47ac78b031c69448",
+          "end_line": 98,
+          "evidence_fingerprint": "10ae8b3a66f7012bd6d820ce1a788ee321897922fb48285a17ebd836d1cc21e3",
           "exact_text": "\"\\n\\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\\n\",",
           "extraction_kind": "person_facing_promise_hint",
           "extraction_rationale": "Sentence combines an Ambitions/person-facing subject, an enabling verb, and capability-oriented terminology.",
           "family_id": "SRC-TESTS",
           "source_path": "tools/tests/test_capability_atlas_discovery.py",
-          "start_line": 89
+          "start_line": 98
         }
       ],
       "exact_terminology": "\"\\n\\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\\n\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"\\n\\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\\n\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-425AC04A9C4E34C2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1320,14 +1539,18 @@
       "exact_terminology": "\"Activated Capture should recover full-screen height after keyboard dismissal.\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"Activated Capture should recover full-screen height after keyboard dismissal.\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-258DC2E9CAAAEBCC",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1344,14 +1567,18 @@
       "exact_terminology": "\"Capture proposal must not expose classifier or holding-bin language: \\(forbidden)\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"Capture proposal must not expose classifier or holding-bin language: \\(forbidden)\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-E7766873824C125C",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1368,14 +1595,18 @@
       "exact_terminology": "\"Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/Search.\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/Search.\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D5FC2FF4C32C01A2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1392,14 +1623,18 @@
       "exact_terminology": "\"Native/Ambitions/App/AppRoot.swift\": \"import SwiftUI\\nstruct AppRoot: View {}\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"Native/Ambitions/App/AppRoot.swift\": \"import SwiftUI\\nstruct AppRoot: View {}\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-FF406DF4E352B45B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1416,14 +1651,18 @@
       "exact_terminology": "\"time.life-shape-field must exist before screenshot capture.\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"time.life-shape-field must exist before screenshot capture.\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C40E76BFBF8F7AAE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1440,14 +1679,18 @@
       "exact_terminology": "\"Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there.\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "\"Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there.\"",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-284ADC4434CE6665",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1464,14 +1707,18 @@
       "exact_terminology": ".appendingPathComponent(\"ambitions-calendar-p0-export-delete-\\(scenario.id)\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": ".appendingPathComponent(\"ambitions-calendar-p0-export-delete-\\(scenario.id)\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7A19B82AB4E252E9",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1488,14 +1735,18 @@
       "exact_terminology": "approvalSummary: \"User approved the local reflow decision.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "ApprovalSummary: \"User approved the local reflow decision.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-2DD0E9D87DB73F25",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1512,14 +1763,18 @@
       "exact_terminology": "approvalSummary: \"User reviewed but did not approve the reflow decision.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "ApprovalSummary: \"User reviewed but did not approve the reflow decision.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-324E2DE1E1979D96",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1536,14 +1791,18 @@
       "exact_terminology": "approvalSummary: \"User-approved reflow emits source adapter input.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "ApprovalSummary: \"User-approved reflow emits source adapter input.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D77E1C729E2F12B4",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1560,14 +1819,18 @@
       "exact_terminology": "capture(id: \"plan\", rawText: \"Create spreadsheet\"),",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Capture(id: \"plan\", rawText: \"Create spreadsheet\"),",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0BF873EC8A3D67A5",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1584,14 +1847,18 @@
       "exact_terminology": "capture(id: \"someday\", rawText: \"Learn piano\"),",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Capture(id: \"someday\", rawText: \"Learn piano\"),",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C4AE672B4B670463",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1608,14 +1875,18 @@
       "exact_terminology": "CaptureRuntimeCorrectionInput(kind: .wrongTime, timeLabel: \"next Tuesday 8 PM\", note: \"The time should move later.\"),",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "CaptureRuntimeCorrectionInput(kind: .wrongTime, timeLabel: \"next Tuesday 8 PM\", note: \"The time should move later.\"),",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-B5019E1BF38E51FA",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1632,14 +1903,18 @@
       "exact_terminology": "captureTimeScreenshot(named: \"packet-3.6-time-after-protect-window\", in: app)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "CaptureTimeScreenshot(named: \"packet-3.6-time-after-protect-window\", in: app)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F1B9DE6E7CCE1CAA",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1656,14 +1931,18 @@
       "exact_terminology": "captureYouScreenshot(named: \"packet-3.8-you-local-data-controls-export-review\", in: app)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "CaptureYouScreenshot(named: \"packet-3.8-you-local-data-controls-export-review\", in: app)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-2F793D47976D739D",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1680,14 +1959,18 @@
       "exact_terminology": "classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"classification\",\"\"))' )\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BB6B510B2869755B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1704,14 +1987,18 @@
       "exact_terminology": "classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"classification\",\"unknown\"))' )\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F27C6038EC4B96BC",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1728,14 +2015,18 @@
       "exact_terminology": "classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"classification\", \"\"))')\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Classification=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-A34D07CA5BE56A12",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1752,14 +2043,18 @@
       "exact_terminology": "context.insert(try Self.captureRecord(id: \"uow-rollback-capture\", rawText: \"Should not persist\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Context.insert(try Self.captureRecord(id: \"uow-rollback-capture\", rawText: \"Should not persist\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DAC6F8670D9F7F45",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1776,14 +2071,18 @@
       "exact_terminology": "detail: \"Time can confirm a write without reading calendar context.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Detail: \"Time can confirm a write without reading calendar context.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0925E898EEADEDC7",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1800,14 +2099,18 @@
       "exact_terminology": "detail: \"Time can read calendar context locally after approval.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Detail: \"Time can read calendar context locally after approval.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-14D3553F5672DAC4",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1824,14 +2127,18 @@
       "exact_terminology": "detail: \"Time stays local until you choose to share calendar access.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Detail: \"Time stays local until you choose to share calendar access.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C1746407F400E451",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1848,14 +2155,74 @@
       "exact_terminology": "detected=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"classification\",\"unknown\"))' )\"",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Detected=\"$(python3 scripts/ambitions-xcode-failure-classifier.py --log \"$LOG_FILE\" --json | python3 -c 'import sys, json",
+      "qualification_status": "supporting",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-6584BE3633CABD8C",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
+      "evidence": [
+        {
+          "authority_class": "verification_evidence_only",
+          "end_line": 168,
+          "evidence_fingerprint": "98b1633406d13f45ecd728ea2fe0c33006c5fc92e45c2af5171a14c9b1d263fa",
+          "exact_text": "exact_text=\"Ambitions can provide contextual search commands.\",",
+          "extraction_kind": "person_facing_promise_hint",
+          "extraction_rationale": "Sentence combines an Ambitions/person-facing subject, an enabling verb, and capability-oriented terminology.",
+          "family_id": "SRC-TESTS",
+          "source_path": "tools/tests/test_capability_atlas_discovery.py",
+          "start_line": 168
+        }
+      ],
+      "exact_terminology": "exact_text=\"Ambitions can provide contextual search commands.\",",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Exact_text=\"Ambitions can provide contextual search commands.\",",
+      "qualification_status": "supporting",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "repository_candidate",
+      "candidate_id": "CAND-5B631ADAE75DA223",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
+      "evidence": [
+        {
+          "authority_class": "verification_evidence_only",
+          "end_line": 214,
+          "evidence_fingerprint": "6512c80835949b4b2a7b5f1ec15a8c4ed9f4b16d5f1fa077c382433322ced61d",
+          "exact_text": "exact_text=\"Ambitions helps a person find and inspect local goals through private search.\",",
+          "extraction_kind": "person_facing_promise_hint",
+          "extraction_rationale": "Sentence combines an Ambitions/person-facing subject, an enabling verb, and capability-oriented terminology.",
+          "family_id": "SRC-TESTS",
+          "source_path": "tools/tests/test_capability_atlas_discovery.py",
+          "start_line": 214
+        }
+      ],
+      "exact_terminology": "exact_text=\"Ambitions helps a person find and inspect local goals through private search.\",",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Exact_text=\"Ambitions helps a person find and inspect local goals through private search.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9B6167ABFB6A9231",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1872,14 +2239,18 @@
       "exact_terminology": "Failing Scenarios",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Failing Scenarios",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-934A9AFC0D74A05E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1896,14 +2267,18 @@
       "exact_terminology": "GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: \"Search should surface the goal anchor.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: \"Search should surface the goal anchor.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-51E6FFFDC3F94BF1",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1920,14 +2295,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-798BA1E533074A83",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1944,14 +2323,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-8FE0D16191534262",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1968,14 +2351,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BF4878EE524085CF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -1992,14 +2379,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C3AA416B963820AB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2016,14 +2407,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C7DD081322A67DFB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2040,14 +2435,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-ECE4239B0F425878",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2064,14 +2463,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-FBEE5EB588CA3C84",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2088,14 +2491,18 @@
       "exact_terminology": "inspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "InspectionSummary: \"You / Search Ambitions can inspect this source, receipt, and reason.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7BC0E78C20C34A38",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2112,14 +2519,18 @@
       "exact_terminology": "let appendedAfterImport = try await sqliteStore.append(makeCommandEvent(id: \"command-after-import\", captureID: \"capture-after-import\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let appendedAfterImport = try await sqliteStore.append(makeCommandEvent(id: \"command-after-import\", captureID: \"capture-after-import\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-08F79A380C5C6614",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2136,14 +2547,18 @@
       "exact_terminology": "let capture = sampleCapture(id: \"capture-export\", updatedAt: \"2026-04-18T14:00:00Z\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let capture = sampleCapture(id: \"capture-export\", updatedAt: \"2026-04-18T14:00:00Z\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-338525EA05448B12",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2160,14 +2575,18 @@
       "exact_terminology": "let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { \"capture-should-not-double-write\" })",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { \"capture-should-not-double-write\" })",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-74525E0CA02607ED",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2184,14 +2603,18 @@
       "exact_terminology": "let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { \"capture-should-not-write\" })",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { \"capture-should-not-write\" })",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-82445EEA9E54236C",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2208,14 +2631,18 @@
       "exact_terminology": "let importedGoal = try await repositories.goals.goal(id: \"legacy-support\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let importedGoal = try await repositories.goals.goal(id: \"legacy-support\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-8860EE401DB9C3EF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2232,14 +2659,18 @@
       "exact_terminology": "let protect = windowCommand(id: \"command.time.protect\", kind: .protectTimeWindow)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Let protect = windowCommand(id: \"command.time.protect\", kind: .protectTimeWindow)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7928769CD5CED5B9",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2256,14 +2687,18 @@
       "exact_terminology": "Proof Boundaries",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Proof Boundaries",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-1AC887606661DFE8",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2280,14 +2715,18 @@
       "exact_terminology": "rawText: \"Capture search anchor for local find-anything.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "RawText: \"Capture search anchor for local find-anything.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F5AA9D2578E28122",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2304,14 +2743,18 @@
       "exact_terminology": "record(awarenessState.status == expectedAwarenessStatus(for: scenario.permissionState), \"Free-time calendar awareness must remain grounded in the permission state.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(awarenessState.status == expectedAwarenessStatus(for: scenario.permissionState), \"Free-time calendar awareness must remain grounde...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-1D4B635A14760D41",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2328,14 +2771,18 @@
       "exact_terminology": "record(block.localScheduleYouInspectionSummary.contains(\"Search Ambitions\"), \"You inspection summary must remain present.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(block.localScheduleYouInspectionSummary.contains(\"Search Ambitions\"), \"You inspection summary must remain present.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-E52D7B6129E51E90",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2352,14 +2799,18 @@
       "exact_terminology": "record(fixture.boundary.blocksRawActivityLogCopy, \"You inspection boundaries must block raw activity copy.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(fixture.boundary.blocksRawActivityLogCopy, \"You inspection boundaries must block raw activity copy.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-FF8BF01466FDD659",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2376,14 +2827,18 @@
       "exact_terminology": "record(fixture.boundary.isInspectableBoundary, \"You inspection boundaries must stay inspectable.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(fixture.boundary.isInspectableBoundary, \"You inspection boundaries must stay inspectable.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-AE1737760911F02A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2400,14 +2855,18 @@
       "exact_terminology": "record(fixture.contextEntry.localInspectionSummary.contains(\"Search Ambitions\"), \"Converted knowledge must remain inspectable in You.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(fixture.contextEntry.localInspectionSummary.contains(\"Search Ambitions\"), \"Converted knowledge must remain inspectable in You.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-AA3FAC2216FAB897",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2424,14 +2883,18 @@
       "exact_terminology": "record(fixture.store.inspectionLabel == \"Search Ambitions\", \"Store inspection label must stay inspectable.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(fixture.store.inspectionLabel == \"Search Ambitions\", \"Store inspection label must stay inspectable.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-92F58A5F2B09F8E3",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2448,14 +2911,18 @@
       "exact_terminology": "record(openWindow.privacy == .calendarDerived, \"Free-time candidates must stay calendar-derived when sourced from calendar data.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(openWindow.privacy == .calendarDerived, \"Free-time candidates must stay calendar-derived when sourced from calendar data.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-97CA5FDA0CFBDA26",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2472,14 +2939,18 @@
       "exact_terminology": "record(search.hitPerformanceBudget == false, \"Search budget must remain roomy for the gauntlet fixture.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(search.hitPerformanceBudget == false, \"Search budget must remain roomy for the gauntlet fixture.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C0B194719FD992F5",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2496,14 +2967,18 @@
       "exact_terminology": "record(search.items.first?.hasProof == true, \"Search results must preserve proof visibility.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(search.items.first?.hasProof == true, \"Search results must preserve proof visibility.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-5C2DA6A961F0C1D5",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2520,14 +2995,18 @@
       "exact_terminology": "record(search.items.first?.matchedTerms == [\"launch\", \"note\"], \"Search terms must stay deterministic.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(search.items.first?.matchedTerms == [\"launch\", \"note\"], \"Search terms must stay deterministic.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9A913824A655F040",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2544,14 +3023,18 @@
       "exact_terminology": "record(search.items.map(\\.id) == [fixture.contextEntry.id], \"Search must return the matching context entry.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(search.items.map(\\.id) == [fixture.contextEntry.id], \"Search must return the matching context entry.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-287699D78E721E9A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2568,14 +3051,18 @@
       "exact_terminology": "record(trace.receipt.id.localizedCaseInsensitiveContains(\"capture-runtime-receipt\"), \"Replay receipt IDs should remain in the capture-runtime receipt namespace.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.receipt.id.localizedCaseInsensitiveContains(\"capture-runtime-receipt\"), \"Replay receipt IDs should remain in the capture-run...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-EC73C5C5BC74BB57",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2592,14 +3079,18 @@
       "exact_terminology": "record(trace.receipt.kind == .captureCorrectionApplied, \"User correction should always produce a correction receipt.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.receipt.kind == .captureCorrectionApplied, \"User correction should always produce a correction receipt.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9B4BC6AF5467A546",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2616,14 +3107,18 @@
       "exact_terminology": "record(trace.receipt.privacyRedactions.contains(\"raw capture text\"), \"Sensitive recovery capture should redact the raw capture text.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.receipt.privacyRedactions.contains(\"raw capture text\"), \"Sensitive recovery capture should redact the raw capture text.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D897415DCED25E0E",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2640,14 +3135,18 @@
       "exact_terminology": "record(trace.receipt.undoAvailability == scenario.expectedUndoAvailability, \"User correction should preserve the expected undo availability.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.receipt.undoAvailability == scenario.expectedUndoAvailability, \"User correction should preserve the expected undo availabili...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9861C7CA31BA3F4A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2664,14 +3163,18 @@
       "exact_terminology": "record(trace.receipt.whatWasCaptured == \"[redacted]\", \"Sensitive recovery capture text should be redacted in the receipt.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.receipt.whatWasCaptured == \"[redacted]\", \"Sensitive recovery capture text should be redacted in the receipt.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0490BEC6C9658020",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2688,14 +3191,18 @@
       "exact_terminology": "record(trace.userDecision.correctionKind == scenario.correction?.kind, \"User correction should preserve the correction kind.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Record(trace.userDecision.correctionKind == scenario.correction?.kind, \"User correction should preserve the correction kind.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-867C6D5222B91A20",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2712,14 +3219,18 @@
       "exact_terminology": "requiredIdentifier: \"you.privacy-control.review.export\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "RequiredIdentifier: \"you.privacy-control.review.export\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-48E2825ED3A84D0B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2736,14 +3247,18 @@
       "exact_terminology": "return XCTFail(\"Capture projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Capture projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-5112361CF636550F",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2760,14 +3275,18 @@
       "exact_terminology": "return XCTFail(\"Capture projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Capture projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-C929DF3A7C214775",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2784,14 +3303,18 @@
       "exact_terminology": "return XCTFail(\"Capture projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Capture projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BE1F0F4A3C6757B0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2808,14 +3331,18 @@
       "exact_terminology": "return XCTFail(\"Goals projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Goals projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-53E9E39EC732A325",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2832,14 +3359,18 @@
       "exact_terminology": "return XCTFail(\"Time projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Time projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-B188810F97B1C59A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2856,14 +3387,18 @@
       "exact_terminology": "return XCTFail(\"Today projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"Today projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-2FFC693ECEE01AC0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2880,14 +3415,18 @@
       "exact_terminology": "return XCTFail(\"You projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"You projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-3C0ADE1D8B9CD7E9",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2904,14 +3443,18 @@
       "exact_terminology": "return XCTFail(\"You projection should exist\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Return XCTFail(\"You projection should exist\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-78B7F369BCECC0DF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2928,14 +3471,18 @@
       "exact_terminology": "root = self._workspace({\"Native/Ambitions/App/B.swift\": \"import SwiftUI\\nstruct B {}\"})",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Root = self._workspace({\"Native/Ambitions/App/B.swift\": \"import SwiftUI\\nstruct B {}\"})",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-6FC09CE81B9DF9F5",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2952,14 +3499,18 @@
       "exact_terminology": "summary: \"A capture can become a goal after confirmation.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"A capture can become a goal after confirmation.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DBC48E2CD4819D1C",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -2976,14 +3527,18 @@
       "exact_terminology": "summary: \"A capture can become a goal after confirmation.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"A capture can become a goal after confirmation.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-1CBC242D97056622",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3000,14 +3555,18 @@
       "exact_terminology": "summary: \"Local search should find the owning goal.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"Local search should find the owning goal.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-417FA8F00BAFA03D",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3024,14 +3583,18 @@
       "exact_terminology": "summary: \"Notes, collections, templates, relations, search, export/delete, and replay stay local.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"Notes, collections, templates, relations, search, export/delete, and replay stay local.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-CB062DA2DE770FB0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3048,14 +3611,18 @@
       "exact_terminology": "summary: \"Notes, collections, templates, relations, search, export/delete, and replay stay local.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"Notes, collections, templates, relations, search, export/delete, and replay stay local.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7F158DC4EF6AEE1F",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3072,14 +3639,18 @@
       "exact_terminology": "summary: \"The user-approved reflow creates a local source-adapter event.\",",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Summary: \"The user-approved reflow creates a local source-adapter event.\",",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-27EA099208D01FF2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3096,14 +3667,18 @@
       "exact_terminology": "surfaceLanguageSamples: [String] = [\"You can review, reset, or disable this local learning.\"]",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "SurfaceLanguageSamples: [String] = [\"You can review, reset, or disable this local learning.\"]",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-27979E3ED58CF992",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3120,14 +3695,18 @@
       "exact_terminology": "surfaceLanguageSamples: [String] = [\"You can review, reset, or disable this local learning.\"],",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "SurfaceLanguageSamples: [String] = [\"You can review, reset, or disable this local learning.\"],",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-80E4A861E425E4AE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3144,14 +3723,18 @@
       "exact_terminology": "Top Failing Scenarios",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Top Failing Scenarios",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-50E70286D34DC15B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3168,14 +3751,18 @@
       "exact_terminology": "Validation Commands",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "Validation Commands",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-85EE7E13BEF9CD9F",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The extracted text is a command, file reference, structured-data field, or evidence pointer rather than a durable user-facing promise.",
+      "classification_reason_code": "machine_metadata_or_command",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3192,14 +3779,18 @@
       "exact_terminology": "visibilityLevels: [.toast, .peek, .trail, .search, .export],",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "VisibilityLevels: [.toast, .peek, .trail, .search, .export],",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-5EFA7CCD37730D89",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3216,14 +3807,18 @@
       "exact_terminology": "XCTAssertEqual(assessment.receipt.inspectionSummary, \"You / Search Ambitions can inspect this storage migration source, receipt, and reason before any recovery action.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(assessment.receipt.inspectionSummary, \"You / Search Ambitions can inspect this storage migration source, receipt, and reas...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-E7939E8B84E8C8EF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3240,14 +3835,18 @@
       "exact_terminology": "XCTAssertEqual(capture.rawText, \"Need to prep the board update, ask Maya for numbers, and protect pickup before Friday.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(capture.rawText, \"Need to prep the board update, ask Maya for numbers, and protect pickup before Friday.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BA89DFD62A0ED3AE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3264,14 +3863,18 @@
       "exact_terminology": "XCTAssertEqual(contextEntry.localInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(contextEntry.localInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-F9E1DBE2E2308D86",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3288,14 +3891,18 @@
       "exact_terminology": "XCTAssertEqual(deleted.exportSnapshot.inspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(deleted.exportSnapshot.inspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-94976CB74147EA7B",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3312,14 +3919,18 @@
       "exact_terminology": "XCTAssertEqual(inspectionItems.first?.title, \"What Ambitions learned from momentum reflow\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(inspectionItems.first?.title, \"What Ambitions learned from momentum reflow\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DC2C9FF5E5C917AA",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3336,14 +3947,18 @@
       "exact_terminology": "XCTAssertEqual(loaded.sourceInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(loaded.sourceInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-46131988442ED242",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3360,14 +3975,18 @@
       "exact_terminology": "XCTAssertEqual(parsedTomorrow.source.localReminderYouInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and reason.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(parsedTomorrow.source.localReminderYouInspectionSummary, \"You / Search Ambitions can inspect this source, receipt, and rea...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-309A9B1386AA5B73",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3384,14 +4003,18 @@
       "exact_terminology": "XCTAssertEqual(recommendation.protects, [\"Keeps protected time intact.\", \"Preserves focus.\"])",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(recommendation.protects, [\"Keeps protected time intact.\", \"Preserves focus.\"])",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D19B8F77C320DB6D",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3408,14 +4031,18 @@
       "exact_terminology": "XCTAssertEqual(report.safetySummary.warningMessages, [\"Goals and plans count does not match the package contents. Review this package before import.\"])",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(report.safetySummary.warningMessages, [\"Goals and plans count does not match the package contents. Review this package bef...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-5821BC233DBC20D3",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3432,14 +4059,18 @@
       "exact_terminology": "XCTAssertEqual(search.queryPrompt, \"Find anything local\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(search.queryPrompt, \"Find anything local\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-D97551372C1E1541",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3456,14 +4087,18 @@
       "exact_terminology": "XCTAssertEqual(signal.personalRuntimeExportRoute, \"you://personal-runtime/momentum_reflow/\\(signal.id)/export\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertEqual(signal.personalRuntimeExportRoute, \"you://personal-runtime/momentum_reflow/\\(signal.id)/export\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-8FFD8F9E560A4337",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3480,14 +4115,18 @@
       "exact_terminology": "XCTAssertFalse(capture.explanation.localizedCaseInsensitiveContains(\"export\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertFalse(capture.explanation.localizedCaseInsensitiveContains(\"export\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-2B19D16E23C9605A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3504,14 +4143,18 @@
       "exact_terminology": "XCTAssertFalse(rootDestinationExists(tab, in: app), \"Activated Capture should own foreground chrome instead of showing \\(tab).\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertFalse(rootDestinationExists(tab, in: app), \"Activated Capture should own foreground chrome instead of showing \\(tab).\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-DE61BEDC4198CDBD",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3528,14 +4171,18 @@
       "exact_terminology": "XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.62, \"Activated Capture should take over the Stage instead of behaving like a sheet.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.62, \"Activated Capture should take over the Stage instead of behav...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-9CCA126C02863FED",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3552,14 +4199,18 @@
       "exact_terminology": "XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.86, \"Activated Capture should remain full-screen after keyboard dismissal.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.86, \"Activated Capture should remain full-screen after keyboard di...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-06A8B891DD120C28",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3576,14 +4227,18 @@
       "exact_terminology": "XCTAssertLessThanOrEqual(shellCrown + objectCrown, 1, \"Time must have exactly one visible context crown owner.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertLessThanOrEqual(shellCrown + objectCrown, 1, \"Time must have exactly one visible context crown owner.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-4954D8D0F2BDFB01",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3600,14 +4255,18 @@
       "exact_terminology": "XCTAssertNotNil(visibleHeadline, \"Today should render either the preview recommendation or the empty Start here fallback.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertNotNil(visibleHeadline, \"Today should render either the preview recommendation or the empty Start here fallback.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-A67F27240A6883E6",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3624,14 +4283,18 @@
       "exact_terminology": "XCTAssertTrue(app.descendants(matching: .any)[\"you.privacy-control.review.export\"].waitForExistence(timeout: 10))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(app.descendants(matching: .any)[\"you.privacy-control.review.export\"].waitForExistence(timeout: 10))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-0B9601EF72BC9CCF",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3648,14 +4311,18 @@
       "exact_terminology": "XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == \"you-integration-share\" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == \"you-integration-share\" && $0.valueLabel == ExternalSurfaceT...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-4DD05C9A6280F796",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3672,14 +4339,18 @@
       "exact_terminology": "XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == \"you-trust-export-import\" && $0.valueLabel == \"Requires confirmation\" }))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == \"you-trust-export-import\" && $0.valueLabel == \"Requires confirmation...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-4F3F8CF72FD51BED",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3696,14 +4367,18 @@
       "exact_terminology": "XCTAssertTrue(history.waitForExistence(timeout: 10), \"Time mutation proof should expose history.\", file: file, line: line)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(history.waitForExistence(timeout: 10), \"Time mutation proof should expose history.\", file: file, line: line)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-639BBA352680D997",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3720,14 +4395,18 @@
       "exact_terminology": "XCTAssertTrue(lensSource.contains(\"global Capture support\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(lensSource.contains(\"global Capture support\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-971DE0AAB853EDAE",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3744,14 +4423,18 @@
       "exact_terminology": "XCTAssertTrue(privacy.waitForExistence(timeout: 10), \"Time mutation proof should expose privacy.\", file: file, line: line)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(privacy.waitForExistence(timeout: 10), \"Time mutation proof should expose privacy.\", file: file, line: line)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-884D77AE6043C678",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3768,14 +4451,18 @@
       "exact_terminology": "XCTAssertTrue(proof.waitForExistence(timeout: 10), \"Time mutation proof should render as an inline receipt.\", file: file, line: line)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(proof.waitForExistence(timeout: 10), \"Time mutation proof should render as an inline receipt.\", file: file, line: line)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-7BAB6B6F29EDBAF6",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3792,14 +4479,18 @@
       "exact_terminology": "XCTAssertTrue(proofLine.waitForExistence(timeout: 10), \"Time mutation proof should expose proof.\", file: file, line: line)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(proofLine.waitForExistence(timeout: 10), \"Time mutation proof should expose proof.\", file: file, line: line)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-FF07BFF890A53EB0",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3816,14 +4507,18 @@
       "exact_terminology": "XCTAssertTrue(registry.contains(\"artifacts/ambitions-ui-reconstruction/action-state/AMB-579-quiet-reflow-family.md\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(registry.contains(\"artifacts/ambitions-ui-reconstruction/action-state/AMB-579-quiet-reflow-family.md\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-CFA6B1551BF807A2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.99,
+      "classification_rationale": "The record is or contains a repository path, generated artifact, result bundle, or file reference rather than a product promise.",
+      "classification_reason_code": "file_or_artifact_reference",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3840,14 +4535,18 @@
       "exact_terminology": "XCTAssertTrue(registry.contains(\"artifacts/ambitions-ui-reconstruction/screenshots/quiet-reflow-family-amb-579.png\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(registry.contains(\"artifacts/ambitions-ui-reconstruction/screenshots/quiet-reflow-family-amb-579.png\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-36E5A42EAF77C8CB",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3864,14 +4563,18 @@
       "exact_terminology": "XCTAssertTrue(screenshotApp.descendants(matching: .any)[\"time.life-shape-field\"].waitForExistence(timeout: 10), \"Life Calendar should exist for \\(item.name) screenshot proof.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(screenshotApp.descendants(matching: .any)[\"time.life-shape-field\"].waitForExistence(timeout: 10), \"Life Calendar should exi...",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-BF2D340C0BB93D1A",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3888,14 +4591,18 @@
       "exact_terminology": "XCTAssertTrue(source.waitForExistence(timeout: 10), \"Time mutation proof should expose source.\", file: file, line: line)",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(source.waitForExistence(timeout: 10), \"Time mutation proof should expose source.\", file: file, line: line)",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-B6E4B11A9C615CC1",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3912,14 +4619,18 @@
       "exact_terminology": "XCTAssertTrue(visibleCopy.contains(\"does not request permissions, write calendars, auto-fill open time, or run broad reflow\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(visibleCopy.contains(\"does not request permissions, write calendars, auto-fill open time, or run broad reflow\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-234DEDEFF6895625",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3936,14 +4647,18 @@
       "exact_terminology": "XCTAssertTrue(visibleCopy.contains(\"Time reflow to receipt\"))",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(visibleCopy.contains(\"Time reflow to receipt\"))",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     },
     {
       "authority_status": "repository_candidate",
       "candidate_id": "CAND-2CC46FB6CAB774D2",
-      "classification": "unclassified",
-      "disposition": "preserve_for_capability_extraction",
+      "classification": "evidence",
+      "classification_confidence": 0.98,
+      "classification_rationale": "Test sources can verify a capability but cannot define or authorize one by themselves.",
+      "classification_reason_code": "test_evidence_source",
+      "disposition": "preserve_as_supporting_evidence",
       "evidence": [
         {
           "authority_class": "verification_evidence_only",
@@ -3960,6 +4675,7 @@
       "exact_terminology": "XCTAssertTrue(waitForSelectedTab(\"Time\", in: screenshotApp), \"Time should be selected for \\(item.name) screenshot proof.\")",
       "implementation_status": "not_assessed",
       "normalized_name_hint": "XCTAssertTrue(waitForSelectedTab(\"Time\", in: screenshotApp), \"Time should be selected for \\(item.name) screenshot proof.\")",
+      "qualification_status": "supporting",
       "specification_maturity": "unframed",
       "verification_status": "not_assessed"
     }
@@ -3968,7 +4684,7 @@
     "SRC-QA-REMEDIATION": 21,
     "SRC-RESEARCH": 8,
     "SRC-STANDARDS": 22,
-    "SRC-TESTS": 114
+    "SRC-TESTS": 116
   },
   "repository": "agentdevan/ambitions",
   "schema_version": 1,
