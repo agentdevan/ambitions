@@ -8,7 +8,7 @@ from pathlib import Path
 from tools.capability_atlas import classified_outputs as base
 from tools.capability_atlas.classification_refinement import classify_candidates
 from tools.capability_atlas.discover import DiscoveryCompilation
-from tools.capability_atlas.model import canonical_json
+from tools.capability_atlas.model import CandidateRecord, canonical_json
 
 
 AMBIGUOUS_DIRECTORY = base.AMBIGUOUS_DIRECTORY
@@ -19,13 +19,52 @@ output_drift = base.output_drift
 write_outputs = base.write_outputs
 
 
+def _precision_filter(candidate: CandidateRecord) -> CandidateRecord:
+    """Reject final scope and unsupported-feature fragments from qualification."""
+
+    if (
+        candidate.qualification_status != "qualified"
+        or candidate.authority_status == "owner_seed"
+    ):
+        return candidate
+    text = candidate.exact_terminology.strip().strip("# \"'`,").casefold()
+    if text.startswith("supported scope"):
+        return replace(
+            candidate,
+            classification="requirement",
+            qualification_status="supporting",
+            classification_reason_code="scope_statement_not_capability",
+            classification_rationale=(
+                "The statement defines supported ownership or scope boundaries and must "
+                "trace beneath a capability rather than becoming the capability identity."
+            ),
+            classification_confidence=0.94,
+            disposition="preserve_as_supporting_requirement",
+        )
+    if text.startswith("what ambitions knows") or "unsupported" in text:
+        return replace(
+            candidate,
+            classification="ambiguous",
+            qualification_status="ambiguous",
+            classification_reason_code="decision_fragment_requires_semantic_reconciliation",
+            classification_rationale=(
+                "The decision fragment references possible product areas and unsupported "
+                "scope without expressing one coherent durable promise."
+            ),
+            classification_confidence=0.76,
+            disposition="preserve_for_manual_capability_reconciliation",
+        )
+    return candidate
+
+
 def render_outputs(compilation: DiscoveryCompilation) -> dict[Path, str]:
     """Render discovery plus authority-refined classification artifacts."""
 
-    classified = replace(
-        compilation,
-        candidates=classify_candidates(compilation.candidates),
+    candidates = tuple(
+        _precision_filter(item)
+        for item in classify_candidates(compilation.candidates)
     )
+    classified = replace(compilation, candidates=candidates)
     outputs = base.render_discovery_outputs(classified)
     qualified = [
         item for item in classified.candidates if item.qualification_status == "qualified"
