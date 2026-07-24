@@ -9,13 +9,9 @@ from pathlib import Path
 from typing import Sequence
 
 from tools.capability_atlas import __version__
-from tools.capability_atlas.discover import (
-    compile_discovery,
-    output_drift,
-    render_outputs,
-    write_outputs,
-)
+from tools.capability_atlas.discover import compile_discovery
 from tools.capability_atlas.model import CapabilityDiscoveryError
+from tools.capability_atlas.outputs import output_drift, render_outputs, write_outputs
 
 
 SUPPORTED_COMMANDS = frozenset({"version", "build", "check"})
