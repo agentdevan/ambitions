@@ -100,6 +100,14 @@ jobs:
             docs/capabilities/discovery-sources.json
             docs/capabilities/candidates/*.json
             docs/capabilities/sources/*.json
+            docs/capabilities/classification-summary.json
+            docs/capabilities/exclusion-register.json
+            docs/capabilities/qualified-capability-candidates.json
+            docs/capabilities/ambiguous-capability-candidates.json
+            docs/capabilities/CLASSIFIED_CAPABILITY_INVENTORY.md
+            docs/capabilities/exclusions/*.json
+            docs/capabilities/qualified/*.json
+            docs/capabilities/ambiguous/*.json
       - name: Reject capability discovery drift
         shell: bash
         run: |
@@ -110,7 +118,15 @@ jobs:
             docs/capabilities/discovery-coverage.json \
             docs/capabilities/discovery-sources.json \
             docs/capabilities/candidates \
-            docs/capabilities/sources)"
+            docs/capabilities/sources \
+            docs/capabilities/classification-summary.json \
+            docs/capabilities/exclusion-register.json \
+            docs/capabilities/qualified-capability-candidates.json \
+            docs/capabilities/ambiguous-capability-candidates.json \
+            docs/capabilities/CLASSIFIED_CAPABILITY_INVENTORY.md \
+            docs/capabilities/exclusions \
+            docs/capabilities/qualified \
+            docs/capabilities/ambiguous)"
           if [[ -n "$status" ]]; then
             printf '%s\n' "$status"
             echo "Run: python3 scripts/ambitions-capabilities.py build"
