@@ -1,0 +1,306 @@
+{
+  "authority": "non_normative_discovery_inventory_index",
+  "baseline_ref": "main",
+  "counts": {
+    "owner_seed_candidates": 8,
+    "repository_candidates": 3165,
+    "total_candidates": 3173
+  },
+  "owner_seed_candidates": [
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-003",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "5b485484bc85371a520e29d56ca0dfe34f10a7eb738aa00bcbbe71c416537be0",
+          "exact_text": "Alternate career pathing simulation",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "Alternate career pathing simulation",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Alternate Career Path Simulation",
+      "owner_seed_id": "SEED-003",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-005",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "46825d9bae234adb5d6a02173f14ac566d7d1cbae6b3be743c69c4fb1014438e",
+          "exact_text": "Raycast-like Ambitions native search",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "Raycast-like Ambitions native search",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Ambitions Native Search and Command",
+      "note": "Raycast-like is preserved as owner intent and must be translated into durable Ambitions-native behavior rather than copied as product identity.",
+      "owner_seed_id": "SEED-005",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-002",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "6c47a1f1b96d7c2fe8151f47a8af4832c28c86ba288f40d257a060e620eb62b8",
+          "exact_text": "Unique generative goal pathing based on personal context and learned behaviors",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "Unique generative goal pathing based on personal context and learned behaviors",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Contextual Generative Goal Pathing",
+      "owner_seed_id": "SEED-002",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-006",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "c7c2da95c49c7898a7695ffc82f2c56a2dd9de0c1cbec693a0c677e5e3ca5741",
+          "exact_text": "First class appearance studio",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "First class appearance studio",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "First-Class Appearance Studio",
+      "owner_seed_id": "SEED-006",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-007",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "4ead6befc44d869f0126709981d67042308a8202fe69238b67fd60ce5fd7a1be",
+          "exact_text": "First class content share studio",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "First class content share studio",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "First-Class Content Share Studio",
+      "owner_seed_id": "SEED-007",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-008",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "5abd435fc80c8060a5ee0fdc136ff617271e591db496fbb70e73b6b50d9a877d",
+          "exact_text": "File storage attached to goals",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "File storage attached to goals",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Goal-Attached File Storage",
+      "owner_seed_id": "SEED-008",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-001",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "a0f11919f8932f049e2e3de085a25e759ea470e5abcb8ed69adc9e705a8901da",
+          "exact_text": "Skill transference",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "Skill transference",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Skill Transference",
+      "owner_seed_id": "SEED-001",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "authority_status": "owner_seed",
+      "candidate_id": "CAND-SEED-004",
+      "classification": "capability_candidate",
+      "disposition": "preserve_for_repository_reconciliation",
+      "evidence": [
+        {
+          "authority_class": "owner_seed_non_normative",
+          "end_line": 1,
+          "evidence_fingerprint": "85ff79db9e4c4c983ef6dbef055d7607a7e3aa9bb51173f0e900f30a5bf4575d",
+          "exact_text": "Step reflow upon new step placement",
+          "extraction_kind": "owner_seed",
+          "extraction_rationale": "Direct owner-originated capability seed preserved verbatim.",
+          "family_id": "SRC-OWNER-SEEDS",
+          "source_path": "docs/capabilities/seed-capabilities.json",
+          "start_line": 1
+        }
+      ],
+      "exact_terminology": "Step reflow upon new step placement",
+      "implementation_status": "not_assessed",
+      "normalized_name_hint": "Step Placement Reflow",
+      "owner_seed_id": "SEED-004",
+      "specification_maturity": "unframed",
+      "verification_status": "not_assessed"
+    }
+  ],
+  "repository": "agentdevan/ambitions",
+  "repository_candidate_family_counts": {
+    "SRC-ADRS": 31,
+    "SRC-AUDITS": 306,
+    "SRC-CONSTITUTION": 30,
+    "SRC-DESIGN-CANON": 1150,
+    "SRC-HISTORICAL": 6,
+    "SRC-LINEAR-MIRRORS": 40,
+    "SRC-NORMATIVE-SPECS": 788,
+    "SRC-PLATFORM": 14,
+    "SRC-PRODUCTION": 304,
+    "SRC-QA-REMEDIATION": 352,
+    "SRC-RESEARCH": 8,
+    "SRC-STANDARDS": 22,
+    "SRC-TESTS": 114
+  },
+  "repository_candidate_shards": [
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-ADRS": 31,
+        "SRC-AUDITS": 306,
+        "SRC-CONSTITUTION": 30,
+        "SRC-DESIGN-CANON": 133
+      },
+      "path": "docs/capabilities/candidates/repository-0001.json",
+      "sha256": "9a77d21cce5bfab1cc5d039088a3d5fc068477c69bd6a321323e2b836be388db",
+      "shard_index": 1
+    },
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-DESIGN-CANON": 500
+      },
+      "path": "docs/capabilities/candidates/repository-0002.json",
+      "sha256": "44720ae2abb9f4b9cc8ecda86c0d29f92b8bb439aee402da808c57e15f2630d7",
+      "shard_index": 2
+    },
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-DESIGN-CANON": 500
+      },
+      "path": "docs/capabilities/candidates/repository-0003.json",
+      "sha256": "8470eab7322955b493781d5d1f348595d1f93170c12e8f6be89805b827e3029c",
+      "shard_index": 3
+    },
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-DESIGN-CANON": 17,
+        "SRC-HISTORICAL": 6,
+        "SRC-LINEAR-MIRRORS": 40,
+        "SRC-NORMATIVE-SPECS": 437
+      },
+      "path": "docs/capabilities/candidates/repository-0004.json",
+      "sha256": "e4070acae96b6f0ce79b6a8c7cebefe7e1df591a6ca6adf7ac11d87d5f03e7f5",
+      "shard_index": 4
+    },
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-NORMATIVE-SPECS": 351,
+        "SRC-PLATFORM": 14,
+        "SRC-PRODUCTION": 135
+      },
+      "path": "docs/capabilities/candidates/repository-0005.json",
+      "sha256": "b7539fa0133ac48f364b75f84cc7a8dd3d8cc62fae3d498cf1c5cbdf9a531802",
+      "shard_index": 5
+    },
+    {
+      "candidate_count": 500,
+      "family_counts": {
+        "SRC-PRODUCTION": 169,
+        "SRC-QA-REMEDIATION": 331
+      },
+      "path": "docs/capabilities/candidates/repository-0006.json",
+      "sha256": "a54b9df46dd3742520761e451d683ac71e77f9d3b859593b0e30c0ae0bdb91ae",
+      "shard_index": 6
+    },
+    {
+      "candidate_count": 165,
+      "family_counts": {
+        "SRC-QA-REMEDIATION": 21,
+        "SRC-RESEARCH": 8,
+        "SRC-STANDARDS": 22,
+        "SRC-TESTS": 114
+      },
+      "path": "docs/capabilities/candidates/repository-0007.json",
+      "sha256": "7b64845424ad103e91a16a94979f3034fdec435b43f5575e570c3fec8de5edc8",
+      "shard_index": 7
+    }
+  ],
+  "schema_version": 2
+}

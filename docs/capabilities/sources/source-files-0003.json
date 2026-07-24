@@ -1,0 +1,1749 @@
+{
+  "authority": "non_normative_source_fingerprint_shard",
+  "baseline_ref": "main",
+  "family_counts": {
+    "SRC-TESTS": 217
+  },
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "shard_index": 3,
+  "source_file_count": 217,
+  "source_files": [
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 21378,
+      "family_id": "SRC-TESTS",
+      "line_count": 513,
+      "path": "Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift",
+      "sha256": "f83ed6b2d51e97157a0b95675535dd390c011a148f49e1f47a278b9cef6d0796"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2556,
+      "family_id": "SRC-TESTS",
+      "line_count": 59,
+      "path": "Native/AmbitionsTests/Services/GoalClarificationServiceTests.swift",
+      "sha256": "637b7bf36185d3d7ed2108f15bc4775a77db94f2c12d58960e9edfc6072b5f54"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 29715,
+      "family_id": "SRC-TESTS",
+      "line_count": 708,
+      "path": "Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift",
+      "sha256": "e070138a6287283cb772ae748bd1f6702f68ab3df139aedfb0abb59c4222692c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10817,
+      "family_id": "SRC-TESTS",
+      "line_count": 232,
+      "path": "Native/AmbitionsTests/Services/GoalDomainPackServiceTests.swift",
+      "sha256": "7d7eb918e1866b0f93f2d83629d1de50d74604813b5ddae2d9971b575e64cf2b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7310,
+      "family_id": "SRC-TESTS",
+      "line_count": 148,
+      "path": "Native/AmbitionsTests/Services/GoalEnergyFitServiceTests.swift",
+      "sha256": "1d5400ddc982ac4787373dbd3a1f091929fcb9de74103df8cd9cfd2a8ccdc33d"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14766,
+      "family_id": "SRC-TESTS",
+      "line_count": 284,
+      "path": "Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift",
+      "sha256": "0df98aff1f27fcb712aca6e61be650b12704f03359e1e914047ae6012a64479a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15042,
+      "family_id": "SRC-TESTS",
+      "line_count": 359,
+      "path": "Native/AmbitionsTests/Services/GoalFreshnessUpdateServiceTests.swift",
+      "sha256": "b991a23bd799e82f179c931444f3bd80e062d761d195751238fb0217608650e8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10019,
+      "family_id": "SRC-TESTS",
+      "line_count": 242,
+      "path": "Native/AmbitionsTests/Services/GoalPathCompilerServiceTests.swift",
+      "sha256": "45ba49cc849b6b8f3fa5b16f3c5e0808216717f759246b3f71ce4f74efa75e45"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 17754,
+      "family_id": "SRC-TESTS",
+      "line_count": 389,
+      "path": "Native/AmbitionsTests/Services/GoalResourceGraphServiceTests.swift",
+      "sha256": "ac621c2b4c61b14344465255725241c24527cad92101f45b59dc3c4d24a48e27"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8816,
+      "family_id": "SRC-TESTS",
+      "line_count": 214,
+      "path": "Native/AmbitionsTests/Services/GoalTeachingSignalServiceTests.swift",
+      "sha256": "4f6b32ad9d25befeafb477c28fb3874386b48e5a4c53e5d414771cbcd6df0763"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12624,
+      "family_id": "SRC-TESTS",
+      "line_count": 270,
+      "path": "Native/AmbitionsTests/Services/GoalUnderstandingServiceTests.swift",
+      "sha256": "ebbf77eb750d3b810b8c0f7891f594bf4f020158e18399576d7516db47b78f29"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9929,
+      "family_id": "SRC-TESTS",
+      "line_count": 228,
+      "path": "Native/AmbitionsTests/Services/KnowledgeIngestionServiceTests.swift",
+      "sha256": "eea98eeb849d6b959dce55a2934fbf1383fdb8a567d7518b9e195da7bcc84cf4"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 13228,
+      "family_id": "SRC-TESTS",
+      "line_count": 306,
+      "path": "Native/AmbitionsTests/Services/KnowledgeProviderBoundaryTests.swift",
+      "sha256": "80102d0a2cae611b595e0c810169a1defd0787c4949c3034260b8189c05eb1f1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 1846,
+      "family_id": "SRC-TESTS",
+      "line_count": 46,
+      "path": "Native/AmbitionsTests/Services/LargeStoreFixtureGeneratorTests.swift",
+      "sha256": "f9c60ab2b890bfbd957c34e43e26d76046281e74eb8d50c9736670a67939c20a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 21546,
+      "family_id": "SRC-TESTS",
+      "line_count": 487,
+      "path": "Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift",
+      "sha256": "fbc9a57e3eeee367a632ea4be1a7e6fb63e1fa52dd7018f368843b8883c8cb58"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6209,
+      "family_id": "SRC-TESTS",
+      "line_count": 133,
+      "path": "Native/AmbitionsTests/Services/LocalScheduleBlockRepositoryTests.swift",
+      "sha256": "d1c2f81ed4b7ecc247ac09ec80ef83763dd766d34ce5f6ceb8be29869af50ff1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6996,
+      "family_id": "SRC-TESTS",
+      "line_count": 162,
+      "path": "Native/AmbitionsTests/Services/NorthStarProjectorTests.swift",
+      "sha256": "85cd6f4084765fb333b0092031b7432b0d96f79eb44e988f900de9f61da0ff86"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14595,
+      "family_id": "SRC-TESTS",
+      "line_count": 334,
+      "path": "Native/AmbitionsTests/Services/OneStepGoalProjectorTests.swift",
+      "sha256": "0721c73692376f458800999684308d06badbb928362d512133025b6ed8619b7a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8741,
+      "family_id": "SRC-TESTS",
+      "line_count": 171,
+      "path": "Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift",
+      "sha256": "57c35db48bc1be9a99c399802da37571bb40f792b18666fb8f7e001258d4d65a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2585,
+      "family_id": "SRC-TESTS",
+      "line_count": 61,
+      "path": "Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift",
+      "sha256": "deb4a2a3db6f81c9185220006668fa1f78fbef93641517c725c73c87c79f9d95"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 3815,
+      "family_id": "SRC-TESTS",
+      "line_count": 92,
+      "path": "Native/AmbitionsTests/Services/RecommendationExplanationAdapterTests.swift",
+      "sha256": "3cc1bdf869d5b783a53ba7022a0188c67ee81d580e3fcdea28318ccb1d3957f2"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7804,
+      "family_id": "SRC-TESTS",
+      "line_count": 162,
+      "path": "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift",
+      "sha256": "627a2ede41a19bb0b7992060f3c75ca3ed6c859cd1c4fae398fe0b5f50fcd529"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 25721,
+      "family_id": "SRC-TESTS",
+      "line_count": 558,
+      "path": "Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift",
+      "sha256": "d73386eeb29953fe4d9e4b3be29ea7550c57b04bd05dff160bec40ad1c74a3de"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2374,
+      "family_id": "SRC-TESTS",
+      "line_count": 46,
+      "path": "Native/AmbitionsTests/Support/AmbitionsCommandExecutorTestFactory.swift",
+      "sha256": "8a18f5358e1299d37daa0a2a9f0e4c80acb97caefcb4717647fa3858cee93e4e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 268,
+      "family_id": "SRC-TESTS",
+      "line_count": 9,
+      "path": "Native/AmbitionsTests/Support/RemovedRuntimeOwnerPath.swift",
+      "sha256": "f45d476c43b6e3efa4bd51f05330fab62f2075b64e9498e1dd99051ec40407d1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5160,
+      "family_id": "SRC-TESTS",
+      "line_count": 126,
+      "path": "Native/AmbitionsTests/SurfacesCanonicalOwnershipTests.swift",
+      "sha256": "814eb15ee8d0fd6265e8aed8b41227760d50cd3441f11d46560adcc25d3604ec"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10041,
+      "family_id": "SRC-TESTS",
+      "line_count": 155,
+      "path": "Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift",
+      "sha256": "f4d89b3250920742e1956df67becd338b32bd1114afcbe7f68bd6e60e78952e7"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 13513,
+      "family_id": "SRC-TESTS",
+      "line_count": 210,
+      "path": "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
+      "sha256": "706e6902c53ad0f92d7d2317ae4fcefc085823b25e752962337807b0ac418290"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19444,
+      "family_id": "SRC-TESTS",
+      "line_count": 411,
+      "path": "Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift",
+      "sha256": "fbd79ffc51100cd3400ae58e5c3b0627a85f722420efb56e24bf0de67d506d2f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12581,
+      "family_id": "SRC-TESTS",
+      "line_count": 295,
+      "path": "Native/AmbitionsTests/Time/TimeClockTests.swift",
+      "sha256": "4543cf138813a0e4f32889e3e1b8704f946077e36bcf52c34ddcdf9ca3e319fc"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 31398,
+      "family_id": "SRC-TESTS",
+      "line_count": 592,
+      "path": "Native/AmbitionsTests/Time/TimeDurableMutationIntegrationTests.swift",
+      "sha256": "40a8f327adf2c0ed92f63e5787b7a2bb8671b20756f2de1969fe570f814c76c0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5528,
+      "family_id": "SRC-TESTS",
+      "line_count": 123,
+      "path": "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift",
+      "sha256": "ca5137dd24487fbd09d0901f86a472618eb3d0b68da597f781865fcaa90f8bd6"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4316,
+      "family_id": "SRC-TESTS",
+      "line_count": 91,
+      "path": "Native/AmbitionsTests/Time/TimeLensProjectionTests.swift",
+      "sha256": "c0d4682cb0a6380352d3c1be0674f0526bab67538e3652a5a1cdb7b266405455"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 90382,
+      "family_id": "SRC-TESTS",
+      "line_count": 1644,
+      "path": "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift",
+      "sha256": "59037b5a85d2ebff5897a1dde315a76e03d9a8a652f9cd47dcdb4a2815d674c8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12625,
+      "family_id": "SRC-TESTS",
+      "line_count": 253,
+      "path": "Native/AmbitionsTests/Time/TimeProtectedPlacementReviewTests.swift",
+      "sha256": "944b42d4fd7ccf2a3c85320845bc5555ea0aea398812b398a99e3ed1618a5f7c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 38387,
+      "family_id": "SRC-TESTS",
+      "line_count": 767,
+      "path": "Native/AmbitionsTests/Time/TimeRitualOwnerWriteTests.swift",
+      "sha256": "8051f806762050c253b3e7c33d98638298cd80ce0e28f0f0a14b4db818612b5f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5849,
+      "family_id": "SRC-TESTS",
+      "line_count": 123,
+      "path": "Native/AmbitionsTests/Time/TimeRitualsProjectionServiceTests.swift",
+      "sha256": "c6281de2d4de4848ba7cfd611250a2f011d1befb76abd2672ff04de0b2275e93"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19254,
+      "family_id": "SRC-TESTS",
+      "line_count": 368,
+      "path": "Native/AmbitionsTests/Time/TimeTodayCouplingTests.swift",
+      "sha256": "3bfd49fcac08bbe43f7ecda808344373feaebe0b7879466ee87918ec4092f98b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5001,
+      "family_id": "SRC-TESTS",
+      "line_count": 116,
+      "path": "Native/AmbitionsTests/Today/CommandSearchObviousnessGauntletTests.swift",
+      "sha256": "0272ec8bb4c276d2b1c134f9c5ccaefebf45df02c5643f5f881b2f7516179775"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4039,
+      "family_id": "SRC-TESTS",
+      "line_count": 82,
+      "path": "Native/AmbitionsTests/Today/TodayActionCopyBuilderTests.swift",
+      "sha256": "b84cdc4d068e380637857a2279f9beefcce4048ad7800a3b6ab838f9dc45622a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8161,
+      "family_id": "SRC-TESTS",
+      "line_count": 200,
+      "path": "Native/AmbitionsTests/Today/TodayClockTests.swift",
+      "sha256": "e4beb3920655dc3e2b7fb3f6e3b4b8e64bdfbc9ccd5f71784afd136430083666"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 20015,
+      "family_id": "SRC-TESTS",
+      "line_count": 400,
+      "path": "Native/AmbitionsTests/Today/TodayClosureRuntimeTests.swift",
+      "sha256": "aaf643ae4ccc10c3c788f6fd3974d8abcf743e67f9c7f9cd9eb5da06115b6e74"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14465,
+      "family_id": "SRC-TESTS",
+      "line_count": 266,
+      "path": "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift",
+      "sha256": "54e546f413f035e4efa279271be6f7b99283b7fbd9b9b0eb224c376f13847c4b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2043,
+      "family_id": "SRC-TESTS",
+      "line_count": 47,
+      "path": "Native/AmbitionsTests/Today/TodayDerivedReadModelCacheTests.swift",
+      "sha256": "6f073e75e41d5888e1abfa8507fe48d710a2c3e59c9706cfb309c92adc6c962d"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 39596,
+      "family_id": "SRC-TESTS",
+      "line_count": 684,
+      "path": "Native/AmbitionsTests/Today/TodayDurableActionMutationIntegrationTests.swift",
+      "sha256": "4aac4e9cf491abfd7b96a47bc337b9121e5fb7ea7280fe1f2b01e81a7c4eca99"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12498,
+      "family_id": "SRC-TESTS",
+      "line_count": 252,
+      "path": "Native/AmbitionsTests/Today/TodayDurableReceiptMutationIntegrationTests.swift",
+      "sha256": "c221ef6be887b25eaa4ccc069e84cb600cb7f70a684295813f6139398712b80f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 18415,
+      "family_id": "SRC-TESTS",
+      "line_count": 391,
+      "path": "Native/AmbitionsTests/Today/TodayFreshGoalVisibilityTests.swift",
+      "sha256": "da5f86493eb0ca3c466ec83f9ef87d9022ffcf6a57bda21caf21b3a5d8364f32"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 13594,
+      "family_id": "SRC-TESTS",
+      "line_count": 226,
+      "path": "Native/AmbitionsTests/Today/TodayGoalStepActionAtomicityTests.swift",
+      "sha256": "0463e0eb813b12db8278e76b68b2d4a99521f6c3e693066ee27a2beb6b98e221"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 21082,
+      "family_id": "SRC-TESTS",
+      "line_count": 400,
+      "path": "Native/AmbitionsTests/Today/TodayRailContinuityTests.swift",
+      "sha256": "0736451909a49494061fed384ad0bff8486de8c730661971459e83ac77eeab37"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10940,
+      "family_id": "SRC-TESTS",
+      "line_count": 176,
+      "path": "Native/AmbitionsTests/Today/TodayRealityMeridianExperienceElevationTests.swift",
+      "sha256": "4ff87f6c9c534d3c68cb0a131ec35aeff5fcf5a7e2a0438f0056d2ddad484675"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8171,
+      "family_id": "SRC-TESTS",
+      "line_count": 175,
+      "path": "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift",
+      "sha256": "84c81e896c5f4815d4ee799b35b57a48e40e5a654231beac96fcbcb62b20eeaf"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9922,
+      "family_id": "SRC-TESTS",
+      "line_count": 204,
+      "path": "Native/AmbitionsTests/Today/TodayRecoveryViewModelTests.swift",
+      "sha256": "2f5866ab3824ac0c9026a20c616316ff6440b6ef161ca528f7918ea51722e771"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 21957,
+      "family_id": "SRC-TESTS",
+      "line_count": 400,
+      "path": "Native/AmbitionsTests/Today/TodayServiceProjectionTests.swift",
+      "sha256": "90847cec04b2873f015c2e00e68708d12869b6c232238d5f1c0e91aa0afcf747"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4047,
+      "family_id": "SRC-TESTS",
+      "line_count": 86,
+      "path": "Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift",
+      "sha256": "ef0d7a7c637bde38a752eac24ed807c4b0328c977f04388fcee5202010c3c5bb"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9411,
+      "family_id": "SRC-TESTS",
+      "line_count": 214,
+      "path": "Native/AmbitionsTests/Today/TodayViewModelTestSupport.swift",
+      "sha256": "ee899c130364df29741488039cc229573226ddd00c57996cbb792e775faf9a5c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5712,
+      "family_id": "SRC-TESTS",
+      "line_count": 100,
+      "path": "Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift",
+      "sha256": "282c18c2abf956d7fddc261c8ee1cb5fc5864560421d849b115d1afb10eb9b8c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11777,
+      "family_id": "SRC-TESTS",
+      "line_count": 269,
+      "path": "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",
+      "sha256": "9b7d2a9b835c8a733ab5a40ed9af91f61b8d4ac536ff6b7769c4901c2269594a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7615,
+      "family_id": "SRC-TESTS",
+      "line_count": 155,
+      "path": "Native/AmbitionsTests/TrustCanonicalOwnershipTests.swift",
+      "sha256": "d56b09dab51b7c5bf83676256a4f8a03157c3f7a77428eabc49a6b2f4b368496"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 798,
+      "family_id": "SRC-TESTS",
+      "line_count": 27,
+      "path": "Native/AmbitionsTests/UI/SourceAtlasUIPrimitivesTests.swift",
+      "sha256": "f815070d7a078ac379054720fdc022d187ebd6b95428133be6325e1056a7dfee"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 116670,
+      "family_id": "SRC-TESTS",
+      "line_count": 2485,
+      "path": "Native/AmbitionsTests/You/YouFeatureServiceTests.swift",
+      "sha256": "5e18a76559628927c7e0cfbee1fbd4577ab4721964bfdcc16ba0d74b4d67b8d0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10090,
+      "family_id": "SRC-TESTS",
+      "line_count": 248,
+      "path": "Native/AmbitionsTests/You/YouPreferencesCommandServiceTests.swift",
+      "sha256": "2234bd9aec29d9159018914785b94f4efeb8626f3fa66b5e36ab7fb7076ec60a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9129,
+      "family_id": "SRC-TESTS",
+      "line_count": 173,
+      "path": "Native/AmbitionsTests/You/YouUserSystemProfileReconstructionTests.swift",
+      "sha256": "85548b5f7c3b65165b675aabb5ebde64f2a005a84fa722860a16d4661c5faaee"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2430,
+      "family_id": "SRC-TESTS",
+      "line_count": 63,
+      "path": "Native/AmbitionsUITests/AmbitionsCaptureUITestSupport.swift",
+      "sha256": "f32bb71f379031ebba7f1ad2c08492c4fc7c833d449d7601ceeed94e499fb0eb"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7937,
+      "family_id": "SRC-TESTS",
+      "line_count": 196,
+      "path": "Native/AmbitionsUITests/AmbitionsGoalsUITestSupport.swift",
+      "sha256": "e7b308fb533076fb8328dc7064f7cf8834cae15b1e586842f8623cb4ce15bafb"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 3911,
+      "family_id": "SRC-TESTS",
+      "line_count": 90,
+      "path": "Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift",
+      "sha256": "6db3706053bd10a7b7552c0c377a73ce78e57f9b824306099c4b951355007bf3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4625,
+      "family_id": "SRC-TESTS",
+      "line_count": 132,
+      "path": "Native/AmbitionsUITests/AmbitionsScrollingUITestSupport.swift",
+      "sha256": "82d395cd269a212cf68dacc95a37d6cd80ad09164e6f8117d900e6bc516da351"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 17082,
+      "family_id": "SRC-TESTS",
+      "line_count": 408,
+      "path": "Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift",
+      "sha256": "fc1ff5a3b421355ba5bc3377f8b09d9d372e9d8dc2614eae4d851c78286c5e11"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14215,
+      "family_id": "SRC-TESTS",
+      "line_count": 310,
+      "path": "Native/AmbitionsUITests/AmbitionsTimeUITestSupport.swift",
+      "sha256": "4fbeb5408ebfc09e48a2c05672da3bf3abf950dc63810111d6867050a486b674"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9262,
+      "family_id": "SRC-TESTS",
+      "line_count": 240,
+      "path": "Native/AmbitionsUITests/AmbitionsTodayUITestSupport.swift",
+      "sha256": "06eb469d870031a253dde1d3257f721295e25bf2c15af91baff828baa313e0f0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4534,
+      "family_id": "SRC-TESTS",
+      "line_count": 108,
+      "path": "Native/AmbitionsUITests/AmbitionsUITestCase.swift",
+      "sha256": "c8f1f9d7e8fc735be4c8c98b1a0e5f52e4cacae4ca8b96e17344ff56cadc5fd1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 3431,
+      "family_id": "SRC-TESTS",
+      "line_count": 109,
+      "path": "Native/AmbitionsUITests/AmbitionsYouUITestSupport.swift",
+      "sha256": "73c34fa8210f0c77aed495f6db5a2e3cda26cefb6b701a0740089e7db50fb01c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 21169,
+      "family_id": "SRC-TESTS",
+      "line_count": 445,
+      "path": "Native/AmbitionsUITests/BootstrapShellUITests.swift",
+      "sha256": "081a297c89d20674b164a81d5b62cec055a78ade731cf34f604f2fe3076dffe1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14057,
+      "family_id": "SRC-TESTS",
+      "line_count": 240,
+      "path": "Native/AmbitionsUITests/CaptureComposerUITests.swift",
+      "sha256": "8563b58a4562753927be4bd8ce36322428c0af32ad4418c70a6c9e798aae79e8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 17600,
+      "family_id": "SRC-TESTS",
+      "line_count": 427,
+      "path": "Native/AmbitionsUITests/DeterministicScreenshotLaneUITests.swift",
+      "sha256": "d460e315f469b65b89ffca094409794b9e22515ac08588e021d07d355ba62b26"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 927,
+      "family_id": "SRC-TESTS",
+      "line_count": 24,
+      "path": "Native/AmbitionsUITests/FirstViewportCopyBudgetUITests.swift",
+      "sha256": "059aefa4e9d92f457e7f0407e16fd01e5321c7e30e030c6b54c4177b903fa75f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 17072,
+      "family_id": "SRC-TESTS",
+      "line_count": 313,
+      "path": "Native/AmbitionsUITests/GoalsSurfaceUITests.swift",
+      "sha256": "0eb80f3971541fe5d84a214cd915dc59c65534bcce24580b1512e877aecd4d73"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2213,
+      "family_id": "SRC-TESTS",
+      "line_count": 60,
+      "path": "Native/AmbitionsUITests/LaunchURLFocusedUITests.swift",
+      "sha256": "dee54070bca82d116145ef65d2ae1e228cbef4f98e39b2485ec7acae237d5188"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 770,
+      "family_id": "SRC-TESTS",
+      "line_count": 20,
+      "path": "Native/AmbitionsUITests/ProductObjectDominanceUITests.swift",
+      "sha256": "9394f862cf4897faca671ea75c7c69eb59b2d1b090f5afd4be1e464e3a884b86"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 781,
+      "family_id": "SRC-TESTS",
+      "line_count": 19,
+      "path": "Native/AmbitionsUITests/SingleCrownOwnershipUITests.swift",
+      "sha256": "192301b033b40ff83b8c746573d98ebd693a94be4b5b061cea0d3bd23048443c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2232,
+      "family_id": "SRC-TESTS",
+      "line_count": 34,
+      "path": "Native/AmbitionsUITests/TimeCalendarGradeUITests.swift",
+      "sha256": "4226fb8375a4bd16f0a24a99c40dd871a408d123dcac2411c70d90472f6bdae0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 35375,
+      "family_id": "SRC-TESTS",
+      "line_count": 600,
+      "path": "Native/AmbitionsUITests/TimeSurfaceUITests.swift",
+      "sha256": "3908d6c1d1e57dfd03a40ca22d835db6fb65c29df6106d02ae1b388f4afe3f5d"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 28861,
+      "family_id": "SRC-TESTS",
+      "line_count": 543,
+      "path": "Native/AmbitionsUITests/TodaySurfaceUITests.swift",
+      "sha256": "ab97d74aba30c4a38fca03824980fc0375f2a1fbe1065137487741388f6b9a5f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5364,
+      "family_id": "SRC-TESTS",
+      "line_count": 121,
+      "path": "Native/AmbitionsUITests/VisualTargetAttachmentUITests.swift",
+      "sha256": "b5b31752c5951ddd6235b188fee7ef7372fb26337f56551396e7891d2fbcee13"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 30022,
+      "family_id": "SRC-TESTS",
+      "line_count": 550,
+      "path": "Native/AmbitionsUITests/YouSurfaceUITests.swift",
+      "sha256": "526ad602d2277fab8aac30f9e15d0a27cb4d1f395a538ffd95c1e5b7e47f87a8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 38063,
+      "family_id": "SRC-TESTS",
+      "line_count": 873,
+      "path": "scripts/ambitions-changed-file-test-router.py",
+      "sha256": "452214e84a6503bd2abd0fe80035ccc079df79e5cb70444f3e2658ced13127a0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7324,
+      "family_id": "SRC-TESTS",
+      "line_count": 302,
+      "path": "scripts/ambitions-changed-file-test-routes.json",
+      "sha256": "769b920014a494564a616561dbad08b28d455957195630484278539c231230dd"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2554,
+      "family_id": "SRC-TESTS",
+      "line_count": 81,
+      "path": "scripts/ambitions-test-strength-audit.py",
+      "sha256": "a486477c9f365b18dd7c515ce25bb9bd67ca8c0499580360450d951bc6c489b7"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9779,
+      "family_id": "SRC-TESTS",
+      "line_count": 308,
+      "path": "scripts/ambitions-xcode-build-for-testing.sh",
+      "sha256": "0e3c1ba39c396e41c8bcee409b394e454d10c3136fc4939db82ba66b99eb3b12"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 28342,
+      "family_id": "SRC-TESTS",
+      "line_count": 830,
+      "path": "scripts/ambitions-xcode-test-focused.sh",
+      "sha256": "99247f583ff37c6879b4b0b41c0e66763077616c17b3dd2e8a8cdf596c076ee6"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9005,
+      "family_id": "SRC-TESTS",
+      "line_count": 277,
+      "path": "scripts/ambitions-xcode-test-plan.sh",
+      "sha256": "53c8810ac6cccf2708e4e9a7011d1a1f7a8df8d1e1ac29c82fe9b3cb89cfaa00"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 1816,
+      "family_id": "SRC-TESTS",
+      "line_count": 92,
+      "path": "scripts/test-local.sh",
+      "sha256": "d1302a7670a2b54f30d66903d223447661147031d0828e6403b574670916fee5"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 37207,
+      "family_id": "SRC-TESTS",
+      "line_count": 824,
+      "path": "scripts/tests/test_ambitions_build_benchmark_report.py",
+      "sha256": "5363d335144c02d3b3ea207d5ed8eafd8f9b39d83af7cd09ac143fd4afc5738b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5991,
+      "family_id": "SRC-TESTS",
+      "line_count": 187,
+      "path": "scripts/tests/test_ambitions_build_graph_audit.py",
+      "sha256": "c89a5eff267ccd573a3d5ad8e7e5f832503da89d394491db97152445215b429b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 29062,
+      "family_id": "SRC-TESTS",
+      "line_count": 605,
+      "path": "scripts/tests/test_ambitions_changed_file_test_router.py",
+      "sha256": "6a9207787cea1efbdf9cbadafbc8dd5ab2436ea60988ae4fb4422d5fb9b15769"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 16327,
+      "family_id": "SRC-TESTS",
+      "line_count": 309,
+      "path": "scripts/tests/test_ambitions_domain_boundary_audit.py",
+      "sha256": "14f80b892685e12eb298746b4db90d27502de288dec15c080ca9c0f04f3e3992"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4692,
+      "family_id": "SRC-TESTS",
+      "line_count": 119,
+      "path": "scripts/tests/test_ambitions_flagship_boundary_audit.py",
+      "sha256": "9ec82cf8df377ffd03fc06da569114f8801147373abf4ec5f22123fe8a265517"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5749,
+      "family_id": "SRC-TESTS",
+      "line_count": 156,
+      "path": "scripts/tests/test_ambitions_gitleaks_scan.py",
+      "sha256": "4d9d02cd35e655a117c6611a7ba47b41f0e6d467edb36f00b183b16502233f95"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 76047,
+      "family_id": "SRC-TESTS",
+      "line_count": 1575,
+      "path": "scripts/tests/test_ambitions_module_candidate_gate.py",
+      "sha256": "c3d77c8815c94913e565b0b6125d9faaede6319f8012f40ded25eaa2c66def52"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11520,
+      "family_id": "SRC-TESTS",
+      "line_count": 253,
+      "path": "scripts/tests/test_ambitions_source_disposition_audit.py",
+      "sha256": "d29b931f4043f8bb45c49d7b13ac9de912eb50a08957e634b9436db3d3abdad5"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10266,
+      "family_id": "SRC-TESTS",
+      "line_count": 244,
+      "path": "scripts/tests/test_ambitions_xcode_lane_lock.py",
+      "sha256": "144c91a3e2851a8e9005a3afba80ffd7b8e4c1b045ef67d2d718b7956adceaa3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9488,
+      "family_id": "SRC-TESTS",
+      "line_count": 221,
+      "path": "scripts/tests/test_ambitions_xcode_result_extract.py",
+      "sha256": "39f278f42736ce158635e13d823a6d2540a84c1b7d57e897427da75a66896d2b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 44011,
+      "family_id": "SRC-TESTS",
+      "line_count": 1053,
+      "path": "scripts/tests/test_ambitions_xcode_runner_reliability.py",
+      "sha256": "f8242c2257829ad0a01a777597e6a99e31ec9e9ec591c660e5d7f28547d2a74c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19638,
+      "family_id": "SRC-TESTS",
+      "line_count": 396,
+      "path": "tools/mcp/ambitions_proof_mcp/tests/test_server_tools.py",
+      "sha256": "6bd362f2de5c84c5c526bb54566cba6013d5a4cb219ed01f37ed3ff76113a802"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 20050,
+      "family_id": "SRC-TESTS",
+      "line_count": 443,
+      "path": "tools/source-atlas/foundry/tests/test_adapter_broad_coverage_train_01.py",
+      "sha256": "d3587be1fb9f87a313a3e4707f54af2864a9e02c6cde360f7489d81c23066497"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7259,
+      "family_id": "SRC-TESTS",
+      "line_count": 201,
+      "path": "tools/source-atlas/foundry/tests/test_arbitrary_goal_domain_gate_train_115.py",
+      "sha256": "d9c4fef3685c83704cd81ab16dda5ffb95e7c538f888cb666b11b31085874d75"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10783,
+      "family_id": "SRC-TESTS",
+      "line_count": 279,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_control_loop_train_119.py",
+      "sha256": "31d2b035c07df42b70cb024b41570dbe00bf4a957bf367090bb73305d660054a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6779,
+      "family_id": "SRC-TESTS",
+      "line_count": 189,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_cycle_executor_train_121.py",
+      "sha256": "501b9b4b1d4e109eae0cb8b7639afe931badb9173c152caa1cbc00dbf3f8a07b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6312,
+      "family_id": "SRC-TESTS",
+      "line_count": 167,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_cycle_runner_train_120.py",
+      "sha256": "e55993208814410073cc998137f3b5e25aaac1d741c6fb43635d3fbfd12068cf"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14538,
+      "family_id": "SRC-TESTS",
+      "line_count": 336,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_domain_expansion_chain_train_107.py",
+      "sha256": "70e45d2b63bf5ddaabd5f5bfbcb78678ac90ac663a2ee688e5b3ba0ce21a4005"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15430,
+      "family_id": "SRC-TESTS",
+      "line_count": 354,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_end_to_end_chain_train_112.py",
+      "sha256": "d455a650408b521f9b2587e877f4b43add548081e40f4b486b88af7650dfb153"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11604,
+      "family_id": "SRC-TESTS",
+      "line_count": 311,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_freshness_scheduler_train_124.py",
+      "sha256": "c75215ac819d26d60d9f08f0c53467f7986fc990105177dc329facd4c20348d8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7157,
+      "family_id": "SRC-TESTS",
+      "line_count": 165,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_maintenance_executor_train_125.py",
+      "sha256": "1f68e007ad0821d5d9b5da5594a2d9b36bc7ab3a16efa259a2ce410ff0c04e3c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9354,
+      "family_id": "SRC-TESTS",
+      "line_count": 235,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_operations_executor_train_106.py",
+      "sha256": "4e094bad97ba52b3b2d34d9ffc52c84b4af1afa23fa70e8e78f03abb0a6fe1f6"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9721,
+      "family_id": "SRC-TESTS",
+      "line_count": 261,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_operations_planner_train_105.py",
+      "sha256": "96aa71b51a2852199de872a7cee31c5bac10ae78e29b93dde28856529ddb1f7a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14644,
+      "family_id": "SRC-TESTS",
+      "line_count": 398,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_production_orchestrator_train_122.py",
+      "sha256": "168b151ba02c7621f123ef7a9c4f15b7ea9141d29dda86f7904eeae135975877"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 23490,
+      "family_id": "SRC-TESTS",
+      "line_count": 552,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_production_supervisor_train_123.py",
+      "sha256": "6a58922920274cd6d071db71f89f585630799cb613e7f3856966c76717426594"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 13725,
+      "family_id": "SRC-TESTS",
+      "line_count": 318,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_promotion_runner_train_127.py",
+      "sha256": "c5f8a50e2ab669b093a713c44789c6c84e27d5fe557aeab77b1e5fc7d559db85"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15979,
+      "family_id": "SRC-TESTS",
+      "line_count": 382,
+      "path": "tools/source-atlas/foundry/tests/test_autonomous_registry_activation_chain_train_108.py",
+      "sha256": "486889aa991bc351414b1c6b951cd31f4a14f3f8fe69fb0f020287906c8d8925"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7471,
+      "family_id": "SRC-TESTS",
+      "line_count": 217,
+      "path": "tools/source-atlas/foundry/tests/test_boundary.py",
+      "sha256": "cde1e28828a14cd8287ba2577d05641f28f40f899be7e3818cc3a1e3ac635338"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12858,
+      "family_id": "SRC-TESTS",
+      "line_count": 267,
+      "path": "tools/source-atlas/foundry/tests/test_broad_domain_discovery_train_07.py",
+      "sha256": "77b77114978e7ab216dd8ca26af7333a20ad5f01930ac245596820b12c645c75"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7313,
+      "family_id": "SRC-TESTS",
+      "line_count": 162,
+      "path": "tools/source-atlas/foundry/tests/test_business_entrepreneurship_adapter_train_43.py",
+      "sha256": "5002429ecb36721cf1be40529f743ae402a5b60547afdce17a8acd92f08390b5"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 16187,
+      "family_id": "SRC-TESTS",
+      "line_count": 324,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_approval_chain_train_66.py",
+      "sha256": "a0833fa7dc3ac4f4ab8286631b14f92c656705aa10d956bfc89181deaf8cede8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 17872,
+      "family_id": "SRC-TESTS",
+      "line_count": 371,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_approval_decision_assembler_train_65.py",
+      "sha256": "a2603f5a253ba7889213a38514dcb27ba322036d7399caa37a29ee55a1073e19"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10465,
+      "family_id": "SRC-TESTS",
+      "line_count": 218,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_approval_decision_inputs_train_64.py",
+      "sha256": "2e39aa1c1b9add3c189a0954526642813bb9dda94ab0421cca108a1eb99afb15"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 16156,
+      "family_id": "SRC-TESTS",
+      "line_count": 349,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_approval_finalizer_train_62.py",
+      "sha256": "a6c72c0879e25c32a475d1b90bfb14cd0fea4c5f105a98178340419f9f6afcea"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15200,
+      "family_id": "SRC-TESTS",
+      "line_count": 308,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_approval_preflight_train_63.py",
+      "sha256": "71a41299fb96105cdb6a90737eeb4a02995bc0e82e3f43e6a650c3ca6fadd4a0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7041,
+      "family_id": "SRC-TESTS",
+      "line_count": 157,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_candidate_review_train_56.py",
+      "sha256": "b76dbc700649a63750be4fb3f28aadff4aaec4ad4411399e9a98fc142fec7e06"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 18066,
+      "family_id": "SRC-TESTS",
+      "line_count": 367,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_direct_source_approval_chain_train_74.py",
+      "sha256": "d71c288aa3ab5a4d0c9d63eaea26cf7cffc68e6c57dd1637c5e5b13ac277e326"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12544,
+      "family_id": "SRC-TESTS",
+      "line_count": 288,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_direct_source_resolution_train_70.py",
+      "sha256": "c9d1918181631d6f8556e9ef6e297937138eff7c9bfdf85204321c72af81928e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19848,
+      "family_id": "SRC-TESTS",
+      "line_count": 432,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_completion_train_73.py",
+      "sha256": "c1a26e98e04010db1e6966c2f58155be5bfa8dc4de9b9c32e43518eb40d48954"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 16990,
+      "family_id": "SRC-TESTS",
+      "line_count": 368,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_gate_train_71.py",
+      "sha256": "c971e14960eaefc60c137dd822ec1edfd9e27041922ba750c60f4b396c227f7f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9187,
+      "family_id": "SRC-TESTS",
+      "line_count": 186,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_template_train_72.py",
+      "sha256": "cc294c5e5903e4c9c3a6074c8210f92d68e33db710e24c26e912e15a79a5b387"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5270,
+      "family_id": "SRC-TESTS",
+      "line_count": 121,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_discovery_train_53.py",
+      "sha256": "6f0fde08fb6a07e56767341489124ac0b2ea6d7c47896d1a76767e990ecc87f8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7523,
+      "family_id": "SRC-TESTS",
+      "line_count": 167,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_governance_intake_train_57.py",
+      "sha256": "8e76dd741af994ac4c2d090c23a68ad35f7e1ec5679c0fabb3185ad0efddbfb3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14414,
+      "family_id": "SRC-TESTS",
+      "line_count": 356,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_registry_applier_train_60.py",
+      "sha256": "93193c9734391b35ad3d12b18e6c647b16f2f84550204009c17c00d43fd9bd7f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7694,
+      "family_id": "SRC-TESTS",
+      "line_count": 168,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_registry_approval_request_train_59.py",
+      "sha256": "10e358db0bdbcb0e67275d1eea10e243b25b0f7de397c074dacf2e5bc9f3c3a3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10704,
+      "family_id": "SRC-TESTS",
+      "line_count": 229,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_registry_mutation_plan_train_58.py",
+      "sha256": "286157546c8a443a71b7a8df5db3f3dd676f5ad8cdacda9d5e34da4481429bc8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8382,
+      "family_id": "SRC-TESTS",
+      "line_count": 184,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_review_work_queue_train_69.py",
+      "sha256": "6832ed3dce07d9eaf4595cc1d393f733c662c2db5980f48d22b066b719ce6756"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14966,
+      "family_id": "SRC-TESTS",
+      "line_count": 325,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_reviewer_completion_intake_train_67.py",
+      "sha256": "845a1c1c058f449d13da119d3e185a08a2192ea6908f086d31ddb69e9f458be8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7696,
+      "family_id": "SRC-TESTS",
+      "line_count": 166,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_reviewer_completion_template_train_68.py",
+      "sha256": "e5f29455153931546bfa2ea06a2f86dd8033b4becee82f70dc257d5ca5375577"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9737,
+      "family_id": "SRC-TESTS",
+      "line_count": 208,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_terms_resolution_train_61.py",
+      "sha256": "51e82c0fdc90c1b891f1805184db422d81863beb4b9bedca7fe05eb3a702c6e1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11220,
+      "family_id": "SRC-TESTS",
+      "line_count": 291,
+      "path": "tools/source-atlas/foundry/tests/test_catalog_transport_train_54.py",
+      "sha256": "b51f22b120c9298d4fe86381ef8445d349eef91c2a42d7249d4335a0cbe27be3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6720,
+      "family_id": "SRC-TESTS",
+      "line_count": 154,
+      "path": "tools/source-atlas/foundry/tests/test_civic_adapter_train_09.py",
+      "sha256": "866ced7522b68a899fe5723af5566d262fef48e363f8e2abf79f3c2871966d10"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5984,
+      "family_id": "SRC-TESTS",
+      "line_count": 126,
+      "path": "tools/source-atlas/foundry/tests/test_claim_frontier_train_03.py",
+      "sha256": "b8aa6f0461477494838f8f02d87ee01e2f1fdd6d44231d86802ccfd5801cfe63"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11217,
+      "family_id": "SRC-TESTS",
+      "line_count": 245,
+      "path": "tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+      "sha256": "f0a3f316ff16235aeadac5241a591b0c38fd320d77fc0256938fa66cb9b70f17"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9231,
+      "family_id": "SRC-TESTS",
+      "line_count": 198,
+      "path": "tools/source-atlas/foundry/tests/test_creative_project_reference_adapter_train_49.py",
+      "sha256": "8a5cf4c88f20f1de47e9e2d8ad754342f64193bdc2863e88738ea659216d4943"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19277,
+      "family_id": "SRC-TESTS",
+      "line_count": 386,
+      "path": "tools/source-atlas/foundry/tests/test_deep_research_frontier_intake_train_137.py",
+      "sha256": "c0d48e41a82b39e6ebb3378a3e1270a6ac276fd412bc39b7ff23a0bd604e4226"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8176,
+      "family_id": "SRC-TESTS",
+      "line_count": 182,
+      "path": "tools/source-atlas/foundry/tests/test_education_adapter_train_08.py",
+      "sha256": "0f7403d8c20ca403d21044732810d994699c09e877e87e14fcc89781ab70931e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9094,
+      "family_id": "SRC-TESTS",
+      "line_count": 193,
+      "path": "tools/source-atlas/foundry/tests/test_finance_public_reference_adapter_train_47.py",
+      "sha256": "18c6a3ecdb26f3f98d294004c5ebb922f38e2367235e9d3f385dd1edc6e38161"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 23751,
+      "family_id": "SRC-TESTS",
+      "line_count": 491,
+      "path": "tools/source-atlas/foundry/tests/test_foundry.py",
+      "sha256": "ab0e2d66274f647f9931c43ea9e09af42cbca91e44654feb2a355fe2b7497b5d"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8098,
+      "family_id": "SRC-TESTS",
+      "line_count": 175,
+      "path": "tools/source-atlas/foundry/tests/test_frontier_intake_train_52.py",
+      "sha256": "a727d9509abc197793a6f1f638fa4dff31ebd1b95bfadb56a14c00e73bd7573f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 18905,
+      "family_id": "SRC-TESTS",
+      "line_count": 422,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_active_registry_apply_gate_train_97.py",
+      "sha256": "de674ac2d21376c71dd5fecf22aa015a86d29b56553dda0630dfd4d31f147245"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8558,
+      "family_id": "SRC-TESTS",
+      "line_count": 232,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_gauntlet_train_118.py",
+      "sha256": "c842034c6550db6a21882397173a8c696de89089d6283946bd799ff285be3798"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7574,
+      "family_id": "SRC-TESTS",
+      "line_count": 180,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_production_activation_train_99.py",
+      "sha256": "45981a5c79d2c3a03dd6953dbe1f640677f9a329b6da773e7630875b16d316da"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8265,
+      "family_id": "SRC-TESTS",
+      "line_count": 169,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_production_lanes_train_89.py",
+      "sha256": "332bbbc1d329c4c08ecffc0b43b1d368a28807ba8418f16e1ce387b7eb499ed8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15495,
+      "family_id": "SRC-TESTS",
+      "line_count": 361,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_registry_applier_train_95.py",
+      "sha256": "890573e828016e97078ed4cf78f54e296aa8bb36f37a0fee3b17ab754cf994a1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5600,
+      "family_id": "SRC-TESTS",
+      "line_count": 138,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_registry_apply_rehearsal_train_96.py",
+      "sha256": "4a0d2bbf5942b0af275a52988f8afed8e9875e103e109ce8bded08c1e7e3779a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 14301,
+      "family_id": "SRC-TESTS",
+      "line_count": 294,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_registry_mutation_plan_train_94.py",
+      "sha256": "a754892ed021e9c6150e15b1521b82af4ef64bd1ea8375cd743575850697a516"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12613,
+      "family_id": "SRC-TESTS",
+      "line_count": 255,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_review_completion_intake_train_93.py",
+      "sha256": "685fb5f450779b58d1a508dd756a5fe724d69fca2e8d64d54b33d70703d190ac"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5139,
+      "family_id": "SRC-TESTS",
+      "line_count": 110,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_review_packets_train_92.py",
+      "sha256": "91a9981e59f6f90e0c32bc40eeaf677882b185581fcfb7b9fa0a2198fe823109"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15433,
+      "family_id": "SRC-TESTS",
+      "line_count": 359,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py",
+      "sha256": "b63dd3d683b952b20fa7e6c0078be9bcca0b30c80ce971bcbf33f63944c5fc33"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 11464,
+      "family_id": "SRC-TESTS",
+      "line_count": 248,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_source_specific_apply_packet_train_98.py",
+      "sha256": "7e43e7235e3eb2d8c99ae2aed181c779ce6e4e38114fe539257e0587139cc4f2"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7804,
+      "family_id": "SRC-TESTS",
+      "line_count": 152,
+      "path": "tools/source-atlas/foundry/tests/test_goal_domain_work_order_executor_train_90.py",
+      "sha256": "11ad63d242c8c10a3cf3ab9e4fe94b62a2ba4569b16678597be60c7b425bc86f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7466,
+      "family_id": "SRC-TESTS",
+      "line_count": 178,
+      "path": "tools/source-atlas/foundry/tests/test_governance_registry_train_01.py",
+      "sha256": "91301d30bc208d51c5f3cf19c1463b546b6e8171bbd0c2232468e9959ad289a7"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4621,
+      "family_id": "SRC-TESTS",
+      "line_count": 120,
+      "path": "tools/source-atlas/foundry/tests/test_governed_harvest_runner_train_02.py",
+      "sha256": "d9d9ee67b57e8350f0dbea467edfca407e162095eae63a633b8d00d29e95453d"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7389,
+      "family_id": "SRC-TESTS",
+      "line_count": 169,
+      "path": "tools/source-atlas/foundry/tests/test_health_wellness_adapter_train_45.py",
+      "sha256": "9c5c37955d77830605a09a4ec34b442210be395854029d3f00124ac5873f0920"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7332,
+      "family_id": "SRC-TESTS",
+      "line_count": 167,
+      "path": "tools/source-atlas/foundry/tests/test_hobbies_recreation_adapter_train_44.py",
+      "sha256": "f26188bdb8e9afda6a13457a588b1f0d5c35308d40b464a9d7713730c73dda7e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9102,
+      "family_id": "SRC-TESTS",
+      "line_count": 198,
+      "path": "tools/source-atlas/foundry/tests/test_home_life_admin_adapter_train_48.py",
+      "sha256": "693d441c3ead4f642758db4291bf80ab45d3bef3a2e17fcdbbbc2884089adf92"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5145,
+      "family_id": "SRC-TESTS",
+      "line_count": 113,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py",
+      "sha256": "49e688a0f89fbd62079d270135c4ef7b60f5c03ac8d1ef77b402e9853d8c22b3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10404,
+      "family_id": "SRC-TESTS",
+      "line_count": 252,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_golden_intent_corpus_lff_m03.py",
+      "sha256": "6784da46fc8e242c86e1dda2e8fe9f51bbf2af2b6941cab3cf819b33e0e3032e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5735,
+      "family_id": "SRC-TESTS",
+      "line_count": 129,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_governance_renewal_lff_m06.py",
+      "sha256": "52761a962baf89ef73c48c62018317a89f008f04c921540d2fe1da52ca896c45"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 3932,
+      "family_id": "SRC-TESTS",
+      "line_count": 106,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_native_shard_index_proof_lff_m02.py",
+      "sha256": "f80d627e0acad957ed9cb1eb10f677404cf6a5461081a015a1f358bce3101395"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9125,
+      "family_id": "SRC-TESTS",
+      "line_count": 218,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_r2_layout_proof_lff_m02.py",
+      "sha256": "800e73cd985f944152ca07e49e4eacdf2947523ef69bd4457e7c329dc8d99030"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8056,
+      "family_id": "SRC-TESTS",
+      "line_count": 178,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_compiler_lff_m02.py",
+      "sha256": "61813ce2759c52377cfe793f4a8a93ff82ef5df5b2f4886f852e1c09304ca9a3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6908,
+      "family_id": "SRC-TESTS",
+      "line_count": 161,
+      "path": "tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_lff_m02.py",
+      "sha256": "af46e100bf9dbf58974d245ed0e9d4afcb7d309b67adc1a64c14a79c15eec8ad"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8264,
+      "family_id": "SRC-TESTS",
+      "line_count": 226,
+      "path": "tools/source-atlas/foundry/tests/test_legal_release_claim_gate_train_35.py",
+      "sha256": "7eb0c82c2f222e59979618be6050f2b8be9470bc2ab31c148127e57e9e7cc78c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 4534,
+      "family_id": "SRC-TESTS",
+      "line_count": 102,
+      "path": "tools/source-atlas/foundry/tests/test_m09_validation.py",
+      "sha256": "1abe7feb921cdfd96e915be66e0a114c6ea68a3ab9bca07183d64f7c6af88451"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15109,
+      "family_id": "SRC-TESTS",
+      "line_count": 348,
+      "path": "tools/source-atlas/foundry/tests/test_missing_shard_activation_executor_lff_m04.py",
+      "sha256": "78a0c580ba5453577ec8c4f12282bf9c4b6ea479177ffff0952b4018f33751f8"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7004,
+      "family_id": "SRC-TESTS",
+      "line_count": 177,
+      "path": "tools/source-atlas/foundry/tests/test_missing_shard_event_queue_lff_m04.py",
+      "sha256": "f1676b79d8b999f0b930d39811f248dccdeb4856c5cf95b55bd46a558f33e138"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6608,
+      "family_id": "SRC-TESTS",
+      "line_count": 153,
+      "path": "tools/source-atlas/foundry/tests/test_missing_shard_expansion_supervisor_lff_m04.py",
+      "sha256": "053109fa52eed2368c0c6d0a5235c902623f93951b309b90a352b6799dc4f8dc"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12008,
+      "family_id": "SRC-TESTS",
+      "line_count": 272,
+      "path": "tools/source-atlas/foundry/tests/test_missing_shard_review_gate_lff_m04.py",
+      "sha256": "917441dd728d2daa47d2f43ac58a5c42aa6097bd004ec127378a5074e318e483"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8443,
+      "family_id": "SRC-TESTS",
+      "line_count": 206,
+      "path": "tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+      "sha256": "31302b9f71daab7a30e0dcd5c0cbd835e28416957085ce2bbbc069521b093d1c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8514,
+      "family_id": "SRC-TESTS",
+      "line_count": 228,
+      "path": "tools/source-atlas/foundry/tests/test_native_runtime_current_proof_train_117.py",
+      "sha256": "9325570539d71e8bd45ad36bf2d89595d4f782019dc5f77074810580ac448d03"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7942,
+      "family_id": "SRC-TESTS",
+      "line_count": 201,
+      "path": "tools/source-atlas/foundry/tests/test_pack_production_train_04.py",
+      "sha256": "614c928db4d5ea94bdf3ad6adf354377189c7b77dfebb13beeccb1162990fa9f"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8274,
+      "family_id": "SRC-TESTS",
+      "line_count": 181,
+      "path": "tools/source-atlas/foundry/tests/test_personal_growth_adapter_train_50.py",
+      "sha256": "740ecc1216ffa204a578c5aad25165c60af9a7ff7b46447839681e155e993479"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10296,
+      "family_id": "SRC-TESTS",
+      "line_count": 260,
+      "path": "tools/source-atlas/foundry/tests/test_production_finish_line_gate_train_114.py",
+      "sha256": "ba30a686a4f23bcacc303f86c7b6aea866a53c50766b1301f66088a9aae2ae84"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9473,
+      "family_id": "SRC-TESTS",
+      "line_count": 254,
+      "path": "tools/source-atlas/foundry/tests/test_production_recertification_gate_train_104.py",
+      "sha256": "cbdb7c62d3a7a2ff7d2269fc3d2668b2e71c9d7efd2a9bea4365a5d4401378c1"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 15619,
+      "family_id": "SRC-TESTS",
+      "line_count": 376,
+      "path": "tools/source-atlas/foundry/tests/test_production_sweep_train_116.py",
+      "sha256": "a2ee155380a7cc4d9e8e47f6ea2a1564263fecd64bf5ce68baabf0a266b5d38a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9516,
+      "family_id": "SRC-TESTS",
+      "line_count": 248,
+      "path": "tools/source-atlas/foundry/tests/test_production_target_gate_train_85.py",
+      "sha256": "60c7c94341b9d323ebbd1e9d32cfaab47c6be0722ceecf40777a7b32acc60a15"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6622,
+      "family_id": "SRC-TESTS",
+      "line_count": 158,
+      "path": "tools/source-atlas/foundry/tests/test_production_target_ledger_train_84.py",
+      "sha256": "4645dae1cd1b87a2facc9be052e304006dc0bcc257d1d833a4dbefeba9bacb63"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9124,
+      "family_id": "SRC-TESTS",
+      "line_count": 219,
+      "path": "tools/source-atlas/foundry/tests/test_public_reference_delivery_chain_train_100.py",
+      "sha256": "bd3eb4b38aa6d02c9c6c2c808c68852fc5c28e910c4126d46a3c7ea3197d31ab"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5046,
+      "family_id": "SRC-TESTS",
+      "line_count": 134,
+      "path": "tools/source-atlas/foundry/tests/test_r2_hygiene_cleanup_train_136.py",
+      "sha256": "a1d864bb567253d1556ad163f2c86cd9d7d86ebeaec367d3cac1964fce76f568"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7333,
+      "family_id": "SRC-TESTS",
+      "line_count": 195,
+      "path": "tools/source-atlas/foundry/tests/test_r2_live_inventory_train_134.py",
+      "sha256": "47d02b6ead897bf99ff1feae0cd478296b3ed86f4f1659622eebbcd10f393900"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 25945,
+      "family_id": "SRC-TESTS",
+      "line_count": 624,
+      "path": "tools/source-atlas/foundry/tests/test_r2_pack_publisher_train_10.py",
+      "sha256": "e82f4d79a8b39b246eb7278651cfab7d3ed94aca1db10e8fb647d1d97cc7b559"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7964,
+      "family_id": "SRC-TESTS",
+      "line_count": 189,
+      "path": "tools/source-atlas/foundry/tests/test_r2_public_gateway_allowlist_train_82.py",
+      "sha256": "cd2f98ccfca2145122c8347bd69cf764f00ec14666d03bdb5719580fef5d6ceb"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 13122,
+      "family_id": "SRC-TESTS",
+      "line_count": 333,
+      "path": "tools/source-atlas/foundry/tests/test_r2_public_gateway_release_train_83.py",
+      "sha256": "e03cc9a70bd257e375042928f5449c2ff375090301068470b664f0716a4a760b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8901,
+      "family_id": "SRC-TESTS",
+      "line_count": 194,
+      "path": "tools/source-atlas/foundry/tests/test_relationships_family_adapter_train_51.py",
+      "sha256": "575a86e5386636f396fca558a8444da0cbe7a98379f8eb6fc066d1f7137410f3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5720,
+      "family_id": "SRC-TESTS",
+      "line_count": 143,
+      "path": "tools/source-atlas/foundry/tests/test_release_proof_packet_train_132.py",
+      "sha256": "b40893e223405cea2fa385cc93282261ff92138d7287b3397093978ef502fc44"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 19246,
+      "family_id": "SRC-TESTS",
+      "line_count": 441,
+      "path": "tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
+      "sha256": "ceca446a45b358367fca11baf27283bc76fe884bf2c0e0dfeec806aaa09f9ae0"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 32614,
+      "family_id": "SRC-TESTS",
+      "line_count": 661,
+      "path": "tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py",
+      "sha256": "521a04bf8ed620f4f62fc8046bde72e1889f0a064d7f0c702cb3f568d538603e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7674,
+      "family_id": "SRC-TESTS",
+      "line_count": 194,
+      "path": "tools/source-atlas/foundry/tests/test_source_needed_fallback_metric_lff_m03.py",
+      "sha256": "26add5b62a96218b14217e6705f6afe272255ea79cb4dfc4fb798070763192cb"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 12268,
+      "family_id": "SRC-TESTS",
+      "line_count": 310,
+      "path": "tools/source-atlas/foundry/tests/test_stable_channel_api_governance_train.py",
+      "sha256": "39ed8b12f770aa00bc54026102cb1f135677011e99cbf9a4b601b8da8111d4dd"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 3498,
+      "family_id": "SRC-TESTS",
+      "line_count": 97,
+      "path": "tools/source-atlas/foundry/tests/test_statcan_live_transport_train_78.py",
+      "sha256": "5fa8a0fafa612b193a0039ef56d6a41966b7564052ccdcbdcf4a690f3f63110b"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7470,
+      "family_id": "SRC-TESTS",
+      "line_count": 173,
+      "path": "tools/source-atlas/foundry/tests/test_statcan_table_13100974_adapter_train_77.py",
+      "sha256": "cda1e47ce6c18631c7565464973cd6b4683a5e16fb49bb3322e49619e77f8a5a"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6392,
+      "family_id": "SRC-TESTS",
+      "line_count": 170,
+      "path": "tools/source-atlas/foundry/tests/test_terms_approval_packet_train_27.py",
+      "sha256": "4ab35c91ad5987e36793efe8c01c6b42803388197e2df011e2427177932c7028"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8263,
+      "family_id": "SRC-TESTS",
+      "line_count": 182,
+      "path": "tools/source-atlas/foundry/tests/test_travel_relocation_adapter_train_46.py",
+      "sha256": "8affef5b8eda44418794e276debec5477668daad9e0ca182b2dc6b19cc9df427"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 9012,
+      "family_id": "SRC-TESTS",
+      "line_count": 201,
+      "path": "tools/source-atlas/foundry/tests/test_volunteering_public_reference_activation_train_130.py",
+      "sha256": "ac452083fa399dc8d4654ef67b916f6b14ee0ec95932a03ec41b65655765b8b3"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7969,
+      "family_id": "SRC-TESTS",
+      "line_count": 191,
+      "path": "tools/source-atlas/lakehouse-workbench/tests/test_regression.py",
+      "sha256": "c8da2a061ff405b232122562deb64be9437c28e9597c92fe566dbf96c331017e"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 7646,
+      "family_id": "SRC-TESTS",
+      "line_count": 208,
+      "path": "tools/source-atlas/lakehouse-workbench/tests/test_workbench.py",
+      "sha256": "ac96df7a11b70c9b260e26cadb1be449e47bf077ba9828ab26ab0a4faf9fd5d6"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6159,
+      "family_id": "SRC-TESTS",
+      "line_count": 171,
+      "path": "tools/source-atlas/tests/test_ambitions_freshness_broker.py",
+      "sha256": "817ef3d4ee264ef526b767c9048704f5bfee1c40d686a61e2e4ef9bf40173140"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 814,
+      "family_id": "SRC-TESTS",
+      "line_count": 23,
+      "path": "tools/source-atlas/tests/test_ambitions_official_adapter_contract.py",
+      "sha256": "f20e0935de36a166cc128dc230f85fde94151f306770d2819cd7371067e2bf54"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 5416,
+      "family_id": "SRC-TESTS",
+      "line_count": 121,
+      "path": "tools/source-atlas/tests/test_ambitions_pack_crypto.py",
+      "sha256": "81286c03c92d8f27201431974584ea3329633c2927eb8d4c184d034236b3a0ff"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 2207,
+      "family_id": "SRC-TESTS",
+      "line_count": 51,
+      "path": "tools/source-atlas/tests/test_ambitions_pack_diff.py",
+      "sha256": "c70d00d87dd24ad49fb3ccaa62be8d33f2dad2d8361d2896be771e1a6672540c"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 10709,
+      "family_id": "SRC-TESTS",
+      "line_count": 276,
+      "path": "tools/source-atlas/tests/test_ambitions_pack_hash_signature_revocation.py",
+      "sha256": "d5dfc44f6cda2884b61e08451f3ebcaf22e955f71deeb3c4d56618cb1a703ef7"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 89702,
+      "family_id": "SRC-TESTS",
+      "line_count": 2344,
+      "path": "tools/tests/test_ambitions_canon_compiler.py",
+      "sha256": "14402d9639f49cd80e07cc3369ad0f6ebd0552eec987c93fc1e950fc66849b17"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 6338,
+      "family_id": "SRC-TESTS",
+      "line_count": 149,
+      "path": "tools/tests/test_ambitions_swift6_modernization_scan.py",
+      "sha256": "32aa8e0bda87d6537b9661989dc368f5d82a90ff114cfe41e181251f5caf07bd"
+    },
+    {
+      "authority_class": "verification_evidence_only",
+      "byte_count": 8325,
+      "family_id": "SRC-TESTS",
+      "line_count": 198,
+      "path": "tools/tests/test_capability_atlas_discovery.py",
+      "sha256": "c8efe16e88115fc1806eb28fa3c75e45142b4ae5647da9493f739da46c7c3058"
+    }
+  ]
+}
