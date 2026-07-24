@@ -41,11 +41,15 @@ private struct TodayFlagshipCalibrationHost: View {
     init(variant: FoundryVariant) {
         self.variant = variant
         content = variant.content
+        var initialState = TodayFlagshipJourneyState.preview(
+            content: variant.content,
+            phase: variant.initialPhase
+        )
+        if variant.fullDayOrigin != nil {
+            _ = initialState.openFullDay()
+        }
         _state = State(
-            initialValue: TodayFlagshipJourneyState.preview(
-                content: variant.content,
-                phase: variant.initialPhase
-            )
+            initialValue: initialState
         )
     }
 
@@ -147,6 +151,12 @@ private enum FoundryVariant: String {
     case b02RootDark = "b02-root-dark"
     case b02RootCompact = "b02-root-compact"
     case b02RootProMax = "b02-root-pro-max"
+    case b02FullDayTypical = "b02-full-day-typical"
+    case b02FullDayReturned = "b02-full-day-returned"
+    case b02FullDayDense = "b02-full-day-dense"
+    case b02FullDayRTL = "b02-full-day-rtl"
+    case b02FullDayCompact = "b02-full-day-compact"
+    case b02FullDayAccessibility5 = "b02-full-day-accessibility5"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -176,6 +186,8 @@ private enum FoundryVariant: String {
         case .accessibilityDark, .tfcsF05, .reviewAccessibility,
                 .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
+        case .b02FullDayAccessibility5:
+            .accessibility5
         default:
             .large
         }
@@ -197,6 +209,8 @@ private enum FoundryVariant: String {
             .interrupted
         case .stateSaving:
             .savingAcceptedTruth
+        case .b02FullDayReturned:
+            .todayReturned
         default:
             .todayInitial
         }
@@ -204,9 +218,9 @@ private enum FoundryVariant: String {
 
     var content: TodayFlagshipCalibrationContent {
         switch self {
-        case .tfcsF03, .stateDense:
+        case .tfcsF03, .stateDense, .b02FullDayDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
-        case .stressLongRTL:
+        case .stressLongRTL, .b02FullDayRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
@@ -215,10 +229,22 @@ private enum FoundryVariant: String {
 
     var dockExpanded: Bool { self == .tfcsF04 }
 
-    var rightToLeft: Bool { self == .stressLongRTL }
+    var rightToLeft: Bool { self == .stressLongRTL || self == .b02FullDayRTL }
 
     var localeIdentifier: String {
-        self == .stressLongRTL ? "ar-SA" : "en-US"
+        self == .stressLongRTL || self == .b02FullDayRTL ? "ar-SA" : "en-US"
+    }
+
+    var fullDayOrigin: TodayFlagshipFullDayOrigin? {
+        switch self {
+        case .b02FullDayReturned:
+            .todayReturned
+        case .b02FullDayTypical, .b02FullDayDense, .b02FullDayRTL,
+                .b02FullDayCompact, .b02FullDayAccessibility5:
+            .todayInitial
+        default:
+            nil
+        }
     }
 
     var demoJourney: FoundryDemoJourney {

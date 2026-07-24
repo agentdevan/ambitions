@@ -34,6 +34,13 @@ public struct TodayFlagshipCalibrationView: View {
             todayRoot
                 .navigationDestination(for: TodayFlagshipRoute.self) { route in
                     switch route {
+                    case let .fullDay(origin):
+                        TodayOpenContinuityFullDayView(
+                            content: content,
+                            state: $state,
+                            origin: origin,
+                            palette: palette
+                        )
                     case let .step(id):
                         if id == content.primaryStep.id {
                             TodayFlagshipFocusedStepView(
@@ -205,7 +212,7 @@ public struct TodayFlagshipCalibrationView: View {
     private var navigationPath: Binding<[TodayFlagshipRoute]> {
         Binding(
             get: { state.navigationPath },
-            set: { state.updateNavigationPath($0) }
+            set: { state.reconcileNavigationPath($0) }
         )
     }
 

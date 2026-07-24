@@ -398,6 +398,19 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertTrue(timelineSource.contains(".lineLimit(2)"))
     }
 
+    func testB02FullDayUsesExplicitOriginNowIdentity() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+
+        XCTAssertEqual(
+            fixture.nowAnchorObjectID(for: .todayInitial),
+            fixture.primaryStep.id
+        )
+        XCTAssertEqual(
+            fixture.nowAnchorObjectID(for: .todayReturned),
+            fixture.revealedStartHereStep.id
+        )
+    }
+
     private func primaryViewSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

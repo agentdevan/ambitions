@@ -44,10 +44,30 @@ func todayOverviewObjects(
 }
 
 struct TodayOpenContinuityTimeline: View {
+    @AccessibilityFocusState private var isFullDayActionFocused: Bool
+
     let content: TodayFlagshipCalibrationContent
     let visibleStartHereID: String
     let mode: TodayOpenContinuityTimelineMode
     let palette: TodayFlagshipPalette
+    let shouldFocusFullDayAction: Bool
+    var onOpenFullDay: (() -> Void)?
+
+    init(
+        content: TodayFlagshipCalibrationContent,
+        visibleStartHereID: String,
+        mode: TodayOpenContinuityTimelineMode,
+        palette: TodayFlagshipPalette,
+        shouldFocusFullDayAction: Bool = false,
+        onOpenFullDay: (() -> Void)? = nil
+    ) {
+        self.content = content
+        self.visibleStartHereID = visibleStartHereID
+        self.mode = mode
+        self.palette = palette
+        self.shouldFocusFullDayAction = shouldFocusFullDayAction
+        self.onOpenFullDay = onOpenFullDay
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -88,17 +108,48 @@ struct TodayOpenContinuityTimeline: View {
 
                     Spacer(minLength: 0)
 
-                    if mode == .overview {
-                        Text(content.interfaceCopy.timelineContextTitle)
-                            .font(TodayOpenContinuityTypographyRole.metadata.font)
-                            .foregroundStyle(palette.tertiaryInk)
-                            .lineLimit(1)
-                            .fixedSize(horizontal: true, vertical: false)
-                    }
+                    overviewTrailingContent
                 }
 
-                timelineTitle
+                VStack(alignment: .leading, spacing: 2) {
+                    timelineTitle
+                    overviewTrailingContent
+                }
             }
+        }
+    }
+
+    @ViewBuilder
+    private var overviewTrailingContent: some View {
+        if mode == .overview, let onOpenFullDay {
+            Button(action: onOpenFullDay) {
+                Label(
+                    content.interfaceCopy.viewFullDayTitle,
+                    systemImage: "chevron.forward"
+                )
+                .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.semibold))
+                .padding(.vertical, 13)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+            .foregroundStyle(palette.articulationAccent)
+            .accessibilityFocused($isFullDayActionFocused)
+            .accessibilityIdentifier("tfcs-view-full-day")
+            .onAppear {
+                isFullDayActionFocused = shouldFocusFullDayAction
+            }
+            .onChange(of: shouldFocusFullDayAction) { _, shouldFocus in
+                guard shouldFocus else { return }
+                isFullDayActionFocused = true
+            }
+        } else if mode == .overview {
+            Text(content.interfaceCopy.timelineContextTitle)
+                .font(TodayOpenContinuityTypographyRole.metadata.font)
+                .foregroundStyle(palette.tertiaryInk)
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
         }
     }
 
@@ -106,7 +157,7 @@ struct TodayOpenContinuityTimeline: View {
         Text(
             mode == .overview
                 ? content.interfaceCopy.timelineTitle
-                : content.interfaceCopy.fullDayTitle
+                : content.interfaceCopy.timelineTitle
         )
         .font(.headline.weight(.semibold))
         .foregroundStyle(palette.primaryInk)

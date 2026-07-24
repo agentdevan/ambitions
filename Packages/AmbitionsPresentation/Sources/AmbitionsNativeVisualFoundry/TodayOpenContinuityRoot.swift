@@ -44,7 +44,11 @@ struct TodayOpenContinuityRoot: View {
                         content: timelineContent,
                         visibleStartHereID: visibleStartHere.id,
                         mode: .overview,
-                        palette: palette
+                        palette: palette,
+                        shouldFocusFullDayAction: state.focusAnchor == .fullDayAction,
+                        onOpenFullDay: {
+                            _ = state.openFullDay()
+                        }
                     )
                 }
                 .frame(maxWidth: 560, alignment: .leading)

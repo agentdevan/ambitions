@@ -10,12 +10,21 @@ public enum TodayFlagshipJourneyPhase: String, Equatable, Sendable {
     case recoveredContinuation = "recovered-continuation"
 }
 
+public enum TodayFlagshipFullDayOrigin: String, Equatable, Hashable, Sendable {
+    case todayInitial
+    case todayReturned
+}
+
 public enum TodayFlagshipRoute: Hashable, Sendable {
+    case fullDay(origin: TodayFlagshipFullDayOrigin)
     case step(id: String)
 }
 
 public enum TodayFlagshipFocusAnchor: String, Equatable, Sendable {
     case startHere = "start-here"
+    case fullDayAction = "full-day-action"
+    case fullDayNow = "full-day-now"
+    case fullDayStep = "full-day-step"
     case focusedIdentity = "focused-identity"
     case reviewCurrentTruth = "review-current-truth"
     case saving
@@ -98,6 +107,78 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     }
 
     @discardableResult
+    public mutating func openFullDay() -> Bool {
+        guard navigationPath.isEmpty else { return false }
+
+        let origin: TodayFlagshipFullDayOrigin
+        switch phase {
+        case .todayInitial:
+            origin = .todayInitial
+        case .todayReturned:
+            origin = .todayReturned
+        default:
+            return false
+        }
+
+        navigationPath.append(.fullDay(origin: origin))
+        focusAnchor = .fullDayNow
+        return true
+    }
+
+    @discardableResult
+    public mutating func openStepFromFullDay(id: String) -> Bool {
+        guard
+            phase == .todayInitial,
+            id == primaryStepID,
+            navigationPath == [.fullDay(origin: .todayInitial)]
+        else {
+            return false
+        }
+
+        navigationPath.append(.step(id: id))
+        phase = .focusedCurrent
+        focusAnchor = .focusedIdentity
+        return true
+    }
+
+    public mutating func reconcileNavigationPath(_ path: [TodayFlagshipRoute]) {
+        let previousPath = navigationPath
+        guard previousPath != path else { return }
+
+        navigationPath = path
+
+        if
+            previousPath == [
+                .fullDay(origin: .todayInitial),
+                .step(id: primaryStepID)
+            ],
+            path == [.fullDay(origin: .todayInitial)] {
+            phase = .todayInitial
+            proposedTruth = nil
+            focusAnchor = .fullDayStep
+            return
+        }
+
+        if previousPath == [.fullDay(origin: .todayInitial)], path.isEmpty {
+            phase = .todayInitial
+            focusAnchor = .fullDayAction
+            return
+        }
+
+        if previousPath == [.fullDay(origin: .todayReturned)], path.isEmpty {
+            phase = .todayReturned
+            focusAnchor = .fullDayAction
+            return
+        }
+
+        if previousPath == [.step(id: primaryStepID)], path.isEmpty {
+            phase = .todayInitial
+            proposedTruth = nil
+            focusAnchor = .startHere
+        }
+    }
+
+    @discardableResult
     public mutating func openStartHere() -> Bool {
         guard phase == .todayInitial else { return false }
         phase = .focusedCurrent
@@ -174,10 +255,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         guard phase == .focusedCurrent || phase == .interrupted || phase == .recoveredContinuation else {
             return false
         }
-        phase = .todayInitial
-        navigationPath = []
-        proposedTruth = nil
-        focusAnchor = .startHere
+        reconcileNavigationPath([])
         return true
     }
 

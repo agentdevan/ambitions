@@ -9,15 +9,20 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     init(
         content: TodayFlagshipCalibrationContent = TodayFlagshipCalibrationFixture.preparingForBaby,
         phase: TodayFlagshipJourneyPhase,
-        initialDockExpanded: Bool = false
+        initialDockExpanded: Bool = false,
+        fullDayOrigin: TodayFlagshipFullDayOrigin? = nil
     ) {
         self.content = content
         self.initialDockExpanded = initialDockExpanded
+        var initialState = TodayFlagshipJourneyState.preview(
+            content: content,
+            phase: phase
+        )
+        if fullDayOrigin != nil {
+            _ = initialState.openFullDay()
+        }
         _state = State(
-            initialValue: TodayFlagshipJourneyState.preview(
-                content: content,
-                phase: phase
-            )
+            initialValue: initialState
         )
     }
 
@@ -124,4 +129,57 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
 #Preview("Stress · Increased contrast and no color") {
     TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
         .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Full Day · Typical · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .todayInitial,
+        fullDayOrigin: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Full Day · Returned · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .todayReturned,
+        fullDayOrigin: .todayReturned
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Full Day · Dense · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.denseToday,
+        phase: .todayInitial,
+        fullDayOrigin: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Full Day · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .todayInitial,
+        fullDayOrigin: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
+}
+
+#Preview("B02 Full Day · Compact · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .todayInitial,
+        fullDayOrigin: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Full Day · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .todayInitial,
+        fullDayOrigin: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+    .dynamicTypeSize(.accessibility5)
 }

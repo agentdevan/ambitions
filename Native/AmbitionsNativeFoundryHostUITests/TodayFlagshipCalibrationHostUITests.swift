@@ -554,6 +554,87 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         assertArabicOnlyLabels(in: expandedDock)
     }
 
+    func testB02FullDayIsReadOnlyCompleteAndKeepsNativeBackDepth() throws {
+        launch("tfcs-f01")
+        let viewFullDay = element("tfcs-view-full-day")
+        XCTAssertTrue(viewFullDay.waitForExistence(timeout: 3))
+        assertMinimumTarget(viewFullDay)
+        viewFullDay.tap()
+
+        let now = element("tfcs-full-day-now-step.nursery-ready-for-crib")
+        let scrollToNow = element("tfcs-scroll-to-now")
+        let timeline = element("tfcs-full-day-timeline")
+        assertExists([now, scrollToNow, timeline])
+        XCTAssertTrue(
+            now.label.contains("The corner is cleared and the paint sample is chosen.")
+        )
+        XCTAssertEqual(
+            timeline.descendants(matching: .any)
+                .matching(identifier: "tfcs-full-day-row-step.nursery-paint-sample").count,
+            1
+        )
+        XCTAssertEqual(
+            timeline.descendants(matching: .any)
+                .matching(identifier: "tfcs-full-day-row-step.send-launch-brief").count,
+            1
+        )
+        XCTAssertEqual(
+            timeline.descendants(matching: .any)
+                .matching(identifier: "tfcs-full-day-row-event.family-prenatal-walk").count,
+            1
+        )
+        XCTAssertTrue(scrollToNow.isHittable)
+        XCTAssertFalse(app.buttons["Edit"].exists)
+        XCTAssertFalse(app.buttons["Open in Time"].exists)
+
+        now.tap()
+        XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 3))
+        XCTAssertTrue(app.navigationBars.buttons.firstMatch.exists)
+        app.navigationBars.buttons.firstMatch.tap()
+        XCTAssertTrue(element("tfcs-full-day-root").waitForExistence(timeout: 3))
+        XCTAssertTrue(now.isHittable)
+
+        let source = try foundrySource(named: "TodayOpenContinuityFullDayView.swift")
+        XCTAssertFalse(source.contains("DatePicker"))
+        XCTAssertFalse(source.contains("Grid"))
+        XCTAssertFalse(source.contains("Open in Time"))
+        XCTAssertFalse(source.contains("onMove"))
+    }
+
+    func testB02ReturnedFullDayUsesRevealedNowAndKeepsNurserySettledReadOnly() {
+        launch("tfcs-f09")
+        let viewFullDay = element("tfcs-view-full-day")
+        XCTAssertTrue(viewFullDay.waitForExistence(timeout: 3))
+        viewFullDay.tap()
+
+        let revealedNow = element("tfcs-full-day-now-step.send-launch-brief")
+        let settledNursery = element("tfcs-full-day-settled-step.nursery-ready-for-crib")
+        assertExists([revealedNow, settledNursery, element("tfcs-full-day-timeline")])
+        XCTAssertTrue(
+            revealedNow.label.contains("The brief is drafted and waiting for one final read.")
+        )
+        XCTAssertEqual(
+            app.buttons.matching(
+                NSPredicate(
+                    format: "identifier == %@",
+                    "tfcs-full-day-now-step.send-launch-brief"
+                )
+            ).count,
+            0
+        )
+        XCTAssertTrue(settledNursery.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(settledNursery.label.contains("Progress recorded"))
+        XCTAssertFalse(element("tfcs-full-day-row-step.send-launch-brief").exists)
+        XCTAssertFalse(element("tfcs-select-still-counts").exists)
+
+        let settledTruth = "The cleared corner and paint sample now count toward the nursery."
+        XCTAssertTrue(settledNursery.label.contains(settledTruth))
+        app.navigationBars.buttons.firstMatch.tap()
+        XCTAssertTrue(element("tfcs-today-root").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("tfcs-returned-settled-step").exists)
+        XCTAssertTrue(app.staticTexts[settledTruth].exists)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()

@@ -512,6 +512,15 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
     public var returnedTodayTimeline: [TodayFlagshipTimelineObject] {
         timeline.filter { $0.canonicalObjectID != revealedStartHereStep.id }
     }
+
+    public func nowAnchorObjectID(for origin: TodayFlagshipFullDayOrigin) -> String {
+        switch origin {
+        case .todayInitial:
+            primaryStep.id
+        case .todayReturned:
+            revealedStartHereStep.id
+        }
+    }
 }
 
 public enum TodayFlagshipNavigationCommand: String, CaseIterable, Equatable, Identifiable, Sendable {

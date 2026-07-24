@@ -18,6 +18,71 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.todayReturnAnchorID, content.returnContract.focusAnchorID)
     }
 
+    func testFullDayFromInitialTodayIsNonMutatingAndKeepsDepthWhenOpeningPrimaryStep() {
+        var state = TodayFlagshipJourneyState(content: content)
+        let acceptedTruth = state.acceptedTruth
+
+        XCTAssertTrue(state.openFullDay())
+        XCTAssertEqual(state.navigationPath, [.fullDay(origin: .todayInitial)])
+        XCTAssertEqual(state.phase, .todayInitial)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+        XCTAssertNil(state.proposedTruth)
+        XCTAssertFalse(state.hasCommittedMutation)
+        XCTAssertFalse(state.receiptIsVisible)
+
+        XCTAssertTrue(state.openStepFromFullDay(id: content.primaryStep.id))
+        XCTAssertEqual(
+            state.navigationPath,
+            [
+                .fullDay(origin: .todayInitial),
+                .step(id: content.primaryStep.id)
+            ]
+        )
+        XCTAssertEqual(state.phase, .focusedCurrent)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+
+        state.reconcileNavigationPath([.fullDay(origin: .todayInitial)])
+        XCTAssertEqual(state.phase, .todayInitial)
+        XCTAssertEqual(state.focusAnchor, .fullDayStep)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+
+        state.reconcileNavigationPath([])
+        XCTAssertEqual(state.phase, .todayInitial)
+        XCTAssertEqual(state.focusAnchor, .fullDayAction)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+    }
+
+    func testReturnedFullDayKeepsSettledTruthReadOnlyAndRestoresReturnedOrigin() {
+        var state = TodayFlagshipJourneyState.preview(
+            content: content,
+            phase: .todayReturned
+        )
+        let settledTruth = state.acceptedTruth
+
+        XCTAssertTrue(state.openFullDay())
+        XCTAssertEqual(state.navigationPath, [.fullDay(origin: .todayReturned)])
+        XCTAssertEqual(state.phase, .todayReturned)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+        XCTAssertTrue(state.hasCommittedMutation)
+        XCTAssertTrue(state.receiptIsVisible)
+        XCTAssertEqual(
+            content.nowAnchorObjectID(for: .todayReturned),
+            content.revealedStartHereStep.id
+        )
+
+        XCTAssertFalse(state.openStepFromFullDay(id: content.primaryStep.id))
+        XCTAssertFalse(state.openStepFromFullDay(id: content.revealedStartHereStep.id))
+        XCTAssertEqual(state.navigationPath, [.fullDay(origin: .todayReturned)])
+        XCTAssertEqual(state.phase, .todayReturned)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+
+        state.reconcileNavigationPath([])
+        XCTAssertEqual(state.phase, .todayReturned)
+        XCTAssertEqual(state.focusAnchor, .fullDayAction)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+        XCTAssertTrue(state.hasCommittedMutation)
+    }
+
     func testStillCountsCreatesProposalWithoutReplacingAcceptedTruth() {
         var state = focusedState()
         let acceptedTruth = state.acceptedTruth
