@@ -6,9 +6,12 @@ import unittest
 from pathlib import Path
 
 from tools.capability_atlas.cli import SUPPORTED_COMMANDS, main
-from tools.capability_atlas.discover import (
-    OUTPUT_PATHS,
-    compile_discovery,
+from tools.capability_atlas.discover import compile_discovery
+from tools.capability_atlas.model import CandidateRecord
+from tools.capability_atlas.outputs import (
+    CANDIDATE_SHARD_DIRECTORY,
+    CORE_OUTPUT_PATHS,
+    SOURCE_SHARD_DIRECTORY,
     output_drift,
     render_outputs,
     write_outputs,
@@ -77,8 +80,13 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             json.dumps(seed_payload),
             encoding="utf-8",
         )
+        repeated_headings = "\n".join(
+            f"## Search Capability {index:03d}" for index in range(510)
+        )
         (self.root / "docs/canon/specifications/global/search.md").write_text(
-            """# Search\n\n## Semantic Search and Command\n\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\n""",
+            "# Search\n\n"
+            + repeated_headings
+            + "\n\nAmbitions must help the person find goals, steps, attachments, and actions through private local search.\n",
             encoding="utf-8",
         )
         (self.root / "Native/Ambitions/SearchRuntime.swift").write_text(
@@ -111,7 +119,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             for item in compilation.candidates
             if item.authority_status == "repository_candidate"
         ]
-        self.assertGreaterEqual(len(repository_candidates), 3)
+        self.assertGreaterEqual(len(repository_candidates), 512)
         for candidate in repository_candidates:
             self.assertRegex(candidate.candidate_id, r"^CAND-[0-9A-F]{16}$")
             self.assertEqual(len(candidate.evidence), 1)
@@ -128,11 +136,8 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             for item in compilation.candidates
             if item.authority_status == "repository_candidate"
         )
-        evidence = candidate.evidence[0]
-        from tools.capability_atlas.model import CandidateRecord
-
         renamed = CandidateRecord.from_evidence(
-            evidence,
+            candidate.evidence[0],
             normalized_name_hint="A Different Reconciliation Hint",
         )
         self.assertEqual(candidate.candidate_id, renamed.candidate_id)
@@ -157,20 +162,31 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(owner_coverage.extracted_candidate_count, 1)
 
-    def test_build_writes_outputs_and_check_detects_drift(self) -> None:
+    def test_outputs_are_sharded_bounded_and_drift_checked(self) -> None:
         compilation = compile_discovery(self.root)
         outputs = render_outputs(compilation)
-        self.assertEqual(set(outputs), set(OUTPUT_PATHS))
-        self.assertEqual(set(output_drift(self.root, outputs)), set(OUTPUT_PATHS))
+        self.assertTrue(set(CORE_OUTPUT_PATHS).issubset(outputs))
+        candidate_shards = sorted(
+            path for path in outputs if path.parent == CANDIDATE_SHARD_DIRECTORY
+        )
+        source_shards = sorted(
+            path for path in outputs if path.parent == SOURCE_SHARD_DIRECTORY
+        )
+        self.assertGreaterEqual(len(candidate_shards), 2)
+        self.assertGreaterEqual(len(source_shards), 1)
+        self.assertTrue(
+            all(len(content.encode("utf-8")) < 1_000_000 for content in outputs.values())
+        )
+        self.assertEqual(set(output_drift(self.root, outputs)), set(outputs))
 
         write_outputs(self.root, outputs)
         self.assertEqual(output_drift(self.root, outputs), ())
 
-        candidate_path = self.root / "docs/capabilities/candidate-capabilities.json"
-        candidate_path.write_text("{}\n", encoding="utf-8")
-        self.assertEqual(
+        stale_path = self.root / CANDIDATE_SHARD_DIRECTORY / "stale.json"
+        stale_path.write_text("{}\n", encoding="utf-8")
+        self.assertIn(
+            CANDIDATE_SHARD_DIRECTORY / "stale.json",
             output_drift(self.root, outputs),
-            (Path("docs/capabilities/candidate-capabilities.json"),),
         )
 
     def test_cli_build_then_check(self) -> None:
