@@ -38,31 +38,35 @@ extension ExecutionResilienceProjector {
         default:
             destination = nil
         }
+        let target = AmbitionsCommandTarget(
+            goalID: option.relatedGoalID,
+            captureID: option.relatedCaptureID,
+            timeID: option.relatedTimeID,
+            recommendationID: option.id,
+            explanationID: option.relatedExplanationID,
+            destination: destination
+        )
+        let content = AmbitionsCommandPayload(
+            title: option.title,
+            notes: option.summary,
+            priorityHints: AmbitionsCommandPriorityHints(recoveryState: nowRecoveryState(from: assessment)),
+            explanationID: option.relatedExplanationID
+        )
         let command = AmbitionsCommand(
             id: "command.resilience.\(option.id)",
-            kind: kind,
             source: .system,
-            target: AmbitionsCommandTarget(
-                goalID: option.relatedGoalID,
-                captureID: option.relatedCaptureID,
-                timeID: option.relatedTimeID,
-                recommendationID: option.id,
-                explanationID: option.relatedExplanationID,
-                destination: destination
-            ),
-            payload: AmbitionsCommandPayload(
-                title: option.title,
-                notes: option.summary,
-                priorityHints: AmbitionsCommandPriorityHints(recoveryState: nowRecoveryState(from: assessment)),
-                explanationID: option.relatedExplanationID,
-                metadata: [
-                    "resilienceAssessmentID": assessment.id,
-                    "recoveryOptionID": option.id,
-                    "recoveryStatus": assessment.status.rawValue,
-                    "recoveryStrategy": option.strategy.rawValue,
-                    "requiresUserConfirmation": option.requiresUserConfirmation ? "true" : "false"
-                ]
-            ),
+            typedPayload: .repair(RepairCommand(
+                action: kind == .openDestination ? .openDestination : .recover,
+                recommendation: RecoveryRecommendationCommand(
+                    goalID: option.relatedGoalID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                    captureID: option.relatedCaptureID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                    timeID: option.relatedTimeID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                    title: option.title,
+                    explanationID: option.relatedExplanationID.flatMap(RuntimeCommandObjectID.init(rawValue:))
+                ),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: createdAt ?? assessment.generatedAt,
             actor: .system,
             relations: AmbitionsCommandRelations(

@@ -4,7 +4,7 @@ enum RuntimeExternalEffectAuthorizationError: Error, Sendable, Equatable {
     case authorityDidNotCommit
 }
 
-enum RuntimeExternalEffectKind: String, Sendable {
+enum RuntimeExternalEffectKind: String, Codable, Sendable, Equatable, Hashable {
     case reminder
     case calendarEvent = "calendar_event"
 }
@@ -71,7 +71,7 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
         if let recovered = try await recoveredAuthorization(for: resolvedRequest) {
             return recovered
         }
-        let command = command(for: resolvedRequest)
+        let command = try command(for: resolvedRequest)
         let result = await commit(command: command, request: resolvedRequest)
         let authorityCommandID = commandID(for: resolvedRequest)
         guard let evidence = SideEffectLocalCommitEvidence(
@@ -90,21 +90,26 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
         )
     }
 
-    private func command(for request: RuntimeExternalEffectRequest) -> AmbitionsCommand {
+    private func command(for request: RuntimeExternalEffectRequest) throws -> AmbitionsCommand {
         let timestamp = DomainTimestamp.string(from: request.requestedAt)
+        let target = AmbitionsCommandTarget(
+            goalID: request.goalID,
+            stepID: request.stepID,
+            destination: request.source == .today ? .today : .goalDetail
+        )
+        guard let operationID = RuntimeExternalOperationID(rawValue: request.operationID),
+              operationID.rawValue == request.operationID else {
+            throw RuntimeFoundationError.invalidIdentity(.externalOperation)
+        }
         return AmbitionsCommand(
             id: commandID(for: request),
-            kind: .scheduleItem,
             source: request.source,
-            target: AmbitionsCommandTarget(
-                goalID: request.goalID,
-                stepID: request.stepID,
-                destination: request.source == .today ? .today : .goalDetail
-            ),
-            payload: AmbitionsCommandPayload(
-                title: request.title,
-                metadata: externalEffectMetadata(for: request)
-            ),
+            typedPayload: .externalOperation(ExternalOperationCommand(
+                operationID: operationID,
+                kind: request.kind,
+                target: target,
+                title: request.title
+            )),
             createdAt: timestamp,
             requestedAt: timestamp,
             sourceSurface: request.source.rawValue,

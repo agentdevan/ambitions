@@ -81,16 +81,21 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
     ) {
         switch payload {
         case let .commandExecution(command):
+            var commandIdentityMetadata = ["resultStatus": command.resultStatus.rawValue]
+            if let typed = command.commandPayload {
+                commandIdentityMetadata["commandFamily"] = typed.diagnosticFamily
+                commandIdentityMetadata["commandCase"] = typed.diagnosticCase
+                commandIdentityMetadata["commandContentIdentity"] = typedContentIdentity(typed)
+            } else if let legacy = command.legacyCommandOperation {
+                commandIdentityMetadata["legacyCommandKind"] = legacy.rawValue
+            }
             return (
                 command.resultSummary,
                 command.resultStatus,
                 command.resultRoute,
                 [command.commandRecordID].compactMap { $0 },
                 command.eventLedgerEntryIDs + command.recommendationExplanationIDs,
-                command.resultMetadata.merging([
-                    "commandKind": command.commandKind.rawValue,
-                    "resultStatus": command.resultStatus.rawValue
-                ], uniquingKeysWith: { _, new in new })
+                command.resultMetadata.merging(commandIdentityMetadata, uniquingKeysWith: { _, new in new })
             )
         case let .closureRecorded(closure):
             return (
@@ -179,6 +184,16 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 ["domainEventTypeID": record.typeID, "domainEventSchemaVersion": String(record.schemaVersion)]
             )
         }
+    }
+
+    private static func typedContentIdentity(_ payload: RuntimeCommandPayload) -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        guard let bytes = try? encoder.encode(payload),
+              let canonical = String(data: bytes, encoding: .utf8) else {
+            return RuntimeTransactionDigest.digest([payload.diagnosticFamily, payload.diagnosticCase])
+        }
+        return RuntimeTransactionDigest.digest([canonical])
     }
 
     private static func objectIDs(for event: RuntimeDomainEvent) -> [String] {

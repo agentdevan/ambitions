@@ -53,30 +53,40 @@ struct FlagshipRuntimeIntentAdapter: FlagshipIntentSending {
         let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedDraftID = draftID.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedKey = idempotencyKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        let typedPlacementID = placementID.flatMap(FlagshipPlacementID.init(rawValue:))
         guard trimmedText.isEmpty == false,
               trimmedDraftID.isEmpty == false,
-              trimmedKey.isEmpty == false else {
+              trimmedKey.isEmpty == false,
+              draftID == trimmedDraftID,
+              idempotencyKey == trimmedKey,
+              idempotencyKey == idempotencyKey.precomposedStringWithCanonicalMapping,
+              idempotencyKey.unicodeScalars.contains(where: CharacterSet.controlCharacters.contains) == false,
+              let typedDraftID = FlagshipDraftID(rawValue: draftID),
+              let typedEntryPoint = CaptureCommand.EntryPoint(rawValue: context.entryPoint.rawValue),
+              placementID == nil || typedPlacementID != nil else {
             return .rejectedBeforeMutation(
                 code: "quick_capture_invalid_draft",
                 recoveryAction: .editIntent
             )
         }
 
+        let target = AmbitionsCommandTarget()
+        let content = AmbitionsCommandPayload(rawText: trimmedText)
         let command = AmbitionsCommand(
             id: Self.commandID(for: trimmedKey),
-            kind: .quickCapture,
             source: context.entryPoint.commandSource,
-            payload: AmbitionsCommandPayload(
-                rawText: trimmedText,
-                destinationRoute: placementID,
-                metadata: [
-                    ExternalCreationCommandMetadataKey.sourceType: context.sourceType.rawValue,
-                    "captureEntryPoint": context.entryPoint.rawValue,
-                    "captureRouteType": context.route.rawValue,
-                    "captureCommandPath": "shell_command_router",
-                    "flagshipDraftID": trimmedDraftID
-                ]
-            ),
+            typedPayload: .capture(CaptureCommand(
+                action: .quickCapture(externalCreation: nil),
+                target: target,
+                content: RuntimeCommandContent(content),
+                sourceType: CaptureSourceType(rawValue: context.sourceType.rawValue),
+                entryPoint: typedEntryPoint,
+                route: nil,
+                flagshipRoute: CaptureCommand.FlagshipRoute(rawValue: context.route.rawValue),
+                placementID: typedPlacementID,
+                draftID: typedDraftID
+            )),
+            idempotencyKey: CommandIdempotencyKey(idempotencyKey),
             createdAt: DomainTimestamp.string(from: context.requestedAt),
             actor: .user,
             sourceSurface: context.sourceSurface,

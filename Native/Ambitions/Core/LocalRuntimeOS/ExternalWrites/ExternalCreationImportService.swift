@@ -125,24 +125,26 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
 
     private func command(for request: ExternalCreationRequest, now: Date) -> AmbitionsCommand {
         let sourceType = CaptureSourceType(rawValue: request.source.captureSourceTypeRawValue) ?? .todayQuickCapture
-        var metadata = [
-            ExternalCreationCommandMetadataKey.requestID: request.id,
-            ExternalCreationCommandMetadataKey.source: request.source.rawValue,
-            ExternalCreationCommandMetadataKey.sourceType: sourceType.rawValue,
-            ExternalCreationCommandMetadataKey.landing: request.landing.rawValue
-        ]
-        metadata[ExternalCreationCommandMetadataKey.sourceApplication] = request.sourceApplication
-        metadata[ExternalCreationCommandMetadataKey.sourceURL] = request.sourceURL
-        metadata[ExternalCreationCommandMetadataKey.provenanceHint] = provenanceHint(for: request)
+        let target = AmbitionsCommandTarget()
+        let content = AmbitionsCommandPayload(rawText: request.text)
+        let provenance = ExternalCreationProvenance(
+            requestID: request.id,
+            source: request.source,
+            sourceApplication: request.sourceApplication,
+            sourceURL: request.sourceURL,
+            sourceType: sourceType,
+            landing: request.landing,
+            provenanceHint: provenanceHint(for: request)
+        )
 
         return AmbitionsCommand(
             id: "external.creation.command.\(request.id)",
-            kind: .quickCapture,
             source: commandSource(for: request.source),
-            payload: AmbitionsCommandPayload(
-                rawText: request.text,
-                metadata: metadata
-            ),
+            typedPayload: .capture(CaptureCommand(
+                action: .quickCapture(externalCreation: provenance),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: request.createdAt.isEmpty ? DomainTimestamp.string(from: now) : request.createdAt,
             requestedAt: DomainTimestamp.string(from: now),
             actor: .externalSurface,

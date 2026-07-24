@@ -20,7 +20,7 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         let affectedIDs = Self.affectedObjectIDs(command, timeMutation: timeMutation)
         let actionReference = MutationActionReference(
             commandID: command.id,
-            commandKind: command.kind,
+            commandPayload: command.typedPayload,
             source: command.source,
             targetObjectIDs: affectedIDs
         )
@@ -107,43 +107,44 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
             command.target.reviewID,
             command.target.stepID
         ].compactMap { $0 } + (timeMutation?.affectedBucketIDs ?? [])
-        if command.kind == .updateUserPreferences {
+        if case .profile = command.typedPayload {
             objectIDs.append(RuntimeTransactionObjectFacts.youPreferencesObjectID)
         }
         return Array(Set(objectIDs)).sorted()
     }
 
     private static func visibleChange(_ command: AmbitionsCommand) -> String {
-        switch command.kind {
-        case .quickCapture:
-            return "Capture saved"
-        case .startStepSession:
-            return "Step started"
-        case .completeAction:
-            return "Step completed"
-        case .scheduleItem, .createTimeItem:
-            return "Time updated"
-        case .placeStepInTime:
-            return "Step placed"
-        case .protectTimeWindow:
-            return "Window protected"
-        case .correctTimeWindow:
-            if command.payload.metadata["correctionKind"] == TimeMutationActionKind.makeTodayLighter.rawValue {
-                return "Today made lighter"
+        switch command.typedPayload {
+        case let .capture(value):
+            if case .quickCapture = value.action { return "Capture saved" }
+            return "Capture updated"
+        case let .step(value):
+            switch value.action {
+            case .startSession: return "Step started"
+            case .complete: return "Step completed"
+            case .todayGoalStep: return "Step action recorded"
+            case .recover: return "Recovery updated"
+            case .delay, .split: return "Step updated"
             }
-            if command.payload.metadata["correctionKind"] == TimeMutationActionKind.addBuffer.rawValue {
-                return "Buffer added"
+        case let .schedule(value):
+            switch value.action {
+            case .placeStep: return "Step placed"
+            case .protectWindow: return "Window protected"
+            case let .correctWindow(intent):
+                if intent.action == .makeTodayLighter { return "Today made lighter" }
+                if intent.action == .addBuffer { return "Buffer added" }
+                return "Time corrected"
+            case .undo: return "Time change undone"
+            default: return "Time updated"
             }
-            return "Time corrected"
-        case .recoverAction:
-            return "Recovery updated"
-        default:
+        case .repair: return "Recovery updated"
+        case .goal, .reminder, .profile, .history, .importDeletion, .externalOperation:
             return "Ambitions updated"
         }
     }
 
     private static func motionEvent(_ command: AmbitionsCommand) -> String {
-        "stage.motion.\(command.kind.rawValue)"
+        "stage.motion.\(command.typedPayload.diagnosticFamily).\(command.typedPayload.diagnosticCase)"
     }
 
     private static func accessibilityAnnouncement(_ command: AmbitionsCommand) -> String {

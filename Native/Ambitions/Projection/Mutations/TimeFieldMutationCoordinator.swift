@@ -65,33 +65,42 @@ struct TimeFieldMutationCoordinator: Sendable {
             ? placementCandidate?.goalID
             : selectedMark?.inputRefs.first { $0.kind == .goal }?.id
         let createdAt = Self.isoString(from: now)
-        var metadata = action.commandMetadata
-        metadata["startAt"] = Self.isoString(from: targetBucket.start)
-        metadata["endAt"] = Self.isoString(from: targetBucket.end)
-        if let placementCandidate, action == .placeStep {
-            metadata["placementCandidateID"] = placementCandidate.id
-            metadata["placementCandidateKind"] = placementCandidate.kind.rawValue
-            metadata["durationMinutes"] = "\(placementCandidate.durationMinutes)"
-            metadata["placementSource"] = placementCandidate.sourceLabel
-            metadata["proposedStartAt"] = Self.isoString(from: targetBucket.start)
-            metadata["proposedEndAt"] = Self.isoString(from: targetBucket.end)
-            metadata["placementTrigger"] = protectedPlacementTrigger(for: actor).rawValue
-            metadata["explicitUserApproval"] = explicitProtectedPlacementApproval ? "true" : "false"
+        let target = AmbitionsCommandTarget(goalID: goalID, timeID: timeID, stepID: stepID)
+        let content = AmbitionsCommandPayload(
+            title: placementCandidate?.title ?? action.title,
+            notes: placementCandidate?.accessibilitySummary ?? selectedMark?.accessibilitySummary ?? targetBucket.accessibilitySummary
+        )
+        let placement = TimePlacementCommandIntent(
+            start: Self.isoString(from: targetBucket.start),
+            end: Self.isoString(from: targetBucket.end),
+            approvedDurationMinutes: action == .placeStep ? placementCandidate?.durationMinutes ?? 15 : nil,
+            contextLens: nil,
+            relatedGoalID: goalID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+            relatedCaptureID: nil,
+            candidateID: placementCandidate?.id.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+            candidateKind: placementCandidate?.kind,
+            sourceLabel: placementCandidate?.sourceLabel,
+            trigger: protectedPlacementTrigger(for: actor),
+            explicitUserApproval: explicitProtectedPlacementApproval
+        )
+        let typedAction: ScheduleCommand.Action = switch action {
+        case .placeStep: .placeStep(placement)
+        case .protectWindow: .protectWindow(placement)
+        case .notUsable, .needsMoreTime, .keepClear, .makeTodayLighter, .addBuffer:
+            .correctWindow(TimeCorrectionCommandIntent(
+                action: action.timeMutationKind,
+                start: placement.start,
+                end: placement.end
+            ))
         }
         let command = AmbitionsCommand(
             id: "command.time.\(action.rawValue).\(Self.idComponent(timeID)).\(Self.idComponent(createdAt))",
-            kind: action.commandKind,
             source: .time,
-            target: AmbitionsCommandTarget(
-                goalID: goalID,
-                timeID: timeID,
-                stepID: stepID
-            ),
-            payload: AmbitionsCommandPayload(
-                title: placementCandidate?.title ?? action.title,
-                notes: placementCandidate?.accessibilitySummary ?? selectedMark?.accessibilitySummary ?? targetBucket.accessibilitySummary,
-                metadata: metadata
-            ),
+            typedPayload: .schedule(ScheduleCommand(
+                action: typedAction,
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: createdAt,
             actor: actor,
             sourceSurface: "Time"

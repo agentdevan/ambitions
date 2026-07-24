@@ -108,24 +108,26 @@ struct CommandReducer: Sendable {
     }
 
     private func mutationKind(for command: AmbitionsCommand) -> CommandMutationKind {
-        switch command.kind {
-        case .dismissRecommendation where command.isTodayReceiptMutation:
+        switch command.typedPayload {
+        case .capture, .goal, .step, .profile, .repair:
             return .runtimeMutation
-        case .openDestination, .askWhy, .dismissRecommendation:
-            return .readOnlyInspect
-        case .prepareExport, .performExport:
-            return .export
-        case .deleteObject, .forgetMemory:
-            return .destructive
-        case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
+        case let .schedule(schedule):
+            if case let .calendarWrite(intent) = schedule.action {
+                return intent.operationIdentityProvenance == .currentRequired ? .externalSideEffect : .runtimeMutation
+            }
+            return .runtimeMutation
+        case .reminder, .externalOperation:
             return .externalSideEffect
-        case .createGoal, .updateGoal, .attachToGoal, .createTimeItem, .scheduleItem,
-             .placeStepInTime, .protectTimeWindow, .correctTimeWindow, .startStepSession,
-             .completeAction, .delayAction, .splitAction, .recoverAction, .markWaiting,
-             .archiveItem, .setPriority, .setUrgency, .setDeadline, .setContextLens,
-             .clearContextLensOverride, .updateUserPreferences, .routeCommitment, .addDeliverable, .removeDeliverable,
-             .addGoalScopeItem, .removeGoalScopeItem, .quickCapture:
-            return .runtimeMutation
+        case let .history(history):
+            switch history.action {
+            case .openDestination, .askWhy, .dismissRecommendation: return .readOnlyInspect
+            case .todayReceipt: return .runtimeMutation
+            }
+        case let .importDeletion(value):
+            switch value.action {
+            case .prepareExport, .performExport: return .export
+            case .deleteObject, .forgetMemory: return .destructive
+            }
         }
     }
 
@@ -181,7 +183,7 @@ struct CommandReducer: Sendable {
         case .readOnlyInspect:
             return .none
         case .externalSideEffect:
-            return command.payload.metadata["userConfirmed"] == "true" ? .outboxRequired : .requiresUserConfirmation
+            return command.calendarWriteCommandIntent?.userConfirmed == true ? .outboxRequired : .requiresUserConfirmation
         case .export, .destructive:
             return .requiresUserConfirmation
         case .runtimeMutation:
@@ -196,7 +198,7 @@ struct CommandReducer: Sendable {
         mutationKind: CommandMutationKind
     ) -> CommandRequiredConfirmation {
         switch mutationKind {
-        case .externalSideEffect where command.payload.metadata["userConfirmed"] == "true":
+        case .externalSideEffect where command.calendarWriteCommandIntent?.userConfirmed == true:
             return .alreadyConfirmed
         case .externalSideEffect, .export, .destructive:
             return .requiredBeforeMutation
@@ -261,7 +263,7 @@ struct CommandReducer: Sendable {
         if validation != .valid {
             reasons.append(validation.rawValue)
         }
-        if mutationKind == .externalSideEffect, command.payload.metadata["userConfirmed"] != "true" {
+        if mutationKind == .externalSideEffect, command.calendarWriteCommandIntent?.userConfirmed != true {
             reasons.append("confirmation_required")
         }
         if mutationKind == .export || mutationKind == .destructive {

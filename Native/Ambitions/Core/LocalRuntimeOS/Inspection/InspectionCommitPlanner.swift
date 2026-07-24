@@ -250,14 +250,14 @@ struct InspectionCommitPlanner: Sendable {
 
         return EventLedgerEntry(
             id: "event-ledger.\(input.commandRecord.commandID).\(input.runtimeEvent.kind.rawValue)",
-            kind: eventLedgerKind(commandKind: input.commandRecord.command.kind, runtimeKind: input.runtimeEvent.kind),
+            kind: eventLedgerKind(commandPayload: input.commandRecord.command.typedPayload, runtimeKind: input.runtimeEvent.kind),
             occurredAt: input.runtimeEvent.occurredAt,
             source: eventLedgerSource(commandSource: input.commandRecord.command.source),
             goalID: input.commandRecord.command.target.goalID,
             captureID: input.commandRecord.command.target.captureID,
             planID: input.commandRecord.command.target.timeID,
             reviewID: input.commandRecord.command.target.reviewID,
-            title: eventTitle(commandKind: input.commandRecord.command.kind, resultStatus: resultStatus),
+            title: eventTitle(commandPayload: input.commandRecord.command.typedPayload, resultStatus: resultStatus),
             summary: resultSummary,
             semanticState: input.runtimeEvent.kind.rawValue,
             tone: eventTone(resultStatus: resultStatus),
@@ -270,7 +270,7 @@ struct InspectionCommitPlanner: Sendable {
                     id: input.commandRecord.id,
                     kind: .externalCommand,
                     occurredAt: input.commandRecord.recordedAt,
-                    summary: input.commandRecord.command.kind.rawValue
+                    summary: "\(input.commandRecord.command.typedPayload.diagnosticFamily).\(input.commandRecord.command.typedPayload.diagnosticCase)"
                 )
             ],
             metadata: [
@@ -324,7 +324,7 @@ struct InspectionCommitPlanner: Sendable {
         return records
     }
 
-    private func eventLedgerKind(commandKind: AmbitionsCommandKind, runtimeKind: RuntimeEventKind) -> EventLedgerKind {
+    private func eventLedgerKind(commandPayload: RuntimeCommandPayload, runtimeKind: RuntimeEventKind) -> EventLedgerKind {
         switch runtimeKind {
         case .captureRouteDecided:
             return .captureTriaged
@@ -341,57 +341,52 @@ struct InspectionCommitPlanner: Sendable {
         case .compactionSnapshot:
             return .reviewCompleted
         case .domainMutation:
-            switch commandKind {
-            case .quickCapture: return .captureCreated
-            case .createTimeItem, .scheduleItem, .placeStepInTime: return .itemScheduled
-            default: return .userCorrectionAdded
-            }
+            if case let .capture(value) = commandPayload, case .quickCapture = value.action { return .captureCreated }
+            if case .schedule = commandPayload { return .itemScheduled }
+            return .userCorrectionAdded
         case .commandExecution:
-            switch commandKind {
-            case .quickCapture:
-                return .captureCreated
-            case .createGoal:
-                return .goalCreated
-            case .updateGoal:
-                return .goalUpdated
-            case .attachToGoal:
-                return .captureAttachedToGoal
-            case .createTimeItem, .scheduleItem, .placeStepInTime:
-                return .itemScheduled
-            case .completeAction:
-                return .actionCompleted
-            case .delayAction:
-                return .actionDelayed
-            case .splitAction:
-                return .actionSplit
-            case .recoverAction:
-                return .recoveryAccepted
-            case .markWaiting:
-                return .actionDelayed
-            case .archiveItem, .deleteObject, .forgetMemory:
-                return .goalArchived
-            case .setPriority:
-                return .priorityChanged
-            case .setUrgency:
-                return .urgencyChanged
-            case .setDeadline:
-                return .deadlineChanged
-            case .routeCommitment:
-                return .commitmentRouted
-            case .addDeliverable:
-                return .deliverableAdded
-            case .removeDeliverable:
-                return .deliverableRemoved
-            case .addGoalScopeItem:
-                return .goalScopeItemAdded
-            case .removeGoalScopeItem:
-                return .goalScopeItemRemoved
-            case .dismissRecommendation:
-                return .recommendationDismissed
-            case .updateUserPreferences:
-                return .contextLensChanged
-            case .openDestination, .protectTimeWindow, .correctTimeWindow, .startStepSession, .prepareExport, .performExport, .setContextLens, .clearContextLensOverride, .askWhy:
+            switch commandPayload {
+            case let .capture(value):
+                switch value.action {
+                case .quickCapture: return .captureCreated
+                case .attachToGoal: return .captureAttachedToGoal
+                case .routeCommitment: return .commitmentRouted
+                case .markWaiting: return .actionDelayed
+                case .archive: return .goalArchived
+                }
+            case let .goal(value):
+                switch value.action {
+                case .create: return .goalCreated
+                case .update: return .goalUpdated
+                case .setPriority: return .priorityChanged
+                case .setUrgency: return .urgencyChanged
+                case .setDeadline: return .deadlineChanged
+                case .addDeliverable: return .deliverableAdded
+                case .removeDeliverable: return .deliverableRemoved
+                case .addScopeItem: return .goalScopeItemAdded
+                case .removeScopeItem: return .goalScopeItemRemoved
+                case .setContextLens, .clearContextLens: return .planUpdated
+                }
+            case let .step(value):
+                switch value.action {
+                case .complete: return .actionCompleted
+                case .delay: return .actionDelayed
+                case .split: return .actionSplit
+                case .recover: return .recoveryAccepted
+                case .todayGoalStep: return .actionCompleted
+                case .startSession: return .planUpdated
+                }
+            case .schedule, .externalOperation: return .itemScheduled
+            case .profile: return .contextLensChanged
+            case let .history(value):
+                if case .dismissRecommendation = value.action { return .recommendationDismissed }
                 return .planUpdated
+            case let .importDeletion(value):
+                switch value.action {
+                case .deleteObject, .forgetMemory: return .goalArchived
+                case .prepareExport, .performExport: return .planUpdated
+                }
+            case .reminder, .repair: return .planUpdated
             }
         }
     }
@@ -415,23 +410,21 @@ struct InspectionCommitPlanner: Sendable {
         }
     }
 
-    private func eventTitle(commandKind: AmbitionsCommandKind, resultStatus: AmbitionsCommandExecutionStatus) -> String {
+    private func eventTitle(commandPayload: RuntimeCommandPayload, resultStatus: AmbitionsCommandExecutionStatus) -> String {
         if resultStatus == .failed || resultStatus == .blocked {
             return "Command failed safely"
         }
-        switch commandKind {
-        case .quickCapture:
-            return "Capture saved"
-        case .createGoal:
-            return "Goal created"
-        case .completeAction:
-            return "Step completed"
-        case .updateUserPreferences:
-            return "Preferences updated"
-        case .placeStepInTime, .scheduleItem, .createTimeItem:
-            return "Time updated"
-        default:
-            return "Command recorded"
+        switch commandPayload {
+        case let .capture(value):
+            if case .quickCapture = value.action { return "Capture saved" }
+            return "Capture updated"
+        case let .goal(value) where value.action == .create: return "Goal created"
+        case let .step(value):
+            if case .complete = value.action { return "Step completed" }
+            return "Step command recorded"
+        case .profile: return "Preferences updated"
+        case .schedule: return "Time updated"
+        default: return "Command recorded"
         }
     }
 

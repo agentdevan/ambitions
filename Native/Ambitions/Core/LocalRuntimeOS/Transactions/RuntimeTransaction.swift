@@ -127,7 +127,7 @@ enum RuntimeTransactionObjectFacts {
             command.target.recommendationID,
             command.target.explanationID,
         ].compactMap { $0 } + (mutation?.stageMutation.affectedObjectIDs ?? [])
-        if command.kind == .updateUserPreferences {
+        if case .profile = command.typedPayload {
             objectIDs.append(appStateObjectID)
             objectIDs.append(youPreferencesObjectID)
         }
@@ -152,19 +152,22 @@ enum RuntimeTransactionObjectFacts {
             families.append(.userSystem)
         }
 
-        switch command.kind {
-        case .completeAction, .delayAction, .splitAction, .recoverAction, .markWaiting, .archiveItem:
-            families.append(.closure)
-            families.append(.receipt)
-        case .prepareExport, .performExport, .forgetMemory:
-            families.append(.userSystem)
-        case .updateUserPreferences:
-            families.append(.appState)
-            families.append(.userSystem)
-        case .askWhy, .dismissRecommendation:
-            families.append(.proof)
-        default:
-            break
+        switch command.typedPayload {
+        case let .capture(value):
+            switch value.action {
+            case .markWaiting, .archive: families += [.closure, .receipt]
+            default: break
+            }
+        case .step: families += [.closure, .receipt]
+        case .profile: families += [.appState, .userSystem]
+        case let .history(value):
+            switch value.action {
+            case .askWhy, .dismissRecommendation: families.append(.proof)
+            case .todayReceipt: families += [.closure, .receipt]
+            case .openDestination: break
+            }
+        case .importDeletion: families.append(.userSystem)
+        case .goal, .schedule, .reminder, .repair, .externalOperation: break
         }
 
         return Array(Set(families)).sorted { $0.rawValue < $1.rawValue }
@@ -210,7 +213,13 @@ enum RuntimeTransactionObjectFacts {
             projections.append(.goals)
             projections.append(.today)
         }
-        if command.target.captureID != nil || command.kind == .quickCapture {
+        let createsCapture: Bool
+        if case let .capture(value) = command.typedPayload, case .quickCapture = value.action {
+            createsCapture = true
+        } else {
+            createsCapture = false
+        }
+        if command.target.captureID != nil || createsCapture {
             projections.append(.today)
             projections.append(.you)
         }

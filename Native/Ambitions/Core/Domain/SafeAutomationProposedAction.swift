@@ -281,63 +281,68 @@ extension SafeAutomationProposedAction {
 
 extension SafeAutomationActionKind {
     init(command: AmbitionsCommand) {
-        switch command.kind {
-        case .openDestination, .askWhy:
-            self = .noOp
-        case .quickCapture:
-            self = .createCapture
-        case .createGoal:
-            self = .attachToGoal
-        case .updateGoal:
-            self = .editLocalNote
-        case .attachToGoal:
-            self = .attachToGoal
-        case .createTimeItem:
-            self = .routeCapture
-        case .scheduleItem:
-            self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
-        case .placeStepInTime:
-            self = .prepareCalendarBlock
-        case .protectTimeWindow, .correctTimeWindow:
-            self = .correctRecommendation
-        case .prepareExport:
-            self = .prepareExport
-        case .performExport:
-            self = .performExport
-        case .deleteObject:
-            self = .deleteObject
-        case .forgetMemory:
-            self = .forgetMemory
-        case .startStepSession:
-            self = .noOp
-        case .completeAction:
-            self = .markDone
-        case .delayAction:
-            self = .moveActionLater
-        case .splitAction:
-            self = .splitAction
-        case .recoverAction:
-            self = .deferAction
-        case .markWaiting:
-            self = .markWaiting
-        case .archiveItem:
-            self = .archiveItem
-        case .setPriority, .setUrgency:
-            self = .changePriority
-        case .setDeadline:
-            self = .changeDeadline
-        case .setContextLens, .clearContextLensOverride:
-            self = .correctRecommendation
-        case .updateUserPreferences:
-            self = .editLocalNote
-        case .routeCommitment:
-            self = .routeCapture
-        case .addDeliverable, .addGoalScopeItem:
-            self = .attachToGoal
-        case .removeDeliverable, .removeGoalScopeItem:
-            self = .dropAction
-        case .dismissRecommendation:
-            self = .dismissSuggestion
+        switch command.typedPayload {
+        case let .capture(value):
+            switch value.action {
+            case .quickCapture: self = .createCapture
+            case .routeCommitment: self = .routeCapture
+            case .attachToGoal: self = .attachToGoal
+            case .markWaiting: self = .markWaiting
+            case .archive: self = .archiveItem
+            }
+        case let .goal(value):
+            switch value.action {
+            case .create: self = .attachToGoal
+            case .update: self = .editLocalNote
+            case .setPriority, .setUrgency: self = .changePriority
+            case .setDeadline: self = .changeDeadline
+            case .setContextLens, .clearContextLens: self = .correctRecommendation
+            case .addDeliverable, .addScopeItem: self = .attachToGoal
+            case .removeDeliverable, .removeScopeItem: self = .dropAction
+            }
+        case let .step(value):
+            switch value.action {
+            case .startSession: self = .noOp
+            case .complete: self = .markDone
+            case .delay: self = .moveActionLater
+            case .split: self = .splitAction
+            case .recover: self = .deferAction
+            case let .todayGoalStep(plan):
+                switch plan.actionKind {
+                case .complete: self = .markDone
+                case .defer, .reschedule: self = .moveActionLater
+                case .split: self = .splitAction
+                case .askForHelp: self = .deferAction
+                case .markNotRelevant: self = .dropAction
+                case .quickLog: self = .createCapture
+                }
+            }
+        case let .schedule(value):
+            switch value.action {
+            case .createItem: self = .routeCapture
+            case .schedule, .placeStep: self = .prepareCalendarBlock
+            case .protectWindow, .correctWindow, .undo: self = .correctRecommendation
+            case .calendarWrite: self = .writeCalendarBlock
+            case .ritual: self = .correctRecommendation
+            }
+        case .reminder: self = .createReminder
+        case .profile: self = .editLocalNote
+        case let .history(value):
+            switch value.action {
+            case .openDestination, .askWhy: self = .noOp
+            case .dismissRecommendation: self = .dismissSuggestion
+            case .todayReceipt: self = .markDone
+            }
+        case .repair: self = .deferAction
+        case let .importDeletion(value):
+            switch value.action {
+            case .prepareExport: self = .prepareExport
+            case .performExport: self = .performExport
+            case .deleteObject: self = .deleteObject
+            case .forgetMemory: self = .forgetMemory
+            }
+        case let .externalOperation(value):
+            self = value.kind == .reminder ? .createReminder : .writeCalendarBlock
         }
     }
 }

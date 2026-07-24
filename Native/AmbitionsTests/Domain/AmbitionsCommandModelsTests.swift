@@ -119,10 +119,10 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         )
 
         XCTAssertEqual(command.schemaVersion, ambitionsCommandSchemaVersion)
-        XCTAssertEqual(command.payload.rawText, "Create spreadsheet and send it to Kaylee by EOD Tuesday")
-        XCTAssertEqual(command.payload.deadlineText, "EOD Tuesday")
-        XCTAssertEqual(command.payload.contextLens, .work)
-        XCTAssertEqual(command.payload.commitmentKind, .oneTime)
+        XCTAssertEqual(command.content.rawText, "Create spreadsheet and send it to Kaylee by EOD Tuesday")
+        XCTAssertEqual(command.content.deadlineText, "EOD Tuesday")
+        XCTAssertEqual(command.content.contextLens, .work)
+        XCTAssertEqual(command.content.commitmentKind, .oneTime)
         XCTAssertEqual(command.validationState, .needsConfirmation)
         XCTAssertEqual(command.executionStatus, .queued)
         XCTAssertEqual(command.result?.route, .time)
@@ -219,8 +219,8 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         )
 
         XCTAssertEqual(validator.validate(priority), .valid)
-        XCTAssertEqual(priority.payload.priorityHints.consequence, .high)
-        XCTAssertEqual(priority.payload.contextLens, .freeTime)
+        XCTAssertEqual(priority.content.priorityHints.consequence, .high)
+        XCTAssertEqual(priority.content.contextLens, .freeTime)
         XCTAssertEqual(validator.validate(context), .valid)
         XCTAssertEqual(validator.validate(deadline), .valid)
     }
@@ -278,7 +278,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 dueText: "Tuesday EOD",
                 contextLens: .work,
                 commitmentKind: .oneTime,
-                destinationRoute: "plan"
+                destinationRoute: CaptureRoute.timeSeed.rawValue
             )
         )
         let addDeliverable = command(
@@ -292,9 +292,9 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         )
 
         XCTAssertEqual(validator.validate(commitment), .valid)
-        XCTAssertEqual(commitment.payload.destinationRoute, "plan")
+        XCTAssertEqual(commitment.content.destinationRoute, .timeSeed)
         XCTAssertEqual(validator.validate(addDeliverable), .valid)
-        XCTAssertEqual(addDeliverable.payload.title, "Song 4")
+        XCTAssertEqual(addDeliverable.content.title, "Song 4")
         XCTAssertEqual(validator.validate(removeScope), .valid)
     }
 
@@ -316,11 +316,11 @@ final class AmbitionsCommandModelsTests: XCTestCase {
             createdAt: "2026-04-25T12:00:00Z"
         )
 
-        XCTAssertEqual(command.kind, .completeAction)
+        XCTAssertEqual(command.operation, .completeAction)
         XCTAssertEqual(command.validationState, .valid)
         XCTAssertEqual(command.target.goalID, "goal-1")
         XCTAssertEqual(command.target.stepID, "step-1")
-        XCTAssertEqual(command.payload.contextLens, .work)
+        XCTAssertEqual(command.content.contextLens, .work)
         XCTAssertEqual(command.relations.eventLedgerEntryIDs, ["ledger-1"])
         XCTAssertEqual(command.relations.recommendationExplanationIDs, ["explanation-1"])
     }

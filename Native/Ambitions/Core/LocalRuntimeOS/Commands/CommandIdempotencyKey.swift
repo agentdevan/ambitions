@@ -10,7 +10,7 @@ struct CommandIdempotencyKey: Codable, Sendable, Equatable, Hashable, Identifiab
         _ rawValue: String,
         schemaVersion: String = commandIdempotencyKeySchemaVersion
     ) {
-        self.rawValue = rawValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.rawValue = rawValue
         self.schemaVersion = schemaVersion
     }
 
@@ -18,7 +18,7 @@ struct CommandIdempotencyKey: Codable, Sendable, Equatable, Hashable, Identifiab
         command: AmbitionsCommand,
         schemaVersion: String = commandIdempotencyKeySchemaVersion
     ) {
-        self.init(command.id, schemaVersion: schemaVersion)
+        self.init(command.idempotencyKey.rawValue, schemaVersion: schemaVersion)
     }
 
     var id: String {
@@ -26,7 +26,10 @@ struct CommandIdempotencyKey: Codable, Sendable, Equatable, Hashable, Identifiab
     }
 
     var isWellFormed: Bool {
-        rawValue.isEmpty == false
+        rawValue.isEmpty == false &&
+            rawValue == rawValue.trimmingCharacters(in: .whitespacesAndNewlines) &&
+            rawValue == rawValue.precomposedStringWithCanonicalMapping &&
+            rawValue.unicodeScalars.contains(where: CharacterSet.controlCharacters.contains) == false
     }
 
     var ledgerKey: LedgerIdempotencyKey {

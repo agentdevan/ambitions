@@ -9,17 +9,6 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
     case makeTodayLighter
     case addBuffer
 
-    var commandKind: AmbitionsCommandKind {
-        switch self {
-        case .placeStep:
-            .placeStepInTime
-        case .protectWindow:
-            .protectTimeWindow
-        case .notUsable, .needsMoreTime, .keepClear, .makeTodayLighter, .addBuffer:
-            .correctTimeWindow
-        }
-    }
-
     var timeMutationKind: TimeMutationActionKind {
         switch self {
         case .placeStep:
@@ -71,14 +60,4 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
         }
     }
 
-    var commandMetadata: [String: String] {
-        switch self {
-        case .notUsable, .needsMoreTime, .keepClear, .makeTodayLighter, .addBuffer:
-            ["correctionKind": timeMutationKind.rawValue]
-        case .placeStep:
-            ["durationMinutes": "15"]
-        case .protectWindow:
-            [:]
-        }
-    }
 }

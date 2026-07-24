@@ -7,7 +7,7 @@ struct RuntimeCommandTransactionRequest: Sendable, Equatable {
     let targetSurface: StageMutationTargetSurface
 
     static func beforeSummary(command: AmbitionsCommand) -> String {
-        "Before \(command.kind.rawValue) from \(command.source.rawValue)."
+        "Before \(command.typedPayload.diagnosticFamily).\(command.typedPayload.diagnosticCase) from \(command.source.rawValue)."
     }
 
     static func afterSummary(
@@ -38,7 +38,19 @@ enum RuntimeTransactionCommitPolicy {
         command: AmbitionsCommand,
         result: AmbitionsCommandExecutionResult
     ) -> Bool {
-        result.status == .succeeded && command.kind.recordsRuntimeMutation
+        guard result.status == .succeeded else { return false }
+        switch command.typedPayload {
+        case .capture, .goal, .step, .schedule, .reminder, .profile, .repair, .externalOperation:
+            return true
+        case let .history(history):
+            if case .todayReceipt = history.action { return true }
+            return false
+        case let .importDeletion(value):
+            switch value.action {
+            case .deleteObject, .forgetMemory: return true
+            case .prepareExport, .performExport: return false
+            }
+        }
     }
 
     static func transactionRequest(
@@ -231,10 +243,10 @@ extension AmbitionsCommand {
         let resolvedTarget = result.target ?? target
         return AmbitionsCommand(
             id: id,
-            kind: kind,
             source: source,
-            target: resolvedTarget,
-            payload: payload,
+            typedPayload: typedPayload.retargeted(to: resolvedTarget),
+            expectedRevision: expectedRevision,
+            idempotencyKey: idempotencyKey,
             validationState: validationState,
             executionStatus: result.status,
             result: result,
@@ -247,17 +259,6 @@ extension AmbitionsCommand {
             privacy: privacy,
             schemaVersion: schemaVersion
         )
-    }
-}
-
-extension AmbitionsCommandKind {
-    var recordsRuntimeMutation: Bool {
-        switch self {
-        case .openDestination, .askWhy, .prepareExport, .performExport:
-            return false
-        default:
-            return true
-        }
     }
 }
 

@@ -201,15 +201,20 @@ final class TimeViewModel {
               let receiptID = lastTimeReceiptID,
               let projectionVersion = lastTimeProjectionVersion,
               let timeID = original.target.timeID else { return }
-        var metadata = original.payload.metadata
-        metadata["undoOriginalReceiptID"] = receiptID
-        metadata["expectedProjectionVersion"] = String(projectionVersion)
+        guard let typedReceiptID = RuntimeCommandReceiptID(rawValue: receiptID) else { return }
+        let target = AmbitionsCommandTarget(timeID: timeID, stepID: original.target.stepID)
+        let content = AmbitionsCommandPayload(title: "Undo")
         let undo = AmbitionsCommand(
             id: "command.time.undo.\(original.id).\(ISO8601DateFormatter().string(from: now))",
-            kind: .correctTimeWindow,
             source: .time,
-            target: AmbitionsCommandTarget(timeID: timeID, stepID: original.target.stepID),
-            payload: AmbitionsCommandPayload(title: "Undo", metadata: metadata),
+            typedPayload: .schedule(ScheduleCommand(
+                action: .undo(CommandUndoIntent(
+                    originalReceiptID: typedReceiptID,
+                    expectedProjectionVersion: projectionVersion
+                )),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: ISO8601DateFormatter().string(from: now),
             actor: .user,
             sourceSurface: "Time"
@@ -283,7 +288,7 @@ final class TimeViewModel {
             projection: reloaded,
             receiptID: receiptID,
             projectionVersion: committedProjection.eventSequence,
-            canUndo: command.payload.metadata["undoOriginalReceiptID"] == nil
+            canUndo: command.commandUndoIntent == nil
         )
     }
 
@@ -316,7 +321,7 @@ final class TimeViewModel {
         let stableAffectedIDs = affectedIDs.isEmpty ? [command.id] : affectedIDs
         let action = MutationActionReference(
             commandID: command.id,
-            commandKind: command.kind,
+            commandPayload: command.typedPayload,
             source: command.source,
             targetObjectIDs: stableAffectedIDs
         )
@@ -338,13 +343,18 @@ final class TimeViewModel {
             action: action,
             afterSnapshot: after
         )
-        let isUndo = command.payload.metadata["undoOriginalReceiptID"] != nil
+        let isUndo = command.commandUndoIntent != nil
         let headline: String
-        switch command.kind {
-        case .placeStepInTime: headline = "Step placed"
-        case .protectTimeWindow: headline = "Window protected"
-        case .correctTimeWindow: headline = isUndo ? "Undo applied" : "Time corrected"
-        default: headline = "Time updated"
+        if case let .schedule(value) = command.typedPayload {
+            switch value.action {
+            case .placeStep: headline = "Step placed"
+            case .protectWindow: headline = "Window protected"
+            case .undo: headline = "Undo applied"
+            case .correctWindow: headline = "Time corrected"
+            case .createItem, .schedule, .ritual, .calendarWrite: headline = "Time updated"
+            }
+        } else {
+            headline = "Time updated"
         }
         let runtimeMutationID = "runtime.mutation.\(receiptID)"
         let stage = StageMutation(
@@ -355,7 +365,7 @@ final class TimeViewModel {
             affectedObjectIDs: stableAffectedIDs,
             visibleUserFacingChange: headline,
             typedMotionEvent: MutationMotionEvent(
-                id: isUndo ? "stage.motion.time.mutation_undone" : "stage.motion.\(command.kind.rawValue)",
+                id: isUndo ? "stage.motion.time.mutation_undone" : "stage.motion.\(command.typedPayload.diagnosticFamily).\(command.typedPayload.diagnosticCase)",
                 kind: isUndo ? .undo : .stageAction,
                 sourceMutationID: runtimeMutationID,
                 affectedObjectIDs: stableAffectedIDs

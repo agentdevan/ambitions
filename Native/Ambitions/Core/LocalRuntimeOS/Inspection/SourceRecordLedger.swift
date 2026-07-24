@@ -85,7 +85,7 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
             kind: .commandRecord,
             boundary: .privateLifeGraph,
             sourceID: commandRecord.id,
-            sourceSummary: "Command \(commandRecord.command.kind.rawValue) recorded locally.",
+            sourceSummary: "Command \(commandRecord.command.operation.rawValue) recorded locally.",
             occurredAt: commandRecord.recordedAt,
             privacy: commandRecord.privacy,
             containsPrivateLifeGraph: true,

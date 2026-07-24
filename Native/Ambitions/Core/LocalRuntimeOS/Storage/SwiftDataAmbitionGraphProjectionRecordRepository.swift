@@ -84,7 +84,7 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
         records.append(record)
     }
 
-    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord] {
         Array(records.sorted { lhs, rhs in
             let lhsDate = PersistedTemporalValue.date(from: lhs.recordedAt)
             let rhsDate = PersistedTemporalValue.date(from: rhs.recordedAt)
@@ -92,10 +92,10 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
                 return lhs.command.id > rhs.command.id
             }
             return lhsDate > rhsDate
-        }.prefix(max(0, limit)))
+        }.prefix(max(0, limit))).map(StoredCommandExecutionRecord.supported)
     }
 
-    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord? {
         records
             .sorted {
                 let lhsDate = PersistedTemporalValue.date(from: $0.recordedAt)
@@ -106,5 +106,6 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
                 return lhsDate > rhsDate
             }
             .first(where: { $0.command.id == commandID })
+            .map(StoredCommandExecutionRecord.supported)
     }
 }

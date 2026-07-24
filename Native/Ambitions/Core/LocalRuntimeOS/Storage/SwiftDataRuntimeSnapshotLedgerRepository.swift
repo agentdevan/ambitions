@@ -136,6 +136,9 @@ struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecu
         try await store.write { context in
             if let persisted = try context.fetch(FetchDescriptor<CommandExecutionRecord>())
                 .first(where: { $0.id == record.id || $0.commandID == record.command.id }) {
+                if case .quarantined = RepositoryMapping.commandExecutionRecord(from: persisted) {
+                    throw RuntimeFoundationError.corruption
+                }
                 try RepositoryMapping.apply(record, to: persisted)
             } else {
                 context.insert(try RepositoryMapping.commandExecutionRecord(from: record))
@@ -143,7 +146,7 @@ struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecu
         }
     }
 
-    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<CommandExecutionRecord>())
                 .sorted {
@@ -159,7 +162,7 @@ struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecu
         }
     }
 
-    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord? {
         try await store.read { context in
             try context.fetch(FetchDescriptor<CommandExecutionRecord>())
                 .first(where: { $0.commandID == commandID })

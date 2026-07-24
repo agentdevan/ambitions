@@ -86,3 +86,67 @@ struct AmbitionsCommandExecutionRecord: Codable, Sendable, Equatable, Hashable, 
         command.id
     }
 }
+
+/// A persistence-boundary result which never erases bytes that this build cannot interpret.
+enum StoredCommandExecutionRecord: Sendable, Equatable {
+    case supported(AmbitionsCommandExecutionRecord)
+    case quarantined(QuarantinedCommandExecutionRecord)
+
+    var command: AmbitionsCommand? {
+        guard case let .supported(record) = self else { return nil }
+        return record.command
+    }
+
+    var result: AmbitionsCommandExecutionResult? {
+        guard case let .supported(record) = self else { return nil }
+        return record.result
+    }
+
+    var commandID: String {
+        switch self {
+        case let .supported(record): record.commandID
+        case let .quarantined(record): record.commandID
+        }
+    }
+
+    var id: String {
+        switch self {
+        case let .supported(record): record.id
+        case let .quarantined(record): record.id
+        }
+    }
+
+    var recordedAt: String {
+        switch self {
+        case let .supported(record): record.recordedAt
+        case let .quarantined(record): record.recordedAt
+        }
+    }
+
+    var localOnly: Bool? {
+        guard case let .supported(record) = self else { return nil }
+        return record.localOnly
+    }
+
+    var privacy: EventLedgerPrivacyClassification? {
+        guard case let .supported(record) = self else { return nil }
+        return record.privacy
+    }
+
+    var schemaVersion: String? {
+        guard case let .supported(record) = self else { return nil }
+        return record.schemaVersion
+    }
+}
+
+struct QuarantinedCommandExecutionRecord: Sendable, Equatable {
+    let id: String
+    let commandID: String
+    let commandBytes: Data
+    let resultBytes: Data
+    let recordedAt: String
+    let schemaVersion: String
+    let localOnly: Bool
+    let privacy: EventLedgerPrivacyClassification
+    let issue: RuntimeUnsupportedCommand
+}

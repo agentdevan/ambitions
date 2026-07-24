@@ -29,7 +29,7 @@ extension EventLedgerEntry {
             captureID: capture.id,
             title: "Capture created",
             summary: nil,
-            semanticState: command.kind.rawValue,
+            semanticState: command.operation.rawValue,
             tone: .neutral,
             trust: EventLedgerTrustMetadata(isUserConfirmed: command.actor == .user),
             evidenceReferences: [
@@ -37,7 +37,7 @@ extension EventLedgerEntry {
                     id: command.id,
                     kind: .externalCommand,
                     occurredAt: command.requestedAt,
-                    summary: command.kind.rawValue
+                    summary: command.operation.rawValue
                 ),
                 EventLedgerEvidenceReference(
                     id: capture.id,
@@ -47,14 +47,14 @@ extension EventLedgerEntry {
                 )
             ],
             metadata: [
-                "commandKind": command.kind.rawValue,
+                "commandOperation": command.operation.rawValue,
                 "commandSource": command.source.rawValue,
                 "sourceSurface": command.sourceSurface ?? ""
             ].filter { $0.value.isEmpty == false },
             payload: [
                 "captureID": capture.id,
-                "contextLens": command.payload.contextLens?.rawValue ?? "",
-                "commitmentKind": command.payload.commitmentKind?.rawValue ?? ""
+                "contextLens": command.content.contextLens?.rawValue ?? "",
+                "commitmentKind": command.content.commitmentKind?.rawValue ?? ""
             ].filter { $0.value.isEmpty == false },
             privacy: .privateUserText
         )

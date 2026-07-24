@@ -13,7 +13,7 @@ extension AmbitionsCommandExecutor {
                 metadata: ["blockedBy": "missing_capture_service"]
             )
         }
-        guard let text = command.payload.primaryText else {
+        guard let text = command.content.primaryText else {
             return blockedResult(for: .invalid, command: command)
         }
         let sourceType = captureSourceType(for: command)
@@ -31,11 +31,11 @@ extension AmbitionsCommandExecutor {
                 maxCandidateCount: 5
             )
         let captureID = "capture.\(command.id)"
-        let resolvedRoute = route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute ?? .captureInbox
-        let resolvedKind = captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind ?? .raw
+        let resolvedRoute = command.content.destinationRoute ?? smartAttachment?.captureRoute ?? .captureInbox
+        let resolvedKind = captureKind(for: command.content.commitmentKind) ?? smartAttachment?.captureKind ?? .raw
         var metadata: [String: String] = [
                 "captureID": captureID,
-                "commandKind": command.kind.rawValue,
+                "commandOperation": command.operation.rawValue,
                 "commandSource": command.source.rawValue,
                 "captureSourceType": sourceType.rawValue,
                 "captureRoute": resolvedRoute.rawValue,
@@ -68,7 +68,7 @@ extension AmbitionsCommandExecutor {
         committedResult: AmbitionsCommandExecutionResult
     ) async -> AmbitionsCommandExecutionResult {
         guard let captureService,
-              let text = command.payload.primaryText,
+              let text = command.content.primaryText,
               let captureID = committedResult.target?.captureID else { return committedResult }
         let sourceType = captureSourceType(for: command)
         let smartAttachment = smartAttachmentService?.route(
@@ -92,14 +92,14 @@ extension AmbitionsCommandExecutor {
                         sourceType: sourceType,
                         linkedGoalID: command.target.goalID,
                         triage: externalCreationTriageMetadata(for: command),
-                        kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
-                        route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,
+                        kind: captureKind(for: command.content.commitmentKind) ?? smartAttachment?.captureKind,
+                        route: command.content.destinationRoute ?? smartAttachment?.captureRoute,
                         triageStatus: smartAttachment?.triageStatus,
-                        commitmentKind: command.payload.commitmentKind,
-                        deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                        deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
-                        contextLensHint: command.payload.contextLens,
-                        priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                        commitmentKind: command.content.commitmentKind,
+                        deadlineText: command.content.deadlineText ?? command.content.dueText,
+                        deadlineKind: command.content.deadlineText == nil && command.content.dueText == nil ? .none : .hard,
+                        contextLensHint: command.content.contextLens,
+                        priorityHints: CapturePriorityHints(commandHints: command.content.priorityHints),
                         assumptionSummary: smartAttachment?.captureAssumptionSummary
                     ), now: context.now
                 )
@@ -162,11 +162,11 @@ extension AmbitionsCommandExecutor {
             if let captureID = command.target.captureID {
                 capture = try await captureService.markAsOneTimeCommitment(
                     id: captureID,
-                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                    contextLensHint: command.payload.contextLens,
+                    deadlineText: command.content.deadlineText ?? command.content.dueText,
+                    contextLensHint: command.content.contextLens,
                     now: context.now
                 )
-            } else if let text = command.payload.primaryText {
+            } else if let text = command.content.primaryText {
                 capture = try await captureService.createCapture(
                     CreateCaptureRequest(
                         rawText: text,
@@ -174,10 +174,10 @@ extension AmbitionsCommandExecutor {
                         kind: .oneTimeCommitment,
                         route: .timeSeed,
                         commitmentKind: .oneTime,
-                        deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                        deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
-                        contextLensHint: command.payload.contextLens,
-                        priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                        deadlineText: command.content.deadlineText ?? command.content.dueText,
+                        deadlineKind: command.content.deadlineText == nil && command.content.dueText == nil ? .none : .hard,
+                        contextLensHint: command.content.contextLens,
+                        priorityHints: CapturePriorityHints(commandHints: command.content.priorityHints),
                         assumptionSummary: "I treated this as a one-time commitment."
                     ),
                     now: context.now
@@ -215,10 +215,10 @@ extension AmbitionsCommandExecutor {
                     id: captureID,
                     kind: kind,
                     route: route,
-                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                    contextLensHint: command.payload.contextLens,
-                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
-                    waitingMetadata: route == .waiting ? CaptureWaitingMetadata(blockedBy: command.payload.notes, waitingOn: command.payload.title) : nil
+                    deadlineText: command.content.deadlineText ?? command.content.dueText,
+                    contextLensHint: command.content.contextLens,
+                    priorityHints: CapturePriorityHints(commandHints: command.content.priorityHints),
+                    waitingMetadata: route == .waiting ? CaptureWaitingMetadata(blockedBy: command.content.notes, waitingOn: command.content.title) : nil
                 ),
                 now: context.now
             )
@@ -274,7 +274,7 @@ extension AmbitionsCommandExecutor {
         guard command.target.captureID != nil else {
             return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Deadline changes are executable for captures only in this build.", target: command.target, metadata: ["blockedBy": "owning_system_not_implemented"])
         }
-        return await executeCaptureRoute(command, context: context, kind: command.payload.commitmentKind == .oneTime ? .deadlineTask : .raw, route: .timeSeed)
+        return await executeCaptureRoute(command, context: context, kind: command.content.commitmentKind == .oneTime ? .deadlineTask : .raw, route: .timeSeed)
     }
 
 
@@ -287,7 +287,8 @@ extension AmbitionsCommandExecutor {
 
 
     func executePlanSeedRepresentation(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
-        if command.kind == .createTimeItem {
+        if case let .schedule(value) = command.typedPayload,
+           case .createItem = value.action {
             guard let stepID = command.target.stepID, let timeID = command.target.timeID else {
                 return AmbitionsCommandExecutionResult(
                     status: .blocked,

@@ -295,15 +295,16 @@ extension TodayExecutionViewState {
             guard let command = command(for: action, explanations: explanations, recoveryOptionID: recoveryOptionID) else {
                 continue
             }
-            guard seen.insert("\(action.id).\(command.kind.rawValue)").inserted else { continue }
+            let identity = "\(command.typedPayload.diagnosticFamily).\(command.typedPayload.diagnosticCase)"
+            guard seen.insert("\(action.id).\(identity)").inserted else { continue }
             mapped.append(
                 TodayCommandMappingState(
-                    id: "today2.command.\(action.id).\(command.kind.rawValue)",
+                    id: "today2.command.\(action.id).\(identity)",
                     actionKind: action.kind,
-                    commandKind: command.kind,
+                    commandPayload: command.typedPayload,
                     destination: command.target.destination,
                     validationState: validator.validate(command),
-                    explanationID: command.target.explanationID ?? command.payload.explanationID,
+                    explanationID: command.target.explanationID ?? command.content.explanationID,
                     recoveryOptionID: recoveryOptionID
                 )
             )
@@ -318,55 +319,69 @@ extension TodayExecutionViewState {
     ) -> AmbitionsCommand? {
         let explanationID = explanations.first?.id
         let destination: AmbitionsCommandDestination?
-        let kind: AmbitionsCommandKind
+        let typed: RuntimeCommandPayload
         switch action.kind {
         case .openTime, .protectLater:
-            kind = .openDestination
             destination = .time
         case .quickLog:
-            kind = .openDestination
             destination = .capture
         case .openDetail:
-            kind = .openDestination
             destination = .goalDetail
         case .askWhyThisMatters:
-            kind = .askWhy
             destination = nil
         case .startStepSession:
-            kind = .startStepSession
             destination = nil
         case .complete:
-            kind = .completeAction
             destination = nil
         case .defer, .reschedule:
-            kind = .delayAction
             destination = nil
         case .split:
-            kind = .splitAction
             destination = nil
         case .askForHelp:
-            kind = .recoverAction
             destination = nil
         default:
             return nil
         }
+        let target = AmbitionsCommandTarget(
+            goalID: action.target.goalID,
+            stepID: action.target.stepID,
+            recommendationID: recoveryOptionID,
+            explanationID: explanationID,
+            destination: destination
+        )
+        let content = AmbitionsCommandPayload(
+            title: action.title,
+            priorityHints: AmbitionsCommandPriorityHints(recoveryState: action.kind == .protectLater || action.kind == .askForHelp ? .needsRecovery : nil),
+            explanationID: explanationID
+        )
+        switch action.kind {
+        case .openTime, .protectLater, .quickLog, .openDetail:
+            typed = .history(HistoryCommand(action: .openDestination, target: target, content: RuntimeCommandContent(content)))
+        case .askWhyThisMatters:
+            typed = .history(HistoryCommand(action: .askWhy, target: target, content: RuntimeCommandContent(content)))
+        case .startStepSession:
+            typed = .step(StepCommand(action: .startSession, target: target, content: RuntimeCommandContent(content)))
+        case .complete:
+            typed = .step(StepCommand(action: .complete, target: target, content: RuntimeCommandContent(content)))
+        case .defer, .reschedule:
+            typed = .step(StepCommand(action: .delay, target: target, content: RuntimeCommandContent(content)))
+        case .split:
+            typed = .step(StepCommand(action: .split, target: target, content: RuntimeCommandContent(content)))
+        case .askForHelp:
+            typed = .step(StepCommand(action: .recover(RecoveryRecommendationCommand(
+                goalID: target.goalID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                captureID: target.captureID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                timeID: target.timeID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                title: content.title,
+                explanationID: explanationID.flatMap(RuntimeCommandObjectID.init(rawValue:))
+            )), target: target, content: RuntimeCommandContent(content)))
+        default:
+            return nil
+        }
         return AmbitionsCommand(
-            id: "command.today2.\(action.id).\(kind.rawValue)",
-            kind: kind,
+            id: "command.today2.\(action.id).\(typed.diagnosticFamily).\(typed.diagnosticCase)",
             source: .today,
-            target: AmbitionsCommandTarget(
-                goalID: action.target.goalID,
-                stepID: action.target.stepID,
-                recommendationID: recoveryOptionID,
-                explanationID: explanationID,
-                destination: destination
-            ),
-            payload: AmbitionsCommandPayload(
-                title: action.title,
-                priorityHints: AmbitionsCommandPriorityHints(recoveryState: action.kind == .protectLater || action.kind == .askForHelp ? .needsRecovery : nil),
-                explanationID: explanationID,
-                metadata: recoveryOptionID.map { ["recoveryOptionID": $0] } ?? [:]
-            ),
+            typedPayload: typed,
             createdAt: DomainTimestamp.string(from: Date(timeIntervalSince1970: 0)),
             sourceSurface: "today"
         )

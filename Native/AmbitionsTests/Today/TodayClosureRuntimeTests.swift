@@ -208,13 +208,13 @@ final class TodayClosureRuntimeTests: TodayViewModelTestCase {
         var hasAskWhyMapping = false
 
         for mapping in mappings {
-            if mapping.actionKind == .openTime && mapping.destination == .time && mapping.commandKind == .openDestination {
+            if mapping.actionKind == .openTime && mapping.destination == .time && mapping.commandPayload.diagnosticCase == "openDestination" {
                 hasPlanDestinationMapping = true
             }
-            if mapping.actionKind == .startStepSession && mapping.commandKind == .startStepSession {
+            if mapping.actionKind == .startStepSession && mapping.commandPayload.diagnosticCase == "startSession" {
                 hasStartStepSessionMapping = true
             }
-            if mapping.actionKind == .askWhyThisMatters && mapping.commandKind == .askWhy {
+            if mapping.actionKind == .askWhyThisMatters && mapping.commandPayload.diagnosticCase == "askWhy" {
                 hasAskWhyMapping = true
             }
         }

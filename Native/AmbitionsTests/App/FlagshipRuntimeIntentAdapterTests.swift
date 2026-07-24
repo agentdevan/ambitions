@@ -22,16 +22,16 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
         XCTAssertEqual(commands[0].sourceSurface, "Share")
         XCTAssertEqual(commands[0].privacy, .privateUserText)
         XCTAssertTrue(commands[0].localOnly)
-        XCTAssertEqual(commands[0].payload.rawText, "Book dentist")
-        XCTAssertEqual(commands[0].payload.destinationRoute, CaptureRoute.timeSeed.rawValue)
-        XCTAssertEqual(
-            commands[0].payload.metadata[ExternalCreationCommandMetadataKey.sourceType],
-            CaptureSourceType.shareExtensionText.rawValue
-        )
-        XCTAssertEqual(commands[0].payload.metadata["captureEntryPoint"], ShellCommandEntrySource.shareExtension.rawValue)
-        XCTAssertEqual(commands[0].payload.metadata["captureRouteType"], SmartAttachmentRouteType.reminder.rawValue)
-        XCTAssertEqual(commands[0].payload.metadata["captureCommandPath"], "shell_command_router")
-        XCTAssertEqual(commands[0].payload.metadata["flagshipDraftID"], "draft.share.001")
+        XCTAssertEqual(commands[0].content.rawText, "Book dentist")
+        XCTAssertEqual(commands[0].idempotencyKey.rawValue, "capture-save-attempt.001")
+        guard case let .capture(capture) = commands[0].typedPayload else {
+            return XCTFail("Expected typed capture command")
+        }
+        XCTAssertEqual(capture.sourceType, .shareExtensionText)
+        XCTAssertEqual(capture.entryPoint, .shareExtension)
+        XCTAssertEqual(capture.flagshipRoute, .reminder)
+        XCTAssertEqual(capture.placementID?.rawValue, CaptureRoute.timeSeed.rawValue)
+        XCTAssertEqual(capture.draftID?.rawValue, "draft.share.001")
     }
 
     func testSameTextWithDifferentDraftIdentityDoesNotDeduplicateLaterCapture() async {
@@ -52,7 +52,7 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
         let commands = await recorder.commands()
         XCTAssertEqual(commands.count, 2)
         XCTAssertNotEqual(commands[0].id, commands[1].id)
-        XCTAssertEqual(commands[0].payload.rawText, commands[1].payload.rawText)
+        XCTAssertEqual(commands[0].content.rawText, commands[1].content.rawText)
     }
 
     func testEmptyQuickCaptureIsRejectedBeforeExecutorMutation() async {
@@ -64,6 +64,27 @@ final class FlagshipRuntimeIntentAdapterTests: XCTestCase {
         let commands = await recorder.commands()
 
         XCTAssertEqual(result.state, .rejectedBeforeMutation)
+        XCTAssertTrue(commands.isEmpty)
+    }
+
+    func testSemanticIdentifiersRejectWhitespaceBeforeExecutorMutation() async {
+        let recorder = RuntimeCommandRecorder(result: .projectionReady)
+        let adapter = FlagshipRuntimeIntentAdapter(runtimeCommandClient: recorder.client)
+
+        let draftResult = await adapter.send(
+            makeIntent(draftID: " draft.invalid "),
+            idempotencyKey: "capture-save-attempt.valid",
+            expectedRevision: nil
+        )
+        let keyResult = await adapter.send(
+            makeIntent(draftID: "draft.valid"),
+            idempotencyKey: " capture-save-attempt.invalid ",
+            expectedRevision: nil
+        )
+        let commands = await recorder.commands()
+
+        XCTAssertEqual(draftResult.state, .rejectedBeforeMutation)
+        XCTAssertEqual(keyResult.state, .rejectedBeforeMutation)
         XCTAssertTrue(commands.isEmpty)
     }
 

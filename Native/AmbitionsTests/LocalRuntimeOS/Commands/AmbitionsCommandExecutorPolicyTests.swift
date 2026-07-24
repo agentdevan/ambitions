@@ -33,9 +33,9 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
 
         let record = try await commandRecordRepository.fetchRecord(commandID: "command-unsupported")
         let fetched = try XCTUnwrap(record)
-        XCTAssertEqual(fetched.result.status, .unsupported)
-        XCTAssertEqual(fetched.result.metadata["blockedBy"], "plan_2_not_implemented")
-        XCTAssertEqual(fetched.command.id, "command-unsupported")
+        XCTAssertEqual(fetched.result?.status, .unsupported)
+        XCTAssertEqual(fetched.result?.metadata["blockedBy"], "plan_2_not_implemented")
+        XCTAssertEqual(fetched.command?.id, "command-unsupported")
 
         let events = try await ledger.fetchRecent(limit: 10)
         XCTAssertTrue(events.isEmpty)
@@ -185,9 +185,9 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
         XCTAssertTrue(captures.isEmpty)
 
         let records = try await commandRecordRepository.fetchRecent(limit: 10)
-        XCTAssertEqual(records.map(\.command.id), ["command-empty-capture", "command-complete-missing"])
-        XCTAssertEqual(records.map(\.result.status), [.failed, .blocked])
-        XCTAssertEqual(records.first?.result.metadata["validation"], AmbitionsCommandValidationState.invalid.rawValue)
+        XCTAssertEqual(records.compactMap { $0.command?.id }, ["command-empty-capture", "command-complete-missing"])
+        XCTAssertEqual(records.compactMap { $0.result?.status }, [.failed, .blocked])
+        XCTAssertEqual(records.first?.result?.metadata["validation"], AmbitionsCommandValidationState.invalid.rawValue)
     }
 
     func testExecutorDoesNotDependOnCalendarOrExternalSurfaceRuntime() async {
@@ -266,14 +266,20 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
                     "relatedCaptureID": "capture-active",
                     "destinationStepID": "step-active",
                     "destinationStepTitle": "Write outline",
-                    "displacedDisposition": "held",
                     "destinationStepPressure": "6/10",
-                    "originStepPressure": "4/10",
-                    "lifeshapeImpact": "pressure-shifts-protected"
+                    "originStepPressure": "4/10"
                 ]
             ),
             createdAt: "2026-04-25T12:00:00Z"
         )
+        guard case let .schedule(schedule) = confirmed.typedPayload,
+              case let .calendarWrite(calendar) = schedule.action else {
+            return XCTFail("Expected v1 calendar metadata to upgrade to typed calendar intent")
+        }
+        XCTAssertEqual(calendar.operationID.rawValue, confirmed.id)
+        XCTAssertEqual(calendar.scheduleBlockID, "schedule-block-1")
+        XCTAssertEqual(calendar.displacedDisposition, .notDisplaced)
+        XCTAssertEqual(calendar.lifeshapeImpact, .recalculatedBeforeCommit)
 
         let result = await executor.execute(
             confirmed,
@@ -302,10 +308,10 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
         XCTAssertEqual(result.metadata["originalBlockID"], "time-block-preview")
         XCTAssertEqual(result.metadata["destinationStepID"], "step-active")
         XCTAssertEqual(result.metadata["destinationStepTitle"], "Write outline")
-        XCTAssertEqual(result.metadata["displacedDisposition"], "held")
+        XCTAssertEqual(result.metadata["displacedDisposition"], "not_displaced")
         XCTAssertEqual(result.metadata["destinationStepPressure"], "6/10")
         XCTAssertEqual(result.metadata["originStepPressure"], "4/10")
-        XCTAssertEqual(result.metadata["lifeshapeImpact"], "pressure-shifts-protected")
+        XCTAssertEqual(result.metadata["lifeshapeImpact"], "recalculated_before_commit")
 
         XCTAssertEqual(blocks.count, 1)
         XCTAssertEqual(blocks.first?.id, "schedule-block-1")

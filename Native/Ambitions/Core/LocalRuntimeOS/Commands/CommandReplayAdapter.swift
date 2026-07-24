@@ -3,6 +3,7 @@ import Foundation
 enum CommandReplayLookupResult: Sendable, Equatable {
     case noRecord
     case record(AmbitionsCommandExecutionRecord)
+    case quarantined(QuarantinedCommandExecutionRecord)
     case lookupUnavailable
 }
 
@@ -16,10 +17,13 @@ struct CommandReplayAdapter: Sendable {
     func lookup(_ command: AmbitionsCommand) async -> CommandReplayLookupResult {
         guard let commandExecutionRecords else { return .noRecord }
         do {
-            guard let record = try await commandExecutionRecords.fetchRecord(commandID: command.id) else {
+            guard let stored = try await commandExecutionRecords.fetchRecord(commandID: command.id) else {
                 return .noRecord
             }
-            return .record(record)
+            switch stored {
+            case let .supported(record): return .record(record)
+            case let .quarantined(record): return .quarantined(record)
+            }
         } catch {
             return .lookupUnavailable
         }

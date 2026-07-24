@@ -51,7 +51,7 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
         XCTAssertEqual(capture.kind, .oneTimeCommitment)
         XCTAssertEqual(capture.rawText, "Need to prep the board update, ask Maya for numbers, and protect pickup before Friday.")
         XCTAssertEqual(captureResult.metadata["captureRoute"], CaptureRoute.captureInbox.rawValue)
-        XCTAssertEqual(commandRecord.result.eventLedgerEntryIDs, ["ledger.command.command-messy-intent-proof"])
+        XCTAssertEqual(commandRecord.result?.eventLedgerEntryIDs, ["ledger.command.command-messy-intent-proof"])
         XCTAssertEqual(captureRuntimeEvent.event.commandID, command.id)
         XCTAssertEqual(captureRuntimeEvent.event.kind, .commandExecution)
 
@@ -83,7 +83,7 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
         XCTAssertEqual(routedCapture.route, .timeSeed)
         XCTAssertEqual(routedCapture.kind, .oneTimeCommitment)
         XCTAssertEqual(routedCapture.deadlineText, "Friday")
-        XCTAssertEqual(routeCommandRecord.command.id, routeCommand.id)
+        XCTAssertEqual(routeCommandRecord.command?.id, routeCommand.id)
         XCTAssertEqual(routeRuntimeEvent.event.commandID, routeCommand.id)
         XCTAssertEqual(routeRuntimeEvent.event.kind, .commandExecution)
 

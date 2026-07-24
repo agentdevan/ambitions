@@ -2,7 +2,7 @@ import Foundation
 
 extension AmbitionsCommand {
     var isTodayReceiptMutation: Bool {
-        payload.metadata[TodayReceiptDomainEvent.mutationMarkerKey] == "true"
+        TodayReceiptDomainEvent.decode(command: self) != nil
     }
 }
 

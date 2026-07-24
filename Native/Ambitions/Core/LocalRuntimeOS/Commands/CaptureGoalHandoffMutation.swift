@@ -16,26 +16,16 @@ struct GoalImmutableIdentity: Sendable, Codable, Equatable {
 }
 
 struct CaptureGoalHandoffPlan: Sendable, Codable, Equatable {
-    static let metadataKey = "captureGoalHandoffPlan"
-    static let mutationMarkerKey = "captureGoalHandoffMutation"
-
     let captureID: String
     let goalID: String
     let expectedCapture: Capture
     let expectedGoalIdentity: GoalImmutableIdentity
     let updatedCapture: Capture
 
-    func encoded() throws -> String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.sortedKeys]
-        return try encoder.encode(self).base64EncodedString()
-    }
-
     static func decode(command: AmbitionsCommand) -> Self? {
-        guard command.payload.metadata[mutationMarkerKey] == "true",
-              let value = command.payload.metadata[metadataKey],
-              let data = Data(base64Encoded: value) else { return nil }
-        return try? JSONDecoder().decode(Self.self, from: data)
+        guard case let .capture(value) = command.canonicalPayload,
+              case let .attachToGoal(plan) = value.action else { return nil }
+        return plan
     }
 }
 
@@ -117,16 +107,12 @@ struct CaptureGoalHandoffPlanner: Sendable {
         )
         let command = AmbitionsCommand(
             id: commandID,
-            kind: .attachToGoal,
             source: .capture,
-            target: AmbitionsCommandTarget(goalID: goal.id, captureID: capture.id, destination: .goals),
-            payload: AmbitionsCommandPayload(
-                title: "Attach capture to created goal",
-                metadata: [
-                    CaptureGoalHandoffPlan.mutationMarkerKey: "true",
-                    CaptureGoalHandoffPlan.metadataKey: try plan.encoded()
-                ]
-            ),
+            typedPayload: .capture(CaptureCommand(
+                action: .attachToGoal(plan),
+                target: AmbitionsCommandTarget(goalID: goal.id, captureID: capture.id, destination: .goals),
+                content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Attach capture to created goal"))
+            )),
             createdAt: DomainTimestamp.string(from: now),
             actor: .user,
             sourceSurface: "Stage",
@@ -288,7 +274,7 @@ struct CaptureGoalHandoffService: Sendable {
 
 extension AmbitionsCommand {
     var isCaptureGoalHandoffMutation: Bool {
-        payload.metadata[CaptureGoalHandoffPlan.mutationMarkerKey] == "true"
+        CaptureGoalHandoffPlan.decode(command: self) != nil
     }
 }
 

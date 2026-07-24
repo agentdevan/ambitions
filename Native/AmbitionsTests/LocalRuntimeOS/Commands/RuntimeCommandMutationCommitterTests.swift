@@ -229,7 +229,7 @@ final class MutationCommitterReplayTests: RuntimeCommandMutationCommitterTestCas
         XCTAssertEqual(second.summary, "Replayed runtime event receipt: Saved once.")
         XCTAssertEqual(materializationExecutionCount, 1)
         XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(record?.result.metadata["runtimeReplayDecision"], LedgerReplayDecision.applyFresh.rawValue)
+        XCTAssertEqual(record?.result?.metadata["runtimeReplayDecision"], LedgerReplayDecision.applyFresh.rawValue)
         XCTAssertEqual(second.metadata["ledgerRecordKind"], LedgerRecordTaxonomyKind.event.rawValue)
         XCTAssertEqual(second.metadata["runtimeReplayAuthority"], "runtime_event_journal")
         XCTAssertEqual(second.metadata["runtimeReplaySource"], "runtime_event")

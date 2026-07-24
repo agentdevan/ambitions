@@ -18,12 +18,14 @@ struct MutationSnapshotReference: Equatable, Sendable {
 
 struct MutationActionReference: Equatable, Sendable {
     let commandID: String
-    let commandKind: AmbitionsCommandKind
+    let commandPayload: RuntimeCommandPayload
     let source: AmbitionsCommandSource
     let targetObjectIDs: [String]
 
     var isTypedReference: Bool {
         commandID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false &&
+            commandPayload.diagnosticFamily.isEmpty == false &&
+            commandPayload.diagnosticCase.isEmpty == false &&
             targetObjectIDs.isEmpty == false
     }
 }

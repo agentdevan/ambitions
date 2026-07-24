@@ -172,7 +172,7 @@ final class CommandsLeafTests: XCTestCase {
         let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(command.id), limit: nil)
         XCTAssertEqual(envelopes.count, 1)
         let record = try await commandRecordRepository.fetchRecord(commandID: command.id)
-        XCTAssertEqual(record?.result.metadata["commandReceiptID"], "command.receipt.command.journal-gated-capture")
+        XCTAssertEqual(record?.result?.metadata["commandReceiptID"], "command.receipt.command.journal-gated-capture")
     }
 
     func testExecutorBlocksMutationWhenCommandJournalAppendFails() async throws {
@@ -223,9 +223,9 @@ final class CommandsLeafTests: XCTestCase {
             result.metadata["runtimeCommitFailureReceiptID"],
             "runtime.failure-receipt.command.runtime-failure"
         )
-        XCTAssertEqual(record?.result.status, .blocked)
+        XCTAssertEqual(record?.result?.status, .blocked)
         XCTAssertEqual(
-            record?.result.metadata["commandReceiptStatus"],
+            record?.result?.metadata["commandReceiptStatus"],
             AmbitionsCommandExecutionStatus.blocked.rawValue
         )
     }

@@ -36,15 +36,17 @@ struct RuntimeTransitionProposal: Sendable, Equatable {
         occurredAt: String
     ) -> RuntimeTransitionProposal {
         let semanticEvent = RuntimeDomainEvent.semanticEvent(command: command, result: result, occurredAt: occurredAt)
-        let intents: [RuntimeOutboxIntent] = switch command.kind {
-        case .createTimeItem, .placeStepInTime:
-            [RuntimeOutboxIntent(
-                id: "runtime.outbox.widget.\(command.id)",
-                kind: .widgetRefresh,
-                payload: Data(command.id.utf8)
-            )]
-        default:
-            []
+        let intents: [RuntimeOutboxIntent]
+        if case let .schedule(schedule) = command.typedPayload {
+            switch schedule.action {
+            case .createItem, .placeStep:
+                intents = [RuntimeOutboxIntent(
+                    id: "runtime.outbox.widget.\(command.id)", kind: .widgetRefresh, payload: Data(command.id.utf8)
+                )]
+            default: intents = []
+            }
+        } else {
+            intents = []
         }
         return RuntimeTransitionProposal(
             semanticEvent: semanticEvent,
@@ -228,15 +230,23 @@ extension EventStoreSQLite {
 
 
     static func requiresSemanticEvent(_ command: AmbitionsCommand) -> Bool {
-        if command.payload.metadata[TodayReceiptDomainEvent.mutationMarkerKey] == "true" {
-            return true
-        }
-        if command.isTodayGoalStepActionMutation { return true }
-        return switch command.kind {
-        case .quickCapture, .createTimeItem, .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
-            true
-        default:
-            false
+        switch command.typedPayload {
+        case let .capture(value):
+            if case .quickCapture = value.action { return true }
+            return false
+        case let .step(value):
+            if case .todayGoalStep = value.action { return true }
+            return false
+        case let .schedule(value):
+            switch value.action {
+            case .createItem, .placeStep, .protectWindow, .correctWindow, .undo, .ritual: return true
+            case .schedule, .calendarWrite: return false
+            }
+        case let .history(value):
+            if case .todayReceipt = value.action { return true }
+            return false
+        case .goal, .reminder, .profile, .repair, .importDeletion, .externalOperation:
+            return false
         }
     }
 }

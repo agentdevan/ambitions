@@ -44,14 +44,13 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let commands = await executor.capturedCommands()
         let command = try XCTUnwrap(commands.first)
         XCTAssertEqual(commands.count, 1)
-        XCTAssertEqual(command.kind, .quickCapture)
+        XCTAssertEqual(command.operation, .quickCapture)
         XCTAssertEqual(command.source, .deepLink)
         XCTAssertEqual(command.sourceSurface, "Share")
-        XCTAssertEqual(command.payload.rawText, "Turn this into a goal")
-        XCTAssertEqual(command.payload.destinationRoute, CaptureRoute.goalSeed.rawValue)
-        XCTAssertEqual(command.payload.metadata[ExternalCreationCommandMetadataKey.sourceType], CaptureSourceType.shareExtensionText.rawValue)
-        XCTAssertEqual(command.payload.metadata["captureRouteType"], SmartAttachmentRouteType.goal.rawValue)
-        XCTAssertEqual(command.payload.metadata["captureCommandPath"], "shell_command_router")
+        XCTAssertEqual(command.content.rawText, "Turn this into a goal")
+        XCTAssertEqual(command.content.destinationRoute, .goalSeed)
+        guard case let .capture(capture) = command.typedPayload else { return XCTFail("Expected typed capture") }
+        XCTAssertEqual(capture.sourceType, .shareExtensionText)
         XCTAssertEqual(result.createdCaptureID, "capture-recorded")
         XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
@@ -82,10 +81,11 @@ final class GlobalComposerHardeningTests: XCTestCase {
 
         let commands = await executor.capturedCommands()
         let command = try XCTUnwrap(commands.first)
-        XCTAssertEqual(command.kind, .quickCapture)
+        XCTAssertEqual(command.operation, .quickCapture)
         XCTAssertEqual(command.source, .capture)
-        XCTAssertEqual(command.payload.destinationRoute, CaptureRoute.timeSeed.rawValue)
-        XCTAssertEqual(command.payload.metadata[ExternalCreationCommandMetadataKey.sourceType], CaptureSourceType.shellComposer.rawValue)
+        XCTAssertEqual(command.content.destinationRoute, .timeSeed)
+        guard case let .capture(capture) = command.typedPayload else { return XCTFail("Expected typed capture") }
+        XCTAssertEqual(capture.sourceType, .shellComposer)
         XCTAssertEqual(viewModel.actionMessage?.title, "Saved through command")
         XCTAssertEqual(viewModel.draftText, "")
         XCTAssertNil(viewModel.draftError)
@@ -125,8 +125,12 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertEqual(commands.count, 3)
         XCTAssertNotEqual(commands[0].id, commands[1].id)
         XCTAssertEqual(commands[1].id, commands[2].id)
-        XCTAssertEqual(commands[0].payload.metadata["captureRouteType"], SmartAttachmentRouteType.task.rawValue)
-        XCTAssertEqual(commands[1].payload.metadata["captureRouteType"], SmartAttachmentRouteType.goal.rawValue)
+        guard case let .capture(firstCapture) = commands[0].typedPayload,
+              case let .capture(secondCapture) = commands[1].typedPayload else {
+            return XCTFail("Expected typed capture commands")
+        }
+        XCTAssertEqual(firstCapture.flagshipRoute, .task)
+        XCTAssertEqual(secondCapture.flagshipRoute, .goal)
     }
 
     func testActivatedCaptureSeamRotatesSaveAttemptOnlyWhenSelectedRouteChanges() throws {
@@ -176,14 +180,14 @@ final class GlobalComposerHardeningTests: XCTestCase {
         XCTAssertEqual(capture.maturityState, .raw)
         XCTAssertTrue(capture.localOnly)
         XCTAssertEqual(commandEntries.count, 1)
-        XCTAssertEqual(commandEntries.first?.envelope.command.kind, .quickCapture)
+        XCTAssertEqual(commandEntries.first?.envelope.command.operation, .quickCapture)
         XCTAssertEqual(commandEntries.first?.envelope.source, .capture)
-        XCTAssertEqual(commandRecord.command.privacy, .privateUserText)
+        XCTAssertEqual(commandRecord.command?.privacy, .privateUserText)
         XCTAssertEqual(commandRecord.localOnly, true)
-        XCTAssertEqual(commandRecord.result.metadata["captureSourceType"], CaptureSourceType.shellComposer.rawValue)
-        XCTAssertEqual(commandRecord.result.metadata["captureLocalOnly"], "true")
-        XCTAssertEqual(commandRecord.result.metadata["captureMaturityState"], CaptureMaturityState.raw.rawValue)
-        XCTAssertNotNil(commandRecord.result.metadata["commandReceiptID"])
+        XCTAssertEqual(commandRecord.result?.metadata["captureSourceType"], CaptureSourceType.shellComposer.rawValue)
+        XCTAssertEqual(commandRecord.result?.metadata["captureLocalOnly"], "true")
+        XCTAssertEqual(commandRecord.result?.metadata["captureMaturityState"], CaptureMaturityState.raw.rawValue)
+        XCTAssertNotNil(commandRecord.result?.metadata["commandReceiptID"])
     }
 
     func testAMB1674CaptureMaturityStatesMapRawClarifiedAttachedScheduledAndParked() {

@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum TimePlacementCandidateKind: String, Sendable, Hashable {
+enum TimePlacementCandidateKind: String, Codable, Sendable, Hashable {
     case goalLinked
     case freeFloating
 

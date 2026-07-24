@@ -53,20 +53,18 @@ extension ActionReceipt {
     static func resultState(command: AmbitionsCommand, result: AmbitionsCommandExecutionResult) -> ActionReceiptResultState {
         switch result.status {
         case .succeeded:
-            switch command.kind {
-            case .quickCapture:
-                return .created
-            case .attachToGoal:
-                return .attached
-            case .markWaiting:
+            switch command.typedPayload {
+            case let .capture(value):
+                switch value.action {
+                case .quickCapture: return .created
+                case .attachToGoal: return .attached
+                case .routeCommitment, .markWaiting, .archive: return .changed
+                }
+            case let .step(value):
+                if case .complete = value.action { return .completed }
                 return .changed
-            case .archiveItem, .setPriority, .setUrgency, .setDeadline, .routeCommitment, .createTimeItem:
-                return .changed
-            case .scheduleItem:
-                return .draftedPrepared
-            case .completeAction:
-                return .completed
-            default:
+            case .schedule: return .draftedPrepared
+            case .goal, .reminder, .profile, .history, .repair, .importDeletion, .externalOperation:
                 return .changed
             }
         case .requiresConfirmation:
@@ -107,7 +105,12 @@ extension ActionReceipt {
         case .noOp:
             kind = .noChange
         case .changed, .scheduled, .detached, .undoAvailable, .undoUnavailable, .correctionAvailable:
-            kind = command.kind == .markWaiting ? .markedWaiting : .changedField
+            if case let .capture(value) = command.typedPayload,
+               case .markWaiting = value.action {
+                kind = .markedWaiting
+            } else {
+                kind = .changedField
+            }
         }
 
         return [
@@ -139,14 +142,23 @@ extension ActionReceipt {
             return result.status == .requiresConfirmation ? .requiresConfirmation : .unavailable
         }
 
-        switch command.kind {
-        case .attachToGoal, .markWaiting, .archiveItem, .setPriority, .setUrgency, .setDeadline, .routeCommitment, .quickCapture:
-            return .availableLocal
-        case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
-            return .requiresConfirmation
-        case .openDestination, .askWhy, .dismissRecommendation:
-            return .unavailable
-        default:
+        switch command.typedPayload {
+        case let .capture(value):
+            switch value.action {
+            case .quickCapture, .routeCommitment, .attachToGoal, .markWaiting, .archive: return .availableLocal
+            }
+        case let .goal(value):
+            switch value.action {
+            case .setPriority, .setUrgency, .setDeadline: return .availableLocal
+            default: return .notSupportedYet
+            }
+        case let .schedule(value):
+            if case let .calendarWrite(intent) = value.action {
+                return intent.operationIdentityProvenance == .currentRequired ? .requiresConfirmation : .availableLocal
+            }
+            return .notSupportedYet
+        case .history: return .unavailable
+        case .step, .reminder, .profile, .repair, .importDeletion, .externalOperation:
             return .notSupportedYet
         }
     }
@@ -206,7 +218,7 @@ extension ActionReceipt {
         case .completed:
             return "Action completed"
         default:
-            return command.payload.title ?? command.kind.rawValue.replacingOccurrences(of: "_", with: " ")
+            return command.content.title ?? command.operation.rawValue.replacingOccurrences(of: "_", with: " ")
         }
     }
 
@@ -237,7 +249,7 @@ extension ActionReceipt {
         LifeGraphObjectReference(
             kind: .action,
             id: command.id,
-            label: command.kind.rawValue,
+            label: command.operation.rawValue,
             sourceDomain: .commandPipeline
         )
     }

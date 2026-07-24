@@ -11,95 +11,94 @@ enum AmbitionsCommandValidationState: String, Codable, Sendable, Equatable, Hash
 
 struct AmbitionsCommandValidator: Sendable {
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
-        switch command.kind {
-        case .quickCapture:
-            return command.payload.primaryText == nil ? .invalid : .valid
-        case .openDestination:
-            return command.target.destination == nil ? .needsMissingTarget : .valid
-        case .createGoal:
-            return command.payload.primaryText == nil ? .needsConfirmation : .valid
-        case .updateGoal:
-            return command.target.goalID == nil ? .needsMissingTarget : .valid
-        case .attachToGoal:
-            return command.target.goalID == nil || command.target.captureID == nil ? .needsMissingTarget : .valid
-        case .createTimeItem:
-            return command.payload.primaryText == nil ? .needsConfirmation : .valid
-        case .scheduleItem:
-            if command.payload.metadata["calendarWriteIntent"] == "true",
-               command.payload.metadata["userConfirmed"] != "true" {
-                return .needsConfirmation
+        switch command.typedPayload {
+        case let .capture(capture):
+            switch capture.action {
+            case .quickCapture: return capture.content.primaryText == nil ? .invalid : .valid
+            case .routeCommitment: return capture.content.primaryText == nil && capture.target.captureID == nil ? .invalid : .valid
+            case .attachToGoal: return capture.target.goalID == nil || capture.target.captureID == nil ? .needsMissingTarget : .valid
+            case .markWaiting, .archive:
+                return hasAnyObjectTarget(capture.target) ? .valid : .needsMissingTarget
             }
-            return command.target.captureID == nil && command.target.timeID == nil && command.payload.primaryText == nil
-                ? .needsMissingTarget
-                : .valid
-        case .placeStepInTime:
-            return command.target.stepID == nil || command.target.timeID == nil ? .needsMissingTarget : .valid
-        case .protectTimeWindow:
-            return command.target.timeID == nil ? .needsMissingTarget : .valid
-        case .correctTimeWindow:
-            if command.payload.metadata["undoOriginalReceiptID"] != nil {
-                guard command.payload.metadata["expectedProjectionVersion"].flatMap(Int64.init) != nil else {
-                    return .invalid
+        case let .goal(goal):
+            switch goal.action {
+            case .create: return goal.content.primaryText == nil ? .needsConfirmation : .valid
+            case .update: return goal.target.goalID == nil ? .needsMissingTarget : .valid
+            case .setPriority: return goal.content.priorityHints.hasAnySignal ? targetBacked(goal.target) : .invalid
+            case .setUrgency: return goal.content.priorityHints.urgency == nil ? .invalid : targetBacked(goal.target)
+            case .setDeadline:
+                return goal.content.deadlineText == nil && goal.content.priorityHints.deadline == nil ? .invalid : targetBacked(goal.target)
+            case .setContextLens: return goal.content.contextLens == nil ? .invalid : .valid
+            case .clearContextLens: return .valid
+            case .addDeliverable: return goal.target.goalID == nil || goal.content.title == nil ? .needsMissingTarget : .valid
+            case .removeDeliverable: return goal.target.goalID == nil || goal.target.deliverableID == nil ? .needsMissingTarget : .valid
+            case .addScopeItem: return goal.target.goalID == nil || goal.content.title == nil ? .needsMissingTarget : .valid
+            case .removeScopeItem: return goal.target.goalID == nil || goal.target.scopeItemID == nil ? .needsMissingTarget : .valid
+            }
+        case let .step(step):
+            switch step.action {
+            case .startSession, .complete, .delay, .split, .todayGoalStep:
+                return step.target.goalID == nil || step.target.stepID == nil ? .needsMissingTarget : .valid
+            case .recover:
+                return hasAnyObjectTarget(step.target) ? .valid : .needsMissingTarget
+            }
+        case let .schedule(schedule):
+            switch schedule.action {
+            case .createItem: return schedule.content.primaryText == nil ? .needsConfirmation : .valid
+            case .schedule:
+                return schedule.target.captureID == nil && schedule.target.timeID == nil && schedule.content.primaryText == nil ? .needsMissingTarget : .valid
+            case .placeStep: return schedule.target.stepID == nil || schedule.target.timeID == nil ? .needsMissingTarget : .valid
+            case .protectWindow: return schedule.target.timeID == nil ? .needsMissingTarget : .valid
+            case let .correctWindow(correction):
+                guard TimeMutationActionKind.correctionKinds.contains(correction.action) else { return .invalid }
+                return schedule.target.timeID == nil ? .needsMissingTarget : .valid
+            case .undo: return schedule.target.timeID == nil ? .needsMissingTarget : .valid
+            case .ritual: return schedule.target.goalID == nil || schedule.target.stepID == nil ? .needsMissingTarget : .valid
+            case let .calendarWrite(intent):
+                switch intent.operationIdentityProvenance {
+                case .currentRequired, .legacyExplicit:
+                    guard intent.operationID != nil else { return .blockedByMissingFoundation }
+                case .legacyAbsent:
+                    guard intent.operationID == nil else { return .invalid }
                 }
-                return command.target.timeID == nil ? .needsMissingTarget : .valid
+                guard intent.userConfirmed else { return .needsConfirmation }
+                return schedule.target.captureID == nil && schedule.target.timeID == nil && schedule.content.primaryText == nil ? .needsMissingTarget : .valid
             }
-            guard let correctionKind = command.payload.metadata["correctionKind"],
-                  let timeCorrection = TimeMutationActionKind(rawValue: correctionKind),
-                  TimeMutationActionKind.correctionKinds.contains(timeCorrection) else {
-                return .invalid
+        case let .reminder(reminder):
+            switch reminder.action {
+            case .create: return reminder.content.primaryText == nil ? .needsConfirmation : .valid
+            case .update, .delete: return targetBacked(reminder.target)
             }
-            return command.target.timeID == nil ? .needsMissingTarget : .valid
-        case .startStepSession, .completeAction, .delayAction, .splitAction:
-            return command.target.goalID == nil || command.target.stepID == nil ? .needsMissingTarget : .valid
-        case .recoverAction:
-            return command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil
-                ? .needsMissingTarget
-                : .valid
-        case .markWaiting, .archiveItem:
-            return command.target.captureID == nil && command.target.goalID == nil && command.target.timeID == nil
-                ? .needsMissingTarget
-                : .valid
-        case .setPriority:
-            return command.payload.priorityHints.hasAnySignal == false ? .invalid : targetBacked(command)
-        case .setUrgency:
-            return command.payload.priorityHints.urgency == nil ? .invalid : targetBacked(command)
-        case .prepareExport, .performExport:
-            return .valid
-        case .deleteObject, .forgetMemory:
-            return command.target.goalID == nil && command.target.captureID == nil &&
-                command.target.timeID == nil && command.target.reviewID == nil ? .needsMissingTarget : .valid
-        case .setDeadline:
-            return command.payload.deadlineText == nil && command.payload.priorityHints.deadline == nil
-                ? .invalid
-                : targetBacked(command)
-        case .setContextLens:
-            return command.payload.contextLens == nil ? .invalid : .valid
-        case .clearContextLensOverride:
-            return .valid
-        case .updateUserPreferences:
-            return command.target.destination == .you ? .valid : .needsMissingTarget
-        case .routeCommitment:
-            return command.payload.primaryText == nil && command.target.captureID == nil ? .invalid : .valid
-        case .addDeliverable:
-            return command.target.goalID == nil || command.payload.title == nil ? .needsMissingTarget : .valid
-        case .removeDeliverable:
-            return command.target.goalID == nil || command.target.deliverableID == nil ? .needsMissingTarget : .valid
-        case .addGoalScopeItem:
-            return command.target.goalID == nil || command.payload.title == nil ? .needsMissingTarget : .valid
-        case .removeGoalScopeItem:
-            return command.target.goalID == nil || command.target.scopeItemID == nil ? .needsMissingTarget : .valid
-        case .askWhy:
-            return command.target.explanationID == nil && command.target.destination == nil ? .needsMissingTarget : .valid
-        case .dismissRecommendation:
-            return command.target.recommendationID == nil && command.target.explanationID == nil
-                ? .needsMissingTarget
-                : .valid
+        case let .profile(profile):
+            return profile.target.destination == .you && profile.preferences != nil ? .valid : (profile.target.destination == .you ? .invalid : .needsMissingTarget)
+        case let .history(history):
+            switch history.action {
+            case .openDestination: return history.target.destination == nil ? .needsMissingTarget : .valid
+            case .askWhy: return history.target.explanationID == nil && history.target.destination == nil ? .needsMissingTarget : .valid
+            case .dismissRecommendation:
+                return history.target.recommendationID == nil && history.target.explanationID == nil ? .needsMissingTarget : .valid
+            case .todayReceipt: return .valid
+            }
+        case let .repair(repair):
+            return hasAnyObjectTarget(repair.target) ? .valid : .needsMissingTarget
+        case let .importDeletion(value):
+            switch value.action {
+            case .prepareExport, .performExport: return .valid
+            case .deleteObject, .forgetMemory: return hasAnyObjectTarget(value.target) ? .valid : .needsMissingTarget
+            }
+        case let .externalOperation(external):
+            guard external.title.isEmpty == false else { return .invalid }
+            return external.target.goalID == nil && external.target.stepID == nil ? .needsMissingTarget : .valid
         }
     }
 
-    private func targetBacked(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
-        command.target.goalID == nil && command.target.captureID == nil && command.target.timeID == nil
+    private func targetBacked(_ target: AmbitionsCommandTarget) -> AmbitionsCommandValidationState {
+        target.goalID == nil && target.captureID == nil && target.timeID == nil
             ? .needsMissingTarget
             : .valid
+    }
+
+    private func hasAnyObjectTarget(_ target: AmbitionsCommandTarget) -> Bool {
+        target.goalID != nil || target.captureID != nil || target.timeID != nil || target.reviewID != nil || target.stepID != nil
     }
 }

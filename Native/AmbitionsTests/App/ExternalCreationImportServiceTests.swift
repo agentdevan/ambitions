@@ -122,7 +122,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(entries.map(\.envelope.commandID), ["external.creation.command.external-request"])
         let record = try await commandRecords.fetchRecord(commandID: "external.creation.command.external-request")
         XCTAssertEqual(
-            record?.result.metadata["commandReceiptID"],
+            record?.result?.metadata["commandReceiptID"],
             "command.receipt.external.creation.command.external-request"
         )
     }
@@ -224,7 +224,7 @@ extension ExternalCreationImportServiceTests {
         XCTAssertEqual(captureMutationCount, 1)
         XCTAssertNotNil(authorityReceipt)
         XCTAssertEqual(
-            replayRecord?.result.metadata["runtimeTransactionDisposition"],
+            replayRecord?.result?.metadata["runtimeTransactionDisposition"],
             RuntimeTransactionCommitDisposition.replayedExistingReceipt.rawValue
         )
         XCTAssertEqual(try retryStore.pendingRequests(), [])
@@ -275,7 +275,7 @@ extension ExternalCreationImportServiceTests {
         XCTAssertEqual(captures.map(\.rawText), ["Use the first value"])
         XCTAssertEqual(entries.count, 1)
         XCTAssertEqual(
-            record?.result.metadata["commandReceiptID"],
+            record?.result?.metadata["commandReceiptID"],
             "command.receipt.external.creation.command.external-request"
         )
         XCTAssertEqual(try store.pendingRequests(), [])

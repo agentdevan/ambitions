@@ -12,8 +12,16 @@ struct SwiftDataExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplay
 
     func fetch(_ query: ExecutionLedgerReplayInspectionQuery) async throws -> ExecutionLedgerReplayInspectionProjection {
         try await store.read { context in
-            let commandRecords = try context.fetch(FetchDescriptor<CommandExecutionRecord>())
-                .compactMap { try? RepositoryMapping.commandExecutionRecord(from: $0) }
+            let storedCommandRecords = try context.fetch(FetchDescriptor<CommandExecutionRecord>())
+                .map(RepositoryMapping.commandExecutionRecord(from:))
+            let commandRecords = storedCommandRecords.compactMap { stored -> AmbitionsCommandExecutionRecord? in
+                guard case let .supported(record) = stored else { return nil }
+                return record
+            }
+            let quarantinedCommandRecords = storedCommandRecords.compactMap { stored -> QuarantinedCommandExecutionRecord? in
+                guard case let .quarantined(record) = stored else { return nil }
+                return record
+            }
             let receiptRecords = try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>())
                 .compactMap { try? RepositoryMapping.actionReceiptHistoryRecord(from: $0) }
             let snapshotEnvelopes = try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
@@ -22,6 +30,7 @@ struct SwiftDataExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplay
             return Self.project(
                 query: query,
                 commandRecords: commandRecords,
+                quarantinedCommandRecords: quarantinedCommandRecords,
                 receiptRecords: receiptRecords,
                 snapshotEnvelopes: snapshotEnvelopes
             )
@@ -31,6 +40,7 @@ struct SwiftDataExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplay
     static func project(
         query: ExecutionLedgerReplayInspectionQuery,
         commandRecords: [AmbitionsCommandExecutionRecord],
+        quarantinedCommandRecords: [QuarantinedCommandExecutionRecord] = [],
         receiptRecords: [ActionReceiptHistoryRecord],
         snapshotEnvelopes: [RuntimeSnapshotLedgerEnvelope]
     ) -> ExecutionLedgerReplayInspectionProjection {
@@ -87,10 +97,11 @@ struct SwiftDataExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplay
         return ExecutionLedgerReplayInspectionProjection(
             query: query,
             items: limited,
-            totalCandidateCount: candidates.count,
+            totalCandidateCount: candidates.count + quarantinedCommandRecords.count,
             emptyTitle: "No replay records matched",
             emptyDetail: "Use a command ID or receipt ID tied to local receipt history.",
-            localOnly: true
+            localOnly: true,
+            quarantinedCommandRecords: quarantinedCommandRecords
         )
     }
 

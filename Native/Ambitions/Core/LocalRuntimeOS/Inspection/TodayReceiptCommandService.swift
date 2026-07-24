@@ -62,7 +62,7 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
             proofRelevance: record.proofRelevance,
             requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse
         )
-        let command = rejectionCommand(for: input, eventPayload: try event.encodedCommandPayload())
+        let command = rejectionCommand(for: input, event: event)
         let response = await runtimeCommandClient.execute(
             command,
             CommandExecutionContext(now: recordedAt, actor: .user, sourceSurface: "today")
@@ -119,7 +119,7 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
             for: closure,
             outcome: outcome,
             occurredAt: occurredAt,
-            eventPayload: try event.encodedCommandPayload()
+            event: event
         )
         let result = await runtimeCommandClient.execute(
             command,
@@ -143,31 +143,22 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         )
     }
 
-    private func rejectionCommand(for input: TodayRecommendationRejectionInput, eventPayload: String) -> AmbitionsCommand {
-        AmbitionsCommand(
+    private func rejectionCommand(for input: TodayRecommendationRejectionInput, event: TodayReceiptDomainEvent) -> AmbitionsCommand {
+        let target = AmbitionsCommandTarget(
+            stepID: input.sourceStepID,
+            recommendationID: input.sourceCandidateID ?? input.candidateID,
+            explanationID: input.contextFingerprint,
+            destination: .today
+        )
+        let content = AmbitionsCommandPayload(title: "Not this", notes: input.customText)
+        return AmbitionsCommand(
             id: "today.rejection.command.\(input.candidateID).\(Self.commandIDComponent(input.recordedAt))",
-            kind: .dismissRecommendation,
             source: .today,
-            target: AmbitionsCommandTarget(
-                stepID: input.sourceStepID,
-                recommendationID: input.sourceCandidateID ?? input.candidateID,
-                explanationID: input.contextFingerprint,
-                destination: .today
-            ),
-            payload: AmbitionsCommandPayload(
-                title: "Not this",
-                notes: input.customText,
-                metadata: [
-                    "candidateID": input.candidateID,
-                    "sourceCandidateID": input.sourceCandidateID ?? "",
-                    "sourceStepID": input.sourceStepID,
-                    "contextFingerprint": input.contextFingerprint,
-                    "rejectionReason": input.reason.storageLabel,
-                    "skippedReason": input.skippedReason ? "true" : "false",
-                    TodayReceiptDomainEvent.mutationMarkerKey: "true",
-                    TodayReceiptDomainEvent.commandMetadataKey: eventPayload,
-                ]
-            ),
+            typedPayload: .history(HistoryCommand(
+                action: .todayReceipt(event),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: input.recordedAt,
             actor: .user,
             sourceSurface: "today",
@@ -180,28 +171,22 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         for closure: TodayActionClosureSheetState,
         outcome: TodayActionClosureOutcomeState,
         occurredAt: String,
-        eventPayload: String
+        event: TodayReceiptDomainEvent
     ) -> AmbitionsCommand {
-        AmbitionsCommand(
+        let target = AmbitionsCommandTarget(
+            goalID: closure.target.goalID,
+            stepID: closure.target.stepID,
+            destination: .today
+        )
+        let content = AmbitionsCommandPayload(title: closure.objectTitle, notes: closure.originalContext)
+        return AmbitionsCommand(
             id: "today.closure.command.\(closure.id).\(outcome.id).\(Self.commandIDComponent(occurredAt))",
-            kind: .completeAction,
             source: .today,
-            target: AmbitionsCommandTarget(
-                goalID: closure.target.goalID,
-                stepID: closure.target.stepID,
-                destination: .today
-            ),
-            payload: AmbitionsCommandPayload(
-                title: closure.objectTitle,
-                notes: closure.originalContext,
-                metadata: [
-                    "closureState": outcome.closureState.rawValue,
-                    "closureOutcomeID": outcome.id,
-                    "closureSheetID": closure.id,
-                    TodayReceiptDomainEvent.mutationMarkerKey: "true",
-                    TodayReceiptDomainEvent.commandMetadataKey: eventPayload,
-                ]
-            ),
+            typedPayload: .history(HistoryCommand(
+                action: .todayReceipt(event),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: occurredAt,
             actor: .user,
             sourceSurface: "today",

@@ -51,7 +51,7 @@ struct TodayLensChipState: Identifiable, Equatable {
 struct TodayCommandMappingState: Identifiable, Equatable {
     let id: String
     let actionKind: TodayActionKind
-    let commandKind: AmbitionsCommandKind
+    let commandPayload: RuntimeCommandPayload
     let destination: AmbitionsCommandDestination?
     let validationState: AmbitionsCommandValidationState
     let explanationID: String?

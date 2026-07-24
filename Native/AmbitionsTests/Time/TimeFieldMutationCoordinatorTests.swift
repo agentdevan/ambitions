@@ -26,14 +26,16 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
             now: now
         )
 
-        XCTAssertEqual(command.kind, .placeStepInTime)
+        XCTAssertEqual(command.operation, .placeStepInTime)
         XCTAssertEqual(command.target.stepID, "step.real-visible")
         XCTAssertEqual(command.target.goalID, "goal.real-visible")
-        XCTAssertEqual(command.payload.metadata["placementCandidateKind"], TimePlacementCandidateKind.goalLinked.rawValue)
-        XCTAssertEqual(command.payload.metadata["placementTrigger"], ProtectedStepPlacementTrigger.userInitiated.rawValue)
-        XCTAssertEqual(command.payload.metadata["explicitUserApproval"], "true")
-        XCTAssertNotNil(command.payload.metadata["startAt"])
-        XCTAssertNotNil(command.payload.metadata["endAt"])
+        guard case let .schedule(schedule) = command.typedPayload,
+              case let .placeStep(placement) = schedule.action else { return XCTFail("Expected typed placement") }
+        XCTAssertEqual(placement?.candidateKind, .goalLinked)
+        XCTAssertEqual(placement?.trigger, .userInitiated)
+        XCTAssertEqual(placement?.explicitUserApproval, true)
+        XCTAssertNotNil(placement?.start)
+        XCTAssertNotNil(placement?.end)
         XCTAssertEqual(command.validationState, .valid)
     }
 
@@ -101,11 +103,11 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
             now: now
         )
 
-        XCTAssertEqual(protect.kind, .protectTimeWindow)
-        XCTAssertNotNil(protect.payload.metadata["startAt"])
-        XCTAssertNotNil(protect.payload.metadata["endAt"])
-        XCTAssertEqual(keepClear.kind, .correctTimeWindow)
-        XCTAssertEqual(keepClear.payload.metadata["correctionKind"], TimeMutationActionKind.keepClear.rawValue)
+        XCTAssertEqual(protect.operation, .protectTimeWindow)
+        XCTAssertNotNil(protect.timePlacementCommandIntent?.start)
+        XCTAssertNotNil(protect.timePlacementCommandIntent?.end)
+        XCTAssertEqual(keepClear.operation, .correctTimeWindow)
+        XCTAssertEqual(keepClear.timeCorrectionCommandIntent?.action, .keepClear)
     }
 
     private func realPlacementCandidate() -> TimePlacementCandidate {

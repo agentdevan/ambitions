@@ -58,8 +58,12 @@ struct TimePlacementRequest: Sendable, Equatable, Hashable {
     }
 
     init?(command: AmbitionsCommand, context: CommandExecutionContext) {
-        guard command.kind.timeEngineProposesPlacement,
-              let stepID = command.timeEngineStepID,
+        guard case let .schedule(schedule) = command.typedPayload else { return nil }
+        switch schedule.action {
+        case .schedule, .placeStep, .calendarWrite: break
+        case .createItem, .protectWindow, .correctWindow, .undo, .ritual: return nil
+        }
+        guard let stepID = command.timeEngineStepID,
               let proposedWindow = command.timeEngineWindow(
                 startKeys: ["proposedStartAt", "startAt", "start", "windowStart", "destinationStartAt"],
                 endKeys: ["proposedEndAt", "endAt", "end", "windowEnd", "destinationEndAt"],
@@ -67,7 +71,7 @@ struct TimePlacementRequest: Sendable, Equatable, Hashable {
               ) else {
             return nil
         }
-        let commandTitle = SchedulingStableID.optional(command.payload.title) ?? stepID
+        let commandTitle = SchedulingStableID.optional(command.content.title) ?? stepID
         self.init(
             commandID: command.id,
             now: context.now,
@@ -156,32 +160,13 @@ struct PlacementEngine: Sendable {
     }
 }
 
-private extension AmbitionsCommandKind {
-    var timeEngineProposesPlacement: Bool {
-        switch self {
-        case .placeStepInTime, .scheduleItem, .delayAction, .recoverAction:
-            true
-        default:
-            false
-        }
-    }
-}
-
 private extension AmbitionsCommand {
     var timeEngineStepID: String? {
-        target.stepID
-            ?? payload.metadata["stepID"]
-            ?? payload.metadata["destinationStepID"]
-            ?? payload.metadata["originalStepID"]
+        target.stepID ?? calendarWriteCommandIntent?.destinationStepID?.rawValue
     }
 
     var timeEngineTrigger: ProtectedStepPlacementTrigger {
-        if payload.metadata["missedRecoveryMoveIt"] == "true" ||
-            payload.metadata["recoveryAction"] == "move_it" {
-            return .missedRecoveryMoveIt
-        }
-        if let raw = payload.metadata["placementTrigger"],
-           let trigger = ProtectedStepPlacementTrigger(rawValue: raw) {
+        if let trigger = timePlacementCommandIntent?.trigger ?? calendarWriteCommandIntent?.placement?.trigger {
             return trigger
         }
         if actor == .system || source == .system {
@@ -194,14 +179,8 @@ private extension AmbitionsCommand {
     }
 
     var timeEngineExplicitApproval: Bool {
-        for key in ["explicitUserApproval", "userConfirmed", "approvalState"] {
-            guard let value = payload.metadata[key]?.lowercased() else { continue }
-            if ["true", "confirmed", "approved"].contains(value) {
-                return true
-            }
-            if ["false", "unconfirmed", "pending", "denied", "declined", "rejected"].contains(value) {
-                return false
-            }
+        if let explicit = timePlacementCommandIntent?.explicitUserApproval ?? calendarWriteCommandIntent?.placement?.explicitUserApproval {
+            return explicit
         }
         switch timeEngineTrigger {
         case .userInitiated, .missedRecoveryMoveIt:
@@ -212,42 +191,19 @@ private extension AmbitionsCommand {
     }
 
     var timeEngineAutomationPolicy: ProtectedStepPlacementAutomationPolicy {
-        let raw = payload.metadata["protectedPlacementAutomationPolicy"]
-            ?? payload.metadata["automaticPlacementPolicy"]
-            ?? payload.metadata["automationPolicy"]
-        return raw.flatMap(ProtectedStepPlacementAutomationPolicy.init(rawValue:)) ?? .notMature
+        timePlacementCommandIntent?.automationPolicy ?? calendarWriteCommandIntent?.placement?.automationPolicy ?? .notMature
     }
 
     var timeEngineContextQuality: ProtectedStepPlacementContextQuality {
-        let raw = payload.metadata["protectedPlacementContextQuality"]
-            ?? payload.metadata["contextQuality"]
-        return raw.flatMap(ProtectedStepPlacementContextQuality.init(rawValue:)) ?? .sufficient
+        timePlacementCommandIntent?.contextQuality ?? calendarWriteCommandIntent?.placement?.contextQuality ?? .sufficient
     }
 
     func timeEngineWindow(startKeys: [String], endKeys: [String], durationKeys: [String]) -> ProtectedStepPlacementWindow? {
-        guard let start = timeEngineDateValue(for: startKeys) else { return nil }
-        let end = timeEngineDateValue(for: endKeys) ?? timeEngineDurationValue(for: durationKeys).map {
-            TemporalMath.end(start: start, durationMinutes: $0)
-        }
-        guard let end else { return nil }
+        let placement = timePlacementCommandIntent ?? calendarWriteCommandIntent?.placement
+        guard let placement else { return nil }
+        let original = startKeys.contains(where: { $0.hasPrefix("original") || $0.hasPrefix("current") || $0.hasPrefix("previous") })
+        guard let start = TemporalMath.date(from: original ? placement.originalStart ?? "" : placement.start),
+              let end = TemporalMath.date(from: original ? placement.originalEnd ?? "" : placement.end) else { return nil }
         return ProtectedStepPlacementWindow(start: start, end: end)
-    }
-
-    func timeEngineDateValue(for keys: [String]) -> Date? {
-        for key in keys {
-            if let value = payload.metadata[key], let date = TemporalMath.date(from: value) {
-                return date
-            }
-        }
-        return nil
-    }
-
-    func timeEngineDurationValue(for keys: [String]) -> Int? {
-        for key in keys {
-            if let value = payload.metadata[key], let duration = Int(value), duration > 0 {
-                return duration
-            }
-        }
-        return nil
     }
 }

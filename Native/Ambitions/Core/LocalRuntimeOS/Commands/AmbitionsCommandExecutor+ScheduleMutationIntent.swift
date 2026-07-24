@@ -5,21 +5,20 @@ extension AmbitionsCommandExecutor {
     func scheduleMutationIntent(
         for command: AmbitionsCommand
     ) -> (blockID: String, title: String, start: Date, end: Date, contextLens: NowContextLens, relatedGoalID: String?, relatedCaptureID: String?, metadata: [String: String], approvedDurationMinutes: Int)? {
-        let metadata = command.payload.metadata
-        guard let start = parseDate(from: metadata["startAt"] ?? metadata["start"]) else {
+        let typed = command.timePlacementCommandIntent ?? command.calendarWriteCommandIntent?.placement
+        guard let typed, let start = parseDate(from: typed.start) else {
             return nil
         }
 
         let approvedDurationMinutes: Int
-        if let requestedDurationText = metadata["approvedDurationMinutes"], let requestedDuration = Int(requestedDurationText), requestedDuration > 0 {
-            approvedDurationMinutes = requestedDuration
-        } else if let requestedDurationText = metadata["durationMinutes"], let requestedDuration = Int(requestedDurationText), requestedDuration > 0 {
+        if let requestedDuration = typed.approvedDurationMinutes, requestedDuration > 0 {
             approvedDurationMinutes = requestedDuration
         } else {
-            return nil
+            guard let end = parseDate(from: typed.end) else { return nil }
+            approvedDurationMinutes = max(Int(end.timeIntervalSince(start) / 60), 1)
         }
 
-        let metadataEnd = parseDate(from: metadata["endAt"] ?? metadata["end"])
+        let metadataEnd = parseDate(from: typed.end)
         let resolvedEnd = metadataEnd ?? start.addingTimeInterval(TimeInterval(approvedDurationMinutes * 60))
         let resolvedDurationMinutes: Int
         if let metadataEnd {
@@ -30,14 +29,14 @@ extension AmbitionsCommandExecutor {
         guard resolvedDurationMinutes > 0, resolvedEnd > start else { return nil }
 
         return (
-            blockID: metadata["scheduleBlockID"] ?? command.id,
-            title: command.payload.primaryText ?? command.payload.title ?? "Schedule block",
+            blockID: command.calendarWriteCommandIntent?.scheduleBlockID?.rawValue ?? command.target.timeID ?? command.id,
+            title: command.content.primaryText ?? command.content.title ?? "Schedule block",
             start: start,
             end: resolvedEnd,
-            contextLens: parseContextLens(from: metadata["contextLens"]) ?? command.payload.contextLens ?? .all,
-            relatedGoalID: metadata["relatedGoalID"] ?? command.target.goalID,
-            relatedCaptureID: metadata["relatedCaptureID"] ?? command.target.captureID,
-            metadata: metadata,
+            contextLens: typed.contextLens ?? command.content.contextLens ?? .all,
+            relatedGoalID: typed.relatedGoalID?.rawValue ?? command.target.goalID,
+            relatedCaptureID: typed.relatedCaptureID?.rawValue ?? command.target.captureID,
+            metadata: [:],
             approvedDurationMinutes: resolvedDurationMinutes
         )
     }
@@ -143,24 +142,22 @@ extension AmbitionsCommandExecutor {
     }
 
     func captureSourceType(for command: AmbitionsCommand) -> CaptureSourceType {
-        if let rawValue = command.payload.metadata[ExternalCreationCommandMetadataKey.sourceType],
-           let sourceType = CaptureSourceType(rawValue: rawValue) {
+        if let sourceType = command.typedCaptureCommand?.sourceType {
             return sourceType
+        }
+        if let provenance = command.externalCreationProvenance {
+            return provenance.sourceType
         }
         return captureSourceType(for: command.source)
     }
 
     func externalCreationTriageMetadata(for command: AmbitionsCommand) -> CaptureTriageMetadata? {
-        guard let landingRawValue = command.payload.metadata[ExternalCreationCommandMetadataKey.landing],
-              let landing = ExternalCreationLanding(rawValue: landingRawValue)
-        else {
-            return nil
-        }
+        guard let provenance = command.externalCreationProvenance else { return nil }
 
-        let destination: CaptureTriageDestination = landing == .createGoal ? .turnIntoGoal : .doSoon
+        let destination: CaptureTriageDestination = provenance.landing == .createGoal ? .turnIntoGoal : .doSoon
         return CaptureTriageMetadata(
             destination: destination,
-            hint: command.payload.metadata[ExternalCreationCommandMetadataKey.provenanceHint]
+            hint: provenance.provenanceHint
         )
     }
 
