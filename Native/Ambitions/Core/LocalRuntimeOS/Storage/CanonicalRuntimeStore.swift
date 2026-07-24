@@ -379,6 +379,33 @@ actor CanonicalRuntimeStore {
         }
     }
 
+    /// The sole composition seam for canonical authority writes. The closure
+    /// is synchronous and isolated to the retained SQLite actor, so no handle
+    /// escapes and no suspension can split the authority transaction.
+    func withAtomicCommitTransaction<Result: Sendable>(
+        _ operation: @Sendable (isolated SQLiteDatabase) throws -> Result
+    ) async throws -> Result {
+        try pinnedFiles.validate(databaseURL: databaseURL)
+        do {
+            let result = try await database.transaction(.immediate) { database in
+                try Task.checkCancellation()
+                return try operation(database)
+            }
+            // Nothing throwable may run after SQLite reports COMMIT. The
+            // finalized result is already authority and must be returned even
+            // if cancellation or later maintenance work becomes pending.
+            return result
+        } catch {
+            if error is RuntimeAtomicCommitError ||
+                error is CanonicalRuntimeTransactionError ||
+                error is CanonicalRuntimeSemanticEventStoreError ||
+                error is CancellationError {
+                throw error
+            }
+            throw Self.mapSQLiteFailure(error, operation: "canonical_atomic_commit")
+        }
+    }
+
     func health() async throws -> CanonicalRuntimeStoreHealth {
         try pinnedFiles.validate(databaseURL: databaseURL)
         let snapshot: (CanonicalRuntimeReadTransaction, String)

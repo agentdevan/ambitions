@@ -68,6 +68,13 @@ enum RuntimeRecoveryReason: String, Codable, Sendable, Equatable, Hashable, Case
     case authorityFailed = "authority_failed"
     case staleAfterPreparation = "stale_after_preparation"
     case projectionDegraded = "projection_degraded"
+    case cancelled
+    case storageBusy = "storage_busy"
+    case storageFull = "storage_full"
+    case storageIO = "storage_io"
+    case authorityCorrupt = "authority_corrupt"
+    case idempotencyCollision = "idempotency_collision"
+    case migrationRequired = "migration_required"
 }
 
 struct RuntimeRecovery: Codable, Sendable, Equatable, Hashable {
