@@ -81,6 +81,32 @@ jobs:
           set -euo pipefail
           python3 scripts/ambitions-canon.py check
           python3 -m unittest discover -s tools/tests -p 'test_ambitions_canon_compiler.py'
+      - name: Capability discovery integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tools/tests -p 'test_capability_atlas_discovery.py'
+          python3 scripts/ambitions-capabilities.py build
+      - name: Upload capability discovery outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-discovery-output
+          if-no-files-found: error
+          path: |
+            docs/capabilities/candidate-capabilities.json
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md
+            docs/capabilities/discovery-coverage.json
+            docs/capabilities/discovery-sources.json
+      - name: Reject capability discovery drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- \
+            docs/capabilities/candidate-capabilities.json \
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md \
+            docs/capabilities/discovery-coverage.json \
+            docs/capabilities/discovery-sources.json
       - name: SwiftLint
         if: needs.changes.outputs.native == 'true'
         env:
