@@ -84,7 +84,7 @@ swift test --package-path Packages/AmbitionsPresentation --filter TodayFlagshipC
 xcodebuild -project Ambitions.xcodeproj -scheme AmbitionsNativeFoundryHost -destination 'platform=iOS Simulator,id=EDE1E954-C663-47FB-855B-95F96AE2DBDD' test -only-testing:AmbitionsNativeFoundryHostUITests/TodayFlagshipCalibrationHostUITests
 ```
 
-Expected: package guards pass where they protect existing semantics; new B01 UI identifiers fail because the articulated anatomy is not implemented.
+Expected: package guards pass where they protect existing semantics; new B01 UI identifiers fail until the articulated anatomy lands.
 
 ### Task 3: Implement Foundry-local articulated anatomy
 

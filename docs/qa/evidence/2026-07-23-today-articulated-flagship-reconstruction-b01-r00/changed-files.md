@@ -1,5 +1,30 @@
 # Changed-file envelope
 
+## Actual implementation changes
+
+- `Native/AmbitionsNativeFoundryHost/AmbitionsNativeFoundryHostApp.swift`
+- `Native/AmbitionsNativeFoundryHostUITests/TodayFlagshipCalibrationHostUITests.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipArticulatedAnatomy.swift` (new)
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationStyle.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationView.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipFocusedStepView.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipNavigationChrome.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipRecoveryReviewView.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipReviewView.swift`
+- `Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayFlagshipCalibrationFixtureTests.swift`
+- `docs/qa/evidence/2026-07-23-today-flagship-calibration-slice-r02/owner-review.md` (owner decision only)
+- `docs/superpowers/plans/2026-07-23-today-articulated-flagship-reconstruction-b01-r00.md`
+- this B01 evidence package
+
+No canon, generated canon, product app-entry, runtime, legacy frontend,
+dependency, `project.yml`, or production screenshot-baseline path changed.
+
+Closeout adds one narrow repair inside
+`TodayFlagshipCalibrationView.startHereButton`: the native button label owns
+the 44-point minimum interaction height so its accessibility frame matches the
+protected target contract. No navigation, fixture, journey, runtime, or visual
+authority changed.
+
 ## Existing files permitted to change
 
 - `docs/qa/evidence/2026-07-23-today-flagship-calibration-slice-r02/owner-review.md` — owner decision only

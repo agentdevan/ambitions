@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-articulated-flagship-reconstruction-b01-r00",
+  "production_baseline": false,
+  "contact_sheets": [
+    {"id":"B01-C01-full-matrix","path":"contact-sheets/B01-C01-full-matrix.png","byte_size":2660531,"sha256":"50776fdd2c05063c508ee8a81eab13c125f756ba6870374f37aa25c37bc489fc","contents":["TFCS-F01","TFCS-F02","TFCS-F03","TFCS-F04","TFCS-F05","TFCS-F06","TFCS-F07","TFCS-F08","TFCS-F09","TFCS-F10","TFCS-S01","TFCS-S02","TFCS-S03","TFCS-S04","TFCS-S05","TFCS-S06"]},
+    {"id":"B01-C02-r02-comparison","path":"contact-sheets/B01-C02-r02-comparison.png","byte_size":2082121,"sha256":"72d247c5c3eaeab54e65eaf7670f41d03c6242ea253f3265959ba4fa135f8bab","pair_order":["F01 R02/B01","F02 R02/B01","F06 R02/B01","F07 R02/B01","F08 R02/B01","F09 R02/B01","F10 R02/B01"]},
+    {"id":"B01-C03-owner-reference-translation","path":"contact-sheets/B01-C03-owner-reference-translation.png","byte_size":2578880,"sha256":"26c743788328362c0384573600feab4294531ac3281c560455569593a5d38343","claim":"caliber and grammar translation, not pixel matching","rejected_reference_elements":["five-tab navigation","Inbox root","Calendar root","crown Search","Capture tab","priority ranking","rainbow categories"]},
+    {"id":"B01-J01-contact","path":"contact-sheets/B01-J01-successful-journey-contact.png","byte_size":845097,"sha256":"d6c3342626a3836c6475a2651e46e3070718cba525b1677a7455539148f2c3ba"},
+    {"id":"B01-J02-contact","path":"contact-sheets/B01-J02-recovery-journey-contact.png","byte_size":664891,"sha256":"737b5660a176427f577280ef57c6764c326d8df5ae135ccf67933631b48add2c"},
+    {"id":"B01-J03-contact","path":"contact-sheets/B01-J03-accessibility-journey-contact.png","byte_size":883522,"sha256":"ccfec6612a4ec7a1577c6e5038ca36dc00957c59fa0cd7417a0853fba070d2c6"}
+  ]
+}

@@ -313,11 +313,12 @@ public struct TodayFlagshipCalibrationView: View {
             Label(step.primaryActionTitle, systemImage: "arrow.forward")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(palette.actionInk)
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle(radius: 8))
         .controlSize(.regular)
-        .frame(minHeight: 44, alignment: .leading)
         .accessibilityHint("Opens this Step without changing it")
         .accessibilityIdentifier("tfcs-open-start-here")
     }

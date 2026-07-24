@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-articulated-flagship-reconstruction-b01-r00",
+  "revision_id": "AVF-TODAY-S10-B01-R00",
+  "rendered_source_sha": "53324b5fc60229958497b75ed3828b7e0d224492",
+  "production_baseline": false,
+  "baseline_policy": "Evaluation references only; not final production screenshot baselines.",
+  "fixture": {
+    "family_id": "today-flagship/preparing-for-baby/still-counts/v1",
+    "rtl_variant_id": "today-flagship/preparing-for-baby/still-counts/v1/rtl-ar-SA-evaluation",
+    "synthetic": true,
+    "copy_is_canon": false,
+    "visible_fixture_metadata": false
+  },
+  "environment": {
+    "device": "VC14 iPhone 17 Pro Simulator",
+    "model": "iPhone 17 Pro",
+    "udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "xcode_version": "26.6",
+    "xcode_build": "17F113",
+    "timezone": "America/New_York",
+    "orientation": "portrait",
+    "default_accessibility_settings": {
+      "dynamic_type": "large unless overridden per frame",
+      "increase_contrast": false,
+      "differentiate_without_color": false,
+      "reduce_transparency": false,
+      "reduce_motion": false
+    },
+    "direct_device_proof_complete": false
+  },
+  "frames": [
+    {"id":"TFCS-F01","path":"screenshots/TFCS-F01-today-first-viewport-light.png","captured_at":"2026-07-23T20:33:26-04:00","appearance":"light","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":313895,"sha256":"26cb6d252c914d6b61a7da5034819cf5bba6b293744f4a08668123119e41cd4e"},
+    {"id":"TFCS-F02","path":"screenshots/TFCS-F02-today-first-viewport-dark.png","captured_at":"2026-07-23T20:33:29-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":309387,"sha256":"c7bb6b8635a75e7ddcf0d1a42b98747c8711cf60d4ce40284b9ef330e41bb866"},
+    {"id":"TFCS-F03","path":"screenshots/TFCS-F03-today-scrolled-dark.png","captured_at":"2026-07-23T20:40:43-04:00","appearance":"dark","dynamic_type":"large","interaction":"real low-distance native vertical drag; intentional semantic offset","width_pixels":1206,"height_pixels":2622,"byte_size":289762,"sha256":"7c2bcd39fc8ed79915d71f0e4c024cd1de895e1f17e828e72ca6bd4bf692b468"},
+    {"id":"TFCS-F04","path":"screenshots/TFCS-F04-dock-expanded-dark.png","captured_at":"2026-07-23T20:33:34-04:00","appearance":"dark","dynamic_type":"large","dock_posture":"expanded","width_pixels":1206,"height_pixels":2622,"byte_size":266896,"sha256":"5a84797fd12a6dbdf0e953690ff16b1c3cee29599af00a1d8d809bbb3dff701b"},
+    {"id":"TFCS-F05","path":"screenshots/TFCS-F05-adaptive-navigation-accessibility.png","captured_at":"2026-07-23T20:33:39-04:00","appearance":"dark","dynamic_type":"accessibility1","navigation_posture":"Adaptive Navigation Passage","width_pixels":1206,"height_pixels":2622,"byte_size":237431,"sha256":"c03bb0b14f09f32e71b8b9018d252cd64fb09b81735ef53ad7c18907d2220849"},
+    {"id":"TFCS-F06","path":"screenshots/TFCS-F06-focused-step-dark.png","captured_at":"2026-07-23T20:33:43-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":254500,"sha256":"0cd8547a1800a05b682e8310e5a4537be994b7c61ac100c076de7af518d70363"},
+    {"id":"TFCS-F07","path":"screenshots/TFCS-F07-consequential-review-dark.png","captured_at":"2026-07-23T21:17:25-04:00","appearance":"dark","dynamic_type":"large","details_collapsed":true,"commit_visible_before_scroll":true,"cancel_visible_before_scroll":true,"width_pixels":1206,"height_pixels":2622,"byte_size":262786,"sha256":"b0b46cecaa73f9711102f3ead1f478be6184cc6089aee2fa1d1ed9b468e91e55"},
+    {"id":"TFCS-F08","path":"screenshots/TFCS-F08-successful-settlement-dark.png","captured_at":"2026-07-23T20:33:53-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":223693,"sha256":"a1adeb6b4836300d8746b922ee29357f89d5bcf08f5a666760157f3c84f5a1b3"},
+    {"id":"TFCS-F09","path":"screenshots/TFCS-F09-returned-today-dark.png","captured_at":"2026-07-23T20:33:57-04:00","appearance":"dark","dynamic_type":"large","promoted_start_here_count":1,"return_focus_object_id":"step.nursery-ready-for-crib","width_pixels":1206,"height_pixels":2622,"byte_size":308819,"sha256":"da441e9c5b735af8e97fff77f323d8c11213777ffbe5616e50d3ae5748077f23"},
+    {"id":"TFCS-F10","path":"screenshots/TFCS-F10-interrupted-recovery-dark.png","captured_at":"2026-07-23T20:34:02-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":213632,"sha256":"85224a704552009f3a2edf182990c42de4fe6e8eaffafc178444e24d76a3e286"}
+  ],
+  "supporting_state_frames": [
+    {"id":"TFCS-S01","path":"supporting-state/TFCS-S01-saving-accepted-truth.png","captured_at":"2026-07-23T20:34:06-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":270262,"sha256":"de78dc0dfbc8c20d202e3670f95ceaee0478af09df94c6ca81bff8eaffc24c92"},
+    {"id":"TFCS-S02","path":"supporting-state/TFCS-S02-cancelled-unchanged.png","captured_at":"2026-07-23T20:34:14-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":254500,"sha256":"0cd8547a1800a05b682e8310e5a4537be994b7c61ac100c076de7af518d70363"},
+    {"id":"TFCS-S03","path":"supporting-state/TFCS-S03-interrupted-preserved-progress.png","captured_at":"2026-07-23T20:34:17-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":285150,"sha256":"99097f9d1ac4ac2e3c14ad2ef8faa93579ec7f7904f059b49d3cf5e912fe2ab6"},
+    {"id":"TFCS-S04","path":"supporting-state/TFCS-S04-dense-today-protected-fixed.png","captured_at":"2026-07-23T20:34:22-04:00","appearance":"dark","dynamic_type":"large","width_pixels":1206,"height_pixels":2622,"byte_size":319455,"sha256":"4beb415de6e46cea28f514c283c0e469390d1f3ace9dc5f403be05869f06e211"},
+    {"id":"TFCS-S05","path":"supporting-state/TFCS-S05-long-content-rtl.png","captured_at":"2026-07-23T20:34:26-04:00","appearance":"dark","dynamic_type":"large","layout_direction":"right-to-left","locale":"ar-SA","evaluation_localization":true,"width_pixels":1206,"height_pixels":2622,"byte_size":283496,"sha256":"0d7029d302183d0a10e84e7fc480b43072719d10ebbaa4d804036f1956bd638f"},
+    {"id":"TFCS-S06","path":"supporting-state/TFCS-S06-increased-contrast-review.png","captured_at":"2026-07-23T21:19:08-04:00","appearance":"dark","dynamic_type":"large","increase_contrast":true,"simulator_setting_verified":true,"width_pixels":1206,"height_pixels":2622,"byte_size":262924,"sha256":"b0c9fb54448414cd8c5aaa7972dd93df8904699c7315c62caa4bea1e0c22d280"}
+  ]
+}
