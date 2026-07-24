@@ -218,20 +218,18 @@ public struct TodayFlagshipCalibrationView: View {
                         palette: palette
                     )
 
-                    VStack(alignment: .leading, spacing: 11) {
-                        TodayFlagshipRelationshipRow(
-                            symbol: "sparkles",
-                            title: content.interfaceCopy.whyItFitsTitle,
-                            value: step.whyItFitsNow,
-                            palette: palette
-                        )
+                    ViewThatFits(in: .horizontal) {
+                        HStack(alignment: .top, spacing: 14) {
+                            startHereFitRow(step: step)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            startHereConsequenceRow(step: step)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
 
-                        TodayFlagshipRelationshipRow(
-                            symbol: "shield",
-                            title: content.interfaceCopy.consequenceTitle,
-                            value: step.materialConsequence,
-                            palette: palette
-                        )
+                        VStack(alignment: .leading, spacing: 11) {
+                            startHereFitRow(step: step)
+                            startHereConsequenceRow(step: step)
+                        }
                     }
 
                     startHereActionZone(step: step)
@@ -290,16 +288,35 @@ public struct TodayFlagshipCalibrationView: View {
         .accessibilityElement(children: .combine)
     }
 
+    private func startHereFitRow(step: TodayFlagshipStepSnapshot) -> some View {
+        TodayFlagshipRelationshipRow(
+            symbol: "sparkles",
+            title: content.interfaceCopy.whyItFitsTitle,
+            value: step.whyItFitsNow,
+            palette: palette
+        )
+    }
+
+    private func startHereConsequenceRow(step: TodayFlagshipStepSnapshot) -> some View {
+        TodayFlagshipRelationshipRow(
+            symbol: "shield",
+            title: content.interfaceCopy.consequenceTitle,
+            value: step.materialConsequence,
+            palette: palette
+        )
+    }
+
     private func startHereButton(step: TodayFlagshipStepSnapshot) -> some View {
         Button {
             _ = state.openStartHere()
         } label: {
             Label(step.primaryActionTitle, systemImage: "arrow.forward")
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(palette.actionInk)
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle(radius: 8))
-        .controlSize(.large)
+        .controlSize(.regular)
         .frame(minHeight: 44, alignment: .leading)
         .accessibilityHint("Opens this Step without changing it")
         .accessibilityIdentifier("tfcs-open-start-here")

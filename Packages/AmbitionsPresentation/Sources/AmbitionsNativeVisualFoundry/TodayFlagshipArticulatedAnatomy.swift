@@ -119,7 +119,7 @@ struct TodayFlagshipRelationshipRow: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.caption.weight(.semibold))
+                    .font(.footnote.weight(.semibold))
                     .foregroundStyle(palette.tertiaryInk)
 
                 Text(value)
@@ -142,7 +142,7 @@ struct TodayFlagshipStateField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Label(label, systemImage: symbol)
-                .font(.subheadline.weight(.semibold))
+                .font(.headline)
                 .foregroundStyle(accent)
 
             Text(truth)
@@ -239,7 +239,7 @@ struct TodayFlagshipTimelineRow: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 Label(item.acceptedState, systemImage: stateSymbol)
-                    .font(.caption.weight(.medium))
+                    .font(.footnote.weight(.medium))
                     .foregroundStyle(stateColor)
             }
             .padding(.bottom, 12)
@@ -341,7 +341,7 @@ struct TodayFlagshipEvidenceRow: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
-                    .font(.subheadline.weight(.medium))
+                    .font(.body.weight(.medium))
                     .foregroundStyle(palette.primaryInk)
                 if let detail {
                     Text(detail)
