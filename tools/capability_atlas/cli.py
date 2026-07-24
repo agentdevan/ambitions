@@ -9,9 +9,13 @@ from pathlib import Path
 from typing import Sequence
 
 from tools.capability_atlas import __version__
+from tools.capability_atlas.classified_outputs import (
+    output_drift,
+    render_outputs,
+    write_outputs,
+)
 from tools.capability_atlas.discover import compile_discovery
 from tools.capability_atlas.model import CapabilityDiscoveryError
-from tools.capability_atlas.outputs import output_drift, render_outputs, write_outputs
 
 
 SUPPORTED_COMMANDS = frozenset({"version", "build", "check"})
@@ -21,18 +25,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ambitions-capabilities",
         description=(
-            "Harvest non-normative Ambitions capability candidates with stable provenance."
+            "Harvest and classify non-normative Ambitions capability candidates with stable provenance."
         ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("version", help="print discovery tool version")
     subparsers.add_parser(
         "build",
-        help="scan configured repository sources and write deterministic discovery artifacts",
+        help="scan configured sources and write deterministic discovery and classification artifacts",
     )
     subparsers.add_parser(
         "check",
-        help="scan configured repository sources and reject checked-in discovery drift",
+        help="scan configured sources and reject checked-in capability artifact drift",
     )
     return parser
 
