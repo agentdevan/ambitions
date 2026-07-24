@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_phase_g_gap_analysis",
+  "repository": "agentdevan/ambitions",
+  "baseline_sha": "5670f24fb82adefd27cffee5ddf8fb70676ed049",
+  "status": "draft_for_owner_review",
+  "severity_order": ["blocker", "high", "medium", "low"],
+  "state_classes": ["missing", "partial", "unverified", "deferred", "prohibited", "not_applicable"],
+  "portfolio_gaps": [
+    {
+      "gap_id": "GAP-PORTFOLIO-AUTHORITY-001",
+      "type": "governance",
+      "severity": "blocker",
+      "state": "deferred",
+      "summary": "No owner-approved canonical capability registry exists.",
+      "impact": "The nine identities remain proposals and cannot govern implementation or retirement.",
+      "closeout": "Resolve the owner decision packet, install only approved entries under docs/canon/product, register them in MANIFEST, and validate them through the canon compiler."
+    },
+    {
+      "gap_id": "GAP-PORTFOLIO-COMPILER-001",
+      "type": "traceability",
+      "severity": "high",
+      "state": "missing",
+      "summary": "The canon compiler does not yet consume capability authority or generate Product Genome links.",
+      "impact": "Capability-to-requirement, surface, test, proof, and retirement drift is not enforceable after owner approval.",
+      "closeout": "Add schema, registry ingestion, reference validation, generated maps, orphan checks, and deterministic drift enforcement after canon cutover."
+    },
+    {
+      "gap_id": "GAP-PORTFOLIO-MATURITY-001",
+      "type": "implementation_assessment",
+      "severity": "high",
+      "state": "unverified",
+      "summary": "Implementation and verification maturity are not assessed as complete for any capability.",
+      "impact": "Source and test presence cannot support roadmap, release, or marketing claims at capability level.",
+      "closeout": "Run capability-specific source-to-runtime-to-surface proof programs after owner approval; keep authority and implementation state independent."
+    },
+    {
+      "gap_id": "GAP-PORTFOLIO-AMBIGUITY-001",
+      "type": "discovery",
+      "severity": "medium",
+      "state": "deferred",
+      "summary": "298 ambiguous discovery records remain preserved outside the qualified set.",
+      "impact": "Some future capabilities, aliases, behaviors, or historical losses may remain hidden in supporting evidence.",
+      "closeout": "Run bounded semantic clustering after the nine owner decisions; promote only records that establish a distinct durable promise."
+    },
+    {
+      "gap_id": "GAP-PORTFOLIO-OWNER-001",
+      "type": "owner_decision",
+      "severity": "blocker",
+      "state": "deferred",
+      "summary": "Nine identity approvals and six additional scope decisions remain unresolved.",
+      "impact": "Canon installation cannot proceed without silently making product decisions for the owner.",
+      "closeout": "Resolve OWNER_DECISION_PACKET.md and record immutable decision provenance."
+    },
+    {
+      "gap_id": "GAP-PORTFOLIO-PROOF-001",
+      "type": "verification",
+      "severity": "high",
+      "state": "unverified",
+      "summary": "Zero proposed capabilities have complete end-to-end proof.",
+      "impact": "No proposed capability is currently entitled to implemented, verified, shippable, or marketed status.",
+      "closeout": "Define and execute capability-level acceptance scenarios, device proof, accessibility, privacy, degraded-state, performance, and replay evidence."
+    }
+  ],
+  "capability_gaps": [
+    {
+      "capability_id": "CAP-CONTEXT-001",
+      "overall_readiness": "seeded_and_adjacent_canon_only",
+      "gaps": [
+        {"gap_id": "GAP-CONTEXT-SPEC-001", "type": "specification", "severity": "high", "state": "missing", "summary": "No normative cross-domain skill-transfer identity, evidence, confidence, correction, or lifecycle contract exists.", "closeout": "Author capability requirements beneath Local Learning without duplicating learning ownership."},
+        {"gap_id": "GAP-CONTEXT-DOMAIN-001", "type": "domain_model", "severity": "high", "state": "missing", "summary": "No stable transferable-skill or strategy representation distinguishes source evidence from destination applicability.", "closeout": "Define a local evidence-linked transfer proposal model with uncertainty, scope, correction, retention, and deletion semantics."},
+        {"gap_id": "GAP-CONTEXT-UX-001", "type": "surface", "severity": "high", "state": "missing", "summary": "No approved person-facing review journey or owning depth exists.", "closeout": "Specify discovery, explanation, comparison, acceptance, correction, dismissal, and later inspection across You and owning objects."},
+        {"gap_id": "GAP-CONTEXT-PROOF-001", "type": "verification", "severity": "high", "state": "missing", "summary": "No cross-domain transfer tests or proof exist.", "closeout": "Test plausible and implausible transfers, sensitive-domain boundaries, sparse evidence, correction, deletion, and no silent consequential action."},
+        {"gap_id": "GAP-CONTEXT-DECISION-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "Standalone capability versus local-learning subcapability is unresolved.", "closeout": "Resolve DEC-CONTEXT-001-SCOPE."}
+      ]
+    },
+    {
+      "capability_id": "CAP-PATH-001",
+      "overall_readiness": "strong_foundation_unverified_capability",
+      "gaps": [
+        {"gap_id": "GAP-PATH-QUALITY-001", "type": "specification", "severity": "high", "state": "partial", "summary": "Canon governs path identity and safety but does not define measurable quality for contextual uniqueness, usefulness, or non-template behavior.", "closeout": "Add acceptance criteria for context relevance, diversity, assumptions, dependency quality, calibration, and person override."},
+        {"gap_id": "GAP-PATH-CONTEXT-001", "type": "architecture", "severity": "high", "state": "partial", "summary": "The exact context-selection and minimization contract between Local Learning and Goal Path generation is not fully traced.", "closeout": "Define typed influence inputs, purpose limits, conflict resolution, missing-context behavior, and explanation lineage."},
+        {"gap_id": "GAP-PATH-E2E-001", "type": "verification", "severity": "high", "state": "unverified", "summary": "No single proof demonstrates generation through acceptance, projection, adaptation, Receipt, replay, rollback, privacy, and accessibility.", "closeout": "Create a golden multi-surface Goal Path capability suite and device evidence."},
+        {"gap_id": "GAP-PATH-PERF-001", "type": "performance", "severity": "medium", "state": "missing", "summary": "Representative generation and adaptation budgets are not calibrated.", "closeout": "Measure cold/warm generation, large paths, reflow, memory, energy, cancellation, and recovery on supported devices."}
+      ]
+    },
+    {
+      "capability_id": "CAP-SIMULATION-001",
+      "overall_readiness": "normative_branch_design_intent_only",
+      "gaps": [
+        {"gap_id": "GAP-SIMULATION-SCOPE-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "Career-specific versus broader life-path simulation is unresolved.", "closeout": "Resolve DEC-SIMULATION-001-BREADTH."},
+        {"gap_id": "GAP-SIMULATION-JOURNEY-001", "type": "specification", "severity": "high", "state": "missing", "summary": "No career-specific scenario journey defines inputs, comparison dimensions, uncertainty, reversible experiments, adoption, or abandonment.", "closeout": "Author a bounded career-simulation journey over Life Branch and Certificate law."},
+        {"gap_id": "GAP-SIMULATION-RUNTIME-001", "type": "implementation", "severity": "high", "state": "missing", "summary": "Life Branch and Certificate specifications explicitly do not prove runtime implementation.", "closeout": "Implement deterministic branch materialization, certification, invalidation, comparison, and promotion behind feature-gated proof."},
+        {"gap_id": "GAP-SIMULATION-REFERENCE-001", "type": "data", "severity": "high", "state": "missing", "summary": "No approved public-reference model defines occupation, training, compensation, geography, or opportunity evidence and freshness.", "closeout": "Define source provenance, freshness, uncertainty, jurisdiction, and separation from private context."},
+        {"gap_id": "GAP-SIMULATION-PROOF-001", "type": "verification", "severity": "high", "state": "missing", "summary": "No executable simulator or certificate proof exists.", "closeout": "Test viable, fragile, blocked, stale, contradictory, privacy-sensitive, and rollback scenarios without predictive overclaiming."}
+      ]
+    },
+    {
+      "capability_id": "CAP-TIME-001",
+      "overall_readiness": "strong_foundation_unverified_capability",
+      "gaps": [
+        {"gap_id": "GAP-TIME-LEVEL-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "Standalone Step Placement Reflow versus broader schedule-reflow subcapability is unresolved.", "closeout": "Resolve DEC-TIME-001-LEVEL."},
+        {"gap_id": "GAP-TIME-PLACEMENT-001", "type": "journey", "severity": "high", "state": "partial", "summary": "The exact new-Step-placement trigger and selective acceptance behavior are not closed as one journey.", "closeout": "Specify create/place/reflow preview, partial acceptance, conflict retention, protected boundaries, and canonical commit order."},
+        {"gap_id": "GAP-TIME-ROLLBACK-001", "type": "verification", "severity": "high", "state": "unverified", "summary": "Atomic rollback and external-write compensation are not proven across a realistic multi-object reflow.", "closeout": "Add deterministic replay, interruption, external failure, recurrence, grouped adjustment, and inverse-command tests."},
+        {"gap_id": "GAP-TIME-A11Y-001", "type": "accessibility", "severity": "high", "state": "unverified", "summary": "Named non-drag parity and focus restoration are specified but not capability-level proven.", "closeout": "Execute VoiceOver, Switch Control, keyboard, Dynamic Type, reduced-motion, and static consequence proof."},
+        {"gap_id": "GAP-TIME-DEVICE-001", "type": "proof", "severity": "medium", "state": "missing", "summary": "No final device evidence proves comprehensible reflow under typical, dense, and conflicted schedules.", "closeout": "Capture device scenarios with before/after consequences, acceptance, Receipt, and rollback."}
+      ]
+    },
+    {
+      "capability_id": "CAP-SEARCH-001",
+      "overall_readiness": "strongest_evidence_unverified_full_experience",
+      "gaps": [
+        {"gap_id": "GAP-SEARCH-INVOCATION-001", "type": "product_experience", "severity": "high", "state": "partial", "summary": "The final global invocation, keyboard/external-keyboard behavior, and Raycast-grade interaction standard are not capability-level proven.", "closeout": "Close invocation, focus, dismissal, resume, command navigation, and Apple-platform behavior with device proof."},
+        {"gap_id": "GAP-SEARCH-ASK-001", "type": "specification", "severity": "high", "state": "partial", "summary": "Grounded Ask has canon but complete supported-question, refusal, citation, stale-evidence, and no-answer behavior remains unverified.", "closeout": "Execute a bounded Ask evaluation suite against private local evidence and disclosure rules."},
+        {"gap_id": "GAP-SEARCH-ACTION-001", "type": "coverage", "severity": "high", "state": "partial", "summary": "App-wide canonical action coverage and owner handoff completeness are not demonstrated.", "closeout": "Generate an owner/action matrix and prove re-resolution, privacy, consequence preview, Receipt, Undo, stale, deleted, and suppressed states."},
+        {"gap_id": "GAP-SEARCH-PERF-001", "type": "performance", "severity": "high", "state": "missing", "summary": "No calibrated index size, query latency, ranking stability, rebuild, memory, or energy budgets establish flagship responsiveness.", "closeout": "Benchmark representative and stress corpora on supported devices and gate regressions."},
+        {"gap_id": "GAP-SEARCH-FINAL-001", "type": "proof", "severity": "medium", "state": "unverified", "summary": "Existing audits do not establish final frontend quality or complete capability shippability.", "closeout": "Run final visual, interaction, accessibility, privacy, recovery, and device acceptance after the frontend rebuild."}
+      ]
+    },
+    {
+      "capability_id": "CAP-APPEARANCE-001",
+      "overall_readiness": "owner_seed_with_partial_infrastructure",
+      "gaps": [
+        {"gap_id": "GAP-APPEARANCE-DEPTH-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "The authoring dimensions required for first-class status are unresolved.", "closeout": "Resolve DEC-APPEARANCE-001-DEPTH."},
+        {"gap_id": "GAP-APPEARANCE-SPEC-001", "type": "specification", "severity": "high", "state": "missing", "summary": "No normative Appearance Studio identity, state model, preview, commit, reset, migration, or failure contract exists.", "closeout": "Author an Appearance Studio journey and system contract beneath You and the design system."},
+        {"gap_id": "GAP-APPEARANCE-TOKEN-001", "type": "architecture", "severity": "high", "state": "partial", "summary": "Design-token infrastructure exists, but person-selectable semantic tokens and safe composition rules are not defined.", "closeout": "Define approved preference dimensions, semantic constraints, migration, fallback, and projection ownership."},
+        {"gap_id": "GAP-APPEARANCE-UX-001", "type": "surface", "severity": "high", "state": "missing", "summary": "No closed studio anatomy, live-preview interaction, or product-wide application experience exists.", "closeout": "Complete provisional exploration, owner selection, accessibility stress, Figma specification, and SwiftUI handoff."},
+        {"gap_id": "GAP-APPEARANCE-PROOF-001", "type": "verification", "severity": "high", "state": "missing", "summary": "No matrix proves every allowed choice across light/dark, accessibility, content stress, motion reduction, and restoration.", "closeout": "Build snapshot, semantic, migration, persistence, contrast, Dynamic Type, VoiceOver, and reset/undo tests."}
+      ]
+    },
+    {
+      "capability_id": "CAP-SHARING-001",
+      "overall_readiness": "owner_seed_with_privacy_and_export_primitives",
+      "gaps": [
+        {"gap_id": "GAP-SHARING-FORMATS-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "Initial output formats are unresolved.", "closeout": "Resolve DEC-SHARING-001-FORMATS."},
+        {"gap_id": "GAP-SHARING-SPEC-001", "type": "specification", "severity": "high", "state": "missing", "summary": "No normative Share Studio identity, audience model, field-selection, transformation, preview, destination, or Receipt contract exists.", "closeout": "Author a complete explicit-egress studio journey and system contract."},
+        {"gap_id": "GAP-SHARING-RENDER-001", "type": "architecture", "severity": "high", "state": "missing", "summary": "No local multi-format composition and rendering architecture is approved.", "closeout": "Define deterministic local visual/document/native payload rendering, cancellation, resource bounds, and provenance."},
+        {"gap_id": "GAP-SHARING-REDACTION-001", "type": "privacy", "severity": "high", "state": "missing", "summary": "No field-level audience/redaction policy maps capability objects into exact output payloads.", "closeout": "Define fail-closed classification, nested relationship handling, previews, redaction explanation, and destination minimization."},
+        {"gap_id": "GAP-SHARING-PROOF-001", "type": "verification", "severity": "high", "state": "missing", "summary": "No end-to-end export/share proof exists.", "closeout": "Test exact bytes and visuals, metadata leakage, accessibility, failed destination, cancellation, large payloads, receipts, and source immutability."},
+        {"gap_id": "GAP-SHARING-PROHIBITED-001", "type": "safety", "severity": "high", "state": "prohibited", "summary": "Using an Ambitions backend or hosted AI to receive the private graph for rendering is prohibited by current privacy law.", "closeout": "Keep core rendering local; any named external integration must receive only explicitly selected minimum fields through separate approval."}
+      ]
+    },
+    {
+      "capability_id": "CAP-KNOWLEDGE-001",
+      "overall_readiness": "strong_object_contract_partial_storage_evidence",
+      "gaps": [
+        {"gap_id": "GAP-KNOWLEDGE-SCOPE-001", "type": "owner_decision", "severity": "blocker", "state": "deferred", "summary": "Goal-first versus object-wide product scope is unresolved.", "closeout": "Resolve DEC-KNOWLEDGE-001-SCOPE."},
+        {"gap_id": "GAP-KNOWLEDGE-RELATION-001", "type": "domain_model", "severity": "high", "state": "partial", "summary": "Attachment supports relationships, but Goal-specific ownership, ordering, roles, shared links, and deletion consequences are not closed.", "closeout": "Define Goal-to-Attachment relationship roles and lifecycle without making Attachment a child copy."},
+        {"gap_id": "GAP-KNOWLEDGE-INGEST-001", "type": "platform", "severity": "high", "state": "missing", "summary": "File importer, security-scoped resource, copy-versus-link, bookmark, permission loss, and recovery behavior are not proven.", "closeout": "Specify and test Apple file-import and local-storage behavior across lifecycle and relaunch."},
+        {"gap_id": "GAP-KNOWLEDGE-SEARCH-001", "type": "search", "severity": "high", "state": "partial", "summary": "Metadata and permitted derived-content indexing, privacy suppression, rebuild, and deletion are not capability-level established.", "closeout": "Add Attachment search projection and index lifecycle requirements and tests."},
+        {"gap_id": "GAP-KNOWLEDGE-RESOURCE-001", "type": "performance", "severity": "medium", "state": "missing", "summary": "No quotas, large-file, streaming, thumbnail/OCR, storage-pressure, or cleanup budgets exist.", "closeout": "Calibrate supported types, sizes, counts, storage pressure, cancellation, memory, and energy."},
+        {"gap_id": "GAP-KNOWLEDGE-UX-001", "type": "surface", "severity": "high", "state": "missing", "summary": "No final Goal files/knowledge experience or device proof exists.", "closeout": "Design and prove add, browse, inspect, recover, share, unlink, Trash, restore, and delete states."}
+      ]
+    },
+    {
+      "capability_id": "CAP-RESILIENCE-001",
+      "overall_readiness": "strong_cross_app_law_partial_proof",
+      "gaps": [
+        {"gap_id": "GAP-RESILIENCE-COVERAGE-001", "type": "coverage", "severity": "high", "state": "partial", "summary": "Today and Search have strong expressions, but every root, focused object, Capture, mutation, import/export, and external effect is not mapped to one continuity contract.", "closeout": "Generate a cross-app failure-class and recovery-owner matrix."},
+        {"gap_id": "GAP-RESILIENCE-INTERRUPT-001", "type": "runtime", "severity": "high", "state": "unverified", "summary": "Interruption, relaunch, resume, checkpoint, stale preview, and partial external result behavior is not app-wide proven.", "closeout": "Execute crash/relaunch/interruption/replay tests at each durable boundary."},
+        {"gap_id": "GAP-RESILIENCE-RESTORE-001", "type": "recovery", "severity": "high", "state": "unverified", "summary": "Backup, restore, repair, index rebuild, and data-loss prevention are not proven together from a clean device state.", "closeout": "Run destructive recovery drills with integrity, schema, privacy, and accessibility evidence."},
+        {"gap_id": "GAP-RESILIENCE-EXTERNAL-001", "type": "external_effects", "severity": "high", "state": "partial", "summary": "Local-success versus external-failure reconciliation is specified but not proven across all adapters and retries.", "closeout": "Test durable outbox identity, idempotency, retries, compensation, stale external facts, and no duplicate local mutation."},
+        {"gap_id": "GAP-RESILIENCE-A11Y-001", "type": "accessibility", "severity": "high", "state": "unverified", "summary": "Failure class, unchanged data, affected scope, and safe recovery are not app-wide proven nonvisually.", "closeout": "Execute VoiceOver, Dynamic Type, Switch Control, keyboard, reduced-motion, and focus-restoration recovery suites."}
+      ]
+    }
+  ],
+  "classification_summary": {
+    "impossible_capabilities": [],
+    "unsafe_or_prohibited_shortcuts": [
+      "Send private life-graph context to hosted AI or an Ambitions backend to generate core paths, simulations, transfer proposals, shares, or personalization.",
+      "Represent probabilistic or generative output as deterministic truth, professional qualification, guaranteed career outcome, or valid branch certificate.",
+      "Commit material path, schedule, scenario, share, deletion, or external-effect changes without the owning confirmation and Receipt boundary.",
+      "Permit arbitrary appearance choices to remove semantic meaning, required status, contrast, accessibility, or product authority."
+    ],
+    "deferred_product_decisions": 6,
+    "merely_unimplemented_or_unverified_capabilities": 9,
+    "note": "All nine proposed capabilities appear feasible within current product law when bounded as drafted; feasibility does not imply implementation readiness."
+  },
+  "priority_order": [
+    "Resolve nine identity approvals and six scope decisions.",
+    "Canonize approved capability authority and compiler traceability.",
+    "Close missing specifications for Skill Transference, Appearance Studio, Content Share Studio, and career-specific simulation.",
+    "Complete capability-level proof for Goal Pathing, Reflow, Search, Attachments, and Operational Continuity.",
+    "Run a bounded second-pass reconciliation over the 298 ambiguous records after owner decisions stabilize identity boundaries."
+  ]
+}
