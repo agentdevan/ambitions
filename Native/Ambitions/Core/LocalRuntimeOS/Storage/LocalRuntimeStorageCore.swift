@@ -5,6 +5,7 @@ import SQLite3
 let localRuntimeStorageCoreSchemaVersion = "local_runtime_storage_core.native.v1"
 
 enum LocalRuntimeStorageTier: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case canonicalRuntimeStoreGeneration = "canonical_runtime_store_generation"
     case eventStoreSQLite = "event_store_sqlite"
     case objectStoreSwiftData = "object_store_swiftdata"
     case projectionStoreSQLite = "projection_store_sqlite"
@@ -59,6 +60,22 @@ struct LocalRuntimeStorageManifest: Codable, Sendable, Equatable, Hashable {
 
     static let current = LocalRuntimeStorageManifest(
         tiers: [
+            LocalRuntimeStorageTierDescriptor(
+                id: .canonicalRuntimeStoreGeneration,
+                rootPath: "Core/LocalRuntimeOS/Storage/CanonicalRuntimeStore",
+                privacyScope: .privateRuntime,
+                authoritativeFor: [
+                    "canonical generation identity",
+                    "runtime authority schema",
+                    "atomic active-store selection",
+                ],
+                excludedResponsibilities: [
+                    "central runtime wiring before cutover",
+                    "extension access",
+                    "migration authorization",
+                    "semantic command policy",
+                ]
+            ),
             LocalRuntimeStorageTierDescriptor(
                 id: .eventStoreSQLite,
                 rootPath: "Core/LocalRuntimeOS/Storage/EventStoreSQLite",
@@ -135,7 +152,33 @@ struct LocalRuntimeStorageManifest: Codable, Sendable, Equatable, Hashable {
     }
 }
 
-enum LocalRuntimeStorageError: Error, Equatable {
+enum LocalRuntimeStorageError: Error, Sendable, Equatable {
+    case protectedDataUnavailable
+    case canonicalManifestMissing
+    case canonicalManifestMalformed
+    case canonicalManifestMismatch(field: String)
+    case canonicalManifestUnverified
+    case canonicalFutureManifestSchema(maximumSupported: Int, actual: Int)
+    case canonicalUnsupportedManifestSchema(expected: Int, actual: Int)
+    case canonicalFutureDatabaseSchema(maximumSupported: Int, actual: Int)
+    case canonicalUnsupportedDatabaseSchema(expected: Int, actual: Int)
+    case canonicalGenerationAlreadyExists(id: String)
+    case canonicalGenerationMissing(id: String)
+    case canonicalStorageFull(operation: String)
+    case canonicalIOFailure(operation: String)
+    case canonicalSQLiteFailure(operation: String, code: Int32, extendedCode: Int32)
+    case canonicalIntegrityFailure
+    case canonicalForeignKeyFailure
+    case canonicalFileProtectionFailure(artifact: String)
+    case canonicalPathAuthorityDenied
+    case canonicalActivationBusy
+    case canonicalActivationLockFailed
+    case canonicalFileIdentityChanged(artifact: String)
+    case canonicalReadPageTooLarge(maximumBytes: Int)
+    case canonicalActivationFailed
+    case canonicalActivationStateUnknown
+    case canonicalActivationSucceededWithCleanupFailure
+    case canonicalStagingCleanupFailed
     case sqliteOpenFailed(path: String, message: String)
     case sqlitePrepareFailed(sql: String, message: String)
     case sqliteStepFailed(sql: String, message: String)

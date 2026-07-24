@@ -33,23 +33,28 @@ public actor SQLiteDatabase {
             )
         }
 
-        do {
-            try FileManager.default.createDirectory(
-                at: databaseURL.deletingLastPathComponent(),
-                withIntermediateDirectories: true
-            )
-        } catch {
-            throw SQLiteError(
-                operation: .open,
-                extendedCode: SQLITE_CANTOPEN
-            )
+        if configuration.openMode == .createOrOpen {
+            do {
+                try FileManager.default.createDirectory(
+                    at: databaseURL.deletingLastPathComponent(),
+                    withIntermediateDirectories: true
+                )
+            } catch {
+                throw SQLiteError(
+                    operation: .open,
+                    extendedCode: SQLITE_CANTOPEN
+                )
+            }
         }
 
         var openedHandle: OpaquePointer?
-        let flags = SQLITE_OPEN_CREATE
-            | SQLITE_OPEN_READWRITE
+        var flags = SQLITE_OPEN_READWRITE
             | SQLITE_OPEN_FULLMUTEX
             | SQLITE_OPEN_URI
+            | SQLITE_OPEN_NOFOLLOW
+        if configuration.openMode == .createOrOpen {
+            flags |= SQLITE_OPEN_CREATE
+        }
         let openResult = sqlite3_open_v2(
             databaseURL.path,
             &openedHandle,
@@ -120,6 +125,22 @@ public actor SQLiteDatabase {
         bindings: [SQLiteBinding] = []
     ) throws -> [SQLiteRow] {
         try query(sql, bindings: bindings, operation: .step)
+    }
+
+    public func query(
+        _ sql: String,
+        bindings: [SQLiteBinding] = [],
+        maximumDecodedBytes: Int
+    ) throws -> [SQLiteRow] {
+        guard maximumDecodedBytes >= 0 else {
+            throw SQLiteQueryBudgetExceeded(maximumBytes: maximumDecodedBytes)
+        }
+        return try query(
+            sql,
+            bindings: bindings,
+            operation: .step,
+            maximumDecodedBytes: maximumDecodedBytes
+        )
     }
 
     /// Runs a transaction without a suspension point or actor reentrancy.
@@ -372,6 +393,12 @@ private extension SQLiteDatabase {
         )
         if let maximumValueBytes = configuration.maximumValueBytes {
             _ = sqlite3_limit(handle, SQLITE_LIMIT_LENGTH, maximumValueBytes)
+            guard sqlite3_limit(handle, SQLITE_LIMIT_LENGTH, -1) == maximumValueBytes else {
+                throw SQLiteError(
+                    operation: .configure,
+                    extendedCode: SQLITE_MISUSE
+                )
+            }
         }
     }
 
@@ -470,7 +497,8 @@ private extension SQLiteDatabase {
     func query(
         _ sql: String,
         bindings: [SQLiteBinding],
-        operation: SQLiteOperation
+        operation: SQLiteOperation,
+        maximumDecodedBytes: Int? = nil
     ) throws -> [SQLiteRow] {
         guard let handle else {
             throw unavailableError(operation: operation)
@@ -480,10 +508,21 @@ private extension SQLiteDatabase {
         try bind(bindings, to: statement)
 
         var rows: [SQLiteRow] = []
+        var decodedBytes = 0
         while true {
             let stepResult = sqlite3_step(statement)
             switch stepResult {
             case SQLITE_ROW:
+                if let maximumDecodedBytes {
+                    let rowBytes = decodedByteCount(of: statement)
+                    let (next, overflow) = decodedBytes.addingReportingOverflow(rowBytes)
+                    guard overflow == false, next <= maximumDecodedBytes else {
+                        throw SQLiteQueryBudgetExceeded(
+                            maximumBytes: maximumDecodedBytes
+                        )
+                    }
+                    decodedBytes = next
+                }
                 rows.append(try readRow(statement))
             case SQLITE_DONE:
                 return rows
@@ -495,6 +534,25 @@ private extension SQLiteDatabase {
                 )
             }
         }
+    }
+
+    func decodedByteCount(of statement: OpaquePointer) -> Int {
+        var total = 0
+        for index in 0..<sqlite3_column_count(statement) {
+            let bytes: Int
+            switch sqlite3_column_type(statement, index) {
+            case SQLITE_NULL:
+                bytes = 0
+            case SQLITE_INTEGER, SQLITE_FLOAT:
+                bytes = MemoryLayout<Int64>.size
+            default:
+                bytes = Int(sqlite3_column_bytes(statement, index))
+            }
+            let (next, overflow) = total.addingReportingOverflow(bytes)
+            if overflow { return Int.max }
+            total = next
+        }
+        return total
     }
 
     func readRow(_ statement: OpaquePointer) throws -> SQLiteRow {

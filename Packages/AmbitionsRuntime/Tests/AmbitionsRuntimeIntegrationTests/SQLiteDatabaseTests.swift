@@ -4,6 +4,31 @@ import XCTest
 @testable import AmbitionsRuntimeSQLite
 
 final class SQLiteDatabaseTests: XCTestCase {
+    func testExistingOnlyOpenDoesNotCreateMissingDatabaseOrFollowSymbolicLink() throws {
+        let missingURL = try databaseURL()
+        XCTAssertThrowsError(
+            try SQLiteDatabase(
+                url: missingURL,
+                configuration: SQLiteConfiguration(openMode: .existingOnly)
+            )
+        )
+        XCTAssertFalse(FileManager.default.fileExists(atPath: missingURL.path))
+
+        let realURL = missingURL.deletingLastPathComponent()
+            .appendingPathComponent("real.sqlite")
+        _ = try SQLiteDatabase(url: realURL)
+        try FileManager.default.createSymbolicLink(
+            at: missingURL,
+            withDestinationURL: realURL
+        )
+        XCTAssertThrowsError(
+            try SQLiteDatabase(
+                url: missingURL,
+                configuration: SQLiteConfiguration(openMode: .existingOnly)
+            )
+        )
+    }
+
     func testPreparedStatementsRoundTripTypedValuesAndApplyPragmas() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
         _ = try await database.execute(

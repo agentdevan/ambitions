@@ -4,18 +4,26 @@ import SQLite3
 public struct SQLiteConfiguration: Sendable, Equatable {
     public var busyTimeoutMilliseconds: Int32
     public var synchronousPolicy: SQLiteSynchronousPolicy
+    public var openMode: SQLiteOpenMode
     /// Maps to `SQLITE_LIMIT_LENGTH` for strings, blobs, and encoded rows.
     public var maximumValueBytes: Int32?
 
     public init(
         busyTimeoutMilliseconds: Int32 = 5_000,
         synchronousPolicy: SQLiteSynchronousPolicy = .full,
+        openMode: SQLiteOpenMode = .createOrOpen,
         maximumValueBytes: Int32? = nil
     ) {
         self.busyTimeoutMilliseconds = busyTimeoutMilliseconds
         self.synchronousPolicy = synchronousPolicy
+        self.openMode = openMode
         self.maximumValueBytes = maximumValueBytes
     }
+}
+
+public enum SQLiteOpenMode: String, Codable, Sendable, CaseIterable {
+    case createOrOpen = "create_or_open"
+    case existingOnly = "existing_only"
 }
 
 public enum SQLiteSynchronousPolicy: String, Codable, Sendable, CaseIterable {
@@ -57,6 +65,14 @@ public struct SQLiteRow: Sendable, Equatable {
     public func value(named name: String) -> SQLiteValue? {
         guard let index = columnNames.firstIndex(of: name) else { return nil }
         return values[index]
+    }
+}
+
+public struct SQLiteQueryBudgetExceeded: Error, Sendable, Equatable {
+    public let maximumBytes: Int
+
+    init(maximumBytes: Int) {
+        self.maximumBytes = maximumBytes
     }
 }
 
