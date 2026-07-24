@@ -1,0 +1,88 @@
+{
+  "authority": "non_normative_capability_review_validation",
+  "coverage": {
+    "atlas_capability_ids": [
+      "CAP-APPEARANCE-001",
+      "CAP-CONTEXT-001",
+      "CAP-KNOWLEDGE-001",
+      "CAP-PATH-001",
+      "CAP-RESILIENCE-001",
+      "CAP-SEARCH-001",
+      "CAP-SHARING-001",
+      "CAP-SIMULATION-001",
+      "CAP-TIME-001"
+    ],
+    "candidate_ids": [
+      "CAND-71C0E590F9213175",
+      "CAND-939873A894F75DC1",
+      "CAND-B2F829141E0DD9A3",
+      "CAND-C6F2EE04321B7240",
+      "CAND-FA37F984A251FF01",
+      "CAND-SEED-001",
+      "CAND-SEED-002",
+      "CAND-SEED-003",
+      "CAND-SEED-004",
+      "CAND-SEED-005",
+      "CAND-SEED-006",
+      "CAND-SEED-007",
+      "CAND-SEED-008"
+    ],
+    "gap_capability_ids": [
+      "CAP-APPEARANCE-001",
+      "CAP-CONTEXT-001",
+      "CAP-KNOWLEDGE-001",
+      "CAP-PATH-001",
+      "CAP-RESILIENCE-001",
+      "CAP-SEARCH-001",
+      "CAP-SHARING-001",
+      "CAP-SIMULATION-001",
+      "CAP-TIME-001"
+    ],
+    "owner_decision_ids": [
+      "DEC-APPEARANCE-001-DEPTH",
+      "DEC-ATLAS-IDENTITIES-001",
+      "DEC-CONTEXT-001-SCOPE",
+      "DEC-KNOWLEDGE-001-SCOPE",
+      "DEC-SHARING-001-FORMATS",
+      "DEC-SIMULATION-001-BREADTH",
+      "DEC-TIME-001-LEVEL"
+    ],
+    "reconciliation_capability_ids": [
+      "CAP-APPEARANCE-001",
+      "CAP-CONTEXT-001",
+      "CAP-KNOWLEDGE-001",
+      "CAP-PATH-001",
+      "CAP-RESILIENCE-001",
+      "CAP-SEARCH-001",
+      "CAP-SHARING-001",
+      "CAP-SIMULATION-001",
+      "CAP-TIME-001"
+    ],
+    "traceability_capability_ids": [
+      "CAP-APPEARANCE-001",
+      "CAP-CONTEXT-001",
+      "CAP-KNOWLEDGE-001",
+      "CAP-PATH-001",
+      "CAP-RESILIENCE-001",
+      "CAP-SEARCH-001",
+      "CAP-SHARING-001",
+      "CAP-SIMULATION-001",
+      "CAP-TIME-001"
+    ]
+  },
+  "errors": [],
+  "is_valid": true,
+  "repository": "agentdevan/ambitions",
+  "schema_version": 1,
+  "summary": {
+    "atlas_capability_count": 9,
+    "gap_capability_record_count": 9,
+    "gap_count": 52,
+    "owner_decision_count": 7,
+    "qualified_candidate_count": 13,
+    "reconciliation_group_count": 9,
+    "taxonomy_domain_count": 14,
+    "traceability_record_count": 9,
+    "unresolved_scope_decision_count": 6
+  }
+}
