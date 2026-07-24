@@ -54,7 +54,7 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
         XCTAssertEqual(RuntimeSemanticEventRegistry.registeredUpcasterVersions, [.captureCreated: [0]])
         for (typeID, aggregateKind) in expected {
             XCTAssertEqual(typeID.aggregateKind, aggregateKind, typeID.rawValue)
-            XCTAssertEqual(typeID.latestPayloadVersion, 2, typeID.rawValue)
+            XCTAssertEqual(typeID.latestPayloadVersion, 3, typeID.rawValue)
         }
     }
 

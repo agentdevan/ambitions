@@ -54,7 +54,33 @@ struct RuntimeSemanticAggregateTransition: Codable, Sendable, Equatable, Hashabl
     let transition: RuntimeObjectTransitionKind
     let canonicalStateBytes: Data
     let canonicalStateDigest: String
+    let privacy: EventLedgerPrivacyClassification?
+    let localOnly: Bool?
     let tombstone: RuntimeCanonicalTombstoneAuthority?
+
+    init(
+        aggregate: RuntimeSemanticAggregate,
+        priorRevision: UInt64?,
+        resultingRevision: UInt64,
+        lifecycle: RuntimeAggregateLifecycle,
+        transition: RuntimeObjectTransitionKind,
+        canonicalStateBytes: Data,
+        canonicalStateDigest: String,
+        privacy: EventLedgerPrivacyClassification = .standard,
+        localOnly: Bool = true,
+        tombstone: RuntimeCanonicalTombstoneAuthority?
+    ) {
+        self.aggregate = aggregate
+        self.priorRevision = priorRevision
+        self.resultingRevision = resultingRevision
+        self.lifecycle = lifecycle
+        self.transition = transition
+        self.canonicalStateBytes = canonicalStateBytes
+        self.canonicalStateDigest = canonicalStateDigest
+        self.privacy = privacy
+        self.localOnly = localOnly
+        self.tombstone = tombstone
+    }
 }
 
 struct RuntimeCorrelationID: RuntimeIdentityValue {
@@ -110,8 +136,8 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
     case externalReminderRequested = "ambitions.external.reminder_requested"
     case externalCalendarEventRequested = "ambitions.external.calendar_event_requested"
 
-    var latestPayloadVersion: Int { 2 }
-    var supportedPayloadVersions: Set<Int> { self == .captureCreated ? [0, 1, 2] : [1, 2] }
+    var latestPayloadVersion: Int { 3 }
+    var supportedPayloadVersions: Set<Int> { self == .captureCreated ? [0, 1, 2, 3] : [1, 2, 3] }
 
     var isCreation: Bool {
         switch self {
@@ -178,6 +204,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
     let priorRevision: UInt64?
     let resultingRevision: UInt64
     let changedObjectIDs: [RuntimeDomainObjectID]
+    let privacy: EventLedgerPrivacyClassification?
+    let localOnly: Bool?
     let primaryAggregate: RuntimeSemanticAggregate?
     let aggregateTransitions: [RuntimeSemanticAggregateTransition]
 
@@ -187,6 +215,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         case priorRevision = "prior_revision"
         case resultingRevision = "resulting_revision"
         case changedObjectIDs = "changed_object_ids"
+        case privacy
+        case localOnly = "local_only"
         case primaryAggregate = "primary_aggregate"
         case aggregateTransitions = "aggregate_transitions"
     }
@@ -197,6 +227,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         priorRevision: UInt64?,
         resultingRevision: UInt64,
         changedObjectIDs: [RuntimeDomainObjectID],
+        privacy: EventLedgerPrivacyClassification = .standard,
+        localOnly: Bool = true,
         primaryAggregate: RuntimeSemanticAggregate? = nil,
         aggregateTransitions: [RuntimeSemanticAggregateTransition] = []
     ) throws {
@@ -205,6 +237,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         self.priorRevision = priorRevision
         self.resultingRevision = resultingRevision
         self.changedObjectIDs = Self.canonicalIDs(changedObjectIDs)
+        self.privacy = privacy
+        self.localOnly = localOnly
         self.aggregateTransitions = aggregateTransitions.sorted {
             ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
                 ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
@@ -220,6 +254,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         priorRevision = try values.decodeIfPresent(UInt64.self, forKey: .priorRevision)
         resultingRevision = try values.decode(UInt64.self, forKey: .resultingRevision)
         changedObjectIDs = try values.decode([RuntimeDomainObjectID].self, forKey: .changedObjectIDs)
+        privacy = try values.decodeIfPresent(EventLedgerPrivacyClassification.self, forKey: .privacy)
+        localOnly = try values.decodeIfPresent(Bool.self, forKey: .localOnly)
         primaryAggregate = try values.decodeIfPresent(RuntimeSemanticAggregate.self, forKey: .primaryAggregate)
         aggregateTransitions = try values.decodeIfPresent(
             [RuntimeSemanticAggregateTransition].self,
@@ -235,6 +271,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         try values.encodeIfPresent(priorRevision, forKey: .priorRevision)
         try values.encode(resultingRevision, forKey: .resultingRevision)
         try values.encode(changedObjectIDs, forKey: .changedObjectIDs)
+        try values.encodeIfPresent(privacy, forKey: .privacy)
+        try values.encodeIfPresent(localOnly, forKey: .localOnly)
         if aggregateTransitions.isEmpty == false {
             try values.encode(primaryAggregate, forKey: .primaryAggregate)
             try values.encode(aggregateTransitions, forKey: .aggregateTransitions)
@@ -288,6 +326,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
                       } ?? false
                   return transitionProgression &&
                       transition.canonicalStateBytes.isEmpty == false &&
+                      transition.privacy == privacy &&
+                      transition.localOnly == localOnly &&
                       RuntimeStoreManifestCodec.isSHA256Hex(transition.canonicalStateDigest) &&
                       transition.canonicalStateDigest == transition.canonicalStateDigest.lowercased() &&
                       (transition.lifecycle == .tombstoned) == (transition.transition == .tombstone) &&

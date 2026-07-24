@@ -200,6 +200,67 @@ actor CanonicalRuntimeStore {
         self.expectedDatabaseIdentitySHA256 = expectedDatabaseIdentitySHA256
     }
 
+    /// Grants canonical read subsystems a non-reentrant transaction without
+    /// exposing or returning the owned SQLite connection.
+    func withCanonicalReadTransaction<Result: Sendable>(
+        _ operation: @Sendable (
+            _ database: isolated SQLiteDatabase
+        ) throws -> Result
+    ) async throws -> Result {
+        try pinnedFiles.validate(databaseURL: databaseURL)
+        do {
+            let result = try await database.transaction(.deferred) { database in
+                try Task.checkCancellation()
+                try Self.requireCompiledIdentity(
+                    database, expected: expectedDatabaseIdentitySHA256
+                )
+                return try operation(database)
+            }
+            try pinnedFiles.validate(databaseURL: databaseURL)
+            return result
+        } catch {
+            if Self.isCanonicalDerivedDomainError(error) { throw error }
+            throw Self.mapSQLiteFailure(error, operation: "canonical_derived_read")
+        }
+    }
+
+    /// Grants canonical maintenance subsystems one immediate transaction. The
+    /// synchronous closure cannot suspend or let the isolated handle escape.
+    func withCanonicalImmediateTransaction<Result: Sendable>(
+        _ operation: @Sendable (
+            _ database: isolated SQLiteDatabase
+        ) throws -> Result
+    ) async throws -> Result {
+        try pinnedFiles.validate(databaseURL: databaseURL)
+        do {
+            let result = try await database.transaction(.immediate) { database in
+                try Task.checkCancellation()
+                try Self.requireCompiledIdentity(
+                    database, expected: expectedDatabaseIdentitySHA256
+                )
+                return try operation(database)
+            }
+            // Parity with `withAtomicCommitTransaction`: once COMMIT succeeds,
+            // no throwable pin check may convert durable progress into a false
+            // failure. The next operation revalidates the pinned files before
+            // opening its transaction; read-only transactions remain symmetric
+            // because they establish no durable result.
+            return result
+        } catch {
+            if Self.isCanonicalDerivedDomainError(error) { throw error }
+            throw Self.mapSQLiteFailure(error, operation: "canonical_derived_write")
+        }
+    }
+
+    private static func isCanonicalDerivedDomainError(_ error: Error) -> Bool {
+        error is RuntimeCanonicalProjectionPersistenceError ||
+            error is RuntimeCanonicalSearchError ||
+            error is RuntimeCanonicalReplayError ||
+            error is RuntimeCanonicalProjectionSourceError ||
+            error is CancellationError ||
+            error is LocalRuntimeStorageError
+    }
+
     static func openActive(
         using generationManager: RuntimeStoreGenerationManager
     ) async throws -> CanonicalRuntimeStore {

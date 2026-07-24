@@ -26,10 +26,10 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
         XCTAssertTrue(schema.contains("runtime_replay_verified_reconstructions_immutable_update"))
         XCTAssertTrue(schema.contains("runtime_replay_verified_reconstructions_immutable_delete"))
         XCTAssertFalse(CanonicalRuntimeStore.expectedRuntimeTables.contains("runtime_replay_checkpoints"))
-        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.writableAuthoritySchemaVersions, Set([4]))
+        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.writableAuthoritySchemaVersions, Set([5]))
     }
 
-    func testAtomicCommitSchemaCatalogAcceptsIntegratedV4WithoutChangingV3Authority() async throws {
+    func testV4RemainsReplayReadableButIsNoLongerWritableAuthority() async throws {
         let directory = FileManager.default.temporaryDirectory
             .appendingPathComponent("runtime-t10-v4-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: directory) }
@@ -45,7 +45,15 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 "INSERT INTO runtime_store_metadata(singleton_id, schema_version, generation_id, created_at_ms) VALUES (1, 4, 'staged-t10', 0)"
             )
             try database.execute("PRAGMA user_version = 4")
-            try CanonicalRuntimeCommitSchemaPlan.requireIntegratedSchema(in: database)
+            do {
+                try CanonicalRuntimeCommitSchemaPlan.requireIntegratedSchema(in: database)
+                XCTFail("V4 must remain migration input only after T11.")
+            } catch {
+                XCTAssertEqual(
+                    error as? RuntimeAtomicCommitError,
+                    .migrationRequired(expected: 5, actual: 4)
+                )
+            }
             try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
         }
         XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.targetSchemaVersion, 3)
@@ -121,6 +129,8 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             )
             let event = try RuntimeAtomicSemanticEventFactory.make(
                 command: command,
+                commandPrivacy: .standard,
+                commandLocalOnly: true,
                 primaryAggregate: aggregate,
                 primaryPriorRevision: priorRevision,
                 primaryResultingRevision: resultingRevision,

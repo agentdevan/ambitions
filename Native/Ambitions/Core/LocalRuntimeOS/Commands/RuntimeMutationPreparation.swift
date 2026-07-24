@@ -192,7 +192,7 @@ enum RuntimeEffectOrdering: String, Codable, Sendable, Equatable, Hashable {
 struct RuntimeMutationWriteSet: Codable, Sendable, Equatable, Hashable {
     let transitions: [RuntimeObjectTransitionIntent]
     let events: [RuntimeSemanticEventIntent]
-    let projectionInvalidations: [String]
+    let projectionInvalidations: [RuntimeCanonicalProjectionID]
     let receiptIntentID: RuntimeReceiptID?
     let rollbackIntentID: RuntimeRollbackPlanID?
     let externalEffect: RuntimeExternalEffectIntent
@@ -201,14 +201,14 @@ struct RuntimeMutationWriteSet: Codable, Sendable, Equatable, Hashable {
     init(
         transitions: [RuntimeObjectTransitionIntent],
         events: [RuntimeSemanticEventIntent],
-        projectionInvalidations: [String],
+        projectionInvalidations: [RuntimeCanonicalProjectionID],
         receiptIntentID: RuntimeReceiptID?,
         rollbackIntentID: RuntimeRollbackPlanID?,
         externalEffect: RuntimeExternalEffectIntent
     ) {
         self.transitions = transitions.sorted { $0.aggregate < $1.aggregate }
         self.events = events.sorted { $0.id.rawValue < $1.id.rawValue }
-        self.projectionInvalidations = Array(Set(projectionInvalidations.filter { $0.isEmpty == false })).sorted()
+        self.projectionInvalidations = Array(Set(projectionInvalidations)).sorted()
         self.receiptIntentID = receiptIntentID
         self.rollbackIntentID = rollbackIntentID
         self.externalEffect = externalEffect

@@ -14,12 +14,35 @@ struct RuntimeCanonicalAggregateState: Codable, Sendable, Equatable {
     let transition: RuntimeObjectTransitionKind
     let commandPayload: RuntimeCommandPayload
     let changedObjectIDs: [RuntimeDomainObjectID]
+    let privacy: EventLedgerPrivacyClassification?
+    let localOnly: Bool?
+
+    init(
+        aggregate: RuntimeSemanticAggregate,
+        revision: UInt64,
+        lifecycle: RuntimeAggregateLifecycle,
+        transition: RuntimeObjectTransitionKind,
+        commandPayload: RuntimeCommandPayload,
+        changedObjectIDs: [RuntimeDomainObjectID],
+        privacy: EventLedgerPrivacyClassification = .standard,
+        localOnly: Bool = true
+    ) {
+        self.aggregate = aggregate
+        self.revision = revision
+        self.lifecycle = lifecycle
+        self.transition = transition
+        self.commandPayload = commandPayload
+        self.changedObjectIDs = changedObjectIDs
+        self.privacy = privacy
+        self.localOnly = localOnly
+    }
 }
 
 enum RuntimeCanonicalAggregateStateCodecError: Error, Sendable, Equatable {
     case corrupt
     case futureVersion
     case nonCanonical
+    case historicalPrivacyMissing
 }
 
 struct RuntimeCanonicalAggregateStateCodec: Sendable {
@@ -29,9 +52,16 @@ struct RuntimeCanonicalAggregateStateCodec: Sendable {
     }
 
     func encode(_ state: RuntimeCanonicalAggregateState) throws -> Data {
+        guard state.privacy != nil, state.localOnly != nil else {
+            throw RuntimeCanonicalAggregateStateCodecError.historicalPrivacyMissing
+        }
+        return try encode(state, version: 2)
+    }
+
+    private func encode(_ state: RuntimeCanonicalAggregateState, version: Int) throws -> Data {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-        return try encoder.encode(Envelope(version: 1, state: state))
+        return try encoder.encode(Envelope(version: version, state: state))
     }
 
     func decode(_ bytes: Data) throws -> RuntimeCanonicalAggregateState {
@@ -42,10 +72,11 @@ struct RuntimeCanonicalAggregateStateCodec: Sendable {
         } catch {
             throw RuntimeCanonicalAggregateStateCodecError.corrupt
         }
-        guard envelope.version == 1 else {
+        guard envelope.version == 1 || envelope.version == 2 else {
             throw RuntimeCanonicalAggregateStateCodecError.futureVersion
         }
-        guard try encode(envelope.state) == bytes else {
+        guard (envelope.version == 1 || (envelope.state.privacy != nil && envelope.state.localOnly != nil)),
+              try encode(envelope.state, version: envelope.version) == bytes else {
             throw RuntimeCanonicalAggregateStateCodecError.nonCanonical
         }
         return envelope.state
@@ -162,7 +193,7 @@ extension RuntimeAtomicCommitError: CustomStringConvertible, LocalizedError {
 enum CanonicalRuntimeCommitSchemaPlan {
     static let sourceSchemaVersion = 1
     static let targetSchemaVersion = runtimeAtomicCommitSchemaVersion
-    static let currentWritableSchemaVersion = runtimeCanonicalReplaySchemaVersion
+    static let currentWritableSchemaVersion = runtimeCanonicalProjectionSchemaVersion
     static let readableActiveSchemaVersions: Set<Int> = [sourceSchemaVersion]
     static let writableAuthoritySchemaVersions: Set<Int> = [currentWritableSchemaVersion]
     static let tables: Set<String> = [
@@ -268,7 +299,11 @@ enum CanonicalRuntimeCommitSchemaPlan {
         }
         try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
         let rows = try database.query(
-            "SELECT name, type FROM sqlite_schema WHERE name LIKE 'runtime_%' AND type IN ('table', 'index')"
+            """
+            SELECT name, type FROM sqlite_schema
+            WHERE name LIKE 'runtime_%'
+              AND type IN ('table', 'index')
+            """
         )
         let tableNames = Set(rows.compactMap { row -> String? in
             guard row.value(named: "type") == .text("table"),
@@ -286,9 +321,13 @@ enum CanonicalRuntimeCommitSchemaPlan {
         var expectedIndexes = CanonicalRuntimeStore.expectedRuntimeIndexes
             .union(CanonicalRuntimeSemanticEventSchemaPlan.indexes)
             .union(indexes)
-        if version == Int64(runtimeCanonicalReplaySchemaVersion) {
+        if version >= Int64(runtimeCanonicalReplaySchemaVersion) {
             expectedTables.formUnion(CanonicalRuntimeReplaySchemaPlan.tables)
             expectedIndexes.formUnion(CanonicalRuntimeReplaySchemaPlan.indexes)
+        }
+        if version == Int64(runtimeCanonicalProjectionSchemaVersion) {
+            expectedTables.formUnion(CanonicalRuntimeProjectionSchemaPlan.tables)
+            expectedIndexes.formUnion(CanonicalRuntimeProjectionSchemaPlan.indexes)
         }
         guard tableNames == expectedTables, indexNames == expectedIndexes else {
             throw RuntimeAtomicCommitError.corruptAuthority
@@ -609,6 +648,8 @@ extension CanonicalRuntimeStore {
             }
             let semanticEvent = try RuntimeAtomicSemanticEventFactory.make(
                 command: preparation.command.typedPayload,
+                commandPrivacy: preparation.command.privacy,
+                commandLocalOnly: preparation.command.localOnly,
                 primaryAggregate: primaryState.aggregate,
                 primaryPriorRevision: try plan.priorRevision(for: plan.primaryKey),
                 primaryResultingRevision: primaryState.revision,
@@ -913,7 +954,7 @@ private struct RuntimeAtomicCommitPlan {
     let receiptID: RuntimeReceiptID
     let occurredAt: Date
     let changedObjectIDs: [RuntimeDomainObjectID]
-    let projectionInvalidations: [String]
+    let projectionInvalidations: [RuntimeCanonicalProjectionID]
     let externalEffect: RuntimeExternalEffectIntent
     let casMutations: [CanonicalAggregateCASMutation]
     let stateByKey: [CanonicalAggregateKey: RuntimeCanonicalAggregateState]
@@ -941,6 +982,10 @@ private struct RuntimeAtomicCommitPlan {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         semanticType = type
+        guard preparation.decision.writeSet.projectionInvalidations ==
+                RuntimeCanonicalProjectionRegistry.projectionIDs(for: semanticType) else {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
         let primaryID = try RuntimeAtomicAggregateIdentity.primaryID(
             command: preparation.command.typedPayload,
             transitions: preparation.decision.writeSet.transitions
@@ -1030,7 +1075,9 @@ private struct RuntimeAtomicCommitPlan {
                 lifecycle: lifecycle,
                 transition: transition,
                 commandPayload: preparation.command.typedPayload,
-                changedObjectIDs: changedObjectIDs
+                changedObjectIDs: changedObjectIDs,
+                privacy: preparation.command.privacy,
+                localOnly: preparation.command.localOnly
             )
             let bytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
             if case let .exact(expectedRevision) = expected {
@@ -1554,8 +1601,13 @@ private extension CanonicalRuntimeStore {
                 predecessorStateDigest: stored.tombstone?.predecessorDigest
             )
         }
+        guard let privacy = primary.privacy, let localOnly = primary.localOnly else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
         let expectedEvent = try RuntimeAtomicSemanticEventFactory.make(
             command: command,
+            commandPrivacy: privacy,
+            commandLocalOnly: localOnly,
             primaryAggregate: primary.aggregate,
             primaryPriorRevision: terminal.event.mutation.priorRevision,
             primaryResultingRevision: primary.revision,
@@ -1629,13 +1681,13 @@ private extension CanonicalRuntimeStore {
     }
 
     static func persistInvalidations(
-        _ projectionIDs: [String],
+        _ projectionIDs: [RuntimeCanonicalProjectionID],
         lineage: RuntimeAuthorityLineageReference,
         createdAt: Int64,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeAuthorityUnresolvedWorkReference] {
         try projectionIDs.sorted().map { projectionID in
-            let stableID = "invalidation.\(lineage.eventSequence).\(projectionID)"
+            let stableID = "invalidation.\(lineage.eventSequence).\(projectionID.rawValue)"
             let payload = try RuntimeAtomicCommitCoding.encode(lineage)
             try database.execute(
                 """
@@ -1645,7 +1697,7 @@ private extension CanonicalRuntimeStore {
                 ) VALUES (?, ?, ?, 1, ?, ?, ?)
                 """,
                 bindings: [
-                    .text(stableID), .text(projectionID), .integer(Int64(lineage.eventSequence)),
+                    .text(stableID), .text(projectionID.rawValue), .integer(Int64(lineage.eventSequence)),
                     .blob(payload), .text(LocalRuntimeStorageChecksum.sha256Hex(for: payload)),
                     .integer(createdAt),
                 ]
@@ -1769,6 +1821,8 @@ struct RuntimeAtomicSemanticTransitionInput {
 enum RuntimeAtomicSemanticEventFactory {
     static func make(
         command: RuntimeCommandPayload,
+        commandPrivacy: EventLedgerPrivacyClassification,
+        commandLocalOnly: Bool,
         primaryAggregate: RuntimeSemanticAggregate,
         primaryPriorRevision: UInt64?,
         primaryResultingRevision: UInt64,
@@ -1788,6 +1842,10 @@ enum RuntimeAtomicSemanticEventFactory {
         }
         let aggregateTransitions = try transitionInputs.map { input in
             let aggregateState = input.state
+            guard aggregateState.privacy == commandPrivacy,
+                  aggregateState.localOnly == commandLocalOnly else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
             let bytes = try RuntimeCanonicalAggregateStateCodec().encode(aggregateState)
             let tombstone: RuntimeCanonicalTombstoneAuthority?
             if aggregateState.lifecycle == .tombstoned {
@@ -1813,6 +1871,8 @@ enum RuntimeAtomicSemanticEventFactory {
                 transition: aggregateState.transition,
                 canonicalStateBytes: bytes,
                 canonicalStateDigest: LocalRuntimeStorageChecksum.sha256Hex(for: bytes),
+                privacy: commandPrivacy,
+                localOnly: commandLocalOnly,
                 tombstone: tombstone
             )
         }.sorted {
@@ -1828,6 +1888,8 @@ enum RuntimeAtomicSemanticEventFactory {
             priorRevision: primaryPriorRevision,
             resultingRevision: primaryResultingRevision,
             changedObjectIDs: changedObjectIDs,
+            privacy: commandPrivacy,
+            localOnly: commandLocalOnly,
             primaryAggregate: primaryAggregate,
             aggregateTransitions: aggregateTransitions
         )

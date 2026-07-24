@@ -210,6 +210,8 @@ struct RuntimeSemanticEventCodec: Sendable {
                       decodedState.transition == transition.transition,
                       decodedState.commandPayload == event.commandPayload,
                       decodedState.changedObjectIDs == event.mutation.changedObjectIDs,
+                      decodedState.privacy == transition.privacy,
+                      decodedState.localOnly == transition.localOnly,
                       (transition.lifecycle == .tombstoned) == (transition.tombstone != nil),
                       (transition.tombstone.map({ authority in
                           RuntimeStoreManifestCodec.isSHA256Hex(authority.predecessorDigest) &&
@@ -220,6 +222,15 @@ struct RuntimeSemanticEventCodec: Sendable {
             }
         } else if event.mutation.aggregateTransitions.isEmpty == false || event.mutation.primaryAggregate != nil {
             throw RuntimeSemanticEventCodecError.invalidPayload
+        }
+        if envelope.payloadVersion >= 3 {
+            guard let privacy = event.mutation.privacy,
+                  let localOnly = event.mutation.localOnly,
+                  event.mutation.aggregateTransitions.allSatisfy({ transition in
+                      transition.privacy == privacy && transition.localOnly == localOnly
+                  }) else {
+                throw RuntimeSemanticEventCodecError.invalidPayload
+            }
         }
         return RuntimeDecodedSemanticEvent(
             event: event,

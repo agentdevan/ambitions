@@ -10,10 +10,15 @@ struct RuntimeCanonicalReplayCursor: Codable, Sendable, Equatable, Hashable {
     let eventHash: String
 
     var isWellFormed: Bool {
-        sequence > 0 &&
+        self == Self.emptySource || (sequence > 0 &&
             RuntimeEventID(rawValue: eventID)?.rawValue == eventID &&
-            RuntimeStoreManifestCodec.isSHA256Hex(eventHash)
+            RuntimeStoreManifestCodec.isSHA256Hex(eventHash))
     }
+
+    static let emptySource = Self(
+        sequence: 0, eventID: "runtime.empty-source",
+        eventHash: RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
+    )
 
     var typedEventID: RuntimeEventID? { RuntimeEventID(rawValue: eventID) }
     var typedEventHash: SHA256Digest? { try? SHA256Digest(hexadecimal: eventHash) }
@@ -773,26 +778,33 @@ enum CanonicalRuntimeReplaySchemaPlan {
         guard case let .integer(version)? = rows.first?.values.first else {
             throw RuntimeCanonicalReplayError.corruptAuthority
         }
-        guard version == Int64(targetSchemaVersion) else {
+        guard version == Int64(targetSchemaVersion) || version == Int64(runtimeCanonicalProjectionSchemaVersion) else {
             throw RuntimeCanonicalReplayError.migrationRequired(
                 expected: targetSchemaVersion,
                 actual: Int(version)
             )
         }
         let schema = try database.query(
-            "SELECT name, type, sql FROM sqlite_schema WHERE name LIKE 'runtime_%' AND type IN ('table', 'index', 'trigger')"
+            """
+            SELECT name, type, sql FROM sqlite_schema
+            WHERE name LIKE 'runtime_%'
+              AND type IN ('table', 'index', 'trigger')
+            """
         )
-        let statements = CanonicalRuntimeStore.schemaStatements + stagedIntegratedStatements
+        let statements = CanonicalRuntimeStore.schemaStatements + stagedIntegratedStatements +
+            (version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.statements : [])
         let expectedCatalog = try exactSchemaCatalog(statements)
         let observedCatalog = try exactObservedSchemaCatalog(schema)
         let expectedTables = CanonicalRuntimeStore.expectedRuntimeTables
             .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
             .union(CanonicalRuntimeCommitSchemaPlan.tables)
             .union(tables)
+            .union(version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.tables : [])
         let expectedIndexes = CanonicalRuntimeStore.expectedRuntimeIndexes
             .union(CanonicalRuntimeSemanticEventSchemaPlan.indexes)
             .union(CanonicalRuntimeCommitSchemaPlan.indexes)
             .union(indexes)
+            .union(version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.indexes : [])
         guard Set(expectedCatalog.keys.filter { $0.hasPrefix("table:") }.map { String($0.dropFirst(6)) }) == expectedTables,
               Set(expectedCatalog.keys.filter { $0.hasPrefix("index:") }.map { String($0.dropFirst(6)) }) == expectedIndexes,
               observedCatalog == expectedCatalog else {
@@ -810,11 +822,16 @@ enum CanonicalRuntimeReplaySchemaPlan {
             guard tokens.count >= 3, tokens[0].uppercased() == "CREATE" else {
                 throw RuntimeCanonicalReplayError.corruptAuthority
             }
-            let kind = tokens[1].lowercased()
+            let isVirtualTable = tokens.count >= 4 &&
+                tokens[1].lowercased() == "virtual" && tokens[2].lowercased() == "table"
+            let isUniqueIndex = tokens.count >= 4 &&
+                tokens[1].lowercased() == "unique" && tokens[2].lowercased() == "index"
+            let kind = isVirtualTable ? "table" : (isUniqueIndex ? "index" : tokens[1].lowercased())
             guard kind == "table" || kind == "index" || kind == "trigger" else {
                 throw RuntimeCanonicalReplayError.corruptAuthority
             }
-            let key = "\(kind):\(tokens[2])"
+            let name = (isVirtualTable || isUniqueIndex) ? tokens[3] : tokens[2]
+            let key = "\(kind):\(name)"
             guard result.updateValue(normalizedSchemaSQL(statement), forKey: key) == nil else {
                 throw RuntimeCanonicalReplayError.corruptAuthority
             }
@@ -847,6 +864,7 @@ enum CanonicalRuntimeReplaySchemaPlan {
             return (String(key.dropFirst(6)), sql)
         })
         for (table, sql) in tableSQL {
+            if sql.contains(" using fts5") { continue }
             try requireSafeSchemaIdentifier(table)
             let columns = try database.query("PRAGMA table_xinfo('\(table)')")
             let expectedColumns = try topLevelDefinitions(sql).filter { definition in
@@ -1499,6 +1517,120 @@ enum RuntimeCanonicalReplayEngine {
             database: database
         )
     }
+
+    /// Constant-time verification for latency-sensitive consumers. The
+    /// immutable reconstruction row is a durable authenticated continuation;
+    /// full source-chain reconstruction remains owned by the replay audit lane.
+    static func verifiedReconstructionCertificate(
+        at cursor: RuntimeCanonicalReplayCursor,
+        database: isolated SQLiteDatabase
+    ) throws -> (
+        sourceChainDigest: SHA256Digest,
+        reconstructionDigest: SHA256Digest,
+        verifiedAtMilliseconds: Int64
+    ) {
+        guard cursor.isWellFormed, cursor.sequence <= UInt64(Int64.max) else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        let rows = try database.query(
+            """
+            SELECT event_id, event_hash, source_chain_digest,
+                   reconstruction_digest, certificate_digest, verified_at_ms
+            FROM runtime_canonical_replay_verification_certificates
+            WHERE event_sequence = ? LIMIT 2
+            """,
+            bindings: [.integer(Int64(cursor.sequence))]
+        )
+        guard rows.count == 1,
+              rows[0].value(named: "event_id") == .text(cursor.eventID),
+              rows[0].value(named: "event_hash") == .text(cursor.eventHash),
+              case let .text(sourceRaw)? = rows[0].value(named: "source_chain_digest"),
+              let source = try? SHA256Digest(hexadecimal: sourceRaw),
+              case let .text(reconstructionRaw)? = rows[0].value(named: "reconstruction_digest"),
+              let reconstruction = try? SHA256Digest(hexadecimal: reconstructionRaw),
+              case let .text(verificationDigest)? = rows[0].value(named: "certificate_digest"),
+              case let .integer(verifiedAt)? = rows[0].value(named: "verified_at_ms"), verifiedAt >= 0,
+              verificationDigest == verificationCertificateDigest(
+                cursor: cursor,
+                sourceChainDigest: source,
+                reconstructionDigest: reconstruction,
+                verifiedAtMilliseconds: verifiedAt
+              ) else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        let anchor = try database.query(
+            """
+            SELECT event_id, event_hash, occurred_at_ms
+            FROM runtime_semantic_events WHERE sequence = ? LIMIT 2
+            """,
+            bindings: [.integer(Int64(cursor.sequence))]
+        )
+        guard anchor.count == 1,
+              anchor[0].value(named: "event_id") == .text(cursor.eventID),
+              anchor[0].value(named: "event_hash") == .text(cursor.eventHash),
+              anchor[0].value(named: "occurred_at_ms") == .integer(verifiedAt) else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        return (source, reconstruction, verifiedAt)
+    }
+
+    /// Reads the authenticated high-water pointer and its immutable
+    /// continuation certificate without scanning prior semantic events.
+    static func verifiedHighWaterCertificate(
+        database: isolated SQLiteDatabase
+    ) throws -> (
+        cursor: RuntimeCanonicalReplayCursor,
+        sourceChainDigest: SHA256Digest,
+        reconstructionDigest: SHA256Digest,
+        verifiedAtMilliseconds: Int64
+    )? {
+        let rows = try database.query(
+            """
+            SELECT event_sequence, event_id, event_hash, chain_anchor_digest,
+                   reconstruction_digest, verified_at_ms
+            FROM runtime_replay_verified_high_water
+            WHERE singleton_id = 1 LIMIT 2
+            """
+        )
+        guard let row = rows.first else { return nil }
+        guard rows.count == 1,
+              case let .integer(sequence)? = row.value(named: "event_sequence"), sequence > 0,
+              case let .text(eventID)? = row.value(named: "event_id"),
+              case let .text(eventHash)? = row.value(named: "event_hash"),
+              case let .text(sourceRaw)? = row.value(named: "chain_anchor_digest"),
+              let source = try? SHA256Digest(hexadecimal: sourceRaw),
+              case let .text(reconstructionRaw)? = row.value(named: "reconstruction_digest"),
+              let reconstruction = try? SHA256Digest(hexadecimal: reconstructionRaw),
+              case let .integer(verifiedAt)? = row.value(named: "verified_at_ms"), verifiedAt >= 0 else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        let cursor = RuntimeCanonicalReplayCursor(
+            sequence: UInt64(sequence), eventID: eventID, eventHash: eventHash
+        )
+        guard cursor.isWellFormed else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        let continuation = try verifiedReconstructionCertificate(at: cursor, database: database)
+        guard continuation.sourceChainDigest == source,
+              continuation.reconstructionDigest == reconstruction,
+              continuation.verifiedAtMilliseconds == verifiedAt else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        return (cursor, source, reconstruction, verifiedAt)
+    }
+
+    static func verificationCertificateDigest(
+        cursor: RuntimeCanonicalReplayCursor,
+        sourceChainDigest: SHA256Digest,
+        reconstructionDigest: SHA256Digest,
+        verifiedAtMilliseconds: Int64
+    ) -> String {
+        RuntimeTransactionDigest.digest([
+            "runtime.replay.verification.v1", String(cursor.sequence), cursor.eventID,
+            cursor.eventHash, sourceChainDigest.hexadecimal,
+            reconstructionDigest.hexadecimal, String(verifiedAtMilliseconds),
+        ])
+    }
 }
 
 private extension RuntimeCanonicalReplayEngine {
@@ -1641,6 +1773,52 @@ private extension RuntimeCanonicalReplayEngine {
             ]
         )
         guard result.changedRowCount == 1 else { throw RuntimeCanonicalReplayError.corruptAuthority }
+
+        // v4 replay remains shape-compatible. A v5 authority adds immutable,
+        // digest-bound continuation certificates for bounded consumers.
+        let certificateTable = try database.query(
+            "SELECT 1 FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_canonical_replay_verification_certificates' LIMIT 2"
+        )
+        if certificateTable.isEmpty == false {
+            guard certificateTable.count == 1 else { throw RuntimeCanonicalReplayError.corruptAuthority }
+            let certificateDigest = verificationCertificateDigest(
+                cursor: cursor,
+                sourceChainDigest: sourceChainDigest,
+                reconstructionDigest: reconstructionDigest,
+                verifiedAtMilliseconds: verifiedAtMilliseconds
+            )
+            try database.execute(
+                """
+                INSERT OR IGNORE INTO runtime_canonical_replay_verification_certificates(
+                    event_sequence, event_id, event_hash, source_chain_digest,
+                    reconstruction_digest, verified_at_ms, certificate_digest
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                bindings: [
+                    .integer(Int64(cursor.sequence)), .text(cursor.eventID), .text(cursor.eventHash),
+                    .text(sourceChainDigest.hexadecimal), .text(reconstructionDigest.hexadecimal),
+                    .integer(verifiedAtMilliseconds), .text(certificateDigest),
+                ]
+            )
+            let certificate = try database.query(
+                """
+                SELECT event_id, event_hash, source_chain_digest, reconstruction_digest,
+                       verified_at_ms, certificate_digest
+                FROM runtime_canonical_replay_verification_certificates
+                WHERE event_sequence = ? LIMIT 2
+                """,
+                bindings: [.integer(Int64(cursor.sequence))]
+            )
+            guard certificate.count == 1,
+                  certificate[0].value(named: "event_id") == .text(cursor.eventID),
+                  certificate[0].value(named: "event_hash") == .text(cursor.eventHash),
+                  certificate[0].value(named: "source_chain_digest") == .text(sourceChainDigest.hexadecimal),
+                  certificate[0].value(named: "reconstruction_digest") == .text(reconstructionDigest.hexadecimal),
+                  certificate[0].value(named: "verified_at_ms") == .integer(verifiedAtMilliseconds),
+                  certificate[0].value(named: "certificate_digest") == .text(certificateDigest) else {
+                throw RuntimeCanonicalReplayError.corruptAuthority
+            }
+        }
     }
 
     static func verifiedHighWaterMatchesTail(

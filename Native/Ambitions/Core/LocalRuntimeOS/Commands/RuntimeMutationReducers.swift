@@ -198,7 +198,7 @@ private enum RuntimePureMutationDecisionBuilder {
         let writeSet = RuntimeMutationWriteSet(
             transitions: transitions,
             events: events,
-            projectionInvalidations: disposition == .apply ? projectionInvalidations(for: command, feature: feature) : [],
+            projectionInvalidations: disposition == .apply ? projectionInvalidations(for: command) : [],
             receiptIntentID: disposition == .apply ? input.context.receiptID : nil,
             rollbackIntentID: disposition == .apply ? input.context.rollbackPlanID : nil,
             externalEffect: disposition == .apply ? effect : .none
@@ -333,14 +333,13 @@ private enum RuntimePureMutationDecisionBuilder {
         }
     }
 
-    private static func projectionInvalidations(
-        for command: AmbitionsCommand,
-        feature: RuntimePreparationFeature
-    ) -> [String] {
-        var values = ["projection.receipt", "projection.privacy", "projection.search"]
-        values.append("projection.\(feature.rawValue)")
-        if let destination = command.target.destination { values.append("projection.\(destination.rawValue)") }
-        return values
+    private static func projectionInvalidations(for command: AmbitionsCommand) -> [RuntimeCanonicalProjectionID] {
+        switch RuntimeSemanticEventClassifier.classify(command.typedPayload) {
+        case let .mutating(typeID):
+            RuntimeCanonicalProjectionRegistry.projectionIDs(for: typeID)
+        case .nonMutating:
+            []
+        }
     }
 }
 
