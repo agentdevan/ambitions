@@ -755,6 +755,32 @@ final class CanonicalRuntimeStoreGenerationTests: XCTestCase {
         }
     }
 
+    func testIdempotencyCASPreservesSchemaV1FixtureAndShippingStoreOpen() async throws {
+        let applicationSupportURL = try scratchApplicationSupportURL()
+        let manager = try makeManager(applicationSupportURL: applicationSupportURL)
+        let resolved = try await activatedGeneration(using: manager)
+        let fixtureDatabase = try fixtureDatabase(for: resolved)
+
+        let columnRows = try await fixtureDatabase.query(
+            "PRAGMA table_info(runtime_command_idempotency)"
+        )
+        let columns = columnRows.compactMap { row -> String? in
+            guard case let .text(name)? = row.value(named: "name") else { return nil }
+            return name
+        }
+        XCTAssertEqual(columns, [
+            "scope", "idempotency_key", "command_id", "command_fingerprint",
+            "claim_version", "claim_payload", "claimed_at_ms",
+            "final_result_version", "final_result_payload",
+            "final_result_checksum", "finalized_at_ms",
+        ])
+
+        let store = try await CanonicalRuntimeStore.openActive(using: manager)
+        let health = try await store.health()
+        XCTAssertTrue(health.isStructurallyHealthy)
+        XCTAssertEqual(health.effectiveUserVersion, canonicalRuntimeStoreSchemaVersion)
+    }
+
     func testCompiledSchemaRejectsSameNamedIndexWithDifferentDefinition() async throws {
         let applicationSupportURL = try scratchApplicationSupportURL()
         let manager = try makeManager(applicationSupportURL: applicationSupportURL)
