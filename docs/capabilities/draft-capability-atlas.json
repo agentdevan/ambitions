@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_phase_e_draft",
+  "repository": "agentdevan/ambitions",
+  "baseline_branch": "codex/capability-atlas-taxonomy",
+  "status": "draft_for_owner_review",
+  "registry_revision": 1,
+  "default_lifecycle": {
+    "authority_status": "proposed",
+    "specification_maturity": "framed",
+    "implementation_status": "not_assessed",
+    "verification_status": "not_assessed"
+  },
+  "capabilities": [
+    {
+      "capability_id": "CAP-CONTEXT-001",
+      "name": "Skill Transference",
+      "primary_domain_id": "DOM-CONTEXT",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-SIMULATION"],
+      "source_candidate_ids": ["CAND-SEED-001"],
+      "product_promise": "Help a person deliberately recognize and reuse demonstrated skills, strategies, and operating patterns from one life domain in another where the evidence and context make the transfer plausible.",
+      "user_outcome": "The person can carry hard-won capability across work, relationships, health, creativity, learning, and other pursuits instead of repeatedly starting from zero.",
+      "why_it_exists": "People often possess transferable capability without noticing the structural similarity between domains. Ambitions should make that leverage visible without pretending that success in one context guarantees success in another.",
+      "example_experience": "After repeated evidence that the person breaks complex work into small milestones effectively, Ambitions proposes applying that same strategy to learning music, shows the evidence that motivated the suggestion, explains the differences between the domains, and lets the person accept, modify, or dismiss the transfer.",
+      "non_goals": [
+        "Claim that competence automatically transfers between unrelated domains.",
+        "Infer credentials, professional qualification, or guaranteed outcomes.",
+        "Apply a learned pattern to consequential plans without person review.",
+        "Turn local learning into an opaque recommendation feed."
+      ],
+      "required_context": [
+        "person-approved goals, steps, outcomes, reflections, and completion evidence",
+        "inspectable local-learning proposals and confidence",
+        "source-domain and destination-domain constraints",
+        "explicit person corrections, dismissals, and acceptance history"
+      ],
+      "privacy_and_data": {
+        "classification": "private_personal_and_derived",
+        "local_first": true,
+        "requirements": [
+          "Derived transfer proposals remain local unless the person explicitly exports them.",
+          "The person can inspect the evidence, reasoning basis, confidence, and correction path.",
+          "Sensitive-domain evidence is not reused across domains without an explicit lawful and person-controlled basis.",
+          "Corrections and dismissals become local learning evidence without erasing history."
+        ]
+      },
+      "user_controls": [
+        "inspect source evidence",
+        "accept, edit, defer, or dismiss the proposed transfer",
+        "limit or disable transfer across selected life areas",
+        "correct the inferred pattern and preserve the correction"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/systems/local-learning.md",
+        "docs/canon/specifications/systems/privacy-and-data-classification.md",
+        "docs/canon/specifications/objects/goal-path.md"
+      ],
+      "supporting_systems": ["Local Learning", "Private Life Runtime", "Goal Path", "Trust Inspection"],
+      "unresolved_decision_ids": ["DEC-CONTEXT-001-SCOPE"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-PATH-001",
+      "name": "Contextual Generative Goal Pathing",
+      "primary_domain_id": "DOM-PATH",
+      "secondary_domain_ids": ["DOM-CONTEXT", "DOM-TIME", "DOM-SIMULATION"],
+      "source_candidate_ids": ["CAND-SEED-002", "CAND-FA37F984A251FF01"],
+      "product_promise": "Generate a unique, revisable path toward a person's goal using their context, constraints, capacity, learned behaviors, dependencies, uncertainty, and accepted preferences rather than assigning a generic checklist.",
+      "user_outcome": "The person receives a coherent route designed for their actual life, can understand why it was proposed, and can revise it without losing canonical ownership, history, or downstream consequences.",
+      "why_it_exists": "A meaningful goal rarely fails because the person lacks a list of obvious tasks. It fails when the path ignores real capacity, dependencies, prior behavior, ambiguity, and the way the pursuit must coexist with the rest of life.",
+      "example_experience": "A person chooses to become a working photographer. Ambitions proposes several evidence-backed stages, identifies prerequisite skill and portfolio dependencies, fits early steps to available time, marks uncertain assumptions, and projects the accepted canonical Goal Path into Today, Time, Search, Motion, and Trust without creating competing copies.",
+      "non_goals": [
+        "Generate static template checklists and label them personalized.",
+        "Commit generated steps or schedule placements without person acceptance.",
+        "Create separate canonical paths for Today, Time, Search, or other projections.",
+        "Hide uncertainty, constraints, conflicts, or the source of personalization."
+      ],
+      "required_context": [
+        "the person's stated goal and desired outcome",
+        "accepted life-area, time, capacity, dependency, and privacy constraints",
+        "relevant local-learning evidence and corrections",
+        "existing goals, steps, schedule placements, conflicts, and protected commitments",
+        "explicit uncertainty and missing-information markers"
+      ],
+      "privacy_and_data": {
+        "classification": "private_personal_and_derived",
+        "local_first": true,
+        "requirements": [
+          "Path generation and personalization use local canonical state by default.",
+          "The person can inspect which context influenced the proposal.",
+          "Sensitive context is minimized and purpose-bound.",
+          "No external source receives the private life graph merely to generate a path."
+        ]
+      },
+      "user_controls": [
+        "compare proposed path variants",
+        "accept, edit, regenerate, defer, or reject the path",
+        "lock constraints and protected commitments",
+        "inspect assumptions, dependencies, confidence, and projected consequences",
+        "restore or compare prior accepted path revisions"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/objects/goal-path.md",
+        "docs/canon/specifications/systems/local-learning.md",
+        "docs/canon/specifications/systems/scheduling-and-capacity.md",
+        "docs/canon/specifications/surfaces/goals.md",
+        "docs/canon/specifications/surfaces/today.md",
+        "docs/canon/specifications/surfaces/time.md",
+        "docs/canon/specifications/global/search.md"
+      ],
+      "supporting_systems": ["Goal Path", "Local Learning", "Scheduling and Capacity", "Private Life Runtime", "Trust Inspection"],
+      "unresolved_decision_ids": [],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-SIMULATION-001",
+      "name": "Alternate Career Path Simulation",
+      "primary_domain_id": "DOM-SIMULATION",
+      "secondary_domain_ids": ["DOM-CONTEXT", "DOM-PATH", "DOM-TIME"],
+      "source_candidate_ids": ["CAND-SEED-003"],
+      "product_promise": "Let a person explore plausible alternate career paths and compare their assumptions, transitions, skill demands, time horizons, trade-offs, and consequences without mutating the person's committed life graph.",
+      "user_outcome": "The person can reason about a career change as a set of inspectable scenarios rather than a vague fantasy or irreversible plan.",
+      "why_it_exists": "Career decisions combine identity, time, learning, money, opportunity, uncertainty, and family constraints. A useful Personal Life OS should help expose those relationships while remaining honest about what cannot be predicted.",
+      "example_experience": "A person explores staying in product management, moving into iOS product leadership, or pursuing music full time. Ambitions models staged transitions, prerequisite skills, available capacity, likely sacrifices, reversible experiments, and uncertainty. Nothing enters Goals or Time until the person adopts part of a scenario.",
+      "non_goals": [
+        "Predict a person's future career or income with unsupported certainty.",
+        "Provide professional financial, legal, educational, or employment guarantees.",
+        "Mutate committed goals, steps, or schedule placements during exploration.",
+        "Generalize career evidence into every life domain without owner-approved scope."
+      ],
+      "required_context": [
+        "person-entered career interests, constraints, values, and acceptable risk",
+        "current skills and evidence-backed learning history",
+        "time, capacity, financial, family, location, and dependency constraints when available",
+        "public or person-provided reference information with provenance",
+        "explicit unknowns and scenario assumptions"
+      ],
+      "privacy_and_data": {
+        "classification": "private_sensitive_and_derived",
+        "local_first": true,
+        "requirements": [
+          "Career scenarios and private constraints remain local by default.",
+          "External reference research is separated from the private life graph.",
+          "Assumptions and uncertainty remain visible and correctable.",
+          "Export or sharing requires an exact audience-bound preview."
+        ]
+      },
+      "user_controls": [
+        "create, duplicate, compare, revise, archive, or discard scenarios",
+        "adopt selected scenario elements into canonical goals only through explicit review",
+        "change assumptions and immediately inspect consequences",
+        "exclude sensitive constraints from a scenario or export"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/objects/life-branch.md",
+        "docs/canon/specifications/objects/branch-viability-certificate.md",
+        "docs/canon/specifications/systems/local-learning.md",
+        "docs/canon/specifications/systems/scheduling-and-capacity.md",
+        "docs/canon/specifications/systems/privacy-and-data-classification.md"
+      ],
+      "supporting_systems": ["Life Branch", "Branch Viability", "Local Learning", "Scheduling and Capacity", "Source Atlas", "Trust Inspection"],
+      "unresolved_decision_ids": ["DEC-SIMULATION-001-BREADTH"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-TIME-001",
+      "name": "Adaptive Step Placement Reflow",
+      "primary_domain_id": "DOM-TIME",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-EXECUTION"],
+      "source_candidate_ids": ["CAND-SEED-004"],
+      "product_promise": "When a person places or changes a step, recalculate the affected temporal plan around dependencies, protected commitments, real capacity, and accepted constraints, then preview the proposed reflow before consequential mutation.",
+      "user_outcome": "The person can place new work into a living plan without manually repairing every downstream date or losing trust in what moved.",
+      "why_it_exists": "Plans become brittle when every new step or disruption requires manual schedule repair. Reflow should absorb mechanical complexity while keeping the person's commitments and consequences legible.",
+      "example_experience": "A person adds a prerequisite certification step before an application deadline. Ambitions identifies affected dependent steps, protected events, overload, and infeasible placements; proposes a revised sequence; explains every movement; and commits only the version the person accepts.",
+      "non_goals": [
+        "Treat simple list reordering as schedule reflow.",
+        "Move protected commitments or accepted constraints silently.",
+        "Hide conflicts, dropped work, or capacity assumptions.",
+        "Let a scheduling subsystem become the canonical owner of goals or steps."
+      ],
+      "required_context": [
+        "canonical step dependencies and goal-path order",
+        "accepted schedule placements, protected commitments, deadlines, and capacity",
+        "transition friction and relevant execution constraints",
+        "current conflicts, recovery segments, and pending proposals"
+      ],
+      "privacy_and_data": {
+        "classification": "private_personal",
+        "local_first": true,
+        "requirements": [
+          "Reflow operates on canonical local planning state.",
+          "Calendar or external timing evidence remains source-scoped and permission-bound.",
+          "Receipts preserve what changed without exposing private schedule content externally.",
+          "Sensitive commitments may participate in capacity calculations without revealing their content in unrelated surfaces."
+        ]
+      },
+      "user_controls": [
+        "preview and compare reflow proposals",
+        "lock steps, dates, constraints, and protected commitments",
+        "accept all, accept selected changes, edit, or cancel",
+        "inspect movement rationale, conflicts, and dropped alternatives",
+        "undo or restore a prior accepted arrangement through canonical mutation history"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/journeys/schedule-reflow.md",
+        "docs/canon/specifications/systems/scheduling-and-capacity.md",
+        "docs/canon/specifications/objects/schedule-placement.md",
+        "docs/canon/specifications/objects/step.md",
+        "docs/canon/specifications/objects/goal-path.md",
+        "docs/canon/specifications/surfaces/time.md"
+      ],
+      "supporting_systems": ["Scheduling and Capacity", "Goal Path", "Private Life Runtime", "Persistence and Replay", "Trust Inspection"],
+      "unresolved_decision_ids": ["DEC-TIME-001-LEVEL"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-SEARCH-001",
+      "name": "Ambitions Native Search and Command",
+      "primary_domain_id": "DOM-SEARCH",
+      "secondary_domain_ids": ["DOM-IDENTITY", "DOM-APPLE"],
+      "source_candidate_ids": ["CAND-SEED-005", "CAND-B2F829141E0DD9A3", "CAND-939873A894F75DC1"],
+      "product_promise": "Provide one global, fast, private, native command surface for finding Ambitions objects and relationships, asking grounded questions about retrieved local evidence, inspecting trust context, and invoking allowed actions through the canonical mutation owner.",
+      "user_outcome": "The person can reach and act on anything meaningful in Ambitions without navigating a hierarchy or surrendering privacy, provenance, or consequence visibility.",
+      "why_it_exists": "A Personal Life OS eventually contains dense relationships that cannot remain usable through navigation alone. Search must become an operational surface, not a passive list or generic chatbot.",
+      "example_experience": "The person opens Search and types 'the photography step blocked by my certification.' Ambitions finds the canonical step, explains the relationship, offers allowed commands, and can answer a grounded follow-up using retrieved evidence. A reschedule command routes through Time's mutation authority and returns an inspectable receipt.",
+      "non_goals": [
+        "Create a fifth root destination.",
+        "Operate as a generic conversational assistant detached from retrieved evidence.",
+        "Write directly to canonical state or bypass domain mutation ownership.",
+        "Require network access for local object retrieval.",
+        "Expose private snippets to platform indexing without explicit policy and consent."
+      ],
+      "required_context": [
+        "local searchable projections of canonical objects, relationships, history, receipts, and attachments",
+        "allowed command registry and canonical mutation ownership",
+        "result provenance, privacy class, freshness, and confidence",
+        "optional external-source results that remain visibly separate from local truth"
+      ],
+      "privacy_and_data": {
+        "classification": "private_personal_and_sensitive",
+        "local_first": true,
+        "requirements": [
+          "Local search remains useful offline.",
+          "Sensitive content is redacted or omitted from inappropriate result contexts.",
+          "Grounded asking uses retrieved evidence and exposes uncertainty.",
+          "Platform search participation requires bounded projections and explicit privacy policy.",
+          "External results never receive the private life graph as query context by default."
+        ]
+      },
+      "user_controls": [
+        "search exact text, meaning, relationships, and history",
+        "filter by object, life area, time, source, privacy, or state",
+        "inspect why a result matched and what source owns it",
+        "invoke only allowed commands with consequential review",
+        "exclude selected objects or data classes from platform-level indexing"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/global/search.md",
+        "docs/canon/specifications/journeys/search-find-act-inspect.md",
+        "docs/canon/specifications/journeys/search-find-ask-act-inspect.md",
+        "docs/canon/specifications/global/trust-inspection.md",
+        "docs/canon/specifications/systems/privacy-and-data-classification.md",
+        "docs/canon/specifications/systems/apple-ecosystem.md"
+      ],
+      "supporting_systems": ["Search", "Trust Inspection", "Private Life Runtime", "Local Index", "App Intents and Spotlight"],
+      "unresolved_decision_ids": [],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-APPEARANCE-001",
+      "name": "Appearance Studio",
+      "primary_domain_id": "DOM-APPEARANCE",
+      "secondary_domain_ids": ["DOM-IDENTITY"],
+      "source_candidate_ids": ["CAND-SEED-006"],
+      "product_promise": "Give a person a first-class studio within You for shaping Ambitions' visual expression across coherent, native, accessible dimensions with live preview, safe application, and clear restoration.",
+      "user_outcome": "Ambitions can feel personally theirs without becoming inconsistent, inaccessible, decorative, or detached from the product's semantic visual system.",
+      "why_it_exists": "A Personal Life OS is unusually intimate and long-lived. Personal expression should be more meaningful than a theme toggle while remaining bounded by native behavior, accessibility, and shared product grammar.",
+      "example_experience": "The person enters Appearance Studio, previews a coordinated expression across Today, Goals, Time, You, Capture, Search, and focused objects, tests accessibility transformations, compares the current and proposed appearance, and applies or restores the full appearance profile atomically.",
+      "non_goals": [
+        "Allow arbitrary styling that breaks semantic hierarchy or native interaction.",
+        "Hide required state, privacy disclosure, focus, or accessibility cues.",
+        "Turn each surface into an unrelated theme.",
+        "Treat a light/dark toggle alone as a first-class studio."
+      ],
+      "required_context": [
+        "current visual-system constraints and supported appearance dimensions",
+        "the person's accessibility settings and platform appearance",
+        "saved appearance profiles and versioned migrations",
+        "representative previews across critical surfaces and content stress states"
+      ],
+      "privacy_and_data": {
+        "classification": "private_preference",
+        "local_first": true,
+        "requirements": [
+          "Appearance preferences remain local-first and portable through user-controlled backup or export.",
+          "No appearance choice may encode or expose sensitive life content.",
+          "Accessibility needs are treated as sensitive preferences and minimized outside their purpose.",
+          "Sharing an appearance profile requires an exact preview of included preferences."
+        ]
+      },
+      "user_controls": [
+        "preview before applying",
+        "edit supported dimensions within safe ranges",
+        "test light, dark, increased contrast, reduced transparency, reduced motion, and large-text transformations",
+        "save, duplicate, rename, restore, reset, import, or export supported profiles"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/surfaces/you.md",
+        "docs/canon/standards/accessibility.md",
+        "docs/canon/standards/swiftui-and-design-system.md",
+        "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md",
+        "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md"
+      ],
+      "supporting_systems": ["You", "Appearance Profile", "Design System", "Accessibility", "Persistence and Replay"],
+      "unresolved_decision_ids": ["DEC-APPEARANCE-001-DEPTH"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-SHARING-001",
+      "name": "Content Share Studio",
+      "primary_domain_id": "DOM-SHARING",
+      "secondary_domain_ids": ["DOM-IDENTITY", "DOM-KNOWLEDGE"],
+      "source_candidate_ids": ["CAND-SEED-007"],
+      "product_promise": "Provide a deliberate studio for transforming selected Ambitions content into an audience-appropriate external representation with privacy review, provenance, redaction, exact preview, and explicit release.",
+      "user_outcome": "The person can share the meaning of a goal, plan, reflection, proof, or other supported content without dumping private internal state or manually rebuilding the material elsewhere.",
+      "why_it_exists": "Ambitions contains deeply contextual private information. Useful sharing requires composition and disclosure control, not a blind serialization of internal objects into the system share sheet.",
+      "example_experience": "A person shares a goal plan with a partner. The studio proposes a concise visual and document version, includes selected milestones, removes internal learning inferences and unrelated attachments, shows every included field and source, and releases only after exact preview and confirmation.",
+      "non_goals": [
+        "Publish content automatically or create a social feed.",
+        "Expose private object graphs, hidden metadata, internal reasoning, or unrelated context.",
+        "Mutate the canonical source while composing a share artifact.",
+        "Treat a raw share-sheet handoff as the complete capability."
+      ],
+      "required_context": [
+        "person-selected source objects and supported relationships",
+        "field-level privacy, sensitivity, provenance, and audience rules",
+        "available share templates and export formats",
+        "attachment inclusion policy and revocation or expiry where supported"
+      ],
+      "privacy_and_data": {
+        "classification": "private_to_explicit_external_release",
+        "local_first": true,
+        "requirements": [
+          "Nothing leaves Ambitions before exact audience-bound preview and confirmation.",
+          "Sensitive and derived data are excluded by default unless specifically selected and allowed.",
+          "The external artifact records provenance and disclosure scope without leaking private internal identifiers.",
+          "Generated share artifacts are managed as explicit exports with visible lifecycle."
+        ]
+      },
+      "user_controls": [
+        "select source objects, fields, relationships, and attachments",
+        "choose audience, format, detail level, and expiration where supported",
+        "review privacy warnings and redactions",
+        "preview the exact external artifact",
+        "cancel, export, share, revoke, or delete retained export artifacts where technically possible"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/surfaces/you.md",
+        "docs/canon/specifications/systems/privacy-and-data-classification.md",
+        "docs/canon/specifications/systems/import-export-repair.md",
+        "docs/canon/specifications/objects/attachment.md",
+        "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md"
+      ],
+      "supporting_systems": ["You", "Privacy and Data Classification", "Import Export and Repair", "Attachments", "Trust Inspection"],
+      "unresolved_decision_ids": ["DEC-SHARING-001-FORMATS"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-KNOWLEDGE-001",
+      "name": "Goal-Attached Files and Knowledge",
+      "primary_domain_id": "DOM-KNOWLEDGE",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-SEARCH"],
+      "source_candidate_ids": ["CAND-SEED-008"],
+      "product_promise": "Let a person keep files, references, notes, and supporting knowledge durably attached to a goal so the material remains locally available, searchable, inspectable, exportable, recoverable, and connected to the pursuit it informs.",
+      "user_outcome": "The person no longer has to remember which external folder, message, note, or browser tab contains the material needed to advance a goal.",
+      "why_it_exists": "Goals depend on evidence and working material, not only steps. Without first-class knowledge relationships, the path loses context and Ambitions becomes another isolated planner beside the person's real information.",
+      "example_experience": "A photography goal contains a course PDF, inspiration images, a contract draft, notes, and source links. Ambitions preserves each attachment's identity and provenance, indexes allowed local content, surfaces the right material from Search or a step, and includes it in backup, restore, export, and deletion review.",
+      "non_goals": [
+        "Become a general-purpose file manager or cloud-drive replacement.",
+        "Copy every external file into Ambitions without person intent.",
+        "Treat attachment metadata and payload availability as the same thing.",
+        "Expose file content through Search, sharing, backup, or platform indexing without applicable privacy controls."
+      ],
+      "required_context": [
+        "canonical goal identity and attachment relationship",
+        "attachment metadata, payload state, provenance, checksum or identity where applicable",
+        "local indexing eligibility and content type",
+        "backup, restore, deletion, export, sync, and unavailable-payload state"
+      ],
+      "privacy_and_data": {
+        "classification": "private_content_variable_sensitivity",
+        "local_first": true,
+        "requirements": [
+          "Attachment metadata and payloads inherit or strengthen the owning goal's privacy boundary.",
+          "Content indexing is local and permission-bound by default.",
+          "Missing, stale, externally changed, or unavailable payloads remain explicitly represented.",
+          "Deletion, export, backup, restore, and sharing distinguish references from owned payloads."
+        ]
+      },
+      "user_controls": [
+        "attach, link, import, annotate, rename, relocate, detach, replace, export, or delete supported material",
+        "choose whether Ambitions stores a payload, security-scoped reference, or source link",
+        "control local content indexing and sharing eligibility",
+        "inspect provenance, availability, storage impact, backup state, and affected relationships"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/objects/attachment.md",
+        "docs/canon/specifications/objects/source-reference.md",
+        "docs/canon/specifications/objects/note.md",
+        "docs/canon/specifications/objects/goal.md",
+        "docs/canon/specifications/global/search.md",
+        "docs/canon/specifications/systems/persistence-and-replay.md",
+        "docs/canon/specifications/systems/import-export-repair.md"
+      ],
+      "supporting_systems": ["Attachments", "Persistence and Replay", "Search", "Import Export and Repair", "Sync and Continuity"],
+      "unresolved_decision_ids": ["DEC-KNOWLEDGE-001-SCOPE"],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    },
+    {
+      "capability_id": "CAP-RESILIENCE-001",
+      "name": "Local-First Operational Continuity",
+      "primary_domain_id": "DOM-RESILIENCE",
+      "secondary_domain_ids": ["DOM-EXECUTION", "DOM-SEARCH", "DOM-IDENTITY"],
+      "source_candidate_ids": ["CAND-C6F2EE04321B7240", "CAND-71C0E590F9213175"],
+      "product_promise": "Keep valid committed local truth understandable and operational through offline use, stale or partial external evidence, interruption, failure, conflict, and recovery, with explicit disclosure and deterministic repair rather than a separate error product.",
+      "user_outcome": "The person can keep using Ambitions when connectivity or external systems fail and can understand exactly what remains valid, what is unavailable, what changed, and how recovery will occur.",
+      "why_it_exists": "A local-first Personal Life OS cannot become useless or misleading when an external source is absent. Resilience must be a cross-product behavioral guarantee rather than a collection of disconnected error screens.",
+      "example_experience": "Without connectivity, Today continues to show locally committed work and Search continues to retrieve local objects. External calendar freshness and public-source results are visibly stale or unavailable. Local mutations remain canonical, receipts are preserved, and later reconciliation is previewed rather than silently overwriting the person's work.",
+      "non_goals": [
+        "Pretend unavailable external data is current.",
+        "Block valid local work because an optional external source failed.",
+        "Create a universal warning dashboard or technical error console.",
+        "Promise offline operation for functions whose necessary source is inherently external.",
+        "Resolve conflicts by silently discarding local or external history."
+      ],
+      "required_context": [
+        "canonical local state and durable mutation history",
+        "source freshness, availability, permission, and sync state",
+        "queued local consequences and reconciliation proposals",
+        "capability-specific degraded-state rules",
+        "backup, restoration, replay, and repair evidence"
+      ],
+      "privacy_and_data": {
+        "classification": "inherits_affected_capability_with_private_operational_metadata",
+        "local_first": true,
+        "requirements": [
+          "Valid local truth remains authoritative over optional external availability.",
+          "Operational diagnostics disclose enough to support repair without exposing sensitive content unnecessarily.",
+          "Queued mutations and receipts remain protected as private history.",
+          "Recovery never exports private life data merely to diagnose or repair local state."
+        ]
+      },
+      "user_controls": [
+        "continue with valid local work",
+        "inspect freshness, availability, queue, conflict, and recovery state in context",
+        "retry, defer, cancel, repair, restore, or reconcile supported operations",
+        "preview conflict resolution before consequential replacement",
+        "export bounded diagnostics without private content where supported"
+      ],
+      "supporting_canon_sources": [
+        "docs/canon/specifications/app/degraded-states.md",
+        "docs/canon/specifications/systems/persistence-and-replay.md",
+        "docs/canon/specifications/systems/sync-and-continuity.md",
+        "docs/canon/specifications/systems/import-export-repair.md",
+        "docs/canon/specifications/surfaces/today.md",
+        "docs/canon/specifications/global/search.md"
+      ],
+      "supporting_systems": ["Private Life Runtime", "Persistence and Replay", "Sync and Continuity", "Import Export and Repair", "Diagnostics", "Trust Inspection"],
+      "unresolved_decision_ids": [],
+      "authority_status": "proposed",
+      "specification_maturity": "framed",
+      "implementation_status": "not_assessed",
+      "verification_status": "not_assessed"
+    }
+  ]
+}
