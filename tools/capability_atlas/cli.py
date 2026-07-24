@@ -1,4 +1,4 @@
-"""Command-line interface for non-normative capability discovery."""
+"""Command-line interface for the non-normative Capability Atlas program."""
 
 from __future__ import annotations
 
@@ -16,6 +16,11 @@ from tools.capability_atlas.classification_pipeline import (
 )
 from tools.capability_atlas.discover import compile_discovery
 from tools.capability_atlas.model import CapabilityDiscoveryError
+from tools.capability_atlas.taxonomy import (
+    TAXONOMY_PATH,
+    TAXONOMY_VALIDATION_PATH,
+    validate_taxonomy,
+)
 
 
 SUPPORTED_COMMANDS = frozenset({"version", "build", "check"})
@@ -25,30 +30,37 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ambitions-capabilities",
         description=(
-            "Harvest and classify non-normative Ambitions capability candidates with stable provenance."
+            "Harvest, classify, and validate non-normative Ambitions capability artifacts with stable provenance."
         ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
-    subparsers.add_parser("version", help="print discovery tool version")
+    subparsers.add_parser("version", help="print Capability Atlas tool version")
     subparsers.add_parser(
         "build",
-        help="scan configured sources and write deterministic discovery and classification artifacts",
+        help="write deterministic discovery, classification, and available taxonomy artifacts",
     )
     subparsers.add_parser(
         "check",
-        help="scan configured sources and reject checked-in capability artifact drift",
+        help="reject invalid or drifted Capability Atlas program artifacts",
     )
     return parser
 
 
-def _summary(compilation: object, elapsed_ms: int) -> str:
+def _summary(
+    compilation: object,
+    elapsed_ms: int,
+    *,
+    taxonomy_validated: bool,
+) -> str:
     candidates = getattr(compilation, "candidates")
     source_files = getattr(compilation, "source_files")
     coverage = getattr(compilation, "coverage")
     blocked = sum(item.status == "blocked" for item in coverage)
+    taxonomy = ", taxonomy validated" if taxonomy_validated else ""
     return (
         f"{len(candidates)} candidates, {len(source_files)} source files, "
-        f"{len(coverage)} source families, {blocked} blocked ({elapsed_ms} ms)"
+        f"{len(coverage)} source families, {blocked} blocked{taxonomy} "
+        f"({elapsed_ms} ms)"
     )
 
 
@@ -64,6 +76,13 @@ def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:
     try:
         compilation = compile_discovery(repository_root)
         outputs = render_outputs(compilation)
+        taxonomy_validated = False
+        if (repository_root / TAXONOMY_PATH).exists():
+            validation = validate_taxonomy(repository_root, compilation)
+            validation.require_valid()
+            outputs[TAXONOMY_VALIDATION_PATH] = validation.render()
+            taxonomy_validated = True
+
         if args.command == "check":
             drift = output_drift(repository_root, outputs)
             if drift:
@@ -78,7 +97,10 @@ def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:
             write_outputs(repository_root, outputs)
         elapsed_ms = round((time.monotonic() - started) * 1000)
         verb = "checked" if args.command == "check" else "built"
-        print(f"Capability discovery {verb}: {_summary(compilation, elapsed_ms)}.")
+        print(
+            f"Capability Atlas artifacts {verb}: "
+            f"{_summary(compilation, elapsed_ms, taxonomy_validated=taxonomy_validated)}."
+        )
         return 0
     except CapabilityDiscoveryError as exc:
         print(f"CAPABILITY_DISCOVERY_ERROR {exc}", file=sys.stderr)
