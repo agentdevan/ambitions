@@ -157,6 +157,12 @@ private enum FoundryVariant: String {
     case b02FullDayRTL = "b02-full-day-rtl"
     case b02FullDayCompact = "b02-full-day-compact"
     case b02FullDayAccessibility5 = "b02-full-day-accessibility5"
+    case b02FocusedTypical = "b02-focused-typical"
+    case b02FocusedDense = "b02-focused-dense"
+    case b02FocusedAccessibility5 = "b02-focused-accessibility5"
+    case b02FocusedRTL = "b02-focused-rtl"
+    case b02FocusedContrast = "b02-focused-contrast"
+    case b02FocusedLongLTR = "b02-focused-long-ltr"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -186,7 +192,7 @@ private enum FoundryVariant: String {
         case .accessibilityDark, .tfcsF05, .reviewAccessibility,
                 .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
-        case .b02FullDayAccessibility5:
+        case .b02FullDayAccessibility5, .b02FocusedAccessibility5:
             .accessibility5
         default:
             .large
@@ -195,7 +201,9 @@ private enum FoundryVariant: String {
 
     var initialPhase: TodayFlagshipJourneyPhase {
         switch self {
-        case .tfcsF06, .stateCancelled, .stressLongRTL:
+        case .tfcsF06, .stateCancelled, .stressLongRTL,
+                .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
+                .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent
         case .tfcsF07, .stressContrast, .reviewAccessibility:
             .reviewingProposal
@@ -218,10 +226,12 @@ private enum FoundryVariant: String {
 
     var content: TodayFlagshipCalibrationContent {
         switch self {
-        case .tfcsF03, .stateDense, .b02FullDayDense:
+        case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
-        case .stressLongRTL, .b02FullDayRTL:
+        case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
+        case .b02FocusedLongLTR:
+            TodayFlagshipCalibrationFixture.preparingForBaby.longContent
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
         }
@@ -229,10 +239,12 @@ private enum FoundryVariant: String {
 
     var dockExpanded: Bool { self == .tfcsF04 }
 
-    var rightToLeft: Bool { self == .stressLongRTL || self == .b02FullDayRTL }
+    var rightToLeft: Bool {
+        self == .stressLongRTL || self == .b02FullDayRTL || self == .b02FocusedRTL
+    }
 
     var localeIdentifier: String {
-        self == .stressLongRTL || self == .b02FullDayRTL ? "ar-SA" : "en-US"
+        rightToLeft ? "ar-SA" : "en-US"
     }
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {

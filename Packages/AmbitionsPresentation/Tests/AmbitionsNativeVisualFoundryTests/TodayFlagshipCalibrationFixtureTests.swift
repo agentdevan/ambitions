@@ -411,6 +411,68 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
     }
 
+    func testB02FocusedStepUsesOneNaturalDepthAndOneOutcome() throws {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let step = fixture.primaryStep
+
+        XCTAssertEqual(step.id, "step.nursery-ready-for-crib")
+        XCTAssertEqual(step.parentPursuitID, "goal.welcome-baby-home")
+        XCTAssertFalse(step.currentAcceptedTruth.isEmpty)
+        XCTAssertFalse(step.whyItFitsNow.isEmpty)
+        XCTAssertFalse(step.materialConsequence.isEmpty)
+        XCTAssertFalse(step.temporalContext.relationship.isEmpty)
+        XCTAssertEqual(step.stillCountsProposal.outcomeTitle, "Still counts")
+
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let source = try String(
+            contentsOf: packageRoot
+                .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+                .appendingPathComponent("TodayOpenContinuityFocusedObject.swift"),
+            encoding: .utf8
+        )
+        let focusedWrapperSource = try String(
+            contentsOf: packageRoot
+                .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+                .appendingPathComponent("TodayFlagshipFocusedStepView.swift"),
+            encoding: .utf8
+        )
+
+        let orderedMarkers = [
+            "tfcs-focused-identity",
+            "tfcs-focused-parent-pursuit",
+            "tfcs-focused-current-truth",
+            "tfcs-focused-why-now",
+            "tfcs-focused-protected-consequence",
+            "tfcs-focused-temporal-anchor",
+            "tfcs-select-still-counts"
+        ]
+        let markerOffsets = try orderedMarkers.map { marker in
+            try XCTUnwrap(source.range(of: marker)?.lowerBound)
+        }
+        for pair in zip(markerOffsets, markerOffsets.dropFirst()) {
+            XCTAssertLessThan(pair.0, pair.1)
+        }
+
+        XCTAssertFalse(source.contains("Form"))
+        XCTAssertFalse(source.contains("Settings"))
+        XCTAssertFalse(source.contains("Other outcomes"))
+        XCTAssertFalse(source.contains("Done · Move it · Waiting · Blocked · Not needed"))
+        XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(source.contains("accessibilityParentPursuit"))
+        XCTAssertEqual(
+            source.components(separatedBy: "tfcs-select-still-counts").count - 1,
+            1
+        )
+        XCTAssertFalse(
+            focusedWrapperSource.contains(
+                ".navigationTitle(content.interfaceCopy.startHereTitle)"
+            )
+        )
+    }
+
     private func primaryViewSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
@@ -423,6 +485,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             "TodayFlagshipCalibrationView.swift",
             "TodayOpenContinuityRoot.swift",
             "TodayOpenContinuityTimeline.swift",
+            "TodayOpenContinuityFocusedObject.swift",
             "TodayFlagshipFocusedStepView.swift",
             "TodayFlagshipNavigationChrome.swift",
             "TodayFlagshipRecoveryReviewView.swift",

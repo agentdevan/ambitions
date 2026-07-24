@@ -9,6 +9,38 @@ struct TodayFlagshipFocusedStepView: View {
     @Binding var state: TodayFlagshipJourneyState
 
     var body: some View {
+        Group {
+            if state.phase == .focusedCurrent {
+                TodayOpenContinuityFocusedObject(
+                    content: content,
+                    acceptedTruth: state.acceptedTruth,
+                    palette: palette,
+                    shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    isOutcomeEnabled: true,
+                    onSelectStillCounts: {
+                        _ = state.selectStillCounts()
+                    }
+                )
+            } else {
+                legacyStateScroll
+            }
+        }
+        .background(palette.semanticPlane.ignoresSafeArea())
+        .foregroundStyle(palette.primaryInk)
+        .navigationTitle(state.phase == .settled ? content.interfaceCopy.settlementTitle : "")
+        .todayFlagshipInlineNavigationTitle()
+        .todayFlagshipBackButtonHidden(state.phase == .settled)
+        .onAppear {
+            accessibilityFocus = state.focusAnchor
+        }
+        .onChange(of: state.phase) { _, _ in
+            accessibilityFocus = state.focusAnchor
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("tfcs-focused-step")
+    }
+
+    private var legacyStateScroll: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 25) {
                 if state.phase == .settled {
@@ -40,22 +72,6 @@ struct TodayFlagshipFocusedStepView: View {
             .padding(.bottom, 50)
         }
         .scrollIndicators(.hidden)
-        .background(palette.semanticPlane.ignoresSafeArea())
-        .foregroundStyle(palette.primaryInk)
-        .navigationTitle(
-            state.phase == .settled
-                ? content.interfaceCopy.settlementTitle
-                : content.interfaceCopy.startHereTitle
-        )
-        .todayFlagshipInlineNavigationTitle()
-        .todayFlagshipBackButtonHidden(state.phase == .settled)
-        .onAppear {
-            accessibilityFocus = state.focusAnchor
-        }
-        .onChange(of: state.phase) { _, _ in
-            accessibilityFocus = state.focusAnchor
-        }
-        .accessibilityIdentifier("tfcs-focused-step")
     }
 
     private var identity: some View {

@@ -83,6 +83,43 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("B02 Focused Step · Typical · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .focusedCurrent)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Focused Step · Dense context · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.denseToday,
+        phase: .focusedCurrent
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Focused Step · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .focusedCurrent)
+        .preferredColorScheme(.dark)
+        .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("B02 Focused Step · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .focusedCurrent
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
+}
+
+#Preview("B02 Focused Step · Long LTR") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
+        phase: .focusedCurrent
+    )
+    .preferredColorScheme(.dark)
+}
+
 #Preview("TFCS-F07 · Consequential review · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
         .preferredColorScheme(.dark)

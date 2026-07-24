@@ -635,6 +635,71 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[settledTruth].exists)
     }
 
+    func testB02FocusedStepUsesOneNaturalDepthAndOneOutcome() {
+        launch("b02-focused-typical")
+
+        let identity = element("tfcs-focused-identity")
+        let parent = element("tfcs-focused-parent-pursuit")
+        let current = element("tfcs-focused-current-truth")
+        let currentTruth = element("tfcs-current-truth")
+        let whyNow = element("tfcs-focused-why-now")
+        let protectedConsequence = element("tfcs-focused-protected-consequence")
+        let temporal = element("tfcs-focused-temporal-anchor")
+        let stillCounts = element("tfcs-select-still-counts")
+
+        assertExists([
+            identity,
+            parent,
+            current,
+            currentTruth,
+            whyNow,
+            protectedConsequence,
+            temporal,
+            stillCounts
+        ])
+        XCTAssertTrue(identity.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(parent.label.contains("Welcome our baby home"))
+        XCTAssertTrue(
+            currentTruth.label.contains("The corner is cleared and the paint sample is chosen.")
+        )
+        XCTAssertLessThan(identity.frame.minY, parent.frame.minY, "\(identity.frame) then \(parent.frame)")
+        XCTAssertLessThan(parent.frame.minY, current.frame.minY, "\(parent.frame) then \(current.frame)")
+        XCTAssertLessThan(current.frame.minY, whyNow.frame.minY, "\(current.frame) then \(whyNow.frame)")
+        XCTAssertLessThan(
+            whyNow.frame.minY,
+            protectedConsequence.frame.minY,
+            "\(whyNow.frame) then \(protectedConsequence.frame)"
+        )
+        XCTAssertLessThan(
+            protectedConsequence.frame.minY,
+            temporal.frame.minY,
+            "\(protectedConsequence.frame) then \(temporal.frame)"
+        )
+        XCTAssertEqual(app.buttons.matching(identifier: "tfcs-select-still-counts").count, 1)
+        XCTAssertTrue(stillCounts.isHittable)
+        assertMinimumTarget(stillCounts)
+        XCTAssertTrue(app.navigationBars.buttons.firstMatch.exists)
+        XCTAssertFalse(app.navigationBars.staticTexts["Start Here"].exists)
+        XCTAssertFalse(app.staticTexts["Done · Move it · Waiting · Blocked · Not needed"].exists)
+        XCTAssertFalse(app.buttons["Other outcomes"].exists)
+    }
+
+    func testB02FocusedStepAccessibilityKeepsOutcomeReachableByNaturalScroll() {
+        launch("b02-focused-accessibility5")
+
+        let identity = element("tfcs-focused-identity")
+        let stillCounts = element("tfcs-select-still-counts")
+        XCTAssertTrue(identity.waitForExistence(timeout: 3))
+
+        for _ in 0..<6 where stillCounts.isHittable == false {
+            app.swipeUp()
+        }
+
+        XCTAssertTrue(stillCounts.exists)
+        XCTAssertTrue(stillCounts.isHittable)
+        assertMinimumTarget(stillCounts)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()
