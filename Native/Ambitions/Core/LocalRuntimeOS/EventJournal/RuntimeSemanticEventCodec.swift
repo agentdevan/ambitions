@@ -119,7 +119,7 @@ struct RuntimeSemanticEventCodec: Sendable {
         let envelope = RuntimeSemanticEventWireEnvelope(
             envelopeVersion: Self.currentEnvelopeVersion,
             typeID: event.typeID.rawValue,
-            payloadVersion: event.typeID.latestPayloadVersion,
+            payloadVersion: event.mutation.aggregateTransitions.isEmpty ? 1 : event.typeID.latestPayloadVersion,
             payload: payloadBytes
         )
         let bytes: Data
@@ -185,6 +185,41 @@ struct RuntimeSemanticEventCodec: Sendable {
             }
             event = try decodeLatest(typeID: typeID, payload: envelope.payload)
             wasUpcast = false
+        }
+        if envelope.payloadVersion >= 2 {
+            guard let primary = event.mutation.primaryAggregate,
+                  event.mutation.aggregateTransitions.isEmpty == false,
+                  event.mutation.aggregateTransitions.contains(where: { $0.aggregate == primary }) else {
+                throw RuntimeSemanticEventCodecError.invalidPayload
+            }
+            for transition in event.mutation.aggregateTransitions {
+                let decodedState: RuntimeCanonicalAggregateState
+                do {
+                    decodedState = try RuntimeCanonicalAggregateStateCodec().decode(transition.canonicalStateBytes)
+                } catch {
+                    throw RuntimeSemanticEventCodecError.invalidPayload
+                }
+                guard RuntimeStoreManifestCodec.isSHA256Hex(transition.canonicalStateDigest),
+                      transition.canonicalStateDigest == transition.canonicalStateDigest.lowercased(),
+                      transition.canonicalStateDigest == LocalRuntimeStorageChecksum.sha256Hex(
+                          for: transition.canonicalStateBytes
+                      ),
+                      decodedState.aggregate == transition.aggregate,
+                      decodedState.revision == transition.resultingRevision,
+                      decodedState.lifecycle == transition.lifecycle,
+                      decodedState.transition == transition.transition,
+                      decodedState.commandPayload == event.commandPayload,
+                      decodedState.changedObjectIDs == event.mutation.changedObjectIDs,
+                      (transition.lifecycle == .tombstoned) == (transition.tombstone != nil),
+                      (transition.tombstone.map({ authority in
+                          RuntimeStoreManifestCodec.isSHA256Hex(authority.predecessorDigest) &&
+                              authority.predecessorDigest == authority.predecessorDigest.lowercased()
+                      }) ?? true) else {
+                    throw RuntimeSemanticEventCodecError.invalidPayload
+                }
+            }
+        } else if event.mutation.aggregateTransitions.isEmpty == false || event.mutation.primaryAggregate != nil {
+            throw RuntimeSemanticEventCodecError.invalidPayload
         }
         return RuntimeDecodedSemanticEvent(
             event: event,

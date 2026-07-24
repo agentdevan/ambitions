@@ -4,11 +4,6 @@ import Foundation
 let runtimeAtomicCommitSchemaVersion = 3
 let runtimeAtomicCommitReceiptVersion = 1
 
-enum RuntimeAggregateLifecycle: String, Codable, Sendable, Equatable, Hashable {
-    case active
-    case tombstoned
-}
-
 /// The single canonical aggregate representation used both when committing
 /// and when replaying aggregate authority. It deliberately contains semantic
 /// command facts, not a repository object or a projection model.
@@ -75,6 +70,7 @@ struct RuntimeCanonicalTombstoneDraft: Codable, Sendable, Equatable, Hashable {
     let family: String
     let terminalRevision: UInt64
     let lineage: RuntimeAuthorityLineageReference
+    let authority: RuntimeCanonicalTombstoneAuthority
 }
 
 struct RuntimeCanonicalPendingExternalOperation: Codable, Sendable, Equatable, Hashable {
@@ -166,8 +162,9 @@ extension RuntimeAtomicCommitError: CustomStringConvertible, LocalizedError {
 enum CanonicalRuntimeCommitSchemaPlan {
     static let sourceSchemaVersion = 1
     static let targetSchemaVersion = runtimeAtomicCommitSchemaVersion
+    static let currentWritableSchemaVersion = runtimeCanonicalReplaySchemaVersion
     static let readableActiveSchemaVersions: Set<Int> = [sourceSchemaVersion]
-    static let writableAuthoritySchemaVersions: Set<Int> = [targetSchemaVersion]
+    static let writableAuthoritySchemaVersions: Set<Int> = [currentWritableSchemaVersion]
     static let tables: Set<String> = [
         "runtime_commit_receipts", "runtime_commit_projection_invalidations",
         "runtime_pending_external_operations", "runtime_confirmation_consumptions",
@@ -263,9 +260,13 @@ enum CanonicalRuntimeCommitSchemaPlan {
         guard case let .integer(version)? = versionRows.first?.values.first else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        guard version == Int64(targetSchemaVersion) else {
-            throw RuntimeAtomicCommitError.migrationRequired(expected: targetSchemaVersion, actual: Int(version))
+        guard writableAuthoritySchemaVersions.contains(Int(version)) else {
+            throw RuntimeAtomicCommitError.migrationRequired(
+                expected: currentWritableSchemaVersion,
+                actual: Int(version)
+            )
         }
+        try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
         let rows = try database.query(
             "SELECT name, type FROM sqlite_schema WHERE name LIKE 'runtime_%' AND type IN ('table', 'index')"
         )
@@ -279,12 +280,16 @@ enum CanonicalRuntimeCommitSchemaPlan {
                   case let .text(name)? = row.value(named: "name") else { return nil }
             return name
         })
-        let expectedTables = CanonicalRuntimeStore.expectedRuntimeTables
+        var expectedTables = CanonicalRuntimeStore.expectedRuntimeTables
             .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
             .union(tables)
-        let expectedIndexes = CanonicalRuntimeStore.expectedRuntimeIndexes
+        var expectedIndexes = CanonicalRuntimeStore.expectedRuntimeIndexes
             .union(CanonicalRuntimeSemanticEventSchemaPlan.indexes)
             .union(indexes)
+        if version == Int64(runtimeCanonicalReplaySchemaVersion) {
+            expectedTables.formUnion(CanonicalRuntimeReplaySchemaPlan.tables)
+            expectedIndexes.formUnion(CanonicalRuntimeReplaySchemaPlan.indexes)
+        }
         guard tableNames == expectedTables, indexNames == expectedIndexes else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
@@ -293,7 +298,7 @@ enum CanonicalRuntimeCommitSchemaPlan {
         )
         guard metadataRows.count == 1,
               case let .integer(metadataVersion)? = metadataRows.first?.value(named: "schema_version"),
-              metadataVersion == Int64(targetSchemaVersion) else {
+              metadataVersion == version else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
     }
@@ -454,10 +459,13 @@ private enum RuntimeAtomicCommitValidation {
               preparation.authorization.sideEffectPolicy == expectedPolicy,
               preparation.decision.family == feature.rawValue,
               preparation.decision.action == preparation.command.typedPayload.diagnosticCase,
-              preparation.decision.readSet.objects.map(\.objectID) ==
-                preparation.command.target.runtimePreparationObjectIDs,
+              preparation.decision.readSet.objects.map(\.aggregate) ==
+                preparation.command.runtimePreparationAggregateReferences,
               preparation.decision.readSet.objects.allSatisfy({ dependency in
-                  dependency.expectedRevision == preparation.command.expectedRevision &&
+                  let expected = dependency.aggregate == preparation.command.runtimePrimaryPreparationReference
+                    ? preparation.command.expectedRevision
+                    : dependency.observedRevision
+                  return dependency.expectedRevision == expected &&
                     RuntimePreparationAuthorizer().revisionMatches(
                         expected: dependency.expectedRevision,
                         observed: dependency.observedRevision
@@ -595,59 +603,43 @@ extension CanonicalRuntimeStore {
             let correlationID = try RuntimeCorrelationID(
                 validating: "correlation.\(preparation.preparationID.rawValue)"
             )
-            var causationEventID: RuntimeEventID?
-            var eventRecords: [CanonicalRuntimeSemanticEventRecord] = []
-            for (index, result) in casResults.sorted(by: { $0.key < $1.key }).enumerated() {
-                let eventID: RuntimeEventID
-                if result.key == plan.primaryKey {
-                    eventID = plan.eventIntent.id
-                } else {
-                    eventID = try RuntimeEventID(
-                        validating: "\(plan.eventIntent.id.rawValue).aggregate.\(index)"
-                    )
-                }
-                let semanticEvent = try RuntimeAtomicSemanticEventFactory.make(
-                    command: preparation.command.typedPayload,
-                    aggregateID: try RuntimeAggregateID(validating: result.key.id),
-                    priorRevision: try plan.priorRevision(for: result.key),
-                    resultingRevision: result.revision,
-                    changedObjectIDs: plan.changedObjectIDs
-                )
-                let encoded = try RuntimeSemanticEventCodec().encode(semanticEvent)
-                let eventBytes = semanticEventBytesOverride ?? encoded
-                let append = try CanonicalRuntimeSemanticEventStore.appendInTransaction(
-                    try CanonicalRuntimeSemanticEventAppendRequest(
-                        eventID: eventID,
-                        commandID: preparation.commandID,
-                        aggregate: RuntimeSemanticAggregate(
-                            kind: semanticEvent.aggregateKind,
-                            id: try RuntimeAggregateID(validating: result.key.id)
-                        ),
-                        canonicalAggregateRevision: result.revision,
-                        correlationID: correlationID,
-                        causationEventID: causationEventID,
-                        occurredAt: plan.occurredAt,
-                        canonicalBytes: eventBytes
-                    ),
-                    to: database
-                )
-                guard case let .appended(eventRecord) = append else {
-                    throw RuntimeAtomicCommitError.eventQuarantined
-                }
-                eventRecords.append(eventRecord)
-                causationEventID = eventID
-            }
-            try RuntimeAtomicCommitFault.check(.eventAppended, failure: failAfterPhase, cancellation: cancelAfterPhase)
-            guard let eventRecord = eventRecords.last else {
+            let states = try plan.states(results: casResults)
+            guard let primaryState = plan.state(for: plan.primaryKey) else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
+            let semanticEvent = try RuntimeAtomicSemanticEventFactory.make(
+                command: preparation.command.typedPayload,
+                primaryAggregate: primaryState.aggregate,
+                primaryPriorRevision: try plan.priorRevision(for: plan.primaryKey),
+                primaryResultingRevision: primaryState.revision,
+                changedObjectIDs: plan.changedObjectIDs,
+                transitionInputs: try plan.semanticTransitionInputs(results: casResults)
+            )
+            let encoded = try RuntimeSemanticEventCodec().encode(semanticEvent)
+            let eventBytes = semanticEventBytesOverride ?? encoded
+            let append = try CanonicalRuntimeSemanticEventStore.appendInTransaction(
+                try CanonicalRuntimeSemanticEventAppendRequest(
+                    eventID: plan.eventIntent.id,
+                    commandID: preparation.commandID,
+                    aggregate: primaryState.aggregate,
+                    canonicalAggregateRevision: primaryState.revision,
+                    correlationID: correlationID,
+                    causationEventID: nil,
+                    occurredAt: plan.occurredAt,
+                    canonicalBytes: eventBytes
+                ),
+                to: database
+            )
+            guard case let .appended(eventRecord) = append else {
+                throw RuntimeAtomicCommitError.eventQuarantined
+            }
+            try RuntimeAtomicCommitFault.check(.eventAppended, failure: failAfterPhase, cancellation: cancelAfterPhase)
             let lineage = RuntimeAuthorityLineageReference(
                 eventID: eventRecord.lineage.eventID,
                 eventSequence: eventRecord.lineage.sequence,
                 eventHash: eventRecord.lineage.eventHash.hexadecimal
             )
-            let states = try plan.states(results: casResults)
-            let tombstones = plan.tombstoneDrafts(results: casResults, lineage: lineage)
+            let tombstones = try plan.tombstoneDrafts(record: eventRecord)
 
             let unresolved = try Self.persistInvalidations(
                 plan.projectionInvalidations,
@@ -872,7 +864,9 @@ private enum RuntimeAtomicCommitCoding {
         guard Set(tombstoneKeys) == expectedTombstoneKeys,
               receipt.tombstones.allSatisfy({ tombstone in
                   RuntimeDomainObjectID(rawValue: tombstone.objectID.rawValue)?.rawValue == tombstone.objectID.rawValue &&
-                    tombstone.lineage == lineage && states.contains(where: { state in
+                    tombstone.lineage.eventSequence <= lineage.eventSequence &&
+                    RuntimeStoreManifestCodec.isSHA256Hex(tombstone.lineage.eventHash) &&
+                    states.contains(where: { state in
                       state.aggregate.kind.rawValue == tombstone.family &&
                         state.aggregate.id.rawValue == tombstone.objectID.rawValue &&
                         state.revision == tombstone.terminalRevision &&
@@ -923,6 +917,7 @@ private struct RuntimeAtomicCommitPlan {
     let externalEffect: RuntimeExternalEffectIntent
     let casMutations: [CanonicalAggregateCASMutation]
     let stateByKey: [CanonicalAggregateKey: RuntimeCanonicalAggregateState]
+    let priorStateDigestByKey: [CanonicalAggregateKey: String]
     let observedSnapshot: RuntimePreparationSnapshot
     let proposedObjectID: RuntimeDomainObjectID?
 
@@ -950,7 +945,14 @@ private struct RuntimeAtomicCommitPlan {
             command: preparation.command.typedPayload,
             transitions: preparation.decision.writeSet.transitions
         )
-        primaryKey = try CanonicalAggregateKey(kind: semanticType.aggregateKind.rawValue, id: primaryID.rawValue)
+        let primaryReference = RuntimePreparationAggregateReference(
+            family: semanticType.aggregateKind,
+            objectID: try RuntimeDomainObjectID(validating: primaryID.rawValue)
+        )
+        primaryKey = try CanonicalAggregateKey(
+            kind: primaryReference.family.rawValue,
+            id: primaryReference.objectID.rawValue
+        )
         self.preparation = preparation
         self.confirmation = confirmation
         self.submittedAt = submittedAt
@@ -961,22 +963,23 @@ private struct RuntimeAtomicCommitPlan {
         externalEffect = preparation.decision.writeSet.externalEffect
         changedObjectIDs = Array(Set(preparation.decision.writeSet.transitions.map(\.objectID))).sorted()
         proposedObjectID = preparation.decision.writeSet.transitions.first(where: {
-            $0.transition == .create && preparation.command.target.runtimePreparationObjectIDs.contains($0.objectID) == false
+            return $0.transition == .create &&
+                preparation.command.runtimePreparationAggregateReferences.contains($0.aggregate) == false
         })?.objectID
 
         var transitionsByKey: [CanonicalAggregateKey: RuntimeObjectTransitionIntent] = [:]
         for transition in preparation.decision.writeSet.transitions {
             let key = try CanonicalAggregateKey(
-                kind: semanticType.aggregateKind.rawValue,
-                id: transition.objectID.rawValue
+                kind: transition.aggregate.family.rawValue,
+                id: transition.aggregate.objectID.rawValue
             )
             guard transitionsByKey[key] == nil else {
                 throw RuntimeAtomicCommitError.malformedPreparation
             }
             let isUnobservedProposedCreate = transition.transition == .create &&
-                preparation.command.target.runtimePreparationObjectIDs.contains(transition.objectID) == false
+                preparation.command.runtimePreparationAggregateReferences.contains(transition.aggregate) == false
             let dependency = preparation.decision.readSet.objects.first(where: {
-                $0.objectID == transition.objectID
+                $0.aggregate == transition.aggregate
             })
             guard isUnobservedProposedCreate ||
                     (dependency?.expectedRevision == transition.expectedRevision &&
@@ -984,7 +987,7 @@ private struct RuntimeAtomicCommitPlan {
                 throw RuntimeAtomicCommitError.stalePreparation
             }
             switch (transition.transition, transition.expectedRevision) {
-            case (.create, .absent), (.restore, .exact), (.update, .exact),
+            case (.create, .absent), (.update, .exact),
                  (.attach, .exact), (.detach, .exact), (.tombstone, .exact):
                 break
             default:
@@ -992,7 +995,10 @@ private struct RuntimeAtomicCommitPlan {
             }
             transitionsByKey[key] = transition
         }
-        let primaryExpected = transitionsByKey[primaryKey]?.expectedRevision ?? preparation.command.expectedRevision
+        guard let primaryIntent = transitionsByKey[primaryKey] else {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        let primaryExpected = primaryIntent.expectedRevision
         priorRevision = switch primaryExpected {
         case .absent: nil
         case let .exact(value): value
@@ -1000,20 +1006,24 @@ private struct RuntimeAtomicCommitPlan {
         if semanticType.isCreation != (priorRevision == nil) {
             throw RuntimeAtomicCommitError.stalePreparation
         }
-        var keys = Array(transitionsByKey.keys)
-        if transitionsByKey[primaryKey] == nil { keys.append(primaryKey) }
-        keys.sort()
+        let keys = Array(transitionsByKey.keys).sorted()
         var states: [CanonicalAggregateKey: RuntimeCanonicalAggregateState] = [:]
+        var priorDigests: [CanonicalAggregateKey: String] = [:]
         var mutations: [CanonicalAggregateCASMutation] = []
         for key in keys {
-            let intent = transitionsByKey[key]
-            let expected = intent?.expectedRevision ?? primaryExpected
-            let transition = intent?.transition ?? (semanticType.isCreation ? .create : .update)
+            guard let stateKind = RuntimeSemanticAggregateKind(rawValue: key.kind) else {
+                throw RuntimeAtomicCommitError.malformedPreparation
+            }
+            guard let intent = transitionsByKey[key] else {
+                throw RuntimeAtomicCommitError.malformedPreparation
+            }
+            let expected = intent.expectedRevision
+            let transition = intent.transition
             let resultingRevision = try RuntimeAtomicAggregateIdentity.resultingRevision(expected)
             let lifecycle: RuntimeAggregateLifecycle = transition == .tombstone ? .tombstoned : .active
             let state = RuntimeCanonicalAggregateState(
                 aggregate: RuntimeSemanticAggregate(
-                    kind: semanticType.aggregateKind,
+                    kind: stateKind,
                     id: try RuntimeAggregateID(validating: key.id)
                 ),
                 revision: resultingRevision,
@@ -1024,9 +1034,10 @@ private struct RuntimeAtomicCommitPlan {
             )
             let bytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
             if case let .exact(expectedRevision) = expected {
-                try Self.requireExistingState(
+                priorDigests[key] = try Self.requireWritableExistingState(
                     key: key,
                     expectedRevision: expectedRevision,
+                    transition: transition,
                     database: database
                 )
             }
@@ -1039,28 +1050,45 @@ private struct RuntimeAtomicCommitPlan {
             ))
         }
         stateByKey = states
+        priorStateDigestByKey = priorDigests
         casMutations = mutations
 
         let observedPrimary = try Self.observedRevision(key: primaryKey, database: database)
         let aggregateObserved = observedPrimary.map { RuntimeExpectedRevision.exact($0) } ?? .absent
-        var revisions: [RuntimeDomainObjectID: RuntimeExpectedRevision] = [:]
+        guard let primaryFamily = RuntimeSemanticAggregateKind(rawValue: primaryKey.kind) else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let primaryReference = RuntimePreparationAggregateReference(
+            family: primaryFamily,
+            objectID: try RuntimeDomainObjectID(validating: primaryKey.id)
+        )
+        var revisions: [RuntimePreparationAggregateReference: RuntimeExpectedRevision] = [
+            primaryReference: aggregateObserved,
+        ]
         for dependency in preparation.decision.readSet.objects {
-            let key = try CanonicalAggregateKey(kind: semanticType.aggregateKind.rawValue, id: dependency.objectID.rawValue)
+            let key = try CanonicalAggregateKey(kind: dependency.family, id: dependency.objectID.rawValue)
             let observed = try Self.observedRevision(key: key, database: database)
-            revisions[dependency.objectID] = observed.map { .exact($0) } ?? .absent
+            revisions[dependency.aggregate] = observed.map { .exact($0) } ?? .absent
         }
         observedSnapshot = RuntimePreparationSnapshot(
-            observedRevision: aggregateObserved,
-            objectRevisions: revisions,
+            aggregateRevisions: revisions,
             cursors: preparation.decision.readSet.cursors,
             privacy: preparation.command.privacy
         )
     }
 
     func requireReducerReplay() throws {
-        guard observedSnapshot.observedRevision == preparation.authorization.observedRevision,
+        guard let primaryFamily = RuntimeSemanticAggregateKind(rawValue: primaryKey.kind),
+              let primaryObjectID = RuntimeDomainObjectID(rawValue: primaryKey.id) else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let primaryReference = RuntimePreparationAggregateReference(
+            family: primaryFamily,
+            objectID: primaryObjectID
+        )
+        guard observedSnapshot.aggregateRevisions[primaryReference] == preparation.authorization.observedRevision,
               preparation.decision.readSet.objects.allSatisfy({ dependency in
-                  observedSnapshot.objectRevisions[dependency.objectID] == dependency.observedRevision
+                  observedSnapshot.aggregateRevisions[dependency.aggregate] == dependency.observedRevision
               }),
               let rollbackID = preparation.decision.writeSet.rollbackIntentID else {
             throw RuntimeAtomicCommitError.stalePreparation
@@ -1123,18 +1151,45 @@ private struct RuntimeAtomicCommitPlan {
         }
     }
 
-    func tombstoneDrafts(
-        results: [CanonicalAggregateCASResult],
-        lineage: RuntimeAuthorityLineageReference
-    ) -> [RuntimeCanonicalTombstoneDraft] {
-        results.compactMap { result in
-            guard stateByKey[result.key]?.lifecycle == .tombstoned,
-                  let objectID = RuntimeDomainObjectID(rawValue: result.key.id) else { return nil }
+    func state(for key: CanonicalAggregateKey) -> RuntimeCanonicalAggregateState? {
+        stateByKey[key]
+    }
+
+    func priorStateDigest(for key: CanonicalAggregateKey) -> String? {
+        priorStateDigestByKey[key]
+    }
+
+    func semanticTransitionInputs(
+        results: [CanonicalAggregateCASResult]
+    ) throws -> [RuntimeAtomicSemanticTransitionInput] {
+        try results.sorted { $0.key < $1.key }.map { result in
+            guard let state = stateByKey[result.key], state.revision == result.revision else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            return RuntimeAtomicSemanticTransitionInput(
+                state: state,
+                priorRevision: try priorRevision(for: result.key),
+                predecessorStateDigest: priorStateDigest(for: result.key)
+            )
+        }
+    }
+
+    func tombstoneDrafts(record: CanonicalRuntimeSemanticEventRecord) throws -> [RuntimeCanonicalTombstoneDraft] {
+        try record.event.mutation.aggregateTransitions.compactMap { transition in
+            guard
+                  transition.lifecycle == .tombstoned,
+                  let authority = transition.tombstone,
+                  let objectID = RuntimeDomainObjectID(rawValue: transition.aggregate.id.rawValue) else { return nil }
             return RuntimeCanonicalTombstoneDraft(
                 objectID: objectID,
-                family: result.key.kind,
-                terminalRevision: result.revision,
-                lineage: lineage
+                family: transition.aggregate.kind.rawValue,
+                terminalRevision: transition.resultingRevision,
+                lineage: RuntimeAuthorityLineageReference(
+                    eventID: record.lineage.eventID,
+                    eventSequence: record.lineage.sequence,
+                    eventHash: record.lineage.eventHash.hexadecimal
+                ),
+                authority: authority
             )
         }.sorted { ($0.family, $0.objectID.rawValue) < ($1.family, $1.objectID.rawValue) }
     }
@@ -1148,11 +1203,12 @@ private struct RuntimeAtomicCommitPlan {
         )]
     }
 
-    private static func requireExistingState(
+    private static func requireWritableExistingState(
         key: CanonicalAggregateKey,
         expectedRevision: UInt64,
+        transition: RuntimeObjectTransitionKind,
         database: isolated SQLiteDatabase
-    ) throws {
+    ) throws -> String {
         let rows = try database.query(
             "SELECT revision, payload_version, payload, payload_checksum FROM runtime_aggregates WHERE aggregate_kind = ? AND aggregate_id = ? LIMIT 2",
             bindings: [.text(key.kind), .text(key.id)]
@@ -1176,12 +1232,23 @@ private struct RuntimeAtomicCommitPlan {
         }
         guard state.aggregate.kind.rawValue == key.kind,
               state.aggregate.id.rawValue == key.id,
-              state.revision == UInt64(revision) else {
+              state.revision == UInt64(revision),
+              state.lifecycle == .active,
+              state.transition != .tombstone,
+              transition != .restore else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
         guard state.revision == expectedRevision else {
             throw RuntimeAtomicCommitError.stalePreparation
         }
+        let durableTombstone = try database.query(
+            "SELECT terminal_revision FROM runtime_commit_tombstones WHERE family = ? AND object_id = ? LIMIT 2",
+            bindings: [.text(key.kind), .text(key.id)]
+        )
+        guard durableTombstone.isEmpty else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        return checksum
     }
 
     private static func observedRevision(
@@ -1224,12 +1291,27 @@ private enum RuntimeAtomicAggregateIdentity {
         case .profile: "profile.local"
         case let .history(value): value.target.reviewID ?? value.target.recommendationID
         case let .repair(value): value.target.recommendationID ?? value.target.goalID
-        case let .importDeletion(value): value.target.runtimePreparationObjectIDs.first?.rawValue
+        case .importDeletion:
+            command.runtimePreparationAggregateReferences.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
         }
-        let fallback = transitions.first(where: { $0.transition == .create })?.objectID.rawValue
-            ?? transitions.first?.objectID.rawValue
-        guard let value = raw ?? fallback, let identity = RuntimeAggregateID(rawValue: value) else {
+        guard case let .mutating(typeID) = RuntimeSemanticEventClassifier.classify(command) else {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        let semanticFamily = typeID.aggregateKind
+        let semanticTransitions = transitions.filter { $0.aggregate.family == semanticFamily }
+        let value: String
+        if let raw {
+            value = raw
+        } else {
+            guard semanticTransitions.count == 1,
+                  semanticTransitions[0].transition == .create else {
+                throw RuntimeAtomicCommitError.malformedPreparation
+            }
+            value = semanticTransitions[0].aggregate.objectID.rawValue
+        }
+        guard semanticTransitions.contains(where: { $0.aggregate.objectID.rawValue == value }),
+              let identity = RuntimeAggregateID(rawValue: value) else {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         return identity
@@ -1427,21 +1509,22 @@ private extension CanonicalRuntimeStore {
     ) throws {
         let states = receipt.aggregateStates
         let commandRecords = records.filter { $0.lineage.commandID == receipt.commandID }
-        guard commandRecords.count == states.count,
-              let terminal = commandRecords.last,
+        guard commandRecords.count == 1,
+              let terminal = commandRecords.first,
               terminal.lineage.eventID == receipt.lineage.eventID,
               terminal.lineage.sequence == receipt.lineage.eventSequence,
-              terminal.lineage.eventHash.hexadecimal == receipt.lineage.eventHash,
-              receipt.lineage.eventSequence >= UInt64(states.count) else {
+              terminal.lineage.eventHash.hexadecimal == receipt.lineage.eventHash else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
 
         let transitionIntents = try states.map { state in
             RuntimeObjectTransitionIntent(
-                objectID: RuntimeDomainObjectID(validating: state.aggregate.id.rawValue),
+                aggregate: RuntimePreparationAggregateReference(
+                    family: state.aggregate.kind,
+                    objectID: try RuntimeDomainObjectID(validating: state.aggregate.id.rawValue)
+                ),
                 expectedRevision: state.revision == 0 ? .absent : .exact(state.revision - 1),
-                transition: state.transition,
-                family: state.aggregate.kind.rawValue
+                transition: state.transition
             )
         }
         guard let command = states.first?.commandPayload else {
@@ -1451,59 +1534,40 @@ private extension CanonicalRuntimeStore {
             command: command,
             transitions: transitionIntents
         )
-        guard let primaryIndex = states.firstIndex(where: { $0.aggregate.id == primaryID }) else {
+        let primaryKind = command.runtimePrimaryPreparationReference?.family ?? terminal.event.typeID.aggregateKind
+        guard let primary = states.first(where: {
+            $0.aggregate.id == primaryID && $0.aggregate.kind == primaryKind
+        }) else {
             throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let terminalIndex = states.count - 1
-        let baseEventID: RuntimeEventID
-        if primaryIndex == terminalIndex {
-            baseEventID = receipt.lineage.eventID
-        } else {
-            let suffix = ".aggregate.\(terminalIndex)"
-            let terminalID = receipt.lineage.eventID.rawValue
-            guard terminalID.hasSuffix(suffix),
-                  let identity = RuntimeEventID(rawValue: String(terminalID.dropLast(suffix.count))) else {
-                throw RuntimeAtomicCommitError.corruptAuthority
-            }
-            baseEventID = identity
         }
         let correlationID = try RuntimeCorrelationID(
             validating: "correlation.\(receipt.preparationID.rawValue)"
         )
-        let firstSequence = receipt.lineage.eventSequence - UInt64(terminalIndex)
-        var priorEventID: RuntimeEventID?
-        var occurredAt: Date?
-        for (index, pair) in zip(states, commandRecords).enumerated() {
-            let state = pair.0
-            let record = pair.1
-            let expectedEventID = index == primaryIndex ? baseEventID : try RuntimeEventID(
-                validating: "\(baseEventID.rawValue).aggregate.\(index)"
-            )
-            let priorRevision: UInt64? = state.revision == 0 ? nil : state.revision - 1
-            let expectedEvent = try RuntimeAtomicSemanticEventFactory.make(
-                command: state.commandPayload,
-                aggregateID: state.aggregate.id,
-                priorRevision: priorRevision,
-                resultingRevision: state.revision,
-                changedObjectIDs: state.changedObjectIDs
-            )
-            if let occurredAt {
-                guard record.lineage.occurredAt == occurredAt else {
-                    throw RuntimeAtomicCommitError.corruptAuthority
-                }
-            } else {
-                occurredAt = record.lineage.occurredAt
+        let inputs = try states.map { state in
+            let stored = terminal.event.mutation.aggregateTransitions.first {
+                $0.aggregate == state.aggregate
             }
-            guard record.lineage.sequence == firstSequence + UInt64(index),
-                  record.lineage.eventID == expectedEventID,
-                  record.lineage.aggregate == state.aggregate,
-                  record.lineage.canonicalAggregateRevision == state.revision,
-                  record.lineage.correlationID == correlationID,
-                  record.lineage.causationEventID == priorEventID,
-                  record.event == expectedEvent else {
-                throw RuntimeAtomicCommitError.corruptAuthority
-            }
-            priorEventID = expectedEventID
+            guard let stored else { throw RuntimeAtomicCommitError.corruptAuthority }
+            return RuntimeAtomicSemanticTransitionInput(
+                state: state,
+                priorRevision: stored.priorRevision,
+                predecessorStateDigest: stored.tombstone?.predecessorDigest
+            )
+        }
+        let expectedEvent = try RuntimeAtomicSemanticEventFactory.make(
+            command: command,
+            primaryAggregate: primary.aggregate,
+            primaryPriorRevision: terminal.event.mutation.priorRevision,
+            primaryResultingRevision: primary.revision,
+            changedObjectIDs: primary.changedObjectIDs,
+            transitionInputs: inputs
+        )
+        guard terminal.lineage.aggregate == primary.aggregate,
+              terminal.lineage.canonicalAggregateRevision == primary.revision,
+              terminal.lineage.correlationID == correlationID,
+              terminal.lineage.causationEventID == nil,
+              terminal.event == expectedEvent else {
+            throw RuntimeAtomicCommitError.corruptAuthority
         }
     }
 
@@ -1513,37 +1577,30 @@ private extension CanonicalRuntimeStore {
         afterHistoricalSequence: UInt64,
         records: [CanonicalRuntimeSemanticEventRecord]
     ) throws {
-        let aggregateRecords = records.filter { $0.lineage.aggregate == state.aggregate }
+        let aggregateRecords = records.filter { record in
+            record.event.mutation.aggregateTransitions.contains { $0.aggregate == state.aggregate }
+        }
         guard let latest = aggregateRecords.max(by: {
             $0.lineage.sequence < $1.lineage.sequence
         }),
               latest.lineage.sequence > afterHistoricalSequence,
-              latest.lineage.canonicalAggregateRevision == state.revision,
-              latest.event.mutation.resultingRevision == state.revision,
               state.revision > 0 else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        let transition = RuntimeAtomicAggregateIdentity.transitionKind(
-            for: state.commandPayload
+        guard let storedTransition = latest.event.mutation.aggregateTransitions.first(where: {
+            $0.aggregate == state.aggregate
+        }) else { throw RuntimeAtomicCommitError.corruptAuthority }
+        let storedState = try RuntimeCanonicalAggregateStateCodec().decode(
+            storedTransition.canonicalStateBytes
         )
-        let expectedEvent = try RuntimeAtomicSemanticEventFactory.make(
-            command: state.commandPayload,
-            aggregateID: state.aggregate.id,
-            priorRevision: state.revision - 1,
-            resultingRevision: state.revision,
-            changedObjectIDs: state.changedObjectIDs
-        )
-        let derivedState = RuntimeCanonicalAggregateState(
-            aggregate: latest.lineage.aggregate,
-            revision: latest.event.mutation.resultingRevision,
-            lifecycle: transition == .tombstone ? .tombstoned : .active,
-            transition: transition,
-            commandPayload: state.commandPayload,
-            changedObjectIDs: latest.event.mutation.changedObjectIDs
-        )
-        guard latest.event == expectedEvent,
-              derivedState == state,
-              try RuntimeCanonicalAggregateStateCodec().encode(derivedState) == canonicalBytes else {
+        guard storedState == state,
+              storedState.aggregate == storedTransition.aggregate,
+              storedState.revision == storedTransition.resultingRevision,
+              storedState.lifecycle == storedTransition.lifecycle,
+              storedState.transition == storedTransition.transition,
+              storedTransition.resultingRevision == state.revision,
+              storedTransition.canonicalStateBytes == canonicalBytes,
+              try RuntimeCanonicalAggregateStateCodec().encode(storedState) == canonicalBytes else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
     }
@@ -1551,12 +1608,13 @@ private extension CanonicalRuntimeStore {
     static func verifiedSemanticEventRecords(
         database: isolated SQLiteDatabase
     ) throws -> [CanonicalRuntimeSemanticEventRecord] {
-        var cursor: CanonicalRuntimeEventCursor?
+        var cursor: RuntimeCanonicalReplayCursor?
         var records: [CanonicalRuntimeSemanticEventRecord] = []
         repeat {
-            let page = try CanonicalRuntimeSemanticEventStore.readInTransaction(
+            let page = try CanonicalRuntimeSemanticEventStore.readVerifiedInTransaction(
                 from: database,
                 after: cursor,
+                initialAnchor: nil,
                 limit: CanonicalRuntimeSemanticEventStore.maximumPageLimit
             )
             for inspection in page.items {
@@ -1702,23 +1760,76 @@ private extension CanonicalRuntimeStore {
     }
 }
 
-private enum RuntimeAtomicSemanticEventFactory {
+struct RuntimeAtomicSemanticTransitionInput {
+    let state: RuntimeCanonicalAggregateState
+    let priorRevision: UInt64?
+    let predecessorStateDigest: String?
+}
+
+enum RuntimeAtomicSemanticEventFactory {
     static func make(
         command: RuntimeCommandPayload,
-        aggregateID: RuntimeAggregateID,
-        priorRevision: UInt64?,
-        resultingRevision: UInt64,
-        changedObjectIDs: [RuntimeDomainObjectID]
+        primaryAggregate: RuntimeSemanticAggregate,
+        primaryPriorRevision: UInt64?,
+        primaryResultingRevision: UInt64,
+        changedObjectIDs: [RuntimeDomainObjectID],
+        transitionInputs: [RuntimeAtomicSemanticTransitionInput]
     ) throws -> RuntimeSemanticEvent {
         guard case let .mutating(typeID) = RuntimeSemanticEventClassifier.classify(command) else {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
+        guard primaryAggregate.kind == typeID.aggregateKind,
+              transitionInputs.contains(where: {
+                  $0.state.aggregate == primaryAggregate &&
+                      $0.priorRevision == primaryPriorRevision &&
+                      $0.state.revision == primaryResultingRevision
+              }) else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let aggregateTransitions = try transitionInputs.map { input in
+            let aggregateState = input.state
+            let bytes = try RuntimeCanonicalAggregateStateCodec().encode(aggregateState)
+            let tombstone: RuntimeCanonicalTombstoneAuthority?
+            if aggregateState.lifecycle == .tombstoned {
+                guard aggregateState.transition == .tombstone,
+                      let predecessorStateDigest = input.predecessorStateDigest,
+                      RuntimeStoreManifestCodec.isSHA256Hex(predecessorStateDigest) else {
+                    throw RuntimeAtomicCommitError.corruptAuthority
+                }
+                tombstone = RuntimeCanonicalTombstoneAuthority(
+                    reason: try tombstoneReason(for: typeID),
+                    predecessorDigest: predecessorStateDigest,
+                    retentionDisposition: .retainedUntilDownstreamPolicy,
+                    recoveryDisposition: .explicitTypedRestorationRequired
+                )
+            } else {
+                tombstone = nil
+            }
+            return RuntimeSemanticAggregateTransition(
+                aggregate: aggregateState.aggregate,
+                priorRevision: input.priorRevision,
+                resultingRevision: aggregateState.revision,
+                lifecycle: aggregateState.lifecycle,
+                transition: aggregateState.transition,
+                canonicalStateBytes: bytes,
+                canonicalStateDigest: LocalRuntimeStorageChecksum.sha256Hex(for: bytes),
+                tombstone: tombstone
+            )
+        }.sorted {
+            ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
+                ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
+        }
+        guard Set(aggregateTransitions.map(\.aggregate)).count == aggregateTransitions.count else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+        }
         let mutation = try RuntimeSemanticMutation(
             semanticType: typeID,
-            aggregateID: aggregateID,
-            priorRevision: priorRevision,
-            resultingRevision: resultingRevision,
-            changedObjectIDs: changedObjectIDs
+            aggregateID: primaryAggregate.id,
+            priorRevision: primaryPriorRevision,
+            resultingRevision: primaryResultingRevision,
+            changedObjectIDs: changedObjectIDs,
+            primaryAggregate: primaryAggregate,
+            aggregateTransitions: aggregateTransitions
         )
         switch command {
         case let .capture(value):
@@ -1796,6 +1907,23 @@ private enum RuntimeAtomicSemanticEventFactory {
         case let .externalOperation(value):
             let payload = try RuntimeExternalOperationMutationPayload(mutation: mutation, facts: value)
             return .externalOperation(value.kind == .reminder ? .reminderRequested(payload) : .calendarEventRequested(payload))
+        }
+    }
+
+    private static func tombstoneReason(
+        for typeID: RuntimeSemanticEventTypeID
+    ) throws -> RuntimeCanonicalTombstoneReason {
+        switch typeID {
+        case .captureArchived:
+            return .archived
+        case .reminderDeleted:
+            return .reminderDeleted
+        case .objectDeleted:
+            return .objectDeleted
+        case .memoryForgotten:
+            return .memoryForgotten
+        default:
+            throw RuntimeAtomicCommitError.malformedPreparation
         }
     }
 }

@@ -111,12 +111,19 @@ private enum RuntimePureMutationDecisionBuilder {
         feature: RuntimePreparationFeature
     ) -> RuntimeReducerDecision {
         let command = input.command
-        let targetIDs = command.target.runtimePreparationObjectIDs
-        let readObjects = targetIDs.map { objectID in
-            RuntimeReadDependency(
-                objectID: objectID,
-                expectedRevision: command.expectedRevision,
-                observedRevision: input.snapshot.objectRevisions[objectID] ?? input.snapshot.observedRevision
+        let targetReferences = command.runtimePreparationAggregateReferences
+        let hasCompleteSnapshot = targetReferences.allSatisfy {
+            input.snapshot.aggregateRevisions[$0] != nil
+        }
+        let readObjects = targetReferences.compactMap { reference -> RuntimeReadDependency? in
+            guard let observed = input.snapshot.aggregateRevisions[reference] else { return nil }
+            let expected = reference == command.runtimePrimaryPreparationReference
+                ? command.expectedRevision
+                : observed
+            return RuntimeReadDependency(
+                aggregate: reference,
+                expectedRevision: expected,
+                observedRevision: observed
             )
         }
         let readSet = RuntimeMutationReadSet(
@@ -124,18 +131,38 @@ private enum RuntimePureMutationDecisionBuilder {
             cursors: input.snapshot.cursors,
             privacy: input.snapshot.privacy
         )
-        let disposition = disposition(for: command)
+        let disposition = hasCompleteSnapshot ? disposition(for: command) : .blocked
         let confirmationScope = confirmationScope(for: command)
         let effect = externalEffect(for: command, context: input.context)
-        let transitionIDs = transitionObjectIDs(for: command, targetIDs: targetIDs, proposed: input.context.proposedObjectID)
+        // Target references are read dependencies. A command writes only its
+        // semantic primary aggregate until a feature reducer explicitly owns
+        // an additional aggregate transition.
+        var transitionReferences = explicitWriteReferences(for: command)
+        if isCreate(command), let proposed = input.context.proposedObjectID {
+            let proposedReference = RuntimePreparationAggregateReference(
+                family: command.typedPayload.semanticAggregateKind,
+                objectID: proposed
+            )
+            if transitionReferences.contains(proposedReference) == false {
+                transitionReferences.append(proposedReference)
+            }
+        }
         let transitionKind = transitionKind(for: command)
         let transitions: [RuntimeObjectTransitionIntent] = disposition == .apply
-            ? transitionIDs.map {
-                RuntimeObjectTransitionIntent(
-                    objectID: $0,
-                    expectedRevision: command.expectedRevision,
-                    transition: transitionKind,
-                    family: feature.rawValue
+            ? transitionReferences.compactMap { reference in
+                let expected: RuntimeExpectedRevision
+                if let dependency = readObjects.first(where: { $0.aggregate == reference }) {
+                    expected = dependency.expectedRevision
+                } else if isCreate(command), reference.family == command.typedPayload.semanticAggregateKind,
+                          reference.objectID == input.context.proposedObjectID {
+                    expected = .absent
+                } else {
+                    return nil
+                }
+                return RuntimeObjectTransitionIntent(
+                    aggregate: reference,
+                    expectedRevision: expected,
+                    transition: transitionKind
                 )
             }
             : []
@@ -243,17 +270,6 @@ private enum RuntimePureMutationDecisionBuilder {
         }
     }
 
-    private static func transitionObjectIDs(
-        for command: AmbitionsCommand,
-        targetIDs: [RuntimeDomainObjectID],
-        proposed: RuntimeDomainObjectID?
-    ) -> [RuntimeDomainObjectID] {
-        var values = targetIDs
-        if isCreate(command), let proposed { values.append(proposed) }
-        var seen = Set<RuntimeDomainObjectID>()
-        return values.filter { seen.insert($0).inserted }.sorted()
-    }
-
     private static func isCreate(_ command: AmbitionsCommand) -> Bool {
         switch command.typedPayload {
         case let .capture(capture):
@@ -266,6 +282,17 @@ private enum RuntimePureMutationDecisionBuilder {
         case let .reminder(reminder): return reminder.action == .create
         default: return false
         }
+    }
+
+    private static func explicitWriteReferences(
+        for command: AmbitionsCommand
+    ) -> [RuntimePreparationAggregateReference] {
+        guard let primary = command.runtimePrimaryPreparationReference else { return [] }
+        // Every currently typed action mutates exactly its semantic owner.
+        // Related IDs in AmbitionsCommandTarget remain optimistic read
+        // dependencies; T17/T20 feature reducers must add explicit secondary
+        // writes when their domain contracts require them.
+        return [primary]
     }
 
     private static func transitionKind(for command: AmbitionsCommand) -> RuntimeObjectTransitionKind {
@@ -317,15 +344,113 @@ private enum RuntimePureMutationDecisionBuilder {
     }
 }
 
-extension AmbitionsCommandTarget {
-    var runtimePreparationObjectIDs: [RuntimeDomainObjectID] {
-        let raw = [
-            goalID, captureID, timeID, reviewID, stepID, deliverableID, scopeItemID,
-            recommendationID, explanationID,
-        ].compactMap { $0 }
-        var seen = Set<RuntimeDomainObjectID>()
-        return raw.compactMap(RuntimeDomainObjectID.init(rawValue:))
-            .filter { seen.insert($0).inserted }
-            .sorted()
+extension AmbitionsCommand {
+    var runtimePrimaryPreparationReference: RuntimePreparationAggregateReference? {
+        typedPayload.runtimePrimaryPreparationReference
+    }
+
+    var runtimePreparationAggregateReferences: [RuntimePreparationAggregateReference] {
+        typedPayload.runtimePreparationAggregateReferences
+    }
+}
+
+extension RuntimeCommandPayload {
+    var runtimePrimaryPreparationReference: RuntimePreparationAggregateReference? {
+        let references = runtimePreparationAggregateReferences
+        let target: AmbitionsCommandTarget = switch self {
+        case let .capture(value): value.target
+        case let .goal(value): value.target
+        case let .step(value): value.target
+        case let .schedule(value): value.target
+        case let .reminder(value): value.target
+        case let .profile(value): value.target
+        case let .history(value): value.target
+        case let .repair(value): value.target
+        case let .importDeletion(value): value.target
+        case let .externalOperation(value): value.target
+        }
+        let raw: String? = switch self {
+        case .capture: target.captureID
+        case .goal: target.goalID
+        case .step: target.stepID
+        case .schedule: target.timeID
+        case .reminder: target.timeID ?? target.goalID
+        case .profile: "profile.local"
+        case .history: target.reviewID ?? target.recommendationID
+        case .repair: target.recommendationID ?? target.goalID
+        case .importDeletion:
+            references.first?.objectID.rawValue
+        case let .externalOperation(value): value.operationID.rawValue
+        }
+        guard let raw, let objectID = RuntimeDomainObjectID(rawValue: raw) else { return nil }
+        let semantic = RuntimePreparationAggregateReference(
+            family: semanticAggregateKind,
+            objectID: objectID
+        )
+        if references.contains(semantic) { return semantic }
+        return semantic
+    }
+
+    var runtimePreparationAggregateReferences: [RuntimePreparationAggregateReference] {
+        let target: AmbitionsCommandTarget = switch self {
+        case let .capture(value): value.target
+        case let .goal(value): value.target
+        case let .step(value): value.target
+        case let .schedule(value): value.target
+        case let .reminder(value): value.target
+        case let .profile(value): value.target
+        case let .history(value): value.target
+        case let .repair(value): value.target
+        case let .importDeletion(value): value.target
+        case let .externalOperation(value): value.target
+        }
+        var values: [RuntimePreparationAggregateReference] = []
+        func add(_ raw: String?, _ family: RuntimeSemanticAggregateKind) {
+            guard let raw, let objectID = RuntimeDomainObjectID(rawValue: raw) else { return }
+            values.append(RuntimePreparationAggregateReference(family: family, objectID: objectID))
+        }
+        add(target.captureID, .capture)
+        add(target.goalID, .goal)
+        add(target.stepID, .step)
+        add(target.deliverableID, .goal)
+        add(target.scopeItemID, .goal)
+        add(target.reviewID, .history)
+        add(target.recommendationID, semanticAggregateKind)
+        add(target.explanationID, .history)
+        switch self {
+        case .reminder: add(target.timeID, .reminder)
+        default: add(target.timeID, .schedule)
+        }
+        let semanticRaw: String? = switch self {
+        case .capture: target.captureID
+        case .goal: target.goalID
+        case .step: target.stepID
+        case .schedule: target.timeID
+        case .reminder: target.timeID ?? target.goalID
+        case .profile: "profile.local"
+        case .history: target.reviewID ?? target.recommendationID
+        case .repair: target.recommendationID ?? target.goalID
+        case .importDeletion: values.first?.objectID.rawValue
+        case let .externalOperation(value): value.operationID.rawValue
+        }
+        add(semanticRaw, semanticAggregateKind)
+        return Array(Set(values)).sorted()
+    }
+}
+
+private extension RuntimeCommandPayload {
+    var semanticAggregateKind: RuntimeSemanticAggregateKind {
+        switch self {
+        case .capture: .capture
+        case .goal: .goal
+        case .step: .step
+        case .schedule: .schedule
+        case .reminder: .reminder
+        case .profile: .profile
+        case .history: .history
+        case .repair: .repair
+        case .importDeletion: .importDeletion
+        case .externalOperation: .externalOperation
+        }
     }
 }

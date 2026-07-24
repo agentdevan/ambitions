@@ -92,10 +92,33 @@ struct RuntimeRecovery: Codable, Sendable, Equatable, Hashable {
     }
 }
 
-struct RuntimeReadDependency: Codable, Sendable, Equatable, Hashable {
+struct RuntimePreparationAggregateReference: Codable, Sendable, Equatable, Hashable, Comparable {
+    let family: RuntimeSemanticAggregateKind
     let objectID: RuntimeDomainObjectID
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        (lhs.family.rawValue, lhs.objectID.rawValue) < (rhs.family.rawValue, rhs.objectID.rawValue)
+    }
+}
+
+struct RuntimeReadDependency: Codable, Sendable, Equatable, Hashable {
+    let aggregate: RuntimePreparationAggregateReference
     let expectedRevision: RuntimeExpectedRevision
     let observedRevision: RuntimeExpectedRevision
+
+    var objectID: RuntimeDomainObjectID { aggregate.objectID }
+    var family: String { aggregate.family.rawValue }
+
+    init(
+        aggregate: RuntimePreparationAggregateReference,
+        expectedRevision: RuntimeExpectedRevision,
+        observedRevision: RuntimeExpectedRevision
+    ) {
+        self.aggregate = aggregate
+        self.expectedRevision = expectedRevision
+        self.observedRevision = observedRevision
+    }
+
 }
 
 struct RuntimeCursorEvidence: Codable, Sendable, Equatable, Hashable {
@@ -111,7 +134,7 @@ struct RuntimeMutationReadSet: Codable, Sendable, Equatable, Hashable {
     let privacy: EventLedgerPrivacyClassification
 
     init(objects: [RuntimeReadDependency], cursors: [RuntimeCursorEvidence], privacy: EventLedgerPrivacyClassification) {
-        self.objects = objects.sorted { $0.objectID.rawValue < $1.objectID.rawValue }
+        self.objects = objects.sorted { $0.aggregate < $1.aggregate }
         self.cursors = cursors.sorted {
             if $0.kind != $1.kind { return $0.kind.rawValue < $1.kind.rawValue }
             if $0.ownerID != $1.ownerID { return $0.ownerID < $1.ownerID }
@@ -126,10 +149,12 @@ enum RuntimeObjectTransitionKind: String, Codable, Sendable, Equatable, Hashable
 }
 
 struct RuntimeObjectTransitionIntent: Codable, Sendable, Equatable, Hashable {
-    let objectID: RuntimeDomainObjectID
+    let aggregate: RuntimePreparationAggregateReference
     let expectedRevision: RuntimeExpectedRevision
     let transition: RuntimeObjectTransitionKind
-    let family: String
+
+    var objectID: RuntimeDomainObjectID { aggregate.objectID }
+    var family: String { aggregate.family.rawValue }
 }
 
 enum RuntimeSemanticEventIntentKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -181,7 +206,7 @@ struct RuntimeMutationWriteSet: Codable, Sendable, Equatable, Hashable {
         rollbackIntentID: RuntimeRollbackPlanID?,
         externalEffect: RuntimeExternalEffectIntent
     ) {
-        self.transitions = transitions.sorted { $0.objectID.rawValue < $1.objectID.rawValue }
+        self.transitions = transitions.sorted { $0.aggregate < $1.aggregate }
         self.events = events.sorted { $0.id.rawValue < $1.id.rawValue }
         self.projectionInvalidations = Array(Set(projectionInvalidations.filter { $0.isEmpty == false })).sorted()
         self.receiptIntentID = receiptIntentID
@@ -315,21 +340,52 @@ enum RuntimeCommandOutcome: Codable, Sendable, Equatable, Hashable {
 }
 
 struct RuntimePreparationSnapshot: Codable, Sendable, Equatable, Hashable {
-    let observedRevision: RuntimeExpectedRevision
-    let objectRevisions: [RuntimeDomainObjectID: RuntimeExpectedRevision]
+    let aggregateRevisions: [RuntimePreparationAggregateReference: RuntimeExpectedRevision]
     let cursors: [RuntimeCursorEvidence]
     let privacy: EventLedgerPrivacyClassification
 
+    private enum CodingKeys: String, CodingKey {
+        case aggregateRevisions, cursors, privacy
+    }
+
+    init(
+        aggregateRevisions: [RuntimePreparationAggregateReference: RuntimeExpectedRevision],
+        cursors: [RuntimeCursorEvidence],
+        privacy: EventLedgerPrivacyClassification
+    ) {
+        self.aggregateRevisions = aggregateRevisions
+        self.cursors = cursors
+        self.privacy = privacy
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        aggregateRevisions = try values.decode(
+            [RuntimePreparationAggregateReference: RuntimeExpectedRevision].self,
+            forKey: .aggregateRevisions
+        )
+        cursors = try values.decode([RuntimeCursorEvidence].self, forKey: .cursors)
+        privacy = try values.decode(EventLedgerPrivacyClassification.self, forKey: .privacy)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(aggregateRevisions, forKey: .aggregateRevisions)
+        try values.encode(cursors, forKey: .cursors)
+        try values.encode(privacy, forKey: .privacy)
+    }
+
     static func empty(privacy: EventLedgerPrivacyClassification) -> RuntimePreparationSnapshot {
-        RuntimePreparationSnapshot(observedRevision: .absent, objectRevisions: [:], cursors: [], privacy: privacy)
+        RuntimePreparationSnapshot(aggregateRevisions: [:], cursors: [], privacy: privacy)
     }
 }
 
 struct RuntimePreparationReadRequest: Codable, Sendable, Equatable, Hashable {
     let commandID: RuntimeCommandID
-    let targetIDs: [RuntimeDomainObjectID]
+    let targets: [RuntimePreparationAggregateReference]
     let expectedRevision: RuntimeExpectedRevision
     let privacy: EventLedgerPrivacyClassification
+
 }
 
 protocol RuntimePreparationReading: Sendable {

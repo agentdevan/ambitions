@@ -104,22 +104,50 @@ final class CanonicalRuntimeStoreEventTests: XCTestCase {
         ) { XCTAssertEqual($0 as? CanonicalRuntimeSemanticEventStoreError, .invalidSequence) }
     }
 
-    func testCursorReadVerifiesGenesisPrefixAndBlocksRowsAfterCorruption() async throws {
+    func testPublicCursorReadRejectsTamperedAnchorSourceInsteadOfTrustingItsStoredHash() async throws {
         let database = try await makeDatabase()
-        try await seedAuthority(database, revision: 1, commandIDs: ["command-1", "command-2"])
-        _ = try await append(database, eventID: "event-1", commandID: "command-1", prior: 0, result: 1)
-        try await setAggregateRevision(2, database: database)
-        _ = try await append(database, eventID: "event-2", commandID: "command-2", prior: 1, result: 2, causationEventID: "event-1")
-        try await database.execute("DROP TRIGGER runtime_semantic_events_immutable_update")
-        try await database.execute(
-            "UPDATE runtime_semantic_events SET event_hash = ? WHERE event_id = ?",
-            bindings: [.text(String(repeating: "f", count: 64)), .text("event-1")]
-        )
-        let cursor = try CanonicalRuntimeEventCursor(sequence: 1, eventID: "event-1")
+        try await seedThreeEventChain(database)
+        try await tamperSourceBytes(sequence: 2, database: database)
+        let cursor = try CanonicalRuntimeEventCursor(sequence: 2, eventID: "event-2")
 
         await XCTAssertThrowsErrorAsync(
             try await database.transaction(.immediate) { isolated in
                 try CanonicalRuntimeSemanticEventStore.readInTransaction(from: isolated, after: cursor, limit: 10)
+            }
+        ) { XCTAssertEqual($0 as? CanonicalRuntimeSemanticEventStoreError, .hashChainBroken) }
+    }
+
+    func testPublicCursorReadRejectsTamperedPreAnchorSourceInsteadOfSkippingPrefix() async throws {
+        let database = try await makeDatabase()
+        try await seedThreeEventChain(database)
+        try await tamperSourceBytes(sequence: 1, database: database)
+        let cursor = try CanonicalRuntimeEventCursor(sequence: 2, eventID: "event-2")
+
+        await XCTAssertThrowsErrorAsync(
+            try await database.transaction(.immediate) { isolated in
+                try CanonicalRuntimeSemanticEventStore.readInTransaction(from: isolated, after: cursor, limit: 10)
+            }
+        ) { XCTAssertEqual($0 as? CanonicalRuntimeSemanticEventStoreError, .hashChainBroken) }
+    }
+
+    func testPublicCursorReadRejectsMaximumSequenceWithoutScalingWorkFromCursor() async throws {
+        let database = try await makeDatabase()
+        let cursor = try CanonicalRuntimeEventCursor(sequence: Int64.max, eventID: "event-impossible")
+
+        await XCTAssertThrowsErrorAsync(
+            try await database.transaction(.immediate) { isolated in
+                try CanonicalRuntimeSemanticEventStore.readInTransaction(from: isolated, after: cursor, limit: 10)
+            }
+        ) { XCTAssertEqual($0 as? CanonicalRuntimeSemanticEventStoreError, .hashChainBroken) }
+    }
+
+    func testPublicCursorReadRejectsNearMaximumSequenceWithoutByteBudgetOverflow() async throws {
+        let database = try await makeDatabase()
+        let cursor = try CanonicalRuntimeEventCursor(sequence: Int64.max - 1, eventID: "event-impossible")
+
+        await XCTAssertThrowsErrorAsync(
+            try await database.transaction(.immediate) { isolated in
+                try CanonicalRuntimeSemanticEventStore.readInTransaction(from: isolated, after: cursor, limit: Int.max)
             }
         ) { XCTAssertEqual($0 as? CanonicalRuntimeSemanticEventStoreError, .hashChainBroken) }
     }
@@ -198,6 +226,64 @@ final class CanonicalRuntimeStoreEventTests: XCTestCase {
             )
             try insertCommands(commandIDs, in: isolated)
         }
+    }
+
+    private func seedThreeEventChain(_ database: SQLiteDatabase) async throws {
+        try await seedAuthority(
+            database,
+            revision: 1,
+            commandIDs: ["command-1", "command-2", "command-3"]
+        )
+        _ = try await append(
+            database,
+            eventID: "event-1",
+            commandID: "command-1",
+            prior: 0,
+            result: 1
+        )
+        try await setAggregateRevision(2, database: database)
+        _ = try await append(
+            database,
+            eventID: "event-2",
+            commandID: "command-2",
+            prior: 1,
+            result: 2,
+            causationEventID: "event-1"
+        )
+        try await setAggregateRevision(3, database: database)
+        _ = try await append(
+            database,
+            eventID: "event-3",
+            commandID: "command-3",
+            prior: 2,
+            result: 3,
+            causationEventID: "event-2"
+        )
+    }
+
+    private func tamperSourceBytes(
+        sequence: Int64,
+        database: SQLiteDatabase
+    ) async throws {
+        let rows = try await database.query(
+            "SELECT source_bytes FROM runtime_semantic_events WHERE sequence = ?",
+            bindings: [.integer(sequence)]
+        )
+        guard rows.count == 1,
+              case var .blob(sourceBytes)? = rows[0].value(named: "source_bytes"),
+              sourceBytes.isEmpty == false else {
+            return XCTFail("Expected source bytes for tamper fixture")
+        }
+        sourceBytes[sourceBytes.startIndex] ^= 0xff
+        try await database.execute("DROP TRIGGER runtime_semantic_events_immutable_update")
+        try await database.execute(
+            "UPDATE runtime_semantic_events SET source_bytes = ?, source_digest = ? WHERE sequence = ?",
+            bindings: [
+                .blob(sourceBytes),
+                .text(LocalRuntimeStorageChecksum.sha256Hex(for: sourceBytes)),
+                .integer(sequence),
+            ]
+        )
     }
 
     private func seedCommands(_ database: SQLiteDatabase, commandIDs: [String]) async throws {

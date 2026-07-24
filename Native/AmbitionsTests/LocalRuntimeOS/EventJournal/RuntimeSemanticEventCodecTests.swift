@@ -54,7 +54,7 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
         XCTAssertEqual(RuntimeSemanticEventRegistry.registeredUpcasterVersions, [.captureCreated: [0]])
         for (typeID, aggregateKind) in expected {
             XCTAssertEqual(typeID.aggregateKind, aggregateKind, typeID.rawValue)
-            XCTAssertEqual(typeID.latestPayloadVersion, 1, typeID.rawValue)
+            XCTAssertEqual(typeID.latestPayloadVersion, 2, typeID.rawValue)
         }
     }
 
@@ -247,7 +247,7 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
         )
         let unknown = canonical.replacingUTF8("ambitions.goal.updated", with: "ambitions.goal.future")
         let futureEnvelope = canonical.replacingUTF8("\"envelope_version\":1", with: "\"envelope_version\":2")
-        let futurePayload = canonical.replacingUTF8("\"payload_version\":1", with: "\"payload_version\":2")
+        let futurePayload = canonical.replacingUTF8("\"payload_version\":1", with: "\"payload_version\":999")
         let mismatch = canonical.replacingUTF8("ambitions.goal.updated", with: "ambitions.goal.created", maximumReplacementCount: 1)
 
         assertCodecError(.unknownType, bytes: unknown)

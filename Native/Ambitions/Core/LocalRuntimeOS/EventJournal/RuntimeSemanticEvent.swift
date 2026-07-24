@@ -19,6 +19,44 @@ struct RuntimeSemanticAggregate: Codable, Sendable, Equatable, Hashable {
     let id: RuntimeAggregateID
 }
 
+enum RuntimeAggregateLifecycle: String, Codable, Sendable, Equatable, Hashable {
+    case active
+    case tombstoned
+}
+
+enum RuntimeCanonicalTombstoneReason: String, Codable, Sendable, Equatable, Hashable {
+    case archived
+    case reminderDeleted = "reminder_deleted"
+    case objectDeleted = "object_deleted"
+    case memoryForgotten = "memory_forgotten"
+}
+
+enum RuntimeCanonicalTombstoneRetentionDisposition: String, Codable, Sendable, Equatable, Hashable {
+    case retainedUntilDownstreamPolicy = "retained_until_downstream_policy"
+}
+
+enum RuntimeCanonicalTombstoneRecoveryDisposition: String, Codable, Sendable, Equatable, Hashable {
+    case explicitTypedRestorationRequired = "explicit_typed_restoration_required"
+}
+
+struct RuntimeCanonicalTombstoneAuthority: Codable, Sendable, Equatable, Hashable {
+    let reason: RuntimeCanonicalTombstoneReason
+    let predecessorDigest: String
+    let retentionDisposition: RuntimeCanonicalTombstoneRetentionDisposition
+    let recoveryDisposition: RuntimeCanonicalTombstoneRecoveryDisposition
+}
+
+struct RuntimeSemanticAggregateTransition: Codable, Sendable, Equatable, Hashable {
+    let aggregate: RuntimeSemanticAggregate
+    let priorRevision: UInt64?
+    let resultingRevision: UInt64
+    let lifecycle: RuntimeAggregateLifecycle
+    let transition: RuntimeObjectTransitionKind
+    let canonicalStateBytes: Data
+    let canonicalStateDigest: String
+    let tombstone: RuntimeCanonicalTombstoneAuthority?
+}
+
 struct RuntimeCorrelationID: RuntimeIdentityValue {
     static let identityKind = RuntimeIdentityKind.domainObject
     let rawValue: String
@@ -72,8 +110,8 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
     case externalReminderRequested = "ambitions.external.reminder_requested"
     case externalCalendarEventRequested = "ambitions.external.calendar_event_requested"
 
-    var latestPayloadVersion: Int { 1 }
-    var supportedPayloadVersions: Set<Int> { self == .captureCreated ? [0, 1] : [1] }
+    var latestPayloadVersion: Int { 2 }
+    var supportedPayloadVersions: Set<Int> { self == .captureCreated ? [0, 1, 2] : [1, 2] }
 
     var isCreation: Bool {
         switch self {
@@ -104,6 +142,34 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
         case .externalReminderRequested, .externalCalendarEventRequested: .externalOperation
         }
     }
+
+    var legalAggregateTransition: RuntimeObjectTransitionKind {
+        switch self {
+        case .captureCreated, .goalCreated, .scheduleItemCreated, .reminderCreated:
+            .create
+        case .captureAttachedToGoal:
+            .attach
+        case .captureArchived, .reminderDeleted, .objectDeleted, .memoryForgotten:
+            .tombstone
+        case .captureCommitmentRouted, .captureMarkedWaiting,
+             .goalUpdated, .goalPrioritySet, .goalUrgencySet, .goalDeadlineSet,
+             .goalContextLensSet, .goalContextLensCleared, .goalDeliverableAdded,
+             .goalDeliverableRemoved, .goalScopeItemAdded, .goalScopeItemRemoved,
+             .stepSessionStarted, .stepCompleted, .stepDelayed, .stepSplit,
+             .stepRecovered, .stepTodayActionApplied, .scheduleItemScheduled,
+             .scheduleStepPlaced, .scheduleWindowProtected, .scheduleWindowCorrected,
+             .scheduleMutationUndone, .scheduleRitualApplied,
+             .scheduleCalendarWriteCommitted, .reminderUpdated,
+             .profilePreferencesUpdated, .historyRecommendationDismissed,
+             .historyTodayReceiptRecorded, .repairRecovered,
+             .externalReminderRequested, .externalCalendarEventRequested:
+            .update
+        }
+    }
+
+    var legalAggregateLifecycle: RuntimeAggregateLifecycle {
+        legalAggregateTransition == .tombstone ? .tombstoned : .active
+    }
 }
 
 struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
@@ -112,6 +178,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
     let priorRevision: UInt64?
     let resultingRevision: UInt64
     let changedObjectIDs: [RuntimeDomainObjectID]
+    let primaryAggregate: RuntimeSemanticAggregate?
+    let aggregateTransitions: [RuntimeSemanticAggregateTransition]
 
     enum CodingKeys: String, CodingKey {
         case semanticType = "semantic_type"
@@ -119,6 +187,8 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         case priorRevision = "prior_revision"
         case resultingRevision = "resulting_revision"
         case changedObjectIDs = "changed_object_ids"
+        case primaryAggregate = "primary_aggregate"
+        case aggregateTransitions = "aggregate_transitions"
     }
 
     init(
@@ -126,19 +196,75 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         aggregateID: RuntimeAggregateID,
         priorRevision: UInt64?,
         resultingRevision: UInt64,
-        changedObjectIDs: [RuntimeDomainObjectID]
+        changedObjectIDs: [RuntimeDomainObjectID],
+        primaryAggregate: RuntimeSemanticAggregate? = nil,
+        aggregateTransitions: [RuntimeSemanticAggregateTransition] = []
     ) throws {
         self.semanticType = semanticType
         self.aggregateID = aggregateID
         self.priorRevision = priorRevision
         self.resultingRevision = resultingRevision
         self.changedObjectIDs = Self.canonicalIDs(changedObjectIDs)
+        self.aggregateTransitions = aggregateTransitions.sorted {
+            ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
+                ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
+        }
+        self.primaryAggregate = primaryAggregate
         try validate(expectedType: semanticType)
     }
 
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        semanticType = try values.decode(RuntimeSemanticEventTypeID.self, forKey: .semanticType)
+        aggregateID = try values.decode(RuntimeAggregateID.self, forKey: .aggregateID)
+        priorRevision = try values.decodeIfPresent(UInt64.self, forKey: .priorRevision)
+        resultingRevision = try values.decode(UInt64.self, forKey: .resultingRevision)
+        changedObjectIDs = try values.decode([RuntimeDomainObjectID].self, forKey: .changedObjectIDs)
+        primaryAggregate = try values.decodeIfPresent(RuntimeSemanticAggregate.self, forKey: .primaryAggregate)
+        aggregateTransitions = try values.decodeIfPresent(
+            [RuntimeSemanticAggregateTransition].self,
+            forKey: .aggregateTransitions
+        ) ?? []
+        try validate(expectedType: semanticType)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(semanticType, forKey: .semanticType)
+        try values.encode(aggregateID, forKey: .aggregateID)
+        try values.encodeIfPresent(priorRevision, forKey: .priorRevision)
+        try values.encode(resultingRevision, forKey: .resultingRevision)
+        try values.encode(changedObjectIDs, forKey: .changedObjectIDs)
+        if aggregateTransitions.isEmpty == false {
+            try values.encode(primaryAggregate, forKey: .primaryAggregate)
+            try values.encode(aggregateTransitions, forKey: .aggregateTransitions)
+        }
+    }
+
     func validate(expectedType: RuntimeSemanticEventTypeID) throws {
+        for transition in aggregateTransitions {
+            let decoded: RuntimeCanonicalAggregateState
+            do {
+                decoded = try RuntimeCanonicalAggregateStateCodec().decode(transition.canonicalStateBytes)
+            } catch {
+                throw RuntimeSemanticEventCodecError.invalidPayload
+            }
+            guard transition.canonicalStateDigest == LocalRuntimeStorageChecksum.sha256Hex(
+                for: transition.canonicalStateBytes
+            ),
+            decoded.aggregate == transition.aggregate,
+            decoded.revision == transition.resultingRevision,
+            decoded.lifecycle == transition.lifecycle,
+            decoded.transition == transition.transition,
+            decoded.changedObjectIDs == changedObjectIDs else {
+                throw RuntimeSemanticEventCodecError.invalidPayload
+            }
+        }
         let hasValidProgression: Bool
-        if expectedType.isCreation {
+        let primary = primaryAggregate.flatMap { primary in
+            aggregateTransitions.first { $0.aggregate == primary }
+        }
+        if primary?.transition == .create || (aggregateTransitions.isEmpty && expectedType.isCreation) {
             hasValidProgression = priorRevision == nil && resultingRevision == 0
         } else if let priorRevision {
             hasValidProgression = priorRevision < UInt64.max && resultingRevision == priorRevision + 1
@@ -147,7 +273,38 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
         }
         guard semanticType == expectedType,
               hasValidProgression,
-              changedObjectIDs == Self.canonicalIDs(changedObjectIDs) else {
+              changedObjectIDs == Self.canonicalIDs(changedObjectIDs),
+              aggregateTransitions.isEmpty == (primaryAggregate == nil),
+              aggregateTransitions == aggregateTransitions.sorted(by: {
+                  ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
+                      ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
+              }),
+              Set(aggregateTransitions.map(\.aggregate)).count == aggregateTransitions.count,
+              aggregateTransitions.allSatisfy({ transition in
+                  let transitionProgression = transition.transition == .create
+                      ? transition.priorRevision == nil && transition.resultingRevision == 0
+                      : transition.priorRevision.map {
+                          $0 < UInt64.max && transition.resultingRevision == $0 + 1
+                      } ?? false
+                  return transitionProgression &&
+                      transition.canonicalStateBytes.isEmpty == false &&
+                      RuntimeStoreManifestCodec.isSHA256Hex(transition.canonicalStateDigest) &&
+                      transition.canonicalStateDigest == transition.canonicalStateDigest.lowercased() &&
+                      (transition.lifecycle == .tombstoned) == (transition.transition == .tombstone) &&
+                      (transition.lifecycle == .tombstoned) == (transition.tombstone != nil) &&
+                      (transition.tombstone.map({ authority in
+                          RuntimeStoreManifestCodec.isSHA256Hex(authority.predecessorDigest) &&
+                              authority.predecessorDigest == authority.predecessorDigest.lowercased()
+                      }) ?? true)
+              }),
+              aggregateTransitions.isEmpty || (
+                  primaryAggregate?.kind == expectedType.aggregateKind &&
+                      primaryAggregate?.id == aggregateID &&
+                      primary?.priorRevision == priorRevision &&
+                      primary?.resultingRevision == resultingRevision &&
+                      primary?.transition == expectedType.legalAggregateTransition &&
+                      primary?.lifecycle == expectedType.legalAggregateLifecycle
+              ) else {
             throw RuntimeSemanticEventCodecError.invalidPayload
         }
     }
@@ -566,7 +723,9 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
             }
         }
     }
-    var aggregateKind: RuntimeSemanticAggregateKind { typeID.aggregateKind }
+    var aggregateKind: RuntimeSemanticAggregateKind {
+        mutation.primaryAggregate?.kind ?? typeID.aggregateKind
+    }
 
     var mutation: RuntimeSemanticMutation {
         switch self {
@@ -585,7 +744,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
 
     func validate() throws {
         guard mutation.semanticType == typeID,
-              typeID.aggregateKind == aggregateKind else {
+              mutation.aggregateTransitions.isEmpty || mutation.primaryAggregate?.kind == typeID.aggregateKind else {
             throw RuntimeSemanticEventCodecError.typeMismatch
         }
         switch self {
@@ -599,6 +758,51 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .repair(value): try value.payload.validate()
         case let .importDeletion(value): try value.payload.validate()
         case let .externalOperation(value): try value.payload.validate()
+        }
+    }
+
+    var commandPayload: RuntimeCommandPayload {
+        switch self {
+        case let .capture(value):
+            let f = value.payload.facts
+            return .capture(CaptureCommand(
+                action: f.action, target: f.target, content: f.content,
+                sourceType: f.sourceType, entryPoint: f.entryPoint, route: f.route,
+                flagshipRoute: f.flagshipRoute, placementID: f.placementID, draftID: f.draftID
+            ))
+        case let .goal(value):
+            let f = value.payload.facts
+            return .goal(GoalCommand(action: f.action, target: f.target, content: f.content))
+        case let .step(value):
+            let f = value.payload.facts
+            return .step(StepCommand(action: f.action, target: f.target, content: f.content))
+        case let .schedule(value):
+            let f = value.payload.facts
+            return .schedule(ScheduleCommand(action: f.action, target: f.target, content: f.content))
+        case let .reminder(value):
+            let f = value.payload.facts
+            return .reminder(ReminderCommand(action: f.action, target: f.target, content: f.content))
+        case let .profile(value):
+            let f = value.payload.facts
+            return .profile(ProfileCommand(
+                action: f.action, target: f.target, content: f.content, preferences: f.preferences
+            ))
+        case let .history(value):
+            let f = value.payload.facts
+            return .history(HistoryCommand(action: f.action, target: f.target, content: f.content))
+        case let .repair(value):
+            let f = value.payload.facts
+            return .repair(RepairCommand(
+                action: f.action, recommendation: f.recommendation, target: f.target, content: f.content
+            ))
+        case let .importDeletion(value):
+            let f = value.payload.facts
+            return .importDeletion(ImportDeletionCommand(action: f.action, target: f.target, content: f.content))
+        case let .externalOperation(value):
+            let f = value.payload.facts
+            return .externalOperation(ExternalOperationCommand(
+                operationID: f.operationID, kind: f.kind, target: f.target, title: f.title
+            ))
         }
     }
 }

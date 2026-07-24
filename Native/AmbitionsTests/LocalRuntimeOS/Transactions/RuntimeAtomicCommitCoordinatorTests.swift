@@ -99,7 +99,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             objectID: try RuntimeDomainObjectID(validating: "capture-1"),
             family: RuntimeSemanticAggregateKind.capture.rawValue,
             terminalRevision: 4,
-            lineage: lineage
+            lineage: lineage,
+            authority: RuntimeCanonicalTombstoneAuthority(
+                reason: .archived,
+                predecessorDigest: String(repeating: "b", count: 64),
+                retentionDisposition: .retainedUntilDownstreamPolicy,
+                recoveryDisposition: .explicitTypedRestorationRequired
+            )
         )
 
         XCTAssertEqual(unresolved.lineage.eventID, eventID)
@@ -232,8 +238,10 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             target: AmbitionsCommandTarget(captureID: "capture-1"),
             expectedRevision: .exact(0),
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(0),
-                objectRevisions: [try RuntimeDomainObjectID(validating: "capture-1"): .exact(0)],
+                aggregateRevisions: [RuntimePreparationAggregateReference(
+                    family: .capture,
+                    objectID: try RuntimeDomainObjectID(validating: "capture-1")
+                ): .exact(0)],
                 cursors: [], privacy: .standard
             )
         )
@@ -304,8 +312,10 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             target: AmbitionsCommandTarget(captureID: "capture-1"),
             expectedRevision: .exact(0),
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(0),
-                objectRevisions: [try RuntimeDomainObjectID(validating: "capture-1"): .exact(0)],
+                aggregateRevisions: [RuntimePreparationAggregateReference(
+                    family: .capture,
+                    objectID: try RuntimeDomainObjectID(validating: "capture-1")
+                ): .exact(0)],
                 cursors: [], privacy: .standard
             )
         )
@@ -405,7 +415,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         }
     }
 
-    func testConcurrentAndRestartedIdenticalSubmissionsReturnExactOutcome() async throws {
+    func testActorSerializedTaskGroupAndRestartedIdenticalSubmissionsReturnExactOutcome() async throws {
         let database = try await makeStagedDatabase(label: "concurrent")
         let preparation = try await makeCapturePreparation()
         let outcomes = try await withThrowingTaskGroup(of: RuntimeAtomicCommitFinalOutcome.self) { group in
@@ -442,8 +452,10 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             target: AmbitionsCommandTarget(captureID: "capture-1"),
             expectedRevision: .exact(0),
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(0),
-                objectRevisions: [try RuntimeDomainObjectID(validating: "capture-1"): .exact(0)],
+                aggregateRevisions: [RuntimePreparationAggregateReference(
+                    family: .capture,
+                    objectID: try RuntimeDomainObjectID(validating: "capture-1")
+                ): .exact(0)],
                 cursors: [],
                 privacy: .standard
             )
@@ -461,21 +473,225 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         XCTAssertEqual(try RuntimeCanonicalAggregateStateCodec().decode(bytes).revision, 1)
     }
 
+    func testCommitAfterTombstoneRejectsBothStoredLifecycleAndDurableTombstoneAuthority() async throws {
+        let database = try await makeStagedDatabase(label: "commit-after-tombstone")
+        _ = try await commit(try await makeCapturePreparation(), database: database)
+        let reference = RuntimePreparationAggregateReference(
+            family: .capture,
+            objectID: try RuntimeDomainObjectID(validating: "capture-1")
+        )
+        let archive = try await makeCapturePreparation(
+            commandID: "command-archive",
+            action: .archive,
+            target: AmbitionsCommandTarget(captureID: "capture-1"),
+            expectedRevision: .exact(0),
+            snapshot: RuntimePreparationSnapshot(
+                aggregateRevisions: [reference: .exact(0)],
+                cursors: [], privacy: .standard
+            )
+        )
+        _ = try await commit(archive, database: database)
+
+        func attemptedUpdate(_ commandID: String) async throws -> RuntimePreparation {
+            try await makeCapturePreparation(
+                commandID: commandID,
+                action: .markWaiting,
+                target: AmbitionsCommandTarget(captureID: "capture-1"),
+                expectedRevision: .exact(1),
+                snapshot: RuntimePreparationSnapshot(
+                    aggregateRevisions: [reference: .exact(1)],
+                    cursors: [], privacy: .standard
+                )
+            )
+        }
+        do {
+            _ = try await commit(try await attemptedUpdate("command-after-tombstoned-state"), database: database)
+            XCTFail("A non-restore write must not advance tombstoned aggregate state")
+        } catch let error as RuntimeAtomicCommitError {
+            XCTAssertEqual(error, .corruptAuthority)
+        }
+
+        let forgedActive = RuntimeCanonicalAggregateState(
+            aggregate: RuntimeSemanticAggregate(
+                kind: .capture,
+                id: try RuntimeAggregateID(validating: "capture-1")
+            ),
+            revision: 1,
+            lifecycle: .active,
+            transition: .update,
+            commandPayload: capturePayload(action: .markWaiting),
+            changedObjectIDs: [try RuntimeDomainObjectID(validating: "capture-1")]
+        )
+        try await replaceCaptureState(forgedActive, database: database)
+        do {
+            _ = try await commit(try await attemptedUpdate("command-after-durable-tombstone"), database: database)
+            XCTFail("A durable tombstone must block a forged active aggregate row")
+        } catch let error as RuntimeAtomicCommitError {
+            XCTAssertEqual(error, .corruptAuthority)
+        }
+        let events = try await database.query("SELECT COUNT(*) AS count FROM runtime_semantic_events")
+        XCTAssertEqual(events.first?.value(named: "count"), .integer(2))
+    }
+
+    func testReminderDeleteAndCaptureArchiveKeepLinkedGoalAsReadOnlyDependency() async throws {
+        let reminderDatabase = try await makeStagedDatabase(label: "reminder-linked-goal")
+        let reminderCreate = try await makeReminderPreparation()
+        _ = try await commit(
+            reminderCreate,
+            confirmation: try approvedConfirmation(for: reminderCreate),
+            database: reminderDatabase
+        )
+        let goalReference = RuntimePreparationAggregateReference(
+            family: .goal,
+            objectID: try RuntimeDomainObjectID(validating: "goal-1")
+        )
+        let reminderReference = RuntimePreparationAggregateReference(
+            family: .reminder,
+            objectID: try RuntimeDomainObjectID(validating: "reminder-1")
+        )
+        try await seedAggregate(
+            goalReference,
+            payload: reminderCreate.command.typedPayload,
+            database: reminderDatabase
+        )
+        let deleteCommand = AmbitionsCommand(
+            id: "command-reminder-delete",
+            source: .time,
+            typedPayload: .reminder(ReminderCommand(
+                action: .delete,
+                target: AmbitionsCommandTarget(goalID: "goal-1", timeID: "reminder-1"),
+                content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Delete reminder"))
+            )),
+            expectedRevision: .exact(0),
+            createdAt: DomainTimestamp.string(from: Self.now)
+        )
+        let delete = try await prepared(
+            deleteCommand,
+            snapshot: RuntimePreparationSnapshot(
+                aggregateRevisions: [goalReference: .exact(0), reminderReference: .exact(0)],
+                cursors: [], privacy: .standard
+            ),
+            proposedID: "unused-reminder-delete"
+        )
+        XCTAssertEqual(delete.decision.writeSet.transitions.map(\.aggregate), [reminderReference])
+        _ = try await commit(
+            delete,
+            confirmation: try approvedConfirmation(for: delete),
+            database: reminderDatabase
+        )
+        let reminderRows = try await reminderDatabase.query(
+            "SELECT aggregate_kind, revision FROM runtime_aggregates ORDER BY aggregate_kind"
+        )
+        XCTAssertEqual(reminderRows.map { $0.value(named: "aggregate_kind") }, [.text("goal"), .text("reminder")])
+        XCTAssertEqual(reminderRows.map { $0.value(named: "revision") }, [.integer(0), .integer(1)])
+
+        let archiveDatabase = try await makeStagedDatabase(label: "archive-linked-goal")
+        _ = try await commit(try await makeCapturePreparation(), database: archiveDatabase)
+        try await seedAggregate(
+            goalReference,
+            payload: capturePayload(action: .archive),
+            database: archiveDatabase
+        )
+        let captureReference = RuntimePreparationAggregateReference(
+            family: .capture,
+            objectID: try RuntimeDomainObjectID(validating: "capture-1")
+        )
+        let archive = try await makeCapturePreparation(
+            commandID: "command-linked-archive",
+            action: .archive,
+            target: AmbitionsCommandTarget(goalID: "goal-1", captureID: "capture-1"),
+            expectedRevision: .exact(0),
+            snapshot: RuntimePreparationSnapshot(
+                aggregateRevisions: [goalReference: .exact(0), captureReference: .exact(0)],
+                cursors: [], privacy: .standard
+            )
+        )
+        XCTAssertEqual(archive.decision.writeSet.transitions.map(\.aggregate), [captureReference])
+        _ = try await commit(archive, database: archiveDatabase)
+        let archiveRows = try await archiveDatabase.query(
+            "SELECT aggregate_kind, revision FROM runtime_aggregates ORDER BY aggregate_kind"
+        )
+        XCTAssertEqual(archiveRows.map { $0.value(named: "aggregate_kind") }, [.text("capture"), .text("goal")])
+        XCTAssertEqual(archiveRows.map { $0.value(named: "revision") }, [.integer(1), .integer(0)])
+    }
+
     func testStableMultiAggregateCASUsesEachBoundTransitionRevision() async throws {
         let database = try await makeStagedDatabase(label: "multi-cas")
-        let preparation = try await makeStepPreparation()
+        let preparation = try explicitMultiAggregatePreparation(
+            try await makeStepPreparation()
+        )
         try await seedStepAggregates(for: preparation.command.typedPayload, database: database)
         _ = try await commit(preparation, database: database)
         let rows = try await database.query(
-            "SELECT aggregate_id, revision FROM runtime_aggregates WHERE aggregate_kind = 'step' ORDER BY aggregate_id"
+            "SELECT aggregate_kind, aggregate_id, revision FROM runtime_aggregates WHERE aggregate_id IN ('goal-1', 'step-1') ORDER BY aggregate_kind, aggregate_id"
         )
+        XCTAssertEqual(rows.map { $0.value(named: "aggregate_kind") }, [.text("goal"), .text("step")])
         XCTAssertEqual(rows.map { $0.value(named: "aggregate_id") }, [.text("goal-1"), .text("step-1")])
         XCTAssertEqual(rows.map { $0.value(named: "revision") }, [.integer(1), .integer(1)])
     }
 
+    func testSameRawIDCrossFamilyCommitWritesOneEventAndReplaysAtomically() async throws {
+        let database = try await makeStagedDatabase(label: "cross-family-one-event")
+        let shared = try RuntimeDomainObjectID(validating: "shared-family-object")
+        let capture = RuntimePreparationAggregateReference(family: .capture, objectID: shared)
+        let goal = RuntimePreparationAggregateReference(family: .goal, objectID: shared)
+        let basePreparation = try await makeCapturePreparation(
+            commandID: "command-cross-family-one-event",
+            action: .attachToGoal,
+            target: AmbitionsCommandTarget(goalID: shared.rawValue, captureID: shared.rawValue),
+            expectedRevision: .exact(0),
+            snapshot: RuntimePreparationSnapshot(
+                aggregateRevisions: [capture: .exact(0), goal: .exact(0)],
+                cursors: [],
+                privacy: .standard
+            )
+        )
+        let preparation = try withExplicitWrites(
+            basePreparation,
+            withExplicitWrites: [capture, goal]
+        )
+        try await seedSameRawCrossFamilyAggregates(
+            id: shared,
+            payload: preparation.command.typedPayload,
+            database: database
+        )
+
+        _ = try await commit(preparation, database: database)
+
+        let rows = try await database.query(
+            "SELECT aggregate_kind, aggregate_id, revision FROM runtime_aggregates ORDER BY aggregate_kind, aggregate_id"
+        )
+        XCTAssertEqual(rows.map { $0.value(named: "aggregate_kind") }, [.text("capture"), .text("goal")])
+        XCTAssertEqual(rows.map { $0.value(named: "aggregate_id") }, [.text(shared.rawValue), .text(shared.rawValue)])
+        XCTAssertEqual(rows.map { $0.value(named: "revision") }, [.integer(1), .integer(1)])
+        let events = try await database.query(
+            "SELECT source_bytes FROM runtime_semantic_events WHERE command_id = ?",
+            bindings: [.text(preparation.commandID.rawValue)]
+        )
+        XCTAssertEqual(events.count, 1)
+        guard case let .blob(bytes)? = events.first?.value(named: "source_bytes") else {
+            return XCTFail("Expected one canonical event")
+        }
+        let decoded = try RuntimeSemanticEventCodec().decode(bytes).event
+        XCTAssertEqual(decoded.mutation.primaryAggregate, RuntimeSemanticAggregate(
+            kind: .capture,
+            id: try RuntimeAggregateID(validating: shared.rawValue)
+        ))
+        XCTAssertEqual(decoded.mutation.aggregateTransitions.map(\.aggregate.kind), [.capture, .goal])
+        let replay = try await database.transaction(.immediate) { database in
+            try RuntimeCanonicalReplayEngine.replayInTransaction(database: database)
+        }
+        guard case let .complete(reconstruction) = replay else {
+            return XCTFail("Expected complete atomic replay")
+        }
+        XCTAssertEqual(reconstruction.aggregates.map(\.state.aggregate.kind), [.capture, .goal])
+    }
+
     func testSameRevisionMultiAggregateReplayBindsCompleteCommandEventChain() async throws {
         let database = try await makeStagedDatabase(label: "multi-replay-chain")
-        let preparation = try await makeStepPreparation()
+        let preparation = try explicitMultiAggregatePreparation(
+            try await makeStepPreparation()
+        )
         try await seedStepAggregates(for: preparation.command.typedPayload, database: database)
         let original = try await commit(preparation, database: database)
         let beforeReplay = try await authoritySnapshot(database)
@@ -487,54 +703,74 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let events = try await database.query(
             """
             SELECT sequence, event_id, aggregate_kind, aggregate_id,
-                   canonical_revision, causation_event_id, event_hash
+                   canonical_revision, causation_event_id, event_hash, source_bytes
             FROM runtime_semantic_events
             WHERE command_id = ?
             ORDER BY sequence
             """,
             bindings: [.text(preparation.commandID.rawValue)]
         )
-        XCTAssertEqual(events.count, 2)
-        XCTAssertEqual(events.map { $0.value(named: "aggregate_kind") }, [.text("step"), .text("step")])
-        XCTAssertEqual(events.map { $0.value(named: "aggregate_id") }, [.text("goal-1"), .text("step-1")])
-        XCTAssertEqual(events.map { $0.value(named: "canonical_revision") }, [.integer(1), .integer(1)])
-        XCTAssertEqual(events[0].value(named: "event_id"), .text("event.command-step.aggregate.0"))
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events[0].value(named: "aggregate_kind"), .text("step"))
+        XCTAssertEqual(events[0].value(named: "aggregate_id"), .text("step-1"))
+        XCTAssertEqual(events[0].value(named: "canonical_revision"), .integer(1))
+        XCTAssertEqual(events[0].value(named: "event_id"), .text("event.command-step"))
         XCTAssertEqual(events[0].value(named: "causation_event_id"), .null)
-        XCTAssertEqual(events[1].value(named: "event_id"), .text("event.command-step"))
-        XCTAssertEqual(events[1].value(named: "causation_event_id"), .text("event.command-step.aggregate.0"))
+        guard case let .blob(sourceBytes)? = events[0].value(named: "source_bytes") else {
+            return XCTFail("Expected canonical semantic event")
+        }
+        let decoded = try RuntimeSemanticEventCodec().decode(sourceBytes).event
         XCTAssertEqual(
-            events[1].value(named: "sequence"),
+            decoded.mutation.aggregateTransitions.map(\.aggregate),
+            [
+                RuntimeSemanticAggregate(kind: .goal, id: try RuntimeAggregateID(validating: "goal-1")),
+                RuntimeSemanticAggregate(kind: .step, id: try RuntimeAggregateID(validating: "step-1")),
+            ]
+        )
+        XCTAssertEqual(decoded.mutation.primaryAggregate?.id.rawValue, "step-1")
+        XCTAssertEqual(
+            events[0].value(named: "sequence"),
             .integer(Int64(original.receipt.lineage.eventSequence))
         )
         XCTAssertEqual(
-            events[1].value(named: "event_id"),
+            events[0].value(named: "event_id"),
             .text(original.receipt.lineage.eventID.rawValue)
         )
         XCTAssertEqual(
-            events[1].value(named: "event_hash"),
+            events[0].value(named: "event_hash"),
             .text(original.receipt.lineage.eventHash)
         )
     }
 
-    func testSameRevisionReplayRejectsCorruptNonterminalEventSourceAndDigestWithoutWriting() async throws {
-        let database = try await makeStagedDatabase(label: "multi-replay-corrupt-nonterminal")
-        let preparation = try await makeStepPreparation()
-        try await seedStepAggregates(for: preparation.command.typedPayload, database: database)
-        _ = try await commit(preparation, database: database)
+    func testImmutableJournalAndExplicitPrefixVerificationRejectHistoricalSourceTampering() async throws {
+        let database = try await makeStagedDatabase(label: "append-corrupt-middle-source")
+        _ = try await commit(try await makeCapturePreparation(), database: database)
+        func update(_ commandID: String, _ revision: UInt64, _ action: CaptureCommand.Action) async throws -> RuntimePreparation {
+            let reference = RuntimePreparationAggregateReference(
+                family: .capture,
+                objectID: try RuntimeDomainObjectID(validating: "capture-1")
+            )
+            return try await makeCapturePreparation(
+                commandID: commandID,
+                action: action,
+                target: AmbitionsCommandTarget(captureID: "capture-1"),
+                expectedRevision: .exact(revision),
+                snapshot: RuntimePreparationSnapshot(
+                    aggregateRevisions: [reference: .exact(revision)],
+                    cursors: [], privacy: .standard
+                )
+            )
+        }
+        _ = try await commit(try await update("command-middle-1", 0, .markWaiting), database: database)
+        _ = try await commit(try await update("command-middle-2", 1, .routeCommitment), database: database)
         let rows = try await database.query(
-            """
-            SELECT sequence, source_bytes
-            FROM runtime_semantic_events
-            WHERE command_id = ?
-            ORDER BY sequence
-            """,
-            bindings: [.text(preparation.commandID.rawValue)]
+            "SELECT sequence, source_bytes FROM runtime_semantic_events ORDER BY sequence"
         )
-        XCTAssertEqual(rows.count, 2)
-        guard case let .integer(sequence)? = rows.first?.value(named: "sequence"),
-              case var .blob(sourceBytes)? = rows.first?.value(named: "source_bytes"),
+        XCTAssertEqual(rows.count, 3)
+        guard case let .integer(sequence)? = rows[1].value(named: "sequence"),
+              case var .blob(sourceBytes)? = rows[1].value(named: "source_bytes"),
               sourceBytes.isEmpty == false else {
-            return XCTFail("Expected nonterminal semantic event source")
+            return XCTFail("Expected middle semantic event source")
         }
         let immutableTrigger = try XCTUnwrap(
             CanonicalRuntimeSemanticEventSchemaPlan.statements.first {
@@ -545,6 +781,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             "SELECT name FROM sqlite_schema WHERE type = 'trigger' AND name = 'runtime_semantic_events_immutable_update'"
         )
         XCTAssertEqual(triggerBeforeBypass.count, 1)
+        do {
+            try await database.execute(
+                "UPDATE runtime_semantic_events SET source_bytes = ? WHERE sequence = ?",
+                bindings: [.blob(sourceBytes), .integer(sequence)]
+            )
+            XCTFail("The immutable journal trigger must reject ordinary historical mutation")
+        } catch {}
         try await database.execute("DROP TRIGGER runtime_semantic_events_immutable_update")
         let triggerDuringBypass = try await database.query(
             "SELECT name FROM sqlite_schema WHERE type = 'trigger' AND name = 'runtime_semantic_events_immutable_update'"
@@ -564,27 +807,28 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             "SELECT name FROM sqlite_schema WHERE type = 'trigger' AND name = 'runtime_semantic_events_immutable_update'"
         )
         XCTAssertEqual(triggerAfterBypass.count, 1)
-        let beforeReplay = try await authoritySnapshot(database)
-
         do {
-            _ = try await commit(preparation, database: database)
-            XCTFail("Expected corrupt nonterminal semantic event rejection")
-        } catch let error as RuntimeAtomicCommitError {
-            XCTAssertEqual(error, .corruptAuthority)
-        }
-        XCTAssertEqual(try await authoritySnapshot(database), beforeReplay)
+            _ = try await database.transaction(.deferred) { database in
+                try CanonicalRuntimeSemanticEventStore.verifiedSourceChainDigestThrough(
+                    3,
+                    database: database
+                )
+            }
+            XCTFail("Explicit replay/checkpoint/retention prefix verification must reject tampered source")
+        } catch {}
     }
 
     func testUnboundMixedRevisionWriteSetFailsInsteadOfGuessing() async throws {
         let database = try await makeStagedDatabase(label: "mixed-revision")
-        let original = try await makeStepPreparation()
+        let original = try explicitMultiAggregatePreparation(
+            try await makeStepPreparation()
+        )
         try await seedStepAggregates(for: original.command.typedPayload, database: database)
         let transitions = original.decision.writeSet.transitions.enumerated().map { index, value in
             RuntimeObjectTransitionIntent(
-                objectID: value.objectID,
+                aggregate: value.aggregate,
                 expectedRevision: index == 0 ? .exact(0) : .exact(1),
-                transition: value.transition,
-                family: value.family
+                transition: value.transition
             )
         }
         let writeSet = RuntimeMutationWriteSet(
@@ -649,8 +893,10 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             target: AmbitionsCommandTarget(captureID: "capture-1"),
             expectedRevision: .exact(0),
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(0),
-                objectRevisions: [try RuntimeDomainObjectID(validating: "capture-1"): .exact(0)],
+                aggregateRevisions: [RuntimePreparationAggregateReference(
+                    family: .capture,
+                    objectID: try RuntimeDomainObjectID(validating: "capture-1")
+                ): .exact(0)],
                 cursors: [], privacy: .standard
             )
         )
@@ -853,11 +1099,80 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         return try await prepared(
             command,
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(0),
-                objectRevisions: [goalID: .exact(0), stepID: .exact(0)],
+                aggregateRevisions: [
+                    RuntimePreparationAggregateReference(family: .goal, objectID: goalID): .exact(0),
+                    RuntimePreparationAggregateReference(family: .step, objectID: stepID): .exact(0),
+                ],
                 cursors: [], privacy: .standard
             ),
             proposedID: "unused-step-proposal"
+        )
+    }
+
+    private func explicitMultiAggregatePreparation(
+        _ base: RuntimePreparation
+    ) throws -> RuntimePreparation {
+        try withExplicitWrites(
+            base,
+            withExplicitWrites: base.decision.readSet.objects.map(\.aggregate)
+        )
+    }
+
+    private func withExplicitWrites(
+        _ base: RuntimePreparation,
+        withExplicitWrites aggregates: [RuntimePreparationAggregateReference]
+    ) throws -> RuntimePreparation {
+        let transitions = try aggregates.map { aggregate in
+            guard let dependency = base.decision.readSet.objects.first(where: {
+                $0.aggregate == aggregate
+            }) else {
+                throw RuntimeAtomicCommitError.malformedPreparation
+            }
+            return RuntimeObjectTransitionIntent(
+                aggregate: aggregate,
+                expectedRevision: dependency.expectedRevision,
+                transition: base.decision.writeSet.transitions.first(where: {
+                    $0.aggregate == aggregate
+                })?.transition ?? .update
+            )
+        }
+        let writeSet = RuntimeMutationWriteSet(
+            transitions: transitions,
+            events: base.decision.writeSet.events,
+            projectionInvalidations: base.decision.writeSet.projectionInvalidations,
+            receiptIntentID: base.decision.writeSet.receiptIntentID,
+            rollbackIntentID: base.decision.writeSet.rollbackIntentID,
+            externalEffect: base.decision.writeSet.externalEffect
+        )
+        let decision = RuntimeReducerDecision(
+            family: base.decision.family,
+            action: base.decision.action,
+            disposition: base.decision.disposition,
+            readSet: base.decision.readSet,
+            writeSet: writeSet,
+            confirmationScope: base.decision.confirmationScope,
+            reason: base.decision.reason,
+            recovery: base.decision.recovery
+        )
+        let payloadDigest = try XCTUnwrap(RuntimePreparationDigest.value(base.command.typedPayload))
+        let decisionDigest = try XCTUnwrap(RuntimePreparationDigest.decision(
+            commandPayloadDigest: payloadDigest,
+            decision: decision,
+            preparationID: base.preparationID
+        ))
+        return RuntimePreparation(
+            preparationID: base.preparationID,
+            command: base.command,
+            commandID: base.commandID,
+            commandFingerprint: base.commandFingerprint,
+            commandVersion: base.commandVersion,
+            decision: decision,
+            decisionDigest: decisionDigest,
+            authorization: base.authorization,
+            confirmationRequest: base.confirmationRequest,
+            issuedAt: base.issuedAt,
+            expiresAt: base.expiresAt,
+            schemaVersion: base.schemaVersion
         )
     }
 
@@ -866,10 +1181,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         database: SQLiteDatabase
     ) async throws {
         try await database.transaction(.immediate) { database in
-            for id in ["goal-1", "step-1"] {
+            for (family, id) in [
+                (RuntimeSemanticAggregateKind.goal, "goal-1"),
+                (RuntimeSemanticAggregateKind.step, "step-1"),
+            ] {
                 let state = RuntimeCanonicalAggregateState(
                     aggregate: RuntimeSemanticAggregate(
-                        kind: .step,
+                        kind: family,
                         id: try RuntimeAggregateID(validating: id)
                     ),
                     revision: 0,
@@ -880,9 +1198,65 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
                 )
                 let bytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
                 try database.execute(
-                    "INSERT INTO runtime_aggregates(aggregate_kind, aggregate_id, revision, payload_version, payload, payload_checksum) VALUES ('step', ?, 0, 1, ?, ?)",
+                    "INSERT INTO runtime_aggregates(aggregate_kind, aggregate_id, revision, payload_version, payload, payload_checksum) VALUES (?, ?, 0, 1, ?, ?)",
                     bindings: [
-                        .text(id), .blob(bytes),
+                        .text(family.rawValue), .text(id), .blob(bytes),
+                        .text(LocalRuntimeStorageChecksum.sha256Hex(for: bytes)),
+                    ]
+                )
+            }
+        }
+    }
+
+    private func seedAggregate(
+        _ reference: RuntimePreparationAggregateReference,
+        payload: RuntimeCommandPayload,
+        database: SQLiteDatabase
+    ) async throws {
+        let state = RuntimeCanonicalAggregateState(
+            aggregate: RuntimeSemanticAggregate(
+                kind: reference.family,
+                id: try RuntimeAggregateID(validating: reference.objectID.rawValue)
+            ),
+            revision: 0,
+            lifecycle: .active,
+            transition: .update,
+            commandPayload: payload,
+            changedObjectIDs: [reference.objectID]
+        )
+        let bytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
+        try await database.execute(
+            "INSERT INTO runtime_aggregates(aggregate_kind, aggregate_id, revision, payload_version, payload, payload_checksum) VALUES (?, ?, 0, 1, ?, ?)",
+            bindings: [
+                .text(reference.family.rawValue), .text(reference.objectID.rawValue),
+                .blob(bytes), .text(LocalRuntimeStorageChecksum.sha256Hex(for: bytes)),
+            ]
+        )
+    }
+
+    private func seedSameRawCrossFamilyAggregates(
+        id: RuntimeDomainObjectID,
+        payload: RuntimeCommandPayload,
+        database: SQLiteDatabase
+    ) async throws {
+        try await database.transaction(.immediate) { database in
+            for family in [RuntimeSemanticAggregateKind.capture, .goal] {
+                let state = RuntimeCanonicalAggregateState(
+                    aggregate: RuntimeSemanticAggregate(
+                        kind: family,
+                        id: try RuntimeAggregateID(validating: id.rawValue)
+                    ),
+                    revision: 0,
+                    lifecycle: .active,
+                    transition: .update,
+                    commandPayload: payload,
+                    changedObjectIDs: [id]
+                )
+                let bytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
+                try database.execute(
+                    "INSERT INTO runtime_aggregates(aggregate_kind, aggregate_id, revision, payload_version, payload, payload_checksum) VALUES (?, ?, 0, 1, ?, ?)",
+                    bindings: [
+                        .text(family.rawValue), .text(id.rawValue), .blob(bytes),
                         .text(LocalRuntimeStorageChecksum.sha256Hex(for: bytes)),
                     ]
                 )

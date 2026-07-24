@@ -40,7 +40,7 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
 
         let request = RuntimePreparationReadRequest(
             commandID: commandID,
-            targetIDs: command.target.runtimePreparationObjectIDs,
+            targets: command.runtimePreparationAggregateReferences,
             expectedRevision: command.expectedRevision,
             privacy: command.privacy
         )
@@ -171,21 +171,37 @@ struct RuntimePreparationAuthorizer: Sendable {
         if privacyBoundary.isSatisfied == false || snapshot.privacy != command.privacy {
             reasons.append(.privacyDenied)
         }
-        if revisionMatches(expected: command.expectedRevision, observed: snapshot.observedRevision) == false {
+        let primaryObserved: RuntimeExpectedRevision
+        if let primary = command.runtimePrimaryPreparationReference {
+            if let observed = snapshot.aggregateRevisions[primary] {
+                primaryObserved = observed
+            } else {
+                primaryObserved = .absent
+                reasons.append(.identityMismatch)
+            }
+        } else {
+            primaryObserved = .absent
+        }
+        if revisionMatches(expected: command.expectedRevision, observed: primaryObserved) == false {
             reasons.append(.revisionMismatch)
         }
-        let targetIDs = command.target.runtimePreparationObjectIDs
-        let readIDs = decision.readSet.objects.map(\.objectID)
-        if readIDs != targetIDs {
+        let targets = command.runtimePreparationAggregateReferences
+        let readTargets = decision.readSet.objects.map(\.aggregate)
+        if readTargets != targets {
             reasons.append(.identityMismatch)
         }
         for dependency in decision.readSet.objects {
-            let snapshotRevision = snapshot.objectRevisions[dependency.objectID] ?? .absent
-            if dependency.expectedRevision != command.expectedRevision ||
-                dependency.observedRevision != snapshotRevision {
+            guard let snapshotRevision = snapshot.aggregateRevisions[dependency.aggregate] else {
+                reasons.append(.identityMismatch)
+                continue
+            }
+            let expected = dependency.aggregate == command.runtimePrimaryPreparationReference
+                ? command.expectedRevision
+                : snapshotRevision
+            if dependency.expectedRevision != expected || dependency.observedRevision != snapshotRevision {
                 reasons.append(.identityMismatch)
             }
-            if revisionMatches(expected: command.expectedRevision, observed: dependency.observedRevision) == false {
+            if revisionMatches(expected: expected, observed: dependency.observedRevision) == false {
                 reasons.append(.revisionMismatch)
             }
         }
@@ -211,7 +227,7 @@ struct RuntimePreparationAuthorizer: Sendable {
             actor: command.actor,
             source: command.source,
             expectedRevision: command.expectedRevision,
-            observedRevision: snapshot.observedRevision,
+            observedRevision: primaryObserved,
             privacyBoundary: privacyBoundary,
             sideEffectPolicy: sideEffectPolicy,
             reasonCodes: ordered
@@ -341,7 +357,7 @@ struct RuntimeMutationSubmissionService: RuntimeMutationSubmitting, Sendable {
         }
         let request = RuntimePreparationReadRequest(
             commandID: preparation.commandID,
-            targetIDs: preparation.command.target.runtimePreparationObjectIDs,
+            targets: preparation.command.runtimePreparationAggregateReferences,
             expectedRevision: preparation.command.expectedRevision,
             privacy: preparation.command.privacy
         )
@@ -354,10 +370,20 @@ struct RuntimeMutationSubmissionService: RuntimeMutationSubmitting, Sendable {
         guard snapshot.privacy == preparation.decision.readSet.privacy else {
             return blocked(preparation, reason: .privacyDenied)
         }
-        guard snapshot.observedRevision == preparation.authorization.observedRevision,
+        let primaryObserved: RuntimeExpectedRevision
+        if let primary = preparation.command.runtimePrimaryPreparationReference,
+           let observed = snapshot.aggregateRevisions[primary] {
+            primaryObserved = observed
+        } else if preparation.command.runtimePrimaryPreparationReference == nil {
+            primaryObserved = .absent
+        } else {
+            return blocked(preparation, reason: .staleAfterPreparation)
+        }
+        guard primaryObserved == preparation.authorization.observedRevision,
               revisionsRemainCurrent(
                   preparation.decision.readSet,
                   expectedRevision: preparation.command.expectedRevision,
+                  primary: preparation.command.runtimePrimaryPreparationReference,
                   snapshot: snapshot
               ) else {
             return blocked(preparation, reason: .staleAfterPreparation)
@@ -387,15 +413,19 @@ struct RuntimeMutationSubmissionService: RuntimeMutationSubmitting, Sendable {
     private func revisionsRemainCurrent(
         _ readSet: RuntimeMutationReadSet,
         expectedRevision: RuntimeExpectedRevision,
+        primary: RuntimePreparationAggregateReference?,
         snapshot: RuntimePreparationSnapshot
     ) -> Bool {
         readSet.objects.allSatisfy { dependency in
-            dependency.expectedRevision == expectedRevision &&
+            guard let current = snapshot.aggregateRevisions[dependency.aggregate] else { return false }
+            return dependency.expectedRevision == (
+                dependency.aggregate == primary ? expectedRevision : current
+            ) &&
                 RuntimePreparationAuthorizer().revisionMatches(
-                    expected: expectedRevision,
+                    expected: dependency.expectedRevision,
                     observed: dependency.observedRevision
                 ) &&
-                (snapshot.objectRevisions[dependency.objectID] ?? .absent) == dependency.observedRevision
+                current == dependency.observedRevision
         }
     }
 
@@ -438,11 +468,14 @@ struct RuntimeMutationSubmissionService: RuntimeMutationSubmitting, Sendable {
         let feature = RuntimeFeatureMutationRouter().feature(for: command.typedPayload)
         guard preparation.decision.family == feature.rawValue,
               preparation.decision.action == command.typedPayload.diagnosticCase,
-              preparation.decision.readSet.objects.map(\.objectID) == command.target.runtimePreparationObjectIDs,
+              preparation.decision.readSet.objects.map(\.aggregate) == command.runtimePreparationAggregateReferences,
               preparation.decision.readSet.objects.allSatisfy({ dependency in
-                  dependency.expectedRevision == command.expectedRevision &&
+                  let expected = dependency.aggregate == command.runtimePrimaryPreparationReference
+                    ? command.expectedRevision
+                    : dependency.observedRevision
+                  return dependency.expectedRevision == expected &&
                       RuntimePreparationAuthorizer().revisionMatches(
-                          expected: command.expectedRevision,
+                          expected: expected,
                           observed: dependency.observedRevision
                       )
               }) else {

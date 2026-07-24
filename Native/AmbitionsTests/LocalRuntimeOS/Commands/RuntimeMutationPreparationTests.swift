@@ -3,6 +3,103 @@ import XCTest
 @testable import Ambitions
 
 final class RuntimeMutationPreparationTests: XCTestCase {
+    func testTransitionIntentRoundTripsTypedAggregateIdentityAndFamilyOrder() throws {
+        let shared = try RuntimeDomainObjectID(validating: "typed-transition")
+        let intents = RuntimeMutationWriteSet(
+            transitions: [
+                RuntimeObjectTransitionIntent(
+                    aggregate: RuntimePreparationAggregateReference(family: .goal, objectID: shared),
+                    expectedRevision: .exact(2),
+                    transition: .update
+                ),
+                RuntimeObjectTransitionIntent(
+                    aggregate: RuntimePreparationAggregateReference(family: .capture, objectID: shared),
+                    expectedRevision: .exact(1),
+                    transition: .attach
+                ),
+            ],
+            events: [],
+            projectionInvalidations: [],
+            receiptIntentID: nil,
+            rollbackIntentID: nil,
+            externalEffect: .none
+        )
+        let bytes = try JSONEncoder().encode(intents)
+        let decoded = try JSONDecoder().decode(RuntimeMutationWriteSet.self, from: bytes)
+        XCTAssertEqual(decoded, intents)
+        XCTAssertEqual(decoded.transitions.map(\.aggregate.family), [.capture, .goal])
+        XCTAssertEqual(decoded.transitions.map(\.aggregate.objectID), [shared, shared])
+    }
+
+    func testCreateProposedIdentityDoesNotAliasSameRawIDInAnotherFamily() throws {
+        let sharedID = try RuntimeDomainObjectID(validating: "prepared-object-1")
+        let command = AmbitionsCommand(
+            id: "command-cross-family-create",
+            source: .capture,
+            typedPayload: .capture(CaptureCommand(
+                action: .quickCapture(externalCreation: nil),
+                target: AmbitionsCommandTarget(goalID: sharedID.rawValue),
+                content: RuntimeCommandContent()
+            )),
+            expectedRevision: .absent,
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        let goal = RuntimePreparationAggregateReference(family: .goal, objectID: sharedID)
+        let capture = RuntimePreparationAggregateReference(family: .capture, objectID: sharedID)
+        let decision = CaptureMutationReducer().reduce(RuntimeFeatureReducerInput(
+            command: command,
+            commandID: try RuntimeCommandID(validating: command.id),
+            snapshot: RuntimePreparationSnapshot(
+                aggregateRevisions: [goal: .exact(7)],
+                cursors: [],
+                privacy: command.privacy
+            ),
+            context: try preparationContext()
+        ))
+
+        XCTAssertEqual(decision.readSet.objects.map(\.aggregate), [goal])
+        XCTAssertEqual(decision.writeSet.transitions.map(\.family), [capture.family.rawValue])
+        XCTAssertEqual(decision.writeSet.transitions.map(\.objectID), [sharedID])
+        XCTAssertEqual(decision.writeSet.transitions.map(\.expectedRevision), [.absent])
+    }
+
+    func testCrossFamilyCaptureAttachmentKeepsTypedReadAndWriteAuthorityDistinct() throws {
+        let sharedID = try RuntimeDomainObjectID(validating: "shared-cross-family-id")
+        let command = AmbitionsCommand(
+            id: "command-cross-family-attach",
+            source: .capture,
+            typedPayload: .capture(CaptureCommand(
+                action: .attachToGoal,
+                target: AmbitionsCommandTarget(
+                    goalID: sharedID.rawValue,
+                    captureID: sharedID.rawValue
+                ),
+                content: RuntimeCommandContent()
+            )),
+            expectedRevision: .exact(2),
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        let capture = RuntimePreparationAggregateReference(family: .capture, objectID: sharedID)
+        let goal = RuntimePreparationAggregateReference(family: .goal, objectID: sharedID)
+        let snapshot = RuntimePreparationSnapshot(
+            aggregateRevisions: [capture: .exact(2), goal: .exact(7)],
+            cursors: [],
+            privacy: command.privacy
+        )
+        let decision = CaptureMutationReducer().reduce(RuntimeFeatureReducerInput(
+            command: command,
+            commandID: try RuntimeCommandID(validating: command.id),
+            snapshot: snapshot,
+            context: try preparationContext()
+        ))
+
+        XCTAssertEqual(decision.readSet.objects.map(\.aggregate), [capture, goal])
+        XCTAssertEqual(
+            decision.writeSet.transitions.map { "\($0.family):\($0.objectID.rawValue):\($0.expectedRevision)" },
+            ["capture:shared-cross-family-id:exact(2)"]
+        )
+    }
+
     func testPureReducerIsDeterministicAndUsesSuppliedAuthorityFacts() throws {
         let command = quickCaptureCommand()
         let input = RuntimeFeatureReducerInput(
@@ -47,7 +144,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
 
         let blockedService = RuntimeMutationPreparationService(
             reader: SequencedPreparationReader([RuntimePreparationSnapshot(
-                observedRevision: .exact(4), objectRevisions: [:], cursors: [], privacy: .privateUserText
+                aggregateRevisions: [:], cursors: [], privacy: .privateUserText
             )])
         )
         guard case let .blocked(blocked) = await blockedService.prepare(quickCaptureCommand(), context: context) else {
@@ -169,8 +266,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             expectedRevision: .exact(7)
         )
         let snapshot = RuntimePreparationSnapshot(
-            observedRevision: .exact(7),
-            objectRevisions: [objectID: .exact(8)],
+            aggregateRevisions: [RuntimePreparationAggregateReference(family: .capture, objectID: objectID): .exact(8)],
             cursors: [],
             privacy: command.privacy
         )
@@ -253,8 +349,10 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             command: protected,
             commandID: try XCTUnwrap(RuntimeCommandID(rawValue: protected.id)),
             snapshot: RuntimePreparationSnapshot(
-                observedRevision: .exact(2),
-                objectRevisions: [try XCTUnwrap(RuntimeDomainObjectID(rawValue: "time-1")): .exact(2)],
+                aggregateRevisions: [RuntimePreparationAggregateReference(
+                    family: .schedule,
+                    objectID: try XCTUnwrap(RuntimeDomainObjectID(rawValue: "time-1"))
+                ): .exact(2)],
                 cursors: [],
                 privacy: protected.privacy
             ),
@@ -371,7 +469,8 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             expectedRevision: .exact(7)
         )
         let initial = RuntimePreparationSnapshot(
-            observedRevision: .exact(7), objectRevisions: [objectID: .exact(7)], cursors: [], privacy: command.privacy
+            aggregateRevisions: [RuntimePreparationAggregateReference(family: .capture, objectID: objectID): .exact(7)],
+            cursors: [], privacy: command.privacy
         )
         let service = RuntimeMutationPreparationService(reader: SequencedPreparationReader([initial]))
         guard case let .ready(preparation) = await service.prepare(
@@ -382,7 +481,8 @@ final class RuntimeMutationPreparationTests: XCTestCase {
         let staleAuthority = StubRuntimeMutationAuthority(mode: .commit)
         let staleSubmitter = RuntimeMutationSubmissionService(
             reader: SequencedPreparationReader([RuntimePreparationSnapshot(
-                observedRevision: .exact(8), objectRevisions: [objectID: .exact(8)], cursors: [], privacy: command.privacy
+                aggregateRevisions: [RuntimePreparationAggregateReference(family: .capture, objectID: objectID): .exact(8)],
+                cursors: [], privacy: command.privacy
             )]),
             authority: staleAuthority,
             clock: .deterministic(now.addingTimeInterval(30))
@@ -543,8 +643,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             expectedRevision: .exact(7)
         )
         let preparedSnapshot = RuntimePreparationSnapshot(
-            observedRevision: .exact(7),
-            objectRevisions: [objectID: .exact(7)],
+            aggregateRevisions: [RuntimePreparationAggregateReference(family: .capture, objectID: objectID): .exact(7)],
             cursors: [],
             privacy: command.privacy
         )
@@ -562,7 +661,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             disposition: base.decision.disposition,
             readSet: RuntimeMutationReadSet(
                 objects: [RuntimeReadDependency(
-                    objectID: objectID,
+                    aggregate: RuntimePreparationAggregateReference(family: .goal, objectID: objectID),
                     expectedRevision: .exact(7),
                     observedRevision: .exact(8)
                 )],
@@ -586,8 +685,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             decisionDigest: recomputedDecisionDigest
         )
         let currentSnapshot = RuntimePreparationSnapshot(
-            observedRevision: .exact(7),
-            objectRevisions: [objectID: .exact(8)],
+            aggregateRevisions: [RuntimePreparationAggregateReference(family: .capture, objectID: objectID): .exact(8)],
             cursors: [],
             privacy: command.privacy
         )
@@ -623,15 +721,13 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             actor: base.authorization.actor,
             source: base.authorization.source,
             expectedRevision: .absent,
-            observedRevision: .exact(1),
             privacyBoundary: base.authorization.privacyBoundary,
             sideEffectPolicy: base.authorization.sideEffectPolicy,
             reasonCodes: []
         )
         let tampered = copy(base, authorization: tamperedAuthorization)
         let currentSnapshot = RuntimePreparationSnapshot(
-            observedRevision: .exact(1),
-            objectRevisions: [:],
+            aggregateRevisions: [:],
             cursors: [],
             privacy: command.privacy
         )
@@ -695,8 +791,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
     private func destructiveSnapshot() throws -> RuntimePreparationSnapshot {
         let goalID = try XCTUnwrap(RuntimeDomainObjectID(rawValue: "goal-1"))
         return RuntimePreparationSnapshot(
-            observedRevision: .exact(1),
-            objectRevisions: [goalID: .exact(1)],
+            aggregateRevisions: [RuntimePreparationAggregateReference(family: .goal, objectID: goalID): .exact(1)],
             cursors: [],
             privacy: .standard
         )

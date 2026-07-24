@@ -389,21 +389,20 @@ enum CanonicalRuntimeSemanticEventStore {
             throw CanonicalRuntimeSemanticEventStoreError.aggregateRevisionMismatch
         }
         try requireCanonicalRevision(request, database: database)
-        let chain = try inspectWholeChain(database: database, codec: codec, quarantineBlocked: false)
-        guard chain.allSatisfy({ if case .supported = $0 { true } else { false } }) else {
-            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
-        }
         let allocator = try allocatorSequence(database)
-        let tailSequence = chain.last?.sequence ?? 0
+        let tail = try verifiedTail(database: database, codec: codec)
+        let tailSequence = tail?.lineage.sequence ?? 0
         guard allocator == tailSequence, allocator < UInt64(Int64.max) else {
             throw CanonicalRuntimeSemanticEventStoreError.invalidSequence
         }
         let sequence = allocator + 1
-        let previousHash: SHA256Digest? = chain.last.flatMap {
-            guard case let .supported(record) = $0 else { return nil }
-            return record.lineage.eventHash
-        }
-        try requireCausation(request.causationEventID, correlationID: request.correlationID, before: sequence, chain: chain)
+        let previousHash = tail?.lineage.eventHash
+        try requireIndexedCausation(
+            request.causationEventID,
+            correlationID: request.correlationID,
+            before: sequence,
+            database: database
+        )
         let sourceDigest = SHA256Digest.digest(request.canonicalBytes)
         let eventHash = try RuntimeSemanticEventHashing.eventHash(
             eventID: request.eventID, commandID: request.commandID,
@@ -440,6 +439,7 @@ enum CanonicalRuntimeSemanticEventStore {
                 .text(eventHash.hexadecimal), .integer(try RuntimeSemanticEventHashing.milliseconds(request.occurredAt)),
             ]
         )
+        try advanceVerifiedHighWaterIfAvailable(lineage: lineage, database: database)
         return .appended(CanonicalRuntimeSemanticEventRecord(
             lineage: lineage, event: decoded.event, sourceBytes: decoded.sourceBytes,
             sourcePayloadVersion: decoded.sourcePayloadVersion, wasUpcast: decoded.wasUpcast
@@ -452,23 +452,55 @@ enum CanonicalRuntimeSemanticEventStore {
         limit: Int,
         codec: RuntimeSemanticEventCodec = RuntimeSemanticEventCodec()
     ) throws -> CanonicalRuntimePage<CanonicalRuntimeSemanticEventInspection, CanonicalRuntimeEventCursor> {
-        let all = try inspectWholeChain(database: database, codec: codec, quarantineBlocked: true)
+        let bounded = min(max(1, limit), maximumPageLimit)
+        // A public continuation cursor has no authenticated event hash. Rebuild
+        // trust from genesis in fixed-size pages before honoring it. No query,
+        // allocation, or byte budget may scale from its unproven sequence.
+        var trustedAnchor: RuntimeCanonicalReplayCursor?
         if let cursor {
-            guard let cursorIndex = all.firstIndex(where: { $0.sequence == UInt64(cursor.sequence) }),
-                  case let .supported(cursorRecord) = all[cursorIndex],
-                  cursorRecord.lineage.eventID.rawValue == cursor.eventID,
-                  all[...cursorIndex].allSatisfy({ inspection in
-                      if case .supported = inspection { return true }
-                      return false
-                  }) else {
+            let targetSequence = UInt64(cursor.sequence)
+            while (trustedAnchor?.sequence ?? 0) < targetSequence {
+                let verifiedSequence = trustedAnchor?.sequence ?? 0
+                let remaining = targetSequence - verifiedSequence
+                let pageLimit = Int(min(UInt64(maximumPageLimit), remaining))
+                let prefixPage = try inspectWholeChain(
+                    database: database,
+                    codec: codec,
+                    quarantineBlocked: true,
+                    trustedAnchor: trustedAnchor,
+                    maximumRows: pageLimit
+                )
+                guard prefixPage.count == pageLimit,
+                      prefixPage.allSatisfy({ inspection in
+                          if case .supported = inspection { return true }
+                          return false
+                      }),
+                      case let .supported(last)? = prefixPage.last else {
+                    throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+                }
+                trustedAnchor = RuntimeCanonicalReplayCursor(
+                    sequence: last.lineage.sequence,
+                    eventID: last.lineage.eventID.rawValue,
+                    eventHash: last.lineage.eventHash.hexadecimal
+                )
+            }
+            guard trustedAnchor?.sequence == targetSequence,
+                  trustedAnchor?.eventID == cursor.eventID else {
                 throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
             }
         }
-        let bounded = min(max(1, limit), maximumPageLimit)
-        let remaining = all.filter { $0.sequence > UInt64(cursor?.sequence ?? 0) }
-        let items = Array(remaining.prefix(bounded))
+        // Only the locally authenticated anchor may enable the bounded fast
+        // continuation path.
+        let continuation = try inspectWholeChain(
+            database: database,
+            codec: codec,
+            quarantineBlocked: true,
+            trustedAnchor: trustedAnchor,
+            maximumRows: bounded + 1
+        )
+        let items = Array(continuation.prefix(bounded))
         let nextCursor: CanonicalRuntimeEventCursor?
-        if remaining.count > bounded, let last = items.last {
+        if continuation.count > bounded, let last = items.last {
             let eventID = switch last {
             case let .supported(record): record.lineage.eventID.rawValue
             case let .blocked(record): record.eventID
@@ -476,6 +508,40 @@ enum CanonicalRuntimeSemanticEventStore {
             nextCursor = try CanonicalRuntimeEventCursor(sequence: Int64(last.sequence), eventID: eventID)
         } else { nextCursor = nil }
         return CanonicalRuntimePage(items: items, nextCursor: nextCursor)
+    }
+
+    static func readVerifiedInTransaction(
+        from database: isolated SQLiteDatabase,
+        after continuation: RuntimeCanonicalReplayCursor?,
+        initialAnchor: RuntimeCanonicalReplayCursor?,
+        limit: Int,
+        codec: RuntimeSemanticEventCodec = RuntimeSemanticEventCodec()
+    ) throws -> CanonicalRuntimePage<CanonicalRuntimeSemanticEventInspection, RuntimeCanonicalReplayCursor> {
+        let bounded = min(max(1, limit), maximumPageLimit)
+        let predecessor = continuation ?? initialAnchor
+        let all = try inspectWholeChain(
+            database: database,
+            codec: codec,
+            quarantineBlocked: true,
+            trustedAnchor: predecessor,
+            maximumRows: bounded + 1
+        )
+        let items = Array(all.prefix(bounded))
+        let next: RuntimeCanonicalReplayCursor?
+        if all.count > bounded, let last = items.last {
+            guard case let .supported(record) = last else {
+                next = nil
+                return CanonicalRuntimePage(items: items, nextCursor: next)
+            }
+            next = RuntimeCanonicalReplayCursor(
+                sequence: record.lineage.sequence,
+                eventID: record.lineage.eventID.rawValue,
+                eventHash: record.lineage.eventHash.hexadecimal
+            )
+        } else {
+            next = nil
+        }
+        return CanonicalRuntimePage(items: items, nextCursor: next)
     }
 
     static func quarantineInTransaction(
@@ -509,26 +575,309 @@ enum CanonicalRuntimeSemanticEventStore {
         }
         return CanonicalRuntimePage(items: records, nextCursor: nextCursor)
     }
+
+    static func verifiedSourceChainDigestThrough(
+        _ sequence: UInt64,
+        database: isolated SQLiteDatabase
+    ) throws -> SHA256Digest {
+        try sourceChainDigestThrough(
+            sequence,
+            database: database,
+            codec: RuntimeSemanticEventCodec()
+        )
+    }
 }
 
 private extension CanonicalRuntimeSemanticEventStore {
-    static func inspectWholeChain(
+    static func verifiedTail(
         database: isolated SQLiteDatabase,
-        codec: RuntimeSemanticEventCodec,
-        quarantineBlocked: Bool
-    ) throws -> [CanonicalRuntimeSemanticEventInspection] {
+        codec: RuntimeSemanticEventCodec
+    ) throws -> CanonicalRuntimeSemanticEventRecord? {
+        let quarantineTables = try database.query(
+            "SELECT 1 AS present FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_replay_quarantine_occurrences' LIMIT 1"
+        )
+        if quarantineTables.isEmpty == false,
+           try database.query("SELECT 1 FROM runtime_replay_quarantine_occurrences LIMIT 1").isEmpty == false {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
         let rows = try database.query(
             """
             SELECT sequence, event_id, command_id, aggregate_kind, aggregate_id,
                    canonical_revision, correlation_id, causation_event_id,
                    envelope_version, type_id, payload_version, source_bytes,
                    source_digest, previous_event_hash, event_hash, occurred_at_ms
-            FROM runtime_semantic_events ORDER BY sequence ASC
+            FROM runtime_semantic_events ORDER BY sequence DESC LIMIT 2
             """,
-            maximumDecodedBytes: 268_435_456
+            maximumDecodedBytes: 2 * (CanonicalRuntimeSemanticEventSchemaPlan.maximumStoredEventBytes + 4_096)
         )
-        var expectedSequence: UInt64 = 1
-        var expectedHash: SHA256Digest?
+        guard let row = rows.first else { return nil }
+        let record = try verifiedRecord(row, codec: codec)
+        let highWaterTable = try database.query(
+            "SELECT 1 AS present FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_replay_verified_high_water' LIMIT 1"
+        )
+        if highWaterTable.isEmpty == false {
+            let highWater = try database.query(
+                "SELECT event_sequence, event_id, event_hash, chain_anchor_digest FROM runtime_replay_verified_high_water WHERE singleton_id = 1 LIMIT 2"
+            )
+            guard highWater.count == 1,
+                  highWater[0].value(named: "event_sequence") == .integer(Int64(record.lineage.sequence)),
+                  highWater[0].value(named: "event_id") == .text(record.lineage.eventID.rawValue),
+                  highWater[0].value(named: "event_hash") == .text(record.lineage.eventHash.hexadecimal),
+                  case let .text(anchorRaw)? = highWater[0].value(named: "chain_anchor_digest"),
+                  (try? SHA256Digest(hexadecimal: anchorRaw)) != nil else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+        }
+        if rows.count == 2 {
+            let predecessor = try verifiedRecord(rows[1], codec: codec)
+            guard record.lineage.sequence == predecessor.lineage.sequence + 1,
+                  record.lineage.previousEventHash == predecessor.lineage.eventHash else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+        } else if record.lineage.sequence != 1 || record.lineage.previousEventHash != nil {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
+        return record
+    }
+
+    static func advanceVerifiedHighWaterIfAvailable(
+        lineage: RuntimeSemanticEventLineage,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let table = try database.query(
+            "SELECT 1 AS present FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_replay_verified_high_water' LIMIT 1"
+        )
+        guard table.isEmpty == false else { return }
+        let priorChainDigest: SHA256Digest
+        if lineage.sequence == 1 {
+            priorChainDigest = RuntimeCanonicalReplaySourceChain.emptyDigest
+        } else {
+            let prior = try database.query(
+                """
+                SELECT event_sequence, event_hash, chain_anchor_digest
+                FROM runtime_replay_verified_high_water WHERE singleton_id = 1 LIMIT 2
+                """
+            )
+            guard prior.count == 1,
+                  prior[0].value(named: "event_sequence") == .integer(Int64(lineage.sequence - 1)),
+                  prior[0].value(named: "event_hash") == .text(lineage.previousEventHash?.hexadecimal ?? ""),
+                  case let .text(priorRaw)? = prior[0].value(named: "chain_anchor_digest"),
+                  let parsed = try? SHA256Digest(hexadecimal: priorRaw) else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            priorChainDigest = parsed
+        }
+        let chainAnchorDigest = try RuntimeCanonicalReplaySourceChain.advance(
+            prior: priorChainDigest,
+            lineage: lineage
+        )
+        let bindings: [SQLiteBinding] = [
+            .integer(Int64(lineage.sequence)), .text(lineage.eventID.rawValue),
+            .text(lineage.eventHash.hexadecimal), .text(chainAnchorDigest.hexadecimal),
+            .integer(try RuntimeSemanticEventHashing.milliseconds(lineage.occurredAt)),
+        ]
+        let changedRowCount: Int
+        if lineage.sequence == 1 {
+            guard lineage.previousEventHash == nil else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            changedRowCount = try database.execute(
+                """
+                INSERT INTO runtime_replay_verified_high_water(
+                    singleton_id, event_sequence, event_id, event_hash,
+                    chain_anchor_digest, reconstruction_digest, verified_at_ms
+                ) VALUES (1, ?, ?, ?, ?, NULL, ?)
+                """,
+                bindings: bindings
+            ).changedRowCount
+        } else {
+            guard let previousHash = lineage.previousEventHash else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            changedRowCount = try database.execute(
+                """
+                UPDATE runtime_replay_verified_high_water
+                SET event_sequence = ?, event_id = ?, event_hash = ?,
+                    chain_anchor_digest = ?, reconstruction_digest = NULL,
+                    verified_at_ms = ?
+                WHERE singleton_id = 1
+                  AND event_sequence = ?
+                  AND event_hash = ?
+                """,
+                bindings: bindings + [
+                    .integer(Int64(lineage.sequence - 1)),
+                    .text(previousHash.hexadecimal),
+                ]
+            ).changedRowCount
+        }
+        guard changedRowCount == 1 else {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
+    }
+
+    static func sourceChainDigestThrough(
+        _ throughSequence: UInt64,
+        database: isolated SQLiteDatabase,
+        codec: RuntimeSemanticEventCodec
+    ) throws -> SHA256Digest {
+        guard throughSequence > 0, throughSequence <= UInt64(Int64.max) else {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
+        var digest = RuntimeCanonicalReplaySourceChain.emptyDigest
+        var predecessor: SHA256Digest?
+        var verifiedThrough: UInt64 = 0
+        let pageLimit = 128
+        repeat {
+            let rows = try database.query(
+                """
+                SELECT sequence, event_id, command_id, aggregate_kind, aggregate_id,
+                       canonical_revision, correlation_id, causation_event_id,
+                       envelope_version, type_id, payload_version, source_bytes,
+                       source_digest, previous_event_hash, event_hash, occurred_at_ms
+                FROM runtime_semantic_events
+                WHERE sequence > ? AND sequence <= ?
+                ORDER BY sequence ASC LIMIT ?
+                """,
+                bindings: [
+                    .integer(Int64(verifiedThrough)), .integer(Int64(throughSequence)),
+                    .integer(Int64(pageLimit)),
+                ],
+                maximumDecodedBytes: pageLimit * (
+                    CanonicalRuntimeSemanticEventSchemaPlan.maximumStoredEventBytes + 4_096
+                )
+            )
+            guard rows.isEmpty == false else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            for row in rows {
+                let record = try verifiedRecord(row, codec: codec)
+                guard record.lineage.sequence == verifiedThrough + 1,
+                      record.lineage.previousEventHash == predecessor else {
+                    throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+                }
+                digest = try RuntimeCanonicalReplaySourceChain.advance(
+                    prior: digest,
+                    lineage: record.lineage
+                )
+                predecessor = record.lineage.eventHash
+                verifiedThrough = record.lineage.sequence
+            }
+        } while verifiedThrough < throughSequence
+        return digest
+    }
+
+    static func verifiedRecord(
+        _ row: SQLiteRow,
+        codec: RuntimeSemanticEventCodec
+    ) throws -> CanonicalRuntimeSemanticEventRecord {
+        let bytes = try blob(row, "source_bytes")
+        let decoded = try codec.decode(bytes)
+        let header = try codec.inspectHeader(bytes)
+        let aggregate = try RuntimeSemanticAggregate(
+            kind: aggregateKind(row, "aggregate_kind"),
+            id: RuntimeAggregateID(validating: text(row, "aggregate_id"))
+        )
+        let digest = SHA256Digest.digest(bytes)
+        let lineage = RuntimeSemanticEventLineage(
+            eventID: try RuntimeEventID(validating: text(row, "event_id")),
+            commandID: try RuntimeCommandID(validating: text(row, "command_id")),
+            aggregate: aggregate,
+            canonicalAggregateRevision: try revisionUInt64(row, "canonical_revision"),
+            sequence: try uint64(row, "sequence"),
+            correlationID: try RuntimeCorrelationID(validating: text(row, "correlation_id")),
+            causationEventID: try optionalText(row, "causation_event_id").map(RuntimeEventID.init(validating:)),
+            occurredAt: Date(timeIntervalSince1970: Double(try int64(row, "occurred_at_ms")) / 1_000),
+            previousEventHash: try optionalDigest(row, "previous_event_hash"),
+            sourceDigest: digest,
+            eventHash: try SHA256Digest(hexadecimal: text(row, "event_hash"))
+        )
+        let record = CanonicalRuntimeSemanticEventRecord(
+            lineage: lineage,
+            event: decoded.event,
+            sourceBytes: bytes,
+            sourcePayloadVersion: decoded.sourcePayloadVersion,
+            wasUpcast: decoded.wasUpcast
+        )
+        guard try text(row, "source_digest") == digest.hexadecimal,
+              try int(row, "envelope_version") == header.envelopeVersion,
+              try text(row, "type_id") == header.typeID.rawValue,
+              try int(row, "payload_version") == header.payloadVersion,
+              decoded.event.aggregateKind == aggregate.kind,
+              decoded.event.mutation.aggregateID == aggregate.id,
+              decoded.event.mutation.resultingRevision == lineage.canonicalAggregateRevision,
+              try record.recomputedEventHash() == lineage.eventHash else {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
+        return record
+    }
+
+    static func requireIndexedCausation(
+        _ eventID: RuntimeEventID?,
+        correlationID: RuntimeCorrelationID,
+        before sequence: UInt64,
+        database: isolated SQLiteDatabase
+    ) throws {
+        guard let eventID else { return }
+        let rows = try database.query(
+            "SELECT sequence, correlation_id FROM runtime_semantic_events WHERE event_id = ? AND sequence < ? LIMIT 2",
+            bindings: [.text(eventID.rawValue), .integer(Int64(sequence))]
+        )
+        guard rows.count == 1,
+              rows[0].value(named: "correlation_id") == .text(correlationID.rawValue) else {
+            throw CanonicalRuntimeSemanticEventStoreError.invalidCausation
+        }
+    }
+
+    static func inspectWholeChain(
+        database: isolated SQLiteDatabase,
+        codec: RuntimeSemanticEventCodec,
+        quarantineBlocked: Bool,
+        trustedAnchor: RuntimeCanonicalReplayCursor? = nil,
+        maximumRows: Int? = nil
+    ) throws -> [CanonicalRuntimeSemanticEventInspection] {
+        if let trustedAnchor {
+            guard trustedAnchor.isWellFormed,
+                  trustedAnchor.sequence <= UInt64(Int64.max) else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            let anchorRows = try database.query(
+                "SELECT event_id, event_hash FROM runtime_semantic_events WHERE sequence = ? LIMIT 2",
+                bindings: [.integer(Int64(trustedAnchor.sequence))]
+            )
+            guard anchorRows.count == 1,
+                  case let .text(eventIDRaw)? = anchorRows[0].value(named: "event_id"),
+                  case let .text(eventHashRaw)? = anchorRows[0].value(named: "event_hash"),
+                  trustedAnchor.matchesSourceAnchor(eventID: eventIDRaw, eventHash: eventHashRaw) else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+        }
+        var sql = """
+            SELECT sequence, event_id, command_id, aggregate_kind, aggregate_id,
+                   canonical_revision, correlation_id, causation_event_id,
+                   envelope_version, type_id, payload_version, source_bytes,
+                   source_digest, previous_event_hash, event_hash, occurred_at_ms
+            FROM runtime_semantic_events
+            WHERE sequence > ?
+            ORDER BY sequence ASC
+            """
+        var bindings: [SQLiteBinding] = [.integer(Int64(trustedAnchor?.sequence ?? 0))]
+        if let maximumRows {
+            sql += " LIMIT ?"
+            bindings.append(.integer(Int64(max(1, maximumRows))))
+        }
+        let rowCount = max(1, maximumRows ?? 4_096)
+        let bytesPerRow = CanonicalRuntimeSemanticEventSchemaPlan.maximumStoredEventBytes + 4_096
+        let (requestedByteBudget, byteBudgetOverflowed) = rowCount.multipliedReportingOverflow(by: bytesPerRow)
+        let rows = try database.query(
+            sql,
+            bindings: bindings,
+            maximumDecodedBytes: min(
+                268_435_456,
+                byteBudgetOverflowed ? Int.max : requestedByteBudget
+            )
+        )
+        var expectedSequence: UInt64 = (trustedAnchor?.sequence ?? 0) + 1
+        var expectedHash = try trustedAnchor.map { try SHA256Digest(hexadecimal: $0.eventHash) }
         var trusted = true
         var known: [String: (sequence: UInt64, correlation: String)] = [:]
         var result: [CanonicalRuntimeSemanticEventInspection] = []
@@ -562,8 +911,21 @@ private extension CanonicalRuntimeSemanticEventStore {
                 let correlation = try RuntimeCorrelationID(validating: text(row, "correlation_id"))
                 let causation = try optionalText(row, "causation_event_id").map(RuntimeEventID.init(validating:))
                 if let causation {
-                    guard let causal = known[causation.rawValue], causal.sequence < sequence,
-                          causal.correlation == correlation.rawValue else { throw InspectionFailure(.invalidCausation) }
+                    if let causal = known[causation.rawValue] {
+                        guard causal.sequence < sequence,
+                              causal.correlation == correlation.rawValue else {
+                            throw InspectionFailure(.invalidCausation)
+                        }
+                    } else {
+                        let causalRows = try database.query(
+                            "SELECT sequence, correlation_id FROM runtime_semantic_events WHERE event_id = ? AND sequence < ? LIMIT 2",
+                            bindings: [.text(causation.rawValue), .integer(Int64(sequence))]
+                        )
+                        guard causalRows.count == 1,
+                              causalRows[0].value(named: "correlation_id") == .text(correlation.rawValue) else {
+                            throw InspectionFailure(.invalidCausation)
+                        }
+                    }
                 }
                 let storedHash = try SHA256Digest(hexadecimal: text(row, "event_hash"))
                 let lineage = RuntimeSemanticEventLineage(
@@ -624,21 +986,6 @@ private extension CanonicalRuntimeSemanticEventStore {
         }
     }
 
-    static func requireCausation(
-        _ eventID: RuntimeEventID?, correlationID: RuntimeCorrelationID, before sequence: UInt64,
-        chain: [CanonicalRuntimeSemanticEventInspection]
-    ) throws {
-        guard let eventID else { return }
-        let matches = chain.compactMap { inspection -> RuntimeSemanticEventLineage? in
-            guard case let .supported(record) = inspection, record.lineage.eventID == eventID else { return nil }
-            return record.lineage
-        }
-        guard matches.count == 1, matches[0].sequence < sequence,
-              matches[0].correlationID == correlationID else {
-            throw CanonicalRuntimeSemanticEventStoreError.invalidCausation
-        }
-    }
-
     static func quarantine(
         request: CanonicalRuntimeSemanticEventAppendRequest,
         sourceEventSequence: UInt64?,
@@ -688,6 +1035,13 @@ private extension CanonicalRuntimeSemanticEventStore {
                 .integer(observedAtMilliseconds),
             ]
         )
+        try recordQuarantineOccurrenceIfAvailable(
+            quarantineKey: key.hexadecimal,
+            sourceEventID: sourceEventID,
+            sourceEventSequence: sourceEventSequence,
+            observedAtMilliseconds: observedAtMilliseconds,
+            database: database
+        )
         let rows = try database.query(
             """
             SELECT quarantine_sequence, source_event_id, source_event_sequence,
@@ -699,6 +1053,40 @@ private extension CanonicalRuntimeSemanticEventStore {
         )
         guard let row = rows.first else { throw CanonicalRuntimeSemanticEventStoreError.malformedStoredRow }
         return try quarantineRecord(row)
+    }
+
+    static func recordQuarantineOccurrenceIfAvailable(
+        quarantineKey: String,
+        sourceEventID: String?,
+        sourceEventSequence: UInt64?,
+        observedAtMilliseconds: Int64,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let table = try database.query(
+            "SELECT 1 AS present FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_replay_quarantine_occurrences' LIMIT 1"
+        )
+        guard table.isEmpty == false else { return }
+        let material = [
+            quarantineKey,
+            sourceEventID ?? "",
+            sourceEventSequence.map(String.init) ?? "",
+            String(observedAtMilliseconds),
+        ].joined(separator: "\u{1f}")
+        let occurrenceID = SHA256Digest.digest(Data(material.utf8)).hexadecimal
+        try database.execute(
+            """
+            INSERT OR IGNORE INTO runtime_replay_quarantine_occurrences(
+                occurrence_id, quarantine_key, source_event_id,
+                source_event_sequence, observed_at_ms
+            ) VALUES (?, ?, ?, ?, ?)
+            """,
+            bindings: [
+                .text(occurrenceID), .text(quarantineKey),
+                sourceEventID.map(SQLiteBinding.text) ?? .null,
+                sourceEventSequence.map { .integer(Int64($0)) } ?? .null,
+                .integer(observedAtMilliseconds),
+            ]
+        )
     }
 
     static func quarantineRecord(_ row: SQLiteRow) throws -> CanonicalRuntimeSemanticEventQuarantineRecord {
