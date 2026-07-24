@@ -55,7 +55,7 @@ private struct TodayFlagshipCalibrationHost: View {
             state: $state,
             initialDockExpanded: variant.dockExpanded,
             onCommitProposal: {
-                try? await Task.sleep(for: .milliseconds(1_200))
+                try? await Task.sleep(for: .milliseconds(2_400))
                 return true
             }
         )
@@ -95,6 +95,11 @@ private struct TodayFlagshipCalibrationHost: View {
             await pause(2_600)
             _ = state.continueFromSavedProgress()
             await pause(3_000)
+        case .interruptedAwaitingReview:
+            await pause(4_000)
+            _ = state.openStartHere()
+            await pause(3_000)
+            _ = state.interrupt()
         }
     }
 
@@ -108,6 +113,7 @@ private enum FoundryDemoJourney {
     case none
     case successful
     case interrupted
+    case interruptedAwaitingReview
     case accessibility
 }
 
@@ -135,6 +141,8 @@ private enum FoundryVariant: String {
     case journeySuccessful = "tfcs-j01"
     case journeyInterrupted = "tfcs-j02"
     case journeyAccessibility = "tfcs-j03"
+    case journeyInterruptedManual = "tfcs-j02-manual"
+    case journeyAccessibilityManual = "tfcs-j03-manual"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -161,7 +169,8 @@ private enum FoundryVariant: String {
 
     var dynamicTypeSize: DynamicTypeSize {
         switch self {
-        case .accessibilityDark, .tfcsF05, .reviewAccessibility, .journeyAccessibility:
+        case .accessibilityDark, .tfcsF05, .reviewAccessibility,
+                .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
         default:
             .large
@@ -214,6 +223,8 @@ private enum FoundryVariant: String {
             .successful
         case .journeyInterrupted:
             .interrupted
+        case .journeyInterruptedManual:
+            .interruptedAwaitingReview
         case .journeyAccessibility:
             .accessibility
         default:

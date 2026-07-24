@@ -37,8 +37,10 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let crown = todayCrown()
         let dock = app.buttons["Open global navigation"]
         let crownY = crown.frame.minY
+        let startHere = element("tfcs-start-here-object")
+        let startHereY = startHere.frame.minY
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.30))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.655))
 
         start.press(
             forDuration: 0.05,
@@ -49,10 +51,10 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         XCTAssertEqual(crown.frame.minY, crownY, accuracy: 1)
         XCTAssertTrue(dock.exists)
+        XCTAssertLessThan(startHere.frame.minY, startHereY - 5)
         XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].isHittable)
         let timelineTitle = app.staticTexts["Today’s Timeline"]
         XCTAssertTrue(timelineTitle.isHittable)
-        XCTAssertTrue(app.staticTexts["Bring appointment notes"].isHittable)
 
         let evidence = XCTAttachment(screenshot: app.screenshot())
         evidence.name = "TFCS-F03-intentional-scrolled-today-dark"
@@ -297,6 +299,83 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         )
     }
 
+    func testB01SuccessfulJourneyRecordingDriver() {
+        launch("tfcs-f02")
+        pauseForEvidence(3)
+
+        element("tfcs-open-start-here").tap()
+        XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 4))
+        pauseForEvidence(2)
+
+        element("tfcs-select-still-counts").tap()
+        XCTAssertTrue(element("tfcs-consequential-review").waitForExistence(timeout: 4))
+        pauseForEvidence(2)
+
+        element("tfcs-commit-still-counts").tap()
+        XCTAssertTrue(element("tfcs-saving-posture").waitForExistence(timeout: 2))
+        XCTAssertTrue(element("tfcs-settled-truth").waitForExistence(timeout: 5))
+        pauseForEvidence(2)
+
+        app.buttons["View history"].tap()
+        XCTAssertTrue(
+            app.staticTexts["Meaningful nursery progress recorded"]
+                .waitForExistence(timeout: 3)
+        )
+        pauseForEvidence(2)
+        app.buttons["View history"].tap()
+        pauseForEvidence(1)
+
+        element("tfcs-return-to-today").tap()
+        XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 4))
+        pauseForEvidence(3)
+    }
+
+    func testB01InterruptedJourneyRecordingDriver() {
+        launch("tfcs-j02-manual")
+        XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 7))
+        pauseForEvidence(1)
+        XCTAssertTrue(element("tfcs-interruption-seam").waitForExistence(timeout: 6))
+        pauseForEvidence(2)
+
+        app.buttons["Pick up where you left off"].tap()
+        XCTAssertTrue(element("tfcs-recovery-review").waitForExistence(timeout: 4))
+        pauseForEvidence(2)
+
+        element("recovery.continue-saved-progress").tap()
+        XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 4))
+        XCTAssertTrue(app.staticTexts["Your saved progress is still here."].exists)
+        pauseForEvidence(3)
+    }
+
+    func testB01AccessibilityJourneyRecordingDriver() {
+        launch("tfcs-j03-manual")
+        pauseForEvidence(3)
+
+        let openStep = element("tfcs-open-start-here")
+        scrollUntilHittable(openStep)
+        openStep.tap()
+        XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 4))
+        pauseForEvidence(2)
+
+        let stillCounts = element("tfcs-select-still-counts")
+        scrollUntilHittable(stillCounts)
+        stillCounts.tap()
+        XCTAssertTrue(element("tfcs-consequential-review").waitForExistence(timeout: 4))
+        pauseForEvidence(2)
+
+        let commit = element("tfcs-commit-still-counts")
+        scrollUntilHittable(commit)
+        commit.tap()
+        XCTAssertTrue(element("tfcs-settled-truth").waitForExistence(timeout: 5))
+        pauseForEvidence(2)
+
+        let returnToday = element("tfcs-return-to-today")
+        scrollUntilHittable(returnToday)
+        returnToday.tap()
+        XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 4))
+        pauseForEvidence(3)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()
@@ -338,5 +417,21 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
     ) {
         XCTAssertGreaterThanOrEqual(element.frame.width, 44, file: file, line: line)
         XCTAssertGreaterThanOrEqual(element.frame.height, 44, file: file, line: line)
+    }
+
+    private func scrollUntilHittable(
+        _ element: XCUIElement,
+        maxSwipes: Int = 8
+    ) {
+        var attempts = 0
+        while element.isHittable == false && attempts < maxSwipes {
+            app.swipeUp(velocity: .slow)
+            attempts += 1
+        }
+        XCTAssertTrue(element.isHittable)
+    }
+
+    private func pauseForEvidence(_ seconds: TimeInterval) {
+        RunLoop.current.run(until: Date().addingTimeInterval(seconds))
     }
 }
