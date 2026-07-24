@@ -268,6 +268,42 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertFalse(visibleViews.contains("Capture in crown"))
     }
 
+    func testB02GrammarUsesSystemTypeMatteContentAndNonColorNodes() throws {
+        let shapeLabels = TodayOpenContinuityNodeKind.allCases.map(\.nonColorShapeLabel)
+
+        XCTAssertEqual(shapeLabels.count, 9)
+        XCTAssertEqual(Set(shapeLabels).count, shapeLabels.count)
+        XCTAssertFalse(shapeLabels.contains(where: \.isEmpty))
+
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let sourceRoot = packageRoot
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let grammarSources = try [
+            "TodayOpenContinuityGrammar.swift",
+            "TodayOpenContinuitySpine.swift",
+            "TodayFlagshipCalibrationStyle.swift",
+            "TodayFlagshipArticulatedAnatomy.swift"
+        ].map { file in
+            try String(
+                contentsOf: sourceRoot.appendingPathComponent(file),
+                encoding: .utf8
+            )
+        }.joined(separator: "\n")
+
+        XCTAssertFalse(grammarSources.contains("Font.custom"))
+        XCTAssertFalse(grammarSources.contains(".glassEffect("))
+        XCTAssertFalse(grammarSources.contains("TabView("))
+        XCTAssertFalse(grammarSources.contains("import AmbitionsFlagshipUI"))
+        XCTAssertFalse(grammarSources.contains("import AmbitionsFlagshipFoundation"))
+        XCTAssertTrue(
+            grammarSources.contains("@Environment(\\.accessibilityDifferentiateWithoutColor)")
+        )
+        XCTAssertFalse(grammarSources.contains("let differentiateWithoutColor"))
+    }
+
     private func primaryViewSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

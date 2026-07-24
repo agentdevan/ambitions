@@ -25,7 +25,8 @@ struct TodayFlagshipObjectField<Content: View>: View {
 
     var body: some View {
         content
-            .padding(.horizontal, 18)
+            .padding(.leading, 42)
+            .padding(.trailing, 18)
             .padding(.vertical, 17)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background {
@@ -38,24 +39,25 @@ struct TodayFlagshipObjectField<Content: View>: View {
                     )
             }
             .overlay(alignment: .leading) {
-                fieldShape
-                    .strokeBorder(palette.localArticulation, lineWidth: 1)
-                    .overlay(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 2, style: .continuous)
-                            .fill(roleAccent)
-                            .frame(width: role == .primary ? 4 : 3)
-                            .padding(.vertical, 13)
-                    }
+                TodayOpenContinuitySpine(
+                    kind: role.nodeKind,
+                    palette: palette.openContinuity,
+                    extendsBefore: false,
+                    extendsAfter: true
+                )
+                    .padding(.leading, 7)
+                    .padding(.vertical, 8)
+                    .frame(maxHeight: .infinity)
                     .accessibilityHidden(true)
             }
     }
 
     private var fieldShape: UnevenRoundedRectangle {
         UnevenRoundedRectangle(
-            topLeadingRadius: 4,
+            topLeadingRadius: 20,
             bottomLeadingRadius: 4,
-            bottomTrailingRadius: 18,
-            topTrailingRadius: 18,
+            bottomTrailingRadius: 20,
+            topTrailingRadius: 4,
             style: .continuous
         )
     }
@@ -72,19 +74,6 @@ struct TodayFlagshipObjectField<Content: View>: View {
             palette.settledTruthPlane
         case .interrupted:
             palette.interruptedTruthPlane
-        }
-    }
-
-    private var roleAccent: Color {
-        switch role {
-        case .primary, .proposed:
-            palette.articulationAccent
-        case .current:
-            palette.localArticulation
-        case .settled:
-            palette.settledAccent
-        case .interrupted:
-            palette.interruptionAccent
         }
     }
 }
@@ -150,17 +139,28 @@ struct TodayFlagshipStateField: View {
                 .foregroundStyle(palette.primaryInk)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.horizontal, 14)
+        .padding(.leading, 40)
+        .padding(.trailing, 14)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
+            UnevenRoundedRectangle(
+                topLeadingRadius: 12,
+                bottomLeadingRadius: 4,
+                bottomTrailingRadius: 12,
+                topTrailingRadius: 4,
+                style: .continuous
+            )
                 .fill(fill)
         }
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(accent.opacity(role == .current ? 0.45 : 0.90))
-                .frame(height: role == .current ? 1 : 2)
+        .overlay(alignment: .leading) {
+            TodayOpenContinuitySpine(
+                kind: role.nodeKind,
+                palette: palette.openContinuity,
+                extendsBefore: false,
+                extendsAfter: false
+            )
+                .padding(.leading, 6)
                 .accessibilityHidden(true)
         }
         .accessibilityElement(children: .combine)
@@ -208,22 +208,13 @@ struct TodayFlagshipTimelineRow: View {
                 .frame(width: 62, alignment: .trailing)
                 .padding(.top, 3)
 
-            VStack(spacing: 0) {
-                Circle()
-                    .fill(markerColor)
-                    .frame(width: 8, height: 8)
-                    .overlay {
-                        Circle().stroke(palette.semanticPlane, lineWidth: 2)
-                    }
-
-                if showsContinuation {
-                    Rectangle()
-                        .fill(palette.timelineRail)
-                        .frame(width: 1)
-                        .frame(maxHeight: .infinity)
-                }
-            }
-            .frame(width: 10)
+            TodayOpenContinuitySpine(
+                kind: timelineNodeKind,
+                palette: palette.openContinuity,
+                extendsBefore: false,
+                extendsAfter: showsContinuation
+            )
+            .frame(width: 18)
             .frame(minHeight: 68)
             .accessibilityHidden(true)
 
@@ -252,16 +243,6 @@ struct TodayFlagshipTimelineRow: View {
         .accessibilityIdentifier("tfcs-timeline-row-\(item.canonicalObjectID)")
     }
 
-    private var markerColor: Color {
-        if item.isProtected {
-            return palette.settledAccent
-        }
-        if item.isFixed {
-            return palette.articulationAccent
-        }
-        return palette.secondaryInk
-    }
-
     private var stateColor: Color {
         item.isProtected ? palette.settledAccent : palette.tertiaryInk
     }
@@ -274,6 +255,16 @@ struct TodayFlagshipTimelineRow: View {
             return "pin"
         }
         return "circle"
+    }
+
+    private var timelineNodeKind: TodayOpenContinuityNodeKind {
+        if item.isProtected {
+            return .protected
+        }
+        if item.isFixed {
+            return .fixed
+        }
+        return .current
     }
 }
 
@@ -295,22 +286,12 @@ struct TodayFlagshipStateComparison: View {
             )
             .accessibilityIdentifier("tfcs-review-current-truth")
 
-            HStack(spacing: 9) {
-                Rectangle()
-                    .fill(palette.timelineRail)
-                    .frame(height: 1)
-
-                Image(systemName: "arrow.down")
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(palette.articulationAccent)
-                    .accessibilityHidden(true)
-
-                Rectangle()
-                    .fill(palette.timelineRail)
-                    .frame(height: 1)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 7)
+            TodayOpenContinuitySpine(
+                kind: .proposed,
+                palette: palette.openContinuity
+            )
+            .frame(height: 36)
+            .accessibilityHidden(true)
 
             TodayFlagshipStateField(
                 label: proposedLabel,
@@ -322,6 +303,21 @@ struct TodayFlagshipStateComparison: View {
             .accessibilityIdentifier("tfcs-proposed-truth")
         }
         .accessibilityElement(children: .contain)
+    }
+}
+
+private extension TodayFlagshipReliefRole {
+    var nodeKind: TodayOpenContinuityNodeKind {
+        switch self {
+        case .primary, .current:
+            .current
+        case .proposed:
+            .proposed
+        case .settled:
+            .settled
+        case .interrupted:
+            .interrupted
+        }
     }
 }
 

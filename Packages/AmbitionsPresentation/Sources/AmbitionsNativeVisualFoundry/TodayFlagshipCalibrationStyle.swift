@@ -4,102 +4,78 @@ struct TodayFlagshipPalette {
     let colorScheme: ColorScheme
     let contrast: ColorSchemeContrast
 
+    var openContinuity: TodayOpenContinuityPalette {
+        TodayOpenContinuityPalette(colorScheme: colorScheme, contrast: contrast)
+    }
+
     var semanticPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.070, green: 0.073, blue: 0.081)
-            : Color(red: 0.945, green: 0.937, blue: 0.910)
+        openContinuity.canvas
     }
 
     var recessedPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.105, green: 0.108, blue: 0.118)
-            : Color(red: 0.918, green: 0.908, blue: 0.880)
+        openContinuity.canvasElevated
     }
 
     var primaryObjectPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.105, green: 0.108, blue: 0.121)
-            : Color(red: 0.915, green: 0.906, blue: 0.879)
+        openContinuity.objectRelief
     }
 
     var currentTruthPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.086, green: 0.090, blue: 0.101)
-            : Color(red: 0.938, green: 0.928, blue: 0.900)
+        openContinuity.currentTruth
     }
 
     var proposedTruthPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.135, green: 0.126, blue: 0.188)
-            : Color(red: 0.875, green: 0.852, blue: 0.925)
+        openContinuity.proposedTruth
     }
 
     var settledTruthPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.100, green: 0.132, blue: 0.121)
-            : Color(red: 0.870, green: 0.900, blue: 0.854)
+        openContinuity.settledTruth
     }
 
     var interruptedTruthPlane: Color {
-        colorScheme == .dark
-            ? Color(red: 0.151, green: 0.126, blue: 0.112)
-            : Color(red: 0.920, green: 0.875, blue: 0.792)
+        openContinuity.interruptedTruth
     }
 
     var primaryInk: Color {
-        colorScheme == .dark
-            ? Color(red: 0.95, green: 0.94, blue: 0.91)
-            : Color(red: 0.11, green: 0.11, blue: 0.12)
+        openContinuity.labelPrimary
     }
 
     var secondaryInk: Color {
-        colorScheme == .dark
-            ? Color(red: 0.74, green: 0.73, blue: 0.70)
-            : Color(red: 0.30, green: 0.29, blue: 0.28)
+        openContinuity.labelSecondary
     }
 
     var tertiaryInk: Color {
-        colorScheme == .dark
-            ? Color(red: 0.59, green: 0.58, blue: 0.56)
-            : Color(red: 0.43, green: 0.42, blue: 0.40)
+        openContinuity.labelTertiary
     }
 
     var actionAccent: Color {
-        colorScheme == .dark
-            ? Color(red: 0.42, green: 0.40, blue: 0.67)
-            : Color(red: 0.30, green: 0.27, blue: 0.55)
+        openContinuity.ambitionsAccent
     }
 
     var articulationAccent: Color {
-        colorScheme == .dark
-            ? Color(red: 0.69, green: 0.67, blue: 0.91)
-            : Color(red: 0.35, green: 0.30, blue: 0.60)
+        openContinuity.ambitionsAccentMuted
     }
 
     var settledAccent: Color {
-        colorScheme == .dark
-            ? Color(red: 0.58, green: 0.76, blue: 0.66)
-            : Color(red: 0.20, green: 0.45, blue: 0.31)
+        openContinuity.protectedState
     }
 
     var interruptionAccent: Color {
-        colorScheme == .dark
-            ? Color(red: 0.82, green: 0.61, blue: 0.47)
-            : Color(red: 0.53, green: 0.30, blue: 0.17)
+        openContinuity.interruptedState
     }
 
     var timelineRail: Color {
         primaryInk.opacity(contrast == .increased ? 0.40 : colorScheme == .dark ? 0.24 : 0.18)
     }
 
-    var actionInk: Color { .white }
+    var actionInk: Color { openContinuity.actionLabel }
 
     var localArticulation: Color {
         primaryInk.opacity(contrast == .increased ? 0.35 : colorScheme == .dark ? 0.22 : 0.16)
     }
 
     var divider: Color {
-        primaryInk.opacity(contrast == .increased ? 0.36 : colorScheme == .dark ? 0.20 : 0.14)
+        openContinuity.separator
     }
 
     var opaqueChrome: Color {
@@ -127,7 +103,7 @@ struct TodayFlagshipPalette {
     }
 
     var reliefShadow: Color {
-        colorScheme == .dark ? .black.opacity(0.20) : .black.opacity(0.08)
+        openContinuity.reliefShadow
     }
 }
 
