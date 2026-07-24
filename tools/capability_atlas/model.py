@@ -166,6 +166,10 @@ class CandidateRecord:
     verification_status: str
     disposition: str
     evidence: tuple[EvidenceExcerpt, ...]
+    qualification_status: str = "unclassified"
+    classification_reason_code: str = "not_classified"
+    classification_rationale: str = "Classification has not been executed."
+    classification_confidence: float = 0.0
     owner_seed_id: str | None = None
     note: str | None = None
 
@@ -197,11 +201,15 @@ class CandidateRecord:
             "authority_status": self.authority_status,
             "candidate_id": self.candidate_id,
             "classification": self.classification,
+            "classification_confidence": self.classification_confidence,
+            "classification_rationale": self.classification_rationale,
+            "classification_reason_code": self.classification_reason_code,
             "disposition": self.disposition,
             "evidence": [item.as_record() for item in self.evidence],
             "exact_terminology": self.exact_terminology,
             "implementation_status": self.implementation_status,
             "normalized_name_hint": self.normalized_name_hint,
+            "qualification_status": self.qualification_status,
             "specification_maturity": self.specification_maturity,
             "verification_status": self.verification_status,
         }
