@@ -57,14 +57,20 @@ def _precision_filter(candidate: CandidateRecord) -> CandidateRecord:
     return candidate
 
 
-def render_outputs(compilation: DiscoveryCompilation) -> dict[Path, str]:
-    """Render discovery plus authority-refined classification artifacts."""
+def classify_compilation(compilation: DiscoveryCompilation) -> DiscoveryCompilation:
+    """Return the immutable authority-refined Phase B compilation."""
 
     candidates = tuple(
         _precision_filter(item)
         for item in classify_candidates(compilation.candidates)
     )
-    classified = replace(compilation, candidates=candidates)
+    return replace(compilation, candidates=candidates)
+
+
+def render_outputs(compilation: DiscoveryCompilation) -> dict[Path, str]:
+    """Render discovery plus authority-refined classification artifacts."""
+
+    classified = classify_compilation(compilation)
     outputs = base.render_discovery_outputs(classified)
     qualified = [
         item for item in classified.candidates if item.qualification_status == "qualified"
