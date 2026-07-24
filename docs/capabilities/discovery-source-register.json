@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_discovery_control",
+  "repository": "agentdevan/ambitions",
+  "baseline_ref": "main",
+  "program_branch": "codex/capability-atlas-foundation",
+  "coverage_policy": {
+    "required_outcome": "Every configured source family must end with covered, intentionally_excluded, or blocked status and an evidence-backed reason.",
+    "silent_exclusion_forbidden": true,
+    "historical_material_preserved": true,
+    "implementation_does_not_imply_authority": true,
+    "tests_do_not_imply_authority": true
+  },
+  "source_families": [
+    {
+      "id": "SRC-CONSTITUTION",
+      "name": "Constitution and canon orientation",
+      "path_patterns": [
+        "docs/canon/CONSTITUTION.md",
+        "docs/canon/README.md",
+        "docs/canon/MANIFEST.toml"
+      ],
+      "authority_class": "normative_or_authority_control",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-NORMATIVE-SPECS",
+      "name": "Normative app, surface, global, object, system, and journey specifications",
+      "path_patterns": [
+        "docs/canon/specifications/**/*.md"
+      ],
+      "authority_class": "normative",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-STANDARDS",
+      "name": "Engineering, accessibility, privacy, language, performance, testing, and release standards",
+      "path_patterns": [
+        "docs/canon/standards/**/*.md"
+      ],
+      "authority_class": "normative_constraint",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-DESIGN-CANON",
+      "name": "Visual closure, UX blueprint, and design provenance",
+      "path_patterns": [
+        "docs/canon/design/**/*",
+        "docs/canon/migration/**/*",
+        "docs/design/provenance/**/*"
+      ],
+      "authority_class": "mixed_reference_and_closed_design_input",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-ADRS",
+      "name": "Accepted architecture and product reconciliation decisions",
+      "path_patterns": [
+        "docs/adr/**/*.md"
+      ],
+      "authority_class": "accepted_decision",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-RESEARCH",
+      "name": "Invention, research, disclosure, and technical-design packages",
+      "path_patterns": [
+        "docs/canon/references/research/**/*",
+        "docs/research/**/*",
+        "docs/invention/**/*"
+      ],
+      "authority_class": "research_or_reference",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-AUDITS",
+      "name": "Product, architecture, domain, persistence, evidence, and reconciliation audits",
+      "path_patterns": [
+        "docs/audits/**/*"
+      ],
+      "authority_class": "audit_evidence",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-QA-REMEDIATION",
+      "name": "QA inventories, remediation dossiers, reconstruction plans, and evidence registers",
+      "path_patterns": [
+        "docs/qa/**/*"
+      ],
+      "authority_class": "mixed_operational_evidence",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-LINEAR-MIRRORS",
+      "name": "Repository-preserved Linear coverage, project, and issue mirrors",
+      "path_patterns": [
+        "docs/linear/**/*"
+      ],
+      "authority_class": "planning_and_traceability_evidence",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-PLATFORM",
+      "name": "Apple platform and Source Atlas blueprints",
+      "path_patterns": [
+        "docs/platform/**/*"
+      ],
+      "authority_class": "platform_reference",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-PRODUCTION",
+      "name": "Native application and runtime source",
+      "path_patterns": [
+        "Native/**/*.swift",
+        "Sources/**/*.swift"
+      ],
+      "authority_class": "implementation_evidence_only",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-TESTS",
+      "name": "Unit, integration, runtime, UI, accessibility, and governance tests",
+      "path_patterns": [
+        "Native/**/*Tests/**/*.swift",
+        "tests/**/*",
+        "tools/**/*test*",
+        "scripts/**/*test*"
+      ],
+      "authority_class": "verification_evidence_only",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-HISTORICAL",
+      "name": "Superseded, archived, migration, and historical planning material",
+      "path_patterns": [
+        "**/*archive*/*",
+        "**/*historical*/*",
+        "**/*superseded*/*",
+        "docs/plans/**/*",
+        "docs/superpowers/plans/**/*"
+      ],
+      "authority_class": "historical_evidence_only",
+      "status": "pending"
+    },
+    {
+      "id": "SRC-OWNER-SEEDS",
+      "name": "Direct owner-originated capability seeds",
+      "path_patterns": [
+        "docs/capabilities/seed-capabilities.json"
+      ],
+      "authority_class": "owner_seed_non_normative",
+      "status": "covered",
+      "coverage_note": "Eight seeds preserved on 2026-07-24 before repository reconciliation."
+    }
+  ]
+}

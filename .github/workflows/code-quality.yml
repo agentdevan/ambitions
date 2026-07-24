@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: code-quality-${{ github.workflow }}-${{ github.ref }}
@@ -81,6 +81,66 @@ jobs:
           set -euo pipefail
           python3 scripts/ambitions-canon.py check
           python3 -m unittest discover -s tools/tests -p 'test_ambitions_canon_compiler.py'
+      - name: Capability discovery integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tools/tests -p 'test_capability_atlas_discovery.py'
+          python3 scripts/ambitions-capabilities.py build
+      - name: Upload capability discovery outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-discovery-output
+          if-no-files-found: error
+          path: |
+            docs/capabilities/candidate-capabilities.json
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md
+            docs/capabilities/discovery-coverage.json
+            docs/capabilities/discovery-sources.json
+            docs/capabilities/candidates/*.json
+            docs/capabilities/sources/*.json
+      - name: Bootstrap generated capability inventory
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.head_ref == 'codex/capability-atlas-foundation' &&
+          github.actor != 'github-actions[bot]'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- \
+            docs/capabilities/candidate-capabilities.json \
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md \
+            docs/capabilities/discovery-coverage.json \
+            docs/capabilities/discovery-sources.json \
+            docs/capabilities/candidates \
+            docs/capabilities/sources
+          if git diff --cached --quiet; then
+            echo "Capability discovery outputs already match."
+            exit 0
+          fi
+          git commit -m "docs: add repository capability discovery inventory"
+          git push origin "HEAD:${HEAD_REF}"
+      - name: Reject capability discovery drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="$(git status --porcelain --untracked-files=all -- \
+            docs/capabilities/candidate-capabilities.json \
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md \
+            docs/capabilities/discovery-coverage.json \
+            docs/capabilities/discovery-sources.json \
+            docs/capabilities/candidates \
+            docs/capabilities/sources)"
+          if [[ -n "$status" ]]; then
+            printf '%s\n' "$status"
+            echo "Run: python3 scripts/ambitions-capabilities.py build"
+            exit 1
+          fi
       - name: SwiftLint
         if: needs.changes.outputs.native == 'true'
         env:
