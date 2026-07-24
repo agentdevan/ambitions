@@ -12,65 +12,60 @@ struct TodayFlagshipReviewView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    identity
+                TodayFlagshipObjectField(role: .proposed, palette: palette) {
+                    VStack(alignment: .leading, spacing: 13) {
+                        identity
 
-                    TodayFlagshipTruthBlock(
-                        label: content.interfaceCopy.rightNowTitle,
-                        symbol: "checkmark.seal",
-                        truth: state.acceptedTruth,
-                        supportingText: nil,
-                        isProposed: false,
-                        palette: palette
-                    )
-                    .accessibilityFocused($accessibilityFocus, equals: .reviewCurrentTruth)
-                    .accessibilityIdentifier("tfcs-review-current-truth")
+                        TodayFlagshipStateComparison(
+                            currentLabel: content.interfaceCopy.rightNowTitle,
+                            currentTruth: state.acceptedTruth,
+                            proposedLabel: content.primaryStep.stillCountsProposal.outcomeTitle,
+                            proposedTruth: state.proposedTruth
+                                ?? content.primaryStep.stillCountsProposal.proposedTruth,
+                            palette: palette
+                        )
+                        .accessibilityFocused($accessibilityFocus, equals: .reviewCurrentTruth)
+                        .accessibilityIdentifier("tfcs-review-comparison")
 
-                    TodayFlagshipTruthBlock(
-                        label: content.primaryStep.stillCountsProposal.outcomeTitle,
-                        symbol: "arrow.trianglehead.branch",
-                        truth: state.proposedTruth
-                            ?? content.primaryStep.stillCountsProposal.proposedTruth,
-                        supportingText: nil,
-                        isProposed: true,
-                        palette: palette
-                    )
-                    .accessibilityIdentifier("tfcs-proposed-truth")
+                        TodayFlagshipRelationshipRow(
+                            symbol: "arrow.trianglehead.branch",
+                            title: content.interfaceCopy.reviewChangeTitle,
+                            value: content.primaryStep.stillCountsProposal.exactConsequence,
+                            palette: palette,
+                            emphasized: true
+                        )
+                        .accessibilityIdentifier("tfcs-review-consequence")
 
-                    reviewRelationship(
-                        label: content.interfaceCopy.reviewChangeTitle,
-                        text: content.primaryStep.stillCountsProposal.exactConsequence
-                    )
-                    .accessibilityIdentifier("tfcs-review-consequence")
-                    reviewRelationship(
-                        label: content.interfaceCopy.reviewRelationshipTitle,
-                        text: content.primaryStep.stillCountsProposal.affectedLineage
-                    )
-                    .accessibilityIdentifier("tfcs-review-relationship")
-
-                    Label(content.interfaceCopy.historyTrustCue, systemImage: "lock")
-                        .font(.footnote)
-                        .foregroundStyle(palette.secondaryInk)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("tfcs-review-trust-cue")
-
-                    DisclosureGroup(content.interfaceCopy.detailsTitle) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(content.primaryStep.stillCountsProposal.proofRequirement)
-                            if content.primaryStep.stillCountsProposal.createsReceipt {
-                                Text("A local receipt will be available after progress is recorded.")
+                        ViewThatFits(in: .horizontal) {
+                            HStack(alignment: .top, spacing: 18) {
+                                reviewRelationshipRow
+                                historyTrustRow
                             }
-                            if content.primaryStep.stillCountsProposal.appearsInHistory {
-                                Text("You can review the saved history from this Step.")
+
+                            VStack(alignment: .leading, spacing: 12) {
+                                reviewRelationshipRow
+                                historyTrustRow
                             }
                         }
-                        .font(.footnote)
-                        .foregroundStyle(palette.secondaryInk)
-                        .padding(.top, 6)
-                        .accessibilityIdentifier("tfcs-review-detail-content")
+
+                        DisclosureGroup(content.interfaceCopy.detailsTitle) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(content.primaryStep.stillCountsProposal.proofRequirement)
+                                if content.primaryStep.stillCountsProposal.createsReceipt {
+                                    Text("A local receipt will be available after progress is recorded.")
+                                }
+                                if content.primaryStep.stillCountsProposal.appearsInHistory {
+                                    Text("You can review the saved history from this Step.")
+                                }
+                            }
+                            .font(.footnote)
+                            .foregroundStyle(palette.secondaryInk)
+                            .padding(.top, 6)
+                            .accessibilityIdentifier("tfcs-review-detail-content")
+                        }
+                        .font(.body.weight(.medium))
+                        .accessibilityIdentifier("tfcs-review-details")
                     }
-                    .font(.body.weight(.medium))
-                    .accessibilityIdentifier("tfcs-review-details")
                 }
                 .frame(maxWidth: 560, alignment: .leading)
                 .padding(.horizontal, 24)
@@ -97,9 +92,9 @@ struct TodayFlagshipReviewView: View {
     }
 
     private var identity: some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 5) {
             Text(content.primaryStep.title)
-                .font(.title3.weight(.semibold))
+                .font(.title2.weight(.bold))
                 .fixedSize(horizontal: false, vertical: true)
             Text(content.primaryStep.parentPursuitTitle)
                 .font(.subheadline)
@@ -109,14 +104,24 @@ struct TodayFlagshipReviewView: View {
         .accessibilityIdentifier("tfcs-step-identity")
     }
 
-    private func reviewRelationship(label: String, text: String) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            TodayFlagshipSectionLabel(label, palette: palette)
-            Text(text)
-                .font(.body)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .accessibilityElement(children: .combine)
+    private var reviewRelationshipRow: some View {
+        TodayFlagshipRelationshipRow(
+            symbol: "scope",
+            title: content.interfaceCopy.reviewRelationshipTitle,
+            value: content.primaryStep.stillCountsProposal.affectedLineage,
+            palette: palette
+        )
+        .accessibilityIdentifier("tfcs-review-relationship")
+    }
+
+    private var historyTrustRow: some View {
+        TodayFlagshipEvidenceRow(
+            symbol: "lock",
+            title: content.interfaceCopy.historyTrustCue,
+            detail: nil,
+            palette: palette
+        )
+        .accessibilityIdentifier("tfcs-review-trust-cue")
     }
 
     private var commitAction: some View {
