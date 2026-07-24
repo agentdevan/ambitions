@@ -110,10 +110,14 @@ struct TodayOpenContinuityTruthComparison: View {
             }
             .accessibilityHidden(true)
         }
-        .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: isSaving)
+        .animation(motionPolicy.stateAnimation, value: isSaving)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(currentLabel). \(proposedLabel).")
         .accessibilityIdentifier("tfcs-review-transition-seam")
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
     private var reliefShape: UnevenRoundedRectangle {

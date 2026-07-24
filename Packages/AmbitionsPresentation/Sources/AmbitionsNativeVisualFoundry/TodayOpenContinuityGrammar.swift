@@ -35,6 +35,14 @@ enum TodayOpenContinuityNodeKind: String, CaseIterable {
     }
 }
 
+struct TodayOpenContinuityMotionPolicy {
+    let reduceMotion: Bool
+
+    var stateAnimation: Animation? {
+        reduceMotion ? nil : .easeInOut(duration: 0.22)
+    }
+}
+
 struct TodayOpenContinuityPalette {
     let colorScheme: ColorScheme
     let contrast: ColorSchemeContrast
@@ -166,6 +174,7 @@ enum TodayOpenContinuityTypographyRole {
 struct TodayOpenContinuityPrimaryActionStyle: ButtonStyle {
     let palette: TodayOpenContinuityPalette
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.isEnabled) private var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
@@ -186,7 +195,7 @@ struct TodayOpenContinuityPrimaryActionStyle: ButtonStyle {
                 .fill(palette.ambitionsAccent.opacity(isEnabled ? 1 : 0.42))
             }
             .opacity(configuration.isPressed ? 0.78 : 1)
-            .scaleEffect(configuration.isPressed ? 0.985 : 1)
+            .scaleEffect(reduceMotion ? 1 : configuration.isPressed ? 0.985 : 1)
             .contentShape(Rectangle())
     }
 }

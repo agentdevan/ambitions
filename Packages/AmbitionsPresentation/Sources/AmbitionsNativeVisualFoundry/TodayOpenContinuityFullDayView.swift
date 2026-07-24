@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TodayOpenContinuityFullDayView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AccessibilityFocusState private var isNowFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
@@ -38,7 +39,7 @@ struct TodayOpenContinuityFullDayView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        withAnimation(.easeOut(duration: 0.2)) {
+                        withAnimation(motionPolicy.stateAnimation) {
                             proxy.scrollTo(nowStep.id, anchor: .top)
                         }
                         isNowFocused = true
@@ -200,6 +201,10 @@ struct TodayOpenContinuityFullDayView: View {
     private var timelineContent: TodayFlagshipCalibrationContent {
         guard origin == .todayReturned else { return content }
         return content.replacingTimelineForFullDay(content.returnedTodayTimeline)
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 }
 

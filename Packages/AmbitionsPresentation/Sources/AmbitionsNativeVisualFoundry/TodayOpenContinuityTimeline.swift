@@ -48,6 +48,7 @@ func todayOverviewObjects(
 }
 
 struct TodayOpenContinuityTimeline: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AccessibilityFocusState private var isFullDayActionFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
@@ -74,17 +75,19 @@ struct TodayOpenContinuityTimeline: View {
     }
 
     var body: some View {
+        let renderedObjects = objects
+
         VStack(alignment: .leading, spacing: 10) {
             timelineHeading
 
             VStack(spacing: 0) {
-                ForEach(Array(objects.enumerated()), id: \.element.id) { index, item in
+                ForEach(Array(renderedObjects.enumerated()), id: \.element.id) { index, item in
                     VStack(spacing: 0) {
                         TodayOpenContinuityTimelineRow(
                             item: item,
                             anchorTitle: anchorTitle(for: item),
                             palette: palette,
-                            showsContinuation: index < objects.count - 1,
+                            showsContinuation: index < renderedObjects.count - 1,
                             isOverview: mode == .overview
                         )
 
@@ -103,6 +106,11 @@ struct TodayOpenContinuityTimeline: View {
         .accessibilityIdentifier(
             mode == .overview ? "tfcs-today-overview" : "tfcs-full-day-timeline"
         )
+        .animation(motionPolicy.stateAnimation, value: renderedObjects.map(\.id))
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
     private var timelineHeading: some View {

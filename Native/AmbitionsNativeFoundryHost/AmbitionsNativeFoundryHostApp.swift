@@ -192,6 +192,8 @@ private enum FoundryVariant: String {
     case b02OfflineLocal = "b02-offline-local"
     case b02StaleExternal = "b02-stale-external"
     case b02ConflictTransfer = "b02-conflict-transfer"
+    case b02MotionNormal = "b02-motion-normal"
+    case b02MotionReduceMotion = "b02-motion-reduce-motion"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -298,7 +300,7 @@ private enum FoundryVariant: String {
     }
 
     var reduceMotion: Bool {
-        self == .b02ReviewReduceMotion
+        self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
     }
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {
@@ -316,6 +318,8 @@ private enum FoundryVariant: String {
     var demoJourney: FoundryDemoJourney {
         switch self {
         case .journeySuccessful:
+            .successful
+        case .b02MotionNormal, .b02MotionReduceMotion:
             .successful
         case .journeyInterrupted:
             .interrupted

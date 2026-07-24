@@ -73,6 +73,9 @@ public struct TodayFlagshipCalibrationView: View {
             guard oldPath.isEmpty == false, newPath.isEmpty else { return }
             _ = state.returnByNativeBackNavigation()
         }
+        .sensoryFeedback(.success, trigger: state.phase) { oldPhase, newPhase in
+            oldPhase == .savingAcceptedTruth && newPhase == .settled
+        }
         .tint(palette.actionAccent)
         .accessibilityIdentifier("tfcs-journey-root")
     }
@@ -124,7 +127,7 @@ public struct TodayFlagshipCalibrationView: View {
                 )
                 .padding(.trailing, isDockExpanded ? 0 : 2)
                 .animation(
-                    reduceMotion ? nil : .easeOut(duration: 0.22),
+                    motionPolicy.stateAnimation,
                     value: isDockExpanded
                 )
             }
@@ -245,6 +248,10 @@ public struct TodayFlagshipCalibrationView: View {
             colorScheme: colorScheme,
             contrast: colorSchemeContrast
         )
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
 }

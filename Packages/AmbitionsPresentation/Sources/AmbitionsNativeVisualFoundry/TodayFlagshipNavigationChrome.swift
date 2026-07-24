@@ -117,6 +117,7 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
 
 struct TodayFlagshipDock: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @State private var commandSelectionFeedback = 0
 
     let copy: TodayFlagshipInterfaceCopy
     let commands: [TodayFlagshipNavigationCommand]
@@ -134,6 +135,7 @@ struct TodayFlagshipDock: View {
                     .transition(.opacity)
             }
         }
+        .sensoryFeedback(.selection, trigger: commandSelectionFeedback)
     }
 
     private var peekDock: some View {
@@ -241,6 +243,7 @@ struct TodayFlagshipDock: View {
 
             ForEach(commands) { command in
                 Button {
+                    commandSelectionFeedback += 1
                     onCommand(command)
                     if command == .today {
                         isExpanded = false
@@ -313,9 +316,11 @@ struct TodayFlagshipDock: View {
 }
 
 private struct TodayFlagshipDockPeekButtonStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .opacity(configuration.isPressed ? 0.72 : 1)
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
+            .scaleEffect(reduceMotion ? 1 : configuration.isPressed ? 0.97 : 1)
     }
 }

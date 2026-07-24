@@ -66,20 +66,16 @@ struct TodayOpenContinuityRoot: View {
             }
             .scrollIndicators(.hidden)
             .onScrollGeometryChange(for: CGFloat.self) { geometry in
-                max(0, geometry.contentOffset.y + geometry.contentInsets.top)
-            } action: { _, offset in
-                onCrownScrollProgress(min(offset / 56, 1))
+                min(max(0, geometry.contentOffset.y + geometry.contentInsets.top) / 56, 1)
+            } action: { _, progress in
+                onCrownScrollProgress(progress)
             }
             .onChange(of: state.phase) { _, phase in
                 routeFocus(for: phase)
                 guard phase == .todayReturned else { return }
                 let anchor = content.returnContract.focusAnchorID
-                if reduceMotion {
+                withAnimation(motionPolicy.stateAnimation) {
                     proxy.scrollTo(anchor, anchor: .bottom)
-                } else {
-                    withAnimation(.easeOut(duration: 0.28)) {
-                        proxy.scrollTo(anchor, anchor: .bottom)
-                    }
                 }
             }
         }
@@ -92,6 +88,10 @@ struct TodayOpenContinuityRoot: View {
     private var timelineContent: TodayFlagshipCalibrationContent {
         guard state.phase == .todayReturned else { return content }
         return content.withTimeline(content.returnedTodayTimeline)
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
     private var returnedContinuity: some View {

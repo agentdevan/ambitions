@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct TodayOpenContinuitySpine: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     let kind: TodayOpenContinuityNodeKind
     let palette: TodayOpenContinuityPalette
     var extendsBefore = true
@@ -19,7 +21,12 @@ struct TodayOpenContinuitySpine: View {
         }
         .frame(width: 28)
         .frame(minHeight: 44)
+        .animation(policy.stateAnimation, value: kind)
         .accessibilityHidden(true)
+    }
+
+    private var policy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
     private var connector: some View {

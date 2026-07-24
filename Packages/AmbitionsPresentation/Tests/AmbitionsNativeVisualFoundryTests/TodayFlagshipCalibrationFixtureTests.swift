@@ -324,6 +324,87 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertFalse(timelineSource.contains("if item.isOpenLane"))
     }
 
+    func testB02ReduceMotionKeepsStaticStateMeaning() throws {
+        let standardPolicy = TodayOpenContinuityMotionPolicy(reduceMotion: false)
+        let reducedPolicy = TodayOpenContinuityMotionPolicy(reduceMotion: true)
+
+        XCTAssertNotNil(standardPolicy.stateAnimation)
+        XCTAssertNil(reducedPolicy.stateAnimation)
+        XCTAssertEqual(
+            Set(TodayOpenContinuityNodeKind.allCases.map(\.nonColorShapeLabel)).count,
+            TodayOpenContinuityNodeKind.allCases.count,
+            "Every state keeps a unique static shape when motion is reduced"
+        )
+
+        let grammarSource = try foundrySource(named: "TodayOpenContinuityGrammar.swift")
+        let spineSource = try foundrySource(named: "TodayOpenContinuitySpine.swift")
+        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
+        let timelineSource = try foundrySource(named: "TodayOpenContinuityTimeline.swift")
+        let fullDaySource = try foundrySource(named: "TodayOpenContinuityFullDayView.swift")
+        let focusedSource = try foundrySource(named: "TodayOpenContinuityFocusedObject.swift")
+        let truthSource = try foundrySource(named: "TodayOpenContinuityTruthFlow.swift")
+        let journeySource = try foundrySource(named: "TodayFlagshipCalibrationView.swift")
+        let reviewSource = try foundrySource(named: "TodayFlagshipReviewView.swift")
+        let navigationSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+        let motionSources = [
+            grammarSource,
+            spineSource,
+            rootSource,
+            timelineSource,
+            fullDaySource,
+            focusedSource,
+            truthSource,
+            journeySource,
+            navigationSource
+        ].joined(separator: "\n")
+
+        XCTAssertTrue(grammarSource.contains("struct TodayOpenContinuityMotionPolicy"))
+        XCTAssertTrue(
+            grammarSource.contains(
+                "@Environment(\\.accessibilityReduceMotion) private var reduceMotion"
+            )
+        )
+        XCTAssertTrue(grammarSource.contains(".scaleEffect(reduceMotion ? 1 :"))
+        XCTAssertTrue(spineSource.contains("policy.stateAnimation"))
+        XCTAssertTrue(fullDaySource.contains("withAnimation(motionPolicy.stateAnimation)"))
+        XCTAssertTrue(
+            fullDaySource.contains(
+                "@Environment(\\.accessibilityReduceMotion) private var reduceMotion"
+            )
+        )
+        XCTAssertFalse(motionSources.contains(".spring("))
+        XCTAssertFalse(motionSources.contains(".blur("))
+        XCTAssertTrue(reviewSource.contains(".sensoryFeedback(.selection"))
+        XCTAssertTrue(reviewSource.contains(".sensoryFeedback("))
+        XCTAssertTrue(reviewSource.contains(".impact(weight: .light"))
+        XCTAssertTrue(
+            navigationSource.contains(
+                ".sensoryFeedback(.selection, trigger: commandSelectionFeedback)"
+            )
+        )
+        XCTAssertTrue(navigationSource.contains("commandSelectionFeedback += 1"))
+        XCTAssertTrue(
+            navigationSource.contains(".scaleEffect(reduceMotion ? 1 :")
+        )
+        XCTAssertTrue(journeySource.contains(".sensoryFeedback(.success"))
+        XCTAssertTrue(journeySource.contains("state.phase"))
+    }
+
+    func testB02MotionScopeKeepsScrollAndTimelineObservationBounded() throws {
+        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
+        let timelineSource = try foundrySource(named: "TodayOpenContinuityTimeline.swift")
+
+        XCTAssertTrue(
+            rootSource.contains(
+                "min(max(0, geometry.contentOffset.y + geometry.contentInsets.top) / 56, 1)"
+            )
+        )
+        XCTAssertTrue(rootSource.contains("onCrownScrollProgress(progress)"))
+        XCTAssertTrue(timelineSource.contains("let renderedObjects = objects"))
+        XCTAssertTrue(timelineSource.contains("Array(renderedObjects.enumerated())"))
+        XCTAssertTrue(timelineSource.contains("renderedObjects.count - 1"))
+    }
+
     func testFixtureProvidesLongLocalizationAndDenseTodayStressWithoutNewPolicy() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
 

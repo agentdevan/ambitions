@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TodayOpenContinuityFocusedObject: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var isIdentityFocused: Bool
     @AccessibilityFocusState private var isRecoveredProgressFocused: Bool
@@ -91,6 +92,11 @@ struct TodayOpenContinuityFocusedObject: View {
             guard shouldFocus else { return }
             isRecoveredProgressFocused = true
         }
+        .animation(motionPolicy.stateAnimation, value: recoveredProgress)
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 
     private var objectIdentity: some View {
