@@ -16,7 +16,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let startHere = element("tfcs-start-here-object")
         let primaryAction = element("tfcs-open-start-here")
         let timeline = element("tfcs-timeline")
-        let dock = app.buttons["Open global navigation"]
+        let dock = element("tfcs-dock-shell-peek")
 
         assertExists([crown, startHere, primaryAction, timeline, dock])
         XCTAssertLessThan(crown.frame.minY, startHere.frame.minY)
@@ -35,7 +35,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         launch("tfcs-f03")
 
         let crown = todayCrown()
-        let dock = app.buttons["Open global navigation"]
+        let dock = element("tfcs-dock-shell-peek")
         let crownY = crown.frame.minY
         let startHere = element("tfcs-start-here-object")
         let startHereY = startHere.frame.minY
@@ -104,7 +104,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 3))
         XCTAssertTrue(element("tfcs-start-here-object").exists)
-        XCTAssertTrue(app.buttons["Open global navigation"].exists)
+        XCTAssertTrue(element("tfcs-dock-shell-peek").exists)
     }
 
     func testReviewFirstViewportContainsDecisionWithoutScrolling() {
@@ -236,7 +236,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let action = element("tfcs-open-start-here")
         let timeline = element("tfcs-timeline")
         let firstTimelineRow = element("tfcs-timeline-row-step.nursery-paint-sample")
-        let dockPeek = app.buttons["Open global navigation"]
+        let dockPeek = element("tfcs-dock-shell-peek")
 
         assertExists([startHereObject, action, timeline, firstTimelineRow, dockPeek])
         XCTAssertEqual(
@@ -376,6 +376,145 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         pauseForEvidence(3)
     }
 
+    func testB02CrownIsRootOnlyAndDockKeepsLockedGroups() {
+        launch("tfcs-f01")
+
+        let heading = element("tfcs-today-heading")
+        assertExists([heading])
+        XCTAssertEqual(heading.label, "Today")
+        XCTAssertEqual(
+            heading.value as? String,
+            "Ambitions, Thursday · Home before dinner"
+        )
+        XCTAssertFalse(app.staticTexts["Navigate"].exists)
+
+        app.terminate()
+        launch("tfcs-f04")
+
+        let rootsGroup = element("tfcs-dock-roots-group")
+        let globalActionsGroup = element("tfcs-dock-global-actions-group")
+        let rootCommands = ["today", "goals", "time", "you"].map {
+            element("tfcs-dock-\($0)")
+        }
+        let globalCommands = ["search", "capture"].map {
+            element("tfcs-dock-\($0)")
+        }
+        assertExists([rootsGroup, globalActionsGroup] + rootCommands + globalCommands)
+        XCTAssertEqual(
+            element("tfcs-dock-expanded").frame.maxX,
+            app.frame.maxX,
+            accuracy: 1
+        )
+        XCTAssertLessThan(rootCommands[3].frame.maxY, globalCommands[0].frame.minY)
+        XCTAssertEqual(rootCommands.map { $0.label }, ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(globalCommands.map { $0.label }, ["Search", "Capture"])
+        XCTAssertEqual(rootCommands[0].value as? String, "Selected root")
+        XCTAssertTrue(rootCommands[0].isSelected)
+
+        app.terminate()
+        launch("tfcs-f05")
+        let adaptiveRootsHeading = element("tfcs-adaptive-roots-heading")
+        let adaptiveGlobalActionsHeading = element("tfcs-adaptive-global-actions-heading")
+        assertExists([adaptiveRootsHeading, adaptiveGlobalActionsHeading])
+        XCTAssertEqual(adaptiveRootsHeading.label, "Roots")
+        XCTAssertEqual(adaptiveGlobalActionsHeading.label, "Global actions")
+
+        app.terminate()
+        launch("tfcs-f06")
+        XCTAssertFalse(element("tfcs-today-heading").exists)
+    }
+
+    func testB02DockPeekHasIntentionalMinimumTarget() throws {
+        launch("tfcs-f01")
+
+        let peek = app.buttons["Open navigation"]
+        XCTAssertTrue(peek.waitForExistence(timeout: 3))
+        XCTAssertEqual(peek.frame.width, 44, accuracy: 1)
+        XCTAssertEqual(peek.frame.height, 64, accuracy: 1)
+        assertMinimumTarget(peek)
+        XCTAssertTrue(peek.isHittable)
+
+        let shellSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+        XCTAssertTrue(shellSource.contains(".frame(width: 14, height: 52)"))
+        XCTAssertTrue(shellSource.contains("Image(systemName: \"sun.max.fill\")"))
+        XCTAssertTrue(shellSource.contains(".frame(width: 44, height: 64)"))
+    }
+
+    func testB02OwnedJourneyViewsUseFixtureCopyInsteadOfLiteralProductStrings() throws {
+        let rootSource = try foundrySource(named: "TodayFlagshipCalibrationView.swift")
+        let chromeSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+        let ownedSources = [rootSource, chromeSource].joined(separator: "\n")
+        let literalArgumentPatterns = [
+            #"Text\(\s*\""#,
+            #"Label\(\s*\""#,
+            #"navigationTitle\(\s*\""#,
+            #"accessibilityLabel\(\s*\""#,
+            #"accessibilityHint\(\s*\""#,
+            #"accessibilityValue\(\s*\""#
+        ]
+        for pattern in literalArgumentPatterns {
+            XCTAssertNil(
+                ownedSources.range(of: pattern, options: .regularExpression),
+                "Task 02 view source still owns a literal product or accessibility argument: \(pattern)"
+            )
+        }
+        for prohibitedLiteral in [
+            "\"Roots\"",
+            "\"Global actions\"",
+            "\"Navigate\"",
+            "\"Selected root\"",
+            "\"Open global navigation\"",
+            "\"Close global navigation\"",
+            "\"Your day, in context\"",
+            "\"That object is no longer here. Today remains available.\""
+        ] {
+            XCTAssertFalse(
+                ownedSources.contains(prohibitedLiteral),
+                "Task 02 view source still owns product copy: \(prohibitedLiteral)"
+            )
+        }
+        XCTAssertTrue(rootSource.contains(".padding(.trailing, isDockExpanded ? 0 : 2)"))
+        XCTAssertTrue(rootSource.contains(".accessibilityValue(crownAccessibilityValue)"))
+        XCTAssertTrue(chromeSource.contains("shape: UnevenRoundedRectangle("))
+        XCTAssertTrue(chromeSource.contains("bottomTrailingRadius: 0"))
+        XCTAssertTrue(chromeSource.contains("topTrailingRadius: 0"))
+        XCTAssertFalse(chromeSource.contains("TodayFlagshipSectionLabel(title, palette: palette)"))
+        XCTAssertTrue(chromeSource.contains("tfcs-adaptive-roots-heading"))
+        XCTAssertTrue(chromeSource.contains("tfcs-adaptive-global-actions-heading"))
+    }
+
+    func testB02ArabicRootAndDockLabelTreeContainsNoUnapprovedEnglish() {
+        launch("tfcs-stress-long-rtl")
+
+        let backButton = app.navigationBars.buttons.firstMatch
+        XCTAssertTrue(backButton.waitForExistence(timeout: 3))
+        backButton.tap()
+        XCTAssertTrue(element("tfcs-today-root").waitForExistence(timeout: 3))
+
+        let heading = element("tfcs-today-heading")
+        assertExists([heading])
+        XCTAssertEqual(heading.label, "اليوم")
+        let headingValue = heading.value as? String
+        XCTAssertTrue(headingValue?.hasPrefix("Ambitions S10, ") == true)
+        XCTAssertTrue(headingValue?.contains("في المنزل قبل العشاء") == true)
+        assertArabicOnlyLabels(in: element("tfcs-today-root"))
+
+        let openNavigation = app.buttons["فتح التنقل"]
+        XCTAssertTrue(openNavigation.exists)
+        openNavigation.tap()
+        let expandedDock = element("tfcs-dock-expanded")
+        XCTAssertTrue(expandedDock.waitForExistence(timeout: 3))
+        let commands = ["today", "goals", "time", "you", "search", "capture"].map {
+            element("tfcs-dock-\($0)")
+        }
+        assertExists(commands)
+        XCTAssertEqual(
+            commands.map { $0.label },
+            ["اليوم", "الأهداف", "الوقت", "أنت", "البحث", "التقاط"]
+        )
+        assertArabicOnlyLabels(in: expandedDock)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()
@@ -387,12 +526,41 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
     }
 
     private func todayCrown() -> XCUIElement {
-        app.descendants(matching: .any)
-            .matching(NSPredicate(
-                format: "label CONTAINS %@",
-                "Thursday · Home before dinner"
-            ))
-            .firstMatch
+        element("tfcs-today-heading")
+    }
+
+    private func foundrySource(named filename: String) throws -> String {
+        let repositoryRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let source = repositoryRoot
+            .appendingPathComponent("Packages/AmbitionsPresentation/Sources")
+            .appendingPathComponent("AmbitionsNativeVisualFoundry")
+            .appendingPathComponent(filename)
+        return try String(contentsOf: source, encoding: .utf8)
+    }
+
+    private func assertArabicOnlyLabels(
+        in container: XCUIElement,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let elements = container.descendants(matching: .any).allElementsBoundByIndex.filter {
+            $0.elementType == .button || $0.elementType == .staticText
+        }
+        let labels = elements.map { $0.label }.filter { $0.isEmpty == false }
+        XCTAssertFalse(labels.isEmpty, file: file, line: line)
+
+        for label in labels {
+            let approvedIdentityRemoved = label.replacingOccurrences(of: "Ambitions S10", with: "")
+            XCTAssertNil(
+                approvedIdentityRemoved.range(of: "[A-Za-z]", options: .regularExpression),
+                "Arabic evaluation label contains unapproved Latin text: \(label)",
+                file: file,
+                line: line
+            )
+        }
     }
 
     private func assertExists(

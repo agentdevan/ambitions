@@ -83,13 +83,14 @@ public struct TodayFlagshipCalibrationView: View {
                     .padding(.top, 12)
                     .padding(.bottom, sectionSpacing)
                     .background(palette.semanticPlane)
-                    .accessibilityIdentifier("tfcs-today-crown")
 
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(alignment: .leading, spacing: sectionSpacing) {
                             if usesAdaptiveNavigation {
                                 TodayFlagshipAdaptiveNavigationPassage(
+                                    copy: content.interfaceCopy,
+                                    commands: TodayFlagshipNavigationCommand.allCases,
                                     palette: palette,
                                     onCommand: onNavigationCommand
                                 )
@@ -138,11 +139,13 @@ public struct TodayFlagshipCalibrationView: View {
 
             if usesAdaptiveNavigation == false {
                 TodayFlagshipDock(
+                    copy: content.interfaceCopy,
+                    commands: TodayFlagshipNavigationCommand.allCases,
                     isExpanded: $isDockExpanded,
                     palette: palette,
                     onCommand: onNavigationCommand
                 )
-                .padding(.trailing, isDockExpanded ? 12 : 2)
+                .padding(.trailing, isDockExpanded ? 0 : 2)
                 .animation(
                     reduceMotion ? nil : .easeOut(duration: 0.22),
                     value: isDockExpanded
@@ -155,6 +158,7 @@ public struct TodayFlagshipCalibrationView: View {
         }
         .foregroundStyle(palette.primaryInk)
         .todayFlagshipHideRootNavigationBar()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-today-root")
     }
 
@@ -173,19 +177,28 @@ public struct TodayFlagshipCalibrationView: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("tfcs-today-crown")
+        .accessibilityLabel(content.interfaceCopy.todayAccessibilityHeading)
+        .accessibilityValue(crownAccessibilityValue)
+        .accessibilityAddTraits(.isHeader)
+        .accessibilityIdentifier("tfcs-today-heading")
     }
 
     private var crownTitle: some View {
-        Text(content.presentContext.crownTitle)
-            .font(.title3.weight(.semibold))
-            .accessibilityAddTraits(.isHeader)
+        Text(content.interfaceCopy.ambitionsWordmark)
+            .font(.subheadline.weight(.semibold))
     }
 
     private var crownRelationship: some View {
         Text(content.presentContext.relationship)
             .font(.caption)
             .foregroundStyle(palette.secondaryInk)
+    }
+
+    private var crownAccessibilityValue: String {
+        [
+            content.interfaceCopy.ambitionsWordmark,
+            content.presentContext.relationship
+        ].joined(separator: ", ")
     }
 
     private func startHere(step: TodayFlagshipStepSnapshot) -> some View {
@@ -236,10 +249,7 @@ public struct TodayFlagshipCalibrationView: View {
                 }
             }
             .accessibilityElement(children: .contain)
-            .accessibilityLabel(
-                "\(content.interfaceCopy.startHereTitle), \(step.title), "
-                    + "\(step.parentPursuitTitle)"
-            )
+            .accessibilityLabel(startHereAccessibilityLabel(for: step))
             .accessibilityIdentifier("tfcs-start-here-object")
         }
         .accessibilityFocused($accessibilityFocus, equals: .startHere)
@@ -319,7 +329,7 @@ public struct TodayFlagshipCalibrationView: View {
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle(radius: 8))
         .controlSize(.regular)
-        .accessibilityHint("Opens this Step without changing it")
+        .accessibilityHint(content.interfaceCopy.openStartHereHint)
         .accessibilityIdentifier("tfcs-open-start-here")
     }
 
@@ -361,7 +371,7 @@ public struct TodayFlagshipCalibrationView: View {
 
                 Spacer(minLength: 12)
 
-                Text("Your day, in context")
+                Text(content.interfaceCopy.timelineContextTitle)
                     .font(.caption)
                     .foregroundStyle(palette.tertiaryInk)
             }
@@ -395,15 +405,15 @@ public struct TodayFlagshipCalibrationView: View {
 
     private var truthfulFallback: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Today")
+            Text(content.interfaceCopy.fallbackTodayTitle)
                 .font(.title2.weight(.semibold))
-            Text("That object is no longer here. Today remains available.")
+            Text(content.interfaceCopy.fallbackTodayBody)
                 .foregroundStyle(palette.secondaryInk)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(24)
         .background(palette.semanticPlane)
-        .navigationTitle("Today")
+        .navigationTitle(content.interfaceCopy.fallbackTodayTitle)
     }
 
     private var reviewPresentation: Binding<Bool> {
@@ -464,5 +474,13 @@ public struct TodayFlagshipCalibrationView: View {
         default:
             break
         }
+    }
+
+    private func startHereAccessibilityLabel(for step: TodayFlagshipStepSnapshot) -> String {
+        [
+            content.interfaceCopy.startHereTitle,
+            step.title,
+            step.parentPursuitTitle
+        ].joined(separator: ", ")
     }
 }

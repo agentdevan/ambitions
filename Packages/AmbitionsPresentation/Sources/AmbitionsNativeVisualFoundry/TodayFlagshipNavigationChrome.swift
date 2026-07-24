@@ -1,14 +1,18 @@
 import SwiftUI
 
 struct TodayFlagshipAdaptiveNavigationPassage: View {
+    let copy: TodayFlagshipInterfaceCopy
+    let commands: [TodayFlagshipNavigationCommand]
     let palette: TodayFlagshipPalette
     let onCommand: (TodayFlagshipNavigationCommand) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             navigationGroup(
-                title: "Roots",
-                commands: TodayFlagshipNavigationCommand.roots
+                title: copy.rootsGroupTitle,
+                commands: rootCommands,
+                headingIdentifier: "tfcs-adaptive-roots-heading",
+                identifier: "tfcs-adaptive-roots-group"
             )
 
             Rectangle()
@@ -17,8 +21,10 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
                 .accessibilityHidden(true)
 
             navigationGroup(
-                title: "Global actions",
-                commands: TodayFlagshipNavigationCommand.globalActions
+                title: copy.globalActionsGroupTitle,
+                commands: globalActionCommands,
+                headingIdentifier: "tfcs-adaptive-global-actions-heading",
+                identifier: "tfcs-adaptive-global-actions-group"
             )
         }
         .padding(14)
@@ -32,10 +38,16 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
 
     private func navigationGroup(
         title: String,
-        commands: [TodayFlagshipNavigationCommand]
+        commands: [TodayFlagshipNavigationCommand],
+        headingIdentifier: String,
+        identifier: String
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            TodayFlagshipSectionLabel(title, palette: palette)
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.secondaryInk)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier(headingIdentifier)
 
             LazyVGrid(
                 columns: [
@@ -49,6 +61,8 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
                 }
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(identifier)
     }
 
     private func navigationButton(
@@ -62,7 +76,7 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
                     .frame(width: 22)
                     .accessibilityHidden(true)
 
-                Text(command.title)
+                Text(copy.navigationTitle(for: command))
                     .fontWeight(command.isSelectedRoot ? .semibold : .regular)
 
                 Spacer(minLength: 0)
@@ -86,16 +100,26 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(command.title)
-        .accessibilityValue(command.isSelectedRoot ? "Selected root" : "")
+        .accessibilityLabel(copy.navigationTitle(for: command))
+        .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
         .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
         .accessibilityIdentifier("tfcs-navigation-\(command.rawValue)")
+    }
+
+    private var rootCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.roots.contains)
+    }
+
+    private var globalActionCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.globalActions.contains)
     }
 }
 
 struct TodayFlagshipDock: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
+    let copy: TodayFlagshipInterfaceCopy
+    let commands: [TodayFlagshipNavigationCommand]
     @Binding var isExpanded: Bool
     let palette: TodayFlagshipPalette
     let onCommand: (TodayFlagshipNavigationCommand) -> Void
@@ -117,52 +141,47 @@ struct TodayFlagshipDock: View {
             isExpanded = true
         } label: {
             ZStack(alignment: .trailing) {
-                Color.clear
                 dockMaterial(
                     shape: UnevenRoundedRectangle(
-                        topLeadingRadius: 16,
-                        bottomLeadingRadius: 16,
+                        topLeadingRadius: 9,
+                        bottomLeadingRadius: 9,
                         bottomTrailingRadius: 0,
                         topTrailingRadius: 0,
                         style: .continuous
                     )
                 )
-                .frame(width: 34, height: 72)
+                .frame(width: 14, height: 52)
                 .overlay(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 1, style: .continuous)
                         .fill(palette.articulationAccent)
-                        .frame(width: 2, height: 34)
+                        .frame(width: 2, height: 30)
                         .accessibilityHidden(true)
                 }
-                .offset(x: 7)
 
-                VStack(spacing: 9) {
-                    Image(systemName: "square.grid.2x2.fill")
-                    Circle()
-                        .fill(palette.tertiaryInk)
-                        .frame(width: 3, height: 3)
-                    Image(systemName: "magnifyingglass")
+                VStack(spacing: 5) {
+                    Image(systemName: "sun.max.fill")
+                        .font(.system(size: 11, weight: .semibold))
+
+                    Capsule(style: .continuous)
+                        .fill(palette.secondaryInk)
+                        .frame(width: 5, height: 2)
                 }
-                    .font(.system(size: 9, weight: .semibold))
-                    .foregroundStyle(palette.secondaryInk)
-                    .frame(width: 28)
-                    .offset(x: 3)
-                    .accessibilityHidden(true)
+                .foregroundStyle(palette.secondaryInk)
+                .frame(width: 14, height: 52)
+                .accessibilityHidden(true)
             }
-            .frame(width: 44, height: 88)
+            .frame(width: 44, height: 64)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Open global navigation")
-        .accessibilityHint("Shows Today, Goals, Time, You, Search, and Capture")
+        .buttonStyle(TodayFlagshipDockPeekButtonStyle())
+        .accessibilityLabel(copy.openNavigationLabel)
+        .accessibilityHint(copy.navigationCommandsHint)
         .accessibilityIdentifier("tfcs-dock-shell-peek")
     }
 
     private var expandedDock: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Navigate")
-                    .font(.headline)
                 Spacer()
                 Button {
                     isExpanded = false
@@ -171,12 +190,14 @@ struct TodayFlagshipDock: View {
                         .frame(width: 44, height: 44)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Close global navigation")
+                .accessibilityLabel(copy.closeNavigationLabel)
+                .accessibilityHint(copy.closeNavigationHint)
             }
 
             dockGroup(
-                label: "Roots",
-                commands: TodayFlagshipNavigationCommand.roots
+                label: copy.rootsGroupTitle,
+                commands: rootCommands,
+                identifier: "tfcs-dock-roots-group"
             )
 
             Rectangle()
@@ -185,15 +206,22 @@ struct TodayFlagshipDock: View {
                 .accessibilityHidden(true)
 
             dockGroup(
-                label: "Global",
-                commands: TodayFlagshipNavigationCommand.globalActions
+                label: copy.globalActionsGroupTitle,
+                commands: globalActionCommands,
+                identifier: "tfcs-dock-global-actions-group"
             )
         }
         .padding(12)
         .frame(width: 300)
         .background {
             dockMaterial(
-                shape: RoundedRectangle(cornerRadius: 18, style: .continuous)
+                shape: UnevenRoundedRectangle(
+                    topLeadingRadius: 18,
+                    bottomLeadingRadius: 18,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 0,
+                    style: .continuous
+                )
             )
         }
         .accessibilityElement(children: .contain)
@@ -202,7 +230,8 @@ struct TodayFlagshipDock: View {
 
     private func dockGroup(
         label: String,
-        commands: [TodayFlagshipNavigationCommand]
+        commands: [TodayFlagshipNavigationCommand],
+        identifier: String
     ) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label)
@@ -221,7 +250,7 @@ struct TodayFlagshipDock: View {
                         Image(systemName: command.symbolName)
                             .frame(width: 20)
                             .accessibilityHidden(true)
-                        Text(command.title)
+                        Text(copy.navigationTitle(for: command))
                         Spacer(minLength: 0)
                         if command.isSelectedRoot {
                             Image(systemName: "checkmark")
@@ -241,12 +270,22 @@ struct TodayFlagshipDock: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(command.title)
-                .accessibilityValue(command.isSelectedRoot ? "Selected root" : "")
+                .accessibilityLabel(copy.navigationTitle(for: command))
+                .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
                 .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
                 .accessibilityIdentifier("tfcs-dock-\(command.rawValue)")
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(identifier)
+    }
+
+    private var rootCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.roots.contains)
+    }
+
+    private var globalActionCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.globalActions.contains)
     }
 
     @ViewBuilder
@@ -270,5 +309,13 @@ struct TodayFlagshipDock: View {
                 .fill(palette.opaqueChrome)
                 .overlay { shape.stroke(palette.divider, lineWidth: 1) }
         }
+    }
+}
+
+private struct TodayFlagshipDockPeekButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.72 : 1)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1)
     }
 }

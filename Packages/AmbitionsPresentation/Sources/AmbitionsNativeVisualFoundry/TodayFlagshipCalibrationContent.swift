@@ -35,6 +35,63 @@ public struct TodayFlagshipInterfaceCopy: Equatable, Sendable {
     public let recoveryTitle: String
     public let recoveryBody: String
     public let timelineTitle: String
+    public let ambitionsWordmark: String
+    public let todayAccessibilityHeading: String
+    public let nowAnchorTitle: String
+    public let nextFixedAnchorTitle: String
+    public let protectedAnchorTitle: String
+    public let openLaneAnchorTitle: String
+    public let viewFullDayTitle: String
+    public let fullDayTitle: String
+    public let scrollToNowTitle: String
+    public let rootsGroupTitle: String
+    public let globalActionsGroupTitle: String
+    public let selectedRootValue: String
+    public let openNavigationHint: String
+    public let closeNavigationHint: String
+    public let partOfRelationshipPrefix: String
+    public let todayNavigationTitle: String
+    public let goalsNavigationTitle: String
+    public let timeNavigationTitle: String
+    public let youNavigationTitle: String
+    public let searchNavigationTitle: String
+    public let captureNavigationTitle: String
+    public let timeOwnerTitle: String
+    public let offlineLocalTitle: String
+    public let offlineLocalBody: String
+    public let staleExternalTitle: String
+    public let staleExternalBody: String
+    public let conflictTransferTitle: String
+    public let conflictTransferBody: String
+    public let savingAnnouncement: String
+    public let settlementAnnouncement: String
+    public let interruptionAnnouncement: String
+    public let recoveryAnnouncement: String
+    public let returnAnnouncement: String
+    public let timelineContextTitle: String
+    public let openStartHereHint: String
+    public let fallbackTodayTitle: String
+    public let fallbackTodayBody: String
+    public let stillCountsRationale: String
+    public let chooseOutcomeTitle: String
+    public let reviewStillCountsHint: String
+    public let lastSavedProgressTitle: String
+    public let addedToRelationshipTitle: String
+    public let historyAvailableDetail: String
+    public let recordIdentifierPrefix: String
+    public let returnTodayHint: String
+    public let interruptedStepTitle: String
+    public let receiptAvailableDetail: String
+    public let savedHistoryDetail: String
+    public let commitProgressHint: String
+    public let cancelReviewHint: String
+    public let openNavigationLabel: String
+    public let navigationCommandsHint: String
+    public let closeNavigationLabel: String
+    public let currentStateAccessibilityTitle: String
+    public let proposedStateAccessibilityTitle: String
+    public let settledStateAccessibilityTitle: String
+    public let interruptedStateAccessibilityTitle: String
 
     public init(
         localeIdentifier: String,
@@ -58,7 +115,64 @@ public struct TodayFlagshipInterfaceCopy: Equatable, Sendable {
         recoveryEntryTitle: String,
         recoveryTitle: String,
         recoveryBody: String,
-        timelineTitle: String
+        timelineTitle: String,
+        ambitionsWordmark: String,
+        todayAccessibilityHeading: String,
+        nowAnchorTitle: String,
+        nextFixedAnchorTitle: String,
+        protectedAnchorTitle: String,
+        openLaneAnchorTitle: String,
+        viewFullDayTitle: String,
+        fullDayTitle: String,
+        scrollToNowTitle: String,
+        rootsGroupTitle: String,
+        globalActionsGroupTitle: String,
+        selectedRootValue: String,
+        openNavigationHint: String,
+        closeNavigationHint: String,
+        partOfRelationshipPrefix: String,
+        todayNavigationTitle: String,
+        goalsNavigationTitle: String,
+        timeNavigationTitle: String,
+        youNavigationTitle: String,
+        searchNavigationTitle: String,
+        captureNavigationTitle: String,
+        timeOwnerTitle: String,
+        offlineLocalTitle: String,
+        offlineLocalBody: String,
+        staleExternalTitle: String,
+        staleExternalBody: String,
+        conflictTransferTitle: String,
+        conflictTransferBody: String,
+        savingAnnouncement: String,
+        settlementAnnouncement: String,
+        interruptionAnnouncement: String,
+        recoveryAnnouncement: String,
+        returnAnnouncement: String,
+        timelineContextTitle: String,
+        openStartHereHint: String,
+        fallbackTodayTitle: String,
+        fallbackTodayBody: String,
+        stillCountsRationale: String,
+        chooseOutcomeTitle: String,
+        reviewStillCountsHint: String,
+        lastSavedProgressTitle: String,
+        addedToRelationshipTitle: String,
+        historyAvailableDetail: String,
+        recordIdentifierPrefix: String,
+        returnTodayHint: String,
+        interruptedStepTitle: String,
+        receiptAvailableDetail: String,
+        savedHistoryDetail: String,
+        commitProgressHint: String,
+        cancelReviewHint: String,
+        openNavigationLabel: String,
+        navigationCommandsHint: String,
+        closeNavigationLabel: String,
+        currentStateAccessibilityTitle: String,
+        proposedStateAccessibilityTitle: String,
+        settledStateAccessibilityTitle: String,
+        interruptedStateAccessibilityTitle: String
     ) {
         self.localeIdentifier = localeIdentifier
         self.startHereTitle = startHereTitle
@@ -82,6 +196,74 @@ public struct TodayFlagshipInterfaceCopy: Equatable, Sendable {
         self.recoveryTitle = recoveryTitle
         self.recoveryBody = recoveryBody
         self.timelineTitle = timelineTitle
+        self.ambitionsWordmark = ambitionsWordmark
+        self.todayAccessibilityHeading = todayAccessibilityHeading
+        self.nowAnchorTitle = nowAnchorTitle
+        self.nextFixedAnchorTitle = nextFixedAnchorTitle
+        self.protectedAnchorTitle = protectedAnchorTitle
+        self.openLaneAnchorTitle = openLaneAnchorTitle
+        self.viewFullDayTitle = viewFullDayTitle
+        self.fullDayTitle = fullDayTitle
+        self.scrollToNowTitle = scrollToNowTitle
+        self.rootsGroupTitle = rootsGroupTitle
+        self.globalActionsGroupTitle = globalActionsGroupTitle
+        self.selectedRootValue = selectedRootValue
+        self.openNavigationHint = openNavigationHint
+        self.closeNavigationHint = closeNavigationHint
+        self.partOfRelationshipPrefix = partOfRelationshipPrefix
+        self.todayNavigationTitle = todayNavigationTitle
+        self.goalsNavigationTitle = goalsNavigationTitle
+        self.timeNavigationTitle = timeNavigationTitle
+        self.youNavigationTitle = youNavigationTitle
+        self.searchNavigationTitle = searchNavigationTitle
+        self.captureNavigationTitle = captureNavigationTitle
+        self.timeOwnerTitle = timeOwnerTitle
+        self.offlineLocalTitle = offlineLocalTitle
+        self.offlineLocalBody = offlineLocalBody
+        self.staleExternalTitle = staleExternalTitle
+        self.staleExternalBody = staleExternalBody
+        self.conflictTransferTitle = conflictTransferTitle
+        self.conflictTransferBody = conflictTransferBody
+        self.savingAnnouncement = savingAnnouncement
+        self.settlementAnnouncement = settlementAnnouncement
+        self.interruptionAnnouncement = interruptionAnnouncement
+        self.recoveryAnnouncement = recoveryAnnouncement
+        self.returnAnnouncement = returnAnnouncement
+        self.timelineContextTitle = timelineContextTitle
+        self.openStartHereHint = openStartHereHint
+        self.fallbackTodayTitle = fallbackTodayTitle
+        self.fallbackTodayBody = fallbackTodayBody
+        self.stillCountsRationale = stillCountsRationale
+        self.chooseOutcomeTitle = chooseOutcomeTitle
+        self.reviewStillCountsHint = reviewStillCountsHint
+        self.lastSavedProgressTitle = lastSavedProgressTitle
+        self.addedToRelationshipTitle = addedToRelationshipTitle
+        self.historyAvailableDetail = historyAvailableDetail
+        self.recordIdentifierPrefix = recordIdentifierPrefix
+        self.returnTodayHint = returnTodayHint
+        self.interruptedStepTitle = interruptedStepTitle
+        self.receiptAvailableDetail = receiptAvailableDetail
+        self.savedHistoryDetail = savedHistoryDetail
+        self.commitProgressHint = commitProgressHint
+        self.cancelReviewHint = cancelReviewHint
+        self.openNavigationLabel = openNavigationLabel
+        self.navigationCommandsHint = navigationCommandsHint
+        self.closeNavigationLabel = closeNavigationLabel
+        self.currentStateAccessibilityTitle = currentStateAccessibilityTitle
+        self.proposedStateAccessibilityTitle = proposedStateAccessibilityTitle
+        self.settledStateAccessibilityTitle = settledStateAccessibilityTitle
+        self.interruptedStateAccessibilityTitle = interruptedStateAccessibilityTitle
+    }
+
+    public func navigationTitle(for command: TodayFlagshipNavigationCommand) -> String {
+        switch command {
+        case .today: todayNavigationTitle
+        case .goals: goalsNavigationTitle
+        case .time: timeNavigationTitle
+        case .you: youNavigationTitle
+        case .search: searchNavigationTitle
+        case .capture: captureNavigationTitle
+        }
     }
 }
 
