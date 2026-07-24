@@ -81,13 +81,13 @@ jobs:
           set -euo pipefail
           python3 scripts/ambitions-canon.py check
           python3 -m unittest discover -s tools/tests -p 'test_ambitions_canon_compiler.py'
-      - name: Capability discovery integrity
+      - name: Capability Atlas program integrity
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m unittest discover -s tools/tests -p 'test_capability_atlas_discovery.py'
+          python3 -m unittest discover -s tools/tests -p 'test_capability_atlas_*.py'
           python3 scripts/ambitions-capabilities.py build
-      - name: Upload capability discovery outputs
+      - name: Upload capability program outputs
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -108,7 +108,8 @@ jobs:
             docs/capabilities/exclusions/*.json
             docs/capabilities/qualified/*.json
             docs/capabilities/ambiguous/*.json
-      - name: Reject capability discovery drift
+            docs/capabilities/taxonomy-validation.json
+      - name: Reject capability program drift
         shell: bash
         run: |
           set -euo pipefail
@@ -126,7 +127,8 @@ jobs:
             docs/capabilities/CLASSIFIED_CAPABILITY_INVENTORY.md \
             docs/capabilities/exclusions \
             docs/capabilities/qualified \
-            docs/capabilities/ambiguous)"
+            docs/capabilities/ambiguous \
+            docs/capabilities/taxonomy-validation.json)"
           if [[ -n "$status" ]]; then
             printf '%s\n' "$status"
             echo "Run: python3 scripts/ambitions-capabilities.py build"
