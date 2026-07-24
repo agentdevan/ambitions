@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_phase_d_reconciliation",
+  "repository": "agentdevan/ambitions",
+  "baseline_branch": "codex/capability-atlas-taxonomy",
+  "status": "proposed_for_owner_review",
+  "qualified_candidate_count": 13,
+  "proposed_capability_count": 9,
+  "ambiguous_record_count_preserved": 298,
+  "rules": {
+    "every_qualified_candidate_has_one_disposition": true,
+    "journey_variants_are_not_duplicate_capabilities": true,
+    "surface_specific_offline_expressions_may_share_one_continuity_capability": true,
+    "projection_contracts_remain_with_the_canonical_object_capability": true,
+    "proposed_ids_do_not_create_canonical_authority": true,
+    "scope_expansion_requires_owner_decision": true
+  },
+  "capability_groups": [
+    {
+      "proposed_capability_id": "CAP-CONTEXT-001",
+      "proposed_name": "Skill Transference",
+      "primary_domain_id": "DOM-CONTEXT",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-SIMULATION"],
+      "reconciliation_type": "one_to_one_owner_seed",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-001", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"}
+      ],
+      "aliases": ["Cross-Domain Skill Transference", "Learned Strategy Transfer"],
+      "recommended_default": "Keep this as an explicit, inspectable person-facing capability rather than an invisible learning mechanism.",
+      "guardrails": ["Show the source domain and supporting evidence.", "Require person control before consequential application."],
+      "owner_decisions": [
+        {"decision_id": "DEC-CONTEXT-001-SCOPE", "question": "Standalone capability or local-learning subcapability?", "recommendation": "standalone_flagship_capability"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-PATH-001",
+      "proposed_name": "Contextual Generative Goal Pathing",
+      "primary_domain_id": "DOM-PATH",
+      "secondary_domain_ids": ["DOM-CONTEXT", "DOM-TIME", "DOM-SIMULATION"],
+      "reconciliation_type": "owner_seed_plus_projection_contract",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-002", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"},
+        {"candidate_id": "CAND-FA37F984A251FF01", "role": "cross_surface_projection", "disposition": "absorbed_as_required_behavior"}
+      ],
+      "aliases": ["Personalized Generative Goal Pathing", "Adaptive Goal Path Generation"],
+      "recommended_default": "Keep one canonical context-aware Goal Path projected into Today, Time, Search, Motion, and Trust.",
+      "guardrails": ["Paths remain revisable proposals until accepted.", "Templates alone do not satisfy personalization."],
+      "owner_decisions": []
+    },
+    {
+      "proposed_capability_id": "CAP-SIMULATION-001",
+      "proposed_name": "Alternate Career Path Simulation",
+      "primary_domain_id": "DOM-SIMULATION",
+      "secondary_domain_ids": ["DOM-CONTEXT", "DOM-PATH", "DOM-TIME"],
+      "reconciliation_type": "one_to_one_owner_seed",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-003", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"}
+      ],
+      "aliases": ["Career Pathing Simulation", "Alternate Career Scenario Exploration"],
+      "recommended_default": "Start with career-specific scope while allowing later owner-approved generalization.",
+      "guardrails": ["Scenarios remain hypothetical until adopted.", "Expose assumptions and uncertainty."],
+      "owner_decisions": [
+        {"decision_id": "DEC-SIMULATION-001-BREADTH", "question": "Career-specific or broader life-path simulation?", "recommendation": "career_specific_initial_scope"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-TIME-001",
+      "proposed_name": "Adaptive Step Placement Reflow",
+      "primary_domain_id": "DOM-TIME",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-EXECUTION"],
+      "reconciliation_type": "one_to_one_owner_seed_with_system_dependency",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-004", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"}
+      ],
+      "aliases": ["Step Placement Reflow", "Dependency-Aware Step Reflow"],
+      "recommended_default": "Keep visible reflow as a capability distinct from the scheduling engine that enables it.",
+      "guardrails": ["Preview consequential movement before commitment.", "Explain what moved, why, and how to repair or undo."],
+      "owner_decisions": [
+        {"decision_id": "DEC-TIME-001-LEVEL", "question": "Standalone capability or subcapability of broader schedule reflow?", "recommendation": "standalone_visible_capability"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-SEARCH-001",
+      "proposed_name": "Ambitions Native Search and Command",
+      "primary_domain_id": "DOM-SEARCH",
+      "secondary_domain_ids": ["DOM-IDENTITY", "DOM-APPLE"],
+      "reconciliation_type": "owner_seed_plus_journey_variants",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-005", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"},
+        {"candidate_id": "CAND-B2F829141E0DD9A3", "role": "find_act_inspect_journey", "disposition": "absorbed_as_required_journey"},
+        {"candidate_id": "CAND-939873A894F75DC1", "role": "find_ask_act_inspect_journey", "disposition": "absorbed_as_grounded_ask_journey"}
+      ],
+      "aliases": ["Raycast-Like Ambitions Search", "Global Search and Command"],
+      "recommended_default": "One global native capability owns retrieval, grounded asking, command, and inspection.",
+      "guardrails": ["Search cannot bypass canonical mutation ownership.", "Generic chatbot behavior does not satisfy this capability."],
+      "owner_decisions": []
+    },
+    {
+      "proposed_capability_id": "CAP-APPEARANCE-001",
+      "proposed_name": "Appearance Studio",
+      "primary_domain_id": "DOM-APPEARANCE",
+      "secondary_domain_ids": ["DOM-IDENTITY"],
+      "reconciliation_type": "one_to_one_owner_seed",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-006", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"}
+      ],
+      "aliases": ["First-Class Appearance Studio", "Personal Appearance Studio"],
+      "recommended_default": "Treat this as an authored experience within You, not a thin settings list.",
+      "guardrails": ["Choices remain native, accessible, and previewable.", "Personalization cannot hide required meaning or state."],
+      "owner_decisions": [
+        {"decision_id": "DEC-APPEARANCE-001-DEPTH", "question": "What authoring depth establishes first-class status?", "recommendation": "bounded_multi_dimension_studio"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-SHARING-001",
+      "proposed_name": "Content Share Studio",
+      "primary_domain_id": "DOM-SHARING",
+      "secondary_domain_ids": ["DOM-IDENTITY", "DOM-KNOWLEDGE"],
+      "reconciliation_type": "one_to_one_owner_seed",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-007", "role": "owner_seed_primary", "disposition": "retained_as_capability_identity"}
+      ],
+      "aliases": ["First-Class Content Share Studio", "Share Composition Studio"],
+      "recommended_default": "Provide deliberate audience-bound composition, transformation, redaction, and preview.",
+      "guardrails": ["The person previews the exact external representation.", "Sharing does not mutate the source object without separate confirmation."],
+      "owner_decisions": [
+        {"decision_id": "DEC-SHARING-001-FORMATS", "question": "Which initial output formats establish first-class status?", "recommendation": "native_payloads_plus_visual_and_document_exports"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-KNOWLEDGE-001",
+      "proposed_name": "Goal-Attached Files and Knowledge",
+      "primary_domain_id": "DOM-KNOWLEDGE",
+      "secondary_domain_ids": ["DOM-PATH", "DOM-SEARCH"],
+      "reconciliation_type": "one_to_one_owner_seed_with_name_normalization",
+      "source_candidates": [
+        {"candidate_id": "CAND-SEED-008", "role": "owner_seed_primary", "disposition": "retained_with_user_facing_name"}
+      ],
+      "aliases": ["Goal-Attached File Storage", "Goal Files"],
+      "recommended_default": "Keep goal-first scope and name the promise around files and knowledge rather than storage mechanics.",
+      "guardrails": ["Attachments remain related, searchable, exportable, and restorable.", "This is not a generic cloud-drive replacement."],
+      "owner_decisions": [
+        {"decision_id": "DEC-KNOWLEDGE-001-SCOPE", "question": "Goal-attached or object-attached across all first-class objects?", "recommendation": "goal_first_scope_with_object_capable_architecture"}
+      ]
+    },
+    {
+      "proposed_capability_id": "CAP-RESILIENCE-001",
+      "proposed_name": "Local-First Operational Continuity",
+      "primary_domain_id": "DOM-RESILIENCE",
+      "secondary_domain_ids": ["DOM-EXECUTION", "DOM-SEARCH", "DOM-IDENTITY"],
+      "reconciliation_type": "surface_specific_continuity_expressions",
+      "source_candidates": [
+        {"candidate_id": "CAND-C6F2EE04321B7240", "role": "offline_today_expression", "disposition": "merged_as_execution_continuity"},
+        {"candidate_id": "CAND-71C0E590F9213175", "role": "offline_search_expression", "disposition": "merged_as_search_continuity"}
+      ],
+      "aliases": ["Offline Present-Execution Continuity", "Offline Search Continuity and Repair"],
+      "recommended_default": "One local-first continuity capability owns degraded-state guarantees with domain-specific expressions.",
+      "guardrails": ["Valid local work remains usable without external connectivity.", "Stale or unavailable external evidence is disclosed without blocking local truth."],
+      "owner_decisions": []
+    }
+  ],
+  "candidate_coverage": {
+    "expected_qualified_candidate_ids": [
+      "CAND-71C0E590F9213175",
+      "CAND-939873A894F75DC1",
+      "CAND-B2F829141E0DD9A3",
+      "CAND-C6F2EE04321B7240",
+      "CAND-FA37F984A251FF01",
+      "CAND-SEED-001",
+      "CAND-SEED-002",
+      "CAND-SEED-003",
+      "CAND-SEED-004",
+      "CAND-SEED-005",
+      "CAND-SEED-006",
+      "CAND-SEED-007",
+      "CAND-SEED-008"
+    ],
+    "covered_candidate_ids": [
+      "CAND-71C0E590F9213175",
+      "CAND-939873A894F75DC1",
+      "CAND-B2F829141E0DD9A3",
+      "CAND-C6F2EE04321B7240",
+      "CAND-FA37F984A251FF01",
+      "CAND-SEED-001",
+      "CAND-SEED-002",
+      "CAND-SEED-003",
+      "CAND-SEED-004",
+      "CAND-SEED-005",
+      "CAND-SEED-006",
+      "CAND-SEED-007",
+      "CAND-SEED-008"
+    ],
+    "uncovered_candidate_ids": [],
+    "multiply_disposed_candidate_ids": [],
+    "unresolved_ambiguous_record_count": 298
+  },
+  "owner_decision_summary": {
+    "additional_scope_decision_count": 6,
+    "decision_ids": [
+      "DEC-APPEARANCE-001-DEPTH",
+      "DEC-CONTEXT-001-SCOPE",
+      "DEC-KNOWLEDGE-001-SCOPE",
+      "DEC-SHARING-001-FORMATS",
+      "DEC-SIMULATION-001-BREADTH",
+      "DEC-TIME-001-LEVEL"
+    ],
+    "note": "All proposed identities still require owner approval. These six are additional scope choices that cannot be resolved deterministically."
+  }
+}
