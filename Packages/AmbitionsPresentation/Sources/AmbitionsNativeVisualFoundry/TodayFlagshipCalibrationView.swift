@@ -10,6 +10,7 @@ public struct TodayFlagshipCalibrationView: View {
     @Binding private var state: TodayFlagshipJourneyState
     @State private var isDockExpanded: Bool
     @State private var crownScrollProgress: CGFloat = 0
+    @State private var recoveryDetent: PresentationDetent = .medium
 
     private let content: TodayFlagshipCalibrationContent
     private let onNavigationCommand: (TodayFlagshipNavigationCommand) -> Void
@@ -65,7 +66,7 @@ public struct TodayFlagshipCalibrationView: View {
                 content: content,
                 state: $state
             )
-            .presentationDetents([.large])
+            .presentationDetents([.medium, .large], selection: $recoveryDetent)
             .presentationDragIndicator(.visible)
         }
         .onChange(of: state.navigationPath) { oldPath, newPath in

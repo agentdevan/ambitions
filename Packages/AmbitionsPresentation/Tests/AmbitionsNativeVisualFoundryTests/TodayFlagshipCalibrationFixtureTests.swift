@@ -214,6 +214,116 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         ])
     }
 
+    func testB02ResilienceSnapshotsAreExplicitAndNonMutating() throws {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+
+        XCTAssertEqual(
+            fixture.timeline.map(\.role),
+            [.ordinary, .fixed, .protected]
+        )
+        XCTAssertNil(fixture.contextSeam)
+
+        let quiet = fixture.quietToday
+        XCTAssertEqual(quiet.timeline.map(\.role), [.openLane, .protected])
+        XCTAssertEqual(quiet.timeline.map(\.timeLabel), ["3:00 PM", "5:30 PM"])
+
+        let dense = fixture.denseToday
+        XCTAssertGreaterThan(dense.timeline.count, fixture.timeline.count)
+        XCTAssertTrue(dense.timeline.contains { $0.role == .fixed })
+        XCTAssertTrue(dense.timeline.contains { $0.role == .protected })
+
+        let veryDense = fixture.veryDenseToday
+        XCTAssertEqual(veryDense.timeline.count, 10)
+        XCTAssertEqual(veryDense.timeline.map(\.timeLabel), [
+            "10:30 AM", "11:40 AM", "12:20 PM", "1:10 PM", "2:00 PM",
+            "3:20 PM", "4:45 PM", "5:30 PM", "6:30 PM", "7:15 PM"
+        ])
+        XCTAssertTrue(veryDense.timeline.contains { $0.role == .external })
+        XCTAssertTrue(veryDense.timeline.contains { $0.role == .openLane })
+
+        let offline = try XCTUnwrap(fixture.offlineLocalTruth.contextSeam)
+        XCTAssertEqual(offline.condition, .offlineLocalTruth)
+        XCTAssertEqual(offline.affectedObjectID, fixture.primaryStep.id)
+        XCTAssertEqual(offline.ownerTitle, fixture.interfaceCopy.todayNavigationTitle)
+        XCTAssertEqual(fixture.offlineLocalTruth.timeline, fixture.timeline)
+
+        let stale = try XCTUnwrap(fixture.staleExternalContext.contextSeam)
+        XCTAssertEqual(stale.condition, .staleExternalContext)
+        XCTAssertEqual(stale.affectedObjectID, fixture.revealedStartHereStep.id)
+        XCTAssertTrue(
+            fixture.staleExternalContext.timeline.contains {
+                $0.canonicalObjectID == stale.affectedObjectID && $0.role == .external
+            }
+        )
+
+        let conflict = try XCTUnwrap(fixture.conflictTransfer.contextSeam)
+        XCTAssertEqual(conflict.condition, .conflictTransfer)
+        XCTAssertEqual(conflict.affectedObjectID, fixture.primaryStep.id)
+        XCTAssertEqual(conflict.ownerTitle, fixture.interfaceCopy.timeNavigationTitle)
+        XCTAssertTrue(conflict.body.contains("nursery Step"))
+        XCTAssertTrue(conflict.body.contains("before family time"))
+        XCTAssertTrue(conflict.body.contains("placement in Time"))
+        XCTAssertTrue(conflict.accessibilityLabel.contains("placement review belongs in Time"))
+        XCTAssertEqual(fixture.conflictTransfer.timeline, fixture.timeline)
+    }
+
+    func testB02RecoveryAndResilienceSourceExposeNoUnsupportedCommands() throws {
+        let source = try primaryViewSource()
+
+        XCTAssertFalse(source.contains("Other outcomes"))
+        XCTAssertFalse(source.contains("Undo"))
+        XCTAssertFalse(source.contains("tfcs-open-in-time"))
+        XCTAssertFalse(source.contains("tfcs-refresh-external-context"))
+    }
+
+    func testB02RecoveryUsesInterruptedContinuityGrammarAndAcceptedTruth() throws {
+        let recoverySource = try foundrySource(named: "TodayFlagshipRecoveryReviewView.swift")
+        let focusedSource = try foundrySource(named: "TodayFlagshipFocusedStepView.swift")
+        let resilienceSource = try foundrySource(named: "TodayOpenContinuityResilience.swift")
+        let focusedObjectSource = try foundrySource(named: "TodayOpenContinuityFocusedObject.swift")
+        let recoveryComposition = recoverySource + resilienceSource
+
+        XCTAssertTrue(recoveryComposition.contains("TodayOpenContinuitySpine"))
+        XCTAssertTrue(recoveryComposition.contains("kind: .interrupted"))
+        XCTAssertTrue(recoverySource.contains("state.acceptedTruth"))
+        XCTAssertTrue(recoveryComposition.contains("content.primaryStep.parentPursuitTitle"))
+        XCTAssertTrue(recoveryComposition.contains("content.interfaceCopy.lastSavedProgressTitle"))
+        XCTAssertTrue(recoverySource.contains("state.leaveForLater()"))
+        XCTAssertTrue(recoveryComposition.contains("tfcs-recovery-step-identity"))
+        XCTAssertTrue(recoveryComposition.contains("tfcs-recovery-current-truth"))
+        XCTAssertFalse(recoverySource.contains("Interrupted Step"))
+        XCTAssertFalse(recoverySource.contains("Last saved progress"))
+        XCTAssertTrue(focusedSource.contains("TodayOpenContinuityInterruptedField"))
+        XCTAssertTrue(focusedSource.contains("state.phase == .recoveredContinuation"))
+        XCTAssertTrue(focusedObjectSource.contains("recoveredProgress"))
+        XCTAssertTrue(focusedObjectSource.contains("tfcs-recovered-progress"))
+        XCTAssertFalse(focusedSource.contains("private var recoveredSeam"))
+    }
+
+    func testB02RootRendersExplicitReadOnlyContextSeamAndTimelineUsesRole() throws {
+        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
+        let timelineSource = try foundrySource(named: "TodayOpenContinuityTimeline.swift")
+        let resilienceSource = try foundrySource(named: "TodayOpenContinuityResilience.swift")
+        let contextSeamSource = try XCTUnwrap(
+            resilienceSource.components(
+                separatedBy: "struct TodayOpenContinuityContextSeam"
+            ).last
+        )
+
+        XCTAssertTrue(rootSource.contains("content.contextSeam"))
+        XCTAssertTrue(rootSource.contains("TodayOpenContinuityContextSeam"))
+        XCTAssertTrue(rootSource.contains("contextSeam.affectedObjectID == visibleStartHere.id"))
+        XCTAssertTrue(timelineSource.contains("contextSeam.affectedObjectID == item.canonicalObjectID"))
+        XCTAssertTrue(resilienceSource.contains("seam.condition"))
+        XCTAssertTrue(resilienceSource.contains("seam.accessibilityLabel"))
+        XCTAssertTrue(resilienceSource.contains("tfcs-context-seam-"))
+        XCTAssertFalse(contextSeamSource.contains("Button"))
+        XCTAssertTrue(timelineSource.contains("switch item.role"))
+        XCTAssertFalse(timelineSource.contains("if item.isProtected"))
+        XCTAssertFalse(timelineSource.contains("if item.isFixed"))
+        XCTAssertFalse(timelineSource.contains("if item.isOpenLane"))
+    }
+
     func testFixtureProvidesLongLocalizationAndDenseTodayStressWithoutNewPolicy() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
 
@@ -518,6 +628,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             "TodayOpenContinuityRoot.swift",
             "TodayOpenContinuityTimeline.swift",
             "TodayOpenContinuityFocusedObject.swift",
+            "TodayOpenContinuityResilience.swift",
             "TodayOpenContinuityTruthFlow.swift",
             "TodayFlagshipFocusedStepView.swift",
             "TodayFlagshipNavigationChrome.swift",
@@ -530,6 +641,19 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
                 encoding: .utf8
             )
         }.joined(separator: "\n")
+    }
+
+    private func foundrySource(named filename: String) throws -> String {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        return try String(
+            contentsOf: packageRoot
+                .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+                .appendingPathComponent(filename),
+            encoding: .utf8
+        )
     }
 }
 
@@ -545,7 +669,8 @@ private extension TodayFlagshipCalibrationContent {
             timeline: timeline,
             receipt: receipt,
             returnContract: returnContract,
-            recovery: recovery
+            recovery: recovery,
+            contextSeam: contextSeam
         )
     }
 }

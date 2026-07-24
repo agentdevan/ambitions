@@ -184,6 +184,14 @@ private enum FoundryVariant: String {
     case b02SettlementCompact = "b02-settlement-compact"
     case b02SettlementProMax = "b02-settlement-pro-max"
     case b02ReturnedTypical = "b02-returned-typical"
+    case b02RecoveryTypical = "b02-recovery-typical"
+    case b02RecoveryInterrupted = "b02-recovery-interrupted"
+    case b02RecoveryContinued = "b02-recovery-continued"
+    case b02QuietToday = "b02-quiet-today"
+    case b02VeryDenseToday = "b02-very-dense-today"
+    case b02OfflineLocal = "b02-offline-local"
+    case b02StaleExternal = "b02-stale-external"
+    case b02ConflictTransfer = "b02-conflict-transfer"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -238,10 +246,12 @@ private enum FoundryVariant: String {
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02FullDayReturned:
             .todayReturned
-        case .tfcsF10:
+        case .tfcsF10, .b02RecoveryTypical:
             .recoveryReview
-        case .stateInterrupted:
+        case .stateInterrupted, .b02RecoveryInterrupted:
             .interrupted
+        case .b02RecoveryContinued:
+            .recoveredContinuation
         case .stateSaving, .b02ReviewSaving:
             .savingAcceptedTruth
         default:
@@ -257,6 +267,16 @@ private enum FoundryVariant: String {
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
         case .b02FocusedLongLTR:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
+        case .b02QuietToday:
+            TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
+        case .b02VeryDenseToday:
+            TodayFlagshipCalibrationFixture.preparingForBaby.veryDenseToday
+        case .b02OfflineLocal:
+            TodayFlagshipCalibrationFixture.preparingForBaby.offlineLocalTruth
+        case .b02StaleExternal:
+            TodayFlagshipCalibrationFixture.preparingForBaby.staleExternalContext
+        case .b02ConflictTransfer:
+            TodayFlagshipCalibrationFixture.preparingForBaby.conflictTransfer
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
         }

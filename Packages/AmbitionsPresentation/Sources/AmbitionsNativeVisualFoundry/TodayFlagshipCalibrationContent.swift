@@ -359,6 +359,15 @@ public struct TodayFlagshipStepSnapshot: Equatable, Identifiable, Sendable {
     }
 }
 
+public enum TodayFlagshipTimelineRole: String, Equatable, Sendable {
+    case now
+    case ordinary
+    case fixed
+    case protected
+    case external
+    case openLane
+}
+
 public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
     public let id: String
     public let canonicalObjectID: String
@@ -369,6 +378,7 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
     public let isProtected: Bool
     public let isFixed: Bool
     public let isOpenLane: Bool
+    public let role: TodayFlagshipTimelineRole
 
     public init(
         id: String,
@@ -379,7 +389,8 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
         acceptedState: String,
         isProtected: Bool = false,
         isFixed: Bool = false,
-        isOpenLane: Bool = false
+        isOpenLane: Bool = false,
+        role: TodayFlagshipTimelineRole? = nil
     ) {
         self.id = id
         self.canonicalObjectID = canonicalObjectID
@@ -390,6 +401,28 @@ public struct TodayFlagshipTimelineObject: Equatable, Identifiable, Sendable {
         self.isProtected = isProtected
         self.isFixed = isFixed
         self.isOpenLane = isOpenLane
+        self.role = role ?? Self.compatibilityRole(
+            isProtected: isProtected,
+            isFixed: isFixed,
+            isOpenLane: isOpenLane
+        )
+    }
+
+    private static func compatibilityRole(
+        isProtected: Bool,
+        isFixed: Bool,
+        isOpenLane: Bool
+    ) -> TodayFlagshipTimelineRole {
+        if isProtected {
+            return .protected
+        }
+        if isFixed {
+            return .fixed
+        }
+        if isOpenLane {
+            return .openLane
+        }
+        return .ordinary
     }
 }
 
@@ -471,6 +504,37 @@ public struct TodayFlagshipRecoverySnapshot: Equatable, Sendable {
     }
 }
 
+public enum TodayFlagshipContextCondition: String, Equatable, Sendable {
+    case offlineLocalTruth
+    case staleExternalContext
+    case conflictTransfer
+}
+
+public struct TodayFlagshipContextSeamSnapshot: Equatable, Sendable {
+    public let condition: TodayFlagshipContextCondition
+    public let title: String
+    public let body: String
+    public let affectedObjectID: String
+    public let ownerTitle: String
+    public let accessibilityLabel: String
+
+    public init(
+        condition: TodayFlagshipContextCondition,
+        title: String,
+        body: String,
+        affectedObjectID: String,
+        ownerTitle: String,
+        accessibilityLabel: String
+    ) {
+        self.condition = condition
+        self.title = title
+        self.body = body
+        self.affectedObjectID = affectedObjectID
+        self.ownerTitle = ownerTitle
+        self.accessibilityLabel = accessibilityLabel
+    }
+}
+
 public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable {
     public var id: String { familyID }
 
@@ -484,6 +548,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
     public let receipt: TodayFlagshipReceiptSnapshot
     public let returnContract: TodayFlagshipReturnContract
     public let recovery: TodayFlagshipRecoverySnapshot
+    public let contextSeam: TodayFlagshipContextSeamSnapshot?
 
     public init(
         familyID: String,
@@ -495,7 +560,8 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         timeline: [TodayFlagshipTimelineObject],
         receipt: TodayFlagshipReceiptSnapshot,
         returnContract: TodayFlagshipReturnContract,
-        recovery: TodayFlagshipRecoverySnapshot
+        recovery: TodayFlagshipRecoverySnapshot,
+        contextSeam: TodayFlagshipContextSeamSnapshot? = nil
     ) {
         self.familyID = familyID
         self.isSynthetic = isSynthetic
@@ -507,6 +573,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         self.receipt = receipt
         self.returnContract = returnContract
         self.recovery = recovery
+        self.contextSeam = contextSeam
     }
 
     public var returnedTodayTimeline: [TodayFlagshipTimelineObject] {

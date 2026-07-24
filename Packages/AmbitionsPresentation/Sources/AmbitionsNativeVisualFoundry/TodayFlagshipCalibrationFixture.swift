@@ -1,13 +1,21 @@
 import Foundation
 
 public enum TodayFlagshipCalibrationFixture {
+    private enum TimelineDensity: Equatable {
+        case standard
+        case quiet
+        case dense
+        case veryDense
+    }
+
     /// Synthetic evaluation content. This fixture is not canon, runtime truth,
     /// persistence proof, or a production screenshot baseline.
     public static let preparingForBaby = makePreparingForBaby()
 
     private static func makePreparingForBaby(
         longContent: Bool = false,
-        denseToday: Bool = false
+        timelineDensity: TimelineDensity = .standard,
+        contextCondition: TodayFlagshipContextCondition? = nil
     ) -> TodayFlagshipCalibrationContent {
         let proposal = TodayFlagshipStillCountsProposal(
             outcomeTitle: "Still counts",
@@ -61,8 +69,14 @@ public enum TodayFlagshipCalibrationFixture {
             primaryActionTitle: "Review launch brief",
             stillCountsProposal: proposal
         )
-        var timeline = baseTimeline
-        if denseToday {
+        var timeline: [TodayFlagshipTimelineObject]
+        switch timelineDensity {
+        case .standard:
+            timeline = baseTimeline
+        case .quiet:
+            timeline = quietTimeline
+        case .dense, .veryDense:
+            timeline = baseTimeline
             timeline.insert(
                 TodayFlagshipTimelineObject(
                     id: "timeline.prenatal-appointment-notes",
@@ -71,7 +85,8 @@ public enum TodayFlagshipCalibrationFixture {
                     timeLabel: "1:10 PM",
                     relationship: "Baby preparation · Health",
                     acceptedState: "Protected health context",
-                    isProtected: true
+                    isProtected: true,
+                    role: .protected
                 ),
                 at: 1
             )
@@ -84,10 +99,42 @@ public enum TodayFlagshipCalibrationFixture {
                     relationship: "Protected family time",
                     acceptedState: "Protected",
                     isProtected: true,
-                    isFixed: true
+                    isFixed: true,
+                    role: .protected
                 )
             )
+
+            if timelineDensity == .veryDense {
+                timeline.append(contentsOf: veryDenseAdditions)
+                timeline.sort { lhs, rhs in
+                    let lhsIndex = veryDenseTimelineOrder.firstIndex(of: lhs.id) ?? .max
+                    let rhsIndex = veryDenseTimelineOrder.firstIndex(of: rhs.id) ?? .max
+                    return lhsIndex < rhsIndex
+                }
+            }
         }
+
+        if contextCondition == .staleExternalContext,
+           let staleIndex = timeline.firstIndex(where: {
+               $0.canonicalObjectID == revealedStep.id
+           }) {
+            let staleItem = timeline[staleIndex]
+            timeline[staleIndex] = TodayFlagshipTimelineObject(
+                id: staleItem.id,
+                canonicalObjectID: staleItem.canonicalObjectID,
+                objectTitle: staleItem.objectTitle,
+                timeLabel: staleItem.timeLabel,
+                relationship: staleItem.relationship,
+                acceptedState: staleItem.acceptedState,
+                role: .external
+            )
+        }
+
+        let contextSeam = makeContextSeam(
+            condition: contextCondition,
+            primaryStep: primaryStep,
+            revealedStep: revealedStep
+        )
 
         return TodayFlagshipCalibrationContent(
             familyID: "today-flagship/preparing-for-baby/still-counts/v1",
@@ -132,7 +179,8 @@ public enum TodayFlagshipCalibrationFixture {
                         consequence: "Keep this Step and saved work for later."
                     )
                 ]
-            )
+            ),
+            contextSeam: contextSeam
         )
     }
 
@@ -143,7 +191,8 @@ public enum TodayFlagshipCalibrationFixture {
             objectTitle: "Paint the nursery sample",
             timeLabel: "10:30 AM",
             relationship: "Baby preparation · Home",
-            acceptedState: "Ready now"
+            acceptedState: "Ready now",
+            role: .ordinary
         ),
         TodayFlagshipTimelineObject(
             id: "timeline.work-launch-brief",
@@ -152,7 +201,8 @@ public enum TodayFlagshipCalibrationFixture {
             timeLabel: "2:00 PM",
             relationship: "One meaningful work commitment",
             acceptedState: "Fixed",
-            isFixed: true
+            isFixed: true,
+            role: .fixed
         ),
         TodayFlagshipTimelineObject(
             id: "timeline.family-prenatal-walk",
@@ -161,9 +211,135 @@ public enum TodayFlagshipCalibrationFixture {
             timeLabel: "5:30 PM",
             relationship: "Family time · Health",
             acceptedState: "Protected",
-            isProtected: true
+            isProtected: true,
+            role: .protected
         )
     ]
+
+    private static let quietTimeline: [TodayFlagshipTimelineObject] = [
+        TodayFlagshipTimelineObject(
+            id: "timeline.open-afternoon",
+            canonicalObjectID: "lane.open-afternoon",
+            objectTitle: "Room for what matters",
+            timeLabel: "3:00 PM",
+            relationship: "Flexible before family time",
+            acceptedState: "Open",
+            isOpenLane: true,
+            role: .openLane
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline.family-prenatal-walk",
+            canonicalObjectID: "event.family-prenatal-walk",
+            objectTitle: "Take the prenatal walk together",
+            timeLabel: "5:30 PM",
+            relationship: "Family time · Health",
+            acceptedState: "Protected",
+            isProtected: true,
+            role: .protected
+        )
+    ]
+
+    private static let veryDenseTimelineOrder = [
+        "timeline.nursery-paint-sample",
+        "timeline.midwife-call",
+        "timeline.open-lunch-lane",
+        "timeline.prenatal-appointment-notes",
+        "timeline.work-launch-brief",
+        "timeline-order-crib-sheet",
+        "timeline-work-close",
+        "timeline.family-prenatal-walk",
+        "timeline.family-dinner",
+        "timeline-family-call"
+    ]
+
+    private static let veryDenseAdditions: [TodayFlagshipTimelineObject] = [
+        TodayFlagshipTimelineObject(
+            id: "timeline.midwife-call",
+            canonicalObjectID: "event.midwife-call",
+            objectTitle: "Midwife check-in",
+            timeLabel: "11:40 AM",
+            relationship: "External health context",
+            acceptedState: "Last known time",
+            role: .external
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline.open-lunch-lane",
+            canonicalObjectID: "lane.open-lunch",
+            objectTitle: "Open lane before the handoff",
+            timeLabel: "12:20 PM",
+            relationship: "Flexible capacity",
+            acceptedState: "Open",
+            isOpenLane: true,
+            role: .openLane
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline-order-crib-sheet",
+            canonicalObjectID: "step.order-crib-sheet",
+            objectTitle: "Order the crib sheet",
+            timeLabel: "3:20 PM",
+            relationship: "Welcome our baby home",
+            acceptedState: "Fits later",
+            role: .ordinary
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline-family-call",
+            canonicalObjectID: "event.family-call",
+            objectTitle: "Call the grandparents",
+            timeLabel: "7:15 PM",
+            relationship: "Protected family connection",
+            acceptedState: "Protected",
+            isProtected: true,
+            role: .protected
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline-work-close",
+            canonicalObjectID: "event.work-close",
+            objectTitle: "Close the workday",
+            timeLabel: "4:45 PM",
+            relationship: "Meaningful work boundary",
+            acceptedState: "Fixed",
+            isFixed: true,
+            role: .fixed
+        )
+    ]
+
+    private static func makeContextSeam(
+        condition: TodayFlagshipContextCondition?,
+        primaryStep: TodayFlagshipStepSnapshot,
+        revealedStep: TodayFlagshipStepSnapshot
+    ) -> TodayFlagshipContextSeamSnapshot? {
+        guard let condition else { return nil }
+
+        switch condition {
+        case .offlineLocalTruth:
+            return TodayFlagshipContextSeamSnapshot(
+                condition: condition,
+                title: englishInterfaceCopy.offlineLocalTitle,
+                body: englishInterfaceCopy.offlineLocalBody,
+                affectedObjectID: primaryStep.id,
+                ownerTitle: englishInterfaceCopy.todayNavigationTitle,
+                accessibilityLabel: "Available on this device. Your saved nursery progress is still here."
+            )
+        case .staleExternalContext:
+            return TodayFlagshipContextSeamSnapshot(
+                condition: condition,
+                title: englishInterfaceCopy.staleExternalTitle,
+                body: englishInterfaceCopy.staleExternalBody,
+                affectedObjectID: revealedStep.id,
+                ownerTitle: englishInterfaceCopy.todayNavigationTitle,
+                accessibilityLabel: "Work context may be out of date. The launch handoff remains visible with its last known time."
+            )
+        case .conflictTransfer:
+            return TodayFlagshipContextSeamSnapshot(
+                condition: condition,
+                title: englishInterfaceCopy.conflictTransferTitle,
+                body: englishInterfaceCopy.conflictTransferBody,
+                affectedObjectID: primaryStep.id,
+                ownerTitle: englishInterfaceCopy.timeNavigationTitle,
+                accessibilityLabel: "The nursery Step still belongs before family time. Its placement review belongs in Time."
+            )
+        }
+    }
 
     private static let englishInterfaceCopy = TodayFlagshipInterfaceCopy(
         localeIdentifier: "en-US",
@@ -214,8 +390,8 @@ public enum TodayFlagshipCalibrationFixture {
         offlineLocalBody: "Your saved nursery progress is still here.",
         staleExternalTitle: "Work context may be out of date",
         staleExternalBody: "The launch handoff remains visible with its last known time.",
-        conflictTransferTitle: "Time needs a closer look",
-        conflictTransferBody: "The family-time boundary remains protected here.",
+        conflictTransferTitle: "Nursery placement needs a closer look",
+        conflictTransferBody: "The nursery Step still belongs before family time. Review its placement in Time.",
         savingAnnouncement: "Recording progress",
         settlementAnnouncement: "Progress recorded",
         interruptionAnnouncement: "Progress paused",
@@ -257,6 +433,26 @@ public extension TodayFlagshipCalibrationContent {
         TodayFlagshipCalibrationFixture.makeDenseToday()
     }
 
+    var quietToday: Self {
+        TodayFlagshipCalibrationFixture.makeQuietToday()
+    }
+
+    var veryDenseToday: Self {
+        TodayFlagshipCalibrationFixture.makeVeryDenseToday()
+    }
+
+    var offlineLocalTruth: Self {
+        TodayFlagshipCalibrationFixture.makeOfflineLocalTruth()
+    }
+
+    var staleExternalContext: Self {
+        TodayFlagshipCalibrationFixture.makeStaleExternalContext()
+    }
+
+    var conflictTransfer: Self {
+        TodayFlagshipCalibrationFixture.makeConflictTransfer()
+    }
+
     var arabicSaudiEvaluation: Self {
         TodayFlagshipCalibrationFixture.makeArabicSaudiEvaluation()
     }
@@ -268,7 +464,27 @@ private extension TodayFlagshipCalibrationFixture {
     }
 
     static func makeDenseToday() -> TodayFlagshipCalibrationContent {
-        makePreparingForBaby(denseToday: true)
+        makePreparingForBaby(timelineDensity: .dense)
+    }
+
+    static func makeQuietToday() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(timelineDensity: .quiet)
+    }
+
+    static func makeVeryDenseToday() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(timelineDensity: .veryDense)
+    }
+
+    static func makeOfflineLocalTruth() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(contextCondition: .offlineLocalTruth)
+    }
+
+    static func makeStaleExternalContext() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(contextCondition: .staleExternalContext)
+    }
+
+    static func makeConflictTransfer() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(contextCondition: .conflictTransfer)
     }
 
     static func makeArabicSaudiEvaluation() -> TodayFlagshipCalibrationContent {

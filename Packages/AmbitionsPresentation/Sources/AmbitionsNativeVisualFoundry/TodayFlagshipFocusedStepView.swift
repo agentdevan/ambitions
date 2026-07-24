@@ -10,12 +10,16 @@ struct TodayFlagshipFocusedStepView: View {
 
     var body: some View {
         Group {
-            if state.phase == .focusedCurrent {
+            if state.phase == .focusedCurrent || state.phase == .recoveredContinuation {
                 TodayOpenContinuityFocusedObject(
                     content: content,
                     acceptedTruth: state.acceptedTruth,
                     palette: palette,
                     shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    recoveredProgress: state.phase == .recoveredContinuation
+                        ? state.lastSavedProgress
+                        : nil,
+                    shouldFocusRecoveredProgress: state.focusAnchor == .recoveredProgress,
                     isOutcomeEnabled: true,
                     onSelectStillCounts: {
                         _ = state.selectStillCounts()
@@ -54,23 +58,31 @@ struct TodayFlagshipFocusedStepView: View {
     private var legacyStateScroll: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 25) {
-                VStack(alignment: .leading, spacing: 25) {
+                if state.phase == .interrupted || state.phase == .recoveryReview {
+                    TodayOpenContinuityInterruptedField(
+                        content: content,
+                        acceptedTruth: state.acceptedTruth,
+                        palette: palette,
+                        showsRecoveryAction: true,
+                        onOpenRecovery: {
+                            _ = state.openRecoveryReview()
+                        }
+                    )
+                    .accessibilityFocused($accessibilityFocus, equals: .interruption)
+                    .accessibilityIdentifier("tfcs-interruption-seam")
+                } else {
+                    VStack(alignment: .leading, spacing: 25) {
                     identity
 
-                    if state.phase == .interrupted || state.phase == .recoveryReview {
-                        interruptionSeam
-                    } else if state.phase == .recoveredContinuation {
-                        recoveredSeam
-                    }
-
                     currentStep
+                    }
+                    .accessibilityElement(children: .contain)
+                    .accessibilityLabel(
+                        "\(content.primaryStep.title), "
+                            + "\(content.primaryStep.parentPursuitTitle)"
+                    )
+                    .accessibilityIdentifier("tfcs-focused-object-field")
                 }
-                .accessibilityElement(children: .contain)
-                .accessibilityLabel(
-                    "\(content.primaryStep.title), "
-                        + "\(content.primaryStep.parentPursuitTitle)"
-                )
-                .accessibilityIdentifier("tfcs-focused-object-field")
             }
             .frame(maxWidth: 560, alignment: .leading)
             .padding(.horizontal, 24)
@@ -200,61 +212,6 @@ struct TodayFlagshipFocusedStepView: View {
             .disabled(state.phase == .interrupted || state.phase == .recoveryReview)
             .accessibilityHint("Reviews meaningful progress before anything changes")
             .accessibilityIdentifier("tfcs-select-still-counts")
-    }
-
-    private var interruptionSeam: some View {
-        TodayFlagshipObjectField(role: .interrupted, palette: palette) {
-            VStack(alignment: .leading, spacing: 12) {
-                TodayFlagshipLandmarkLabel(
-                    title: content.recovery.interruptionTitle,
-                    symbol: "pause.circle.fill",
-                    tint: palette.interruptionAccent
-                )
-
-                Text(content.recovery.interruptionDetail)
-                    .font(.body.weight(.medium))
-
-                TodayFlagshipStateField(
-                    label: "Last saved progress",
-                    symbol: "externaldrive.badge.checkmark",
-                    truth: content.recovery.lastSavedProgress,
-                    role: .interrupted,
-                    palette: palette
-                )
-
-                Button(content.interfaceCopy.recoveryEntryTitle) {
-                    _ = state.openRecoveryReview()
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .frame(minHeight: 44, alignment: .leading)
-                // AMBitionsAllowWeakPattern(reason: "SwiftUI interaction state prevents a duplicate recovery presentation")
-                .disabled(state.phase == .recoveryReview)
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityFocused($accessibilityFocus, equals: .interruption)
-        .accessibilityIdentifier("tfcs-interruption-seam")
-    }
-
-    private var recoveredSeam: some View {
-        TodayFlagshipObjectField(role: .current, palette: palette) {
-            VStack(alignment: .leading, spacing: 6) {
-                TodayFlagshipLandmarkLabel(
-                    title: content.interfaceCopy.recoveryTitle,
-                    symbol: "arrow.clockwise",
-                    tint: palette.articulationAccent
-                )
-                Text(content.recovery.lastSavedProgress)
-                    .font(.body)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(content.interfaceCopy.recoveryBody)
-                    .font(.footnote)
-                    .foregroundStyle(palette.secondaryInk)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityFocused($accessibilityFocus, equals: .recoveredProgress)
     }
 
     private var historyDisclosure: Binding<Bool> {

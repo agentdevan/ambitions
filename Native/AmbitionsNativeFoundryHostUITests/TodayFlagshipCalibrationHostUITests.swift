@@ -200,6 +200,72 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertFalse(element("tfcs-settled-truth").exists)
     }
 
+    func testB02RecoveryRetainsIdentityTruthProgressAndExactCommands() {
+        launch("b02-recovery-typical")
+
+        let recovery = element("tfcs-recovery-review")
+        let identity = element("tfcs-recovery-step-identity")
+        let currentTruth = element("tfcs-recovery-current-truth")
+        let savedProgress = element("tfcs-recovery-progress-field")
+        let continueChoice = element("recovery.continue-saved-progress")
+        let deferChoice = element("recovery.keep-step")
+
+        assertExists([
+            recovery,
+            identity,
+            currentTruth,
+            savedProgress,
+            continueChoice,
+            deferChoice
+        ])
+        assertMinimumTarget(continueChoice)
+        assertMinimumTarget(deferChoice)
+        XCTAssertTrue(continueChoice.isHittable)
+        XCTAssertTrue(deferChoice.isHittable)
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
+        XCTAssertFalse(app.buttons["Undo"].exists)
+
+        deferChoice.tap()
+        XCTAssertTrue(element("tfcs-interruption-seam").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("tfcs-recovery-current-truth").exists)
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
+    }
+
+    func testB02RecoveryAndResilienceStayObjectScoped() {
+        launch("b02-recovery-typical")
+        let recovery = element("tfcs-recovery-review")
+        XCTAssertTrue(recovery.waitForExistence(timeout: 3))
+        XCTAssertGreaterThan(recovery.frame.minY, app.frame.minY + 100)
+        XCTAssertTrue(element("recovery.continue-saved-progress").isHittable)
+        XCTAssertTrue(element("recovery.keep-step").isHittable)
+
+        app.terminate()
+        launch("b02-offline-local")
+        let startHere = element("tfcs-start-here-object")
+        let offline = element("tfcs-context-seam-offlineLocalTruth")
+        let timeline = element("tfcs-today-overview")
+        assertExists([startHere, offline, timeline])
+        XCTAssertGreaterThanOrEqual(offline.frame.minY, startHere.frame.maxY)
+        XCTAssertLessThan(offline.frame.maxY, timeline.frame.maxY)
+
+        app.terminate()
+        launch("b02-stale-external")
+        let stale = element("tfcs-context-seam-staleExternalContext")
+        let affectedRow = element("tfcs-overview-row-step.send-launch-brief")
+        assertExists([stale, affectedRow])
+        XCTAssertGreaterThanOrEqual(stale.frame.minY, affectedRow.frame.minY)
+
+        app.terminate()
+        launch("b02-conflict-transfer")
+        let conflict = element("tfcs-context-seam-conflictTransfer")
+        XCTAssertTrue(conflict.waitForExistence(timeout: 3))
+        XCTAssertTrue(conflict.label.contains("nursery Step"))
+        XCTAssertTrue(conflict.label.contains("placement review belongs in Time"))
+        XCTAssertFalse(element("tfcs-refresh-external-context").exists)
+        XCTAssertFalse(element("tfcs-open-in-time").exists)
+        XCTAssertFalse(app.buttons["Undo"].exists)
+    }
+
     func testAdaptiveNavigationAndRecoveryExposeDistinctValidActions() {
         launch("tfcs-f05")
 

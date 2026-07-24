@@ -11,57 +11,25 @@ struct TodayFlagshipRecoveryReviewView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
-                    TodayFlagshipObjectField(role: .interrupted, palette: palette) {
-                        VStack(alignment: .leading, spacing: 15) {
-                            TodayFlagshipLandmarkLabel(
-                                title: "Interrupted Step",
-                                symbol: "pause.circle.fill",
-                                tint: palette.interruptionAccent
-                            )
-
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(content.primaryStep.title)
-                                    .font(.title2.weight(.bold))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                Text(content.interfaceCopy.recoveryBody)
-                                    .font(.subheadline)
-                                    .foregroundStyle(palette.secondaryInk)
-                            }
-
-                            TodayFlagshipStateField(
-                                label: "Last saved progress",
-                                symbol: "externaldrive.badge.checkmark",
-                                truth: content.recovery.lastSavedProgress,
-                                role: .interrupted,
-                                palette: palette
-                            )
-
-                            Text(content.recovery.interruptionDetail)
-                                .font(.subheadline)
-                                .foregroundStyle(palette.secondaryInk)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    .accessibilityElement(children: .contain)
-                    .accessibilityIdentifier("tfcs-recovery-progress-field")
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        ForEach(content.recovery.availableChoices) { choice in
-                            recoveryChoice(choice)
-                        }
-                    }
-                }
+                TodayOpenContinuityInterruptedField(
+                    content: content,
+                    acceptedTruth: state.acceptedTruth,
+                    palette: palette,
+                    showsRecoveryAction: false
+                )
                 .frame(maxWidth: 560, alignment: .leading)
                 .padding(.horizontal, 24)
                 .padding(.top, 18)
-                .padding(.bottom, 44)
+                .padding(.bottom, 28)
             }
             .scrollIndicators(.hidden)
             .background(palette.semanticPlane.ignoresSafeArea())
             .foregroundStyle(palette.primaryInk)
             .navigationTitle(content.interfaceCopy.recoveryTitle)
             .todayFlagshipInlineNavigationTitle()
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                recoveryActions
+            }
         }
         .onAppear {
             accessibilityFocus = .recoveryReview
@@ -70,12 +38,33 @@ struct TodayFlagshipRecoveryReviewView: View {
         .accessibilityIdentifier("tfcs-recovery-review")
     }
 
+    private var recoveryActions: some View {
+        VStack(alignment: .leading, spacing: 11) {
+            ForEach(content.recovery.availableChoices) { choice in
+                recoveryChoice(choice)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 14)
+        .padding(.bottom, 12)
+        .frame(maxWidth: .infinity)
+        .background(palette.semanticPlane)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(palette.divider)
+                .frame(height: 1)
+        }
+    }
+
     private func recoveryChoice(_ choice: TodayFlagshipRecoveryChoice) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             if choice.id == "recovery.continue-saved-progress" {
                 recoveryButton(choice)
-                    .buttonStyle(.borderedProminent)
-                    .foregroundStyle(palette.actionInk)
+                    .buttonStyle(
+                        TodayOpenContinuityPrimaryActionStyle(
+                            palette: palette.openContinuity
+                        )
+                    )
             } else {
                 recoveryButton(choice)
                     .buttonStyle(.bordered)
@@ -93,7 +82,7 @@ struct TodayFlagshipRecoveryReviewView: View {
             if choice.id == "recovery.continue-saved-progress" {
                 _ = state.continueFromSavedProgress()
             } else {
-                _ = state.dismissRecovery()
+                _ = state.leaveForLater()
             }
         }
         .buttonBorderShape(.roundedRectangle(radius: 8))

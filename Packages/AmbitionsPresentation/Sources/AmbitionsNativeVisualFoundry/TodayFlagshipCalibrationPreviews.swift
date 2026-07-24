@@ -178,6 +178,61 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("B02 Recovery · Interrupted sheet · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveryReview)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Recovery · Interrupted Step · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .interrupted)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Recovery · Continued saved progress · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveredContinuation)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Today · Quiet") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.quietToday,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Today · Very dense") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.veryDenseToday,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Today · Offline local truth") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.offlineLocalTruth,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Today · Stale external context") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.staleExternalContext,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Today · Conflict transfer") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.conflictTransfer,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
 #Preview("State · Saving") {
     TodayFlagshipCalibrationPreviewHost(phase: .savingAcceptedTruth)
         .preferredColorScheme(.dark)

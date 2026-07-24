@@ -29,10 +29,14 @@ func todayOverviewObjects(
         selectedCanonicalObjectIDs.insert(candidate.canonicalObjectID)
     }
 
-    selectFirst { $0.isFixed }
-    selectFirst { $0.isProtected }
-    selectFirst { $0.isOpenLane }
-    selectFirst { $0.isFixed == false && $0.isProtected == false && $0.isOpenLane == false }
+    if let affectedObjectID = content.contextSeam?.affectedObjectID,
+       affectedObjectID != visibleStartHereID {
+        selectFirst { $0.canonicalObjectID == affectedObjectID }
+    }
+    selectFirst { $0.role == .fixed }
+    selectFirst { $0.role == .protected }
+    selectFirst { $0.role == .openLane }
+    selectFirst { $0.role == .ordinary || $0.role == .external }
 
     var emittedCanonicalObjectIDs = Set<String>()
     return candidates.filter { candidate in
@@ -75,13 +79,23 @@ struct TodayOpenContinuityTimeline: View {
 
             VStack(spacing: 0) {
                 ForEach(Array(objects.enumerated()), id: \.element.id) { index, item in
-                    TodayOpenContinuityTimelineRow(
-                        item: item,
-                        anchorTitle: anchorTitle(for: item),
-                        palette: palette,
-                        showsContinuation: index < objects.count - 1,
-                        isOverview: mode == .overview
-                    )
+                    VStack(spacing: 0) {
+                        TodayOpenContinuityTimelineRow(
+                            item: item,
+                            anchorTitle: anchorTitle(for: item),
+                            palette: palette,
+                            showsContinuation: index < objects.count - 1,
+                            isOverview: mode == .overview
+                        )
+
+                        if let contextSeam = content.contextSeam,
+                           contextSeam.affectedObjectID == item.canonicalObjectID {
+                            TodayOpenContinuityContextSeam(
+                                seam: contextSeam,
+                                palette: palette
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -178,16 +192,18 @@ struct TodayOpenContinuityTimeline: View {
     }
 
     private func anchorTitle(for item: TodayFlagshipTimelineObject) -> String {
-        if item.isFixed {
+        switch item.role {
+        case .fixed:
             return content.interfaceCopy.nextFixedAnchorTitle
-        }
-        if item.isProtected {
+        case .protected:
             return content.interfaceCopy.protectedAnchorTitle
-        }
-        if item.isOpenLane {
+        case .openLane:
             return content.interfaceCopy.openLaneAnchorTitle
+        case .now:
+            return content.interfaceCopy.nowAnchorTitle
+        case .ordinary, .external:
+            return item.acceptedState
         }
-        return item.acceptedState
     }
 }
 
@@ -257,15 +273,17 @@ private struct TodayOpenContinuityTimelineRow: View {
     }
 
     private var nodeKind: TodayOpenContinuityNodeKind {
-        if item.isProtected {
-            return .protected
+        switch item.role {
+        case .now, .ordinary:
+            .current
+        case .fixed:
+            .fixed
+        case .protected:
+            .protected
+        case .external:
+            .external
+        case .openLane:
+            .openLane
         }
-        if item.isFixed {
-            return .fixed
-        }
-        if item.isOpenLane {
-            return .openLane
-        }
-        return .current
     }
 }

@@ -337,6 +337,32 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.focusAnchor, .recoveredProgress)
     }
 
+    func testLeaveForLaterPreservesInterruptedTruthAndRestoresInterruptionFocus() {
+        var state = recoveryReviewState()
+        let acceptedTruth = state.acceptedTruth
+        let navigationPath = state.navigationPath
+
+        XCTAssertTrue(state.leaveForLater())
+
+        XCTAssertEqual(state.phase, .interrupted)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+        XCTAssertEqual(state.navigationPath, navigationPath)
+        XCTAssertEqual(state.lastSavedProgress, content.recovery.lastSavedProgress)
+        XCTAssertEqual(state.focusAnchor, .interruption)
+        XCTAssertFalse(state.hasCommittedMutation)
+        XCTAssertFalse(state.receiptIsVisible)
+        XCTAssertFalse(state.isRecoveryPresented)
+    }
+
+    func testRecoveryCommandsRejectUnsupportedPhasesWithoutChangingTruth() {
+        var state = focusedState()
+        let before = state
+
+        XCTAssertFalse(state.continueFromSavedProgress())
+        XCTAssertFalse(state.leaveForLater())
+        XCTAssertEqual(state, before)
+    }
+
     private func focusedState() -> TodayFlagshipJourneyState {
         var state = TodayFlagshipJourneyState(content: content)
         XCTAssertTrue(state.openStartHere())

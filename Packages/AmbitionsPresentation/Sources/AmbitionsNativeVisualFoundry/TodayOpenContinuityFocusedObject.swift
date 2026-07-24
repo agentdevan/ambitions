@@ -3,11 +3,14 @@ import SwiftUI
 struct TodayOpenContinuityFocusedObject: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var isIdentityFocused: Bool
+    @AccessibilityFocusState private var isRecoveredProgressFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
     let acceptedTruth: String
     let palette: TodayFlagshipPalette
     let shouldFocusIdentity: Bool
+    let recoveredProgress: String?
+    let shouldFocusRecoveredProgress: Bool
     let isOutcomeEnabled: Bool
     let onSelectStillCounts: () -> Void
 
@@ -20,6 +23,11 @@ struct TodayOpenContinuityFocusedObject: View {
 
                     parentPursuit
                         .accessibilityIdentifier("tfcs-focused-parent-pursuit")
+
+                    if let recoveredProgress {
+                        recoveredContinuity(recoveredProgress)
+                            .accessibilityIdentifier("tfcs-recovered-progress")
+                    }
 
                     currentTruth
                         .accessibilityIdentifier("tfcs-focused-current-truth")
@@ -68,12 +76,20 @@ struct TodayOpenContinuityFocusedObject: View {
         .background(palette.semanticPlane.ignoresSafeArea())
         .foregroundStyle(palette.primaryInk)
         .onAppear {
-            guard shouldFocusIdentity else { return }
-            isIdentityFocused = true
+            if shouldFocusIdentity {
+                isIdentityFocused = true
+            }
+            if shouldFocusRecoveredProgress {
+                isRecoveredProgressFocused = true
+            }
         }
         .onChange(of: shouldFocusIdentity) { _, shouldFocus in
             guard shouldFocus else { return }
             isIdentityFocused = true
+        }
+        .onChange(of: shouldFocusRecoveredProgress) { _, shouldFocus in
+            guard shouldFocus else { return }
+            isRecoveredProgressFocused = true
         }
     }
 
@@ -185,6 +201,39 @@ struct TodayOpenContinuityFocusedObject: View {
             .accessibilityIdentifier("tfcs-current-truth")
         }
         .accessibilityElement(children: .contain)
+    }
+
+    private func recoveredContinuity(_ progress: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            TodayOpenContinuitySpine(
+                kind: .current,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: true
+            )
+            .frame(width: 22)
+            .frame(minHeight: 64)
+
+            Image(systemName: "arrow.clockwise")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.articulationAccent)
+                .frame(width: 18)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(content.interfaceCopy.recoveryTitle)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.articulationAccent)
+
+                Text(progress)
+                    .font(TodayOpenContinuityTypographyRole.state.font)
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityFocused($isRecoveredProgressFocused)
     }
 
     private func relationship(

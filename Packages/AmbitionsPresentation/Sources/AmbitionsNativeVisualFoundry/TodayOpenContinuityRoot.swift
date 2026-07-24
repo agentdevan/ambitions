@@ -36,6 +36,14 @@ struct TodayOpenContinuityRoot: View {
                     )
                     .accessibilityFocused($accessibilityFocus, equals: .startHere)
 
+                    if let contextSeam = content.contextSeam,
+                       contextSeam.affectedObjectID == visibleStartHere.id {
+                        TodayOpenContinuityContextSeam(
+                            seam: contextSeam,
+                            palette: palette
+                        )
+                    }
+
                     if state.phase == .todayReturned {
                         returnedContinuity
                     }
@@ -337,7 +345,8 @@ private extension TodayFlagshipCalibrationContent {
             timeline: timeline,
             receipt: receipt,
             returnContract: returnContract,
-            recovery: recovery
+            recovery: recovery,
+            contextSeam: contextSeam
         )
     }
 }

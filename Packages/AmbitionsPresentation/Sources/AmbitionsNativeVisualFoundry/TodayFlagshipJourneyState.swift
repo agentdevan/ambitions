@@ -284,6 +284,19 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     }
 
     @discardableResult
+    public mutating func leaveForLater() -> Bool {
+        guard
+            phase == .recoveryReview,
+            recoveryChoiceIDs.contains("recovery.keep-step")
+        else {
+            return false
+        }
+        phase = .interrupted
+        focusAnchor = .interruption
+        return true
+    }
+
+    @discardableResult
     public mutating func continueFromSavedProgress() -> Bool {
         guard phase == .recoveryReview else { return false }
         phase = .recoveredContinuation
