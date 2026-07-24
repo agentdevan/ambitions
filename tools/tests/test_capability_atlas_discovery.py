@@ -5,16 +5,23 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tools.capability_atlas.classification import apply_classification
+from tools.capability_atlas.classified_outputs import (
+    AMBIGUOUS_DIRECTORY,
+    CLASSIFICATION_CORE_PATHS,
+    EXCLUSION_DIRECTORY,
+    QUALIFIED_DIRECTORY,
+    output_drift,
+    render_outputs,
+    write_outputs,
+)
 from tools.capability_atlas.cli import SUPPORTED_COMMANDS, main
 from tools.capability_atlas.discover import compile_discovery
-from tools.capability_atlas.model import CandidateRecord
+from tools.capability_atlas.model import CandidateRecord, EvidenceExcerpt
 from tools.capability_atlas.outputs import (
     CANDIDATE_SHARD_DIRECTORY,
     CORE_OUTPUT_PATHS,
     SOURCE_SHARD_DIRECTORY,
-    output_drift,
-    render_outputs,
-    write_outputs,
 )
 
 
@@ -38,7 +45,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
                     "name": "Normative specifications",
                     "path_patterns": ["docs/canon/specifications/**/*.md"],
                     "authority_class": "normative",
-                    "status": "pending",
+                    "status": "covered",
                 },
                 {
                     "id": "SRC-OWNER-SEEDS",
@@ -52,7 +59,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
                     "name": "Production source",
                     "path_patterns": ["Native/**/*.swift"],
                     "authority_class": "implementation_evidence_only",
-                    "status": "pending",
+                    "status": "covered",
                 },
             ],
         }
@@ -142,6 +149,59 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(candidate.candidate_id, renamed.candidate_id)
 
+    def test_owner_seed_is_qualified_without_becoming_canonical(self) -> None:
+        candidate = apply_classification(compile_discovery(self.root).candidates[0])
+        self.assertEqual(candidate.classification, "capability")
+        self.assertEqual(candidate.qualification_status, "qualified")
+        self.assertEqual(candidate.classification_reason_code, "direct_owner_seed")
+        self.assertEqual(candidate.authority_status, "owner_seed")
+
+    def test_implementation_source_is_preserved_as_supporting_implementation(self) -> None:
+        evidence = EvidenceExcerpt.create(
+            family_id="SRC-PRODUCTION",
+            authority_class="implementation_evidence_only",
+            source_path="Native/Ambitions/SearchRuntime.swift",
+            start_line=1,
+            end_line=1,
+            exact_text="Ambitions can provide contextual search commands.",
+            extraction_kind="person_facing_promise_hint",
+            extraction_rationale="fixture",
+        )
+        candidate = CandidateRecord.from_evidence(
+            evidence,
+            normalized_name_hint="Contextual Search Commands",
+        )
+        classified = apply_classification(candidate)
+        self.assertEqual(classified.classification, "implementation")
+        self.assertEqual(classified.qualification_status, "supporting")
+        self.assertEqual(
+            classified.disposition,
+            "preserve_as_supporting_implementation",
+        )
+
+    def test_machine_command_is_excluded_as_evidence_not_deleted(self) -> None:
+        evidence = EvidenceExcerpt.create(
+            family_id="SRC-AUDITS",
+            authority_class="audit_evidence",
+            source_path="docs/audits/search.json",
+            start_line=10,
+            end_line=10,
+            exact_text='"command": "python3 scripts/check-search.py"',
+            extraction_kind="person_facing_promise_hint",
+            extraction_rationale="fixture",
+        )
+        candidate = CandidateRecord.from_evidence(
+            evidence,
+            normalized_name_hint="python3 scripts/check-search.py",
+        )
+        classified = apply_classification(candidate)
+        self.assertEqual(classified.classification, "evidence")
+        self.assertEqual(classified.qualification_status, "supporting")
+        self.assertEqual(
+            classified.classification_reason_code,
+            "machine_metadata_or_command",
+        )
+
     def test_excluded_dependency_paths_are_not_harvested(self) -> None:
         compilation = compile_discovery(self.root)
         harvested_paths = {item.path for item in compilation.source_files}
@@ -166,14 +226,27 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         compilation = compile_discovery(self.root)
         outputs = render_outputs(compilation)
         self.assertTrue(set(CORE_OUTPUT_PATHS).issubset(outputs))
+        self.assertTrue(set(CLASSIFICATION_CORE_PATHS).issubset(outputs))
         candidate_shards = sorted(
             path for path in outputs if path.parent == CANDIDATE_SHARD_DIRECTORY
         )
         source_shards = sorted(
             path for path in outputs if path.parent == SOURCE_SHARD_DIRECTORY
         )
+        qualified_shards = sorted(
+            path for path in outputs if path.parent == QUALIFIED_DIRECTORY
+        )
+        exclusion_shards = sorted(
+            path for path in outputs if path.parent == EXCLUSION_DIRECTORY
+        )
+        ambiguous_shards = sorted(
+            path for path in outputs if path.parent == AMBIGUOUS_DIRECTORY
+        )
         self.assertGreaterEqual(len(candidate_shards), 2)
         self.assertGreaterEqual(len(source_shards), 1)
+        self.assertGreaterEqual(len(qualified_shards), 2)
+        self.assertGreaterEqual(len(exclusion_shards), 1)
+        self.assertEqual(ambiguous_shards, [])
         self.assertTrue(
             all(len(content.encode("utf-8")) < 1_000_000 for content in outputs.values())
         )
@@ -182,10 +255,10 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         write_outputs(self.root, outputs)
         self.assertEqual(output_drift(self.root, outputs), ())
 
-        stale_path = self.root / CANDIDATE_SHARD_DIRECTORY / "stale.json"
+        stale_path = self.root / EXCLUSION_DIRECTORY / "stale.json"
         stale_path.write_text("{}\n", encoding="utf-8")
         self.assertIn(
-            CANDIDATE_SHARD_DIRECTORY / "stale.json",
+            EXCLUSION_DIRECTORY / "stale.json",
             output_drift(self.root, outputs),
         )
 
