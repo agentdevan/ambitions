@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Sequence
 
 from tools.capability_atlas import __version__
-from tools.capability_atlas.classified_outputs import (
+from tools.capability_atlas.classification_pipeline import (
     output_drift,
     render_outputs,
     write_outputs,
