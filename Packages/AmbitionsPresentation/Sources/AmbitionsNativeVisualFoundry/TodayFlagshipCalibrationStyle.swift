@@ -16,6 +16,36 @@ struct TodayFlagshipPalette {
             : Color(red: 0.918, green: 0.908, blue: 0.880)
     }
 
+    var primaryObjectPlane: Color {
+        colorScheme == .dark
+            ? Color(red: 0.105, green: 0.108, blue: 0.121)
+            : Color(red: 0.915, green: 0.906, blue: 0.879)
+    }
+
+    var currentTruthPlane: Color {
+        colorScheme == .dark
+            ? Color(red: 0.086, green: 0.090, blue: 0.101)
+            : Color(red: 0.938, green: 0.928, blue: 0.900)
+    }
+
+    var proposedTruthPlane: Color {
+        colorScheme == .dark
+            ? Color(red: 0.135, green: 0.126, blue: 0.188)
+            : Color(red: 0.875, green: 0.852, blue: 0.925)
+    }
+
+    var settledTruthPlane: Color {
+        colorScheme == .dark
+            ? Color(red: 0.100, green: 0.132, blue: 0.121)
+            : Color(red: 0.870, green: 0.900, blue: 0.854)
+    }
+
+    var interruptedTruthPlane: Color {
+        colorScheme == .dark
+            ? Color(red: 0.151, green: 0.126, blue: 0.112)
+            : Color(red: 0.920, green: 0.875, blue: 0.792)
+    }
+
     var primaryInk: Color {
         colorScheme == .dark
             ? Color(red: 0.95, green: 0.94, blue: 0.91)
@@ -44,6 +74,22 @@ struct TodayFlagshipPalette {
         colorScheme == .dark
             ? Color(red: 0.69, green: 0.67, blue: 0.91)
             : Color(red: 0.35, green: 0.30, blue: 0.60)
+    }
+
+    var settledAccent: Color {
+        colorScheme == .dark
+            ? Color(red: 0.58, green: 0.76, blue: 0.66)
+            : Color(red: 0.20, green: 0.45, blue: 0.31)
+    }
+
+    var interruptionAccent: Color {
+        colorScheme == .dark
+            ? Color(red: 0.82, green: 0.61, blue: 0.47)
+            : Color(red: 0.53, green: 0.30, blue: 0.17)
+    }
+
+    var timelineRail: Color {
+        primaryInk.opacity(contrast == .increased ? 0.40 : colorScheme == .dark ? 0.24 : 0.18)
     }
 
     var actionInk: Color { .white }
@@ -78,6 +124,10 @@ struct TodayFlagshipPalette {
         colorScheme == .dark
             ? Color(red: 0.12, green: 0.145, blue: 0.135)
             : Color(red: 0.86, green: 0.89, blue: 0.84)
+    }
+
+    var reliefShadow: Color {
+        colorScheme == .dark ? .black.opacity(0.20) : .black.opacity(0.08)
     }
 }
 
