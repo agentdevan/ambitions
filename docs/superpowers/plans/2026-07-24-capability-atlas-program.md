@@ -73,23 +73,23 @@
 - Consumes: Existing Constitution, canon README, MANIFEST, and owner-provided seed list.
 - Produces: Stable definitions and discovery contracts consumed by Tasks 2–8.
 
-- [ ] **Step 1: Define capability identity and exclusion law**
+- [x] **Step 1: Define capability identity and exclusion law**
 
 Specify the primary test: a capability must describe a durable user-facing promise that remains meaningful if the UI, algorithm, storage, or architecture changes.
 
-- [ ] **Step 2: Define separate lifecycle dimensions**
+- [x] **Step 2: Define separate lifecycle dimensions**
 
 Model `authority_status`, `specification_maturity`, `implementation_status`, and `verification_status` independently so implementation cannot imply canonization.
 
-- [ ] **Step 3: Preserve the eight owner seeds verbatim**
+- [x] **Step 3: Preserve the eight owner seeds verbatim**
 
 Record skill transference, contextual generative goal pathing, alternate career-path simulation, step reflow, native search, Appearance Studio, Content Share Studio, and goal-attached file storage as `owner_seed` candidates with `authority_status: proposed`.
 
-- [ ] **Step 4: Define source coverage families**
+- [x] **Step 4: Define source coverage families**
 
 Include Constitution, normative specifications, journeys, objects, systems, visual closure, UX blueprint, ADRs, research packages, audits, remediation dossiers, Linear mirrors, tests, production code comments, and historical superseded material.
 
-- [ ] **Step 5: Validate JSON syntax**
+- [x] **Step 5: Validate JSON syntax**
 
 Run:
 
@@ -100,7 +100,7 @@ python3 -m json.tool docs/capabilities/discovery-source-register.json >/dev/null
 
 Expected: both commands exit `0`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add docs/capabilities
@@ -120,12 +120,12 @@ git commit -m "docs: establish capability atlas discovery law"
 - Consumes: `discovery-source-register.json`, repository files, seed registry.
 - Produces: normalized source excerpts and candidate records with stable evidence fingerprints.
 
-- [ ] **Step 1: Write failing tests for stable discovery order, provenance, and exclusions**
-- [ ] **Step 2: Implement source enumeration without external dependencies**
-- [ ] **Step 3: Implement candidate extraction hints without declaring authority**
-- [ ] **Step 4: Emit deterministic JSON with sorted keys and stable IDs**
-- [ ] **Step 5: Run focused tests and JSON validation**
-- [ ] **Step 6: Commit**
+- [x] **Step 1: Write failing tests for stable discovery order, provenance, and exclusions**
+- [x] **Step 2: Implement source enumeration without external dependencies**
+- [x] **Step 3: Implement candidate extraction hints without declaring authority**
+- [x] **Step 4: Emit deterministic JSON with sorted keys and stable IDs**
+- [x] **Step 5: Run focused tests and JSON validation**
+- [x] **Step 6: Commit**
 
 ### Task 3: Execute Phase A Repository Archaeology
 
@@ -138,12 +138,12 @@ git commit -m "docs: establish capability atlas discovery law"
 - Consumes: Task 2 discovery tooling.
 - Produces: Evidence-preserving master candidate inventory.
 
-- [ ] **Step 1: Harvest all configured source families**
-- [ ] **Step 2: Record source path, line/range, authority class, exact terminology, and extraction rationale**
-- [ ] **Step 3: Mark historical or superseded evidence without deleting it**
-- [ ] **Step 4: Generate the readable candidate inventory**
-- [ ] **Step 5: Confirm every configured source family has explicit coverage or a documented blocker**
-- [ ] **Step 6: Commit**
+- [x] **Step 1: Harvest all configured source families**
+- [x] **Step 2: Record source path, line/range, authority class, exact terminology, and extraction rationale**
+- [x] **Step 3: Mark historical or superseded evidence without deleting it**
+- [x] **Step 4: Generate the readable candidate inventory**
+- [x] **Step 5: Confirm every configured source family has explicit coverage or a documented blocker**
+- [x] **Step 6: Commit**
 
 ### Task 4: Execute Phase B Capability Extraction
 
@@ -155,11 +155,11 @@ git commit -m "docs: establish capability atlas discovery law"
 - Consumes: Raw candidates from Task 3 and capability law from Task 1.
 - Produces: Qualified capability candidates plus auditable exclusions.
 
-- [ ] **Step 1: Classify candidates as capability, behavior, requirement, object, surface, system, implementation, design language, project, or evidence**
-- [ ] **Step 2: Preserve excluded records with reasons and backlinks**
-- [ ] **Step 3: Flag ambiguous records instead of forcing classification**
-- [ ] **Step 4: Verify all owner seeds remain present**
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Classify candidates as capability, behavior, requirement, object, surface, system, implementation, design language, project, or evidence**
+- [x] **Step 2: Preserve excluded records with reasons and backlinks**
+- [x] **Step 3: Flag ambiguous records instead of forcing classification**
+- [x] **Step 4: Verify all owner seeds remain present**
+- [x] **Step 5: Commit**
 
 ### Task 5: Execute Phase C Taxonomy
 
@@ -218,45 +218,44 @@ git commit -m "docs: establish capability atlas discovery law"
 
 **Interfaces:**
 - Consumes: Draft atlas, canon index, requirement graph, architecture evidence, UI/UX references, tests, and proof.
-- Produces: Capability-to-product-genome links with confidence and gaps.
+- Produces: Capability-to-product-genome traceability.
 
-- [ ] **Step 1: Map capability to requirements and source specifications**
-- [ ] **Step 2: Map capability to objects, systems, runtime ownership, and surfaces**
-- [ ] **Step 3: Map capability to tests, evidence, and implementation only where verified**
-- [ ] **Step 4: Record confidence and contradictory evidence**
+- [ ] **Step 1: Link capabilities to normative requirements**
+- [ ] **Step 2: Link capabilities to objects, systems, runtime owners, surfaces, journeys, and Apple integrations**
+- [ ] **Step 3: Link capabilities to tests and proof without letting tests create authority**
+- [ ] **Step 4: Record missing and conflicting links explicitly**
 - [ ] **Step 5: Commit**
 
-### Task 9: Execute Phase G Gap Analysis
+### Task 9: Execute Phase G Gap and Loss Analysis
 
 **Files:**
 - Create: `docs/capabilities/DRAFT_CAPABILITY_GAP_REPORT.md`
-- Create: `docs/capabilities/draft-capability-gaps.json`
+- Create: `docs/capabilities/capability-gap-report.json`
 
 **Interfaces:**
-- Consumes: Draft atlas and traceability graph.
-- Produces: Prioritized product, specification, architecture, UI, testing, and governance gaps.
+- Consumes: Draft capability traceability.
+- Produces: Gap, loss, conflict, and invisibility findings.
 
-- [ ] **Step 1: Detect canonized promise without specification**
-- [ ] **Step 2: Detect specification without capability ownership**
-- [ ] **Step 3: Detect missing architecture, runtime, surface, test, or proof links**
-- [ ] **Step 4: Detect historical capability loss and contradictory authority**
-- [ ] **Step 5: Separate impossible, unsafe, deferred, and merely unimplemented states**
-- [ ] **Step 6: Commit**
+- [ ] **Step 1: Detect capabilities without specification, owner, architecture, runtime, surface, test, or proof**
+- [ ] **Step 2: Detect requirements, systems, UI, and implementation without a capability link**
+- [ ] **Step 3: Detect historical product promises lost during cleanup**
+- [ ] **Step 4: Detect impossible, contradictory, over-broad, or implementation-bound capabilities**
+- [ ] **Step 5: Commit**
 
-### Task 10: Produce the Owner Decision Packet
+### Task 10: Build the Owner Decision Packet
 
 **Files:**
 - Create: `docs/capabilities/OWNER_DECISION_PACKET.md`
-- Create: `docs/capabilities/owner-decisions.json`
+- Update: `docs/capabilities/reconciliation-register.json`
 
 **Interfaces:**
-- Consumes: Reconciliation, draft promises, traceability, and gaps.
-- Produces: Minimal bounded decisions required before canon installation.
+- Consumes: Draft atlas, reconciliation, traceability, and gap findings.
+- Produces: Bounded decisions for explicit owner action.
 
-- [ ] **Step 1: Exclude deterministic decisions from the packet**
-- [ ] **Step 2: Present only meaningful name, scope, merge, authority, conflict, retirement, and deferral decisions**
-- [ ] **Step 3: Include recommended default and consequence of each option**
-- [ ] **Step 4: Keep undecided entries non-normative**
+- [ ] **Step 1: Include only decisions that cannot be resolved deterministically**
+- [ ] **Step 2: State options, recommendation, consequences, and affected sources**
+- [ ] **Step 3: Separate accept/reject/merge/rename/defer/retire choices**
+- [ ] **Step 4: Preserve owner decisions with date and provenance**
 - [ ] **Step 5: Commit**
 
 ### Task 11: Install the Approved Canonical Capability Atlas
@@ -264,79 +263,70 @@ git commit -m "docs: establish capability atlas discovery law"
 **Files:**
 - Create: `docs/canon/product/CAPABILITY_ATLAS.md`
 - Create: `docs/canon/product/capability-atlas.json`
-- Create: `docs/canon/product/CAPABILITY_DECISIONS.md`
 - Create: `docs/canon/schemas/capability.schema.json`
+- Create: `docs/canon/product/CAPABILITY_DECISIONS.md`
 - Modify: `docs/canon/MANIFEST.toml`
 - Modify: `docs/canon/README.md`
 
 **Interfaces:**
-- Consumes: Explicit owner decisions.
-- Produces: Normative capability authority.
+- Consumes: Explicit owner-approved decisions.
+- Produces: Normative capability source layer.
 
-- [ ] **Step 1: Write schema tests that fail before installation**
-- [ ] **Step 2: Materialize only approved capabilities and decisions**
-- [ ] **Step 3: Register canonical artifacts in MANIFEST**
-- [ ] **Step 4: Update reading order and authority model**
-- [ ] **Step 5: Run canon build/check and focused tests**
+- [ ] **Step 1: Apply only approved decisions**
+- [ ] **Step 2: Validate stable IDs, names, required fields, and source links**
+- [ ] **Step 3: Register normative and reference files in MANIFEST**
+- [ ] **Step 4: Update reading order and authority boundary**
+- [ ] **Step 5: Commit**
+
+### Task 12: Extend the Canon Compiler and Product Genome
+
+**Files:**
+- Modify: `tools/ambitions_canon/compiler.py`
+- Add/modify: focused supporting compiler modules
+- Add/modify: canon compiler tests
+- Generate: all capability projections listed above
+
+**Interfaces:**
+- Consumes: Normative capability registry and existing canon graph.
+- Produces: Deterministic Product Genome and gap enforcement.
+
+- [ ] **Step 1: Write failing parser/schema/graph/output tests**
+- [ ] **Step 2: Parse and validate the canonical capability registry**
+- [ ] **Step 3: Generate index, requirement map, surface matrix, test matrix, gap report, and Product Genome**
+- [ ] **Step 4: Enforce orphan, missing-owner, missing-source, duplicate-ID, retirement, and generated-drift rules**
+- [ ] **Step 5: Run full canon build/check/test suite**
 - [ ] **Step 6: Commit**
 
-### Task 12: Integrate Compiler Outputs and Governance Gates
+### Task 13: Validate and Close Out
 
 **Files:**
-- Modify: `tools/ambitions_canon/compiler.py` and focused modules
-- Modify: compiler tests
-- Create: all capability generated artifacts listed above
-- Modify: `docs/canon/MANIFEST.toml`
+- Create: `docs/qa/evidence/<date>-capability-atlas-closeout/`
+- Update: program README and decision records
 
 **Interfaces:**
-- Consumes: Canonical capability registry and existing requirement graph.
-- Produces: Deterministic Product Genome projections and drift enforcement.
+- Consumes: Completed canonical and compiler work.
+- Produces: Verifiable closeout evidence.
 
-- [ ] **Step 1: Write failing tests for schema, IDs, references, cycles, ownership, and deterministic generation**
-- [ ] **Step 2: Generate capability index and requirement map**
-- [ ] **Step 3: Generate surface, test, and gap matrices**
-- [ ] **Step 4: Generate `product-genome.json` spanning vision to evidence**
-- [ ] **Step 5: Add warnings/errors for orphaned or improperly advanced capabilities**
-- [ ] **Step 6: Run full canon validation**
+- [ ] **Step 1: Run JSON/schema and canon checks**
+- [ ] **Step 2: Run focused and full Python tests**
+- [ ] **Step 3: Verify all generated files are deterministic and clean**
+- [ ] **Step 4: Audit every approved capability for source and owner traceability**
+- [ ] **Step 5: Verify no candidate was silently removed and all retirement decisions are explicit**
+- [ ] **Step 6: Commit closeout evidence**
 
-Run:
+---
 
-```bash
-python3 scripts/ambitions-canon.py build
-python3 scripts/ambitions-canon.py check
-python3 -m unittest discover
-```
+## Gate cadence
 
-Expected: deterministic generated outputs, canon check passes, and all focused/full tests pass.
+1. **Foundation gate:** Definitions, authority boundary, owner seeds, and discovery contract.
+2. **Discovery gate:** Complete candidate inventory and source coverage.
+3. **Extraction gate:** Capability/non-capability classification with exclusions preserved.
+4. **Taxonomy gate:** Product ontology and candidate placement.
+5. **Reconciliation gate:** Canonical-name and merge proposals.
+6. **Draft-atlas gate:** Product promises and non-goals.
+7. **Traceability/gap gate:** Product Genome and loss analysis.
+8. **Owner-decision gate:** Explicit decisions only.
+9. **Canon cutover gate:** Normative installation and compiler enforcement.
+10. **Closeout gate:** Determinism, traceability, and governance proof.
 
-- [ ] **Step 7: Commit**
-
-### Task 13: Final Program Validation and Cutover Evidence
-
-**Files:**
-- Create: `docs/qa/evidence/2026-07-24-capability-atlas/validation-report.md`
-- Create: `docs/qa/evidence/2026-07-24-capability-atlas/validation-manifest.json`
-
-**Interfaces:**
-- Consumes: Complete capability system.
-- Produces: Reviewable proof for merge and future audits.
-
-- [ ] **Step 1: Validate every owner seed has a final disposition**
-- [ ] **Step 2: Validate every canonical capability has a product promise, owner, maturity, and source provenance**
-- [ ] **Step 3: Validate no implementation status altered authority status**
-- [ ] **Step 4: Validate generated-output determinism from a clean tree**
-- [ ] **Step 5: Validate links, JSON, schema, tests, privacy boundaries, and supersession records**
-- [ ] **Step 6: Record unresolved gaps without falsely declaring completion**
-- [ ] **Step 7: Commit and prepare owner review**
-
-## Program Cadence
-
-1. **Foundation gate:** Task 1 approved as non-normative discovery law.
-2. **Discovery gate:** Tasks 2–4 complete; candidate inventory and exclusions reviewable.
-3. **Meaning gate:** Tasks 5–7 complete; taxonomy, reconciliation, and product promises reviewable.
-4. **Evidence gate:** Tasks 8–9 complete; traceability and gaps reviewable.
-5. **Owner gate:** Task 10 decisions resolved.
-6. **Canon cutover gate:** Tasks 11–12 install and compile approved authority.
-7. **Closeout gate:** Task 13 proves determinism, coverage, and remaining gaps.
-
-No later gate may silently repair an earlier owner decision. New evidence returns to the owning gate through an explicit amendment.
+Each gate must be reviewable independently. No gate may claim later-gate maturity or implementation completion.
