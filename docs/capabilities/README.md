@@ -19,15 +19,13 @@ Existing Constitution, specifications, ADRs, visual closure authority, requireme
 1. `CAPABILITY_MODEL.md` — capability identity, exclusions, lifecycle dimensions, evidence rules, and governance.
 2. `seed-capabilities.json` — owner-originated capability seeds preserved before repository reconciliation.
 3. `discovery-source-register.json` — source families and coverage requirements for repository archaeology.
-4. `candidate-capabilities.json` and `CANDIDATE_CAPABILITY_INVENTORY.md` — deterministic repository archaeology and source-family coverage.
-5. `CLASSIFICATION_POLICY.md` — Phase B classification and qualification law.
-6. `classification-summary.json`, `qualified-capability-candidates.json`, `ambiguous-capability-candidates.json`, and `exclusion-register.json` — classified Phase B outputs.
-7. `CAPABILITY_TAXONOMY.md` — product-meaning ontology after extraction.
-8. `CAPABILITY_RECONCILIATION.md` — duplicate, alias, conflict, and canonical-name proposals.
-9. `DRAFT_CAPABILITY_ATLAS.md` — non-normative product promises.
-10. `DRAFT_CAPABILITY_TRACEABILITY.md` — draft Product Genome links.
-11. `DRAFT_CAPABILITY_GAP_REPORT.md` — missing specification, ownership, architecture, surface, test, proof, and governance links.
-12. `OWNER_DECISION_PACKET.md` — bounded decisions required before canonical installation.
+4. `candidate-capabilities.json` — raw and qualified candidate inventory once discovery begins.
+5. `CAPABILITY_TAXONOMY.md` — product-meaning ontology after extraction.
+6. `CAPABILITY_RECONCILIATION.md` — duplicate, alias, conflict, and canonical-name proposals.
+7. `DRAFT_CAPABILITY_ATLAS.md` — non-normative product promises.
+8. `DRAFT_CAPABILITY_TRACEABILITY.md` — draft Product Genome links.
+9. `DRAFT_CAPABILITY_GAP_REPORT.md` — missing specification, ownership, architecture, surface, test, proof, and governance links.
+10. `OWNER_DECISION_PACKET.md` — bounded decisions required before canonical installation.
 
 ## Program gates
 
@@ -45,13 +43,7 @@ A later gate may not silently rewrite a decision from an earlier gate. New evide
 ## Current state
 
 - Program branch: `codex/capability-atlas-foundation`
-- Completed gates: Foundation, Phase A repository archaeology, and Phase B capability extraction
-- Current boundary: Awaiting stacked Phase C taxonomy and reconciliation work
+- Current gate: Foundation
 - Canon impact: None
 - Owner seeds preserved: Eight
-- Repository source families covered: Fourteen of fourteen
-- Classified records: 3,175
-- Qualified capability candidates: 13
-- Supporting non-capability records: 2,864
-- Ambiguous records preserved for reconciliation: 298
-- Implementation state: Deliberately not assessed
+- Implementation state: Deliberately not assessed during foundation
