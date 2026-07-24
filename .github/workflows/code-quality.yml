@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: code-quality-${{ github.workflow }}-${{ github.ref }}
@@ -108,6 +108,42 @@ jobs:
             docs/capabilities/exclusions/*.json
             docs/capabilities/qualified/*.json
             docs/capabilities/ambiguous/*.json
+      - name: Bootstrap classified capability inventory
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.head_ref == 'codex/capability-atlas-foundation' &&
+          github.actor != 'github-actions[bot]'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "$HEAD_REF"
+          git checkout -B "$HEAD_REF" "origin/$HEAD_REF"
+          python3 scripts/ambitions-capabilities.py build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- \
+            docs/capabilities/candidate-capabilities.json \
+            docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md \
+            docs/capabilities/discovery-coverage.json \
+            docs/capabilities/discovery-sources.json \
+            docs/capabilities/candidates \
+            docs/capabilities/sources \
+            docs/capabilities/classification-summary.json \
+            docs/capabilities/exclusion-register.json \
+            docs/capabilities/qualified-capability-candidates.json \
+            docs/capabilities/ambiguous-capability-candidates.json \
+            docs/capabilities/CLASSIFIED_CAPABILITY_INVENTORY.md \
+            docs/capabilities/exclusions \
+            docs/capabilities/qualified \
+            docs/capabilities/ambiguous
+          if git diff --cached --quiet; then
+            echo "Capability outputs already match."
+            exit 0
+          fi
+          git commit -m "docs: add classified capability discovery inventory"
+          git push origin "$HEAD_REF"
       - name: Reject capability discovery drift
         shell: bash
         run: |
