@@ -176,10 +176,9 @@ class CandidateRecord:
         *,
         normalized_name_hint: str,
     ) -> "CandidateRecord":
-        candidate_id = "CAND-" + stable_digest(
-            evidence.evidence_fingerprint,
-            normalized_name_hint.casefold(),
-        )[:16].upper()
+        candidate_id = (
+            "CAND-" + stable_digest(evidence.evidence_fingerprint)[:16].upper()
+        )
         return cls(
             candidate_id=candidate_id,
             authority_status="repository_candidate",
