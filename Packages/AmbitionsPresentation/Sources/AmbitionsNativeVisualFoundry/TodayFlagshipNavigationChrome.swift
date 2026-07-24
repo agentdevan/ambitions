@@ -119,24 +119,43 @@ struct TodayFlagshipDock: View {
             ZStack(alignment: .trailing) {
                 Color.clear
                 dockMaterial(
-                    shape: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    shape: UnevenRoundedRectangle(
+                        topLeadingRadius: 16,
+                        bottomLeadingRadius: 16,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 0,
+                        style: .continuous
+                    )
                 )
-                .frame(width: 25, height: 42)
-                .offset(x: 8)
+                .frame(width: 34, height: 72)
+                .overlay(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 1, style: .continuous)
+                        .fill(palette.articulationAccent)
+                        .frame(width: 2, height: 34)
+                        .accessibilityHidden(true)
+                }
+                .offset(x: 7)
 
-                Image(systemName: "square.grid.2x2.fill")
-                    .font(.system(size: 8, weight: .semibold))
+                VStack(spacing: 9) {
+                    Image(systemName: "square.grid.2x2.fill")
+                    Circle()
+                        .fill(palette.tertiaryInk)
+                        .frame(width: 3, height: 3)
+                    Image(systemName: "magnifyingglass")
+                }
+                    .font(.system(size: 9, weight: .semibold))
                     .foregroundStyle(palette.secondaryInk)
-                    .offset(x: 1)
+                    .frame(width: 28)
+                    .offset(x: 3)
                     .accessibilityHidden(true)
             }
-            .frame(width: 44, height: 64)
+            .frame(width: 44, height: 88)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Open global navigation")
         .accessibilityHint("Shows Today, Goals, Time, You, Search, and Capture")
-        .accessibilityIdentifier("tfcs-dock-peek")
+        .accessibilityIdentifier("tfcs-dock-shell-peek")
     }
 
     private var expandedDock: some View {

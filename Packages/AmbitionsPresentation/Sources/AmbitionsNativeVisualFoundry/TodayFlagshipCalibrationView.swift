@@ -189,80 +189,142 @@ public struct TodayFlagshipCalibrationView: View {
     }
 
     private func startHere(step: TodayFlagshipStepSnapshot) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(content.interfaceCopy.startHereTitle)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(palette.articulationAccent)
+        VStack(alignment: .leading, spacing: 0) {
+            TodayFlagshipObjectField(role: .primary, palette: palette) {
+                VStack(alignment: .leading, spacing: 15) {
+                    TodayFlagshipLandmarkLabel(
+                        title: content.interfaceCopy.startHereTitle,
+                        symbol: "location.north.fill",
+                        tint: palette.articulationAccent
+                    )
 
-            Text(step.title)
-                .font(.title2.weight(.semibold))
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityAddTraits(.isHeader)
+                    VStack(alignment: .leading, spacing: 7) {
+                        Text(step.title)
+                            .font(.title2.weight(.bold))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityAddTraits(.isHeader)
 
-            TodayFlagshipLocalSeam(palette: palette) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(step.currentAcceptedTruth)
-                        .font(.body)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(step.whyItFitsNow)
-                        .font(.footnote)
-                        .foregroundStyle(palette.secondaryInk)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(step.materialConsequence)
-                        .font(.callout.weight(.medium))
-                        .foregroundStyle(palette.secondaryInk)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    if state.phase == .todayReturned {
-                        Label(
-                            "\(step.temporalContext.exactTime) · \(step.temporalContext.relationship)",
-                            systemImage: "clock"
-                        )
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(palette.secondaryInk)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("tfcs-returned-start-here-time")
-                    } else {
-                        Button {
-                            _ = state.openStartHere()
-                        } label: {
-                            Text(step.primaryActionTitle)
-                                .foregroundStyle(palette.actionInk)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .buttonBorderShape(.roundedRectangle(radius: 7))
-                        .controlSize(.large)
-                        .frame(minHeight: 44, alignment: .leading)
-                        .accessibilityHint("Opens this Step without changing it")
-                        .accessibilityIdentifier("tfcs-open-start-here")
+                        Label(step.parentPursuitTitle, systemImage: "scope")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(palette.secondaryInk)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
+
+                    TodayFlagshipStateField(
+                        label: content.interfaceCopy.rightNowTitle,
+                        symbol: "checkmark.seal",
+                        truth: step.currentAcceptedTruth,
+                        role: .current,
+                        palette: palette
+                    )
+
+                    VStack(alignment: .leading, spacing: 11) {
+                        TodayFlagshipRelationshipRow(
+                            symbol: "sparkles",
+                            title: content.interfaceCopy.whyItFitsTitle,
+                            value: step.whyItFitsNow,
+                            palette: palette
+                        )
+
+                        TodayFlagshipRelationshipRow(
+                            symbol: "shield",
+                            title: content.interfaceCopy.consequenceTitle,
+                            value: step.materialConsequence,
+                            palette: palette
+                        )
+                    }
+
+                    startHereActionZone(step: step)
+                }
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel(
+                "\(content.interfaceCopy.startHereTitle), \(step.title), "
+                    + "\(step.parentPursuitTitle)"
+            )
+            .accessibilityIdentifier("tfcs-start-here-object")
+        }
+        .accessibilityFocused($accessibilityFocus, equals: .startHere)
+    }
+
+    @ViewBuilder
+    private func startHereActionZone(step: TodayFlagshipStepSnapshot) -> some View {
+        if state.phase == .todayReturned {
+            TodayFlagshipRelationshipRow(
+                symbol: "clock",
+                title: step.temporalContext.relationship,
+                value: step.temporalContext.exactTime,
+                palette: palette,
+                emphasized: true
+            )
+            .accessibilityIdentifier("tfcs-returned-start-here-time")
+        } else {
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 12) {
+                    startHereTime(step: step)
+                    Spacer(minLength: 8)
+                    startHereButton(step: step)
+                }
+
+                VStack(alignment: .leading, spacing: 12) {
+                    startHereTime(step: step)
+                    startHereButton(step: step)
                 }
             }
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityFocused($accessibilityFocus, equals: .startHere)
-        .accessibilityIdentifier("tfcs-start-here")
+    }
+
+    private func startHereTime(step: TodayFlagshipStepSnapshot) -> some View {
+        Label {
+            VStack(alignment: .leading, spacing: 1) {
+                Text(step.temporalContext.relationship)
+                    .font(.caption.weight(.semibold))
+                Text(step.temporalContext.exactTime)
+                    .font(.subheadline.monospacedDigit().weight(.medium))
+            }
+        } icon: {
+            Image(systemName: "clock")
+                .foregroundStyle(palette.tertiaryInk)
+        }
+        .foregroundStyle(palette.secondaryInk)
+        .accessibilityElement(children: .combine)
+    }
+
+    private func startHereButton(step: TodayFlagshipStepSnapshot) -> some View {
+        Button {
+            _ = state.openStartHere()
+        } label: {
+            Label(step.primaryActionTitle, systemImage: "arrow.forward")
+                .foregroundStyle(palette.actionInk)
+        }
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle(radius: 8))
+        .controlSize(.large)
+        .frame(minHeight: 44, alignment: .leading)
+        .accessibilityHint("Opens this Step without changing it")
+        .accessibilityIdentifier("tfcs-open-start-here")
     }
 
     private var returnedContinuity: some View {
-        TodayFlagshipLocalSeam(palette: palette) {
+        TodayFlagshipObjectField(role: .settled, palette: palette) {
             VStack(alignment: .leading, spacing: 7) {
-                TodayFlagshipSectionLabel(
-                    content.returnContract.settledLocationTitle,
+                TodayFlagshipLandmarkLabel(
+                    title: content.returnContract.settledLocationTitle,
                     symbol: "checkmark.seal",
-                    palette: palette
+                    tint: palette.settledAccent
                 )
 
                 Text(content.primaryStep.title)
                     .font(.headline)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text(state.acceptedTruth)
-                    .font(.subheadline)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
+                TodayFlagshipStateField(
+                    label: content.interfaceCopy.settlementTitle,
+                    symbol: "checkmark.seal.fill",
+                    truth: state.acceptedTruth,
+                    role: .settled,
+                    palette: palette
+                )
             }
         }
         .id(content.returnContract.focusAnchorID)
@@ -272,51 +334,45 @@ public struct TodayFlagshipCalibrationView: View {
     }
 
     private var timeline: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text(content.interfaceCopy.timelineTitle)
-                .font(.headline)
-                .accessibilityAddTraits(.isHeader)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(content.interfaceCopy.timelineTitle)
+                    .font(.title3.weight(.semibold))
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityIdentifier("tfcs-timeline")
 
-            ForEach(visibleTimeline) { item in
-                timelineItem(item)
+                Spacer(minLength: 12)
+
+                Text("Your day, in context")
+                    .font(.caption)
+                    .foregroundStyle(palette.tertiaryInk)
+            }
+
+            VStack(spacing: 0) {
+                ForEach(Array(visibleTimeline.enumerated()), id: \.element.id) { index, item in
+                    timelineItem(
+                        item,
+                        showsContinuation: index < visibleTimeline.count - 1
+                    )
+                }
             }
         }
         .padding(.top, 2)
-        .accessibilityIdentifier("tfcs-timeline")
     }
 
     private var visibleTimeline: [TodayFlagshipTimelineObject] {
         state.phase == .todayReturned ? content.returnedTodayTimeline : content.timeline
     }
 
-    private func timelineItem(_ item: TodayFlagshipTimelineObject) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(item.objectTitle)
-                .font(.body.weight(.semibold))
-                .fixedSize(horizontal: false, vertical: true)
-
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(item.timeLabel)
-                    .font(.caption.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(palette.tertiaryInk)
-
-                Text(item.relationship)
-                    .font(.subheadline)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            if item.isProtected || item.isFixed {
-                Text(item.acceptedState)
-                    .font(.caption)
-                    .foregroundStyle(palette.tertiaryInk)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(
-            "\(item.objectTitle), \(item.timeLabel), \(item.relationship), \(item.acceptedState)"
+    private func timelineItem(
+        _ item: TodayFlagshipTimelineObject,
+        showsContinuation: Bool
+    ) -> some View {
+        TodayFlagshipTimelineRow(
+            item: item,
+            palette: palette,
+            showsContinuation: showsContinuation
         )
-        .accessibilityIdentifier("tfcs-timeline-object-\(item.canonicalObjectID)")
     }
 
     private var truthfulFallback: some View {
