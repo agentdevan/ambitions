@@ -98,15 +98,24 @@ jobs:
             docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md
             docs/capabilities/discovery-coverage.json
             docs/capabilities/discovery-sources.json
+            docs/capabilities/candidates/*.json
+            docs/capabilities/sources/*.json
       - name: Reject capability discovery drift
         shell: bash
         run: |
           set -euo pipefail
-          git diff --exit-code -- \
+          status="$(git status --porcelain --untracked-files=all -- \
             docs/capabilities/candidate-capabilities.json \
             docs/capabilities/CANDIDATE_CAPABILITY_INVENTORY.md \
             docs/capabilities/discovery-coverage.json \
-            docs/capabilities/discovery-sources.json
+            docs/capabilities/discovery-sources.json \
+            docs/capabilities/candidates \
+            docs/capabilities/sources)"
+          if [[ -n "$status" ]]; then
+            printf '%s\n' "$status"
+            echo "Run: python3 scripts/ambitions-capabilities.py build"
+            exit 1
+          fi
       - name: SwiftLint
         if: needs.changes.outputs.native == 'true'
         env:
