@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_phase_f_traceability",
+  "repository": "agentdevan/ambitions",
+  "baseline_sha": "5670f24fb82adefd27cffee5ddf8fb70676ed049",
+  "status": "draft_for_owner_review",
+  "methodology": {
+    "capability_identity_source": "docs/capabilities/draft-capability-atlas.json",
+    "intended_behavior_source": "normative canon and accepted decisions",
+    "implementation_evidence_rule": "source presence is evidence only and never establishes complete capability fulfillment",
+    "verification_rule": "tests and audits are credited only for their explicit exercised scope",
+    "unknown_rule": "missing or contradictory evidence remains an explicit gap"
+  },
+  "capabilities": [
+    {
+      "capability_id": "CAP-CONTEXT-001",
+      "name": "Skill Transference",
+      "source_candidate_ids": ["CAND-SEED-001"],
+      "specifications": [
+        {"path": "docs/canon/specifications/systems/local-learning.md", "relationship": "supports local evidence-linked capability inference and user control", "confidence": "medium"},
+        {"path": "docs/canon/specifications/systems/privacy-and-data-classification.md", "relationship": "governs private derived context and egress", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/goal-path.md", "relationship": "provides a possible inspected destination for accepted transfer", "confidence": "low"}
+      ],
+      "requirement_ids": [
+        "SYSTEM-LEARNING-LOCAL-001",
+        "SYSTEM-LEARNING-CONTROL-001",
+        "SYSTEM-LEARNING-CAPABILITY-RETENTION-001",
+        "SYSTEM-PRIVACY-CLASSIFICATION-001",
+        "SYSTEM-PRIVACY-EGRESS-001"
+      ],
+      "objects": ["Goal", "Goal Path", "Step", "Proof", "History Event"],
+      "systems": ["Local Learning", "Private Life Runtime", "Trust Inspection", "Privacy and Data Classification"],
+      "surfaces": ["You", "Goals", "Today", "Search"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/Domain/PersonalRuntimeLearningSignal.swift", "claim_ceiling": "learning-signal source presence only"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "claim_ceiling": "planning ownership target; no verified cross-domain transfer workflow"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift", "claim_ceiling": "candidate-generation behavior only"},
+        {"path": "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", "claim_ceiling": "You feature-service scope only"}
+      ],
+      "implementation_assessment": {
+        "status": "not_demonstrated_as_capability",
+        "rationale": "The repository contains local-learning law and narrower signals, but no explicit cross-domain transfer model, reviewed user journey, or capability-level proof."
+      }
+    },
+    {
+      "capability_id": "CAP-PATH-001",
+      "name": "Contextual Generative Goal Pathing",
+      "source_candidate_ids": ["CAND-SEED-002", "CAND-FA37F984A251FF01"],
+      "specifications": [
+        {"path": "docs/canon/specifications/objects/goal-path.md", "relationship": "canonical path identity, lifecycle, adaptation, projections, receipts, and accessibility", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/local-learning.md", "relationship": "bounded learned influences and correction controls", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/scheduling-and-capacity.md", "relationship": "time-fit and capacity constraints", "confidence": "high"},
+        {"path": "docs/canon/specifications/surfaces/goals.md", "relationship": "full-path projection", "confidence": "high"},
+        {"path": "docs/canon/specifications/surfaces/today.md", "relationship": "executable-now projection", "confidence": "high"},
+        {"path": "docs/canon/specifications/surfaces/time.md", "relationship": "placement projection", "confidence": "high"},
+        {"path": "docs/canon/specifications/global/search.md", "relationship": "find, inspect, and owner-routed action projection", "confidence": "high"}
+      ],
+      "requirement_ids": [
+        "OBJ-GOAL-PATH-IDENTITY-001",
+        "OBJ-GOAL-PATH-RECEIPT-001",
+        "OBJ-GOAL-PATH-ADAPTATION-TRIGGERS-001",
+        "OBJ-GOAL-PATH-STRATEGY-001",
+        "OBJ-GOAL-PATH-ADAPTATION-BOUNDARY-001",
+        "OBJ-GOAL-PATH-ACCESSIBILITY-001",
+        "SYSTEM-LEARNING-LOCAL-001",
+        "SYSTEM-LEARNING-CONTROL-001"
+      ],
+      "objects": ["Goal", "Goal Path", "Step", "Proof", "Schedule Placement", "Recovery Segment", "Receipt", "History Event"],
+      "systems": ["Planning", "Local Learning", "Scheduling and Capacity", "Commands", "Inspection", "Persistence and Replay"],
+      "surfaces": ["Goals", "Today", "Time", "Search", "Trust", "Motion"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathPlanner.swift", "claim_ceiling": "planning implementation evidence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathCompilerService.swift", "claim_ceiling": "compiler-service implementation evidence"},
+        {"path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels.swift", "claim_ceiling": "domain-model implementation evidence"},
+        {"path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+05-GoalPathStage.swift", "claim_ceiling": "Goals projection evidence"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/Domain/GoalPathCompilerModelsTests.swift", "claim_ceiling": "domain-model tests"},
+        {"path": "Native/AmbitionsTests/Services/GoalPathCompilerServiceTests.swift", "claim_ceiling": "compiler-service tests"},
+        {"path": "Native/AmbitionsTests/LocalRuntimeOS/Planning/PlanningTests.swift", "claim_ceiling": "planning subsystem tests"},
+        {"path": "Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift", "claim_ceiling": "projection tests"},
+        {"path": "docs/audits/goals-flagship-acceptance.md", "claim_ceiling": "audit assertions within documented scope"}
+      ],
+      "implementation_assessment": {
+        "status": "substantial_evidence_not_capability_verified",
+        "rationale": "Canonical law, implementation owners, and focused tests exist, but uniqueness, context quality, cross-surface end-to-end coherence, privacy, and person-facing acceptance remain to be proven as one complete capability."
+      }
+    },
+    {
+      "capability_id": "CAP-SIMULATION-001",
+      "name": "Alternate Career Path Simulation",
+      "source_candidate_ids": ["CAND-SEED-003"],
+      "specifications": [
+        {"path": "docs/canon/specifications/objects/life-branch.md", "relationship": "prospective typed branch delta and lineage", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/branch-viability-certificate.md", "relationship": "assumption, dependency, conflict, and operational-gate evidence", "confidence": "high"},
+        {"path": "docs/canon/specifications/journeys/life-branch-reconciliation.md", "relationship": "branch review and adoption journey", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/certified-executable-branch-reconciliation.md", "relationship": "deterministic branch evaluation architecture", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/privacy-and-data-classification.md", "relationship": "private scenario and external-reference boundary", "confidence": "high"}
+      ],
+      "requirement_ids": [
+        "OBJ-LIFE-BRANCH-IDENTITY-001",
+        "OBJ-LIFE-BRANCH-DELTA-001",
+        "OBJ-LIFE-BRANCH-LINEAGE-001",
+        "OBJ-LIFE-BRANCH-AUTHORITY-001",
+        "OBJ-BRANCH-CERTIFICATE-IDENTITY-001",
+        "OBJ-BRANCH-CERTIFICATE-DEPENDENCY-001",
+        "OBJ-BRANCH-CERTIFICATE-GATE-001",
+        "OBJ-BRANCH-CERTIFICATE-CONFLICT-001"
+      ],
+      "objects": ["Life Branch", "Branch Viability Certificate", "Goal", "Goal Path", "Step", "Schedule Placement", "Receipt", "History Event"],
+      "systems": ["Certified Executable Branch Reconciliation", "Planning", "Scheduling and Capacity", "Inspection", "Privacy and Data Classification"],
+      "surfaces": ["Goals", "Today", "Time", "You", "Trust"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "claim_ceiling": "declared target ownership; current object specifications explicitly do not prove implementation"}
+      ],
+      "tests_and_proof": [
+        {"path": "docs/canon/specifications/objects/life-branch.md", "claim_ceiling": "explicit design-intent proof ceiling"},
+        {"path": "docs/canon/specifications/objects/branch-viability-certificate.md", "claim_ceiling": "explicit future-design-and-testing proof ceiling"}
+      ],
+      "implementation_assessment": {
+        "status": "design_intent_only",
+        "rationale": "The normative branch model is strong, but its own proof ceilings state that current source does not prove branch lifecycle or certificate computation; no career-specific journey or verified simulator is established."
+      }
+    },
+    {
+      "capability_id": "CAP-TIME-001",
+      "name": "Adaptive Step Placement Reflow",
+      "source_candidate_ids": ["CAND-SEED-004"],
+      "specifications": [
+        {"path": "docs/canon/specifications/journeys/schedule-reflow.md", "relationship": "preview, conflict, commit, rollback, accessibility, and offline journey", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/scheduling-and-capacity.md", "relationship": "capacity and placement engine contract", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/schedule-placement.md", "relationship": "canonical placement identity", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/step.md", "relationship": "canonical Step ownership", "confidence": "high"},
+        {"path": "docs/canon/specifications/surfaces/time.md", "relationship": "person-facing temporal manipulation and consequence", "confidence": "high"}
+      ],
+      "requirement_ids": [
+        "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+        "MISSION-REFLOW-001",
+        "CONTROL-MATERIAL-CONFIRMATION-001",
+        "CONTROL-UNDO-RECOVERY-001"
+      ],
+      "objects": ["Step", "Schedule Placement", "Goal Path", "Event", "Recovery Segment", "Receipt", "History Event"],
+      "systems": ["Scheduling and Capacity", "Commands", "External Writes", "Inspection", "Persistence and Replay"],
+      "surfaces": ["Time", "Goals", "Today", "Motion", "Trust"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/Domain/TimeContextAvailabilityAndReflow.swift", "claim_ceiling": "domain reflow evidence"},
+        {"path": "Native/Ambitions/Surfaces/Time/Projection/TimeRealityReflowProjection.swift", "claim_ceiling": "Time projection evidence"},
+        {"path": "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceProjectionAssembly.swift", "claim_ceiling": "surface assembly evidence"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/App/QuietReflowPrimitiveFamilyTests.swift", "claim_ceiling": "reflow primitive tests"},
+        {"path": "Native/AmbitionsTests/Domain/TimeContextHierarchyTests.swift", "claim_ceiling": "time-context tests"},
+        {"path": "Native/AmbitionsTests/Domain/LivingPlanMutationPermissionTests.swift", "claim_ceiling": "mutation-permission tests"},
+        {"path": "docs/audits/time-flagship-acceptance.md", "claim_ceiling": "documented Time acceptance scope"}
+      ],
+      "implementation_assessment": {
+        "status": "substantial_evidence_not_capability_verified",
+        "rationale": "Reflow law, source, projections, and focused tests exist, but the exact new-Step-placement journey, partial acceptance behavior, cross-object rollback, accessibility parity, and device proof remain capability-level gaps."
+      }
+    },
+    {
+      "capability_id": "CAP-SEARCH-001",
+      "name": "Ambitions Native Search and Command",
+      "source_candidate_ids": ["CAND-SEED-005", "CAND-B2F829141E0DD9A3", "CAND-939873A894F75DC1"],
+      "specifications": [
+        {"path": "docs/canon/specifications/global/search.md", "relationship": "global Search identity, index, retrieval, Ask, action, inspection, presentation, accessibility, and offline law", "confidence": "high"},
+        {"path": "docs/canon/specifications/journeys/search-find-act-inspect.md", "relationship": "direct-action journey", "confidence": "high"},
+        {"path": "docs/canon/specifications/journeys/search-find-ask-act-inspect.md", "relationship": "grounded Ask journey", "confidence": "high"},
+        {"path": "docs/canon/specifications/global/trust-inspection.md", "relationship": "receipt, history, and evidence inspection", "confidence": "high"}
+      ],
+      "requirement_ids": [
+        "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
+        "SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
+      ],
+      "objects": ["Search Result Projection", "Canonical Object Identity", "Receipt", "History Event"],
+      "systems": ["FTS Index", "Semantic Local Index", "Result Ranking", "Command Routing", "Trust Inspection", "Privacy and Data Classification"],
+      "surfaces": ["Global Search", "Trust", "Today", "Goals", "Time", "You"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/FindActInspectContract.swift", "claim_ceiling": "Find/Act/Inspect implementation evidence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/FTSIndex.swift", "claim_ceiling": "local lexical index evidence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SemanticLocalIndex.swift", "claim_ceiling": "local semantic-index evidence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchActionValidator.swift", "claim_ceiling": "action validation evidence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/ResultRanker.swift", "claim_ceiling": "ranking implementation evidence"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift", "claim_ceiling": "local Search tests"},
+        {"path": "docs/audits/amb-1764-search-find-act-inspect-acceptance.md", "claim_ceiling": "Find/Act/Inspect acceptance evidence"},
+        {"path": "docs/audits/amb-1771-search-functionality-repair-gate.md", "claim_ceiling": "documented repair-gate scope"},
+        {"path": "docs/qa/remediation/dossiers/AMB-1196-search-find-act-inspect.md", "claim_ceiling": "remediation scope and remaining conditions"}
+      ],
+      "implementation_assessment": {
+        "status": "strong_evidence_not_full_experience_verified",
+        "rationale": "Search has the strongest direct source and audit evidence in the proposed atlas, but Raycast-grade interaction quality, complete grounded Ask behavior, app-wide action coverage, performance calibration, and final device proof remain distinct requirements."
+      }
+    },
+    {
+      "capability_id": "CAP-APPEARANCE-001",
+      "name": "Appearance Studio",
+      "source_candidate_ids": ["CAND-SEED-006"],
+      "specifications": [
+        {"path": "docs/canon/specifications/surfaces/you.md", "relationship": "You owns appearance and settings depth", "confidence": "medium"},
+        {"path": "docs/canon/design/VISUAL_SYSTEM_R1.md", "relationship": "approved visual-system constraints", "confidence": "high"},
+        {"path": "docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md", "relationship": "surface and journey visual closure", "confidence": "medium"},
+        {"path": "docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md", "relationship": "accessibility transformation constraints", "confidence": "high"}
+      ],
+      "requirement_ids": ["surface.you.appearance", "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"],
+      "objects": ["Appearance Preference", "Design Token Selection", "Preference Receipt"],
+      "systems": ["You Settings", "Design Tokens", "Accessibility", "Motion Reduction", "Local Preferences"],
+      "surfaces": ["You", "All supported roots and focused depths through projection"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift", "claim_ceiling": "You appearance/settings projection evidence only"},
+        {"path": "Packages/AmbitionsDesignSystem/Sources/Theme/AmbitionsRecipeID.generated.swift", "claim_ceiling": "design-system recipe infrastructure"},
+        {"path": "Packages/AmbitionsDesignSystem/Sources/Theme/AmbitionsSurfaceID.generated.swift", "claim_ceiling": "surface-token infrastructure"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", "claim_ceiling": "You feature-service tests only"},
+        {"path": "docs/audits/rp-01-08-evidence-audit/06-rp-06-you-capability-inventory.md", "claim_ceiling": "inventory and gap evidence"}
+      ],
+      "implementation_assessment": {
+        "status": "partial_settings_evidence_no_studio_proof",
+        "rationale": "You and design-token infrastructure exist, but no approved first-class studio contract, multidimensional authoring model, live-preview flow, persistence semantics, or complete accessibility proof is established."
+      }
+    },
+    {
+      "capability_id": "CAP-SHARING-001",
+      "name": "Content Share Studio",
+      "source_candidate_ids": ["CAND-SEED-007"],
+      "specifications": [
+        {"path": "docs/canon/specifications/systems/privacy-and-data-classification.md", "relationship": "explicit reviewed-egress and fail-closed boundary", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/import-export-repair.md", "relationship": "export lifecycle, failure, and repair", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/attachment.md", "relationship": "payload and metadata lifecycle", "confidence": "medium"},
+        {"path": "docs/canon/specifications/global/trust-inspection.md", "relationship": "provenance and Receipt inspection", "confidence": "high"}
+      ],
+      "requirement_ids": ["SYSTEM-PRIVACY-EGRESS-001"],
+      "objects": ["Export Candidate", "Attachment", "Receipt", "History Event"],
+      "systems": ["Privacy Classification", "Import/Export Repair", "Local Rendering", "System Share Integration", "Trust Inspection"],
+      "surfaces": ["Contextual source object", "Share Studio depth", "Trust"],
+      "runtime_evidence": [
+        {"path": "Native/AmbitionsTests/Runtime/GoldenVerticalSliceRuntimeTests.swift", "claim_ceiling": "isolated export/share-adjacent runtime assertions only; no studio proof"}
+      ],
+      "tests_and_proof": [],
+      "implementation_assessment": {
+        "status": "not_demonstrated_as_capability",
+        "rationale": "The repository has privacy and export primitives but no authoritative Content Share Studio specification, audience model, format matrix, local transformation pipeline, preview contract, or end-to-end output proof."
+      }
+    },
+    {
+      "capability_id": "CAP-KNOWLEDGE-001",
+      "name": "Goal-Attached Files and Knowledge",
+      "source_candidate_ids": ["CAND-SEED-008"],
+      "specifications": [
+        {"path": "docs/canon/specifications/objects/attachment.md", "relationship": "stable attachment identity, lifecycle, privacy, relationships, export, and accessibility", "confidence": "high"},
+        {"path": "docs/canon/specifications/objects/goal.md", "relationship": "Goal ownership and relationship target", "confidence": "medium"},
+        {"path": "docs/canon/specifications/systems/import-export-repair.md", "relationship": "file ingest/export and repair", "confidence": "high"},
+        {"path": "docs/canon/specifications/global/search.md", "relationship": "permitted attachment retrieval and inspection", "confidence": "medium"},
+        {"path": "docs/audits/persistence-storage-owner-map.md", "relationship": "storage ownership and reality evidence", "confidence": "medium"}
+      ],
+      "requirement_ids": ["OBJ-ATTACHMENT-IDENTITY-001", "SCENARIO-ATTACHMENT-LIFECYCLE-001"],
+      "objects": ["Attachment", "Goal", "Proof", "Receipt", "History Event"],
+      "systems": ["Local Storage", "Commands", "Inspection", "Search", "Import/Export Repair", "Privacy Classification"],
+      "surfaces": ["Goal detail", "Capture", "Proof", "Search", "Trust"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/", "claim_ceiling": "storage owner presence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift", "claim_ceiling": "mutation-registry evidence"}
+      ],
+      "tests_and_proof": [
+        {"path": "Native/AmbitionsTests/LocalRuntimeOS/Storage/StorageTierTests.swift", "claim_ceiling": "storage-tier tests, not Goal attachment experience"},
+        {"path": "Native/AmbitionsTests/LocalRuntimeOS/Projections/LocalRuntimeOSProjectionsTests.swift", "claim_ceiling": "projection tests only"}
+      ],
+      "implementation_assessment": {
+        "status": "object_contract_and_storage_evidence_no_goal_experience_proof",
+        "rationale": "Attachment law and storage infrastructure exist, but the Goal-attached relationship model, ingest and recovery UX, Search indexing, shared-link deletion behavior, resource limits, and device-level experience are not proven together."
+      }
+    },
+    {
+      "capability_id": "CAP-RESILIENCE-001",
+      "name": "Local-First Operational Continuity",
+      "source_candidate_ids": ["CAND-C6F2EE04321B7240", "CAND-71C0E590F9213175"],
+      "specifications": [
+        {"path": "docs/canon/specifications/app/degraded-states.md", "relationship": "cross-app degraded-state taxonomy, preservation, recovery, and accessibility", "confidence": "high"},
+        {"path": "docs/canon/specifications/surfaces/today.md", "relationship": "offline present-execution expression", "confidence": "high"},
+        {"path": "docs/canon/specifications/global/search.md", "relationship": "offline Search, prior-index, rebuild, and privacy expression", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/persistence-and-replay.md", "relationship": "durable local truth and replay", "confidence": "high"},
+        {"path": "docs/canon/specifications/systems/privacy-and-data-classification.md", "relationship": "local/network and diagnostic boundary", "confidence": "high"}
+      ],
+      "requirement_ids": [
+        "LAW-OFFLINE-NO-ACCOUNT-001",
+        "CONTROL-UNDO-RECOVERY-001",
+        "LAW-RUNTIME-DURABLE-SUCCESS-001",
+        "LAW-DATA-LOSS-STOP-SHIP-001",
+        "APP-DEGRADED-COMMAND-CONTRACT-001"
+      ],
+      "objects": ["Canonical local objects", "Receipt", "History Event", "External Outbox Result", "Recovery Checkpoint"],
+      "systems": ["Persistence and Replay", "Repair", "Diagnostics", "External Writes", "Search", "Privacy Classification"],
+      "surfaces": ["Today", "Goals", "Time", "You", "Search", "Trust"],
+      "runtime_evidence": [
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/", "claim_ceiling": "repair owner presence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/", "claim_ceiling": "diagnostic owner presence"},
+        {"path": "Native/Ambitions/Core/LocalRuntimeOS/Search/FTSIndex.swift", "claim_ceiling": "local Search index evidence"}
+      ],
+      "tests_and_proof": [
+        {"path": "docs/audits/rp-01-08-evidence-audit/07-rp-07-persistence-offline-recovery.md", "claim_ceiling": "persistence/offline/recovery audit scope"},
+        {"path": "docs/qa/product-experience-scenario-gates.md", "claim_ceiling": "declared scenario gate coverage"},
+        {"path": "docs/qa/KNOWN_ISSUES.md", "claim_ceiling": "known residual risks and unresolved proof"}
+      ],
+      "implementation_assessment": {
+        "status": "broad_contract_and_partial_evidence_not_app_wide_verified",
+        "rationale": "Continuity law is extensive and local runtime owners exist, but app-wide degraded-state coverage, interruption/resume, external-write reconciliation, accessibility, and clean-device restoration proof remain incomplete."
+      }
+    }
+  ],
+  "coverage_summary": {
+    "proposed_capability_count": 9,
+    "traceability_record_count": 9,
+    "missing_traceability_ids": [],
+    "fully_verified_capability_count": 0,
+    "capabilities_with_substantial_evidence": ["CAP-PATH-001", "CAP-TIME-001", "CAP-SEARCH-001"],
+    "capabilities_with_design_intent_or_primitive_evidence_only": ["CAP-CONTEXT-001", "CAP-SIMULATION-001", "CAP-APPEARANCE-001", "CAP-SHARING-001", "CAP-KNOWLEDGE-001", "CAP-RESILIENCE-001"],
+    "note": "No capability is declared implemented, verified, or shippable by this draft traceability pass."
+  }
+}
