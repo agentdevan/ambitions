@@ -12,27 +12,39 @@ struct TodayFlagshipRecoveryReviewView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
-                    VStack(alignment: .leading, spacing: 7) {
-                        Text(content.primaryStep.title)
-                            .font(.title3.weight(.semibold))
-                            .fixedSize(horizontal: false, vertical: true)
-                        Text(content.interfaceCopy.recoveryBody)
-                            .font(.subheadline)
-                            .foregroundStyle(palette.secondaryInk)
-                    }
+                    TodayFlagshipObjectField(role: .interrupted, palette: palette) {
+                        VStack(alignment: .leading, spacing: 15) {
+                            TodayFlagshipLandmarkLabel(
+                                title: "Interrupted Step",
+                                symbol: "pause.circle.fill",
+                                tint: palette.interruptionAccent
+                            )
 
-                    TodayFlagshipLocalSeam(palette: palette) {
-                        VStack(alignment: .leading, spacing: 7) {
-                            TodayFlagshipSectionLabel(
-                                "Last saved progress",
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(content.primaryStep.title)
+                                    .font(.title2.weight(.bold))
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Text(content.interfaceCopy.recoveryBody)
+                                    .font(.subheadline)
+                                    .foregroundStyle(palette.secondaryInk)
+                            }
+
+                            TodayFlagshipStateField(
+                                label: "Last saved progress",
                                 symbol: "externaldrive.badge.checkmark",
+                                truth: content.recovery.lastSavedProgress,
+                                role: .interrupted,
                                 palette: palette
                             )
-                            Text(content.recovery.lastSavedProgress)
-                                .font(.body)
+
+                            Text(content.recovery.interruptionDetail)
+                                .font(.subheadline)
+                                .foregroundStyle(palette.secondaryInk)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }
+                    .accessibilityElement(children: .contain)
+                    .accessibilityIdentifier("tfcs-recovery-progress-field")
 
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach(content.recovery.availableChoices) { choice in
