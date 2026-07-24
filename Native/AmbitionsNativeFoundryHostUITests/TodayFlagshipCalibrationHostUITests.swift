@@ -770,6 +770,53 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         assertMinimumTarget(commit)
     }
 
+    func testB02SettlementAndReturnPreserveIdentityWithoutCeremony() {
+        launch("b02-settlement-typical")
+
+        let identity = element("tfcs-settlement-identity")
+        let settledTruth = element("tfcs-settled-truth")
+        let parent = element("tfcs-settlement-parent-pursuit")
+        let evidence = element("tfcs-recorded-acknowledgment")
+        let history = element("tfcs-view-history")
+        let returnToday = element("tfcs-return-to-today")
+        assertExists([identity, settledTruth, parent, evidence, history, returnToday])
+        XCTAssertLessThan(identity.frame.minY, settledTruth.frame.minY)
+        XCTAssertLessThan(settledTruth.frame.minY, evidence.frame.minY)
+        XCTAssertTrue(settledTruth.label.contains("now count toward the nursery"))
+        XCTAssertTrue(parent.label.contains("Welcome our baby home"))
+        XCTAssertFalse(app.images["checkmark.seal.fill"].exists)
+
+        XCTAssertEqual(history.value as? String, "Collapsed")
+        app.buttons["View history"].tap()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
+        XCTAssertEqual(history.value as? String, "Expanded")
+        XCTAssertTrue(element("tfcs-settled-truth").exists)
+        app.buttons["View history"].tap()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
+        XCTAssertEqual(
+            element("tfcs-view-history").value as? String,
+            "Collapsed"
+        )
+        XCTAssertTrue(element("tfcs-settled-truth").exists)
+
+        assertMinimumTarget(returnToday)
+        returnToday.tap()
+
+        let returnedSettledStep = element("tfcs-returned-settled-step")
+        XCTAssertTrue(returnedSettledStep.waitForExistence(timeout: 4))
+        XCTAssertTrue(returnedSettledStep.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(returnedSettledStep.label.contains("now count toward the nursery"))
+        XCTAssertEqual(
+            app.staticTexts.matching(
+                NSPredicate(format: "label == %@", "Send the launch brief")
+            ).count,
+            1
+        )
+        XCTAssertFalse(element("tfcs-timeline-object-step.send-launch-brief").exists)
+        XCTAssertTrue(element("tfcs-today-overview").exists)
+        XCTAssertTrue(element("tfcs-dock-shell-peek").exists)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()

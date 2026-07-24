@@ -237,3 +237,282 @@ struct TodayOpenContinuitySavingSeam: View {
         .accessibilityIdentifier("tfcs-saving-posture")
     }
 }
+
+struct TodayOpenContinuitySettlementView: View {
+    @AccessibilityFocusState private var isSettledTruthFocused: Bool
+
+    let content: TodayFlagshipCalibrationContent
+    let acceptedTruth: String
+    let palette: TodayFlagshipPalette
+    let shouldFocusTruth: Bool
+    let historyDisclosure: Binding<Bool>
+    let onReturnToToday: () -> Void
+
+    var body: some View {
+        VStack(spacing: 0) {
+            GeometryReader { viewport in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        settlementIdentity
+                            .accessibilityIdentifier("tfcs-settlement-identity")
+
+                        adaptiveSectionGap
+
+                        TodayOpenContinuitySettledTruth(
+                            label: content.interfaceCopy.rightNowTitle,
+                            truth: acceptedTruth,
+                            palette: palette
+                        )
+                        .accessibilityFocused($isSettledTruthFocused)
+                        .accessibilityIdentifier("tfcs-settled-truth")
+
+                        adaptiveSectionGap
+
+                        parentPursuit
+                            .accessibilityIdentifier("tfcs-settlement-parent-pursuit")
+
+                        adaptiveSectionGap
+
+                        recordedAcknowledgment
+                            .accessibilityIdentifier("tfcs-recorded-acknowledgment")
+
+                        adaptiveSectionGap
+
+                        history
+                            .accessibilityIdentifier("tfcs-view-history")
+                            .accessibilityValue(
+                                historyDisclosure.wrappedValue ? "Expanded" : "Collapsed"
+                            )
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 24)
+                    .padding(.bottom, 30)
+                    .frame(
+                        maxWidth: 560,
+                        minHeight: viewport.size.height,
+                        alignment: .topLeading
+                    )
+                }
+                .scrollIndicators(.hidden)
+            }
+
+            TodayOpenContinuityReturnBar(
+                title: content.interfaceCopy.returnTodayTitle,
+                palette: palette,
+                action: onReturnToToday
+            )
+            .accessibilityIdentifier("tfcs-return-to-today")
+        }
+        .background(palette.semanticPlane.ignoresSafeArea())
+        .foregroundStyle(palette.primaryInk)
+        .onAppear {
+            guard shouldFocusTruth else { return }
+            isSettledTruthFocused = true
+        }
+        .onChange(of: shouldFocusTruth) { _, shouldFocus in
+            guard shouldFocus else { return }
+            isSettledTruthFocused = true
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("tfcs-settlement-field")
+    }
+
+    private var adaptiveSectionGap: some View {
+        Spacer(minLength: 28)
+            .accessibilityHidden(true)
+    }
+
+    private var settlementIdentity: some View {
+        HStack(alignment: .top, spacing: 14) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: false,
+                extendsAfter: true
+            )
+            .frame(width: 22)
+            .frame(minHeight: 96)
+
+            VStack(alignment: .leading, spacing: 7) {
+                Text(content.interfaceCopy.settlementTitle)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.settledAccent)
+
+                Text(content.primaryStep.title)
+                    .font(.title.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private var parentPursuit: some View {
+        HStack(alignment: .top, spacing: 12) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: true
+            )
+            .frame(width: 22)
+            .frame(minHeight: 64)
+
+            Image(systemName: "scope")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.settledAccent)
+                .frame(width: 18)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(content.interfaceCopy.settlementRelationshipPrefix)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.tertiaryInk)
+
+                Text(content.primaryStep.parentPursuitTitle)
+                    .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private var recordedAcknowledgment: some View {
+        HStack(alignment: .center, spacing: 12) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: true
+            )
+            .frame(width: 22, height: 58)
+
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(palette.secondaryInk)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(content.receipt.recordedLabel)
+                    .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
+
+                Text(content.receipt.receiptSummary)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font)
+                    .foregroundStyle(palette.secondaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private var history: some View {
+        HStack(alignment: .top, spacing: 12) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: false
+            )
+            .frame(width: 22)
+            .frame(minHeight: 60)
+
+            DisclosureGroup(
+                content.interfaceCopy.viewHistoryTitle,
+                isExpanded: historyDisclosure
+            ) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(content.receipt.receiptSummary)
+                    Text(content.receipt.historySummary)
+                    Text(content.receipt.recordedLabel)
+                    Text("Record: \(content.receipt.id)")
+                        .font(TodayOpenContinuityTypographyRole.metadata.font.monospaced())
+                        .foregroundStyle(palette.tertiaryInk)
+                }
+                .font(TodayOpenContinuityTypographyRole.relationship.font)
+                .foregroundStyle(palette.secondaryInk)
+                .padding(.top, 10)
+            }
+            .font(TodayOpenContinuityTypographyRole.action.font)
+            .foregroundStyle(palette.primaryInk)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
+
+struct TodayOpenContinuitySettledTruth: View {
+    let label: String
+    let truth: String
+    let palette: TodayFlagshipPalette
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: true
+            )
+            .frame(width: 22)
+            .frame(minHeight: 120)
+
+            VStack(alignment: .leading, spacing: 9) {
+                Text(label)
+                    .font(TodayOpenContinuityTypographyRole.state.font.weight(.semibold))
+                    .foregroundStyle(palette.settledAccent)
+
+                Text(truth)
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.horizontal, 17)
+            .padding(.vertical, 16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background {
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 14,
+                    bottomLeadingRadius: 4,
+                    bottomTrailingRadius: 14,
+                    topTrailingRadius: 4,
+                    style: .continuous
+                )
+                .fill(palette.currentTruthPlane)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label). \(truth)")
+    }
+}
+
+struct TodayOpenContinuityReturnBar: View {
+    let title: String
+    let palette: TodayFlagshipPalette
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Label(title, systemImage: "arrow.uturn.backward")
+                .font(TodayOpenContinuityTypographyRole.action.font)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: 44)
+        }
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.roundedRectangle(radius: 8))
+        .controlSize(.large)
+        .tint(palette.articulationAccent)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
+        .background(palette.semanticPlane)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(palette.divider)
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+    }
+}

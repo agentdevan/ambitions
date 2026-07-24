@@ -226,6 +226,69 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.todayReturnAnchorID, content.returnContract.focusAnchorID)
     }
 
+    func testB02SettlementAndReturnDeclareTruthLeadingContinuityWithoutCeremony() throws {
+        let sourceRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let truthFlowSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityTruthFlow.swift"),
+            encoding: .utf8
+        )
+        let rootSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityRoot.swift"),
+            encoding: .utf8
+        )
+
+        for declaration in [
+            "struct TodayOpenContinuitySettlementView: View",
+            "struct TodayOpenContinuitySettledTruth: View",
+            "struct TodayOpenContinuityReturnBar: View"
+        ] {
+            XCTAssertTrue(truthFlowSource.contains(declaration), "Missing \(declaration)")
+        }
+
+        let settlementOrder = try [
+            "tfcs-settlement-identity",
+            "tfcs-settled-truth",
+            "tfcs-settlement-parent-pursuit",
+            "tfcs-recorded-acknowledgment",
+            "tfcs-view-history",
+            "tfcs-return-to-today"
+        ].map { marker in
+            try XCTUnwrap(truthFlowSource.range(of: marker)?.lowerBound)
+        }
+        for pair in zip(settlementOrder, settlementOrder.dropFirst()) {
+            XCTAssertLessThan(pair.0, pair.1)
+        }
+
+        XCTAssertTrue(truthFlowSource.contains("TodayOpenContinuitySpine(\n                kind: .settled"))
+        XCTAssertTrue(truthFlowSource.contains("DisclosureGroup("))
+        XCTAssertTrue(truthFlowSource.contains("GeometryReader { viewport in"))
+        XCTAssertTrue(truthFlowSource.contains("Spacer(minLength: 28)"))
+        XCTAssertTrue(truthFlowSource.contains("minHeight: viewport.size.height"))
+        XCTAssertFalse(truthFlowSource.contains("VStack(alignment: .leading, spacing: 28)"))
+        XCTAssertTrue(truthFlowSource.contains(".fill(palette.currentTruthPlane)"))
+        XCTAssertFalse(truthFlowSource.contains(".fill(palette.settledTruthPlane)"))
+        XCTAssertTrue(truthFlowSource.contains("content.receipt.receiptSummary"))
+        XCTAssertFalse(truthFlowSource.contains("content.interfaceCopy.historyTrustCue"))
+        XCTAssertFalse(truthFlowSource.contains("checkmark.seal.fill"))
+        XCTAssertFalse(truthFlowSource.localizedCaseInsensitiveContains("confetti"))
+        XCTAssertFalse(truthFlowSource.localizedCaseInsensitiveContains("success badge"))
+
+        let startHereOffset = try XCTUnwrap(
+            rootSource.range(of: "TodayOpenContinuityStartHere(")?.lowerBound
+        )
+        let returnedOffset = try XCTUnwrap(
+            rootSource.range(of: "returnedContinuity")?.lowerBound
+        )
+        XCTAssertLessThan(startHereOffset, returnedOffset)
+        XCTAssertTrue(rootSource.contains("tfcs-returned-settled-step"))
+        XCTAssertTrue(rootSource.contains("content.returnContract.focusAnchorID"))
+        XCTAssertFalse(rootSource.localizedCaseInsensitiveContains("reward"))
+    }
+
     func testInterruptedJourneyPreservesIdentityAcceptedTruthAndLastSavedProgress() {
         var state = focusedState()
         let acceptedTruth = state.acceptedTruth

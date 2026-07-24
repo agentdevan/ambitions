@@ -25,10 +25,6 @@ struct TodayOpenContinuityRoot: View {
                         )
                     }
 
-                    if state.phase == .todayReturned {
-                        returnedContinuity
-                    }
-
                     TodayOpenContinuityStartHere(
                         copy: content.interfaceCopy,
                         step: visibleStartHere,
@@ -39,6 +35,10 @@ struct TodayOpenContinuityRoot: View {
                         }
                     )
                     .accessibilityFocused($accessibilityFocus, equals: .startHere)
+
+                    if state.phase == .todayReturned {
+                        returnedContinuity
+                    }
 
                     TodayOpenContinuityTimeline(
                         content: timelineContent,
@@ -67,10 +67,10 @@ struct TodayOpenContinuityRoot: View {
                 guard phase == .todayReturned else { return }
                 let anchor = content.returnContract.focusAnchorID
                 if reduceMotion {
-                    proxy.scrollTo(anchor, anchor: .top)
+                    proxy.scrollTo(anchor, anchor: .bottom)
                 } else {
                     withAnimation(.easeOut(duration: 0.28)) {
-                        proxy.scrollTo(anchor, anchor: .top)
+                        proxy.scrollTo(anchor, anchor: .bottom)
                     }
                 }
             }
@@ -87,25 +87,39 @@ struct TodayOpenContinuityRoot: View {
     }
 
     private var returnedContinuity: some View {
-        TodayFlagshipObjectField(role: .settled, palette: palette) {
-            VStack(alignment: .leading, spacing: 7) {
-                TodayFlagshipLandmarkLabel(
-                    title: content.returnContract.settledLocationTitle,
-                    symbol: "checkmark.seal",
-                    tint: palette.settledAccent
-                )
+        HStack(alignment: .top, spacing: 9) {
+            TodayOpenContinuitySpine(
+                kind: .settled,
+                palette: palette.openContinuity,
+                extendsBefore: true,
+                extendsAfter: true
+            )
+            .frame(width: 28)
+            .frame(minHeight: 84)
+            .padding(.leading, 5)
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text(content.returnContract.settledLocationTitle)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.settledAccent)
 
                 Text(content.primaryStep.title)
-                    .font(.headline)
+                    .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
                     .fixedSize(horizontal: false, vertical: true)
 
-                TodayFlagshipStateField(
-                    label: content.interfaceCopy.settlementTitle,
-                    symbol: "checkmark.seal.fill",
-                    truth: state.acceptedTruth,
-                    role: .settled,
-                    palette: palette
-                )
+                Text(state.acceptedTruth)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font)
+                    .foregroundStyle(palette.secondaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(palette.divider)
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
             }
         }
         .id(content.returnContract.focusAnchorID)

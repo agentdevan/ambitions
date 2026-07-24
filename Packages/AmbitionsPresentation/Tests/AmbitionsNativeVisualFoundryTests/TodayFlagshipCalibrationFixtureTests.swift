@@ -160,6 +160,38 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
                 $0.canonicalObjectID == "step.nursery-paint-sample"
             }
         )
+        XCTAssertFalse(
+            fixture.returnedTodayTimeline.contains {
+                $0.canonicalObjectID == fixture.primaryStep.id
+            },
+            "The settled primary Step is projected by its dedicated return-anchor row"
+        )
+        XCTAssertEqual(
+            Set(fixture.returnedTodayTimeline.map(\.canonicalObjectID)).count,
+            fixture.returnedTodayTimeline.count
+        )
+    }
+
+    func testB02ReturnedTodayKeepsOneRevealedStartHereAndExactSettledAnchor() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let allReturnedIdentities = [fixture.revealedStartHereStep.id]
+            + fixture.returnedTodayTimeline.map(\.canonicalObjectID)
+
+        XCTAssertEqual(
+            allReturnedIdentities.filter { $0 == fixture.revealedStartHereStep.id }.count,
+            1
+        )
+        XCTAssertEqual(fixture.returnContract.settledStepID, fixture.primaryStep.id)
+        XCTAssertEqual(
+            fixture.returnContract.focusAnchorID,
+            "today.settled.step.nursery-ready-for-crib"
+        )
+        XCTAssertEqual(
+            fixture.receipt.historySummary,
+            fixture.primaryStep.stillCountsProposal.settledTruth
+        )
+        XCTAssertFalse(fixture.receipt.recordedLabel.localizedCaseInsensitiveContains("will"))
+        XCTAssertFalse(fixture.receipt.receiptSummary.localizedCaseInsensitiveContains("will"))
     }
 
     func testReturnAndRecoveryContractsUseStableObjectScopedAnchors() {
@@ -486,6 +518,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             "TodayOpenContinuityRoot.swift",
             "TodayOpenContinuityTimeline.swift",
             "TodayOpenContinuityFocusedObject.swift",
+            "TodayOpenContinuityTruthFlow.swift",
             "TodayFlagshipFocusedStepView.swift",
             "TodayFlagshipNavigationChrome.swift",
             "TodayFlagshipRecoveryReviewView.swift",

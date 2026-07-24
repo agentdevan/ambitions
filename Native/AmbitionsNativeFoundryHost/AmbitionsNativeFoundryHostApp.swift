@@ -53,6 +53,9 @@ private struct TodayFlagshipCalibrationHost: View {
         if variant.fullDayOrigin != nil {
             _ = initialState.openFullDay()
         }
+        if variant == .b02SettlementHistory {
+            _ = initialState.openHistory()
+        }
         _state = State(
             initialValue: initialState
         )
@@ -175,6 +178,12 @@ private enum FoundryVariant: String {
     case b02ReviewReduceMotion = "b02-review-reduce-motion"
     case b02ReviewRTL = "b02-review-rtl"
     case b02ReviewSaving = "b02-review-saving"
+    case b02SettlementTypical = "b02-settlement-typical"
+    case b02SettlementHistory = "b02-settlement-history"
+    case b02SettlementLowBrightness = "b02-settlement-low-brightness"
+    case b02SettlementCompact = "b02-settlement-compact"
+    case b02SettlementProMax = "b02-settlement-pro-max"
+    case b02ReturnedTypical = "b02-returned-typical"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -223,9 +232,11 @@ private enum FoundryVariant: String {
                 .b02ReviewContrast, .b02ReviewNoColor,
                 .b02ReviewReduceMotion, .b02ReviewRTL:
             .reviewingProposal
-        case .tfcsF08:
+        case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
+                .b02SettlementLowBrightness, .b02SettlementCompact,
+                .b02SettlementProMax:
             .settled
-        case .tfcsF09:
+        case .tfcsF09, .b02ReturnedTypical, .b02FullDayReturned:
             .todayReturned
         case .tfcsF10:
             .recoveryReview
@@ -233,8 +244,6 @@ private enum FoundryVariant: String {
             .interrupted
         case .stateSaving, .b02ReviewSaving:
             .savingAcceptedTruth
-        case .b02FullDayReturned:
-            .todayReturned
         default:
             .todayInitial
         }

@@ -21,13 +21,24 @@ struct TodayFlagshipFocusedStepView: View {
                         _ = state.selectStillCounts()
                     }
                 )
+            } else if state.phase == .settled {
+                TodayOpenContinuitySettlementView(
+                    content: content,
+                    acceptedTruth: state.acceptedTruth,
+                    palette: palette,
+                    shouldFocusTruth: state.focusAnchor == .settledTruth,
+                    historyDisclosure: historyDisclosure,
+                    onReturnToToday: {
+                        _ = state.returnToToday()
+                    }
+                )
             } else {
                 legacyStateScroll
             }
         }
         .background(palette.semanticPlane.ignoresSafeArea())
         .foregroundStyle(palette.primaryInk)
-        .navigationTitle(state.phase == .settled ? content.interfaceCopy.settlementTitle : "")
+        .navigationTitle("")
         .todayFlagshipInlineNavigationTitle()
         .todayFlagshipBackButtonHidden(state.phase == .settled)
         .onAppear {
@@ -43,28 +54,23 @@ struct TodayFlagshipFocusedStepView: View {
     private var legacyStateScroll: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 25) {
-                if state.phase == .settled {
+                VStack(alignment: .leading, spacing: 25) {
                     identity
-                    settlement
-                } else {
-                    VStack(alignment: .leading, spacing: 25) {
-                        identity
 
-                        if state.phase == .interrupted || state.phase == .recoveryReview {
-                            interruptionSeam
-                        } else if state.phase == .recoveredContinuation {
-                            recoveredSeam
-                        }
-
-                        currentStep
+                    if state.phase == .interrupted || state.phase == .recoveryReview {
+                        interruptionSeam
+                    } else if state.phase == .recoveredContinuation {
+                        recoveredSeam
                     }
-                    .accessibilityElement(children: .contain)
-                    .accessibilityLabel(
-                        "\(content.primaryStep.title), "
-                            + "\(content.primaryStep.parentPursuitTitle)"
-                    )
-                    .accessibilityIdentifier("tfcs-focused-object-field")
+
+                    currentStep
                 }
+                .accessibilityElement(children: .contain)
+                .accessibilityLabel(
+                    "\(content.primaryStep.title), "
+                        + "\(content.primaryStep.parentPursuitTitle)"
+                )
+                .accessibilityIdentifier("tfcs-focused-object-field")
             }
             .frame(maxWidth: 560, alignment: .leading)
             .padding(.horizontal, 24)
@@ -249,79 +255,6 @@ struct TodayFlagshipFocusedStepView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityFocused($accessibilityFocus, equals: .recoveredProgress)
-    }
-
-    private var settlement: some View {
-        TodayFlagshipObjectField(role: .settled, palette: palette) {
-            VStack(alignment: .leading, spacing: 18) {
-                TodayFlagshipLandmarkLabel(
-                    title: content.interfaceCopy.settlementTitle,
-                    symbol: "checkmark.seal.fill",
-                    tint: palette.settledAccent
-                )
-
-                TodayFlagshipStateField(
-                    label: content.interfaceCopy.rightNowTitle,
-                    symbol: "checkmark.seal.fill",
-                    truth: state.acceptedTruth,
-                    role: .settled,
-                    palette: palette
-                )
-                .accessibilityFocused($accessibilityFocus, equals: .settledTruth)
-                .accessibilityIdentifier("tfcs-settled-truth")
-
-                TodayFlagshipRelationshipRow(
-                    symbol: "scope",
-                    title: "Added to",
-                    value: content.primaryStep.parentPursuitTitle,
-                    palette: palette,
-                    emphasized: true
-                )
-
-                TodayFlagshipEvidenceRow(
-                    symbol: "checkmark.seal",
-                    title: content.receipt.recordedLabel,
-                    detail: "Available in this Step’s history",
-                    palette: palette
-                )
-                .accessibilityIdentifier("tfcs-recorded-acknowledgment")
-
-                DisclosureGroup(
-                    content.interfaceCopy.viewHistoryTitle,
-                    isExpanded: historyDisclosure
-                ) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(content.receipt.receiptSummary)
-                        Text(content.receipt.historySummary)
-                        Text(content.receipt.recordedLabel)
-                        Text("Record: \(content.receipt.id)")
-                            .font(.caption.monospaced())
-                            .foregroundStyle(palette.tertiaryInk)
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(palette.secondaryInk)
-                    .padding(.top, 8)
-                    .accessibilityIdentifier("tfcs-history-detail")
-                }
-                .font(.body.weight(.medium))
-                .accessibilityIdentifier("tfcs-view-history")
-
-                Button {
-                    _ = state.returnToToday()
-                } label: {
-                    Label(content.interfaceCopy.returnTodayTitle, systemImage: "arrow.uturn.backward")
-                        .foregroundStyle(palette.actionInk)
-                }
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.roundedRectangle(radius: 8))
-                .controlSize(.large)
-                .frame(minHeight: 44, alignment: .leading)
-                .accessibilityHint("Returns to the settled Step and the next Start Here")
-                .accessibilityIdentifier("tfcs-return-to-today")
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("tfcs-settlement-field")
     }
 
     private var historyDisclosure: Binding<Bool> {
