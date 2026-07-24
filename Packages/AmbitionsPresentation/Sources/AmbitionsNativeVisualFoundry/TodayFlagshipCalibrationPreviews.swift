@@ -125,6 +125,44 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("B02 Review · Typical · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Review · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("B02 Review · Differentiate Without Color") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityDifferentiateWithoutColor, true)
+}
+
+#Preview("B02 Review · Reduce Motion") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityReduceMotion, true)
+}
+
+#Preview("B02 Review · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .reviewingProposal
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
+}
+
+#Preview("B02 Saving · Accepted truth retained") {
+    TodayFlagshipCalibrationPreviewHost(phase: .savingAcceptedTruth)
+        .preferredColorScheme(.dark)
+}
+
 #Preview("TFCS-F08 · Successful settlement · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .settled)
         .preferredColorScheme(.dark)

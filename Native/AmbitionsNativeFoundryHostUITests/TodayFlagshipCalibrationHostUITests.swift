@@ -700,6 +700,76 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         assertMinimumTarget(stillCounts)
     }
 
+    func testB02ReviewUsesSpatialComparisonAndAnchoredActionsAtStandardSize() {
+        launch("b02-review-typical")
+
+        let identity = element("tfcs-step-identity")
+        let current = element("tfcs-review-current-truth")
+        let proposed = element("tfcs-proposed-truth")
+        let transition = element("tfcs-review-transition-seam")
+        let consequence = element("tfcs-review-consequence")
+        let relationship = element("tfcs-review-relationship")
+        let details = element("tfcs-review-details")
+        let cancel = element("tfcs-cancel-review")
+        let commit = element("tfcs-commit-still-counts")
+
+        assertExists([
+            identity,
+            current,
+            proposed,
+            transition,
+            consequence,
+            relationship,
+            details,
+            cancel,
+            commit
+        ])
+        XCTAssertLessThan(identity.frame.minY, current.frame.minY)
+        XCTAssertLessThan(current.frame.minY, proposed.frame.minY)
+        XCTAssertLessThan(proposed.frame.minY, consequence.frame.minY)
+        XCTAssertTrue(cancel.isHittable)
+        XCTAssertTrue(commit.isHittable)
+        assertMinimumTarget(cancel)
+        assertMinimumTarget(commit)
+        XCTAssertFalse(element("tfcs-review-detail-content").isHittable)
+    }
+
+    func testB02SavingKeepsTruthComparisonAndPreventsDuplicateCommit() {
+        launch("b02-review-saving")
+
+        let current = element("tfcs-review-current-truth")
+        let proposed = element("tfcs-proposed-truth")
+        let saving = element("tfcs-saving-posture")
+        let commit = element("tfcs-commit-still-counts")
+        let cancel = element("tfcs-cancel-review")
+
+        assertExists([current, proposed, saving, commit, cancel])
+        XCTAssertTrue(current.label.contains("The corner is cleared"))
+        XCTAssertTrue(proposed.label.contains("Record the cleared corner"))
+        XCTAssertFalse(commit.isEnabled)
+        XCTAssertFalse(cancel.isEnabled)
+        XCTAssertFalse(app.staticTexts["Progress recorded"].exists)
+    }
+
+    func testB02ReviewAccessibilityKeepsVerticalActionsReachable() {
+        launch("b02-review-accessibility5")
+
+        let cancel = element("tfcs-cancel-review")
+        let commit = element("tfcs-commit-still-counts")
+        XCTAssertTrue(cancel.waitForExistence(timeout: 3))
+        XCTAssertTrue(commit.exists)
+
+        for _ in 0..<6 where commit.isHittable == false {
+            app.swipeUp()
+        }
+
+        XCTAssertTrue(cancel.isHittable)
+        XCTAssertTrue(commit.isHittable)
+        XCTAssertLessThan(cancel.frame.minY, commit.frame.minY)
+        assertMinimumTarget(cancel)
+        assertMinimumTarget(commit)
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()

@@ -29,6 +29,11 @@ private struct FoundryHostRoot: View {
         .dynamicTypeSize(variant.dynamicTypeSize)
         .environment(\.locale, Locale(identifier: variant.localeIdentifier))
         .environment(\.layoutDirection, variant.rightToLeft ? .rightToLeft : .leftToRight)
+        .environment(
+            \._accessibilityDifferentiateWithoutColor,
+            variant.differentiateWithoutColor
+        )
+        .environment(\._accessibilityReduceMotion, variant.reduceMotion)
     }
 }
 
@@ -163,6 +168,13 @@ private enum FoundryVariant: String {
     case b02FocusedRTL = "b02-focused-rtl"
     case b02FocusedContrast = "b02-focused-contrast"
     case b02FocusedLongLTR = "b02-focused-long-ltr"
+    case b02ReviewTypical = "b02-review-typical"
+    case b02ReviewAccessibility5 = "b02-review-accessibility5"
+    case b02ReviewContrast = "b02-review-contrast"
+    case b02ReviewNoColor = "b02-review-no-color"
+    case b02ReviewReduceMotion = "b02-review-reduce-motion"
+    case b02ReviewRTL = "b02-review-rtl"
+    case b02ReviewSaving = "b02-review-saving"
 
     static var fromProcessArguments: FoundryVariant {
         let arguments = ProcessInfo.processInfo.arguments
@@ -192,7 +204,8 @@ private enum FoundryVariant: String {
         case .accessibilityDark, .tfcsF05, .reviewAccessibility,
                 .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
-        case .b02FullDayAccessibility5, .b02FocusedAccessibility5:
+        case .b02FullDayAccessibility5, .b02FocusedAccessibility5,
+                .b02ReviewAccessibility5:
             .accessibility5
         default:
             .large
@@ -205,7 +218,10 @@ private enum FoundryVariant: String {
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent
-        case .tfcsF07, .stressContrast, .reviewAccessibility:
+        case .tfcsF07, .stressContrast, .reviewAccessibility,
+                .b02ReviewTypical, .b02ReviewAccessibility5,
+                .b02ReviewContrast, .b02ReviewNoColor,
+                .b02ReviewReduceMotion, .b02ReviewRTL:
             .reviewingProposal
         case .tfcsF08:
             .settled
@@ -215,7 +231,7 @@ private enum FoundryVariant: String {
             .recoveryReview
         case .stateInterrupted:
             .interrupted
-        case .stateSaving:
+        case .stateSaving, .b02ReviewSaving:
             .savingAcceptedTruth
         case .b02FullDayReturned:
             .todayReturned
@@ -228,7 +244,7 @@ private enum FoundryVariant: String {
         switch self {
         case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
-        case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL:
+        case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL, .b02ReviewRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
         case .b02FocusedLongLTR:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
@@ -240,11 +256,20 @@ private enum FoundryVariant: String {
     var dockExpanded: Bool { self == .tfcsF04 }
 
     var rightToLeft: Bool {
-        self == .stressLongRTL || self == .b02FullDayRTL || self == .b02FocusedRTL
+        self == .stressLongRTL || self == .b02FullDayRTL
+            || self == .b02FocusedRTL || self == .b02ReviewRTL
     }
 
     var localeIdentifier: String {
         rightToLeft ? "ar-SA" : "en-US"
+    }
+
+    var differentiateWithoutColor: Bool {
+        self == .b02ReviewNoColor
+    }
+
+    var reduceMotion: Bool {
+        self == .b02ReviewReduceMotion
     }
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {

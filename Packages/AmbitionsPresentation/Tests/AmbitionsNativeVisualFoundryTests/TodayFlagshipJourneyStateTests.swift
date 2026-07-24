@@ -127,6 +127,57 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertFalse(state.beginCommit())
     }
 
+    func testB02TruthFlowDeclaresSpatialComparisonAndPersistentSavingSemantics() throws {
+        let sourceRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let truthFlowSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityTruthFlow.swift"),
+            encoding: .utf8
+        )
+        let reviewSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayFlagshipReviewView.swift"),
+            encoding: .utf8
+        )
+
+        for declaration in [
+            "struct TodayOpenContinuityTruthComparison: View",
+            "struct TodayOpenContinuityCommitBar: View",
+            "struct TodayOpenContinuitySavingSeam: View"
+        ] {
+            XCTAssertTrue(truthFlowSource.contains(declaration), "Missing \(declaration)")
+        }
+
+        for identifier in [
+            "tfcs-review-current-truth",
+            "tfcs-proposed-truth",
+            "tfcs-review-transition-seam",
+            "tfcs-saving-posture",
+            "tfcs-commit-still-counts"
+        ] {
+            XCTAssertTrue(
+                truthFlowSource.contains(identifier),
+                "Truth flow is missing \(identifier)"
+            )
+        }
+
+        XCTAssertTrue(
+            truthFlowSource.contains("@Environment(\\.accessibilityDifferentiateWithoutColor)")
+        )
+        XCTAssertTrue(truthFlowSource.contains("@Environment(\\.accessibilityReduceMotion)"))
+        XCTAssertTrue(truthFlowSource.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(truthFlowSource.contains("ProgressView"))
+        XCTAssertFalse(truthFlowSource.contains("Progress recorded"))
+        XCTAssertFalse(truthFlowSource.contains(".glassEffect("))
+
+        XCTAssertTrue(reviewSource.contains("TodayOpenContinuityTruthComparison"))
+        XCTAssertTrue(reviewSource.contains("TodayOpenContinuityCommitBar"))
+        XCTAssertTrue(reviewSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(reviewSource.contains("DisclosureGroup"))
+    }
+
     func testSettlementChangesAcceptedTruthAndRemainsOnFocusedStep() {
         var state = savingState()
 
