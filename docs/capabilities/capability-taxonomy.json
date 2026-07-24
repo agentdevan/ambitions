@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_phase_c_taxonomy",
+  "repository": "agentdevan/ambitions",
+  "baseline_branch": "codex/capability-atlas-foundation",
+  "taxonomy_revision": 1,
+  "status": "proposed_for_reconciliation",
+  "governing_rules": {
+    "organize_by_product_meaning_not_current_information_architecture": true,
+    "exactly_one_primary_domain_per_qualified_candidate": true,
+    "maximum_secondary_domains": 3,
+    "secondary_domains_express_dependency_not_duplicate_ownership": true,
+    "domain_assignment_does_not_canonize_candidate": true,
+    "surface_system_object_or_implementation_may_not_become_domain_by_itself": true,
+    "unassigned_and_over_broad_candidates_must_be_reported": true
+  },
+  "domains": [
+    {
+      "domain_id": "DOM-CONTEXT",
+      "name": "Personal Context, Learning, and Transfer",
+      "purpose": "Understand the person over time and use learned patterns, preferences, skills, constraints, and outcomes to improve future support.",
+      "owns": [
+        "personal-context interpretation",
+        "local learning from behavior and outcomes",
+        "cross-domain transfer of learned strategies or skills"
+      ],
+      "does_not_own": [
+        "goal-path construction",
+        "scenario comparison",
+        "identity settings or privacy controls",
+        "generic model training infrastructure"
+      ],
+      "anti_overlap_rule": "Use this domain when the durable promise is that Ambitions learns from or transfers what is known about the person; route the resulting plan, simulation, search, or execution behavior to its own primary domain."
+    },
+    {
+      "domain_id": "DOM-PATH",
+      "name": "Goals, Paths, and Progression",
+      "purpose": "Help a person form meaningful pursuits, understand the path toward them, and preserve coherent progression across changing circumstances.",
+      "owns": [
+        "goal formation and activation",
+        "goal-path generation and revision",
+        "path dependencies and progression",
+        "cross-surface projection of canonical goal paths"
+      ],
+      "does_not_own": [
+        "today-only execution selection",
+        "exact schedule placement",
+        "generic file storage",
+        "counterfactual life simulation"
+      ],
+      "anti_overlap_rule": "Use this domain when the durable promise concerns the pursuit and its path; use execution, time, simulation, or knowledge domains when the promise remains meaningful without a goal path."
+    },
+    {
+      "domain_id": "DOM-EXECUTION",
+      "name": "Present Execution and Adaptation",
+      "purpose": "Help a person understand what is executable now, act with appropriate context, and adapt present work without collapsing into a task list.",
+      "owns": [
+        "present-reality orientation",
+        "executable-now selection and context",
+        "in-progress adaptation",
+        "return-to-work support"
+      ],
+      "does_not_own": [
+        "full goal-path definition",
+        "exact chronology and schedule placement",
+        "system-wide recovery mechanics",
+        "search retrieval"
+      ],
+      "anti_overlap_rule": "Use this domain when the promise is about acting now; route durable path structure, chronology, or recovery guarantees to their owning domains."
+    },
+    {
+      "domain_id": "DOM-TIME",
+      "name": "Time, Capacity, and Reflow",
+      "purpose": "Help a person place, understand, and revise commitments against real chronology, capacity, dependencies, and disruption.",
+      "owns": [
+        "schedule placement",
+        "capacity-aware temporal planning",
+        "dependency-aware reflow",
+        "chronological consequence and repair"
+      ],
+      "does_not_own": [
+        "goal meaning",
+        "present-execution prioritization",
+        "counterfactual life-path simulation",
+        "generic calendar import mechanics"
+      ],
+      "anti_overlap_rule": "Use this domain when the promise changes or explains temporal placement, capacity, sequence, or reflow; a goal path may depend on it without transferring path ownership."
+    },
+    {
+      "domain_id": "DOM-SIMULATION",
+      "name": "Simulation and Decision Support",
+      "purpose": "Let a person explore plausible alternatives, trade-offs, consequences, and uncertainty before committing their real life graph.",
+      "owns": [
+        "counterfactual path simulation",
+        "scenario comparison",
+        "trade-off and consequence exploration",
+        "uncertainty-aware decision support"
+      ],
+      "does_not_own": [
+        "committed goal paths",
+        "live schedule mutation",
+        "recommendation feeds",
+        "unsupported certainty or prediction"
+      ],
+      "anti_overlap_rule": "Use this domain when alternatives remain hypothetical and reversible; once a path is accepted, ownership transfers to the applicable goal, time, or execution domain."
+    },
+    {
+      "domain_id": "DOM-SEARCH",
+      "name": "Search, Command, and Inspection",
+      "purpose": "Let a person privately find, understand, inspect, ask about, and act on Ambitions objects and relationships from a global native command surface.",
+      "owns": [
+        "global retrieval",
+        "semantic and exact search",
+        "search-to-command action",
+        "result inspection and trust context",
+        "search-grounded asking"
+      ],
+      "does_not_own": [
+        "capture and provisional interpretation",
+        "object creation semantics",
+        "generic chat",
+        "source-of-truth ownership for returned objects"
+      ],
+      "anti_overlap_rule": "Search owns discovery and invocation, never the canonical object or mutation semantics it exposes."
+    },
+    {
+      "domain_id": "DOM-KNOWLEDGE",
+      "name": "Knowledge, Files, and Attachments",
+      "purpose": "Keep supporting information, files, references, notes, and provenance durably attached to the life objects they inform.",
+      "owns": [
+        "object-attached files",
+        "attachment identity and lifecycle",
+        "reference and source relationships",
+        "searchable local knowledge associated with life objects"
+      ],
+      "does_not_own": [
+        "goal progression",
+        "share presentation",
+        "cloud-drive replacement",
+        "external public-source research"
+      ],
+      "anti_overlap_rule": "Use this domain when the promise is durable knowledge custody and relationship; use sharing when the primary promise is external presentation or transfer."
+    },
+    {
+      "domain_id": "DOM-SHARING",
+      "name": "Sharing and External Expression",
+      "purpose": "Help a person deliberately transform and share selected Ambitions content while preserving meaning, privacy, provenance, and audience control.",
+      "owns": [
+        "share composition",
+        "audience-appropriate transformation",
+        "redaction and disclosure review",
+        "external formats and presentation"
+      ],
+      "does_not_own": [
+        "canonical local object mutation",
+        "general file storage",
+        "appearance of the private app",
+        "automatic publication"
+      ],
+      "anti_overlap_rule": "Use this domain when content leaves or is prepared to leave the private Ambitions context; the source object remains owned by its original domain."
+    },
+    {
+      "domain_id": "DOM-IDENTITY",
+      "name": "Identity, Privacy, and Trust",
+      "purpose": "Give the person legible control over who Ambitions understands them to be, what data exists, how it is used, and why the system acted.",
+      "owns": [
+        "person and system relationship",
+        "privacy and data boundaries",
+        "trust inspection",
+        "consent and sensitive-data control",
+        "explanation and provenance visibility"
+      ],
+      "does_not_own": [
+        "visual appearance authoring",
+        "search result ranking",
+        "local-learning algorithms",
+        "generic settings"
+      ],
+      "anti_overlap_rule": "Use this domain when the durable promise is control, legibility, consent, or trust; other domains may depend on it but cannot absorb privacy ownership."
+    },
+    {
+      "domain_id": "DOM-APPEARANCE",
+      "name": "Appearance and Personal Expression",
+      "purpose": "Let a person meaningfully shape Ambitions' visual expression within native, accessible, coherent product boundaries.",
+      "owns": [
+        "first-class appearance authoring",
+        "personal visual expression",
+        "accessible appearance transformations",
+        "preview and safe application of appearance choices"
+      ],
+      "does_not_own": [
+        "the core visual system law",
+        "share-document styling",
+        "generic theme toggles alone",
+        "surface information architecture"
+      ],
+      "anti_overlap_rule": "Use this domain when the person is deliberately authoring the private product's expression; visual-system implementation remains design authority, not a capability domain."
+    },
+    {
+      "domain_id": "DOM-RESILIENCE",
+      "name": "Resilience, Recovery, and Continuity",
+      "purpose": "Keep Ambitions understandable and useful through offline operation, stale or partial information, interruption, conflict, failure, and restoration.",
+      "owns": [
+        "offline continuity",
+        "failure-safe preservation",
+        "recovery and restoration",
+        "staleness disclosure",
+        "deterministic repair and replay"
+      ],
+      "does_not_own": [
+        "ordinary successful workflows",
+        "general diagnostics UI",
+        "feature-specific business rules",
+        "cloud synchronization as a product promise by itself"
+      ],
+      "anti_overlap_rule": "Use this domain when the promise is that another capability remains trustworthy under degraded conditions; retain the affected capability as a secondary domain."
+    },
+    {
+      "domain_id": "DOM-CAPTURE",
+      "name": "Capture and Interpretation",
+      "purpose": "Let a person express something quickly, preserve it provisionally, inspect interpretation, and place it without premature commitment.",
+      "owns": [
+        "global expression capture",
+        "provisional interpretation",
+        "review before placement",
+        "capture-to-object placement"
+      ],
+      "does_not_own": [
+        "global retrieval",
+        "long-form content publishing",
+        "final goal-path generation",
+        "voice technology as an end in itself"
+      ],
+      "anti_overlap_rule": "Capture owns intake and provisional interpretation; ownership transfers when the person accepts placement into a canonical object or domain."
+    },
+    {
+      "domain_id": "DOM-CLOSURE",
+      "name": "Reflection, Proof, and Closure",
+      "purpose": "Help a person understand what changed, preserve meaningful evidence, reflect on outcomes, and close work without losing history.",
+      "owns": [
+        "completion proof",
+        "outcome reflection",
+        "receipts and history",
+        "closure and learned consequence"
+      ],
+      "does_not_own": [
+        "audit evidence for repository governance",
+        "generic analytics dashboards",
+        "goal-path creation",
+        "search inspection"
+      ],
+      "anti_overlap_rule": "Use this domain when the person-facing promise concerns completed consequence, evidence, reflection, or durable closure rather than ongoing execution."
+    },
+    {
+      "domain_id": "DOM-APPLE",
+      "name": "Apple Ecosystem and Automation",
+      "purpose": "Extend Ambitions coherently through native Apple platforms, system surfaces, and user-authorized automation without weakening local-first control.",
+      "owns": [
+        "App Intents and Shortcuts exposure",
+        "system search and Spotlight participation",
+        "widgets and native system surfaces",
+        "cross-device continuity as experienced by the person"
+      ],
+      "does_not_own": [
+        "the internal implementation framework",
+        "generic platform compliance",
+        "capabilities merely because they use an Apple API",
+        "unbounded autonomous action"
+      ],
+      "anti_overlap_rule": "Use this domain only when native ecosystem reach is itself part of the durable user promise; otherwise treat Apple technology as implementation support."
+    }
+  ],
+  "assignments": [
+    {
+      "candidate_id": "CAND-SEED-001",
+      "candidate_name": "Skill Transference",
+      "primary_domain_id": "DOM-CONTEXT",
+      "secondary_domain_ids": [
+        "DOM-PATH",
+        "DOM-SIMULATION"
+      ],
+      "assignment_rationale": "The defining promise is reuse of learned personal capability across domains; pathing and simulation are downstream applications."
+    },
+    {
+      "candidate_id": "CAND-SEED-002",
+      "candidate_name": "Contextual Generative Goal Pathing",
+      "primary_domain_id": "DOM-PATH",
+      "secondary_domain_ids": [
+        "DOM-CONTEXT",
+        "DOM-TIME",
+        "DOM-SIMULATION"
+      ],
+      "assignment_rationale": "The outcome is a coherent goal path, while personal learning, temporal feasibility, and scenario exploration inform its generation."
+    },
+    {
+      "candidate_id": "CAND-SEED-003",
+      "candidate_name": "Alternate Career Path Simulation",
+      "primary_domain_id": "DOM-SIMULATION",
+      "secondary_domain_ids": [
+        "DOM-CONTEXT",
+        "DOM-PATH",
+        "DOM-TIME"
+      ],
+      "assignment_rationale": "The alternatives remain hypothetical until chosen; personal context, path structure, and temporal consequences support the simulation."
+    },
+    {
+      "candidate_id": "CAND-SEED-004",
+      "candidate_name": "Step Placement Reflow",
+      "primary_domain_id": "DOM-TIME",
+      "secondary_domain_ids": [
+        "DOM-PATH",
+        "DOM-EXECUTION"
+      ],
+      "assignment_rationale": "The durable promise is dependency- and capacity-aware temporal repair after placement; the affected path and present work remain secondary."
+    },
+    {
+      "candidate_id": "CAND-SEED-005",
+      "candidate_name": "Ambitions Native Search and Command",
+      "primary_domain_id": "DOM-SEARCH",
+      "secondary_domain_ids": [
+        "DOM-IDENTITY",
+        "DOM-APPLE"
+      ],
+      "assignment_rationale": "Global private retrieval, inspection, and command are primary; trust boundaries and native Apple reach constrain the experience."
+    },
+    {
+      "candidate_id": "CAND-SEED-006",
+      "candidate_name": "First-Class Appearance Studio",
+      "primary_domain_id": "DOM-APPEARANCE",
+      "secondary_domain_ids": [
+        "DOM-IDENTITY"
+      ],
+      "assignment_rationale": "The person is authoring Ambitions' visual expression; identity and accessibility boundaries support but do not own it."
+    },
+    {
+      "candidate_id": "CAND-SEED-007",
+      "candidate_name": "First-Class Content Share Studio",
+      "primary_domain_id": "DOM-SHARING",
+      "secondary_domain_ids": [
+        "DOM-IDENTITY",
+        "DOM-KNOWLEDGE"
+      ],
+      "assignment_rationale": "The defining outcome is deliberate external expression, supported by privacy control and source-content relationships."
+    },
+    {
+      "candidate_id": "CAND-SEED-008",
+      "candidate_name": "Goal-Attached File Storage",
+      "primary_domain_id": "DOM-KNOWLEDGE",
+      "secondary_domain_ids": [
+        "DOM-PATH",
+        "DOM-SEARCH"
+      ],
+      "assignment_rationale": "Durable custody and relationship of files is primary; goals provide attachment context and Search provides retrieval."
+    },
+    {
+      "candidate_id": "CAND-B2F829141E0DD9A3",
+      "candidate_name": "Search Find Act Inspect",
+      "primary_domain_id": "DOM-SEARCH",
+      "secondary_domain_ids": [
+        "DOM-IDENTITY"
+      ],
+      "assignment_rationale": "The journey is a global retrieval-to-action-to-inspection promise, with trust inspection as a required boundary."
+    },
+    {
+      "candidate_id": "CAND-939873A894F75DC1",
+      "candidate_name": "Search Find Ask Act Inspect",
+      "primary_domain_id": "DOM-SEARCH",
+      "secondary_domain_ids": [
+        "DOM-CONTEXT",
+        "DOM-IDENTITY"
+      ],
+      "assignment_rationale": "Search-grounded asking extends retrieval and command while depending on personal context and explicit trust inspection."
+    },
+    {
+      "candidate_id": "CAND-FA37F984A251FF01",
+      "candidate_name": "Canonical Goal Path Projection Across Surfaces",
+      "primary_domain_id": "DOM-PATH",
+      "secondary_domain_ids": [
+        "DOM-EXECUTION",
+        "DOM-TIME",
+        "DOM-SEARCH"
+      ],
+      "assignment_rationale": "The canonical path remains the durable identity while Today, Time, Motion, Search, and Trust expose projections without taking ownership."
+    },
+    {
+      "candidate_id": "CAND-C6F2EE04321B7240",
+      "candidate_name": "Offline Present-Execution Continuity",
+      "primary_domain_id": "DOM-RESILIENCE",
+      "secondary_domain_ids": [
+        "DOM-EXECUTION",
+        "DOM-IDENTITY"
+      ],
+      "assignment_rationale": "The promise is continued trustworthy use of Today under degraded conditions, with present execution and disclosure boundaries retained."
+    },
+    {
+      "candidate_id": "CAND-71C0E590F9213175",
+      "candidate_name": "Offline Search Continuity and Repair",
+      "primary_domain_id": "DOM-RESILIENCE",
+      "secondary_domain_ids": [
+        "DOM-SEARCH",
+        "DOM-IDENTITY"
+      ],
+      "assignment_rationale": "The defining promise is deterministic local Search continuity and recovery when external connectivity is unavailable."
+    }
+  ],
+  "validation_expectations": {
+    "qualified_candidate_count": 13,
+    "assignment_count": 13,
+    "unassigned_candidate_ids": [],
+    "unknown_candidate_ids": [],
+    "unknown_domain_ids": [],
+    "duplicate_primary_assignments": [],
+    "over_broad_candidate_ids": []
+  }
+}
