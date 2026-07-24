@@ -145,6 +145,13 @@ struct ProjectionStoreSurfaceReadAdapter {
         try await readProjection(.privacy, as: PrivacyProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
     }
 
+    func readReceipt(
+        minimumEventCursor: RuntimeEventCursor? = nil,
+        inspectedAt: String
+    ) async throws -> ProjectionStoreSurfaceReadEnvelope<ReceiptProjection> {
+        try await readProjection(.receipt, as: ReceiptProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
+    }
+
     func search(
         _ query: SearchQuery,
         minimumEventCursor: RuntimeEventCursor? = nil,

@@ -1,6 +1,6 @@
 import Foundation
 
-struct RuntimeEventCursor: Codable, Equatable, Hashable, Comparable {
+struct RuntimeEventCursor: Codable, Sendable, Equatable, Hashable, Comparable {
     let sequence: Int64
     let eventID: String
     let checksum: String
