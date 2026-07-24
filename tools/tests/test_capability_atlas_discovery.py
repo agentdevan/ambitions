@@ -5,8 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.capability_atlas.classification import apply_classification
-from tools.capability_atlas.classified_outputs import (
+from tools.capability_atlas.classification_pipeline import (
     AMBIGUOUS_DIRECTORY,
     CLASSIFICATION_CORE_PATHS,
     EXCLUSION_DIRECTORY,
@@ -14,6 +13,9 @@ from tools.capability_atlas.classified_outputs import (
     output_drift,
     render_outputs,
     write_outputs,
+)
+from tools.capability_atlas.classification_refinement import (
+    apply_refined_classification,
 )
 from tools.capability_atlas.cli import SUPPORTED_COMMANDS, main
 from tools.capability_atlas.discover import compile_discovery
@@ -150,7 +152,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
         self.assertEqual(candidate.candidate_id, renamed.candidate_id)
 
     def test_owner_seed_is_qualified_without_becoming_canonical(self) -> None:
-        candidate = apply_classification(compile_discovery(self.root).candidates[0])
+        candidate = apply_refined_classification(compile_discovery(self.root).candidates[0])
         self.assertEqual(candidate.classification, "capability")
         self.assertEqual(candidate.qualification_status, "qualified")
         self.assertEqual(candidate.classification_reason_code, "direct_owner_seed")
@@ -171,7 +173,7 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             evidence,
             normalized_name_hint="Contextual Search Commands",
         )
-        classified = apply_classification(candidate)
+        classified = apply_refined_classification(candidate)
         self.assertEqual(classified.classification, "implementation")
         self.assertEqual(classified.qualification_status, "supporting")
         self.assertEqual(
@@ -194,12 +196,35 @@ class CapabilityAtlasDiscoveryTests(unittest.TestCase):
             evidence,
             normalized_name_hint="python3 scripts/check-search.py",
         )
-        classified = apply_classification(candidate)
+        classified = apply_refined_classification(candidate)
         self.assertEqual(classified.classification, "evidence")
         self.assertEqual(classified.qualification_status, "supporting")
         self.assertEqual(
             classified.classification_reason_code,
-            "machine_metadata_or_command",
+            "file_or_artifact_reference",
+        )
+
+    def test_audit_capability_claim_requires_product_authority(self) -> None:
+        evidence = EvidenceExcerpt.create(
+            family_id="SRC-AUDITS",
+            authority_class="audit_evidence",
+            source_path="docs/audits/search.md",
+            start_line=20,
+            end_line=20,
+            exact_text="Ambitions helps a person find and inspect local goals through private search.",
+            extraction_kind="person_facing_promise_hint",
+            extraction_rationale="fixture",
+        )
+        candidate = CandidateRecord.from_evidence(
+            evidence,
+            normalized_name_hint="Private Goal Search",
+        )
+        classified = apply_refined_classification(candidate)
+        self.assertEqual(classified.classification, "ambiguous")
+        self.assertEqual(classified.qualification_status, "ambiguous")
+        self.assertEqual(
+            classified.classification_reason_code,
+            "capability_like_evidence_requires_authority_source",
         )
 
     def test_excluded_dependency_paths_are_not_harvested(self) -> None:
