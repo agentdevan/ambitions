@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "authority": "non_normative_capability_set_completeness_review",
+  "repository": "agentdevan/ambitions",
+  "status": "initial_set_approved_pending_completeness_review",
+  "owner_decision": {
+    "recorded_on": "2026-07-24",
+    "owner_wording": "I agree these 9 are approvable. I just wasn't sure if we should add more or review whatever else is being approved",
+    "interpretation": "The nine identities are approved as an initial capability set, not as an exclusive or complete Capability Atlas and not yet as the final basis for canon cutover."
+  },
+  "approved_initial_capability_ids": [
+    "CAP-CONTEXT-001",
+    "CAP-PATH-001",
+    "CAP-SIMULATION-001",
+    "CAP-TIME-001",
+    "CAP-SEARCH-001",
+    "CAP-APPEARANCE-001",
+    "CAP-SHARING-001",
+    "CAP-KNOWLEDGE-001",
+    "CAP-RESILIENCE-001"
+  ],
+  "taxonomy_coverage": {
+    "domain_count": 14,
+    "domains_with_primary_capability_candidates": 9,
+    "domains_without_primary_capability_candidates": 5,
+    "uncovered_domains": [
+      {
+        "domain_id": "DOM-EXECUTION",
+        "name": "Present Execution and Adaptation",
+        "purpose": "Help a person understand what is executable now, act with appropriate context, and adapt present work without collapsing into a task list."
+      },
+      {
+        "domain_id": "DOM-IDENTITY",
+        "name": "Identity, Privacy, and Trust",
+        "purpose": "Give the person legible control over who Ambitions understands them to be, what data exists, how it is used, and why the system acted."
+      },
+      {
+        "domain_id": "DOM-CAPTURE",
+        "name": "Capture and Interpretation",
+        "purpose": "Let a person express something quickly, preserve it provisionally, inspect interpretation, and place it without premature commitment."
+      },
+      {
+        "domain_id": "DOM-CLOSURE",
+        "name": "Reflection, Proof, and Closure",
+        "purpose": "Help a person understand what changed, preserve meaningful evidence, reflect on outcomes, and close work without losing history."
+      },
+      {
+        "domain_id": "DOM-APPLE",
+        "name": "Apple Ecosystem and Automation",
+        "purpose": "Extend Ambitions coherently through native Apple platforms, system surfaces, and user-authorized automation without weakening local-first control."
+      }
+    ]
+  },
+  "ambiguous_inventory": {
+    "record_count": 298,
+    "reason_counts": {
+      "capability_like_evidence_requires_authority_source": 50,
+      "decision_fragment_requires_semantic_reconciliation": 1,
+      "decision_heading_requires_product_promise_reconciliation": 1,
+      "design_implied_capability_requires_product_authority": 19,
+      "insufficient_durable_promise_evidence": 227
+    },
+    "source_family_counts": {
+      "SRC-DESIGN-CANON": 61,
+      "SRC-AUDITS": 50,
+      "SRC-NORMATIVE-SPECS": 11,
+      "SRC-QA-REMEDIATION": 155,
+      "SRC-CONSTITUTION": 1,
+      "SRC-RESEARCH": 2,
+      "SRC-ADRS": 9,
+      "SRC-LINEAR-MIRRORS": 5,
+      "SRC-PLATFORM": 4
+    }
+  },
+  "strong_additional_candidate_families": [
+    {
+      "candidate_id": "NEXT-CAPTURE-001",
+      "proposed_name": "Provisional Capture and Interpretation",
+      "primary_domain_id": "DOM-CAPTURE",
+      "confidence": "high",
+      "why_review": "Capture is a global product promise with durable provisional intake, interpretation review, routing, and recovery law, but it has no CAP identity.",
+      "likely_scope": "Express, preserve, interpret, review, and place an idea without premature commitment.",
+      "evidence_paths": [
+        "docs/canon/specifications/global/capture.md",
+        "docs/canon/specifications/journeys/goal-creation-and-activation.md",
+        "docs/canon/migration/UX_BLUEPRINT.md"
+      ]
+    },
+    {
+      "candidate_id": "NEXT-EXECUTION-001",
+      "proposed_name": "Present Execution and Adaptive Recovery",
+      "primary_domain_id": "DOM-EXECUTION",
+      "confidence": "high",
+      "why_review": "Today owns the immediate lived execution promise, narrow contextual action, changed-reality response, and missed-step recovery, but no CAP identity represents that outcome.",
+      "likely_scope": "Understand what is executable now, act, adapt, and recover without becoming a task list.",
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/today.md",
+        "docs/qa/p1-foundation-reality-inventory.md",
+        "docs/canon/specifications/app/degraded-states.md"
+      ]
+    },
+    {
+      "candidate_id": "NEXT-IDENTITY-001",
+      "proposed_name": "Personal Data, Privacy, and Identity Control",
+      "primary_domain_id": "DOM-IDENTITY",
+      "confidence": "high",
+      "why_review": "You and the privacy system promise inspectable local data boundaries, account separation, preferences, deletion, export, and identity controls; those are broader than Appearance Studio.",
+      "likely_scope": "Know what Ambitions stores, how it is used, and control identity, privacy, data, retention, export, reset, and deletion.",
+      "evidence_paths": [
+        "docs/canon/specifications/surfaces/you.md",
+        "docs/canon/specifications/systems/privacy-and-data-classification.md",
+        "docs/canon/specifications/systems/local-learning.md"
+      ]
+    },
+    {
+      "candidate_id": "NEXT-TRUST-001",
+      "proposed_name": "Trust Inspection and Reversible History",
+      "primary_domain_id": "DOM-IDENTITY",
+      "confidence": "high",
+      "why_review": "Receipts, History, source provenance, explanations, inspection, undo, and rollback form a distinct person-facing promise that Search can invoke but should not own.",
+      "likely_scope": "Inspect why something happened, what changed, where information came from, and how supported changes can be reversed or repaired.",
+      "evidence_paths": [
+        "docs/canon/specifications/global/trust-inspection.md",
+        "docs/canon/specifications/objects/receipt.md",
+        "docs/canon/specifications/objects/history-event.md"
+      ]
+    },
+    {
+      "candidate_id": "NEXT-CLOSURE-001",
+      "proposed_name": "Proof, Reflection, and Closure",
+      "primary_domain_id": "DOM-CLOSURE",
+      "confidence": "high",
+      "why_review": "Proof, progress interpretation, reflection, closure, and preserved history are a declared taxonomy domain with repeated canon and product evidence but no CAP identity.",
+      "likely_scope": "Preserve meaningful evidence, understand progress, reflect on outcomes, and close or change pursuits without losing truth.",
+      "evidence_paths": [
+        "docs/canon/specifications/objects/proof.md",
+        "docs/canon/specifications/objects/closure.md",
+        "docs/canon/CONSTITUTION.md"
+      ]
+    },
+    {
+      "candidate_id": "NEXT-APPLE-001",
+      "proposed_name": "Native Apple Reach and Automation",
+      "primary_domain_id": "DOM-APPLE",
+      "confidence": "medium",
+      "why_review": "App Intents, widgets, notifications, EventKit, share intake, deep links, and system surfaces create a coherent user outcome, but may ultimately be one platform capability or several bounded subcapabilities.",
+      "likely_scope": "Reach and act through Apple system surfaces while preserving canonical ownership, privacy, confirmation, and local-first behavior.",
+      "evidence_paths": [
+        "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md",
+        "docs/audits/external-command-adapter-contract.md",
+        "docs/canon/specifications/app/deep-linking.md"
+      ]
+    }
+  ],
+  "covered_domain_breadth_questions": [
+    {
+      "review_id": "BREADTH-GOALS-001",
+      "question": "Does Contextual Generative Goal Pathing fully represent ordinary Goal and Life Area formation, management, progression, pause, pivot, accomplishment, and closure?",
+      "likely_outcome": "Either broaden CAP-PATH-001 explicitly or add a baseline Goal and Pursuit Management capability."
+    },
+    {
+      "review_id": "BREADTH-TIME-001",
+      "question": "Does Adaptive Step Placement Reflow fully represent Time shaping, calendar views, protected time, events, recurrence, imports, and exact chronology?",
+      "likely_outcome": "Keep Reflow as a differentiator and add a broader Time Shaping and Calendar Management capability."
+    },
+    {
+      "review_id": "BREADTH-CONTEXT-001",
+      "question": "Does Skill Transference fully represent Personalization, Local Learning, adaptive guidance, preference learning, and inspectable recommendation influence?",
+      "likely_outcome": "Keep Skill Transference standalone and add or explicitly model a broader Personal Learning and Adaptive Guidance capability."
+    },
+    {
+      "review_id": "BREADTH-KNOWLEDGE-001",
+      "question": "Does Goal-Attached Files and Knowledge cover general notes, references, source provenance, collection, synthesis, and retrieval outside Goals?",
+      "likely_outcome": "Preserve goal-first scope and review a separate Knowledge Collection and Synthesis capability."
+    },
+    {
+      "review_id": "BREADTH-RESILIENCE-001",
+      "question": "Does Local-First Operational Continuity fully represent backup, restore, import/export repair, portability, and continuity controls?",
+      "likely_outcome": "Keep continuity as the umbrella and decide which portability/restoration behaviors require named subcapabilities."
+    }
+  ],
+  "not_automatically_approved": {
+    "taxonomy_domains": "Categories used to organize product meaning; they are not themselves capabilities.",
+    "gaps": "Missing specification, implementation, surface, test, or proof obligations; they are not feature approvals.",
+    "ambiguous_records": "Preserved evidence requiring semantic review; none are silently promoted.",
+    "scope_recommendations": "The six scope choices in the current owner packet remain undecided unless the owner explicitly selects them."
+  },
+  "recommended_next_gate": {
+    "name": "Capability Set Completeness and Expansion Review",
+    "outcome": "Present a complete baseline-plus-flagship capability set, distinguish top-level capabilities from subcapabilities and enabling systems, then request one final owner approval before canon installation.",
+    "canon_cutover_blocked": true
+  }
+}
