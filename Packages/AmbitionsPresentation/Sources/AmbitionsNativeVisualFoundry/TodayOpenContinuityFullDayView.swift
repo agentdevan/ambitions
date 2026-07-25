@@ -32,7 +32,6 @@ struct TodayOpenContinuityFullDayView: View {
                 .padding(.top, 12)
                 .padding(.bottom, 40)
             }
-            .scrollIndicators(.hidden)
             .background(palette.semanticPlane)
             .navigationTitle(content.interfaceCopy.fullDayTitle)
             .todayFlagshipInlineNavigationTitle()
@@ -49,6 +48,7 @@ struct TodayOpenContinuityFullDayView: View {
                             systemImage: "location.fill"
                         )
                     }
+                    .accessibilityInputLabels([content.interfaceCopy.scrollToNowTitle])
                     .accessibilityIdentifier("tfcs-scroll-to-now")
                 }
             }
@@ -90,6 +90,7 @@ struct TodayOpenContinuityFullDayView: View {
             }
             .buttonStyle(.plain)
             .accessibilityHint(content.interfaceCopy.openStartHereHint)
+            .accessibilityInputLabels([nowStep.title])
             .accessibilityIdentifier("tfcs-full-day-now-\(nowStep.id)")
             .accessibilityFocused($isNowFocused)
         } else {

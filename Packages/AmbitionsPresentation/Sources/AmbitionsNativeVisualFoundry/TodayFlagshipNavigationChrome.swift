@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct TodayFlagshipAdaptiveNavigationPassage: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     let copy: TodayFlagshipInterfaceCopy
     let commands: [TodayFlagshipNavigationCommand]
     let palette: TodayFlagshipPalette
@@ -71,24 +73,8 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
         Button {
             onCommand(command)
         } label: {
-            HStack(spacing: 8) {
-                Image(systemName: command.symbolName)
-                    .frame(width: 22)
-                    .accessibilityHidden(true)
-
-                Text(copy.navigationTitle(for: command))
-                    .fontWeight(command.isSelectedRoot ? .semibold : .regular)
-
-                Spacer(minLength: 0)
-
-                if command.isSelectedRoot {
-                    Image(systemName: "checkmark")
-                        .font(.caption.weight(.bold))
-                        .accessibilityHidden(true)
-                }
-            }
+            navigationButtonLabel(command)
             .font(.body)
-            .lineLimit(2)
             .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
             .padding(.horizontal, 10)
             .background {
@@ -101,9 +87,63 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(copy.navigationTitle(for: command))
+        .accessibilityInputLabels([copy.navigationTitle(for: command)])
         .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
         .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
         .accessibilityIdentifier("tfcs-navigation-\(command.rawValue)")
+    }
+
+    @ViewBuilder
+    private func navigationButtonLabel(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .top, spacing: 8) {
+                    navigationIcon(command)
+                    navigationTitle(command)
+                }
+
+                if command.isSelectedRoot {
+                    Label(copy.selectedRootValue, systemImage: "checkmark")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(palette.secondaryInk)
+                }
+            }
+            .padding(.vertical, 8)
+        } else {
+            HStack(spacing: 8) {
+                navigationIcon(command)
+                navigationTitle(command)
+                Spacer(minLength: 0)
+
+                if command.isSelectedRoot {
+                    Image(systemName: "checkmark")
+                        .font(.caption.weight(.bold))
+                        .accessibilityHidden(true)
+                }
+            }
+        }
+    }
+
+    private func navigationIcon(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        Image(systemName: command.symbolName)
+            .frame(width: 22)
+            .accessibilityHidden(true)
+    }
+
+    private func navigationTitle(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        Text(copy.navigationTitle(for: command))
+            .fontWeight(command.isSelectedRoot ? .semibold : .regular)
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+            .fixedSize(
+                horizontal: false,
+                vertical: dynamicTypeSize.isAccessibilitySize
+            )
     }
 
     private var rootCommands: [TodayFlagshipNavigationCommand] {
@@ -178,7 +218,12 @@ struct TodayFlagshipDock: View {
         .buttonStyle(TodayFlagshipDockPeekButtonStyle())
         .accessibilityLabel(copy.openNavigationLabel)
         .accessibilityHint(copy.navigationCommandsHint)
-        .accessibilityIdentifier("tfcs-dock-shell-peek")
+        .accessibilityInputLabels([copy.openNavigationLabel])
+        .accessibilityIdentifier(
+            reduceTransparency
+                ? "tfcs-dock-shell-peek-opaque"
+                : "tfcs-dock-shell-peek"
+        )
     }
 
     private var expandedDock: some View {
@@ -194,6 +239,7 @@ struct TodayFlagshipDock: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(copy.closeNavigationLabel)
                 .accessibilityHint(copy.closeNavigationHint)
+                .accessibilityInputLabels([copy.closeNavigationLabel])
             }
 
             dockGroup(
@@ -274,6 +320,7 @@ struct TodayFlagshipDock: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(copy.navigationTitle(for: command))
+                .accessibilityInputLabels([copy.navigationTitle(for: command)])
                 .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
                 .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
                 .accessibilityIdentifier("tfcs-dock-\(command.rawValue)")

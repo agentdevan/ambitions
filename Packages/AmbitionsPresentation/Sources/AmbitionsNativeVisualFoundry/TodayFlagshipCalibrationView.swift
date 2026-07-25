@@ -1,10 +1,15 @@
 import SwiftUI
 
+#if os(iOS)
+import UIKit
+#endif
+
 public struct TodayFlagshipCalibrationView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.layoutDirection) private var layoutDirection
     @ScaledMetric(relativeTo: .body) private var crownSpacing = 14.0
 
     @Binding private var state: TodayFlagshipJourneyState
@@ -31,29 +36,27 @@ public struct TodayFlagshipCalibrationView: View {
     }
 
     public var body: some View {
+        presentedJourney
+            .onChange(of: state.navigationPath, reconcileNativeBack)
+            .sensoryFeedback(.success, trigger: state.phase) { oldPhase, newPhase in
+                oldPhase == .savingAcceptedTruth && newPhase == .settled
+            }
+            .onChange(of: state.phase, announceTransition)
+            .tint(palette.actionAccent)
+            .accessibilityIdentifier("tfcs-journey-root")
+    }
+
+    private var navigationRoot: some View {
         NavigationStack(path: navigationPath) {
             todayRoot
                 .navigationDestination(for: TodayFlagshipRoute.self) { route in
-                    switch route {
-                    case let .fullDay(origin):
-                        TodayOpenContinuityFullDayView(
-                            content: content,
-                            state: $state,
-                            origin: origin,
-                            palette: palette
-                        )
-                    case let .step(id):
-                        if id == content.primaryStep.id {
-                            TodayFlagshipFocusedStepView(
-                                content: content,
-                                state: $state
-                            )
-                        } else {
-                            truthfulFallback
-                        }
-                    }
+                    destination(for: route)
                 }
         }
+    }
+
+    private var presentedJourney: some View {
+        navigationRoot
         .todayFlagshipConsequentialReview(isPresented: reviewPresentation) {
             TodayFlagshipReviewView(
                 content: content,
@@ -69,15 +72,25 @@ public struct TodayFlagshipCalibrationView: View {
             .presentationDetents([.medium, .large], selection: $recoveryDetent)
             .presentationDragIndicator(.visible)
         }
-        .onChange(of: state.navigationPath) { oldPath, newPath in
-            guard oldPath.isEmpty == false, newPath.isEmpty else { return }
-            _ = state.returnByNativeBackNavigation()
+    }
+
+    @ViewBuilder
+    private func destination(for route: TodayFlagshipRoute) -> some View {
+        switch route {
+        case let .fullDay(origin):
+            TodayOpenContinuityFullDayView(
+                content: content,
+                state: $state,
+                origin: origin,
+                palette: palette
+            )
+        case let .step(id):
+            if id == content.primaryStep.id {
+                TodayFlagshipFocusedStepView(content: content, state: $state)
+            } else {
+                truthfulFallback
+            }
         }
-        .sensoryFeedback(.success, trigger: state.phase) { oldPhase, newPhase in
-            oldPhase == .savingAcceptedTruth && newPhase == .settled
-        }
-        .tint(palette.actionAccent)
-        .accessibilityIdentifier("tfcs-journey-root")
     }
 
     private var todayRoot: some View {
@@ -144,23 +157,25 @@ public struct TodayFlagshipCalibrationView: View {
 
     private var crown: some View {
         Group {
-            if usesAdaptiveNavigation {
+            if usesAdaptiveNavigation || layoutDirection == .rightToLeft {
                 VStack(alignment: .leading, spacing: 4) {
                     crownTitle
                     crownRelationship
                 }
+                .frame(minHeight: 46, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true)
             } else {
                 HStack(alignment: .firstTextBaseline, spacing: 10) {
                     crownTitle
                     crownRelationship
                 }
+                .frame(
+                    height: 26 - (6 * crownScrollProgress),
+                    alignment: .leading
+                )
+                .clipped()
             }
         }
-        .frame(
-            height: (usesAdaptiveNavigation ? 46 : 26) - (6 * crownScrollProgress),
-            alignment: .leading
-        )
-        .clipped()
         .accessibilityElement(children: .combine)
         .accessibilityLabel(content.interfaceCopy.todayAccessibilityHeading)
         .accessibilityValue(crownAccessibilityValue)
@@ -252,6 +267,39 @@ public struct TodayFlagshipCalibrationView: View {
 
     private var motionPolicy: TodayOpenContinuityMotionPolicy {
         TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
+    }
+
+    private func announceTransition(
+        from oldPhase: TodayFlagshipJourneyPhase,
+        to newPhase: TodayFlagshipJourneyPhase
+    ) {
+        let announcement: String?
+        switch (oldPhase, newPhase) {
+        case (_, .interrupted):
+            announcement = content.interfaceCopy.interruptionAnnouncement
+        case (_, .recoveryReview), (_, .recoveredContinuation):
+            announcement = content.interfaceCopy.recoveryAnnouncement
+        case (.savingAcceptedTruth, .settled):
+            announcement = content.interfaceCopy.settlementAnnouncement
+        case (.settled, .todayReturned):
+            announcement = content.interfaceCopy.returnAnnouncement
+        default:
+            announcement = nil
+        }
+
+        #if os(iOS)
+        if let announcement {
+            UIAccessibility.post(notification: .announcement, argument: announcement)
+        }
+        #endif
+    }
+
+    private func reconcileNativeBack(
+        _ oldPath: [TodayFlagshipRoute],
+        _ newPath: [TodayFlagshipRoute]
+    ) {
+        guard oldPath.isEmpty == false, newPath.isEmpty else { return }
+        _ = state.returnByNativeBackNavigation()
     }
 
 }

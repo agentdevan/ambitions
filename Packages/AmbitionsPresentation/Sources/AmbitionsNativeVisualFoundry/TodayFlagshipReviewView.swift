@@ -43,7 +43,6 @@ struct TodayFlagshipReviewView: View {
                 .padding(.top, 12)
                 .padding(.bottom, 20)
             }
-            .scrollIndicators(.hidden)
             .background(palette.semanticPlane.ignoresSafeArea())
             .foregroundStyle(palette.primaryInk)
             .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -155,7 +154,7 @@ struct TodayFlagshipReviewView: View {
     }
 
     private var details: some View {
-        DisclosureGroup(content.interfaceCopy.detailsTitle) {
+        DisclosureGroup {
             VStack(alignment: .leading, spacing: 9) {
                 Text(content.primaryStep.stillCountsProposal.proofRequirement)
                 if content.primaryStep.stillCountsProposal.createsReceipt {
@@ -169,9 +168,13 @@ struct TodayFlagshipReviewView: View {
             .foregroundStyle(palette.secondaryInk)
             .padding(.top, 6)
             .accessibilityIdentifier("tfcs-review-detail-content")
+        } label: {
+            Text(content.interfaceCopy.detailsTitle)
+                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
         }
         .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.medium))
-        .frame(minHeight: 44)
+        .accessibilityInputLabels([content.interfaceCopy.detailsTitle])
         .accessibilityIdentifier("tfcs-review-details")
     }
 

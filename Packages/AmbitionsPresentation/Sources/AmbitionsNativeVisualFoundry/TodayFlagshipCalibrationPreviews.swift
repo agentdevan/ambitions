@@ -64,6 +64,30 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("B02 Root · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
+        .preferredColorScheme(.dark)
+        .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("B02 Root · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
+}
+
+#Preview("B02 Root · Long LTR") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
 #Preview("TFCS-F04 · Dock expanded · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayInitial,
@@ -148,6 +172,12 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .environment(\._accessibilityReduceMotion, true)
 }
 
+#Preview("B02 Review · Reduce Transparency") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityReduceTransparency, true)
+}
+
 #Preview("B02 Review · RTL evaluation") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
@@ -166,6 +196,16 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
 #Preview("TFCS-F08 · Successful settlement · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .settled)
         .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Settlement · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .settled
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
 }
 
 #Preview("TFCS-F09 · Returned Today · Dark") {
@@ -191,6 +231,16 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
 #Preview("B02 Recovery · Continued saved progress · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .recoveredContinuation)
         .preferredColorScheme(.dark)
+}
+
+#Preview("B02 Recovery · RTL evaluation") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
+        phase: .recoveryReview
+    )
+    .preferredColorScheme(.dark)
+    .environment(\.locale, Locale(identifier: "ar-SA"))
+    .environment(\.layoutDirection, .rightToLeft)
 }
 
 #Preview("B02 Today · Quiet") {

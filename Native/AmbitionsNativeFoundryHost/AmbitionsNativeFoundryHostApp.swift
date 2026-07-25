@@ -34,6 +34,7 @@ private struct FoundryHostRoot: View {
             variant.differentiateWithoutColor
         )
         .environment(\._accessibilityReduceMotion, variant.reduceMotion)
+        .environment(\._accessibilityReduceTransparency, variant.reduceTransparency)
     }
 }
 
@@ -159,6 +160,9 @@ private enum FoundryVariant: String {
     case b02RootDark = "b02-root-dark"
     case b02RootCompact = "b02-root-compact"
     case b02RootProMax = "b02-root-pro-max"
+    case b02RootAccessibility5 = "b02-root-accessibility5"
+    case b02RootRTL = "b02-root-rtl"
+    case b02RootLongLTR = "b02-root-long-ltr"
     case b02FullDayTypical = "b02-full-day-typical"
     case b02FullDayReturned = "b02-full-day-returned"
     case b02FullDayDense = "b02-full-day-dense"
@@ -175,18 +179,23 @@ private enum FoundryVariant: String {
     case b02ReviewAccessibility5 = "b02-review-accessibility5"
     case b02ReviewContrast = "b02-review-contrast"
     case b02ReviewNoColor = "b02-review-no-color"
+    case b02RootReduceTransparency = "b02-root-reduce-transparency"
     case b02ReviewReduceMotion = "b02-review-reduce-motion"
     case b02ReviewRTL = "b02-review-rtl"
     case b02ReviewSaving = "b02-review-saving"
+    case b02ReviewSavingRTL = "b02-review-saving-rtl"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
     case b02SettlementCompact = "b02-settlement-compact"
     case b02SettlementProMax = "b02-settlement-pro-max"
+    case b02SettlementRTL = "b02-settlement-rtl"
     case b02ReturnedTypical = "b02-returned-typical"
+    case b02ReturnedRTL = "b02-returned-rtl"
     case b02RecoveryTypical = "b02-recovery-typical"
     case b02RecoveryInterrupted = "b02-recovery-interrupted"
     case b02RecoveryContinued = "b02-recovery-continued"
+    case b02RecoveryRTL = "b02-recovery-rtl"
     case b02QuietToday = "b02-quiet-today"
     case b02VeryDenseToday = "b02-very-dense-today"
     case b02OfflineLocal = "b02-offline-local"
@@ -224,7 +233,7 @@ private enum FoundryVariant: String {
                 .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
         case .b02FullDayAccessibility5, .b02FocusedAccessibility5,
-                .b02ReviewAccessibility5:
+                .b02ReviewAccessibility5, .b02RootAccessibility5:
             .accessibility5
         default:
             .large
@@ -244,17 +253,17 @@ private enum FoundryVariant: String {
             .reviewingProposal
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
-                .b02SettlementProMax:
+                .b02SettlementProMax, .b02SettlementRTL:
             .settled
-        case .tfcsF09, .b02ReturnedTypical, .b02FullDayReturned:
+        case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned:
             .todayReturned
-        case .tfcsF10, .b02RecoveryTypical:
+        case .tfcsF10, .b02RecoveryTypical, .b02RecoveryRTL:
             .recoveryReview
         case .stateInterrupted, .b02RecoveryInterrupted:
             .interrupted
         case .b02RecoveryContinued:
             .recoveredContinuation
-        case .stateSaving, .b02ReviewSaving:
+        case .stateSaving, .b02ReviewSaving, .b02ReviewSavingRTL:
             .savingAcceptedTruth
         default:
             .todayInitial
@@ -265,9 +274,11 @@ private enum FoundryVariant: String {
         switch self {
         case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
-        case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL, .b02ReviewRTL:
+        case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL, .b02ReviewRTL,
+                .b02ReviewSavingRTL, .b02RootRTL, .b02SettlementRTL,
+                .b02ReturnedRTL, .b02RecoveryRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
-        case .b02FocusedLongLTR:
+        case .b02FocusedLongLTR, .b02RootLongLTR:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
         case .b02QuietToday:
             TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
@@ -289,6 +300,9 @@ private enum FoundryVariant: String {
     var rightToLeft: Bool {
         self == .stressLongRTL || self == .b02FullDayRTL
             || self == .b02FocusedRTL || self == .b02ReviewRTL
+            || self == .b02ReviewSavingRTL || self == .b02RootRTL
+            || self == .b02SettlementRTL || self == .b02ReturnedRTL
+            || self == .b02RecoveryRTL
     }
 
     var localeIdentifier: String {
@@ -301,6 +315,10 @@ private enum FoundryVariant: String {
 
     var reduceMotion: Bool {
         self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
+    }
+
+    var reduceTransparency: Bool {
+        self == .b02RootReduceTransparency
     }
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {

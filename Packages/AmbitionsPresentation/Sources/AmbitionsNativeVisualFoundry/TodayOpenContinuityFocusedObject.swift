@@ -68,7 +68,6 @@ struct TodayOpenContinuityFocusedObject: View {
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("tfcs-focused-object-field")
             }
-            .scrollIndicators(.hidden)
 
             if dynamicTypeSize.isAccessibilitySize == false {
                 outcomeAction
@@ -297,6 +296,9 @@ struct TodayOpenContinuityFocusedObject: View {
             .buttonStyle(TodayOpenContinuityPrimaryActionStyle(palette: palette.openContinuity))
             .disabled(isOutcomeEnabled == false)
             .accessibilityHint(content.interfaceCopy.reviewStillCountsHint)
+            .accessibilityInputLabels([
+                content.primaryStep.stillCountsProposal.outcomeTitle
+            ])
             .accessibilityIdentifier("tfcs-select-still-counts")
         }
         .frame(maxWidth: .infinity, alignment: .leading)

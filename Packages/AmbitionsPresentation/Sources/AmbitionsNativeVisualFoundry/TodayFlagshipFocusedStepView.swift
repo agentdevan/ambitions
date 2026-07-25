@@ -89,7 +89,6 @@ struct TodayFlagshipFocusedStepView: View {
             .padding(.top, 16)
             .padding(.bottom, 50)
         }
-        .scrollIndicators(.hidden)
     }
 
     private var identity: some View {

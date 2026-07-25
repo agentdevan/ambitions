@@ -13,69 +13,80 @@ struct TodayOpenContinuityRoot: View {
     let onCrownScrollProgress: (CGFloat) -> Void
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    if usesAdaptiveNavigation {
-                        TodayFlagshipAdaptiveNavigationPassage(
+        GeometryReader { viewport in
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        if usesAdaptiveNavigation {
+                            TodayFlagshipAdaptiveNavigationPassage(
+                                copy: content.interfaceCopy,
+                                commands: TodayFlagshipNavigationCommand.allCases,
+                                palette: palette,
+                                onCommand: onNavigationCommand
+                            )
+                        }
+
+                        TodayOpenContinuityStartHere(
                             copy: content.interfaceCopy,
-                            commands: TodayFlagshipNavigationCommand.allCases,
+                            step: visibleStartHere,
                             palette: palette,
-                            onCommand: onNavigationCommand
+                            showsAction: state.phase != .todayReturned,
+                            onOpen: {
+                                _ = state.openStartHere()
+                            }
                         )
-                    }
+                        .accessibilityFocused($accessibilityFocus, equals: .startHere)
 
-                    TodayOpenContinuityStartHere(
-                        copy: content.interfaceCopy,
-                        step: visibleStartHere,
-                        palette: palette,
-                        showsAction: state.phase != .todayReturned,
-                        onOpen: {
-                            _ = state.openStartHere()
+                        if let contextSeam = content.contextSeam,
+                           contextSeam.affectedObjectID == visibleStartHere.id {
+                            TodayOpenContinuityContextSeam(
+                                seam: contextSeam,
+                                palette: palette
+                            )
                         }
-                    )
-                    .accessibilityFocused($accessibilityFocus, equals: .startHere)
 
-                    if let contextSeam = content.contextSeam,
-                       contextSeam.affectedObjectID == visibleStartHere.id {
-                        TodayOpenContinuityContextSeam(
-                            seam: contextSeam,
-                            palette: palette
+                        if state.phase == .todayReturned {
+                            returnedContinuity
+                        }
+
+                        TodayOpenContinuityTimeline(
+                            content: timelineContent,
+                            visibleStartHereID: visibleStartHere.id,
+                            mode: .overview,
+                            palette: palette,
+                            shouldFocusFullDayAction: state.focusAnchor == .fullDayAction,
+                            onOpenFullDay: {
+                                _ = state.openFullDay()
+                            }
                         )
+                        .frame(maxHeight: .infinity, alignment: .top)
                     }
-
-                    if state.phase == .todayReturned {
-                        returnedContinuity
-                    }
-
-                    TodayOpenContinuityTimeline(
-                        content: timelineContent,
-                        visibleStartHereID: visibleStartHere.id,
-                        mode: .overview,
-                        palette: palette,
-                        shouldFocusFullDayAction: state.focusAnchor == .fullDayAction,
-                        onOpenFullDay: {
-                            _ = state.openFullDay()
-                        }
+                    .frame(
+                        minHeight: max(0, viewport.size.height - 54),
+                        alignment: .top
                     )
+                    .frame(maxWidth: 560, alignment: .leading)
+                    .padding(.leading, 24)
+                    .padding(.trailing, trailingPadding)
+                    .padding(.bottom, 54)
                 }
-                .frame(maxWidth: 560, alignment: .leading)
-                .padding(.leading, 24)
-                .padding(.trailing, trailingPadding)
-                .padding(.bottom, 54)
-            }
-            .scrollIndicators(.hidden)
-            .onScrollGeometryChange(for: CGFloat.self) { geometry in
-                min(max(0, geometry.contentOffset.y + geometry.contentInsets.top) / 56, 1)
-            } action: { _, progress in
-                onCrownScrollProgress(progress)
-            }
-            .onChange(of: state.phase) { _, phase in
-                routeFocus(for: phase)
-                guard phase == .todayReturned else { return }
-                let anchor = content.returnContract.focusAnchorID
-                withAnimation(motionPolicy.stateAnimation) {
-                    proxy.scrollTo(anchor, anchor: .bottom)
+                .contentMargins(
+                    .trailing,
+                    usesAdaptiveNavigation ? 0 : 54,
+                    for: .scrollIndicators
+                )
+                .onScrollGeometryChange(for: CGFloat.self) { geometry in
+                    min(max(0, geometry.contentOffset.y + geometry.contentInsets.top) / 56, 1)
+                } action: { _, progress in
+                    onCrownScrollProgress(progress)
+                }
+                .onChange(of: state.phase) { _, phase in
+                    routeFocus(for: phase)
+                    guard phase == .todayReturned else { return }
+                    let anchor = content.returnContract.focusAnchorID
+                    withAnimation(motionPolicy.stateAnimation) {
+                        proxy.scrollTo(anchor, anchor: .bottom)
+                    }
                 }
             }
         }
@@ -329,6 +340,7 @@ struct TodayOpenContinuityStartHere: View {
         }
         .buttonStyle(TodayOpenContinuityPrimaryActionStyle(palette: palette.openContinuity))
         .accessibilityHint(copy.openStartHereHint)
+        .accessibilityInputLabels([step.primaryActionTitle, copy.startHereTitle])
         .accessibilityIdentifier("tfcs-open-start-here")
     }
 }

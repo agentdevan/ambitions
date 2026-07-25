@@ -621,6 +621,18 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertTrue(timelineSource.contains(".lineLimit(2)"))
     }
 
+    func testB02TallOverviewFillsAvailablePlaneWithoutNewTruth() throws {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
+        let timelineSource = try foundrySource(named: "TodayOpenContinuityTimeline.swift")
+
+        XCTAssertEqual(fixture.timeline.count, 3)
+        XCTAssertFalse(fixture.timeline.contains { $0.canonicalObjectID.hasPrefix("lane.") })
+        XCTAssertTrue(rootSource.contains("GeometryReader { viewport in"))
+        XCTAssertTrue(rootSource.contains("minHeight: max(0, viewport.size.height - 54)"))
+        XCTAssertTrue(timelineSource.contains("mode == .overview ? .infinity : nil"))
+    }
+
     func testB02FullDayUsesExplicitOriginNowIdentity() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
 

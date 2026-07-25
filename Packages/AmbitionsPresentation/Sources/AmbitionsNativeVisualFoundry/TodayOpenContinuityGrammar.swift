@@ -185,18 +185,28 @@ struct TodayOpenContinuityPrimaryActionStyle: ButtonStyle {
             .frame(minHeight: 44)
             .padding(.horizontal, 16)
             .background {
-                UnevenRoundedRectangle(
-                    topLeadingRadius: 12,
-                    bottomLeadingRadius: 4,
-                    bottomTrailingRadius: 12,
-                    topTrailingRadius: 4,
-                    style: .continuous
-                )
-                .fill(palette.ambitionsAccent.opacity(isEnabled ? 1 : 0.42))
+                actionShape
+                    .fill(palette.ambitionsAccent.opacity(isEnabled ? 1 : 0.42))
+            }
+            .overlay {
+                if palette.contrast == .increased {
+                    actionShape
+                        .stroke(palette.labelPrimary.opacity(0.88), lineWidth: 1.5)
+                }
             }
             .opacity(configuration.isPressed ? 0.78 : 1)
             .scaleEffect(reduceMotion ? 1 : configuration.isPressed ? 0.985 : 1)
             .contentShape(Rectangle())
+    }
+
+    private var actionShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: 12,
+            bottomLeadingRadius: 4,
+            bottomTrailingRadius: 12,
+            topTrailingRadius: 4,
+            style: .continuous
+        )
     }
 }
 

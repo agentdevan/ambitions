@@ -99,9 +99,21 @@ struct TodayOpenContinuityTimeline: View {
                             )
                         }
                     }
+                    .frame(
+                        maxHeight: mode == .overview ? .infinity : nil,
+                        alignment: .top
+                    )
                 }
             }
+            .frame(
+                maxHeight: mode == .overview ? .infinity : nil,
+                alignment: .top
+            )
         }
+        .frame(
+            maxHeight: mode == .overview ? .infinity : nil,
+            alignment: .top
+        )
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(
             mode == .overview ? "tfcs-today-overview" : "tfcs-full-day-timeline"
@@ -157,6 +169,7 @@ struct TodayOpenContinuityTimeline: View {
             .frame(minHeight: 44)
             .contentShape(Rectangle())
             .foregroundStyle(palette.articulationAccent)
+            .accessibilityInputLabels([content.interfaceCopy.viewFullDayTitle])
             .accessibilityFocused($isFullDayActionFocused)
             .accessibilityIdentifier("tfcs-view-full-day")
             .onAppear {
@@ -223,6 +236,18 @@ private struct TodayOpenContinuityTimelineRow: View {
     let isOverview: Bool
 
     var body: some View {
+        timelineRow
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(
+                [item.objectTitle, item.timeLabel, item.relationship, anchorTitle]
+                    .joined(separator: ", ")
+            )
+            .accessibilityIdentifier(
+                "\(isOverview ? "tfcs-overview-row" : "tfcs-full-day-row")-\(item.canonicalObjectID)"
+            )
+    }
+
+    private var timelineRow: some View {
         HStack(alignment: .top, spacing: 9) {
             TodayOpenContinuitySpine(
                 kind: nodeKind,
@@ -232,6 +257,7 @@ private struct TodayOpenContinuityTimelineRow: View {
             )
             .frame(width: 28)
             .frame(minHeight: isOverview ? 58 : 68)
+            .frame(maxHeight: isOverview ? .infinity : nil)
             .padding(.leading, 5)
 
             VStack(alignment: .leading, spacing: 5) {
@@ -259,13 +285,9 @@ private struct TodayOpenContinuityTimelineRow: View {
             .padding(.bottom, isOverview ? 8 : 12)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(
-            [item.objectTitle, item.timeLabel, item.relationship, anchorTitle]
-                .joined(separator: ", ")
-        )
-        .accessibilityIdentifier(
-            "\(isOverview ? "tfcs-overview-row" : "tfcs-full-day-row")-\(item.canonicalObjectID)"
+        .frame(
+            maxHeight: isOverview ? .infinity : nil,
+            alignment: .top
         )
     }
 

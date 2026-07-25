@@ -32,7 +32,11 @@ struct TodayOpenContinuitySpine: View {
     private var connector: some View {
         Rectangle()
             .fill(connectorColor)
-            .frame(width: kind == .saving ? 2 : 1)
+            .frame(
+                width: kind == .saving
+                    ? (palette.contrast == .increased ? 3 : 2)
+                    : (palette.contrast == .increased ? 2 : 1)
+            )
             .frame(maxHeight: .infinity)
     }
 

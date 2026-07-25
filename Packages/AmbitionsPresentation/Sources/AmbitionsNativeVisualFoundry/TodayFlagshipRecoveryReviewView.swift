@@ -22,7 +22,6 @@ struct TodayFlagshipRecoveryReviewView: View {
                 .padding(.top, 18)
                 .padding(.bottom, 28)
             }
-            .scrollIndicators(.hidden)
             .background(palette.semanticPlane.ignoresSafeArea())
             .foregroundStyle(palette.primaryInk)
             .navigationTitle(content.interfaceCopy.recoveryTitle)
@@ -89,6 +88,7 @@ struct TodayFlagshipRecoveryReviewView: View {
         .controlSize(.large)
         .frame(minHeight: 44, alignment: .leading)
         .accessibilityHint(choice.consequence)
+        .accessibilityInputLabels([choice.title])
         .accessibilityIdentifier(choice.id)
     }
 

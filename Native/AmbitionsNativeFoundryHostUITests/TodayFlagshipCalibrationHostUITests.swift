@@ -883,6 +883,183 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(element("tfcs-dock-shell-peek").exists)
     }
 
+}
+
+extension TodayFlagshipCalibrationHostUITests {
+    func testB02AccessibilityAndAdaptivityMatrix() throws {
+        launch("b02-review-accessibility5")
+
+        let accessibilityReview = element("tfcs-consequential-review")
+        let accessibilityCancel = element("tfcs-cancel-review")
+        let accessibilityCommit = element("tfcs-commit-still-counts")
+        assertExists([accessibilityReview, accessibilityCancel, accessibilityCommit])
+        scrollUntilHittable(accessibilityCommit)
+        XCTAssertTrue(accessibilityCancel.isHittable)
+        XCTAssertLessThan(accessibilityCancel.frame.minY, accessibilityCommit.frame.minY)
+        assertMinimumTarget(accessibilityCancel)
+        assertMinimumTarget(accessibilityCommit)
+        assertEveryVisibleButtonHasMinimumTargetAndDistinctName()
+
+        app.terminate()
+        launch("b02-root-accessibility5")
+        let passage = element("tfcs-adaptive-navigation-passage")
+        let passageCommands = ["today", "goals", "time", "you", "search", "capture"].map {
+            element("tfcs-navigation-\($0)")
+        }
+        assertExists([passage])
+        for command in passageCommands {
+            scrollUntilHittable(command)
+            assertMinimumTarget(command)
+        }
+
+        let chromeSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+        XCTAssertTrue(chromeSource.contains("@Environment(\\.dynamicTypeSize)"))
+        XCTAssertTrue(
+            chromeSource.contains(".lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)")
+        )
+
+        app.terminate()
+        launch("b02-root-reduce-transparency")
+        let opaqueRoot = element("tfcs-today-root")
+        let opaqueDock = element("tfcs-dock-shell-peek-opaque")
+        assertExists([opaqueRoot, opaqueDock])
+        assertMinimumTarget(opaqueDock)
+        assertEveryVisibleButtonHasMinimumTargetAndDistinctName()
+
+        app.terminate()
+        launch("b02-root-rtl")
+        let rtlCrown = element("tfcs-today-heading")
+        let rtlRootStartHere = element("tfcs-start-here-object")
+        assertExists([rtlCrown, rtlRootStartHere])
+        XCTAssertGreaterThan(rtlCrown.frame.height, 30)
+        XCTAssertLessThan(rtlCrown.frame.maxY, rtlRootStartHere.frame.minY)
+        XCTAssertTrue((rtlCrown.value as? String)?.contains("في المنزل قبل العشاء") == true)
+
+        app.terminate()
+        launch("b02-full-day-rtl")
+        let rtlFullDay = element("tfcs-full-day-root")
+        let rtlFullDayNow = element("tfcs-full-day-now-step.nursery-ready-for-crib")
+        assertExists([rtlFullDay, rtlFullDayNow, element("tfcs-full-day-timeline")])
+        XCTAssertTrue(rtlFullDayNow.label.contains("جهّز زاوية سرير الطفل"))
+        assertArabicOnlyLabels(in: rtlFullDay)
+
+        app.terminate()
+        launch("b02-focused-rtl")
+        let rtlIdentity = element("tfcs-focused-identity")
+        let rtlParent = element("tfcs-focused-parent-pursuit")
+        let rtlCurrent = element("tfcs-focused-current-truth")
+        assertExists([rtlIdentity, rtlParent, rtlCurrent])
+        XCTAssertTrue(rtlIdentity.label.contains("جهّز زاوية سرير الطفل"))
+        XCTAssertTrue(rtlParent.label.contains("نستقبل طفلنا في منزلنا"))
+        XCTAssertLessThan(rtlIdentity.frame.minY, rtlParent.frame.minY)
+        XCTAssertLessThan(rtlParent.frame.minY, rtlCurrent.frame.minY)
+        XCTAssertTrue(app.navigationBars.buttons.firstMatch.exists)
+        assertArabicOnlyLabels(in: element("tfcs-focused-step"))
+
+        app.terminate()
+        launch("b02-review-rtl")
+        assertExists([
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth"),
+            element("tfcs-commit-still-counts"),
+            element("tfcs-cancel-review")
+        ])
+        assertArabicOnlyLabels(in: element("tfcs-consequential-review"))
+
+        app.terminate()
+        launch("b02-review-saving-rtl")
+        assertExists([element("tfcs-saving-posture"), element("tfcs-consequential-review")])
+        assertArabicOnlyLabels(in: element("tfcs-consequential-review"))
+
+        app.terminate()
+        launch("b02-settlement-rtl")
+        assertExists([
+            element("tfcs-settled-truth"),
+            element("tfcs-view-history"),
+            element("tfcs-return-to-today")
+        ])
+        assertArabicOnlyLabels(in: element("tfcs-focused-step"))
+
+        app.terminate()
+        launch("b02-returned-rtl")
+        assertExists([
+            element("tfcs-returned-settled-step"),
+            element("tfcs-start-here-object"),
+            element("tfcs-today-overview")
+        ])
+        assertArabicOnlyLabels(in: element("tfcs-today-root"))
+
+        app.terminate()
+        launch("b02-recovery-rtl")
+        let recoveryReview = element("tfcs-recovery-review")
+        assertExists([
+            recoveryReview,
+            element("recovery.continue-saved-progress"),
+            element("recovery.keep-step")
+        ])
+        assertArabicOnlyLabels(in: recoveryReview)
+        app.swipeDown()
+        XCTAssertTrue(element("tfcs-interruption-seam").waitForExistence(timeout: 4))
+        XCTAssertTrue(element("tfcs-focused-step").exists)
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
+
+        app.terminate()
+        launch("b02-focused-long-ltr")
+        let longIdentity = element("tfcs-focused-identity")
+        let longOutcome = element("tfcs-select-still-counts")
+        XCTAssertTrue(longIdentity.waitForExistence(timeout: 3))
+        XCTAssertTrue(longIdentity.label.contains("Make the nursery ready for the crib"))
+        scrollUntilHittable(longOutcome)
+        assertMinimumTarget(longOutcome)
+
+        app.terminate()
+        launch("b02-review-no-color")
+        let current = element("tfcs-review-current-truth")
+        let proposed = element("tfcs-proposed-truth")
+        let seam = element("tfcs-review-transition-seam")
+        assertExists([current, proposed, seam])
+        XCTAssertNotEqual(current.label, proposed.label)
+        XCTAssertTrue(current.label.contains("Right now"))
+        XCTAssertTrue(proposed.label.contains("Still counts"))
+
+        app.terminate()
+        launch("b02-review-contrast")
+        assertExists([
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth"),
+            element("tfcs-commit-still-counts"),
+            element("tfcs-cancel-review")
+        ])
+
+        app.terminate()
+        launch("b02-root-dark")
+        let overview = element("tfcs-today-overview")
+        let dock = element("tfcs-dock-shell-peek")
+        let overviewRows = overview.descendants(matching: .any)
+            .allElementsBoundByIndex
+            .filter { $0.identifier.hasPrefix("tfcs-overview-row-") }
+        XCTAssertEqual(overviewRows.count, 3)
+        let rootScrollView = app.scrollViews.firstMatch
+        XCTAssertTrue(rootScrollView.exists)
+        rootScrollView.swipeUp(velocity: .slow)
+        let scrollIndicator = app.otherElements.matching(
+            NSPredicate(format: "label BEGINSWITH %@", "Vertical scroll bar")
+        ).firstMatch
+        XCTAssertTrue(scrollIndicator.waitForExistence(timeout: 2))
+        XCTAssertFalse(scrollIndicator.frame.intersects(dock.frame))
+
+        let activeScrollEvidence = XCTAttachment(screenshot: app.screenshot())
+        activeScrollEvidence.name = "B02-T10-active-scroll-indicator-dock-clear"
+        activeScrollEvidence.lifetime = .keepAlways
+        add(activeScrollEvidence)
+
+        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
+        XCTAssertTrue(rootSource.contains("for: .scrollIndicators"))
+        XCTAssertTrue(rootSource.contains("accessibilityFocused"))
+        XCTAssertTrue(chromeSource.contains("accessibilityInputLabels"))
+
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()
@@ -953,6 +1130,19 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
     ) {
         XCTAssertGreaterThanOrEqual(element.frame.width, 44, file: file, line: line)
         XCTAssertGreaterThanOrEqual(element.frame.height, 44, file: file, line: line)
+    }
+
+    private func assertEveryVisibleButtonHasMinimumTargetAndDistinctName(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let buttons = app.buttons.allElementsBoundByIndex.filter { $0.isHittable }
+        let names = buttons.map { $0.label }
+        XCTAssertFalse(names.contains(where: \.isEmpty), file: file, line: line)
+        XCTAssertEqual(Set(names).count, names.count, file: file, line: line)
+        for button in buttons {
+            assertMinimumTarget(button, file: file, line: line)
+        }
     }
 
     private func scrollUntilHittable(

@@ -73,11 +73,11 @@ struct TodayOpenContinuityTruthComparison: View {
                     .fill(kind == .proposed ? palette.proposedTruthPlane : palette.currentTruthPlane)
             }
             .overlay {
-                if differentiateWithoutColor {
+                if differentiateWithoutColor || palette.openContinuity.contrast == .increased {
                     reliefShape.stroke(
                         kind == .proposed ? palette.articulationAccent : palette.secondaryInk,
                         style: StrokeStyle(
-                            lineWidth: kind == .proposed ? 1.5 : 1,
+                            lineWidth: kind == .proposed ? 2 : 1.5,
                             dash: kind == .proposed ? [5, 4] : []
                         )
                     )
@@ -191,6 +191,7 @@ struct TodayOpenContinuityCommitBar: View {
         .buttonBorderShape(.roundedRectangle(radius: 8))
         .disabled(isSaving)
         .accessibilityHint(cancelHint)
+        .accessibilityInputLabels([cancelTitle])
         .accessibilityIdentifier("tfcs-cancel-review")
     }
 
@@ -204,6 +205,7 @@ struct TodayOpenContinuityCommitBar: View {
         .buttonStyle(TodayOpenContinuityPrimaryActionStyle(palette: palette.openContinuity))
         .disabled(isSaving)
         .accessibilityHint(commitHint)
+        .accessibilityInputLabels([commitTitle])
         .accessibilityIdentifier("tfcs-commit-still-counts")
     }
 }
@@ -297,7 +299,6 @@ struct TodayOpenContinuitySettlementView: View {
                         alignment: .topLeading
                     )
                 }
-                .scrollIndicators(.hidden)
             }
 
             TodayOpenContinuityReturnBar(
@@ -423,25 +424,30 @@ struct TodayOpenContinuitySettlementView: View {
             .frame(width: 22)
             .frame(minHeight: 60)
 
-            DisclosureGroup(
-                content.interfaceCopy.viewHistoryTitle,
-                isExpanded: historyDisclosure
-            ) {
+            DisclosureGroup(isExpanded: historyDisclosure) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(content.receipt.receiptSummary)
                     Text(content.receipt.historySummary)
                     Text(content.receipt.recordedLabel)
-                    Text("Record: \(content.receipt.id)")
+                    Text(
+                        "\(content.interfaceCopy.recordIdentifierPrefix): "
+                            + content.receipt.id
+                    )
                         .font(TodayOpenContinuityTypographyRole.metadata.font.monospaced())
                         .foregroundStyle(palette.tertiaryInk)
                 }
                 .font(TodayOpenContinuityTypographyRole.relationship.font)
                 .foregroundStyle(palette.secondaryInk)
                 .padding(.top, 10)
+            } label: {
+                Text(content.interfaceCopy.viewHistoryTitle)
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
             }
             .font(TodayOpenContinuityTypographyRole.action.font)
             .foregroundStyle(palette.primaryInk)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityInputLabels([content.interfaceCopy.viewHistoryTitle])
         }
     }
 }
@@ -508,6 +514,7 @@ struct TodayOpenContinuityReturnBar: View {
         .buttonBorderShape(.roundedRectangle(radius: 8))
         .controlSize(.large)
         .tint(palette.articulationAccent)
+        .accessibilityInputLabels([title])
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
