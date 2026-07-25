@@ -527,6 +527,40 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertFalse(grammarSources.contains("let differentiateWithoutColor"))
     }
 
+    func testB02FoundryKeepsSystemTypographyAndItsPackageLocalBoundary() throws {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let sourceRoot = packageRoot
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let sourceFiles = try FileManager.default.contentsOfDirectory(
+            at: sourceRoot,
+            includingPropertiesForKeys: nil
+        ).filter { $0.pathExtension == "swift" }
+        let foundrySource = try sourceFiles.map {
+            try String(contentsOf: $0, encoding: .utf8)
+        }.joined(separator: "\n")
+
+        XCTAssertFalse(foundrySource.contains("Font.custom"))
+        XCTAssertFalse(foundrySource.contains(".custom("))
+        XCTAssertFalse(foundrySource.contains("import AmbitionsFlagshipUI"))
+        XCTAssertFalse(foundrySource.contains("import AmbitionsFlagshipFoundation"))
+        XCTAssertFalse(foundrySource.contains("import AmbitionsPresentationContracts"))
+
+        let manifest = try String(
+            contentsOf: packageRoot.appendingPathComponent("Package.swift"),
+            encoding: .utf8
+        )
+        XCTAssertNotNil(
+            manifest.range(
+                of: #"\.target\(name:\s*"AmbitionsNativeVisualFoundry"\)"#,
+                options: .regularExpression
+            ),
+            "The Foundry target must remain package-local and dependency-free"
+        )
+    }
+
     func testB02OverviewSelectionIsDeterministicAndBounded() throws {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
         let overview = todayOverviewObjects(

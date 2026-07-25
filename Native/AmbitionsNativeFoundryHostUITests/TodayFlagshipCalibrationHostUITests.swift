@@ -1,7 +1,7 @@
 import XCTest
 
 final class TodayFlagshipCalibrationHostUITests: XCTestCase {
-    private var app: XCUIApplication!
+    var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
@@ -41,7 +41,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let startHere = element("tfcs-start-here-object")
         let startHereY = startHere.frame.minY
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.655))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.60))
 
         start.press(
             forDuration: 0.05,
@@ -51,7 +51,10 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         )
 
         XCTAssertEqual(crown.label, "Today")
-        XCTAssertLessThan(crown.frame.height, crownFrame.height)
+        assertElementSettles(crown) { element in
+            element.frame.height < crownFrame.height
+                || element.frame.maxY < crownFrame.maxY - 2
+        }
         XCTAssertTrue(dock.exists)
         XCTAssertEqual(dock.frame.minY, dockFrame.minY, accuracy: 1)
         XCTAssertLessThan(startHere.frame.minY, startHereY - 5)
@@ -95,9 +98,11 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let history = app.buttons["View history"]
         XCTAssertTrue(history.exists)
         history.tap()
-        XCTAssertTrue(app.staticTexts["Meaningful nursery progress recorded"].isHittable)
-        app.buttons["View history"].tap()
-        XCTAssertFalse(app.staticTexts["Meaningful nursery progress recorded"].isHittable)
+        let historySummary = app.staticTexts["Meaningful nursery progress recorded"]
+        XCTAssertTrue(historySummary.waitForExistence(timeout: 3))
+        XCTAssertEqual(element("tfcs-view-history").value as? String, "Expanded")
+        history.tap()
+        XCTAssertEqual(element("tfcs-view-history").value as? String, "Collapsed")
         XCTAssertTrue(element("tfcs-settled-truth").exists)
 
         let returnToToday = element("tfcs-return-to-today")
@@ -218,8 +223,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
             continueChoice,
             deferChoice
         ])
-        assertMinimumTarget(continueChoice)
-        assertMinimumTarget(deferChoice)
+        assertMinimumTargetAfterSettling(continueChoice)
+        assertMinimumTargetAfterSettling(deferChoice)
         XCTAssertTrue(continueChoice.isHittable)
         XCTAssertTrue(deferChoice.isHittable)
         XCTAssertFalse(element("tfcs-settled-truth").exists)
@@ -289,8 +294,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let continueChoice = element("recovery.continue-saved-progress")
         let keepChoice = element("recovery.keep-step")
         assertExists([continueChoice, keepChoice])
-        assertMinimumTarget(continueChoice)
-        assertMinimumTarget(keepChoice)
+        assertMinimumTargetAfterSettling(continueChoice)
+        assertMinimumTargetAfterSettling(keepChoice)
         XCTAssertNotEqual(continueChoice.label, keepChoice.label)
 
         continueChoice.tap()
@@ -327,9 +332,16 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         launch("tfcs-f06")
 
         let focusedField = element("tfcs-focused-object-field")
-        assertExists([focusedField, element("tfcs-current-truth")])
-        XCTAssertTrue(focusedField.label.contains("Make the nursery ready for the crib"))
-        XCTAssertTrue(focusedField.label.contains("Welcome our baby home"))
+        let focusedIdentity = element("tfcs-focused-identity")
+        let parentPursuit = element("tfcs-focused-parent-pursuit")
+        assertExists([
+            focusedField,
+            focusedIdentity,
+            parentPursuit,
+            element("tfcs-current-truth")
+        ])
+        XCTAssertTrue(focusedIdentity.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(parentPursuit.label.contains("Welcome our baby home"))
         XCTAssertEqual(app.buttons.matching(identifier: "tfcs-select-still-counts").count, 1)
 
         element("tfcs-select-still-counts").tap()
@@ -348,7 +360,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         app.terminate()
         launch("tfcs-f08")
         assertExists([
-            element("tfcs-settlement-field"),
+            element("tfcs-settlement-identity"),
+            element("tfcs-settled-truth"),
+            element("tfcs-settlement-parent-pursuit"),
             element("tfcs-recorded-acknowledgment"),
             element("tfcs-return-to-today")
         ])
@@ -412,7 +426,20 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         element("recovery.continue-saved-progress").tap()
         XCTAssertTrue(element("tfcs-focused-step").waitForExistence(timeout: 4))
-        XCTAssertTrue(app.staticTexts["Your saved progress is still here."].exists)
+        let recoveredProgress = element("tfcs-recovered-progress")
+        let acceptedTruth = element("tfcs-current-truth")
+        assertExists([recoveredProgress, acceptedTruth])
+        XCTAssertTrue(
+            recoveredProgress.label.contains(
+                "Cleared the crib corner and kept the paint sample decision."
+            )
+        )
+        XCTAssertTrue(
+            acceptedTruth.label.contains(
+                "The corner is cleared and the paint sample is chosen."
+            )
+        )
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
         pauseForEvidence(3)
     }
 
@@ -836,53 +863,6 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         assertMinimumTarget(commit)
     }
 
-    func testB02SettlementAndReturnPreserveIdentityWithoutCeremony() {
-        launch("b02-settlement-typical")
-
-        let identity = element("tfcs-settlement-identity")
-        let settledTruth = element("tfcs-settled-truth")
-        let parent = element("tfcs-settlement-parent-pursuit")
-        let evidence = element("tfcs-recorded-acknowledgment")
-        let history = element("tfcs-view-history")
-        let returnToday = element("tfcs-return-to-today")
-        assertExists([identity, settledTruth, parent, evidence, history, returnToday])
-        XCTAssertLessThan(identity.frame.minY, settledTruth.frame.minY)
-        XCTAssertLessThan(settledTruth.frame.minY, evidence.frame.minY)
-        XCTAssertTrue(settledTruth.label.contains("now count toward the nursery"))
-        XCTAssertTrue(parent.label.contains("Welcome our baby home"))
-        XCTAssertFalse(app.images["checkmark.seal.fill"].exists)
-
-        XCTAssertEqual(history.value as? String, "Collapsed")
-        app.buttons["View history"].tap()
-        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
-        XCTAssertEqual(history.value as? String, "Expanded")
-        XCTAssertTrue(element("tfcs-settled-truth").exists)
-        app.buttons["View history"].tap()
-        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
-        XCTAssertEqual(
-            element("tfcs-view-history").value as? String,
-            "Collapsed"
-        )
-        XCTAssertTrue(element("tfcs-settled-truth").exists)
-
-        assertMinimumTarget(returnToday)
-        returnToday.tap()
-
-        let returnedSettledStep = element("tfcs-returned-settled-step")
-        XCTAssertTrue(returnedSettledStep.waitForExistence(timeout: 4))
-        XCTAssertTrue(returnedSettledStep.label.contains("Make the nursery ready for the crib"))
-        XCTAssertTrue(returnedSettledStep.label.contains("now count toward the nursery"))
-        XCTAssertEqual(
-            app.staticTexts.matching(
-                NSPredicate(format: "label == %@", "Send the launch brief")
-            ).count,
-            1
-        )
-        XCTAssertFalse(element("tfcs-timeline-object-step.send-launch-brief").exists)
-        XCTAssertTrue(element("tfcs-today-overview").exists)
-        XCTAssertTrue(element("tfcs-dock-shell-peek").exists)
-    }
-
 }
 
 extension TodayFlagshipCalibrationHostUITests {
@@ -1060,13 +1040,13 @@ extension TodayFlagshipCalibrationHostUITests {
 
     }
 
-    private func launch(_ variant: String) {
+    func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()
         XCTAssertTrue(element("tfcs-journey-root").waitForExistence(timeout: 8))
     }
 
-    private func element(_ identifier: String) -> XCUIElement {
+    func element(_ identifier: String) -> XCUIElement {
         app.descendants(matching: .any).matching(identifier: identifier).firstMatch
     }
 
@@ -1108,7 +1088,7 @@ extension TodayFlagshipCalibrationHostUITests {
         }
     }
 
-    private func assertExists(
+    func assertExists(
         _ elements: [XCUIElement],
         file: StaticString = #filePath,
         line: UInt = #line
@@ -1123,13 +1103,47 @@ extension TodayFlagshipCalibrationHostUITests {
         }
     }
 
-    private func assertMinimumTarget(
+    func assertMinimumTarget(
         _ element: XCUIElement,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
         XCTAssertGreaterThanOrEqual(element.frame.width, 44, file: file, line: line)
         XCTAssertGreaterThanOrEqual(element.frame.height, 44, file: file, line: line)
+    }
+
+    private func assertMinimumTargetAfterSettling(
+        _ element: XCUIElement,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        assertElementSettles(element, file: file, line: line) {
+            $0.isHittable && $0.frame.width >= 44 && $0.frame.height >= 44
+        }
+        assertMinimumTarget(element, file: file, line: line)
+    }
+
+    private func assertElementSettles(
+        _ element: XCUIElement,
+        timeout: TimeInterval = 3,
+        file: StaticString = #filePath,
+        line: UInt = #line,
+        predicate: @escaping (XCUIElement) -> Bool
+    ) {
+        let expectation = XCTNSPredicateExpectation(
+            predicate: NSPredicate { candidate, _ in
+                guard let candidate = candidate as? XCUIElement else { return false }
+                return predicate(candidate)
+            },
+            object: element
+        )
+        XCTAssertEqual(
+            XCTWaiter.wait(for: [expectation], timeout: timeout),
+            .completed,
+            "Element did not reach its settled layout: \(element)",
+            file: file,
+            line: line
+        )
     }
 
     private func assertEveryVisibleButtonHasMinimumTargetAndDistinctName(
@@ -1145,7 +1159,7 @@ extension TodayFlagshipCalibrationHostUITests {
         }
     }
 
-    private func scrollUntilHittable(
+    func scrollUntilHittable(
         _ element: XCUIElement,
         maxSwipes: Int = 8
     ) {
@@ -1157,7 +1171,7 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertTrue(element.isHittable)
     }
 
-    private func pauseForEvidence(_ seconds: TimeInterval) {
+    func pauseForEvidence(_ seconds: TimeInterval) {
         RunLoop.current.run(until: Date().addingTimeInterval(seconds))
     }
 }

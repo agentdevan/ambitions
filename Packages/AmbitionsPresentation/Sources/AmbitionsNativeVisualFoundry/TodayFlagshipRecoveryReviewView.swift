@@ -77,16 +77,19 @@ struct TodayFlagshipRecoveryReviewView: View {
     }
 
     private func recoveryButton(_ choice: TodayFlagshipRecoveryChoice) -> some View {
-        Button(choice.title) {
+        Button {
             if choice.id == "recovery.continue-saved-progress" {
                 _ = state.continueFromSavedProgress()
             } else {
                 _ = state.leaveForLater()
             }
+        } label: {
+            Text(choice.title)
+                .frame(maxWidth: .infinity, minHeight: 48, alignment: .center)
+                .contentShape(Rectangle())
         }
         .buttonBorderShape(.roundedRectangle(radius: 8))
         .controlSize(.large)
-        .frame(minHeight: 44, alignment: .leading)
         .accessibilityHint(choice.consequence)
         .accessibilityInputLabels([choice.title])
         .accessibilityIdentifier(choice.id)
