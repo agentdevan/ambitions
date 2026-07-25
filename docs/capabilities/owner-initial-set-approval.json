@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "authority": "owner_decision_provenance_non_normative_until_canon_cutover",
+  "repository": "agentdevan/ambitions",
+  "recorded_on": "2026-07-24",
+  "decision_id": "DEC-ATLAS-INITIAL-SET-001",
+  "status": "approved",
+  "owner": "Devan",
+  "exact_owner_wording": "I agree these 9 are approvable. I just wasn't sure if we should add more or review whatever else is being approved",
+  "decision_interpretation": "The nine proposed identities are accepted as valid initial capabilities. They are not approved as the complete or exclusive Capability Atlas, and canon installation is not authorized.",
+  "approved_initial_capability_ids": [
+    "CAP-CONTEXT-001",
+    "CAP-PATH-001",
+    "CAP-SIMULATION-001",
+    "CAP-TIME-001",
+    "CAP-SEARCH-001",
+    "CAP-APPEARANCE-001",
+    "CAP-SHARING-001",
+    "CAP-KNOWLEDGE-001",
+    "CAP-RESILIENCE-001"
+  ],
+  "not_approved": [
+    "The nine as the final complete capability set",
+    "Canonical registry installation",
+    "The six unresolved capability scope recommendations",
+    "Any implementation, verification, shipping, or marketing claim",
+    "Any additional ambiguous or completeness-review candidate"
+  ],
+  "required_next_gate": "Capability Set Completeness and Expansion Review",
+  "final_set_decision_id": "DEC-ATLAS-IDENTITIES-001",
+  "canon_installation_authorized": false
+}
