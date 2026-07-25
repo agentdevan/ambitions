@@ -2,20 +2,15 @@
   "schema_version": 1,
   "authority": "non_normative_owner_decision_packet",
   "repository": "agentdevan/ambitions",
-  "status": "initial_identity_set_approved_pending_completeness_review",
+  "status": "awaiting_owner_decision",
   "decision_count": 7,
   "decisions": [
     {
       "decision_id": "DEC-ATLAS-IDENTITIES-001",
       "type": "identity_set_approval",
-      "question": "Approve the proposed nine-capability identity set as an initial approved set while a completeness review determines whether additional baseline capabilities must be added before canonical installation?",
+      "question": "Approve the proposed nine-capability identity set as the basis for canonical installation?",
       "recommended_option_id": "approve_recommended_set",
       "options": [
-        {
-          "option_id": "approve_initial_set_pending_completeness_review",
-          "label": "Approve the nine as an initial set pending completeness review",
-          "consequence": "The nine identities are accepted as valid product capabilities, but the set remains open and canon installation stays blocked until uncovered domains and ambiguous records are reviewed."
-        },
         {
           "option_id": "approve_recommended_set",
           "label": "Approve the recommended nine-capability set",
@@ -43,15 +38,8 @@
         "CAP-KNOWLEDGE-001 — Goal-Attached Files and Knowledge",
         "CAP-RESILIENCE-001 — Local-First Operational Continuity"
       ],
-      "status": "approved_initial_set_pending_completeness_review",
-      "selected_option_id": "approve_initial_set_pending_completeness_review",
-      "owner_response": {
-        "recorded_on": "2026-07-24",
-        "exact_wording": "I agree these 9 are approvable. I just wasn't sure if we should add more or review whatever else is being approved",
-        "interpretation": "Approve the nine as an initial non-exclusive set; require completeness review before final canonical installation."
-      },
-      "canon_installation_authorized": false,
-      "next_required_gate": "Capability Set Completeness and Expansion Review"
+      "status": "pending",
+      "selected_option_id": null
     },
     {
       "decision_id": "DEC-CONTEXT-001-SCOPE",
@@ -59,21 +47,9 @@
       "question": "Should Skill Transference remain a standalone flagship capability or become a named Local Learning subcapability?",
       "recommended_option_id": "standalone_flagship_capability",
       "options": [
-        {
-          "option_id": "standalone_flagship_capability",
-          "label": "Standalone capability",
-          "consequence": "The person-facing transfer promise remains visible, independently traceable, and cannot disappear inside learning infrastructure."
-        },
-        {
-          "option_id": "local_learning_subcapability",
-          "label": "Local Learning subcapability",
-          "consequence": "The product ontology is smaller, but transfer risks becoming an implementation behavior rather than a durable product promise."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Skill Transference remains proposed and cannot be canonized."
-        }
+        {"option_id": "standalone_flagship_capability", "label": "Standalone capability", "consequence": "The person-facing transfer promise remains visible, independently traceable, and cannot disappear inside learning infrastructure."},
+        {"option_id": "local_learning_subcapability", "label": "Local Learning subcapability", "consequence": "The product ontology is smaller, but transfer risks becoming an implementation behavior rather than a durable product promise."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Skill Transference remains proposed and cannot be canonized."}
       ],
       "status": "pending",
       "selected_option_id": null
@@ -84,21 +60,9 @@
       "question": "Should the initial simulation capability remain career-specific or cover broader alternate life paths?",
       "recommended_option_id": "career_specific_initial_scope",
       "options": [
-        {
-          "option_id": "career_specific_initial_scope",
-          "label": "Career-specific initial scope",
-          "consequence": "The capability stays bounded and evidenceable while the Life Branch architecture remains extensible."
-        },
-        {
-          "option_id": "general_life_path_simulation",
-          "label": "General life-path simulation",
-          "consequence": "The capability becomes broader and more differentiating, but requires substantially more domain, safety, reference-data, and uncertainty law before implementation."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Branch architecture remains design intent without a selected product capability."
-        }
+        {"option_id": "career_specific_initial_scope", "label": "Career-specific initial scope", "consequence": "The capability stays bounded and evidenceable while the Life Branch architecture remains extensible."},
+        {"option_id": "general_life_path_simulation", "label": "General life-path simulation", "consequence": "The capability becomes broader and more differentiating, but requires substantially more domain, safety, reference-data, and uncertainty law before implementation."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Branch architecture remains design intent without a selected product capability."}
       ],
       "status": "pending",
       "selected_option_id": null
@@ -109,21 +73,9 @@
       "question": "Should Adaptive Step Placement Reflow be a standalone capability or a named subcapability of broader schedule reflow?",
       "recommended_option_id": "standalone_visible_capability",
       "options": [
-        {
-          "option_id": "standalone_visible_capability",
-          "label": "Standalone visible capability",
-          "consequence": "The defining placement consequence remains explicit while infrastructure stays owned by Scheduling and Capacity."
-        },
-        {
-          "option_id": "schedule_reflow_subcapability",
-          "label": "Schedule Reflow subcapability",
-          "consequence": "The atlas is more compact, but the owner-originated new-Step promise becomes less independently traceable."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Existing reflow law remains but the product capability identity is not installed."
-        }
+        {"option_id": "standalone_visible_capability", "label": "Standalone visible capability", "consequence": "The defining placement consequence remains explicit while infrastructure stays owned by Scheduling and Capacity."},
+        {"option_id": "schedule_reflow_subcapability", "label": "Schedule Reflow subcapability", "consequence": "The atlas is more compact, but the owner-originated new-Step promise becomes less independently traceable."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Existing reflow law remains but the product capability identity is not installed."}
       ],
       "status": "pending",
       "selected_option_id": null
@@ -134,21 +86,9 @@
       "question": "What initial authoring depth is required for Appearance Studio to qualify as first-class?",
       "recommended_option_id": "bounded_multidimensional_studio",
       "options": [
-        {
-          "option_id": "bounded_multidimensional_studio",
-          "label": "Bounded multidimensional studio",
-          "consequence": "Live preview covers approved mode, accent/palette expression, surface/material intensity, supported density/emphasis, and compatible motion preferences under semantic and accessibility constraints."
-        },
-        {
-          "option_id": "mode_and_accent_only",
-          "label": "Mode and accent only",
-          "consequence": "Implementation is smaller, but the result is closer to a settings page and may not satisfy the owner-originated first-class promise."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Appearance remains existing settings and design-system infrastructure without a Studio capability."
-        }
+        {"option_id": "bounded_multidimensional_studio", "label": "Bounded multidimensional studio", "consequence": "Live preview covers approved mode, accent/palette expression, surface/material intensity, supported density/emphasis, and compatible motion preferences under semantic and accessibility constraints."},
+        {"option_id": "mode_and_accent_only", "label": "Mode and accent only", "consequence": "Implementation is smaller, but the result is closer to a settings page and may not satisfy the owner-originated first-class promise."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Appearance remains existing settings and design-system infrastructure without a Studio capability."}
       ],
       "status": "pending",
       "selected_option_id": null
@@ -159,26 +99,10 @@
       "question": "Which initial output formats establish Content Share Studio as first-class?",
       "recommended_option_id": "native_visual_document",
       "options": [
-        {
-          "option_id": "native_visual_document",
-          "label": "Native payloads plus visual and document exports",
-          "consequence": "One audience/redaction/preview contract supports system sharing, polished images, and durable documents."
-        },
-        {
-          "option_id": "native_payloads_only",
-          "label": "Native payloads only",
-          "consequence": "The initial implementation is smaller but risks becoming a refined share sheet rather than a studio."
-        },
-        {
-          "option_id": "visual_only",
-          "label": "Visual exports first",
-          "consequence": "The product gets a strong expressive artifact but defers structured and document use cases."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Privacy and export primitives remain without a selected Share Studio product scope."
-        }
+        {"option_id": "native_visual_document", "label": "Native payloads plus visual and document exports", "consequence": "One audience/redaction/preview contract supports system sharing, polished images, and durable documents."},
+        {"option_id": "native_payloads_only", "label": "Native payloads only", "consequence": "The initial implementation is smaller but risks becoming a refined share sheet rather than a studio."},
+        {"option_id": "visual_only", "label": "Visual exports first", "consequence": "The product gets a strong expressive artifact but defers structured and document use cases."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Privacy and export primitives remain without a selected Share Studio product scope."}
       ],
       "status": "pending",
       "selected_option_id": null
@@ -189,26 +113,10 @@
       "question": "Should the initial Files and Knowledge experience remain Goal-attached or be object-wide from launch?",
       "recommended_option_id": "goal_first_object_capable",
       "options": [
-        {
-          "option_id": "goal_first_object_capable",
-          "label": "Goal-first, object-capable architecture",
-          "consequence": "The initial experience remains coherent and bounded while Attachment relationships can later extend without redesigning identity or storage."
-        },
-        {
-          "option_id": "object_wide_initial_scope",
-          "label": "Object-wide initial scope",
-          "consequence": "Files can attach everywhere immediately, but surface, lifecycle, Search, deletion, and accessibility scope expands materially."
-        },
-        {
-          "option_id": "goal_only_architecture",
-          "label": "Goal-only architecture",
-          "consequence": "The implementation is narrower but creates avoidable future migration and identity constraints."
-        },
-        {
-          "option_id": "defer",
-          "label": "Defer",
-          "consequence": "Attachment law remains generic and no Goal Files product capability is installed."
-        }
+        {"option_id": "goal_first_object_capable", "label": "Goal-first, object-capable architecture", "consequence": "The initial experience remains coherent and bounded while Attachment relationships can later extend without redesigning identity or storage."},
+        {"option_id": "object_wide_initial_scope", "label": "Object-wide initial scope", "consequence": "Files can attach everywhere immediately, but surface, lifecycle, Search, deletion, and accessibility scope expands materially."},
+        {"option_id": "goal_only_architecture", "label": "Goal-only architecture", "consequence": "The implementation is narrower but creates avoidable future migration and identity constraints."},
+        {"option_id": "defer", "label": "Defer", "consequence": "Attachment law remains generic and no Goal Files product capability is installed."}
       ],
       "status": "pending",
       "selected_option_id": null
