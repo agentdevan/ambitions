@@ -294,6 +294,7 @@ struct TodayOpenContinuityFocusedObject: View {
                     .frame(minHeight: 44)
             }
             .buttonStyle(TodayOpenContinuityPrimaryActionStyle(palette: palette.openContinuity))
+            // AMBitionsAllowWeakPattern(reason: "Outcome contract controls native action availability from semantic state")
             .disabled(isOutcomeEnabled == false)
             .accessibilityHint(content.interfaceCopy.reviewStillCountsHint)
             .accessibilityInputLabels([

@@ -189,6 +189,7 @@ struct TodayOpenContinuityCommitBar: View {
         }
         .buttonStyle(.bordered)
         .buttonBorderShape(.roundedRectangle(radius: 8))
+        // AMBitionsAllowWeakPattern(reason: "Native control blocks cancellation during active settlement commitment")
         .disabled(isSaving)
         .accessibilityHint(cancelHint)
         .accessibilityInputLabels([cancelTitle])
@@ -203,6 +204,7 @@ struct TodayOpenContinuityCommitBar: View {
                 .frame(minHeight: 44)
         }
         .buttonStyle(TodayOpenContinuityPrimaryActionStyle(palette: palette.openContinuity))
+        // AMBitionsAllowWeakPattern(reason: "Native control blocks repeated settlement commitment while saving")
         .disabled(isSaving)
         .accessibilityHint(commitHint)
         .accessibilityInputLabels([commitTitle])

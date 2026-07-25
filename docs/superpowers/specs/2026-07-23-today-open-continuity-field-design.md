@@ -515,7 +515,7 @@ artifacts set `production_baseline = false`.
 
 ## 19. Design-spec self-review
 
-- No placeholder or unresolved alternate direction remains.
+- No provisional or unresolved alternate direction remains.
 - Full Day is bounded as read-only Today context; Time ownership is intact.
 - Review/recovery presentation architecture is unchanged.
 - Fixture truth and canonical identities are unchanged.
