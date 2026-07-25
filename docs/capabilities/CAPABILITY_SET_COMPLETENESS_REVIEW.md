@@ -47,7 +47,8 @@ These remain the **approved initial expansion/flagship set**.
 
 ### 1. Provisional Capture and Interpretation
 
-**Confidence:** High  
+**Confidence:** High
+
 **Domain:** Capture and Interpretation
 
 Ambitions already promises global provisional intake, durable preservation, interpretation review, owner-routed placement, and recovery. This is a person-facing outcome, not merely the Capture surface.
@@ -58,7 +59,8 @@ Likely promise:
 
 ### 2. Present Execution and Adaptive Recovery
 
-**Confidence:** High  
+**Confidence:** High
+
 **Domain:** Present Execution and Adaptation
 
 Today owns immediate execution, narrow contextual action, changed-reality response, and missed-step recovery. Those behaviors need one product capability identity.
@@ -69,7 +71,8 @@ Likely promise:
 
 ### 3. Personal Data, Privacy, and Identity Control
 
-**Confidence:** High  
+**Confidence:** High
+
 **Domain:** Identity, Privacy, and Trust
 
 You, Privacy, Local Learning, deletion, export, reset, account separation, and local-data controls establish a broader promise than Appearance Studio.
@@ -80,7 +83,8 @@ Likely promise:
 
 ### 4. Trust Inspection and Reversible History
 
-**Confidence:** High  
+**Confidence:** High
+
 **Domain:** Identity, Privacy, and Trust
 
 Receipts, History, provenance, explanations, inspection, Undo, rollback, and repair form a distinct capability. Search may invoke this capability but should not own it.
@@ -91,7 +95,8 @@ Likely promise:
 
 ### 5. Proof, Reflection, and Closure
 
-**Confidence:** High  
+**Confidence:** High
+
 **Domain:** Reflection, Proof, and Closure
 
 Proof, progress interpretation, reflection, closure, pause, pivot, and retained history are central Ambitions outcomes and currently lack a capability identity.
@@ -102,7 +107,8 @@ Likely promise:
 
 ### 6. Native Apple Reach and Automation
 
-**Confidence:** Medium  
+**Confidence:** Medium
+
 **Domain:** Apple Ecosystem and Automation
 
 App Intents, widgets, notifications, EventKit, deep links, share intake, and other Apple system surfaces may form one umbrella capability or several subcapabilities.
