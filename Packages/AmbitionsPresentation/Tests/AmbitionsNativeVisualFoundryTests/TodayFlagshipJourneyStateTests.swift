@@ -273,6 +273,10 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
             contentsOf: sourceRoot.appendingPathComponent("TodayFlagshipReviewView.swift"),
             encoding: .utf8
         )
+        let vitalitySource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayVitalityReviewView.swift"),
+            encoding: .utf8
+        )
 
         XCTAssertTrue(source.contains("let succeeded = await onCommitProposal()"))
         XCTAssertTrue(source.contains("state.resolveCommit(succeeded: succeeded)"))
@@ -289,8 +293,8 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         )
         XCTAssertTrue(source.contains("state.retryFailedCommit()"))
         XCTAssertTrue(source.contains("state.dismissFailedCommit()"))
-        XCTAssertTrue(source.contains("content.supporting.commitFailure.retryTitle"))
-        XCTAssertTrue(source.contains("content.supporting.commitFailure.dismissTitle"))
+        XCTAssertTrue(vitalitySource.contains("content.supporting.commitFailure.retryTitle"))
+        XCTAssertTrue(vitalitySource.contains("content.supporting.commitFailure.dismissTitle"))
         XCTAssertTrue(
             source.contains(
                 "state.isCommitInFlight || state.phase == .failedSettlement"
@@ -332,6 +336,10 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
             contentsOf: sourceRoot.appendingPathComponent("TodayFlagshipReviewView.swift"),
             encoding: .utf8
         )
+        let vitalityReviewSource = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayVitalityReviewView.swift"),
+            encoding: .utf8
+        )
 
         for declaration in [
             "struct TodayOpenContinuityTruthComparison: View",
@@ -363,10 +371,11 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertFalse(truthFlowSource.contains("Progress recorded"))
         XCTAssertFalse(truthFlowSource.contains(".glassEffect("))
 
-        XCTAssertTrue(reviewSource.contains("TodayOpenContinuityTruthComparison"))
-        XCTAssertTrue(reviewSource.contains("TodayOpenContinuityCommitBar"))
-        XCTAssertTrue(reviewSource.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(reviewSource.contains("DisclosureGroup"))
+        XCTAssertTrue(reviewSource.contains("TodayVitalityReviewView"))
+        XCTAssertTrue(vitalityReviewSource.contains("TodayVitalityNode(kind: .current"))
+        XCTAssertTrue(vitalityReviewSource.contains("TodayVitalityNode(kind: .proposed"))
+        XCTAssertTrue(vitalityReviewSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(vitalityReviewSource.contains("DisclosureGroup"))
     }
 
     func testSettlementChangesAcceptedTruthAndRemainsOnFocusedStep() {

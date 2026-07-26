@@ -193,6 +193,39 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
+#Preview("R13 Review · Typical · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Review · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("R13 Review · Differentiate Without Color") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityDifferentiateWithoutColor, true)
+}
+
+#Preview("R13 Review · Reduce Motion") {
+    TodayFlagshipCalibrationPreviewHost(phase: .reviewingProposal)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityReduceMotion, true)
+}
+
+#Preview("R13 Saving · Accepted truth retained") {
+    TodayFlagshipCalibrationPreviewHost(phase: .savingAcceptedTruth)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Review · Failed settlement") {
+    TodayFlagshipCalibrationPreviewHost(phase: .failedSettlement)
+        .preferredColorScheme(.dark)
+}
+
 #Preview("TFCS-F08 · Successful settlement · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .settled)
         .preferredColorScheme(.dark)

@@ -69,7 +69,7 @@ private struct TodayFlagshipCalibrationHost: View {
             initialDockExpanded: variant.dockExpanded,
             onCommitProposal: {
                 try? await Task.sleep(for: .milliseconds(2_400))
-                return true
+                return variant.commitShouldSucceed
             }
         )
         .task {
@@ -184,6 +184,14 @@ private enum FoundryVariant: String {
     case b02ReviewRTL = "b02-review-rtl"
     case b02ReviewSaving = "b02-review-saving"
     case b02ReviewSavingRTL = "b02-review-saving-rtl"
+    case r13ReviewTypical = "r13-review-typical"
+    case r13ReviewSaving = "r13-review-saving"
+    case r13ReviewFailed = "r13-review-failed"
+    case r13ReviewFailureCallback = "r13-review-failure-callback"
+    case r13ReviewIncreasedContrast = "r13-review-increased-contrast"
+    case r13ReviewNoColor = "r13-review-differentiate-without-color"
+    case r13ReviewReduceMotion = "r13-review-reduce-motion"
+    case r13ReviewAccessibility5 = "r13-review-accessibility5"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -233,7 +241,8 @@ private enum FoundryVariant: String {
                 .journeyAccessibility, .journeyAccessibilityManual:
             .accessibility1
         case .b02FullDayAccessibility5, .b02FocusedAccessibility5,
-                .b02ReviewAccessibility5, .b02RootAccessibility5:
+                .b02ReviewAccessibility5, .b02RootAccessibility5,
+                .r13ReviewAccessibility5:
             .accessibility5
         default:
             .large
@@ -249,8 +258,13 @@ private enum FoundryVariant: String {
         case .tfcsF07, .stressContrast, .reviewAccessibility,
                 .b02ReviewTypical, .b02ReviewAccessibility5,
                 .b02ReviewContrast, .b02ReviewNoColor,
-                .b02ReviewReduceMotion, .b02ReviewRTL:
+                .b02ReviewReduceMotion, .b02ReviewRTL,
+                .r13ReviewTypical, .r13ReviewFailureCallback,
+                .r13ReviewIncreasedContrast, .r13ReviewNoColor,
+                .r13ReviewReduceMotion, .r13ReviewAccessibility5:
             .reviewingProposal
+        case .r13ReviewFailed:
+            .failedSettlement
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL:
@@ -263,7 +277,8 @@ private enum FoundryVariant: String {
             .interrupted
         case .b02RecoveryContinued:
             .recoveredContinuation
-        case .stateSaving, .b02ReviewSaving, .b02ReviewSavingRTL:
+        case .stateSaving, .b02ReviewSaving, .b02ReviewSavingRTL,
+                .r13ReviewSaving:
             .savingAcceptedTruth
         default:
             .todayInitial
@@ -310,11 +325,12 @@ private enum FoundryVariant: String {
     }
 
     var differentiateWithoutColor: Bool {
-        self == .b02ReviewNoColor
+        self == .b02ReviewNoColor || self == .r13ReviewNoColor
     }
 
     var reduceMotion: Bool {
         self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
+            || self == .r13ReviewReduceMotion
     }
 
     var reduceTransparency: Bool {
@@ -348,5 +364,9 @@ private enum FoundryVariant: String {
         default:
             .none
         }
+    }
+
+    var commitShouldSucceed: Bool {
+        self != .r13ReviewFailureCallback
     }
 }
