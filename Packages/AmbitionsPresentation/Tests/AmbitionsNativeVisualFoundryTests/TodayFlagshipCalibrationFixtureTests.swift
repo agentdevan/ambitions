@@ -144,14 +144,15 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         let timeline = TodayFlagshipCalibrationFixture.preparingForBaby.timeline
 
         XCTAssertEqual(timeline.map(\.id), [
-            "timeline.nursery-paint-sample",
             "timeline.work-launch-brief",
-            "timeline.family-prenatal-walk"
+            "timeline.family-time",
+            "timeline.open-after-family"
         ])
-        XCTAssertEqual(timeline.first?.objectTitle, "Paint the nursery sample")
-        XCTAssertEqual(timeline.first?.timeLabel, "10:30 AM")
+        XCTAssertEqual(timeline.first?.objectTitle, "Send the launch brief")
+        XCTAssertEqual(timeline.first?.timeLabel, "2:00 PM")
         XCTAssertTrue(timeline.contains(where: { $0.isProtected }))
         XCTAssertTrue(timeline.contains(where: { $0.isFixed }))
+        XCTAssertTrue(timeline.contains(where: { $0.isOpenLane }))
     }
 
     func testReturnedTodayProjectionShowsPromotedStepOnlyAsStartHere() {
@@ -170,7 +171,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
         XCTAssertTrue(
             fixture.returnedTodayTimeline.contains {
-                $0.canonicalObjectID == "step.nursery-paint-sample"
+                $0.canonicalObjectID == "event.family-time"
             }
         )
         XCTAssertFalse(
@@ -374,13 +375,16 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
         XCTAssertEqual(
             fixture.timeline.map(\.role),
-            [.ordinary, .fixed, .protected]
+            [.fixed, .protected, .openLane]
         )
         XCTAssertNil(fixture.contextSeam)
 
         let quiet = fixture.quietToday
-        XCTAssertEqual(quiet.timeline.map(\.role), [.openLane, .protected])
-        XCTAssertEqual(quiet.timeline.map(\.timeLabel), ["3:00 PM", "5:30 PM"])
+        XCTAssertEqual(quiet.timeline.map(\.role), [.protected, .openLane])
+        XCTAssertEqual(
+            quiet.timeline.map(\.timeLabel),
+            ["5:30 PM", "Open after 6:30 PM"]
+        )
 
         let dense = fixture.denseToday
         XCTAssertGreaterThan(dense.timeline.count, fixture.timeline.count)
@@ -390,8 +394,8 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         let veryDense = fixture.veryDenseToday
         XCTAssertEqual(veryDense.timeline.count, 10)
         XCTAssertEqual(veryDense.timeline.map(\.timeLabel), [
-            "10:30 AM", "11:40 AM", "12:20 PM", "1:10 PM", "2:00 PM",
-            "3:20 PM", "4:45 PM", "5:30 PM", "6:30 PM", "7:15 PM"
+            "11:40 AM", "12:20 PM", "1:10 PM", "2:00 PM", "3:20 PM",
+            "4:45 PM", "5:30 PM", "6:30 PM", "Open after 6:30 PM", "7:15 PM"
         ])
         XCTAssertTrue(veryDense.timeline.contains { $0.role == .external })
         XCTAssertTrue(veryDense.timeline.contains { $0.role == .openLane })
@@ -723,7 +727,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             visibleStartHereID: fixture.primaryStep.id
         )
 
-        XCTAssertLessThanOrEqual(overview.count, 4)
+        XCTAssertLessThanOrEqual(overview.count, 3)
         XCTAssertEqual(overview.count, 3)
         XCTAssertFalse(
             overview.contains { $0.canonicalObjectID == fixture.primaryStep.id }
@@ -732,8 +736,8 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             Set(overview.map(\.id)),
             Set([
                 "timeline.work-launch-brief",
-                "timeline.family-prenatal-walk",
-                "timeline.nursery-paint-sample"
+                "timeline.family-time",
+                "timeline.open-after-family"
             ])
         )
         XCTAssertEqual(
@@ -741,8 +745,8 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             fixture.timeline.filter {
                 Set([
                     "timeline.work-launch-brief",
-                    "timeline.family-prenatal-walk",
-                    "timeline.nursery-paint-sample"
+                    "timeline.family-time",
+                    "timeline.open-after-family"
                 ]).contains($0.id)
             }.map(\.id),
             "Selected anchors preserve fixture chronology after deterministic priority selection"
@@ -754,7 +758,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             content: fixture.denseToday,
             visibleStartHereID: fixture.primaryStep.id
         )
-        XCTAssertLessThanOrEqual(denseOverview.count, 4)
+        XCTAssertLessThanOrEqual(denseOverview.count, 3)
         XCTAssertEqual(denseOverview.filter(\.isFixed).count, 1)
         XCTAssertEqual(denseOverview.filter(\.isProtected).count, 1)
 
@@ -789,11 +793,11 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         let sourceRoot = packageRoot
             .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
         let rootSource = try String(
-            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityRoot.swift"),
+            contentsOf: sourceRoot.appendingPathComponent("TodayVitalityRootView.swift"),
             encoding: .utf8
         )
         let timelineSource = try String(
-            contentsOf: sourceRoot.appendingPathComponent("TodayOpenContinuityTimeline.swift"),
+            contentsOf: sourceRoot.appendingPathComponent("TodayVitalityTimelineView.swift"),
             encoding: .utf8
         )
 
@@ -804,22 +808,21 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertFalse(rootSource.contains("TodayFlagshipNavigationCommand.capture"))
         XCTAssertTrue(rootSource.contains(".onScrollGeometryChange"))
         XCTAssertTrue(rootSource.contains("onCrownScrollProgress"))
-        XCTAssertTrue(timelineSource.contains(".lineLimit(1)"))
-        XCTAssertTrue(timelineSource.contains(".fixedSize(horizontal: true"))
-        XCTAssertTrue(timelineSource.contains("ViewThatFits(in: .horizontal)"))
-        XCTAssertTrue(timelineSource.contains(".lineLimit(2)"))
+        XCTAssertTrue(timelineSource.contains("TodayVitalityNode("))
+        XCTAssertTrue(timelineSource.contains("TodayVitalityActionStyle("))
+        XCTAssertTrue(timelineSource.contains("tfcs-view-full-day"))
     }
 
     func testB02TallOverviewFillsAvailablePlaneWithoutNewTruth() throws {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
-        let rootSource = try foundrySource(named: "TodayOpenContinuityRoot.swift")
-        let timelineSource = try foundrySource(named: "TodayOpenContinuityTimeline.swift")
+        let rootSource = try foundrySource(named: "TodayVitalityRootView.swift")
+        let timelineSource = try foundrySource(named: "TodayVitalityTimelineView.swift")
 
         XCTAssertEqual(fixture.timeline.count, 3)
-        XCTAssertFalse(fixture.timeline.contains { $0.canonicalObjectID.hasPrefix("lane.") })
-        XCTAssertTrue(rootSource.contains("GeometryReader { viewport in"))
-        XCTAssertTrue(rootSource.contains("minHeight: max(0, viewport.size.height - 54)"))
-        XCTAssertTrue(timelineSource.contains("mode == .overview ? .infinity : nil"))
+        XCTAssertTrue(fixture.timeline.contains { $0.canonicalObjectID.hasPrefix("lane.") })
+        XCTAssertFalse(rootSource.contains("GeometryReader { viewport in"))
+        XCTAssertFalse(rootSource.contains("frame(maxHeight: .infinity"))
+        XCTAssertFalse(timelineSource.contains("mode == .overview ? .infinity : nil"))
     }
 
     func testB02FullDayUsesExplicitOriginNowIdentity() {

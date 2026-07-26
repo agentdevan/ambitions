@@ -108,10 +108,10 @@ public struct TodayFlagshipCalibrationView: View {
                     .padding(.bottom, 14 - (8 * crownScrollProgress))
                     .background(palette.semanticPlane)
 
-                TodayOpenContinuityRoot(
+                TodayVitalityRootView(
                     content: content,
                     state: $state,
-                    palette: palette,
+                    shellPalette: palette,
                     usesAdaptiveNavigation: usesAdaptiveNavigation,
                     trailingPadding: rootTrailingPadding,
                     onNavigationCommand: onNavigationCommand,

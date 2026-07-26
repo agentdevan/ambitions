@@ -54,23 +54,23 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Root · Compact iPhone · Dark") {
+#Preview("R13 Root · Compact iPhone · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
         .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Root · Pro Max · Dark") {
+#Preview("R13 Root · Pro Max · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
         .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Root · Accessibility 5 · Dark") {
+#Preview("R13 Root · Accessibility 5 · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .todayInitial)
         .preferredColorScheme(.dark)
         .dynamicTypeSize(.accessibility5)
 }
 
-#Preview("B02 Root · RTL evaluation") {
+#Preview("R13 Root · RTL stress evaluation") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
         phase: .todayInitial
@@ -80,7 +80,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .environment(\.layoutDirection, .rightToLeft)
 }
 
-#Preview("B02 Root · Long LTR") {
+#Preview("R13 Root · Long English") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
         phase: .todayInitial
@@ -243,7 +243,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .environment(\.layoutDirection, .rightToLeft)
 }
 
-#Preview("B02 Today · Quiet") {
+#Preview("R13 Today · Quiet") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.quietToday,
         phase: .todayInitial
@@ -251,7 +251,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Today · Very dense") {
+#Preview("R13 Today · Very dense") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.veryDenseToday,
         phase: .todayInitial

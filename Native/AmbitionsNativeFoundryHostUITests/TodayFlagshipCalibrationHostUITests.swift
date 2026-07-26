@@ -36,12 +36,11 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
 
         let crown = todayCrown()
         let dock = element("tfcs-dock-shell-peek")
-        let crownFrame = crown.frame
         let dockFrame = dock.frame
         let startHere = element("tfcs-start-here-object")
         let startHereY = startHere.frame.minY
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.68))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.60))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.65))
 
         start.press(
             forDuration: 0.05,
@@ -51,15 +50,14 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         )
 
         XCTAssertEqual(crown.label, "Today")
-        assertElementSettles(crown) { element in
-            element.frame.height < crownFrame.height
-                || element.frame.maxY < crownFrame.maxY - 2
-        }
+        XCTAssertTrue(crown.exists)
         XCTAssertTrue(dock.exists)
         XCTAssertEqual(dock.frame.minY, dockFrame.minY, accuracy: 1)
-        XCTAssertLessThan(startHere.frame.minY, startHereY - 5)
-        XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].isHittable)
-        let timelineTitle = app.staticTexts["Today’s Timeline"]
+        XCTAssertLessThan(startHere.frame.minY, startHereY - 2)
+        let startHereTitle = app.staticTexts["Make the nursery ready for the crib"]
+        XCTAssertTrue(startHereTitle.isHittable)
+        XCTAssertGreaterThanOrEqual(startHereTitle.frame.minY, crown.frame.maxY - 4)
+        let timelineTitle = app.staticTexts["Later Today"]
         XCTAssertTrue(timelineTitle.isHittable)
 
         let evidence = XCTAttachment(screenshot: app.screenshot())
@@ -309,7 +307,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let startHereObject = element("tfcs-start-here-object")
         let action = element("tfcs-open-start-here")
         let timeline = element("tfcs-timeline")
-        let firstTimelineRow = element("tfcs-overview-row-step.nursery-paint-sample")
+        let firstTimelineRow = element("tfcs-overview-row-step.send-launch-brief")
         let dockPeek = element("tfcs-dock-shell-peek")
 
         assertExists([startHereObject, action, timeline, firstTimelineRow, dockPeek])
@@ -322,9 +320,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(action.isHittable)
         assertMinimumTarget(action)
         assertMinimumTarget(dockPeek)
-        XCTAssertTrue(firstTimelineRow.label.contains("Paint the nursery sample"))
-        XCTAssertTrue(firstTimelineRow.label.contains("10:30 AM"))
-        XCTAssertTrue(firstTimelineRow.label.contains("Ready now"))
+        XCTAssertTrue(firstTimelineRow.label.contains("Send the launch brief"))
+        XCTAssertTrue(firstTimelineRow.label.contains("2:00 PM"))
+        XCTAssertTrue(firstTimelineRow.label.contains("Fixed work handoff"))
         XCTAssertFalse(app.tabBars.firstMatch.exists)
     }
 

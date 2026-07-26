@@ -18,7 +18,7 @@ func todayOverviewObjects(
         matching predicate: (TodayFlagshipTimelineObject) -> Bool
     ) {
         guard
-            selectedCanonicalObjectIDs.count < 4,
+            selectedCanonicalObjectIDs.count < 3,
             let candidate = candidates.first(where: {
                 selectedCanonicalObjectIDs.contains($0.canonicalObjectID) == false
                     && predicate($0)
@@ -36,7 +36,9 @@ func todayOverviewObjects(
     selectFirst { $0.role == .fixed }
     selectFirst { $0.role == .protected }
     selectFirst { $0.role == .openLane }
-    selectFirst { $0.role == .ordinary || $0.role == .external }
+    if selectedCanonicalObjectIDs.count < 3 {
+        selectFirst { $0.role == .ordinary || $0.role == .external }
+    }
 
     var emittedCanonicalObjectIDs = Set<String>()
     return candidates.filter { candidate in

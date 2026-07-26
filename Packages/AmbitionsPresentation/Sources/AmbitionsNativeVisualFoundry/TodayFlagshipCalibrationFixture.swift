@@ -42,14 +42,14 @@ public enum TodayFlagshipCalibrationFixture {
             currentAcceptedTruth: "The corner is cleared and the paint sample is chosen.",
             whyItFitsNow: "This is the smallest useful step before protected family time.",
             materialConsequence: "It keeps the room moving without taking over the evening.",
-            startHereSummary: "A small move now keeps the nursery moving and family time protected.",
+            startHereSummary: "Moves the nursery forward while family time stays protected.",
             temporalContext: TodayFlagshipTemporalContext(
                 exactTime: "Available now",
                 relationship: "before 2:00 PM handoff",
                 owner: "Time",
                 fullDayTimeLabel: "10:30 AM"
             ),
-            primaryActionTitle: "Continue nursery setup",
+            primaryActionTitle: "Continue",
             stillCountsProposal: proposal
         )
         let revealedStep = TodayFlagshipStepSnapshot(
@@ -295,69 +295,70 @@ public enum TodayFlagshipCalibrationFixture {
 
     private static let baseTimeline: [TodayFlagshipTimelineObject] = [
         TodayFlagshipTimelineObject(
-            id: "timeline.nursery-paint-sample",
-            canonicalObjectID: "step.nursery-paint-sample",
-            objectTitle: "Paint the nursery sample",
-            timeLabel: "10:30 AM",
-            relationship: "Baby preparation · Home",
-            acceptedState: "Ready now",
-            role: .ordinary
-        ),
-        TodayFlagshipTimelineObject(
             id: "timeline.work-launch-brief",
             canonicalObjectID: "step.send-launch-brief",
             objectTitle: "Send the launch brief",
             timeLabel: "2:00 PM",
-            relationship: "One meaningful work commitment",
+            relationship: "Fixed work handoff",
             acceptedState: "Fixed",
             isFixed: true,
             role: .fixed
         ),
         TodayFlagshipTimelineObject(
-            id: "timeline.family-prenatal-walk",
-            canonicalObjectID: "event.family-prenatal-walk",
-            objectTitle: "Take the prenatal walk together",
+            id: "timeline.family-time",
+            canonicalObjectID: "event.family-time",
+            objectTitle: "Family time",
             timeLabel: "5:30 PM",
-            relationship: "Family time · Health",
+            relationship: "No work · Protected",
             acceptedState: "Protected",
             isProtected: true,
             role: .protected
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline.open-after-family",
+            canonicalObjectID: "lane.open-after-family",
+            objectTitle: "Open time",
+            timeLabel: "Open after 6:30 PM",
+            relationship: "Room for what matters",
+            acceptedState: "Open",
+            isOpenLane: true,
+            role: .openLane
         )
     ]
 
     private static let quietTimeline: [TodayFlagshipTimelineObject] = [
         TodayFlagshipTimelineObject(
-            id: "timeline.open-afternoon",
-            canonicalObjectID: "lane.open-afternoon",
-            objectTitle: "Room for what matters",
-            timeLabel: "3:00 PM",
-            relationship: "Flexible before family time",
-            acceptedState: "Open",
-            isOpenLane: true,
-            role: .openLane
-        ),
-        TodayFlagshipTimelineObject(
-            id: "timeline.family-prenatal-walk",
-            canonicalObjectID: "event.family-prenatal-walk",
-            objectTitle: "Take the prenatal walk together",
+            id: "timeline.family-time",
+            canonicalObjectID: "event.family-time",
+            objectTitle: "Family time",
             timeLabel: "5:30 PM",
-            relationship: "Family time · Health",
+            relationship: "No work · Protected",
             acceptedState: "Protected",
             isProtected: true,
             role: .protected
+        ),
+        TodayFlagshipTimelineObject(
+            id: "timeline.open-after-family",
+            canonicalObjectID: "lane.open-after-family",
+            objectTitle: "Open time",
+            timeLabel: "Open after 6:30 PM",
+            relationship: "Room for what matters",
+            acceptedState: "Open",
+            isOpenLane: true,
+            role: .openLane
         )
     ]
 
     private static let veryDenseTimelineOrder = [
-        "timeline.nursery-paint-sample",
         "timeline.midwife-call",
         "timeline.open-lunch-lane",
         "timeline.prenatal-appointment-notes",
         "timeline.work-launch-brief",
         "timeline-order-crib-sheet",
         "timeline-work-close",
-        "timeline.family-prenatal-walk",
+        "timeline.family-time",
         "timeline.family-dinner",
+        "timeline.open-after-family",
         "timeline-family-call"
     ]
 
@@ -472,7 +473,7 @@ public enum TodayFlagshipCalibrationFixture {
         recoveryEntryTitle: "Pick up where you left off",
         recoveryTitle: "Pick up where you left off",
         recoveryBody: "Your saved progress is still here.",
-        timelineTitle: "Today’s Timeline",
+        timelineTitle: "Later Today",
         ambitionsWordmark: "Ambitions",
         todayAccessibilityHeading: "Today",
         nowAnchorTitle: "Now",
