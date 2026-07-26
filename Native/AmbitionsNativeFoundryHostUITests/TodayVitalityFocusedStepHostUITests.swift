@@ -42,14 +42,25 @@ extension TodayFlagshipCalibrationHostUITests {
         launch("b02-focused-accessibility5")
 
         let identity = element("tfcs-focused-identity")
+        let outcome = element("r13-focused-outcome")
         let openReview = element("tfcs-select-still-counts")
         XCTAssertTrue(identity.waitForExistence(timeout: 3))
+        XCTAssertTrue(outcome.exists)
+        XCTAssertTrue(element("r13-focused-flowing-action").exists)
+        XCTAssertLessThanOrEqual(outcome.frame.maxY, openReview.frame.minY)
 
         scrollUntilHittable(openReview)
+        app.swipeUp()
 
         XCTAssertTrue(openReview.exists)
         XCTAssertTrue(openReview.isHittable)
         assertMinimumTarget(openReview)
+        XCTAssertLessThanOrEqual(openReview.frame.maxY, app.frame.maxY - 16)
         XCTAssertFalse(element("tfcs-dock-shell-peek").exists)
+
+        let evidence = XCTAttachment(screenshot: app.screenshot())
+        evidence.name = "R13-focused-accessibility-flowing-action"
+        evidence.lifetime = .keepAlways
+        add(evidence)
     }
 }

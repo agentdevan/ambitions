@@ -38,6 +38,16 @@ final class TodayVitalityFocusedStepTests: XCTestCase {
         XCTAssertFalse(source.contains("Form {"))
     }
 
+    func testR13FocusedAccessibilityMovesTheActionIntoNaturalScrollOrder() throws {
+        let source = try focusedSource()
+
+        XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(source.contains("if usesFlowingReviewAction"))
+        XCTAssertTrue(source.contains("if usesFlowingReviewAction == false"))
+        XCTAssertTrue(source.contains(".padding(.bottom, 36)"))
+        XCTAssertTrue(source.contains("accessibilityIdentifier(\"r13-focused-flowing-action\")"))
+    }
+
     private func focusedSource() throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

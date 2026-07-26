@@ -5,6 +5,7 @@ struct TodayVitalityFocusedStepView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var isIdentityFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
@@ -30,6 +31,16 @@ struct TodayVitalityFocusedStepView: View {
                     proposedTruth: content.primaryStep.stillCountsProposal.proposedTruth,
                     palette: palette
                 )
+
+                if usesFlowingReviewAction {
+                    VStack(spacing: 0) {
+                        reviewAction
+                    }
+                    .padding(.top, 8)
+                    .padding(.bottom, 36)
+                    .accessibilityElement(children: .contain)
+                    .accessibilityIdentifier("r13-focused-flowing-action")
+                }
             }
             .frame(maxWidth: 560, alignment: .leading)
             .padding(.horizontal, 24)
@@ -39,7 +50,9 @@ struct TodayVitalityFocusedStepView: View {
             .accessibilityIdentifier("tfcs-focused-object-field")
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            reviewAction
+            if usesFlowingReviewAction == false {
+                anchoredReviewAction
+            }
         }
         .background(palette.canvas.ignoresSafeArea())
         .foregroundStyle(palette.labelPrimary)
@@ -161,6 +174,10 @@ struct TodayVitalityFocusedStepView: View {
             "Choose Still Counts"
         ])
         .accessibilityIdentifier("tfcs-select-still-counts")
+    }
+
+    private var anchoredReviewAction: some View {
+        reviewAction
         .padding(.horizontal, 24)
         .padding(.top, 12)
         .padding(.bottom, 10)
@@ -172,6 +189,10 @@ struct TodayVitalityFocusedStepView: View {
                         .frame(height: palette.separatorStrokeWidth)
                 }
         }
+    }
+
+    private var usesFlowingReviewAction: Bool {
+        dynamicTypeSize.isAccessibilitySize
     }
 
     private var palette: TodayVitalityPalette {
