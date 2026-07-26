@@ -49,6 +49,24 @@ final class TodayVitalityRecoveryHostUITests: XCTestCase {
         XCTAssertFalse(element("tfcs-settled-truth").exists)
     }
 
+    func testR13RecoveryCloseRestoresInterruptedTruthWithoutMutation() {
+        launch("r13-recovery-sheet")
+
+        let close = app.buttons["Close"]
+        XCTAssertTrue(element("tfcs-recovery-review").waitForExistence(timeout: 4))
+        XCTAssertTrue(close.waitForExistence(timeout: 4))
+        assertMinimumTarget(close)
+        XCTAssertTrue(close.isHittable)
+
+        close.tap()
+
+        assertExists([
+            element("tfcs-interruption-seam"),
+            element("tfcs-recovery-current-truth")
+        ])
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
+    }
+
     func testR13RecoveryContinuationRestoresSavedProgressWithoutSettlement() {
         launch("r13-recovery-sheet")
 
@@ -77,13 +95,22 @@ final class TodayVitalityRecoveryHostUITests: XCTestCase {
         XCTAssertTrue(deferChoice.exists)
         XCTAssertGreaterThanOrEqual(heading.frame.height, 90)
         XCTAssertLessThan(heading.frame.minY, savedProgress.frame.minY)
+        XCTAssertFalse(savedProgress.frame.intersects(continueChoice.frame))
+        XCTAssertFalse(savedProgress.frame.intersects(deferChoice.frame))
         assertMinimumTarget(continueChoice)
         assertMinimumTarget(deferChoice)
-        if deferChoice.isHittable == false {
+        for _ in 0..<3 where continueChoice.isHittable == false || deferChoice.isHittable == false {
             app.swipeUp()
         }
         XCTAssertTrue(continueChoice.isHittable)
         XCTAssertTrue(deferChoice.isHittable)
+        XCTAssertLessThanOrEqual(savedProgress.frame.maxY, continueChoice.frame.minY)
+        XCTAssertLessThan(continueChoice.frame.maxY, deferChoice.frame.minY)
+
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = "R13 recovery AX action continuation"
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     private func launch(_ variant: String) {

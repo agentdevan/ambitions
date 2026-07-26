@@ -177,6 +177,7 @@ struct TodayVitalityRecoverySheetView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var focusedCommandID: String?
 
     let content: TodayFlagshipCalibrationContent
@@ -184,35 +185,77 @@ struct TodayVitalityRecoverySheetView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    sheetHeading
-                    savedProgress
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    accessibilitySheetContent
+                } else {
+                    standardSheetContent
                 }
-                .frame(maxWidth: 560, alignment: .leading)
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 24)
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                actionRegion
             }
             .background(palette.canvas.ignoresSafeArea())
             .foregroundStyle(palette.labelPrimary)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", systemImage: "xmark") {
-                        _ = state.dismissRecovery()
-                        dismiss()
-                    }
-                    .accessibilityHint("Leaves the Step unchanged")
-                }
-            }
         }
         .onAppear {
             focusedCommandID = "recovery.continue-saved-progress"
         }
         .accessibilityIdentifier("tfcs-recovery-review")
+    }
+
+    private var standardSheetContent: some View {
+        ScrollView {
+            sheetContent
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            standardActionRegion
+        }
+    }
+
+    private var accessibilitySheetContent: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                sheetTopRow
+                savedProgress
+                actionButtons
+                    .padding(.top, 4)
+            }
+            .frame(maxWidth: 560, alignment: .leading)
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
+        }
+    }
+
+    private var sheetContent: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            sheetTopRow
+            savedProgress
+        }
+        .frame(maxWidth: 560, alignment: .leading)
+        .padding(.horizontal, 24)
+        .padding(.top, 12)
+        .padding(.bottom, 24)
+    }
+
+    private var sheetTopRow: some View {
+        HStack(alignment: .top, spacing: 12) {
+            sheetHeading
+            Spacer(minLength: 8)
+            closeButton
+        }
+    }
+
+    private var closeButton: some View {
+        Button {
+            _ = state.dismissRecovery()
+            dismiss()
+        } label: {
+            Image(systemName: "xmark")
+                .frame(width: 48, height: 48)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Close")
+        .accessibilityHint("Leaves the Step unchanged")
     }
 
     private var sheetHeading: some View {
@@ -249,9 +292,11 @@ struct TodayVitalityRecoverySheetView: View {
                         .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Text("Saved at 10:30 AM")
-                        .font(TodayVitalityTypographyRole.metadata.font.monospacedDigit())
-                        .foregroundStyle(palette.labelSecondary)
+                    if let savedAtLabel = content.recovery.savedAtLabel {
+                        Text(savedAtLabel)
+                            .font(TodayVitalityTypographyRole.metadata.font.monospacedDigit())
+                            .foregroundStyle(palette.labelSecondary)
+                    }
                 }
                 .padding(.top, 6)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -259,11 +304,26 @@ struct TodayVitalityRecoverySheetView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(content.interfaceCopy.lastSavedProgressTitle)
-        .accessibilityValue("\(content.recovery.lastSavedProgress). Saved at 10:30 AM")
+        .accessibilityValue(savedProgressAccessibilityValue)
         .accessibilityIdentifier("tfcs-recovery-sheet-progress")
     }
 
-    private var actionRegion: some View {
+    private var standardActionRegion: some View {
+        actionButtons
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 10)
+            .background {
+                palette.canvas
+                    .overlay(alignment: .top) {
+                        Rectangle()
+                            .fill(palette.separator)
+                            .frame(height: palette.separatorStrokeWidth)
+                    }
+            }
+    }
+
+    private var actionButtons: some View {
         VStack(spacing: 10) {
             recoveryButton(
                 id: "recovery.continue-saved-progress",
@@ -281,17 +341,12 @@ struct TodayVitalityRecoverySheetView: View {
                 dismiss()
             }
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 12)
-        .padding(.bottom, 10)
-        .background {
-            palette.canvas
-                .overlay(alignment: .top) {
-                    Rectangle()
-                        .fill(palette.separator)
-                        .frame(height: palette.separatorStrokeWidth)
-                }
-        }
+    }
+
+    private var savedProgressAccessibilityValue: String {
+        [content.recovery.lastSavedProgress, content.recovery.savedAtLabel]
+            .compactMap { $0 }
+            .joined(separator: ". ")
     }
 
     private func recoveryButton(

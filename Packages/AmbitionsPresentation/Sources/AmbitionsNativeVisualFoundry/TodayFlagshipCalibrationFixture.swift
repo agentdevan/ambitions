@@ -181,7 +181,8 @@ public enum TodayFlagshipCalibrationFixture {
                         title: "Leave for Later",
                         consequence: "Keep this Step and saved work for later."
                     )
-                ]
+                ],
+                savedAtLabel: "Saved at 10:30 AM"
             ),
             contextSeam: contextSeam,
             supporting: makeSupportingSnapshots(

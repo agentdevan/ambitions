@@ -27,6 +27,14 @@ final class TodayVitalityRecoveryTests: XCTestCase {
         XCTAssertFalse(state.hasCommittedMutation)
     }
 
+    func testR13RecoverySavedTimeIsFixtureOwnedAndAbsentFromViewLiterals() throws {
+        XCTAssertEqual(content.recovery.savedAtLabel, "Saved at 10:30 AM")
+
+        let source = try source(named: "TodayVitalityRecoveryView.swift")
+        XCTAssertFalse(source.contains("Saved at 10:30 AM"))
+        XCTAssertTrue(source.contains("content.recovery.savedAtLabel"))
+    }
+
     func testR13RecoveryDeferralAndDismissalRemainNonMutating() {
         var dismissed = TodayFlagshipJourneyState.preview(
             content: content,
@@ -100,6 +108,15 @@ final class TodayVitalityRecoveryTests: XCTestCase {
             )
         )
         XCTAssertTrue(source.contains(".presentationDetents([.medium, .large]"))
+    }
+
+    func testR13RecoveryAccessibilityUsesOneNaturalScrollingComposition() throws {
+        let source = try source(named: "TodayVitalityRecoveryView.swift")
+
+        XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(source.contains("accessibilitySheetContent"))
+        XCTAssertTrue(source.contains("standardSheetContent"))
+        XCTAssertTrue(source.contains("actionButtons"))
     }
 
     private func assertInterruptedWithoutMutation(

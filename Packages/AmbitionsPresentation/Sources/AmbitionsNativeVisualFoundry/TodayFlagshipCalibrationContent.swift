@@ -495,19 +495,22 @@ public struct TodayFlagshipRecoverySnapshot: Equatable, Sendable {
     public let interruptionDetail: String
     public let lastSavedProgress: String
     public let availableChoices: [TodayFlagshipRecoveryChoice]
+    public let savedAtLabel: String?
 
     public init(
         stepID: String,
         interruptionTitle: String,
         interruptionDetail: String,
         lastSavedProgress: String,
-        availableChoices: [TodayFlagshipRecoveryChoice]
+        availableChoices: [TodayFlagshipRecoveryChoice],
+        savedAtLabel: String? = nil
     ) {
         self.stepID = stepID
         self.interruptionTitle = interruptionTitle
         self.interruptionDetail = interruptionDetail
         self.lastSavedProgress = lastSavedProgress
         self.availableChoices = availableChoices
+        self.savedAtLabel = savedAtLabel
     }
 }
 
