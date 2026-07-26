@@ -40,6 +40,10 @@ public struct TodayFlagshipCalibrationView: View {
                 oldPhase == .savingAcceptedTruth && newPhase == .settled
             }
             .onChange(of: state.phase, announceTransition)
+            .onChange(of: state.phase, selectRecoveryDetent)
+            .onAppear {
+                selectRecoveryDetent(from: state.phase, to: state.phase)
+            }
             .tint(palette.actionAccent)
             .accessibilityIdentifier("tfcs-journey-root")
     }
@@ -67,6 +71,7 @@ public struct TodayFlagshipCalibrationView: View {
                 content: content,
                 state: $state
             )
+            .dynamicTypeSize(dynamicTypeSize)
             .presentationDetents([.medium, .large], selection: $recoveryDetent)
             .presentationDragIndicator(.visible)
         }
@@ -247,6 +252,14 @@ public struct TodayFlagshipCalibrationView: View {
             UIAccessibility.post(notification: .announcement, argument: announcement)
         }
         #endif
+    }
+
+    private func selectRecoveryDetent(
+        from _: TodayFlagshipJourneyPhase,
+        to newPhase: TodayFlagshipJourneyPhase
+    ) {
+        guard newPhase == .recoveryReview else { return }
+        recoveryDetent = dynamicTypeSize.isAccessibilitySize ? .large : .medium
     }
 
     private func reconcileNativeBack(

@@ -195,7 +195,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         launch("tfcs-f10")
 
         let deferChoice = element("recovery.keep-step")
-        XCTAssertEqual(deferChoice.label, "Leave this for later")
+        XCTAssertEqual(deferChoice.label, "Leave for Later")
         deferChoice.tap()
 
         XCTAssertTrue(element("tfcs-interruption-seam").waitForExistence(timeout: 3))

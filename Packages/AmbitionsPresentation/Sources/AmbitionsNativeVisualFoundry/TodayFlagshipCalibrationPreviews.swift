@@ -276,6 +276,41 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .environment(\.layoutDirection, .rightToLeft)
 }
 
+#Preview("R13 Recovery · Interrupted Step · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .interrupted)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Recovery · Sheet · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveryReview)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Recovery · Continued · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveredContinuation)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Recovery · Accessibility 5 · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveryReview)
+        .preferredColorScheme(.dark)
+        .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("R13 Recovery · Long English · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
+        phase: .recoveryReview
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Recovery · Reduce Motion · Dark") {
+    TodayFlagshipCalibrationPreviewHost(phase: .recoveryReview)
+        .preferredColorScheme(.dark)
+        .environment(\._accessibilityReduceMotion, true)
+}
+
 #Preview("R13 Today · Quiet") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.quietToday,

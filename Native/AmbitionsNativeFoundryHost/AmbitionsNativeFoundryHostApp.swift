@@ -197,6 +197,12 @@ private enum FoundryVariant: String {
     case r13FullDayDense = "r13-full-day-dense"
     case r13FullDayCompact = "r13-full-day-compact"
     case r13FullDayAccessibility5 = "r13-full-day-accessibility5"
+    case r13RecoveryInterrupted = "r13-recovery-interrupted"
+    case r13RecoverySheet = "r13-recovery-sheet"
+    case r13RecoveryContinued = "r13-recovery-continued"
+    case r13RecoveryAccessibility5 = "r13-recovery-accessibility5"
+    case r13RecoveryLongEnglish = "r13-recovery-long-english"
+    case r13RecoveryReduceMotion = "r13-recovery-reduce-motion"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -249,6 +255,8 @@ private enum FoundryVariant: String {
                 .b02ReviewAccessibility5, .b02RootAccessibility5,
                 .r13ReviewAccessibility5, .r13FullDayAccessibility5:
             .accessibility5
+        case .r13RecoveryAccessibility5:
+            .accessibility5
         default:
             .large
         }
@@ -277,11 +285,13 @@ private enum FoundryVariant: String {
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:
             .todayReturned
-        case .tfcsF10, .b02RecoveryTypical, .b02RecoveryRTL:
+        case .tfcsF10, .b02RecoveryTypical, .b02RecoveryRTL,
+                .r13RecoverySheet, .r13RecoveryAccessibility5,
+                .r13RecoveryLongEnglish, .r13RecoveryReduceMotion:
             .recoveryReview
-        case .stateInterrupted, .b02RecoveryInterrupted:
+        case .stateInterrupted, .b02RecoveryInterrupted, .r13RecoveryInterrupted:
             .interrupted
-        case .b02RecoveryContinued:
+        case .b02RecoveryContinued, .r13RecoveryContinued:
             .recoveredContinuation
         case .stateSaving, .b02ReviewSaving, .b02ReviewSavingRTL,
                 .r13ReviewSaving:
@@ -300,7 +310,7 @@ private enum FoundryVariant: String {
                 .b02ReviewSavingRTL, .b02RootRTL, .b02SettlementRTL,
                 .b02ReturnedRTL, .b02RecoveryRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
-        case .b02FocusedLongLTR, .b02RootLongLTR:
+        case .b02FocusedLongLTR, .b02RootLongLTR, .r13RecoveryLongEnglish:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
         case .b02QuietToday:
             TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
@@ -337,7 +347,7 @@ private enum FoundryVariant: String {
 
     var reduceMotion: Bool {
         self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
-            || self == .r13ReviewReduceMotion
+            || self == .r13ReviewReduceMotion || self == .r13RecoveryReduceMotion
     }
 
     var reduceTransparency: Bool {

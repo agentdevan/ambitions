@@ -7,10 +7,13 @@ struct TodayVitalityFocusedStepView: View {
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var isIdentityFocused: Bool
+    @AccessibilityFocusState private var isRecoveredProgressFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
     let acceptedTruth: String
     let shouldFocusIdentity: Bool
+    var recoveredProgress: String?
+    var shouldFocusRecoveredProgress: Bool = false
     let onSelectStillCounts: () -> Void
 
     var body: some View {
@@ -19,6 +22,14 @@ struct TodayVitalityFocusedStepView: View {
                 identity
                 parentPursuit
                 presentField
+                if let recoveredProgress {
+                    TodayVitalityRecoveredProgressField(
+                        title: content.interfaceCopy.lastSavedProgressTitle,
+                        progress: recoveredProgress,
+                        palette: palette
+                    )
+                    .accessibilityFocused($isRecoveredProgressFocused)
+                }
                 temporalRelationship
 
                 Rectangle()
@@ -62,6 +73,13 @@ struct TodayVitalityFocusedStepView: View {
         .onChange(of: shouldFocusIdentity) { _, shouldFocus in
             guard shouldFocus else { return }
             isIdentityFocused = true
+        }
+        .onAppear {
+            isRecoveredProgressFocused = shouldFocusRecoveredProgress
+        }
+        .onChange(of: shouldFocusRecoveredProgress) { _, shouldFocus in
+            guard shouldFocus else { return }
+            isRecoveredProgressFocused = true
         }
     }
 

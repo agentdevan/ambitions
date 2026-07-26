@@ -173,12 +173,12 @@ public enum TodayFlagshipCalibrationFixture {
                 availableChoices: [
                     TodayFlagshipRecoveryChoice(
                         id: "recovery.continue-saved-progress",
-                        title: "Continue where you left off",
+                        title: "Continue Where You Left Off",
                         consequence: "Return to this Step with your saved work in place."
                     ),
                     TodayFlagshipRecoveryChoice(
                         id: "recovery.keep-step",
-                        title: "Leave this for later",
+                        title: "Leave for Later",
                         consequence: "Keep this Step and saved work for later."
                     )
                 ]
@@ -586,12 +586,12 @@ public enum TodayFlagshipCalibrationFixture {
         stillCountsRationale: "Keep the useful progress without marking the Step done.",
         chooseOutcomeTitle: "Choose an outcome",
         reviewStillCountsHint: "Reviews what Still counts will change",
-        lastSavedProgressTitle: "Last saved progress",
+        lastSavedProgressTitle: "Saved progress",
         addedToRelationshipTitle: "Added to",
         historyAvailableDetail: "History is available on this device.",
         recordIdentifierPrefix: "Record",
         returnTodayHint: "Returns to the recorded Step in Today",
-        interruptedStepTitle: "Progress paused",
+        interruptedStepTitle: "Interrupted · You can pick up where you left off.",
         receiptAvailableDetail: "A local record is available.",
         savedHistoryDetail: "The history entry stays on this device.",
         commitProgressHint: "Records this progress for the Step",

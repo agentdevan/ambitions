@@ -56,7 +56,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertEqual(step.stillCountsProposal.commitActionTitle, "Record progress")
         XCTAssertEqual(
             fixture.recovery.availableChoices.map(\.title),
-            ["Continue where you left off", "Leave this for later"]
+            ["Continue Where You Left Off", "Leave for Later"]
         )
 
         let prohibited = [
@@ -437,25 +437,25 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
     func testB02RecoveryUsesInterruptedContinuityGrammarAndAcceptedTruth() throws {
         let recoverySource = try foundrySource(named: "TodayFlagshipRecoveryReviewView.swift")
+        let vitalityRecoverySource = try foundrySource(named: "TodayVitalityRecoveryView.swift")
         let focusedSource = try foundrySource(named: "TodayFlagshipFocusedStepView.swift")
         let resilienceSource = try foundrySource(named: "TodayOpenContinuityResilience.swift")
-        let focusedObjectSource = try foundrySource(named: "TodayOpenContinuityFocusedObject.swift")
-        let recoveryComposition = recoverySource + resilienceSource
+        let recoveryComposition = recoverySource + vitalityRecoverySource + resilienceSource
 
         XCTAssertTrue(recoveryComposition.contains("TodayOpenContinuitySpine"))
         XCTAssertTrue(recoveryComposition.contains("kind: .interrupted"))
-        XCTAssertTrue(recoverySource.contains("state.acceptedTruth"))
+        XCTAssertTrue(focusedSource.contains("state.acceptedTruth"))
         XCTAssertTrue(recoveryComposition.contains("content.primaryStep.parentPursuitTitle"))
         XCTAssertTrue(recoveryComposition.contains("content.interfaceCopy.lastSavedProgressTitle"))
-        XCTAssertTrue(recoverySource.contains("state.leaveForLater()"))
+        XCTAssertTrue(vitalityRecoverySource.contains("state.leaveForLater()"))
         XCTAssertTrue(recoveryComposition.contains("tfcs-recovery-step-identity"))
         XCTAssertTrue(recoveryComposition.contains("tfcs-recovery-current-truth"))
         XCTAssertFalse(recoverySource.contains("Interrupted Step"))
         XCTAssertFalse(recoverySource.contains("Last saved progress"))
-        XCTAssertTrue(focusedSource.contains("TodayOpenContinuityInterruptedField"))
+        XCTAssertTrue(focusedSource.contains("TodayVitalityInterruptedStepView"))
         XCTAssertTrue(focusedSource.contains("state.phase == .recoveredContinuation"))
-        XCTAssertTrue(focusedObjectSource.contains("recoveredProgress"))
-        XCTAssertTrue(focusedObjectSource.contains("tfcs-recovered-progress"))
+        XCTAssertTrue(focusedSource.contains("recoveredProgress"))
+        XCTAssertTrue(focusedSource.contains("TodayVitalityFocusedStepView"))
         XCTAssertFalse(focusedSource.contains("private var recoveredSeam"))
     }
 
