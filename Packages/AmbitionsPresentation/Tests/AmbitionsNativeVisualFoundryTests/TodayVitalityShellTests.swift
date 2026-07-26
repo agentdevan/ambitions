@@ -10,7 +10,9 @@ final class TodayVitalityShellTests: XCTestCase {
         XCTAssertTrue(shellSource.contains("copy.todayAccessibilityHeading"))
         XCTAssertTrue(shellSource.contains("copy.ambitionsWordmark"))
         XCTAssertTrue(shellSource.contains("tfcs-today-heading"))
-        XCTAssertTrue(shellSource.contains("tfcs-ambitions-wordmark"))
+        XCTAssertTrue(shellSource.contains(".accessibilityElement(children: .ignore)"))
+        XCTAssertFalse(shellSource.contains(".accessibilityElement(children: .contain)"))
+        XCTAssertFalse(shellSource.contains("tfcs-ambitions-wordmark"))
         XCTAssertTrue(wrapperSource.contains("TodayVitalityRootCrown("))
         XCTAssertFalse(wrapperSource.contains("private var crown:"))
     }
@@ -37,7 +39,8 @@ final class TodayVitalityShellTests: XCTestCase {
 
         XCTAssertTrue(shellSource.contains("TodayVitalityDockPeekLabel"))
         XCTAssertTrue(shellSource.contains("frame(width: 44, height: 56"))
-        XCTAssertTrue(shellSource.contains("frame(width: 30, height: 52)"))
+        XCTAssertTrue(shellSource.contains("Text(copy.navigationTitle(for: .today))"))
+        XCTAssertTrue(shellSource.contains("Image(systemName: TodayFlagshipNavigationCommand.today.symbolName)"))
         XCTAssertTrue(shellSource.contains("contentShape(Rectangle())"))
         XCTAssertFalse(shellSource.contains("Capsule(style: .continuous)"))
     }

@@ -182,12 +182,19 @@ struct TodayFlagshipDock: View {
         Button {
             isExpanded = true
         } label: {
-            TodayVitalityDockPeekLabel(palette: palette)
+            TodayVitalityDockPeekLabel(copy: copy, palette: palette)
         }
         .buttonStyle(TodayFlagshipDockPeekButtonStyle())
-        .accessibilityLabel(copy.openNavigationLabel)
+        .accessibilityLabel(
+            "\(copy.navigationTitle(for: .today)), \(copy.openNavigationLabel)"
+        )
         .accessibilityHint(copy.navigationCommandsHint)
-        .accessibilityInputLabels([copy.openNavigationLabel])
+        .accessibilityInputLabels([
+            copy.navigationTitle(for: .today),
+            copy.openNavigationLabel
+        ])
+        .accessibilityValue(copy.selectedRootValue)
+        .accessibilityAddTraits(.isSelected)
         .accessibilityIdentifier(
             reduceTransparency
                 ? "tfcs-dock-shell-peek-opaque"

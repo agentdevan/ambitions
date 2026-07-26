@@ -7,14 +7,26 @@ extension TodayFlagshipCalibrationHostUITests {
         let heading = element("tfcs-today-heading")
         let wordmark = element("tfcs-ambitions-wordmark")
         let peek = element("tfcs-dock-shell-peek")
-        assertExists([heading, wordmark, peek])
+        assertExists([heading, peek])
         XCTAssertEqual(heading.label, "Today")
-        XCTAssertEqual(wordmark.label, "Ambitions")
+        XCTAssertEqual(
+            heading.value as? String,
+            "Ambitions, Thursday · Home before dinner"
+        )
+        XCTAssertFalse(wordmark.exists)
+        XCTAssertEqual(peek.label, "Today, Open navigation")
+        XCTAssertEqual(peek.value as? String, "Selected root")
+        XCTAssertTrue(peek.isSelected)
         XCTAssertFalse(app.buttons["Search"].exists)
         XCTAssertFalse(app.buttons["Capture"].exists)
         assertMinimumTarget(peek)
         XCTAssertEqual(peek.frame.width, 44, accuracy: 1)
         XCTAssertGreaterThanOrEqual(peek.frame.height, 44)
+
+        let accessibilityTree = XCTAttachment(string: app.debugDescription)
+        accessibilityTree.name = "R13 repaired crown and Peek accessibility tree"
+        accessibilityTree.lifetime = .keepAlways
+        add(accessibilityTree)
 
         peek.tap()
         let rootsGroup = element("tfcs-dock-roots-group")

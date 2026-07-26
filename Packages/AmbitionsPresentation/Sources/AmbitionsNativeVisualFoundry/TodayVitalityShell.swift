@@ -20,7 +20,6 @@ struct TodayVitalityRootCrown: View {
 
                 Text(copy.ambitionsWordmark)
                     .font(.subheadline.weight(.medium))
-                    .accessibilityIdentifier("tfcs-ambitions-wordmark")
             }
 
             Text(relationship)
@@ -31,7 +30,7 @@ struct TodayVitalityRootCrown: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 2)
-        .accessibilityElement(children: .contain)
+        .accessibilityElement(children: .ignore)
         .accessibilityLabel(copy.todayAccessibilityHeading)
         .accessibilityValue(crownAccessibilityValue)
         .accessibilityAddTraits(.isHeader)
@@ -51,6 +50,7 @@ struct TodayVitalityRootCrown: View {
 }
 
 struct TodayVitalityDockPeekLabel: View {
+    let copy: TodayFlagshipInterfaceCopy
     let palette: TodayFlagshipPalette
 
     var body: some View {
@@ -61,18 +61,18 @@ struct TodayVitalityDockPeekLabel: View {
                 shape: edgeShape
             )
 
-            ZStack {
-                Circle()
-                    .strokeBorder(palette.secondaryInk, lineWidth: 1.5)
-                    .frame(width: 20, height: 20)
+            VStack(spacing: 3) {
+                Image(systemName: TodayFlagshipNavigationCommand.today.symbolName)
+                    .font(.caption.weight(.semibold))
 
-                Circle()
-                    .fill(palette.articulationAccent)
-                    .frame(width: 7, height: 7)
+                Text(copy.navigationTitle(for: .today))
+                    .font(.caption2.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
+            .foregroundStyle(palette.primaryInk)
             .accessibilityHidden(true)
         }
-        .frame(width: 30, height: 52)
         .frame(width: 44, height: 56, alignment: .trailing)
         .contentShape(Rectangle())
     }
