@@ -120,6 +120,7 @@ enum RuntimeCommittedReceiptAuthority {
         correlationID: RuntimeCorrelationID,
         dispositionIntent: RuntimeCompensationDispositionIntent,
         externalOperationCreations: [RuntimeCanonicalExternalOperationCreation],
+        attachmentArtifacts: [RuntimeCommittedReceiptArtifactLink],
         compensationConsumption: RuntimeCompensationConsumptionDraft?,
         createdAtMilliseconds: Int64,
         phase: ((RuntimeCommittedReceiptAuthorityPhase) throws -> Void)? = nil,
@@ -134,6 +135,11 @@ enum RuntimeCommittedReceiptAuthority {
               atomicReceipt.aggregateStates.isEmpty == false,
               atomicReceipt.aggregateStates.count <= RuntimeCommittedReceiptLimits.maximumObjects,
               externalOperationCreations.count <= RuntimeExternalOperationLimits.maximumOperationsPerReceipt,
+              attachmentArtifacts.allSatisfy({
+                  $0.kind == .attachmentRevision || $0.kind == .attachmentFinalizationIntent
+              }),
+              attachmentArtifacts == attachmentArtifacts.sorted(),
+              Set(attachmentArtifacts).count == attachmentArtifacts.count,
               atomicReceipt.unresolvedWork.filter {
                 $0.kind == .projectionInvalidation
               }.count <= RuntimeCommittedReceiptLimits.maximumProjectionInvalidations else {
@@ -286,6 +292,7 @@ enum RuntimeCommittedReceiptAuthority {
                 digest: try RuntimeExternalOperationCodec.creationDigest($0)
             )
         }
+        artifacts += attachmentArtifacts
         if let plan = committedPlan {
             artifacts.append(RuntimeCommittedReceiptArtifactLink(
                 kind: .compensationPlan, stableID: plan.planID.rawValue, digest: plan.digest
@@ -2158,19 +2165,34 @@ enum RuntimeCommittedReceiptAuthority {
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
         let operationAuthority: ExternalOperationArtifactAuthority
+        let attachmentArtifacts: [RuntimeCommittedReceiptArtifactLink]
         switch Int(rawSchemaVersion) {
         case 6:
             operationAuthority = try authenticateLegacyExternalOperations(
                 expected, budget: &budget, database: database
             )
+            attachmentArtifacts = []
         case runtimeCanonicalExternalOperationSchemaVersion:
             operationAuthority = try authenticateCanonicalExternalOperations(
                 expected, plan: plan, budget: &budget, database: database
             )
+            attachmentArtifacts = []
+        case runtimeCanonicalAttachmentSchemaVersion:
+            operationAuthority = try authenticateCanonicalExternalOperations(
+                expected, plan: plan, budget: &budget, database: database
+            )
+            do {
+                attachmentArtifacts = try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
+                    receiptID: expected.facts.receiptID, budget: &budget, database: database
+                )
+            } catch {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
         default:
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
         authoritativeArtifacts += operationAuthority.artifacts
+        authoritativeArtifacts += attachmentArtifacts
         authoritativeRetention += operationAuthority.retention
 
         if let plan {

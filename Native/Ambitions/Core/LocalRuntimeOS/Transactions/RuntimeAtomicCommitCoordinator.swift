@@ -143,6 +143,11 @@ struct RuntimeAtomicCommitFinalOutcome: Codable, Sendable, Equatable {
     let externalOperationCreations: [RuntimeAtomicExternalOperationCreationEvidence]
 }
 
+struct RuntimeAtomicAttachmentCommitOutcome: Sendable, Equatable {
+    let commit: RuntimeAtomicCommitFinalOutcome
+    let attachment: RuntimeAttachmentAuthoritySnapshot
+}
+
 struct RuntimeAtomicExternalOperationCreationEvidence: Codable, Sendable, Equatable, Hashable {
     let operationID: RuntimeExternalOperationID
     let kind: RuntimeExternalEffectKind
@@ -265,7 +270,7 @@ extension RuntimeAtomicCommitError: CustomStringConvertible, LocalizedError {
 enum CanonicalRuntimeCommitSchemaPlan {
     static let sourceSchemaVersion = 1
     static let targetSchemaVersion = runtimeAtomicCommitSchemaVersion
-    static let currentWritableSchemaVersion = runtimeCanonicalExternalOperationSchemaVersion
+    static let currentWritableSchemaVersion = runtimeCanonicalAttachmentSchemaVersion
     static let readableActiveSchemaVersions: Set<Int> = [sourceSchemaVersion]
     static let writableAuthoritySchemaVersions: Set<Int> = [currentWritableSchemaVersion]
     static let tables: Set<String> = [
@@ -370,8 +375,8 @@ enum CanonicalRuntimeCommitSchemaPlan {
                 actual: Int(version)
             )
         }
-        if version == Int64(runtimeCanonicalExternalOperationSchemaVersion) {
-            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+        if version == Int64(runtimeCanonicalAttachmentSchemaVersion) {
+            try CanonicalRuntimeAttachmentSchemaPlan.requireIntegratedSchema(in: database)
             return
         }
         try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
@@ -655,6 +660,50 @@ extension CanonicalRuntimeStore {
         }
     }
 
+    func atomicCommitAttachment(
+        preparation: RuntimePreparation,
+        confirmation: RuntimeMutationConfirmation?,
+        submittedAt: Date,
+        failAfterPhase: RuntimeAtomicCommitPhase? = nil
+    ) async throws -> RuntimeAtomicAttachmentCommitOutcome {
+        guard case let .attachment(command) = preparation.command.typedPayload else {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        let attachmentIntent = command.intent
+        try await withAtomicCommitTransaction { database in
+            let outcome = try Self.atomicCommitInTransaction(
+                preparation: preparation, confirmation: confirmation,
+                submittedAt: submittedAt,
+                failAfterPhase: failAfterPhase, database: database
+            )
+            var attachmentReceiptBudget = RuntimeReceiptDecodedByteBudget(
+                maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAttachmentArtifactGraphBytes
+            )
+            let authenticated = try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
+                receiptID: outcome.receipt.facts.receiptID,
+                budget: &attachmentReceiptBudget,
+                database: database
+            )
+            let receiptAttachmentArtifacts = outcome.receipt.facts.artifacts.filter {
+                $0.kind == .attachmentRevision || $0.kind == .attachmentFinalizationIntent
+            }.sorted()
+            guard authenticated == receiptAttachmentArtifacts,
+                  authenticated.contains(where: {
+                      $0.kind == .attachmentRevision &&
+                          $0.stableID.hasPrefix(attachmentIntent.revisionID.rawValue + "#")
+                  }),
+                  let graph = try CanonicalRuntimeAttachmentStore.loadSnapshot(
+                      revisionID: attachmentIntent.revisionID, database: database
+                  ),
+                  graph.revision.attachmentID == attachmentIntent.attachmentID,
+                  graph.revision.blobID == attachmentIntent.blobID,
+                  graph.revision.manifestDigest == attachmentIntent.manifestDigest else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            return RuntimeAtomicAttachmentCommitOutcome(commit: outcome, attachment: graph)
+        }
+    }
+
     static func atomicCommitInTransaction(
         preparation: RuntimePreparation,
         confirmation: RuntimeMutationConfirmation?,
@@ -664,7 +713,11 @@ extension CanonicalRuntimeStore {
         semanticEventBytesOverride: Data? = nil,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeAtomicCommitFinalOutcome {
-            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+            let attachmentIntent: RuntimeAttachmentCommandIntent? = {
+                guard case let .attachment(command) = preparation.command.typedPayload else { return nil }
+                return command.intent
+            }()
+            try CanonicalRuntimeAttachmentSchemaPlan.requireIntegratedSchema(in: database)
             try Task.checkCancellation()
             try RuntimeAtomicCommitValidation.validate(
                 preparation: preparation,
@@ -832,6 +885,34 @@ extension CanonicalRuntimeStore {
                     database: database
                 )
             }
+            let attachmentArtifacts: [RuntimeCommittedReceiptArtifactLink]
+            if let attachmentIntent {
+                let targetRevision: UInt64
+                if let target = attachmentIntent.target {
+                    let targetReference = RuntimePreparationAggregateReference(
+                        family: target.kind,
+                        objectID: try RuntimeDomainObjectID(validating: target.id.rawValue)
+                    )
+                    guard let dependency = preparation.decision.readSet.objects.first(where: {
+                        $0.aggregate == targetReference
+                    }),
+                    case let .exact(observedTargetRevision) = dependency.observedRevision,
+                    dependency.expectedRevision == dependency.observedRevision else {
+                        throw RuntimeAtomicCommitError.corruptAuthority
+                    }
+                    targetRevision = observedTargetRevision
+                } else {
+                    targetRevision = 0
+                }
+                let attachmentMutation = try CanonicalRuntimeAttachmentStore.apply(
+                    attachmentIntent, commandID: preparation.commandID,
+                    receiptID: receipt.receiptID, lineage: receipt.lineage,
+                    targetRevision: targetRevision, at: submittedAt, database: database
+                )
+                attachmentArtifacts = attachmentMutation.receiptArtifacts
+            } else {
+                attachmentArtifacts = []
+            }
             try RuntimeAtomicCommitFault.check(.confirmationConsumed, failure: failAfterPhase, cancellation: cancelAfterPhase)
             try Task.checkCancellation()
             let compensationConsumption: RuntimeCompensationConsumptionDraft?
@@ -853,6 +934,7 @@ extension CanonicalRuntimeStore {
                 correlationID: correlationID,
                 dispositionIntent: compensationDisposition,
                 externalOperationCreations: externalOperationCreations,
+                attachmentArtifacts: attachmentArtifacts,
                 compensationConsumption: compensationConsumption,
                 createdAtMilliseconds: claimedAt,
                 phase: { authorityPhase in
@@ -1254,7 +1336,11 @@ private struct RuntimeAtomicCommitPlan {
         case .absent: nil
         case let .exact(value): value
         }
-        if semanticType.isCreation != (priorRevision == nil) {
+        if semanticType == .attachmentLinked {
+            guard primaryIntent.transition == (priorRevision == nil ? .create : .update) else {
+                throw RuntimeAtomicCommitError.stalePreparation
+            }
+        } else if semanticType.isCreation != (priorRevision == nil) {
             throw RuntimeAtomicCommitError.stalePreparation
         }
         let keys = Array(transitionsByKey.keys).sorted()
@@ -1868,6 +1954,7 @@ private enum RuntimeAtomicAggregateIdentity {
         case .importDeletion:
             command.runtimePreparationAggregateReferences.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .attachment(value): value.intent.attachmentID.rawValue
         case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         guard case let .mutating(typeID) = RuntimeSemanticEventClassifier.classify(command) else {
@@ -1918,6 +2005,9 @@ private enum RuntimeAtomicAggregateIdentity {
             case .deleteObject, .forgetMemory: return .tombstone
             case .prepareExport, .performExport: return .update
             }
+        case let .attachment(value):
+            if value.intent.action == .linkStaged { return .update }
+            return .update
         case .step, .profile, .history, .repair, .externalOperation:
             return .update
         case let .compensation(value):
@@ -2421,6 +2511,15 @@ enum RuntimeAtomicSemanticEventFactory {
         case let .externalOperation(value):
             let payload = try RuntimeExternalOperationMutationPayload(mutation: mutation, facts: value)
             return .externalOperation(value.kind == .reminder ? .reminderRequested(payload) : .calendarEventRequested(payload))
+        case let .attachment(value):
+            let payload = try RuntimeAttachmentMutationPayload(mutation: mutation, facts: value)
+            return .attachment(switch value.intent.action {
+            case .linkStaged: .linked(payload)
+            case .unlink: .unlinked(payload)
+            case .replaceRevision: .revisionReplaced(payload)
+            case .authorizeDeletion: .deletionAuthorized(payload)
+            case .quarantine: .quarantined(payload)
+            })
         case let .compensation(value):
             return .compensation(.applied(try RuntimeCompensationMutationPayload(
                 mutation: mutation,

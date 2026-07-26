@@ -283,6 +283,7 @@ struct RuntimeSemanticEventCodec: Sendable {
         case let .repair(value): try encoder.encode(value.payload)
         case let .importDeletion(value): try encoder.encode(value.payload)
         case let .externalOperation(value): try encoder.encode(value.payload)
+        case let .attachment(value): try encoder.encode(value.payload)
         case let .compensation(value): try encoder.encode(value.payload)
         }
     }
@@ -339,6 +340,10 @@ struct RuntimeSemanticEventCodec: Sendable {
             let value: RuntimeExternalOperationMutationPayload = try decodeCanonicalPayload(payload)
             try value.validate()
             return try externalEvent(typeID, value)
+        case .attachment:
+            let value: RuntimeAttachmentMutationPayload = try decodeCanonicalPayload(payload)
+            try value.validate()
+            return try attachmentEvent(typeID, value)
         }
     }
 
@@ -418,6 +423,17 @@ struct RuntimeSemanticEventCodec: Sendable {
         case .reminderCreated: .reminder(.created(value))
         case .reminderUpdated: .reminder(.updated(value))
         case .reminderDeleted: .reminder(.deleted(value))
+        default: throw RuntimeSemanticEventCodecError.typeMismatch
+        }
+    }
+    private func attachmentEvent(_ id: RuntimeSemanticEventTypeID, _ value: RuntimeAttachmentMutationPayload) throws -> RuntimeSemanticEvent {
+        guard value.mutation.semanticType == id else { throw RuntimeSemanticEventCodecError.typeMismatch }
+        return switch id {
+        case .attachmentLinked: .attachment(.linked(value))
+        case .attachmentUnlinked: .attachment(.unlinked(value))
+        case .attachmentRevisionReplaced: .attachment(.revisionReplaced(value))
+        case .attachmentDeletionAuthorized: .attachment(.deletionAuthorized(value))
+        case .attachmentQuarantined: .attachment(.quarantined(value))
         default: throw RuntimeSemanticEventCodecError.typeMismatch
         }
     }

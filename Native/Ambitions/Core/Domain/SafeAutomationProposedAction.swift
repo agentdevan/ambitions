@@ -129,6 +129,18 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )
+        case .manageAttachment:
+            return decision(
+                action,
+                permission: .requiresConfirmation,
+                confirmation: .required,
+                undo: .notSupportedYet,
+                safety: .privacySensitive,
+                reasons: [.privacySensitive, .confirmationRequired],
+                blockedFacts: ["No attachment bytes, references, or lifecycle state were changed."],
+                receiptState: .needsConfirmation,
+                receiptSafety: .confirmationRequired
+            )
         case .prepareSyncResolution:
             return decision(
                 action,
@@ -343,6 +355,8 @@ extension SafeAutomationActionKind {
             }
         case let .externalOperation(value):
             self = value.kind == .reminder ? .createReminder : .writeCalendarBlock
+        case let .attachment(value):
+            self = value.intent.action == .authorizeDeletion ? .deleteObject : .manageAttachment
         }
     }
 }

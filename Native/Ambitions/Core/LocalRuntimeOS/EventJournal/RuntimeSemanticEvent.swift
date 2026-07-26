@@ -12,6 +12,7 @@ enum RuntimeSemanticAggregateKind: String, Codable, Sendable, Equatable, Hashabl
     case repair
     case importDeletion = "import_deletion"
     case externalOperation = "external_operation"
+    case attachment
 }
 
 struct RuntimeSemanticAggregate: Codable, Sendable, Equatable, Hashable {
@@ -136,6 +137,11 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
     case memoryForgotten = "ambitions.memory.forgotten"
     case externalReminderRequested = "ambitions.external.reminder_requested"
     case externalCalendarEventRequested = "ambitions.external.calendar_event_requested"
+    case attachmentLinked = "ambitions.attachment.linked"
+    case attachmentUnlinked = "ambitions.attachment.unlinked"
+    case attachmentRevisionReplaced = "ambitions.attachment.revision_replaced"
+    case attachmentDeletionAuthorized = "ambitions.attachment.deletion_authorized"
+    case attachmentQuarantined = "ambitions.attachment.quarantined"
     case captureCreatedCompensated = "ambitions.compensation.capture_created"
     case goalCreatedCompensated = "ambitions.compensation.goal_created"
     case scheduleCreatedCompensated = "ambitions.compensation.schedule_created"
@@ -180,6 +186,8 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
         case .repairRecovered: .repair
         case .objectDeleted, .memoryForgotten: .importDeletion
         case .externalReminderRequested, .externalCalendarEventRequested: .externalOperation
+        case .attachmentLinked, .attachmentUnlinked, .attachmentRevisionReplaced,
+             .attachmentDeletionAuthorized, .attachmentQuarantined: .attachment
         }
     }
 
@@ -204,13 +212,20 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
              .scheduleCalendarWriteCommitted, .reminderUpdated,
              .profilePreferencesUpdated, .historyRecommendationDismissed,
              .historyTodayReceiptRecorded, .repairRecovered,
-             .externalReminderRequested, .externalCalendarEventRequested:
+             .externalReminderRequested, .externalCalendarEventRequested,
+             .attachmentLinked, .attachmentUnlinked, .attachmentRevisionReplaced,
+             .attachmentDeletionAuthorized, .attachmentQuarantined:
             .update
         }
     }
 
     var legalAggregateLifecycle: RuntimeAggregateLifecycle {
         legalAggregateTransition == .tombstone ? .tombstoned : .active
+    }
+
+    func acceptsPrimaryTransition(_ transition: RuntimeObjectTransitionKind) -> Bool {
+        if self == .attachmentLinked { return transition == .create || transition == .update }
+        return transition == legalAggregateTransition
     }
 }
 
@@ -358,7 +373,7 @@ struct RuntimeSemanticMutation: Codable, Sendable, Equatable, Hashable {
                       primaryAggregate?.id == aggregateID &&
                       primary?.priorRevision == priorRevision &&
                       primary?.resultingRevision == resultingRevision &&
-                      primary?.transition == expectedType.legalAggregateTransition &&
+                      primary.map { expectedType.acceptsPrimaryTransition($0.transition) } == true &&
                       primary?.lifecycle == expectedType.legalAggregateLifecycle
               ) else {
             throw RuntimeSemanticEventCodecError.invalidPayload
@@ -462,6 +477,22 @@ struct RuntimeExternalOperationMutationFacts: Codable, Sendable, Equatable {
     let title: String
     init(_ command: ExternalOperationCommand) {
         operationID = command.operationID; kind = command.kind; target = command.target; title = command.title
+    }
+}
+
+struct RuntimeAttachmentMutationFacts: Codable, Sendable, Equatable {
+    let intent: RuntimeAttachmentCommandIntent
+    let target: AmbitionsCommandTarget
+    let content: RuntimeCommandContent
+
+    init(_ command: RuntimeAttachmentCommand) {
+        intent = command.intent
+        target = command.target
+        content = command.content
+    }
+
+    var command: RuntimeAttachmentCommand {
+        RuntimeAttachmentCommand(intent: intent, target: target, content: content)
     }
 }
 
@@ -674,6 +705,36 @@ struct RuntimeExternalOperationMutationPayload: RuntimeSemanticFamilyMutationPay
     }
 }
 
+struct RuntimeAttachmentMutationPayload: RuntimeSemanticFamilyMutationPayload {
+    let mutation: RuntimeSemanticMutation
+    let facts: RuntimeAttachmentMutationFacts
+
+    init(mutation: RuntimeSemanticMutation, facts: RuntimeAttachmentCommand) throws {
+        self.mutation = mutation
+        self.facts = RuntimeAttachmentMutationFacts(facts)
+        try validate()
+    }
+
+    func validate() throws {
+        let expected: RuntimeSemanticEventTypeID = switch facts.intent.action {
+        case .linkStaged: .attachmentLinked
+        case .unlink: .attachmentUnlinked
+        case .replaceRevision: .attachmentRevisionReplaced
+        case .authorizeDeletion: .attachmentDeletionAuthorized
+        case .quarantine: .attachmentQuarantined
+        }
+        guard facts.content == RuntimeCommandContent(),
+              mutation.aggregateID.rawValue == facts.intent.attachmentID.rawValue,
+              mutation.primaryAggregate?.kind == .attachment || mutation.primaryAggregate == nil,
+              mutation.privacy == facts.intent.privacy,
+              mutation.localOnly == true,
+              (try? RuntimeAttachmentCodec.validate(facts.intent)) != nil else {
+            throw RuntimeSemanticEventCodecError.invalidPayload
+        }
+        try mutation.validate(expectedType: expected)
+    }
+}
+
 struct RuntimeCompensationMutationPayload: RuntimeSemanticFamilyMutationPayload {
     let mutation: RuntimeSemanticMutation
     let facts: RuntimeCompensationMutationFacts
@@ -780,6 +841,13 @@ enum RuntimeExternalOperationSemanticEvent: Sendable, Equatable {
     case reminderRequested(RuntimeExternalOperationMutationPayload)
     case calendarEventRequested(RuntimeExternalOperationMutationPayload)
 }
+enum RuntimeAttachmentSemanticEvent: Sendable, Equatable {
+    case linked(RuntimeAttachmentMutationPayload)
+    case unlinked(RuntimeAttachmentMutationPayload)
+    case revisionReplaced(RuntimeAttachmentMutationPayload)
+    case deletionAuthorized(RuntimeAttachmentMutationPayload)
+    case quarantined(RuntimeAttachmentMutationPayload)
+}
 enum RuntimeCompensationSemanticEvent: Sendable, Equatable {
     case applied(RuntimeCompensationMutationPayload)
 }
@@ -795,6 +863,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
     case repair(RuntimeRepairSemanticEvent)
     case importDeletion(RuntimeImportDeletionSemanticEvent)
     case externalOperation(RuntimeExternalOperationSemanticEvent)
+    case attachment(RuntimeAttachmentSemanticEvent)
     case compensation(RuntimeCompensationSemanticEvent)
 
     var typeID: RuntimeSemanticEventTypeID {
@@ -864,6 +933,14 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
             case .reminderRequested: .externalReminderRequested
             case .calendarEventRequested: .externalCalendarEventRequested
             }
+        case let .attachment(value):
+            switch value {
+            case .linked: .attachmentLinked
+            case .unlinked: .attachmentUnlinked
+            case .revisionReplaced: .attachmentRevisionReplaced
+            case .deletionAuthorized: .attachmentDeletionAuthorized
+            case .quarantined: .attachmentQuarantined
+            }
         case let .compensation(value): value.payload.mutation.semanticType
         }
     }
@@ -883,6 +960,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .repair(value): value.payload.mutation
         case let .importDeletion(value): value.payload.mutation
         case let .externalOperation(value): value.payload.mutation
+        case let .attachment(value): value.payload.mutation
         case let .compensation(value): value.payload.mutation
         }
     }
@@ -903,6 +981,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .repair(value): try value.payload.validate()
         case let .importDeletion(value): try value.payload.validate()
         case let .externalOperation(value): try value.payload.validate()
+        case let .attachment(value): try value.payload.validate()
         case let .compensation(value): try value.payload.validate()
         }
     }
@@ -954,6 +1033,8 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
                 compensationPlanID: f.compensationPlanID,
                 compensationPlanDigest: f.compensationPlanDigest
             ))
+        case let .attachment(value):
+            return .attachment(value.payload.facts.command)
         case let .compensation(value):
             return .compensation(value.payload.facts.command)
         }
@@ -980,6 +1061,7 @@ extension RuntimeHistorySemanticEvent { var payload: RuntimeHistoryMutationPaylo
 extension RuntimeRepairSemanticEvent { var payload: RuntimeRepairMutationPayload { switch self { case let .recovered(v): v } } }
 extension RuntimeImportDeletionSemanticEvent { var payload: RuntimeImportDeletionMutationPayload { switch self { case let .objectDeleted(v), let .memoryForgotten(v): v } } }
 extension RuntimeExternalOperationSemanticEvent { var payload: RuntimeExternalOperationMutationPayload { switch self { case let .reminderRequested(v), let .calendarEventRequested(v): v } } }
+extension RuntimeAttachmentSemanticEvent { var payload: RuntimeAttachmentMutationPayload { switch self { case let .linked(v), let .unlinked(v), let .revisionReplaced(v), let .deletionAuthorized(v), let .quarantined(v): v } } }
 extension RuntimeCompensationSemanticEvent { var payload: RuntimeCompensationMutationPayload { switch self { case let .applied(v): v } } }
 
 enum RuntimeSemanticEventRegistry {
@@ -1086,6 +1168,14 @@ enum RuntimeSemanticEventClassifier {
             switch value.kind {
             case .reminder: .mutating(.externalReminderRequested)
             case .calendarEvent: .mutating(.externalCalendarEventRequested)
+            }
+        case let .attachment(value):
+            switch value.intent.action {
+            case .linkStaged: .mutating(.attachmentLinked)
+            case .unlink: .mutating(.attachmentUnlinked)
+            case .replaceRevision: .mutating(.attachmentRevisionReplaced)
+            case .authorizeDeletion: .mutating(.attachmentDeletionAuthorized)
+            case .quarantine: .mutating(.attachmentQuarantined)
             }
         case let .compensation(value):
             switch value.action {

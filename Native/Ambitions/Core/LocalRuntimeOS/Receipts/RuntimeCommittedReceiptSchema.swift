@@ -1153,8 +1153,8 @@ enum CanonicalRuntimeCommittedReceiptSchemaPlan {
     static func requireIntegratedSchema(in database: isolated SQLiteDatabase) throws {
         let rows = try database.query("PRAGMA user_version")
         if rows.count == 1,
-           rows[0].values.first == .integer(Int64(runtimeCanonicalExternalOperationSchemaVersion)) {
-            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+           rows[0].values.first == .integer(Int64(runtimeCanonicalAttachmentSchemaVersion)) {
+            try CanonicalRuntimeAttachmentSchemaPlan.requireIntegratedSchema(in: database)
             return
         }
         guard rows.count == 1, rows[0].values.first == .integer(Int64(targetSchemaVersion)) else {

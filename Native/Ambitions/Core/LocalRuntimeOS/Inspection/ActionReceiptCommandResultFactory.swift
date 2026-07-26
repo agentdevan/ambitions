@@ -65,7 +65,7 @@ extension ActionReceipt {
                 return .changed
             case .schedule: return .draftedPrepared
             case .goal, .reminder, .profile, .history, .repair, .importDeletion,
-                 .externalOperation:
+                 .externalOperation, .attachment:
                 return .changed
             case .compensation:
                 return .failedSafely

@@ -199,7 +199,8 @@ extension SideEffectLedgerEffectKind {
              .archiveItem, .unarchiveItem, .markWaiting, .markDone,
              .moveActionLater, .changePriority, .changeDeadline, .changeTimeWindow,
              .shrinkAction, .splitAction, .dropAction, .deferAction,
-             .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
+             .correctRecommendation, .editLocalNote, .manageAttachment,
+             .dismissSuggestion, .noOp:
             self = .localOnly
         }
     }

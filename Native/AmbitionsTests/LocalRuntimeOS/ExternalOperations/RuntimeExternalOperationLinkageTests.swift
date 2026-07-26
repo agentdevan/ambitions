@@ -3,7 +3,7 @@ import XCTest
 
 final class RuntimeExternalOperationLinkageTests: XCTestCase {
     func testT09CommitUsesV7AuthorityAndT12CompensationRelationIsDurable() {
-        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.currentWritableSchemaVersion, 7)
+        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.currentWritableSchemaVersion, 8)
         let sql = CanonicalRuntimeExternalOperationSchemaPlan.fullGenerationStatements
             .joined(separator: "\n")
         XCTAssertTrue(sql.contains("FOREIGN KEY (command_id) REFERENCES runtime_command_idempotency(command_id)"))

@@ -109,7 +109,7 @@ struct CommandReducer: Sendable {
 
     private func mutationKind(for command: AmbitionsCommand) -> CommandMutationKind {
         switch command.typedPayload {
-        case .capture, .goal, .step, .profile, .repair:
+        case .capture, .goal, .step, .profile, .repair, .attachment:
             return .runtimeMutation
         case .compensation:
             return .unsupported

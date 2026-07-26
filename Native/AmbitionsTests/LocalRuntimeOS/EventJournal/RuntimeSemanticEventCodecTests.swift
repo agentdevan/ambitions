@@ -26,6 +26,11 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
             (.repairRecovered, .repair), (.objectDeleted, .importDeletion),
             (.memoryForgotten, .importDeletion), (.externalReminderRequested, .externalOperation),
             (.externalCalendarEventRequested, .externalOperation),
+            (.attachmentLinked, .attachment), (.attachmentUnlinked, .attachment),
+            (.attachmentRevisionReplaced, .attachment), (.attachmentDeletionAuthorized, .attachment),
+            (.attachmentQuarantined, .attachment),
+            (.captureCreatedCompensated, .capture), (.goalCreatedCompensated, .goal),
+            (.scheduleCreatedCompensated, .schedule), (.reminderCreatedCompensated, .reminder),
         ]
         let expectedRawTypeIDs = [
             "ambitions.capture.created", "ambitions.capture.commitment_routed",
@@ -46,6 +51,11 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
             "ambitions.history.today_receipt_recorded", "ambitions.repair.recovered",
             "ambitions.object.deleted", "ambitions.memory.forgotten",
             "ambitions.external.reminder_requested", "ambitions.external.calendar_event_requested",
+            "ambitions.attachment.linked", "ambitions.attachment.unlinked",
+            "ambitions.attachment.revision_replaced", "ambitions.attachment.deletion_authorized",
+            "ambitions.attachment.quarantined",
+            "ambitions.compensation.capture_created", "ambitions.compensation.goal_created",
+            "ambitions.compensation.schedule_created", "ambitions.compensation.reminder_created",
         ]
 
         XCTAssertEqual(expected.map(\.0), RuntimeSemanticEventTypeID.allCases)

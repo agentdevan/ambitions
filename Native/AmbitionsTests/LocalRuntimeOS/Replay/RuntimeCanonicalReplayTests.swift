@@ -95,7 +95,12 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             guard case let .mutating(typeID) = RuntimeSemanticEventClassifier.classify(command) else {
                 return XCTFail("Writer fixture must classify as a mutation")
             }
-            let objectID = try RuntimeDomainObjectID(validating: "writer-event-\(index)")
+            let objectID: RuntimeDomainObjectID
+            if case let .attachment(value) = command {
+                objectID = try RuntimeDomainObjectID(validating: value.intent.attachmentID.rawValue)
+            } else {
+                objectID = try RuntimeDomainObjectID(validating: "writer-event-\(index)")
+            }
             let aggregate = RuntimeSemanticAggregate(
                 kind: typeID.aggregateKind,
                 id: try RuntimeAggregateID(validating: objectID.rawValue)
@@ -1572,7 +1577,53 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 target: target,
                 title: "Calendar"
             )),
+            Self.writerAttachmentCommand(.linkStaged),
+            Self.writerAttachmentCommand(.unlink),
+            Self.writerAttachmentCommand(.replaceRevision),
+            Self.writerAttachmentCommand(.authorizeDeletion),
+            Self.writerAttachmentCommand(.quarantine),
         ]
+    }
+
+    private static func writerAttachmentCommand(
+        _ action: RuntimeAttachmentMutationAction
+    ) -> RuntimeCommandPayload {
+        let replacement = action == .replaceRevision
+        let hasReference = [.linkStaged, .unlink, .replaceRevision].contains(action)
+        let target = RuntimeSemanticAggregate(
+            kind: .capture,
+            id: try! RuntimeAggregateID(validating: "capture-writer")
+        )
+        return .attachment(RuntimeAttachmentCommand(
+            intent: RuntimeAttachmentCommandIntent(
+                version: runtimeCanonicalAttachmentModelVersion,
+                action: action,
+                attachmentID: RuntimeAttachmentID(rawValue: "attachment-writer")!,
+                revisionID: RuntimeAttachmentRevisionID(rawValue: "attachment-revision-writer-2")!,
+                blobID: RuntimeBlobID(rawValue: "blob-writer-2")!,
+                referenceID: hasReference ? RuntimeAttachmentReferenceID(rawValue: "attachment-reference-writer-2")! : nil,
+                replacesReferenceID: replacement ? RuntimeAttachmentReferenceID(rawValue: "attachment-reference-writer-1")! : nil,
+                replacesRevisionID: replacement ? RuntimeAttachmentRevisionID(rawValue: "attachment-revision-writer-1")! : nil,
+                replacesBlobID: replacement ? RuntimeBlobID(rawValue: "blob-writer-1")! : nil,
+                target: hasReference ? target : nil,
+                expectedLifecycleVersion: 2,
+                expectedReplacedLifecycleVersion: replacement ? 3 : nil,
+                manifestDigest: String(repeating: "a", count: 64),
+                replacesManifestDigest: replacement ? String(repeating: "b", count: 64) : nil,
+                quarantineReason: action == .quarantine ? .authenticationFailed : nil,
+                quarantineEvidenceFingerprint: action == .quarantine ? String(repeating: "c", count: 64) : nil,
+                privacy: .standard,
+                provenance: RuntimeAttachmentProvenance(
+                    version: runtimeCanonicalAttachmentModelVersion,
+                    kind: .capture,
+                    sourceRecordID: "capture-writer",
+                    receivedAt: Date(timeIntervalSince1970: 1_800_000_000),
+                    sourceApplicationFingerprint: nil
+                )
+            ),
+            target: AmbitionsCommandTarget(captureID: "capture-writer"),
+            content: RuntimeCommandContent()
+        ))
     }
 
     private static func writerFixtureGoal() -> Goal {

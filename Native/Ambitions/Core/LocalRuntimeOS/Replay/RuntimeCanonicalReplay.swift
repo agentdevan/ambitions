@@ -778,8 +778,8 @@ enum CanonicalRuntimeReplaySchemaPlan {
         guard case let .integer(version)? = rows.first?.values.first else {
             throw RuntimeCanonicalReplayError.corruptAuthority
         }
-        if version == Int64(runtimeCanonicalExternalOperationSchemaVersion) {
-            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+        if version == Int64(runtimeCanonicalAttachmentSchemaVersion) {
+            try CanonicalRuntimeAttachmentSchemaPlan.requireIntegratedSchema(in: database)
             return
         }
         guard version == Int64(targetSchemaVersion) ||

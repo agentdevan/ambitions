@@ -40,7 +40,7 @@ enum RuntimeTransactionCommitPolicy {
     ) -> Bool {
         guard result.status == .succeeded else { return false }
         switch command.typedPayload {
-        case .capture, .goal, .step, .schedule, .reminder, .profile, .repair, .externalOperation:
+        case .capture, .goal, .step, .schedule, .reminder, .profile, .repair, .externalOperation, .attachment:
             return true
         case .compensation:
             return false

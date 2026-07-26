@@ -167,7 +167,7 @@ enum RuntimeTransactionObjectFacts {
             case .openDestination: break
             }
         case .importDeletion: families.append(.userSystem)
-        case .compensation: break
+        case .attachment, .compensation: break
         case .goal, .schedule, .reminder, .repair, .externalOperation: break
         }
 

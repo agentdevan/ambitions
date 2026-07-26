@@ -788,6 +788,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
     case repair(RepairCommand)
     case importDeletion(ImportDeletionCommand)
     case externalOperation(ExternalOperationCommand)
+    case attachment(RuntimeAttachmentCommand)
     case compensation(RuntimeCompensationCommand)
 
     var target: AmbitionsCommandTarget {
@@ -802,6 +803,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .attachment(value): value.target
         case let .compensation(value): value.target
         }
     }
@@ -818,6 +820,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
         case let .repair(value): value.content
         case let .importDeletion(value): value.content
         case let .externalOperation(value): RuntimeCommandContent(AmbitionsCommandPayload(title: value.title))
+        case let .attachment(value): value.content
         case let .compensation(value): value.content
         }
     }
@@ -850,6 +853,10 @@ enum RuntimeCommandOperation: String, Codable, Sendable, Equatable, Hashable, Ca
     case dismissRecommendation = "dismiss_recommendation"
     case createReminder = "create_reminder", updateReminder = "update_reminder", deleteReminder = "delete_reminder"
     case externalReminder = "external_reminder", externalCalendarEvent = "external_calendar_event"
+    case linkAttachment = "link_attachment", unlinkAttachment = "unlink_attachment"
+    case replaceAttachmentRevision = "replace_attachment_revision"
+    case authorizeAttachmentDeletion = "authorize_attachment_deletion"
+    case quarantineAttachment = "quarantine_attachment"
     case compensateMutation = "compensate_mutation"
 }
 
@@ -880,6 +887,9 @@ extension RuntimeCommandPayload {
             compensationPlanID: value.compensationPlanID,
             compensationPlanDigest: value.compensationPlanDigest
         ))
+        case let .attachment(value): .attachment(RuntimeAttachmentCommand(
+            intent: value.intent, target: target, content: value.content
+        ))
         case let .compensation(value): .compensation(RuntimeCompensationCommand(
             sourceReceiptID: value.sourceReceiptID, planID: value.planID,
             planDigest: value.planDigest, sourceLineage: value.sourceLineage,
@@ -906,6 +916,7 @@ extension RuntimeCommandPayload {
         case .repair: "repair"
         case .importDeletion: "importDeletion"
         case .externalOperation: "externalOperation"
+        case .attachment: "attachment"
         case .compensation: "compensation"
         }
     }
@@ -953,6 +964,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.action.rawValue
         case let .importDeletion(value): value.action.rawValue
         case let .externalOperation(value): value.kind.rawValue
+        case let .attachment(value): value.intent.action.rawValue
         case let .compensation(value): "execute.\(value.action.aggregateKind.rawValue)"
         }
     }
@@ -1228,6 +1240,14 @@ extension RuntimeCommandPayload {
             case .forgetMemory: .forgetMemory
             }
         case let .externalOperation(value): value.kind == .reminder ? .externalReminder : .externalCalendarEvent
+        case let .attachment(value):
+            switch value.intent.action {
+            case .linkStaged: .linkAttachment
+            case .unlink: .unlinkAttachment
+            case .replaceRevision: .replaceAttachmentRevision
+            case .authorizeDeletion: .authorizeAttachmentDeletion
+            case .quarantine: .quarantineAttachment
+            }
         case .compensation: .compensateMutation
         }
     }
@@ -1389,6 +1409,14 @@ struct RuntimeCommandV2Envelope: Codable, Sendable, Equatable, Hashable, Identif
            (intent.operationID == nil || intent.operationIdentityProvenance != .currentRequired) {
             throw RuntimeFoundationError.externalOperation(intent.operationID)
         }
+        if case let .attachment(attachment) = payload {
+            guard command.localOnly,
+                  attachment.intent.privacy == command.privacy,
+                  attachment.content == RuntimeCommandContent(),
+                  (try? RuntimeAttachmentCodec.validate(attachment.intent)) != nil else {
+                throw RuntimeFoundationError.validation
+            }
+        }
         guard RuntimeNestedIdentityValidator.hasValidIdentities(inEncodable: payload),
               RuntimeNestedIdentityValidator.hasValidIdentities(inEncodable: command.relations) else {
             throw RuntimeFoundationError.invalidIdentity(.domainObject)
@@ -1404,7 +1432,7 @@ struct RuntimeCommandV2Envelope: Codable, Sendable, Equatable, Hashable, Identif
         privacy = RuntimeCommandPrivacy(classification: command.privacy, localOnly: command.localOnly)
         idempotencyKey = command.idempotencyKey
         var seen = Set<RuntimeDomainObjectID>()
-        let rawTargetIdentities = [
+        var rawTargetIdentities = [
             payload.target.goalID,
             payload.target.captureID,
             payload.target.timeID,
@@ -1415,6 +1443,10 @@ struct RuntimeCommandV2Envelope: Codable, Sendable, Equatable, Hashable, Identif
             payload.target.recommendationID,
             payload.target.explanationID
         ].compactMap { $0 }
+        if case let .attachment(attachment) = payload {
+            rawTargetIdentities.append(attachment.intent.attachmentID.rawValue)
+            if let related = attachment.intent.target { rawTargetIdentities.append(related.id.rawValue) }
+        }
         let normalizedTargetIdentities = rawTargetIdentities.compactMap(RuntimeDomainObjectID.init(rawValue:))
         guard normalizedTargetIdentities.count == rawTargetIdentities.count,
               zip(normalizedTargetIdentities, rawTargetIdentities).allSatisfy({ $0.rawValue == $1 }) else {
@@ -1570,7 +1602,8 @@ struct RuntimeCommandCodec: Sendable {
             "capacityHint", "recoveryState", "candidateKind", "trigger", "automationPolicy", "contextQuality",
             "placementPriority", "displacedDisposition", "lifeshapeImpact", "preferredTab",
             "appearancePreference", "accentFamily", "resultState", "sourceDomain", "privacyLevel",
-            "proofRelevance", "correctionAvailability", "undoAvailability", "safetyState"
+            "proofRelevance", "correctionAvailability", "undoAvailability", "safetyState",
+            "privacyDomain", "dedupPolicy", "protectionClass", "quarantineReason"
         ]
         return context.codingPath.last.map { closedEnumKeys.contains($0.stringValue) } ?? false
     }
@@ -1579,7 +1612,7 @@ struct RuntimeCommandCodec: Sendable {
         guard let root = try? JSONSerialization.jsonObject(with: bytes) as? [String: Any],
               let payload = root["payload"] as? [String: Any],
               let family = payload.keys.first else { return false }
-        let families = Set(["capture", "goal", "step", "schedule", "reminder", "profile", "history", "repair", "importDeletion", "externalOperation", "compensation"])
+        let families = Set(["capture", "goal", "step", "schedule", "reminder", "profile", "history", "repair", "importDeletion", "externalOperation", "attachment", "compensation"])
         guard families.contains(family) else { return true }
         let actionsByFamily: [String: Set<String>] = [
             "capture": ["quickCapture", "routeCommitment", "attachToGoal", "markWaiting", "archive"],
@@ -1590,7 +1623,8 @@ struct RuntimeCommandCodec: Sendable {
             "profile": ["updatePreferences"],
             "history": ["openDestination", "askWhy", "dismissRecommendation", "todayReceipt"],
             "repair": ["recover", "openDestination"],
-            "importDeletion": ["prepareExport", "performExport", "deleteObject", "forgetMemory"]
+            "importDeletion": ["prepareExport", "performExport", "deleteObject", "forgetMemory"],
+            "attachment": Set(RuntimeAttachmentMutationAction.allCases.map(\.rawValue))
         ]
         if let supportedActions = actionsByFamily[family],
            let action = discriminator(named: "action", in: payload) ?? stringValue(named: "action", in: payload),
@@ -1657,10 +1691,20 @@ private extension RuntimeCommandV2Envelope {
               let rawTargets = root["targetIdentities"] as? [String],
               rawTargets == targetIdentities.map(\.rawValue) else { return false }
         guard RuntimeNestedIdentityValidator.hasValidIdentities(in: root) else { return false }
-        let targetIDs = [payload.target.goalID, payload.target.captureID, payload.target.timeID,
+        if case let .attachment(command) = payload {
+            guard privacy.localOnly,
+                  command.intent.privacy == privacy.classification,
+                  command.content == RuntimeCommandContent(),
+                  (try? RuntimeAttachmentCodec.validate(command.intent)) != nil else { return false }
+        }
+        var targetIDs = [payload.target.goalID, payload.target.captureID, payload.target.timeID,
                          payload.target.reviewID, payload.target.stepID, payload.target.deliverableID,
                          payload.target.scopeItemID, payload.target.recommendationID, payload.target.explanationID]
             .compactMap { $0 }
+        if case let .attachment(attachment) = payload {
+            targetIDs.append(attachment.intent.attachmentID.rawValue)
+            if let related = attachment.intent.target { targetIDs.append(related.id.rawValue) }
+        }
         var seen = Set<String>()
         let expected = targetIDs.filter { seen.insert($0).inserted }
         return expected == targetIdentities.map(\.rawValue)

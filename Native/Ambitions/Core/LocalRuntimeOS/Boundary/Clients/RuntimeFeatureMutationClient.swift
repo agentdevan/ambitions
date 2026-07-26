@@ -75,6 +75,14 @@ enum CompensationRuntimeCommandFamily: RuntimeFeatureCommandFamily {
     }
 }
 
+enum AttachmentRuntimeCommandFamily: RuntimeFeatureCommandFamily {
+    static let feature = RuntimePreparationFeature.attachment
+    static func accepts(_ payload: RuntimeCommandPayload) -> Bool {
+        if case .attachment = payload { return true }
+        return false
+    }
+}
+
 struct RuntimeFeatureCommand<Family: RuntimeFeatureCommandFamily>: Sendable, Equatable {
     let value: AmbitionsCommand
 
@@ -91,6 +99,7 @@ typealias RuntimeProfileCommand = RuntimeFeatureCommand<ProfileRuntimeCommandFam
 typealias RuntimeHistoryRepairCommand = RuntimeFeatureCommand<HistoryRepairRuntimeCommandFamily>
 typealias RuntimeImportDeletionCommand = RuntimeFeatureCommand<ImportDeletionRuntimeCommandFamily>
 typealias RuntimeExternalOperationFeatureCommand = RuntimeFeatureCommand<ExternalOperationRuntimeCommandFamily>
+typealias RuntimeAttachmentFeatureCommand = RuntimeFeatureCommand<AttachmentRuntimeCommandFamily>
 typealias RuntimeCompensationFeatureCommand = RuntimeFeatureCommand<CompensationRuntimeCommandFamily>
 
 struct RuntimeFeatureMutationClient<Family: RuntimeFeatureCommandFamily>: Sendable {
@@ -241,6 +250,28 @@ struct ExternalOperationRuntimeMutationClient: Sendable {
         await boundary.prepare(command, context: context)
     }
     func commit(_ preparation: RuntimePreparation, confirmation: RuntimeMutationConfirmation?) async -> RuntimeCommandOutcome {
+        await boundary.commit(preparation, confirmation: confirmation)
+    }
+}
+
+struct AttachmentRuntimeMutationClient: Sendable {
+    let boundary: RuntimeFeatureMutationClient<AttachmentRuntimeCommandFamily>
+
+    init(preparer: any RuntimeMutationPreparing, submitter: any RuntimeMutationSubmitting) {
+        boundary = RuntimeFeatureMutationClient(preparer: preparer, submitter: submitter)
+    }
+
+    func prepare(
+        _ command: RuntimeAttachmentFeatureCommand,
+        context: RuntimePreparationContext
+    ) async -> RuntimePreparationOutcome {
+        await boundary.prepare(command, context: context)
+    }
+
+    func commit(
+        _ preparation: RuntimePreparation,
+        confirmation: RuntimeMutationConfirmation?
+    ) async -> RuntimeCommandOutcome {
         await boundary.commit(preparation, confirmation: confirmation)
     }
 }

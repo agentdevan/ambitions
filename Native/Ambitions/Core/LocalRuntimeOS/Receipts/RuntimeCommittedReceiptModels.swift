@@ -78,6 +78,7 @@ enum RuntimeCommittedReceiptReadBounds {
     static let defaultAccessBytes = 4 * 1_048_576
     static let maximumAccessBudgetBytes = 16 * 1_048_576
     static let maximumAuthenticatedGraphBudgetBytes = 32 * 1_048_576
+    static let maximumAttachmentArtifactGraphBytes = 4 * 1_048_576
 
     static func authenticatedGraphBudgetBytes(baseBytes: Int) -> Int {
         let boundedBase = max(minimumAccessBytes, min(baseBytes, maximumAccessBudgetBytes))
@@ -394,6 +395,8 @@ enum RuntimeCommittedReceiptArtifactKind: String, Codable, Sendable, Equatable, 
     case externalOperation = "external_operation"
     case compensationPlan = "compensation_plan"
     case irreversibilityEvidence = "irreversibility_evidence"
+    case attachmentRevision = "attachment_revision"
+    case attachmentFinalizationIntent = "attachment_finalization_intent"
 }
 
 struct RuntimeCommittedReceiptArtifactLink: Codable, Sendable, Equatable, Hashable, Comparable {

@@ -168,6 +168,7 @@ enum RuntimeSemanticEventIntentKind: String, Codable, Sendable, Equatable, Hasha
     case repairRequested = "repair_requested"
     case importDeletionRequested = "import_deletion_requested"
     case externalOperationProposed = "external_operation_proposed"
+    case attachmentChanged = "attachment_changed"
     case compensationApplied = "compensation_applied"
 }
 

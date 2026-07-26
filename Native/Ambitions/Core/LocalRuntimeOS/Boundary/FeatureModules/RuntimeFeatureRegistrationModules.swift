@@ -27,6 +27,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         case "history", "repair": .historyRepair
         case "importDeletion": .importDeletion
         case "externalOperation": .externalOperation
+        case "attachment": .attachment
         case "compensation": .compensation
         default: nil
         }
@@ -52,6 +53,8 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         "repair.recover", "repair.openDestination",
         "importDeletion.prepareExport", "importDeletion.performExport", "importDeletion.deleteObject", "importDeletion.forgetMemory",
         "externalOperation.reminder", "externalOperation.calendar_event",
+        "attachment.link_staged", "attachment.unlink", "attachment.replace_revision",
+        "attachment.authorize_deletion", "attachment.quarantine",
         "compensation.apply",
     ].compactMap(RuntimeCommandCaseID.init(rawValue:)))
 }
@@ -110,6 +113,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): "repair.\(value.action.rawValue)"
         case let .importDeletion(value): "importDeletion.\(value.action.rawValue)"
         case let .externalOperation(value): "externalOperation.\(value.kind.rawValue)"
+        case let .attachment(value): "attachment.\(value.intent.action.rawValue)"
         case .compensation: "compensation.apply"
         }
         return RuntimeCommandCaseID(canonicalRawValue: rawValue)
@@ -360,7 +364,7 @@ struct ExternalOperationRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
 struct CompensationRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
     let mutationClient: CompensationRuntimeMutationClient
     let featureID = RuntimePreparationFeature.compensation
-    let order = 7
+    let order = 8
     let handler = RuntimeFeatureHandlerRegistration(
         feature: .compensation,
         reducerType: "CompensationMutationReducer",
@@ -380,6 +384,35 @@ struct CompensationRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
         RuntimeFeatureQueryRegistration(queryID: .objectInspection, owner: .compensation),
         RuntimeFeatureQueryRegistration(queryID: .history, owner: .compensation),
         RuntimeFeatureQueryRegistration(queryID: .recovery, owner: .compensation),
+    ]
+}
+
+struct AttachmentRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
+    let mutationClient: AttachmentRuntimeMutationClient
+    let featureID = RuntimePreparationFeature.attachment
+    let order = 7
+    let handler = RuntimeFeatureHandlerRegistration(
+        feature: .attachment,
+        reducerType: "AttachmentMutationReducer",
+        cases: ownership([
+            "attachment.link_staged", "attachment.unlink", "attachment.replace_revision",
+            "attachment.authorize_deletion", "attachment.quarantine",
+        ])
+    )
+    let mutationClientRegistration = RuntimeFeatureMutationClientRegistration(
+        feature: .attachment,
+        clientType: "AttachmentRuntimeMutationClient"
+    )
+    let projectorRegistrations = [
+        RuntimeProjectorRegistration(projectionID: .receipt, owner: .attachment, order: 0),
+    ]
+    let materializerRegistrations = [
+        RuntimeMaterializerRegistration(projectionID: .receipt, owner: .attachment, order: 0),
+    ]
+    let queryRegistrations = [
+        RuntimeFeatureQueryRegistration(queryID: .objectInspection, owner: .attachment),
+        RuntimeFeatureQueryRegistration(queryID: .history, owner: .attachment),
+        RuntimeFeatureQueryRegistration(queryID: .recovery, owner: .attachment),
     ]
 }
 

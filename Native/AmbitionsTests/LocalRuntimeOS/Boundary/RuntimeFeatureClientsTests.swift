@@ -243,6 +243,9 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             AnyRuntimeFeatureRegistrationModule(ExternalOperationRuntimeFeatureModule(
                 mutationClient: ExternalOperationRuntimeMutationClient(preparer: seam, submitter: seam)
             )),
+            AnyRuntimeFeatureRegistrationModule(AttachmentRuntimeFeatureModule(
+                mutationClient: AttachmentRuntimeMutationClient(preparer: seam, submitter: seam)
+            )),
             AnyRuntimeFeatureRegistrationModule(CompensationRuntimeFeatureModule(
                 mutationClient: CompensationRuntimeMutationClient(
                     preparer: seam,

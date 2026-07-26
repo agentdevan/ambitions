@@ -381,7 +381,7 @@ struct InspectionCommitPlanner: Sendable {
                 case .startSession: return .planUpdated
                 }
             case .schedule, .externalOperation: return .itemScheduled
-            case .compensation: return .planUpdated // Rejected by validate(_:).
+            case .attachment, .compensation: return .planUpdated // Compensation is rejected by validate(_:).
             case .profile: return .contextLensChanged
             case let .history(value):
                 if case .dismissRecommendation = value.action { return .recommendationDismissed }

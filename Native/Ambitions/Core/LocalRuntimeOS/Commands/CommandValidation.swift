@@ -94,6 +94,12 @@ struct AmbitionsCommandValidator: Sendable {
         case let .externalOperation(external):
             guard external.title.isEmpty == false else { return .invalid }
             return external.target.goalID == nil && external.target.stepID == nil ? .needsMissingTarget : .valid
+        case let .attachment(attachment):
+            guard command.localOnly,
+                  attachment.content == RuntimeCommandContent(),
+                  attachment.intent.privacy == command.privacy,
+                  (try? RuntimeAttachmentCodec.validate(attachment.intent)) != nil else { return .invalid }
+            return .valid
         case let .compensation(compensation):
             if Task.isCancelled { return .invalid }
             guard compensation.targets.isEmpty == false,

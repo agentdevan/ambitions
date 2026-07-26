@@ -8,6 +8,7 @@ enum RuntimePreparationFeature: String, Codable, Sendable, Equatable, Hashable, 
     case historyRepair = "history_repair"
     case importDeletion = "import_deletion"
     case externalOperation = "external_operation"
+    case attachment
     case compensation
 }
 
@@ -69,6 +70,23 @@ struct ImportDeletionMutationReducer: RuntimeFeatureMutationReducing {
 struct ExternalOperationMutationReducer: RuntimeFeatureMutationReducing {
     func reduce(_ input: RuntimeFeatureReducerInput) -> RuntimeReducerDecision {
         RuntimePureMutationDecisionBuilder.reduce(input, feature: .externalOperation)
+    }
+}
+
+struct AttachmentMutationReducer: RuntimeFeatureMutationReducing {
+    func reduce(_ input: RuntimeFeatureReducerInput) -> RuntimeReducerDecision {
+        guard case let .attachment(command) = input.command.typedPayload,
+              input.command.localOnly,
+              command.content == RuntimeCommandContent(),
+              command.intent.privacy == input.command.privacy,
+              (try? RuntimeAttachmentCodec.validate(command.intent)) != nil else {
+            return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .attachment)
+        }
+        if command.intent.action != .linkStaged,
+           case .absent = input.command.expectedRevision {
+            return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .attachment)
+        }
+        return RuntimePureMutationDecisionBuilder.reduce(input, feature: .attachment)
     }
 }
 
@@ -222,6 +240,7 @@ struct RuntimeFeatureMutationRouter: Sendable {
         case .history, .repair: .historyRepair
         case .importDeletion: .importDeletion
         case .externalOperation: .externalOperation
+        case .attachment: .attachment
         case .compensation: .compensation
         }
     }
@@ -237,6 +256,7 @@ struct RuntimeFeatureMutationRouter: Sendable {
         case .historyRepair: return HistoryRepairMutationReducer().reduce(input)
         case .importDeletion: return ImportDeletionMutationReducer().reduce(input)
         case .externalOperation: return ExternalOperationMutationReducer().reduce(input)
+        case .attachment: return AttachmentMutationReducer().reduce(input)
         case .compensation: return CompensationMutationReducer().reduce(input)
         }
     }
@@ -484,6 +504,10 @@ private enum RuntimePureMutationDecisionBuilder {
             case .deleteObject, .forgetMemory: return .tombstone
             case .prepareExport, .performExport: return .update
             }
+        case let .attachment(value):
+            if value.intent.action == .linkStaged,
+               case .absent = command.expectedRevision { return .create }
+            return .update
         default: return .update
         }
     }
@@ -500,6 +524,7 @@ private enum RuntimePureMutationDecisionBuilder {
         case .repair: .repairRequested
         case .importDeletion: .importDeletionRequested
         case .externalOperation: .externalOperationProposed
+        case .attachment: .attachmentChanged
         case .compensation: .compensationApplied
         }
     }
@@ -538,6 +563,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .attachment(value): value.target
         case let .compensation(value): value.target
         }
         let raw: String? = switch self {
@@ -552,6 +578,7 @@ extension RuntimeCommandPayload {
         case .importDeletion:
             references.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .attachment(value): value.intent.attachmentID.rawValue
         case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         guard let raw, let objectID = RuntimeDomainObjectID(rawValue: raw) else { return nil }
@@ -586,6 +613,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .attachment(value): value.target
         case let .compensation(value): value.target
         }
         var values: [RuntimePreparationAggregateReference] = []
@@ -605,6 +633,12 @@ extension RuntimeCommandPayload {
         case .reminder: add(target.timeID, .reminder)
         default: add(target.timeID, .schedule)
         }
+        if case let .attachment(value) = self {
+            add(value.intent.attachmentID.rawValue, .attachment)
+            if let related = value.intent.target {
+                add(related.id.rawValue, related.kind)
+            }
+        }
         let semanticRaw: String? = switch self {
         case .capture: target.captureID
         case .goal: target.goalID
@@ -616,6 +650,7 @@ extension RuntimeCommandPayload {
         case .repair: target.recommendationID ?? target.goalID
         case .importDeletion: values.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .attachment(value): value.intent.attachmentID.rawValue
         case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         add(semanticRaw, semanticAggregateKind)
@@ -636,6 +671,7 @@ private extension RuntimeCommandPayload {
         case .repair: .repair
         case .importDeletion: .importDeletion
         case .externalOperation: .externalOperation
+        case .attachment: .attachment
         case let .compensation(value): value.action.aggregateKind
         }
     }
@@ -711,7 +747,7 @@ private enum RuntimeCompensationIntentFactory {
                 version: 1, permanence: .semantic, reason: .compensationOfCompensation,
                 commandFamily: "compensation", commandAction: command.typedPayload.diagnosticCase
             ))
-        case .profile, .history, .repair, .externalOperation:
+        case .profile, .history, .repair, .externalOperation, .attachment:
             break
         }
         return unsupported(command, reason: .missingPriorSemanticValue)
