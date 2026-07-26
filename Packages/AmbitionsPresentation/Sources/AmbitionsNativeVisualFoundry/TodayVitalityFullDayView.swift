@@ -39,29 +39,52 @@ struct TodayVitalityFullDayView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
+                    contentTitle
+
                     ForEach(Array(objects.enumerated()), id: \.element.id) { index, item in
-                        row(item, extendsAfter: index < objects.count - 1)
-                            .id(item.canonicalObjectID)
-                            .accessibilityFocused(
-                                $focusedObjectID,
-                                equals: item.canonicalObjectID
-                            )
+                        row(
+                            item,
+                            extendsAfter: index < objects.count
+                        )
+                        .id(item.canonicalObjectID)
+                        .accessibilityFocused(
+                            $focusedObjectID,
+                            equals: item.canonicalObjectID
+                        )
                     }
+
+                    Spacer(minLength: 0)
+                        .overlay(alignment: .leading) {
+                            HStack(spacing: 0) {
+                                TodayVitalityOpenRailContinuation()
+                                    .stroke(
+                                        palette.nodeColor(for: .open),
+                                        style: StrokeStyle(
+                                            lineWidth: palette.separatorStrokeWidth,
+                                            lineCap: .round,
+                                            dash: [3, 4]
+                                        )
+                                    )
+                                    .frame(width: 44)
+
+                                Spacer(minLength: 0)
+                            }
+                        }
+                        .accessibilityHidden(true)
                 }
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("tfcs-full-day-timeline")
                 .frame(maxWidth: 560, alignment: .leading)
+                .containerRelativeFrame(.vertical, alignment: .top)
                 .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 28)
+                .padding(.bottom, 12)
             }
             .background(palette.canvas)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 bottomChrome(proxy: proxy)
             }
-            .navigationTitle(content.interfaceCopy.fullDayTitle)
-            .todayFlagshipInlineNavigationTitle()
+            .navigationTitle("")
             .onAppear {
                 focusNow(proxy: proxy, shouldScroll: false)
             }
@@ -76,21 +99,43 @@ struct TodayVitalityFullDayView: View {
         .accessibilityIdentifier("tfcs-full-day-root")
     }
 
+    private var contentTitle: some View {
+        Text(content.interfaceCopy.fullDayTitle)
+            .font(TodayVitalityTypographyRole.objectIdentity.font)
+            .foregroundStyle(palette.labelPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 12)
+            .padding(.bottom, 18)
+            .accessibilityAddTraits(.isHeader)
+            .accessibilityIdentifier("r13-full-day-title")
+    }
+
     @ViewBuilder
-    private func row(_ item: TodayFlagshipTimelineObject, extendsAfter: Bool) -> some View {
+    private func row(
+        _ item: TodayFlagshipTimelineObject,
+        extendsAfter: Bool
+    ) -> some View {
         if isInspectable(item) {
             Button {
                 _ = state.openStepFromFullDay(id: item.canonicalObjectID)
             } label: {
-                rowContent(item, extendsAfter: extendsAfter, showsDisclosure: true)
+                rowContent(
+                    item,
+                    extendsAfter: extendsAfter,
+                    showsDisclosure: true
+                )
             }
             .buttonStyle(.plain)
             .accessibilityHint("Opens this Step without changing it.")
             .accessibilityInputLabels([item.objectTitle])
             .accessibilityIdentifier("tfcs-full-day-now-\(item.canonicalObjectID)")
         } else {
-            rowContent(item, extendsAfter: extendsAfter, showsDisclosure: false)
-                .accessibilityIdentifier(identifier(for: item))
+            rowContent(
+                item,
+                extendsAfter: extendsAfter,
+                showsDisclosure: false
+            )
+            .accessibilityIdentifier(identifier(for: item))
         }
     }
 
@@ -145,6 +190,7 @@ struct TodayVitalityFullDayView: View {
             .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? 24 : 18)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .fixedSize(horizontal: false, vertical: true)
         .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityLabel(for: item))
@@ -218,6 +264,7 @@ struct TodayVitalityFullDayView: View {
 
     private func nodeKind(for item: TodayFlagshipTimelineObject) -> TodayVitalityNodeKind {
         if isNow(item) { return .current }
+        if isPastResolved(item) { return .settled }
         if origin == .todayReturned && item.canonicalObjectID == content.primaryStep.id {
             return .settled
         }
@@ -233,6 +280,10 @@ struct TodayVitalityFullDayView: View {
         case .now, .ordinary:
             return .current
         }
+    }
+
+    private func isPastResolved(_ item: TodayFlagshipTimelineObject) -> Bool {
+        item.canonicalObjectID == "event.deep-work"
     }
 
     private func identifier(for item: TodayFlagshipTimelineObject) -> String {
@@ -270,5 +321,14 @@ struct TodayVitalityFullDayView: View {
             differentiateWithoutColor: differentiateWithoutColor,
             reduceTransparency: reduceTransparency
         )
+    }
+}
+
+private struct TodayVitalityOpenRailContinuation: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        return path
     }
 }

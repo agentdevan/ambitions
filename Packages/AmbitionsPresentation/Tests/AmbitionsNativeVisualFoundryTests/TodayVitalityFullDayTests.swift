@@ -69,11 +69,15 @@ final class TodayVitalityFullDayTests: XCTestCase {
 
         for required in [
             "struct TodayVitalityFullDayView: View",
-            "LazyVStack",
+            "VStack(alignment: .leading, spacing: 0)",
             "TodayVitalityRailNode(",
             "TodayVitalityFunctionalChrome(",
             "TodayVitalityActionStyle(",
             "ScrollViewReader",
+            "contentTitle",
+            "Spacer(minLength: 0)",
+            ".containerRelativeFrame(.vertical, alignment: .top)",
+            "isPastResolved",
             "state.openStepFromFullDay(id:",
             "tfcs-full-day-timeline",
             "tfcs-scroll-to-now"
@@ -81,6 +85,10 @@ final class TodayVitalityFullDayTests: XCTestCase {
             XCTAssertTrue(source.contains(required), "Missing R13 Full Day contract: \(required)")
         }
         XCTAssertTrue(wrapper.contains("TodayVitalityFullDayView("))
+        XCTAssertTrue(source.contains("font(TodayVitalityTypographyRole.objectIdentity.font)"))
+        XCTAssertTrue(source.contains("accessibilityIdentifier(\"r13-full-day-title\")"))
+        XCTAssertTrue(source.contains("if isPastResolved(item) { return .settled }"))
+        XCTAssertFalse(source.contains(".todayFlagshipInlineNavigationTitle()"))
 
         for prohibited in [
             "DatePicker", "Grid {", ".onMove", "Open in Time",
