@@ -153,6 +153,7 @@ public struct TodayFlagshipCalibrationView: View {
                 .ignoresSafeArea()
         }
         .foregroundStyle(palette.primaryInk)
+        .navigationTitle(content.interfaceCopy.todayNavigationTitle)
         .todayFlagshipHideRootNavigationBar()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-today-root")

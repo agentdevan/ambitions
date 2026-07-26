@@ -10,7 +10,16 @@ struct TodayFlagshipFocusedStepView: View {
 
     var body: some View {
         Group {
-            if state.phase == .focusedCurrent || state.phase == .recoveredContinuation {
+            if state.phase == .focusedCurrent {
+                TodayVitalityFocusedStepView(
+                    content: content,
+                    acceptedTruth: state.acceptedTruth,
+                    shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    onSelectStillCounts: {
+                        _ = state.selectStillCounts()
+                    }
+                )
+            } else if state.phase == .recoveredContinuation {
                 TodayOpenContinuityFocusedObject(
                     content: content,
                     acceptedTruth: state.acceptedTruth,

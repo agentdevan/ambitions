@@ -107,7 +107,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Focused Step · Typical · Dark") {
+#Preview("R13 Focused Step · Typical · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .focusedCurrent)
         .preferredColorScheme(.dark)
 }
@@ -120,7 +120,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Focused Step · Accessibility 5 · Dark") {
+#Preview("R13 Focused Step · Accessibility 5 · Dark") {
     TodayFlagshipCalibrationPreviewHost(phase: .focusedCurrent)
         .preferredColorScheme(.dark)
         .dynamicTypeSize(.accessibility5)
@@ -136,7 +136,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .environment(\.layoutDirection, .rightToLeft)
 }
 
-#Preview("B02 Focused Step · Long LTR") {
+#Preview("R13 Focused Step · Long English") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.longContent,
         phase: .focusedCurrent
