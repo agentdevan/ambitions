@@ -1,5 +1,9 @@
 # B02 changed-file inventory
 
+The exact path-by-path inventory relative to B01 base
+`92048f7622b06f78ee6e5667e84facd0c4beb2f4` is stored in
+`changed-files-manifest.txt`.
+
 Status: `COMPLETE AT HANDOFF`
 
 - Starting SHA: `92048f7622b06f78ee6e5667e84facd0c4beb2f4`
