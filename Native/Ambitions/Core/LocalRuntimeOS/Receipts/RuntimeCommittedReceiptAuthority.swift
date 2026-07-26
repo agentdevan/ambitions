@@ -41,6 +41,8 @@ struct RuntimeReceiptDecodedByteBudget: Sendable, Equatable {
 
 }
 
+extension RuntimeReceiptDecodedByteBudget: RuntimeExternalOperationReadBudget {}
+
 struct RuntimeAuthenticatedReceiptGraph: Sendable, Equatable {
     let core: RuntimeCommittedReceiptCore
     let eventEvidence: RuntimeVerifiedExactSemanticEventEvidence
@@ -48,7 +50,11 @@ struct RuntimeAuthenticatedReceiptGraph: Sendable, Equatable {
     let tombstones: [RuntimeCanonicalTombstoneDraft]
     let plan: RuntimeCommittedCompensationPlan?
     let irreversibilityEvidence: RuntimeIrreversibilityEvidence?
-    let pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation]
+    let externalOperations: [RuntimeAuthenticatedExternalOperationSummary]
+    /// Internal authenticated state used only by same-transaction authority
+    /// decisions. Receipt/query presentation exposes `externalOperations`.
+    let externalOperationStates: [RuntimeExternalOperationID: RuntimeCanonicalExternalOperation]
+    let externalOperationSchemaVersion: Int
     let projectionInvalidationIDs: [String]
     let compensationReceiptID: RuntimeReceiptID?
     let currentTargetStates: [RuntimeSemanticAggregate: RuntimeCanonicalAggregateState]
@@ -92,6 +98,14 @@ enum RuntimeCommittedReceiptAuthority {
         let authority: RuntimeCanonicalTombstoneAuthority
     }
 
+    private struct ExternalOperationArtifactAuthority {
+        let summaries: [RuntimeAuthenticatedExternalOperationSummary]
+        let states: [RuntimeExternalOperationID: RuntimeCanonicalExternalOperation]
+        let artifacts: [RuntimeCommittedReceiptArtifactLink]
+        let retention: [RuntimeReceiptRetentionReference]
+        let schemaVersion: Int
+    }
+
     struct HistoryDraft {
         let historyID: String
         let link: RuntimeCommittedReceiptObjectLink
@@ -105,7 +119,7 @@ enum RuntimeCommittedReceiptAuthority {
         eventRecord: CanonicalRuntimeSemanticEventRecord,
         correlationID: RuntimeCorrelationID,
         dispositionIntent: RuntimeCompensationDispositionIntent,
-        pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation],
+        externalOperationCreations: [RuntimeCanonicalExternalOperationCreation],
         compensationConsumption: RuntimeCompensationConsumptionDraft?,
         createdAtMilliseconds: Int64,
         phase: ((RuntimeCommittedReceiptAuthorityPhase) throws -> Void)? = nil,
@@ -119,8 +133,7 @@ enum RuntimeCommittedReceiptAuthority {
               eventRecord.event.mutation.aggregateTransitions.count == atomicReceipt.aggregateStates.count,
               atomicReceipt.aggregateStates.isEmpty == false,
               atomicReceipt.aggregateStates.count <= RuntimeCommittedReceiptLimits.maximumObjects,
-              pendingExternalOperations.count <=
-                RuntimeCommittedReceiptLimits.maximumPendingExternalOperations,
+              externalOperationCreations.count <= RuntimeExternalOperationLimits.maximumOperationsPerReceipt,
               atomicReceipt.unresolvedWork.filter {
                 $0.kind == .projectionInvalidation
               }.count <= RuntimeCommittedReceiptLimits.maximumProjectionInvalidations else {
@@ -136,7 +149,32 @@ enum RuntimeCommittedReceiptAuthority {
             eventRecord: eventRecord,
             privacy: privacy
         )
-        let externalOperationIDs = pendingExternalOperations.map(\.operationID).sorted()
+        let externalOperationIDs = externalOperationCreations.map(\.operationID).sorted()
+        let expectedExternalTargets = try atomicReceipt.aggregateStates.map {
+            RuntimeExternalOperationTarget(
+                family: $0.aggregate.kind,
+                objectID: try RuntimeDomainObjectID(validating: $0.aggregate.id.rawValue)
+            )
+        }.sorted()
+        guard externalOperationIDs == externalOperationCreations.map(\.operationID),
+              Set(externalOperationIDs).count == externalOperationIDs.count,
+              externalOperationCreations.allSatisfy({ creation in
+                  creation.receiptID == atomicReceipt.receiptID &&
+                      creation.commandID == atomicReceipt.commandID &&
+                      creation.lineage == atomicReceipt.lineage &&
+                      creation.targets == expectedExternalTargets &&
+                      creation.privacy == privacy.classification &&
+                      creation.localOnly &&
+                      creation.localOnly == privacy.localOnly &&
+                      creation.createdAt == atomicReceipt.committedAt &&
+                      creation.stableIdempotencyKey == .derive(
+                          operationID: creation.operationID,
+                          commandID: creation.commandID,
+                          kind: creation.kind
+                      )
+              }) else {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
         let committedDisposition: RuntimeCommittedCompensationDisposition
         let committedPlan: RuntimeCommittedCompensationPlan?
         let evidence: RuntimeIrreversibilityEvidence?
@@ -241,13 +279,11 @@ enum RuntimeCommittedReceiptAuthority {
                 ))
             }
         }
-        artifacts += try pendingExternalOperations.map {
+        artifacts += try externalOperationCreations.map {
             RuntimeCommittedReceiptArtifactLink(
                 kind: .externalOperation,
                 stableID: $0.operationID.rawValue,
-                digest: LocalRuntimeStorageChecksum.sha256Hex(
-                    for: try RuntimeCommittedReceiptCodec.encode($0)
-                )
+                digest: try RuntimeExternalOperationCodec.creationDigest($0)
             )
         }
         if let plan = committedPlan {
@@ -292,7 +328,7 @@ enum RuntimeCommittedReceiptAuthority {
                 lifecycle: $0.link.lifecycle
             )
         }
-        presentation += pendingExternalOperations.map { .externalWorkPending(kind: $0.kind) }
+        presentation += externalOperationCreations.map { .externalWorkPending(kind: $0.kind) }
         presentation.append(committedPlan == nil ? .compensationUnavailable : .compensationPlanRecorded)
 
         let core = try RuntimeCommittedReceiptCodec.makeCore(RuntimeCommittedReceiptCoreFacts(
@@ -743,7 +779,9 @@ enum RuntimeCommittedReceiptAuthority {
         database: isolated SQLiteDatabase
     ) throws -> RuntimeAuthenticatedReceiptGraph {
         var budget = RuntimeReceiptDecodedByteBudget(
-            maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
+            maximumBytes: RuntimeCommittedReceiptReadBounds.authenticatedGraphBudgetBytes(
+                baseBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
+            )
         )
         return try authenticatePersistedCore(
             expected,
@@ -1399,7 +1437,9 @@ enum RuntimeCommittedReceiptAuthority {
             tombstones: authenticatedTombstones,
             plan: authenticatedPlan,
             irreversibilityEvidence: authenticatedEvidence,
-            pendingExternalOperations: artifactAuthority.pendingExternalOperations,
+            externalOperations: artifactAuthority.externalOperations,
+            externalOperationStates: artifactAuthority.states,
+            externalOperationSchemaVersion: artifactAuthority.schemaVersion,
             projectionInvalidationIDs: artifactAuthority.projectionInvalidationIDs,
             compensationReceiptID: compensationReceiptID,
             currentTargetStates: currentTargetStates,
@@ -2032,7 +2072,9 @@ enum RuntimeCommittedReceiptAuthority {
         budget: inout RuntimeReceiptDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> (
-        pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation],
+        externalOperations: [RuntimeAuthenticatedExternalOperationSummary],
+        states: [RuntimeExternalOperationID: RuntimeCanonicalExternalOperation],
+        schemaVersion: Int,
         projectionInvalidationIDs: [String]
     ) {
         var authoritativeArtifacts = [RuntimeCommittedReceiptArtifactLink(
@@ -2110,67 +2152,26 @@ enum RuntimeCommittedReceiptAuthority {
             projectionInvalidationIDs.append(invalidationID)
         }
 
-        let operations = try budget.query(
-            """
-            SELECT operation_id, command_id, terminal_event_sequence, status,
-                   payload, payload_checksum
-            FROM runtime_pending_external_operations
-            WHERE receipt_id = ? ORDER BY operation_id LIMIT ?
-            """,
-            bindings: [
-                .text(expected.facts.receiptID.rawValue),
-                .integer(Int64(RuntimeCommittedReceiptLimits.maximumPendingExternalOperations + 1)),
-            ],
-            database: database
-        )
-        guard operations.count <= RuntimeCommittedReceiptLimits.maximumPendingExternalOperations else {
+        let versionRows = try budget.query("PRAGMA user_version", database: database)
+        guard versionRows.count == 1,
+              case let .integer(rawSchemaVersion)? = versionRows[0].values.first else {
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
-        var pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation] = []
-        pendingExternalOperations.reserveCapacity(operations.count)
-        for row in operations {
-            try Task.checkCancellation()
-            guard case let .text(rawOperationID)? = row.value(named: "operation_id"),
-                  let operationID = RuntimeExternalOperationID(rawValue: rawOperationID),
-                  row.value(named: "command_id") == .text(expected.facts.commandID.rawValue),
-                  row.value(named: "terminal_event_sequence") == .integer(
-                    try int64(expected.facts.lineage.eventSequence)
-                  ),
-                  row.value(named: "status") == .text("pending"),
-                  case let .blob(bytes)? = row.value(named: "payload"),
-                  bytes.count <= RuntimeCommittedReceiptReadBounds.maximumPersistedPayloadBytes,
-                  case let .text(checksum)? = row.value(named: "payload_checksum"),
-                  LocalRuntimeStorageChecksum.sha256Hex(for: bytes) == checksum else {
-                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
-            }
-            let operation: RuntimeCanonicalPendingExternalOperation
-            do {
-                operation = try decodeCanonical(
-                    RuntimeCanonicalPendingExternalOperation.self,
-                    bytes: bytes
-                )
-            } catch is CancellationError {
-                throw CancellationError()
-            } catch {
-                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
-            }
-            guard operation.operationID == operationID,
-                  operation.status == "pending",
-                  operation.lineage == expected.facts.lineage else {
-                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
-            }
-            authoritativeArtifacts.append(RuntimeCommittedReceiptArtifactLink(
-                kind: .externalOperation,
-                stableID: operationID.rawValue,
-                digest: checksum
-            ))
-            authoritativeRetention.append(RuntimeReceiptRetentionReference(
-                kind: .externalOperation,
-                stableID: operationID.rawValue,
-                retainUntil: nil
-            ))
-            pendingExternalOperations.append(operation)
+        let operationAuthority: ExternalOperationArtifactAuthority
+        switch Int(rawSchemaVersion) {
+        case 6:
+            operationAuthority = try authenticateLegacyExternalOperations(
+                expected, budget: &budget, database: database
+            )
+        case runtimeCanonicalExternalOperationSchemaVersion:
+            operationAuthority = try authenticateCanonicalExternalOperations(
+                expected, plan: plan, budget: &budget, database: database
+            )
+        default:
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
+        authoritativeArtifacts += operationAuthority.artifacts
+        authoritativeRetention += operationAuthority.retention
 
         if let plan {
             authoritativeArtifacts.append(RuntimeCommittedReceiptArtifactLink(
@@ -2199,7 +2200,178 @@ enum RuntimeCommittedReceiptAuthority {
               authoritativeRetention.sorted() == expected.facts.retention else {
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
-        return (pendingExternalOperations, projectionInvalidationIDs)
+        return (
+            operationAuthority.summaries,
+            operationAuthority.states,
+            operationAuthority.schemaVersion,
+            projectionInvalidationIDs
+        )
+    }
+
+    private static func authenticateLegacyExternalOperations(
+        _ expected: RuntimeCommittedReceiptCore,
+        budget: inout RuntimeReceiptDecodedByteBudget,
+        database: isolated SQLiteDatabase
+    ) throws -> ExternalOperationArtifactAuthority {
+        let rows = try budget.query(
+            """
+            SELECT operation_id, command_id, terminal_event_sequence, status,
+                   payload, payload_checksum
+            FROM runtime_pending_external_operations
+            WHERE receipt_id = ? ORDER BY operation_id LIMIT ?
+            """,
+            bindings: [
+                .text(expected.facts.receiptID.rawValue),
+                .integer(Int64(RuntimeCommittedReceiptLimits.maximumPendingExternalOperations + 1)),
+            ],
+            database: database
+        )
+        guard rows.count <= RuntimeCommittedReceiptLimits.maximumPendingExternalOperations else {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
+        var summaries: [RuntimeAuthenticatedExternalOperationSummary] = []
+        var artifacts: [RuntimeCommittedReceiptArtifactLink] = []
+        var retention: [RuntimeReceiptRetentionReference] = []
+        for row in rows {
+            try Task.checkCancellation()
+            guard case let .text(rawOperationID)? = row.value(named: "operation_id"),
+                  let operationID = RuntimeExternalOperationID(rawValue: rawOperationID),
+                  row.value(named: "command_id") == .text(expected.facts.commandID.rawValue),
+                  row.value(named: "terminal_event_sequence") == .integer(
+                    try int64(expected.facts.lineage.eventSequence)
+                  ),
+                  row.value(named: "status") == .text("pending"),
+                  case let .blob(bytes)? = row.value(named: "payload"),
+                  bytes.count <= RuntimeCommittedReceiptReadBounds.maximumPersistedPayloadBytes,
+                  case let .text(checksum)? = row.value(named: "payload_checksum"),
+                  LocalRuntimeStorageChecksum.sha256Hex(for: bytes) == checksum else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            let operation: RuntimeCanonicalPendingExternalOperation
+            do {
+                operation = try decodeCanonical(
+                    RuntimeCanonicalPendingExternalOperation.self, bytes: bytes
+                )
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            guard operation.operationID == operationID,
+                  operation.status == "pending",
+                  operation.lineage == expected.facts.lineage else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            summaries.append(RuntimeAuthenticatedExternalOperationSummary(
+                operationID: operationID,
+                kind: operation.kind,
+                workflowStatus: .pending,
+                effectDisposition: .notAttempted,
+                statusVersion: nil,
+                attemptCount: nil
+            ))
+            artifacts.append(RuntimeCommittedReceiptArtifactLink(
+                kind: .externalOperation, stableID: operationID.rawValue, digest: checksum
+            ))
+            retention.append(RuntimeReceiptRetentionReference(
+                kind: .externalOperation, stableID: operationID.rawValue, retainUntil: nil
+            ))
+        }
+        return ExternalOperationArtifactAuthority(
+            summaries: summaries,
+            states: [:],
+            artifacts: artifacts,
+            retention: retention,
+            schemaVersion: 6
+        )
+    }
+
+    private static func authenticateCanonicalExternalOperations(
+        _ expected: RuntimeCommittedReceiptCore,
+        plan: RuntimeCommittedCompensationPlan?,
+        budget: inout RuntimeReceiptDecodedByteBudget,
+        database: isolated SQLiteDatabase
+    ) throws -> ExternalOperationArtifactAuthority {
+        let graphs: [RuntimeExternalOperationAuthorityGraph]
+        do {
+            graphs = try RuntimeExternalOperationGraphAuthority.loadAuthenticatedForReceipt(
+                receiptID: expected.facts.receiptID,
+                budget: &budget,
+                database: database
+            )
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch is RuntimeCanonicalExternalOperationError {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        } catch is RuntimeExternalOperationCodecError {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
+
+        let expectedTargets = try expected.facts.objects.map {
+            RuntimeExternalOperationTarget(
+                family: $0.aggregate.kind,
+                objectID: try RuntimeDomainObjectID(validating: $0.aggregate.id.rawValue)
+            )
+        }.sorted()
+        var summaries: [RuntimeAuthenticatedExternalOperationSummary] = []
+        var states: [RuntimeExternalOperationID: RuntimeCanonicalExternalOperation] = [:]
+        var artifacts: [RuntimeCommittedReceiptArtifactLink] = []
+        var retention: [RuntimeReceiptRetentionReference] = []
+
+        for graph in graphs {
+            try Task.checkCancellation()
+            let creation = graph.creation
+            let current = graph.current
+            guard creation.receiptID == expected.facts.receiptID,
+                  creation.commandID == expected.facts.commandID,
+                  creation.lineage == expected.facts.lineage,
+                  creation.privacy == expected.facts.privacy.classification,
+                  creation.localOnly,
+                  creation.localOnly == expected.facts.privacy.localOnly,
+                  creation.createdAt == expected.facts.committedAt,
+                  creation.targets == expectedTargets,
+                  creation.stableIdempotencyKey == .derive(
+                    operationID: creation.operationID,
+                    commandID: creation.commandID,
+                    kind: creation.kind
+                  ),
+                  current.operationID == creation.operationID,
+                  states.updateValue(current, forKey: creation.operationID) == nil else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            summaries.append(RuntimeAuthenticatedExternalOperationSummary(
+                operationID: creation.operationID,
+                kind: creation.kind,
+                workflowStatus: current.workflowStatus,
+                effectDisposition: current.effectDisposition,
+                statusVersion: current.statusVersion,
+                attemptCount: current.attemptCount
+            ))
+            artifacts.append(RuntimeCommittedReceiptArtifactLink(
+                kind: .externalOperation,
+                stableID: creation.operationID.rawValue,
+                digest: current.creationDigest
+            ))
+            retention.append(RuntimeReceiptRetentionReference(
+                kind: .externalOperation,
+                stableID: creation.operationID.rawValue,
+                retainUntil: nil
+            ))
+        }
+
+        let operationIDs = summaries.map(\.operationID)
+        guard operationIDs == operationIDs.sorted(),
+              Set(operationIDs).count == operationIDs.count,
+              plan.map({ $0.externalOperationIDs == operationIDs }) ?? true else {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
+        return ExternalOperationArtifactAuthority(
+            summaries: summaries,
+            states: states,
+            artifacts: artifacts,
+            retention: retention,
+            schemaVersion: runtimeCanonicalExternalOperationSchemaVersion
+        )
     }
 
     private static func authenticatePlanRelations(
@@ -2281,6 +2453,259 @@ enum RuntimeCommittedReceiptAuthority {
             budget: &budget,
             database: database
         )
+    }
+
+    enum CompensatingRemovalState {
+        enum Authority: Equatable { case clear, unresolved, successorRequired }
+
+        case missing
+        case active
+        case complete
+        case failed
+
+        var authority: Authority {
+            switch self {
+            case .complete: .clear
+            case .active, .failed: .unresolved
+            case .missing: .successorRequired
+            }
+        }
+
+        var permitsSuccessorCreation: Bool { authority == .successorRequired }
+        var requiresOperatorResolution: Bool { authority == .unresolved }
+    }
+
+    private static func classifyCompensatingRemoval(
+        sourceOperationID: RuntimeExternalOperationID,
+        sourceReference: RuntimeExternalProviderReference,
+        sourceGraph: RuntimeAuthenticatedReceiptGraph,
+        sourceState: RuntimeCanonicalExternalOperation,
+        plan: RuntimeCommittedCompensationPlan,
+        database: isolated SQLiteDatabase
+    ) throws -> CompensatingRemovalState {
+        let rows = try database.query(
+            """
+            SELECT operation_id FROM runtime_external_operation_creations
+            WHERE source_operation_id = ? AND operation_action = 'compensate_removal'
+            LIMIT 2
+            """,
+            bindings: [.text(sourceOperationID.rawValue)],
+            maximumDecodedBytes: 4_096
+        )
+        guard rows.count <= 1 else { throw RuntimeCommittedReceiptAuthorityError.corruptAuthority }
+        guard case let .text(rawID)? = rows.first?.value(named: "operation_id"),
+              let operationID = RuntimeExternalOperationID(rawValue: rawID) else { return .missing }
+        var budget = RuntimeExternalOperationDecodedByteBudget()
+        guard let cancellation = try RuntimeExternalOperationGraphAuthority.loadAuthenticated(
+            operationID: operationID, budget: &budget, database: database
+        ), cancellation.creation.payload.action == .compensateRemoval,
+        cancellation.creation.payload.sourceOperationID == sourceOperationID,
+        cancellation.creation.payload.sourceProviderReference == sourceReference,
+        cancellation.creation.payload.sourceReceiptID == sourceGraph.core.facts.receiptID,
+        cancellation.creation.payload.compensationPlanID == plan.planID,
+        cancellation.creation.payload.compensationPlanDigest == plan.digest,
+        cancellation.creation.kind == sourceGraph.externalOperations.first(where: {
+            $0.operationID == sourceOperationID
+        })?.kind,
+        cancellation.creation.providerID == sourceState.providerID,
+        cancellation.creation.privacy == sourceGraph.core.facts.privacy.classification,
+        cancellation.creation.localOnly else {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
+        if cancellation.current.workflowStatus == .succeeded,
+           cancellation.current.effectDisposition == .confirmedAbsent,
+           let outcome = cancellation.attempts.last.flatMap({ cancellation.outcomes[$0.attemptID] }),
+           outcome.kind == .confirmedCancellation || outcome.kind == .reconciledCancellationAbsent {
+            return .complete
+        }
+        if cancellation.current.effectDisposition == .indeterminate ||
+            [.pending, .claimed, .executing, .retryScheduled, .reconciliationRequired]
+                .contains(cancellation.current.workflowStatus) {
+            return .active
+        }
+        return .failed
+    }
+
+    static func externalCompensationAuthority(
+        graph: RuntimeAuthenticatedReceiptGraph,
+        plan: RuntimeCommittedCompensationPlan,
+        database: isolated SQLiteDatabase
+    ) throws -> RuntimeExternalCompensationAuthority {
+        try requireExternalOperationPlanParity(graph: graph, plan: plan)
+        guard graph.externalOperationSchemaVersion ==
+                runtimeCanonicalExternalOperationSchemaVersion else {
+            return plan.externalOperationIDs.isEmpty
+                ? .clear
+                : .unresolved(operationIDs: plan.externalOperationIDs)
+        }
+        var unresolved: [RuntimeExternalOperationID] = []
+        var requiresCompensation: [RuntimeExternalOperationID] = []
+        for summary in graph.externalOperations {
+            try Task.checkCancellation()
+            guard let state = graph.externalOperationStates[summary.operationID],
+                  state.workflowStatus == summary.workflowStatus,
+                  state.effectDisposition == summary.effectDisposition,
+                  summary.statusVersion == Optional(state.statusVersion),
+                  summary.attemptCount == Optional(state.attemptCount),
+                  RuntimeExternalOperationInvariant.valid(
+                    status: summary.workflowStatus,
+                    disposition: summary.effectDisposition
+                  ) else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            if summary.effectDisposition == .indeterminate {
+                unresolved.append(summary.operationID)
+                continue
+            }
+            switch (summary.workflowStatus, summary.effectDisposition) {
+            case (.succeeded, .confirmedPresent):
+                guard let sourceReference = state.externalReference else {
+                    throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+                }
+                switch try classifyCompensatingRemoval(
+                    sourceOperationID: summary.operationID,
+                    sourceReference: sourceReference,
+                    sourceGraph: graph,
+                    sourceState: state,
+                    plan: plan,
+                    database: database
+                ).authority {
+                case .clear: break
+                case .unresolved: unresolved.append(summary.operationID)
+                case .successorRequired: requiresCompensation.append(summary.operationID)
+                }
+            case (.succeeded, .confirmedAbsent):
+                requiresCompensation.append(summary.operationID)
+            case (.permanentFailure, .notAttempted), (.permanentFailure, .confirmedAbsent),
+                 (.cancelled, .notAttempted), (.cancelled, .confirmedAbsent),
+                 (.pending, .notAttempted), (.retryScheduled, .confirmedAbsent),
+                 (.retryScheduled, .notAttempted):
+                break
+            case (.claimed, .notAttempted), (.claimed, .confirmedAbsent),
+                 (.executing, .notAttempted), (.executing, .confirmedAbsent):
+                unresolved.append(summary.operationID)
+            case (.operatorRequired, .indeterminate):
+                unresolved.append(summary.operationID)
+            default:
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+        }
+        if unresolved.isEmpty == false { return .unresolved(operationIDs: unresolved) }
+        if requiresCompensation.isEmpty == false {
+            return .externalCompensationRequired(operationIDs: requiresCompensation)
+        }
+        return .clear
+    }
+
+    static func prepareExternalOperationsForCompensation(
+        graph: RuntimeAuthenticatedReceiptGraph,
+        plan: RuntimeCommittedCompensationPlan,
+        at now: Date,
+        database: isolated SQLiteDatabase
+    ) throws -> RuntimeExternalCompensationAuthority {
+        try requireExternalOperationPlanParity(graph: graph, plan: plan)
+        guard graph.externalOperationSchemaVersion ==
+                runtimeCanonicalExternalOperationSchemaVersion else {
+            return plan.externalOperationIDs.isEmpty
+                ? .clear
+                : .unresolved(operationIDs: plan.externalOperationIDs)
+        }
+
+        var cancellable: [RuntimeCanonicalExternalOperation] = []
+        var unresolved: [RuntimeExternalOperationID] = []
+        var requiresCompensation: [RuntimeExternalOperationID] = []
+        for summary in graph.externalOperations {
+            try Task.checkCancellation()
+            guard let expected = graph.externalOperationStates[summary.operationID],
+                  expected.workflowStatus == summary.workflowStatus,
+                  expected.effectDisposition == summary.effectDisposition,
+                  summary.statusVersion == Optional(expected.statusVersion),
+                  summary.attemptCount == Optional(expected.attemptCount),
+                  RuntimeExternalOperationInvariant.valid(
+                    status: summary.workflowStatus,
+                    disposition: summary.effectDisposition
+                  ) else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            if summary.effectDisposition == .indeterminate {
+                unresolved.append(summary.operationID)
+                continue
+            }
+            switch (summary.workflowStatus, summary.effectDisposition) {
+            case (.pending, .notAttempted), (.retryScheduled, .confirmedAbsent),
+                 (.retryScheduled, .notAttempted):
+                cancellable.append(expected)
+            case (.succeeded, .confirmedPresent):
+                guard let sourceReference = expected.externalReference else {
+                    throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+                }
+                switch try classifyCompensatingRemoval(
+                    sourceOperationID: summary.operationID,
+                    sourceReference: sourceReference,
+                    sourceGraph: graph,
+                    sourceState: expected,
+                    plan: plan,
+                    database: database
+                ).authority {
+                case .clear: break
+                case .unresolved: unresolved.append(summary.operationID)
+                case .successorRequired: requiresCompensation.append(summary.operationID)
+                }
+            case (.succeeded, .confirmedAbsent):
+                requiresCompensation.append(summary.operationID)
+            case (.permanentFailure, .notAttempted), (.permanentFailure, .confirmedAbsent),
+                 (.cancelled, .notAttempted), (.cancelled, .confirmedAbsent):
+                break
+            case (.claimed, .notAttempted), (.claimed, .confirmedAbsent),
+                 (.executing, .notAttempted), (.executing, .confirmedAbsent):
+                unresolved.append(summary.operationID)
+            default:
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+        }
+        if unresolved.isEmpty == false { return .unresolved(operationIDs: unresolved) }
+        if requiresCompensation.isEmpty == false {
+            return .externalCompensationRequired(operationIDs: requiresCompensation)
+        }
+
+        for expected in cancellable {
+            try Task.checkCancellation()
+            let cancelled: RuntimeCanonicalExternalOperation
+            do {
+                cancelled = try CanonicalRuntimeExternalOperationStore.cancelForCompensation(
+                    expected: expected,
+                    at: now,
+                    database: database
+                )
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+            guard cancelled.operationID == expected.operationID,
+                  cancelled.workflowStatus == .cancelled,
+                  cancelled.effectDisposition == expected.effectDisposition,
+                  cancelled.statusVersion == expected.statusVersion + 1 else {
+                throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+            }
+        }
+        return .clear
+    }
+
+    private static func requireExternalOperationPlanParity(
+        graph: RuntimeAuthenticatedReceiptGraph,
+        plan: RuntimeCommittedCompensationPlan
+    ) throws {
+        let operationIDs = graph.externalOperations.map(\.operationID)
+        guard graph.core.facts.receiptID == plan.sourceReceiptID,
+              graph.plan == plan,
+              operationIDs == plan.externalOperationIDs,
+              operationIDs == operationIDs.sorted(),
+              Set(operationIDs).count == operationIDs.count,
+              (graph.externalOperationSchemaVersion == 6 ||
+                graph.externalOperationStates.count == operationIDs.count) else {
+            throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
+        }
     }
 
     static func loadCore(
@@ -2417,7 +2842,7 @@ enum RuntimeCommittedReceiptAuthority {
         let milliseconds = value.timeIntervalSince1970 * 1_000
         guard milliseconds.isFinite, milliseconds >= 0,
               milliseconds.rounded(.towardZero) == milliseconds,
-              milliseconds <= Double(Int64.max) else {
+              milliseconds < Double(Int64.max) else {
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
         return Int64(milliseconds)

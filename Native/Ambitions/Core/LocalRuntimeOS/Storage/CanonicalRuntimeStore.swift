@@ -260,6 +260,7 @@ actor CanonicalRuntimeStore {
             error is RuntimeCommittedReceiptQueryError ||
             error is RuntimeCommittedReceiptAuthorityError ||
             error is RuntimeCommittedReceiptCodecError ||
+            error is RuntimeCanonicalExternalOperationError ||
             error is RuntimeAtomicCommitError ||
             error is CancellationError ||
             error is LocalRuntimeStorageError

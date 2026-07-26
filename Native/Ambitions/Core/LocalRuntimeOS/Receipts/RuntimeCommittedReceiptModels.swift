@@ -77,6 +77,18 @@ enum RuntimeCommittedReceiptReadBounds {
     static let maximumPlanRowBytes = maximumSelectedPayloadRowBytes
     static let defaultAccessBytes = 4 * 1_048_576
     static let maximumAccessBudgetBytes = 16 * 1_048_576
+    static let maximumAuthenticatedGraphBudgetBytes = 32 * 1_048_576
+
+    static func authenticatedGraphBudgetBytes(baseBytes: Int) -> Int {
+        let boundedBase = max(minimumAccessBytes, min(baseBytes, maximumAccessBudgetBytes))
+        let (requiredBytes, overflow) = boundedBase.addingReportingOverflow(
+            RuntimeExternalOperationLimits.maximumReceiptGraphBytes
+        )
+        return min(
+            overflow ? maximumAuthenticatedGraphBudgetBytes : requiredBytes,
+            maximumAuthenticatedGraphBudgetBytes
+        )
+    }
 
     static func maximumSelectedPayloadRowsBytes(expectedRows: Int) -> Int {
         let rowCount = max(0, expectedRows)
@@ -590,6 +602,26 @@ struct RuntimeCommittedReceiptConfirmationReference: Sendable, Equatable, Hashab
     let consumedAt: Date
 }
 
+/// Privacy-safe current truth derived only after the complete external-operation
+/// authority graph has authenticated. Provider references, request payloads,
+/// leases, titles, and failure evidence deliberately do not cross this boundary.
+struct RuntimeAuthenticatedExternalOperationSummary: Sendable, Equatable, Hashable {
+    let operationID: RuntimeExternalOperationID
+    let kind: RuntimeExternalEffectKind
+    let workflowStatus: RuntimeExternalWorkflowStatus
+    let effectDisposition: RuntimeExternalEffectDisposition
+    /// Nil for schema-v6 compatibility rows, which did not persist normalized
+    /// workflow revisions or attempt authority.
+    let statusVersion: UInt64?
+    let attemptCount: Int?
+}
+
+enum RuntimeExternalCompensationAuthority: Sendable, Equatable, Hashable {
+    case clear
+    case unresolved(operationIDs: [RuntimeExternalOperationID])
+    case externalCompensationRequired(operationIDs: [RuntimeExternalOperationID])
+}
+
 enum RuntimeReceiptReplayInvalidationReason: String, Codable, Sendable, Equatable, Hashable {
     case quarantineOccurrence = "quarantine_occurrence"
 }
@@ -608,6 +640,7 @@ struct RuntimeCommittedReceipt: Sendable, Equatable, Hashable, Identifiable {
     let core: RuntimeCommittedReceiptCore
     let finalizedIdempotency: RuntimeFinalizedIdempotencyReference
     let replayCoverage: RuntimeReceiptReplayCoverage
+    let externalOperations: [RuntimeAuthenticatedExternalOperationSummary]
 }
 
 struct RuntimeCompensationCommand: Codable, Sendable, Equatable, Hashable {
@@ -653,7 +686,12 @@ enum RuntimeCompensationEligibility: Codable, Sendable, Equatable, Hashable {
     case expired
     case consumed(compensationReceiptID: RuntimeReceiptID)
     case stale
+    /// Schema-v6 compatibility result. Schema-v7 authority uses
+    /// `unresolvedExternalWork` so a terminal confirmed-present effect is never
+    /// misleadingly described as pending.
     case pendingExternalWork(operationIDs: [RuntimeExternalOperationID])
+    case unresolvedExternalWork(operationIDs: [RuntimeExternalOperationID])
+    case externalCompensationRequired(operationIDs: [RuntimeExternalOperationID])
     case irreversible(RuntimeIrreversibilityEvidence)
     case unsupported(RuntimeIrreversibilityEvidence)
     case sourceBlocked(
@@ -737,6 +775,8 @@ enum RuntimeRedactedCompensationEligibility: String, Codable, Sendable, Equatabl
     case consumed
     case stale
     case pendingExternalWork = "pending_external_work"
+    case unresolvedExternalWork = "unresolved_external_work"
+    case externalCompensationRequired = "external_compensation_required"
     case irreversible
     case unsupported
     case sourceBlocked = "source_blocked"

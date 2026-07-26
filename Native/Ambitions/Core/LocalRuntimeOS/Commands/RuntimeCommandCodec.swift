@@ -734,10 +734,47 @@ struct ImportDeletionCommand: Codable, Sendable, Equatable, Hashable {
 }
 
 struct ExternalOperationCommand: Codable, Sendable, Equatable, Hashable {
+    enum Action: String, Codable, Sendable, Equatable, Hashable {
+        case create
+        case compensateRemoval = "compensate_removal"
+    }
+
     let operationID: RuntimeExternalOperationID
     let kind: RuntimeExternalEffectKind
     let target: AmbitionsCommandTarget
     let title: String
+    let action: Action?
+    let sourceOperationID: RuntimeExternalOperationID?
+    let sourceProviderReference: RuntimeExternalProviderReference?
+    let sourceReceiptID: RuntimeReceiptID?
+    let compensationPlanID: RuntimeRollbackPlanID?
+    let compensationPlanDigest: String?
+
+    init(
+        operationID: RuntimeExternalOperationID,
+        kind: RuntimeExternalEffectKind,
+        target: AmbitionsCommandTarget,
+        title: String,
+        action: Action = .create,
+        sourceOperationID: RuntimeExternalOperationID? = nil,
+        sourceProviderReference: RuntimeExternalProviderReference? = nil,
+        sourceReceiptID: RuntimeReceiptID? = nil,
+        compensationPlanID: RuntimeRollbackPlanID? = nil,
+        compensationPlanDigest: String? = nil
+    ) {
+        self.operationID = operationID
+        self.kind = kind
+        self.target = target
+        self.title = title
+        self.action = action
+        self.sourceOperationID = sourceOperationID
+        self.sourceProviderReference = sourceProviderReference
+        self.sourceReceiptID = sourceReceiptID
+        self.compensationPlanID = compensationPlanID
+        self.compensationPlanDigest = compensationPlanDigest
+    }
+
+    var effectiveAction: Action { action ?? .create }
 }
 
 enum RuntimeCommandPayload: Codable, Sendable, Equatable {
@@ -834,7 +871,15 @@ extension RuntimeCommandPayload {
         case let .history(value): .history(HistoryCommand(action: value.action, target: target, content: value.content))
         case let .repair(value): .repair(RepairCommand(action: value.action, recommendation: value.recommendation, target: target, content: value.content))
         case let .importDeletion(value): .importDeletion(ImportDeletionCommand(action: value.action, target: target, content: value.content))
-        case let .externalOperation(value): .externalOperation(ExternalOperationCommand(operationID: value.operationID, kind: value.kind, target: target, title: value.title))
+        case let .externalOperation(value): .externalOperation(ExternalOperationCommand(
+            operationID: value.operationID, kind: value.kind, target: target,
+            title: value.title, action: value.effectiveAction,
+            sourceOperationID: value.sourceOperationID,
+            sourceProviderReference: value.sourceProviderReference,
+            sourceReceiptID: value.sourceReceiptID,
+            compensationPlanID: value.compensationPlanID,
+            compensationPlanDigest: value.compensationPlanDigest
+        ))
         case let .compensation(value): .compensation(RuntimeCompensationCommand(
             sourceReceiptID: value.sourceReceiptID, planID: value.planID,
             planDigest: value.planDigest, sourceLineage: value.sourceLineage,

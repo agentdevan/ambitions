@@ -947,7 +947,12 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .externalOperation(value):
             let f = value.payload.facts
             return .externalOperation(ExternalOperationCommand(
-                operationID: f.operationID, kind: f.kind, target: f.target, title: f.title
+                operationID: f.operationID, kind: f.kind, target: f.target, title: f.title,
+                action: f.effectiveAction, sourceOperationID: f.sourceOperationID,
+                sourceProviderReference: f.sourceProviderReference,
+                sourceReceiptID: f.sourceReceiptID,
+                compensationPlanID: f.compensationPlanID,
+                compensationPlanDigest: f.compensationPlanDigest
             ))
         case let .compensation(value):
             return .compensation(value.payload.facts.command)

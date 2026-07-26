@@ -778,6 +778,10 @@ enum CanonicalRuntimeReplaySchemaPlan {
         guard case let .integer(version)? = rows.first?.values.first else {
             throw RuntimeCanonicalReplayError.corruptAuthority
         }
+        if version == Int64(runtimeCanonicalExternalOperationSchemaVersion) {
+            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+            return
+        }
         guard version == Int64(targetSchemaVersion) ||
                 version == Int64(runtimeCanonicalProjectionSchemaVersion) ||
                 version == Int64(runtimeCommittedReceiptSchemaVersion) else {
@@ -1466,7 +1470,16 @@ enum RuntimeCanonicalReplayEngine {
             hasUnknownOrCorruptEvents: try verifiedHighWaterMatchesTail(database: database) == false,
             hasQuarantineOccurrences: try exists("SELECT 1 FROM runtime_replay_quarantine_occurrences LIMIT 1"),
             hasUnresolvedProjectionWork: try exists("SELECT 1 FROM runtime_commit_projection_invalidations LIMIT 1"),
-            hasUnresolvedExternalWork: try exists("SELECT 1 FROM runtime_pending_external_operations LIMIT 1"),
+            hasUnresolvedExternalWork: try exists(
+                """
+                SELECT 1 FROM runtime_external_operation_current
+                WHERE workflow_status IN (
+                    'pending','claimed','executing','retry_scheduled',
+                    'reconciliation_required','operator_required'
+                ) OR effect_disposition = 'indeterminate'
+                LIMIT 1
+                """
+            ),
             hasRetainedReceipts: try exists("SELECT 1 FROM runtime_commit_receipts LIMIT 1"),
             hasRetainedIdempotency: try exists("SELECT 1 FROM runtime_command_idempotency LIMIT 1"),
             hasRetainedLineage: try exists("SELECT 1 FROM runtime_semantic_events LIMIT 1"),

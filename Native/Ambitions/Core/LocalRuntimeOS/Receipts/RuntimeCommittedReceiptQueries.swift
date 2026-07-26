@@ -63,7 +63,11 @@ extension CanonicalRuntimeStore {
         at now: Date,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeReceiptPage {
-        var decodedBudget = RuntimeReceiptDecodedByteBudget(maximumBytes: access.maximumBytes)
+        var decodedBudget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.authenticatedGraphBudgetBytes(
+                baseBytes: access.maximumBytes
+            )
+        )
         let keyset = try receiptKeysetPredicate(after: cursor, access: access)
         let authorization = authorizedReceiptPredicate(
             access: access,
@@ -320,7 +324,11 @@ extension CanonicalRuntimeStore {
         at now: Date,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeCompensationEligibility {
-        var budget = RuntimeReceiptDecodedByteBudget(maximumBytes: access.maximumBytes)
+        var budget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.authenticatedGraphBudgetBytes(
+                baseBytes: access.maximumBytes
+            )
+        )
         let authorization = authorizedReceiptPredicate(
             access: access, digestColumn: "core_digest", privacyColumn: "privacy"
         )
@@ -373,7 +381,7 @@ extension CanonicalRuntimeStore {
             let reason = compensationAuthorityFailureReason(error)
             return .sourceBlocked(reason: reason, fingerprint: blockedFingerprint(reason))
         }
-        return try compensationEligibility(graph: graph, now: now)
+        return try compensationEligibility(graph: graph, now: now, database: database)
     }
 
     static func compensationOfferInTransaction(
@@ -383,7 +391,11 @@ extension CanonicalRuntimeStore {
         at now: Date,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeCompensationOfferState {
-        var budget = RuntimeReceiptDecodedByteBudget(maximumBytes: access.maximumBytes)
+        var budget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.authenticatedGraphBudgetBytes(
+                baseBytes: access.maximumBytes
+            )
+        )
         let authorization = authorizedReceiptPredicate(
             access: access, digestColumn: "core_digest", privacyColumn: "privacy"
         )
@@ -440,7 +452,7 @@ extension CanonicalRuntimeStore {
                 fingerprint: blockedFingerprint(reason)
             ))
         }
-        let eligibility = try compensationEligibility(graph: graph, now: now)
+        let eligibility = try compensationEligibility(graph: graph, now: now, database: database)
         guard eligibility == .available || eligibility == .confirmationRequired else {
             return .unavailable(eligibility)
         }
@@ -594,7 +606,11 @@ extension CanonicalRuntimeStore {
         now: Date,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeReceiptAuthorityState {
-        var budget = RuntimeReceiptDecodedByteBudget(maximumBytes: access.maximumBytes)
+        var budget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.authenticatedGraphBudgetBytes(
+                baseBytes: access.maximumBytes
+            )
+        )
         return try receiptAuthorityState(
             receiptID: receiptID,
             access: access,
@@ -635,6 +651,8 @@ extension CanonicalRuntimeStore {
             )
         } catch is CancellationError {
             throw CancellationError()
+        } catch RuntimeCommittedReceiptQueryError.firstRowExceedsBound {
+            throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
         } catch is SQLiteQueryBudgetExceeded {
             throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
         } catch {
@@ -689,6 +707,10 @@ extension CanonicalRuntimeStore {
             replayCoverage = try replayCoverage(for: core, budget: &budget, database: database)
         } catch is CancellationError {
             throw CancellationError()
+        } catch RuntimeCommittedReceiptQueryError.firstRowExceedsBound {
+            throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
+        } catch is SQLiteQueryBudgetExceeded {
+            throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
         } catch {
             let reason = RuntimeReceiptSourceBlockedReason.terminalEventIntegrityMismatch
             return .sourceBlocked(reason: reason, fingerprint: blockedFingerprint(reason))
@@ -701,7 +723,8 @@ extension CanonicalRuntimeStore {
             return .available(RuntimeCommittedReceipt(
                 core: core,
                 finalizedIdempotency: finalized,
-                replayCoverage: replayCoverage
+                replayCoverage: replayCoverage,
+                externalOperations: graph.externalOperations
             ))
         }
         guard exposure == .redacted else { return .unavailable }
@@ -743,6 +766,8 @@ extension CanonicalRuntimeStore {
             )
         } catch is CancellationError {
             throw CancellationError()
+        } catch RuntimeCommittedReceiptQueryError.firstRowExceedsBound {
+            throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
         } catch is SQLiteQueryBudgetExceeded {
             throw RuntimeCommittedReceiptQueryError.firstRowExceedsBound
         } catch {
@@ -820,7 +845,8 @@ extension CanonicalRuntimeStore {
 
     private static func compensationEligibility(
         graph: RuntimeAuthenticatedReceiptGraph,
-        now: Date
+        now: Date,
+        database: isolated SQLiteDatabase
     ) throws -> RuntimeCompensationEligibility {
         try RuntimeReceiptCancellation.check(.eligibilityEvaluation)
         let core = graph.core
@@ -851,14 +877,28 @@ extension CanonicalRuntimeStore {
             if let compensationReceiptID = graph.compensationReceiptID {
                 return .consumed(compensationReceiptID: compensationReceiptID)
             }
-            guard graph.pendingExternalOperations.map(\.operationID) == plan.externalOperationIDs else {
+            let externalAuthority: RuntimeExternalCompensationAuthority
+            do {
+                externalAuthority = try RuntimeCommittedReceiptAuthority
+                    .externalCompensationAuthority(graph: graph, plan: plan, database: database)
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch let error as RuntimeCommittedReceiptAuthorityError {
+                let reason = compensationAuthorityFailureReason(error)
                 return .sourceBlocked(
-                    reason: .compensationDispositionMismatch,
-                    fingerprint: blockedFingerprint(.compensationDispositionMismatch)
+                    reason: reason,
+                    fingerprint: blockedFingerprint(reason)
                 )
             }
-            if plan.externalOperationIDs.isEmpty == false {
-                return .pendingExternalWork(operationIDs: plan.externalOperationIDs)
+            switch externalAuthority {
+            case .clear:
+                break
+            case let .unresolved(operationIDs):
+                return graph.externalOperationSchemaVersion == 6
+                    ? .pendingExternalWork(operationIDs: operationIDs)
+                    : .unresolvedExternalWork(operationIDs: operationIDs)
+            case let .externalCompensationRequired(operationIDs):
+                return .externalCompensationRequired(operationIDs: operationIDs)
             }
             if now > expiresAt { return .expired }
             for target in plan.targets {
@@ -1016,6 +1056,8 @@ extension CanonicalRuntimeStore {
         case .consumed: .consumed
         case .stale: .stale
         case .pendingExternalWork: .pendingExternalWork
+        case .unresolvedExternalWork: .unresolvedExternalWork
+        case .externalCompensationRequired: .externalCompensationRequired
         case .irreversible: .irreversible
         case .unsupported: .unsupported
         case .sourceBlocked: .sourceBlocked

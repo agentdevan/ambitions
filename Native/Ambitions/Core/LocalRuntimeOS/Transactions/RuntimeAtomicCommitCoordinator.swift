@@ -140,7 +140,26 @@ struct RuntimeAtomicCommitReceipt: Codable, Sendable, Equatable {
 struct RuntimeAtomicCommitFinalOutcome: Codable, Sendable, Equatable {
     let committed: RuntimeCommittedMutation
     let receipt: RuntimeCommittedReceiptCore
+    let externalOperationCreations: [RuntimeAtomicExternalOperationCreationEvidence]
+}
+
+struct RuntimeAtomicExternalOperationCreationEvidence: Codable, Sendable, Equatable, Hashable {
+    let operationID: RuntimeExternalOperationID
+    let kind: RuntimeExternalEffectKind
+    let creationDigest: String
+    let receiptID: RuntimeReceiptID
+    let lineage: RuntimeAuthorityLineageReference
+}
+
+private struct RuntimeAtomicCommitLegacyV6FinalOutcome: Codable {
+    let committed: RuntimeCommittedMutation
+    let receipt: RuntimeCommittedReceiptCore
     let pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation]
+}
+
+private struct RuntimeAtomicCommitLegacyV6FinalOutcomeEnvelope: Codable {
+    let outcomeVersion: Int
+    let outcome: RuntimeAtomicCommitLegacyV6FinalOutcome
 }
 
 private enum RuntimeAtomicCommitLegacyV5UndoabilityReason: String, Codable {
@@ -246,7 +265,7 @@ extension RuntimeAtomicCommitError: CustomStringConvertible, LocalizedError {
 enum CanonicalRuntimeCommitSchemaPlan {
     static let sourceSchemaVersion = 1
     static let targetSchemaVersion = runtimeAtomicCommitSchemaVersion
-    static let currentWritableSchemaVersion = runtimeCommittedReceiptSchemaVersion
+    static let currentWritableSchemaVersion = runtimeCanonicalExternalOperationSchemaVersion
     static let readableActiveSchemaVersions: Set<Int> = [sourceSchemaVersion]
     static let writableAuthoritySchemaVersions: Set<Int> = [currentWritableSchemaVersion]
     static let tables: Set<String> = [
@@ -350,6 +369,10 @@ enum CanonicalRuntimeCommitSchemaPlan {
                 expected: currentWritableSchemaVersion,
                 actual: Int(version)
             )
+        }
+        if version == Int64(runtimeCanonicalExternalOperationSchemaVersion) {
+            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
+            return
         }
         try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
         let rows = try database.query(
@@ -641,7 +664,7 @@ extension CanonicalRuntimeStore {
         semanticEventBytesOverride: Data? = nil,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeAtomicCommitFinalOutcome {
-            try CanonicalRuntimeCommitSchemaPlan.requireIntegratedSchema(in: database)
+            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: database)
             try Task.checkCancellation()
             try RuntimeAtomicCommitValidation.validate(
                 preparation: preparation,
@@ -784,12 +807,21 @@ extension CanonicalRuntimeStore {
             )
             try Self.persistReceipt(receipt, createdAt: claimedAt, database: database)
             try Self.persistTombstones(tombstones, createdAt: claimedAt, database: database)
-            let pending = try Self.persistPendingExternalOperation(
-                plan.externalEffect,
+            let externalOperationCreations: [RuntimeCanonicalExternalOperationCreation]
+            if let creation = try RuntimeExternalOperationCreationFactory.make(
+                effect: plan.externalEffect,
                 receipt: receipt,
-                createdAt: claimedAt,
-                database: database
-            )
+                command: preparation.command,
+                createdAt: receipt.committedAt
+            ) {
+                _ = try CanonicalRuntimeExternalOperationStore.persistCreation(
+                    creation,
+                    database: database
+                )
+                externalOperationCreations = [creation]
+            } else {
+                externalOperationCreations = []
+            }
             if let confirmation {
                 try Self.consumeConfirmation(
                     confirmation,
@@ -820,7 +852,7 @@ extension CanonicalRuntimeStore {
                 eventRecord: eventRecord,
                 correlationID: correlationID,
                 dispositionIntent: compensationDisposition,
-                pendingExternalOperations: pending,
+                externalOperationCreations: externalOperationCreations,
                 compensationConsumption: compensationConsumption,
                 createdAtMilliseconds: claimedAt,
                 phase: { authorityPhase in
@@ -853,7 +885,15 @@ extension CanonicalRuntimeStore {
             let finalOutcome = RuntimeAtomicCommitFinalOutcome(
                 committed: committed,
                 receipt: committedReceiptCore,
-                pendingExternalOperations: pending
+                externalOperationCreations: try externalOperationCreations.map { creation in
+                    RuntimeAtomicExternalOperationCreationEvidence(
+                        operationID: creation.operationID,
+                        kind: creation.kind,
+                        creationDigest: try RuntimeExternalOperationCodec.creationDigest(creation),
+                        receiptID: creation.receiptID,
+                        lineage: creation.lineage
+                    )
+                }.sorted { $0.operationID < $1.operationID }
             )
             let finalBytes = try RuntimeAtomicCommitCoding.encodeFinalOutcome(finalOutcome)
             _ = try Self.finalizeIdempotency(
@@ -902,7 +942,7 @@ enum RuntimeAtomicCommitCoding {
         case let .current(value):
             try validateFinalOutcome(value)
             return value
-        case .legacyV5:
+        case .legacyV5, .legacyV6:
             throw RuntimeAtomicCommitError.migrationRequired(
                 expected: runtimeCommittedReceiptSchemaVersion,
                 actual: runtimeCanonicalProjectionSchemaVersion
@@ -911,7 +951,7 @@ enum RuntimeAtomicCommitCoding {
     }
 
     static func encodeFinalOutcome(_ value: RuntimeAtomicCommitFinalOutcome) throws -> Data {
-        try encode(RuntimeAtomicCommitFinalOutcomeEnvelope(outcomeVersion: 2, outcome: value))
+        try encode(RuntimeAtomicCommitFinalOutcomeEnvelope(outcomeVersion: 3, outcome: value))
     }
 
     static func requireFinalizedOutcome(
@@ -931,6 +971,7 @@ enum RuntimeAtomicCommitCoding {
     private enum FinalOutcomeInspection {
         case current(RuntimeAtomicCommitFinalOutcome)
         case legacyV5
+        case legacyV6
     }
 
     private struct FinalOutcomeVersionProbe: Decodable {
@@ -949,13 +990,27 @@ enum RuntimeAtomicCommitCoding {
             probe = nil
         }
         if let probe {
-            guard probe.outcomeVersion <= 2 else {
+            guard probe.outcomeVersion <= 3 else {
                 throw RuntimeAtomicCommitError.migrationRequired(
-                    expected: 2,
+                    expected: 3,
                     actual: probe.outcomeVersion
                 )
             }
-            guard probe.outcomeVersion == 2 else {
+            if probe.outcomeVersion == 2 {
+                let envelope: RuntimeAtomicCommitLegacyV6FinalOutcomeEnvelope
+                do {
+                    envelope = try decoder.decode(
+                        RuntimeAtomicCommitLegacyV6FinalOutcomeEnvelope.self, from: bytes
+                    )
+                } catch {
+                    throw RuntimeAtomicCommitError.corruptAuthority
+                }
+                guard envelope.outcomeVersion == 2, try encode(envelope) == bytes else {
+                    throw RuntimeAtomicCommitError.corruptAuthority
+                }
+                return .legacyV6
+            }
+            guard probe.outcomeVersion == 3 else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
             let envelope: RuntimeAtomicCommitFinalOutcomeEnvelope
@@ -966,7 +1021,7 @@ enum RuntimeAtomicCommitCoding {
             } catch {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
-            guard envelope.outcomeVersion == 2, try encode(envelope) == bytes else {
+            guard envelope.outcomeVersion == 3, try encode(envelope) == bytes else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
             return .current(envelope.outcome)
@@ -1044,13 +1099,19 @@ enum RuntimeAtomicCommitCoding {
               facts.privacy.localOnly else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        let pendingArtifacts = facts.artifacts.filter { $0.kind == .externalOperation }
-        let pendingIDs = value.pendingExternalOperations.map(\.operationID.rawValue)
-        guard Set(pendingIDs).count == pendingIDs.count,
-              pendingArtifacts.map(\.stableID).sorted() == pendingIDs.sorted(),
-              value.pendingExternalOperations.allSatisfy({ pending in
-                  RuntimeExternalOperationID(rawValue: pending.operationID.rawValue)?.rawValue == pending.operationID.rawValue &&
-                    pending.status == "pending" && pending.lineage == lineage
+        let externalArtifacts = facts.artifacts.filter { $0.kind == .externalOperation }
+        let creationIDs = value.externalOperationCreations.map(\.operationID.rawValue)
+        guard value.externalOperationCreations.count <= RuntimeExternalOperationLimits.maximumOperationsPerReceipt,
+              Set(creationIDs).count == creationIDs.count,
+              creationIDs == creationIDs.sorted(),
+              externalArtifacts.map(\.stableID).sorted() == creationIDs.sorted(),
+              value.externalOperationCreations.allSatisfy({ creation in
+                  RuntimeStoreManifestCodec.isSHA256Hex(creation.creationDigest) &&
+                    creation.receiptID == facts.receiptID && creation.lineage == lineage &&
+                    externalArtifacts.contains(where: {
+                        $0.stableID == creation.operationID.rawValue &&
+                            $0.digest == creation.creationDigest
+                    })
               }) else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
@@ -1279,12 +1340,15 @@ private struct RuntimeAtomicCommitPlan {
     ) throws -> (correlationID: RuntimeCorrelationID, causationEventID: RuntimeEventID?) {
         let core: RuntimeCommittedReceiptCore
         let plan: RuntimeCommittedCompensationPlan
+        let graph: RuntimeAuthenticatedReceiptGraph
         do {
             core = try RuntimeCommittedReceiptAuthority.loadCore(
                 receiptID: command.sourceReceiptID,
                 database: database
             )
-            try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(core, database: database)
+            graph = try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(
+                core, database: database
+            )
             plan = try RuntimeCommittedReceiptAuthority.loadPlan(
                 planID: command.planID,
                 database: database
@@ -1306,7 +1370,6 @@ private struct RuntimeAtomicCommitPlan {
               plan.action == command.action,
               plan.targets == command.targets,
               plan.requiresConfirmation == command.requiresConfirmation,
-              plan.externalOperationIDs.isEmpty,
               submittedAt <= plan.expiresAt,
               command.action.target == command.target,
               command.content == RuntimeCommandContent(),
@@ -1326,6 +1389,16 @@ private struct RuntimeAtomicCommitPlan {
                       $0.inverseTransition == command.action.transition &&
                       $0.requiredCurrentRevision == $0.sourceRevision
               }) else {
+            throw RuntimeAtomicCommitError.stalePreparation
+        }
+        let externalAuthority = try RuntimeCommittedReceiptAuthority
+            .prepareExternalOperationsForCompensation(
+                graph: graph,
+                plan: plan,
+                at: submittedAt,
+                database: database
+            )
+        guard externalAuthority == .clear else {
             throw RuntimeAtomicCommitError.stalePreparation
         }
         guard case let .exact(primaryRevision) = expectedRevision,
@@ -1973,36 +2046,35 @@ private extension CanonicalRuntimeStore {
             try requireArtifactChecksum(row, bytes: bytes)
         }
 
-        guard outcome.pendingExternalOperations.count <=
-                RuntimeCommittedReceiptLimits.maximumPendingExternalOperations else {
+        guard outcome.externalOperationCreations.count <=
+                RuntimeExternalOperationLimits.maximumOperationsPerReceipt else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        let operationRows = try database.query(
-            "SELECT operation_id, payload, payload_checksum FROM runtime_pending_external_operations WHERE receipt_id = ? ORDER BY operation_id LIMIT ?",
-            bindings: [
-                .text(facts.receiptID.rawValue),
-                .integer(Int64(outcome.pendingExternalOperations.count + 1)),
-            ],
-            maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowsBytes(
-                expectedRows: outcome.pendingExternalOperations.count
-            )
+        var externalBudget = RuntimeExternalOperationDecodedByteBudget(
+            maximumBytes: RuntimeExternalOperationLimits.maximumReceiptGraphBytes + 8_192
         )
-        guard operationRows.count == outcome.pendingExternalOperations.count else {
+        let authenticatedExternalOperations = try RuntimeExternalOperationGraphAuthority
+            .loadAuthenticatedForReceipt(
+                receiptID: facts.receiptID,
+                budget: &externalBudget,
+                database: database
+            )
+        guard authenticatedExternalOperations.count == outcome.externalOperationCreations.count else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        for (row, expected) in zip(operationRows, outcome.pendingExternalOperations.sorted(by: {
-            $0.operationID < $1.operationID
-        })) {
+        for (graph, expected) in zip(
+            authenticatedExternalOperations,
+            outcome.externalOperationCreations
+        ) {
             try Task.checkCancellation()
-            guard row.value(named: "operation_id") == .text(expected.operationID.rawValue),
-                  case let .blob(bytes)? = row.value(named: "payload"),
-                  try RuntimeAtomicCommitCoding.decodeCanonical(
-                    RuntimeCanonicalPendingExternalOperation.self,
-                    from: bytes
-                  ) == expected else {
+            guard graph.creation.operationID == expected.operationID,
+                  graph.creation.kind == expected.kind,
+                  graph.creation.receiptID == expected.receiptID,
+                  graph.creation.lineage == expected.lineage,
+                  try RuntimeExternalOperationCodec.creationDigest(graph.creation) ==
+                    expected.creationDigest else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
-            try requireArtifactChecksum(row, bytes: bytes)
         }
 
     }
@@ -2164,38 +2236,6 @@ private extension CanonicalRuntimeStore {
                 ]
             )
         }
-    }
-
-    static func persistPendingExternalOperation(
-        _ effect: RuntimeExternalEffectIntent,
-        receipt: RuntimeAtomicCommitReceipt,
-        createdAt: Int64,
-        database: isolated SQLiteDatabase
-    ) throws -> [RuntimeCanonicalPendingExternalOperation] {
-        guard case let .outbox(operationID, kind) = effect else { return [] }
-        let record = RuntimeCanonicalPendingExternalOperation(
-            operationID: operationID,
-            kind: kind,
-            status: "pending",
-            lineage: receipt.lineage
-        )
-        let bytes = try RuntimeAtomicCommitCoding.encode(record)
-        try database.execute(
-            """
-            INSERT INTO runtime_pending_external_operations(
-                operation_id, command_id, receipt_id, terminal_event_sequence,
-                operation_kind, status, operation_version, payload,
-                payload_checksum, attempt_count, updated_at_ms
-            ) VALUES (?, ?, ?, ?, ?, 'pending', 1, ?, ?, 0, ?)
-            """,
-            bindings: [
-                .text(operationID.rawValue), .text(receipt.commandID.rawValue),
-                .text(receipt.receiptID.rawValue), .integer(Int64(receipt.lineage.eventSequence)),
-                .text(kind.rawValue), .blob(bytes),
-                .text(LocalRuntimeStorageChecksum.sha256Hex(for: bytes)), .integer(createdAt),
-            ]
-        )
-        return [record]
     }
 
     static func consumeConfirmation(

@@ -35,7 +35,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         XCTAssertEqual(canonicalRuntimeStoreSchemaVersion, 1)
         XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.sourceSchemaVersion, 1)
         XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.targetSchemaVersion, 3)
-        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.currentWritableSchemaVersion, 6)
+        XCTAssertEqual(CanonicalRuntimeCommitSchemaPlan.currentWritableSchemaVersion, 7)
         XCTAssertFalse(CanonicalRuntimeStore.expectedRuntimeTables.contains("runtime_commit_receipts"))
         XCTAssertTrue(CanonicalRuntimeCommitSchemaPlan.tables.contains("runtime_commit_receipts"))
         XCTAssertTrue(CanonicalRuntimeSemanticEventSchemaPlan.tables.contains("runtime_semantic_events"))
@@ -53,7 +53,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             }
             XCTFail("Expected staged schema requirement")
         } catch let error as RuntimeAtomicCommitError {
-            XCTAssertEqual(error, .migrationRequired(expected: 6, actual: 1))
+            XCTAssertEqual(error, .migrationRequired(expected: 7, actual: 1))
         }
         let version = try await database.query("PRAGMA user_version")
         XCTAssertEqual(version.first?.values.first, .integer(1))
@@ -4005,7 +4005,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         )) { error in
             XCTAssertEqual(
                 error as? RuntimeAtomicCommitError,
-                .migrationRequired(expected: 6, actual: 5)
+                .migrationRequired(expected: 7, actual: 5)
             )
         }
 
