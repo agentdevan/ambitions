@@ -86,9 +86,14 @@ struct TodayVitalityReviewView: View {
 
     private var reviewDismissalAction: some View {
         Button(action: onCancel) {
-            Label(content.interfaceCopy.stepTitle, systemImage: "chevron.backward")
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                    .accessibilityHidden(true)
+                Text(content.interfaceCopy.stepTitle)
+            }
         }
         .disabled(state.isCommitInFlight)
+        .accessibilityLabel(content.interfaceCopy.stepTitle)
         .accessibilityHint(content.interfaceCopy.cancelReviewHint)
         .accessibilityInputLabels([content.interfaceCopy.stepTitle])
         .accessibilityIdentifier("r13-review-step-dismissal")

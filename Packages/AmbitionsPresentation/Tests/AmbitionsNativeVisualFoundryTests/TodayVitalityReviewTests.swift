@@ -52,6 +52,7 @@ final class TodayVitalityReviewTests: XCTestCase {
         XCTAssertTrue(source.contains("state.proposedTruth"))
         XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
         XCTAssertTrue(source.contains("accessibilityHidden(true)"))
+        XCTAssertTrue(source.contains("Text(content.interfaceCopy.stepTitle)"))
         XCTAssertFalse(source.contains(".glassEffect("))
         XCTAssertFalse(source.contains("TabView"))
         XCTAssertFalse(source.contains("Font.custom"))
