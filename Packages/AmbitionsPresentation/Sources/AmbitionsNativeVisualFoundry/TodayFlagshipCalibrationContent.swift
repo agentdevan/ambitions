@@ -650,25 +650,36 @@ public struct TodayFlagshipCommitFailureSnapshot: Equatable, Sendable {
     }
 }
 
+public struct TodayFlagshipFullDaySnapshot: Equatable, Sendable {
+    public let entries: [TodayFlagshipTimelineObject]
+
+    public init(entries: [TodayFlagshipTimelineObject]) {
+        self.entries = entries
+    }
+}
+
 public struct TodayFlagshipSupportingSnapshots: Equatable, Sendable {
     public let goal: TodayFlagshipGoalContextSnapshot
     public let timeTransfer: TodayFlagshipTimeTransferSnapshot
     public let history: TodayFlagshipHistoryEntrySnapshot
     public let inverse: TodayFlagshipInverseSnapshot
     public let commitFailure: TodayFlagshipCommitFailureSnapshot
+    public let fullDay: TodayFlagshipFullDaySnapshot
 
     public init(
         goal: TodayFlagshipGoalContextSnapshot,
         timeTransfer: TodayFlagshipTimeTransferSnapshot,
         history: TodayFlagshipHistoryEntrySnapshot,
         inverse: TodayFlagshipInverseSnapshot,
-        commitFailure: TodayFlagshipCommitFailureSnapshot
+        commitFailure: TodayFlagshipCommitFailureSnapshot,
+        fullDay: TodayFlagshipFullDaySnapshot = TodayFlagshipFullDaySnapshot(entries: [])
     ) {
         self.goal = goal
         self.timeTransfer = timeTransfer
         self.history = history
         self.inverse = inverse
         self.commitFailure = commitFailure
+        self.fullDay = fullDay
     }
 }
 

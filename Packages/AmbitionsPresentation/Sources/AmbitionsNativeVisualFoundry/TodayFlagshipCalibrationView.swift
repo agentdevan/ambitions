@@ -76,11 +76,10 @@ public struct TodayFlagshipCalibrationView: View {
     private func destination(for route: TodayFlagshipRoute) -> some View {
         switch route {
         case let .fullDay(origin):
-            TodayOpenContinuityFullDayView(
+            TodayVitalityFullDayView(
                 content: content,
                 state: $state,
-                origin: origin,
-                palette: palette
+                origin: origin
             )
         case let .step(id):
             if id == content.primaryStep.id {

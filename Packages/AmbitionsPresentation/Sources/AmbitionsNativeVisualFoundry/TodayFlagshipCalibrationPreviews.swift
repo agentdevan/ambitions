@@ -344,7 +344,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Full Day · Typical · Dark") {
+#Preview("R13 Full Day · Typical · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayInitial,
         fullDayOrigin: .todayInitial
@@ -352,7 +352,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Full Day · Returned · Dark") {
+#Preview("R13 Full Day · Returned · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayReturned,
         fullDayOrigin: .todayReturned
@@ -360,7 +360,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Full Day · Dense · Dark") {
+#Preview("R13 Full Day · Dense · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.denseToday,
         phase: .todayInitial,
@@ -380,7 +380,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .environment(\.layoutDirection, .rightToLeft)
 }
 
-#Preview("B02 Full Day · Compact · Dark") {
+#Preview("R13 Full Day · Compact · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayInitial,
         fullDayOrigin: .todayInitial
@@ -388,7 +388,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("B02 Full Day · Accessibility 5 · Dark") {
+#Preview("R13 Full Day · Accessibility 5 · Dark") {
     TodayFlagshipCalibrationPreviewHost(
         phase: .todayInitial,
         fullDayOrigin: .todayInitial

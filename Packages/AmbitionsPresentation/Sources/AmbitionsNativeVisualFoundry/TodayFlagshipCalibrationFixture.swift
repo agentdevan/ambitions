@@ -186,6 +186,7 @@ public enum TodayFlagshipCalibrationFixture {
             contextSeam: contextSeam,
             supporting: makeSupportingSnapshots(
                 primaryStep: primaryStep,
+                revealedStep: revealedStep,
                 receipt: receipt,
                 inverseEligible: inverseEligible
             )
@@ -194,6 +195,7 @@ public enum TodayFlagshipCalibrationFixture {
 
     private static func makeSupportingSnapshots(
         primaryStep: TodayFlagshipStepSnapshot,
+        revealedStep: TodayFlagshipStepSnapshot,
         receipt: TodayFlagshipReceiptSnapshot,
         inverseEligible: Bool
     ) -> TodayFlagshipSupportingSnapshots {
@@ -239,8 +241,78 @@ public enum TodayFlagshipCalibrationFixture {
                 retryTitle: "Try again",
                 dismissTitle: "Return to Step",
                 preservesAcceptedTruth: true
+            ),
+            fullDay: makeFullDaySnapshot(
+                primaryStep: primaryStep,
+                revealedStep: revealedStep
             )
         )
+    }
+
+    private static func makeFullDaySnapshot(
+        primaryStep: TodayFlagshipStepSnapshot,
+        revealedStep: TodayFlagshipStepSnapshot
+    ) -> TodayFlagshipFullDaySnapshot {
+        TodayFlagshipFullDaySnapshot(entries: [
+            TodayFlagshipTimelineObject(
+                id: "full-day.deep-work",
+                canonicalObjectID: "event.deep-work",
+                objectTitle: "Deep work",
+                timeLabel: "9:00 AM",
+                relationship: "90 min focus",
+                acceptedState: "Complete",
+                role: .ordinary
+            ),
+            TodayFlagshipTimelineObject(
+                id: "full-day.nursery-now",
+                canonicalObjectID: primaryStep.id,
+                objectTitle: primaryStep.title,
+                timeLabel: "Now · 10:30 AM",
+                relationship: primaryStep.currentAcceptedTruth,
+                acceptedState: primaryStep.currentAcceptedTruth,
+                role: .now
+            ),
+            TodayFlagshipTimelineObject(
+                id: "full-day.launch-brief",
+                canonicalObjectID: revealedStep.id,
+                objectTitle: revealedStep.title,
+                timeLabel: "2:00 PM",
+                relationship: "Fixed work handoff",
+                acceptedState: "Fixed",
+                isFixed: true,
+                role: .fixed
+            ),
+            TodayFlagshipTimelineObject(
+                id: "full-day.open-afternoon",
+                canonicalObjectID: "lane.open-afternoon",
+                objectTitle: "Open lane",
+                timeLabel: "3:30 PM",
+                relationship: "Focus time",
+                acceptedState: "Open",
+                isOpenLane: true,
+                role: .openLane
+            ),
+            TodayFlagshipTimelineObject(
+                id: "full-day.family-time",
+                canonicalObjectID: "event.family-time",
+                objectTitle: "Family time",
+                timeLabel: "5:30 PM",
+                relationship: "No work · Protected",
+                acceptedState: "Protected",
+                isProtected: true,
+                role: .protected
+            ),
+            TodayFlagshipTimelineObject(
+                id: "full-day.open-after-family",
+                canonicalObjectID: "lane.open-after-family",
+                objectTitle: "Open time",
+                timeLabel: "Open after 6:30 PM",
+                relationship: "Room for what matters",
+                acceptedState: "Open",
+                isOpenLane: true,
+                role: .openLane
+            )
+        ])
     }
 
     private static func makeArabicSupportingSnapshots(
@@ -481,7 +553,7 @@ public enum TodayFlagshipCalibrationFixture {
         protectedAnchorTitle: "Protected",
         openLaneAnchorTitle: "Open lane",
         viewFullDayTitle: "View Full Day",
-        fullDayTitle: "Full Day",
+        fullDayTitle: "Your day",
         scrollToNowTitle: "Scroll to Now",
         rootsGroupTitle: "Roots",
         globalActionsGroupTitle: "Global actions",

@@ -999,7 +999,8 @@ private extension TodayFlagshipCalibrationContent {
                 timeTransfer: supporting.timeTransfer,
                 history: supporting.history,
                 inverse: inverse,
-                commitFailure: supporting.commitFailure
+                commitFailure: supporting.commitFailure,
+                fullDay: supporting.fullDay
             )
         )
     }

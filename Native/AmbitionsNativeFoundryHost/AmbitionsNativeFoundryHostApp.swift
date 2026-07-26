@@ -192,6 +192,11 @@ private enum FoundryVariant: String {
     case r13ReviewNoColor = "r13-review-differentiate-without-color"
     case r13ReviewReduceMotion = "r13-review-reduce-motion"
     case r13ReviewAccessibility5 = "r13-review-accessibility5"
+    case r13FullDayTypical = "r13-full-day-typical"
+    case r13FullDayReturned = "r13-full-day-returned"
+    case r13FullDayDense = "r13-full-day-dense"
+    case r13FullDayCompact = "r13-full-day-compact"
+    case r13FullDayAccessibility5 = "r13-full-day-accessibility5"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -242,7 +247,7 @@ private enum FoundryVariant: String {
             .accessibility1
         case .b02FullDayAccessibility5, .b02FocusedAccessibility5,
                 .b02ReviewAccessibility5, .b02RootAccessibility5,
-                .r13ReviewAccessibility5:
+                .r13ReviewAccessibility5, .r13FullDayAccessibility5:
             .accessibility5
         default:
             .large
@@ -269,7 +274,8 @@ private enum FoundryVariant: String {
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL:
             .settled
-        case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned:
+        case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
+                .r13FullDayReturned:
             .todayReturned
         case .tfcsF10, .b02RecoveryTypical, .b02RecoveryRTL:
             .recoveryReview
@@ -287,7 +293,8 @@ private enum FoundryVariant: String {
 
     var content: TodayFlagshipCalibrationContent {
         switch self {
-        case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense:
+        case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense,
+                .r13FullDayDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
         case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL, .b02ReviewRTL,
                 .b02ReviewSavingRTL, .b02RootRTL, .b02SettlementRTL,
@@ -339,10 +346,12 @@ private enum FoundryVariant: String {
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {
         switch self {
-        case .b02FullDayReturned:
+        case .b02FullDayReturned, .r13FullDayReturned:
             .todayReturned
         case .b02FullDayTypical, .b02FullDayDense, .b02FullDayRTL,
-                .b02FullDayCompact, .b02FullDayAccessibility5:
+                .b02FullDayCompact, .b02FullDayAccessibility5,
+                .r13FullDayTypical, .r13FullDayDense, .r13FullDayCompact,
+                .r13FullDayAccessibility5:
             .todayInitial
         default:
             nil
