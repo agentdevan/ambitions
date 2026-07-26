@@ -157,8 +157,8 @@ struct TodayFlagshipFocusedStepView: View {
     private var temporalContext: some View {
         TodayFlagshipRelationshipRow(
             symbol: "clock",
-            title: content.primaryStep.temporalContext.relationship,
-            value: content.primaryStep.temporalContext.exactTime,
+            title: content.primaryStep.temporalContext.exactTime,
+            value: content.primaryStep.temporalContext.relationship,
             palette: palette,
             emphasized: true
         )

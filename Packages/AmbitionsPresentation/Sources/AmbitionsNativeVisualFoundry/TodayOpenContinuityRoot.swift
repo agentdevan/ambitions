@@ -318,9 +318,9 @@ struct TodayOpenContinuityStartHere: View {
     private var timeRelationship: some View {
         Label {
             VStack(alignment: .leading, spacing: 1) {
-                Text(step.temporalContext.relationship)
-                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
                 Text(step.temporalContext.exactTime)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font.weight(.semibold))
+                Text(step.temporalContext.relationship)
                     .font(TodayOpenContinuityTypographyRole.relationship.font.monospacedDigit())
             }
         } icon: {

@@ -12,6 +12,7 @@ struct TodayFlagshipReviewView: View {
     @State private var reviewFeedbackTrigger = false
     @State private var commitFeedbackTrigger = false
     @State private var commitTask: Task<Void, Never>?
+    @State private var commitGeneration: UUID?
 
     let content: TodayFlagshipCalibrationContent
     @Binding var state: TodayFlagshipJourneyState
@@ -255,22 +256,22 @@ struct TodayFlagshipReviewView: View {
         guard didBeginCommit else { return }
 
         commitTask?.cancel()
+        let generation = UUID()
+        commitGeneration = generation
         commitFeedbackTrigger.toggle()
         announceSaving()
 
         commitTask = Task { @MainActor in
             let succeeded = await onCommitProposal()
-            guard Task.isCancelled == false else {
-                _ = state.failCommit()
-                commitTask = nil
-                return
-            }
+            guard Task.isCancelled == false, commitGeneration == generation else { return }
             _ = state.resolveCommit(succeeded: succeeded)
             commitTask = nil
+            commitGeneration = nil
         }
     }
 
     private func cancelCommitTask() {
+        commitGeneration = nil
         commitTask?.cancel()
         commitTask = nil
         if state.isCommitInFlight {

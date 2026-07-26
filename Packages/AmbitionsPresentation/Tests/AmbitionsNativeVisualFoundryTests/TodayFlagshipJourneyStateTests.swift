@@ -279,6 +279,14 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertTrue(source.contains("Task.isCancelled"))
         XCTAssertTrue(source.contains("commitTask?.cancel()"))
         XCTAssertTrue(source.contains("state.failCommit()"))
+        XCTAssertTrue(source.contains("commitGeneration"))
+        XCTAssertTrue(source.contains("commitGeneration == generation"))
+        XCTAssertTrue(source.contains("commitGeneration = nil"))
+        XCTAssertFalse(
+            source.contains(
+                "guard Task.isCancelled == false else {\n                _ = state.failCommit()"
+            )
+        )
         XCTAssertTrue(source.contains("state.retryFailedCommit()"))
         XCTAssertTrue(source.contains("state.dismissFailedCommit()"))
         XCTAssertTrue(source.contains("content.supporting.commitFailure.retryTitle"))

@@ -50,7 +50,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             "It keeps the room moving without taking over the evening."
         )
         XCTAssertEqual(
-            step.temporalContext.relationship,
+            "\(step.temporalContext.exactTime) · \(step.temporalContext.relationship)",
             "Available now · before 2:00 PM handoff"
         )
         XCTAssertEqual(step.stillCountsProposal.commitActionTitle, "Record progress")
@@ -120,10 +120,16 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
         XCTAssertFalse(step.whyItFitsNow.isEmpty)
         XCTAssertFalse(step.materialConsequence.isEmpty)
-        XCTAssertEqual(step.temporalContext.exactTime, "2:00 PM")
+        XCTAssertEqual(step.temporalContext.exactTime, "Available now")
         XCTAssertEqual(
             step.temporalContext.relationship,
-            "Available now · before 2:00 PM handoff"
+            "before 2:00 PM handoff"
+        )
+        XCTAssertEqual(fixture.revealedStartHereStep.temporalContext.exactTime, "2:00 PM")
+        XCTAssertEqual(step.temporalContext.fullDayTimeLabel, "10:30 AM")
+        XCTAssertEqual(
+            fixture.timeline.first(where: { $0.canonicalObjectID == "step.send-launch-brief" })?.timeLabel,
+            "2:00 PM"
         )
         XCTAssertEqual(step.temporalContext.owner, "Time")
         XCTAssertTrue(step.stillCountsProposal.createsProof)

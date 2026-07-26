@@ -50,8 +50,8 @@ struct TodayOpenContinuityFocusedObject: View {
                     .accessibilityIdentifier("tfcs-focused-protected-consequence")
 
                     relationship(
-                        title: content.primaryStep.temporalContext.relationship,
-                        value: content.primaryStep.temporalContext.exactTime,
+                        title: content.primaryStep.temporalContext.exactTime,
+                        value: content.primaryStep.temporalContext.relationship,
                         symbol: "clock",
                         kind: .fixed
                     )

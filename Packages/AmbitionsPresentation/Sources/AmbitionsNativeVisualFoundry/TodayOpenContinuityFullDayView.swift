@@ -126,10 +126,7 @@ struct TodayOpenContinuityFullDayView: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 Label {
-                    Text(
-                        "\(nowStep.temporalContext.relationship) · "
-                            + nowStep.temporalContext.exactTime
-                    )
+                    Text(nowTimeLabel)
                 } icon: {
                     Image(systemName: "clock")
                 }
@@ -147,8 +144,7 @@ struct TodayOpenContinuityFullDayView: View {
                 nowStep.title,
                 nowStep.parentPursuitTitle,
                 nowStep.currentAcceptedTruth,
-                nowStep.temporalContext.relationship,
-                nowStep.temporalContext.exactTime
+                nowTimeLabel
             ].joined(separator: ", ")
         )
     }
@@ -197,6 +193,10 @@ struct TodayOpenContinuityFullDayView: View {
         return objectID == content.revealedStartHereStep.id
             ? content.revealedStartHereStep
             : content.primaryStep
+    }
+
+    private var nowTimeLabel: String {
+        nowStep.temporalContext.fullDayTimeLabel ?? nowStep.temporalContext.exactTime
     }
 
     private var timelineContent: TodayFlagshipCalibrationContent {

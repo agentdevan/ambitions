@@ -271,11 +271,18 @@ public struct TodayFlagshipTemporalContext: Equatable, Sendable {
     public let exactTime: String
     public let relationship: String
     public let owner: String
+    public let fullDayTimeLabel: String?
 
-    public init(exactTime: String, relationship: String, owner: String) {
+    public init(
+        exactTime: String,
+        relationship: String,
+        owner: String,
+        fullDayTimeLabel: String? = nil
+    ) {
         self.exactTime = exactTime
         self.relationship = relationship
         self.owner = owner
+        self.fullDayTimeLabel = fullDayTimeLabel
     }
 }
 

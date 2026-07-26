@@ -44,9 +44,10 @@ public enum TodayFlagshipCalibrationFixture {
             materialConsequence: "It keeps the room moving without taking over the evening.",
             startHereSummary: "A small move now keeps the nursery moving and family time protected.",
             temporalContext: TodayFlagshipTemporalContext(
-                exactTime: "2:00 PM",
-                relationship: "Available now · before 2:00 PM handoff",
-                owner: "Time"
+                exactTime: "Available now",
+                relationship: "before 2:00 PM handoff",
+                owner: "Time",
+                fullDayTimeLabel: "10:30 AM"
             ),
             primaryActionTitle: "Continue nursery setup",
             stillCountsProposal: proposal
@@ -719,8 +720,8 @@ private extension TodayFlagshipCalibrationFixture {
         )
         let proposal = TodayFlagshipStillCountsProposal(
             outcomeTitle: "ما زال يُحتسب",
-            proposedTruth: "سجّل إخلاء الزاوية واختيار عيّنة الطلاء كتقدّم ذي معنى.",
-            settledTruth: "إخلاء الزاوية واختيار عيّنة الطلاء يُحتسبان الآن ضمن تجهيز الغرفة.",
+            proposedTruth: "دهنتُ الجدار بطبقة أساس وجرّبتُ اللون الجديد.",
+            settledTruth: "دهنتُ الجدار بطبقة أساس وجرّبتُ اللون الجديد.",
             exactConsequence: "ستغادر هذه الخطوة «ابدأ من هنا» وتبقى ظاهرة في اليوم.",
             affectedLineage: "نستقبل طفلنا في منزلنا",
             proofRequirement: "سيُحفظ إدخال في السجل على هذا الجهاز.",
@@ -743,9 +744,10 @@ private extension TodayFlagshipCalibrationFixture {
             ),
             startHereSummary: "خطوة صغيرة الآن تحافظ على تقدّم الغرفة ووقت العائلة المحمي.",
             temporalContext: TodayFlagshipTemporalContext(
-                exactTime: localizedTime(hour: 16, minute: 30),
-                relationship: "قبل وقت العائلة",
-                owner: "Time"
+                exactTime: "متاح الآن",
+                relationship: "قبل تسليم الساعة ٢:٠٠ م",
+                owner: "Time",
+                fullDayTimeLabel: localizedTime(hour: 10, minute: 30)
             ),
             primaryActionTitle: "تابع تجهيز غرفة الطفل",
             stillCountsProposal: proposal
@@ -828,7 +830,7 @@ private extension TodayFlagshipCalibrationFixture {
                 stepID: "step.nursery-ready-for-crib",
                 interruptionTitle: "تابع من حيث توقفت",
                 interruptionDetail: "ما حفظته من تقدّم ما زال هنا.",
-                lastSavedProgress: "أُخليت زاوية السرير وحُفظ قرار عيّنة الطلاء.",
+                lastSavedProgress: proposal.settledTruth,
                 availableChoices: [
                     TodayFlagshipRecoveryChoice(
                         id: "recovery.continue-saved-progress",
