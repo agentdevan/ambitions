@@ -13,7 +13,9 @@ extension TodayFlagshipCalibrationHostUITests {
         assertExists([identity, settledTruth, parent, evidence, history, returnToday])
         XCTAssertLessThan(identity.frame.minY, settledTruth.frame.minY)
         XCTAssertLessThan(settledTruth.frame.minY, evidence.frame.minY)
-        XCTAssertTrue(settledTruth.label.contains("now count toward the nursery"))
+        XCTAssertTrue(
+            settledTruth.label.contains("I primed the wall and tested the new color.")
+        )
         XCTAssertTrue(parent.label.contains("Welcome our baby home"))
         XCTAssertFalse(app.images["checkmark.seal.fill"].exists)
 
@@ -33,7 +35,9 @@ extension TodayFlagshipCalibrationHostUITests {
         let returnedSettledStep = element("tfcs-returned-settled-step")
         XCTAssertTrue(returnedSettledStep.waitForExistence(timeout: 4))
         XCTAssertTrue(returnedSettledStep.label.contains("Make the nursery ready for the crib"))
-        XCTAssertTrue(returnedSettledStep.label.contains("now count toward the nursery"))
+        XCTAssertTrue(
+            returnedSettledStep.label.contains("I primed the wall and tested the new color.")
+        )
         XCTAssertEqual(
             app.staticTexts.matching(
                 NSPredicate(format: "label == %@", "Send the launch brief")

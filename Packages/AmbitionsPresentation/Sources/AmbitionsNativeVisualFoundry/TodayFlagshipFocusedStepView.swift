@@ -35,10 +35,9 @@ struct TodayFlagshipFocusedStepView: View {
                     }
                 )
             } else if state.phase == .settled {
-                TodayOpenContinuitySettlementView(
+                TodayVitalitySettlementView(
                     content: content,
                     acceptedTruth: state.acceptedTruth,
-                    palette: palette,
                     shouldFocusTruth: state.focusAnchor == .settledTruth,
                     historyDisclosure: historyDisclosure,
                     onReturnToToday: {
