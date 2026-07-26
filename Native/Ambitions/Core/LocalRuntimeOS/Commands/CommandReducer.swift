@@ -111,6 +111,8 @@ struct CommandReducer: Sendable {
         switch command.typedPayload {
         case .capture, .goal, .step, .profile, .repair:
             return .runtimeMutation
+        case .compensation:
+            return .unsupported
         case let .schedule(schedule):
             if case let .calendarWrite(intent) = schedule.action {
                 return intent.operationIdentityProvenance == .currentRequired ? .externalSideEffect : .runtimeMutation

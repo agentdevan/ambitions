@@ -43,7 +43,10 @@ struct ObjectInspectionRuntimeQueryClient: Sendable {
     }
 }
 
-struct HistoryRuntimeQueryClient: Sendable {
+/// Transitional projection-only history query. It is intentionally not a
+/// committed-receipt authority and is superseded by T12 receipt/history reads;
+/// T22 owns its removal or adaptation at the presentation boundary.
+struct LegacyProjectionHistoryRuntimeQueryClient: Sendable {
     private let read: @Sendable (RuntimeHistoryQuery) async -> RuntimeQueryTruth<RuntimeHistorySnapshot>
     init(read: @escaping @Sendable (RuntimeHistoryQuery) async -> RuntimeQueryTruth<RuntimeHistorySnapshot>) {
         self.read = read
@@ -53,7 +56,9 @@ struct HistoryRuntimeQueryClient: Sendable {
     }
 }
 
-struct RecoveryRuntimeQueryClient: Sendable {
+/// Transitional projection-only recovery query. It cannot assert compensation
+/// eligibility and remains isolated until T22 replaces its presentation use.
+struct LegacyProjectionRecoveryRuntimeQueryClient: Sendable {
     private let read: @Sendable (RuntimeRecoveryQuery) async -> RuntimeQueryTruth<RuntimeRecoverySnapshot>
     init(read: @escaping @Sendable (RuntimeRecoveryQuery) async -> RuntimeQueryTruth<RuntimeRecoverySnapshot>) {
         self.read = read
@@ -62,3 +67,9 @@ struct RecoveryRuntimeQueryClient: Sendable {
         await read(request)
     }
 }
+
+@available(*, deprecated, renamed: "LegacyProjectionHistoryRuntimeQueryClient")
+typealias HistoryRuntimeQueryClient = LegacyProjectionHistoryRuntimeQueryClient
+
+@available(*, deprecated, renamed: "LegacyProjectionRecoveryRuntimeQueryClient")
+typealias RecoveryRuntimeQueryClient = LegacyProjectionRecoveryRuntimeQueryClient

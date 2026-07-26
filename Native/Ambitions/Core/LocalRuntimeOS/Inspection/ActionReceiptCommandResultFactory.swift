@@ -64,8 +64,11 @@ extension ActionReceipt {
                 if case .complete = value.action { return .completed }
                 return .changed
             case .schedule: return .draftedPrepared
-            case .goal, .reminder, .profile, .history, .repair, .importDeletion, .externalOperation:
+            case .goal, .reminder, .profile, .history, .repair, .importDeletion,
+                 .externalOperation:
                 return .changed
+            case .compensation:
+                return .failedSafely
             }
         case .requiresConfirmation:
             return .needsConfirmation
@@ -158,7 +161,8 @@ extension ActionReceipt {
             }
             return .notSupportedYet
         case .history: return .unavailable
-        case .step, .reminder, .profile, .repair, .importDeletion, .externalOperation:
+        case .step, .reminder, .profile, .repair, .importDeletion, .externalOperation,
+             .compensation:
             return .notSupportedYet
         }
     }

@@ -751,6 +751,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
     case repair(RepairCommand)
     case importDeletion(ImportDeletionCommand)
     case externalOperation(ExternalOperationCommand)
+    case compensation(RuntimeCompensationCommand)
 
     var target: AmbitionsCommandTarget {
         switch self {
@@ -764,6 +765,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .compensation(value): value.target
         }
     }
 
@@ -779,6 +781,7 @@ enum RuntimeCommandPayload: Codable, Sendable, Equatable {
         case let .repair(value): value.content
         case let .importDeletion(value): value.content
         case let .externalOperation(value): RuntimeCommandContent(AmbitionsCommandPayload(title: value.title))
+        case let .compensation(value): value.content
         }
     }
 
@@ -810,6 +813,7 @@ enum RuntimeCommandOperation: String, Codable, Sendable, Equatable, Hashable, Ca
     case dismissRecommendation = "dismiss_recommendation"
     case createReminder = "create_reminder", updateReminder = "update_reminder", deleteReminder = "delete_reminder"
     case externalReminder = "external_reminder", externalCalendarEvent = "external_calendar_event"
+    case compensateMutation = "compensate_mutation"
 }
 
 extension RuntimeCommandPayload {
@@ -831,6 +835,13 @@ extension RuntimeCommandPayload {
         case let .repair(value): .repair(RepairCommand(action: value.action, recommendation: value.recommendation, target: target, content: value.content))
         case let .importDeletion(value): .importDeletion(ImportDeletionCommand(action: value.action, target: target, content: value.content))
         case let .externalOperation(value): .externalOperation(ExternalOperationCommand(operationID: value.operationID, kind: value.kind, target: target, title: value.title))
+        case let .compensation(value): .compensation(RuntimeCompensationCommand(
+            sourceReceiptID: value.sourceReceiptID, planID: value.planID,
+            planDigest: value.planDigest, sourceLineage: value.sourceLineage,
+            action: value.action, targets: value.targets,
+            requiresConfirmation: value.requiresConfirmation,
+            target: target, content: value.content
+        ))
         }
     }
 }
@@ -850,6 +861,7 @@ extension RuntimeCommandPayload {
         case .repair: "repair"
         case .importDeletion: "importDeletion"
         case .externalOperation: "externalOperation"
+        case .compensation: "compensation"
         }
     }
 
@@ -896,6 +908,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.action.rawValue
         case let .importDeletion(value): value.action.rawValue
         case let .externalOperation(value): value.kind.rawValue
+        case let .compensation(value): "execute.\(value.action.aggregateKind.rawValue)"
         }
     }
 
@@ -1170,6 +1183,7 @@ extension RuntimeCommandPayload {
             case .forgetMemory: .forgetMemory
             }
         case let .externalOperation(value): value.kind == .reminder ? .externalReminder : .externalCalendarEvent
+        case .compensation: .compensateMutation
         }
     }
 
@@ -1320,6 +1334,11 @@ struct RuntimeCommandV2Envelope: Codable, Sendable, Equatable, Hashable, Identif
               command.idempotencyKey.schemaVersion == commandIdempotencyKeySchemaVersion else {
             throw RuntimeFoundationError.validation
         }
+        if case let .schedule(schedule) = payload, case .undo = schedule.action {
+            // Historical schedule undo is decoded for inspection only. Canonical
+            // compensation is represented by the dedicated compensation family.
+            throw RuntimeFoundationError.unsupportedSchema
+        }
         if case let .schedule(schedule) = payload,
            case let .calendarWrite(intent) = schedule.action,
            (intent.operationID == nil || intent.operationIdentityProvenance != .currentRequired) {
@@ -1395,7 +1414,9 @@ enum RuntimeCommandDecodeResult: Sendable, Equatable {
 }
 
 struct RuntimeUnsupportedCommand: Sendable, Equatable {
-    enum Reason: String, Sendable, Equatable { case futureVersion, unknownFamilyOrCase, corrupt }
+    enum Reason: String, Sendable, Equatable {
+        case futureVersion, unknownFamilyOrCase, oversized, corrupt
+    }
     let originalBytes: Data
     let reason: Reason
     let recovery: RuntimeFoundationError
@@ -1404,16 +1425,33 @@ struct RuntimeUnsupportedCommand: Sendable, Equatable {
 enum RuntimeCommandCodecError: Error, Sendable, Equatable {
     case unsupported(RuntimeUnsupportedCommand)
     case corrupt(RuntimeUnsupportedCommand)
+    case envelopeTooLarge(maximumBytes: Int, actualBytes: Int)
 }
 
 struct RuntimeCommandCodec: Sendable {
+    static let maximumEnvelopeBytes = 524_288
+
     func encode(_ command: AmbitionsCommand) throws -> Data {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-        return try encoder.encode(RuntimeCommandV2Envelope(command: command, payload: command.typedPayload))
+        let bytes = try encoder.encode(RuntimeCommandV2Envelope(command: command, payload: command.typedPayload))
+        guard bytes.count <= Self.maximumEnvelopeBytes else {
+            throw RuntimeCommandCodecError.envelopeTooLarge(
+                maximumBytes: Self.maximumEnvelopeBytes,
+                actualBytes: bytes.count
+            )
+        }
+        return bytes
     }
 
     func decode(_ bytes: Data) -> RuntimeCommandDecodeResult {
+        guard bytes.count <= Self.maximumEnvelopeBytes else {
+            return .unsupported(RuntimeUnsupportedCommand(
+                originalBytes: Data(),
+                reason: .oversized,
+                recovery: .validation
+            ))
+        }
         let decoder = JSONDecoder()
         if let probe = try? decoder.decode(SchemaProbe.self, from: bytes) {
             if probe.schemaVersion == String(runtimeCommandSchemaVersion) || probe.schemaVersion == "runtime_command.native.v2" {
@@ -1455,6 +1493,13 @@ struct RuntimeCommandCodec: Sendable {
                     recovery: .corruption
                 ))
             }
+            if case let .schedule(schedule) = envelope.payload, case .undo = schedule.action {
+                return .unsupported(RuntimeUnsupportedCommand(
+                    originalBytes: bytes,
+                    reason: .unknownFamilyOrCase,
+                    recovery: .unsupportedSchema
+                ))
+            }
             return .supported(command: envelope.command, upgradedFromV1: false)
         } catch {
             let reason: RuntimeUnsupportedCommand.Reason = Self.hasUnknownPayloadDiscriminator(bytes) || Self.isUnknownClosedEnum(error)
@@ -1489,7 +1534,7 @@ struct RuntimeCommandCodec: Sendable {
         guard let root = try? JSONSerialization.jsonObject(with: bytes) as? [String: Any],
               let payload = root["payload"] as? [String: Any],
               let family = payload.keys.first else { return false }
-        let families = Set(["capture", "goal", "step", "schedule", "reminder", "profile", "history", "repair", "importDeletion", "externalOperation"])
+        let families = Set(["capture", "goal", "step", "schedule", "reminder", "profile", "history", "repair", "importDeletion", "externalOperation", "compensation"])
         guard families.contains(family) else { return true }
         let actionsByFamily: [String: Set<String>] = [
             "capture": ["quickCapture", "routeCommitment", "attachToGoal", "markWaiting", "archive"],
@@ -1618,6 +1663,13 @@ private enum RuntimeNestedIdentityValidator {
 
 struct LegacyV1CommandAdapter: Sendable {
     func decode(_ bytes: Data) -> RuntimeCommandDecodeResult {
+        guard bytes.count <= RuntimeCommandCodec.maximumEnvelopeBytes else {
+            return .unsupported(RuntimeUnsupportedCommand(
+                originalBytes: Data(),
+                reason: .oversized,
+                recovery: .validation
+            ))
+        }
         do {
             let legacy = try JSONDecoder().decode(LegacyV1AmbitionsCommand.self, from: bytes)
             guard legacy.schemaVersion == ambitionsCommandSchemaVersion else {

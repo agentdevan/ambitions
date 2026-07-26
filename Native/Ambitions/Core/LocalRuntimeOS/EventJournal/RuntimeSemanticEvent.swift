@@ -29,6 +29,7 @@ enum RuntimeCanonicalTombstoneReason: String, Codable, Sendable, Equatable, Hash
     case reminderDeleted = "reminder_deleted"
     case objectDeleted = "object_deleted"
     case memoryForgotten = "memory_forgotten"
+    case compensatedCreation = "compensated_creation"
 }
 
 enum RuntimeCanonicalTombstoneRetentionDisposition: String, Codable, Sendable, Equatable, Hashable {
@@ -135,9 +136,21 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
     case memoryForgotten = "ambitions.memory.forgotten"
     case externalReminderRequested = "ambitions.external.reminder_requested"
     case externalCalendarEventRequested = "ambitions.external.calendar_event_requested"
+    case captureCreatedCompensated = "ambitions.compensation.capture_created"
+    case goalCreatedCompensated = "ambitions.compensation.goal_created"
+    case scheduleCreatedCompensated = "ambitions.compensation.schedule_created"
+    case reminderCreatedCompensated = "ambitions.compensation.reminder_created"
 
     var latestPayloadVersion: Int { 3 }
-    var supportedPayloadVersions: Set<Int> { self == .captureCreated ? [0, 1, 2, 3] : [1, 2, 3] }
+    var supportedPayloadVersions: Set<Int> {
+        if Self.compensationTypeIDs.contains(self) { return [3] }
+        return self == .captureCreated ? [0, 1, 2, 3] : [1, 2, 3]
+    }
+
+    private static let compensationTypeIDs: Set<Self> = [
+        .captureCreatedCompensated, .goalCreatedCompensated,
+        .scheduleCreatedCompensated, .reminderCreatedCompensated,
+    ]
 
     var isCreation: Bool {
         switch self {
@@ -149,18 +162,19 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
     var aggregateKind: RuntimeSemanticAggregateKind {
         switch self {
         case .captureCreated, .captureCommitmentRouted, .captureAttachedToGoal,
-             .captureMarkedWaiting, .captureArchived: .capture
+             .captureMarkedWaiting, .captureArchived, .captureCreatedCompensated: .capture
         case .goalCreated, .goalUpdated, .goalPrioritySet, .goalUrgencySet,
              .goalDeadlineSet, .goalContextLensSet, .goalContextLensCleared,
              .goalDeliverableAdded, .goalDeliverableRemoved, .goalScopeItemAdded,
-             .goalScopeItemRemoved: .goal
+             .goalScopeItemRemoved, .goalCreatedCompensated: .goal
         case .stepSessionStarted, .stepCompleted, .stepDelayed, .stepSplit,
              .stepRecovered, .stepTodayActionApplied: .step
         case .scheduleItemCreated, .scheduleItemScheduled, .scheduleStepPlaced,
              .scheduleWindowProtected, .scheduleWindowCorrected,
              .scheduleMutationUndone, .scheduleRitualApplied,
-             .scheduleCalendarWriteCommitted: .schedule
-        case .reminderCreated, .reminderUpdated, .reminderDeleted: .reminder
+             .scheduleCalendarWriteCommitted, .scheduleCreatedCompensated: .schedule
+        case .reminderCreated, .reminderUpdated, .reminderDeleted,
+             .reminderCreatedCompensated: .reminder
         case .profilePreferencesUpdated: .profile
         case .historyRecommendationDismissed, .historyTodayReceiptRecorded: .history
         case .repairRecovered: .repair
@@ -175,7 +189,9 @@ enum RuntimeSemanticEventTypeID: String, Codable, Sendable, Equatable, Hashable,
             .create
         case .captureAttachedToGoal:
             .attach
-        case .captureArchived, .reminderDeleted, .objectDeleted, .memoryForgotten:
+        case .captureArchived, .reminderDeleted, .objectDeleted, .memoryForgotten,
+             .captureCreatedCompensated, .goalCreatedCompensated,
+             .scheduleCreatedCompensated, .reminderCreatedCompensated:
             .tombstone
         case .captureCommitmentRouted, .captureMarkedWaiting,
              .goalUpdated, .goalPrioritySet, .goalUrgencySet, .goalDeadlineSet,
@@ -449,6 +465,40 @@ struct RuntimeExternalOperationMutationFacts: Codable, Sendable, Equatable {
     }
 }
 
+struct RuntimeCompensationMutationFacts: Codable, Sendable, Equatable {
+    let sourceReceiptID: RuntimeReceiptID
+    let planID: RuntimeRollbackPlanID
+    let planDigest: String
+    let sourceLineage: RuntimeAuthorityLineageReference
+    let action: RuntimeSemanticCompensationAction
+    let targets: [RuntimeCompensationTargetExpectation]
+    let requiresConfirmation: Bool
+    let target: AmbitionsCommandTarget
+    let content: RuntimeCommandContent
+
+    init(_ command: RuntimeCompensationCommand) {
+        sourceReceiptID = command.sourceReceiptID
+        planID = command.planID
+        planDigest = command.planDigest
+        sourceLineage = command.sourceLineage
+        action = command.action
+        targets = command.targets
+        requiresConfirmation = command.requiresConfirmation
+        target = command.target
+        content = command.content
+    }
+
+    var command: RuntimeCompensationCommand {
+        RuntimeCompensationCommand(
+            sourceReceiptID: sourceReceiptID, planID: planID,
+            planDigest: planDigest, sourceLineage: sourceLineage,
+            action: action, targets: targets,
+            requiresConfirmation: requiresConfirmation,
+            target: target, content: content
+        )
+    }
+}
+
 struct RuntimeCaptureMutationPayload: RuntimeSemanticFamilyMutationPayload {
     let mutation: RuntimeSemanticMutation
     let facts: RuntimeCaptureMutationFacts
@@ -624,6 +674,55 @@ struct RuntimeExternalOperationMutationPayload: RuntimeSemanticFamilyMutationPay
     }
 }
 
+struct RuntimeCompensationMutationPayload: RuntimeSemanticFamilyMutationPayload {
+    let mutation: RuntimeSemanticMutation
+    let facts: RuntimeCompensationMutationFacts
+
+    init(mutation: RuntimeSemanticMutation, facts: RuntimeCompensationCommand) throws {
+        self.mutation = mutation
+        self.facts = RuntimeCompensationMutationFacts(facts)
+        try validate()
+    }
+
+    func validate() throws {
+        let expected: RuntimeSemanticEventTypeID = switch facts.action {
+        case .discardCreatedCapture: .captureCreatedCompensated
+        case .discardCreatedGoal: .goalCreatedCompensated
+        case .discardCreatedSchedule: .scheduleCreatedCompensated
+        case .discardCreatedReminder: .reminderCreatedCompensated
+        }
+        try Task.checkCancellation()
+        guard facts.targets.isEmpty == false,
+              facts.targets.count <= RuntimeCompensationLimits.maximumTargets else {
+            throw RuntimeSemanticEventCodecError.invalidPayload
+        }
+        let targetKeys = facts.targets.map {
+            "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)"
+        }
+        guard facts.targets == facts.targets.sorted(),
+              Set(targetKeys).count == targetKeys.count,
+              facts.content == RuntimeCommandContent(),
+              facts.targets.allSatisfy({ target in
+                  target.aggregate.kind == facts.action.aggregateKind &&
+                      target.inverseTransition == facts.action.transition &&
+                      target.requiredCurrentRevision == target.sourceRevision &&
+                      RuntimeStoreManifestCodec.isSHA256Hex(target.sourceStateDigest)
+              }) else {
+            throw RuntimeSemanticEventCodecError.invalidPayload
+        }
+        for target in facts.targets {
+            try Task.checkCancellation()
+            guard target.aggregate.kind == facts.action.aggregateKind,
+                  target.inverseTransition == facts.action.transition,
+                  target.requiredCurrentRevision == target.sourceRevision,
+                  RuntimeStoreManifestCodec.isSHA256Hex(target.sourceStateDigest) else {
+                throw RuntimeSemanticEventCodecError.invalidPayload
+            }
+        }
+        try mutation.validate(expectedType: expected)
+    }
+}
+
 enum RuntimeCaptureSemanticEvent: Sendable, Equatable {
     case created(RuntimeCaptureMutationPayload)
     case commitmentRouted(RuntimeCaptureMutationPayload)
@@ -681,6 +780,9 @@ enum RuntimeExternalOperationSemanticEvent: Sendable, Equatable {
     case reminderRequested(RuntimeExternalOperationMutationPayload)
     case calendarEventRequested(RuntimeExternalOperationMutationPayload)
 }
+enum RuntimeCompensationSemanticEvent: Sendable, Equatable {
+    case applied(RuntimeCompensationMutationPayload)
+}
 
 enum RuntimeSemanticEvent: Sendable, Equatable {
     case capture(RuntimeCaptureSemanticEvent)
@@ -693,6 +795,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
     case repair(RuntimeRepairSemanticEvent)
     case importDeletion(RuntimeImportDeletionSemanticEvent)
     case externalOperation(RuntimeExternalOperationSemanticEvent)
+    case compensation(RuntimeCompensationSemanticEvent)
 
     var typeID: RuntimeSemanticEventTypeID {
         switch self {
@@ -761,6 +864,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
             case .reminderRequested: .externalReminderRequested
             case .calendarEventRequested: .externalCalendarEventRequested
             }
+        case let .compensation(value): value.payload.mutation.semanticType
         }
     }
     var aggregateKind: RuntimeSemanticAggregateKind {
@@ -779,6 +883,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .repair(value): value.payload.mutation
         case let .importDeletion(value): value.payload.mutation
         case let .externalOperation(value): value.payload.mutation
+        case let .compensation(value): value.payload.mutation
         }
     }
 
@@ -798,6 +903,7 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
         case let .repair(value): try value.payload.validate()
         case let .importDeletion(value): try value.payload.validate()
         case let .externalOperation(value): try value.payload.validate()
+        case let .compensation(value): try value.payload.validate()
         }
     }
 
@@ -843,6 +949,8 @@ enum RuntimeSemanticEvent: Sendable, Equatable {
             return .externalOperation(ExternalOperationCommand(
                 operationID: f.operationID, kind: f.kind, target: f.target, title: f.title
             ))
+        case let .compensation(value):
+            return .compensation(value.payload.facts.command)
         }
     }
 }
@@ -867,6 +975,7 @@ extension RuntimeHistorySemanticEvent { var payload: RuntimeHistoryMutationPaylo
 extension RuntimeRepairSemanticEvent { var payload: RuntimeRepairMutationPayload { switch self { case let .recovered(v): v } } }
 extension RuntimeImportDeletionSemanticEvent { var payload: RuntimeImportDeletionMutationPayload { switch self { case let .objectDeleted(v), let .memoryForgotten(v): v } } }
 extension RuntimeExternalOperationSemanticEvent { var payload: RuntimeExternalOperationMutationPayload { switch self { case let .reminderRequested(v), let .calendarEventRequested(v): v } } }
+extension RuntimeCompensationSemanticEvent { var payload: RuntimeCompensationMutationPayload { switch self { case let .applied(v): v } } }
 
 enum RuntimeSemanticEventRegistry {
     static let allRegisteredTypeIDs = Set(RuntimeSemanticEventTypeID.allCases)
@@ -972,6 +1081,13 @@ enum RuntimeSemanticEventClassifier {
             switch value.kind {
             case .reminder: .mutating(.externalReminderRequested)
             case .calendarEvent: .mutating(.externalCalendarEventRequested)
+            }
+        case let .compensation(value):
+            switch value.action {
+            case .discardCreatedCapture: .mutating(.captureCreatedCompensated)
+            case .discardCreatedGoal: .mutating(.goalCreatedCompensated)
+            case .discardCreatedSchedule: .mutating(.scheduleCreatedCompensated)
+            case .discardCreatedReminder: .mutating(.reminderCreatedCompensated)
             }
         }
     }

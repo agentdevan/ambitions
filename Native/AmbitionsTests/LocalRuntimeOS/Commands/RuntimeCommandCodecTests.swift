@@ -3,6 +3,42 @@ import XCTest
 @testable import Ambitions
 
 final class RuntimeCommandCodecTests: XCTestCase {
+    func testOversizedEnvelopeIsTypedValidationFailureWithoutRetainedHostileBytes() throws {
+        let oversizedBytes = Data(
+            repeating: 0x61,
+            count: RuntimeCommandCodec.maximumEnvelopeBytes + 1
+        )
+        guard case let .unsupported(value) = RuntimeCommandCodec().decode(oversizedBytes) else {
+            return XCTFail("Oversized input must be rejected before JSON decoding")
+        }
+        XCTAssertEqual(value.reason, .oversized)
+        XCTAssertEqual(value.recovery, .validation)
+        XCTAssertTrue(value.originalBytes.isEmpty)
+
+        let command = AmbitionsCommand(
+            id: "oversized-command",
+            source: .capture,
+            typedPayload: .capture(CaptureCommand(
+                action: .quickCapture(externalCreation: nil),
+                target: AmbitionsCommandTarget(),
+                content: RuntimeCommandContent(AmbitionsCommandPayload(
+                    title: String(
+                        repeating: "x",
+                        count: RuntimeCommandCodec.maximumEnvelopeBytes + 1
+                    )
+                ))
+            )),
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        XCTAssertThrowsError(try RuntimeCommandCodec().encode(command)) { error in
+            guard case let RuntimeCommandCodecError.envelopeTooLarge(maximum, actual) = error else {
+                return XCTFail("Expected typed envelope limit failure")
+            }
+            XCTAssertEqual(maximum, RuntimeCommandCodec.maximumEnvelopeBytes)
+            XCTAssertGreaterThan(actual, maximum)
+        }
+    }
+
     func testEveryTypedFamilyRoundTripsThroughV2Envelope() throws {
         let target = AmbitionsCommandTarget(goalID: "goal-1", captureID: "capture-1", timeID: "time-1", stepID: "step-1")
         let content = RuntimeCommandContent(AmbitionsCommandPayload(title: "Typed command"))

@@ -2,7 +2,7 @@ import AmbitionsRuntimeSQLite
 import Foundation
 
 let runtimeAtomicCommitSchemaVersion = 3
-let runtimeAtomicCommitReceiptVersion = 1
+let runtimeCommitAnchorVersion = 1
 
 /// The single canonical aggregate representation used both when committing
 /// and when replaying aggregate authority. It deliberately contains semantic
@@ -111,13 +111,9 @@ struct RuntimeCanonicalPendingExternalOperation: Codable, Sendable, Equatable, H
     let lineage: RuntimeAuthorityLineageReference
 }
 
-enum RuntimeAuthorityUndoabilityReason: String, Codable, Sendable, Equatable, Hashable {
-    case missingTypedCompensationContract = "missing_typed_compensation_contract"
-}
-
 enum RuntimeAuthorityUndoability: Codable, Sendable, Equatable, Hashable {
     case typedPlan(RuntimeRollbackPlanID)
-    case notUndoable(reason: RuntimeAuthorityUndoabilityReason)
+    case noncompensable(RuntimeIrreversibilityEvidence)
 }
 
 struct RuntimeAuthorityObjectLink: Codable, Sendable, Equatable, Hashable {
@@ -143,14 +139,71 @@ struct RuntimeAtomicCommitReceipt: Codable, Sendable, Equatable {
 
 struct RuntimeAtomicCommitFinalOutcome: Codable, Sendable, Equatable {
     let committed: RuntimeCommittedMutation
-    let receipt: RuntimeAtomicCommitReceipt
+    let receipt: RuntimeCommittedReceiptCore
     let pendingExternalOperations: [RuntimeCanonicalPendingExternalOperation]
+}
+
+private enum RuntimeAtomicCommitLegacyV5UndoabilityReason: String, Codable {
+    case missingTypedCompensationContract = "missing_typed_compensation_contract"
+}
+
+private enum RuntimeAtomicCommitLegacyV5Undoability: Codable {
+    case typedPlan(RuntimeRollbackPlanID)
+    case notUndoable(reason: RuntimeAtomicCommitLegacyV5UndoabilityReason)
+}
+
+private struct RuntimeAtomicCommitLegacyV5ObjectLink: Codable {
+    let aggregate: RuntimeSemanticAggregate
+    let terminalRevision: UInt64
+    let lifecycle: RuntimeAggregateLifecycle
+}
+
+private struct RuntimeAtomicCommitLegacyV5WorkReference: Codable {
+    enum Kind: String, Codable { case projectionInvalidation, externalOperation }
+    let kind: Kind
+    let stableID: String
+    let lineage: RuntimeAuthorityLineageReference
+}
+
+private struct RuntimeAtomicCommitLegacyV5Receipt: Codable {
+    let receiptID: RuntimeReceiptID
+    let preparationID: RuntimePreparationID
+    let commandID: RuntimeCommandID
+    let lineage: RuntimeAuthorityLineageReference
+    let aggregateStates: [RuntimeCanonicalAggregateState]
+    let tombstones: [RuntimeCanonicalTombstoneDraft]
+    let unresolvedWork: [RuntimeAtomicCommitLegacyV5WorkReference]
+    let objectLinks: [RuntimeAtomicCommitLegacyV5ObjectLink]
+    let undoability: RuntimeAtomicCommitLegacyV5Undoability
+    let confirmationToken: RuntimeConfirmationToken?
+    let confirmationDecisionDigest: RuntimeCommandFingerprint?
+    let committedAt: Date
+}
+
+private struct RuntimeAtomicCommitLegacyV5PendingExternalOperation: Codable {
+    let operationID: RuntimeExternalOperationID
+    let kind: RuntimeExternalEffectKind
+    let status: String
+    let lineage: RuntimeAuthorityLineageReference
+}
+
+private struct RuntimeAtomicCommitLegacyV5FinalOutcome: Codable {
+    let committed: RuntimeCommittedMutation
+    let receipt: RuntimeAtomicCommitLegacyV5Receipt
+    let pendingExternalOperations: [RuntimeAtomicCommitLegacyV5PendingExternalOperation]
+}
+
+private struct RuntimeAtomicCommitFinalOutcomeEnvelope: Codable, Sendable, Equatable {
+    let outcomeVersion: Int
+    let outcome: RuntimeAtomicCommitFinalOutcome
 }
 
 enum RuntimeAtomicCommitPhase: Int, Codable, Sendable, Equatable, CaseIterable {
     case claimed, snapshotsLoaded, reduced, aggregatesApplied, eventAppended
     case invalidationsPersisted, receiptPersisted, externalOperationsPersisted
-    case idempotencyFinalized, confirmationConsumed
+    case receiptCorePersisted, receiptHistoryPersisted
+    case compensationDispositionPersisted, receiptGraphAuthenticated
+    case compensationConsumed, idempotencyFinalized, confirmationConsumed
 }
 
 enum RuntimeAtomicCommitError: Error, Sendable, Equatable {
@@ -193,7 +246,7 @@ extension RuntimeAtomicCommitError: CustomStringConvertible, LocalizedError {
 enum CanonicalRuntimeCommitSchemaPlan {
     static let sourceSchemaVersion = 1
     static let targetSchemaVersion = runtimeAtomicCommitSchemaVersion
-    static let currentWritableSchemaVersion = runtimeCanonicalProjectionSchemaVersion
+    static let currentWritableSchemaVersion = runtimeCommittedReceiptSchemaVersion
     static let readableActiveSchemaVersions: Set<Int> = [sourceSchemaVersion]
     static let writableAuthoritySchemaVersions: Set<Int> = [currentWritableSchemaVersion]
     static let tables: Set<String> = [
@@ -213,9 +266,7 @@ enum CanonicalRuntimeCommitSchemaPlan {
             preparation_id TEXT NOT NULL UNIQUE CHECK (length(preparation_id) > 0),
             command_id TEXT NOT NULL UNIQUE CHECK (length(command_id) > 0),
             terminal_event_sequence INTEGER NOT NULL CHECK (terminal_event_sequence > 0),
-            receipt_version INTEGER NOT NULL CHECK (receipt_version > 0),
-            payload BLOB NOT NULL,
-            payload_checksum TEXT NOT NULL CHECK (length(payload_checksum) = 64 AND payload_checksum NOT GLOB '*[^0-9a-f]*'),
+            receipt_version INTEGER NOT NULL CHECK (receipt_version = 1),
             created_at_ms INTEGER NOT NULL CHECK (created_at_ms >= 0),
             FOREIGN KEY (command_id) REFERENCES runtime_command_idempotency(command_id),
             FOREIGN KEY (terminal_event_sequence) REFERENCES runtime_semantic_events(sequence)
@@ -256,11 +307,14 @@ enum CanonicalRuntimeCommitSchemaPlan {
         """
         CREATE TABLE runtime_confirmation_consumptions (
             token TEXT PRIMARY KEY CHECK (length(token) > 0),
-            preparation_id TEXT NOT NULL,
-            command_id TEXT NOT NULL,
+            receipt_id TEXT NOT NULL UNIQUE,
+            preparation_id TEXT NOT NULL UNIQUE,
+            command_id TEXT NOT NULL UNIQUE,
             decision_digest TEXT NOT NULL CHECK (length(decision_digest) = 64 AND decision_digest NOT GLOB '*[^0-9a-f]*'),
-            terminal_event_sequence INTEGER NOT NULL CHECK (terminal_event_sequence > 0),
+            terminal_event_sequence INTEGER NOT NULL UNIQUE CHECK (terminal_event_sequence > 0),
             consumed_at_ms INTEGER NOT NULL CHECK (consumed_at_ms >= 0),
+            UNIQUE (receipt_id, token, decision_digest),
+            FOREIGN KEY (receipt_id) REFERENCES runtime_commit_receipts(receipt_id),
             FOREIGN KEY (command_id) REFERENCES runtime_command_idempotency(command_id),
             FOREIGN KEY (terminal_event_sequence) REFERENCES runtime_semantic_events(sequence)
         ) WITHOUT ROWID
@@ -325,9 +379,13 @@ enum CanonicalRuntimeCommitSchemaPlan {
             expectedTables.formUnion(CanonicalRuntimeReplaySchemaPlan.tables)
             expectedIndexes.formUnion(CanonicalRuntimeReplaySchemaPlan.indexes)
         }
-        if version == Int64(runtimeCanonicalProjectionSchemaVersion) {
+        if version >= Int64(runtimeCanonicalProjectionSchemaVersion) {
             expectedTables.formUnion(CanonicalRuntimeProjectionSchemaPlan.tables)
             expectedIndexes.formUnion(CanonicalRuntimeProjectionSchemaPlan.indexes)
+        }
+        if version >= Int64(runtimeCommittedReceiptSchemaVersion) {
+            expectedTables.formUnion(CanonicalRuntimeCommittedReceiptSchemaPlan.tables)
+            expectedIndexes.formUnion(CanonicalRuntimeCommittedReceiptSchemaPlan.indexes)
         }
         guard tableNames == expectedTables, indexNames == expectedIndexes else {
             throw RuntimeAtomicCommitError.corruptAuthority
@@ -475,6 +533,12 @@ private enum RuntimeAtomicCommitValidation {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         guard now <= preparation.expiresAt else { throw RuntimeAtomicCommitError.preparationExpired }
+        do {
+            _ = try RuntimeCommandCodec().encode(preparation.command)
+        } catch {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        try Task.checkCancellation()
         guard preparation.authorization.isAuthorized,
               preparation.authorization.reasonCodes.isEmpty,
               preparation.authorization.actor == preparation.command.actor,
@@ -639,9 +703,7 @@ extension CanonicalRuntimeStore {
             guard casResults.contains(where: { $0.key == plan.primaryKey }) else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
-            let correlationID = try RuntimeCorrelationID(
-                validating: "correlation.\(preparation.preparationID.rawValue)"
-            )
+            let correlationID = plan.correlationID
             let states = try plan.states(results: casResults)
             guard let primaryState = plan.state(for: plan.primaryKey) else {
                 throw RuntimeAtomicCommitError.corruptAuthority
@@ -665,7 +727,7 @@ extension CanonicalRuntimeStore {
                     aggregate: primaryState.aggregate,
                     canonicalAggregateRevision: primaryState.revision,
                     correlationID: correlationID,
-                    causationEventID: nil,
+                    causationEventID: plan.causationEventID,
                     occurredAt: plan.occurredAt,
                     canonicalBytes: eventBytes
                 ),
@@ -689,6 +751,14 @@ extension CanonicalRuntimeStore {
                 database: database
             )
             try RuntimeAtomicCommitFault.check(.invalidationsPersisted, failure: failAfterPhase, cancellation: cancelAfterPhase)
+            let undoability: RuntimeAuthorityUndoability
+            guard let compensationDisposition = preparation.decision.writeSet.compensation else {
+                throw RuntimeAtomicCommitError.malformedPreparation
+            }
+            switch compensationDisposition {
+            case let .typedPlan(intent): undoability = .typedPlan(intent.planID)
+            case let .noncompensable(evidence): undoability = .noncompensable(evidence)
+            }
             let receipt = RuntimeAtomicCommitReceipt(
                 receiptID: plan.receiptID,
                 preparationID: preparation.preparationID,
@@ -707,20 +777,70 @@ extension CanonicalRuntimeStore {
                     ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
                         ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
                 },
-                undoability: .notUndoable(reason: .missingTypedCompensationContract),
+                undoability: undoability,
                 confirmationToken: confirmation?.token,
                 confirmationDecisionDigest: confirmation.map { _ in preparation.decisionDigest },
                 committedAt: submittedAt
             )
             try Self.persistReceipt(receipt, createdAt: claimedAt, database: database)
             try Self.persistTombstones(tombstones, createdAt: claimedAt, database: database)
-            try RuntimeAtomicCommitFault.check(.receiptPersisted, failure: failAfterPhase, cancellation: cancelAfterPhase)
             let pending = try Self.persistPendingExternalOperation(
                 plan.externalEffect,
                 receipt: receipt,
                 createdAt: claimedAt,
                 database: database
             )
+            if let confirmation {
+                try Self.consumeConfirmation(
+                    confirmation,
+                    receiptID: receipt.receiptID,
+                    preparation: preparation,
+                    lineage: lineage,
+                    consumedAt: claimedAt,
+                    database: database
+                )
+            }
+            try RuntimeAtomicCommitFault.check(.confirmationConsumed, failure: failAfterPhase, cancellation: cancelAfterPhase)
+            try Task.checkCancellation()
+            let compensationConsumption: RuntimeCompensationConsumptionDraft?
+            if case let .compensation(command) = preparation.command.typedPayload {
+                compensationConsumption = RuntimeCompensationConsumptionDraft(
+                    planID: command.planID,
+                    sourceReceiptID: command.sourceReceiptID,
+                    compensationReceiptID: receipt.receiptID,
+                    compensationCommandID: preparation.commandID,
+                    terminalEventSequence: lineage.eventSequence,
+                    consumedAtMilliseconds: claimedAt
+                )
+            } else {
+                compensationConsumption = nil
+            }
+            let committedReceiptCore = try RuntimeCommittedReceiptAuthority.persist(
+                atomicReceipt: receipt,
+                eventRecord: eventRecord,
+                correlationID: correlationID,
+                dispositionIntent: compensationDisposition,
+                pendingExternalOperations: pending,
+                compensationConsumption: compensationConsumption,
+                createdAtMilliseconds: claimedAt,
+                phase: { authorityPhase in
+                    let atomicPhase: RuntimeAtomicCommitPhase = switch authorityPhase {
+                    case .coreInserted: .receiptCorePersisted
+                    case .historyPersisted: .receiptHistoryPersisted
+                    case .dispositionPersisted: .compensationDispositionPersisted
+                    case .compensationConsumed: .compensationConsumed
+                    case .graphAuthenticated: .receiptGraphAuthenticated
+                    }
+                    try RuntimeAtomicCommitFault.check(
+                        atomicPhase,
+                        failure: failAfterPhase,
+                        cancellation: cancelAfterPhase
+                    )
+                },
+                database: database
+            )
+            _ = committedReceiptCore
+            try RuntimeAtomicCommitFault.check(.receiptPersisted, failure: failAfterPhase, cancellation: cancelAfterPhase)
             try RuntimeAtomicCommitFault.check(.externalOperationsPersisted, failure: failAfterPhase, cancellation: cancelAfterPhase)
             try Task.checkCancellation()
 
@@ -732,10 +852,10 @@ extension CanonicalRuntimeStore {
             )
             let finalOutcome = RuntimeAtomicCommitFinalOutcome(
                 committed: committed,
-                receipt: receipt,
+                receipt: committedReceiptCore,
                 pendingExternalOperations: pending
             )
-            let finalBytes = try RuntimeAtomicCommitCoding.encode(finalOutcome)
+            let finalBytes = try RuntimeAtomicCommitCoding.encodeFinalOutcome(finalOutcome)
             _ = try Self.finalizeIdempotency(
                 in: database,
                 identity: claim.claimIdentity,
@@ -746,17 +866,6 @@ extension CanonicalRuntimeStore {
                 )
             )
             try RuntimeAtomicCommitFault.check(.idempotencyFinalized, failure: failAfterPhase, cancellation: cancelAfterPhase)
-            try Task.checkCancellation()
-            if let confirmation {
-                try Self.consumeConfirmation(
-                    confirmation,
-                    preparation: preparation,
-                    lineage: lineage,
-                    consumedAt: claimedAt,
-                    database: database
-                )
-            }
-            try RuntimeAtomicCommitFault.check(.confirmationConsumed, failure: failAfterPhase, cancellation: cancelAfterPhase)
             try Task.checkCancellation()
             return finalOutcome
     }
@@ -773,7 +882,7 @@ private enum RuntimeAtomicCommitFault {
     }
 }
 
-private enum RuntimeAtomicCommitCoding {
+enum RuntimeAtomicCommitCoding {
     static func encode<Value: Encodable>(_ value: Value) throws -> Data {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .millisecondsSince1970
@@ -789,25 +898,92 @@ private enum RuntimeAtomicCommitCoding {
               LocalRuntimeStorageChecksum.sha256Hex(for: bytes) == storedChecksum else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
+        switch try inspectFinalOutcome(bytes) {
+        case let .current(value):
+            try validateFinalOutcome(value)
+            return value
+        case .legacyV5:
+            throw RuntimeAtomicCommitError.migrationRequired(
+                expected: runtimeCommittedReceiptSchemaVersion,
+                actual: runtimeCanonicalProjectionSchemaVersion
+            )
+        }
+    }
+
+    static func encodeFinalOutcome(_ value: RuntimeAtomicCommitFinalOutcome) throws -> Data {
+        try encode(RuntimeAtomicCommitFinalOutcomeEnvelope(outcomeVersion: 2, outcome: value))
+    }
+
+    static func requireFinalizedOutcome(
+        _ bytes: Data,
+        storedChecksum: String,
+        references expectedCore: RuntimeCommittedReceiptCore
+    ) throws {
+        let outcome = try decodeFinalOutcome(bytes, storedChecksum: storedChecksum)
+        guard outcome.receipt == expectedCore,
+              outcome.committed.preparationID == expectedCore.facts.preparationID,
+              outcome.committed.commandID == expectedCore.facts.commandID,
+              outcome.committed.authorityReceiptID == expectedCore.facts.receiptID else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+    }
+
+    private enum FinalOutcomeInspection {
+        case current(RuntimeAtomicCommitFinalOutcome)
+        case legacyV5
+    }
+
+    private struct FinalOutcomeVersionProbe: Decodable {
+        let outcomeVersion: Int
+    }
+
+    private static func inspectFinalOutcome(_ bytes: Data) throws -> FinalOutcomeInspection {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
-        let value: RuntimeAtomicCommitFinalOutcome
+        let probe: FinalOutcomeVersionProbe?
         do {
-            value = try decoder.decode(RuntimeAtomicCommitFinalOutcome.self, from: bytes)
+            probe = try decoder.decode(FinalOutcomeVersionProbe.self, from: bytes)
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            probe = nil
+        }
+        if let probe {
+            guard probe.outcomeVersion <= 2 else {
+                throw RuntimeAtomicCommitError.migrationRequired(
+                    expected: 2,
+                    actual: probe.outcomeVersion
+                )
+            }
+            guard probe.outcomeVersion == 2 else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            let envelope: RuntimeAtomicCommitFinalOutcomeEnvelope
+            do {
+                envelope = try decoder.decode(RuntimeAtomicCommitFinalOutcomeEnvelope.self, from: bytes)
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            guard envelope.outcomeVersion == 2, try encode(envelope) == bytes else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            return .current(envelope.outcome)
+        }
+        do {
+            let legacy = try decoder.decode(RuntimeAtomicCommitLegacyV5FinalOutcome.self, from: bytes)
+            guard try encode(legacy) == bytes else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            return .legacyV5
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch let error as RuntimeAtomicCommitError {
+            throw error
         } catch {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        guard try encode(value) == bytes else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let stateCodec = RuntimeCanonicalAggregateStateCodec()
-        for state in value.receipt.aggregateStates {
-            guard try stateCodec.decode(stateCodec.encode(state)) == state else {
-                throw RuntimeAtomicCommitError.corruptAuthority
-            }
-        }
-        try validateFinalOutcome(value)
-        return value
     }
 
     static func decodeCanonical<Value: Codable>(
@@ -819,6 +995,8 @@ private enum RuntimeAtomicCommitCoding {
         let value: Value
         do {
             value = try decoder.decode(type, from: bytes)
+        } catch is CancellationError {
+            throw CancellationError()
         } catch {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
@@ -840,98 +1018,40 @@ private enum RuntimeAtomicCommitCoding {
         _ value: RuntimeAtomicCommitFinalOutcome
     ) throws {
         let receipt = value.receipt
-        let lineage = receipt.lineage
-        let committedAt = receipt.committedAt.timeIntervalSince1970
-        guard RuntimePreparationID(rawValue: receipt.preparationID.rawValue)?.rawValue == receipt.preparationID.rawValue,
-              RuntimeCommandID(rawValue: receipt.commandID.rawValue)?.rawValue == receipt.commandID.rawValue,
-              RuntimeReceiptID(rawValue: receipt.receiptID.rawValue)?.rawValue == receipt.receiptID.rawValue,
+        let facts = receipt.facts
+        let lineage = facts.lineage
+        let committedAt = facts.committedAt.timeIntervalSince1970
+        guard try RuntimeCommittedReceiptCodec.makeCore(facts) == receipt,
+              RuntimePreparationID(rawValue: facts.preparationID.rawValue)?.rawValue == facts.preparationID.rawValue,
+              RuntimeCommandID(rawValue: facts.commandID.rawValue)?.rawValue == facts.commandID.rawValue,
+              RuntimeReceiptID(rawValue: facts.receiptID.rawValue)?.rawValue == facts.receiptID.rawValue,
               RuntimeEventID(rawValue: lineage.eventID.rawValue)?.rawValue == lineage.eventID.rawValue,
-              receipt.confirmationToken.map({
+              facts.confirmationToken.map({
                   RuntimeConfirmationToken(rawValue: $0.rawValue)?.rawValue == $0.rawValue
               }) ?? true,
-              receipt.confirmationDecisionDigest.map({
+              facts.confirmationDecisionDigest.map({
                   RuntimeCommandFingerprint(rawValue: $0.rawValue)?.rawValue == $0.rawValue
               }) ?? true,
-              (receipt.confirmationToken == nil) == (receipt.confirmationDecisionDigest == nil),
-              value.committed.preparationID == receipt.preparationID,
-              value.committed.commandID == receipt.commandID,
-              value.committed.authorityReceiptID == receipt.receiptID,
+              (facts.confirmationToken == nil) == (facts.confirmationDecisionDigest == nil),
+              value.committed.preparationID == facts.preparationID,
+              value.committed.commandID == facts.commandID,
+              value.committed.authorityReceiptID == facts.receiptID,
               value.committed.projectionDegradation.isEmpty,
               lineage.eventSequence > 0,
               RuntimeStoreManifestCodec.isSHA256Hex(lineage.eventHash),
               committedAt.isFinite, committedAt >= 0,
-              receipt.aggregateStates.isEmpty == false else {
+              facts.objects.isEmpty == false,
+              facts.privacy.localOnly else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-
-        let states = receipt.aggregateStates
-        let sortedStates = states.sorted {
-            ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
-                ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
-        }
-        let stateKeys = states.map { "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)" }
-        guard states == sortedStates, Set(stateKeys).count == states.count,
-              states.allSatisfy({ state in
-                  RuntimeAggregateID(rawValue: state.aggregate.id.rawValue)?.rawValue == state.aggregate.id.rawValue &&
-                    state.changedObjectIDs.allSatisfy({
-                        RuntimeDomainObjectID(rawValue: $0.rawValue)?.rawValue == $0.rawValue
-                    }) &&
-                    state.changedObjectIDs == Array(Set(state.changedObjectIDs)).sorted()
-              }),
-              states.dropFirst().allSatisfy({ $0.commandPayload == states[0].commandPayload }),
-              receipt.undoability == .notUndoable(reason: .missingTypedCompensationContract) else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let expectedLinks = states.map {
-            RuntimeAuthorityObjectLink(
-                aggregate: $0.aggregate,
-                terminalRevision: $0.revision,
-                lifecycle: $0.lifecycle
-            )
-        }.sorted {
-            ($0.aggregate.kind.rawValue, $0.aggregate.id.rawValue) <
-                ($1.aggregate.kind.rawValue, $1.aggregate.id.rawValue)
-        }
-        guard receipt.objectLinks == expectedLinks else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-
-        let expectedTombstoneKeys = Set(states.filter { $0.lifecycle == .tombstoned }.map {
-            "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)\u{0}\($0.revision)"
-        })
-        let tombstoneKeys = receipt.tombstones.map {
-            "\($0.family)\u{0}\($0.objectID.rawValue)\u{0}\($0.terminalRevision)"
-        }
-        guard Set(tombstoneKeys) == expectedTombstoneKeys,
-              receipt.tombstones.allSatisfy({ tombstone in
-                  RuntimeDomainObjectID(rawValue: tombstone.objectID.rawValue)?.rawValue == tombstone.objectID.rawValue &&
-                    tombstone.lineage.eventSequence <= lineage.eventSequence &&
-                    RuntimeStoreManifestCodec.isSHA256Hex(tombstone.lineage.eventHash) &&
-                    states.contains(where: { state in
-                      state.aggregate.kind.rawValue == tombstone.family &&
-                        state.aggregate.id.rawValue == tombstone.objectID.rawValue &&
-                        state.revision == tombstone.terminalRevision &&
-                        state.lifecycle == .tombstoned
-                  })
-              }) else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-
-        let unresolvedKeys = receipt.unresolvedWork.map { "\($0.kind.rawValue)\u{0}\($0.stableID)" }
+        let pendingArtifacts = facts.artifacts.filter { $0.kind == .externalOperation }
         let pendingIDs = value.pendingExternalOperations.map(\.operationID.rawValue)
-        guard Set(unresolvedKeys).count == unresolvedKeys.count,
-              Set(pendingIDs).count == pendingIDs.count,
-              receipt.unresolvedWork.allSatisfy({
-                  validStableIdentity($0.stableID) && $0.lineage == lineage
-              }),
+        guard Set(pendingIDs).count == pendingIDs.count,
+              pendingArtifacts.map(\.stableID).sorted() == pendingIDs.sorted(),
               value.pendingExternalOperations.allSatisfy({ pending in
                   RuntimeExternalOperationID(rawValue: pending.operationID.rawValue)?.rawValue == pending.operationID.rawValue &&
-                    pending.status == "pending" && pending.lineage == lineage &&
-                    receipt.unresolvedWork.contains(where: {
-                        $0.kind == .externalOperation && $0.stableID == pending.operationID.rawValue
-                    })
-              }),
-              receipt.unresolvedWork.filter({ $0.kind == .externalOperation }).count == pendingIDs.count else {
+                    pending.status == "pending" && pending.lineage == lineage
+              }) else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
     }
@@ -961,6 +1081,8 @@ private struct RuntimeAtomicCommitPlan {
     let priorStateDigestByKey: [CanonicalAggregateKey: String]
     let observedSnapshot: RuntimePreparationSnapshot
     let proposedObjectID: RuntimeDomainObjectID?
+    let correlationID: RuntimeCorrelationID
+    let causationEventID: RuntimeEventID?
 
     init(
         preparation: RuntimePreparation,
@@ -976,6 +1098,26 @@ private struct RuntimeAtomicCommitPlan {
               eventIntent.privacy == preparation.command.privacy,
               let occurredAt = DomainTimestamp.date(from: eventIntent.occurredAt) else {
             throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        if case let .schedule(schedule) = preparation.command.typedPayload,
+           schedule.action == .undo {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
+        let causalAuthority: (correlationID: RuntimeCorrelationID, causationEventID: RuntimeEventID?)
+        if case let .compensation(command) = preparation.command.typedPayload {
+            causalAuthority = try Self.authenticateCompensationCommand(
+                command,
+                commandPrivacy: preparation.command.privacy,
+                expectedRevision: preparation.command.expectedRevision,
+                confirmationScope: preparation.decision.confirmationScope,
+                submittedAt: submittedAt,
+                database: database
+            )
+        } else {
+            causalAuthority = (
+                try RuntimeCorrelationID(validating: "correlation.\(preparation.preparationID.rawValue)"),
+                nil
+            )
         }
         let semanticType: RuntimeSemanticEventTypeID
         guard case let .mutating(type) = RuntimeSemanticEventClassifier.classify(preparation.command.typedPayload) else {
@@ -1004,6 +1146,8 @@ private struct RuntimeAtomicCommitPlan {
         self.eventIntent = eventIntent
         self.receiptID = receiptID
         self.occurredAt = occurredAt
+        correlationID = causalAuthority.correlationID
+        causationEventID = causalAuthority.causationEventID
         projectionInvalidations = preparation.decision.writeSet.projectionInvalidations
         externalEffect = preparation.decision.writeSet.externalEffect
         changedObjectIDs = Array(Set(preparation.decision.writeSet.transitions.map(\.objectID))).sorted()
@@ -1033,7 +1177,8 @@ private struct RuntimeAtomicCommitPlan {
             }
             switch (transition.transition, transition.expectedRevision) {
             case (.create, .absent), (.update, .exact),
-                 (.attach, .exact), (.detach, .exact), (.tombstone, .exact):
+                 (.attach, .exact), (.detach, .exact), (.tombstone, .exact),
+                 (.restore, .exact):
                 break
             default:
                 throw RuntimeAtomicCommitError.stalePreparation
@@ -1124,7 +1269,249 @@ private struct RuntimeAtomicCommitPlan {
         )
     }
 
+    private static func authenticateCompensationCommand(
+        _ command: RuntimeCompensationCommand,
+        commandPrivacy: EventLedgerPrivacyClassification,
+        expectedRevision: RuntimeExpectedRevision,
+        confirmationScope: RuntimeConfirmationScope?,
+        submittedAt: Date,
+        database: isolated SQLiteDatabase
+    ) throws -> (correlationID: RuntimeCorrelationID, causationEventID: RuntimeEventID?) {
+        let core: RuntimeCommittedReceiptCore
+        let plan: RuntimeCommittedCompensationPlan
+        do {
+            core = try RuntimeCommittedReceiptAuthority.loadCore(
+                receiptID: command.sourceReceiptID,
+                database: database
+            )
+            try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(core, database: database)
+            plan = try RuntimeCommittedReceiptAuthority.loadPlan(
+                planID: command.planID,
+                database: database
+            )
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        guard core.facts.receiptID == command.sourceReceiptID,
+              core.facts.privacy.localOnly,
+              core.facts.privacy.classification == commandPrivacy,
+              plan.sourceReceiptID == command.sourceReceiptID,
+              plan.sourceLineage == command.sourceLineage,
+              plan.sourceLineage == core.facts.lineage,
+              plan.sourceCorrelationID == core.facts.correlationID,
+              plan.planID == command.planID,
+              plan.digest == command.planDigest,
+              plan.action == command.action,
+              plan.targets == command.targets,
+              plan.requiresConfirmation == command.requiresConfirmation,
+              plan.externalOperationIDs.isEmpty,
+              submittedAt <= plan.expiresAt,
+              command.action.target == command.target,
+              command.content == RuntimeCommandContent(),
+              confirmationScope == (plan.requiresConfirmation ? .semanticCompensation : nil),
+              command.targets.isEmpty == false,
+              command.targets.count <= RuntimeCompensationLimits.maximumTargets,
+              command.targets == command.targets.sorted(),
+              Set(command.targets.map {
+                  "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)"
+              }).count == command.targets.count,
+              command.targets.allSatisfy({
+                  if Task.isCancelled { return false }
+                  return $0.aggregate.kind == command.action.aggregateKind &&
+                      $0.sourcePriorRevision == nil &&
+                      $0.sourceTransition == .create &&
+                      $0.requiredLifecycle == .active &&
+                      $0.inverseTransition == command.action.transition &&
+                      $0.requiredCurrentRevision == $0.sourceRevision
+              }) else {
+            throw RuntimeAtomicCommitError.stalePreparation
+        }
+        guard case let .exact(primaryRevision) = expectedRevision,
+              command.targets.contains(where: {
+                  $0.aggregate.kind == command.action.aggregateKind &&
+                      $0.aggregate.id.rawValue == command.action.primaryObjectID.rawValue &&
+                      $0.requiredCurrentRevision == primaryRevision
+              }) else {
+            throw RuntimeAtomicCommitError.stalePreparation
+        }
+
+        let sourceEventRows = try database.query(
+            """
+            SELECT event_id, sequence, event_hash, command_id, correlation_id
+            FROM runtime_semantic_events WHERE sequence = ? LIMIT 2
+            """,
+            bindings: [.integer(try int64(core.facts.lineage.eventSequence))]
+        )
+        guard sourceEventRows.count == 1, let sourceEvent = sourceEventRows.first,
+              sourceEvent.value(named: "event_id") == .text(core.facts.lineage.eventID.rawValue),
+              sourceEvent.value(named: "event_hash") == .text(core.facts.lineage.eventHash),
+              sourceEvent.value(named: "command_id") == .text(core.facts.commandID.rawValue),
+              sourceEvent.value(named: "correlation_id") == .text(core.facts.correlationID.rawValue) else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let quarantine = try database.query(
+            """
+            SELECT 1 AS present FROM runtime_semantic_event_quarantine
+            WHERE source_event_id = ? OR source_event_sequence = ? LIMIT 1
+            """,
+            bindings: [
+                .text(core.facts.lineage.eventID.rawValue),
+                .integer(try int64(core.facts.lineage.eventSequence)),
+            ]
+        )
+        guard quarantine.isEmpty else { throw RuntimeAtomicCommitError.corruptAuthority }
+
+        let finalized = try database.query(
+            """
+            SELECT final_result_version, final_result_payload, final_result_checksum, finalized_at_ms
+            FROM runtime_command_idempotency WHERE command_id = ? LIMIT 2
+            """,
+            bindings: [.text(core.facts.commandID.rawValue)],
+            maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowBytes
+        )
+        guard finalized.count == 1, let finalizedRow = finalized.first,
+              finalizedRow.value(named: "final_result_version") == .integer(
+                Int64(canonicalIdempotencyFinalResultVersion)
+              ),
+              case let .blob(finalBytes)? = finalizedRow.value(named: "final_result_payload"),
+              finalBytes.count <= RuntimeCommittedReceiptReadBounds.maximumFinalizedResultPayloadBytes,
+              case let .text(finalChecksum)? = finalizedRow.value(named: "final_result_checksum"),
+              RuntimeStoreManifestCodec.isSHA256Hex(finalChecksum),
+              LocalRuntimeStorageChecksum.sha256Hex(for: finalBytes) == finalChecksum,
+              case let .integer(finalizedAt)? = finalizedRow.value(named: "finalized_at_ms"),
+              finalizedAt >= 0 else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        try RuntimeAtomicCommitCoding.requireFinalizedOutcome(
+            finalBytes,
+            storedChecksum: finalChecksum,
+            references: core
+        )
+        let consumed = try database.query(
+            "SELECT 1 AS present FROM runtime_compensation_consumptions WHERE plan_id = ? LIMIT 1",
+            bindings: [.text(plan.planID.rawValue)]
+        )
+        guard consumed.isEmpty else { throw RuntimeAtomicCommitError.stalePreparation }
+
+        let targetRows = try database.query(
+            """
+            SELECT family, object_id, source_prior_revision, source_revision,
+                   source_transition_kind, required_current_revision,
+                   required_lifecycle, source_state_digest, transition_kind
+            FROM runtime_compensation_plan_targets
+            WHERE plan_id = ? ORDER BY family, object_id LIMIT ?
+            """,
+            bindings: [
+                .text(plan.planID.rawValue),
+                .integer(Int64(RuntimeCompensationLimits.maximumTargets + 1)),
+            ],
+            maximumDecodedBytes: 262_144
+        )
+        guard targetRows.count == plan.targets.count else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        for (row, target) in zip(targetRows, plan.targets) {
+            try Task.checkCancellation()
+            guard row.value(named: "family") == .text(target.aggregate.kind.rawValue),
+                  row.value(named: "object_id") == .text(target.aggregate.id.rawValue),
+                  row.value(named: "source_prior_revision") == (try target.sourcePriorRevision.map {
+                    .integer(try int64($0))
+                  } ?? .null),
+                  row.value(named: "source_revision") == .integer(try int64(target.sourceRevision)),
+                  row.value(named: "source_transition_kind") == .text(target.sourceTransition.rawValue),
+                  row.value(named: "required_current_revision") == .integer(try int64(target.requiredCurrentRevision)),
+                  row.value(named: "required_lifecycle") == .text(target.requiredLifecycle.rawValue),
+                  row.value(named: "source_state_digest") == .text(target.sourceStateDigest),
+                  row.value(named: "transition_kind") == .text(target.inverseTransition.rawValue) else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            try authenticateCurrentTarget(target, database: database)
+        }
+        return (core.facts.correlationID, core.facts.lineage.eventID)
+    }
+
+    private static func authenticateCurrentTarget(
+        _ target: RuntimeCompensationTargetExpectation,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let rows = try database.query(
+            """
+            SELECT revision, payload_version, payload, payload_checksum
+            FROM runtime_aggregates
+            WHERE aggregate_kind = ? AND aggregate_id = ? LIMIT 2
+            """,
+            bindings: [
+                .text(target.aggregate.kind.rawValue),
+                .text(target.aggregate.id.rawValue),
+            ],
+            maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowBytes
+        )
+        guard rows.count == 1, let row = rows.first,
+              row.value(named: "payload_version") == .integer(1),
+              row.value(named: "revision") == .integer(try int64(target.requiredCurrentRevision)),
+              case let .blob(bytes)? = row.value(named: "payload"),
+              case let .text(checksum)? = row.value(named: "payload_checksum"),
+              checksum == target.sourceStateDigest,
+              RuntimeStoreManifestCodec.isSHA256Hex(checksum),
+              checksum == checksum.lowercased(),
+              LocalRuntimeStorageChecksum.sha256Hex(for: bytes) == checksum else {
+            throw RuntimeAtomicCommitError.stalePreparation
+        }
+        let state: RuntimeCanonicalAggregateState
+        do { state = try RuntimeCanonicalAggregateStateCodec().decode(bytes) }
+        catch is CancellationError { throw CancellationError() }
+        catch { throw RuntimeAtomicCommitError.corruptAuthority }
+        guard state.aggregate == target.aggregate,
+              state.revision == target.requiredCurrentRevision,
+              state.lifecycle == target.requiredLifecycle,
+              try RuntimeCanonicalAggregateStateCodec().encode(state) == bytes else {
+            throw RuntimeAtomicCommitError.stalePreparation
+        }
+        if target.inverseTransition == .restore {
+            guard state.lifecycle == .tombstoned, state.transition == .tombstone else {
+                throw RuntimeAtomicCommitError.stalePreparation
+            }
+            let tombstones = try database.query(
+                """
+                SELECT h.terminal_revision, h.state_digest, t.payload, t.payload_checksum
+                FROM runtime_object_tombstone_history AS t
+                JOIN runtime_object_history AS h ON h.history_id = t.history_id
+                WHERE t.family = ? AND t.object_id = ?
+                ORDER BY t.terminal_event_sequence DESC LIMIT 1
+                """,
+                bindings: [
+                    .text(target.aggregate.kind.rawValue),
+                    .text(target.aggregate.id.rawValue),
+                ],
+                maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowBytes
+            )
+            guard tombstones.count == 1, let tombstone = tombstones.first,
+                  tombstone.value(named: "terminal_revision") == .integer(try int64(target.requiredCurrentRevision)),
+                  tombstone.value(named: "state_digest") == .text(target.sourceStateDigest),
+                  case let .blob(tombstoneBytes)? = tombstone.value(named: "payload"),
+                  case let .text(tombstoneChecksum)? = tombstone.value(named: "payload_checksum"),
+                  LocalRuntimeStorageChecksum.sha256Hex(for: tombstoneBytes) == tombstoneChecksum else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+        } else {
+            guard state.lifecycle == .active, state.transition != .tombstone else {
+                throw RuntimeAtomicCommitError.stalePreparation
+            }
+        }
+    }
+
+    private static func int64(_ value: UInt64) throws -> Int64 {
+        guard value <= UInt64(Int64.max) else { throw RuntimeAtomicCommitError.corruptAuthority }
+        return Int64(value)
+    }
+
     func requireReducerReplay() throws {
+        if case let .schedule(schedule) = preparation.command.typedPayload,
+           schedule.action == .undo {
+            throw RuntimeAtomicCommitError.malformedPreparation
+        }
         guard let primaryFamily = RuntimeSemanticAggregateKind(rawValue: primaryKey.kind),
               let primaryObjectID = RuntimeDomainObjectID(rawValue: primaryKey.id) else {
             throw RuntimeAtomicCommitError.corruptAuthority
@@ -1136,9 +1523,18 @@ private struct RuntimeAtomicCommitPlan {
         guard observedSnapshot.aggregateRevisions[primaryReference] == preparation.authorization.observedRevision,
               preparation.decision.readSet.objects.allSatisfy({ dependency in
                   observedSnapshot.aggregateRevisions[dependency.aggregate] == dependency.observedRevision
-              }),
-              let rollbackID = preparation.decision.writeSet.rollbackIntentID else {
+              }), let compensation = preparation.decision.writeSet.compensation else {
             throw RuntimeAtomicCommitError.stalePreparation
+        }
+        let rollbackID: RuntimeRollbackPlanID
+        switch compensation {
+        case let .typedPlan(intent):
+            rollbackID = intent.planID
+        case .noncompensable:
+            guard let placeholder = RuntimeRollbackPlanID(
+                rawValue: "noncompensable.\(preparation.preparationID.rawValue)"
+            ) else { throw RuntimeAtomicCommitError.malformedPreparation }
+            rollbackID = placeholder
         }
         let token: RuntimeConfirmationToken
         if let bound = preparation.confirmationRequest?.token {
@@ -1274,26 +1670,84 @@ private struct RuntimeAtomicCommitPlan {
         let state: RuntimeCanonicalAggregateState
         do {
             state = try RuntimeCanonicalAggregateStateCodec().decode(bytes)
+        } catch is CancellationError {
+            throw CancellationError()
         } catch {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
         guard state.aggregate.kind.rawValue == key.kind,
               state.aggregate.id.rawValue == key.id,
-              state.revision == UInt64(revision),
-              state.lifecycle == .active,
-              state.transition != .tombstone,
-              transition != .restore else {
+              state.revision == UInt64(revision) else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
         guard state.revision == expectedRevision else {
             throw RuntimeAtomicCommitError.stalePreparation
         }
-        let durableTombstone = try database.query(
-            "SELECT terminal_revision FROM runtime_commit_tombstones WHERE family = ? AND object_id = ? LIMIT 2",
+        let latestHistory = try database.query(
+            """
+            SELECT resulting_revision, lifecycle, transition_kind, state_digest
+            FROM runtime_object_history
+            WHERE family = ? AND object_id = ?
+            ORDER BY terminal_event_sequence DESC LIMIT 1
+            """,
             bindings: [.text(key.kind), .text(key.id)]
         )
-        guard durableTombstone.isEmpty else {
+        guard latestHistory.count == 1, let history = latestHistory.first,
+              history.value(named: "resulting_revision") == .integer(revision),
+              history.value(named: "lifecycle") == .text(state.lifecycle.rawValue),
+              history.value(named: "transition_kind") == .text(state.transition.rawValue),
+              history.value(named: "state_digest") == .text(checksum) else {
             throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        if transition == .restore {
+            guard state.lifecycle == .tombstoned, state.transition == .tombstone else {
+                throw RuntimeAtomicCommitError.stalePreparation
+            }
+            let tombstone = try database.query(
+                """
+                SELECT tombstone_history_id, receipt_id, terminal_revision,
+                       predecessor_digest, payload, payload_checksum
+                FROM runtime_object_tombstone_history
+                WHERE family = ? AND object_id = ?
+                ORDER BY terminal_event_sequence DESC LIMIT 1
+                """,
+                bindings: [.text(key.kind), .text(key.id)],
+                maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowBytes
+            )
+            guard tombstone.count == 1, let row = tombstone.first,
+                  row.value(named: "terminal_revision") == .integer(revision),
+                  case let .text(predecessorDigest)? = row.value(named: "predecessor_digest"),
+                  RuntimeStoreManifestCodec.isSHA256Hex(predecessorDigest),
+                  case let .text(tombstoneHistoryID)? = row.value(named: "tombstone_history_id"),
+                  case let .text(receiptID)? = row.value(named: "receipt_id"),
+                  case let .blob(tombstoneBytes)? = row.value(named: "payload"),
+                  case let .text(tombstoneChecksum)? = row.value(named: "payload_checksum"),
+                  LocalRuntimeStorageChecksum.sha256Hex(for: tombstoneBytes) == tombstoneChecksum else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+            let draft = try RuntimeAtomicCommitCoding.decodeCanonical(
+                RuntimeCanonicalTombstoneDraft.self,
+                from: tombstoneBytes
+            )
+            let retained = try database.query(
+                """
+                SELECT 1 AS present FROM runtime_receipt_retention_references
+                WHERE receipt_id = ? AND reference_kind = 'tombstone_history'
+                  AND reference_id = ? LIMIT 1
+                """,
+                bindings: [.text(receiptID), .text(tombstoneHistoryID)]
+            )
+            guard draft.family == key.kind,
+                  draft.objectID.rawValue == key.id,
+                  draft.terminalRevision == expectedRevision,
+                  draft.authority.predecessorDigest == predecessorDigest,
+                  retained.count == 1 else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
+        } else {
+            guard state.lifecycle == .active, state.transition != .tombstone else {
+                throw RuntimeAtomicCommitError.stalePreparation
+            }
         }
         return checksum
     }
@@ -1341,6 +1795,7 @@ private enum RuntimeAtomicAggregateIdentity {
         case .importDeletion:
             command.runtimePreparationAggregateReferences.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         guard case let .mutating(typeID) = RuntimeSemanticEventClassifier.classify(command) else {
             throw RuntimeAtomicCommitError.malformedPreparation
@@ -1392,6 +1847,8 @@ private enum RuntimeAtomicAggregateIdentity {
             }
         case .step, .profile, .history, .repair, .externalOperation:
             return .update
+        case let .compensation(value):
+            return value.action.transition
         }
     }
 }
@@ -1402,69 +1859,102 @@ private extension CanonicalRuntimeStore {
         database: isolated SQLiteDatabase
     ) throws {
         let receipt = outcome.receipt
-        let sequence = Int64(receipt.lineage.eventSequence)
-        let semanticEventRecords = try verifiedSemanticEventRecords(database: database)
-        try requirePersistedCommandEventChain(
-            receipt,
-            records: semanticEventRecords
+        let facts = receipt.facts
+        guard facts.lineage.eventSequence <= UInt64(Int64.max) else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let sequence = Int64(facts.lineage.eventSequence)
+        let sourceGraph: RuntimeAuthenticatedReceiptGraph
+        do {
+            sourceGraph = try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(
+                receipt,
+                database: database
+            )
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let terminal = sourceGraph.eventEvidence.terminal
+        let commandEventRows = try database.query(
+            """
+            SELECT sequence, event_id, event_hash FROM runtime_semantic_events
+            WHERE command_id = ? LIMIT 2
+            """,
+            bindings: [.text(facts.commandID.rawValue)],
+            maximumDecodedBytes: 8_192
         )
-
-        for state in receipt.aggregateStates {
+        guard commandEventRows.count == 1,
+              commandEventRows[0].value(named: "sequence") == .integer(sequence),
+              commandEventRows[0].value(named: "event_id") == .text(facts.lineage.eventID.rawValue),
+              commandEventRows[0].value(named: "event_hash") == .text(facts.lineage.eventHash),
+              terminal.lineage.eventHash.hexadecimal == facts.lineage.eventHash,
+              terminal.lineage.correlationID == facts.correlationID,
+              terminal.event.mutation.aggregateTransitions.count == facts.objects.count else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        for link in facts.objects {
+            guard let sourceTransition = terminal.event.mutation.aggregateTransitions.first(where: {
+                $0.aggregate == link.aggregate
+            }), sourceTransition.priorRevision == link.priorRevision,
+                  sourceTransition.resultingRevision == link.terminalRevision,
+                  sourceTransition.lifecycle == link.lifecycle,
+                  sourceTransition.transition == link.transition,
+                  sourceTransition.canonicalStateDigest == link.stateDigest else {
+                throw RuntimeAtomicCommitError.corruptAuthority
+            }
             let rows = try database.query(
                 "SELECT revision, payload, payload_checksum FROM runtime_aggregates WHERE aggregate_kind = ? AND aggregate_id = ? LIMIT 2",
-                bindings: [.text(state.aggregate.kind.rawValue), .text(state.aggregate.id.rawValue)]
+                bindings: [.text(link.aggregate.kind.rawValue), .text(link.aggregate.id.rawValue)],
+                maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowBytes
             )
             guard rows.count == 1, let row = rows.first,
                   case let .blob(bytes)? = row.value(named: "payload"),
                   case let .integer(currentRevision)? = row.value(named: "revision"),
                   currentRevision >= 0,
-                  UInt64(currentRevision) >= state.revision else {
+                  UInt64(currentRevision) >= link.terminalRevision else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
             try requireArtifactChecksum(row, bytes: bytes)
             let current = try RuntimeAtomicCommitCoding.decodeAggregateState(bytes)
-            guard current.aggregate == state.aggregate,
+            guard current.aggregate == link.aggregate,
                   current.revision == UInt64(currentRevision) else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
-            if current.revision == state.revision {
-                guard current == state else {
+            if current.revision == link.terminalRevision {
+                guard bytes == sourceTransition.canonicalStateBytes,
+                      LocalRuntimeStorageChecksum.sha256Hex(for: bytes) == link.stateDigest else {
                     throw RuntimeAtomicCommitError.corruptAuthority
                 }
             } else {
-                try requireAdvancedStateAuthority(
-                    current,
-                    canonicalBytes: bytes,
-                    afterHistoricalSequence: receipt.lineage.eventSequence,
-                    records: semanticEventRecords
-                )
+                do {
+                    try requireAdvancedStateAuthority(
+                        current,
+                        canonicalBytes: bytes,
+                        afterHistoricalSequence: facts.lineage.eventSequence,
+                        database: database
+                    )
+                } catch is CancellationError {
+                    throw CancellationError()
+                } catch {
+                    throw RuntimeAtomicCommitError.corruptAuthority
+                }
             }
         }
 
-        let receiptRows = try database.query(
-            "SELECT preparation_id, command_id, terminal_event_sequence, payload, payload_checksum FROM runtime_commit_receipts WHERE receipt_id = ? LIMIT 2",
-            bindings: [.text(receipt.receiptID.rawValue)]
-        )
-        guard receiptRows.count == 1, let receiptRow = receiptRows.first,
-              receiptRow.value(named: "preparation_id") == .text(receipt.preparationID.rawValue),
-              receiptRow.value(named: "command_id") == .text(receipt.commandID.rawValue),
-              receiptRow.value(named: "terminal_event_sequence") == .integer(sequence),
-              case let .blob(receiptBytes)? = receiptRow.value(named: "payload"),
-              try RuntimeAtomicCommitCoding.decodeCanonical(
-                RuntimeAtomicCommitReceipt.self,
-                from: receiptBytes
-              ) == receipt else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        try requireArtifactChecksum(receiptRow, bytes: receiptBytes)
-
-        let invalidationRows = try database.query(
-            "SELECT invalidation_id, payload, payload_checksum FROM runtime_commit_projection_invalidations WHERE terminal_event_sequence = ? ORDER BY invalidation_id",
-            bindings: [.integer(sequence)]
-        )
-        let expectedInvalidations = receipt.unresolvedWork
+        let expectedInvalidations = facts.artifacts
             .filter { $0.kind == .projectionInvalidation }
             .map(\.stableID).sorted()
+        guard expectedInvalidations.count <= RuntimeCommittedReceiptLimits.maximumProjectionInvalidations else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
+        let invalidationRows = try database.query(
+            "SELECT invalidation_id, payload, payload_checksum FROM runtime_commit_projection_invalidations WHERE terminal_event_sequence = ? ORDER BY invalidation_id LIMIT ?",
+            bindings: [
+                .integer(sequence),
+                .integer(Int64(expectedInvalidations.count + 1)),
+            ]
+        )
         guard invalidationRows.compactMap({ row in
             guard case let .text(value)? = row.value(named: "invalidation_id") else { return nil }
             return value
@@ -1472,19 +1962,30 @@ private extension CanonicalRuntimeStore {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
         for row in invalidationRows {
+            try Task.checkCancellation()
             guard case let .blob(bytes)? = row.value(named: "payload"),
                   try RuntimeAtomicCommitCoding.decodeCanonical(
                     RuntimeAuthorityLineageReference.self,
                     from: bytes
-                  ) == receipt.lineage else {
+                  ) == facts.lineage else {
                 throw RuntimeAtomicCommitError.corruptAuthority
             }
             try requireArtifactChecksum(row, bytes: bytes)
         }
 
+        guard outcome.pendingExternalOperations.count <=
+                RuntimeCommittedReceiptLimits.maximumPendingExternalOperations else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
         let operationRows = try database.query(
-            "SELECT operation_id, payload, payload_checksum FROM runtime_pending_external_operations WHERE receipt_id = ? ORDER BY operation_id",
-            bindings: [.text(receipt.receiptID.rawValue)]
+            "SELECT operation_id, payload, payload_checksum FROM runtime_pending_external_operations WHERE receipt_id = ? ORDER BY operation_id LIMIT ?",
+            bindings: [
+                .text(facts.receiptID.rawValue),
+                .integer(Int64(outcome.pendingExternalOperations.count + 1)),
+            ],
+            maximumDecodedBytes: RuntimeCommittedReceiptReadBounds.maximumSelectedPayloadRowsBytes(
+                expectedRows: outcome.pendingExternalOperations.count
+            )
         )
         guard operationRows.count == outcome.pendingExternalOperations.count else {
             throw RuntimeAtomicCommitError.corruptAuthority
@@ -1492,6 +1993,7 @@ private extension CanonicalRuntimeStore {
         for (row, expected) in zip(operationRows, outcome.pendingExternalOperations.sorted(by: {
             $0.operationID < $1.operationID
         })) {
+            try Task.checkCancellation()
             guard row.value(named: "operation_id") == .text(expected.operationID.rawValue),
                   case let .blob(bytes)? = row.value(named: "payload"),
                   try RuntimeAtomicCommitCoding.decodeCanonical(
@@ -1503,43 +2005,6 @@ private extension CanonicalRuntimeStore {
             try requireArtifactChecksum(row, bytes: bytes)
         }
 
-        let tombstoneRows = try database.query(
-            "SELECT object_id, family, payload, payload_checksum FROM runtime_commit_tombstones WHERE terminal_event_sequence = ? ORDER BY family, object_id",
-            bindings: [.integer(sequence)]
-        )
-        guard tombstoneRows.count == receipt.tombstones.count else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        for (row, expected) in zip(tombstoneRows, receipt.tombstones) {
-            guard row.value(named: "object_id") == .text(expected.objectID.rawValue),
-                  row.value(named: "family") == .text(expected.family),
-                  case let .blob(bytes)? = row.value(named: "payload"),
-                  try RuntimeAtomicCommitCoding.decodeCanonical(
-                    RuntimeCanonicalTombstoneDraft.self,
-                    from: bytes
-                  ) == expected else {
-                throw RuntimeAtomicCommitError.corruptAuthority
-            }
-            try requireArtifactChecksum(row, bytes: bytes)
-        }
-
-        let confirmationRows = try database.query(
-            "SELECT token, preparation_id, command_id, decision_digest, terminal_event_sequence FROM runtime_confirmation_consumptions WHERE terminal_event_sequence = ?",
-            bindings: [.integer(sequence)]
-        )
-        if let token = receipt.confirmationToken,
-           let decisionDigest = receipt.confirmationDecisionDigest {
-            guard confirmationRows.count == 1, let row = confirmationRows.first,
-                  row.value(named: "token") == .text(token.rawValue),
-                  row.value(named: "preparation_id") == .text(receipt.preparationID.rawValue),
-                  row.value(named: "command_id") == .text(receipt.commandID.rawValue),
-                  row.value(named: "terminal_event_sequence") == .integer(sequence),
-                  row.value(named: "decision_digest") == .text(decisionDigest.rawValue) else {
-                throw RuntimeAtomicCommitError.corruptAuthority
-            }
-        } else if confirmationRows.isEmpty == false {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
     }
 
     static func requireArtifactChecksum(_ row: SQLiteRow, bytes: Data) throws {
@@ -1550,134 +2015,81 @@ private extension CanonicalRuntimeStore {
         }
     }
 
-    static func requirePersistedCommandEventChain(
-        _ receipt: RuntimeAtomicCommitReceipt,
-        records: [CanonicalRuntimeSemanticEventRecord]
-    ) throws {
-        let states = receipt.aggregateStates
-        let commandRecords = records.filter { $0.lineage.commandID == receipt.commandID }
-        guard commandRecords.count == 1,
-              let terminal = commandRecords.first,
-              terminal.lineage.eventID == receipt.lineage.eventID,
-              terminal.lineage.sequence == receipt.lineage.eventSequence,
-              terminal.lineage.eventHash.hexadecimal == receipt.lineage.eventHash else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-
-        let transitionIntents = try states.map { state in
-            RuntimeObjectTransitionIntent(
-                aggregate: RuntimePreparationAggregateReference(
-                    family: state.aggregate.kind,
-                    objectID: try RuntimeDomainObjectID(validating: state.aggregate.id.rawValue)
-                ),
-                expectedRevision: state.revision == 0 ? .absent : .exact(state.revision - 1),
-                transition: state.transition
-            )
-        }
-        guard let command = states.first?.commandPayload else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let primaryID = try RuntimeAtomicAggregateIdentity.primaryID(
-            command: command,
-            transitions: transitionIntents
-        )
-        let primaryKind = command.runtimePrimaryPreparationReference?.family ?? terminal.event.typeID.aggregateKind
-        guard let primary = states.first(where: {
-            $0.aggregate.id == primaryID && $0.aggregate.kind == primaryKind
-        }) else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let correlationID = try RuntimeCorrelationID(
-            validating: "correlation.\(receipt.preparationID.rawValue)"
-        )
-        let inputs = try states.map { state in
-            let stored = terminal.event.mutation.aggregateTransitions.first {
-                $0.aggregate == state.aggregate
-            }
-            guard let stored else { throw RuntimeAtomicCommitError.corruptAuthority }
-            return RuntimeAtomicSemanticTransitionInput(
-                state: state,
-                priorRevision: stored.priorRevision,
-                predecessorStateDigest: stored.tombstone?.predecessorDigest
-            )
-        }
-        guard let privacy = primary.privacy, let localOnly = primary.localOnly else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let expectedEvent = try RuntimeAtomicSemanticEventFactory.make(
-            command: command,
-            commandPrivacy: privacy,
-            commandLocalOnly: localOnly,
-            primaryAggregate: primary.aggregate,
-            primaryPriorRevision: terminal.event.mutation.priorRevision,
-            primaryResultingRevision: primary.revision,
-            changedObjectIDs: primary.changedObjectIDs,
-            transitionInputs: inputs
-        )
-        guard terminal.lineage.aggregate == primary.aggregate,
-              terminal.lineage.canonicalAggregateRevision == primary.revision,
-              terminal.lineage.correlationID == correlationID,
-              terminal.lineage.causationEventID == nil,
-              terminal.event == expectedEvent else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-    }
-
     static func requireAdvancedStateAuthority(
         _ state: RuntimeCanonicalAggregateState,
         canonicalBytes: Data,
         afterHistoricalSequence: UInt64,
-        records: [CanonicalRuntimeSemanticEventRecord]
+        database: isolated SQLiteDatabase
     ) throws {
-        let aggregateRecords = records.filter { record in
-            record.event.mutation.aggregateTransitions.contains { $0.aggregate == state.aggregate }
-        }
-        guard let latest = aggregateRecords.max(by: {
-            $0.lineage.sequence < $1.lineage.sequence
-        }),
-              latest.lineage.sequence > afterHistoricalSequence,
+        try Task.checkCancellation()
+        let highWaterRows = try database.query(
+            """
+            SELECT terminal_event_sequence FROM runtime_object_history
+            WHERE family = ? AND object_id = ?
+            ORDER BY terminal_event_sequence DESC LIMIT 1
+            """,
+            bindings: [
+                .text(state.aggregate.kind.rawValue),
+                .text(state.aggregate.id.rawValue),
+            ],
+            maximumDecodedBytes: 4_096
+        )
+        guard highWaterRows.count == 1,
+              case let .integer(rawSequence)? = highWaterRows[0].value(named: "terminal_event_sequence"),
+              rawSequence > 0,
+              UInt64(rawSequence) > afterHistoricalSequence,
               state.revision > 0 else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-        guard let storedTransition = latest.event.mutation.aggregateTransitions.first(where: {
-            $0.aggregate == state.aggregate
-        }) else { throw RuntimeAtomicCommitError.corruptAuthority }
-        let storedState = try RuntimeCanonicalAggregateStateCodec().decode(
-            storedTransition.canonicalStateBytes
+        let authorityRows = try database.query(
+            """
+            SELECT receipt_id, resulting_revision, state_digest
+            FROM runtime_object_history
+            WHERE family = ? AND object_id = ? AND terminal_event_sequence = ? LIMIT 2
+            """,
+            bindings: [
+                .text(state.aggregate.kind.rawValue),
+                .text(state.aggregate.id.rawValue),
+                .integer(rawSequence),
+            ],
+            maximumDecodedBytes: 8_192
         )
-        guard storedState == state,
-              storedState.aggregate == storedTransition.aggregate,
-              storedState.revision == storedTransition.resultingRevision,
-              storedState.lifecycle == storedTransition.lifecycle,
-              storedState.transition == storedTransition.transition,
-              storedTransition.resultingRevision == state.revision,
-              storedTransition.canonicalStateBytes == canonicalBytes,
-              try RuntimeCanonicalAggregateStateCodec().encode(storedState) == canonicalBytes else {
+        guard authorityRows.count == 1,
+              let authorityRow = authorityRows.first,
+              case let .text(rawReceiptID)? = authorityRow.value(named: "receipt_id"),
+              let receiptID = RuntimeReceiptID(rawValue: rawReceiptID),
+              authorityRow.value(named: "resulting_revision") == .integer(Int64(state.revision)),
+              case let .text(stateDigest)? = authorityRow.value(named: "state_digest"),
+              stateDigest == LocalRuntimeStorageChecksum.sha256Hex(for: canonicalBytes) else {
             throw RuntimeAtomicCommitError.corruptAuthority
         }
-    }
-
-    static func verifiedSemanticEventRecords(
-        database: isolated SQLiteDatabase
-    ) throws -> [CanonicalRuntimeSemanticEventRecord] {
-        var cursor: RuntimeCanonicalReplayCursor?
-        var records: [CanonicalRuntimeSemanticEventRecord] = []
-        repeat {
-            let page = try CanonicalRuntimeSemanticEventStore.readVerifiedInTransaction(
-                from: database,
-                after: cursor,
-                initialAnchor: nil,
-                limit: CanonicalRuntimeSemanticEventStore.maximumPageLimit
-            )
-            for inspection in page.items {
-                guard case let .supported(record) = inspection else {
-                    throw RuntimeAtomicCommitError.corruptAuthority
-                }
-                records.append(record)
-            }
-            cursor = page.nextCursor
-        } while cursor != nil
-        return records
+        var budget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
+        )
+        let latestCore = try RuntimeCommittedReceiptAuthority.loadCore(
+            receiptID: receiptID,
+            budget: &budget,
+            database: database
+        )
+        let graph = try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(
+            latestCore,
+            budget: &budget,
+            database: database
+        )
+        guard latestCore.facts.lineage.eventSequence == UInt64(rawSequence),
+              let history = graph.history.first(where: { $0.object.aggregate == state.aggregate }),
+              history.object.terminalRevision == state.revision,
+              history.object.stateDigest == stateDigest,
+              let storedTransition = graph.eventEvidence.terminal.event.mutation.aggregateTransitions.first(
+                  where: { $0.aggregate == state.aggregate }
+              ),
+              storedTransition.resultingRevision == state.revision,
+              storedTransition.canonicalStateDigest == stateDigest,
+              storedTransition.canonicalStateBytes == canonicalBytes,
+              try RuntimeCanonicalAggregateStateCodec().decode(canonicalBytes) == state,
+              try RuntimeCanonicalAggregateStateCodec().encode(state) == canonicalBytes else {
+            throw RuntimeAtomicCommitError.corruptAuthority
+        }
     }
 
     static func persistInvalidations(
@@ -1715,19 +2127,17 @@ private extension CanonicalRuntimeStore {
         createdAt: Int64,
         database: isolated SQLiteDatabase
     ) throws {
-        let bytes = try RuntimeAtomicCommitCoding.encode(receipt)
         try database.execute(
             """
             INSERT INTO runtime_commit_receipts(
                 receipt_id, preparation_id, command_id, terminal_event_sequence,
-                receipt_version, payload, payload_checksum, created_at_ms
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                receipt_version, created_at_ms
+            ) VALUES (?, ?, ?, ?, ?, ?)
             """,
             bindings: [
                 .text(receipt.receiptID.rawValue), .text(receipt.preparationID.rawValue),
                 .text(receipt.commandID.rawValue), .integer(Int64(receipt.lineage.eventSequence)),
-                .integer(Int64(runtimeAtomicCommitReceiptVersion)), .blob(bytes),
-                .text(LocalRuntimeStorageChecksum.sha256Hex(for: bytes)), .integer(createdAt),
+                .integer(Int64(runtimeCommitAnchorVersion)), .integer(createdAt),
             ]
         )
     }
@@ -1790,6 +2200,7 @@ private extension CanonicalRuntimeStore {
 
     static func consumeConfirmation(
         _ confirmation: RuntimeMutationConfirmation,
+        receiptID: RuntimeReceiptID,
         preparation: RuntimePreparation,
         lineage: RuntimeAuthorityLineageReference,
         consumedAt: Int64,
@@ -1798,12 +2209,13 @@ private extension CanonicalRuntimeStore {
         let result = try database.execute(
             """
             INSERT INTO runtime_confirmation_consumptions(
-                token, preparation_id, command_id, decision_digest,
+                token, receipt_id, preparation_id, command_id, decision_digest,
                 terminal_event_sequence, consumed_at_ms
-            ) VALUES (?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
             bindings: [
-                .text(confirmation.token.rawValue), .text(preparation.preparationID.rawValue),
+                .text(confirmation.token.rawValue), .text(receiptID.rawValue),
+                .text(preparation.preparationID.rawValue),
                 .text(preparation.commandID.rawValue), .text(preparation.decisionDigest.rawValue),
                 .integer(Int64(lineage.eventSequence)), .integer(consumedAt),
             ]
@@ -1969,6 +2381,11 @@ enum RuntimeAtomicSemanticEventFactory {
         case let .externalOperation(value):
             let payload = try RuntimeExternalOperationMutationPayload(mutation: mutation, facts: value)
             return .externalOperation(value.kind == .reminder ? .reminderRequested(payload) : .calendarEventRequested(payload))
+        case let .compensation(value):
+            return .compensation(.applied(try RuntimeCompensationMutationPayload(
+                mutation: mutation,
+                facts: value
+            )))
         }
     }
 
@@ -1984,6 +2401,9 @@ enum RuntimeAtomicSemanticEventFactory {
             return .objectDeleted
         case .memoryForgotten:
             return .memoryForgotten
+        case .captureCreatedCompensated, .goalCreatedCompensated,
+             .scheduleCreatedCompensated, .reminderCreatedCompensated:
+            return .compensatedCreation
         default:
             throw RuntimeAtomicCommitError.malformedPreparation
         }

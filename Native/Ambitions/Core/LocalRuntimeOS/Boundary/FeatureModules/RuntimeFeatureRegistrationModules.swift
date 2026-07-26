@@ -27,6 +27,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         case "history", "repair": .historyRepair
         case "importDeletion": .importDeletion
         case "externalOperation": .externalOperation
+        case "compensation": .compensation
         default: nil
         }
     }
@@ -44,13 +45,14 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         "goal.clearContextLens", "goal.addDeliverable", "goal.removeDeliverable", "goal.addScopeItem", "goal.removeScopeItem",
         "step.startSession", "step.complete", "step.delay", "step.split", "step.recover", "step.todayGoalStep",
         "schedule.createItem", "schedule.schedule", "schedule.placeStep", "schedule.protectWindow", "schedule.correctWindow",
-        "schedule.undo", "schedule.ritual", "schedule.calendarWrite",
+        "schedule.ritual", "schedule.calendarWrite",
         "reminder.create", "reminder.update", "reminder.delete",
         "profile.updatePreferences",
         "history.openDestination", "history.askWhy", "history.dismissRecommendation", "history.todayReceipt",
         "repair.recover", "repair.openDestination",
         "importDeletion.prepareExport", "importDeletion.performExport", "importDeletion.deleteObject", "importDeletion.forgetMemory",
         "externalOperation.reminder", "externalOperation.calendar_event",
+        "compensation.apply",
     ].compactMap(RuntimeCommandCaseID.init(rawValue:)))
 }
 
@@ -108,6 +110,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): "repair.\(value.action.rawValue)"
         case let .importDeletion(value): "importDeletion.\(value.action.rawValue)"
         case let .externalOperation(value): "externalOperation.\(value.kind.rawValue)"
+        case .compensation: "compensation.apply"
         }
         return RuntimeCommandCaseID(canonicalRawValue: rawValue)
     }
@@ -248,7 +251,7 @@ struct ScheduleReminderRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
         reducerType: "ScheduleReminderMutationReducer",
         cases: ownership([
             "schedule.createItem", "schedule.schedule", "schedule.placeStep", "schedule.protectWindow", "schedule.correctWindow",
-            "schedule.undo", "schedule.ritual", "schedule.calendarWrite", "reminder.create", "reminder.update", "reminder.delete",
+            "schedule.ritual", "schedule.calendarWrite", "reminder.create", "reminder.update", "reminder.delete",
         ])
     )
     let mutationClientRegistration = RuntimeFeatureMutationClientRegistration(feature: .scheduleReminder, clientType: "ScheduleReminderRuntimeMutationClient")
@@ -351,6 +354,32 @@ struct ExternalOperationRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
     let queryRegistrations = [
         RuntimeFeatureQueryRegistration(queryID: .time, owner: .externalOperation),
         RuntimeFeatureQueryRegistration(queryID: .history, owner: .externalOperation),
+    ]
+}
+
+struct CompensationRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
+    let mutationClient: CompensationRuntimeMutationClient
+    let featureID = RuntimePreparationFeature.compensation
+    let order = 7
+    let handler = RuntimeFeatureHandlerRegistration(
+        feature: .compensation,
+        reducerType: "CompensationMutationReducer",
+        cases: ownership(["compensation.apply"])
+    )
+    let mutationClientRegistration = RuntimeFeatureMutationClientRegistration(
+        feature: .compensation,
+        clientType: "CompensationRuntimeMutationClient"
+    )
+    let projectorRegistrations = [
+        RuntimeProjectorRegistration(projectionID: .receipt, owner: .compensation, order: 0),
+    ]
+    let materializerRegistrations = [
+        RuntimeMaterializerRegistration(projectionID: .receipt, owner: .compensation, order: 0),
+    ]
+    let queryRegistrations = [
+        RuntimeFeatureQueryRegistration(queryID: .objectInspection, owner: .compensation),
+        RuntimeFeatureQueryRegistration(queryID: .history, owner: .compensation),
+        RuntimeFeatureQueryRegistration(queryID: .recovery, owner: .compensation),
     ]
 }
 

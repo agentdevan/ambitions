@@ -17,6 +17,14 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
     }
 
     func prepare(_ command: AmbitionsCommand, context: RuntimePreparationContext) async -> RuntimePreparationOutcome {
+        guard Task.isCancelled == false else {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
+        }
+        do {
+            _ = try RuntimeCommandCodec().encode(command)
+        } catch {
+            return unsupported(commandID: command.id, reason: .unsupportedInput, target: command.target)
+        }
         guard context.issuedAt < context.expiresAt,
               let commandID = RuntimeCommandID(rawValue: command.id),
               commandID.rawValue == command.id,
@@ -29,6 +37,9 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
             )
         }
         let validation = validator.validate(command)
+        guard Task.isCancelled == false else {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
+        }
         guard validation == .valid || validation == .needsConfirmation else {
             let reason: RuntimeRecoveryReason = validation == .unsupportedInThisBuild
                 ? .unsupportedInput
@@ -47,8 +58,13 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
         let snapshot: RuntimePreparationSnapshot
         do {
             snapshot = try await reader.read(request)
+        } catch is CancellationError {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
         } catch {
             return blocked(commandID: command.id, reason: .snapshotReadFailed, target: command.target)
+        }
+        guard Task.isCancelled == false else {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
         }
         let input = RuntimeFeatureReducerInput(
             command: command,
@@ -58,6 +74,9 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
         )
         guard let decision = router.reduce(input) else {
             return unsupported(commandID: command.id, reason: .missingHandler, target: command.target)
+        }
+        guard Task.isCancelled == false else {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
         }
         guard decision.disposition != .unsupported else {
             return unsupported(commandID: command.id, reason: decision.reason ?? .unsupportedInput, target: command.target)
@@ -75,6 +94,9 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
             decision: decision,
             boundary: context.boundary
         )
+        guard Task.isCancelled == false else {
+            return blocked(commandID: command.id, reason: .cancelled, target: command.target)
+        }
         guard authorization.isAuthorized else {
             let reason = authorization.reasonCodes.first ?? .authorityRejected
             return blocked(commandID: command.id, reason: reason, target: command.target)
@@ -119,6 +141,9 @@ struct RuntimeMutationPreparationService: RuntimeMutationPreparing, Sendable {
     }
 
     func prepare(_ bytes: Data, context: RuntimePreparationContext) async -> RuntimePreparationOutcome {
+        guard Task.isCancelled == false else {
+            return blocked(commandID: nil, reason: .cancelled, target: AmbitionsCommandTarget())
+        }
         switch RuntimeCommandCodec().decode(bytes) {
         case let .supported(command, _):
             return await prepare(command, context: context)
@@ -489,13 +514,15 @@ struct RuntimeMutationSubmissionService: RuntimeMutationSubmitting, Sendable {
         case .apply:
             guard preparation.decision.writeSet.events.isEmpty == false,
                   preparation.decision.writeSet.receiptIntentID != nil,
-                  preparation.decision.writeSet.rollbackIntentID != nil else {
+                  preparation.decision.writeSet.compensation != nil else {
                 return .identityMismatch
             }
         case .unchanged:
             guard preparation.decision.writeSet.transitions.isEmpty,
                   preparation.decision.writeSet.events.isEmpty,
-                  preparation.decision.writeSet.externalEffect == .none else {
+                  preparation.decision.writeSet.externalEffect == .none,
+                  preparation.decision.writeSet.receiptIntentID == nil,
+                  preparation.decision.writeSet.compensation == nil else {
                 return .identityMismatch
             }
         case .blocked:

@@ -830,7 +830,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try await makeV5Database("projection-scrub-summary")
         let definition = try projectionDefinition(.aggregateState)
         let entry = try makeEntry(
-            id: "goal-private", privacy: .privateUserText, cursor: fixtureCursor(1)
+            id: "goal-private", privacy: .privateUserText, cursor: try fixtureCursor(1)
         )
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -879,8 +879,8 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try await makeV5Database("projection-scrub-budget")
         let definition = try projectionDefinition(.aggregateState)
         let entries = try [
-            makeEntry(id: "goal-a", privacy: .standard, cursor: fixtureCursor(1)),
-            makeEntry(id: "goal-b", privacy: .standard, cursor: fixtureCursor(1)),
+            makeEntry(id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)),
+            makeEntry(id: "goal-b", privacy: .standard, cursor: try fixtureCursor(1)),
         ]
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -930,7 +930,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try await makeV5Database("durable-fsm")
         let definition = try projectionDefinition(.aggregateState)
         let entry = try makeEntry(
-            id: "goal-fsm", privacy: .standard, cursor: fixtureCursor(1)
+            id: "goal-fsm", privacy: .standard, cursor: try fixtureCursor(1)
         )
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -1066,15 +1066,15 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             let database = try await makeV5Database("scrub-\(defect)")
             let generationID = RuntimeTransactionDigest.digest(["scrub-defect", defect])
             let first = try makeEntry(
-                id: "goal-a", privacy: .standard, cursor: fixtureCursor(1)
+                id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)
             )
             let second = try makeEntry(
-                id: "goal-b", privacy: .standard, cursor: fixtureCursor(1)
+                id: "goal-b", privacy: .standard, cursor: try fixtureCursor(1)
             )
             try await database.transaction(.immediate) { isolated in
                 try insertProjectionGeneration(
                     generationID: generationID, definition: definition,
-                    cursor: fixtureCursor(1), sourceDigest: String(repeating: "a", count: 64),
+                    cursor: try fixtureCursor(1), sourceDigest: String(repeating: "a", count: 64),
                     invalidationIDs: ["invalidation.scrub.\(defect)"],
                     invalidationDigest: RuntimeTransactionDigest.digest([defect]),
                     entryCount: 0, shardCount: 0, rootDigest: empty,
@@ -1161,7 +1161,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         generationID: generationID, projectionID: definition.id,
                         definitionDigest: definition.authorityDigest,
                         outputVersion: definition.outputVersion,
-                        sourceCursor: fixtureCursor(1),
+                        sourceCursor: try fixtureCursor(1),
                         sourceChainDigest: String(repeating: "a", count: 64),
                         entryCount: declaredEntryCount, shardCount: declaredShardCount,
                         rootDigest: declaredRoot, privacy: "standard", localOnly: true,
@@ -1654,7 +1654,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try await makeV5Database("full-search-cleanup")
         let definition = try projectionDefinition(.search)
         let entry = try makeEntry(
-            id: "goal-search-cleanup", privacy: .standard, cursor: fixtureCursor(1)
+            id: "goal-search-cleanup", privacy: .standard, cursor: try fixtureCursor(1)
         )
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -1781,9 +1781,9 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try await makeV5Database("entry-access")
         let definition = try projectionDefinition(.aggregateState)
         let entries = try [
-            makeEntry(id: "goal-a", privacy: .standard, cursor: fixtureCursor(1)),
-            makeEntry(id: "goal-b", privacy: .sensitive, cursor: fixtureCursor(1)),
-            makeEntry(id: "goal-c", privacy: .standard, cursor: fixtureCursor(1)),
+            makeEntry(id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)),
+            makeEntry(id: "goal-b", privacy: .sensitive, cursor: try fixtureCursor(1)),
+            makeEntry(id: "goal-c", privacy: .standard, cursor: try fixtureCursor(1)),
         ]
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -1866,7 +1866,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         try await database.transaction(.immediate) { isolated in
             try insertProjectionGeneration(
                 generationID: generationID, definition: definition,
-                cursor: fixtureCursor(1), sourceDigest: String(repeating: "a", count: 64),
+                cursor: try fixtureCursor(1), sourceDigest: String(repeating: "a", count: 64),
                 invalidationIDs: ["invalidation.first-row"],
                 invalidationDigest: RuntimeTransactionDigest.digest(["first-row"]),
                 entryCount: 0, shardCount: 0, rootDigest: empty,
@@ -1875,7 +1875,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             try CanonicalRuntimeStore.insertCanonicalProjectionEntry(
                 generationID: generationID,
                 entry: makeEntry(
-                    id: "goal-first-row", privacy: .standard, cursor: fixtureCursor(1)
+                    id: "goal-first-row", privacy: .standard, cursor: try fixtureCursor(1)
                 ), database: isolated
             )
             XCTAssertThrowsError(try CanonicalRuntimeStore.canonicalBoundedProjectionEntryCount(
@@ -1952,10 +1952,105 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         return database
     }
 
-    private func fixtureCursor(_ sequence: Int) -> RuntimeCanonicalReplayCursor {
-        RuntimeCanonicalReplayCursor(
-            sequence: UInt64(sequence), eventID: "event-\(sequence)",
-            eventHash: RuntimeTransactionDigest.digest(["fixture-event", String(sequence)])
+    private func fixtureCursor(_ sequence: Int) throws -> RuntimeCanonicalReplayCursor {
+        let record = try fixtureSemanticRecord(sequence)
+        return RuntimeCanonicalReplayCursor(
+            sequence: record.lineage.sequence,
+            eventID: record.lineage.eventID.rawValue,
+            eventHash: record.lineage.eventHash.hexadecimal
+        )
+    }
+
+    private func fixtureSemanticRecord(
+        _ sequence: Int
+    ) throws -> CanonicalRuntimeSemanticEventRecord {
+        guard sequence > 0 else {
+            throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
+        }
+        let aggregate = RuntimeSemanticAggregate(
+            kind: .goal,
+            id: try RuntimeAggregateID(validating: "fixture-goal")
+        )
+        let objectID = try RuntimeDomainObjectID(validating: "fixture-goal")
+        let command = GoalCommand(
+            action: .update,
+            target: AmbitionsCommandTarget(goalID: objectID.rawValue),
+            content: RuntimeCommandContent(AmbitionsCommandPayload(
+                title: "Fixture goal revision \(sequence)"
+            ))
+        )
+        let state = RuntimeCanonicalAggregateState(
+            aggregate: aggregate,
+            revision: UInt64(sequence),
+            lifecycle: .active,
+            transition: .update,
+            commandPayload: .goal(command),
+            changedObjectIDs: [objectID]
+        )
+        let stateBytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
+        let mutation = try RuntimeSemanticMutation(
+            semanticType: .goalUpdated,
+            aggregateID: aggregate.id,
+            priorRevision: UInt64(sequence - 1),
+            resultingRevision: UInt64(sequence),
+            changedObjectIDs: [objectID],
+            primaryAggregate: aggregate,
+            aggregateTransitions: [RuntimeSemanticAggregateTransition(
+                aggregate: aggregate,
+                priorRevision: UInt64(sequence - 1),
+                resultingRevision: UInt64(sequence),
+                lifecycle: .active,
+                transition: .update,
+                canonicalStateBytes: stateBytes,
+                canonicalStateDigest: LocalRuntimeStorageChecksum.sha256Hex(for: stateBytes),
+                tombstone: nil
+            )]
+        )
+        let event = RuntimeSemanticEvent.goal(.updated(
+            try RuntimeGoalMutationPayload(mutation: mutation, facts: command)
+        ))
+        let sourceBytes = try RuntimeSemanticEventCodec().encode(event)
+        let header = try RuntimeSemanticEventCodec().inspectHeader(sourceBytes)
+        let eventID = try RuntimeEventID(validating: "event-\(sequence)")
+        let commandID = try RuntimeCommandID(validating: "command-\(sequence)")
+        let correlationID = try RuntimeCorrelationID(validating: "correlation-\(sequence)")
+        let previousHash = sequence == 1
+            ? nil
+            : try fixtureSemanticRecord(sequence - 1).lineage.eventHash
+        let occurredAt = Date(timeIntervalSince1970: Double(sequence) / 1_000)
+        let sourceDigest = SHA256Digest.digest(sourceBytes)
+        let eventHash = try RuntimeSemanticEventHashing.eventHash(
+            eventID: eventID,
+            commandID: commandID,
+            aggregate: aggregate,
+            canonicalAggregateRevision: UInt64(sequence),
+            sequence: UInt64(sequence),
+            correlationID: correlationID,
+            causationEventID: nil,
+            occurredAt: occurredAt,
+            previousEventHash: previousHash,
+            sourceDigest: sourceDigest,
+            typeID: event.typeID,
+            payloadVersion: header.payloadVersion
+        )
+        return CanonicalRuntimeSemanticEventRecord(
+            lineage: RuntimeSemanticEventLineage(
+                eventID: eventID,
+                commandID: commandID,
+                aggregate: aggregate,
+                canonicalAggregateRevision: UInt64(sequence),
+                sequence: UInt64(sequence),
+                correlationID: correlationID,
+                causationEventID: nil,
+                occurredAt: occurredAt,
+                previousEventHash: previousHash,
+                sourceDigest: sourceDigest,
+                eventHash: eventHash
+            ),
+            event: event,
+            sourceBytes: sourceBytes,
+            sourcePayloadVersion: header.payloadVersion,
+            wasUpcast: false
         )
     }
 
@@ -1970,28 +2065,44 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     ) async throws -> ActivationFixture {
         try await database.transaction(.immediate) { isolated in
             let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
-            let sourceBytes = Data("semantic-source".utf8)
-            let sourceChecksum = LocalRuntimeStorageChecksum.sha256Hex(for: sourceBytes)
+            let firstRecord = try fixtureSemanticRecord(1)
+            let firstTransition = try XCTUnwrap(
+                firstRecord.event.mutation.aggregateTransitions.first
+            )
+            let firstState = try RuntimeCanonicalAggregateStateCodec().decode(
+                firstTransition.canonicalStateBytes
+            )
+            let initialState = RuntimeCanonicalAggregateState(
+                aggregate: firstState.aggregate,
+                revision: 0,
+                lifecycle: .active,
+                transition: .update,
+                commandPayload: firstState.commandPayload,
+                changedObjectIDs: firstState.changedObjectIDs
+            )
+            let initialStateBytes = try RuntimeCanonicalAggregateStateCodec().encode(initialState)
             try isolated.execute(
                 """
-                INSERT INTO runtime_aggregates VALUES (
-                    'goal', 'fixture-goal', ?, 1, ?, ?
-                )
+                INSERT INTO runtime_aggregates(
+                    aggregate_kind, aggregate_id, revision,
+                    payload_version, payload, payload_checksum
+                ) VALUES ('goal', 'fixture-goal', 0, 1, ?, ?)
                 """,
                 bindings: [
-                    .integer(Int64(totalCount)), .blob(Data("aggregate".utf8)),
-                    .text(RuntimeTransactionDigest.digest(["aggregate"])),
+                    .blob(initialStateBytes),
+                    .text(LocalRuntimeStorageChecksum.sha256Hex(for: initialStateBytes)),
                 ]
             )
             for sequence in 1...totalCount {
-                let cursor = fixtureCursor(sequence)
+                let record = try fixtureSemanticRecord(sequence)
+                let cursor = try fixtureCursor(sequence)
                 let commandID = "command-\(sequence)"
                 try isolated.execute(
                     """
                     INSERT INTO runtime_command_idempotency(
                         scope, idempotency_key, command_id, command_fingerprint,
                         claim_version, claim_payload, claimed_at_ms
-                    ) VALUES ('fixture', ?, ?, ?, 1, ?, ?)
+                    ) VALUES ('runtime.command', ?, ?, ?, 1, ?, ?)
                     """,
                     bindings: [
                         .text("key-\(sequence)"), .text(commandID),
@@ -2007,14 +2118,19 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         envelope_version, type_id, payload_version, source_bytes,
                         source_digest, previous_event_hash, event_hash, occurred_at_ms
                     ) VALUES (?, ?, ?, 'goal', 'fixture-goal', ?, ?, NULL,
-                              1, ?, 3, ?, ?, ?, ?, ?)
+                              ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     bindings: [
                         .integer(Int64(sequence)), .text(cursor.eventID), .text(commandID),
                         .integer(Int64(sequence)), .text("correlation-\(sequence)"),
-                        .text(RuntimeSemanticEventTypeID.goalUpdated.rawValue),
-                        .blob(sourceBytes), .text(sourceChecksum),
-                        sequence == 1 ? .null : .text(fixtureCursor(sequence - 1).eventHash),
+                        .integer(Int64(RuntimeSemanticEventCodec.currentEnvelopeVersion)),
+                        .text(record.event.typeID.rawValue),
+                        .integer(Int64(record.sourcePayloadVersion)),
+                        .blob(record.sourceBytes),
+                        .text(record.lineage.sourceDigest.hexadecimal),
+                        record.lineage.previousEventHash.map {
+                            .text($0.hexadecimal)
+                        } ?? .null,
                         .text(cursor.eventHash), .integer(Int64(sequence)),
                     ]
                 )
@@ -2037,37 +2153,96 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         .integer(Int64(sequence)),
                     ]
                 )
+                let state = try RuntimeCanonicalAggregateStateCodec().decode(
+                    try XCTUnwrap(record.event.mutation.aggregateTransitions.first).canonicalStateBytes
+                )
+                let stateBytes = try RuntimeCanonicalAggregateStateCodec().encode(state)
+                try isolated.execute(
+                    """
+                    UPDATE runtime_aggregates
+                    SET revision = ?, payload_version = 1, payload = ?, payload_checksum = ?
+                    WHERE aggregate_kind = 'goal' AND aggregate_id = 'fixture-goal'
+                    """,
+                    bindings: [
+                        .integer(Int64(sequence)), .blob(stateBytes),
+                        .text(LocalRuntimeStorageChecksum.sha256Hex(for: stateBytes)),
+                    ]
+                )
+                let evidence = RuntimeIrreversibilityEvidence(
+                    version: 1,
+                    permanence: .currentRuntimeUnsupported,
+                    reason: .missingPriorSemanticValue,
+                    commandFamily: "projection_fixture",
+                    commandAction: "replay"
+                )
                 let receipt = RuntimeAtomicCommitReceipt(
                     receiptID: try RuntimeReceiptID(validating: "receipt-\(sequence)"),
                     preparationID: try XCTUnwrap(RuntimePreparationID(rawValue: "preparation-\(sequence)")),
                     commandID: try RuntimeCommandID(validating: commandID),
-                    lineage: lineage, aggregateStates: [], tombstones: [],
+                    lineage: lineage, aggregateStates: [state], tombstones: [],
                     unresolvedWork: [RuntimeAuthorityUnresolvedWorkReference(
                         kind: .projectionInvalidation, stableID: invalidationID,
                         lineage: lineage
-                    )], objectLinks: [],
-                    undoability: .notUndoable(reason: .missingTypedCompensationContract),
+                    )], objectLinks: [RuntimeAuthorityObjectLink(
+                        aggregate: state.aggregate,
+                        terminalRevision: state.revision,
+                        lifecycle: state.lifecycle
+                    )],
+                    undoability: .noncompensable(evidence),
                     confirmationToken: nil, confirmationDecisionDigest: nil,
                     committedAt: Date(timeIntervalSince1970: Double(sequence) / 1_000)
                 )
-                let receiptBytes = try canonicalJSON(receipt)
                 try isolated.execute(
                     """
-                    INSERT INTO runtime_commit_receipts VALUES (
-                        ?, ?, ?, ?, ?, ?, ?, ?
-                    )
+                    INSERT INTO runtime_commit_receipts(
+                        receipt_id, preparation_id, command_id,
+                        terminal_event_sequence, receipt_version, created_at_ms
+                    ) VALUES (?, ?, ?, ?, ?, ?)
                     """,
                     bindings: [
                         .text(receipt.receiptID.rawValue),
                         .text(receipt.preparationID.rawValue), .text(commandID),
-                        .integer(Int64(sequence)), .integer(Int64(runtimeAtomicCommitReceiptVersion)),
-                        .blob(receiptBytes),
-                        .text(LocalRuntimeStorageChecksum.sha256Hex(for: receiptBytes)),
+                        .integer(Int64(sequence)), .integer(Int64(runtimeCommitAnchorVersion)),
                         .integer(Int64(sequence)),
                     ]
                 )
+                let core = try RuntimeCommittedReceiptAuthority.persist(
+                    atomicReceipt: receipt,
+                    eventRecord: record,
+                    correlationID: record.lineage.correlationID,
+                    dispositionIntent: .noncompensable(evidence),
+                    pendingExternalOperations: [],
+                    compensationConsumption: nil,
+                    createdAtMilliseconds: Int64(sequence),
+                    database: isolated
+                )
+                let finalOutcome = RuntimeAtomicCommitFinalOutcome(
+                    committed: RuntimeCommittedMutation(
+                        preparationID: receipt.preparationID,
+                        commandID: receipt.commandID,
+                        authorityReceiptID: receipt.receiptID,
+                        projectionDegradation: []
+                    ),
+                    receipt: core,
+                    pendingExternalOperations: []
+                )
+                let finalBytes = try RuntimeAtomicCommitCoding.encodeFinalOutcome(finalOutcome)
+                try isolated.execute(
+                    """
+                    UPDATE runtime_command_idempotency
+                    SET final_result_version = ?, final_result_payload = ?,
+                        final_result_checksum = ?, finalized_at_ms = ?
+                    WHERE command_id = ?
+                    """,
+                    bindings: [
+                        .integer(Int64(canonicalIdempotencyFinalResultVersion)),
+                        .blob(finalBytes),
+                        .text(LocalRuntimeStorageChecksum.sha256Hex(for: finalBytes)),
+                        .integer(Int64(sequence)), .text(commandID),
+                    ]
+                )
             }
-            let target = fixtureCursor(capturedCount)
+            let target = try fixtureCursor(capturedCount)
             let sourceDigest = RuntimeTransactionDigest.digest([
                 "fixture-source-chain", String(capturedCount), target.eventHash,
             ])
@@ -2096,15 +2271,14 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             let invalidationIDs = (1...capturedCount).map {
                 "invalidation.\($0).\(definition.id.rawValue)"
             }
-            let invalidationDigest = RuntimeTransactionDigest.digest(
-                (1...capturedCount).flatMap { sequence in
-                    let cursor = fixtureCursor(sequence)
+            let invalidationDigestMaterial = try (1...capturedCount).flatMap { sequence in
+                    let cursor = try fixtureCursor(sequence)
                     return [
                         "invalidation.\(sequence).\(definition.id.rawValue)",
                         String(sequence), cursor.eventID, cursor.eventHash,
                     ]
                 }
-            )
+            let invalidationDigest = RuntimeTransactionDigest.digest(invalidationDigestMaterial)
             let generationID = RuntimeTransactionDigest.digest([
                 "fixture-generation", definition.id.rawValue, String(capturedCount),
                 invalidationDigest,

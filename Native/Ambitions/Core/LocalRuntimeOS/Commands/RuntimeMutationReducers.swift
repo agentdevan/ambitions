@@ -8,6 +8,7 @@ enum RuntimePreparationFeature: String, Codable, Sendable, Equatable, Hashable, 
     case historyRepair = "history_repair"
     case importDeletion = "import_deletion"
     case externalOperation = "external_operation"
+    case compensation
 }
 
 struct RuntimeFeatureHandlerAvailability: Sendable, Equatable {
@@ -71,6 +72,140 @@ struct ExternalOperationMutationReducer: RuntimeFeatureMutationReducing {
     }
 }
 
+struct CompensationMutationReducer: RuntimeFeatureMutationReducing {
+    func reduce(_ input: RuntimeFeatureReducerInput) -> RuntimeReducerDecision {
+        guard case let .compensation(command) = input.command.typedPayload else {
+            return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .compensation)
+        }
+        guard Task.isCancelled == false else {
+            return blocked(input, command: command, reason: .cancelled)
+        }
+        guard command.targets.isEmpty == false,
+              command.targets.count <= RuntimeCompensationLimits.maximumTargets,
+              command.targets == command.targets.sorted(),
+              Set(command.targets.map {
+                  "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)"
+              }).count == command.targets.count else {
+            return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .compensation)
+        }
+        var readObjects: [RuntimeReadDependency] = []
+        readObjects.reserveCapacity(command.targets.count)
+        for target in command.targets {
+            guard Task.isCancelled == false else {
+                return blocked(input, command: command, reason: .cancelled)
+            }
+            guard let objectID = RuntimeDomainObjectID(rawValue: target.aggregate.id.rawValue) else {
+                return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .compensation)
+            }
+            let reference = RuntimePreparationAggregateReference(
+                family: target.aggregate.kind,
+                objectID: objectID
+            )
+            guard let observed = input.snapshot.aggregateRevisions[reference] else { continue }
+            readObjects.append(RuntimeReadDependency(
+                aggregate: reference,
+                expectedRevision: .exact(target.requiredCurrentRevision),
+                observedRevision: observed
+            ))
+        }
+        readObjects.sort { $0.aggregate < $1.aggregate }
+        let complete = readObjects.count == command.targets.count && zip(readObjects, command.targets).allSatisfy {
+            $0.aggregate.family == $1.aggregate.kind &&
+                $0.aggregate.objectID.rawValue == $1.aggregate.id.rawValue &&
+                $0.observedRevision == .exact($1.requiredCurrentRevision)
+        }
+        let readSet = RuntimeMutationReadSet(
+            objects: readObjects, cursors: input.snapshot.cursors, privacy: input.snapshot.privacy
+        )
+        guard complete else {
+            return RuntimeReducerDecision(
+                family: RuntimePreparationFeature.compensation.rawValue,
+                action: input.command.typedPayload.diagnosticCase,
+                disposition: .blocked, readSet: readSet,
+                writeSet: RuntimeMutationWriteSet(
+                    transitions: [], events: [], projectionInvalidations: [],
+                    receiptIntentID: nil, compensation: nil, externalEffect: .none
+                ),
+                confirmationScope: nil, reason: .revisionMismatch,
+                recovery: .inspect(.revisionMismatch, target: command.target)
+            )
+        }
+        var transitions: [RuntimeObjectTransitionIntent] = []
+        transitions.reserveCapacity(command.targets.count)
+        for target in command.targets {
+            guard Task.isCancelled == false else {
+                return blocked(input, command: command, reason: .cancelled)
+            }
+            guard let objectID = RuntimeDomainObjectID(rawValue: target.aggregate.id.rawValue) else {
+                return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .compensation)
+            }
+            transitions.append(RuntimeObjectTransitionIntent(
+                aggregate: RuntimePreparationAggregateReference(
+                    family: target.aggregate.kind,
+                    objectID: objectID
+                ),
+                expectedRevision: .exact(target.requiredCurrentRevision),
+                transition: target.inverseTransition
+            ))
+        }
+        guard transitions.count == command.targets.count,
+              command.targets.allSatisfy({ $0.inverseTransition == command.action.transition }) else {
+            return RuntimePureMutationDecisionBuilder.unsupported(input, feature: .compensation)
+        }
+        let event = RuntimeSemanticEventIntent(
+            id: input.context.eventID, kind: .compensationApplied,
+            commandID: input.commandID, target: command.target,
+            occurredAt: DomainTimestamp.string(from: input.context.issuedAt),
+            privacy: input.command.privacy
+        )
+        let typeID = RuntimeSemanticEventClassifier.classify(input.command.typedPayload)
+        let invalidations: [RuntimeCanonicalProjectionID]
+        if case let .mutating(id) = typeID {
+            invalidations = RuntimeCanonicalProjectionRegistry.projectionIDs(for: id)
+        } else {
+            invalidations = []
+        }
+        let evidence = RuntimeIrreversibilityEvidence(
+            version: 1, permanence: .semantic, reason: .compensationOfCompensation,
+            commandFamily: "compensation", commandAction: input.command.typedPayload.diagnosticCase
+        )
+        return RuntimeReducerDecision(
+            family: RuntimePreparationFeature.compensation.rawValue,
+            action: input.command.typedPayload.diagnosticCase,
+            disposition: .apply, readSet: readSet,
+            writeSet: RuntimeMutationWriteSet(
+                transitions: transitions, events: [event], projectionInvalidations: invalidations,
+                receiptIntentID: input.context.receiptID,
+                compensation: .noncompensable(evidence), externalEffect: .none
+            ),
+            confirmationScope: command.requiresConfirmation ? .semanticCompensation : nil, reason: nil,
+            recovery: RuntimeRecovery(kind: .none, reason: .preparedMutation, target: command.target, redactedDetail: nil)
+        )
+    }
+
+    private func blocked(
+        _ input: RuntimeFeatureReducerInput,
+        command: RuntimeCompensationCommand,
+        reason: RuntimeRecoveryReason
+    ) -> RuntimeReducerDecision {
+        RuntimeReducerDecision(
+            family: RuntimePreparationFeature.compensation.rawValue,
+            action: input.command.typedPayload.diagnosticCase,
+            disposition: .blocked,
+            readSet: RuntimeMutationReadSet(
+                objects: [], cursors: input.snapshot.cursors, privacy: input.snapshot.privacy
+            ),
+            writeSet: RuntimeMutationWriteSet(
+                transitions: [], events: [], projectionInvalidations: [],
+                receiptIntentID: nil, compensation: nil, externalEffect: .none
+            ),
+            confirmationScope: nil,
+            reason: reason,
+            recovery: .inspect(reason, target: command.target)
+        )
+    }
+}
+
 struct RuntimeFeatureMutationRouter: Sendable {
     let availability: RuntimeFeatureHandlerAvailability
 
@@ -87,6 +222,7 @@ struct RuntimeFeatureMutationRouter: Sendable {
         case .history, .repair: .historyRepair
         case .importDeletion: .importDeletion
         case .externalOperation: .externalOperation
+        case .compensation: .compensation
         }
     }
 
@@ -101,11 +237,29 @@ struct RuntimeFeatureMutationRouter: Sendable {
         case .historyRepair: return HistoryRepairMutationReducer().reduce(input)
         case .importDeletion: return ImportDeletionMutationReducer().reduce(input)
         case .externalOperation: return ExternalOperationMutationReducer().reduce(input)
+        case .compensation: return CompensationMutationReducer().reduce(input)
         }
     }
 }
 
 private enum RuntimePureMutationDecisionBuilder {
+    static func unsupported(
+        _ input: RuntimeFeatureReducerInput,
+        feature: RuntimePreparationFeature
+    ) -> RuntimeReducerDecision {
+        RuntimeReducerDecision(
+            family: feature.rawValue, action: input.command.typedPayload.diagnosticCase,
+            disposition: .unsupported,
+            readSet: RuntimeMutationReadSet(objects: [], cursors: [], privacy: input.command.privacy),
+            writeSet: RuntimeMutationWriteSet(
+                transitions: [], events: [], projectionInvalidations: [],
+                receiptIntentID: nil, compensation: nil, externalEffect: .none
+            ),
+            confirmationScope: nil, reason: .unsupportedInput,
+            recovery: .inspect(.unsupportedInput, target: input.command.target)
+        )
+    }
+
     static func reduce(
         _ input: RuntimeFeatureReducerInput,
         feature: RuntimePreparationFeature
@@ -183,14 +337,27 @@ private enum RuntimePureMutationDecisionBuilder {
         case .blocked: .invalidSemanticInput
         case .unsupported: .unsupportedInput
         }
+        let compensation = disposition == .apply
+            ? RuntimeCompensationIntentFactory.disposition(for: command, context: input.context)
+            : nil
         let recovery: RuntimeRecovery = switch disposition {
         case .apply:
-            RuntimeRecovery(
-                kind: effect == .none ? .undo : .rollback,
-                reason: .preparedMutation,
-                target: command.target,
-                redactedDetail: nil
-            )
+            switch compensation {
+            case .typedPlan?:
+                RuntimeRecovery(
+                    kind: effect == .none ? .undo : .rollback,
+                    reason: .preparedMutation,
+                    target: command.target,
+                    redactedDetail: nil
+                )
+            case .noncompensable?, nil:
+                RuntimeRecovery(
+                    kind: .none,
+                    reason: .preparedMutation,
+                    target: command.target,
+                    redactedDetail: nil
+                )
+            }
         case .unchanged: .none(.noMutation, target: command.target)
         case .blocked: .inspect(.invalidSemanticInput, target: command.target)
         case .unsupported: .inspect(.unsupportedInput, target: command.target)
@@ -200,7 +367,7 @@ private enum RuntimePureMutationDecisionBuilder {
             events: events,
             projectionInvalidations: disposition == .apply ? projectionInvalidations(for: command) : [],
             receiptIntentID: disposition == .apply ? input.context.receiptID : nil,
-            rollbackIntentID: disposition == .apply ? input.context.rollbackPlanID : nil,
+            compensation: compensation,
             externalEffect: disposition == .apply ? effect : .none
         )
         return RuntimeReducerDecision(
@@ -217,6 +384,8 @@ private enum RuntimePureMutationDecisionBuilder {
 
     private static func disposition(for command: AmbitionsCommand) -> RuntimeReducerDisposition {
         switch command.typedPayload {
+        case let .schedule(schedule) where schedule.action == .undo:
+            return .unsupported
         case let .history(history):
             switch history.action {
             case .openDestination, .askWhy: return .unchanged
@@ -247,6 +416,7 @@ private enum RuntimePureMutationDecisionBuilder {
             case .deleteObject, .forgetMemory: return .destructiveMutation
             }
         case .externalOperation: return .externalOperation
+        case .compensation: return .semanticCompensation
         default: return nil
         }
     }
@@ -330,6 +500,7 @@ private enum RuntimePureMutationDecisionBuilder {
         case .repair: .repairRequested
         case .importDeletion: .importDeletionRequested
         case .externalOperation: .externalOperationProposed
+        case .compensation: .compensationApplied
         }
     }
 
@@ -367,6 +538,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .compensation(value): value.target
         }
         let raw: String? = switch self {
         case .capture: target.captureID
@@ -380,6 +552,7 @@ extension RuntimeCommandPayload {
         case .importDeletion:
             references.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         guard let raw, let objectID = RuntimeDomainObjectID(rawValue: raw) else { return nil }
         let semantic = RuntimePreparationAggregateReference(
@@ -391,6 +564,17 @@ extension RuntimeCommandPayload {
     }
 
     var runtimePreparationAggregateReferences: [RuntimePreparationAggregateReference] {
+        if case let .compensation(value) = self {
+            guard Task.isCancelled == false,
+                  value.targets.isEmpty == false,
+                  value.targets.count <= RuntimeCompensationLimits.maximumTargets else {
+                return []
+            }
+            return value.targets.compactMap { target in
+                guard let objectID = RuntimeDomainObjectID(rawValue: target.aggregate.id.rawValue) else { return nil }
+                return RuntimePreparationAggregateReference(family: target.aggregate.kind, objectID: objectID)
+            }.sorted()
+        }
         let target: AmbitionsCommandTarget = switch self {
         case let .capture(value): value.target
         case let .goal(value): value.target
@@ -402,6 +586,7 @@ extension RuntimeCommandPayload {
         case let .repair(value): value.target
         case let .importDeletion(value): value.target
         case let .externalOperation(value): value.target
+        case let .compensation(value): value.target
         }
         var values: [RuntimePreparationAggregateReference] = []
         func add(_ raw: String?, _ family: RuntimeSemanticAggregateKind) {
@@ -431,6 +616,7 @@ extension RuntimeCommandPayload {
         case .repair: target.recommendationID ?? target.goalID
         case .importDeletion: values.first?.objectID.rawValue
         case let .externalOperation(value): value.operationID.rawValue
+        case let .compensation(value): value.action.primaryObjectID.rawValue
         }
         add(semanticRaw, semanticAggregateKind)
         return Array(Set(values)).sorted()
@@ -450,6 +636,95 @@ private extension RuntimeCommandPayload {
         case .repair: .repair
         case .importDeletion: .importDeletion
         case .externalOperation: .externalOperation
+        case let .compensation(value): value.action.aggregateKind
         }
+    }
+}
+
+private enum RuntimeCompensationIntentFactory {
+    static func disposition(
+        for command: AmbitionsCommand,
+        context: RuntimePreparationContext
+    ) -> RuntimeCompensationDispositionIntent {
+        guard command.localOnly else {
+            return .noncompensable(RuntimeIrreversibilityEvidence(
+                version: 1,
+                permanence: .currentRuntimeUnsupported,
+                reason: .externalEffectConstraint,
+                commandFamily: command.typedPayload.diagnosticFamily,
+                commandAction: command.typedPayload.diagnosticCase
+            ))
+        }
+        let expiry = context.issuedAt.addingTimeInterval(30 * 24 * 60 * 60)
+        func plan(_ action: RuntimeSemanticCompensationAction, confirmation: Bool) -> RuntimeCompensationDispositionIntent {
+            .typedPlan(RuntimeCompensationPlanIntent(
+                planID: context.rollbackPlanID, action: action,
+                policyVersion: runtimeCompensationPolicyVersion,
+                expiresAt: expiry, requiresConfirmation: confirmation
+            ))
+        }
+        switch command.typedPayload {
+        case let .capture(value):
+            switch value.action {
+            case .quickCapture:
+                if let id = context.proposedObjectID { return plan(.discardCreatedCapture(id), confirmation: true) }
+            case .attachToGoal:
+                return unsupported(command, reason: .unsupportedSemanticInverse)
+            case .archive:
+                return unsupported(command, reason: .unsupportedSemanticInverse)
+            case .routeCommitment, .markWaiting: break
+            }
+        case let .goal(value):
+            if value.action == .create, let id = context.proposedObjectID {
+                return plan(.discardCreatedGoal(id), confirmation: true)
+            }
+        case let .step(value):
+            if case .complete = value.action {
+                return unsupported(command, reason: .unsupportedSemanticInverse)
+            }
+        case let .schedule(value):
+            switch value.action {
+            case .createItem:
+                if let id = context.proposedObjectID { return plan(.discardCreatedSchedule(id), confirmation: true) }
+            case .undo:
+                return unsupported(command, reason: .legacyProjectionAuthority)
+            default: break
+            }
+        case let .reminder(value):
+            switch value.action {
+            case .create:
+                if let id = context.proposedObjectID { return plan(.discardCreatedReminder(id), confirmation: true) }
+            case .delete:
+                return unsupported(command, reason: .unsupportedSemanticInverse)
+            case .update: break
+            }
+        case let .importDeletion(value):
+            if value.action == .forgetMemory {
+                return .noncompensable(RuntimeIrreversibilityEvidence(
+                    version: 1, permanence: .semantic, reason: .destructiveErasure,
+                    commandFamily: command.typedPayload.diagnosticFamily,
+                    commandAction: command.typedPayload.diagnosticCase
+                ))
+            }
+        case .compensation:
+            return .noncompensable(RuntimeIrreversibilityEvidence(
+                version: 1, permanence: .semantic, reason: .compensationOfCompensation,
+                commandFamily: "compensation", commandAction: command.typedPayload.diagnosticCase
+            ))
+        case .profile, .history, .repair, .externalOperation:
+            break
+        }
+        return unsupported(command, reason: .missingPriorSemanticValue)
+    }
+
+    private static func unsupported(
+        _ command: AmbitionsCommand,
+        reason: RuntimeIrreversibilityReason
+    ) -> RuntimeCompensationDispositionIntent {
+        .noncompensable(RuntimeIrreversibilityEvidence(
+            version: 1, permanence: .currentRuntimeUnsupported, reason: reason,
+            commandFamily: command.typedPayload.diagnosticFamily,
+            commandAction: command.typedPayload.diagnosticCase
+        ))
     }
 }

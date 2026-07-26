@@ -8,6 +8,7 @@ struct RuntimeMutationFeatureClients: Sendable {
     let historyRepair: HistoryRepairRuntimeMutationClient
     let importDeletion: ImportDeletionRuntimeMutationClient
     let externalOperation: ExternalOperationRuntimeMutationClient
+    let compensation: CompensationRuntimeMutationClient
 }
 
 struct RuntimeProjectionFeatureClients: Sendable {
@@ -20,8 +21,8 @@ struct RuntimeProjectionFeatureClients: Sendable {
 
 struct RuntimeInspectionFeatureClients: Sendable {
     let objectInspection: ObjectInspectionRuntimeQueryClient
-    let history: HistoryRuntimeQueryClient
-    let recovery: RecoveryRuntimeQueryClient
+    let history: LegacyProjectionHistoryRuntimeQueryClient
+    let recovery: LegacyProjectionRecoveryRuntimeQueryClient
 }
 
 struct RuntimeFeatureClients: Sendable {

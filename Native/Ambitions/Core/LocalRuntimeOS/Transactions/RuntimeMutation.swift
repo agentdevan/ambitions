@@ -140,6 +140,8 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         case .repair: return "Recovery updated"
         case .goal, .reminder, .profile, .history, .importDeletion, .externalOperation:
             return "Ambitions updated"
+        case .compensation:
+            return "Canonical compensation required"
         }
     }
 

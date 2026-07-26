@@ -778,7 +778,9 @@ enum CanonicalRuntimeReplaySchemaPlan {
         guard case let .integer(version)? = rows.first?.values.first else {
             throw RuntimeCanonicalReplayError.corruptAuthority
         }
-        guard version == Int64(targetSchemaVersion) || version == Int64(runtimeCanonicalProjectionSchemaVersion) else {
+        guard version == Int64(targetSchemaVersion) ||
+                version == Int64(runtimeCanonicalProjectionSchemaVersion) ||
+                version == Int64(runtimeCommittedReceiptSchemaVersion) else {
             throw RuntimeCanonicalReplayError.migrationRequired(
                 expected: targetSchemaVersion,
                 actual: Int(version)
@@ -791,20 +793,25 @@ enum CanonicalRuntimeReplaySchemaPlan {
               AND type IN ('table', 'index', 'trigger')
             """
         )
+        let includesProjections = version >= Int64(runtimeCanonicalProjectionSchemaVersion)
+        let includesReceipts = version >= Int64(runtimeCommittedReceiptSchemaVersion)
         let statements = CanonicalRuntimeStore.schemaStatements + stagedIntegratedStatements +
-            (version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.statements : [])
+            (includesProjections ? CanonicalRuntimeProjectionSchemaPlan.statements : []) +
+            (includesReceipts ? CanonicalRuntimeCommittedReceiptSchemaPlan.statements : [])
         let expectedCatalog = try exactSchemaCatalog(statements)
         let observedCatalog = try exactObservedSchemaCatalog(schema)
         let expectedTables = CanonicalRuntimeStore.expectedRuntimeTables
             .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
             .union(CanonicalRuntimeCommitSchemaPlan.tables)
             .union(tables)
-            .union(version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.tables : [])
+            .union(includesProjections ? CanonicalRuntimeProjectionSchemaPlan.tables : [])
+            .union(includesReceipts ? CanonicalRuntimeCommittedReceiptSchemaPlan.tables : [])
         let expectedIndexes = CanonicalRuntimeStore.expectedRuntimeIndexes
             .union(CanonicalRuntimeSemanticEventSchemaPlan.indexes)
             .union(CanonicalRuntimeCommitSchemaPlan.indexes)
             .union(indexes)
-            .union(version == Int64(runtimeCanonicalProjectionSchemaVersion) ? CanonicalRuntimeProjectionSchemaPlan.indexes : [])
+            .union(includesProjections ? CanonicalRuntimeProjectionSchemaPlan.indexes : [])
+            .union(includesReceipts ? CanonicalRuntimeCommittedReceiptSchemaPlan.indexes : [])
         guard Set(expectedCatalog.keys.filter { $0.hasPrefix("table:") }.map { String($0.dropFirst(6)) }) == expectedTables,
               Set(expectedCatalog.keys.filter { $0.hasPrefix("index:") }.map { String($0.dropFirst(6)) }) == expectedIndexes,
               observedCatalog == expectedCatalog else {

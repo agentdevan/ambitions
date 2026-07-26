@@ -42,6 +42,8 @@ enum RuntimeTransactionCommitPolicy {
         switch command.typedPayload {
         case .capture, .goal, .step, .schedule, .reminder, .profile, .repair, .externalOperation:
             return true
+        case .compensation:
+            return false
         case let .history(history):
             if case .todayReceipt = history.action { return true }
             return false

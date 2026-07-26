@@ -3,6 +3,36 @@ import XCTest
 @testable import Ambitions
 
 final class RuntimeMutationPreparationTests: XCTestCase {
+    func testCancelledPreparationStopsBeforeSnapshotRead() async throws {
+        let reader = SequencedPreparationReader([.empty(privacy: .standard)])
+        let command = AmbitionsCommand(
+            id: "cancelled-preparation",
+            source: .capture,
+            typedPayload: .capture(CaptureCommand(
+                action: .quickCapture(externalCreation: nil),
+                target: AmbitionsCommandTarget(),
+                content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Capture"))
+            )),
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        let context = try preparationContext()
+        let task = Task {
+            await Task.yield()
+            return await RuntimeMutationPreparationService(reader: reader).prepare(
+                command,
+                context: context
+            )
+        }
+        task.cancel()
+        let outcome = await task.value
+        guard case let .blocked(failure) = outcome else {
+            return XCTFail("Cancelled preparation must be represented truthfully")
+        }
+        XCTAssertEqual(failure.reason, .cancelled)
+        let readCount = await reader.readCount()
+        XCTAssertEqual(readCount, 0)
+    }
+
     func testTransitionIntentRoundTripsTypedAggregateIdentityAndFamilyOrder() throws {
         let shared = try RuntimeDomainObjectID(validating: "typed-transition")
         let intents = RuntimeMutationWriteSet(
@@ -21,7 +51,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             events: [],
             projectionInvalidations: [],
             receiptIntentID: nil,
-            rollbackIntentID: nil,
+            compensation: nil,
             externalEffect: .none
         )
         let bytes = try JSONEncoder().encode(intents)
@@ -117,7 +147,10 @@ final class RuntimeMutationPreparationTests: XCTestCase {
         XCTAssertEqual(first.writeSet.transitions.map(\.objectID.rawValue), ["prepared-object-1"])
         XCTAssertEqual(first.writeSet.events.map(\.id.rawValue), ["prepared-event-1"])
         XCTAssertEqual(first.writeSet.receiptIntentID?.rawValue, "prepared-receipt-1")
-        XCTAssertEqual(first.writeSet.rollbackIntentID?.rawValue, "prepared-rollback-1")
+        guard case let .typedPlan(plan)? = first.writeSet.compensation else {
+            return XCTFail("Creation must carry a typed compensation plan intent")
+        }
+        XCTAssertEqual(plan.planID.rawValue, "prepared-rollback-1")
         XCTAssertEqual(first.writeSet.externalEffect, .none)
     }
 

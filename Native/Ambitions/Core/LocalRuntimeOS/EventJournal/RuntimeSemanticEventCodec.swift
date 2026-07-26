@@ -283,10 +283,19 @@ struct RuntimeSemanticEventCodec: Sendable {
         case let .repair(value): try encoder.encode(value.payload)
         case let .importDeletion(value): try encoder.encode(value.payload)
         case let .externalOperation(value): try encoder.encode(value.payload)
+        case let .compensation(value): try encoder.encode(value.payload)
         }
     }
 
     private func decodeLatest(typeID: RuntimeSemanticEventTypeID, payload: Data) throws -> RuntimeSemanticEvent {
+        if Self.compensationTypeIDs.contains(typeID) {
+            let value: RuntimeCompensationMutationPayload = try decodeCanonicalPayload(payload)
+            try value.validate()
+            guard value.mutation.semanticType == typeID else {
+                throw RuntimeSemanticEventCodecError.typeMismatch
+            }
+            return .compensation(.applied(value))
+        }
         switch typeID.aggregateKind {
         case .capture:
             let value: RuntimeCaptureMutationPayload = try decodeCanonicalPayload(payload)
@@ -332,6 +341,11 @@ struct RuntimeSemanticEventCodec: Sendable {
             return try externalEvent(typeID, value)
         }
     }
+
+    private static let compensationTypeIDs: Set<RuntimeSemanticEventTypeID> = [
+        .captureCreatedCompensated, .goalCreatedCompensated,
+        .scheduleCreatedCompensated, .reminderCreatedCompensated,
+    ]
 
     private func decodeCanonicalPayload<Value: Codable>(_ bytes: Data) throws -> Value {
         guard bytes.count <= limits.maximumPayloadBytes else { throw RuntimeSemanticEventCodecError.payloadTooLarge }

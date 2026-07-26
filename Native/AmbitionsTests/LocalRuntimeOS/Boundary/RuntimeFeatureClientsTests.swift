@@ -24,12 +24,12 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .duplicateFeature(.capture))
         }
         XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(Array(all.dropLast()))) { error in
-            XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .missingFeature(.externalOperation))
+            XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .missingFeature(.compensation))
         }
 
         let duplicateOrder = AnyRuntimeFeatureRegistrationModule(TestRegistrationModule(
-            base: all[6],
-            cases: all[6].handler.cases,
+            base: all[7],
+            cases: all[7].handler.cases,
             order: 0
         ))
         XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(Array(all.dropLast()) + [duplicateOrder])) { error in
@@ -49,7 +49,9 @@ final class RuntimeFeatureClientsTests: XCTestCase {
                 ),
             ]
         ))
-        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(Array(all.dropLast()) + [duplicateExternal])) { error in
+        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(
+            Array(all.dropLast(2)) + [duplicateExternal, all[7]]
+        )) { error in
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .duplicateCommandCase(duplicateCase))
         }
 
@@ -61,7 +63,9 @@ final class RuntimeFeatureClientsTests: XCTestCase {
                 route: .mutation
             )]
         ))
-        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(Array(all.dropLast()) + [incompleteExternal])) { error in
+        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(
+            Array(all.dropLast(2)) + [incompleteExternal, all[7]]
+        )) { error in
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .missingCommandCase(missingCase))
         }
     }
@@ -239,6 +243,13 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             AnyRuntimeFeatureRegistrationModule(ExternalOperationRuntimeFeatureModule(
                 mutationClient: ExternalOperationRuntimeMutationClient(preparer: seam, submitter: seam)
             )),
+            AnyRuntimeFeatureRegistrationModule(CompensationRuntimeFeatureModule(
+                mutationClient: CompensationRuntimeMutationClient(
+                    preparer: seam,
+                    submitter: seam,
+                    offering: { _, _, _, _ in .unavailable(.unavailable) }
+                )
+            )),
         ]
     }
 
@@ -284,7 +295,7 @@ final class RuntimeFeatureClientsTests: XCTestCase {
                 events: [],
                 projectionInvalidations: [],
                 receiptIntentID: nil,
-                rollbackIntentID: nil,
+                compensation: nil,
                 externalEffect: .none
             ),
             confirmationScope: nil,

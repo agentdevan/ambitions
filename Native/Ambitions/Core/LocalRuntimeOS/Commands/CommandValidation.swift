@@ -52,7 +52,7 @@ struct AmbitionsCommandValidator: Sendable {
             case let .correctWindow(correction):
                 guard TimeMutationActionKind.correctionKinds.contains(correction.action) else { return .invalid }
                 return schedule.target.timeID == nil ? .needsMissingTarget : .valid
-            case .undo: return schedule.target.timeID == nil ? .needsMissingTarget : .valid
+            case .undo: return .unsupportedInThisBuild
             case .ritual: return schedule.target.goalID == nil || schedule.target.stepID == nil ? .needsMissingTarget : .valid
             case let .calendarWrite(intent):
                 switch intent.operationIdentityProvenance {
@@ -94,6 +94,29 @@ struct AmbitionsCommandValidator: Sendable {
         case let .externalOperation(external):
             guard external.title.isEmpty == false else { return .invalid }
             return external.target.goalID == nil && external.target.stepID == nil ? .needsMissingTarget : .valid
+        case let .compensation(compensation):
+            if Task.isCancelled { return .invalid }
+            guard compensation.targets.isEmpty == false,
+                  compensation.targets.count <= RuntimeCompensationLimits.maximumTargets else {
+                return .invalid
+            }
+            let targetKeys = compensation.targets.map {
+                "\($0.aggregate.kind.rawValue)\u{0}\($0.aggregate.id.rawValue)"
+            }
+            guard compensation.planDigest.count == 64,
+                  RuntimeStoreManifestCodec.isSHA256Hex(compensation.planDigest),
+                  compensation.action.target == compensation.target,
+                  compensation.content == RuntimeCommandContent(),
+                  compensation.targets == compensation.targets.sorted(),
+                  Set(targetKeys).count == targetKeys.count,
+                  compensation.targets.allSatisfy({
+                      if Task.isCancelled { return false }
+                      return $0.aggregate.kind == compensation.action.aggregateKind &&
+                          $0.requiredCurrentRevision == $0.sourceRevision &&
+                          $0.inverseTransition == compensation.action.transition &&
+                          RuntimeStoreManifestCodec.isSHA256Hex($0.sourceStateDigest)
+                  }) else { return .invalid }
+            return compensation.requiresConfirmation ? .needsConfirmation : .valid
         }
     }
 

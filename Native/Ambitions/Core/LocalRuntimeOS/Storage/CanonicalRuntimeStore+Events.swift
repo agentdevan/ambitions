@@ -10,6 +10,8 @@ enum CanonicalRuntimeSemanticEventStoreError: Error, Sendable, Equatable {
     case invalidSequence
     case hashChainBroken
     case malformedStoredRow
+    case quarantinedSource
+    case quarantinedDependency
     case oversizeQuarantineDeferredUntilBlobAuthority
 }
 
@@ -23,6 +25,8 @@ extension CanonicalRuntimeSemanticEventStoreError: CustomStringConvertible, Loca
         case .invalidSequence: "The event sequence is invalid."
         case .hashChainBroken: "The event hash chain is invalid."
         case .malformedStoredRow: "The stored event row is malformed."
+        case .quarantinedSource: "The event source is quarantined."
+        case .quarantinedDependency: "A predecessor or causation dependency is quarantined."
         case .oversizeQuarantineDeferredUntilBlobAuthority: "Oversized source quarantine is deferred until verified blob authority is available."
         }
     }
@@ -191,6 +195,12 @@ struct CanonicalRuntimeSemanticEventRecord: Sendable, Equatable {
     func recomputedEventHash() throws -> SHA256Digest {
         try RuntimeSemanticEventHashing.eventHash(lineage: lineage, typeID: event.typeID, payloadVersion: sourcePayloadVersion)
     }
+}
+
+struct RuntimeVerifiedExactSemanticEventEvidence: Sendable, Equatable {
+    let predecessor: CanonicalRuntimeSemanticEventRecord?
+    let causation: CanonicalRuntimeSemanticEventRecord?
+    let terminal: CanonicalRuntimeSemanticEventRecord
 }
 
 enum CanonicalRuntimeSemanticEventQuarantineReason: String, Codable, Sendable, Equatable, Hashable {
@@ -584,6 +594,120 @@ enum CanonicalRuntimeSemanticEventStore {
             sequence,
             database: database,
             codec: RuntimeSemanticEventCodec()
+        )
+    }
+
+    /// Receipt-page variant of exact verification. Every decoded predecessor,
+    /// terminal, causation, and quarantine row consumes one caller-owned budget.
+    static func readVerifiedExactInTransaction(
+        sequence: UInt64,
+        budget: inout RuntimeReceiptDecodedByteBudget,
+        database: isolated SQLiteDatabase,
+        codec: RuntimeSemanticEventCodec = RuntimeSemanticEventCodec()
+    ) throws -> RuntimeVerifiedExactSemanticEventEvidence {
+        guard sequence > 0, sequence <= UInt64(Int64.max) else {
+            throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+        }
+        let lower = sequence == 1 ? 1 : sequence - 1
+        let rows = try budget.query(
+            """
+            SELECT sequence, event_id, command_id, aggregate_kind, aggregate_id,
+                   canonical_revision, correlation_id, causation_event_id,
+                   envelope_version, type_id, payload_version, source_bytes,
+                   source_digest, previous_event_hash, event_hash, occurred_at_ms
+            FROM runtime_semantic_events
+            WHERE sequence >= ? AND sequence <= ? ORDER BY sequence ASC
+            """,
+            bindings: [.integer(Int64(lower)), .integer(Int64(sequence))],
+            database: database
+        )
+        let predecessor: CanonicalRuntimeSemanticEventRecord?
+        let record: CanonicalRuntimeSemanticEventRecord
+        if sequence == 1 {
+            guard rows.count == 1 else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            record = try verifiedRecord(rows[0], codec: codec)
+            predecessor = nil
+            guard record.lineage.sequence == 1, record.lineage.previousEventHash == nil else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+        } else {
+            guard rows.count == 2 else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+            predecessor = try verifiedRecord(rows[0], codec: codec)
+            record = try verifiedRecord(rows[1], codec: codec)
+            guard predecessor?.lineage.sequence == record.lineage.sequence - 1,
+                  record.lineage.sequence == sequence,
+                  record.lineage.previousEventHash == predecessor?.lineage.eventHash else {
+                throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
+            }
+        }
+        let causation: CanonicalRuntimeSemanticEventRecord?
+        if let causationEventID = record.lineage.causationEventID {
+            if predecessor?.lineage.eventID == causationEventID {
+                causation = predecessor
+            } else {
+                let causationRows = try budget.query(
+                    """
+                    SELECT sequence, event_id, command_id, aggregate_kind, aggregate_id,
+                           canonical_revision, correlation_id, causation_event_id,
+                           envelope_version, type_id, payload_version, source_bytes,
+                           source_digest, previous_event_hash, event_hash, occurred_at_ms
+                    FROM runtime_semantic_events
+                    WHERE event_id = ? AND sequence < ? LIMIT 2
+                    """,
+                    bindings: [
+                        .text(causationEventID.rawValue),
+                        .integer(Int64(record.lineage.sequence)),
+                    ],
+                    database: database
+                )
+                guard causationRows.count == 1 else {
+                    throw CanonicalRuntimeSemanticEventStoreError.invalidCausation
+                }
+                causation = try verifiedRecord(causationRows[0], codec: codec)
+            }
+            guard let causation,
+                  causation.lineage.sequence < record.lineage.sequence,
+                  causation.lineage.eventID == causationEventID,
+                  causation.lineage.correlationID == record.lineage.correlationID else {
+                throw CanonicalRuntimeSemanticEventStoreError.invalidCausation
+            }
+        } else {
+            causation = nil
+        }
+        var dependencies: [CanonicalRuntimeSemanticEventRecord] = [record]
+        if let predecessor { dependencies.append(predecessor) }
+        if let causation,
+           dependencies.contains(where: { $0.lineage.sequence == causation.lineage.sequence }) == false {
+            dependencies.append(causation)
+        }
+        for dependency in dependencies {
+            try Task.checkCancellation()
+            let quarantine = try budget.query(
+                """
+                SELECT 1 AS present FROM runtime_semantic_event_quarantine
+                WHERE source_event_id = ? OR source_event_sequence = ? LIMIT 1
+                """,
+                bindings: [
+                    .text(dependency.lineage.eventID.rawValue),
+                    .integer(Int64(dependency.lineage.sequence)),
+                ],
+                database: database
+            )
+            guard quarantine.isEmpty else {
+                if dependency.lineage.sequence == record.lineage.sequence {
+                    throw CanonicalRuntimeSemanticEventStoreError.quarantinedSource
+                }
+                throw CanonicalRuntimeSemanticEventStoreError.quarantinedDependency
+            }
+        }
+        return RuntimeVerifiedExactSemanticEventEvidence(
+            predecessor: predecessor,
+            causation: causation,
+            terminal: record
         )
     }
 }

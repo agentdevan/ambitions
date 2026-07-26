@@ -168,6 +168,7 @@ enum RuntimeSemanticEventIntentKind: String, Codable, Sendable, Equatable, Hasha
     case repairRequested = "repair_requested"
     case importDeletionRequested = "import_deletion_requested"
     case externalOperationProposed = "external_operation_proposed"
+    case compensationApplied = "compensation_applied"
 }
 
 struct RuntimeSemanticEventIntent: Codable, Sendable, Equatable, Hashable {
@@ -194,7 +195,7 @@ struct RuntimeMutationWriteSet: Codable, Sendable, Equatable, Hashable {
     let events: [RuntimeSemanticEventIntent]
     let projectionInvalidations: [RuntimeCanonicalProjectionID]
     let receiptIntentID: RuntimeReceiptID?
-    let rollbackIntentID: RuntimeRollbackPlanID?
+    let compensation: RuntimeCompensationDispositionIntent?
     let externalEffect: RuntimeExternalEffectIntent
     let effectOrdering: RuntimeEffectOrdering
 
@@ -203,14 +204,14 @@ struct RuntimeMutationWriteSet: Codable, Sendable, Equatable, Hashable {
         events: [RuntimeSemanticEventIntent],
         projectionInvalidations: [RuntimeCanonicalProjectionID],
         receiptIntentID: RuntimeReceiptID?,
-        rollbackIntentID: RuntimeRollbackPlanID?,
+        compensation: RuntimeCompensationDispositionIntent?,
         externalEffect: RuntimeExternalEffectIntent
     ) {
         self.transitions = transitions.sorted { $0.aggregate < $1.aggregate }
         self.events = events.sorted { $0.id.rawValue < $1.id.rawValue }
         self.projectionInvalidations = Array(Set(projectionInvalidations)).sorted()
         self.receiptIntentID = receiptIntentID
-        self.rollbackIntentID = rollbackIntentID
+        self.compensation = compensation
         self.externalEffect = externalEffect
         self.effectOrdering = externalEffect == .none ? .notApplicable : .afterLocalAuthorityAcceptance
     }
@@ -228,6 +229,7 @@ enum RuntimeConfirmationScope: String, Codable, Sendable, Equatable, Hashable, C
     case reminderOutbox = "reminder_outbox"
     case externalOperation = "external_operation"
     case legacyCalendarCompatibility = "legacy_calendar_compatibility"
+    case semanticCompensation = "semantic_compensation"
 }
 
 struct RuntimeReducerDecision: Codable, Sendable, Equatable, Hashable {

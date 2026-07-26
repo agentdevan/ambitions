@@ -257,6 +257,10 @@ actor CanonicalRuntimeStore {
             error is RuntimeCanonicalSearchError ||
             error is RuntimeCanonicalReplayError ||
             error is RuntimeCanonicalProjectionSourceError ||
+            error is RuntimeCommittedReceiptQueryError ||
+            error is RuntimeCommittedReceiptAuthorityError ||
+            error is RuntimeCommittedReceiptCodecError ||
+            error is RuntimeAtomicCommitError ||
             error is CancellationError ||
             error is LocalRuntimeStorageError
     }

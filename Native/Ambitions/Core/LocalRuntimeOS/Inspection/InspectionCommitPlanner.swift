@@ -10,6 +10,7 @@ enum InspectionCommitError: Error, Sendable, Equatable {
     case runtimeCommitReceiptReceiptMismatch(expected: String, actual: String)
     case receiptMissingAffectedObject(String)
     case receiptCommandMismatch(receiptID: String, commandID: String)
+    case canonicalCompensationOnly
 }
 
 struct InspectionPublicSourceAtlasReference: Sendable, Equatable, Hashable {
@@ -178,6 +179,9 @@ struct InspectionCommitPlanner: Sendable {
     }
 
     private func validate(_ input: InspectionCommitInput) throws {
+        if case .compensation = input.commandRecord.command.typedPayload {
+            throw InspectionCommitError.canonicalCompensationOnly
+        }
         guard input.runtimeEvent.commandID == input.commandRecord.commandID else {
             throw InspectionCommitError.commandMismatch(
                 expected: input.commandRecord.commandID,
@@ -377,6 +381,7 @@ struct InspectionCommitPlanner: Sendable {
                 case .startSession: return .planUpdated
                 }
             case .schedule, .externalOperation: return .itemScheduled
+            case .compensation: return .planUpdated // Rejected by validate(_:).
             case .profile: return .contextLensChanged
             case let .history(value):
                 if case .dismissRecommendation = value.action { return .recommendationDismissed }

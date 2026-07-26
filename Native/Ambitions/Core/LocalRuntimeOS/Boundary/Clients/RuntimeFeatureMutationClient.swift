@@ -67,6 +67,14 @@ enum ExternalOperationRuntimeCommandFamily: RuntimeFeatureCommandFamily {
     }
 }
 
+enum CompensationRuntimeCommandFamily: RuntimeFeatureCommandFamily {
+    static let feature = RuntimePreparationFeature.compensation
+    static func accepts(_ payload: RuntimeCommandPayload) -> Bool {
+        if case .compensation = payload { return true }
+        return false
+    }
+}
+
 struct RuntimeFeatureCommand<Family: RuntimeFeatureCommandFamily>: Sendable, Equatable {
     let value: AmbitionsCommand
 
@@ -83,6 +91,7 @@ typealias RuntimeProfileCommand = RuntimeFeatureCommand<ProfileRuntimeCommandFam
 typealias RuntimeHistoryRepairCommand = RuntimeFeatureCommand<HistoryRepairRuntimeCommandFamily>
 typealias RuntimeImportDeletionCommand = RuntimeFeatureCommand<ImportDeletionRuntimeCommandFamily>
 typealias RuntimeExternalOperationFeatureCommand = RuntimeFeatureCommand<ExternalOperationRuntimeCommandFamily>
+typealias RuntimeCompensationFeatureCommand = RuntimeFeatureCommand<CompensationRuntimeCommandFamily>
 
 struct RuntimeFeatureMutationClient<Family: RuntimeFeatureCommandFamily>: Sendable {
     private let preparer: any RuntimeMutationPreparing
@@ -232,6 +241,73 @@ struct ExternalOperationRuntimeMutationClient: Sendable {
         await boundary.prepare(command, context: context)
     }
     func commit(_ preparation: RuntimePreparation, confirmation: RuntimeMutationConfirmation?) async -> RuntimeCommandOutcome {
+        await boundary.commit(preparation, confirmation: confirmation)
+    }
+}
+
+struct CompensationRuntimeMutationClient: Sendable {
+    let boundary: RuntimeFeatureMutationClient<CompensationRuntimeCommandFamily>
+    private let offering: @Sendable (
+        RuntimeReceiptID,
+        RuntimeReceiptReadAccess,
+        RuntimeCompensationOfferContext,
+        Date
+    ) async throws -> RuntimeCompensationOfferState
+
+    init(
+        preparer: any RuntimeMutationPreparing,
+        submitter: any RuntimeMutationSubmitting,
+        offering: @escaping @Sendable (
+            RuntimeReceiptID,
+            RuntimeReceiptReadAccess,
+            RuntimeCompensationOfferContext,
+            Date
+        ) async throws -> RuntimeCompensationOfferState
+    ) {
+        boundary = RuntimeFeatureMutationClient(preparer: preparer, submitter: submitter)
+        self.offering = offering
+    }
+
+    init(
+        store: CanonicalRuntimeStore,
+        preparer: any RuntimeMutationPreparing,
+        submitter: any RuntimeMutationSubmitting
+    ) {
+        self.init(
+            preparer: preparer,
+            submitter: submitter,
+            offering: { receiptID, access, context, now in
+                try await store.compensationOffer(
+                    receiptID: receiptID,
+                    access: access,
+                    context: context,
+                    at: now
+                )
+            }
+        )
+    }
+    func offer(
+        for receiptID: RuntimeReceiptID,
+        accessAuthority: RuntimeReceiptAccessAuthority,
+        accessRequest: RuntimeReceiptAccessRequest,
+        context: RuntimeCompensationOfferContext,
+        at now: Date
+    ) async throws -> RuntimeCompensationOfferState {
+        guard let access = try await accessAuthority.issue(accessRequest) else {
+            return .unavailable(.unavailable)
+        }
+        return try await offering(receiptID, access, context, now)
+    }
+    func prepare(
+        _ command: RuntimeCompensationFeatureCommand,
+        context: RuntimePreparationContext
+    ) async -> RuntimePreparationOutcome {
+        await boundary.prepare(command, context: context)
+    }
+    func commit(
+        _ preparation: RuntimePreparation,
+        confirmation: RuntimeMutationConfirmation?
+    ) async -> RuntimeCommandOutcome {
         await boundary.commit(preparation, confirmation: confirmation)
     }
 }

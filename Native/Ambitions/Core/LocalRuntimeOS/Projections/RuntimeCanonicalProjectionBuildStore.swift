@@ -6,11 +6,26 @@ private enum RuntimeCanonicalProjectionBuildSQL {
         SELECT i.invalidation_id, i.projection_id, i.terminal_event_sequence,
                i.invalidation_version, e.event_id, e.event_hash, e.type_id,
                i.payload, i.payload_checksum,
-               r.receipt_id, r.receipt_version, r.payload AS receipt_payload,
-               r.payload_checksum AS receipt_payload_checksum
+               r.receipt_id, r.preparation_id, r.command_id,
+               r.receipt_version, r.created_at_ms,
+               c.core_version, c.core_digest, c.created_at_ms AS core_created_at_ms,
+               authority.artifact_digest,
+               finalized.final_result_version, finalized.final_result_checksum
         FROM runtime_commit_projection_invalidations AS i
-        JOIN runtime_semantic_events AS e ON e.sequence = i.terminal_event_sequence
-        JOIN runtime_commit_receipts AS r ON r.terminal_event_sequence = i.terminal_event_sequence
+        LEFT JOIN runtime_semantic_events AS e ON e.sequence = i.terminal_event_sequence
+        LEFT JOIN runtime_commit_receipts AS r ON r.terminal_event_sequence = i.terminal_event_sequence
+        LEFT JOIN runtime_committed_receipt_cores AS c
+          ON c.receipt_id = r.receipt_id
+         AND c.command_id = r.command_id
+         AND c.terminal_event_sequence = r.terminal_event_sequence
+         AND c.created_at_ms = r.created_at_ms
+        LEFT JOIN runtime_receipt_artifact_links AS authority
+          ON authority.receipt_id = r.receipt_id
+         AND authority.artifact_kind = 'projection_invalidation'
+         AND authority.artifact_id = i.invalidation_id
+         AND authority.artifact_digest = i.payload_checksum
+        LEFT JOIN runtime_command_idempotency AS finalized
+          ON finalized.command_id = r.command_id
         LEFT JOIN runtime_canonical_projection_invalidation_acks AS a
           ON a.projection_id = i.projection_id AND a.invalidation_id = i.invalidation_id
         WHERE a.invalidation_id IS NULL AND i.projection_id = ?
@@ -812,6 +827,10 @@ extension CanonicalRuntimeStore {
             bindings: [.text(projectionID.rawValue), .integer(Int64(max(1, min(limit, 64))))],
             maximumDecodedBytes: max(1, min(limit, 64)) * 16_384
         )
+        var receiptBudget = RuntimeReceiptDecodedByteBudget(
+            maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
+        )
+        var authenticatedGraphs: [RuntimeReceiptID: RuntimeAuthenticatedReceiptGraph] = [:]
         return try rows.map { row in
             guard case let .text(id)? = row.value(named: "invalidation_id"),
                   row.value(named: "invalidation_version") == .integer(1),
@@ -824,29 +843,70 @@ extension CanonicalRuntimeStore {
                   case let .blob(payload)? = row.value(named: "payload"),
                   case let .text(payloadChecksum)? = row.value(named: "payload_checksum"),
                   LocalRuntimeStorageChecksum.sha256Hex(for: payload) == payloadChecksum,
-                  case let .text(receiptID)? = row.value(named: "receipt_id"),
-                  row.value(named: "receipt_version") == .integer(Int64(runtimeAtomicCommitReceiptVersion)),
-                  case let .blob(receiptPayload)? = row.value(named: "receipt_payload"),
-                  case let .text(receiptChecksum)? = row.value(named: "receipt_payload_checksum"),
-                  LocalRuntimeStorageChecksum.sha256Hex(for: receiptPayload) == receiptChecksum else {
+                  case let .text(receiptIDRaw)? = row.value(named: "receipt_id"),
+                  let receiptID = RuntimeReceiptID(rawValue: receiptIDRaw),
+                  case let .text(preparationID)? = row.value(named: "preparation_id"),
+                  RuntimePreparationID(rawValue: preparationID) != nil,
+                  case let .text(commandID)? = row.value(named: "command_id"),
+                  RuntimeCommandID(rawValue: commandID) != nil,
+                  row.value(named: "receipt_version") == .integer(Int64(runtimeCommitAnchorVersion)),
+                  case let .integer(createdAt)? = row.value(named: "created_at_ms"),
+                  createdAt >= 0,
+                  row.value(named: "core_version") == .integer(Int64(runtimeCommittedReceiptCoreVersion)),
+                  case let .text(coreDigest)? = row.value(named: "core_digest"),
+                  RuntimeStoreManifestCodec.isSHA256Hex(coreDigest),
+                  row.value(named: "core_created_at_ms") == .integer(createdAt),
+                  row.value(named: "artifact_digest") == .text(payloadChecksum),
+                  row.value(named: "final_result_version") == .integer(
+                      Int64(canonicalIdempotencyFinalResultVersion)
+                  ),
+                  case let .text(finalChecksum)? = row.value(named: "final_result_checksum"),
+                  RuntimeStoreManifestCodec.isSHA256Hex(finalChecksum) else {
                 throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
             }
             let lineage = try RuntimeCanonicalProjectionBuildCodec.decodeCanonical(
                 RuntimeAuthorityLineageReference.self, bytes: payload
             )
-            let receipt = try RuntimeCanonicalProjectionBuildCodec.decodeCanonical(
-                RuntimeAtomicCommitReceipt.self, bytes: receiptPayload
-            )
+            let graph: RuntimeAuthenticatedReceiptGraph
+            if let authenticated = authenticatedGraphs[receiptID] {
+                graph = authenticated
+            } else {
+                do {
+                    let core = try RuntimeCommittedReceiptAuthority.loadCore(
+                        receiptID: receiptID,
+                        budget: &receiptBudget,
+                        database: database
+                    )
+                    graph = try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(
+                        core,
+                        requireFinalization: true,
+                        coreRowAuthenticated: true,
+                        budget: &receiptBudget,
+                        database: database
+                    )
+                    authenticatedGraphs[receiptID] = graph
+                } catch is CancellationError {
+                    throw CancellationError()
+                } catch {
+                    throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
+                }
+            }
             let cursor = RuntimeCanonicalReplayCursor(
                 sequence: UInt64(sequence), eventID: eventID, eventHash: eventHash
             )
             guard id == "invalidation.\(sequence).\(projectionID.rawValue)", cursor.isWellFormed,
                   lineage.eventID.rawValue == eventID, lineage.eventSequence == UInt64(sequence),
-                  lineage.eventHash == eventHash, receipt.receiptID.rawValue == receiptID,
-                  receipt.lineage == lineage,
-                  receipt.unresolvedWork.filter({
-                    $0.kind == .projectionInvalidation && $0.stableID == id && $0.lineage == lineage
-                  }).count == 1 else {
+                  lineage.eventHash == eventHash,
+                  receiptID.rawValue.isEmpty == false,
+                  preparationID.isEmpty == false,
+                  commandID.isEmpty == false,
+                  createdAt >= 0,
+                  graph.core.facts.receiptID == receiptID,
+                  graph.core.facts.preparationID.rawValue == preparationID,
+                  graph.core.facts.commandID.rawValue == commandID,
+                  graph.core.facts.lineage == lineage,
+                  graph.finalizedIdempotency != nil,
+                  graph.projectionInvalidationIDs.filter({ $0 == id }).count == 1 else {
                 throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
             }
             return RuntimeCanonicalProjectionInvalidation(
