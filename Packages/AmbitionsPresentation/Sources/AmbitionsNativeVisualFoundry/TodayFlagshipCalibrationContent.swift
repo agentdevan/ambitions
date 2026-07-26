@@ -724,7 +724,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         returnContract: TodayFlagshipReturnContract,
         recovery: TodayFlagshipRecoverySnapshot,
         contextSeam: TodayFlagshipContextSeamSnapshot? = nil,
-        supporting: TodayFlagshipSupportingSnapshots? = nil
+        supporting: TodayFlagshipSupportingSnapshots
     ) {
         self.familyID = familyID
         self.isSynthetic = isSynthetic
@@ -737,14 +737,14 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         self.returnContract = returnContract
         self.recovery = recovery
         self.contextSeam = contextSeam
-        self.supporting = supporting ?? Self.defaultSupportingSnapshots(
-            primaryStep: primaryStep,
-            receipt: receipt
-        )
+        self.supporting = supporting
     }
 
     public var returnedTodayTimeline: [TodayFlagshipTimelineObject] {
-        timeline.filter { $0.canonicalObjectID != revealedStartHereStep.id }
+        timeline.filter {
+            $0.canonicalObjectID != revealedStartHereStep.id
+                && $0.canonicalObjectID != returnContract.settledStepID
+        }
     }
 
     public var returnedTodayVisibleObjectIDs: [String] {
@@ -761,55 +761,6 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         }
     }
 
-    private static func defaultSupportingSnapshots(
-        primaryStep: TodayFlagshipStepSnapshot,
-        receipt: TodayFlagshipReceiptSnapshot
-    ) -> TodayFlagshipSupportingSnapshots {
-        TodayFlagshipSupportingSnapshots(
-            goal: TodayFlagshipGoalContextSnapshot(
-                id: primaryStep.parentPursuitID,
-                title: primaryStep.parentPursuitTitle,
-                whyItMatters: primaryStep.materialConsequence,
-                currentPosture: primaryStep.currentAcceptedTruth,
-                nextStepID: primaryStep.id
-            ),
-            timeTransfer: TodayFlagshipTimeTransferSnapshot(
-                title: "Open in Time?",
-                body: "Exact chronology changes belong in Time. This evaluation does not provide that route.",
-                sourceOwner: "Today",
-                destinationOwner: "Time",
-                isReadOnly: true,
-                isHostEvaluationOnly: true,
-                isProductRouteAvailable: false
-            ),
-            history: TodayFlagshipHistoryEntrySnapshot(
-                id: receipt.historyID,
-                recordedAtISO8601: "2026-07-23T10:30:00-04:00",
-                recordedTruth: receipt.historySummary,
-                stepID: primaryStep.id,
-                goalID: primaryStep.parentPursuitID,
-                isLocalOnly: true
-            ),
-            inverse: TodayFlagshipInverseSnapshot(
-                commandID: "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE",
-                title: "Reopen Still counts Step",
-                triggerReceiptID: receipt.id,
-                currentReceiptID: nil,
-                stepRevisionIsCurrent: false,
-                dependenciesAreCurrent: false,
-                hasNewerDependentCommand: false,
-                preservesHistory: true
-            ),
-            commitFailure: TodayFlagshipCommitFailureSnapshot(
-                affectedStepID: primaryStep.id,
-                title: "Progress wasn’t recorded",
-                body: "Your current truth is unchanged. You can try again or return to the Step.",
-                retryTitle: "Try again",
-                dismissTitle: "Return to Step",
-                preservesAcceptedTruth: true
-            )
-        )
-    }
 }
 
 public enum TodayFlagshipNavigationCommand: String, CaseIterable, Equatable, Identifiable, Sendable {

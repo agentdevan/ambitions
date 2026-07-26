@@ -123,10 +123,6 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         phase == .recoveryReview ? recoveryChoiceIDs : []
     }
 
-    public mutating func updateNavigationPath(_ path: [TodayFlagshipRoute]) {
-        navigationPath = path
-    }
-
     @discardableResult
     public mutating func openFullDay() -> Bool {
         guard navigationPath.isEmpty else { return false }
@@ -166,36 +162,50 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         let previousPath = navigationPath
         guard previousPath != path else { return }
 
-        navigationPath = path
-
-        if
-            previousPath == [
+        switch (previousPath, path) {
+        case (
+            [
                 .fullDay(origin: .todayInitial),
                 .step(id: primaryStepID)
             ],
-            path == [.fullDay(origin: .todayInitial)] {
+            [.fullDay(origin: .todayInitial)]
+        ):
+            navigationPath = path
             phase = .todayInitial
             proposedTruth = nil
+            supportingRoute = nil
             focusAnchor = .fullDayStep
-            return
-        }
-
-        if previousPath == [.fullDay(origin: .todayInitial)], path.isEmpty {
-            phase = .todayInitial
-            focusAnchor = .fullDayAction
-            return
-        }
-
-        if previousPath == [.fullDay(origin: .todayReturned)], path.isEmpty {
-            phase = .todayReturned
-            focusAnchor = .fullDayAction
-            return
-        }
-
-        if previousPath == [.step(id: primaryStepID)], path.isEmpty {
+        case (
+            [
+                .fullDay(origin: .todayInitial),
+                .step(id: primaryStepID)
+            ],
+            []
+        ):
+            navigationPath = []
             phase = .todayInitial
             proposedTruth = nil
+            supportingRoute = nil
+            focusAnchor = .fullDayAction
+        case ([.fullDay(origin: .todayInitial)], []):
+            navigationPath = []
+            phase = .todayInitial
+            proposedTruth = nil
+            supportingRoute = nil
+            focusAnchor = .fullDayAction
+        case ([.fullDay(origin: .todayReturned)], []):
+            navigationPath = []
+            phase = .todayReturned
+            supportingRoute = nil
+            focusAnchor = .fullDayAction
+        case ([.step(id: primaryStepID)], []):
+            navigationPath = []
+            phase = .todayInitial
+            proposedTruth = nil
+            supportingRoute = nil
             focusAnchor = .startHere
+        default:
+            return
         }
     }
 
@@ -211,7 +221,10 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func selectStillCounts() -> Bool {
-        guard phase == .focusedCurrent || phase == .recoveredContinuation else {
+        guard
+            supportingRoute == nil,
+            phase == .focusedCurrent || phase == .recoveredContinuation
+        else {
             return false
         }
         phase = .reviewingProposal
@@ -223,7 +236,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func cancelReview() -> Bool {
-        guard phase == .reviewingProposal else { return false }
+        guard phase == .reviewingProposal, supportingRoute == nil else { return false }
         phase = .focusedCurrent
         proposedTruth = nil
         focusAnchor = .focusedIdentity
@@ -233,7 +246,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func beginCommit() -> Bool {
-        guard phase == .reviewingProposal else { return false }
+        guard phase == .reviewingProposal, supportingRoute == nil else { return false }
         phase = .savingAcceptedTruth
         focusAnchor = .saving
         supportingRoute = nil
@@ -259,7 +272,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func retryFailedCommit() -> Bool {
-        guard phase == .failedSettlement else { return false }
+        guard phase == .failedSettlement, supportingRoute == nil else { return false }
         phase = .savingAcceptedTruth
         focusAnchor = .saving
         return true
@@ -267,7 +280,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func dismissFailedCommit() -> Bool {
-        guard phase == .failedSettlement else { return false }
+        guard phase == .failedSettlement, supportingRoute == nil else { return false }
         phase = .focusedCurrent
         proposedTruth = nil
         focusAnchor = .focusedIdentity
@@ -316,26 +329,29 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     @discardableResult
     public mutating func closeSupportingRoute() -> Bool {
         guard supportingRoute != nil else { return false }
-        supportingRoute = nil
 
+        let restoredFocus: TodayFlagshipFocusAnchor
         switch phase {
         case .focusedCurrent, .recoveredContinuation:
-            focusAnchor = .focusedIdentity
+            restoredFocus = .focusedIdentity
         case .reviewingProposal:
-            focusAnchor = .reviewCurrentTruth
+            restoredFocus = .reviewCurrentTruth
         case .failedSettlement:
-            focusAnchor = .failedSettlement
+            restoredFocus = .failedSettlement
         case .settled:
-            focusAnchor = .settledTruth
+            restoredFocus = .settledTruth
         default:
             return false
         }
+
+        supportingRoute = nil
+        focusAnchor = restoredFocus
         return true
     }
 
     @discardableResult
     public mutating func returnToToday() -> Bool {
-        guard phase == .settled else { return false }
+        guard phase == .settled, supportingRoute == nil else { return false }
         phase = .todayReturned
         navigationPath = []
         focusAnchor = .returnedSettledStep
@@ -346,7 +362,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func openHistory() -> Bool {
-        guard phase == .settled else { return false }
+        guard phase == .settled, supportingRoute == nil else { return false }
         isHistoryExpanded = true
         return true
     }
@@ -360,7 +376,10 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func returnByNativeBackNavigation() -> Bool {
-        guard phase == .focusedCurrent || phase == .interrupted || phase == .recoveredContinuation else {
+        guard
+            supportingRoute == nil,
+            phase == .focusedCurrent || phase == .interrupted || phase == .recoveredContinuation
+        else {
             return false
         }
         reconcileNavigationPath([])
@@ -369,7 +388,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func interrupt() -> Bool {
-        guard phase == .focusedCurrent else { return false }
+        guard phase == .focusedCurrent, supportingRoute == nil else { return false }
         phase = .interrupted
         focusAnchor = .interruption
         return true

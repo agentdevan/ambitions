@@ -20,8 +20,8 @@ public enum TodayFlagshipCalibrationFixture {
     ) -> TodayFlagshipCalibrationContent {
         let proposal = TodayFlagshipStillCountsProposal(
             outcomeTitle: "Still counts",
-            proposedTruth: "Record the cleared corner and paint sample as meaningful progress.",
-            settledTruth: "The cleared corner and paint sample now count toward the nursery.",
+            proposedTruth: "I primed the wall and tested the new color.",
+            settledTruth: "I primed the wall and tested the new color.",
             exactConsequence: "This Step will leave Start Here and remain visible in Today.",
             affectedLineage: "Welcome our baby home",
             proofRequirement: "A history entry will be saved on this device.",
@@ -44,8 +44,8 @@ public enum TodayFlagshipCalibrationFixture {
             materialConsequence: "It keeps the room moving without taking over the evening.",
             startHereSummary: "A small move now keeps the nursery moving and family time protected.",
             temporalContext: TodayFlagshipTemporalContext(
-                exactTime: "4:30 PM",
-                relationship: "Before family time",
+                exactTime: "2:00 PM",
+                relationship: "Available now · before 2:00 PM handoff",
                 owner: "Time"
             ),
             primaryActionTitle: "Continue nursery setup",
@@ -141,7 +141,7 @@ public enum TodayFlagshipCalibrationFixture {
             historyID: "history.step.nursery-ready-for-crib",
             recordedLabel: "Recorded on this device",
             receiptSummary: "Meaningful nursery progress recorded",
-            historySummary: "The cleared corner and paint sample now count toward the nursery.",
+            historySummary: proposal.settledTruth,
             proofLabel: "Added to Welcome our baby home"
         )
 
@@ -168,7 +168,7 @@ public enum TodayFlagshipCalibrationFixture {
                 stepID: "step.nursery-ready-for-crib",
                 interruptionTitle: "Pick up where you left off",
                 interruptionDetail: "Your saved progress is still here.",
-                lastSavedProgress: "Cleared the crib corner and kept the paint sample decision.",
+                lastSavedProgress: proposal.settledTruth,
                 availableChoices: [
                     TodayFlagshipRecoveryChoice(
                         id: "recovery.continue-saved-progress",
@@ -237,6 +237,56 @@ public enum TodayFlagshipCalibrationFixture {
                 body: "Your current truth is unchanged. You can try again or return to the Step.",
                 retryTitle: "Try again",
                 dismissTitle: "Return to Step",
+                preservesAcceptedTruth: true
+            )
+        )
+    }
+
+    private static func makeArabicSupportingSnapshots(
+        primaryStep: TodayFlagshipStepSnapshot,
+        receipt: TodayFlagshipReceiptSnapshot
+    ) -> TodayFlagshipSupportingSnapshots {
+        TodayFlagshipSupportingSnapshots(
+            goal: TodayFlagshipGoalContextSnapshot(
+                id: primaryStep.parentPursuitID,
+                title: primaryStep.parentPursuitTitle,
+                whyItMatters: "نُهيّئ بيتًا هادئًا وآمنًا لطفلنا ولعائلتنا.",
+                currentPosture: "تتقدّم الغرفة بخطوات صغيرة تحمي وقت العائلة.",
+                nextStepID: primaryStep.id
+            ),
+            timeTransfer: TodayFlagshipTimeTransferSnapshot(
+                title: "الفتح في الوقت غير متاح هنا",
+                body: "تعديل التوقيت الدقيق يخص الوقت، ولا يوفّر هذا التقييم مسارًا إليه.",
+                sourceOwner: "اليوم",
+                destinationOwner: "الوقت",
+                isReadOnly: true,
+                isHostEvaluationOnly: true,
+                isProductRouteAvailable: false
+            ),
+            history: TodayFlagshipHistoryEntrySnapshot(
+                id: receipt.historyID,
+                recordedAtISO8601: "2026-07-23T10:30:00-04:00",
+                recordedTruth: primaryStep.stillCountsProposal.settledTruth,
+                stepID: primaryStep.id,
+                goalID: primaryStep.parentPursuitID,
+                isLocalOnly: true
+            ),
+            inverse: TodayFlagshipInverseSnapshot(
+                commandID: "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE",
+                title: "أعد فتح خطوة ما زال يُحتسب",
+                triggerReceiptID: receipt.id,
+                currentReceiptID: nil,
+                stepRevisionIsCurrent: false,
+                dependenciesAreCurrent: false,
+                hasNewerDependentCommand: false,
+                preservesHistory: true
+            ),
+            commitFailure: TodayFlagshipCommitFailureSnapshot(
+                affectedStepID: primaryStep.id,
+                title: "لم يُسجّل التقدّم",
+                body: "حالتك الحالية لم تتغيّر. يمكنك المحاولة مجددًا أو العودة إلى الخطوة.",
+                retryTitle: "حاول مجددًا",
+                dismissTitle: "العودة إلى الخطوة",
                 preservesAcceptedTruth: true
             )
         )
@@ -792,10 +842,9 @@ private extension TodayFlagshipCalibrationFixture {
                     )
                 ]
             ),
-            supporting: makeSupportingSnapshots(
+            supporting: makeArabicSupportingSnapshots(
                 primaryStep: primaryStep,
-                receipt: receipt,
-                inverseEligible: false
+                receipt: receipt
             )
         )
     }

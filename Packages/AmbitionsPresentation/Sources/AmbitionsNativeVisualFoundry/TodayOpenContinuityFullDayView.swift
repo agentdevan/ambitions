@@ -224,7 +224,8 @@ private extension TodayFlagshipCalibrationContent {
             receipt: receipt,
             returnContract: returnContract,
             recovery: recovery,
-            contextSeam: contextSeam
+            contextSeam: contextSeam,
+            supporting: supporting
         )
     }
 }

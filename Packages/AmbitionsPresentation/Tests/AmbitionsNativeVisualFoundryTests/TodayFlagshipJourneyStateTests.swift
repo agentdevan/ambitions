@@ -52,6 +52,35 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.acceptedTruth, acceptedTruth)
     }
 
+    func testDirectMultiLevelNativePopRestoresInitialTodayTruthAndFocus() {
+        var state = TodayFlagshipJourneyState(content: content)
+        XCTAssertTrue(state.openFullDay())
+        XCTAssertTrue(state.openStepFromFullDay(id: content.primaryStep.id))
+
+        state.reconcileNavigationPath([])
+
+        XCTAssertTrue(state.navigationPath.isEmpty)
+        XCTAssertEqual(state.phase, .todayInitial)
+        XCTAssertNil(state.proposedTruth)
+        XCTAssertEqual(state.focusAnchor, .fullDayAction)
+        XCTAssertFalse(state.hasCommittedMutation)
+    }
+
+    func testReturnedOriginPopRestoresReturnedTodayAndRejectsArbitraryPush() {
+        var state = TodayFlagshipJourneyState.preview(content: content, phase: .todayReturned)
+        XCTAssertTrue(state.openFullDay())
+
+        state.reconcileNavigationPath([])
+
+        XCTAssertEqual(state.phase, .todayReturned)
+        XCTAssertEqual(state.focusAnchor, .fullDayAction)
+        XCTAssertTrue(state.hasCommittedMutation)
+
+        let before = state
+        state.reconcileNavigationPath([.step(id: content.primaryStep.id)])
+        XCTAssertEqual(state, before)
+    }
+
     func testReturnedFullDayKeepsSettledTruthReadOnlyAndRestoresReturnedOrigin() {
         var state = TodayFlagshipJourneyState.preview(
             content: content,
@@ -203,6 +232,62 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(settled.focusAnchor, .historyEntry)
         XCTAssertTrue(settled.closeSupportingRoute())
         XCTAssertEqual(settled.focusAnchor, .settledTruth)
+    }
+
+    func testPrimaryTransitionsRejectOpenSupportingDepthAndCloseFailureIsAtomic() {
+        var focused = focusedState()
+        XCTAssertTrue(focused.openSupportingRoute(.goalDetail))
+        let focusedWithRoute = focused
+        XCTAssertFalse(focused.selectStillCounts())
+        XCTAssertFalse(focused.interrupt())
+        XCTAssertEqual(focused, focusedWithRoute)
+
+        XCTAssertTrue(focused.closeSupportingRoute())
+        XCTAssertTrue(focused.selectStillCounts())
+        XCTAssertTrue(focused.openSupportingRoute(.consequenceDetails))
+        let reviewWithRoute = focused
+        XCTAssertFalse(focused.beginCommit())
+        XCTAssertFalse(focused.cancelReview())
+        XCTAssertEqual(focused, reviewWithRoute)
+
+        var failed = TodayFlagshipJourneyState.preview(content: content, phase: .failedSettlement)
+        XCTAssertTrue(failed.openSupportingRoute(.consequenceDetails))
+        let failedWithRoute = failed
+        XCTAssertFalse(failed.retryFailedCommit())
+        XCTAssertFalse(failed.dismissFailedCommit())
+        XCTAssertEqual(failed, failedWithRoute)
+
+        var invalid = TodayFlagshipJourneyState(content: content)
+        let invalidBefore = invalid
+        XCTAssertFalse(invalid.closeSupportingRoute())
+        XCTAssertEqual(invalid, invalidBefore)
+    }
+
+    func testReviewPresentationWiresFailureAndCancelsOutstandingCommitTask() throws {
+        let sourceRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+        let source = try String(
+            contentsOf: sourceRoot.appendingPathComponent("TodayFlagshipReviewView.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(source.contains("let succeeded = await onCommitProposal()"))
+        XCTAssertTrue(source.contains("state.resolveCommit(succeeded: succeeded)"))
+        XCTAssertTrue(source.contains("Task.isCancelled"))
+        XCTAssertTrue(source.contains("commitTask?.cancel()"))
+        XCTAssertTrue(source.contains("state.failCommit()"))
+        XCTAssertTrue(source.contains("state.retryFailedCommit()"))
+        XCTAssertTrue(source.contains("state.dismissFailedCommit()"))
+        XCTAssertTrue(source.contains("content.supporting.commitFailure.retryTitle"))
+        XCTAssertTrue(source.contains("content.supporting.commitFailure.dismissTitle"))
+        XCTAssertTrue(
+            source.contains(
+                "state.isCommitInFlight || state.phase == .failedSettlement"
+            )
+        )
     }
 
     func testTimeTransferIsNotAProductJourneyRoute() {

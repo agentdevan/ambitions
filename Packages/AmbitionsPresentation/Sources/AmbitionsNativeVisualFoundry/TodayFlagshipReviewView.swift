@@ -11,6 +11,7 @@ struct TodayFlagshipReviewView: View {
     @AccessibilityFocusState private var accessibilityFocus: TodayFlagshipFocusAnchor?
     @State private var reviewFeedbackTrigger = false
     @State private var commitFeedbackTrigger = false
+    @State private var commitTask: Task<Void, Never>?
 
     let content: TodayFlagshipCalibrationContent
     @Binding var state: TodayFlagshipJourneyState
@@ -21,6 +22,10 @@ struct TodayFlagshipReviewView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     identity
+
+                    if state.phase == .failedSettlement {
+                        failurePosture
+                    }
 
                     TodayOpenContinuityTruthComparison(
                         currentLabel: content.interfaceCopy.rightNowTitle,
@@ -47,8 +52,8 @@ struct TodayFlagshipReviewView: View {
             .foregroundStyle(palette.primaryInk)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 TodayOpenContinuityCommitBar(
-                    cancelTitle: content.interfaceCopy.cancelTitle,
-                    commitTitle: content.primaryStep.stillCountsProposal.commitActionTitle,
+                    cancelTitle: cancelTitle,
+                    commitTitle: commitTitle,
                     savingTitle: content.interfaceCopy.savingTitle,
                     savingBody: content.interfaceCopy.savingBody,
                     cancelHint: content.interfaceCopy.cancelReviewHint,
@@ -62,7 +67,9 @@ struct TodayFlagshipReviewView: View {
             .navigationTitle(content.interfaceCopy.reviewTitle)
             .todayFlagshipInlineNavigationTitle()
         }
-        .interactiveDismissDisabled(state.isCommitInFlight)
+        .interactiveDismissDisabled(
+            state.isCommitInFlight || state.phase == .failedSettlement
+        )
         .onAppear {
             accessibilityFocus = state.focusAnchor
             reviewFeedbackTrigger.toggle()
@@ -70,6 +77,7 @@ struct TodayFlagshipReviewView: View {
         .onChange(of: state.phase) { _, _ in
             accessibilityFocus = state.focusAnchor
         }
+        .onDisappear(perform: cancelCommitTask)
         .sensoryFeedback(.selection, trigger: reviewFeedbackTrigger)
         .sensoryFeedback(
             .impact(weight: .light, intensity: 0.75),
@@ -113,6 +121,25 @@ struct TodayFlagshipReviewView: View {
             emphasized: true
         )
         .accessibilityIdentifier("tfcs-review-consequence")
+    }
+
+    private var failurePosture: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.circle")
+                .foregroundStyle(palette.articulationAccent)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(content.supporting.commitFailure.title)
+                    .font(TodayOpenContinuityTypographyRole.relationship.font.weight(.semibold))
+                Text(content.supporting.commitFailure.body)
+                    .font(TodayOpenContinuityTypographyRole.metadata.font)
+                    .foregroundStyle(palette.secondaryInk)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityFocused($accessibilityFocus, equals: .failedSettlement)
+        .accessibilityIdentifier("tfcs-failed-settlement")
     }
 
     private var relationshipSummary: some View {
@@ -211,18 +238,56 @@ struct TodayFlagshipReviewView: View {
     }
 
     private func cancelReview() {
-        _ = state.cancelReview()
+        if state.phase == .failedSettlement {
+            _ = state.dismissFailedCommit()
+        } else {
+            _ = state.cancelReview()
+        }
     }
 
     private func commitProposal() {
-        guard state.beginCommit() else { return }
+        let didBeginCommit: Bool
+        if state.phase == .failedSettlement {
+            didBeginCommit = state.retryFailedCommit()
+        } else {
+            didBeginCommit = state.beginCommit()
+        }
+        guard didBeginCommit else { return }
+
+        commitTask?.cancel()
         commitFeedbackTrigger.toggle()
         announceSaving()
 
-        Task { @MainActor in
-            guard await onCommitProposal() else { return }
-            _ = state.settle()
+        commitTask = Task { @MainActor in
+            let succeeded = await onCommitProposal()
+            guard Task.isCancelled == false else {
+                _ = state.failCommit()
+                commitTask = nil
+                return
+            }
+            _ = state.resolveCommit(succeeded: succeeded)
+            commitTask = nil
         }
+    }
+
+    private func cancelCommitTask() {
+        commitTask?.cancel()
+        commitTask = nil
+        if state.isCommitInFlight {
+            _ = state.failCommit()
+        }
+    }
+
+    private var cancelTitle: String {
+        state.phase == .failedSettlement
+            ? content.supporting.commitFailure.dismissTitle
+            : content.interfaceCopy.cancelTitle
+    }
+
+    private var commitTitle: String {
+        state.phase == .failedSettlement
+            ? content.supporting.commitFailure.retryTitle
+            : content.primaryStep.stillCountsProposal.commitActionTitle
     }
 
     @MainActor

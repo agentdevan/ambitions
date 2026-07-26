@@ -25,11 +25,11 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
         XCTAssertEqual(
             step.stillCountsProposal.proposedTruth,
-            "Record the cleared corner and paint sample as meaningful progress."
+            "I primed the wall and tested the new color."
         )
         XCTAssertEqual(
             step.stillCountsProposal.settledTruth,
-            "The cleared corner and paint sample now count toward the nursery."
+            "I primed the wall and tested the new color."
         )
         XCTAssertNotEqual(step.currentAcceptedTruth, step.stillCountsProposal.proposedTruth)
         XCTAssertNotEqual(step.currentAcceptedTruth, step.stillCountsProposal.settledTruth)
@@ -49,7 +49,10 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             step.materialConsequence,
             "It keeps the room moving without taking over the evening."
         )
-        XCTAssertEqual(step.temporalContext.relationship, "Before family time")
+        XCTAssertEqual(
+            step.temporalContext.relationship,
+            "Available now · before 2:00 PM handoff"
+        )
         XCTAssertEqual(step.stillCountsProposal.commitActionTitle, "Record progress")
         XCTAssertEqual(
             fixture.recovery.availableChoices.map(\.title),
@@ -117,7 +120,11 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
         XCTAssertFalse(step.whyItFitsNow.isEmpty)
         XCTAssertFalse(step.materialConsequence.isEmpty)
-        XCTAssertEqual(step.temporalContext.exactTime, "4:30 PM")
+        XCTAssertEqual(step.temporalContext.exactTime, "2:00 PM")
+        XCTAssertEqual(
+            step.temporalContext.relationship,
+            "Available now · before 2:00 PM handoff"
+        )
         XCTAssertEqual(step.temporalContext.owner, "Time")
         XCTAssertTrue(step.stillCountsProposal.createsProof)
         XCTAssertTrue(step.stillCountsProposal.createsReceipt)
@@ -184,6 +191,44 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         )
     }
 
+    func testReturnedProjectionDeduplicatesSettledAndRevealedIDsIntrinsically() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let adversarialTimeline = fixture.timeline + [
+            TodayFlagshipTimelineObject(
+                id: "timeline.duplicate-settled",
+                canonicalObjectID: fixture.primaryStep.id,
+                objectTitle: fixture.primaryStep.title,
+                timeLabel: "10:30 AM",
+                relationship: "Settled",
+                acceptedState: fixture.primaryStep.stillCountsProposal.settledTruth
+            ),
+            TodayFlagshipTimelineObject(
+                id: "timeline.duplicate-revealed",
+                canonicalObjectID: fixture.revealedStartHereStep.id,
+                objectTitle: fixture.revealedStartHereStep.title,
+                timeLabel: "2:00 PM",
+                relationship: "Fixed",
+                acceptedState: fixture.revealedStartHereStep.currentAcceptedTruth
+            )
+        ]
+        let projected = fixture.replacingTimeline(adversarialTimeline)
+
+        XCTAssertEqual(
+            Set(projected.returnedTodayVisibleObjectIDs).count,
+            projected.returnedTodayVisibleObjectIDs.count
+        )
+        XCTAssertEqual(
+            projected.returnedTodayVisibleObjectIDs.filter { $0 == fixture.primaryStep.id }.count,
+            1
+        )
+        XCTAssertEqual(
+            projected.returnedTodayVisibleObjectIDs.filter {
+                $0 == fixture.revealedStartHereStep.id
+            }.count,
+            1
+        )
+    }
+
     func testR13SupportingSnapshotsRemainFixtureDrivenAndReadOnly() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
         let supporting = fixture.supporting
@@ -230,6 +275,52 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertTrue(eligible.preservesHistory)
     }
 
+    func testEveryUndoEligibilityGateIsIndependentlyRequired() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby.undoAvailableEvaluation
+        let eligible = fixture.supporting.inverse
+        let invalidSnapshots = [
+            inverse(from: eligible, currentReceiptID: "receipt.other"),
+            inverse(from: eligible, stepRevisionIsCurrent: false),
+            inverse(from: eligible, dependenciesAreCurrent: false),
+            inverse(from: eligible, hasNewerDependentCommand: true),
+            inverse(from: eligible, preservesHistory: false)
+        ]
+
+        for invalid in invalidSnapshots {
+            XCTAssertFalse(invalid.isAvailable)
+            let content = fixture.replacingInverse(invalid)
+            var state = TodayFlagshipJourneyState.preview(content: content, phase: .settled)
+            XCTAssertFalse(state.openSupportingRoute(.undoReview))
+            XCTAssertNil(state.supportingRoute)
+        }
+    }
+
+    func testSupportingSnapshotsAreExplicitAndRTLStressDoesNotFallBackToEnglish() throws {
+        let contentSource = try foundrySource(named: "TodayFlagshipCalibrationContent.swift")
+        XCTAssertTrue(contentSource.contains("supporting: TodayFlagshipSupportingSnapshots"))
+        XCTAssertFalse(contentSource.contains("supporting: TodayFlagshipSupportingSnapshots?"))
+        XCTAssertFalse(contentSource.contains("defaultSupportingSnapshots"))
+
+        let rtl = TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation.supporting
+        let visibleSupport = [
+            rtl.goal.title,
+            rtl.goal.whyItMatters,
+            rtl.goal.currentPosture,
+            rtl.timeTransfer.title,
+            rtl.timeTransfer.body,
+            rtl.commitFailure.title,
+            rtl.commitFailure.body,
+            rtl.commitFailure.retryTitle,
+            rtl.commitFailure.dismissTitle
+        ].joined(separator: " ")
+        XCTAssertTrue(
+            visibleSupport.unicodeScalars.contains { (0x0600...0x06FF).contains($0.value) }
+        )
+        for english in ["Open in Time", "Progress wasn’t recorded", "Try again"] {
+            XCTAssertFalse(visibleSupport.contains(english))
+        }
+    }
+
     func testB02ReturnedTodayKeepsOneRevealedStartHereAndExactSettledAnchor() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
         let allReturnedIdentities = [fixture.revealedStartHereStep.id]
@@ -264,7 +355,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertEqual(fixture.recovery.stepID, fixture.primaryStep.id)
         XCTAssertEqual(
             fixture.recovery.lastSavedProgress,
-            "Cleared the crib corner and kept the paint sample decision."
+            "I primed the wall and tested the new color."
         )
         XCTAssertEqual(fixture.recovery.availableChoices.map(\.id), [
             "recovery.continue-saved-progress",
@@ -840,6 +931,27 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             encoding: .utf8
         )
     }
+
+    private func inverse(
+        from source: TodayFlagshipInverseSnapshot,
+        currentReceiptID: String? = nil,
+        stepRevisionIsCurrent: Bool? = nil,
+        dependenciesAreCurrent: Bool? = nil,
+        hasNewerDependentCommand: Bool? = nil,
+        preservesHistory: Bool? = nil
+    ) -> TodayFlagshipInverseSnapshot {
+        TodayFlagshipInverseSnapshot(
+            commandID: source.commandID,
+            title: source.title,
+            triggerReceiptID: source.triggerReceiptID,
+            currentReceiptID: currentReceiptID ?? source.currentReceiptID,
+            stepRevisionIsCurrent: stepRevisionIsCurrent ?? source.stepRevisionIsCurrent,
+            dependenciesAreCurrent: dependenciesAreCurrent ?? source.dependenciesAreCurrent,
+            hasNewerDependentCommand: hasNewerDependentCommand
+                ?? source.hasNewerDependentCommand,
+            preservesHistory: preservesHistory ?? source.preservesHistory
+        )
+    }
 }
 
 private extension TodayFlagshipCalibrationContent {
@@ -857,6 +969,29 @@ private extension TodayFlagshipCalibrationContent {
             recovery: recovery,
             contextSeam: contextSeam,
             supporting: supporting
+        )
+    }
+
+    func replacingInverse(_ inverse: TodayFlagshipInverseSnapshot) -> Self {
+        Self(
+            familyID: familyID,
+            isSynthetic: isSynthetic,
+            interfaceCopy: interfaceCopy,
+            presentContext: presentContext,
+            primaryStep: primaryStep,
+            revealedStartHereStep: revealedStartHereStep,
+            timeline: timeline,
+            receipt: receipt,
+            returnContract: returnContract,
+            recovery: recovery,
+            contextSeam: contextSeam,
+            supporting: TodayFlagshipSupportingSnapshots(
+                goal: supporting.goal,
+                timeTransfer: supporting.timeTransfer,
+                history: supporting.history,
+                inverse: inverse,
+                commitFailure: supporting.commitFailure
+            )
         )
     }
 }
