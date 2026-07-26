@@ -9,8 +9,6 @@ public struct TodayFlagshipCalibrationView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.layoutDirection) private var layoutDirection
-    @ScaledMetric(relativeTo: .body) private var crownSpacing = 14.0
 
     @Binding private var state: TodayFlagshipJourneyState
     @State private var isDockExpanded: Bool
@@ -96,13 +94,18 @@ public struct TodayFlagshipCalibrationView: View {
     private var todayRoot: some View {
         ZStack(alignment: .trailing) {
             VStack(spacing: 0) {
-                crown
+                TodayVitalityRootCrown(
+                    copy: content.interfaceCopy,
+                    relationship: content.presentContext.relationship,
+                    palette: palette,
+                    scrollProgress: crownScrollProgress
+                )
                     .frame(maxWidth: 560, alignment: .leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 24)
                     .padding(.trailing, rootTrailingPadding)
                     .padding(.top, 12 - (4 * crownScrollProgress))
-                    .padding(.bottom, crownSpacing - (8 * crownScrollProgress))
+                    .padding(.bottom, 14 - (8 * crownScrollProgress))
                     .background(palette.semanticPlane)
 
                 TodayOpenContinuityRoot(
@@ -153,54 +156,6 @@ public struct TodayFlagshipCalibrationView: View {
         .todayFlagshipHideRootNavigationBar()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-today-root")
-    }
-
-    private var crown: some View {
-        Group {
-            if usesAdaptiveNavigation || layoutDirection == .rightToLeft {
-                VStack(alignment: .leading, spacing: 4) {
-                    crownTitle
-                    crownRelationship
-                }
-                .frame(minHeight: 46, alignment: .leading)
-                .fixedSize(horizontal: false, vertical: true)
-            } else {
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    crownTitle
-                    crownRelationship
-                }
-                .frame(
-                    height: 26 - (6 * crownScrollProgress),
-                    alignment: .leading
-                )
-                .clipped()
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(content.interfaceCopy.todayAccessibilityHeading)
-        .accessibilityValue(crownAccessibilityValue)
-        .accessibilityAddTraits(.isHeader)
-        .accessibilityIdentifier("tfcs-today-heading")
-    }
-
-    private var crownTitle: some View {
-        Text(content.interfaceCopy.ambitionsWordmark)
-            .font(.subheadline.weight(.semibold))
-    }
-
-    private var crownRelationship: some View {
-        Text(content.presentContext.relationship)
-            .font(.caption)
-            .foregroundStyle(palette.secondaryInk)
-            .opacity(1 - crownScrollProgress)
-            .offset(y: -3 * crownScrollProgress)
-    }
-
-    private var crownAccessibilityValue: String {
-        [
-            content.interfaceCopy.ambitionsWordmark,
-            content.presentContext.relationship
-        ].joined(separator: ", ")
     }
 
     private var truthfulFallback: some View {

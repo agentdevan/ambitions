@@ -182,38 +182,7 @@ struct TodayFlagshipDock: View {
         Button {
             isExpanded = true
         } label: {
-            ZStack(alignment: .trailing) {
-                dockMaterial(
-                    shape: UnevenRoundedRectangle(
-                        topLeadingRadius: 9,
-                        bottomLeadingRadius: 9,
-                        bottomTrailingRadius: 0,
-                        topTrailingRadius: 0,
-                        style: .continuous
-                    )
-                )
-                .frame(width: 14, height: 52)
-                .overlay(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 1, style: .continuous)
-                        .fill(palette.articulationAccent)
-                        .frame(width: 2, height: 30)
-                        .accessibilityHidden(true)
-                }
-
-                VStack(spacing: 5) {
-                    Image(systemName: "sun.max.fill")
-                        .font(.system(size: 11, weight: .semibold))
-
-                    Capsule(style: .continuous)
-                        .fill(palette.secondaryInk)
-                        .frame(width: 5, height: 2)
-                }
-                .foregroundStyle(palette.secondaryInk)
-                .frame(width: 14, height: 52)
-                .accessibilityHidden(true)
-            }
-            .frame(width: 44, height: 64)
-            .contentShape(Rectangle())
+            TodayVitalityDockPeekLabel(palette: palette)
         }
         .buttonStyle(TodayFlagshipDockPeekButtonStyle())
         .accessibilityLabel(copy.openNavigationLabel)
@@ -227,6 +196,29 @@ struct TodayFlagshipDock: View {
     }
 
     private var expandedDock: some View {
+        ViewThatFits(in: .vertical) {
+            expandedDockContent
+
+            ScrollView(.vertical) {
+                expandedDockContent
+            }
+            .scrollIndicators(.visible)
+            .scrollBounceBehavior(.basedOnSize)
+            .accessibilityIdentifier("tfcs-dock-compact-scroll")
+        }
+        .frame(width: 300)
+        .background {
+            TodayVitalityDockMaterial(
+                palette: palette,
+                isInteractive: true,
+                shape: expandedEdgeShape
+            )
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("tfcs-dock-expanded")
+    }
+
+    private var expandedDockContent: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Spacer()
@@ -260,20 +252,16 @@ struct TodayFlagshipDock: View {
             )
         }
         .padding(12)
-        .frame(width: 300)
-        .background {
-            dockMaterial(
-                shape: UnevenRoundedRectangle(
-                    topLeadingRadius: 18,
-                    bottomLeadingRadius: 18,
-                    bottomTrailingRadius: 0,
-                    topTrailingRadius: 0,
-                    style: .continuous
-                )
-            )
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("tfcs-dock-expanded")
+    }
+
+    private var expandedEdgeShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: 18,
+            bottomLeadingRadius: 18,
+            bottomTrailingRadius: 0,
+            topTrailingRadius: 0,
+            style: .continuous
+        )
     }
 
     private func dockGroup(
@@ -338,28 +326,6 @@ struct TodayFlagshipDock: View {
         commands.filter(TodayFlagshipNavigationCommand.globalActions.contains)
     }
 
-    @ViewBuilder
-    private func dockMaterial<S: InsettableShape>(shape: S) -> some View {
-        if reduceTransparency {
-            shape
-                .fill(palette.opaqueChrome)
-                .overlay { shape.stroke(palette.divider, lineWidth: 1) }
-        } else if #available(iOS 26.0, macOS 26.0, *) {
-            shape
-                .fill(palette.opaqueChrome.opacity(0.90))
-                .glassEffect(
-                    .regular
-                        .tint(palette.opaqueChrome.opacity(0.48))
-                        .interactive(),
-                    in: shape
-                )
-                .overlay { shape.stroke(palette.divider, lineWidth: 1) }
-        } else {
-            shape
-                .fill(palette.opaqueChrome)
-                .overlay { shape.stroke(palette.divider, lineWidth: 1) }
-        }
-    }
 }
 
 private struct TodayFlagshipDockPeekButtonStyle: ButtonStyle {

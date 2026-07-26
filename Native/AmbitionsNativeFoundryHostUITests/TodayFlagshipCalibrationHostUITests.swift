@@ -526,14 +526,16 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let peek = app.buttons["Open navigation"]
         XCTAssertTrue(peek.waitForExistence(timeout: 3))
         XCTAssertEqual(peek.frame.width, 44, accuracy: 1)
-        XCTAssertEqual(peek.frame.height, 64, accuracy: 1)
+        XCTAssertEqual(peek.frame.height, 56, accuracy: 1)
         assertMinimumTarget(peek)
         XCTAssertTrue(peek.isHittable)
 
         let shellSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
-        XCTAssertTrue(shellSource.contains(".frame(width: 14, height: 52)"))
-        XCTAssertTrue(shellSource.contains("Image(systemName: \"sun.max.fill\")"))
-        XCTAssertTrue(shellSource.contains(".frame(width: 44, height: 64)"))
+        let vitalityShellSource = try foundrySource(named: "TodayVitalityShell.swift")
+        XCTAssertTrue(vitalityShellSource.contains(".frame(width: 30, height: 52)"))
+        XCTAssertTrue(vitalityShellSource.contains("Circle()"))
+        XCTAssertTrue(vitalityShellSource.contains(".frame(width: 44, height: 56"))
+        XCTAssertTrue(shellSource.contains("TodayVitalityDockPeekLabel(palette: palette)"))
     }
 
     func testB02RootUsesOneStartHereAndThreeTruthfulOverviewAnchors() {
@@ -575,7 +577,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
     func testB02OwnedJourneyViewsUseFixtureCopyInsteadOfLiteralProductStrings() throws {
         let rootSource = try foundrySource(named: "TodayFlagshipCalibrationView.swift")
         let chromeSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
-        let ownedSources = [rootSource, chromeSource].joined(separator: "\n")
+        let vitalityShellSource = try foundrySource(named: "TodayVitalityShell.swift")
+        let ownedSources = [rootSource, chromeSource, vitalityShellSource].joined(separator: "\n")
         let literalArgumentPatterns = [
             #"Text\(\s*\""#,
             #"Label\(\s*\""#,
@@ -607,9 +610,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         }
         XCTAssertTrue(rootSource.contains(".padding(.trailing, isDockExpanded ? 0 : 2)"))
         XCTAssertTrue(rootSource.contains(".accessibilityValue(crownAccessibilityValue)"))
-        XCTAssertTrue(chromeSource.contains("shape: UnevenRoundedRectangle("))
-        XCTAssertTrue(chromeSource.contains("bottomTrailingRadius: 0"))
-        XCTAssertTrue(chromeSource.contains("topTrailingRadius: 0"))
+        XCTAssertTrue(vitalityShellSource.contains("UnevenRoundedRectangle("))
+        XCTAssertTrue(vitalityShellSource.contains("bottomTrailingRadius: 0"))
+        XCTAssertTrue(vitalityShellSource.contains("topTrailingRadius: 0"))
         XCTAssertFalse(chromeSource.contains("TodayFlagshipSectionLabel(title, palette: palette)"))
         XCTAssertTrue(chromeSource.contains("tfcs-adaptive-roots-heading"))
         XCTAssertTrue(chromeSource.contains("tfcs-adaptive-global-actions-heading"))
