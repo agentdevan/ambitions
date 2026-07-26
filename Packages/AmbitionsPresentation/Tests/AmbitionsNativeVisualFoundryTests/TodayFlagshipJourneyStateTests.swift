@@ -127,6 +127,104 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertFalse(state.beginCommit())
     }
 
+    func testRejectedCommitLeavesSavingWithAcceptedTruthAndRecovery() {
+        var state = savingState()
+        let acceptedTruth = state.acceptedTruth
+        let proposedTruth = state.proposedTruth
+
+        XCTAssertTrue(state.resolveCommit(succeeded: false))
+
+        XCTAssertEqual(state.phase, .failedSettlement)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+        XCTAssertEqual(state.proposedTruth, proposedTruth)
+        XCTAssertFalse(state.isCommitInFlight)
+        XCTAssertTrue(state.isReviewPresented)
+        XCTAssertFalse(state.hasCommittedMutation)
+        XCTAssertFalse(state.receiptIsVisible)
+        XCTAssertEqual(state.focusAnchor, .failedSettlement)
+
+        XCTAssertTrue(state.retryFailedCommit())
+        XCTAssertEqual(state.phase, .savingAcceptedTruth)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+        XCTAssertEqual(state.proposedTruth, proposedTruth)
+        XCTAssertTrue(state.isCommitInFlight)
+    }
+
+    func testDismissingFailedCommitReturnsToFocusedAcceptedTruth() {
+        var state = savingState()
+        let acceptedTruth = state.acceptedTruth
+        XCTAssertTrue(state.resolveCommit(succeeded: false))
+
+        XCTAssertTrue(state.dismissFailedCommit())
+
+        XCTAssertEqual(state.phase, .focusedCurrent)
+        XCTAssertEqual(state.acceptedTruth, acceptedTruth)
+        XCTAssertNil(state.proposedTruth)
+        XCTAssertFalse(state.isReviewPresented)
+        XCTAssertFalse(state.hasCommittedMutation)
+        XCTAssertEqual(state.focusAnchor, .focusedIdentity)
+    }
+
+    func testSuccessfulCommitResolutionStillSettlesExactTruth() {
+        var state = savingState()
+
+        XCTAssertTrue(state.resolveCommit(succeeded: true))
+
+        XCTAssertEqual(state.phase, .settled)
+        XCTAssertEqual(
+            state.acceptedTruth,
+            content.primaryStep.stillCountsProposal.settledTruth
+        )
+        XCTAssertNil(state.proposedTruth)
+        XCTAssertTrue(state.hasCommittedMutation)
+        XCTAssertEqual(state.focusAnchor, .settledTruth)
+    }
+
+    func testSupportingRoutesArePhaseBoundAndRestoreSemanticFocus() {
+        var focused = focusedState()
+
+        XCTAssertTrue(focused.openSupportingRoute(.goalDetail))
+        XCTAssertEqual(focused.supportingRoute, .goalDetail)
+        XCTAssertEqual(focused.focusAnchor, .goalDetail)
+        XCTAssertFalse(focused.openSupportingRoute(.consequenceDetails))
+
+        XCTAssertTrue(focused.closeSupportingRoute())
+        XCTAssertNil(focused.supportingRoute)
+        XCTAssertEqual(focused.focusAnchor, .focusedIdentity)
+
+        var reviewing = reviewingState()
+        XCTAssertTrue(reviewing.openSupportingRoute(.consequenceDetails))
+        XCTAssertEqual(reviewing.focusAnchor, .consequenceDetails)
+        XCTAssertTrue(reviewing.closeSupportingRoute())
+        XCTAssertEqual(reviewing.focusAnchor, .reviewCurrentTruth)
+
+        var settled = settledState()
+        XCTAssertTrue(settled.openSupportingRoute(.historyEntry))
+        XCTAssertEqual(settled.focusAnchor, .historyEntry)
+        XCTAssertTrue(settled.closeSupportingRoute())
+        XCTAssertEqual(settled.focusAnchor, .settledTruth)
+    }
+
+    func testTimeTransferIsNotAProductJourneyRoute() {
+        XCTAssertFalse(
+            TodayFlagshipSupportingRoute.allCases.map(\.rawValue).contains("time-transfer")
+        )
+    }
+
+    func testUndoRouteRequiresExactSourceBackedEligibility() {
+        var standard = TodayFlagshipJourneyState.preview(content: content, phase: .settled)
+        XCTAssertFalse(standard.openSupportingRoute(.undoReview))
+        XCTAssertNil(standard.supportingRoute)
+
+        let undoContent = content.undoAvailableEvaluation
+        var eligible = TodayFlagshipJourneyState.preview(content: undoContent, phase: .settled)
+        XCTAssertTrue(eligible.openSupportingRoute(.undoReview))
+        XCTAssertEqual(eligible.supportingRoute, .undoReview)
+        XCTAssertEqual(eligible.focusAnchor, .undoReview)
+        XCTAssertTrue(eligible.closeSupportingRoute())
+        XCTAssertEqual(eligible.focusAnchor, .settledTruth)
+    }
+
     func testB02TruthFlowDeclaresSpatialComparisonAndPersistentSavingSemantics() throws {
         let sourceRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

@@ -15,7 +15,8 @@ public enum TodayFlagshipCalibrationFixture {
     private static func makePreparingForBaby(
         longContent: Bool = false,
         timelineDensity: TimelineDensity = .standard,
-        contextCondition: TodayFlagshipContextCondition? = nil
+        contextCondition: TodayFlagshipContextCondition? = nil,
+        inverseEligible: Bool = false
     ) -> TodayFlagshipCalibrationContent {
         let proposal = TodayFlagshipStillCountsProposal(
             outcomeTitle: "Still counts",
@@ -27,7 +28,7 @@ public enum TodayFlagshipCalibrationFixture {
             createsProof: true,
             createsReceipt: true,
             appearsInHistory: true,
-            inverseAvailable: false,
+            inverseAvailable: inverseEligible,
             commitActionTitle: "Record progress"
         )
         let primaryTitle = longContent
@@ -135,6 +136,14 @@ public enum TodayFlagshipCalibrationFixture {
             primaryStep: primaryStep,
             revealedStep: revealedStep
         )
+        let receipt = TodayFlagshipReceiptSnapshot(
+            id: "receipt.step.nursery-ready-for-crib.still-counts",
+            historyID: "history.step.nursery-ready-for-crib",
+            recordedLabel: "Recorded on this device",
+            receiptSummary: "Meaningful nursery progress recorded",
+            historySummary: "The cleared corner and paint sample now count toward the nursery.",
+            proofLabel: "Added to Welcome our baby home"
+        )
 
         return TodayFlagshipCalibrationContent(
             familyID: "today-flagship/preparing-for-baby/still-counts/v1",
@@ -148,14 +157,7 @@ public enum TodayFlagshipCalibrationFixture {
             primaryStep: primaryStep,
             revealedStartHereStep: revealedStep,
             timeline: timeline,
-            receipt: TodayFlagshipReceiptSnapshot(
-                id: "receipt.step.nursery-ready-for-crib.still-counts",
-                historyID: "history.step.nursery-ready-for-crib",
-                recordedLabel: "Recorded on this device",
-                receiptSummary: "Meaningful nursery progress recorded",
-                historySummary: "The cleared corner and paint sample now count toward the nursery.",
-                proofLabel: "Added to Welcome our baby home"
-            ),
+            receipt: receipt,
             returnContract: TodayFlagshipReturnContract(
                 settledStepID: "step.nursery-ready-for-crib",
                 newStartHereStepID: "step.send-launch-brief",
@@ -180,7 +182,63 @@ public enum TodayFlagshipCalibrationFixture {
                     )
                 ]
             ),
-            contextSeam: contextSeam
+            contextSeam: contextSeam,
+            supporting: makeSupportingSnapshots(
+                primaryStep: primaryStep,
+                receipt: receipt,
+                inverseEligible: inverseEligible
+            )
+        )
+    }
+
+    private static func makeSupportingSnapshots(
+        primaryStep: TodayFlagshipStepSnapshot,
+        receipt: TodayFlagshipReceiptSnapshot,
+        inverseEligible: Bool
+    ) -> TodayFlagshipSupportingSnapshots {
+        TodayFlagshipSupportingSnapshots(
+            goal: TodayFlagshipGoalContextSnapshot(
+                id: primaryStep.parentPursuitID,
+                title: primaryStep.parentPursuitTitle,
+                whyItMatters: "Prepare a calm, safe home for the baby and the family welcoming them.",
+                currentPosture: "The nursery is moving forward in small, protected steps.",
+                nextStepID: primaryStep.id
+            ),
+            timeTransfer: TodayFlagshipTimeTransferSnapshot(
+                title: "Open in Time?",
+                body: "Exact chronology changes belong in Time. This evaluation does not provide that route.",
+                sourceOwner: "Today",
+                destinationOwner: "Time",
+                isReadOnly: true,
+                isHostEvaluationOnly: true,
+                isProductRouteAvailable: false
+            ),
+            history: TodayFlagshipHistoryEntrySnapshot(
+                id: receipt.historyID,
+                recordedAtISO8601: "2026-07-23T10:30:00-04:00",
+                recordedTruth: primaryStep.stillCountsProposal.settledTruth,
+                stepID: primaryStep.id,
+                goalID: primaryStep.parentPursuitID,
+                isLocalOnly: true
+            ),
+            inverse: TodayFlagshipInverseSnapshot(
+                commandID: "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE",
+                title: "Reopen Still counts Step",
+                triggerReceiptID: receipt.id,
+                currentReceiptID: inverseEligible ? receipt.id : nil,
+                stepRevisionIsCurrent: inverseEligible,
+                dependenciesAreCurrent: inverseEligible,
+                hasNewerDependentCommand: false,
+                preservesHistory: true
+            ),
+            commitFailure: TodayFlagshipCommitFailureSnapshot(
+                affectedStepID: primaryStep.id,
+                title: "Progress wasn’t recorded",
+                body: "Your current truth is unchanged. You can try again or return to the Step.",
+                retryTitle: "Try again",
+                dismissTitle: "Return to Step",
+                preservesAcceptedTruth: true
+            )
         )
     }
 
@@ -453,6 +511,10 @@ public extension TodayFlagshipCalibrationContent {
         TodayFlagshipCalibrationFixture.makeConflictTransfer()
     }
 
+    var undoAvailableEvaluation: Self {
+        TodayFlagshipCalibrationFixture.makeUndoAvailableEvaluation()
+    }
+
     var arabicSaudiEvaluation: Self {
         TodayFlagshipCalibrationFixture.makeArabicSaudiEvaluation()
     }
@@ -485,6 +547,10 @@ private extension TodayFlagshipCalibrationFixture {
 
     static func makeConflictTransfer() -> TodayFlagshipCalibrationContent {
         makePreparingForBaby(contextCondition: .conflictTransfer)
+    }
+
+    static func makeUndoAvailableEvaluation() -> TodayFlagshipCalibrationContent {
+        makePreparingForBaby(inverseEligible: true)
     }
 
     static func makeArabicSaudiEvaluation() -> TodayFlagshipCalibrationContent {
@@ -680,6 +746,15 @@ private extension TodayFlagshipCalibrationFixture {
             )
         ]
 
+        let receipt = TodayFlagshipReceiptSnapshot(
+            id: "receipt.step.nursery-ready-for-crib.still-counts",
+            historyID: "history.step.nursery-ready-for-crib",
+            recordedLabel: "حُفظ على هذا الجهاز",
+            receiptSummary: "سُجّل تقدّم ذو معنى في تجهيز الغرفة",
+            historySummary: proposal.settledTruth,
+            proofLabel: "أُضيف إلى نستقبل طفلنا في منزلنا"
+        )
+
         return TodayFlagshipCalibrationContent(
             familyID: "today-flagship/preparing-for-baby/still-counts/v1",
             isSynthetic: true,
@@ -692,14 +767,7 @@ private extension TodayFlagshipCalibrationFixture {
             primaryStep: primaryStep,
             revealedStartHereStep: revealedStep,
             timeline: timeline,
-            receipt: TodayFlagshipReceiptSnapshot(
-                id: "receipt.step.nursery-ready-for-crib.still-counts",
-                historyID: "history.step.nursery-ready-for-crib",
-                recordedLabel: "حُفظ على هذا الجهاز",
-                receiptSummary: "سُجّل تقدّم ذو معنى في تجهيز الغرفة",
-                historySummary: proposal.settledTruth,
-                proofLabel: "أُضيف إلى نستقبل طفلنا في منزلنا"
-            ),
+            receipt: receipt,
             returnContract: TodayFlagshipReturnContract(
                 settledStepID: "step.nursery-ready-for-crib",
                 newStartHereStepID: "step.send-launch-brief",
@@ -723,6 +791,11 @@ private extension TodayFlagshipCalibrationFixture {
                         consequence: "احتفظ بالخطوة والعمل المحفوظ لوقت لاحق."
                     )
                 ]
+            ),
+            supporting: makeSupportingSnapshots(
+                primaryStep: primaryStep,
+                receipt: receipt,
+                inverseEligible: false
             )
         )
     }

@@ -3,6 +3,7 @@ public enum TodayFlagshipJourneyPhase: String, Equatable, Sendable {
     case focusedCurrent = "focused-current"
     case reviewingProposal = "reviewing-proposal"
     case savingAcceptedTruth = "saving-accepted-truth"
+    case failedSettlement = "failed-settlement"
     case settled
     case todayReturned = "today-returned"
     case interrupted
@@ -20,6 +21,14 @@ public enum TodayFlagshipRoute: Hashable, Sendable {
     case step(id: String)
 }
 
+public enum TodayFlagshipSupportingRoute: String, CaseIterable, Equatable, Sendable {
+    case goalDetail = "goal-detail"
+    case consequenceDetails = "consequence-details"
+    case historyEntry = "history-entry"
+    case historyFilters = "history-filters"
+    case undoReview = "undo-review"
+}
+
 public enum TodayFlagshipFocusAnchor: String, Equatable, Sendable {
     case startHere = "start-here"
     case fullDayAction = "full-day-action"
@@ -28,11 +37,17 @@ public enum TodayFlagshipFocusAnchor: String, Equatable, Sendable {
     case focusedIdentity = "focused-identity"
     case reviewCurrentTruth = "review-current-truth"
     case saving
+    case failedSettlement = "failed-settlement"
     case settledTruth = "settled-truth"
     case returnedSettledStep = "returned-settled-step"
     case interruption
     case recoveryReview = "recovery-review"
     case recoveredProgress = "recovered-progress"
+    case goalDetail = "goal-detail"
+    case consequenceDetails = "consequence-details"
+    case historyEntry = "history-entry"
+    case historyFilters = "history-filters"
+    case undoReview = "undo-review"
 }
 
 public struct TodayFlagshipJourneyState: Equatable, Sendable {
@@ -43,12 +58,14 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     public private(set) var focusAnchor: TodayFlagshipFocusAnchor
     public private(set) var hasCommittedMutation: Bool
     public private(set) var isHistoryExpanded: Bool
+    public private(set) var supportingRoute: TodayFlagshipSupportingRoute?
 
     private let primaryStepID: String
     private let revealedStartHereStepID: String
     private let proposalTruth: String
     private let settledTruth: String
     private let recoveryChoiceIDs: [String]
+    private let inverseIsAvailable: Bool
 
     public let todayReturnAnchorID: String
     public let lastSavedProgress: String
@@ -61,17 +78,21 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         focusAnchor = .startHere
         hasCommittedMutation = false
         isHistoryExpanded = false
+        supportingRoute = nil
         primaryStepID = content.primaryStep.id
         revealedStartHereStepID = content.revealedStartHereStep.id
         proposalTruth = content.primaryStep.stillCountsProposal.proposedTruth
         settledTruth = content.primaryStep.stillCountsProposal.settledTruth
         recoveryChoiceIDs = content.recovery.availableChoices.map(\.id)
+        inverseIsAvailable = content.supporting.inverse.isAvailable
         todayReturnAnchorID = content.returnContract.focusAnchorID
         lastSavedProgress = content.recovery.lastSavedProgress
     }
 
     public var isReviewPresented: Bool {
-        phase == .reviewingProposal || phase == .savingAcceptedTruth
+        phase == .reviewingProposal
+            || phase == .savingAcceptedTruth
+            || phase == .failedSettlement
     }
 
     public var isRecoveryPresented: Bool {
@@ -184,6 +205,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         phase = .focusedCurrent
         navigationPath = [.step(id: primaryStepID)]
         focusAnchor = .focusedIdentity
+        supportingRoute = nil
         return true
     }
 
@@ -195,6 +217,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         phase = .reviewingProposal
         proposedTruth = proposalTruth
         focusAnchor = .reviewCurrentTruth
+        supportingRoute = nil
         return true
     }
 
@@ -204,6 +227,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         phase = .focusedCurrent
         proposedTruth = nil
         focusAnchor = .focusedIdentity
+        supportingRoute = nil
         return true
     }
 
@@ -212,6 +236,42 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         guard phase == .reviewingProposal else { return false }
         phase = .savingAcceptedTruth
         focusAnchor = .saving
+        supportingRoute = nil
+        return true
+    }
+
+    @discardableResult
+    public mutating func resolveCommit(succeeded: Bool) -> Bool {
+        if succeeded {
+            return settle()
+        }
+        return failCommit()
+    }
+
+    @discardableResult
+    public mutating func failCommit() -> Bool {
+        guard phase == .savingAcceptedTruth else { return false }
+        phase = .failedSettlement
+        focusAnchor = .failedSettlement
+        supportingRoute = nil
+        return true
+    }
+
+    @discardableResult
+    public mutating func retryFailedCommit() -> Bool {
+        guard phase == .failedSettlement else { return false }
+        phase = .savingAcceptedTruth
+        focusAnchor = .saving
+        return true
+    }
+
+    @discardableResult
+    public mutating func dismissFailedCommit() -> Bool {
+        guard phase == .failedSettlement else { return false }
+        phase = .focusedCurrent
+        proposedTruth = nil
+        focusAnchor = .focusedIdentity
+        supportingRoute = nil
         return true
     }
 
@@ -223,6 +283,53 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         proposedTruth = nil
         focusAnchor = .settledTruth
         hasCommittedMutation = true
+        supportingRoute = nil
+        return true
+    }
+
+    @discardableResult
+    public mutating func openSupportingRoute(_ route: TodayFlagshipSupportingRoute) -> Bool {
+        guard supportingRoute == nil else { return false }
+
+        let anchor: TodayFlagshipFocusAnchor
+        switch (phase, route) {
+        case (.focusedCurrent, .goalDetail), (.recoveredContinuation, .goalDetail):
+            anchor = .goalDetail
+        case (.reviewingProposal, .consequenceDetails),
+             (.failedSettlement, .consequenceDetails):
+            anchor = .consequenceDetails
+        case (.settled, .historyEntry):
+            anchor = .historyEntry
+        case (.settled, .historyFilters):
+            anchor = .historyFilters
+        case (.settled, .undoReview) where inverseIsAvailable:
+            anchor = .undoReview
+        default:
+            return false
+        }
+
+        supportingRoute = route
+        focusAnchor = anchor
+        return true
+    }
+
+    @discardableResult
+    public mutating func closeSupportingRoute() -> Bool {
+        guard supportingRoute != nil else { return false }
+        supportingRoute = nil
+
+        switch phase {
+        case .focusedCurrent, .recoveredContinuation:
+            focusAnchor = .focusedIdentity
+        case .reviewingProposal:
+            focusAnchor = .reviewCurrentTruth
+        case .failedSettlement:
+            focusAnchor = .failedSettlement
+        case .settled:
+            focusAnchor = .settledTruth
+        default:
+            return false
+        }
         return true
     }
 
@@ -233,6 +340,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         navigationPath = []
         focusAnchor = .returnedSettledStep
         isHistoryExpanded = false
+        supportingRoute = nil
         return true
     }
 
@@ -322,6 +430,10 @@ public extension TodayFlagshipJourneyState {
         case .savingAcceptedTruth:
             _ = state.selectStillCounts()
             _ = state.beginCommit()
+        case .failedSettlement:
+            _ = state.selectStillCounts()
+            _ = state.beginCommit()
+            _ = state.failCommit()
         case .settled:
             _ = state.selectStillCounts()
             _ = state.beginCommit()

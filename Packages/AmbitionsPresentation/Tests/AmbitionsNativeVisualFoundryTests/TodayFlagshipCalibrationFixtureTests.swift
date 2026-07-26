@@ -170,6 +170,64 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             Set(fixture.returnedTodayTimeline.map(\.canonicalObjectID)).count,
             fixture.returnedTodayTimeline.count
         )
+        XCTAssertEqual(
+            fixture.returnedTodayVisibleObjectIDs.filter {
+                $0 == fixture.revealedStartHereStep.id
+            }.count,
+            1
+        )
+        XCTAssertEqual(
+            fixture.returnedTodayVisibleObjectIDs.filter {
+                $0 == fixture.returnContract.settledStepID
+            }.count,
+            1
+        )
+    }
+
+    func testR13SupportingSnapshotsRemainFixtureDrivenAndReadOnly() {
+        let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
+        let supporting = fixture.supporting
+
+        XCTAssertEqual(supporting.goal.id, fixture.primaryStep.parentPursuitID)
+        XCTAssertEqual(supporting.goal.nextStepID, fixture.primaryStep.id)
+        XCTAssertEqual(supporting.history.id, fixture.receipt.historyID)
+        XCTAssertEqual(supporting.history.stepID, fixture.primaryStep.id)
+        XCTAssertEqual(supporting.history.goalID, fixture.primaryStep.parentPursuitID)
+        XCTAssertTrue(supporting.history.isLocalOnly)
+
+        XCTAssertTrue(supporting.timeTransfer.isReadOnly)
+        XCTAssertTrue(supporting.timeTransfer.isHostEvaluationOnly)
+        XCTAssertFalse(supporting.timeTransfer.isProductRouteAvailable)
+        XCTAssertEqual(supporting.timeTransfer.sourceOwner, "Today")
+        XCTAssertEqual(supporting.timeTransfer.destinationOwner, "Time")
+
+        XCTAssertEqual(supporting.commitFailure.affectedStepID, fixture.primaryStep.id)
+        XCTAssertTrue(supporting.commitFailure.preservesAcceptedTruth)
+    }
+
+    func testUndoRequiresExactCurrentReceiptRevisionAndDependencies() {
+        let standard = TodayFlagshipCalibrationFixture.preparingForBaby
+        XCTAssertFalse(standard.supporting.inverse.isAvailable)
+        XCTAssertNil(standard.supporting.inverse.currentReceiptID)
+
+        let eligible = standard.undoAvailableEvaluation.supporting.inverse
+        XCTAssertTrue(eligible.isAvailable)
+        XCTAssertTrue(
+            standard.undoAvailableEvaluation.primaryStep.stillCountsProposal.inverseAvailable
+        )
+        XCTAssertEqual(
+            eligible.commandID,
+            "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
+        )
+        XCTAssertEqual(
+            eligible.triggerReceiptID,
+            "receipt.step.nursery-ready-for-crib.still-counts"
+        )
+        XCTAssertEqual(eligible.currentReceiptID, eligible.triggerReceiptID)
+        XCTAssertTrue(eligible.stepRevisionIsCurrent)
+        XCTAssertTrue(eligible.dependenciesAreCurrent)
+        XCTAssertFalse(eligible.hasNewerDependentCommand)
+        XCTAssertTrue(eligible.preservesHistory)
     }
 
     func testB02ReturnedTodayKeepsOneRevealedStartHereAndExactSettledAnchor() {
@@ -797,7 +855,8 @@ private extension TodayFlagshipCalibrationContent {
             receipt: receipt,
             returnContract: returnContract,
             recovery: recovery,
-            contextSeam: contextSeam
+            contextSeam: contextSeam,
+            supporting: supporting
         )
     }
 }

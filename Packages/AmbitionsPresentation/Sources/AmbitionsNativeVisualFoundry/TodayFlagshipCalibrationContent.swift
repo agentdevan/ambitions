@@ -504,6 +504,167 @@ public struct TodayFlagshipRecoverySnapshot: Equatable, Sendable {
     }
 }
 
+public struct TodayFlagshipGoalContextSnapshot: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let title: String
+    public let whyItMatters: String
+    public let currentPosture: String
+    public let nextStepID: String
+
+    public init(
+        id: String,
+        title: String,
+        whyItMatters: String,
+        currentPosture: String,
+        nextStepID: String
+    ) {
+        self.id = id
+        self.title = title
+        self.whyItMatters = whyItMatters
+        self.currentPosture = currentPosture
+        self.nextStepID = nextStepID
+    }
+}
+
+public struct TodayFlagshipTimeTransferSnapshot: Equatable, Sendable {
+    public let title: String
+    public let body: String
+    public let sourceOwner: String
+    public let destinationOwner: String
+    public let isReadOnly: Bool
+    public let isHostEvaluationOnly: Bool
+    public let isProductRouteAvailable: Bool
+
+    public init(
+        title: String,
+        body: String,
+        sourceOwner: String,
+        destinationOwner: String,
+        isReadOnly: Bool,
+        isHostEvaluationOnly: Bool,
+        isProductRouteAvailable: Bool
+    ) {
+        self.title = title
+        self.body = body
+        self.sourceOwner = sourceOwner
+        self.destinationOwner = destinationOwner
+        self.isReadOnly = isReadOnly
+        self.isHostEvaluationOnly = isHostEvaluationOnly
+        self.isProductRouteAvailable = isProductRouteAvailable
+    }
+}
+
+public struct TodayFlagshipHistoryEntrySnapshot: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let recordedAtISO8601: String
+    public let recordedTruth: String
+    public let stepID: String
+    public let goalID: String
+    public let isLocalOnly: Bool
+
+    public init(
+        id: String,
+        recordedAtISO8601: String,
+        recordedTruth: String,
+        stepID: String,
+        goalID: String,
+        isLocalOnly: Bool
+    ) {
+        self.id = id
+        self.recordedAtISO8601 = recordedAtISO8601
+        self.recordedTruth = recordedTruth
+        self.stepID = stepID
+        self.goalID = goalID
+        self.isLocalOnly = isLocalOnly
+    }
+}
+
+public struct TodayFlagshipInverseSnapshot: Equatable, Sendable {
+    public let commandID: String
+    public let title: String
+    public let triggerReceiptID: String
+    public let currentReceiptID: String?
+    public let stepRevisionIsCurrent: Bool
+    public let dependenciesAreCurrent: Bool
+    public let hasNewerDependentCommand: Bool
+    public let preservesHistory: Bool
+
+    public init(
+        commandID: String,
+        title: String,
+        triggerReceiptID: String,
+        currentReceiptID: String?,
+        stepRevisionIsCurrent: Bool,
+        dependenciesAreCurrent: Bool,
+        hasNewerDependentCommand: Bool,
+        preservesHistory: Bool
+    ) {
+        self.commandID = commandID
+        self.title = title
+        self.triggerReceiptID = triggerReceiptID
+        self.currentReceiptID = currentReceiptID
+        self.stepRevisionIsCurrent = stepRevisionIsCurrent
+        self.dependenciesAreCurrent = dependenciesAreCurrent
+        self.hasNewerDependentCommand = hasNewerDependentCommand
+        self.preservesHistory = preservesHistory
+    }
+
+    public var isAvailable: Bool {
+        currentReceiptID == triggerReceiptID
+            && stepRevisionIsCurrent
+            && dependenciesAreCurrent
+            && !hasNewerDependentCommand
+            && preservesHistory
+    }
+}
+
+public struct TodayFlagshipCommitFailureSnapshot: Equatable, Sendable {
+    public let affectedStepID: String
+    public let title: String
+    public let body: String
+    public let retryTitle: String
+    public let dismissTitle: String
+    public let preservesAcceptedTruth: Bool
+
+    public init(
+        affectedStepID: String,
+        title: String,
+        body: String,
+        retryTitle: String,
+        dismissTitle: String,
+        preservesAcceptedTruth: Bool
+    ) {
+        self.affectedStepID = affectedStepID
+        self.title = title
+        self.body = body
+        self.retryTitle = retryTitle
+        self.dismissTitle = dismissTitle
+        self.preservesAcceptedTruth = preservesAcceptedTruth
+    }
+}
+
+public struct TodayFlagshipSupportingSnapshots: Equatable, Sendable {
+    public let goal: TodayFlagshipGoalContextSnapshot
+    public let timeTransfer: TodayFlagshipTimeTransferSnapshot
+    public let history: TodayFlagshipHistoryEntrySnapshot
+    public let inverse: TodayFlagshipInverseSnapshot
+    public let commitFailure: TodayFlagshipCommitFailureSnapshot
+
+    public init(
+        goal: TodayFlagshipGoalContextSnapshot,
+        timeTransfer: TodayFlagshipTimeTransferSnapshot,
+        history: TodayFlagshipHistoryEntrySnapshot,
+        inverse: TodayFlagshipInverseSnapshot,
+        commitFailure: TodayFlagshipCommitFailureSnapshot
+    ) {
+        self.goal = goal
+        self.timeTransfer = timeTransfer
+        self.history = history
+        self.inverse = inverse
+        self.commitFailure = commitFailure
+    }
+}
+
 public enum TodayFlagshipContextCondition: String, Equatable, Sendable {
     case offlineLocalTruth
     case staleExternalContext
@@ -549,6 +710,7 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
     public let returnContract: TodayFlagshipReturnContract
     public let recovery: TodayFlagshipRecoverySnapshot
     public let contextSeam: TodayFlagshipContextSeamSnapshot?
+    public let supporting: TodayFlagshipSupportingSnapshots
 
     public init(
         familyID: String,
@@ -561,7 +723,8 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         receipt: TodayFlagshipReceiptSnapshot,
         returnContract: TodayFlagshipReturnContract,
         recovery: TodayFlagshipRecoverySnapshot,
-        contextSeam: TodayFlagshipContextSeamSnapshot? = nil
+        contextSeam: TodayFlagshipContextSeamSnapshot? = nil,
+        supporting: TodayFlagshipSupportingSnapshots? = nil
     ) {
         self.familyID = familyID
         self.isSynthetic = isSynthetic
@@ -574,10 +737,19 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         self.returnContract = returnContract
         self.recovery = recovery
         self.contextSeam = contextSeam
+        self.supporting = supporting ?? Self.defaultSupportingSnapshots(
+            primaryStep: primaryStep,
+            receipt: receipt
+        )
     }
 
     public var returnedTodayTimeline: [TodayFlagshipTimelineObject] {
         timeline.filter { $0.canonicalObjectID != revealedStartHereStep.id }
+    }
+
+    public var returnedTodayVisibleObjectIDs: [String] {
+        [revealedStartHereStep.id, returnContract.settledStepID]
+            + returnedTodayTimeline.map(\.canonicalObjectID)
     }
 
     public func nowAnchorObjectID(for origin: TodayFlagshipFullDayOrigin) -> String {
@@ -587,6 +759,56 @@ public struct TodayFlagshipCalibrationContent: Equatable, Identifiable, Sendable
         case .todayReturned:
             revealedStartHereStep.id
         }
+    }
+
+    private static func defaultSupportingSnapshots(
+        primaryStep: TodayFlagshipStepSnapshot,
+        receipt: TodayFlagshipReceiptSnapshot
+    ) -> TodayFlagshipSupportingSnapshots {
+        TodayFlagshipSupportingSnapshots(
+            goal: TodayFlagshipGoalContextSnapshot(
+                id: primaryStep.parentPursuitID,
+                title: primaryStep.parentPursuitTitle,
+                whyItMatters: primaryStep.materialConsequence,
+                currentPosture: primaryStep.currentAcceptedTruth,
+                nextStepID: primaryStep.id
+            ),
+            timeTransfer: TodayFlagshipTimeTransferSnapshot(
+                title: "Open in Time?",
+                body: "Exact chronology changes belong in Time. This evaluation does not provide that route.",
+                sourceOwner: "Today",
+                destinationOwner: "Time",
+                isReadOnly: true,
+                isHostEvaluationOnly: true,
+                isProductRouteAvailable: false
+            ),
+            history: TodayFlagshipHistoryEntrySnapshot(
+                id: receipt.historyID,
+                recordedAtISO8601: "2026-07-23T10:30:00-04:00",
+                recordedTruth: receipt.historySummary,
+                stepID: primaryStep.id,
+                goalID: primaryStep.parentPursuitID,
+                isLocalOnly: true
+            ),
+            inverse: TodayFlagshipInverseSnapshot(
+                commandID: "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE",
+                title: "Reopen Still counts Step",
+                triggerReceiptID: receipt.id,
+                currentReceiptID: nil,
+                stepRevisionIsCurrent: false,
+                dependenciesAreCurrent: false,
+                hasNewerDependentCommand: false,
+                preservesHistory: true
+            ),
+            commitFailure: TodayFlagshipCommitFailureSnapshot(
+                affectedStepID: primaryStep.id,
+                title: "Progress wasn’t recorded",
+                body: "Your current truth is unchanged. You can try again or return to the Step.",
+                retryTitle: "Try again",
+                dismissTitle: "Return to Step",
+                preservesAcceptedTruth: true
+            )
+        )
     }
 }
 
