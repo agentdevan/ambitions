@@ -18,6 +18,7 @@ struct TodayFlagshipReviewView: View {
         TodayVitalityReviewView(
             content: content,
             state: $state,
+            onOpenConsequenceDetails: openConsequenceDetails,
             onCancel: cancelReview,
             onCommit: commitProposal
         )
@@ -33,7 +34,36 @@ struct TodayFlagshipReviewView: View {
             .impact(weight: .light, intensity: 0.75),
             trigger: commitFeedbackTrigger
         )
+        .sheet(isPresented: consequenceDetailsPresentation) {
+            TodayVitalityConsequenceDetailsView(
+                content: content,
+                onDismiss: closeSupportingRoute
+            )
+        }
         .accessibilityIdentifier("tfcs-consequential-review")
+    }
+
+    private func openConsequenceDetails() {
+        _ = state.openSupportingRoute(.consequenceDetails)
+    }
+
+    private func closeSupportingRoute() {
+        _ = state.closeSupportingRoute()
+    }
+
+    private var consequenceDetailsPresentation: Binding<Bool> {
+        Binding(
+            get: { state.supportingRoute == .consequenceDetails },
+            set: { isPresented in
+                guard
+                    isPresented == false,
+                    state.supportingRoute == .consequenceDetails
+                else {
+                    return
+                }
+                closeSupportingRoute()
+            }
+        )
     }
 
     private func cancelReview() {

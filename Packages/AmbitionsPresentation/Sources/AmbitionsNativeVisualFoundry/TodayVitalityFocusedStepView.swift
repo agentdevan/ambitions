@@ -14,6 +14,7 @@ struct TodayVitalityFocusedStepView: View {
     let shouldFocusIdentity: Bool
     var recoveredProgress: String?
     var shouldFocusRecoveredProgress: Bool = false
+    let onOpenGoalDetail: () -> Void
     let onSelectStillCounts: () -> Void
 
     var body: some View {
@@ -101,13 +102,25 @@ struct TodayVitalityFocusedStepView: View {
     }
 
     private var parentPursuit: some View {
-        Label(content.primaryStep.parentPursuitTitle, systemImage: "house")
-            .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
-            .foregroundStyle(palette.ambitionsAccentMuted)
-            .fixedSize(horizontal: false, vertical: true)
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(content.primaryStep.parentPursuitTitle)
-            .accessibilityIdentifier("tfcs-focused-parent-pursuit")
+        Button(action: onOpenGoalDetail) {
+            HStack(spacing: 9) {
+                Image(systemName: "house")
+                    .accessibilityHidden(true)
+                Text(content.primaryStep.parentPursuitTitle)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.forward")
+                    .accessibilityHidden(true)
+            }
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
+        .foregroundStyle(palette.ambitionsAccentMuted)
+        .accessibilityLabel(content.primaryStep.parentPursuitTitle)
+        .accessibilityHint("Open Goal details")
+        .accessibilityIdentifier("r13-open-goal-detail")
     }
 
     private var presentField: some View {

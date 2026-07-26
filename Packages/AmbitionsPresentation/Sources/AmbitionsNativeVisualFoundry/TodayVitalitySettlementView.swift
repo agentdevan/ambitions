@@ -16,7 +16,7 @@ struct TodayVitalitySettlementView: View {
     let content: TodayFlagshipCalibrationContent
     let acceptedTruth: String
     let shouldFocusTruth: Bool
-    let historyDisclosure: Binding<Bool>
+    let onOpenHistory: () -> Void
     let onReturnToToday: () -> Void
 
     var body: some View {
@@ -157,29 +157,21 @@ struct TodayVitalitySettlementView: View {
     }
 
     private var history: some View {
-        DisclosureGroup(isExpanded: historyDisclosure) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(content.receipt.receiptSummary)
-                Text(content.receipt.historySummary)
-                Text(
-                    "\(content.interfaceCopy.recordIdentifierPrefix): "
-                        + content.receipt.id
-                )
-                .font(TodayVitalityTypographyRole.metadata.font.monospaced())
-                .foregroundStyle(palette.labelTertiary)
+        Button(action: onOpenHistory) {
+            HStack(spacing: 10) {
+                Text(content.interfaceCopy.viewHistoryTitle)
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.forward")
+                    .accessibilityHidden(true)
             }
-            .font(TodayVitalityTypographyRole.relationship.font)
-            .foregroundStyle(palette.labelSecondary)
-            .padding(.top, 10)
-        } label: {
-            Text(content.interfaceCopy.viewHistoryTitle)
-                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                .contentShape(Rectangle())
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
         .font(TodayVitalityTypographyRole.action.font)
         .foregroundStyle(palette.labelPrimary)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityValue(historyDisclosure.wrappedValue ? "Expanded" : "Collapsed")
+        .accessibilityHint("Open local history")
         .accessibilityInputLabels([content.interfaceCopy.viewHistoryTitle])
         .accessibilityIdentifier("tfcs-view-history")
     }

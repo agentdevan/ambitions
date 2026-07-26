@@ -96,11 +96,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let history = app.buttons["View history"]
         XCTAssertTrue(history.exists)
         history.tap()
-        let historySummary = app.staticTexts["Meaningful nursery progress recorded"]
-        XCTAssertTrue(historySummary.waitForExistence(timeout: 3))
-        XCTAssertEqual(element("tfcs-view-history").value as? String, "Expanded")
-        history.tap()
-        XCTAssertEqual(element("tfcs-view-history").value as? String, "Collapsed")
+        XCTAssertTrue(element("r13-history-entry").waitForExistence(timeout: 3))
+        element("r13-supporting-done").tap()
         XCTAssertTrue(element("tfcs-settled-truth").exists)
 
         let returnToToday = element("tfcs-return-to-today")
@@ -398,12 +395,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         pauseForEvidence(2)
 
         app.buttons["View history"].tap()
-        XCTAssertTrue(
-            app.staticTexts["Meaningful nursery progress recorded"]
-                .waitForExistence(timeout: 3)
-        )
+        XCTAssertTrue(element("r13-history-entry").waitForExistence(timeout: 3))
         pauseForEvidence(2)
-        app.buttons["View history"].tap()
+        element("r13-supporting-done").tap()
         pauseForEvidence(1)
 
         element("tfcs-return-to-today").tap()

@@ -375,7 +375,8 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertTrue(vitalityReviewSource.contains("TodayVitalityNode(kind: .current"))
         XCTAssertTrue(vitalityReviewSource.contains("TodayVitalityNode(kind: .proposed"))
         XCTAssertTrue(vitalityReviewSource.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(vitalityReviewSource.contains("DisclosureGroup"))
+        XCTAssertTrue(vitalityReviewSource.contains("onOpenConsequenceDetails"))
+        XCTAssertFalse(vitalityReviewSource.contains("DisclosureGroup"))
     }
 
     func testSettlementChangesAcceptedTruthAndRemainsOnFocusedStep() {

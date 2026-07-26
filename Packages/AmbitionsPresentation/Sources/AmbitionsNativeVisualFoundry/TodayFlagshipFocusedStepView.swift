@@ -14,6 +14,7 @@ struct TodayFlagshipFocusedStepView: View {
                     content: content,
                     acceptedTruth: state.acceptedTruth,
                     shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    onOpenGoalDetail: openGoalDetail,
                     onSelectStillCounts: {
                         _ = state.selectStillCounts()
                     }
@@ -27,6 +28,7 @@ struct TodayFlagshipFocusedStepView: View {
                         ? state.lastSavedProgress
                         : nil,
                     shouldFocusRecoveredProgress: state.focusAnchor == .recoveredProgress,
+                    onOpenGoalDetail: openGoalDetail,
                     onSelectStillCounts: {
                         _ = state.selectStillCounts()
                     }
@@ -45,7 +47,7 @@ struct TodayFlagshipFocusedStepView: View {
                     content: content,
                     acceptedTruth: state.acceptedTruth,
                     shouldFocusTruth: state.focusAnchor == .settledTruth,
-                    historyDisclosure: historyDisclosure,
+                    onOpenHistory: openHistory,
                     onReturnToToday: {
                         _ = state.returnToToday()
                     }
@@ -59,17 +61,60 @@ struct TodayFlagshipFocusedStepView: View {
         .todayFlagshipBackButtonHidden(state.phase == .settled)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-focused-step")
+        .sheet(isPresented: goalDetailPresentation) {
+            TodayVitalityGoalDetailView(
+                content: content,
+                onDismiss: closeSupportingRoute
+            )
+        }
+        .sheet(isPresented: historyEntryPresentation) {
+            TodayVitalityHistoryEntryView(
+                content: content,
+                initiallyShowsFilters: state.supportingRoute == .historyFilters,
+                onDismiss: closeSupportingRoute
+            )
+        }
     }
 
-    private var historyDisclosure: Binding<Bool> {
+    private func openGoalDetail() {
+        _ = state.openSupportingRoute(.goalDetail)
+    }
+
+    private func closeSupportingRoute() {
+        _ = state.closeSupportingRoute()
+    }
+
+    private func openHistory() {
+        _ = state.openSupportingRoute(.historyEntry)
+    }
+
+    private var goalDetailPresentation: Binding<Bool> {
         Binding(
-            get: { state.isHistoryExpanded },
-            set: { isExpanded in
-                if isExpanded {
-                    _ = state.openHistory()
-                } else {
-                    _ = state.closeHistory()
+            get: { state.supportingRoute == .goalDetail },
+            set: { isPresented in
+                guard isPresented == false, state.supportingRoute == .goalDetail else {
+                    return
                 }
+                closeSupportingRoute()
+            }
+        )
+    }
+
+    private var historyEntryPresentation: Binding<Bool> {
+        Binding(
+            get: {
+                state.supportingRoute == .historyEntry
+                    || state.supportingRoute == .historyFilters
+            },
+            set: { isPresented in
+                guard
+                    isPresented == false,
+                    state.supportingRoute == .historyEntry
+                        || state.supportingRoute == .historyFilters
+                else {
+                    return
+                }
+                closeSupportingRoute()
             }
         )
     }

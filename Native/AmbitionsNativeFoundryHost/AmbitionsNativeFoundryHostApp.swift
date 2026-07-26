@@ -21,6 +21,11 @@ private struct FoundryHostRoot: View {
                     onOpenStep: {},
                     onOpenDock: {}
                 )
+            } else if variant == .r13TimeTransferEvaluation {
+                TodayFlagshipTimeTransferEvaluationView(
+                    content: variant.content,
+                    onCancel: {}
+                )
             } else {
                 TodayFlagshipCalibrationHost(variant: variant)
             }
@@ -56,6 +61,9 @@ private struct TodayFlagshipCalibrationHost: View {
         }
         if variant == .b02SettlementHistory {
             _ = initialState.openHistory()
+        }
+        if let supportingRoute = variant.supportingRoute {
+            _ = initialState.openSupportingRoute(supportingRoute)
         }
         _state = State(
             initialValue: initialState
@@ -203,6 +211,11 @@ private enum FoundryVariant: String {
     case r13RecoveryAccessibility5 = "r13-recovery-accessibility5"
     case r13RecoveryLongEnglish = "r13-recovery-long-english"
     case r13RecoveryReduceMotion = "r13-recovery-reduce-motion"
+    case r13GoalDetail = "r13-goal-detail"
+    case r13ConsequenceDetails = "r13-consequence-details"
+    case r13HistoryEntry = "r13-history-entry"
+    case r13HistoryFilters = "r13-history-filters"
+    case r13TimeTransferEvaluation = "r13-time-transfer-evaluation"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -264,7 +277,7 @@ private enum FoundryVariant: String {
 
     var initialPhase: TodayFlagshipJourneyPhase {
         switch self {
-        case .tfcsF06, .stateCancelled, .stressLongRTL,
+        case .tfcsF06, .stateCancelled, .stressLongRTL, .r13GoalDetail,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent
@@ -274,13 +287,15 @@ private enum FoundryVariant: String {
                 .b02ReviewReduceMotion, .b02ReviewRTL,
                 .r13ReviewTypical, .r13ReviewFailureCallback,
                 .r13ReviewIncreasedContrast, .r13ReviewNoColor,
-                .r13ReviewReduceMotion, .r13ReviewAccessibility5:
+                .r13ReviewReduceMotion, .r13ReviewAccessibility5,
+                .r13ConsequenceDetails:
             .reviewingProposal
         case .r13ReviewFailed:
             .failedSettlement
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
-                .b02SettlementProMax, .b02SettlementRTL:
+                .b02SettlementProMax, .b02SettlementRTL,
+                .r13HistoryEntry, .r13HistoryFilters:
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:
@@ -387,5 +402,20 @@ private enum FoundryVariant: String {
 
     var commitShouldSucceed: Bool {
         self != .r13ReviewFailureCallback
+    }
+
+    var supportingRoute: TodayFlagshipSupportingRoute? {
+        switch self {
+        case .r13GoalDetail:
+            .goalDetail
+        case .r13ConsequenceDetails:
+            .consequenceDetails
+        case .r13HistoryEntry:
+            .historyEntry
+        case .r13HistoryFilters:
+            .historyFilters
+        default:
+            nil
+        }
     }
 }

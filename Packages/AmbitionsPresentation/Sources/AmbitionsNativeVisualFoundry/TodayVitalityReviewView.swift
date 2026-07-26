@@ -10,6 +10,7 @@ struct TodayVitalityReviewView: View {
 
     let content: TodayFlagshipCalibrationContent
     @Binding var state: TodayFlagshipJourneyState
+    let onOpenConsequenceDetails: () -> Void
     let onCancel: () -> Void
     let onCommit: () -> Void
 
@@ -237,25 +238,17 @@ struct TodayVitalityReviewView: View {
     }
 
     private var details: some View {
-        DisclosureGroup {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(content.primaryStep.stillCountsProposal.proofRequirement)
-                if content.primaryStep.stillCountsProposal.createsReceipt {
-                    Text(content.interfaceCopy.receiptAvailableDetail)
-                }
-                if content.primaryStep.stillCountsProposal.appearsInHistory {
-                    Text(content.interfaceCopy.savedHistoryDetail)
-                }
+        Button(action: onOpenConsequenceDetails) {
+            HStack(spacing: 10) {
+                Text(content.interfaceCopy.detailsTitle)
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.forward")
+                    .accessibilityHidden(true)
             }
-            .font(TodayVitalityTypographyRole.metadata.font)
-            .foregroundStyle(palette.labelSecondary)
-            .padding(.vertical, 8)
-            .accessibilityIdentifier("tfcs-review-detail-content")
-        } label: {
-            Text(content.interfaceCopy.detailsTitle)
-                .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-                .contentShape(Rectangle())
+            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
         .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
         .overlay(alignment: .top) {
             Rectangle()
@@ -263,6 +256,7 @@ struct TodayVitalityReviewView: View {
                 .frame(height: palette.separatorStrokeWidth)
                 .accessibilityHidden(true)
         }
+        .accessibilityHint("Open consequence details")
         .accessibilityInputLabels([content.interfaceCopy.detailsTitle])
         .accessibilityIdentifier("tfcs-review-details")
     }

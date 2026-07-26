@@ -32,7 +32,7 @@ final class TodayVitalityReviewTests: XCTestCase {
             "TodayVitalityNode(kind: .saving",
             "TodayVitalityActionStyle(role: .secondary",
             "TodayVitalityActionStyle(role: .commitment",
-            "DisclosureGroup",
+            "Button(action: onOpenConsequenceDetails)",
             "ProgressView",
             ".safeAreaInset(edge: .bottom",
             "tfcs-review-current-truth",
@@ -59,6 +59,7 @@ final class TodayVitalityReviewTests: XCTestCase {
         XCTAssertFalse(source.contains("Progress recorded"))
         XCTAssertFalse(source.contains("TodayOpenContinuityTruthComparison"))
         XCTAssertFalse(source.contains("TodayOpenContinuityCommitBar"))
+        XCTAssertFalse(source.contains("DisclosureGroup"))
     }
 
     func testR13ReviewWrapperPreservesGenerationGuardAndDelegatesComposition() throws {

@@ -49,18 +49,19 @@ final class TodayVitalitySettlementHostUITests: XCTestCase {
         let history = element("tfcs-view-history")
         let returnToday = element("tfcs-return-to-today")
         assertExists([truth, history, returnToday])
-        XCTAssertEqual(history.value as? String, "Collapsed")
 
         history.tap()
-        XCTAssertEqual(history.value as? String, "Expanded")
+        assertExists([
+            element("r13-history-entry"),
+            element("r13-history-entry-truth"),
+            element("r13-supporting-done")
+        ])
+        element("r13-supporting-done").tap()
         XCTAssertTrue(
             String(describing: truth.value)
                 .contains("I primed the wall and tested the new color.")
         )
         XCTAssertTrue(returnToday.exists)
-
-        history.tap()
-        XCTAssertEqual(element("tfcs-view-history").value as? String, "Collapsed")
         XCTAssertTrue(truth.exists)
         XCTAssertTrue(returnToday.isHittable)
     }

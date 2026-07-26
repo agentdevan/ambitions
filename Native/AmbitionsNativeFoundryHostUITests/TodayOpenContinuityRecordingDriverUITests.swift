@@ -19,14 +19,9 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertTrue(parent.label.contains("Welcome our baby home"))
         XCTAssertFalse(app.images["checkmark.seal.fill"].exists)
 
-        XCTAssertEqual(history.value as? String, "Collapsed")
         app.buttons["View history"].tap()
-        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
-        XCTAssertEqual(history.value as? String, "Expanded")
-        XCTAssertTrue(element("tfcs-settled-truth").exists)
-        app.buttons["View history"].tap()
-        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
-        XCTAssertEqual(element("tfcs-view-history").value as? String, "Collapsed")
+        XCTAssertTrue(element("r13-history-entry").waitForExistence(timeout: 3))
+        element("r13-supporting-done").tap()
         XCTAssertTrue(element("tfcs-settled-truth").exists)
 
         assertMinimumTarget(returnToday)
@@ -92,12 +87,9 @@ extension TodayFlagshipCalibrationHostUITests {
 
         let history = element("tfcs-view-history")
         history.tap()
-        XCTAssertTrue(
-            app.staticTexts["Meaningful nursery progress recorded"]
-                .waitForExistence(timeout: 3)
-        )
+        XCTAssertTrue(element("r13-history-entry").waitForExistence(timeout: 3))
         pauseForEvidence(1)
-        history.tap()
+        element("r13-supporting-done").tap()
 
         element("tfcs-return-to-today").tap()
         let settledStep = element("tfcs-returned-settled-step")

@@ -10,7 +10,8 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         content: TodayFlagshipCalibrationContent = TodayFlagshipCalibrationFixture.preparingForBaby,
         phase: TodayFlagshipJourneyPhase,
         initialDockExpanded: Bool = false,
-        fullDayOrigin: TodayFlagshipFullDayOrigin? = nil
+        fullDayOrigin: TodayFlagshipFullDayOrigin? = nil,
+        supportingRoute: TodayFlagshipSupportingRoute? = nil
     ) {
         self.content = content
         self.initialDockExpanded = initialDockExpanded
@@ -20,6 +21,9 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         )
         if fullDayOrigin != nil {
             _ = initialState.openFullDay()
+        }
+        if let supportingRoute {
+            _ = initialState.openSupportingRoute(supportingRoute)
         }
         _state = State(
             initialValue: initialState
@@ -430,4 +434,44 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     )
     .preferredColorScheme(.dark)
     .dynamicTypeSize(.accessibility5)
+}
+
+#Preview("R13 Goal Detail · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .focusedCurrent,
+        supportingRoute: .goalDetail
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Consequence Details · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .reviewingProposal,
+        supportingRoute: .consequenceDetails
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 History Entry · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .settled,
+        supportingRoute: .historyEntry
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 History Filters · Dark") {
+    TodayFlagshipCalibrationPreviewHost(
+        phase: .settled,
+        supportingRoute: .historyFilters
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Time Transfer · Host evaluation · route unavailable") {
+    TodayFlagshipTimeTransferEvaluationView(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby,
+        onCancel: {}
+    )
+    .preferredColorScheme(.dark)
 }
