@@ -73,6 +73,15 @@ final class TodayVitalitySupportingDepthHostUITests: XCTestCase {
             element("r13-history-filter-currentGoal").value as? String,
             "Selected"
         )
+
+        app.navigationBars["Filters"].buttons["History"].tap()
+        XCTAssertTrue(element("r13-history-entry-truth").waitForExistence(timeout: 4))
+        element("r13-supporting-done").tap()
+        assertExists([
+            element("tfcs-settled-truth"),
+            element("tfcs-view-history"),
+            element("tfcs-return-to-today")
+        ])
     }
 
     func testTimeTransferEvaluationIsTruthfullyUnavailableAndCancelable() {
@@ -82,9 +91,16 @@ final class TodayVitalitySupportingDepthHostUITests: XCTestCase {
         let cancel = element("r13-time-transfer-cancel")
         assertExists([transfer, cancel])
         XCTAssertTrue(app.staticTexts["Open in Time?"].exists)
+        XCTAssertTrue(app.staticTexts["Today → Time"].exists)
         XCTAssertTrue(app.staticTexts["Today remains unchanged"].exists)
         XCTAssertFalse(app.buttons["Open in Time"].exists)
         XCTAssertTrue(cancel.isHittable)
+        cancel.tap()
+        assertExists([
+            element("tfcs-focused-identity"),
+            element("tfcs-current-truth")
+        ])
+        XCTAssertFalse(app.buttons["Open in Time"].exists)
     }
 
     private func launch(_ variant: String) {

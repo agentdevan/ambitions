@@ -22,10 +22,7 @@ private struct FoundryHostRoot: View {
                     onOpenDock: {}
                 )
             } else if variant == .r13TimeTransferEvaluation {
-                TodayFlagshipTimeTransferEvaluationView(
-                    content: variant.content,
-                    onCancel: {}
-                )
+                TodayFlagshipTimeTransferEvaluationHost(variant: variant)
             } else {
                 TodayFlagshipCalibrationHost(variant: variant)
             }
@@ -40,6 +37,22 @@ private struct FoundryHostRoot: View {
         )
         .environment(\._accessibilityReduceMotion, variant.reduceMotion)
         .environment(\._accessibilityReduceTransparency, variant.reduceTransparency)
+    }
+}
+
+private struct TodayFlagshipTimeTransferEvaluationHost: View {
+    let variant: FoundryVariant
+    @State private var isPresented = true
+
+    var body: some View {
+        if isPresented {
+            TodayFlagshipTimeTransferEvaluationView(
+                content: variant.content,
+                onCancel: { isPresented = false }
+            )
+        } else {
+            TodayFlagshipCalibrationHost(variant: variant)
+        }
     }
 }
 
@@ -278,6 +291,7 @@ private enum FoundryVariant: String {
     var initialPhase: TodayFlagshipJourneyPhase {
         switch self {
         case .tfcsF06, .stateCancelled, .stressLongRTL, .r13GoalDetail,
+                .r13TimeTransferEvaluation,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent

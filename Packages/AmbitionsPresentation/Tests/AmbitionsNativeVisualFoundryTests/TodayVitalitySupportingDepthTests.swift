@@ -61,6 +61,19 @@ final class TodayVitalitySupportingDepthTests: XCTestCase {
         XCTAssertFalse(
             TodayFlagshipSupportingRoute.allCases.map(\.rawValue).contains("time-transfer")
         )
+        XCTAssertEqual(transfer.sourceOwner, "Today")
+        XCTAssertEqual(transfer.destinationOwner, "Time")
+    }
+
+    func testConsequenceDetailsKeepsLocalHistoryBeforeProtectedBoundary() throws {
+        let source = try String(
+            contentsOf: supportingDepthSourceURL,
+            encoding: .utf8
+        )
+        let history = try XCTUnwrap(source.range(of: "title: \"On this device\""))
+        let protected = try XCTUnwrap(source.range(of: "title: \"Protected boundary\""))
+
+        XCTAssertLessThan(history.lowerBound, protected.lowerBound)
     }
 
     func testSupportingDepthUsesExactFixtureRelationships() {
@@ -73,5 +86,15 @@ final class TodayVitalitySupportingDepthTests: XCTestCase {
         XCTAssertEqual(content.supporting.history.stepID, content.primaryStep.id)
         XCTAssertEqual(content.supporting.history.goalID, content.supporting.goal.id)
         XCTAssertTrue(content.supporting.history.isLocalOnly)
+    }
+
+    private var supportingDepthSourceURL: URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Sources")
+            .appendingPathComponent("AmbitionsNativeVisualFoundry")
+            .appendingPathComponent("TodayVitalitySupportingDepth.swift")
     }
 }

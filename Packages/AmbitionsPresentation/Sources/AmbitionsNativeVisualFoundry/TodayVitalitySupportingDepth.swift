@@ -94,14 +94,14 @@ struct TodayVitalityConsequenceDetailsView: View {
                     identifier: "r13-consequence-details-pursuit"
                 )
                 TodayVitalitySupportingSection(
-                    title: "Protected boundary",
-                    body: content.primaryStep.materialConsequence,
-                    identifier: "r13-consequence-details-protected"
-                )
-                TodayVitalitySupportingSection(
                     title: "On this device",
                     body: content.interfaceCopy.historyTrustCue,
                     identifier: "r13-consequence-details-history"
+                )
+                TodayVitalitySupportingSection(
+                    title: "Protected boundary",
+                    body: content.primaryStep.materialConsequence,
+                    identifier: "r13-consequence-details-protected"
                 )
             }
             .accessibilityElement(children: .contain)
@@ -266,6 +266,16 @@ public struct TodayFlagshipTimeTransferEvaluationView: View {
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
 
+                    Text(
+                        "\(content.supporting.timeTransfer.sourceOwner) → "
+                            + content.supporting.timeTransfer.destinationOwner
+                    )
+                    .font(TodayVitalityTypographyRole.relationship.font.weight(.semibold))
+                    .foregroundStyle(.tint)
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityIdentifier("r13-time-transfer-ownership")
+
                     Label("Today remains unchanged", systemImage: "lock")
                         .font(TodayVitalityTypographyRole.relationship.font)
                         .foregroundStyle(.secondary)
@@ -277,7 +287,7 @@ public struct TodayFlagshipTimeTransferEvaluationView: View {
             .todayFlagshipInlineNavigationTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: onCancel)
+                    Button("Not now", action: onCancel)
                         .accessibilityIdentifier("r13-time-transfer-cancel")
                 }
             }
