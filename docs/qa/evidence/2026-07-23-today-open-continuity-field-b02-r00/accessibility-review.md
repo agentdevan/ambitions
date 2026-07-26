@@ -17,8 +17,8 @@ Status: `PROPOSED`
   return, four-root ordering, dock-owned Search and Capture, and local fixture
   boundary remain unchanged.
 - The same product meaning is available in standard size, Accessibility 5,
-  Increased Contrast, Differentiate Without Color, Reduce Transparency, Arabic
-  RTL, and long-LTR composition.
+  Increased Contrast, Differentiate Without Color, Reduce Transparency, and
+  long-English LTR composition.
 - Primary content remains matte and opaque. Liquid Glass remains functional
   shell chrome only, with an authored opaque dock branch.
 
@@ -57,11 +57,10 @@ Status: `PROPOSED`
 ## 4. Added
 
 - Exact UI regression `testB02AccessibilityAndAdaptivityMatrix`.
-- Foundry host variants for root Accessibility 5, genuine Arabic RTL across
-  root, Full Day, focused Step, review, saving, settlement, returned Today, and
-  recovery; long LTR; and Reduce Transparency.
+- Foundry host variants for root Accessibility 5, long-English LTR, and Reduce
+  Transparency.
 - Matching package previews for the same pressure states.
-- Native evidence for Accessibility 5, `ar-SA`, long LTR, Increased Contrast,
+- Native evidence for Accessibility 5, long-English LTR, Increased Contrast,
   Differentiate Without Color, Reduce Transparency, compact iPhone, and Pro Max.
 
 ## 5. Unresolved
@@ -82,8 +81,7 @@ Status: `PROPOSED`
 
 ## 6. Architecture-sensitive assumptions
 
-- Fixture-local strings and snapshots remain non-authoritative adapters. The
-  Arabic text is evaluation localization, not production localization authority.
+- Fixture-local strings and snapshots remain non-authoritative adapters.
 - Accessibility announcements describe fixture-supported state transitions;
   they do not imply production persistence or runtime timing.
 - `accessibilityInputLabels` improve command discovery without replacing visible
@@ -105,8 +103,7 @@ Status: `PROPOSED`
   final fresh rerun passed in 365.934 seconds (439.099 seconds including build
   and test orchestration). It verifies Accessibility 5 vertical/reachable
   actions and scrollable navigation commands, visible custom-button targets and
-  unique names on the audited pressure surfaces, opaque dock fallback, Arabic
-  semantic order and native Back across the complete fixture journey, recovery
+  unique names on the audited pressure surfaces, opaque dock fallback, recovery
   dismissal without mutation, long-LTR outcome reachability, no-color
   current/proposed structure, contrast-state presence, and native scroll-
   indicator separation from Dock Peek.
@@ -143,7 +140,6 @@ All screenshots are real rendered Native Foundry host frames.
 | Evidence | Device / mode | Dimensions | SHA-256 |
 | --- | --- | --- | --- |
 | `screenshots/task10-accessibility-adaptivity/B02-T10-accessibility5-review-standard-pro.png` | iPhone 17 Pro, Dark, Accessibility 5 | 1206x2622 | `90e1f1abb615d7ababf53761643afc11c932f959c69be30c1bc788d3af187ec8` |
-| `screenshots/task10-accessibility-adaptivity/B02-T10-ar-SA-rtl-root.png` | iPhone 17 Pro, Dark, `ar-SA`, RTL | 1206x2622 | `b18d3fd27cd8af872b2985de88be1836cb4cb8d52f4d1d8a2d36112ab25a833e` |
 | `screenshots/task10-accessibility-adaptivity/B02-T10-long-ltr-root.png` | iPhone 17 Pro, Dark, long LTR | 1206x2622 | `798fe1eec13a20f75cd1028a674b7cfeece53278bd2dcaf928fed7428d9399c7` |
 | `screenshots/task10-accessibility-adaptivity/B02-T10-differentiate-without-color-review.png` | iPhone 17 Pro, Dark, no-color distinction | 1206x2622 | `e47431e2fa08832235a524a52b5e7aace313f72b02146c84acbcecb743cf44ad` |
 | `screenshots/task10-accessibility-adaptivity/B02-T10-increased-contrast-review.png` | iPhone 17 Pro, Dark, system Increased Contrast | 1206x2622 | `f8c74786b8209e8efce3738f0c38fcd01b725a4459788f08900ffbdd8af5aa1d` |
@@ -151,9 +147,7 @@ All screenshots are real rendered Native Foundry host frames.
 | `screenshots/task10-accessibility-adaptivity/B02-T10-active-scroll-indicator-dock-clear.png` | iPhone 17 Pro, Dark, naturally scrolled root with Dock Peek visible | 1206x2622 | `3a2d199dbbbb9947bca65ff4021f46b2b1300f81205859a34516f27564ce0c02` |
 
 The AX5 screenshot proves both safe-area actions are visible and unobscured.
-The repaired Arabic frame proves real RTL script, a complete untruncated crown
-context, localized date/time, mirrored geometry, and the deliberate mixed-
-direction `Ambitions S10` identity. The scrolled frame proves the Dock Peek
+The scrolled frame proves the Dock Peek
 remains visually stable during natural scrolling; the passing UI geometry
 assertion proves the native indicator and Dock Peek occupy distinct trailing
 regions because the indicator itself is transient and not visible in the still.
@@ -167,3 +161,11 @@ labels/order/targets/focus metadata, real system content-size and Increased
 Contrast settings, and the authored opaque dock branch. It does not prove direct
 device behavior, production localization, runtime integration, physical assistive
 technology behavior, or visual acceptance. `APPROVED FOR SWIFTUI` remains false.
+
+## Owner evidence override
+
+The final B02 screenshot matrix, recordings, contact sheets, and owner review
+are English only. The earlier Task 10 Arabic/RTL diagnostic file remains
+unchanged on disk but is excluded from the final evidence inventory and is not
+cited as proof. Long-English LTR is the final content stress. RTL and
+localization proof remain open.

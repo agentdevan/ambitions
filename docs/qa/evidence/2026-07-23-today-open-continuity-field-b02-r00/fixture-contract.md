@@ -1,5 +1,7 @@
 # Fixture and state inventory
 
+Status: `PROPOSED EVALUATION FIXTURE`
+
 ## Stable family
 
 - Family: `today-flagship/preparing-for-baby/still-counts/v1`
@@ -95,3 +97,19 @@ Full Day is entirely read-only: neither the settled Step nor the revealed Step
 can re-enter the Still Counts journey. Returned-origin validation asserts the
 revealed Start Here owns Now while the nursery Step remains settled and
 subordinate. Back restores the exact origin phase and focus.
+
+## Owner evidence override
+
+The Arabic fixture and its source/test history remain preserved, but the final
+B02 screenshot matrix, recordings, contact sheets, and proof claims are English
+only. Phase 9 uses the English typical and long-English LTR stress fixtures.
+Historical RTL diagnostic media are excluded from final metadata and review.
+RTL and localization proof remain open.
+
+## Proof ceiling
+
+The fixture proves deterministic semantic snapshots and navigation/state
+behavior inside the Native Visual Foundry. It does not own product decisions,
+persist data, define production localization, authorize a runtime adapter, or
+establish a universal Start Here rule. Synthetic saving timing is evaluation
+behavior only. Runtime integration and `APPROVED FOR SWIFTUI` remain false.

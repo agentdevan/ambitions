@@ -10,7 +10,6 @@ Status: `PROPOSED`
 | Standard Pro | VC14 iPhone 17 Pro, iOS 26.5 | 1206x2622 | PASS: primary validation and accessibility matrix device. |
 | Wide / Pro Max | B02 iPhone 17 Pro Max, iOS 26.5 | 1320x2868 | PASS: hierarchy expands without fixed-coordinate drift or stretched action anatomy. |
 | Accessibility pressure | iPhone 17 Pro, Accessibility 5 | 1206x2622 | PASS: review recomposes vertically; commit and cancel are visible, reachable, and safe-area clear. |
-| RTL | iPhone 17 Pro, `ar-SA` | 1206x2622 | PASS: leading/trailing geometry, symbols, rail, dock edge, and localized date/time mirror natively. |
 | Long LTR | iPhone 17 Pro | 1206x2622 | PASS: identity wraps naturally; required root action remains available; content continues with native scrolling. |
 
 The compact iPhone is the narrow physical-Simulator proving environment and Pro
@@ -26,9 +25,9 @@ and fixture family render in all tested environments.
   stay in native vertical scroll containers with visible continuation indicators.
 - Safe-area review actions remain in the existing native inset region and never
   flow under the home indicator.
-- The compact crown uses its established clamped scroll transform; RTL and
+- The compact crown uses its established clamped scroll transform;
   Accessibility Navigation Passage crowns grow naturally rather than clipping
-  localized meaning. Passage command labels remove their two-line cap at
+  meaning. Passage command labels remove their two-line cap at
   accessibility sizes and remain available through natural scrolling.
 - Timeline identity remains primary, with time and relationship allowed to wrap
   or move vertically instead of being compressed into fixed columns.
@@ -62,8 +61,7 @@ and fixture family render in all tested environments.
 | Reduce Transparency | opaque dock branch and identifier | opaque root frame | physical material appearance |
 | Reduce Motion | Task 09 state-policy tests and journey media | M02 recording/frame | physical vestibular comfort |
 | Button Shapes / Bold Text | native Buttons and semantic system typography retained; `simctl ui` has no setting for either | ordinary native-control rendering | physical preference comfort |
-| RTL `ar-SA` | Arabic-only label guard and logical vertical order | genuine RTL root frame | physical Arabic VoiceOver speech |
-| Long LTR | outcome reachability | long-LTR root frame | production localization breadth |
+| Long-English LTR | outcome reachability | long-English root frame | localization breadth remains open |
 | Compact / Pro / Pro Max | identical package contract; Pro UI matrix plus device-specific native renders | three native device frames | resizable iPhone Mirroring, physical safe areas / call state |
 | Voice Control | distinct localized input-label scan | named controls in UI hierarchy | recognition accuracy |
 | Switch Control / Full Keyboard Access | native control inventory | not fully exercisable in this pass | physical cadence and traversal |
@@ -91,3 +89,10 @@ incomplete.
 
 These Simulator frames are evaluation references, not production baselines.
 They do not complete direct-device proof or authorize broader reconstruction.
+
+## Owner evidence override
+
+Final B02 review media are English only. Historical Arabic/RTL diagnostic
+source and media remain preserved but excluded from final proof claims. RTL and
+localization proof remain open; compact, standard, Pro Max, Accessibility 5,
+and long-English LTR are the final adaptive evidence set.

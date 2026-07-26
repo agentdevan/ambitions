@@ -24,8 +24,8 @@ Status: `PROPOSED`
 
 ## Rendering observations
 
-- The package-backed host and fixture host rendered Accessibility 5, Arabic RTL,
-  long LTR, Increased Contrast, Differentiate Without Color, Reduce
+- The package-backed host and fixture host rendered Accessibility 5,
+  long-English LTR, Increased Contrast, Differentiate Without Color, Reduce
   Transparency, compact iPhone, standard Pro, and Pro Max without visible
   scrolling stalls or delayed material resolution.
 - Changing Simulator content size and contrast required no clean build.
@@ -62,3 +62,10 @@ This audit supports the bounded fixture-host composition only. It does not prove
 physical-device frame pacing, thermal behavior, memory lifetime under runtime
 data, production persistence, or broad frontend performance. No ETTrace or
 memgraph claim is made, and `APPROVED FOR SWIFTUI` remains false.
+
+## Owner evidence override
+
+The earlier Arabic/RTL diagnostic run remains historical implementation evidence
+only. It is excluded from the final English-only B02 matrix and no RTL or
+localization proof claim is made. Long-English LTR is the final content-expansion
+stress; RTL and localization remain open.
