@@ -235,6 +235,7 @@ private enum FoundryVariant: String {
     case r13ResilienceFailed = "r13-resilience-failed"
     case r13ResilienceCancelled = "r13-resilience-cancelled"
     case r13ResilienceUndo = "r13-resilience-undo"
+    case r13ResilienceUndoUnavailable = "r13-resilience-undo-unavailable"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -298,7 +299,6 @@ private enum FoundryVariant: String {
         switch self {
         case .tfcsF06, .stateCancelled, .stressLongRTL, .r13GoalDetail,
                 .r13TimeTransferEvaluation,
-                .r13ResilienceCancelled,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent
@@ -309,14 +309,15 @@ private enum FoundryVariant: String {
                 .r13ReviewTypical, .r13ReviewFailureCallback,
                 .r13ReviewIncreasedContrast, .r13ReviewNoColor,
                 .r13ReviewReduceMotion, .r13ReviewAccessibility5,
-                .r13ConsequenceDetails:
+                .r13ConsequenceDetails, .r13ResilienceCancelled:
             .reviewingProposal
         case .r13ReviewFailed, .r13ResilienceFailed:
             .failedSettlement
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL,
-                .r13HistoryEntry, .r13HistoryFilters, .r13ResilienceUndo:
+                .r13HistoryEntry, .r13HistoryFilters, .r13ResilienceUndo,
+                .r13ResilienceUndoUnavailable:
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:

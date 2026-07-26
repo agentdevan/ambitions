@@ -33,10 +33,28 @@ final class TodayVitalityResilienceHostUITests: XCTestCase {
         XCTAssertTrue(element("tfcs-review-current-truth").exists)
         XCTAssertFalse(element("tfcs-settled-truth").exists)
 
+        let retry = app.buttons["Try again"]
+        XCTAssertTrue(retry.exists)
+        assertMinimumTarget(retry)
+        retry.tap()
+        XCTAssertTrue(element("tfcs-saving-posture").waitForExistence(timeout: 2))
+
+        app.terminate()
+        launch("r13-resilience-failed")
+        let returnToStep = app.buttons["Return to Step"]
+        XCTAssertTrue(returnToStep.waitForExistence(timeout: 4))
+        assertMinimumTarget(returnToStep)
+        returnToStep.tap()
+        assertUnchangedFocusedTruth()
+
         app.terminate()
         launch("r13-resilience-cancelled")
-        XCTAssertTrue(element("tfcs-current-truth").waitForExistence(timeout: 4))
-        XCTAssertFalse(element("tfcs-settled-truth").exists)
+        let notNow = element("tfcs-cancel-review")
+        XCTAssertTrue(notNow.waitForExistence(timeout: 4))
+        XCTAssertEqual(notNow.label, "Not now")
+        assertMinimumTarget(notNow)
+        notNow.tap()
+        assertUnchangedFocusedTruth()
     }
 
     func testExactEligibleUndoCanBeKeptOrAppliedWithoutDeletingHistory() {
@@ -62,8 +80,19 @@ final class TodayVitalityResilienceHostUITests: XCTestCase {
         let relaunchedUndo = element("r13-undo-commit")
         XCTAssertTrue(relaunchedUndo.waitForExistence(timeout: 4))
         relaunchedUndo.tap()
-        XCTAssertTrue(element("tfcs-current-truth").waitForExistence(timeout: 4))
+        assertUnchangedFocusedTruth()
+        let identity = element("tfcs-focused-identity")
+        let parent = element("r13-open-goal-detail")
+        XCTAssertTrue(identity.label.contains("Make the nursery ready for the crib"))
+        XCTAssertTrue(parent.label.contains("Welcome our baby home"))
         XCTAssertFalse(element("tfcs-settled-truth").exists)
+    }
+
+    func testDefaultFixtureDoesNotExposeUndo() {
+        launch("r13-resilience-undo-unavailable")
+        XCTAssertTrue(element("tfcs-settled-truth").waitForExistence(timeout: 4))
+        XCTAssertFalse(app.buttons["Undo"].exists)
+        XCTAssertFalse(element("r13-undo-review").exists)
     }
 
     private func launch(_ variant: String) {
@@ -84,5 +113,15 @@ final class TodayVitalityResilienceHostUITests: XCTestCase {
     private func assertMinimumTarget(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertGreaterThanOrEqual(element.frame.width, 44, file: file, line: line)
         XCTAssertGreaterThanOrEqual(element.frame.height, 44, file: file, line: line)
+    }
+
+    private func assertUnchangedFocusedTruth(file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertTrue(element("tfcs-focused-identity").waitForExistence(timeout: 4), file: file, line: line)
+        XCTAssertTrue(element("tfcs-current-truth").exists, file: file, line: line)
+        XCTAssertTrue(element("r13-open-goal-detail").exists, file: file, line: line)
+        XCTAssertFalse(element("tfcs-proposed-truth").exists, file: file, line: line)
+        XCTAssertFalse(element("tfcs-settled-truth").exists, file: file, line: line)
+        XCTAssertFalse(element("tfcs-failed-settlement").exists, file: file, line: line)
+        XCTAssertFalse(element("tfcs-interruption-seam").exists, file: file, line: line)
     }
 }
