@@ -59,6 +59,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     public private(set) var hasCommittedMutation: Bool
     public private(set) var isHistoryExpanded: Bool
     public private(set) var supportingRoute: TodayFlagshipSupportingRoute?
+    public private(set) var appliedInverseCommandID: String?
 
     private let primaryStepID: String
     private let revealedStartHereStepID: String
@@ -66,6 +67,8 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     private let settledTruth: String
     private let recoveryChoiceIDs: [String]
     private let inverseIsAvailable: Bool
+    private let inverseCommandID: String
+    private let originalAcceptedTruth: String
 
     public let todayReturnAnchorID: String
     public let lastSavedProgress: String
@@ -79,12 +82,15 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         hasCommittedMutation = false
         isHistoryExpanded = false
         supportingRoute = nil
+        appliedInverseCommandID = nil
         primaryStepID = content.primaryStep.id
         revealedStartHereStepID = content.revealedStartHereStep.id
         proposalTruth = content.primaryStep.stillCountsProposal.proposedTruth
         settledTruth = content.primaryStep.stillCountsProposal.settledTruth
         recoveryChoiceIDs = content.recovery.availableChoices.map(\.id)
         inverseIsAvailable = content.supporting.inverse.isAvailable
+        inverseCommandID = content.supporting.inverse.commandID
+        originalAcceptedTruth = content.primaryStep.currentAcceptedTruth
         todayReturnAnchorID = content.returnContract.focusAnchorID
         lastSavedProgress = content.recovery.lastSavedProgress
     }
@@ -302,7 +308,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func openSupportingRoute(_ route: TodayFlagshipSupportingRoute) -> Bool {
-        guard supportingRoute == nil else { return false }
+        guard supportingRoute == nil, isHistoryExpanded == false else { return false }
 
         let anchor: TodayFlagshipFocusAnchor
         switch (phase, route) {
@@ -323,6 +329,29 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
         supportingRoute = route
         focusAnchor = anchor
+        return true
+    }
+
+    @discardableResult
+    public mutating func applyEligibleInverse() -> Bool {
+        guard
+            phase == .settled,
+            supportingRoute == .undoReview,
+            inverseIsAvailable,
+            isHistoryExpanded == false,
+            appliedInverseCommandID == nil
+        else {
+            return false
+        }
+
+        acceptedTruth = originalAcceptedTruth
+        proposedTruth = nil
+        phase = .focusedCurrent
+        navigationPath = [.step(id: primaryStepID)]
+        supportingRoute = nil
+        focusAnchor = .focusedIdentity
+        appliedInverseCommandID = inverseCommandID
+        hasCommittedMutation = true
         return true
     }
 

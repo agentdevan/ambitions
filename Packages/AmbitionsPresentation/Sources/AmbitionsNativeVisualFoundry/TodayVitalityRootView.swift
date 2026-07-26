@@ -42,9 +42,9 @@ struct TodayVitalityRootView: View {
 
                     if let contextSeam = content.contextSeam,
                        contextSeam.affectedObjectID == visibleStartHere.id {
-                        TodayOpenContinuityContextSeam(
+                        TodayVitalityContextSeam(
                             seam: contextSeam,
-                            palette: shellPalette
+                            palette: vitalityPalette
                         )
                     }
 

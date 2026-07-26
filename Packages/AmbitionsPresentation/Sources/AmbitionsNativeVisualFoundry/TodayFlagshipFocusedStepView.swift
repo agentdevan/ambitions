@@ -74,6 +74,13 @@ struct TodayFlagshipFocusedStepView: View {
                 onDismiss: closeSupportingRoute
             )
         }
+        .sheet(isPresented: undoReviewPresentation) {
+            TodayVitalityUndoReviewView(
+                content: content,
+                onUndo: { _ = state.applyEligibleInverse() },
+                onKeep: closeSupportingRoute
+            )
+        }
     }
 
     private func openGoalDetail() {
@@ -114,6 +121,16 @@ struct TodayFlagshipFocusedStepView: View {
                 else {
                     return
                 }
+                closeSupportingRoute()
+            }
+        )
+    }
+
+    private var undoReviewPresentation: Binding<Bool> {
+        Binding(
+            get: { state.supportingRoute == .undoReview },
+            set: { isPresented in
+                guard isPresented == false, state.supportingRoute == .undoReview else { return }
                 closeSupportingRoute()
             }
         )

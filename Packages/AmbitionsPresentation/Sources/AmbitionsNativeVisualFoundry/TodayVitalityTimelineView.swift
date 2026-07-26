@@ -47,12 +47,9 @@ struct TodayVitalityTimelineView: View {
 
                     if let contextSeam = content.contextSeam,
                        contextSeam.affectedObjectID == item.canonicalObjectID {
-                        TodayOpenContinuityContextSeam(
+                        TodayVitalityContextSeam(
                             seam: contextSeam,
-                            palette: TodayFlagshipPalette(
-                                colorScheme: palette.colorScheme,
-                                contrast: palette.contrast
-                            )
+                            palette: palette
                         )
                     }
                 }

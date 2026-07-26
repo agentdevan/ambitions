@@ -428,9 +428,12 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
 
     func testB02RecoveryAndResilienceSourceExposeNoUnsupportedCommands() throws {
         let source = try primaryViewSource()
+        let journeySource = try foundrySource(named: "TodayFlagshipJourneyState.swift")
 
         XCTAssertFalse(source.contains("Other outcomes"))
-        XCTAssertFalse(source.contains("Undo"))
+        XCTAssertTrue(journeySource.contains("applyEligibleInverse"))
+        XCTAssertTrue(journeySource.contains("inverseIsAvailable"))
+        XCTAssertFalse(source.contains("genericUndo"))
         XCTAssertFalse(source.contains("tfcs-open-in-time"))
         XCTAssertFalse(source.contains("tfcs-refresh-external-context"))
     }

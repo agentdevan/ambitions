@@ -475,3 +475,46 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
     )
     .preferredColorScheme(.dark)
 }
+
+#Preview("R13 Resilience · Offline local truth · English") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.offlineLocalTruth,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Resilience · Stale external context · English") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.staleExternalContext,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Resilience · Conflict transfer · English") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.conflictTransfer,
+        phase: .todayInitial
+    )
+    .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Resilience · Failed settlement · English") {
+    TodayFlagshipCalibrationPreviewHost(phase: .failedSettlement)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Resilience · Cancelled unchanged · English") {
+    TodayFlagshipCalibrationPreviewHost(phase: .focusedCurrent)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("R13 Resilience · Exact Undo · English") {
+    TodayFlagshipCalibrationPreviewHost(
+        content: TodayFlagshipCalibrationFixture.preparingForBaby.undoAvailableEvaluation,
+        phase: .settled,
+        supportingRoute: .undoReview
+    )
+    .preferredColorScheme(.dark)
+}

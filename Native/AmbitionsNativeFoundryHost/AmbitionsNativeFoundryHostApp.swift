@@ -229,6 +229,12 @@ private enum FoundryVariant: String {
     case r13HistoryEntry = "r13-history-entry"
     case r13HistoryFilters = "r13-history-filters"
     case r13TimeTransferEvaluation = "r13-time-transfer-evaluation"
+    case r13ResilienceOffline = "r13-resilience-offline"
+    case r13ResilienceStale = "r13-resilience-stale"
+    case r13ResilienceConflict = "r13-resilience-conflict"
+    case r13ResilienceFailed = "r13-resilience-failed"
+    case r13ResilienceCancelled = "r13-resilience-cancelled"
+    case r13ResilienceUndo = "r13-resilience-undo"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -292,6 +298,7 @@ private enum FoundryVariant: String {
         switch self {
         case .tfcsF06, .stateCancelled, .stressLongRTL, .r13GoalDetail,
                 .r13TimeTransferEvaluation,
+                .r13ResilienceCancelled,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
             .focusedCurrent
@@ -304,12 +311,12 @@ private enum FoundryVariant: String {
                 .r13ReviewReduceMotion, .r13ReviewAccessibility5,
                 .r13ConsequenceDetails:
             .reviewingProposal
-        case .r13ReviewFailed:
+        case .r13ReviewFailed, .r13ResilienceFailed:
             .failedSettlement
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL,
-                .r13HistoryEntry, .r13HistoryFilters:
+                .r13HistoryEntry, .r13HistoryFilters, .r13ResilienceUndo:
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:
@@ -345,12 +352,14 @@ private enum FoundryVariant: String {
             TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
         case .b02VeryDenseToday:
             TodayFlagshipCalibrationFixture.preparingForBaby.veryDenseToday
-        case .b02OfflineLocal:
+        case .b02OfflineLocal, .r13ResilienceOffline:
             TodayFlagshipCalibrationFixture.preparingForBaby.offlineLocalTruth
-        case .b02StaleExternal:
+        case .b02StaleExternal, .r13ResilienceStale:
             TodayFlagshipCalibrationFixture.preparingForBaby.staleExternalContext
-        case .b02ConflictTransfer:
+        case .b02ConflictTransfer, .r13ResilienceConflict:
             TodayFlagshipCalibrationFixture.preparingForBaby.conflictTransfer
+        case .r13ResilienceUndo:
+            TodayFlagshipCalibrationFixture.preparingForBaby.undoAvailableEvaluation
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
         }
@@ -428,6 +437,8 @@ private enum FoundryVariant: String {
             .historyEntry
         case .r13HistoryFilters:
             .historyFilters
+        case .r13ResilienceUndo:
+            .undoReview
         default:
             nil
         }
