@@ -67,6 +67,22 @@ final class TodayVitalityRootTests: XCTestCase {
         }
     }
 
+    func testR13DenseTimelineKeepsEarlyProtectedContextBeforeFixedHandoff() {
+        let denseTimeline = TodayFlagshipCalibrationFixture.preparingForBaby.denseToday.timeline
+
+        XCTAssertEqual(
+            Array(denseTimeline.prefix(2).map(\.canonicalObjectID)),
+            [
+                "step.prenatal-appointment-notes",
+                "step.send-launch-brief"
+            ]
+        )
+        XCTAssertEqual(
+            Array(denseTimeline.prefix(2).map(\.timeLabel)),
+            ["1:10 PM", "2:00 PM"]
+        )
+    }
+
     func testR13ReturnedProjectionShowsReadOnlyRevealedStartHereAndSettledStepOnce() {
         let fixture = TodayFlagshipCalibrationFixture.preparingForBaby
         let returnedTimeline = todayReturnedOverviewObjects(content: fixture)

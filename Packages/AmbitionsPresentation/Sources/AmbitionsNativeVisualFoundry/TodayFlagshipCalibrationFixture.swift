@@ -90,7 +90,7 @@ public enum TodayFlagshipCalibrationFixture {
                     isProtected: true,
                     role: .protected
                 ),
-                at: 1
+                at: 0
             )
             timeline.append(
                 TodayFlagshipTimelineObject(
