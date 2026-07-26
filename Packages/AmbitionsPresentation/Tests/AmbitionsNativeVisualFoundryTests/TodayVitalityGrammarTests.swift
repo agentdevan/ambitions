@@ -10,7 +10,7 @@ final class TodayVitalityGrammarTests: XCTestCase {
         )
 
         let shapeLabels = TodayVitalityNodeKind.allCases.map(\.nonColorShapeLabel)
-        XCTAssertEqual(shapeLabels.count, 9)
+        XCTAssertEqual(shapeLabels.count, 10)
         XCTAssertEqual(Set(shapeLabels).count, shapeLabels.count)
         XCTAssertFalse(shapeLabels.contains(where: \.isEmpty))
     }
@@ -20,6 +20,7 @@ final class TodayVitalityGrammarTests: XCTestCase {
             TodayVitalityNodeKind.allCases.map(\.geometry),
             [
                 .openRingWithStableCenter,
+                .elapsedDot,
                 .pairedOffsetRings,
                 .activeConnector,
                 .resolvedDoubleRing,
@@ -34,6 +35,7 @@ final class TodayVitalityGrammarTests: XCTestCase {
             TodayVitalityNodeKind.allCases.map(\.nonColorShapeLabel),
             [
                 "Open ring with stable center",
+                "Elapsed dot",
                 "Paired offset rings",
                 "Active connector",
                 "Resolved double ring",
@@ -44,6 +46,22 @@ final class TodayVitalityGrammarTests: XCTestCase {
                 "Dashed open ring"
             ]
         )
+    }
+
+    func testElapsedNodeIsNeutralAndDistinctFromCurrentSettlementAndOwnershipNodes() {
+        let palette = TodayVitalityPalette(
+            colorScheme: .dark,
+            contrast: .standard,
+            differentiateWithoutColor: false,
+            reduceTransparency: false
+        )
+
+        XCTAssertEqual(TodayVitalityNodeKind.elapsed.geometry, .elapsedDot)
+        XCTAssertEqual(palette.nodeColor(for: .elapsed), palette.labelTertiary)
+        XCTAssertNotEqual(TodayVitalityNodeKind.elapsed.geometry, TodayVitalityNodeKind.current.geometry)
+        XCTAssertNotEqual(TodayVitalityNodeKind.elapsed.geometry, TodayVitalityNodeKind.settled.geometry)
+        XCTAssertNotEqual(TodayVitalityNodeKind.elapsed.geometry, TodayVitalityNodeKind.fixed.geometry)
+        XCTAssertNotEqual(TodayVitalityNodeKind.elapsed.geometry, TodayVitalityNodeKind.external.geometry)
     }
 
     func testOpenReliefMapsTruthToSemanticColorAndNonColorSeamGeometry() {

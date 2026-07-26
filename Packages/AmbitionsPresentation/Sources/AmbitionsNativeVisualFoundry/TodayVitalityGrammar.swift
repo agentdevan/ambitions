@@ -59,6 +59,7 @@ enum TodayVitalityTypographyRole: CaseIterable {
 
 enum TodayVitalityNodeGeometry: String, CaseIterable {
     case openRingWithStableCenter
+    case elapsedDot
     case pairedOffsetRings
     case activeConnector
     case resolvedDoubleRing
@@ -72,6 +73,8 @@ enum TodayVitalityNodeGeometry: String, CaseIterable {
         switch self {
         case .openRingWithStableCenter:
             "Open ring with stable center"
+        case .elapsedDot:
+            "Elapsed dot"
         case .pairedOffsetRings:
             "Paired offset rings"
         case .activeConnector:
@@ -94,6 +97,7 @@ enum TodayVitalityNodeGeometry: String, CaseIterable {
 
 enum TodayVitalityNodeKind: String, CaseIterable {
     case current
+    case elapsed
     case proposed
     case saving
     case settled
@@ -107,6 +111,8 @@ enum TodayVitalityNodeKind: String, CaseIterable {
         switch self {
         case .current:
             .openRingWithStableCenter
+        case .elapsed:
+            .elapsedDot
         case .proposed:
             .pairedOffsetRings
         case .saving:
@@ -319,6 +325,8 @@ struct TodayVitalityPalette {
         switch kind {
         case .current, .external, .open:
             labelSecondary
+        case .elapsed:
+            labelTertiary
         case .proposed, .saving:
             ambitionsAccentMuted
         case .settled:
@@ -372,6 +380,10 @@ struct TodayVitalityNode: View {
                         .fill(color)
                         .frame(width: 5, height: 5)
                 }
+        case .elapsedDot:
+            Circle()
+                .fill(color)
+                .frame(width: 8, height: 8)
         case .pairedOffsetRings:
             ZStack {
                 Circle()

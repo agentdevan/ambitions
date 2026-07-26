@@ -77,7 +77,7 @@ final class TodayVitalityFullDayTests: XCTestCase {
             "contentTitle",
             "Spacer(minLength: 0)",
             ".containerRelativeFrame(.vertical, alignment: .top)",
-            "isPastResolved",
+            "if isElapsed(item) { return .elapsed }",
             "state.openStepFromFullDay(id:",
             "tfcs-full-day-timeline",
             "tfcs-scroll-to-now"
@@ -87,7 +87,8 @@ final class TodayVitalityFullDayTests: XCTestCase {
         XCTAssertTrue(wrapper.contains("TodayVitalityFullDayView("))
         XCTAssertTrue(source.contains("font(TodayVitalityTypographyRole.objectIdentity.font)"))
         XCTAssertTrue(source.contains("accessibilityIdentifier(\"r13-full-day-title\")"))
-        XCTAssertTrue(source.contains("if isPastResolved(item) { return .settled }"))
+        XCTAssertFalse(source.contains("isPastResolved"))
+        XCTAssertFalse(source.contains("if isPastResolved(item) { return .settled }"))
         XCTAssertFalse(source.contains(".todayFlagshipInlineNavigationTitle()"))
 
         for prohibited in [

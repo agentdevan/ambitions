@@ -264,7 +264,7 @@ struct TodayVitalityFullDayView: View {
 
     private func nodeKind(for item: TodayFlagshipTimelineObject) -> TodayVitalityNodeKind {
         if isNow(item) { return .current }
-        if isPastResolved(item) { return .settled }
+        if isElapsed(item) { return .elapsed }
         if origin == .todayReturned && item.canonicalObjectID == content.primaryStep.id {
             return .settled
         }
@@ -282,7 +282,7 @@ struct TodayVitalityFullDayView: View {
         }
     }
 
-    private func isPastResolved(_ item: TodayFlagshipTimelineObject) -> Bool {
+    private func isElapsed(_ item: TodayFlagshipTimelineObject) -> Bool {
         item.canonicalObjectID == "event.deep-work"
     }
 
