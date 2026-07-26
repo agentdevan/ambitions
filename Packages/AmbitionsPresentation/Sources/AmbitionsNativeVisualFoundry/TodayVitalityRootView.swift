@@ -80,6 +80,9 @@ struct TodayVitalityRootView: View {
                     proxy.scrollTo(content.returnContract.focusAnchorID, anchor: .center)
                 }
             }
+            .onAppear {
+                routeFocus(for: state.phase)
+            }
         }
     }
 

@@ -39,7 +39,7 @@ struct TodayVitalityFullDayView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
+                LazyVStack(alignment: .leading, spacing: 0) {
                     contentTitle
 
                     ForEach(Array(objects.enumerated()), id: \.element.id) { index, item in
@@ -306,7 +306,7 @@ struct TodayVitalityFullDayView: View {
             if reduceMotion {
                 proxy.scrollTo(nowObjectID, anchor: .center)
             } else {
-                withAnimation(.easeInOut(duration: 0.25)) {
+                withAnimation(motionPolicy.stateAnimation) {
                     proxy.scrollTo(nowObjectID, anchor: .center)
                 }
             }
@@ -321,6 +321,10 @@ struct TodayVitalityFullDayView: View {
             differentiateWithoutColor: differentiateWithoutColor,
             reduceTransparency: reduceTransparency
         )
+    }
+
+    private var motionPolicy: TodayOpenContinuityMotionPolicy {
+        TodayOpenContinuityMotionPolicy(reduceMotion: reduceMotion)
     }
 }
 

@@ -213,6 +213,7 @@ private enum FoundryVariant: String {
     case r13ReviewNoColor = "r13-review-differentiate-without-color"
     case r13ReviewReduceMotion = "r13-review-reduce-motion"
     case r13ReviewAccessibility5 = "r13-review-accessibility5"
+    case r13ReviewLongEnglish = "r13-review-long-english"
     case r13FullDayTypical = "r13-full-day-typical"
     case r13FullDayReturned = "r13-full-day-returned"
     case r13FullDayDense = "r13-full-day-dense"
@@ -236,6 +237,15 @@ private enum FoundryVariant: String {
     case r13ResilienceCancelled = "r13-resilience-cancelled"
     case r13ResilienceUndo = "r13-resilience-undo"
     case r13ResilienceUndoUnavailable = "r13-resilience-undo-unavailable"
+    case r13RootDark = "r13-root-dark"
+    case r13RootAccessibility5 = "r13-root-accessibility5"
+    case r13RootLongEnglish = "r13-root-long-english"
+    case r13RootReduceTransparency = "r13-root-reduce-transparency"
+    case r13FocusedLongEnglish = "r13-focused-long-english"
+    case r13SettlementNoColor = "r13-settlement-differentiate-without-color"
+    case r13JourneyReduceMotion = "r13-journey-reduce-motion"
+    case r13SavingReduceMotion = "r13-saving-reduce-motion"
+    case r13SettlementReduceMotion = "r13-settlement-reduce-motion"
     case b02SettlementTypical = "b02-settlement-typical"
     case b02SettlementHistory = "b02-settlement-history"
     case b02SettlementLowBrightness = "b02-settlement-low-brightness"
@@ -288,7 +298,7 @@ private enum FoundryVariant: String {
                 .b02ReviewAccessibility5, .b02RootAccessibility5,
                 .r13ReviewAccessibility5, .r13FullDayAccessibility5:
             .accessibility5
-        case .r13RecoveryAccessibility5:
+        case .r13RecoveryAccessibility5, .r13RootAccessibility5:
             .accessibility5
         default:
             .large
@@ -300,7 +310,8 @@ private enum FoundryVariant: String {
         case .tfcsF06, .stateCancelled, .stressLongRTL, .r13GoalDetail,
                 .r13TimeTransferEvaluation,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
-                .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR:
+                .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR,
+                .r13FocusedLongEnglish:
             .focusedCurrent
         case .tfcsF07, .stressContrast, .reviewAccessibility,
                 .b02ReviewTypical, .b02ReviewAccessibility5,
@@ -309,7 +320,8 @@ private enum FoundryVariant: String {
                 .r13ReviewTypical, .r13ReviewFailureCallback,
                 .r13ReviewIncreasedContrast, .r13ReviewNoColor,
                 .r13ReviewReduceMotion, .r13ReviewAccessibility5,
-                .r13ConsequenceDetails, .r13ResilienceCancelled:
+                .r13ConsequenceDetails, .r13ResilienceCancelled,
+                .r13ReviewLongEnglish:
             .reviewingProposal
         case .r13ReviewFailed, .r13ResilienceFailed:
             .failedSettlement
@@ -317,7 +329,8 @@ private enum FoundryVariant: String {
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL,
                 .r13HistoryEntry, .r13HistoryFilters, .r13ResilienceUndo,
-                .r13ResilienceUndoUnavailable:
+                .r13ResilienceUndoUnavailable, .r13SettlementNoColor,
+                .r13SettlementReduceMotion:
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:
@@ -331,7 +344,7 @@ private enum FoundryVariant: String {
         case .b02RecoveryContinued, .r13RecoveryContinued:
             .recoveredContinuation
         case .stateSaving, .b02ReviewSaving, .b02ReviewSavingRTL,
-                .r13ReviewSaving:
+                .r13ReviewSaving, .r13SavingReduceMotion:
             .savingAcceptedTruth
         default:
             .todayInitial
@@ -347,7 +360,8 @@ private enum FoundryVariant: String {
                 .b02ReviewSavingRTL, .b02RootRTL, .b02SettlementRTL,
                 .b02ReturnedRTL, .b02RecoveryRTL:
             TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation
-        case .b02FocusedLongLTR, .b02RootLongLTR, .r13RecoveryLongEnglish:
+        case .b02FocusedLongLTR, .b02RootLongLTR, .r13RecoveryLongEnglish,
+                .r13RootLongEnglish, .r13FocusedLongEnglish, .r13ReviewLongEnglish:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
         case .b02QuietToday:
             TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
@@ -382,15 +396,18 @@ private enum FoundryVariant: String {
 
     var differentiateWithoutColor: Bool {
         self == .b02ReviewNoColor || self == .r13ReviewNoColor
+            || self == .r13SettlementNoColor
     }
 
     var reduceMotion: Bool {
         self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
             || self == .r13ReviewReduceMotion || self == .r13RecoveryReduceMotion
+            || self == .r13JourneyReduceMotion || self == .r13SavingReduceMotion
+            || self == .r13SettlementReduceMotion
     }
 
     var reduceTransparency: Bool {
-        self == .b02RootReduceTransparency
+        self == .b02RootReduceTransparency || self == .r13RootReduceTransparency
     }
 
     var fullDayOrigin: TodayFlagshipFullDayOrigin? {
@@ -411,7 +428,7 @@ private enum FoundryVariant: String {
         switch self {
         case .journeySuccessful:
             .successful
-        case .b02MotionNormal, .b02MotionReduceMotion:
+        case .b02MotionNormal, .b02MotionReduceMotion, .r13JourneyReduceMotion:
             .successful
         case .journeyInterrupted:
             .interrupted
