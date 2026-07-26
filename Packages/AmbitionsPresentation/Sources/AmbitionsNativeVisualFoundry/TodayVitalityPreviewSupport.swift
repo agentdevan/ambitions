@@ -54,7 +54,7 @@ struct TodayVitalityGrammarPreview: View {
     }
 
     private var reliefSpecimen: some View {
-        TodayVitalityOpenRelief(palette: palette) {
+        TodayVitalityOpenRelief(palette: palette, truthKind: .current) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Right now")
                     .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
@@ -114,13 +114,17 @@ struct TodayVitalityGrammarPreview: View {
     }
 
     private var chromeSpecimen: some View {
-        TodayVitalityFunctionalChrome(palette: palette) {
-            Label("Functional chrome", systemImage: "circle.grid.2x2")
-                .font(TodayVitalityTypographyRole.action.font)
-                .foregroundStyle(palette.labelPrimary)
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: 52)
-                .padding(.horizontal, 16)
+        TodayVitalityFunctionalChrome(palette: palette, isInteractive: true) {
+            Button {
+            } label: {
+                Label("Functional chrome", systemImage: "circle.grid.2x2")
+                    .font(TodayVitalityTypographyRole.action.font)
+                    .foregroundStyle(palette.labelPrimary)
+                    .frame(maxWidth: .infinity)
+                    .frame(minHeight: 52)
+                    .padding(.horizontal, 16)
+            }
+            .buttonStyle(.plain)
         }
         .accessibilityLabel("Functional chrome preview")
     }
@@ -146,7 +150,7 @@ struct TodayVitalityGrammarPreview: View {
         .preferredColorScheme(.dark)
 }
 
-#Preview("R13 Grammar — Dynamic Type") {
+#Preview("R13 Grammar — Accessibility Dynamic Type") {
     TodayVitalityGrammarPreview()
         .preferredColorScheme(.dark)
         .dynamicTypeSize(.accessibility3)

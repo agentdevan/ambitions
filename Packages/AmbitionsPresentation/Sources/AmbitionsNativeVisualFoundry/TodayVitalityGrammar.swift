@@ -57,6 +57,41 @@ enum TodayVitalityTypographyRole: CaseIterable {
     }
 }
 
+enum TodayVitalityNodeGeometry: String, CaseIterable {
+    case openRingWithStableCenter
+    case pairedOffsetRings
+    case activeConnector
+    case resolvedDoubleRing
+    case retainedBrokenRing
+    case boundedShield
+    case anchoredDiamond
+    case openSquare
+    case dashedOpenRing
+
+    var accessibilityLabel: String {
+        switch self {
+        case .openRingWithStableCenter:
+            "Open ring with stable center"
+        case .pairedOffsetRings:
+            "Paired offset rings"
+        case .activeConnector:
+            "Active connector"
+        case .resolvedDoubleRing:
+            "Resolved double ring"
+        case .retainedBrokenRing:
+            "Retained broken ring"
+        case .boundedShield:
+            "Bounded shield"
+        case .anchoredDiamond:
+            "Anchored diamond"
+        case .openSquare:
+            "Open square"
+        case .dashedOpenRing:
+            "Dashed open ring"
+        }
+    }
+}
+
 enum TodayVitalityNodeKind: String, CaseIterable {
     case current
     case proposed
@@ -68,26 +103,77 @@ enum TodayVitalityNodeKind: String, CaseIterable {
     case external
     case open
 
-    var nonColorShapeLabel: String {
+    var geometry: TodayVitalityNodeGeometry {
         switch self {
         case .current:
-            "Open ring"
+            .openRingWithStableCenter
         case .proposed:
-            "Paired offset rings"
+            .pairedOffsetRings
         case .saving:
-            "Connected active center"
+            .activeConnector
         case .settled:
-            "Resolved double ring"
+            .resolvedDoubleRing
         case .interrupted:
-            "Broken retained ring"
+            .retainedBrokenRing
         case .protected:
-            "Bounded square"
+            .boundedShield
         case .fixed:
-            "Anchored diamond"
+            .anchoredDiamond
         case .external:
-            "Open square"
+            .openSquare
         case .open:
-            "Parallel open marks"
+            .dashedOpenRing
+        }
+    }
+
+    var nonColorShapeLabel: String {
+        geometry.accessibilityLabel
+    }
+}
+
+enum TodayVitalitySeamRole: String, CaseIterable {
+    case neutral
+    case violetProposal
+    case mossSettlement
+    case amberInterruption
+}
+
+enum TodayVitalitySeamGeometry: String, CaseIterable {
+    case stableLine
+    case pairedLine
+    case resolvedDoubleLine
+    case retainedBrokenLine
+}
+
+enum TodayVitalityTruthKind: String, CaseIterable {
+    case current
+    case proposed
+    case settled
+    case interrupted
+
+    var seamRole: TodayVitalitySeamRole {
+        switch self {
+        case .current:
+            .neutral
+        case .proposed:
+            .violetProposal
+        case .settled:
+            .mossSettlement
+        case .interrupted:
+            .amberInterruption
+        }
+    }
+
+    var seamGeometry: TodayVitalitySeamGeometry {
+        switch self {
+        case .current:
+            .stableLine
+        case .proposed:
+            .pairedLine
+        case .settled:
+            .resolvedDoubleLine
+        case .interrupted:
+            .retainedBrokenLine
         }
     }
 }
@@ -245,6 +331,19 @@ struct TodayVitalityPalette {
             fixedState
         }
     }
+
+    func seamColor(for kind: TodayVitalityTruthKind) -> Color {
+        switch kind.seamRole {
+        case .neutral:
+            labelSecondary
+        case .violetProposal:
+            ambitionsAccentMuted
+        case .mossSettlement:
+            settledState
+        case .amberInterruption:
+            interruptedState
+        }
+    }
 }
 
 struct TodayVitalityNode: View {
@@ -263,12 +362,17 @@ struct TodayVitalityNode: View {
         let color = palette.nodeColor(for: kind)
         let lineWidth = palette.nodeStrokeWidth
 
-        switch kind {
-        case .current:
+        switch kind.geometry {
+        case .openRingWithStableCenter:
             Circle()
                 .strokeBorder(color, lineWidth: lineWidth)
-                .frame(width: 15, height: 15)
-        case .proposed:
+                .frame(width: 19, height: 19)
+                .overlay {
+                    Circle()
+                        .fill(color)
+                        .frame(width: 5, height: 5)
+                }
+        case .pairedOffsetRings:
             ZStack {
                 Circle()
                     .strokeBorder(color, lineWidth: lineWidth)
@@ -279,7 +383,7 @@ struct TodayVitalityNode: View {
                     .frame(width: 13, height: 13)
                     .offset(x: 4, y: -3)
             }
-        case .saving:
+        case .activeConnector:
             ZStack {
                 Capsule()
                     .fill(color)
@@ -291,7 +395,7 @@ struct TodayVitalityNode: View {
                         Circle().stroke(color, lineWidth: lineWidth)
                     }
             }
-        case .settled:
+        case .resolvedDoubleRing:
             Circle()
                 .strokeBorder(color, lineWidth: lineWidth)
                 .frame(width: 19, height: 19)
@@ -300,7 +404,7 @@ struct TodayVitalityNode: View {
                         .strokeBorder(color, lineWidth: lineWidth)
                         .frame(width: 9, height: 9)
                 }
-        case .interrupted:
+        case .retainedBrokenRing:
             ZStack {
                 Circle()
                     .trim(from: 0.05, to: 0.42)
@@ -312,16 +416,17 @@ struct TodayVitalityNode: View {
                     .rotationEffect(.degrees(-25))
             }
             .frame(width: 19, height: 19)
-        case .protected:
-            HStack(spacing: 3) {
-                RoundedRectangle(cornerRadius: 3, style: .continuous)
-                    .strokeBorder(color, lineWidth: lineWidth)
-                    .frame(width: 17, height: 17)
-                Capsule()
-                    .fill(color)
-                    .frame(width: lineWidth + 1, height: 23)
-            }
-        case .fixed:
+        case .boundedShield:
+            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                .strokeBorder(color, lineWidth: lineWidth)
+                .frame(width: 22, height: 22)
+                .overlay {
+                    Image(systemName: "shield.fill")
+                        .imageScale(.small)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(color)
+                }
+        case .anchoredDiamond:
             RoundedRectangle(cornerRadius: 2, style: .continuous)
                 .strokeBorder(color, lineWidth: lineWidth)
                 .frame(width: 15, height: 15)
@@ -331,28 +436,70 @@ struct TodayVitalityNode: View {
                         .fill(color)
                         .frame(width: 4, height: 4)
                 }
-        case .external:
+        case .openSquare:
             RoundedRectangle(cornerRadius: 2, style: .continuous)
                 .strokeBorder(color, lineWidth: lineWidth)
                 .frame(width: 17, height: 17)
-        case .open:
-            VStack(spacing: 5) {
-                Capsule().fill(color).frame(width: 18, height: lineWidth + 1)
-                Capsule().fill(color).frame(width: 18, height: lineWidth + 1)
+        case .dashedOpenRing:
+            Circle()
+                .stroke(
+                    color,
+                    style: StrokeStyle(
+                        lineWidth: lineWidth,
+                        lineCap: .round,
+                        dash: [3, 3]
+                    )
+                )
+                .frame(width: 20, height: 20)
+        }
+    }
+}
+
+private struct TodayVitalityTruthSeam: View {
+    let kind: TodayVitalityTruthKind
+    let palette: TodayVitalityPalette
+
+    var body: some View {
+        let color = palette.seamColor(for: kind)
+        let width = palette.separatorStrokeWidth + 1
+
+        switch kind.seamGeometry {
+        case .stableLine:
+            Capsule()
+                .fill(color)
+                .frame(width: width)
+        case .pairedLine:
+            HStack(spacing: 3) {
+                Capsule().fill(color).frame(width: width)
+                Capsule().fill(color).frame(width: width)
             }
+        case .resolvedDoubleLine:
+            ZStack {
+                Capsule().fill(color).frame(width: width + 3)
+                Capsule().fill(palette.objectRelief).frame(width: width)
+            }
+        case .retainedBrokenLine:
+            VStack(spacing: 7) {
+                Capsule().fill(color)
+                Capsule().fill(color)
+            }
+            .frame(width: width)
         }
     }
 }
 
 struct TodayVitalityOpenRelief<Content: View>: View {
     let palette: TodayVitalityPalette
+    let truthKind: TodayVitalityTruthKind
     let content: Content
 
     init(
         palette: TodayVitalityPalette,
+        truthKind: TodayVitalityTruthKind,
         @ViewBuilder content: () -> Content
     ) {
         self.palette = palette
+        self.truthKind = truthKind
         self.content = content()
     }
 
@@ -365,9 +512,7 @@ struct TodayVitalityOpenRelief<Content: View>: View {
                 Rectangle().fill(palette.objectRelief)
             }
             .overlay(alignment: .leading) {
-                Capsule()
-                    .fill(palette.ambitionsAccentMuted)
-                    .frame(width: palette.separatorStrokeWidth + 1)
+                TodayVitalityTruthSeam(kind: truthKind, palette: palette)
                     .padding(.vertical, 8)
                     .accessibilityHidden(true)
             }
@@ -462,7 +607,7 @@ struct TodayVitalityFunctionalChrome<Content: View>: View {
 
     init(
         palette: TodayVitalityPalette,
-        isInteractive: Bool = true,
+        isInteractive: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.palette = palette

@@ -1,3 +1,4 @@
+import SwiftUI
 import XCTest
 @testable import AmbitionsNativeVisualFoundry
 
@@ -14,6 +15,51 @@ final class TodayVitalityGrammarTests: XCTestCase {
         XCTAssertFalse(shapeLabels.contains(where: \.isEmpty))
     }
 
+    func testNodeKindsMapToTheExactR13NonColorGeometry() {
+        XCTAssertEqual(
+            TodayVitalityNodeKind.allCases.map(\.geometry),
+            [
+                .openRingWithStableCenter,
+                .pairedOffsetRings,
+                .activeConnector,
+                .resolvedDoubleRing,
+                .retainedBrokenRing,
+                .boundedShield,
+                .anchoredDiamond,
+                .openSquare,
+                .dashedOpenRing
+            ]
+        )
+        XCTAssertEqual(
+            TodayVitalityNodeKind.allCases.map(\.nonColorShapeLabel),
+            [
+                "Open ring with stable center",
+                "Paired offset rings",
+                "Active connector",
+                "Resolved double ring",
+                "Retained broken ring",
+                "Bounded shield",
+                "Anchored diamond",
+                "Open square",
+                "Dashed open ring"
+            ]
+        )
+    }
+
+    func testOpenReliefMapsTruthToSemanticColorAndNonColorSeamGeometry() {
+        XCTAssertEqual(
+            TodayVitalityTruthKind.allCases.map(\.seamRole),
+            [.neutral, .violetProposal, .mossSettlement, .amberInterruption]
+        )
+        let geometries = TodayVitalityTruthKind.allCases.map(\.seamGeometry)
+        XCTAssertEqual(
+            geometries,
+            [.stableLine, .pairedLine, .resolvedDoubleLine, .retainedBrokenLine]
+        )
+        XCTAssertEqual(Set(geometries).count, TodayVitalityTruthKind.allCases.count)
+    }
+
+    @MainActor
     func testKeepsContentOpaqueAndGlassInFunctionalChrome() {
         XCTAssertTrue(TodayVitalitySurfaceClass.openPlane.isOpaque)
         XCTAssertFalse(TodayVitalitySurfaceClass.openPlane.allowsLiquidGlass)
@@ -35,6 +81,18 @@ final class TodayVitalityGrammarTests: XCTestCase {
         )
         XCTAssertEqual(transparent.chromeTreatment, .nativeGlass)
         XCTAssertEqual(opaque.chromeTreatment, .opaque)
+
+        let staticChrome = TodayVitalityFunctionalChrome(palette: transparent) {
+            Text("Static chrome")
+        }
+        let interactiveChrome = TodayVitalityFunctionalChrome(
+            palette: transparent,
+            isInteractive: true
+        ) {
+            Button("Interactive chrome") {}
+        }
+        XCTAssertFalse(staticChrome.isInteractive)
+        XCTAssertTrue(interactiveChrome.isInteractive)
     }
 
     func testSeparatesActionRolesAndAuthorsContrast() {
@@ -98,13 +156,24 @@ final class TodayVitalityGrammarTests: XCTestCase {
             grammarSource.range(of: "struct TodayVitalityFunctionalChrome")?.lowerBound
         )
         XCTAssertGreaterThan(glassOffset, chromeOffset)
+        XCTAssertTrue(grammarSource.contains("isInteractive: Bool = false"))
+        XCTAssertTrue(previewSource.contains("isInteractive: true"))
+        let interactiveOffset = try XCTUnwrap(
+            previewSource.range(of: "isInteractive: true")?.lowerBound
+        )
+        let buttonOffset = try XCTUnwrap(previewSource.range(of: "Button {")?.lowerBound)
+        let labelOffset = try XCTUnwrap(
+            previewSource.range(of: "Label(\"Functional chrome\"")?.lowerBound
+        )
+        XCTAssertLessThan(interactiveOffset, buttonOffset)
+        XCTAssertLessThan(buttonOffset, labelOffset)
 
         for preview in [
             "R13 Grammar — Light",
             "R13 Grammar — Dark",
             "R13 Grammar — Increased Contrast",
             "R13 Grammar — Differentiate Without Color",
-            "R13 Grammar — Dynamic Type"
+            "R13 Grammar — Accessibility Dynamic Type"
         ] {
             XCTAssertTrue(previewSource.contains(preview), "Missing preview: \(preview)")
         }
