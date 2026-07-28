@@ -59,18 +59,13 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
         XCTAssertEqual(overflowingField.tokens.count, 64)
     }
 
-    func testMetadataExtractorNeverTreatsLastCommandPayloadAsMergedSearchState() throws {
+    func testMetadataExtractorPublishesOnlyAggregateKind() throws {
         let entry = try makeEntry()
-        let all = try RuntimeCanonicalSearchMetadataExtractor.extract(
-            entry: entry, allowedFields: [.aggregateID, .aggregateKind]
-        )
-        XCTAssertEqual(all.title, "goal")
-        XCTAssertEqual(all.body, "goal-1")
-        let kindOnly = try RuntimeCanonicalSearchMetadataExtractor.extract(
+        let metadata = try RuntimeCanonicalSearchMetadataExtractor.extract(
             entry: entry, allowedFields: [.aggregateKind]
         )
-        XCTAssertEqual(kindOnly.title, "goal")
-        XCTAssertEqual(kindOnly.body, "")
+        XCTAssertEqual(metadata.title, "goal")
+        XCTAssertEqual(metadata.body, "")
     }
 
     func testDocumentDigestBindsGenerationAggregatePrivacyAndSource() throws {
@@ -78,12 +73,12 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
         let generationID = String(repeating: "a", count: 64)
         let digest = RuntimeCanonicalSearchDocument.authorityDigest(
             generationID: generationID, aggregate: entry.aggregate,
-            privacy: entry.privacy, localOnly: true, title: "goal", body: "goal-1",
+            privacy: entry.privacy, localOnly: true, title: "goal", body: "",
             sourceCursor: entry.sourceCursor
         )
         let changed = RuntimeCanonicalSearchDocument.authorityDigest(
             generationID: generationID, aggregate: entry.aggregate,
-            privacy: .sensitive, localOnly: true, title: "goal", body: "goal-1",
+            privacy: .sensitive, localOnly: true, title: "goal", body: "",
             sourceCursor: entry.sourceCursor
         )
         XCTAssertNotEqual(digest, changed)
@@ -97,14 +92,14 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
         let certificate = CanonicalRuntimeStore.canonicalSearchGenerationCertificateDigest(
             generationID: String(repeating: "a", count: 64),
             projectionGenerationID: String(repeating: "b", count: 64),
-            coverage: .aggregateMetadataOnly,
+            coverage: .aggregateKindOnly,
             definitionDigest: definition.authorityDigest, sourceCursor: cursor,
             documentCount: 0, postingCount: 0, postingBytes: 0, shardCount: 0,
             rootDigest: RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
         )
         XCTAssertEqual(certificate.count, 64)
-        XCTAssertEqual(RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue,
-                       "aggregate_metadata_only")
+        XCTAssertEqual(RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue,
+                       "aggregate_kind_only")
     }
 
     func testActionTokenCarriesCoverageAndGenerationAuthority() throws {
@@ -118,18 +113,19 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
         let generationID = String(repeating: "a", count: 64)
         let digest = RuntimeCanonicalSearchDocument.authorityDigest(
             generationID: generationID, aggregate: entry.aggregate,
-            privacy: entry.privacy, localOnly: true, title: "goal", body: "goal-1",
+            privacy: entry.privacy, localOnly: true, title: "goal", body: "",
             sourceCursor: entry.sourceCursor
         )
         let document = RuntimeCanonicalSearchDocument(
             generationID: generationID, aggregate: entry.aggregate,
-            privacy: entry.privacy, localOnly: true, title: "goal", body: "goal-1",
+            privacy: entry.privacy, localOnly: true, title: "goal", body: "",
             sourceCursor: entry.sourceCursor, digest: digest
         )
         let result = RuntimeCanonicalSearchResult(document: document)
         let authority = RuntimeCanonicalGenerationAuthority(
             projectionID: .search, generationID: String(repeating: "b", count: 64),
-            definitionDigest: definition.authorityDigest, outputVersion: 1,
+            definitionDigest: definition.authorityDigest,
+            outputVersion: definition.outputVersion,
             sourceCursor: entry.sourceCursor,
             sourceChainDigest: String(repeating: "c", count: 64), entryCount: 1,
             entryRootDigest: String(repeating: "d", count: 64),
@@ -138,19 +134,20 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             fingerprint: String(repeating: "f", count: 64)
         )
         let truth = RuntimeCanonicalProjectionTruth(
-            state: .available, authority: authority, expectedDefinitionVersion: 1,
+            state: .available, authority: authority,
+            expectedDefinitionVersion: definition.definitionVersion,
             sourceCursor: authority.sourceCursor, digest: authority.certificateDigest,
             repairEligible: false, reasonCode: nil
         )
         let page = RuntimeCanonicalSearchPage(
-            generationID: generationID, coverage: .aggregateMetadataOnly,
+            generationID: generationID, coverage: .aggregateKindOnly,
             projectionCursor: entry.sourceCursor,
             projectionDigest: authority.certificateDigest, results: [result],
             nextCursor: nil, truth: truth,
             authorityFingerprint: String(repeating: "1", count: 64)
         )
         let token = try page.actionToken(for: result, query: query, definition: definition)
-        XCTAssertEqual(token.coverage, .aggregateMetadataOnly)
+        XCTAssertEqual(token.coverage, .aggregateKindOnly)
         XCTAssertEqual(token.aggregate, entry.aggregate)
         XCTAssertEqual(token.accessPolicyDigest, query.accessPolicyDigest)
     }
@@ -161,7 +158,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
         XCTAssertFalse(sql.contains("runtime_canonical_search_token_stats"))
         XCTAssertTrue(sql.contains("runtime_canonical_search_postings_immutable_update"))
         XCTAssertTrue(sql.contains("runtime_canonical_search_documents_immutable_update"))
-        XCTAssertTrue(sql.contains("aggregate_metadata_only"))
+        XCTAssertTrue(sql.contains("aggregate_kind_only"))
         XCTAssertFalse(sql.contains("bm25"))
         XCTAssertFalse(sql.contains("CREATE VIRTUAL TABLE"))
     }
@@ -188,7 +185,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_projection_generations VALUES (
-                    ?, 'runtime.search', 1, ?, 1, 1, 'event-1', ?, ?,
+                    ?, 'runtime.search', 2, ?, 2, 1, 'event-1', ?, ?,
                     'invalidation.1.runtime.search', 'invalidation.1.runtime.search', ?,
                     0, 0, ?, '', 1, 'building', NULL, 1, NULL
                 )
@@ -201,7 +198,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 1
                 )
                 """,
@@ -218,23 +215,23 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             )
             let digest = RuntimeCanonicalSearchDocument.authorityDigest(
                 generationID: searchID, aggregate: aggregate, privacy: .standard,
-                localOnly: true, title: "goal", body: "goal-1", sourceCursor: cursor
+                localOnly: true, title: "goal", body: "", sourceCursor: cursor
             )
             let document = RuntimeCanonicalSearchDocument(
                 generationID: searchID, aggregate: aggregate, privacy: .standard,
-                localOnly: true, title: "goal", body: "goal-1",
+                localOnly: true, title: "goal", body: "",
                 sourceCursor: cursor, digest: digest
             )
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_documents VALUES (
-                    ?, 'goal', 'goal-1', 'standard', 1, 'goal', 'goal-1',
+                    ?, 'goal', 'goal-1', 'standard', 1, 'goal', '',
                     1, 'event-1', ?, ?
                 )
                 """,
                 bindings: [.text(searchID), .text(hash), .text(digest)]
             )
-            for (field, text) in ["goal", "goal-1"].enumerated() {
+            for (field, text) in ["goal"].enumerated() {
                 for (ordinal, token) in CanonicalRuntimeStore
                     .canonicalSearchTokens(text).enumerated() {
                     let posting = RuntimeTransactionDigest.digest([
@@ -293,7 +290,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_projection_generations VALUES (
-                    ?, 'runtime.search', 1, ?, 1, 1, 'event-1', ?, ?,
+                    ?, 'runtime.search', 2, ?, 2, 1, 'event-1', ?, ?,
                     'invalidation.1.runtime.search', 'invalidation.1.runtime.search', ?,
                     0, 0, ?, '', 1, 'building', NULL, 1, NULL
                 )
@@ -306,7 +303,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 1
                 )
                 """,
@@ -320,12 +317,12 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             )
             let documentDigest = RuntimeCanonicalSearchDocument.authorityDigest(
                 generationID: searchID, aggregate: aggregate, privacy: .standard,
-                localOnly: true, title: "goal", body: "goal-1", sourceCursor: cursor
+                localOnly: true, title: "goal", body: "", sourceCursor: cursor
             )
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_documents VALUES (
-                    ?, 'goal', 'goal-1', 'standard', 1, 'goal', 'goal-1',
+                    ?, 'goal', 'goal-1', 'standard', 1, 'goal', '',
                     1, 'event-1', ?, ?
                 )
                 """,
@@ -333,7 +330,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             )
             var postingCount = 0
             var postingBytes = 0
-            for (field, text) in ["goal", "goal-1"].enumerated() {
+            for (field, text) in ["goal"].enumerated() {
                 for (ordinal, token) in CanonicalRuntimeStore
                     .canonicalSearchTokens(text).enumerated() {
                     let digest = RuntimeTransactionDigest.digest([
@@ -373,18 +370,10 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                 "UPDATE runtime_canonical_projection_generations SET status = 'sealed', generation_certificate_digest = ?, sealed_at_ms = 1 WHERE generation_id = ?",
                 bindings: [.text(projectionCertificate), .text(projectionID)]
             )
-            try isolated.execute(
-                "UPDATE runtime_canonical_projection_generations SET status = 'published' WHERE generation_id = ?",
-                bindings: [.text(projectionID)]
-            )
-            try isolated.execute(
-                "INSERT INTO runtime_canonical_projection_active_generations VALUES ('runtime.search', ?, ?, 1)",
-                bindings: [.text(projectionID), .text(projectionCertificate)]
-            )
             let searchCertificate = CanonicalRuntimeStore
                 .canonicalSearchGenerationCertificateDigest(
                     generationID: searchID, projectionGenerationID: projectionID,
-                    coverage: .aggregateMetadataOnly,
+                    coverage: .aggregateKindOnly,
                     definitionDigest: definition.authorityDigest,
                     sourceCursor: cursor, documentCount: 1,
                     postingCount: postingCount, postingBytes: postingBytes,
@@ -401,14 +390,6 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                     .integer(Int64(postingCount)), .integer(Int64(postingBytes)),
                     .text(searchRoot), .text(searchCertificate), .text(searchID),
                 ]
-            )
-            try isolated.execute(
-                "UPDATE runtime_canonical_search_generations SET status = 'published' WHERE generation_id = ?",
-                bindings: [.text(searchID)]
-            )
-            try isolated.execute(
-                "INSERT INTO runtime_canonical_search_active_generation VALUES (1, ?, ?, 1)",
-                bindings: [.text(searchID), .text(searchCertificate)]
             )
             try CanonicalRuntimeStore.scheduleCanonicalGenerationScrub(
                 generationID: searchID, kind: "search", certificate: searchCertificate,
@@ -453,7 +434,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                 try isolated.execute(
                     """
                     INSERT INTO runtime_canonical_projection_generations VALUES (
-                        ?, 'runtime.search', 1, ?, 1, 1, 'event-1', ?, ?,
+                        ?, 'runtime.search', 2, ?, 2, 1, 'event-1', ?, ?,
                         ?, ?, ?, 0, 0, ?, '', 1, 'published', ?, 20, 20
                     )
                     """,
@@ -471,7 +452,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                 try isolated.execute(
                     """
                     INSERT INTO runtime_canonical_search_generations VALUES (
-                        ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                        ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                         'building', NULL, 20
                     )
                     """,
@@ -483,12 +464,12 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                 let malformedDocumentDigest = RuntimeCanonicalSearchDocument.authorityDigest(
                     generationID: malformedSearchID, aggregate: aggregate,
                     privacy: .standard, localOnly: true,
-                    title: "goal", body: "goal-1", sourceCursor: cursor
+                    title: "goal", body: "", sourceCursor: cursor
                 )
                 try isolated.execute(
                     """
                     INSERT INTO runtime_canonical_search_documents VALUES (
-                        ?, 'goal', 'goal-1', 'standard', 1, 'goal', 'goal-1',
+                        ?, 'goal', 'goal-1', 'standard', 1, 'goal', '',
                         1, 'event-1', ?, ?
                     )
                     """,
@@ -499,7 +480,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                 )
                 var actualCount = 0
                 var actualBytes = 0
-                for (field, text) in ["goal", "goal-1"].enumerated() {
+                for (field, text) in ["goal"].enumerated() {
                     for (ordinal, token) in CanonicalRuntimeStore
                         .canonicalSearchTokens(text).enumerated() {
                         let digest = RuntimeTransactionDigest.digest([
@@ -536,7 +517,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                     .canonicalSearchGenerationCertificateDigest(
                         generationID: malformedSearchID,
                         projectionGenerationID: malformedProjectionID,
-                        coverage: .aggregateMetadataOnly,
+                        coverage: .aggregateKindOnly,
                         definitionDigest: definition.authorityDigest,
                         sourceCursor: cursor, documentCount: 1,
                         postingCount: declaredCount, postingBytes: declaredBytes,
@@ -554,18 +535,6 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
                         .text(malformedRoot), .text(malformedCertificate),
                         .text(malformedSearchID),
                     ]
-                )
-                try isolated.execute(
-                    "UPDATE runtime_canonical_search_generations SET status = 'published' WHERE generation_id = ?",
-                    bindings: [.text(malformedSearchID)]
-                )
-                try isolated.execute(
-                    """
-                    UPDATE runtime_canonical_search_active_generation
-                    SET generation_id = ?, generation_certificate_digest = ?, activated_at_ms = 20
-                    WHERE singleton_id = 1
-                    """,
-                    bindings: [.text(malformedSearchID), .text(malformedCertificate)]
                 )
                 try CanonicalRuntimeStore.scheduleCanonicalGenerationScrub(
                     generationID: malformedSearchID, kind: "search",
@@ -616,7 +585,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_projection_generations VALUES (
-                    ?, 'runtime.search', 1, ?, 1, 1, 'event-1', ?, ?,
+                    ?, 'runtime.search', 2, ?, 2, 1, 'event-1', ?, ?,
                     'invalidation.1.runtime.search', 'invalidation.1.runtime.search', ?,
                     0, 0, ?, '', 1, 'building', NULL, 1, NULL
                 )
@@ -629,7 +598,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 1
                 )
                 """,
@@ -673,7 +642,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             )
             let authority = RuntimeCanonicalSearchAuthority(
                 projection: projection, generationID: searchID,
-                coverage: .aggregateMetadataOnly,
+                coverage: .aggregateKindOnly,
                 certificateDigest: String(repeating: "3", count: 64),
                 fingerprint: String(repeating: "4", count: 64)
             )
@@ -692,7 +661,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_projection_generations VALUES (
-                    ?, 'runtime.search', 1, ?, 1, 1, 'event-1', ?, ?,
+                    ?, 'runtime.search', 2, ?, 2, 1, 'event-1', ?, ?,
                     'invalidation.posting-saturation', 'invalidation.posting-saturation', ?,
                     0, 0, ?, '', 1, 'building', NULL, 1, NULL
                 )
@@ -707,7 +676,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 1
                 )
                 """,
@@ -758,7 +727,7 @@ final class RuntimeCanonicalSearchTests: XCTestCase {
             }
             let saturatedAuthority = RuntimeCanonicalSearchAuthority(
                 projection: projection, generationID: postingSaturationID,
-                coverage: .aggregateMetadataOnly,
+                coverage: .aggregateKindOnly,
                 certificateDigest: String(repeating: "8", count: 64),
                 fingerprint: String(repeating: "7", count: 64)
             )

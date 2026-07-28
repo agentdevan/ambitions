@@ -290,7 +290,7 @@ struct CaptureComposerSurface: View {
 
     private func routeToTime(_ capture: Capture) {
         Task {
-            await viewModel.routeToTime(id: capture.id, captureService: featureFactory.captureService, goalsService: featureFactory.goalsService)
+            await viewModel.routeToTime(id: capture.id)
         }
     }
 
@@ -310,6 +310,7 @@ struct CaptureComposerSurface: View {
                 captureID: capture.id,
                 goalID: option.id,
                 goalTitle: option.title,
+                captureGoalHandoffCommands: featureFactory.captureGoalHandoffCommands,
                 captureService: featureFactory.captureService,
                 goalsService: featureFactory.goalsService
             ) {
@@ -327,7 +328,7 @@ struct CaptureComposerSurface: View {
 
     private func markWaiting(_ capture: Capture) {
         Task {
-            await viewModel.markWaiting(id: capture.id, captureService: featureFactory.captureService, goalsService: featureFactory.goalsService)
+            await viewModel.markWaiting(id: capture.id)
         }
     }
 
@@ -339,7 +340,7 @@ struct CaptureComposerSurface: View {
 
     private func archive(_ capture: Capture) {
         Task {
-            await viewModel.archive(id: capture.id, captureService: featureFactory.captureService, goalsService: featureFactory.goalsService)
+            await viewModel.archive(id: capture.id)
         }
     }
 

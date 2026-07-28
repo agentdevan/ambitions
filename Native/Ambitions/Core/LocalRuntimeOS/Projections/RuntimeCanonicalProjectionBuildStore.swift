@@ -50,13 +50,13 @@ private enum RuntimeCanonicalProjectionBuildCodec {
     }
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     func publishCanonicalEmptyAuthoritiesIfNeeded(
         registry: RuntimeCanonicalProjectionDefinitionRegistry,
         nowMilliseconds: Int64
     ) async throws -> Bool {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try CanonicalRuntimeProjectionSchemaPlan.requireIntegratedSchema(in: database)
             let source = try database.query("SELECT 1 FROM runtime_semantic_events LIMIT 1")
             let invalidations = try database.query(
@@ -165,13 +165,13 @@ extension CanonicalRuntimeStore {
                 if definition.id == .search {
                     let searchGenerationID = RuntimeTransactionDigest.digest([
                         "runtime.search.generation.v1", generationID,
-                        RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue,
+                        RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue,
                         definition.authorityDigest, "0", cursor.eventHash,
                     ])
                     let searchCertificate = Self.canonicalSearchGenerationCertificateDigest(
                         generationID: searchGenerationID,
                         projectionGenerationID: generationID,
-                        coverage: .aggregateMetadataOnly,
+                        coverage: .aggregateKindOnly,
                         definitionDigest: definition.authorityDigest,
                         sourceCursor: cursor, documentCount: 0,
                         postingCount: 0, postingBytes: 0, shardCount: 0,
@@ -185,7 +185,7 @@ extension CanonicalRuntimeStore {
                             document_count, posting_count, posting_bytes,
                             shard_count, document_root_digest, status,
                             generation_certificate_digest, created_at_ms
-                        ) VALUES (?, ?, 'aggregate_metadata_only', ?, 0, ?, 0, 0, 0, 0, ?,
+                        ) VALUES (?, ?, 'aggregate_kind_only', ?, 0, ?, 0, 0, 0, 0, ?,
                                   'published', ?, ?)
                         """,
                         bindings: [
@@ -243,7 +243,7 @@ extension CanonicalRuntimeStore {
         invalidationLimit: Int
     ) async throws -> RuntimeCanonicalProjectionBuildWork? {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try CanonicalRuntimeProjectionSchemaPlan.requireIntegratedSchema(in: database)
             if try Self.retireOneObsoleteBlockedCanonicalProjectionBuild(
                 registry: registry, ownerID: ownerID,
@@ -827,10 +827,6 @@ extension CanonicalRuntimeStore {
             bindings: [.text(projectionID.rawValue), .integer(Int64(max(1, min(limit, 64))))],
             maximumDecodedBytes: max(1, min(limit, 64)) * 16_384
         )
-        var receiptBudget = RuntimeReceiptDecodedByteBudget(
-            maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
-        )
-        var authenticatedGraphs: [RuntimeReceiptID: RuntimeAuthenticatedReceiptGraph] = [:]
         return try rows.map { row in
             guard case let .text(id)? = row.value(named: "invalidation_id"),
                   row.value(named: "invalidation_version") == .integer(1),
@@ -867,32 +863,71 @@ extension CanonicalRuntimeStore {
             let lineage = try RuntimeCanonicalProjectionBuildCodec.decodeCanonical(
                 RuntimeAuthorityLineageReference.self, bytes: payload
             )
-            let graph: RuntimeAuthenticatedReceiptGraph
-            if let authenticated = authenticatedGraphs[receiptID] {
-                graph = authenticated
-            } else {
-                do {
-                    let core = try RuntimeCommittedReceiptAuthority.loadCore(
-                        receiptID: receiptID,
+            var receiptBudget = RuntimeReceiptDecodedByteBudget(
+                maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
+            )
+            let core: RuntimeCommittedReceiptCore
+            let eventEvidence: RuntimeVerifiedExactSemanticEventEvidence
+            do {
+                core = try RuntimeCommittedReceiptAuthority.loadCore(
+                    receiptID: receiptID,
+                    budget: &receiptBudget,
+                    database: database
+                )
+                eventEvidence = try CanonicalRuntimeSemanticEventStore
+                    .readVerifiedExactInTransaction(
+                        sequence: UInt64(sequence),
                         budget: &receiptBudget,
                         database: database
                     )
-                    graph = try RuntimeCommittedReceiptAuthority.authenticatePersistedCore(
-                        core,
-                        requireFinalization: true,
-                        coreRowAuthenticated: true,
-                        budget: &receiptBudget,
-                        database: database
-                    )
-                    authenticatedGraphs[receiptID] = graph
-                } catch is CancellationError {
-                    throw CancellationError()
-                } catch {
-                    throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
+                let finalized = try receiptBudget.query(
+                    """
+                    SELECT final_result_version, final_result_payload,
+                           final_result_checksum, finalized_at_ms
+                    FROM runtime_command_idempotency WHERE command_id = ? LIMIT 2
+                    """,
+                    bindings: [.text(commandID)],
+                    database: database
+                )
+                guard finalized.count == 1,
+                      finalized[0].value(named: "final_result_version") == .integer(
+                          Int64(canonicalIdempotencyFinalResultVersion)
+                      ),
+                      case let .blob(finalBytes)? = finalized[0]
+                        .value(named: "final_result_payload"),
+                      finalBytes.count <= RuntimeCommittedReceiptReadBounds
+                        .maximumFinalizedResultPayloadBytes,
+                      case let .text(storedFinalChecksum)? = finalized[0]
+                        .value(named: "final_result_checksum"),
+                      storedFinalChecksum == finalChecksum,
+                      case let .integer(finalizedAt)? = finalized[0]
+                        .value(named: "finalized_at_ms"),
+                      finalizedAt >= 0 else {
+                    throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
                 }
+                try RuntimeAtomicCommitCoding.requireFinalizedOutcome(
+                    finalBytes,
+                    storedChecksum: storedFinalChecksum,
+                    references: core
+                )
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch RuntimeCommittedReceiptQueryError.firstRowExceedsBound {
+                throw RuntimeCanonicalProjectionPersistenceError.unitBudgetExceeded
+            } catch is SQLiteQueryBudgetExceeded {
+                throw RuntimeCanonicalProjectionPersistenceError.unitBudgetExceeded
+            } catch RuntimeCommittedReceiptAuthorityError.sourceBlocked(_) {
+                throw RuntimeCanonicalProjectionSourceError.unsupportedSource
+            } catch {
+                throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
             }
             let cursor = RuntimeCanonicalReplayCursor(
                 sequence: UInt64(sequence), eventID: eventID, eventHash: eventHash
+            )
+            let expectedArtifact = RuntimeCommittedReceiptArtifactLink(
+                kind: .projectionInvalidation,
+                stableID: id,
+                digest: payloadChecksum
             )
             guard id == "invalidation.\(sequence).\(projectionID.rawValue)", cursor.isWellFormed,
                   lineage.eventID.rawValue == eventID, lineage.eventSequence == UInt64(sequence),
@@ -901,12 +936,15 @@ extension CanonicalRuntimeStore {
                   preparationID.isEmpty == false,
                   commandID.isEmpty == false,
                   createdAt >= 0,
-                  graph.core.facts.receiptID == receiptID,
-                  graph.core.facts.preparationID.rawValue == preparationID,
-                  graph.core.facts.commandID.rawValue == commandID,
-                  graph.core.facts.lineage == lineage,
-                  graph.finalizedIdempotency != nil,
-                  graph.projectionInvalidationIDs.filter({ $0 == id }).count == 1 else {
+                  core.facts.receiptID == receiptID,
+                  core.facts.preparationID.rawValue == preparationID,
+                  core.facts.commandID.rawValue == commandID,
+                  core.facts.lineage == lineage,
+                  core.facts.artifacts.filter({ $0 == expectedArtifact }).count == 1,
+                  eventEvidence.terminal.lineage.eventID.rawValue == eventID,
+                  eventEvidence.terminal.lineage.eventHash.hexadecimal == eventHash,
+                  eventEvidence.terminal.lineage.commandID.rawValue == commandID,
+                  eventEvidence.terminal.event.typeID == eventType else {
                 throw RuntimeCanonicalProjectionPersistenceError.corruptInvalidation
             }
             return RuntimeCanonicalProjectionInvalidation(

@@ -191,6 +191,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             }
         case let .goal(goal):
             switch goal.action {
+            case .create: result = executeGoalCreation(command)
             case .setDeadline: result = await executeDeadlineChange(command, context: context)
             case .setPriority, .setUrgency: result = await executePriorityChange(command, context: context)
             default: result = unsupportedTypedResult(command, validation: validation)
@@ -221,7 +222,11 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             case .todayReceipt: result = executeTodayReceipt(command)
             case .askWhy, .dismissRecommendation: result = unsupportedTypedResult(command, validation: validation)
             }
-        case .reminder, .profile, .repair, .importDeletion, .externalOperation, .compensation:
+        case let .profile(profile):
+            result = executeProfileCommand(command, profile: profile)
+        case let .importDeletion(deletion):
+            result = executeImportDeletionCommand(command, deletion: deletion)
+        case .reminder, .repair, .externalOperation, .compensation:
             result = unsupportedTypedResult(command, validation: validation)
         }
 
@@ -282,6 +287,28 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
         return await executeQuickCapture(command, context: context)
+    }
+
+    private func executeGoalCreation(
+        _ command: AmbitionsCommand
+    ) -> AmbitionsCommandExecutionResult {
+        guard let goalID = command.target.goalID,
+              let title = command.content.primaryText?.trimmingCharacters(in: .whitespacesAndNewlines),
+              title.isEmpty == false else {
+            return blockedResult(for: .needsMissingTarget, command: command)
+        }
+        return AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Goal creation accepted for authority commit.",
+            route: .goals,
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "goalID": goalID,
+                "goalMaterialization": "pending_authority_commit",
+                "goalLocalOnly": "true",
+            ]
+        )
     }
 
     private func unsupportedTypedResult(

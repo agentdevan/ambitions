@@ -1690,28 +1690,34 @@ private struct RuntimeAtomicCommitPlan {
         case let .typedPlan(intent):
             rollbackID = intent.planID
         case .noncompensable:
-            guard let placeholder = RuntimeRollbackPlanID(
+            // Noncompensable commands still need a deterministic replay context;
+            // this sentinel is never persisted as an executable rollback plan.
+            guard let sentinelID = RuntimeRollbackPlanID(
                 rawValue: "noncompensable.\(preparation.preparationID.rawValue)"
             ) else { throw RuntimeAtomicCommitError.malformedPreparation }
-            rollbackID = placeholder
+            rollbackID = sentinelID
         }
         let token: RuntimeConfirmationToken
         if let bound = preparation.confirmationRequest?.token {
             token = bound
         } else {
-            guard let placeholder = RuntimeConfirmationToken(
+            // The sentinel binds replay to the preparation when confirmation was
+            // structurally not required; it cannot satisfy a confirmation request.
+            guard let sentinelToken = RuntimeConfirmationToken(
                 rawValue: "confirmation.none.\(preparation.preparationID.rawValue)"
             ) else { throw RuntimeAtomicCommitError.malformedPreparation }
-            token = placeholder
+            token = sentinelToken
         }
         let operationID: RuntimeExternalOperationID
         switch externalEffect {
         case let .outbox(boundOperationID, _): operationID = boundOperationID
         case .none:
-            guard let placeholder = RuntimeExternalOperationID(
+            // This deterministic sentinel represents the absence of an external
+            // operation and is not an outbox record or success acknowledgement.
+            guard let sentinelID = RuntimeExternalOperationID(
                 rawValue: "external.none.\(preparation.preparationID.rawValue)"
             ) else { throw RuntimeAtomicCommitError.malformedPreparation }
-            operationID = placeholder
+            operationID = sentinelID
         }
         let context = RuntimePreparationContext(
             preparationID: preparation.preparationID,

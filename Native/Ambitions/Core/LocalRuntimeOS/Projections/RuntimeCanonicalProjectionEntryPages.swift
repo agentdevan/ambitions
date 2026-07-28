@@ -1,13 +1,13 @@
 import AmbitionsRuntimeSQLite
 import Foundation
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     func cloneCanonicalProjectionEntryPage(
         _ work: RuntimeCanonicalProjectionBuildWork,
         bounds: RuntimeCanonicalProjectionUnitBounds
     ) async throws -> RuntimeCanonicalProjectionUnitResult {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(work, phase: .clone, database: database)
             let base = try Self.requireCanonicalCloneBase(work, database: database)
             let baseID = base.generationID
@@ -183,7 +183,7 @@ extension CanonicalRuntimeStore {
         bounds: RuntimeCanonicalProjectionUnitBounds
     ) async throws -> RuntimeCanonicalProjectionUnitResult {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(work, phase: .replay, database: database)
             let remaining = work.targetCursor.sequence - (work.progressCursor?.sequence ?? 0)
             guard remaining > 0 else {
@@ -207,7 +207,8 @@ extension CanonicalRuntimeStore {
                 sizeRows: sizeRows, bounds: bounds, perRowOverhead: 4_096
             )
             let page = try CanonicalRuntimeSemanticEventStore.readVerifiedInTransaction(
-                from: database, after: work.progressCursor, initialAnchor: nil, limit: limit
+                from: database, after: work.progressCursor, initialAnchor: nil,
+                limit: limit, mode: .observeOnly
             )
             guard page.items.isEmpty == false else {
                 throw RuntimeCanonicalProjectionPersistenceError.sourceAdvanced
@@ -360,7 +361,7 @@ extension CanonicalRuntimeStore {
         bounds: RuntimeCanonicalProjectionUnitBounds
     ) async throws -> RuntimeCanonicalProjectionUnitResult {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(work, phase: .sealProjection, database: database)
             let limit = try Self.canonicalBoundedProjectionEntryCount(
                 generationID: work.generationID, afterKind: work.afterAggregateKind,
@@ -421,7 +422,14 @@ extension CanonicalRuntimeStore {
                 guard generation.changedRowCount == 1 else {
                     throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
                 }
-                let next: RuntimeCanonicalProjectionBuildPhase = work.projectionID == .search ? .indexSearch : .ready
+                try Self.scheduleCanonicalGenerationScrub(
+                    generationID: work.generationID,
+                    kind: "projection",
+                    certificate: certificate,
+                    nowMilliseconds: work.operationNowMilliseconds,
+                    database: database
+                )
+                let next: RuntimeCanonicalProjectionBuildPhase = .scrubProjection
                 try Self.updateCanonicalProjectionJobPhase(
                     work, nextPhase: next, resetKeyset: true, database: database
                 )
@@ -490,7 +498,7 @@ extension CanonicalRuntimeStore {
     }
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     static func canonicalBoundedProjectionEntryCount(
         generationID: String,
         afterKind: String,

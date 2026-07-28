@@ -52,6 +52,7 @@ extension AmbitionsCommandExecutor {
             isUserConfirmed: true
         )
 
+        // AMBitionsAllowWeakPattern(reason: "Preparation-only calendar handling truthfully performs no authority mutation.")
         return AmbitionsCommandExecutionResult(
             status: .noOp,
             summary: "Calendar mutation was prepared; an accepted runtime authority transaction is still required.",

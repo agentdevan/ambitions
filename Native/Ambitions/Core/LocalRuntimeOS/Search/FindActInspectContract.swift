@@ -3,6 +3,12 @@ import Foundation
 let findActInspectContractSchemaVersion = "search_find_act_inspect.native.v1"
 
 struct SearchQuery: Codable, Sendable, Equatable, Hashable {
+    /// A Find delivery is deliberately bounded before it reaches the FTS
+    /// candidate expansion path. The index may retrieve a small multiple of
+    /// this value for ranking, but it must never derive SQLite work from an
+    /// arbitrary decoded integer.
+    static let maximumDeliveryCount = 50
+
     let rawText: String
     let origin: AmbitionsSurface?
     let allowedPrivacy: Set<EventLedgerPrivacyClassification>
@@ -22,8 +28,29 @@ struct SearchQuery: Codable, Sendable, Equatable, Hashable {
         self.origin = origin
         self.allowedPrivacy = allowedPrivacy
         self.allowedFamilies = allowedFamilies
-        self.limit = max(0, limit)
+        self.limit = min(max(0, limit), Self.maximumDeliveryCount)
         self.requiresLocalOnly = requiresLocalOnly
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case rawText
+        case origin
+        case allowedPrivacy
+        case allowedFamilies
+        case limit
+        case requiresLocalOnly
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            rawText: try container.decode(String.self, forKey: .rawText),
+            origin: try container.decodeIfPresent(AmbitionsSurface.self, forKey: .origin),
+            allowedPrivacy: try container.decode(Set<EventLedgerPrivacyClassification>.self, forKey: .allowedPrivacy),
+            allowedFamilies: try container.decodeIfPresent(Set<LocalSearchObjectFamily>.self, forKey: .allowedFamilies),
+            limit: try container.decode(Int.self, forKey: .limit),
+            requiresLocalOnly: try container.decode(Bool.self, forKey: .requiresLocalOnly)
+        )
     }
 
     var normalizedText: String {

@@ -314,6 +314,7 @@ extension SafeAutomationActionKind {
             }
         case let .step(value):
             switch value.action {
+            // AMBitionsAllowWeakPattern(reason: "Session start is a policy-only observation and cannot mutate canonical state.")
             case .startSession: self = .noOp
             case .complete: self = .markDone
             case .delay: self = .moveActionLater
@@ -341,6 +342,7 @@ extension SafeAutomationActionKind {
         case .profile: self = .editLocalNote
         case let .history(value):
             switch value.action {
+            // AMBitionsAllowWeakPattern(reason: "History navigation and explanation requests are intentionally non-mutating policy observations.")
             case .openDestination, .askWhy: self = .noOp
             case .dismissRecommendation: self = .dismissSuggestion
             case .todayReceipt: self = .markDone

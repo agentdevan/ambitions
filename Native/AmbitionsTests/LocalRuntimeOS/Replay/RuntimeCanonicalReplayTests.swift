@@ -664,11 +664,14 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("Strict checkpoint publication must reject a duplicate instead of repairing it")
-        } catch {}
-        XCTAssertEqual(
-            try await database.query("SELECT COUNT(*) AS count FROM runtime_replay_checkpoints"),
-            beforeDuplicate
+        } catch {
+            XCTAssertNotNil(error as? SQLiteError)
+            XCTAssertFalse(error is CancellationError)
+        }
+        let afterDuplicate = try await database.query(
+            "SELECT COUNT(*) AS count FROM runtime_replay_checkpoints"
         )
+        XCTAssertEqual(afterDuplicate, beforeDuplicate)
         let update = try captureEvent(
             id: "sqlite-checkpoint", revision: 1, prior: 0, action: .markWaiting
         )
@@ -683,7 +686,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("A stale compaction plan must not publish after the tail advances")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .staleCompactionPlan)
+        }
         let resumed = try await database.transaction(.immediate) { database in
             try RuntimeCanonicalReplayEngine.replayInTransaction(
                 database: database,
@@ -712,7 +717,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("A partial checkpoint must never be loaded or silently repaired")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .checkpointMismatch)
+        }
     }
 
     func testSQLiteReplayCrossesKeysetPageBoundaryWithoutSkippingOrDuplicating() async throws {
@@ -842,7 +849,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("Mutually forged checkpoint, attestation, and high-water digests must not replace authenticated source bytes")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .checkpointMismatch)
+        }
     }
 
     func testCheckpointLoadAuthenticatesEverySourceRowInItsPrefix() async throws {
@@ -898,7 +907,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("Checkpoint load must authenticate every source row in the prefix")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .checkpointMismatch)
+        }
     }
 
     func testCheckpointColumnsHashesHighWaterAndAttestationEachFailClosed() async throws {
@@ -955,7 +966,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                     )
                 }
                 XCTFail("Forged checkpoint column or hash must fail closed")
-            } catch {}
+            } catch {
+                XCTAssertEqual(error as? RuntimeCanonicalReplayError, .checkpointMismatch)
+            }
             try await database.execute(
                 """
                 UPDATE runtime_replay_checkpoints
@@ -998,7 +1011,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 )
             }
             XCTFail("Forged attestation must fail checkpoint loading")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .checkpointMismatch)
+        }
     }
 
     func testSQLiteSchemaTamperAndVerifiedAttestationMutationFailClosed() async throws {
@@ -1017,14 +1032,19 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 bindings: [.text(String(repeating: "f", count: 64))]
             )
             XCTFail("Verified reconstruction attestation must be immutable")
-        } catch {}
+        } catch {
+            XCTAssertNotNil(error as? SQLiteError)
+            XCTAssertFalse(error is CancellationError)
+        }
         try await database.execute("DROP TRIGGER runtime_replay_verified_reconstructions_immutable_update")
         do {
             try await database.transaction(.immediate) { database in
                 try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
             }
             XCTFail("Exact schema validation must reject a missing attestation trigger")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .corruptAuthority)
+        }
     }
 
     func testSQLiteExactSchemaCatalogRejectsSameNameWrongIndexDefinition() async throws {
@@ -1038,7 +1058,9 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
                 try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
             }
             XCTFail("Exact normalized SQL and index_xinfo validation must reject a same-name wrong index")
-        } catch {}
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .corruptAuthority)
+        }
     }
 
     func testSQLiteActorSerializedTaskGroupMaintainsOneConditionalHighWaterChain() async throws {
@@ -1297,6 +1319,323 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
         }
         XCTAssertEqual(extra?.code, .liveStateDivergence)
         XCTAssertNil(extra?.privatePayload)
+    }
+
+    func testReadOnlyReconstructionDoesNotWriteCertificatesHighWaterOrQuarantine() async throws {
+        let database = try await makeProjectionReplayDatabase(label: "observe-only")
+        let event = try captureEvent(
+            id: "observe-only", revision: 0, prior: nil,
+            action: .quickCapture(externalCreation: nil)
+        )
+        let record = try await Self.appendAndMaterialize(
+            event, sequenceHint: 1, database: database
+        )
+        try await database.transaction(.immediate) { isolated in
+            try Self.insertProjectionInvalidation(
+                sequence: record.lineage.sequence, database: isolated
+            )
+        }
+        try await database.execute("DROP TRIGGER runtime_semantic_events_immutable_update")
+        try await database.execute(
+            "UPDATE runtime_semantic_events SET source_bytes = zeroblob(length(source_bytes)) WHERE sequence = 1"
+        )
+        let immutableUpdate = try XCTUnwrap(
+            CanonicalRuntimeSemanticEventSchemaPlan.statements.first {
+                $0.contains("CREATE TRIGGER runtime_semantic_events_immutable_update")
+            }
+        )
+        try await database.execute(immutableUpdate)
+
+        let result = try await database.transaction(.deferred) { isolated in
+            try RuntimeCanonicalReplayEngine.reconstructInTransaction(database: isolated)
+        }
+        guard case let .blocked(divergence, reconstruction) = result else {
+            return XCTFail("Expected observe-only reconstruction to report divergence")
+        }
+        XCTAssertEqual(divergence.code, .sourceDigestMismatch)
+        XCTAssertNil(reconstruction.cursor)
+        for table in [
+            "runtime_canonical_replay_verification_certificates",
+            "runtime_replay_verified_reconstructions",
+            "runtime_replay_verified_high_water",
+            "runtime_replay_quarantine_occurrences",
+        ] {
+            let rows = try await database.query("SELECT 1 FROM \(table)")
+            XCTAssertTrue(rows.isEmpty, table)
+        }
+    }
+
+    func testReplayCertifiesEveryProjectionInvalidationBoundaryAndTail() async throws {
+        let database = try await makeProjectionReplayDatabase(label: "boundary-certificates")
+        let first = try captureEvent(
+            id: "boundary-certificates", revision: 0, prior: nil,
+            action: .quickCapture(externalCreation: nil)
+        )
+        let second = try captureEvent(
+            id: "boundary-certificates", revision: 1, prior: 0,
+            action: .markWaiting
+        )
+        for (sequence, event) in [(UInt64(1), first), (UInt64(2), second)] {
+            let record = try await Self.appendAndMaterialize(
+                event, sequenceHint: sequence, database: database
+            )
+            try await database.transaction(.immediate) { isolated in
+                try Self.insertProjectionInvalidation(
+                    sequence: record.lineage.sequence, database: isolated
+                )
+            }
+        }
+
+        let result = try await database.transaction(.immediate) { isolated in
+            try RuntimeCanonicalReplayEngine.replayInTransaction(database: isolated)
+        }
+        guard case let .complete(reconstruction) = result else {
+            return XCTFail("Expected certified replay to complete")
+        }
+        XCTAssertEqual(reconstruction.cursor?.sequence, 2)
+        let certificates = try await database.query(
+            "SELECT event_sequence FROM runtime_canonical_replay_verification_certificates ORDER BY event_sequence"
+        )
+        XCTAssertEqual(
+            certificates.map { $0.value(named: "event_sequence") },
+            [.integer(1), .integer(2)]
+        )
+        let reconstructions = try await database.query(
+            "SELECT event_sequence FROM runtime_replay_verified_reconstructions ORDER BY event_sequence"
+        )
+        XCTAssertEqual(
+            reconstructions.map { $0.value(named: "event_sequence") },
+            [.integer(1), .integer(2)]
+        )
+        let highWater = try await database.query(
+            "SELECT event_sequence FROM runtime_replay_verified_high_water WHERE singleton_id = 1"
+        )
+        XCTAssertEqual(
+            highWater.first?.value(named: "event_sequence"),
+            .integer(2)
+        )
+    }
+
+    func testImmutableBoundaryCertificateMismatchRollsBackAllReplayWrites() async throws {
+        let database = try await makeProjectionReplayDatabase(label: "boundary-mismatch")
+        let first = try captureEvent(
+            id: "boundary-mismatch", revision: 0, prior: nil,
+            action: .quickCapture(externalCreation: nil)
+        )
+        let second = try captureEvent(
+            id: "boundary-mismatch", revision: 1, prior: 0,
+            action: .markWaiting
+        )
+        var secondRecord: CanonicalRuntimeSemanticEventRecord?
+        for (sequence, event) in [(UInt64(1), first), (UInt64(2), second)] {
+            let record = try await Self.appendAndMaterialize(
+                event, sequenceHint: sequence, database: database
+            )
+            if sequence == 2 { secondRecord = record }
+            try await database.transaction(.immediate) { isolated in
+                try Self.insertProjectionInvalidation(
+                    sequence: record.lineage.sequence, database: isolated
+                )
+            }
+        }
+        let forged = try XCTUnwrap(secondRecord)
+        try await database.execute(
+            """
+            INSERT INTO runtime_canonical_replay_verification_certificates VALUES (
+                2, ?, ?, ?, ?, ?, ?
+            )
+            """,
+            bindings: [
+                .text(forged.lineage.eventID.rawValue),
+                .text(forged.lineage.eventHash.hexadecimal),
+                .text(String(repeating: "f", count: 64)),
+                .text(String(repeating: "e", count: 64)),
+                .integer(0), .text(String(repeating: "d", count: 64)),
+            ]
+        )
+
+        do {
+            _ = try await database.transaction(.immediate) { isolated in
+                try RuntimeCanonicalReplayEngine.replayInTransaction(database: isolated)
+            }
+            XCTFail("A conflicting immutable boundary certificate must reject replay")
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .corruptAuthority)
+        }
+        let certificates = try await database.query(
+            "SELECT event_sequence FROM runtime_canonical_replay_verification_certificates"
+        )
+        XCTAssertEqual(
+            certificates.map { $0.value(named: "event_sequence") },
+            [.integer(2)]
+        )
+        let reconstructions = try await database.query(
+            "SELECT 1 FROM runtime_replay_verified_reconstructions"
+        )
+        XCTAssertTrue(reconstructions.isEmpty)
+        let highWater = try await database.query(
+            "SELECT 1 FROM runtime_replay_verified_high_water"
+        )
+        XCTAssertTrue(highWater.isEmpty)
+    }
+
+    func testReplayRejectsInvalidationBoundaryBeyondAuthenticatedEventTailWithoutWrites() async throws {
+        let database = try await makeProjectionReplayDatabase(label: "missing-boundary")
+        let event = try captureEvent(
+            id: "missing-boundary", revision: 0, prior: nil,
+            action: .quickCapture(externalCreation: nil)
+        )
+        _ = try await Self.appendAndMaterialize(event, sequenceHint: 1, database: database)
+        try await database.transaction(.immediate) { isolated in
+            try Self.insertProjectionInvalidation(sequence: 2, database: isolated)
+        }
+
+        do {
+            _ = try await database.transaction(.immediate) { isolated in
+                try RuntimeCanonicalReplayEngine.replayInTransaction(database: isolated)
+            }
+            XCTFail("A boundary beyond the authenticated tail must reject replay")
+        } catch {
+            XCTAssertEqual(error as? RuntimeCanonicalReplayError, .corruptAuthority)
+        }
+        for table in [
+            "runtime_canonical_replay_verification_certificates",
+            "runtime_replay_verified_reconstructions",
+            "runtime_replay_verified_high_water",
+        ] {
+            let rows = try await database.query("SELECT 1 FROM \(table)")
+            XCTAssertTrue(rows.isEmpty, table)
+        }
+    }
+
+    func testReplayRejectsMoreThan4096PendingBoundaryCertificatesWithoutWrites() async throws {
+        let database = try await makeProjectionReplayDatabase(label: "boundary-cap")
+        let events = try (0..<4_097).map { index in
+            try captureEvent(
+                id: "boundary-cap", revision: UInt64(index),
+                prior: index == 0 ? nil : UInt64(index - 1),
+                action: index == 0 ? .quickCapture(externalCreation: nil) : .markWaiting
+            )
+        }
+        try await Self.appendBoundarySeries(events, database: database)
+
+        do {
+            _ = try await database.transaction(.immediate) { isolated in
+                try RuntimeCanonicalReplayEngine.replayInTransaction(database: isolated)
+            }
+            XCTFail("Replay must bound its in-memory boundary-certificate workspace")
+        } catch {
+            XCTAssertEqual(
+                error as? RuntimeCanonicalReplayError,
+                .resourcePolicyExceeded(maximumBoundaryCertificates: 4_096)
+            )
+        }
+        for table in [
+            "runtime_canonical_replay_verification_certificates",
+            "runtime_replay_verified_reconstructions",
+            "runtime_replay_verified_high_water",
+        ] {
+            let rows = try await database.query("SELECT 1 FROM \(table)")
+            XCTAssertTrue(rows.isEmpty, table)
+        }
+    }
+
+    private func makeProjectionReplayDatabase(label: String) async throws -> SQLiteDatabase {
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(
+            "runtime-projection-replay-\(label)-\(UUID().uuidString)",
+            isDirectory: true
+        )
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let database = try SQLiteDatabase(url: directory.appendingPathComponent("Runtime.sqlite"))
+        try await database.transaction(.exclusive) { isolated in
+            for statement in CanonicalRuntimeStore.schemaStatements
+                + CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements {
+                try isolated.execute(statement)
+            }
+            try isolated.execute(
+                "INSERT INTO runtime_store_metadata(singleton_id, schema_version, generation_id, created_at_ms) VALUES (1, 5, 'projection-replay-tests', 0)"
+            )
+            try isolated.execute("PRAGMA user_version = 5")
+        }
+        try await database.execute("PRAGMA foreign_keys = OFF")
+        return database
+    }
+
+    private static func insertProjectionInvalidation(
+        sequence: UInt64,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let payload = Data("boundary-\(sequence)".utf8)
+        try database.execute(
+            """
+            INSERT INTO runtime_commit_projection_invalidations(
+                invalidation_id, projection_id, terminal_event_sequence,
+                invalidation_version, payload, payload_checksum, created_at_ms
+            ) VALUES (?, ?, ?, 1, ?, ?, ?)
+            """,
+            bindings: [
+                .text("replay-boundary.\(sequence)"),
+                .text(RuntimeCanonicalProjectionID.aggregateState.rawValue),
+                .integer(Int64(sequence)), .blob(payload),
+                .text(LocalRuntimeStorageChecksum.sha256Hex(for: payload)),
+                .integer(Int64(sequence)),
+            ]
+        )
+    }
+
+    private static func appendBoundarySeries(
+        _ events: [RuntimeSemanticEvent],
+        database: SQLiteDatabase
+    ) async throws {
+        try await database.transaction(.immediate) { isolated in
+            var finalTransitions: [RuntimeSemanticAggregateTransition] = []
+            for (offset, event) in events.enumerated() {
+                let sequence = UInt64(offset + 1)
+                let bytes = try RuntimeSemanticEventCodec().encode(event)
+                guard let primary = event.mutation.primaryAggregate else {
+                    throw RuntimeCanonicalReplayError.corruptAuthority
+                }
+                let append = try CanonicalRuntimeSemanticEventStore.appendInTransaction(
+                    try CanonicalRuntimeSemanticEventAppendRequest(
+                        eventID: RuntimeEventID(validating: "boundary-cap-event-\(sequence)"),
+                        commandID: RuntimeCommandID(validating: "boundary-cap-command-\(sequence)"),
+                        aggregate: primary,
+                        canonicalAggregateRevision: event.mutation.resultingRevision,
+                        correlationID: RuntimeCorrelationID(
+                            validating: "boundary-cap-correlation-\(sequence)"
+                        ),
+                        causationEventID: nil,
+                        occurredAt: Date(timeIntervalSince1970: Double(1_800_100_000 + sequence)),
+                        canonicalBytes: bytes
+                    ),
+                    to: isolated
+                )
+                guard case let .appended(record) = append else {
+                    throw RuntimeCanonicalReplayError.corruptAuthority
+                }
+                try insertProjectionInvalidation(
+                    sequence: record.lineage.sequence, database: isolated
+                )
+                finalTransitions = event.mutation.aggregateTransitions
+            }
+            for transition in finalTransitions {
+                try isolated.execute(
+                    """
+                    INSERT INTO runtime_aggregates(
+                        aggregate_kind, aggregate_id, revision,
+                        payload_version, payload, payload_checksum
+                    ) VALUES (?, ?, ?, 1, ?, ?)
+                    """,
+                    bindings: [
+                        .text(transition.aggregate.kind.rawValue),
+                        .text(transition.aggregate.id.rawValue),
+                        .integer(Int64(transition.resultingRevision)),
+                        .blob(transition.canonicalStateBytes),
+                        .text(transition.canonicalStateDigest),
+                    ]
+                )
+            }
+        }
     }
 
     private func makeReplayDatabase(label: String) async throws -> SQLiteDatabase {

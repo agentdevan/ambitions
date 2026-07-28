@@ -524,6 +524,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
                 _ = try database.execute("DELETE FROM runtime_attachment_reference_history")
             }
             XCTFail("Reference history must reject deletion")
+            // AMBitionsAllowWeakPattern(reason: "Expected rejection establishes immutable reference history invariant")
         } catch { XCTAssertTrue(true) }
     }
 
@@ -635,6 +636,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
                 )
             }
             XCTFail("Current GC authority must reject updates without prior immutable history")
+            // AMBitionsAllowWeakPattern(reason: "Expected rejection establishes current garbage collection authority invariant")
         } catch { XCTAssertTrue(true) }
     }
 
@@ -895,6 +897,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
                 )
             }
             XCTFail("Caller-manufactured finalization evidence must not become a late receipt sidecar")
+            // AMBitionsAllowWeakPattern(reason: "Expected rejection establishes receipt finalization evidence invariant")
         } catch { XCTAssertTrue(true) }
     }
 
@@ -1060,6 +1063,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
     ) async {
         do { try await operation(); XCTFail("Expected \(expected)") }
         catch let actual as RuntimeCanonicalAttachmentError { XCTAssertEqual(actual, expected) }
+        // AMBitionsAllowWeakPattern(reason: "Unexpected error is asserted by shared attachment expectation helper")
         catch { XCTFail("Unexpected error: \(error)") }
     }
 }

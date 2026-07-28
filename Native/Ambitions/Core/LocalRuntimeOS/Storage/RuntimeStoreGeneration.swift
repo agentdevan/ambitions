@@ -6,6 +6,15 @@ import UIKit
 let canonicalRuntimeStoreSchemaVersion = 1
 let canonicalRuntimeStoreManifestFormatVersion = 1
 
+struct RuntimeStoreGenerationPublicationResult: Sendable, Equatable {
+    let activationState: RuntimeStoreManifestActivationState
+    let postCommitJournalSucceeded: Bool
+    /// The selector is committed, but one or more process/cross-process lock
+    /// releases failed. The caller must keep admission closed and reconcile or
+    /// restart; this never reclassifies the durable selector as unknown.
+    let isolationCleanupRequired: Bool
+}
+
 extension RuntimeStoreGenerationID {
     var pathComponent: String {
         rawValue
@@ -131,6 +140,37 @@ struct RuntimeStoreLocations: Sendable, Equatable {
         rootURL.appendingPathComponent("Stores", isDirectory: true)
     }
 
+    var controlURL: URL {
+        rootURL.appendingPathComponent("Control", isDirectory: true)
+    }
+
+    var controlDatabaseURL: URL {
+        controlURL.appendingPathComponent(
+            "RuntimeGenerationControl.sqlite",
+            isDirectory: false
+        )
+    }
+
+    var backupsURL: URL {
+        rootURL.appendingPathComponent("Backups", isDirectory: true)
+    }
+
+    var quarantineURL: URL {
+        rootURL.appendingPathComponent("Quarantine", isDirectory: true)
+    }
+
+    var importsURL: URL {
+        rootURL.appendingPathComponent("Imports", isDirectory: true)
+    }
+
+    var coordinatedLegacySourcesURL: URL {
+        importsURL.appendingPathComponent("CoordinatedLegacySources", isDirectory: true)
+    }
+
+    var attachmentVaultURL: URL {
+        rootURL.appendingPathComponent("AttachmentVault", isDirectory: true)
+    }
+
     var activeManifestURL: URL {
         rootURL.appendingPathComponent("active-store.json", isDirectory: false)
     }
@@ -249,6 +289,39 @@ enum RuntimeStoreManifestActivationState: Sendable, Equatable {
     case committedWithCleanupWarning
     case unchanged(LocalRuntimeStorageError)
     case unknown
+
+    var isDefinitelyUncommittedOrUnknown: Bool {
+        switch self {
+        case .unchanged, .unknown:
+            return true
+        case .committed, .committedWithCleanupWarning:
+            return false
+        }
+    }
+}
+
+struct RuntimeGenerationCrashByteEvidence: Sendable, Equatable {
+    let sha256: String
+    let byteCount: Int64
+}
+
+enum RuntimeGenerationActivationCrashClassification: Sendable, Equatable {
+    case committed(RuntimeGenerationActiveSelector)
+    case unchanged
+    case selectorMissing
+    case selectorCorrupt(RuntimeGenerationCrashByteEvidence)
+    case selectorFutureVersion(RuntimeGenerationCrashByteEvidence)
+    case selectorUnavailable
+    case unexpectedSelector(RuntimeGenerationActiveSelector)
+    case targetAuthorityMissing
+    case targetAuthorityCorrupt(RuntimeGenerationCrashByteEvidence)
+    case targetAuthorityUnavailable
+    case targetDatabaseMissing
+    case targetDatabaseCorrupt
+    case targetDatabaseUnavailable
+    case controlAuthorityUnavailable
+    case splitAuthority
+    case externalAuthorityAmbiguous(observedSelectorFileSHA256: String?)
 }
 
 enum RuntimeStoreManifestActivationFaultPhase: String, Sendable, CaseIterable {
@@ -332,6 +405,10 @@ struct AtomicRuntimeStoreManifestActivator: RuntimeStoreManifestActivating {
                 try RuntimeStoreFileDurability.synchronizeFile(at: rollbackURL)
                 try injectFailure(at: .rollbackDurable)
             }
+            // Persist both temporary and rollback directory entries before the
+            // selector rename. Without this fence, a power loss can commit the
+            // new selector while losing the only durable rollback pathname.
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: directoryURL)
         } catch {
             let cleaned = cleanupDefinitelyInactiveArtifacts(
                 temporaryURL: temporaryURL,
@@ -480,6 +557,14 @@ private extension AtomicRuntimeStoreManifestActivator {
             if priorData != nil {
                 guard FileManager.default.fileExists(atPath: rollbackURL.path)
                 else { return .unknown }
+                try RuntimeStoreFileDurability.requireRegularNonSymbolicFile(
+                    at: rollbackURL,
+                    artifact: "active_manifest_rollback"
+                )
+                let rollbackData = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+                    at: rollbackURL
+                )
+                guard rollbackData == priorData else { return .unknown }
                 guard Darwin.rename(rollbackURL.path, manifestURL.path) == 0
                 else { return .unknown }
             } else if mayRemoveVerifiedAttemptedManifest,
@@ -557,6 +642,132 @@ private extension AtomicRuntimeStoreManifestActivator {
     }
 }
 
+actor RuntimeGenerationCandidateOwnership {
+    private enum LockState {
+        case open(Int32)
+        case terminalCloseFailed
+        case closed
+    }
+    nonisolated let generationID: RuntimeStoreGenerationID
+    nonisolated let candidateDirectoryURL: URL
+    nonisolated let databaseURL: URL
+
+    private let activeSelectorURL: URL
+    private let finalGenerationURL: URL
+    private let rootAuthority: any RuntimeStoreRootAuthorityProviding
+    private let candidateDirectoryPin: RuntimeStoreDirectoryPin
+    private var lockState: LockState
+    private var leaseBorrowed = false
+
+    init(
+        generationID: RuntimeStoreGenerationID,
+        candidateDirectoryURL: URL,
+        databaseURL: URL,
+        activeSelectorURL: URL,
+        finalGenerationURL: URL,
+        rootAuthority: any RuntimeStoreRootAuthorityProviding,
+        candidateDirectoryPin: RuntimeStoreDirectoryPin,
+        lockDescriptor: Int32
+    ) {
+        self.generationID = generationID
+        self.candidateDirectoryURL = candidateDirectoryURL
+        self.databaseURL = databaseURL
+        self.activeSelectorURL = activeSelectorURL
+        self.finalGenerationURL = finalGenerationURL
+        self.rootAuthority = rootAuthority
+        self.candidateDirectoryPin = candidateDirectoryPin
+        lockState = .open(lockDescriptor)
+    }
+
+    deinit {
+        switch lockState {
+        case let .open(descriptor):
+            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = Darwin.close(descriptor)
+        case .terminalCloseFailed, .closed:
+            break
+        }
+    }
+
+    func revalidate(pinnedFiles: RuntimeStorePinnedFileSet) throws {
+        guard case let .open(lockDescriptor) = lockState else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        var status = stat()
+        guard fstat(lockDescriptor, &status) == 0,
+              status.st_mode & S_IFMT == S_IFREG,
+              status.st_nlink == 1,
+              Darwin.flock(lockDescriptor, LOCK_EX | LOCK_NB) == 0,
+              FileManager.default.fileExists(atPath: finalGenerationURL.path) == false else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        try rootAuthority.revalidatePinnedRoot()
+        try candidateDirectoryPin.revalidate()
+        try pinnedFiles.validate(databaseURL: databaseURL)
+        try RuntimeStoreFileDurability.requireCompleteProtection(
+            at: candidateDirectoryURL,
+            artifact: "derived_candidate_directory"
+        )
+        for (url, artifact) in [
+            (databaseURL, "derived_candidate_database"),
+            (URL(fileURLWithPath: databaseURL.path + "-wal"), "derived_candidate_wal"),
+            (URL(fileURLWithPath: databaseURL.path + "-shm"), "derived_candidate_shm"),
+        ] where FileManager.default.fileExists(atPath: url.path) {
+            try RuntimeStoreFileDurability.requireRegularNonSymbolicFile(
+                at: url, artifact: artifact
+            )
+            try RuntimeStoreFileDurability.requireCompleteProtection(
+                at: url, artifact: artifact
+            )
+        }
+        if let selectorData = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+            at: activeSelectorURL
+        ) {
+            let selector = try RuntimeGenerationActiveSelectorCodec.decode(selectorData)
+            guard selector.generationID != generationID else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+        }
+    }
+
+    func withHeldLease<Result: Sendable>(
+        pinnedFiles: RuntimeStorePinnedFileSet,
+        operation: @Sendable () async throws -> Result
+    ) async throws -> Result {
+        guard leaseBorrowed == false else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        leaseBorrowed = true
+        defer { leaseBorrowed = false }
+        try revalidate(pinnedFiles: pinnedFiles)
+        let result = try await operation()
+        try revalidate(pinnedFiles: pinnedFiles)
+        return result
+    }
+
+    func close() throws {
+        guard leaseBorrowed == false else {
+            throw LocalRuntimeStorageError.canonicalActivationLockFailed
+        }
+        switch lockState {
+        case let .open(descriptor):
+            // Numeric descriptors are never retried after a close attempt;
+            // close failure makes reuse ownership indeterminate.
+            lockState = .terminalCloseFailed
+            let unlockResult = Darwin.flock(descriptor, LOCK_UN)
+            let closeResult = Darwin.close(descriptor)
+            guard unlockResult == 0, closeResult == 0 else {
+                throw LocalRuntimeStorageError.canonicalActivationLockFailed
+            }
+            lockState = .closed
+        case .terminalCloseFailed:
+            throw LocalRuntimeStorageError.canonicalActivationLockFailed
+        case .closed:
+            return
+        }
+    }
+}
+
 actor RuntimeStoreGenerationManager {
     let locations: RuntimeStoreLocations
 
@@ -565,8 +776,9 @@ actor RuntimeStoreGenerationManager {
     private let protectedDataChecker: any RuntimeStoreProtectedDataChecking
     private let manifestActivator: any RuntimeStoreManifestActivating
     private var environment: RuntimeEnvironment
+    private let minimumRecoveryAuthorizationValidityMilliseconds: Int64
     private var activationInProgress = false
-    private var activationLockDescriptor: Int32?
+    private var activationLockScope: RuntimeGenerationActivationLockScope?
 
     init(
         environment: RuntimeEnvironment,
@@ -574,8 +786,14 @@ actor RuntimeStoreGenerationManager {
         fileManager: FileManager = .default,
         protectedDataChecker: any RuntimeStoreProtectedDataChecking =
             ApplicationRuntimeStoreProtectedDataChecker(),
-        manifestActivator: any RuntimeStoreManifestActivating = AtomicRuntimeStoreManifestActivator()
+        manifestActivator: any RuntimeStoreManifestActivating = AtomicRuntimeStoreManifestActivator(),
+        minimumRecoveryAuthorizationValidityMilliseconds: Int64 = 5_000
     ) throws {
+        guard minimumRecoveryAuthorizationValidityMilliseconds > 0 else {
+            throw RuntimeGenerationControlError.malformed(
+                field: "minimum_recovery_authorization_validity_ms"
+            )
+        }
         try rootAuthority.revalidatePinnedRoot()
         self.rootAuthority = rootAuthority
         locations = RuntimeStoreLocations(
@@ -592,9 +810,924 @@ actor RuntimeStoreGenerationManager {
         self.fileManager = fileManager
         self.protectedDataChecker = protectedDataChecker
         self.manifestActivator = manifestActivator
+        self.minimumRecoveryAuthorizationValidityMilliseconds =
+            minimumRecoveryAuthorizationValidityMilliseconds
         self.environment = environment
     }
 
+    /// Acquires exclusive cross-process ownership of one unpublished staging
+    /// candidate. The durable reservation/run are checked by the caller before
+    /// this filesystem capability is issued; the manager independently binds
+    /// it to the pinned runtime root and rejects an active or already-published
+    /// generation.
+    func acquireDerivedCandidateOwnership(
+        reservation: RuntimeGenerationReservation,
+        run: RuntimeGenerationMigrationRun,
+        candidateDirectoryURL: URL,
+        authorityNowMilliseconds: Int64
+    ) throws -> RuntimeGenerationCandidateOwnership {
+        guard reservation.operationKind == .projectionRebuild,
+              run.operationKind == .projectionRebuild,
+              run.reservationID == reservation.reservationID,
+              run.candidateGenerationID == reservation.candidateGenerationID,
+              authorityNowMilliseconds >= reservation.createdAtMilliseconds,
+              candidateDirectoryURL.lastPathComponent.hasPrefix(
+                  ".staging-\(reservation.candidateGenerationID.pathComponent)-"
+              ),
+              fileManager.fileExists(
+                  atPath: locations.generationDirectoryURL(
+                      for: reservation.candidateGenerationID
+                  ).path
+              ) == false else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        try rootAuthority.revalidatePinnedRoot()
+        try prepareCanonicalRoot()
+        try RuntimeStorePathValidation.requireContained(
+            candidateDirectoryURL,
+            in: locations.storesURL
+        )
+        let candidatePin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+            candidateDirectoryURL,
+            createFinalComponentIfMissing: false
+        )
+        try candidatePin.revalidate()
+        try RuntimeStoreFileDurability.requireCompleteProtection(
+            at: candidateDirectoryURL,
+            artifact: "derived_candidate_directory"
+        )
+        if let selectorData = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+            at: locations.activeManifestURL
+        ) {
+            let selector = try RuntimeGenerationActiveSelectorCodec.decode(selectorData)
+            guard selector.generationID != reservation.candidateGenerationID else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+        }
+        let descriptor = try acquireCandidatePublicationLock(
+            generationID: reservation.candidateGenerationID
+        )
+        return RuntimeGenerationCandidateOwnership(
+            generationID: reservation.candidateGenerationID,
+            candidateDirectoryURL: candidateDirectoryURL,
+            databaseURL: candidateDirectoryURL.appendingPathComponent(
+                "Runtime.sqlite", isDirectory: false
+            ),
+            activeSelectorURL: locations.activeManifestURL,
+            finalGenerationURL: locations.generationDirectoryURL(
+                for: reservation.candidateGenerationID
+            ),
+            rootAuthority: rootAuthority,
+            candidateDirectoryPin: candidatePin,
+            lockDescriptor: descriptor
+        )
+    }
+
+    /// Writer-excluding ownership for immutable candidate verification. The
+    /// same candidate lock is later acquired by publication, so construction,
+    /// verification, and final move cannot overlap across processes.
+    func acquireVerificationCandidateOwnership(
+        reservation: RuntimeGenerationReservation,
+        run: RuntimeGenerationMigrationRun,
+        candidateDirectoryURL: URL,
+        authorityNowMilliseconds: Int64
+    ) throws -> RuntimeGenerationCandidateOwnership {
+        guard run.reservationID == reservation.reservationID,
+              run.candidateGenerationID == reservation.candidateGenerationID,
+              run.operationKind == reservation.operationKind,
+              authorityNowMilliseconds >= reservation.createdAtMilliseconds,
+              candidateDirectoryURL.lastPathComponent.hasPrefix(
+                ".staging-\(reservation.candidateGenerationID.pathComponent)-"
+              ),
+              fileManager.fileExists(
+                atPath: locations.generationDirectoryURL(
+                    for: reservation.candidateGenerationID
+                ).path
+              ) == false else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        try rootAuthority.revalidatePinnedRoot()
+        try prepareCanonicalRoot()
+        try RuntimeStorePathValidation.requireContained(
+            candidateDirectoryURL, in: locations.storesURL
+        )
+        let candidatePin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+            candidateDirectoryURL,
+            createFinalComponentIfMissing: false
+        )
+        try candidatePin.revalidate()
+        let descriptor = try acquireCandidatePublicationLock(
+            generationID: reservation.candidateGenerationID
+        )
+        return RuntimeGenerationCandidateOwnership(
+            generationID: reservation.candidateGenerationID,
+            candidateDirectoryURL: candidateDirectoryURL,
+            databaseURL: candidateDirectoryURL.appendingPathComponent(
+                "Runtime.sqlite", isDirectory: false
+            ),
+            activeSelectorURL: locations.activeManifestURL,
+            finalGenerationURL: locations.generationDirectoryURL(
+                for: reservation.candidateGenerationID
+            ),
+            rootAuthority: rootAuthority,
+            candidateDirectoryPin: candidatePin,
+            lockDescriptor: descriptor
+        )
+    }
+
+    /// The only release-path publisher for schema-v8 generations. Candidate
+    /// construction, independent verification, and activation-intent journaling
+    /// happen before this method. It never cleans a failed candidate because
+    /// failure evidence is recovery authority, not disposable staging.
+    func publishVerifiedGeneration(
+        candidateDirectoryURL: URL,
+        candidate: RuntimeGenerationCandidateRecord,
+        candidatePreparationCompletion: RuntimeGenerationCandidatePreparationCompletion,
+        selectorData: Data,
+        controlStore: RuntimeGenerationControlStore,
+        operationLease: RuntimeGenerationOperationLease,
+        activationIntentID: String,
+        expectedPriorSelectorFileSHA256: String?,
+        sourceStore: CanonicalRuntimeStoreV8? = nil,
+        expectedSourceFence: RuntimeGenerationRevisionFence? = nil,
+        expectedSourceAuthorityFenceToken: RuntimeGenerationAuthorityFenceToken? = nil,
+        recoveryAuthorization: RuntimeGenerationRecoveryAuthorization? = nil,
+        recoveryResultDigest: String? = nil,
+        vaultRestoreRequest: RuntimeGenerationVaultRestoreRequest? = nil,
+        postCommitJournal: (@Sendable (_ committedAtMilliseconds: Int64) async -> Bool)? = nil,
+        temporaryToken: String,
+        rollbackToken: String
+    ) async throws -> RuntimeStoreGenerationPublicationResult {
+        guard activationInProgress == false else {
+            throw LocalRuntimeStorageError.canonicalActivationBusy
+        }
+        activationInProgress = true
+        defer { activationInProgress = false }
+        try candidate.validate()
+        let selector = try RuntimeGenerationActiveSelectorCodec.decode(selectorData)
+        let selectorSHA = LocalRuntimeStorageChecksum.sha256Hex(for: selectorData)
+        guard selector.generationID == candidate.authorityManifest.generationID,
+              selector.authorityManifestDigest == candidate.authorityManifest.manifestDigest,
+              selector.authorityManifestFileSHA256 == candidate.authorityManifestFileSHA256,
+              selectorSHA == candidate.selectorFileSHA256,
+              candidateDirectoryURL.lastPathComponent.hasPrefix(
+                ".staging-\(selector.generationID.pathComponent)-"
+              ) else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        try await requireProtectedData()
+        try Task.checkCancellation()
+        let leaseToken = environment.uuid.nextUUID().uuidString.lowercased()
+        try await rootAuthority.activationCoordinator.acquire(token: leaseToken)
+        var restoreDeltaJournal: RuntimeGenerationVaultRestoreDeltaJournal?
+        var candidateLockDescriptor: Int32?
+        var activationFileLockHeld = false
+        var coordinatorLeaseHeld = true
+        var vaultDeltaMayBelongToCommittedState = false
+        do {
+            try rootAuthority.revalidatePinnedRoot()
+            try prepareCanonicalRoot()
+            candidateLockDescriptor = try acquireCandidatePublicationLock(
+                generationID: selector.generationID
+            )
+            activationFileLockHeld = true
+            try acquireActivationFileLock()
+            try reconcileVaultRestoreDeltaJournals()
+            let durableCandidate = try await controlStore.generationRecord(
+                id: candidate.authorityManifest.generationID
+            )
+            let durableIntent = try await controlStore.activationIntent(
+                id: activationIntentID
+            )
+            let durableVerification = try await controlStore.verification(
+                id: durableIntent.verificationID
+            )
+            let durableRun = try await controlStore.migrationRun(
+                id: candidate.authorityManifest.migrationRunID
+            )
+            let candidatePreparationAuthority = try await controlStore
+                .candidatePreparationAuthority(generationID: selector.generationID)
+            let authorityNowMilliseconds = try activationAuthorityNowMilliseconds()
+            let durableLease = try await controlStore.requireCurrentOperationLease(
+                reservationID: durableRun.reservationID,
+                ownerInstanceID: durableRun.executorInstanceID,
+                observedAtMilliseconds: authorityNowMilliseconds
+            )
+            guard durableCandidate == candidate,
+                  durableIntent.intentID == selector.activationIntentID,
+                  durableIntent.candidateGenerationID == selector.generationID,
+                  durableIntent.candidateSelectorFileSHA256 == selectorSHA,
+                  durableVerification.verificationID == selector.verificationID,
+                  durableVerification.hasCompleteEvidence,
+                  durableVerification.candidateAuthorityManifestDigest ==
+                    candidate.authorityManifest.manifestDigest,
+                  durableRun.migrationRunID == candidate.authorityManifest.migrationRunID,
+                  durableRun.candidateGenerationID == selector.generationID,
+                  durableRun.operationKind == candidate.authorityManifest.operationKind,
+                  candidatePreparationAuthority.0.reservationID == durableRun.reservationID,
+                  candidatePreparationAuthority.0.stagingDirectoryName ==
+                    candidateDirectoryURL.lastPathComponent,
+                  candidatePreparationAuthority.1.candidateRecordDigest ==
+                    durableCandidate.recordDigest,
+                  durableLease == operationLease,
+                  durableLease.reservationID == durableRun.reservationID,
+                  durableLease.ownerInstanceID == durableRun.executorInstanceID,
+                  durableLease.fencingToken == durableRun.operationFencingToken,
+                  authorityNowMilliseconds >= durableIntent.createdAtMilliseconds,
+                  authorityNowMilliseconds < durableIntent.expiresAtMilliseconds,
+                  try await controlStore.activationConsumption(
+                    intentID: durableIntent.intentID
+                  ) == nil else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            if candidate.authorityManifest.operationKind == .restore ||
+                candidate.authorityManifest.operationKind == .rollback {
+                guard let recoveryAuthorization,
+                      durableRun.recoveryAuthorizationID == recoveryAuthorization.authorizationID,
+                      durableRun.recoveryAuthorizationDigest == recoveryAuthorization.authorizationDigest else {
+                    throw RuntimeGenerationControlError.recoveryAuthorizationRequired
+                }
+            } else if recoveryAuthorization != nil ||
+                durableRun.recoveryAuthorizationID != nil ||
+                durableRun.recoveryAuthorizationDigest != nil {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            let observedPrior = try activeManifestFileDigestIfPresent()
+            guard observedPrior == expectedPriorSelectorFileSHA256 else {
+                throw RuntimeGenerationControlError.activationFenceAdvanced
+            }
+            if let sourceStore, let expectedSourceFence,
+               let expectedSourceAuthorityFenceToken {
+                guard let activationLockScope else {
+                    throw RuntimeGenerationControlError.generationWorkerBarrierMismatch
+                }
+                let observedSourceAuthorityFenceToken = try await sourceStore
+                    .currentAuthorityFenceTokenForActivation(
+                        activationLock: activationLockScope
+                    )
+                guard observedSourceAuthorityFenceToken == expectedSourceAuthorityFenceToken,
+                      durableIntent.expectedSourceFenceDigest == expectedSourceFence.fenceDigest,
+                      durableCandidate.authorityManifest.sourceFence == expectedSourceFence else {
+                    throw RuntimeGenerationControlError.activationFenceAdvanced
+                }
+            } else if sourceStore != nil || expectedSourceFence != nil ||
+                expectedSourceAuthorityFenceToken != nil
+                || durableIntent.expectedSourceFenceDigest != nil {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            // This is the last cancellation point before restore-vault mutation
+            // and generation publication. Cancellation can only strand
+            // preserved evidence; it cannot be observed as a false commit.
+            try Task.checkCancellation()
+            let authorityURL = candidateDirectoryURL.appendingPathComponent(
+                "Authority.json",
+                isDirectory: false
+            )
+            try RuntimeStoreFileDurability.requireRegularNonSymbolicFile(
+                at: authorityURL,
+                artifact: "candidate_authority_manifest"
+            )
+            guard let authorityBytes = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+                at: authorityURL
+            ) else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            guard LocalRuntimeStorageChecksum.sha256Hex(for: authorityBytes) ==
+                    candidate.authorityManifestFileSHA256,
+                  try RuntimeGenerationControlCodec.decode(
+                    RuntimeGenerationAuthorityManifest.self,
+                    from: authorityBytes
+                  ) == candidate.authorityManifest else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            let stagingPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+                candidateDirectoryURL,
+                createFinalComponentIfMissing: false
+            )
+            try stagingPin.revalidate()
+            guard stagingPin.identity.device ==
+                    candidatePreparationAuthority.1.directoryDevice,
+                  stagingPin.identity.inode ==
+                    candidatePreparationAuthority.1.directoryInode else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            guard try RuntimeGenerationDatabaseAuthority.artifact(
+                at: candidateDirectoryURL.appendingPathComponent("Runtime.sqlite"),
+                relativePath: "Runtime.sqlite"
+            ).semanticallyMatches(candidate.authorityManifest.database) else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            if let vaultRestoreRequest {
+                guard vaultRestoreRequest.vaultRootURL.standardizedFileURL ==
+                        locations.attachmentVaultURL.standardizedFileURL,
+                      vaultRestoreRequest.quarantineRootURL.standardizedFileURL ==
+                        locations.quarantineURL.standardizedFileURL,
+                      vaultRestoreRequest.snapshot.blobSetDigest ==
+                        candidate.authorityManifest.blobSetDigest,
+                      vaultRestoreRequest.snapshot.manifestSetDigest ==
+                        candidate.authorityManifest.attachmentManifestSetDigest,
+                      vaultRestoreRequest.snapshot.keyIdentityDigest ==
+                        candidate.authorityManifest.keyIdentityDigest else {
+                    throw RuntimeGenerationControlError.activationAuthorityMismatch
+                }
+                let deltaJournalURL = locations.controlURL.appendingPathComponent(
+                    "vault-restore-delta-\(vaultRestoreRequest.quarantineToken).json",
+                    isDirectory: false
+                )
+                restoreDeltaJournal = try RuntimeGenerationVaultGraphVerifier
+                    .prepareRestoreDeltaJournal(
+                        snapshot: vaultRestoreRequest.snapshot,
+                        candidateGenerationID: selector.generationID,
+                        candidateSelectorFileSHA256: selectorSHA,
+                        token: vaultRestoreRequest.quarantineToken,
+                        vaultRootURL: vaultRestoreRequest.vaultRootURL,
+                        journalURL: deltaJournalURL,
+                        fileManager: fileManager
+                    )
+                try RuntimeGenerationVaultGraphVerifier.restoreMissingArtifacts(
+                    vaultRestoreRequest.snapshot,
+                    backupDirectoryURL: vaultRestoreRequest.backupDirectoryURL,
+                    vaultRootURL: vaultRestoreRequest.vaultRootURL,
+                    fileManager: fileManager
+                )
+            }
+            try stagingPin.revalidate()
+            try requireCurrentCandidateCompletionWitness(
+                candidatePreparationCompletion,
+                candidate: candidate,
+                stagingDirectoryURL: candidateDirectoryURL,
+                stagingPin: stagingPin
+            )
+            let finalURL = locations.generationDirectoryURL(
+                for: selector.generationID
+            )
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: candidateDirectoryURL)
+            let storesPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+                locations.storesURL,
+                createFinalComponentIfMissing: false
+            )
+            try storesPin.revalidate()
+            var stagingStatus = stat()
+            guard fstatat(
+                storesPin.descriptor,
+                candidateDirectoryURL.lastPathComponent,
+                &stagingStatus,
+                AT_SYMLINK_NOFOLLOW
+            ) == 0,
+            stagingStatus.st_mode & S_IFMT == S_IFDIR,
+            RuntimeStoreFileIdentity(
+                device: UInt64(stagingStatus.st_dev),
+                inode: UInt64(stagingStatus.st_ino)
+            ) == stagingPin.identity else {
+                throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
+                    artifact: "publish_generation_staging_directory"
+                )
+            }
+            guard Darwin.renameatx_np(
+                storesPin.descriptor,
+                candidateDirectoryURL.lastPathComponent,
+                storesPin.descriptor,
+                finalURL.lastPathComponent,
+                UInt32(RENAME_EXCL)
+            ) == 0 else {
+                if errno == EEXIST {
+                    throw LocalRuntimeStorageError.canonicalGenerationAlreadyExists(
+                        id: selector.generationID.pathComponent
+                    )
+                }
+                throw LocalRuntimeStorageError.canonicalIOFailure(
+                    operation: "publish_generation_directory"
+                )
+            }
+            guard Darwin.fsync(storesPin.descriptor) == 0 else {
+                throw LocalRuntimeStorageError.canonicalIOFailure(
+                    operation: "synchronize_published_generation_parent"
+                )
+            }
+            try storesPin.revalidate()
+            let finalPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+                finalURL,
+                createFinalComponentIfMissing: false
+            )
+            try finalPin.revalidate()
+            guard finalPin.identity == stagingPin.identity else {
+                throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
+                    artifact: "published_generation_directory"
+                )
+            }
+            let finalAuthorityURL = finalURL.appendingPathComponent(
+                "Authority.json", isDirectory: false
+            )
+            guard let finalAuthorityBytes = try RuntimeStoreManifestDescriptorReader
+                .readIfPresent(at: finalAuthorityURL),
+                  LocalRuntimeStorageChecksum.sha256Hex(for: finalAuthorityBytes) ==
+                    candidate.authorityManifestFileSHA256,
+                  try RuntimeGenerationControlCodec.decode(
+                    RuntimeGenerationAuthorityManifest.self,
+                    from: finalAuthorityBytes
+                  ) == candidate.authorityManifest,
+                  try RuntimeGenerationDatabaseAuthority.artifact(
+                    at: finalURL.appendingPathComponent(
+                        "Runtime.sqlite", isDirectory: false
+                    ),
+                    relativePath: "Runtime.sqlite"
+                  ).semanticallyMatches(candidate.authorityManifest.database) else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            try finalPin.revalidate()
+            try rootAuthority.revalidatePinnedRoot()
+            guard let activationLockScope else {
+                throw RuntimeGenerationControlError.generationWorkerBarrierMismatch
+            }
+            try activationLockScope.revalidate(requiredMode: .exclusive)
+            if let recoveryAuthorization {
+                guard let recoveryResultDigest else {
+                    throw RuntimeGenerationControlError.recoveryAuthorizationRequired
+                }
+                let minimumRemainingValidityMilliseconds =
+                    minimumRecoveryAuthorizationValidityMilliseconds
+                let observedAt = try activationAuthorityNowMilliseconds()
+                let witness = try RuntimeGenerationControlRecordFactory
+                    .recoveryPrecommitWitness(
+                        activationIntent: durableIntent,
+                        migrationRunID: durableRun.migrationRunID,
+                        authorization: recoveryAuthorization,
+                        resultDigest: recoveryResultDigest,
+                        observedAtMilliseconds: observedAt,
+                        minimumRemainingValidityMilliseconds:
+                            minimumRemainingValidityMilliseconds
+                    )
+                try await controlStore.recordRecoveryPrecommitWitness(
+                    witness,
+                    expectedAuthorization: recoveryAuthorization
+                )
+                let publicationNow = try activationAuthorityNowMilliseconds()
+                guard publicationNow >= observedAt,
+                      publicationNow < recoveryAuthorization.expiresAtMilliseconds,
+                      recoveryAuthorization.expiresAtMilliseconds - publicationNow >=
+                        minimumRemainingValidityMilliseconds else {
+                    throw RuntimeGenerationControlError.recoveryAuthorizationRequired
+                }
+                try rootAuthority.revalidatePinnedRoot()
+                try finalPin.revalidate()
+                try activationLockScope.revalidate(requiredMode: .exclusive)
+            } else if recoveryResultDigest != nil {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            let precommitLeaseNow = try activationAuthorityNowMilliseconds()
+            let precommitLease = try await controlStore.requireCurrentOperationLease(
+                reservationID: durableRun.reservationID,
+                ownerInstanceID: durableRun.executorInstanceID,
+                observedAtMilliseconds: precommitLeaseNow
+            )
+            guard precommitLease == operationLease,
+                  precommitLease.fencingToken == durableRun.operationFencingToken else {
+                throw RuntimeGenerationControlError.activationAuthorityMismatch
+            }
+            let rawState = manifestActivator.replaceActiveManifest(
+                with: selectorData,
+                at: locations.activeManifestURL,
+                expectedPriorDigest: expectedPriorSelectorFileSHA256,
+                expectedNewDigest: selectorSHA,
+                temporaryNameToken: temporaryToken,
+                rollbackNameToken: rollbackToken
+            )
+            let state: RuntimeStoreManifestActivationState
+            if rawState == .unknown {
+                do {
+                    let observed = try activeManifestFileDigestIfPresent()
+                    if observed == selectorSHA {
+                        state = .committedWithCleanupWarning
+                    } else if observed == expectedPriorSelectorFileSHA256 {
+                        state = .unchanged(.canonicalActivationFailed)
+                    } else {
+                        state = .unknown
+                    }
+                } catch {
+                    state = .unknown
+                }
+            } else {
+                state = rawState
+            }
+            switch state {
+            case .committed, .committedWithCleanupWarning:
+                vaultDeltaMayBelongToCommittedState = true
+            case .unknown:
+                vaultDeltaMayBelongToCommittedState = true
+            case .unchanged:
+                break
+            }
+            if case .unchanged = state,
+               let vaultRestoreRequest,
+               let restoreDeltaJournal {
+                try RuntimeGenerationVaultGraphVerifier
+                    .quarantineCreatedRestoreDelta(
+                        restoreDeltaJournal,
+                        vaultRootURL: vaultRestoreRequest.vaultRootURL,
+                        quarantineRootURL: vaultRestoreRequest.quarantineRootURL,
+                        fileManager: fileManager
+                    )
+            }
+            let postCommitJournalSucceeded: Bool
+            switch state {
+            case .committed, .committedWithCleanupWarning:
+                if let postCommitJournal {
+                    do {
+                        postCommitJournalSucceeded = await postCommitJournal(
+                            try activationAuthorityNowMilliseconds()
+                        )
+                    } catch {
+                        postCommitJournalSucceeded = false
+                    }
+                } else {
+                    postCommitJournalSucceeded = true
+                }
+            case .unchanged, .unknown:
+                postCommitJournalSucceeded = true
+            }
+            var isolationCleanupRequired = false
+            if activationFileLockHeld {
+                activationFileLockHeld = false
+                do { try releaseActivationFileLock() }
+                // AMBitionsAllowWeakPattern(reason: "Release failure is retained as explicit isolation cleanup state")
+                catch { isolationCleanupRequired = true }
+            }
+            if let descriptor = candidateLockDescriptor {
+                // Clear ownership before the exactly-once close attempt so no
+                // catch path can act on a potentially reused descriptor.
+                candidateLockDescriptor = nil
+                do { try releaseCandidatePublicationLock(descriptor) }
+                catch { isolationCleanupRequired = true }
+            } else {
+                isolationCleanupRequired = true
+            }
+            if coordinatorLeaseHeld {
+                coordinatorLeaseHeld = false
+                do { try await rootAuthority.activationCoordinator.release(token: leaseToken) }
+                // AMBitionsAllowWeakPattern(reason: "Coordinator release failure is retained as explicit isolation cleanup state")
+                catch { isolationCleanupRequired = true }
+            }
+            return RuntimeStoreGenerationPublicationResult(
+                activationState: state,
+                postCommitJournalSucceeded: postCommitJournalSucceeded,
+                isolationCleanupRequired: isolationCleanupRequired
+            )
+        } catch {
+            let operationError = error
+            var cleanupFailed = false
+            if vaultDeltaMayBelongToCommittedState == false,
+               let vaultRestoreRequest,
+               let restoreDeltaJournal {
+                do {
+                    try RuntimeGenerationVaultGraphVerifier
+                        .quarantineCreatedRestoreDelta(
+                            restoreDeltaJournal,
+                            vaultRootURL: vaultRestoreRequest.vaultRootURL,
+                            quarantineRootURL: vaultRestoreRequest.quarantineRootURL,
+                            fileManager: fileManager
+                        )
+                } catch {
+                    cleanupFailed = true
+                }
+            }
+            if activationFileLockHeld {
+                activationFileLockHeld = false
+                do { try releaseActivationFileLock() }
+                // AMBitionsAllowWeakPattern(reason: "Release failure is retained as explicit activation cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if let descriptor = candidateLockDescriptor {
+                candidateLockDescriptor = nil
+                do { try releaseCandidatePublicationLock(descriptor) }
+                // AMBitionsAllowWeakPattern(reason: "Candidate lock release failure is retained as explicit activation cleanup state")
+                catch { cleanupFailed = true }
+            }
+            if coordinatorLeaseHeld {
+                coordinatorLeaseHeld = false
+                do { try await rootAuthority.activationCoordinator.release(token: leaseToken) }
+                // AMBitionsAllowWeakPattern(reason: "Coordinator release failure is retained as explicit activation cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if cleanupFailed {
+                throw LocalRuntimeStorageError.canonicalActivationStateUnknown
+            }
+            throw operationError
+        }
+    }
+
+    /// Reclassifies an activation whose final fsync/rename outcome was unknown.
+    /// The selector and candidate artifacts are read under the same process and
+    /// cross-process activation locks used by publication.
+    func classifyActivationAfterCrash(
+        candidate: RuntimeGenerationCandidateRecord,
+        expectedPriorSelectorFileSHA256: String?,
+        externalAuthorityMayHaveChanged: Bool,
+        controlStore: RuntimeGenerationControlStore
+    ) async throws -> RuntimeGenerationActivationCrashClassification {
+        try await requireProtectedData()
+        try Task.checkCancellation()
+        let token = environment.uuid.nextUUID().uuidString.lowercased()
+        try await rootAuthority.activationCoordinator.acquire(token: token)
+        var coordinatorLeaseHeld = true
+        var activationFileLockHeld = false
+        do {
+            try rootAuthority.revalidatePinnedRoot()
+            try prepareCanonicalRoot()
+            activationFileLockHeld = true
+            try acquireActivationFileLock()
+            let classification = try await classifyActivationEvidence(
+                candidate: candidate,
+                expectedPriorSelectorFileSHA256: expectedPriorSelectorFileSHA256,
+                externalAuthorityMayHaveChanged: externalAuthorityMayHaveChanged,
+                controlStore: controlStore
+            )
+            var cleanupFailed = false
+            activationFileLockHeld = false
+            do { try releaseActivationFileLock() }
+            catch { cleanupFailed = true }
+            coordinatorLeaseHeld = false
+            do { try await rootAuthority.activationCoordinator.release(token: token) }
+            catch { cleanupFailed = true }
+            guard cleanupFailed == false else {
+                throw LocalRuntimeStorageError.canonicalActivationIsolationIndeterminate
+            }
+            return classification
+        } catch {
+            let operationError = error
+            var cleanupFailed = false
+            if activationFileLockHeld {
+                activationFileLockHeld = false
+                do { try releaseActivationFileLock() }
+                // AMBitionsAllowWeakPattern(reason: "Release failure is retained as explicit isolation cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if coordinatorLeaseHeld {
+                coordinatorLeaseHeld = false
+                do { try await rootAuthority.activationCoordinator.release(token: token) }
+                // AMBitionsAllowWeakPattern(reason: "Coordinator release failure is retained as explicit isolation cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if cleanupFailed {
+                throw LocalRuntimeStorageError.canonicalActivationIsolationIndeterminate
+            }
+            throw operationError
+        }
+    }
+
+    private func classifyActivationEvidence(
+        candidate: RuntimeGenerationCandidateRecord,
+        expectedPriorSelectorFileSHA256: String?,
+        externalAuthorityMayHaveChanged: Bool,
+        controlStore: RuntimeGenerationControlStore
+    ) async throws -> RuntimeGenerationActivationCrashClassification {
+        let bytes: Data?
+        do {
+            bytes = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+                at: locations.activeManifestURL
+            )
+        } catch {
+            return .selectorUnavailable
+        }
+        let observedDigest = bytes.map {
+            LocalRuntimeStorageChecksum.sha256Hex(for: $0)
+        }
+        if observedDigest == expectedPriorSelectorFileSHA256 {
+            return externalAuthorityMayHaveChanged
+                ? .externalAuthorityAmbiguous(observedSelectorFileSHA256: observedDigest)
+                : .unchanged
+        }
+        guard let bytes else { return .selectorMissing }
+        let selectorEvidence = RuntimeGenerationCrashByteEvidence(
+            sha256: LocalRuntimeStorageChecksum.sha256Hex(for: bytes),
+            byteCount: Int64(bytes.count)
+        )
+        let selector: RuntimeGenerationActiveSelector
+        do {
+            selector = try RuntimeGenerationActiveSelectorCodec.decode(bytes)
+        } catch let error as RuntimeGenerationControlError {
+            if case .futureVersion = error {
+                return .selectorFutureVersion(selectorEvidence)
+            }
+            return .selectorCorrupt(selectorEvidence)
+        } catch {
+            return .selectorCorrupt(selectorEvidence)
+        }
+        guard observedDigest == candidate.selectorFileSHA256,
+              selector.generationID == candidate.authorityManifest.generationID,
+              selector.authorityManifestDigest == candidate.authorityManifest.manifestDigest,
+              selector.authorityManifestFileSHA256 ==
+                candidate.authorityManifestFileSHA256 else {
+            return .unexpectedSelector(selector)
+        }
+        let durableCandidate: RuntimeGenerationCandidateRecord
+        let durableVerification: RuntimeGenerationVerificationReport
+        do {
+            durableCandidate = try await controlStore.generationRecord(
+                id: selector.generationID
+            )
+            durableVerification = try await controlStore.verification(
+                id: selector.verificationID
+            )
+        } catch {
+            return .controlAuthorityUnavailable
+        }
+        guard durableCandidate == candidate,
+              durableVerification.verificationID == selector.verificationID,
+              durableVerification.hasCompleteEvidence else {
+            return .controlAuthorityUnavailable
+        }
+        let finalURL = locations.generationDirectoryURL(for: selector.generationID)
+        let authorityURL = finalURL.appendingPathComponent(
+            "Authority.json", isDirectory: false
+        )
+        let authority: Data?
+        do {
+            authority = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+                at: authorityURL
+            )
+        } catch {
+            return .targetAuthorityUnavailable
+        }
+        guard let authority else { return .targetAuthorityMissing }
+        let authorityEvidence = RuntimeGenerationCrashByteEvidence(
+            sha256: LocalRuntimeStorageChecksum.sha256Hex(for: authority),
+            byteCount: Int64(authority.count)
+        )
+        let decodedAuthority: RuntimeGenerationAuthorityManifest
+        do {
+            decodedAuthority = try RuntimeGenerationControlCodec.decode(
+                RuntimeGenerationAuthorityManifest.self,
+                from: authority
+            )
+        } catch {
+            return .targetAuthorityCorrupt(authorityEvidence)
+        }
+        guard authorityEvidence.sha256 == candidate.authorityManifestFileSHA256,
+              decodedAuthority == candidate.authorityManifest else {
+            return .targetAuthorityCorrupt(authorityEvidence)
+        }
+        let databaseURL = finalURL.appendingPathComponent("Runtime.sqlite")
+        var databaseStatus = stat()
+        guard lstat(databaseURL.path, &databaseStatus) == 0 else {
+            return errno == ENOENT ? .targetDatabaseMissing : .targetDatabaseUnavailable
+        }
+        guard databaseStatus.st_mode & S_IFMT == S_IFREG,
+              databaseStatus.st_nlink == 1 else {
+            return .targetDatabaseUnavailable
+        }
+        let artifact: RuntimeGenerationObservedArtifact
+        do {
+            artifact = try RuntimeGenerationDatabaseAuthority.artifact(
+                at: databaseURL,
+                relativePath: "Runtime.sqlite"
+            )
+        } catch {
+            return .targetDatabaseUnavailable
+        }
+        guard artifact.semanticallyMatches(candidate.authorityManifest.database) else {
+            return .targetDatabaseCorrupt
+        }
+        return .committed(selector)
+    }
+
+    func preserveCrashAuthorityBytes(
+        candidate: RuntimeGenerationCandidateRecord,
+        token: String
+    ) async throws -> [RuntimeGenerationObservedArtifact] {
+        try RuntimeStorePathValidation.requireSafeComponent(token)
+        try await requireProtectedData()
+        try Task.checkCancellation()
+        let lockToken = environment.uuid.nextUUID().uuidString.lowercased()
+        try await rootAuthority.activationCoordinator.acquire(token: lockToken)
+        var coordinatorLeaseHeld = true
+        var activationFileLockHeld = false
+        do {
+            try rootAuthority.revalidatePinnedRoot()
+            try prepareCanonicalRoot()
+            activationFileLockHeld = true
+            try acquireActivationFileLock()
+            let quarantinePin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+                locations.quarantineURL,
+                createFinalComponentIfMissing: true
+            )
+            try RuntimeStoreFileDurability.applyCompleteProtection(
+                at: locations.quarantineURL,
+                artifact: "generation_quarantine_root"
+            )
+            try quarantinePin.revalidate()
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.rootURL)
+            let evidenceDirectory = locations.quarantineURL.appendingPathComponent(
+                "activation-\(token)",
+                isDirectory: true
+            )
+            try fileManager.createDirectory(
+                at: evidenceDirectory,
+                withIntermediateDirectories: false
+            )
+            try RuntimeStoreFileDurability.applyCompleteProtection(
+                at: evidenceDirectory,
+                artifact: "activation_crash_evidence_directory"
+            )
+            var artifacts: [RuntimeGenerationObservedArtifact] = []
+            let sources: [(String, URL)] = [
+                ("Active.json", locations.activeManifestURL),
+                ("Authority.json", locations.generationDirectoryURL(
+                    for: candidate.authorityManifest.generationID
+                ).appendingPathComponent("Authority.json")),
+            ]
+            for (name, sourceURL) in sources {
+                guard let bytes = try RuntimeStoreManifestDescriptorReader.readIfPresent(
+                    at: sourceURL
+                ) else { continue }
+                let destinationURL = evidenceDirectory.appendingPathComponent(name)
+                try bytes.write(to: destinationURL, options: [.withoutOverwriting])
+                try RuntimeStoreFileDurability.applyCompleteProtection(
+                    at: destinationURL,
+                    artifact: "activation_crash_evidence"
+                )
+                try RuntimeStoreFileDurability.synchronizeFile(at: destinationURL)
+                artifacts.append(try RuntimeGenerationDatabaseAuthority.artifact(
+                    at: destinationURL,
+                    relativePath: "activation-\(token)/\(name)"
+                ))
+            }
+            let candidateDatabaseURL = locations.databaseURL(
+                for: candidate.authorityManifest.generationID
+            )
+            let raw = try RuntimeGenerationForensicArtifactPreserver.preserve(
+                sources: [
+                    ("generation-db", candidateDatabaseURL),
+                    ("generation-wal", URL(fileURLWithPath: candidateDatabaseURL.path + "-wal")),
+                    ("generation-shm", URL(fileURLWithPath: candidateDatabaseURL.path + "-shm")),
+                    ("control-db", locations.controlDatabaseURL),
+                    ("control-wal", URL(fileURLWithPath: locations.controlDatabaseURL.path + "-wal")),
+                    ("control-shm", URL(fileURLWithPath: locations.controlDatabaseURL.path + "-shm")),
+                ],
+                evidenceDirectoryURL: evidenceDirectory,
+                evidenceDirectoryRelativePath: "activation-\(token)"
+            )
+            artifacts.append(contentsOf: raw.copiedArtifacts)
+            let referencesURL = evidenceDirectory.appendingPathComponent(
+                "RawReferences.json",
+                isDirectory: false
+            )
+            let referencesData = try RuntimeGenerationControlCodec.encode(raw.references)
+            try referencesData.write(to: referencesURL, options: [.withoutOverwriting])
+            try RuntimeStoreFileDurability.applyCompleteProtection(
+                at: referencesURL,
+                artifact: "activation_raw_forensic_references"
+            )
+            try RuntimeStoreFileDurability.synchronizeFile(at: referencesURL)
+            artifacts.append(try RuntimeGenerationDatabaseAuthority.artifact(
+                at: referencesURL,
+                relativePath: "activation-\(token)/RawReferences.json"
+            ))
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: evidenceDirectory)
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.quarantineURL)
+            var cleanupFailed = false
+            activationFileLockHeld = false
+            do { try releaseActivationFileLock() }
+            catch { cleanupFailed = true }
+            coordinatorLeaseHeld = false
+            do { try await rootAuthority.activationCoordinator.release(token: lockToken) }
+            catch { cleanupFailed = true }
+            guard cleanupFailed == false else {
+                throw LocalRuntimeStorageError.canonicalActivationIsolationIndeterminate
+            }
+            return artifacts
+        } catch {
+            let operationError = error
+            var cleanupFailed = false
+            if activationFileLockHeld {
+                activationFileLockHeld = false
+                do { try releaseActivationFileLock() }
+                // AMBitionsAllowWeakPattern(reason: "Release failure is retained as explicit forensic cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if coordinatorLeaseHeld {
+                coordinatorLeaseHeld = false
+                do { try await rootAuthority.activationCoordinator.release(token: lockToken) }
+                // AMBitionsAllowWeakPattern(reason: "Coordinator release failure is retained as explicit forensic cleanup failure state")
+                catch { cleanupFailed = true }
+            }
+            if cleanupFailed {
+                throw LocalRuntimeStorageError.canonicalActivationIsolationIndeterminate
+            }
+            throw operationError
+        }
+    }
+
+    private func activationAuthorityNowMilliseconds() throws -> Int64 {
+        let value = environment.clock.now.timeIntervalSince1970 * 1_000
+        guard value.isFinite, value >= 0, value <= Double(Int64.max) else {
+            throw RuntimeGenerationControlError.malformed(field: "activation_clock")
+        }
+        return Int64(value.rounded(.towardZero))
+    }
+
+#if AMBITIONS_LEGACY_RUNTIME_TEST_SUPPORT
+    /// Legacy schema-v1 construction retained only for old test fixtures. It is
+    /// absent from release builds and is not a shipping mutation authority.
     func createAndActivateGeneration(
         id requestedID: RuntimeStoreGenerationID? = nil,
         activatedAt requestedActivationDate: Date? = nil
@@ -701,25 +1834,41 @@ actor RuntimeStoreGenerationManager {
                         openMode: .existingOnly
                     )
                 )
-                try await CanonicalRuntimeStore.installSchema(
-                    in: database,
-                    generationID: id,
-                    createdAtMilliseconds: activationMilliseconds
-                )
-                let checkpoint = try await database.checkpoint(.truncate)
-                guard checkpoint.logFrameCount == checkpoint.checkpointedFrameCount else {
-                    throw LocalRuntimeStorageError.canonicalIntegrityFailure
+                do {
+                    try await CanonicalRuntimeStore.installSchema(
+                        in: database,
+                        generationID: id,
+                        createdAtMilliseconds: activationMilliseconds
+                    )
+                    let checkpoint = try await database.checkpoint(.truncate)
+                    guard checkpoint.logFrameCount == checkpoint.checkpointedFrameCount else {
+                        throw LocalRuntimeStorageError.canonicalIntegrityFailure
+                    }
+                    let integrity = try await database.integrityCheck()
+                    guard integrity.isOK else {
+                        throw LocalRuntimeStorageError.canonicalIntegrityFailure
+                    }
+                    guard (try await database.foreignKeyCheck()).isEmpty else {
+                        throw LocalRuntimeStorageError.canonicalForeignKeyFailure
+                    }
+                    databaseIdentitySHA256 = try await CanonicalRuntimeStore
+                        .databaseIdentitySHA256(in: database)
+                } catch {
+                    let operationError = error
+                    do { try await database.close() }
+                    catch {
+                        throw LocalRuntimeStorageError.canonicalIOFailure(
+                            operation: "close_first_install_database"
+                        )
+                    }
+                    throw operationError
                 }
-                let integrity = try await database.integrityCheck()
-                guard integrity.isOK else {
-                    throw LocalRuntimeStorageError.canonicalIntegrityFailure
+                do { try await database.close() }
+                catch {
+                    throw LocalRuntimeStorageError.canonicalIOFailure(
+                        operation: "close_first_install_database"
+                    )
                 }
-                guard (try await database.foreignKeyCheck()).isEmpty else {
-                    throw LocalRuntimeStorageError.canonicalForeignKeyFailure
-                }
-                databaseIdentitySHA256 = try await CanonicalRuntimeStore
-                    .databaseIdentitySHA256(in: database)
-
                 try protectAndSynchronizeSQLiteArtifacts(
                     databaseURL: stagingDatabaseURL,
                     generationDirectoryURL: stagingDirectoryURL
@@ -816,7 +1965,14 @@ actor RuntimeStoreGenerationManager {
                 }
             }
             if finalDirectoryMoved, activationCommitted == false {
-                let observedDigest = try? activeManifestFileDigestIfPresent()
+                let observedDigest: String?
+                do {
+                    observedDigest = try activeManifestFileDigestIfPresent()
+                } catch {
+                    // Unreadable is an unknown authority state, never the same
+                    // as a missing selector. Preserve the committed candidate.
+                    throw LocalRuntimeStorageError.canonicalActivationStateUnknown
+                }
                 if observedDigest == attemptedManifestDigest {
                     throw LocalRuntimeStorageError.canonicalActivationStateUnknown
                 }
@@ -832,7 +1988,9 @@ actor RuntimeStoreGenerationManager {
             throw Self.mapFailure(error, operation: "create_generation")
         }
     }
+#endif
 
+#if AMBITIONS_LEGACY_RUNTIME_TEST_SUPPORT
     func resolveActiveGeneration() async throws -> ResolvedRuntimeStoreGeneration {
         try rootAuthority.revalidatePinnedRoot()
         try await requireProtectedData()
@@ -936,17 +2094,18 @@ actor RuntimeStoreGenerationManager {
             databaseURL: databaseURL
         )
         let observedDatabaseIdentitySHA256: String
-        let openedDatabase: SQLiteDatabase
+        var openedDatabase: SQLiteDatabase?
         let pinnedFiles: RuntimeStorePinnedFileSet
         do {
-            openedDatabase = try SQLiteDatabase(
+            let database = try SQLiteDatabase(
                 url: databaseURL,
                 configuration: CanonicalRuntimeStore.sqliteConfiguration(
                     openMode: .existingOnly
                 )
             )
+            openedDatabase = database
             let effectiveUserVersion = try await CanonicalRuntimeStore
-                .effectiveUserVersion(in: openedDatabase)
+                .effectiveUserVersion(in: database)
             guard effectiveUserVersion <= canonicalRuntimeStoreSchemaVersion else {
                 throw LocalRuntimeStorageError.canonicalFutureDatabaseSchema(
                     maximumSupported: canonicalRuntimeStoreSchemaVersion,
@@ -962,7 +2121,7 @@ actor RuntimeStoreGenerationManager {
                 )
             }
             observedDatabaseIdentitySHA256 = try await CanonicalRuntimeStore
-                .databaseIdentitySHA256(in: openedDatabase)
+                .databaseIdentitySHA256(in: database)
             try protectAndSynchronizeSQLiteArtifacts(
                 databaseURL: databaseURL,
                 generationDirectoryURL: generationDirectoryURL
@@ -972,15 +2131,44 @@ actor RuntimeStoreGenerationManager {
             )
             try pinnedFiles.requireCompatiblePreOpenIdentity(preOpenFiles)
         } catch {
+            if let openedDatabase {
+                do { try await openedDatabase.close() }
+                catch {
+                    throw LocalRuntimeStorageError.canonicalIOFailure(
+                        operation: "close_failed_generation_resolver_database"
+                    )
+                }
+            }
             throw Self.mapFailure(
                 error,
                 operation: "verify_database_identity"
             )
         }
+        guard let openedDatabase else {
+            throw LocalRuntimeStorageError.canonicalIOFailure(
+                operation: "open_generation_resolver_database"
+            )
+        }
         guard observedDatabaseIdentitySHA256 == manifest.databaseIdentitySHA256 else {
+            do { try await openedDatabase.close() }
+            catch {
+                throw LocalRuntimeStorageError.canonicalIOFailure(
+                    operation: "close_mismatched_generation_resolver_database"
+                )
+            }
             throw LocalRuntimeStorageError.canonicalManifestUnverified
         }
-        try rootAuthority.revalidatePinnedRoot()
+        do {
+            try rootAuthority.revalidatePinnedRoot()
+        } catch {
+            do { try await openedDatabase.close() }
+            catch {
+                throw LocalRuntimeStorageError.canonicalIOFailure(
+                    operation: "close_unpinned_generation_resolver_database"
+                )
+            }
+            throw error
+        }
 
         return ResolvedRuntimeStoreGeneration(
             manifest: manifest,
@@ -994,10 +2182,135 @@ actor RuntimeStoreGenerationManager {
             verifiedDatabase: openedDatabase
         )
     }
+#endif
 }
 
 private extension RuntimeStoreGenerationManager {
+    func requireCurrentCandidateCompletionWitness(
+        _ completion: RuntimeGenerationCandidatePreparationCompletion,
+        candidate: RuntimeGenerationCandidateRecord,
+        stagingDirectoryURL: URL,
+        stagingPin: RuntimeStoreDirectoryPin
+    ) throws {
+        guard completion.candidateRecordDigest == candidate.recordDigest,
+              completion.directoryDevice == stagingPin.identity.device,
+              completion.directoryInode == stagingPin.identity.inode else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+        let database = try RuntimeGenerationDatabaseAuthority.artifact(
+            at: stagingDirectoryURL.appendingPathComponent("Runtime.sqlite"),
+            relativePath: "Runtime.sqlite"
+        ).semantic
+        let authorityURL = stagingDirectoryURL.appendingPathComponent("Authority.json")
+        let authority = try RuntimeGenerationDatabaseAuthority.artifact(
+            at: authorityURL, relativePath: "Authority.json"
+        ).semantic
+        let observed = try RuntimeGenerationLifecycleService
+            .descriptorRelativeArtifactInventory(
+                root: stagingPin, maximumTotalBytes: 8 * 1_024 * 1_024 * 1_024
+            )
+        let expected = [database, authority].sorted { $0.relativePath < $1.relativePath }
+        var bytes: Int64 = 0
+        for artifact in observed {
+            guard artifact.byteCount <= Int64.max - bytes else {
+                throw RuntimeGenerationControlError.resourcePolicyExceeded(
+                    resource: "candidate_publication_witness_bytes",
+                    maximum: 8 * 1_024 * 1_024 * 1_024
+                )
+            }
+            bytes += artifact.byteCount
+        }
+        let inventoryDigest = LocalRuntimeStorageChecksum.sha256Hex(for: observed.map {
+            "\($0.relativePath)\n\($0.sha256)\n\($0.byteCount)\n\($0.protectionClass)"
+        }.joined(separator: "\n--\n"))
+        let durabilityDigest = LocalRuntimeStorageChecksum.sha256Hex(
+            for: "candidate-directory-durability-v1\n\(stagingPin.identity.device)\n\(stagingPin.identity.inode)\n\(inventoryDigest)\n\(observed.count)\n\(bytes)"
+        )
+        guard observed == expected,
+              completion.interiorArtifactCount == Int64(observed.count),
+              completion.interiorByteCount == bytes,
+              completion.interiorInventoryDigest == inventoryDigest,
+              completion.durabilityWitnessDigest == durabilityDigest else {
+            throw RuntimeGenerationControlError.activationAuthorityMismatch
+        }
+    }
+
+    func acquireCandidatePublicationLock(
+        generationID: RuntimeStoreGenerationID
+    ) throws -> Int32 {
+        try RuntimeStorePathValidation.requireSafeComponent(generationID.pathComponent)
+        try rootAuthority.revalidatePinnedRoot()
+        let controlPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+            locations.controlURL,
+            createFinalComponentIfMissing: false
+        )
+        try controlPin.revalidate()
+        let lockURL = locations.controlURL.appendingPathComponent(
+            ".derived-candidate-\(generationID.pathComponent).lock",
+            isDirectory: false
+        )
+        let descriptor = Darwin.open(
+            lockURL.path,
+            O_RDWR | O_CREAT | O_NOFOLLOW | O_CLOEXEC,
+            S_IRUSR | S_IWUSR
+        )
+        guard descriptor >= 0 else {
+            throw LocalRuntimeStorageError.canonicalActivationLockFailed
+        }
+        var descriptorStatus = stat()
+        guard fstat(descriptor, &descriptorStatus) == 0,
+              descriptorStatus.st_mode & S_IFMT == S_IFREG,
+              descriptorStatus.st_nlink == 1,
+              Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+            _ = Darwin.close(descriptor)
+            throw LocalRuntimeStorageError.canonicalActivationLockFailed
+        }
+        do {
+            try RuntimeStoreFileDurability.applyCompleteProtection(
+                toOpenFileDescriptor: descriptor,
+                artifact: "derived_candidate_lock"
+            )
+            guard Darwin.fsync(descriptor) == 0 else {
+                throw LocalRuntimeStorageError.canonicalActivationLockFailed
+            }
+            var pathStatus = stat()
+            var refreshedDescriptorStatus = stat()
+            guard lstat(lockURL.path, &pathStatus) == 0,
+                  fstat(descriptor, &refreshedDescriptorStatus) == 0,
+                  pathStatus.st_mode & S_IFMT == S_IFREG,
+                  pathStatus.st_nlink == 1,
+                  refreshedDescriptorStatus.st_nlink == 1,
+                  pathStatus.st_dev == refreshedDescriptorStatus.st_dev,
+                  pathStatus.st_ino == refreshedDescriptorStatus.st_ino,
+                  refreshedDescriptorStatus.st_dev == descriptorStatus.st_dev,
+                  refreshedDescriptorStatus.st_ino == descriptorStatus.st_ino else {
+                throw LocalRuntimeStorageError.canonicalActivationLockFailed
+            }
+            try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.controlURL)
+            try controlPin.revalidate()
+            try rootAuthority.revalidatePinnedRoot()
+            return descriptor
+        } catch {
+            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = Darwin.close(descriptor)
+            throw error
+        }
+    }
+
+    func releaseCandidatePublicationLock(_ descriptor: Int32) throws {
+        let unlockResult = Darwin.flock(descriptor, LOCK_UN)
+        let closeResult = Darwin.close(descriptor)
+        guard unlockResult == 0, closeResult == 0 else {
+            throw LocalRuntimeStorageError.canonicalActivationLockFailed
+        }
+    }
+
     func createExclusiveDatabaseFile(at url: URL) throws {
+        let parentPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
+            url.deletingLastPathComponent(),
+            createFinalComponentIfMissing: false
+        )
+        try parentPin.revalidate()
         let descriptor = Darwin.open(
             url.path,
             O_CREAT | O_EXCL | O_RDWR | O_CLOEXEC | O_NOFOLLOW,
@@ -1008,16 +2321,44 @@ private extension RuntimeStoreGenerationManager {
                 operation: "create_staging_database"
             )
         }
-        let closeResult = Darwin.close(descriptor)
-        guard closeResult == 0 else {
-            throw RuntimeStoreErrnoMapper.storageError(
-                operation: "close_staging_database"
+        var closeAttempted = false
+        do {
+            try RuntimeStoreFileDurability.applyCompleteProtection(
+                toOpenFileDescriptor: descriptor,
+                artifact: "staging_database"
             )
+            guard Darwin.fsync(descriptor) == 0 else {
+                throw RuntimeStoreErrnoMapper.storageError(
+                    operation: "synchronize_staging_database"
+                )
+            }
+            var descriptorStatus = stat()
+            var pathStatus = stat()
+            guard fstat(descriptor, &descriptorStatus) == 0,
+                  lstat(url.path, &pathStatus) == 0,
+                  descriptorStatus.st_mode & S_IFMT == S_IFREG,
+                  descriptorStatus.st_nlink == 1,
+                  pathStatus.st_nlink == 1,
+                  descriptorStatus.st_dev == pathStatus.st_dev,
+                  descriptorStatus.st_ino == pathStatus.st_ino else {
+                throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
+                    artifact: "staging_database"
+                )
+            }
+            closeAttempted = true
+            guard Darwin.close(descriptor) == 0 else {
+                throw RuntimeStoreErrnoMapper.storageError(
+                    operation: "close_staging_database"
+                )
+            }
+            try RuntimeStoreFileDurability.synchronizeDirectory(
+                at: url.deletingLastPathComponent()
+            )
+            try parentPin.revalidate()
+        } catch {
+            if closeAttempted == false { _ = Darwin.close(descriptor) }
+            throw error
         }
-        try RuntimeStoreFileDurability.applyCompleteProtection(
-            at: url,
-            artifact: "staging_database"
-        )
     }
 
     func recoverStaleUncommittedArtifacts() throws {
@@ -1043,11 +2384,17 @@ private extension RuntimeStoreGenerationManager {
                 )
             }
             try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.storesURL)
-            if isStaging {
-                try fileManager.removeItem(at: quarantineURL)
-                try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.storesURL)
-            }
+            // Staging bytes are recovery/forensic authority until a durable
+            // preparation journal proves their disposition. Never delete them
+            // merely because activation was interrupted.
         }
+    }
+
+    func reconcileVaultRestoreDeltaJournals() throws {
+        try RuntimeGenerationVaultGraphVerifier.reconcileRestoreDeltaJournals(
+            locations: locations,
+            fileManager: fileManager
+        )
     }
 
     func activeManifestFileDigestIfPresent() throws -> String? {
@@ -1087,71 +2434,25 @@ private extension RuntimeStoreGenerationManager {
     }
 
     func acquireActivationFileLock() throws {
-        guard activationLockDescriptor == nil else {
+        guard activationLockScope == nil else {
             throw LocalRuntimeStorageError.canonicalActivationBusy
         }
-        let lockURL = locations.rootURL.appendingPathComponent(
-            ".activation.lock",
-            isDirectory: false
+        activationLockScope = try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: rootAuthority,
+            locations: locations,
+            mode: .exclusive,
+            createIfMissing: true
         )
-        let descriptor = Darwin.open(
-            lockURL.path,
-            O_CREAT | O_RDWR | O_CLOEXEC | O_NOFOLLOW,
-            S_IRUSR | S_IWUSR
-        )
-        guard descriptor >= 0 else {
-            throw RuntimeStoreErrnoMapper.storageError(
-                operation: "open_activation_lock",
-                fallback: .canonicalActivationLockFailed
-            )
-        }
-        guard Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
-            let lockError = errno == EWOULDBLOCK
-                ? LocalRuntimeStorageError.canonicalActivationBusy
-                : RuntimeStoreErrnoMapper.storageError(
-                    operation: "acquire_activation_lock",
-                    fallback: .canonicalActivationLockFailed
-                )
-            _ = Darwin.close(descriptor)
-            throw lockError
-        }
-        var status = stat()
-        guard fstat(descriptor, &status) == 0,
-              status.st_mode & S_IFMT == S_IFREG
-        else {
-            _ = Darwin.flock(descriptor, LOCK_UN)
-            _ = Darwin.close(descriptor)
+        guard let activationLockScope else {
             throw LocalRuntimeStorageError.canonicalActivationLockFailed
         }
-        do {
-            try RuntimeStoreFileDurability.applyCompleteProtection(
-                at: lockURL,
-                artifact: "activation_lock"
-            )
-            var pathStatus = stat()
-            guard lstat(lockURL.path, &pathStatus) == 0,
-                  status.st_dev == pathStatus.st_dev,
-                  status.st_ino == pathStatus.st_ino,
-                  pathStatus.st_mode & S_IFMT == S_IFREG
-            else {
-                throw LocalRuntimeStorageError.canonicalActivationLockFailed
-            }
-        } catch {
-            _ = Darwin.flock(descriptor, LOCK_UN)
-            _ = Darwin.close(descriptor)
-            throw error
-        }
-        activationLockDescriptor = descriptor
+        try activationLockScope.revalidate(requiredMode: .exclusive)
     }
 
     func releaseActivationFileLock() throws {
-        guard let descriptor = activationLockDescriptor else { return }
-        activationLockDescriptor = nil
-        let unlockResult = Darwin.flock(descriptor, LOCK_UN)
-        let closeResult = Darwin.close(descriptor)
-        guard unlockResult == 0, closeResult == 0 else {
-            throw LocalRuntimeStorageError.canonicalActivationLockFailed
-        }
+        guard let scope = activationLockScope else { return }
+        activationLockScope = nil
+        try scope.close()
     }
 
     func requireProtectedData() async throws {
@@ -1184,6 +2485,7 @@ private extension RuntimeStoreGenerationManager {
         try RuntimeStoreFileDurability.synchronizeDirectory(at: locations.rootURL)
     }
 
+#if AMBITIONS_LEGACY_RUNTIME_TEST_SUPPORT
     func loadPriorManifestForActivation() async throws -> ActiveRuntimeStoreManifest? {
         guard fileManager.fileExists(atPath: locations.activeManifestURL.path) else {
             let contents = try fileManager.contentsOfDirectory(
@@ -1202,6 +2504,7 @@ private extension RuntimeStoreGenerationManager {
         }
         return (try await resolveActiveGeneration()).manifest
     }
+#endif
 
     func readBoundedManifestData() throws -> Data {
         guard let data = try RuntimeStoreManifestDescriptorReader.readIfPresent(
@@ -1326,15 +2629,32 @@ private extension RuntimeStoreGenerationManager {
                 openMode: .existingOnly
             )
         )
-        let identity = try await CanonicalRuntimeStore.databaseIdentitySHA256(
-            in: database
-        )
-        let postOpenFiles = try RuntimeStorePinnedFileSet.capture(
-            databaseURL: predecessorDatabaseURL
-        )
-        try postOpenFiles.requireCompatiblePreOpenIdentity(preOpenFiles)
-        guard identity == predecessor.databaseIdentitySHA256 else {
-            throw LocalRuntimeStorageError.canonicalManifestUnverified
+        do {
+            let identity = try await CanonicalRuntimeStore.databaseIdentitySHA256(
+                in: database
+            )
+            let postOpenFiles = try RuntimeStorePinnedFileSet.capture(
+                databaseURL: predecessorDatabaseURL
+            )
+            try postOpenFiles.requireCompatiblePreOpenIdentity(preOpenFiles)
+            guard identity == predecessor.databaseIdentitySHA256 else {
+                throw LocalRuntimeStorageError.canonicalManifestUnverified
+            }
+        } catch {
+            let operationError = error
+            do { try await database.close() }
+            catch {
+                throw LocalRuntimeStorageError.canonicalIOFailure(
+                    operation: "close_predecessor_verification_database"
+                )
+            }
+            throw operationError
+        }
+        do { try await database.close() }
+        catch {
+            throw LocalRuntimeStorageError.canonicalIOFailure(
+                operation: "close_predecessor_verification_database"
+            )
         }
     }
 
@@ -1489,7 +2809,11 @@ enum RuntimeStoreManifestCodec {
             throw LocalRuntimeStorageError.canonicalManifestMalformed
         }
         do {
-            return try decoder.decode(ActiveRuntimeStoreManifest.self, from: data)
+            let manifest = try decoder.decode(ActiveRuntimeStoreManifest.self, from: data)
+            guard try encode(manifest) == data else {
+                throw LocalRuntimeStorageError.canonicalManifestMalformed
+            }
+            return manifest
         } catch {
             throw LocalRuntimeStorageError.canonicalManifestMalformed
         }
@@ -1624,7 +2948,7 @@ enum RuntimeStorePathValidation {
     }
 }
 
-struct RuntimeStoreFileIdentity: Sendable, Equatable {
+struct RuntimeStoreFileIdentity: Sendable, Equatable, Codable, Hashable {
     let device: UInt64
     let inode: UInt64
 }
@@ -1787,6 +3111,7 @@ enum RuntimeStoreManifestDescriptorReader {
         let maximumManifestBytes = off_t(RuntimeStoreManifestCodec.maximumByteCount)
         guard fstat(descriptor, &initialStatus) == 0,
               initialStatus.st_mode & S_IFMT == S_IFREG,
+              initialStatus.st_nlink == 1,
               initialStatus.st_size >= 0,
               initialStatus.st_size <= maximumManifestBytes
         else {
@@ -1827,6 +3152,8 @@ enum RuntimeStoreManifestDescriptorReader {
               initialStatus.st_ino == finalStatus.st_ino,
               initialStatus.st_dev == pathStatus.st_dev,
               initialStatus.st_ino == pathStatus.st_ino,
+              finalStatus.st_nlink == 1,
+              pathStatus.st_nlink == 1,
               pathStatus.st_mode & S_IFMT == S_IFREG,
               data.isEmpty == false
         else {
@@ -1839,6 +3166,20 @@ enum RuntimeStoreManifestDescriptorReader {
 }
 
 enum RuntimeStoreFileDurability {
+    static func applyCompleteProtection(
+        toOpenFileDescriptor descriptor: Int32,
+        artifact: String
+    ) throws {
+        guard Darwin.fcntl(
+            descriptor, F_SETPROTECTIONCLASS, PROTECTION_CLASS_A
+        ) == 0,
+        Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+            throw LocalRuntimeStorageError.canonicalFileProtectionFailure(
+                artifact: artifact
+            )
+        }
+    }
+
     static func applyCompleteProtection(
         at url: URL,
         artifact: String
@@ -1889,17 +3230,14 @@ enum RuntimeStoreFileDurability {
     }
 
     static func requireDirectory(at url: URL, artifact: String) throws {
-        let values: URLResourceValues
-        do {
-            values = try url.resourceValues(
-                forKeys: [.isDirectoryKey, .isSymbolicLinkKey]
-            )
-        } catch {
+        var status = stat()
+        guard Darwin.lstat(url.path, &status) == 0 else {
             throw LocalRuntimeStorageError.canonicalIOFailure(
                 operation: "inspect_\(artifact)"
             )
         }
-        guard values.isDirectory == true, values.isSymbolicLink != true else {
+        guard status.st_mode & S_IFMT == S_IFDIR,
+              status.st_nlink >= 2 else {
             throw LocalRuntimeStorageError.canonicalManifestMismatch(
                 field: artifact
             )
@@ -1910,17 +3248,14 @@ enum RuntimeStoreFileDurability {
         at url: URL,
         artifact: String
     ) throws {
-        let values: URLResourceValues
-        do {
-            values = try url.resourceValues(
-                forKeys: [.isRegularFileKey, .isSymbolicLinkKey]
-            )
-        } catch {
+        var status = stat()
+        guard Darwin.lstat(url.path, &status) == 0 else {
             throw LocalRuntimeStorageError.canonicalIOFailure(
                 operation: "inspect_\(artifact)"
             )
         }
-        guard values.isRegularFile == true, values.isSymbolicLink != true else {
+        guard status.st_mode & S_IFMT == S_IFREG,
+              status.st_nlink == 1 else {
             throw LocalRuntimeStorageError.canonicalManifestMismatch(
                 field: artifact
             )
@@ -1944,6 +3279,7 @@ enum RuntimeStoreFileDurability {
         let closeResult = Darwin.close(descriptor)
         guard statusResult == 0,
               status.st_mode & S_IFMT == S_IFREG,
+              status.st_nlink == 1,
               syncResult == 0,
               closeResult == 0
         else {
@@ -1955,16 +3291,22 @@ enum RuntimeStoreFileDurability {
     }
 
     static func synchronizeDirectory(at url: URL) throws {
-        let descriptor = Darwin.open(url.path, O_RDONLY)
+        let descriptor = Darwin.open(
+            url.path,
+            O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC
+        )
         guard descriptor >= 0 else {
             throw RuntimeStoreErrnoMapper.storageError(
                 operation: "open_directory_for_synchronization"
             )
         }
-        let synchronizationResult = Darwin.fsync(descriptor)
+        var status = stat()
+        let statusResult = fstat(descriptor, &status)
+        let synchronizationResult = statusResult == 0 ? Darwin.fsync(descriptor) : -1
         let synchronizationErrno = errno
         let closeResult = Darwin.close(descriptor)
-        if synchronizationResult != 0 {
+        if statusResult != 0 || status.st_mode & S_IFMT != S_IFDIR
+            || synchronizationResult != 0 {
             errno = synchronizationErrno
             throw RuntimeStoreErrnoMapper.storageError(
                 operation: "synchronize_directory"

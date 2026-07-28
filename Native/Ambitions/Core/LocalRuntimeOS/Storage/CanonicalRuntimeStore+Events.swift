@@ -203,6 +203,14 @@ struct RuntimeVerifiedExactSemanticEventEvidence: Sendable, Equatable {
     let terminal: CanonicalRuntimeSemanticEventRecord
 }
 
+enum CanonicalRuntimeSemanticEventInspectionMode: Sendable, Equatable {
+    /// Returns typed blocked evidence without changing canonical authority.
+    /// Derived-state builders and read-only verification must use this mode.
+    case observeOnly
+    /// Canonical event inspection owns durable quarantine evidence.
+    case persistCanonicalQuarantine
+}
+
 enum CanonicalRuntimeSemanticEventQuarantineReason: String, Codable, Sendable, Equatable, Hashable {
     case envelopeTooLarge = "envelope_too_large"
     case payloadTooLarge = "payload_too_large"
@@ -476,7 +484,7 @@ enum CanonicalRuntimeSemanticEventStore {
                 let prefixPage = try inspectWholeChain(
                     database: database,
                     codec: codec,
-                    quarantineBlocked: true,
+                    mode: .persistCanonicalQuarantine,
                     trustedAnchor: trustedAnchor,
                     maximumRows: pageLimit
                 )
@@ -504,7 +512,7 @@ enum CanonicalRuntimeSemanticEventStore {
         let continuation = try inspectWholeChain(
             database: database,
             codec: codec,
-            quarantineBlocked: true,
+            mode: .persistCanonicalQuarantine,
             trustedAnchor: trustedAnchor,
             maximumRows: bounded + 1
         )
@@ -525,6 +533,7 @@ enum CanonicalRuntimeSemanticEventStore {
         after continuation: RuntimeCanonicalReplayCursor?,
         initialAnchor: RuntimeCanonicalReplayCursor?,
         limit: Int,
+        mode: CanonicalRuntimeSemanticEventInspectionMode,
         codec: RuntimeSemanticEventCodec = RuntimeSemanticEventCodec()
     ) throws -> CanonicalRuntimePage<CanonicalRuntimeSemanticEventInspection, RuntimeCanonicalReplayCursor> {
         let bounded = min(max(1, limit), maximumPageLimit)
@@ -532,7 +541,7 @@ enum CanonicalRuntimeSemanticEventStore {
         let all = try inspectWholeChain(
             database: database,
             codec: codec,
-            quarantineBlocked: true,
+            mode: mode,
             trustedAnchor: predecessor,
             maximumRows: bounded + 1
         )
@@ -955,7 +964,7 @@ private extension CanonicalRuntimeSemanticEventStore {
     static func inspectWholeChain(
         database: isolated SQLiteDatabase,
         codec: RuntimeSemanticEventCodec,
-        quarantineBlocked: Bool,
+        mode: CanonicalRuntimeSemanticEventInspectionMode,
         trustedAnchor: RuntimeCanonicalReplayCursor? = nil,
         maximumRows: Int? = nil
     ) throws -> [CanonicalRuntimeSemanticEventInspection] {
@@ -1075,7 +1084,7 @@ private extension CanonicalRuntimeSemanticEventStore {
                 known[eventID] = (sequence, record.lineage.correlationID.rawValue)
             } else {
                 let blockedReason = reason ?? .malformedStoredRow
-                if quarantineBlocked {
+                if mode == .persistCanonicalQuarantine {
                     _ = try quarantine(
                         sourceEventID: eventID, sourceEventSequence: sequence,
                         reason: blockedReason, bytes: bytes, retention: .inline(bytes),

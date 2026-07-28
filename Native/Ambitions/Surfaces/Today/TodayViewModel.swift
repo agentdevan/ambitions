@@ -92,24 +92,23 @@ final class TodayViewModel {
     ) async {
         do {
             let response: TodayActionResponse
-            if RepositoryBackedTodayService.durableGoalStepActionKinds.contains(action.kind) {
-                guard let runtimeClient,
-                      let preparer = service as? any TodayDurableGoalStepActionPreparing else {
-                    throw TodayDurableActionError.unavailable
-                }
-                let prepared = try await preparer.prepareDurableGoalStepAction(action, now: now)
-                let result = await runtimeClient.execute(prepared.command, prepared.context)
-                guard result.status == .succeeded,
-                      result.metadata["runtimeReceiptID"] != nil,
-                      result.metadata["runtimeProjectionStoreStatus"] == "saved",
-                      result.metadata["todayActionMaterialization"] == "saved_post_authority",
-                      await Self.hasMatchingTodayProjection(result, client: runtimeClient) else {
-                    throw TodayDurableActionError.needsRecovery
-                }
-                response = TodayActionResponse(message: Self.message(for: action.kind))
-            } else {
-                response = try await service.performAction(action, now: now)
+            guard RepositoryBackedTodayService.durableGoalStepActionKinds.contains(action.kind) else {
+                throw TodayDurableActionError.unavailable
             }
+            guard let runtimeClient,
+                  let preparer = service as? any TodayDurableGoalStepActionPreparing else {
+                throw TodayDurableActionError.unavailable
+            }
+            let prepared = try await preparer.prepareDurableGoalStepAction(action, now: now)
+            let result = await runtimeClient.execute(prepared.command, prepared.context)
+            guard result.status == .succeeded,
+                  result.metadata["runtimeReceiptID"] != nil,
+                  result.metadata["runtimeProjectionStoreStatus"] == "saved",
+                  result.metadata["todayActionMaterialization"] == "saved_post_authority",
+                  await Self.hasMatchingTodayProjection(result, client: runtimeClient) else {
+                throw TodayDurableActionError.needsRecovery
+            }
+            response = TodayActionResponse(message: Self.message(for: action.kind))
             transientMessage = response.message
             await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext, timeZone: timeZone)
         } catch {

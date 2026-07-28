@@ -1,13 +1,43 @@
 import AmbitionsRuntimeSQLite
 import Foundation
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
+    func advanceCanonicalProjectionBuildAfterScrub(
+        _ work: RuntimeCanonicalProjectionBuildWork
+    ) async throws -> RuntimeCanonicalProjectionUnitResult? {
+        try Task.checkCancellation()
+        return try await withDerivedImmediateTransaction { database in
+            guard work.phase == .scrubProjection || work.phase == .scrubSearch else {
+                throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+            }
+            try Self.requireCanonicalProjectionBuildFence(
+                work, phase: work.phase, database: database
+            )
+            let kind = work.phase == .scrubProjection ? "projection" : "search"
+            guard try Self.hasValidCanonicalScrubCertificate(
+                work, kind: kind, database: database
+            ) else { return nil }
+            let next: RuntimeCanonicalProjectionBuildPhase
+            if work.phase == .scrubSearch {
+                next = .ready
+            } else {
+                next = work.projectionID == .search ? .indexSearch : .ready
+            }
+            try Self.updateCanonicalProjectionJobPhase(
+                work, nextPhase: next, resetKeyset: true, database: database
+            )
+            return RuntimeCanonicalProjectionUnitResult(
+                nextPhase: next, progressCursor: work.targetCursor
+            )
+        }
+    }
+
     func activateCanonicalProjectionGeneration(
         _ work: RuntimeCanonicalProjectionBuildWork,
         nowMilliseconds: Int64
     ) async throws {
         try Task.checkCancellation()
-        try await withCanonicalImmediateTransaction { database in
+        try await withDerivedImmediateTransaction { database in
             try Self.activateCanonicalProjectionGenerationInTransaction(
                 work, nowMilliseconds: nowMilliseconds, database: database
             )
@@ -19,8 +49,8 @@ extension CanonicalRuntimeStore {
         nowMilliseconds: Int64,
         database: isolated SQLiteDatabase
     ) throws {
-            try Task.checkCancellation()
-            try Self.requireCanonicalProjectionBuildFence(work, phase: .ready, database: database)
+        try Task.checkCancellation()
+        try Self.requireCanonicalProjectionBuildFence(work, phase: .ready, database: database)
             let targetCertificate = try RuntimeCanonicalReplayEngine
                 .verifiedReconstructionCertificate(at: work.targetCursor, database: database)
             guard targetCertificate.sourceChainDigest.hexadecimal == work.sourceChainDigest else {
@@ -58,6 +88,11 @@ extension CanonicalRuntimeStore {
             guard certificate == expectedCertificate else {
                 throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
             }
+            guard try Self.hasValidCanonicalScrubCertificate(
+                work, kind: "projection", database: database
+            ) else {
+                throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+            }
             let invalidations = try Self.authenticatedInvalidations(
                 projectionID: work.projectionID,
                 limit: RuntimeCanonicalProjectionWorker.maximumInvalidationBatch,
@@ -78,6 +113,11 @@ extension CanonicalRuntimeStore {
             }
             if work.projectionID == .search {
                 try Self.requireSealedCanonicalSearchGeneration(work, database: database)
+                guard try Self.hasValidCanonicalScrubCertificate(
+                    work, kind: "search", database: database
+                ) else {
+                    throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+                }
             }
 
             let retiredProjectionRows = try database.query(
@@ -131,27 +171,7 @@ extension CanonicalRuntimeStore {
             )
             if work.projectionID == .search {
                 try Self.activateCanonicalSearchGeneration(work, nowMilliseconds: nowMilliseconds, database: database)
-                let searchGenerationID = Self.canonicalSearchGenerationID(work)
-                let searchCertificateRows = try database.query(
-                    "SELECT generation_certificate_digest FROM runtime_canonical_search_generations WHERE generation_id = ? LIMIT 2",
-                    bindings: [.text(searchGenerationID)]
-                )
-                guard searchCertificateRows.count == 1,
-                      case let .text(searchCertificate)? = searchCertificateRows[0]
-                        .value(named: "generation_certificate_digest") else {
-                    throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
-                }
-                try Self.scheduleCanonicalGenerationScrub(
-                    generationID: searchGenerationID, kind: "search",
-                    certificate: searchCertificate, nowMilliseconds: nowMilliseconds,
-                    database: database
-                )
             }
-            try Self.scheduleCanonicalGenerationScrub(
-                generationID: work.generationID, kind: "projection",
-                certificate: certificate, nowMilliseconds: nowMilliseconds,
-                database: database
-            )
             try Self.scheduleCanonicalGenerationGC(
                 rows: retiredSearchRows, kind: "search", firstPhase: "postings",
                 nowMilliseconds: nowMilliseconds, database: database
@@ -196,9 +216,119 @@ extension CanonicalRuntimeStore {
                 throw RuntimeCanonicalProjectionPersistenceError.leaseUnavailable
             }
     }
+
+    static func hasValidCanonicalScrubCertificate(
+        _ work: RuntimeCanonicalProjectionBuildWork,
+        kind: String,
+        database: isolated SQLiteDatabase
+    ) throws -> Bool {
+        guard kind == "projection" || (kind == "search" && work.projectionID == .search) else {
+            throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+        }
+        let generationID = kind == "projection"
+            ? work.generationID : canonicalSearchGenerationID(work)
+        let generationRows: [SQLiteRow]
+        if kind == "projection" {
+            generationRows = try database.query(
+                """
+                SELECT generation_certificate_digest, entry_count AS observed_count,
+                       shard_count AS observed_shard_count, 0 AS observed_posting_count,
+                       0 AS observed_posting_bytes, entry_root_digest AS root_digest
+                FROM runtime_canonical_projection_generations
+                WHERE generation_id = ? AND projection_id = ? AND status = 'sealed' LIMIT 2
+                """,
+                bindings: [.text(generationID), .text(work.projectionID.rawValue)]
+            )
+        } else {
+            generationRows = try database.query(
+                """
+                SELECT generation_certificate_digest, document_count AS observed_count,
+                       shard_count AS observed_shard_count,
+                       posting_count AS observed_posting_count,
+                       posting_bytes AS observed_posting_bytes,
+                       document_root_digest AS root_digest
+                FROM runtime_canonical_search_generations
+                WHERE generation_id = ? AND projection_generation_id = ?
+                  AND status = 'sealed' LIMIT 2
+                """,
+                bindings: [.text(generationID), .text(work.generationID)]
+            )
+        }
+        guard generationRows.count == 1,
+              case let .text(generationCertificate)? = generationRows[0]
+                .value(named: "generation_certificate_digest"),
+              case let .integer(observedCount)? = generationRows[0]
+                .value(named: "observed_count"), observedCount >= 0,
+              case let .integer(observedShardCount)? = generationRows[0]
+                .value(named: "observed_shard_count"), observedShardCount >= 0,
+              case let .integer(observedPostingCount)? = generationRows[0]
+                .value(named: "observed_posting_count"), observedPostingCount >= 0,
+              case let .integer(observedPostingBytes)? = generationRows[0]
+                .value(named: "observed_posting_bytes"), observedPostingBytes >= 0,
+              case let .text(rootDigest)? = generationRows[0].value(named: "root_digest") else {
+            throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+        }
+        let scrubRows = try database.query(
+            """
+            SELECT generation_kind, projection_id, generation_certificate_digest,
+                   observed_count, observed_shard_count, observed_posting_count,
+                   observed_posting_bytes, root_digest, completed_at_ms,
+                   scrub_certificate_digest
+            FROM runtime_canonical_scrub_certificates
+            WHERE generation_id = ? LIMIT 2
+            """,
+            bindings: [.text(generationID)]
+        )
+        guard scrubRows.count <= 1 else {
+            throw RuntimeCanonicalProjectionPersistenceError.derivedArtifactCorrupt
+        }
+        guard let scrub = scrubRows.first else {
+            let quarantine = try database.query(
+                """
+                SELECT 1 FROM runtime_canonical_projection_quarantine
+                WHERE projection_id = ? AND generation_id = ?
+                  AND reason_code = 'scrub_authority_mismatch' LIMIT 2
+                """,
+                bindings: [.text(work.projectionID.rawValue), .text(generationID)]
+            )
+            guard quarantine.count <= 1 else {
+                throw RuntimeCanonicalProjectionPersistenceError.derivedArtifactCorrupt
+            }
+            if quarantine.isEmpty == false {
+                throw RuntimeCanonicalProjectionPersistenceError.derivedArtifactCorrupt
+            }
+            return false
+        }
+        guard scrub.value(named: "generation_kind") == .text(kind),
+              scrub.value(named: "projection_id") == .text(work.projectionID.rawValue),
+              scrub.value(named: "generation_certificate_digest") == .text(generationCertificate),
+              scrub.value(named: "observed_count") == .integer(observedCount),
+              scrub.value(named: "observed_shard_count") == .integer(observedShardCount),
+              scrub.value(named: "observed_posting_count") == .integer(observedPostingCount),
+              scrub.value(named: "observed_posting_bytes") == .integer(observedPostingBytes),
+              scrub.value(named: "root_digest") == .text(rootDigest),
+              case let .integer(completedAt)? = scrub.value(named: "completed_at_ms"),
+              completedAt >= 0,
+              case let .text(scrubCertificate)? = scrub
+                .value(named: "scrub_certificate_digest"),
+              scrubCertificate == canonicalScrubCertificateDigest(
+                  generationID: generationID, kind: kind,
+                  projectionID: work.projectionID.rawValue,
+                  generationCertificate: generationCertificate,
+                  observedCount: Int(observedCount),
+                  observedShardCount: Int(observedShardCount),
+                  observedPostingCount: Int(observedPostingCount),
+                  observedPostingBytes: Int(observedPostingBytes),
+                  rootDigest: rootDigest,
+                  completedAtMilliseconds: completedAt
+              ) else {
+            throw RuntimeCanonicalProjectionPersistenceError.derivedArtifactCorrupt
+        }
+        return true
+    }
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     static func requireSealedCanonicalSearchGeneration(
         _ work: RuntimeCanonicalProjectionBuildWork,
         database: isolated SQLiteDatabase
@@ -218,7 +348,7 @@ extension CanonicalRuntimeStore {
         guard rows.count == 1,
               rows[0].value(named: "generation_id") == .text(generationID),
               rows[0].value(named: "projection_generation_id") == .text(work.generationID),
-              rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue),
+              rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue),
               rows[0].value(named: "definition_digest") == .text(work.definition.authorityDigest),
               rows[0].value(named: "source_sequence") == .integer(Int64(work.targetCursor.sequence)),
               rows[0].value(named: "source_event_hash") == .text(work.targetCursor.eventHash),
@@ -231,7 +361,7 @@ extension CanonicalRuntimeStore {
               certificate == canonicalSearchGenerationCertificateDigest(
                   generationID: generationID,
                   projectionGenerationID: work.generationID,
-                  coverage: .aggregateMetadataOnly,
+                  coverage: .aggregateKindOnly,
                   definitionDigest: work.definition.authorityDigest,
                   sourceCursor: work.targetCursor,
                   documentCount: Int(documentCount),
@@ -371,7 +501,7 @@ extension CanonicalRuntimeStore {
     }
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     static func retireCanonicalGenerationScrubJobs(
         rows: [SQLiteRow],
         database: isolated SQLiteDatabase

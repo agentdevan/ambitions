@@ -27,6 +27,22 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(try store.pendingRequests(), [])
     }
 
+    func testSharedExternalCreationStoreRejectsOversizedPayloadBeforeItCanEnterTheQueue() throws {
+        let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
+        let request = makeRequest(
+            text: String(repeating: "x", count: SharedExternalCreationStore.maximumCaptureTextBytes + 1),
+            source: .shareExtensionText
+        )
+
+        XCTAssertThrowsError(try store.enqueueDurableRequest(request)) { error in
+            guard let storeError = error as? SharedExternalCreationStoreError,
+                  case .invalidRequest = storeError else {
+                return XCTFail("Expected oversized request rejection, got \(error)")
+            }
+        }
+        XCTAssertEqual(try store.pendingRequests(), [])
+    }
+
     func testIndependentStoresSerializeOverlappingQueueMutationsWithoutLostUpdate() async throws {
         let root = temporaryDirectory()
         let firstWriterLoadedQueue = DispatchSemaphore(value: 0)

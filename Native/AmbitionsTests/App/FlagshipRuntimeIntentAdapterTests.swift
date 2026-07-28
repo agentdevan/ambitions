@@ -274,7 +274,7 @@ private extension FlagshipIntentResult {
              let .externalEffectReconciled(receipt, _),
              let .externalEffectFailed(receipt, _, _):
             return receipt
-        case .rejectedBeforeMutation, .revisionConflict:
+        case .outcomeIndeterminate, .rejectedBeforeMutation, .revisionConflict:
             return nil
         }
     }

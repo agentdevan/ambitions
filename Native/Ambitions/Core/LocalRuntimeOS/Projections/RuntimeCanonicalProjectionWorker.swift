@@ -9,6 +9,7 @@ enum RuntimeCanonicalProjectionDrainOutcome: Sendable, Equatable {
         target: RuntimeCanonicalReplayCursor
     )
     case published(projectionID: RuntimeCanonicalProjectionID, cursor: RuntimeCanonicalReplayCursor)
+    case deferred(projectionID: RuntimeCanonicalProjectionID, reasonCode: String)
     case restartDeferred(projectionID: RuntimeCanonicalProjectionID, generationID: String)
     case maintenance(RuntimeCanonicalGenerationMaintenanceOutcome)
     case bootstrappedEmptyAuthority
@@ -34,14 +35,14 @@ actor RuntimeCanonicalProjectionWorker {
     // One maximum-size canonical state plus bounded row metadata.
     static let maximumBytesPerUnit = 2_097_152
 
-    private let store: CanonicalRuntimeStore
+    private let store: any RuntimeCanonicalDerivedTransactionGateway
     private let registry: RuntimeCanonicalProjectionDefinitionRegistry
     private let ownerID: String
     private var inFlight = false
     private var maintenanceTurn = false
 
     init(
-        store: CanonicalRuntimeStore,
+        store: any RuntimeCanonicalDerivedTransactionGateway,
         registry: RuntimeCanonicalProjectionDefinitionRegistry,
         ownerID: String
     ) {
@@ -102,6 +103,37 @@ actor RuntimeCanonicalProjectionWorker {
                 result = try await store.replayCanonicalProjectionEventPage(work, bounds: bounds)
             case .sealProjection:
                 result = try await store.sealCanonicalProjectionEntryShard(work, bounds: bounds)
+            case .scrubProjection, .scrubSearch:
+                if let advanced = try await store.advanceCanonicalProjectionBuildAfterScrub(work) {
+                    return .progressed(
+                        projectionID: work.projectionID,
+                        phase: advanced.nextPhase,
+                        cursor: advanced.progressCursor,
+                        target: work.targetCursor
+                    )
+                }
+                let maintenance = try await store.runOneCanonicalGenerationMaintenanceUnit(
+                    ownerID: ownerID,
+                    nowMilliseconds: nowMilliseconds,
+                    maximumRows: Self.maximumRowsPerUnit
+                )
+                if case .quarantined = maintenance {
+                    let scope: RuntimeCanonicalProjectionRecoveryScope =
+                        work.phase == .scrubSearch ? .search : .projection
+                    try await store.quarantineAndRestartCanonicalProjectionBuild(
+                        work, scope: scope, nowMilliseconds: nowMilliseconds
+                    )
+                    return .restartDeferred(
+                        projectionID: work.projectionID,
+                        generationID: work.generationID
+                    )
+                }
+                return maintenance == .idle
+                    ? .deferred(
+                        projectionID: work.projectionID,
+                        reasonCode: "awaiting_\(work.phase.rawValue)_certificate"
+                    )
+                    : .maintenance(maintenance)
             case .indexSearch:
                 result = try await store.indexCanonicalSearchDocumentPage(work, bounds: bounds)
             case .sealSearch:
@@ -151,6 +183,7 @@ actor RuntimeCanonicalProjectionWorker {
         } catch RuntimeCanonicalProjectionPersistenceError.generationMismatch {
             let scope: RuntimeCanonicalProjectionRecoveryScope =
                 work.phase == .indexSearch || work.phase == .sealSearch
+                    || work.phase == .scrubSearch
                 ? .search : .projection
             try await store.quarantineAndRestartCanonicalProjectionBuild(
                 work, scope: scope, nowMilliseconds: nowMilliseconds
@@ -174,11 +207,15 @@ actor RuntimeCanonicalProjectionWorker {
             )
             return .blocked(projectionID: work.projectionID, reasonCode: reason)
         } catch RuntimeCanonicalProjectionPersistenceError.unitBudgetExceeded {
-            let reason = "source_unit_exceeds_declared_budget"
-            try await store.blockCanonicalProjectionBuild(
-                work, reasonCode: reason, nowMilliseconds: nowMilliseconds
+            return .deferred(
+                projectionID: work.projectionID,
+                reasonCode: "source_unit_exceeds_declared_budget"
             )
-            return .blocked(projectionID: work.projectionID, reasonCode: reason)
+        } catch RuntimeCanonicalProjectionPersistenceError.transientStoreUnavailable {
+            return .deferred(
+                projectionID: work.projectionID,
+                reasonCode: "derived_store_temporarily_unavailable"
+            )
         }
         return .progressed(
             projectionID: work.projectionID,
@@ -197,8 +234,8 @@ actor RuntimeCanonicalProjectionWorker {
     static func recoveryScopeForDerivedArtifact(
         _ work: RuntimeCanonicalProjectionBuildWork
     ) -> RuntimeCanonicalProjectionRecoveryScope {
-        work.phase == .clone && work.baseGenerationID != nil
-            ? .baseProjection : .projection
+        if work.phase == .clone && work.baseGenerationID != nil { return .baseProjection }
+        return work.phase == .scrubSearch ? .search : .projection
     }
 
     static func recoveryScopeForProjectionUnavailable(

@@ -17,15 +17,21 @@ struct AppIntentBridge {
 
     static func defaultExternalSurfaceBridge() -> AppIntentBridge {
         AppIntentBridge(
-            recorder: SideEffectOutbox(ledger: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger())
+            recorder: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger().map {
+                SideEffectOutbox(ledger: $0)
+            }
         )
     }
 
+    /// Persists only an extension-safe handoff record. The returned deferred
+    /// disposition is intentionally not a canonical receipt: the launch-time
+    /// importer must obtain a committed receipt through
+    /// `RuntimeExternalMutationHandoff` before it acknowledges this request.
     @discardableResult
     func enqueueExternalCreation(
         _ request: ExternalCreationRequest,
         acceptedAt: Date
-    ) async throws -> SideEffectAttempt? {
+    ) async throws -> RuntimeExternalMutationHandoffDisposition {
         let outboxRequest = SideEffectOutboxRequest(
             id: "app-intent-intake.\(request.id)",
             effectKind: .externalSnapshot,
@@ -58,8 +64,13 @@ struct AppIntentBridge {
         )
         try privacyGate.requirePermitted(privacyDecision)
         try store.enqueueDurableRequest(request)
-        guard let recorder else { return nil }
-        return try await recorder.enqueue(outboxRequest)
+        // The app-group queue is the durable source for the deferred command.
+        // Ledger persistence is diagnostic-only and must neither fabricate a
+        // canonical receipt nor reverse a successful local handoff.
+        if let recorder {
+            _ = try? await recorder.enqueue(outboxRequest)
+        }
+        return .deferredForCanonicalImport(requestID: request.id)
     }
 
     func recordCommandBridge(command: AmbitionsCommand, acceptedAt: Date) async {

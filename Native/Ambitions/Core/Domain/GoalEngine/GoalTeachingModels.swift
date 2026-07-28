@@ -340,6 +340,19 @@ struct GoalTeachingSignal: Codable, Sendable, Equatable, Hashable, Identifiable 
     }
 }
 
+/// A validated correction that is safe to show or hand to a future canonical
+/// mutation command. It deliberately excludes the user's free-form note and
+/// correction payload so proposal surfaces do not become a second persistence
+/// or disclosure boundary.
+struct GoalTeachingCorrectionProposal: Sendable, Equatable, Hashable {
+    let goalID: String
+    let capturedAt: String
+    let kind: GoalTeachingSignalKind
+    let source: GoalTeachingSignalSource
+    let anchor: GoalTeachingStableAnchor
+    let applicationKey: String
+}
+
 struct GoalTeachingCaptureTarget: Codable, Sendable, Equatable, Hashable {
     let artifactKind: GoalTeachingArtifactKind
     let canonicalField: GoalTeachingCanonicalField?

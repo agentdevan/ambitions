@@ -306,10 +306,18 @@ enum CanonicalRuntimeExternalOperationSchemaPlan {
     static func requireIntegratedSchema(in database: isolated SQLiteDatabase) throws {
         let versionRows = try database.query("PRAGMA user_version")
         guard versionRows.count == 1,
-              versionRows[0].values.first == .integer(Int64(targetSchemaVersion)) else {
+              case let .integer(version)? = versionRows[0].values.first else {
+            throw RuntimeCanonicalExternalOperationError.corruptAuthority
+        }
+        if version == Int64(runtimeCanonicalAttachmentSchemaVersion) {
+            try CanonicalRuntimeAttachmentSchemaPlan.requireIntegratedSchema(
+                in: database
+            )
+            return
+        }
+        guard version == Int64(targetSchemaVersion) else {
             let actual: Int
-            if case let .integer(value)? = versionRows.first?.values.first { actual = Int(value) }
-            else { actual = 0 }
+            actual = Int(version)
             throw RuntimeCanonicalExternalOperationError.migrationRequired(
                 expected: targetSchemaVersion, actual: actual
             )

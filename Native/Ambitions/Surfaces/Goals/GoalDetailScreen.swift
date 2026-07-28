@@ -63,7 +63,13 @@ struct GoalDetailScreen: View {
                     }
 
                     GoalDetailPathFieldSurface(detail: detail, isReviewingPath: viewModel.lens == .path) { action in
-                        Task { await viewModel.perform(action, using: featureFactory.goalsService) }
+                        Task {
+                            await viewModel.perform(
+                                action,
+                                using: featureFactory.goalsService,
+                                runtimeCommandClient: featureFactory.runtimeCommandClient
+                            )
+                        }
                     }
 
                     if viewModel.lens == .path {
@@ -113,7 +119,13 @@ struct GoalDetailScreen: View {
                                         .textFieldStyle(.roundedBorder)
                                         .padding(.top, theme.spacing.xs)
                                         Button("Save answer") {
-                                            Task { await viewModel.saveClarificationAnswer(question, using: featureFactory.goalsService) }
+                                            Task {
+                                                await viewModel.saveClarificationAnswer(
+                                                    question,
+                                                    using: featureFactory.goalsService,
+                                                    runtimeCommandClient: featureFactory.runtimeCommandClient
+                                                )
+                                            }
                                         }
                                         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
                                         .padding(.top, theme.spacing.xs)
@@ -139,7 +151,13 @@ struct GoalDetailScreen: View {
 
                     GoalDetailSectionSurface(title: "Operations", subtitle: "Only available actions are shown. Unsupported path edits stay out of the control surface.") {
                         GoalActionGrid(actions: detail.actions) { action in
-                            Task { await viewModel.perform(action, using: featureFactory.goalsService) }
+                            Task {
+                                await viewModel.perform(
+                                    action,
+                                    using: featureFactory.goalsService,
+                                    runtimeCommandClient: featureFactory.runtimeCommandClient
+                                )
+                            }
                         }
                     }
 

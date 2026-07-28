@@ -665,8 +665,14 @@ enum CanonicalRuntimeAttachmentSchemaPlan {
     static let fullGenerationStatements: [String] = {
         let source = CanonicalRuntimeExternalOperationSchemaPlan.fullGenerationStatements
         let names = source.compactMap(schemaObjectName)
+        let supersededLegacyBlobObjects: Set<String> = [
+            "runtime_blob_records",
+            "runtime_blob_references",
+            "runtime_blob_references_owner_idx",
+        ]
         guard names.count == source.count,
               Set(names).count == names.count,
+              supersededLegacyBlobObjects.isSubset(of: Set(names)),
               Set([
                   "runtime_receipt_artifact_links", "runtime_receipt_artifact_links_bind_authority",
                   "runtime_command_idempotency_require_complete_receipt",
@@ -674,13 +680,70 @@ enum CanonicalRuntimeAttachmentSchemaPlan {
                 .isSubset(of: Set(names)) else { return [] }
         let base = source.compactMap { statement -> String? in
             guard let name = schemaObjectName(statement) else { return nil }
+            // Schema v8 replaces the v1 opaque blob rows and references with
+            // the attachment vault's encrypted manifest, key-envelope,
+            // lifecycle, and receipt-linked authority graph. Retaining either
+            // legacy table would create a second blob authority and, because
+            // the new `runtime_blob_records` has a different shape, an invalid
+            // foreign-key contract. Legacy rows are admitted only through the
+            // staged T15 provenance importer; they are never copied into a v8
+            // generation under their old schema.
+            if supersededLegacyBlobObjects.contains(name) { return nil }
             if name == "runtime_receipt_artifact_links" { return receiptArtifactTableV8 }
             if name == "runtime_receipt_artifact_links_bind_authority" { return nil }
             if name == "runtime_command_idempotency_require_complete_receipt" { return nil }
             return expandingSemanticFamiliesForV8(statement)
         }
         guard receiptFinalizationBindingV8.isEmpty == false else { return [] }
-        return base + statements + [receiptArtifactBindingV8, receiptFinalizationBindingV8]
+        let authorityBase = base + statements + [receiptArtifactBindingV8, receiptFinalizationBindingV8]
+        let authorityTables = authorityBase.compactMap { statement -> String? in
+            guard schemaObjectType(statement) == "table",
+                  let name = schemaObjectName(statement),
+                  name != "runtime_store_metadata",
+                  name.hasPrefix("runtime_canonical_") == false,
+                  name.hasPrefix("runtime_replay_") == false,
+                  name.hasPrefix("runtime_projection_") == false else {
+                return nil
+            }
+            return name
+        }.sorted()
+        let fenceTable = """
+        CREATE TABLE runtime_authority_fence (
+            singleton_id INTEGER PRIMARY KEY CHECK (singleton_id = 1),
+            change_epoch INTEGER NOT NULL CHECK (change_epoch >= 0),
+            last_changed_table TEXT NOT NULL,
+            last_change_operation TEXT NOT NULL CHECK (last_change_operation IN ('bootstrap','insert','update','delete'))
+        )
+        """
+        let fenceTriggers = authorityTables.flatMap { table in
+            [
+                ("insert", "INSERT"),
+                ("update", "UPDATE"),
+                ("delete", "DELETE"),
+            ].map { operation, sqlOperation in
+                """
+                CREATE TRIGGER runtime_authority_fence_\(table)_\(operation)
+                AFTER \(sqlOperation) ON \(table)
+                BEGIN
+                    UPDATE runtime_authority_fence
+                    SET change_epoch = change_epoch + 1,
+                        last_changed_table = '\(table)',
+                        last_change_operation = '\(operation)'
+                    WHERE singleton_id = 1;
+                END
+                """
+            }
+        }
+        let result = authorityBase + [fenceTable] + fenceTriggers
+        let resultNames = result.compactMap(schemaObjectName)
+        guard resultNames.count == result.count,
+              Set(resultNames).count == resultNames.count,
+              supersededLegacyBlobObjects.isDisjoint(with: Set(resultNames).subtracting(["runtime_blob_records"])),
+              resultNames.filter({ $0 == "runtime_blob_records" }).count == 1,
+              Set(["runtime_blob_references", "runtime_blob_references_owner_idx"])
+                .isDisjoint(with: Set(resultNames))
+        else { return [] }
+        return result
     }()
 
     static func requireIntegratedSchema(in database: isolated SQLiteDatabase) throws {

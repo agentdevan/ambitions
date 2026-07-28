@@ -245,26 +245,18 @@ final class TimeViewModel {
         calendar: Calendar,
         timeZone: TimeZone
     ) async throws -> TimeFeatureMutationResult {
-        let result = await runtimeClient.execute(
-            command,
-            CommandExecutionContext(now: now, actor: .user, sourceSurface: "Time")
-        )
-        guard result.status == .succeeded,
-              let receiptID = result.metadata["runtimeReceiptID"] else {
-            throw TimeFieldMutationError.runtimeRejected(
-                result.metadata["rejectionType"] ?? result.metadata["blockedBy"] ?? result.summary
+        let commit: TimeRuntimeMutationCommit
+        do {
+            commit = try await TimeRuntimeMutationAdapter(runtimeClient: runtimeClient).execute(
+                command,
+                now: now
             )
+        } catch let error as TimeRuntimeMutationAdapterError {
+            throw TimeFieldMutationError.runtimeRejected(String(describing: error))
         }
-        guard result.metadata["runtimeProjectionStoreStatus"] == "saved" else {
-            throw TimeFieldMutationError.runtimeRejected("time_projection_needs_recovery")
-        }
-        guard result.metadata["timeMaterialization"] == "saved_post_authority" else {
-            throw TimeFieldMutationError.runtimeRejected("time_materialization_needs_recovery")
-        }
-        let committedProjection = try await runtimeClient.projection(.time)
-        guard Self.projection(committedProjection, matchesCommittedTimeCursorIn: result.metadata) else {
-            throw TimeFieldMutationError.runtimeRejected("time_projection_receipt_mismatch")
-        }
+        let result = commit.result
+        let receiptID = commit.receiptID
+        let committedProjection = commit.projection
         let reloaded = try await service.loadTimeSurfaceState(now: now)
         state = .loaded(reloaded)
         visibleTimeMutation = Self.committedVisibleMutation(
@@ -290,22 +282,6 @@ final class TimeViewModel {
             projectionVersion: committedProjection.eventSequence,
             canUndo: command.commandUndoIntent == nil
         )
-    }
-
-    private static func projection(
-        _ projection: RuntimeProjectionSnapshot,
-        matchesCommittedTimeCursorIn metadata: [String: String]
-    ) -> Bool {
-        let ids = metadata["runtimeMaterializedProjectionCursorIDs"]?.split(separator: ",").map(String.init) ?? []
-        let sequences = metadata["runtimeMaterializedProjectionCursorSequences"]?.split(separator: ",").compactMap { Int64($0) } ?? []
-        let checksums = metadata["runtimeMaterializedProjectionCursorChecksums"]?.split(separator: ",").map(String.init) ?? []
-        guard ids.count == sequences.count, ids.count == checksums.count,
-              let timeIndex = ids.firstIndex(of: ProjectionID.time.rawValue) else {
-            return false
-        }
-        return projection.projectionID == ProjectionID.time.rawValue &&
-            projection.eventSequence == sequences[timeIndex] &&
-            projection.cursorChecksum == checksums[timeIndex]
     }
 
     private static func committedVisibleMutation(

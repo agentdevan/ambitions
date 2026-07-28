@@ -145,6 +145,30 @@ final class GoalDetailViewModel {
         }
     }
 
+    /// Production Goal Detail actions may not bypass the selected runtime
+    /// authority. The legacy service overload remains for compatibility and
+    /// focused test coverage until each action has a matching typed command
+    /// reducer and materializer.
+    func perform(
+        _ action: GoalDetailActionKind,
+        using service: any GoalsServicing,
+        runtimeCommandClient: RuntimeCommandClient,
+        now: Date = .now
+    ) async {
+        _ = service
+        _ = runtimeCommandClient
+        _ = now
+        if action == .showPath {
+            lens = lens == .tasks ? .path : .tasks
+            return
+        }
+        inlineMessage = GoalDetailInlineMessage(
+            title: "Action not available yet",
+            body: "This Goal action stays unavailable until its typed runtime command can preserve local history, receipt, and recovery evidence.",
+            state: .warning
+        )
+    }
+
     func saveClarificationAnswer(
         _ question: GoalClarificationQuestionState,
         using service: any GoalsServicing,
@@ -170,6 +194,23 @@ final class GoalDetailViewModel {
                 state: .warning
             )
         }
+    }
+
+    func saveClarificationAnswer(
+        _ question: GoalClarificationQuestionState,
+        using service: any GoalsServicing,
+        runtimeCommandClient: RuntimeCommandClient,
+        now: Date = .now
+    ) async {
+        _ = question
+        _ = service
+        _ = runtimeCommandClient
+        _ = now
+        inlineMessage = GoalDetailInlineMessage(
+            title: "Clarification save not available yet",
+            body: "This clarification remains editable, but Ambitions will not persist it until the typed runtime command can retain its receipt and recovery history.",
+            state: .warning
+        )
     }
 
     func submitExplainabilityCorrection(

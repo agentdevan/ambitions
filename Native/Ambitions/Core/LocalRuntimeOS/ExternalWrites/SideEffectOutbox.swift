@@ -4,6 +4,7 @@ enum SideEffectOutboxError: LocalizedError, Sendable, Equatable {
     case missingDurableID
     case missingLocalCommitReceipt
     case invalidClaimToken
+    case claimBackpressureExceeded
 
     var errorDescription: String? {
         switch self {
@@ -13,6 +14,8 @@ enum SideEffectOutboxError: LocalizedError, Sendable, Equatable {
             return "External side-effect attempts require a committed local mutation receipt."
         case .invalidClaimToken:
             return "The durable side-effect claim no longer belongs to this attempt."
+        case .claimBackpressureExceeded:
+            return "Too many callers are waiting for the same side-effect claim."
         }
     }
 }
@@ -124,11 +127,13 @@ extension SideEffectOutboxing {
 }
 
 actor SideEffectOutbox: SideEffectOutboxing {
+    private static let maximumWaitersPerClaim = 32
+
     private let ledger: any SideEffectLedgerRepository
     private let policyEngine: SideEffectPolicyEngine
     private let leaseDuration: TimeInterval
     private var activeClaimIDs = Set<String>()
-    private var claimWaiters: [String: [CheckedContinuation<Void, Never>]] = [:]
+    private var claimWaiters: [String: [UUID: CheckedContinuation<Void, Error>]] = [:]
 
     init(
         ledger: any SideEffectLedgerRepository,
@@ -191,11 +196,8 @@ actor SideEffectOutbox: SideEffectOutboxing {
         guard request.id.isEmpty == false else {
             throw SideEffectOutboxError.missingDurableID
         }
-        if activeClaimIDs.contains(request.id) {
-            await withCheckedContinuation { continuation in
-                claimWaiters[request.id, default: []].append(continuation)
-            }
-            return try await claim(request)
+        while activeClaimIDs.contains(request.id) {
+            try await waitForClaimCompletion(id: request.id)
         }
 
         activeClaimIDs.insert(request.id)
@@ -228,9 +230,13 @@ actor SideEffectOutbox: SideEffectOutboxing {
                     lease: lease,
                     claimToken: token
                 )
-                if lease == nil {
-                    finishClaim(id: request.id)
-                }
+                // The actor-local claim only serializes the durable ledger
+                // admission. Keeping it active while the caller performs an
+                // external write lets a cancelled or abandoned caller strand
+                // every later request for this ID in memory. The durable
+                // record/token remains the sole ownership authority after
+                // this point; later callers receive reconciliation-required.
+                finishClaim(id: request.id)
                 return .claimed(attempt)
             }
         } catch {
@@ -325,8 +331,49 @@ actor SideEffectOutbox: SideEffectOutboxing {
 
     private func finishClaim(id: String) {
         activeClaimIDs.remove(id)
-        let waiters = claimWaiters.removeValue(forKey: id) ?? []
+        let waiters = claimWaiters.removeValue(forKey: id)?.values ?? []
         waiters.forEach { $0.resume() }
+    }
+
+    private func waitForClaimCompletion(id: String) async throws {
+        try Task.checkCancellation()
+        let waiterID = UUID()
+        try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                registerClaimWaiter(
+                    id: id,
+                    waiterID: waiterID,
+                    continuation: continuation
+                )
+            }
+        } onCancel: {
+            Task { await self.cancelClaimWaiter(id: id, waiterID: waiterID) }
+        }
+        try Task.checkCancellation()
+    }
+
+    private func registerClaimWaiter(
+        id: String,
+        waiterID: UUID,
+        continuation: CheckedContinuation<Void, Error>
+    ) {
+        guard activeClaimIDs.contains(id) else {
+            continuation.resume()
+            return
+        }
+        guard claimWaiters[id, default: [:]].count < Self.maximumWaitersPerClaim else {
+            continuation.resume(throwing: SideEffectOutboxError.claimBackpressureExceeded)
+            return
+        }
+        claimWaiters[id, default: [:]][waiterID] = continuation
+    }
+
+    private func cancelClaimWaiter(id: String, waiterID: UUID) {
+        guard let continuation = claimWaiters[id]?.removeValue(forKey: waiterID) else { return }
+        if claimWaiters[id]?.isEmpty == true {
+            claimWaiters.removeValue(forKey: id)
+        }
+        continuation.resume(throwing: CancellationError())
     }
 
     private func makeRecord(

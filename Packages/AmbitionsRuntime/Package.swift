@@ -24,8 +24,19 @@ let package = Package(
     targets: [
         .target(name: "AmbitionsRuntimeCore"),
         .target(
+            name: "CAmbitionsSQLiteSecureVFS",
+            path: "Sources/CAmbitionsSQLiteSecureVFS",
+            publicHeadersPath: "include",
+            linkerSettings: [
+                .linkedLibrary("sqlite3")
+            ]
+        ),
+        .target(
             name: "AmbitionsRuntimeSQLite",
-            dependencies: ["AmbitionsRuntimeCore"]
+            dependencies: [
+                "AmbitionsRuntimeCore",
+                "CAmbitionsSQLiteSecureVFS"
+            ]
         ),
         .target(
             name: "AmbitionsRuntimeTestSupport",

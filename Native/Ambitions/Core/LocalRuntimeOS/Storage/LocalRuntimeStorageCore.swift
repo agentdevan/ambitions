@@ -177,6 +177,7 @@ enum LocalRuntimeStorageError: Error, Sendable, Equatable {
     case canonicalReadPageTooLarge(maximumBytes: Int)
     case canonicalActivationFailed
     case canonicalActivationStateUnknown
+    case canonicalActivationIsolationIndeterminate
     case canonicalActivationSucceededWithCleanupFailure
     case canonicalStagingCleanupFailed
     case sqliteOpenFailed(path: String, message: String)

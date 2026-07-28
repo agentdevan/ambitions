@@ -406,6 +406,7 @@ private func XCTAssertThrowsErrorAsync<T>(
     line: UInt = #line
 ) async {
     do { _ = try await expression(); XCTFail("Expected expression to throw", file: file, line: line) }
+    // AMBitionsAllowWeakPattern(reason: "Expected thrown error is delegated to supplied assertion handler")
     catch { errorHandler(error) }
 }
 

@@ -82,7 +82,10 @@ struct CreateGoalScreen: View {
 
                 Button {
                     Task {
-                        if let response = await viewModel.submit(using: featureFactory.goalsService) {
+                        if let response = await viewModel.submit(
+                            using: featureFactory.goalsService,
+                            runtimeCommandClient: featureFactory.runtimeCommandClient
+                        ) {
                             onCreated(response)
                         }
                     }

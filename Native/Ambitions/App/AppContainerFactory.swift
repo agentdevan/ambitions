@@ -49,79 +49,99 @@ enum AppContainerFactory {
 
     @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
-        let repositories = try await prepareRepositories(for: configuration)
-        let clock = RuntimeBootstrap.clock(for: configuration)
-        let platformServices = SystemSurfaceBootstrap.makePlatformServices(repositories: repositories)
-        let lifeCalendarURL = lifeCalendarStoreURL(for: configuration)
-        let runtime = RuntimeBootstrap.makeRuntime(
-            repositories: repositories,
-            clock: clock,
-            notificationService: platformServices.notificationService,
-            calendarRemindersService: platformServices.calendarRemindersService,
-            scheduleStoreFileURL: lifeCalendarURL
+        let authoritySession = await RuntimeMutationAuthoritySession.bootstrap(
+            persistenceMode: configuration.persistenceMode
         )
-        let session = try await SystemSurfaceBootstrap.prepareSession(
-            configuration: configuration,
-            repositories: repositories,
-            clock: clock
-        )
-        let navigation = StageStore(selectedSurface: session.initialTab)
-        let externalRouter = DefaultAppExternalRouter(navigation: navigation)
-        let runtimeCommandClient = makeRuntimeCommandClient(
-            repositories: repositories,
-            captureService: runtime.captureService,
-            scheduleStoreFileURL: lifeCalendarURL
-        )
-        let surfaceServices = SystemSurfaceBootstrap.makeServices(
-            repositories: repositories,
-            runtime: runtime,
-            navigation: navigation,
-            externalRouter: externalRouter,
-            runtimeCommandClient: runtimeCommandClient,
-            appRouteForIntent: appRoute
-        )
-        let todayService = RuntimeBootstrap.todayService(for: configuration, runtime: runtime)
-        let timeService = RuntimeBootstrap.timeService(runtime: runtime)
-        await SystemSurfaceBootstrap.prepareLaunchEffects(
-            runtime: runtime,
-            notificationService: platformServices.notificationService,
-            clock: clock
-        )
-
-        return AppContainer(
-            bootstrapConfiguration: configuration,
-            session: session,
-            clock: clock,
-            runtimeCommandClient: runtimeCommandClient,
-            runtime: runtime,
-            appearancePreference: session.appearancePreference,
-            accentFamily: session.accentFamily,
-            navigation: navigation,
-            todayService: todayService,
-            todayReceiptCommands: surfaceServices.todayReceiptCommands,
-            captureService: runtime.captureService,
-            goalsService: runtime.goalsService,
-            timeRitualsService: runtime.timeRitualsService,
-            timeService: timeService,
-            insightsService: runtime.insightsService,
-            youService: runtime.youService,
-            youPreferencesCommands: surfaceServices.youPreferencesCommands,
-            systemSettingsOpener: .live,
-            notificationService: platformServices.notificationService,
-            calendarRemindersService: platformServices.calendarRemindersService,
-            actionRouter: surfaceServices.actionRouter,
-            externalRouter: externalRouter,
-            externalActionService: surfaceServices.externalActionService,
-            externalCreationImportService: surfaceServices.externalCreationImportService,
-            sourceAtlasLifecycleRefreshService: surfaceServices.sourceAtlasLifecycleRefreshService,
-            commandRouter: surfaceServices.commandRouter,
-            memoryLensService: surfaceServices.memoryLensService,
-            onboardingService: surfaceServices.onboardingService,
-            captureGoalHandoffCommands: CaptureGoalHandoffService(
+        do {
+            // Every currently constructed product service is backed by the legacy
+            // repository graph. Refuse to construct it after v8 has been selected;
+            // that graph would otherwise become a second write authority.
+            try await authoritySession.requireLegacyServiceAuthority()
+            let repositories = try await prepareRepositories(for: configuration)
+            let clock = RuntimeBootstrap.clock(for: configuration)
+            let platformServices = SystemSurfaceBootstrap.makePlatformServices(repositories: repositories)
+            let lifeCalendarURL = lifeCalendarStoreURL(for: configuration)
+            let runtime = RuntimeBootstrap.makeRuntime(
                 repositories: repositories,
-                runtimeClient: runtimeCommandClient
+                clock: clock,
+                notificationService: platformServices.notificationService,
+                calendarRemindersService: platformServices.calendarRemindersService,
+                scheduleStoreFileURL: lifeCalendarURL
             )
-        )
+            let session = try await SystemSurfaceBootstrap.prepareSession(
+                configuration: configuration,
+                repositories: repositories,
+                clock: clock
+            )
+            let navigation = StageStore(selectedSurface: session.initialTab)
+            let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+            let legacyRuntimeCommandClient = makeRuntimeCommandClient(
+                repositories: repositories,
+                captureService: runtime.captureService,
+                scheduleStoreFileURL: lifeCalendarURL
+            )
+            let runtimeAuthority = await authoritySession.composition(
+                legacyCommandClient: legacyRuntimeCommandClient
+            )
+            let runtimeCommandClient = runtimeAuthority.commandClient
+            let surfaceServices = SystemSurfaceBootstrap.makeServices(
+                repositories: repositories,
+                runtime: runtime,
+                navigation: navigation,
+                externalRouter: externalRouter,
+                runtimeCommandClient: runtimeCommandClient,
+                appRouteForIntent: appRoute
+            )
+            let todayService = RuntimeBootstrap.todayService(for: configuration, runtime: runtime)
+            let timeService = RuntimeBootstrap.timeService(runtime: runtime)
+            await SystemSurfaceBootstrap.prepareLaunchEffects(
+                runtime: runtime,
+                notificationService: platformServices.notificationService,
+                clock: clock
+            )
+
+            return AppContainer(
+                bootstrapConfiguration: configuration,
+                session: session,
+                clock: clock,
+                runtimeCommandClient: runtimeCommandClient,
+                runtimeAuthority: runtimeAuthority,
+                appearancePreference: session.appearancePreference,
+                accentFamily: session.accentFamily,
+                navigation: navigation,
+                todayService: todayService,
+                todayReceiptCommands: surfaceServices.todayReceiptCommands,
+                captureService: runtime.captureService,
+                goalsService: runtime.goalsService,
+                timeRitualsService: runtime.timeRitualsService,
+                timeService: timeService,
+                insightsService: runtime.insightsService,
+                youService: runtime.youService,
+                youPreferencesCommands: surfaceServices.youPreferencesCommands,
+                systemSettingsOpener: .live,
+                notificationService: platformServices.notificationService,
+                calendarRemindersService: platformServices.calendarRemindersService,
+                actionRouter: surfaceServices.actionRouter,
+                externalRouter: externalRouter,
+                externalActionService: surfaceServices.externalActionService,
+                externalCreationImportService: surfaceServices.externalCreationImportService,
+                sourceAtlasLifecycleRefreshService: surfaceServices.sourceAtlasLifecycleRefreshService,
+                commandRouter: surfaceServices.commandRouter,
+                memoryLensService: surfaceServices.memoryLensService,
+                onboardingService: surfaceServices.onboardingService,
+                captureGoalHandoffCommands: CaptureGoalHandoffService(
+                    repositories: repositories,
+                    runtimeClient: runtimeCommandClient
+                )
+            )
+        } catch {
+            do {
+                try await authoritySession.close()
+            } catch {
+                throw RuntimeMutationAuthorityBridgeError.generationAuthorityUnavailable
+            }
+            throw error
+        }
     }
 
     static func prepareRepositories(

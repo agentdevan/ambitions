@@ -58,6 +58,10 @@ final class FlagshipContractsTests: XCTestCase {
         let results: [FlagshipIntentResult] = [
             .committedProjectionReady(receipt),
             .committedCatchUpRequired(receipt),
+            .outcomeIndeterminate(
+                code: "receipt-missing",
+                recoveryAction: .refreshAndRetry
+            ),
             .rejectedBeforeMutation(
                 code: "invalid",
                 recoveryAction: .editIntent

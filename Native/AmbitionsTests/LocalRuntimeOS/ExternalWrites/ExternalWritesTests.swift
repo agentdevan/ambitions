@@ -257,6 +257,58 @@ final class ExternalWritesTests: XCTestCase {
         XCTAssertTrue(stored?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 
+    func testRepeatedClaimReturnsDurableReconciliationInsteadOfWaitingOnTheFirstCaller() async throws {
+        let eventStore = InMemoryRuntimeEventStore()
+        let localCommit = try await runtimeCommit(
+            id: "command-side-effect-claim",
+            eventStore: eventStore
+        )
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let request = SideEffectOutboxRequest(
+            id: "side-effect.calendar.claim-reconciliation",
+            effectKind: .calendar,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            requestedAt: Date(timeIntervalSince1970: 1_714_000_000),
+            externalEffect: true,
+            requiresConfirmation: false,
+            commitRequirement: .localCommitRequired,
+            localCommit: SideEffectLocalCommitEvidence(runtimeReceipt: localCommit.receipt),
+            requestedStatus: .queued,
+            requestedBoundary: .externalEffect,
+            reasons: [.externalSideEffect]
+        )
+
+        let first = try await outbox.claim(request)
+        let second = try await outbox.claim(request)
+
+        guard case let .claimed(firstAttempt) = first else {
+            return XCTFail("Expected the first durable claim to own the external attempt.")
+        }
+        guard case let .reconciliationRequired(secondAttempt) = second else {
+            return XCTFail("Expected the repeated claim to use the durable reconciliation path.")
+        }
+        XCTAssertNotNil(firstAttempt.claimToken)
+        XCTAssertNil(secondAttempt.claimToken)
+        XCTAssertEqual(secondAttempt.ledgerRecord.status, .leased)
+        XCTAssertEqual(secondAttempt.ledgerRecord.id, request.id)
+    }
+
+    func testClaimWaiterCancellationRemainsAnExplicitOutboxContract() throws {
+        let source = try String(
+            contentsOf: repositoryRoot().appendingPathComponent(
+                "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift"
+            ),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(source.contains("withTaskCancellationHandler"))
+        XCTAssertTrue(source.contains("cancelClaimWaiter"))
+        XCTAssertTrue(source.contains("continuation.resume(throwing: CancellationError())"))
+        XCTAssertTrue(source.contains("finishClaim(id: request.id)"))
+    }
+
     func testAppIntentBridgeAppendsExternalCreationThroughCanonicalSideEffectOwner() async throws {
         let ledger = InMemorySideEffectLedgerRepository()
         let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)

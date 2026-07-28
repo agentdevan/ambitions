@@ -264,6 +264,10 @@ actor RuntimeAttachmentVault {
     private let intakeProofKey: SymmetricKey
     private let chunkSize: Int
     private let opaqueToken: @Sendable () -> String
+    /// The lifetime process lock excludes other vault owners. These tokens add
+    /// an actor-reentrancy fence while migration code authenticates and copies
+    /// a database-bound immutable vault graph across suspension points.
+    private var migrationSnapshotHolds: Set<String> = []
 
     init(
         rootDirectory: URL,
@@ -362,6 +366,23 @@ actor RuntimeAttachmentVault {
               (metadata.st_mode & S_IFMT) == S_IFDIR,
               (fcntl(descriptor, F_FULLFSYNC) == 0 || fsync(descriptor) == 0) else {
             throw RuntimeCanonicalAttachmentError.pathAuthorityDenied
+        }
+    }
+
+    func beginMigrationSnapshotHold(token: String) throws {
+        guard token.isEmpty == false,
+              token.utf8.count <= 128,
+              token.allSatisfy({
+                  $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "-")
+              }),
+              migrationSnapshotHolds.insert(token).inserted else {
+            throw RuntimeCanonicalAttachmentError.lifecycleConflict
+        }
+    }
+
+    func endMigrationSnapshotHold(token: String) throws {
+        guard migrationSnapshotHolds.remove(token) != nil else {
+            throw RuntimeCanonicalAttachmentError.lifecycleConflict
         }
     }
 
@@ -757,6 +778,9 @@ actor RuntimeAttachmentVault {
         lease: RuntimeBlobGCLease,
         now: Date
     ) throws -> RuntimeAttachmentVaultDeletionClaim {
+        guard migrationSnapshotHolds.isEmpty else {
+            throw RuntimeCanonicalAttachmentError.lifecycleConflict
+        }
         let manifest = work.manifest
         let manifestDigest = try RuntimeAttachmentCodec.digest(
             manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
@@ -1330,6 +1354,9 @@ private extension RuntimeAttachmentVault {
         now: Date,
         requiresOriginal: Bool
     ) throws -> RuntimeAttachmentVaultManifestDeletionClaim {
+        guard migrationSnapshotHolds.isEmpty else {
+            throw RuntimeCanonicalAttachmentError.lifecycleConflict
+        }
         guard RuntimeStoreManifestCodec.isSHA256Hex(claim.claimID),
               RuntimeStoreManifestCodec.isSHA256Hex(claim.manifestDigest),
               claim.claimedAt <= now,

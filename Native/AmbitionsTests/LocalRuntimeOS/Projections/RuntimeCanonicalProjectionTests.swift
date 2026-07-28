@@ -22,10 +22,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let registry = try RuntimeCanonicalProjectionDefinitionRegistry.canonical()
         XCTAssertEqual(Set(registry.definitions.keys), Set(RuntimeCanonicalProjectionID.allCases))
         let search = try XCTUnwrap(registry.definitions[.search])
-        XCTAssertEqual(search.allowedSearchFields, [.aggregateID, .aggregateKind])
+        XCTAssertEqual(search.allowedSearchFields, [.aggregateKind])
         XCTAssertEqual(
-            RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue,
-            "aggregate_metadata_only"
+            RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue,
+            "aggregate_kind_only"
         )
 
         let duplicate = registry.definitions.values.sorted { $0.id < $1.id }
@@ -388,13 +388,11 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 fixture.work, nowMilliseconds: 20, database: isolated
             )
             XCTAssertEqual(
-                try CanonicalRuntimeStore.runOneCanonicalGenerationMaintenanceUnitInTransaction(
-                    ownerID: "scrub-worker", nowMilliseconds: 21,
-                    rowLimit: 128, database: isolated
-                ),
-                .completed(
-                    generationID: fixture.work.generationID, kind: "projection"
-                )
+                try isolated.query(
+                    "SELECT 1 FROM runtime_canonical_scrub_certificates WHERE generation_id = ?",
+                    bindings: [.text(fixture.work.generationID)]
+                ).count,
+                1
             )
             XCTAssertTrue(try CanonicalRuntimeStore.hasCompatibleCanonicalProjectionBase(
                 definition: definition, database: isolated
@@ -834,12 +832,9 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         )
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
-            entries: [entry], database: database
+            entries: [entry], database: database, phase: .scrubProjection
         )
         try await database.transaction(.immediate) { isolated in
-            try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
-                fixture.work, nowMilliseconds: 20, database: isolated
-            )
             XCTAssertEqual(
                 try CanonicalRuntimeStore.runOneCanonicalGenerationMaintenanceUnitInTransaction(
                     ownerID: "scrub", nowMilliseconds: 21, rowLimit: 128, database: isolated
@@ -872,6 +867,13 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 "SELECT observed_shard_count FROM runtime_canonical_scrub_certificates WHERE generation_id = ?",
                 bindings: [.text(fixture.work.generationID)]
             ).first?.value(named: "observed_shard_count"), .integer(1))
+            try CanonicalRuntimeStore.updateCanonicalProjectionJobPhase(
+                fixture.work, nextPhase: .ready, resetKeyset: true, database: isolated
+            )
+            try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
+                replacingPhase(fixture.work, phase: .ready),
+                nowMilliseconds: 23, database: isolated
+            )
         }
     }
 
@@ -884,12 +886,9 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         ]
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
-            entries: entries, database: database
+            entries: entries, database: database, phase: .scrubProjection
         )
         try await database.transaction(.immediate) { isolated in
-            try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
-                fixture.work, nowMilliseconds: 20, database: isolated
-            )
             XCTAssertNil(CanonicalRuntimeStore.canonicalMaintenanceRowLimit(maximumRows: 1))
             XCTAssertEqual(
                 CanonicalRuntimeStore.canonicalMaintenanceRowLimit(maximumRows: 128), 128
@@ -923,6 +922,18 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             XCTAssertEqual(try isolated.query(
                 "SELECT next_service_ticket FROM runtime_canonical_scheduler_state WHERE singleton_id = 1"
             ).first?.value(named: "next_service_ticket"), .integer(2))
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_scrub_certificates WHERE generation_id = ?",
+                bindings: [.text(fixture.work.generationID)]
+            ).isEmpty)
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_projection_quarantine WHERE generation_id = ?",
+                bindings: [.text(fixture.work.generationID)]
+            ).isEmpty)
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_repair_requirements WHERE generation_id = ?",
+                bindings: [.text(fixture.work.generationID)]
+            ).isEmpty)
         }
     }
 
@@ -934,7 +945,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         )
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
-            entries: [entry], database: database, phase: .sealProjection
+            entries: [entry], database: database, phase: .scrubProjection
         )
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
         try await database.transaction(.immediate) { isolated in
@@ -954,10 +965,21 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             try CanonicalRuntimeStore.updateCanonicalProjectionJobPhase(
                 fixture.work, nextPhase: .ready, resetKeyset: true, database: isolated
             )
-            try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
-                replacingPhase(fixture.work, phase: .ready),
-                nowMilliseconds: 20, database: isolated
-            )
+            XCTAssertThrowsError(
+                try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
+                    replacingPhase(fixture.work, phase: .ready),
+                    nowMilliseconds: 20, database: isolated
+                )
+            ) { error in
+                XCTAssertEqual(
+                    error as? RuntimeCanonicalProjectionPersistenceError,
+                    .generationMismatch
+                )
+            }
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_projection_active_generations WHERE projection_id = ?",
+                bindings: [.text(definition.id.rawValue)]
+            ).isEmpty)
             XCTAssertThrowsError(try isolated.execute(
                 "UPDATE runtime_canonical_generation_scrub_jobs SET phase = 'postings' WHERE generation_id = ?",
                 bindings: [.text(fixture.work.generationID)]
@@ -1010,6 +1032,88 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                     .integer(invalidCleanupTicket),
                 ]
             ))
+        }
+    }
+
+    func testSearchActivationRequiresProjectionAndSearchScrubCertificates() async throws {
+        let database = try await makeV5Database("search-preactivation-scrub")
+        let definition = try projectionDefinition(.search)
+        let fixture = try await seedActivationFixture(
+            definition: definition, capturedCount: 1, totalCount: 1,
+            entries: [], database: database
+        )
+        let searchID = CanonicalRuntimeStore.canonicalSearchGenerationID(fixture.work)
+        let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
+        let searchCertificate = CanonicalRuntimeStore
+            .canonicalSearchGenerationCertificateDigest(
+                generationID: searchID,
+                projectionGenerationID: fixture.work.generationID,
+                coverage: .aggregateKindOnly,
+                definitionDigest: definition.authorityDigest,
+                sourceCursor: fixture.work.targetCursor,
+                documentCount: 0, postingCount: 0, postingBytes: 0,
+                shardCount: 0, rootDigest: empty
+            )
+        try await database.transaction(.immediate) { isolated in
+            try isolated.execute(
+                """
+                INSERT INTO runtime_canonical_search_generations VALUES (
+                    ?, ?, 'aggregate_kind_only', ?, ?, ?, 0, 0, 0, 0, ?,
+                    'sealed', ?, 10
+                )
+                """,
+                bindings: [
+                    .text(searchID), .text(fixture.work.generationID),
+                    .text(definition.authorityDigest),
+                    .integer(Int64(fixture.work.targetCursor.sequence)),
+                    .text(fixture.work.targetCursor.eventHash), .text(empty),
+                    .text(searchCertificate),
+                ]
+            )
+            XCTAssertThrowsError(
+                try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
+                    fixture.work, nowMilliseconds: 20, database: isolated
+                )
+            ) { error in
+                XCTAssertEqual(
+                    error as? RuntimeCanonicalProjectionPersistenceError,
+                    .generationMismatch
+                )
+            }
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_projection_active_generations WHERE projection_id = ?",
+                bindings: [.text(definition.id.rawValue)]
+            ).isEmpty)
+            XCTAssertTrue(try isolated.query(
+                "SELECT 1 FROM runtime_canonical_search_active_generation"
+            ).isEmpty)
+
+            let scrubCertificate = CanonicalRuntimeStore
+                .canonicalScrubCertificateDigest(
+                    generationID: searchID, kind: "search",
+                    projectionID: definition.id.rawValue,
+                    generationCertificate: searchCertificate,
+                    observedCount: 0, observedShardCount: 0,
+                    observedPostingCount: 0, observedPostingBytes: 0,
+                    rootDigest: empty, completedAtMilliseconds: 21
+                )
+            try isolated.execute(
+                """
+                INSERT INTO runtime_canonical_scrub_certificates VALUES (
+                    ?, 'search', ?, ?, 0, 0, 0, 0, ?, 21, ?
+                )
+                """,
+                bindings: [
+                    .text(searchID), .text(definition.id.rawValue),
+                    .text(searchCertificate), .text(empty), .text(scrubCertificate),
+                ]
+            )
+            try CanonicalRuntimeStore.activateCanonicalProjectionGenerationInTransaction(
+                fixture.work, nowMilliseconds: 22, database: isolated
+            )
+            XCTAssertEqual(try isolated.query(
+                "SELECT generation_id FROM runtime_canonical_search_active_generation WHERE singleton_id = 1"
+            ).first?.value(named: "generation_id"), .text(searchID))
         }
     }
 
@@ -1181,16 +1285,6 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         .text(certificate), .text(generationID),
                     ]
                 )
-                try isolated.execute(
-                    "UPDATE runtime_canonical_projection_generations SET status = 'published' WHERE generation_id = ?",
-                    bindings: [.text(generationID)]
-                )
-                try isolated.execute(
-                    "INSERT INTO runtime_canonical_projection_active_generations VALUES (?, ?, ?, 1)",
-                    bindings: [
-                        .text(definition.id.rawValue), .text(generationID), .text(certificate),
-                    ]
-                )
                 try CanonicalRuntimeStore.scheduleCanonicalGenerationScrub(
                     generationID: generationID, kind: "projection",
                     certificate: certificate, nowMilliseconds: 1, database: isolated
@@ -1309,7 +1403,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 0, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 0, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 1
                 )
                 """,
@@ -1375,7 +1469,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 .canonicalSearchGenerationCertificateDigest(
                     generationID: scrubID,
                     projectionGenerationID: searchProjectionID,
-                    coverage: .aggregateMetadataOnly,
+                    coverage: .aggregateKindOnly,
                     definitionDigest: searchDefinition.authorityDigest,
                     sourceCursor: .emptySource, documentCount: 0,
                     postingCount: 0, postingBytes: 0, shardCount: 0,
@@ -1384,7 +1478,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 0, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 0, ?, 0, 0, 0, 0, ?,
                     'published', ?, 10
                 )
                 """,
@@ -1666,7 +1760,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
-                    ?, ?, 'aggregate_metadata_only', ?, 1, ?, 0, 0, 0, 0, ?,
+                    ?, ?, 'aggregate_kind_only', ?, 1, ?, 0, 0, 0, 0, ?,
                     'building', NULL, 10
                 )
                 """,
@@ -2396,6 +2490,40 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                     .text(certificate), .text(generationID),
                 ]
             )
+            switch phase {
+            case .scrubProjection:
+                try CanonicalRuntimeStore.scheduleCanonicalGenerationScrub(
+                    generationID: generationID, kind: "projection",
+                    certificate: certificate, nowMilliseconds: 10,
+                    database: isolated
+                )
+            case .indexSearch, .sealSearch, .scrubSearch, .ready:
+                let scrubCertificate = CanonicalRuntimeStore
+                    .canonicalScrubCertificateDigest(
+                        generationID: generationID, kind: "projection",
+                        projectionID: definition.id.rawValue,
+                        generationCertificate: certificate,
+                        observedCount: entries.count,
+                        observedShardCount: shardCount,
+                        observedPostingCount: 0, observedPostingBytes: 0,
+                        rootDigest: rootDigest, completedAtMilliseconds: 11
+                    )
+                try isolated.execute(
+                    """
+                    INSERT INTO runtime_canonical_scrub_certificates VALUES (
+                        ?, 'projection', ?, ?, ?, ?, 0, 0, ?, 11, ?
+                    )
+                    """,
+                    bindings: [
+                        .text(generationID), .text(definition.id.rawValue),
+                        .text(certificate), .integer(Int64(entries.count)),
+                        .integer(Int64(shardCount)), .text(rootDigest),
+                        .text(scrubCertificate),
+                    ]
+                )
+            case .clone, .replay, .sealProjection, .blocked:
+                break
+            }
             try isolated.execute(
                 """
                 UPDATE runtime_canonical_projection_jobs
@@ -2429,14 +2557,26 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 phasePath = []
             case .sealProjection:
                 phasePath = [.sealProjection]
+            case .scrubProjection:
+                phasePath = [.sealProjection, .scrubProjection]
             case .indexSearch:
-                phasePath = [.sealProjection, .indexSearch]
+                phasePath = [.sealProjection, .scrubProjection, .indexSearch]
             case .sealSearch:
-                phasePath = [.sealProjection, .indexSearch, .sealSearch]
+                phasePath = [
+                    .sealProjection, .scrubProjection, .indexSearch, .sealSearch,
+                ]
+            case .scrubSearch:
+                phasePath = [
+                    .sealProjection, .scrubProjection, .indexSearch, .sealSearch,
+                    .scrubSearch,
+                ]
             case .ready:
                 phasePath = definition.id == .search
-                    ? [.sealProjection, .indexSearch, .sealSearch, .ready]
-                    : [.sealProjection, .ready]
+                    ? [
+                        .sealProjection, .scrubProjection, .indexSearch, .sealSearch,
+                        .scrubSearch, .ready,
+                    ]
+                    : [.sealProjection, .scrubProjection, .ready]
             case .blocked:
                 phasePath = [.blocked]
             }

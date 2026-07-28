@@ -163,11 +163,13 @@ final class RuntimeAttachmentRecoveryTests: XCTestCase {
     ) async {
         do { try await operation(); XCTFail("Expected \(expected)") }
         catch let actual as RuntimeCanonicalAttachmentError { XCTAssertEqual(actual, expected) }
+        // AMBitionsAllowWeakPattern(reason: "Unexpected error is asserted by shared attachment recovery helper")
         catch { XCTFail("Unexpected error: \(error)") }
     }
 
     private func assertAnyError(operation: () async throws -> Void) async {
         do { try await operation(); XCTFail("Expected recovery authority rejection") }
+        // AMBitionsAllowWeakPattern(reason: "Expected recovery rejection establishes durable attachment recovery invariant")
         catch { XCTAssertTrue(true) }
     }
 }

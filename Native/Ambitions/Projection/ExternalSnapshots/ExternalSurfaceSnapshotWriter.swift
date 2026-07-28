@@ -30,10 +30,18 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
             guard let appGroupSnapshotStore else {
                 throw ExternalSurfaceSnapshotWriterError.missingAppGroupSnapshotStore
             }
-            guard let widgetRecord = try await projectionStore.fetchRecord(id: .widget) else {
+            // Read every projection through one SQLite statement before taking
+            // the widget/privacy pair. Fetching the two records independently
+            // permits a committed projection batch to land between reads and
+            // produces an external snapshot assembled from different canonical
+            // states. A mixed pair is not safe to publish, even when each row
+            // passes its own checksum and privacy checks.
+            let projectionRecords = try await projectionStore.fetchAllRecords()
+            let recordsByID = Dictionary(uniqueKeysWithValues: projectionRecords.map { ($0.id, $0) })
+            guard let widgetRecord = recordsByID[.widget] else {
                 throw ExternalSurfaceSnapshotWriterError.missingProjection(.widget)
             }
-            guard let privacyRecord = try await projectionStore.fetchRecord(id: .privacy) else {
+            guard let privacyRecord = recordsByID[.privacy] else {
                 throw ExternalSurfaceSnapshotWriterError.missingProjection(.privacy)
             }
 

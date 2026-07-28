@@ -132,7 +132,6 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertTrue(runtime.captureService is DefaultCaptureService)
         let knowledgeStatus = await runtime.knowledgeProvider.status(now: .now)
         XCTAssertEqual(knowledgeStatus.availability, .localOnlyMode)
-        _ = runtime.dedicatedDevicePrototypeRuntime
     }
 }
 

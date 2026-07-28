@@ -508,7 +508,7 @@ extension CanonicalRuntimeStore {
             String(token.requiresLocalOnly), token.families.map(\.rawValue).sorted().joined(separator: ","),
         ])
         guard token.definitionDigest == definition.authorityDigest,
-              token.coverage == .aggregateMetadataOnly,
+              token.coverage == .aggregateKindOnly,
               token.allowedPrivacy.isEmpty == false,
               token.allowedPrivacy.isSubset(of: Set(definition.allowedPrivacyClasses)),
               token.accessPolicyDigest == expectedAccess else {
@@ -646,6 +646,18 @@ extension CanonicalRuntimeStore {
               definition.requiresLocalOnlySource == false || localOnly == 1 else {
             throw RuntimeCanonicalSearchError.projectionNotAvailable(.corrupt)
         }
+        try requireCanonicalPublishedScrubCertificate(
+            generationID: generationID,
+            kind: "projection",
+            projectionID: definition.id.rawValue,
+            generationCertificate: certificate,
+            observedCount: Int(entryCount),
+            observedShardCount: Int(shardCount),
+            observedPostingCount: 0,
+            observedPostingBytes: 0,
+            rootDigest: rootDigest,
+            database: database
+        )
         if cursor == .emptySource {
             guard firstInvalidationID == "runtime.empty-source",
                   lastInvalidationID == "runtime.empty-source",
@@ -814,7 +826,7 @@ extension CanonicalRuntimeStore {
               rows[0].value(named: "projection_generation_id") == .text(projection.generationID),
               case let .text(coverageRaw)? = rows[0].value(named: "coverage"),
               let coverage = RuntimeCanonicalSearchCoverage(rawValue: coverageRaw),
-              coverage == .aggregateMetadataOnly,
+              coverage == .aggregateKindOnly,
               rows[0].value(named: "definition_digest") == .text(definition.authorityDigest),
               rows[0].value(named: "source_sequence") == .integer(Int64(projection.sourceCursor.sequence)),
               rows[0].value(named: "source_event_hash") == .text(projection.sourceCursor.eventHash),
@@ -867,6 +879,18 @@ extension CanonicalRuntimeStore {
         guard generationID == expectedID, certificate == expectedCertificate else {
             throw RuntimeCanonicalSearchError.corruptIndex
         }
+        try requireCanonicalPublishedScrubCertificate(
+            generationID: generationID,
+            kind: "search",
+            projectionID: definition.id.rawValue,
+            generationCertificate: certificate,
+            observedCount: Int(documentCount),
+            observedShardCount: Int(shardCount),
+            observedPostingCount: Int(postingCount),
+            observedPostingBytes: Int(postingBytes),
+            rootDigest: rootDigest,
+            database: database
+        )
         let fingerprint = RuntimeTransactionDigest.digest([
             "runtime.search.authority-fingerprint.v2", projection.fingerprint,
             generationID, coverage.rawValue, certificate, definition.authorityDigest,
@@ -875,6 +899,63 @@ extension CanonicalRuntimeStore {
             projection: projection, generationID: generationID, coverage: coverage,
             certificateDigest: certificate, fingerprint: fingerprint
         )
+    }
+
+    static func requireCanonicalPublishedScrubCertificate(
+        generationID: String,
+        kind: String,
+        projectionID: String,
+        generationCertificate: String,
+        observedCount: Int,
+        observedShardCount: Int,
+        observedPostingCount: Int,
+        observedPostingBytes: Int,
+        rootDigest: String,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let rows = try database.query(
+            """
+            SELECT generation_kind, projection_id, generation_certificate_digest,
+                   observed_count, observed_shard_count, observed_posting_count,
+                   observed_posting_bytes, root_digest, completed_at_ms,
+                   scrub_certificate_digest
+            FROM runtime_canonical_scrub_certificates
+            WHERE generation_id = ? LIMIT 2
+            """,
+            bindings: [.text(generationID)]
+        )
+        guard rows.count == 1,
+              rows[0].value(named: "generation_kind") == .text(kind),
+              rows[0].value(named: "projection_id") == .text(projectionID),
+              rows[0].value(named: "generation_certificate_digest") ==
+                .text(generationCertificate),
+              rows[0].value(named: "observed_count") == .integer(Int64(observedCount)),
+              rows[0].value(named: "observed_shard_count") ==
+                .integer(Int64(observedShardCount)),
+              rows[0].value(named: "observed_posting_count") ==
+                .integer(Int64(observedPostingCount)),
+              rows[0].value(named: "observed_posting_bytes") ==
+                .integer(Int64(observedPostingBytes)),
+              rows[0].value(named: "root_digest") == .text(rootDigest),
+              case let .integer(completedAt)? = rows[0].value(named: "completed_at_ms"),
+              completedAt >= 0,
+              case let .text(scrubCertificate)? = rows[0]
+                .value(named: "scrub_certificate_digest"),
+              scrubCertificate == canonicalScrubCertificateDigest(
+                  generationID: generationID,
+                  kind: kind,
+                  projectionID: projectionID,
+                  generationCertificate: generationCertificate,
+                  observedCount: observedCount,
+                  observedShardCount: observedShardCount,
+                  observedPostingCount: observedPostingCount,
+                  observedPostingBytes: observedPostingBytes,
+                  rootDigest: rootDigest,
+                  completedAtMilliseconds: completedAt
+              ) else {
+            if kind == "search" { throw RuntimeCanonicalSearchError.corruptIndex }
+            throw RuntimeCanonicalSearchError.projectionNotAvailable(.corrupt)
+        }
     }
 
     static func readCanonicalSearchRows(

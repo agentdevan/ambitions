@@ -100,7 +100,7 @@ struct FlagshipRuntimeIntentAdapter: FlagshipIntentSending {
                 sourceSurface: context.sourceSurface
             )
         )
-        return Self.mapQuickCaptureResult(result, commandID: command.id)
+        return Self.mapQuickCaptureResult(result)
     }
 
     private static func commandID(for idempotencyKey: String) -> String {
@@ -111,8 +111,7 @@ struct FlagshipRuntimeIntentAdapter: FlagshipIntentSending {
     }
 
     private static func mapQuickCaptureResult(
-        _ result: AmbitionsCommandExecutionResult,
-        commandID: String
+        _ result: AmbitionsCommandExecutionResult
     ) -> FlagshipIntentResult {
         guard result.status == .succeeded else {
             let recoveryAction: FlagshipRecoveryAction = result.status == .blocked ? .editIntent : .refreshAndRetry
@@ -121,15 +120,16 @@ struct FlagshipRuntimeIntentAdapter: FlagshipIntentSending {
                 recoveryAction: recoveryAction
             )
         }
-        let returnedReceiptID = result.metadata["commandReceiptID"]?.nonEmpty
-        let returnedCaptureID = (result.target?.captureID ?? result.metadata["captureID"])?.nonEmpty
-        let receiptID = returnedReceiptID ?? "command.receipt.\(commandID)"
-        let captureID = returnedCaptureID ?? "capture.\(commandID)"
+        guard let receiptID = result.metadata["commandReceiptID"]?.nonEmpty,
+              let captureID = (result.target?.captureID ?? result.metadata["captureID"])?.nonEmpty else {
+            return .outcomeIndeterminate(
+                code: "quick_capture_authority_evidence_incomplete",
+                recoveryAction: .refreshAndRetry
+            )
+        }
         let projectionCursors = projectionCursors(from: result.metadata)
         let requiresCatchUp = result.metadata["captureMaterialization"] == "needs_recovery" ||
-            projectionCursors.isEmpty ||
-            returnedReceiptID == nil ||
-            returnedCaptureID == nil
+            projectionCursors.isEmpty
         let receipt = FlagshipReceiptReference(
             id: receiptID,
             projectionCursors: projectionCursors,

@@ -33,7 +33,7 @@ enum AmbitionsRuntimeFactory {
             repositories: repositories,
             explainabilityProjector: explainabilityProjector,
             teachingReader: teachingService,
-            teachingCaptureService: teachingService,
+            teachingProposalService: teachingService,
             learningService: learningService
         )
         let memoryService = RepositoryBackedRuntimeMemoryService(repositories: repositories)
@@ -99,10 +99,6 @@ enum AmbitionsRuntimeFactory {
         )
         let privateLifeRuntimeKernel = PrivateLifeRuntimeKernel()
         let actionExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
-        let dedicatedDevicePrototypeRuntime = DedicatedDevicePrototypeRuntime(
-            contextService: contextService,
-            actionExecutor: actionExecutor
-        )
 
         return AmbitionsRuntime(
             clientContext: clientContext,
@@ -129,8 +125,7 @@ enum AmbitionsRuntimeFactory {
             youService: youService,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
-            privateLifeRuntimeKernel: privateLifeRuntimeKernel,
-            dedicatedDevicePrototypeRuntime: dedicatedDevicePrototypeRuntime
+            privateLifeRuntimeKernel: privateLifeRuntimeKernel
         )
     }
 }

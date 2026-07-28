@@ -109,8 +109,13 @@ enum RuntimeAttachmentCodec {
         guard bytes.isEmpty == false, bytes.count <= maximumBytes else {
             throw RuntimeCanonicalAttachmentError.malformedPayload
         }
-        do { return try makeDecoder().decode(type, from: bytes) }
-        catch { throw RuntimeCanonicalAttachmentError.malformedPayload }
+        do {
+            return try makeDecoder().decode(type, from: bytes)
+        } catch {
+            // Decoder details can contain private payload fragments; the attachment
+            // boundary deliberately exposes only the typed corrupt-payload result.
+            throw RuntimeCanonicalAttachmentError.malformedPayload
+        }
     }
 
     static func digest<T: Encodable>(_ value: T, maximumBytes: Int) throws -> String {

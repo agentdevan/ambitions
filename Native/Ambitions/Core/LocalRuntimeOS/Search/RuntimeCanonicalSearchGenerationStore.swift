@@ -1,7 +1,7 @@
 import AmbitionsRuntimeSQLite
 import Foundation
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     func indexCanonicalSearchDocumentPage(
         _ work: RuntimeCanonicalProjectionBuildWork,
         bounds: RuntimeCanonicalProjectionUnitBounds
@@ -10,7 +10,7 @@ extension CanonicalRuntimeStore {
         guard work.projectionID == .search else {
             throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
         }
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(work, phase: .indexSearch, database: database)
             let searchGenerationID = Self.canonicalSearchGenerationID(work)
             try Self.ensureCanonicalSearchGeneration(
@@ -96,7 +96,7 @@ extension CanonicalRuntimeStore {
         bounds: RuntimeCanonicalProjectionUnitBounds
     ) async throws -> RuntimeCanonicalProjectionUnitResult {
         try Task.checkCancellation()
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(work, phase: .sealSearch, database: database)
             let searchGenerationID = Self.canonicalSearchGenerationID(work)
             let sizeRows = try database.query(
@@ -138,7 +138,7 @@ extension CanonicalRuntimeStore {
                 let certificate = Self.canonicalSearchGenerationCertificateDigest(
                     generationID: searchGenerationID,
                     projectionGenerationID: work.generationID,
-                    coverage: .aggregateMetadataOnly,
+                    coverage: .aggregateKindOnly,
                     definitionDigest: work.definition.authorityDigest,
                     sourceCursor: work.targetCursor,
                     documentCount: work.searchDocumentCount,
@@ -167,11 +167,18 @@ extension CanonicalRuntimeStore {
                 guard changed.changedRowCount == 1 else {
                     throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
                 }
+                try Self.scheduleCanonicalGenerationScrub(
+                    generationID: searchGenerationID,
+                    kind: "search",
+                    certificate: certificate,
+                    nowMilliseconds: work.operationNowMilliseconds,
+                    database: database
+                )
                 try Self.updateCanonicalProjectionJobPhase(
-                    work, nextPhase: .ready, resetKeyset: true, database: database
+                    work, nextPhase: .scrubSearch, resetKeyset: true, database: database
                 )
                 return RuntimeCanonicalProjectionUnitResult(
-                    nextPhase: .ready, progressCursor: work.targetCursor
+                    nextPhase: .scrubSearch, progressCursor: work.targetCursor
                 )
             }
             guard case let .text(firstKind)? = rows.first?.value(named: "aggregate_kind"),
@@ -241,7 +248,7 @@ extension CanonicalRuntimeStore {
     }
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     static func canonicalBoundedSearchSourceCount(
         generationID: String,
         afterKind: String,
@@ -309,7 +316,7 @@ extension CanonicalRuntimeStore {
     static func canonicalSearchGenerationID(_ work: RuntimeCanonicalProjectionBuildWork) -> String {
         RuntimeTransactionDigest.digest([
             "runtime.search.generation.v1", work.generationID,
-            RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue,
+            RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue,
             work.definition.authorityDigest, String(work.targetCursor.sequence),
             work.targetCursor.eventHash,
         ])
@@ -352,7 +359,7 @@ extension CanonicalRuntimeStore {
             """,
             bindings: [
                 .text(generationID), .text(work.generationID),
-                .text(RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue),
+                .text(RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue),
                 .text(work.definition.authorityDigest),
                 .integer(Int64(work.targetCursor.sequence)), .text(work.targetCursor.eventHash),
                 .text(RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal),
@@ -369,7 +376,7 @@ extension CanonicalRuntimeStore {
         )
         guard rows.count == 1,
               rows[0].value(named: "projection_generation_id") == .text(work.generationID),
-              rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue),
+              rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue),
               rows[0].value(named: "definition_digest") == .text(work.definition.authorityDigest),
               rows[0].value(named: "source_sequence") == .integer(Int64(work.targetCursor.sequence)),
               rows[0].value(named: "source_event_hash") == .text(work.targetCursor.eventHash),
@@ -543,7 +550,6 @@ enum RuntimeCanonicalSearchMetadataExtractor {
         var titleParts: [String] = []
         var bodyParts: [String] = []
         if allowedFields.contains(.aggregateKind) { titleParts.append(entry.aggregate.kind.rawValue) }
-        if allowedFields.contains(.aggregateID) { bodyParts.append(entry.aggregate.id.rawValue) }
         let all = titleParts + bodyParts
         guard all.allSatisfy({ $0.unicodeScalars.count <= maximumFieldCharacters }) else {
             throw RuntimeCanonicalProjectionPersistenceError.unitBudgetExceeded

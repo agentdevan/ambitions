@@ -44,6 +44,7 @@ final class CreateGoalViewModel {
     var clarificationAnswers: [MissingFieldKey: String]
     var previewState: CreateGoalPreviewLoadState
     var submissionState: CreateGoalSubmissionState
+    private var creationAttemptID: String
     @ObservationIgnored private var previewRefreshTask: Task<Void, Never>?
 
     init(
@@ -55,7 +56,8 @@ final class CreateGoalViewModel {
         selectedTargetDateOverride: String? = nil,
         clarificationAnswers: [MissingFieldKey: String] = [:],
         previewState: CreateGoalPreviewLoadState = .idle,
-        submissionState: CreateGoalSubmissionState = .idle
+        submissionState: CreateGoalSubmissionState = .idle,
+        creationAttemptID: String = DomainIdentifier.prefixed("goal.create")
     ) {
         self.title = title
         self.selectedMode = selectedMode
@@ -66,6 +68,7 @@ final class CreateGoalViewModel {
         self.clarificationAnswers = clarificationAnswers
         self.previewState = previewState
         self.submissionState = submissionState
+        self.creationAttemptID = creationAttemptID
     }
 
     var canSubmit: Bool {
@@ -234,5 +237,76 @@ final class CreateGoalViewModel {
             submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
             return nil
         }
+    }
+
+    func submit(
+        using service: any GoalsServicing,
+        runtimeCommandClient: RuntimeCommandClient,
+        now: Date = .now
+    ) async -> CreateGoalResponse? {
+        submissionState = .loading
+        do {
+            guard let preparing = service as? any GoalCreationPreparing else {
+                throw GoalsFeatureError.notActionable
+            }
+            let request = CreateGoalRequest(
+                title: trimmedTitle,
+                mode: selectedMode,
+                entrySource: entrySource,
+                clarifiedFields: clarificationAnswers,
+                preferredPace: selectedPace,
+                targetDateOverride: selectedTargetDateOverride,
+                captureID: captureID
+            )
+            let prepared = try await preparing.prepareGoalCreation(request, now: now)
+            guard let goal = prepared.goal,
+                  let goalID = prepared.response.target.goalID,
+                  goal.id == goalID else {
+                throw GoalsFeatureError.notActionable
+            }
+            let command = AmbitionsCommand(
+                id: "goal.create.command.\(creationAttemptID)",
+                source: .goals,
+                typedPayload: .goal(GoalCommand(
+                    action: .create,
+                    target: AmbitionsCommandTarget(goalID: goalID, destination: .goals),
+                    content: RuntimeCommandContent(AmbitionsCommandPayload(rawText: trimmedTitle))
+                )),
+                idempotencyKey: CommandIdempotencyKey(creationAttemptID),
+                createdAt: DomainTimestamp.string(from: now),
+                actor: .user,
+                sourceSurface: "Create Goal",
+                privacy: .privateUserText
+            )
+            let authorityResult = await runtimeCommandClient.execute(
+                command,
+                CommandExecutionContext(now: now, actor: .user, sourceSurface: "Create Goal")
+            )
+            guard authorityResult.status == .succeeded,
+                  authorityResult.metadata["commandReceiptID"]?.isEmpty == false,
+                  authorityResult.target?.goalID == goalID,
+                  hasProjectionEvidence(authorityResult.metadata) else {
+                throw GoalsFeatureError.notActionable
+            }
+            let response = try await preparing.commitPreparedGoalCreation(prepared, now: now)
+            creationAttemptID = DomainIdentifier.prefixed("goal.create")
+            submissionState = .idle
+            return response
+        } catch {
+            submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    private func hasProjectionEvidence(_ metadata: [String: String]) -> Bool {
+        guard let countValue = metadata["runtimeProjectionCursorCount"],
+              let count = Int(countValue),
+              count > 0,
+              let identifiers = metadata["runtimeProjectionCursorIDs"]?.split(separator: ","),
+              identifiers.count == count,
+              Set(identifiers).count == count else {
+            return false
+        }
+        return true
     }
 }

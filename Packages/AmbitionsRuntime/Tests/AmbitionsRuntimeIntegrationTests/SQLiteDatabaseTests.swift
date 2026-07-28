@@ -1,6 +1,7 @@
 import Dispatch
 import Foundation
 import XCTest
+import SQLite3
 @testable import AmbitionsRuntimeSQLite
 
 final class SQLiteDatabaseTests: XCTestCase {
@@ -31,7 +32,9 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testPreparedStatementsRoundTripTypedValuesAndApplyPragmas() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["values_table"],
             """
             CREATE TABLE values_table (
                 integer_value INTEGER,
@@ -42,7 +45,9 @@ final class SQLiteDatabaseTests: XCTestCase {
             )
             """
         )
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["values_table"],
             """
             INSERT INTO values_table (
                 integer_value, real_value, text_value, blob_value, null_value
@@ -82,15 +87,21 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testTextBindingAndReadingPreserveEmbeddedNULBytes() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["text_values"],
             "CREATE TABLE text_values (value TEXT NOT NULL)"
         )
         let value = "prefix\u{0}suffix"
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["text_values"],
             "INSERT INTO text_values (value) VALUES (?)",
             bindings: [.text(value)]
         )
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["text_values"],
             "INSERT INTO text_values (value) VALUES (?)",
             bindings: [.text("")]
         )
@@ -103,10 +114,14 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testInvalidUTF8TextFailsWithPrivacySafeDecodeError() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["invalid_text"],
             "CREATE TABLE invalid_text (value BLOB NOT NULL)"
         )
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["invalid_text"],
             "INSERT INTO invalid_text (value) VALUES (?)",
             bindings: [.blob(Data([0xC3, 0x28]))]
         )
@@ -129,12 +144,16 @@ final class SQLiteDatabaseTests: XCTestCase {
             url: try databaseURL(),
             configuration: SQLiteConfiguration(maximumValueBytes: 1_024)
         )
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["blob_values"],
             "CREATE TABLE blob_values (value BLOB NOT NULL)"
         )
 
         do {
-            _ = try await database.execute(
+            try await Self.write(
+                database,
+                tables: ["blob_values"],
                 "INSERT INTO blob_values (value) VALUES (?)",
                 bindings: [.blob(Data(repeating: 0xA5, count: 2_048))]
             )
@@ -148,14 +167,20 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testErrorsUseImmediateNonzeroResultCodesInsteadOfStaleDiagnostics() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["error_codes"],
             "CREATE TABLE error_codes (value TEXT UNIQUE NOT NULL)"
         )
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["error_codes"],
             "INSERT INTO error_codes (value) VALUES ('duplicate')"
         )
         do {
-            _ = try await database.execute(
+            try await Self.write(
+                database,
+                tables: ["error_codes"],
                 "INSERT INTO error_codes (value) VALUES ('duplicate')"
             )
             XCTFail("Expected a constraint error to seed connection diagnostics.")
@@ -202,12 +227,16 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testScopedTransactionCommitsAndThrownBodyRollsBack() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["items"],
             "CREATE TABLE items (id INTEGER PRIMARY KEY, value TEXT NOT NULL)"
         )
 
         do {
-            try await database.transaction { database -> Void in
+            try await database.transaction(
+                writeAuthorization: try Self.writeAuthorization(tables: ["items"])
+            ) { database -> Void in
                 _ = try database.execute(
                     "INSERT INTO items (id, value) VALUES (?, ?)",
                     bindings: [.integer(1), .text("rolled-back")]
@@ -221,7 +250,10 @@ final class SQLiteDatabaseTests: XCTestCase {
         let afterRollback = try await database.query("SELECT id FROM items")
         XCTAssertTrue(afterRollback.isEmpty)
 
-        try await database.transaction(.exclusive) { database in
+        try await database.transaction(
+            .exclusive,
+            writeAuthorization: try Self.writeAuthorization(tables: ["items"])
+        ) { database in
             _ = try database.execute(
                 "INSERT INTO items (id, value) VALUES (?, ?)",
                 bindings: [.integer(2), .text("committed")]
@@ -233,8 +265,14 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testCommitFailureAutomaticallyRollsBackDeferredConstraint() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute("CREATE TABLE parent (id INTEGER PRIMARY KEY)")
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["parent", "child"],
+            "CREATE TABLE parent (id INTEGER PRIMARY KEY)"
+        )
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["parent", "child"],
             """
             CREATE TABLE child (
                 id INTEGER PRIMARY KEY,
@@ -246,7 +284,12 @@ final class SQLiteDatabaseTests: XCTestCase {
         )
 
         do {
-            try await database.transaction { database in
+            try await database.transaction(
+                writeAuthorization: try Self.writeAuthorization(
+                    tables: ["child"],
+                    reads: ["child", "parent"]
+                )
+            ) { database in
                 _ = try database.execute(
                     "INSERT INTO child (id, parent_id) VALUES (?, ?)",
                     bindings: [.integer(1), .integer(999)]
@@ -263,21 +306,17 @@ final class SQLiteDatabaseTests: XCTestCase {
     }
 
     func testForeignKeysRejectInvalidWritesAndCheckReportsStoredViolations() async throws {
-        let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
-            "CREATE TABLE parent (id INTEGER PRIMARY KEY)"
-        )
-        _ = try await database.execute(
-            """
-            CREATE TABLE child (
-                id INTEGER PRIMARY KEY,
-                parent_id INTEGER NOT NULL REFERENCES parent(id)
-            )
-            """
-        )
+        // A foreign-key violation is an externally-created legacy/corrupt-store
+        // fixture. The runtime itself never disables foreign-key enforcement.
+        let url = try databaseURL()
+        try Self.seedForeignKeyViolation(at: url)
+        let database = try SQLiteDatabase(url: url)
 
         do {
-            _ = try await database.execute(
+            try await Self.write(
+                database,
+                tables: ["child"],
+                reads: ["child", "parent"],
                 "INSERT INTO child (id, parent_id) VALUES (?, ?)",
                 bindings: [.integer(1), .integer(999)]
             )
@@ -286,13 +325,6 @@ final class SQLiteDatabaseTests: XCTestCase {
             XCTAssertEqual(error.operation, .step)
             XCTAssertEqual(error.primaryCode, 19)
         }
-
-        _ = try await database.execute("PRAGMA foreign_keys=OFF")
-        _ = try await database.execute(
-            "INSERT INTO child (id, parent_id) VALUES (?, ?)",
-            bindings: [.integer(2), .integer(999)]
-        )
-        _ = try await database.execute("PRAGMA foreign_keys=ON")
 
         let violations = try await database.foreignKeyCheck()
         XCTAssertEqual(violations.count, 1)
@@ -303,7 +335,9 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testScopedTransactionCannotInterleaveOtherCallsOnSameActor() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["ordering"],
             """
             CREATE TABLE ordering (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -313,9 +347,12 @@ final class SQLiteDatabaseTests: XCTestCase {
         )
         let entered = AsyncStream<Void>.makeStream()
         let release = DispatchSemaphore(value: 0)
+        let orderingWriteAuthorization = try Self.writeAuthorization(tables: ["ordering"])
 
         let first = Task {
-            try await database.transaction { database in
+            try await database.transaction(
+                writeAuthorization: orderingWriteAuthorization
+            ) { database in
                 _ = try database.execute(
                     "INSERT INTO ordering (value) VALUES ('first-start')"
                 )
@@ -331,7 +368,9 @@ final class SQLiteDatabaseTests: XCTestCase {
         let secondAttempted = AsyncStream<Void>.makeStream()
         let second = Task {
             secondAttempted.continuation.yield(())
-            try await database.transaction { database in
+            try await database.transaction(
+                writeAuthorization: orderingWriteAuthorization
+            ) { database in
                 _ = try database.execute(
                     "INSERT INTO ordering (value) VALUES ('second')"
                 )
@@ -354,7 +393,9 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testScopedBodyRejectsTransactionControlWithoutDurableCommit() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["guarded_values"],
             "CREATE TABLE guarded_values (value TEXT NOT NULL)"
         )
 
@@ -367,7 +408,11 @@ final class SQLiteDatabaseTests: XCTestCase {
             "RELEASE nested"
         ] {
             do {
-                try await database.transaction { database in
+                try await database.transaction(
+                    writeAuthorization: try Self.writeAuthorization(
+                        tables: ["guarded_values"]
+                    )
+                ) { database in
                     _ = try database.execute(
                         "INSERT INTO guarded_values (value) VALUES ('uncommitted')"
                     )
@@ -387,10 +432,14 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testPublicExecuteAndQueryRejectRawTransactionControl() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["committed_value"],
             "CREATE TABLE committed_value (value INTEGER NOT NULL)"
         )
-        try await database.transaction { database in
+        try await database.transaction(
+            writeAuthorization: try Self.writeAuthorization(tables: ["committed_value"])
+        ) { database in
             _ = try database.execute(
                 "INSERT INTO committed_value (value) VALUES (1)"
             )
@@ -429,7 +478,7 @@ final class SQLiteDatabaseTests: XCTestCase {
     func testUnresolvedRollbackPoisonSeamRejectsEveryLaterOperation() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
         let backupURL = try databaseURL()
-        await database.poisonConnectionAfterUnresolvedRollback(
+        _ = await database.poisonConnectionAfterUnresolvedRollback(
             SQLiteError(operation: .transaction, extendedCode: 10)
         )
 
@@ -463,13 +512,18 @@ final class SQLiteDatabaseTests: XCTestCase {
             url: url,
             configuration: SQLiteConfiguration(busyTimeoutMilliseconds: 1)
         )
-        _ = try await first.execute(
+        try await Self.bootstrap(
+            first,
+            schemaObjects: ["secrets"],
             "CREATE TABLE secrets (id INTEGER PRIMARY KEY, value TEXT UNIQUE)"
         )
         let writerEntered = AsyncStream<Void>.makeStream()
         let releaseWriter = DispatchSemaphore(value: 0)
+        let secretsWriteAuthorization = try Self.writeAuthorization(tables: ["secrets"])
         let holdingWriter = Task {
-            try await first.transaction { database in
+            try await first.transaction(
+                writeAuthorization: secretsWriteAuthorization
+            ) { database in
                 _ = try database.execute(
                     "INSERT INTO secrets (id, value) VALUES (?, ?)",
                     bindings: [.integer(1), .text("held-value")]
@@ -483,7 +537,9 @@ final class SQLiteDatabaseTests: XCTestCase {
 
         let observedBusyError: Error?
         do {
-            _ = try await second.execute(
+            try await Self.write(
+                second,
+                tables: ["secrets"],
                 "INSERT INTO secrets /* private-sql-marker */ (id, value) VALUES (?, ?)",
                 bindings: [.integer(2), .text("private-bound-marker")]
             )
@@ -500,12 +556,16 @@ final class SQLiteDatabaseTests: XCTestCase {
         XCTAssertFalse(busyError.description.contains("private-sql-marker"))
         XCTAssertFalse(busyError.description.contains("private-bound-marker"))
 
-        _ = try await first.execute(
+        try await Self.write(
+            first,
+            tables: ["secrets"],
             "INSERT INTO secrets (id, value) VALUES (?, ?)",
             bindings: [.integer(3), .text("duplicate-private-marker")]
         )
         do {
-            _ = try await first.execute(
+            try await Self.write(
+                first,
+                tables: ["secrets"],
                 "INSERT INTO secrets (id, value) VALUES (?, ?)",
                 bindings: [.integer(4), .text("duplicate-private-marker")]
             )
@@ -521,10 +581,14 @@ final class SQLiteDatabaseTests: XCTestCase {
         let backupURL = sourceURL.deletingLastPathComponent()
             .appendingPathComponent("backup.sqlite")
         let database = try SQLiteDatabase(url: sourceURL)
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["records"],
             "CREATE TABLE records (id INTEGER PRIMARY KEY, value TEXT NOT NULL)"
         )
-        _ = try await database.execute(
+        try await Self.write(
+            database,
+            tables: ["records"],
             "INSERT INTO records (id, value) VALUES (?, ?)",
             bindings: [.integer(1), .text("backed-up")]
         )
@@ -551,14 +615,18 @@ final class SQLiteDatabaseTests: XCTestCase {
 
     func testActorSerializesConcurrentPreparedOperations() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
-        _ = try await database.execute(
+        try await Self.bootstrap(
+            database,
+            schemaObjects: ["concurrent_values"],
             "CREATE TABLE concurrent_values (id INTEGER PRIMARY KEY)"
         )
 
         try await withThrowingTaskGroup(of: Void.self) { group in
             for value in 0..<64 {
                 group.addTask {
-                    _ = try await database.execute(
+                    try await Self.write(
+                        database,
+                        tables: ["concurrent_values"],
                         "INSERT INTO concurrent_values (id) VALUES (?)",
                         bindings: [.integer(Int64(value))]
                     )
@@ -571,6 +639,72 @@ final class SQLiteDatabaseTests: XCTestCase {
             "SELECT COUNT(*) AS count FROM concurrent_values"
         )
         XCTAssertEqual(rows.first?.value(named: "count"), .integer(64))
+    }
+
+    private static func seedForeignKeyViolation(at url: URL) throws {
+        var handle: OpaquePointer?
+        let openResult = sqlite3_open_v2(
+            url.path,
+            &handle,
+            SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX,
+            nil
+        )
+        guard openResult == SQLITE_OK, let handle else {
+            throw SQLiteError(operation: .open, extendedCode: openResult)
+        }
+        defer { sqlite3_close(handle) }
+
+        for statement in [
+            "PRAGMA foreign_keys=OFF",
+            "CREATE TABLE parent (id INTEGER PRIMARY KEY)",
+            "CREATE TABLE child (id INTEGER PRIMARY KEY, parent_id INTEGER NOT NULL REFERENCES parent(id))",
+            "INSERT INTO child (id, parent_id) VALUES (2, 999)"
+        ] {
+            let result = sqlite3_exec(handle, statement, nil, nil, nil)
+            guard result == SQLITE_OK else {
+                throw SQLiteError(operation: .step, extendedCode: result)
+            }
+        }
+    }
+
+    private static func bootstrap(
+        _ database: SQLiteDatabase,
+        schemaObjects: Set<String>,
+        _ sql: String,
+        bindings: [SQLiteBinding] = []
+    ) async throws {
+        let authorization = try SQLiteBootstrapAuthorization(
+            allowedSchemaObjects: schemaObjects
+        )
+        try await database.bootstrapTransaction(authorization: authorization) { database in
+            _ = try database.execute(sql, bindings: bindings)
+        }
+    }
+
+    private static func write(
+        _ database: SQLiteDatabase,
+        tables: Set<String>,
+        reads: Set<String>? = nil,
+        _ sql: String,
+        bindings: [SQLiteBinding] = []
+    ) async throws {
+        let authorization = try SQLiteWriteAuthorization(
+            allowedTables: tables,
+            allowedReadTables: reads ?? tables
+        )
+        try await database.transaction(writeAuthorization: authorization) { database in
+            _ = try database.execute(sql, bindings: bindings)
+        }
+    }
+
+    private static func writeAuthorization(
+        tables: Set<String>,
+        reads: Set<String>? = nil
+    ) throws -> SQLiteWriteAuthorization {
+        try SQLiteWriteAuthorization(
+            allowedTables: tables,
+            allowedReadTables: reads ?? tables
+        )
     }
 
     private func databaseURL() throws -> URL {

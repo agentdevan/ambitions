@@ -28,15 +28,11 @@ final class RuntimePackageBoundaryModelsTests: XCTestCase {
                 path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift",
                 imports: ["AmbitionsDesignSystem", "Foundation"]
             ),
-            RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/DedicatedDevicePrototypeRuntime.swift",
-                imports: ["Foundation"]
-            )
         ]
 
         let report = RuntimePackageBoundaryValidator().validate(manifest: manifest, files: files)
 
-        XCTAssertEqual(report.checkedFileCount, 3)
+        XCTAssertEqual(report.checkedFileCount, 2)
         XCTAssertEqual(report.issues, [])
         XCTAssertEqual(report.offendingPaths, [])
         XCTAssertTrue(report.canMoveRuntimeToPackage)

@@ -251,6 +251,7 @@ final class CanonicalRuntimeStoreIdempotencyCASTests: XCTestCase {
                 throw InjectedFailure()
             }
             XCTFail("Expected injected failure")
+        // AMBitionsAllowWeakPattern(reason: "Expected injected failure establishes transaction rollback invariant")
         } catch is InjectedFailure {
         }
 
@@ -282,6 +283,7 @@ final class CanonicalRuntimeStoreIdempotencyCASTests: XCTestCase {
         do {
             try await operation.value
             XCTFail("Expected cancellation")
+        // AMBitionsAllowWeakPattern(reason: "Expected cancellation establishes idempotency claim rollback invariant")
         } catch is CancellationError {
         }
         let rows = try await database.query(

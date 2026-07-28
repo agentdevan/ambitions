@@ -278,16 +278,16 @@ extension RepositoryBackedGoalsService {
     }
 
 
-    func correctionMessage(for signal: GoalTeachingSignal) -> String {
-        switch signal.kind {
+    func correctionMessage(for proposal: GoalTeachingCorrectionProposal) -> String {
+        switch proposal.kind {
         case .requirementRelevanceCorrection:
-            return "That support relevance correction is now stored through the canonical teaching layer."
+            return "That support relevance correction was validated against the current path, but is not stored until a receipt-backed runtime command can install it."
         case .contradictionDispositionCorrection:
-            return "That contradiction disposition is now stored through the canonical teaching layer."
+            return "That contradiction disposition was validated against the current path, but is not stored until a receipt-backed runtime command can install it."
         case .energyFitCorrection:
-            return "That energy-fit correction is now stored through the canonical teaching layer."
+            return "That energy-fit correction was validated against the current path, but is not stored until a receipt-backed runtime command can install it."
         case .interpretationCorrection, .goalSubjectCorrection, .classificationCorrection:
-            return "That correction is now stored through the canonical teaching layer."
+            return "That correction was validated against the current goal, but is not stored until a receipt-backed runtime command can install it."
         }
     }
 

@@ -224,21 +224,44 @@ actor CanonicalRuntimeStore {
         }
     }
 
-    /// Grants canonical maintenance subsystems one immediate transaction. The
-    /// synchronous closure cannot suspend or let the isolated handle escape.
-    func withCanonicalImmediateTransaction<Result: Sendable>(
+    /// Grants projection/search maintenance one immediate transaction. SQLite
+    /// independently denies writes outside the derived-state table capability,
+    /// including trigger writes. A canonical fence is compared before commit
+    /// so a future schema/allowlist error cannot silently mutate authority.
+    func withDerivedImmediateTransaction<Result: Sendable>(
         _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) async throws -> Result {
         try pinnedFiles.validate(databaseURL: databaseURL)
         do {
-            let result = try await database.transaction(.immediate) { database in
+            let transactionGenerationID = generationID
+            let transactionIdentityDigest = expectedDatabaseIdentitySHA256
+            let result = try await database.transaction(
+                .immediate,
+                writeAuthorization: try RuntimeCanonicalDerivedWriteAuthority.sqlite,
+                invariantCapture: { database in
+                    try RuntimeGenerationControlCodec.encode(
+                        RuntimeGenerationDatabaseAuthority.revisionFenceInTransaction(
+                            database: database,
+                            generationID: transactionGenerationID,
+                            generationDigest: transactionIdentityDigest
+                        )
+                    )
+                },
+                validateInvariant: { before, after in
+                    guard before == after else {
+                        throw RuntimeGenerationControlError.derivedCanonicalMutationDenied
+                    }
+                }
+            ) { database in
                 try Task.checkCancellation()
                 try Self.requireCompiledIdentity(
                     database, expected: expectedDatabaseIdentitySHA256
                 )
-                return try operation(database)
+                let value = try operation(database)
+                try Task.checkCancellation()
+                return value
             }
             // Parity with `withAtomicCommitTransaction`: once COMMIT succeeds,
             // no throwable pin check may convert durable progress into a false
@@ -266,12 +289,14 @@ actor CanonicalRuntimeStore {
             error is LocalRuntimeStorageError
     }
 
+#if AMBITIONS_LEGACY_RUNTIME_TEST_SUPPORT
     static func openActive(
         using generationManager: RuntimeStoreGenerationManager
     ) async throws -> CanonicalRuntimeStore {
         let generation = try await generationManager.resolveActiveGeneration()
         return try await openPinnedGeneration(generation)
     }
+#endif
 
     static func openPinnedGeneration(
         _ generation: ResolvedRuntimeStoreGeneration
@@ -453,7 +478,10 @@ actor CanonicalRuntimeStore {
     ) async throws -> Result {
         try pinnedFiles.validate(databaseURL: databaseURL)
         do {
-            let result = try await database.transaction(.immediate) { database in
+            let result = try await database.transaction(
+                .immediate,
+                writeAuthorization: try CanonicalRuntimeAtomicCommitWriteAuthority.sqlite
+            ) { database in
                 try Task.checkCancellation()
                 return try operation(database)
             }
@@ -776,12 +804,45 @@ extension CanonicalRuntimeStore {
         "CREATE INDEX runtime_tombstones_causal_object_idx ON runtime_tombstones(causal_event_sequence, object_kind, object_id)",
     ]
 
+    /// Decode-only legacy import may accept typed v1 rows only after proving the
+    /// source has the complete compiled v1 catalog. This intentionally ignores
+    /// a source's generation identity while retaining exact table, index,
+    /// trigger, metadata-version, and user-version requirements.
+    static func requireExactLegacyV1Schema(
+        in database: isolated SQLiteDatabase
+    ) throws {
+        let inspection = try inspectReadTransaction(database)
+        guard inspection.schema.isExact,
+              inspection.metadata.schemaVersion == 1,
+              inspection.effectiveUserVersion == 1,
+              inspection.foreignKeysEnabled else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+        let rows = try database.query(
+            """
+            SELECT type, name, sql FROM sqlite_schema
+            WHERE name LIKE 'runtime_%'
+            ORDER BY type, name LIMIT 256
+            """
+        )
+        guard rows.isEmpty == false, rows.count < 256 else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+        let observed = try Set(rows.map {
+            normalizedSchemaSQL(try text($0, named: "sql"))
+        })
+        guard observed == Set(schemaStatements.map(normalizedSchemaSQL)) else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+    }
+
     static func installSchema(
         in database: SQLiteDatabase,
         generationID: RuntimeStoreGenerationID,
         createdAtMilliseconds: Int64
     ) async throws {
-        try await database.transaction(.exclusive) { database in
+        let authorization = try schemaBootstrapAuthorization(schemaStatements)
+        try await database.bootstrapTransaction(.exclusive, authorization: authorization) { database in
             for statement in schemaStatements {
                 try database.execute(statement)
             }
@@ -823,6 +884,81 @@ extension CanonicalRuntimeStore {
                 throw LocalRuntimeStorageError.canonicalIntegrityFailure
             }
             return version
+        }
+    }
+
+    /// Schema bootstrap is the sole place where the generation's compiled DDL
+    /// gets authority. Normal canonical commits receive only table mutation
+    /// capabilities and cannot create, alter, or drop schema objects.
+    static func schemaBootstrapAuthorization(
+        _ statements: [String]
+    ) throws -> SQLiteBootstrapAuthorization {
+        let names = Set(try statements.map { statement in
+            try schemaObjectNameForBootstrap(statement)
+        })
+        guard names.isEmpty == false, names.count == statements.count else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+        return try SQLiteBootstrapAuthorization(allowedSchemaObjects: names)
+    }
+
+    private static func schemaObjectNameForBootstrap(
+        _ statement: String
+    ) throws -> String {
+        let tokens = statement.split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        guard tokens.first == "CREATE" else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+        let name: String?
+        if tokens.count > 2,
+           tokens[1] == "TABLE" || tokens[1] == "TRIGGER" || tokens[1] == "INDEX" {
+            name = tokens[2]
+        } else if tokens.count > 3,
+                  tokens[1] == "UNIQUE", tokens[2] == "INDEX" {
+            name = tokens[3]
+        } else {
+            name = nil
+        }
+        guard let name,
+              name.isEmpty == false,
+              name == name.lowercased() else {
+            throw LocalRuntimeStorageError.canonicalIntegrityFailure
+        }
+        return name
+    }
+}
+
+/// The exact mutable catalog used by foreground commits, receipt authority,
+/// external-effect authority, and attachment authority. The two replay rows
+/// below are semantic-event consistency markers written by the event append
+/// primitive itself; all other replay, projection, search, and control-plane
+/// tables are deliberately absent.
+private enum CanonicalRuntimeAtomicCommitWriteAuthority {
+    static let tables: Set<String> = [
+        "runtime_aggregates",
+        "runtime_authority_fence",
+        "runtime_command_idempotency",
+        "runtime_replay_quarantine_occurrences",
+        "runtime_replay_verified_high_water",
+    ]
+        .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
+        .union(CanonicalRuntimeCommitSchemaPlan.tables)
+        .union(CanonicalRuntimeCommittedReceiptSchemaPlan.tables)
+        .union(CanonicalRuntimeExternalOperationSchemaPlan.tables)
+        .union(CanonicalRuntimeAttachmentSchemaPlan.tables)
+
+    static let readableTables: Set<String> = tables.union([
+        "runtime_store_metadata",
+        "sqlite_master",
+        "sqlite_schema",
+    ])
+
+    static var sqlite: SQLiteWriteAuthorization {
+        get throws {
+            try SQLiteWriteAuthorization(
+                allowedTables: tables,
+                allowedReadTables: readableTables
+            )
         }
     }
 }

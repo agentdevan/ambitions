@@ -224,10 +224,34 @@ enum RuntimeCanonicalReplayResult: Sendable, Equatable {
     case blocked(RuntimeCanonicalReplayDivergence, RuntimeCanonicalReconstruction)
 }
 
+/// A candidate replay audit never turns finite-work exhaustion or cancellation
+/// into an apparent replay success. Lifecycle ownership persists/retries this
+/// outcome; this layer only reports its exact static cause.
+enum RuntimeCanonicalReplayDeferredReason: Sendable, Equatable {
+    case boundaryCertificateBudget(maximum: Int)
+    case queryBudget(maximumBytes: Int, maximumRows: Int, maximumVMCallbacks: Int)
+    case cancelled
+}
+
+enum RuntimeCanonicalReplayCandidateAuditResult: Sendable, Equatable {
+    case complete(RuntimeCanonicalReconstruction)
+    case blocked(RuntimeCanonicalReplayDivergence, RuntimeCanonicalReconstruction)
+    case deferred(RuntimeCanonicalReplayDeferredReason)
+}
+
+enum RuntimeCanonicalReplayExecutionMode: Sendable, Equatable {
+    /// Independent verification. This mode must remain byte-level read-only.
+    case inspectReadOnly
+    /// Canonical audit authority may persist quarantine and verified
+    /// continuation certificates after full replay equivalence succeeds.
+    case auditAndCertify
+}
+
 enum RuntimeCanonicalReplayError: Error, Sendable, Equatable {
     case migrationRequired(expected: Int, actual: Int)
     case corruptAuthority
     case checkpointMismatch
+    case resourcePolicyExceeded(maximumBoundaryCertificates: Int)
     case staleCompactionPlan
     case destructivePruneUnavailable
 }
@@ -239,6 +263,8 @@ extension RuntimeCanonicalReplayError: CustomStringConvertible, LocalizedError {
             "Canonical replay schema migration is required (expected \(expected), actual \(actual))."
         case .corruptAuthority: "Canonical replay authority is corrupt."
         case .checkpointMismatch: "Canonical replay checkpoint does not match authority."
+        case let .resourcePolicyExceeded(maximum):
+            "Canonical replay requires more than \(maximum) boundary certificates in one audit."
         case .staleCompactionPlan: "Canonical compaction evidence became stale."
         case .destructivePruneUnavailable: "Destructive compaction is unavailable until downstream retention authority exists."
         }
@@ -1110,6 +1136,10 @@ enum CanonicalRuntimeReplaySchemaPlan {
 }
 
 enum RuntimeCanonicalReplayEngine {
+    /// T15's admitted in-memory boundary workspace. T16 may replace this with
+    /// a persisted/streaming certificate workspace without changing authority.
+    static let maximumPendingBoundaryCertificates = 4_096
+
 #if DEBUG
     static func testOnlyCheckpointHeaderBytes(
         _ checkpoint: RuntimeCanonicalReplayCheckpoint
@@ -1127,6 +1157,66 @@ enum RuntimeCanonicalReplayEngine {
         ))
     }
 #endif
+
+    /// The only production construction path for a replay audit that persists
+    /// certificates. It is candidate-scoped: no control-plane, projection,
+    /// search, or canonical aggregate mutation is available to the audit.
+    static func auditAndCertifyCandidate(
+        in database: SQLiteDatabase,
+        checkpointID: String? = nil
+    ) async throws -> RuntimeCanonicalReplayCandidateAuditResult {
+        do {
+            let result = try await database.transaction(
+                .immediate,
+                writeAuthorization: try RuntimeCanonicalReplayCandidateWriteAuthority.sqlite
+            ) { isolated in
+                try Task.checkCancellation()
+                return try replayInTransaction(
+                    database: isolated,
+                    checkpointID: checkpointID
+                )
+            }
+            switch result {
+            case let .complete(reconstruction): return .complete(reconstruction)
+            case let .blocked(divergence, reconstruction): return .blocked(divergence, reconstruction)
+            }
+        } catch let error as RuntimeCanonicalReplayError {
+            if case let .resourcePolicyExceeded(maximum) = error {
+                return .deferred(.boundaryCertificateBudget(maximum: maximum))
+            }
+            throw error
+        } catch let error as SQLiteQueryBudgetExceeded {
+            return .deferred(.queryBudget(
+                maximumBytes: error.maximumBytes,
+                maximumRows: error.maximumRowCount,
+                maximumVMCallbacks: error.maximumProgressCallbacks
+            ))
+        } catch is CancellationError {
+            return .deferred(.cancelled)
+        }
+    }
+
+    /// Compaction is candidate-only and checkpoint-only. It shares the replay
+    /// evidence capability rather than borrowing foreground mutation power.
+    static func applyCompactionCandidate(
+        _ plan: RuntimeCanonicalCompactionPlan,
+        reconstruction: RuntimeCanonicalReconstruction,
+        createdAt: Date,
+        in database: SQLiteDatabase
+    ) async throws -> RuntimeCanonicalReplayCheckpoint {
+        try await database.transaction(
+            .immediate,
+            writeAuthorization: try RuntimeCanonicalReplayCandidateWriteAuthority.sqlite
+        ) { isolated in
+            try Task.checkCancellation()
+            return try applyCompactionInTransaction(
+                plan,
+                reconstruction: reconstruction,
+                createdAt: createdAt,
+                database: isolated
+            )
+        }
+    }
 
     static func loadCheckpointInTransaction(
         checkpointID: String? = nil,
@@ -1243,6 +1333,31 @@ enum RuntimeCanonicalReplayEngine {
         database: isolated SQLiteDatabase,
         checkpointID: String? = nil
     ) throws -> RuntimeCanonicalReplayResult {
+        try executeReplayInTransaction(
+            database: database,
+            checkpointID: checkpointID,
+            mode: .auditAndCertify
+        )
+    }
+
+    /// Pure reconstruction/equivalence path for independent read-only
+    /// verification. It never writes replay certificates or high-water rows.
+    static func reconstructInTransaction(
+        database: isolated SQLiteDatabase,
+        checkpointID: String? = nil
+    ) throws -> RuntimeCanonicalReplayResult {
+        try executeReplayInTransaction(
+            database: database,
+            checkpointID: checkpointID,
+            mode: .inspectReadOnly
+        )
+    }
+
+    private static func executeReplayInTransaction(
+        database: isolated SQLiteDatabase,
+        checkpointID: String?,
+        mode: RuntimeCanonicalReplayExecutionMode
+    ) throws -> RuntimeCanonicalReplayResult {
         try Task.checkCancellation()
         try CanonicalRuntimeReplaySchemaPlan.requireIntegratedSchema(in: database)
         var reconstruction: RuntimeCanonicalReconstruction
@@ -1284,6 +1399,14 @@ enum RuntimeCanonicalReplayEngine {
             sourceChainDigest = RuntimeCanonicalReplaySourceChain.emptyDigest
         }
 
+        var verificationDrafts: [RuntimeCanonicalReplayVerificationDraft] = []
+        var nextInvalidationBoundary = try mode == .auditAndCertify
+            ? nextProjectionInvalidationBoundary(
+                after: reconstruction.cursor?.sequence ?? 0,
+                database: database
+            )
+            : nil
+
         var cursor: RuntimeCanonicalReplayCursor?
         repeat {
             try Task.checkCancellation()
@@ -1291,7 +1414,9 @@ enum RuntimeCanonicalReplayEngine {
                 from: database,
                 after: cursor,
                 initialAnchor: anchor,
-                limit: CanonicalRuntimeSemanticEventStore.maximumPageLimit
+                limit: CanonicalRuntimeSemanticEventStore.maximumPageLimit,
+                mode: mode == .auditAndCertify
+                    ? .persistCanonicalQuarantine : .observeOnly
             )
             for inspection in page.items {
                 switch inspection {
@@ -1305,11 +1430,12 @@ enum RuntimeCanonicalReplayEngine {
                         observedHash: nil,
                         expectedRevision: nil,
                         observedRevision: nil,
-                        quarantineReference: try quarantineOccurrenceReference(
-                            eventID: blocked.eventID,
-                            sequence: blocked.sequence,
-                            database: database
-                        )
+                        quarantineReference: mode == .auditAndCertify
+                            ? try quarantineOccurrenceReference(
+                                eventID: blocked.eventID,
+                                sequence: blocked.sequence,
+                                database: database
+                            ) : nil
                     ), reconstruction)
                 case let .supported(record):
                     switch RuntimeCanonicalReplayReducer().apply(record, to: reconstruction) {
@@ -1319,12 +1445,35 @@ enum RuntimeCanonicalReplayEngine {
                             prior: sourceChainDigest,
                             lineage: record.lineage
                         )
+                        if nextInvalidationBoundary == record.lineage.sequence {
+                            guard verificationDrafts.count < maximumPendingBoundaryCertificates else {
+                                throw RuntimeCanonicalReplayError.resourcePolicyExceeded(
+                                    maximumBoundaryCertificates:
+                                        maximumPendingBoundaryCertificates
+                                )
+                            }
+                            verificationDrafts.append(try verificationDraft(
+                                reconstruction,
+                                sourceChainDigest: sourceChainDigest,
+                                database: database
+                            ))
+                            nextInvalidationBoundary = try nextProjectionInvalidationBoundary(
+                                after: record.lineage.sequence,
+                                database: database
+                            )
+                        }
                     case let .blocked(evidence, prefix): return .blocked(evidence, prefix)
                     }
                 }
             }
             cursor = page.nextCursor
         } while cursor != nil
+
+        if mode == .auditAndCertify, nextInvalidationBoundary != nil {
+            // A projection invalidation points beyond the authenticated event
+            // tail (or across a missing event). Never advance verified authority.
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
 
         if let quarantine = try firstQuarantineOccurrence(database: database) {
             return .blocked(RuntimeCanonicalReplayDivergence(
@@ -1345,11 +1494,18 @@ enum RuntimeCanonicalReplayEngine {
         if let divergence = try firstLiveTombstoneDivergence(reconstruction, database: database) {
             return .blocked(divergence, reconstruction)
         }
-        try recordVerifiedHighWater(
-            reconstruction,
-            sourceChainDigest: sourceChainDigest,
-            database: database
-        )
+        if mode == .auditAndCertify {
+            for draft in verificationDrafts {
+                try Task.checkCancellation()
+                try persistVerificationCertificate(draft, database: database)
+            }
+            try Task.checkCancellation()
+            try recordVerifiedHighWater(
+                reconstruction,
+                sourceChainDigest: sourceChainDigest,
+                database: database
+            )
+        }
         return .complete(reconstruction)
     }
 
@@ -1660,6 +1816,13 @@ private extension RuntimeCanonicalReplayEngine {
         let verifiedAtMilliseconds: Int64
     }
 
+    struct RuntimeCanonicalReplayVerificationDraft {
+        let cursor: RuntimeCanonicalReplayCursor
+        let sourceChainDigest: SHA256Digest
+        let reconstructionDigest: SHA256Digest
+        let verifiedAtMilliseconds: Int64
+    }
+
     struct RuntimeCanonicalReplayCheckpointHeader: Codable {
         let version: Int
         let highWaterCursor: RuntimeCanonicalReplayCursor
@@ -1715,12 +1878,44 @@ private extension RuntimeCanonicalReplayEngine {
         return result
     }
 
-    static func recordVerifiedHighWater(
+    static func nextProjectionInvalidationBoundary(
+        after sequence: UInt64,
+        database: isolated SQLiteDatabase
+    ) throws -> UInt64? {
+        guard sequence <= UInt64(Int64.max) else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        let certificateTable = try database.query(
+            "SELECT 1 FROM sqlite_schema WHERE type = 'table' AND name = 'runtime_canonical_replay_verification_certificates' LIMIT 2"
+        )
+        guard certificateTable.count <= 1 else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        guard certificateTable.isEmpty == false else { return nil }
+        let rows = try database.query(
+            "SELECT MIN(terminal_event_sequence) AS event_sequence FROM runtime_commit_projection_invalidations WHERE terminal_event_sequence > ?",
+            bindings: [.integer(Int64(sequence))]
+        )
+        guard rows.count == 1 else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+        switch rows[0].value(named: "event_sequence") {
+        case .null?: return nil
+        case let .integer(value)?:
+            guard value > 0 else { throw RuntimeCanonicalReplayError.corruptAuthority }
+            return UInt64(value)
+        default: throw RuntimeCanonicalReplayError.corruptAuthority
+        }
+    }
+
+    static func verificationDraft(
         _ reconstruction: RuntimeCanonicalReconstruction,
         sourceChainDigest: SHA256Digest,
         database: isolated SQLiteDatabase
-    ) throws {
-        guard let cursor = reconstruction.cursor else { return }
+    ) throws -> RuntimeCanonicalReplayVerificationDraft {
+        guard let cursor = reconstruction.cursor else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
+        }
         let tail = try database.query(
             "SELECT occurred_at_ms FROM runtime_semantic_events WHERE sequence = ? AND event_id = ? AND event_hash = ? LIMIT 2",
             bindings: [.integer(Int64(cursor.sequence)), .text(cursor.eventID), .text(cursor.eventHash)]
@@ -1730,12 +1925,22 @@ private extension RuntimeCanonicalReplayEngine {
               verifiedAtMilliseconds >= 0 else {
             throw RuntimeCanonicalReplayError.corruptAuthority
         }
-        let actualSourceChainDigest = try CanonicalRuntimeSemanticEventStore
-            .verifiedSourceChainDigestThrough(cursor.sequence, database: database)
-        guard actualSourceChainDigest == sourceChainDigest else {
-            throw RuntimeCanonicalReplayError.corruptAuthority
-        }
-        let reconstructionDigest = try SHA256Digest(hexadecimal: reconstruction.stateDigest)
+        return RuntimeCanonicalReplayVerificationDraft(
+            cursor: cursor,
+            sourceChainDigest: sourceChainDigest,
+            reconstructionDigest: try SHA256Digest(hexadecimal: reconstruction.stateDigest),
+            verifiedAtMilliseconds: verifiedAtMilliseconds
+        )
+    }
+
+    static func persistVerificationCertificate(
+        _ draft: RuntimeCanonicalReplayVerificationDraft,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let cursor = draft.cursor
+        let sourceChainDigest = draft.sourceChainDigest
+        let reconstructionDigest = draft.reconstructionDigest
+        let verifiedAtMilliseconds = draft.verifiedAtMilliseconds
         let existing = try database.query(
             """
             SELECT event_id, event_hash, source_chain_digest,
@@ -1772,28 +1977,6 @@ private extension RuntimeCanonicalReplayEngine {
                 throw RuntimeCanonicalReplayError.corruptAuthority
             }
         }
-        let result = try database.execute(
-            """
-            INSERT INTO runtime_replay_verified_high_water(
-                singleton_id, event_sequence, event_id, event_hash,
-                chain_anchor_digest, reconstruction_digest, verified_at_ms
-            ) VALUES (1, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(singleton_id) DO UPDATE SET
-                event_sequence = excluded.event_sequence,
-                event_id = excluded.event_id,
-                event_hash = excluded.event_hash,
-                chain_anchor_digest = excluded.chain_anchor_digest,
-                reconstruction_digest = excluded.reconstruction_digest,
-                verified_at_ms = excluded.verified_at_ms
-            """,
-            bindings: [
-                .integer(Int64(cursor.sequence)), .text(cursor.eventID), .text(cursor.eventHash),
-                .text(sourceChainDigest.hexadecimal), .text(reconstructionDigest.hexadecimal),
-                .integer(verifiedAtMilliseconds),
-            ]
-        )
-        guard result.changedRowCount == 1 else { throw RuntimeCanonicalReplayError.corruptAuthority }
-
         // v4 replay remains shape-compatible. A v5 authority adds immutable,
         // digest-bound continuation certificates for bounded consumers.
         let certificateTable = try database.query(
@@ -1838,6 +2021,44 @@ private extension RuntimeCanonicalReplayEngine {
                   certificate[0].value(named: "certificate_digest") == .text(certificateDigest) else {
                 throw RuntimeCanonicalReplayError.corruptAuthority
             }
+        }
+    }
+
+    static func recordVerifiedHighWater(
+        _ reconstruction: RuntimeCanonicalReconstruction,
+        sourceChainDigest: SHA256Digest,
+        database: isolated SQLiteDatabase
+    ) throws {
+        guard reconstruction.cursor != nil else { return }
+        let draft = try verificationDraft(
+            reconstruction,
+            sourceChainDigest: sourceChainDigest,
+            database: database
+        )
+        try persistVerificationCertificate(draft, database: database)
+        let result = try database.execute(
+            """
+            INSERT INTO runtime_replay_verified_high_water(
+                singleton_id, event_sequence, event_id, event_hash,
+                chain_anchor_digest, reconstruction_digest, verified_at_ms
+            ) VALUES (1, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(singleton_id) DO UPDATE SET
+                event_sequence = excluded.event_sequence,
+                event_id = excluded.event_id,
+                event_hash = excluded.event_hash,
+                chain_anchor_digest = excluded.chain_anchor_digest,
+                reconstruction_digest = excluded.reconstruction_digest,
+                verified_at_ms = excluded.verified_at_ms
+            """,
+            bindings: [
+                .integer(Int64(draft.cursor.sequence)), .text(draft.cursor.eventID),
+                .text(draft.cursor.eventHash), .text(draft.sourceChainDigest.hexadecimal),
+                .text(draft.reconstructionDigest.hexadecimal),
+                .integer(draft.verifiedAtMilliseconds),
+            ]
+        )
+        guard result.changedRowCount == 1 else {
+            throw RuntimeCanonicalReplayError.corruptAuthority
         }
     }
 
@@ -2261,6 +2482,47 @@ private enum RuntimeCanonicalReplayCoding {
 
     static func digest<Value: Encodable>(_ value: Value) throws -> String {
         LocalRuntimeStorageChecksum.sha256Hex(for: try encode(value))
+    }
+}
+
+/// Candidate replay writes are limited to replay evidence plus the semantic
+/// quarantine record that the verified reader may need to persist. The
+/// authority-fence row is included because compiled triggers advance it for
+/// every durable runtime mutation.
+private enum RuntimeCanonicalReplayCandidateWriteAuthority {
+    static let writableTables: Set<String> = [
+        "runtime_authority_fence",
+        "runtime_canonical_replay_verification_certificates",
+        "runtime_replay_checkpoint_aggregates",
+        "runtime_replay_checkpoint_tombstones",
+        "runtime_replay_checkpoints",
+        "runtime_replay_quarantine_occurrences",
+        "runtime_replay_verified_high_water",
+        "runtime_replay_verified_reconstructions",
+        "runtime_semantic_event_quarantine",
+    ]
+
+    static let readableTables: Set<String> = writableTables.union([
+        "runtime_aggregates",
+        "runtime_command_idempotency",
+        "runtime_commit_projection_invalidations",
+        "runtime_commit_receipts",
+        "runtime_commit_tombstones",
+        "runtime_external_operation_current",
+        "runtime_replay_retention_holds",
+        "runtime_semantic_events",
+        "runtime_store_metadata",
+        "sqlite_master",
+        "sqlite_schema",
+    ])
+
+    static var sqlite: SQLiteWriteAuthorization {
+        get throws {
+            try SQLiteWriteAuthorization(
+                allowedTables: writableTables,
+                allowedReadTables: readableTables
+            )
+        }
     }
 }
 

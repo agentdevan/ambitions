@@ -604,8 +604,13 @@ enum RuntimeExternalOperationCodec {
     }
 
     private static func encodeCanonical<Value: Encodable>(_ value: Value) throws -> Data {
-        do { return try makeEncoder().encode(value) }
-        catch { throw RuntimeExternalOperationCodecError.corrupt }
+        do {
+            return try makeEncoder().encode(value)
+        } catch {
+            // External-operation payloads cross a durable privacy boundary; never
+            // surface encoder details that could contain personal payload data.
+            throw RuntimeExternalOperationCodecError.corrupt
+        }
     }
 
     private static func bounded(_ bytes: Data, maximum: Int) throws -> Data {

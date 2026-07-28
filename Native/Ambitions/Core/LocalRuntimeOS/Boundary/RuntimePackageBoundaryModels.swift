@@ -31,7 +31,7 @@ struct RuntimePackageBoundaryManifest: Codable, Sendable, Equatable, Hashable {
         plannedPackageProductName: String = "AmbitionsRuntime",
         allowedImports: [String] = ["AmbitionsDesignSystem", "Foundation"],
         forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],
-        runtimeCapabilities: [String] = ["LocalMemoryContext", "RepositoryBackedRuntime", "ExternalActionCommandBoundary", "DedicatedDevicePrototypeBoundary"],
+        runtimeCapabilities: [String] = ["LocalMemoryContext", "RepositoryBackedRuntime", "ExternalActionCommandBoundary"],
         packageWiringDeclared: Bool = false,
         localRuntimeOwnerDeclared: Bool = true,
         remoteIntelligenceBackendDeclared: Bool = false,

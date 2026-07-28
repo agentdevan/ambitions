@@ -5,6 +5,7 @@ enum TimeFieldMutationError: Error, Equatable {
     case missingEligibleStep
     case runtimeRejected(String)
     case protectedPlacementRequiresApproval(ProtectedStepPlacementDecision)
+    case revisionAuthorityUnavailable
 }
 
 struct TimeFieldMutationCoordinator: Sendable {
@@ -41,6 +42,14 @@ struct TimeFieldMutationCoordinator: Sendable {
             actor: actor,
             explicitProtectedPlacementApproval: explicitProtectedPlacementApproval
         )
+        // A Life Shape bucket is presentation-derived and currently carries
+        // no durable schedule aggregate revision. Do not turn its transient
+        // identity into invented optimistic-concurrency evidence: refuse to
+        // admit a Time field write until command construction receives a real
+        // authority revision from the selected runtime store.
+        guard case .exact = command.expectedRevision else {
+            throw TimeFieldMutationError.revisionAuthorityUnavailable
+        }
         if let decision = PlacementEngine().evaluate(
             command: command,
             context: CommandExecutionContext(now: now, actor: actor, sourceSurface: "Time")

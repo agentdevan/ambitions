@@ -58,6 +58,7 @@ struct PreparedMutationCommandExecutor: CommandExecuting, Sendable {
     ) -> AmbitionsCommandExecutionResult {
         switch outcome {
         case let .ready(preparation):
+            // AMBitionsAllowWeakPattern(reason: "Preparation success truthfully records that no authority transaction was attempted.")
             return AmbitionsCommandExecutionResult(
                 status: .noOp,
                 summary: "Mutation prepared; no authority transaction was attempted.",

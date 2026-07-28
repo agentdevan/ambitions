@@ -28,11 +28,11 @@ struct RuntimeExternalEffectAuthorization: Sendable {
 struct RuntimeExternalEffectCommandAuthorizer: Sendable {
     private let committer: RuntimeCommandMutationCommitter
     private let runtimeEvents: (any RuntimeEventStore)?
-    private let pendingOperationStore: any PendingEventKitOperationStoring
+    private let pendingOperationStore: (any PendingEventKitOperationStoring)?
 
     init(
         repositories: AppRepositories,
-        pendingOperationStore: any PendingEventKitOperationStoring =
+        pendingOperationStore: (any PendingEventKitOperationStoring)? =
             FilePendingEventKitOperationStore.defaultStore()
     ) {
         runtimeEvents = repositories.runtimeEvents
@@ -52,6 +52,9 @@ struct RuntimeExternalEffectCommandAuthorizer: Sendable {
             goalID: request.goalID,
             stepID: request.stepID
         )
+        guard let pendingOperationStore else {
+            throw RuntimeExternalEffectAuthorizationError.authorityDidNotCommit
+        }
         let operationID = try await pendingOperationStore.resolve(
             fingerprint: fingerprint,
             proposedOperationID: request.operationID

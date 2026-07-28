@@ -1,16 +1,15 @@
 import Foundation
 
 enum RuntimeCanonicalSearchField: String, Codable, Sendable, Equatable, Hashable, CaseIterable, Comparable {
-    case aggregateID = "aggregate_id"
     case aggregateKind = "aggregate_kind"
 
     static func < (lhs: Self, rhs: Self) -> Bool { lhs.rawValue < rhs.rawValue }
 }
 
 enum RuntimeCanonicalSearchCoverage: String, Codable, Sendable, Equatable, Hashable {
-    /// Search remains limited to stable aggregate metadata until the canonical
-    /// reducer owns merged searchable fields instead of last-command fragments.
-    case aggregateMetadataOnly = "aggregate_metadata_only"
+    /// Search remains limited to non-sensitive aggregate kind labels until the
+    /// canonical reducer owns merged searchable content and field privacy.
+    case aggregateKindOnly = "aggregate_kind_only"
 }
 
 enum RuntimeCanonicalProjectionOrderingField: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -102,6 +101,8 @@ struct RuntimeCanonicalProjectionDefinitionRegistry: Sendable {
             .init(id: .aggregateState, inputEventTypes: all),
             .init(
                 id: .search,
+                definitionVersion: 2,
+                outputVersion: 2,
                 inputEventTypes: all,
                 allowedSearchFields: RuntimeCanonicalSearchField.allCases
             ),

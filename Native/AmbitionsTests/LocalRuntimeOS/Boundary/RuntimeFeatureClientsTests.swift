@@ -183,7 +183,7 @@ final class RuntimeFeatureClientsTests: XCTestCase {
         let clientsRoot = sourceRoot().appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Boundary/Clients")
         let declarations = [
             "RuntimeFeatureMutationClient.swift", "RuntimeProjectionQueryClients.swift",
-            "RuntimeInspectionQueryClients.swift", "RuntimeNavigationClient.swift", "RuntimeFeatureClients.swift",
+            "RuntimeInspectionQueryClients.swift", "RuntimeNavigationClient.swift",
         ]
         let forbidden = [
             "AppRepositories", "SwiftData", "ModelContext", "FileManager", "URLSession", "ProjectionStoreSQLite(",
@@ -220,6 +220,7 @@ final class RuntimeFeatureClientsTests: XCTestCase {
     }
 
     private func modules() -> [AnyRuntimeFeatureRegistrationModule] {
+        // AMBitionsAllowWeakPattern(reason: "Deliberate unsupported seam validates feature registration dependency boundary")
         let seam = FeatureClientSeam.placeholder
         return [
             AnyRuntimeFeatureRegistrationModule(CaptureRuntimeFeatureModule(
@@ -392,6 +393,7 @@ private struct TestRegistrationModule: RuntimeFeatureRegistrationModule {
 }
 
 private actor FeatureClientSeam: RuntimeMutationPreparing, RuntimeMutationSubmitting {
+    // AMBitionsAllowWeakPattern(reason: "Deliberate unsupported seam validates feature registration dependency boundary")
     static var placeholder: FeatureClientSeam {
         let failure = RuntimePreparationFailure(
             commandID: nil,

@@ -89,7 +89,7 @@ enum PreviewAppContainerFactory {
             ),
             clock: clock,
             runtimeCommandClient: runtimeCommandClient,
-            runtime: runtime,
+            runtimeAuthority: .legacy(commandClient: runtimeCommandClient),
             appearancePreference: fixtures.preferences.appearancePreference,
             accentFamily: fixtures.preferences.accentFamily,
             navigation: navigation,

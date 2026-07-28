@@ -55,10 +55,10 @@ extension RepositoryBackedGoalsService {
             throw GoalsFeatureError.notActionable
         }
 
-        let signal: GoalTeachingSignal
+        let proposal: GoalTeachingCorrectionProposal
         if let goalIntelligenceService {
             do {
-                signal = try await goalIntelligenceService.captureCorrection(
+                proposal = try await goalIntelligenceService.proposeCorrection(
                     target: request.target,
                     control: request.control,
                     now: now
@@ -69,7 +69,7 @@ extension RepositoryBackedGoalsService {
                 throw GoalsFeatureError.notActionable
             }
         } else {
-            signal = try await teachingService.capture(
+            proposal = try teachingService.propose(
                 GoalTeachingCaptureRequest(
                     goalID: goalID,
                     capturedAt: DomainTimestamp.string(from: now),
@@ -84,8 +84,8 @@ extension RepositoryBackedGoalsService {
 
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(
-                title: "Correction captured",
-                body: correctionMessage(for: signal),
+                title: "Correction ready for review",
+                body: correctionMessage(for: proposal),
                 state: .selected
             )
         )

@@ -12,7 +12,7 @@ enum RuntimeCanonicalGenerationMaintenanceOutcome: Sendable, Equatable {
     case deferred(generationID: String, kind: String, reasonCode: String)
 }
 
-extension CanonicalRuntimeStore {
+extension RuntimeCanonicalDerivedTransactionGateway {
     static func canonicalProjectionHasDependentSearchGeneration(
         _ projectionGenerationID: String,
         database: isolated SQLiteDatabase
@@ -28,7 +28,7 @@ extension CanonicalRuntimeStore {
         reasonCode: String,
         nowMilliseconds: Int64
     ) async throws {
-        try await withCanonicalImmediateTransaction { database in
+        try await withDerivedImmediateTransaction { database in
             try Self.requireCanonicalProjectionBuildFence(
                 work, phase: work.phase, database: database
             )
@@ -69,7 +69,7 @@ extension CanonicalRuntimeStore {
         nowMilliseconds: Int64
     ) async throws {
         try Task.checkCancellation()
-        try await withCanonicalImmediateTransaction { database in
+        try await withDerivedImmediateTransaction { database in
             try CanonicalRuntimeProjectionSchemaPlan.requireIntegratedSchema(in: database)
             try Self.retireBlockedCanonicalProjectionBuildInTransaction(
                 projectionID: projectionID,
@@ -128,7 +128,7 @@ extension CanonicalRuntimeStore {
         guard let rowLimit = Self.canonicalMaintenanceRowLimit(maximumRows: maximumRows) else {
             return .configurationDeferred(minimumRows: 128)
         }
-        return try await withCanonicalImmediateTransaction { database in
+        return try await withDerivedImmediateTransaction { database in
             try Self.runOneCanonicalGenerationMaintenanceUnitInTransaction(
                 ownerID: ownerID, nowMilliseconds: nowMilliseconds,
                 rowLimit: rowLimit, database: database
@@ -239,7 +239,7 @@ extension CanonicalRuntimeStore {
         nowMilliseconds: Int64
     ) async throws {
         try Task.checkCancellation()
-        try await withCanonicalImmediateTransaction { database in
+        try await withDerivedImmediateTransaction { database in
             try Self.quarantineAndRestartCanonicalProjectionBuildInTransaction(
                 work, scope: scope, nowMilliseconds: nowMilliseconds,
                 database: database
@@ -636,7 +636,7 @@ private struct RuntimeCanonicalCleanupJob: Sendable {
     let expiresAtMilliseconds: Int64
 }
 
-private extension CanonicalRuntimeStore {
+private extension RuntimeCanonicalDerivedTransactionGateway {
     static func nextCanonicalMaintenanceCandidate(
         ownerID: String,
         nowMilliseconds: Int64,
@@ -949,7 +949,7 @@ private extension CanonicalRuntimeStore {
         nowMilliseconds: Int64,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeCanonicalGenerationMaintenanceOutcome {
-        try requireCanonicalMaintenanceAuthority(job, expectedStatus: "published", database: database)
+        try requireCanonicalScrubAuthority(job, database: database)
         guard job.phase == "shards" || (job.kind == "search" && job.phase == "postings") else {
             throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
         }
@@ -1497,7 +1497,7 @@ private extension CanonicalRuntimeStore {
             guard rows.count == 1,
                   case let .text(rawProjectionID)? = rows[0].value(named: "projection_id"),
                   case let .text(projectionGenerationID)? = rows[0].value(named: "projection_generation_id"),
-                  rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateMetadataOnly.rawValue),
+                  rows[0].value(named: "coverage") == .text(RuntimeCanonicalSearchCoverage.aggregateKindOnly.rawValue),
                   case let .text(definitionDigest)? = rows[0].value(named: "definition_digest"),
                   case let .integer(sequence)? = rows[0].value(named: "source_sequence"), sequence >= 0,
                   case let .text(eventID)? = rows[0].value(named: "source_event_id"),
@@ -1524,7 +1524,7 @@ private extension CanonicalRuntimeStore {
             let expected = canonicalSearchGenerationCertificateDigest(
                 generationID: job.generationID,
                 projectionGenerationID: projectionGenerationID,
-                coverage: .aggregateMetadataOnly, definitionDigest: definitionDigest,
+                coverage: .aggregateKindOnly, definitionDigest: definitionDigest,
                 sourceCursor: cursor, documentCount: Int(documentCount),
                 postingCount: Int(postingCount), postingBytes: Int(postingBytes),
                 shardCount: job.shardOrdinal, rootDigest: rootDigest
@@ -1730,6 +1730,40 @@ private extension CanonicalRuntimeStore {
                 throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
             }
         } else if active.isEmpty == false {
+            throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+        }
+    }
+
+    static func requireCanonicalScrubAuthority(
+        _ job: RuntimeCanonicalMaintenanceJob,
+        database: isolated SQLiteDatabase
+    ) throws {
+        let table = job.kind == "search"
+            ? "runtime_canonical_search_generations"
+            : "runtime_canonical_projection_generations"
+        guard job.kind == "search" || job.kind == "projection" else {
+            throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+        }
+        let rows = try database.query(
+            "SELECT status, generation_certificate_digest FROM \(table) WHERE generation_id = ? AND status IN ('sealed', 'published') LIMIT 2",
+            bindings: [.text(job.generationID)]
+        )
+        guard rows.count == 1,
+              case let .text(status)? = rows[0].value(named: "status"),
+              rows[0].value(named: "generation_certificate_digest") ==
+                .text(job.expectedCertificate) else {
+            throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
+        }
+        let activeTable = job.kind == "search"
+            ? "runtime_canonical_search_active_generation"
+            : "runtime_canonical_projection_active_generations"
+        let active = try database.query(
+            "SELECT generation_id FROM \(activeTable) WHERE generation_id = ? LIMIT 2",
+            bindings: [.text(job.generationID)]
+        )
+        guard active.count <= 1,
+              (status == "published" && active.count == 1)
+                || (status == "sealed" && active.isEmpty) else {
             throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
         }
     }

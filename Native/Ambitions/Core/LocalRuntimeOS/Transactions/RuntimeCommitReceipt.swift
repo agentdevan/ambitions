@@ -90,6 +90,12 @@ struct RuntimeCommitReceipt: Sendable, Codable, Equatable, Hashable, Identifiabl
             "runtimeReceiptID": receiptID,
             "runtimeRollbackPlanID": rollbackPlanID,
             "runtimeReplayTraceID": replayTraceID,
+            // Consumers that require a cross-aggregate atomic transition (for
+            // example Step + Time placement) can verify their identities were
+            // covered by this one receipt without inferring authority from a
+            // presentation refresh.
+            "runtimeAffectedObjectIDs": affectedObjectIDs.joined(separator: ","),
+            "runtimeAffectedObjectFamilies": objectFamilies.map(\.rawValue).joined(separator: ","),
             "runtimeProjectionCursorCount": String(projectionCursors.count),
             "runtimeProjectionIDs": orderedProjectionCursors.map(\.projectionID.rawValue).joined(separator: ","),
             "runtimeProjectionCursorIDs": orderedProjectionCursors.map(\.projectionID.rawValue).joined(separator: ","),

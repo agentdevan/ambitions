@@ -32,6 +32,7 @@ enum CanonicalRuntimeProjectionSchemaPlan {
 
     static let indexes: Set<String> = [
         "runtime_commit_projection_invalidations_lineage_idx",
+        "runtime_commit_projection_invalidations_terminal_sequence_idx",
         "runtime_canonical_projection_generations_cursor_idx",
         "runtime_canonical_projection_entries_order_idx",
         "runtime_canonical_projection_jobs_phase_idx",
@@ -53,6 +54,7 @@ enum CanonicalRuntimeProjectionSchemaPlan {
 
     static let statements: [String] = [
         "CREATE UNIQUE INDEX runtime_commit_projection_invalidations_lineage_idx ON runtime_commit_projection_invalidations(projection_id, terminal_event_sequence)",
+        "CREATE INDEX runtime_commit_projection_invalidations_terminal_sequence_idx ON runtime_commit_projection_invalidations(terminal_event_sequence)",
         """
         CREATE TRIGGER runtime_commit_projection_invalidations_immutable_update
         BEFORE UPDATE ON runtime_commit_projection_invalidations
@@ -190,7 +192,7 @@ enum CanonicalRuntimeProjectionSchemaPlan {
         CREATE TABLE runtime_canonical_projection_jobs (
             projection_id TEXT PRIMARY KEY,
             generation_id TEXT NOT NULL UNIQUE,
-            phase TEXT NOT NULL CHECK (phase IN ('clone', 'replay', 'seal_projection', 'index_search', 'seal_search', 'ready', 'recovering', 'blocked')),
+            phase TEXT NOT NULL CHECK (phase IN ('clone', 'replay', 'seal_projection', 'scrub_projection', 'index_search', 'seal_search', 'scrub_search', 'ready', 'recovering', 'blocked')),
             blocked_reason_code TEXT,
             base_generation_id TEXT,
             base_certificate_digest TEXT,
@@ -284,7 +286,7 @@ enum CanonicalRuntimeProjectionSchemaPlan {
         CREATE TABLE runtime_canonical_search_generations (
             generation_id TEXT PRIMARY KEY CHECK (length(generation_id) = 64 AND generation_id NOT GLOB '*[^0-9a-f]*'),
             projection_generation_id TEXT NOT NULL UNIQUE,
-            coverage TEXT NOT NULL CHECK (coverage = 'aggregate_metadata_only'),
+            coverage TEXT NOT NULL CHECK (coverage = 'aggregate_kind_only'),
             definition_digest TEXT NOT NULL CHECK (length(definition_digest) = 64 AND definition_digest NOT GLOB '*[^0-9a-f]*'),
             source_sequence INTEGER NOT NULL CHECK (source_sequence >= 0),
             source_event_hash TEXT NOT NULL CHECK (length(source_event_hash) = 64 AND source_event_hash NOT GLOB '*[^0-9a-f]*'),
@@ -611,10 +613,10 @@ enum CanonicalRuntimeProjectionSchemaPlan {
           OR NEW.service_ticket < OLD.service_ticket
           OR NEW.updated_at_ms < OLD.updated_at_ms
           OR (NEW.projection_id != 'runtime.search'
-              AND NEW.phase IN ('index_search', 'seal_search'))
-          OR (OLD.phase = 'seal_projection' AND NEW.phase = 'ready'
+              AND NEW.phase IN ('index_search', 'seal_search', 'scrub_search'))
+          OR (OLD.phase = 'scrub_projection' AND NEW.phase = 'ready'
               AND NEW.projection_id = 'runtime.search')
-          OR (OLD.phase = 'seal_projection' AND NEW.phase = 'index_search'
+          OR (OLD.phase = 'scrub_projection' AND NEW.phase = 'index_search'
               AND NEW.projection_id != 'runtime.search')
           OR (NEW.phase = OLD.phase AND NEW.shard_ordinal < OLD.shard_ordinal)
           OR (NEW.phase = OLD.phase AND (
@@ -626,9 +628,11 @@ enum CanonicalRuntimeProjectionSchemaPlan {
               NEW.phase = OLD.phase OR
               (OLD.phase = 'clone' AND NEW.phase IN ('replay', 'recovering', 'blocked')) OR
               (OLD.phase = 'replay' AND NEW.phase IN ('seal_projection', 'recovering', 'blocked')) OR
-              (OLD.phase = 'seal_projection' AND NEW.phase IN ('index_search', 'ready', 'recovering', 'blocked')) OR
+              (OLD.phase = 'seal_projection' AND NEW.phase IN ('scrub_projection', 'recovering', 'blocked')) OR
+              (OLD.phase = 'scrub_projection' AND NEW.phase IN ('index_search', 'ready', 'recovering', 'blocked')) OR
               (OLD.phase = 'index_search' AND NEW.phase IN ('seal_search', 'recovering', 'blocked')) OR
-              (OLD.phase = 'seal_search' AND NEW.phase IN ('ready', 'recovering', 'blocked')) OR
+              (OLD.phase = 'seal_search' AND NEW.phase IN ('scrub_search', 'recovering', 'blocked')) OR
+              (OLD.phase = 'scrub_search' AND NEW.phase IN ('ready', 'recovering', 'blocked')) OR
               (OLD.phase = 'ready' AND NEW.phase = 'recovering') OR
               (OLD.phase = 'blocked' AND NEW.phase = 'recovering')
           )
@@ -865,6 +869,19 @@ enum CanonicalRuntimeProjectionSchemaPlan {
                    ))
                OR (OLD.status = 'published' AND NEW.status = 'retired')
                )
+          OR (OLD.status = 'sealed' AND NEW.status = 'published'
+              AND NOT EXISTS (
+                  SELECT 1 FROM runtime_canonical_scrub_certificates AS scrub
+                  WHERE scrub.generation_id = OLD.generation_id
+                    AND scrub.generation_kind = 'projection'
+                    AND scrub.projection_id = OLD.projection_id
+                    AND scrub.generation_certificate_digest = OLD.generation_certificate_digest
+                    AND scrub.observed_count = OLD.entry_count
+                    AND scrub.observed_shard_count = OLD.shard_count
+                    AND scrub.observed_posting_count = 0
+                    AND scrub.observed_posting_bytes = 0
+                    AND scrub.root_digest = OLD.entry_root_digest
+              ))
           OR (OLD.status != 'building'
               AND NOT (OLD.status = 'sealed' AND NEW.status = 'abandoned'
                    AND EXISTS (
@@ -1070,6 +1087,21 @@ enum CanonicalRuntimeProjectionSchemaPlan {
                          AND job.phase = 'recovering'
                    ))
                OR (OLD.status = 'published' AND NEW.status = 'retired'))
+          OR (OLD.status = 'sealed' AND NEW.status = 'published'
+              AND NOT EXISTS (
+                  SELECT 1 FROM runtime_canonical_scrub_certificates AS scrub
+                  JOIN runtime_canonical_projection_generations AS projection
+                    ON projection.generation_id = OLD.projection_generation_id
+                  WHERE scrub.generation_id = OLD.generation_id
+                    AND scrub.generation_kind = 'search'
+                    AND scrub.projection_id = projection.projection_id
+                    AND scrub.generation_certificate_digest = OLD.generation_certificate_digest
+                    AND scrub.observed_count = OLD.document_count
+                    AND scrub.observed_shard_count = OLD.shard_count
+                    AND scrub.observed_posting_count = OLD.posting_count
+                    AND scrub.observed_posting_bytes = OLD.posting_bytes
+                    AND scrub.root_digest = OLD.document_root_digest
+              ))
           OR (OLD.status != 'building'
               AND NOT (OLD.status = 'sealed' AND NEW.status = 'abandoned'
                    AND EXISTS (

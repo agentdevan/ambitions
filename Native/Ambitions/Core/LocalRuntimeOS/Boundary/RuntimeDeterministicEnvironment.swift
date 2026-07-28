@@ -24,6 +24,36 @@ protocol RuntimeRandomDependency: Sendable {
     mutating func nextUInt64() -> UInt64
 }
 
+protocol RuntimeSleepDependency: Sendable {
+    func sleep(milliseconds: Int64) async throws
+}
+
+struct RuntimeSleepClient: RuntimeSleepDependency, Sendable {
+    private let performSleep: @Sendable (Int64) async throws -> Void
+
+    init(performSleep: @escaping @Sendable (Int64) async throws -> Void) {
+        self.performSleep = performSleep
+    }
+
+    func sleep(milliseconds: Int64) async throws {
+        guard milliseconds > 0 else { return }
+        try await performSleep(milliseconds)
+    }
+
+    static var live: RuntimeSleepClient {
+        RuntimeSleepClient { milliseconds in
+            guard let value = UInt64(exactly: milliseconds),
+                  value <= UInt64.max / 1_000_000 else {
+                throw RuntimeGenerationControlError.malformed(
+                    field: "sleep_duration"
+                )
+            }
+            let nanos = value * 1_000_000
+            try await Task.sleep(nanoseconds: nanos)
+        }
+    }
+}
+
 struct RuntimeClockClient: RuntimeClockDependency, Sendable {
     private let readNow: @Sendable () -> Date
 
@@ -170,6 +200,7 @@ struct RuntimeEnvironment: Sendable {
     let calendar: RuntimeCalendarClient
     let timeZone: RuntimeTimeZoneClient
     let locale: RuntimeLocaleClient
+    let sleeper: RuntimeSleepClient
     var uuid: RuntimeUUIDClient
     var random: RuntimeRandomClient
 
@@ -179,6 +210,7 @@ struct RuntimeEnvironment: Sendable {
             calendar: .live,
             timeZone: .live,
             locale: .live,
+            sleeper: .live,
             uuid: .live,
             random: .live
         )
@@ -199,6 +231,7 @@ struct RuntimeEnvironment: Sendable {
             calendar: .deterministic(timeZone: timeZone.timeZone, locale: locale.locale),
             timeZone: timeZone,
             locale: locale,
+            sleeper: .live,
             uuid: .deterministic(seed: seed ^ 0xA076_1D64_78BD_642F),
             random: .deterministic(seed: seed)
         )

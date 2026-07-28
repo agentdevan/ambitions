@@ -4,8 +4,10 @@ enum RuntimeCanonicalProjectionBuildPhase: String, Codable, Sendable, Equatable,
     case clone
     case replay
     case sealProjection = "seal_projection"
+    case scrubProjection = "scrub_projection"
     case indexSearch = "index_search"
     case sealSearch = "seal_search"
+    case scrubSearch = "scrub_search"
     case ready
     case blocked
 }
