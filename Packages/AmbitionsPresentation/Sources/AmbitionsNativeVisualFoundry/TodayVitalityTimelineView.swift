@@ -34,7 +34,7 @@ struct TodayVitalityTimelineView: View {
     let onOpenFullDay: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(content.interfaceCopy.timelineTitle)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(palette.labelSecondary)
@@ -187,7 +187,7 @@ private struct TodayVitalityTimelineRow: View {
                 }
             }
             .padding(.top, 7)
-            .padding(.bottom, 14)
+            .padding(.bottom, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .id(isSettledReturn ? item.id : item.canonicalObjectID)
