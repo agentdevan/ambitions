@@ -32,6 +32,43 @@ extension TodayFlagshipCalibrationHostUITests {
         attachR13Screenshot(named: "R13-F04-dock-expanded")
     }
 
+    func testR13F07CapturesConsequentialReview() {
+        launch("r13-root-dark")
+        element("tfcs-open-start-here").tap()
+        XCTAssertTrue(element("tfcs-focused-identity").waitForExistence(timeout: 4))
+        element("tfcs-select-still-counts").tap()
+
+        assertExists([
+            element("tfcs-consequential-review"),
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth"),
+            element("tfcs-cancel-review"),
+            element("tfcs-commit-still-counts")
+        ])
+        attachR13Screenshot(named: "R13-F07-consequential-review")
+    }
+
+    func testR13F08CapturesSavingWithAcceptedTruthRetained() {
+        let acceptedTruth = "The corner is cleared and the paint sample is chosen."
+        let proposedTruth = "I primed the wall and tested the new color."
+        launch("r13-root-dark")
+        element("tfcs-open-start-here").tap()
+        XCTAssertTrue(element("tfcs-focused-identity").waitForExistence(timeout: 4))
+        element("tfcs-select-still-counts").tap()
+        XCTAssertTrue(element("tfcs-consequential-review").waitForExistence(timeout: 4))
+        element("tfcs-commit-still-counts").tap()
+
+        assertExists([
+            element("tfcs-saving-posture"),
+            element("tfcs-review-current-truth"),
+            element("tfcs-proposed-truth")
+        ])
+        XCTAssertEqual(element("tfcs-review-current-truth").value as? String, acceptedTruth)
+        XCTAssertEqual(element("tfcs-proposed-truth").value as? String, proposedTruth)
+        XCTAssertFalse(element("tfcs-settled-truth").exists)
+        attachR13Screenshot(named: "R13-F08-saving")
+    }
+
     func testR13D11CapturesCancelledUnchangedState() {
         launch("r13-root-dark")
         element("tfcs-open-start-here").tap()
