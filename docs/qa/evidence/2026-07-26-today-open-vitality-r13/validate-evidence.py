@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parents[3]
 SOURCE_SHA = "ac7ed07d090d65bdc469a9a2309f6899dc6135e6"
+CAPTURE_SHA = "f9d2059ef041d0a73371f0346a5113044d503920"
 SCREENSHOTS = ROOT / "screenshots"
 CONTACT_SHEETS = ROOT / "contact-sheets"
 REFERENCES = ROOT / "owner-references"
@@ -136,7 +137,7 @@ def screenshot_records() -> list[dict[str, object]]:
                 "layout_direction": "left-to-right",
                 "accessibility_settings": settings_for(filename),
                 "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
-                "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+                "branch_sha": CAPTURE_SHA,
                 "evaluation_reference": True,
                 "production_baseline": False,
             }
