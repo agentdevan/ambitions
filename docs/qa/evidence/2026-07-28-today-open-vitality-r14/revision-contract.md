@@ -36,4 +36,3 @@
 - Immutable fixture snapshots remain adapters, not authority owners or runtimes.
 - Scroll-to-Now visibility is driven by fixture-host viewport truth, not a production chronology service.
 - The edge dock remains provisional until physical-device proof.
-

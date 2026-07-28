@@ -7,4 +7,3 @@
 - Fixture timing does not prove production persistence, asynchronous latency, offline synchronization, or recovery guarantees.
 - English-only evaluation copy is used for R14; no production localization authority is claimed.
 - Screenshots are evaluation references with `production_baseline = false`.
-

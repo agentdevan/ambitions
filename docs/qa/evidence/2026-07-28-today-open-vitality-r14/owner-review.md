@@ -11,4 +11,3 @@ Available dispositions:
 - request another structural branch;
 - reject R14;
 - reject the Today slice structure.
-

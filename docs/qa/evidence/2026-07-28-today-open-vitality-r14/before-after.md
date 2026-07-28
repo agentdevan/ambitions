@@ -9,4 +9,3 @@ The owner-reference comparison is [R14-C02](contact-sheets/R14-C02-owner-referen
 - Full Day: native back, root-equivalent node grammar, readable chronology, truthful Scroll-to-Now behavior, and safe bottom content.
 - Shell: Peek is distinct from the scroll indicator; expansion remains edge-owned and semantically grouped.
 - Supporting depths and recovery: open-plane grammar replaces generic form/debug anatomy without changing behavior.
-

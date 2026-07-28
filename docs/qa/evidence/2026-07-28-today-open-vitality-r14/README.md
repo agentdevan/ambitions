@@ -12,8 +12,7 @@ Inherited research, design rationale, and visual references remain in the immuta
 
 ## Proof ceiling
 
-- Fixture route implemented; production route not implemented.
+- Fixture route implemented; no production route was added.
 - Runtime integration and broad reconstruction remain unauthorized.
 - Direct-device shell, haptic, reach, gesture, and physical accessibility proof remain incomplete.
 - `APPROVED FOR SWIFTUI` remains `false`.
-

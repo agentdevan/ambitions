@@ -15,4 +15,3 @@
 - A02–A05/CI01/PM01/DK01: long content, contrast, non-color distinction, opaque chrome, compact/large sizing, and low-brightness Dark remain legible evaluation states.
 
 No required text or action is obscured in the captured frames. Visual approval remains an owner decision.
-
