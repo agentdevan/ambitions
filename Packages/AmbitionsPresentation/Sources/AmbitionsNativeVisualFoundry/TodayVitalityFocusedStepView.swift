@@ -120,7 +120,7 @@ struct TodayVitalityFocusedStepView: View {
         .foregroundStyle(palette.ambitionsAccentMuted)
         .accessibilityLabel(content.primaryStep.parentPursuitTitle)
         .accessibilityHint("Open Goal details")
-        .accessibilityIdentifier("r13-open-goal-detail")
+        .accessibilityIdentifier("tfcs-focused-parent-pursuit")
     }
 
     private var presentField: some View {

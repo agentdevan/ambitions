@@ -94,7 +94,7 @@ extension TodayFlagshipCalibrationHostUITests {
 
         XCTAssertTrue(cancel.isHittable)
         XCTAssertTrue(commit.isHittable)
-        XCTAssertLessThan(cancel.frame.minY, commit.frame.minY)
+        assertAccessibilityOrder(cancel, before: commit)
         assertMinimumTarget(cancel)
         assertMinimumTarget(commit)
     }

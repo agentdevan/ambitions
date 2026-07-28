@@ -1,5 +1,19 @@
 import SwiftUI
 
+enum TodayVitalityRecoveryAccessibility {
+    static func savedProgressValue(progress: String, savedAt: String?) -> String {
+        guard let savedAt, savedAt.isEmpty == false else {
+            return progress
+        }
+
+        let terminalPunctuation = ".!?…"
+        let separator = progress.last.map { terminalPunctuation.contains($0) } == true
+            ? " "
+            : ". "
+        return progress + separator + savedAt
+    }
+}
+
 struct TodayVitalityInterruptedStepView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
@@ -344,9 +358,10 @@ struct TodayVitalityRecoverySheetView: View {
     }
 
     private var savedProgressAccessibilityValue: String {
-        [content.recovery.lastSavedProgress, content.recovery.savedAtLabel]
-            .compactMap { $0 }
-            .joined(separator: ". ")
+        TodayVitalityRecoveryAccessibility.savedProgressValue(
+            progress: content.recovery.lastSavedProgress,
+            savedAt: content.recovery.savedAtLabel
+        )
     }
 
     private func recoveryButton(

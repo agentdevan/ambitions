@@ -12,7 +12,7 @@ final class TodayVitalitySettlementHostUITests: XCTestCase {
     func testR13SettlementLeadsWithChangedTruthAndSubordinateEvidence() {
         launch("tfcs-f08")
 
-        let heading = element("r13-settlement-heading")
+        let heading = element("tfcs-settlement-identity")
         let node = element("r13-settlement-resolved-node")
         let time = element("r13-settlement-time")
         let truth = element("tfcs-settled-truth")
@@ -97,11 +97,11 @@ final class TodayVitalitySettlementHostUITests: XCTestCase {
         XCTAssertFalse(element("tfcs-open-start-here").exists)
         XCTAssertLessThan(
             settledNursery.frame.minY,
-            element("tfcs-overview-row-event.family-prenatal-walk").frame.minY
+            element("tfcs-overview-row-event.family-time").frame.minY
         )
         XCTAssertLessThan(
-            element("tfcs-overview-row-event.family-prenatal-walk").frame.minY,
-            element("tfcs-overview-row-window.open-after-family").frame.minY
+            element("tfcs-overview-row-event.family-time").frame.minY,
+            element("tfcs-overview-row-lane.open-after-family").frame.minY
         )
     }
 

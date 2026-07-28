@@ -14,7 +14,9 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertLessThan(identity.frame.minY, settledTruth.frame.minY)
         XCTAssertLessThan(settledTruth.frame.minY, evidence.frame.minY)
         XCTAssertTrue(
-            settledTruth.label.contains("I primed the wall and tested the new color.")
+            String(describing: settledTruth.value).contains(
+                "I primed the wall and tested the new color."
+            )
         )
         XCTAssertTrue(parent.label.contains("Welcome our baby home"))
         XCTAssertFalse(app.images["checkmark.seal.fill"].exists)
@@ -192,7 +194,7 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertLessThan(startHere.frame.minY, startHereY - 5)
         XCTAssertTrue(startHereTitle.isHittable)
         XCTAssertTrue(overview.exists)
-        XCTAssertTrue(app.staticTexts["Today’s Timeline"].isHittable)
+        XCTAssertTrue(element("tfcs-timeline").isHittable)
         XCTAssertEqual(peek.frame.minY, peekY, accuracy: 1)
 
         let attachment = XCTAttachment(screenshot: app.screenshot())

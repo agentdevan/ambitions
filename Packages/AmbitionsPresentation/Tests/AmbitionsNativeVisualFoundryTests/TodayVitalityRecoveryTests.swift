@@ -35,6 +35,23 @@ final class TodayVitalityRecoveryTests: XCTestCase {
         XCTAssertTrue(source.contains("content.recovery.savedAtLabel"))
     }
 
+    func testR13RecoveryAccessibilityJoinsSavedTimeWithoutDuplicatePunctuation() {
+        XCTAssertEqual(
+            TodayVitalityRecoveryAccessibility.savedProgressValue(
+                progress: content.recovery.lastSavedProgress,
+                savedAt: content.recovery.savedAtLabel
+            ),
+            "I primed the wall and tested the new color. Saved at 10:30 AM"
+        )
+        XCTAssertEqual(
+            TodayVitalityRecoveryAccessibility.savedProgressValue(
+                progress: "Saved progress",
+                savedAt: "Saved at 10:30 AM"
+            ),
+            "Saved progress. Saved at 10:30 AM"
+        )
+    }
+
     func testR13RecoveryDeferralAndDismissalRemainNonMutating() {
         var dismissed = TodayFlagshipJourneyState.preview(
             content: content,

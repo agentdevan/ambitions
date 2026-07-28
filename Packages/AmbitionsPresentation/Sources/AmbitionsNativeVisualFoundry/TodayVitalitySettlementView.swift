@@ -67,7 +67,7 @@ struct TodayVitalitySettlementView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(content.settlementAccessibilityIdentity)
-        .accessibilityIdentifier("r13-settlement-heading")
+        .accessibilityIdentifier("tfcs-settlement-identity")
     }
 
     private var resolvedField: some View {

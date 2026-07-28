@@ -82,7 +82,7 @@ final class TodayVitalityResilienceHostUITests: XCTestCase {
         relaunchedUndo.tap()
         assertUnchangedFocusedTruth()
         let identity = element("tfcs-focused-identity")
-        let parent = element("r13-open-goal-detail")
+        let parent = element("tfcs-focused-parent-pursuit")
         XCTAssertTrue(identity.label.contains("Make the nursery ready for the crib"))
         XCTAssertTrue(parent.label.contains("Welcome our baby home"))
         XCTAssertFalse(element("tfcs-settled-truth").exists)
@@ -118,7 +118,7 @@ final class TodayVitalityResilienceHostUITests: XCTestCase {
     private func assertUnchangedFocusedTruth(file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertTrue(element("tfcs-focused-identity").waitForExistence(timeout: 4), file: file, line: line)
         XCTAssertTrue(element("tfcs-current-truth").exists, file: file, line: line)
-        XCTAssertTrue(element("r13-open-goal-detail").exists, file: file, line: line)
+        XCTAssertTrue(element("tfcs-focused-parent-pursuit").exists, file: file, line: line)
         XCTAssertFalse(element("tfcs-proposed-truth").exists, file: file, line: line)
         XCTAssertFalse(element("tfcs-settled-truth").exists, file: file, line: line)
         XCTAssertFalse(element("tfcs-failed-settlement").exists, file: file, line: line)

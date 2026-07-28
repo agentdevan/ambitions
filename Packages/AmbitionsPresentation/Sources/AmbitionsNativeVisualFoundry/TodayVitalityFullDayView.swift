@@ -10,16 +10,30 @@ func todayVitalityFullDayObjects(
     }
 
     return content.supporting.fullDay.entries.map { item in
-        guard item.canonicalObjectID == content.primaryStep.id else { return item }
-        return TodayFlagshipTimelineObject(
-            id: item.id,
-            canonicalObjectID: item.canonicalObjectID,
-            objectTitle: item.objectTitle,
-            timeLabel: item.timeLabel.replacingOccurrences(of: "Now · ", with: ""),
-            relationship: acceptedTruth,
-            acceptedState: acceptedTruth,
-            role: .ordinary
-        )
+        if item.canonicalObjectID == content.primaryStep.id {
+            return TodayFlagshipTimelineObject(
+                id: item.id,
+                canonicalObjectID: item.canonicalObjectID,
+                objectTitle: item.objectTitle,
+                timeLabel: item.timeLabel.replacingOccurrences(of: "Now · ", with: ""),
+                relationship: acceptedTruth,
+                acceptedState: acceptedTruth,
+                role: .ordinary
+            )
+        }
+        if item.canonicalObjectID == content.revealedStartHereStep.id {
+            return TodayFlagshipTimelineObject(
+                id: item.id,
+                canonicalObjectID: item.canonicalObjectID,
+                objectTitle: item.objectTitle,
+                timeLabel: item.timeLabel,
+                relationship: content.revealedStartHereStep.currentAcceptedTruth,
+                acceptedState: content.revealedStartHereStep.currentAcceptedTruth,
+                isFixed: item.isFixed,
+                role: .now
+            )
+        }
+        return item
     }
 }
 

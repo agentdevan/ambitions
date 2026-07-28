@@ -89,7 +89,7 @@ private struct TodayFlagshipCalibrationHost: View {
             state: $state,
             initialDockExpanded: variant.dockExpanded,
             onCommitProposal: {
-                try? await Task.sleep(for: .milliseconds(2_400))
+                try? await Task.sleep(for: .milliseconds(variant.commitLatencyMilliseconds))
                 return variant.commitShouldSucceed
             }
         )
@@ -237,11 +237,26 @@ private enum FoundryVariant: String {
     case r13ResilienceCancelled = "r13-resilience-cancelled"
     case r13ResilienceUndo = "r13-resilience-undo"
     case r13ResilienceUndoUnavailable = "r13-resilience-undo-unavailable"
+    case r13RootLight = "r13-root-light"
     case r13RootDark = "r13-root-dark"
     case r13RootAccessibility5 = "r13-root-accessibility5"
     case r13RootLongEnglish = "r13-root-long-english"
     case r13RootReduceTransparency = "r13-root-reduce-transparency"
+    case r13RootReduceMotion = "r13-root-reduce-motion"
+    case r13RootDense = "r13-root-dense"
+    case r13RootVeryDense = "r13-root-very-dense"
+    case r13RootQuiet = "r13-root-quiet"
+    case r13FocusedTypical = "r13-focused-typical"
+    case r13FocusedAccessibility5 = "r13-focused-accessibility5"
     case r13FocusedLongEnglish = "r13-focused-long-english"
+    case r13SettlementTypical = "r13-settlement-typical"
+    case r13ReturnedTypical = "r13-returned-typical"
+    case r13OfflineLocal = "r13-offline-local"
+    case r13StaleContext = "r13-stale-context"
+    case r13ConflictTransfer = "r13-conflict-transfer"
+    case r13FailedSettlement = "r13-failed-settlement"
+    case r13CancelledUnchanged = "r13-cancelled-unchanged"
+    case r13UndoAvailable = "r13-undo-available"
     case r13SettlementNoColor = "r13-settlement-differentiate-without-color"
     case r13JourneyReduceMotion = "r13-journey-reduce-motion"
     case r13SavingReduceMotion = "r13-saving-reduce-motion"
@@ -286,7 +301,8 @@ private enum FoundryVariant: String {
     }
 
     var colorScheme: ColorScheme {
-        self == .typicalLight || self == .tfcsF01 || self == .b02RootLight ? .light : .dark
+        self == .typicalLight || self == .tfcsF01 || self == .b02RootLight
+            || self == .r13RootLight ? .light : .dark
     }
 
     var dynamicTypeSize: DynamicTypeSize {
@@ -300,6 +316,8 @@ private enum FoundryVariant: String {
             .accessibility5
         case .r13RecoveryAccessibility5, .r13RootAccessibility5:
             .accessibility5
+        case .r13FocusedAccessibility5:
+            .accessibility5
         default:
             .large
         }
@@ -311,7 +329,7 @@ private enum FoundryVariant: String {
                 .r13TimeTransferEvaluation,
                 .b02FocusedTypical, .b02FocusedDense, .b02FocusedAccessibility5,
                 .b02FocusedRTL, .b02FocusedContrast, .b02FocusedLongLTR,
-                .r13FocusedLongEnglish:
+                .r13FocusedTypical, .r13FocusedAccessibility5, .r13FocusedLongEnglish:
             .focusedCurrent
         case .tfcsF07, .stressContrast, .reviewAccessibility,
                 .b02ReviewTypical, .b02ReviewAccessibility5,
@@ -320,20 +338,23 @@ private enum FoundryVariant: String {
                 .r13ReviewTypical, .r13ReviewFailureCallback,
                 .r13ReviewIncreasedContrast, .r13ReviewNoColor,
                 .r13ReviewReduceMotion, .r13ReviewAccessibility5,
-                .r13ConsequenceDetails, .r13ResilienceCancelled,
+                .r13ConsequenceDetails, .r13ResilienceCancelled, .r13CancelledUnchanged,
                 .r13ReviewLongEnglish:
             .reviewingProposal
-        case .r13ReviewFailed, .r13ResilienceFailed:
+        case .r13ReviewFailed, .r13ResilienceFailed, .r13FailedSettlement:
             .failedSettlement
         case .tfcsF08, .b02SettlementTypical, .b02SettlementHistory,
                 .b02SettlementLowBrightness, .b02SettlementCompact,
                 .b02SettlementProMax, .b02SettlementRTL,
                 .r13HistoryEntry, .r13HistoryFilters, .r13ResilienceUndo,
-                .r13ResilienceUndoUnavailable, .r13SettlementNoColor,
+                .r13ResilienceUndoUnavailable, .r13SettlementTypical, .r13UndoAvailable,
+                .r13SettlementNoColor,
                 .r13SettlementReduceMotion:
             .settled
         case .tfcsF09, .b02ReturnedTypical, .b02ReturnedRTL, .b02FullDayReturned,
                 .r13FullDayReturned:
+            .todayReturned
+        case .r13ReturnedTypical:
             .todayReturned
         case .tfcsF10, .b02RecoveryTypical, .b02RecoveryRTL,
                 .r13RecoverySheet, .r13RecoveryAccessibility5,
@@ -354,7 +375,7 @@ private enum FoundryVariant: String {
     var content: TodayFlagshipCalibrationContent {
         switch self {
         case .tfcsF03, .stateDense, .b02FullDayDense, .b02FocusedDense,
-                .r13FullDayDense:
+                .r13FullDayDense, .r13RootDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.denseToday
         case .stressLongRTL, .b02FullDayRTL, .b02FocusedRTL, .b02ReviewRTL,
                 .b02ReviewSavingRTL, .b02RootRTL, .b02SettlementRTL,
@@ -363,17 +384,17 @@ private enum FoundryVariant: String {
         case .b02FocusedLongLTR, .b02RootLongLTR, .r13RecoveryLongEnglish,
                 .r13RootLongEnglish, .r13FocusedLongEnglish, .r13ReviewLongEnglish:
             TodayFlagshipCalibrationFixture.preparingForBaby.longContent
-        case .b02QuietToday:
+        case .b02QuietToday, .r13RootQuiet:
             TodayFlagshipCalibrationFixture.preparingForBaby.quietToday
-        case .b02VeryDenseToday:
+        case .b02VeryDenseToday, .r13RootVeryDense:
             TodayFlagshipCalibrationFixture.preparingForBaby.veryDenseToday
-        case .b02OfflineLocal, .r13ResilienceOffline:
+        case .b02OfflineLocal, .r13ResilienceOffline, .r13OfflineLocal:
             TodayFlagshipCalibrationFixture.preparingForBaby.offlineLocalTruth
-        case .b02StaleExternal, .r13ResilienceStale:
+        case .b02StaleExternal, .r13ResilienceStale, .r13StaleContext:
             TodayFlagshipCalibrationFixture.preparingForBaby.staleExternalContext
-        case .b02ConflictTransfer, .r13ResilienceConflict:
+        case .b02ConflictTransfer, .r13ResilienceConflict, .r13ConflictTransfer:
             TodayFlagshipCalibrationFixture.preparingForBaby.conflictTransfer
-        case .r13ResilienceUndo:
+        case .r13ResilienceUndo, .r13UndoAvailable:
             TodayFlagshipCalibrationFixture.preparingForBaby.undoAvailableEvaluation
         default:
             TodayFlagshipCalibrationFixture.preparingForBaby
@@ -403,7 +424,7 @@ private enum FoundryVariant: String {
         self == .b02ReviewReduceMotion || self == .b02MotionReduceMotion
             || self == .r13ReviewReduceMotion || self == .r13RecoveryReduceMotion
             || self == .r13JourneyReduceMotion || self == .r13SavingReduceMotion
-            || self == .r13SettlementReduceMotion
+            || self == .r13SettlementReduceMotion || self == .r13RootReduceMotion
     }
 
     var reduceTransparency: Bool {
@@ -445,6 +466,10 @@ private enum FoundryVariant: String {
         self != .r13ReviewFailureCallback
     }
 
+    var commitLatencyMilliseconds: Int {
+        4_000
+    }
+
     var supportingRoute: TodayFlagshipSupportingRoute? {
         switch self {
         case .r13GoalDetail:
@@ -455,7 +480,7 @@ private enum FoundryVariant: String {
             .historyEntry
         case .r13HistoryFilters:
             .historyFilters
-        case .r13ResilienceUndo:
+        case .r13ResilienceUndo, .r13UndoAvailable:
             .undoReview
         default:
             nil
