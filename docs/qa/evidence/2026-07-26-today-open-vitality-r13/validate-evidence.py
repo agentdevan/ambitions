@@ -7,10 +7,13 @@ import argparse
 import hashlib
 import json
 import struct
+import subprocess
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
+REPO_ROOT = ROOT.parents[3]
+SOURCE_SHA = "ac7ed07d090d65bdc469a9a2309f6899dc6135e6"
 SCREENSHOTS = ROOT / "screenshots"
 CONTACT_SHEETS = ROOT / "contact-sheets"
 REFERENCES = ROOT / "owner-references"
@@ -93,7 +96,7 @@ def png_dimensions(path: Path) -> tuple[int, int]:
 def device_for(filename: str) -> dict[str, str]:
     if "CI01" in filename:
         return {"name": "iPhone 17e", "udid": "0BA18BA4-EFB6-483E-8318-FF344741F8DE"}
-    if any(token in filename for token in ("PM01", "F04", "F07", "F08", "D11")):
+    if any(token in filename for token in ("PM01", "F04", "F07", "F08", "F13", "D11")):
         return {"name": "iPhone 17 Pro Max", "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"}
     return {"name": "iPhone 17 Pro", "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"}
 
@@ -164,6 +167,37 @@ def reference_records() -> list[dict[str, str]]:
     ]
 
 
+def changed_file_records() -> list[dict[str, str]]:
+    diff = subprocess.run(
+        ["git", "diff", "--name-status", SOURCE_SHA, "--"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
+    untracked = subprocess.run(
+        ["git", "ls-files", "--others", "--exclude-standard"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
+    records = []
+    for row in diff:
+        status, path = row.split("\t", maxsplit=1)
+        records.append({"status": status, "path": path})
+    known_paths = {record["path"] for record in records}
+    records.extend(
+        {"status": "A", "path": path}
+        for path in untracked
+        if path not in known_paths
+    )
+    manifest_path = str((ROOT / "changed-files.json").relative_to(REPO_ROOT))
+    if manifest_path not in {record["path"] for record in records}:
+        records.append({"status": "A", "path": manifest_path})
+    return sorted(records, key=lambda record: record["path"])
+
+
 def write_manifests() -> None:
     manifests = {
         "screenshot-metadata.json": {
@@ -179,6 +213,11 @@ def write_manifests() -> None:
         "reference-hashes.json": {
             "schema_version": 1,
             "references": reference_records(),
+        },
+        "changed-files.json": {
+            "schema_version": 1,
+            "source_sha": SOURCE_SHA,
+            "files": changed_file_records(),
         },
     }
     for filename, payload in manifests.items():
@@ -196,17 +235,25 @@ def validate() -> None:
     screenshot_manifest = json.loads((ROOT / "screenshot-metadata.json").read_text())
     comparison_manifest = json.loads((ROOT / "comparison-metadata.json").read_text())
     reference_manifest = json.loads((ROOT / "reference-hashes.json").read_text())
+    changed_files_manifest = json.loads((ROOT / "changed-files.json").read_text())
     assert screenshot_manifest == {
         "schema_version": 1,
         "production_baseline": False,
         "screenshots": screenshot_records(),
     }
+    screenshot_hashes = [record["sha256"] for record in screenshot_manifest["screenshots"]]
+    assert len(screenshot_hashes) == len(set(screenshot_hashes)), "duplicate screenshot hashes"
     assert comparison_manifest == {
         "schema_version": 1,
         "production_baseline": False,
         "contact_sheets": comparison_records(),
     }
     assert reference_manifest == {"schema_version": 1, "references": reference_records()}
+    assert changed_files_manifest == {
+        "schema_version": 1,
+        "source_sha": SOURCE_SHA,
+        "files": changed_file_records(),
+    }
 
     prohibited = [path for path in ROOT.rglob("*") if path.is_file() and "recording" in path.name.lower()]
     assert prohibited == [], f"recording artifacts are prohibited: {prohibited}"

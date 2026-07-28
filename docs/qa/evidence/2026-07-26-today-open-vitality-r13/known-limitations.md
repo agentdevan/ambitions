@@ -16,6 +16,8 @@
   product-wide rollback contract.
 - Blocked consequence (`R13-D10`) is absent because the fixture does not support
   it. No fake capability was added.
+- Stale Context preserves accepted local truth but omits `Review Changes`
+  because no source-backed route exists. This is an explicit unsupported-
+  capability stop-loss, not a hidden fixture control.
 - No R13 recording evidence exists by owner direction.
 - Screenshots are evaluation references and are not production baselines.
-

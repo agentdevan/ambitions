@@ -93,7 +93,7 @@ struct TodayVitalityReviewView: View {
                 Text(content.interfaceCopy.stepTitle)
             }
         }
-        .disabled(state.isCommitInFlight)
+        .environment(\.isEnabled, !state.isCommitInFlight)
         .accessibilityLabel(content.interfaceCopy.stepTitle)
         .accessibilityHint(content.interfaceCopy.cancelReviewHint)
         .accessibilityInputLabels([content.interfaceCopy.stepTitle])

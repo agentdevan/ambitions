@@ -74,7 +74,7 @@ private struct TodayFlagshipCalibrationPreviewHost: View {
         .dynamicTypeSize(.accessibility5)
 }
 
-#Preview("R13 Root · RTL stress evaluation") {
+#Preview("Inherited B02 RTL stress regression") {
     TodayFlagshipCalibrationPreviewHost(
         content: TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation,
         phase: .todayInitial

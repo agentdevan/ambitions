@@ -5,6 +5,7 @@ import UIKit
 #endif
 
 public struct TodayFlagshipCalibrationView: View {
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
@@ -64,6 +65,11 @@ public struct TodayFlagshipCalibrationView: View {
                 content: content,
                 state: $state,
                 onCommitProposal: onCommitProposal
+            )
+            .dynamicTypeSize(dynamicTypeSize)
+            .environment(
+                \._accessibilityDifferentiateWithoutColor,
+                differentiateWithoutColor
             )
         }
         .sheet(isPresented: recoveryPresentation) {

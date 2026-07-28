@@ -261,8 +261,8 @@
       "width": 1320,
       "height": 2868,
       "device": {
-        "name": "iPhone 17 Pro",
-        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
       },
       "os": "iOS 26.5",
       "locale": "en-US",
@@ -278,7 +278,7 @@
     {
       "id": "R13-D01-goal-detail",
       "path": "screenshots/R13-D01-goal-detail.png",
-      "sha256": "736f6d583be10329601b3142fd6fb6e79093011c17750e2f456c04c9585ec263",
+      "sha256": "eaa6a6ecbee00f153161f69c008aceff3d411f058bd2eddcb5e963a95ed67da2",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -341,7 +341,7 @@
     {
       "id": "R13-D04-local-history-entry",
       "path": "screenshots/R13-D04-local-history-entry.png",
-      "sha256": "d66862ef81524d57bd326dead8506ab410eeab36eae4f9e40bc8cc9dfc778c3d",
+      "sha256": "9d9aace2ee70e10a80ccf42f27ab4fc1d9e84d0a1d01a4775c42aebb615e15b8",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -362,7 +362,7 @@
     {
       "id": "R13-D05-history-filters",
       "path": "screenshots/R13-D05-history-filters.png",
-      "sha256": "8a809441ce25b9a5192193ad7bf892aaae8fedfc0b29730f2c68b86c7905d9b8",
+      "sha256": "6dbcfef969921841294b47e4341caeb41f26d59e3b6a25225ed075f952ffad4b",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -425,7 +425,7 @@
     {
       "id": "R13-D08-undo-available",
       "path": "screenshots/R13-D08-undo-available.png",
-      "sha256": "ec28996e48fb733f42179fb09d7eb655a1576e3cd0f99525c7dbdc4b20aaae6f",
+      "sha256": "255d260354e2e2de2185cccb33029339bd96aa3e1c10b728120b25b44af5735b",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -446,7 +446,7 @@
     {
       "id": "R13-D09-failed-settlement",
       "path": "screenshots/R13-D09-failed-settlement.png",
-      "sha256": "5031ca3bc092e94c1bfb1f3ba49a3aee91c91e71521c7ebc8dd3b369b80201b8",
+      "sha256": "30c019d7d971f20650f62ccdb87578781b6708031831f2086ee54665debd188c",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -488,7 +488,7 @@
     {
       "id": "R13-A01-accessibility-root",
       "path": "screenshots/R13-A01-accessibility-root.png",
-      "sha256": "67b662c57b80629f735e29c6cf48f9e963389e3c82c7707cfcbd9c69db00f180",
+      "sha256": "a85c87532187c4712a030021cb951de34edccdb3e26a05f5dd8ae218831c0958",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -509,7 +509,7 @@
     {
       "id": "R13-A02-accessibility-review",
       "path": "screenshots/R13-A02-accessibility-review.png",
-      "sha256": "7f2fa8a94ac18abdd98bec9c369bfc4a1f5c3ecd582d057bda55f4ac5132dcfd",
+      "sha256": "f6f1c3596d4b5d96f4fe66073fbf3b8fd1c55d677033a896c443e4817169fd56",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -530,7 +530,7 @@
     {
       "id": "R13-A03-increased-contrast",
       "path": "screenshots/R13-A03-increased-contrast.png",
-      "sha256": "cebb42d6e3608e8e99bd51110ffb073e16a428ec012d4ffbf95537f6f8bb56ce",
+      "sha256": "10143685b21ff23b828a48bde84b88cc461a04eed87cc4b9d206cf177d8c9249",
       "width": 1206,
       "height": 2622,
       "device": {
@@ -551,7 +551,7 @@
     {
       "id": "R13-A04-differentiate-without-color",
       "path": "screenshots/R13-A04-differentiate-without-color.png",
-      "sha256": "7f2fa8a94ac18abdd98bec9c369bfc4a1f5c3ecd582d057bda55f4ac5132dcfd",
+      "sha256": "83ae03d8c7abd32c5117214495a1cb2f5c602107f2a7019ed857be6c1b6a1aee",
       "width": 1206,
       "height": 2622,
       "device": {

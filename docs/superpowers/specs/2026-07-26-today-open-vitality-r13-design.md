@@ -274,8 +274,9 @@ proxies. Return targets the settled nursery entry. Increased Contrast strengthen
 geometry; Differentiate Without Color preserves labels and node shape; Reduce
 Transparency uses opaque chrome; Reduce Motion uses stable placement and
 crossfade. Bold Text, Button Shapes, grayscale, Smart Invert, Voice Control,
-Switch Control, Full Keyboard Access, 44-point targets, and RTL logical order
-are tested where Simulator permits. Physical spoken order, haptics, reach, edge
+Switch Control, Full Keyboard Access, and 44-point targets are tested where
+Simulator permits. R13 localization and RTL proof are owner-deferred; inherited
+B02 regression coverage does not become R13 evidence. Physical spoken order, haptics, reach, edge
 competition, and low-brightness behavior remain direct-device obligations.
 
 ## 15. Motion and haptics

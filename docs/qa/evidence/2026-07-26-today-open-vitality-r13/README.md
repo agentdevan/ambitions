@@ -29,6 +29,8 @@ Key records:
 - `comparison-review.md`
 - `benchmark-report.md`
 - `validation-results.md`
+- `reviewer-findings.md`
+- `changed-files.json`
 - `known-limitations.md`
 - `screenshot-metadata.json`
 - `comparison-metadata.json`
@@ -36,4 +38,3 @@ Key records:
 - `owner-review.md`
 
 `production_baseline = false`
-

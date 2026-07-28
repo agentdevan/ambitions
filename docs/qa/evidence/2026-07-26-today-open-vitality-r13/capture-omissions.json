@@ -2,6 +2,10 @@
   "schema_version": 1,
   "omissions": [
     {
+      "id": "R13-STALE-REVIEW-CHANGES",
+      "reason": "No source-backed Review Changes route exists; the unsupported control remains absent under the stop-loss gate."
+    },
+    {
       "id": "R13-D10",
       "reason": "Blocked consequence is not source-supported by this fixture and was deliberately not fabricated."
     },

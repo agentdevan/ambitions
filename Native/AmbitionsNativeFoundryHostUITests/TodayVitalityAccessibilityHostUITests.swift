@@ -16,8 +16,11 @@ final class TodayVitalityAccessibilityHostUITests: XCTestCase {
         let today = element("tfcs-navigation-today")
         let search = element("tfcs-navigation-search")
         let capture = element("tfcs-navigation-capture")
-        assertExists([passage, today, search, capture])
+        assertExists([passage, today])
         assertMinimumTarget(today)
+        let startHere = element("tfcs-start-here-object")
+        scrollUntilHittable(startHere)
+        assertExists([search, capture])
         assertMinimumTarget(search)
         assertMinimumTarget(capture)
         XCTAssertFalse(element("tfcs-dock-shell-peek").exists)
@@ -28,8 +31,6 @@ final class TodayVitalityAccessibilityHostUITests: XCTestCase {
         capture.tap()
         XCTAssertTrue(passage.exists)
 
-        let startHere = element("tfcs-start-here-object")
-        scrollUntilExists(startHere)
         XCTAssertEqual(
             app.descendants(matching: .any)
                 .matching(identifier: "tfcs-start-here-object").count,

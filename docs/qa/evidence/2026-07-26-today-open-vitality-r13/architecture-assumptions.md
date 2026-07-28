@@ -15,6 +15,9 @@
   focused journey for it.
 - Time Transfer is an unavailable fixture posture until a source-backed Time
   route exists; it is not a fake control.
+- Stale Context has no source-backed `Review Changes` route. R13 keeps that
+  control absent under the stop-loss gate rather than fabricating navigation or
+  mutation behavior.
 - Review Details and History destinations do not define final production
   Receipt architecture.
 - Undo appears only when an exact current Receipt, current revision, dependency

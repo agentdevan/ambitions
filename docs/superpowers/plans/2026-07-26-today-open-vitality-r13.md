@@ -1,8 +1,8 @@
 # Today Open Vitality Field — R13 Implementation Plan
 
-> Execute through `superpowers:subagent-driven-development`. Each task gets a
-> fresh implementer, then independent specification and quality review. Resolve
-> Critical and Important findings before continuing.
+> Execute the approved implementation directly. Owner-directed closeout uses
+> exactly one final specification review and one final combined visual-quality
+> and accessibility review; no phase-by-phase review loop is required.
 
 **Goal:** Implement the complete owner-selected R13 Today journey in the Native
 Visual Foundry while preserving B02 semantics, fixture truth, native behavior,

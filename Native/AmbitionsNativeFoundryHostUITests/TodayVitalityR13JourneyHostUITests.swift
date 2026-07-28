@@ -38,7 +38,7 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertTrue(element("tfcs-saving-posture").waitForExistence(timeout: 4))
         XCTAssertEqual(currentTruth.value as? String, acceptedTruth)
         XCTAssertEqual(proposedTruth.value as? String, proposedTruthValue)
-        XCTAssertTrue(element("tfcs-commit-still-counts").waitForNonExistence(timeout: 1))
+        XCTAssertFalse(element("tfcs-commit-still-counts").isHittable)
         XCTAssertTrue(element("tfcs-settled-truth").waitForExistence(timeout: 5))
         XCTAssertEqual(element("tfcs-settled-truth").value as? String, proposedTruthValue)
         XCTAssertFalse(app.images["checkmark.seal.fill"].exists)

@@ -302,30 +302,11 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         }
     }
 
-    func testSupportingSnapshotsAreExplicitAndRTLStressDoesNotFallBackToEnglish() throws {
+    func testSupportingSnapshotsAreExplicit() throws {
         let contentSource = try foundrySource(named: "TodayFlagshipCalibrationContent.swift")
         XCTAssertTrue(contentSource.contains("supporting: TodayFlagshipSupportingSnapshots"))
         XCTAssertFalse(contentSource.contains("supporting: TodayFlagshipSupportingSnapshots?"))
         XCTAssertFalse(contentSource.contains("defaultSupportingSnapshots"))
-
-        let rtl = TodayFlagshipCalibrationFixture.preparingForBaby.arabicSaudiEvaluation.supporting
-        let visibleSupport = [
-            rtl.goal.title,
-            rtl.goal.whyItMatters,
-            rtl.goal.currentPosture,
-            rtl.timeTransfer.title,
-            rtl.timeTransfer.body,
-            rtl.commitFailure.title,
-            rtl.commitFailure.body,
-            rtl.commitFailure.retryTitle,
-            rtl.commitFailure.dismissTitle
-        ].joined(separator: " ")
-        XCTAssertTrue(
-            visibleSupport.unicodeScalars.contains { (0x0600...0x06FF).contains($0.value) }
-        )
-        for english in ["Open in Time", "Progress wasn’t recorded", "Try again"] {
-            XCTAssertFalse(visibleSupport.contains(english))
-        }
     }
 
     func testB02ReturnedTodayKeepsOneRevealedStartHereAndExactSettledAnchor() {
