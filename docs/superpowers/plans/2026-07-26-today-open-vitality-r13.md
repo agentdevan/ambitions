@@ -162,7 +162,7 @@ Exact files: existing state/content/fixture and package test files only.
   consequence/time, only Still counts, native Back, and no deep dock.
 - [ ] Implement open object depth using the same title/node alignment.
 - [ ] Keep action reachable across standard and accessibility sizes.
-- [ ] Render typical, long English, Dynamic Type, Contrast, and RTL stress.
+- [ ] Render typical, long English, Dynamic Type, and Contrast.
 - [ ] Commit `feat(foundry): reconstruct R13 focused step`.
 
 ## Task 06 — Consequential review and saving
@@ -222,10 +222,11 @@ Exact files: existing state/content/fixture and package test files only.
 ## Task 11 — Resilience states
 
 - [ ] Add RED tests for offline local truth and source-supported local closure,
-  stale external context, blocked consequence, conflict transfer, failed
+  stale external context, conflict transfer, failed
   settlement, cancelled unchanged, and exact inverse gating.
 - [ ] Implement only fixture/source-supported seams and actions.
-- [ ] Render offline, stale, failed, blocked, cancelled, and Undo available.
+- [ ] Render offline, stale, failed, cancelled, and Undo available. Record the
+  blocked-consequence frame as omitted because the fixture has no supported path.
 - [ ] Commit `feat(foundry): prove R13 resilience`.
 
 ## Task 12 — Accessibility, adaptivity, motion, and performance
@@ -234,9 +235,10 @@ Exact files: existing state/content/fixture and package test files only.
   focus restoration.
 - [ ] Verify Dynamic Type, VoiceOver order/actions, Contrast, Differentiate
   Without Color, Reduce Transparency, Reduce Motion, Bold Text, Button Shapes,
-  RTL stress, long English, target geometry, compact/Pro Max/narrow widths, and
+  long English, target geometry, compact/Pro Max/narrow widths, and
   expanded status areas.
-- [ ] Keep primary owner UI English; label RTL as evaluation-only stress.
+- [ ] Keep all R13 UI and evidence English; record localization and RTL proof as
+  deferred by owner.
 - [ ] Implement calm native transitions/haptic intent without ambient animation.
 - [ ] Run SwiftUI performance audit; use ETTrace/memgraph only for observed
   symptoms.
@@ -257,47 +259,31 @@ Exact files: existing state/content/fixture and package test files only.
 ## Task 14 — Evidence capture
 
 - [ ] Capture R13-F01–F13, R13-D01–D11, quiet/dense/very-dense, accessibility,
-  RTL stress, long localization, contrast, differentiate, transparency,
+  long English, contrast, differentiate, transparency,
   low-brightness, compact, Pro Max, and narrow-width frames.
-- [ ] Record continuously:
-  - R13-J01: Today Root → Focused Step → Still counts → Review → Record Progress
-    → Saving → Settlement → View History → Return to Today → settled nursery
-    entry → new Start Here → Full Day → Back to returned Today.
-  - R13-J02: Today Root → Focused Step → interruption → retained saved truth →
-    recovery sheet → Continue Where You Left Off → resumed focused Step.
-  - R13-J03: the complete J01 semantic journey at Accessibility Dynamic Type,
-    ending on returned Today after Full Day round-trip.
-  - R13-J04: root natural scroll → Dock Peek → expanded roots and global actions
-    → dismiss → Adaptive Navigation Passage → return to root content.
-  - R13-J05: J01 review/saving/settlement/return sequence with Reduce Motion,
-    ending on the settled nursery focus anchor.
-  - R13-J06: offline local truth → local closure posture → stale context → failed
-    settlement with accepted truth retained → recovery/dismissal → exact Undo
-    review variant → Keep, ending unchanged.
 - [ ] Create full matrix, B02 comparison, reference translation, and
   accessibility contact sheets.
-- [ ] Record source SHA, fixture, device/OS, settings, duration/size/hash, and
+- [ ] Record source SHA, fixture, device/OS, settings, byte size/hash, and
   `production_baseline = false` in machine metadata.
 - [ ] Inspect every artifact at full, 50%, and contact-sheet scale.
 - [ ] Commit `docs(foundry): add R13 native evidence`.
 
 ## Final evidence-file inventory
 
-The evidence directory must contain README, owner selection, visual-direction
-contract, repository/canon maps, visual-reference manifest, reference
-translation, implementation plan, architecture assumptions, fixture contract,
-visual grammar, typography, color/material, node, action, shell/dock,
-motion/haptics, accessibility, adaptivity, performance, before/after,
-screen-by-screen review, reference comparison, reviewer findings, validation,
-benchmark, changed files, known limitations, owner review, command log,
-reference hashes, screenshot/recording/comparison metadata, a checked-in
-`validate-evidence.py`, all screenshots, recordings/manifests, and contact
-sheets.
+The evidence directory may consolidate overlapping prose. It must preserve a
+README, owner selection and direction contract, repository/canon and fixture
+boundaries, reference manifest/translation, implementation and architecture
+summary, visual/accessibility/adaptivity/performance review, comparisons, final
+reviewer findings, validation outcomes, benchmark, changed files, known
+limitations, owner review, command log, reference hashes,
+screenshot/comparison metadata, a checked-in `validate-evidence.py`, all
+screenshots, and contact sheets. Do not create recordings, recording metadata,
+or recording validation.
 
 ## Task 15 — Final independent review and validation
 
-- [ ] Run fresh specification, visual-quality, accessibility, and performance
-  reviewers. Resolve every Critical/Important finding.
+- [ ] Run exactly one final specification review and one final combined
+  visual-quality/accessibility review. Resolve every Critical/Important finding.
 - [ ] Complete the 20-category scorecard; no category below 4 and average at
   least 4.5.
 - [ ] Run all validation below and write exact outcomes, commands, changed files,
@@ -330,7 +316,6 @@ gitleaks detect --source . --no-git --redact
 gitleaks git --log-opts 'ac7ed07d090d65bdc469a9a2309f6899dc6135e6..HEAD' --redact
 python3 docs/qa/evidence/2026-07-26-today-open-vitality-r13/validate-evidence.py \
   --screenshots docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshot-metadata.json \
-  --recordings docs/qa/evidence/2026-07-26-today-open-vitality-r13/recording-metadata.json \
   --comparisons docs/qa/evidence/2026-07-26-today-open-vitality-r13/comparison-metadata.json \
   --references docs/qa/evidence/2026-07-26-today-open-vitality-r13/visual-reference-manifest.json
 git diff --name-only ac7ed07d090d65bdc469a9a2309f6899dc6135e6..HEAD > /tmp/r13-changed-paths.txt

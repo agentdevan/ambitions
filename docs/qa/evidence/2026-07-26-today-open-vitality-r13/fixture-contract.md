@@ -29,8 +29,9 @@ Family: `today-flagship/preparing-for-baby/still-counts/v1`
 
 Initial, focused, reviewing, saving, failed settlement, settled, returned,
 interrupted, recovery review, cancelled unchanged, offline, stale external
-context, blocked consequence, conflict transfer, and exact inverse available
-are deterministic fixture states. Offline retains the source-supported local
+context, conflict transfer, and exact inverse available are deterministic
+fixture states. The current fixture has no source-supported blocked-consequence
+command or recovery path, so that frame remains omitted. Offline retains the source-supported local
 Still counts closure while separating external context. Conflict transfer does
 not move or edit chronology in Today. Only the exact inverse variant exposes
 Undo.

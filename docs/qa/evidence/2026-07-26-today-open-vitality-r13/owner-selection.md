@@ -14,7 +14,8 @@ not authorize runtime integration, broad frontend reconstruction, app-entry
 changes, legacy cutover, production screenshot baselines, Figma authority,
 Code Connect, merge, push, or `APPROVED FOR SWIFTUI`.
 
-Primary product UI and owner-facing journey evidence are English. A genuine RTL
-variant is retained only as isolated accessibility stress evidence; it is not
-production localization authority or part of the selected English visual
-direction.
+All R13 product UI and owner evidence are English (`en-US`, left-to-right).
+Localization and RTL proof are deferred by owner. No R13 Arabic/RTL media,
+journey recordings, recording metadata, or recording validation will be
+created. Historical fixture coverage is preserved only as inherited regression
+coverage and is not part of R13 evidence.

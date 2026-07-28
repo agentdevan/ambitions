@@ -19,8 +19,10 @@
   Receipt architecture.
 - Undo appears only when an exact current Receipt, current revision, dependency
   state, and fixture command satisfy the source-backed inverse contract.
-- RTL content is evaluation-only accessibility stress, not production
-  localization authority. Primary owner UI remains English.
+- R13 UI and evidence are English-only. Localization and RTL proof are deferred
+  by owner; inherited fixture coverage does not authorize R13 localized media.
+- Screenshots and contact sheets are the complete R13 native visual evidence
+  set. No journey recordings or recording metadata are required.
 - Simulator timing, focus, motion, and haptics do not imply production runtime
   guarantees or physical-device proof.
 - Package preview hot reload remains the inner loop; no clean build or injection

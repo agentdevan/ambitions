@@ -31,8 +31,10 @@ production screenshot baseline, Figma artifact, or Code Connect artifact is
 allowed. `APPROVED FOR SWIFTUI` remains false. Simulator evidence does not close
 direct-device proof.
 
-Primary product UI and owner journey evidence are English. A genuine RTL
-fixture is retained only as an isolated accessibility stress proof.
+All R13 product UI and owner evidence are English (`en-US`, left-to-right).
+Localization and RTL proof are deferred by owner and are not part of this
+branch's evidence or acceptance claim. Historical fixture coverage remains an
+inherited regression guard only.
 
 ## 3. Fixture truth
 
@@ -239,9 +241,10 @@ Offline retains local truth, permits the fixture-supported local Still counts
 closure, and separately labels unavailable external context. Stale
 context preserves the Step, labels outside facts as outdated, and permits only
 source-supported Review Changes. Failed settlement preserves accepted truth.
-Blocked consequence and conflict transfer remain distinct, narrow owning-scope
-states; conflict transfer delegates exact chronology without silently moving
-Today truth. Undo appears only in
+The fixture has no source-supported blocked-consequence command or recovery, so
+that state is absent and its requested frame is explicitly omitted. Conflict
+transfer remains a narrow owning-scope state and delegates exact chronology
+without silently moving Today truth. Undo appears only in
 a dedicated exact-receipt fixture whose current revision and dependencies meet
 the canonical inverse contract; Keep is always safe and History is retained.
 
@@ -305,19 +308,20 @@ loop. ETTrace or memgraph is required only if rendered symptoms justify it.
 
 Tests cover semantic state, accessibility labels/order, target geometry,
 failure recovery, de-duplication, read-only Full Day, source-backed inverse
-gating, locked dock ownership, and scope guards. Native screenshots and journeys
-remain required because source tests do not prove visual quality.
+gating, locked dock ownership, and scope guards. Native screenshots and contact
+sheets remain required because source tests do not prove visual quality.
 
 The final evidence package contains the required primary, drill-down,
-resilience, stress, device, and accessibility frames; six journeys; contact
-sheets; reference comparisons; warm-loop data; performance review; independent
-review findings; command log; metadata; exact SHAs; and honest limitations.
+resilience, stress, device, and accessibility frames; contact sheets; reference
+comparisons; warm-loop data; performance review; final independent review
+findings; command log; metadata; exact SHAs; and honest limitations. R13 has no
+journey recordings, recording metadata, or recording-validation lane.
 All artifacts set `production_baseline = false`.
 
 ## 18. Self-review
 
 This specification has no placeholders or unsupported route promise. It resolves
-reference/canon conflicts explicitly, preserves fixture truth, isolates RTL to
-stress proof, keeps mutation outside views, retains native presentation, and
+reference/canon conflicts explicitly, preserves fixture truth, defers RTL and
+localization proof, keeps mutation outside views, retains native presentation, and
 does not broaden authority. Implementation can proceed without another owner
 decision unless a named stop-loss conflict appears.
