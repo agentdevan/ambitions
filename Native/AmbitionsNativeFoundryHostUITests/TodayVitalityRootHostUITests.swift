@@ -31,12 +31,15 @@ extension TodayFlagshipCalibrationHostUITests {
         XCTAssertLessThan(fixed.frame.minY, protected.frame.minY)
         XCTAssertLessThan(protected.frame.minY, open.frame.minY)
 
-        scrollUntilHittable(fullDay)
+        XCTAssertTrue(fullDay.isHittable)
+        XCTAssertLessThanOrEqual(fullDay.frame.maxY, app.frame.maxY - 16)
         XCTAssertLessThan(open.frame.minY, fullDay.frame.minY)
 
         app.terminate()
         launch("tfcs-f09")
-        XCTAssertFalse(element("tfcs-open-start-here").exists)
+        let returnedContinue = element("tfcs-open-start-here")
+        XCTAssertTrue(returnedContinue.waitForExistence(timeout: 3))
+        XCTAssertTrue(returnedContinue.isHittable)
         XCTAssertTrue(element("tfcs-returned-settled-step").waitForExistence(timeout: 3))
         XCTAssertEqual(
             app.staticTexts.matching(

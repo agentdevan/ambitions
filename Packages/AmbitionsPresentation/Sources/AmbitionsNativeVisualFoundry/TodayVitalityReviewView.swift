@@ -18,12 +18,7 @@ struct TodayVitalityReviewView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text(screenTitle)
-                        .font(TodayVitalityTypographyRole.objectIdentity.font)
-                        .foregroundStyle(palette.labelPrimary)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilityIdentifier("tfcs-step-identity")
+                    reviewIdentity
 
                     if state.phase == .failedSettlement {
                         failurePosture
@@ -31,10 +26,11 @@ struct TodayVitalityReviewView: View {
 
                     comparisonField
 
+                    consequenceSummary
+
                     if state.isCommitInFlight {
                         savingTrustCue
                     } else {
-                        consequenceSummary
                         details
                     }
 
@@ -72,6 +68,28 @@ struct TodayVitalityReviewView: View {
         .accessibilityIdentifier("tfcs-consequential-review")
     }
 
+    private var reviewIdentity: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(screenTitle)
+                .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
+                .foregroundStyle(
+                    state.isCommitInFlight
+                        ? palette.ambitionsAccentMuted
+                        : palette.labelSecondary
+                )
+
+            Text(content.primaryStep.title)
+                .font(TodayVitalityTypographyRole.objectIdentity.font)
+                .foregroundStyle(palette.labelPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("tfcs-review-step-identity")
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(screenTitle). \(content.primaryStep.title)")
+        .accessibilityIdentifier("tfcs-step-identity")
+    }
+
     @ToolbarContentBuilder
     private var reviewDismissalToolbarItem: some ToolbarContent {
         #if os(iOS)
@@ -101,7 +119,7 @@ struct TodayVitalityReviewView: View {
     }
 
     private var comparisonField: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        TodayVitalityReviewComparison {
             truthRegion(
                 kind: .current,
                 label: content.interfaceCopy.rightNowTitle,
@@ -194,6 +212,11 @@ struct TodayVitalityReviewView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityHidden(true)
         .accessibilityIdentifier("tfcs-review-transition-seam")
+        .accessibilityIdentifier(
+            state.isCommitInFlight
+                ? "tfcs-saving-transaction-seam"
+                : "tfcs-review-transition-seam"
+        )
     }
 
     private var consequenceSummary: some View {
@@ -419,5 +442,15 @@ private struct TodayVitalityReviewActionBackground: ViewModifier {
                             .frame(height: palette.separatorStrokeWidth)
                     }
             }
+    }
+}
+
+private struct TodayVitalityReviewComparison<Content: View>: View {
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            content
+        }
     }
 }

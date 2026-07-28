@@ -55,15 +55,21 @@ struct TodayVitalitySettlementView: View {
 
     private var settlementHeading: some View {
         VStack(alignment: .leading, spacing: 7) {
-            Text(content.interfaceCopy.settledStateAccessibilityTitle)
+            Text(content.interfaceCopy.settlementTitle)
                 .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
                 .foregroundStyle(palette.settledState)
 
-            Text(content.interfaceCopy.settlementTitle)
+            Text(content.primaryStep.title)
                 .font(TodayVitalityTypographyRole.objectIdentity.font)
                 .foregroundStyle(palette.labelPrimary)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("tfcs-settlement-step-title")
+
+            Text(content.primaryStep.parentPursuitTitle)
+                .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
+                .foregroundStyle(palette.ambitionsAccentMuted)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(content.settlementAccessibilityIdentity)
@@ -98,6 +104,7 @@ struct TodayVitalitySettlementView: View {
         }
         .frame(width: 44)
         .accessibilityHidden(true)
+        .accessibilityIdentifier("r14-settlement-resolved-seam")
     }
 
     private var settledTruth: some View {

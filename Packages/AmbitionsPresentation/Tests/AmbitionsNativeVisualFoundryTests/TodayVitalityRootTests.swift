@@ -112,7 +112,7 @@ final class TodayVitalityRootTests: XCTestCase {
 
         XCTAssertTrue(rootSource.contains("TodayVitalityRailNode("))
         XCTAssertTrue(rootSource.contains("TodayVitalityActionStyle"))
-        XCTAssertTrue(rootSource.contains("showsAction: state.phase != .todayReturned"))
+        XCTAssertTrue(rootSource.contains("showsAction: true"))
         XCTAssertTrue(rootSource.contains("frame(minHeight: 48)"))
         XCTAssertFalse(rootSource.contains("TodayOpenContinuitySpine("))
         XCTAssertFalse(rootSource.contains("UnevenRoundedRectangle("))
@@ -126,6 +126,25 @@ final class TodayVitalityRootTests: XCTestCase {
         XCTAssertTrue(timelineSource.contains("row.accessibilityFocused($isReturnedSettledStepFocused)"))
         XCTAssertFalse(timelineSource.contains("TodayOpenContinuitySpine("))
         XCTAssertTrue(wrapperSource.contains("TodayVitalityRootView("))
+    }
+
+    func testR14ReturnedRootExposesContinueForUniqueRevealedStartHere() throws {
+        let rootSource = try foundrySource(named: "TodayVitalityRootView.swift")
+
+        XCTAssertTrue(rootSource.contains("showsAction: true"))
+        XCTAssertFalse(rootSource.contains("showsAction: state.phase != .todayReturned"))
+        XCTAssertEqual(
+            TodayFlagshipCalibrationFixture.preparingForBaby.revealedStartHereStep.primaryActionTitle,
+            "Continue"
+        )
+    }
+
+    func testR14RootProtectsTerminalActionAcrossBottomSafeArea() throws {
+        let rootSource = try foundrySource(named: "TodayVitalityRootView.swift")
+        let timelineSource = try foundrySource(named: "TodayVitalityTimelineView.swift")
+
+        XCTAssertTrue(rootSource.contains("safeAreaPadding(.bottom"))
+        XCTAssertTrue(timelineSource.contains("tfcs-view-full-day"))
     }
 
     private func foundrySource(named filename: String) throws -> String {

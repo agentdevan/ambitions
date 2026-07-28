@@ -15,6 +15,7 @@ struct TodayVitalityRootView: View {
     let trailingPadding: CGFloat
     let onNavigationCommand: (TodayFlagshipNavigationCommand) -> Void
     let onCrownScrollProgress: (CGFloat) -> Void
+    let onScrollActivityChange: (Bool) -> Void
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -33,7 +34,7 @@ struct TodayVitalityRootView: View {
                         copy: content.interfaceCopy,
                         step: visibleStartHere,
                         palette: vitalityPalette,
-                        showsAction: state.phase != .todayReturned,
+                        showsAction: true,
                         onOpen: {
                             _ = state.openStartHere()
                         }
@@ -62,6 +63,7 @@ struct TodayVitalityRootView: View {
                 .padding(.leading, 24)
                 .padding(.trailing, trailingPadding)
                 .padding(.bottom, 72)
+                .safeAreaPadding(.bottom, 24)
             }
             .contentMargins(
                 .trailing,
@@ -72,6 +74,9 @@ struct TodayVitalityRootView: View {
                 min(max(0, geometry.contentOffset.y + geometry.contentInsets.top) / 56, 1)
             } action: { _, progress in
                 onCrownScrollProgress(progress)
+            }
+            .onScrollPhaseChange { _, newPhase in
+                onScrollActivityChange(newPhase != .idle)
             }
             .onChange(of: state.phase) { _, phase in
                 routeFocus(for: phase)

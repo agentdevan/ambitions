@@ -16,6 +16,23 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
         XCTAssertTrue(fixture.isSynthetic)
     }
 
+    func testR14RevealedStartHereHasOwnerAuthorizedFocusedInspectionTruth() {
+        let step = TodayFlagshipCalibrationFixture.preparingForBaby.revealedStartHereStep
+
+        XCTAssertEqual(step.id, "step.send-launch-brief")
+        XCTAssertEqual(step.parentPursuitTitle, "Work Projects")
+        XCTAssertEqual(step.currentAcceptedTruth, "The brief is drafted and ready for review.")
+        XCTAssertEqual(
+            step.materialConsequence,
+            "Sending it keeps the launch on track without entering protected family time."
+        )
+        XCTAssertEqual(
+            "\(step.temporalContext.exactTime) · \(step.temporalContext.relationship)",
+            "Due today · 2:00 PM"
+        )
+        XCTAssertEqual(step.primaryActionTitle, "Continue")
+    }
+
     func testFixtureSeparatesCurrentProposedAndSettledTruth() {
         let step = TodayFlagshipCalibrationFixture.preparingForBaby.primaryStep
 
@@ -125,7 +142,7 @@ final class TodayFlagshipCalibrationFixtureTests: XCTestCase {
             step.temporalContext.relationship,
             "before 2:00 PM handoff"
         )
-        XCTAssertEqual(fixture.revealedStartHereStep.temporalContext.exactTime, "2:00 PM")
+        XCTAssertEqual(fixture.revealedStartHereStep.temporalContext.exactTime, "Due today")
         XCTAssertEqual(step.temporalContext.fullDayTimeLabel, "10:30 AM")
         XCTAssertEqual(
             fixture.timeline.first(where: { $0.canonicalObjectID == "step.send-launch-brief" })?.timeLabel,

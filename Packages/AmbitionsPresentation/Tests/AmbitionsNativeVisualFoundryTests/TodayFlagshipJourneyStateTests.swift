@@ -18,6 +18,27 @@ final class TodayFlagshipJourneyStateTests: XCTestCase {
         XCTAssertEqual(state.todayReturnAnchorID, content.returnContract.focusAnchorID)
     }
 
+    func testR14ReturnedStartHereOpensRevealedStepWithoutMutationAndBackRestoresReturn() {
+        var state = TodayFlagshipJourneyState.preview(content: content, phase: .todayReturned)
+        let settledTruth = state.acceptedTruth
+
+        XCTAssertTrue(state.openStartHere())
+        XCTAssertEqual(state.phase, .focusedReturnedStartHere)
+        XCTAssertEqual(state.focusedStepID, content.revealedStartHereStep.id)
+        XCTAssertEqual(state.navigationPath, [.step(id: content.revealedStartHereStep.id)])
+        XCTAssertNotEqual(state.focusedStepID, content.primaryStep.id)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+        XCTAssertTrue(state.hasCommittedMutation)
+        XCTAssertNil(state.proposedTruth)
+        XCTAssertFalse(state.selectStillCounts())
+
+        state.reconcileNavigationPath([])
+        XCTAssertEqual(state.phase, .todayReturned)
+        XCTAssertEqual(state.focusAnchor, .returnedSettledStep)
+        XCTAssertEqual(state.acceptedTruth, settledTruth)
+        XCTAssertTrue(state.settledStepRemainsVisible)
+    }
+
     func testFullDayFromInitialTodayIsNonMutatingAndKeepsDepthWhenOpeningPrimaryStep() {
         var state = TodayFlagshipJourneyState(content: content)
         let acceptedTruth = state.acceptedTruth

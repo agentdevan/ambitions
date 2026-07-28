@@ -57,18 +57,18 @@ public enum TodayFlagshipCalibrationFixture {
             title: longContent
                 ? "Send the launch brief that keeps the meaningful work commitment on track"
                 : "Send the launch brief",
-            parentPursuitID: "goal.meaningful-work-commitment",
-            parentPursuitTitle: "Keep the launch promise",
-            currentAcceptedTruth: "The brief is drafted and waiting for one final read.",
-            whyItFitsNow: "The nursery progress is recorded and the 2:00 PM handoff is next.",
-            materialConsequence: "Sending it protects the work promise without entering family time.",
-            startHereSummary: "One final read protects the work promise before family time.",
+            parentPursuitID: "goal.work-projects",
+            parentPursuitTitle: "Work Projects",
+            currentAcceptedTruth: "The brief is drafted and ready for review.",
+            whyItFitsNow: "The 2:00 PM handoff is the next fixed commitment.",
+            materialConsequence: "Sending it keeps the launch on track without entering protected family time.",
+            startHereSummary: "Sending it keeps the launch on track without entering protected family time.",
             temporalContext: TodayFlagshipTemporalContext(
-                exactTime: "2:00 PM",
-                relationship: "Fixed work handoff",
+                exactTime: "Due today",
+                relationship: "2:00 PM",
                 owner: "Time"
             ),
-            primaryActionTitle: "Review launch brief",
+            primaryActionTitle: "Continue",
             stillCountsProposal: proposal
         )
         var timeline: [TodayFlagshipTimelineObject]

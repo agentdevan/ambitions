@@ -10,16 +10,18 @@ struct TodayVitalityFocusedStepView: View {
     @AccessibilityFocusState private var isRecoveredProgressFocused: Bool
 
     let content: TodayFlagshipCalibrationContent
-    let acceptedTruth: String
+    let step: TodayFlagshipStepSnapshot
     let shouldFocusIdentity: Bool
     var recoveredProgress: String?
     var shouldFocusRecoveredProgress: Bool = false
+    let showsStillCountsOutcome: Bool
+    let showsParentPursuitNavigation: Bool
     let onOpenGoalDetail: () -> Void
     let onSelectStillCounts: () -> Void
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 20) {
                 identity
                 parentPursuit
                 presentField
@@ -33,36 +35,35 @@ struct TodayVitalityFocusedStepView: View {
                 }
                 temporalRelationship
 
-                Rectangle()
-                    .fill(palette.separator)
-                    .frame(height: palette.separatorStrokeWidth)
-                    .accessibilityHidden(true)
+                if showsStillCountsOutcome {
+                    TodayVitalityOutcomeTransitionSeam(palette: palette)
 
-                TodayVitalityFocusedOutcome(
-                    title: content.primaryStep.stillCountsProposal.outcomeTitle,
-                    proposedTruth: content.primaryStep.stillCountsProposal.proposedTruth,
-                    palette: palette
-                )
+                    TodayVitalityFocusedOutcome(
+                        title: step.stillCountsProposal.outcomeTitle,
+                        proposedTruth: step.stillCountsProposal.proposedTruth,
+                        palette: palette
+                    )
 
-                if usesFlowingReviewAction {
-                    VStack(spacing: 0) {
-                        reviewAction
+                    if usesFlowingReviewAction {
+                        VStack(spacing: 0) {
+                            reviewAction
+                        }
+                        .padding(.top, 8)
+                        .padding(.bottom, 36)
+                        .accessibilityElement(children: .contain)
+                        .accessibilityIdentifier("r13-focused-flowing-action")
                     }
-                    .padding(.top, 8)
-                    .padding(.bottom, 36)
-                    .accessibilityElement(children: .contain)
-                    .accessibilityIdentifier("r13-focused-flowing-action")
                 }
             }
             .frame(maxWidth: 560, alignment: .leading)
             .padding(.horizontal, 24)
-            .padding(.top, 18)
+            .padding(.top, 0)
             .padding(.bottom, 20)
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("tfcs-focused-object-field")
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            if usesFlowingReviewAction == false {
+            if showsStillCountsOutcome && usesFlowingReviewAction == false {
                 anchoredReviewAction
             }
         }
@@ -90,11 +91,12 @@ struct TodayVitalityFocusedStepView: View {
                 .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
                 .foregroundStyle(palette.ambitionsAccentMuted)
 
-            Text(content.primaryStep.title)
+            Text(step.title)
                 .font(TodayVitalityTypographyRole.objectIdentity.font)
                 .foregroundStyle(palette.labelPrimary)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("tfcs-focused-step-id-\(step.id)")
         }
         .accessibilityElement(children: .combine)
         .accessibilityFocused($isIdentityFocused)
@@ -102,25 +104,37 @@ struct TodayVitalityFocusedStepView: View {
     }
 
     private var parentPursuit: some View {
-        Button(action: onOpenGoalDetail) {
+        Group {
+            if showsParentPursuitNavigation {
+                Button(action: onOpenGoalDetail) {
+                    parentPursuitLabel
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Open Goal details")
+            } else {
+                parentPursuitLabel
+            }
+        }
+        .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
+        .foregroundStyle(palette.ambitionsAccentMuted)
+        .accessibilityLabel(step.parentPursuitTitle)
+        .accessibilityIdentifier("tfcs-focused-parent-pursuit")
+    }
+
+    private var parentPursuitLabel: some View {
             HStack(spacing: 9) {
                 Image(systemName: "house")
                     .accessibilityHidden(true)
-                Text(content.primaryStep.parentPursuitTitle)
+                Text(step.parentPursuitTitle)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 8)
-                Image(systemName: "chevron.forward")
-                    .accessibilityHidden(true)
+                if showsParentPursuitNavigation {
+                    Image(systemName: "chevron.forward")
+                        .accessibilityHidden(true)
+                }
             }
             .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
             .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .font(TodayVitalityTypographyRole.relationship.font.weight(.medium))
-        .foregroundStyle(palette.ambitionsAccentMuted)
-        .accessibilityLabel(content.primaryStep.parentPursuitTitle)
-        .accessibilityHint("Open Goal details")
-        .accessibilityIdentifier("tfcs-focused-parent-pursuit")
     }
 
     private var presentField: some View {
@@ -136,13 +150,13 @@ struct TodayVitalityFocusedStepView: View {
                     .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
                     .foregroundStyle(palette.ambitionsAccentMuted)
 
-                Text(acceptedTruth)
+                Text(step.currentAcceptedTruth)
                     .font(TodayVitalityTypographyRole.stateTruth.font)
                     .foregroundStyle(palette.labelPrimary)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier("tfcs-current-truth")
 
-                Text(content.primaryStep.startHereSummary)
+                Text(step.materialConsequence)
                     .font(TodayVitalityTypographyRole.relationship.font)
                     .foregroundStyle(palette.labelSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -159,8 +173,8 @@ struct TodayVitalityFocusedStepView: View {
     private var temporalRelationship: some View {
         Label {
             Text(
-                "\(content.primaryStep.temporalContext.exactTime) · "
-                    + content.primaryStep.temporalContext.relationship
+                "\(step.temporalContext.exactTime) · "
+                    + step.temporalContext.relationship
             )
             .fixedSize(horizontal: false, vertical: true)
         } icon: {
@@ -172,8 +186,8 @@ struct TodayVitalityFocusedStepView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(
-            "\(content.primaryStep.temporalContext.exactTime) · "
-                + content.primaryStep.temporalContext.relationship
+            "\(step.temporalContext.exactTime) · "
+                + step.temporalContext.relationship
         )
         .accessibilityIdentifier("tfcs-focused-temporal-anchor")
     }
@@ -198,10 +212,10 @@ struct TodayVitalityFocusedStepView: View {
                 palette: palette
             )
         )
-        .accessibilityLabel(content.primaryStep.stillCountsProposal.outcomeTitle)
+        .accessibilityLabel(step.stillCountsProposal.outcomeTitle)
         .accessibilityHint(content.interfaceCopy.reviewStillCountsHint)
         .accessibilityInputLabels([
-            content.primaryStep.stillCountsProposal.outcomeTitle,
+            step.stillCountsProposal.outcomeTitle,
             "Choose Still Counts"
         ])
         .accessibilityIdentifier("tfcs-select-still-counts")
@@ -267,5 +281,21 @@ private struct TodayVitalityFocusedOutcome: View {
         .accessibilityLabel(title)
         .accessibilityValue(proposedTruth)
         .accessibilityIdentifier("r13-focused-outcome")
+    }
+}
+
+private struct TodayVitalityOutcomeTransitionSeam: View {
+    let palette: TodayVitalityPalette
+
+    var body: some View {
+        HStack(spacing: 0) {
+            Rectangle()
+                .fill(palette.separator)
+                .frame(width: palette.separatorStrokeWidth, height: 20)
+                .padding(.leading, 21)
+            Spacer(minLength: 0)
+        }
+        .frame(height: 20)
+        .accessibilityHidden(true)
     }
 }

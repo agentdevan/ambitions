@@ -14,6 +14,7 @@ public struct TodayFlagshipCalibrationView: View {
     @Binding private var state: TodayFlagshipJourneyState
     @State private var isDockExpanded: Bool
     @State private var crownScrollProgress: CGFloat = 0
+    @State private var isRootScrolling = false
     @State private var recoveryDetent: PresentationDetent = .medium
 
     private let content: TodayFlagshipCalibrationContent
@@ -93,7 +94,7 @@ public struct TodayFlagshipCalibrationView: View {
                 origin: origin
             )
         case let .step(id):
-            if id == content.primaryStep.id {
+            if id == content.primaryStep.id || id == content.revealedStartHereStep.id {
                 TodayFlagshipFocusedStepView(content: content, state: $state)
             } else {
                 truthfulFallback
@@ -127,6 +128,9 @@ public struct TodayFlagshipCalibrationView: View {
                     onNavigationCommand: onNavigationCommand,
                     onCrownScrollProgress: { progress in
                         crownScrollProgress = progress
+                    },
+                    onScrollActivityChange: { isScrolling in
+                        isRootScrolling = isScrolling
                     }
                 )
             }
@@ -148,6 +152,7 @@ public struct TodayFlagshipCalibrationView: View {
                     copy: content.interfaceCopy,
                     commands: TodayFlagshipNavigationCommand.allCases,
                     isExpanded: $isDockExpanded,
+                    isScrolling: isRootScrolling,
                     palette: palette,
                     onCommand: onNavigationCommand
                 )

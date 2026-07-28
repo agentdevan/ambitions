@@ -12,22 +12,36 @@ struct TodayFlagshipFocusedStepView: View {
             if state.phase == .focusedCurrent {
                 TodayVitalityFocusedStepView(
                     content: content,
-                    acceptedTruth: state.acceptedTruth,
+                    step: content.primaryStep,
                     shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    showsStillCountsOutcome: true,
+                    showsParentPursuitNavigation: true,
                     onOpenGoalDetail: openGoalDetail,
                     onSelectStillCounts: {
                         _ = state.selectStillCounts()
                     }
                 )
+            } else if state.phase == .focusedReturnedStartHere {
+                TodayVitalityFocusedStepView(
+                    content: content,
+                    step: content.revealedStartHereStep,
+                    shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
+                    showsStillCountsOutcome: false,
+                    showsParentPursuitNavigation: false,
+                    onOpenGoalDetail: {},
+                    onSelectStillCounts: {}
+                )
             } else if state.phase == .recoveredContinuation {
                 TodayVitalityFocusedStepView(
                     content: content,
-                    acceptedTruth: state.acceptedTruth,
+                    step: content.primaryStep,
                     shouldFocusIdentity: state.focusAnchor == .focusedIdentity,
                     recoveredProgress: state.phase == .recoveredContinuation
                         ? state.lastSavedProgress
                         : nil,
                     shouldFocusRecoveredProgress: state.focusAnchor == .recoveredProgress,
+                    showsStillCountsOutcome: true,
+                    showsParentPursuitNavigation: true,
                     onOpenGoalDetail: openGoalDetail,
                     onSelectStillCounts: {
                         _ = state.selectStillCounts()

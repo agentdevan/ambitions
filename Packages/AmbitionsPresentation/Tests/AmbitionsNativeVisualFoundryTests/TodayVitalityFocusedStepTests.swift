@@ -43,9 +43,21 @@ final class TodayVitalityFocusedStepTests: XCTestCase {
 
         XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
         XCTAssertTrue(source.contains("if usesFlowingReviewAction"))
-        XCTAssertTrue(source.contains("if usesFlowingReviewAction == false"))
+        XCTAssertTrue(source.contains("if showsStillCountsOutcome && usesFlowingReviewAction == false"))
         XCTAssertTrue(source.contains(".padding(.bottom, 36)"))
         XCTAssertTrue(source.contains("accessibilityIdentifier(\"r13-focused-flowing-action\")"))
+    }
+
+    func testR14FocusedViewAcceptsStableFixtureStepAndCanOmitUnsupportedOutcome() throws {
+        let source = try focusedSource()
+
+        XCTAssertTrue(source.contains("let step: TodayFlagshipStepSnapshot"))
+        XCTAssertTrue(source.contains("let showsStillCountsOutcome: Bool"))
+        XCTAssertTrue(source.contains("if showsStillCountsOutcome"))
+        XCTAssertTrue(source.contains("step.parentPursuitTitle"))
+        XCTAssertTrue(source.contains("step.currentAcceptedTruth"))
+        XCTAssertTrue(source.contains("step.materialConsequence"))
+        XCTAssertTrue(source.contains("tfcs-focused-step-id-"))
     }
 
     private func focusedSource() throws -> String {

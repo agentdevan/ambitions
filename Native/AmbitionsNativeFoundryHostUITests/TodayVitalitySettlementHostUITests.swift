@@ -94,7 +94,31 @@ final class TodayVitalitySettlementHostUITests: XCTestCase {
             settledNursery.label.contains("I primed the wall and tested the new color.")
         )
         XCTAssertFalse(element("tfcs-overview-row-step.send-launch-brief").exists)
-        XCTAssertFalse(element("tfcs-open-start-here").exists)
+        let continueLaunchBrief = element("tfcs-open-start-here")
+        XCTAssertTrue(continueLaunchBrief.exists)
+        XCTAssertEqual(continueLaunchBrief.label, "Continue")
+        XCTAssertTrue(continueLaunchBrief.isHittable)
+        continueLaunchBrief.tap()
+        let launchIdentity = element("tfcs-focused-step-id-step.send-launch-brief")
+        assertExists([launchIdentity, element("tfcs-focused-parent-pursuit")])
+        XCTAssertTrue(launchIdentity.label.contains("Send the launch brief"))
+        XCTAssertTrue(element("tfcs-focused-parent-pursuit").label.contains("Work Projects"))
+        XCTAssertTrue(app.staticTexts["The brief is drafted and ready for review."].exists)
+        XCTAssertTrue(
+            app.staticTexts[
+                "Sending it keeps the launch on track without entering protected family time."
+            ].exists
+        )
+        XCTAssertTrue(app.staticTexts["Due today · 2:00 PM"].exists)
+        XCTAssertFalse(element("tfcs-select-still-counts").exists)
+        XCTAssertTrue(app.navigationBars.buttons["Today"].exists)
+        app.navigationBars.buttons["Today"].tap()
+        XCTAssertTrue(settledNursery.waitForExistence(timeout: 3))
+        XCTAssertEqual(
+            app.descendants(matching: .any)
+                .matching(identifier: "tfcs-returned-settled-step").count,
+            1
+        )
         XCTAssertLessThan(
             settledNursery.frame.minY,
             element("tfcs-overview-row-event.family-time").frame.minY

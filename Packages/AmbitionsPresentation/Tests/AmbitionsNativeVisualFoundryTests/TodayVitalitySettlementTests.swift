@@ -43,4 +43,26 @@ final class TodayVitalitySettlementTests: XCTestCase {
         XCTAssertEqual(state.acceptedTruth, settledTruth)
         XCTAssertEqual(state.phase, .settled)
     }
+
+    func testR14SettlementSourceRendersStableStepAndParentBeforeAcceptedTruth() throws {
+        let source = try foundrySource(named: "TodayVitalitySettlementView.swift")
+
+        XCTAssertTrue(source.contains("tfcs-settlement-step-title"))
+        XCTAssertTrue(source.contains("content.primaryStep.title"))
+        XCTAssertTrue(source.contains("content.primaryStep.parentPursuitTitle"))
+        XCTAssertTrue(source.contains("r14-settlement-resolved-seam"))
+    }
+
+    private func foundrySource(named filename: String) throws -> String {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        return try String(
+            contentsOf: packageRoot
+                .appendingPathComponent("Sources/AmbitionsNativeVisualFoundry")
+                .appendingPathComponent(filename),
+            encoding: .utf8
+        )
+    }
 }

@@ -76,6 +76,16 @@ final class TodayVitalityReviewTests: XCTestCase {
         XCTAssertTrue(wrapper.contains("UIAccessibility.post"))
     }
 
+    func testR14ReviewAndSavingRetainStableStepIdentityAndSharedComparison() throws {
+        let source = try reviewSource()
+
+        XCTAssertTrue(source.contains("tfcs-review-step-identity"))
+        XCTAssertTrue(source.contains("TodayVitalityReviewComparison"))
+        XCTAssertTrue(source.contains("tfcs-saving-transaction-seam"))
+        XCTAssertTrue(source.contains("content.primaryStep.title"))
+        XCTAssertTrue(source.contains("content.interfaceCopy.savingBody"))
+    }
+
     private func reviewSource() throws -> String {
         try foundrySource(named: "TodayVitalityReviewView.swift")
     }

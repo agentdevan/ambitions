@@ -6,6 +6,7 @@ public enum TodayFlagshipJourneyPhase: String, Equatable, Sendable {
     case failedSettlement = "failed-settlement"
     case settled
     case todayReturned = "today-returned"
+    case focusedReturnedStartHere = "focused-returned-start-here"
     case interrupted
     case recoveryReview = "recovery-review"
     case recoveredContinuation = "recovered-continuation"
@@ -60,6 +61,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     public private(set) var isHistoryExpanded: Bool
     public private(set) var supportingRoute: TodayFlagshipSupportingRoute?
     public private(set) var appliedInverseCommandID: String?
+    public private(set) var focusedStepID: String?
 
     private let primaryStepID: String
     private let revealedStartHereStepID: String
@@ -83,6 +85,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         isHistoryExpanded = false
         supportingRoute = nil
         appliedInverseCommandID = nil
+        focusedStepID = nil
         primaryStepID = content.primaryStep.id
         revealedStartHereStepID = content.revealedStartHereStep.id
         proposalTruth = content.primaryStep.stillCountsProposal.proposedTruth
@@ -110,19 +113,21 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     }
 
     public var receiptIsVisible: Bool {
-        phase == .settled || phase == .todayReturned
+        phase == .settled || phase == .todayReturned || phase == .focusedReturnedStartHere
     }
 
     public var primaryStepIsStartHereEligible: Bool {
-        phase != .settled && phase != .todayReturned
+        phase != .settled && phase != .todayReturned && phase != .focusedReturnedStartHere
     }
 
     public var visibleStartHereStepID: String {
-        phase == .todayReturned ? revealedStartHereStepID : primaryStepID
+        phase == .todayReturned || phase == .focusedReturnedStartHere
+            ? revealedStartHereStepID
+            : primaryStepID
     }
 
     public var settledStepRemainsVisible: Bool {
-        phase == .todayReturned
+        phase == .todayReturned || phase == .focusedReturnedStartHere
     }
 
     public var availableRecoveryChoiceIDs: [String] {
@@ -209,7 +214,15 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
             phase = .todayInitial
             proposedTruth = nil
             supportingRoute = nil
+            focusedStepID = nil
             focusAnchor = .startHere
+        case ([.step(id: revealedStartHereStepID)], []):
+            navigationPath = []
+            phase = .todayReturned
+            proposedTruth = nil
+            supportingRoute = nil
+            focusedStepID = nil
+            focusAnchor = .returnedSettledStep
         default:
             return
         }
@@ -217,9 +230,19 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func openStartHere() -> Bool {
-        guard phase == .todayInitial else { return false }
-        phase = .focusedCurrent
-        navigationPath = [.step(id: primaryStepID)]
+        let stepID: String
+        switch phase {
+        case .todayInitial:
+            phase = .focusedCurrent
+            stepID = primaryStepID
+        case .todayReturned:
+            phase = .focusedReturnedStartHere
+            stepID = revealedStartHereStepID
+        default:
+            return false
+        }
+        focusedStepID = stepID
+        navigationPath = [.step(id: stepID)]
         focusAnchor = .focusedIdentity
         supportingRoute = nil
         return true
@@ -383,6 +406,7 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
         guard phase == .settled, supportingRoute == nil else { return false }
         phase = .todayReturned
         navigationPath = []
+        focusedStepID = nil
         focusAnchor = .returnedSettledStep
         isHistoryExpanded = false
         supportingRoute = nil
@@ -407,7 +431,10 @@ public struct TodayFlagshipJourneyState: Equatable, Sendable {
     public mutating func returnByNativeBackNavigation() -> Bool {
         guard
             supportingRoute == nil,
-            phase == .focusedCurrent || phase == .interrupted || phase == .recoveredContinuation
+            phase == .focusedCurrent
+                || phase == .focusedReturnedStartHere
+                || phase == .interrupted
+                || phase == .recoveredContinuation
         else {
             return false
         }
@@ -473,6 +500,12 @@ public extension TodayFlagshipJourneyState {
         switch phase {
         case .todayInitial, .focusedCurrent:
             break
+        case .focusedReturnedStartHere:
+            _ = state.selectStillCounts()
+            _ = state.beginCommit()
+            _ = state.settle()
+            _ = state.returnToToday()
+            _ = state.openStartHere()
         case .reviewingProposal:
             _ = state.selectStillCounts()
         case .savingAcceptedTruth:
