@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "references": [
+    {
+      "id": "R13-REF-ROOT",
+      "path": "owner-references/R13-REF-ROOT.jpg",
+      "sha256": "6f041fdeca1e56bade6b2da05505a4138ced11c1df2dce6b28a49c4286a3dd1d"
+    },
+    {
+      "id": "R13-REF-FOCUSED",
+      "path": "owner-references/R13-REF-FOCUSED.jpg",
+      "sha256": "0934be67d0d6e6315496eb5c09889ad9a408a091d7cdecdd67e2dad51ef83526"
+    },
+    {
+      "id": "R13-REF-REVIEW",
+      "path": "owner-references/R13-REF-REVIEW.jpg",
+      "sha256": "45cc57f4b4c79af93ecb67533b578a3164e7d4311f977380ffb322908cb6956a"
+    },
+    {
+      "id": "R13-REF-SAVING",
+      "path": "owner-references/R13-REF-SAVING.jpg",
+      "sha256": "4213c6d7a002bbc886b04a7e7fd887e407cdb6f33f4de3a90de1de9d537524c2"
+    },
+    {
+      "id": "R13-REF-SETTLEMENT",
+      "path": "owner-references/R13-REF-SETTLEMENT.jpg",
+      "sha256": "a31f77947afddabe02356bdf19142a7ad4f6b7c54d8fd0afe6e51b55067ce3f3"
+    },
+    {
+      "id": "R13-REF-RETURNED",
+      "path": "owner-references/R13-REF-RETURNED.jpg",
+      "sha256": "2e5d40cd8c8a3471b1c1394a59d206fdc40bcf489f9b43489c2b74489da7b88d"
+    },
+    {
+      "id": "R13-REF-FULL-DAY",
+      "path": "owner-references/R13-REF-FULL-DAY.jpg",
+      "sha256": "3330333b768908667d75e86caf6b63f79865b98187fea78d7ec4f4fad9310dad"
+    },
+    {
+      "id": "R13-REF-RECOVERY",
+      "path": "owner-references/R13-REF-RECOVERY.jpg",
+      "sha256": "6aab5e310bdcc4f919cf25e5b96300e3bd9c036a00991807a2a7ceefa1e9261d"
+    }
+  ]
+}

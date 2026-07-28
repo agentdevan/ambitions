@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "omissions": [
+    {
+      "id": "R13-D10",
+      "reason": "Blocked consequence is not source-supported by this fixture and was deliberately not fabricated."
+    },
+    {
+      "id": "R13-RTL",
+      "reason": "Owner directed R13 to remain English-only; localization and RTL evidence are deferred."
+    },
+    {
+      "id": "R13-NW01",
+      "reason": "The iPhone Air Simulator failed data migration and launchd startup twice; compact iPhone 17e and iPhone 17 Pro Max proofs succeeded."
+    },
+    {
+      "id": "R13-J01-through-J06",
+      "reason": "Owner removed all R13 journey-recording requirements. No recording media, metadata, or validation is part of this package."
+    }
+  ]
+}

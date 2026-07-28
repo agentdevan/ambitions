@@ -1,0 +1,783 @@
+{
+  "schema_version": 1,
+  "production_baseline": false,
+  "screenshots": [
+    {
+      "id": "R13-F01-today-root-light",
+      "path": "screenshots/R13-F01-today-root-light.png",
+      "sha256": "272e64cd922851b670fd1a218a1040d7a011208b46bceb6e35af3d28ba357c9e",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F02-today-root-dark",
+      "path": "screenshots/R13-F02-today-root-dark.png",
+      "sha256": "8cd2ac9caae5110fd687427162800a9c8b037fe0b5114d77dbb000d6c20660b4",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F03-natural-scroll",
+      "path": "screenshots/R13-F03-natural-scroll.png",
+      "sha256": "f46782bfd5f4b2cbac40c19b097418f3b289291729ec02b68bf0799597d83a17",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F04-dock-expanded",
+      "path": "screenshots/R13-F04-dock-expanded.png",
+      "sha256": "b53698a9c41f0794885130d88c539425611c563f6851e9df71fcc7766c7f905b",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F05-adaptive-navigation",
+      "path": "screenshots/R13-F05-adaptive-navigation.png",
+      "sha256": "230eebaae5919f2ded820e4f5451e72b23b181e957bd06867db70d88fae7183b",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Accessibility Dynamic Type 5"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F06-focused-step",
+      "path": "screenshots/R13-F06-focused-step.png",
+      "sha256": "4c41be3aa70eef58dcd59819d570575ddb0f6a0f4a28ef62e4bd0439fd6a95cf",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F07-consequential-review",
+      "path": "screenshots/R13-F07-consequential-review.png",
+      "sha256": "7138e1aebe11f7f48c6e1b586c50c0a645d99b3e0fb47bb9d341f2780f2eab23",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F08-saving",
+      "path": "screenshots/R13-F08-saving.png",
+      "sha256": "c9c2c4d35c0ad17578463e6285855e4c243b7489e352d26019af56df404f6f4c",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F09-settlement",
+      "path": "screenshots/R13-F09-settlement.png",
+      "sha256": "96cdafb8b6a4eac330a4360f3311d208a812bcafb1c9dcc56e3f2a0970ee3cfc",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F10-returned-today",
+      "path": "screenshots/R13-F10-returned-today.png",
+      "sha256": "79196c774e7df4979cba0ea93b7ad6816cdfefdec3191f077f41dd3a568d8391",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F11-full-day",
+      "path": "screenshots/R13-F11-full-day.png",
+      "sha256": "5209cbd8faa1e2aa78da3dab8769a2cb4e238244b5dc927e6694579184623225",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F12-interrupted-step",
+      "path": "screenshots/R13-F12-interrupted-step.png",
+      "sha256": "c788ba0c43dc435d4369db28c2955d14a8a7c841ca86fb2e4ea2469b8a9fc155",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-F13-recovery-sheet",
+      "path": "screenshots/R13-F13-recovery-sheet.png",
+      "sha256": "e98ce34e9558d16ececeb50d3ee9a89fb22fee87332ec84e448ac725f789b235",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D01-goal-detail",
+      "path": "screenshots/R13-D01-goal-detail.png",
+      "sha256": "736f6d583be10329601b3142fd6fb6e79093011c17750e2f456c04c9585ec263",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D02-time-transfer",
+      "path": "screenshots/R13-D02-time-transfer.png",
+      "sha256": "534c9a49f53e178fc84802c89534e6a3a8bb83c4c699cece4cd2bb801f54b02d",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D03-consequence-details",
+      "path": "screenshots/R13-D03-consequence-details.png",
+      "sha256": "5015a1986d8a764863bda05a6cf600716a591c92d5957e8bf853e007236be060",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D04-local-history-entry",
+      "path": "screenshots/R13-D04-local-history-entry.png",
+      "sha256": "d66862ef81524d57bd326dead8506ab410eeab36eae4f9e40bc8cc9dfc778c3d",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D05-history-filters",
+      "path": "screenshots/R13-D05-history-filters.png",
+      "sha256": "8a809441ce25b9a5192193ad7bf892aaae8fedfc0b29730f2c68b86c7905d9b8",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D06-offline-mode",
+      "path": "screenshots/R13-D06-offline-mode.png",
+      "sha256": "94f2f4eb267189bbff976389e4bbe59e1968fac844819ae69459daf905e2b8b9",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D07-stale-context",
+      "path": "screenshots/R13-D07-stale-context.png",
+      "sha256": "46990cb0649c3aec1ed96b645a4c5a2fec486da855295dd5074881f3d75f3eb7",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D08-undo-available",
+      "path": "screenshots/R13-D08-undo-available.png",
+      "sha256": "ec28996e48fb733f42179fb09d7eb655a1576e3cd0f99525c7dbdc4b20aaae6f",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D09-failed-settlement",
+      "path": "screenshots/R13-D09-failed-settlement.png",
+      "sha256": "5031ca3bc092e94c1bfb1f3ba49a3aee91c91e71521c7ebc8dd3b369b80201b8",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-D11-cancelled-unchanged",
+      "path": "screenshots/R13-D11-cancelled-unchanged.png",
+      "sha256": "73e2392163f370553d7a1c8c8342df977ff0381c2d9d9160cf19781c2b2dd34e",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A01-accessibility-root",
+      "path": "screenshots/R13-A01-accessibility-root.png",
+      "sha256": "67b662c57b80629f735e29c6cf48f9e963389e3c82c7707cfcbd9c69db00f180",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Accessibility Dynamic Type 5"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A02-accessibility-review",
+      "path": "screenshots/R13-A02-accessibility-review.png",
+      "sha256": "7f2fa8a94ac18abdd98bec9c369bfc4a1f5c3ecd582d057bda55f4ac5132dcfd",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Accessibility Dynamic Type 5"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A03-increased-contrast",
+      "path": "screenshots/R13-A03-increased-contrast.png",
+      "sha256": "cebb42d6e3608e8e99bd51110ffb073e16a428ec012d4ffbf95537f6f8bb56ce",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Increased Contrast"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A04-differentiate-without-color",
+      "path": "screenshots/R13-A04-differentiate-without-color.png",
+      "sha256": "7f2fa8a94ac18abdd98bec9c369bfc4a1f5c3ecd582d057bda55f4ac5132dcfd",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Differentiate Without Color"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A05-reduce-transparency",
+      "path": "screenshots/R13-A05-reduce-transparency.png",
+      "sha256": "c3303aed17728dc0a0f24f11ed4276c3fdeb1c633eb393118ea71713a743b545",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Reduce Transparency"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-A06-reduce-motion",
+      "path": "screenshots/R13-A06-reduce-motion.png",
+      "sha256": "d66862ef81524d57bd326dead8506ab410eeab36eae4f9e40bc8cc9dfc778c3d",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "Reduce Motion"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-L01-long-root",
+      "path": "screenshots/R13-L01-long-root.png",
+      "sha256": "49aa4ec8b96fff43bf4aabfdb7455407a76b1e432cdebd0ff3ceb59facf3731d",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-L02-long-focused",
+      "path": "screenshots/R13-L02-long-focused.png",
+      "sha256": "874ace8a8e2b78fcdabb5f4dd2f29acf0120e8d531d1f27891c3f305b7e3dda4",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-Q01-quiet-day",
+      "path": "screenshots/R13-Q01-quiet-day.png",
+      "sha256": "8d191a251ad65301e19ce3bc4e6d0d116b09c996f42da459cf431323e08e4fef",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-N01-dense-day",
+      "path": "screenshots/R13-N01-dense-day.png",
+      "sha256": "491e0124b7f24915ffc3215eecfadeb061ae832dd7b24ad7999211c8e4ff7b3a",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-N02-very-dense-day",
+      "path": "screenshots/R13-N02-very-dense-day.png",
+      "sha256": "db5f631269da7a1fb0eb074bc5b415059334214898f5495f30b145b312c66489",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-DK01-low-brightness-dark",
+      "path": "screenshots/R13-DK01-low-brightness-dark.png",
+      "sha256": "192381e7a16ddf92fc13782b4af1eebe1e8cdaed096bb9fc511ab1abb89fe23d",
+      "width": 1206,
+      "height": 2622,
+      "device": {
+        "name": "iPhone 17 Pro",
+        "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "low-brightness visual inspection reference"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-CI01-compact-iphone",
+      "path": "screenshots/R13-CI01-compact-iphone.png",
+      "sha256": "9176b7eccd47d42e58c61ff7f14fcf176a7e468da95f98847cc947a7cf0e0ec8",
+      "width": 1170,
+      "height": 2532,
+      "device": {
+        "name": "iPhone 17e",
+        "udid": "0BA18BA4-EFB6-483E-8318-FF344741F8DE"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R13-PM01-pro-max",
+      "path": "screenshots/R13-PM01-pro-max.png",
+      "sha256": "5b5cf43509af7f70c5fb4299f121ff1109ff75988755852260dd2b99eccb6290",
+      "width": 1320,
+      "height": 2868,
+      "device": {
+        "name": "iPhone 17 Pro Max",
+        "udid": "E6B10AFA-E54B-45F3-B3C2-A864AB632090"
+      },
+      "os": "iOS 26.5",
+      "locale": "en-US",
+      "layout_direction": "left-to-right",
+      "accessibility_settings": [
+        "standard evaluation settings"
+      ],
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "branch_sha": "fa648ff1e1a5d9b07a9acab8645cd3b4ad82735a",
+      "evaluation_reference": true,
+      "production_baseline": false
+    }
+  ]
+}
