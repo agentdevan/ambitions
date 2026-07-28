@@ -89,7 +89,7 @@ final class TodayVitalityFullDayTests: XCTestCase {
         XCTAssertTrue(source.contains("accessibilityIdentifier(\"r13-full-day-title\")"))
         XCTAssertFalse(source.contains("isPastResolved"))
         XCTAssertFalse(source.contains("if isPastResolved(item) { return .settled }"))
-        XCTAssertFalse(source.contains(".todayFlagshipInlineNavigationTitle()"))
+        XCTAssertTrue(source.contains(".todayFlagshipInlineNavigationTitle()"))
 
         for prohibited in [
             "DatePicker", "Grid {", ".onMove", "Open in Time",
@@ -98,6 +98,16 @@ final class TodayVitalityFullDayTests: XCTestCase {
         ] {
             XCTAssertFalse(source.contains(prohibited), "Prohibited Full Day source: \(prohibited)")
         }
+    }
+
+    func testR14FullDayOnlyOffersScrollToNowWhenNowIsOffscreen() throws {
+        let source = try foundrySource(named: "TodayVitalityFullDayView.swift")
+
+        XCTAssertTrue(source.contains("@State private var isNowVisible"))
+        XCTAssertTrue(source.contains("if isNowVisible == false"))
+        XCTAssertTrue(source.contains("onScrollVisibilityChange"))
+        XCTAssertTrue(source.contains("navigationTitle(\"\")"))
+        XCTAssertTrue(source.contains("safeAreaPadding(.bottom"))
     }
 
     private func foundrySource(named filename: String) throws -> String {

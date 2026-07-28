@@ -45,6 +45,7 @@ struct TodayVitalityFullDayView: View {
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AccessibilityFocusState private var focusedObjectID: String?
+    @State private var isNowVisible = true
 
     let content: TodayFlagshipCalibrationContent
     @Binding var state: TodayFlagshipJourneyState
@@ -66,6 +67,10 @@ struct TodayVitalityFullDayView: View {
                             $focusedObjectID,
                             equals: item.canonicalObjectID
                         )
+                        .onScrollVisibilityChange(threshold: 0.6) { isVisible in
+                            guard isNow(item) else { return }
+                            isNowVisible = isVisible
+                        }
                     }
 
                     Spacer(minLength: 0)
@@ -93,12 +98,16 @@ struct TodayVitalityFullDayView: View {
                 .containerRelativeFrame(.vertical, alignment: .top)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 12)
+                .safeAreaPadding(.bottom, isNowVisible ? 24 : 128)
             }
             .background(palette.canvas)
             .safeAreaInset(edge: .bottom, spacing: 0) {
-                bottomChrome(proxy: proxy)
+                if isNowVisible == false {
+                    bottomChrome(proxy: proxy)
+                }
             }
             .navigationTitle("")
+            .todayFlagshipInlineNavigationTitle()
             .onAppear {
                 focusNow(proxy: proxy, shouldScroll: false)
             }
@@ -219,6 +228,7 @@ struct TodayVitalityFullDayView: View {
 
                 Button {
                     focusNow(proxy: proxy, shouldScroll: true)
+                    isNowVisible = true
                 } label: {
                     Text(content.interfaceCopy.scrollToNowTitle)
                         .frame(maxWidth: .infinity)

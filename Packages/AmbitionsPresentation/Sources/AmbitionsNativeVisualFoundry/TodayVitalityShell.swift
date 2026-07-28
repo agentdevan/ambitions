@@ -52,23 +52,31 @@ struct TodayVitalityRootCrown: View {
 struct TodayVitalityDockPeekLabel: View {
     let copy: TodayFlagshipInterfaceCopy
     let palette: TodayFlagshipPalette
+    let isScrolling: Bool
 
     var body: some View {
         ZStack {
-            TodayVitalityDockMaterial(
-                palette: palette,
-                isInteractive: true,
-                shape: edgeShape
-            )
+            HStack(spacing: 0) {
+                Spacer(minLength: 0)
+                TodayVitalityDockMaterial(
+                    palette: palette,
+                    isInteractive: true,
+                    shape: edgeShape
+                )
+                .frame(width: isScrolling ? 30 : 44, height: isScrolling ? 44 : 56)
+                .accessibilityIdentifier("r14-dock-peek-visible-seam")
+            }
 
             VStack(spacing: 3) {
                 Image(systemName: TodayFlagshipNavigationCommand.today.symbolName)
                     .font(.caption.weight(.semibold))
 
-                Text(copy.navigationTitle(for: .today))
-                    .font(.caption2.weight(.semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                if isScrolling == false {
+                    Text(copy.navigationTitle(for: .today))
+                        .font(.caption2.weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
             }
             .foregroundStyle(palette.primaryInk)
             .accessibilityHidden(true)

@@ -9,7 +9,7 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
     let onCommand: (TodayFlagshipNavigationCommand) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        LazyVStack(alignment: .leading, spacing: 18) {
             navigationGroup(
                 title: copy.rootsGroupTitle,
                 commands: rootCommands,
@@ -29,10 +29,17 @@ struct TodayFlagshipAdaptiveNavigationPassage: View {
                 identifier: "tfcs-adaptive-global-actions-group"
             )
         }
-        .padding(14)
+        .padding(.vertical, 14)
+        .padding(.leading, 16)
+        .padding(.trailing, 8)
         .background {
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(palette.opaqueChrome)
+            palette.opaqueChrome.opacity(0.46)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(palette.selectedChrome)
+                .frame(width: 3)
+                .accessibilityHidden(true)
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-adaptive-navigation-passage")
@@ -162,6 +169,7 @@ struct TodayFlagshipDock: View {
     let copy: TodayFlagshipInterfaceCopy
     let commands: [TodayFlagshipNavigationCommand]
     @Binding var isExpanded: Bool
+    let isScrolling: Bool
     let palette: TodayFlagshipPalette
     let onCommand: (TodayFlagshipNavigationCommand) -> Void
 
@@ -182,7 +190,11 @@ struct TodayFlagshipDock: View {
         Button {
             isExpanded = true
         } label: {
-            TodayVitalityDockPeekLabel(copy: copy, palette: palette)
+            TodayVitalityDockPeekLabel(
+                copy: copy,
+                palette: palette,
+                isScrolling: isScrolling
+            )
         }
         .buttonStyle(TodayFlagshipDockPeekButtonStyle())
         .accessibilityLabel(peekAccessibilityLabel)
@@ -216,13 +228,14 @@ struct TodayFlagshipDock: View {
             .scrollBounceBehavior(.basedOnSize)
             .accessibilityIdentifier("tfcs-dock-compact-scroll")
         }
-        .frame(width: 300)
+        .frame(width: 276)
         .background {
             TodayVitalityDockMaterial(
                 palette: palette,
                 isInteractive: true,
                 shape: expandedEdgeShape
             )
+            .accessibilityIdentifier("r14-dock-edge-origin")
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tfcs-dock-expanded")
@@ -254,6 +267,7 @@ struct TodayFlagshipDock: View {
                 .fill(palette.divider)
                 .frame(height: 1)
                 .accessibilityHidden(true)
+                .accessibilityIdentifier("r14-dock-group-divider")
 
             dockGroup(
                 label: copy.globalActionsGroupTitle,

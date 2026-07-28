@@ -45,6 +45,25 @@ final class TodayVitalityShellTests: XCTestCase {
         XCTAssertFalse(shellSource.contains("Capsule(style: .continuous)"))
     }
 
+    func testR14PeekSeparatesVisibleGeometryFromScrollIndicatorDuringScrolling() throws {
+        let shellSource = try foundrySource(named: "TodayVitalityShell.swift")
+        let rootSource = try foundrySource(named: "TodayVitalityRootView.swift")
+        let wrapperSource = try foundrySource(named: "TodayFlagshipCalibrationView.swift")
+
+        XCTAssertTrue(shellSource.contains("let isScrolling: Bool"))
+        XCTAssertTrue(shellSource.contains("r14-dock-peek-visible-seam"))
+        XCTAssertTrue(rootSource.contains("onScrollActivityChange"))
+        XCTAssertTrue(wrapperSource.contains("isRootScrolling"))
+    }
+
+    func testR14ExpandedDockKeepsEdgeOriginAndSemanticGroupDivider() throws {
+        let source = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+
+        XCTAssertTrue(source.contains("r14-dock-edge-origin"))
+        XCTAssertTrue(source.contains("r14-dock-group-divider"))
+        XCTAssertTrue(source.contains("TodayVitalityDockMaterial"))
+    }
+
     func testExpandedDockHasCompactHeightScrollEscapeAndOpaqueFallback() throws {
         let chromeSource = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
         let shellSource = try foundrySource(named: "TodayVitalityShell.swift")

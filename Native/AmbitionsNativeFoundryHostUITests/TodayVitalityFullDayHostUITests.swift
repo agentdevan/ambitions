@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class TodayVitalityFullDayHostUITests: XCTestCase {
     private var app: XCUIApplication!
 
@@ -9,7 +10,7 @@ final class TodayVitalityFullDayHostUITests: XCTestCase {
         app = XCUIApplication()
     }
 
-    func testR13FullDayShowsOrderedReadOnlyFieldAndScrollToNow() {
+    func testR14FullDayShowsOrderedReadOnlyFieldAndOmitsScrollToNowAtNow() {
         launch("r13-full-day-typical")
 
         let timeline = element("tfcs-full-day-timeline")
@@ -18,22 +19,19 @@ final class TodayVitalityFullDayHostUITests: XCTestCase {
         let launch = element("tfcs-full-day-row-step.send-launch-brief")
         let scrollToNow = element("tfcs-scroll-to-now")
 
-        assertExists([timeline, deepWork, nursery, launch, scrollToNow])
+        assertExists([timeline, deepWork, nursery, launch])
         XCTAssertTrue(deepWork.label.contains("9:00 AM"))
         XCTAssertTrue(nursery.label.contains("Now · 10:30 AM"))
         XCTAssertTrue(launch.label.contains("2:00 PM"))
         XCTAssertLessThan(deepWork.frame.minY, nursery.frame.minY)
         XCTAssertLessThan(nursery.frame.minY, launch.frame.minY)
         assertMinimumTarget(nursery)
-        assertMinimumTarget(scrollToNow)
         XCTAssertTrue(nursery.isHittable)
-        XCTAssertTrue(scrollToNow.isHittable)
+        XCTAssertFalse(scrollToNow.exists)
+        XCTAssertTrue(app.navigationBars.buttons.firstMatch.exists)
         XCTAssertFalse(app.buttons["Open in Time"].exists)
         XCTAssertFalse(element("tfcs-dock-shell-peek").exists)
 
-        app.swipeUp()
-        scrollToNow.tap()
-        XCTAssertTrue(nursery.waitForExistence(timeout: 3))
     }
 
     func testR13FullDayInspectsInitialStepWithoutMutationAndNativeBackRestoresDepth() {
@@ -59,7 +57,8 @@ final class TodayVitalityFullDayHostUITests: XCTestCase {
 
         let launch = element("tfcs-full-day-now-step.send-launch-brief")
         let settled = element("tfcs-full-day-settled-step.nursery-ready-for-crib")
-        assertExists([launch, settled, element("tfcs-scroll-to-now")])
+        assertExists([launch, settled])
+        XCTAssertFalse(element("tfcs-scroll-to-now").exists)
         XCTAssertEqual(
             app.descendants(matching: .any)
                 .matching(identifier: "tfcs-full-day-now-step.send-launch-brief").count,

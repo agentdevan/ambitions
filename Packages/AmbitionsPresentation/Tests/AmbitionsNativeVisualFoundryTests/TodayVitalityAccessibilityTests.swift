@@ -81,6 +81,14 @@ final class TodayVitalityAccessibilityTests: XCTestCase {
         XCTAssertTrue(wrapper.contains("TodayVitalityRootCrown("))
     }
 
+    func testR14AdaptivePassageUsesAuthoredRootAndGlobalActionGroups() throws {
+        let source = try foundrySource(named: "TodayFlagshipNavigationChrome.swift")
+
+        XCTAssertTrue(source.contains("tfcs-adaptive-roots-group"))
+        XCTAssertTrue(source.contains("tfcs-adaptive-global-actions-group"))
+        XCTAssertTrue(source.contains("LazyVStack"))
+    }
+
     private func foundrySource(named filename: String) throws -> String {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
