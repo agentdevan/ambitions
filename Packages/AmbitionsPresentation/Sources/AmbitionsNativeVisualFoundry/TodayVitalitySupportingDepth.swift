@@ -27,16 +27,11 @@ struct TodayVitalityGoalDetailView: View {
     var body: some View {
         TodayVitalitySupportingContainer(title: "Goal", onDismiss: onDismiss) {
             VStack(alignment: .leading, spacing: 24) {
-                VStack(alignment: .leading, spacing: 9) {
-                    Text("Pursuit")
-                        .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                    Text(content.supporting.goal.title)
-                        .font(TodayVitalityTypographyRole.objectIdentity.font)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilityIdentifier("r13-goal-detail-identity")
-                }
+                TodayVitalitySupportingIdentity(
+                    eyebrow: "Pursuit",
+                    title: content.supporting.goal.title,
+                    identifier: "r13-goal-detail-identity"
+                )
 
                 TodayVitalitySupportingSection(
                     title: "Why it matters",
@@ -78,10 +73,11 @@ struct TodayVitalityConsequenceDetailsView: View {
     var body: some View {
         TodayVitalitySupportingContainer(title: "Details", onDismiss: onDismiss) {
             VStack(alignment: .leading, spacing: 22) {
-                Text(content.primaryStep.title)
-                    .font(TodayVitalityTypographyRole.objectIdentity.font)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityAddTraits(.isHeader)
+                TodayVitalitySupportingIdentity(
+                    eyebrow: "Step",
+                    title: content.primaryStep.title,
+                    identifier: "r14-consequence-step-identity"
+                )
 
                 TodayVitalitySupportingSection(
                     title: "What changes",
@@ -131,16 +127,11 @@ struct TodayVitalityHistoryEntryView: View {
         NavigationStack(path: $path) {
             TodayVitalitySupportingScroll {
                 VStack(alignment: .leading, spacing: 24) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Local history")
-                            .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                        Text(content.supporting.history.recordedTruth)
-                            .font(TodayVitalityTypographyRole.objectIdentity.font)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityAddTraits(.isHeader)
-                            .accessibilityIdentifier("r13-history-entry-truth")
-                    }
+                    TodayVitalitySupportingIdentity(
+                        eyebrow: "Local history",
+                        title: content.supporting.history.recordedTruth,
+                        identifier: "r13-history-entry-truth"
+                    )
 
                     Label(historyTimestamp, systemImage: "clock")
                         .font(TodayVitalityTypographyRole.relationship.font.monospacedDigit())
@@ -196,39 +187,60 @@ struct TodayVitalityHistoryEntryView: View {
 }
 
 struct TodayVitalityHistoryFiltersView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
     let content: TodayFlagshipCalibrationContent
     @Binding var selection: TodayVitalityHistoryFilter
 
     var body: some View {
-        List(TodayVitalityHistoryFilter.allCases) { filter in
-            Button {
-                selection = filter
-            } label: {
-                HStack(spacing: 12) {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(filter.visibleTitle)
-                        if let context = context(for: filter) {
-                            Text(context)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+        TodayVitalitySupportingScroll {
+            LazyVStack(alignment: .leading, spacing: 0) {
+                ForEach(TodayVitalityHistoryFilter.allCases) { filter in
+                    Button {
+                        selection = filter
+                    } label: {
+                        HStack(alignment: .top, spacing: 10) {
+                            TodayVitalityNode(
+                                kind: selection == filter ? .current : .open,
+                                palette: palette
+                            )
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(filter.visibleTitle)
+                                if let context = context(for: filter) {
+                                    Text(context)
+                                        .font(.subheadline)
+                                        .foregroundStyle(palette.labelSecondary)
+                                }
+                            }
+                            Spacer()
+                            if selection == filter {
+                                Image(systemName: "checkmark")
+                                    .accessibilityHidden(true)
+                            }
                         }
+                        .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+                        .padding(.vertical, 8)
+                        .contentShape(Rectangle())
                     }
-                    Spacer()
-                    if selection == filter {
-                        Image(systemName: "checkmark")
-                            .accessibilityHidden(true)
-                    }
+                    .buttonStyle(.plain)
+                    .accessibilityValue(selection == filter ? "Selected" : "")
+                    .accessibilityIdentifier("r13-history-filter-\(filter.rawValue)")
                 }
-                .frame(minHeight: 44)
-                .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
-            .accessibilityValue(selection == filter ? "Selected" : "")
-            .accessibilityIdentifier("r13-history-filter-\(filter.rawValue)")
         }
         .navigationTitle("Filters")
         .todayFlagshipInlineNavigationTitle()
         .accessibilityIdentifier("r13-history-filters")
+    }
+
+    private var palette: TodayVitalityPalette {
+        TodayVitalityPalette(
+            colorScheme: colorScheme,
+            contrast: colorSchemeContrast,
+            differentiateWithoutColor: false,
+            reduceTransparency: false
+        )
     }
 
     private func context(for filter: TodayVitalityHistoryFilter) -> String? {
@@ -256,10 +268,11 @@ public struct TodayFlagshipTimeTransferEvaluationView: View {
         NavigationStack {
             TodayVitalitySupportingScroll {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text(content.supporting.timeTransfer.title)
-                        .font(TodayVitalityTypographyRole.objectIdentity.font)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityAddTraits(.isHeader)
+                    TodayVitalitySupportingIdentity(
+                        eyebrow: "Time",
+                        title: content.supporting.timeTransfer.title,
+                        identifier: "r14-time-transfer-identity"
+                    )
 
                     Text(content.supporting.timeTransfer.body)
                         .font(TodayVitalityTypographyRole.stateTruth.font)
@@ -323,6 +336,9 @@ private struct TodayVitalitySupportingContainer<Content: View>: View {
 
 private struct TodayVitalitySupportingScroll<Content: View>: View {
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @ViewBuilder let content: Content
 
     var body: some View {
@@ -332,14 +348,24 @@ private struct TodayVitalitySupportingScroll<Content: View>: View {
                 .padding(.horizontal, 24)
                 .padding(.vertical, 24)
         }
-        .background(
-            Color(white: colorScheme == .dark ? 0.035 : 0.965)
-                .ignoresSafeArea()
+        .background(palette.canvas.ignoresSafeArea())
+        .foregroundStyle(palette.labelPrimary)
+        .accessibilityIdentifier("r14-supporting-open-plane")
+    }
+
+    private var palette: TodayVitalityPalette {
+        TodayVitalityPalette(
+            colorScheme: colorScheme,
+            contrast: colorSchemeContrast,
+            differentiateWithoutColor: differentiateWithoutColor,
+            reduceTransparency: reduceTransparency
         )
     }
 }
 
 private struct TodayVitalitySupportingSection: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     let title: String
     let text: String
     let identifier: String
@@ -351,15 +377,64 @@ private struct TodayVitalitySupportingSection: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Text(title)
-                .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
-                .foregroundStyle(.secondary)
-            Text(text)
-                .font(TodayVitalityTypographyRole.relationship.font)
-                .fixedSize(horizontal: false, vertical: true)
+        HStack(alignment: .top, spacing: 10) {
+            TodayVitalityNode(kind: .current, palette: palette)
+            VStack(alignment: .leading, spacing: 7) {
+                Text(title)
+                    .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.labelSecondary)
+                Text(text)
+                    .font(TodayVitalityTypographyRole.relationship.font)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.top, 7)
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier(identifier)
+    }
+
+    private var palette: TodayVitalityPalette {
+        TodayVitalityPalette(
+            colorScheme: colorScheme,
+            contrast: colorSchemeContrast,
+            differentiateWithoutColor: false,
+            reduceTransparency: false
+        )
+    }
+}
+
+private struct TodayVitalitySupportingIdentity: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    let eyebrow: String
+    let title: String
+    let identifier: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            TodayVitalityNode(kind: .current, palette: palette)
+            VStack(alignment: .leading, spacing: 8) {
+                Text(eyebrow)
+                    .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
+                    .foregroundStyle(palette.ambitionsAccentMuted)
+                Text(title)
+                    .font(TodayVitalityTypographyRole.objectIdentity.font)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+            }
+            .padding(.top, 7)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier(identifier)
+    }
+
+    private var palette: TodayVitalityPalette {
+        TodayVitalityPalette(
+            colorScheme: colorScheme,
+            contrast: colorSchemeContrast,
+            differentiateWithoutColor: false,
+            reduceTransparency: false
+        )
     }
 }

@@ -88,6 +88,15 @@ final class TodayVitalitySupportingDepthTests: XCTestCase {
         XCTAssertTrue(content.supporting.history.isLocalOnly)
     }
 
+    func testR14SupportingDepthUsesOpenPlaneIdentityAndVitalityRows() throws {
+        let source = try String(contentsOf: supportingDepthSourceURL, encoding: .utf8)
+
+        XCTAssertTrue(source.contains("TodayVitalitySupportingIdentity"))
+        XCTAssertTrue(source.contains("r14-supporting-open-plane"))
+        XCTAssertTrue(source.contains("TodayVitalityNode("))
+        XCTAssertFalse(source.contains("Form {"))
+    }
+
     private var supportingDepthSourceURL: URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

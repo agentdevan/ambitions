@@ -91,8 +91,9 @@ final class TodayVitalityRecoveryTests: XCTestCase {
 
         XCTAssertTrue(source.contains("TodayVitalityRailNode("))
         XCTAssertTrue(source.contains("kind: .interrupted"))
-        XCTAssertTrue(source.contains("TodayVitalityOpenRelief("))
-        XCTAssertTrue(source.contains("truthKind: .interrupted"))
+        XCTAssertFalse(source.contains("TodayVitalityOpenRelief("))
+        XCTAssertTrue(source.contains("r14-recovery-open-progress"))
+        XCTAssertFalse(source.contains("truthKind: .interrupted"))
         XCTAssertTrue(source.contains("TodayVitalityActionStyle"))
         XCTAssertTrue(source.contains("role: .continuation"))
         XCTAssertTrue(source.contains("role: .secondary"))

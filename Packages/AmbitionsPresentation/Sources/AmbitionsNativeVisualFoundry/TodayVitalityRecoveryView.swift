@@ -120,7 +120,7 @@ struct TodayVitalityInterruptedStepView: View {
     }
 
     private var savedProgressField: some View {
-        TodayVitalityOpenRelief(palette: palette, truthKind: .interrupted) {
+        TodayVitalityRecoveryOpenProgress(palette: palette) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(content.interfaceCopy.lastSavedProgressTitle)
                     .font(TodayVitalityTypographyRole.metadata.font.weight(.semibold))
@@ -293,7 +293,7 @@ struct TodayVitalityRecoverySheetView: View {
     }
 
     private var savedProgress: some View {
-        TodayVitalityOpenRelief(palette: palette, truthKind: .interrupted) {
+        TodayVitalityRecoveryOpenProgress(palette: palette) {
             HStack(alignment: .top, spacing: 8) {
                 TodayVitalityNode(kind: .interrupted, palette: palette)
 
@@ -399,7 +399,7 @@ struct TodayVitalityRecoveredProgressField: View {
     let palette: TodayVitalityPalette
 
     var body: some View {
-        TodayVitalityOpenRelief(palette: palette, truthKind: .interrupted) {
+        TodayVitalityRecoveryOpenProgress(palette: palette) {
             HStack(alignment: .top, spacing: 8) {
                 TodayVitalityNode(kind: .interrupted, palette: palette)
 
@@ -420,5 +420,29 @@ struct TodayVitalityRecoveredProgressField: View {
         .accessibilityLabel(title)
         .accessibilityValue(progress)
         .accessibilityIdentifier("tfcs-recovered-progress")
+    }
+}
+
+private struct TodayVitalityRecoveryOpenProgress<Content: View>: View {
+    let palette: TodayVitalityPalette
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        HStack(spacing: 0) {
+            Rectangle()
+                .fill(palette.interruptedState)
+                .frame(width: palette.separatorStrokeWidth)
+                .padding(.vertical, 8)
+
+            content
+                .padding(.leading, 16)
+        }
+        .padding(.vertical, 8)
+        .overlay(alignment: .bottomLeading) {
+            Rectangle()
+                .fill(palette.separator)
+                .frame(maxWidth: 132, maxHeight: palette.separatorStrokeWidth)
+        }
+        .accessibilityIdentifier("r14-recovery-open-progress")
     }
 }
