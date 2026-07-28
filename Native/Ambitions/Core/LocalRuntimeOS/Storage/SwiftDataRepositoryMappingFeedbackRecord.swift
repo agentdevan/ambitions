@@ -245,7 +245,7 @@ extension RepositoryMapping {
         CommandExecutionRecord(
             id: record.id,
             commandID: record.command.id,
-            commandKindRaw: record.command.kind.rawValue,
+            commandKindRaw: record.command.operation.rawValue,
             commandSourceRaw: record.command.source.rawValue,
             actorRaw: record.command.actor.rawValue,
             executionStatusRaw: record.command.executionStatus.rawValue,
@@ -255,7 +255,7 @@ extension RepositoryMapping {
             schemaVersion: record.schemaVersion,
             localOnly: record.localOnly,
             privacyRaw: record.privacy.rawValue,
-            commandData: try PersistenceCoding.encode(record.command),
+            commandData: try RuntimeCommandCodec().encode(record.command),
             resultData: try PersistenceCoding.encode(record.result)
         )
     }
@@ -263,7 +263,7 @@ extension RepositoryMapping {
 
     static func apply(_ record: AmbitionsCommandExecutionRecord, to persisted: CommandExecutionRecord) throws {
         persisted.commandID = record.command.id
-        persisted.commandKindRaw = record.command.kind.rawValue
+        persisted.commandKindRaw = record.command.operation.rawValue
         persisted.commandSourceRaw = record.command.source.rawValue
         persisted.actorRaw = record.command.actor.rawValue
         persisted.executionStatusRaw = record.command.executionStatus.rawValue
@@ -273,39 +273,34 @@ extension RepositoryMapping {
         persisted.schemaVersion = record.schemaVersion
         persisted.localOnly = record.localOnly
         persisted.privacyRaw = record.privacy.rawValue
-        persisted.commandData = try PersistenceCoding.encode(record.command)
+        persisted.commandData = try RuntimeCommandCodec().encode(record.command)
         persisted.resultData = try PersistenceCoding.encode(record.result)
     }
 
 
-    static func commandExecutionRecord(from record: CommandExecutionRecord) throws -> AmbitionsCommandExecutionRecord {
-        let command = try? PersistenceCoding.decode(AmbitionsCommand.self, from: record.commandData)
-        let result = try? PersistenceCoding.decode(AmbitionsCommandExecutionResult.self, from: record.resultData)
-
-        let fallbackCommand = AmbitionsCommand(
-            id: record.commandID,
-            kind: persisted(AmbitionsCommandKind.self, rawValue: record.commandKindRaw, fallback: .openDestination, storedTypeName: "CommandExecutionRecord", fieldName: "commandKindRaw"),
-            source: persisted(AmbitionsCommandSource.self, rawValue: record.commandSourceRaw, fallback: .system, storedTypeName: "CommandExecutionRecord", fieldName: "commandSourceRaw"),
-            executionStatus: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.executionStatusRaw, fallback: .blocked, storedTypeName: "CommandExecutionRecord", fieldName: "executionStatusRaw"),
-            createdAt: record.recordedAt,
-            actor: persisted(AmbitionsCommandActor.self, rawValue: record.actorRaw, fallback: .user, storedTypeName: "CommandExecutionRecord", fieldName: "actorRaw"),
-            localOnly: record.localOnly,
-            privacy: persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "CommandExecutionRecord", fieldName: "privacyRaw"),
-            schemaVersion: ambitionsCommandSchemaVersion
-        )
-        let fallbackResult = AmbitionsCommandExecutionResult(
-            status: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.resultStatusRaw, fallback: .failed, storedTypeName: "CommandExecutionRecord", fieldName: "resultStatusRaw"),
-            summary: "Recovered from durable command execution record."
-        )
-
-        return AmbitionsCommandExecutionRecord(
-            command: command ?? fallbackCommand,
-            result: result ?? fallbackResult,
-            recordedAt: record.recordedAt,
-            localOnly: record.localOnly,
-            privacy: persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "CommandExecutionRecord", fieldName: "privacyRaw"),
-            schemaVersion: record.schemaVersion
-        )
+    static func commandExecutionRecord(from record: CommandExecutionRecord) -> StoredCommandExecutionRecord {
+        let privacy = persisted(EventLedgerPrivacyClassification.self, rawValue: record.privacyRaw, fallback: .standard, storedTypeName: "CommandExecutionRecord", fieldName: "privacyRaw")
+        switch RuntimeCommandCodec().decode(record.commandData) {
+        case let .supported(command, _):
+            guard let result = try? PersistenceCoding.decode(AmbitionsCommandExecutionResult.self, from: record.resultData) else {
+                return .quarantined(QuarantinedCommandExecutionRecord(
+                    id: record.id, commandID: record.commandID, commandBytes: record.commandData,
+                    resultBytes: record.resultData, recordedAt: record.recordedAt,
+                    schemaVersion: record.schemaVersion, localOnly: record.localOnly, privacy: privacy,
+                    issue: RuntimeUnsupportedCommand(originalBytes: record.resultData, reason: .corrupt, recovery: .corruption)
+                ))
+            }
+            return .supported(AmbitionsCommandExecutionRecord(
+                command: command, result: result, recordedAt: record.recordedAt,
+                localOnly: record.localOnly, privacy: privacy, schemaVersion: record.schemaVersion
+            ))
+        case let .unsupported(issue), let .corrupt(issue):
+            return .quarantined(QuarantinedCommandExecutionRecord(
+                id: record.id, commandID: record.commandID, commandBytes: record.commandData,
+                resultBytes: record.resultData, recordedAt: record.recordedAt,
+                schemaVersion: record.schemaVersion, localOnly: record.localOnly, privacy: privacy, issue: issue
+            ))
+        }
     }
 
 

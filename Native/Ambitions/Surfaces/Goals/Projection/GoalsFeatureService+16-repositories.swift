@@ -108,6 +108,13 @@ extension RepositoryBackedGoalsService {
 
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
         let prepared = try await prepareGoalCreation(request, now: now)
+        return try await commitPreparedGoalCreation(prepared, now: now)
+    }
+
+    func commitPreparedGoalCreation(
+        _ prepared: PreparedGoalCreation,
+        now: Date
+    ) async throws -> CreateGoalResponse {
         let receipt = try await saveGoalCreation(goal: prepared.goal, draft: prepared.draft, now: now)
         return CreateGoalResponse(
             target: prepared.response.target,

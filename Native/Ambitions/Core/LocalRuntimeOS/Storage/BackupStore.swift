@@ -41,10 +41,14 @@ actor BackupStore {
         self.rootDirectory = rootDirectory
     }
 
-    static func defaultLiveStore() -> BackupStore {
+    static func defaultLiveStore() -> BackupStore? {
         let fileManager = FileManager.default
-        let supportDirectory = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
-            ?? URL(fileURLWithPath: "/tmp", isDirectory: true)
+        guard let supportDirectory = fileManager.urls(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask
+        ).first else {
+            return nil
+        }
         return BackupStore(
             rootDirectory: supportDirectory
                 .appendingPathComponent("AmbitionsLocalRuntimeOS", isDirectory: true)
@@ -69,9 +73,14 @@ actor BackupStore {
         guard let encrypted = sealedBox.combined else {
             throw LocalRuntimeStorageError.emptyPayload(id: cleanID)
         }
-        let encryptedURL = rootDirectory.appendingPathComponent("\(cleanID).backup.bin", isDirectory: false)
+        // The package is immutable once written.  The record is the activation
+        // pointer, so replacing it can never make an existing record point at
+        // replacement ciphertext that has not already been verified.
+        let encryptedURL = rootDirectory.appendingPathComponent(
+            "\(cleanID).backup.\(LocalRuntimeStorageChecksum.sha256Hex(for: encrypted)).bin",
+            isDirectory: false
+        )
         let recordURL = rootDirectory.appendingPathComponent("\(cleanID).backup.json", isDirectory: false)
-        try encrypted.write(to: encryptedURL, options: [.atomic])
         let record = BackupStoreRecord(
             id: cleanID,
             kind: kind,
@@ -83,7 +92,19 @@ actor BackupStore {
             relativePackagePath: encryptedURL.lastPathComponent,
             schemaVersion: backupStoreSchemaVersion
         )
+        try encrypted.write(to: encryptedURL, options: [.atomic])
+        try applyPrivateBackupFileProtection(to: encryptedURL)
+        try verify(encryptedData: encrypted, record: record, key: key)
+
+        // This is the single authority activation.  A crash before this atomic
+        // replacement leaves the earlier record usable; a crash after it leaves
+        // a record that references a complete, pre-verified immutable package.
         try LocalRuntimeStorageCoding.encode(record).write(to: recordURL, options: [.atomic])
+        try applyPrivateBackupFileProtection(to: recordURL)
+        let verified = try await decryptPackage(id: cleanID, key: key)
+        guard verified == plaintext else {
+            throw LocalRuntimeStorageError.checksumMismatch(id: cleanID)
+        }
         return record
     }
 
@@ -138,6 +159,18 @@ actor BackupStore {
 private extension BackupStore {
     func ensureRoot() throws {
         try fileManager.createDirectory(at: rootDirectory, withIntermediateDirectories: true)
+        try applyPrivateBackupFileProtection(to: rootDirectory)
+    }
+
+    func applyPrivateBackupFileProtection(to url: URL) throws {
+        #if os(iOS)
+        try fileManager.setAttributes(
+            [.protectionKey: FileProtectionType.complete],
+            ofItemAtPath: url.path
+        )
+        #else
+        _ = url
+        #endif
     }
 
     func packageURL(for record: BackupStoreRecord) throws -> URL {
@@ -147,6 +180,21 @@ private extension BackupStore {
             throw LocalRuntimeStorageError.pathEscape(id: record.id)
         }
         return rootDirectory.appendingPathComponent(record.relativePackagePath, isDirectory: false)
+    }
+
+    func verify(
+        encryptedData: Data,
+        record: BackupStoreRecord,
+        key: SymmetricKey
+    ) throws {
+        guard LocalRuntimeStorageChecksum.sha256Hex(for: encryptedData) == record.encryptedSHA256 else {
+            throw LocalRuntimeStorageError.checksumMismatch(id: record.id)
+        }
+        let sealedBox = try AES.GCM.SealedBox(combined: encryptedData)
+        let plaintext = try AES.GCM.open(sealedBox, using: key)
+        guard LocalRuntimeStorageChecksum.sha256Hex(for: plaintext) == record.plaintextSHA256 else {
+            throw LocalRuntimeStorageError.checksumMismatch(id: record.id)
+        }
     }
 
     func validatedIdentifier(_ id: String) throws -> String {

@@ -242,8 +242,12 @@ struct ProtectedStepPlacementPolicy: Sendable {
         command: AmbitionsCommand,
         context: CommandExecutionContext
     ) -> ProtectedStepPlacementDecision? {
-        guard command.kind.proposesScheduledStepPlacement,
-              let stepID = command.protectedPlacementStepID,
+        guard case let .schedule(schedule) = command.typedPayload else { return nil }
+        switch schedule.action {
+        case .schedule, .placeStep, .calendarWrite: break
+        case .createItem, .protectWindow, .correctWindow, .undo, .ritual: return nil
+        }
+        guard let stepID = command.protectedPlacementStepID,
               let proposedPlacement = command.protectedPlacementWindow(
                 startKeys: ["proposedStartAt", "startAt", "start", "windowStart", "destinationStartAt"],
                 endKeys: ["proposedEndAt", "endAt", "end", "windowEnd", "destinationEndAt"],
@@ -351,32 +355,13 @@ struct ProtectedStepPlacementPolicy: Sendable {
     }
 }
 
-private extension AmbitionsCommandKind {
-    var proposesScheduledStepPlacement: Bool {
-        switch self {
-        case .placeStepInTime, .scheduleItem, .delayAction, .recoverAction:
-            return true
-        default:
-            return false
-        }
-    }
-}
-
 private extension AmbitionsCommand {
     var protectedPlacementStepID: String? {
-        target.stepID
-            ?? payload.metadata["stepID"]
-            ?? payload.metadata["destinationStepID"]
-            ?? payload.metadata["originalStepID"]
+        target.stepID ?? calendarWriteCommandIntent?.destinationStepID?.rawValue
     }
 
     var protectedPlacementTrigger: ProtectedStepPlacementTrigger {
-        if payload.metadata["missedRecoveryMoveIt"] == "true" ||
-            payload.metadata["recoveryAction"] == "move_it" {
-            return .missedRecoveryMoveIt
-        }
-        if let raw = payload.metadata["placementTrigger"],
-           let trigger = ProtectedStepPlacementTrigger(rawValue: raw) {
+        if let trigger = timePlacementCommandIntent?.trigger ?? calendarWriteCommandIntent?.placement?.trigger {
             return trigger
         }
         if actor == .system || source == .system {
@@ -389,14 +374,8 @@ private extension AmbitionsCommand {
     }
 
     var hasExplicitProtectedPlacementApproval: Bool {
-        if let explicitUserApproval = payload.metadata["explicitUserApproval"]?.lowercased() {
-            return ["true", "confirmed", "approved"].contains(explicitUserApproval)
-        }
-        if let userConfirmed = payload.metadata["userConfirmed"]?.lowercased() {
-            return ["true", "confirmed", "approved"].contains(userConfirmed)
-        }
-        if let approvalState = payload.metadata["approvalState"]?.lowercased() {
-            return ["confirmed", "approved"].contains(approvalState)
+        if let explicit = timePlacementCommandIntent?.explicitUserApproval ?? calendarWriteCommandIntent?.placement?.explicitUserApproval {
+            return explicit
         }
         switch protectedPlacementTrigger {
         case .userInitiated, .missedRecoveryMoveIt:
@@ -407,16 +386,11 @@ private extension AmbitionsCommand {
     }
 
     var protectedPlacementAutomationPolicy: ProtectedStepPlacementAutomationPolicy {
-        let raw = payload.metadata["protectedPlacementAutomationPolicy"]
-            ?? payload.metadata["automaticPlacementPolicy"]
-            ?? payload.metadata["automationPolicy"]
-        return raw.flatMap(ProtectedStepPlacementAutomationPolicy.init(rawValue:)) ?? .notMature
+        timePlacementCommandIntent?.automationPolicy ?? calendarWriteCommandIntent?.placement?.automationPolicy ?? .notMature
     }
 
     var protectedPlacementContextQuality: ProtectedStepPlacementContextQuality {
-        let raw = payload.metadata["protectedPlacementContextQuality"]
-            ?? payload.metadata["contextQuality"]
-        return raw.flatMap(ProtectedStepPlacementContextQuality.init(rawValue:)) ?? .sufficient
+        timePlacementCommandIntent?.contextQuality ?? calendarWriteCommandIntent?.placement?.contextQuality ?? .sufficient
     }
 
     func protectedPlacementWindow(
@@ -424,29 +398,11 @@ private extension AmbitionsCommand {
         endKeys: [String],
         durationKeys: [String]
     ) -> ProtectedStepPlacementWindow? {
-        guard let start = dateValue(for: startKeys) else { return nil }
-        let end = dateValue(for: endKeys) ?? durationValue(for: durationKeys).map {
-            start.addingTimeInterval(TimeInterval($0 * 60))
-        }
-        guard let end else { return nil }
+        let placement = timePlacementCommandIntent ?? calendarWriteCommandIntent?.placement
+        guard let placement else { return nil }
+        let original = startKeys.contains(where: { $0.hasPrefix("original") || $0.hasPrefix("current") || $0.hasPrefix("previous") })
+        guard let start = DomainTimestamp.date(from: original ? placement.originalStart ?? "" : placement.start),
+              let end = DomainTimestamp.date(from: original ? placement.originalEnd ?? "" : placement.end) else { return nil }
         return ProtectedStepPlacementWindow(start: start, end: end)
-    }
-
-    func dateValue(for keys: [String]) -> Date? {
-        for key in keys {
-            if let value = payload.metadata[key], let date = DomainTimestamp.date(from: value) {
-                return date
-            }
-        }
-        return nil
-    }
-
-    func durationValue(for keys: [String]) -> Int? {
-        for key in keys {
-            if let value = payload.metadata[key], let duration = Int(value), duration > 0 {
-                return duration
-            }
-        }
-        return nil
     }
 }

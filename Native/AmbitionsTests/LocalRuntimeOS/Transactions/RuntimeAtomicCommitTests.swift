@@ -257,8 +257,8 @@ final class RuntimeAtomicCommitTests: XCTestCase {
         XCTAssertEqual(ledgerEvents.count, 1)
         let fetchedRecord = try await records.fetchRecord(commandID: command.id)
         let finalRecord = try XCTUnwrap(fetchedRecord)
-        XCTAssertEqual(finalRecord.result.eventLedgerEntryIDs, replay.eventLedgerEntryIDs)
-        XCTAssertEqual(finalRecord.result.metadata["eventLedgerEmission"], "saved_post_authority")
+        XCTAssertEqual(finalRecord.result?.eventLedgerEntryIDs, replay.eventLedgerEntryIDs)
+        XCTAssertEqual(finalRecord.result?.metadata["eventLedgerEmission"], "saved_post_authority")
     }
 
     func testProductionTransitionProposalPersistsEmptyAndTypedNonemptyIntents() async throws {

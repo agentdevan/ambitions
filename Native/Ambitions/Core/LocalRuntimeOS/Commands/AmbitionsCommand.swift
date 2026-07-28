@@ -40,7 +40,7 @@ struct AmbitionsCommandPayload: Codable, Sendable, Equatable, Hashable {
         self.priorityHints = priorityHints
         self.goalRelationship = goalRelationship
         self.destinationRoute = Self.trimmed(destinationRoute)
-        self.explanationID = Self.trimmed(explanationID)
+        self.explanationID = explanationID
         self.metadata = metadata.filter { $0.key.isEmpty == false && $0.value.isEmpty == false }
     }
 
@@ -57,10 +57,7 @@ struct AmbitionsCommandPayload: Codable, Sendable, Equatable, Hashable {
 
 struct AmbitionsCommand: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
-    let kind: AmbitionsCommandKind
     let source: AmbitionsCommandSource
-    let target: AmbitionsCommandTarget
-    let payload: AmbitionsCommandPayload
     let validationState: AmbitionsCommandValidationState
     let executionStatus: AmbitionsCommandExecutionStatus
     let result: AmbitionsCommandExecutionResult?
@@ -72,13 +69,20 @@ struct AmbitionsCommand: Codable, Sendable, Equatable, Hashable, Identifiable {
     let localOnly: Bool
     let privacy: EventLedgerPrivacyClassification
     let schemaVersion: String
+    let expectedRevision: RuntimeExpectedRevision
+    let idempotencyKey: CommandIdempotencyKey
+    private(set) var typedPayload: RuntimeCommandPayload
+
+    var operation: RuntimeCommandOperation { typedPayload.operation }
+    var target: AmbitionsCommandTarget { typedPayload.target }
+    var content: RuntimeCommandContent { typedPayload.content }
 
     init(
         id: String,
-        kind: AmbitionsCommandKind,
         source: AmbitionsCommandSource,
-        target: AmbitionsCommandTarget = AmbitionsCommandTarget(),
-        payload: AmbitionsCommandPayload = AmbitionsCommandPayload(),
+        typedPayload: RuntimeCommandPayload,
+        expectedRevision: RuntimeExpectedRevision = .absent,
+        idempotencyKey: CommandIdempotencyKey? = nil,
         validationState: AmbitionsCommandValidationState = .valid,
         executionStatus: AmbitionsCommandExecutionStatus = .pending,
         result: AmbitionsCommandExecutionResult? = nil,
@@ -92,10 +96,7 @@ struct AmbitionsCommand: Codable, Sendable, Equatable, Hashable, Identifiable {
         schemaVersion: String = ambitionsCommandSchemaVersion
     ) {
         self.id = id
-        self.kind = kind
         self.source = source
-        self.target = target
-        self.payload = payload
         self.validationState = validationState
         self.executionStatus = executionStatus
         self.result = result
@@ -107,15 +108,32 @@ struct AmbitionsCommand: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.localOnly = localOnly
         self.privacy = privacy
         self.schemaVersion = schemaVersion
+        self.expectedRevision = expectedRevision
+        self.idempotencyKey = idempotencyKey ?? CommandIdempotencyKey(id)
+        self.typedPayload = typedPayload
+    }
+
+    init(from decoder: Decoder) throws {
+        let envelope = try RuntimeCommandV2Envelope(from: decoder)
+        guard envelope.schemaVersion == runtimeCommandSchemaVersion else {
+            throw DecodingError.dataCorrupted(
+                .init(codingPath: decoder.codingPath, debugDescription: "Unsupported runtime command version.")
+            )
+        }
+        self = envelope.command
+    }
+
+    func encode(to encoder: Encoder) throws {
+        try RuntimeCommandV2Envelope(command: self, payload: typedPayload).encode(to: encoder)
     }
 
     func validated(as state: AmbitionsCommandValidationState) -> AmbitionsCommand {
         AmbitionsCommand(
             id: id,
-            kind: kind,
             source: source,
-            target: target,
-            payload: payload,
+            typedPayload: typedPayload,
+            expectedRevision: expectedRevision,
+            idempotencyKey: idempotencyKey,
             validationState: state,
             executionStatus: executionStatus,
             result: result,
@@ -129,6 +147,7 @@ struct AmbitionsCommand: Codable, Sendable, Equatable, Hashable, Identifiable {
             schemaVersion: schemaVersion
         )
     }
+
 }
 
 extension AmbitionsCommand {
@@ -139,26 +158,49 @@ extension AmbitionsCommand {
         createdAt: String
     ) -> AmbitionsCommand {
         let route = CommandRouter().route(action)
+        let target = AmbitionsCommandTarget(
+            goalID: action.reference?.goalID,
+            captureID: action.reference?.captureID,
+            timeID: action.reference?.timeID,
+            reviewID: action.reference?.reviewID,
+            stepID: action.reference?.stepID,
+            explanationID: action.explanationID,
+            destination: route.destination
+        )
+        let content = AmbitionsCommandPayload(
+            title: action.title,
+            notes: action.subtitle,
+            contextLens: action.contextLens,
+            commitmentKind: action.commitmentKind,
+            explanationID: action.explanationID
+        )
+        let typedContent = RuntimeCommandContent(content)
+        let typedPayload: RuntimeCommandPayload = switch action.kind {
+        case .none, .openGoal, .openTime, .schedule, .capture, .review:
+            .history(HistoryCommand(action: .openDestination, target: target, content: typedContent))
+        case .focus:
+            .step(StepCommand(action: .startSession, target: target, content: typedContent))
+        case .completeAction:
+            .step(StepCommand(action: .complete, target: target, content: typedContent))
+        case .recover:
+            .step(StepCommand(action: .recover(RecoveryRecommendationCommand(
+                goalID: target.goalID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                captureID: target.captureID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                timeID: target.timeID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+                title: typedContent.title,
+                explanationID: typedContent.explanationID.flatMap(RuntimeCommandObjectID.init(rawValue:))
+            )), target: target, content: typedContent))
+        case .wait:
+            .capture(CaptureCommand(action: .markWaiting, target: target, content: typedContent))
+        case .routeCommitment:
+            .capture(CaptureCommand(action: .routeCommitment, target: target, content: typedContent))
+        case .explain:
+            .history(HistoryCommand(action: .askWhy, target: target, content: typedContent))
+        }
         let command = AmbitionsCommand(
             id: id,
-            kind: route.kind,
             source: source,
-            target: AmbitionsCommandTarget(
-                goalID: action.reference?.goalID,
-                captureID: action.reference?.captureID,
-                timeID: action.reference?.timeID,
-                reviewID: action.reference?.reviewID,
-                stepID: action.reference?.stepID,
-                explanationID: action.explanationID,
-                destination: route.destination
-            ),
-            payload: AmbitionsCommandPayload(
-                title: action.title,
-                notes: action.subtitle,
-                contextLens: action.contextLens,
-                commitmentKind: action.commitmentKind,
-                explanationID: action.explanationID
-            ),
+            typedPayload: typedPayload,
             createdAt: createdAt,
             relations: AmbitionsCommandRelations(
                 goalIDs: [action.reference?.goalID].compactMap { $0 },

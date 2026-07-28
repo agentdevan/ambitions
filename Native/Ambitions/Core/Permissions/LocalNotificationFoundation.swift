@@ -437,13 +437,14 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
 }
 
 actor FileExternalSurfaceSnapshotReader: ExternalSurfaceSnapshotReading {
-    private let fileURL: URL
+    private let fileURL: URL?
 
-    init(fileURL: URL = SharedExternalSnapshotStore.snapshotRecordFileURL()) {
-        self.fileURL = fileURL
+    init() {
+        fileURL = SharedExternalSnapshotStore.snapshotRecordFileURL()
     }
 
     func loadSnapshot() async throws -> ExternalSurfaceSnapshot? {
+        guard let fileURL else { return nil }
         guard FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
         let data = try Data(contentsOf: fileURL)
         let record = try PersistenceCoding.decode(SharedExternalSnapshotRecord.self, from: data)
@@ -505,6 +506,18 @@ struct NotificationSchedulingGoalsService: GoalsServicing, GoalCreationPreparing
             throw GoalsFeatureError.notActionable
         }
         return try await base.prepareGoalCreation(request, now: now)
+    }
+
+    func commitPreparedGoalCreation(
+        _ prepared: PreparedGoalCreation,
+        now: Date
+    ) async throws -> CreateGoalResponse {
+        guard let base = base as? any GoalCreationPreparing else {
+            throw GoalsFeatureError.notActionable
+        }
+        let response = try await base.commitPreparedGoalCreation(prepared, now: now)
+        await notificationService.refreshSchedule(now: now)
+        return response
     }
 
     func didCommitPreparedGoalCreation(now: Date) async {

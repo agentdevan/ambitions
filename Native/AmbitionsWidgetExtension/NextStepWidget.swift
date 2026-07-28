@@ -385,7 +385,7 @@ private struct NextStepWidgetView: View {
 
 private struct ExtensionExternalSurfaceSnapshotReader {
     func loadSnapshot() -> ExternalSurfaceSnapshot? {
-        let fileURL = SharedExternalSnapshotStore.snapshotRecordFileURL()
+        guard let fileURL = SharedExternalSnapshotStore.snapshotRecordFileURL() else { return nil }
         guard let data = try? Data(contentsOf: fileURL) else { return nil }
         guard let record = try? JSONDecoder().decode(SharedExternalSnapshotRecord.self, from: data),
               let payload = try? record.verifiedPayloadData() else {

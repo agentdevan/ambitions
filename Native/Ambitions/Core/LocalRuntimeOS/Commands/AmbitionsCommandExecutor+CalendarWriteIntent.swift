@@ -3,10 +3,20 @@ import Foundation
 extension AmbitionsCommandExecutor {
     func executeConfirmedCalendarWriteIntent(
         _ command: AmbitionsCommand,
-        context: CommandExecutionContext
+        context _: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
-        guard command.payload.metadata["calendarWriteIntent"] == "true" else {
+        guard let calendarWrite = command.calendarWriteCommandIntent else {
             return blockedResult(for: .needsMissingTarget, command: command)
+        }
+        switch calendarWrite.operationIdentityProvenance {
+        case .currentRequired, .legacyExplicit:
+            guard calendarWrite.operationID != nil else {
+                return blockedCalendarIdentityResult(command)
+            }
+        case .legacyAbsent:
+            guard calendarWrite.operationID == nil else {
+                return blockedCalendarIdentityResult(command)
+            }
         }
 
         let intent = scheduleMutationIntent(for: command)
@@ -23,13 +33,13 @@ extension AmbitionsCommandExecutor {
             )
         }
 
-        let destinationStepID = command.target.stepID ?? command.payload.metadata["destinationStepID"]
-        let destinationStepTitle = command.payload.metadata["destinationStepTitle"]
-        let originalBlockID = command.payload.metadata["originalBlockID"] ?? command.target.timeID
-        let displacedDisposition = command.payload.metadata["displacedDisposition"] ?? "not_displaced"
-        let destinationStepPressure = command.payload.metadata["destinationStepPressure"]
-        let originStepPressure = command.payload.metadata["originStepPressure"]
-        let lifeshapeImpact = command.payload.metadata["lifeshapeImpact"] ?? "recalculated_before_commit"
+        let destinationStepID = calendarWrite.destinationStepID?.rawValue
+        let destinationStepTitle = calendarWrite.destinationStepTitle
+        let originalBlockID = calendarWrite.originalBlockID?.rawValue
+        let displacedDisposition = calendarWrite.displacedDisposition.rawValue
+        let destinationStepPressure = calendarWrite.destinationStepPressure?.rawValue
+        let originStepPressure = calendarWrite.originStepPressure?.rawValue
+        let lifeshapeImpact = calendarWrite.lifeshapeImpact.rawValue
 
         let scheduleBlock = ScheduledAmbitionsBlock(
             id: intent.blockID,
@@ -37,85 +47,15 @@ extension AmbitionsCommandExecutor {
             start: intent.start,
             end: intent.end,
             contextLens: intent.contextLens,
-            relatedGoalID: intent.relatedGoalID ?? command.target.goalID,
-            relatedCaptureID: intent.relatedCaptureID ?? command.target.captureID,
+            relatedGoalID: intent.relatedGoalID?.rawValue ?? command.target.goalID,
+            relatedCaptureID: intent.relatedCaptureID?.rawValue ?? command.target.captureID,
             isUserConfirmed: true
         )
 
-        let sourceRecordID = scheduleBlock.localScheduleSourceRecordID
-        do {
-            let scheduleRepository = FileLocalScheduleBlockRepository(fileURL: scheduleStoreURL())
-            _ = try await scheduleRepository.upsertBlock(scheduleBlock)
-        } catch {
-            return AmbitionsCommandExecutionResult(
-                status: .blocked,
-                summary: "Calendar write intent could not be written locally.",
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: [
-                    "blockedBy": "calendar_write_store_error",
-                    "calendarWriteIntent": "true",
-                    "error": String(describing: error)
-                ]
-            )
-        }
-
-        var eventLedgerEntryIDs: [String] = []
-        let scheduleReceiptID = scheduleBlock.localScheduleReceiptID(action: "save")
-        let replayTraceID = scheduleBlock.localScheduleReplayTraceID(action: "save")
-        if context.allowsEventLedgerEmission, let eventLedger {
-            let event = EventLedgerEntry(
-                id: "ledger.schedule.mutation.\(command.id)",
-                kind: .planScheduled,
-                occurredAt: DomainTimestamp.string(from: context.now),
-                source: .plan,
-                goalID: command.target.goalID,
-                captureID: command.target.captureID,
-                planID: command.target.timeID,
-                title: "Schedule mutation recorded",
-                summary: "Time mutation was confirmed and persisted locally.",
-                semanticState: command.kind.rawValue,
-                tone: .neutral,
-                trust: EventLedgerTrustMetadata(
-                    isUserConfirmed: true,
-                    requiresReview: false
-                ),
-                evidenceReferences: [
-                    EventLedgerEvidenceReference(
-                        id: scheduleBlock.id,
-                        kind: .plan,
-                        occurredAt: DomainTimestamp.string(from: context.now),
-                        summary: "schedule block mutation"
-                    )
-                ],
-                metadata: [
-                    "sourceRecordID": sourceRecordID,
-                    "receiptID": scheduleReceiptID,
-                    "replayTraceID": replayTraceID
-                ].merging(intent.metadata, uniquingKeysWith: { _, new in new }),
-                payload: [
-                    "receipt": scheduleReceiptID,
-                    "replayTrace": replayTraceID,
-                    "destinationStepID": destinationStepID ?? "",
-                    "originalBlockID": originalBlockID ?? "",
-                    "displacedDisposition": displacedDisposition,
-                    "start": DomainTimestamp.string(from: intent.start),
-                    "end": DomainTimestamp.string(from: intent.end),
-                    "lifeshapeImpact": lifeshapeImpact
-                ].filter { $0.value.isEmpty == false }
-            )
-            do {
-                try await eventLedger.append(event)
-                eventLedgerEntryIDs = [event.id]
-            } catch {
-                // Preserve local safety contract: no mutation without local receipt,
-                // but event projection is best-effort when storage is unavailable.
-            }
-        }
-
+        // AMBitionsAllowWeakPattern(reason: "Preparation-only calendar handling truthfully performs no authority mutation.")
         return AmbitionsCommandExecutionResult(
-            status: .succeeded,
-            summary: "Schedule mutation was written locally after confirmation.",
+            status: .noOp,
+            summary: "Calendar mutation was prepared; an accepted runtime authority transaction is still required.",
             target: AmbitionsCommandTarget(
                 goalID: command.target.goalID,
                 captureID: command.target.captureID,
@@ -123,16 +63,16 @@ extension AmbitionsCommandExecutor {
                 stepID: destinationStepID,
                 destination: .time
             ),
-            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            eventLedgerEntryIDs: [],
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
             metadata: [
                 "commandID": command.id,
                 "calendarWriteIntent": "true",
-                "approvalState": "confirmed",
-                "userConfirmed": command.payload.metadata["userConfirmed"] ?? "true",
-                "sourceRecordID": sourceRecordID,
-                "receiptID": scheduleReceiptID,
-                "replayTraceID": replayTraceID,
+                "preparationState": "authority_required",
+                "userConfirmed": calendarWrite.userConfirmed ? "true" : "false",
+                "calendarOperationIdentityProvenance": calendarWrite.operationIdentityProvenance.rawValue,
+                "externalEffectOperationID": calendarWrite.operationID?.rawValue ?? "",
+                "proposedScheduleBlockID": scheduleBlock.id,
                 "approvedDurationMinutes": String(intent.approvedDurationMinutes),
                 "originalBlockID": originalBlockID ?? "",
                 "destinationStepID": destinationStepID ?? "",
@@ -141,7 +81,17 @@ extension AmbitionsCommandExecutor {
                 "originStepPressure": originStepPressure ?? "",
                 "displacedDisposition": displacedDisposition,
                 "lifeshapeImpact": lifeshapeImpact
-            ].merging(intent.metadata, uniquingKeysWith: { _, new in new })
+            ].filter { $0.value.isEmpty == false }
+                .merging(intent.metadata, uniquingKeysWith: { _, new in new })
+        )
+    }
+
+    private func blockedCalendarIdentityResult(_ command: AmbitionsCommand) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "Calendar intent has inconsistent operation identity provenance.",
+            target: command.target,
+            metadata: ["blockedBy": "invalid_calendar_operation_identity"]
         )
     }
 }

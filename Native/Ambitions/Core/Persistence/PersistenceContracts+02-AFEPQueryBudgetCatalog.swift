@@ -117,8 +117,8 @@ protocol RuntimeSnapshotLedgerRepository: Sendable {
 
 protocol AmbitionsCommandExecutionRecordRepository: Sendable {
     func append(_ record: AmbitionsCommandExecutionRecord) async throws
-    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord]
-    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord?
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord]
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord?
 }
 
 protocol AppStateRepository: Sendable {

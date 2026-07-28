@@ -270,7 +270,7 @@ struct TodayCommandActionHandler {
         action: TodayInlineAction,
         newCaptures: [Capture]
     ) -> AmbitionsCommandTarget {
-        guard command.kind == .quickCapture || action.kind == .quickLog,
+        guard (command.typedPayload.isQuickCapture || action.kind == .quickLog),
               let capture = newCaptures.first else {
             return command.target
         }

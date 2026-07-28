@@ -245,6 +245,8 @@ private extension RuntimeCommandMutationCommitter {
             )
         case .commandRecordWithoutRuntimeEvent(let record):
             return adapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+        case .quarantinedCommandRecord(let record):
+            return adapter.quarantinedCommandRecordResult(for: command, record: record)
         case .sqliteDiagnosticWithoutAuthority(let projection):
             return adapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
         case .lookupUnavailable:

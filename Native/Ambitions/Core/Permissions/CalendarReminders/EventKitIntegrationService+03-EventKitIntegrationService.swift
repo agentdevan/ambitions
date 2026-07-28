@@ -111,97 +111,15 @@ extension EventKitIntegrationService {
     }
 
     func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
-        try await createCalendarBlock(intent: intent, now: now, localCommit: nil)
-    }
-
-    func createCalendarBlock(
-        intent: ScheduledBlockWriteIntent,
-        now: Date,
-        localCommit: SideEffectLocalCommitEvidence?
-    ) async throws -> ScheduledAmbitionsBlock {
-        guard intent.isExecutable else {
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .blocked,
-                boundary: .externalEffect,
-                requiresConfirmation: true,
-                externalEffect: true,
-                blockedFacts: ["Calendar block write request was missing required timing details."]
-            )
-            throw CalendarRemindersError.missingEventStartDate
-        }
-        let permission = await requestCalendarWriteAccessForConfirmedBlock(intent: intent)
-        guard permission.canWrite else {
-            let attempt = await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .blocked,
-                boundary: .externalEffect,
-                requiresConfirmation: true,
-                externalEffect: false,
-                blockedFacts: ["Calendar write permission was not available for the confirmed block."]
-            )
-            await recordCalendarResult(
-                SideEffectAttemptResult(
-                    state: .permissionDenied,
-                    degradedFacts: ["Calendar block write permission was denied before EventKit save."]
-                ),
-                for: attempt,
-                now: now
-            )
-            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
-        }
-        let payload = EventKitEventPayload(
-            title: intent.block.title,
-            notes: "Created by Ambitions after explicit Time confirmation.",
-            startDate: intent.block.start,
-            endDate: intent.block.end
-        )
-        let attempt = await recordCalendarSideEffect(
-            actionKind: .writeCalendarBlock,
-            status: .queued,
-            boundary: .externalEffect,
-            requiresConfirmation: true,
-            externalEffect: true,
-            reasons: [.externalSideEffect],
-            localCommit: localCommit
-        )
-        guard attempt?.mayAttemptExternalWrite == true else {
-            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
-        }
-        do {
-            let identifier = try await storeClient.saveEvent(payload)
-            await recordCalendarResult(
-                SideEffectAttemptResult(
-                    state: .succeeded,
-                    externalReceiptID: identifier,
-                    degradedFacts: ["Calendar block write completed through EventKit side-effect owner."]
-                ),
-                for: attempt,
-                now: now
-            )
-            return ScheduledAmbitionsBlock(
-                id: intent.block.id,
-                title: intent.block.title,
-                start: intent.block.start,
-                end: intent.block.end,
-                contextLens: intent.block.contextLens,
-                relatedGoalID: intent.block.relatedGoalID,
-                relatedCaptureID: intent.block.relatedCaptureID,
-                relatedPlanID: intent.block.relatedPlanID,
-                isUserConfirmed: true,
-                calendarEventIdentifier: identifier
-            )
-        } catch {
-            await recordCalendarResult(
-                SideEffectAttemptResult(
-                    state: .failedSafely,
-                    degradedFacts: ["Calendar block write did not complete."]
-                ),
-                for: attempt,
-                now: now
-            )
-            throw error
-        }
+        // Calendar blocks must enter through the operation-bearing
+        // `createCalendarEvent` path. That path verifies committed runtime
+        // evidence, derives a stable durable outbox ID, and reconciles an
+        // indeterminate EventKit save by its operation marker. This older
+        // protocol cannot carry those requirements, so it is intentionally
+        // non-executable rather than creating an unowned external write.
+        _ = intent
+        _ = now
+        throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
     }
 
     @discardableResult

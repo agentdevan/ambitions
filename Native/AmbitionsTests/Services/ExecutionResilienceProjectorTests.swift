@@ -329,9 +329,9 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
         let ledger = InMemoryEventLedgerRepository()
         let executor = AmbitionsCommandExecutor.test(eventLedger: ledger)
 
-        XCTAssertEqual(command.kind, .recoverAction)
-        XCTAssertEqual(command.payload.metadata["resilienceAssessmentID"], assessment.id)
-        XCTAssertEqual(command.payload.metadata["recoveryStrategy"], option.strategy.rawValue)
+        XCTAssertEqual(command.operation, .recoverAction)
+        guard case let .repair(repair) = command.typedPayload else { return XCTFail("Expected typed repair") }
+        XCTAssertEqual(repair.recommendation.explanationID, option.relatedExplanationID)
 
         let result = await executor.execute(command, context: CommandExecutionContext(now: now))
         let events = try await ledger.fetchRecent(limit: 10)

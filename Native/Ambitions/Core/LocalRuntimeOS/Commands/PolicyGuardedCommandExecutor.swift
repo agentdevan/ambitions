@@ -2,7 +2,6 @@ import Foundation
 
 struct PolicyGuardedCommandExecutor: CommandExecuting {
     private let base: any CommandExecuting
-    private let sideEffectLedger: (any SideEffectLedgerRepository)?
     private let policyEvaluator: SafeAutomationPolicyEvaluator
     private let protectedPlacementPolicy: ProtectedStepPlacementPolicy
 
@@ -13,7 +12,7 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
         protectedPlacementPolicy: ProtectedStepPlacementPolicy = ProtectedStepPlacementPolicy()
     ) {
         self.base = base
-        self.sideEffectLedger = sideEffectLedger
+        _ = sideEffectLedger // Transitional label retained; T09 owns accepted-transaction ledger persistence.
         self.policyEvaluator = policyEvaluator
         self.protectedPlacementPolicy = protectedPlacementPolicy
     }
@@ -34,8 +33,6 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
             commandID: command.id,
             occurredAt: DomainTimestamp.string(from: context.now)
         )
-        try? await sideEffectLedger?.append(record)
-
         guard record.mayExecuteWithoutUserConfirmation || decision.permissionLevel == .executeLocalOnly else {
             return guardedResult(command: command, decision: decision, record: record)
         }
@@ -96,7 +93,8 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
                 "permissionLevel": decision.permissionLevel.rawValue,
                 "confirmationRequirement": decision.confirmationRequirement.rawValue,
                 "safetyClassification": decision.safetyClassification.rawValue,
-                "guardedBy": "side_effect_policy"
+                "guardedBy": "side_effect_policy",
+                "sideEffectLedgerStatus": "deferred_until_authority_acceptance"
             ]
         )
     }

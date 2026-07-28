@@ -1,4 +1,5 @@
 import XCTest
+import SwiftData
 @testable import Ambitions
 
 final class ExecutionLedgerReplayInspectionRepositoryTests: XCTestCase {
@@ -128,6 +129,51 @@ final class ExecutionLedgerReplayInspectionRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.items.first?.deterministicReplayValidationState, .unavailable)
         XCTAssertEqual(projection.items.first?.sourceRecordIDs, [receiptRecord.id])
         XCTAssertEqual(projection.items.first?.commandSummary, "Command record not attached")
+    }
+
+    func testQuarantinedCommandBytesAreInspectedAndCannotBeOverwritten() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repository = SwiftDataAmbitionsCommandExecutionRecordRepository(store: store)
+        let inspection = SwiftDataExecutionLedgerReplayInspectionRepository(store: store)
+        let command = AmbitionsCommand(
+            id: "command-quarantined",
+            kind: .quickCapture,
+            source: .today,
+            payload: AmbitionsCommandPayload(rawText: "Original"),
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        let originalRecord = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: AmbitionsCommandExecutionResult(status: .succeeded, summary: "Original"),
+            recordedAt: "2026-07-24T12:00:01Z"
+        )
+        try await repository.append(originalRecord)
+        let futureBytes = Data("{\"schemaVersion\":99,\"payload\":{}}".utf8)
+        try await store.write { context in
+            let persisted = try XCTUnwrap(try context.fetch(FetchDescriptor<CommandExecutionRecord>()).first)
+            persisted.commandData = futureBytes
+        }
+
+        do {
+            try await repository.append(AmbitionsCommandExecutionRecord(
+                command: command,
+                result: AmbitionsCommandExecutionResult(status: .failed, summary: "Replacement"),
+                recordedAt: "2026-07-24T12:00:02Z"
+            ))
+            XCTFail("Quarantined bytes must not be overwritten")
+        } catch {
+            // Expected fail-closed append.
+        }
+
+        let stored = try XCTUnwrap(try await repository.fetchRecord(commandID: command.id))
+        guard case let .quarantined(quarantine) = stored else {
+            return XCTFail("Expected typed quarantine")
+        }
+        XCTAssertEqual(quarantine.commandBytes, futureBytes)
+        let projection = try await inspection.fetch(ExecutionLedgerReplayInspectionQuery(commandID: command.id, limit: 10))
+        XCTAssertEqual(projection.quarantinedCommandRecords.map(\.commandBytes), [futureBytes])
+        XCTAssertEqual(projection.totalCandidateCount, 1)
+        XCTAssertFalse(projection.isEmpty)
     }
 }
 

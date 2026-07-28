@@ -378,6 +378,7 @@ public struct FlagshipReceiptReference: Codable, Sendable, Equatable {
 public enum FlagshipIntentState: String, Codable, Sendable, CaseIterable {
     case committedProjectionReady = "committed-projection-ready"
     case committedCatchUpRequired = "committed-catch-up-required"
+    case outcomeIndeterminate = "outcome-indeterminate"
     case rejectedBeforeMutation = "rejected-before-mutation"
     case revisionConflict = "revision-conflict"
     case externalEffectPending = "external-effect-pending"
@@ -388,6 +389,11 @@ public enum FlagshipIntentState: String, Codable, Sendable, CaseIterable {
 public enum FlagshipIntentResult: Codable, Sendable, Equatable {
     case committedProjectionReady(FlagshipReceiptReference)
     case committedCatchUpRequired(FlagshipReceiptReference)
+    /// The runtime returned a non-failure result, but did not provide enough
+    /// durable evidence to classify the mutation as committed or rejected.
+    /// Consumers must preserve the input and offer recovery rather than
+    /// claiming that no mutation occurred.
+    case outcomeIndeterminate(code: String, recoveryAction: FlagshipRecoveryAction)
     case rejectedBeforeMutation(code: String, recoveryAction: FlagshipRecoveryAction?)
     case revisionConflict(expected: Int64?, actual: Int64, recoveryAction: FlagshipRecoveryAction)
     case externalEffectPending(FlagshipReceiptReference, effectIDs: [String])
@@ -402,6 +408,7 @@ public enum FlagshipIntentResult: Codable, Sendable, Equatable {
         switch self {
         case .committedProjectionReady: .committedProjectionReady
         case .committedCatchUpRequired: .committedCatchUpRequired
+        case .outcomeIndeterminate: .outcomeIndeterminate
         case .rejectedBeforeMutation: .rejectedBeforeMutation
         case .revisionConflict: .revisionConflict
         case .externalEffectPending: .externalEffectPending

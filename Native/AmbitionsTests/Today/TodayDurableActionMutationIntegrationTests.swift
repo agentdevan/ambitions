@@ -64,7 +64,7 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
         XCTAssertEqual(first.command.id, second.command.id)
         XCTAssertTrue(first.command.id.contains(action.operationID))
         XCTAssertEqual(plan, TodayGoalStepActionPlan.decode(command: second.command))
-        XCTAssertEqual(first.command.kind, .quickCapture)
+        XCTAssertEqual(first.command.operation, .quickCapture)
         XCTAssertEqual(capture.id, "capture.\(first.command.id)")
         XCTAssertEqual(capture.rawText, "Quick log for \"Capture this session\".")
         XCTAssertEqual(capture.sourceType, .todayQuickCapture)
@@ -418,7 +418,7 @@ final class TodayDurableActionMutationIntegrationTests: XCTestCase {
             let captures = try await repositories.captures.listCaptures()
 
             XCTAssertEqual(first.command.id, second.command.id)
-            XCTAssertEqual(first.command.payload.metadata[TodayGoalStepActionPlan.metadataKey], second.command.payload.metadata[TodayGoalStepActionPlan.metadataKey])
+            XCTAssertEqual(first.command.typedPayload, second.command.typedPayload)
             XCTAssertEqual(afterSteps, beforeSteps)
             XCTAssertTrue(feedback.isEmpty)
             XCTAssertTrue(evidence.isEmpty)

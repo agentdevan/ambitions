@@ -8,26 +8,16 @@ enum SharedExternalSnapshotStore {
     static let snapshotRecordID = "external-surface-current"
     static let snapshotKind = "widget_projection_external_surface"
 
-    static func snapshotFileURL(fileManager: FileManager = .default) -> URL {
-        snapshotDirectoryURL(fileManager: fileManager).appendingPathComponent(fileName)
+    static func snapshotFileURL(fileManager: FileManager = .default) -> URL? {
+        snapshotDirectoryURL(fileManager: fileManager)?.appendingPathComponent(fileName)
     }
 
-    static func snapshotRecordFileURL(fileManager: FileManager = .default) -> URL {
-        snapshotDirectoryURL(fileManager: fileManager).appendingPathComponent("\(snapshotRecordID).snapshot.json")
+    static func snapshotRecordFileURL(fileManager: FileManager = .default) -> URL? {
+        snapshotDirectoryURL(fileManager: fileManager)?.appendingPathComponent("\(snapshotRecordID).snapshot.json")
     }
 
-    private static func snapshotDirectoryURL(fileManager: FileManager) -> URL {
-        if let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier) {
-            return groupURL
-                .appendingPathComponent(relativeDirectory, isDirectory: true)
-        }
-
-        if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            return appSupport
-                .appendingPathComponent(relativeDirectory, isDirectory: true)
-        }
-
-        return fileManager.temporaryDirectory
+    private static func snapshotDirectoryURL(fileManager: FileManager) -> URL? {
+        fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
             .appendingPathComponent(relativeDirectory, isDirectory: true)
     }
 }

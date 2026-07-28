@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class MutationReplayIdentityTests: RuntimeCommandMutationCommitterTestCase {
-    func testSemanticallyIdenticalReplayWithNewTimestampRepairsUsingOriginalCommand() async throws {
+    func testSamePayloadWithDifferentTimestampIsReplayIdentityConflict() async throws {
         let directory = FileManager.default.temporaryDirectory
             .appendingPathComponent("RuntimeCommandSemanticIdentity-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -48,12 +48,12 @@ final class MutationReplayIdentityTests: RuntimeCommandMutationCommitterTestCase
         let probeSnapshot = await materializationProbe.snapshot
 
         XCTAssertEqual(first.metadata["captureMaterialization"], "needs_recovery")
-        XCTAssertEqual(replay.status, .succeeded)
-        XCTAssertEqual(replay.metadata["captureMaterialization"], "saved_post_authority")
-        XCTAssertEqual(probeSnapshot.attemptCount, 2)
+        XCTAssertEqual(replay.status, .blocked)
+        XCTAssertEqual(replay.metadata["blockedBy"], "runtime_command_identity_conflict")
+        XCTAssertEqual(probeSnapshot.attemptCount, 1)
         XCTAssertEqual(events.map(\.id), firstAuthorityEvents.map(\.id))
         XCTAssertEqual(repairedRecord?.command, originalCommand)
-        XCTAssertNotEqual(repairedRecord?.command.createdAt, retryCommand.createdAt)
+        XCTAssertNotEqual(repairedRecord?.command?.createdAt, retryCommand.createdAt)
     }
 
     func testIncompatibleSameIDReplayRetainsOriginalCommandAndSkipsRecovery() async throws {
@@ -108,8 +108,8 @@ final class MutationReplayIdentityTests: RuntimeCommandMutationCommitterTestCase
         XCTAssertEqual(events.map(\.id), firstAuthorityEvents.map(\.id))
         XCTAssertEqual(retainedRecord, originalRecord)
         XCTAssertEqual(retainedRecord.command, originalCommand)
-        XCTAssertNotEqual(retainedRecord.command.payload, retryCommand.payload)
-        XCTAssertNotEqual(retainedRecord.command.createdAt, retryCommand.createdAt)
+        XCTAssertNotEqual(retainedRecord.command?.content, retryCommand.content)
+        XCTAssertNotEqual(retainedRecord.command?.createdAt, retryCommand.createdAt)
     }
 
     private func incompatibleRetryCommand(id: String, now: Date) -> AmbitionsCommand {

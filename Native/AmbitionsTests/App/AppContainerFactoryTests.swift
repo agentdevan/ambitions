@@ -2,6 +2,22 @@
 import XCTest
 
 final class AppContainerFactoryTests: XCTestCase {
+    func testRuntimeMutationAuthorityIsSelectedBeforeTheLegacyServiceGraphAndSuppliesTheInjectedClient() throws {
+        let factorySource = try source("Native/Ambitions/App/AppContainerFactory.swift")
+        let selection = try XCTUnwrap(factorySource.range(of: "let authoritySession = await RuntimeMutationAuthoritySession.bootstrap"))
+        let legacyAdmission = try XCTUnwrap(factorySource.range(of: "try await authoritySession.requireLegacyServiceAuthority()"))
+        let repositoryConstruction = try XCTUnwrap(factorySource.range(of: "let repositories = try await prepareRepositories"))
+        let authorityComposition = try XCTUnwrap(factorySource.range(of: "let runtimeAuthority = await authoritySession.composition"))
+        let selectedClient = try XCTUnwrap(factorySource.range(of: "let runtimeCommandClient = runtimeAuthority.commandClient"))
+
+        XCTAssertLessThan(selection.lowerBound, legacyAdmission.lowerBound)
+        XCTAssertLessThan(legacyAdmission.lowerBound, repositoryConstruction.lowerBound)
+        XCTAssertLessThan(repositoryConstruction.lowerBound, authorityComposition.lowerBound)
+        XCTAssertLessThan(authorityComposition.lowerBound, selectedClient.lowerBound)
+        XCTAssertTrue(factorySource.contains("runtimeCommandClient: runtimeCommandClient"))
+        XCTAssertTrue(factorySource.contains("runtimeAuthority: runtimeAuthority"))
+    }
+
     func testLiveBootstrapDoesNotSeedFreshRepositories() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
 

@@ -30,6 +30,7 @@ enum SafeAutomationActionKind: String, Codable, Sendable, Equatable, Hashable, C
     case externalCommand = "external_command"
     case correctRecommendation = "correct_recommendation"
     case editLocalNote = "edit_local_note"
+    case manageAttachment = "manage_attachment"
     case dismissSuggestion = "dismiss_suggestion"
     case noOp = "no_op"
 }

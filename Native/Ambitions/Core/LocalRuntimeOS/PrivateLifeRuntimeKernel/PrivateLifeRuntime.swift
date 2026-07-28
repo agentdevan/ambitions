@@ -33,11 +33,13 @@ struct PrivateLifeRuntime: Sendable {
         targetSurface: StageMutationTargetSurface,
         timeMutation: TimeMutation? = nil
     ) -> RuntimeMutation? {
-        switch command.kind {
-        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
-            guard timeMutation?.todayRecompute.recomputedToday == true else { return nil }
-        default:
-            break
+        if case let .schedule(value) = command.typedPayload {
+            switch value.action {
+            case .placeStep, .protectWindow, .correctWindow, .undo:
+                guard timeMutation?.todayRecompute.recomputedToday == true else { return nil }
+            case .createItem, .schedule, .ritual, .calendarWrite:
+                break
+            }
         }
         return RuntimeMutation(
             command: command,

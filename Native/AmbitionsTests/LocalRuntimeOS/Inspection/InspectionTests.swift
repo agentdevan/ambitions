@@ -113,7 +113,7 @@ final class InspectionTests: XCTestCase {
             payload: .commandExecution(
                 RuntimeCommandEventPayload(
                     phase: .executionRecorded,
-                    commandKind: .completeAction,
+                    commandPayload: fixture.commandRecord.command.typedPayload,
                     validationState: .valid,
                     executionStatus: .succeeded,
                     resultStatus: .succeeded,

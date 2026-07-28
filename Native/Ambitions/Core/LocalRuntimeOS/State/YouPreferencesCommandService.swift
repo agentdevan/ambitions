@@ -91,15 +91,23 @@ private struct YouPreferencesCommandPlan: Sendable {
             "reviewCadenceDays": String(max(1, preferences.reviewCadenceDays)),
             "localOnlyModeEnabled": "true"
         ]
+        let target = AmbitionsCommandTarget(destination: .you)
+        let content = AmbitionsCommandPayload(title: "Update You preferences")
         command = AmbitionsCommand(
             id: commandID,
-            kind: .updateUserPreferences,
             source: .you,
-            target: AmbitionsCommandTarget(destination: .you),
-            payload: AmbitionsCommandPayload(
-                title: "Update You preferences",
-                metadata: metadata
-            ),
+            typedPayload: .profile(ProfileCommand(
+                action: .updatePreferences,
+                target: target,
+                content: RuntimeCommandContent(content),
+                preferences: ProfilePreferencesCommandValues(
+                    preferredTab: preferences.preferredTab.canonicalTopLevelTab,
+                    appearancePreference: preferences.appearancePreference,
+                    accentFamily: preferences.accentFamily,
+                    reviewCadenceDays: max(1, preferences.reviewCadenceDays),
+                    localOnlyModeEnabled: true
+                )
+            )),
             createdAt: DomainTimestamp.string(from: now),
             actor: .user,
             sourceSurface: "you",

@@ -37,9 +37,6 @@ struct TodayReceiptDomainEvent: Sendable, Codable, Equatable {
         case recommendationRejection = "recommendation_rejection"
     }
 
-    static let commandMetadataKey = "todayReceiptPayload"
-    static let mutationMarkerKey = "todayReceiptMutation"
-
     let kind: Kind
     let receipt: ActionReceipt
     let privacyLevel: ActionReceiptPrivacyLevel
@@ -57,17 +54,10 @@ struct TodayReceiptDomainEvent: Sendable, Codable, Equatable {
         )
     }
 
-    func encodedCommandPayload() throws -> String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.sortedKeys]
-        return try encoder.encode(self).base64EncodedString()
-    }
-
     static func decode(command: AmbitionsCommand) -> TodayReceiptDomainEvent? {
-        guard command.payload.metadata[mutationMarkerKey] == "true",
-              let encoded = command.payload.metadata[commandMetadataKey],
-              let data = Data(base64Encoded: encoded) else { return nil }
-        return try? JSONDecoder().decode(TodayReceiptDomainEvent.self, from: data)
+        guard case let .history(value) = command.canonicalPayload,
+              case let .todayReceipt(event) = value.action else { return nil }
+        return event
     }
 }
 
@@ -205,10 +195,11 @@ extension RuntimeDomainEvent {
         if let plan = TodayGoalStepActionPlan.decode(command: command), result.status == .succeeded {
             return .todayGoalStepActionApplied(plan)
         }
-        switch command.kind {
-        case .quickCapture:
+        switch command.typedPayload {
+        case let .capture(capture):
+            guard case .quickCapture = capture.action else { return nil }
             guard let captureID = result.target?.captureID ?? result.metadata["captureID"],
-                  let rawText = command.payload.primaryText else { return nil }
+                  let rawText = capture.content.primaryText else { return nil }
             let route = result.metadata["captureRoute"].flatMap(CaptureRoute.init(rawValue:)) ?? .captureInbox
             let kind = result.metadata["captureKind"].flatMap(CaptureKind.init(rawValue:)) ?? .raw
             return .captureCreated(CaptureCreatedDomainEvent(capture: Capture(
@@ -218,57 +209,50 @@ extension RuntimeDomainEvent {
                 rawText: rawText.trimmingCharacters(in: .whitespacesAndNewlines),
                 sourceType: result.metadata["captureSourceType"].flatMap(CaptureSourceType.init(rawValue:)),
                 status: route == .captureInbox ? .needsTriage : .seed,
-                linkedGoalID: command.target.goalID,
+                linkedGoalID: capture.target.goalID,
                 triage: CaptureTriageMetadata(destination: route.triageDestination, hint: result.metadata["smartAttachmentReceipt"]),
                 kind: kind,
                 route: route,
                 triageStatus: route == .captureInbox ? .needsTriage : .assumedRoute,
-                commitmentKind: command.payload.commitmentKind,
-                deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
-                contextLensHint: command.payload.contextLens,
-                priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                commitmentKind: capture.content.commitmentKind,
+                deadlineText: capture.content.deadlineText ?? capture.content.dueText,
+                deadlineKind: capture.content.deadlineText == nil && capture.content.dueText == nil ? .none : .hard,
+                contextLensHint: capture.content.contextLens,
+                priorityHints: CapturePriorityHints(commandHints: capture.content.priorityHints),
                 assumptionSummary: result.metadata["smartAttachmentReceipt"],
                 recommendationExplanationIDs: command.relations.recommendationExplanationIDs
             )))
-        case .createTimeItem, .placeStepInTime:
-            guard let stepID = command.target.stepID, let timeBlockID = command.target.timeID else { return nil }
-            return .stepPlaced(StepPlacedDomainEvent(
-                stepID: stepID,
-                timeBlockID: timeBlockID,
-                start: command.payload.metadata["startAt"] ?? command.payload.metadata["start"] ?? occurredAt,
-                end: command.payload.metadata["endAt"] ?? command.payload.metadata["end"] ?? occurredAt,
-                title: command.payload.title,
-                goalID: command.target.goalID
-            ))
-        case .protectTimeWindow:
-            guard let windowID = command.target.timeID,
-                  let start = command.payload.metadata["startAt"] ?? command.payload.metadata["start"],
-                  let end = command.payload.metadata["endAt"] ?? command.payload.metadata["end"] else { return nil }
-            return .timeWindowProtected(TimeWindowDomainEvent(
-                windowID: windowID, start: start, end: end,
-                reason: command.payload.notes ?? command.payload.title ?? "user_protected"
-            ))
-        case .correctTimeWindow:
-            if let originalReceiptID = command.payload.metadata["undoOriginalReceiptID"] {
-                return .mutationUndone(MutationUndoneDomainEvent(
-                    originalReceiptID: originalReceiptID,
-                    affectedObjectIDs: [command.target.timeID, command.target.stepID].compactMap { $0 }
+        case let .schedule(schedule):
+            switch schedule.action {
+            case let .createItem(placement), let .placeStep(placement):
+                guard let placement, let stepID = schedule.target.stepID, let timeBlockID = schedule.target.timeID else { return nil }
+                return .stepPlaced(StepPlacedDomainEvent(
+                    stepID: stepID, timeBlockID: timeBlockID, start: placement.start, end: placement.end,
+                    title: schedule.content.title, goalID: schedule.target.goalID
                 ))
+            case let .protectWindow(placement):
+                guard let placement, let windowID = schedule.target.timeID else { return nil }
+                return .timeWindowProtected(TimeWindowDomainEvent(
+                    windowID: windowID, start: placement.start, end: placement.end,
+                    reason: schedule.content.notes ?? schedule.content.title ?? "user_protected"
+                ))
+            case let .undo(undo):
+                return .mutationUndone(MutationUndoneDomainEvent(
+                    originalReceiptID: undo.originalReceiptID.rawValue,
+                    affectedObjectIDs: [schedule.target.timeID, schedule.target.stepID].compactMap { $0 }
+                ))
+            case let .correctWindow(correction):
+                guard let windowID = schedule.target.timeID, let start = correction.start, let end = correction.end else { return nil }
+                return .timeWindowCorrected(TimeWindowDomainEvent(
+                    windowID: windowID, start: start, end: end, reason: correction.action.rawValue
+                ))
+            case .schedule, .calendarWrite, .ritual: return nil
             }
-            guard let windowID = command.target.timeID,
-                  let start = command.payload.metadata["startAt"] ?? command.payload.metadata["start"],
-                  let end = command.payload.metadata["endAt"] ?? command.payload.metadata["end"] else { return nil }
-            return .timeWindowCorrected(TimeWindowDomainEvent(
-                windowID: windowID, start: start, end: end,
-                reason: command.payload.metadata["correctionKind"] ?? "corrected"
-            ))
-        case .completeAction, .updateGoal, .delayAction, .splitAction, .recoverAction, .archiveItem,
-             .dismissRecommendation:
-            guard result.status == .succeeded,
-                  let receipt = TodayReceiptDomainEvent.decode(command: command) else { return nil }
+        case let .history(history):
+            guard result.status == .succeeded, case let .todayReceipt(receipt) = history.action else { return nil }
             return .todayReceiptRecorded(receipt)
-        default:
+        case .goal, .step, .reminder, .profile, .repair, .importDeletion, .externalOperation,
+             .compensation:
             return nil
         }
     }
@@ -292,7 +276,8 @@ enum RuntimeCommandEventPhase: String, Codable, Equatable, Hashable, CaseIterabl
 
 struct RuntimeCommandEventPayload: Codable, Equatable, Hashable {
     let phase: RuntimeCommandEventPhase
-    let commandKind: AmbitionsCommandKind
+    let commandPayload: RuntimeCommandPayload?
+    let legacyCommandOperation: RuntimeCommandOperation?
     let validationState: AmbitionsCommandValidationState
     let executionStatus: AmbitionsCommandExecutionStatus
     let resultStatus: AmbitionsCommandExecutionStatus
@@ -303,9 +288,17 @@ struct RuntimeCommandEventPayload: Codable, Equatable, Hashable {
     let recommendationExplanationIDs: [String]
     let resultMetadata: [String: String]
 
+    private enum CodingKeys: String, CodingKey {
+        case phase
+        case commandPayload
+        case legacyCommandOperation = "commandKind"
+        case validationState, executionStatus, resultStatus, resultSummary, commandRecordID, resultRoute
+        case eventLedgerEntryIDs, recommendationExplanationIDs, resultMetadata
+    }
+
     init(
         phase: RuntimeCommandEventPhase,
-        commandKind: AmbitionsCommandKind,
+        commandPayload: RuntimeCommandPayload,
         validationState: AmbitionsCommandValidationState,
         executionStatus: AmbitionsCommandExecutionStatus,
         resultStatus: AmbitionsCommandExecutionStatus,
@@ -317,7 +310,8 @@ struct RuntimeCommandEventPayload: Codable, Equatable, Hashable {
         resultMetadata: [String: String]
     ) {
         self.phase = phase
-        self.commandKind = commandKind
+        self.commandPayload = commandPayload
+        legacyCommandOperation = nil
         self.validationState = validationState
         self.executionStatus = executionStatus
         self.resultStatus = resultStatus
@@ -327,6 +321,41 @@ struct RuntimeCommandEventPayload: Codable, Equatable, Hashable {
         self.eventLedgerEntryIDs = Self.normalized(eventLedgerEntryIDs)
         self.recommendationExplanationIDs = Self.normalized(recommendationExplanationIDs)
         self.resultMetadata = resultMetadata.filter { $0.key.isEmpty == false && $0.value.isEmpty == false }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        phase = try container.decode(RuntimeCommandEventPhase.self, forKey: .phase)
+        commandPayload = try container.decodeIfPresent(RuntimeCommandPayload.self, forKey: .commandPayload)
+        legacyCommandOperation = try container.decodeIfPresent(RuntimeCommandOperation.self, forKey: .legacyCommandOperation)
+        guard commandPayload != nil || legacyCommandOperation != nil else {
+            throw DecodingError.dataCorruptedError(forKey: .commandPayload, in: container, debugDescription: "Command event identity is missing.")
+        }
+        validationState = try container.decode(AmbitionsCommandValidationState.self, forKey: .validationState)
+        executionStatus = try container.decode(AmbitionsCommandExecutionStatus.self, forKey: .executionStatus)
+        resultStatus = try container.decode(AmbitionsCommandExecutionStatus.self, forKey: .resultStatus)
+        resultSummary = try container.decode(String.self, forKey: .resultSummary)
+        commandRecordID = Self.nonEmpty(try container.decodeIfPresent(String.self, forKey: .commandRecordID))
+        resultRoute = try container.decodeIfPresent(AmbitionsCommandDestination.self, forKey: .resultRoute)
+        eventLedgerEntryIDs = Self.normalized(try container.decode([String].self, forKey: .eventLedgerEntryIDs))
+        recommendationExplanationIDs = Self.normalized(try container.decode([String].self, forKey: .recommendationExplanationIDs))
+        resultMetadata = try container.decode([String: String].self, forKey: .resultMetadata)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(phase, forKey: .phase)
+        try container.encodeIfPresent(commandPayload, forKey: .commandPayload)
+        try container.encodeIfPresent(legacyCommandOperation, forKey: .legacyCommandOperation)
+        try container.encode(validationState, forKey: .validationState)
+        try container.encode(executionStatus, forKey: .executionStatus)
+        try container.encode(resultStatus, forKey: .resultStatus)
+        try container.encode(resultSummary, forKey: .resultSummary)
+        try container.encodeIfPresent(commandRecordID, forKey: .commandRecordID)
+        try container.encodeIfPresent(resultRoute, forKey: .resultRoute)
+        try container.encode(eventLedgerEntryIDs, forKey: .eventLedgerEntryIDs)
+        try container.encode(recommendationExplanationIDs, forKey: .recommendationExplanationIDs)
+        try container.encode(resultMetadata, forKey: .resultMetadata)
     }
 
     private static func normalized(_ values: [String]) -> [String] {
@@ -483,7 +512,7 @@ struct RuntimeEvent: Codable, Equatable, Hashable {
             payload: .commandExecution(
                 RuntimeCommandEventPayload(
                     phase: .executionRecorded,
-                    commandKind: command.kind,
+                    commandPayload: command.typedPayload,
                     validationState: command.validationState,
                     executionStatus: command.executionStatus,
                     resultStatus: result.status,

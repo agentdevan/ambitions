@@ -259,7 +259,6 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeFactory.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AppServices.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/DedicatedDevicePrototypeRuntime.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RealityIntegrationAdapters.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimePackageBoundaryModels.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SnapshotRefreshingServices.swift",

@@ -170,10 +170,10 @@ final class EventLedgerRepositoryTests: XCTestCase {
         let recent = try await repository.fetchRecent(limit: 2)
         let fetched = try await repository.fetchRecord(commandID: "command-old")
 
-        XCTAssertEqual(recent.map(\.command.id), ["command-new", "command-old"])
-        XCTAssertEqual(recent.map(\.result.status), [.failed, .succeeded])
+        XCTAssertEqual(recent.compactMap { $0.command?.id }, ["command-new", "command-old"])
+        XCTAssertEqual(recent.compactMap { $0.result?.status }, [.failed, .succeeded])
         XCTAssertEqual(recent.map(\.recordedAt), ["2026-04-24T10:00:00Z", "2026-04-24T09:00:00Z"])
-        XCTAssertEqual(fetched?.result.summary, "Created")
+        XCTAssertEqual(fetched?.result?.summary, "Created")
         XCTAssertEqual(fetched?.commandID, "command-old")
     }
 
@@ -206,9 +206,9 @@ final class EventLedgerRepositoryTests: XCTestCase {
         let fetched = try await repository.fetchRecord(commandID: "command-memory")
         let records = try await repository.fetchRecent(limit: 10)
 
-        XCTAssertEqual(fetched?.command.id, "command-memory")
+        XCTAssertEqual(fetched?.command?.id, "command-memory")
         XCTAssertEqual(records.count, 1)
-        XCTAssertEqual(records.first?.result.summary, "Replaced")
+        XCTAssertEqual(records.first?.result?.summary, "Replaced")
     }
 }
 

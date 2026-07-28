@@ -236,90 +236,77 @@ final class CaptureViewModel {
     }
 
     func saveToNeedsPlace(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.updateCaptureState(
-                CaptureStateUpdateRequest(
-                    id: id,
-                    status: .needsTriage,
-                    triage: CaptureTriageMetadata(destination: .needsTriage, hint: "Held for review until the route is clearer."),
-                    kind: .raw,
-                    route: .captureInbox,
-                    triageStatus: .userCorrected,
-                    assumptionSummary: "Held without pressure until you choose a clearer route."
-                ),
-                now: now
-            )
-            actionMessage = CaptureActionMessage(title: "Saved for review", body: "Held without pressure until you choose a clearer route.")
-            return nil
-        }
+        _ = id
+        _ = captureService
+        _ = goalsService
+        _ = now
+        actionMessage = unavailableMutationMessage(
+            "Saving a capture back to Needs a Place requires a typed capture-triage command with receipt and recovery evidence."
+        )
     }
 
-    func archive(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.updateCaptureState(
-                CaptureStateUpdateRequest(
-                    id: id,
-                    status: .archived,
-                    triage: CaptureTriageMetadata(destination: .archive)
-                ),
-                now: now
-            )
-            actionMessage = CaptureActionMessage(title: "Archived", body: "This capture is out of the active list.")
-            return nil
-        }
+    func archive(id: String) async {
+        _ = id
+        actionMessage = unavailableMutationMessage(
+            "Archiving requires a capture command that materializes only after its runtime receipt is committed."
+        )
     }
 
-    func routeToTime(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.routeToTimeSeed(id: id, now: now)
-            actionMessage = CaptureActionMessage(title: "Saved as Step · Today", body: "This can become time work later; no calendar event was created.")
-            return nil
-        }
+    func routeToTime(id: String) async {
+        _ = id
+        actionMessage = unavailableMutationMessage(
+            "Routing to Time requires a capture command that materializes only after its runtime receipt is committed."
+        )
     }
 
-    func markWaiting(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.markAsWaiting(id: id, waitingMetadata: nil, now: now)
-            actionMessage = CaptureActionMessage(title: "Saved as Waiting", body: "This is parked until someone or something unblocks it.")
-            return nil
-        }
+    func markWaiting(id: String) async {
+        _ = id
+        actionMessage = unavailableMutationMessage(
+            "Marking a capture waiting requires a capture command that materializes only after its runtime receipt is committed."
+        )
     }
 
     func markOptionalSomeday(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.markAsOptionalSomeday(id: id, now: now)
-            actionMessage = CaptureActionMessage(title: "Review later", body: "This will not compete with active commitments.")
-            return nil
-        }
+        _ = id
+        _ = captureService
+        _ = goalsService
+        _ = now
+        actionMessage = unavailableMutationMessage(
+            "Saving a capture for later requires a typed optional-someday command with receipt and recovery evidence."
+        )
     }
 
     func markDeliverableSeed(id: String, text: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
-        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            _ = try await captureService.markAsDeliverableSeed(id: id, deliverableHint: text, now: now)
-            actionMessage = CaptureActionMessage(title: "Saved as Idea", body: "This stays findable without becoming scheduled work.")
-            return nil
-        }
+        _ = id
+        _ = text
+        _ = captureService
+        _ = goalsService
+        _ = now
+        actionMessage = unavailableMutationMessage(
+            "Saving a capture as an idea requires a typed deliverable-seed command with receipt and recovery evidence."
+        )
     }
 
     func attachToGoal(
         captureID: String,
         goalID: String,
         goalTitle: String,
+        captureGoalHandoffCommands: CaptureGoalHandoffService,
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
         now: Date = .now
     ) async -> GoalRouteTarget? {
-        await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            guard let binding = try await captureService.attachCaptureToGoal(
-                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
-                now: now
-            ) else {
-                actionMessage = CaptureActionMessage(title: "Capture not found", body: "Refresh captures and try again.")
-                return nil
-            }
-            actionMessage = CaptureActionMessage(title: "Attached as Proof · \(goalTitle)", body: "The capture now belongs with that goal.")
-            return binding.target
+        let outcome = await captureGoalHandoffCommands.perform(
+            CaptureGoalHandoffRequest(captureID: captureID, goalID: goalID),
+            now: now
+        )
+        guard outcome.isAttached else {
+            actionMessage = CaptureActionMessage(title: "Attach did not finish", body: "Refresh this capture and try again.")
+            return nil
         }
+        actionMessage = CaptureActionMessage(title: "Attached as Proof · \(goalTitle)", body: "The capture now belongs with that goal.")
+        await load(captureService: captureService, goalsService: goalsService)
+        return GoalRouteTarget(goalID: goalID)
     }
 
     func turnIntoGoal(
@@ -328,17 +315,14 @@ final class CaptureViewModel {
         goalsService: any GoalsServicing,
         now: Date = .now
     ) async -> GoalRouteTarget? {
-        await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
-            guard let binding = try await captureService.turnCaptureIntoGoal(
-                TurnCaptureIntoGoalRequest(captureID: captureID),
-                now: now
-            ) else {
-                actionMessage = CaptureActionMessage(title: "Capture not found", body: "Refresh captures and try again.")
-                return nil
-            }
-            actionMessage = CaptureActionMessage(title: "Saved as Goal · Creative", body: "The capture is now connected to a new goal.")
-            return binding.target
-        }
+        _ = captureID
+        _ = captureService
+        _ = goalsService
+        _ = now
+        actionMessage = unavailableMutationMessage(
+            "Turning a capture into a goal requires an atomic typed capture-to-goal creation command."
+        )
+        return nil
     }
 
     private func performAndReload(
@@ -356,6 +340,10 @@ final class CaptureViewModel {
             await load(captureService: captureService, goalsService: goalsService)
             return nil
         }
+    }
+
+    private func unavailableMutationMessage(_ detail: String) -> CaptureActionMessage {
+        CaptureActionMessage(title: "Action not available yet", body: detail)
     }
 
     private func receiptTitle(for capture: Capture, fallback: String? = nil) -> String {

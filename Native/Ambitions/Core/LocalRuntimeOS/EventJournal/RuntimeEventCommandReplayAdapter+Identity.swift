@@ -27,18 +27,20 @@ extension RuntimeEventCommandReplayAdapter {
 extension AmbitionsCommand {
     func hasSameReplaySemanticIdentity(as other: AmbitionsCommand) -> Bool {
         id == other.id &&
-            kind == other.kind &&
             source == other.source &&
-            target == other.target &&
-            payload == other.payload &&
+            typedPayload == other.typedPayload &&
             validationState == other.validationState &&
             executionStatus == other.executionStatus &&
             result == other.result &&
+            createdAt == other.createdAt &&
+            requestedAt == other.requestedAt &&
             actor == other.actor &&
             sourceSurface == other.sourceSurface &&
             relations == other.relations &&
             localOnly == other.localOnly &&
             privacy == other.privacy &&
-            schemaVersion == other.schemaVersion
+            schemaVersion == other.schemaVersion &&
+            expectedRevision == other.expectedRevision &&
+            idempotencyKey == other.idempotencyKey
     }
 }

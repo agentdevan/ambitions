@@ -44,6 +44,18 @@ struct SnapshotRefreshingGoalsService: GoalsServicing, GoalCreationPreparing {
         return try await base.prepareGoalCreation(request, now: now)
     }
 
+    func commitPreparedGoalCreation(
+        _ prepared: PreparedGoalCreation,
+        now: Date
+    ) async throws -> CreateGoalResponse {
+        guard let base = base as? any GoalCreationPreparing else {
+            throw GoalsFeatureError.notActionable
+        }
+        let response = try await base.commitPreparedGoalCreation(prepared, now: now)
+        await snapshotWriter.refresh(now: now)
+        return response
+    }
+
     func didCommitPreparedGoalCreation(now: Date) async {
         await snapshotWriter.refresh(now: now)
         if let base = base as? any GoalCreationPreparing {

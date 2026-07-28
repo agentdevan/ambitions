@@ -77,7 +77,7 @@ struct RuntimeMutationPlan: Sendable, Equatable, Identifiable {
         self.checksum = RuntimeTransactionDigest.digest([
             id,
             command.id,
-            command.kind.rawValue,
+            Self.commandPayloadIdentity(command.typedPayload),
             validation.validationState.rawValue,
             readSet.checksum,
             writeSet.checksum,
@@ -94,5 +94,15 @@ struct RuntimeMutationPlan: Sendable, Equatable, Identifiable {
             readSet.isComplete &&
             writeSet.isComplete &&
             expectedProjectionIDs.isEmpty == false
+    }
+
+    private static func commandPayloadIdentity(_ payload: RuntimeCommandPayload) -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        guard let bytes = try? encoder.encode(payload),
+              let canonical = String(data: bytes, encoding: .utf8) else {
+            return RuntimeTransactionDigest.digest([payload.diagnosticFamily, payload.diagnosticCase])
+        }
+        return RuntimeTransactionDigest.digest([canonical])
     }
 }

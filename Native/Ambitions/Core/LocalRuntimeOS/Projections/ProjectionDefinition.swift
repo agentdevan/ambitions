@@ -2,7 +2,7 @@ import Foundation
 
 let projectionDefinitionSchemaVersion = "runtime_projection_definition.native.v1"
 
-enum ProjectionID: String, Codable, Equatable, Hashable, CaseIterable, Comparable {
+enum ProjectionID: String, Codable, Sendable, Equatable, Hashable, CaseIterable, Comparable {
     case today
     case goals
     case time

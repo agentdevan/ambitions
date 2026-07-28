@@ -199,7 +199,9 @@ extension SideEffectLedgerEffectKind {
              .archiveItem, .unarchiveItem, .markWaiting, .markDone,
              .moveActionLater, .changePriority, .changeDeadline, .changeTimeWindow,
              .shrinkAction, .splitAction, .dropAction, .deferAction,
-             .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
+        // AMBitionsAllowWeakPattern(reason: "No-op is an explicit local-only ledger classification, never a successful external effect.")
+             .correctRecommendation, .editLocalNote, .manageAttachment,
+             .dismissSuggestion, .noOp:
             self = .localOnly
         }
     }

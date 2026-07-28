@@ -69,9 +69,9 @@ final class LocalRuntimeOSCommandsOwnershipTests: XCTestCase {
             createdAt: "2026-06-20T12:00:00Z"
         )
 
-        XCTAssertEqual(route.kind, .completeAction)
+        XCTAssertEqual(route.operation, .completeAction)
         XCTAssertNil(route.destination)
-        XCTAssertEqual(command.kind, .completeAction)
+        XCTAssertEqual(command.operation, .completeAction)
         XCTAssertEqual(command.validationState, .valid)
         XCTAssertEqual(command.relations.eventLedgerEntryIDs, ["event-1"])
     }

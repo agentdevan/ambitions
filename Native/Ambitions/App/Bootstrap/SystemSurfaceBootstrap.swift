@@ -26,9 +26,9 @@ enum SystemSurfaceBootstrap {
         let notificationService = LocalNotificationFoundation(
             notificationOutbox: NotificationOutbox(recorder: sideEffectOutbox)
         )
-        let eventKitSideEffectOutbox = SideEffectOutbox(
-            ledger: FileSideEffectLedgerRepository.defaultEventKitLedger()
-        )
+        let eventKitSideEffectOutbox: (any SideEffectOutboxing)? = FileSideEffectLedgerRepository.defaultEventKitLedger().map {
+            SideEffectOutbox(ledger: $0)
+        }
         let calendarRemindersService = EventKitIntegrationService(
             eventKitOutbox: EventKitOutbox(recorder: eventKitSideEffectOutbox),
             reminderRepository: repositories.reminders,
@@ -69,8 +69,9 @@ enum SystemSurfaceBootstrap {
             repositories: repositories,
             runtimeCommandClient: runtimeCommandClient
         )
-        let youPreferencesCommands = YouPreferencesCommandService(
-            repositories: repositories,
+        let youPreferencesCommands = RuntimeSelectedYouPreferencesCommandService(
+            adapter: YouRuntimeDataControlAdapter(runtimeClient: runtimeCommandClient),
+            appStateRepository: repositories.appState,
             loadDashboard: { try await runtime.youService.loadYouDashboard() }
         )
         let externalActionService = AppExternalActionRoutingAdapter(

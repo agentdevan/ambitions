@@ -154,8 +154,8 @@ final class TodayServiceProjectionTests: TodayViewModelTestCase {
         XCTAssertFalse(experience.execution.todayTimeLayer.openWindowLabel.isEmpty)
         XCTAssertNotNil(experience.execution.hero.explanation)
         XCTAssertNotNil(experience.execution.saveTheDayAction)
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandKind == .startStepSession })
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandPayload.diagnosticCase == "startSession" })
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandPayload.diagnosticCase == "askWhy" })
     }
 
     func testF01DayRailFoundationProjectsStartHereRowsAndFutureSlots() async throws {

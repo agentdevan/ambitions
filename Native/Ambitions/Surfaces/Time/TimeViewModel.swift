@@ -201,15 +201,20 @@ final class TimeViewModel {
               let receiptID = lastTimeReceiptID,
               let projectionVersion = lastTimeProjectionVersion,
               let timeID = original.target.timeID else { return }
-        var metadata = original.payload.metadata
-        metadata["undoOriginalReceiptID"] = receiptID
-        metadata["expectedProjectionVersion"] = String(projectionVersion)
+        guard let typedReceiptID = RuntimeCommandReceiptID(rawValue: receiptID) else { return }
+        let target = AmbitionsCommandTarget(timeID: timeID, stepID: original.target.stepID)
+        let content = AmbitionsCommandPayload(title: "Undo")
         let undo = AmbitionsCommand(
             id: "command.time.undo.\(original.id).\(ISO8601DateFormatter().string(from: now))",
-            kind: .correctTimeWindow,
             source: .time,
-            target: AmbitionsCommandTarget(timeID: timeID, stepID: original.target.stepID),
-            payload: AmbitionsCommandPayload(title: "Undo", metadata: metadata),
+            typedPayload: .schedule(ScheduleCommand(
+                action: .undo(CommandUndoIntent(
+                    originalReceiptID: typedReceiptID,
+                    expectedProjectionVersion: projectionVersion
+                )),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: ISO8601DateFormatter().string(from: now),
             actor: .user,
             sourceSurface: "Time"
@@ -240,26 +245,18 @@ final class TimeViewModel {
         calendar: Calendar,
         timeZone: TimeZone
     ) async throws -> TimeFeatureMutationResult {
-        let result = await runtimeClient.execute(
-            command,
-            CommandExecutionContext(now: now, actor: .user, sourceSurface: "Time")
-        )
-        guard result.status == .succeeded,
-              let receiptID = result.metadata["runtimeReceiptID"] else {
-            throw TimeFieldMutationError.runtimeRejected(
-                result.metadata["rejectionType"] ?? result.metadata["blockedBy"] ?? result.summary
+        let commit: TimeRuntimeMutationCommit
+        do {
+            commit = try await TimeRuntimeMutationAdapter(runtimeClient: runtimeClient).execute(
+                command,
+                now: now
             )
+        } catch let error as TimeRuntimeMutationAdapterError {
+            throw TimeFieldMutationError.runtimeRejected(String(describing: error))
         }
-        guard result.metadata["runtimeProjectionStoreStatus"] == "saved" else {
-            throw TimeFieldMutationError.runtimeRejected("time_projection_needs_recovery")
-        }
-        guard result.metadata["timeMaterialization"] == "saved_post_authority" else {
-            throw TimeFieldMutationError.runtimeRejected("time_materialization_needs_recovery")
-        }
-        let committedProjection = try await runtimeClient.projection(.time)
-        guard Self.projection(committedProjection, matchesCommittedTimeCursorIn: result.metadata) else {
-            throw TimeFieldMutationError.runtimeRejected("time_projection_receipt_mismatch")
-        }
+        let result = commit.result
+        let receiptID = commit.receiptID
+        let committedProjection = commit.projection
         let reloaded = try await service.loadTimeSurfaceState(now: now)
         state = .loaded(reloaded)
         visibleTimeMutation = Self.committedVisibleMutation(
@@ -283,24 +280,8 @@ final class TimeViewModel {
             projection: reloaded,
             receiptID: receiptID,
             projectionVersion: committedProjection.eventSequence,
-            canUndo: command.payload.metadata["undoOriginalReceiptID"] == nil
+            canUndo: command.commandUndoIntent == nil
         )
-    }
-
-    private static func projection(
-        _ projection: RuntimeProjectionSnapshot,
-        matchesCommittedTimeCursorIn metadata: [String: String]
-    ) -> Bool {
-        let ids = metadata["runtimeMaterializedProjectionCursorIDs"]?.split(separator: ",").map(String.init) ?? []
-        let sequences = metadata["runtimeMaterializedProjectionCursorSequences"]?.split(separator: ",").compactMap { Int64($0) } ?? []
-        let checksums = metadata["runtimeMaterializedProjectionCursorChecksums"]?.split(separator: ",").map(String.init) ?? []
-        guard ids.count == sequences.count, ids.count == checksums.count,
-              let timeIndex = ids.firstIndex(of: ProjectionID.time.rawValue) else {
-            return false
-        }
-        return projection.projectionID == ProjectionID.time.rawValue &&
-            projection.eventSequence == sequences[timeIndex] &&
-            projection.cursorChecksum == checksums[timeIndex]
     }
 
     private static func committedVisibleMutation(
@@ -316,7 +297,7 @@ final class TimeViewModel {
         let stableAffectedIDs = affectedIDs.isEmpty ? [command.id] : affectedIDs
         let action = MutationActionReference(
             commandID: command.id,
-            commandKind: command.kind,
+            commandPayload: command.typedPayload,
             source: command.source,
             targetObjectIDs: stableAffectedIDs
         )
@@ -338,13 +319,18 @@ final class TimeViewModel {
             action: action,
             afterSnapshot: after
         )
-        let isUndo = command.payload.metadata["undoOriginalReceiptID"] != nil
+        let isUndo = command.commandUndoIntent != nil
         let headline: String
-        switch command.kind {
-        case .placeStepInTime: headline = "Step placed"
-        case .protectTimeWindow: headline = "Window protected"
-        case .correctTimeWindow: headline = isUndo ? "Undo applied" : "Time corrected"
-        default: headline = "Time updated"
+        if case let .schedule(value) = command.typedPayload {
+            switch value.action {
+            case .placeStep: headline = "Step placed"
+            case .protectWindow: headline = "Window protected"
+            case .undo: headline = "Undo applied"
+            case .correctWindow: headline = "Time corrected"
+            case .createItem, .schedule, .ritual, .calendarWrite: headline = "Time updated"
+            }
+        } else {
+            headline = "Time updated"
         }
         let runtimeMutationID = "runtime.mutation.\(receiptID)"
         let stage = StageMutation(
@@ -355,7 +341,7 @@ final class TimeViewModel {
             affectedObjectIDs: stableAffectedIDs,
             visibleUserFacingChange: headline,
             typedMotionEvent: MutationMotionEvent(
-                id: isUndo ? "stage.motion.time.mutation_undone" : "stage.motion.\(command.kind.rawValue)",
+                id: isUndo ? "stage.motion.time.mutation_undone" : "stage.motion.\(command.typedPayload.diagnosticFamily).\(command.typedPayload.diagnosticCase)",
                 kind: isUndo ? .undo : .stageAction,
                 sourceMutationID: runtimeMutationID,
                 affectedObjectIDs: stableAffectedIDs

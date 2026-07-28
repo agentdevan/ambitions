@@ -23,7 +23,11 @@ struct ClosureStageMutation: Equatable, Sendable {
         let targetIDs = affectedObjectIDs.isEmpty ? [record.id] : affectedObjectIDs
         let action = MutationActionReference(
             commandID: "closure.\(record.id)",
-            commandKind: .completeAction,
+            commandPayload: .step(StepCommand(
+                action: .complete,
+                target: AmbitionsCommandTarget(goalID: record.goalID, stepID: record.stepID),
+                content: RuntimeCommandContent(AmbitionsCommandPayload(title: stepTitle))
+            )),
             source: .today,
             targetObjectIDs: targetIDs
         )

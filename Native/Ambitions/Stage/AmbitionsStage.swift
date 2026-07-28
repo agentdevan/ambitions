@@ -15,7 +15,7 @@ struct AmbitionsStage: View {
     init(container: AppContainer, appFeatureFlags: AppFeatureFlags = .current) {
         self.container = container
         self.appFeatureFlags = appFeatureFlags
-        _navigation = State(initialValue: container.navigation)
+        _navigation = State(initialValue: container.shell.navigation)
         _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
     }
 
@@ -170,8 +170,8 @@ struct AmbitionsStage: View {
             AppShellActivatedCaptureSeam(
                 overlay: overlay,
                 command: ActivatedCaptureCommand(
-                    commandRouter: container.commandRouter,
-                    clock: container.clock
+                    commandRouter: container.shell.commandRouter,
+                    clock: container.runtimeCapability.clock
                 ),
                 onDismiss: {
                     navigation.dismissOverlay()
@@ -198,8 +198,8 @@ struct AmbitionsStage: View {
     private var shellOverlayActions: ShellOverlayActions {
         ShellOverlayActions(
             navigation: navigation,
-            commandRouter: container.commandRouter,
-            searchService: container.memoryLensService
+            commandRouter: container.shell.commandRouter,
+            searchService: container.shell.memoryLensService
         )
     }
 
@@ -275,11 +275,11 @@ struct AmbitionsStage: View {
         captureID: String? = nil
     ) {
         creationMessage = nil
-        container.commandRouter.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
+        container.shell.commandRouter.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
     }
 
     private func presentCommandSheet(from source: ShellCommandEntrySource) {
-        container.commandRouter.presentCommandSheet(
+        container.shell.commandRouter.presentCommandSheet(
             intent: nil,
             source: source,
             presentationContext: .neutral
@@ -287,7 +287,7 @@ struct AmbitionsStage: View {
     }
 
     private func presentSurfaceCapture(for tab: AmbitionsSurface) {
-        container.commandRouter.presentCommandSheet(
+        container.shell.commandRouter.presentCommandSheet(
             intent: .quickCapture,
             source: AppShellCaptureAccessModel.source(for: tab),
             presentationContext: .quickCapture
@@ -296,7 +296,7 @@ struct AmbitionsStage: View {
 
     private func completeOnboarding(choice: OnboardingEntryChoice) async {
         do {
-            let decision = try await container.onboardingService.complete(choice: choice, now: .now)
+            let decision = try await container.userSystem.onboardingService.complete(choice: choice, now: .now)
             onboardingError = nil
             isOnboardingPresented = false
             navigation.selectTab(decision.selectedTab)
@@ -304,7 +304,7 @@ struct AmbitionsStage: View {
             case .createFirstGoal:
                 presentCreateGoal(from: decision.overlaySource ?? .shellCompose)
             case .captureFirst:
-                container.commandRouter.presentCommandSheet(
+                container.shell.commandRouter.presentCommandSheet(
                     intent: decision.overlayIntent,
                     source: decision.overlaySource ?? .shellCompose,
                     presentationContext: decision.presentationContext

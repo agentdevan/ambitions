@@ -75,11 +75,9 @@ struct PriorityPlacementInput: Sendable, Equatable, Hashable {
     }
 
     static func fromCommand(_ command: AmbitionsCommand) -> PriorityPlacementInput {
-        let metadataPriority = command.payload.metadata["placementPriority"]
-            ?? command.payload.metadata["priority"]
-            ?? command.payload.metadata["userPriority"]
-        let userOverride = metadataPriority.flatMap(PlacementPriority.userFacingValue(from:))
-        let hintedPriority = userOverride ?? PlacementPriority.fromHints(command.payload.priorityHints)
+        let userOverride = command.timePlacementCommandIntent?.placementPriority
+            ?? command.calendarWriteCommandIntent?.placement?.placementPriority
+        let hintedPriority = userOverride ?? PlacementPriority.fromHints(command.content.priorityHints)
         let source: PlacementPrioritySource
         if userOverride != nil {
             source = .userOverride
@@ -92,7 +90,7 @@ struct PriorityPlacementInput: Sendable, Equatable, Hashable {
         }
 
         return PriorityPlacementInput(
-            stepID: command.target.stepID ?? command.payload.metadata["stepID"] ?? "unknown-step",
+            stepID: command.target.stepID ?? command.calendarWriteCommandIntent?.destinationStepID?.rawValue ?? "unknown-step",
             priority: hintedPriority,
             source: source,
             userOverride: userOverride,
@@ -102,9 +100,9 @@ struct PriorityPlacementInput: Sendable, Equatable, Hashable {
     }
 
     private static func contextQuality(from command: AmbitionsCommand) -> ProtectedStepPlacementContextQuality {
-        let raw = command.payload.metadata["protectedPlacementContextQuality"]
-            ?? command.payload.metadata["contextQuality"]
-        return raw.flatMap(ProtectedStepPlacementContextQuality.init(rawValue:)) ?? .sufficient
+        command.timePlacementCommandIntent?.contextQuality
+            ?? command.calendarWriteCommandIntent?.placement?.contextQuality
+            ?? .sufficient
     }
 }
 

@@ -49,6 +49,7 @@ struct AppShellActivatedCaptureSeam: View {
     @State private var saveState: SaveState = .idle
     @State private var selectedDraftRouteType: SmartAttachmentRouteType?
     @State private var isProposalPresented = false
+    @State private var saveTask: Task<Void, Never>?
 
     private let draftRouteService = CaptureDraftRouteService()
 
@@ -82,7 +83,7 @@ struct AppShellActivatedCaptureSeam: View {
                             preview: routePreview,
                             isSaving: saveState == .saving,
                             onAccept: {
-                                Task { await saveCapture() }
+                                beginSaveCapture()
                             },
                             onChangeDestination: { routeType in
                                 updateSelectedDraftRoute(routeType)
@@ -119,6 +120,10 @@ struct AppShellActivatedCaptureSeam: View {
                 isProposalPresented = false
             }
             saveState = .idle
+        }
+        .onDisappear {
+            saveTask?.cancel()
+            saveTask = nil
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
@@ -260,6 +265,16 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     @MainActor
+    private func beginSaveCapture() {
+        guard saveTask == nil, saveState != .saving else { return }
+        saveTask = Task { @MainActor in
+            await saveCapture()
+            guard Task.isCancelled == false else { return }
+            saveTask = nil
+        }
+    }
+
+    @MainActor
     private func saveCapture() async {
         let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard rawText.isEmpty == false else { return }
@@ -279,8 +294,16 @@ struct AppShellActivatedCaptureSeam: View {
             selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType
         ))
 
+        guard Task.isCancelled == false else { return }
+
         if let title = result.title, result.createdCaptureID != nil {
             saveState = .saved(title)
+            // The text field remains editable while the local command is in
+            // flight. Never clear a newer draft merely because an earlier
+            // capture subsequently committed.
+            guard captureText.trimmingCharacters(in: .whitespacesAndNewlines) == rawText else {
+                return
+            }
             draftID = DomainIdentifier.prefixed("shell.capture.draft")
             selectedDraftRouteType = nil
             isProposalPresented = false

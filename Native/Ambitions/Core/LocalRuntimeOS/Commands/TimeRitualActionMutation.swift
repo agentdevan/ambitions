@@ -1,9 +1,6 @@
 import Foundation
 
 struct TimeRitualActionPlan: Sendable, Codable, Equatable {
-    static let metadataKey = "timeRitualActionPlan"
-    static let mutationMarkerKey = "timeRitualActionMutation"
-
     let actionKind: TimeRitualActionKind
     let goalID: String
     let stepID: String
@@ -13,17 +10,21 @@ struct TimeRitualActionPlan: Sendable, Codable, Equatable {
     let feedbackEvents: [StoredGoalFeedbackEvent]
     let evidence: [ProgressEvidence]
 
-    func encoded() throws -> String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.sortedKeys]
-        return try encoder.encode(self).base64EncodedString()
+    static func decode(command: AmbitionsCommand) -> Self? {
+        guard case let .schedule(value) = command.canonicalPayload,
+              case let .ritual(plan) = value.action else { return nil }
+        return plan
     }
 
-    static func decode(command: AmbitionsCommand) -> Self? {
-        guard command.payload.metadata[mutationMarkerKey] == "true",
-              let value = command.payload.metadata[metadataKey],
-              let data = Data(base64Encoded: value) else { return nil }
-        return try? JSONDecoder().decode(Self.self, from: data)
+    static func operation(for action: TimeRitualActionKind) -> RuntimeCommandOperation {
+        switch action {
+        case .complete, .minimumVersion: .completeAction
+        case .quickLog: .quickCapture
+        case .delay, .skip: .delayAction
+        case .needsEasierVersion: .recoverAction
+        case .markNotRelevant: .updateGoal
+        case .openDetail: .openDestination
+        }
     }
 }
 
@@ -202,20 +203,19 @@ struct TimeRitualActionPlanner: Sendable {
             feedbackEvents: feedback.map(StoredGoalFeedbackEvent.init(event:)),
             evidence: evidence
         )
+        let target = AmbitionsCommandTarget(goalID: goal.id, stepID: step.id, destination: .time)
+        let content = AmbitionsCommandPayload(
+            rawText: request.kind == .quickLog ? "Quick log for \"\(step.title)\"." : nil,
+            title: request.kind.rawValue
+        )
         let command = AmbitionsCommand(
             id: commandID,
-            kind: commandKind(for: request.kind),
             source: .time,
-            target: AmbitionsCommandTarget(goalID: goal.id, stepID: step.id, destination: .time),
-            payload: AmbitionsCommandPayload(
-                rawText: request.kind == .quickLog ? "Quick log for \"\(step.title)\"." : nil,
-                title: request.kind.rawValue,
-                metadata: [
-                TimeRitualActionPlan.mutationMarkerKey: "true",
-                TimeRitualActionPlan.metadataKey: try plan.encoded(),
-                "timeRitualActionKind": request.kind.rawValue
-                ]
-            ),
+            typedPayload: .schedule(ScheduleCommand(
+                action: .ritual(plan),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: timestamp,
             actor: .user,
             sourceSurface: "Time",
@@ -226,17 +226,6 @@ struct TimeRitualActionPlanner: Sendable {
             context: CommandExecutionContext(now: now, actor: .user, sourceSurface: "Time"),
             response: response
         )
-    }
-
-    private func commandKind(for kind: TimeRitualActionKind) -> AmbitionsCommandKind {
-        switch kind {
-        case .complete, .minimumVersion: .completeAction
-        case .quickLog: .quickCapture
-        case .delay, .skip: .delayAction
-        case .needsEasierVersion: .recoverAction
-        case .markNotRelevant: .updateGoal
-        case .openDetail: .openDestination
-        }
     }
 
     private func feedbackNote(for kind: TimeRitualActionKind, step: Step) -> String {
@@ -389,7 +378,7 @@ struct RepositoryTimeRitualActionMaterializer: TimeRitualActionMaterializing {
 
 extension AmbitionsCommand {
     var isTimeRitualActionMutation: Bool {
-        payload.metadata[TimeRitualActionPlan.mutationMarkerKey] == "true"
+        TimeRitualActionPlan.decode(command: self) != nil
     }
 }
 

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct DegradedStateSurface: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let state: DegradedStatePresentation
     let primaryAccessibilityIdentifier: String?
@@ -45,30 +46,57 @@ struct DegradedStateSurface: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                HStack(spacing: theme.spacing.sm) {
-                    if let onPrimaryAction {
-                        Button {
-                            onPrimaryAction()
-                        } label: {
-                            Label(state.primaryAction.title, systemImage: state.primaryAction.systemImage)
-                        }
-                        .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: state.tone))
-                        .accessibilityIdentifier(primaryAccessibilityIdentifier ?? "\(state.id).primary")
-                    }
-
-                    if let secondary = state.secondaryAction, let onSecondaryAction {
-                        Button {
-                            onSecondaryAction()
-                        } label: {
-                            Label(secondary.title, systemImage: secondary.systemImage)
-                        }
-                        .buttonStyle(AmbitionButtonStyle(tier: .tertiary, state: .default))
-                        .accessibilityIdentifier(secondaryAccessibilityIdentifier ?? "\(state.id).secondary")
-                    }
-                }
+                actionControls
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .accessibilityIdentifier(state.id)
+    }
+
+    @ViewBuilder
+    private var actionControls: some View {
+        if hasActions {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    primaryActionButton
+                    secondaryActionButton
+                }
+            } else {
+                HStack(spacing: theme.spacing.sm) {
+                    primaryActionButton
+                    secondaryActionButton
+                }
+            }
+        }
+    }
+
+    private var hasActions: Bool {
+        onPrimaryAction != nil || (state.secondaryAction != nil && onSecondaryAction != nil)
+    }
+
+    @ViewBuilder
+    private var primaryActionButton: some View {
+        if let onPrimaryAction {
+            Button {
+                onPrimaryAction()
+            } label: {
+                Label(state.primaryAction.title, systemImage: state.primaryAction.systemImage)
+            }
+            .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: state.tone))
+            .accessibilityIdentifier(primaryAccessibilityIdentifier ?? "\(state.id).primary")
+        }
+    }
+
+    @ViewBuilder
+    private var secondaryActionButton: some View {
+        if let secondary = state.secondaryAction, let onSecondaryAction {
+            Button {
+                onSecondaryAction()
+            } label: {
+                Label(secondary.title, systemImage: secondary.systemImage)
+            }
+            .buttonStyle(AmbitionButtonStyle(tier: .tertiary, state: .default))
+            .accessibilityIdentifier(secondaryAccessibilityIdentifier ?? "\(state.id).secondary")
+        }
     }
 }

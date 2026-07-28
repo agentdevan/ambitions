@@ -8,6 +8,7 @@ enum RuntimeEventCommandReplayLookupResult: Sendable, Equatable {
         commandRecordMaterialization: String
     )
     case commandRecordWithoutRuntimeEvent(AmbitionsCommandExecutionRecord)
+    case quarantinedCommandRecord(QuarantinedCommandExecutionRecord)
     case sqliteDiagnosticWithoutAuthority(RuntimeCommandReplayProjection)
     case lookupUnavailable
     case noRecord
@@ -34,7 +35,11 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
                         return .sqliteDiagnosticWithoutAuthority(projection)
                     }
                     let materialization = await materializeCommandRecordIfNeeded(for: command, projection: projection)
-                    let commandRecord = try await commandExecutionRecords?.fetchRecord(commandID: command.id)
+                    let storedRecord = try await commandExecutionRecords?.fetchRecord(commandID: command.id)
+                    if case let .quarantined(record) = storedRecord {
+                        return .quarantinedCommandRecord(record)
+                    }
+                    let commandRecord: AmbitionsCommandExecutionRecord? = if case let .supported(record) = storedRecord { record } else { nil }
                     return .runtimeEvent(
                         projection,
                         authorityReceipt: authorityReceipt,
@@ -49,10 +54,13 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
 
         guard let commandExecutionRecords else { return .noRecord }
         do {
-            guard let record = try await commandExecutionRecords.fetchRecord(commandID: command.id) else {
+            guard let stored = try await commandExecutionRecords.fetchRecord(commandID: command.id) else {
                 return .noRecord
             }
-            return .commandRecordWithoutRuntimeEvent(record)
+            switch stored {
+            case let .supported(record): return .commandRecordWithoutRuntimeEvent(record)
+            case let .quarantined(record): return .quarantinedCommandRecord(record)
+            }
         } catch {
             return .lookupUnavailable
         }
@@ -156,6 +164,23 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
                 "doubleApplyDisposition": LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue,
                 "blockedBy": "runtime_event_replay_lookup_unavailable",
                 "runtimeReplayAuthority": "runtime_event_journal",
+            ]
+        )
+    }
+
+    func quarantinedCommandRecordResult(
+        for command: AmbitionsCommand,
+        record: QuarantinedCommandExecutionRecord
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "A stored command uses an unsupported or corrupt schema. Its original bytes were preserved and mutation was blocked.",
+            target: command.target,
+            metadata: [
+                "blockedBy": "quarantined_runtime_command",
+                "quarantinedRecordID": record.id,
+                "quarantinedReason": record.issue.reason.rawValue,
+                "doubleApplyDisposition": LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue
             ]
         )
     }

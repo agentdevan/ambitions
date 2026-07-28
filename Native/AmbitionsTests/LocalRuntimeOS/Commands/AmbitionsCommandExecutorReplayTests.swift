@@ -133,7 +133,7 @@ final class AmbitionsCommandExecutorReplayTests: XCTestCase {
         XCTAssertTrue(captures.isEmpty)
         XCTAssertTrue(events.isEmpty)
         XCTAssertEqual(runtimeEventEnvelopes.count, 1)
-        XCTAssertEqual(record.result.metadata["ledgerRecordKind"], LedgerRecordTaxonomyKind.event.rawValue)
+        XCTAssertEqual(record.result?.metadata["ledgerRecordKind"], LedgerRecordTaxonomyKind.event.rawValue)
         XCTAssertEqual(record.recordedAt, "2026-04-25T12:01:00Z")
     }
 
@@ -210,9 +210,9 @@ final class AmbitionsCommandExecutorReplayTests: XCTestCase {
 
         let records = try await commandRecordRepository.fetchRecent(limit: 10)
         let record = try XCTUnwrap(records.first)
-        XCTAssertEqual(record.result.summary, "Saved to Needs a Place")
-        XCTAssertEqual(record.result.eventLedgerEntryIDs, [])
-        XCTAssertEqual(record.command.actor, .externalSurface)
+        XCTAssertEqual(record.result?.summary, "Saved to Needs a Place")
+        XCTAssertEqual(record.result?.eventLedgerEntryIDs, [])
+        XCTAssertEqual(record.command?.actor, .externalSurface)
     }
 
     func testQuickCaptureCanExecuteWithoutLedgerEmission() async throws {
@@ -261,11 +261,11 @@ private actor ThrowingFetchCommandExecutionRecordRepository: AmbitionsCommandExe
         appendedRecords.append(record)
     }
 
-    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
-        Array(appendedRecords.prefix(max(0, limit)))
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord] {
+        Array(appendedRecords.prefix(max(0, limit))).map(StoredCommandExecutionRecord.supported)
     }
 
-    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord? {
         throw CommandExecutionRecordTestError.fetchUnavailable
     }
 }

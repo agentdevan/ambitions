@@ -259,6 +259,8 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             case let .committedCatchUpRequired(reference):
                 receipt = reference
                 projectionReady = false
+            case .outcomeIndeterminate:
+                return indeterminateQuickCaptureResult(intent: intent)
             case let .rejectedBeforeMutation(code, _):
                 return rejectedQuickCaptureResult(
                     intent: intent,
@@ -416,6 +418,22 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 proofReceipt: .unavailable("No complete receipt and Capture identity were returned."),
                 accessibility: .satisfied("Failure returns a user-facing fallback message."),
                 fallbackUndo: .satisfied("The previous Capture state remains unchanged.")
+            )
+        )
+    }
+
+    private func indeterminateQuickCaptureResult(
+        intent: ShellCommandIntent
+    ) -> ShellCommandExecutionResult {
+        ShellCommandExecutionResult(
+            title: "Capture outcome needs recovery.",
+            pipelineTrace: intent.productRuntimePipelineTrace(
+                commandValidation: .satisfied("Capture save command has non-empty user text."),
+                runtimeMutation: .unavailable("The runtime did not return enough durable evidence to classify this save."),
+                visibleMutation: .blocked("No navigation or saved Capture result is claimed while the outcome is indeterminate."),
+                proofReceipt: .unavailable("A receipt and Capture identity were not both returned."),
+                accessibility: .satisfied("Recovery state returns a user-facing message."),
+                fallbackUndo: .unavailable("Preserve the draft and refresh before retrying; the mutation outcome is unknown.")
             )
         )
     }

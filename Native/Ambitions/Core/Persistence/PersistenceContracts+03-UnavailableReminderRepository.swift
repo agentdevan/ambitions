@@ -91,12 +91,12 @@ struct UnavailableAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExe
         throw UnavailableRepositoryError.intentionallyOutOfScope(repository: "AmbitionsCommandExecutionRecordRepository")
     }
 
-    func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord] {
         _ = limit
         throw UnavailableRepositoryError.intentionallyOutOfScope(repository: "AmbitionsCommandExecutionRecordRepository")
     }
 
-    func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord? {
         _ = commandID
         throw UnavailableRepositoryError.intentionallyOutOfScope(repository: "AmbitionsCommandExecutionRecordRepository")
     }

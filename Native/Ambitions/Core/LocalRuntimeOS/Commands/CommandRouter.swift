@@ -1,7 +1,7 @@
 import Foundation
 
 struct CommandRouteDecision: Sendable, Equatable {
-    let kind: AmbitionsCommandKind
+    let operation: RuntimeCommandOperation
     let destination: AmbitionsCommandDestination?
 }
 
@@ -9,27 +9,27 @@ struct CommandRouter: Sendable {
     func route(_ action: NowAction) -> CommandRouteDecision {
         switch action.kind {
         case .none:
-            return CommandRouteDecision(kind: .openDestination, destination: .today)
+            return CommandRouteDecision(operation: .openDestination, destination: .today)
         case .focus:
-            return CommandRouteDecision(kind: .startStepSession, destination: nil)
+            return CommandRouteDecision(operation: .startStepSession, destination: nil)
         case .completeAction:
-            return CommandRouteDecision(kind: .completeAction, destination: nil)
+            return CommandRouteDecision(operation: .completeAction, destination: nil)
         case .openGoal:
-            return CommandRouteDecision(kind: .openDestination, destination: .goalDetail)
+            return CommandRouteDecision(operation: .openDestination, destination: .goalDetail)
         case .openTime, .schedule:
-            return CommandRouteDecision(kind: .openDestination, destination: .time)
+            return CommandRouteDecision(operation: .openDestination, destination: .time)
         case .capture:
-            return CommandRouteDecision(kind: .openDestination, destination: .capture)
+            return CommandRouteDecision(operation: .openDestination, destination: .capture)
         case .recover:
-            return CommandRouteDecision(kind: .recoverAction, destination: nil)
+            return CommandRouteDecision(operation: .recoverAction, destination: nil)
         case .review:
-            return CommandRouteDecision(kind: .openDestination, destination: .reviews)
+            return CommandRouteDecision(operation: .openDestination, destination: .reviews)
         case .wait:
-            return CommandRouteDecision(kind: .markWaiting, destination: nil)
+            return CommandRouteDecision(operation: .markWaiting, destination: nil)
         case .routeCommitment:
-            return CommandRouteDecision(kind: .routeCommitment, destination: nil)
+            return CommandRouteDecision(operation: .routeCommitment, destination: nil)
         case .explain:
-            return CommandRouteDecision(kind: .askWhy, destination: nil)
+            return CommandRouteDecision(operation: .askWhy, destination: nil)
         }
     }
 

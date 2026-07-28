@@ -121,18 +121,18 @@ struct RuntimeIntelligenceQuarantinePolicy: Sendable {
 protocol RuntimeGoalIntelligenceServicing: Sendable {
     func loadContext(_ request: RuntimeGoalIntelligenceRequest, now: Date) async throws -> RuntimeGoalIntelligenceContext?
     func loadContexts(_ requests: [RuntimeGoalIntelligenceRequest], now: Date) async throws -> [RuntimeGoalIntelligenceContext?]
-    func captureCorrection(
+    func proposeCorrection(
         target: GoalRouteTarget,
         control: GoalCorrectionControlState,
         now: Date
-    ) async throws -> GoalTeachingSignal
+    ) async throws -> GoalTeachingCorrectionProposal
 }
 
 struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceServicing {
     let repositories: AppRepositories
     let explainabilityProjector: any GoalExplainabilityProjecting
     let teachingReader: any GoalTeachingSignalReading
-    let teachingCaptureService: any GoalTeachingSignalCapturing
+    let teachingProposalService: any GoalTeachingSignalProposing
     let learningService: LearningAnticipationService
     let quarantinePolicy: RuntimeIntelligenceQuarantinePolicy
 
@@ -140,7 +140,7 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
         repositories: AppRepositories,
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
         teachingReader: (any GoalTeachingSignalReading)? = nil,
-        teachingCaptureService: (any GoalTeachingSignalCapturing)? = nil,
+        teachingProposalService: (any GoalTeachingSignalProposing)? = nil,
         learningService: LearningAnticipationService = LearningAnticipationService(),
         quarantinePolicy: RuntimeIntelligenceQuarantinePolicy = RuntimeIntelligenceQuarantinePolicy()
     ) {
@@ -148,7 +148,7 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
         self.repositories = repositories
         self.explainabilityProjector = explainabilityProjector
         self.teachingReader = teachingReader ?? sharedTeachingService
-        self.teachingCaptureService = teachingCaptureService ?? sharedTeachingService
+        self.teachingProposalService = teachingProposalService ?? sharedTeachingService
         self.learningService = learningService
         self.quarantinePolicy = quarantinePolicy
     }
@@ -202,11 +202,11 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
         return contexts
     }
 
-    func captureCorrection(
+    func proposeCorrection(
         target: GoalRouteTarget,
         control: GoalCorrectionControlState,
         now: Date
-    ) async throws -> GoalTeachingSignal {
+    ) async throws -> GoalTeachingCorrectionProposal {
         guard let context = try await loadContext(
             RuntimeGoalIntelligenceRequest(
                 target: target,
@@ -221,7 +221,7 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
             throw RuntimeGoalIntelligenceError.notActionable
         }
 
-        return try await teachingCaptureService.capture(
+        return try teachingProposalService.propose(
             GoalTeachingCaptureRequest(
                 goalID: goalID,
                 capturedAt: DomainTimestamp.string(from: now),

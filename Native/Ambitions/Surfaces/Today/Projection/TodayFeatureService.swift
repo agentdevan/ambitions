@@ -66,28 +66,13 @@ struct RepositoryBackedTodayService: TodayServicing {
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
-        if Self.durableGoalStepActionKinds.contains(action.kind) {
-            return TodayActionResponse(message: TodayInlineMessage(
-                title: "Action needs the runtime",
-                body: "This Step change is available only through the committed Today runtime path.",
-                state: .warning
-            ))
-        }
-        let commandActionHandler = TodayCommandActionHandler(
-            repositories: repositories,
-            feedbackAction: { action, now in
-                try await self.performFeedbackAction(action, now: now)
-            }
+        _ = now
+        return TodayActionResponse(message: TodayInlineMessage(
+            title: "Action needs the runtime",
+            body: "Today does not apply this change until a typed, committed runtime command is available.",
+            state: .warning
         )
-        let handler = TodayCommandHandler(
-            feedbackActionHandler: { action, now in
-                try await self.performFeedbackAction(action, now: now)
-            },
-            commandActionHandler: { action, command, now in
-                try await commandActionHandler.performAction(action, command: command, now: now)
-            }
         )
-        return try await handler.performAction(action, now: now)
     }
 }
 import AmbitionsTimeFoundation

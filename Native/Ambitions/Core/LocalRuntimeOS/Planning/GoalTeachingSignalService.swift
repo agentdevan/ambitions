@@ -12,40 +12,56 @@ protocol GoalTeachingSignalCapturing: Sendable {
     func capture(_ request: GoalTeachingCaptureRequest, metadata: GoalOrchestrationMetadata) async throws -> GoalTeachingSignal
 }
 
+protocol GoalTeachingSignalProposing: Sendable {
+    func propose(_ request: GoalTeachingCaptureRequest, metadata: GoalOrchestrationMetadata) throws -> GoalTeachingCorrectionProposal
+}
+
 protocol GoalTeachingSignalReading: Sendable {
     func listSignals(goalID: String) async throws -> [GoalTeachingSignal]
     func applicableSignals(goalID: String, metadata: GoalOrchestrationMetadata?) async throws -> GoalTeachingApplicableSet
 }
 
-struct DefaultGoalTeachingSignalService: GoalTeachingSignalCapturing, GoalTeachingSignalReading {
+struct DefaultGoalTeachingSignalService: GoalTeachingSignalCapturing, GoalTeachingSignalProposing, GoalTeachingSignalReading {
     let repository: any GoalTeachingSignalRepository
 
     func capture(_ request: GoalTeachingCaptureRequest, metadata: GoalOrchestrationMetadata) async throws -> GoalTeachingSignal {
+        let proposal = try propose(request, metadata: metadata)
+        let signal = GoalTeachingSignal(
+            id: DomainIdentifier.prefixed("teaching"),
+            goalID: proposal.goalID,
+            createdAt: proposal.capturedAt,
+            updatedAt: proposal.capturedAt,
+            source: proposal.source,
+            kind: proposal.kind,
+            disposition: .active,
+            anchor: proposal.anchor,
+            payload: request.payload,
+            applicationKey: proposal.applicationKey,
+            userNote: request.userNote
+        )
+        try await repository.saveSignals([signal])
+        return signal
+    }
+
+    func propose(_ request: GoalTeachingCaptureRequest, metadata: GoalOrchestrationMetadata) throws -> GoalTeachingCorrectionProposal {
         if let contextGoalID = metadata.context.goalID, contextGoalID != request.goalID {
             throw GoalTeachingSignalError.goalMismatch
         }
 
         let anchor = try validate(request: request, metadata: metadata)
-        let signal = GoalTeachingSignal(
-            id: DomainIdentifier.prefixed("teaching"),
+        return GoalTeachingCorrectionProposal(
             goalID: request.goalID,
-            createdAt: request.capturedAt,
-            updatedAt: request.capturedAt,
-            source: .explicitManualCorrection,
+            capturedAt: request.capturedAt,
             kind: request.kind,
-            disposition: .active,
+            source: .explicitManualCorrection,
             anchor: anchor,
-            payload: request.payload,
             applicationKey: GoalTeachingSignal.makeApplicationKey(
                 goalID: request.goalID,
                 kind: request.kind,
                 anchor: anchor,
                 normalizedTargetValue: request.payload.normalizedTargetValue
-            ),
-            userNote: request.userNote
+            )
         )
-        try await repository.saveSignals([signal])
-        return signal
     }
 
     func listSignals(goalID: String) async throws -> [GoalTeachingSignal] {

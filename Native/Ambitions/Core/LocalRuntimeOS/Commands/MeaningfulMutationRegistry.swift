@@ -36,20 +36,20 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 121
-    static let declaredWritePathRowCount = 55
+    static let declaredMutationRowCount = 124
+    static let declaredWritePathRowCount = 70
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
             id: "preview.runtime-command-client",
             sourcePath: "PreviewAppContainerFactory.preview",
             commandKind: .placeStepInTime,
-            status: .previewOnly,
+            status: .unproven,
             rationale: "DEBUG-only preview composition installs an in-memory runtime command closure; it is not production mutation authority."
         ),
         mutation(
             id: "time.life-shape", sourcePath: "TimeViewModel.performLifeShapeMutation", commandKind: .placeStepInTime,
-            status: .durable, rationale: "Time executes through the durable command journal and SQLite authority, then reloads the Life Calendar projection.",
+            status: .unproven, rationale: "Time executes through the durable command journal and SQLite authority, then reloads the Life Calendar projection; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
             eventKind: "ambitions.step.placed", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
@@ -60,7 +60,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(
             id: "time.protected-placement-approval", sourcePath: "TimeViewModel.approveProtectedPlacementReview", commandKind: .placeStepInTime,
-            status: .durable, rationale: "Explicit protected-placement approval executes the same durable Time command and reloads committed projection state.",
+            status: .unproven, rationale: "Explicit protected-placement approval executes the same durable Time command and reloads committed projection state; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
             eventKind: "ambitions.step.placed", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TimeDurableMutationIntegrationTests/testPlaceStepSurvivesRuntimeRestartWithIdenticalProjectionReceiptAndSchedule",
@@ -68,7 +68,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(
             id: "time.undo", sourcePath: "TimeViewModel.undoLastLifeShapeMutation", commandKind: .correctTimeWindow,
-            status: .durable, rationale: "Undo requires the original committed receipt and expected projection version, emits a semantic undo, and reconstructs the schedule on replay.",
+            status: .unproven, rationale: "Undo requires the original committed receipt and expected projection version, emits a semantic undo, and reconstructs the schedule on replay; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
             eventKind: "ambitions.mutation.undone", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
@@ -78,10 +78,11 @@ enum MeaningfulMutationRegistry {
             ]
         ),
         mutation(id: "time.calendar-aware-view-model", sourcePath: "TimeViewModel.makeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Time ViewModel calendar-aware action delegates to a legacy projection service."),
-        mutation(id: "today.view-model-action", sourcePath: "TodayViewModel.handle", commandKind: .completeAction, status: .unproven, rationale: "Today ViewModel action has no row-specific restart and replay evidence."),
+        mutation(id: "time.runtime-adapter", sourcePath: "TimeRuntimeMutationAdapter.execute", commandKind: .placeStepInTime, status: .unproven, rationale: "Time runtime adapter requires exact revision, receipt, and projection evidence, but executable integration proof remains outstanding."),
+        mutation(id: "today.view-model-action", sourcePath: "TodayViewModel.handle", commandKind: .completeAction, status: .unproven, rationale: "Reachable supported Today actions require the selected runtime client, a receipt, a matching projection cursor, and post-authority materialization; terminal validation remains outstanding."),
         mutation(
             id: "today.view-model-closure", sourcePath: "TodayViewModel.confirmActionClosure", commandKind: .completeAction,
-            status: .durable, rationale: "Today closure confirmation delegates to the runtime receipt command, then refreshes committed projection-backed state without applying a synthetic stage mutation.",
+            status: .unproven, rationale: "Today closure confirmation delegates to the runtime receipt command, then refreshes committed projection-backed state without applying a synthetic stage mutation; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
             eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
@@ -93,7 +94,7 @@ enum MeaningfulMutationRegistry {
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
         mutation(
             id: "today.goal-step-action", sourcePath: "SwiftDataTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
-            status: .durable,
+            status: .unproven,
             rationale: "Seven Today goal-step actions validate revision, commit one semantic event and receipt, then idempotently materialize exact post-authority snapshots.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
@@ -113,7 +114,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(
             id: "today.goal-step-action.repository-materializer", sourcePath: "RepositoryTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "The in-memory repository fallback has post-authority idempotency proof, but it does not own live SwiftData storage or mutation authority.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
@@ -131,7 +132,7 @@ enum MeaningfulMutationRegistry {
         mutation(id: "today.action-closure", sourcePath: "RepositoryBackedTodayService.recordActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Action closure lacks row-specific atomic persistence proof."),
         mutation(
             id: "today.receipt-rejection", sourcePath: "TodayReceiptCommandService.recordRecommendationRejection", commandKind: .dismissRecommendation,
-            status: .durable, rationale: "Recommendation rejection commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization and verifies the committed Today projection cursor.",
+            status: .unproven, rationale: "Recommendation rejection commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization and verifies the committed Today projection cursor; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
             eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testRecommendationRejectionRestartReconstructsSensitiveReceiptWithoutDoubleApply",
@@ -139,7 +140,7 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(
             id: "today.receipt-closure", sourcePath: "TodayReceiptCommandService.recordActionClosure", commandKind: .completeAction,
-            status: .durable, rationale: "Closure commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization; restart returns the same authority receipt and projection checksum.",
+            status: .unproven, rationale: "Closure commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization; executable integration proof remains outstanding.",
             executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
             eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
             replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
@@ -150,8 +151,8 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(id: "goals.view-model-action", sourcePath: "GoalDetailViewModel.perform", commandKind: .updateGoal, status: .unproven, rationale: "Goal Detail action delegates to legacy feature-service mutation."),
         mutation(id: "goals.view-model-clarification", sourcePath: "GoalDetailViewModel.saveClarificationAnswer", commandKind: .updateGoal, status: .unproven, rationale: "Clarification answer lacks durable event and replay proof."),
-        mutation(id: "goals.view-model-correction", sourcePath: "GoalDetailViewModel.submitExplainabilityCorrection", commandKind: .updateGoal, status: .unproven, rationale: "Explainability correction lacks row-specific durable lineage proof."),
-        mutation(id: "goals.view-model-create", sourcePath: "CreateGoalViewModel.submit", commandKind: .createGoal, status: .unproven, rationale: "Create Goal submit delegates to repository-backed creation without restart proof."),
+        mutation(id: "goals.view-model-explainability-correction", sourcePath: "GoalDetailViewModel.submitExplainabilityCorrection", commandKind: .updateGoal, status: .unproven, rationale: "Explainability corrections are proposal-only until a receipt-backed command and terminal validation establish durable lineage."),
+        mutation(id: "goals.view-model-create", sourcePath: "CreateGoalViewModel.submit", commandKind: .createGoal, status: .unproven, rationale: "Reachable goal creation builds a typed runtime command and requires receipt/projection evidence before presentation; terminal validation remains outstanding."),
         mutation(id: "goals.create", sourcePath: "RepositoryBackedGoalsService.createGoal", commandKind: .createGoal, status: .unproven, rationale: "Goal creation retains legacy repository writes outside proven atomic commit."),
         mutation(id: "goals.detail-action", sourcePath: "RepositoryBackedGoalsService.performAction", commandKind: .updateGoal, status: .unproven, rationale: "Goal action retains legacy repository mutation branches."),
         mutation(id: "goals.mutation", sourcePath: "RepositoryBackedGoalsService.performMutation", commandKind: .updateGoal, status: .unproven, rationale: "Goal mutation helper has no durable command replay proof."),
@@ -161,21 +162,21 @@ enum MeaningfulMutationRegistry {
         mutation(id: "goals.adjust-priority", sourcePath: "RepositoryBackedGoalsService.adjustPriority", commandKind: .setPriority, status: .unproven, rationale: "Priority adjustment lacks durable idempotency and replay evidence."),
         mutation(id: "goals.materialize-draft", sourcePath: "RepositoryBackedGoalsService.materializeDraft", commandKind: .updateGoal, status: .unproven, rationale: "Draft materialization lacks authoritative event reconstruction proof."),
         mutation(id: "goals.teaching-signal", sourcePath: "GoalTeachingSignalService.capture", commandKind: .updateGoal, status: .unproven, rationale: "Teaching signal persistence lacks row-specific receipt and replay tests."),
-        mutation(id: "capture.quick-create", sourcePath: "CaptureViewModel.createQuickCapture", commandKind: .quickCapture, status: .unproven, rationale: "One Capture ViewModel overload still calls CaptureServicing directly."),
-        mutation(id: "capture.needs-place", sourcePath: "CaptureViewModel.saveToNeedsPlace", commandKind: .routeCommitment, status: .unproven, rationale: "Needs Place action writes through legacy CaptureServicing."),
-        mutation(id: "capture.archive", sourcePath: "CaptureViewModel.archive", commandKind: .archiveItem, status: .unproven, rationale: "Capture archive lacks row-specific durable replay evidence."),
-        mutation(id: "capture.route-time", sourcePath: "CaptureViewModel.routeToTime", commandKind: .scheduleItem, status: .unproven, rationale: "Capture route-to-Time uses a legacy service mutation."),
-        mutation(id: "capture.waiting-view-model", sourcePath: "CaptureViewModel.markWaiting", commandKind: .markWaiting, status: .unproven, rationale: "Capture Waiting action uses legacy CaptureServicing without durable lineage."),
-        mutation(id: "capture.optional-view-model", sourcePath: "CaptureViewModel.markOptionalSomeday", commandKind: .delayAction, status: .unproven, rationale: "Capture optional action lacks restart and replay proof."),
-        mutation(id: "capture.deliverable-view-model", sourcePath: "CaptureViewModel.markDeliverableSeed", commandKind: .addDeliverable, status: .unproven, rationale: "Capture deliverable seed lacks authoritative event proof."),
-        mutation(id: "capture.attach-view-model", sourcePath: "CaptureViewModel.attachToGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Capture attachment lacks atomic cross-object replay proof."),
-        mutation(id: "capture.goal-view-model", sourcePath: "CaptureViewModel.turnIntoGoal", commandKind: .createGoal, status: .unproven, rationale: "Capture-to-Goal conversion lacks atomic restart proof."),
+        mutation(id: "capture.quick-create", sourcePath: "CaptureViewModel.createQuickCapture", commandKind: .quickCapture, status: .unproven, rationale: "The selected production route uses a typed runtime command and receipt; a compatibility overload remains isolated and is not proven reachable."),
+        mutation(id: "capture.needs-place", sourcePath: "CaptureViewModel.saveToNeedsPlace", commandKind: .routeCommitment, status: .unproven, rationale: "The reachable surface now rejects this action before legacy CaptureServicing can write; a typed receipt-backed route command is still required."),
+        mutation(id: "capture.archive", sourcePath: "CaptureViewModel.archive", commandKind: .archiveItem, status: .unproven, rationale: "The reachable surface now rejects archive before any legacy write; a typed receipt-backed archive command is still required."),
+        mutation(id: "capture.route-time", sourcePath: "CaptureViewModel.routeToTime", commandKind: .scheduleItem, status: .unproven, rationale: "The reachable surface now rejects route-to-Time before any legacy write; a typed receipt-backed schedule command is still required."),
+        mutation(id: "capture.waiting-view-model", sourcePath: "CaptureViewModel.markWaiting", commandKind: .markWaiting, status: .unproven, rationale: "The reachable surface now rejects Waiting before any legacy write; a typed receipt-backed command is still required."),
+        mutation(id: "capture.optional-view-model", sourcePath: "CaptureViewModel.markOptionalSomeday", commandKind: .delayAction, status: .unproven, rationale: "The reachable surface now rejects Someday before any legacy write; a typed receipt-backed command is still required."),
+        mutation(id: "capture.deliverable-view-model", sourcePath: "CaptureViewModel.markDeliverableSeed", commandKind: .addDeliverable, status: .unproven, rationale: "The reachable surface now rejects deliverable seeding before any legacy write; a typed receipt-backed command is still required."),
+        mutation(id: "capture.attach-view-model", sourcePath: "CaptureViewModel.attachToGoal", commandKind: .attachToGoal, status: .unproven, rationale: "The reachable handoff requires committed receipt and projection materialization; terminal cross-object replay validation remains outstanding."),
+        mutation(id: "capture.goal-view-model", sourcePath: "CaptureViewModel.turnIntoGoal", commandKind: .createGoal, status: .unproven, rationale: "The reachable surface now rejects Capture-to-Goal conversion before any legacy write; a typed cross-object receipt-backed command is still required."),
         mutation(id: "capture.create", sourcePath: "DefaultCaptureService.createCapture", commandKind: .quickCapture, status: .unproven, rationale: "Default Capture creation mutates legacy repositories before full lineage proof."),
         mutation(
             id: "capture.semantic-snapshot-materialization",
             sourcePath: "DefaultCaptureService.materializeCaptureSnapshot",
             commandKind: .quickCapture,
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "The Capture repository write materializes the exact full snapshot from the already committed ambitions.capture.created semantic event and is idempotently recovered on authority replay.",
             executorOwner: "EventStoreSQLite.commitAuthority",
             durableStores: ["EventStoreSQLite", "CaptureRepository"],
@@ -207,13 +208,15 @@ enum MeaningfulMutationRegistry {
         mutation(id: "you.view-model-preferences", sourcePath: "YouViewModel.commitPreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "You ViewModel preference commit lacks restart and replay proof."),
         mutation(id: "you.preferences", sourcePath: "RepositoryBackedYouService.saveYouPreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "Repository-backed preference save lacks authoritative replay proof."),
         mutation(id: "you.preferences-command", sourcePath: "YouPreferencesCommandService.saveYouPreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "Command service source presence lacks row-specific reconstruction proof."),
+        mutation(id: "you.runtime-data-control-adapter", sourcePath: "YouRuntimeDataControlAdapter.execute", commandKind: .updateUserPreferences, status: .unproven, rationale: "You runtime data-control adapter requires receipt and projection evidence, but executable integration proof remains outstanding."),
+        mutation(id: "you.runtime-selected-preferences", sourcePath: "RuntimeSelectedYouPreferencesCommandService.saveYouPreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "Selected You preferences service performs derived app-state materialization after a runtime receipt, but executable integration proof remains outstanding."),
         mutation(id: "onboarding.complete", sourcePath: "RepositoryBackedOnboardingService.complete", commandKind: .updateUserPreferences, status: .unproven, rationale: "Onboarding completion writes app state through compatibility storage."),
         mutation(id: "time.calendar-aware", sourcePath: "RepositoryBackedTimeService.makeTimeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Calendar-aware service appends a legacy projection ledger mirror."),
         mutation(
             id: "time.ritual-action",
             sourcePath: "SwiftDataTimeRitualActionMaterializer.materialize",
             commandKind: .updateGoal,
-            status: .durable,
+            status: .unproven,
             rationale: "Seven Time ritual actions commit one semantic authority event before atomic, target-validated SwiftData materialization.",
             executorOwner: "AmbitionsCommandExecutor",
             durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
@@ -238,7 +241,7 @@ enum MeaningfulMutationRegistry {
             id: "time.ritual-action.repository-materializer",
             sourcePath: "RepositoryTimeRitualActionMaterializer.materialize",
             commandKind: .updateGoal,
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "The non-transactional repository fallback fails closed and never claims atomic materialization.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.time.ritual_action_applied",
@@ -253,7 +256,7 @@ enum MeaningfulMutationRegistry {
             id: "time.ritual-view-model-adapter",
             sourcePath: "TimeRitualsViewModel.perform",
             commandKind: .updateGoal,
-            status: .adapter,
+            status: .unproven,
             rationale: "The Time Ritual ViewModel executes the authority-owned command and requires its receipt, materialization, and exact Time projection cursor before success.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.time.ritual_action_applied",
@@ -268,7 +271,7 @@ enum MeaningfulMutationRegistry {
             id: "time.command-view-model-adapter",
             sourcePath: "TimeViewModel.executeTimeCommand",
             commandKind: .placeStepInTime,
-            status: .adapter,
+            status: .unproven,
             rationale: "The Time ViewModel delegates to the authority-owned runtime command and accepts visible success only for matching committed Time projection lineage.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.time.window_protected",
@@ -327,6 +330,7 @@ enum MeaningfulMutationRegistry {
         mutation(id: "repair.restore-rollback", sourcePath: "RestoreRollback.restoreSnapshotWithRollback", commandKind: .updateGoal, status: .unproven, rationale: "Restore rollback mutation lacks row-specific crash-boundary and replay proof."),
         mutation(id: "preview.capture-seed", sourcePath: "PersistenceBootstrap.applyPreviewCaptureSeedIfNeeded", commandKind: .quickCapture, status: .unproven, rationale: "Preview capture seeding lacks row-specific isolation and replay proof for its repository mutation."),
         mutation(id: "runtime.command-envelope", sourcePath: "AmbitionsCommandExecutor.appendCommandEnvelope", commandKind: .updateGoal, status: .unproven, rationale: "Command envelope append lacks row-specific atomic event, receipt, and replay proof."),
+        mutation(id: "runtime.authority-router", sourcePath: "RuntimeMutationAuthorityRouter.execute", commandKind: .updateGoal, status: .unproven, rationale: "Mutation authority router selects legacy or fail-closed command execution, but executable composition proof remains outstanding."),
         mutation(id: "runtime.attach-goal", sourcePath: "AmbitionsCommandExecutor.executeAttachToGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Attach-to-Goal execution lacks row-specific atomic restart and replay proof."),
         mutation(id: "runtime.calendar-write", sourcePath: "AmbitionsCommandExecutor.executeConfirmedCalendarWriteIntent", commandKind: .scheduleItem, status: .unproven, rationale: "Confirmed calendar write execution lacks row-specific device reconciliation and replay proof."),
         mutation(id: "runtime.plan-seed", sourcePath: "AmbitionsCommandExecutor.executePlanSeedRepresentation", commandKind: .routeCommitment, status: .unproven, rationale: "Plan-seed execution lacks row-specific durable reconstruction proof."),
@@ -335,7 +339,7 @@ enum MeaningfulMutationRegistry {
             id: "runtime.quick-capture-materialization",
             sourcePath: "AmbitionsCommandExecutor.materializeQuickCapture",
             commandKind: .quickCapture,
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "Capture object persistence is a post-authority materialization recovered from the committed semantic event on replay.",
             executorOwner: "EventStoreSQLite.commitAuthority",
             durableStores: ["EventStoreSQLite", "CaptureRepository"],
@@ -353,7 +357,7 @@ enum MeaningfulMutationRegistry {
             id: "stage.capture-attachment",
             sourcePath: "CaptureGoalHandoffService.perform",
             commandKind: .attachToGoal,
-            status: .durable,
+            status: .unproven,
             rationale: "Stage renders the typed result of an authority-first Capture-to-Goal handoff; the semantic event and atomic SwiftData materializer own replay and projection.",
             executorOwner: "AmbitionsCommandExecutor",
             durableStores: ["EventStoreSQLite", "CaptureRepository"],
@@ -372,7 +376,7 @@ enum MeaningfulMutationRegistry {
             id: "stage.capture-attachment-materialization",
             sourcePath: "SwiftDataCaptureGoalHandoffMaterializer.materialize",
             commandKind: .attachToGoal,
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "The atomic Capture transition materializes only after the semantic authority event commits and converges idempotently on replay.",
             executorOwner: "AmbitionsCommandExecutor",
             durableStores: ["CaptureRepository"],
@@ -386,7 +390,6 @@ enum MeaningfulMutationRegistry {
                 "AmbitionsTests/CaptureGoalHandoffOwnerWriteTests/testMissingOrRecreatedGoalBlocksInitialCommitBeforeIdempotentCaptureReturn"
             ]
         ),
-        mutation(id: "prototype.runtime-perform", sourcePath: "DedicatedDevicePrototypeRuntime.perform", commandKind: .updateGoal, status: .unproven, rationale: "Prototype runtime mutation lacks production durable lineage and replay proof."),
         mutation(id: "capture.event-append", sourcePath: "DefaultCaptureService.appendCaptureEvent", commandKind: .quickCapture, status: .unproven, rationale: "Capture event append lacks row-specific projection, receipt, and replay proof."),
         mutation(id: "external-action.execute", sourcePath: "DefaultExternalActionCommandService.execute", commandKind: .completeAction, status: .unproven, rationale: "External action execution lacks row-specific durable reconciliation and replay proof."),
         mutation(id: "external-action.rejection", sourcePath: "DefaultExternalActionCommandService.recordRejectedExternalActionIfNeeded", commandKind: .dismissRecommendation, status: .unproven, rationale: "Rejected external action recording lacks row-specific restart and replay proof."),
@@ -451,7 +454,7 @@ enum MeaningfulMutationRegistry {
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRuntimeSnapshotLedgerRepository.swift", status: .unproven, rationale: "Runtime snapshot ledger writes lack row-specific replay equivalence proof."),
         writePath(
             sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/TodayGoalStepActionMaterializer.swift",
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "SwiftData materialization is a derived Today projection write path with row-specific authority, restart, replay, idempotency, and atomicity proof.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.today.goal_step_action_applied",
@@ -473,7 +476,7 @@ enum MeaningfulMutationRegistry {
         ),
         writePath(
             sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/TimeRitualActionMaterializer.swift",
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "SwiftData materialization is a derived Time projection write path with authority, replay, atomicity, target-existence, and idempotency proof.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.time.ritual_action_applied",
@@ -491,7 +494,7 @@ enum MeaningfulMutationRegistry {
         ),
         writePath(
             sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/CaptureGoalHandoffMaterializer.swift",
-            status: .projectionOnly,
+            status: .unproven,
             rationale: "The authority-owned Capture-to-Goal transition materializes atomically and advances the Goals projection cursor only after semantic commit.",
             executorOwner: "AmbitionsCommandExecutor",
             eventKind: "ambitions.capture.goal_handoff_applied",
@@ -512,13 +515,28 @@ enum MeaningfulMutationRegistry {
         ),
         writePath(
             sourcePath: "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
-            status: .previewOnly,
+            status: .unproven,
             rationale: "Preview and demo composition create UUID-isolated projection stores; production mutation authority remains in the runtime event journal."
         ),
-        writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .previewOnly, rationale: "DEBUG preview temporary storage is not production mutation authority."),
+        writePath(sourcePath: "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift", status: .unproven, rationale: "DEBUG preview temporary storage is not production mutation authority; executable isolation proof remains outstanding."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", status: .unproven, rationale: "External creation handoff lacks row-specific terminated-app adapter proof."),
         writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift", status: .unproven, rationale: "External snapshot writes lack row-specific projection-only lineage proof."),
-        writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", status: .unproven, rationale: "Shared snapshot storage lacks row-specific projection lifecycle proof.")
+        writePath(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", status: .unproven, rationale: "Shared snapshot storage lacks row-specific projection lifecycle proof."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentIntake.swift", status: .unproven, rationale: "Attachment intake writes bounded staging files; executable crash-recovery and authority proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentPortableExport.swift", status: .unproven, rationale: "Attachment portable export and cleanup write private files; executable import/export recovery proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentSubsystem.swift", status: .unproven, rationale: "Attachment subsystem composes file-backed services; executable authority-boundary proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentVault.swift", status: .unproven, rationale: "Attachment vault writes encrypted blob and manifest artifacts; executable lifecycle and recovery proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimeMutationAuthorityComposition.swift", status: .unproven, rationale: "Runtime authority composition opens file-backed generation authority; executable composition and shutdown proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeCanonicalDerivedTransactionGateway.swift", status: .unproven, rationale: "Derived transaction gateway inspects generation files while opening SQLite authority; executable projection-ownership proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/CanonicalRuntimeStore.swift", status: .unproven, rationale: "Canonical runtime store manages SQLite artifacts and protection; executable transaction and restart proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationControlStore.swift", status: .unproven, rationale: "Generation control store writes control records and activation evidence; executable activation and crash-recovery proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationForensicArtifacts.swift", status: .unproven, rationale: "Generation forensic artifacts use protected file storage; executable preservation and disclosure-boundary proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationLegacyImportService.swift", status: .unproven, rationale: "Legacy import service stages and quarantines migration artifacts; executable import recovery proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationLifecycleService.swift", status: .unproven, rationale: "Generation lifecycle writes preparation and activation artifacts; executable lifecycle and rollback proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationRecoveryRuntime.swift", status: .unproven, rationale: "Recovery runtime opens file-backed generation authority; executable recovery concurrency proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationRecoveryService.swift", status: .unproven, rationale: "Generation recovery service coordinates protected recovery artifacts; executable recovery proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationVaultInventory.swift", status: .unproven, rationale: "Vault inventory writes and restores protected generation artifacts; executable backup and restore proof remains outstanding."),
+        writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/RuntimeStoreGeneration.swift", status: .unproven, rationale: "Store generation publishes active-manifest and generation artifacts; executable atomic activation proof remains outstanding.")
     ]
 
     private static func mutation(
@@ -535,18 +553,23 @@ enum MeaningfulMutationRegistry {
         replayTestID: String? = nil,
         proofTestIDs: [String] = []
     ) -> MeaningfulMutationDescriptor {
+        // Source inspection can establish the path being described, not the
+        // executable authority proof that a durable/projection classification
+        // would claim. Keep every row unproven until terminal validation has
+        // evaluated the current integrated source tree.
+        let auditStatus: MeaningfulMutationStatus = .unproven
         MeaningfulMutationDescriptor(
             id: id,
             sourcePath: sourcePath,
             commandKind: commandKind,
-            executorOwner: executorOwner,
-            durableStores: durableStores,
-            eventKind: eventKind,
-            projectionOwner: projectionOwner,
-            receiptOwner: receiptOwner,
-            replayTestID: replayTestID,
-            proofTestIDs: proofTestIDs,
-            status: status,
+            executorOwner: nil,
+            durableStores: [],
+            eventKind: nil,
+            projectionOwner: nil,
+            receiptOwner: nil,
+            replayTestID: nil,
+            proofTestIDs: [],
+            status: auditStatus,
             rationale: rationale
         )
     }
@@ -562,15 +585,17 @@ enum MeaningfulMutationRegistry {
         replayTestID: String? = nil,
         proofTestIDs: [String] = []
     ) -> MeaningfulMutationWritePathDescriptor {
+        // See `mutation`: a declared write path is not executable proof.
+        let auditStatus: MeaningfulMutationStatus = .unproven
         MeaningfulMutationWritePathDescriptor(
             sourcePath: sourcePath,
-            executorOwner: executorOwner,
-            eventKind: eventKind,
-            projectionOwner: projectionOwner,
-            receiptOwner: receiptOwner,
-            replayTestID: replayTestID,
-            status: status,
-            proofTestIDs: proofTestIDs,
+            executorOwner: nil,
+            eventKind: nil,
+            projectionOwner: nil,
+            receiptOwner: nil,
+            replayTestID: nil,
+            status: auditStatus,
+            proofTestIDs: [],
             rationale: rationale
         )
     }

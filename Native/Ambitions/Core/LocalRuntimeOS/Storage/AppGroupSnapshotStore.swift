@@ -61,15 +61,17 @@ actor AppGroupSnapshotStore {
         self.fileProtectionApplier = fileProtectionApplier
     }
 
-    static func defaultLiveStore() -> AppGroupSnapshotStore {
+    /// Returns a store only when the declared app-group boundary is available.
+    ///
+    /// An external snapshot is consumed by a different process. Falling back to
+    /// Application Support would both misrepresent that availability and create
+    /// a second, non-shared authority for the same snapshot contract.
+    static func defaultLiveStore() -> AppGroupSnapshotStore? {
         let fileManager = FileManager.default
-        let root: URL
-        if let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier) {
-            root = groupURL.appendingPathComponent(relativeDirectory, isDirectory: true)
-        } else {
-            root = (fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: "/tmp", isDirectory: true))
-                .appendingPathComponent(relativeDirectory, isDirectory: true)
+        guard let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier) else {
+            return nil
         }
+        let root = groupURL.appendingPathComponent(relativeDirectory, isDirectory: true)
         return AppGroupSnapshotStore(rootDirectory: root)
     }
 
@@ -91,24 +93,16 @@ actor AppGroupSnapshotStore {
 
     func read(id: String) async throws -> AppGroupSnapshotRecord {
         let fileURL = try url(for: id)
-        let record = try LocalRuntimeStorageCoding.decode(AppGroupSnapshotRecord.self, from: Data(contentsOf: fileURL))
-        guard record.schemaVersion == appGroupSnapshotStoreSchemaVersion else {
-            throw LocalRuntimeStorageError.unsupportedSchema(expected: appGroupSnapshotStoreSchemaVersion, actual: record.schemaVersion)
-        }
-        guard record.isSafeForExternalProcess else {
-            throw LocalRuntimeStorageError.unsafeExternalSnapshot(id: record.id)
-        }
-        guard LocalRuntimeStorageChecksum.sha256Hex(for: record.payloadData) == record.payloadChecksum else {
-            throw LocalRuntimeStorageError.checksumMismatch(id: record.id)
-        }
-        return record
+        return try validated(
+            LocalRuntimeStorageCoding.decode(AppGroupSnapshotRecord.self, from: Data(contentsOf: fileURL))
+        )
     }
 
     func listSnapshots() async throws -> [AppGroupSnapshotRecord] {
         try ensureRoot()
         return try fileManager.contentsOfDirectory(at: rootDirectory, includingPropertiesForKeys: nil)
             .filter { $0.lastPathComponent.hasSuffix(".snapshot.json") }
-            .map { try LocalRuntimeStorageCoding.decode(AppGroupSnapshotRecord.self, from: Data(contentsOf: $0)) }
+            .map { try validated(LocalRuntimeStorageCoding.decode(AppGroupSnapshotRecord.self, from: Data(contentsOf: $0))) }
             .sorted { $0.createdAt > $1.createdAt }
     }
 
@@ -123,6 +117,19 @@ actor AppGroupSnapshotStore {
 }
 
 private extension AppGroupSnapshotStore {
+    func validated(_ record: AppGroupSnapshotRecord) throws -> AppGroupSnapshotRecord {
+        guard record.schemaVersion == appGroupSnapshotStoreSchemaVersion else {
+            throw LocalRuntimeStorageError.unsupportedSchema(expected: appGroupSnapshotStoreSchemaVersion, actual: record.schemaVersion)
+        }
+        guard record.isSafeForExternalProcess else {
+            throw LocalRuntimeStorageError.unsafeExternalSnapshot(id: record.id)
+        }
+        guard LocalRuntimeStorageChecksum.sha256Hex(for: record.payloadData) == record.payloadChecksum else {
+            throw LocalRuntimeStorageError.checksumMismatch(id: record.id)
+        }
+        return record
+    }
+
     func ensureRoot() throws {
         try fileManager.createDirectory(at: rootDirectory, withIntermediateDirectories: true)
     }

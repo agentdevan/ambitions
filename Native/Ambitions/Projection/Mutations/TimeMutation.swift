@@ -126,20 +126,18 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
     }
 
     private static func actionKind(from command: AmbitionsCommand) throws -> TimeMutationActionKind {
-        switch command.kind {
-        case .placeStepInTime:
-            return .placeStep
-        case .protectTimeWindow:
-            return .protectWindow
-        case .correctTimeWindow:
-            guard let rawKind = command.payload.metadata["correctionKind"] else {
-                throw TimeMutationError.unsupportedCommand
+        guard case let .schedule(schedule) = command.typedPayload else {
+            throw TimeMutationError.unsupportedCommand
+        }
+        switch schedule.action {
+        case .placeStep: return .placeStep
+        case .protectWindow: return .protectWindow
+        case let .correctWindow(correction):
+            guard TimeMutationActionKind.correctionKinds.contains(correction.action) else {
+                throw TimeMutationError.unsupportedCorrectionKind(correction.action.rawValue)
             }
-            guard let kind = TimeMutationActionKind(rawValue: rawKind), TimeMutationActionKind.correctionKinds.contains(kind) else {
-                throw TimeMutationError.unsupportedCorrectionKind(rawKind)
-            }
-            return kind
-        default:
+            return correction.action
+        case .createItem, .schedule, .undo, .ritual, .calendarWrite:
             throw TimeMutationError.unsupportedCommand
         }
     }
@@ -211,10 +209,10 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
         from bucket: LifeShapeBucket,
         command: AmbitionsCommand
     ) throws -> LifeShapeBucket {
-        let stepMinutes = max(1, Int(command.payload.metadata["durationMinutes"] ?? "") ?? 15)
+        let stepMinutes = max(1, command.timePlacementCommandIntent?.approvedDurationMinutes ?? 15)
         let shortenedEnd = max(bucket.start, bucket.end.addingTimeInterval(Double(-stepMinutes * 60)))
         let remainingMinutes = max(0, Int(shortenedEnd.timeIntervalSince(bucket.start) / 60))
-        let stepTitle = command.payload.title ?? "Step"
+        let stepTitle = command.content.title ?? "Step"
         guard let stepID = command.target.stepID, stepID.isEmpty == false else {
             throw TimeMutationError.missingRealStep
         }
@@ -254,7 +252,7 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
         command: AmbitionsCommand,
         kind: ProtectedBoundaryKind
     ) throws -> LifeShapeBucket {
-        let title = command.payload.title ?? (kind == .keepClearCorrection ? "Keep this clear" : "Protected window")
+        let title = command.content.title ?? (kind == .keepClearCorrection ? "Keep this clear" : "Protected window")
         let boundary = ProtectedBoundary(
             id: "time.boundary.\(command.id).\(kind.rawValue)",
             title: title,
@@ -371,7 +369,7 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
         let commandRef = LifeShapeInputRef(
             id: "time.command.\(command.id)",
             kind: .userCorrection,
-            label: command.payload.title ?? command.kind.rawValue
+            label: command.content.title ?? command.operation.rawValue
         )
         let inputRefs = Array(Set(bucket.derivation.inputRefs + [commandRef])).sorted { $0.id < $1.id }
         let ruleIDs = Array(Set(bucket.derivation.ruleIDs + [rule])).sorted { $0.rawValue < $1.rawValue }

@@ -1,17 +1,8 @@
 import Foundation
 
-extension AmbitionsCommandKind {
-    var isTimeMutation: Bool {
-        switch self {
-        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow: true
-        default: false
-        }
-    }
-}
-
 extension AmbitionsCommandExecutor {
     func executeTimeCommand(_ command: AmbitionsCommand) async -> AmbitionsCommandExecutionResult {
-        if command.payload.metadata["undoOriginalReceiptID"] != nil {
+        if command.commandUndoIntent != nil {
             return await executeTimeUndo(command)
         }
         guard let interval = timeInterval(command) else {
@@ -23,11 +14,16 @@ extension AmbitionsCommandExecutor {
             )
         }
         let summary: String
-        switch command.kind {
-        case .placeStepInTime: summary = "Step placed in Time."
-        case .protectTimeWindow: summary = "Time window protected."
-        case .correctTimeWindow: summary = "Time window corrected."
-        default: summary = "Time changed."
+        switch command.typedPayload {
+        case let .schedule(schedule):
+            switch schedule.action {
+            case .placeStep: summary = "Step placed in Time."
+            case .protectWindow: summary = "Time window protected."
+            case .correctWindow, .undo: summary = "Time window corrected."
+            default: summary = "Time changed."
+            }
+        default:
+            summary = "Time changed."
         }
         return AmbitionsCommandExecutionResult(
             status: .succeeded,
@@ -45,12 +41,11 @@ extension AmbitionsCommandExecutor {
     }
 
     private func executeTimeUndo(_ command: AmbitionsCommand) async -> AmbitionsCommandExecutionResult {
-        guard let originalReceiptID = command.payload.metadata["undoOriginalReceiptID"],
-              let expectedVersion = command.payload.metadata["expectedProjectionVersion"].flatMap(Int64.init),
-              let originalCommandID = Self.commandID(fromReceiptID: originalReceiptID),
+        guard let undo = command.commandUndoIntent,
+              let originalCommandID = Self.commandID(fromReceiptID: undo.originalReceiptID.rawValue),
               let sqliteStore = runtimeEvents as? EventStoreSQLite,
               let authorityReceipt = try? await sqliteStore.authorityReceipt(commandID: originalCommandID),
-              authorityReceipt.receiptID == originalReceiptID else {
+              authorityReceipt.receiptID == undo.originalReceiptID.rawValue else {
             return timeUndoRejection(command, type: "time_undo_receipt_not_found")
         }
         let events = (try? await runtimeEvents?.fetchEvents(matching: .kind(.domainMutation), limit: nil)) ?? []
@@ -58,13 +53,13 @@ extension AmbitionsCommandExecutor {
             guard case let .domainMutation(record) = envelope.event.payload,
                   let event = try? record.decodedEvent(),
                   case let .mutationUndone(value) = event else { return false }
-            return value.originalReceiptID == originalReceiptID
+            return value.originalReceiptID == undo.originalReceiptID.rawValue
         }
         guard alreadyUndone == false else {
             return timeUndoRejection(command, type: "time_undo_already_applied")
         }
         guard let currentVersion = try? await projectionStore?.fetchRecord(id: .time)?.cursor.sequence,
-              currentVersion == expectedVersion else {
+              currentVersion == undo.expectedProjectionVersion else {
             return timeUndoRejection(command, type: "time_undo_stale_projection")
         }
         return AmbitionsCommandExecutionResult(
@@ -73,8 +68,8 @@ extension AmbitionsCommandExecutor {
             route: .time,
             target: command.target,
             metadata: [
-                "undoOriginalReceiptID": originalReceiptID,
-                "expectedProjectionVersion": String(expectedVersion),
+                "undoOriginalReceiptID": undo.originalReceiptID.rawValue,
+                "expectedProjectionVersion": String(undo.expectedProjectionVersion),
                 "timeMaterialization": "pending_authority_commit",
                 "projectionReloadRequired": "true",
             ]
@@ -139,8 +134,10 @@ extension AmbitionsCommandExecutor {
     }
 
     private func timeInterval(_ command: AmbitionsCommand) -> (start: Date, end: Date)? {
-        guard let start = parseDate(from: command.payload.metadata["startAt"] ?? command.payload.metadata["start"]),
-              let end = parseDate(from: command.payload.metadata["endAt"] ?? command.payload.metadata["end"]),
+        let placement = command.timePlacementCommandIntent
+        let correction = command.timeCorrectionCommandIntent
+        guard let start = parseDate(from: placement?.start ?? correction?.start),
+              let end = parseDate(from: placement?.end ?? correction?.end),
               end > start else { return nil }
         return (start, end)
     }

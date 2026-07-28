@@ -53,4 +53,16 @@ extension RepositoryBackedTodayService: TodayDurableGoalStepActionPreparing {
     ]
 }
 
-enum TodayDurableActionError: Error { case unavailable, needsRecovery }
+enum TodayDurableActionError: LocalizedError {
+    case unavailable
+    case needsRecovery
+
+    var errorDescription: String? {
+        switch self {
+        case .unavailable:
+            "This Today action is not available until it has a typed, committed runtime command. No change was applied."
+        case .needsRecovery:
+            "The command outcome needs recovery before Today can show the change as saved."
+        }
+    }
+}

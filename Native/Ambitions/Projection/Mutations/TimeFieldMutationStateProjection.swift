@@ -141,7 +141,7 @@ extension LifeShapeFieldState {
                 detail: runtimeMutation.stageMutation.proofArtifact.artifactID,
                 intensity: 0.82,
                 visualState: .selected,
-                inputRefs: [LifeShapeInputRef(id: runtimeMutation.command.id, kind: .userCorrection, label: runtimeMutation.command.payload.title ?? runtimeMutation.command.kind.rawValue)],
+                inputRefs: [LifeShapeInputRef(id: runtimeMutation.command.id, kind: .userCorrection, label: runtimeMutation.command.content.title ?? runtimeMutation.command.operation.rawValue)],
                 ruleIDs: ["lifeshape.mutation.proof-visible"],
                 accessibilitySummary: runtimeMutation.stageMutation.accessibilityAnnouncement.message
             )
@@ -271,7 +271,7 @@ extension RuntimeMutation {
         let affectedObjectIDs = original.stageMutation.affectedObjectIDs
         let action = MutationActionReference(
             commandID: commandID,
-            commandKind: original.command.kind,
+            commandPayload: original.command.typedPayload,
             source: original.command.source,
             targetObjectIDs: affectedObjectIDs
         )

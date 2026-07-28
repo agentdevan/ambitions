@@ -86,9 +86,9 @@ final class AmbitionsCommandExecutorRoutingTests: XCTestCase {
 
         let records = try await commandRecordRepository.fetchRecent(limit: 10)
         let record = try XCTUnwrap(records.first)
-        XCTAssertEqual(record.command.id, "command-capture")
-        XCTAssertEqual(record.result.status, .succeeded)
-        XCTAssertEqual(record.result.eventLedgerEntryIDs, ["ledger.command.command-capture"])
+        XCTAssertEqual(record.command?.id, "command-capture")
+        XCTAssertEqual(record.result?.status, .succeeded)
+        XCTAssertEqual(record.result?.eventLedgerEntryIDs, ["ledger.command.command-capture"])
         XCTAssertEqual(record.localOnly, command.localOnly)
         XCTAssertEqual(record.privacy, command.privacy)
         XCTAssertEqual(record.schemaVersion, ambitionsCommandExecutionRecordSchemaVersion)

@@ -33,6 +33,7 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
                 .externalCommand,
                 .correctRecommendation,
                 .editLocalNote,
+                .manageAttachment,
                 .dismissSuggestion,
                 .noOp
             ]
@@ -94,6 +95,23 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         XCTAssertEqual(receipt.safetyState, .safeFailure)
         XCTAssertEqual(receipt.undoAvailability, .notSupportedYet)
         XCTAssertEqual(receipt.safeFailure?.unchangedFacts, ["No automation ran.", "No calendar, export, sync, external, or destructive data changed.", "No undo ran."])
+    }
+
+    func testAttachmentMutationIsPrivacySensitiveAndNeverSilentlyExecuted() {
+        let decision = SafeAutomationPolicyEvaluator().evaluate(
+            SafeAutomationProposedAction(
+                kind: .manageAttachment,
+                sourceDomain: .capture,
+                targetObjects: [object(.capture, "capture-attachment", sourceDomain: .capture)]
+            )
+        )
+
+        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+        XCTAssertEqual(decision.confirmationRequirement, .required)
+        XCTAssertEqual(decision.safetyClassification, .privacySensitive)
+        XCTAssertEqual(decision.undoRule, .notSupportedYet)
+        XCTAssertEqual(decision.receiptRecommendation.resultState, .needsConfirmation)
+        XCTAssertTrue(decision.mustNeverBeSilent)
     }
 
     func testCalendarWriteIsPlanOwnedConfirmationGatedAndNeverSilent() {

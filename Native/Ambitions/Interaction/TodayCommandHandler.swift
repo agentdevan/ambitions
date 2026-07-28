@@ -58,12 +58,16 @@ struct TodayCommandHandler {
     private func command(for action: TodayInlineAction, now: Date) -> AmbitionsCommand {
         let createdAt = DomainTimestamp.string(from: Date(timeIntervalSince1970: 0))
         if action.kind == .quickLog {
+            let target = AmbitionsCommandTarget(goalID: action.target.goalID, stepID: action.target.stepID)
+            let content = AmbitionsCommandPayload(title: action.title)
             return AmbitionsCommand(
                 id: "command.today2.\(action.id).\(AmbitionsCommandKind.quickCapture.rawValue)",
-                kind: .quickCapture,
                 source: .today,
-                target: AmbitionsCommandTarget(goalID: action.target.goalID, stepID: action.target.stepID),
-                payload: AmbitionsCommandPayload(title: action.title),
+                typedPayload: .capture(CaptureCommand(
+                    action: .quickCapture(externalCreation: nil),
+                    target: target,
+                    content: RuntimeCommandContent(content)
+                )),
                 createdAt: createdAt,
                 sourceSurface: "today"
             )
@@ -74,9 +78,12 @@ struct TodayCommandHandler {
             recoveryOptionID: nil
         ) ?? AmbitionsCommand(
             id: "command.today2.\(action.id).unsupported",
-            kind: .openDestination,
             source: .today,
-            target: AmbitionsCommandTarget(goalID: action.target.goalID, stepID: action.target.stepID, destination: nil),
+            typedPayload: .history(HistoryCommand(
+                action: .openDestination,
+                target: AmbitionsCommandTarget(goalID: action.target.goalID, stepID: action.target.stepID, destination: nil),
+                content: RuntimeCommandContent()
+            )),
             createdAt: DomainTimestamp.string(from: now)
         )
     }

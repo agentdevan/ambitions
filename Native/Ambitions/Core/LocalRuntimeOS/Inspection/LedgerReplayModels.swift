@@ -318,8 +318,27 @@ struct ExecutionLedgerReplayInspectionProjection: Sendable, Equatable {
     let emptyTitle: String
     let emptyDetail: String
     let localOnly: Bool
+    let quarantinedCommandRecords: [QuarantinedCommandExecutionRecord]
+
+    init(
+        query: ExecutionLedgerReplayInspectionQuery,
+        items: [ExecutionLedgerReplayBrowserProjection],
+        totalCandidateCount: Int,
+        emptyTitle: String,
+        emptyDetail: String,
+        localOnly: Bool,
+        quarantinedCommandRecords: [QuarantinedCommandExecutionRecord] = []
+    ) {
+        self.query = query
+        self.items = items
+        self.totalCandidateCount = totalCandidateCount
+        self.emptyTitle = emptyTitle
+        self.emptyDetail = emptyDetail
+        self.localOnly = localOnly
+        self.quarantinedCommandRecords = quarantinedCommandRecords
+    }
 
     var isEmpty: Bool {
-        items.isEmpty
+        items.isEmpty && quarantinedCommandRecords.isEmpty
     }
 }

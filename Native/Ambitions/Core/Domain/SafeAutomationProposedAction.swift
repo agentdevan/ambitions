@@ -129,6 +129,18 @@ struct SafeAutomationPolicyEvaluator: Sendable {
                 receiptState: .needsConfirmation,
                 receiptSafety: .confirmationRequired
             )
+        case .manageAttachment:
+            return decision(
+                action,
+                permission: .requiresConfirmation,
+                confirmation: .required,
+                undo: .notSupportedYet,
+                safety: .privacySensitive,
+                reasons: [.privacySensitive, .confirmationRequired],
+                blockedFacts: ["No attachment bytes, references, or lifecycle state were changed."],
+                receiptState: .needsConfirmation,
+                receiptSafety: .confirmationRequired
+            )
         case .prepareSyncResolution:
             return decision(
                 action,
@@ -281,63 +293,72 @@ extension SafeAutomationProposedAction {
 
 extension SafeAutomationActionKind {
     init(command: AmbitionsCommand) {
-        switch command.kind {
-        case .openDestination, .askWhy:
-            self = .noOp
-        case .quickCapture:
-            self = .createCapture
-        case .createGoal:
-            self = .attachToGoal
-        case .updateGoal:
-            self = .editLocalNote
-        case .attachToGoal:
-            self = .attachToGoal
-        case .createTimeItem:
-            self = .routeCapture
-        case .scheduleItem:
-            self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
-        case .placeStepInTime:
-            self = .prepareCalendarBlock
-        case .protectTimeWindow, .correctTimeWindow:
-            self = .correctRecommendation
-        case .prepareExport:
-            self = .prepareExport
-        case .performExport:
-            self = .performExport
-        case .deleteObject:
-            self = .deleteObject
-        case .forgetMemory:
-            self = .forgetMemory
-        case .startStepSession:
-            self = .noOp
-        case .completeAction:
-            self = .markDone
-        case .delayAction:
-            self = .moveActionLater
-        case .splitAction:
-            self = .splitAction
-        case .recoverAction:
-            self = .deferAction
-        case .markWaiting:
-            self = .markWaiting
-        case .archiveItem:
-            self = .archiveItem
-        case .setPriority, .setUrgency:
-            self = .changePriority
-        case .setDeadline:
-            self = .changeDeadline
-        case .setContextLens, .clearContextLensOverride:
-            self = .correctRecommendation
-        case .updateUserPreferences:
-            self = .editLocalNote
-        case .routeCommitment:
-            self = .routeCapture
-        case .addDeliverable, .addGoalScopeItem:
-            self = .attachToGoal
-        case .removeDeliverable, .removeGoalScopeItem:
-            self = .dropAction
-        case .dismissRecommendation:
-            self = .dismissSuggestion
+        switch command.typedPayload {
+        case let .capture(value):
+            switch value.action {
+            case .quickCapture: self = .createCapture
+            case .routeCommitment: self = .routeCapture
+            case .attachToGoal: self = .attachToGoal
+            case .markWaiting: self = .markWaiting
+            case .archive: self = .archiveItem
+            }
+        case let .goal(value):
+            switch value.action {
+            case .create: self = .attachToGoal
+            case .update: self = .editLocalNote
+            case .setPriority, .setUrgency: self = .changePriority
+            case .setDeadline: self = .changeDeadline
+            case .setContextLens, .clearContextLens: self = .correctRecommendation
+            case .addDeliverable, .addScopeItem: self = .attachToGoal
+            case .removeDeliverable, .removeScopeItem: self = .dropAction
+            }
+        case let .step(value):
+            switch value.action {
+            // AMBitionsAllowWeakPattern(reason: "Session start is a policy-only observation and cannot mutate canonical state.")
+            case .startSession: self = .noOp
+            case .complete: self = .markDone
+            case .delay: self = .moveActionLater
+            case .split: self = .splitAction
+            case .recover: self = .deferAction
+            case let .todayGoalStep(plan):
+                switch plan.actionKind {
+                case .complete: self = .markDone
+                case .defer, .reschedule: self = .moveActionLater
+                case .split: self = .splitAction
+                case .askForHelp: self = .deferAction
+                case .markNotRelevant: self = .dropAction
+                case .quickLog: self = .createCapture
+                }
+            }
+        case let .schedule(value):
+            switch value.action {
+            case .createItem: self = .routeCapture
+            case .schedule, .placeStep: self = .prepareCalendarBlock
+            case .protectWindow, .correctWindow, .undo: self = .correctRecommendation
+            case .calendarWrite: self = .writeCalendarBlock
+            case .ritual: self = .correctRecommendation
+            }
+        case .reminder: self = .createReminder
+        case .profile: self = .editLocalNote
+        case let .history(value):
+            switch value.action {
+            // AMBitionsAllowWeakPattern(reason: "History navigation and explanation requests are intentionally non-mutating policy observations.")
+            case .openDestination, .askWhy: self = .noOp
+            case .dismissRecommendation: self = .dismissSuggestion
+            case .todayReceipt: self = .markDone
+            }
+        case .repair: self = .deferAction
+        case let .importDeletion(value):
+            switch value.action {
+            case .prepareExport: self = .prepareExport
+            case .performExport: self = .performExport
+            case .deleteObject: self = .deleteObject
+            case .forgetMemory: self = .forgetMemory
+            }
+        case let .externalOperation(value):
+            self = value.kind == .reminder ? .createReminder : .writeCalendarBlock
+        case let .attachment(value):
+            self = value.intent.action == .authorizeDeletion ? .deleteObject : .manageAttachment
         }
     }
 }

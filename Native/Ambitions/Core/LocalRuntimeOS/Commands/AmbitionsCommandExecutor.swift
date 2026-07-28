@@ -43,6 +43,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let todayActionMaterializer: (any TodayGoalStepActionMaterializing)?
     let timeRitualActionMaterializer: (any TimeRitualActionMaterializing)?
     let captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)?
+    let mutationPreparer: (any RuntimeMutationPreparing)?
 
     init(
         captureService: (any CaptureServicing)? = nil,
@@ -62,7 +63,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         scheduleStoreFileURL: URL? = nil,
         todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
         timeRitualActionMaterializer: (any TimeRitualActionMaterializing)? = nil,
-        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil
+        captureGoalHandoffMaterializer: (any CaptureGoalHandoffMaterializing)? = nil,
+        mutationPreparer: (any RuntimeMutationPreparing)? = nil
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
@@ -82,6 +84,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.todayActionMaterializer = todayActionMaterializer
         self.timeRitualActionMaterializer = timeRitualActionMaterializer
         self.captureGoalHandoffMaterializer = captureGoalHandoffMaterializer
+        self.mutationPreparer = mutationPreparer
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
@@ -92,6 +95,9 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
+        if let mutationPreparer {
+            return await PreparedMutationCommandExecutor(preparer: mutationPreparer).execute(command, context: context)
+        }
         let replayAdapter = RuntimeEventCommandReplayAdapter(
             runtimeEvents: runtimeEvents,
             commandExecutionRecords: commandExecutionRecords
@@ -111,6 +117,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
             return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+        case .quarantinedCommandRecord(let record):
+            return replayAdapter.quarantinedCommandRecordResult(for: command, record: record)
         case .sqliteDiagnosticWithoutAuthority(let projection):
             return replayAdapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
         case .lookupUnavailable:
@@ -171,64 +179,55 @@ struct AmbitionsCommandExecutor: CommandExecuting {
 
         let result: AmbitionsCommandExecutionResult
 
-        switch command.kind {
-        case _ where command.isCaptureGoalHandoffMutation:
-            result = await executeCaptureGoalHandoff(command)
-        case _ where command.isTimeRitualActionMutation:
-            result = await executeTimeRitualAction(command)
-        case .openDestination:
-            guard let destination = command.target.destination else {
-                result = blockedResult(for: .needsMissingTarget, command: command)
-                break
+        switch command.typedPayload {
+        case let .capture(capture):
+            switch capture.action {
+            case .quickCapture: result = await executeOwnedQuickCapture(command, context: context)
+            case .routeCommitment: result = await executeRouteCommitment(command, context: context)
+            case let .attachToGoal(plan):
+                result = plan == nil ? await executeAttachToGoal(command, context: context) : await executeCaptureGoalHandoff(command)
+            case .markWaiting: result = await executeCaptureRoute(command, context: context, kind: .waitingItem, route: .waiting)
+            case .archive: result = await executeArchive(command, context: context)
             }
-            result = AmbitionsCommandExecutionResult(
-                status: .succeeded,
-                summary: "Open destination command validated.",
-                route: destination,
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs
-            )
-        case .quickCapture:
-            result = await executeOwnedQuickCapture(command, context: context)
-        case .routeCommitment:
-            result = await executeRouteCommitment(command, context: context)
-        case .markWaiting:
-            result = await executeCaptureRoute(command, context: context, kind: .waitingItem, route: .waiting)
-        case .archiveItem:
-            result = await executeArchive(command, context: context)
-        case .attachToGoal:
-            result = await executeAttachToGoal(command, context: context)
-        case .setDeadline:
-            result = await executeDeadlineChange(command, context: context)
-        case .setPriority, .setUrgency:
-            result = await executePriorityChange(command, context: context)
-        case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
-            result = await executeConfirmedCalendarWriteIntent(command, context: context)
-        case .createTimeItem, .scheduleItem:
-            result = await executePlanSeedRepresentation(command, context: context)
-        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
-            result = await executeTimeCommand(command)
-        case .completeAction where command.isTodayGoalStepActionMutation,
-             .updateGoal where command.isTodayGoalStepActionMutation,
-             .delayAction where command.isTodayGoalStepActionMutation,
-             .splitAction where command.isTodayGoalStepActionMutation,
-             .recoverAction where command.isTodayGoalStepActionMutation,
-             .archiveItem where command.isTodayGoalStepActionMutation:
-            result = await executeTodayGoalStepAction(command)
-        case .completeAction where command.isTodayReceiptMutation,
-             .dismissRecommendation where command.isTodayReceiptMutation:
-            result = executeTodayReceipt(command)
-        default:
-            result = AmbitionsCommandExecutionResult(
-                status: .unsupported,
-                summary: "\(command.kind.rawValue) is represented by the shared command model, but its owning foundation is not executable in this build.",
-                target: command.target,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: [
-                    "validation": validation.rawValue,
-                    "blockedBy": "owning_system_not_implemented"
-                ]
-            )
+        case let .goal(goal):
+            switch goal.action {
+            case .create: result = executeGoalCreation(command)
+            case .setDeadline: result = await executeDeadlineChange(command, context: context)
+            case .setPriority, .setUrgency: result = await executePriorityChange(command, context: context)
+            default: result = unsupportedTypedResult(command, validation: validation)
+            }
+        case let .step(step):
+            switch step.action {
+            case .todayGoalStep: result = await executeTodayGoalStepAction(command)
+            default: result = unsupportedTypedResult(command, validation: validation)
+            }
+        case let .schedule(schedule):
+            switch schedule.action {
+            case .calendarWrite: result = await executeConfirmedCalendarWriteIntent(command, context: context)
+            case .createItem, .schedule: result = await executePlanSeedRepresentation(command, context: context)
+            case .placeStep, .protectWindow, .correctWindow, .undo: result = await executeTimeCommand(command)
+            case .ritual: result = await executeTimeRitualAction(command)
+            }
+        case let .history(history):
+            switch history.action {
+            case .openDestination:
+                guard let destination = history.target.destination else {
+                    result = blockedResult(for: .needsMissingTarget, command: command)
+                    break
+                }
+                result = AmbitionsCommandExecutionResult(
+                    status: .succeeded, summary: "Open destination command validated.", route: destination,
+                    target: history.target, recommendationExplanationIDs: command.relations.recommendationExplanationIDs
+                )
+            case .todayReceipt: result = executeTodayReceipt(command)
+            case .askWhy, .dismissRecommendation: result = unsupportedTypedResult(command, validation: validation)
+            }
+        case let .profile(profile):
+            result = executeProfileCommand(command, profile: profile)
+        case let .importDeletion(deletion):
+            result = executeImportDeletionCommand(command, deletion: deletion)
+        case .reminder, .repair, .externalOperation, .compensation:
+            result = unsupportedTypedResult(command, validation: validation)
         }
 
         let commandsResult = result
@@ -254,19 +253,30 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         result: AmbitionsCommandExecutionResult
     ) async -> AmbitionsCommandExecutionResult {
         let materialized: AmbitionsCommandExecutionResult
-        if command.isCaptureGoalHandoffMutation {
-            materialized = await materializeCaptureGoalHandoff(command, committedResult: result)
-        } else if command.isTimeRitualActionMutation {
-            materialized = await materializeTimeRitualAction(command, committedResult: result)
-        } else if command.isTodayGoalStepActionMutation {
-            materialized = await materializeTodayGoalStepAction(command, committedResult: result)
-        } else if command.kind == .quickCapture {
-            materialized = await materializeQuickCapture(command, context: context, committedResult: result)
-        } else if command.kind.isTimeMutation {
-            materialized = await materializeTime(command, context: context, committedResult: result)
-        } else if command.isTodayReceiptMutation {
-            materialized = await materializeTodayReceipt(command, committedResult: result)
-        } else {
+        switch command.typedPayload {
+        case let .capture(capture):
+            switch capture.action {
+            case .quickCapture: materialized = await materializeQuickCapture(command, context: context, committedResult: result)
+            case let .attachToGoal(plan) where plan != nil:
+                materialized = await materializeCaptureGoalHandoff(command, committedResult: result)
+            default: return result
+            }
+        case let .step(step):
+            if case .todayGoalStep = step.action {
+                materialized = await materializeTodayGoalStepAction(command, committedResult: result)
+            } else { return result }
+        case let .schedule(schedule):
+            switch schedule.action {
+            case .ritual: materialized = await materializeTimeRitualAction(command, committedResult: result)
+            case .placeStep, .protectWindow, .correctWindow, .undo:
+                materialized = await materializeTime(command, context: context, committedResult: result)
+            default: return result
+            }
+        case let .history(history):
+            if case .todayReceipt = history.action {
+                materialized = await materializeTodayReceipt(command, committedResult: result)
+            } else { return result }
+        case .goal, .reminder, .profile, .repair, .importDeletion, .externalOperation, .compensation:
             return result
         }
         return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
@@ -276,10 +286,42 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
-        if command.isTodayGoalStepActionMutation {
-            return await executeTodayGoalStepAction(command)
-        }
         return await executeQuickCapture(command, context: context)
+    }
+
+    private func executeGoalCreation(
+        _ command: AmbitionsCommand
+    ) -> AmbitionsCommandExecutionResult {
+        guard let goalID = command.target.goalID,
+              let title = command.content.primaryText?.trimmingCharacters(in: .whitespacesAndNewlines),
+              title.isEmpty == false else {
+            return blockedResult(for: .needsMissingTarget, command: command)
+        }
+        return AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Goal creation accepted for authority commit.",
+            route: .goals,
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "goalID": goalID,
+                "goalMaterialization": "pending_authority_commit",
+                "goalLocalOnly": "true",
+            ]
+        )
+    }
+
+    private func unsupportedTypedResult(
+        _ command: AmbitionsCommand,
+        validation: AmbitionsCommandValidationState
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .unsupported,
+            summary: "\(command.operation.rawValue) is represented by the typed command model, but its owning foundation is not executable in this build.",
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: ["validation": validation.rawValue, "blockedBy": "owning_system_not_implemented"]
+        )
     }
 
 }

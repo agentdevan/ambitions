@@ -42,10 +42,23 @@ protocol GoalsServicing: Sendable {
 
 protocol GoalCreationPreparing: Sendable {
     func prepareGoalCreation(_ request: CreateGoalRequest, now: Date) async throws -> PreparedGoalCreation
+    func commitPreparedGoalCreation(
+        _ prepared: PreparedGoalCreation,
+        now: Date
+    ) async throws -> CreateGoalResponse
     func didCommitPreparedGoalCreation(now: Date) async
 }
 
 extension GoalCreationPreparing {
+    func commitPreparedGoalCreation(
+        _ prepared: PreparedGoalCreation,
+        now: Date
+    ) async throws -> CreateGoalResponse {
+        _ = prepared
+        _ = now
+        throw GoalsFeatureError.notActionable
+    }
+
     func didCommitPreparedGoalCreation(now: Date) async {
         _ = now
     }

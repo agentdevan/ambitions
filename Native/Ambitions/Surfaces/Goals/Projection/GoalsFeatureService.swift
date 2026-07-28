@@ -20,7 +20,7 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
 
     let explainabilityProjector: any GoalExplainabilityProjecting
 
-    let teachingService: any GoalTeachingSignalReading & GoalTeachingSignalCapturing
+    let teachingService: any GoalTeachingSignalReading & GoalTeachingSignalProposing
 
     let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
 
@@ -33,7 +33,7 @@ struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
         learningService: LearningAnticipationService = LearningAnticipationService(),
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
-        teachingService: (any GoalTeachingSignalReading & GoalTeachingSignalCapturing)? = nil,
+        teachingService: (any GoalTeachingSignalReading & GoalTeachingSignalProposing)? = nil,
         goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
         externalEffectAuthorizer: RuntimeExternalEffectCommandAuthorizer? = nil
     ) {

@@ -22,7 +22,7 @@ final class AppContainer {
 
     let session: AppSession
     let clock: any AmbitionsClock
-    let runtime: AmbitionsRuntime
+    let runtimeAuthority: RuntimeMutationAuthorityComposition
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
     #if DEBUG
@@ -54,7 +54,7 @@ final class AppContainer {
         session: AppSession,
         clock: any AmbitionsClock,
         runtimeCommandClient: RuntimeCommandClient,
-        runtime: AmbitionsRuntime,
+        runtimeAuthority: RuntimeMutationAuthorityComposition,
         appearancePreference: AppAppearancePreference,
         accentFamily: AmbitionAccentFamily,
         navigation: StageStore,
@@ -89,7 +89,6 @@ final class AppContainer {
             memoryLensService: memoryLensService
         )
         self.runtimeCapability = AppRuntimeCapability(
-            runtime: runtime,
             clock: clock,
             todayService: todayService,
             todayReceiptCommands: todayReceiptCommands,
@@ -126,11 +125,12 @@ final class AppContainer {
             timeService: timeService,
             insightsService: insightsService,
             youService: youService,
-            youPreferencesCommands: youPreferencesCommands
+            youPreferencesCommands: youPreferencesCommands,
+            captureGoalHandoffCommands: captureGoalHandoffCommands
         )
         self.session = session
         self.clock = clock
-        self.runtime = runtime
+        self.runtimeAuthority = runtimeAuthority
         self.appearancePreference = appearancePreference
         self.accentFamily = accentFamily
         self.navigation = navigation

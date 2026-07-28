@@ -1,10 +1,11 @@
 import Foundation
 
-struct TodayGoalStepActionPlan: Sendable, Codable, Equatable {
-    static let metadataKey = "todayGoalStepActionPlan"
-    static let mutationMarkerKey = "todayGoalStepActionMutation"
+enum TodayGoalStepActionKind: String, Sendable, Codable, Equatable {
+    case complete, `defer`, reschedule, markNotRelevant, split, askForHelp, quickLog
+}
 
-    let actionKind: String
+struct TodayGoalStepActionPlan: Sendable, Codable, Equatable {
+    let actionKind: TodayGoalStepActionKind
     let goalID: String
     let stepID: String
     let expectedGoalRevision: Int
@@ -16,17 +17,21 @@ struct TodayGoalStepActionPlan: Sendable, Codable, Equatable {
 
     var shouldWriteGoal: Bool { writesGoal ?? true }
 
-    func encoded() throws -> String {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.sortedKeys]
-        return try encoder.encode(self).base64EncodedString()
+    static func decode(command: AmbitionsCommand) -> TodayGoalStepActionPlan? {
+        guard case let .step(value) = command.canonicalPayload,
+              case let .todayGoalStep(plan) = value.action else { return nil }
+        return plan
     }
 
-    static func decode(command: AmbitionsCommand) -> TodayGoalStepActionPlan? {
-        guard command.payload.metadata[mutationMarkerKey] == "true",
-              let value = command.payload.metadata[metadataKey],
-              let data = Data(base64Encoded: value) else { return nil }
-        return try? JSONDecoder().decode(Self.self, from: data)
+    static func operation(for actionKind: TodayGoalStepActionKind) -> RuntimeCommandOperation {
+        switch actionKind {
+        case .complete: .completeAction
+        case .defer, .reschedule: .delayAction
+        case .markNotRelevant: .updateGoal
+        case .split: .splitAction
+        case .askForHelp: .recoverAction
+        case .quickLog: .quickCapture
+        }
     }
 }
 
@@ -57,6 +62,9 @@ struct TodayGoalStepActionPlanner: Sendable {
     let repositories: AppRepositories
 
     func prepare(_ request: TodayGoalStepActionRequest, now: Date) async throws -> PreparedTodayGoalStepAction {
+        guard let typedActionKind = TodayGoalStepActionKind(rawValue: request.kind) else {
+            throw TodayDurableActionError.unavailable
+        }
         guard var goal = try await repositories.goals.goal(id: request.goalID),
               let selectedStep = goal.plan?.sections.flatMap(\.steps).first(where: { $0.id == request.stepID }) else {
             throw TodayDurableActionError.unavailable
@@ -187,40 +195,29 @@ struct TodayGoalStepActionPlanner: Sendable {
         }
 
         let plan = TodayGoalStepActionPlan(
-            actionKind: request.kind, goalID: request.goalID, stepID: request.stepID,
+            actionKind: typedActionKind, goalID: request.goalID, stepID: request.stepID,
             expectedGoalRevision: expectedRevision, updatedGoal: goal,
             writesGoal: request.kind != "quickLog",
             feedbackEvents: feedback.map(StoredGoalFeedbackEvent.init(event:)), evidence: evidence,
             capture: capture
         )
+        let target = AmbitionsCommandTarget(
+            goalID: request.goalID,
+            captureID: capture?.id,
+            stepID: request.stepID,
+            destination: .today
+        )
+        let content = AmbitionsCommandPayload(rawText: capture?.rawText, title: request.title)
         let command = AmbitionsCommand(
-            id: commandID, kind: commandKind(for: request.kind), source: .today,
-            target: AmbitionsCommandTarget(
-                goalID: request.goalID,
-                captureID: capture?.id,
-                stepID: request.stepID,
-                destination: .today
-            ),
-            payload: AmbitionsCommandPayload(rawText: capture?.rawText, title: request.title, metadata: [
-                TodayGoalStepActionPlan.mutationMarkerKey: "true",
-                TodayGoalStepActionPlan.metadataKey: try plan.encoded(),
-                "todayActionKind": request.kind
-            ]),
+            id: commandID, source: .today,
+            typedPayload: .step(StepCommand(
+                action: .todayGoalStep(plan),
+                target: target,
+                content: RuntimeCommandContent(content)
+            )),
             createdAt: timestamp, actor: .user, sourceSurface: "Today", privacy: .privateUserText
         )
         return PreparedTodayGoalStepAction(command: command, context: CommandExecutionContext(now: now, actor: .user, sourceSurface: "Today"))
-    }
-
-    private func commandKind(for kind: String) -> AmbitionsCommandKind {
-        switch kind {
-        case "complete": .completeAction
-        case "defer", "reschedule": .delayAction
-        case "markNotRelevant": .updateGoal
-        case "split": .splitAction
-        case "askForHelp": .recoverAction
-        case "quickLog": .quickCapture
-        default: .recoverAction
-        }
     }
 
     private func feedbackNote(kind: String, step: Step) -> String {
@@ -349,7 +346,7 @@ enum TodayDurableActionMaterializationError: Error, Equatable {
 
 extension AmbitionsCommand {
     var isTodayGoalStepActionMutation: Bool {
-        payload.metadata[TodayGoalStepActionPlan.mutationMarkerKey] == "true"
+        TodayGoalStepActionPlan.decode(command: self) != nil
     }
 }
 
@@ -394,7 +391,7 @@ extension AmbitionsCommandExecutor {
             route: .today,
             target: command.target,
             metadata: [
-                "todayActionKind": plan.actionKind,
+                "todayActionKind": plan.actionKind.rawValue,
                 "todayActionMaterialization": "pending_authority_commit",
                 "projectionReloadRequired": "true"
             ]

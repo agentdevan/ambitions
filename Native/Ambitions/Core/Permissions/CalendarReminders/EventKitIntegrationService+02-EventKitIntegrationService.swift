@@ -5,15 +5,14 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     let storeClient: any EventKitStoreClient
     let eventKitOutbox: EventKitOutbox
     let reminderRepository: (any ReminderRepository)?
-    let pendingOperationStore: any PendingEventKitOperationStoring
+    let pendingOperationStore: (any PendingEventKitOperationStoring)?
     let calendar: Calendar
 
     init(
         storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
         eventKitOutbox: EventKitOutbox = EventKitOutbox(recorder: nil),
         reminderRepository: (any ReminderRepository)? = nil,
-        pendingOperationStore: any PendingEventKitOperationStoring =
-            MemoryPendingEventKitOperationStore(),
+        pendingOperationStore: (any PendingEventKitOperationStoring)? = nil,
         calendar: Calendar = Calendar.current
     ) {
         self.storeClient = storeClient
@@ -225,7 +224,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
         }
         if case let .terminal(attempt) = claim, let identifier = attempt.ledgerRecord.receiptID {
-            try await pendingOperationStore.complete(fingerprint: operation.fingerprint, operationID: operation.id)
+            try await pendingOperationStore?.complete(fingerprint: operation.fingerprint, operationID: operation.id)
             return CreatedCalendarEventRecord(
                 identifier: identifier,
                 title: selection.stepTitle,
@@ -241,7 +240,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 interval: interval,
                 now: now
             )
-            try await pendingOperationStore.complete(
+            try await pendingOperationStore?.complete(
                 fingerprint: operation.fingerprint,
                 operationID: operation.id
             )
@@ -274,7 +273,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 externalIdentifier: identifier
             )
         }
-        try await pendingOperationStore.complete(
+        try await pendingOperationStore?.complete(
             fingerprint: operation.fingerprint,
             operationID: operation.id
         )
@@ -364,7 +363,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         now: Date
     ) async throws -> CreatedReminderRecord {
         try await materializeReminderMirror(identifier: identifier, selection: selection, now: now)
-        try await pendingOperationStore.complete(
+        try await pendingOperationStore?.complete(
             fingerprint: operation.fingerprint,
             operationID: operation.id
         )
@@ -466,6 +465,9 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             goalID: selection.goalID,
             stepID: selection.stepID
         )
+        guard let pendingOperationStore else {
+            throw SideEffectOutboxError.missingDurableID
+        }
         let operationID = try await pendingOperationStore.resolve(
             fingerprint: fingerprint,
             proposedOperationID: proposedOperationID

@@ -35,7 +35,6 @@ struct AppShellCapability {
 }
 
 struct AppRuntimeCapability {
-    let runtime: AmbitionsRuntime
     let clock: any AmbitionsClock
     let todayService: any TodayServicing
     let todayReceiptCommands: any TodayReceiptCommanding
@@ -82,5 +81,6 @@ struct AppFeatureFactoryCapability {
     let insightsService: any InsightsServicing
     let youService: any YouServicing
     let youPreferencesCommands: any YouPreferencesCommanding
+    let captureGoalHandoffCommands: CaptureGoalHandoffService
 }
 import AmbitionsTimeFoundation

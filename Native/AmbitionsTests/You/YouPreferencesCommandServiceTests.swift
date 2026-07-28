@@ -92,9 +92,9 @@ final class YouPreferencesCommandServiceTests: XCTestCase {
 
         await assertFirstAttemptNeedsRecovery(service: service)
         let recoverableRecord = try await repositories.commandExecutionRecords?.fetchRecord(commandID: commandID)
-        XCTAssertEqual(recoverableRecord?.result.status, .succeeded)
-        XCTAssertTrue(recoverableRecord.map { RuntimeTransactionCommitPolicy.hasCommittedEvidence($0.result) } ?? false)
-        XCTAssertEqual(recoverableRecord?.result.metadata["appStateMaterialization"], "needs_recovery")
+        XCTAssertEqual(recoverableRecord?.result?.status, .succeeded)
+        XCTAssertTrue(recoverableRecord?.result.map(RuntimeTransactionCommitPolicy.hasCommittedEvidence) ?? false)
+        XCTAssertEqual(recoverableRecord?.result?.metadata["appStateMaterialization"], "needs_recovery")
 
         _ = try await service.saveYouPreferences(preferencesForRecovery)
 
@@ -103,7 +103,7 @@ final class YouPreferencesCommandServiceTests: XCTestCase {
         let events = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
         assertPreferences(repairedState, tab: .time, appearance: .light, accent: .mutedGold, cadence: 4)
         XCTAssertEqual(repairedState.userDisplayName, initialState.userDisplayName)
-        XCTAssertEqual(repairedRecord?.result.metadata["appStateMaterialization"], "saved_post_authority")
+        XCTAssertEqual(repairedRecord?.result?.metadata["appStateMaterialization"], "saved_post_authority")
         XCTAssertEqual(events.count, 1)
     }
 }

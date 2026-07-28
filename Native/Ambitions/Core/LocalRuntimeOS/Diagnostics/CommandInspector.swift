@@ -86,7 +86,7 @@ struct CommandInspector: Sendable, Equatable, Hashable {
                 componentID: "CommandInspector",
                 severity: .critical,
                 summary: "Command execution record is not local-only.",
-                detail: "Command \(fingerprint) has local-only disabled for kind \(record.command.kind.rawValue).",
+                detail: "Command \(fingerprint) has local-only disabled for operation \(record.command.operation.rawValue).",
                 repairHint: "Route private runtime commands through local-only command execution unless a future approved sync law permits otherwise.",
                 evidenceIDs: evidence,
                 privacy: privacy,

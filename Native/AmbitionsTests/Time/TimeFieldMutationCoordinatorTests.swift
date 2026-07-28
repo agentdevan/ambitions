@@ -15,26 +15,20 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         }
     }
 
-    func testPlaceStepPreparesDurableRuntimeCommandFromRealCandidate() throws {
+    func testPlaceStepFailsClosedUntilTheRuntimeSuppliesAnExactScheduleRevision() throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
 
-        let command = try TimeFieldMutationCoordinator.prepareCommand(
-            .placeStep,
-            in: state,
-            selectedMark: mark,
-            now: now
-        )
-
-        XCTAssertEqual(command.kind, .placeStepInTime)
-        XCTAssertEqual(command.target.stepID, "step.real-visible")
-        XCTAssertEqual(command.target.goalID, "goal.real-visible")
-        XCTAssertEqual(command.payload.metadata["placementCandidateKind"], TimePlacementCandidateKind.goalLinked.rawValue)
-        XCTAssertEqual(command.payload.metadata["placementTrigger"], ProtectedStepPlacementTrigger.userInitiated.rawValue)
-        XCTAssertEqual(command.payload.metadata["explicitUserApproval"], "true")
-        XCTAssertNotNil(command.payload.metadata["startAt"])
-        XCTAssertNotNil(command.payload.metadata["endAt"])
-        XCTAssertEqual(command.validationState, .valid)
+        XCTAssertThrowsError(
+            try TimeFieldMutationCoordinator.prepareCommand(
+                .placeStep,
+                in: state,
+                selectedMark: mark,
+                now: now
+            )
+        ) { error in
+            XCTAssertEqual(error as? TimeFieldMutationError, .revisionAuthorityUnavailable)
+        }
     }
 
     func testAutomaticProtectedPlacementStopsBeforeCommandExecution() throws {
@@ -51,12 +45,7 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
                 explicitProtectedPlacementApproval: false
             )
         ) { error in
-            guard case let .protectedPlacementRequiresApproval(decision) = error as? TimeFieldMutationError else {
-                return XCTFail("Expected protected placement decision, got \(error)")
-            }
-            XCTAssertEqual(decision.kind, .blockedFromSilentMovement)
-            XCTAssertEqual(decision.trigger, .automatic)
-            XCTAssertFalse(decision.canApplySilently)
+            XCTAssertEqual(error as? TimeFieldMutationError, .revisionAuthorityUnavailable)
         }
     }
 
@@ -74,38 +63,31 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
                 explicitProtectedPlacementApproval: false
             )
         ) { error in
-            guard case let .protectedPlacementRequiresApproval(decision) = error as? TimeFieldMutationError else {
-                return XCTFail("Expected protected placement decision, got \(error)")
-            }
-            XCTAssertEqual(decision.kind, .requiresExplicitApproval)
-            XCTAssertTrue(decision.requiresExplicitApproval)
-            XCTAssertFalse(decision.canApplyWithExplicitAction)
+            XCTAssertEqual(error as? TimeFieldMutationError, .revisionAuthorityUnavailable)
         }
     }
 
-    func testProtectAndCorrectionCommandsCarryExactRuntimeSemantics() throws {
+    func testProtectAndCorrectionRefusePresentationDerivedRevisionEvidence() throws {
         let state = PreviewTimeScenarios.seeded
         let protectedMark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .protectedTime })
         let openMark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .executionLanes })
 
-        let protect = try TimeFieldMutationCoordinator.prepareCommand(
-            .protectWindow,
-            in: state,
-            selectedMark: protectedMark,
-            now: now
-        )
-        let keepClear = try TimeFieldMutationCoordinator.prepareCommand(
-            .keepClear,
-            in: state,
-            selectedMark: openMark,
-            now: now
-        )
-
-        XCTAssertEqual(protect.kind, .protectTimeWindow)
-        XCTAssertNotNil(protect.payload.metadata["startAt"])
-        XCTAssertNotNil(protect.payload.metadata["endAt"])
-        XCTAssertEqual(keepClear.kind, .correctTimeWindow)
-        XCTAssertEqual(keepClear.payload.metadata["correctionKind"], TimeMutationActionKind.keepClear.rawValue)
+        let cases: [(TimeFieldMutationAction, LifeShapeSemanticMark)] = [
+            (.protectWindow, protectedMark),
+            (.keepClear, openMark),
+        ]
+        for (action, mark) in cases {
+            XCTAssertThrowsError(
+                try TimeFieldMutationCoordinator.prepareCommand(
+                    action,
+                    in: state,
+                    selectedMark: mark,
+                    now: now
+                )
+            ) { error in
+                XCTAssertEqual(error as? TimeFieldMutationError, .revisionAuthorityUnavailable)
+            }
+        }
     }
 
     private func realPlacementCandidate() -> TimePlacementCandidate {
@@ -120,4 +102,5 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
             kind: .goalLinked
         )
     }
+
 }
