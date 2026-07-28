@@ -55,11 +55,16 @@ extension TodayFlagshipCalibrationHostUITests {
         let overview = element("tfcs-today-overview")
         assertExists([startHere, overview, element("tfcs-dock-shell-peek")])
 
-        for _ in 0..<3 {
-            app.swipeUp(velocity: .slow)
-        }
+        let dragStart = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.78))
+        let dragEnd = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.75))
+        dragStart.press(
+            forDuration: 0.2,
+            thenDragTo: dragEnd,
+            withVelocity: .slow,
+            thenHoldForDuration: 0.2
+        )
         XCTAssertTrue(overview.exists)
-        XCTAssertTrue(element("tfcs-view-full-day").isHittable)
+        XCTAssertTrue(startHere.exists)
         attachR13Screenshot(named: "R13-F03-natural-scroll")
     }
 

@@ -144,7 +144,7 @@ struct TodayVitalityRailNode: View {
                 .opacity(extendsAfter ? 1 : 0)
         }
         .frame(width: 44)
-        .frame(minHeight: 76)
+        .frame(minHeight: 54)
         .accessibilityHidden(true)
     }
 }

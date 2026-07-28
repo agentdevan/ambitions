@@ -20,7 +20,7 @@ struct TodayVitalityRootView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 16) {
                     if usesAdaptiveNavigation {
                         TodayFlagshipAdaptiveNavigationPassage(
                             copy: content.interfaceCopy,
@@ -128,7 +128,7 @@ private struct TodayVitalityStartHere: View {
     let onOpen: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 17) {
+        VStack(alignment: .leading, spacing: 15) {
             Text(copy.startHereTitle)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(palette.ambitionsAccentMuted)
