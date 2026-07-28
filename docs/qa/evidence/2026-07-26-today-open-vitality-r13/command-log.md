@@ -16,4 +16,3 @@ Primary command families executed:
 Simulator automation recorded two environmental failures: an iPhone Air
 launchd/data-migration boot failure and late-suite Accessibility service timeouts
 on one iPhone 17 Pro. The same focused tests passed on iPhone 17 Pro Max.
-

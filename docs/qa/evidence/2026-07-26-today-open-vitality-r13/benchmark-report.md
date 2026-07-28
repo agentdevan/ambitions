@@ -25,4 +25,3 @@ A cached fixture-host `build-for-testing` also succeeded without cleaning. The
 direct Xcode bridge remained available for repository diagnostics. XcodeBuildMCP
 `Transport closed` was isolated to that fallback and is not classified as a
 repository or direct-Xcode failure.
-

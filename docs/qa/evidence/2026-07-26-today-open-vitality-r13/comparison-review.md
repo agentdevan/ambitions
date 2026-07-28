@@ -25,4 +25,3 @@ or safe-area actions in the reviewed frames.
 
 The iPhone Air narrow-width frame is omitted because the Simulator failed to
 boot reliably. This is recorded as incomplete evidence, not inferred success.
-

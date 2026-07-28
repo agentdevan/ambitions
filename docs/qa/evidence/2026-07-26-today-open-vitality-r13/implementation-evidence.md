@@ -59,4 +59,3 @@ without a device.
 The Foundry package keeps stable IDs, bounded observation, lazy scrolling for
 the complete day, localized material, and scoped animation invalidation. No
 ETTrace or Memgraph escalation was warranted by observed Simulator behavior.
-

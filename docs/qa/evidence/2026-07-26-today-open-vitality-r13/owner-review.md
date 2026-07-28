@@ -15,4 +15,3 @@ Owner dispositions:
 - request another structural branch;
 - reject R13;
 - reject the Today slice structure.
-
