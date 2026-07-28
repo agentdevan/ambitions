@@ -208,9 +208,9 @@ extension TodayFlagshipCalibrationHostUITests {
         viewFullDay.tap()
         assertExists([
             element("tfcs-full-day-root"),
-            element("tfcs-scroll-to-now"),
             element("tfcs-full-day-timeline")
         ])
+        XCTAssertFalse(element("tfcs-scroll-to-now").exists)
         pauseForEvidence(1)
     }
 

@@ -149,7 +149,9 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertFalse(element("tfcs-timeline-object-step.send-launch-brief").exists)
         XCTAssertTrue(element("tfcs-returned-settled-step").exists)
         XCTAssertTrue(app.staticTexts["Make the nursery ready for the crib"].exists)
-        XCTAssertTrue(element("tfcs-returned-start-here-time").exists)
+        let promotedTime = element("tfcs-root-time-relationship")
+        XCTAssertTrue(promotedTime.exists)
+        XCTAssertTrue(app.staticTexts["Due today · 2:00 PM"].exists)
     }
 
     func testAccessibilityReviewKeepsCommitAndCancelReachable() {
@@ -538,9 +540,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(vitalityShellSource.contains("UnevenRoundedRectangle("))
         XCTAssertTrue(vitalityShellSource.contains("bottomTrailingRadius: 0"))
         XCTAssertTrue(vitalityShellSource.contains("topTrailingRadius: 0"))
-        XCTAssertTrue(
-            shellSource.contains("TodayVitalityDockPeekLabel(copy: copy, palette: palette)")
-        )
+        XCTAssertTrue(shellSource.contains("TodayVitalityDockPeekLabel("))
+        XCTAssertTrue(shellSource.contains("isScrolling: isScrolling"))
     }
 
     func testB02RootUsesOneStartHereAndThreeTruthfulOverviewAnchors() {
@@ -666,7 +667,8 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let now = element("tfcs-full-day-now-step.nursery-ready-for-crib")
         let scrollToNow = element("tfcs-scroll-to-now")
         let timeline = element("tfcs-full-day-timeline")
-        assertExists([now, scrollToNow, timeline])
+        assertExists([now, timeline])
+        XCTAssertFalse(scrollToNow.exists)
         XCTAssertTrue(
             now.label.contains("The corner is cleared and the paint sample is chosen.")
         )
@@ -685,7 +687,6 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
                 .matching(identifier: "tfcs-full-day-row-event.family-time").count,
             1
         )
-        XCTAssertTrue(scrollToNow.isHittable)
         XCTAssertFalse(app.buttons["Edit"].exists)
         XCTAssertFalse(app.buttons["Open in Time"].exists)
 
@@ -713,7 +714,7 @@ final class TodayFlagshipCalibrationHostUITests: XCTestCase {
         let settledNursery = element("tfcs-full-day-settled-step.nursery-ready-for-crib")
         assertExists([revealedNow, settledNursery, element("tfcs-full-day-timeline")])
         XCTAssertTrue(
-            revealedNow.label.contains("The brief is drafted and waiting for one final read.")
+            revealedNow.label.contains("The brief is drafted and ready for review.")
         )
         XCTAssertEqual(
             app.buttons.matching(
@@ -925,9 +926,9 @@ extension TodayFlagshipCalibrationHostUITests {
         let rtlFullDay = element("tfcs-full-day-root")
         let rtlFullDayTimeline = element("tfcs-full-day-timeline")
         let rtlScrollToNow = element("tfcs-scroll-to-now")
-        assertExists([rtlFullDay, rtlFullDayTimeline, rtlScrollToNow])
+        assertExists([rtlFullDay, rtlFullDayTimeline])
+        XCTAssertFalse(rtlScrollToNow.exists)
         XCTAssertTrue(app.staticTexts["اليوم كاملًا"].exists)
-        XCTAssertEqual(rtlScrollToNow.label, "الانتقال إلى الآن")
         // The historical fixture has no localized Full Day entries. Per the owner's
         // English-only R13 boundary, entry-level localization remains deferred.
         assertArabicOnlyLabels(in: rtlFullDay)

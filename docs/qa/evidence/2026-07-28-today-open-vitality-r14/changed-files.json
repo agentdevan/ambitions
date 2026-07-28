@@ -2,7 +2,11 @@
   "base_sha": "4e18499c0015acb1d64de7ccef1bb835fe2281a9",
   "scope": "AVF-TODAY-S10-B04-D09-R14",
   "source_and_test_paths": [
+    "Native/AmbitionsNativeFoundryHostUITests/TodayFlagshipCalibrationHostUITests.swift",
+    "Native/AmbitionsNativeFoundryHostUITests/TodayOpenContinuityRecordingDriverUITests.swift",
+    "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityFocusedStepHostUITests.swift",
     "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityFullDayHostUITests.swift",
+    "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityR13JourneyHostUITests.swift",
     "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityR13ScreenshotCaptureUITests.swift",
     "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityRootHostUITests.swift",
     "Native/AmbitionsNativeFoundryHostUITests/TodayVitalitySettlementHostUITests.swift",

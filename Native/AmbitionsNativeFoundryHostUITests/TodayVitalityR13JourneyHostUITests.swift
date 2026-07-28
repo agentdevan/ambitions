@@ -329,7 +329,7 @@ extension TodayFlagshipCalibrationHostUITests {
 
         relaunchR13("r13-history-entry")
         XCTAssertTrue(element("r13-history-entry").waitForExistence(timeout: 4))
-        XCTAssertEqual(element("r13-history-entry-truth").label, settledTruth)
+        XCTAssertTrue(element("r13-history-entry-truth").label.contains(settledTruth))
 
         relaunchR13("r13-settlement-typical")
         XCTAssertFalse(app.buttons["Undo"].exists)
@@ -363,9 +363,9 @@ extension TodayFlagshipCalibrationHostUITests {
         fullDay.tap()
         assertExists([
             element("tfcs-full-day-root"),
-            element("tfcs-full-day-timeline"),
-            element("tfcs-scroll-to-now")
+            element("tfcs-full-day-timeline")
         ])
+        XCTAssertFalse(element("tfcs-scroll-to-now").exists)
         let orderedIDs = [
             "tfcs-full-day-row-event.deep-work",
             "tfcs-full-day-now-step.nursery-ready-for-crib",

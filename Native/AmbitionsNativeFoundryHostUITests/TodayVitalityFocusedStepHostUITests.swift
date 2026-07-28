@@ -21,7 +21,7 @@ extension TodayFlagshipCalibrationHostUITests {
         )
         XCTAssertTrue(
             consequence.label.contains(
-                "Moves the nursery forward while family time stays protected."
+                "It keeps the room moving without taking over the evening."
             )
         )
         XCTAssertTrue(time.label.contains("Available now · before 2:00 PM handoff"))
