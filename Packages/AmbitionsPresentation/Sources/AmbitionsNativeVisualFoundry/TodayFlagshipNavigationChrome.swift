@@ -1,0 +1,363 @@
+import SwiftUI
+
+struct TodayFlagshipAdaptiveNavigationPassage: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    let copy: TodayFlagshipInterfaceCopy
+    let commands: [TodayFlagshipNavigationCommand]
+    let palette: TodayFlagshipPalette
+    let onCommand: (TodayFlagshipNavigationCommand) -> Void
+
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 18) {
+            navigationGroup(
+                title: copy.rootsGroupTitle,
+                commands: rootCommands,
+                headingIdentifier: "tfcs-adaptive-roots-heading",
+                identifier: "tfcs-adaptive-roots-group"
+            )
+
+            Rectangle()
+                .fill(palette.divider)
+                .frame(height: 1)
+                .accessibilityHidden(true)
+
+            navigationGroup(
+                title: copy.globalActionsGroupTitle,
+                commands: globalActionCommands,
+                headingIdentifier: "tfcs-adaptive-global-actions-heading",
+                identifier: "tfcs-adaptive-global-actions-group"
+            )
+        }
+        .padding(.vertical, 14)
+        .padding(.leading, 16)
+        .padding(.trailing, 8)
+        .background {
+            palette.opaqueChrome.opacity(0.46)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(palette.selectedChrome)
+                .frame(width: 3)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("tfcs-adaptive-navigation-passage")
+    }
+
+    private func navigationGroup(
+        title: String,
+        commands: [TodayFlagshipNavigationCommand],
+        headingIdentifier: String,
+        identifier: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.secondaryInk)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier(headingIdentifier)
+
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(), spacing: 8)
+                ],
+                alignment: .leading,
+                spacing: 8
+            ) {
+                ForEach(commands) { command in
+                    navigationButton(command)
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(identifier)
+    }
+
+    private func navigationButton(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        Button {
+            onCommand(command)
+        } label: {
+            navigationButtonLabel(command)
+            .font(.body)
+            .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+            .padding(.horizontal, 10)
+            .background {
+                if command.isSelectedRoot {
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(palette.selectedChrome)
+                }
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(copy.navigationTitle(for: command))
+        .accessibilityInputLabels([copy.navigationTitle(for: command)])
+        .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
+        .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
+        .accessibilityIdentifier("tfcs-navigation-\(command.rawValue)")
+    }
+
+    @ViewBuilder
+    private func navigationButtonLabel(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .top, spacing: 8) {
+                    navigationIcon(command)
+                    navigationTitle(command)
+                }
+
+                if command.isSelectedRoot {
+                    Label(copy.selectedRootValue, systemImage: "checkmark")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(palette.secondaryInk)
+                }
+            }
+            .padding(.vertical, 8)
+        } else {
+            HStack(spacing: 8) {
+                navigationIcon(command)
+                navigationTitle(command)
+                Spacer(minLength: 0)
+
+                if command.isSelectedRoot {
+                    Image(systemName: "checkmark")
+                        .font(.caption.weight(.bold))
+                        .accessibilityHidden(true)
+                }
+            }
+        }
+    }
+
+    private func navigationIcon(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        Image(systemName: command.symbolName)
+            .frame(width: 22)
+            .accessibilityHidden(true)
+    }
+
+    private func navigationTitle(
+        _ command: TodayFlagshipNavigationCommand
+    ) -> some View {
+        Text(copy.navigationTitle(for: command))
+            .fontWeight(command.isSelectedRoot ? .semibold : .regular)
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+            .fixedSize(
+                horizontal: false,
+                vertical: dynamicTypeSize.isAccessibilitySize
+            )
+    }
+
+    private var rootCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.roots.contains)
+    }
+
+    private var globalActionCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.globalActions.contains)
+    }
+}
+
+struct TodayFlagshipDock: View {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @State private var commandSelectionFeedback = 0
+
+    let copy: TodayFlagshipInterfaceCopy
+    let commands: [TodayFlagshipNavigationCommand]
+    @Binding var isExpanded: Bool
+    let isScrolling: Bool
+    let palette: TodayFlagshipPalette
+    let onCommand: (TodayFlagshipNavigationCommand) -> Void
+
+    var body: some View {
+        Group {
+            if isExpanded {
+                expandedDock
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+            } else {
+                peekDock
+                    .transition(.opacity)
+            }
+        }
+        .sensoryFeedback(.selection, trigger: commandSelectionFeedback)
+    }
+
+    private var peekDock: some View {
+        Button {
+            isExpanded = true
+        } label: {
+            TodayVitalityDockPeekLabel(
+                copy: copy,
+                palette: palette,
+                isScrolling: isScrolling
+            )
+        }
+        .buttonStyle(TodayFlagshipDockPeekButtonStyle())
+        .accessibilityLabel(peekAccessibilityLabel)
+        .accessibilityHint(copy.navigationCommandsHint)
+        .accessibilityInputLabels([
+            copy.navigationTitle(for: .today),
+            copy.openNavigationLabel
+        ])
+        .accessibilityValue(copy.selectedRootValue)
+        .accessibilityAddTraits(.isSelected)
+        .accessibilityIdentifier(
+            reduceTransparency
+                ? "tfcs-dock-shell-peek-opaque"
+                : "tfcs-dock-shell-peek"
+        )
+    }
+
+    private var peekAccessibilityLabel: String {
+        [copy.navigationTitle(for: .today), copy.openNavigationLabel]
+            .joined(separator: ", ")
+    }
+
+    private var expandedDock: some View {
+        ViewThatFits(in: .vertical) {
+            expandedDockContent
+
+            ScrollView(.vertical) {
+                expandedDockContent
+            }
+            .scrollIndicators(.visible)
+            .scrollBounceBehavior(.basedOnSize)
+            .accessibilityIdentifier("tfcs-dock-compact-scroll")
+        }
+        .frame(width: 276)
+        .background {
+            TodayVitalityDockMaterial(
+                palette: palette,
+                isInteractive: true,
+                shape: expandedEdgeShape
+            )
+            .accessibilityIdentifier("r14-dock-edge-origin")
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("tfcs-dock-expanded")
+    }
+
+    private var expandedDockContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Spacer()
+                Button {
+                    isExpanded = false
+                } label: {
+                    Image(systemName: "xmark")
+                        .frame(width: 44, height: 44)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(copy.closeNavigationLabel)
+                .accessibilityHint(copy.closeNavigationHint)
+                .accessibilityInputLabels([copy.closeNavigationLabel])
+            }
+
+            dockGroup(
+                label: copy.rootsGroupTitle,
+                commands: rootCommands,
+                identifier: "tfcs-dock-roots-group"
+            )
+
+            Rectangle()
+                .fill(palette.divider)
+                .frame(height: 1)
+                .accessibilityHidden(true)
+                .accessibilityIdentifier("r14-dock-group-divider")
+
+            dockGroup(
+                label: copy.globalActionsGroupTitle,
+                commands: globalActionCommands,
+                identifier: "tfcs-dock-global-actions-group"
+            )
+        }
+        .padding(12)
+    }
+
+    private var expandedEdgeShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: 18,
+            bottomLeadingRadius: 18,
+            bottomTrailingRadius: 0,
+            topTrailingRadius: 0,
+            style: .continuous
+        )
+    }
+
+    private func dockGroup(
+        label: String,
+        commands: [TodayFlagshipNavigationCommand],
+        identifier: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(label)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(palette.secondaryInk)
+                .accessibilityAddTraits(.isHeader)
+
+            ForEach(commands) { command in
+                Button {
+                    commandSelectionFeedback += 1
+                    onCommand(command)
+                    if command == .today {
+                        isExpanded = false
+                    }
+                } label: {
+                    HStack(spacing: 9) {
+                        Image(systemName: command.symbolName)
+                            .frame(width: 20)
+                            .accessibilityHidden(true)
+                        Text(copy.navigationTitle(for: command))
+                        Spacer(minLength: 0)
+                        if command.isSelectedRoot {
+                            Image(systemName: "checkmark")
+                                .font(.caption.weight(.bold))
+                                .accessibilityHidden(true)
+                        }
+                    }
+                    .font(.body.weight(command.isSelectedRoot ? .semibold : .regular))
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .padding(.horizontal, 8)
+                    .background {
+                        if command.isSelectedRoot {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(palette.selectedChrome)
+                        }
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(copy.navigationTitle(for: command))
+                .accessibilityInputLabels([copy.navigationTitle(for: command)])
+                .accessibilityValue(command.isSelectedRoot ? copy.selectedRootValue : String())
+                .accessibilityAddTraits(command.isSelectedRoot ? .isSelected : [])
+                .accessibilityIdentifier("tfcs-dock-\(command.rawValue)")
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(identifier)
+    }
+
+    private var rootCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.roots.contains)
+    }
+
+    private var globalActionCommands: [TodayFlagshipNavigationCommand] {
+        commands.filter(TodayFlagshipNavigationCommand.globalActions.contains)
+    }
+
+}
+
+private struct TodayFlagshipDockPeekButtonStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.72 : 1)
+            .scaleEffect(reduceMotion ? 1 : configuration.isPressed ? 0.97 : 1)
+    }
+}

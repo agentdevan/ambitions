@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-open-continuity-field-b02-r00",
+  "revision_id": "AVF-TODAY-S10-B02-R00",
+  "rendered_source_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+  "production_baseline": false,
+  "fixture_family_id": "today-flagship/preparing-for-baby/still-counts/v1",
+  "capture_method": "Continuous iOS Simulator framebuffer recording via simctl around a passing XCUI Foundry-host driver; AVFoundation passthrough trim removed simulator pre-roll and post-test Home frames. No live app or runtime path was used.",
+  "environment": {
+    "device": "B02 Recording iPhone 17 Pro",
+    "udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "orientation": "portrait",
+    "direct_device_proof_complete": false
+  },
+  "recordings": [
+    {
+      "id": "TFCS-J01",
+      "path": "recordings/TFCS-J01-success-full-day.mov",
+      "duration_seconds": 30.258,
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "device": "B02 Recording iPhone 17 Pro",
+      "os": "iOS 26.5 (23F77)",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "appearance": "dark",
+      "content_size": "large",
+      "dynamic_type": "large",
+      "accessibility_settings": {
+        "increase_contrast": false,
+        "differentiate_without_color": false,
+        "reduce_transparency": false,
+        "reduce_motion": false
+      },
+      "driver": "testB02J01SuccessfulJourneyRecordingDriver",
+      "sequence": [
+        "Today",
+        "focused Step",
+        "Still Counts review",
+        "saving",
+        "settlement",
+        "View History",
+        "returned Today",
+        "Full Day"
+      ],
+      "captured_at": "2026-07-25T20:14:48-04:00",
+      "byte_size": 5498275,
+      "sha256": "a37478570361cbe588bc51da63d6e233da12f3a31b9f884352800d57beb821fd"
+    },
+    {
+      "id": "TFCS-J02",
+      "path": "recordings/TFCS-J02-recovery.mov",
+      "duration_seconds": 21.868,
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "device": "B02 Recording iPhone 17 Pro",
+      "os": "iOS 26.5 (23F77)",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "appearance": "dark",
+      "content_size": "large",
+      "dynamic_type": "large",
+      "accessibility_settings": {
+        "increase_contrast": false,
+        "differentiate_without_color": false,
+        "reduce_transparency": false,
+        "reduce_motion": false
+      },
+      "driver": "testB02J02InterruptedRecoveryRecordingDriver",
+      "sequence": [
+        "Today",
+        "focused interrupted Step",
+        "preserved progress",
+        "recovery sheet",
+        "truthful continuation"
+      ],
+      "captured_at": "2026-07-25T20:14:48-04:00",
+      "byte_size": 690085,
+      "sha256": "67730f5a1b061738617e331cc850bd0fcb8434ad33b8c18038d13057e142dc36"
+    },
+    {
+      "id": "TFCS-J03",
+      "path": "recordings/TFCS-J03-accessibility-dynamic-type.mov",
+      "duration_seconds": 44.5,
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "device": "B02 Recording iPhone 17 Pro",
+      "os": "iOS 26.5 (23F77)",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "appearance": "dark",
+      "content_size": "accessibility5",
+      "dynamic_type": "accessibility5",
+      "accessibility_settings": {
+        "increase_contrast": false,
+        "differentiate_without_color": false,
+        "reduce_transparency": false,
+        "reduce_motion": false
+      },
+      "driver": "testB02J03AccessibilityJourneyRecordingDriver",
+      "sequence": [
+        "Adaptive Navigation Passage",
+        "Today",
+        "focused Step",
+        "review",
+        "settlement",
+        "returned Today"
+      ],
+      "captured_at": "2026-07-25T20:16:17-04:00",
+      "byte_size": 1255625,
+      "sha256": "ebaeb7f4f92e297b09a3df68ef34114ff2de14fb3a63c06708fbe12ae609385e"
+    },
+    {
+      "id": "TFCS-J04",
+      "path": "recordings/TFCS-J04-dock-and-scroll.mov",
+      "duration_seconds": 23.7,
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "device": "B02 Recording iPhone 17 Pro",
+      "os": "iOS 26.5 (23F77)",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "appearance": "dark",
+      "content_size": "large",
+      "dynamic_type": "large",
+      "accessibility_settings": {
+        "increase_contrast": false,
+        "differentiate_without_color": false,
+        "reduce_transparency": false,
+        "reduce_motion": false
+      },
+      "driver": "testB02J04DockAndNaturalScrollRecordingDriver",
+      "sequence": [
+        "Today",
+        "dock Peek",
+        "expanded dock",
+        "natural scroll",
+        "Full Day"
+      ],
+      "captured_at": "2026-07-25T20:16:17-04:00",
+      "byte_size": 829036,
+      "sha256": "134aa22c365bd2f281224dbf1d58000a3ae3483ce15240969ab05c5b14ded914"
+    },
+    {
+      "id": "TFCS-J05",
+      "path": "recordings/TFCS-J05-reduce-motion.mov",
+      "duration_seconds": 13.898,
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "device": "B02 Recording iPhone 17 Pro",
+      "os": "iOS 26.5 (23F77)",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "appearance": "dark",
+      "content_size": "large",
+      "dynamic_type": "large",
+      "accessibility_settings": {
+        "increase_contrast": false,
+        "differentiate_without_color": false,
+        "reduce_transparency": false,
+        "reduce_motion": true
+      },
+      "reduce_motion": true,
+      "driver": "testB02J05ReduceMotionRecordingDriver",
+      "sequence": [
+        "focused Step",
+        "review",
+        "saving",
+        "settlement",
+        "returned Today"
+      ],
+      "captured_at": "2026-07-25T20:16:17-04:00",
+      "byte_size": 428748,
+      "sha256": "d31e572a06c4dd923d1c9d8329c8cf57b2497ba083ca4465ee38906b14b9b632"
+    }
+  ],
+  "proof_ceiling": "Simulator Foundry recordings prove fixture-host visual and semantic continuity only. They do not prove live persistence, direct-device behavior, production runtime integration, localization completeness, or owner acceptance."
+}

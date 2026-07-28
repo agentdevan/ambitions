@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-flagship-calibration-slice-r01",
+  "revision_id": "AVF-TODAY-S10-R01",
+  "production_baseline": false,
+  "baseline_policy": "Evaluation references only; not final production screenshot baselines.",
+  "fixture": {
+    "family_id": "today-flagship/preparing-for-baby/still-counts/v1",
+    "synthetic": true,
+    "copy_is_canon": false,
+    "visible_fixture_metadata": false
+  },
+  "environment": {
+    "device": "VC14 iPhone 17 Pro Simulator",
+    "model": "iPhone 17 Pro",
+    "udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "xcode_version": "26.6",
+    "xcode_build": "17F113",
+    "timezone": "America/New_York",
+    "orientation": "portrait",
+    "default_accessibility_settings": {
+      "dynamic_type": "large unless overridden per frame",
+      "increase_contrast": false,
+      "differentiate_without_color": false,
+      "reduce_transparency": false,
+      "reduce_motion": false
+    },
+    "direct_device_proof_complete": false
+  },
+  "frames": [
+    {
+      "id": "TFCS-F01",
+      "path": "screenshots/TFCS-F01-today-first-viewport-light.png",
+      "captured_at": "2026-07-23T15:51:07-04:00",
+      "appearance": "light",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 257951,
+      "sha256": "b6db58de06f87527133c19e3456536bcde874526747f83c79aa89338222928a1"
+    },
+    {
+      "id": "TFCS-F02",
+      "path": "screenshots/TFCS-F02-today-first-viewport-dark.png",
+      "captured_at": "2026-07-23T15:51:16-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 256426,
+      "sha256": "a303a5e94d463cfbd7cbaf579f63636c1ab6b69c0a085236dd219f0d75ec23a9"
+    },
+    {
+      "id": "TFCS-F03",
+      "path": "screenshots/TFCS-F03-today-scrolled-dark.png",
+      "captured_at": "2026-07-23T15:50:44-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "content_projection": "dense Today within the same fixture family",
+      "interaction": "real native vertical drag",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 287486,
+      "sha256": "b7740b80e331292f26b97fb4e03262f473dd5c8b7d0937d6f203d489a2dc2fac"
+    },
+    {
+      "id": "TFCS-F04",
+      "path": "screenshots/TFCS-F04-dock-expanded-dark.png",
+      "captured_at": "2026-07-23T15:51:24-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 241024,
+      "sha256": "84bd93c27edf932d1d4ac41789c9f612663615109dc563fd777905a770d03168"
+    },
+    {
+      "id": "TFCS-F05",
+      "path": "screenshots/TFCS-F05-adaptive-navigation-accessibility.png",
+      "captured_at": "2026-07-23T15:51:48-04:00",
+      "appearance": "dark",
+      "dynamic_type": "accessibility1",
+      "navigation_posture": "Adaptive Navigation Passage",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 238836,
+      "sha256": "eb08dd014ed48d2c0cf6a3d6cca8ec7364eaea45a4491b4769add741ca7d454e"
+    },
+    {
+      "id": "TFCS-F06",
+      "path": "screenshots/TFCS-F06-focused-step-dark.png",
+      "captured_at": "2026-07-23T15:51:56-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 292606,
+      "sha256": "1559ef3037c4267c759d5ac02e16c9174650a1c1f75b543e493fd5343570f91a"
+    },
+    {
+      "id": "TFCS-F07",
+      "path": "screenshots/TFCS-F07-consequential-review-dark.png",
+      "captured_at": "2026-07-23T15:52:04-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 315807,
+      "sha256": "daed1646f035130b2e16d0e68d8caf71020f043d144f2ddfb7ec5ba15745fe23"
+    },
+    {
+      "id": "TFCS-F08",
+      "path": "screenshots/TFCS-F08-successful-settlement-dark.png",
+      "captured_at": "2026-07-23T15:52:23-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 207638,
+      "sha256": "b5edaca1fa2dd865dec7b96f0b5069c79f4c286c6edc7e417a955cc997beb80a"
+    },
+    {
+      "id": "TFCS-F09",
+      "path": "screenshots/TFCS-F09-returned-today-dark.png",
+      "captured_at": "2026-07-23T15:52:32-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 293345,
+      "sha256": "c3668b752cc7f72b2e198d3acc6c88bdb15f6354fdbe53430303fc9781960b6b"
+    },
+    {
+      "id": "TFCS-F10",
+      "path": "screenshots/TFCS-F10-interrupted-recovery-dark.png",
+      "captured_at": "2026-07-23T15:52:41-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 202639,
+      "sha256": "af1177fb51c12879016f2d822f708c651fbb658252e5dc032b97e400bbaedbb2"
+    }
+  ],
+  "supporting_state_frames": [
+    {
+      "id": "TFCS-S01",
+      "path": "supporting-state/TFCS-S01-saving-accepted-truth.png",
+      "captured_at": "2026-07-23T16:05:01-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 327552,
+      "sha256": "66f32e7605d24d5b4cedec6ae36f1a2a84793ec6bc34f9b5efad3c59be770573"
+    },
+    {
+      "id": "TFCS-S02",
+      "path": "supporting-state/TFCS-S02-cancelled-unchanged.png",
+      "captured_at": "2026-07-23T16:05:09-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 293030,
+      "sha256": "b02f2bd1301620d308dc5b6aee7562c14f46456d878571e040b8e08baafa3c4a"
+    },
+    {
+      "id": "TFCS-S03",
+      "path": "supporting-state/TFCS-S03-interrupted-preserved-progress.png",
+      "captured_at": "2026-07-23T16:05:18-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 289292,
+      "sha256": "fa4cfe1feb9a450840c21a08b2420042a3d276438212451518619577164fdbbf"
+    },
+    {
+      "id": "TFCS-S04",
+      "path": "supporting-state/TFCS-S04-dense-today-protected-fixed.png",
+      "captured_at": "2026-07-23T16:05:35-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 304084,
+      "sha256": "7704365e67324adf3daafa88161dd59f64cfa1fa5e232b270b7c063a9e880d4d"
+    },
+    {
+      "id": "TFCS-S05",
+      "path": "supporting-state/TFCS-S05-long-content-rtl.png",
+      "captured_at": "2026-07-23T16:05:44-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "layout_direction": "right-to-left",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 295535,
+      "sha256": "67f81c7daf8b030f393672a7169bc2368fabb91275987966da72cb267fe87c89"
+    },
+    {
+      "id": "TFCS-S06",
+      "path": "supporting-state/TFCS-S06-increased-contrast-review.png",
+      "captured_at": "2026-07-23T16:06:14-04:00",
+      "appearance": "dark",
+      "dynamic_type": "large",
+      "increase_contrast": true,
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "byte_size": 315547,
+      "sha256": "6f93d388cf7c0e315f32a439af9b0be8bb196792756a23f6a6dd238a04a1e712"
+    }
+  ]
+}

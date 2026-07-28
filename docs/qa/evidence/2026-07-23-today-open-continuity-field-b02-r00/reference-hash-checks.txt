@@ -1,0 +1,2 @@
+536377f7877411821f2c6a2827d6c4d36ed699f78b0ddeca41c5f9804841e151  docs/qa/evidence/2026-07-23-today-articulated-flagship-reconstruction-b01-r00/reference-inputs/owner-intended-eight-screen-graphite-reference.jpg
+50776fdd2c05063c508ee8a81eab13c125f756ba6870374f37aa25c37bc489fc  docs/qa/evidence/2026-07-23-today-articulated-flagship-reconstruction-b01-r00/contact-sheets/B01-C01-full-matrix.png

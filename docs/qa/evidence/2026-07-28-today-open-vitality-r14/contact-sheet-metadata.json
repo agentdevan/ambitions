@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "production_baseline": false,
+  "contact_sheets": [
+    {
+      "id": "R14-C01-full-matrix",
+      "path": "contact-sheets/R14-C01-full-matrix.png",
+      "sha256": "b99a8cefbcf69d89ead6dcdee5d28483e9028bdc4bd71c530c12112e6a9a1e34",
+      "width": 1184,
+      "height": 5096,
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R14-C02-owner-reference-comparison",
+      "path": "contact-sheets/R14-C02-owner-reference-comparison.png",
+      "sha256": "388a11b8b2d2e3c2ace42b2bedb0e04d64883167aa0a43d9d200003eb0cb9e3f",
+      "width": 756,
+      "height": 6312,
+      "evaluation_reference": true,
+      "production_baseline": false
+    },
+    {
+      "id": "R14-C03-accessibility-and-adaptivity",
+      "path": "contact-sheets/R14-C03-accessibility-and-adaptivity.png",
+      "sha256": "57da1450b66b15355f9ff0f7aff671e36643193b11a5237139382f2b3f3c7687",
+      "width": 1360,
+      "height": 1448,
+      "evaluation_reference": true,
+      "production_baseline": false
+    }
+  ]
+}

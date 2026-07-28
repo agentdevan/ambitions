@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "source_sha": "ac7ed07d090d65bdc469a9a2309f6899dc6135e6",
+  "files": [
+    {
+      "status": "M",
+      "path": "Native/AmbitionsNativeFoundryHost/AmbitionsNativeFoundryHostApp.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayFlagshipCalibrationHostUITestSupport.swift"
+    },
+    {
+      "status": "M",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayFlagshipCalibrationHostUITests.swift"
+    },
+    {
+      "status": "M",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayOpenContinuityRecordingDriverUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityAccessibilityHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityFocusedStepHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityFullDayHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityR13JourneyHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityR13ScreenshotCaptureUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityRecoveryHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityResilienceHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityReviewHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityRootHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalitySettlementHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalityShellHostUITests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Native/AmbitionsNativeFoundryHostUITests/TodayVitalitySupportingDepthHostUITests.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationContent.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationFixture.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationPreviews.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipCalibrationView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipFocusedStepView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipJourneyState.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipNavigationChrome.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipRecoveryReviewView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayFlagshipReviewView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayOpenContinuityFocusedObject.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayOpenContinuityFullDayView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayOpenContinuityRoot.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayOpenContinuityTimeline.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityFocusedStepView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityFullDayView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityGrammar.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityPreviewSupport.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityRecoveryView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityResilienceViews.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityReviewView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityRootView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalitySettlementView.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityShell.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalitySupportingDepth.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/TodayVitalityTimelineView.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayFlagshipCalibrationFixtureTests.swift"
+    },
+    {
+      "status": "M",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayFlagshipJourneyStateTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityAccessibilityTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityFocusedStepTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityFullDayTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityGrammarTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityRecoveryTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityResilienceTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityReviewTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityRootTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalitySettlementTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalityShellTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/TodayVitalitySupportingDepthTests.swift"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/architecture-assumptions.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/baseline-validation.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/benchmark-report.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/canon-ownership-map.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/capture-omissions.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/changed-files.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/command-log.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/comparison-metadata.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/comparison-review.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/contact-sheets/R13-C01-full-matrix.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/contact-sheets/R13-C02-b02-comparison.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/contact-sheets/R13-C03-owner-reference-translation.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/contact-sheets/R13-C04-accessibility-transformations.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/fixture-contract.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/implementation-evidence.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/known-limitations.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-FOCUSED.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-FULL-DAY.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-RECOVERY.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-RETURNED.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-REVIEW.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-ROOT.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-SAVING.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-references/R13-REF-SETTLEMENT.jpg"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-review.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/owner-selection.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/reference-hashes.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/reference-translation.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/repository-map.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/reviewer-findings.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshot-metadata.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A01-accessibility-root.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A02-accessibility-review.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A03-increased-contrast.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A04-differentiate-without-color.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A05-reduce-transparency.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-A06-reduce-motion.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-CI01-compact-iphone.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D01-goal-detail.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D02-time-transfer.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D03-consequence-details.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D04-local-history-entry.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D05-history-filters.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D06-offline-mode.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D07-stale-context.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D08-undo-available.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D09-failed-settlement.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-D11-cancelled-unchanged.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-DK01-low-brightness-dark.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F01-today-root-light.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F02-today-root-dark.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F03-natural-scroll.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F04-dock-expanded.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F05-adaptive-navigation.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F06-focused-step.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F07-consequential-review.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F08-saving.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F09-settlement.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F10-returned-today.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F11-full-day.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F12-interrupted-step.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-F13-recovery-sheet.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-L01-long-root.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-L02-long-focused.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-N01-dense-day.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-N02-very-dense-day.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-PM01-pro-max.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/screenshots/R13-Q01-quiet-day.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/validate-evidence.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/validation-results.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/visual-direction-contract.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/qa/evidence/2026-07-26-today-open-vitality-r13/visual-reference-manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/superpowers/plans/2026-07-26-today-open-vitality-r13.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/superpowers/specs/2026-07-26-today-open-vitality-r13-design.md"
+    }
+  ]
+}

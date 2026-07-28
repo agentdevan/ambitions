@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "production_baseline": false,
+  "contact_sheets": [
+    {
+      "id": "R13-C01-full-matrix",
+      "path": "contact-sheets/R13-C01-full-matrix.png",
+      "sha256": "fd5f6d52d9cb806229fec25b632f2c519ac88b637e6312374ab653d2dd197638",
+      "production_baseline": false
+    },
+    {
+      "id": "R13-C02-b02-comparison",
+      "path": "contact-sheets/R13-C02-b02-comparison.png",
+      "sha256": "745f903d753100043eac237e23097ececcf4d40e7e18e3d4a5c453dba7f0dca7",
+      "production_baseline": false
+    },
+    {
+      "id": "R13-C03-owner-reference-translation",
+      "path": "contact-sheets/R13-C03-owner-reference-translation.png",
+      "sha256": "ac63ab504fa866f5068cac2d5c87e08d69e2812f2d2bbf20d356a20b612ec79c",
+      "production_baseline": false
+    },
+    {
+      "id": "R13-C04-accessibility-transformations",
+      "path": "contact-sheets/R13-C04-accessibility-transformations.png",
+      "sha256": "c10ab8514a214d37951b7934c25c77eda2d00cc370e1f6a9bf499e95cf4f1eaa",
+      "production_baseline": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-open-continuity-field-b02-r00",
+  "production_baseline": false,
+  "contact_sheets": [
+    {
+      "id": "B02-C01-full-matrix",
+      "path": "contact-sheets/B02-C01-full-matrix.png",
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "contents": [
+        "TFCS-F01",
+        "TFCS-F02",
+        "TFCS-F03",
+        "TFCS-F04",
+        "TFCS-F05",
+        "TFCS-F06",
+        "TFCS-F07",
+        "TFCS-F08",
+        "TFCS-F09",
+        "TFCS-F10",
+        "TFCS-S01",
+        "TFCS-S02",
+        "TFCS-S03",
+        "TFCS-S04",
+        "TFCS-S05",
+        "TFCS-S06",
+        "B02-Q01",
+        "B02-D01",
+        "B02-T01",
+        "B02-L01",
+        "B02-A01",
+        "B02-A02",
+        "B02-CI01",
+        "B02-PM01",
+        "B02-RS01"
+      ],
+      "captured_at": "2026-07-25T20:17:26-04:00",
+      "byte_size": 5556340,
+      "sha256": "07ab7815aa3b27c4f5efe7b3f8d6a7d1322d5e63d31ad4b111212ede5f60cb5a",
+      "width_pixels": 1680,
+      "height_pixels": 3745
+    },
+    {
+      "id": "B02-C02-b01-comparison",
+      "path": "contact-sheets/B02-C02-b01-comparison.png",
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "pair_order": [
+        "F01 B01/B02",
+        "F02 B01/B02",
+        "F06 B01/B02",
+        "F07 B01/B02",
+        "F08 B01/B02",
+        "F09 B01/B02",
+        "F10 B01/B02"
+      ],
+      "captured_at": "2026-07-25T20:17:51-04:00",
+      "byte_size": 4626620,
+      "sha256": "e788add27ca9ecfff670aaeb3e833c6d8f6da038466080a0f7f6d120f3f2b2cf",
+      "width_pixels": 850,
+      "height_pixels": 6489
+    },
+    {
+      "id": "B02-C03-owner-reference-translation",
+      "path": "contact-sheets/B02-C03-owner-reference-translation.png",
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "claim": "caliber and grammar translation, not pixel matching",
+      "rejected_reference_elements": [
+        "five-tab navigation",
+        "Inbox root",
+        "Calendar root",
+        "crown Search",
+        "Capture tab",
+        "priority ranking",
+        "rainbow categories"
+      ],
+      "captured_at": "2026-07-25T20:18:21-04:00",
+      "byte_size": 12588929,
+      "sha256": "354df24fac539ac3bb9e74e787777406f169a7a12689642c84897e89c39f9c26",
+      "width_pixels": 853,
+      "height_pixels": 7416
+    },
+    {
+      "id": "B02-C04-accessibility-transformations",
+      "path": "contact-sheets/B02-C04-accessibility-transformations.png",
+      "repository_sha": "75fb51f96d911cd6da92094b72b2248c99922ea1",
+      "production_baseline": false,
+      "fixture_id": "today-flagship/preparing-for-baby/still-counts/v1",
+      "contents": [
+        "TFCS-F02",
+        "TFCS-F05",
+        "TFCS-S06",
+        "B02-A02",
+        "B02-A01",
+        "TFCS-S05"
+      ],
+      "language_policy": "English-only owner-review selection; RTL remains an open obligation",
+      "captured_at": "2026-07-25T20:18:34-04:00",
+      "byte_size": 2020175,
+      "sha256": "f9c1ba70725803fa065d1b15850070f9d5dd553e611dc00969a42233102038cd",
+      "width_pixels": 1275,
+      "height_pixels": 1854
+    }
+  ]
+}

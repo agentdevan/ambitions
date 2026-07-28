@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-23-today-articulated-flagship-reconstruction-b01-r00",
+  "revision_id": "AVF-TODAY-S10-B01-R00",
+  "rendered_source_sha": "53324b5fc60229958497b75ed3828b7e0d224492",
+  "production_baseline": false,
+  "fixture_family_id": "today-flagship/preparing-for-baby/still-counts/v1",
+  "capture_method": "XCUI-driven native Simulator journey captured as a continuous framebuffer sequence and encoded with AVAssetWriter; no live app or runtime path was used.",
+  "environment": {
+    "device": "VC14 iPhone 17 Pro Simulator",
+    "udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+    "ios_version": "26.5",
+    "ios_build": "23F77",
+    "orientation": "portrait",
+    "direct_device_proof_complete": false
+  },
+  "recordings": [
+    {
+      "id": "TFCS-J01",
+      "path": "recordings/TFCS-J01-successful-complete-journey.mov",
+      "captured_at": "2026-07-23T21:03:24-04:00",
+      "duration_seconds": 18.000,
+      "byte_size": 967951,
+      "sha256": "8e451920e6f6f34082ef3a25da669787b9c461ca5276ab04c3db593f4bc60a18",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "dynamic_type": "large",
+      "appearance": "dark",
+      "driver": "testB01SuccessfulJourneyRecordingDriver",
+      "sequence": ["Today", "focused current Step", "proposed Still counts review", "saving with accepted truth retained", "settled accepted truth", "View history open and return", "truthful returned Today with unique Start Here"]
+    },
+    {
+      "id": "TFCS-J02",
+      "path": "recordings/TFCS-J02-interrupted-recovery-journey.mov",
+      "captured_at": "2026-07-23T21:08:48-04:00",
+      "duration_seconds": 11.000,
+      "byte_size": 850722,
+      "sha256": "cb7c21ce6e7e7d5fc0e2099192876a2aea733b0d70d13e30103d70b280ce61cf",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "dynamic_type": "large",
+      "appearance": "dark",
+      "driver": "testB01InterruptedJourneyRecordingDriver",
+      "sequence": ["Today", "focused current Step", "interrupted with saved progress", "object-scoped recovery review", "truthful saved-progress continuation"]
+    },
+    {
+      "id": "TFCS-J03",
+      "path": "recordings/TFCS-J03-accessibility-dynamic-type-journey.mov",
+      "captured_at": "2026-07-23T21:14:41-04:00",
+      "duration_seconds": 11.000,
+      "byte_size": 713548,
+      "sha256": "a2efca94cf661b083bd06ce897456f8c4f57828302ba47851203148aef6139ee",
+      "width_pixels": 1206,
+      "height_pixels": 2622,
+      "dynamic_type": "accessibility1",
+      "appearance": "dark",
+      "driver": "testB01AccessibilityJourneyRecordingDriver",
+      "sequence": ["Adaptive Navigation Passage and Today", "focused current Step", "proposed Still counts review", "saving with accepted truth retained", "settled accepted truth", "truthful returned Today"]
+    }
+  ],
+  "proof_ceiling": "Simulator Foundry recordings prove fixture-host visual and semantic continuity only. They do not prove live persistence, direct-device behavior, production runtime integration, or owner acceptance."
+}
