@@ -1,0 +1,76 @@
+{
+  "status": "READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_MATERIALIZED_REVIEW",
+  "owner_disposition": "SELECT_D09_FOR_SYNTHESIS / REQUEST_NARROW_D09_R01_REVISION",
+  "direction_id": "AVF-GOALS-S08-INT-D09-R01",
+  "direction_name": "Native Pursuit Continuum, Materialized",
+  "source_repository_sha": "51ad2b9fefcdeea9cf5707a7d825fb34aa595305",
+  "fixture": "GoalsNativeCalibrationFixture.preparingForBaby",
+  "viewport": {
+    "device_equivalent": "iPhone 17 Pro portrait",
+    "pixel_width": 853,
+    "pixel_height": 1844
+  },
+  "appearance": "dark",
+  "content_size": "standard_dynamic_type",
+  "locale": "en",
+  "production_baseline": false,
+  "asset_kind": "generated_visual_evaluation_reference",
+  "preserved_from_d09_r00": [
+    "canonical route hierarchy",
+    "native route ownership",
+    "persistent cross-depth Goal anatomy",
+    "accepted truth and attached Proof",
+    "current movement and open possibility",
+    "protected relationship boundary",
+    "fixture truth",
+    "shell posture"
+  ],
+  "materialized_goal_anatomy": [
+    "faceted material origin",
+    "open accepted-truth shelf",
+    "embedded Proof provenance",
+    "explicit current-movement action",
+    "qualitative future certainty",
+    "relationship-driven boundary change"
+  ],
+  "assets": [
+    {
+      "screen": "Goals root",
+      "route_depth": "life_area_index",
+      "file": "AVF-GOALS-S08-INT-D09-R01-goals-root.png",
+      "sha256": "bee61ebdca87d5e573c46fd4631bb1393b717b67ef7d66047d9694850c221ddb",
+      "goal_anatomy_resolution": "material pursuit signal"
+    },
+    {
+      "screen": "Home",
+      "route_depth": "life_area_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R01-home-life-area.png",
+      "sha256": "5974d2d8e2f207074983f2720b404da7dbbe96b66047a22c88bb2ed18659cf2b",
+      "goal_anatomy_resolution": "material compact pursuit object"
+    },
+    {
+      "screen": "Welcome our baby home",
+      "route_depth": "goal_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R01-focused-goal.png",
+      "sha256": "dd41f500c5659aab8bdd51c5a4838eac408a32eaec2dbbfbe774262f4dfa9891",
+      "goal_anatomy_resolution": "material full pursuit continuum"
+    }
+  ],
+  "authority_sources": [
+    "docs/canon/migration/UX_BLUEPRINT.md",
+    "docs/canon/specifications/app/navigation.md",
+    "docs/canon/specifications/surfaces/goals.md"
+  ],
+  "proof_ceiling": [
+    "not_native_swiftui",
+    "not_navigationstack_proof",
+    "not_interactive_back_proof",
+    "not_focus_restoration_proof",
+    "not_interaction_proof",
+    "not_accessibility_proof",
+    "not_shell_validation",
+    "not_runtime_proof",
+    "not_production_baseline",
+    "owner_native_pursuit_continuum_materialized_review_required"
+  ]
+}

@@ -95,3 +95,19 @@ The D09 follow-up adds or updates only:
 - `native-pursuit-continuum/AVF-GOALS-S08-INT-D09-R00-focused-goal.png`
 
 D08 remains preserved as canonical-IA proof. No D08 asset, earlier intervention evidence, rejected R01 evidence, Swift, tests, fixtures, product canon, generated authority, project files, routes, runtime integration, native prototypes, or production screenshot baselines were changed.
+
+## Native Pursuit Continuum, Materialized narrow revision
+
+The D09-R01 follow-up adds or updates only:
+
+- `README.md`
+- `owner-review.md`
+- `changed-files.md`
+- `native-pursuit-continuum-materialized-contract.md`
+- `native-pursuit-continuum-materialized/README.md`
+- `native-pursuit-continuum-materialized/rendering-manifest.json`
+- `native-pursuit-continuum-materialized/AVF-GOALS-S08-INT-D09-R01-goals-root.png`
+- `native-pursuit-continuum-materialized/AVF-GOALS-S08-INT-D09-R01-home-life-area.png`
+- `native-pursuit-continuum-materialized/AVF-GOALS-S08-INT-D09-R01-focused-goal.png`
+
+D08 and D09-R00 remain preserved as historical evidence. No Swift, tests, fixtures, product canon, generated authority, project files, routes, runtime integration, native prototypes, deeper Goals screens, accessibility renders, or production screenshot baselines were changed or created.
