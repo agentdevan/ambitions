@@ -1,0 +1,73 @@
+{
+  "status": "READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_REVIEW",
+  "owner_disposition": "REQUEST_NEW_GOALS_STRUCTURAL_BRANCH",
+  "direction_id": "AVF-GOALS-S08-INT-D09-R00",
+  "direction_name": "Native Pursuit Continuum",
+  "source_repository_sha": "75ec538bc33a6c531cfbae59938d3be319267f43",
+  "fixture": "GoalsNativeCalibrationFixture.preparingForBaby",
+  "viewport": {
+    "device_equivalent": "iPhone 17 Pro portrait",
+    "pixel_width": 853,
+    "pixel_height": 1844
+  },
+  "appearance": "dark",
+  "content_size": "standard_dynamic_type",
+  "locale": "en",
+  "production_baseline": false,
+  "asset_kind": "generated_visual_evaluation_reference",
+  "preserved_from_d08": [
+    "canonical route hierarchy",
+    "native route ownership",
+    "root, Life Area, and Goal separation",
+    "fixture truth",
+    "shell posture"
+  ],
+  "canonical_goal_anatomy": [
+    "open identity anchor",
+    "accepted-truth seam",
+    "attached recorded support",
+    "current movement",
+    "open possibility",
+    "protected relationship boundary"
+  ],
+  "assets": [
+    {
+      "screen": "Goals root",
+      "route_depth": "life_area_index",
+      "file": "AVF-GOALS-S08-INT-D09-R00-goals-root.png",
+      "sha256": "491de656cd2d5c841994a8ccc59c91bcb9243ffd81b3a12696ef403aeb3ab330",
+      "goal_anatomy_resolution": "pursuit signal"
+    },
+    {
+      "screen": "Home",
+      "route_depth": "life_area_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R00-home-life-area.png",
+      "sha256": "216f1e3c93177ef0d58a3c64129f1207661f980841d0e633eff0cb49b77318d2",
+      "goal_anatomy_resolution": "compact pursuit object"
+    },
+    {
+      "screen": "Welcome our baby home",
+      "route_depth": "goal_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R00-focused-goal.png",
+      "sha256": "4d0a1d76e11f8aa6f41c366836588130d35c6b7115a63fd3dfe74b6540a3ef4f",
+      "goal_anatomy_resolution": "full pursuit continuum"
+    }
+  ],
+  "authority_sources": [
+    "docs/canon/migration/UX_BLUEPRINT.md",
+    "docs/canon/specifications/app/navigation.md",
+    "docs/canon/specifications/surfaces/goals.md"
+  ],
+  "proof_ceiling": [
+    "not_native_swiftui",
+    "not_navigationstack_proof",
+    "not_interactive_back_proof",
+    "not_focus_restoration_proof",
+    "not_interaction_proof",
+    "not_accessibility_proof",
+    "not_shell_validation",
+    "not_runtime_proof",
+    "not_production_baseline",
+    "owner_native_pursuit_continuum_review_required"
+  ]
+}
