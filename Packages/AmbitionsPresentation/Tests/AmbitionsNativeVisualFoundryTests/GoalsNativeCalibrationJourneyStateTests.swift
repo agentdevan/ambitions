@@ -69,4 +69,37 @@ final class GoalsNativeCalibrationJourneyStateTests: XCTestCase {
         XCTAssertTrue(state.navigationPath.isEmpty)
         XCTAssertFalse(state.hasMutation)
     }
+
+    func testRelationshipInspectionIsNonMutatingAndBackRestoresFocusedGoalThenLens() {
+        var state = GoalsNativeCalibrationJourneyState(content: content)
+        let canonicalContent = content
+
+        XCTAssertTrue(state.openLinkedLens())
+        XCTAssertTrue(state.openSelectedGoal())
+        XCTAssertTrue(state.openRelationship())
+        XCTAssertEqual(
+            state.navigationPath,
+            [
+                .focusedGoal(id: "goal.welcome-baby-home"),
+                .relationship(
+                    primaryGoalID: "goal.welcome-baby-home",
+                    relatedGoalID: "goal.protect-first-weeks-together"
+                )
+            ]
+        )
+        XCTAssertFalse(state.hasMutation)
+        XCTAssertEqual(content, canonicalContent)
+
+        state.reconcileNavigationPath([.focusedGoal(id: "goal.welcome-baby-home")])
+        XCTAssertEqual(state.focusAnchor, .focusedGoal)
+        XCTAssertFalse(state.hasMutation)
+
+        state.reconcileNavigationPath([])
+        XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
+        XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
+        XCTAssertTrue(state.isLinkedLensExpanded)
+        XCTAssertEqual(state.focusAnchor, .linkedLens)
+        XCTAssertFalse(state.hasMutation)
+        XCTAssertEqual(content, canonicalContent)
+    }
 }

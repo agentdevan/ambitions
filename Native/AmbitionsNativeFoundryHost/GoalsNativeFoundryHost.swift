@@ -6,6 +6,8 @@ enum GoalsNativeFoundryVariant: String {
     case rootDark = "gnc-f02"
     case selectedGoal = "gnc-f03"
     case linkedGoalLens = "gnc-f04"
+    case focusedGoal = "gnc-f05"
+    case consequentialRelationship = "gnc-f06"
 
     static var fromProcessArguments: GoalsNativeFoundryVariant? {
         let arguments = ProcessInfo.processInfo.arguments
@@ -27,7 +29,20 @@ enum GoalsNativeFoundryVariant: String {
     }
 
     var lensExpanded: Bool {
-        self == .linkedGoalLens
+        switch self {
+        case .linkedGoalLens, .focusedGoal, .consequentialRelationship:
+            true
+        default:
+            false
+        }
+    }
+
+    var opensFocusedGoal: Bool {
+        self == .focusedGoal || self == .consequentialRelationship
+    }
+
+    var opensRelationship: Bool {
+        self == .consequentialRelationship
     }
 }
 
@@ -39,11 +54,18 @@ struct GoalsNativeFoundryHost: View {
 
     init(variant: GoalsNativeFoundryVariant) {
         self.variant = variant
+        var initialState = GoalsNativeCalibrationJourneyState(
+            content: GoalsNativeCalibrationFixture.preparingForBaby,
+            lensExpanded: variant.lensExpanded
+        )
+        if variant.opensFocusedGoal {
+            _ = initialState.openSelectedGoal()
+        }
+        if variant.opensRelationship {
+            _ = initialState.openRelationship()
+        }
         _state = State(
-            initialValue: GoalsNativeCalibrationJourneyState(
-                content: GoalsNativeCalibrationFixture.preparingForBaby,
-                lensExpanded: variant.lensExpanded
-            )
+            initialValue: initialState
         )
     }
 

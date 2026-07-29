@@ -24,6 +24,10 @@ public struct GoalsNativeCalibrationView: View {
                 palette: palette,
                 usesAdaptiveNavigation: dynamicTypeSize.isAccessibilitySize
             )
+            .navigationTitle("Goals")
+            .navigationDestination(for: GoalsNativeCalibrationRoute.self) { route in
+                destination(for: route)
+            }
         }
         .tint(palette.accent)
         .accessibilityIdentifier("gnc-journey-root")
@@ -41,5 +45,42 @@ public struct GoalsNativeCalibrationView: View {
             colorScheme: colorScheme,
             contrast: colorSchemeContrast
         )
+    }
+
+    @ViewBuilder
+    private func destination(for route: GoalsNativeCalibrationRoute) -> some View {
+        switch route {
+        case let .focusedGoal(id) where id == content.primaryGoal.id:
+            GoalsNativeCalibrationFocusedGoalView(
+                content: content,
+                state: $state,
+                palette: palette
+            )
+        case let .relationship(primaryGoalID, relatedGoalID)
+            where primaryGoalID == content.relationship.primaryGoalID
+                && relatedGoalID == content.relationship.relatedGoalID:
+            GoalsNativeCalibrationRelationshipView(
+                content: content,
+                palette: palette
+            )
+        case .goalPath:
+            // Goal Path is installed by the dedicated path calibration task.
+            EmptyView()
+        default:
+            EmptyView()
+        }
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func goalsNativeCalibrationDepthNavigation(title: String) -> some View {
+        #if os(iOS)
+        navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.visible, for: .navigationBar)
+        #else
+        navigationTitle(title)
+        #endif
     }
 }
