@@ -2,12 +2,11 @@ import XCTest
 
 @MainActor
 final class GoalsNativeCalibrationScreenshotCaptureUITests: XCTestCase {
-    private var app: XCUIApplication!
+    private let app = XCUIApplication()
 
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        app = XCUIApplication()
     }
 
     func testGNCF01GoalsRootLight() {
