@@ -23,4 +23,4 @@ Evidence:
 - [validation](validation-results.md)
 - [known limitations](known-limitations.md)
 
-Status: `READY_FOR_OWNER_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_GOALS_CALIBRATION_EVIDENCE`
