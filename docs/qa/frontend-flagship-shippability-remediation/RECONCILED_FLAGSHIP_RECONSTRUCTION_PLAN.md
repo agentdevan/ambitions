@@ -2,8 +2,8 @@
 
 # Reconciled Flagship Reconstruction Plan
 
-Status: Current planning authority; Wave 1 foundation closed; implementation entry is closed
-Date: 2026-07-22
+Status: Current planning authority; `POST_VC14_NATIVE_CALIBRATION / PRE_CROSS_ROOT_PROPAGATION`; implementation entry is closed
+Date: 2026-07-28
 Baseline: `5ba9814f2636f148eb5e455b0a791299dcab0849` or later on `main`
 Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
 
@@ -12,7 +12,9 @@ Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-deci
 This plan replaces the active sequencing in the historical frontend execution
 ledger. It consumes the reconciled canon and ADRs; it does not authorize an
 implementation packet. Figma authorization, SwiftUI approval, and
-implementation authorization are false.
+implementation authorization are false. Native SwiftUI previews and the
+Native Visual Foundry are the current proving environment; Figma remains
+optional documentation and is not visual authority or a sequencing gate.
 
 ## Dependency graph
 
@@ -27,12 +29,13 @@ Canon/architecture authority
   -> persistence/recovery capability gates
   -> accessibility/localization infrastructure
   -> R10 Wave 1 shared visual foundation [COMPLETE]
-  -> R10 Wave 2 surfaces and journeys [OPEN]
-  -> R10 Wave 3 stress and matched baseline [OPEN]
-  -> VC-14 reconciled matched-baseline closure [NOT COMPLETE]
-  -> Figma authorization
-  -> Figma journey specification
-  -> SwiftUI approval
+  -> R10 Wave 2 surfaces and journeys [COMPLETE]
+  -> R10 Wave 3 stress and matched baseline / VC-13 [COMPLETE]
+  -> VC-14 reconciled native-matched closure [COMPLETE]
+  -> Native Visual Foundry bootstrap [COMPLETE]
+  -> Today native calibration [ACCEPTED PROVISIONALLY]
+  -> cross-root native calibration [NEXT]
+  -> separate SwiftUI approval [FALSE]
   -> clean frontend implementation
   -> legacy authority deletion after parity proof
 ```
@@ -53,11 +56,11 @@ No milestone may treat a later arrow as evidence for an earlier dependency.
 | R8 Persistence/recovery gates | Only approved durable drafts/outboxes/recovery | Interruption, retry, cancel, publication, conflict tests | Planning only |
 | R9 Accessibility/localization | Focus, announcements, catalogs, RTL and input equivalence | Automated plus direct device matrix | Planning only |
 | R10 / Wave 1 shared visual foundation | Typography, appearance, crown, dock, state, and foundational grammar | `VC_WAVE_1_FOUNDATION_CLOSURE.md`, JSON peer, compiler validation, generated manifest | **COMPLETE** |
-| R10 / Wave 2 surfaces and journeys | Surface and journey studies using the closed foundation | VC-07 through VC-12 closure records with matched target/capability boundaries | **OPEN** |
-| R10 / Wave 3 stress and matched baseline | Cross-surface stress, accessibility transformation, and matched-baseline preparation | VC-13 stress closure and matched reference input | **OPEN** |
-| R11 VC-14 reconciled matched-baseline closure | Cross-direction matched reference baseline | Completed VC-14 record and owner review of the matched study | **NOT COMPLETE** |
-| R12 Figma entry | Owner explicitly declares `SELECTED FOR FIGMA` | Separate owner record | Authorization false |
-| R13 Figma journeys | Journey-level design/QA | Authorized Figma proof | Blocked |
+| R10 / Wave 2 surfaces and journeys | Surface and journey studies using the closed foundation | VC-07 through VC-12 closure records with matched target/capability boundaries | **COMPLETE** |
+| R10 / Wave 3 stress and matched baseline | Cross-surface stress, accessibility transformation, and matched-baseline preparation | VC-13 stress closure and matched reference input | **COMPLETE** |
+| R11 VC-14 reconciled matched-baseline closure | Cross-direction matched reference baseline | Completed VC-14 record and owner review of the matched study | **COMPLETE** |
+| R12 Figma entry | Optional documentation only when separately authorized | Separate owner record | Authorization false; not a sequencing gate |
+| R13 Figma journeys | Optional journey documentation | Separately authorized Figma proof | Not required for current native proving path |
 | R14 SwiftUI entry | Owner explicitly declares `APPROVED FOR SWIFTUI` | Separate owner record | Approval false |
 | R15 Clean implementation | New frontend consumes proven contracts | Scoped implementation/test/device proof | Authorization false |
 | R16 Legacy deletion | Remove replaced product/frontend authority | Parity, rollback, archive, deletion proof | Blocked by cutover |
@@ -122,32 +125,33 @@ and authority closure only. It is not a final design system, component library,
 Figma artifact, rendered baseline, runtime capability claim, or implementation
 approval.
 
-R10 / Wave 2 surfaces and journeys is **OPEN**. VC-07 through VC-12 must consume
-the closed foundation without reopening it, adding product scope, or depicting
-unsupported behavior as current capability. R10 / Wave 3 stress and matched
-baseline is **OPEN**; VC-13 remains open and must preserve the same capability
-and proof ceilings.
+R10 / Wave 2 surfaces and journeys is **COMPLETE**: VC-07 through VC-12 are
+closed. R10 / Wave 3 accessibility and content stress is **COMPLETE**: VC-13 is
+closed. VC-14 and the visual-closure planning program are **COMPLETE**, the
+Native Visual Foundry bootstrap is complete, and Today R14 is accepted as
+provisional Today calibration evidence. The current position is
+`POST_VC14_NATIVE_CALIBRATION / PRE_CROSS_ROOT_PROPAGATION`.
 
-VC-14 is **NOT COMPLETE** and remains `NOT_STARTED`. The two authorized branches
-and six revisions remain the only current structural branch/revision IDs. Exact
-tokens, Figma collections, component variables, component APIs, final component
-library structure, and matched frames remain deferred. Wave 1 completion does
-not authorize Figma, SwiftUI, or implementation.
+Native Foundry calibration proves visual and interaction direction against
+synthetic fixtures. It does not prove production runtime ownership,
+persistence, migration, settlement, restoration, or cutover. It does not
+complete R2 through R9 or R15 through R16. Exact tokens, component APIs, final
+component-library structure, production screenshot baselines, runtime
+integration, and production cutover remain deferred and unauthorized.
 
 ### Figma
 
-Figma remains closed until owner authorization after the reconciled Goals and
-Today branches, shell contract, identity/ownership matrix, truth/mutation/
-Receipt/Undo contract, Search/Capture transfer contract, supported You
-inventory, persistence/recovery matrix, accessibility/localization plan,
-updated closure studies, and VC-14 matched baseline all exist and agree.
+Figma remains optional documentation only. It is not visual authority and does
+not gate the current package-backed native preview and cross-root calibration
+sequence. Any future Figma work still requires separate owner authorization.
 
 ### SwiftUI and implementation
 
-SwiftUI remains closed until a separate owner approval after authorized Figma
-journey specification and QA. Implementation requires an explicit bounded work
-packet with current source/tests, migration plan, proof lane, and rollback. This
-plan intentionally contains no task-level SwiftUI steps or component APIs.
+`APPROVED FOR SWIFTUI` remains false. Production implementation requires a
+separate owner approval after cross-root synthesis and an explicit bounded work
+packet with current source/tests, migration plan, proof lane, and rollback.
+This plan intentionally contains no task-level production SwiftUI steps or
+component APIs.
 
 ## Risk register
 
@@ -170,14 +174,15 @@ plan intentionally contains no task-level SwiftUI steps or component APIs.
 | Architecture contracts | Ready for implementation planning | Accepted ADRs define owners and boundaries; runtime proof absent. |
 | Canon/UX direction | Ready for reconciled specification use | Normative owners and active direction IDs are aligned. |
 | R10 / Wave 1 shared visual foundation | Complete | VC-01 through VC-06 are closed in the source-owned human and machine package and projected into generated authority. |
-| R10 / Wave 2 surfaces and journeys | Open | VC-07 through VC-12 remain open and must consume the closed foundation. |
-| R10 / Wave 3 stress and matched baseline | Open | VC-13 remains open; matched-baseline preparation has not completed. |
-| VC-14 | Not complete | Status remains `NOT_STARTED`; no reconciled matched baseline is selected. |
+| R10 / Wave 2 surfaces and journeys | Complete | VC-07 through VC-12 are closed by the active Wave 2 closure authority. |
+| R10 / Wave 3 stress and matched baseline | Complete | VC-13 is closed by the active Wave 3 closure authority. |
+| VC-14 | Complete | Native matched closure and the bounded Native Foundry bootstrap are complete. |
+| Today native calibration | Accepted provisionally | R14 is accepted as Today calibration evidence; it is not production-final. |
 | Identity migrations | Not implementation-ready | Designs exist; schemas/migrations/tests do not. |
 | Runtime capability | Not implementation-ready | Registry closure, typed states, and proof are incomplete. |
 | Accessibility/localization | Ready for infrastructure planning | Proof plan exists; implementation/direct evidence absent. |
-| Figma | Not authorized | Wave 2, Wave 3, VC-14, and the required owner declaration remain incomplete or absent. |
-| SwiftUI | Not approved | Figma journey authority and owner approval absent. |
+| Figma | Not authorized | Optional documentation only; it is not visual authority or a sequencing gate. |
+| SwiftUI | Not approved | Cross-root synthesis, production proof, and separate owner approval remain absent. |
 | Legacy deletion | Not ready | Replacement parity does not exist. |
 
 ## Integrity
@@ -185,4 +190,7 @@ plan intentionally contains no task-level SwiftUI steps or component APIs.
 This plan authorizes architecture, UX Blueprint, runtime, reconstruction, and
 accessibility planning. It authorizes no Figma artifact, SwiftUI work, frontend
 implementation, migration, source deletion, target change, or product-code
-modification.
+modification. Broad reconstruction, runtime integration, production cutover,
+and `APPROVED FOR SWIFTUI` remain false. Foundry fixture evidence must not be
+used as proof of production persistence, settlement, restoration, migration,
+or cutover.
