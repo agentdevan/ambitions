@@ -2,6 +2,21 @@ public enum GoalsNativeCalibrationFixture {
     public static let preparingForBaby = makePreparingForBaby()
 
     private static func makePreparingForBaby() -> GoalsNativeCalibrationContent {
+        let proofMoments = [
+            GoalsNativeCalibrationProofMoment(
+                id: "proof.crib-corner-cleared",
+                title: "Crib corner cleared"
+            ),
+            GoalsNativeCalibrationProofMoment(
+                id: "proof.paint-color-confirmed",
+                title: "Paint color confirmed"
+            ),
+            GoalsNativeCalibrationProofMoment(
+                id: "proof.wall-primed",
+                title: "Wall primed"
+            )
+        ]
+
         let primaryGoal = GoalsNativeCalibrationGoal(
             id: "goal.welcome-baby-home",
             title: "Welcome our baby home",
@@ -80,7 +95,7 @@ public enum GoalsNativeCalibrationFixture {
         )
 
         let relationship = GoalsNativeCalibrationRelationship(
-            id: "relationship.home-supports-first-weeks",
+            id: "relationship.goal.welcome-baby-home.protect-first-weeks",
             primaryGoalID: primaryGoal.id,
             primaryGoalTitle: primaryGoal.title,
             ownerLifeAreaID: "life-area.home",
@@ -97,58 +112,94 @@ public enum GoalsNativeCalibrationFixture {
             id: "goalpath.welcome-baby-home.v1",
             nodes: [
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.define-ready",
+                    id: "pathnode.define-ready",
                     title: "Define what ready means",
                     state: .completed,
                     detail: "The family agreed on the smallest useful definition of ready."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.clear-crib-corner",
+                    id: "pathnode.clear-crib-corner",
                     title: "Clear the crib corner",
                     state: .completed,
                     proof: ["Crib corner cleared"],
+                    proofIDs: ["proof.crib-corner-cleared"],
                     detail: "The crib corner is clear."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.prime-wall",
+                    id: "pathnode.prime-wall-color",
                     title: "Prime the wall and confirm the color",
                     state: .settled,
                     proof: ["Paint color confirmed", "Wall primed"],
+                    proofIDs: ["proof.paint-color-confirmed", "proof.wall-primed"],
                     detail: "The wall is primed and the color is confirmed."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.paint-wall",
+                    id: "pathnode.paint-wall",
                     title: "Paint the nursery wall",
                     state: .current,
                     detail: "This is the current meaningful movement."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.assemble-crib",
+                    id: "pathnode.assemble-crib",
                     title: "Assemble the crib",
                     state: .next,
                     detail: "This becomes available after the paint has settled."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.changing-station",
+                    id: "pathnode.changing-station",
                     title: "Set up the changing station",
                     state: .planned,
                     detail: "This remains a planned movement."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.final-furniture",
+                    id: "pathnode.final-furniture",
                     title: "Arrange final furniture after delivery",
                     state: .conditional,
                     detail: "Future Step · available after delivery."
                 ),
                 GoalsNativeCalibrationPathNode(
-                    id: "goalpath-node.nursery-ready",
+                    id: "pathnode.nursery-ready",
                     title: "Nursery ready for the crib",
                     state: .finish,
                     detail: "The room supports the family without taking over their time."
                 )
             ],
-            currentNodeID: "goalpath-node.paint-wall",
-            nextNodeID: "goalpath-node.assemble-crib"
+            currentNodeID: "pathnode.paint-wall",
+            nextNodeID: "pathnode.assemble-crib"
+        )
+
+        let recovery = GoalsNativeCalibrationRecovery(
+            id: "recovery.goal.welcome-baby-home.paint-delay",
+            goalID: primaryGoal.id,
+            interruptionFact: "The nursery paint is unavailable until Friday.",
+            retainedAcceptedTruth: primaryGoal.currentAcceptedTruth,
+            retainedProofIDs: proofMoments.map(\.id),
+            interruptedPathNodeID: "pathnode.paint-wall",
+            possibleNextPathNodeID: "pathnode.assemble-crib",
+            unchangedPathStatement: "The current path is still intact. Nothing has changed yet."
+        )
+
+        let closure = GoalsNativeCalibrationClosure(
+            id: "closure.goal.welcome-baby-home.nursery-ready",
+            goalID: primaryGoal.id,
+            acceptedTruth: "The nursery is ready for the crib.",
+            relationshipResult: "The first weeks together remain protected.",
+            remainingOpenItem: "Arrange final furniture after delivery",
+            proofIDs: proofMoments.map(\.id),
+            history: [
+                GoalsNativeCalibrationHistoryEntry(
+                    id: "history.goal.welcome-baby-home.nursery-ready",
+                    title: "Nursery outcome accepted",
+                    detail: "The nursery is ready for the crib."
+                ),
+                GoalsNativeCalibrationHistoryEntry(
+                    id: "history.goal.welcome-baby-home.protected-first-weeks",
+                    title: "Protected relationship retained",
+                    detail: "The first weeks together remain protected."
+                )
+            ],
+            isOutcomeAchieved: true,
+            isGoalClosed: true
         )
 
         return GoalsNativeCalibrationContent(
@@ -161,7 +212,10 @@ public enum GoalsNativeCalibrationFixture {
             primaryGoal: primaryGoal,
             linkedLens: linkedLens,
             relationship: relationship,
-            goalPath: goalPath
+            goalPath: goalPath,
+            proofMoments: proofMoments,
+            recovery: recovery,
+            closure: closure
         )
     }
 }

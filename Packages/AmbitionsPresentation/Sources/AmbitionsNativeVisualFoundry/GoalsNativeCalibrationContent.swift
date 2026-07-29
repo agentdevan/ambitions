@@ -113,6 +113,9 @@ public struct GoalsNativeCalibrationRelationship: Equatable, Sendable {
     public let meaning: String
     public let practicalConsequence: String
 
+    public var consequence: String { meaning }
+    public var protectedBoundary: String { practicalConsequence }
+
     public init(
         id: String,
         primaryGoalID: String,
@@ -137,6 +140,16 @@ public struct GoalsNativeCalibrationRelationship: Equatable, Sendable {
         self.relatedLifeAreaTitle = relatedLifeAreaTitle
         self.meaning = meaning
         self.practicalConsequence = practicalConsequence
+    }
+}
+
+public struct GoalsNativeCalibrationProofMoment: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let title: String
+
+    public init(id: String, title: String) {
+        self.id = id
+        self.title = title
     }
 }
 
@@ -167,6 +180,7 @@ public struct GoalsNativeCalibrationPathNode: Equatable, Identifiable, Sendable 
     public let title: String
     public let state: GoalsNativeCalibrationPathNodeState
     public let proof: [String]
+    public let proofIDs: [String]
     public let detail: String
 
     public init(
@@ -174,12 +188,14 @@ public struct GoalsNativeCalibrationPathNode: Equatable, Identifiable, Sendable 
         title: String,
         state: GoalsNativeCalibrationPathNodeState,
         proof: [String] = [],
+        proofIDs: [String] = [],
         detail: String
     ) {
         self.id = id
         self.title = title
         self.state = state
         self.proof = proof
+        self.proofIDs = proofIDs
         self.detail = detail
     }
 }
@@ -201,6 +217,87 @@ public struct GoalsNativeCalibrationPath: Equatable, Identifiable, Sendable {
         self.currentNodeID = currentNodeID
         self.nextNodeID = nextNodeID
     }
+
+    public func node(id: String) -> GoalsNativeCalibrationPathNode? {
+        nodes.first { $0.id == id }
+    }
+}
+
+public struct GoalsNativeCalibrationRecovery: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let goalID: String
+    public let interruptionFact: String
+    public let retainedAcceptedTruth: String
+    public let retainedProofIDs: [String]
+    public let interruptedPathNodeID: String
+    public let possibleNextPathNodeID: String
+    public let unchangedPathStatement: String
+
+    public init(
+        id: String,
+        goalID: String,
+        interruptionFact: String,
+        retainedAcceptedTruth: String,
+        retainedProofIDs: [String],
+        interruptedPathNodeID: String,
+        possibleNextPathNodeID: String,
+        unchangedPathStatement: String
+    ) {
+        self.id = id
+        self.goalID = goalID
+        self.interruptionFact = interruptionFact
+        self.retainedAcceptedTruth = retainedAcceptedTruth
+        self.retainedProofIDs = retainedProofIDs
+        self.interruptedPathNodeID = interruptedPathNodeID
+        self.possibleNextPathNodeID = possibleNextPathNodeID
+        self.unchangedPathStatement = unchangedPathStatement
+    }
+}
+
+public struct GoalsNativeCalibrationHistoryEntry: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let title: String
+    public let detail: String
+
+    public init(id: String, title: String, detail: String) {
+        self.id = id
+        self.title = title
+        self.detail = detail
+    }
+}
+
+public struct GoalsNativeCalibrationClosure: Equatable, Identifiable, Sendable {
+    public let id: String
+    public let goalID: String
+    public let acceptedTruth: String
+    public let relationshipResult: String
+    public let remainingOpenItem: String
+    public let proofIDs: [String]
+    public let history: [GoalsNativeCalibrationHistoryEntry]
+    public let isOutcomeAchieved: Bool
+    public let isGoalClosed: Bool
+
+    public init(
+        id: String,
+        goalID: String,
+        acceptedTruth: String,
+        relationshipResult: String,
+        remainingOpenItem: String,
+        proofIDs: [String],
+        history: [GoalsNativeCalibrationHistoryEntry],
+        isOutcomeAchieved: Bool,
+        isGoalClosed: Bool
+    ) {
+        self.id = id
+        self.goalID = goalID
+        self.acceptedTruth = acceptedTruth
+        self.relationshipResult = relationshipResult
+        self.remainingOpenItem = remainingOpenItem
+        self.proofIDs = proofIDs
+        self.history = history
+        self.isOutcomeAchieved = isOutcomeAchieved
+        self.isGoalClosed = isGoalClosed
+    }
 }
 
 public struct GoalsNativeCalibrationContent: Equatable, Sendable {
@@ -214,6 +311,9 @@ public struct GoalsNativeCalibrationContent: Equatable, Sendable {
     public let linkedLens: GoalsNativeCalibrationLinkedLens
     public let relationship: GoalsNativeCalibrationRelationship
     public let goalPath: GoalsNativeCalibrationPath
+    public let proofMoments: [GoalsNativeCalibrationProofMoment]
+    public let recovery: GoalsNativeCalibrationRecovery
+    public let closure: GoalsNativeCalibrationClosure
 
     public init(
         familyID: String,
@@ -225,7 +325,10 @@ public struct GoalsNativeCalibrationContent: Equatable, Sendable {
         primaryGoal: GoalsNativeCalibrationGoal,
         linkedLens: GoalsNativeCalibrationLinkedLens,
         relationship: GoalsNativeCalibrationRelationship,
-        goalPath: GoalsNativeCalibrationPath
+        goalPath: GoalsNativeCalibrationPath,
+        proofMoments: [GoalsNativeCalibrationProofMoment],
+        recovery: GoalsNativeCalibrationRecovery,
+        closure: GoalsNativeCalibrationClosure
     ) {
         self.familyID = familyID
         self.isSynthetic = isSynthetic
@@ -237,6 +340,9 @@ public struct GoalsNativeCalibrationContent: Equatable, Sendable {
         self.linkedLens = linkedLens
         self.relationship = relationship
         self.goalPath = goalPath
+        self.proofMoments = proofMoments
+        self.recovery = recovery
+        self.closure = closure
     }
 
     public var visibleEvaluationText: [String] {
@@ -262,6 +368,16 @@ public struct GoalsNativeCalibrationContent: Equatable, Sendable {
             ]
             + linkedLens.proofPosture
             + goalPath.nodes.flatMap { [$0.title, $0.state.label, $0.detail] + $0.proof }
+            + proofMoments.map(\.title)
+            + [
+                recovery.interruptionFact,
+                recovery.retainedAcceptedTruth,
+                recovery.unchangedPathStatement,
+                closure.acceptedTruth,
+                closure.relationshipResult,
+                closure.remainingOpenItem
+            ]
+            + closure.history.flatMap { [$0.title, $0.detail] }
     }
 
     public func lifeArea(id: String) -> GoalsNativeCalibrationLifeArea? {

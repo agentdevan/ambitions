@@ -3,6 +3,10 @@ public enum GoalsNativeCalibrationRoute: Hashable, Sendable {
     case focusedGoal(id: String)
     case relationship(primaryGoalID: String, relatedGoalID: String)
     case goalPath(id: String)
+    case pathEvidence(pathID: String, nodeID: String)
+    case recovery(id: String)
+    case closure(id: String)
+    case closureHistory(id: String)
 }
 
 public enum GoalsNativeCalibrationFocusAnchor: String, Equatable, Sendable {
@@ -11,8 +15,15 @@ public enum GoalsNativeCalibrationFocusAnchor: String, Equatable, Sendable {
     case linkedLens = "linked-lens"
     case focusedGoal = "focused-goal"
     case relationship
+    case relationshipEntry = "relationship-entry"
     case goalPath = "goal-path"
     case pathNode = "path-node"
+    case pathEvidence = "path-evidence"
+    case currentMovement = "current-movement"
+    case recoveryEntry = "recovery-entry"
+    case recoveryState = "recovery-state"
+    case closure
+    case closureHistory = "closure-history"
 }
 
 public enum GoalsNativeCalibrationPathJump: String, CaseIterable, Equatable, Sendable {
@@ -38,6 +49,10 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     private let pathNodeIDs: [String]
     private let currentPathNodeID: String
     private let nextPathNodeID: String
+    private let recoveryID: String
+    private let interruptedPathNodeID: String
+    private let possibleNextPathNodeID: String
+    private let closureID: String
 
     public init(
         content: GoalsNativeCalibrationContent,
@@ -59,6 +74,10 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
         pathNodeIDs = content.goalPath.nodes.map(\.id)
         currentPathNodeID = content.goalPath.currentNodeID
         nextPathNodeID = content.goalPath.nextNodeID
+        recoveryID = content.recovery.id
+        interruptedPathNodeID = content.recovery.interruptedPathNodeID
+        possibleNextPathNodeID = content.recovery.possibleNextPathNodeID
+        closureID = content.closure.id
     }
 
     public var expandedLifeAreaIDs: [String] { [selectedLifeAreaID] }
@@ -159,6 +178,71 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     }
 
     @discardableResult
+    public mutating func openPathEvidence() -> Bool {
+        guard
+            navigationPath == focusedGoalPath + [.goalPath(id: goalPathID)],
+            pathNodeIDs.contains(selectedPathNodeID)
+        else { return false }
+        navigationPath.append(
+            .pathEvidence(pathID: goalPathID, nodeID: selectedPathNodeID)
+        )
+        focusAnchor = .pathEvidence
+        return true
+    }
+
+    @discardableResult
+    public mutating func openRecovery() -> Bool {
+        guard navigationPath == focusedGoalPath else { return false }
+        navigationPath.append(.recovery(id: recoveryID))
+        selectedPathNodeID = interruptedPathNodeID
+        focusAnchor = .recoveryState
+        return true
+    }
+
+    @discardableResult
+    public mutating func openRecoveryPath() -> Bool {
+        guard navigationPath == recoveryPath else { return false }
+        navigationPath.append(.goalPath(id: goalPathID))
+        selectedPathNodeID = interruptedPathNodeID
+        focusAnchor = .pathNode
+        return true
+    }
+
+    @discardableResult
+    public mutating func inspectPossibleNext() -> Bool {
+        guard navigationPath == recoveryPath else { return false }
+        navigationPath.append(.goalPath(id: goalPathID))
+        selectedPathNodeID = possibleNextPathNodeID
+        focusAnchor = .pathNode
+        return true
+    }
+
+    @discardableResult
+    public mutating func keepRecoveryUnresolved() -> Bool {
+        guard navigationPath == recoveryPath else { return false }
+        navigationPath = focusedGoalPath
+        selectedPathNodeID = interruptedPathNodeID
+        focusAnchor = .recoveryEntry
+        return true
+    }
+
+    @discardableResult
+    public mutating func openClosure() -> Bool {
+        guard navigationPath == focusedGoalPath else { return false }
+        navigationPath.append(.closure(id: closureID))
+        focusAnchor = .closure
+        return true
+    }
+
+    @discardableResult
+    public mutating func openClosureHistory() -> Bool {
+        guard navigationPath == closurePath else { return false }
+        navigationPath.append(.closureHistory(id: closureID))
+        focusAnchor = .closureHistory
+        return true
+    }
+
+    @discardableResult
     public mutating func selectPathNode(id: String) -> Bool {
         guard
             navigationPath.last == .goalPath(id: goalPathID),
@@ -194,6 +278,8 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
         let previousPath = navigationPath
         navigationPath = path
 
+        let removedRoute = previousPath.count > path.count ? previousPath.last : nil
+
         switch path.last {
         case .lifeArea(id: let id):
             selectedLifeAreaID = id
@@ -203,12 +289,35 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
             focusAnchor = previousPath.count > path.count ? .selectedGoal : .lifeArea
         case .focusedGoal:
             selectedGoalID = primaryGoalID
-            focusAnchor = .focusedGoal
+            switch removedRoute {
+            case .goalPath:
+                focusAnchor = .currentMovement
+            case .relationship:
+                focusAnchor = .relationshipEntry
+            case .recovery:
+                focusAnchor = .recoveryEntry
+            default:
+                focusAnchor = .focusedGoal
+            }
         case .relationship:
             focusAnchor = .relationship
         case .goalPath:
-            selectedPathNodeID = currentPathNodeID
+            if previousPath.last != .pathEvidence(
+                pathID: goalPathID,
+                nodeID: selectedPathNodeID
+            ) && previousPath.count <= path.count {
+                selectedPathNodeID = path.count == 4 ? interruptedPathNodeID : currentPathNodeID
+            }
             focusAnchor = .pathNode
+        case .pathEvidence:
+            focusAnchor = .pathEvidence
+        case .recovery:
+            selectedPathNodeID = interruptedPathNodeID
+            focusAnchor = .recoveryState
+        case .closure:
+            focusAnchor = .closure
+        case .closureHistory:
+            focusAnchor = .closureHistory
         case nil:
             focusAnchor = .lifeArea
         }
@@ -225,6 +334,14 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
             .lifeArea(id: lifeAreaID),
             .focusedGoal(id: primaryGoalID)
         ]
+    }
+
+    private var recoveryPath: [GoalsNativeCalibrationRoute] {
+        focusedGoalPath + [.recovery(id: recoveryID)]
+    }
+
+    private var closurePath: [GoalsNativeCalibrationRoute] {
+        focusedGoalPath + [.closure(id: closureID)]
     }
 
     private func isValidNavigationPath(_ path: [GoalsNativeCalibrationRoute]) -> Bool {
@@ -249,13 +366,35 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
             return true
         }
 
-        guard path.count == 3 else { return false }
-        switch path[2] {
+        guard path.count >= 3, path.count <= 4 else { return false }
+        let thirdRouteIsValid: Bool = switch path[2] {
         case let .relationship(primaryID, relatedID):
-            return primaryID == primaryGoalID && relatedID == relatedGoalID
+            primaryID == primaryGoalID && relatedID == relatedGoalID
         case let .goalPath(pathID):
+            pathID == goalPathID
+        case let .recovery(id):
+            id == recoveryID
+        case let .closure(id):
+            id == closureID
+        case .lifeArea, .focusedGoal, .pathEvidence, .closureHistory:
+            false
+        }
+        guard thirdRouteIsValid else { return false }
+
+        if path.count == 3 {
+            return true
+        }
+
+        switch (path[2], path[3]) {
+        case let (.goalPath(pathID), .pathEvidence(evidencePathID, nodeID)):
             return pathID == goalPathID
-        case .lifeArea, .focusedGoal:
+                && evidencePathID == goalPathID
+                && pathNodeIDs.contains(nodeID)
+        case let (.recovery(id), .goalPath(pathID)):
+            return id == recoveryID && pathID == goalPathID
+        case let (.closure(id), .closureHistory(historyID)):
+            return id == closureID && historyID == closureID
+        default:
             return false
         }
     }
