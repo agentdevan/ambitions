@@ -1,6 +1,6 @@
 # Owner review
 
-Status: `READY_FOR_OWNER_REVIEW`
+Status: `REQUEST_NARROW_NATIVE_SYNTHESIS_REVISION`
 
 Direction under review:
 
@@ -9,6 +9,17 @@ Direction under review:
 This package proves the selected structural family through native behavior. It
 does not mark the visible native synthesis selected, accepted, production-ready,
 or approved for broader SwiftUI implementation.
+
+The owner preserves the native hierarchy, interaction architecture, fixture
+semantics, and regression harness, but rejects R01 as Goals calibration
+evidence. The required successor is:
+
+`AVF-GOALS-S08-INT-D09-NATIVE-R02 — Flagship Anatomy Restoration`
+
+The revision is limited to the visible anatomy of the existing Goals root,
+Home Life Area, and focused Goal. Runtime integration, a larger screen family,
+production routes, final visual APIs, and `APPROVED_FOR_SWIFTUI` remain
+unauthorized.
 
 Owner review should assess:
 
