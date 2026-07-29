@@ -8,6 +8,10 @@ struct GoalsNativeCalibrationRootView: View {
 
     @State private var isDockExpanded = false
 
+    private var presentation: GoalsNativeCalibrationRootPresentation {
+        GoalsNativeCalibrationRootPresentation(content: content)
+    }
+
     var body: some View {
         ZStack(alignment: .trailing) {
             VStack(spacing: 0) {
@@ -59,7 +63,7 @@ struct GoalsNativeCalibrationRootView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 12)
-        .padding(.bottom, 18)
+        .padding(.bottom, 12)
         .background(palette.canvas)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Goals")
@@ -75,7 +79,7 @@ struct GoalsNativeCalibrationRootView: View {
                     NavigationLink(value: GoalsNativeCalibrationRoute.lifeArea(id: area.id)) {
                         GoalsNativeCalibrationLifeAreaPassage(
                             area: area,
-                            position: index,
+                            posture: presentation.lifeAreaPostures[index].kind,
                             palette: palette
                         )
                     }
@@ -85,12 +89,6 @@ struct GoalsNativeCalibrationRootView: View {
                     .accessibilityHint("Opens the \(area.title) Life Area")
                     .accessibilityIdentifier("gnc-life-area-\(area.id)")
 
-                    if index < content.lifeAreas.count - 1 {
-                        Rectangle()
-                            .fill(palette.separator)
-                            .frame(height: 1)
-                            .padding(.leading, 58)
-                    }
                 }
 
                 if usesAdaptiveNavigation {
@@ -172,68 +170,77 @@ struct GoalsNativeCalibrationRootView: View {
 
 private struct GoalsNativeCalibrationLifeAreaPassage: View {
     let area: GoalsNativeCalibrationLifeArea
-    let position: Int
+    let posture: GoalsNativeCalibrationLifeAreaPostureKind
     let palette: GoalsNativeCalibrationPalette
 
     var body: some View {
-        HStack(alignment: .top, spacing: 14) {
-            posture
-                .padding(.top, 3)
-
-            VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 13) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(area.title)
-                    .font(.title2.weight(.semibold))
+                    .font(.title2.weight(.bold))
                     .foregroundStyle(palette.primaryInk)
 
-                Text(area.currentTruth)
-                    .font(.body)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 12)
+
+                Image(systemName: "chevron.forward")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(palette.tertiaryInk)
+                    .frame(width: 20, height: 44)
+                    .accessibilityHidden(true)
             }
 
-            Spacer(minLength: 12)
-
-            Image(systemName: "chevron.forward")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(palette.tertiaryInk)
-                .frame(width: 20, height: 44)
-                .accessibilityHidden(true)
+            postureBody
         }
-        .frame(maxWidth: .infinity, minHeight: 122, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: 146, alignment: .leading)
         .padding(.vertical, 14)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(palette.separator)
+                .frame(height: 1)
+        }
         .contentShape(Rectangle())
     }
 
     @ViewBuilder
-    private var posture: some View {
-        switch position % 3 {
-        case 0:
-            VStack(spacing: 3) {
-                ForEach([18.0, 13.0, 8.0], id: \.self) { height in
-                    Capsule()
-                        .fill(palette.secondaryInk)
-                        .frame(width: 3, height: height)
+    private var postureBody: some View {
+        switch posture {
+        case .activeConstruction:
+            HStack(alignment: .bottom, spacing: 18) {
+                Text(area.currentTruth)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 8)
+                signal
+            }
+        case .protectedBalance:
+            HStack(alignment: .center, spacing: 16) {
+                signal
+                Text(area.currentTruth)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        case .containedWork:
+            VStack(alignment: .leading, spacing: 12) {
+                Text(area.currentTruth)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(palette.primaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack {
+                    Spacer()
+                    signal
                 }
             }
-            .frame(width: 28, height: 44)
-        case 1:
-            ZStack {
-                Circle()
-                    .stroke(palette.secondaryInk, lineWidth: palette.markerWidth)
-                    .frame(width: 22, height: 22)
-                Circle()
-                    .stroke(palette.secondaryInk, lineWidth: palette.markerWidth)
-                    .frame(width: 12, height: 12)
-            }
-            .frame(width: 28, height: 44)
-        default:
-            VStack(spacing: 5) {
-                Rectangle().fill(palette.secondaryInk).frame(width: 24, height: 2)
-                Rectangle().fill(palette.secondaryInk).frame(width: 15, height: 2)
-                Rectangle().fill(palette.secondaryInk).frame(width: 8, height: 2)
-            }
-            .frame(width: 28, height: 44)
         }
+    }
+
+    private var signal: some View {
+        GoalsNativeCalibrationLifeAreaPostureSignal(
+            lifeAreaID: area.id,
+            kind: posture,
+            palette: palette
+        )
     }
 }
 

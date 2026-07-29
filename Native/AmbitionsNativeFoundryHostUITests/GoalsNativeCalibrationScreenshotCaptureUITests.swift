@@ -9,23 +9,23 @@ final class GoalsNativeCalibrationScreenshotCaptureUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testGPCSF01GoalsRootDark() {
+    func testGPN2F01GoalsRootDark() {
         launch("gnc-synthesis-root-dark")
         assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
-        attachScreenshot(named: "GPCS-F01-goals-root-dark")
+        attachScreenshot(named: "GPN2-F01-goals-root-dark")
     }
 
-    func testGPCSF02HomeLifeAreaDark() {
+    func testGPN2F02HomeLifeAreaDark() {
         launch("gnc-synthesis-home-dark")
         assertReady([
             "gnc-home-life-area",
             "gnc-home-goal-goal.welcome-baby-home",
             "gnc-home-goal-goal.make-home-easier-to-run"
         ])
-        attachScreenshot(named: "GPCS-F02-home-life-area-dark")
+        attachScreenshot(named: "GPN2-F02-home-life-area-dark")
     }
 
-    func testGPCSF03FocusedGoalDark() {
+    func testGPN2F03FocusedGoalDark() {
         launch("gnc-synthesis-focused-dark")
         assertReady([
             "gnc-focused-goal-title",
@@ -33,38 +33,38 @@ final class GoalsNativeCalibrationScreenshotCaptureUITests: XCTestCase {
             "gnc-current-movement-path",
             "gnc-future-disclosure"
         ])
-        attachScreenshot(named: "GPCS-F03-focused-goal-dark")
+        attachScreenshot(named: "GPN2-F03-focused-goal-dark")
     }
 
-    func testGPCSF04GoalsRootLight() {
+    func testGPN2F04GoalsRootLight() {
         launch("gnc-synthesis-root-light")
         assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
-        attachScreenshot(named: "GPCS-F04-goals-root-light")
+        attachScreenshot(named: "GPN2-F04-goals-root-light")
     }
 
-    func testGPCSF05HomeLifeAreaLight() {
+    func testGPN2F05HomeLifeAreaLight() {
         launch("gnc-synthesis-home-light")
         assertReady(["gnc-home-life-area", "gnc-home-goal-goal.welcome-baby-home"])
-        attachScreenshot(named: "GPCS-F05-home-life-area-light")
+        attachScreenshot(named: "GPN2-F05-home-life-area-light")
     }
 
-    func testGPCSF06FocusedGoalLight() {
+    func testGPN2F06FocusedGoalLight() {
         launch("gnc-synthesis-focused-light")
         assertReady(["gnc-focused-goal-title", "gnc-focused-current-truth"])
-        attachScreenshot(named: "GPCS-F06-focused-goal-light")
+        attachScreenshot(named: "GPN2-F06-focused-goal-light")
     }
 
-    func testGPCSS01FocusedGoalAccessibility() {
+    func testGPN2S01FocusedGoalAccessibility() {
         launch("gnc-synthesis-focused-accessibility")
         assertReady([
             "gnc-focused-goal-title",
             "gnc-focused-current-truth",
             "gnc-focused-proof-disclosure"
         ])
-        attachScreenshot(named: "GPCS-S01-focused-goal-accessibility")
+        attachScreenshot(named: "GPN2-S01-focused-goal-accessibility")
     }
 
-    func testGPCSS02FocusedGoalDisclosures() {
+    func testGPN2S02FocusedGoalDisclosures() {
         launch("gnc-synthesis-focused-dark")
         let proof = element("gnc-focused-proof-disclosure")
         let future = element("gnc-future-disclosure")
@@ -72,13 +72,13 @@ final class GoalsNativeCalibrationScreenshotCaptureUITests: XCTestCase {
         proof.tap()
         future.tap()
         assertReady(["gnc-focused-proof", "gnc-future-possible", "gnc-open-relationship"])
-        attachScreenshot(named: "GPCS-S02-focused-goal-disclosures")
+        attachScreenshot(named: "GPN2-S02-focused-goal-disclosures")
     }
 
-    func testGPCSS03ReduceTransparencyRoot() {
+    func testGPN2S03ReduceTransparencyRoot() {
         launch("gnc-synthesis-root-reduce-transparency")
         assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
-        attachScreenshot(named: "GPCS-S03-reduce-transparency-root")
+        attachScreenshot(named: "GPN2-S03-reduce-transparency-root")
     }
 
     private func launch(_ variant: String) {

@@ -16,6 +16,14 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
         )
         XCTAssertFalse(presentation.visibleText.contains(content.primaryGoal.title))
         XCTAssertFalse(presentation.visibleText.contains(content.primaryGoal.nextMeaningfulMovement))
+        XCTAssertEqual(
+            presentation.lifeAreaPostures.map(\.kind),
+            [.activeConstruction, .protectedBalance, .containedWork]
+        )
+        XCTAssertEqual(
+            presentation.lifeAreaPostures.map(\.lifeAreaID),
+            presentation.lifeAreaIDs
+        )
     }
 
     func testHomePresentationContainsEachHomeGoalExactlyOnce() {
@@ -37,6 +45,20 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
             1
         )
         XCTAssertEqual(presentation.supportedFocusedGoalIDs, ["goal.welcome-baby-home"])
+        XCTAssertEqual(presentation.goals.count, 3)
+        XCTAssertTrue(presentation.goals.allSatisfy { $0.acceptedTruth.isEmpty == false })
+        XCTAssertTrue(presentation.goals.allSatisfy { $0.anchorRole == .pursuit })
+
+        let selected = presentation.goals.first { $0.id == content.primaryGoal.id }
+        XCTAssertNotNil(selected)
+        XCTAssertEqual(selected?.proofFoundation, content.linkedLens.proofPosture)
+        XCTAssertEqual(selected?.currentMovement, content.primaryGoal.nextMeaningfulMovement)
+        XCTAssertEqual(selected?.interactionRole, .opensFocusedGoal)
+
+        let peers = presentation.goals.filter { $0.id != content.primaryGoal.id }
+        XCTAssertTrue(peers.allSatisfy { $0.proofFoundation.isEmpty })
+        XCTAssertTrue(peers.allSatisfy { $0.currentMovement == nil })
+        XCTAssertTrue(peers.allSatisfy { $0.interactionRole == .inspectionOnly })
     }
 
     func testFocusedGoalPresentationPreservesPursuitContinuity() {
@@ -67,6 +89,8 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
         )
         XCTAssertEqual(presentation.pathActionTitle, "View Goal Path")
         XCTAssertEqual(presentation.proofDisclosureTitle, "3 recorded moments")
+        XCTAssertEqual(presentation.proofFoundation, presentation.proofMoments)
+        XCTAssertEqual(presentation.primaryOperation, .currentMovement)
         XCTAssertEqual(
             presentation.futurePostures.map(\.certainty),
             [.possible, .conditional]
@@ -75,6 +99,11 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
             presentation.futurePostures.map(\.title),
             ["Assemble the crib.", "Arrange final furniture after delivery"]
         )
+        XCTAssertEqual(
+            presentation.futurePostures.map(\.materialPresence),
+            [.partial, .boundaryOnly]
+        )
+        XCTAssertEqual(presentation.futureBoundary, .protectedRelationship)
         XCTAssertEqual(
             presentation.protectedRelationshipTitle,
             "Protect our first weeks together"

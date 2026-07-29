@@ -26,6 +26,11 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
             XCTAssertGreaterThanOrEqual(passage.frame.height, 44)
             XCTAssertTrue(passage.isHittable)
         }
+        assertExists([
+            element("gnc-life-area-posture-life-area.home"),
+            element("gnc-life-area-posture-life-area.relationships"),
+            element("gnc-life-area-posture-life-area.career")
+        ])
 
         home.tap()
         XCTAssertTrue(element("gnc-home-life-area").waitForExistence(timeout: 5))
@@ -39,6 +44,14 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         let peerOne = element("gnc-home-goal-goal.make-home-easier-to-run")
         let peerTwo = element("gnc-home-goal-goal.finish-essential-move-in-work")
         assertExists([primary, peerOne, peerTwo])
+        assertExists([
+            element("gnc-goal-anchor-goal.welcome-baby-home"),
+            element("gnc-goal-anchor-goal.make-home-easier-to-run"),
+            element("gnc-goal-anchor-goal.finish-essential-move-in-work")
+        ])
+        XCTAssertTrue((primary.value as? String)?.contains("recorded support") == true)
+        XCTAssertTrue((peerOne.value as? String)?.contains("Small systems are taking shape") == true)
+        XCTAssertTrue((peerTwo.value as? String)?.contains("Only essential work remains") == true)
         XCTAssertGreaterThanOrEqual(primary.frame.height, 44)
         XCTAssertTrue(primary.isHittable)
 
@@ -51,7 +64,8 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
 
         app.swipeRight()
         XCTAssertTrue(primary.waitForExistence(timeout: 5))
-        XCTAssertEqual(primary.value as? String, "Selected")
+        XCTAssertTrue((primary.value as? String)?.contains("Selected Goal") == true)
+        XCTAssertTrue((primary.value as? String)?.contains("Current movement") == true)
 
         let back = app.navigationBars["Home"].buttons.firstMatch
         XCTAssertTrue(back.exists)
@@ -84,7 +98,16 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         let proofDisclosure = element("gnc-focused-proof-disclosure")
         let futureDisclosure = element("gnc-future-disclosure")
         let movement = element("gnc-current-movement-path")
-        assertExists([truth, proofDisclosure, futureDisclosure, movement])
+        let proofFoundation = element("gnc-proof-foundation")
+        let pursuitAnchor = element("gnc-focused-pursuit-anchor")
+        assertExists([
+            truth,
+            proofDisclosure,
+            futureDisclosure,
+            movement,
+            proofFoundation,
+            pursuitAnchor
+        ])
         XCTAssertEqual(
             truth.label,
             "The wall is primed, the color is confirmed, and the crib corner is clear."
@@ -92,6 +115,8 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         XCTAssertGreaterThanOrEqual(proofDisclosure.frame.height, 44)
         XCTAssertGreaterThanOrEqual(futureDisclosure.frame.height, 44)
         XCTAssertGreaterThanOrEqual(movement.frame.height, 44)
+        XCTAssertTrue(proofFoundation.label.contains("Crib corner cleared"))
+        XCTAssertEqual(movement.value as? String, "Primary operation")
 
         proofDisclosure.tap()
         let proof = element("gnc-focused-proof")
@@ -145,6 +170,7 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         let future = element("gnc-future-disclosure")
 
         assertExists([title, truth, proof])
+        XCTAssertTrue(element("gnc-focused-pursuit-anchor").exists)
         for _ in 0 ..< 5 where movement.exists == false || future.exists == false {
             app.swipeUp()
         }

@@ -40,9 +40,9 @@ enum GoalsNativeCalibrationTypographyRole {
     var font: Font {
         switch self {
         case .objectIdentity:
-            .title2.weight(.semibold)
+            .title2.weight(.bold)
         case .truth:
-            .body.weight(.medium)
+            .title3.weight(.medium)
         case .relationship:
             .body
         case .metadata:
@@ -60,19 +60,19 @@ struct GoalsNativeCalibrationPalette {
     var canvas: Color {
         colorScheme == .dark
             ? Color(red: 0.055, green: 0.061, blue: 0.070)
-            : Color(red: 0.948, green: 0.943, blue: 0.925)
+            : Color(red: 0.932, green: 0.938, blue: 0.939)
     }
 
     var relief: Color {
         colorScheme == .dark
             ? Color(red: 0.078, green: 0.085, blue: 0.096)
-            : Color(red: 0.918, green: 0.911, blue: 0.891)
+            : Color(red: 0.884, green: 0.896, blue: 0.899)
     }
 
     var inset: Color {
         colorScheme == .dark
             ? Color(red: 0.100, green: 0.107, blue: 0.120)
-            : Color(red: 0.895, green: 0.887, blue: 0.866)
+            : Color(red: 0.842, green: 0.858, blue: 0.862)
     }
 
     var primaryInk: Color {
@@ -109,6 +109,24 @@ struct GoalsNativeCalibrationPalette {
             : Color(red: 0.325, green: 0.245, blue: 0.590)
     }
 
+    var acceptedFoundation: Color {
+        colorScheme == .dark
+            ? Color(red: 0.150, green: 0.160, blue: 0.176)
+            : Color(red: 0.770, green: 0.792, blue: 0.798)
+    }
+
+    var futurePossibility: Color {
+        colorScheme == .dark
+            ? Color(red: 0.112, green: 0.122, blue: 0.136)
+            : Color(red: 0.823, green: 0.838, blue: 0.842)
+    }
+
+    var protectedBoundary: Color {
+        colorScheme == .dark
+            ? Color(red: 0.610, green: 0.555, blue: 0.425)
+            : Color(red: 0.405, green: 0.350, blue: 0.250)
+    }
+
     var opaqueChrome: Color {
         colorScheme == .dark
             ? Color(red: 0.125, green: 0.132, blue: 0.148)
@@ -116,6 +134,122 @@ struct GoalsNativeCalibrationPalette {
     }
 
     var markerWidth: CGFloat { contrast == .increased ? 2.5 : 1.5 }
+}
+
+enum GoalsNativeCalibrationPursuitAnchorResolution {
+    case compact
+    case selected
+    case focused
+}
+
+struct GoalsNativeCalibrationPursuitAnchor: View {
+    let goalID: String
+    let resolution: GoalsNativeCalibrationPursuitAnchorResolution
+    let palette: GoalsNativeCalibrationPalette
+
+    private var width: CGFloat {
+        switch resolution {
+        case .compact: 28
+        case .selected: 34
+        case .focused: 42
+        }
+    }
+
+    private var height: CGFloat {
+        switch resolution {
+        case .compact: 34
+        case .selected: 42
+        case .focused: 50
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: resolution == .focused ? 5 : 4) {
+            Capsule()
+                .fill(resolution == .compact ? palette.secondaryInk : palette.primaryInk)
+                .frame(width: width, height: resolution == .focused ? 5 : 4)
+                .overlay(alignment: .leading) {
+                    if resolution != .compact {
+                        Circle()
+                            .fill(palette.accent)
+                            .frame(width: resolution == .focused ? 9 : 7)
+                    }
+                }
+            Capsule()
+                .fill(palette.acceptedFoundation)
+                .frame(width: width * 0.72, height: resolution == .focused ? 6 : 5)
+            Capsule()
+                .fill(palette.acceptedFoundation.opacity(0.72))
+                .frame(width: width * 0.46, height: resolution == .focused ? 7 : 6)
+        }
+        .frame(width: width, height: height, alignment: .leading)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Pursuit anchor")
+        .accessibilityValue(resolution == .compact ? "Accepted Goal" : "Selected Goal")
+        .accessibilityIdentifier("gnc-goal-anchor-\(goalID)")
+    }
+}
+
+struct GoalsNativeCalibrationProofFoundation: View {
+    let moments: [String]
+    let palette: GoalsNativeCalibrationPalette
+    let expanded: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: expanded ? 9 : 5) {
+            ForEach(Array(moments.enumerated()), id: \.offset) { index, moment in
+                HStack(spacing: 10) {
+                    Capsule()
+                        .fill(palette.acceptedFoundation.opacity(1 - Double(index) * 0.16))
+                        .frame(width: expanded ? 26 : CGFloat(30 - index * 5), height: expanded ? 5 : 4)
+                        .accessibilityHidden(true)
+                    if expanded {
+                        Text(moment)
+                            .font(.subheadline)
+                            .foregroundStyle(palette.secondaryInk)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Recorded support. \(moments.joined(separator: ", "))")
+        .accessibilityIdentifier("gnc-proof-foundation")
+    }
+}
+
+struct GoalsNativeCalibrationLifeAreaPostureSignal: View {
+    let lifeAreaID: String
+    let kind: GoalsNativeCalibrationLifeAreaPostureKind
+    let palette: GoalsNativeCalibrationPalette
+
+    var body: some View {
+        Group {
+            switch kind {
+            case .activeConstruction:
+                VStack(alignment: .leading, spacing: 5) {
+                    Capsule().fill(palette.primaryInk).frame(width: 42, height: 4)
+                    Capsule().fill(palette.acceptedFoundation).frame(width: 30, height: 6)
+                    Capsule().fill(palette.acceptedFoundation.opacity(0.68)).frame(width: 18, height: 7)
+                }
+            case .protectedBalance:
+                HStack(spacing: 5) {
+                    Capsule().fill(palette.protectedBoundary).frame(width: 4, height: 28)
+                    Capsule().fill(palette.acceptedFoundation).frame(width: 25, height: 9)
+                    Capsule().fill(palette.protectedBoundary).frame(width: 4, height: 28)
+                }
+            case .containedWork:
+                VStack(alignment: .trailing, spacing: 4) {
+                    Capsule().fill(palette.acceptedFoundation.opacity(0.62)).frame(width: 42, height: 4)
+                    Capsule().fill(palette.primaryInk).frame(width: 28, height: 5)
+                    Capsule().fill(palette.acceptedFoundation).frame(width: 18, height: 5)
+                }
+            }
+        }
+        .frame(width: 46, height: 40)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Life Area posture")
+        .accessibilityIdentifier("gnc-life-area-posture-\(lifeAreaID)")
+    }
 }
 
 enum GoalsNativeCalibrationMarkerKind {

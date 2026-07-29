@@ -261,19 +261,61 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     }
 }
 
+public enum GoalsNativeCalibrationLifeAreaPostureKind: Equatable, Sendable {
+    case activeConstruction
+    case protectedBalance
+    case containedWork
+}
+
+public struct GoalsNativeCalibrationLifeAreaPosture: Equatable, Sendable {
+    public let lifeAreaID: String
+    public let kind: GoalsNativeCalibrationLifeAreaPostureKind
+}
+
 public struct GoalsNativeCalibrationRootPresentation: Equatable, Sendable {
     public let accessibilityScreenHeading = "Goals"
     public let selectedRootTitle = "Goals"
     public let rootOrder = ["Today", "Goals", "Time", "You"]
     public let globalActions = ["Search", "Capture"]
     public let lifeAreaIDs: [String]
+    public let lifeAreaPostures: [GoalsNativeCalibrationLifeAreaPosture]
     public let visibleText: [String]
 
     public init(content: GoalsNativeCalibrationContent) {
         lifeAreaIDs = content.lifeAreas.map(\.id)
+        lifeAreaPostures = content.lifeAreas.enumerated().map { index, area in
+            let kind: GoalsNativeCalibrationLifeAreaPostureKind = switch index {
+            case 0: .activeConstruction
+            case 1: .protectedBalance
+            default: .containedWork
+            }
+            return GoalsNativeCalibrationLifeAreaPosture(
+                lifeAreaID: area.id,
+                kind: kind
+            )
+        }
         visibleText = [content.presentContext]
             + content.lifeAreas.flatMap { [$0.title, $0.currentTruth] }
     }
+}
+
+public enum GoalsNativeCalibrationGoalAnchorRole: Equatable, Sendable {
+    case pursuit
+}
+
+public enum GoalsNativeCalibrationCompactGoalInteractionRole: Equatable, Sendable {
+    case opensFocusedGoal
+    case inspectionOnly
+}
+
+public struct GoalsNativeCalibrationCompactGoalPresentation: Equatable, Sendable {
+    public let id: String
+    public let title: String
+    public let acceptedTruth: String
+    public let anchorRole: GoalsNativeCalibrationGoalAnchorRole
+    public let proofFoundation: [String]
+    public let currentMovement: String?
+    public let interactionRole: GoalsNativeCalibrationCompactGoalInteractionRole
 }
 
 public struct GoalsNativeCalibrationHomePresentation: Equatable, Sendable {
@@ -281,6 +323,7 @@ public struct GoalsNativeCalibrationHomePresentation: Equatable, Sendable {
     public let lifeAreaTitle: String
     public let goalIDs: [String]
     public let supportedFocusedGoalIDs: [String]
+    public let goals: [GoalsNativeCalibrationCompactGoalPresentation]
 
     public init(content: GoalsNativeCalibrationContent) {
         let lifeArea = content.lifeArea(id: content.selectedLifeAreaID)
@@ -288,5 +331,19 @@ public struct GoalsNativeCalibrationHomePresentation: Equatable, Sendable {
         lifeAreaTitle = lifeArea?.title ?? content.primaryGoal.lifeAreaTitle
         goalIDs = lifeArea?.goals.map(\.id) ?? []
         supportedFocusedGoalIDs = [content.primaryGoal.id]
+        goals = (lifeArea?.goals ?? []).map { goal in
+            let isPrimary = goal.id == content.primaryGoal.id
+            return GoalsNativeCalibrationCompactGoalPresentation(
+                id: goal.id,
+                title: goal.title,
+                acceptedTruth: isPrimary
+                    ? content.primaryGoal.currentAcceptedTruth
+                    : goal.acceptedPosture,
+                anchorRole: .pursuit,
+                proofFoundation: isPrimary ? content.linkedLens.proofPosture : [],
+                currentMovement: isPrimary ? content.primaryGoal.nextMeaningfulMovement : nil,
+                interactionRole: isPrimary ? .opensFocusedGoal : .inspectionOnly
+            )
+        }
     }
 }

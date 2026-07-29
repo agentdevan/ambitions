@@ -9,45 +9,45 @@ struct GoalsNativeCalibrationLifeAreaView: View {
         content.lifeArea(id: lifeAreaID)
     }
 
+    private var presentation: GoalsNativeCalibrationHomePresentation {
+        GoalsNativeCalibrationHomePresentation(content: content)
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 owner
                     .padding(.bottom, 14)
 
-                ForEach(Array((lifeArea?.goals ?? []).enumerated()), id: \.element.id) { index, goal in
-                    if lifeAreaID == content.primaryGoal.lifeAreaID && goal.id == content.primaryGoal.id {
+                ForEach(Array(presentation.goals.enumerated()), id: \.element.id) { index, goal in
+                    if goal.interactionRole == .opensFocusedGoal {
                         NavigationLink(value: GoalsNativeCalibrationRoute.focusedGoal(id: goal.id)) {
                             GoalsNativeCalibrationGoalPassage(
                                 goal: goal,
-                                truth: content.primaryGoal.currentAcceptedTruth,
-                                movement: content.primaryGoal.nextMeaningfulMovement,
-                                proofCount: content.linkedLens.proofPosture.count,
-                                isSelected: true,
                                 palette: palette
                             )
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel(goal.title)
-                        .accessibilityValue("Selected")
+                        .accessibilityValue(
+                            "Selected Goal. \(goal.acceptedTruth). "
+                                + "\(goal.proofFoundation.count) recorded support moments. "
+                                + "Current movement, \(goal.currentMovement ?? "")"
+                        )
                         .accessibilityHint("Opens the focused Goal")
                         .accessibilityIdentifier("gnc-home-goal-\(goal.id)")
                     } else {
                         GoalsNativeCalibrationGoalPassage(
                             goal: goal,
-                            truth: goal.acceptedPosture,
-                            movement: nil,
-                            proofCount: nil,
-                            isSelected: false,
                             palette: palette
                         )
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel(goal.title)
-                        .accessibilityValue(goal.acceptedPosture)
+                        .accessibilityValue(goal.acceptedTruth)
                         .accessibilityIdentifier("gnc-home-goal-\(goal.id)")
                     }
 
-                    if index < (lifeArea?.goals.count ?? 0) - 1 {
+                    if index < presentation.goals.count - 1 {
                         Rectangle()
                             .fill(palette.separator)
                             .frame(height: 1)
@@ -86,25 +86,26 @@ struct GoalsNativeCalibrationLifeAreaView: View {
 }
 
 private struct GoalsNativeCalibrationGoalPassage: View {
-    let goal: GoalsNativeCalibrationGoalSummary
-    let truth: String
-    let movement: String?
-    let proofCount: Int?
-    let isSelected: Bool
+    let goal: GoalsNativeCalibrationCompactGoalPresentation
     let palette: GoalsNativeCalibrationPalette
+
+    private var isSelected: Bool {
+        goal.interactionRole == .opensFocusedGoal
+    }
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            GoalsNativeCalibrationGoalSeam(
-                palette: palette,
-                emphasis: isSelected ? .selected : .quiet
+            GoalsNativeCalibrationPursuitAnchor(
+                goalID: goal.id,
+                resolution: isSelected ? .selected : .compact,
+                palette: palette
             )
             .padding(.top, 4)
 
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: isSelected ? 12 : 9) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Text(goal.title)
-                        .font(isSelected ? .title3.weight(.semibold) : .headline)
+                        .font(isSelected ? .title3.weight(.bold) : .headline.weight(.semibold))
                         .foregroundStyle(palette.primaryInk)
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: 8)
@@ -116,31 +117,60 @@ private struct GoalsNativeCalibrationGoalPassage: View {
                     }
                 }
 
-                Text(truth)
-                    .font(.subheadline)
+                Text(goal.acceptedTruth)
+                    .font(isSelected ? .body.weight(.medium) : .body)
                     .foregroundStyle(isSelected ? palette.primaryInk : palette.secondaryInk)
                     .fixedSize(horizontal: false, vertical: true)
 
-                if let proofCount {
-                    Label("Supported by \(proofCount) recorded moments", systemImage: "checkmark.circle")
-                        .font(.caption)
-                        .foregroundStyle(palette.secondaryInk)
-                }
+                acceptedFoundation
 
-                if let movement {
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text("Now")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(palette.accent)
-                        Text(movement)
-                            .font(.subheadline.weight(.medium))
-                            .foregroundStyle(palette.primaryInk)
+                if let movement = goal.currentMovement {
+                    HStack(alignment: .top, spacing: 10) {
+                        Capsule()
+                            .fill(palette.accent)
+                            .frame(width: 5, height: 38)
+                            .accessibilityHidden(true)
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Current movement")
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(palette.secondaryInk)
+                            Text(movement)
+                                .font(.headline)
+                                .foregroundStyle(palette.primaryInk)
+                        }
                     }
                 }
             }
         }
-        .frame(maxWidth: .infinity, minHeight: isSelected ? 168 : 112, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: isSelected ? 218 : 142, alignment: .leading)
         .padding(.vertical, 16)
         .contentShape(Rectangle())
+    }
+
+    @ViewBuilder
+    private var acceptedFoundation: some View {
+        if goal.proofFoundation.isEmpty {
+            HStack(spacing: 5) {
+                ForEach([20.0, 13.0], id: \.self) { width in
+                    Capsule()
+                        .fill(palette.acceptedFoundation)
+                        .frame(width: width, height: 4)
+                }
+                Text("Accepted truth")
+                    .font(.subheadline)
+                    .foregroundStyle(palette.tertiaryInk)
+            }
+        } else {
+            HStack(alignment: .center, spacing: 10) {
+                GoalsNativeCalibrationProofFoundation(
+                    moments: goal.proofFoundation,
+                    palette: palette,
+                    expanded: false
+                )
+                Text("\(goal.proofFoundation.count) recorded moments support this truth")
+                    .font(.subheadline)
+                    .foregroundStyle(palette.secondaryInk)
+            }
+        }
     }
 }
