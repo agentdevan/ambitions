@@ -19,6 +19,11 @@ Validation source commit: `fb9b23984f189d972f37fa4a48e79be2cd65098c`
 | Local-first boundary scan | PASS |
 | Runtime direct-write audit | PASS |
 | Weak-implementation scan | PASS |
+| Screenshot metadata and SHA-256 validation | PASS — 9 of 9 |
+| Contact-sheet metadata and SHA-256 validation | PASS — 2 of 2 |
+| Introduced-range Gitleaks scan | PASS — no leaks |
+| Changed-path and authority audit | PASS — Foundry, focused tests, plans, and evidence only |
+| `git diff --check` | PASS |
 
 The final fixture-host result bundle is:
 
