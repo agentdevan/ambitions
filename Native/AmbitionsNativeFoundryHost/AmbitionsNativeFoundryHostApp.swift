@@ -5,7 +5,11 @@ import SwiftUI
 struct AmbitionsNativeFoundryHostApp: App {
     var body: some Scene {
         WindowGroup {
-            FoundryHostRoot(variant: .fromProcessArguments)
+            if let goalsVariant = GoalsNativeFoundryVariant.fromProcessArguments {
+                GoalsNativeFoundryHost(variant: goalsVariant)
+            } else {
+                FoundryHostRoot(variant: .fromProcessArguments)
+            }
         }
     }
 }
