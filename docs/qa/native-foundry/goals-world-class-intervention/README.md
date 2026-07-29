@@ -1,6 +1,6 @@
 # Goals World-Class Structural Intervention
 
-Status: `READY_FOR_OWNER_STRUCTURAL_DIRECTION_SELECTION`
+Status: `SELECTED_FOR_RENDERING`
 
 Program state: `REJECTED_STRUCTURAL_SPIKE — PRESERVE_SEMANTICS / REPLACE_VISUAL_MODEL`
 
@@ -17,7 +17,18 @@ The package contains:
 - exactly six materially different text directions; and
 - a neutral comparison for owner selection.
 
-This is not normative canon, a component library, a visual campaign, a production implementation packet, or SwiftUI approval. No direction is selected. No images or native prototypes were generated. The next authorized action is owner selection of directions for rendering.
+This is not normative canon, a component library, a production implementation packet, or SwiftUI approval. The owner selected D02, D04, and D06 for a first round of standalone Goals-root renderings. This selection does not choose a final Goals direction or authorize native implementation.
+
+## Owner selection
+
+- [`direction-selection.md`](direction-selection.md)
+- D02 — Open Horizon Passage
+- D04 — Pursuit Aperture
+- D06 — Living Fold
+
+The first round is limited to one full-screen dark Goals root per direction using identical fixture truth, device, appearance, and density. No collage or deeper journey state is authorized.
+
+Round-one assets: [`round-1-root-renderings/`](round-1-root-renderings/)
 
 ## Preserved evidence
 
@@ -37,3 +48,5 @@ This is not normative canon, a component library, a visual campaign, a productio
 8. [`goals-intervention-synthesis.md`](goals-intervention-synthesis.md)
 9. [`six-structural-directions.md`](six-structural-directions.md)
 10. [`direction-comparison.md`](direction-comparison.md)
+11. [`direction-selection.md`](direction-selection.md)
+12. [`round-1-root-renderings/README.md`](round-1-root-renderings/README.md)

@@ -32,3 +32,19 @@ All intervention changes are confined to `docs/qa/native-foundry/goals-world-cla
 - `owner-review.md`
 
 No product canon, generated authority, Swift, tests, fixtures, project files, dependencies, screenshots, recordings, or production code are in the intervention diff.
+
+## Owner selection and first-round renderings
+
+The owner-selection follow-up changes remain confined to this package:
+
+- `README.md`
+- `owner-review.md`
+- `direction-selection.md`
+- `changed-files.md`
+- `round-1-root-renderings/README.md`
+- `round-1-root-renderings/rendering-manifest.json`
+- `round-1-root-renderings/AVF-GOALS-S08-INT-D02-R00-goals-root.png`
+- `round-1-root-renderings/AVF-GOALS-S08-INT-D04-R00-goals-root.png`
+- `round-1-root-renderings/AVF-GOALS-S08-INT-D06-R00-goals-root.png`
+
+No Swift, tests, fixtures, canon, project files, runtime integration, native prototypes, or production screenshot baselines were changed or created.

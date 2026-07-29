@@ -1,0 +1,46 @@
+{
+  "status": "READY_FOR_OWNER_ROOT_SELECTION",
+  "source_repository_sha": "140b4e0da0a4d8bd330409b6f5c2199c592643cd",
+  "fixture": "GoalsNativeCalibrationFixture.preparingForBaby",
+  "viewport": {
+    "device_equivalent": "iPhone 17 Pro portrait",
+    "pixel_width": 853,
+    "pixel_height": 1844
+  },
+  "appearance": "dark",
+  "content_size": "standard_dynamic_type",
+  "locale": "en",
+  "production_baseline": false,
+  "asset_kind": "generated_visual_evaluation_reference",
+  "assets": [
+    {
+      "direction_id": "AVF-GOALS-S08-INT-D02-R00",
+      "name": "Open Horizon Passage",
+      "file": "AVF-GOALS-S08-INT-D02-R00-goals-root.png",
+      "sha256": "1316bac2589c8992f1b8daa90a3121cf685f9566d7376eeb9d91b1803826181e",
+      "structural_prompt": "One qualitative present boundary separates supported accepted reality from open possibility without encoding time, quantity, duration, distance, or percent."
+    },
+    {
+      "direction_id": "AVF-GOALS-S08-INT-D04-R00",
+      "name": "Pursuit Aperture",
+      "file": "AVF-GOALS-S08-INT-D04-R00-goals-root.png",
+      "sha256": "77084e0c92fae91402ff09efd81d1ae736fe7e83802aa0d8dbc462575e6e5175",
+      "structural_prompt": "One negative-space aperture cut from the Home plane keeps Goal identity stable while semantic layers change resolution."
+    },
+    {
+      "direction_id": "AVF-GOALS-S08-INT-D06-R00",
+      "name": "Living Fold",
+      "file": "AVF-GOALS-S08-INT-D06-R00-goals-root.png",
+      "sha256": "e699121e9d004cfd61e68c60e99823620e9bf4571e423451e9ad8ee7555f554a",
+      "structural_prompt": "One asymmetric matte plane opens from Home and keeps the Goal visibly attached to its Life Area origin without accordion, paper, or custom-navigation theater."
+    }
+  ],
+  "proof_ceiling": [
+    "not_native_swiftui",
+    "not_interaction_proof",
+    "not_accessibility_proof",
+    "not_runtime_proof",
+    "not_production_baseline",
+    "owner_root_selection_required"
+  ]
+}
