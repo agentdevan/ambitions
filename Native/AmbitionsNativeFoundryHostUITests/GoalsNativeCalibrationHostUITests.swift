@@ -133,10 +133,10 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         ])
 
         movement.tap()
-        XCTAssertTrue(element("gnc-goal-path").waitForExistence(timeout: 5))
+        XCTAssertTrue(element("gnc-r03-path").waitForExistence(timeout: 5))
         XCTAssertEqual(
-            element("gnc-path-node-goalpath-node.paint-wall").value as? String,
-            "Current, selected"
+            element("gnc-r03-path-selected-node").label,
+            "Paint the nursery wall"
         )
     }
 

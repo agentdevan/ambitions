@@ -490,6 +490,8 @@ struct GoalsNativeCalibrationPathSelectedDetail: View {
             }
         }
         .accessibilityElement(children: .contain)
+        .accessibilityLabel(node.title)
+        .accessibilityValue("\(node.state.label), selected")
         .accessibilityIdentifier("gnc-r03-path-selected-node")
     }
 

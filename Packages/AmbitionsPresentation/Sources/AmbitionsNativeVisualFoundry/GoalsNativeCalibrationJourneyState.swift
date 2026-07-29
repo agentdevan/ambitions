@@ -9,7 +9,7 @@ public enum GoalsNativeCalibrationRoute: Hashable, Sendable {
     case closureHistory(id: String)
 }
 
-public enum GoalsNativeCalibrationFocusAnchor: String, Equatable, Sendable {
+public enum GoalsNativeCalibrationFocusAnchor: String, Hashable, Sendable {
     case lifeArea
     case selectedGoal = "selected-goal"
     case linkedLens = "linked-lens"
