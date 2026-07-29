@@ -1,0 +1,79 @@
+{
+  "status": "READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_CANONICAL_DEPTH_REVIEW",
+  "owner_disposition": "KEEP_D09_AS_STRUCTURAL_FAMILY / REQUEST_NARROW_D09_R02_REVISION",
+  "direction_id": "AVF-GOALS-S08-INT-D09-R02",
+  "direction_name": "Native Pursuit Continuum, Canonical Depth",
+  "source_repository_sha": "87bfcf52cbc043d788d736257b4e98211b05d915",
+  "fixture": "GoalsNativeCalibrationFixture.preparingForBaby",
+  "viewport": {
+    "device_equivalent": "iPhone 17 Pro portrait",
+    "pixel_width": 853,
+    "pixel_height": 1844
+  },
+  "appearance": "dark",
+  "content_size": "standard_dynamic_type",
+  "locale": "en",
+  "production_baseline": false,
+  "asset_kind": "generated_visual_evaluation_reference",
+  "preserved_from_d09_r01": [
+    "canonical native hierarchy",
+    "matte Dark plane",
+    "system typography",
+    "persistent Goal family",
+    "accepted truth and attached Proof",
+    "current movement",
+    "possible and conditional future",
+    "protected relationship",
+    "fixture truth",
+    "shell posture"
+  ],
+  "r02_corrections": [
+    "strict Life Area root",
+    "semantic area posture without child identity",
+    "shared neutral compact Goal anatomy",
+    "row-wide Goal navigation",
+    "intrinsic Goal Path disclosure",
+    "qualitative future material presence",
+    "relationship-reserved future capacity"
+  ],
+  "assets": [
+    {
+      "screen": "Goals root",
+      "route_depth": "life_area_index",
+      "file": "AVF-GOALS-S08-INT-D09-R02-goals-root.png",
+      "sha256": "77ef3d3c85d2907219a02f11f7cf3bb82474b0a0e982fe18dcbf87c5bb80d1a0",
+      "visible_object_resolution": "Life Area only"
+    },
+    {
+      "screen": "Home",
+      "route_depth": "life_area_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R02-home-life-area.png",
+      "sha256": "1ab069691f08f62f01e2e883a9307bb2f86b5ad7b78885ef4829b8fe6b8d240e",
+      "visible_object_resolution": "compact canonical Goals"
+    },
+    {
+      "screen": "Welcome our baby home",
+      "route_depth": "goal_detail",
+      "file": "AVF-GOALS-S08-INT-D09-R02-focused-goal.png",
+      "sha256": "b17a1e06d6475e63550d5ebc0bc879740fda8f9b43f3c7cc030e133242e589e5",
+      "visible_object_resolution": "focused pursuit continuum"
+    }
+  ],
+  "authority_sources": [
+    "docs/canon/migration/UX_BLUEPRINT.md",
+    "docs/canon/specifications/app/navigation.md",
+    "docs/canon/specifications/surfaces/goals.md"
+  ],
+  "proof_ceiling": [
+    "not_native_swiftui",
+    "not_navigationstack_proof",
+    "not_interactive_back_proof",
+    "not_focus_restoration_proof",
+    "not_interaction_proof",
+    "not_accessibility_proof",
+    "not_shell_validation",
+    "not_runtime_proof",
+    "not_production_baseline",
+    "owner_native_pursuit_continuum_canonical_depth_review_required"
+  ]
+}

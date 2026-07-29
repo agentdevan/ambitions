@@ -1,6 +1,6 @@
 # Goals World-Class Structural Intervention
 
-Status: `READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_MATERIALIZED_REVIEW`
+Status: `READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_CANONICAL_DEPTH_REVIEW`
 
 Program state: `REJECTED_STRUCTURAL_SPIKE — PRESERVE_SEMANTICS / REPLACE_VISUAL_MODEL`
 
@@ -17,7 +17,7 @@ The package contains:
 - exactly six materially different text directions; and
 - a neutral comparison for owner selection.
 
-This is not normative canon, a component library, a production implementation packet, or SwiftUI approval. D02, D04, and D06 remain preserved as structural exploration. D08 remains preserved as successful canonical-IA proof but rejected visible anatomy. The owner selected the D09 structural family and requested the narrow `AVF-GOALS-S08-INT-D09-R01 — Native Pursuit Continuum, Materialized` revision. This does not choose a final Goals direction or authorize native implementation.
+This is not normative canon, a component library, a production implementation packet, or SwiftUI approval. D02, D04, and D06 remain preserved as structural exploration. D08 remains preserved as successful canonical-IA proof but rejected visible anatomy. The owner retained the D09 structural family and requested the narrow `AVF-GOALS-S08-INT-D09-R02 — Native Pursuit Continuum, Canonical Depth` revision. This does not choose a final Goals direction or authorize native implementation.
 
 ## Owner selection
 
@@ -37,6 +37,8 @@ Current D08 synthesis gate: [`native-pursuit-gallery/`](native-pursuit-gallery/)
 Current D09 structural branch: [`native-pursuit-continuum/`](native-pursuit-continuum/)
 
 Current D09-R01 narrow revision: [`native-pursuit-continuum-materialized/`](native-pursuit-continuum-materialized/)
+
+Current D09-R02 canonical-depth revision: [`native-pursuit-continuum-canonical-depth/`](native-pursuit-continuum-canonical-depth/)
 
 ## Preserved evidence
 
@@ -66,3 +68,5 @@ Current D09-R01 narrow revision: [`native-pursuit-continuum-materialized/`](nati
 18. [`native-pursuit-continuum/README.md`](native-pursuit-continuum/README.md)
 19. [`native-pursuit-continuum-materialized-contract.md`](native-pursuit-continuum-materialized-contract.md)
 20. [`native-pursuit-continuum-materialized/README.md`](native-pursuit-continuum-materialized/README.md)
+21. [`native-pursuit-continuum-canonical-depth-contract.md`](native-pursuit-continuum-canonical-depth-contract.md)
+22. [`native-pursuit-continuum-canonical-depth/README.md`](native-pursuit-continuum-canonical-depth/README.md)

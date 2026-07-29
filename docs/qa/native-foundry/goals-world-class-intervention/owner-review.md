@@ -1,14 +1,16 @@
 # Owner Review
 
-Status: `READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_MATERIALIZED_REVIEW`
+Status: `READY_FOR_OWNER_NATIVE_PURSUIT_CONTINUUM_CANONICAL_DEPTH_REVIEW`
 
-Owner disposition: `SELECT_D09_FOR_SYNTHESIS / REQUEST_NARROW_D09_R01_REVISION`
+Owner disposition: `KEEP_D09_AS_STRUCTURAL_FAMILY / REQUEST_NARROW_D09_R02_REVISION`
 
 Rejected visual direction: `AVF-GOALS-S08-INT-D08-R00 — Native Pursuit Gallery`
 
 Selected structural family: `AVF-GOALS-S08-INT-D09-R00 — Native Pursuit Continuum`
 
 Selected narrow revision: `AVF-GOALS-S08-INT-D09-R01 — Native Pursuit Continuum, Materialized`
+
+Current narrow revision: `AVF-GOALS-S08-INT-D09-R02 — Native Pursuit Continuum, Canonical Depth`
 
 The Goals R01 native implementation is preserved as a rejected structural spike:
 
@@ -38,6 +40,10 @@ The owner selected D09's structural family but rejected the literal bracket, thi
 
 The three requested D09-R01 evaluation frames are complete. They remain generated visual references, not native or accessibility proof, and require owner review before any deeper rendering or SwiftUI work.
 
+The owner retained D09 but rejected R01 as a final direction because the root leaked Goal depth, Home split movement from navigation, and focused depth made Goal Path and a detached relationship too dominant. D09-R02 restores strict route ownership, row-wide Goal navigation, intrinsic Path disclosure, qualitative future certainty, and a relationship-modified future boundary.
+
+The three requested D09-R02 evaluation frames are complete. They remain generated visual references, not native or accessibility proof, and require owner review before deeper rendering or SwiftUI work.
+
 This decision does not select a final Goals direction, authorize native prototyping or SwiftUI implementation, authorize runtime integration, or set `APPROVED FOR SWIFTUI` to true.
 
 ## Decision boundary
@@ -46,7 +52,7 @@ This package does not authorize:
 
 - editing the rejected SwiftUI views;
 - changing Goals fixtures or typed routes;
-- generating direction images beyond the three authorized D09-R01 screens;
+- generating direction images beyond the three authorized D09-R02 screens;
 - native prototypes;
 - production Goals implementation;
 - runtime integration or mutation;
@@ -58,8 +64,8 @@ This package does not authorize:
 
 ## Next decision
 
-- accept D09-R01 for a bounded native prototype packet;
-- request another narrow D09-R01 render revision;
+- accept D09-R02 for a bounded deeper-rendering packet;
+- request another narrow D09-R02 render revision;
 - request replacement directions;
 - resume the rejected R01 structure; or
 - pause Goals calibration.
