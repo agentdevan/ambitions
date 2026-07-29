@@ -116,6 +116,94 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         XCTAssertEqual(element("gnc-focused-goal-title").label, "Welcome our baby home")
     }
 
+    func testGoalPathExposesCurrentNextProofJumpsAndRestoresFocusedGoal() {
+        launch("gnc-f07")
+
+        let path = element("gnc-goal-path")
+        let current = element("gnc-path-node-goalpath-node.paint-wall")
+        let next = element("gnc-path-node-goalpath-node.assemble-crib")
+        let selectedDetail = element("gnc-path-selected-detail")
+        let proof = element("gnc-path-proof-history")
+        let start = element("gnc-path-jump-start")
+        let now = element("gnc-path-jump-now")
+        let nextJump = element("gnc-path-jump-next")
+        let finish = element("gnc-path-jump-finish")
+
+        assertExists([path, current, next, selectedDetail, proof, start, now, nextJump, finish])
+        XCTAssertEqual(current.value as? String, "Current, selected")
+        XCTAssertEqual(next.value as? String, "Next")
+        XCTAssertTrue(current.isHittable)
+        XCTAssertTrue(next.isHittable)
+        XCTAssertEqual(selectedDetail.label, "This is the current meaningful movement.")
+        XCTAssertTrue(proof.label.contains("Crib corner cleared"))
+        XCTAssertTrue(proof.label.contains("Paint color confirmed"))
+        XCTAssertTrue(proof.label.contains("Wall primed"))
+        for action in [start, now, nextJump, finish] {
+            XCTAssertGreaterThanOrEqual(action.frame.height, 44)
+            XCTAssertTrue(action.isHittable)
+        }
+
+        nextJump.tap()
+        XCTAssertEqual(next.value as? String, "Next, selected")
+        start.tap()
+        XCTAssertEqual(
+            element("gnc-path-node-goalpath-node.define-ready").value as? String,
+            "Completed, selected"
+        )
+        finish.tap()
+        XCTAssertEqual(
+            element("gnc-path-node-goalpath-node.nursery-ready").value as? String,
+            "Finish, selected"
+        )
+        now.tap()
+        XCTAssertEqual(current.value as? String, "Current, selected")
+
+        let back = app.navigationBars.buttons.firstMatch
+        XCTAssertTrue(back.exists)
+        back.tap()
+        XCTAssertTrue(element("gnc-focused-goal-title").waitForExistence(timeout: 5))
+        back.tap()
+        XCTAssertTrue(element("gnc-linked-lens-goal.welcome-baby-home").waitForExistence(timeout: 5))
+    }
+
+    func testAccessibilityRootAndLensUseObjectFirstOrderWithReachableActions() {
+        launch("gnc-f08")
+
+        let home = element("gnc-life-area-life-area.home")
+        let goal = element("gnc-goal-goal.welcome-baby-home")
+        let lens = element("gnc-linked-lens-goal.welcome-baby-home")
+        let truth = element("gnc-lens-current-truth")
+        let openGoal = element("gnc-open-goal")
+        let passage = element("gnc-adaptive-navigation")
+
+        assertExists([home, goal, lens, truth, openGoal, passage])
+        XCTAssertLessThan(home.frame.minY, goal.frame.minY)
+        XCTAssertLessThan(goal.frame.minY, lens.frame.minY)
+        XCTAssertLessThan(lens.frame.minY, passage.frame.minY)
+        XCTAssertGreaterThanOrEqual(openGoal.frame.height, 44)
+        for _ in 0 ..< 4 where openGoal.isHittable == false {
+            app.swipeUp()
+        }
+        XCTAssertTrue(openGoal.isHittable)
+        XCTAssertFalse(element("gnc-dock-peek").exists)
+
+        let passageRows = [
+            "gnc-adaptive-root-today",
+            "gnc-adaptive-root-goals",
+            "gnc-adaptive-root-time",
+            "gnc-adaptive-root-you",
+            "gnc-adaptive-global-search",
+            "gnc-adaptive-global-capture"
+        ].map(element)
+        for _ in 0 ..< 6 where passageRows.allSatisfy(\.exists) == false {
+            app.swipeUp()
+        }
+        assertExists(passageRows)
+        for row in passageRows {
+            XCTAssertGreaterThanOrEqual(row.frame.height, 44)
+        }
+    }
+
     private func launch(_ variant: String) {
         app.launchArguments = ["-FoundryVariant", variant]
         app.launch()

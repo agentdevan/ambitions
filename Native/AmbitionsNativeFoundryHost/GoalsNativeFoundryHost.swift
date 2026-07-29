@@ -8,6 +8,8 @@ enum GoalsNativeFoundryVariant: String {
     case linkedGoalLens = "gnc-f04"
     case focusedGoal = "gnc-f05"
     case consequentialRelationship = "gnc-f06"
+    case goalPath = "gnc-f07"
+    case accessibilityRoot = "gnc-f08"
 
     static var fromProcessArguments: GoalsNativeFoundryVariant? {
         let arguments = ProcessInfo.processInfo.arguments
@@ -30,7 +32,7 @@ enum GoalsNativeFoundryVariant: String {
 
     var lensExpanded: Bool {
         switch self {
-        case .linkedGoalLens, .focusedGoal, .consequentialRelationship:
+        case .linkedGoalLens, .focusedGoal, .consequentialRelationship, .goalPath, .accessibilityRoot:
             true
         default:
             false
@@ -38,11 +40,19 @@ enum GoalsNativeFoundryVariant: String {
     }
 
     var opensFocusedGoal: Bool {
-        self == .focusedGoal || self == .consequentialRelationship
+        self == .focusedGoal || self == .consequentialRelationship || self == .goalPath
     }
 
     var opensRelationship: Bool {
         self == .consequentialRelationship
+    }
+
+    var opensGoalPath: Bool {
+        self == .goalPath
+    }
+
+    var dynamicTypeSize: DynamicTypeSize {
+        self == .accessibilityRoot ? .accessibility2 : .large
     }
 }
 
@@ -64,6 +74,9 @@ struct GoalsNativeFoundryHost: View {
         if variant.opensRelationship {
             _ = initialState.openRelationship()
         }
+        if variant.opensGoalPath {
+            _ = initialState.openGoalPath()
+        }
         _state = State(
             initialValue: initialState
         )
@@ -72,6 +85,6 @@ struct GoalsNativeFoundryHost: View {
     var body: some View {
         GoalsNativeCalibrationView(content: content, state: $state)
             .preferredColorScheme(variant.colorScheme)
-            .dynamicTypeSize(.large)
+            .dynamicTypeSize(variant.dynamicTypeSize)
     }
 }

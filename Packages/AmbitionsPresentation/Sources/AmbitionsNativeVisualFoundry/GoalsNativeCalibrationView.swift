@@ -63,9 +63,12 @@ public struct GoalsNativeCalibrationView: View {
                 content: content,
                 palette: palette
             )
-        case .goalPath:
-            // Goal Path is installed by the dedicated path calibration task.
-            EmptyView()
+        case let .goalPath(id) where id == content.goalPath.id:
+            GoalsNativeCalibrationPathView(
+                content: content,
+                state: $state,
+                palette: palette
+            )
         default:
             EmptyView()
         }

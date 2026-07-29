@@ -14,7 +14,7 @@ public enum GoalsNativeCalibrationFocusAnchor: String, Equatable, Sendable {
     case pathNode = "path-node"
 }
 
-public enum GoalsNativeCalibrationPathJump: String, Equatable, Sendable {
+public enum GoalsNativeCalibrationPathJump: String, CaseIterable, Equatable, Sendable {
     case start
     case now
     case next
@@ -141,7 +141,7 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
         guard navigationPath == [.focusedGoal(id: primaryGoalID)] else { return false }
         navigationPath.append(.goalPath(id: goalPathID))
         selectedPathNodeID = currentPathNodeID
-        focusAnchor = .goalPath
+        focusAnchor = .pathNode
         return true
     }
 

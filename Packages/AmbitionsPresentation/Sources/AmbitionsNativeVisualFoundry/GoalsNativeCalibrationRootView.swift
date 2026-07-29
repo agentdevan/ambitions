@@ -71,12 +71,12 @@ struct GoalsNativeCalibrationRootView: View {
     private var rootContent: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                if usesAdaptiveNavigation {
-                    adaptiveNavigation
-                }
-
                 ForEach(content.lifeAreas) { area in
                     lifeArea(area)
+                }
+
+                if usesAdaptiveNavigation {
+                    adaptiveNavigation
                 }
             }
             .frame(maxWidth: 560, alignment: .leading)
@@ -367,17 +367,30 @@ struct GoalsNativeCalibrationRootView: View {
                             .font(.caption.weight(.semibold))
                     }
                 }
-                .frame(minHeight: 44)
-                .accessibilityElement(children: .combine)
+                .frame(maxWidth: .infinity, minHeight: 56)
+                .background(Color.clear)
+                .contentShape(Rectangle())
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(title)
+                .accessibilityValue(title == "Goals" ? "Selected root" : "Root")
+                .accessibilityIdentifier("gnc-adaptive-root-\(title.lowercased())")
             }
             Divider()
             ForEach(["Search", "Capture"], id: \.self) { title in
                 Text(title)
-                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
+                    .background(Color.clear)
+                    .contentShape(Rectangle())
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(title)
+                    .accessibilityValue("Global action")
+                    .accessibilityIdentifier("gnc-adaptive-global-\(title.lowercased())")
             }
         }
         .padding(14)
         .background(palette.relief)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Adaptive Navigation Passage")
         .accessibilityIdentifier("gnc-adaptive-navigation")
     }
 }
