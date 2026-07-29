@@ -48,3 +48,18 @@ The owner-selection follow-up changes remain confined to this package:
 - `round-1-root-renderings/AVF-GOALS-S08-INT-D06-R00-goals-root.png`
 
 No Swift, tests, fixtures, canon, project files, runtime integration, native prototypes, or production screenshot baselines were changed or created.
+
+## Targeted root rerender
+
+The targeted rerender follow-up adds or updates only:
+
+- `README.md`
+- `owner-review.md`
+- `changed-files.md`
+- `targeted-root-rerender-contract.md`
+- `targeted-root-rerenders/README.md`
+- `targeted-root-rerenders/rendering-manifest.json`
+- `targeted-root-rerenders/AVF-GOALS-S08-INT-D02-R01-goals-root.png`
+- `targeted-root-rerenders/AVF-GOALS-S08-INT-D04-R01-goals-root.png`
+
+D02-R00, D04-R00, D06-R00, the rejected R01 spike, source fixtures, Swift, tests, canon, routes, and runtime remain unchanged.

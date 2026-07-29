@@ -1,6 +1,6 @@
 # Goals World-Class Structural Intervention
 
-Status: `SELECTED_FOR_RENDERING`
+Status: `READY_FOR_OWNER_TARGETED_ROOT_REVIEW`
 
 Program state: `REJECTED_STRUCTURAL_SPIKE — PRESERVE_SEMANTICS / REPLACE_VISUAL_MODEL`
 
@@ -30,6 +30,8 @@ The first round is limited to one full-screen dark Goals root per direction usin
 
 Round-one assets: [`round-1-root-renderings/`](round-1-root-renderings/)
 
+Owner-requested targeted rerenders: [`targeted-root-rerenders/`](targeted-root-rerenders/)
+
 ## Preserved evidence
 
 - Rejected spike evidence: [`../../evidence/2026-07-28-goals-native-calibration-r01/`](../../evidence/2026-07-28-goals-native-calibration-r01/)
@@ -50,3 +52,5 @@ Round-one assets: [`round-1-root-renderings/`](round-1-root-renderings/)
 10. [`direction-comparison.md`](direction-comparison.md)
 11. [`direction-selection.md`](direction-selection.md)
 12. [`round-1-root-renderings/README.md`](round-1-root-renderings/README.md)
+13. [`targeted-root-rerender-contract.md`](targeted-root-rerender-contract.md)
+14. [`targeted-root-rerenders/README.md`](targeted-root-rerenders/README.md)
