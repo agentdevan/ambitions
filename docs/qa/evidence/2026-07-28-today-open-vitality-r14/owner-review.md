@@ -1,13 +1,19 @@
 # Owner review
 
-Status: `READY_FOR_OWNER_REVIEW`
+Status: `ACCEPTED_AS_TODAY_CALIBRATION_EVIDENCE`
 
-Review the full matrix, owner-reference comparison, accessibility/adaptivity sheet, and validation record. R14 is not self-accepted.
+The owner accepts `AVF-TODAY-S10-B04-D09-R14 — Native Fidelity
+Restoration` as provisional Today calibration evidence. This protects the
+selected Today structure for cross-root synthesis.
 
-Available dispositions:
+This acceptance does not:
 
-- accept R14 as Today calibration evidence;
-- request another narrow R14 revision;
-- request another structural branch;
-- reject R14;
-- reject the Today slice structure.
+- make R14 production-final;
+- authorize runtime integration or broad frontend reconstruction;
+- establish production screenshot baselines;
+- approve final global visual APIs, tokens, or component contracts;
+- set `APPROVED FOR SWIFTUI` to true; or
+- complete direct-device shell and physical accessibility proof.
+
+R13 evidence remains unchanged and historical. R14 screenshots remain
+evaluation references with `production_baseline = false`.
