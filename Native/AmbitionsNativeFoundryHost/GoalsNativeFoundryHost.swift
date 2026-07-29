@@ -24,7 +24,9 @@ enum GoalsNativeFoundryVariant: String {
     case r03PathFuture = "gnc-r03-path-future"
     case r03PathLight = "gnc-r03-path-light"
     case r03Relationship = "gnc-r03-relationship"
+    case r03RecoveryEntry = "gnc-r03-recovery-entry"
     case r03Recovery = "gnc-r03-recovery"
+    case r03ClosureEntry = "gnc-r03-closure-entry"
     case r03Closure = "gnc-r03-closure"
     case r03ClosureHistory = "gnc-r03-closure-history"
     case r03PathAccessibility = "gnc-r03-path-accessibility"
@@ -68,7 +70,8 @@ enum GoalsNativeFoundryVariant: String {
              .synthesisHomeDark, .synthesisHomeLight, .synthesisFocusedDark,
              .synthesisFocusedLight, .synthesisFocusedAccessibility, .synthesisFocusedReduceMotion,
              .r03PathDark, .r03PathEvidence, .r03PathFuture, .r03PathLight,
-             .r03Relationship, .r03Recovery, .r03Closure, .r03ClosureHistory,
+             .r03Relationship, .r03RecoveryEntry, .r03Recovery,
+             .r03ClosureEntry, .r03Closure, .r03ClosureHistory,
              .r03PathAccessibility, .r03RelationshipAccessibility,
              .r03PathReduceTransparency, .r03RelationshipContrastNoColor,
              .r03ReturnedFocused:
@@ -83,7 +86,8 @@ enum GoalsNativeFoundryVariant: String {
         case .focusedGoal, .consequentialRelationship, .goalPath, .synthesisFocusedDark,
              .synthesisFocusedLight, .synthesisFocusedAccessibility, .synthesisFocusedReduceMotion,
              .r03PathDark, .r03PathEvidence, .r03PathFuture, .r03PathLight,
-             .r03Relationship, .r03Recovery, .r03Closure, .r03ClosureHistory,
+             .r03Relationship, .r03RecoveryEntry, .r03Recovery,
+             .r03ClosureEntry, .r03Closure, .r03ClosureHistory,
              .r03PathAccessibility, .r03RelationshipAccessibility,
              .r03PathReduceTransparency, .r03RelationshipContrastNoColor,
              .r03ReturnedFocused:
@@ -134,9 +138,9 @@ enum GoalsNativeFoundryVariant: String {
 
     var depthEntryMode: GoalsNativeCalibrationDepthEntryMode {
         switch self {
-        case .r03Recovery:
+        case .r03RecoveryEntry, .r03Recovery:
             .recovery
-        case .r03Closure, .r03ClosureHistory:
+        case .r03ClosureEntry, .r03Closure, .r03ClosureHistory:
             .closure
         default:
             .active

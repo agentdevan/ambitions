@@ -91,7 +91,7 @@ struct GoalsNativeCalibrationPathSpatialField: View {
             .padding(.trailing, 24)
         }
         .scrollIndicators(.visible)
-        .scrollPosition(id: $horizontalAnchorID, anchor: .center)
+        .scrollPosition(id: $horizontalAnchorID, anchor: .leading)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Goal Path, eight movements with declining future certainty")
         .accessibilityIdentifier("gnc-r03-path-horizontal")
@@ -131,6 +131,7 @@ private struct GoalsNativeCalibrationPathRecordedSupportField: View {
                     isSelected: selectedNodeID == node.id
                 ))
                 .accessibilityIdentifier("gnc-r03-path-node-\(node.id)")
+                .id(node.id)
             }
         }
         .padding(.top, 16)
@@ -188,9 +189,9 @@ private struct GoalsNativeCalibrationPathCurrentSeamField: View {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(palette.accent)
             }
-            .frame(width: 250, alignment: .topLeading)
             .frame(minHeight: 220, alignment: .topLeading)
             .padding(.leading, 18)
+            .containerRelativeFrame(.horizontal, alignment: .leading)
             .overlay(alignment: .leading) {
                 Capsule()
                     .fill(palette.primaryInk.opacity(0.66))
@@ -232,9 +233,9 @@ private struct GoalsNativeCalibrationPathNearMovementField: View {
                     .foregroundStyle(palette.secondaryInk)
                     .lineLimit(3)
             }
-            .frame(width: 205, alignment: .topLeading)
             .frame(minHeight: 202, alignment: .topLeading)
             .padding(.top, 18)
+            .containerRelativeFrame(.horizontal, alignment: .leading)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -263,6 +264,7 @@ private struct GoalsNativeCalibrationPathOpenFutureField: View {
                     palette: palette,
                     onSelect: onSelect
                 )
+                .id(node.id)
             }
         }
     }
