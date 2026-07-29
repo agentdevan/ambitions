@@ -104,4 +104,3 @@
 - [ ] Run the full presentation package suite, fixture-host build, focused UI suite, SwiftLint on changed Swift, canon check, Gitleaks range scan, `git diff --check`, and changed-path audit.
 - [ ] Record exact commands, results, device/OS, appearance, content size, accessibility settings, hashes, and `production_baseline = false`.
 - [ ] Commit the coherent Foundry prototype and evidence, then verify a clean worktree.
-

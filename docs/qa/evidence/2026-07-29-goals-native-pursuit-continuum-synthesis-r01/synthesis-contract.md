@@ -28,4 +28,3 @@ The controlling implementation plan is:
 - transition tuning and haptic character.
 
 None of these become final shared APIs or tokens.
-

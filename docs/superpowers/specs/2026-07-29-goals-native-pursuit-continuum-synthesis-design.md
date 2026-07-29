@@ -120,4 +120,3 @@ Screenshots are evaluation references with `production_baseline = false`.
 - The fixture remains synthetic and immutable.
 - Production Goals, runtime, app entry, canon, tokens, and shared component APIs
   remain untouched.
-

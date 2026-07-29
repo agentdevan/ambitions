@@ -16,4 +16,3 @@ Light and Dark, Reduce Motion, and Reduce Transparency.
 This authorization does not cover production Goals, runtime integration,
 mutation, shell freeze, final tokens or component APIs, Figma, Code Connect,
 production screenshot baselines, or `APPROVED_FOR_SWIFTUI`.
-
