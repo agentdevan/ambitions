@@ -1,6 +1,6 @@
 # Validation
 
-Status: `PENDING_FINAL_VALIDATION`
+Status: `PASSED`
 
 This docs-only gate runs canon consistency, available Markdown validation,
 introduced-range secret scanning, whitespace validation, a changed-path audit,
@@ -20,5 +20,14 @@ or generated authority changes.
 - `git diff --check`: passed.
 - Single read-only reviewer: passed after the documented narrow repairs.
 
-The introduced-commit-range Gitleaks scan, final changed-path audit, and final
-worktree inspection are recorded after the documentation commits exist.
+## Final commit-range checks
+
+- `scripts/ci/ambitions-gitleaks-scan.sh --range-only` with base
+  `74370723b84084f2cac4b5aa60bfccbad70e6aea`: passed; two commits scanned and
+  no leaks found.
+- Changed-path audit over the same base: passed; all 13 paths are limited to
+  the R14 owner record, reconciled plan, and this transfer package.
+- `git diff --check 74370723b..HEAD`: passed.
+- Local `main` and `origin/main`: unchanged and synchronized at
+  `74370723b84084f2cac4b5aa60bfccbad70e6aea`.
+- Final worktree inspection: clean after the validation record commit.
