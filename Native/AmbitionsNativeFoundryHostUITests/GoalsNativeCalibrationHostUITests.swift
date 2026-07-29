@@ -80,12 +80,12 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         let relationships = element("gnc-life-area-life-area.relationships")
         XCTAssertTrue(relationships.waitForExistence(timeout: 5))
         relationships.tap()
-        XCTAssertTrue(
-            element("gnc-life-area-detail-life-area.relationships")
-                .waitForExistence(timeout: 5)
-        )
+        let relationshipsDetail = element("gnc-life-area-detail-life-area.relationships")
+        XCTAssertTrue(relationshipsDetail.waitForExistence(timeout: 5))
         XCTAssertTrue(app.navigationBars["Relationships"].exists)
-        XCTAssertFalse(app.staticTexts["Welcome our baby home"].exists)
+        XCTAssertFalse(
+            relationshipsDetail.descendants(matching: .staticText)["Welcome our baby home"].exists
+        )
 
         app.navigationBars["Relationships"].buttons.firstMatch.tap()
         XCTAssertTrue(element("gnc-goals-root").waitForExistence(timeout: 5))

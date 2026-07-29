@@ -10,7 +10,7 @@ struct GoalsNativeCalibrationLifeAreaView: View {
     }
 
     private var presentation: GoalsNativeCalibrationHomePresentation {
-        GoalsNativeCalibrationHomePresentation(content: content)
+        GoalsNativeCalibrationHomePresentation(content: content, lifeAreaID: lifeAreaID)
     }
 
     var body: some View {

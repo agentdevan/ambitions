@@ -61,6 +61,21 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
         XCTAssertTrue(peers.allSatisfy { $0.interactionRole == .inspectionOnly })
     }
 
+    func testPeerLifeAreaPresentationDoesNotSubstituteThePrimaryHomeGoal() {
+        let content = GoalsNativeCalibrationFixture.preparingForBaby
+        let presentation = GoalsNativeCalibrationHomePresentation(
+            content: content,
+            lifeAreaID: "life-area.relationships"
+        )
+
+        XCTAssertEqual(presentation.lifeAreaID, "life-area.relationships")
+        XCTAssertEqual(presentation.lifeAreaTitle, "Relationships")
+        XCTAssertEqual(presentation.goalIDs, ["goal.protect-first-weeks-together"])
+        XCTAssertTrue(presentation.supportedFocusedGoalIDs.isEmpty)
+        XCTAssertFalse(presentation.goalIDs.contains(content.primaryGoal.id))
+        XCTAssertTrue(presentation.goals.allSatisfy { $0.interactionRole == .inspectionOnly })
+    }
+
     func testFocusedGoalPresentationPreservesPursuitContinuity() {
         let content = GoalsNativeCalibrationFixture.preparingForBaby
         let presentation = GoalsNativeCalibrationFocusedGoalPresentation(content: content)

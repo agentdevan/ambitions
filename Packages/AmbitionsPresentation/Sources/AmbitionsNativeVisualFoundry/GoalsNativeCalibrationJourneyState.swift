@@ -325,12 +325,18 @@ public struct GoalsNativeCalibrationHomePresentation: Equatable, Sendable {
     public let supportedFocusedGoalIDs: [String]
     public let goals: [GoalsNativeCalibrationCompactGoalPresentation]
 
-    public init(content: GoalsNativeCalibrationContent) {
-        let lifeArea = content.lifeArea(id: content.selectedLifeAreaID)
-        lifeAreaID = lifeArea?.id ?? content.selectedLifeAreaID
+    public init(
+        content: GoalsNativeCalibrationContent,
+        lifeAreaID requestedLifeAreaID: String? = nil
+    ) {
+        let requestedLifeAreaID = requestedLifeAreaID ?? content.selectedLifeAreaID
+        let lifeArea = content.lifeArea(id: requestedLifeAreaID)
+        lifeAreaID = lifeArea?.id ?? requestedLifeAreaID
         lifeAreaTitle = lifeArea?.title ?? content.primaryGoal.lifeAreaTitle
         goalIDs = lifeArea?.goals.map(\.id) ?? []
-        supportedFocusedGoalIDs = [content.primaryGoal.id]
+        supportedFocusedGoalIDs = lifeArea?.goals.contains { $0.id == content.primaryGoal.id } == true
+            ? [content.primaryGoal.id]
+            : []
         goals = (lifeArea?.goals ?? []).map { goal in
             let isPrimary = goal.id == content.primaryGoal.id
             return GoalsNativeCalibrationCompactGoalPresentation(
