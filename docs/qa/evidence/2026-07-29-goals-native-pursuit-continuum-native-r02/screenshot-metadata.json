@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "direction": "AVF-GOALS-S08-INT-D09-NATIVE-R02",
+  "repository_sha": "69b786932fb3d2e935c0fa56ff64528f6247162a",
+  "fixture": "goals-flagship/home/welcome-baby-home/v1",
+  "device": "B02 Recording iPhone 17 Pro",
+  "os": "iOS 26.5",
+  "production_baseline": false,
+  "frames": [
+    {"id":"GPN2-F01","file":"screenshots/GPN2-F01-goals-root-dark.png","screen":"Goals root","appearance":"Dark","content_size":"Large","sha256":"556ff3b3ab1b819a15b7a2239bcdd2c54786384d8dd8adaa0f4467efffbd398d"},
+    {"id":"GPN2-F02","file":"screenshots/GPN2-F02-home-life-area-dark.png","screen":"Home Life Area","appearance":"Dark","content_size":"Large","sha256":"d594a1439b514948c14a943c9b5437afe3f5af072e5c9bdb2a8af54d99209799"},
+    {"id":"GPN2-F03","file":"screenshots/GPN2-F03-focused-goal-dark.png","screen":"Focused Goal","appearance":"Dark","content_size":"Large","sha256":"db13dd2765fcec3383e2691d444a67c390d67c4e845106b10210fdb1cd8f1429"},
+    {"id":"GPN2-F04","file":"screenshots/GPN2-F04-goals-root-light.png","screen":"Goals root","appearance":"Light","content_size":"Large","sha256":"eccd0b60426e2c04961c47ad5ebb10ea7b10f24da5e4f2bf7d9d7e5f2795f6cc"},
+    {"id":"GPN2-F05","file":"screenshots/GPN2-F05-home-life-area-light.png","screen":"Home Life Area","appearance":"Light","content_size":"Large","sha256":"993194772b38e94aa51538ca6bf30b2034d7d809053c45f359d52f1776bbfdee"},
+    {"id":"GPN2-F06","file":"screenshots/GPN2-F06-focused-goal-light.png","screen":"Focused Goal","appearance":"Light","content_size":"Large","sha256":"abeb48df6d4b74b6afeb109db4c99912ad41b19833aeab18459f6f785dc2543a"},
+    {"id":"GPN2-S01","file":"screenshots/GPN2-S01-focused-goal-accessibility.png","screen":"Focused Goal","appearance":"Dark","content_size":"Accessibility 2","sha256":"f17e2f15fd101ffa5ae478138e5e31ba0b45bb6ba95dad324a7aeee7d8d4bcb8"},
+    {"id":"GPN2-S02","file":"screenshots/GPN2-S02-focused-goal-disclosures.png","screen":"Focused Goal with Proof and future disclosures","appearance":"Dark","content_size":"Large","sha256":"e6926d687f6f4486e2e81b4d4c764913a86738c16c4b6a8f55285a2824cbffca"},
+    {"id":"GPN2-S03","file":"screenshots/GPN2-S03-reduce-transparency-root.png","screen":"Goals root","appearance":"Dark","content_size":"Large","accessibility":["Reduce Transparency"],"sha256":"41485c89d11ffefe5e0fff8592b327b06b0acbe72156677fdfff71b92aa5a39b"}
+  ]
+}

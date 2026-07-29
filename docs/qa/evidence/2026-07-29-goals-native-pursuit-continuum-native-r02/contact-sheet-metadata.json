@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "direction": "AVF-GOALS-S08-INT-D09-NATIVE-R02",
+  "production_baseline": false,
+  "contact_sheets": [
+    {"id":"GPN2-C01","file":"contact-sheets/GPN2-C01-native-matrix.png","purpose":"Dark, Light, Accessibility Dynamic Type, disclosure, and Reduce Transparency matrix","dimensions":"1068x2196","sha256":"a400668b9eee162fcb53836e83f2b4c9800f28d98737f2ef79491920cdfcee63"},
+    {"id":"GPN2-C02","file":"contact-sheets/GPN2-C02-r01-comparison.png","purpose":"Matched R01 and NATIVE-R02 root, Home, and focused Goal comparison","dimensions":"996x1410","sha256":"d3758add379a6f41423559eda9a6c08fa3b30476ad69abb40913ede959cb2d19"},
+    {"id":"GPN2-C03","file":"contact-sheets/GPN2-C03-50-percent.png","purpose":"Primary Dark screens at approximately 50 percent of full-device scale","dimensions":"1849x1311","sha256":"e4c34242bdbbf5b4193c00c6a4068beea425f61e3092f4ea7b955b40208acb67"},
+    {"id":"GPN2-C04","file":"contact-sheets/GPN2-C04-accessibility-and-appearance.png","purpose":"Focused Goal standard Dark, Accessibility Dynamic Type, and Light comparison","dimensions":"1240x870","sha256":"d77f317d5f4c94aa6af1e8b6bfb9b9db84ff6e006ff46117b2cad3100886328f"}
+  ]
+}
