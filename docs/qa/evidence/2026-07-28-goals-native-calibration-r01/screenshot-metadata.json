@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-28-goals-native-calibration-r01",
+  "visual_direction": "AVF-GOALS-S08-NATIVE-CALIBRATION-R01",
+  "fixture_id": "goals-flagship/home/welcome-baby-home/v1",
+  "capture_source_sha": "d7eb47f8152e02af5e5d11f196a77971d13172ab",
+  "device": "iPhone 17 Pro",
+  "device_udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E",
+  "os": "iOS 26.5",
+  "locale": "en-US",
+  "layout_direction": "left-to-right",
+  "production_baseline": false,
+  "frames": [
+    {"id":"GNC-F01","path":"screenshots/GNC-F01-goals-root-light.png","sha256":"c1447731c4259a12ac7e1bc3fb6e56c3743e9d37ce9ed41b7f5f1ec311d3e62b","width":1206,"height":2622,"appearance":"Light","dynamic_type":"Large","state":"Goals root, Home expanded, Goal selected, lens collapsed"},
+    {"id":"GNC-F02","path":"screenshots/GNC-F02-goals-root-dark.png","sha256":"9d1071be4aa24434181cbb5f60d48b0a94188d1e978c7db098ae413990ae3426","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Goals root Dark equivalence"},
+    {"id":"GNC-F03","path":"screenshots/GNC-F03-selected-life-area-and-goal.png","sha256":"9d1071be4aa24434181cbb5f60d48b0a94188d1e978c7db098ae413990ae3426","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Explicit selected Home and Welcome our baby home"},
+    {"id":"GNC-F04","path":"screenshots/GNC-F04-linked-goal-lens.png","sha256":"afdaf4bbea1804e274a01bbc4304f460d51123c26ab46a466123e0e0646d0f93","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Linked Goal Lens expanded"},
+    {"id":"GNC-F05","path":"screenshots/GNC-F05-focused-goal-depth.png","sha256":"27ddb5fe3a10bb5d740cd48c20ef3c682410714610252a5b1415c3217d06aec7","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Focused Goal depth"},
+    {"id":"GNC-F06","path":"screenshots/GNC-F06-consequential-relationship.png","sha256":"bfa9144b5dc1060814f16defe70f75b0c6735f2993fc927cb34f9f2d52ffe158","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Consequential relationship inspection"},
+    {"id":"GNC-F07","path":"screenshots/GNC-F07-goal-path-history.png","sha256":"0b775edafb5cbfe616656f48aad156f127e9a3f12f1cfc33032f441fdd47ef54","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Large","state":"Goal Path anchored at current movement"},
+    {"id":"GNC-F08","path":"screenshots/GNC-F08-accessibility-dynamic-type.png","sha256":"b7aeaf2174a5d3f186e4a41b0eb3daba8c68f7fdcd2a3df11ff21426e3085ad5","width":1206,"height":2622,"appearance":"Dark","dynamic_type":"Accessibility 2","state":"Accessibility root naturally scrolled to lens and action"}
+  ]
+}
+

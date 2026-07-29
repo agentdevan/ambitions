@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-28-goals-native-calibration-r01",
+  "production_baseline": false,
+  "sheets": [
+    {
+      "id": "GNC-C01",
+      "path": "contact-sheets/GNC-C01-full-matrix.png",
+      "sha256": "a77113f7cdb5c7503846c31cdfcdf216241131d96304cab95412bf42f85913fa",
+      "width": 900,
+      "height": 3960,
+      "inputs": ["GNC-F01","GNC-F02","GNC-F03","GNC-F04","GNC-F05","GNC-F06","GNC-F07","GNC-F08"]
+    },
+    {
+      "id": "GNC-C02",
+      "path": "contact-sheets/GNC-C02-r14-cross-root-transfer.png",
+      "sha256": "1a4b7eea4938d09a27ba05b2854a9195f7159174ee70f76e3c41de37ab99fa0d",
+      "width": 768,
+      "height": 3556,
+      "inputs": ["R14-F01","GNC-F01","R14-F02","GNC-F02","R14-F06","GNC-F05","R14-A01","GNC-F08"]
+    }
+  ]
+}
+
