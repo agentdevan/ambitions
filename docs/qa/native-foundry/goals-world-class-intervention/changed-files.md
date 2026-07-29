@@ -63,3 +63,19 @@ The targeted rerender follow-up adds or updates only:
 - `targeted-root-rerenders/AVF-GOALS-S08-INT-D04-R01-goals-root.png`
 
 D02-R00, D04-R00, D06-R00, the rejected R01 spike, source fixtures, Swift, tests, canon, routes, and runtime remain unchanged.
+
+## Native Pursuit Gallery synthesis render
+
+The D08 follow-up adds or updates only:
+
+- `README.md`
+- `owner-review.md`
+- `changed-files.md`
+- `native-pursuit-gallery-contract.md`
+- `native-pursuit-gallery/README.md`
+- `native-pursuit-gallery/rendering-manifest.json`
+- `native-pursuit-gallery/AVF-GOALS-S08-INT-D08-R00-goals-root.png`
+- `native-pursuit-gallery/AVF-GOALS-S08-INT-D08-R00-home-life-area.png`
+- `native-pursuit-gallery/AVF-GOALS-S08-INT-D08-R00-focused-goal.png`
+
+The prior intervention, round-one, targeted-rerender, and rejected R01 evidence remains unchanged. No Swift, tests, fixtures, product canon, generated authority, project files, routes, runtime integration, native prototypes, or production screenshot baselines were changed or created.

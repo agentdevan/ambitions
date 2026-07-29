@@ -1,6 +1,6 @@
 # Goals World-Class Structural Intervention
 
-Status: `READY_FOR_OWNER_TARGETED_ROOT_REVIEW`
+Status: `READY_FOR_OWNER_NATIVE_PURSUIT_GALLERY_REVIEW`
 
 Program state: `REJECTED_STRUCTURAL_SPIKE — PRESERVE_SEMANTICS / REPLACE_VISUAL_MODEL`
 
@@ -17,7 +17,7 @@ The package contains:
 - exactly six materially different text directions; and
 - a neutral comparison for owner selection.
 
-This is not normative canon, a component library, a production implementation packet, or SwiftUI approval. The owner selected D02, D04, and D06 for a first round of standalone Goals-root renderings. This selection does not choose a final Goals direction or authorize native implementation.
+This is not normative canon, a component library, a production implementation packet, or SwiftUI approval. D02, D04, and D06 remain preserved as structural exploration. The owner subsequently selected `AVF-GOALS-S08-INT-D08-R00 — Native Pursuit Gallery` for a controlled three-depth synthesis render. This does not choose a final Goals direction or authorize native implementation.
 
 ## Owner selection
 
@@ -31,6 +31,8 @@ The first round is limited to one full-screen dark Goals root per direction usin
 Round-one assets: [`round-1-root-renderings/`](round-1-root-renderings/)
 
 Owner-requested targeted rerenders: [`targeted-root-rerenders/`](targeted-root-rerenders/)
+
+Current D08 synthesis gate: [`native-pursuit-gallery/`](native-pursuit-gallery/)
 
 ## Preserved evidence
 
@@ -54,3 +56,5 @@ Owner-requested targeted rerenders: [`targeted-root-rerenders/`](targeted-root-r
 12. [`round-1-root-renderings/README.md`](round-1-root-renderings/README.md)
 13. [`targeted-root-rerender-contract.md`](targeted-root-rerender-contract.md)
 14. [`targeted-root-rerenders/README.md`](targeted-root-rerenders/README.md)
+15. [`native-pursuit-gallery-contract.md`](native-pursuit-gallery-contract.md)
+16. [`native-pursuit-gallery/README.md`](native-pursuit-gallery/README.md)
