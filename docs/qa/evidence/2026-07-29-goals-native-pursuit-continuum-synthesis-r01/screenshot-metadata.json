@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "direction": "AVF-GOALS-S08-INT-D09-R02",
+  "repository_sha": "fb9b23984f189d972f37fa4a48e79be2cd65098c",
+  "fixture": "goals-flagship/home/welcome-baby-home/v1",
+  "device": "B02 Recording iPhone 17 Pro",
+  "os": "iOS 26.5",
+  "production_baseline": false,
+  "frames": [
+    {
+      "id": "GPCS-F01",
+      "file": "screenshots/GPCS-F01-goals-root-dark.png",
+      "screen": "Goals root",
+      "appearance": "Dark",
+      "content_size": "Large",
+      "sha256": "4845e35c86aaba6c43c72b358295915211f981a5c1a75d7d845c61eba0660ca9"
+    },
+    {
+      "id": "GPCS-F02",
+      "file": "screenshots/GPCS-F02-home-life-area-dark.png",
+      "screen": "Home Life Area",
+      "appearance": "Dark",
+      "content_size": "Large",
+      "sha256": "099de7d4e216fb828a23125f5065e2b36613d07e4ef3fdc9f65f0c70474c4c4d"
+    },
+    {
+      "id": "GPCS-F03",
+      "file": "screenshots/GPCS-F03-focused-goal-dark.png",
+      "screen": "Focused Goal",
+      "appearance": "Dark",
+      "content_size": "Large",
+      "sha256": "43a6b16fc2877c45e8ddc3f32b899e8e5e2f5692c600fbaf5410849a91a1db2c"
+    },
+    {
+      "id": "GPCS-F04",
+      "file": "screenshots/GPCS-F04-goals-root-light.png",
+      "screen": "Goals root",
+      "appearance": "Light",
+      "content_size": "Large",
+      "sha256": "bcf4f99128d8178c30d29de6bd349c394c10077640f3ded18e295ef22eb308e1"
+    },
+    {
+      "id": "GPCS-F05",
+      "file": "screenshots/GPCS-F05-home-life-area-light.png",
+      "screen": "Home Life Area",
+      "appearance": "Light",
+      "content_size": "Large",
+      "sha256": "931598329a816e87a78628104d9bca8e544011485a93967754af64173d4decb3"
+    },
+    {
+      "id": "GPCS-F06",
+      "file": "screenshots/GPCS-F06-focused-goal-light.png",
+      "screen": "Focused Goal",
+      "appearance": "Light",
+      "content_size": "Large",
+      "sha256": "d644077f507f57b6cd76f70bcde23d62063de5b63c37fefd9e62ef19ddb6e9a1"
+    },
+    {
+      "id": "GPCS-S01",
+      "file": "screenshots/GPCS-S01-focused-goal-accessibility.png",
+      "screen": "Focused Goal",
+      "appearance": "Dark",
+      "content_size": "Accessibility 2",
+      "sha256": "4f2581bf97efda7cf90933f0ea473a231ffa01e79e4c1d61a5fa88411354d9da"
+    },
+    {
+      "id": "GPCS-S02",
+      "file": "screenshots/GPCS-S02-focused-goal-disclosures.png",
+      "screen": "Focused Goal with Proof and future disclosures",
+      "appearance": "Dark",
+      "content_size": "Large",
+      "sha256": "44819fd140c864ac82b022fc7c630edc00eb7a123dde6f56d743155366d035bf"
+    },
+    {
+      "id": "GPCS-S03",
+      "file": "screenshots/GPCS-S03-reduce-transparency-root.png",
+      "screen": "Goals root",
+      "appearance": "Dark",
+      "content_size": "Large",
+      "accessibility": ["Reduce Transparency"],
+      "sha256": "b409c342f0b41ac50055711be325ea12584ac34fe0bf47bcd562258462bdc358"
+    }
+  ]
+}
