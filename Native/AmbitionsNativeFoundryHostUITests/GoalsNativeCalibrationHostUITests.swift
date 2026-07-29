@@ -10,198 +10,177 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         app = XCUIApplication()
     }
 
-    func testGoalsRootKeepsIdentitySelectionAndShellOwnership() {
-        launch("gnc-f01")
+    func testGoalsRootIsStrictLifeAreaIndexAndHomeIsRowWideNavigation() {
+        launch("gnc-synthesis-root-dark")
 
         let heading = element("gnc-goals-heading")
         let home = element("gnc-life-area-life-area.home")
-        let selectedGoal = element("gnc-goal-goal.welcome-baby-home")
-        let lensDisclosure = element("gnc-linked-lens-disclosure")
-        let dock = element("gnc-dock-peek")
+        let relationships = element("gnc-life-area-life-area.relationships")
+        let career = element("gnc-life-area-life-area.career")
 
-        assertExists([heading, home, selectedGoal, lensDisclosure, dock])
+        assertExists([heading, home, relationships, career, element("gnc-dock-peek")])
         XCTAssertEqual(heading.label, "Goals")
-        XCTAssertEqual(selectedGoal.value as? String, "Selected")
-        XCTAssertFalse(app.staticTexts["Start Here"].exists)
-        XCTAssertFalse(app.staticTexts["Later Today"].exists)
-        XCTAssertFalse(app.staticTexts["View Full Day"].exists)
-        XCTAssertFalse(app.buttons["Search"].exists)
-        XCTAssertFalse(app.buttons["Capture"].exists)
-        XCTAssertGreaterThanOrEqual(lensDisclosure.frame.height, 44)
-        XCTAssertGreaterThanOrEqual(dock.frame.height, 44)
+        XCTAssertFalse(app.staticTexts["Welcome our baby home"].exists)
+        XCTAssertFalse(element("gnc-goal-goal.welcome-baby-home").exists)
+        for passage in [home, relationships, career] {
+            XCTAssertGreaterThanOrEqual(passage.frame.height, 44)
+            XCTAssertTrue(passage.isHittable)
+        }
+
+        home.tap()
+        XCTAssertTrue(element("gnc-home-life-area").waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Home"].exists)
     }
 
-    func testLinkedGoalLensRemainsAttachedAndOpenGoalIsReachable() {
-        launch("gnc-f04")
+    func testHomeGoalOpensFocusedDepthAndInteractiveBackRestoresSelection() {
+        launch("gnc-synthesis-home-dark")
 
-        let selectedGoal = element("gnc-goal-goal.welcome-baby-home")
-        let lens = element("gnc-linked-lens-goal.welcome-baby-home")
-        let currentTruth = element("gnc-lens-current-truth")
-        let openGoal = element("gnc-open-goal")
+        let primary = element("gnc-home-goal-goal.welcome-baby-home")
+        let peerOne = element("gnc-home-goal-goal.make-home-easier-to-run")
+        let peerTwo = element("gnc-home-goal-goal.finish-essential-move-in-work")
+        assertExists([primary, peerOne, peerTwo])
+        XCTAssertGreaterThanOrEqual(primary.frame.height, 44)
+        XCTAssertTrue(primary.isHittable)
 
-        assertExists([selectedGoal, lens, currentTruth, openGoal])
-        XCTAssertLessThan(selectedGoal.frame.minY, lens.frame.minY)
+        primary.tap()
+        XCTAssertTrue(element("gnc-focused-goal").waitForExistence(timeout: 5))
         XCTAssertEqual(
-            currentTruth.label,
+            element("gnc-focused-goal-title").label,
+            "Welcome our baby home"
+        )
+
+        app.swipeRight()
+        XCTAssertTrue(primary.waitForExistence(timeout: 5))
+        XCTAssertEqual(primary.value as? String, "Selected")
+
+        let back = app.navigationBars["Home"].buttons.firstMatch
+        XCTAssertTrue(back.exists)
+        back.tap()
+        XCTAssertTrue(element("gnc-goals-root").waitForExistence(timeout: 5))
+        XCTAssertTrue(element("gnc-life-area-life-area.home").exists)
+    }
+
+    func testPeerLifeAreaNavigationPreservesSelectedIdentity() {
+        launch("gnc-synthesis-root-dark")
+
+        let relationships = element("gnc-life-area-life-area.relationships")
+        XCTAssertTrue(relationships.waitForExistence(timeout: 5))
+        relationships.tap()
+        XCTAssertTrue(
+            element("gnc-life-area-detail-life-area.relationships")
+                .waitForExistence(timeout: 5)
+        )
+        XCTAssertTrue(app.navigationBars["Relationships"].exists)
+        XCTAssertFalse(app.staticTexts["Welcome our baby home"].exists)
+
+        app.navigationBars["Relationships"].buttons.firstMatch.tap()
+        XCTAssertTrue(element("gnc-goals-root").waitForExistence(timeout: 5))
+    }
+
+    func testFocusedGoalExpandsProofFutureAndOpensGoalPath() {
+        launch("gnc-synthesis-focused-dark")
+
+        let truth = element("gnc-focused-current-truth")
+        let proofDisclosure = element("gnc-focused-proof-disclosure")
+        let futureDisclosure = element("gnc-future-disclosure")
+        let movement = element("gnc-current-movement-path")
+        assertExists([truth, proofDisclosure, futureDisclosure, movement])
+        XCTAssertEqual(
+            truth.label,
             "The wall is primed, the color is confirmed, and the crib corner is clear."
         )
-        XCTAssertGreaterThanOrEqual(openGoal.frame.height, 44)
-        XCTAssertTrue(openGoal.isHittable)
+        XCTAssertGreaterThanOrEqual(proofDisclosure.frame.height, 44)
+        XCTAssertGreaterThanOrEqual(futureDisclosure.frame.height, 44)
+        XCTAssertGreaterThanOrEqual(movement.frame.height, 44)
+
+        proofDisclosure.tap()
+        let proof = element("gnc-focused-proof")
+        XCTAssertTrue(proof.waitForExistence(timeout: 5))
+        XCTAssertTrue(proof.label.contains("Crib corner cleared"))
+        XCTAssertTrue(proof.label.contains("Paint color confirmed"))
+        XCTAssertTrue(proof.label.contains("Wall primed"))
+
+        futureDisclosure.tap()
+        assertExists([
+            element("gnc-future-possible"),
+            element("gnc-future-conditional"),
+            element("gnc-open-relationship")
+        ])
+
+        movement.tap()
+        XCTAssertTrue(element("gnc-goal-path").waitForExistence(timeout: 5))
+        XCTAssertEqual(
+            element("gnc-path-node-goalpath-node.paint-wall").value as? String,
+            "Current, selected"
+        )
     }
 
-    func testFocusedGoalPreservesIdentityTruthMovementAndNativeBack() {
-        launch("gnc-f05")
+    func testRelationshipInspectionReturnsToFocusedGoalWithoutMutation() {
+        launch("gnc-synthesis-focused-dark")
+
+        let futureDisclosure = element("gnc-future-disclosure")
+        XCTAssertTrue(futureDisclosure.waitForExistence(timeout: 5))
+        futureDisclosure.tap()
+
+        let relationship = element("gnc-open-relationship")
+        XCTAssertTrue(relationship.waitForExistence(timeout: 5))
+        relationship.tap()
+        XCTAssertTrue(element("gnc-relationship-primary-goal").waitForExistence(timeout: 5))
+
+        app.navigationBars.buttons.firstMatch.tap()
+        XCTAssertTrue(element("gnc-focused-goal").waitForExistence(timeout: 5))
+        XCTAssertEqual(
+            element("gnc-focused-current-truth").label,
+            "The wall is primed, the color is confirmed, and the crib corner is clear."
+        )
+    }
+
+    func testAccessibilityFocusedGoalRecomposesAndKeepsActionsReachable() {
+        launch("gnc-synthesis-focused-accessibility")
 
         let title = element("gnc-focused-goal-title")
-        let lifeArea = element("gnc-focused-goal-life-area")
-        let direction = element("gnc-focused-current-direction")
         let truth = element("gnc-focused-current-truth")
-        let thread = element("gnc-focused-active-thread")
-        let movement = element("gnc-focused-next-movement")
-        let proof = element("gnc-focused-proof")
-        let scheduleFit = element("gnc-focused-schedule-fit")
-        let relationship = element("gnc-open-relationship")
-        let path = element("gnc-view-goal-path")
+        let proof = element("gnc-focused-proof-disclosure")
+        let movement = element("gnc-current-movement-path")
+        let future = element("gnc-future-disclosure")
 
-        assertExists([
-            title, lifeArea, direction, truth, thread, movement, proof,
-            scheduleFit, relationship, path
-        ])
-        XCTAssertEqual(title.label, "Welcome our baby home")
-        XCTAssertEqual(lifeArea.label, "Home")
-        XCTAssertEqual(thread.label, "Finish the nursery.")
-        XCTAssertEqual(movement.label, "Paint the nursery wall.")
-        XCTAssertTrue(proof.label.contains("Crib corner cleared"))
-        XCTAssertTrue(proof.label.contains("Paint color confirmed"))
-        XCTAssertTrue(proof.label.contains("Wall primed"))
-        XCTAssertTrue(app.navigationBars.buttons.firstMatch.exists)
+        assertExists([title, truth, proof])
+        for _ in 0 ..< 5 where movement.exists == false || future.exists == false {
+            app.swipeUp()
+        }
+        assertExists([movement, future])
+        XCTAssertGreaterThanOrEqual(proof.frame.height, 44)
+        XCTAssertGreaterThanOrEqual(movement.frame.height, 44)
+        XCTAssertGreaterThanOrEqual(future.frame.height, 44)
         XCTAssertTrue(app.navigationBars.buttons.firstMatch.isHittable)
-        XCTAssertGreaterThanOrEqual(relationship.frame.height, 44)
-        XCTAssertGreaterThanOrEqual(path.frame.height, 44)
     }
 
-    func testRelationshipContainsBothGoalsOwnersAndReturnsToFocusedGoal() {
-        launch("gnc-f06")
+    func testReduceMotionKeepsProofAndFutureMeaningAvailable() {
+        launch("gnc-synthesis-focused-reduce-motion")
 
-        let primaryGoal = element("gnc-relationship-primary-goal")
-        let primaryOwner = element("gnc-relationship-primary-owner")
-        let relatedGoal = element("gnc-relationship-related-goal")
-        let relatedOwner = element("gnc-relationship-related-owner")
-        let meaning = element("gnc-relationship-meaning")
-        let consequence = element("gnc-relationship-consequence")
-        let ownership = element("gnc-relationship-ownership")
-
+        let proof = element("gnc-focused-proof-disclosure")
+        let future = element("gnc-future-disclosure")
+        assertExists([proof, future])
+        proof.tap()
+        future.tap()
         assertExists([
-            primaryGoal, primaryOwner, relatedGoal, relatedOwner,
-            meaning, consequence, ownership
+            element("gnc-focused-proof"),
+            element("gnc-future-possible"),
+            element("gnc-future-conditional"),
+            element("gnc-open-relationship")
         ])
-        XCTAssertEqual(primaryGoal.label, "Welcome our baby home")
-        XCTAssertEqual(primaryOwner.label, "Home")
-        XCTAssertEqual(relatedGoal.label, "Protect our first weeks together")
-        XCTAssertEqual(relatedOwner.label, "Relationships")
-        XCTAssertEqual(
-            meaning.label,
-            "A ready nursery lowers pressure during the first days at home."
-        )
-        XCTAssertEqual(
-            consequence.label,
-            "Home setup should support the family’s first-week plan rather than consume it."
-        )
-        XCTAssertEqual(ownership.label, "Home owns this setup decision.")
-
-        let back = app.navigationBars.buttons.firstMatch
-        XCTAssertTrue(back.exists)
-        back.tap()
-        XCTAssertTrue(element("gnc-focused-goal-title").waitForExistence(timeout: 5))
-        XCTAssertEqual(element("gnc-focused-goal-title").label, "Welcome our baby home")
     }
 
-    func testGoalPathExposesCurrentNextProofJumpsAndRestoresFocusedGoal() {
-        launch("gnc-f07")
+    func testReduceTransparencyKeepsOpaqueDockNavigationReachable() {
+        launch("gnc-synthesis-root-reduce-transparency")
 
-        let path = element("gnc-goal-path")
-        let current = element("gnc-path-node-goalpath-node.paint-wall")
-        let next = element("gnc-path-node-goalpath-node.assemble-crib")
-        let selectedDetail = element("gnc-path-selected-detail")
-        let proof = element("gnc-path-proof-history")
-        let start = element("gnc-path-jump-start")
-        let now = element("gnc-path-jump-now")
-        let nextJump = element("gnc-path-jump-next")
-        let finish = element("gnc-path-jump-finish")
-
-        assertExists([path, current, next, selectedDetail, proof, start, now, nextJump, finish])
-        XCTAssertEqual(current.value as? String, "Current, selected")
-        XCTAssertEqual(next.value as? String, "Next")
-        XCTAssertTrue(current.isHittable)
-        XCTAssertTrue(next.isHittable)
-        XCTAssertEqual(selectedDetail.label, "This is the current meaningful movement.")
-        XCTAssertTrue(proof.label.contains("Crib corner cleared"))
-        XCTAssertTrue(proof.label.contains("Paint color confirmed"))
-        XCTAssertTrue(proof.label.contains("Wall primed"))
-        for action in [start, now, nextJump, finish] {
-            XCTAssertGreaterThanOrEqual(action.frame.height, 44)
-            XCTAssertTrue(action.isHittable)
-        }
-
-        nextJump.tap()
-        XCTAssertEqual(next.value as? String, "Next, selected")
-        start.tap()
-        XCTAssertEqual(
-            element("gnc-path-node-goalpath-node.define-ready").value as? String,
-            "Completed, selected"
-        )
-        finish.tap()
-        XCTAssertEqual(
-            element("gnc-path-node-goalpath-node.nursery-ready").value as? String,
-            "Finish, selected"
-        )
-        now.tap()
-        XCTAssertEqual(current.value as? String, "Current, selected")
-
-        let back = app.navigationBars.buttons.firstMatch
-        XCTAssertTrue(back.exists)
-        back.tap()
-        XCTAssertTrue(element("gnc-focused-goal-title").waitForExistence(timeout: 5))
-        back.tap()
-        XCTAssertTrue(element("gnc-linked-lens-goal.welcome-baby-home").waitForExistence(timeout: 5))
-    }
-
-    func testAccessibilityRootAndLensUseObjectFirstOrderWithReachableActions() {
-        launch("gnc-f08")
-
+        let dock = element("gnc-dock-peek")
         let home = element("gnc-life-area-life-area.home")
-        let goal = element("gnc-goal-goal.welcome-baby-home")
-        let lens = element("gnc-linked-lens-goal.welcome-baby-home")
-        let truth = element("gnc-lens-current-truth")
-        let openGoal = element("gnc-open-goal")
-        let passage = element("gnc-adaptive-navigation")
-
-        assertExists([home, goal, lens, truth, openGoal, passage])
-        XCTAssertLessThan(home.frame.minY, goal.frame.minY)
-        XCTAssertLessThan(goal.frame.minY, lens.frame.minY)
-        XCTAssertLessThan(lens.frame.minY, passage.frame.minY)
-        XCTAssertGreaterThanOrEqual(openGoal.frame.height, 44)
-        for _ in 0 ..< 4 where openGoal.isHittable == false {
-            app.swipeUp()
-        }
-        XCTAssertTrue(openGoal.isHittable)
-        XCTAssertFalse(element("gnc-dock-peek").exists)
-
-        let passageRows = [
-            "gnc-adaptive-root-today",
-            "gnc-adaptive-root-goals",
-            "gnc-adaptive-root-time",
-            "gnc-adaptive-root-you",
-            "gnc-adaptive-global-search",
-            "gnc-adaptive-global-capture"
-        ].map(element)
-        for _ in 0 ..< 6 where passageRows.allSatisfy(\.exists) == false {
-            app.swipeUp()
-        }
-        assertExists(passageRows)
-        for row in passageRows {
-            XCTAssertGreaterThanOrEqual(row.frame.height, 44)
-        }
+        assertExists([dock, home])
+        XCTAssertGreaterThanOrEqual(dock.frame.width, 44)
+        XCTAssertGreaterThanOrEqual(dock.frame.height, 44)
+        home.tap()
+        XCTAssertTrue(element("gnc-home-life-area").waitForExistence(timeout: 5))
     }
 
     private func launch(_ variant: String) {

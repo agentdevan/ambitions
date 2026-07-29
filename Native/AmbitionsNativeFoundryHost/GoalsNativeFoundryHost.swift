@@ -10,6 +10,15 @@ enum GoalsNativeFoundryVariant: String {
     case consequentialRelationship = "gnc-f06"
     case goalPath = "gnc-f07"
     case accessibilityRoot = "gnc-f08"
+    case synthesisRootDark = "gnc-synthesis-root-dark"
+    case synthesisRootLight = "gnc-synthesis-root-light"
+    case synthesisHomeDark = "gnc-synthesis-home-dark"
+    case synthesisHomeLight = "gnc-synthesis-home-light"
+    case synthesisFocusedDark = "gnc-synthesis-focused-dark"
+    case synthesisFocusedLight = "gnc-synthesis-focused-light"
+    case synthesisFocusedAccessibility = "gnc-synthesis-focused-accessibility"
+    case synthesisFocusedReduceMotion = "gnc-synthesis-focused-reduce-motion"
+    case synthesisRootReduceTransparency = "gnc-synthesis-root-reduce-transparency"
 
     static var fromProcessArguments: GoalsNativeFoundryVariant? {
         let arguments = ProcessInfo.processInfo.arguments
@@ -27,12 +36,23 @@ enum GoalsNativeFoundryVariant: String {
     }
 
     var colorScheme: ColorScheme {
-        self == .rootLight ? .light : .dark
+        switch self {
+        case .rootLight, .synthesisRootLight, .synthesisHomeLight, .synthesisFocusedLight:
+            .light
+        default:
+            .dark
+        }
     }
 
     var lensExpanded: Bool {
+        self == .linkedGoalLens
+    }
+
+    var opensHome: Bool {
         switch self {
-        case .linkedGoalLens, .focusedGoal, .consequentialRelationship, .goalPath, .accessibilityRoot:
+        case .selectedGoal, .linkedGoalLens, .focusedGoal, .consequentialRelationship, .goalPath,
+             .synthesisHomeDark, .synthesisHomeLight, .synthesisFocusedDark,
+             .synthesisFocusedLight, .synthesisFocusedAccessibility, .synthesisFocusedReduceMotion:
             true
         default:
             false
@@ -40,7 +60,13 @@ enum GoalsNativeFoundryVariant: String {
     }
 
     var opensFocusedGoal: Bool {
-        self == .focusedGoal || self == .consequentialRelationship || self == .goalPath
+        switch self {
+        case .focusedGoal, .consequentialRelationship, .goalPath, .synthesisFocusedDark,
+             .synthesisFocusedLight, .synthesisFocusedAccessibility, .synthesisFocusedReduceMotion:
+            true
+        default:
+            false
+        }
     }
 
     var opensRelationship: Bool {
@@ -52,7 +78,17 @@ enum GoalsNativeFoundryVariant: String {
     }
 
     var dynamicTypeSize: DynamicTypeSize {
-        self == .accessibilityRoot ? .accessibility2 : .large
+        self == .accessibilityRoot || self == .synthesisFocusedAccessibility
+            ? .accessibility2
+            : .large
+    }
+
+    var reducesMotion: Bool {
+        self == .synthesisFocusedReduceMotion
+    }
+
+    var reducesTransparency: Bool {
+        self == .synthesisRootReduceTransparency
     }
 }
 
@@ -68,6 +104,9 @@ struct GoalsNativeFoundryHost: View {
             content: GoalsNativeCalibrationFixture.preparingForBaby,
             lensExpanded: variant.lensExpanded
         )
+        if variant.opensHome {
+            _ = initialState.openLifeArea(id: "life-area.home")
+        }
         if variant.opensFocusedGoal {
             _ = initialState.openSelectedGoal()
         }
@@ -86,5 +125,9 @@ struct GoalsNativeFoundryHost: View {
         GoalsNativeCalibrationView(content: content, state: $state)
             .preferredColorScheme(variant.colorScheme)
             .dynamicTypeSize(variant.dynamicTypeSize)
+            .goalsNativeCalibrationAccessibilityOverrides(
+                reduceMotion: variant.reducesMotion,
+                reduceTransparency: variant.reducesTransparency
+            )
     }
 }

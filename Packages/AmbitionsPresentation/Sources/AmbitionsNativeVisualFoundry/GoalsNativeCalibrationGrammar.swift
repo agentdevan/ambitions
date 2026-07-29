@@ -1,5 +1,35 @@
 import SwiftUI
 
+private struct GoalsNativeCalibrationForceReduceMotionKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+private struct GoalsNativeCalibrationForceReduceTransparencyKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var goalsNativeCalibrationForceReduceMotion: Bool {
+        get { self[GoalsNativeCalibrationForceReduceMotionKey.self] }
+        set { self[GoalsNativeCalibrationForceReduceMotionKey.self] = newValue }
+    }
+
+    var goalsNativeForceOpaqueChrome: Bool {
+        get { self[GoalsNativeCalibrationForceReduceTransparencyKey.self] }
+        set { self[GoalsNativeCalibrationForceReduceTransparencyKey.self] = newValue }
+    }
+}
+
+public extension View {
+    func goalsNativeCalibrationAccessibilityOverrides(
+        reduceMotion: Bool = false,
+        reduceTransparency: Bool = false
+    ) -> some View {
+        environment(\.goalsNativeCalibrationForceReduceMotion, reduceMotion)
+            .environment(\.goalsNativeForceOpaqueChrome, reduceTransparency)
+    }
+}
+
 enum GoalsNativeCalibrationTypographyRole {
     case objectIdentity
     case truth
@@ -96,6 +126,39 @@ enum GoalsNativeCalibrationMarkerKind {
     case proof
 }
 
+enum GoalsNativeCalibrationGoalSeamEmphasis {
+    case quiet
+    case selected
+    case focused
+}
+
+struct GoalsNativeCalibrationGoalSeam: View {
+    let palette: GoalsNativeCalibrationPalette
+    let emphasis: GoalsNativeCalibrationGoalSeamEmphasis
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Circle()
+                .strokeBorder(
+                    emphasis == .quiet ? palette.secondaryInk : palette.primaryInk,
+                    lineWidth: palette.markerWidth
+                )
+                .background {
+                    if emphasis != .quiet {
+                        Circle().fill(palette.accent).padding(5)
+                    }
+                }
+                .frame(width: emphasis == .focused ? 24 : 20, height: emphasis == .focused ? 24 : 20)
+
+            Rectangle()
+                .fill(emphasis == .quiet ? palette.separator : palette.primaryInk.opacity(0.42))
+                .frame(width: palette.markerWidth, height: emphasis == .focused ? 54 : 34)
+        }
+        .frame(width: 28)
+        .accessibilityHidden(true)
+    }
+}
+
 struct GoalsNativeCalibrationMarker: View {
     let kind: GoalsNativeCalibrationMarkerKind
     let palette: GoalsNativeCalibrationPalette
@@ -188,6 +251,7 @@ struct GoalsNativeCalibrationOpenRelief<Content: View>: View {
 
 struct GoalsNativeCalibrationFunctionalChrome<Content: View>: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.goalsNativeForceOpaqueChrome) private var forceReduceTransparency
 
     let palette: GoalsNativeCalibrationPalette
     let content: Content
@@ -203,7 +267,7 @@ struct GoalsNativeCalibrationFunctionalChrome<Content: View>: View {
     var body: some View {
         content
             .background {
-                if reduceTransparency {
+                if reduceTransparency || forceReduceTransparency {
                     RoundedRectangle(cornerRadius: 13, style: .continuous)
                         .fill(palette.opaqueChrome)
                 } else {

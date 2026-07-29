@@ -1,4 +1,5 @@
 public enum GoalsNativeCalibrationRoute: Hashable, Sendable {
+    case lifeArea(id: String)
     case focusedGoal(id: String)
     case relationship(primaryGoalID: String, relatedGoalID: String)
     case goalPath(id: String)
@@ -47,7 +48,7 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
         isLinkedLensExpanded = lensExpanded
         navigationPath = []
         selectedPathNodeID = content.goalPath.currentNodeID
-        focusAnchor = lensExpanded ? .linkedLens : .selectedGoal
+        focusAnchor = .lifeArea
         lifeAreaGoalIDs = Dictionary(
             uniqueKeysWithValues: content.lifeAreas.map { ($0.id, $0.goals.map(\.id)) }
         )
@@ -73,19 +74,27 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     }
 
     @discardableResult
-    public mutating func selectLifeArea(id: String) -> Bool {
+    public mutating func openLifeArea(id: String) -> Bool {
         guard lifeAreaGoalIDs[id] != nil, navigationPath.isEmpty else { return false }
         selectedLifeAreaID = id
-        selectedGoalID = nil
+        selectedGoalID = lifeAreaGoalIDs[id]?.contains(primaryGoalID) == true
+            ? primaryGoalID
+            : lifeAreaGoalIDs[id]?.first
         isLinkedLensExpanded = false
+        navigationPath = [.lifeArea(id: id)]
         focusAnchor = .lifeArea
         return true
     }
 
     @discardableResult
+    public mutating func selectLifeArea(id: String) -> Bool {
+        openLifeArea(id: id)
+    }
+
+    @discardableResult
     public mutating func selectGoal(id: String) -> Bool {
         guard
-            navigationPath.isEmpty,
+            navigationPath == [.lifeArea(id: selectedLifeAreaID)],
             lifeAreaGoalIDs[selectedLifeAreaID]?.contains(id) == true
         else { return false }
         selectedGoalID = id
@@ -97,7 +106,7 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     @discardableResult
     public mutating func openLinkedLens() -> Bool {
         guard
-            navigationPath.isEmpty,
+            navigationPath == [.lifeArea(id: selectedLifeAreaID)],
             selectedGoalID == primaryGoalID
         else { return false }
         isLinkedLensExpanded = true
@@ -107,7 +116,10 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func closeLinkedLens() -> Bool {
-        guard navigationPath.isEmpty, isLinkedLensExpanded else { return false }
+        guard
+            navigationPath == [.lifeArea(id: selectedLifeAreaID)],
+            isLinkedLensExpanded
+        else { return false }
         isLinkedLensExpanded = false
         focusAnchor = .selectedGoal
         return true
@@ -117,18 +129,19 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
     public mutating func openSelectedGoal(id: String? = nil) -> Bool {
         let targetID = id ?? selectedGoalID
         guard
-            navigationPath.isEmpty,
+            navigationPath == [.lifeArea(id: selectedLifeAreaID)],
+            selectedLifeAreaID == lifeAreaID,
             targetID == primaryGoalID,
             selectedGoalID == primaryGoalID
         else { return false }
-        navigationPath = [.focusedGoal(id: primaryGoalID)]
+        navigationPath.append(.focusedGoal(id: primaryGoalID))
         focusAnchor = .focusedGoal
         return true
     }
 
     @discardableResult
     public mutating func openRelationship() -> Bool {
-        guard navigationPath == [.focusedGoal(id: primaryGoalID)] else { return false }
+        guard navigationPath == focusedGoalPath else { return false }
         navigationPath.append(
             .relationship(primaryGoalID: primaryGoalID, relatedGoalID: relatedGoalID)
         )
@@ -138,7 +151,7 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
 
     @discardableResult
     public mutating func openGoalPath() -> Bool {
-        guard navigationPath == [.focusedGoal(id: primaryGoalID)] else { return false }
+        guard navigationPath == focusedGoalPath else { return false }
         navigationPath.append(.goalPath(id: goalPathID))
         selectedPathNodeID = currentPathNodeID
         focusAnchor = .pathNode
@@ -176,51 +189,104 @@ public struct GoalsNativeCalibrationJourneyState: Equatable, Sendable {
 
     public mutating func reconcileNavigationPath(_ path: [GoalsNativeCalibrationRoute]) {
         guard path != navigationPath else { return }
+        guard isValidNavigationPath(path) else { return }
 
-        switch (navigationPath, path) {
-        case (
-            [
-                .focusedGoal(id: primaryGoalID),
-                .relationship(primaryGoalID: primaryGoalID, relatedGoalID: relatedGoalID)
-            ],
-            [.focusedGoal(id: primaryGoalID)]
-        ), (
-            [.focusedGoal(id: primaryGoalID), .goalPath(id: goalPathID)],
-            [.focusedGoal(id: primaryGoalID)]
-        ):
-            navigationPath = path
+        let previousPath = navigationPath
+        navigationPath = path
+
+        switch path.last {
+        case .lifeArea(id: let id):
+            selectedLifeAreaID = id
+            selectedGoalID = lifeAreaGoalIDs[id]?.contains(primaryGoalID) == true
+                ? primaryGoalID
+                : lifeAreaGoalIDs[id]?.first
+            focusAnchor = previousPath.count > path.count ? .selectedGoal : .lifeArea
+        case .focusedGoal:
+            selectedGoalID = primaryGoalID
             focusAnchor = .focusedGoal
-        case ([.focusedGoal(id: primaryGoalID)], []):
-            navigationPath = []
-            isLinkedLensExpanded = true
-            focusAnchor = .linkedLens
-        default:
-            return
+        case .relationship:
+            focusAnchor = .relationship
+        case .goalPath:
+            selectedPathNodeID = currentPathNodeID
+            focusAnchor = .pathNode
+        case nil:
+            focusAnchor = .lifeArea
         }
     }
 
     public var relationshipRouteID: String { relationshipID }
+
+    private var lifeAreaID: String {
+        lifeAreaGoalIDs.first { $0.value.contains(primaryGoalID) }?.key ?? selectedLifeAreaID
+    }
+
+    private var focusedGoalPath: [GoalsNativeCalibrationRoute] {
+        [
+            .lifeArea(id: lifeAreaID),
+            .focusedGoal(id: primaryGoalID)
+        ]
+    }
+
+    private func isValidNavigationPath(_ path: [GoalsNativeCalibrationRoute]) -> Bool {
+        if path.isEmpty {
+            return true
+        }
+
+        guard case let .lifeArea(id: areaID) = path[0] else { return false }
+        guard lifeAreaGoalIDs[areaID] != nil else { return false }
+
+        if path.count == 1 {
+            return true
+        }
+
+        guard
+            areaID == lifeAreaID,
+            case let .focusedGoal(id: goalID) = path[1],
+            goalID == primaryGoalID
+        else { return false }
+
+        if path.count == 2 {
+            return true
+        }
+
+        guard path.count == 3 else { return false }
+        switch path[2] {
+        case let .relationship(primaryID, relatedID):
+            return primaryID == primaryGoalID && relatedID == relatedGoalID
+        case let .goalPath(pathID):
+            return pathID == goalPathID
+        case .lifeArea, .focusedGoal:
+            return false
+        }
+    }
 }
 
-public struct GoalsNativeCalibrationPresentation: Equatable, Sendable {
+public struct GoalsNativeCalibrationRootPresentation: Equatable, Sendable {
     public let accessibilityScreenHeading = "Goals"
     public let selectedRootTitle = "Goals"
     public let rootOrder = ["Today", "Goals", "Time", "You"]
     public let globalActions = ["Search", "Capture"]
-    public let expandedLifeAreaIDs: [String]
-    public let selectedGoalIDs: [String]
-    public let attachedLensGoalIDs: [String]
-    public let primaryActionTitle: String
+    public let lifeAreaIDs: [String]
+    public let visibleText: [String]
 
-    public init(
-        content: GoalsNativeCalibrationContent,
-        state: GoalsNativeCalibrationJourneyState
-    ) {
-        expandedLifeAreaIDs = state.expandedLifeAreaIDs
-        selectedGoalIDs = state.selectedGoalID.map { [$0] } ?? []
-        attachedLensGoalIDs = state.isLinkedLensExpanded ? [content.primaryGoal.id] : []
-        primaryActionTitle = state.isLinkedLensExpanded
-            ? content.linkedLens.openActionTitle
-            : "Show Linked Goal Lens"
+    public init(content: GoalsNativeCalibrationContent) {
+        lifeAreaIDs = content.lifeAreas.map(\.id)
+        visibleText = [content.presentContext]
+            + content.lifeAreas.flatMap { [$0.title, $0.currentTruth] }
+    }
+}
+
+public struct GoalsNativeCalibrationHomePresentation: Equatable, Sendable {
+    public let lifeAreaID: String
+    public let lifeAreaTitle: String
+    public let goalIDs: [String]
+    public let supportedFocusedGoalIDs: [String]
+
+    public init(content: GoalsNativeCalibrationContent) {
+        let lifeArea = content.lifeArea(id: content.selectedLifeAreaID)
+        lifeAreaID = lifeArea?.id ?? content.selectedLifeAreaID
+        lifeAreaTitle = lifeArea?.title ?? content.primaryGoal.lifeAreaTitle
+        goalIDs = lifeArea?.goals.map(\.id) ?? []
+        supportedFocusedGoalIDs = [content.primaryGoal.id]
     }
 }

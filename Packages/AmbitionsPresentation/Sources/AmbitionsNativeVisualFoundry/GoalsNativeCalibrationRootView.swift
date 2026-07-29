@@ -12,7 +12,7 @@ struct GoalsNativeCalibrationRootView: View {
         ZStack(alignment: .trailing) {
             VStack(spacing: 0) {
                 crown
-                rootContent
+                lifeAreaIndex
             }
             .allowsHitTesting(isDockExpanded == false)
             .accessibilityHidden(isDockExpanded)
@@ -51,7 +51,7 @@ struct GoalsNativeCalibrationRootView: View {
                 .font(.title.weight(.semibold))
                 .accessibilityAddTraits(.isHeader)
 
-            Text(content.presentContext)
+            Text("The parts of life you are shaping over time")
                 .font(.subheadline)
                 .foregroundStyle(palette.secondaryInk)
         }
@@ -59,273 +59,51 @@ struct GoalsNativeCalibrationRootView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 12)
-        .padding(.bottom, 13)
+        .padding(.bottom, 18)
         .background(palette.canvas)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Goals")
-        .accessibilityValue("Ambitions, \(content.presentContext)")
+        .accessibilityValue("Ambitions. The parts of life you are shaping over time")
         .accessibilityAddTraits(.isHeader)
         .accessibilityIdentifier("gnc-goals-heading")
     }
 
-    private var rootContent: some View {
+    private var lifeAreaIndex: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(content.lifeAreas) { area in
-                    lifeArea(area)
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(Array(content.lifeAreas.enumerated()), id: \.element.id) { index, area in
+                    NavigationLink(value: GoalsNativeCalibrationRoute.lifeArea(id: area.id)) {
+                        GoalsNativeCalibrationLifeAreaPassage(
+                            area: area,
+                            position: index,
+                            palette: palette
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(area.title)
+                    .accessibilityValue(area.currentTruth)
+                    .accessibilityHint("Opens the \(area.title) Life Area")
+                    .accessibilityIdentifier("gnc-life-area-\(area.id)")
+
+                    if index < content.lifeAreas.count - 1 {
+                        Rectangle()
+                            .fill(palette.separator)
+                            .frame(height: 1)
+                            .padding(.leading, 58)
+                    }
                 }
 
                 if usesAdaptiveNavigation {
                     adaptiveNavigation
+                        .padding(.top, 26)
                 }
             }
             .frame(maxWidth: 560, alignment: .leading)
             .padding(.leading, 24)
             .padding(.trailing, usesAdaptiveNavigation ? 24 : 68)
-            .padding(.bottom, 80)
+            .padding(.bottom, 88)
         }
         .contentMargins(.trailing, usesAdaptiveNavigation ? 0 : 52, for: .scrollIndicators)
-    }
-
-    @ViewBuilder
-    private func lifeArea(_ area: GoalsNativeCalibrationLifeArea) -> some View {
-        if state.isLifeAreaExpanded(id: area.id) {
-            VStack(alignment: .leading, spacing: 12) {
-                Button {
-                    _ = state.selectLifeArea(id: area.id)
-                } label: {
-                    HStack(spacing: 10) {
-                        GoalsNativeCalibrationMarker(kind: .lifeArea, palette: palette)
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text(area.title)
-                                .font(.title2.weight(.semibold))
-                                .foregroundStyle(palette.primaryInk)
-                            Text(area.currentTruth)
-                                .font(.subheadline)
-                                .foregroundStyle(palette.secondaryInk)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        Spacer(minLength: 8)
-                        Image(systemName: "chevron.up")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(palette.secondaryInk)
-                            .accessibilityHidden(true)
-                    }
-                    .frame(minHeight: 54)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(area.title)
-                .accessibilityValue("Selected Life Area, expanded")
-                .accessibilityIdentifier("gnc-life-area-\(area.id)")
-
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(area.goals) { goal in
-                        goalRow(goal)
-                    }
-                }
-            }
-            .padding(.bottom, 8)
-        } else {
-            Button {
-                _ = state.selectLifeArea(id: area.id)
-            } label: {
-                HStack(spacing: 10) {
-                    GoalsNativeCalibrationMarker(kind: .lifeArea, palette: palette)
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(area.title)
-                            .font(.headline)
-                            .foregroundStyle(palette.primaryInk)
-                        Text(area.currentTruth)
-                            .font(.subheadline)
-                            .foregroundStyle(palette.secondaryInk)
-                            .lineLimit(2)
-                    }
-                    Spacer(minLength: 8)
-                    Image(systemName: "chevron.down")
-                        .foregroundStyle(palette.secondaryInk)
-                        .accessibilityHidden(true)
-                }
-                .frame(minHeight: 54)
-                .padding(.vertical, 6)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(area.title)
-            .accessibilityValue("Compact Life Area")
-            .accessibilityIdentifier("gnc-life-area-\(area.id)")
-            .overlay(alignment: .bottom) {
-                Rectangle().fill(palette.separator).frame(height: 1)
-            }
-        }
-    }
-
-    private func goalRow(_ goal: GoalsNativeCalibrationGoalSummary) -> some View {
-        let isSelected = state.isGoalSelected(id: goal.id)
-
-        return VStack(alignment: .leading, spacing: 0) {
-            Button {
-                _ = state.selectGoal(id: goal.id)
-            } label: {
-                HStack(alignment: .top, spacing: 10) {
-                    GoalsNativeCalibrationMarker(
-                        kind: isSelected ? .selectedGoal : .compactGoal,
-                        palette: palette
-                    )
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(goal.title)
-                            .font(
-                                isSelected
-                                    ? GoalsNativeCalibrationTypographyRole.objectIdentity.font
-                                    : .body.weight(.medium)
-                            )
-                            .foregroundStyle(palette.primaryInk)
-                            .fixedSize(horizontal: false, vertical: true)
-                        Text(goal.acceptedPosture)
-                            .font(GoalsNativeCalibrationTypographyRole.metadata.font)
-                            .foregroundStyle(palette.secondaryInk)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Spacer(minLength: 8)
-                    if isSelected {
-                        Text("Selected")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(palette.accent)
-                    }
-                }
-                .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
-                .padding(.vertical, isSelected ? 12 : 9)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(goal.title)
-            .accessibilityValue(isSelected ? "Selected" : goal.acceptedPosture)
-            .accessibilityAddTraits(isSelected ? .isSelected : [])
-            .accessibilityIdentifier("gnc-goal-\(goal.id)")
-
-            if isSelected && goal.id == content.primaryGoal.id {
-                linkedLensRegion
-            }
-
-            Rectangle()
-                .fill(palette.separator)
-                .frame(height: 1)
-                .padding(.leading, 38)
-        }
-    }
-
-    @ViewBuilder
-    private var linkedLensRegion: some View {
-        if state.isLinkedLensExpanded {
-            linkedLens
-        } else {
-            Button {
-                _ = state.openLinkedLens()
-            } label: {
-                HStack(spacing: 10) {
-                    GoalsNativeCalibrationMarker(kind: .lens, palette: palette)
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Linked Goal Lens")
-                            .font(.headline)
-                        Text("See current truth, consequence, and the movement now in focus.")
-                            .font(.subheadline)
-                            .foregroundStyle(palette.secondaryInk)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Spacer(minLength: 8)
-                    Image(systemName: "chevron.down")
-                        .accessibilityHidden(true)
-                }
-                .frame(minHeight: 52)
-                .padding(.vertical, 8)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityHint("Reveals the Goal’s current pursuit truth in place")
-            .accessibilityIdentifier("gnc-linked-lens-disclosure")
-        }
-    }
-
-    private var linkedLens: some View {
-        GoalsNativeCalibrationOpenRelief(palette: palette) {
-            VStack(alignment: .leading, spacing: 13) {
-                HStack(spacing: 9) {
-                    GoalsNativeCalibrationMarker(kind: .lens, palette: palette)
-                    Text("Linked Goal Lens")
-                        .font(.headline)
-                        .foregroundStyle(palette.accent)
-                    Spacer(minLength: 8)
-                    Button("Hide") {
-                        _ = state.closeLinkedLens()
-                    }
-                    .font(.subheadline.weight(.medium))
-                    .frame(minHeight: 44)
-                }
-
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Current truth")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(palette.secondaryInk)
-                    Text(content.linkedLens.currentTruth)
-                        .font(GoalsNativeCalibrationTypographyRole.truth.font)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("gnc-lens-current-truth")
-                }
-
-                Text(content.linkedLens.consequence)
-                    .font(GoalsNativeCalibrationTypographyRole.relationship.font)
-                    .foregroundStyle(palette.secondaryInk)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                HStack(alignment: .top, spacing: 10) {
-                    Image(systemName: "point.forward.to.point.capsulepath")
-                        .foregroundStyle(palette.accent)
-                        .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Active thread")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(palette.tertiaryInk)
-                        Text(content.linkedLens.activeThread)
-                            .font(.body.weight(.medium))
-                        Text("Next · \(content.linkedLens.nextMovement)")
-                            .font(.subheadline)
-                            .foregroundStyle(palette.secondaryInk)
-                    }
-                }
-
-                HStack(spacing: 8) {
-                    GoalsNativeCalibrationMarker(kind: .proof, palette: palette)
-                    Text(content.linkedLens.proofPosture.joined(separator: " · "))
-                        .font(.caption)
-                        .foregroundStyle(palette.secondaryInk)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                Button {
-                    _ = state.openSelectedGoal()
-                } label: {
-                    ZStack {
-                        Text(content.linkedLens.openActionTitle)
-                        HStack {
-                            Spacer()
-                            Image(systemName: "chevron.forward")
-                                .accessibilityHidden(true)
-                        }
-                    }
-                }
-                .buttonStyle(
-                    GoalsNativeCalibrationNavigationButtonStyle(
-                        palette: palette,
-                        isProminent: true
-                    )
-                )
-                .accessibilityHint("Opens the focused Goal without changing it")
-                .accessibilityIdentifier("gnc-open-goal")
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Linked Goal Lens, \(content.primaryGoal.title)")
-        .accessibilityIdentifier("gnc-linked-lens-\(content.primaryGoal.id)")
     }
 
     private var dock: some View {
@@ -368,7 +146,6 @@ struct GoalsNativeCalibrationRootView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, minHeight: 56)
-                .background(Color.clear)
                 .contentShape(Rectangle())
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(title)
@@ -379,7 +156,6 @@ struct GoalsNativeCalibrationRootView: View {
             ForEach(["Search", "Capture"], id: \.self) { title in
                 Text(title)
                     .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
-                    .background(Color.clear)
                     .contentShape(Rectangle())
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel(title)
@@ -387,11 +163,77 @@ struct GoalsNativeCalibrationRootView: View {
                     .accessibilityIdentifier("gnc-adaptive-global-\(title.lowercased())")
             }
         }
-        .padding(14)
-        .background(palette.relief)
+        .padding(.vertical, 14)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Adaptive Navigation Passage")
         .accessibilityIdentifier("gnc-adaptive-navigation")
+    }
+}
+
+private struct GoalsNativeCalibrationLifeAreaPassage: View {
+    let area: GoalsNativeCalibrationLifeArea
+    let position: Int
+    let palette: GoalsNativeCalibrationPalette
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 14) {
+            posture
+                .padding(.top, 3)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(area.title)
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(palette.primaryInk)
+
+                Text(area.currentTruth)
+                    .font(.body)
+                    .foregroundStyle(palette.secondaryInk)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: 12)
+
+            Image(systemName: "chevron.forward")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.tertiaryInk)
+                .frame(width: 20, height: 44)
+                .accessibilityHidden(true)
+        }
+        .frame(maxWidth: .infinity, minHeight: 122, alignment: .leading)
+        .padding(.vertical, 14)
+        .contentShape(Rectangle())
+    }
+
+    @ViewBuilder
+    private var posture: some View {
+        switch position % 3 {
+        case 0:
+            VStack(spacing: 3) {
+                ForEach([18.0, 13.0, 8.0], id: \.self) { height in
+                    Capsule()
+                        .fill(palette.secondaryInk)
+                        .frame(width: 3, height: height)
+                }
+            }
+            .frame(width: 28, height: 44)
+        case 1:
+            ZStack {
+                Circle()
+                    .stroke(palette.secondaryInk, lineWidth: palette.markerWidth)
+                    .frame(width: 22, height: 22)
+                Circle()
+                    .stroke(palette.secondaryInk, lineWidth: palette.markerWidth)
+                    .frame(width: 12, height: 12)
+            }
+            .frame(width: 28, height: 44)
+        default:
+            VStack(spacing: 5) {
+                Rectangle().fill(palette.secondaryInk).frame(width: 24, height: 2)
+                Rectangle().fill(palette.secondaryInk).frame(width: 15, height: 2)
+                Rectangle().fill(palette.secondaryInk).frame(width: 8, height: 2)
+            }
+            .frame(width: 28, height: 44)
+        }
     }
 }
 

@@ -1,15 +1,27 @@
 import SwiftUI
 
+private enum GoalsNativeCalibrationPreviewDepth {
+    case root
+    case home
+    case focused
+    case path
+}
+
 private struct GoalsNativeCalibrationPreviewHost: View {
     @State private var state: GoalsNativeCalibrationJourneyState
 
-    init(lensExpanded: Bool = false, opensGoalPath: Bool = false) {
+    init(depth: GoalsNativeCalibrationPreviewDepth = .root) {
         var initialState = GoalsNativeCalibrationJourneyState(
             content: GoalsNativeCalibrationFixture.preparingForBaby,
-            lensExpanded: lensExpanded || opensGoalPath
+            lensExpanded: false
         )
-        if opensGoalPath {
+        if depth != .root {
+            _ = initialState.openLifeArea(id: "life-area.home")
+        }
+        if depth == .focused || depth == .path {
             _ = initialState.openSelectedGoal()
+        }
+        if depth == .path {
             _ = initialState.openGoalPath()
         }
         _state = State(initialValue: initialState)
@@ -33,23 +45,23 @@ private struct GoalsNativeCalibrationPreviewHost: View {
         .preferredColorScheme(.dark)
 }
 
-#Preview("GNC-F03 · Selected Home and Goal") {
-    GoalsNativeCalibrationPreviewHost()
+#Preview("GPC-S01 · Home Life Area") {
+    GoalsNativeCalibrationPreviewHost(depth: .home)
         .preferredColorScheme(.dark)
 }
 
-#Preview("GNC-F04 · Linked Goal Lens") {
-    GoalsNativeCalibrationPreviewHost(lensExpanded: true)
+#Preview("GPC-S02 · Focused Goal") {
+    GoalsNativeCalibrationPreviewHost(depth: .focused)
         .preferredColorScheme(.dark)
 }
 
 #Preview("GNC-F07 · Goal Path") {
-    GoalsNativeCalibrationPreviewHost(opensGoalPath: true)
+    GoalsNativeCalibrationPreviewHost(depth: .path)
         .preferredColorScheme(.dark)
 }
 
-#Preview("GNC-F08 · Accessibility Root and Lens") {
-    GoalsNativeCalibrationPreviewHost(lensExpanded: true)
+#Preview("GPC-S03 · Accessibility Focused Goal") {
+    GoalsNativeCalibrationPreviewHost(depth: .focused)
         .preferredColorScheme(.dark)
         .dynamicTypeSize(.accessibility2)
 }

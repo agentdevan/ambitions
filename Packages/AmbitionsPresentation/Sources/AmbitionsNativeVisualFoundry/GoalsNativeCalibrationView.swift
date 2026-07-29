@@ -50,6 +50,12 @@ public struct GoalsNativeCalibrationView: View {
     @ViewBuilder
     private func destination(for route: GoalsNativeCalibrationRoute) -> some View {
         switch route {
+        case let .lifeArea(id):
+            GoalsNativeCalibrationLifeAreaView(
+                content: content,
+                lifeAreaID: id,
+                palette: palette
+            )
         case let .focusedGoal(id) where id == content.primaryGoal.id:
             GoalsNativeCalibrationFocusedGoalView(
                 content: content,

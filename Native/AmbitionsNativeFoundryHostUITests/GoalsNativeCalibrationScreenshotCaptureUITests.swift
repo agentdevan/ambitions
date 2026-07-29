@@ -9,83 +9,76 @@ final class GoalsNativeCalibrationScreenshotCaptureUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testGNCF01GoalsRootLight() {
-        launch("gnc-f01")
-        assertReady(["gnc-goals-heading", "gnc-goal-goal.welcome-baby-home", "gnc-dock-peek"])
-        attachScreenshot(named: "GNC-F01-goals-root-light")
+    func testGPCSF01GoalsRootDark() {
+        launch("gnc-synthesis-root-dark")
+        assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
+        attachScreenshot(named: "GPCS-F01-goals-root-dark")
     }
 
-    func testGNCF02GoalsRootDark() {
-        launch("gnc-f02")
-        assertReady(["gnc-goals-heading", "gnc-goal-goal.welcome-baby-home", "gnc-dock-peek"])
-        attachScreenshot(named: "GNC-F02-goals-root-dark")
-    }
-
-    func testGNCF03SelectedLifeAreaAndGoal() {
-        launch("gnc-f03")
+    func testGPCSF02HomeLifeAreaDark() {
+        launch("gnc-synthesis-home-dark")
         assertReady([
-            "gnc-life-area-life-area.home",
-            "gnc-goal-goal.welcome-baby-home",
-            "gnc-linked-lens-disclosure"
+            "gnc-home-life-area",
+            "gnc-home-goal-goal.welcome-baby-home",
+            "gnc-home-goal-goal.make-home-easier-to-run"
         ])
-        attachScreenshot(named: "GNC-F03-selected-life-area-and-goal")
+        attachScreenshot(named: "GPCS-F02-home-life-area-dark")
     }
 
-    func testGNCF04LinkedGoalLens() {
-        launch("gnc-f04")
-        assertReady([
-            "gnc-goal-goal.welcome-baby-home",
-            "gnc-linked-lens-goal.welcome-baby-home",
-            "gnc-open-goal"
-        ])
-        attachScreenshot(named: "GNC-F04-linked-goal-lens")
-    }
-
-    func testGNCF05FocusedGoalDepth() {
-        launch("gnc-f05")
+    func testGPCSF03FocusedGoalDark() {
+        launch("gnc-synthesis-focused-dark")
         assertReady([
             "gnc-focused-goal-title",
             "gnc-focused-current-truth",
-            "gnc-focused-next-movement"
+            "gnc-current-movement-path",
+            "gnc-future-disclosure"
         ])
-        attachScreenshot(named: "GNC-F05-focused-goal-depth")
+        attachScreenshot(named: "GPCS-F03-focused-goal-dark")
     }
 
-    func testGNCF06ConsequentialRelationship() {
-        launch("gnc-f06")
-        assertReady([
-            "gnc-relationship-primary-goal",
-            "gnc-relationship-related-goal",
-            "gnc-relationship-consequence"
-        ])
-        attachScreenshot(named: "GNC-F06-consequential-relationship")
+    func testGPCSF04GoalsRootLight() {
+        launch("gnc-synthesis-root-light")
+        assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
+        attachScreenshot(named: "GPCS-F04-goals-root-light")
     }
 
-    func testGNCF07GoalPathHistory() {
-        launch("gnc-f07")
-        assertReady([
-            "gnc-goal-path",
-            "gnc-path-node-goalpath-node.paint-wall",
-            "gnc-path-proof-history"
-        ])
-        attachScreenshot(named: "GNC-F07-goal-path-history")
+    func testGPCSF05HomeLifeAreaLight() {
+        launch("gnc-synthesis-home-light")
+        assertReady(["gnc-home-life-area", "gnc-home-goal-goal.welcome-baby-home"])
+        attachScreenshot(named: "GPCS-F05-home-life-area-light")
     }
 
-    func testGNCF08AccessibilityDynamicType() {
-        launch("gnc-f08")
-        assertReady([
-            "gnc-life-area-life-area.home",
-            "gnc-goal-goal.welcome-baby-home",
-            "gnc-linked-lens-goal.welcome-baby-home"
-        ])
+    func testGPCSF06FocusedGoalLight() {
+        launch("gnc-synthesis-focused-light")
+        assertReady(["gnc-focused-goal-title", "gnc-focused-current-truth"])
+        attachScreenshot(named: "GPCS-F06-focused-goal-light")
+    }
 
-        let action = element("gnc-open-goal")
-        for _ in 0 ..< 4 where action.isHittable == false {
-            app.swipeUp()
-        }
-        XCTAssertTrue(action.isHittable)
-        XCTAssertTrue(element("gnc-adaptive-navigation").exists)
-        attachScreenshot(named: "GNC-F08-accessibility-dynamic-type")
+    func testGPCSS01FocusedGoalAccessibility() {
+        launch("gnc-synthesis-focused-accessibility")
+        assertReady([
+            "gnc-focused-goal-title",
+            "gnc-focused-current-truth",
+            "gnc-focused-proof-disclosure"
+        ])
+        attachScreenshot(named: "GPCS-S01-focused-goal-accessibility")
+    }
+
+    func testGPCSS02FocusedGoalDisclosures() {
+        launch("gnc-synthesis-focused-dark")
+        let proof = element("gnc-focused-proof-disclosure")
+        let future = element("gnc-future-disclosure")
+        assertReady(["gnc-focused-proof-disclosure", "gnc-future-disclosure"])
+        proof.tap()
+        future.tap()
+        assertReady(["gnc-focused-proof", "gnc-future-possible", "gnc-open-relationship"])
+        attachScreenshot(named: "GPCS-S02-focused-goal-disclosures")
+    }
+
+    func testGPCSS03ReduceTransparencyRoot() {
+        launch("gnc-synthesis-root-reduce-transparency")
+        assertReady(["gnc-goals-heading", "gnc-life-area-life-area.home", "gnc-dock-peek"])
+        attachScreenshot(named: "GPCS-S03-reduce-transparency-root")
     }
 
     private func launch(_ variant: String) {

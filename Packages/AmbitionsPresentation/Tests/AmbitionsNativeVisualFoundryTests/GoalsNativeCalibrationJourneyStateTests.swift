@@ -4,65 +4,69 @@ import XCTest
 final class GoalsNativeCalibrationJourneyStateTests: XCTestCase {
     private let content = GoalsNativeCalibrationFixture.preparingForBaby
 
-    func testInitialStateExpandsOnlyHomeAndSelectsOneGoalWithoutRanking() {
+    func testInitialStateBeginsAtStrictLifeAreaRootWithoutMutation() {
         let state = GoalsNativeCalibrationJourneyState(content: content)
 
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
-        XCTAssertEqual(state.expandedLifeAreaIDs, ["life-area.home"])
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
         XCTAssertFalse(state.isLinkedLensExpanded)
         XCTAssertTrue(state.navigationPath.isEmpty)
-        XCTAssertEqual(state.focusAnchor, .selectedGoal)
+        XCTAssertEqual(state.focusAnchor, .lifeArea)
+        XCTAssertFalse(state.hasMutation)
     }
 
-    func testSelectingAnotherLifeAreaKeepsExactlyOneExpandedAndClearsGoalSelection() {
+    func testOpeningHomeCreatesCanonicalLifeAreaDepth() {
         var state = GoalsNativeCalibrationJourneyState(content: content)
 
-        XCTAssertTrue(state.selectLifeArea(id: "life-area.relationships"))
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
 
-        XCTAssertEqual(state.expandedLifeAreaIDs, ["life-area.relationships"])
-        XCTAssertNil(state.selectedGoalID)
-        XCTAssertFalse(state.isLinkedLensExpanded)
+        XCTAssertEqual(state.navigationPath, [.lifeArea(id: "life-area.home")])
+        XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.focusAnchor, .lifeArea)
+        XCTAssertFalse(state.hasMutation)
     }
 
-    func testSelectingGoalAndOpeningLensAreInspectionOnly() {
+    func testOpeningGoalRequiresHomeAndPreservesCanonicalParentPath() {
         var state = GoalsNativeCalibrationJourneyState(content: content)
         let originalContent = content
 
-        XCTAssertTrue(state.selectGoal(id: "goal.make-home-easier-to-run"))
-        XCTAssertEqual(state.selectedGoalID, "goal.make-home-easier-to-run")
-        XCTAssertFalse(state.isLinkedLensExpanded)
-
-        XCTAssertTrue(state.selectGoal(id: content.primaryGoal.id))
-        XCTAssertTrue(state.openLinkedLens())
-        XCTAssertTrue(state.isLinkedLensExpanded)
-        XCTAssertEqual(state.focusAnchor, .linkedLens)
-        XCTAssertEqual(content, originalContent)
-        XCTAssertFalse(state.hasMutation)
-    }
-
-    func testOpenGoalUsesTypedStableIdentityAndBackRestoresLens() {
-        var state = GoalsNativeCalibrationJourneyState(content: content)
-        XCTAssertTrue(state.openLinkedLens())
+        XCTAssertFalse(state.openSelectedGoal())
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
 
         XCTAssertTrue(state.openSelectedGoal())
-        XCTAssertEqual(state.navigationPath, [.focusedGoal(id: "goal.welcome-baby-home")])
+        XCTAssertEqual(
+            state.navigationPath,
+            [
+                .lifeArea(id: "life-area.home"),
+                .focusedGoal(id: "goal.welcome-baby-home")
+            ]
+        )
         XCTAssertEqual(state.focusAnchor, .focusedGoal)
         XCTAssertFalse(state.hasMutation)
+        XCTAssertEqual(content, originalContent)
+    }
 
-        state.reconcileNavigationPath([])
+    func testBackRestoresSelectedGoalThenHomeAtRoot() {
+        var state = GoalsNativeCalibrationJourneyState(content: content)
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
+        XCTAssertTrue(state.openSelectedGoal())
+
+        state.reconcileNavigationPath([.lifeArea(id: "life-area.home")])
+        XCTAssertEqual(state.focusAnchor, .selectedGoal)
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
-        XCTAssertTrue(state.isLinkedLensExpanded)
-        XCTAssertEqual(state.focusAnchor, .linkedLens)
+
+        state.reconcileNavigationPath([])
+        XCTAssertEqual(state.focusAnchor, .lifeArea)
+        XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
+        XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
+        XCTAssertFalse(state.hasMutation)
     }
 
     func testInvalidIdentitiesCannotCreateFixtureRoutes() {
         var state = GoalsNativeCalibrationJourneyState(content: content)
 
-        XCTAssertFalse(state.selectLifeArea(id: "life-area.unknown"))
-        XCTAssertFalse(state.selectGoal(id: "goal.unknown"))
+        XCTAssertFalse(state.openLifeArea(id: "life-area.unknown"))
         XCTAssertFalse(state.openSelectedGoal(id: "goal.unknown"))
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
@@ -74,12 +78,13 @@ final class GoalsNativeCalibrationJourneyStateTests: XCTestCase {
         var state = GoalsNativeCalibrationJourneyState(content: content)
         let canonicalContent = content
 
-        XCTAssertTrue(state.openLinkedLens())
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
         XCTAssertTrue(state.openSelectedGoal())
         XCTAssertTrue(state.openRelationship())
         XCTAssertEqual(
             state.navigationPath,
             [
+                .lifeArea(id: "life-area.home"),
                 .focusedGoal(id: "goal.welcome-baby-home"),
                 .relationship(
                     primaryGoalID: "goal.welcome-baby-home",
@@ -90,15 +95,17 @@ final class GoalsNativeCalibrationJourneyStateTests: XCTestCase {
         XCTAssertFalse(state.hasMutation)
         XCTAssertEqual(content, canonicalContent)
 
-        state.reconcileNavigationPath([.focusedGoal(id: "goal.welcome-baby-home")])
+        state.reconcileNavigationPath([
+            .lifeArea(id: "life-area.home"),
+            .focusedGoal(id: "goal.welcome-baby-home")
+        ])
         XCTAssertEqual(state.focusAnchor, .focusedGoal)
         XCTAssertFalse(state.hasMutation)
 
-        state.reconcileNavigationPath([])
+        state.reconcileNavigationPath([.lifeArea(id: "life-area.home")])
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
-        XCTAssertTrue(state.isLinkedLensExpanded)
-        XCTAssertEqual(state.focusAnchor, .linkedLens)
+        XCTAssertEqual(state.focusAnchor, .selectedGoal)
         XCTAssertFalse(state.hasMutation)
         XCTAssertEqual(content, canonicalContent)
     }

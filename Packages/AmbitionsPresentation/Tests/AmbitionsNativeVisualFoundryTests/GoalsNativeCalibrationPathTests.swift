@@ -27,24 +27,28 @@ final class GoalsNativeCalibrationPathTests: XCTestCase {
 
     func testOpeningPathAnchorsTheCurrentNodeAndBackRestoresGoalThenLens() {
         var state = GoalsNativeCalibrationJourneyState(content: content, lensExpanded: true)
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
         XCTAssertTrue(state.openSelectedGoal())
 
         XCTAssertTrue(state.openGoalPath())
         XCTAssertEqual(state.selectedPathNodeID, "goalpath-node.paint-wall")
         XCTAssertEqual(state.focusAnchor, .pathNode)
 
-        state.reconcileNavigationPath([.focusedGoal(id: "goal.welcome-baby-home")])
+        state.reconcileNavigationPath([
+            .lifeArea(id: "life-area.home"),
+            .focusedGoal(id: "goal.welcome-baby-home")
+        ])
         XCTAssertEqual(state.focusAnchor, .focusedGoal)
-        state.reconcileNavigationPath([])
+        state.reconcileNavigationPath([.lifeArea(id: "life-area.home")])
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
-        XCTAssertTrue(state.isLinkedLensExpanded)
-        XCTAssertEqual(state.focusAnchor, .linkedLens)
+        XCTAssertEqual(state.focusAnchor, .selectedGoal)
     }
 
     func testPathJumpControlsSelectExactFixtureNodesWithoutMutation() {
         var state = GoalsNativeCalibrationJourneyState(content: content, lensExpanded: true)
         let canonicalContent = content
+        XCTAssertTrue(state.openLifeArea(id: "life-area.home"))
         XCTAssertTrue(state.openSelectedGoal())
         XCTAssertTrue(state.openGoalPath())
 

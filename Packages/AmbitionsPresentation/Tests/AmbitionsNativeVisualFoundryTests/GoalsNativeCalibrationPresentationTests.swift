@@ -2,37 +2,41 @@ import XCTest
 @testable import AmbitionsNativeVisualFoundry
 
 final class GoalsNativeCalibrationPresentationTests: XCTestCase {
-    func testRootPresentationKeepsShellOwnershipAndOneAttachedLens() {
+    func testRootPresentationContainsOnlyLifeAreaIdentityAndShellOwnership() {
         let content = GoalsNativeCalibrationFixture.preparingForBaby
-        var state = GoalsNativeCalibrationJourneyState(content: content)
-        XCTAssertTrue(state.openLinkedLens())
-
-        let presentation = GoalsNativeCalibrationPresentation(
-            content: content,
-            state: state
-        )
+        let presentation = GoalsNativeCalibrationRootPresentation(content: content)
 
         XCTAssertEqual(presentation.accessibilityScreenHeading, "Goals")
         XCTAssertEqual(presentation.selectedRootTitle, "Goals")
         XCTAssertEqual(presentation.rootOrder, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(presentation.globalActions, ["Search", "Capture"])
-        XCTAssertEqual(presentation.expandedLifeAreaIDs, ["life-area.home"])
-        XCTAssertEqual(presentation.selectedGoalIDs, ["goal.welcome-baby-home"])
-        XCTAssertEqual(presentation.attachedLensGoalIDs, ["goal.welcome-baby-home"])
-        XCTAssertEqual(presentation.primaryActionTitle, "Open Goal")
+        XCTAssertEqual(
+            presentation.lifeAreaIDs,
+            ["life-area.home", "life-area.relationships", "life-area.career"]
+        )
+        XCTAssertFalse(presentation.visibleText.contains(content.primaryGoal.title))
+        XCTAssertFalse(presentation.visibleText.contains(content.primaryGoal.nextMeaningfulMovement))
     }
 
-    func testCollapsedRootDoesNotPretendTheLensIsVisible() {
+    func testHomePresentationContainsEachHomeGoalExactlyOnce() {
         let content = GoalsNativeCalibrationFixture.preparingForBaby
-        let state = GoalsNativeCalibrationJourneyState(content: content)
+        let presentation = GoalsNativeCalibrationHomePresentation(content: content)
 
-        let presentation = GoalsNativeCalibrationPresentation(
-            content: content,
-            state: state
+        XCTAssertEqual(presentation.lifeAreaID, "life-area.home")
+        XCTAssertEqual(presentation.lifeAreaTitle, "Home")
+        XCTAssertEqual(
+            presentation.goalIDs,
+            [
+                "goal.welcome-baby-home",
+                "goal.make-home-easier-to-run",
+                "goal.finish-essential-move-in-work"
+            ]
         )
-
-        XCTAssertTrue(presentation.attachedLensGoalIDs.isEmpty)
-        XCTAssertEqual(presentation.primaryActionTitle, "Show Linked Goal Lens")
+        XCTAssertEqual(
+            presentation.goalIDs.filter { $0 == "goal.welcome-baby-home" }.count,
+            1
+        )
+        XCTAssertEqual(presentation.supportedFocusedGoalIDs, ["goal.welcome-baby-home"])
     }
 
     func testFocusedGoalPresentationPreservesPursuitContinuity() {
@@ -62,6 +66,19 @@ final class GoalsNativeCalibrationPresentationTests: XCTestCase {
             "The next movement currently fits before protected family time."
         )
         XCTAssertEqual(presentation.pathActionTitle, "View Goal Path")
+        XCTAssertEqual(presentation.proofDisclosureTitle, "3 recorded moments")
+        XCTAssertEqual(
+            presentation.futurePostures.map(\.certainty),
+            [.possible, .conditional]
+        )
+        XCTAssertEqual(
+            presentation.futurePostures.map(\.title),
+            ["Assemble the crib.", "Arrange final furniture after delivery"]
+        )
+        XCTAssertEqual(
+            presentation.protectedRelationshipTitle,
+            "Protect our first weeks together"
+        )
     }
 
     func testRelationshipPresentationKeepsBothOwnersAndExactConsequence() {
