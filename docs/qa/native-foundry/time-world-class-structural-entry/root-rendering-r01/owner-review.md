@@ -2,9 +2,17 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_TIME_ROOT_SELECTION`
+Status: `REVIEWED_NONE_ADVANCE_UNCHANGED`
 
 Final Time direction selected: `false`
+
+R01 disposition:
+
+- D01: preserve root foundation only; do not advance the render unchanged.
+- D05: preserve dual-truth review model only; do not use it as the Week root.
+- D06: rejected; preserve no visual expression from the planner-binder anatomy.
+- Further generated Time rendering: stopped.
+- Next proof: measured native D07 prototype.
 
 Selected for this standalone root-rendering round:
 

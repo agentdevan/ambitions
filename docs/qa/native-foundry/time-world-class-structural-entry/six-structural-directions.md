@@ -4,7 +4,7 @@
 
 All six directions are subordinate explorations within `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`. They preserve `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`, use fixture `time-flagship/week/protected-family-and-launch/v1`, and stop before rendering or implementation.
 
-No final Time direction is selected. The owner selected D01, D05, and D06 for first-round standalone Week-root rendering; D02, D03, and D04 remain held. Every direction remains a subordinate research hypothesis until separately selected for further work.
+No final Time direction is selected. After R01 owner review, D01 survives only as the root foundation, D05 survives only as the review-depth model, and D06 is rejected. D07 is documented separately as an explicit synthesis rather than silently installed as a seventh original research direction.
 
 ## AVF-TIME-S07-INT-D01-R00
 

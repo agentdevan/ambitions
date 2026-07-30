@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-07-30",
+  "direction_id": "AVF-TIME-S07-INT-D07-R00",
+  "fixture_id": "time-flagship/week/protected-family-and-launch/v1",
+  "device": "VC14 iPhone 17 Pro Simulator",
+  "os": "iOS 26.5",
+  "xcode": "26.6 (17F113)",
+  "appearance": "dark",
+  "production_baseline": false,
+  "files": [
+    {
+      "file": "screenshots/D07-F01-week-root-dark.png",
+      "variant": "tnc-d07-week-root-dark",
+      "dynamic_type": "large",
+      "pixel_width": 1206,
+      "pixel_height": 2622,
+      "sha256": "0a6d671c1d65fa358b74ee39a6a41e21ae87d2d5b03b12e7016774a20e202438"
+    },
+    {
+      "file": "screenshots/D07-F02-focused-wednesday-dark.png",
+      "variant": "tnc-d07-focused-wednesday",
+      "dynamic_type": "large",
+      "pixel_width": 1206,
+      "pixel_height": 2622,
+      "sha256": "b8f218dc4a660c5bbdba6d3387ea2831271bd26702d80ce7e9e0427078c2f8c6"
+    },
+    {
+      "file": "screenshots/D07-F03-compact-object-detail-dark.png",
+      "variant": "tnc-d07-object-detail",
+      "dynamic_type": "large",
+      "pixel_width": 1206,
+      "pixel_height": 2622,
+      "sha256": "c0160407a93a3842534acad55205f9b8179d91fb51f50129eb7119d4f530c806"
+    },
+    {
+      "file": "screenshots/D07-F04-dual-truth-review-dark.png",
+      "variant": "tnc-d07-conflict-review",
+      "dynamic_type": "large",
+      "pixel_width": 1206,
+      "pixel_height": 2622,
+      "sha256": "4c95b7455be3129c5a6ceaf3bfc867161973a817ee0de81b67d94cd85bd9eea2"
+    },
+    {
+      "file": "screenshots/D07-A01-accessibility-chronology-dark.png",
+      "variant": "tnc-d07-accessibility-chronology",
+      "dynamic_type": "accessibility2",
+      "pixel_width": 1206,
+      "pixel_height": 2622,
+      "sha256": "78e7dcd78f02401c3c1b4272acc2aedb1128b9c01b975684cdafd89e6f464d04"
+    }
+  ]
+}

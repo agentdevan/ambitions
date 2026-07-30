@@ -2,7 +2,7 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_TIME_ROOT_SELECTION`
+Status: `SELECTED_FOR_SYNTHESIS`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -10,14 +10,21 @@ Installed closure: `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`
 
 ## Review boundary
 
-Exactly six text directions remain available as research. The owner selected D01, D05, and D06 only for first-round standalone Week-root rendering and held D02, D03, and D04. No final Time direction has been selected, installed as canon, implemented in SwiftUI, connected to runtime data, or approved for production work.
+None of the three R01 generated roots advances unchanged. D01 survives as the Week-root foundation, D05 survives as the review-depth model, and D06 is rejected. D07 is the explicit synthesis selected for one fixture-driven native prototype. No final Time direction has been selected, installed as canon, connected to runtime data, or approved for production work.
 
-The next owner decision is limited to:
+The next owner decision follows measured native proof and is limited to:
 
-- select one of the three rendered Time roots for the next expressly authorized step;
-- request a Time research revision;
-- request replacement Time directions; or
+- accept, revise, or reject the D07 native synthesis;
+- request a replacement structural synthesis; or
 - pause Time calibration.
+
+## R01 disposition
+
+| Direction | Score | Decision |
+| --- | ---: | --- |
+| D01 — Native Week Ledger | 2.8/5 | Preserve root foundation |
+| D05 — Dual-Truth Week Ledger | 3.2/5 | Reassign to review depth |
+| D06 — Articulated Period Atlas | 1.7/5 | Reject |
 
 ## Required owner checks
 
@@ -38,12 +45,14 @@ For every direction under consideration, verify:
 ## Authorization state
 
 - Final Time direction selected: `false`
-- Standalone root rendering selection: `D01`, `D05`, `D06`
-- Held directions: `D02`, `D03`, `D04`
-- Images authorized: `true`, limited to one standalone Dark-mode Week root per selected direction
-- Images generated: `true`, exactly three standalone Dark-mode Week roots in [root rendering R01](root-rendering-r01/README.md)
-- Time SwiftUI authorized: `false`
-- Time fixture implementation authorized: `false`
+- Root foundation: `D01`
+- Review-depth foundation: `D05`
+- Rejected: `D06`
+- Bounded synthesis: `AVF-TIME-S07-INT-D07-R00`
+- Further generated images authorized: `false`
+- Fixture-driven native prototype authorized: `true`, limited to the five D07 proof surfaces
+- Production Time SwiftUI authorized: `false`
+- Production Time fixture implementation authorized: `false`
 - Runtime integration authorized: `false`
 - Canon modification authorized: `false`
 - Broad reconstruction authorized: `false`
@@ -54,4 +63,4 @@ For every direction under consideration, verify:
 
 ## Proof ceiling
 
-The owner’s rendering selection authorizes only the bounded three-image comparison. It does not authorize SwiftUI, fixtures, routes, components, runtime mutation, source integration, final tokens, shell freeze, or production implementation.
+The owner authorizes prototype SwiftUI only inside the disconnected Native Visual Foundry fixture adapter for evaluation. This does not authorize production Time routes, runtime mutation, persistence, canonical Event/Schedule Placement integration, final tokens or components, shell freeze, or production implementation.

@@ -34,13 +34,26 @@ The original research commit added exactly these 19 files:
 
 The later owner correction modifies research fixture/review documents and adds the bounded [root-rendering-r01](root-rendering-r01/README.md) evidence subpacket. That follow-up remains inside the same non-normative QA root.
 
+The owner then selected the explicit D07 synthesis for a bounded native
+fixture-host proof. That follow-up adds only:
+
+- `TimeNativeCalibration*` fixture, journey, style, view, and measured timeline
+  files under `AmbitionsNativeVisualFoundry`;
+- focused fixture/journey tests;
+- a fixture-host route and five fixture variants;
+- focused D07 host UI tests;
+- the non-production D07 native evidence package under `docs/qa/evidence/`;
+- D07 disposition and evidence links in this research package.
+
 ## Explicit non-changes
 
-- No file outside this non-normative QA package is modified.
-- No Swift or test file is changed.
+- No production app, runtime, domain, persistence, adapter, or feature source is
+  modified.
 - No product/design canon is changed.
 - Goals evidence is unchanged.
-- No fixture code, route, component, project, generated project state, or runtime integration is added.
+- The only Swift and test changes are isolated native Foundry fixture-host
+  evidence; no production route or runtime integration is added.
+- `project.yml` is unchanged and no generated Xcode project state is committed.
 - The four pre-existing modified Xcode user-scheme files in the primary worktree remain outside this branch and untouched.
 
 The ending commit identifier is intentionally recorded in the final handoff rather than inside this self-referential committed file.

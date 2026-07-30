@@ -8,7 +8,7 @@ Fixture status: `IMMUTABLE_SYNTHETIC_RESEARCH_CONTRACT`
 
 Implementation status: `NOT_IMPLEMENTED`
 
-This fixture exists only to keep the six text directions semantically comparable. It is non-canon, non-production, disconnected from runtime data, and does not authorize fixture code, SwiftUI, mutation, or settlement. Owner correction on 2026-07-30 replaced the contradictory protected/open boundary before standalone root rendering.
+This research fixture exists only to keep the six text directions semantically comparable. It is non-canon, non-production, and disconnected from runtime data. This document alone does not authorize fixture code, SwiftUI, mutation, or settlement. Owner correction on 2026-07-30 replaced the contradictory protected/open boundary before standalone root rendering; the later D07 owner disposition separately authorized a bounded native fixture-host proof.
 
 ## Range and focus
 

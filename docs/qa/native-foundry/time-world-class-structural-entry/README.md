@@ -2,7 +2,7 @@
 
 # Time World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_TIME_ROOT_SELECTION`
+Status: `SELECTED_FOR_SYNTHESIS`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -12,18 +12,18 @@ Repository baseline: `4ced31dc9a9bd2c9a987ad7649eedd7bb1569b72`
 
 This is a non-normative research and structural-selection packet. It studies current native temporal products, reconciles the installed Time direction with canon and the current capability ceiling, and proposes exactly six materially different text directions.
 
-The owner corrected the protected/open fixture boundary and selected D01, D05, and D06 only for first-round standalone Week-root rendering. D02, D03, and D04 remain held. This does not select a final Time direction, implement Time, create production fixtures, modify canon, authorize SwiftUI/runtime work, or set `APPROVED_FOR_SWIFTUI` to true.
+The owner reviewed R01 and directed that none of its three generated roots advance unchanged. D01 survives only as the root foundation, D05 survives only as the dual-truth review-depth model, and D06 is rejected. D07 is an explicit bounded synthesis for native fixture evaluation. It is not a final Time direction, canon installation, production fixture, runtime integration, or `APPROVED_FOR_SWIFTUI = true`.
 
-## Owner rendering selection
+## Owner synthesis disposition
 
-- `AVF-TIME-S07-INT-D01-R00 — Native Week Ledger`: selected for standalone root rendering
-- `AVF-TIME-S07-INT-D05-R00 — Dual-Truth Week Ledger`: selected for standalone root rendering
-- `AVF-TIME-S07-INT-D06-R00 — Articulated Period Atlas`: selected for standalone root rendering
-- D02, D03, and D04: held
+- `AVF-TIME-S07-INT-D01-R00 — Native Week Ledger`: preserve root foundation only
+- `AVF-TIME-S07-INT-D05-R00 — Dual-Truth Week Ledger`: preserve review-depth model only
+- `AVF-TIME-S07-INT-D06-R00 — Articulated Period Atlas`: rejected
+- `AVF-TIME-S07-INT-D07-R00 — Native Week Passage with Dual-Truth Review`: selected for bounded fixture-driven native synthesis
 
-No direction becomes active automatically. The next owner decision compares the three standalone root renderings.
+No final Time direction becomes active automatically. Generated Time rendering stops at R01; exact geometry moves to native proof.
 
-## Proving slice held for a later packet
+## Bounded native proving slice
 
 ```text
 Week root / active period
@@ -34,7 +34,7 @@ Week root / active period
 → exact return to period, day, object, and focus
 ```
 
-The proposed accessibility equivalent is an ordered chronological passage or List, not a compressed miniature week.
+The accessibility equivalent is an ordered chronological passage, not a compressed miniature week.
 
 ## Package
 
@@ -57,7 +57,9 @@ The proposed accessibility equivalent is an ordered chronological passage or Lis
 17. [Reviewer findings](reviewer-findings.md)
 18. [Owner review](owner-review.md)
 19. [Standalone root rendering R01](root-rendering-r01/README.md)
+20. [D07 synthesis contract](d07-native-week-passage-synthesis.md)
+21. [D07 native evidence](../../evidence/2026-07-30-time-native-week-passage-d07/README.md)
 
 ## Proof ceiling
 
-This package proves a cited research corpus, an explicit capability boundary, a corrected synthetic research fixture, six traceable structural hypotheses, and a bounded three-root image comparison. Generated images are non-production visual hypotheses. They do not prove native visual quality, SwiftUI feasibility in a running app, accessibility behavior, direct-device interaction, runtime data, calendar replacement, mutation, settlement, restoration, or production readiness.
+This package proves a cited research corpus, an explicit capability boundary, a corrected synthetic research fixture, six traceable structural hypotheses, and a bounded three-root image comparison. The generated R01 images remain non-production visual hypotheses. The separately linked D07 fixture-host packet adds measured native geometry, framework navigation, focused UI interaction, and structural Dynamic Type evidence; it still does not prove physical-device accessibility, production runtime data, calendar replacement, mutation, durable settlement, final shell behavior, or production readiness.
