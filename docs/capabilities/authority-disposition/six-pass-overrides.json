@@ -1,0 +1,28 @@
+{
+  "authority": "non_normative_six_pass_disposition_overlay",
+  "overrides": [
+    {
+      "candidate_id": "CAP2-APPEAR-007",
+      "correct_hierarchy": "bounded top-level You expression capability with future subcapability proposals",
+      "implementation_status": "source_present_bounded_not_runtime_verified",
+      "owner_decision_required": false,
+      "primary_disposition": "authoritative_but_fragmented",
+      "rationale": "Current canon owns System, Light, Dark, approved accents, accessibility settings, persistence, reset, offline behavior, theme completeness, and semantic tokens. Current Swift source and focused evidence also contain a bounded Appearance Studio with object previews. Proposed material, density, adaptive preset, and private/shared styling behavior remains outside the current authority ceiling.",
+      "recommended_action": "Reconcile the existing bounded source behavior with SURFACE-YOU and the design-system standard. Freeze all broader Appearance expansion until separately specified and proven.",
+      "verification_status": "focused_source_and_test_evidence_present_not_reverified_by_this_audit"
+    },
+    {
+      "candidate_id": "CAP2-SEARCH-006",
+      "owner_decision_required": false,
+      "recommended_action": "Mandatory authority cleanup: amend GLOBAL-SEARCH to preserve deterministic Find, bounded Understand, owner-routed Act, and Inspect while removing conversational or chatbot Ask framing. Activate nothing."
+    },
+    {
+      "candidate_id": "CAP2-SIM-007",
+      "owner_decision_required": false,
+      "recommended_action": "Treat Alternate Career Path Simulation as a career-specific Life Branch application. No new owner, object family, root, or immediate specification is required until roadmap activation."
+    }
+  ],
+  "review_date": "2026-07-30",
+  "schema_version": 1,
+  "supersedes": "compounding-review-overrides.json"
+}
