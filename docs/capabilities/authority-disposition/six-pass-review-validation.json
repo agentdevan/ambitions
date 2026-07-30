@@ -1,0 +1,23 @@
+{
+  "authority": "non_normative_six_pass_review_validation",
+  "errors": [],
+  "is_valid": true,
+  "schema_version": 1,
+  "summary": {
+    "candidate_count": 112,
+    "disposition_counts": {
+      "already_authoritative": 56,
+      "authoritative_but_fragmented": 20,
+      "duplicate_or_alias": 3,
+      "enabling_system_or_mechanism": 14,
+      "genuine_specification_gap": 3,
+      "reject": 1,
+      "research_only_hypothesis": 5,
+      "valid_subcapability": 10
+    },
+    "domain_count": 14,
+    "genuine_gap_count": 3,
+    "owner_decision_count": 3,
+    "pass_count_total": 6
+  }
+}
