@@ -1,0 +1,57 @@
+{
+  "authority": "non_normative_six_pass_compounding_review",
+  "constitutional_amendment_required": false,
+  "genuine_specification_gap_ids": [
+    "CAP2-CAPTURE-007",
+    "CAP2-CTX-008",
+    "CAP2-SHARE-005"
+  ],
+  "mandatory_authority_repairs": [
+    "GLOBAL-SEARCH no-chatbot alignment",
+    "bounded Appearance Studio authority/source reconciliation"
+  ],
+  "new_normative_file_required_immediately": false,
+  "owner_decision_required_count": 3,
+  "owner_decision_required_ids": [
+    "CAP2-CAPTURE-007",
+    "CAP2-CTX-008",
+    "CAP2-SHARE-005"
+  ],
+  "parked_capabilities": [
+    "CAP2-SHARE-005"
+  ],
+  "passes": [
+    {
+      "changed_candidate_ids": [
+        "CAP2-APPEAR-007",
+        "CAP2-SEARCH-006",
+        "CAP2-SIM-007"
+      ],
+      "finding": "Current bounded Appearance Studio is source-present and partially authoritative; Search cleanup and career placement are not optional owner decisions.",
+      "name": "Source, Authority, and Proof Parity",
+      "pass_id": "PASS-4"
+    },
+    {
+      "finding": "Immediate work is limited to authority repair and Skill Transference; Capture is dependency-gated and Content Share Studio is parked.",
+      "name": "Product Value, Sequencing, and Opportunity Cost",
+      "pass_id": "PASS-5"
+    },
+    {
+      "finding": "Three genuine gaps and three owner decisions remain; all immediate work uses amendments to existing owners rather than a new canon layer.",
+      "name": "Minimal-Law Convergence",
+      "pass_id": "PASS-6"
+    }
+  ],
+  "review_date": "2026-07-30",
+  "revised_primary_disposition_counts": {
+    "already_authoritative": 56,
+    "authoritative_but_fragmented": 20,
+    "duplicate_or_alias": 3,
+    "enabling_system_or_mechanism": 14,
+    "genuine_specification_gap": 3,
+    "reject": 1,
+    "research_only_hypothesis": 5,
+    "valid_subcapability": 10
+  },
+  "schema_version": 1
+}
