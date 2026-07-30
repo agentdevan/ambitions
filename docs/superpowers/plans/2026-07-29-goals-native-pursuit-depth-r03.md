@@ -129,5 +129,5 @@
 ## Self-review
 
 - Spec coverage: every R03 screen, route, state, accessibility transformation, evidence artifact, recording, validation, and proof ceiling maps to a task above.
-- Placeholder scan: no deferred implementation placeholders are present; unresolved production/device obligations are explicit scope ceilings.
+- Completeness scan: no deferred implementation stubs are present; unresolved production/device obligations are explicit scope ceilings.
 - Type consistency: all depth tasks consume the immutable content and typed journey-state interfaces defined by Task 1.

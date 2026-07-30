@@ -1,0 +1,28 @@
+{
+  "production_baseline": false,
+  "capture_sha": "0c744ec28aef3164cb7905f2c5c1f6deedfd8e62",
+  "fixture_id": "goals-flagship/home/welcome-baby-home/v1",
+  "device": "B02 Recording iPhone 17 Pro Simulator",
+  "device_udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E",
+  "os": "iOS 26.5",
+  "xcode": "26.6 (17F113)",
+  "resolution_pixels": "1206x2622",
+  "status_bar_time": "9:41",
+  "content_size": "Large unless artifact name states Accessibility Dynamic Type",
+  "artifacts": [
+    {"id":"R03-F01","file":"screenshots/R03-F01-goal-path-dark.png","appearance":"Dark","sha256":"4e56478e1e0b035482bea102b17ffe8660bd2a991edc2e9f789c1a8e39011b1c"},
+    {"id":"R03-F02","file":"screenshots/R03-F02-goal-path-current-selection.png","appearance":"Dark","sha256":"4e56478e1e0b035482bea102b17ffe8660bd2a991edc2e9f789c1a8e39011b1c"},
+    {"id":"R03-F03","file":"screenshots/R03-F03-goal-path-future-selection.png","appearance":"Dark","sha256":"8250c4846e45ea5098cbb59e9cdd883c0b549bfffbb6883f3f5595433f39f997"},
+    {"id":"R03-F04","file":"screenshots/R03-F04-goal-path-light.png","appearance":"Light","sha256":"d61f0754f2f9901bbdaaa8d6c9752bac835ddb0a3182191840bf37ad0fbfeea8"},
+    {"id":"R03-F05","file":"screenshots/R03-F05-consequential-relationship.png","appearance":"Dark","sha256":"0c6df2eda68c6d274596d5e0e46d3dc7e20b2fc22312a641d681a99deddfa5c2"},
+    {"id":"R03-F06","file":"screenshots/R03-F06-recovery.png","appearance":"Dark","sha256":"8e368e75a035f0137da6e5d35b4a94714f1d86c15e2f8e71f6877a6a21a2692c"},
+    {"id":"R03-F07","file":"screenshots/R03-F07-closure.png","appearance":"Dark","sha256":"2ac1be5e0851bc954ddfd6e71ce79d1de1c8023f3493d8a1b9cd55acea5d9fa1"},
+    {"id":"R03-F08","file":"screenshots/R03-F08-closure-history.png","appearance":"Dark","sha256":"c9884ac963a99863e7cd80bd14ce5e3f1bbf29bbdcaa1e4b097029e94c70afd7"},
+    {"id":"R03-A01","file":"screenshots/R03-A01-path-accessibility-dynamic-type.png","appearance":"Dark","content_size":"Accessibility 2","sha256":"4b8523a0545985c65da84a8c0e692a690cf48cba36a3dc6152c628a8468d9468"},
+    {"id":"R03-A02","file":"screenshots/R03-A02-relationship-accessibility-dynamic-type.png","appearance":"Dark","content_size":"Accessibility 2","sha256":"3441b43bc533f7260f25df2fc8d50c7edc146aaf320ca2d221af1b40eea16bf6"},
+    {"id":"R03-A03","file":"screenshots/R03-A03-reduce-transparency.png","appearance":"Dark","settings":["Reduce Transparency"],"sha256":"4e56478e1e0b035482bea102b17ffe8660bd2a991edc2e9f789c1a8e39011b1c"},
+    {"id":"R03-A04","file":"screenshots/R03-A04-increased-contrast-differentiate-without-color.png","appearance":"Dark","settings":["Increase Contrast","Differentiate Without Color"],"sha256":"2f9ef6e6158074beb451e73f513c54a63c9eb873cb7a861f72fd677d8d05b8bc"},
+    {"id":"R03-R01","file":"screenshots/R03-R01-returned-focused-goal.png","appearance":"Dark","sha256":"6c739713a664a7af03da8aa2910b97e82dcada460b310dc8f917b7b1a235ddc9"},
+    {"id":"R03-R02","file":"screenshots/R03-R02-r02-protected-screens-comparison.png","appearance":"Dark","sha256":"813d345dbcc06111c6c2efae0bfa46c3699213326a354ba7a2ca8adadcef741f"}
+  ]
+}

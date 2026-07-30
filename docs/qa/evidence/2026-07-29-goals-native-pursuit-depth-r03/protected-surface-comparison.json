@@ -1,0 +1,11 @@
+{
+  "baseline_sha": "d3c99c8b287d0aa98fc83c17e4d4f8b77d3c8b9d",
+  "final_capture_sha": "0c744ec28aef3164cb7905f2c5c1f6deedfd8e62",
+  "result": "NO_MATERIAL_CONTENT_REGRESSION",
+  "comparisons": [
+    {"surface":"Goals root","baseline_sha256":"556ff3b3ab1b819a15b7a2239bcdd2c54786384d8dd8adaa0f4467efffbd398d","final_sha256":"27a6af623aab6aef0c1cdd5046d5275ba843cb18bb1e9418faf44b079dd24fed","absolute_error_ratio":0.0117149},
+    {"surface":"Home","baseline_sha256":"d594a1439b514948c14a943c9b5437afe3f5af072e5c9bdb2a8af54d99209799","final_sha256":"dc67efd42c5e63f5e4233532d619d9b65a110b3455972dd02334ae254492a1c5","absolute_error_ratio":0.0119271},
+    {"surface":"Focused Goal","baseline_sha256":"db13dd2765fcec3383e2691d444a67c390d67c4e845106b10210fdb1cd8f1429","final_sha256":"6c739713a664a7af03da8aa2910b97e82dcada460b310dc8f917b7b1a235ddc9","absolute_error_ratio":0.0119271}
+  ],
+  "variance_note": "Final capture waited for framework navigation chrome to settle. Content anatomy is visually unchanged; native Back affordances account for the principal comparison variance."
+}

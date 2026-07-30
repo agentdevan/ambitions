@@ -1,0 +1,9 @@
+{
+  "production_baseline": false,
+  "capture_sha": "0c744ec28aef3164cb7905f2c5c1f6deedfd8e62",
+  "artifacts": [
+    {"id":"R03-C01","file":"contact-sheets/R03-C01-full-depth-matrix.png","dimensions":"1204x1308","source_frames":["R03-F01","R03-F02","R03-F03","R03-F04","R03-F05","R03-F06","R03-F07","R03-F08"],"sha256":"300249036dbab270025706d1bd81ceda3406419b5779cf853930b0ce6fe2c5e2"},
+    {"id":"R03-C02","file":"contact-sheets/R03-C02-accessibility-and-return.png","dimensions":"903x1310","source_frames":["R03-A01","R03-A02","R03-A03","R03-A04","R03-R01"],"sha256":"b9ee1847f0d10a17a06dbcfdafd4d7a58d36d6a228e623f4188522e4efda1e74"},
+    {"id":"R03-C03","file":"contact-sheets/R03-C03-r02-protected-surface-comparison.png","dimensions":"903x1308","source_frames":["protected baseline Goals root","protected baseline Home","protected baseline focused Goal","protected final Goals root","protected final Home","protected final focused Goal"],"sha256":"813d345dbcc06111c6c2efae0bfa46c3699213326a354ba7a2ca8adadcef741f"}
+  ]
+}
