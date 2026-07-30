@@ -2,7 +2,7 @@
 
 # Time World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_TIME_STRUCTURAL_DIRECTION_SELECTION`
+Status: `READY_FOR_OWNER_TIME_ROOT_SELECTION`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -10,20 +10,18 @@ Installed Time closure: `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passag
 
 Repository baseline: `4ced31dc9a9bd2c9a987ad7649eedd7bb1569b72`
 
-This is a non-normative research and structural-selection packet. It studies current native temporal products, reconciles the installed Time direction with canon and the current capability ceiling, proposes exactly six materially different text directions, and stops for owner selection.
+This is a non-normative research and structural-selection packet. It studies current native temporal products, reconciles the installed Time direction with canon and the current capability ceiling, and proposes exactly six materially different text directions.
 
-It does not implement Time, select a direction, create production fixtures, modify canon, authorize rendering, generate images, or set `APPROVED_FOR_SWIFTUI` to true.
+The owner corrected the protected/open fixture boundary and selected D01, D05, and D06 only for first-round standalone Week-root rendering. D02, D03, and D04 remain held. This does not select a final Time direction, implement Time, create production fixtures, modify canon, authorize SwiftUI/runtime work, or set `APPROVED_FOR_SWIFTUI` to true.
 
-## Decision boundary
+## Owner rendering selection
 
-The next bounded decision is one of:
+- `AVF-TIME-S07-INT-D01-R00 — Native Week Ledger`: selected for standalone root rendering
+- `AVF-TIME-S07-INT-D05-R00 — Dual-Truth Week Ledger`: selected for standalone root rendering
+- `AVF-TIME-S07-INT-D06-R00 — Articulated Period Atlas`: selected for standalone root rendering
+- D02, D03, and D04: held
 
-- select Time directions for standalone rendering;
-- request a Time research revision;
-- request replacement Time directions; or
-- pause Time calibration.
-
-No direction becomes active automatically. All six remain subordinate explorations under `AVF-TIME-S07-R01`.
+No direction becomes active automatically. The next owner decision compares the three standalone root renderings.
 
 ## Proving slice held for a later packet
 
@@ -58,7 +56,8 @@ The proposed accessibility equivalent is an ordered chronological passage or Lis
 16. [Changed files](changed-files.md)
 17. [Reviewer findings](reviewer-findings.md)
 18. [Owner review](owner-review.md)
+19. [Standalone root rendering R01](root-rendering-r01/README.md)
 
 ## Proof ceiling
 
-This package proves a cited research corpus, an explicit capability boundary, a stable synthetic research fixture, six traceable structural hypotheses, and a neutral owner-selection comparison. It does not prove native visual quality, SwiftUI feasibility in a running app, accessibility behavior, direct-device interaction, runtime data, calendar replacement, mutation, settlement, restoration, or production readiness.
+This package proves a cited research corpus, an explicit capability boundary, a corrected synthetic research fixture, six traceable structural hypotheses, and a bounded three-root image comparison. Generated images are non-production visual hypotheses. They do not prove native visual quality, SwiftUI feasibility in a running app, accessibility behavior, direct-device interaction, runtime data, calendar replacement, mutation, settlement, restoration, or production readiness.

@@ -10,7 +10,7 @@
 - Changed root: `docs/qa/native-foundry/time-world-class-structural-entry/`
 - Package classification: non-normative research and owner-selection evidence
 
-The packet adds exactly these 19 files:
+The original research commit added exactly these 19 files:
 
 1. `README.md`
 2. `research-method.md`
@@ -32,9 +32,11 @@ The packet adds exactly these 19 files:
 18. `reviewer-findings.md`
 19. `owner-review.md`
 
+The later owner correction modifies research fixture/review documents and adds the bounded [root-rendering-r01](root-rendering-r01/README.md) evidence subpacket. That follow-up remains inside the same non-normative QA root.
+
 ## Explicit non-changes
 
-- No existing file is modified.
+- No file outside this non-normative QA package is modified.
 - No Swift or test file is changed.
 - No product/design canon is changed.
 - Goals evidence is unchanged.

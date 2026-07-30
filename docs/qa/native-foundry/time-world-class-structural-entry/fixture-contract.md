@@ -8,7 +8,7 @@ Fixture status: `IMMUTABLE_SYNTHETIC_RESEARCH_CONTRACT`
 
 Implementation status: `NOT_IMPLEMENTED`
 
-This fixture exists only to keep the six text directions semantically comparable. It is non-canon, non-production, disconnected from runtime data, and does not authorize fixture code, SwiftUI, mutation, screenshots, or settlement.
+This fixture exists only to keep the six text directions semantically comparable. It is non-canon, non-production, disconnected from runtime data, and does not authorize fixture code, SwiftUI, mutation, or settlement. Owner correction on 2026-07-30 replaced the contradictory protected/open boundary before standalone root rendering.
 
 ## Range and focus
 
@@ -31,7 +31,7 @@ This fixture exists only to keep the six text directions semantically comparable
 
 - ID: `placement.family-time.wed-1730`
 - Title: `Family time`
-- Time: `Wednesday · 5:30–7:30 PM`
+- Time: `Wednesday · 5:30–6:30 PM`
 - State: `Accepted · Protected`
 - Meaning: `No work`
 
@@ -42,7 +42,7 @@ This fixture exists only to keep the six text directions semantically comparable
 - State: `Open`
 - Meaning: `Available calendar space; personal usability is not automatically inferred.`
 
-The overlap between the open-calendar observation beginning at 6:30 PM and protected family time ending at 7:30 PM is intentional: calendar openness and personal usability are different truths. No direction may turn the opening into a recommendation or erase the protected interval.
+The boundary is exact: protected family time ends at 6:30 PM and the open-calendar observation begins after 6:30 PM. Open calendar space remains observational and does not establish personal usability or recommend work.
 
 ## External observation
 
@@ -68,7 +68,7 @@ No viewport, detail, accessibility label, legend, material, fill, or motion may 
 ## Conflict-review fixture
 
 - Proposed change: `Move launch review to Wednesday · 5:45–6:15 PM`
-- Current truth: `Family time remains protected from 5:30–7:30 PM.`
+- Current truth: `Family time remains protected from 5:30–6:30 PM.`
 - Consequence: `The proposed change would consume protected family time.`
 - Participants: the proposed launch-review placement and accepted protected family-time placement
 - Current authority: protected family time remains accepted and unchanged throughout preview
@@ -79,7 +79,7 @@ The conflict-review fixture is a distinct scenario from `Send the launch brief`.
 
 The review must therefore state only the supplied facts:
 
-- `Current`: Family time remains accepted and protected from 5:30–7:30 PM.
+- `Current`: Family time remains accepted and protected from 5:30–6:30 PM.
 - `Current launch-review placement`: not specified by this research fixture.
 - `Proposed`: launch review at 5:45–6:15 PM.
 - `Consequence`: the proposed interval would consume protected family time.

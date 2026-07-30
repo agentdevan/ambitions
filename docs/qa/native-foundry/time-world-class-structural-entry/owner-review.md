@@ -2,7 +2,7 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_TIME_STRUCTURAL_DIRECTION_SELECTION`
+Status: `READY_FOR_OWNER_TIME_ROOT_SELECTION`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -10,11 +10,11 @@ Installed closure: `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`
 
 ## Review boundary
 
-Exactly six text directions are ready for neutral structural review. No direction has been selected, rendered, installed as canon, implemented in SwiftUI, connected to runtime data, or approved for production work.
+Exactly six text directions remain available as research. The owner selected D01, D05, and D06 only for first-round standalone Week-root rendering and held D02, D03, and D04. No final Time direction has been selected, installed as canon, implemented in SwiftUI, connected to runtime data, or approved for production work.
 
-The owner decision is limited to:
+The next owner decision is limited to:
 
-- select one or more Time directions for standalone rendering;
+- select one of the three rendered Time roots for the next expressly authorized step;
 - request a Time research revision;
 - request replacement Time directions; or
 - pause Time calibration.
@@ -37,8 +37,11 @@ For every direction under consideration, verify:
 
 ## Authorization state
 
-- Time direction selected: `false`
-- Images authorized or generated: `false`
+- Final Time direction selected: `false`
+- Standalone root rendering selection: `D01`, `D05`, `D06`
+- Held directions: `D02`, `D03`, `D04`
+- Images authorized: `true`, limited to one standalone Dark-mode Week root per selected direction
+- Images generated: `true`, exactly three standalone Dark-mode Week roots in [root rendering R01](root-rendering-r01/README.md)
 - Time SwiftUI authorized: `false`
 - Time fixture implementation authorized: `false`
 - Runtime integration authorized: `false`
@@ -51,4 +54,4 @@ For every direction under consideration, verify:
 
 ## Proof ceiling
 
-Owner selection would authorize only the next expressly selected standalone rendering packet. It would not by itself authorize SwiftUI, fixtures, routes, components, runtime mutation, source integration, final tokens, shell freeze, or production implementation.
+The owner’s rendering selection authorizes only the bounded three-image comparison. It does not authorize SwiftUI, fixtures, routes, components, runtime mutation, source integration, final tokens, shell freeze, or production implementation.

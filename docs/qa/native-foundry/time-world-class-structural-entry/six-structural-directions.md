@@ -4,7 +4,7 @@
 
 All six directions are subordinate explorations within `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`. They preserve `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`, use fixture `time-flagship/week/protected-family-and-launch/v1`, and stop before rendering or implementation.
 
-No direction is selected. Every direction must generate Week, focused Wednesday, compact object detail, current/proposed review, cancel or fixture-only settlement, exact return, and an Accessibility Dynamic Type semantic equivalent.
+No final Time direction is selected. The owner selected D01, D05, and D06 for first-round standalone Week-root rendering; D02, D03, and D04 remain held. Every direction remains a subordinate research hypothesis until separately selected for further work.
 
 ## AVF-TIME-S07-INT-D01-R00
 
@@ -30,7 +30,7 @@ No direction is selected. Every direction must generate Week, focused Wednesday,
 - **Flexible treatment:** A named `Flexible` range/window with bounded alternative affordance only at detail; it does not float or imply automatic movement.
 - **Open-capacity treatment:** Empty chronology remains mostly empty. The named `After 6:30 PM · Open calendar space · Personal usability unknown` observation appears at day depth, not as a green fill or invitation.
 - **Conflict treatment:** Conflicting current/proposed ranges show a localized discontinuity and both participant labels. Red may reinforce but never explains the conflict. The first consequence says the move would consume protected family time.
-- **Current/proposed review:** A focused vertical comparison shows `Current` Family time at 5:30–7:30 PM and explicitly says the fixture does not specify launch review’s current placement; proposed 5:45–6:15 PM follows with consequence and valid outcomes. It never aliases launch review to the launch brief.
+- **Current/proposed review:** A focused vertical comparison shows `Current` Family time at 5:30–6:30 PM and explicitly says the fixture does not specify launch review’s current placement; proposed 5:45–6:15 PM follows with consequence and valid outcomes. It never aliases launch review to the launch brief.
 - **Settlement and return:** `Cancel` or `Keep current time` dismisses to Wednesday and restores the originating conflict-review trigger/focus and original week excerpt. The separate compact-detail dismissal restores `Send the launch brief`; fixture-only alternative inspection returns without commit or Receipt.
 - **Goal/Step context:** Goal and Step identity appear in object detail or proposal review; they never turn the Week into a Goal plan or mark computed Goal timing accepted.
 - **Density strategy:** Increase visible-day focus, collision grouping, minimum block targets, overflow count, and detail/List depth before shrinking type. Very dense days may show exact time plus identity stub and a named `N more` entry.
