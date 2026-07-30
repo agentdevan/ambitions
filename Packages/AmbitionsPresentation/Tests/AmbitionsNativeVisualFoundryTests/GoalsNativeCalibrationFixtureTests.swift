@@ -84,17 +84,17 @@ final class GoalsNativeCalibrationFixtureTests: XCTestCase {
         XCTAssertEqual(content.goalPath.id, "goalpath.welcome-baby-home.v1")
         XCTAssertEqual(content.goalPath.nodes.count, 8)
         XCTAssertEqual(content.goalPath.nodes.map(\.id), [
-            "goalpath-node.define-ready",
-            "goalpath-node.clear-crib-corner",
-            "goalpath-node.prime-wall",
-            "goalpath-node.paint-wall",
-            "goalpath-node.assemble-crib",
-            "goalpath-node.changing-station",
-            "goalpath-node.final-furniture",
-            "goalpath-node.nursery-ready"
+            "pathnode.define-ready",
+            "pathnode.clear-crib-corner",
+            "pathnode.prime-wall-color",
+            "pathnode.paint-wall",
+            "pathnode.assemble-crib",
+            "pathnode.changing-station",
+            "pathnode.final-furniture",
+            "pathnode.nursery-ready"
         ])
-        XCTAssertEqual(content.goalPath.currentNodeID, "goalpath-node.paint-wall")
-        XCTAssertEqual(content.goalPath.nextNodeID, "goalpath-node.assemble-crib")
+        XCTAssertEqual(content.goalPath.currentNodeID, "pathnode.paint-wall")
+        XCTAssertEqual(content.goalPath.nextNodeID, "pathnode.assemble-crib")
     }
 
     func testVisibleFixtureContentDoesNotLeakTodayOrGamificationGrammar() {

@@ -37,7 +37,7 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Home"].exists)
     }
 
-    func testHomeGoalOpensFocusedDepthAndInteractiveBackRestoresSelection() {
+    func testHomeGoalOpensFocusedDepthAndNativeBackRestoresSelection() {
         launch("gnc-synthesis-home-dark")
 
         let primary = element("gnc-home-goal-goal.welcome-baby-home")
@@ -62,7 +62,9 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
             "Welcome our baby home"
         )
 
-        app.swipeRight()
+        let focusedBack = app.navigationBars["Welcome our baby home"].buttons.firstMatch
+        XCTAssertTrue(focusedBack.exists)
+        focusedBack.tap()
         XCTAssertTrue(primary.waitForExistence(timeout: 5))
         XCTAssertTrue((primary.value as? String)?.contains("Selected Goal") == true)
         XCTAssertTrue((primary.value as? String)?.contains("Current movement") == true)
@@ -133,10 +135,10 @@ final class GoalsNativeCalibrationHostUITests: XCTestCase {
         ])
 
         movement.tap()
-        XCTAssertTrue(element("gnc-goal-path").waitForExistence(timeout: 5))
+        XCTAssertTrue(element("gnc-r03-path").waitForExistence(timeout: 5))
         XCTAssertEqual(
-            element("gnc-path-node-goalpath-node.paint-wall").value as? String,
-            "Current, selected"
+            element("gnc-r03-path-selected-node").label,
+            "Paint the nursery wall"
         )
     }
 

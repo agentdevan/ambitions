@@ -9,14 +9,14 @@ final class GoalsNativeCalibrationPathTests: XCTestCase {
         XCTAssertEqual(
             content.goalPath.nodes.map(\.id),
             [
-                "goalpath-node.define-ready",
-                "goalpath-node.clear-crib-corner",
-                "goalpath-node.prime-wall",
-                "goalpath-node.paint-wall",
-                "goalpath-node.assemble-crib",
-                "goalpath-node.changing-station",
-                "goalpath-node.final-furniture",
-                "goalpath-node.nursery-ready"
+                "pathnode.define-ready",
+                "pathnode.clear-crib-corner",
+                "pathnode.prime-wall-color",
+                "pathnode.paint-wall",
+                "pathnode.assemble-crib",
+                "pathnode.changing-station",
+                "pathnode.final-furniture",
+                "pathnode.nursery-ready"
             ]
         )
         XCTAssertEqual(
@@ -31,14 +31,14 @@ final class GoalsNativeCalibrationPathTests: XCTestCase {
         XCTAssertTrue(state.openSelectedGoal())
 
         XCTAssertTrue(state.openGoalPath())
-        XCTAssertEqual(state.selectedPathNodeID, "goalpath-node.paint-wall")
+        XCTAssertEqual(state.selectedPathNodeID, "pathnode.paint-wall")
         XCTAssertEqual(state.focusAnchor, .pathNode)
 
         state.reconcileNavigationPath([
             .lifeArea(id: "life-area.home"),
             .focusedGoal(id: "goal.welcome-baby-home")
         ])
-        XCTAssertEqual(state.focusAnchor, .focusedGoal)
+        XCTAssertEqual(state.focusAnchor, .currentMovement)
         state.reconcileNavigationPath([.lifeArea(id: "life-area.home")])
         XCTAssertEqual(state.selectedLifeAreaID, "life-area.home")
         XCTAssertEqual(state.selectedGoalID, "goal.welcome-baby-home")
@@ -53,10 +53,10 @@ final class GoalsNativeCalibrationPathTests: XCTestCase {
         XCTAssertTrue(state.openGoalPath())
 
         let expected: [(GoalsNativeCalibrationPathJump, String)] = [
-            (.start, "goalpath-node.define-ready"),
-            (.now, "goalpath-node.paint-wall"),
-            (.next, "goalpath-node.assemble-crib"),
-            (.finish, "goalpath-node.nursery-ready")
+            (.start, "pathnode.define-ready"),
+            (.now, "pathnode.paint-wall"),
+            (.next, "pathnode.assemble-crib"),
+            (.finish, "pathnode.nursery-ready")
         ]
 
         for (jump, nodeID) in expected {
@@ -75,8 +75,8 @@ final class GoalsNativeCalibrationPathTests: XCTestCase {
         XCTAssertEqual(presentation.goalID, "goal.welcome-baby-home")
         XCTAssertEqual(presentation.goalTitle, "Welcome our baby home")
         XCTAssertEqual(presentation.lifeAreaTitle, "Home")
-        XCTAssertEqual(presentation.currentNodeID, "goalpath-node.paint-wall")
-        XCTAssertEqual(presentation.nextNodeID, "goalpath-node.assemble-crib")
+        XCTAssertEqual(presentation.currentNodeID, "pathnode.paint-wall")
+        XCTAssertEqual(presentation.nextNodeID, "pathnode.assemble-crib")
         XCTAssertEqual(presentation.nodes.count, 8)
         XCTAssertEqual(presentation.jumpTitles, ["Start", "Now", "Next", "Finish"])
         XCTAssertEqual(

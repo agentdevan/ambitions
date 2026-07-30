@@ -1,0 +1,18 @@
+{
+  "production_baseline": false,
+  "capture_sha": "0c744ec28aef3164cb7905f2c5c1f6deedfd8e62",
+  "fixture_id": "goals-flagship/home/welcome-baby-home/v1",
+  "device": "B02 Recording iPhone 17 Pro Simulator",
+  "device_udid": "396F4B4A-2DAD-4345-B26E-ABD2EF69BF5E",
+  "os": "iOS 26.5",
+  "appearance": "Dark",
+  "content_size": "Large",
+  "accessibility_settings": [],
+  "artifacts": [
+    {"id":"R03-J01","title":"Path and relationship","file":"recordings/R03-J01-path-and-relationship.mov","duration_seconds":8.0,"size_bytes":1576791,"resolution_pixels":"1206x2622","semantic_frames":8,"sha256":"5c99eb0471e4098b04d9b7e93352a976d88ea4bcbefbf9e02236e8b5bdaa8369"},
+    {"id":"R03-J02","title":"Recovery and closure","file":"recordings/R03-J02-recovery-and-closure.mov","duration_seconds":9.0,"size_bytes":1870009,"resolution_pixels":"1206x2622","semantic_frames":9,"sha256":"a56749f9f61cfa899e558993c5e8fca6242ff7f87c3aabe37d616e09d390e28f"}
+  ],
+  "capture_method": "Deterministic XCUI tap journeys retained one XCUIScreen frame at each asserted semantic state; those native frames were encoded in order as H.264 MOV evidence.",
+  "behavioral_proof": "The corresponding XCUI run executed 2 tests with 0 failures. The clips prove state order and return targets; they do not claim raw transition timing or physical-device haptics.",
+  "note": "The Xcode 26 UI-automation surface was not exposed through the base Simulator framebuffer used by simctl recordVideo, so raw framebuffer attempts were rejected after frame sampling showed they did not contain the automation journey."
+}

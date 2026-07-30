@@ -1,18 +1,27 @@
 import SwiftUI
 
+public enum GoalsNativeCalibrationDepthEntryMode: Equatable, Sendable {
+    case active
+    case recovery
+    case closure
+}
+
 public struct GoalsNativeCalibrationView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let content: GoalsNativeCalibrationContent
+    private let depthEntryMode: GoalsNativeCalibrationDepthEntryMode
     @Binding private var state: GoalsNativeCalibrationJourneyState
 
     public init(
         content: GoalsNativeCalibrationContent,
-        state: Binding<GoalsNativeCalibrationJourneyState>
+        state: Binding<GoalsNativeCalibrationJourneyState>,
+        depthEntryMode: GoalsNativeCalibrationDepthEntryMode = .active
     ) {
         self.content = content
+        self.depthEntryMode = depthEntryMode
         _state = state
     }
 
@@ -60,7 +69,8 @@ public struct GoalsNativeCalibrationView: View {
             GoalsNativeCalibrationFocusedGoalView(
                 content: content,
                 state: $state,
-                palette: palette
+                palette: palette,
+                depthEntryMode: depthEntryMode
             )
         case let .relationship(primaryGoalID, relatedGoalID)
             where primaryGoalID == content.relationship.primaryGoalID
@@ -75,9 +85,44 @@ public struct GoalsNativeCalibrationView: View {
                 state: $state,
                 palette: palette
             )
+        case let .pathEvidence(pathID, nodeID)
+            where pathID == content.goalPath.id
+                && content.goalPath.node(id: nodeID) != nil:
+            GoalsNativeCalibrationPathEvidenceView(
+                content: content,
+                nodeID: nodeID,
+                palette: palette
+            )
+        case let .recovery(id) where id == content.recovery.id:
+            GoalsNativeCalibrationRecoveryView(
+                content: content,
+                palette: palette,
+                reviewCurrentPath: { _ = state.openRecoveryPath() },
+                inspectPossibleNext: { _ = state.inspectPossibleNext() },
+                keepUnresolved: { _ = state.keepRecoveryUnresolved() }
+            )
+        case let .closure(id) where id == content.closure.id:
+            GoalsNativeCalibrationClosureView(
+                content: content,
+                palette: palette,
+                viewHistory: { _ = state.openClosureHistory() },
+                returnToGoal: { state.reconcileNavigationPath(focusedGoalPath) }
+            )
+        case let .closureHistory(id) where id == content.closure.id:
+            GoalsNativeCalibrationClosureHistoryView(
+                content: content,
+                palette: palette
+            )
         default:
             EmptyView()
         }
+    }
+
+    private var focusedGoalPath: [GoalsNativeCalibrationRoute] {
+        [
+            .lifeArea(id: content.primaryGoal.lifeAreaID),
+            .focusedGoal(id: content.primaryGoal.id)
+        ]
     }
 }
 

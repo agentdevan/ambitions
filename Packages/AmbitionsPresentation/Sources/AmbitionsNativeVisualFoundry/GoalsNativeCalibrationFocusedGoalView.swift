@@ -98,6 +98,9 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
 
     @State private var isProofExpanded = false
     @State private var isFutureExpanded = false
+    @AccessibilityFocusState private var accessibilityFocus: GoalsNativeCalibrationFocusAnchor?
+
+    let depthEntryMode: GoalsNativeCalibrationDepthEntryMode
 
     private var presentation: GoalsNativeCalibrationFocusedGoalPresentation {
         GoalsNativeCalibrationFocusedGoalPresentation(content: content)
@@ -111,6 +114,8 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
                 acceptedTruth
                 currentMovement
                     .padding(.top, 20)
+                depthEntry
+                    .padding(.top, depthEntryMode == .active ? 0 : 14)
                 futureField
                     .padding(.top, 24)
             }
@@ -124,6 +129,10 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
         .goalsNativeCalibrationDepthNavigation(title: presentation.goalTitle)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("gnc-focused-goal")
+        .onAppear(perform: restoreAccessibilityFocus)
+        .onChange(of: state.focusAnchor) { _, _ in
+            restoreAccessibilityFocus()
+        }
     }
 
     private var identity: some View {
@@ -311,6 +320,71 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
         .accessibilityValue("Primary operation")
         .accessibilityHint("Opens Goal Path")
         .accessibilityIdentifier("gnc-current-movement-path")
+        .accessibilityFocused($accessibilityFocus, equals: .currentMovement)
+    }
+
+    @ViewBuilder
+    private var depthEntry: some View {
+        switch depthEntryMode {
+        case .active:
+            EmptyView()
+        case .recovery:
+            NavigationLink(value: GoalsNativeCalibrationRoute.recovery(id: content.recovery.id)) {
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: "pause.circle")
+                        .font(.title3.weight(.medium))
+                        .foregroundStyle(palette.secondaryInk)
+                        .frame(width: 28, height: 44)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Current movement interrupted")
+                            .font(.body.weight(.semibold))
+                        Text(content.recovery.interruptionFact)
+                            .font(.subheadline)
+                            .foregroundStyle(palette.secondaryInk)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 8)
+                    Image(systemName: "chevron.forward")
+                        .foregroundStyle(palette.tertiaryInk)
+                        .frame(width: 20, height: 44)
+                        .accessibilityHidden(true)
+                }
+                .frame(maxWidth: .infinity, minHeight: 64, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Inspects retained truth and recovery choices")
+            .accessibilityIdentifier("gnc-r03-recovery-entry")
+            .accessibilityFocused($accessibilityFocus, equals: .recoveryEntry)
+        case .closure:
+            NavigationLink(value: GoalsNativeCalibrationRoute.closure(id: content.closure.id)) {
+                HStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "circle.circle")
+                        .font(.title3.weight(.medium))
+                        .foregroundStyle(palette.secondaryInk)
+                        .frame(width: 28, height: 44)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Inspect closed Goal")
+                            .font(.body.weight(.semibold))
+                        Text(content.closure.acceptedTruth)
+                            .font(.subheadline)
+                            .foregroundStyle(palette.secondaryInk)
+                    }
+                    Spacer(minLength: 8)
+                    Image(systemName: "chevron.forward")
+                        .foregroundStyle(palette.tertiaryInk)
+                        .frame(width: 20, height: 44)
+                        .accessibilityHidden(true)
+                }
+                .frame(maxWidth: .infinity, minHeight: 64, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Inspects closure, retained history, and open work")
+            .accessibilityIdentifier("gnc-r03-closure-entry")
+        }
     }
 
     private var futureField: some View {
@@ -440,6 +514,7 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
         .accessibilityValue(content.relationship.practicalConsequence)
         .accessibilityHint("Inspects the consequential relationship")
         .accessibilityIdentifier("gnc-open-relationship")
+        .accessibilityFocused($accessibilityFocus, equals: .relationshipEntry)
     }
 
     private var certaintyPassage: some View {
@@ -497,5 +572,14 @@ struct GoalsNativeCalibrationFocusedGoalView: View {
 
     private var shouldReduceMotion: Bool {
         reduceMotion || forceReduceMotion
+    }
+
+    private func restoreAccessibilityFocus() {
+        switch state.focusAnchor {
+        case .currentMovement, .relationshipEntry, .recoveryEntry:
+            accessibilityFocus = state.focusAnchor
+        default:
+            break
+        }
     }
 }

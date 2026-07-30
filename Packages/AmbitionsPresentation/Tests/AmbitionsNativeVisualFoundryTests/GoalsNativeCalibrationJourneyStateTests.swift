@@ -99,7 +99,7 @@ final class GoalsNativeCalibrationJourneyStateTests: XCTestCase {
             .lifeArea(id: "life-area.home"),
             .focusedGoal(id: "goal.welcome-baby-home")
         ])
-        XCTAssertEqual(state.focusAnchor, .focusedGoal)
+        XCTAssertEqual(state.focusAnchor, .relationshipEntry)
         XCTAssertFalse(state.hasMutation)
 
         state.reconcileNavigationPath([.lifeArea(id: "life-area.home")])
