@@ -2,7 +2,7 @@
 
 # You World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_YOU_STRUCTURAL_DIRECTION_SELECTION`
+Status: `READY_FOR_OWNER_YOU_ROOT_RENDER_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -29,6 +29,12 @@ You root
 
 Every direction preserves the nine canonical domains in their required order. The first viewport normally reaches into Notifications & Attention without compressing all nine domains into one screen.
 
+## Owner render disposition
+
+The owner selected D01, D04, and D06 as the minimum R01 standalone root comparison set. This selection asks how much authored structure You requires; it does not select a winner or authorize synthesis, SwiftUI, production implementation, canon change, or system freeze.
+
+D02 remains an ownership-semantics ingredient or later branch, D03 remains a current-first Personalization-depth grammar, and D05 remains the leading four-phase focused-depth rhythm. Their research remains intact and none is rejected as a complete concept.
+
 ## Package
 
 1. [Research method](research-method.md)
@@ -49,7 +55,8 @@ Every direction preserves the nine canonical domains in their required order. Th
 16. [Changed files](changed-files.md)
 17. [Reviewer findings](reviewer-findings.md)
 18. [Owner review](owner-review.md)
+19. [Standalone root rendering R01](root-rendering-r01/README.md)
 
 ## Proof ceiling
 
-This package proves a cited research corpus, a repository-grounded capability boundary, one research fixture contract, and six traceable structural hypotheses. It does not prove rendered quality, exact geometry, device accessibility, shipping commands, runtime integration, final shell behavior, final materials or tokens, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.
+This package proves a cited research corpus, a repository-grounded capability boundary, one research fixture contract, six traceable structural hypotheses, and a bounded three-image root comparison. The generated R01 images are non-production visual hypotheses. They do not prove exact native geometry, device accessibility, shipping commands, runtime integration, final shell behavior, final materials or tokens, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.
