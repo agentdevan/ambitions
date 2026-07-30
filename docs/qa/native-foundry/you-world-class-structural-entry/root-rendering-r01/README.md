@@ -2,7 +2,7 @@
 
 # You Standalone Root Rendering R01
 
-Status: `READY_FOR_OWNER_YOU_ROOT_RENDER_REVIEW`
+Status: `OWNER_REVIEW_COMPLETE_NO_R01_DIRECTION_ACCEPTED_UNCHANGED`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -21,6 +21,17 @@ The three structural poles are:
 - D01: native structure with Ambitions meaning and visual DNA;
 - D04: authored structure only at meaningful control boundaries; and
 - D06: authored semantic continuity across the entire root.
+
+## Owner disposition
+
+- D01 remains the native root substrate and control reference. Its R00 render is not selected because it remains too close to generic Apple Settings anatomy.
+- D04-R00's rendering expression is rejected. Only selective source-purpose-consequence clarification survives where authority materially crosses Ambitions, iPhone system control, or a supported external source.
+- D06-R00's permanent semantic seam is rejected because it reads as a timeline, sidebar, or static infographic and consumes excessive horizontal space.
+- D02 remains ownership-language research only; its continuous ownership rail must not return.
+- D03 remains bounded Personalization-depth provenance grammar only.
+- D05 remains the leading focused-domain depth rhythm.
+
+No R01 direction is accepted as provisional You calibration evidence.
 
 ## Shared rendering contract
 
@@ -57,6 +68,7 @@ The remaining four domains continue below the fold in canon but are not compress
 - Dimensions: 1024 × 1536
 - Structural posture: intentional native grouped-index comprehension, information-bearing summaries, restrained matte separation, and conventional disclosure.
 - Question: does the strongest native-default Ambitions expression still read as generic Settings?
+- Owner disposition: native substrate and control reference only; R00 is not selected.
 
 ### D04 — Private Boundary Index
 
@@ -65,6 +77,7 @@ The remaining four domains continue below the fold in canon but are not compress
 - Dimensions: 1024 × 1536
 - Structural posture: ordinary rows until authority becomes consequential, then restrained text-equivalent local/iOS/source articulation.
 - Question: do selective boundaries create sufficient identity without making Privacy dominate the root?
+- Owner disposition: R00 rendering expression rejected; only selective user-facing clarification survives.
 
 ### D06 — Articulated Personal Control Index
 
@@ -73,6 +86,7 @@ The remaining four domains continue below the fold in canon but are not compress
 - Dimensions: 1024 × 1536
 - Structural posture: one continuous noninteractive tonal seam aligns the crown, domain symbols, identity, state, and disclosure without nodes or custom navigation.
 - Question: does the seam create useful semantic continuity or slip toward static infographic anatomy?
+- Owner disposition: permanent seam rejected.
 
 ## Prompt set
 
@@ -84,7 +98,7 @@ All three prompts fixed the same canvas, Dark graphite/mineral atmosphere, compa
 
 ## Narrowed unrendered roles
 
-- `AVF-YOU-D07-INT-D02-R00 — Local Ownership Passage`: preserved as explicit ownership semantics for possible later synthesis or a later structural branch. It is not rendered in R01 because its continuous-passage expression overlaps visually with D06.
+- `AVF-YOU-D07-INT-D02-R00 — Local Ownership Passage`: preserved as ownership-language research only. Its continuous ownership rail must not return.
 - `AVF-YOU-D07-INT-D03-R00 — Personal Truth Register`: preserved only as current-first provenance grammar for bounded Personalization depth. It is not eligible as the root organizing model because it approaches personal-content and AI-dossier anatomy.
 - `AVF-YOU-D07-INT-D05-R00 — Focused Domain Passage`: preserved as the leading four-phase focused-depth rhythm. It is not a materially independent root direction.
 
@@ -123,6 +137,8 @@ None of D02, D03, or D05 is rejected as a complete research concept.
 - Rows remain full-width native activation targets rather than cards placed around a line.
 - Labels remain primary and the seam can disappear without removing meaning.
 
-## Owner review boundary
+## D07 continuation
 
-No direction has been selected. Owner review may reject a render, preserve a structural characteristic, or request a bounded correction. This packet does not propose a winner or synthesis.
+[Review `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage`](../d07-native-personal-control-passage.md).
+
+D07 is selected for synthesis, not accepted as a final or provisional You calibration direction. R01 remains historical comparison evidence.

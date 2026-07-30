@@ -2,51 +2,50 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_YOU_ROOT_RENDER_REVIEW`
+Status: `READY_FOR_OWNER_YOU_D07_SYNTHESIS_RENDER_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
-## R01 render disposition
+## R01 owner disposition
 
-The owner selected exactly three existing directions for controlled standalone root rendering:
+- D01 remains the native root substrate and control reference. Its R00 render is not selected because it remains too close to generic Apple Settings anatomy.
+- D04-R00's rendering expression is rejected. Selective source-purpose-consequence clarification survives only where authority materially crosses Ambitions, iPhone system control, or a supported external source.
+- D06-R00's permanent semantic seam is rejected because it reads as a timeline, sidebar, or static infographic and consumes excessive horizontal space.
+- D02 remains ownership-language research only. Its continuous ownership rail must not return.
+- D03 remains bounded Personalization-depth provenance grammar only.
+- D05 remains the leading focused-domain depth rhythm.
 
-- `AVF-YOU-D07-INT-D01-R00 — Native Personal Control Index`
-- `AVF-YOU-D07-INT-D04-R00 — Private Boundary Index`
-- `AVF-YOU-D07-INT-D06-R00 — Articulated Personal Control Index`
+No D01–D06 direction is accepted as provisional You calibration evidence.
 
-The controlled question is: how much authored structure does You require to feel distinctly Ambitions while remaining a calm, native, local personal-control index?
+## D07 bounded synthesis
 
-[Review the three standalone roots](root-rendering-r01/README.md).
+`AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage`
 
-No direction is selected as a winner, installed, synthesized, or authorized for implementation.
+Status: `SELECTED_FOR_SYNTHESIS`
 
-## Narrowed unrendered roles
+[Review the D07 synthesis and standalone root](d07-native-personal-control-passage.md).
 
-- D02 preserves explicit ownership semantics as a possible synthesis ingredient or later structural branch. It is not rendered in R01 because its continuous passage overlaps visually with D06.
-- D03 preserves current-first provenance grammar only as a bounded Personalization-depth ingredient. It is not eligible as the root organizing model because it approaches personal-content and AI-dossier anatomy.
-- D05 preserves its four-phase focused-depth rhythm as the leading domain-depth ingredient. It is not a materially independent root direction.
+D07 remains subordinate to `AVF-YOU-D07-R02 — Local Personal Control Index`. It does not replace the active direction, install canon, select a final You direction, authorize SwiftUI, or authorize production work.
 
-D02, D03, and D05 remain research concepts; none is marked rejected.
+## D07 owner checks
 
-## Required owner checks
-
-For every direction under consideration, verify:
-
-- the root is immediately comprehensible as native personal control;
-- local ownership is clear without becoming an account substitute;
-- the nine domains remain in exact order and viewport one reaches Notifications;
-- current, suggested, inferred, uncertain, historical, superseded, and removed truth cannot be confused;
-- privacy communicates source, purpose, and consequence without grades or dashboard identity;
-- unsupported commands and permissions are absent;
-- Appearance remains finite and specimen-led only after controls;
-- root and depth feel continuous while native Back and exact return remain authoritative;
-- Accessibility Dynamic Type becomes a complete ordered equivalent; and
-- the direction avoids Settings-clone, account-page, privacy-dashboard, AI-profile, generic-list, and static-infographic drift.
+- Crown contains only You and On this iPhone.
+- Identity & Local Data retains no-account truth.
+- The root is one continuous matte personal-control plane without cards, rails, seams, or diagrams.
+- Native disclosure comprehension remains immediate without copying Settings pixel-for-pixel.
+- Authority clarification is concise, user-facing, and limited to consequential boundaries.
+- Privacy does not dominate the root.
+- Icons remain consistent and subordinate.
+- Notifications is reached without compressed typography.
+- Remaining domains continue below the fold.
+- The image makes no shell, dock, native, or production-baseline claim.
 
 ## Authorization state
 
 - Owner structural direction selected: `false`
 - R01 standalone rendering completed: `true`, limited to D01, D04, and D06
+- D07 synthesis status: `SELECTED_FOR_SYNTHESIS`
+- D07 standalone rendering completed: `true`, one root only
 - Further standalone rendering authorized: `false`
 - You SwiftUI prototype authorized: `false`
 - Production You implementation authorized: `false`
@@ -61,7 +60,6 @@ For every direction under consideration, verify:
 
 ## Next owner decision
 
-- reject an R01 root render;
-- preserve structural characteristics for a later owner-authorized step;
-- request a bounded R01 render correction; or
+- accept or reject the D07 root hypothesis for a later owner-authorized step;
+- request a bounded D07 render correction; or
 - pause You calibration.

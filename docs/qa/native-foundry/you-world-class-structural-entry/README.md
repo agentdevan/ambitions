@@ -2,7 +2,7 @@
 
 # You World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_YOU_ROOT_RENDER_REVIEW`
+Status: `READY_FOR_OWNER_YOU_D07_SYNTHESIS_RENDER_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -14,7 +14,7 @@ Accessibility transformation: `VC11-YOU-D06 — Explicit Adaptive Control Passag
 
 Repository baseline: `82af01dfefb7fb6d9d0b8fa55fe8dd7f7d29ae63`
 
-This non-normative research packet studies current native personal-control, privacy, local-data, and appearance products; reconciles the installed You direction with live capability; and proposes exactly six materially different text directions. It does not install canon, render images, create fixtures, implement SwiftUI, or authorize runtime integration.
+This non-normative packet records the completed You research gate, six initial structural directions, their R01 root comparison, and the bounded D07 synthesis selected for owner review. It does not install canon, implement SwiftUI, authorize runtime integration, or select a final You direction.
 
 ## Bounded journey
 
@@ -29,11 +29,18 @@ You root
 
 Every direction preserves the nine canonical domains in their required order. The first viewport normally reaches into Notifications & Attention without compressing all nine domains into one screen.
 
-## Owner render disposition
+## R01 owner disposition and D07 synthesis
 
-The owner selected D01, D04, and D06 as the minimum R01 standalone root comparison set. This selection asks how much authored structure You requires; it does not select a winner or authorize synthesis, SwiftUI, production implementation, canon change, or system freeze.
+No R01 direction is accepted unchanged or as provisional You calibration evidence.
 
-D02 remains an ownership-semantics ingredient or later branch, D03 remains a current-first Personalization-depth grammar, and D05 remains the leading four-phase focused-depth rhythm. Their research remains intact and none is rejected as a complete concept.
+- D01 remains the native root substrate and control reference; its R00 render remains too close to generic Apple Settings anatomy.
+- D04-R00's rendering expression is rejected; only selective source-purpose-consequence clarification survives where authority materially crosses a boundary.
+- D06-R00's permanent seam is rejected as timeline/sidebar/static-infographic anatomy.
+- D02 remains ownership-language research only, without its continuous rail.
+- D03 remains bounded Personalization-depth provenance grammar only.
+- D05 remains the leading focused-domain depth rhythm.
+
+`AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage` is `SELECTED_FOR_SYNTHESIS`. It remains subordinate to `AVF-YOU-D07-R02` and is not a final direction or implementation authorization.
 
 ## Package
 
@@ -56,7 +63,8 @@ D02 remains an ownership-semantics ingredient or later branch, D03 remains a cur
 17. [Reviewer findings](reviewer-findings.md)
 18. [Owner review](owner-review.md)
 19. [Standalone root rendering R01](root-rendering-r01/README.md)
+20. [D07 Native Personal Control Passage](d07-native-personal-control-passage.md)
 
 ## Proof ceiling
 
-This package proves a cited research corpus, a repository-grounded capability boundary, one research fixture contract, six traceable structural hypotheses, and a bounded three-image root comparison. The generated R01 images are non-production visual hypotheses. They do not prove exact native geometry, device accessibility, shipping commands, runtime integration, final shell behavior, final materials or tokens, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.
+This package proves a cited research corpus, a repository-grounded capability boundary, one research fixture contract, six traceable initial hypotheses, a bounded R01 comparison, and the D07 text/render synthesis. All generated images are non-production visual hypotheses. They do not prove exact native geometry, device accessibility, shipping commands, runtime integration, shell coexistence, final materials or tokens, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.
