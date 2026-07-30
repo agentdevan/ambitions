@@ -35,7 +35,7 @@ Amend Local Learning to support bounded cross-domain transfer proposals using el
 
 No capability graph, psychological dossier, generic trait engine, or automatic Goal/Time mutation is authorized.
 
-**Priority:** P1 moat specification.  
+**Priority:** P1 moat specification.
 **Implementation gate:** direct proof of Local Learning controls and receiving-owner proposal boundaries.
 
 ## Decision 2 — Capture Routing Calibration
@@ -46,7 +46,7 @@ Use existing Local Learning influences to reorder or preselect only supported pr
 
 Capture retains no destination mutation authority. Contextual Capture Suggestions remain a subordinate output mode, not a second capability or advice panel.
 
-**Priority:** P2.  
+**Priority:** P2.
 **Implementation gate:** proven deterministic Capture routing, ambiguity correction, owner handoff, and Local Learning consumption.
 
 ## Decision 3 — Content Share Studio
