@@ -1,25 +1,37 @@
-# Capability Authority Disposition Evidence Package
+# Capability Authority Disposition Evidence
 
-Status: **non-normative portable audit evidence**
+Status: **non-normative audit evidence with compounding-review overlay**
 
-The complete 112-record machine-readable disposition, concise human matrix, current-authority map, derived projection, validator, and synthetic test fixtures are preserved in:
+## Baseline construction package
+
+The original complete 112-record construction package remains preserved at:
 
 ```text
 docs/capabilities/authority-disposition/evidence/capability-authority-disposition-package.zip
 ```
 
-SHA-256:
+Baseline SHA-256:
 
 ```text
 624b3b272497a13af9c28e8954353ed0aa4ebc7fac934b2679f984e80cd7567b
 ```
 
-Extract from the repository root with:
+That package is historical construction evidence. Its first-pass counts and owner packet are superseded by the three compounding review passes committed beside it.
 
-```bash
-unzip docs/capabilities/authority-disposition/evidence/capability-authority-disposition-package.zip
+## Superseding review overlay
+
+Current disposition interpretation is defined by the three review-pass documents, the revised owner/remediation packets, and `compounding-review*.json`.
+
+The overlay revises eight candidate records and aggregate totals while preserving the complete baseline population and evidence.
+
+## Revised validation result
+
+Fresh fixture validation passed all seven positive and negative tests with 112 candidates, 14 domains, 9 approved initial identities, 28 derived strategic labels, 6 candidate-level owner decisions, 4 genuine specification gaps, and 0 constitutional proposals.
+
+The complete reconstructed three-pass package was generated locally with SHA-256:
+
+```text
+6a4fb65c6f023c7df9014757332e95d578fb263d74855527ec29f5ca45cb7be6
 ```
 
-The package is an audit artifact, not canon. It must not be added to `docs/canon/MANIFEST.toml` or treated as a product-authority source. The readable reports beside it are review projections of the same audit results.
-
-Local synthetic validation passed all positive and negative fixture cases after repair. Full-repository canon and drift checks require execution in a complete checkout and remain separate from this evidence package.
+Neither the baseline package nor the overlay may be added to `docs/canon/MANIFEST.toml`. Full-repository canon and drift checks remain separate from this audit evidence.

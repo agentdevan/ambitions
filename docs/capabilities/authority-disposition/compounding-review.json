@@ -1,0 +1,14 @@
+{
+  "authority": "non_normative_compounding_review",
+  "constitutional_amendment_required": false,
+  "genuine_specification_gap_ids": ["CAP2-APPEAR-007", "CAP2-CAPTURE-007", "CAP2-CTX-008", "CAP2-SHARE-005"],
+  "passes": [
+    {"pass_id": "PASS-1", "name": "Semantic and Authority Boundaries", "finding": "Dependent controls and integration seams were over-counted as independent gaps.", "changed_candidate_ids": ["CAP2-APPEAR-002", "CAP2-APPEAR-003", "CAP2-APPEAR-006", "CAP2-CAPTURE-008", "CAP2-CLOSE-008", "CAP2-CTX-006", "CAP2-KNOW-007", "CAP2-RES-008"]},
+    {"pass_id": "PASS-2", "name": "Runtime, Privacy, Apple, and Activation", "finding": "Existing Local Learning and runtime law must be reused; safety and activation gates were strengthened."},
+    {"pass_id": "PASS-3", "name": "Convergence and Final Recommendations", "finding": "The owner packet converged from eight broad decisions and twelve gaps to seven decisions and four gaps."}
+  ],
+  "review_date": "2026-07-30",
+  "revised_owner_decision_required_count": 6,
+  "revised_primary_disposition_counts": {"already_authoritative": 56, "authoritative_but_fragmented": 19, "duplicate_or_alias": 3, "enabling_system_or_mechanism": 14, "genuine_specification_gap": 4, "reject": 1, "research_only_hypothesis": 5, "valid_subcapability": 10},
+  "schema_version": 1
+}

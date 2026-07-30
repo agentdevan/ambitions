@@ -1,0 +1,11 @@
+{
+  "authority": "non_normative_compounding_review_validation",
+  "baseline_evidence_sha256": "624b3b272497a13af9c28e8954353ed0aa4ebc7fac934b2679f984e80cd7567b",
+  "changed_candidate_count": 8,
+  "errors": [],
+  "is_valid": true,
+  "review_pass_count": 3,
+  "revised_package_sha256": "6a4fb65c6f023c7df9014757332e95d578fb263d74855527ec29f5ca45cb7be6",
+  "schema_version": 1,
+  "summary": {"approved_initial_capability_count": 9, "candidate_count": 112, "constitutional_proposal_count": 0, "derived_capability_count": 28, "domain_count": 14, "genuine_specification_gap_count": 4, "owner_decision_required_count": 6, "primary_disposition_counts": {"already_authoritative": 56, "authoritative_but_fragmented": 19, "duplicate_or_alias": 3, "enabling_system_or_mechanism": 14, "genuine_specification_gap": 4, "reject": 1, "research_only_hypothesis": 5, "valid_subcapability": 10}, "tests_executed": 7, "tests_passed": 7}
+}
