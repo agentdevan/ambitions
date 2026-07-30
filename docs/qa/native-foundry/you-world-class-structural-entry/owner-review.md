@@ -2,7 +2,7 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_YOU_D07_SYNTHESIS_RENDER_REVIEW`
+Status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -17,49 +17,54 @@ Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
 No D01–D06 direction is accepted as provisional You calibration evidence.
 
-## D07 bounded synthesis
+## D07 generated-render disposition
 
-`AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage`
+The generated render for `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage` is not accepted as provisional You calibration evidence. It remains a structural reference only and must not be reproduced pixel-for-pixel.
 
-Status: `SELECTED_FOR_SYNTHESIS`
+The D07 structural family remains `SELECTED_FOR_SYNTHESIS`, subordinate to `AVF-YOU-D07-R02 — Local Personal Control Index`. It does not replace the parent direction, install canon, select a final You direction, or authorize production work.
 
-[Review the D07 synthesis and standalone root](d07-native-personal-control-passage.md).
+## Native proving slice
 
-D07 remains subordinate to `AVF-YOU-D07-R02 — Local Personal Control Index`. It does not replace the active direction, install canon, select a final You direction, authorize SwiftUI, or authorize production work.
+`AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
 
-## D07 owner checks
+Status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
 
-- Crown contains only You and On this iPhone.
-- Identity & Local Data retains no-account truth.
-- The root is one continuous matte personal-control plane without cards, rails, seams, or diagrams.
-- Native disclosure comprehension remains immediate without copying Settings pixel-for-pixel.
-- Authority clarification is concise, user-facing, and limited to consequential boundaries.
-- Privacy does not dominate the root.
-- Icons remain consistent and subordinate.
-- Notifications is reached without compressed typography.
-- Remaining domains continue below the fold.
-- The image makes no shell, dock, native, or production-baseline claim.
+[Review the bounded native evidence](../../evidence/2026-07-30-you-native-personal-control-passage-d07/README.md).
+
+The slice is limited to a typical Dark root, a focused Dark Appearance depth, an Accessibility Dynamic Type Dark root, and the framework Back journey returning to the exact originating root context and Appearance row.
+
+## D07 native owner checks
+
+- The compact crown says You without crown-level local or account posture.
+- Identity & Local Data carries `On this iPhone · No account`.
+- The ordinary viewport reaches Notifications & Attention without smaller type or all-nine-domain compression.
+- The root stays on one continuous matte plane without cards, rails, seams, timelines, diagrams, or technical ownership taxonomy.
+- Appearance uses focused-domain cadence: current truth, supported controls, provisional accent posture, and one controlled specimen.
+- System, Light, and Dark are fixture-preview states only; no persistence is implied.
+- The violet–indigo target remains explicitly unresolved against the production enum.
+- Accessibility Dynamic Type retains every domain and summary in canonical order through scrolling.
+- Framework Back restores the root and marks Appearance as the return target.
+- The captures make no shell, dock, physical-device, production-baseline, or approval claim.
 
 ## Authorization state
 
 - Owner structural direction selected: `false`
-- R01 standalone rendering completed: `true`, limited to D01, D04, and D06
 - D07 synthesis status: `SELECTED_FOR_SYNTHESIS`
-- D07 standalone rendering completed: `true`, one root only
-- Further standalone rendering authorized: `false`
-- You SwiftUI prototype authorized: `false`
+- D07 generated root accepted: `false`
+- D07 bounded native Foundry prototype completed: `true`
+- D07 native calibration accepted: `false`
+- Further conceptual rendering authorized: `false`
+- Production You SwiftUI authorized: `false`
 - Production You implementation authorized: `false`
 - Runtime integration authorized: `false`
 - Canon modification authorized: `false`
 - Broad frontend reconstruction authorized: `false`
-- Figma authorized: `false`
-- Code Connect authorized: `false`
 - Final tokens or component APIs authorized: `false`
 - Dock freeze: `false`
 - `APPROVED_FOR_SWIFTUI`: `false`
 
 ## Next owner decision
 
-- accept or reject the D07 root hypothesis for a later owner-authorized step;
-- request a bounded D07 render correction; or
+- accept or reject D07 as provisional You calibration evidence;
+- request a bounded native revision; or
 - pause You calibration.

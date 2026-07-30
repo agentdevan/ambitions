@@ -2,7 +2,7 @@
 
 # You World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_YOU_D07_SYNTHESIS_RENDER_REVIEW`
+Status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -14,24 +14,22 @@ Accessibility transformation: `VC11-YOU-D06 — Explicit Adaptive Control Passag
 
 Repository baseline: `82af01dfefb7fb6d9d0b8fa55fe8dd7f7d29ae63`
 
-This non-normative packet records the completed You research gate, six initial structural directions, their R01 root comparison, and the bounded D07 synthesis selected for owner review. It does not install canon, implement SwiftUI, authorize runtime integration, or select a final You direction.
+This non-normative packet records the completed You research gate, six initial structural directions, their R01 root comparison, the D07 synthesis, and its bounded fixture-driven native proving slice. It does not install canon, authorize production SwiftUI, authorize runtime integration, or select a final You direction.
 
 ## Bounded journey
 
 ```text
 You root
-→ Identity & Local Data
-→ Personalization
-→ Privacy & Data
 → Appearance
-→ exact native return
+→ framework Back
+→ exact originating root context and Appearance-row return target
 ```
 
-Every direction preserves the nine canonical domains in their required order. The first viewport normally reaches into Notifications & Attention without compressing all nine domains into one screen.
+The root fixture contains all nine canonical domains in their required order. The ordinary first viewport reaches Notifications & Attention without compressing all nine domains; the accessibility equivalent stacks and scrolls without dropping domain identity or current truth.
 
-## R01 owner disposition and D07 synthesis
+## Owner disposition and native proof
 
-No R01 direction is accepted unchanged or as provisional You calibration evidence.
+No D01–D06 direction is accepted as provisional You calibration evidence.
 
 - D01 remains the native root substrate and control reference; its R00 render remains too close to generic Apple Settings anatomy.
 - D04-R00's rendering expression is rejected; only selective source-purpose-consequence clarification survives where authority materially crosses a boundary.
@@ -40,7 +38,9 @@ No R01 direction is accepted unchanged or as provisional You calibration evidenc
 - D03 remains bounded Personalization-depth provenance grammar only.
 - D05 remains the leading focused-domain depth rhythm.
 
-`AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage` is `SELECTED_FOR_SYNTHESIS`. It remains subordinate to `AVF-YOU-D07-R02` and is not a final direction or implementation authorization.
+The generated D07 R00 root is not accepted as provisional You calibration evidence. It remains a structural reference only. `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage` remains `SELECTED_FOR_SYNTHESIS` and subordinate to `AVF-YOU-D07-R02`.
+
+The authorized native proving identity is `AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`. Its evidence is ready for owner review; passing tests do not accept the direction automatically.
 
 ## Package
 
@@ -64,7 +64,8 @@ No R01 direction is accepted unchanged or as provisional You calibration evidenc
 18. [Owner review](owner-review.md)
 19. [Standalone root rendering R01](root-rendering-r01/README.md)
 20. [D07 Native Personal Control Passage](d07-native-personal-control-passage.md)
+21. [D07 bounded native evidence](../../evidence/2026-07-30-you-native-personal-control-passage-d07/README.md)
 
 ## Proof ceiling
 
-This package proves a cited research corpus, a repository-grounded capability boundary, one research fixture contract, six traceable initial hypotheses, a bounded R01 comparison, and the D07 text/render synthesis. All generated images are non-production visual hypotheses. They do not prove exact native geometry, device accessibility, shipping commands, runtime integration, shell coexistence, final materials or tokens, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.
+The native slice proves fixture-host rendering, framework navigation and Back, exact Appearance-row return targeting, deterministic domain order, a focused Appearance hypothesis, and a scrollable accessibility Dynamic Type equivalent on one Simulator profile. It does not prove production routing, persistence, runtime mutation, manual assistive-technology use, physical-device behavior, shell coexistence, final appearance authority, or production readiness. `APPROVED_FOR_SWIFTUI` remains `false`.

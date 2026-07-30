@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-30-you-native-personal-control-passage-d07",
+  "native_proving_id": "AVF-YOU-D07-INT-D07-NATIVE-R00",
+  "parent_direction": "AVF-YOU-D07-INT-D07-R00",
+  "fixture_id": "you-flagship/local-personal-control/v1",
+  "capture_source_sha": "99a81c4063b1928b3cf5ec53783594f8d41e5e95",
+  "device": "VC14 iPhone 17 Pro Simulator",
+  "device_udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+  "os": "iOS 26.5",
+  "xcode": "26.6 (17F113)",
+  "locale": "en-US",
+  "layout_direction": "left-to-right",
+  "production_baseline": false,
+  "direct_device_proof": false,
+  "approved_for_swiftui": false,
+  "frames": [
+    {
+      "id": "YNC-D07-NATIVE-F01",
+      "path": "screenshots/01-you-root-typical-dark.png",
+      "sha256": "d6a88fc8069ab9361ff992646a8234b06c55ae785981c19293fc67d8ab74af50",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T16:33:32-04:00",
+      "appearance": "Dark",
+      "dynamic_type": "Large",
+      "state": "You root, canonical order, ordinary first viewport"
+    },
+    {
+      "id": "YNC-D07-NATIVE-F02",
+      "path": "screenshots/02-you-appearance-depth-dark.png",
+      "sha256": "9ff57ff7d02a6bec9417d71bf9e77c9f643ba2e828c201e883a4e5950612918c",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T16:34:10-04:00",
+      "appearance": "Dark",
+      "dynamic_type": "Large",
+      "state": "Appearance focused depth, System current, preview-only choices"
+    },
+    {
+      "id": "YNC-D07-NATIVE-F03",
+      "path": "screenshots/03-you-root-accessibility-dark.png",
+      "sha256": "a26dfe64ac82e00f71888797f3d0856545d7be4ddbf49780a59b08e79b95c355",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T16:34:25-04:00",
+      "appearance": "Dark",
+      "dynamic_type": "Accessibility 2",
+      "state": "You root, stacked semantic equivalent with natural continuation"
+    }
+  ]
+}

@@ -2,26 +2,37 @@
 
 # Changed Files
 
-All changes are confined to `docs/qa/native-foundry/you-world-class-structural-entry/`:
+This continuation adds only the bounded D07 native Foundry proving slice and its owner-review evidence.
 
-1. `README.md`
-2. `research-method.md`
-3. `you-authority-map.md`
-4. `current-capability-ceiling.md`
-5. `fixture-contract.md`
-6. `research-corpus.md`
-7. `benchmark-matrix.md`
-8. `benchmark-matrix.csv`
-9. `pattern-atlas.md`
-10. `market-anti-patterns.md`
-11. `world-class-you-bar.md`
-12. `you-intervention-synthesis.md`
-13. `six-structural-directions.md`
-14. `direction-comparison.md`
-15. `source-register.md`
-16. `architecture-sensitive-assumptions.md`
-17. `changed-files.md`
-18. `reviewer-findings.md`
-19. `owner-review.md`
+## Native Foundry package
 
-No Swift, tests, project files, generated Xcode state, canon, images, screenshots, or runtime artifacts changed.
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/YouNativeCalibrationFixture.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/YouNativeCalibrationJourneyState.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/YouNativeCalibrationStyle.swift`
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/YouNativeCalibrationView.swift`
+- `Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/YouNativeCalibrationFixtureTests.swift`
+- `Packages/AmbitionsPresentation/Tests/AmbitionsNativeVisualFoundryTests/YouNativeCalibrationJourneyStateTests.swift`
+
+## Existing fixture host and focused UI proof
+
+- `Native/AmbitionsNativeFoundryHost/AmbitionsNativeFoundryHostApp.swift`
+- `Native/AmbitionsNativeFoundryHost/YouNativeFoundryHost.swift`
+- `Native/AmbitionsNativeFoundryHostUITests/YouNativeCalibrationD07HostUITests.swift`
+
+## Existing You packet records
+
+- `docs/qa/native-foundry/you-world-class-structural-entry/README.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/changed-files.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/d07-native-personal-control-passage.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/owner-review.md`
+
+## Native evidence
+
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/README.md`
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/changed-files.md`
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/fixture-contract.md`
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/screenshot-metadata.json`
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/validation-results.md`
+- three PNG captures under `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/screenshots/`
+
+No production source, production tests, runtime routes, canon, app entry, final components, final tokens, or project configuration changed. The existing Foundry fixture-host router was extended; no new app entry was created.
