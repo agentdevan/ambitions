@@ -53,7 +53,8 @@ final class GoalsNativeCalibrationR03RecordingUITests: XCTestCase {
         hold()
         capture("J01-07-relationship")
         app.navigationBars.buttons.firstMatch.tap()
-        XCTAssertTrue(element("gnc-open-relationship").waitForExistence(timeout: 6))
+        let returnedRelationship = element("gnc-open-relationship")
+        scrollUntilHittable(returnedRelationship)
         hold()
         capture("J01-08-returned-relationship-entry")
     }
