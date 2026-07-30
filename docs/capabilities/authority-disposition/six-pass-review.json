@@ -17,6 +17,7 @@
     "CAP2-CTX-008",
     "CAP2-SHARE-005"
   ],
+  "overlay_file": "six-pass-overrides.json",
   "parked_capabilities": [
     "CAP2-SHARE-005"
   ],
