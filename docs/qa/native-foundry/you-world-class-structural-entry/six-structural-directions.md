@@ -1,0 +1,287 @@
+<!-- markdownlint-disable MD013 -->
+
+# Six Structural Directions
+
+These directions are subordinate explorations within `AVF-YOU-D07-R02 — Local Personal Control Index`. They preserve `VC11-YOU-D02`, use `VC11-YOU-D01` as native substrate, and transform through `VC11-YOU-D06`. None is selected.
+
+## Direction 1
+
+- **Stable ID:** `AVF-YOU-D07-INT-D01-R00`
+- **Name:** Native Personal Control Index
+- **Research lineage:** Apple Settings, Things 3, Signal; native grouped-list substrate.
+- **Thesis:** Familiar grouped control hierarchy becomes distinctly Ambitions through exact local ownership, unusually disciplined summaries, and provenance-aware depth.
+- **User outcome:** The person immediately understands where controls live and what is currently true without learning a custom model.
+- **Primary spatial model:** A compact You crown followed by native inset groups of full-width disclosure rows.
+- **Root identity:** A quiet “On this iPhone · No Ambitions account” ownership line precedes the domains without becoming a hero.
+- **Canonical domain order:** All nine domains remain in the required order without re-grouping.
+- **First viewport:** Identity, Personalization, Privacy, Appearance, and the beginning of Notifications are readable at standard Dynamic Type.
+- **Identity & Local Data depth:** A native grouped passage for display name, local storage posture, preferred root, and review cadence; unsupported data commands are absent.
+- **Personalization depth:** Current preferences lead; state-labelled provenance opens from each supported value.
+- **Privacy & Data depth:** Local posture and source-purpose rows appear before permission metadata; unsupported export/reset/delete controls are absent.
+- **Appearance depth:** System, Light, and Dark use a labelled native selection control above one compact specimen and finite accent choices.
+- **Truth-state grammar:** State labels and secondary material distinguish current, suggested, inferred, uncertain, historical, superseded, and removed truth; color is supplementary.
+- **Local/no-account treatment:** One factual ownership line and a local-data summary; no profile image, account-shaped container, or device list.
+- **Current-state summary:** Exactly one concise summary per domain, omitted when it would merely repeat the title.
+- **Permissions and source grammar:** Permission name, current status, purpose, and a native route to system settings when the system owns the change.
+- **Domain-row anatomy:** Optional SF Symbol, title, wrapping summary, material status when consequential, and disclosure indicator.
+- **Navigation and return:** Framework `NavigationStack`, native Back and interactive Back, exact root scroll and focus restoration.
+- **Density strategy:** System row rhythm; summaries wrap to two or more lines before any reduction in type.
+- **Sparse-state behavior:** Domains remain present because their identity is stable; unsupported individual rows remain absent.
+- **Material strategy:** Matte grouped planes with a restrained action accent; no card-per-domain treatment.
+- **Typography character:** Native hierarchy with calm semibold domain labels and regular factual summaries.
+- **Native control strategy:** `List`, `NavigationLink`, `Picker`, `Toggle`, and system-settings links where authoritative.
+- **Interaction alternatives:** Every row and control has a named tap or keyboard path; no gesture-only behavior.
+- **Motion character:** Native push, selection, and disclosure motion only.
+- **Accessibility transformation:** Rows become multiline vertical units; symbols yield before summaries; Appearance choices stack vertically before the specimen.
+- **Reduce Motion:** Framework transitions without custom continuity effects.
+- **Reduce Transparency:** Opaque matte group backgrounds preserve hierarchy.
+- **Increased Contrast:** Stronger separators, text, status outline, and selected-state mark.
+- **Light character:** Mineral neutral planes with dark graphite text and restrained violet-indigo action.
+- **Dark character:** Deep graphite planes with quiet elevation and no luminous dashboard effects.
+- **Strongest quality:** Highest immediate native comprehension and feasibility.
+- **Principal risk:** It may feel like Apple Settings with better writing.
+- **Native SwiftUI feasibility:** High as a future bounded prototype; this packet does not authorize implementation.
+- **Settings-clone risk:** High.
+- **Account-page risk:** Low.
+- **Privacy-dashboard risk:** Low.
+- **AI-profile risk:** Low.
+- **Generic-list risk:** High.
+- **Copy dependence:** Medium; summary discipline carries meaningful identity.
+- **Architecture-sensitive assumptions:** Preference read/write status, system-settings routing, and exact provenance availability require live reconciliation.
+- **What must be tested in native prototype:** First-viewport reach, summary wrapping, selected-state clarity, return restoration, and whether semantic identity survives without decorative containers.
+- **Automatic invalidation conditions:** Any account-shaped hero, disabled unsupported row, all-nine-domain compression, color-only state, or failure to distinguish provenance.
+
+## Direction 2
+
+- **Stable ID:** `AVF-YOU-D07-INT-D02-R00`
+- **Name:** Local Ownership Passage
+- **Research lineage:** Anytype local-first language, Standard Notes data custody, Apple privacy guidance.
+- **Thesis:** A continuous local-ownership passage gives every domain an explicit relationship to this iPhone, system authority, or an observed external source.
+- **User outcome:** The person understands not only what can be controlled, but where truth and authority live.
+- **Primary spatial model:** One continuous matte passage with a narrow ownership rail; domain rows articulate local, system-owned, or source-connected posture.
+- **Root identity:** “This iPhone” is a structural origin marker, not an identity hero or device-management UI.
+- **Canonical domain order:** The nine domains remain exact; ownership annotations never re-sort them.
+- **First viewport:** The local origin, first four domains, and Notifications threshold remain visible without shrinking rows.
+- **Identity & Local Data depth:** Begins with a plain custody statement, then supported local preferences and storage facts.
+- **Personalization depth:** Each value names its origin—person-entered, confirmed, suggested, or inferred—without aggregating a dossier.
+- **Privacy & Data depth:** Separates local Ambitions data, system-owned permission state, and external observations into ordered sections.
+- **Appearance depth:** App-wide appearance choices sit within the local app-control section; system following is visibly system-derived.
+- **Truth-state grammar:** Origin and state are paired: “Person-entered · Current,” “Inferred · Uncertain,” or “Historical · Superseded.”
+- **Local/no-account treatment:** Local ownership is persistent but compact; “No Ambitions account” remains factual secondary text.
+- **Current-state summary:** Summaries lead with ownership when material, then current state.
+- **Permissions and source grammar:** The rail changes semantic owner—Ambitions, iOS, Calendar, or Reminders—using text and shape, never color alone.
+- **Domain-row anatomy:** Origin marker, domain title, one current-state sentence, and disclosure.
+- **Navigation and return:** Native navigation carries the origin marker into depth and restores the same domain and scroll position.
+- **Density strategy:** Ownership markers collapse to inline labels in dense or localized states while semantic order remains.
+- **Sparse-state behavior:** The rail stays quiet; domains without an ownership distinction do not receive decorative badges.
+- **Material strategy:** A single continuous mineral plane with small matte owner transitions, not stacked cards.
+- **Typography character:** Factual, editorial labels with compact monospaced treatment prohibited for user-facing state.
+- **Native control strategy:** Standard grouped controls live inside owner-labelled sections.
+- **Interaction alternatives:** Owner explanations are named disclosure rows rather than hover, long-press, or gesture-only affordances.
+- **Motion character:** A subtle native continuity of the ownership marker during push; nonessential custom motion is absent.
+- **Accessibility transformation:** The rail becomes a preceding spoken owner label and visible section heading; rows become vertical.
+- **Reduce Motion:** Ownership continuity becomes an immediate state change.
+- **Reduce Transparency:** All owner markers become opaque bordered planes.
+- **Increased Contrast:** Owner boundaries receive heavier rules and explicit text.
+- **Light character:** Pale mineral continuity with graphite owner labels.
+- **Dark character:** Deep graphite field with restrained opaque ownership segments.
+- **Strongest quality:** Makes the local/no-account constitution understandable without an account substitute.
+- **Principal risk:** “This iPhone” can become a reverse account hero or imply device management.
+- **Native SwiftUI feasibility:** Medium-high; custom rail layout requires prototype proof but retains native navigation and controls.
+- **Settings-clone risk:** Medium.
+- **Account-page risk:** Medium.
+- **Privacy-dashboard risk:** Low.
+- **AI-profile risk:** Low.
+- **Generic-list risk:** Medium.
+- **Copy dependence:** Medium-high because ownership language must remain exact and short.
+- **Architecture-sensitive assumptions:** The product must truthfully classify each state as local, system-owned, or external without overclaiming storage behavior.
+- **What must be tested in native prototype:** Rail legibility, VoiceOver order, first-viewport density, ambiguity with device management, and exact dark-mode boundaries.
+- **Automatic invalidation conditions:** Device selector, sync implication, account metaphor, decorative ownership badges, or an ownership claim unsupported by canon/source.
+
+## Direction 3
+
+- **Stable ID:** `AVF-YOU-D07-INT-D03-R00`
+- **Name:** Personal Truth Register
+- **Research lineage:** Apple Journal suggestion sources, Proton Pass history, Standard Notes current/history separation.
+- **Thesis:** You becomes a register of controllable personal truth in which current, proposed, uncertain, historical, and removed states have unmistakable authority.
+- **User outcome:** The person can inspect why a personal value exists and whether it is current without feeling analyzed.
+- **Primary spatial model:** Native domain index at root; focused depths use an ordered truth register with current state fixed first and provenance below.
+- **Root identity:** A restrained “Personal controls · Local” crown; no values or inferred traits are exposed in the crown.
+- **Canonical domain order:** Exact nine-domain order; provenance never becomes a new root or filter.
+- **First viewport:** Standard domain passage with small state markers only where a domain contains consequential non-current truth.
+- **Identity & Local Data depth:** Current person-entered identity and confirmed preferences lead; local storage posture follows.
+- **Personalization depth:** The flagship expression: current values, suggestions, uncertain inferences, history, superseded values, and removed records are structurally separated.
+- **Privacy & Data depth:** Shows which provenance sources are permitted and which categories are absent; it does not enumerate a dossier.
+- **Appearance depth:** Current confirmed appearance leads; prior appearance history is omitted unless shipping provenance exists.
+- **Truth-state grammar:** Current uses a filled matte plane; suggested/inferred remain outlined; uncertain adds explicit uncertainty; history is dated; superseded and removed are segregated.
+- **Local/no-account treatment:** Local storage is a source statement, not identity framing.
+- **Current-state summary:** Root summaries report only current control posture, never suggested or historical content.
+- **Permissions and source grammar:** A source is named only inside the owning value or privacy depth with purpose and date.
+- **Domain-row anatomy:** Title, current summary, optional non-current-state count expressed as words rather than a badge metric, and disclosure.
+- **Navigation and return:** Native push from domain to register, then value inspection; Back restores the exact value focus and domain location.
+- **Density strategy:** Non-current values are collapsed behind named sections; no root chips or state cloud.
+- **Sparse-state behavior:** When no non-current truth exists, the depth becomes a simple current-preferences passage.
+- **Material strategy:** Authority is conveyed by fill, border, ordering, and labels on a matte plane.
+- **Typography character:** Current values are direct and human; provenance metadata is smaller but never required to understand status.
+- **Native control strategy:** Disclosure groups, standard edit controls for supported preferences, and native confirmation only where consequence warrants.
+- **Interaction alternatives:** State sections use labelled disclosure; swipe, drag, or long-press never controls provenance.
+- **Motion character:** Current truth remains stable while subordinate history discloses beneath it.
+- **Accessibility transformation:** Every state becomes an ordered heading-value-source passage; count summaries are fully spoken.
+- **Reduce Motion:** History appears without expansion animation.
+- **Reduce Transparency:** State planes become opaque with borders.
+- **Increased Contrast:** Filled/outlined states gain explicit leading glyph and stronger rules.
+- **Light character:** Quiet ivory/mineral current plane with ink-like history text.
+- **Dark character:** Graphite current plane with low-chroma subordinate history.
+- **Strongest quality:** Most exact articulation of Personalization truth state.
+- **Principal risk:** The provenance register can become “What Ambitions Knows” under another name.
+- **Native SwiftUI feasibility:** Medium; semantic state modeling must precede any credible prototype.
+- **Settings-clone risk:** Low-medium.
+- **Account-page risk:** Low.
+- **Privacy-dashboard risk:** Medium.
+- **AI-profile risk:** High.
+- **Generic-list risk:** Low-medium.
+- **Copy dependence:** High; state and source terms must be exact.
+- **Architecture-sensitive assumptions:** Complete provenance, dates, and removal semantics are target-only unless fixture-labelled.
+- **What must be tested in native prototype:** Dossier perception, current-state dominance, long-value localization, removed-value privacy, and VoiceOver state grouping.
+- **Automatic invalidation conditions:** Personality claims, inferred-trait summary, root-level memory list, recommendation framing, or non-current truth styled as confirmed.
+
+## Direction 4
+
+- **Stable ID:** `AVF-YOU-D07-INT-D04-R00`
+- **Name:** Private Boundary Index
+- **Research lineage:** Apple HealthKit privacy guidance, Apple Settings privacy hierarchy, 1Password purpose mapping, Signal consequence-first language.
+- **Thesis:** You expresses privacy through explicit boundaries between local data, system authority, and connected sources while leaving the root a personal-control index.
+- **User outcome:** The person can tell what Ambitions holds, what iOS controls, and what an external source contributes without interpreting a privacy score.
+- **Primary spatial model:** Canonical root list with three recurring boundary materials used only where a domain crosses local, system, or external authority.
+- **Root identity:** A compact private/local statement and no aggregate privacy status.
+- **Canonical domain order:** Exact; Privacy & Data remains third and Connections & Permissions sixth rather than becoming new roots.
+- **First viewport:** The first four domains and Notifications threshold; Privacy receives stronger semantic articulation but not more root height.
+- **Identity & Local Data depth:** Shows local custody and supported preferences without a data-management console.
+- **Personalization depth:** Each supported personal value identifies whether its source is the person or a system observation.
+- **Privacy & Data depth:** Boundary map in ordered prose rows: local Ambitions data, iOS-owned controls, and source observations.
+- **Appearance depth:** Finite app control, with “System” explicitly described as following iOS appearance.
+- **Truth-state grammar:** State and authority are separate axes; a confirmed value may still be system-derived, and an external observation never becomes person-entered truth.
+- **Local/no-account treatment:** Local boundary is explicit; lack of account is a fact, not a grade or celebratory claim.
+- **Current-state summary:** Summaries name a material boundary only when it affects control.
+- **Permissions and source grammar:** Each connection shows status, source, purpose, practical consequence, and authoritative route.
+- **Domain-row anatomy:** Domain title, factual state, optional boundary marker with text equivalent, and disclosure.
+- **Navigation and return:** Native depth; system-settings excursions return to the same permission row and announce refreshed state.
+- **Density strategy:** Boundary materials remain sparse and cannot become per-row badges.
+- **Sparse-state behavior:** With few active permissions, Privacy remains a concise local statement rather than an empty dashboard.
+- **Material strategy:** Opaque matte local plane, bordered system plane, and hairline-source plane; all carry text labels in depth.
+- **Typography character:** Serious and precise without legalistic density.
+- **Native control strategy:** Read-only status rows, supported in-app controls, and explicit system-settings links.
+- **Interaction alternatives:** Every system excursion has a named action; no icon-only privacy behavior.
+- **Motion character:** Boundary changes refresh in place after return; no scanning, shield, or pulse animation.
+- **Accessibility transformation:** Boundary labels become section headings; source-purpose-consequence order is preserved.
+- **Reduce Motion:** In-place state refresh without animated boundary morphing.
+- **Reduce Transparency:** Opaque planes and rules.
+- **Increased Contrast:** Boundary types gain explicit leading text and heavier outlines.
+- **Light character:** Clean mineral separation without green/red privacy coding.
+- **Dark character:** Low-glare graphite with precise neutral boundaries.
+- **Strongest quality:** Exact source and system-authority comprehension.
+- **Principal risk:** Privacy can dominate the product and make You feel like a security dashboard.
+- **Native SwiftUI feasibility:** Medium-high; boundary materials and return from Settings require measured proof.
+- **Settings-clone risk:** Medium.
+- **Account-page risk:** Low.
+- **Privacy-dashboard risk:** High.
+- **AI-profile risk:** Low.
+- **Generic-list risk:** Medium.
+- **Copy dependence:** High because boundary language carries trust.
+- **Architecture-sensitive assumptions:** Permission refresh, system-settings deep links, and source classification must match live adapters.
+- **What must be tested in native prototype:** Whether privacy feels calm rather than alarming, permission return refresh, non-color distinction, and VoiceOver source order.
+- **Automatic invalidation conditions:** Privacy grade, shield score, red/green status system, duplicated system toggle, or unsupported permission inventory.
+
+## Direction 5
+
+- **Stable ID:** `AVF-YOU-D07-INT-D05-R00`
+- **Name:** Focused Domain Passage
+- **Research lineage:** Things 3 restraint, Signal focused settings, Apple native disclosure and selection patterns.
+- **Thesis:** The root stays exceptionally quiet while each chosen domain opens into a consistent focused passage whose crown, current state, controls, and specimen create product continuity.
+- **User outcome:** The person scans quickly at root and gains rich, calm context only after making an intentional selection.
+- **Primary spatial model:** Minimal grouped root; each depth uses a repeated four-part passage: domain crown, current truth, supported controls, consequence/specimen.
+- **Root identity:** Identity emerges through consistent root-to-depth continuity rather than a distinctive root ornament.
+- **Canonical domain order:** Exact and visibly stable.
+- **First viewport:** Concise rows reliably reach Notifications; summaries are deliberately short and never carry provenance detail.
+- **Identity & Local Data depth:** Crown states local ownership; current preferences and storage facts follow; unsupported commands remain absent.
+- **Personalization depth:** Current values precede a named “How this became current” disclosure for supported provenance.
+- **Privacy & Data depth:** Current local posture precedes supported permission/source consequences.
+- **Appearance depth:** The clearest expression of the passage: current selection, System/Light/Dark controls, finite accent controls, then one live specimen.
+- **Truth-state grammar:** Root exposes only material state; complete provenance exists in depth with current-first ordering.
+- **Local/no-account treatment:** Appears in the Identity crown and root summary, never as a global hero.
+- **Current-state summary:** Root summaries are aggressively bounded; consequence and technical detail live in depth.
+- **Permissions and source grammar:** Purpose appears in the focused passage before the status/action row.
+- **Domain-row anatomy:** Symbol where space permits, title, one short summary, disclosure.
+- **Navigation and return:** Native push; Back returns to the selected row with preserved scroll and accessibility focus.
+- **Density strategy:** Root stays light; depth accepts richer multiline composition.
+- **Sparse-state behavior:** Empty unsupported subsections vanish; the four-part passage contracts without placeholder cards.
+- **Material strategy:** Root is nearly native; focused depths use one articulated matte plane per semantic phase rather than per control.
+- **Typography character:** Compact root, editorial depth headings, clear current-state emphasis.
+- **Native control strategy:** Standard navigation and form controls; the specimen is read-only.
+- **Interaction alternatives:** All detail uses labelled rows and buttons; specimen never becomes the only way to change appearance.
+- **Motion character:** Calm native push with a subtle, nonessential crown continuity.
+- **Accessibility transformation:** Root rows become multiline; focused phases become sequential headings; controls always precede specimen.
+- **Reduce Motion:** Native transition only.
+- **Reduce Transparency:** Opaque phase planes.
+- **Increased Contrast:** Stronger phase separators and selected marks.
+- **Light character:** Quiet mineral root; focused depths reveal slightly richer controlled surfaces.
+- **Dark character:** Deep graphite root; focused planes use restrained elevation.
+- **Strongest quality:** Best balance between first-viewport efficiency and rich intentional depth.
+- **Principal risk:** The root may be too generic and defer all Ambitions identity below the fold.
+- **Native SwiftUI feasibility:** High.
+- **Settings-clone risk:** High at root, low-medium in depth.
+- **Account-page risk:** Low.
+- **Privacy-dashboard risk:** Low.
+- **AI-profile risk:** Low-medium.
+- **Generic-list risk:** High.
+- **Copy dependence:** Medium.
+- **Architecture-sensitive assumptions:** Focused depths must hide unsupported sections dynamically without changing canonical root order.
+- **What must be tested in native prototype:** Root distinctiveness, phase continuity, Appearance specimen ordering, focus restoration, and large-text passage rhythm.
+- **Automatic invalidation conditions:** Decorative depth cards, root summaries that conceal consequential state, specimen-first Appearance, or focus loss on return.
+
+## Direction 6
+
+- **Stable ID:** `AVF-YOU-D07-INT-D06-R00`
+- **Name:** Articulated Personal Control Index
+- **Research lineage:** `AVF-YOU-D07-R02`, Apple native list grammar, Anytype ownership clarity, Apple Journal provenance boundaries.
+- **Thesis:** A restrained Ambitions-specific index uses one articulated semantic seam to connect local ownership, domain state, and focused depth without changing native navigation.
+- **User outcome:** The person recognizes You as a composed Ambitions environment while retaining immediate settings literacy.
+- **Primary spatial model:** A full-width native passage whose leading semantic seam aligns crown, domain titles, material state, and depth headings.
+- **Root identity:** A compact You crown and local ownership sentence share the seam; there is no hero, score, or dashboard header.
+- **Canonical domain order:** Exact; the seam never creates categories or alternate navigation.
+- **First viewport:** Five-domain reach remains the measured target; the seam consumes no extra row height.
+- **Identity & Local Data depth:** The seam transitions from domain marker to local-custody statement and supported preference groups.
+- **Personalization depth:** Current truth sits on the seam; subordinate provenance branches only within the selected value.
+- **Privacy & Data depth:** Local, system, and external boundaries articulate from the same seam through labels and material, not a diagram.
+- **Appearance depth:** Controls align to the seam; the single specimen sits after controls and demonstrates global hierarchy.
+- **Truth-state grammar:** Position, fill, outline, state label, and source work together; current truth remains on the primary seam while non-current truth is inset.
+- **Local/no-account treatment:** The seam begins with “On this iPhone”; it never depicts devices, sync, or account identity.
+- **Current-state summary:** One sentence aligned under each domain, with non-current detail deferred.
+- **Permissions and source grammar:** Source branches are literal ordered rows, not connecting lines or network diagrams.
+- **Domain-row anatomy:** Seam marker, optional symbol, domain title, summary, status word where required, and disclosure.
+- **Navigation and return:** Framework navigation; the seam is a visual continuity only and never replaces Back or disclosure.
+- **Density strategy:** Seam markers simplify at dense and localized states; text retains full semantic order.
+- **Sparse-state behavior:** A quiet continuous seam avoids empty cards while maintaining composition.
+- **Material strategy:** Matte mineral field, one precise graphite seam, restrained violet-indigo only for supported actions and selection.
+- **Typography character:** Editorial but native; domain identity is confident and summaries remain factual.
+- **Native control strategy:** Standard controls embedded in the articulated passage; no custom toggles or navigation.
+- **Interaction alternatives:** The seam is never interactive; all actions remain named native controls.
+- **Motion character:** Optional subtle seam continuity on push; no tracing or progress animation.
+- **Accessibility transformation:** The seam disappears visually and becomes semantic headings; ordered vertical passages retain identical meaning.
+- **Reduce Motion:** No seam transition.
+- **Reduce Transparency:** Already matte and opaque.
+- **Increased Contrast:** Seam and selection outlines strengthen; text labels remain authoritative.
+- **Light character:** Warm mineral field and precise graphite articulation.
+- **Dark character:** Deep graphite field with a lighter neutral seam and restrained action accent.
+- **Strongest quality:** Most ownable Ambitions identity without inventing a new control model.
+- **Principal risk:** The seam can become decorative branding or a static infographic.
+- **Native SwiftUI feasibility:** Medium; exact alignment and transformation require measured prototype proof.
+- **Settings-clone risk:** Low-medium.
+- **Account-page risk:** Low.
+- **Privacy-dashboard risk:** Low-medium.
+- **AI-profile risk:** Medium.
+- **Generic-list risk:** Low.
+- **Copy dependence:** Medium.
+- **Architecture-sensitive assumptions:** The seam must survive reusable domain data and accessibility transformations without driving component API design prematurely.
+- **What must be tested in native prototype:** Whether the seam improves pre-reading comprehension, dense localization, VoiceOver order, selection/focus restoration, and static-infographic risk.
+- **Automatic invalidation conditions:** Interactive custom seam navigation, branching diagram, decorative animation, loss of native row literacy, or any account/profile implication.
