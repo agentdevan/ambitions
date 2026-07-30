@@ -1,6 +1,6 @@
 # Goals native pursuit depth R03
 
-Status: `READY_FOR_OWNER_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_GOALS_PURSUIT_DEPTH_EVIDENCE`
 
 Direction: `AVF-GOALS-S08-INT-D09-NATIVE-R03 — Pursuit Depth Completion`
 
