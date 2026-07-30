@@ -1,6 +1,6 @@
 # Time native Week Passage D07
 
-Status: `READY_FOR_OWNER_TIME_D07_NATIVE_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_TIME_CALIBRATION_EVIDENCE`
 
 Direction: `AVF-TIME-S07-INT-D07-R00 — Native Week Passage with Dual-Truth Review`
 
@@ -37,7 +37,13 @@ or a production screenshot baseline.
 - Evidence: five standalone native screenshots and focused unit/UI tests
 - `production_baseline = false`
 
-No generative image was used for D07. The package does not select a final Time
-direction, authorize production SwiftUI or runtime integration, change
-`APPROVED_FOR_SWIFTUI`, freeze the shell or dock, or claim canonical Event,
-Schedule Placement, external-write, Receipt, Undo, or recurrence capability.
+No generative image was used for D07. Acceptance does not authorize production
+SwiftUI or runtime integration, change `APPROVED_FOR_SWIFTUI`, freeze the shell
+or dock, or claim canonical Event, Schedule Placement, external-write, Receipt,
+Undo, or recurrence capability.
+
+`TIME_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
+
+The exact geometry, materials, typography, color, motion, haptics, dock posture,
+component APIs, and global tokens remain unfrozen pending later cross-root and
+physical-device synthesis.

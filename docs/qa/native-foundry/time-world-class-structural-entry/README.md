@@ -2,7 +2,7 @@
 
 # Time World-Class Structural Entry
 
-Status: `SELECTED_FOR_SYNTHESIS`
+Status: `ACCEPTED_AS_PROVISIONAL_TIME_CALIBRATION_EVIDENCE`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -12,16 +12,18 @@ Repository baseline: `4ced31dc9a9bd2c9a987ad7649eedd7bb1569b72`
 
 This is a non-normative research and structural-selection packet. It studies current native temporal products, reconciles the installed Time direction with canon and the current capability ceiling, and proposes exactly six materially different text directions.
 
-The owner reviewed R01 and directed that none of its three generated roots advance unchanged. D01 survives only as the root foundation, D05 survives only as the dual-truth review-depth model, and D06 is rejected. D07 is an explicit bounded synthesis for native fixture evaluation. It is not a final Time direction, canon installation, production fixture, runtime integration, or `APPROVED_FOR_SWIFTUI = true`.
+The owner reviewed R01 and directed that none of its three generated roots advance unchanged. D01 survives only as the root foundation, D05 survives only as the dual-truth review-depth model, and D06 is rejected. D07 is the explicit bounded synthesis accepted as provisional Time calibration evidence. It is not a canon installation, production fixture, runtime integration, or `APPROVED_FOR_SWIFTUI = true`.
+
+`TIME_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 ## Owner synthesis disposition
 
 - `AVF-TIME-S07-INT-D01-R00 — Native Week Ledger`: preserve root foundation only
 - `AVF-TIME-S07-INT-D05-R00 — Dual-Truth Week Ledger`: preserve review-depth model only
 - `AVF-TIME-S07-INT-D06-R00 — Articulated Period Atlas`: rejected
-- `AVF-TIME-S07-INT-D07-R00 — Native Week Passage with Dual-Truth Review`: selected for bounded fixture-driven native synthesis
+- `AVF-TIME-S07-INT-D07-R00 — Native Week Passage with Dual-Truth Review`: accepted as provisional Time calibration evidence
 
-No final Time direction becomes active automatically. Generated Time rendering stops at R01; exact geometry moves to native proof.
+Generated Time rendering stops at R01. D07 protects the accepted structural characteristics for later synthesis without freezing exact geometry, materials, controls, tokens, motion, haptics, or production APIs.
 
 ## Bounded native proving slice
 

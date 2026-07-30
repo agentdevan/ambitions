@@ -2,7 +2,7 @@
 
 # D07 Native Week Passage with Dual-Truth Review
 
-Status: `SELECTED_FOR_SYNTHESIS`
+Status: `ACCEPTED_AS_PROVISIONAL_TIME_CALIBRATION_EVIDENCE`
 
 Stable ID: `AVF-TIME-S07-INT-D07-R00`
 
@@ -17,6 +17,8 @@ Installed closure retained: `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Pa
 - D06 contributes no preserved visual expression.
 
 This is an explicit synthesis. It does not silently merge the R01 renders or replace the installed provisional Time direction.
+
+`TIME_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 ## Thesis
 

@@ -2,7 +2,7 @@
 
 # Owner Review
 
-Status: `SELECTED_FOR_SYNTHESIS`
+Status: `ACCEPTED_AS_PROVISIONAL_TIME_CALIBRATION_EVIDENCE`
 
 Parent direction: `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`
 
@@ -10,13 +10,9 @@ Installed closure: `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`
 
 ## Review boundary
 
-None of the three R01 generated roots advances unchanged. D01 survives as the Week-root foundation, D05 survives as the review-depth model, and D06 is rejected. D07 is the explicit synthesis selected for one fixture-driven native prototype. No final Time direction has been selected, installed as canon, connected to runtime data, or approved for production work.
+None of the three R01 generated roots advances unchanged. D01 survives as the Week-root foundation, D05 survives as the review-depth model, and D06 is rejected. D07 is the explicit synthesis accepted as bounded provisional Time calibration evidence. It is not installed as canon, connected to runtime data, or approved for production work.
 
-The next owner decision follows measured native proof and is limited to:
-
-- accept, revise, or reject the D07 native synthesis;
-- request a replacement structural synthesis; or
-- pause Time calibration.
+`TIME_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 ## R01 disposition
 
@@ -44,7 +40,7 @@ For every direction under consideration, verify:
 
 ## Authorization state
 
-- Final Time direction selected: `false`
+- Accepted provisional direction: `AVF-TIME-S07-INT-D07-R00`
 - Root foundation: `D01`
 - Review-depth foundation: `D05`
 - Rejected: `D06`
@@ -58,8 +54,7 @@ For every direction under consideration, verify:
 - Broad reconstruction authorized: `false`
 - Dock freeze: `false`
 - `APPROVED_FOR_SWIFTUI`: `false`
-- Branch merged: `false`
-- Branch pushed: `false`
+- Time native calibration: `PROVISIONALLY_CLOSED`
 
 ## Proof ceiling
 
