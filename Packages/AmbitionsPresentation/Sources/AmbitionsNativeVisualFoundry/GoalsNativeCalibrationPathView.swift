@@ -120,17 +120,19 @@ struct GoalsNativeCalibrationPathView: View {
                         usesAccessibilityLayout: usesOrderedPath,
                         palette: palette
                     )
-                    pathField
-                    jumpMenu(verticalProxy: verticalProxy)
-                    GoalsNativeCalibrationPathSelectedDetail(
-                        pathID: presentation.pathID,
-                        node: selectedNode,
-                        palette: palette
-                    )
-                    .accessibilityFocused(
-                        $accessibilityFocusedNodeID,
-                        equals: selectedNode.id
-                    )
+                    if usesOrderedPath {
+                        GoalsNativeCalibrationPathAccessibilityFoundation(
+                            presentation: presentation,
+                            palette: palette
+                        )
+                        pathField
+                        selectedDetail
+                        jumpMenu(verticalProxy: verticalProxy)
+                    } else {
+                        pathField
+                        jumpMenu(verticalProxy: verticalProxy)
+                        selectedDetail
+                    }
                 }
                 .frame(maxWidth: 660, alignment: .leading)
                 .padding(.horizontal, usesOrderedPath ? 20 : 24)
@@ -171,6 +173,18 @@ struct GoalsNativeCalibrationPathView: View {
                 onSelect: select
             )
         }
+    }
+
+    private var selectedDetail: some View {
+        GoalsNativeCalibrationPathSelectedDetail(
+            pathID: presentation.pathID,
+            node: selectedNode,
+            palette: palette
+        )
+        .accessibilityFocused(
+            $accessibilityFocusedNodeID,
+            equals: selectedNode.id
+        )
     }
 
     private func jumpMenu(verticalProxy: ScrollViewProxy) -> some View {

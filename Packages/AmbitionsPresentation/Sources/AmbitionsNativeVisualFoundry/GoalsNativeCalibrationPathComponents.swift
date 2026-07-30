@@ -407,6 +407,107 @@ struct GoalsNativeCalibrationPathSemanticList: View {
     }
 }
 
+struct GoalsNativeCalibrationPathAccessibilityFoundation: View {
+    let presentation: GoalsNativeCalibrationPathPresentation
+    let palette: GoalsNativeCalibrationPalette
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            acceptedTruth
+            currentPosition
+            supportingProof
+            futurePostures
+        }
+        .padding(.vertical, 4)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("gnc-r03-path-accessibility-foundation")
+    }
+
+    private var acceptedTruth: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text("Accepted truth")
+                .font(.headline)
+                .foregroundStyle(palette.secondaryInk)
+            Text(presentation.acceptedTruth)
+                .font(GoalsNativeCalibrationTypographyRole.truth.font)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("gnc-r03-path-accessibility-truth")
+    }
+
+    private var currentPosition: some View {
+        HStack(alignment: .top, spacing: 14) {
+            GoalsNativeCalibrationPathMarker(
+                state: presentation.currentSeam.state,
+                isSelected: true,
+                palette: palette,
+                scale: .regular
+            )
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Current Path position")
+                    .font(.headline)
+                Text(presentation.currentSeam.title)
+                    .font(.title3.weight(.bold))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("gnc-r03-path-accessibility-current")
+    }
+
+    private var supportingProof: some View {
+        VStack(alignment: .leading, spacing: 9) {
+            Text("Supporting Proof")
+                .font(.headline)
+            GoalsNativeCalibrationProofFoundation(
+                moments: presentation.proofMoments.map(\.title),
+                palette: palette,
+                expanded: true
+            )
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("gnc-r03-path-accessibility-proof")
+    }
+
+    private var futurePostures: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            posture(
+                label: "Next movement",
+                title: presentation.nearMovement.title,
+                identifier: "gnc-r03-path-accessibility-next"
+            )
+            if let possible = presentation.openFuture.first {
+                posture(
+                    label: "Possible future",
+                    title: possible.title,
+                    identifier: "gnc-r03-path-accessibility-possible"
+                )
+            }
+            if let conditional = presentation.openFuture.dropFirst().first {
+                posture(
+                    label: "Conditional future",
+                    title: conditional.title,
+                    identifier: "gnc-r03-path-accessibility-conditional"
+                )
+            }
+        }
+    }
+
+    private func posture(label: String, title: String, identifier: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(label)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(palette.secondaryInk)
+            Text(title)
+                .font(.body.weight(.semibold))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier(identifier)
+    }
+}
+
 private struct GoalsNativeCalibrationPathSemanticNode: View {
     let node: GoalsNativeCalibrationPathNode
     let position: Int

@@ -31,6 +31,9 @@ enum GoalsNativeFoundryVariant: String {
     case r03ClosureHistory = "gnc-r03-closure-history"
     case r03PathAccessibility = "gnc-r03-path-accessibility"
     case r03RelationshipAccessibility = "gnc-r03-relationship-accessibility"
+    case r03RecoveryAccessibility = "gnc-r03-recovery-accessibility"
+    case r03ClosureAccessibility = "gnc-r03-closure-accessibility"
+    case r03PathReduceMotion = "gnc-r03-path-reduce-motion"
     case r03PathReduceTransparency = "gnc-r03-path-reduce-transparency"
     case r03RelationshipContrastNoColor = "gnc-r03-relationship-contrast-no-color"
     case r03ReturnedFocused = "gnc-r03-returned-focused"
@@ -73,6 +76,7 @@ enum GoalsNativeFoundryVariant: String {
              .r03Relationship, .r03RecoveryEntry, .r03Recovery,
              .r03ClosureEntry, .r03Closure, .r03ClosureHistory,
              .r03PathAccessibility, .r03RelationshipAccessibility,
+             .r03RecoveryAccessibility, .r03ClosureAccessibility, .r03PathReduceMotion,
              .r03PathReduceTransparency, .r03RelationshipContrastNoColor,
              .r03ReturnedFocused:
             true
@@ -89,6 +93,7 @@ enum GoalsNativeFoundryVariant: String {
              .r03Relationship, .r03RecoveryEntry, .r03Recovery,
              .r03ClosureEntry, .r03Closure, .r03ClosureHistory,
              .r03PathAccessibility, .r03RelationshipAccessibility,
+             .r03RecoveryAccessibility, .r03ClosureAccessibility, .r03PathReduceMotion,
              .r03PathReduceTransparency, .r03RelationshipContrastNoColor,
              .r03ReturnedFocused:
             true
@@ -110,7 +115,7 @@ enum GoalsNativeFoundryVariant: String {
     var opensGoalPath: Bool {
         switch self {
         case .goalPath, .r03PathDark, .r03PathEvidence, .r03PathFuture, .r03PathLight,
-             .r03PathAccessibility, .r03PathReduceTransparency:
+             .r03PathAccessibility, .r03PathReduceMotion, .r03PathReduceTransparency:
             true
         default:
             false
@@ -120,12 +125,13 @@ enum GoalsNativeFoundryVariant: String {
     var dynamicTypeSize: DynamicTypeSize {
         self == .accessibilityRoot || self == .synthesisFocusedAccessibility
             || self == .r03PathAccessibility || self == .r03RelationshipAccessibility
+            || self == .r03RecoveryAccessibility || self == .r03ClosureAccessibility
             ? .accessibility2
             : .large
     }
 
     var reducesMotion: Bool {
-        self == .synthesisFocusedReduceMotion
+        self == .synthesisFocusedReduceMotion || self == .r03PathReduceMotion
     }
 
     var reducesTransparency: Bool {
@@ -138,9 +144,9 @@ enum GoalsNativeFoundryVariant: String {
 
     var depthEntryMode: GoalsNativeCalibrationDepthEntryMode {
         switch self {
-        case .r03RecoveryEntry, .r03Recovery:
+        case .r03RecoveryEntry, .r03Recovery, .r03RecoveryAccessibility:
             .recovery
-        case .r03ClosureEntry, .r03Closure, .r03ClosureHistory:
+        case .r03ClosureEntry, .r03Closure, .r03ClosureHistory, .r03ClosureAccessibility:
             .closure
         default:
             .active
@@ -176,9 +182,10 @@ struct GoalsNativeFoundryHost: View {
             _ = initialState.selectPathNode(id: "pathnode.prime-wall-color")
         } else if variant == .r03PathFuture {
             _ = initialState.selectPathNode(id: "pathnode.assemble-crib")
-        } else if variant == .r03Recovery {
+        } else if variant == .r03Recovery || variant == .r03RecoveryAccessibility {
             _ = initialState.openRecovery()
-        } else if variant == .r03Closure || variant == .r03ClosureHistory {
+        } else if variant == .r03Closure || variant == .r03ClosureHistory
+                    || variant == .r03ClosureAccessibility {
             _ = initialState.openClosure()
             if variant == .r03ClosureHistory {
                 _ = initialState.openClosureHistory()
