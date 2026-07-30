@@ -73,11 +73,66 @@ final class YouNativeCalibrationD07HostUITests: XCTestCase {
             app.buttons["Dark"]
         ])
         XCTAssertTrue(app.navigationBars["Appearance"].exists)
-        XCTAssertTrue(element("ync-d07-appearance-current").label.contains("System"))
+        XCTAssertEqual(
+            element("ync-d07-appearance-current").label,
+            "Current appearance"
+        )
+        XCTAssertEqual(
+            element("ync-d07-appearance-current").value as? String,
+            "System. Matches your iPhone appearance."
+        )
         XCTAssertEqual(
             element("ync-d07-appearance-accent").value as? String,
-            "Violet–indigo, selected provisional target; production enum unresolved"
+            "Violet–indigo, selected. Used for actions, not status."
         )
+
+        let currentAppearance = element("ync-d07-appearance-current")
+        let appearanceSelection = element("ync-d07-appearance-controls")
+        let actionAccent = element("ync-d07-appearance-accent")
+        let previewIdentity = element("ync-d07-appearance-preview-identity")
+        let previewTruth = element("ync-d07-appearance-preview-truth")
+        let previewAction = element("ync-d07-appearance-preview-action")
+        assertExists([
+            currentAppearance,
+            appearanceSelection,
+            actionAccent,
+            previewIdentity,
+            previewTruth,
+            previewAction
+        ])
+
+        let orderedDepth = [
+            currentAppearance,
+            appearanceSelection,
+            actionAccent,
+            previewIdentity,
+            previewTruth,
+            previewAction
+        ]
+        for pair in zip(orderedDepth, orderedDepth.dropFirst()) {
+            XCTAssertLessThan(pair.0.frame.minY, pair.1.frame.minY)
+        }
+
+        XCTAssertEqual(
+            previewIdentity.label,
+            "Start Here. Prepare for tomorrow’s appointment"
+        )
+        XCTAssertEqual(previewTruth.label, "Protected time · 30 min")
+        XCTAssertEqual(previewAction.label, "Review")
+
+        for forbiddenPhrase in [
+            "Current truth",
+            "Supported controls",
+            "Controlled specimen",
+            "fixture",
+            "Visual-authority target",
+            "Production enum unresolved",
+            "proof",
+            "architecture",
+            "implementation"
+        ] {
+            assertNoAccessibleText(containing: forbiddenPhrase)
+        }
 
         let back = app.navigationBars["Appearance"].buttons.firstMatch
         XCTAssertTrue(back.isHittable)
@@ -185,6 +240,25 @@ final class YouNativeCalibrationD07HostUITests: XCTestCase {
                 line: line
             )
         }
+    }
+
+    private func assertNoAccessibleText(
+        containing phrase: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let predicate = NSPredicate(
+            format: "label CONTAINS[c] %@ OR value CONTAINS[c] %@",
+            phrase,
+            phrase
+        )
+        XCTAssertEqual(
+            app.descendants(matching: .any).matching(predicate).count,
+            0,
+            "Unexpected product UI language containing \(phrase)",
+            file: file,
+            line: line
+        )
     }
 
     private func scrollUntilVisible(_ target: XCUIElement, attempts: Int = 16) {

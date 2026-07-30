@@ -200,10 +200,10 @@ private struct YouNativeCalibrationAppearanceDepth: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
-                currentTruth
-                supportedControls
+                currentAppearance
+                appearanceControls
                 accentChoice
-                specimen
+                preview
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 20)
@@ -216,18 +216,12 @@ private struct YouNativeCalibrationAppearanceDepth: View {
         .accessibilityIdentifier("ync-d07-appearance-depth")
     }
 
-    private var currentTruth: some View {
+    private var currentAppearance: some View {
         VStack(alignment: .leading, spacing: 10) {
-            phaseLabel("Current truth")
-            HStack(alignment: .firstTextBaseline) {
-                Text(selection.title)
-                    .font(.title2.weight(.semibold))
-                Spacer(minLength: 16)
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(palette.accent)
-                    .accessibilityHidden(true)
-            }
-            Text(systemExplanation)
+            phaseLabel("Current appearance")
+            Text(selection.title)
+                .font(.title2.weight(.semibold))
+            Text(appearanceExplanation)
                 .font(.body)
                 .foregroundStyle(palette.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -236,13 +230,15 @@ private struct YouNativeCalibrationAppearanceDepth: View {
         .overlay(alignment: .bottom) {
             Rectangle().fill(palette.separator).frame(height: 1)
         }
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Current appearance")
+        .accessibilityValue("\(selection.title). \(appearanceExplanation)")
         .accessibilityIdentifier("ync-d07-appearance-current")
     }
 
-    private var supportedControls: some View {
+    private var appearanceControls: some View {
         VStack(alignment: .leading, spacing: 12) {
-            phaseLabel("Supported controls")
+            phaseLabel("Appearance")
             if dynamicTypeSize.isAccessibilitySize {
                 appearancePicker.pickerStyle(.inline)
             } else {
@@ -275,7 +271,7 @@ private struct YouNativeCalibrationAppearanceDepth: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(fixture.appearance.provisionalAccent.name)
                         .font(.headline)
-                    Text(fixture.appearance.provisionalAccent.posture)
+                    Text("Used for actions, not status.")
                         .font(.subheadline)
                         .foregroundStyle(palette.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -293,24 +289,39 @@ private struct YouNativeCalibrationAppearanceDepth: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Action accent")
         .accessibilityValue(
-            "\(fixture.appearance.provisionalAccent.name), selected provisional target; production enum unresolved"
+            "\(fixture.appearance.provisionalAccent.name), selected. Used for actions, not status."
         )
         .accessibilityIdentifier("ync-d07-appearance-accent")
     }
 
-    private var specimen: some View {
+    private var preview: some View {
         VStack(alignment: .leading, spacing: 14) {
-            phaseLabel("Controlled specimen")
-            Text("A clear next action")
-                .font(.title3.weight(.semibold))
-            Text("Hierarchy, selection, and contrast remain legible without changing semantic state.")
+            phaseLabel("Preview")
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Start Here")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(palette.secondary)
+                Text("Prepare for tomorrow’s appointment")
+                    .font(.title3.weight(.semibold))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Start Here. Prepare for tomorrow’s appointment")
+            .accessibilityIdentifier("ync-d07-appearance-preview-identity")
+
+            Text("Protected time · 30 min")
                 .font(.body)
                 .foregroundStyle(palette.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("ync-d07-appearance-preview-truth")
+
             Text("Review")
                 .font(.headline)
                 .foregroundStyle(palette.accent)
                 .frame(minHeight: 44, alignment: .leading)
+                .accessibilityIdentifier("ync-d07-appearance-preview-action")
         }
         .padding(.vertical, 22)
         .overlay(alignment: .top) {
@@ -319,8 +330,7 @@ private struct YouNativeCalibrationAppearanceDepth: View {
         .overlay(alignment: .bottom) {
             Rectangle().fill(palette.separator).frame(height: 1)
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Controlled Ambitions appearance specimen")
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("ync-d07-appearance-specimen")
     }
 
@@ -330,14 +340,14 @@ private struct YouNativeCalibrationAppearanceDepth: View {
             .foregroundStyle(palette.secondary)
     }
 
-    private var systemExplanation: String {
+    private var appearanceExplanation: String {
         switch selection {
         case .system:
-            "System follows the iPhone appearance. This fixture does not persist a change."
+            "Matches your iPhone appearance."
         case .light:
-            "Light is a fixture-only preview. Production persistence is not proven here."
+            "Uses a light appearance."
         case .dark:
-            "Dark is a fixture-only preview. Production persistence is not proven here."
+            "Uses a dark appearance."
         }
     }
 }
