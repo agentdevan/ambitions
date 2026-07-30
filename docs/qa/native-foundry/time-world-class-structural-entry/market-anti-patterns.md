@@ -1,0 +1,31 @@
+<!-- markdownlint-disable MD013 MD060 -->
+
+# Time Market Anti-Patterns
+
+| Anti-pattern | Why common | Why initially useful | Why it fails Ambitions | Native alternative |
+|---|---|---|---|---|
+| Calendar-grid-first product identity | The grid is familiar and implementation-ready. | People immediately recognize dates and events. | It creates a calendar clone and leaves dual truth, protection, and consequence as annotations. | Keep calendar grammar inside a Week-owned period passage whose primary identity is range, temporal truth, and focused depth. |
+| Agenda-as-root | Lists fit phones and screen readers well. | Long titles and chronology remain readable. | Duration, overlap, protection shape, and multi-day relation disappear; it duplicates Today. | Week root with List as semantic/accessibility transform. |
+| Week compressed to unreadable columns | Seven columns show the complete period at once. | Coverage feels efficient. | Short blocks become untappable, long titles vanish, and density becomes tiny type. | Adaptive Week emphasis, minimum object treatment, natural scrolling, and ordered equivalent. |
+| Availability heat map | Busy/free aggregation is fast to scan. | It appears to reveal opportunity. | Empty calendar space is not personal usability, and density color becomes recommendation. | Name exact openings as observations and qualify usability as unknown. |
+| Capacity dashboard | Metrics summarize overload. | Pressure looks measurable and actionable. | It creates analytics, scoring, comparison, and shame instead of chronology. | Contextual qualitative capacity/protection inside the affected period. |
+| Decorative waveform | Continuous curves make time feel alive. | The first viewport looks distinctive and premium. | It becomes a static infographic, implies unsupported continuous data, and weakens calendar grammar. | Restrained Now marker, temporal passage, and exact object-led movement. |
+| AI briefing above chronology | Automated summaries promise immediate value. | The product seems proactive. | Suggested output outranks accepted truth and creates an AI-planner destination. | On-demand proposal review subordinate to current chronology. |
+| Open-time recommendation | Scheduling products equate free/busy with availability. | It shortens planning decisions. | Open does not establish energy, family intent, transitions, or personal usability. | `Open calendar space · Personal usability unknown` until valid authority exists. |
+| Protection represented only through color | Tint is compact and conventional. | A busy grid stays visually simple. | It fails non-color access and competes with source/category colors. | Explicit Protected label, semantic boundary, trait, and consequence. |
+| Red overlap as complete conflict explanation | Calendars commonly warn through geometry. | The collision is instantly visible. | Overlap is not necessarily conflict; participants, ownership, and lived consequence vanish. | Participant-first review with exact incompatibility and Keep current/Cancel. |
+| Proposal styled as accepted placement | In-grid preview shows the possible result. | Spatial fit is easy to judge. | Suggested Goal timing appears scheduled before Time accepts it. | Separate proposal rail/material plus `Proposed · Not scheduled` and current truth retained. |
+| External observation styled as Ambitions truth | Unified calendars reduce apparent complexity. | Everything appears in one chronology. | Source authority, freshness, import status, and capacity decision are erased. | Source-bearing observation treatment and exact object/source detail. |
+| Tiny duration blocks | Proportional height is chronologically accurate. | More events fit without scrolling. | Accuracy becomes unreadable and inaccessible. | Minimum visible/hit representation with exact duration and List/detail fallback. |
+| Calendar clone with purple accents | Branding an existing grammar is low risk. | Familiar behavior gets a visual refresh. | Accent does not create Ambitions identity or truth integrity. | Ownable structure from accepted/proposed/source/protection/review/return relationships. |
+| Card stack beside a calendar | Context cards are easy to add. | Suggestions, conflicts, and capacity remain visible. | The root becomes a scheduling dashboard with competing objects. | Contextual object detail or consequence review at native depth. |
+| Duplicate Today timeline | Day planners optimize immediate execution. | The next action is obvious. | Time takes Today’s role and loses exact chronology ownership. | Chronology-first focused day with Event/Placement identity and handoff to execution. |
+| Segmented-control product identity | View switching is easy to expose. | Modes feel discoverable. | The control becomes the first viewport instead of temporal reality. | One subordinate native scale control or menu, absent unsupported choices. |
+| Separate conflict or reflow dashboard | Problems can be aggregated into a queue. | Resolution work seems efficient. | It creates unauthorized roots, backlog pressure, and context loss. | Start review from the affected object and return to its exact period/day/focus. |
+| Drag-only editing | Direct manipulation is fast and spatial. | Expert users move work quickly. | It excludes assistive input and hides the durable boundary and consequence. | Named Move/Change start/Change duration/Keep current/Cancel actions with preview. |
+| Static temporal infographic | A polished overview photographs well. | Time feels distinctive before interaction. | It cannot inspect, review, settle, cancel, or return. | Operational temporal objects with framework depth and focused review. |
+| Generic productivity metrics | Completion, focus, and utilization are market norms. | People can quantify performance. | Scores and streaks moralize personal time and turn Time into work software. | Exact chronology, humane recovery, and consequence without performance scoring. |
+
+## Banned-pattern audit rule
+
+A direction fails the selection gate if any anti-pattern above is its primary identity, even when its copy says the correct thing. Small subordinate use of familiar calendar geometry or ordered List is valid only when the direction preserves Time ownership, truth integrity, accessibility, and exact return.

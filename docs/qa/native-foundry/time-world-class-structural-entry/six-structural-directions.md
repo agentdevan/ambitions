@@ -1,0 +1,317 @@
+<!-- markdownlint-disable MD013 -->
+
+# Six Structural Directions
+
+All six directions are subordinate explorations within `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`. They preserve `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`, use fixture `time-flagship/week/protected-family-and-launch/v1`, and stop before rendering or implementation.
+
+No direction is selected. Every direction must generate Week, focused Wednesday, compact object detail, current/proposed review, cancel or fixture-only settlement, exact return, and an Accessibility Dynamic Type semantic equivalent.
+
+## AVF-TIME-S07-INT-D01-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D01-R00`
+- **Name:** Native Week Ledger
+- **Research lineage:** Apple Calendar’s conventional interval grammar and alternate List; BusyCal’s adjustable visible-day span and density control; Readdle’s direct edit plus named alternative; Apple HIG navigation and accessibility.
+- **Thesis:** Time becomes world-class by starting from the strongest native Week grammar and making authority, protection, and consequence unusually exact rather than replacing the calendar.
+- **User outcome:** A person can scan the week immediately, identify accepted reality, enter Wednesday, inspect one object, and review a proposal without learning a new temporal diagram.
+- **Primary spatial model:** A proportional vertical hour field with an adaptive three-day portrait window centered on Wednesday, narrow preceding/following-day continuations, and an exact seven-day range header. Horizontal passage changes the visible excerpt; the root identity remains the full week.
+- **Active-period identity:** `This week · Jul 27–Aug 2` remains above the temporal field with named Previous, Current week, and Next actions. The visible three-day excerpt is labelled as part of that week, never as a separate multi-day root.
+- **Now/Today treatment:** A restrained Now rule crosses Wednesday only. `Today` returns to the current week when away; it does not reset the selected supported scale or replace exact object return.
+- **Calendar-comprehension model:** Hour labels, all-day boundary, proportional range blocks, chronological vertical direction, adjacent overlap, and exact time labels remain conventional. Ambitions state changes edge, fill, label, and semantic role without changing what a time block is.
+- **Primary temporal object:** The subject-plus-placement interval block. Subject identity leads; exact range and placement authority follow. Event, placed Step, Reminder trigger, and external observation retain distinct object roles.
+- **Week first viewport:** Compact Time crown, exact week range, present relationship, Wednesday’s accepted fixed handoff, protected family-time boundary, narrow cross-day evidence of Thursday’s external observation/proposal, and the beginning of chronology. View switching remains in overflow or a subordinate menu.
+- **Focused-day composition:** Wednesday expands to a complete day hour field with all-day rail, Now, accepted blocks, protection boundary, neutral open-space label, and exact object selection. It remains chronology-first and does not expose Today execution actions.
+- **Temporal-object detail:** A compact native sheet leads with `Send the launch brief`, exact range, `Accepted · Fixed`, subject/placement IDs in evidence only, Goal context, and source/recurrence fields only where the fixture defines them. It returns to that object; the separate launch-review conflict trigger owns focused review.
+- **Accepted-placement treatment:** Opaque matte block integrated into the authoritative hour field, with stable leading interval spine, exact range, `Accepted`, and Fixed/Protected language. Accent is reserved for selection/action, not acceptance.
+- **Proposed-placement treatment:** An open-outline preview anchored outside the accepted lane with `Proposed · Not scheduled`; it never receives the accepted fill, selected trait, or primary chronological z-order. The accepted object remains visible.
+- **External-observation treatment:** A source-edged time range labelled `Apple Calendar observation · External`; it uses calendar position for comprehension but not accepted Ambitions material.
+- **Stale/unknown/history treatment:** Stale adds freshness language and interrupted source edge; unknown uses an explicit unresolved value rather than an empty block; historical chronology moves to object inspection with prior-range language and no current interaction trait.
+- **Protected treatment:** Family time uses a closed interval boundary, `Protected · No work`, and increased internal reservation. Its meaning survives monochrome and cannot be weakened from Week.
+- **Fixed treatment:** A firm interval spine plus `Fixed`; unlike Protected, it states schedule rigidity without `No work` meaning.
+- **Flexible treatment:** A named `Flexible` range/window with bounded alternative affordance only at detail; it does not float or imply automatic movement.
+- **Open-capacity treatment:** Empty chronology remains mostly empty. The named `After 6:30 PM · Open calendar space · Personal usability unknown` observation appears at day depth, not as a green fill or invitation.
+- **Conflict treatment:** Conflicting current/proposed ranges show a localized discontinuity and both participant labels. Red may reinforce but never explains the conflict. The first consequence says the move would consume protected family time.
+- **Current/proposed review:** A focused vertical comparison shows `Current` Family time at 5:30–7:30 PM and explicitly says the fixture does not specify launch review’s current placement; proposed 5:45–6:15 PM follows with consequence and valid outcomes. It never aliases launch review to the launch brief.
+- **Settlement and return:** `Cancel` or `Keep current time` dismisses to Wednesday and restores the originating conflict-review trigger/focus and original week excerpt. The separate compact-detail dismissal restores `Send the launch brief`; fixture-only alternative inspection returns without commit or Receipt.
+- **Goal/Step context:** Goal and Step identity appear in object detail or proposal review; they never turn the Week into a Goal plan or mark computed Goal timing accepted.
+- **Density strategy:** Increase visible-day focus, collision grouping, minimum block targets, overflow count, and detail/List depth before shrinking type. Very dense days may show exact time plus identity stub and a named `N more` entry.
+- **Quiet-week behavior:** Retain hour/date scaffolding, accepted truth, protection, and Now; do not enlarge empty space into a recommendation, briefing, or decorative hero.
+- **Material strategy:** Opaque mineral semantic plane, restrained interval edges, localized selected/proposed/protected articulation, and transient native sheet/review material with opaque fallback.
+- **Typography character:** Native SF Pro, object identity before state, tabular time, compact range title, and no micro-label legend. Long titles wrap in detail and receive a meaningful minimum in the grid.
+- **Native control strategy:** Framework stack/Back, native toolbar/menus, native sheet for compact detail, full-screen cover only for consequential review, native date/time pickers for future named edits.
+- **Direct manipulation and named alternatives:** Drag/resize and named `Move`/`Change start`/`Change duration` are target-only future operations. This calibration exposes only `Cancel`, `Keep current time`, or fixture-only alternative inspection; it neither creates nor commits a proposal.
+- **Motion character:** Short spatial continuity when the visible day excerpt changes and a restrained object-to-detail expansion; no elastic grid, pulsing Now, or automatic reflow animation.
+- **Accessibility transformation:** Replace the multi-day field with an ordered chronological List for the same week: range, Wednesday, accepted fixed handoff, protected family time, open-space qualification, Thursday external observation, proposed nursery Step, then detail/review/return actions.
+- **Reduce Motion:** Crossfade or direct replacement for range/day changes; current/proposed remain static labelled groups; deterministic focus carries continuity.
+- **Reduce Transparency:** All calendar, sheet, proposal, and protection surfaces become opaque with equivalent rules and grouping.
+- **Increased Contrast:** Strengthen hour rules, interval spines, Now, focus, proposal outline, source edge, and protection boundary while preserving the same hierarchy.
+- **Light character:** Mineral-neutral canvas, graphite type, fine structural rules, no sterile white, and restrained violet-indigo only for selection/action.
+- **Dark character:** Deep graphite field, controlled tonal blocks, bright-enough chronology, no glow, and no dim proposal/source text.
+- **Strongest quality:** Immediate calendar comprehension and lowest native interaction learning cost.
+- **Principal risk:** It may remain a sophisticated calendar clone whose identity is still the grid.
+- **Native SwiftUI feasibility:** High for a bounded prototype using native navigation, scrolling, shapes, adaptive layout, sheet, and List; proportional overlap and exact return still require focused proof.
+- **Calendar-clone risk:** High; invalid if authority/protection structure feels like annotations on Apple Calendar.
+- **Dashboard risk:** Low; rises if conflict, opening, or source summaries become side cards.
+- **Today-duplication risk:** Medium at focused-day depth; controlled by exact chronology, object authority, and absence of execution prioritization.
+- **Copy dependence:** Low-to-medium for explanation; high structural dependence on conventional calendar grammar is intentional but must not copy a product’s trade dress.
+- **Architecture-sensitive assumptions:** Exact placement/subject/source identities, proposal authority, day selection, range restoration, collision ordering, and List parity can be represented independently.
+- **What must be tested in native prototype:** Portrait three-day excerpt comprehension; seven-day range retention; short block hit targets; dense overlap; proposal non-acceptance in grayscale/VoiceOver; interactive Back coexistence; sheet/review focus return; maximum Dynamic Type List parity.
+- **Automatic invalidation conditions:** The week is mistaken for a three-day root; proposal resembles an accepted block; source is color-only; protection is tint-only; Today execution anatomy appears; dense objects shrink below legibility; the grid remains the only semantic form; or owner review concludes the direction is merely Apple Calendar with violet accents.
+
+## AVF-TIME-S07-INT-D02-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D02-R00`
+- **Name:** Adaptive Period Passage
+- **Research lineage:** Timepage’s period passage; Structured’s stable date strip and readable temporal flow; Weather’s progressive time scales; Tide Guide’s direct temporal exploration; Wave 3 ordered-passage law.
+- **Thesis:** The Week can be understood as one continuous passage through seven named days, with Wednesday opened to exact chronology and adjacent days retained as thresholds rather than compressed columns.
+- **User outcome:** The person feels where they are in the week, enters Wednesday naturally, and retains cross-day orientation without parsing seven tiny vertical lanes.
+- **Primary spatial model:** A vertically scrolling sequence of seven day passages. Each day has a compact proportional interval strip; the focused/current day opens into a full-width hour field in place. Day thresholds remain visible above/below, so the Week is one continuous object rather than an agenda of cards.
+- **Active-period identity:** Exact range anchors the crown and a slender seven-position passage index marks Wednesday by label and trait, not color. The index navigates within the Week but does not become top tabs.
+- **Now/Today treatment:** Now sits inside the opened Wednesday passage. Today returns to the current week/day threshold only when the person intentionally leaves the current period.
+- **Calendar-comprehension model:** Each compact day strip preserves vertical time position and proportional interval spans; the opened day uses conventional hour grammar. Seven-day ordering and exact date headings prevent the passage from becoming a task list.
+- **Primary temporal object:** A time-range segment inside a day passage, expanded to full subject-plus-placement anatomy only in the opened day.
+- **Week first viewport:** Compact range, seven-position index, the end of Tuesday, opened Wednesday with fixed handoff and protected family time, and the beginning of Thursday. Cross-day thresholds establish Week before labels are fully read.
+- **Focused-day composition:** The opened passage becomes a full-width vertical chronology with Now, all-day area, exact intervals, and an end threshold leading to Thursday. The transition preserves the Week’s scroll owner and selected day.
+- **Temporal-object detail:** Selection lifts one segment into compact native detail while the day passage remains the return context. Detail contains exact time, authority, source, protection/flexibility, Goal link, and only supported actions.
+- **Accepted-placement treatment:** Solid segment attached to the day’s authoritative time spine, with `Accepted` and rigidity label. It reads as part of lived chronology.
+- **Proposed-placement treatment:** Open-ended segment floats in a subordinate proposal gutter beside the day spine and says `Proposed · Not scheduled`; its time alignment is exact but it never closes onto the authoritative spine.
+- **External-observation treatment:** Source-labelled segment touches the chronological strip through a small source bridge but remains outside the accepted spine; it reads as observed time, not native object.
+- **Stale/unknown/history treatment:** Stale breaks the source bridge and names last verification; unknown reserves no false interval; historical objects disclose from the day heading or detail and do not occupy current chronology.
+- **Protected treatment:** Protected time closes a section of the day passage with a firm start/end gate and `No work`; later content begins after the boundary rather than visually flowing through it.
+- **Fixed treatment:** Fixed objects attach firmly to the time spine without closing the passage around surrounding time.
+- **Flexible treatment:** Flexible segments retain exact current accepted placement and show a bounded movable-window annotation at detail, never a loose floating blob.
+- **Open-capacity treatment:** Named opening appears as a textual waypoint only at opened-day depth. The passage remains quiet; it does not widen, glow, or surface a suggested Goal.
+- **Conflict treatment:** The proposed segment encounters the protected gate; both participant identities appear at the interruption. Conflict is the inability to pass, not a red region or capacity score.
+- **Current/proposed review:** The day passage freezes around the review trigger, then focused review shows accepted Family time, marks launch review’s current placement `Not specified by fixture`, and follows with the proposed insertion and protected-time consequence.
+- **Settlement and return:** Cancel/Keep current returns to the frozen Wednesday passage, restores the conflict-review trigger and scroll threshold, and removes proposal articulation without moving any accepted spine. Compact object detail has its own exact object return.
+- **Goal/Step context:** Goal context is a secondary line inside detail/proposal; the Week passage never becomes a Goal Path or progress chronology.
+- **Density strategy:** Compact nonfocused day strips aggregate only at the object-identity boundary, not into heat; focused day uses collision groups and depth. Very dense Week retains day thresholds and uses named overflow entry.
+- **Quiet-week behavior:** Empty days remain short but named passages with proportional time strip; the current/protected day retains natural depth. No scenic void or recommendation fills the Week.
+- **Material strategy:** Continuous matte plane with subtle day-threshold rules; opened day gains localized relief; protected gate and proposal gutter use authored structural boundaries.
+- **Typography character:** Exact range and day names lead; SF Pro body and tabular times create a calm reading rhythm. Day thresholds use headings, not giant editorial titles.
+- **Native control strategy:** One vertical scroll owner, native section headings and buttons, NavigationStack for true depth, sheet for compact detail, full-screen consequence review, native menu for supported scales.
+- **Direct manipulation and named alternatives:** Long-press, drag, and named Move/Change start/Change duration are target-only future operations. This calibration exposes only Cancel, Keep current, or fixture-only alternative inspection and creates no proposal.
+- **Motion character:** A restrained opening/closing of the selected day passage and continuity between day threshold and full chronology. No continuous scrolling animation, waveform, or forced auto-centering.
+- **Accessibility transformation:** The standard passage is already near-linear; at Accessibility Dynamic Type the compact interval strips disappear and each day becomes a complete chronological semantic group with exact duration/state/source and full review parity.
+- **Reduce Motion:** Day opening becomes direct insertion or short fade; static headings and focus establish origin and return.
+- **Reduce Transparency:** The opened passage, detail, and proposal gutter use opaque tonal steps and rules.
+- **Increased Contrast:** Strengthen day thresholds, time spine, opened-day boundary, protected gate, and proposal gutter without adding warning panels.
+- **Light character:** Airy mineral paper-like plane without parchment; graphite time spine and restrained local relief.
+- **Dark character:** Deep continuous graphite passage with tonal day thresholds and no luminous timeline.
+- **Strongest quality:** Cross-day orientation without seven-column compression; the Week feels like a temporal journey rather than a mode.
+- **Principal risk:** The vertical passage may become an agenda or duplicate Today when Wednesday dominates.
+- **Native SwiftUI feasibility:** High for sectioned scroll plus opened-day layout; preserving proportional compact strips, stable expansion, and exact scroll/focus return is medium risk.
+- **Calendar-clone risk:** Low-to-medium because the Week is not grid-first, but it must retain recognizable temporal strips.
+- **Dashboard risk:** Low unless summaries accumulate between passages.
+- **Today-duplication risk:** High; must be rejected if the opened day becomes action prioritization or a current-task timeline.
+- **Copy dependence:** Medium; the spatial passage should communicate orientation before explanatory copy, while truth labels remain mandatory.
+- **Architecture-sensitive assumptions:** One root scroll owner can preserve seven-day identity, selected day, compact strip semantics, object identity, and review return; nonfocused-day aggregation never invents capacity.
+- **What must be tested in native prototype:** Whether people recognize Week before scrolling; Tuesday/Thursday thresholds; proportional comprehension in compact strips; Wednesday versus Today distinction; dense-week performance; VoiceOver heading traversal; exact scroll/focus return; period-swipe versus Back gesture.
+- **Automatic invalidation conditions:** The root reads as agenda/List; duration/overlap cannot be understood; Wednesday becomes Today’s execution timeline; nonfocused days collapse into scores/heat; day expansion loses the week range; motion carries continuity alone; or return lands at the top instead of the originating segment.
+
+## AVF-TIME-S07-INT-D03-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D03-R00`
+- **Name:** Interval Object Field
+- **Research lineage:** Flighty’s exact-object continuity and source/prediction depth; BusyCal compact Info Panel; Apple Health provenance depth; Apple Calendar interval grammar; Moonlitt’s coherent-object identity.
+- **Thesis:** Time’s distinctive unit is not the calendar cell but the exact temporal object: a stable subject attached to an interval, authority, source, and consequence across Week, day, detail, review, and return.
+- **User outcome:** A person can recognize and follow `Send the launch brief`, `Family time`, the prenatal observation, and the nursery proposal as different exact temporal objects without losing the week they inhabit.
+- **Primary spatial model:** A portrait focus-plus-context object field gives Wednesday the full readable width, retains Tuesday/Thursday as labelled object thresholds above and below, and keeps all seven days in a stable range rail. Each object is an interval spine with its label beside rather than inside short geometry; the person changes the focused territory through the range rail instead of compressing seven columns.
+- **Active-period identity:** Exact week range and seven day territories stay visible; selecting Wednesday emphasizes its territory but keeps object spines aligned to their dates.
+- **Now/Today treatment:** Now is a small crossing on the current day’s neutral time meridian. Today is a named range-return control, not the primary object.
+- **Calendar-comprehension model:** Date territories, vertical time alignment, proportional interval spines, all-day position, and collision offsets remain conventional enough to read as a calendar. Labels may extend beyond short block geometry through clear ownership connectors.
+- **Primary temporal object:** A coupled subject identity plus interval spine plus authority edge. Placement remains a relationship; the object anatomy shows subject and placement without merging their identities.
+- **Week first viewport:** Exact seven-day range rail, full-width Wednesday object field, labelled Tuesday/Thursday thresholds, four distinguishable object anatomies across Wednesday/Thursday, and enough time scaffolding to interpret their ranges. No seven-column miniature appears.
+- **Focused-day composition:** Wednesday expands the labels and interval spines into a readable object sequence while preserving proportional time alignment and overlap.
+- **Temporal-object detail:** The selected object spine grows into a compact detail sheet with subject identity fixed in the same visual axis; exact placement, source, Goal, recurrence, and state follow.
+- **Accepted-placement treatment:** Closed interval spine attached to an accepted-authority edge; subject label and `Accepted · Fixed/Protected` form one semantic group.
+- **Proposed-placement treatment:** Open interval spine with an unjoined end and `Proposed · Not scheduled`; it belongs to a proposal layer and cannot acquire the accepted edge until real settlement.
+- **External-observation treatment:** Interval spine carries a source notch and human-readable `Apple Calendar observation`; it uses temporal alignment without the accepted-authority edge.
+- **Stale/unknown/history treatment:** Stale changes the source notch to a labelled verification break; unknown shows unresolved current value in detail rather than a false spine; historical interval spines appear only in history inspection with former-time language.
+- **Protected treatment:** Protected object adds a closed reserve bracket spanning the exact interval and the written meaning `No work`; the bracket belongs to that placement, not the entire category color.
+- **Fixed treatment:** Fixed object uses a firm squared endpoint and exact range; it is visibly rigid but does not imply protected personal meaning.
+- **Flexible treatment:** Flexible object uses an accepted current interval plus a small named permissible-window disclosure in detail; no decorative elastic animation.
+- **Open-capacity treatment:** Open time is not an object spine. It appears only as a neutral day annotation with usability unknown, preventing empty space from acquiring object/action weight.
+- **Conflict treatment:** Two exact object spines remain visible and are connected only in the review where their intervals cannot coexist. The protected participant’s reserve bracket and consequence are explicit.
+- **Current/proposed review:** The design ordinarily keeps subject identity fixed across interval states, but this fixture does not supply launch review’s stable ID or current interval. It therefore shows the conflict trigger, accepted Family time, `Current placement not specified`, the proposed interval, and consequence without inventing a same-object accepted spine.
+- **Settlement and return:** Cancel/Keep removes the proposed interval state and returns focus to the originating conflict trigger in Wednesday; accepted Family time remains unchanged. The separate launch-brief detail path returns to its own subject spine.
+- **Goal/Step context:** Goal and Step IDs attach as contextual lineage beneath the subject. The proposal remains a Step plus proposed placement, never a scheduled Step row.
+- **Density strategy:** Labels use a collision-aware side index; proportional spines remain compact. Dense clusters collapse labels into a named object index while preserving exact spines and accessible chronological order.
+- **Quiet-week behavior:** A few exact object spines carry the viewport without oversized empty-state copy. Unoccupied day territories remain quiet.
+- **Material strategy:** Minimal matte field, fine temporal rules, authored interval spines, localized selected relief, and compact native transient detail.
+- **Typography character:** Object names lead in SF Pro Text Medium/Semibold; tabular ranges align; authority/source lines remain concise and attached.
+- **Native control strategy:** Native navigation and presentation own depth; custom drawing is limited to bounded interval/connector geometry with complete semantic mirror.
+- **Direct manipulation and named alternatives:** An object spine may become a future drag target, while named Move/Change actions would provide parity. Both are target-only; this calibration exposes only Cancel, Keep current, or fixture-only inspection and does not create a proposal.
+- **Motion character:** Object-to-detail continuity and a short interval-state transition; no moving background, orbit, path animation, or decorative pulse.
+- **Accessibility transformation:** Replace spatial spines with a chronological object List retaining subject, exact range/duration, placement authority, source, Goal/Step context, protection, conflict, and actions. One object is one coherent accessibility group.
+- **Reduce Motion:** Direct swap between current/proposed labelled sections; focus and repeated subject identity establish continuity.
+- **Reduce Transparency:** Object field and detail use opaque plane/rules; connectors remain solid structural marks.
+- **Increased Contrast:** Strengthen interval spines, endpoints, source notches, protection brackets, and focus without enlarging all objects into cards.
+- **Light character:** Precise graphite interval marks on mineral-neutral field with restrained selection accent.
+- **Dark character:** Clear pale interval marks and tonal object identity on deep graphite, avoiding neon diagram appearance.
+- **Strongest quality:** Exact temporal object identity and clean separation of subject, placement, source, and proposal through the whole journey.
+- **Principal risk:** The field may become a custom diagram or static infographic whose connectors require explanation.
+- **Native SwiftUI feasibility:** Medium-high; native depth is straightforward, but label-to-spine layout, collision ordering, hit targets, and semantic equivalence require a bounded custom layout.
+- **Calendar-clone risk:** Low-to-medium; familiar time alignment remains but object anatomy is ownable.
+- **Dashboard risk:** Low unless the side index becomes a card list beside the calendar.
+- **Today-duplication risk:** Low because object authority and exact intervals dominate instead of execution priority.
+- **Copy dependence:** Medium; geometry should establish object/interval coupling, but explicit truth/source labels remain required.
+- **Architecture-sensitive assumptions:** Stable subject and placement IDs can remain coupled without duplication; exact source/occurrence identity exists; label collision order matches semantic order; short intervals remain targetable.
+- **What must be tested in native prototype:** Whether labels clearly own their interval; short durations; overlapping objects; dense collision index; proposal in grayscale; source versus authority; object-to-detail continuity; accessibility grouping; performance of custom interval layout.
+- **Automatic invalidation conditions:** The Week becomes seven tiny columns; the range rail is mistaken for top tabs; connectors look like a network graph; label/interval ownership is ambiguous; placement becomes part of the subject lifecycle; short spines are unreachable; proposals close like accepted objects; List order differs from visual order; or the field looks better as a poster than as an operating calendar.
+
+## AVF-TIME-S07-INT-D04-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D04-R00`
+- **Name:** Protected Ground Week
+- **Research lineage:** Gentler Streak’s legitimate recovery states; Opal’s named operational boundaries; Fantastical unavailable/maybe states; Time canon’s protected/fixed/flexible inequality; Apple Maps consequence-first alternatives.
+- **Thesis:** Time can become distinctly Ambitions by making protected reality and truthful unknown usability shape the Week’s ground, while keeping conventional chronology and refusing to score or fill every opening.
+- **User outcome:** A person sees what must remain intact, what is fixed, where calendar space is merely open, and exactly why a proposal cannot consume protected family time.
+- **Primary spatial model:** A protection-first portrait Week uses a full-width Wednesday reserve field plus a compact seven-day boundary index that names each day’s protected/fixed intervals without scoring or heat. Thursday’s source/proposal context appears in a labelled next-day threshold; selecting another day replaces the broad field while the exact Week remains fixed. Accepted objects occupy chronology above the ground.
+- **Active-period identity:** Exact week range and seven named days remain stable above the ground; protected reserves are local to their exact intervals and do not recolor entire days.
+- **Now/Today treatment:** Now is a restrained rule on Wednesday. Today returns to current week/day but does not turn protected ground into a day-planning recommendation.
+- **Calendar-comprehension model:** Time position, duration blocks, all-day separation, broad focused-day chronology, exact seven-day index, and overlap remain familiar. The ground adds meaning only where canonical protection/open qualification exists; it never compresses seven chronological columns.
+- **Primary temporal object:** Accepted subject-plus-placement block, interpreted in relation to the protected/fixed/flexible ground rather than as an isolated colored event.
+- **Week first viewport:** Exact Week range and boundary index, full-width Wednesday chronology, the fixed handoff, strong family-time reserve, neutral open-space observation, and a labelled Thursday source/proposal threshold. The protected boundary is the most distinctive non-chrome element.
+- **Focused-day composition:** Wednesday expands to full hour detail; protected family time becomes a named reserved region with exact endpoints, while the open observation remains a textual qualification rather than colored capacity.
+- **Temporal-object detail:** Compact native detail leads with object identity and exact placement, then protection/flexibility relationship, Goal/source, and supported inspection actions.
+- **Accepted-placement treatment:** Opaque chronological block with `Accepted`; its relationship to protected/fixed ground is explicit but acceptance does not depend on ground color.
+- **Proposed-placement treatment:** Proposal appears as a light, open candidate laid over but not absorbed into the ground, with `Proposed · Not scheduled` and no accepted z-order.
+- **External-observation treatment:** External time is an outlined observation band labelled by source. It may show occupied chronology but does not automatically alter protected or usable ground.
+- **Stale/unknown/history treatment:** Stale source band states last verification; unknown ground remains explicitly unqualified, not open; historical reserves disclose at object/history depth and do not shape current space.
+- **Protected treatment:** A firm exact reserve with start/end gates, `Protected`, and `No work`; its visual boundary persists under monochrome, opaque, high-contrast, and List forms.
+- **Fixed treatment:** Fixed placement uses a firm block and rigidity label but does not reserve adjacent ground or imply personal prohibition.
+- **Flexible treatment:** Flexible placement stays accepted at its current interval and exposes only its rule/window in detail; ground never silently moves it.
+- **Open-capacity treatment:** The named opening is rendered as unfilled neutral chronology with `Open calendar space · Personal usability unknown`. No positive tint, score, fill level, or Goal suggestion appears.
+- **Conflict treatment:** The proposal visibly crosses the protected reserve boundary, but review must name both participants and state `would consume protected family time`; the boundary alone is insufficient.
+- **Current/proposed review:** Current ground and accepted Family time remain the first section; launch review’s current placement is explicitly unspecified; the proposed change occupies a second static section; protection meaning and valid outcomes follow.
+- **Settlement and return:** Cancel/Keep current preserves protected ground and accepted objects, removes the candidate, and returns to the originating Wednesday conflict trigger. Compact detail returns separately to its selected object.
+- **Goal/Step context:** Goal context appears only on subject/proposal; protected family time remains personal temporal meaning, not a Goal metric or Life Capital score.
+- **Density strategy:** Protection reserves retain exact boundaries while object detail compresses progressively. Very dense periods use focused day/List rather than reducing ground to colored percentages.
+- **Quiet-week behavior:** Quietness is a valid spacious chronology. Protected intervals remain meaningful; other emptiness stays unqualified and free of prompts.
+- **Material strategy:** Matte mineral ground, opaque protected reserve, restrained object relief, no gradients/heat, and transient native review material.
+- **Typography character:** Protection and consequence use clear body/callout language; object identity remains primary; tabular time anchors boundaries; no uppercase policy labels.
+- **Native control strategy:** Framework navigation and sheets; custom ground is a bounded background/overlay with semantic labels and no independent gestures. Native controls own actions.
+- **Direct manipulation and named alternatives:** Direct manipulation and named Move/Change controls are target-only future operations; they cannot cross protected ground without review and must provide parity. This calibration exposes only Cancel, Keep current, or fixture-only inspection and offers no working movement or proposal creation.
+- **Motion character:** Protection is static. Proposal entry may use a short local reveal; no breathing reserve, heat animation, or automatic flow.
+- **Accessibility transformation:** Ordered chronological List names each protected/fixed/open interval and its meaning before objects/actions. Open-space uncertainty and both conflict participants remain explicit.
+- **Reduce Motion:** All ground/proposal relationships remain static with direct state changes and focus.
+- **Reduce Transparency:** Ground and protection use opaque tonal/structural separation; no blur conveys availability.
+- **Increased Contrast:** Strengthen reserve gates, exact endpoints, labels, focus, and proposal crossing without using a red warning field.
+- **Light character:** Mineral-neutral open ground with a slightly denser protected reserve and crisp graphite boundaries.
+- **Dark character:** Deep graphite ground with opaque tonal reserves, controlled contrast, and no glowing blocked zones.
+- **Strongest quality:** Makes protection and non-equivalent time intrinsic to the Week without relying on color or scores.
+- **Principal risk:** It may become an availability/capacity visualization whose empty ground implies usability.
+- **Native SwiftUI feasibility:** High for static bounded reserves and ordinary chronology; medium risk in dense overlap, accessibility ordering, and ensuring background never becomes the interaction owner.
+- **Calendar-clone risk:** Medium; familiar chronology remains, but the semantic ground is distinctive.
+- **Dashboard risk:** Medium-high if reserves/openings are summarized, scored, or aggregated.
+- **Today-duplication risk:** Low; exact protection/chronology rather than execution dominates.
+- **Copy dependence:** Medium; `Open`/`Protected` language is essential, but boundaries must carry pre-reading meaning.
+- **Architecture-sensitive assumptions:** Protected/fixed/flexible/open/unknown are exact orthogonal facts with stable intervals; external observation does not automatically alter capacity; usability can remain unknown.
+- **What must be tested in native prototype:** Whether empty ground reads as invitation; protection without tint; fixed versus protected distinction; overlap/dense weeks; open/protected overlap in the fixture; grayscale/VoiceOver; proposal crossing; quiet-week balance.
+- **Automatic invalidation conditions:** The Week becomes seven tiny columns or the boundary index becomes a score strip; ground becomes a heat map or utilization score; empty space suggests available work; protection is category color; fixed/protected collapse; external observation reserves capacity silently; conflict participants disappear; or the first viewport reads as a capacity dashboard.
+
+## AVF-TIME-S07-INT-D05-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D05-R00`
+- **Name:** Dual-Truth Week Ledger
+- **Research lineage:** Flighty’s official-versus-predicted times; Fantastical Proposals; Morgen preview and explicit Schedule; Apple Maps alternatives before Go; Wave 1 Semantic State Covenant and VC-09 dual-truth passage.
+- **Thesis:** Time’s most ownable operation is the honest coexistence of current accepted chronology and proposed change, with a Week root that makes proposals visible but never installs them.
+- **User outcome:** The person can see what is actually scheduled, notice that a nursery Step is only proposed, and enter a consequence review that never hides or weakens current truth.
+- **Primary spatial model:** A stable seven-day range crown owns a single full-width focused-day chronology; a narrow contextual proposal ledger attaches only to that day’s trailing edge. Day selection replaces the full-width chronology beneath the unchanged Week range. The ledger is absent when no proposal exists and never becomes a second calendar, tab, or dashboard.
+- **Active-period identity:** Exact week range anchors both accepted chronology and the day-attached proposal ledger; proposals cannot define a different range.
+- **Now/Today treatment:** Now belongs exclusively to accepted chronology. Today returns to the current week. A proposal never receives a Now relationship.
+- **Calendar-comprehension model:** Accepted chronology uses familiar interval blocks and day/time scaffolding. Proposal entries include exact date/range and a visual anchor to their possible position without occupying the accepted lane.
+- **Primary temporal object:** Current subject-plus-accepted-placement pair, with optional proposal/change-set identity attached but not merged.
+- **Week first viewport:** Exact seven-day range crown, full-width Wednesday accepted fixed/protected chronology, labelled Thursday preview with external observation, and one small day-attached entry `Paint the nursery wall · Proposed · Not scheduled · Thu 10:30`. No miniature seven-column Week is used; the ledger is subordinate but unmissable.
+- **Focused-day composition:** Wednesday shows accepted day chronology first and a proposal/conflict entry only when relevant. Thursday can show the nursery proposal adjacent to the external observation without installing it.
+- **Temporal-object detail:** Compact detail presents accepted identity/time/source. If a proposal exists, a separate `Review proposed change` row opens focused comparison.
+- **Accepted-placement treatment:** Stable opaque authoritative block with `Accepted` and rigidity/protection qualifier.
+- **Proposed-placement treatment:** Text-first proposal entry with open interval glyph, exact destination, `Not scheduled`, consequence summary, and Review action. It never uses accepted block fill or selected trait.
+- **External-observation treatment:** Source-labelled observation occupies observed chronology but carries neither accepted placement nor proposal ledger anatomy.
+- **Stale/unknown/history treatment:** Stale and unknown qualify the accepted/external source section before proposals; historical proposals/results live in object history, not the active ledger.
+- **Protected treatment:** Protected time remains an accepted authoritative block/boundary and is copied into review as current truth, never into the proposal ledger as a warning badge.
+- **Fixed treatment:** Fixed is attached to current accepted placement and informs whether named alternatives may be reviewed.
+- **Flexible treatment:** Flexible current placement remains accepted; the ledger may carry a proposed alternative only when a stable proposal identity exists.
+- **Open-capacity treatment:** Open calendar space may appear in accepted chronology as a neutral observation but never automatically creates a proposal ledger entry.
+- **Conflict treatment:** Conflict is created only when a proposal and exact accepted participant cannot coexist. The ledger names both and routes directly to review; no general conflict inbox exists.
+- **Current/proposed review:** Full-screen vertical dual-truth ledger: Current accepted family-time boundary; `Launch review current placement · Not specified by fixture`; Proposed 5:45–6:15 alternative; `would consume protected family time`; Cancel/Keep current/fixture-only inspection. No accepted launch-review placement or revision is invented.
+- **Settlement and return:** Cancel or Keep current removes/dismisses the proposal review without changing accepted chronology, then restores the exact ledger trigger/object focus. No changed settlement, Receipt, or Undo is shown in this fixture.
+- **Goal/Step context:** Nursery proposal carries Goal and Step identity in its ledger entry/detail. Its proposal status is more prominent than Goal attractiveness or planning rationale.
+- **Density strategy:** The proposal ledger shows at most the highest-context entries by day with a named count/depth. Accepted chronology retains its own collision handling. It never accumulates as a card stack beside every day.
+- **Quiet-week behavior:** When no proposals exist the ledger disappears completely; accepted chronology and protection remain calm. The structure must still feel intentional without a permanent empty proposal rail.
+- **Material strategy:** Opaque accepted plane, narrow open proposal seam, restrained comparison material at review, and no warning-card or tinted-side-panel identity.
+- **Typography character:** `Current` and `Proposed · Not scheduled` are explicit semantic headings; object identity and exact time lead within each; consequence copy is concise and body-scaled.
+- **Native control strategy:** Native Week scroll/selection, sheet for detail, full-screen review with native Cancel/Back, framework focus return, native menu for any supported view switch.
+- **Direct manipulation and named alternatives:** Drag and named Move/Change actions are target-only future ways to create a proposal and cannot install one without review. This calibration exposes only Cancel, Keep current, or fixture-only inspection; it does not create, reject durably, or commit a proposal.
+- **Motion character:** Proposal seam opens from its day/object origin; accepted chronology never shifts during preview. Reduce to focus/highlight under pressure.
+- **Accessibility transformation:** Ordered Week List preserves chronological day order. Within each day, accepted and external truth read first, followed by a separately labelled proposal group with explicit `Not scheduled`, then review. Proposals are never interleaved as accepted events.
+- **Reduce Motion:** Proposal entry appears directly; current/proposed groups remain static; focus return supplies continuity.
+- **Reduce Transparency:** Accepted plane, proposal seam, and review become opaque grouped surfaces with rules and headings.
+- **Increased Contrast:** Strengthen accepted/proposal group boundaries, open proposal glyph, focus, and protection rule; color remains secondary.
+- **Light character:** Crisp mineral chronology with restrained open proposal seam and precise text hierarchy.
+- **Dark character:** Deep graphite accepted field, clearly separated but legible proposal seam, no luminous ghost events.
+- **Strongest quality:** Proposal-versus-accepted integrity is the organizing quality and prepares directly for consequential dual-truth review.
+- **Principal risk:** The proposal ledger can become a permanent planning dashboard or card rail beside the calendar.
+- **Native SwiftUI feasibility:** High for contextual ledger and full-screen comparison; medium risk in keeping proposal anchors spatially useful without appearing scheduled.
+- **Calendar-clone risk:** Medium; accepted chronology remains conventional, while the dual-truth ledger is distinctive.
+- **Dashboard risk:** High; strict absence/size/context limits are essential.
+- **Today-duplication risk:** Low-to-medium; proposals remain temporal placement review, not next-action execution.
+- **Copy dependence:** Medium-high because explicit authority language is central; structure must still keep accepted/proposed separate before full copy is read.
+- **Architecture-sensitive assumptions:** Stable proposal/change-set identity, destination time, source/current revision, affected placement IDs, and review origin exist; proposal absence is distinguishable from empty data.
+- **What must be tested in native prototype:** Whether day-attached proposal looks unscheduled; no-proposal quiet week; several proposal density; external observation beside proposal; grayscale/VoiceOver order; review transition; cancellation/return; avoidance of side-panel/dashboard impression.
+- **Automatic invalidation conditions:** The focused-day root is mistaken for Today or the Week crown becomes mode tabs; proposal occupies accepted chronology; current truth shifts or disappears; ledger persists empty; ledger becomes a queue/dashboard; proposals are ranked/recommended; external observations use proposal anatomy; or fixture-only review exposes working Commit/Undo.
+
+## AVF-TIME-S07-INT-D06-R00
+
+- **Stable ID:** `AVF-TIME-S07-INT-D06-R00`
+- **Name:** Articulated Period Atlas
+- **Research lineage:** Active provisional `AVF-TIME-S07-R01 — Integrated Period Atlas, Capability-Bounded`; installed `VC09-TIME-S07-R00 — Adaptive Dual-Truth Period Passage`; Apple Calendar’s exact day grammar and stable range return; Flighty’s exact temporal identity; Tide Guide and Moonlitt’s pre-reading temporal character; Wave 1 Articulated Native Grammar; Weather progressive disclosure.
+- **Thesis:** A restrained Ambitions-specific Week can behave as a bound atlas of seven full-width day leaves: one readable day at a time, an unmistakable Week spine, and authored object edges that reveal authority without a grid, dashboard, or decorative waveform.
+- **User outcome:** The Week feels ownable and alive at first glance, yet the person can still read exact dates/times, inspect real objects, distinguish authority, review consequence, and return through native depth.
+- **Primary spatial model:** Seven full-width day leaves are bound beneath one exact Week spine. Wednesday is the active leaf; labelled edges for the other six remain visible as one bound period, and selecting an edge replaces the leaf rather than expanding a vertical passage. Each leaf uses a conventional top-to-bottom day chronology with authored interval edges.
+- **Active-period identity:** `This week · Jul 27–Aug 2` is the binding spine, with seven named leaf edges and Wednesday selected. The spine is neither a segmented mode control nor parallel navigation; the root remains Week while its local day leaf changes.
+- **Now/Today treatment:** Now is a single precise notch within Wednesday’s active leaf. Today returns to the current Week and selects today’s leaf; neither becomes a glowing rule or ambient animation.
+- **Calendar-comprehension model:** The active leaf retains conventional top-to-bottom hours, all-day boundary, proportional duration, overlap offsets, and exact date. The seven labelled edges and range spine communicate Week without shrinking seven day columns.
+- **Primary temporal object:** A subject-plus-placement block with an authored authority edge. The edge is part of ordinary day chronology, not a floating node or connector graph.
+- **Week first viewport:** Compact Time crown, exact Week spine, all seven labelled leaf edges, full-width Wednesday chronology with Now, fixed launch brief, protected family reserve, and a restrained Thursday-edge preview naming its external observation/proposal context.
+- **Focused-day composition:** Selecting Wednesday from the Week root pushes a denser conventional day chronology through framework navigation; it does not open in place. Native Back returns to the bound Week atlas with the same active leaf and focus.
+- **Temporal-object detail:** Selecting a block opens compact native detail from either Week leaf or focused day. Ordinary rows own identity and metadata; the atlas-leaf expression stops at the root.
+- **Accepted-placement treatment:** Opaque block closes against the active leaf’s authority edge with `Accepted` and Fixed/Protected qualifier; acceptance is structural plus verbal, never accent alone.
+- **Proposed-placement treatment:** An open-edged trace sits outside accepted chronology and says `Proposed · Not scheduled`; it never becomes a second accepted block on the leaf.
+- **External-observation treatment:** A source-bearing edge attaches the observed interval to the leaf while retaining `Apple Calendar observation`; it does not close into Ambitions acceptance.
+- **Stale/unknown/history treatment:** Stale interrupts and labels the source edge; unknown creates no fabricated interval; historical truth appears in detail/history rather than the active leaf.
+- **Protected treatment:** A closed reserve edge spans exact endpoints and carries `Protected · No work`; proposed traces cannot visually cross it as though accepted.
+- **Fixed treatment:** A fixed block has firm endpoints and `Fixed` but does not inherit the protected reserve meaning.
+- **Flexible treatment:** Flexible accepted placement remains closed at its current interval; a bounded movement rule appears only at object depth.
+- **Open-capacity treatment:** Empty leaf space is merely unoccupied chronology. The named opening appears without positive relief and states that personal usability is unknown.
+- **Conflict treatment:** Review shows the proposed open edge encountering the protected reserve and names both participants and the consequence; the leaf itself is not a red warning map.
+- **Current/proposed review:** The atlas resolves into a native focused comparison: the accepted Family time reserve, `Launch review current placement · Not specified by fixture`, the proposed open 5:45–6:15 PM edge, consequence, and valid outcomes. It does not draw a fabricated current launch-review interval.
+- **Settlement and return:** Cancel/Keep current removes only the proposal trace, keeps accepted blocks fixed, and returns focus to the originating Wednesday conflict trigger on the same active leaf. Compact detail returns separately to its selected block; fixture-only inspection never closes the proposal.
+- **Goal/Step context:** Goal/Step identity appears as contextual lineage on the nursery proposal and object detail; no Goal Path or progression length is encoded in leaf geometry.
+- **Density strategy:** Repeated context compresses before identity. Dense active leaves offset collisions and disclose a chronological object index or focused day; other leaf edges never become density bars or heat.
+- **Quiet-week behavior:** The bound Week spine and leaf edges remain calm while a few exact blocks give the active leaf identity. Empty portions receive no scenic effects or recommendations.
+- **Material strategy:** Opaque mineral/deep-graphite leaves, localized authored edges, no glass content cards, glow, gradient identity, or page-curl mimicry; transient material is limited to native chrome/review.
+- **Typography character:** System typography remains primary; exact range, day, object, current truth, consequence, qualifier, and action follow Semantic Cadence. Tabular time and concise labels prevent the geometry from requiring legend copy.
+- **Native control strategy:** Framework NavigationStack/Back owns focused day and detail; native toolbar/menu/sheet/full-screen cover owns controls; day-edge selection is a bounded accessible Week control with a complete native List equivalent and no custom Back interception.
+- **Direct manipulation and named alternatives:** Drag/resize and named Move/Change start/Change duration are target-only future operations. This calibration exposes only Cancel, Keep current, or fixture-only inspection and performs no proposal creation or commit.
+- **Motion character:** Sparse causal leaf replacement and object-to-detail continuity, with no page curl, parallax, waveform, shimmer, sweeping Now, or cinematic zoom.
+- **Accessibility transformation:** The bound leaves become one ordered native Week List with chronological day headings and complete object authority/source/protection/conflict/action values. Leaf-edge controls remain a single Week picker; decorative edges are hidden.
+- **Reduce Motion:** Leaf selection changes directly or crossfades; static Week range, selected-day label, origin label, and focus preserve continuity.
+- **Reduce Transparency:** Zero content blur; all leaves, edges, chrome, and review have opaque structural equivalents.
+- **Increased Contrast:** Strengthen Week spine, leaf selection, hour rules, authority edges, proposal opening, source edge, reserve boundary, focus, and labels; atmosphere recedes.
+- **Light character:** Mineral-neutral matte leaves with graphite articulation and a small violet-indigo action/focus accent.
+- **Dark character:** Deep graphite leaves with restrained tonal articulation, readable authority edges, no pure-black void or neon technical diagram.
+- **Strongest quality:** An ownable integrated Ambitions identity that avoids both seven-column compression and the continuous-passage model while retaining familiar day chronology.
+- **Principal risk:** The active leaf may be mistaken for a Day/Today root, and the bound-edge metaphor may become decorative or behave like custom tabs.
+- **Native SwiftUI feasibility:** Medium-high for native day chronology and stack depth; the bound Week control, edge previews, semantic equivalence, and exact return still require focused prototype proof.
+- **Calendar-clone risk:** Low if comprehension survives; high failure cost if the custom structure becomes incomprehensible.
+- **Dashboard risk:** Low-to-medium; rises if object index, opening, conflict, or source summaries become modules.
+- **Today-duplication risk:** Medium-high because one day is broad; invalid if execution priority, completion state, or “what next” anatomy displaces Week chronology.
+- **Copy dependence:** Medium-low target: Week binding, active leaf, and authority edges should orient before explanatory labels, while every state remains named.
+- **Architecture-sensitive assumptions:** Week range and active-day selection are distinct route state; leaf selection and focused-day navigation preserve stable IDs; visual and semantic orders match; one bounded Week control meets focus and restoration requirements.
+- **What must be tested in native prototype:** Whether the first viewport reads as Week rather than Day/Today; all-seven-edge comprehension; exact time/overlap; quiet/dense leaves; long titles and short blocks; proposal versus accepted in grayscale; source/protection edges; List parity; Back-edge coexistence; exact active-leaf/object/focus return.
+- **Automatic invalidation conditions:** The root reads as Day or Today; leaf edges read as top tabs or need a legend; seven-day identity is not obvious; page metaphor becomes decorative; proposals resemble accepted blocks; dense objects shrink; visual and semantic orders diverge; Back is intercepted; or a simpler native direction communicates the same structure with materially less custom risk.
+
+## Shared decision boundary
+
+These directions remain text-only research hypotheses. Selecting one or more for standalone rendering would not authorize SwiftUI, fixture code, routes, runtime integration, production components, canon changes, or broad reconstruction.

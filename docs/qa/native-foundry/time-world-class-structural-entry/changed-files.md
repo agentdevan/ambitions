@@ -1,0 +1,44 @@
+<!-- markdownlint-disable MD013 -->
+
+# Changed Files
+
+## Repository boundary
+
+- Baseline: `4ced31dc9a9bd2c9a987ad7649eedd7bb1569b72`
+- Branch: `codex/time-world-class-structural-entry`
+- Worktree: `.worktrees/time-world-class-structural-entry`
+- Changed root: `docs/qa/native-foundry/time-world-class-structural-entry/`
+- Package classification: non-normative research and owner-selection evidence
+
+The packet adds exactly these 19 files:
+
+1. `README.md`
+2. `research-method.md`
+3. `time-authority-map.md`
+4. `current-capability-ceiling.md`
+5. `fixture-contract.md`
+6. `research-corpus.md`
+7. `benchmark-matrix.md`
+8. `benchmark-matrix.csv`
+9. `pattern-atlas.md`
+10. `market-anti-patterns.md`
+11. `world-class-time-bar.md`
+12. `time-intervention-synthesis.md`
+13. `six-structural-directions.md`
+14. `direction-comparison.md`
+15. `source-register.md`
+16. `architecture-sensitive-assumptions.md`
+17. `changed-files.md`
+18. `reviewer-findings.md`
+19. `owner-review.md`
+
+## Explicit non-changes
+
+- No existing file is modified.
+- No Swift or test file is changed.
+- No product/design canon is changed.
+- Goals evidence is unchanged.
+- No fixture code, route, component, project, generated project state, or runtime integration is added.
+- The four pre-existing modified Xcode user-scheme files in the primary worktree remain outside this branch and untouched.
+
+The ending commit identifier is intentionally recorded in the final handoff rather than inside this self-referential committed file.
