@@ -2,6 +2,12 @@
   "authority": "non_normative_six_pass_review_validation",
   "errors": [],
   "is_valid": true,
+  "overlay_file": "six-pass-overrides.json",
+  "overlay_ids": [
+    "CAP2-APPEAR-007",
+    "CAP2-SEARCH-006",
+    "CAP2-SIM-007"
+  ],
   "schema_version": 1,
   "summary": {
     "candidate_count": 112,
