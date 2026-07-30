@@ -2,7 +2,9 @@
 
 # You World-Class Structural Entry
 
-Status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_YOU_CALIBRATION_EVIDENCE`
+
+Closure: `YOU_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -40,7 +42,9 @@ No D01–D06 direction is accepted as provisional You calibration evidence.
 
 The generated D07 R00 root is not accepted as provisional You calibration evidence. It remains a structural reference only. `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage` remains `SELECTED_FOR_SYNTHESIS` and subordinate to `AVF-YOU-D07-R02`.
 
-R00 is not accepted as provisional You calibration evidence. Its root structure, navigation proof, exact return, and accessibility recomposition survive. The narrow revision `AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance Restoration` removes internal program language from Appearance depth without changing the root. Its evidence is ready for owner review; passing tests do not accept the direction automatically.
+R00 is not accepted as provisional You calibration evidence. Its root structure, navigation proof, exact return, and accessibility recomposition survive. The narrow revision `AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance Restoration` removes internal program language from Appearance depth without changing the root and is accepted as provisional You calibration evidence by owner decision.
+
+This acceptance closes only the bounded You calibration program. It does not install production UI, modify canon, authorize broad reconstruction, or freeze shell, tokens, components, motion, haptics, typography, or materials. `APPROVED_FOR_SWIFTUI` remains `false`.
 
 ## Package
 

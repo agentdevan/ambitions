@@ -4,7 +4,9 @@
 
 `AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance Restoration`
 
-Status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_YOU_CALIBRATION_EVIDENCE`
+
+Closure: `YOU_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Parent native proof: `AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
 
@@ -13,6 +15,12 @@ Parent synthesis: `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Passage`
 Fixture: `you-flagship/local-personal-control/v1`
 
 Captured source: `801e64094947a786d32097c6ce53e20f3863b47b`
+
+The owner accepts this bounded native proving identity as provisional You
+calibration evidence. Acceptance closes the You calibration program without
+installing production UI, modifying canon, authorizing broad reconstruction,
+or freezing shell, tokens, components, motion, haptics, typography, or
+materials.
 
 ## Preserve exactly
 
@@ -55,7 +63,7 @@ Captured source: `801e64094947a786d32097c6ce53e20f3863b47b`
 
 ## Validation
 
-See [validation-results.md](validation-results.md). Package, build, interaction, accessibility-order, image comparison, lint, link, diff, path, and secret checks pass. Passing checks do not accept the direction.
+See [validation-results.md](validation-results.md). Package, build, interaction, accessibility-order, image comparison, lint, link, diff, path, and secret checks pass. Acceptance is the owner's bounded disposition, not an inference from passing checks.
 
 ## Evidence
 
@@ -69,4 +77,16 @@ All three captures are 1206 × 2622 pixels from the `VC14 iPhone 17 Pro` Simulat
 
 ## Proof ceiling
 
-This package proves a bounded native fixture-host revision on one Simulator profile. It does not prove production SwiftUI authorization, runtime integration, durable appearance mutation, a production baseline, physical-device behavior, manual assistive-technology operation, final shell coexistence, or final visual-system authority. `APPROVED_FOR_SWIFTUI` remains `false`.
+This package proves a bounded native fixture-host revision on one Simulator profile. It is neither final nor production-ready and does not prove durable appearance mutation, physical-device behavior, manual assistive-technology operation, final shell coexistence, or final visual-system authority.
+
+- Fixture identity: `you-flagship/local-personal-control/v1`
+- Simulator evidence only
+- `production_baseline = false`
+- `direct_device_proof = false`
+- `runtime_integration = false`
+- `production_implementation = false`
+- `canon_installation = false`
+- `APPROVED_FOR_SWIFTUI = false`
+
+The complete protected-characteristics and explicitly-not-frozen registers are
+recorded in the [owner review](../../native-foundry/you-world-class-structural-entry/owner-review.md).

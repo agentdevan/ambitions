@@ -6,7 +6,7 @@ Proving identity: `AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance 
 
 Parent: `AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
 
-Status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_YOU_CALIBRATION_EVIDENCE`
 
 The owner did not accept R00 as provisional You calibration evidence. The root structure, native navigation, exact return, and accessibility recomposition survived unchanged. R01 repairs only the Appearance depth's exposure of Foundry, proof, architecture, and implementation language as product UI.
 

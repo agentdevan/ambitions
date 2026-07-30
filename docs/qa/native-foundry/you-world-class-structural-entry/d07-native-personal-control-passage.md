@@ -10,13 +10,17 @@ Status: `SELECTED_FOR_SYNTHESIS`
 
 Native proving ID: `AVF-YOU-D07-INT-D07-NATIVE-R01`
 
-Native proving status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
+Native proving status: `ACCEPTED_AS_PROVISIONAL_YOU_CALIBRATION_EVIDENCE`
+
+Calibration closure: `YOU_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Native proving parent: `AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
 D07 is a bounded structural synthesis. It does not replace the active AVF direction, install canon, select a final You direction, authorize production SwiftUI, authorize runtime integration, or freeze tokens, components, shell behavior, motion, or materials.
+
+The owner accepts `AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance Restoration` as provisional You calibration evidence. This is a bounded calibration acceptance, not a final direction or production authorization.
 
 `APPROVED_FOR_SWIFTUI = false`
 
@@ -119,4 +123,4 @@ D03's eight-state grammar remains available only inside selected Personalization
 
 ## Proof ceiling
 
-The native slice proves one fixture-host root, one Appearance depth, one Accessibility Dynamic Type equivalent, and a focused framework-Back return on one Simulator profile. It does not prove manual VoiceOver, Switch Control, Voice Control, Full Keyboard Access, physical-device behavior, production navigation, runtime ownership, durable appearance mutation, shell coexistence, or final visual authority. Passing validation does not accept D07 automatically.
+The native slice proves one fixture-host root, one Appearance depth, one Accessibility Dynamic Type equivalent, and a focused framework-Back return on one Simulator profile. It does not prove manual VoiceOver, Switch Control, Voice Control, Full Keyboard Access, physical-device behavior, production navigation, runtime ownership, durable appearance mutation, shell coexistence, or final visual authority. Acceptance is the owner's bounded disposition, not an inference from passing validation.
