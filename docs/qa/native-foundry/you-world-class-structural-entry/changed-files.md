@@ -2,6 +2,23 @@
 
 # Changed Files
 
+## R01 product-facing Appearance restoration
+
+The R01 revision changes exactly:
+
+- `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/YouNativeCalibrationView.swift`
+- `Native/AmbitionsNativeFoundryHostUITests/YouNativeCalibrationD07HostUITests.swift`
+- `docs/qa/native-foundry/you-world-class-structural-entry/README.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/changed-files.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/d07-native-personal-control-passage.md`
+- `docs/qa/native-foundry/you-world-class-structural-entry/owner-review.md`
+- the existing evidence-package records under `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/`
+- `docs/qa/evidence/2026-07-30-you-native-personal-control-passage-d07/screenshots/02-you-appearance-depth-dark.png`
+
+The recaptured root and accessibility PNGs remain byte-identical to R00 and therefore have no Git content change.
+
+## R00 bounded native proving slice
+
 This continuation adds only the bounded D07 native Foundry proving slice and its owner-review evidence.
 
 ## Native Foundry package

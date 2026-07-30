@@ -8,9 +8,11 @@ Name: `Native Personal Control Passage`
 
 Status: `SELECTED_FOR_SYNTHESIS`
 
-Native proving ID: `AVF-YOU-D07-INT-D07-NATIVE-R00`
+Native proving ID: `AVF-YOU-D07-INT-D07-NATIVE-R01`
 
-Native proving status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
+Native proving status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
+
+Native proving parent: `AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
@@ -77,21 +79,26 @@ D05's four-phase rhythm is the bounded depth hypothesis:
 3. supported controls; and
 4. controlled consequence specimen.
 
-The fixture exposes System, Light, and Dark through a native selection control. Selection is preview-only and never presented as durable mutation. The System explanation states that System follows iPhone appearance at focused depth.
+The fixture exposes System, Light, and Dark through a native selection control. Product UI states that System matches iPhone appearance. Selection remains preview-only in evidence and is never presented as durable mutation.
 
-The violet–indigo action-accent target remains explicitly provisional because the current production enum does not contain it. The native slice neither remaps nor modifies that enum.
+The product-facing action accent says violet–indigo is used for actions, not status. The production-enum mismatch remains evidence-only: the target is violet–indigo, the mismatch is unresolved, the enum is unchanged, and no runtime mapping is claimed.
+
+The static preview follows `Start Here` → `Prepare for tomorrow’s appointment` → `Protected time · 30 min` → `Review`. It has no navigation, mutation, save, settlement, or Today command behavior.
 
 D03's eight-state grammar remains available only inside selected Personalization value depth. It does not organize the root and is not exercised by this proving slice.
 
 ## Native evidence
 
-[Open the AVF-YOU-D07-INT-D07-NATIVE-R00 evidence package](../../evidence/2026-07-30-you-native-personal-control-passage-d07/README.md).
+[Open the AVF-YOU-D07-INT-D07-NATIVE-R01 evidence package](../../evidence/2026-07-30-you-native-personal-control-passage-d07/README.md).
 
 - `01-you-root-typical-dark.png`
 - `02-you-appearance-depth-dark.png`
 - `03-you-root-accessibility-dark.png`
 - Fixture: `you-flagship/local-personal-control/v1`
-- Captured source: `99a81c4063b1928b3cf5ec53783594f8d41e5e95`
+- Captured source: `801e64094947a786d32097c6ce53e20f3863b47b`
+- Root pixels changed from R00: `false`
+- Appearance pixels changed from R00: `true`
+- Accessibility-root pixels changed from R00: `false`
 - Production baseline: `false`
 - Direct-device proof: `false`
 - `APPROVED_FOR_SWIFTUI`: `false`
@@ -105,6 +112,7 @@ D03's eight-state grammar remains available only inside selected Personalization
 - Light appearance calibration;
 - shell or Crowned Edge Dock coexistence;
 - final accent family;
+- large accessibility crown posture pending cross-root synthesis;
 - motion or haptics;
 - final materials, typography metrics, tokens, or component APIs; and
 - production persistence or runtime mutation.

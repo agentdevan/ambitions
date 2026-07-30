@@ -32,11 +32,15 @@ The ordinary screenshot reaches Notifications & Attention. All remaining domains
 ## Appearance proving state
 
 - Current appearance: System.
+- Current supporting copy: `Matches your iPhone appearance.`
 - Available fixture-preview choices: System, Light, Dark.
 - Action accent: violet–indigo visual-authority target.
-- Accent posture: provisional; current production enum mismatch unresolved.
+- Product-facing accent purpose: `Used for actions, not status.`
+- Internal evidence posture: current production enum mismatch unresolved; production enum unchanged; no runtime mapping claim.
 - Selection persistence: none.
 - Supported focused depth: Appearance only.
+- Static preview: `Start Here` → `Prepare for tomorrow’s appointment` → `Protected time · 30 min` → `Review`.
+- Preview capability: visual only; no navigation, mutation, save, settlement, or Today command.
 
 ## Capture variants
 

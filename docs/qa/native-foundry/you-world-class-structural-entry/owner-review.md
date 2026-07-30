@@ -2,11 +2,11 @@
 
 # Owner Review
 
-Status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
+Status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
 
 Parent direction: `AVF-YOU-D07-R02 — Local Personal Control Index`
 
-## R01 owner disposition
+## Initial root-render owner disposition
 
 - D01 remains the native root substrate and control reference. Its R00 render is not selected because it remains too close to generic Apple Settings anatomy.
 - D04-R00's rendering expression is rejected. Selective source-purpose-consequence clarification survives only where authority materially crosses Ambitions, iPhone system control, or a supported external source.
@@ -23,15 +23,21 @@ The generated render for `AVF-YOU-D07-INT-D07-R00 — Native Personal Control Pa
 
 The D07 structural family remains `SELECTED_FOR_SYNTHESIS`, subordinate to `AVF-YOU-D07-R02 — Local Personal Control Index`. It does not replace the parent direction, install canon, select a final You direction, or authorize production work.
 
-## Native proving slice
+## R00 native owner disposition
 
-`AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage`
+`AVF-YOU-D07-INT-D07-NATIVE-R00 — Native Personal Control Passage` is not yet accepted as provisional You calibration evidence. Its root structure, native navigation proof, exact return, and accessibility recomposition survive unchanged.
 
-Status: `READY_FOR_OWNER_YOU_D07_NATIVE_ROOT_REVIEW`
+The sole blocking issue was Appearance depth exposing Foundry, proof, architecture, and implementation language as product UI.
+
+## R01 native proving revision
+
+`AVF-YOU-D07-INT-D07-NATIVE-R01 — Product-Facing Appearance Restoration`
+
+Status: `READY_FOR_OWNER_YOU_D07_NATIVE_R01_REVIEW`
 
 [Review the bounded native evidence](../../evidence/2026-07-30-you-native-personal-control-passage-d07/README.md).
 
-The slice is limited to a typical Dark root, a focused Dark Appearance depth, an Accessibility Dynamic Type Dark root, and the framework Back journey returning to the exact originating root context and Appearance row.
+R01 is limited to product-facing restoration within the existing focused Dark Appearance depth. The typical Dark root and Accessibility Dynamic Type Dark root were recaptured and remained byte-identical to R00. Framework Back still returns to the exact originating root context and Appearance row.
 
 ## D07 native owner checks
 
@@ -39,9 +45,10 @@ The slice is limited to a typical Dark root, a focused Dark Appearance depth, an
 - Identity & Local Data carries `On this iPhone · No account`.
 - The ordinary viewport reaches Notifications & Attention without smaller type or all-nine-domain compression.
 - The root stays on one continuous matte plane without cards, rails, seams, timelines, diagrams, or technical ownership taxonomy.
-- Appearance uses focused-domain cadence: current truth, supported controls, provisional accent posture, and one controlled specimen.
+- Appearance uses product cadence: current appearance, native selection, action accent, and one static Ambitions preview.
+- Rendered UI contains no fixture, proof, architecture, implementation, visual-authority, or production-enum terminology.
 - System, Light, and Dark are fixture-preview states only; no persistence is implied.
-- The violet–indigo target remains explicitly unresolved against the production enum.
+- The violet–indigo target remains unresolved against the production enum in evidence only.
 - Accessibility Dynamic Type retains every domain and summary in canonical order through scrolling.
 - Framework Back restores the root and marks Appearance as the return target.
 - The captures make no shell, dock, physical-device, production-baseline, or approval claim.
@@ -52,6 +59,8 @@ The slice is limited to a typical Dark root, a focused Dark Appearance depth, an
 - D07 synthesis status: `SELECTED_FOR_SYNTHESIS`
 - D07 generated root accepted: `false`
 - D07 bounded native Foundry prototype completed: `true`
+- D07 R00 native calibration accepted: `false`
+- D07 R01 bounded revision completed: `true`
 - D07 native calibration accepted: `false`
 - Further conceptual rendering authorized: `false`
 - Production You SwiftUI authorized: `false`
@@ -65,6 +74,6 @@ The slice is limited to a typical Dark root, a focused Dark Appearance depth, an
 
 ## Next owner decision
 
-- accept or reject D07 as provisional You calibration evidence;
-- request a bounded native revision; or
+- accept or reject R01 as provisional You calibration evidence;
+- request another bounded revision; or
 - pause You calibration.
