@@ -254,7 +254,7 @@ final class RuntimeAttachmentIntakeTests: XCTestCase {
         RuntimeAttachmentIntakePart(
             attachmentID: RuntimeAttachmentID(rawValue: attachment)!,
             revisionID: RuntimeAttachmentRevisionID(rawValue: revision)!, revision: 1,
-            blobID: RuntimeBlobID(rawValue: blob)!, sourceURL: source,
+            blobID: RuntimeAttachmentBlobID(rawValue: blob)!, sourceURL: source,
             originalFilename: filename, declaredContentType: contentType, privacy: .sensitive,
             dedupPolicy: .withinPrivacyDomain, provenance: XCTAttachmentFixtures.provenance(),
             reservationID: RuntimeBlobQuotaReservationID(rawValue: reservation)!,

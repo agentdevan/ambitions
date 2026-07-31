@@ -240,7 +240,7 @@ struct RuntimeAttachmentPortableImportRequest: Sendable {
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let reservationID: RuntimeBlobQuotaReservationID
     let dedupPolicy: RuntimeAttachmentDedupPolicy
     let retentionUntil: Date?

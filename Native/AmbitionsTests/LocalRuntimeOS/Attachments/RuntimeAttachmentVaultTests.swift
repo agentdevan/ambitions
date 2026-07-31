@@ -128,7 +128,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
     func testReadCursorRejectsCrossBlobAndOutOfRangeAuthority() async throws {
         let fixture = try await makeFixture("cursor")
         let foreign = RuntimeAttachmentReadCursor(
-            blobID: RuntimeBlobID(rawValue: "foreign-blob")!, nextChunkIndex: 1,
+            blobID: RuntimeAttachmentBlobID(rawValue: "foreign-blob")!, nextChunkIndex: 1,
             plaintextBytesRead: Int64(RuntimeAttachmentLimits.minimumChunkBytes)
         )
         await assertAttachmentError(.invalidRecord) {
@@ -369,7 +369,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         }
         #endif
         let revisionID = RuntimeAttachmentRevisionID(rawValue: "revision-direct-stage")!
-        let blobID = RuntimeBlobID(rawValue: "blob-direct-stage")!
+        let blobID = RuntimeAttachmentBlobID(rawValue: "blob-direct-stage")!
         let classification = RuntimeAttachmentContentClassification(
             normalizedFilename: "direct.bin",
             declaredContentType: "application/octet-stream",
