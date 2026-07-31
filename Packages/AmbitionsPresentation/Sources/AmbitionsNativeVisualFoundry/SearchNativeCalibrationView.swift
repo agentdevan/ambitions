@@ -136,9 +136,7 @@ private struct SearchNativeCalibrationPassage: View {
         case .ownerHandoff:
             SearchNativeCalibrationHandoffDepth(
                 handoff: fixture.handoff,
-                isPrepared: state.fixtureHandoffPrepared,
                 onContinue: { state.recordFixtureOnlyHandoff() },
-                onCancelRequest: { state.cancelOwnerHandoff() },
                 onCancelSearch: { state.dismissSearch() }
             )
         }
@@ -155,6 +153,7 @@ private struct SearchNativeCalibrationRoot: View {
     @FocusState private var queryFocused: Bool
     @AccessibilityFocusState private var focusedResultID: String?
     @AccessibilityFocusState private var handoffPreparationFocused: Bool
+    @State private var keyboardClearance: CGFloat = 0
 
     private var palette: SearchNativeCalibrationPalette {
         SearchNativeCalibrationPalette(colorScheme: colorScheme, contrast: contrast)
@@ -168,8 +167,9 @@ private struct SearchNativeCalibrationRoot: View {
                 .frame(height: 1)
             content
         }
-        .background(palette.canvas.ignoresSafeArea())
+        .background(palette.canvas.ignoresSafeArea(.container))
         .foregroundStyle(palette.primary)
+        .searchNativeCalibrationTracksKeyboardClearance($keyboardClearance)
         .searchNativeCalibrationHideNavigationBar()
         .onAppear {
             focusForCurrentAnchor()
@@ -267,7 +267,7 @@ private struct SearchNativeCalibrationRoot: View {
 
     private var entryState: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Find local Ambitions objects.")
+            Text("Search across Ambitions.")
                 .font(.body)
                 .foregroundStyle(palette.secondary)
             Spacer()
@@ -316,7 +316,7 @@ private struct SearchNativeCalibrationRoot: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel("Review requested change")
                 .accessibilityValue(
-                    "Dentist appointment. Time. Current accepted truth, Tomorrow at 9:30 AM. Requested change, Tomorrow at 11:00 AM."
+                    "Dentist appointment. Event in Time. Current time, Tomorrow at 9:30 AM. Requested time, Tomorrow at 11:00 AM."
                 )
                 .accessibilityFocused($handoffPreparationFocused)
                 .accessibilityIdentifier("snc-action-query-review")
@@ -386,7 +386,14 @@ private struct SearchNativeCalibrationRoot: View {
                 }
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            Color.clear
+                .frame(height: keyboardClearance)
+                .accessibilityHidden(true)
+        }
+        .clipped()
         .searchNativeCalibrationNeverDismissesKeyboard()
+        .accessibilityIdentifier("snc-search-results-region")
     }
 
     private func resultRow(_ result: SearchNativeCalibrationResult) -> some View {
@@ -443,13 +450,13 @@ private struct SearchNativeCalibrationRoot: View {
 
     private func resultAccessibilityValue(_ result: SearchNativeCalibrationResult) -> String {
         var parts = [
-            "Owner, \(result.owner.rawValue)",
-            "Current truth, \(result.currentTruth)"
+            result.owner.rawValue,
+            result.currentTruth
         ]
         if result.matchReasonIsObvious == false {
-            parts.append("Match reason, \(result.matchReason)")
+            parts.append("Why it appeared, \(result.matchReason)")
         }
-        parts.append("Action, \(result.actionTitle)")
+        parts.append(result.actionTitle)
         if state.focusAnchor == .result(result.id) {
             parts.append("Selected result")
         }
@@ -506,40 +513,33 @@ private struct SearchNativeCalibrationInspectDepth: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 SearchNativeCalibrationSection(
-                    label: "Identity",
+                    label: "Object",
                     title: result.identity,
-                    detail: result.kind.rawValue,
+                    detail: "\(result.kind.rawValue) in \(result.owner.rawValue)",
                     identifier: "snc-inspect-identity"
                 )
                 SearchNativeCalibrationSection(
-                    label: "Owner",
-                    title: result.owner.rawValue,
-                    detail: "Exact changes belong in \(result.owner.rawValue).",
-                    identifier: "snc-inspect-owner"
-                )
-                SearchNativeCalibrationSection(
-                    label: "Current truth",
+                    label: "When",
                     title: result.currentTruth,
-                    detail: [result.source, result.freshness].compactMap { $0 }.joined(separator: " · "),
                     identifier: "snc-inspect-current"
                 )
                 SearchNativeCalibrationSection(
-                    label: "Why this matched",
-                    title: result.matchReason,
-                    detail: "The match is tied to this canonical object.",
-                    identifier: "snc-inspect-match"
+                    label: "Why it appeared",
+                    title: "The title matches “appointment.”",
+                    identifier: "snc-inspect-match",
+                    emphasizesTitle: false
                 )
                 SearchNativeCalibrationSection(
-                    label: "Understand",
-                    title: result.boundedExplanation,
-                    detail: result.knowledgeLimit,
-                    identifier: "snc-inspect-understand"
+                    label: "About this result",
+                    title: "Search can show this event and open it. Time handles any changes.",
+                    identifier: "snc-inspect-understand",
+                    emphasizesTitle: false
                 )
             }
         }
         .background(palette.canvas.ignoresSafeArea())
         .foregroundStyle(palette.primary)
-        .navigationTitle("Inspect")
+        .navigationTitle("Details")
         .searchNativeCalibrationInlineNavigationTitle()
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -553,9 +553,7 @@ private struct SearchNativeCalibrationInspectDepth: View {
 
 private struct SearchNativeCalibrationHandoffDepth: View {
     let handoff: SearchNativeCalibrationHandoff
-    let isPrepared: Bool
     let onContinue: () -> Void
-    let onCancelRequest: () -> Void
     let onCancelSearch: () -> Void
 
     @Environment(\.colorScheme) private var colorScheme
@@ -569,28 +567,28 @@ private struct SearchNativeCalibrationHandoffDepth: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 SearchNativeCalibrationSection(
-                    label: "Target",
+                    label: "Object",
                     title: handoff.targetIdentity,
-                    detail: "Canonical owner · \(handoff.owner.rawValue)",
+                    detail: "Event in \(handoff.owner.rawValue)",
                     identifier: "snc-handoff-target"
                 )
                 SearchNativeCalibrationSection(
-                    label: "Current accepted truth",
+                    label: "Current time",
                     title: handoff.currentAcceptedTruth,
-                    detail: "This remains unchanged.",
+                    detail: "Nothing has changed.",
                     identifier: "snc-handoff-current"
                 )
                 SearchNativeCalibrationSection(
-                    label: "Requested change",
+                    label: "Requested time",
                     title: handoff.requestedChange,
                     detail: handoff.consequence,
                     identifier: "snc-handoff-requested"
                 )
                 SearchNativeCalibrationSection(
-                    label: "Limit",
-                    title: "Prepared for Time review",
-                    detail: handoff.limitation,
-                    identifier: "snc-handoff-limit"
+                    label: "Before anything changes",
+                    title: handoff.limitation,
+                    identifier: "snc-handoff-consequence",
+                    emphasizesTitle: false
                 )
 
                 VStack(alignment: .leading, spacing: 12) {
@@ -598,22 +596,8 @@ private struct SearchNativeCalibrationHandoffDepth: View {
                         .buttonStyle(.borderedProminent)
                         .tint(palette.accent)
                         .frame(minHeight: 44)
-                        .accessibilityHint("Opens this requested change for review in Time. Nothing changes in Search.")
+                        .accessibilityHint("Continues this requested time for review in Time.")
                         .accessibilityIdentifier("snc-handoff-continue")
-
-                    Button("Cancel request", action: onCancelRequest)
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(palette.secondary)
-                        .frame(minHeight: 44)
-                        .accessibilityIdentifier("snc-handoff-cancel-request")
-
-                    if isPrepared {
-                        Text("Prepared for Time. Nothing changed.")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(palette.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityIdentifier("snc-handoff-prepared-status")
-                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -622,7 +606,7 @@ private struct SearchNativeCalibrationHandoffDepth: View {
         }
         .background(palette.canvas.ignoresSafeArea())
         .foregroundStyle(palette.primary)
-        .navigationTitle("Prepare in Time")
+        .navigationTitle("Review in Time")
         .searchNativeCalibrationInlineNavigationTitle()
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -637,8 +621,23 @@ private struct SearchNativeCalibrationHandoffDepth: View {
 private struct SearchNativeCalibrationSection: View {
     let label: String
     let title: String
-    let detail: String
+    let detail: String?
     let identifier: String
+    let emphasizesTitle: Bool
+
+    init(
+        label: String,
+        title: String,
+        detail: String? = nil,
+        identifier: String,
+        emphasizesTitle: Bool = true
+    ) {
+        self.label = label
+        self.title = title
+        self.detail = detail
+        self.identifier = identifier
+        self.emphasizesTitle = emphasizesTitle
+    }
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var contrast
@@ -653,19 +652,21 @@ private struct SearchNativeCalibrationSection: View {
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(palette.secondary)
             Text(title)
-                .font(.title3.weight(.semibold))
+                .font(emphasizesTitle ? .title3.weight(.semibold) : .body)
                 .fixedSize(horizontal: false, vertical: true)
-            Text(detail)
-                .font(.body)
-                .foregroundStyle(palette.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            if let detail {
+                Text(detail)
+                    .font(.body)
+                    .foregroundStyle(palette.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 20)
         .padding(.vertical, 22)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)
-        .accessibilityValue("\(title). \(detail)")
+        .accessibilityValue([title, detail].compactMap { $0 }.joined(separator: ". "))
         .accessibilityIdentifier(identifier)
         .overlay(alignment: .bottom) {
             Rectangle().fill(palette.separator).frame(height: 1)

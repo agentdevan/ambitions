@@ -167,9 +167,9 @@ public extension SearchNativeCalibrationFixture {
             currentAcceptedTruth: "Tomorrow · 9:30 AM",
             requestedChange: "Tomorrow · 11:00 AM",
             owner: .time,
-            consequence: "This would move the appointment 90 minutes later.",
-            limitation: "Time must review availability and any external-calendar effects.",
-            actionTitle: "Continue in Time"
+            consequence: "90 minutes later",
+            limitation: "Time will check availability and any calendar effects.",
+            actionTitle: "Continue to Time"
         ),
         privacy: SearchNativeCalibrationPrivacyState(
             query: SearchNativeCalibrationFixture.privacyQuery,

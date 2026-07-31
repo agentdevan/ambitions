@@ -50,35 +50,57 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
         assertSemanticOrder(
             in: event,
             expected: [
-                "Owner, Time",
-                "Current truth, Tomorrow · 9:30 AM",
-                "Action, Inspect"
+                "Time",
+                "Tomorrow · 9:30 AM",
+                "Inspect"
             ]
         )
         assertSemanticOrder(
             in: movement,
             expected: [
-                "Owner, Goals",
-                "Current truth, Current movement",
-                "Match reason, Related appointment context",
-                "Action, Inspect"
+                "Goals",
+                "Current movement",
+                "Why it appeared, Related appointment context",
+                "Inspect"
             ]
         )
         XCTAssertLessThan(event.frame.minY, movement.frame.minY)
 
         event.tap()
 
-        assertExists([
-            element("snc-inspect-identity"),
-            element("snc-inspect-owner"),
-            element("snc-inspect-current"),
-            element("snc-inspect-match"),
-            element("snc-inspect-understand")
-        ])
-        XCTAssertTrue(app.navigationBars["Inspect"].exists)
+        let identity = element("snc-inspect-identity")
+        let current = element("snc-inspect-current")
+        let match = element("snc-inspect-match")
+        let understanding = element("snc-inspect-understand")
+        assertExists([identity, current, match, understanding, element("snc-search-cancel")])
+        assertVerticalOrder([identity, current, match, understanding])
+        XCTAssertTrue(app.navigationBars["Details"].exists)
         XCTAssertFalse(app.buttons["Edit"].exists)
+        XCTAssertFalse(element("snc-inspect-owner").exists)
 
-        let back = app.navigationBars["Inspect"].buttons.firstMatch
+        XCTAssertEqual(element("snc-inspect-identity").label, "Object")
+        XCTAssertEqual(
+            element("snc-inspect-identity").value as? String,
+            "Dentist appointment. Event in Time"
+        )
+        XCTAssertEqual(element("snc-inspect-current").label, "When")
+        XCTAssertEqual(
+            element("snc-inspect-current").value as? String,
+            "Tomorrow · 9:30 AM"
+        )
+        XCTAssertEqual(element("snc-inspect-match").label, "Why it appeared")
+        XCTAssertEqual(
+            element("snc-inspect-match").value as? String,
+            "The title matches “appointment.”"
+        )
+        XCTAssertEqual(element("snc-inspect-understand").label, "About this result")
+        XCTAssertEqual(
+            element("snc-inspect-understand").value as? String,
+            "Search can show this event and open it. Time handles any changes."
+        )
+        assertNoInternalProductTerminology()
+
+        let back = app.navigationBars["Details"].buttons.firstMatch
         XCTAssertTrue(back.isHittable)
         back.tap()
 
@@ -91,29 +113,59 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
 
         let current = element("snc-handoff-current")
         let requested = element("snc-handoff-requested")
-        let limit = element("snc-handoff-limit")
-        let continueInTime = element("snc-handoff-continue")
-        let cancelRequest = element("snc-handoff-cancel-request")
-        assertExists([current, requested, limit, continueInTime, cancelRequest])
+        let consequence = element("snc-handoff-consequence")
+        let continueToTime = element("snc-handoff-continue")
+        assertExists([
+            element("snc-handoff-target"),
+            current,
+            requested,
+            consequence,
+            continueToTime,
+            element("snc-search-cancel")
+        ])
+        assertVerticalOrder([
+            element("snc-handoff-target"),
+            current,
+            requested,
+            consequence,
+            continueToTime
+        ])
 
+        XCTAssertTrue(app.navigationBars["Review in Time"].exists)
+        XCTAssertEqual(element("snc-handoff-target").label, "Object")
+        XCTAssertEqual(
+            element("snc-handoff-target").value as? String,
+            "Dentist appointment. Event in Time"
+        )
+        XCTAssertEqual(current.label, "Current time")
         XCTAssertTrue((current.value as? String)?.contains("Tomorrow · 9:30 AM") == true)
-        XCTAssertTrue((current.value as? String)?.contains("remains unchanged") == true)
+        XCTAssertTrue((current.value as? String)?.contains("Nothing has changed") == true)
+        XCTAssertEqual(requested.label, "Requested time")
         XCTAssertTrue((requested.value as? String)?.contains("Tomorrow · 11:00 AM") == true)
-        XCTAssertTrue((limit.value as? String)?.contains("Time must review") == true)
+        XCTAssertTrue((requested.value as? String)?.contains("90 minutes later") == true)
+        XCTAssertEqual(consequence.label, "Before anything changes")
+        XCTAssertEqual(
+            consequence.value as? String,
+            "Time will check availability and any calendar effects."
+        )
+        XCTAssertEqual(continueToTime.label, "Continue to Time")
+        XCTAssertFalse(element("snc-handoff-cancel-request").exists)
+        assertNoInternalProductTerminology()
 
-        continueInTime.tap()
-        let prepared = element("snc-handoff-prepared-status")
-        XCTAssertTrue(prepared.waitForExistence(timeout: Self.waitTimeout))
-        XCTAssertEqual(prepared.label, "Prepared for Time. Nothing changed.")
+        continueToTime.tap()
         XCTAssertTrue((current.value as? String)?.contains("Tomorrow · 9:30 AM") == true)
 
-        cancelRequest.tap()
+        let back = app.navigationBars["Review in Time"].buttons.firstMatch
+        XCTAssertTrue(back.isHittable)
+        back.tap()
 
         let query = element("snc-search-query")
         let review = element("snc-action-query-review")
         assertExists([query, review])
         XCTAssertEqual(query.value as? String, "move the dentist appointment to 11")
-        XCTAssertTrue((review.value as? String)?.contains("Current accepted truth") == true)
+        XCTAssertTrue((review.value as? String)?.contains("Event in Time") == true)
+        XCTAssertTrue((review.value as? String)?.contains("Current time") == true)
+        XCTAssertFalse((review.value as? String)?.contains("Current accepted truth") == true)
         XCTAssertTrue((review.value as? String)?.contains("Tomorrow at 11:00 AM") == true)
     }
 
@@ -150,32 +202,45 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
 
         let query = element("snc-search-query")
         let cancel = element("snc-search-cancel")
+        let resultsRegion = element("snc-search-results-region")
         let event = element("snc-result-event.dentist-appointment")
         let movement = element("snc-result-movement.prepare-appointment-questions")
-        assertExists([query, cancel, event, movement, app.keyboards.firstMatch])
+        let keyboard = app.keyboards.firstMatch
+        assertExists([query, cancel, resultsRegion, event, movement, keyboard])
+        let initialMovementMaxY = movement.frame.maxY
 
         XCTAssertEqual(query.value as? String, "appointment")
         XCTAssertGreaterThanOrEqual(event.frame.height, 44)
         XCTAssertGreaterThanOrEqual(movement.frame.height, 44)
         XCTAssertGreaterThan(event.frame.height, ordinaryEventHeight)
         XCTAssertLessThan(event.frame.minY, movement.frame.minY)
+        XCTAssertLessThan(query.frame.maxY, keyboard.frame.minY)
+        XCTAssertLessThan(cancel.frame.maxY, keyboard.frame.minY)
+        XCTAssertLessThanOrEqual(event.frame.maxY, keyboard.frame.minY)
+        XCTAssertTrue(event.isHittable)
         assertSemanticOrder(
             in: event,
             expected: [
-                "Owner, Time",
-                "Current truth, Tomorrow · 9:30 AM",
-                "Action, Inspect"
+                "Time",
+                "Tomorrow · 9:30 AM",
+                "Inspect"
             ]
         )
         assertSemanticOrder(
             in: movement,
             expected: [
-                "Owner, Goals",
-                "Current truth, Current movement",
-                "Match reason, Related appointment context",
-                "Action, Inspect"
+                "Goals",
+                "Current movement",
+                "Why it appeared, Related appointment context",
+                "Inspect"
             ]
         )
+
+        let scrollStart = event.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.75))
+        let scrollEnd = resultsRegion.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.22))
+        scrollStart.press(forDuration: 0.05, thenDragTo: scrollEnd)
+        XCTAssertTrue(movement.isHittable)
+        XCTAssertLessThan(movement.frame.maxY, initialMovementMaxY)
         XCTAssertTrue(cancel.isHittable)
     }
 
@@ -271,5 +336,42 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
             file: file,
             line: line
         )
+    }
+
+    private func assertNoInternalProductTerminology(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let prohibitedPhrases = [
+            "Canonical owner",
+            "Current accepted truth",
+            "Current truth",
+            "Accepted local Event",
+            "canonical object",
+            "Time-owned Event",
+            "Limit",
+            "Prepared for Time review",
+            "Cancel request",
+            "architecture",
+            "runtime",
+            "fixture",
+            "proof",
+            "implementation",
+            "mutation"
+        ]
+
+        for phrase in prohibitedPhrases {
+            assertNoAccessibleText(containing: phrase, file: file, line: line)
+        }
+    }
+
+    private func assertVerticalOrder(
+        _ elements: [XCUIElement],
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        for pair in zip(elements, elements.dropFirst()) {
+            XCTAssertLessThan(pair.0.frame.minY, pair.1.frame.minY, file: file, line: line)
+        }
     }
 }

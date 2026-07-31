@@ -1,5 +1,9 @@
 import SwiftUI
 
+#if os(iOS)
+import UIKit
+#endif
+
 struct SearchNativeCalibrationPalette {
     let colorScheme: ColorScheme
     let contrast: ColorSchemeContrast
@@ -72,4 +76,66 @@ extension View {
         self
         #endif
     }
+
+    @ViewBuilder
+    func searchNativeCalibrationTracksKeyboardClearance(
+        _ clearance: Binding<CGFloat>
+    ) -> some View {
+        #if os(iOS)
+        modifier(SearchNativeCalibrationKeyboardClearanceModifier(clearance: clearance))
+        #else
+        self
+        #endif
+    }
 }
+
+#if os(iOS)
+private struct SearchNativeCalibrationKeyboardClearanceModifier: ViewModifier {
+    @Binding var clearance: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .onReceive(
+                NotificationCenter.default.publisher(
+                    for: UIResponder.keyboardWillChangeFrameNotification
+                )
+            ) { notification in
+                clearance = overlap(from: notification)
+            }
+            .onReceive(
+                NotificationCenter.default.publisher(
+                    for: UIResponder.keyboardDidChangeFrameNotification
+                )
+            ) { notification in
+                clearance = overlap(from: notification)
+            }
+            .onReceive(
+                NotificationCenter.default.publisher(
+                    for: UIResponder.keyboardWillHideNotification
+                )
+            ) { _ in
+                clearance = 0
+            }
+    }
+
+    private func overlap(from notification: Notification) -> CGFloat {
+        guard
+            let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let window = activeWindow
+        else {
+            return 0
+        }
+
+        let frameInWindow = window.convert(endFrame, from: nil)
+        let intersection = window.bounds.intersection(frameInWindow)
+        return intersection.isNull ? 0 : intersection.height
+    }
+
+    private var activeWindow: UIWindow? {
+        let windows = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+        return windows.first(where: \.isKeyWindow) ?? windows.first
+    }
+}
+#endif

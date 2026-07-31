@@ -71,6 +71,12 @@ final class SearchNativeCalibrationFixtureTests: XCTestCase {
         XCTAssertEqual(fixture.handoff.currentAcceptedTruth, "Tomorrow · 9:30 AM")
         XCTAssertEqual(fixture.handoff.requestedChange, "Tomorrow · 11:00 AM")
         XCTAssertEqual(fixture.handoff.owner, .time)
+        XCTAssertEqual(fixture.handoff.consequence, "90 minutes later")
+        XCTAssertEqual(
+            fixture.handoff.limitation,
+            "Time will check availability and any calendar effects."
+        )
+        XCTAssertEqual(fixture.handoff.actionTitle, "Continue to Time")
         XCTAssertNotEqual(
             fixture.handoff.currentAcceptedTruth,
             fixture.handoff.requestedChange
