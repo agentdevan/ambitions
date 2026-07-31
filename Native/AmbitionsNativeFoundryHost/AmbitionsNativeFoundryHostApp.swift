@@ -5,7 +5,9 @@ import SwiftUI
 struct AmbitionsNativeFoundryHostApp: App {
     var body: some Scene {
         WindowGroup {
-            if let searchVariant = SearchNativeFoundryVariant.fromProcessArguments {
+            if let captureVariant = CaptureNativeFoundryVariant.fromProcessArguments {
+                CaptureNativeFoundryHost(variant: captureVariant)
+            } else if let searchVariant = SearchNativeFoundryVariant.fromProcessArguments {
                 SearchNativeFoundryHost(variant: searchVariant)
             } else if let youVariant = YouNativeFoundryVariant.fromProcessArguments {
                 YouNativeFoundryHost(variant: youVariant)
