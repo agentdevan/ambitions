@@ -1,6 +1,6 @@
 # Search and Capture native-proof gate
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_REVIEW`
+Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
 
 This record decides whether the current Search and Capture evidence is sufficient for cross-root synthesis. It does not reopen Today, Goals, Time, or You, and it does not authorize implementation, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
@@ -10,7 +10,7 @@ The proof gate is accepted for sequencing purposes. The selected sequence is **S
 
 - No standalone shared-substrate implementation phase, evidence package, component library, or acceptance gate is created.
 - Capture remains deferred. After Search receives separate owner acceptance and is merged, Capture begins from a fresh synchronized branch.
-- The bounded Search proving package is [AVF-SEARCH-D07-R01-NATIVE-R00](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md).
+- The bounded Search proving package has advanced to [AVF-SEARCH-D07-R01-NATIVE-R01](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md). R00 was not accepted; its interaction architecture survived into this narrow product-language and Accessibility 2 restoration.
 - This sequencing decision does not accept Search, authorize Capture, begin cross-root synthesis, or change `APPROVED_FOR_SWIFTUI = false`.
 
 ## 1. Verified baseline
@@ -233,4 +233,4 @@ Search should exercise the substrate first because it is read-only and exposes p
 
 The sequencing decision is recorded. The bounded Search proving slice now awaits a separate owner review. Capture remains unimplemented and cannot begin on this branch.
 
-Final status: `READY_FOR_OWNER_SEARCH_NATIVE_REVIEW`
+Final status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`

@@ -4,6 +4,8 @@
 
 Fixture identity: `search-flagship/owner-routed-semantic-passage/v1`
 
+Current proving identity: `AVF-SEARCH-D07-R01-NATIVE-R01 — Product-Facing Search Passage Restoration`
+
 The fixture is immutable, deterministic, local-only proving input. It is not a production search index, object resolver, route owner, mutation authority, persistence contract, or privacy authorization model.
 
 ## Presentation origin
@@ -25,7 +27,7 @@ Query: `appointment`
    - Current truth: Tomorrow · 9:30 AM.
    - Match reason: direct title match; omitted from the compact row because it is obvious.
    - Available action: Inspect.
-   - Source/freshness in focused depth: Accepted local Event · Current.
+   - Product-facing focused-depth owner: Event in Time.
 2. `movement.prepare-appointment-questions`
    - Identity: Prepare questions for the appointment.
    - Kind: Current movement.
@@ -34,9 +36,9 @@ Query: `appointment`
    - Match reason: Related appointment context.
    - Available action: Inspect.
 
-## Inspect and Understand
+## Details and bounded understanding
 
-The selected Event depth preserves identity, owner, current truth, source/freshness, and why the result matched. Understand remains a bounded statement tied to that Event. Search can inspect or open the Event; Time must review any change.
+The selected Event depth shows `Dentist appointment`, `Event in Time`, `When`, `Why it appeared`, and `About this result`. The explanation remains bounded to the selected Event: Search can show and open it; Time handles changes. Internal ownership and truth-taxonomy terms remain fixture evidence only and are not rendered.
 
 ## Owner-handoff preparation
 
@@ -47,7 +49,7 @@ Query: `move the dentist appointment to 11`
 - Current accepted truth: Tomorrow · 9:30 AM.
 - Requested change: Tomorrow · 11:00 AM.
 - Practical consequence: 90 minutes later.
-- Limit: Time must review availability and external-calendar effects.
+- Product-facing boundary: Time will check availability and any calendar effects before anything changes.
 - Primary action: Continue in Time.
 - Fixture outcome: preparation flag only; accepted truth unchanged and canonical mutation count remains zero.
 

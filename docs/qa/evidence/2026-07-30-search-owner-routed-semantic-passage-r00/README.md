@@ -1,10 +1,10 @@
 <!-- markdownlint-disable MD013 -->
 
-# Search Owner-Routed Semantic Passage R00
+# Search Product-Facing Passage Restoration R01
 
-`AVF-SEARCH-D07-R01-NATIVE-R00 — Owner-Routed Semantic Search Passage`
+`AVF-SEARCH-D07-R01-NATIVE-R01 — Product-Facing Search Passage Restoration`
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_REVIEW`
+Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
 
 Parent provisional authority: `AVF-SEARCH-D07-R01 — Owner-Routed Semantic Command Field`
 
@@ -12,9 +12,9 @@ Installed closure: `VC10-SEARCH-S01 — Full-Screen Semantic Command Passage`
 
 Fixture: `search-flagship/owner-routed-semantic-passage/v1`
 
-Captured source: `5366214d4b1d1c1a8dd7fbec9889cffbc250843b`
+Captured source: `873aab9cf6258a6dbe19a681d303b5c75e425d30`
 
-This package is one bounded, fixture-driven native proving slice. It asks whether Search can operate as a full-screen, local, owner-routed semantic command passage without becoming an AI answer feed, generic command palette, Search-owned mutation surface, or privacy leak. Passing validation does not accept Search automatically.
+This existing package now records the bounded R01 restoration of the R00 fixture-driven native proving slice. R01 preserves the accepted interaction architecture while replacing internal truth-model and architecture language with product-facing Search language and repairing Accessibility 2 result geometry above the native keyboard. Passing validation does not accept Search automatically.
 
 ## Preserve exactly
 
@@ -25,27 +25,28 @@ This package is one bounded, fixture-driven native proving slice. It asks whethe
 - Find, Inspect, bounded object-backed Understand, and owner-handoff preparation remain non-mutating.
 - Privacy suppression never reveals the protected identity.
 - No-results and privacy-degraded states remain distinct.
+- The embedded presentation substrate remains Foundry-only and provisional.
 - `APPROVED_FOR_SWIFTUI = false`.
 
 ## Changed
 
-- Added only Foundry fixture behavior for the selected Search proving slice.
-- Embedded the minimum provisional global-presentation substrate in Search: fixture origin identity, temporary full-screen presentation, origin/trigger return target, initial focus, keyboard containment, Cancel, exact return, and return focus.
-- Added an explicit Dynamic Type propagation boundary so the presented passage receives Accessibility 2 instead of inheriting ordinary-size geometry.
+- Entry helper copy now reads `Search across Ambitions.` while retaining `Local on this iPhone`.
+- Focused inspection now uses `Details` with product-facing object, timing, match, and bounded explanation language.
+- Handoff preparation now uses `Review in Time`, current and requested time, a practical consequence boundary, and one `Continue to Time` action.
+- Search result scrolling now responds to the live native keyboard frame, keeping Accessibility 2 content within the keyboard-safe viewport without a fixed-height or screenshot-only branch.
 
 ## Removed
 
-- Root chrome from the active global Search journey.
-- Any assistant avatar, chat anatomy, generated answer, prompt filler, floating command-palette box, confidence score, Search-owned edit control, settlement claim, or protected identity disclosure.
+- Internal architecture, truth-model, fixture, proof, implementation, and mutation terminology from rendered Search UI.
+- The redundant lower `Cancel request` action; framework Back restores the exact Search action-query context and top-right Cancel still dismisses Search.
 - No production behavior or source was removed.
 
 ## Added
 
-- Representative local results for a Time-owned Event and Goals-owned current movement.
-- One focused Event inspection containing distinct Inspect and Understand sections.
-- One Time-owned handoff-preparation depth that preserves accepted truth and records zero canonical mutations.
-- Deterministic no-results and privacy-suppressed states.
-- Six standalone native screenshots and focused package/UI assertions.
+- Product-facing Details and Review in Time semantic assertions.
+- Prohibited-rendered-language assertions.
+- Accessibility keyboard-overlap, first-result hitability, and two-result inventory assertions.
+- An [R01 revision record](r01-revision.md) and six recaptured standalone native screenshots.
 
 ## Unresolved
 
@@ -53,6 +54,7 @@ This package is one bounded, fixture-driven native proving slice. It asks whethe
 - No stale/unavailable index, permission-limitation, unsupported-query, ambiguity, or partial-coverage anatomy is proven by this single degraded fixture.
 - Production shell and Crowned Edge Dock coexistence remain unproven.
 - Manual assistive-technology, RTL, long-localization, and physical-device behavior remain unproven.
+- Accessibility 2 proof is automated identifier/order/geometry evidence, not a manual VoiceOver transcript.
 
 ## Architecture-sensitive assumptions
 
@@ -61,6 +63,7 @@ This package is one bounded, fixture-driven native proving slice. It asks whethe
 - The fixture state does not reconcile current production Search models, indexes, routes, or privacy filtering.
 - `Continue in Time` records a fixture-only prepared handoff; it does not instantiate Time or mutate the Event.
 - Search context restoration is in-session fixture proof, not durable restoration across relaunch.
+- Live keyboard clearance is Search-specific Foundry infrastructure for this slice. It is not a final global-presentation component or production API.
 
 ## Validation
 
@@ -76,6 +79,7 @@ See [validation-results.md](validation-results.md). The Foundry package, focused
 - [Accessibility results](screenshots/06-search-results-accessibility-dark.png)
 - [Machine-readable screenshot metadata](screenshot-metadata.json)
 - [Fixture contract](fixture-contract.md)
+- [R01 revision record](r01-revision.md)
 - [Owner review](owner-review.md)
 
 All captures are 1206 × 2622 pixels from the `VC14 iPhone 17 Pro` Simulator on iOS 26.5 (23F77). The first five use Dynamic Type Large; the sixth uses Accessibility 2.
