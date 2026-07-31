@@ -4,6 +4,7 @@
   "native_proving_id": "AVF-SEARCH-D07-R01-NATIVE-R01",
   "parent_direction": "AVF-SEARCH-D07-R01",
   "installed_closure": "VC10-SEARCH-S01",
+  "authority_reconciled_base_sha": "d4394d95a2b0170822841ab693c6e06a996dcffd",
   "fixture_id": "search-flagship/owner-routed-semantic-passage/v1",
   "capture_source_sha": "873aab9cf6258a6dbe19a681d303b5c75e425d30",
   "device": "VC14 iPhone 17 Pro Simulator",
@@ -45,7 +46,7 @@
     },
     {
       "id": "SNC-R01-F03",
-      "path": "screenshots/03-search-inspect-understand-dark.png",
+      "path": "screenshots/03-search-contextual-inspect-dark.png",
       "sha256": "ec644db1dcef775a01cff8700fdbf4992bb7589464b5532b4f0a6352c35fe694",
       "width": 1206,
       "height": 2622,

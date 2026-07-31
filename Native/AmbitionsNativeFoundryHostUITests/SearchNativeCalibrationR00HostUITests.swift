@@ -38,7 +38,7 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
         XCTAssertEqual(trigger.value as? String, "Returned from Search")
     }
 
-    func testRepresentativeResultsInspectUnderstandAndSelectedReturn() {
+    func testRepresentativeResultsContextualInspectAndSelectedReturn() {
         launch("snc-search-results-dark")
 
         let query = element("snc-search-query")
@@ -71,9 +71,9 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
         let identity = element("snc-inspect-identity")
         let current = element("snc-inspect-current")
         let match = element("snc-inspect-match")
-        let understanding = element("snc-inspect-understand")
-        assertExists([identity, current, match, understanding, element("snc-search-cancel")])
-        assertVerticalOrder([identity, current, match, understanding])
+        let explanation = element("snc-contextual-inspect-explanation")
+        assertExists([identity, current, match, explanation, element("snc-search-cancel")])
+        assertVerticalOrder([identity, current, match, explanation])
         XCTAssertTrue(app.navigationBars["Details"].exists)
         XCTAssertFalse(app.buttons["Edit"].exists)
         XCTAssertFalse(element("snc-inspect-owner").exists)
@@ -93,9 +93,9 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
             element("snc-inspect-match").value as? String,
             "The title matches “appointment.”"
         )
-        XCTAssertEqual(element("snc-inspect-understand").label, "About this result")
+        XCTAssertEqual(element("snc-contextual-inspect-explanation").label, "About this result")
         XCTAssertEqual(
-            element("snc-inspect-understand").value as? String,
+            element("snc-contextual-inspect-explanation").value as? String,
             "Search can show this event and open it. Time handles any changes."
         )
         assertNoInternalProductTerminology()
@@ -248,7 +248,7 @@ final class SearchNativeCalibrationR00HostUITests: XCTestCase {
         let variants = [
             "snc-search-entry-focused-dark",
             "snc-search-results-dark",
-            "snc-search-inspect-understand-dark",
+            "snc-search-contextual-inspect-dark",
             "snc-search-owner-handoff-dark",
             "snc-search-no-results-dark",
             "snc-search-privacy-degraded-dark"

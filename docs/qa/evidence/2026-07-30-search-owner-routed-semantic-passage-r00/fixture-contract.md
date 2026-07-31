@@ -36,9 +36,9 @@ Query: `appointment`
    - Match reason: Related appointment context.
    - Available action: Inspect.
 
-## Details and bounded understanding
+## Contextual Inspect
 
-The selected Event depth shows `Dentist appointment`, `Event in Time`, `When`, `Why it appeared`, and `About this result`. The explanation remains bounded to the selected Event: Search can show and open it; Time handles changes. Internal ownership and truth-taxonomy terms remain fixture evidence only and are not rendered.
+The selected Event depth shows `Dentist appointment`, `Event in Time`, `When`, `Why it appeared`, and `About this result`. `About this result` is bounded explanatory content inside contextual Inspect, not a separate mode or outcome. Search can show and open the Event; Time handles changes. Internal ownership and truth-taxonomy terms remain fixture evidence only and are not rendered.
 
 ## Owner-handoff preparation
 
@@ -74,7 +74,7 @@ The protected probe must never appear in rendered or accessible product UI.
 
 - `snc-search-entry-focused-dark`: initial entry, Large, keyboard visible.
 - `snc-search-results-dark`: representative results, Large, keyboard visible.
-- `snc-search-inspect-understand-dark`: focused Event depth, Large.
+- `snc-search-contextual-inspect-dark`: focused Event depth, Large.
 - `snc-search-owner-handoff-dark`: Time handoff preparation, Large.
 - `snc-search-no-results-dark`: no-results state, Large, automated proof only.
 - `snc-search-privacy-degraded-dark`: privacy suppression, Large, keyboard visible.

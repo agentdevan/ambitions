@@ -5,7 +5,7 @@ enum SearchNativeFoundryVariant: String {
     case origin = "snc-search-origin-dark"
     case entryFocused = "snc-search-entry-focused-dark"
     case results = "snc-search-results-dark"
-    case inspectUnderstand = "snc-search-inspect-understand-dark"
+    case contextualInspect = "snc-search-contextual-inspect-dark"
     case ownerHandoff = "snc-search-owner-handoff-dark"
     case noResults = "snc-search-no-results-dark"
     case privacyDegraded = "snc-search-privacy-degraded-dark"
@@ -66,7 +66,7 @@ struct SearchNativeFoundryHost: View {
             _ = state.presentSearch(
                 query: SearchNativeCalibrationFixture.representativeQuery
             )
-        case .inspectUnderstand:
+        case .contextualInspect:
             _ = state.presentSearch(
                 query: SearchNativeCalibrationFixture.representativeQuery
             )

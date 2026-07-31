@@ -1,6 +1,8 @@
 # Search and Capture native-proof gate
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_SEARCH_CALIBRATION_EVIDENCE`
+
+Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 This record decides whether the current Search and Capture evidence is sufficient for cross-root synthesis. It does not reopen Today, Goals, Time, or You, and it does not authorize implementation, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
@@ -9,11 +11,21 @@ This record decides whether the current Search and Capture evidence is sufficien
 The proof gate is accepted for sequencing purposes. The selected sequence is **Search first, with the minimum shared presentation substrate embedded in the Search proving slice**.
 
 - No standalone shared-substrate implementation phase, evidence package, component library, or acceptance gate is created.
-- Capture remains deferred. After Search receives separate owner acceptance and is merged, Capture begins from a fresh synchronized branch.
+- Capture remains deferred and unimplemented. After this accepted Search package is merged, any Capture work begins from a fresh synchronized branch.
 - The bounded Search proving package has advanced to [AVF-SEARCH-D07-R01-NATIVE-R01](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md). R00 was not accepted; its interaction architecture survived into this narrow product-language and Accessibility 2 restoration.
-- This sequencing decision does not accept Search, authorize Capture, begin cross-root synthesis, or change `APPROVED_FOR_SWIFTUI = false`.
+- Owner review accepts R01 as bounded provisional Search calibration evidence. This does not authorize Capture, production Search, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
-## 1. Verified baseline
+## Current Search authority reconciliation
+
+- Current progression: Find → owner-routed Act → contextual Inspect.
+- Local query and result retrieval map to Find.
+- Details and `About this result` map to contextual Inspect; the explanation is not a separate mode or outcome.
+- Review in Time and `Continue to Time` map to owner-routed Act preparation and perform no Search-owned mutation.
+- Privacy suppression and no-results remain Search-owned result states.
+- Full-screen presentation, keyboard containment, dismissal, exact return, and return focus remain a provisional Foundry-only global-presentation substrate.
+- Conversational Search authority is retired; no answer-feed, session-history, assistant, or generic explanation mode is accepted by this package.
+
+## 1. Historical gate baseline
 
 - Repository: `agentdevan/ambitions`
 - Starting `main`: `448ad0b9db62ac52d3e6f16b406254def123c970`
@@ -48,42 +60,37 @@ The binding product and presentation boundary comes from:
 - [Accessibility Stress Closure](../../../canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md)
 - [Native Matched Closure](../../../canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md)
 
-This authority establishes the intended journeys, not their proof status. Search and Capture are temporary global non-roots. Each must preserve its originating relationship, use one presentation owner, keep primary-object ownership distinct, and return exactly. Search owns finding, bounded understanding, inspection, and action preparation; it does not own consequential mutation. Capture owns expression, draft correction, interpretation review, and handoff; the canonical destination owner owns consequential mutation.
+This authority establishes the intended journeys, not their proof status. Search and Capture are temporary global non-roots. Each must preserve its originating relationship, use one presentation owner, keep primary-object ownership distinct, and return exactly. Search owns Find, contextual Inspect, and owner-routed Act preparation; it does not own consequential mutation. Capture owns expression, draft correction, interpretation review, and handoff; the canonical destination owner owns consequential mutation.
 
-The current evidence floor is materially lower than that target:
+The following was the historical pre-proof evidence floor before the accepted R01 package:
 
-- There is no Search or Capture Native Visual Foundry host, fixture family, accepted journey package, or accepted owner-review closeout.
+- There was no Search or Capture Native Visual Foundry host, fixture family, accepted journey package, or accepted owner-review closeout.
 - Existing Search/Capture workshop and VSP images are generated design evidence, not native proof.
 - The current app contains Stage-owned Search and Capture implementations, focused tests, and previously recorded Simulator screenshots. The repository continues to label their device and acceptance proof as pending in [Known Issues](../../KNOWN_ISSUES.md) and the [frontend journey registry](../../../audits/frontend-journey-registry.md).
 - The [frontend remediation ledger](../../frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md) records earlier Simulator execution for Capture composition and the light/dark overlay matrix. Those artifacts establish implementation observations only; they were not accepted as Search or Capture Foundry calibration evidence.
 
-Therefore no Search or Capture journey claim in this gate is classified `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE`.
+That historical statement is superseded for Search by the R01 owner acceptance. It remains current for Capture.
 
 ## 3. Search proof inventory
 
-Current implementation references include the Stage-owned [Search overlay](../../../../Native/Ambitions/Stage/Overlays/QuietCommandMemoryLensOverlay.swift), [overlay host](../../../../Native/Ambitions/Stage/AmbitionsStage.swift), [local result service](../../../../Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift), [Find / Act / Inspect contract](../../../../Native/Ambitions/Core/LocalRuntimeOS/Search/FindActInspectContract.swift), [command router](../../../../Native/Ambitions/App/ShellCommandRouter.swift), and focused [Search route UI test](../../../../Native/AmbitionsUITests/GoalsSurfaceUITests.swift). They are not a substitute for accepted journey evidence.
+Current implementation references include the Stage-owned [Search overlay](../../../../Native/Ambitions/Stage/Overlays/QuietCommandMemoryLensOverlay.swift), [overlay host](../../../../Native/Ambitions/Stage/AmbitionsStage.swift), [local result service](../../../../Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift), [Find / Act / Inspect contract](../../../../Native/Ambitions/Core/LocalRuntimeOS/Search/FindActInspectContract.swift), [command router](../../../../Native/Ambitions/App/ShellCommandRouter.swift), and focused [Search route UI test](../../../../Native/AmbitionsUITests/GoalsSurfaceUITests.swift). Production implementation remains separate from the accepted fixture evidence.
 
 | Proof claim | Classification | Current evidence and limit |
 |---|---|---|
-| Full-screen temporary non-root presentation | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Search is a Stage-level, edge-covering seam and the root dock is suppressed while it is active. Earlier Simulator overlay captures exist, but there is no accepted Search proof package or owner acceptance. |
-| Originating-root relationship | `PARTIALLY_PROVEN` | `entrySource` and origin-biased search inputs are carried. Existing proof enters mainly by launch URL or isolated route; it does not demonstrate invocation from a retained root depth and exact restoration to that origin. |
-| Query focus and keyboard behavior | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | The native field is focus-bound and requests focus on Search appearance. The current gate did not rerun a keyboard interaction, and no accepted focus/keyboard evidence exists. |
-| Cancel and exact return | `PARTIALLY_PROVEN` | Close dismisses the overlay without changing the selected root. Exact root depth, scroll position, selection, and invoking-control focus restoration are not proven. |
-| Representative local results | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | The local service produces goals, steps, captures, proof, receipts, Time, and settings results, and an existing UI test opens a Time result. A representative accepted rendered fixture family does not exist. |
-| Compact result hierarchy | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Current rows expose family, source, state, title, context, action, and optional inspect indication. Earlier visual evidence calls the result treatment card-heavy; owner-accepted hierarchy proof is absent. |
-| Find behavior | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Deterministic local ranking and origin bias exist and have focused tests recorded elsewhere. The current gate did not execute those tests. |
-| Open behavior | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Trusted results route to typed destinations, including a previously exercised Time route. Exact return to Search after owner inspection is not proven. |
-| Inspect behavior | `PARTIALLY_PROVEN` | Inspect metadata and an accessibility action exist for selected result kinds, but the visible UI does not prove a distinct compact inspection journey with source, freshness, and return continuity. |
-| Bounded Understand behavior | `UNPROVEN` | Explanation data exists in lower-level contracts, but no accepted object-backed answer presentation, evidence disclosure, or rendered semantic order was found in the active Search UI. |
-| Owner-routed action preparation without Search-owned mutation | `PARTIALLY_PROVEN` | Search routes trusted results and does not directly mutate saved objects. A distinct prepared action reviewed by the owning surface, with Search context and return preserved, is not proven. Production action authority remains subject to reconciliation. |
-| No-results state | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | The active UI distinguishes an empty prompt from “No local match” and offers a Capture handoff. It has no accepted rendered proof. |
-| One degraded state | `UNPROVEN` | Service errors collapse to an empty result array. No separate stale, unavailable, partial-index, or permission-constrained native state is proven. |
-| Privacy suppression | `UNPROVEN` | Privacy filtering exists in a lower-level Find contract, while the active Memory Lens result path does not visibly distinguish suppressed results from no results. No native suppression proof was found. |
-| Dynamic Type recomposition | `UNPROVEN` | SwiftUI text wrapping is present, but no Search-specific accessibility-size capture or focused geometry assertion proves the complete field/result/action hierarchy. |
-| Semantic focus order | `UNPROVEN` | Result labels are combined, but no accepted ordered transcript or targeted focus-order assertion covers dismiss, query, status, results, inspection, and recovery. |
-| Result selection and return focus | `PARTIALLY_PROVEN` | Result selection and owner routing exist. Return to the same query, selected result, scroll position, and invoking result focus after owner depth is not proven. |
+| Full-screen temporary non-root presentation | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | The neutral fixture origin presents Search full-screen and hides origin chrome. This is Foundry-only substrate proof, not production shell proof. |
+| Originating-root relationship, Cancel, exact return, and return focus | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Entry, dismissal from all bounded states, exact neutral-origin return, Search-trigger return focus, and selected-result return focus are proven in-session. |
+| Query focus and keyboard behavior | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Initial focus, visible native keyboard, stable query/Cancel, and keyboard containment are proven on the recorded Simulator profile. |
+| Representative local results and compact hierarchy | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | The deterministic Event and current-movement fixtures preserve identity → owner → current state → optional match reason → action. |
+| Deterministic Find | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | The bounded local query fixtures prove deterministic retrieval only; production indexing, matching, and ranking remain unproven. |
+| Contextual Inspect | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Details proves object-backed read-only inspection, bounded explanation inside Inspect, framework Back, and selected-result return focus. |
+| Owner-routed Act preparation | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Review in Time proves current/requested truth, consequence, owner handoff preparation, and zero canonical mutations. Production routing remains unproven. |
+| No-results state | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | The bounded no-results fixture preserves query and remains distinct from degraded/privacy states. |
+| Privacy suppression | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | A valid visible result remains while the protected fixture identity, owner, title, and match text stay undisclosed. |
+| Full degraded-state inventory | `PARTIALLY_PROVEN` | Privacy suppression is proven; stale, unavailable, partial-index, permission-limited, unsupported-query, and ambiguous states remain unproven. |
+| Dynamic Type, semantic order, and keyboard-safe scrolling | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Accessibility 2 preserves order, complete first-result operation above the keyboard, and natural continuation. Manual assistive-technology proof remains absent. |
+| Production Open, owner routing, and cross-root return | `DEFERRED_TO_PRODUCTION_RECONCILIATION` | The fixture proves preparation and in-Search return only; production destinations and commits remain outside this package. |
 
-**Search verdict:** Search does not possess sufficient accepted native evidence to enter cross-root synthesis. It requires one bounded fixture-driven native proving slice.
+**Search verdict:** R01 is accepted as sufficient bounded provisional native calibration evidence for later cross-root synthesis. Production reconciliation remains required.
 
 ## 4. Capture proof inventory
 
@@ -113,19 +120,15 @@ Current implementation references include the full-height [activated Capture sea
 
 ### Shared gaps
 
-- No accepted Search or Capture Foundry package, fixture contract, owner decision, or evidence ceiling.
-- No proof beginning at a real provisionally closed root, retaining root route depth and selection, and returning the exact invoking control to focus.
-- No accepted keyboard, Dynamic Type, semantic focus-order, and dismissal family under one controlled device profile.
-- No evidence attribution that separates shell presentation behavior from Search-owned and Capture-owned behavior.
+- Capture still has no accepted Foundry package, fixture contract, owner decision, or evidence ceiling.
+- Search proof uses a neutral fixture origin, not production shell or Crowned Edge Dock integration.
+- The Foundry presentation substrate remains provisional and has not been evaluated for Capture reuse.
 
-### Search-only gaps
+### Remaining Search production-reconciliation gaps
 
-- No bounded object-backed Understand state.
-- No visible Inspect depth distinct from Open.
-- No privacy-suppressed result treatment.
-- No separate degraded state; current failures collapse into empty results.
-- No complete owner-action preparation and return journey.
-- No result-selection restoration to the same query, scroll position, and result focus.
+- Production indexing, matching, ranking, resolution, routing, privacy authorization, and owner handoff remain unproven.
+- The full degraded-state inventory, production shell/dock coexistence, durable history, relaunch restoration, and physical-device quality remain unproven.
+- Light appearance, manual assistive technologies, RTL, and long localization remain unproven.
 
 ### Capture-only gaps
 
@@ -139,28 +142,25 @@ Current implementation references include the full-height [activated Capture sea
 
 | Global journey | Accepted native evidence sufficient for synthesis? | Native proof required? | Reason |
 |---|---|---|---|
-| Search | No | Yes, one bounded slice | Current implementation proves local Find and basic routing, but not accepted presentation, Understand, Inspect, degraded/privacy states, semantic order, or exact return. |
+| Search | Yes, bounded provisional calibration | No further Search calibration slice | R01 proves Find, contextual Inspect, owner-routed Act preparation, result states, presentation/return, and Accessibility 2 within its explicit ceiling. |
 | Capture | No | Yes, one bounded slice | Current implementation proof is stronger, but owner acceptance, clarification, exact return, draft recovery, transfer authority, and full accessibility order remain open. |
 
-Passing existing tests again would not close these gaps. The missing artifact is a bounded, controlled, owner-reviewable native journey with explicit claim attribution.
+Search acceptance does not close Capture or production-reconciliation gaps.
 
-## 7. Minimum proposed Search slice
+## 7. Completed bounded Search slice
 
-Proposed fixture identity: `search-flagship/local-find-understand-inspect/v1`.
+Fixture identity: `search-flagship/owner-routed-semantic-passage/v1`.
 
-The smallest sufficient slice is one full-app, fixture-driven Search journey with immutable local records:
+The accepted slice proves:
 
-1. Begin on one provisionally closed root at a named invoking control; record root, route depth, scroll/selection state, and focus target.
-2. Present Search full-screen with the native query field focused and keyboard visible.
-3. Enter one deterministic query returning a compact mixed set: one Goal, one Step, one temporal object, and one local proof/source record.
-4. Prove Find and Open with one result, then return to the same Search query, result position, and focus.
-5. Prove a separate read-only Inspect state and one object-backed bounded Understand disclosure; neither mutates.
-6. Prepare one owner-routed action, label it uncommitted, transfer to the owning surface for inspection only, and preserve Search return context. Production mutation remains absent.
-7. Exercise a no-results state and exactly one degraded privacy-suppressed state; do not collapse them together.
-8. Cancel Search and restore the exact originating root context and invoking-control focus.
-9. Capture one accessibility-size semantic equivalent and assert the ordered focus sequence.
+1. Neutral fixture origin, temporary full-screen presentation, initial focus, keyboard containment, Cancel, exact return, and return focus.
+2. Deterministic Find for one Time Event and one Goals current movement.
+3. Contextual Inspect with bounded object-backed explanation and selected-result return focus.
+4. Owner-routed Act preparation for Time with no mutation or settlement claim.
+5. Distinct no-results and privacy-suppressed result states.
+6. Accessibility 2 ordered, keyboard-safe adaptive scrolling.
 
-This is not a request for a Search redesign, broad index rebuild, production mutation, Ask mode, or Search-to-Capture expansion.
+This acceptance is not a Search redesign, production index, production mutation path, or Search-to-Capture implementation.
 
 ## 8. Minimum proposed Capture slice
 
@@ -190,15 +190,15 @@ This slice must not reuse the current local-save result as proof of universal ow
 
 **Original gate recommendation:** path 3, ordered as shared shell contract → Search slice → Capture slice.
 
-Search should exercise the substrate first because it is read-only and exposes presentation, keyboard, and restoration failures without draft or mutation ambiguity. Capture should then reuse the proven shell contract while adding expression, clarification, consequence, draft preservation, and owner-transfer proof.
+Search exercised the provisional substrate first because it is read-only and exposed presentation, keyboard, and restoration behavior without draft or mutation ambiguity. Any later Capture slice may evaluate reuse while adding expression, clarification, consequence, draft preservation, and owner-transfer proof.
 
-**Owner-selected refinement:** Search proceeds first with only the minimum presentation substrate embedded in its proving slice. There is no standalone shared phase or gate. Capture remains separate and deferred. A combined Search-and-Capture prototype remains rejected because it would blur primary objects, privacy states, owner handoff, capability ceilings, and evidence attribution.
+**Owner-selected result:** Search completed first with only the minimum presentation substrate embedded in its proving slice. There is no standalone shared phase or gate. Capture remains separate, deferred, and unimplemented. A combined Search-and-Capture prototype remains rejected because it would blur primary objects, privacy states, owner handoff, capability ceilings, and evidence attribution.
 
 ## 10. Explicit exclusions
 
 ### Search
 
-- Conversational Ask and open-ended synthesis: `OUTSIDE_CURRENT_CAPABILITY`.
+- Conversational Search and open-ended synthesis are retired authority and remain excluded.
 - Search-owned mutation or generic action execution: `OUTSIDE_CURRENT_CAPABILITY`.
 - Broad index reconstruction, cloud or network search, and speculative source families: `OUTSIDE_CURRENT_CAPABILITY`.
 - Production consolidation of Memory Lens and Find / Act / Inspect models: `DEFERRED_TO_PRODUCTION_RECONCILIATION`.
@@ -220,17 +220,21 @@ Search should exercise the substrate first because it is read-only and exposes p
 
 ## 11. Architecture-sensitive assumptions
 
-1. A full-app host is required for the next proof because a package preview cannot establish Stage ownership, native keyboard containment, root-depth restoration, or focus return.
+1. The accepted Search proof remains fixture-host Simulator evidence. Production Stage ownership, root-depth restoration, and shell coexistence still require later production reconciliation.
 2. The shared presentation contract must record a structured origin tuple, not only `ShellCommandEntrySource`; exact return requires root, route depth, selected object, scroll/selection state, and focus target.
 3. Search currently presents `MemoryLensResult` while a separate Find / Act / Inspect contract carries richer privacy, provenance, explanation, and Inspect data. The proving fixture must not silently claim those models are reconciled in production.
 4. Search failure currently collapses to an empty array. A fixture-only degraded state may prove the required anatomy, but production error and privacy-suppression sources remain a later reconciliation.
 5. Capture’s activated seam currently performs a local Capture command on Accept. The proving fixture must stop at owner handoff or inspection so it does not establish the wrong mutation authority.
-6. Existing closed-root Foundry hosts can supply visual substrate only. A root fixture host without the real Stage cannot prove global presentation or exact return.
+6. The neutral root fixture proves only the Foundry presentation/return substrate; it does not prove the real Stage, accepted-root composition, or production shell.
 7. Search and Capture may share presentation infrastructure, but they cannot share primary-object state, fixture records, action semantics, acceptance evidence, or review status.
 8. Simulator evidence can support provisional calibration only. Physical-device, manual assistive-technology, production baseline, and runtime integration proof remain outside these slices unless separately performed and recorded.
 
 ## 12. Current owner gate
 
-The sequencing decision is recorded. The bounded Search proving slice now awaits a separate owner review. Capture remains unimplemented and cannot begin on this branch.
+The owner accepts the bounded Search R01 proving slice as provisional calibration evidence. Search calibration is provisionally closed. Capture remains unimplemented and cannot begin on this branch.
 
-Final status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
+Final status: `ACCEPTED_AS_PROVISIONAL_SEARCH_CALIBRATION_EVIDENCE`
+
+Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
+
+Authorization: `APPROVED_FOR_SWIFTUI = false`

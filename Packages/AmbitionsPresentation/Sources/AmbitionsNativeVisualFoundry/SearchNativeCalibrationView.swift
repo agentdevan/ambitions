@@ -532,7 +532,7 @@ private struct SearchNativeCalibrationInspectDepth: View {
                 SearchNativeCalibrationSection(
                     label: "About this result",
                     title: "Search can show this event and open it. Time handles any changes.",
-                    identifier: "snc-inspect-understand",
+                    identifier: "snc-contextual-inspect-explanation",
                     emphasizesTitle: false
                 )
             }

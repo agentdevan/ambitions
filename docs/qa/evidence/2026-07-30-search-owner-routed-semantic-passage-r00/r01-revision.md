@@ -6,7 +6,9 @@ Native proving identity: `AVF-SEARCH-D07-R01-NATIVE-R01 — Product-Facing Searc
 
 Parent: `AVF-SEARCH-D07-R01 — Owner-Routed Semantic Command Field`
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_SEARCH_CALIBRATION_EVIDENCE`
+
+Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 ## Owner disposition carried forward
 
@@ -44,4 +46,4 @@ Automated proof covers geometry, hitability, identifiers, order, both fixture re
 - `shell_viability_proof = false`
 - `APPROVED_FOR_SWIFTUI = false`
 
-No Search acceptance follows automatically from this revision.
+Owner acceptance applies only to this bounded provisional calibration evidence. Current authority maps the product-facing Details depth to contextual Inspect and Review in Time to owner-routed Act preparation. No production authorization follows.

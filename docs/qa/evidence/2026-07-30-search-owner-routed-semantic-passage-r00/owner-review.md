@@ -4,9 +4,13 @@
 
 Native proving identity: `AVF-SEARCH-D07-R01-NATIVE-R01 — Product-Facing Search Passage Restoration`
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_SEARCH_CALIBRATION_EVIDENCE`
 
-R00 was not accepted because internal architecture and truth-model language appeared in product UI and Accessibility 2 result geometry collided with the keyboard. R01 preserves the surviving interaction architecture, restores product-facing language, and repairs the keyboard-safe accessibility geometry. This record requests a new owner disposition; passing builds and tests do not accept Search or authorize production work.
+Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
+
+The owner accepts R01 as bounded provisional Search calibration evidence. R00 was not accepted because internal architecture and truth-model language appeared in product UI and Accessibility 2 result geometry collided with the keyboard. R01 preserves the surviving interaction architecture, restores product-facing language, and repairs keyboard-safe accessibility geometry.
+
+The acceptance is reconciled to Find → owner-routed Act → contextual Inspect. `About this result` is explanatory content inside contextual Inspect, not a separate Search mode or outcome.
 
 ## Review checklist
 
@@ -22,11 +26,6 @@ R00 was not accepted because internal architecture and truth-model language appe
 - Is the neutral Today origin correctly understood as fixture-only presentation proof, with no accepted Today or dock claim?
 - Does this remain within the explicit proof ceiling and keep `APPROVED_FOR_SWIFTUI = false`?
 
-Owner options:
+This acceptance closes only bounded provisional Search calibration. It does not authorize production Search, indexing, ranking, resolution, routing, privacy authorization, owner-domain mutation, Search-owned mutation/Receipt/settlement/Undo, production shell integration, Crowned Edge Dock viability, final components/APIs/tokens, production screenshot baselines, or broad reconstruction.
 
-- accept as provisional Search calibration evidence;
-- request one bounded Search revision;
-- reject the native proving slice;
-- pause Search before Capture begins.
-
-Capture remains deferred until Search receives a separate owner decision and, if accepted, is merged from this branch. `APPROVED_FOR_SWIFTUI = false`.
+Capture remains deferred and unimplemented. `APPROVED_FOR_SWIFTUI = false`.

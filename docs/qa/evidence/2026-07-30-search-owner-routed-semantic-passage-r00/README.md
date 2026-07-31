@@ -4,7 +4,9 @@
 
 `AVF-SEARCH-D07-R01-NATIVE-R01 — Product-Facing Search Passage Restoration`
 
-Status: `READY_FOR_OWNER_SEARCH_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_SEARCH_CALIBRATION_EVIDENCE`
+
+Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Parent provisional authority: `AVF-SEARCH-D07-R01 — Owner-Routed Semantic Command Field`
 
@@ -14,18 +16,33 @@ Fixture: `search-flagship/owner-routed-semantic-passage/v1`
 
 Captured source: `873aab9cf6258a6dbe19a681d303b5c75e425d30`
 
-This existing package now records the bounded R01 restoration of the R00 fixture-driven native proving slice. R01 preserves the accepted interaction architecture while replacing internal truth-model and architecture language with product-facing Search language and repairing Accessibility 2 result geometry above the native keyboard. Passing validation does not accept Search automatically.
+This package records the owner-accepted bounded R01 native proving slice. The evidence is reconciled to the current deterministic Search progression—Find → owner-routed Act → contextual Inspect—without changing rendered geometry, product copy, fixture truth, behavior, screenshot pixels, or accessibility composition. Conversational Search authority is retired.
+
+## Current Search authority mapping
+
+- Local query and result retrieval prove deterministic Find.
+- Details and `About this result` prove contextual, object-backed Inspect. The explanation is content inside Inspect, not a separate mode or outcome.
+- Review in Time and `Continue to Time` prove owner-routed Act preparation without Search-owned mutation.
+- Privacy suppression and no-results are Search-owned result states.
+- Full-screen presentation, keyboard containment, dismissal, exact return, and return focus prove a provisional Foundry-only global-presentation substrate.
 
 ## Preserve exactly
 
-- Search remains a temporary full-screen global non-root, never a tab.
-- The origin and initiating Search control remain the exact dismissal and focus-return target.
-- Root chrome is absent while Search is active; query and Cancel remain stable above the native keyboard.
-- Results preserve canonical identity and canonical owner.
-- Find, Inspect, bounded object-backed Understand, and owner-handoff preparation remain non-mutating.
-- Privacy suppression never reveals the protected identity.
-- No-results and privacy-degraded states remain distinct.
-- The embedded presentation substrate remains Foundry-only and provisional.
+- Search is a temporary full-screen global non-root and is not a tab.
+- Root crown and navigation chrome are hidden while Search is active.
+- Query receives initial focus; query and Cancel remain stable with the keyboard.
+- Search remains local and offline-capable in principle.
+- Results present identity before owner, current state, optional match reason, and action.
+- Search supports deterministic Find.
+- Details provides contextual, object-backed Inspect.
+- Search may prepare owner-routed Act but cannot commit owner-domain mutation; current accepted owner truth remains unchanged during preparation.
+- Privacy-suppressed matches disclose no protected identity, while valid visible results remain available.
+- No-results and privacy suppression remain distinct.
+- Framework Back preserves Search context.
+- Global Cancel returns to the exact fixture origin and initiating Search control; return focus remains protected.
+- Accessibility Dynamic Type uses keyboard-safe adaptive scrolling; at least one complete result and action remain operable above the keyboard, and additional results continue through natural scrolling.
+- Search does not become an AI answer feed, chat transcript, assistant, detached command palette, or Search-owned editing surface.
+- The provisional global-presentation substrate may be evaluated for Capture reuse, but is not a final component or production API.
 - `APPROVED_FOR_SWIFTUI = false`.
 
 ## Changed
@@ -56,6 +73,17 @@ This existing package now records the bounded R01 restoration of the R00 fixture
 - Manual assistive-technology, RTL, long-localization, and physical-device behavior remain unproven.
 - Accessibility 2 proof is automated identifier/order/geometry evidence, not a manual VoiceOver transcript.
 
+## Explicitly not frozen
+
+- Exact Search chrome or query-field geometry.
+- Row height, spacing, separators, typography measurements, action styling, or exact section labels such as `Object`.
+- Result count or ranking presentation.
+- Full degraded-state inventory, stale or unavailable index behavior, production indexing, matching, ranking, or resolution.
+- Production owner handoff or privacy authorization.
+- Durable search history or relaunch restoration.
+- Light appearance, manual assistive-technology proof, RTL, long localization, or physical-device quality.
+- Shell or Crowned Edge Dock coexistence, motion, haptics, final components, APIs, tokens, or production screenshot baselines.
+
 ## Architecture-sensitive assumptions
 
 - The neutral Today origin is a fixture host only. It neither reproduces nor reopens accepted Today.
@@ -73,7 +101,7 @@ See [validation-results.md](validation-results.md). The Foundry package, focused
 
 - [Focused Search entry](screenshots/01-search-entry-focused-dark.png)
 - [Representative results](screenshots/02-search-results-dark.png)
-- [Inspect and bounded Understand](screenshots/03-search-inspect-understand-dark.png)
+- [Contextual Inspect](screenshots/03-search-contextual-inspect-dark.png)
 - [Owner-handoff preparation](screenshots/04-search-owner-handoff-preparation-dark.png)
 - [Privacy-degraded state](screenshots/05-search-privacy-degraded-dark.png)
 - [Accessibility results](screenshots/06-search-results-accessibility-dark.png)
@@ -86,7 +114,7 @@ All captures are 1206 × 2622 pixels from the `VC14 iPhone 17 Pro` Simulator on 
 
 ## Proof ceiling
 
-This is bounded Simulator evidence for owner review. It is not final, production-ready, a production screenshot baseline, runtime integration, canon installation, shell proof, or implementation authorization.
+This is owner-accepted bounded provisional Simulator calibration evidence. It is not final, production-ready, a production screenshot baseline, runtime integration, canon installation, shell proof, or implementation authorization.
 
 - Fixture identity: `search-flagship/owner-routed-semantic-passage/v1`
 - Simulator evidence only
