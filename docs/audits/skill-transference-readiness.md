@@ -30,10 +30,12 @@ previously observed parser failures reproduced. The mechanical repair is
 preserved in prerequisite PR #56 (`f34305949`) but is not merged because its
 build-for-testing run then exposed the unrelated existing
 `RuntimeBlobID` ambiguity in `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
-PR #55 was refreshed by merging current `origin/main` without rebasing. Its
-refreshed build preflight was then blocked by an unrelated active Xcode process;
-no focused test process started. The final result in Section 10 supersedes the
-earlier D conclusion for readiness purposes with these bounded blockers.
+PR #55 was refreshed by merging current `origin/main` without rebasing. One
+refreshed build preflight was blocked by an unrelated active Xcode process; after
+that process finished, the final bounded focused retry started `xcodebuild` but
+failed at the same three syntax blockers with executed-test count `0`. The
+final result in Section 10 supersedes the earlier D conclusion for readiness
+purposes with these bounded blockers.
 
 The current authority has most of the necessary boundaries: Local Learning is
 local, evidence-linked, uncertain, correctable, and non-mutating;
@@ -309,10 +311,11 @@ The initial focused run executed zero tests after simulator-launch retries and
 the original syntax blockers. Clean current main reproduced those blockers;
 the three-file mechanical repair in PR #56 parses but its build then stopped at
 the unrelated `RuntimeBlobID` ambiguity. After PR #55 merged live main without
-rebasing, its focused build preflight reported `xcode_process_active` because
-an unrelated worktree build was active. The refreshed proof therefore still
-executed zero tests, so the repository cannot honestly claim executable
-readiness from this proof.
+rebasing, its focused build preflight first reported `xcode_process_active`
+because an unrelated worktree build was active. The bounded retry then started
+`xcodebuild` and failed at the same parser errors before test launch, reporting
+`FAILURE_CLASS=test_failure` and executed-test count `0`. The repository cannot
+honestly claim executable readiness from this proof.
 
 ## 9. Smallest proof slice
 
@@ -361,8 +364,9 @@ across every domain or infer sensitive traits.
    in unmerged PR #56 because its build then exposed the unrelated
    `RuntimeBlobID` ambiguity at
    `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
-   The refreshed PR #55 build was additionally blocked by an active unrelated
-   Xcode process; executed-test count remains zero.
+   The refreshed PR #55 build was initially blocked by an active unrelated
+   Xcode process; the bounded retry then started `xcodebuild` and failed at the
+   same parser errors before test launch. Executed-test count remains zero.
 2. A production Goal Path proposal-input contract. The proof's owner envelope
    is private test code, so it cannot establish a current receiving seam.
 3. Executable Trust/privacy/control evidence for the transfer fields; the
