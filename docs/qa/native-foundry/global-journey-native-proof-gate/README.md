@@ -1,6 +1,6 @@
 # Search and Capture native-proof gate
 
-Status: `READY_FOR_OWNER_CAPTURE_NATIVE_REVIEW`
+Status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
 
 Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
@@ -11,7 +11,7 @@ This record decides whether the current Search and Capture evidence is sufficien
 The proof gate is accepted for sequencing purposes. The selected sequence is **Search first, with the minimum shared presentation substrate embedded in the Search proving slice**.
 
 - No standalone shared-substrate implementation phase, evidence package, component library, or acceptance gate is created.
-- Capture began from a fresh synchronized branch after Search acceptance and has advanced to the bounded [AVF-CAPTURE-S07-R01-NATIVE-R00](../../evidence/2026-07-31-capture-bounded-adaptive-meaning-passage-r00/README.md) owner-review gate.
+- Capture began from a fresh synchronized branch after Search acceptance and has advanced to the bounded [AVF-CAPTURE-S07-R01-NATIVE-R01](../../evidence/2026-07-31-capture-bounded-adaptive-meaning-passage-r00/README.md) owner-review gate. R00 interaction and semantic architecture survived; R01 restores the Atmosphere Composer fidelity without activating routing or mutation.
 - The bounded Search proving package has advanced to [AVF-SEARCH-D07-R01-NATIVE-R01](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md). R00 was not accepted; its interaction architecture survived into this narrow product-language and Accessibility 2 restoration.
 - Owner review accepts R01 as bounded provisional Search calibration evidence. This does not authorize Capture, production Search, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
@@ -69,7 +69,7 @@ The following was the historical pre-proof evidence floor before the accepted R0
 - The current app contains Stage-owned Search and Capture implementations, focused tests, and previously recorded Simulator screenshots. The repository continues to label their device and acceptance proof as pending in [Known Issues](../../KNOWN_ISSUES.md) and the [frontend journey registry](../../../audits/frontend-journey-registry.md).
 - The [frontend remediation ledger](../../frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md) records earlier Simulator execution for Capture composition and the light/dark overlay matrix. Those artifacts establish implementation observations only; they were not accepted as Search or Capture Foundry calibration evidence.
 
-That historical statement is superseded for Search by the R01 owner acceptance and for Capture by the bounded R00 native proving package. Capture remains unaccepted pending owner review.
+That historical statement is superseded for Search by the R01 owner acceptance and for Capture by the bounded R01 native proving package. Capture remains unaccepted pending owner review.
 
 ## 3. Search proof inventory
 
@@ -114,7 +114,7 @@ Current implementation references include the full-height [activated Capture sea
 | Dynamic Type recomposition | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | A previous Accessibility XL UI path exercised input and proposal controls. No accepted Capture semantic-equivalent evidence or complete reading-order proof exists. |
 | Semantic focus order | `UNPROVEN` | Accessibility labels and containment exist, but no focused ordered transcript proves expression, interpretation, clarification, review consequence, actions, and recovery order. |
 
-**Capture verdict at the original gate:** Capture had useful current native implementation evidence but required one bounded fixture-driven native proving slice. That slice now exists as R00 and is awaiting owner review; it is not accepted native evidence yet.
+**Capture verdict at the original gate:** Capture had useful current native implementation evidence but required one bounded fixture-driven native proving slice. That slice now exists as R01 and is awaiting owner review; it is not accepted native evidence yet.
 
 ## 5. Exact evidence gaps
 
@@ -122,7 +122,7 @@ Current implementation references include the full-height [activated Capture sea
 
 - Capture now has a bounded Foundry package, fixture contract, and explicit evidence ceiling. It still has no owner acceptance.
 - Search proof uses a neutral fixture origin, not production shell or Crowned Edge Dock integration.
-- The Foundry presentation substrate remains provisional and has not been evaluated for Capture reuse.
+- Capture reproduced the minimum Search-proven presentation behavior without changing accepted Search. The behavior remains provisional and has not become a final shared component or production API.
 
 ### Remaining Search production-reconciliation gaps
 
@@ -130,20 +130,19 @@ Current implementation references include the full-height [activated Capture sea
 - The full degraded-state inventory, production shell/dock coexistence, durable history, relaunch restoration, and physical-device quality remain unproven.
 - Light appearance, manual assistive technologies, RTL, and long localization remain unproven.
 
-### Capture-only gaps
+### Remaining Capture gaps
 
-- No one-and-only-one necessary clarification journey.
-- No accepted comparison of original expression, bounded interpretation, practical consequence, and changed destination in one flow.
-- No end-to-end proof that Cancel or failure preserves the draft and exact origin relationship.
-- No fixture-bounded owner-transfer review that avoids claiming Capture-owned canonical mutation.
-- No accepted semantic order for the complete expression-to-review journey.
+- Owner acceptance remains pending; passing R01 validation does not make the package accepted native evidence.
+- Production interpretation, routing, owner transfer, persistence, mutation, permission behavior, and relaunch recovery remain unproven.
+- Production shell/dock coexistence, Light appearance, final material and motion, physical-device quality, manual assistive technologies, RTL, and long localization remain unproven.
+- Capture Routing Calibration remains inactive and dependency-gated.
 
 ## 6. Native-proof determination
 
 | Global journey | Accepted native evidence sufficient for synthesis? | Native proof required? | Reason |
 |---|---|---|---|
 | Search | Yes, bounded provisional calibration | No further Search calibration slice | R01 proves Find, contextual Inspect, owner-routed Act preparation, result states, presentation/return, and Accessibility 2 within its explicit ceiling. |
-| Capture | No | Completed; awaiting owner review | R00 now proves the bounded clarification, exact return, in-session recovery, zero-mutation handoff preparation, and accessibility order in fixtures. Owner acceptance and production reconciliation remain open. |
+| Capture | No | Completed; awaiting owner review | R01 now proves the bounded clarification, exact return, in-session recovery, zero-mutation handoff preparation, restored Atmosphere Composer structure, and accessibility order/action geometry in fixtures. Owner acceptance and production reconciliation remain open. |
 
 Search acceptance does not close Capture or production-reconciliation gaps.
 
@@ -166,7 +165,7 @@ This acceptance is not a Search redesign, production index, production mutation 
 
 Fixture identity: `capture-flagship/bounded-adaptive-meaning-passage/v1`.
 
-The R00 slice implements one full-app, fixture-driven Capture journey with retained in-session state and fixture-only handoff outcomes:
+The R01 slice implements one full-app, fixture-driven Capture journey with retained in-session state and fixture-only handoff outcomes:
 
 1. Begin on the same provisionally closed root substrate at a named Capture trigger; record origin, route depth, selection, scroll state, and focus target.
 2. Present Capture full-screen with the expression field focused and the native keyboard visible.
@@ -231,9 +230,9 @@ Search exercised the provisional substrate first because it is read-only and exp
 
 ## 12. Current owner gate
 
-The owner accepts the bounded Search R01 proving slice as provisional calibration evidence, and Search calibration remains provisionally closed. Capture R00 is implemented only as a bounded fixture-driven Foundry slice and now awaits separate owner review.
+The owner accepts the bounded Search R01 proving slice as provisional calibration evidence, and Search calibration remains provisionally closed. Capture R01 is implemented only as a bounded fixture-driven Foundry slice and now awaits separate owner review.
 
-Final status: `READY_FOR_OWNER_CAPTURE_NATIVE_REVIEW`
+Final status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
 
 Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 

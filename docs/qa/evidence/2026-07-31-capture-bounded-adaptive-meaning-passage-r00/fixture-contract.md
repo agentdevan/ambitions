@@ -4,9 +4,9 @@
 
 Fixture identity: `capture-flagship/bounded-adaptive-meaning-passage/v1`
 
-Native proving identity: `AVF-CAPTURE-S07-R01-NATIVE-R00 — Bounded Adaptive Meaning Passage`
+Native proving identity: `AVF-CAPTURE-S07-R01-NATIVE-R01 — Atmosphere Composer Fidelity Restoration`
 
-This fixture is immutable, deterministic, local-only proving input. It is not production interpretation, destination resolution, routing, mutation, persistence, recovery, or settlement authority.
+This fixture is immutable, deterministic, and local-only proving input. It is not production interpretation, destination resolution, routing, mutation, persistence, recovery, or settlement authority.
 
 ## Presentation origin
 
@@ -19,29 +19,33 @@ This fixture is immutable, deterministic, local-only proving input. It is not pr
 ## Primary expression and bounded meaning
 
 - Original expression: `I need to prepare questions for tomorrow’s dentist appointment.`
-- Proposed item: `Prepare questions for the dentist appointment`.
-- Proposed owner: Goals.
+- Proposed identity: `Prepare questions for the dentist appointment`.
+- Proposed owner expression: `Proposed for Goals`.
 - Related context: `Dentist appointment · Tomorrow · 9:30 AM`.
-- Product-facing state: proposed meaning only.
+- Product-facing qualification: `Nothing has been added.`
 - Current accepted truth: nothing has been added or changed.
 - Time chronology: unchanged.
-- Actions: `Review` and `Change`.
+- Actions: `Review proposal` and `Edit words`.
+- The original expression remains primary; the articulated proposal fold is subordinate and provisional without relying on color alone.
 
 ## Necessary clarification
 
 - Ambiguous expression: `Prepare for tomorrow’s appointment.`
+- Native focused title: `Clarify`.
 - One targeted question: `What do you want to prepare?`
 - Deterministic response: `Questions to ask the dentist`.
+- Actions: `Continue` and `Edit original words`.
+- Framework Back restores the retained original expression and editor focus.
 - The original expression and clarified response remain retained.
 - No second clarification is permitted by the fixture state machine.
 
 ## Consequential review
 
-- Original words remain first.
-- Proposed Goals meaning remains explicitly provisional.
-- The related Dentist appointment remains a Time context fact, not a Capture-owned object.
-- Current state: `Nothing has changed.`
-- Consequence: Goals reviews the proposal; the appointment time remains unchanged.
+- Native focused title: `Review`.
+- Semantic order: proposed Goals object, original words, related Time context, unchanged truth, consequence, and actions.
+- Current state: `Nothing has changed yet.`
+- Consequence: `Goals will review the proposal. The appointment stays at 9:30 AM.`
+- Actions: `Continue to Goals` and `Edit proposal`.
 - `Continue to Goals` records only a fixture handoff-preparation result.
 - Canonical mutation count remains zero; no Goal, Step, Event, Placement, Receipt, or Undo is created.
 
@@ -51,17 +55,20 @@ This fixture is immutable, deterministic, local-only proving input. It is not pr
 - Non-empty Cancel presents `Keep Editing` and `Discard and Close`.
 - `Keep Editing` preserves text and returns editor focus.
 - `Discard and Close` performs no mutation, dismisses, and restores Capture-trigger focus.
-- Recovery says `Your draft is still here.` and retains expression, clarification when applicable, proposed meaning, and related context.
+- Recovery says `Your draft is still here.` and `Continue when you’re ready.`
+- The retained recovery object contains the expression, clarification when applicable, proposed Goals meaning, and related context.
+- Recovery actions are `Continue review` and `Keep editing`.
 - Recovery is in-session only; no durable storage or relaunch restoration is claimed.
 
 ## Fixture-host variants
 
 - `cnc-capture-origin-dark`: neutral invocation and exact-return host.
 - `cnc-capture-entry-focused-dark`: empty focused editor, Large, keyboard visible.
-- `cnc-capture-bounded-meaning-dark`: primary expression and provisional meaning, Large.
-- `cnc-capture-clarification-dark`: ambiguous expression and one focused clarification, Large, keyboard visible.
-- `cnc-capture-review-dark`: consequential review, Large.
-- `cnc-capture-recovery-dark`: retained in-session draft, Large.
-- `cnc-capture-review-accessibility-dark`: ordered review, Accessibility 2.
+- `cnc-capture-bounded-meaning-dark`: expression-to-proposal fold, Large.
+- `cnc-capture-clarification-dark`: native Clarify depth with focused response, Large, keyboard visible.
+- `cnc-capture-review-dark`: consolidated consequence passage, Large.
+- `cnc-capture-recovery-dark`: localized retained-draft recovery, Large.
+- `cnc-capture-review-accessibility-top-dark`: ordered review at top, Accessibility 2.
+- `cnc-capture-review-accessibility-action-dark`: lower scrolled truth, consequence, and actions, Accessibility 2.
 
 Capture Routing Calibration remains inactive and dependency-gated. This contract does not instantiate or approximate that production capability.
