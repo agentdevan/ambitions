@@ -6,6 +6,9 @@ Original inspection base for PR #54: `origin/main` at
 Bounded proof base after PR #53 and PR #54 merged:
 `origin/main` at `d4394d95a2b0170822841ab693c6e06a996dcffd`.
 
+Current PR #55 refresh base after merging live `origin/main`:
+`0c1451d74ca73e87a0a95008b3d0adde5c001f1a`.
+
 This memo is a docs-only readiness record. The companion bounded proof adds
 only one focused test file; neither file changes canon, manifest, generated
 output, product source, persistence, or tools. Skill Transference remains
@@ -14,16 +17,23 @@ activation, or a new object family.
 
 ## 1. Executive decision
 
-PR #54 originally selected Result D. The bounded proof in PR #55 attempted to
+PR #54 originally selected Result D. The initial PR #55 execution attempted to
 resolve that missing evidence with existing identities, recommendation
 explanation/trace, privacy classification, Trust sections, correction
 influence, Goal Path candidates, and local runtime boundaries
-(`Native/AmbitionsTests/Domain/SkillTransferenceReadinessProofTests.swift:284-387`).
-The proof did not execute because the focused build reached unrelated existing
-production syntax errors before the test target could run; its test-only
-adapter is therefore evidence of a possible contract, not proof of a current
-production receiving seam. The final result in Section 10 supersedes the
-earlier D conclusion for readiness purposes with this narrower blocker.
+(`Native/AmbitionsTests/Domain/SkillTransferenceReadinessProofTests.swift:284-387`),
+but executed zero tests because simulator and baseline-build blockers occurred
+first.
+
+This continuation established Control B on clean current main: the three
+previously observed parser failures reproduced. The mechanical repair is
+preserved in prerequisite PR #56 (`f34305949`) but is not merged because its
+build-for-testing run then exposed the unrelated existing
+`RuntimeBlobID` ambiguity in `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
+PR #55 was refreshed by merging current `origin/main` without rebasing. Its
+refreshed build preflight was then blocked by an unrelated active Xcode process;
+no focused test process started. The final result in Section 10 supersedes the
+earlier D conclusion for readiness purposes with these bounded blockers.
 
 The current authority has most of the necessary boundaries: Local Learning is
 local, evidence-linked, uncertain, correctable, and non-mutating;
@@ -51,9 +61,9 @@ and the owner seam is established. Result C is not supported because the
 test-only composition demonstrates that no new persisted object, graph, or
 substantial architecture is required to express the proposed fields
 (`Native/AmbitionsTests/Domain/SkillTransferenceReadinessProofTests.swift:389-487`).
-The smallest next step is to restore bounded executable proof of the existing
-source/test surface, then make a separate owner decision about any narrow
-Goal Path amendment.
+The smallest next step is to resolve the unrelated current-main build blocker,
+restore bounded executable proof of the existing source/test surface, then make
+a separate owner decision about any narrow Goal Path amendment.
 
 ## 2. Person-facing promise and prohibited interpretations
 
@@ -295,10 +305,14 @@ transfer:
 The bounded test file binds two existing synthetic context identities and
 asserts the promise fields plus accept/edit/dismiss/suppress behavior in its
 test-only adapter (`Native/AmbitionsTests/Domain/SkillTransferenceReadinessProofTests.swift:7-280`).
-However, the focused test run executed zero tests: simulator-launch retries
-failed first, and build-for-testing then stopped on unrelated existing
-production syntax errors in `Native/Ambitions/Core/LocalRuntimeOS`. Thus the
-repository cannot honestly claim executable readiness from this proof.
+The initial focused run executed zero tests after simulator-launch retries and
+the original syntax blockers. Clean current main reproduced those blockers;
+the three-file mechanical repair in PR #56 parses but its build then stopped at
+the unrelated `RuntimeBlobID` ambiguity. After PR #55 merged live main without
+rebasing, its focused build preflight reported `xcode_process_active` because
+an unrelated worktree build was active. The refreshed proof therefore still
+executed zero tests, so the repository cannot honestly claim executable
+readiness from this proof.
 
 ## 9. Smallest proof slice
 
@@ -339,11 +353,16 @@ across every domain or infer sensitive traits.
 
 ### Exact missing evidence
 
-1. An executable focused run of the bounded proof; current build-for-testing
-   is blocked before the test target by existing production syntax errors in
+1. An executable focused run of the bounded proof. Clean current main at
+   `e028eefbc18f9af2deb1b14beacd2a0eb0e5b40c` reproduced parser failures in
    `RuntimeCanonicalGenerationMaintenance.swift`,
    `RuntimeCommittedReceiptAuthority.swift`, and
-   `RuntimeGenerationControlStore.swift`.
+   `RuntimeGenerationControlStore.swift`. The syntax-only repair is preserved
+   in unmerged PR #56 because its build then exposed the unrelated
+   `RuntimeBlobID` ambiguity at
+   `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
+   The refreshed PR #55 build was additionally blocked by an active unrelated
+   Xcode process; executed-test count remains zero.
 2. A production Goal Path proposal-input contract. The proof's owner envelope
    is private test code, so it cannot establish a current receiving seam.
 3. Executable Trust/privacy/control evidence for the transfer fields; the
@@ -362,18 +381,20 @@ Selecting A, B, or C now would overstate roadmap readiness.
 
 ### Smallest bounded inspection needed
 
-Restore an executable, bounded test environment for the exact proof file, then
-inspect the result with one owner selected and no canon or product edits. Do
-not repair the unrelated production syntax errors in this PR. Stop if the
-owner, privacy boundary, or non-durable representation cannot be proven.
+Resolve the unrelated `RuntimeBlobID` current-main build blocker outside this
+PR, then rerun the exact bounded build and focused test class after the
+mechanical syntax repair can be merged. Do not broaden PR #56 or repair
+production Skill Transference seams. Stop if the owner, privacy boundary, or
+non-durable representation cannot be proven.
 
 ## 11. Explicit next authorization required
 
 Skill Transference remains roadmap-approved. The smallest next decision is a
-separate owner authorization to restore/obtain executable proof and then decide
-whether a narrow Goal Path proposal-input amendment is warranted. Only after
-that result may an owner authorize any canon amendment or implementation. This
-memo authorizes none of those actions.
+separate owner decision on the unrelated runtime baseline blocker, followed by
+authorization to obtain executable proof and decide whether a narrow Goal Path
+proposal-input amendment is warranted. Only after that result may an owner
+authorize any canon amendment or implementation. This memo authorizes none of
+those actions.
 
 Prohibited next actions remain: creating a capability graph or dossier,
 universal capability scoring, generic personalization, automatic Goal or Goal
