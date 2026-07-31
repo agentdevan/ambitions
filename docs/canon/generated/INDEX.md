@@ -3,9 +3,9 @@
 > Generated from normative product canon. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916`
-- Documents: `66`
-- Requirements: `466`
+- Canon digest: `f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d`
+- Documents: `65`
+- Requirements: `460`
 
 ## Constitution
 
@@ -39,7 +39,7 @@
 | --- | --- | ---: | ---: | --- |
 | `GLOBAL-CAPTURE` | Capture | 10 | 10 | [specifications/global/capture.md](../specifications/global/capture.md) |
 | `GLOBAL-MOTION` | Motion | 3 | 3 | [specifications/global/motion.md](../specifications/global/motion.md) |
-| `GLOBAL-SEARCH` | Search | 18 | 18 | [specifications/global/search.md](../specifications/global/search.md) |
+| `GLOBAL-SEARCH` | Search | 13 | 13 | [specifications/global/search.md](../specifications/global/search.md) |
 | `GLOBAL-TRUST-INSPECTION` | Trust Inspection | 7 | 7 | [specifications/global/trust-inspection.md](../specifications/global/trust-inspection.md) |
 
 ## Object
@@ -97,7 +97,6 @@
 | `JOURNEY-MISSED-WORK-RECOVERY` | Missed Work Recovery | 1 | 1 | [specifications/journeys/missed-work-recovery.md](../specifications/journeys/missed-work-recovery.md) |
 | `JOURNEY-SCHEDULE-REFLOW` | Schedule Reflow | 1 | 1 | [specifications/journeys/schedule-reflow.md](../specifications/journeys/schedule-reflow.md) |
 | `JOURNEY-SEARCH-FIND-ACT-INSPECT` | Search Find Act Inspect | 1 | 1 | [specifications/journeys/search-find-act-inspect.md](../specifications/journeys/search-find-act-inspect.md) |
-| `JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT` | Search Find Ask Act Inspect | 1 | 1 | [specifications/journeys/search-find-ask-act-inspect.md](../specifications/journeys/search-find-ask-act-inspect.md) |
 | `JOURNEY-START-AND-COMPLETE-STEP` | Start and Complete Step | 1 | 1 | [specifications/journeys/start-and-complete-step.md](../specifications/journeys/start-and-complete-step.md) |
 
 ## Standard

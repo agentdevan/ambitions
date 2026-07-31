@@ -1,10 +1,10 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916",
+  "canon_content_sha": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
   "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
-  "disposition_sha256": "92d5f6bc7f5f0be68825ce1c14c70c2e0bf59cbe2d030c63d8093c9982736cdb",
+  "disposition_sha256": "8b7d5ed10ff173162092f3b3d687ddf25c42c15fda2bfa7716d127e5e261af84",
   "dispositions": [
     {
       "blueprint_ids": [
@@ -2467,20 +2467,6 @@
       "state_blueprint_ids": []
     },
     {
-      "blueprint_ids": [],
-      "disposition": "visual_mapping_required",
-      "rationale": "Search MUST accept one input, return immediate deterministic Find results, MAY progressively add an optional grounded Ask answer, present only owner-routed action proposals, hand creation intent to Capture, and keep Inspect in relevant context. Ask history stays session-local unless explicit user action routes a question, answer, proposal, or derived object to an identified canonical owner. The user MUST distinguish retrieved fact, inferred interpretation, and proposed change, and Ask unavailability MUST preserve a deterministic Find / Act / Inspect fallback. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK, UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER.",
-      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
-      "requirement_text_sha256": "ee6b9ebaf287f0627232d321cd893dedaf5e8b5fab45e2a09234107eaa822540",
-      "source_path": "docs/canon/specifications/journeys/search-find-ask-act-inspect.md",
-      "state_blueprint_ids": [
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
-      ]
-    },
-    {
       "blueprint_ids": [
         "UX-JOURNEY-CLOSURE-PROOF",
         "UX-SCREEN-GOALS-CLOSURE"
@@ -4879,62 +4865,6 @@
     {
       "blueprint_ids": [],
       "disposition": "visual_mapping_required",
-      "rationale": "Users MUST always be able to distinguish a retrieved fact, an inferred interpretation, and a proposed change. Each substantive answer binds supporting objects and approved sources, states material assumptions and uncertainty, and routes contextual Trust inspection without presenting inference as saved fact. Visual, Dynamic Type, non-color, and VoiceOver presentation MUST preserve these distinctions and their source links. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
-      "requirement_text_sha256": "b0aa52afcb288daaacab4b4ff6fbfe4c569ed0bcdc159d6af4222ae26ef8add7",
-      "source_path": "docs/canon/specifications/global/search.md",
-      "state_blueprint_ids": [
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "visual_mapping_required",
-      "rationale": "Ask MAY provide conversational, on-device synthesis grounded only in privacy-authorized Ambitions data and approved reference sources. Every substantive answer MUST expose its supporting objects, sources, assumptions, and uncertainty through the answer-evidence contract. Ask MUST remain optional: when conversational intelligence is unavailable, Search continues through deterministic Find / Act / Inspect without withholding local results, safe actions, or Trust inspection. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER, UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001",
-      "requirement_text_sha256": "e79c3f802e06b3c612b1a3505ce9a00761e6e089f012259784ceff70484e8106",
-      "source_path": "docs/canon/specifications/global/search.md",
-      "state_blueprint_ids": [
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Ask and Search-to-Capture handoff states and commands MUST remain future-gated and non-authorizing. A posture transition is invalid unless a closed, base-owned evidence registry and verifier is already merged; every affected command has nonempty exact command dependency bindings to that base-owned evidence; current source and runtime proof, no-egress and privacy proof, grounding and deterministic-fallback proof, accessibility and visual proof, and performance proof are all current for the same canon revision and source revision; and the owner has explicitly approved the exact final Figma frame IDs. Intended canon, state mappings, command metadata, generated projections, unverified dependency text, or visual candidates MUST NOT satisfy this gate. The Search amendment creates no evidence registry, verifier, dependency kind, authorization policy, or Task 24/25 implementation. Until the base-owned mechanism and every named proof class exist and pass, deterministic Find, Act, and Inspect remain the only active Search command contract. This current-implementation authorization gate is nonvisual and maps no visual record.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
-      "requirement_text_sha256": "83f84a080b28d4bbb16500feb1e1032077c04d0c62ec4ff09817a778e3448487",
-      "source_path": "docs/canon/specifications/global/search.md",
-      "state_blueprint_ids": []
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "visual_mapping_required",
-      "rationale": "Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-authorized source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract authorizes no current implementation behavior. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED, UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK, UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF, UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER, UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
-      "requirement_text_sha256": "e4f53d2c92688603e6e26c57ac11492666e0ba502d1848143e240031b007b494",
-      "source_path": "docs/canon/specifications/global/search.md",
-      "state_blueprint_ids": [
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
-        "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "visual_mapping_required",
       "rationale": "Creation intent MUST hand off seamlessly to Capture with the accepted source context and user-entered intent preserved. Search MUST NOT duplicate Capture's creation policy and MUST NOT become a parallel composer; Capture remains responsible for type, draft durability, consequences, confirmation, canonical-owner routing, Receipt, and Undo. Visual state mappings: UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF.",
       "requirement_id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
       "requirement_text_sha256": "774463ecc177f2f5ab67d5f30d91a24af6ad7e41bd37818afc9cc9486f82876a",
@@ -5134,15 +5064,6 @@
         "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
         "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
       ]
-    },
-    {
-      "blueprint_ids": [],
-      "disposition": "nonvisual_with_rationale",
-      "rationale": "Conversational history MUST remain session-local by default. Persisting any question, answer, proposal, or derived object requires explicit user action and an identified canonical owner; dismissal, interruption, or ordinary session expiry MUST NOT silently create a Note, Capture, History entry, profile, training record, or canonical object. This persistence and ownership boundary governs data lifecycle rather than visual composition and maps no visual record.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001",
-      "requirement_text_sha256": "dcc23510cde5af349997bab89d43576661f1ec47c03c9f2ead46fcf9f8be98fa",
-      "source_path": "docs/canon/specifications/global/search.md",
-      "state_blueprint_ids": []
     },
     {
       "blueprint_ids": [],
@@ -8016,9 +7937,9 @@
       ]
     }
   ],
-  "nonvisual_count": 123,
-  "requirement_count": 466,
+  "nonvisual_count": 121,
+  "requirement_count": 460,
   "schema_version": 1,
   "source_sha": "e5d08c2d538277fc2ae7c6fd9fa09595f6e72973",
-  "visual_mapping_count": 343
+  "visual_mapping_count": 339
 }

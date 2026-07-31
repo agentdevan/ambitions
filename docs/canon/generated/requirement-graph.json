@@ -1,5 +1,5 @@
 {
-  "canon_digest": "ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916",
+  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
   "concepts": {
     "accessibility.dynamic-type": {
       "owner_spec_id": "STANDARD-ACCESSIBILITY",
@@ -573,22 +573,6 @@
       "owner_spec_id": "GLOBAL-MOTION",
       "requirement_id": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001"
     },
-    "global.search.answer-evidence": {
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001"
-    },
-    "global.search.ask": {
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001"
-    },
-    "global.search.ask-activation-gate": {
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
-    },
-    "global.search.ask-command-contract": {
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-    },
     "global.search.canonical-actions": {
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-ACTIONS-001"
@@ -640,10 +624,6 @@
     "global.search.private-command-layer": {
       "owner_spec_id": "CONSTITUTION",
       "requirement_id": "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001"
-    },
-    "global.search.session-history": {
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001"
     },
     "global.search.visual-authority": {
       "owner_spec_id": "GLOBAL-SEARCH",
@@ -776,10 +756,6 @@
     "journey.search.find-act-inspect": {
       "owner_spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
       "requirement_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001"
-    },
-    "journey.search.find-ask-act-inspect": {
-      "owner_spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
-      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
     },
     "journey.step-closure.required-proof": {
       "owner_spec_id": "JOURNEY-CLOSURE-AND-PROOF",
@@ -1914,7 +1890,6 @@
         "GLOBAL-MOTION",
         "GLOBAL-SEARCH",
         "GLOBAL-TRUST-INSPECTION",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "STANDARD-ACCESSIBILITY",
         "SURFACE-GOALS",
         "SURFACE-TIME",
@@ -2232,7 +2207,6 @@
         "JOURNEY-MISSED-WORK-RECOVERY",
         "JOURNEY-SCHEDULE-REFLOW",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "OBJECT-EVENT",
         "OBJECT-GOAL-PATH",
         "OBJECT-IMPORT-DIFF-RECORD",
@@ -2544,11 +2518,6 @@
       "owner_spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
       "source_path": "specifications/journeys/search-find-act-inspect.md"
     },
-    "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001": {
-      "inherited_by": [],
-      "owner_spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
-      "source_path": "specifications/journeys/search-find-ask-act-inspect.md"
-    },
     "JOURNEY-STEP-CLOSURE-001": {
       "inherited_by": [],
       "owner_spec_id": "JOURNEY-CLOSURE-AND-PROOF",
@@ -2638,7 +2607,6 @@
         "GLOBAL-CAPTURE",
         "GLOBAL-SEARCH",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "OBJECT-ATTACHMENT",
         "STANDARD-NATIVE-IOS-ENGINEERING",
         "STANDARD-SECURITY-PRIVACY",
@@ -2690,7 +2658,6 @@
         "JOURNEY-MISSED-WORK-RECOVERY",
         "JOURNEY-SCHEDULE-REFLOW",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "JOURNEY-START-AND-COMPLETE-STEP",
         "OBJECT-RECEIPT",
         "SYSTEM-NOTIFICATIONS",
@@ -2711,8 +2678,7 @@
     },
     "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001": {
       "inherited_by": [
-        "GLOBAL-SEARCH",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT"
+        "GLOBAL-SEARCH"
       ],
       "owner_spec_id": "CONSTITUTION",
       "source_path": "CONSTITUTION.md"
@@ -3589,26 +3555,6 @@
       "owner_spec_id": "GLOBAL-SEARCH",
       "source_path": "specifications/global/search.md"
     },
-    "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001": {
-      "inherited_by": [],
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "source_path": "specifications/global/search.md"
-    },
-    "SPEC-GLOBAL-SEARCH-ASK-001": {
-      "inherited_by": [],
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "source_path": "specifications/global/search.md"
-    },
-    "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001": {
-      "inherited_by": [],
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "source_path": "specifications/global/search.md"
-    },
-    "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001": {
-      "inherited_by": [],
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "source_path": "specifications/global/search.md"
-    },
     "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001": {
       "inherited_by": [],
       "owner_spec_id": "GLOBAL-SEARCH",
@@ -3660,11 +3606,6 @@
       "source_path": "specifications/global/search.md"
     },
     "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001": {
-      "inherited_by": [],
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "source_path": "specifications/global/search.md"
-    },
-    "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001": {
       "inherited_by": [],
       "owner_spec_id": "GLOBAL-SEARCH",
       "source_path": "specifications/global/search.md"
@@ -4520,7 +4461,6 @@
       ],
       "dependents": [
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "SYSTEM-APPLE-ECOSYSTEM"
       ],
       "inherits": [
@@ -4585,7 +4525,6 @@
         "GLOBAL-SEARCH",
         "GLOBAL-TRUST-INSPECTION",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "SURFACE-GOALS",
         "SURFACE-TIME",
         "SURFACE-TODAY",
@@ -4675,7 +4614,6 @@
         "JOURNEY-MISSED-WORK-RECOVERY",
         "JOURNEY-SCHEDULE-REFLOW",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "JOURNEY-START-AND-COMPLETE-STEP",
         "OBJECT-ATTACHMENT",
         "OBJECT-BRANCH-VIABILITY-CERTIFICATE",
@@ -4734,7 +4672,6 @@
       ],
       "dependents": [
         "JOURNEY-CAPTURE-TO-PLACEMENT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "OBJECT-ATTACHMENT",
         "OBJECT-LIFE-AREA",
         "OBJECT-NOTE",
@@ -4781,7 +4718,6 @@
       ],
       "dependents": [
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "OBJECT-NOTE",
         "OBJECT-SAVED-FOR-LATER-DRAFT"
       ],
@@ -4806,7 +4742,6 @@
         "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
         "JOURNEY-LIFE-BRANCH-RECONCILIATION",
         "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
         "JOURNEY-START-AND-COMPLETE-STEP",
         "OBJECT-ATTACHMENT",
         "OBJECT-BRANCH-VIABILITY-CERTIFICATE",
@@ -5007,9 +4942,7 @@
         "APP-NAVIGATION",
         "APP-DEEP-LINKING"
       ],
-      "dependents": [
-        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT"
-      ],
+      "dependents": [],
       "inherits": [
         "LAW-LOCAL-AUTHORITY-001",
         "OBJECT-CANONICAL-GRAPH-001",
@@ -5017,26 +4950,6 @@
         "LAW-RUNTIME-DURABLE-SUCCESS-001"
       ],
       "source_path": "specifications/journeys/search-find-act-inspect.md"
-    },
-    "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT": {
-      "dependencies": [
-        "CONSTITUTION",
-        "GLOBAL-SEARCH",
-        "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "GLOBAL-CAPTURE",
-        "GLOBAL-TRUST-INSPECTION",
-        "APP-NAVIGATION",
-        "APP-DEEP-LINKING"
-      ],
-      "dependents": [],
-      "inherits": [
-        "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
-        "LAW-LOCAL-AUTHORITY-001",
-        "CONTROL-MATERIAL-CONFIRMATION-001",
-        "LAW-RUNTIME-DURABLE-SUCCESS-001",
-        "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
-      ],
-      "source_path": "specifications/journeys/search-find-ask-act-inspect.md"
     },
     "JOURNEY-START-AND-COMPLETE-STEP": {
       "dependencies": [

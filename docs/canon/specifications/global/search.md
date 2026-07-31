@@ -7,10 +7,6 @@ owner_domain = "global-search"
 canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
-  "global.search.answer-evidence",
-  "global.search.ask",
-  "global.search.ask-activation-gate",
-  "global.search.ask-command-contract",
   "global.search.canonical-actions",
   "global.search.capture-handoff",
   "global.search.command-contract",
@@ -23,7 +19,6 @@ owns_concepts = [
   "global.search.inspect",
   "global.search.placement",
   "global.search.presentation",
-  "global.search.session-history",
   "global.search.visual-authority",
 ]
 inherits = [
@@ -187,190 +182,10 @@ activation_posture = "active"
 gate_requirement_ids = []
 
 [[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Retry Ask => destination: in-place on-device synthesis progress for the unchanged query and deterministic result set; effect: No durable mutation occurs and no Receipt is created; Retry Ask revalidates privacy authorization and reruns only optional on-device synthesis while deterministic local results remain visible.; focus: the synthesis progress status, then the grounded answer heading, or the unchanged local results if synthesis remains unavailable."
-durable_effect = "Deterministic local results remain visible after optional synthesis fails; no question, answer, proposal, or canonical object is persisted. Retry reruns only on-device synthesis against the current privacy-authorized query context."
-recovery_rollback = "Retry revalidates the current query, source access, and on-device availability; cancellation returns to unchanged deterministic results. No Search Undo is required."
-offline_behavior = "Find, Act, and Inspect remain available from local projections offline. Ask stays unavailable until on-device synthesis can run, without hiding local results."
-accessibility_focus = "VoiceOver announces that optional Ask failed, deterministic results remain available, and Retry Ask is optional; focus stays on the failure explanation or first local result."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-ASK-FAILED-001"
-label = "Retry Ask"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Privacy authorization and on-device synthesis eligibility are revalidated", "The current query and deterministic result generation are still available"]
-destination = "in-place on-device synthesis progress for the unchanged query and deterministic result set"
-destination_id = "DEST-SEARCH-RESULTS-ASK-FAILED-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Retry Ask revalidates privacy authorization and reruns only optional on-device synthesis while deterministic local results remain visible."
-success_focus = "the synthesis progress status, then the grounded answer heading, or the unchanged local results if synthesis remains unavailable"
-success_focus_id = "FOCUS-SEARCH-RESULTS-ASK-FAILED-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the concise Ask-unavailable explanation with the first unchanged deterministic result still reachable"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-ASK-FAILED-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Retry Ask reruns optional session-local synthesis and cannot create, save, or mutate a canonical object."
-rollback_undo = "No Search Undo is required; cancellation or repeated failure returns to the unchanged deterministic results and current query."
-recovery_id = "RECOVERY-SEARCH-RESULTS-ASK-FAILED-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The query, deterministic results, synthesis context, and supporting objects remain on device; no private query, answer, or private life graph leaves the device."
-verification_ids = ["SCENARIO-SEARCH-ASK-UNAVAILABLE-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Resume Ask => destination: resumed in-place synthesis for the same session-local query and evidence scope; effect: No durable mutation occurs and no Receipt is created; Resume Ask revalidates the current query, privacy authorization, supporting-object availability, and on-device synthesis eligibility before continuing.; focus: the resumed synthesis status, grounded answer heading, or interruption explanation if revalidation fails."
-durable_effect = "Interruption pauses optional synthesis in memory while preserving the visible deterministic results, query, and authorized evidence scope. It creates no saved conversation, History item, or canonical object."
-recovery_rollback = "Resume revalidates current local facts before continuing; dismissal discards only the session-local synthesis checkpoint and preserves deterministic results. No Search Undo is required."
-offline_behavior = "An interruption never removes offline Find, Act, or Inspect. Resume uses on-device resources only and otherwise returns to the visible deterministic fallback."
-accessibility_focus = "VoiceOver announces that Ask paused, that local results remain usable, and that Resume Ask is optional; focus remains at the interruption status before the unchanged result list."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-ASK-INTERRUPTED-001"
-label = "Resume Ask"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Current privacy authorization and supporting-object revisions can be revalidated", "The session-local query checkpoint still belongs to the current Search presentation"]
-destination = "resumed in-place synthesis for the same session-local query and evidence scope"
-destination_id = "DEST-SEARCH-RESULTS-ASK-INTERRUPTED-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Resume Ask revalidates the current query, privacy authorization, supporting-object availability, and on-device synthesis eligibility before continuing."
-success_focus = "the resumed synthesis status, grounded answer heading, or interruption explanation if revalidation fails"
-success_focus_id = "FOCUS-SEARCH-RESULTS-ASK-INTERRUPTED-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the interruption explanation with deterministic results still visible and no protected supporting object disclosed"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-ASK-INTERRUPTED-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Resume Ask continues only optional session-local synthesis after current-state revalidation."
-rollback_undo = "No Search Undo is required; dismissal or failed resumption discards the synthesis checkpoint and returns to unchanged deterministic results."
-recovery_id = "RECOVERY-SEARCH-RESULTS-ASK-INTERRUPTED-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The session checkpoint, query, evidence scope, and resumed synthesis remain on device; no private query, answer, or private life graph leaves the device."
-verification_ids = ["SCENARIO-SEARCH-SESSION-HISTORY-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Inspect Source => destination: contextual supporting-object and approved-source evidence for the recovered answer; effect: No durable mutation occurs and no Receipt is created; Inspect Source opens privacy-authorized evidence for the current answer and keeps its assumptions and uncertainty attached.; focus: the supporting Source heading or the exact unavailable-evidence explanation, then back to the recovered answer."
-durable_effect = "A recovered grounded answer replaces only the failed progressive enhancement and leaves deterministic results and canonical objects unchanged. Supporting objects, assumptions, uncertainty, and source links remain visible."
-recovery_rollback = "Inspection dismissal returns to the recovered answer and its source markers; if evidence becomes stale or unavailable, the answer is relabeled or withheld while deterministic results remain. No Search Undo is required."
-offline_behavior = "The recovered answer and its authorized local evidence remain inspectable offline; missing approved reference material is labeled without reducing deterministic Find, Act, or Inspect."
-accessibility_focus = "VoiceOver announces Ask recovered, then the answer, retrieved and inferred distinctions, assumptions, uncertainty, and Inspect Source; focus returns to the answer heading after inspection."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-ASK-RECOVERED-001"
-label = "Inspect Source"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Source evidence remains privacy-authorized for contextual inspection", "The recovered answer is still bound to the current query and supporting-object revisions"]
-destination = "contextual supporting-object and approved-source evidence for the recovered answer"
-destination_id = "DEST-SEARCH-RESULTS-ASK-RECOVERED-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Inspect Source opens privacy-authorized evidence for the current answer and keeps its assumptions and uncertainty attached."
-success_focus = "the supporting Source heading or the exact unavailable-evidence explanation, then back to the recovered answer"
-success_focus_id = "FOCUS-SEARCH-RESULTS-ASK-RECOVERED-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the recovered answer’s source marker and exact stale, suppressed, or unavailable evidence reason"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-ASK-RECOVERED-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: contextual Source inspection is read-only and cannot persist the answer or alter its supporting objects."
-rollback_undo = "No Search Undo is required; dismissal returns to the recovered answer, and evidence failure preserves deterministic results with an explicit limitation."
-recovery_id = "RECOVERY-SEARCH-RESULTS-ASK-RECOVERED-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The answer and its supporting-object evidence remain on device; Source inspection discloses only current privacy-authorized local or approved reference material."
-verification_ids = ["SCENARIO-SEARCH-ANSWER-EVIDENCE-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Cancel Ask => destination: the unchanged deterministic result list and current query after resumed synthesis stops; effect: No durable mutation occurs and no Receipt is created; Cancel Ask discards only in-progress session-local synthesis and preserves the query, filters, deterministic results, and privacy suppression.; focus: the deterministic result-count heading or current query field with a concise Ask-cancelled announcement."
-durable_effect = "Resumed synthesis continues only in memory after current-state revalidation. The current query and deterministic results remain primary, and no partial answer or checkpoint becomes canonical state."
-recovery_rollback = "Cancel discards incomplete resumed synthesis and returns to unchanged local results; interruption may create a new session-local checkpoint only while Search remains active. No Search Undo is required."
-offline_behavior = "Resumed Ask uses on-device resources only. If those resources become unavailable, Search stops synthesis and retains offline deterministic results and inspection."
-accessibility_focus = "VoiceOver announces that Ask resumed while local results remain available, exposes Cancel Ask, and moves focus to the bounded answer only when evidence is ready."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-ASK-RESUMED-001"
-label = "Cancel Ask"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Optional synthesis resumed from a revalidated session-local checkpoint", "The current query and deterministic results remain available independently"]
-destination = "the unchanged deterministic result list and current query after resumed synthesis stops"
-destination_id = "DEST-SEARCH-RESULTS-ASK-RESUMED-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Cancel Ask discards only in-progress session-local synthesis and preserves the query, filters, deterministic results, and privacy suppression."
-success_focus = "the deterministic result-count heading or current query field with a concise Ask-cancelled announcement"
-success_focus_id = "FOCUS-SEARCH-RESULTS-ASK-RESUMED-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the resumed synthesis status with an explicit cancellation failure and deterministic results still reachable"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-ASK-RESUMED-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Cancel Ask ends only optional session-local synthesis and preserves all canonical objects."
-rollback_undo = "No Search Undo is required; cancellation returns to deterministic results, while cancellation failure retains the current query and allows dismissal."
-recovery_id = "RECOVERY-SEARCH-RESULTS-ASK-RESUMED-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "Resumed synthesis and its checkpoint remain on device; cancellation emits no private content or private life graph data."
-verification_ids = ["SCENARIO-SEARCH-SESSION-HISTORY-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Inspect Privacy => destination: contextual privacy explanation for Ask unavailability and the still-active local Search scope; effect: No durable mutation occurs and no Receipt is created; Inspect Privacy explains the local eligibility or protected-data boundary without revealing suppressed objects or enabling hosted synthesis.; focus: the Privacy heading or exact unavailable explanation, then back to the deterministic result list."
-durable_effect = "Ask unavailability changes no local object or result. Immediate deterministic matches, safe owner action proposals, and contextual inspection remain available, with the unavailable capability named separately."
-recovery_rollback = "Privacy inspection returns to the same query and deterministic results; a later Ask attempt must revalidate on-device eligibility and current source authorization. No Search Undo is required."
-offline_behavior = "Offline Search remains fully useful through deterministic Find, Act, and Inspect. Ask is labeled unavailable rather than delaying, replacing, or hiding local results."
-accessibility_focus = "VoiceOver announces Ask unavailable, why only when disclosure is safe, and that local results remain complete; focus proceeds to the deterministic result count before optional Inspect Privacy."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001"
-label = "Inspect Privacy"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Deterministic local Search remains available for the current query", "The privacy explanation can be shown without revealing a suppressed object or protected fact"]
-destination = "contextual privacy explanation for Ask unavailability and the still-active local Search scope"
-destination_id = "DEST-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Inspect Privacy explains the local eligibility or protected-data boundary without revealing suppressed objects or enabling hosted synthesis."
-success_focus = "the Privacy heading or exact unavailable explanation, then back to the deterministic result list"
-success_focus_id = "FOCUS-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the Ask-unavailable label with deterministic results still visible and no suppressed identity disclosed"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Privacy inspection cannot enable Ask, reveal suppressed facts, or mutate any canonical object."
-rollback_undo = "No Search Undo is required; dismissal or inspection failure returns to the same deterministic results and unavailable label."
-recovery_id = "RECOVERY-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The query, eligibility explanation, and results remain on device; no private context is transferred to a hosted model, profiler, or external service."
-verification_ids = ["SCENARIO-SEARCH-ASK-UNAVAILABLE-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-
-[[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
+requirement_id = "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001"
+activation_posture = "active"
+gate_requirement_ids = []
 transition_exit = "Open Capture => destination: Capture with the accepted user-entered creation intent and privacy-authorized source context; effect: No durable mutation occurs and no Receipt is created; Open Capture transfers only the in-memory intent and permitted source references, while Capture independently owns draft durability, type, consequences, confirmation, save, Receipt, and Undo.; focus: the Capture composer field containing the transferred intent or the Search handoff explanation if Capture cannot open."
 durable_effect = "Search preserves the current query and return context while transferring creation intent to Capture. Search creates no draft, canonical object, Receipt, or parallel composition policy."
 recovery_rollback = "Capture cancellation returns to the same Search query and source context without a new object; failed handoff retains the intent in Search for retry or dismissal. No Search Undo is required."
@@ -380,7 +195,7 @@ accessibility_focus = "VoiceOver announces that creation will continue in Captur
 [[state_command_contracts.commands]]
 command_id = "CMD-SEARCH-RESULTS-CAPTURE-HANDOFF-001"
 label = "Open Capture"
-canonical_owner = "global.search.ask-command-contract"
+canonical_owner = "global.search.capture-handoff"
 preconditions = ["Only privacy-authorized source context is eligible for transfer to Capture", "The current Search input expresses creation intent rather than an existing-object mutation"]
 destination = "Capture with the accepted user-entered creation intent and privacy-authorized source context"
 destination_id = "DEST-SEARCH-RESULTS-CAPTURE-HANDOFF-001"
@@ -396,11 +211,11 @@ commit_boundary = "Non-mutating: Search ends at the Capture presentation handoff
 rollback_undo = "No Search Undo is required; Capture cancellation or handoff failure returns to the preserved Search intent without creating a draft."
 recovery_id = "RECOVERY-SEARCH-RESULTS-CAPTURE-HANDOFF-001"
 recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
+recovery_owner = "global.search.capture-handoff"
 privacy_egress = "Transferred intent and source references remain local and privacy-authorized; no query, draft, or private life graph data leaves the device."
 verification_ids = ["SCENARIO-SEARCH-CAPTURE-HANDOFF-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED"
@@ -437,42 +252,6 @@ privacy_egress = "Search and its derived index remain local; suppressed or prote
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
 activation_posture = "active"
 gate_requirement_ids = []
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Inspect Source => destination: contextual supporting objects and approved sources for the bounded grounded answer; effect: No durable mutation occurs and no Receipt is created; Inspect Source opens only privacy-authorized evidence and keeps retrieved facts, inferred interpretation, proposed changes, assumptions, and uncertainty visibly distinct.; focus: the supporting Source heading or exact unavailable-evidence explanation, then back to the answer heading."
-durable_effect = "The bounded answer remains session-local and grounded in the visible supporting objects and approved sources. Retrieved facts, inferred interpretation, proposed changes, material assumptions, and uncertainty stay distinctly labeled without becoming saved truth."
-recovery_rollback = "Inspection dismissal returns to the same bounded answer; stale, contradictory, missing, or suppressed evidence relabels or withholds only the affected inference while preserving deterministic results. No Search Undo is required."
-offline_behavior = "The grounded answer uses only on-device synthesis and locally available authorized evidence. If synthesis or a reference is unavailable, deterministic results and contextual inspection remain usable."
-accessibility_focus = "VoiceOver reads the bounded answer after deterministic results, announces retrieved, inferred, and proposed labels, then supporting objects, sources, assumptions, uncertainty, and Inspect Source in that order."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-GROUNDED-ANSWER-001"
-label = "Inspect Source"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["The bounded answer remains attached to the current query and supporting-object revisions", "The requested supporting evidence is privacy-authorized for contextual inspection"]
-destination = "contextual supporting objects and approved sources for the bounded grounded answer"
-destination_id = "DEST-SEARCH-RESULTS-GROUNDED-ANSWER-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Inspect Source opens only privacy-authorized evidence and keeps retrieved facts, inferred interpretation, proposed changes, assumptions, and uncertainty visibly distinct."
-success_focus = "the supporting Source heading or exact unavailable-evidence explanation, then back to the answer heading"
-success_focus_id = "FOCUS-SEARCH-RESULTS-GROUNDED-ANSWER-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the answer’s source marker with the exact stale, missing, contradictory, or privacy-suppressed evidence reason"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-GROUNDED-ANSWER-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Source inspection cannot save the answer, promote inference to fact, or alter a supporting object."
-rollback_undo = "No Search Undo is required; dismissal returns to the answer, and evidence failure preserves deterministic results with the affected inference labeled or withheld."
-recovery_id = "RECOVERY-SEARCH-RESULTS-GROUNDED-ANSWER-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The answer, supporting objects, approved reference artifacts, assumptions, and uncertainty remain on device and reveal only privacy-authorized evidence."
-verification_ids = ["SCENARIO-SEARCH-ANSWER-EVIDENCE-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-NO-RESULTS"
@@ -606,42 +385,6 @@ privacy_egress = "Search and its derived index remain local; suppressed or prote
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
 activation_posture = "active"
 gate_requirement_ids = []
-
-[[state_command_contracts]]
-state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
-requirement_id = "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
-transition_exit = "Cancel Ask => destination: the unchanged deterministic results and current query while optional synthesis stops; effect: No durable mutation occurs and no Receipt is created; Cancel Ask discards only in-progress session-local synthesis and preserves the query, filters, deterministic results, selected object, and privacy suppression.; focus: the deterministic result-count heading or current query field with a concise Ask-cancelled announcement."
-durable_effect = "Optional on-device synthesis progresses beside already-visible deterministic results. Partial answer text is not presented as substantive output, saved, or promoted to canonical fact."
-recovery_rollback = "Cancel discards incomplete synthesis and preserves the query and deterministic results; interruption retains only a session-local checkpoint eligible for current-state revalidation. No Search Undo is required."
-offline_behavior = "Synthesis runs only when on-device capability and authorized local evidence are available. Otherwise it stops cleanly while offline Find, Act, and Inspect continue unchanged."
-accessibility_focus = "VoiceOver announces that optional Ask is working while deterministic results remain usable, exposes Cancel Ask, and does not repeatedly announce partial tokens or shift focus."
-
-[[state_command_contracts.commands]]
-command_id = "CMD-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001"
-label = "Cancel Ask"
-canonical_owner = "global.search.ask-command-contract"
-preconditions = ["Deterministic results remain independently available and privacy-filtered", "Optional on-device synthesis is in progress for the current query"]
-destination = "the unchanged deterministic results and current query while optional synthesis stops"
-destination_id = "DEST-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001"
-destination_posture = "current"
-effect = "No durable mutation occurs and no Receipt is created; Cancel Ask discards only in-progress session-local synthesis and preserves the query, filters, deterministic results, selected object, and privacy suppression."
-success_focus = "the deterministic result-count heading or current query field with a concise Ask-cancelled announcement"
-success_focus_id = "FOCUS-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001-SUCCESS"
-success_focus_posture = "current"
-failure_focus = "the bounded synthesis status with deterministic results still reachable and cancellation failure explained"
-failure_focus_id = "FOCUS-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001-FAILURE"
-failure_focus_posture = "current"
-commit_boundary = "Non-mutating: Cancel Ask changes only session-local synthesis state and cannot alter a canonical object or result projection."
-rollback_undo = "No Search Undo is required; cancellation returns to deterministic results, while cancellation failure retains the current query and permits dismissal."
-recovery_id = "RECOVERY-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001"
-recovery_posture = "current"
-recovery_owner = "global.search.ask-command-contract"
-privacy_egress = "The query, result context, evidence, and partial synthesis remain on device; cancellation sends no private content off device."
-verification_ids = ["SCENARIO-SEARCH-ASK-GROUNDING-001"]
-activation_posture = "future_gated"
-gate_requirement_ids = ["SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"]
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING"
@@ -1223,9 +966,9 @@ gate_requirement_ids = []
 
 # Search
 
-Search uses `surface-v1` because it presents one full-screen Find, Ask, Act, and Inspect experience with visible result, answer, evidence, proposal, action, state, accessibility, and visual contracts. It remains a global overlay/evolution, never a root tab or generic AI destination.
+Search uses `surface-v1` because it presents one full-screen deterministic Find, owner-routed Act, and contextual Inspect experience with visible result, evidence, proposal, action, state, accessibility, and visual contracts. It remains a global overlay/evolution, never a root tab or alternate canonical store.
 
-## SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001 — Unified local Find, Ask, Act, and Inspect
+## SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001 — Deterministic local Find, Act, and Inspect
 
 - **Concept:** `global.search.identity`
 - **Modality:** `MUST`
@@ -1234,18 +977,13 @@ Search uses `surface-v1` because it presents one full-screen Find, Ask, Act, and
 - **Verification:** `SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001`
 - **Supersedes:** `CLAIM-LFT-0163`, `CLAIM-LFT-0182`, `CLAIM-STB-0306`, `SPEC-GLOBAL-SEARCH-IDENTITY-001`
 
-Search MUST be one unified, local-first Find / grounded Understand /
-owner-routed Act / Inspect surface. The current baseline is Find, Open, Inspect,
-and bounded object-backed current/history labels. Understand and Act appear only
-to the depth proven by their capability contracts. Search MUST NOT use hosted
-AI, perform cloud profiling, transfer the private life graph, become a root or
-alternate canonical store, or present command-line/chatbot theater.
+Search MUST be one deterministic, local-first Find / owner-routed Act / contextual Inspect surface. The current baseline is Find, Open, Inspect, and bounded object-backed result explanation. Search MUST NOT use hosted AI, perform cloud profiling, transfer the private life graph, become a root or alternate canonical store, or present command-line theater.
 
 ## SPEC-GLOBAL-SEARCH-FIND-001 — Immediate deterministic local retrieval
 
 - **Concept:** `global.search.find`
 - **Modality:** `MUST`
-- **Scope:** Exact and natural-language retrieval before optional synthesis
+- **Scope:** Exact, prefix, date, status, context, and approved semantic retrieval
 - **Status:** `normative`
 - **Verification:** `SCENARIO-SEARCH-FIND-001`, `TEST-SEARCH-RANKING-001`
 - **Supersedes:** none
@@ -1257,89 +995,27 @@ prefix, typo-tolerant, date, status, context, and approved semantic matching is
 enabled only where implemented and measured; cross-root consolidation applies
 only to canonical identities with a proven bridge.
 
-## SPEC-GLOBAL-SEARCH-ASK-001 — Optional grounded on-device synthesis
-
-- **Concept:** `global.search.ask`
-- **Modality:** `MAY`
-- **Scope:** Conversational interpretation and synthesis inside Global Search
-- **Status:** `normative`
-- **Verification:** `SCENARIO-SEARCH-ASK-GROUNDING-001`, `SCENARIO-SEARCH-ASK-UNAVAILABLE-001`
-- **Supersedes:** none
-
-Ask MAY provide conversational, on-device synthesis grounded only in privacy-authorized Ambitions data and approved reference sources. Every substantive answer MUST expose its supporting objects, sources, assumptions, and uncertainty through the answer-evidence contract. Ask MUST remain optional: when conversational intelligence is unavailable, Search continues through deterministic Find / Act / Inspect without withholding local results, safe actions, or Trust inspection.
-
-## SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001 — Ask controls preserve deterministic Search and owner boundaries
-
-- **Concept:** `global.search.ask-command-contract`
-- **Modality:** `MUST`
-- **Scope:** Optional on-device synthesis, interruption, fallback, evidence inspection, and Capture transition
-- **Status:** `normative`
-- **Verification:** `SCENARIO-SEARCH-ASK-GROUNDING-001`, `SCENARIO-SEARCH-ASK-UNAVAILABLE-001`, `SCENARIO-SEARCH-CAPTURE-HANDOFF-001`, `SCENARIO-SEARCH-SESSION-HISTORY-001`
-- **Supersedes:** none
-
-Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-safe source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract specifies no active current behavior.
-
-## SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001 — Ask remains disabled until executable safeguards pass
-
-- **Concept:** `global.search.ask-activation-gate`
-- **Modality:** `MUST`
-- **Scope:** Ask and Search-to-Capture handoff activation
-- **Status:** `normative`
-- **Verification:** `TEST-SEARCH-ASK-ACTIVATION-001`, `TEST-SEARCH-NO-EGRESS-001`, `TEST-SEARCH-DETERMINISTIC-FALLBACK-001`
-- **Supersedes:** none
-
-Ask and Search-to-Capture handoff states and commands MUST remain disabled until
-the implementation passes current source/runtime, local-only no-egress,
-privacy, grounding, deterministic-fallback, cancellation, accessibility,
-visual-state, and performance tests. Canon text, command metadata, generated
-indexes, or a Figma frame alone cannot enable the feature. Until every
-applicable executable safeguard passes, deterministic Find, Open, Inspect, and
-bounded object-backed Understand are the only active Search command contract;
-Act is owner-routed and not activated by this requirement.
-
-## SPEC-GLOBAL-SEARCH-INPUT-001 — One input, immediate results, progressive enhancement
+## SPEC-GLOBAL-SEARCH-INPUT-001 — One input, immediate deterministic results
 
 - **Concept:** `global.search.input`
 - **Modality:** `MUST`
-- **Scope:** Query entry, exact retrieval, questions, action intent, and progressive answer presentation
+- **Scope:** Query entry, exact retrieval, natural-language queries, and action intent
 - **Status:** `normative`
 - **Verification:** `SCENARIO-SEARCH-UNIFIED-INPUT-001`
 - **Supersedes:** none
 
-The same input MUST support exact search, natural-language questions, and action intent. Deterministic results appear immediately while the user types; optional conversational synthesis MAY progressively enhance those results without delaying or replacing them. Answers use inline Ambitions objects, evidence, and action proposals and MUST NOT become an endless transcript.
-
-## SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001 — Retrieved, inferred, and proposed states remain distinct
-
-- **Concept:** `global.search.answer-evidence`
-- **Modality:** `MUST`
-- **Scope:** Every result, substantive answer, interpretation, and action proposal
-- **Status:** `normative`
-- **Verification:** `SCENARIO-SEARCH-ANSWER-EVIDENCE-001`, `PROOF-SEARCH-ANSWER-ACCESSIBILITY-001`
-- **Supersedes:** none
-
-Users MUST always be able to distinguish a retrieved fact, an inferred interpretation, and a proposed change. Each substantive answer binds supporting objects and approved sources, states material assumptions and uncertainty, and routes contextual Trust inspection without presenting inference as saved fact. Visual, Dynamic Type, non-color, and VoiceOver presentation MUST preserve these distinctions and their source links.
-
-## SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001 — Conversational history is ephemeral by default
-
-- **Concept:** `global.search.session-history`
-- **Modality:** `MUST`
-- **Scope:** Questions, answers, proposals, derived objects, dismissal, interruption, and explicit persistence
-- **Status:** `normative`
-- **Verification:** `SCENARIO-SEARCH-SESSION-HISTORY-001`
-- **Supersedes:** none
-
-Conversational history MUST remain session-local by default. Persisting any question, answer, proposal, or derived object requires explicit user action and an identified canonical owner; dismissal, interruption, or ordinary session expiry MUST NOT silently create a Note, Capture, History entry, profile, training record, or canonical object.
+The same input MUST support exact and natural-language queries and action intent. Deterministic results appear immediately while the user types; bounded result explanation remains attached to the displayed result or contextual Inspect evidence. Search MUST keep explanation bounded to displayed evidence and canonical owner routes.
 
 ## SPEC-GLOBAL-SEARCH-INSPECT-001 — Contextual trust inspection
 
 - **Concept:** `global.search.inspect`
 - **Modality:** `MUST`
-- **Scope:** Search results, answers, interpretations, and action proposals
+- **Scope:** Search results, evidence, and action proposals
 - **Status:** `normative`
 - **Verification:** `SCENARIO-SEARCH-INSPECT-001`
 - **Supersedes:** none
 
-Inspect MUST allow the user to examine Source, Privacy, History, Proof, and Receipts without leaving the relevant context unnecessarily. Inspection remains read-only, privacy-authorized, focus-restoring, and explicit about unavailable, stale, inferred, or suppressed evidence.
+Inspect MUST allow the user to examine Source, Privacy, History, Proof, and Receipts without leaving the relevant context unnecessarily. Result-level explanation may remain bounded to the displayed result and its authorized evidence; inspection remains read-only, privacy-authorized, focus-restoring, and explicit about unavailable, stale, inferred, or suppressed evidence.
 
 ## SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001 — Creation belongs to Capture
 
@@ -1356,16 +1032,16 @@ become a parallel composer. Capture prepares its bounded proposal; the
 destination owner remains responsible for validation, confirmation, commit,
 settlement, capability-gated Receipt, and capability-gated Undo.
 
-## SPEC-GLOBAL-SEARCH-PRESENTATION-001 — Ambitions-native understanding, not generic AI theater
+## SPEC-GLOBAL-SEARCH-PRESENTATION-001 — Evidence-led Search, not generic AI theater
 
 - **Concept:** `global.search.presentation`
 - **Modality:** `MUST NOT`
-- **Scope:** Search layout, answer composition, conversation affordances, branding, and interaction rhythm
+- **Scope:** Search layout, result evidence, action affordances, branding, and interaction rhythm
 - **Status:** `normative`
 - **Verification:** `REVIEW-SEARCH-PRESENTATION-001`, `PROOF-SEARCH-PRESENTATION-ACCESSIBILITY-001`
 - **Supersedes:** none
 
-The experience MUST NOT resemble a generic AI chatbot, chatbot bubble stream, or branded AI destination. It presents Ambitions' private understanding and command layer as object-led, source-linked, calm, concise, inspectable, and native to iPhone; progressive answers remain bounded around the current objects and user intent rather than accumulating an engagement transcript.
+The experience MUST remain object-led, source-linked, calm, concise, inspectable, and native to iPhone. Bounded explanations stay attached to current results and authorized evidence; Search does not present a persona, message stream, or durable result narrative.
 
 ## SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001 — Query and useful local results first
 
@@ -1444,17 +1120,9 @@ Receipt and Undo appear only when the owner result proves them.
 - **Verification:** `SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001`
 - **Supersedes:** none
 
-Search MUST remain a local full-screen non-root Find, bounded Understand,
-owner-routed Act, and Inspect presentation. Active controls are limited by the
-capability registry; an owner-provided Undo control appears only for an
-executable inverse command returned by that owner.
+Search MUST remain a local full-screen non-root Find, bounded result explanation, owner-routed Act, and Inspect presentation. Active controls are limited by current capability contracts; an owner-provided Undo control appears only for an executable inverse command returned by that owner.
 
-Querying, filtering, selection, understanding, and action preparation are
-non-mutating. Selecting a result routes to its canonical owner. A material
-action transfers object identity, owner, source revision, origin, requested
-action, preview, consequence, uncertainty, confirmation requirement, and return
-target; commit/result/Receipt/Undo fields are populated only by the owner.
-Search MUST NOT own a generic mutation path.
+Querying, filtering, selection, result explanation, and action preparation are non-mutating. Selecting a result routes to its canonical owner. A material action transfers object identity, owner, source revision, origin, requested action, preview, consequence, uncertainty, confirmation requirement, and return target; commit/result/Receipt/Undo fields are populated only by the owner. Search MUST NOT own a generic mutation path.
 
 `Rebuild Search` may rebuild only the derived local index from canonical projections. It MUST NOT repair or mutate canonical objects. The prior valid index remains available until replacement validation succeeds; corrupt output is quarantined. Cancel retains the prior valid index.
 
@@ -1466,7 +1134,7 @@ persistence across relaunch is not promised.
 ## Completeness contract
 
 <!-- canon-section: purpose-user-question -->
-Search answers where a local object or setting is, what a privacy-authorized local fact means, what safe action can be proposed now, and what Proof, Source, History, Receipt, Privacy, assumption, or uncertainty context can be inspected.
+Search resolves where a local object or setting is, what a privacy-authorized local fact means, what safe action can be proposed now, and what Proof, Source, History, Receipt, Privacy, or uncertainty context can be inspected.
 
 <!-- canon-section: entry-exit -->
 Entry comes from integrated shell/context, keyboard shortcut, deep link, or handoff. Dismissal restores exact root/depth/query-origin focus; opening a result records a return target; accepted action returns to the changed object or results predictably.
@@ -1478,48 +1146,48 @@ Search is full-screen non-root presentation. Result detail uses native depth or 
 Results show canonical identity, type, relevant status/date/context, privacy-safe excerpt, provenance/trust marker only when relevant, and safe actions. Grouping and ranking rationale remain plain and inspectable without exposing internals.
 
 <!-- canon-section: resting-states -->
-Resting-state evidence covers the declared empty, result, answer, recovery, handoff, action, rebuild, restored, and privacy-suppressed presentations.
-Required states are empty query, recent/local suggestions, querying, results, no results, filtered, selected, Ask unavailable with deterministic offline fallback, synthesis in progress, a bounded grounded answer with supporting objects, sources, assumptions, and uncertainty, Ask failure, interruption, resume, recovery, Capture handoff, action preview, action complete, rebuilding, restored, and privacy-suppressed.
+Resting-state evidence covers the declared empty, result, recovery, handoff, action, rebuild, restored, and privacy-suppressed presentations.
+Required states are empty query, recent/local suggestions, querying, results, no results, filtered, selected, Capture handoff, action preview, action complete, rebuilding, restored, and privacy-suppressed. Bounded result explanation remains part of result or Inspect evidence, not a separate Search mode or journey.
 
 <!-- canon-section: loading-transitional -->
-Query, filter, index refresh/rebuild, optional on-device synthesis, supporting-evidence resolution, action validation, mutation, inspection handoff, and restoration are cancellable where useful and retain last valid deterministic results until replacement or progressive enhancement is ready.
+Query, filter, index refresh/rebuild, action validation, mutation, inspection handoff, and restoration are cancellable where useful and retain last valid deterministic results until replacement is ready.
 
 <!-- canon-section: empty-degraded -->
 The result-state matrix pairs each index, projection, permission, and action condition with preserved query context and repair controls.
-No results offers query repair, scope/filter changes, Capture, or exact setting help without fake matches. Corrupt/stale index, unavailable projection, permission denial, partial results, offline, Ask unavailable, or action rejection states preserve query and disclose what remains searchable. Ask failure returns to the current deterministic Find / Act / Inspect results without implying loss of local capability.
+No results offers query repair, scope/filter changes, Capture, or exact setting help without fake matches. Corrupt/stale index, unavailable projection, permission denial, partial results, offline, or action rejection states preserve query and disclose what remains searchable.
 
 <!-- canon-section: commands-actions -->
-Type/edit query, filter, select, open, ask, inspect supporting object/source/assumption/uncertainty, propose complete, Start now, schedule/reschedule, add Proof, pause/resume, review conflict, inspect Source/Receipt/History/Proof/Privacy, open Capture, and open exact setting use explicit controls and canonical commands. No gesture is required.
+Type/edit query, filter, select, open, inspect source/assumption/uncertainty, propose complete, Start now, schedule/reschedule, add Proof, pause/resume, review conflict, inspect Source/Receipt/History/Proof/Privacy, open Capture, and open exact setting use explicit controls and canonical commands. No gesture is required.
 
 <!-- canon-section: durable-effects -->
 Durable effects are limited to canonical-owner commands, events, projections, Receipts, and replay after explicit confirmation.
-Queries, answers, interpretations, proposals, and result views do not mutate canonical data. Accepted owner actions follow Command to Event to Projection to Receipt to Replay; explicit persistence routes a question, answer, proposal, or derived object to its identified canonical owner; index updates consume projections and never write canonical object copies.
+Queries, bounded result explanations, interpretations, proposals, and result views do not mutate canonical data. Accepted owner actions follow Command to Event to Projection to Receipt to Replay; Search does not persist explanations or create durable explanation objects; index updates consume projections and never write canonical object copies.
 
 <!-- canon-section: failure-rollback -->
 Failure preserves canonical state and query context; rollback delegates any committed inverse to the canonical owner.
-Rejected or stale result actions re-resolve the object and leave state unchanged. Partial action/external failure preserves accepted local intent and result status. Missing, stale, private, or contradictory grounding withholds or labels the affected inference and preserves deterministic results. Index failure quarantines/rebuilds from canonical projections; Undo routes to the canonical owner.
+Rejected or stale result actions re-resolve the object and leave state unchanged. Partial action/external failure preserves accepted local intent and result status. Missing, stale, private, or contradictory evidence withholds or labels the affected explanation and preserves deterministic results. Index failure quarantines/rebuilds from canonical projections; Undo routes to the canonical owner.
 
 <!-- canon-section: offline -->
 Offline Search preserves deterministic local Find, Act, Inspect, Receipt, replay, and index-rebuild behavior.
-Query, ranking, filtering, result opening, approved local action proposals, inspection, rebuild, Receipt, and replay work without account/network. On-device Ask MAY enhance this path but is never required; when unavailable, Search degrades to deterministic Find / Act / Inspect. Network availability cannot change core ranking authority or reveal more private content.
+Query, ranking, filtering, result opening, approved local action proposals, inspection, rebuild, Receipt, and replay work without account/network. Network availability cannot change core ranking authority or reveal more private content.
 
 <!-- canon-section: privacy-data-classification -->
-Index, queries, session history, supporting-object selection, answers, assumptions, uncertainty, and proposals are private local data, privacy-filtered at indexing, retrieval, and synthesis. Logs/proof redact query and content by default. Spotlight or optional external handoff uses approved minimum metadata only; Account, R2, hosted AI, cloud profiling, and external models receive no private query/context or private-life-graph data. Approved Source Atlas reference artifacts may be read locally but receive no query or private context.
+Index, queries, result selection, bounded explanations, and proposals are private local data, privacy-filtered at indexing and retrieval. Logs/proof redact query and content by default. Spotlight or optional external handoff uses approved minimum metadata only; Account, R2, hosted AI, cloud profiling, and external models receive no private query/context or private-life-graph data. Approved Source Atlas reference artifacts may be read locally but receive no query or private context.
 
 <!-- canon-section: accessibility-reading-order -->
-VoiceOver orders dismiss, query/scope, filters, deterministic result count/status, ranked results, bounded answer, supporting objects/sources/assumptions/uncertainty, proposed actions, then inspection. It announces retrieved, inferred, and proposed state explicitly; custom actions mirror every swipe/context action; headings/rotor support groups; action preview and inspection restore focus to the originating result.
+VoiceOver orders dismiss, query/scope, filters, deterministic result count/status, ranked results, result evidence, proposed actions, then inspection. It announces retrieved, inferred, and proposed state explicitly; custom actions mirror every swipe/context action; headings/rotor support groups; action preview and inspection restore focus to the originating result.
 
 <!-- canon-section: dynamic-type -->
-Query, filters, results, excerpts, bounded answers, supporting objects/sources/assumptions/uncertainty, state, and action proposals reflow vertically; no horizontal layout, truncation, or hidden context is required to identify, understand, or act safely.
+Query, filters, results, excerpts, result evidence, state, and action proposals reflow vertically; no horizontal layout, truncation, or hidden context is required to identify, understand, or act safely.
 
 <!-- canon-section: reduce-motion -->
-Result insertion, ranking changes, progressive answer enhancement, owner handoff, and action completion use restrained fades or immediate updates while preserving announcements, retrieved/inferred/proposed distinctions, selection, and focus.
+Result insertion, ranking changes, owner handoff, and action completion use restrained fades or immediate updates while preserving announcements, retrieved/inferred/proposed distinctions, selection, and focus.
 
 <!-- canon-section: reduce-transparency -->
-Search, result, answer, supporting-evidence, and proposal materials become opaque semantic surfaces with equivalent grouping, retrieved/inferred/proposed labels, selection, action, privacy, and contrast cues.
+Search, result evidence, and proposal materials become opaque semantic surfaces with equivalent grouping, retrieved/inferred/proposed labels, selection, action, privacy, and contrast cues.
 
 <!-- canon-section: copy-state-language -->
-Use Find, Ask, Search, Open step, Start now, Review, Source, Proof, Receipt, History, Privacy, assumption, uncertainty, and Undo contextually. Avoid Ask AI, model confidence, runtime/index taxonomy, shame, or productivity scoring.
+Use Find, Search, Open step, Start now, Review, Source, Proof, Receipt, History, Privacy, uncertainty, and Undo contextually. Avoid model-confidence, runtime/index taxonomy, shame, or productivity scoring.
 
 <!-- canon-section: visual-authority -->
 The named shell package controls placement only;
@@ -1527,19 +1195,19 @@ Search rendering, accessibility/device evidence, implementation parity, and rele
 
 <!-- canon-section: source-ownership -->
 Source ownership remains exact across Stage, LocalRuntimeOS Search, Projections, Commands, Trust, and Quality.
-Canonical target ownership is exact: `Stage/` owns presentation containment; the existing `Core/LocalRuntimeOS/Search/` owner owns index/ranking/rebuild and any future on-device Ask synthesis; `Projections/` supplies views; `Commands/` owns actions; `Trust/` owns inspection; `Quality/` owns proof. This ownership statement creates no new architecture path or Swift source and does not assert that Ask is implemented.
+Canonical target ownership is exact: `Stage/` owns presentation containment; the existing `Core/LocalRuntimeOS/Search/` owner owns index/ranking/rebuild; `Projections/` supplies views; `Commands/` owns actions; `Trust/` owns inspection; `Quality/` owns proof. This ownership statement creates no new architecture path or Swift source.
 
 <!-- canon-section: tests -->
-Executable tests bind ranking, privacy, object families, Ask grounding, action safety, recovery, offline use, replay, accessibility, and return focus.
-Tests cover exact/prefix/typo/date/context ranking, immediate while-typing results, suppression/privacy, every object family, optional Ask grounding and unavailable fallback, approved-reference use, supporting objects/sources/assumptions/uncertainty, retrieved/inferred/proposed distinction, session-local history, explicit persistence routing, Capture handoff, action safety/material preview, stale object, index corruption/rebuild, partial results, offline, replay/Undo, return focus, VoiceOver order/actions/rotor, Dynamic Type, reduced effects, contrast, and scale.
+Executable tests bind ranking, privacy, object families, action safety, recovery, offline use, replay, accessibility, and return focus.
+Tests cover exact/prefix/typo/date/context ranking, immediate while-typing results, suppression/privacy, every object family, approved-reference use, result evidence, retrieved/inferred/proposed distinction, Capture handoff, action safety/material preview, stale object, index corruption/rebuild, partial results, offline, replay/Undo, return focus, VoiceOver order/actions/rotor, Dynamic Type, reduced effects, contrast, and scale.
 
 <!-- canon-section: proof -->
-Proof binds declared-corpus ranking, privacy filtering, local execution, grounded Ask fallback, owner Receipts, recovery, and accessibility evidence.
-Applicable validation includes declared-corpus ranking metrics, privacy/filter fixtures, on-device no-egress tests, Ask grounding and unavailable-fallback fixtures, session expiry/persistence, Capture handoff, action Receipts/replay, corruption recovery, rendered-state/accessibility matrices, visual comparison, performance, and rollback. Generated indexes, wording, source ownership, and state contracts alone do not implement on-device Ask or demonstrate current Search behavior.
+Proof binds declared-corpus ranking, privacy filtering, local execution, owner Receipts, recovery, and accessibility evidence.
+Applicable validation includes declared-corpus ranking metrics, privacy/filter fixtures, local no-egress tests, Capture handoff, action Receipts/replay, corruption recovery, rendered-state/accessibility matrices, visual comparison, performance, and rollback. Generated indexes, wording, source ownership, and state contracts alone do not demonstrate current Search behavior.
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Search query, ranking, on-device synthesis, supporting-evidence resolution, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result/answer/context caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, preserve immediate deterministic results while optional synthesis runs, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative indexed-record/query/result/answer/context data scale, warm/cold state, measurement tool, percentile/maximum, synthesis and rebuild resource measures, and regression threshold.
+Search query, ranking, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result/context caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, preserve immediate deterministic results, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. The implementation must define and test a performance-budget record declaring device floor, OS, build configuration, representative indexed-record/query/result/context data scale, warm/cold state, measurement tool, percentile/maximum, rebuild resource measures, and regression threshold.
 
 ## SPEC-GLOBAL-SEARCH-PLACEMENT-001 — Global Search placement
 

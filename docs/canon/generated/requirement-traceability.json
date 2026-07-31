@@ -1,5 +1,5 @@
 {
-  "canon_digest": "ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916",
+  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
   "canon_revision": 2,
   "executable_resolution_policy": {
     "binding_source": "executed test result manifests",
@@ -2994,30 +2994,6 @@
       "source_path": "specifications/journeys/search-find-act-inspect.md",
       "verification_declarations": [
         "SCENARIO-JOURNEY-SEARCH-FIND-ACT-INSPECT-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "concept": "journey.search.find-ask-act-inspect",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Search MUST accept one input, return immediate deterministic Find results, MAY progressively add an optional grounded Ask answer, present only owner-routed action proposals, hand creation intent to Capture, and keep Inspect in relevant context. Ask history stays session-local unless explicit user action routes a question, answer, proposal, or derived object to an identified canonical owner. The user MUST distinguish retrieved fact, inferred interpretation, and proposed change, and Ask unavailability MUST preserve a deterministic Find / Act / Inspect fallback.",
-      "modality": "MUST",
-      "owner_spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
-      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
-      "scope": "Unified Search input, immediate deterministic Find, optional grounded Ask, canonical-owner Act, Capture handoff, contextual Inspect, interruption, and deterministic offline fallback",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Composer/Capture/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/journeys/search-find-ask-act-inspect.md",
-      "verification_declarations": [
-        "SCENARIO-JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
       ]
     },
     {
@@ -7375,105 +7351,6 @@
     },
     {
       "blueprint_ids": [],
-      "concept": "global.search.answer-evidence",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Users MUST always be able to distinguish a retrieved fact, an inferred interpretation, and a proposed change. Each substantive answer binds supporting objects and approved sources, states material assumptions and uncertainty, and routes contextual Trust inspection without presenting inference as saved fact. Visual, Dynamic Type, non-color, and VoiceOver presentation MUST preserve these distinctions and their source links.",
-      "modality": "MUST",
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
-      "scope": "Every result, substantive answer, interpretation, and action proposal",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/global/search.md",
-      "verification_declarations": [
-        "SCENARIO-SEARCH-ANSWER-EVIDENCE-001",
-        "PROOF-SEARCH-ANSWER-ACCESSIBILITY-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "concept": "global.search.ask",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Ask MAY provide conversational, on-device synthesis grounded only in privacy-authorized Ambitions data and approved reference sources. Every substantive answer MUST expose its supporting objects, sources, assumptions, and uncertainty through the answer-evidence contract. Ask MUST remain optional: when conversational intelligence is unavailable, Search continues through deterministic Find / Act / Inspect without withholding local results, safe actions, or Trust inspection.",
-      "modality": "MAY",
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001",
-      "scope": "Conversational interpretation and synthesis inside Global Search",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/global/search.md",
-      "verification_declarations": [
-        "SCENARIO-SEARCH-ASK-GROUNDING-001",
-        "SCENARIO-SEARCH-ASK-UNAVAILABLE-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "concept": "global.search.ask-activation-gate",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Ask and Search-to-Capture handoff states and commands MUST remain disabled until the implementation passes current source/runtime, local-only no-egress, privacy, grounding, deterministic-fallback, cancellation, accessibility, visual-state, and performance tests. Canon text, command metadata, generated indexes, or a Figma frame alone cannot enable the feature. Until every applicable executable safeguard passes, deterministic Find, Open, Inspect, and bounded object-backed Understand are the only active Search command contract; Act is owner-routed and not activated by this requirement.",
-      "modality": "MUST",
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
-      "scope": "Ask and Search-to-Capture handoff activation",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/global/search.md",
-      "verification_declarations": [
-        "TEST-SEARCH-ASK-ACTIVATION-001",
-        "TEST-SEARCH-NO-EGRESS-001",
-        "TEST-SEARCH-DETERMINISTIC-FALLBACK-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "concept": "global.search.ask-command-contract",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Ask state controls MUST remain local, session-bound, non-mutating, and subordinate to already-available deterministic results. Search exposes `Retry Ask`, `Resume Ask`, and `Cancel Ask` only for optional on-device synthesis. One applicable contextual Inspect route MUST keep `Source`, `Privacy`, `History`, `Proof`, and `Receipts` available as read-only sections without forcing an unnecessary context exit; state-specific `Inspect Source` and `Inspect Privacy` controls may open that route at the relevant section. `Open Capture` transfers accepted creation intent and privacy-safe source context without creating or mutating a canonical object in Search. Failure, cancellation, interruption, and offline unavailability preserve the current query and deterministic Find / Act / Inspect results. Every Ask and Search-to-Capture handoff control remains future-gated by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`; this target contract specifies no active current behavior.",
-      "modality": "MUST",
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
-      "scope": "Optional on-device synthesis, interruption, fallback, evidence inspection, and Capture transition",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/global/search.md",
-      "verification_declarations": [
-        "SCENARIO-SEARCH-ASK-GROUNDING-001",
-        "SCENARIO-SEARCH-ASK-UNAVAILABLE-001",
-        "SCENARIO-SEARCH-CAPTURE-HANDOFF-001",
-        "SCENARIO-SEARCH-SESSION-HISTORY-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
       "concept": "global.search.capture-handoff",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
@@ -7500,7 +7377,7 @@
       "concept": "global.search.command-contract",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Search MUST remain a local full-screen non-root Find, bounded Understand, owner-routed Act, and Inspect presentation. Active controls are limited by the capability registry; an owner-provided Undo control appears only for an executable inverse command returned by that owner.",
+      "intended_outcome": "Search MUST remain a local full-screen non-root Find, bounded result explanation, owner-routed Act, and Inspect presentation. Active controls are limited by current capability contracts; an owner-provided Undo control appears only for an executable inverse command returned by that owner.",
       "modality": "MUST",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
@@ -7527,7 +7404,7 @@
       "modality": "MUST",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-FIND-001",
-      "scope": "Exact and natural-language retrieval before optional synthesis",
+      "scope": "Exact, prefix, date, status, context, and approved semantic retrieval",
       "source_owners": [
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -7625,11 +7502,11 @@
       "concept": "global.search.input",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "The same input MUST support exact search, natural-language questions, and action intent. Deterministic results appear immediately while the user types; optional conversational synthesis MAY progressively enhance those results without delaying or replacing them. Answers use inline Ambitions objects, evidence, and action proposals and MUST NOT become an endless transcript.",
+      "intended_outcome": "The same input MUST support exact and natural-language queries and action intent. Deterministic results appear immediately while the user types; bounded result explanation remains attached to the displayed result or contextual Inspect evidence. Search MUST keep explanation bounded to displayed evidence and canonical owner routes.",
       "modality": "MUST",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-INPUT-001",
-      "scope": "Query entry, exact retrieval, questions, action intent, and progressive answer presentation",
+      "scope": "Query entry, exact retrieval, natural-language queries, and action intent",
       "source_owners": [
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -7652,11 +7529,11 @@
       "concept": "global.search.inspect",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Inspect MUST allow the user to examine Source, Privacy, History, Proof, and Receipts without leaving the relevant context unnecessarily. Inspection remains read-only, privacy-authorized, focus-restoring, and explicit about unavailable, stale, inferred, or suppressed evidence.",
+      "intended_outcome": "Inspect MUST allow the user to examine Source, Privacy, History, Proof, and Receipts without leaving the relevant context unnecessarily. Result-level explanation may remain bounded to the displayed result and its authorized evidence; inspection remains read-only, privacy-authorized, focus-restoring, and explicit about unavailable, stale, inferred, or suppressed evidence.",
       "modality": "MUST",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-INSPECT-001",
-      "scope": "Search results, answers, interpretations, and action proposals",
+      "scope": "Search results, evidence, and action proposals",
       "source_owners": [
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -7701,11 +7578,11 @@
       "concept": "global.search.presentation",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "The experience MUST NOT resemble a generic AI chatbot, chatbot bubble stream, or branded AI destination. It presents Ambitions' private understanding and command layer as object-led, source-linked, calm, concise, inspectable, and native to iPhone; progressive answers remain bounded around the current objects and user intent rather than accumulating an engagement transcript.",
+      "intended_outcome": "The experience MUST remain object-led, source-linked, calm, concise, inspectable, and native to iPhone. Bounded explanations stay attached to current results and authorized evidence; Search does not present a persona, message stream, or durable result narrative.",
       "modality": "MUST NOT",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
-      "scope": "Search layout, answer composition, conversation affordances, branding, and interaction rhythm",
+      "scope": "Search layout, result evidence, action affordances, branding, and interaction rhythm",
       "source_owners": [
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -7725,7 +7602,7 @@
       "concept": "global.search.identity",
       "executable_bindings": [],
       "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Search MUST be one unified, local-first Find / grounded Understand / owner-routed Act / Inspect surface. The current baseline is Find, Open, Inspect, and bounded object-backed current/history labels. Understand and Act appear only to the depth proven by their capability contracts. Search MUST NOT use hosted AI, perform cloud profiling, transfer the private life graph, become a root or alternate canonical store, or present command-line/chatbot theater.",
+      "intended_outcome": "Search MUST be one deterministic, local-first Find / owner-routed Act / contextual Inspect surface. The current baseline is Find, Open, Inspect, and bounded object-backed result explanation. Search MUST NOT use hosted AI, perform cloud profiling, transfer the private life graph, become a root or alternate canonical store, or present command-line theater.",
       "modality": "MUST",
       "owner_spec_id": "GLOBAL-SEARCH",
       "requirement_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
@@ -7741,29 +7618,6 @@
       "source_path": "specifications/global/search.md",
       "verification_declarations": [
         "SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001"
-      ]
-    },
-    {
-      "blueprint_ids": [],
-      "concept": "global.search.session-history",
-      "executable_bindings": [],
-      "executable_resolution": "not_evaluated_by_canon_compiler",
-      "intended_outcome": "Conversational history MUST remain session-local by default. Persisting any question, answer, proposal, or derived object requires explicit user action and an identified canonical owner; dismissal, interruption, or ordinary session expiry MUST NOT silently create a Note, Capture, History entry, profile, training record, or canonical object.",
-      "modality": "MUST",
-      "owner_spec_id": "GLOBAL-SEARCH",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001",
-      "scope": "Questions, answers, proposals, derived objects, dismissal, interruption, and explicit persistence",
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "source_path": "specifications/global/search.md",
-      "verification_declarations": [
-        "SCENARIO-SEARCH-SESSION-HISTORY-001"
       ]
     },
     {
