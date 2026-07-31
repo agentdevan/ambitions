@@ -30,6 +30,16 @@ previously observed parser failures reproduced. The mechanical repair is
 preserved in prerequisite PR #56 (`f34305949`) but is not merged because its
 build-for-testing run then exposed the unrelated existing
 `RuntimeBlobID` ambiguity in `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
+The single stacked identity reconciliation is draft PR #57
+(`9b80b7f04`), which retains general `RuntimeBlobID` and renames the
+attachment-owned duplicate to `RuntimeAttachmentBlobID`. Its combined
+build-for-testing run cleared both the syntax and duplicate-identity blockers,
+then stopped on new unrelated production failures in
+`RuntimeExternalOperationGraphAuthority.swift:28`,
+`RuntimeExternalOperationQueries.swift:7`,
+`RuntimeFeatureRegistrationModules.swift:23-32,119`, and
+`RuntimeGenerationActivationLock.swift:66,112,158,174`. Those files are
+outside the authorized repair scope, so neither repair PR was merged.
 PR #55 was refreshed by merging current `origin/main` without rebasing. One
 refreshed build preflight was blocked by an unrelated active Xcode process. After
 that process finished, the final bounded build-for-testing command started
@@ -319,6 +329,18 @@ because an unrelated worktree build was active. The bounded retry then started
 `FAILURE_CLASS=test_failure` and executed-test count `0`. The repository cannot
 honestly claim executable readiness from this proof.
 
+The stacked identity validation reached beyond the duplicate identity and
+syntax blockers but failed on the following unrelated current-main errors:
+
+- `RuntimeExternalOperationGraphAuthority.swift:28:28`: `'switch' may only be used as expression in return, throw, or as the source of an assignment`.
+- `RuntimeExternalOperationQueries.swift:7:32`: `RuntimeIdentityNormalizer` is inaccessible due to `private` protection level.
+- `RuntimeFeatureRegistrationModules.swift:23-32,119`: unresolved feature members and invalid `RuntimeCommandCaseID` initializer label/optional use.
+- `RuntimeGenerationActivationLock.swift:66,112,158,174`: `Darwin.flock` call/signature errors.
+
+Because those failures are outside the proof and identity-repair allowlists,
+PR #55 was not refreshed or rerun after this new blocker. The identity focused
+attempts all remained preflight-only with executed-test count `0`.
+
 The final prescribed build-for-testing command
 (`scripts/ambitions-xcode-build-for-testing.sh --batch
 SKILL-TRANSFER-PR55-BFT-FINAL --scheme AmbitionsUnitTests --timeout 45m
@@ -379,8 +401,10 @@ across every domain or infer sensitive traits.
    The refreshed PR #55 build was initially blocked by an active unrelated
    Xcode process; after that process finished, the final build-for-testing
    command started `xcodebuild` and failed before the test target compiled at
-   the same parser errors. The bounded focused retry likewise failed before
-   test launch. Executed-test count remains zero.
+   the same parser errors. Draft PR #57 clears the duplicate identity on the
+   stacked head, but that build stops on the unrelated errors listed above.
+   The focused proof attempts remained preflight-only because of simulator
+   recovery and active unrelated Xcode work. Executed-test count remains zero.
 2. A production Goal Path proposal-input contract. The proof's owner envelope
    is private test code, so it cannot establish a current receiving seam.
 3. Executable Trust/privacy/control evidence for the transfer fields; the
