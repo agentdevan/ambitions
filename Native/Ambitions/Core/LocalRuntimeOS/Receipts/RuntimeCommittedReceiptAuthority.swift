@@ -140,9 +140,9 @@ enum RuntimeCommittedReceiptAuthority {
               }),
               attachmentArtifacts == attachmentArtifacts.sorted(),
               Set(attachmentArtifacts).count == attachmentArtifacts.count,
-              atomicReceipt.unresolvedWork.filter {
+              atomicReceipt.unresolvedWork.filter({
                 $0.kind == .projectionInvalidation
-              }.count <= RuntimeCommittedReceiptLimits.maximumProjectionInvalidations else {
+              }).count <= RuntimeCommittedReceiptLimits.maximumProjectionInvalidations else {
             throw RuntimeCommittedReceiptAuthorityError.corruptAuthority
         }
 
