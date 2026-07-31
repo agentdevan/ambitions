@@ -3905,12 +3905,12 @@ actor RuntimeGenerationControlStore {
                   latestLease.leaseEpoch >= run.operationLeaseEpoch,
                   latestLease.fencingToken >= run.operationFencingToken,
                   leases[admissionIndex].ownerInstanceID == claim.executorInstanceID,
-                  zip(leases.dropFirst(admissionIndex), leases.dropFirst(admissionIndex + 1)).allSatisfy {
+                  zip(leases.dropFirst(admissionIndex), leases.dropFirst(admissionIndex + 1)).allSatisfy({
                       previous, successor in
                       successor.leaseEpoch == previous.leaseEpoch + 1 &&
                           successor.priorLeaseDigest == previous.leaseDigest &&
                           successor.fencingToken >= previous.fencingToken
-                  },
+                  }),
                   latestTransition.migrationRunID == run.migrationRunID,
                   latestTransition.phase == .readyForCertification,
                   latestTransition.transitionDigest == record.readyTransitionDigest,
@@ -8551,7 +8551,7 @@ private extension RuntimeGenerationControlStore {
                 }
 
                 let transitionRows = try database.query(
-                    "SELECT * FROM \(upgradedName(\"runtime_generation_projection_rebuild_lifecycle_transitions\")) WHERE migration_run_id = ? ORDER BY occurred_at_ms, transition_id",
+                    "SELECT * FROM \(upgradedName("runtime_generation_projection_rebuild_lifecycle_transitions")) WHERE migration_run_id = ? ORDER BY occurred_at_ms, transition_id",
                     bindings: [.text(legacy.migrationRunID)],
                     maximumDecodedBytes: maximumControlReadBytes
                 )
@@ -8610,11 +8610,11 @@ private extension RuntimeGenerationControlStore {
                       claim.claimEpoch == firstTransition.recoveryExecutionClaimEpoch,
                       firstTransition.phase == .admitted,
                       firstTransition.priorTransitionDigest == nil,
-                      transitions.allSatisfy {
+                      transitions.allSatisfy({
                           $0.occurredAtMilliseconds >= claim.claimedAtMilliseconds &&
                               $0.occurredAtMilliseconds < claim.expiresAtMilliseconds
-                      },
-                      zip(transitions, transitions.dropFirst()).allSatisfy {
+                      }),
+                      zip(transitions, transitions.dropFirst()).allSatisfy({
                           previous, current in
                           current.priorTransitionDigest == previous.transitionDigest &&
                               current.occurredAtMilliseconds >=
@@ -8623,7 +8623,7 @@ private extension RuntimeGenerationControlStore {
                                 from: previous.phase,
                                 to: current.phase
                               )
-                      },
+                      }),
                       reservation.operationKind == .projectionRebuild,
                       reservation.candidateGenerationID == legacy.candidateGenerationID,
                       safetyBackup.sourceGenerationID == reservation.sourceGenerationID,
@@ -8823,10 +8823,10 @@ private extension RuntimeGenerationControlStore {
             // Rename child first, then its parent. The replacement child is
             // installed only after the new parent exists, preserving FK shape.
             try database.execute(
-                "ALTER TABLE runtime_generation_recovery_operation_execution_receipts RENAME TO \(upgradedName(\"runtime_generation_recovery_operation_execution_receipts\"))"
+                "ALTER TABLE runtime_generation_recovery_operation_execution_receipts RENAME TO \(upgradedName("runtime_generation_recovery_operation_execution_receipts"))"
             )
             try database.execute(
-                "ALTER TABLE runtime_generation_rebuilds RENAME TO \(upgradedName(\"runtime_generation_rebuilds\"))"
+                "ALTER TABLE runtime_generation_rebuilds RENAME TO \(upgradedName("runtime_generation_rebuilds"))"
             )
             try database.execute(try tableStatement("runtime_generation_rebuilds"))
             try database.execute(try tableStatement("runtime_generation_recovery_operation_execution_receipts"))
