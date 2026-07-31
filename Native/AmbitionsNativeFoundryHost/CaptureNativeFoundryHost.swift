@@ -8,7 +8,8 @@ enum CaptureNativeFoundryVariant: String {
     case clarification = "cnc-capture-clarification-dark"
     case review = "cnc-capture-review-dark"
     case recovery = "cnc-capture-recovery-dark"
-    case accessibilityReview = "cnc-capture-review-accessibility-dark"
+    case accessibilityReviewTop = "cnc-capture-review-accessibility-top-dark"
+    case accessibilityReviewAction = "cnc-capture-review-accessibility-action-dark"
 
     static var fromProcessArguments: CaptureNativeFoundryVariant? {
         let arguments = ProcessInfo.processInfo.arguments
@@ -26,7 +27,12 @@ enum CaptureNativeFoundryVariant: String {
     }
 
     var dynamicTypeSize: DynamicTypeSize {
-        self == .accessibilityReview ? .accessibility2 : .large
+        switch self {
+        case .accessibilityReviewTop, .accessibilityReviewAction:
+            .accessibility2
+        default:
+            .large
+        }
     }
 }
 
@@ -74,7 +80,7 @@ struct CaptureNativeFoundryHost: View {
             state.updateClarificationResponse(
                 CaptureNativeCalibrationFixture.clarificationAnswer
             )
-        case .review, .accessibilityReview:
+        case .review, .accessibilityReviewTop, .accessibilityReviewAction:
             _ = state.presentCapture(
                 expression: CaptureNativeCalibrationFixture.primaryExpression
             )

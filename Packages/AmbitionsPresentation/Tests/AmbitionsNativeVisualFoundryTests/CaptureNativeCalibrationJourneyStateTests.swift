@@ -42,10 +42,25 @@ final class CaptureNativeCalibrationJourneyStateTests: XCTestCase {
         )
         XCTAssertTrue(ambiguous.continueExpression(using: fixture))
         XCTAssertEqual(ambiguous.phase, .clarification)
+        XCTAssertEqual(ambiguous.navigationPath, [.clarification])
         XCTAssertEqual(ambiguous.clarificationCount, 1)
 
         XCTAssertTrue(ambiguous.continueExpression(using: fixture))
         XCTAssertEqual(ambiguous.clarificationCount, 1)
+    }
+
+    func testClarificationUsesNativeDepthAndBackRestoresRetainedExpression() {
+        var state = presentedState(
+            expression: CaptureNativeCalibrationFixture.ambiguousExpression
+        )
+        XCTAssertTrue(state.continueExpression(using: fixture))
+
+        state.restoreNavigationPath([])
+
+        XCTAssertEqual(state.phase, .expression)
+        XCTAssertEqual(state.expression, CaptureNativeCalibrationFixture.ambiguousExpression)
+        XCTAssertEqual(state.clarificationCount, 1)
+        XCTAssertEqual(state.focusAnchor, .expressionEditor)
     }
 
     func testClarificationRetainsOriginalAndAnswerThroughReviewAndChange() {

@@ -29,6 +29,8 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         XCTAssertTrue(cancel.isHittable)
         XCTAssertLessThan(editor.frame.minY, keyboard.frame.minY)
         XCTAssertLessThan(cancel.frame.maxY, keyboard.frame.minY)
+        XCTAssertFalse(element("cnc-capture-expression-continue").exists)
+        XCTAssertFalse(element("cnc-capture-action-region").exists)
 
         cancel.tap()
 
@@ -43,19 +45,21 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
 
         let original = element("cnc-meaning-original")
         let proposal = element("cnc-meaning-proposal")
-        let destination = element("cnc-meaning-destination")
         let review = element("cnc-meaning-review")
         let change = element("cnc-meaning-change")
-        assertExists([original, proposal, destination, review, change])
-        assertVerticalOrder([original, proposal, destination, review])
+        assertExists([original, proposal, review, change])
+        assertVerticalOrder([original, proposal])
         XCTAssertEqual(original.label, "Your words")
         XCTAssertEqual(
             original.value as? String,
             "I need to prepare questions for tomorrow’s dentist appointment."
         )
-        XCTAssertEqual(destination.label, "Destination")
-        XCTAssertTrue((destination.value as? String)?.contains("Goals") == true)
-        XCTAssertTrue((destination.value as? String)?.contains("Proposed, not added") == true)
+        XCTAssertEqual(proposal.label, "Proposed for Goals")
+        XCTAssertTrue((proposal.value as? String)?.contains("Nothing has been added") == true)
+        XCTAssertFalse(app.staticTexts["Destination"].exists)
+        XCTAssertFalse(app.staticTexts["Proposed, not added"].exists)
+        XCTAssertFalse(app.staticTexts["What this could mean"].exists)
+        assertActionRegion(primary: review, secondary: change)
 
         review.tap()
 
@@ -73,23 +77,21 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
             consequence,
             continueToGoals
         ])
-        assertVerticalOrder([
-            reviewOriginal,
-            reviewProposal,
-            related,
-            current,
-            consequence,
-            continueToGoals
-        ])
+        assertVerticalOrder([reviewProposal, reviewOriginal, related, current, consequence])
         XCTAssertTrue(app.navigationBars["Review"].exists)
-        XCTAssertEqual(current.value as? String, "Nothing has changed.")
+        XCTAssertEqual(current.value as? String, "Nothing has changed yet.")
         XCTAssertEqual(
             consequence.value as? String,
-            "Goals will review this proposal. The appointment time remains unchanged."
+            "Goals will review the proposal. The appointment stays at 9:30 AM."
+        )
+        XCTAssertFalse(app.staticTexts["Before anything changes"].exists)
+        assertActionRegion(
+            primary: continueToGoals,
+            secondary: element("cnc-review-change")
         )
 
         continueToGoals.tap()
-        XCTAssertEqual(current.value as? String, "Nothing has changed.")
+        XCTAssertEqual(current.value as? String, "Nothing has changed yet.")
         XCTAssertFalse(app.staticTexts["Goal created"].exists)
         XCTAssertFalse(app.staticTexts["Added"].exists)
 
@@ -119,7 +121,9 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         let changeWords = element("cnc-clarification-change-words")
         let keyboard = app.keyboards.firstMatch
         assertExists([original, question, response, continueButton, changeWords, keyboard])
-        assertVerticalOrder([original, question, response, continueButton, changeWords])
+        assertVerticalOrder([original, question, response])
+        XCTAssertTrue(app.navigationBars["Clarify"].exists)
+        XCTAssertTrue(app.navigationBars["Clarify"].buttons.firstMatch.isHittable)
         XCTAssertEqual(original.value as? String, "Prepare for tomorrow’s appointment.")
         XCTAssertEqual(question.label, "What do you want to prepare?")
         XCTAssertEqual(response.value as? String, "Questions to ask the dentist")
@@ -130,6 +134,8 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
             1
         )
         XCTAssertLessThan(response.frame.maxY, keyboard.frame.minY)
+        assertActionRegion(primary: continueButton, secondary: changeWords)
+        XCTAssertTrue(app.buttons["Edit original words"].exists)
 
         continueButton.tap()
         assertExists([
@@ -180,7 +186,7 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         let continueReview = element("cnc-recovery-continue")
         let keepEditing = element("cnc-recovery-keep-editing")
         assertExists([message, original, proposal, continueReview, keepEditing])
-        assertVerticalOrder([message, original, proposal, continueReview, keepEditing])
+        assertVerticalOrder([message, original, proposal])
         XCTAssertTrue((message.label).contains("Your draft is still here"))
         XCTAssertEqual(
             original.value as? String,
@@ -188,6 +194,7 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         )
         XCTAssertTrue((proposal.value as? String)?.contains("Dentist appointment") == true)
         XCTAssertTrue((proposal.value as? String)?.contains("Tomorrow · 9:30 AM") == true)
+        assertActionRegion(primary: continueReview, secondary: keepEditing)
 
         continueReview.tap()
         XCTAssertTrue(element("cnc-capture-review").waitForExistence(timeout: Self.waitTimeout))
@@ -210,7 +217,7 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         let ordinaryOriginalHeight = element("cnc-review-original").frame.height
 
         app.terminate()
-        launch("cnc-capture-review-accessibility-dark")
+        launch("cnc-capture-review-accessibility-top-dark")
 
         let original = element("cnc-review-original")
         let proposal = element("cnc-review-proposal")
@@ -222,17 +229,48 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
         assertExists([original, proposal, related, current, consequence, continueToGoals, change])
 
         XCTAssertGreaterThan(original.frame.height, ordinaryOriginalHeight)
-        assertVerticalOrder([original, proposal, related, current, consequence, continueToGoals])
-        XCTAssertEqual(current.value as? String, "Nothing has changed.")
-        XCTAssertTrue((consequence.value as? String)?.contains("appointment time remains unchanged") == true)
+        assertVerticalOrder([proposal, original, related, current, consequence])
+        XCTAssertTrue(app.navigationBars["Review"].exists)
+        XCTAssertGreaterThanOrEqual(
+            proposal.frame.minY,
+            app.navigationBars["Review"].frame.maxY - 1
+        )
+        XCTAssertLessThan(original.frame.maxY, continueToGoals.frame.minY)
+        XCTAssertEqual(current.value as? String, "Nothing has changed yet.")
+        XCTAssertTrue((consequence.value as? String)?.contains("stays at 9:30 AM") == true)
         XCTAssertGreaterThanOrEqual(continueToGoals.frame.height, 44)
+        attachScreenScreenshot(named: "06-capture-review-accessibility-top-dark")
 
-        if continueToGoals.isHittable == false {
+        app.terminate()
+        launch("cnc-capture-review-accessibility-action-dark")
+
+        let actionCurrent = element("cnc-review-current")
+        let actionConsequence = element("cnc-review-consequence")
+        let actionPrimary = element("cnc-review-continue-goals")
+        let actionSecondary = element("cnc-review-change")
+        assertExists([
+            actionCurrent,
+            actionConsequence,
+            actionPrimary,
+            actionSecondary
+        ])
+        for _ in 0..<4 where actionConsequence.isHittable == false {
             element("cnc-capture-review").swipeUp()
         }
-        XCTAssertTrue(continueToGoals.isHittable)
-        XCTAssertTrue(change.exists)
+        XCTAssertTrue(actionConsequence.isHittable)
+        XCTAssertLessThanOrEqual(
+            actionConsequence.frame.maxY,
+            actionPrimary.frame.minY + 1
+        )
+        XCTAssertTrue(actionPrimary.isHittable)
+        XCTAssertTrue(actionSecondary.isHittable)
+        XCTAssertGreaterThanOrEqual(actionPrimary.frame.minY, app.frame.minY)
+        XCTAssertLessThanOrEqual(actionPrimary.frame.maxY, app.frame.maxY)
+        XCTAssertGreaterThanOrEqual(actionSecondary.frame.minY, app.frame.minY)
+        XCTAssertLessThanOrEqual(actionSecondary.frame.maxY, app.frame.maxY)
         XCTAssertTrue(element("cnc-capture-cancel").isHittable)
+        assertActionRegion(primary: actionPrimary, secondary: actionSecondary)
+        attachAppScreenshot(named: "07-capture-review-accessibility-action-dark")
         assertNoExcludedRenderedTerminology()
     }
 
@@ -279,6 +317,20 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
 
     private func element(_ identifier: String) -> XCUIElement {
         app.descendants(matching: .any).matching(identifier: identifier).firstMatch
+    }
+
+    private func attachScreenScreenshot(named name: String) {
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
+    private func attachAppScreenshot(named name: String) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     private func assertExists(
@@ -333,6 +385,20 @@ final class CaptureNativeCalibrationR00HostUITests: XCTestCase {
                 line: line
             )
         }
+    }
+
+    private func assertActionRegion(
+        primary: XCUIElement,
+        secondary: XCUIElement,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        assertExists([primary, secondary], file: file, line: line)
+        XCTAssertTrue(primary.isHittable, file: file, line: line)
+        XCTAssertTrue(secondary.isHittable, file: file, line: line)
+        XCTAssertFalse(primary.frame.intersects(secondary.frame), file: file, line: line)
+        XCTAssertGreaterThanOrEqual(primary.frame.height, 44, file: file, line: line)
+        XCTAssertGreaterThanOrEqual(secondary.frame.height, 44, file: file, line: line)
     }
 
     private func assertVerticalOrder(

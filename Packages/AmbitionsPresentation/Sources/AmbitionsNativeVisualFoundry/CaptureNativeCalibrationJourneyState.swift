@@ -24,6 +24,7 @@ public enum CaptureNativeCalibrationRootPhase: Equatable, Sendable {
 }
 
 public enum CaptureNativeCalibrationRoute: Hashable, Sendable {
+    case clarification
     case review
 }
 
@@ -147,6 +148,7 @@ public struct CaptureNativeCalibrationJourneyState: Equatable, Sendable {
             if clarificationCount == 0 {
                 clarificationCount = 1
             }
+            navigationPath = [.clarification]
             focusAnchor = .clarificationResponse
             return true
         case .unsupported:
@@ -166,6 +168,7 @@ public struct CaptureNativeCalibrationJourneyState: Equatable, Sendable {
             focusAnchor = .clarificationResponse
             return false
         }
+        navigationPath = []
         phase = .boundedMeaning
         focusAnchor = .boundedMeaningReview
         return true
@@ -190,8 +193,13 @@ public struct CaptureNativeCalibrationJourneyState: Equatable, Sendable {
     public mutating func restoreNavigationPath(_ path: [CaptureNativeCalibrationRoute]) {
         let previousRoute = navigationPath.last
         navigationPath = path
-        if path.last == .review {
+        if path.last == .clarification {
+            focusAnchor = .clarificationResponse
+        } else if path.last == .review {
             focusAnchor = .reviewPrimaryAction
+        } else if previousRoute == .clarification {
+            phase = .expression
+            focusAnchor = .expressionEditor
         } else if previousRoute == .review {
             focusAnchor = .boundedMeaningReview
         }
