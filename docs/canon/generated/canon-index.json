@@ -1,5 +1,5 @@
 {
-  "canon_digest": "ace9594c560cb23814ad4280e4da5a6eaf736d3bacf9516319495ddb35b2d916",
+  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
   "canon_revision": 2,
   "documents": [
     {
@@ -2534,10 +2534,6 @@
       "kind": "global",
       "owner_domain": "global-search",
       "owns_concepts": [
-        "global.search.answer-evidence",
-        "global.search.ask",
-        "global.search.ask-activation-gate",
-        "global.search.ask-command-contract",
         "global.search.canonical-actions",
         "global.search.capture-handoff",
         "global.search.command-contract",
@@ -2550,7 +2546,6 @@
         "global.search.inspect",
         "global.search.placement",
         "global.search.presentation",
-        "global.search.session-history",
         "global.search.visual-authority"
       ],
       "path": "specifications/global/search.md",
@@ -2558,7 +2553,7 @@
         {
           "concept": "global.search.identity",
           "id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
-          "line": 1228,
+          "line": 971,
           "modality": "MUST",
           "scope": "Global Search presentation and behavior",
           "source_owners": [
@@ -2576,7 +2571,7 @@
             "CLAIM-STB-0306",
             "SPEC-GLOBAL-SEARCH-IDENTITY-001"
           ],
-          "title": "Unified local Find, Ask, Act, and Inspect",
+          "title": "Deterministic local Find, Act, and Inspect",
           "verification": [
             "SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001"
           ]
@@ -2584,9 +2579,9 @@
         {
           "concept": "global.search.find",
           "id": "SPEC-GLOBAL-SEARCH-FIND-001",
-          "line": 1244,
+          "line": 982,
           "modality": "MUST",
-          "scope": "Exact and natural-language retrieval before optional synthesis",
+          "scope": "Exact, prefix, date, status, context, and approved semantic retrieval",
           "source_owners": [
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -2604,80 +2599,11 @@
           ]
         },
         {
-          "concept": "global.search.ask",
-          "id": "SPEC-GLOBAL-SEARCH-ASK-001",
-          "line": 1260,
-          "modality": "MAY",
-          "scope": "Conversational interpretation and synthesis inside Global Search",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/global/search.md",
-          "supersedes": [],
-          "title": "Optional grounded on-device synthesis",
-          "verification": [
-            "SCENARIO-SEARCH-ASK-GROUNDING-001",
-            "SCENARIO-SEARCH-ASK-UNAVAILABLE-001"
-          ]
-        },
-        {
-          "concept": "global.search.ask-command-contract",
-          "id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
-          "line": 1271,
-          "modality": "MUST",
-          "scope": "Optional on-device synthesis, interruption, fallback, evidence inspection, and Capture transition",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/global/search.md",
-          "supersedes": [],
-          "title": "Ask controls preserve deterministic Search and owner boundaries",
-          "verification": [
-            "SCENARIO-SEARCH-ASK-GROUNDING-001",
-            "SCENARIO-SEARCH-ASK-UNAVAILABLE-001",
-            "SCENARIO-SEARCH-CAPTURE-HANDOFF-001",
-            "SCENARIO-SEARCH-SESSION-HISTORY-001"
-          ]
-        },
-        {
-          "concept": "global.search.ask-activation-gate",
-          "id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
-          "line": 1282,
-          "modality": "MUST",
-          "scope": "Ask and Search-to-Capture handoff activation",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/global/search.md",
-          "supersedes": [],
-          "title": "Ask remains disabled until executable safeguards pass",
-          "verification": [
-            "TEST-SEARCH-ASK-ACTIVATION-001",
-            "TEST-SEARCH-NO-EGRESS-001",
-            "TEST-SEARCH-DETERMINISTIC-FALLBACK-001"
-          ]
-        },
-        {
           "concept": "global.search.input",
           "id": "SPEC-GLOBAL-SEARCH-INPUT-001",
-          "line": 1300,
+          "line": 998,
           "modality": "MUST",
-          "scope": "Query entry, exact retrieval, questions, action intent, and progressive answer presentation",
+          "scope": "Query entry, exact retrieval, natural-language queries, and action intent",
           "source_owners": [
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -2688,60 +2614,17 @@
           ],
           "source_path": "specifications/global/search.md",
           "supersedes": [],
-          "title": "One input, immediate results, progressive enhancement",
+          "title": "One input, immediate deterministic results",
           "verification": [
             "SCENARIO-SEARCH-UNIFIED-INPUT-001"
           ]
         },
         {
-          "concept": "global.search.answer-evidence",
-          "id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
-          "line": 1311,
-          "modality": "MUST",
-          "scope": "Every result, substantive answer, interpretation, and action proposal",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/global/search.md",
-          "supersedes": [],
-          "title": "Retrieved, inferred, and proposed states remain distinct",
-          "verification": [
-            "SCENARIO-SEARCH-ANSWER-EVIDENCE-001",
-            "PROOF-SEARCH-ANSWER-ACCESSIBILITY-001"
-          ]
-        },
-        {
-          "concept": "global.search.session-history",
-          "id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001",
-          "line": 1322,
-          "modality": "MUST",
-          "scope": "Questions, answers, proposals, derived objects, dismissal, interruption, and explicit persistence",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/global/search.md",
-          "supersedes": [],
-          "title": "Conversational history is ephemeral by default",
-          "verification": [
-            "SCENARIO-SEARCH-SESSION-HISTORY-001"
-          ]
-        },
-        {
           "concept": "global.search.inspect",
           "id": "SPEC-GLOBAL-SEARCH-INSPECT-001",
-          "line": 1333,
+          "line": 1009,
           "modality": "MUST",
-          "scope": "Search results, answers, interpretations, and action proposals",
+          "scope": "Search results, evidence, and action proposals",
           "source_owners": [
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -2760,7 +2643,7 @@
         {
           "concept": "global.search.capture-handoff",
           "id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
-          "line": 1344,
+          "line": 1020,
           "modality": "MUST",
           "scope": "Any Search input, result, answer, or proposal that expresses creation intent",
           "source_owners": [
@@ -2781,9 +2664,9 @@
         {
           "concept": "global.search.presentation",
           "id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
-          "line": 1359,
+          "line": 1035,
           "modality": "MUST NOT",
-          "scope": "Search layout, answer composition, conversation affordances, branding, and interaction rhythm",
+          "scope": "Search layout, result evidence, action affordances, branding, and interaction rhythm",
           "source_owners": [
             "Native/Ambitions/Stage/",
             "Native/Ambitions/Core/LocalRuntimeOS/Search/",
@@ -2794,7 +2677,7 @@
           ],
           "source_path": "specifications/global/search.md",
           "supersedes": [],
-          "title": "Ambitions-native understanding, not generic AI theater",
+          "title": "Evidence-led Search, not generic AI theater",
           "verification": [
             "REVIEW-SEARCH-PRESENTATION-001",
             "PROOF-SEARCH-PRESENTATION-ACCESSIBILITY-001"
@@ -2803,7 +2686,7 @@
         {
           "concept": "global.search.first-viewport",
           "id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
-          "line": 1370,
+          "line": 1046,
           "modality": "MUST",
           "scope": "Search first visible and semantic viewport",
           "source_owners": [
@@ -2824,7 +2707,7 @@
         {
           "concept": "global.search.index-actions",
           "id": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
-          "line": 1385,
+          "line": 1061,
           "modality": "MUST",
           "scope": "Index, ranking, result presentation, actions, and inspection",
           "source_owners": [
@@ -2846,7 +2729,7 @@
         {
           "concept": "global.search.visual-authority",
           "id": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
-          "line": 1396,
+          "line": 1072,
           "modality": "MUST",
           "scope": "Search overlay, results, actions, and inspection visuals",
           "source_owners": [
@@ -2867,7 +2750,7 @@
         {
           "concept": "global.search.index-ranking",
           "id": "SPEC-GLOBAL-SEARCH-INDEX-001",
-          "line": 1411,
+          "line": 1087,
           "modality": "MUST",
           "scope": "Local search index",
           "source_owners": [
@@ -2888,7 +2771,7 @@
         {
           "concept": "global.search.canonical-actions",
           "id": "SPEC-GLOBAL-SEARCH-ACTIONS-001",
-          "line": 1422,
+          "line": 1098,
           "modality": "MUST",
           "scope": "Search result actions",
           "source_owners": [
@@ -2909,7 +2792,7 @@
         {
           "concept": "global.search.command-contract",
           "id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
-          "line": 1438,
+          "line": 1114,
           "modality": "MUST",
           "scope": "Local query, filters, selection, owner action preview, Trust inspection, stale/deleted/privacy-suppressed results, derived-index rebuild, semantic Undo handoff, focus, offline use, and accessibility",
           "source_owners": [
@@ -2930,7 +2813,7 @@
         {
           "concept": "global.search.placement",
           "id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
-          "line": 1544,
+          "line": 1212,
           "modality": "MUST",
           "scope": "Global Search placement",
           "source_owners": [
@@ -3970,65 +3853,6 @@
       ],
       "spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
       "title": "Search Find Act Inspect"
-    },
-    {
-      "depends_on": [
-        "CONSTITUTION",
-        "GLOBAL-SEARCH",
-        "JOURNEY-SEARCH-FIND-ACT-INSPECT",
-        "GLOBAL-CAPTURE",
-        "GLOBAL-TRUST-INSPECTION",
-        "APP-NAVIGATION",
-        "APP-DEEP-LINKING"
-      ],
-      "inherits": [
-        "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
-        "LAW-LOCAL-AUTHORITY-001",
-        "CONTROL-MATERIAL-CONFIRMATION-001",
-        "LAW-RUNTIME-DURABLE-SUCCESS-001",
-        "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
-      ],
-      "kind": "journey",
-      "owner_domain": "journey-search-find-ask-act-inspect",
-      "owns_concepts": [
-        "journey.search.find-ask-act-inspect"
-      ],
-      "path": "specifications/journeys/search-find-ask-act-inspect.md",
-      "requirements": [
-        {
-          "concept": "journey.search.find-ask-act-inspect",
-          "id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
-          "line": 19,
-          "modality": "MUST",
-          "scope": "Unified Search input, immediate deterministic Find, optional grounded Ask, canonical-owner Act, Capture handoff, contextual Inspect, interruption, and deterministic offline fallback",
-          "source_owners": [
-            "Native/Ambitions/Stage/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-            "Native/Ambitions/Composer/Capture/",
-            "Native/Ambitions/Trust/",
-            "Native/Ambitions/Quality/"
-          ],
-          "source_path": "specifications/journeys/search-find-ask-act-inspect.md",
-          "supersedes": [],
-          "title": "One input, grounded understanding, owner-routed consequence",
-          "verification": [
-            "SCENARIO-JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
-          ]
-        }
-      ],
-      "source_owners": [
-        "Native/Ambitions/Stage/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
-        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
-        "Native/Ambitions/Composer/Capture/",
-        "Native/Ambitions/Trust/",
-        "Native/Ambitions/Quality/"
-      ],
-      "spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT",
-      "title": "Search Find Ask Act Inspect"
     },
     {
       "depends_on": [

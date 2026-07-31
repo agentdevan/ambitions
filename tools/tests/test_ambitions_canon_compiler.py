@@ -203,7 +203,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         cls.outputs = render_outputs(cls.compilation)
 
     def test_repository_compiles_as_complete_product_canon(self) -> None:
-        self.assertEqual(len(self.compilation.documents), 66)
+        self.assertEqual(len(self.compilation.documents), 65)
         self.assertGreaterEqual(len(self.compilation.requirements), 450)
         self.assertGreaterEqual(self.compilation.ux_screen_count, 30)
         self.assertGreaterEqual(self.compilation.visual_contract_count, 25)
@@ -287,7 +287,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             visual_schema["properties"]["coverage"]["properties"][
                 "visual_requirement_count"
             ]["const"],
-            343,
+            339,
         )
 
     def test_active_ux_taxonomy_matches_named_variants(self) -> None:
@@ -1126,7 +1126,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             self.outputs["generated/requirement-traceability.json"]
         )
         self.assertEqual(payload["canon_digest"], self.compilation.canon_digest)
-        self.assertEqual(len(payload["requirements"]), 466)
+        self.assertEqual(len(payload["requirements"]), 460)
         self.assertEqual(
             {
                 item["requirement_id"]

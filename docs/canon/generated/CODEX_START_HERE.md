@@ -3,8 +3,8 @@
 > Generated navigation for Ambitions product canon. Do not edit by hand.
 
 - Canon revision: `2`
-- Documents: `66`
-- Requirements: `466`
+- Documents: `65`
+- Requirements: `460`
 
 Canon defines product and engineering direction. It does not authorize
 repository work and creates no task, pack, signature, approval, attestation,

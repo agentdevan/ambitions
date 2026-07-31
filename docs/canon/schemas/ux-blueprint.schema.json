@@ -79,8 +79,8 @@
     },
     "requirement_dispositions": {
       "type": "array",
-      "minItems": 466,
-      "maxItems": 466,
+      "minItems": 460,
+      "maxItems": 460,
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/requirementDisposition"}
     },
