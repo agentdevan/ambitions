@@ -4,7 +4,9 @@
 
 `AVF-CAPTURE-S07-R01-NATIVE-R01 — Atmosphere Composer Fidelity Restoration`
 
-Status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_CAPTURE_CALIBRATION_EVIDENCE`
+
+Closure: `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Parent provisional authority: `AVF-CAPTURE-S07-R01 — Bounded Adaptive Meaning Fold`
 
@@ -12,9 +14,9 @@ Installed closure: `VC10-CAPTURE-S01 — Full-Screen Adaptive Meaning Passage`
 
 Fixture: `capture-flagship/bounded-adaptive-meaning-passage/v1`
 
-Captured source: `8e645c4c67534096b27ef5979b6db71796ee0350`
+Captured source after clean rebase: `ac96ddaf595146263e6f30e5c48811b8a16da193`
 
-This record advances the existing bounded fixture-driven Capture package from R00 to R01. It restores the native Atmosphere Composer fidelity while preserving the accepted R00 interaction and semantic architecture. It does not accept Capture automatically, activate Capture Routing Calibration, install production Capture, or authorize runtime integration.
+The owner accepts this bounded fixture-driven R01 package as provisional Capture calibration evidence. The acceptance preserves the R00 interaction and semantic architecture carried into the Atmosphere Composer fidelity restoration. It closes only bounded Capture native calibration; it does not activate Capture Routing Calibration, install production Capture, authorize runtime integration, begin FR-2, or authorize production reconstruction.
 
 ## Preserve exactly
 
@@ -61,8 +63,18 @@ This record advances the existing bounded fixture-driven Capture package from R0
 
 - Capture Routing Calibration remains inactive and dependency-gated.
 - Production interpretation, destination resolution, owner transfer, routing, mutation, persistence, and relaunch recovery remain unproven.
-- Final material, motion, Light appearance, shell coexistence, and physical-device quality remain unproven.
+- Final flagship enrichment across material, typography, motion, haptics, and Light appearance remains unresolved.
+- Shell and Crowned Edge Dock coexistence, final shared components, APIs, and tokens remain unresolved.
+- Physical-device quality remains unproven.
 - Manual assistive-technology, RTL, and long-localization behavior remain unproven.
+
+## Explicitly not frozen
+
+- Exact composer, fold, review, recovery, action-region, typography, spacing, separator, corner, and material geometry.
+- Final graphite/mineral recipes, violet–indigo values, motion, haptics, and Light appearance.
+- Production interpretation, routing, persistence, owner transfer, canonical mutation, settlement, Receipt, Undo, or relaunch recovery.
+- Production shell, Crowned Edge Dock, shared presentation component, final component APIs, or final tokens.
+- Manual VoiceOver, Switch Control, Voice Control, Full Keyboard Access, RTL, long localization, physical-device quality, or production screenshot baselines.
 
 ### FR-2 carry-forward
 
@@ -103,7 +115,7 @@ All captures are 1206 × 2622 pixels from the `VC14 Capture R01 iPhone 17 Pro` S
 
 ## Proof ceiling
 
-This is bounded provisional Simulator evidence awaiting owner review. It is not accepted calibration, final, production-ready, a production screenshot baseline, runtime integration, production routing, canon installation, shell proof, or implementation authorization.
+This is owner-accepted bounded provisional Simulator calibration evidence. It is not final, production-ready, a production screenshot baseline, runtime integration, production routing, canon installation, shell proof, or implementation authorization. Remaining flagship richness and cross-root beauty work moves to `FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS`, which is the next phase and was not begun in this closeout. Production reconstruction remains blocked.
 
 - Fixture identity: `capture-flagship/bounded-adaptive-meaning-passage/v1`
 - Simulator evidence only

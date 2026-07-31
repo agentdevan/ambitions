@@ -4,11 +4,11 @@
 
 Status: `PASS`
 
-Package review status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
+Package review status: `ACCEPTED_AS_PROVISIONAL_CAPTURE_CALIBRATION_EVIDENCE`
 
 Native proving ID: `AVF-CAPTURE-S07-R01-NATIVE-R01`
 
-Captured source: `8e645c4c67534096b27ef5979b6db71796ee0350`
+Captured source after clean rebase: `ac96ddaf595146263e6f30e5c48811b8a16da193`
 
 ## Native package and fixture host
 
@@ -60,7 +60,22 @@ This is automated Simulator geometry, identifier, order, scrolling, and hitabili
 - `git diff --check`: pass.
 - Introduced-range Gitleaks: pass.
 - Primary-worktree Xcode user-scheme hashes: unchanged.
-- Current `main` remains `0c1451d74ca73e87a0a95008b3d0adde5c001f1a`; this branch was not rebased.
+- R01 validation originally ran before the acceptance rebase; acceptance-specific rebase and evidence-integrity checks are recorded below.
 - Final worktree inspection: pass; branch clean after the evidence commit.
 
-Accepted Search source, screenshots, behavior, and evidence remained untouched. No production Capture, routing, canon, accepted root evidence, final component, final token, operating-plan document, or production app entry changed. No canon compilation, external-link validation, production Capture suite, Search suite, broad audit, FR-2 work, cross-root rendering, or production reconstruction ran.
+Accepted Search source, screenshots, behavior, and evidence remained untouched. No production Capture, routing, canon, accepted root evidence, final component, final token, or production app entry changed. No canon compilation, external-link validation, production Capture suite, Search suite, broad audit, FR-2 work, cross-root rendering, or production reconstruction ran.
+
+## Acceptance closeout validation
+
+- Original accepted feature HEAD: `ba4bcaca772ddb80eec6d0c1015f007695079292`.
+- Clean rebase baseline: `origin/main = 0c1451d74ca73e87a0a95008b3d0adde5c001f1a`.
+- Rebased R01 evidence HEAD before the acceptance record: `bb6cc30cc6e7d6d15289288977837ffaddb27149`.
+- Rebased implementation source: `ac96ddaf595146263e6f30e5c48811b8a16da193`.
+- The six Capture Swift source/test files are byte-identical between the accepted pre-rebase and rebased implementation commits.
+- All seven accepted PNGs retain their R01 SHA-256 hashes and 1206 × 2622 dimensions.
+- Rendered product copy, fixture truth, interaction behavior, and accessibility composition remain unchanged.
+- The acceptance delta is limited to nine existing documentation/metadata records; it changes no Swift, tests, PNGs, canon, production source, routes, components, tokens, or app entry.
+- The two existing FR-1/FR-2 planning records change only to record Capture closure and FR-2 as next but not begun.
+- Local Markdown links, positive-authorization scan, `git diff --check`, and acceptance changed-path audit pass.
+- No Xcode, Simulator, screenshot capture, build, or test lane reran because the clean rebase introduced no implementation change.
+- Capture Routing Calibration remains inactive. FR-2 and production reconstruction did not begin.

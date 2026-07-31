@@ -8,7 +8,9 @@ Parent: `AVF-CAPTURE-S07-R01 — Bounded Adaptive Meaning Fold`
 
 Installed closure: `VC10-CAPTURE-S01 — Full-Screen Adaptive Meaning Passage`
 
-Status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_CAPTURE_CALIBRATION_EVIDENCE`
+
+Closure: `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Fixture: `capture-flagship/bounded-adaptive-meaning-passage/v1`
 
@@ -30,4 +32,4 @@ R00 was not accepted because its visual expression read as a generic form and do
 
 The revision creates no production interpretation, routing, destination resolution, mutation, persistence, owner transfer, Receipt, Undo, settlement, shell integration, component API, token, or canon authority. Capture Routing Calibration remains inactive. `APPROVED_FOR_SWIFTUI = false`.
 
-Passing validation does not accept Capture automatically. Owner review remains required.
+The owner accepts R01 as bounded provisional Capture calibration evidence. This acceptance preserves the rendered UI, fixture truth, screenshots, interaction behavior, and accessibility composition unchanged. It closes only the bounded native calibration; `FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS` is next and was not begun here. Production reconstruction remains blocked.

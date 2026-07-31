@@ -2,9 +2,9 @@
 
 # Flagship Enrichment and Cross-Root Synthesis Charter
 
-Status: `QUEUED_AFTER_CAPTURE / PROVISIONAL_VISUAL_EXPLORATION / PRODUCTION_RECONSTRUCTION_BLOCKED`
+Status: `NEXT_NOT_BEGUN / PROVISIONAL_VISUAL_EXPLORATION / PRODUCTION_RECONSTRUCTION_BLOCKED`
 
-Entry gate: accepted and synchronized Capture closeout.
+Entry gate: satisfied by accepted and synchronized Capture closeout. FR-2 work has not begun.
 
 Exit does not authorize production implementation or `APPROVED_FOR_SWIFTUI`.
 
@@ -50,8 +50,8 @@ system, component API, runtime owner, or cutover path.
 
 ## Inputs
 
-FR-2 requires the following inputs. Capture is an input only after its active
-campaign has reached owner acceptance and synchronized closeout.
+FR-2 requires the following inputs. Capture has reached owner acceptance and
+synchronized closeout under its bounded proof ceiling.
 
 - accepted Today calibration;
 - accepted Goals calibration;
@@ -280,18 +280,14 @@ navigation ownership, capability boundaries, current runtime reality,
 flagship-reconstruction baseline, and accepted Foundry evidence before any
 production contract can be proposed.
 
-## Capture non-interruption and closeout handoff
+## Capture closeout handoff
 
-Capture continues unchanged under its approved current scope. This charter and
-the accompanying plan update do not modify Capture acceptance criteria or
-implementation. The active Capture branch is not rebased or interrupted now.
-
-When Capture reaches owner closeout, it must reconcile onto the updated `main`
-before merge. Capture closeout must record the evidence, protected
-characteristics, unresolved visual opportunities, and architecture-sensitive
-assumptions needed as FR-2 inputs. After synchronized Capture closeout, the
-next campaign is FR-2. Broad production wiring and isolated root campaigns
-remain prohibited.
+Capture reconciled onto the updated `main` baseline without changing accepted
+UI, screenshots, fixture truth, source behavior, tests, or accessibility
+composition. Its accepted evidence, protected characteristics, unresolved
+visual opportunities, architecture-sensitive assumptions, and proof ceiling
+are FR-2 inputs. FR-2 is next but was not begun during Capture closeout. Broad
+production wiring and isolated root campaigns remain prohibited.
 
 ## Proof and authority boundary
 

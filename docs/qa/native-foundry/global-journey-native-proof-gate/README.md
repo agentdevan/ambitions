@@ -1,8 +1,10 @@
 # Search and Capture native-proof gate
 
-Status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
+Status: `ACCEPTED_AS_PROVISIONAL_CAPTURE_CALIBRATION_EVIDENCE`
 
 Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
+
+Closure: `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 This record decides whether the current Search and Capture evidence is sufficient for cross-root synthesis. It does not reopen Today, Goals, Time, or You, and it does not authorize implementation, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
@@ -11,7 +13,7 @@ This record decides whether the current Search and Capture evidence is sufficien
 The proof gate is accepted for sequencing purposes. The selected sequence is **Search first, with the minimum shared presentation substrate embedded in the Search proving slice**.
 
 - No standalone shared-substrate implementation phase, evidence package, component library, or acceptance gate is created.
-- Capture began from a fresh synchronized branch after Search acceptance and has advanced to the bounded [AVF-CAPTURE-S07-R01-NATIVE-R01](../../evidence/2026-07-31-capture-bounded-adaptive-meaning-passage-r00/README.md) owner-review gate. R00 interaction and semantic architecture survived; R01 restores the Atmosphere Composer fidelity without activating routing or mutation.
+- Capture began from a fresh synchronized branch after Search acceptance. The owner accepts bounded [AVF-CAPTURE-S07-R01-NATIVE-R01](../../evidence/2026-07-31-capture-bounded-adaptive-meaning-passage-r00/README.md) as provisional calibration evidence. R00 interaction and semantic architecture survived; R01 restores the Atmosphere Composer fidelity without activating routing or mutation.
 - The bounded Search proving package has advanced to [AVF-SEARCH-D07-R01-NATIVE-R01](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md). R00 was not accepted; its interaction architecture survived into this narrow product-language and Accessibility 2 restoration.
 - Owner review accepts R01 as bounded provisional Search calibration evidence. This does not authorize Capture, production Search, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
 
@@ -69,7 +71,7 @@ The following was the historical pre-proof evidence floor before the accepted R0
 - The current app contains Stage-owned Search and Capture implementations, focused tests, and previously recorded Simulator screenshots. The repository continues to label their device and acceptance proof as pending in [Known Issues](../../KNOWN_ISSUES.md) and the [frontend journey registry](../../../audits/frontend-journey-registry.md).
 - The [frontend remediation ledger](../../frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md) records earlier Simulator execution for Capture composition and the light/dark overlay matrix. Those artifacts establish implementation observations only; they were not accepted as Search or Capture Foundry calibration evidence.
 
-That historical statement is superseded for Search by the R01 owner acceptance and for Capture by the bounded R01 native proving package. Capture remains unaccepted pending owner review.
+That historical statement is superseded for both Search and Capture by their bounded R01 owner acceptances. Both remain provisional Simulator calibration evidence rather than production proof.
 
 ## 3. Search proof inventory
 
@@ -98,29 +100,29 @@ Current implementation references include the full-height [activated Capture sea
 
 | Proof claim | Classification | Current evidence and limit |
 |---|---|---|
-| Full-screen temporary non-root presentation | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Focused UI tests previously asserted a Stage takeover, hidden root dock, keyboard clearance, and recovered height. The artifacts are Simulator implementation proof, not accepted Capture calibration evidence. |
-| Originating-root relationship | `PARTIALLY_PROVEN` | Capture carries an `entrySource` into its local source label. Most focused proof uses a launch URL or command sheet and does not preserve a complete originating root/depth/focus tuple. |
-| Initial expression focus and keyboard behavior | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | The activated seam requests focus and earlier UI execution captured the native keyboard and clearance. No accepted journey package owns that proof. |
-| Retained original expression | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Placement review displays the original text, and editing is not cleared before successful save. The behavior is implementation evidence only. |
-| Bounded interpretation | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Deterministic draft routing produces a bounded destination, object type, time fit, privacy posture, and change choices. The proving ceiling must remain the supported synthetic inputs; arbitrary semantic interpretation is outside scope. |
-| One clarification state only when required | `UNPROVEN` | A clarification model and rendering primitive exist, but the active global seam and its focused tests do not prove one necessary clarification, its correction, and the absence of gratuitous clarification. |
-| Consequential review | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | The active placement review retains captured text, destination, time fit, goal/area, local posture, alternatives, and pre-save actions. It lacks accepted owner review as a Capture Foundry journey. |
-| Accept | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Earlier focused UI execution accepted the proposal and observed a local save status. That proves the current implementation path only. |
-| Change | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Destination choices are visible and a focused UI test changed the selected route before acceptance. |
-| Cancel | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Proposal cancellation returns to the draft without saving in current source. It was not separately captured and accepted. |
-| Owner transfer without Capture-owned mutation | `DEFERRED_TO_PRODUCTION_RECONCILIATION` | Current acceptance executes a Capture command and can create a local Capture before later routing. A fixture can prove a prepared handoff boundary, but whether each destination owner receives and commits the canonical object requires production authority reconciliation. |
-| Draft preservation through cancellation or failure | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | Proposal cancellation retains the in-session expression and failed saves retain editable text. Exact preservation through full dismissal, process loss, or relaunch is not established. |
-| Exact dismissal and return | `PARTIALLY_PROVEN` | Dismissal reveals the underlying selected root, but exact route depth, scroll position, selection, and invoking-control focus restoration are not proven. |
-| Dynamic Type recomposition | `PROVEN_BY_CURRENT_NATIVE_IMPLEMENTATION_ONLY` | A previous Accessibility XL UI path exercised input and proposal controls. No accepted Capture semantic-equivalent evidence or complete reading-order proof exists. |
-| Semantic focus order | `UNPROVEN` | Accessibility labels and containment exist, but no focused ordered transcript proves expression, interpretation, clarification, review consequence, actions, and recovery order. |
+| Full-screen temporary non-root presentation | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | R01 proves full-screen fixture presentation with neutral-origin chrome suppressed. Production shell coexistence remains unproven. |
+| Originating-root relationship | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | The fixture preserves the neutral origin and Capture-trigger return target in-session. Production route-depth restoration remains deferred. |
+| Initial expression focus and keyboard behavior | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | R01 proves initial editor focus, native keyboard containment, and keyboard-safe composition. |
+| Retained original expression | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Original words remain retained through interpretation, clarification, review, editing, recovery, and dismissal choices. |
+| Bounded interpretation | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Deterministic provisional Goals meaning is proven for the bounded fixture only. Arbitrary interpretation remains outside scope. |
+| One clarification state only when required | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Only the ambiguous fixture receives exactly one targeted clarification; the ordinary fixture receives none. |
+| Consequential review | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | R01 preserves proposed meaning, original words, Time context, unchanged accepted truth, consequence, and the owner-handoff boundary. |
+| Accept | `DEFERRED_TO_PRODUCTION_RECONCILIATION` | The accepted fixture stops at `Continue to Goals` preparation and performs zero canonical mutations. Production acceptance and settlement are not proven. |
+| Change | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Edit and Change paths restore retained expression and clarification state without mutation. |
+| Cancel | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Empty Cancel, non-empty close choice, framework Back, global Cancel, and discard return behavior are proven in-session. |
+| Owner transfer without Capture-owned mutation | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | R01 proves fixture-only handoff preparation with zero canonical mutations. Production transfer and owner receipt remain deferred. |
+| Draft preservation through cancellation or failure | `PARTIALLY_PROVEN` | In-session cancellation, editing, and recovery retain the fixture draft. Termination, relaunch, and durable recovery remain unproven. |
+| Exact dismissal and return | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Global dismissal restores the exact neutral origin and Capture-trigger focus in-session. Production shell return remains deferred. |
+| Dynamic Type recomposition | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Accessibility 2 proves ordered native scrolling at top and lower action positions without overlap. |
+| Semantic focus order | `PROVEN_BY_ACCEPTED_NATIVE_EVIDENCE` | Automated identifiers and order assertions prove the bounded semantic sequence. Manual assistive-technology proof remains absent. |
 
-**Capture verdict at the original gate:** Capture had useful current native implementation evidence but required one bounded fixture-driven native proving slice. That slice now exists as R01 and is awaiting owner review; it is not accepted native evidence yet.
+**Capture verdict:** R01 is accepted as sufficient bounded provisional native calibration evidence for later Flagship Enrichment and Cross-Root Synthesis. Production reconciliation remains required.
 
 ## 5. Exact evidence gaps
 
 ### Shared gaps
 
-- Capture now has a bounded Foundry package, fixture contract, and explicit evidence ceiling. It still has no owner acceptance.
+- Capture now has an owner-accepted bounded Foundry package, fixture contract, and explicit evidence ceiling.
 - Search proof uses a neutral fixture origin, not production shell or Crowned Edge Dock integration.
 - Capture reproduced the minimum Search-proven presentation behavior without changing accepted Search. The behavior remains provisional and has not become a final shared component or production API.
 
@@ -132,7 +134,7 @@ Current implementation references include the full-height [activated Capture sea
 
 ### Remaining Capture gaps
 
-- Owner acceptance remains pending; passing R01 validation does not make the package accepted native evidence.
+- Owner acceptance closes bounded native calibration only; it does not establish production capability.
 - Production interpretation, routing, owner transfer, persistence, mutation, permission behavior, and relaunch recovery remain unproven.
 - Production shell/dock coexistence, Light appearance, final material and motion, physical-device quality, manual assistive technologies, RTL, and long localization remain unproven.
 - Capture Routing Calibration remains inactive and dependency-gated.
@@ -142,7 +144,7 @@ Current implementation references include the full-height [activated Capture sea
 | Global journey | Accepted native evidence sufficient for synthesis? | Native proof required? | Reason |
 |---|---|---|---|
 | Search | Yes, bounded provisional calibration | No further Search calibration slice | R01 proves Find, contextual Inspect, owner-routed Act preparation, result states, presentation/return, and Accessibility 2 within its explicit ceiling. |
-| Capture | No | Completed; awaiting owner review | R01 now proves the bounded clarification, exact return, in-session recovery, zero-mutation handoff preparation, restored Atmosphere Composer structure, and accessibility order/action geometry in fixtures. Owner acceptance and production reconciliation remain open. |
+| Capture | Yes, bounded provisional calibration | No further isolated Capture calibration slice | R01 proves the bounded clarification, exact return, in-session recovery, zero-mutation handoff preparation, restored Atmosphere Composer structure, and accessibility order/action geometry in fixtures. Production reconciliation remains open. |
 
 Search acceptance does not close Capture or production-reconciliation gaps.
 
@@ -213,7 +215,7 @@ Search exercised the provisional substrate first because it is read-only and exp
 
 ### Program-wide
 
-- The bounded Capture package is Foundry-only fixture and Simulator evidence. No production SwiftUI, runtime integration, canon modification, or cross-root synthesis is authorized by this gate.
+- The accepted bounded Capture package is Foundry-only fixture and Simulator evidence. No production SwiftUI, runtime integration, canon modification, or production reconstruction is authorized by this gate.
 - No existing root calibration is reopened.
 - `APPROVED_FOR_SWIFTUI` remains false.
 
@@ -230,10 +232,12 @@ Search exercised the provisional substrate first because it is read-only and exp
 
 ## 12. Current owner gate
 
-The owner accepts the bounded Search R01 proving slice as provisional calibration evidence, and Search calibration remains provisionally closed. Capture R01 is implemented only as a bounded fixture-driven Foundry slice and now awaits separate owner review.
+The owner accepts the bounded Search and Capture R01 proving slices as provisional calibration evidence. Both calibrations are provisionally closed. `FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS` is next and was not begun by this closeout.
 
-Final status: `READY_FOR_OWNER_CAPTURE_NATIVE_R01_REVIEW`
+Final status: `ACCEPTED_AS_PROVISIONAL_CAPTURE_CALIBRATION_EVIDENCE`
 
 Closure: `SEARCH_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
+
+Closure: `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`
 
 Authorization: `APPROVED_FOR_SWIFTUI = false`

@@ -5,7 +5,7 @@
   "parent_direction": "AVF-CAPTURE-S07-R01",
   "installed_closure": "VC10-CAPTURE-S01",
   "fixture_id": "capture-flagship/bounded-adaptive-meaning-passage/v1",
-  "capture_source_sha": "8e645c4c67534096b27ef5979b6db71796ee0350",
+  "capture_source_sha": "ac96ddaf595146263e6f30e5c48811b8a16da193",
   "device": "VC14 Capture R01 iPhone 17 Pro Simulator",
   "device_udid": "5F93135F-DB04-41C9-81FD-F8272224994B",
   "os": "iOS 26.5 (23F77)",

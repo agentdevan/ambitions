@@ -2,7 +2,7 @@
 
 # Reconciled Flagship Reconstruction Plan
 
-Status: Current planning authority; `CAPTURE_NATIVE_CALIBRATION_ACTIVE / FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS_QUEUED / PRODUCTION_RECONSTRUCTION_BLOCKED`
+Status: Current planning authority; `CAPTURE_NATIVE_CALIBRATION_PROVISIONALLY_CLOSED / FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS_NEXT_NOT_BEGUN / PRODUCTION_RECONSTRUCTION_BLOCKED`
 Date: 2026-07-31
 Baseline: `e028eefbc18f9af2deb1b14beacd2a0eb0e5b40c` or later on `main`
 Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
@@ -11,9 +11,8 @@ Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-deci
 
 This plan replaces the active sequencing in the historical frontend execution
 ledger. It consumes the reconciled canon and ADRs; it does not authorize an
-implementation packet. Search calibration is provisionally closed. Capture
-native calibration is the active campaign and remains under its approved
-scope. The phase immediately after synchronized Capture closeout is
+implementation packet. Search and Capture calibration are provisionally
+closed. The phase immediately after synchronized Capture closeout is
 **FLAGSHIP ENRICHMENT AND CROSS-ROOT SYNTHESIS**, which supersedes the narrower
 planned phrase **Cross-Root Synthesis**.
 
@@ -26,18 +25,18 @@ and enrichment evidence. That evidence is not production SwiftUI approval,
 production runtime proof, a component-library contract, or implementation
 authorization.
 
-Broad production reconstruction is blocked until:
+Broad production reconstruction remains blocked until:
 
-1. Capture closes under its existing approved campaign.
+1. Capture remains closed under its accepted bounded proof ceiling.
 2. Flagship Enrichment and Cross-Root Synthesis completes.
 3. The enriched direction is reconciled with the completed architecture and
    flagship-reconstruction baseline.
 4. A production reconstruction contract is approved.
 
-This is a parallel documentation-only operating-plan update. It does not
-interrupt, narrow, expand, rebase, restart, or modify the active Capture
-campaign, its branch/worktree, implementation, tests, fixtures, screenshots,
-evidence, or status.
+The earlier parallel documentation-only operating-plan update did not modify
+the then-active Capture campaign. Capture has now reconciled onto that updated
+baseline and closed without changing its accepted UI, tests, fixtures,
+screenshots, or proof ceiling.
 
 ## Current calibration status
 
@@ -46,12 +45,12 @@ evidence, or status.
 - Time native calibration: provisionally closed.
 - You native calibration: provisionally closed.
 - Search native calibration: provisionally closed.
-- Capture native calibration: active; not accepted or closed.
-- Flagship Enrichment and Cross-Root Synthesis: queued after Capture closeout.
+- Capture native calibration: provisionally closed with accepted bounded R01 evidence.
+- Flagship Enrichment and Cross-Root Synthesis: next phase; not begun.
 
-The five provisionally closed roots are accepted bounded Foundry calibration
-evidence, not production approval. Capture remains the final active native
-calibration campaign.
+The provisionally closed roots and global journeys are accepted bounded
+Foundry calibration evidence, not production approval. No isolated native
+calibration campaign remains active.
 
 ## Dependency graph
 
@@ -63,9 +62,9 @@ Completed architecture and flagship-reconstruction baseline
   -> Time native calibration [PROVISIONALLY CLOSED]
   -> You native calibration [PROVISIONALLY CLOSED]
   -> Search native calibration [PROVISIONALLY CLOSED]
-  -> Capture native calibration [ACTIVE]
-  -> Capture owner acceptance and synchronized closeout
-  -> Flagship Enrichment and Cross-Root Synthesis
+  -> Capture native calibration [PROVISIONALLY CLOSED]
+  -> Capture owner acceptance and synchronized closeout [COMPLETE]
+  -> Flagship Enrichment and Cross-Root Synthesis [NEXT; NOT BEGUN]
   -> owner-selected enriched provisional visual direction
   -> reconciliation against completed architecture and reconstruction baseline
   -> production reconstruction contract
@@ -87,8 +86,8 @@ No later arrow provides evidence for an earlier dependency.
 
 | Milestone | Current posture | Scope and exit evidence |
 | --- | --- | --- |
-| **FR-1 — Complete Capture native calibration and closeout** | **ACTIVE** | Exit requires owner-accepted bounded Capture evidence; protected characteristics; explicit non-frozen boundaries; architecture-sensitive assumptions; exact proof ceiling; merged and synchronized `main`; `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`; and `APPROVED_FOR_SWIFTUI = false`. |
-| **FR-2 — Flagship Enrichment and Cross-Root Synthesis** | **QUEUED_AFTER_CAPTURE** | Exit requires all charter deliverables; an owner-selected enriched direction; a unified system direction; a reconstruction handoff packet; and no production authorization. |
+| **FR-1 — Complete Capture native calibration and closeout** | **PROVISIONALLY_CLOSED** | Owner-accepted bounded Capture evidence, protected characteristics, non-frozen boundaries, architecture-sensitive assumptions, exact proof ceiling, synchronized `main`, `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`, and `APPROVED_FOR_SWIFTUI = false` are recorded. |
+| **FR-2 — Flagship Enrichment and Cross-Root Synthesis** | **NEXT_NOT_BEGUN** | Entry follows synchronized Capture closeout. Exit requires all charter deliverables; an owner-selected enriched direction; a unified system direction; a reconstruction handoff packet; and no production authorization. |
 | **FR-3 — Enriched-direction architecture and baseline reconciliation** | **BLOCKED_BY_FR-2** | Reconcile the enriched visual and behavioral direction against completed architecture, UX Blueprint and navigation ownership, capability boundaries, current runtime reality, flagship-reconstruction baseline, and accepted Foundry evidence. Exit requires conflicts resolved or explicitly deferred; production-relevant assumptions classified; no duplicate route, object, state, or mutation authority; and owner acceptance of the reconciled direction. |
 | **FR-4 — Production reconstruction contract** | **BLOCKED_BY_FR-3** | Exit requires exact production scope; source and runtime owners; migration and deletion boundaries; fixture-to-production separation; implementation sequencing; state, navigation, accessibility, device, and rollback proof; and explicit owner authorization. |
 | **FR-5 — Real production Today vertical slice** | **BLOCKED_BY_FR-4** | This is the first production reconstruction implementation. It must prove real production ownership, routing, persistence, mutation, settlement, restoration, accessibility, device behavior, and visual fidelity. Foundry acceptance alone is not sufficient. |
@@ -187,7 +186,7 @@ no remaining live references.
 - **PROVISIONALLY_CLOSED** — accepted bounded Foundry calibration; not
   production.
 - **ACTIVE** — current authorized campaign.
-- **QUEUED_AFTER_CAPTURE** — next phase; cannot start before Capture closeout.
+- **NEXT_NOT_BEGUN** — next dependency-satisfied phase; no work has started.
 - **BLOCKED_BY_FR-N** — dependency not complete.
 - **READY_FOR_OWNER_SELECTION** — complete proposal awaiting Devan.
 - **SELECTED_FOR_SYNTHESIS** — owner-selected exploration input.
@@ -204,8 +203,8 @@ statuses.
 
 | Order | Campaign | Status | Entry dependency |
 | --- | --- | --- | --- |
-| 1 | Capture native calibration and closeout | **ACTIVE** | Current approved Capture scope |
-| 2 | Flagship Enrichment and Cross-Root Synthesis | **QUEUED_AFTER_CAPTURE** | Accepted and synchronized Capture closeout |
+| 1 | Capture native calibration and closeout | **PROVISIONALLY_CLOSED** | Accepted bounded R01 evidence and synchronized closeout |
+| 2 | Flagship Enrichment and Cross-Root Synthesis | **NEXT_NOT_BEGUN** | Accepted and synchronized Capture closeout |
 | 3 | Enriched-direction architecture and reconstruction reconciliation | **BLOCKED_BY_FR-2** | Owner-selected enriched direction and handoff |
 | 4 | Production reconstruction contract | **BLOCKED_BY_FR-3** | Reconciled direction |
 | 5 | Production Today vertical slice | **BLOCKED_BY_FR-4** | Approved production contract |
@@ -225,8 +224,8 @@ stable ID.
 | Time | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
 | You | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
 | Search | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
-| Capture | Active, not yet accepted | Current authorized campaign; closeout remains pending. |
-| Flagship Enrichment and Cross-Root Synthesis | Queued | Entry is accepted and synchronized Capture closeout. |
+| Capture | Accepted provisional calibration | Bounded R01 Foundry evidence; not production-final. |
+| Flagship Enrichment and Cross-Root Synthesis | Next; not begun | Capture entry dependency is satisfied; no FR-2 work began in closeout. |
 | Production reconstruction | Blocked | FR-2, FR-3, FR-4, and owner authorization remain incomplete. |
 | `APPROVED_FOR_SWIFTUI` | False | Foundry evidence remains provisional. |
 | Legacy deletion | Blocked | FR-6 parity and FR-7 proof are incomplete. |
@@ -249,17 +248,14 @@ stable ID.
 | Decorative complexity | Glass, cards, gradients, pills, rounding, metrics, or motion reduce clarity, performance, or accessibility. | Use the charter anti-goals and semantic-material requirements. |
 | Premature component library | Component APIs freeze before complete journey semantics and production reconciliation. | FR-2 produces only a provisional shared-system inventory. Final APIs follow FR-3 and FR-4. |
 
-## Capture non-interruption and closeout handoff
+## Capture closeout handoff
 
-Capture continues unchanged under its approved current scope. This plan update
-does not modify Capture acceptance criteria or implementation. The active
-Capture branch is not rebased or interrupted now.
-
-When Capture reaches owner closeout, it must reconcile onto the updated `main`
-before merge. Capture closeout must record the evidence, protected
-characteristics, unresolved visual opportunities, and architecture-sensitive
-assumptions needed as FR-2 inputs. After synchronized Capture closeout, the
-next campaign is FR-2. Broad production wiring and isolated root campaigns
+Capture reconciled onto the updated `main` baseline without changing accepted
+UI, screenshots, fixture truth, source behavior, tests, or accessibility
+composition. Its closeout records the evidence, protected characteristics,
+unresolved visual opportunities, architecture-sensitive assumptions, and
+proof ceiling needed as FR-2 inputs. The next campaign is FR-2, but no FR-2
+implementation began here. Broad production wiring and isolated root campaigns
 remain prohibited.
 
 ## Entry and proof boundary
@@ -288,5 +284,6 @@ enrichment evidence described above. It authorizes no Figma artifact, SwiftUI
 approval, frontend implementation, migration, source deletion, target change,
 production wiring, component finalization, or product-code modification.
 Foundry fixture evidence must not be used as proof of production persistence,
-settlement, restoration, migration, or cutover. The active Capture campaign
-remains the only current authorized native-calibration campaign.
+settlement, restoration, migration, or cutover. Capture calibration is
+provisionally closed; FR-2 is next and not begun. Production reconstruction
+remains blocked.
