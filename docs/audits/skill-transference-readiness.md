@@ -31,11 +31,13 @@ preserved in prerequisite PR #56 (`f34305949`) but is not merged because its
 build-for-testing run then exposed the unrelated existing
 `RuntimeBlobID` ambiguity in `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
 PR #55 was refreshed by merging current `origin/main` without rebasing. One
-refreshed build preflight was blocked by an unrelated active Xcode process; after
-that process finished, the final bounded focused retry started `xcodebuild` but
-failed at the same three syntax blockers with executed-test count `0`. The
-final result in Section 10 supersedes the earlier D conclusion for readiness
-purposes with these bounded blockers.
+refreshed build preflight was blocked by an unrelated active Xcode process. After
+that process finished, the final bounded build-for-testing command started
+`xcodebuild` but failed before the Skill Transference test target compiled at
+the same three syntax blockers. The final bounded focused retry likewise
+started `xcodebuild` and failed before test launch with executed-test count
+`0`. The final result in Section 10 supersedes the earlier D conclusion for
+readiness purposes with these bounded blockers.
 
 The current authority has most of the necessary boundaries: Local Learning is
 local, evidence-linked, uncertain, correctable, and non-mutating;
@@ -317,6 +319,16 @@ because an unrelated worktree build was active. The bounded retry then started
 `FAILURE_CLASS=test_failure` and executed-test count `0`. The repository cannot
 honestly claim executable readiness from this proof.
 
+The final prescribed build-for-testing command
+(`scripts/ambitions-xcode-build-for-testing.sh --batch
+SKILL-TRANSFER-PR55-BFT-FINAL --scheme AmbitionsUnitTests --timeout 45m
+--kill-after 60s`) reached compilation and terminated before the Skill
+Transference test target compiled. It reproduced the same syntax diagnostics
+in `RuntimeCanonicalGenerationMaintenance.swift:1455`,
+`RuntimeCommittedReceiptAuthority.swift:143`, and
+`RuntimeGenerationControlStore.swift:3908,8554,8613,8826,8829`. No test
+process started and the focused run recorded `EXECUTED_TESTS=0`.
+
 ## 9. Smallest proof slice
 
 The bounded proof attempted the smallest slice:
@@ -365,8 +377,10 @@ across every domain or infer sensitive traits.
    `RuntimeBlobID` ambiguity at
    `Native/Ambitions/Core/LocalRuntimeOS/Attachments/RuntimeAttachmentModels.swift:612,616`.
    The refreshed PR #55 build was initially blocked by an active unrelated
-   Xcode process; the bounded retry then started `xcodebuild` and failed at the
-   same parser errors before test launch. Executed-test count remains zero.
+   Xcode process; after that process finished, the final build-for-testing
+   command started `xcodebuild` and failed before the test target compiled at
+   the same parser errors. The bounded focused retry likewise failed before
+   test launch. Executed-test count remains zero.
 2. A production Goal Path proposal-input contract. The proof's owner envelope
    is private test code, so it cannot establish a current receiving seam.
 3. Executable Trust/privacy/control evidence for the transfer fields; the
