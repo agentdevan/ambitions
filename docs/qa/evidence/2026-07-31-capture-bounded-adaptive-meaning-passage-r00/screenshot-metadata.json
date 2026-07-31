@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-31-capture-bounded-adaptive-meaning-passage-r00",
+  "native_proving_id": "AVF-CAPTURE-S07-R01-NATIVE-R00",
+  "parent_direction": "AVF-CAPTURE-S07-R01",
+  "installed_closure": "VC10-CAPTURE-S01",
+  "fixture_id": "capture-flagship/bounded-adaptive-meaning-passage/v1",
+  "capture_source_sha": "8fd34693d81938975ac26692719375f6a675589b",
+  "device": "VC14 Capture Proof iPhone 17 Pro Simulator",
+  "device_udid": "8A217324-6158-45E4-907D-ECBA5198DDCB",
+  "os": "iOS 26.5 (23F77)",
+  "xcode": "26.6 (17F113)",
+  "locale": "en-US",
+  "layout_direction": "left-to-right",
+  "appearance": "Dark",
+  "production_baseline": false,
+  "direct_device_proof": false,
+  "runtime_integration": false,
+  "production_implementation": false,
+  "production_routing": false,
+  "capture_routing_calibration": false,
+  "canon_installation": false,
+  "shell_viability_proof": false,
+  "approved_for_swiftui": false,
+  "frames": [
+    {
+      "id": "CNC-R00-F01",
+      "path": "screenshots/01-capture-entry-focused-dark.png",
+      "sha256": "9fb63eeb94fadeb75b450ba62f1bbc0f8258bf63249dad42cbff8a66b6831ab9",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:37:44-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": true,
+      "state": "Initial full-screen Capture with focused empty editor, native keyboard, helper, and Cancel"
+    },
+    {
+      "id": "CNC-R00-F02",
+      "path": "screenshots/02-capture-bounded-meaning-dark.png",
+      "sha256": "dc188fc0f453f925fa6b6ca208b7b1f9f5c39dd5a37dd5819233cfe8e666d27c",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:37:49-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": false,
+      "state": "Retained original expression with provisional Goals meaning, related appointment context, Review, and Change"
+    },
+    {
+      "id": "CNC-R00-F03",
+      "path": "screenshots/03-capture-clarification-dark.png",
+      "sha256": "5f0856ba485fb2ddbc2b178bc28ccb17d1cfce79e09bb51314dfbc7b0c84efb4",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:37:55-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": true,
+      "state": "Retained ambiguous expression with one targeted focused clarification and no transcript anatomy"
+    },
+    {
+      "id": "CNC-R00-F04",
+      "path": "screenshots/04-capture-consequential-review-dark.png",
+      "sha256": "9a15729ced882de726d570c466ecc776c5b265dd408d13bffde43ebba09209cd",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:38:00-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": false,
+      "state": "Consequential review with original words, proposed Goals meaning, unchanged current state, Time context, handoff, and Change"
+    },
+    {
+      "id": "CNC-R00-F05",
+      "path": "screenshots/05-capture-draft-recovery-dark.png",
+      "sha256": "223933f6ad337f2497b0edd18f67a7e9e384c0e0932952cc017cff799133d446",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:38:06-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": false,
+      "state": "In-session retained expression, proposed meaning, related context, Continue Review, and Keep Editing"
+    },
+    {
+      "id": "CNC-R00-F06",
+      "path": "screenshots/06-capture-review-accessibility-dark.png",
+      "sha256": "f49cbf1a90b3b6951e9797d9cbcd9118d95222b149b6fc1cd95c7f05fd6f03d5",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-31T02:40:27-04:00",
+      "dynamic_type": "Accessibility 2",
+      "keyboard_visible": false,
+      "state": "Post-scroll ordered review with unchanged current state, consequence, primary action, and Change fully operable"
+    }
+  ]
+}
