@@ -2,49 +2,118 @@
 
 # Reconciled Flagship Reconstruction Plan
 
-Status: Current planning authority; `POST_VC14_NATIVE_CALIBRATION / PRE_CROSS_ROOT_PROPAGATION`; implementation entry is closed
-Date: 2026-07-28
-Baseline: `5ba9814f2636f148eb5e455b0a791299dcab0849` or later on `main`
+Status: Current planning authority; `CAPTURE_NATIVE_CALIBRATION_ACTIVE / FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS_QUEUED / PRODUCTION_RECONSTRUCTION_BLOCKED`
+Date: 2026-07-31
+Baseline: `e028eefbc18f9af2deb1b14beacd2a0eb0e5b40c` or later on `main`
 Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
 
 ## Purpose and boundary
 
 This plan replaces the active sequencing in the historical frontend execution
 ledger. It consumes the reconciled canon and ADRs; it does not authorize an
-implementation packet. Figma authorization, SwiftUI approval, and
-implementation authorization are false. Native SwiftUI previews and the
-Native Visual Foundry are the current proving environment; Figma remains
-optional documentation and is not visual authority or a sequencing gate.
+implementation packet. Search calibration is provisionally closed. Capture
+native calibration is the active campaign and remains under its approved
+scope. The phase immediately after synchronized Capture closeout is
+**FLAGSHIP ENRICHMENT AND CROSS-ROOT SYNTHESIS**, which supersedes the narrower
+planned phrase **Cross-Root Synthesis**.
+
+Figma authorization = false.
+`APPROVED_FOR_SWIFTUI = false`.
+Production reconstruction authorization = false.
+Legacy cutover authorization = false.
+Foundry SwiftUI is permitted only for fixture-driven provisional calibration
+and enrichment evidence. That evidence is not production SwiftUI approval,
+production runtime proof, a component-library contract, or implementation
+authorization.
+
+Broad production reconstruction is blocked until:
+
+1. Capture closes under its existing approved campaign.
+2. Flagship Enrichment and Cross-Root Synthesis completes.
+3. The enriched direction is reconciled with the completed architecture and
+   flagship-reconstruction baseline.
+4. A production reconstruction contract is approved.
+
+This is a parallel documentation-only operating-plan update. It does not
+interrupt, narrow, expand, rebase, restart, or modify the active Capture
+campaign, its branch/worktree, implementation, tests, fixtures, screenshots,
+evidence, or status.
+
+## Current calibration status
+
+- Today native calibration: provisionally closed.
+- Goals native calibration: provisionally closed.
+- Time native calibration: provisionally closed.
+- You native calibration: provisionally closed.
+- Search native calibration: provisionally closed.
+- Capture native calibration: active; not accepted or closed.
+- Flagship Enrichment and Cross-Root Synthesis: queued after Capture closeout.
+
+The five provisionally closed roots are accepted bounded Foundry calibration
+evidence, not production approval. Capture remains the final active native
+calibration campaign.
 
 ## Dependency graph
 
 ```text
-Canon/architecture authority
-  -> identity and owner migrations
-  -> shell/navigation/restoration
-  -> truth-state and mutation contracts
-  -> Goals/Today/Time projections
-  -> Search/Capture owner transfer
-  -> You capability pruning
-  -> persistence/recovery capability gates
-  -> accessibility/localization infrastructure
-  -> R10 Wave 1 shared visual foundation [COMPLETE]
-  -> R10 Wave 2 surfaces and journeys [COMPLETE]
-  -> R10 Wave 3 stress and matched baseline / VC-13 [COMPLETE]
-  -> VC-14 reconciled native-matched closure [COMPLETE]
-  -> Native Visual Foundry bootstrap [COMPLETE]
-  -> Today native calibration [ACCEPTED PROVISIONALLY]
-  -> cross-root native calibration [NEXT]
-  -> separate SwiftUI approval [FALSE]
-  -> clean frontend implementation
-  -> legacy authority deletion after parity proof
+Completed architecture and flagship-reconstruction baseline
+  -> reconciled visual closure and Native Visual Foundry
+  -> Today native calibration [PROVISIONALLY CLOSED]
+  -> Goals native calibration [PROVISIONALLY CLOSED]
+  -> Time native calibration [PROVISIONALLY CLOSED]
+  -> You native calibration [PROVISIONALLY CLOSED]
+  -> Search native calibration [PROVISIONALLY CLOSED]
+  -> Capture native calibration [ACTIVE]
+  -> Capture owner acceptance and synchronized closeout
+  -> Flagship Enrichment and Cross-Root Synthesis
+  -> owner-selected enriched provisional visual direction
+  -> reconciliation against completed architecture and reconstruction baseline
+  -> production reconstruction contract
+  -> real production Today vertical slice
+  -> production Goals / Time / You / Search / Capture / shell reconstruction
+  -> legacy cutover
+  -> physical-device refinement
+  -> complete accessibility proof
+  -> release validation
 ```
 
-No milestone may treat a later arrow as evidence for an earlier dependency.
+No broad production frontend implementation, production wiring, component
+finalization, or legacy cutover may begin before Flagship Enrichment and
+Cross-Root Synthesis and the following reconciliation gate are complete.
 
-## Milestones
+No later arrow provides evidence for an earlier dependency.
 
-| Milestone | Scope | Exit evidence | Current posture |
+## Active Frontend Reconstruction Critical Path
+
+| Milestone | Current posture | Scope and exit evidence |
+| --- | --- | --- |
+| **FR-1 — Complete Capture native calibration and closeout** | **ACTIVE** | Exit requires owner-accepted bounded Capture evidence; protected characteristics; explicit non-frozen boundaries; architecture-sensitive assumptions; exact proof ceiling; merged and synchronized `main`; `CAPTURE_NATIVE_CALIBRATION = PROVISIONALLY_CLOSED`; and `APPROVED_FOR_SWIFTUI = false`. |
+| **FR-2 — Flagship Enrichment and Cross-Root Synthesis** | **QUEUED_AFTER_CAPTURE** | Exit requires all charter deliverables; an owner-selected enriched direction; a unified system direction; a reconstruction handoff packet; and no production authorization. |
+| **FR-3 — Enriched-direction architecture and baseline reconciliation** | **BLOCKED_BY_FR-2** | Reconcile the enriched visual and behavioral direction against completed architecture, UX Blueprint and navigation ownership, capability boundaries, current runtime reality, flagship-reconstruction baseline, and accepted Foundry evidence. Exit requires conflicts resolved or explicitly deferred; production-relevant assumptions classified; no duplicate route, object, state, or mutation authority; and owner acceptance of the reconciled direction. |
+| **FR-4 — Production reconstruction contract** | **BLOCKED_BY_FR-3** | Exit requires exact production scope; source and runtime owners; migration and deletion boundaries; fixture-to-production separation; implementation sequencing; state, navigation, accessibility, device, and rollback proof; and explicit owner authorization. |
+| **FR-5 — Real production Today vertical slice** | **BLOCKED_BY_FR-4** | This is the first production reconstruction implementation. It must prove real production ownership, routing, persistence, mutation, settlement, restoration, accessibility, device behavior, and visual fidelity. Foundry acceptance alone is not sufficient. |
+| **FR-6 — Full production frontend reconstruction** | **BLOCKED_BY_FR-5** | Extend the proven production reconstruction model across Goals, Time, You, Search, Capture, Crowned Edge Dock and global shell, plus shared state, materials, motion, accessibility, and return behavior. |
+| **FR-7 — Cutover, refinement, accessibility, and release** | **BLOCKED_BY_FR-6** | Scope is legacy frontend authority deletion; migration and rollback; physical-device refinement; Crowned Edge Dock viability; complete assistive-technology proof; localization and RTL; performance and energy; and release/App Store validation. |
+
+FR-1 closeout must also preserve the information required for FR-2:
+
+- global presentation behavior;
+- expression and original-word retention;
+- interpretation and clarification boundaries;
+- review and owner handoff;
+- cancellation and return;
+- keyboard and accessibility behavior;
+- visual strengths and sterile or unresolved areas;
+- architecture-sensitive assumptions.
+
+This requirement does not expand the active Capture implementation scope.
+
+## Historical R1–R16 traceability
+
+These records remain historical traceability. They are not a competing active
+queue and are not renumbered or deleted.
+
+| Milestone | Scope | Exit evidence | Historical posture |
 | --- | --- | --- | --- |
 | R1 Canon and architecture authority | Accepted ADRs, canonical specifications, UX Blueprint, traceability | Canon compiler/check, links, authority register | Established by documentation; runtime unproven |
 | R2 Identity and owner migrations | Life Area, Event, Schedule Placement, Goal/Step bridge designs and migration implementation | Migration/replay/parity/rollback tests | Planning only |
@@ -61,9 +130,9 @@ No milestone may treat a later arrow as evidence for an earlier dependency.
 | R11 VC-14 reconciled matched-baseline closure | Cross-direction matched reference baseline | Completed VC-14 record and owner review of the matched study | **COMPLETE** |
 | R12 Figma entry | Optional documentation only when separately authorized | Separate owner record | Authorization false; not a sequencing gate |
 | R13 Figma journeys | Optional journey documentation | Separately authorized Figma proof | Not required for current native proving path |
-| R14 SwiftUI entry | Owner explicitly declares `APPROVED FOR SWIFTUI` | Separate owner record | Approval false |
-| R15 Clean implementation | New frontend consumes proven contracts | Scoped implementation/test/device proof | Authorization false |
-| R16 Legacy deletion | Remove replaced product/frontend authority | Parity, rollback, archive, deletion proof | Blocked by cutover |
+| R14 SwiftUI entry | Owner explicitly declares `APPROVED FOR SWIFTUI` | Separate owner record | **Superseded by FR-1 through FR-7; approval false** |
+| R15 Clean implementation | New frontend consumes proven contracts | Scoped implementation/test/device proof | **Superseded by FR-1 through FR-7; authorization false** |
+| R16 Legacy deletion | Remove replaced product/frontend authority | Parity, rollback, archive, deletion proof | **Superseded by FR-1 through FR-7; cutover authorization false** |
 
 ## Migration plan
 
@@ -113,84 +182,111 @@ no remaining live references.
 | Visual reference | Reconciled direction ID and matched state/appearance/accessibility matrix |
 | Legacy deletion | Replacement parity, no live references, migration/rollback, historical preservation |
 
-## Entry criteria
+## Operating status language
 
-### Reconciled visual closure and VC-14
+- **PROVISIONALLY_CLOSED** — accepted bounded Foundry calibration; not
+  production.
+- **ACTIVE** — current authorized campaign.
+- **QUEUED_AFTER_CAPTURE** — next phase; cannot start before Capture closeout.
+- **BLOCKED_BY_FR-N** — dependency not complete.
+- **READY_FOR_OWNER_SELECTION** — complete proposal awaiting Devan.
+- **SELECTED_FOR_SYNTHESIS** — owner-selected exploration input.
+- **SELECTED_AS_PROVISIONAL_VISUAL_DIRECTION** — accepted provisional
+  direction.
+- **PRODUCTION_AUTHORIZED** — may be used only after explicit owner approval
+  and the production reconstruction contract.
 
-R10 / Wave 1 shared visual foundation is **COMPLETE**. The source-owned
-`VC_WAVE_1_FOUNDATION_CLOSURE.md` and JSON peer install the closed VC-01 through
-VC-06 typography, appearance, crown, dock, state, and foundational grammar
-decisions beneath the unchanged active AVF direction set. This is documentation
-and authority closure only. It is not a final design system, component library,
-Figma artifact, rendered baseline, runtime capability claim, or implementation
-approval.
+During FR-1 and FR-2, `SELECTED FOR FIGMA`, `APPROVED FOR SWIFTUI`,
+production ready, flagship complete, and release ready are not positive
+statuses.
 
-R10 / Wave 2 surfaces and journeys is **COMPLETE**: VC-07 through VC-12 are
-closed. R10 / Wave 3 accessibility and content stress is **COMPLETE**: VC-13 is
-closed. VC-14 and the visual-closure planning program are **COMPLETE**, the
-Native Visual Foundry bootstrap is complete, and Today R14 is accepted as
-provisional Today calibration evidence. The current position is
-`POST_VC14_NATIVE_CALIBRATION / PRE_CROSS_ROOT_PROPAGATION`.
+## Future campaign queue
 
-Native Foundry calibration proves visual and interaction direction against
-synthetic fixtures. It does not prove production runtime ownership,
-persistence, migration, settlement, restoration, or cutover. It does not
-complete R2 through R9 or R15 through R16. Exact tokens, component APIs, final
-component-library structure, production screenshot baselines, runtime
-integration, and production cutover remain deferred and unauthorized.
+| Order | Campaign | Status | Entry dependency |
+| --- | --- | --- | --- |
+| 1 | Capture native calibration and closeout | **ACTIVE** | Current approved Capture scope |
+| 2 | Flagship Enrichment and Cross-Root Synthesis | **QUEUED_AFTER_CAPTURE** | Accepted and synchronized Capture closeout |
+| 3 | Enriched-direction architecture and reconstruction reconciliation | **BLOCKED_BY_FR-2** | Owner-selected enriched direction and handoff |
+| 4 | Production reconstruction contract | **BLOCKED_BY_FR-3** | Reconciled direction |
+| 5 | Production Today vertical slice | **BLOCKED_BY_FR-4** | Approved production contract |
+| 6 | Goals, Time, You, Search, Capture, and shell reconstruction | **BLOCKED_BY_FR-5** | Successful production Today slice |
+| 7 | Legacy cutover, device refinement, accessibility proof, and release validation | **BLOCKED_BY_FR-6** | Full replacement parity |
 
-### Figma
-
-Figma remains optional documentation only. It is not visual authority and does
-not gate the current package-backed native preview and cross-root calibration
-sequence. Any future Figma work still requires separate owner authorization.
-
-### SwiftUI and implementation
-
-`APPROVED FOR SWIFTUI` remains false. Production implementation requires a
-separate owner approval after cross-root synthesis and an explicit bounded work
-packet with current source/tests, migration plan, proof lane, and rollback.
-This plan intentionally contains no task-level production SwiftUI steps or
-component APIs.
-
-## Risk register
-
-| Risk | Consequence | Control |
-| --- | --- | --- |
-| Visual target outruns runtime | Fictional state/action | Capability manifest and proof-gated rows |
-| Identity migration duplicates objects | Lost linkage/history | Stable aliases, idempotency, parity/replay tests |
-| Custom dock breaks native behavior | Back/focus/gesture exclusion | Framework boundary plus physical-device gate |
-| Projection becomes owner | Divergent cross-root truth | ID lineage and owner-only mutation |
-| Multi-owner operation fakes settlement | Misleading trust | Atomic commits until typed scope model |
-| Generic queue overclaims offline | Lost/premature work | Domain-specific pending contract only |
-| UX Blueprint legacy rows look current | Wrong design scope | Explicit reconciliation overlay and supersession register |
-| Historical code removed early | Irrecoverable regression | R16 only after parity/rollback proof |
+There is no additional isolated root campaign after Capture. Any new
+structural proposal belongs inside FR-2 as an explicit new branch with a new
+stable ID.
 
 ## Readiness scorecard
 
 | Area | Readiness | Reason |
 | --- | --- | --- |
-| Owner choices | Ready | D-DEV-01 through D-DEV-10 are controlling and closed. |
-| Architecture contracts | Ready for implementation planning | Accepted ADRs define owners and boundaries; runtime proof absent. |
-| Canon/UX direction | Ready for reconciled specification use | Normative owners and active direction IDs are aligned. |
-| R10 / Wave 1 shared visual foundation | Complete | VC-01 through VC-06 are closed in the source-owned human and machine package and projected into generated authority. |
-| R10 / Wave 2 surfaces and journeys | Complete | VC-07 through VC-12 are closed by the active Wave 2 closure authority. |
-| R10 / Wave 3 stress and matched baseline | Complete | VC-13 is closed by the active Wave 3 closure authority. |
-| VC-14 | Complete | Native matched closure and the bounded Native Foundry bootstrap are complete. |
-| Today native calibration | Accepted provisionally | R14 is accepted as Today calibration evidence; it is not production-final. |
-| Identity migrations | Not implementation-ready | Designs exist; schemas/migrations/tests do not. |
-| Runtime capability | Not implementation-ready | Registry closure, typed states, and proof are incomplete. |
-| Accessibility/localization | Ready for infrastructure planning | Proof plan exists; implementation/direct evidence absent. |
-| Figma | Not authorized | Optional documentation only; it is not visual authority or a sequencing gate. |
-| SwiftUI | Not approved | Cross-root synthesis, production proof, and separate owner approval remain absent. |
-| Legacy deletion | Not ready | Replacement parity does not exist. |
+| Today | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
+| Goals | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
+| Time | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
+| You | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
+| Search | Accepted provisional calibration | Bounded Foundry evidence; not production-final. |
+| Capture | Active, not yet accepted | Current authorized campaign; closeout remains pending. |
+| Flagship Enrichment and Cross-Root Synthesis | Queued | Entry is accepted and synchronized Capture closeout. |
+| Production reconstruction | Blocked | FR-2, FR-3, FR-4, and owner authorization remain incomplete. |
+| `APPROVED_FOR_SWIFTUI` | False | Foundry evidence remains provisional. |
+| Legacy deletion | Blocked | FR-6 parity and FR-7 proof are incomplete. |
+
+## Risk register
+
+| Risk | Consequence | Control |
+| --- | --- | --- |
+| Visual target outruns runtime | Fictional state/action | Capability manifest and proof-gated rows. |
+| Identity migration duplicates objects | Lost linkage/history | Stable aliases, idempotency, parity/replay tests. |
+| Custom dock breaks native behavior | Back/focus/gesture exclusion | Framework boundary plus physical-device gate. |
+| Projection becomes owner | Divergent cross-root truth | ID lineage and owner-only mutation. |
+| Multi-owner operation fakes settlement | Misleading trust | Atomic commits until typed scope model. |
+| Generic queue overclaims offline | Lost/premature work | Domain-specific pending contract only. |
+| UX Blueprint legacy rows look current | Wrong design scope | Explicit reconciliation overlay and supersession register. |
+| Historical code removed early | Irrecoverable regression | R16 only after parity/rollback proof. |
+| Premature production reconstruction | The app hardens an under-enriched, sterile, or inconsistent Foundry state. | FR-2, FR-3, and FR-4 are mandatory before production Today implementation. |
+| Superficial enrichment | A late restyle adds ornament without improving hierarchy, anatomy, continuity, or emotional quality. | Text directions precede rendering; structural differences remain explicit; enrichment is judged across complete journeys and states. |
+| Cross-root divergence | Each root becomes locally polished but no longer feels like one product. | FR-2 compares all roots and global experiences together and produces one shared direction with root-specific expression. |
+| Decorative complexity | Glass, cards, gradients, pills, rounding, metrics, or motion reduce clarity, performance, or accessibility. | Use the charter anti-goals and semantic-material requirements. |
+| Premature component library | Component APIs freeze before complete journey semantics and production reconciliation. | FR-2 produces only a provisional shared-system inventory. Final APIs follow FR-3 and FR-4. |
+
+## Capture non-interruption and closeout handoff
+
+Capture continues unchanged under its approved current scope. This plan update
+does not modify Capture acceptance criteria or implementation. The active
+Capture branch is not rebased or interrupted now.
+
+When Capture reaches owner closeout, it must reconcile onto the updated `main`
+before merge. Capture closeout must record the evidence, protected
+characteristics, unresolved visual opportunities, and architecture-sensitive
+assumptions needed as FR-2 inputs. After synchronized Capture closeout, the
+next campaign is FR-2. Broad production wiring and isolated root campaigns
+remain prohibited.
+
+## Entry and proof boundary
+
+R10 / Wave 1 shared visual foundation, R10 / Wave 2 surfaces and journeys,
+R10 / Wave 3 accessibility and content stress, VC-14, and the Native Visual
+Foundry bootstrap remain completed authority and evidence packages. Their
+closure is documentation and bounded visual-direction evidence only.
+
+Native Foundry calibration proves visual and interaction direction against
+synthetic fixtures. It does not prove production runtime ownership,
+persistence, migration, settlement, restoration, or cutover. Exact tokens,
+component APIs, final component-library structure, production screenshot
+baselines, runtime integration, and production cutover remain deferred and
+unauthorized.
+
+The UX Blueprint, navigation and surface ownership, capability boundaries,
+architecture-sensitive assumption registers, and current runtime reality must
+all be reconciled before a production contract is proposed. No fixture,
+screenshot, or preview can substitute for that reconciliation.
 
 ## Integrity
 
-This plan authorizes architecture, UX Blueprint, runtime, reconstruction, and
-accessibility planning. It authorizes no Figma artifact, SwiftUI work, frontend
-implementation, migration, source deletion, target change, or product-code
-modification. Broad reconstruction, runtime integration, production cutover,
-and `APPROVED FOR SWIFTUI` remain false. Foundry fixture evidence must not be
-used as proof of production persistence, settlement, restoration, migration,
-or cutover.
+This plan authorizes only the documentation-defined planning and provisional
+enrichment evidence described above. It authorizes no Figma artifact, SwiftUI
+approval, frontend implementation, migration, source deletion, target change,
+production wiring, component finalization, or product-code modification.
+Foundry fixture evidence must not be used as proof of production persistence,
+settlement, restoration, migration, or cutover. The active Capture campaign
+remains the only current authorized native-calibration campaign.
