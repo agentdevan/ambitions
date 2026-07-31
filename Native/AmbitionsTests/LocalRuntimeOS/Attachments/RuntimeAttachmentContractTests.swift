@@ -3,6 +3,27 @@ import XCTest
 @testable import Ambitions
 
 final class RuntimeAttachmentContractTests: XCTestCase {
+    func testAttachmentBlobIdentityPreservesStrictValidationAndRawStringCoding() throws {
+        let blobID = RuntimeAttachmentBlobID(rawValue: "blob-2")!
+
+        XCTAssertEqual(blobID.rawValue, "blob-2")
+        XCTAssertNil(RuntimeAttachmentBlobID(rawValue: " blob-2"))
+        XCTAssertNil(RuntimeAttachmentBlobID(rawValue: "blob-2 "))
+        XCTAssertNil(RuntimeAttachmentBlobID(rawValue: String(repeating: "a", count: 1_025)))
+        XCTAssertNil(RuntimeAttachmentBlobID(rawValue: "cafe\u{0301}"))
+        XCTAssertNil(RuntimeAttachmentBlobID(rawValue: "blob\u{0000}2"))
+
+        let encoded = try JSONEncoder().encode(blobID)
+        XCTAssertEqual(encoded, Data(#""blob-2""#.utf8))
+        XCTAssertEqual(try JSONDecoder().decode(RuntimeAttachmentBlobID.self, from: encoded), blobID)
+
+        let equivalent = RuntimeAttachmentBlobID(rawValue: "blob-2")!
+        let later = RuntimeAttachmentBlobID(rawValue: "blob-3")!
+        XCTAssertEqual(blobID, equivalent)
+        XCTAssertEqual(Set([blobID, equivalent]).count, 1)
+        XCTAssertLessThan(blobID, later)
+    }
+
     func testAttachmentCommandIsTypedCanonicalAndRoundTripsWithoutLosingAuthority() throws {
         let attachment = Self.command(action: .linkStaged, expectedRevision: .absent)
         let command = AmbitionsCommand(
@@ -148,11 +169,11 @@ final class RuntimeAttachmentContractTests: XCTestCase {
         XCTAssertEqual(workID, repeatedWorkID)
 
         let firstOccurrence = try CanonicalRuntimeAttachmentStore.recoveryFindingEvidenceFingerprint(
-            issue: .manifestWithoutRow, blobID: RuntimeBlobID(rawValue: "blob-recovery")!,
+            issue: .manifestWithoutRow, blobID: RuntimeAttachmentBlobID(rawValue: "blob-recovery")!,
             relativeDirectory: "v1/aa/owned-entry", cycle: 1
         )
         let secondOccurrence = try CanonicalRuntimeAttachmentStore.recoveryFindingEvidenceFingerprint(
-            issue: .manifestWithoutRow, blobID: RuntimeBlobID(rawValue: "blob-recovery")!,
+            issue: .manifestWithoutRow, blobID: RuntimeAttachmentBlobID(rawValue: "blob-recovery")!,
             relativeDirectory: "v1/aa/owned-entry", cycle: 2
         )
         XCTAssertNotEqual(firstOccurrence, secondOccurrence)
@@ -181,11 +202,11 @@ final class RuntimeAttachmentContractTests: XCTestCase {
             action: action,
             attachmentID: RuntimeAttachmentID(rawValue: "attachment-1")!,
             revisionID: RuntimeAttachmentRevisionID(rawValue: "attachment-revision-2")!,
-            blobID: RuntimeBlobID(rawValue: "blob-2")!,
+            blobID: RuntimeAttachmentBlobID(rawValue: "blob-2")!,
             referenceID: [.linkStaged, .unlink, .replaceRevision].contains(action) ? reference : nil,
             replacesReferenceID: replacement ? RuntimeAttachmentReferenceID(rawValue: "attachment-reference-0")! : nil,
             replacesRevisionID: replacement ? RuntimeAttachmentRevisionID(rawValue: "attachment-revision-1")! : nil,
-            replacesBlobID: replacement ? RuntimeBlobID(rawValue: "blob-1")! : nil,
+            replacesBlobID: replacement ? RuntimeAttachmentBlobID(rawValue: "blob-1")! : nil,
             target: [.linkStaged, .unlink, .replaceRevision].contains(action) ? target : nil,
             expectedLifecycleVersion: 3,
             expectedReplacedLifecycleVersion: replacement ? 4 : nil,

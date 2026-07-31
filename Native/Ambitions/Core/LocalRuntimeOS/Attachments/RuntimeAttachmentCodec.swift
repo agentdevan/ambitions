@@ -68,7 +68,7 @@ enum RuntimeAttachmentCodec {
 
     static func manifestDeletionProofDigest(
         claimID: String,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         originalRelativeDirectory: String,
         quarantineRelativeDirectory: String,
@@ -132,7 +132,7 @@ enum RuntimeAttachmentCodec {
 
     static func issueIntakeProof(
         revisionID: RuntimeAttachmentRevisionID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         ownedFilename: String,
         sourceDevice: UInt64,
         sourceInode: UInt64,
@@ -237,7 +237,7 @@ enum RuntimeAttachmentCodec {
         privacyDomain: RuntimeAttachmentPrivacyDomain,
         policy: RuntimeAttachmentDedupPolicy,
         plaintextDigest: SHA256.Digest,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         key: SymmetricKey
     ) -> RuntimeAttachmentContentAddress {
         var material = Data("ambitions.attachment.content-address.v1\u{0}\(privacyDomain.rawValue)\u{0}\(policy.rawValue)\u{0}".utf8)

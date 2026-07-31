@@ -31,7 +31,7 @@ struct RuntimeAttachmentKeyRewrapJob: Sendable, Equatable {
 
 struct RuntimeAttachmentKeyRewrapClaim: Sendable, Equatable {
     let jobID: RuntimeAttachmentKeyRewrapJobID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let sourceEnvelope: RuntimeBlobKeyEnvelope
     let expectedEnvelopeDigest: String
     let itemStateVersion: UInt64
@@ -253,7 +253,7 @@ actor RuntimeAttachmentKeyRotationCoordinator {
 
     private static func errorFingerprint(
         jobID: RuntimeAttachmentKeyRewrapJobID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         error: any Error
     ) -> String {
         RuntimeAttachmentCodec.sha256(Data(
