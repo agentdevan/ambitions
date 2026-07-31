@@ -1,8 +1,17 @@
 # Search and Capture native-proof gate
 
-Status: `READY_FOR_OWNER_GLOBAL_JOURNEY_PROOF_SELECTION`
+Status: `READY_FOR_OWNER_SEARCH_NATIVE_REVIEW`
 
 This record decides whether the current Search and Capture evidence is sufficient for cross-root synthesis. It does not reopen Today, Goals, Time, or You, and it does not authorize implementation, runtime integration, cross-root synthesis, or `APPROVED_FOR_SWIFTUI`.
+
+## Owner sequencing decision
+
+The proof gate is accepted for sequencing purposes. The selected sequence is **Search first, with the minimum shared presentation substrate embedded in the Search proving slice**.
+
+- No standalone shared-substrate implementation phase, evidence package, component library, or acceptance gate is created.
+- Capture remains deferred. After Search receives separate owner acceptance and is merged, Capture begins from a fresh synchronized branch.
+- The bounded Search proving package is [AVF-SEARCH-D07-R01-NATIVE-R00](../../evidence/2026-07-30-search-owner-routed-semantic-passage-r00/README.md).
+- This sequencing decision does not accept Search, authorize Capture, begin cross-root synthesis, or change `APPROVED_FOR_SWIFTUI = false`.
 
 ## 1. Verified baseline
 
@@ -179,11 +188,11 @@ This slice must not reuse the current local-save result as proof of universal ow
 | 2. Search then Capture | Search is the lower-consequence first journey and can expose presentation and restoration faults earlier. Without an explicit shared substrate contract, Capture would still repeat the same proof work. |
 | 3. Shared presentation substrate, then separate Search and Capture journeys | Lowest-risk and lowest-duplication path if the shared work is limited to shell-owned presentation, origin tuple, keyboard/focus containment, dismissal, and exact return. Search and Capture retain separate fixtures, primary objects, screenshots, tests, and owner decisions. |
 
-**Recommendation:** path 3, ordered as shared shell contract → Search slice → Capture slice.
+**Original gate recommendation:** path 3, ordered as shared shell contract → Search slice → Capture slice.
 
 Search should exercise the substrate first because it is read-only and exposes presentation, keyboard, and restoration failures without draft or mutation ambiguity. Capture should then reuse the proven shell contract while adding expression, clarification, consequence, draft preservation, and owner-transfer proof.
 
-The shared substrate is not a third product surface or an all-in-one prototype. It should be a small reusable host/test contract exercised separately by each journey. A combined Search-and-Capture prototype is rejected because it would blur primary objects, privacy states, owner handoff, capability ceilings, and evidence attribution.
+**Owner-selected refinement:** Search proceeds first with only the minimum presentation substrate embedded in its proving slice. There is no standalone shared phase or gate. Capture remains separate and deferred. A combined Search-and-Capture prototype remains rejected because it would blur primary objects, privacy states, owner handoff, capability ceilings, and evidence attribution.
 
 ## 10. Explicit exclusions
 
@@ -220,16 +229,8 @@ The shared substrate is not a third product surface or an all-in-one prototype. 
 7. Search and Capture may share presentation infrastructure, but they cannot share primary-object state, fixture records, action semantics, acceptance evidence, or review status.
 8. Simulator evidence can support provisional calibration only. Physical-device, manual assistive-technology, production baseline, and runtime integration proof remain outside these slices unless separately performed and recorded.
 
-## 12. Owner decision options
+## 12. Current owner gate
 
-The owner may choose one of:
+The sequencing decision is recorded. The bounded Search proving slice now awaits a separate owner review. Capture remains unimplemented and cannot begin on this branch.
 
-- authorize the recommended shared presentation-substrate contract followed by separate Search and Capture proving slices;
-- authorize Search first, then decide whether its substrate is reusable for Capture;
-- authorize Capture first despite its higher consequence and authority risk;
-- request a narrower proof classification revision;
-- defer Search and Capture and pause cross-root synthesis entry.
-
-No option is selected by this record.
-
-Final status: `READY_FOR_OWNER_GLOBAL_JOURNEY_PROOF_SELECTION`
+Final status: `READY_FOR_OWNER_SEARCH_NATIVE_REVIEW`

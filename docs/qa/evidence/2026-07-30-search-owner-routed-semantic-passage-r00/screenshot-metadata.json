@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "package_id": "2026-07-30-search-owner-routed-semantic-passage-r00",
+  "native_proving_id": "AVF-SEARCH-D07-R01-NATIVE-R00",
+  "parent_direction": "AVF-SEARCH-D07-R01",
+  "installed_closure": "VC10-SEARCH-S01",
+  "fixture_id": "search-flagship/owner-routed-semantic-passage/v1",
+  "capture_source_sha": "5366214d4b1d1c1a8dd7fbec9889cffbc250843b",
+  "device": "VC14 iPhone 17 Pro Simulator",
+  "device_udid": "EDE1E954-C663-47FB-855B-95F96AE2DBDD",
+  "os": "iOS 26.5 (23F77)",
+  "xcode": "26.6 (17F113)",
+  "locale": "en-US",
+  "layout_direction": "left-to-right",
+  "appearance": "Dark",
+  "production_baseline": false,
+  "direct_device_proof": false,
+  "runtime_integration": false,
+  "production_implementation": false,
+  "canon_installation": false,
+  "shell_viability_proof": false,
+  "approved_for_swiftui": false,
+  "frames": [
+    {
+      "id": "SNC-R00-F01",
+      "path": "screenshots/01-search-entry-focused-dark.png",
+      "sha256": "7c86dcd73f707e262111f0523524c98f60ded7855cf820974a42d066e93cc462",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:04:24-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": true,
+      "state": "Initial full-screen Search with focused empty query and Cancel"
+    },
+    {
+      "id": "SNC-R00-F02",
+      "path": "screenshots/02-search-results-dark.png",
+      "sha256": "bf10326a9832ec6f88604c6a8478a31fa09b4cefe1e5a84d11c9565be21965c9",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:05:38-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": true,
+      "state": "Representative appointment results with owner and current truth"
+    },
+    {
+      "id": "SNC-R00-F03",
+      "path": "screenshots/03-search-inspect-understand-dark.png",
+      "sha256": "ce481717a18911c5ea564a92671dcd3a86350036ed02f7b2f2d3e7e6306c5959",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:06:46-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": false,
+      "state": "Time-owned Event inspection with bounded object-backed Understand"
+    },
+    {
+      "id": "SNC-R00-F04",
+      "path": "screenshots/04-search-owner-handoff-preparation-dark.png",
+      "sha256": "4f901e3619ffab5c89ff6a7f394a47b81be4e17d74f8e562bfb3bd5193201607",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:07:52-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": false,
+      "state": "Current accepted truth and uncommitted Time handoff preparation"
+    },
+    {
+      "id": "SNC-R00-F05",
+      "path": "screenshots/05-search-privacy-degraded-dark.png",
+      "sha256": "5757f3117cf8154e7407bd3d2f9e9ff527c0ff3923fc50d3426f821e6d39ab12",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:09:02-04:00",
+      "dynamic_type": "Large",
+      "keyboard_visible": true,
+      "state": "Calm privacy suppression with valid visible result and no identity leak"
+    },
+    {
+      "id": "SNC-R00-F06",
+      "path": "screenshots/06-search-results-accessibility-dark.png",
+      "sha256": "eaa21cb29fc958ed7c2e198d623cf1660e14b2d7b2a7304e2ff598339976b6ba",
+      "width": 1206,
+      "height": 2622,
+      "captured_at": "2026-07-30T21:01:32-04:00",
+      "dynamic_type": "Accessibility 2",
+      "keyboard_visible": true,
+      "state": "Vertically recomposed results with stable query and actions"
+    }
+  ]
+}
