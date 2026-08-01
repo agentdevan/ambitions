@@ -3167,7 +3167,7 @@ enum RuntimeStoreManifestDescriptorReader {
 
 enum RuntimeStoreFileDurability {
     /// Darwin content-protection class A, equivalent to `FileProtectionType.complete`.
-    private static let completeProtectionClass: Int32 = 1
+    static let completeProtectionClass: Int32 = 1
 
     static func applyCompleteProtection(
         toOpenFileDescriptor descriptor: Int32,

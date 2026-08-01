@@ -508,7 +508,8 @@ private enum RuntimeLegacyImportPinnedArtifactIO {
                   opened.st_mtimespec.tv_nsec == entryBefore.st_mtimespec.tv_nsec,
                   opened.st_ctimespec.tv_sec == entryBefore.st_ctimespec.tv_sec,
                   opened.st_ctimespec.tv_nsec == entryBefore.st_ctimespec.tv_nsec,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: "legacy_import_artifact"
                 )
@@ -565,7 +566,8 @@ private enum RuntimeLegacyImportPinnedArtifactIO {
                   entryAfter.st_mtimespec.tv_nsec == opened.st_mtimespec.tv_nsec,
                   entryAfter.st_ctimespec.tv_sec == opened.st_ctimespec.tv_sec,
                   entryAfter.st_ctimespec.tv_nsec == opened.st_ctimespec.tv_nsec,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: "legacy_import_artifact"
                 )
@@ -634,7 +636,8 @@ actor RuntimeSwiftDataTypedExporter {
         var directoryStatus = stat()
         guard fstat(parentDescriptor, &directoryStatus) == 0,
               directoryStatus.st_mode & S_IFMT == S_IFDIR,
-              Darwin.fcntl(parentDescriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+              Darwin.fcntl(parentDescriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
             throw LocalRuntimeStorageError.canonicalPathAuthorityDenied
         }
         let descriptor = Darwin.openat(
@@ -4747,7 +4750,8 @@ private extension RuntimeGenerationLegacyImportService {
             finalEntryStatus.st_mode & S_IFMT == S_IFDIR,
             finalEntryStatus.st_dev == childStatus.st_dev,
             finalEntryStatus.st_ino == childStatus.st_ino,
-            Darwin.fcntl(childDescriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+            Darwin.fcntl(childDescriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: artifact
                 )

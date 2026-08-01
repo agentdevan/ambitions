@@ -202,7 +202,8 @@ enum RuntimeGenerationDatabaseAuthority {
                   initial.st_size >= 0,
                   initial.st_dev == initialPath.st_dev,
                   initial.st_ino == initialPath.st_ino,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalIntegrityFailure
             }
             var hasher = SHA256()
@@ -233,7 +234,8 @@ enum RuntimeGenerationDatabaseAuthority {
                   final.st_ino == finalPath.st_ino,
                   finalPath.st_mode & S_IFMT == S_IFREG,
                   finalPath.st_nlink == 1,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: "generation_artifact"
                 )

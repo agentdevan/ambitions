@@ -3858,7 +3858,8 @@ extension RuntimeGenerationLifecycleService {
                 )
             }
             try Task.checkCancellation()
-            guard Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+            guard Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileProtectionFailure(
                     artifact: prefix.isEmpty ? "preparation_root" : prefix
                 )
@@ -4019,7 +4020,7 @@ extension RuntimeGenerationLifecycleService {
                           finalPathStatus.st_ctimespec.tv_sec == initialFileStatus.st_ctimespec.tv_sec,
                           finalPathStatus.st_ctimespec.tv_nsec == initialFileStatus.st_ctimespec.tv_nsec,
                           finalPathStatus.st_gen == initialFileStatus.st_gen,
-                          protection == PROTECTION_CLASS_A,
+                          protection == RuntimeStoreFileDurability.completeProtectionClass,
                           closeResult == 0 else {
                         throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                             artifact: relativePath
