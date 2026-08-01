@@ -209,7 +209,7 @@ struct RuntimeGenerationTestHarness: Sendable {
 
     func openActiveStore() async throws -> CanonicalRuntimeStoreV8 {
         let resolved = try await resolveActive()
-        try await CanonicalRuntimeStoreV8.open(
+        return try await CanonicalRuntimeStoreV8.open(
             resolved: resolved,
             environment: environment
         )
