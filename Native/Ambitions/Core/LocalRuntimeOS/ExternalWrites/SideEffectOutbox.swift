@@ -331,7 +331,7 @@ actor SideEffectOutbox: SideEffectOutboxing {
 
     private func finishClaim(id: String) {
         activeClaimIDs.remove(id)
-        let waiters = claimWaiters.removeValue(forKey: id)?.values ?? []
+        let waiters = claimWaiters.removeValue(forKey: id).map { Array($0.values) } ?? []
         waiters.forEach { $0.resume() }
     }
 
