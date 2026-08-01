@@ -955,7 +955,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
         database: SQLiteDatabase
     ) async throws -> RuntimeAttachmentMutationResult {
         try await database.transaction(.immediate) { database in
-            let lineage = try seedLineage(command: command, receipt: receipt, database: database)
+            let lineage = try Self.seedLineage(command: command, receipt: receipt, database: database)
             return try CanonicalRuntimeAttachmentStore.apply(
                 intent, commandID: RuntimeCommandID(rawValue: command)!,
                 receiptID: RuntimeReceiptID(rawValue: receipt)!, lineage: lineage,
@@ -964,7 +964,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
         }
     }
 
-    private func seedLineage(
+    private static func seedLineage(
         command: String,
         receipt: String,
         database: isolated SQLiteDatabase
