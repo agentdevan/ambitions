@@ -490,7 +490,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             var budget = RuntimeReceiptDecodedByteBudget(
                 maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
             )
-            try RuntimeCommittedReceiptAuthority.loadAuthenticatedGraph(
+            return try RuntimeCommittedReceiptAuthority.loadAuthenticatedGraph(
                 receiptID: committed.receipt.facts.receiptID,
                 budget: &budget,
                 database: database
