@@ -934,13 +934,13 @@ extension CanonicalRuntimeStore {
 /// primitive itself; all other replay, projection, search, and control-plane
 /// tables are deliberately absent.
 private enum CanonicalRuntimeAtomicCommitWriteAuthority {
-    static let tables: Set<String> = [
+    static let tables: Set<String> = Set([
         "runtime_aggregates",
         "runtime_authority_fence",
         "runtime_command_idempotency",
         "runtime_replay_quarantine_occurrences",
         "runtime_replay_verified_high_water",
-    ]
+    ])
         .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
         .union(CanonicalRuntimeCommitSchemaPlan.tables)
         .union(CanonicalRuntimeCommittedReceiptSchemaPlan.tables)
