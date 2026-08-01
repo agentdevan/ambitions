@@ -6604,7 +6604,7 @@ private extension RuntimeGenerationControlStore {
         }
     }
 
-    func authorityNowMilliseconds() throws -> Int64 {
+    nonisolated func authorityNowMilliseconds() throws -> Int64 {
         let value = environment.clock.now.timeIntervalSince1970 * 1_000
         guard value.isFinite, value >= 0, value <= Double(Int64.max) else {
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
