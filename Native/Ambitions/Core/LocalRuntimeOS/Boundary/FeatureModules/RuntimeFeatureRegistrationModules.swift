@@ -9,7 +9,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         self.rawValue = rawValue
     }
 
-    private init(canonicalRawValue: String) {
+    fileprivate init(canonicalRawValue: String) {
         rawValue = canonicalRawValue
     }
 
