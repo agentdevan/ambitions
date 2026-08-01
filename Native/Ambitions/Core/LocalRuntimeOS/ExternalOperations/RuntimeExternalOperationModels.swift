@@ -233,7 +233,7 @@ enum RuntimeExternalOperationInvariant {
         disposition: RuntimeExternalEffectDisposition
     ) -> Bool {
         guard valid(status: status, disposition: disposition) else { return true }
-        switch (status, disposition) {
+        return switch (status, disposition) {
         case (.permanentFailure, .notAttempted), (.permanentFailure, .confirmedAbsent),
              (.succeeded, .confirmedAbsent),
              (.cancelled, .notAttempted), (.cancelled, .confirmedAbsent):
