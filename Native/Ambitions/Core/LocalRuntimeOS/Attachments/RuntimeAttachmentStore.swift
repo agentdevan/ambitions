@@ -2812,7 +2812,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(currentDigest)? = rows[0].value(named: "claim_digest"),
               RuntimeAttachmentCodec.sha256(currentPayload) == currentDigest,
               case let .integer(version)? = rows[0].value(named: "state_version"),
-              version == try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion),
+              version == (try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion)),
               rows[0].value(named: "claimed_at_ms") == .integer(try milliseconds(claim.claimedAt)),
               rows[0].value(named: "expires_at_ms") == .integer(try milliseconds(claim.expiresAt)),
               try RuntimeAttachmentCodec.decode(
