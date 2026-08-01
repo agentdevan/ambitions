@@ -1249,7 +1249,7 @@ enum CanonicalRuntimeAttachmentStore {
             )
         }
         guard case .null? = reservation[0].value(named: "consumed_by_blob_id"),
-              expiresAt > try milliseconds(now) else {
+              expiresAt > (try milliseconds(now)) else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
         }
         let completedSourceRotations = try database.query(
