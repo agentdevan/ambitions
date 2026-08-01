@@ -1779,7 +1779,7 @@ enum RuntimeCommittedReceiptAuthority {
               reference.compensationReceiptID == compensationCore.facts.receiptID,
               reference.compensationCommandID == compensationCore.facts.commandID,
               reference.terminalEventSequence == compensationCore.facts.lineage.eventSequence,
-              reference.consumedAtMilliseconds == try milliseconds(compensationCore.facts.committedAt),
+              reference.consumedAtMilliseconds == (try milliseconds(compensationCore.facts.committedAt)),
               compensationCore.facts.correlationID == sourceCore.facts.correlationID,
               compensationEventEvidence.terminal.lineage.causationEventID == sourceCore.facts.lineage.eventID,
               compensationEventEvidence.terminal.lineage.correlationID == sourceCore.facts.correlationID,
