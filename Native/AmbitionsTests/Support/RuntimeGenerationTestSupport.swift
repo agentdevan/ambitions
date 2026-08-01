@@ -4,6 +4,8 @@ import Darwin
 import Foundation
 import XCTest
 
+final class RuntimeGenerationTestFileManager: FileManager, @unchecked Sendable {}
+
 struct RuntimeGenerationTestRootAuthority: RuntimeStoreRootAuthorityProviding {
     let applicationSupportURL: URL
     let activationCoordinator = RuntimeStoreActivationCoordinator()
@@ -137,7 +139,7 @@ struct RuntimeGenerationTestHarness: Sendable {
             RuntimeGenerationFixedProtectedDataChecker(isAvailable: true),
         manifestActivator: any RuntimeStoreManifestActivating =
             AtomicRuntimeStoreManifestActivator(),
-        fileManager: FileManager = .default
+        fileManager: RuntimeGenerationTestFileManager = RuntimeGenerationTestFileManager()
     ) async throws -> Self {
         let rootURL = fileManager.temporaryDirectory.appendingPathComponent(
             "RuntimeGenerationV8-\(UUID().uuidString)",
