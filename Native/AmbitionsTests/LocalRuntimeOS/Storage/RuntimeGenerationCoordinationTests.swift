@@ -92,6 +92,75 @@ final class RuntimeGenerationCoordinationTests: XCTestCase {
             createIfMissing: false
         )
         try second.close()
+        try second.close()
+
+        let firstShared = try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: firstAuthority,
+            locations: locations,
+            mode: .shared,
+            createIfMissing: false
+        )
+        let secondShared = try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: secondAuthority,
+            locations: locations,
+            mode: .shared,
+            createIfMissing: false
+        )
+        XCTAssertNoThrow(try firstShared.revalidate(requiredMode: .shared))
+        XCTAssertNoThrow(try secondShared.revalidate(requiredMode: .shared))
+        XCTAssertThrowsError(try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: firstAuthority,
+            locations: locations,
+            mode: .exclusive,
+            createIfMissing: false
+        ))
+        try firstShared.close()
+        try secondShared.close()
+
+        let afterShared = try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: firstAuthority,
+            locations: locations,
+            mode: .exclusive,
+            createIfMissing: false
+        )
+        try afterShared.close()
+    }
+
+    func testActivationLockRevalidatesPinnedFileIdentityAndMode() throws {
+        let fileManager = FileManager.default
+        let root = fileManager.temporaryDirectory.appendingPathComponent(
+            "RuntimeGenerationLockIdentity-\(UUID().uuidString)",
+            isDirectory: true
+        )
+        let applicationSupportURL = root.appendingPathComponent(
+            "Application Support",
+            isDirectory: true
+        )
+        try fileManager.createDirectory(at: applicationSupportURL, withIntermediateDirectories: true)
+        defer { try? fileManager.removeItem(at: root) }
+        let authority = try RuntimeGenerationTestRootAuthority(
+            applicationSupportURL: applicationSupportURL
+        )
+        let locations = RuntimeStoreLocations(applicationSupportURL: applicationSupportURL)
+        try fileManager.createDirectory(at: locations.rootURL, withIntermediateDirectories: true)
+        let scope = try RuntimeGenerationActivationLockScope.acquire(
+            rootAuthority: authority,
+            locations: locations,
+            mode: .exclusive,
+            createIfMissing: true
+        )
+        XCTAssertThrowsError(try scope.revalidate(requiredMode: .shared)) { error in
+            XCTAssertEqual(error as? RuntimeGenerationControlError, .generationWorkerBarrierMismatch)
+        }
+
+        let lockURL = locations.rootURL.appendingPathComponent(".activation.lock")
+        let displacedURL = locations.rootURL.appendingPathComponent(".activation.lock.displaced")
+        try fileManager.moveItem(at: lockURL, to: displacedURL)
+        try Data().write(to: lockURL, options: .withoutOverwriting)
+        XCTAssertThrowsError(try scope.revalidate(requiredMode: .exclusive)) { error in
+            XCTAssertEqual(error as? RuntimeGenerationControlError, .generationWorkerBarrierMismatch)
+        }
+        try scope.close()
     }
 
     func testCancellationReleasesActivationOwnershipAndAllowsCleanRetry() async throws {
@@ -184,5 +253,16 @@ final class RuntimeGenerationCoordinationTests: XCTestCase {
         XCTAssertTrue(source.contains("lifecycle = .closeIndeterminate"))
         XCTAssertTrue(source.contains("guard case .open = lifecycle"))
         XCTAssertTrue(source.contains("guard case .open = lifecycle, let controlLockDescriptor else { return }"))
+
+        let activationSource = try String(
+            contentsOf: repositoryRoot.appendingPathComponent(
+                "Ambitions/Core/LocalRuntimeOS/Storage/RuntimeGenerationActivationLock.swift"
+            ),
+            encoding: .utf8
+        )
+        XCTAssertTrue(activationSource.contains("case closeIndeterminate"))
+        XCTAssertTrue(activationSource.contains("Never retry an indeterminate numeric descriptor"))
+        XCTAssertTrue(activationSource.contains("guard unlocked, closed else"))
+        XCTAssertTrue(activationSource.contains("state = closeResult == 0 ? .closed : .closeIndeterminate"))
     }
 }

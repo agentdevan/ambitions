@@ -63,7 +63,7 @@ final class RuntimeGenerationActivationLockScope: @unchecked Sendable {
         }
         var lockAcquired = false
         do {
-            guard Darwin.flock(descriptor, mode.flockOperation) == 0 else {
+            guard flock(descriptor, mode.flockOperation) == 0 else {
                 throw LocalRuntimeStorageError.canonicalActivationLockFailed
             }
             lockAcquired = true
@@ -109,7 +109,7 @@ final class RuntimeGenerationActivationLockScope: @unchecked Sendable {
                 )
             )
         } catch {
-            let unlocked = lockAcquired == false || Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = lockAcquired == false || flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             if closed == false {
                 RuntimeGenerationLockFailureRegistry.shared.recordIndeterminateClose()
@@ -155,7 +155,7 @@ final class RuntimeGenerationActivationLockScope: @unchecked Sendable {
         case .closeIndeterminate:
             throw LocalRuntimeStorageError.canonicalActivationLockFailed
         case let .held(descriptor):
-            let unlockResult = Darwin.flock(descriptor, LOCK_UN)
+            let unlockResult = flock(descriptor, LOCK_UN)
             let closeResult = Darwin.close(descriptor)
             state = closeResult == 0 ? .closed : .closeIndeterminate
             if closeResult != 0 {
@@ -171,7 +171,7 @@ final class RuntimeGenerationActivationLockScope: @unchecked Sendable {
     deinit {
         stateLock.lock()
         if case let .held(descriptor) = state {
-            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = flock(descriptor, LOCK_UN)
             let closed = Darwin.close(descriptor) == 0
             if closed == false {
                 RuntimeGenerationLockFailureRegistry.shared.recordIndeterminateClose()
