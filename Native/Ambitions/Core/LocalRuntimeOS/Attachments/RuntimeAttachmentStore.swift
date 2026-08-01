@@ -1441,7 +1441,7 @@ enum CanonicalRuntimeAttachmentStore {
         let lifecycleDigest = RuntimeAttachmentCodec.sha256(lifecycleBytes)
         let createdAt = try milliseconds(bundle.revision.createdAt)
 
-        let retentionBinding: SQLiteValue = if let retentionUntil = bundle.lifecycle.retentionUntil {
+        let retentionBinding: SQLiteBinding = if let retentionUntil = bundle.lifecycle.retentionUntil {
             .integer(try milliseconds(retentionUntil))
         } else {
             .null
