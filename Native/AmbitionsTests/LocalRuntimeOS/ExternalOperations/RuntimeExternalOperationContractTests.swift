@@ -3,6 +3,39 @@ import Foundation
 import XCTest
 
 final class RuntimeExternalOperationContractTests: XCTestCase {
+    func testQueryCursorMatchesOperationIdentityValidationNormalizationAndCoding() throws {
+        XCTAssertNil(RuntimeExternalOperationQueryCursor(rawValue: ""))
+        XCTAssertNil(RuntimeExternalOperationQueryCursor(rawValue: " \n "))
+
+        let decomposed = "  e\u{301}.operation  "
+        let operationID = try XCTUnwrap(RuntimeExternalOperationID(rawValue: decomposed))
+        let cursor = try XCTUnwrap(RuntimeExternalOperationQueryCursor(rawValue: decomposed))
+        XCTAssertEqual(cursor.rawValue, operationID.rawValue)
+        XCTAssertEqual(cursor.rawValue, "é.operation")
+
+        let encoded = try JSONEncoder().encode(cursor)
+        XCTAssertEqual(String(decoding: encoded, as: UTF8.self), #""é.operation""#)
+        XCTAssertEqual(try JSONDecoder().decode(RuntimeExternalOperationQueryCursor.self, from: encoded), cursor)
+        XCTAssertLessThan(
+            try XCTUnwrap(RuntimeExternalOperationQueryCursor(rawValue: "operation-1")).rawValue,
+            try XCTUnwrap(RuntimeExternalOperationQueryCursor(rawValue: "operation-2")).rawValue
+        )
+    }
+
+    func testQueryPaginationUsesExclusiveOrderedOperationIdentityBoundary() throws {
+        let source = try String(contentsOfFile:
+            #filePath.replacingOccurrences(
+                of: "Native/AmbitionsTests/LocalRuntimeOS/ExternalOperations/RuntimeExternalOperationContractTests.swift",
+                with: "Native/Ambitions/Core/LocalRuntimeOS/ExternalOperations/RuntimeExternalOperationQueries.swift"
+            ),
+            encoding: .utf8
+        )
+        XCTAssertTrue(source.contains("AND s.operation_id > ?"))
+        XCTAssertTrue(source.contains("ORDER BY s.operation_id LIMIT ?"))
+        XCTAssertTrue(source.contains("bindings.append(.text(cursor.rawValue))"))
+        XCTAssertTrue(source.contains("last.operationID.rawValue"))
+    }
+
     func testV7CatalogIsFullExactAndHasNoLegacyWriteAuthority() {
         let sql = CanonicalRuntimeExternalOperationSchemaPlan.fullGenerationStatements
             .joined(separator: "\n")
