@@ -1,4 +1,5 @@
 @testable import Ambitions
+import AmbitionsRuntimeCore
 import AmbitionsRuntimeSQLite
 import Foundation
 import XCTest
