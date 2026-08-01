@@ -973,7 +973,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let goal = RuntimePreparationAggregateReference(family: .goal, objectID: shared)
         let basePreparation = try await makeCapturePreparation(
             commandID: "command-cross-family-one-event",
-            action: .attachToGoal,
+            action: .attachToGoal(nil),
             target: AmbitionsCommandTarget(goalID: shared.rawValue, captureID: shared.rawValue),
             expectedRevision: .exact(0),
             snapshot: RuntimePreparationSnapshot(
