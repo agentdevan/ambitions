@@ -1065,10 +1065,16 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[4]
                 predicate = #Predicate<StepRecord> {
                     $0.goalID > goalID ||
-                    ($0.goalID == goalID && $0.planID > planID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID > sectionID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID == sectionID && $0.orderIndex > orderIndex) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID == sectionID && $0.orderIndex == orderIndex && $0.id > id)
+                    ($0.goalID == goalID && (
+                        $0.planID > planID ||
+                        ($0.planID == planID && (
+                            $0.sectionID > sectionID ||
+                            ($0.sectionID == sectionID && (
+                                $0.orderIndex > orderIndex ||
+                                ($0.orderIndex == orderIndex && $0.id > id)
+                            ))
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<StepRecord>(
