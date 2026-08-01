@@ -779,7 +779,7 @@ enum CanonicalRuntimeAttachmentStore {
               total < Int64(RuntimeAttachmentLimits.maximumHolds) else {
             throw RuntimeCanonicalAttachmentError.retentionHoldActive
         }
-        let retainBinding: SQLiteValue
+        let retainBinding: SQLiteBinding
         if let retainUntil = hold.retainUntil {
             retainBinding = .integer(try milliseconds(retainUntil))
         } else {
