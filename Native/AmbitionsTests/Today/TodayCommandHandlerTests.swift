@@ -171,6 +171,59 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(envelopes.first?.phase, .rejectedBeforeMutation)
     }
 
+    func testQuarantinedRuntimeCommandBlocksFeedbackAndPreservesOriginalRecord() async throws {
+        let command = AmbitionsCommand(
+            id: "command.quarantined-today-action",
+            kind: .completeAction,
+            source: .today,
+            target: AmbitionsCommandTarget(),
+            createdAt: DomainTimestamp.string(from: fixedNow),
+            sourceSurface: "today"
+        )
+        let quarantinedRecord = QuarantinedCommandExecutionRecord(
+            id: "command.execution.\(command.id)",
+            commandID: command.id,
+            commandBytes: Data("future command bytes".utf8),
+            resultBytes: Data("future result bytes".utf8),
+            recordedAt: DomainTimestamp.string(from: fixedNow),
+            schemaVersion: "99",
+            localOnly: true,
+            privacy: .sensitive,
+            issue: RuntimeUnsupportedCommand(
+                originalBytes: Data("future command bytes".utf8),
+                reason: .futureVersion,
+                recovery: .unsupportedSchema
+            )
+        )
+        let commandRecords = QuarantinedTodayCommandRecordRepository(record: quarantinedRecord)
+        let repositories = try await makeRepositories(
+            commandExecutionRecords: commandRecords,
+            runtimeEvents: nil
+        )
+        let handler = TodayCommandActionHandler(
+            repositories: repositories,
+            feedbackAction: { _, _ in
+                XCTFail("A quarantined command reached the Today feedback mutation handler.")
+                return TodayActionResponse(message: nil)
+            }
+        )
+        let action = TodayInlineAction(
+            kind: .complete,
+            title: "Still counts",
+            systemImage: "checkmark.circle",
+            state: .warning,
+            target: TodayActionTarget()
+        )
+
+        let response = try await handler.performAction(action, command: command, now: fixedNow)
+
+        XCTAssertEqual(response.message?.title, "Action not available")
+        XCTAssertEqual(
+            try await commandRecords.fetchRecord(commandID: command.id),
+            .quarantined(quarantinedRecord)
+        )
+    }
+
     func testAskWhyThisMattersIsRepeatableReadOnlyInspection() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
@@ -230,11 +283,22 @@ private extension TodayCommandHandlerTests {
         Date(timeIntervalSince1970: 1_777_113_600)
     }
 
-    func makeRepositories() async throws -> AppRepositories {
-        try await makeRepositories(store: AmbitionsPersistenceStore(inMemory: true))
+    func makeRepositories(
+        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = InMemoryAmbitionsCommandExecutionRecordRepository(),
+        runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore()
+    ) async throws -> AppRepositories {
+        try await makeRepositories(
+            store: AmbitionsPersistenceStore(inMemory: true),
+            commandExecutionRecords: commandExecutionRecords,
+            runtimeEvents: runtimeEvents
+        )
     }
 
-    func makeRepositories(store: AmbitionsPersistenceStore) async throws -> AppRepositories {
+    func makeRepositories(
+        store: AmbitionsPersistenceStore,
+        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = InMemoryAmbitionsCommandExecutionRecordRepository(),
+        runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore()
+    ) async throws -> AppRepositories {
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),
@@ -242,8 +306,8 @@ private extension TodayCommandHandlerTests {
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
             eventLedger: InMemoryEventLedgerRepository(),
-            commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
-            runtimeEvents: InMemoryRuntimeEventStore(),
+            commandExecutionRecords: commandExecutionRecords,
+            runtimeEvents: runtimeEvents,
             appState: SwiftDataAppStateRepository(store: store)
         )
     }
@@ -262,5 +326,25 @@ private extension TodayCommandHandlerTests {
                 line: line
             )
         }
+    }
+}
+
+private actor QuarantinedTodayCommandRecordRepository: AmbitionsCommandExecutionRecordRepository {
+    let record: QuarantinedCommandExecutionRecord
+
+    init(record: QuarantinedCommandExecutionRecord) {
+        self.record = record
+    }
+
+    func append(_ record: AmbitionsCommandExecutionRecord) async throws {
+        throw RuntimeFoundationError.unsupportedSchema
+    }
+
+    func fetchRecent(limit: Int) async throws -> [StoredCommandExecutionRecord] {
+        limit > 0 ? [.quarantined(record)] : []
+    }
+
+    func fetchRecord(commandID: String) async throws -> StoredCommandExecutionRecord? {
+        commandID == record.commandID ? .quarantined(record) : nil
     }
 }
