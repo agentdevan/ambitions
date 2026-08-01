@@ -115,8 +115,8 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(written.identifier, "event-1")
         XCTAssertEqual(requestedScopes, [.calendarEvents])
         XCTAssertEqual(payload?.title, "Draft proposal")
-        XCTAssertTrue(payload?.notes?.contains("Created by Ambitions after an explicit calendar event request.") == true)
-        XCTAssertTrue(payload?.notes?.contains(operationID) == true)
+        XCTAssertTrue(payload?.notes.contains("Created by Ambitions after an explicit calendar event request.") == true)
+        XCTAssertTrue(payload?.notes.contains(operationID) == true)
 
         let records = await sideEffectLedger.records
         let completedSideEffect = records.first
