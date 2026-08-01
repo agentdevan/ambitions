@@ -477,7 +477,7 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
         let changed = [try RuntimeDomainObjectID(validating: id.rawValue)]
         let command = CaptureCommand(
             action: .quickCapture(externalCreation: nil),
-            target: AmbitionsCommandTarget(captureID: id.rawValue, goalID: id.rawValue),
+            target: AmbitionsCommandTarget(goalID: id.rawValue, captureID: id.rawValue),
             content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Atomic"))
         )
         let capture = RuntimeSemanticAggregate(kind: .capture, id: id)
