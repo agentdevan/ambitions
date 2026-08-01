@@ -561,7 +561,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             blockedReason: "historical_privacy_missing"
         )
         try await database.transaction(.deferred) { isolated in
-            XCTAssertNil(try CanonicalRuntimeStore.nextCanonicalProjectionID(database: isolated))
+            XCTAssertNil(try CanonicalRuntimeStore.nextCanonicalProjectionID(
+                registry: RuntimeCanonicalProjectionDefinitionRegistry.canonical(),
+                database: isolated
+            ))
             let truth = try XCTUnwrap(CanonicalRuntimeStore.canonicalProjectionJobTruth(
                 projectionID: definition.id,
                 expectedDefinitionVersion: definition.definitionVersion,
