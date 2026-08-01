@@ -86,7 +86,7 @@ struct TimeFieldMutationCoordinator: Sendable {
             contextLens: nil,
             relatedGoalID: goalID.flatMap(RuntimeCommandObjectID.init(rawValue:)),
             relatedCaptureID: nil,
-            candidateID: placementCandidate?.id.flatMap(RuntimeCommandObjectID.init(rawValue:)),
+            candidateID: placementCandidate.flatMap { RuntimeCommandObjectID(rawValue: $0.id) },
             candidateKind: placementCandidate?.kind,
             sourceLabel: placementCandidate?.sourceLabel,
             trigger: protectedPlacementTrigger(for: actor),
