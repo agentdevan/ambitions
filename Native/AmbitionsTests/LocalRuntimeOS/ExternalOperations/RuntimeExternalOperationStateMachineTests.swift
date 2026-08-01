@@ -34,10 +34,11 @@ final class RuntimeExternalOperationStateMachineTests: XCTestCase {
                 "SELECT 2 AS ordinal UNION ALL SELECT 1 ORDER BY ordinal",
                 database: database
             )
-            XCTAssertEqual(ordered.compactMap { row in
+            let orderedValues: [Int64] = ordered.compactMap { row in
                 guard case let .integer(value) = row.value(named: "ordinal") else { return nil }
                 return value
-            }, [1, 2])
+            }
+            XCTAssertEqual(orderedValues, [1, 2])
             XCTAssertEqual(orderedBudget.remainingBytes, 0)
 
             var insufficient = RuntimeExternalOperationDecodedByteBudget(maximumBytes: 7)
