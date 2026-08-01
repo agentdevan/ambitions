@@ -345,7 +345,7 @@ actor RuntimeAttachmentVault {
                 throw RuntimeCanonicalAttachmentError.protectedDataUnavailable
             }
             #endif
-            guard Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+            guard flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             try synchronizeDirectoryForProcessLock(rootDirectory)
