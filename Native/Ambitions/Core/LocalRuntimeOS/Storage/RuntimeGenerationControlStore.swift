@@ -226,7 +226,7 @@ actor RuntimeGenerationControlStore {
             O_RDWR | O_NOFOLLOW | O_CLOEXEC
         )
         guard controlLockDescriptor >= 0,
-              Darwin.flock(controlLockDescriptor, LOCK_EX | LOCK_NB) == 0 else {
+              flock(controlLockDescriptor, LOCK_EX | LOCK_NB) == 0 else {
             if controlLockDescriptor >= 0 { _ = Darwin.close(controlLockDescriptor) }
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -234,7 +234,7 @@ actor RuntimeGenerationControlStore {
         guard fstat(controlLockDescriptor, &lockStatus) == 0,
               lockStatus.st_mode & S_IFMT == S_IFREG,
               lockStatus.st_nlink == 1 else {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -247,7 +247,7 @@ actor RuntimeGenerationControlStore {
                 fileManager: fileManager
             )
         } catch {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
@@ -264,7 +264,7 @@ actor RuntimeGenerationControlStore {
                 )
             )
         } catch {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
@@ -274,11 +274,11 @@ actor RuntimeGenerationControlStore {
             let precedingError = error
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw precedingError
         }
@@ -306,22 +306,22 @@ actor RuntimeGenerationControlStore {
         } catch {
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
-        guard Darwin.flock(controlLockDescriptor, LOCK_SH | LOCK_NB) == 0 else {
+        guard flock(controlLockDescriptor, LOCK_SH | LOCK_NB) == 0 else {
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -338,7 +338,7 @@ actor RuntimeGenerationControlStore {
 
     deinit {
         guard case .open = lifecycle, let controlLockDescriptor else { return }
-        _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+        _ = flock(controlLockDescriptor, LOCK_UN)
         _ = Darwin.close(controlLockDescriptor)
     }
 
@@ -364,7 +364,7 @@ actor RuntimeGenerationControlStore {
 
         if let descriptor = controlLockDescriptor {
             controlLockDescriptor = nil
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked && closed else {
                 lifecycle = .closeIndeterminate
