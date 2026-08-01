@@ -3557,7 +3557,7 @@ actor RuntimeGenerationControlStore {
                   target.authorityManifest.sourceGenerationID == record.sourceGenerationID,
                   target.authorityManifest.sourceGenerationDigest == record.sourceGenerationDigest,
                   target.authorityManifest.sourceFence == safetyBackup.sourceFence,
-                  target.authorityManifest.activationBaseline.baselineDigest ==
+                  target.authorityManifest.activationBaseline.candidateIdentityDigest ==
                     record.targetActivationBaselineDigest,
                   verification.candidateGenerationID == record.targetGenerationID,
                   verification.verificationID == record.targetVerificationID,
@@ -3668,7 +3668,7 @@ actor RuntimeGenerationControlStore {
                   plan.targetGenerationID == record.targetGenerationID,
                   plan.targetVerificationID == record.targetVerificationID,
                   plan.targetActivationBaselineDigest ==
-                    target.authorityManifest.activationBaseline.baselineDigest,
+                    target.authorityManifest.activationBaseline.candidateIdentityDigest,
                   target.authorityManifest.sourceFence == safetyBackup.sourceFence,
                   observed.generationDigest == target.authorityManifest.manifestDigest,
                   observed.eventSequence == baseline.eventSequence,
