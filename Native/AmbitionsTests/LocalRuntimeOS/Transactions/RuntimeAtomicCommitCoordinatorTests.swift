@@ -768,8 +768,9 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         }
         XCTAssertTrue(outcomes.dropFirst().allSatisfy { $0 == outcomes[0] })
         let beforeRestart = try await authoritySnapshot(database)
+        let databaseURL = await database.databaseURL
         let restarted = try SQLiteDatabase(
-            url: database.databaseURL,
+            url: databaseURL,
             configuration: SQLiteConfiguration(openMode: .existingOnly)
         )
         let restartedOutcome = try await commit(preparation, database: restarted)
