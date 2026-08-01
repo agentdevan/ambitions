@@ -809,7 +809,7 @@ private extension CanonicalRuntimeSemanticEventStore {
             .text(lineage.eventHash.hexadecimal), .text(chainAnchorDigest.hexadecimal),
             .integer(try RuntimeSemanticEventHashing.milliseconds(lineage.occurredAt)),
         ]
-        let changedRowCount: Int
+        let changedRowCount: Int32
         if lineage.sequence == 1 {
             guard lineage.previousEventHash == nil else {
                 throw CanonicalRuntimeSemanticEventStoreError.hashChainBroken
