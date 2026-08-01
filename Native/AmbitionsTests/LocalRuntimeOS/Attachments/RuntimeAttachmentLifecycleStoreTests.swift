@@ -255,7 +255,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
             var budget = RuntimeReceiptDecodedByteBudget(
                 maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAttachmentArtifactGraphBytes
             )
-            try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
+            return try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
                 receiptID: RuntimeReceiptID(rawValue: "receipt-link-a")!,
                 budget: &budget,
                 database: database
@@ -802,7 +802,7 @@ final class RuntimeAttachmentLifecycleStoreTests: XCTestCase {
             var budget = RuntimeReceiptDecodedByteBudget(
                 maximumBytes: RuntimeCommittedReceiptReadBounds.maximumAttachmentArtifactGraphBytes
             )
-            try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
+            return try CanonicalRuntimeAttachmentStore.authenticatedReceiptArtifacts(
                 receiptID: work.receiptID, budget: &budget, database: database
             )
         }
