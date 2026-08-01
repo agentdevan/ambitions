@@ -1980,7 +1980,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             eventID: try RuntimeEventID(validating: "event.target-bound"),
             receiptID: try RuntimeReceiptID(validating: "receipt.target-bound"),
             rollbackPlanID: try XCTUnwrap(RuntimeRollbackPlanID(rawValue: "rollback.target-bound")),
-            externalOperationID: nil,
+            externalOperationID: try RuntimeExternalOperationID(validating: "external.target-bound"),
             issuedAt: Self.now,
             expiresAt: Self.now.addingTimeInterval(60),
             boundary: .localOnly
@@ -3977,7 +3977,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
                 eventID: try RuntimeEventID(validating: "event.legacy-undo"),
                 receiptID: try RuntimeReceiptID(validating: "receipt.legacy-undo"),
                 rollbackPlanID: try XCTUnwrap(RuntimeRollbackPlanID(rawValue: "rollback.legacy-undo")),
-                externalOperationID: nil,
+                externalOperationID: try RuntimeExternalOperationID(validating: "external.legacy-undo"),
                 issuedAt: Self.now,
                 expiresAt: Self.now.addingTimeInterval(60),
                 boundary: .localOnly
@@ -4013,7 +4013,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
                 eventID: try RuntimeEventID(validating: "event.nonlocal"),
                 receiptID: try RuntimeReceiptID(validating: "receipt.nonlocal"),
                 rollbackPlanID: try XCTUnwrap(RuntimeRollbackPlanID(rawValue: "rollback.nonlocal")),
-                externalOperationID: nil,
+                externalOperationID: try RuntimeExternalOperationID(validating: "external.nonlocal"),
                 issuedAt: Self.now,
                 expiresAt: Self.now.addingTimeInterval(60),
                 boundary: .localOnly
