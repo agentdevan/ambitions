@@ -4,8 +4,6 @@ import Darwin
 import Foundation
 import XCTest
 
-final class RuntimeGenerationTestFileManager: FileManager, @unchecked Sendable {}
-
 struct RuntimeGenerationTestRootAuthority: RuntimeStoreRootAuthorityProviding {
     let applicationSupportURL: URL
     let activationCoordinator = RuntimeStoreActivationCoordinator()
@@ -138,9 +136,9 @@ struct RuntimeGenerationTestHarness: Sendable {
         protectedDataChecker: any RuntimeStoreProtectedDataChecking =
             RuntimeGenerationFixedProtectedDataChecker(isAvailable: true),
         manifestActivator: any RuntimeStoreManifestActivating =
-            AtomicRuntimeStoreManifestActivator(),
-        fileManager: RuntimeGenerationTestFileManager = RuntimeGenerationTestFileManager()
+            AtomicRuntimeStoreManifestActivator()
     ) async throws -> Self {
+        let fileManager = FileManager.default
         let rootURL = fileManager.temporaryDirectory.appendingPathComponent(
             "RuntimeGenerationV8-\(UUID().uuidString)",
             isDirectory: true
@@ -163,15 +161,13 @@ struct RuntimeGenerationTestHarness: Sendable {
         let manager = try RuntimeStoreGenerationManager(
             environment: environment,
             rootAuthority: rootAuthority,
-            fileManager: fileManager,
             protectedDataChecker: protectedDataChecker,
             manifestActivator: manifestActivator
         )
         let locations = await manager.locations
         let controlStore = try await RuntimeGenerationControlStore.open(
             rootAuthority: rootAuthority,
-            environment: environment,
-            fileManager: fileManager
+            environment: environment
         )
         let barrier = RuntimeGenerationBarrierAuthority(activeGenerationID: nil)
         return Self(
@@ -186,8 +182,7 @@ struct RuntimeGenerationTestHarness: Sendable {
                 controlStore: controlStore,
                 generationManager: manager,
                 barrierAuthority: barrier,
-                environment: environment,
-                fileManager: fileManager
+                environment: environment
             )
         )
     }
