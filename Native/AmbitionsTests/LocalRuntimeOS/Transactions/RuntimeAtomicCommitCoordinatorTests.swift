@@ -3986,7 +3986,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         guard case let .unsupported(failure) = outcome else {
             return XCTFail("Legacy schedule undo must remain decode-only")
         }
-        XCTAssertEqual(failure.reason, .unsupportedInThisBuild)
+        XCTAssertEqual(failure.reason, .unsupportedInput)
     }
 
     func testNonLocalCreationCannotAdvertiseACompensationPlan() throws {
