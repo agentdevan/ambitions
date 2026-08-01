@@ -4704,7 +4704,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             subjects: [RuntimeReceiptAccessSubject(coreDigest: coreDigest, privacy: privacy)]
         ))
         let access = try XCTUnwrap(issuedAccess)
-        try await database.transaction(.deferred) { database in
+        return try await database.transaction(.deferred) { database in
             try CanonicalRuntimeStore.compensationEligibilityInTransaction(
                 receiptID: receiptID,
                 access: access,
