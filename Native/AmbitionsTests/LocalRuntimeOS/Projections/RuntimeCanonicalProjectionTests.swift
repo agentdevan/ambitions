@@ -2314,7 +2314,8 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                     eventRecord: record,
                     correlationID: record.lineage.correlationID,
                     dispositionIntent: .noncompensable(evidence),
-                    pendingExternalOperations: [],
+                    externalOperationCreations: [],
+                    attachmentArtifacts: [],
                     compensationConsumption: nil,
                     createdAtMilliseconds: Int64(sequence),
                     database: isolated
@@ -2327,7 +2328,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         projectionDegradation: []
                     ),
                     receipt: core,
-                    pendingExternalOperations: []
+                    externalOperationCreations: []
                 )
                 let finalBytes = try RuntimeAtomicCommitCoding.encodeFinalOutcome(finalOutcome)
                 try isolated.execute(
