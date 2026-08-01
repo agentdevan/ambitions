@@ -1948,7 +1948,7 @@ private extension RuntimeAttachmentVault {
         manifest: RuntimeBlobManifestAuthority,
         key: SymmetricKey
     ) throws {
-        guard try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+        guard try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               expectedAuthority.byteCount == manifest.ciphertextByteCount else {
             throw RuntimeCanonicalAttachmentError.manifestInvalid
         }
@@ -2002,7 +2002,7 @@ private extension RuntimeAttachmentVault {
         )
         let trailing = try handle.read(upToCount: 1) ?? Data()
         guard trailing.isEmpty,
-              try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+              try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               terminal.version == manifest.formatVersion,
               terminal.blobID == manifest.blobID,
               terminal.headerDigest == manifest.headerDigest,
