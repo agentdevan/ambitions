@@ -4314,7 +4314,7 @@ enum CanonicalRuntimeAttachmentStore {
             referenceTransitions.append(referenceHistory)
             producedReference = reference
             nextCount = old.referenceCount + 1
-            nextState = old.state == .finalized || (try hasAuthenticatedCompletedFinalization(
+            nextState = try (old.state == .finalized || hasAuthenticatedCompletedFinalization(
                 blobID: intent.blobID, manifestDigest: intent.manifestDigest, database: database
             )) ? .finalized : .referenced
             if old.state == .orphaned {
