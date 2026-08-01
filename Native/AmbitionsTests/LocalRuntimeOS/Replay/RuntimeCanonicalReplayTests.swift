@@ -1511,12 +1511,14 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
 
     func testReplayRejectsMoreThan4096PendingBoundaryCertificatesWithoutWrites() async throws {
         let database = try await makeProjectionReplayDatabase(label: "boundary-cap")
-        let events = try (0..<4_097).map { index in
-            try captureEvent(
+        var events: [RuntimeSemanticEvent] = []
+        events.reserveCapacity(4_097)
+        for index in 0..<4_097 {
+            events.append(try captureEvent(
                 id: "boundary-cap", revision: UInt64(index),
                 prior: index == 0 ? nil : UInt64(index - 1),
                 action: index == 0 ? .quickCapture(externalCreation: nil) : .markWaiting
-            )
+            ))
         }
         try await Self.appendBoundarySeries(events, database: database)
 
