@@ -214,7 +214,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             } catch let error as RuntimeAtomicCommitError {
                 XCTAssertEqual(error, .injectedFailure(phase))
             }
-            XCTAssertEqual(try await authoritySnapshot(failureDatabase), .empty)
+            let failureSnapshot = try await authoritySnapshot(failureDatabase)
+            XCTAssertEqual(failureSnapshot, .empty)
 
             let cancellationDatabase = try await makeStagedDatabase(label: "cancel-\(phase.rawValue)")
             do {
@@ -227,7 +228,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             // AMBitionsAllowWeakPattern(reason: "Expected cancellation establishes atomic commit rollback invariant")
             } catch is CancellationError {
             }
-            XCTAssertEqual(try await authoritySnapshot(cancellationDatabase), .empty)
+            let cancellationSnapshot = try await authoritySnapshot(cancellationDatabase)
+            XCTAssertEqual(cancellationSnapshot, .empty)
         }
     }
 
@@ -239,7 +241,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let replay = try await commit(original, database: database)
 
         XCTAssertEqual(replay, first)
-        XCTAssertEqual(try await authoritySnapshot(database), afterFirst)
+        let snapshotAfterReplay = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterReplay, afterFirst)
 
         let collision = try await makeCapturePreparation(
             commandID: "command-collision",
@@ -252,7 +255,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as CanonicalRuntimeTransactionError {
             XCTAssertEqual(error, .idempotencyCollision)
         }
-        XCTAssertEqual(try await authoritySnapshot(database), afterFirst)
+        let snapshotAfterCollision = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterCollision, afterFirst)
     }
 
     func testHistoricalReplayAllowsCurrentAggregateToAdvanceAndWritesNothing() async throws {
@@ -278,7 +282,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let historicalReplay = try await commit(creation, database: database)
 
         XCTAssertEqual(historicalReplay, original)
-        XCTAssertEqual(try await authoritySnapshot(database), afterUpdate)
+        let snapshotAfterHistoricalReplay = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterHistoricalReplay, afterUpdate)
         let aggregate = try await database.query(
             "SELECT revision FROM runtime_aggregates WHERE aggregate_kind = 'capture' AND aggregate_id = 'capture-1'"
         )
@@ -325,7 +330,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let replay = try await commit(creation, database: database)
 
         XCTAssertEqual(replay, original)
-        XCTAssertEqual(try await authoritySnapshot(database), beforeReplay)
+        let snapshotAfterReplay = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterReplay, beforeReplay)
     }
 
     func testSameRevisionChecksumValidPayloadMutationIsRejected() async throws {
@@ -421,7 +427,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as RuntimeAtomicCommitError {
             XCTAssertEqual(error, .eventQuarantined)
         }
-        XCTAssertEqual(try await authoritySnapshot(database), .empty)
+        let snapshotAfterQuarantine = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterQuarantine, .empty)
     }
 
     func testConfirmationRemainsReusableAfterRollbackAndIsConsumedWithLinkedCommit() async throws {
@@ -439,7 +446,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as RuntimeAtomicCommitError {
             XCTAssertEqual(error, .injectedFailure(.idempotencyFinalized))
         }
-        XCTAssertEqual(try await authoritySnapshot(database), .empty)
+        let snapshotAfterRollback = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterRollback, .empty)
 
         let committed = try await commit(
             preparation,
@@ -764,8 +772,10 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             url: database.databaseURL,
             configuration: SQLiteConfiguration(openMode: .existingOnly)
         )
-        XCTAssertEqual(try await commit(preparation, database: restarted), outcomes[0])
-        XCTAssertEqual(try await authoritySnapshot(restarted), beforeRestart)
+        let restartedOutcome = try await commit(preparation, database: restarted)
+        XCTAssertEqual(restartedOutcome, outcomes[0])
+        let afterRestart = try await authoritySnapshot(restarted)
+        XCTAssertEqual(afterRestart, beforeRestart)
     }
 
     func testExactCASReadsChecksummedStateAndAdvancesZeroToOne() async throws {
@@ -1024,7 +1034,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let replay = try await commit(preparation, database: database)
 
         XCTAssertEqual(replay, original)
-        XCTAssertEqual(try await authoritySnapshot(database), beforeReplay)
+        let snapshotAfterReplay = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterReplay, beforeReplay)
         let events = try await database.query(
             """
             SELECT sequence, event_id, aggregate_kind, aggregate_id,
@@ -1203,7 +1214,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as RuntimeAtomicCommitError {
             XCTAssertEqual(error, .stalePreparation)
         }
-        XCTAssertEqual(try await authoritySnapshot(database), before)
+        let snapshotAfterRejection = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterRejection, before)
     }
 
     func testCorruptStoredAggregateChecksumFailsBeforeCASAndPreservesEvidence() async throws {
@@ -1233,7 +1245,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as RuntimeAtomicCommitError {
             XCTAssertEqual(error, .corruptAuthority)
         }
-        XCTAssertEqual(try await authoritySnapshot(database), before)
+        let snapshotAfterCorruption = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterCorruption, before)
         let preserved = try await database.query(
             "SELECT payload_checksum FROM runtime_aggregates WHERE aggregate_kind = 'capture' AND aggregate_id = 'capture-1'"
         )
@@ -1266,7 +1279,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         } catch let error as RuntimeAtomicCommitError {
             XCTAssertEqual(error, .corruptAuthority)
         }
-        XCTAssertEqual(try await authoritySnapshot(database), before)
+        let snapshotAfterReplayRejection = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterReplayRejection, before)
         let preserved = try await database.query("SELECT final_result_payload FROM runtime_command_idempotency")
         XCTAssertEqual(preserved.first?.value(named: "final_result_payload"), .blob(payload))
     }
@@ -1821,7 +1835,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         )
 
         XCTAssertEqual(replay, first)
-        XCTAssertEqual(try await authoritySnapshot(database), snapshotAfterFirst)
+        let snapshotAfterReplay = try await authoritySnapshot(database)
+        XCTAssertEqual(snapshotAfterReplay, snapshotAfterFirst)
         do {
             _ = try await commit(
                 competingPreparation,
@@ -2049,12 +2064,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             confirmation: try approvedConfirmation(for: preparation),
             database: database
         )
+        let consumedEligibility = try await eligibility(
+            for: source.receipt.facts.receiptID,
+            at: Self.now,
+            database: database
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: source.receipt.facts.receiptID,
-                at: Self.now,
-                database: database
-            ),
+            consumedEligibility,
             .consumed(compensationReceiptID: compensation.receipt.facts.receiptID)
         )
 
@@ -2178,12 +2194,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
 
         let expiredDatabase = try await makeStagedDatabase(label: "eligibility-expired")
         let expiredSource = try await commit(try await makeCapturePreparation(), database: expiredDatabase)
+        let expiredEligibility = try await eligibility(
+            for: expiredSource.receipt.facts.receiptID,
+            at: Self.now.addingTimeInterval(31 * 24 * 60 * 60),
+            database: expiredDatabase
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: expiredSource.receipt.facts.receiptID,
-                at: Self.now.addingTimeInterval(31 * 24 * 60 * 60),
-                database: expiredDatabase
-            ),
+            expiredEligibility,
             .expired
         )
 
@@ -2204,12 +2221,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             )
         )
         _ = try await commit(update, database: staleDatabase)
+        let staleEligibility = try await eligibility(
+            for: staleSource.receipt.facts.receiptID,
+            at: Self.now,
+            database: staleDatabase
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: staleSource.receipt.facts.receiptID,
-                at: Self.now,
-                database: staleDatabase
-            ),
+            staleEligibility,
             .stale
         )
 
@@ -2225,12 +2243,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             confirmation: try approvedConfirmation(for: compensation),
             database: consumedDatabase
         )
+        let consumedEligibility = try await eligibility(
+            for: consumedSource.receipt.facts.receiptID,
+            at: Self.now,
+            database: consumedDatabase
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: consumedSource.receipt.facts.receiptID,
-                at: Self.now,
-                database: consumedDatabase
-            ),
+            consumedEligibility,
             .consumed(compensationReceiptID: compensationOutcome.receipt.facts.receiptID)
         )
     }
@@ -2245,12 +2264,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             "DELETE FROM runtime_aggregates WHERE aggregate_kind = 'capture' AND aggregate_id = 'capture-1'"
         )
         XCTAssertEqual(deletion.changedRowCount, 1)
+        let absentEligibility = try await eligibility(
+            for: absentSource.receipt.facts.receiptID,
+            at: Self.now,
+            database: absentDatabase
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: absentSource.receipt.facts.receiptID,
-                at: Self.now,
-                database: absentDatabase
-            ),
+            absentEligibility,
             .stale
         )
 
@@ -2277,12 +2297,13 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             ),
             database: advancedDatabase
         )
+        let advancedEligibility = try await eligibility(
+            for: advancedSource.receipt.facts.receiptID,
+            at: Self.now,
+            database: advancedDatabase
+        )
         XCTAssertEqual(
-            try await eligibility(
-                for: advancedSource.receipt.facts.receiptID,
-                at: Self.now,
-                database: advancedDatabase
-            ),
+            advancedEligibility,
             .stale
         )
     }
@@ -2676,10 +2697,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
                     [.text(compensation.receipt.facts.receiptID.rawValue)]
                 )
             }
-            XCTAssertEqual(
-                try await database.execute(update.0, bindings: update.1).changedRowCount,
-                1
-            )
+            let updateResult = try await database.execute(update.0, bindings: update.1)
+            XCTAssertEqual(updateResult.changedRowCount, 1)
             do {
                 try await database.transaction(.deferred) { database in
                     var budget = RuntimeReceiptDecodedByteBudget(
@@ -3642,14 +3661,15 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let wrongAuthority = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .authenticated }
         )
-        let access = try XCTUnwrap(try await wrongAuthority.issue(RuntimeReceiptAccessRequest(
+        let issuedAccess = try await wrongAuthority.issue(RuntimeReceiptAccessRequest(
             surface: .localInspection,
             purpose: .interactiveInspection,
             subjects: [RuntimeReceiptAccessSubject(
                 coreDigest: wrongDigest,
                 privacy: .privateUserText
             )]
-        )))
+        ))
+        let access = try XCTUnwrap(issuedAccess)
         XCTAssertEqual(access.authorizedReceiptDigests, Set([wrongDigest]))
         XCTAssertNotEqual(outcome.receipt.receiptDigest, wrongDigest)
         let receiptState = try await database.transaction(.deferred) { database in
@@ -3723,7 +3743,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let forgedPrivacyAuthority = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .authenticated }
         )
-        let access = try XCTUnwrap(try await forgedPrivacyAuthority.issue(
+        let issuedAccess = try await forgedPrivacyAuthority.issue(
             RuntimeReceiptAccessRequest(
                 surface: .localInspection,
                 purpose: .interactiveInspection,
@@ -3732,7 +3752,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
                     privacy: .standard
                 )]
             )
-        ))
+        )
+        let access = try XCTUnwrap(issuedAccess)
         XCTAssertEqual(access.fullReceiptDigests, Set([outcome.receipt.receiptDigest]))
 
         let receiptState = try await database.transaction(.deferred) { database in
@@ -4674,11 +4695,12 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             testingAuthentication: { _ in .authenticated },
             testingReview: { _ in .reviewed }
         )
-        let access = try XCTUnwrap(try await authority.issue(RuntimeReceiptAccessRequest(
+        let issuedAccess = try await authority.issue(RuntimeReceiptAccessRequest(
             surface: .localInspection,
             purpose: .interactiveInspection,
             subjects: [RuntimeReceiptAccessSubject(coreDigest: coreDigest, privacy: privacy)]
-        )))
+        ))
+        let access = try XCTUnwrap(issuedAccess)
         try await database.transaction(.deferred) { database in
             try CanonicalRuntimeStore.compensationEligibilityInTransaction(
                 receiptID: receiptID,
@@ -4841,7 +4863,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             },
             testingReview: { _ in userReviewed ? .reviewed : .denied }
         )
-        return try XCTUnwrap(try await authority.issue(RuntimeReceiptAccessRequest(
+        let issuedAccess = try await authority.issue(RuntimeReceiptAccessRequest(
             surface: surface,
             purpose: .interactiveInspection,
             subjects: cores.map {
@@ -4852,7 +4874,8 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             },
             maximumRows: maximumRows,
             maximumBytes: maximumBytes
-        )))
+        ))
+        return try XCTUnwrap(issuedAccess)
     }
 
     private static let now = Date(timeIntervalSince1970: 1_800_000_000)
