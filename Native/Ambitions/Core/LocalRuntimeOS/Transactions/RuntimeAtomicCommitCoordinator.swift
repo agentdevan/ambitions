@@ -1394,13 +1394,6 @@ private struct RuntimeAtomicCommitPlan {
 
         let observedPrimary = try Self.observedRevision(key: primaryKey, database: database)
         let aggregateObserved = observedPrimary.map { RuntimeExpectedRevision.exact($0) } ?? .absent
-        guard let primaryFamily = RuntimeSemanticAggregateKind(rawValue: primaryKey.kind) else {
-            throw RuntimeAtomicCommitError.corruptAuthority
-        }
-        let primaryReference = RuntimePreparationAggregateReference(
-            family: primaryFamily,
-            objectID: try RuntimeDomainObjectID(validating: primaryKey.id)
-        )
         var revisions: [RuntimePreparationAggregateReference: RuntimeExpectedRevision] = [
             primaryReference: aggregateObserved,
         ]
