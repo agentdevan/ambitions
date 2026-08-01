@@ -700,7 +700,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void = { _ in },
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
@@ -726,7 +726,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void = { _ in },
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
@@ -756,7 +756,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void = { _ in },
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
@@ -781,7 +781,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void = { _ in },
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
@@ -805,7 +805,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void = { _ in },
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
@@ -833,7 +833,7 @@ public actor SQLiteDatabase {
         precommitValidation: @escaping @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Void,
-        _ operation: @escaping @Sendable (
+        _ operation: @Sendable (
             _ database: isolated SQLiteDatabase
         ) throws -> Result
     ) throws -> Result {
