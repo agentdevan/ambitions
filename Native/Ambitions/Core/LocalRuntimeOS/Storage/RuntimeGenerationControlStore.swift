@@ -2465,7 +2465,7 @@ actor RuntimeGenerationControlStore {
                     let consumptions = try database.query(
                         "SELECT authorization_id FROM runtime_generation_recovery_authorization_consumptions WHERE authorization_id = ? LIMIT 1",
                         bindings: [.text(authorizationID)],
-                        maximumDecodedBytes: maximumControlReadBytes
+                        maximumDecodedBytes: Self.maximumControlReadBytes
                     )
                     let targetMatches: Bool
                     if record.operationKind == .restore {
@@ -2476,7 +2476,7 @@ actor RuntimeGenerationControlStore {
                         let rollbackRows = try database.query(
                             "SELECT * FROM runtime_generation_rollbacks WHERE rollback_digest = ? LIMIT 2",
                             bindings: [.text(authorization.targetDigest)],
-                            maximumDecodedBytes: maximumControlReadBytes
+                            maximumDecodedBytes: Self.maximumControlReadBytes
                         )
                         guard rollbackRows.count == 1 else {
                             throw RuntimeGenerationControlError.rollbackUnsafe
@@ -2922,7 +2922,7 @@ actor RuntimeGenerationControlStore {
             let existing = try database.query(
                 "SELECT * FROM runtime_generation_activation_consumptions WHERE intent_id = ? LIMIT 2",
                 bindings: [.text(consumption.intentID)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             if existing.isEmpty == false {
                 guard existing.count == 1,
@@ -3526,7 +3526,7 @@ actor RuntimeGenerationControlStore {
                 let rollbackRows = try database.query(
                     "SELECT * FROM runtime_generation_rollbacks WHERE rollback_digest = ? LIMIT 2",
                     bindings: [.text(authorization.targetDigest)],
-                    maximumDecodedBytes: maximumControlReadBytes
+                    maximumDecodedBytes: Self.maximumControlReadBytes
                 )
                 guard rollbackRows.count == 1 else {
                     throw RuntimeGenerationControlError.rollbackUnsafe
@@ -4191,7 +4191,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_retention_transitions WHERE generation_id = ? ORDER BY occurred_at_ms DESC, transition_id DESC LIMIT 2",
                 bindings: [.text(generationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count <= 1 else {
                 // LIMIT 2 intentionally makes an equal timestamp/identity
@@ -6406,7 +6406,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_restore_baselines WHERE target_generation_id = ? LIMIT 2",
                 bindings: [.text(targetGenerationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count == 1 else {
                 throw RuntimeGenerationControlError.recordMissing(
@@ -6445,7 +6445,7 @@ actor RuntimeGenerationControlStore {
         let rows = try await database.query(
             "SELECT authorization_id FROM runtime_generation_recovery_authorization_consumptions WHERE authorization_id = ? LIMIT 2",
             bindings: [.text(id)],
-            maximumDecodedBytes: maximumControlReadBytes
+            maximumDecodedBytes: Self.maximumControlReadBytes
         )
         guard rows.count <= 1 else {
             throw RuntimeGenerationControlError.recordCorrupt(
@@ -6524,7 +6524,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_activation_intents WHERE candidate_generation_id = ? LIMIT 2",
                 bindings: [.text(candidateGenerationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count == 1 else {
                 throw RuntimeGenerationControlError.recordMissing(
@@ -6547,7 +6547,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_activation_consumptions WHERE intent_id = ? LIMIT 2",
                 bindings: [.text(intentID)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count <= 1 else {
                 throw RuntimeGenerationControlError.recordCorrupt(
