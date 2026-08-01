@@ -670,7 +670,7 @@ extension CanonicalRuntimeStore {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         let attachmentIntent = command.intent
-        try await withAtomicCommitTransaction { database in
+        return try await withAtomicCommitTransaction { database in
             let outcome = try Self.atomicCommitInTransaction(
                 preparation: preparation, confirmation: confirmation,
                 submittedAt: submittedAt,
