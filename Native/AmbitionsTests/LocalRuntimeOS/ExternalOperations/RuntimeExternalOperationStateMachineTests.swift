@@ -102,7 +102,7 @@ final class RuntimeExternalOperationStateMachineTests: XCTestCase {
         )
         XCTAssertFalse(RuntimeExternalOperationCodec.validTransition(
             from: claimed, to: executing,
-            attemptID: XCTUnwrap(RuntimeExternalAttemptID(rawValue: "attempt-1"))
+            attemptID: try XCTUnwrap(RuntimeExternalAttemptID(rawValue: "attempt-1"))
         ))
         XCTAssertFalse(RuntimeExternalOperationCodec.validTransition(
             from: claimed, to: claimed, attemptID: nil
