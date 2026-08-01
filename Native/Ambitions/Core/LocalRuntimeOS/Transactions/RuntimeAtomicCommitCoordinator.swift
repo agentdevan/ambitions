@@ -1243,7 +1243,7 @@ private struct RuntimeAtomicCommitPlan {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         if case let .schedule(schedule) = preparation.command.typedPayload,
-           schedule.action == .undo {
+           case .undo = schedule.action {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         let causalAuthority: (correlationID: RuntimeCorrelationID, causationEventID: RuntimeEventID?)
@@ -1668,7 +1668,7 @@ private struct RuntimeAtomicCommitPlan {
 
     func requireReducerReplay() throws {
         if case let .schedule(schedule) = preparation.command.typedPayload,
-           schedule.action == .undo {
+           case .undo = schedule.action {
             throw RuntimeAtomicCommitError.malformedPreparation
         }
         guard let primaryFamily = RuntimeSemanticAggregateKind(rawValue: primaryKey.kind),
