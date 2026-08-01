@@ -254,8 +254,9 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         let vault = try XCTAttachmentFixtures.vault(root: root)
         let source = root.appendingPathComponent("cancel.bin")
         try Data(repeating: 8, count: 20_000).write(to: source)
+        let request = try stageRequest(source: source, size: 20_000)
         let task = Task {
-            try await vault.stage(try stageRequest(source: source, size: 20_000))
+            try await vault.stage(request)
         }
         task.cancel()
         do {
