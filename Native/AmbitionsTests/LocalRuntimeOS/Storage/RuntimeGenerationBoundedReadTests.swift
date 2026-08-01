@@ -11,14 +11,14 @@ final class RuntimeGenerationBoundedReadTests: XCTestCase {
             try await Self.seedCanonicalRows(in: source, tombstoneCount: 0)
 
             let first = try await source.withReadTransaction { database in
-                try CanonicalRuntimeStore.readEvents(
+                try CanonicalRuntimeStore.testOnlyReadEvents(
                     from: database,
                     after: nil,
                     limit: 2
                 )
             }
             let second = try await source.withReadTransaction { database in
-                try CanonicalRuntimeStore.readEvents(
+                try CanonicalRuntimeStore.testOnlyReadEvents(
                     from: database,
                     after: try XCTUnwrap(first.nextCursor),
                     limit: 2
@@ -43,7 +43,7 @@ final class RuntimeGenerationBoundedReadTests: XCTestCase {
             )
             let migrated = try await harness.openActiveStore()
             let migratedPage = try await migrated.withReadTransaction { database in
-                try CanonicalRuntimeStore.readEvents(
+                try CanonicalRuntimeStore.testOnlyReadEvents(
                     from: database,
                     after: nil,
                     limit: 3
@@ -66,14 +66,14 @@ final class RuntimeGenerationBoundedReadTests: XCTestCase {
             try await Self.seedCanonicalRows(in: store, tombstoneCount: 3)
 
             let first = try await store.withReadTransaction { database in
-                try CanonicalRuntimeStore.readTombstones(
+                try CanonicalRuntimeStore.testOnlyReadTombstones(
                     from: database,
                     after: nil,
                     limit: 2
                 )
             }
             let second = try await store.withReadTransaction { database in
-                try CanonicalRuntimeStore.readTombstones(
+                try CanonicalRuntimeStore.testOnlyReadTombstones(
                     from: database,
                     after: try XCTUnwrap(first.nextCursor),
                     limit: 2
@@ -102,7 +102,7 @@ final class RuntimeGenerationBoundedReadTests: XCTestCase {
 
             do {
                 _ = try await store.withReadTransaction { database in
-                    try CanonicalRuntimeStore.readTombstones(
+                    try CanonicalRuntimeStore.testOnlyReadTombstones(
                         from: database,
                         after: nil,
                         limit: 5
@@ -136,7 +136,10 @@ private extension RuntimeGenerationBoundedReadTests {
         tombstoneCount: Int,
         tombstonePayloadByteCount: Int = 1
     ) async throws {
-        _ = try await store.withWriteTransaction { database in
+        _ = try await store.withWriteTransaction(
+            kind: .canonicalWriter,
+            writeAuthorization: try seedWriteAuthorization
+        ) { database in
             try database.execute(
                 """
                 INSERT INTO runtime_aggregates(
@@ -213,6 +216,21 @@ private extension RuntimeGenerationBoundedReadTests {
                     )
                 }
             }
+        }
+    }
+
+    static var seedWriteAuthorization: SQLiteWriteAuthorization {
+        get throws {
+            let tables: Set<String> = [
+                "runtime_aggregates",
+                "runtime_command_idempotency",
+                "runtime_events",
+                "runtime_tombstones",
+            ]
+            return try SQLiteWriteAuthorization(
+                allowedTables: tables,
+                allowedReadTables: tables
+            )
         }
     }
 }

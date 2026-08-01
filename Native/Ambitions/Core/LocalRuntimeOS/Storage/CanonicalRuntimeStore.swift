@@ -1392,3 +1392,23 @@ private extension CanonicalRuntimeStore {
         }
     }
 }
+
+#if DEBUG
+extension CanonicalRuntimeStore {
+    static func testOnlyReadEvents(
+        from database: isolated SQLiteDatabase,
+        after cursor: CanonicalRuntimeEventCursor?,
+        limit: Int
+    ) throws -> CanonicalRuntimePage<CanonicalRuntimeEventRecord, CanonicalRuntimeEventCursor> {
+        try readEvents(from: database, after: cursor, limit: limit)
+    }
+
+    static func testOnlyReadTombstones(
+        from database: isolated SQLiteDatabase,
+        after cursor: CanonicalRuntimeTombstoneCursor?,
+        limit: Int
+    ) throws -> CanonicalRuntimePage<CanonicalRuntimeTombstoneRecord, CanonicalRuntimeTombstoneCursor> {
+        try readTombstones(from: database, after: cursor, limit: limit)
+    }
+}
+#endif
