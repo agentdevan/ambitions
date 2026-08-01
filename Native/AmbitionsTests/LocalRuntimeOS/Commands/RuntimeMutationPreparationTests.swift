@@ -754,6 +754,7 @@ final class RuntimeMutationPreparationTests: XCTestCase {
             actor: base.authorization.actor,
             source: base.authorization.source,
             expectedRevision: .absent,
+            observedRevision: .exact(1),
             privacyBoundary: base.authorization.privacyBoundary,
             sideEffectPolicy: base.authorization.sideEffectPolicy,
             reasonCodes: []
