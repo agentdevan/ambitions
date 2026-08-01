@@ -276,8 +276,8 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
               case let .calendarWrite(calendar) = schedule.action else {
             return XCTFail("Expected v1 calendar metadata to upgrade to typed calendar intent")
         }
-        XCTAssertEqual(calendar.operationID.rawValue, confirmed.id)
-        XCTAssertEqual(calendar.scheduleBlockID, "schedule-block-1")
+        XCTAssertEqual(calendar.operationID?.rawValue, confirmed.id)
+        XCTAssertEqual(calendar.scheduleBlockID?.rawValue, "schedule-block-1")
         XCTAssertEqual(calendar.displacedDisposition, .notDisplaced)
         XCTAssertEqual(calendar.lifeshapeImpact, .recalculatedBeforeCommit)
 
