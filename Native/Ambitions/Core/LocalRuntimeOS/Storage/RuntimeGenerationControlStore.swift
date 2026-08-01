@@ -8381,7 +8381,11 @@ private extension RuntimeGenerationControlStore {
     static func legacyV5ToV6MigrationAuthorization() throws -> SQLiteSchemaMigrationAuthorization {
         let tables = ["runtime_generation_control_metadata", "runtime_generation_control_metadata_upgrade_v6", "runtime_generation_recovery_operation_plans", "runtime_generation_recovery_operation_consumptions", "runtime_generation_recovery_operation_execution_claims", "runtime_generation_recovery_operation_execution_receipts", "runtime_generation_recovery_operation_plan_dispositions", "runtime_generation_recovery_operation_plan_successions", "runtime_generation_recovery_operation_verification_bindings"]
         let triggers = tables.flatMap { immutableTrigger(table: $0) }.compactMap { $0.split(separator: " ").dropFirst(2).first.map(String.init) }
-        return try SQLiteSchemaMigrationAuthorization(allowedSchemaObjects: tables + triggers, allowedTables: tables, allowedReadTables: tables + ["runtime_generation_recovery_authorizations", "runtime_generation_quarantines", "runtime_generation_verifications", "runtime_generation_rebuilds", "runtime_generation_records", "sqlite_master", "sqlite_schema"])
+        return try SQLiteSchemaMigrationAuthorization(
+            allowedSchemaObjects: Set(tables + triggers),
+            allowedTables: Set(tables),
+            allowedReadTables: Set(tables + ["runtime_generation_recovery_authorizations", "runtime_generation_quarantines", "runtime_generation_verifications", "runtime_generation_rebuilds", "runtime_generation_records", "sqlite_master", "sqlite_schema"])
+        )
     }
 
     static func migrateExactLegacyV6Schema(in database: SQLiteDatabase) async throws {
@@ -8765,14 +8769,18 @@ private extension RuntimeGenerationControlStore {
             "runtime_generation_migration_runs_recovery_execution_idx",
             "runtime_generation_recovery_execution_claims_plan_claim_epoch_uq",
         ]
-        return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: rebuiltTables + upgradeTables + triggerNames + indexes + [
+        let allowedSchemaObjects = Set(
+            rebuiltTables + upgradeTables + triggerNames + indexes + [
                 "runtime_generation_recovery_operation_execution_claims",
-            ],
-            allowedTables: rebuiltTables + upgradeTables + [
+            ]
+        )
+        let allowedTables = Set(
+            rebuiltTables + upgradeTables + [
                 "runtime_generation_recovery_operation_execution_claims",
-            ],
-            allowedReadTables: rebuiltTables + upgradeTables + [
+            ]
+        )
+        let allowedReadTables = Set(
+            rebuiltTables + upgradeTables + [
                 "runtime_generation_reservations",
                 "runtime_generation_backups",
                 "runtime_generation_backup_preparations",
@@ -8784,6 +8792,11 @@ private extension RuntimeGenerationControlStore {
                 "sqlite_master",
                 "sqlite_schema",
             ]
+        )
+        return try SQLiteSchemaMigrationAuthorization(
+            allowedSchemaObjects: allowedSchemaObjects,
+            allowedTables: allowedTables,
+            allowedReadTables: allowedReadTables
         )
     }
 
@@ -8993,11 +9006,11 @@ private extension RuntimeGenerationControlStore {
             }
         }
         return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: rebuiltTables + upgradedTables + triggerNames + [
+            allowedSchemaObjects: Set(rebuiltTables + upgradedTables + triggerNames + [
                 "runtime_generation_rebuilds_recovery_execution_idx",
-            ],
-            allowedTables: rebuiltTables + upgradedTables,
-            allowedReadTables: rebuiltTables + upgradedTables + [
+            ]),
+            allowedTables: Set(rebuiltTables + upgradedTables),
+            allowedReadTables: Set(rebuiltTables + upgradedTables + [
                 "runtime_generation_migration_runs",
                 "runtime_generation_reservations",
                 "runtime_generation_records",
@@ -9006,7 +9019,7 @@ private extension RuntimeGenerationControlStore {
                 "runtime_generation_projection_rebuild_lifecycle_transitions",
                 "sqlite_master",
                 "sqlite_schema",
-            ]
+            ])
         )
     }
 
@@ -9070,10 +9083,10 @@ private extension RuntimeGenerationControlStore {
             }
         }
         return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: tables + triggers + [
+            allowedSchemaObjects: Set(tables + triggers + [
                 "runtime_generation_projection_rebuild_candidate_reservations_claim_idx",
-            ],
-            allowedTables: tables,
+            ]),
+            allowedTables: Set(tables),
             allowedReadTables: [metadata, upgradedMetadata, "sqlite_master", "sqlite_schema"]
         )
     }
