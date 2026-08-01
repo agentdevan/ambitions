@@ -4032,7 +4032,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
         let frozen = FrozenV5FinalOutcome(
             committed: current.committed,
             receipt: FrozenV5Receipt(current.receipt),
-            pendingExternalOperations: current.pendingExternalOperations.map(FrozenV5Pending.init)
+            pendingExternalOperations: current.externalOperationCreations.map(FrozenV5Pending.init)
         )
         let frozenBytes = try RuntimeAtomicCommitCoding.encode(frozen)
         XCTAssertThrowsError(try RuntimeAtomicCommitCoding.decodeFinalOutcome(
@@ -5004,10 +5004,10 @@ private struct FrozenV5Pending: Codable {
     let status: String
     let lineage: RuntimeAuthorityLineageReference
 
-    init(_ value: RuntimeCanonicalPendingExternalOperation) {
+    init(_ value: RuntimeAtomicExternalOperationCreationEvidence) {
         operationID = value.operationID
         kind = value.kind
-        status = value.status
+        status = "pending"
         lineage = value.lineage
     }
 }
