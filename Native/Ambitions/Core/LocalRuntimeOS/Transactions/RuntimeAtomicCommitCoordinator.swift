@@ -2437,57 +2437,57 @@ enum RuntimeAtomicSemanticEventFactory {
         switch command {
         case let .capture(value):
             let payload = try RuntimeCaptureMutationPayload(mutation: mutation, facts: value)
-            return .capture(switch value.action {
-            case .quickCapture: .created(payload)
-            case .routeCommitment: .commitmentRouted(payload)
-            case .attachToGoal: .attachedToGoal(payload)
-            case .markWaiting: .markedWaiting(payload)
-            case .archive: .archived(payload)
-            })
+            switch value.action {
+            case .quickCapture: return .capture(.created(payload))
+            case .routeCommitment: return .capture(.commitmentRouted(payload))
+            case .attachToGoal: return .capture(.attachedToGoal(payload))
+            case .markWaiting: return .capture(.markedWaiting(payload))
+            case .archive: return .capture(.archived(payload))
+            }
         case let .goal(value):
             let payload = try RuntimeGoalMutationPayload(mutation: mutation, facts: value)
-            return .goal(switch value.action {
-            case .create: .created(payload)
-            case .update: .updated(payload)
-            case .setPriority: .prioritySet(payload)
-            case .setUrgency: .urgencySet(payload)
-            case .setDeadline: .deadlineSet(payload)
-            case .setContextLens: .contextLensSet(payload)
-            case .clearContextLens: .contextLensCleared(payload)
-            case .addDeliverable: .deliverableAdded(payload)
-            case .removeDeliverable: .deliverableRemoved(payload)
-            case .addScopeItem: .scopeItemAdded(payload)
-            case .removeScopeItem: .scopeItemRemoved(payload)
-            })
+            switch value.action {
+            case .create: return .goal(.created(payload))
+            case .update: return .goal(.updated(payload))
+            case .setPriority: return .goal(.prioritySet(payload))
+            case .setUrgency: return .goal(.urgencySet(payload))
+            case .setDeadline: return .goal(.deadlineSet(payload))
+            case .setContextLens: return .goal(.contextLensSet(payload))
+            case .clearContextLens: return .goal(.contextLensCleared(payload))
+            case .addDeliverable: return .goal(.deliverableAdded(payload))
+            case .removeDeliverable: return .goal(.deliverableRemoved(payload))
+            case .addScopeItem: return .goal(.scopeItemAdded(payload))
+            case .removeScopeItem: return .goal(.scopeItemRemoved(payload))
+            }
         case let .step(value):
             let payload = try RuntimeStepMutationPayload(mutation: mutation, facts: value)
-            return .step(switch value.action {
-            case .startSession: .sessionStarted(payload)
-            case .complete: .completed(payload)
-            case .delay: .delayed(payload)
-            case .split: .split(payload)
-            case .recover: .recovered(payload)
-            case .todayGoalStep: .todayActionApplied(payload)
-            })
+            switch value.action {
+            case .startSession: return .step(.sessionStarted(payload))
+            case .complete: return .step(.completed(payload))
+            case .delay: return .step(.delayed(payload))
+            case .split: return .step(.split(payload))
+            case .recover: return .step(.recovered(payload))
+            case .todayGoalStep: return .step(.todayActionApplied(payload))
+            }
         case let .schedule(value):
             let payload = try RuntimeScheduleMutationPayload(mutation: mutation, facts: value)
-            return .schedule(switch value.action {
-            case .createItem: .itemCreated(payload)
-            case .schedule: .itemScheduled(payload)
-            case .placeStep: .stepPlaced(payload)
-            case .protectWindow: .windowProtected(payload)
-            case .correctWindow: .windowCorrected(payload)
-            case .undo: .mutationUndone(payload)
-            case .ritual: .ritualApplied(payload)
-            case .calendarWrite: .calendarWriteCommitted(payload)
-            })
+            switch value.action {
+            case .createItem: return .schedule(.itemCreated(payload))
+            case .schedule: return .schedule(.itemScheduled(payload))
+            case .placeStep: return .schedule(.stepPlaced(payload))
+            case .protectWindow: return .schedule(.windowProtected(payload))
+            case .correctWindow: return .schedule(.windowCorrected(payload))
+            case .undo: return .schedule(.mutationUndone(payload))
+            case .ritual: return .schedule(.ritualApplied(payload))
+            case .calendarWrite: return .schedule(.calendarWriteCommitted(payload))
+            }
         case let .reminder(value):
             let payload = try RuntimeReminderMutationPayload(mutation: mutation, facts: value)
-            return .reminder(switch value.action {
-            case .create: .created(payload)
-            case .update: .updated(payload)
-            case .delete: .deleted(payload)
-            })
+            switch value.action {
+            case .create: return .reminder(.created(payload))
+            case .update: return .reminder(.updated(payload))
+            case .delete: return .reminder(.deleted(payload))
+            }
         case let .profile(value):
             return .profile(.preferencesUpdated(try RuntimeProfileMutationPayload(mutation: mutation, facts: value)))
         case let .history(value):
@@ -2512,13 +2512,13 @@ enum RuntimeAtomicSemanticEventFactory {
             return .externalOperation(value.kind == .reminder ? .reminderRequested(payload) : .calendarEventRequested(payload))
         case let .attachment(value):
             let payload = try RuntimeAttachmentMutationPayload(mutation: mutation, facts: value)
-            return .attachment(switch value.intent.action {
-            case .linkStaged: .linked(payload)
-            case .unlink: .unlinked(payload)
-            case .replaceRevision: .revisionReplaced(payload)
-            case .authorizeDeletion: .deletionAuthorized(payload)
-            case .quarantine: .quarantined(payload)
-            })
+            switch value.intent.action {
+            case .linkStaged: return .attachment(.linked(payload))
+            case .unlink: return .attachment(.unlinked(payload))
+            case .replaceRevision: return .attachment(.revisionReplaced(payload))
+            case .authorizeDeletion: return .attachment(.deletionAuthorized(payload))
+            case .quarantine: return .attachment(.quarantined(payload))
+            }
         case let .compensation(value):
             return .compensation(.applied(try RuntimeCompensationMutationPayload(
                 mutation: mutation,
