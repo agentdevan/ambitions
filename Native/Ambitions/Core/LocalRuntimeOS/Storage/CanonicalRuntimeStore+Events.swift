@@ -1254,6 +1254,30 @@ private extension CanonicalRuntimeSemanticEventStore {
     static func optionalDigest(_ row: SQLiteRow, _ name: String) throws -> SHA256Digest? { try optionalText(row, name).map(SHA256Digest.init(hexadecimal:)) }
 }
 
+#if DEBUG
+extension CanonicalRuntimeSemanticEventStore {
+    static func testOnlyQuarantine(
+        sourceEventID: String?,
+        sourceEventSequence: UInt64?,
+        reason: CanonicalRuntimeSemanticEventQuarantineReason,
+        bytes: Data,
+        retention: RuntimeSemanticEventSourceRetention,
+        observedAtMilliseconds: Int64,
+        database: isolated SQLiteDatabase
+    ) throws -> CanonicalRuntimeSemanticEventQuarantineRecord {
+        try quarantine(
+            sourceEventID: sourceEventID,
+            sourceEventSequence: sourceEventSequence,
+            reason: reason,
+            bytes: bytes,
+            retention: retention,
+            observedAtMilliseconds: observedAtMilliseconds,
+            database: database
+        )
+    }
+}
+#endif
+
 private struct InspectionFailure: Error {
     let reason: CanonicalRuntimeSemanticEventQuarantineReason
     init(_ reason: CanonicalRuntimeSemanticEventQuarantineReason) { self.reason = reason }

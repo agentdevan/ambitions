@@ -3457,7 +3457,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             try RuntimeCanonicalReplayEngine.replayInTransaction(database: database)
         }
         _ = try await database.transaction(.immediate) { database in
-            try CanonicalRuntimeSemanticEventStore.quarantine(
+            try CanonicalRuntimeSemanticEventStore.testOnlyQuarantine(
                 sourceEventID: nil,
                 sourceEventSequence: nil,
                 reason: .malformedEnvelope,
@@ -3519,7 +3519,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             } else {
                 let bytes = Data("quarantined-predecessor".utf8)
                 _ = try await database.transaction(.immediate) { database in
-                    try CanonicalRuntimeSemanticEventStore.quarantine(
+                    try CanonicalRuntimeSemanticEventStore.testOnlyQuarantine(
                         sourceEventID: source.receipt.facts.lineage.eventID.rawValue,
                         sourceEventSequence: source.receipt.facts.lineage.eventSequence,
                         reason: .corruptEnvelope,
@@ -3583,7 +3583,7 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             } else {
                 let bytes = Data("quarantined-causation".utf8)
                 _ = try await database.transaction(.immediate) { database in
-                    try CanonicalRuntimeSemanticEventStore.quarantine(
+                    try CanonicalRuntimeSemanticEventStore.testOnlyQuarantine(
                         sourceEventID: source.receipt.facts.lineage.eventID.rawValue,
                         sourceEventSequence: source.receipt.facts.lineage.eventSequence,
                         reason: .corruptEnvelope,
