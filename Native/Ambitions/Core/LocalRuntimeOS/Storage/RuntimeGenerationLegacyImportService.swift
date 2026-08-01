@@ -1152,9 +1152,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<FeedbackEventRecord> {
                     $0.occurredAt > occurredAt ||
-                    ($0.occurredAt == occurredAt && $0.goalID > goalID) ||
-                    ($0.occurredAt == occurredAt && $0.goalID == goalID && $0.stepID > stepID) ||
-                    ($0.occurredAt == occurredAt && $0.goalID == goalID && $0.stepID == stepID && $0.id > id)
+                    ($0.occurredAt == occurredAt && (
+                        $0.goalID > goalID ||
+                        ($0.goalID == goalID && (
+                            $0.stepID > stepID ||
+                            ($0.stepID == stepID && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<FeedbackEventRecord>(
