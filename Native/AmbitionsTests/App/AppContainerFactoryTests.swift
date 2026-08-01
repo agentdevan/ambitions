@@ -1,4 +1,5 @@
 @testable import Ambitions
+import AmbitionsTimeFoundation
 import XCTest
 
 final class AppContainerFactoryTests: XCTestCase {
