@@ -2134,7 +2134,7 @@ private extension RuntimeAttachmentVault {
     }
 
     func verifyOwnedDirectory(_ url: URL, expectedRelative: String) throws {
-        guard url == try ownedURL(relativeDirectory: expectedRelative) else {
+        guard try url == ownedURL(relativeDirectory: expectedRelative) else {
             throw RuntimeCanonicalAttachmentError.pathAuthorityDenied
         }
         let values = try url.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
