@@ -1108,16 +1108,24 @@ actor RuntimeSwiftDataTypedExporter {
                     }
                     predicate = #Predicate<ProgressEvidenceRecord> {
                         $0.capturedAt > capturedAt ||
-                        ($0.capturedAt == capturedAt && $0.goalID > goalID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID == nil && $0.id > id)
+                        ($0.capturedAt == capturedAt && (
+                            $0.goalID > goalID ||
+                            ($0.goalID == goalID && (
+                                $0.stepID != nil ||
+                                ($0.stepID == nil && $0.id > id)
+                            ))
+                        ))
                     }
                 } else {
                     predicate = #Predicate<ProgressEvidenceRecord> {
                         $0.capturedAt > capturedAt ||
-                        ($0.capturedAt == capturedAt && $0.goalID > goalID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil && ($0.stepID ?? "") > stepID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil && ($0.stepID ?? "") == stepID && $0.id > id)
+                        ($0.capturedAt == capturedAt && (
+                            $0.goalID > goalID ||
+                            ($0.goalID == goalID && $0.stepID != nil && (
+                                ($0.stepID ?? "") > stepID ||
+                                (($0.stepID ?? "") == stepID && $0.id > id)
+                            ))
+                        ))
                     }
                 }
             } else { predicate = nil }
