@@ -682,7 +682,7 @@ actor RuntimeGenerationCandidateOwnership {
     deinit {
         switch lockState {
         case let .open(descriptor):
-            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = flock(descriptor, LOCK_UN)
             _ = Darwin.close(descriptor)
         case .terminalCloseFailed, .closed:
             break
@@ -697,7 +697,7 @@ actor RuntimeGenerationCandidateOwnership {
         guard fstat(lockDescriptor, &status) == 0,
               status.st_mode & S_IFMT == S_IFREG,
               status.st_nlink == 1,
-              Darwin.flock(lockDescriptor, LOCK_EX | LOCK_NB) == 0,
+              flock(lockDescriptor, LOCK_EX | LOCK_NB) == 0,
               FileManager.default.fileExists(atPath: finalGenerationURL.path) == false else {
             throw RuntimeGenerationControlError.activationAuthorityMismatch
         }
@@ -754,7 +754,7 @@ actor RuntimeGenerationCandidateOwnership {
             // Numeric descriptors are never retried after a close attempt;
             // close failure makes reuse ownership indeterminate.
             lockState = .terminalCloseFailed
-            let unlockResult = Darwin.flock(descriptor, LOCK_UN)
+            let unlockResult = flock(descriptor, LOCK_UN)
             let closeResult = Darwin.close(descriptor)
             guard unlockResult == 0, closeResult == 0 else {
                 throw LocalRuntimeStorageError.canonicalActivationLockFailed
@@ -2261,7 +2261,7 @@ private extension RuntimeStoreGenerationManager {
         guard fstat(descriptor, &descriptorStatus) == 0,
               descriptorStatus.st_mode & S_IFMT == S_IFREG,
               descriptorStatus.st_nlink == 1,
-              Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+              flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
             _ = Darwin.close(descriptor)
             throw LocalRuntimeStorageError.canonicalActivationLockFailed
         }
@@ -2291,14 +2291,14 @@ private extension RuntimeStoreGenerationManager {
             try rootAuthority.revalidatePinnedRoot()
             return descriptor
         } catch {
-            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = flock(descriptor, LOCK_UN)
             _ = Darwin.close(descriptor)
             throw error
         }
     }
 
     func releaseCandidatePublicationLock(_ descriptor: Int32) throws {
-        let unlockResult = Darwin.flock(descriptor, LOCK_UN)
+        let unlockResult = flock(descriptor, LOCK_UN)
         let closeResult = Darwin.close(descriptor)
         guard unlockResult == 0, closeResult == 0 else {
             throw LocalRuntimeStorageError.canonicalActivationLockFailed
