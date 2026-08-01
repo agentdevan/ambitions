@@ -637,6 +637,10 @@ private struct RuntimeCanonicalCleanupJob: Sendable {
 }
 
 private extension RuntimeCanonicalDerivedTransactionGateway {
+    static func isCanonicalSQLiteCorruption(_ error: SQLiteError) -> Bool {
+        [11, 18, 19, 20, 21, 26].contains(Int(error.primaryCode))
+    }
+
     static func nextCanonicalMaintenanceCandidate(
         ownerID: String,
         nowMilliseconds: Int64,
