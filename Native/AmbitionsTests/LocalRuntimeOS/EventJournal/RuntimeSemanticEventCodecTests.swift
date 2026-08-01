@@ -90,6 +90,39 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
         }
     }
 
+    func testExternalCompensationFactsSurviveCanonicalRoundTrip() throws {
+        let operationID = try XCTUnwrap(RuntimeExternalOperationID(rawValue: "operation-compensation"))
+        let sourceOperationID = try XCTUnwrap(RuntimeExternalOperationID(rawValue: "operation-source"))
+        let command = ExternalOperationCommand(
+            operationID: operationID,
+            kind: .reminder,
+            target: AmbitionsCommandTarget(reminderID: "reminder-compensation"),
+            title: "Remove the external reminder",
+            action: .compensateRemoval,
+            sourceOperationID: sourceOperationID,
+            sourceProviderReference: RuntimeExternalProviderReference(rawValue: "provider-reference"),
+            sourceReceiptID: RuntimeReceiptID(rawValue: "receipt-source"),
+            compensationPlanID: RuntimeRollbackPlanID(rawValue: "rollback-plan"),
+            compensationPlanDigest: String(repeating: "a", count: 64)
+        )
+        let mutation = try RuntimeSemanticMutation(
+            semanticType: .externalReminderRequested,
+            aggregateID: RuntimeAggregateID(validating: operationID.rawValue),
+            priorRevision: 0,
+            resultingRevision: 1,
+            changedObjectIDs: [RuntimeDomainObjectID(validating: operationID.rawValue)]
+        )
+        let event = RuntimeSemanticEvent.externalOperation(.reminderRequested(
+            try RuntimeExternalOperationMutationPayload(mutation: mutation, facts: command)
+        ))
+
+        let bytes = try RuntimeSemanticEventCodec().encode(event)
+        let decoded = try RuntimeSemanticEventCodec().decode(bytes).event
+
+        XCTAssertEqual(decoded, event)
+        XCTAssertEqual(decoded.commandPayload, .externalOperation(command))
+    }
+
     func testFamilyPayloadRejectsCaseMismatchAndRevisionGap() throws {
         let wrongType = try mutation(typeID: .goalPrioritySet, prior: 0, result: 1)
         XCTAssertThrowsError(
