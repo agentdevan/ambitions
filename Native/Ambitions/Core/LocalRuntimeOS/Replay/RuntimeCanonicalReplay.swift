@@ -509,11 +509,12 @@ struct RuntimeCanonicalReplayCheckpoint: Codable, Sendable, Equatable {
 
 struct RuntimeCanonicalReplayCheckpointCodec: Sendable {
     func encode(_ checkpoint: RuntimeCanonicalReplayCheckpoint) throws -> Data {
+        let expectedManifestDigest = try manifestDigest(checkpoint)
         guard checkpoint.version == runtimeCanonicalReplayCheckpointVersion,
               checkpoint.highWaterCursor.isWellFormed,
               RuntimeStoreManifestCodec.isSHA256Hex(checkpoint.sourceChainDigest),
               RuntimeStoreManifestCodec.isSHA256Hex(checkpoint.stateDigest),
-              checkpoint.manifestDigest == try manifestDigest(checkpoint) else {
+              checkpoint.manifestDigest == expectedManifestDigest else {
             throw RuntimeCanonicalReplayError.checkpointMismatch
         }
         return try RuntimeCanonicalReplayCoding.encode(checkpoint)
