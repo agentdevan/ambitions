@@ -14,7 +14,12 @@ final class RuntimeExternalOperationStateMachineTests: XCTestCase {
         let database = try SQLiteDatabase(url: root.appendingPathComponent("Runtime.sqlite"))
 
         try await database.transaction(.deferred) { database in
-            func assertCharge(_ sql: String, expectedBytes: Int, value: SQLiteValue) throws {
+            func assertCharge(
+                _ sql: String,
+                expectedBytes: Int,
+                value: SQLiteValue,
+                database: isolated SQLiteDatabase
+            ) throws {
                 var budget = RuntimeExternalOperationDecodedByteBudget(
                     maximumBytes: expectedBytes + 1
                 )
@@ -23,11 +28,16 @@ final class RuntimeExternalOperationStateMachineTests: XCTestCase {
                 XCTAssertEqual(budget.remainingBytes, 1)
             }
 
-            try assertCharge("SELECT NULL", expectedBytes: 1, value: .null)
-            try assertCharge("SELECT 7", expectedBytes: 8, value: .integer(7))
-            try assertCharge("SELECT 1.5", expectedBytes: 8, value: .real(1.5))
-            try assertCharge("SELECT 'é'", expectedBytes: 2, value: .text("é"))
-            try assertCharge("SELECT X'010203'", expectedBytes: 3, value: .blob(Data([1, 2, 3])))
+            try assertCharge("SELECT NULL", expectedBytes: 1, value: .null, database: database)
+            try assertCharge("SELECT 7", expectedBytes: 8, value: .integer(7), database: database)
+            try assertCharge("SELECT 1.5", expectedBytes: 8, value: .real(1.5), database: database)
+            try assertCharge("SELECT 'é'", expectedBytes: 2, value: .text("é"), database: database)
+            try assertCharge(
+                "SELECT X'010203'",
+                expectedBytes: 3,
+                value: .blob(Data([1, 2, 3])),
+                database: database
+            )
 
             var orderedBudget = RuntimeExternalOperationDecodedByteBudget(maximumBytes: 16)
             let ordered = try orderedBudget.query(
