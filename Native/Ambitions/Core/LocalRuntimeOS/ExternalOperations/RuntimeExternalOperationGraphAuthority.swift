@@ -617,7 +617,7 @@ enum RuntimeExternalOperationGraphAuthority {
             purpose: purpose,
             kind: outcome.kind
         ) else { return false }
-        switch outcome.kind {
+        return switch outcome.kind {
         case .confirmedSuccess, .confirmedPresence:
             state.workflowStatus == .succeeded && state.effectDisposition == .confirmedPresent
         case .confirmedCancellation, .reconciledCancellationAbsent:
