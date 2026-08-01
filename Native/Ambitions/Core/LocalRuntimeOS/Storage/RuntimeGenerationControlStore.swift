@@ -1170,7 +1170,7 @@ actor RuntimeGenerationControlStore {
         let journal = try RuntimeGenerationControlCodec.decode(
             RuntimeGenerationControlUpgradeJournal.self, from: journalData
         )
-        guard journal.journalDigest == try upgradeJournalDigest(
+        guard try journal.journalDigest == upgradeJournalDigest(
             RuntimeGenerationControlUpgradeJournal(
                 token: journal.token, sourceSchemaVersion: journal.sourceSchemaVersion,
                 source: journal.source, staging: journal.staging,
