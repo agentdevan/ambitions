@@ -1573,6 +1573,10 @@ enum RuntimeCommittedReceiptAuthority {
         let allowedUnfinalizedCompensation: CompensationConsumptionReference?
         private var visitedCompensationEdges: Set<CompensationConsumptionReference> = []
 
+        init(allowedUnfinalizedCompensation: CompensationConsumptionReference?) {
+            self.allowedUnfinalizedCompensation = allowedUnfinalizedCompensation
+        }
+
         mutating func begin(_ reference: CompensationConsumptionReference) -> Bool {
             visitedCompensationEdges.insert(reference).inserted
         }
