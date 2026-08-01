@@ -311,7 +311,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         )
     }
 
-    private func unsupportedTypedResult(
+    func unsupportedTypedResult(
         _ command: AmbitionsCommand,
         validation: AmbitionsCommandValidationState
     ) -> AmbitionsCommandExecutionResult {
