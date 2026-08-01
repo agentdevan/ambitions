@@ -1207,6 +1207,9 @@ enum CanonicalRuntimeAttachmentStore {
         try RuntimeAttachmentCodec.validate(bundle.manifest)
         try RuntimeAttachmentCodec.validate(bundle.envelope)
         try RuntimeAttachmentCodec.validate(bundle.lifecycle)
+        let expectedManifestDigest = try RuntimeAttachmentCodec.digest(
+            bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
+        )
         guard bundle.revision.blobID == bundle.manifest.blobID,
               bundle.envelope.blobID == bundle.manifest.blobID,
               bundle.lifecycle.blobID == bundle.manifest.blobID,
@@ -1214,9 +1217,7 @@ enum CanonicalRuntimeAttachmentStore {
               bundle.lifecycle.stateVersion == 1,
               bundle.lifecycle.referenceCount == 0,
               bundle.revision.manifestDigest == bundle.lifecycle.manifestDigest,
-              bundle.revision.manifestDigest == try RuntimeAttachmentCodec.digest(
-                  bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
-              ),
+              bundle.revision.manifestDigest == expectedManifestDigest,
               bundle.manifest.plaintextByteCount == bundle.revision.classification.byteCount,
               RuntimeAttachmentPrivacyDomain(bundle.revision.privacy) == bundle.manifest.privacyDomain else {
             throw RuntimeCanonicalAttachmentError.invalidRecord
