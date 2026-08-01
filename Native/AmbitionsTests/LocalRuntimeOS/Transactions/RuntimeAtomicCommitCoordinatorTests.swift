@@ -3086,13 +3086,15 @@ final class RuntimeAtomicCommitCoordinatorTests: XCTestCase {
             for: [privateOutcome.receipt],
             surface: .localInspection
         )
+        let cancellationReceiptID = privateOutcome.receipt.facts.receiptID
+        let cancellationDate = Self.now
         let cancellationTask = Task {
             await Task.yield()
             return try await privateDatabase.transaction(.deferred) { database in
                 try CanonicalRuntimeStore.compensationEligibilityInTransaction(
-                    receiptID: privateOutcome.receipt.facts.receiptID,
+                    receiptID: cancellationReceiptID,
                     access: cancellationAccess,
-                    at: Self.now,
+                    at: cancellationDate,
                     database: database
                 )
             }
