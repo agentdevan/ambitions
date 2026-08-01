@@ -96,7 +96,7 @@ final class RuntimeSemanticEventCodecTests: XCTestCase {
         let command = ExternalOperationCommand(
             operationID: operationID,
             kind: .reminder,
-            target: AmbitionsCommandTarget(reminderID: "reminder-compensation"),
+            target: AmbitionsCommandTarget(stepID: "reminder-compensation"),
             title: "Remove the external reminder",
             action: .compensateRemoval,
             sourceOperationID: sourceOperationID,
