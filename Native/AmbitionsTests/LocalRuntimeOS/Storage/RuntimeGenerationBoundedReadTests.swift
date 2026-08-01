@@ -49,7 +49,8 @@ final class RuntimeGenerationBoundedReadTests: XCTestCase {
                     limit: 3
                 )
             }
-            XCTAssertEqual(migrated.resolved.selector.generationID, target.generationID)
+            let migratedGenerationID = await migrated.resolved.selector.generationID
+            XCTAssertEqual(migratedGenerationID, target.generationID)
             XCTAssertEqual(migratedPage.items.map(\.eventID), [
                 "event-1", "event-2", "event-3",
             ])
