@@ -1032,9 +1032,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<PlanSectionRecord> {
                     $0.goalID > goalID ||
-                    ($0.goalID == goalID && $0.planID > planID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.orderIndex > orderIndex) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.orderIndex == orderIndex && $0.id > id)
+                    ($0.goalID == goalID && (
+                        $0.planID > planID ||
+                        ($0.planID == planID && (
+                            $0.orderIndex > orderIndex ||
+                            ($0.orderIndex == orderIndex && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<PlanSectionRecord>(
