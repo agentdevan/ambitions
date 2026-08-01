@@ -1494,9 +1494,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<AmbitionGraphProofRecordModel> {
                     $0.ambitionID > ambitionID ||
-                    ($0.ambitionID == ambitionID && $0.version > version) ||
-                    ($0.ambitionID == ambitionID && $0.version == version && $0.proofID > proofID) ||
-                    ($0.ambitionID == ambitionID && $0.version == version && $0.proofID == proofID && $0.id > id)
+                    ($0.ambitionID == ambitionID && (
+                        $0.version > version ||
+                        ($0.version == version && (
+                            $0.proofID > proofID ||
+                            ($0.proofID == proofID && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<AmbitionGraphProofRecordModel>(
