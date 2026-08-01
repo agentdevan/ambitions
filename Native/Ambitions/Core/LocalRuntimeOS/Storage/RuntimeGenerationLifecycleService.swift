@@ -3768,7 +3768,7 @@ extension RuntimeGenerationLifecycleService {
         try parent.revalidate()
     }
 
-    func preparedBackupDirectoryEvidence(
+    fileprivate func preparedBackupDirectoryEvidence(
         at directoryURL: URL,
         backup: RuntimeGenerationBackupRecord
     ) throws -> RuntimeGenerationPreparedDirectoryEvidence {
@@ -3787,7 +3787,7 @@ extension RuntimeGenerationLifecycleService {
         )
     }
 
-    func preparedDirectoryEvidence(
+    fileprivate func preparedDirectoryEvidence(
         at directoryURL: URL,
         artifacts: [RuntimeGenerationArtifact],
         witnessDomain: String
