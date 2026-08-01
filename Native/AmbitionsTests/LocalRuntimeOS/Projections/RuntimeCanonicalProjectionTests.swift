@@ -1779,7 +1779,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 ]
             )
             let metadata = try RuntimeCanonicalSearchMetadataExtractor.extract(
-                entry: entry, allowedFields: definition.allowedSearchFields
+                entry: entry, allowedFields: Set(definition.allowedSearchFields)
             )
             let documentDigest = RuntimeCanonicalSearchDocument.authorityDigest(
                 generationID: searchID, aggregate: entry.aggregate,
