@@ -1036,7 +1036,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(ownerID)? = rows[0].value(named: "owner_id"),
               reservedBytes >= maximumBytes,
               case let .integer(expiresAtMS)? = rows[0].value(named: "expires_at_ms"),
-              expiresAtMS > try milliseconds(now),
+              expiresAtMS > (try milliseconds(now)),
               rows[0].value(named: "consumed_by_blob_id") == .null,
               rows[0].value(named: "released_at_ms") == .null else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
