@@ -96,6 +96,9 @@ final class RuntimeAttachmentContractTests: XCTestCase {
             ))
             XCTAssertEqual(payload.operation, operation)
             XCTAssertEqual(payload.registrationCaseID.rawValue, registration)
+            XCTAssertTrue(RuntimeCommandCaseID.all.contains(payload.registrationCaseID))
+            XCTAssertEqual(payload.registrationCaseID.feature, .attachment)
+            XCTAssertEqual(payload.registrationCaseID.route, .mutation)
             XCTAssertEqual(RuntimeSemanticEventClassifier.classify(payload), .mutating(event))
             XCTAssertTrue(EventStoreSQLite.requiresSemanticEvent(AmbitionsCommand(
                 id: "command-attachment-semantic-event-\(action.rawValue)",

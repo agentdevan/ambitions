@@ -160,6 +160,14 @@ final class RuntimeCommandCodecTests: XCTestCase {
         let decoder = JSONDecoder()
 
         for (index, payload) in payloads.enumerated() {
+            XCTAssertTrue(RuntimeCommandCaseID.all.contains(payload.registrationCaseID))
+            XCTAssertEqual(payload.registrationCaseID.feature, RuntimeFeatureMutationRouter().feature(for: payload))
+            XCTAssertEqual(
+                payload.registrationCaseID.route,
+                ["history.openDestination", "repair.openDestination"].contains(
+                    payload.registrationCaseID.rawValue
+                ) ? .navigation : .mutation
+            )
             let command = AmbitionsCommand(
                 id: "command.family.\(index)",
                 source: .system,
