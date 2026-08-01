@@ -754,7 +754,8 @@ actor RuntimeGenerationControlStore {
         }
         guard let legacyVersion else { return }
 
-        let token = environment.uuid.nextUUID().uuidString.lowercased()
+        var identifierSource = environment.uuid
+        let token = identifierSource.nextUUID().uuidString.lowercased()
         let stagingURL = controlDirectoryURL.appendingPathComponent(
             ".RuntimeGenerationControl.upgrading-\(token).sqlite", isDirectory: false
         )
