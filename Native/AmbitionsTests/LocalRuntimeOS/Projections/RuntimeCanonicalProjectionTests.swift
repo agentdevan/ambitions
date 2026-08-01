@@ -1210,10 +1210,11 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 }
                 func insertShard(
                     ordinal: Int, prior: String,
-                    entries: [RuntimeCanonicalProjectionEntry]
+                    entries: [RuntimeCanonicalProjectionEntry],
+                    database: isolated SQLiteDatabase
                 ) throws -> String {
                     let digest = shardDigest(ordinal: ordinal, prior: prior, entries: entries)
-                    try isolated.execute(
+                    try database.execute(
                         """
                         INSERT INTO runtime_canonical_projection_shards VALUES (
                             ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -1236,29 +1237,33 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 let declaredRoot: String
                 switch defect {
                 case "gap_suffix":
-                    let shard0 = try insertShard(ordinal: 0, prior: empty, entries: [first])
+                    let shard0 = try insertShard(
+                        ordinal: 0, prior: empty, entries: [first], database: isolated
+                    )
                     declaredRoot = try insertShard(
-                        ordinal: 2, prior: shard0, entries: [second]
+                        ordinal: 2, prior: shard0, entries: [second], database: isolated
                     )
                     declaredEntryCount = 2
                     declaredShardCount = 2
                 case "overlap":
                     let shard0 = try insertShard(
-                        ordinal: 0, prior: empty, entries: [first, second]
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
                     )
                     declaredRoot = try insertShard(
-                        ordinal: 1, prior: shard0, entries: [second]
+                        ordinal: 1, prior: shard0, entries: [second], database: isolated
                     )
                     declaredEntryCount = 3
                     declaredShardCount = 2
                 case "header_count":
                     declaredRoot = try insertShard(
-                        ordinal: 0, prior: empty, entries: [first, second]
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
                     )
                     declaredEntryCount = 2
                     declaredShardCount = 2
                 default:
-                    _ = try insertShard(ordinal: 0, prior: empty, entries: [first, second])
+                    _ = try insertShard(
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
+                    )
                     declaredEntryCount = 2
                     declaredShardCount = 1
                     declaredRoot = String(repeating: "e", count: 64)
