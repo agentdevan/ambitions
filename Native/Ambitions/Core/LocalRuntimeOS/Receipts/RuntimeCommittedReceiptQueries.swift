@@ -700,7 +700,8 @@ extension CanonicalRuntimeStore {
         }
         let eligibility = try compensationEligibility(
             graph: graph,
-            now: now
+            now: now,
+            database: database
         )
         let replayCoverage: RuntimeReceiptReplayCoverage
         do {
