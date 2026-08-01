@@ -162,7 +162,7 @@ extension ActionReceipt {
             return .notSupportedYet
         case .history: return .unavailable
         case .step, .reminder, .profile, .repair, .importDeletion, .externalOperation,
-             .compensation:
+             .attachment, .compensation:
             return .notSupportedYet
         }
     }
