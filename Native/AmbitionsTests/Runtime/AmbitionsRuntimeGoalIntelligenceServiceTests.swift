@@ -95,8 +95,10 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
             normalizedApplicationKey(runtimeProposal.applicationKey),
             normalizedApplicationKey(directProposal.applicationKey)
         )
-        XCTAssertTrue(try await runtimeRepositories.teaching.listSignals(goalID: nil).isEmpty)
-        XCTAssertTrue(try await directRepositories.teaching.listSignals(goalID: nil).isEmpty)
+        let runtimeSignals = try await runtimeRepositories.teaching.listSignals(goalID: nil)
+        let directSignals = try await directRepositories.teaching.listSignals(goalID: nil)
+        XCTAssertTrue(runtimeSignals.isEmpty)
+        XCTAssertTrue(directSignals.isEmpty)
     }
 
     func testBatchLoadContextMatchesSingleTargetProjectionAndOrdering() async throws {
