@@ -359,7 +359,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         size: Int64
     ) throws -> RuntimeAttachmentVaultStageRequest {
         var metadata = stat()
-        let isRegular = Darwin.stat(source.path, &metadata) == 0 &&
+        let isRegular = stat(source.path, &metadata) == 0 &&
             (metadata.st_mode & S_IFMT) == S_IFREG && metadata.st_size > 0
         #if os(iOS)
         if isRegular {
