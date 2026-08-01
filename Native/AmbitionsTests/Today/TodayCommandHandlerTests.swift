@@ -216,10 +216,11 @@ final class TodayCommandHandlerTests: XCTestCase {
         )
 
         let response = try await handler.performAction(action, command: command, now: fixedNow)
+        let fetchedRecord = try await commandRecords.fetchRecord(commandID: command.id)
 
         XCTAssertEqual(response.message?.title, "Action not available")
         XCTAssertEqual(
-            try await commandRecords.fetchRecord(commandID: command.id),
+            fetchedRecord,
             .quarantined(quarantinedRecord)
         )
     }
