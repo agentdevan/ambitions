@@ -3166,14 +3166,17 @@ enum RuntimeStoreManifestDescriptorReader {
 }
 
 enum RuntimeStoreFileDurability {
+    /// Darwin content-protection class A, equivalent to `FileProtectionType.complete`.
+    private static let completeProtectionClass: Int32 = 1
+
     static func applyCompleteProtection(
         toOpenFileDescriptor descriptor: Int32,
         artifact: String
     ) throws {
         guard Darwin.fcntl(
-            descriptor, F_SETPROTECTIONCLASS, PROTECTION_CLASS_A
+            descriptor, F_SETPROTECTIONCLASS, completeProtectionClass
         ) == 0,
-        Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+        Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == completeProtectionClass else {
             throw LocalRuntimeStorageError.canonicalFileProtectionFailure(
                 artifact: artifact
             )
