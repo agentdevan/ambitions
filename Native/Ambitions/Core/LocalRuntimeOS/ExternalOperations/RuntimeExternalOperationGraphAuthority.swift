@@ -25,12 +25,13 @@ struct RuntimeExternalOperationDecodedByteBudget: RuntimeExternalOperationReadBu
         let rows = try database.query(sql, bindings: bindings, maximumDecodedBytes: remainingBytes)
         let decoded = rows.reduce(0) { total, row in
             total + row.values.reduce(0) { subtotal, value in
-                subtotal + switch value {
+                let valueBytes: Int = switch value {
                 case .null: 1
                 case .integer, .real: 8
                 case let .text(text): text.utf8.count
                 case let .blob(bytes): bytes.count
                 }
+                return subtotal + valueBytes
             }
         }
         guard decoded <= remainingBytes else {

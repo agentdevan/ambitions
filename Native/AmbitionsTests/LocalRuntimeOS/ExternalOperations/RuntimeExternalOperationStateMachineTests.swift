@@ -5,6 +5,48 @@ import XCTest
 final class RuntimeExternalOperationStateMachineTests: XCTestCase {
     private let now = Date(timeIntervalSince1970: 1_000)
 
+    func testDecodedByteBudgetChargesSQLiteValuesExactlyAndFailsClosed() async throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("runtime-external-budget-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let database = try SQLiteDatabase(url: root.appendingPathComponent("Runtime.sqlite"))
+
+        try await database.transaction(.deferred) { database in
+            func assertCharge(_ sql: String, expectedBytes: Int, value: SQLiteValue) throws {
+                var budget = RuntimeExternalOperationDecodedByteBudget(
+                    maximumBytes: expectedBytes + 1
+                )
+                let rows = try budget.query(sql, database: database)
+                XCTAssertEqual(rows.map(\.values), [[value]])
+                XCTAssertEqual(budget.remainingBytes, 1)
+            }
+
+            try assertCharge("SELECT NULL", expectedBytes: 1, value: .null)
+            try assertCharge("SELECT 7", expectedBytes: 8, value: .integer(7))
+            try assertCharge("SELECT 1.5", expectedBytes: 8, value: .real(1.5))
+            try assertCharge("SELECT 'é'", expectedBytes: 2, value: .text("é"))
+            try assertCharge("SELECT X'010203'", expectedBytes: 3, value: .blob(Data([1, 2, 3])))
+
+            var orderedBudget = RuntimeExternalOperationDecodedByteBudget(maximumBytes: 16)
+            let ordered = try orderedBudget.query(
+                "SELECT 2 AS ordinal UNION ALL SELECT 1 ORDER BY ordinal",
+                database: database
+            )
+            XCTAssertEqual(ordered.compactMap { row in
+                guard case let .integer(value) = row.value(named: "ordinal") else { return nil }
+                return value
+            }, [1, 2])
+            XCTAssertEqual(orderedBudget.remainingBytes, 0)
+
+            var insufficient = RuntimeExternalOperationDecodedByteBudget(maximumBytes: 7)
+            XCTAssertThrowsError(try insufficient.query("SELECT 7", database: database)) { error in
+                XCTAssertEqual((error as? SQLiteQueryBudgetExceeded)?.limit, .decodedBytes)
+            }
+            XCTAssertEqual(insufficient.remainingBytes, 7)
+        }
+    }
+
     func testAtomicClaimBeginSuccessAndTerminalImmutability() throws {
         let pending = try state(.pending, .notAttempted, version: 1)
         let lease = try self.lease()
