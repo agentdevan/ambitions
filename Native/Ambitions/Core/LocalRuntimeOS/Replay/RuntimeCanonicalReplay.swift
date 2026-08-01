@@ -2474,7 +2474,7 @@ private enum RuntimeCanonicalReplayCoding {
         return try encoder.encode(value)
     }
 
-    static func decode<Value: Decodable>(_ bytes: Data) throws -> Value {
+    static func decode<Value: Codable>(_ bytes: Data) throws -> Value {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
         let value = try decoder.decode(Value.self, from: bytes)
