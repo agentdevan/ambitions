@@ -681,8 +681,8 @@ enum RuntimeCommittedReceiptAuthority {
     ) throws {
         let bytes = try RuntimeCommittedReceiptCodec.encode(disposition)
         let kind: String
-        let planID: SQLiteValue
-        let evidenceDigest: SQLiteValue
+        let planID: SQLiteBinding
+        let evidenceDigest: SQLiteBinding
         switch disposition {
         case let .plan(id, _, _, _):
             kind = "plan"; planID = .text(id.rawValue); evidenceDigest = .null
@@ -717,7 +717,7 @@ enum RuntimeCommittedReceiptAuthority {
                 """,
                 bindings: [
                     .text(core.facts.receiptID.rawValue), .text(artifact.kind.rawValue),
-                    .text(artifact.stableID), artifact.digest.map(SQLiteValue.text) ?? .null,
+                    .text(artifact.stableID), artifact.digest.map(SQLiteBinding.text) ?? .null,
                 ]
             )
         }
