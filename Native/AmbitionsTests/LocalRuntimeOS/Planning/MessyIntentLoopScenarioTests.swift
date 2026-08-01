@@ -45,13 +45,14 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
         let fetchedRuntimeEvents = try await runtimeEvents.fetchEvents(matching: .commandID(command.id), limit: 1)
         let capture = try XCTUnwrap(fetchedCapture)
         let commandRecord = try XCTUnwrap(fetchedCommandRecord)
+        let persistedCaptureResult = try XCTUnwrap(commandRecord.result)
         let captureRuntimeEvent = try XCTUnwrap(fetchedRuntimeEvents.first)
         XCTAssertEqual(captureResult.status, .succeeded)
         XCTAssertEqual(capture.route, .captureInbox)
         XCTAssertEqual(capture.kind, .oneTimeCommitment)
         XCTAssertEqual(capture.rawText, "Need to prep the board update, ask Maya for numbers, and protect pickup before Friday.")
         XCTAssertEqual(captureResult.metadata["captureRoute"], CaptureRoute.captureInbox.rawValue)
-        XCTAssertEqual(commandRecord.result?.eventLedgerEntryIDs, ["ledger.command.command-messy-intent-proof"])
+        XCTAssertEqual(persistedCaptureResult.eventLedgerEntryIDs, ["ledger.command.command-messy-intent-proof"])
         XCTAssertEqual(captureRuntimeEvent.event.commandID, command.id)
         XCTAssertEqual(captureRuntimeEvent.event.kind, .commandExecution)
 
@@ -189,7 +190,7 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
             summary: "Messy intent produced an inspected proof-bearing step without moving protected time.",
             route: .today,
             target: inspectionCommand.target,
-            eventLedgerEntryIDs: commandRecord.result.eventLedgerEntryIDs,
+            eventLedgerEntryIDs: persistedCaptureResult.eventLedgerEntryIDs,
             metadata: [
                 "originCommandID": command.id,
                 "routeCommandID": routeCommand.id,
@@ -247,7 +248,7 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
             ],
             why: ActionReceiptWhyExplanation(
                 body: "The messy intent was captured, routed to Time, planned into two local steps, held protected time for review, and attached proof locally.",
-                eventLedgerEntryIDs: commandRecord.result.eventLedgerEntryIDs
+                eventLedgerEntryIDs: persistedCaptureResult.eventLedgerEntryIDs
             ),
             nextAction: ActionReceiptNextAction(
                 kind: .openToday,
