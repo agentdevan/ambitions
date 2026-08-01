@@ -226,7 +226,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             result = executeProfileCommand(command, profile: profile)
         case let .importDeletion(deletion):
             result = executeImportDeletionCommand(command, deletion: deletion)
-        case .reminder, .repair, .externalOperation, .compensation:
+        case .reminder, .repair, .externalOperation, .attachment, .compensation:
             result = unsupportedTypedResult(command, validation: validation)
         }
 
@@ -276,7 +276,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             if case .todayReceipt = history.action {
                 materialized = await materializeTodayReceipt(command, committedResult: result)
             } else { return result }
-        case .goal, .reminder, .profile, .repair, .importDeletion, .externalOperation, .compensation:
+        case .goal, .reminder, .profile, .repair, .importDeletion, .externalOperation, .attachment, .compensation:
             return result
         }
         return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
