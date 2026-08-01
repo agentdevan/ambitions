@@ -1341,10 +1341,16 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[4]
                 predicate = #Predicate<EntityRevisionTombstoneRecord> {
                     $0.recordedAt > recordedAt ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw > entityKind) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID > entityID) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID == entityID && $0.revisionMarker > revisionMarker) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID == entityID && $0.revisionMarker == revisionMarker && $0.id > id)
+                    ($0.recordedAt == recordedAt && (
+                        $0.entityKindRaw > entityKind ||
+                        ($0.entityKindRaw == entityKind && (
+                            $0.entityID > entityID ||
+                            ($0.entityID == entityID && (
+                                $0.revisionMarker > revisionMarker ||
+                                ($0.revisionMarker == revisionMarker && $0.id > id)
+                            ))
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<EntityRevisionTombstoneRecord>(
