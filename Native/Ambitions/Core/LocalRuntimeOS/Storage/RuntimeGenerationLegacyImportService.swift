@@ -4919,15 +4919,23 @@ private extension RuntimeGenerationLegacyImportService {
         try parentPin.revalidate()
     }
 
-    /// Actor-confined mutable staging state. It is never returned, stored in a
-    /// task, or transferred across an isolation boundary.
-    final class ImportAccumulator {
+    /// Mutable staging state shared by the import service and its isolated
+    /// streaming callbacks.
+    actor ImportAccumulator {
+        struct Snapshot: Sendable {
+            let itemCount: Int
+            let requiresQuarantine: Bool
+            let lastSourceRecordID: String?
+            let mappedArtifactSetDigest: String
+            let durableProcessedFloor: Int
+        }
+
         let importID: String
-        var itemCount = 0
-        var requiresQuarantine = false
-        var decodedByteCount: Int64 = 0
-        var lastSourceRecordID: String?
-        var mappedArtifactSetDigest: String
+        private var itemCount = 0
+        private var requiresQuarantine = false
+        private var decodedByteCount: Int64 = 0
+        private var lastSourceRecordID: String?
+        private var mappedArtifactSetDigest: String
         let durableProcessedFloor: Int
 
         init(importID: String, durableProcessedFloor: Int) {
@@ -4952,6 +4960,38 @@ private extension RuntimeGenerationLegacyImportService {
                 )
             }
             decodedByteCount += Int64(count)
+        }
+
+        func advance(with item: RuntimeLegacyImportItem) throws -> Snapshot {
+            let increment = itemCount.addingReportingOverflow(1)
+            guard increment.overflow == false else {
+                throw RuntimeGenerationControlError.readBudgetExceeded(
+                    maximumBytes: RuntimeGenerationLegacyImportService.maximumRecords
+                )
+            }
+            itemCount = increment.partialValue
+            lastSourceRecordID = item.sourceRecordID
+            if let binding = item.mappedArtifact?.bindingDigest {
+                mappedArtifactSetDigest = LocalRuntimeStorageChecksum.sha256Hex(
+                    for: "\(mappedArtifactSetDigest)\n\(item.sourceRecordID)\n\(binding)"
+                )
+            }
+            return snapshot()
+        }
+
+        func requireQuarantine(for disposition: RuntimeLegacyImportDisposition) {
+            requiresQuarantine = requiresQuarantine ||
+                [.ambiguous, .unsupported, .malformed].contains(disposition)
+        }
+
+        func snapshot() -> Snapshot {
+            Snapshot(
+                itemCount: itemCount,
+                requiresQuarantine: requiresQuarantine,
+                lastSourceRecordID: lastSourceRecordID,
+                mappedArtifactSetDigest: mappedArtifactSetDigest,
+                durableProcessedFloor: durableProcessedFloor
+            )
         }
     }
 
@@ -5194,7 +5234,7 @@ private extension RuntimeGenerationLegacyImportService {
         schemaVersion: RuntimeLegacyCanonicalSchemaVersion?,
         accumulator: ImportAccumulator
     ) async throws {
-        try accumulator.consumeDecodedBytes(
+        try await accumulator.consumeDecodedBytes(
             RuntimeGenerationControlCodec.encode(record).count
         )
         let recordDigest = try Self.decodedRecordPayloadDigest(record)
@@ -5249,8 +5289,7 @@ private extension RuntimeGenerationLegacyImportService {
         )
         try await controlStore.recordImportItem(item)
         try await advanceAccumulator(accumulator, item: item, source: source)
-        accumulator.requiresQuarantine = accumulator.requiresQuarantine ||
-            [.ambiguous, .unsupported, .malformed].contains(item.disposition)
+        await accumulator.requireQuarantine(for: item.disposition)
     }
 
     func appendMappedRecord(
@@ -5259,7 +5298,7 @@ private extension RuntimeGenerationLegacyImportService {
         source: RuntimeLegacyImportSource,
         accumulator: ImportAccumulator
     ) async throws {
-        try accumulator.consumeDecodedBytes(
+        try await accumulator.consumeDecodedBytes(
             RuntimeGenerationControlCodec.encode(mapped.payload).count
         )
         let duplicate = try await controlStore.importContainsSourceRecordDigest(
@@ -5290,6 +5329,7 @@ private extension RuntimeGenerationLegacyImportService {
         source: RuntimeLegacyImportSource,
         accumulator: ImportAccumulator
     ) async throws -> RuntimeLegacyImportStagingResult {
+        let accumulatorSnapshot = await accumulator.snapshot()
         let mappedDirectory = staged.url.deletingLastPathComponent()
             .appendingPathComponent("Mapped", isDirectory: true)
         let importDirectoryPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
@@ -5394,17 +5434,18 @@ private extension RuntimeGenerationLegacyImportService {
             }
             if page.count < Self.pageSize { break }
         } while true
-        guard observedCount == accumulator.itemCount else {
+        guard observedCount == accumulatorSnapshot.itemCount else {
             throw RuntimeGenerationControlError.importReviewRequired
         }
         let latest = try await controlStore.latestImportCheckpoint(importID: source.importID)
-        if latest?.phase != .decoding || latest?.processedItemCount != accumulator.itemCount {
+        if latest?.phase != .decoding ||
+            latest?.processedItemCount != accumulatorSnapshot.itemCount {
             try await appendCheckpoint(
                 source: source, phase: .decoding,
-                artifactSetDigest: accumulator.mappedArtifactSetDigest,
-                lastSourceRecordID: accumulator.lastSourceRecordID,
-                processedItemCount: accumulator.itemCount,
-                evidence: .decoding(cursorDigest: accumulator.lastSourceRecordID.map {
+                artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
+                lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+                processedItemCount: accumulatorSnapshot.itemCount,
+                evidence: .decoding(cursorDigest: accumulatorSnapshot.lastSourceRecordID.map {
                     LocalRuntimeStorageChecksum.sha256Hex(for: $0)
                 })
             )
@@ -5418,16 +5459,16 @@ private extension RuntimeGenerationLegacyImportService {
         try await controlStore.recordImportManifest(manifest)
         try await appendCheckpoint(
             source: source, phase: .mapped,
-            artifactSetDigest: accumulator.mappedArtifactSetDigest,
-            lastSourceRecordID: accumulator.lastSourceRecordID,
-            processedItemCount: accumulator.itemCount,
+            artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
+            lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+            processedItemCount: accumulatorSnapshot.itemCount,
             evidence: .mapped(
                 manifestDigest: manifest.manifestDigest,
-                mappedArtifactSetDigest: accumulator.mappedArtifactSetDigest
+                mappedArtifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest
             )
         )
         let quarantine: RuntimeGenerationQuarantineRecord?
-        if accumulator.requiresQuarantine {
+        if accumulatorSnapshot.requiresQuarantine {
             let quarantineArtifact = try await quarantineImportArtifact(
                 source: source
             )
@@ -5448,8 +5489,8 @@ private extension RuntimeGenerationLegacyImportService {
                 source: source,
                 phase: .quarantined,
                 artifactSetDigest: record.quarantineDigest,
-                lastSourceRecordID: accumulator.lastSourceRecordID,
-                processedItemCount: accumulator.itemCount,
+                lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+                processedItemCount: accumulatorSnapshot.itemCount,
                 evidence: .quarantined(
                     quarantineDigest: record.quarantineDigest,
                     recoveryActions: record.allowedActions
@@ -5471,24 +5512,14 @@ private extension RuntimeGenerationLegacyImportService {
         item: RuntimeLegacyImportItem,
         source: RuntimeLegacyImportSource
     ) async throws {
-        let increment = accumulator.itemCount.addingReportingOverflow(1)
-        guard increment.overflow == false else {
-            throw RuntimeGenerationControlError.readBudgetExceeded(maximumBytes: Self.maximumRecords)
-        }
-        accumulator.itemCount = increment.partialValue
-        accumulator.lastSourceRecordID = item.sourceRecordID
-        if let binding = item.mappedArtifact?.bindingDigest {
-            accumulator.mappedArtifactSetDigest = LocalRuntimeStorageChecksum.sha256Hex(
-                for: "\(accumulator.mappedArtifactSetDigest)\n\(item.sourceRecordID)\n\(binding)"
-            )
-        }
-        if accumulator.itemCount > accumulator.durableProcessedFloor,
-           accumulator.itemCount.isMultiple(of: Self.pageSize) {
+        let accumulatorSnapshot = try await accumulator.advance(with: item)
+        if accumulatorSnapshot.itemCount > accumulatorSnapshot.durableProcessedFloor,
+           accumulatorSnapshot.itemCount.isMultiple(of: Self.pageSize) {
             try await appendCheckpoint(
                 source: source, phase: .decoding,
-                artifactSetDigest: accumulator.mappedArtifactSetDigest,
+                artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
                 lastSourceRecordID: item.sourceRecordID,
-                processedItemCount: accumulator.itemCount,
+                processedItemCount: accumulatorSnapshot.itemCount,
                 evidence: .decoding(
                     cursorDigest: LocalRuntimeStorageChecksum.sha256Hex(
                         for: item.sourceRecordID
