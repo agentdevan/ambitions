@@ -225,6 +225,10 @@ private enum RuntimeGenerationLeaseOperationEvent<Result: Sendable>: Sendable {
     case heartbeatStopped
 }
 
+private struct RuntimeGenerationLifecycleFileManager: @unchecked Sendable {
+    let value: FileManager
+}
+
 /// Concrete schema-v8 first-install lifecycle. The same journal, verifier,
 /// barrier, and publisher are used by migration/restore/import operations;
 /// those operations additionally require a source backup and exact final fence.
@@ -233,7 +237,7 @@ actor RuntimeGenerationLifecycleService {
     private let generationManager: RuntimeStoreGenerationManager
     private let barrierAuthority: RuntimeGenerationBarrierAuthority
     private var environment: RuntimeEnvironment
-    private let fileManager: FileManager
+    private let fileManager: RuntimeGenerationLifecycleFileManager
     private let preparationScanByteLimit: Int64
     private var activeProjectionRebuildAdvances: Set<String> = []
 
@@ -249,7 +253,7 @@ actor RuntimeGenerationLifecycleService {
         self.generationManager = generationManager
         self.barrierAuthority = barrierAuthority
         self.environment = environment
-        self.fileManager = fileManager
+        self.fileManager = RuntimeGenerationLifecycleFileManager(value: fileManager)
         self.preparationScanByteLimit = preparationScanByteLimit
     }
 
@@ -313,7 +317,7 @@ actor RuntimeGenerationLifecycleService {
             try await RuntimeGenerationVaultInventoryReader.prepareEmpty(
                 rootURL: locations.attachmentVaultURL,
                 keyCustody: keyCustody,
-                fileManager: self.fileManager
+                fileManager: self.fileManager.value
             )
         }
         let vaultInventory = vaultPreparation.result
@@ -3379,7 +3383,7 @@ extension RuntimeGenerationLifecycleService {
                     rootURL: vaultRootURL,
                     expected: vaultInventory,
                     keyCustody: keyCustody,
-                    fileManager: fileManager
+                    fileManager: fileManager.value
                 )
                 vaultEvidenceMaterial = "\(verifiedVault.blobSetDigest)\n\(verifiedVault.manifestSetDigest)\n\(verifiedVault.keyIdentityDigest)"
             }
@@ -3695,10 +3699,10 @@ extension RuntimeGenerationLifecycleService {
         artifact: String
     ) throws {
         try RuntimeStorePathValidation.requireContained(url, in: parent)
-        if fileManager.fileExists(atPath: url.path) {
+        if fileManager.value.fileExists(atPath: url.path) {
             try RuntimeStoreFileDurability.requireDirectory(at: url, artifact: artifact)
         } else {
-            try fileManager.createDirectory(at: url, withIntermediateDirectories: false)
+            try fileManager.value.createDirectory(at: url, withIntermediateDirectories: false)
             try RuntimeStoreFileDurability.synchronizeDirectory(at: parent)
         }
         try RuntimeStoreFileDurability.applyCompleteProtection(at: url, artifact: artifact)
