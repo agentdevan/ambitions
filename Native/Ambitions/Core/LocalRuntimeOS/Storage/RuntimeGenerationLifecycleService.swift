@@ -792,7 +792,7 @@ actor RuntimeGenerationLifecycleService {
         let candidate = source.resolved.candidate
         guard selector.generationID == plan.targetGenerationID,
               candidate.authorityManifest.generationID == plan.targetGenerationID,
-              candidate.authorityManifest.activationBaseline.baselineDigest ==
+              candidate.authorityManifest.activationBaseline.candidateIdentityDigest ==
                 plan.targetActivationBaselineDigest else {
             throw RuntimeGenerationControlError.rollbackUnsafe
         }
@@ -2753,7 +2753,8 @@ actor RuntimeGenerationLifecycleService {
                 sourceSafetyFenceDigest: sourceSnapshot.fence.fenceDigest,
                 targetGenerationID: generationID,
                 targetVerificationID: report.verificationID,
-                targetActivationBaselineDigest: manifest.activationBaseline.baselineDigest,
+                targetActivationBaselineDigest:
+                    manifest.activationBaseline.candidateIdentityDigest,
                 recoveryAuthorizationID: recoveryAuthorization.authorizationID,
                 recoveryAuthorizationDigest: recoveryAuthorization.authorizationDigest,
                 preparedAtMilliseconds: preparedAt
