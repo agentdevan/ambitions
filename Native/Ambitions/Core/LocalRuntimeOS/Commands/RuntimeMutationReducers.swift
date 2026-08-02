@@ -403,9 +403,11 @@ private enum RuntimePureMutationDecisionBuilder {
     }
 
     private static func disposition(for command: AmbitionsCommand) -> RuntimeReducerDisposition {
-        switch command.typedPayload {
-        case let .schedule(schedule) where schedule.action == .undo:
+        if case let .schedule(schedule) = command.typedPayload,
+           case .undo = schedule.action {
             return .unsupported
+        }
+        switch command.typedPayload {
         case let .history(history):
             switch history.action {
             case .openDestination, .askWhy: return .unchanged
