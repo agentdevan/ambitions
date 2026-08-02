@@ -4343,7 +4343,7 @@ private extension RuntimeGenerationLegacyImportService {
                 let bucketDigest = SHA256.hash(
                     data: Data("ambitions.import.inventory.bucket.v3\n".utf8) + material
                 )
-                let bucket = Int(bucketDigest.first ?? 0)
+                let bucket = Int(Array(bucketDigest)[0])
                 let primary = Array(SHA256.hash(
                     data: Data("ambitions.import.inventory.primary.v3\n".utf8) + material
                 ))
