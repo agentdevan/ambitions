@@ -1144,18 +1144,8 @@ actor RuntimeGenerationLifecycleService {
         sourceSafetyBackupID: String,
         reservationLifetimeMilliseconds: Int64 = 15 * 60 * 1_000
     ) async throws -> RuntimeGenerationProjectionRebuildAdmission {
-        let durablePlan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
-            id: plan.planID
-        )
-        let durableClaim = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationExecutionClaim.self,
-            table: "runtime_generation_recovery_operation_execution_claims",
-            idColumn: "claim_id",
-            id: claim.claimID
-        )
+        let durablePlan = try await controlStore.recoveryOperationPlan(id: plan.planID)
+        let durableClaim = try await controlStore.recoveryOperationExecutionClaim(id: claim.claimID)
         let durableQuarantine = try await controlStore.quarantine(id: quarantine.quarantineID)
         let durableAuthorization = try await controlStore.recoveryAuthorization(
             id: authorization.authorizationID
@@ -1755,12 +1745,7 @@ actor RuntimeGenerationLifecycleService {
         let preparation = try await controlStore.candidatePreparation(
             generationID: commitment.candidateGenerationID
         )
-        let lease = try await controlStore.load(
-            RuntimeGenerationOperationLease.self,
-            table: "runtime_generation_operation_leases",
-            idColumn: "lease_id",
-            id: run.operationLeaseID
-        )
+        let lease = try await controlStore.operationLease(id: run.operationLeaseID)
         let now = try nowMilliseconds()
         guard plan.action == .rebuildDerivedState,
               plan.planID == commitment.recoveryExecutionPlanID,
@@ -2048,16 +2033,10 @@ actor RuntimeGenerationLifecycleService {
             ownerInstanceID: admission.recoveryClaim.executorInstanceID,
             observedAtMilliseconds: observedAt
         )
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
+        let plan = try await controlStore.recoveryOperationPlan(
             id: admission.recoveryPlan.planID
         )
-        let claim = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationExecutionClaim.self,
-            table: "runtime_generation_recovery_operation_execution_claims",
-            idColumn: "claim_id",
+        let claim = try await controlStore.recoveryOperationExecutionClaim(
             id: admission.recoveryClaim.claimID
         )
         let authorization = try await controlStore.recoveryAuthorization(

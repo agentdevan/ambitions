@@ -126,12 +126,7 @@ actor RuntimeGenerationRecoveryService {
             throw RuntimeGenerationControlError.recoveryAuthorizationRequired
         }
         if let supersedingPlanID {
-            let predecessor = try await controlStore.load(
-                RuntimeGenerationRecoveryOperationPlan.self,
-                table: "runtime_generation_recovery_operation_plans",
-                idColumn: "plan_id",
-                id: supersedingPlanID
-            )
+            let predecessor = try await controlStore.recoveryOperationPlan(id: supersedingPlanID)
             guard predecessor.quarantineID == quarantine.quarantineID,
                   predecessor.action == .retryFreshConnectionVerification,
                   predecessor.targetDigest == quarantine.quarantineDigest,
@@ -157,12 +152,7 @@ actor RuntimeGenerationRecoveryService {
     func disposeExpiredRetryFreshConnectionVerificationPlan(
         planID: String
     ) async throws -> RuntimeGenerationRecoveryOperationPlanDisposition {
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
-            id: planID
-        )
+        let plan = try await controlStore.recoveryOperationPlan(id: planID)
         let disposedAt = try nowMilliseconds()
         guard plan.action == .retryFreshConnectionVerification,
               disposedAt >= plan.expiresAtMilliseconds else {
@@ -192,11 +182,7 @@ actor RuntimeGenerationRecoveryService {
         ) {
             return .completed(receipt)
         }
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id", id: planID
-        )
+        let plan = try await controlStore.recoveryOperationPlan(id: planID)
         let quarantine = try await controlStore.quarantine(id: plan.quarantineID)
         let authorization = try await controlStore.recoveryAuthorization(
             id: plan.recoveryAuthorizationID
@@ -254,12 +240,7 @@ actor RuntimeGenerationRecoveryService {
         ) {
             return .completed(receipt)
         }
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
-            id: planID
-        )
+        let plan = try await controlStore.recoveryOperationPlan(id: planID)
         let quarantine = try await controlStore.quarantine(id: plan.quarantineID)
         let authorization = try await controlStore.recoveryAuthorization(
             id: plan.recoveryAuthorizationID
@@ -324,11 +305,7 @@ actor RuntimeGenerationRecoveryService {
         if let receipt = try await controlStore.recoveryOperationExecutionReceipt(planID: planID) {
             return .completed(receipt)
         }
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id", id: planID
-        )
+        let plan = try await controlStore.recoveryOperationPlan(id: planID)
         let quarantine = try await controlStore.quarantine(id: plan.quarantineID)
         let authorization = try await controlStore.recoveryAuthorization(
             id: plan.recoveryAuthorizationID
@@ -344,10 +321,8 @@ actor RuntimeGenerationRecoveryService {
             .projectionRebuildCandidateAuthorityCommitment(recoveryExecutionPlanID: plan.planID) else {
             return .pending(migrationRunID: nil)
         }
-        let claim = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationExecutionClaim.self,
-            table: "runtime_generation_recovery_operation_execution_claims",
-            idColumn: "claim_id", id: commitment.recoveryExecutionClaimID
+        let claim = try await controlStore.recoveryOperationExecutionClaim(
+            id: commitment.recoveryExecutionClaimID
         )
         guard claim.planID == plan.planID,
               claim.claimEpoch == commitment.recoveryExecutionClaimEpoch else {

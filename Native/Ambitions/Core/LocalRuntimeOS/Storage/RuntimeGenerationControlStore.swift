@@ -6563,6 +6563,37 @@ actor RuntimeGenerationControlStore {
             }
         }
     }
+
+    func recoveryOperationPlan(
+        id: String
+    ) async throws -> RuntimeGenerationRecoveryOperationPlan {
+        try await load(
+            RuntimeGenerationRecoveryOperationPlan.self,
+            table: "runtime_generation_recovery_operation_plans",
+            idColumn: "plan_id",
+            id: id
+        )
+    }
+
+    func recoveryOperationExecutionClaim(
+        id: String
+    ) async throws -> RuntimeGenerationRecoveryOperationExecutionClaim {
+        try await load(
+            RuntimeGenerationRecoveryOperationExecutionClaim.self,
+            table: "runtime_generation_recovery_operation_execution_claims",
+            idColumn: "claim_id",
+            id: id
+        )
+    }
+
+    func operationLease(id: String) async throws -> RuntimeGenerationOperationLease {
+        try await load(
+            RuntimeGenerationOperationLease.self,
+            table: "runtime_generation_operation_leases",
+            idColumn: "lease_id",
+            id: id
+        )
+    }
 }
 
 private extension RuntimeGenerationControlStore {
