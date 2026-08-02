@@ -759,8 +759,9 @@ actor RuntimeGenerationRecoveryService {
             evidenceDirectoryRelativePath: "Ambitions-Recovery-Export-\(exportID)"
         )
         guard preservation.references.count == 1,
+              preservation.observations.count == 1,
               preservation.references[0].preservation == .copied,
-              let exported = preservation.references[0].copiedArtifact,
+              let exported = preservation.observations[0].observedArtifact,
               exported.sha256 == quarantine.originalArtifact.sha256,
               exported.byteCount == quarantine.originalArtifact.byteCount else {
             throw RuntimeGenerationControlError.verificationRejected
@@ -771,11 +772,11 @@ actor RuntimeGenerationRecoveryService {
         let exportedAt = try nowMilliseconds()
         return RuntimeGenerationOriginalExportResult(
             quarantineID: quarantineID,
-            sourceArtifactDigest: quarantine.originalArtifact.artifactDigest,
+            sourceArtifactDigest: quarantine.originalArtifact.sha256,
             exportedArtifact: exported,
             exportedAtMilliseconds: exportedAt,
             exportReceiptDigest: LocalRuntimeStorageChecksum.sha256Hex(
-                for: "recovery-original-export-v1\n\(quarantine.quarantineDigest)\n\(exported.artifactDigest)\n\(exportedAt)"
+                for: "recovery-original-export-v1\n\(quarantine.quarantineDigest)\n\(exported.sha256)\n\(exportedAt)"
             )
         )
     }
