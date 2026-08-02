@@ -310,14 +310,18 @@ struct RuntimeGenerationResolver: Sendable {
             case let (.some(existing), .active):
                 consumption = existing
             case let (existing, .freshConnectionVerified):
-                let reconciled = existing ?? (try
-                    RuntimeGenerationControlRecordFactory.activationConsumption(
+                let reconciled: RuntimeGenerationActivationConsumption
+                if let existing {
+                    reconciled = existing
+                } else {
+                    reconciled = try RuntimeGenerationControlRecordFactory.activationConsumption(
                         intent: intent,
                         consumedAtMilliseconds: try nowMilliseconds(),
                         installedSelectorFileSHA256: selectorSHA,
                         priorGenerationID: selector.priorGenerationID,
                         priorGenerationDigest: selector.priorAuthorityManifestDigest
-                    ))
+                    )
+                }
                 let transition = try RuntimeGenerationControlRecordFactory
                     .retentionTransition(
                         id: "reconcile-active-\(intent.intentID)",
