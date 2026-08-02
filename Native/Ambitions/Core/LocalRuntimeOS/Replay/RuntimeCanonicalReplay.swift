@@ -911,7 +911,7 @@ enum CanonicalRuntimeReplaySchemaPlan {
                 return upper.hasPrefix("PRIMARY KEY") == false &&
                     upper.hasPrefix("FOREIGN KEY") == false &&
                     upper.hasPrefix("UNIQUE") == false &&
-                    upper.hasPrefix("CHECK") == false &&
+                    upper.hasPrefix("CHECK ") == false &&
                     upper.hasPrefix("CONSTRAINT") == false
             }
             guard columns.count == expectedColumns.count else {
