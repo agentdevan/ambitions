@@ -4469,8 +4469,9 @@ private extension RuntimeGenerationLegacyImportService {
             maximumCaptureSetBytes: Self.maximumSourceBytes
         )
         guard copied.references.count == 1,
+              copied.observations.count == 1,
               copied.references[0].preservation == .copied,
-              let artifact = copied.references[0].copiedArtifact else {
+              let artifact = copied.observations[0].observedArtifact else {
             throw RuntimeGenerationControlError.importReviewRequired
         }
         guard Darwin.fsync(stagingPin.descriptor) == 0 else {
@@ -5870,7 +5871,7 @@ private extension RuntimeGenerationLegacyImportService {
             importID: staged.id,
             sourceRecordID: mapped.sourceRecordID,
             sourceRecordDigest: mapped.sourceRecordDigest,
-            artifact: storedArtifact,
+            artifact: storedArtifact.semanticArtifact(),
             formatVersion: artifactFormatVersion,
             payloadVersion: mapped.payloadVersion
         )
