@@ -434,7 +434,7 @@ private final class RuntimeLegacyImportReconciliationLockScope: @unchecked Senda
         }
         self.descriptor = nil
         stateLock.unlock()
-        let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+        let unlocked = flock(descriptor, LOCK_UN) == 0
         let closed = Darwin.close(descriptor) == 0
         guard unlocked, closed else {
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -447,7 +447,7 @@ private final class RuntimeLegacyImportReconciliationLockScope: @unchecked Senda
         descriptor = nil
         stateLock.unlock()
         if let descriptor = ownedDescriptor {
-            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = flock(descriptor, LOCK_UN)
             _ = Darwin.close(descriptor)
         }
     }
@@ -4800,7 +4800,7 @@ private extension RuntimeGenerationLegacyImportService {
             )
         }
         guard descriptor >= 0,
-              Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+              flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
             if descriptor >= 0, Darwin.close(descriptor) != 0 {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
@@ -4819,7 +4819,7 @@ private extension RuntimeGenerationLegacyImportService {
               descriptorStatus.st_nlink == 1,
               descriptorStatus.st_dev == pathStatus.st_dev,
                   descriptorStatus.st_ino == pathStatus.st_ino else {
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked, closed else {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -4837,7 +4837,7 @@ private extension RuntimeGenerationLegacyImportService {
             try controlPin.revalidate()
         } catch {
             let operationError = error
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked, closed else {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
