@@ -99,6 +99,8 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             let objectID: RuntimeDomainObjectID
             if case let .attachment(value) = command {
                 objectID = try RuntimeDomainObjectID(validating: value.intent.attachmentID.rawValue)
+            } else if case let .compensation(value) = command {
+                objectID = value.action.primaryObjectID
             } else {
                 objectID = try RuntimeDomainObjectID(validating: "writer-event-\(index)")
             }
@@ -1924,7 +1926,54 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             Self.writerAttachmentCommand(.replaceRevision),
             Self.writerAttachmentCommand(.authorizeDeletion),
             Self.writerAttachmentCommand(.quarantine),
+            Self.writerCompensationCommand(.discardCreatedCapture(
+                try RuntimeDomainObjectID(validating: "capture-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedGoal(
+                try RuntimeDomainObjectID(validating: "goal-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedSchedule(
+                try RuntimeDomainObjectID(validating: "schedule-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedReminder(
+                try RuntimeDomainObjectID(validating: "reminder-compensation-writer")
+            )),
         ]
+    }
+
+    private static func writerCompensationCommand(
+        _ action: RuntimeSemanticCompensationAction
+    ) -> RuntimeCommandPayload {
+        let objectID = action.primaryObjectID
+        let aggregate = RuntimeSemanticAggregate(
+            kind: action.aggregateKind,
+            id: try! RuntimeAggregateID(validating: objectID.rawValue)
+        )
+        let target = RuntimeCompensationTargetExpectation(
+            aggregate: aggregate,
+            sourcePriorRevision: nil,
+            sourceRevision: 0,
+            sourceTransition: .create,
+            requiredCurrentRevision: 0,
+            requiredLifecycle: .active,
+            sourceStateDigest: String(repeating: "d", count: 64),
+            inverseTransition: .tombstone
+        )
+        return .compensation(RuntimeCompensationCommand(
+            sourceReceiptID: RuntimeReceiptID(rawValue: "receipt-compensation-writer")!,
+            planID: RuntimeRollbackPlanID(rawValue: "plan-compensation-writer")!,
+            planDigest: String(repeating: "a", count: 64),
+            sourceLineage: RuntimeAuthorityLineageReference(
+                eventID: RuntimeEventID(rawValue: "event-compensation-writer")!,
+                eventSequence: 1,
+                eventHash: String(repeating: "b", count: 64)
+            ),
+            action: action,
+            targets: [target],
+            requiresConfirmation: false,
+            target: action.target,
+            content: RuntimeCommandContent()
+        ))
     }
 
     private static func writerAttachmentCommand(
