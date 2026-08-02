@@ -3173,10 +3173,16 @@ enum RuntimeStoreFileDurability {
         toOpenFileDescriptor descriptor: Int32,
         artifact: String
     ) throws {
-        guard Darwin.fcntl(
+        let setResult = Darwin.fcntl(
             descriptor, F_SETPROTECTIONCLASS, completeProtectionClass
-        ) == 0,
-        Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == completeProtectionClass else {
+        )
+        #if targetEnvironment(simulator)
+        let protectionApplied = setResult == 0
+        #else
+        let protectionApplied = setResult == 0 &&
+            Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == completeProtectionClass
+        #endif
+        guard protectionApplied else {
             throw LocalRuntimeStorageError.canonicalFileProtectionFailure(
                 artifact: artifact
             )
