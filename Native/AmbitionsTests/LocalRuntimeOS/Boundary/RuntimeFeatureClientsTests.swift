@@ -27,16 +27,19 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .missingFeature(.compensation))
         }
 
+        let compensation = try XCTUnwrap(all.first { $0.featureID == .compensation })
         let duplicateOrder = AnyRuntimeFeatureRegistrationModule(TestRegistrationModule(
-            base: all[7],
-            cases: all[7].handler.cases,
+            base: compensation,
+            cases: compensation.handler.cases,
             order: 0
         ))
-        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(Array(all.dropLast()) + [duplicateOrder])) { error in
+        XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(
+            all.filter { $0.featureID != .compensation } + [duplicateOrder]
+        )) { error in
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .duplicateOrder(0))
         }
 
-        let external = all[6]
+        let external = try XCTUnwrap(all.first { $0.featureID == .externalOperation })
         let duplicateCase = try XCTUnwrap(RuntimeCommandCaseID(rawValue: "externalOperation.reminder"))
         let duplicateExternal = AnyRuntimeFeatureRegistrationModule(TestRegistrationModule(
             base: external,
@@ -50,7 +53,7 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             ]
         ))
         XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(
-            Array(all.dropLast(2)) + [duplicateExternal, all[7]]
+            all.filter { $0.featureID != .externalOperation } + [duplicateExternal]
         )) { error in
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .duplicateCommandCase(duplicateCase))
         }
@@ -64,7 +67,7 @@ final class RuntimeFeatureClientsTests: XCTestCase {
             )]
         ))
         XCTAssertThrowsError(try RuntimeFeatureRegistrationRegistry(
-            Array(all.dropLast(2)) + [incompleteExternal, all[7]]
+            all.filter { $0.featureID != .externalOperation } + [incompleteExternal]
         )) { error in
             XCTAssertEqual(error as? RuntimeFeatureRegistrationError, .missingCommandCase(missingCase))
         }
