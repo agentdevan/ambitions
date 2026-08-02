@@ -2007,11 +2007,11 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
-            entries: [], database: database
+            entries: [], database: database, phase: .replay
         )
         try await database.transaction(.deferred) { isolated in
             try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                fixture.work, phase: .ready, database: isolated
+                fixture.work, phase: .replay, database: isolated
             )
             let staleLease = RuntimeCanonicalProjectionLease(
                 projectionID: definition.id, ownerID: "other-owner", version: 99,
@@ -2019,7 +2019,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             )
             let stale = replacingLease(fixture.work, lease: staleLease)
             XCTAssertThrowsError(try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                stale, phase: .ready, database: isolated
+                stale, phase: .replay, database: isolated
             ))
         }
         let cancelled = await Task { () -> Bool in
@@ -2027,7 +2027,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             do {
                 try await database.transaction(.deferred) { isolated in
                     try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                        fixture.work, phase: .ready, database: isolated
+                        fixture.work, phase: .replay, database: isolated
                     )
                 }
                 return false
