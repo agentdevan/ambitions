@@ -3100,7 +3100,7 @@ actor RuntimeGenerationLegacyImportService {
         afterSourceRecordID: String? = nil
     ) async throws -> [RuntimeLegacyImportItem] {
         try await ensureStartupReconciled()
-        try await controlStore.importItemsPage(
+        return try await controlStore.importItemsPage(
             importID: staging.source.importID,
             afterSourceRecordID: afterSourceRecordID,
             limit: Self.pageSize
