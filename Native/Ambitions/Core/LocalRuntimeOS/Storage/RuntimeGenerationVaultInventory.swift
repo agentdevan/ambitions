@@ -924,7 +924,7 @@ enum RuntimeGenerationVaultInventoryReader {
             artifact: "attachment_vault_root"
         )
         let key = try await keyCustody.currentWrappingKey()
-        return try verifyEmpty(
+        return try await verifyEmpty(
             rootURL: rootURL,
             keyID: key.id,
             keyVersion: key.version,
