@@ -35,9 +35,10 @@ extension RuntimeAttachmentIdentity {
     static func < (lhs: Self, rhs: Self) -> Bool { lhs.rawValue < rhs.rawValue }
 
     static func validate(_ raw: String, maximumBytes: Int = 1_024) -> String? {
+        let canonicalRaw = raw.precomposedStringWithCanonicalMapping
         guard raw.isEmpty == false,
               raw == raw.trimmingCharacters(in: .whitespacesAndNewlines),
-              raw == raw.precomposedStringWithCanonicalMapping,
+              raw.utf8.elementsEqual(canonicalRaw.utf8),
               raw.utf8.count <= maximumBytes,
               raw.unicodeScalars.contains(where: CharacterSet.controlCharacters.contains) == false else {
             return nil
