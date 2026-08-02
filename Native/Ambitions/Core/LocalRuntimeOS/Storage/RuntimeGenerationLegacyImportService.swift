@@ -2859,7 +2859,7 @@ actor RuntimeGenerationLegacyImportService {
                   let pages = pageCount[0].values.first.flatMap(Self.integerValue),
                   let bytesPerPage = pageSize[0].values.first.flatMap(Self.integerValue),
                   pages >= 0, bytesPerPage > 0,
-                  pages <= Self.maximumSourceBytes / bytesPerPage else {
+                  Int64(pages) <= Self.maximumSourceBytes / Int64(bytesPerPage) else {
                 throw RuntimeGenerationControlError.readBudgetExceeded(
                     maximumBytes: Int(Self.maximumSourceBytes)
                 )
