@@ -1896,7 +1896,7 @@ actor RuntimeGenerationLifecycleService {
                             authorityDigest: consumption.consumptionDigest,
                             disposedAtMilliseconds: consumedAt
                         )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: activeTransition,
                             predecessorRetentionTransition: predecessorTransition,
@@ -2856,7 +2856,7 @@ actor RuntimeGenerationLifecycleService {
                                 authorityDigest: consumption.consumptionDigest,
                                 disposedAtMilliseconds: consumedAt
                             )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: activeTransition,
                             predecessorRetentionTransition: predecessorTransition,
@@ -3526,7 +3526,10 @@ extension RuntimeGenerationLifecycleService {
                     reconstructionDigest: outcome == .deferred ? nil : replayStateDigest,
                     auditedAtMilliseconds: max(operationLease.issuedAtMilliseconds, try nowMilliseconds())
                 )
-                try await controlStore.recordCandidateReplayAudit(audit, currentLease: operationLease)
+                try await self.controlStore.recordCandidateReplayAudit(
+                    audit,
+                    currentLease: operationLease
+                )
                 switch replayAuditResult {
                 case .complete: break
                 case let .blocked(divergence, _):
