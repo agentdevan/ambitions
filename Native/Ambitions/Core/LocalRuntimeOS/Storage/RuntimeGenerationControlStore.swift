@@ -85,7 +85,7 @@ struct RuntimeGenerationProjectionRebuildAdmissionRequest: Sendable, Equatable {
     /// Optional only to preserve source compatibility for callers that have
     /// not yet been migrated. Admission rejects nil at runtime; no projection
     /// rebuild can enter the v10 authority path without this stage-one fact.
-    let candidateAuthorityReservation: RuntimeGenerationProjectionRebuildCandidateReservation? = nil
+    let candidateAuthorityReservation: RuntimeGenerationProjectionRebuildCandidateReservation?
 
     init(
         plan: RuntimeGenerationRecoveryOperationPlan,
