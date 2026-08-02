@@ -83,7 +83,8 @@ struct RuntimeGenerationResolver: Sendable {
     let environment: RuntimeEnvironment
 
     func resolveActive() async throws -> ResolvedRuntimeGenerationV8 {
-        let coordinatorToken = environment.uuid.nextUUID().uuidString.lowercased()
+        var uuid = environment.uuid
+        let coordinatorToken = uuid.nextUUID().uuidString.lowercased()
         try await rootAuthority.activationCoordinator.acquire(token: coordinatorToken)
         let activationLock: RuntimeGenerationActivationLockScope
         do {
@@ -100,7 +101,8 @@ struct RuntimeGenerationResolver: Sendable {
         let result: ResolvedRuntimeGenerationV8
         do {
             result = try await resolveActiveWhileActivationLocked(
-                activationLock: activationLock
+                activationLock: activationLock,
+                uuid: &uuid
             )
         } catch {
             let operationError = error
@@ -126,7 +128,8 @@ struct RuntimeGenerationResolver: Sendable {
     }
 
     private func resolveActiveWhileActivationLocked(
-        activationLock: RuntimeGenerationActivationLockScope
+        activationLock: RuntimeGenerationActivationLockScope,
+        uuid: inout RuntimeUUIDClient
     ) async throws
         -> ResolvedRuntimeGenerationV8 {
         try activationLock.revalidate(requiredMode: .exclusive)
@@ -134,7 +137,9 @@ struct RuntimeGenerationResolver: Sendable {
         try RuntimeGenerationVaultGraphVerifier.reconcileRestoreDeltaJournals(
             locations: locations
         )
-        let backupReconciliation = try await reconcileBackupPreparationsWhileActivationLocked()
+        let backupReconciliation = try await reconcileBackupPreparationsWhileActivationLocked(
+            uuid: &uuid
+        )
         try activationLock.revalidate(requiredMode: .exclusive)
         try rootAuthority.revalidatePinnedRoot()
         guard let selectorData = try RuntimeStoreManifestDescriptorReader.readIfPresent(
@@ -143,7 +148,8 @@ struct RuntimeGenerationResolver: Sendable {
         let selectorSHA = LocalRuntimeStorageChecksum.sha256Hex(for: selectorData)
         let selector = try RuntimeGenerationActiveSelectorCodec.decode(selectorData)
         let candidateReconciliation = try await reconcileInactiveCandidatePreparations(
-            activeSelector: selector
+            activeSelector: selector,
+            uuid: &uuid
         )
         let reconciliation: RuntimeGenerationReconciliationOutcome
         if backupReconciliation.hasPendingWork || candidateReconciliation.hasPendingWork {
@@ -361,7 +367,8 @@ struct RuntimeGenerationResolver: Sendable {
                 let candidatePreparation = try await controlStore
                     .candidatePreparation(generationID: selector.generationID)
                 let reconciliationLease = try await takeOverExpiredOperationLease(
-                    reservationID: candidatePreparation.reservationID
+                    reservationID: candidatePreparation.reservationID,
+                    uuid: &uuid
                 )
                 let candidateDisposition = try RuntimeGenerationControlRecordFactory
                     .candidatePreparationDisposition(
@@ -447,7 +454,8 @@ struct RuntimeGenerationResolver: Sendable {
     }
 
     private func takeOverExpiredOperationLease(
-        reservationID: String
+        reservationID: String,
+        uuid: inout RuntimeUUIDClient
     ) async throws -> RuntimeGenerationOperationLease {
         guard let prior = try await controlStore.currentOperationLease(
             reservationID: reservationID
@@ -466,9 +474,9 @@ struct RuntimeGenerationResolver: Sendable {
             throw RuntimeGenerationControlError.reservationExpired
         }
         let takeover = try RuntimeGenerationControlRecordFactory.operationLease(
-            id: environment.uuid.nextUUID().uuidString.lowercased(),
+            id: uuid.nextUUID().uuidString.lowercased(),
             reservationID: reservationID,
-            ownerInstanceID: environment.uuid.nextUUID().uuidString.lowercased(),
+            ownerInstanceID: uuid.nextUUID().uuidString.lowercased(),
             leaseEpoch: prior.leaseEpoch + 1,
             fencingToken: prior.fencingToken + 1,
             priorLeaseDigest: prior.leaseDigest,
@@ -480,7 +488,9 @@ struct RuntimeGenerationResolver: Sendable {
         return takeover
     }
 
-    private func reconcileBackupPreparationsWhileActivationLocked() async throws
+    private func reconcileBackupPreparationsWhileActivationLocked(
+        uuid: inout RuntimeUUIDClient
+    ) async throws
         -> RuntimeGenerationPreparationReconciliationResult {
         let page = try await controlStore.unconsumedBackupPreparationsPage(
             after: nil,
@@ -501,7 +511,8 @@ struct RuntimeGenerationResolver: Sendable {
             // prepared bytes. Otherwise a second resolver could take ownership
             // after this resolver's evidence scan but before publication.
             let lease = try await takeOverExpiredOperationLease(
-                reservationID: preparation.reservationID
+                reservationID: preparation.reservationID,
+                uuid: &uuid
             )
             let backups = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
                 locations.backupsURL,
@@ -884,7 +895,8 @@ struct RuntimeGenerationResolver: Sendable {
     }
 
     private func reconcileInactiveCandidatePreparations(
-        activeSelector: RuntimeGenerationActiveSelector
+        activeSelector: RuntimeGenerationActiveSelector,
+        uuid: inout RuntimeUUIDClient
     ) async throws -> RuntimeGenerationPreparationReconciliationResult {
         let page = try await controlStore.unresolvedCandidatePreparationsPage(
             after: nil,
@@ -944,7 +956,8 @@ struct RuntimeGenerationResolver: Sendable {
                 continue
             }
             let lease = try await takeOverExpiredOperationLease(
-                reservationID: preparation.reservationID
+                reservationID: preparation.reservationID,
+                uuid: &uuid
             )
             let stores = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
                 locations.storesURL,
