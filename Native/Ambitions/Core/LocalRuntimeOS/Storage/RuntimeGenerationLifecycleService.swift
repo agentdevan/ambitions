@@ -944,14 +944,18 @@ actor RuntimeGenerationLifecycleService {
             var reconciliationRequired = false
             do {
                 let consumedAt = max(intent.createdAtMilliseconds, try nowMilliseconds())
-                let consumption = existingConsumption ?? (try
-                    RuntimeGenerationControlRecordFactory.activationConsumption(
+                let consumption: RuntimeGenerationActivationConsumption
+                if let existingConsumption {
+                    consumption = existingConsumption
+                } else {
+                    consumption = try RuntimeGenerationControlRecordFactory.activationConsumption(
                         intent: intent,
                         consumedAtMilliseconds: consumedAt,
                         installedSelectorFileSHA256: candidate.selectorFileSHA256,
                         priorGenerationID: reservation.sourceGenerationID,
                         priorGenerationDigest: reservation.sourceGenerationDigest
-                    ))
+                    )
+                }
                 let retention = try await controlStore.currentRetentionClass(
                     generationID: candidateGenerationID
                 )
