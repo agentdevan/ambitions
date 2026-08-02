@@ -682,7 +682,7 @@ enum RuntimeGenerationVaultGraphVerifier {
                     at: backupDirectoryURL.appendingPathComponent(expected.relativePath),
                     relativePath: expected.relativePath
                 )
-                guard observed == expected else {
+                guard observed.semanticallyMatches(expected) else {
                     throw RuntimeGenerationControlError.restoreSourceUnverified
                 }
             }
