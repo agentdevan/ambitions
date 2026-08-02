@@ -40,7 +40,8 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
             context: CommandExecutionContext(now: now, sourceSurface: "Today")
         )
 
-        let fetchedCapture = try await captureRepository.capture(id: "capture-messy-intent-proof")
+        let captureID = try XCTUnwrap(captureResult.target?.captureID)
+        let fetchedCapture = try await captureRepository.capture(id: captureID)
         let fetchedCommandRecord = try await commandRecords.fetchRecord(commandID: command.id)
         let fetchedRuntimeEvents = try await runtimeEvents.fetchEvents(matching: .commandID(command.id), limit: 1)
         let capture = try XCTUnwrap(fetchedCapture)
