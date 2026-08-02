@@ -1863,8 +1863,6 @@ actor RuntimeGenerationLifecycleService {
                 expectedPriorSelectorFileSHA256: source.resolved.selectorFileSHA256,
                 sourceStore: source,
                 expectedSourceFence: source.resolved.liveFence,
-                temporaryToken: nextID(),
-                rollbackToken: nextID(),
                 postCommitJournal: { committedAtMilliseconds in
                     do {
                         let consumedAt = max(intent.createdAtMilliseconds, committedAtMilliseconds)
@@ -1913,7 +1911,9 @@ actor RuntimeGenerationLifecycleService {
                     } catch {
                         return false
                     }
-                }
+                },
+                temporaryToken: nextID(),
+                rollbackToken: nextID()
             )
             let cleanupWarning: Bool
             switch activation.activationState {
