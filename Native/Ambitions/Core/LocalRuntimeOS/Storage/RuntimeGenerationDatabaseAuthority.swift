@@ -290,7 +290,7 @@ enum RuntimeGenerationDatabaseAuthority {
         activationLock: RuntimeGenerationActivationLockScope
     ) async throws -> RuntimeGenerationAuthorityFenceToken {
         try activationLock.revalidate(requiredMode: .exclusive)
-        try await database.transaction(.deferred) { database in
+        return try await database.transaction(.deferred) { database in
             try boundedAuthorityFenceTokenInTransaction(
                 database: database,
                 generationID: generationID
