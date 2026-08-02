@@ -643,7 +643,7 @@ actor RuntimeGenerationLifecycleService {
                                 authorityDigest: consumption.consumptionDigest,
                                 disposedAtMilliseconds: consumedAt
                             )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: transition,
                             predecessorRetentionTransition: nil,
