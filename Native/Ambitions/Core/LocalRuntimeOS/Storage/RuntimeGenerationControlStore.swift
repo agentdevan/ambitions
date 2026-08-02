@@ -86,6 +86,33 @@ struct RuntimeGenerationProjectionRebuildAdmissionRequest: Sendable, Equatable {
     /// not yet been migrated. Admission rejects nil at runtime; no projection
     /// rebuild can enter the v10 authority path without this stage-one fact.
     let candidateAuthorityReservation: RuntimeGenerationProjectionRebuildCandidateReservation? = nil
+
+    init(
+        plan: RuntimeGenerationRecoveryOperationPlan,
+        claim: RuntimeGenerationRecoveryOperationExecutionClaim,
+        quarantine: RuntimeGenerationQuarantineRecord,
+        authorization: RuntimeGenerationRecoveryAuthorization,
+        sourceSafetyBackup: RuntimeGenerationBackupRecord,
+        reservation: RuntimeGenerationReservation,
+        operationLease: RuntimeGenerationOperationLease,
+        candidatePreparation: RuntimeGenerationCandidatePreparationRecord,
+        migrationRun: RuntimeGenerationMigrationRun,
+        admittedTransition: RuntimeGenerationProjectionRebuildLifecycleTransition,
+        candidateAuthorityReservation:
+            RuntimeGenerationProjectionRebuildCandidateReservation? = nil
+    ) {
+        self.plan = plan
+        self.claim = claim
+        self.quarantine = quarantine
+        self.authorization = authorization
+        self.sourceSafetyBackup = sourceSafetyBackup
+        self.reservation = reservation
+        self.operationLease = operationLease
+        self.candidatePreparation = candidatePreparation
+        self.migrationRun = migrationRun
+        self.admittedTransition = admittedTransition
+        self.candidateAuthorityReservation = candidateAuthorityReservation
+    }
 }
 
 struct RuntimeGenerationProjectionRebuildAdmissionRecords: Sendable, Equatable {
