@@ -2246,7 +2246,21 @@ private func sqlitePublicStatementAuthorizer(
             return SQLITE_DENY
         }
         return SQLITE_OK
-    case SQLITE_ALTER_TABLE, SQLITE_ANALYZE, SQLITE_REINDEX,
+    case SQLITE_REINDEX:
+        guard state.connectionIsReadOnly == false,
+              state.precommitValidationIsReadOnly == false,
+              let firstDetail else { return SQLITE_DENY }
+        let primary = String(cString: firstDetail).lowercased()
+        if let authorization = state.bootstrapAuthorization {
+            return authorization.allowedSchemaObjects.contains(primary)
+                ? SQLITE_OK : SQLITE_DENY
+        }
+        guard let authorization = state.schemaMigrationAuthorization else {
+            return SQLITE_DENY
+        }
+        return authorization.allowedSchemaObjects.contains(primary)
+            ? SQLITE_OK : SQLITE_DENY
+    case SQLITE_ALTER_TABLE, SQLITE_ANALYZE,
          SQLITE_DROP_INDEX, SQLITE_DROP_TABLE,
          SQLITE_DROP_TRIGGER, SQLITE_DROP_VIEW,
          SQLITE_DROP_VTABLE:
