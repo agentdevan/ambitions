@@ -1649,10 +1649,10 @@ actor CanonicalRuntimeStoreV8 {
                 .deferred,
                 precommitValidation: { _ in
                     try sharedLock.revalidate(requiredMode: .shared)
-                    try resolved.rootAuthority.revalidatePinnedRoot()
-                    try resolved.generationDirectoryPin.revalidate()
-                    try resolved.pinnedFiles.validate(databaseURL: resolved.databaseURL)
-                    try Self.requireBoundActiveSelector(resolved: resolved)
+                    try self.resolved.rootAuthority.revalidatePinnedRoot()
+                    try self.resolved.generationDirectoryPin.revalidate()
+                    try self.resolved.pinnedFiles.validate(databaseURL: self.resolved.databaseURL)
+                    try Self.requireBoundActiveSelector(resolved: self.resolved)
                 },
                 operation
             )
@@ -1706,10 +1706,10 @@ actor CanonicalRuntimeStoreV8 {
                 writeAuthorization: writeAuthorization,
                 precommitValidation: { _ in
                     try heldLock.revalidate(requiredMode: .shared)
-                    try resolved.rootAuthority.revalidatePinnedRoot()
-                    try resolved.generationDirectoryPin.revalidate()
-                    try resolved.pinnedFiles.validate(databaseURL: resolved.databaseURL)
-                    try Self.requireBoundActiveSelector(resolved: resolved)
+                    try self.resolved.rootAuthority.revalidatePinnedRoot()
+                    try self.resolved.generationDirectoryPin.revalidate()
+                    try self.resolved.pinnedFiles.validate(databaseURL: self.resolved.databaseURL)
+                    try Self.requireBoundActiveSelector(resolved: self.resolved)
                 },
                 operation
             )
@@ -1786,10 +1786,10 @@ actor CanonicalRuntimeStoreV8 {
                 .deferred,
                 precommitValidation: { _ in
                     try heldLock.revalidate(requiredMode: .shared)
-                    try resolved.rootAuthority.revalidatePinnedRoot()
-                    try resolved.generationDirectoryPin.revalidate()
-                    try resolved.pinnedFiles.validate(databaseURL: resolved.databaseURL)
-                    try Self.requireBoundActiveSelector(resolved: resolved)
+                    try self.resolved.rootAuthority.revalidatePinnedRoot()
+                    try self.resolved.generationDirectoryPin.revalidate()
+                    try self.resolved.pinnedFiles.validate(databaseURL: self.resolved.databaseURL)
+                    try Self.requireBoundActiveSelector(resolved: self.resolved)
                 }
             ) { database in
                 let fence = try RuntimeGenerationDatabaseAuthority.revisionFenceInTransaction(
