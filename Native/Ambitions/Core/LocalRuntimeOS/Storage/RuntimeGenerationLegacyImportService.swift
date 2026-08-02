@@ -1224,9 +1224,13 @@ actor RuntimeSwiftDataTypedExporter {
                     }
                 } else {
                     predicate = #Predicate<ReminderRecord> {
-                        $0.triggerAt != nil && ($0.triggerAt ?? "") > triggerAt ||
-                        ($0.triggerAt != nil && ($0.triggerAt ?? "") == triggerAt && $0.createdAt > createdAt) ||
-                        ($0.triggerAt != nil && ($0.triggerAt ?? "") == triggerAt && $0.createdAt == createdAt && $0.id > id)
+                        $0.triggerAt != nil && (
+                            ($0.triggerAt ?? "") > triggerAt ||
+                            (($0.triggerAt ?? "") == triggerAt && (
+                                $0.createdAt > createdAt ||
+                                ($0.createdAt == createdAt && $0.id > id)
+                            ))
+                        )
                     }
                 }
             } else { predicate = nil }
