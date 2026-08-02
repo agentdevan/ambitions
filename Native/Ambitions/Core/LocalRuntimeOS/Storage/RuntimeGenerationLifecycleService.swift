@@ -2932,7 +2932,7 @@ extension RuntimeGenerationLifecycleService {
             group.addTask { [environment] in
                 while Task.isCancelled == false {
                     let prior = await state.lease()
-                    let observedAt = try self.nowMilliseconds()
+                    let observedAt = try await self.nowMilliseconds()
                     guard observedAt >= prior.issuedAtMilliseconds,
                           observedAt < prior.expiresAtMilliseconds else {
                         throw RuntimeGenerationControlError.reservationExpired
@@ -3524,7 +3524,10 @@ extension RuntimeGenerationLifecycleService {
                     deferredReason: deferredReason,
                     replayCertificateDigest: certificateDigest,
                     reconstructionDigest: outcome == .deferred ? nil : replayStateDigest,
-                    auditedAtMilliseconds: max(operationLease.issuedAtMilliseconds, try nowMilliseconds())
+                    auditedAtMilliseconds: max(
+                        operationLease.issuedAtMilliseconds,
+                        try await self.nowMilliseconds()
+                    )
                 )
                 try await self.controlStore.recordCandidateReplayAudit(
                     audit,
