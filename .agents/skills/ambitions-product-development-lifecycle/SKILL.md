@@ -44,8 +44,8 @@ internally consistent, grounded in current repository truth, and has no blocking
 finding. Otherwise return `NEEDS REVISION` with a concise list of blockers.
 
 When Devan agrees, revise the document directly and review it again. Do not
-create separate review artifacts or require seals, hashes, provenance packets,
-freshness replay, or isolated reviewer sessions.
+create separate review artifacts, require recorded integrity state, replay
+repository history, or use isolated reviewer sessions.
 
 ## Approve
 

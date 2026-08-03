@@ -16,8 +16,12 @@ it does not authorize edits or merges.
 For a material new product, UX, or architecture initiative whose behavior is not
 already resolved by current canon, use the repository skill
 `ambitions-product-development-lifecycle`. ChatGPT authors the canonical Research,
-Scope, and Design files; Codex performs consumer review before each downstream
-phase. This is a quality workflow, not edit or merge authorization.
+Scope, and Design files in that order. Devan reviews each phase, ChatGPT checks
+it for completeness and consistency, and a phase becomes approved only after
+Devan explicitly approves it. After approved Design, ChatGPT or Codex creates
+`implementation/plan.md`, `implementation/tasks.md`, and
+`implementation/verification.md`. This workflow supports product quality and
+does not control ordinary edits or merges.
 
 ## Required engineering practice
 

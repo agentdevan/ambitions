@@ -15,5 +15,5 @@ architecture, data, privacy, accessibility, traceability, and verification
 needed for implementation grooming.
 
 If evidence, repository access, or a product decision is missing, stop and
-explain what is needed. Do not require a seal, contract hash, provenance packet,
-freshness replay, review artifact, or isolated reviewer session.
+explain what is needed. Do not require extra process artifacts, recorded
+integrity state, repository-history replay, or an isolated reviewer session.
