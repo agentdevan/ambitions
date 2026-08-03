@@ -1,17 +1,19 @@
-# Product-development lifecycle skill — final validation
+# Product-development lifecycle skill — interim validation
 
 ## Result
 
-The installed `ambitions-product-development-lifecycle` package is canonical
-and the committed synthetic fixture is valid: Research revision 3, Scope
-revision 1, and Design revision 2 are all in `passed` state. This Task 11
-record is validation evidence only; it changes no package, fixture, workflow,
-or canon source.
+The installed `ambitions-product-development-lifecycle` package is canonical.
+The committed synthetic fixture retains its historical passed states: Research
+revision 3, Scope revision 1, and Design revision 2. This is interim Task 11
+evidence, not final fixture completion: the package-source correction below is
+semantic drift for Design and requires a fresh Design revision and provenance
+cycle before a current standalone consume can pass. Fixture lifecycle state was
+intentionally not changed here.
 
 | Item | Value |
 | --- | --- |
 | Package identity | `ambitions-product-development-lifecycle` v`1.0.0` |
-| Active package hash | `sha256:9c96c984a24886eeb60f06bb931926e38ae8fc2d30dbbb5cd480b4db8b0874dc` (25 operational files) |
+| Active package hash | `sha256:8e7bcaf7ef33edcf33b9334f40c7eb3e42277b146604165428f32f495c12d2e2` (25 operational files) |
 | Research template hash | `sha256:ea95f88f1bcfc75898f5cb32e7a7151a8c094b9791439f7fa4a0cf1466afb39a` |
 | Scope template hash | `sha256:94840a4ce88a5be28f9ba2154a5aa025d1f3923618389fd2648bfeb4ce41bb6e` |
 | Design template hash | `sha256:bc7725fcd84c2b52391b3cee4c196f05a8c5c4155fbf8140c82621f3025bb4da` |
@@ -21,35 +23,36 @@ or canon source.
 ## Exact command evidence
 
 The following commands were run from the repository root at commit
-`7c11a85b3cd499ffb2af08abc1939ce95e4fa21d`. The full discovery command uses
+`42427b93cfa82a8a9650bcb6429a833439bcbd17`. The full discovery command uses
 only temporary-directory and bytecode controls to prevent host Git background
 maintenance from racing test-repository cleanup; it does not change test or
 package behavior.
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `env TMPDIR=/tmp PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_*.py' -v` | 0 | `Ran 105 tests in 67.590s` / `OK` |
+| `env TMPDIR=/tmp PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_*.py' -v` | 0 | `Ran 106 tests in 72.049s` / `OK` |
 | `python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py package --check` | 0 | `package: success`; package ready |
 | `python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py check --initiative docs/product-development/lifecycle-fixture` | 0 | `check: success`; documents valid |
-| `python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py consume docs/product-development/lifecycle-fixture/design.md --json` | 0 | `status: success`; `verdict: pass`; exact JSON below |
+| `python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py consume docs/product-development/lifecycle-fixture/design.md --json` | 1 | expected `semantic-review-required`; exact JSON below |
 | `python3 scripts/ambitions-canon.py check` | 0 | 65 documents, 460 requirements, 47 UX screens, 39 visual contracts, 16 local links, 68 JSON files |
 | `git diff --check` | 0 | no output |
 
-The current standalone Design consume result passes. Its stored Consumer PASS
-contains exactly the nonmaterial Scope assessment that matched drift at the
-review commit; later fresh semantic owner drift is still rejected by the new
-focused regression test.
+The current standalone Design consume correctly requires revision. It treats
+the declared package owners `repository.py` and `validation.py` as relevant;
+only automatic package identity evolution (the manifest and active template)
+is excluded. A stored Consumer PASS may reuse assessments only when a unique,
+well-formed event is proven to have been introduced by the committed
+`content-reviewed` to `passed` transition for the same revision and contract.
+An appended lookalike Consumer event cannot move that boundary.
 
 ```json
-{"command":"consume","status":"success","document":{"path":"docs/product-development/lifecycle-fixture/design.md","document_id":"PD-2026-08-LIFECYCLE-FIXTURE-DESIGN","revision":2,"contract_hash":"sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224","verdict":"pass","relevant_paths":[],"unrelated_paths":[".agents/skills/ambitions-product-development-lifecycle/package-manifest.json",".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py",".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py",".agents/skills/ambitions-product-development-lifecycle/tests/support.py",".agents/skills/ambitions-product-development-lifecycle/tests/test_consume.py","docs/product-development/lifecycle-fixture/design.md","docs/product-development/lifecycle-fixture/research.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/cross-product.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/fixture-provenance.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/post-skill.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-review-replay-addendum.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/design-revision-2.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/design.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/research-revision-3.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/scope.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/validation.md"]},"changes":[],"diagnostics":[],"next_action":"canon-reconciliation"}
+{"command":"consume","status":"failure","document":{"path":"docs/product-development/lifecycle-fixture/design.md","document_id":"PD-2026-08-LIFECYCLE-FIXTURE-DESIGN","revision":2,"contract_hash":"sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224","verdict":"needs-revision","relevant_paths":[".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py",".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py"],"unrelated_paths":[".agents/skills/ambitions-product-development-lifecycle/package-manifest.json",".agents/skills/ambitions-product-development-lifecycle/tests/support.py",".agents/skills/ambitions-product-development-lifecycle/tests/test_consume.py","docs/product-development/lifecycle-fixture/design.md","docs/product-development/lifecycle-fixture/research.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/cross-product.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/fixture-provenance.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/post-skill.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-review-replay-addendum.md","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/design-revision-2.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/design.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/research-revision-3.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/scope.json","docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/validation.md"]},"changes":[],"diagnostics":[{"code":"semantic-review-required","message":"Relevant repository drift requires one assessment per path","path":null,"section":null,"identifier":null,"remediation":null}],"next_action":"revision"}
 ```
 
-The consumer checks the active revision/hash-bound review event at the commit
-that recorded it. It accepts the event only when its nonmaterial assessments
-exactly cover semantic owner drift through that commit, then checks for fresh
-semantic owner drift afterward. Historical and active package identity continue
-to be verified independently; package evolution is not misclassified as
-product-owner drift. No fixture state was changed to suppress a diagnostic.
+The consumer proves the exact transition boundary before reusing an assessment,
+then checks later semantic owner drift. Historical and active package identity
+remain independently verified. No fixture state was changed to suppress the
+current diagnostic.
 
 ## Read-only stability
 
@@ -68,7 +71,7 @@ unchanged. The test suite itself includes
 | ChatGPT deployment | `docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/fixture-provenance.md`; `docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/raw-content-reviews/design-revision-2.json` | `LifecycleAcceptanceTests.test_complete_research_scope_design_chain_and_drift_contract` |
 | Producer | `.agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py` | `TransitionTests.test_new_scope_and_design_require_committed_passed_upstream` |
 | Content review | `.agents/skills/ambitions-product-development-lifecycle/references/research-review-rubric.md`; `.agents/skills/ambitions-product-development-lifecycle/references/scope-review-rubric.md`; `.agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py` | `TransitionTests.test_review_lanes_advance_only_with_exact_committed_revision_and_hash` |
-| Consumer | `.agents/skills/ambitions-product-development-lifecycle/references/consumer-contract.md`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py` | `ConsumptionTests.test_consumer_pass_requires_exact_nonmaterial_drift_assessments` |
+| Consumer | `.agents/skills/ambitions-product-development-lifecycle/references/consumer-contract.md`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py` | `ConsumptionTests.test_consumer_pass_requires_exact_nonmaterial_drift_assessments`; `ConsumptionTests.test_declared_skill_owner_drift_remains_relevant` |
 | Canonical persistence | `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/documents.py`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py` | `DocumentIOTests.test_atomic_write_preserves_target_when_candidate_is_invalid` |
 | Typed inputs | `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/models.py`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/documents.py` | `DocumentIOTests.test_rejects_boolean_integer_fields` |
 | State machine | `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py`; `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py` | `StructureAndFreshnessTests.test_state_review_matrix_accepts_only_reachable_lane_pairs` |
@@ -105,6 +108,9 @@ ChatGPT-to-Codex consumption. It does not prove every future initiative or
 replace product, code, runtime, accessibility, privacy, performance, or
 release verification.
 
-Follow-up adoption work is to apply the package to a real initiative and run
-the separately appropriate product and engineering validation. This task did
-not change the Code Quality workflow or branch-protection configuration.
+Before final fixture closeout, produce a fresh Design revision and its required
+fresh provenance/review cycle against the current package, then rerun the
+standalone consume and validation commands. Follow-up adoption work remains to
+apply the package to a real initiative and run separately appropriate product
+and engineering validation. This task did not change the Code Quality workflow
+or branch-protection configuration.
