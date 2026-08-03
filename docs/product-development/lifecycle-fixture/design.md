@@ -3,7 +3,7 @@ schema_version = 1
 template_version = "design-v1"
 template_hash = "sha256:bc7725fcd84c2b52391b3cee4c196f05a8c5c4155fbf8140c82621f3025bb4da"
 skill_version = "1.0.0"
-skill_package_hash = "sha256:b810179fdc59fb037091b03502b226d996d9ea128cde7118d60eee46e7e178cf"
+skill_package_hash = "sha256:8e7bcaf7ef33edcf33b9334f40c7eb3e42277b146604165428f32f495c12d2e2"
 
 authoring_surface = "chatgpt"
 initiative_id = "PD-2026-08-LIFECYCLE-FIXTURE"
@@ -56,7 +56,7 @@ role = "Repository-only comparison evidence for relevant-versus-unrelated drift 
 
 `Lifecycle Fixture` is a synthetic, repository-only, documentation-only initiative. This Design maps the exact passed Scope requirements and acceptance criteria to existing lifecycle-package mechanisms, repository seams, and inspectable evidence. It does not propose or authorize an Ambitions feature, user-facing behavior, canon change, source or test change, implementation, merge, deployment, or release.
 
-The sole lifecycle input is `PD-2026-08-LIFECYCLE-FIXTURE-SCOPE`, revision 1, contract hash `sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58`, committed at `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b`. The repository baseline for this Design revision is that same commit. The design decisions below describe how the committed fixture obligations are represented by the existing package identity checks, canonical repository reads, adjacent-phase input binding, revision-bound transition records, freshness-path derivation, drift classification, and installed acceptance test.
+The sole lifecycle input is `PD-2026-08-LIFECYCLE-FIXTURE-SCOPE`, revision 1, contract hash `sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58`, committed at `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b`. The repository baseline for this Design revision is `fc3085ab0b61fa48b0172a359980f7902b30a801`. The design decisions below describe how the committed fixture obligations are represented by the active package identity checks, canonical and literal repository reads, adjacent-phase input binding, revision-bound transition records, freshness-path derivation, authenticated Consumer-assessment boundaries, drift classification, and installed acceptance test.
 
 Every Scope requirement `REQ-001` through `REQ-010` and acceptance criterion `AC-001` through `AC-012` is mapped to one or more `DESIGN-*`, `SEAM-*`, and `VERIFY-*` identifiers. Canon targets and canon deltas remain empty. There are no unresolved product or implementation decisions. Current lifecycle status, contract/freshness binding, and review state for this revision are authoritative only in frontmatter and recorded lifecycle events.
 
@@ -78,7 +78,7 @@ This Design consumes exactly one adjacent passed lifecycle input:
 
 `DESIGN-003` — Preserve the synthetic boundary. Every section is interpreted as documentation architecture for the lifecycle fixture, never as Ambitions application architecture or behavior.
 
-`DESIGN-004` — Preserve exact identities. Skill version, package hash, template version, template hash, upstream revision, upstream contract hash, upstream commit, document IDs, and stable traceability IDs are exact values rather than descriptive approximations.
+`DESIGN-004` — Preserve exact identities. Skill version, active package hash, template version, template hash, upstream revision, upstream contract hash, upstream commit, document IDs, and stable traceability IDs are exact values rather than descriptive approximations.
 
 `DESIGN-005` — Preserve self-containment. A repository reader must be able to determine the Design's conclusion, constraints, inputs, owners, seams, verification evidence, exclusions, and next permissible concern without any originating chat.
 
@@ -95,12 +95,13 @@ There is no Ambitions end-user journey or application information architecture i
 The repository-reader journey is:
 
 1. Open this canonical Design file.
-2. Confirm the exact Scope input binding and package/template identities.
+2. Confirm the exact Scope input binding and active package/template identities.
 3. Read the handoff summary and protected characteristics.
 4. Follow `REQ-*` and `AC-*` rows through the traceability table to `DESIGN-*`, `SEAM-*`, and `VERIFY-*` records.
 5. Inspect the declared repository paths at the baseline commit.
-6. Distinguish changed freshness paths from unrelated changed paths during a later Consumer assessment.
-7. Confirm that no product behavior, canon delta, code change, review verdict, merge, or release authority is asserted.
+6. Distinguish changed semantic freshness paths from unrelated or package-identity-only paths during a later Consumer assessment.
+7. Confirm that any accepted Consumer drift assessment is authenticated to the unique passed transition commit and its content-reviewed parent before it can narrow the remaining relevant drift boundary.
+8. Confirm that no product behavior, canon delta, code change, review verdict, merge, or release authority is asserted.
 
 The information architecture is the immutable `design-v1` heading sequence. Stable IDs provide cross-section navigation. No application route, tab, sheet, navigation stack, or screen hierarchy is introduced.
 
@@ -110,10 +111,10 @@ The canonical artifact is `docs/product-development/lifecycle-fixture/design.md`
 
 Existing repository mechanics retain their current ownership:
 
-- `package_identity.py` owns package manifest, package hash, template hash, and historical package compatibility checks.
-- `repository.py` owns canonical path validation, exact commit validation, historical reads, reachability checks, changed-path reads, and committed-byte checks.
+- `package_identity.py` owns package manifest, package hash, template hash, active package verification, and historical package compatibility checks.
+- `repository.py` owns canonical path validation, exact commit validation, historical reads, reachability checks, changed-path reads, literal pathspec handling for declared paths, path-touch history, parent lookup, and committed-byte checks.
 - `transitions.py` owns adjacent-phase document creation and input binding plus revision-bound lifecycle record transitions.
-- `validation.py` owns structural validation, freshness union derivation, review-state consistency, traceability checks, and drift consumption classification.
+- `validation.py` owns structural validation, freshness union derivation, review-state consistency, traceability checks, authenticated Consumer PASS assessment boundaries, semantic relevant-path selection, and drift consumption classification.
 - `test_ambitions_product_docs.py` supplies installed synthetic acceptance evidence for the Research → Scope → Design chain and relevant-versus-unrelated drift behavior.
 
 `DESIGN-009` — This Design introduces no new canonical object, mutable store, runtime owner, command owner, or duplicate authority.
@@ -127,6 +128,7 @@ The documented lifecycle state model is the existing revision-bound model:
 - A new Design revision is represented as a draft with empty `contract_hash`, empty `freshness_paths`, and both review lanes unreviewed.
 - A later seal, review, stale result, reopen, pass, or supersession is authoritative only when recorded by the existing lifecycle mechanics for the exact revision and contract hash.
 - Historical records remain history and cannot bind another revision.
+- An accepted Consumer assessment boundary exists only when exactly one current revision/hash-bound Consumer PASS event can be authenticated to a unique passed transition commit whose first parent is the matching content-reviewed state.
 - Body prose does not independently establish that any transition, validation, review, or consumption has occurred.
 
 `DESIGN-010` — The Design body remains transition-neutral. It describes rules and evidence, not the current revision's authoritative lifecycle outcome.
@@ -135,7 +137,7 @@ The documented lifecycle state model is the existing revision-bound model:
 
 This Design does not add or authorize any command.
 
-Existing lifecycle commands, when explicitly invoked outside this authoring act, have their existing consequences only. Creation records adjacent-phase input binding; sealing derives freshness paths and binds authority-bearing bytes; review records bind a lane to the exact revision and contract hash; consumption reports relevant and unrelated drift and requires assessment of relevant paths before a Consumer PASS.
+Existing lifecycle commands, when explicitly invoked outside this authoring act, have their existing consequences only. Creation records adjacent-phase input binding; sealing derives freshness paths and binds authority-bearing bytes; review records bind a lane to the exact revision and contract hash; consumption reports relevant and unrelated drift. A Consumer PASS assessment narrows the later drift comparison only when the recorded event and transition history authenticate the reviewed boundary, the assessed paths exactly equal the semantic relevant paths through that review commit, and every recorded impact is `none`.
 
 `DESIGN-011` — A lifecycle quality result cannot authorize repository edits, implementation, canon activation, merge, deployment, or release.
 
@@ -168,10 +170,10 @@ No SwiftUI view, modifier, environment value, state container, navigation contai
 The fixture's domain boundary is lifecycle-document portability and traceability within the repository.
 
 - Document metadata and sections are the declared representation.
-- Git repository reads provide committed identity, path, reachability, and drift evidence.
-- Package identity logic verifies package and template bytes.
+- Git repository reads provide committed identity, path, reachability, literal declared-path history, parent transitions, and drift evidence.
+- Package identity logic verifies active and historical package and template bytes.
 - Transition logic records lifecycle changes.
-- Validation logic verifies structure, bindings, freshness, and traceability.
+- Validation logic verifies structure, bindings, freshness, traceability, and authenticated Consumer assessment history.
 - Tests provide synthetic executable evidence.
 
 No Ambitions domain object, service, model, account, network client, CloudKit boundary, external model, analytics system, or product runtime service is introduced.
@@ -186,13 +188,15 @@ For the fixture document chain, existing lifecycle mechanics preserve:
 
 - committed repository bytes as the handoff boundary;
 - exact commit/path reads for historical inputs and package identity;
+- literal declared-path traversal through repository history without pathspec glob interpretation;
 - revision-bound lifecycle records;
+- authenticated transition ancestry for accepted Consumer assessments;
 - atomic document writes in the existing transition implementation;
-- no substitution of uncommitted or historical authority for the declared input.
+- no substitution of uncommitted, unauthenticated, or historical authority for the declared input or current assessment boundary.
 
-`DESIGN-017` — No migration is required because the Design adds one Markdown document and changes no schema or executable behavior.
+`DESIGN-017` — No migration is required because the Design changes one Markdown document and changes no schema or executable behavior.
 
-`DESIGN-018` — No concurrency or replay behavior is newly specified. Later reviewers inspect the committed revision and repository history rather than relying on transient chat state.
+`DESIGN-018` — No concurrency or replay behavior is newly specified. Later reviewers inspect the committed revision and authenticated repository history rather than relying on transient chat state or unauthenticated prose.
 
 ## Offline behavior
 
@@ -200,7 +204,7 @@ No Ambitions offline behavior changes.
 
 The fixture is repository-local in meaning: all authority used by this Design is committed in the repository at named paths and commits. Network access may be used to read or write GitHub, but the document asserts no product runtime network behavior and no user-data flow.
 
-`DESIGN-019` — Loss of access to required committed evidence, an input mismatch, or an undeclared material dependency is a reason to stop or require revision, not a reason to invent content.
+`DESIGN-019` — Loss of access to required committed evidence, an input mismatch, an unauthenticated Consumer assessment boundary, or an undeclared material dependency is a reason to stop or require revision, not a reason to invent content.
 
 ## Privacy and security
 
@@ -208,7 +212,7 @@ The Design contains synthetic IDs, repository paths, commit SHAs, hashes, and li
 
 `DESIGN-020` — No account, telemetry, analytics, external model, CloudKit, private-data, credential, entitlement, or product security boundary is introduced.
 
-`DESIGN-021` — Repository path and commit validation remain delegated to the existing canonical validation functions; this Design does not redefine their behavior.
+`DESIGN-021` — Repository path, commit, literal history, and transition-parent validation remain delegated to the existing canonical repository functions; this Design does not redefine their behavior.
 
 ## Accessibility
 
@@ -232,10 +236,13 @@ Fixture failure and recovery are represented by existing lifecycle rules:
 
 - missing or mismatched adjacent-phase input blocks legitimate downstream progression;
 - incomplete owner or evidence coverage requires revision rather than invention;
-- relevant drift requires explicit semantic assessment;
+- relevant semantic drift requires explicit path-by-path assessment;
+- a recorded Consumer PASS assessment is not accepted as a drift boundary unless its event, revision/hash binding, passed transition commit, and content-reviewed parent authenticate uniquely;
+- an authenticated assessment narrows future drift only when its assessed paths exactly match the semantic relevant paths through the review commit and all impacts are `none`;
+- otherwise baseline semantic drift remains relevant;
 - authority-bearing correction after an applicable stale or needs-revision result requires a new draft revision;
 - historical records remain preserved;
-- unrelated drift remains separately reported and is not automatically blocking.
+- unrelated and package-identity-only drift remain separately reported and are not automatically semantic blockers.
 
 `DESIGN-024` — No product Undo affordance or rollback implementation is proposed.
 
@@ -245,22 +252,22 @@ No application latency, memory, energy, rendering, storage, or network performan
 
 Repository inspection is bounded to this Design, its exact Scope input, the active package and selected template, declared contracts and canon-boundary documents, named source/test owners, and committed comparison evidence.
 
-`DESIGN-025` — Diagnostics are repository lifecycle diagnostics only. No production telemetry, logging, analytics, crash reporting, or performance instrumentation is added or authorized.
+`DESIGN-025` — Diagnostics are repository lifecycle diagnostics only. They may distinguish semantic relevant paths, package identity paths, and unrelated paths, and may reject unauthenticated or incomplete Consumer assessment history. No production telemetry, logging, analytics, crash reporting, or performance instrumentation is added or authorized.
 
 ## Testing strategy
 
 Testing is evidence mapping, not a proposal to change tests.
 
 - `VERIFY-001` — Inspect this file and the exact Scope input to confirm the synthetic boundary and denial of product, canon, implementation, merge, and release authority.
-- `VERIFY-002` — Inspect frontmatter for exact `authoring_surface`, skill/package identity, template identity, document identity, baseline, and single Scope input binding.
+- `VERIFY-002` — Inspect frontmatter for exact `authoring_surface`, active skill/package identity, template identity, document identity, baseline, and single Scope input binding.
 - `VERIFY-003` — Inspect `source_owner_paths`, `test_owner_paths`, `dependency_paths`, input, evidence, manifest, and template to confirm complete material owner coverage.
 - `VERIFY-004` — Inspect `derive_freshness_paths` in `validation.py` to confirm the non-weakenable union of owners, dependencies, inputs, evidence, package manifest, and selected template.
-- `VERIFY-005` — Inspect repository drift logic and the installed acceptance test to confirm relevant paths require semantic assessment while unrelated paths are reported separately.
-- `VERIFY-006` — Inspect `lifecycle-contract.md`, transition logic, and validation review-state logic to confirm revision-bound status, hash, freshness, and review authority.
+- `VERIFY-005` — Inspect `repository.py`, the Consumer-assessment helpers and drift logic in `validation.py`, and the installed acceptance test to confirm literal declared-path handling, authenticated assessment boundaries, semantic relevant-path assessment, and separate unrelated reporting.
+- `VERIFY-006` — Inspect transition logic and validation review-state logic to confirm revision-bound status, hash, freshness, and review authority.
 - `VERIFY-007` — Inspect the traceability table to confirm every `REQ-*` and `AC-*` is connected to concrete design, seam, and verification IDs.
 - `VERIFY-008` — Inspect frontmatter and canon reconciliation to confirm `canon_targets = []` and `canon_delta_ids = []`.
 - `VERIFY-009` — Inspect all sections and Open questions to confirm no invention-causing decision remains.
-- `VERIFY-010` — Inspect the package manifest and design template at the baseline to confirm version `1.0.0`, package hash `sha256:b810179fdc59fb037091b03502b226d996d9ea128cde7118d60eee46e7e178cf`, template `design-v1`, and template hash `sha256:bc7725fcd84c2b52391b3cee4c196f05a8c5c4155fbf8140c82621f3025bb4da`.
+- `VERIFY-010` — Inspect the active package manifest and design template to confirm version `1.0.0`, package hash `sha256:8e7bcaf7ef33edcf33b9334f40c7eb3e42277b146604165428f32f495c12d2e2`, template `design-v1`, and template hash `sha256:bc7725fcd84c2b52391b3cee4c196f05a8c5c4155fbf8140c82621f3025bb4da`.
 - `VERIFY-011` — Inspect the committed Design as a single self-contained artifact using the producer contract and design-review rubric.
 - `VERIFY-012` — Inspect Review history to confirm no originating chat or previous lifecycle conversation is declared as an input and no CLI validation is claimed.
 
@@ -274,9 +281,10 @@ The proof plan is repository inspection:
 
 1. Render the committed Markdown in GitHub or another ordinary Markdown reader.
 2. Confirm heading order and table readability.
-3. Compare exact metadata values with the passed Scope, manifest, and design template at the baseline.
+3. Compare exact metadata values with the passed Scope, active manifest, and design template.
 4. Follow traceability rows to the named source, test, contract, canon-boundary, and evidence paths.
-5. Use the installed acceptance test as existing evidence that the package can bind Research → Scope → Design and classify relevant versus unrelated drift.
+5. Inspect repository and validation ownership for literal declared-path history, transition ancestry, authenticated Consumer assessment boundaries, and semantic drift classification.
+6. Use the installed acceptance test as existing evidence that the package can bind Research → Scope → Design and require an explicit assessment for relevant owner drift.
 
 `DESIGN-026` — Screenshots, simulator runs, UI tests, accessibility audits, product runtime traces, and release proof are outside this fixture.
 
@@ -296,7 +304,7 @@ Current-source delta: none.
 
 Legacy deletion: none.
 
-The Design describes existing lifecycle mechanics solely to map Scope commitments to repository seams and evidence. It does not request refactoring, deletion, renaming, migration, new code, changed tests, or compatibility behavior.
+The Design describes current lifecycle mechanics solely to map Scope commitments to repository seams and evidence. The revision-3 reconciliation accounts for the current literal path-history operations in `repository.py` and the authenticated Consumer-assessment boundary and semantic relevant-path behavior in `validation.py`. It does not request refactoring, deletion, renaming, migration, new code, changed tests, or compatibility behavior.
 
 `DESIGN-028` — Any later implementation proposal would exceed this fixture's authority and require separate valid authority; none is supplied here.
 
@@ -312,16 +320,16 @@ No canon reconciliation edit is proposed.
 
 | Seam ID | Responsibility | Consumes | Produces | Depends on | Verification IDs |
 |---|---|---|---|---|---|
-| SEAM-001 | Preserve exact Design document, package, template, and upstream Scope identity in frontmatter. | REQ-002, REQ-006, REQ-010; AC-002, AC-008, AC-012 | DESIGN-001, DESIGN-004, DESIGN-007, DESIGN-010 | `scope.md`, `package-manifest.json`, `design.md` template | VERIFY-002, VERIFY-006, VERIFY-010 |
+| SEAM-001 | Preserve exact Design document, active package, template, and upstream Scope identity in frontmatter. | REQ-002, REQ-006, REQ-010; AC-002, AC-008, AC-012 | DESIGN-001, DESIGN-004, DESIGN-007, DESIGN-010 | `scope.md`, `package-manifest.json`, `design.md` template | VERIFY-002, VERIFY-006, VERIFY-010 |
 | SEAM-002 | Preserve the synthetic documentation-only and non-authorization boundary throughout the Design. | REQ-001, REQ-008; AC-001, AC-010 | DESIGN-002, DESIGN-003, DESIGN-008, DESIGN-011 | `AGENTS.md`, `SKILL.md`, `CONSTITUTION.md`, `CODEX_START_HERE.md` | VERIFY-001, VERIFY-008 |
-| SEAM-003 | Make the Design self-contained and transition-neutral through complete sections and stable IDs. | REQ-003, REQ-006, REQ-009; AC-003, AC-008, AC-011 | DESIGN-005, DESIGN-007, DESIGN-010 | producer contract, lifecycle contract, design-review rubric | VERIFY-006, VERIFY-009, VERIFY-011, VERIFY-012 |
+| SEAM-003 | Make the Design self-contained and transition-neutral through complete sections and stable IDs. | REQ-003, REQ-006, REQ-009; AC-003, AC-008, AC-011 | DESIGN-005, DESIGN-007, DESIGN-010 | producer contract, design-review rubric, transition and validation ownership | VERIFY-006, VERIFY-009, VERIFY-011, VERIFY-012 |
 | SEAM-004 | Declare all material source, test, dependency, input, evidence, manifest, and template owners. | REQ-004; AC-004, AC-005 | DESIGN-006 | frontmatter path arrays and records | VERIFY-003, VERIFY-004 |
-| SEAM-005 | Map relevant drift and unrelated drift to the existing freshness and consumption mechanics. | REQ-005; AC-006, AC-007 | DESIGN-019, DESIGN-024, DESIGN-025 | `repository.py`, `validation.py`, comparison evidence, acceptance test | VERIFY-004, VERIFY-005 |
+| SEAM-005 | Map literal declared-path history, authenticated Consumer assessments, relevant semantic drift, and unrelated drift to the existing repository and validation mechanics. | REQ-005; AC-006, AC-007 | DESIGN-019, DESIGN-021, DESIGN-024, DESIGN-025 | `repository.py`, `validation.py`, comparison evidence, acceptance test | VERIFY-004, VERIFY-005 |
 | SEAM-006 | Map complete Scope traceability to Design decisions, seams, and verification evidence. | REQ-007, REQ-009; AC-009, AC-011 | DESIGN-005, DESIGN-009 | requirement-to-design table and all named evidence paths | VERIFY-007, VERIFY-009 |
 | SEAM-007 | Preserve empty canon, source, test, migration, rollout, and deletion impact. | REQ-001, REQ-008, REQ-009; AC-001, AC-010, AC-011 | DESIGN-008, DESIGN-017, DESIGN-027, DESIGN-028, DESIGN-029 | frontmatter, file-impact, source-delta, canon sections | VERIFY-001, VERIFY-008, VERIFY-009 |
 | SEAM-008 | Preserve inspectable documentation presentation without inventing product UI or Apple-platform behavior. | REQ-001, REQ-003; AC-001, AC-003 | DESIGN-013, DESIGN-014, DESIGN-015, DESIGN-022, DESIGN-023, DESIGN-026 | immutable template heading order | VERIFY-011 |
 
-Dependency order is documentary: `SEAM-001` establishes exact authority, `SEAM-002` fixes the boundary, `SEAM-003` establishes self-contained interpretation, `SEAM-004` declares owners, `SEAM-005` maps drift semantics, `SEAM-006` completes traceability, and `SEAM-007` through `SEAM-008` close non-impact and presentation concerns. This order does not authorize implementation work.
+Dependency order is documentary: `SEAM-001` establishes exact authority, `SEAM-002` fixes the boundary, `SEAM-003` establishes self-contained interpretation, `SEAM-004` declares owners, `SEAM-005` maps current drift and authenticated assessment semantics, `SEAM-006` completes traceability, and `SEAM-007` through `SEAM-008` close non-impact and presentation concerns. This order does not authorize implementation work.
 
 ## Requirement-to-design traceability
 
@@ -369,7 +377,7 @@ All Scope requirements and acceptance criteria are covered. Each row contains ex
 
 No implementation grooming is authorized or required for the fixture.
 
-A later Consumer or canon-reconciliation reader may use this Design only to inspect whether the existing lifecycle package is described without invention and whether every Scope commitment is traceable. The only bounded follow-on concern is quality review of this committed Design revision under the installed lifecycle contracts and rubric.
+A later Consumer or canon-reconciliation reader may use this Design only to inspect whether the current lifecycle package is described without invention and whether every Scope commitment is traceable. The only bounded follow-on concern is quality review of this committed Design revision under the installed lifecycle contracts and rubric.
 
 No ticket breakdown, code task, migration task, test task, estimate, rollout, branch merge, release activity, or canon edit is implied. Any authority-bearing correction to the Design must follow the existing revision rules rather than being inferred from this handoff prose.
 
@@ -377,7 +385,7 @@ No ticket breakdown, code task, migration task, test task, estimate, rollout, br
 
 None.
 
-The exact upstream binding, package/template identity, synthetic boundary, owner coverage, drift semantics, lifecycle-state interpretation, traceability, evidence, empty canon impact, file impact, and non-authorization boundary are resolved. A later reader must stop rather than invent Ambitions behavior, code changes, tests, canon deltas, implementation authority, merge authority, or release authority.
+The exact upstream binding, active package/template identity, synthetic boundary, owner coverage, authenticated assessment and drift semantics, lifecycle-state interpretation, traceability, evidence, empty canon impact, file impact, and non-authorization boundary are resolved. A later reader must stop rather than invent Ambitions behavior, code changes, tests, canon deltas, implementation authority, merge authority, or release authority.
 
 ## Review history
 
