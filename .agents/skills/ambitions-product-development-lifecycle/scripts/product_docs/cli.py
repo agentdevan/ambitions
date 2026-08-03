@@ -24,7 +24,6 @@ EXIT_USAGE = 2
 EXIT_REPOSITORY = 3
 _PHASES = tuple(document_type.value for document_type in DocumentType)
 _INITIATIVE_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
-_GROOMING_FILES = frozenset(("plan.md", "tasks.md", "verification.md"))
 
 
 class _ParserExit(Exception):
@@ -222,7 +221,9 @@ def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, 
     )
 
 
-def _next_action(documents: Sequence[ProductDocument], directory: Path) -> str:
+def _next_action(
+    documents: Sequence[ProductDocument], *, grooming_complete: bool
+) -> str:
     by_type = {document.document_type: document for document in documents}
     research = by_type.get(DocumentType.RESEARCH)
     scope = by_type.get(DocumentType.SCOPE)
@@ -237,8 +238,7 @@ def _next_action(documents: Sequence[ProductDocument], directory: Path) -> str:
         return "create design"
     if design.status is not DocumentStatus.APPROVED:
         return "complete design"
-    implementation = directory / "implementation"
-    if implementation.is_dir() and {path.name for path in implementation.iterdir()} == _GROOMING_FILES:
+    if grooming_complete:
         return "implementation grooming complete"
     return "groom implementation"
 
@@ -291,7 +291,13 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
             status=status,
             documents=records,
             diagnostics=diagnostics,
-            next_action=_next_action(action_documents, directory) if not diagnostics else "correct the reported diagnostics",
+            next_action=(
+                _next_action(
+                    action_documents, grooming_complete=report.grooming_complete
+                )
+                if not diagnostics
+                else "correct the reported diagnostics"
+            ),
         ),
     )
 

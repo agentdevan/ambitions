@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
+from unittest.mock import patch
 
 
 SCRIPTS_DIRECTORY = Path(__file__).resolve().parents[1] / "scripts"
@@ -376,6 +377,51 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(
             directory_payload["next_action"], "implementation grooming complete"
         )
+
+    def test_check_reuses_validated_grooming_state_for_the_next_action(self) -> None:
+        for phase in ("research", "scope", "design"):
+            self.assertEqual(
+                EXIT_SUCCESS,
+                self.invoke("new", phase, "--initiative", "example")[0],
+            )
+            self.approve(phase)
+        implementation = self.root / DOCUMENTS_PATH / "example" / "implementation"
+        implementation.mkdir()
+        for filename in ("plan.md", "tasks.md", "verification.md"):
+            (implementation / filename).write_text(
+                "# Complete\n\nComplete grooming content.\n", encoding="utf-8"
+            )
+
+        path_type = type(implementation)
+        real_iterdir = path_type.iterdir
+        implementation_reads = 0
+
+        def fail_second_implementation_read(path: Path):
+            nonlocal implementation_reads
+            if path.name == "implementation" and path.parent.name == "example":
+                implementation_reads += 1
+                if implementation_reads == 2:
+                    raise PermissionError("simulated post-validation read race")
+            return real_iterdir(path)
+
+        with patch.object(path_type, "iterdir", fail_second_implementation_read):
+            result, payload = self.invoke_json(
+                "check", "docs/product-development/example/design.md"
+            )
+
+        self.assertEqual(result, EXIT_SUCCESS)
+        self.assertEqual(implementation_reads, 1)
+        self.assertEqual(
+            payload["documents"],
+            [
+                {
+                    "path": "docs/product-development/example/design.md",
+                    "type": "design",
+                    "status": "approved",
+                }
+            ],
+        )
+        self.assertEqual(payload["next_action"], "implementation grooming complete")
 
     def test_help_honors_success_and_json_remains_machine_parseable(self) -> None:
         result, stdout, stderr = self.invoke("--help")

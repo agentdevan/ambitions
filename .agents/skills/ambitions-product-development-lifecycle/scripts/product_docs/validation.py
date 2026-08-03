@@ -75,30 +75,38 @@ def _validate_traceability(scope: ProductDocument, design: ProductDocument) -> l
     ]
 
 
-def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[Diagnostic]:
+def _validate_grooming(
+    directory: Path, design: ProductDocument | None
+) -> tuple[list[Diagnostic], bool]:
     implementation = directory / "implementation"
     if not implementation.exists():
-        return []
+        return [], False
 
     diagnostics: list[Diagnostic] = []
     if not implementation.is_dir():
-        return [
-            _diagnostic(
-                "invalid-grooming-directory",
-                "Implementation grooming must be a directory",
-                path=implementation,
-            )
-        ]
+        return (
+            [
+                _diagnostic(
+                    "invalid-grooming-directory",
+                    "Implementation grooming must be a directory",
+                    path=implementation,
+                )
+            ],
+            False,
+        )
     try:
         present_entries = {entry.name: entry for entry in implementation.iterdir()}
     except OSError:
-        return [
-            _diagnostic(
-                "document-read-error",
-                "Implementation grooming directory could not be read",
-                path=implementation,
-            )
-        ]
+        return (
+            [
+                _diagnostic(
+                    "document-read-error",
+                    "Implementation grooming directory could not be read",
+                    path=implementation,
+                )
+            ],
+            False,
+        )
     for filename in sorted(set(present_entries) - set(_GROOMING_FILES)):
         diagnostics.append(
             _diagnostic(
@@ -148,7 +156,7 @@ def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[
                     path=path,
                 )
             )
-    return diagnostics
+    return diagnostics, not diagnostics
 
 
 def _repository_relative_diagnostics(
@@ -230,6 +238,11 @@ def validate_initiative(
             diagnostics.append(_diagnostic("scope-not-approved", "Approved Design requires approved Scope", path=design.source_path))
     if scope is not None and design is not None:
         diagnostics.extend(_validate_traceability(scope, design))
-    diagnostics.extend(_validate_grooming(directory, design))
+    grooming_diagnostics, grooming_complete = _validate_grooming(directory, design)
+    diagnostics.extend(grooming_diagnostics)
     diagnostics = _repository_relative_diagnostics(diagnostics, repository_root)
-    return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))
+    return ValidationResult(
+        valid=not diagnostics,
+        diagnostics=tuple(diagnostics),
+        grooming_complete=grooming_complete,
+    )

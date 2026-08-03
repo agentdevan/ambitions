@@ -41,3 +41,4 @@ class ProductDocument:
 class ValidationResult:
     valid: bool
     diagnostics: tuple[Diagnostic, ...]
+    grooming_complete: bool = False
