@@ -12,13 +12,13 @@ document_type = "scope"
 authority_class = "product-commitment"
 entry_point = "scope"
 
-status = "draft"
+status = "sealed"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
 repository_baseline_commit = "5d224acfd5f4ad7063be14ae4b3f0a030a195ccd"
 external_research_as_of = "2026-08-03"
-contract_hash = ""
+contract_hash = "sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58"
 
 content_review_verdict = "unreviewed"
 content_review_revision = 0
@@ -35,7 +35,7 @@ source_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/sc
 test_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py"]
 dependency_paths = ["AGENTS.md", ".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/scope.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/scope-review-rubric.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md"]
 additional_freshness_paths = []
-freshness_paths = []
+freshness_paths = [".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/scope.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/scope-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py", ".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py", "AGENTS.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md", "docs/product-development/lifecycle-fixture/research.md"]
 supersedes = []
 
 [[inputs]]
@@ -289,3 +289,25 @@ All behavior needed by Design is resolved in this Scope: the exact upstream bind
 - 2026-08-03: Revision 1 authored and committed from the exact passed Research revision 3 binding at commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`.
 - No originating chat or previous lifecycle conversation was used.
 - No lifecycle CLI execution or validation is claimed by this authoring record.
+### Seal event
+
+- Sealed at: `2026-08-03T16:13:54Z`
+- Revision: `1`
+- Contract hash: `sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58`
+- Freshness paths:
+- .agents/skills/ambitions-product-development-lifecycle/SKILL.md
+- .agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/scope.md
+- .agents/skills/ambitions-product-development-lifecycle/package-manifest.json
+- .agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md
+- .agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md
+- .agents/skills/ambitions-product-development-lifecycle/references/scope-review-rubric.md
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py
+- .agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py
+- AGENTS.md
+- docs/canon/CONSTITUTION.md
+- docs/canon/generated/CODEX_START_HERE.md
+- docs/product-development/lifecycle-fixture/evidence/comparison.md
+- docs/product-development/lifecycle-fixture/research.md
