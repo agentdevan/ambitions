@@ -12,7 +12,7 @@ document_type = "scope"
 authority_class = "product-commitment"
 entry_point = "scope"
 
-status = "passed"
+status = "content-reviewed"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -24,9 +24,9 @@ content_review_verdict = "pass"
 content_review_revision = 1
 content_review_hash = "sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58"
 content_blocking_findings = 0
-consumer_review_verdict = "pass"
-consumer_review_revision = 1
-consumer_review_hash = "sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58"
+consumer_review_verdict = "unreviewed"
+consumer_review_revision = 0
+consumer_review_hash = ""
 consumer_blocking_findings = 0
 
 canon_targets = []
@@ -343,42 +343,6 @@ All behavior needed by Design is resolved in this Scope: the exact upstream bind
 #### Next permitted lifecycle phase
 
 consumer-review
-
-#### Drift assessments
-
-- None
-### Review event: REV-CONSUMER-SCOPE-001
-
-- Review lane: `CONSUMER`
-- Verdict: `PASS`
-- Reviewer surface: `codex`
-- Reviewed at: `2026-08-03T16:30:30Z`
-- Reviewed revision: `1`
-- Reviewed contract hash: `sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58`
-
-#### Blocking findings
-
-- None
-
-#### Non-blocking improvements
-
-- None
-
-#### Traceability gaps
-
-- None
-
-#### Stale or conflicting inputs
-
-- None
-
-#### Required revisions
-
-- None
-
-#### Next permitted lifecycle phase
-
-design
 
 #### Drift assessments
 
