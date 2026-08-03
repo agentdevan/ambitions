@@ -12,7 +12,7 @@ document_type = "design"
 authority_class = "implementation-design"
 entry_point = "design"
 
-status = "passed"
+status = "stale"
 revision = 2
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -543,3 +543,7 @@ canon-reconciliation
 #### Drift assessments
 
 - `docs/product-development/lifecycle-fixture/scope.md`: `none` — The current Scope preserves the same passed revision, contract hash, input binding, requirements, acceptance criteria, owner paths, and Design-relevant authority as the declared baseline; only review-history timestamps and the prior nonmaterial Research-drift assessment changed, so no product or implementation inference is required.
+### Stale event
+
+- Marked at: `2026-08-03T20:58:59Z`
+- Reason: Relevant declared source-owner drift in repository.py and validation.py, including the authenticated consumer assessment semantics fix at 42427b93c, requires a fresh Design semantic review before this passed revision can remain current.
