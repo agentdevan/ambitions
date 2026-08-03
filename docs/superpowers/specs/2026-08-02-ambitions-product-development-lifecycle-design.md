@@ -1,8 +1,8 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 7 — final verification candidate  
-**Repository baseline inspected:** `cba4fc570f7c3ce4c728bed39343d031b6467207`  
+**Status:** Approved after two ruthless review passes  
+**Approved repository baseline:** `cb3ba85ef0cfe7e567d2963013f95baa2da0d6b6`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
@@ -997,15 +997,43 @@ The system is complete when:
 
 ## 26. Open questions
 
-None block final verification or implementation planning. The implementation plan
-may select the supported ChatGPT installation mechanism after checking the
-owner's available surface, but it must deliver and verify one mechanism before
-the lifecycle system is complete.
+None block implementation planning. The implementation plan may select the
+supported ChatGPT installation mechanism after checking the owner's available
+surface, but it must deliver and verify one mechanism before the lifecycle system
+is complete.
 
-## 27. Review gate
+## 27. Dual-review approval
 
-Revision 7 incorporates both ruthless review passes and all mechanical and
-compatibility repairs. Approval requires verification that active and historical
-package identity, sealing, corrective reopening, typed-input schemas, derived
-freshness, state transitions, review binding, authority deltas, and the
-cross-product handoff are internally consistent and directly implementable.
+### Pass 1 — ChatGPT producer perspective
+
+**Initial verdict:** `NEEDS REVISION`.
+
+The pass found that the original design treated the files as generic repository
+documents rather than an explicit ChatGPT-to-Codex contract. Repairs introduced
+canonical persistence, producer/consumer roles, authority classes, package and
+template identity, exact repository baselines, summary-first handoff, offline
+evidence summaries, and revision-bound review lanes.
+
+### Pass 2 — Codex consumer perspective
+
+**Initial verdict:** `NEEDS REVISION`.
+
+The pass found incomplete repository-drift attribution, non-durable review
+records, an underspecified hash, undeclared versus intentional canon/source
+differences, an incomplete corrective-revision transition, and historical
+package compatibility risk. Repairs introduced derived freshness, append-only
+review records, the exact hash algorithm, explicit canon deltas, deterministic
+seal/reopen transitions, and baseline-backed historical package verification.
+
+### Final verification
+
+**Verdict:** `PASS`.
+
+- Blocking findings: None.
+- Traceability gaps: None at design level.
+- Stale or conflicting inputs: None affecting implementation planning.
+- Required revisions: None.
+- Next permitted lifecycle phase: Detailed implementation planning.
+
+The design is approved. Under the owner's stated delegation, this approval is
+also owner approval.
