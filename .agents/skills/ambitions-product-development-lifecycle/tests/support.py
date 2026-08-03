@@ -12,6 +12,8 @@ class TemporaryRepositoryTestCase(unittest.TestCase):
         subprocess.run(["git", "init", "-q", str(self.root)], check=True)
         subprocess.run(["git", "-C", str(self.root), "config", "user.name", "Ambitions Test"], check=True)
         subprocess.run(["git", "-C", str(self.root), "config", "user.email", "ambitions-test@example.invalid"], check=True)
+        subprocess.run(["git", "-C", str(self.root), "config", "gc.auto", "0"], check=True)
+        subprocess.run(["git", "-C", str(self.root), "config", "maintenance.auto", "false"], check=True)
 
     def tearDown(self) -> None:
         self._temporary_directory.cleanup()
