@@ -384,7 +384,7 @@ The exact upstream binding, package/template identity, synthetic boundary, owner
 - 2026-08-03: Revision 1 authored and committed from the exact passed Scope revision 1 binding at commit `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b`.
 - Repository baseline: `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b`.
 - No originating chat or previous lifecycle conversation was used.
-- No lifecycle CLI execution, validation, seal, review, pass, consumption, merge, or release outcome is claimed by this authoring record.
+- This producer-authored record claims no lifecycle CLI execution, validation, pass, consumption, merge, or release outcome; the revision 1 seal and Content-review outcome are represented only by the lifecycle-recorded events below.
 ### Seal event
 
 - Sealed at: `2026-08-03T17:45:53Z`
