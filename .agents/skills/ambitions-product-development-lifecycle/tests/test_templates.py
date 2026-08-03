@@ -68,9 +68,16 @@ class TemplateProfileTests(unittest.TestCase):
             self.assertIn("freshness_paths = []", contents)
             self.assertIn('content_review_hash = ""', contents)
             self.assertIn('consumer_review_hash = ""', contents)
-            for heading in headings:
-                sentinel = heading.upper().replace(" ", "_").replace(",", "").replace("-", "_")
-                self.assertIn("<!-- PRODUCT-DOC-DRAFT:", contents, heading)
+            expected_sentinels = [
+                "<!-- PRODUCT-DOC-DRAFT: "
+                + heading.upper().replace(" ", "_").replace(",", "").replace("-", "_")
+                + " -->"
+                for heading in headings
+            ]
+            actual_sentinels = [
+                line for line in contents.splitlines() if line.startswith("<!-- PRODUCT-DOC-DRAFT:")
+            ]
+            self.assertEqual(actual_sentinels, expected_sentinels)
             for table in REQUIRED_TABLES[template_path.name]:
                 self.assertIn(table, contents)
 
