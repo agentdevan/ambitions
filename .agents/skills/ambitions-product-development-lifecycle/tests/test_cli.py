@@ -8,8 +8,10 @@ from datetime import date
 import hashlib
 from io import StringIO
 import json
+import os
 from pathlib import Path
 import runpy
+import shutil
 import subprocess
 import sys
 from unittest import mock
@@ -229,6 +231,34 @@ class CliTests(TemporaryRepositoryTestCase):
                 result, _, _ = self.invoke(*arguments)
                 self.assertEqual(result, 2)
 
+    def test_reconcile_rejects_empty_supplied_options_from_the_other_mode(self) -> None:
+        cases = (
+            ("reconcile", "a.md", "--reopen", "--reason-file", ""),
+            (
+                "reconcile",
+                "a.md",
+                "--mark-stale",
+                "--reason-file",
+                "reason.txt",
+                "--baseline",
+                "",
+            ),
+            (
+                "reconcile",
+                "a.md",
+                "--mark-stale",
+                "--reason-file",
+                "reason.txt",
+                "--authority-file",
+                "",
+            ),
+        )
+
+        for arguments in cases:
+            with self.subTest(arguments=arguments):
+                result, _, _ = self.invoke(*arguments)
+                self.assertEqual(result, 2)
+
     def test_json_contract_has_exact_keys_on_success_and_failure(self) -> None:
         success, payload = self.invoke_json("package", "--check")
         self.assertEqual(success, 0)
@@ -336,6 +366,58 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(result, 3)
         self.assertEqual(payload["status"], "failure")
         self.assertEqual(payload["diagnostics"][0]["code"], "repository-unavailable")
+
+    def test_unavailable_git_during_repository_discovery_returns_three(self) -> None:
+        output = StringIO()
+        unavailable = FileNotFoundError(2, "No such file or directory", "git")
+        with mock.patch("product_docs.cli.subprocess.run", side_effect=unavailable):
+            with redirect_stdout(output):
+                result = main(
+                    ["package", "--check", "--json"], repository_root=self.root
+                )
+        payload = json.loads(output.getvalue())
+
+        self.assertEqual(result, 3)
+        self.assertEqual(payload["status"], "failure")
+        self.assertEqual(payload["diagnostics"][0]["code"], "repository-unavailable")
+
+    def test_actual_entrypoint_never_writes_bytecode_on_success_or_failure(
+        self,
+    ) -> None:
+        entrypoint = self.skill_root / "scripts" / "ambitions_product_docs.py"
+        for cache in tuple(self.skill_root.rglob("__pycache__")):
+            shutil.rmtree(cache)
+        environment = os.environ.copy()
+        environment.pop("PYTHONDONTWRITEBYTECODE", None)
+        before = self.repository_snapshot()
+
+        success = subprocess.run(
+            [sys.executable, str(entrypoint), "package", "--check", "--json"],
+            cwd=self.root,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(success.returncode, 0, success.stderr)
+        self.assertEqual(json.loads(success.stdout)["status"], "success")
+        self.assertEqual(self.repository_snapshot(), before)
+        caches = tuple(self.skill_root.rglob("__pycache__"))
+        self.assertFalse(caches, caches)
+
+        failure = subprocess.run(
+            [sys.executable, str(entrypoint), "check", "missing.md", "--json"],
+            cwd=self.root,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(failure.returncode, 1, failure.stderr)
+        self.assertEqual(json.loads(failure.stdout)["status"], "failure")
+        self.assertEqual(self.repository_snapshot(), before)
+        caches = tuple(self.skill_root.rglob("__pycache__"))
+        self.assertFalse(caches, caches)
 
     def test_entrypoint_rejects_unsupported_python_with_exit_three(self) -> None:
         entrypoint = SCRIPTS_DIRECTORY / "ambitions_product_docs.py"

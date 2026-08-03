@@ -141,15 +141,15 @@ def _usage_error(arguments: argparse.Namespace) -> str | None:
     if arguments.command != "reconcile":
         return None
     if arguments.mark_stale:
-        if not arguments.reason_file:
+        if arguments.reason_file is None:
             return "reconcile --mark-stale requires --reason-file"
         if (
-            arguments.baseline
+            arguments.baseline is not None
             or arguments.input is not None
-            or arguments.authority_file
+            or arguments.authority_file is not None
         ):
             return "reconcile --mark-stale does not accept reopen inputs"
-    elif arguments.reason_file:
+    elif arguments.reason_file is not None:
         return "reconcile --reopen does not accept --reason-file"
     return None
 
@@ -208,7 +208,17 @@ def _emit(
 
 def _repository_root(candidate: Path | str | None) -> Path:
     start = Path.cwd() if candidate is None else Path(candidate)
-    if not start.is_dir():
+    try:
+        accessible = start.is_dir()
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "repository-unavailable",
+                "Repository root could not be accessed",
+                path=str(start),
+            )
+        ) from error
+    if not accessible:
         raise ProductDocsError(
             Diagnostic(
                 "repository-unavailable",
@@ -216,13 +226,22 @@ def _repository_root(candidate: Path | str | None) -> Path:
                 path=str(start),
             )
         )
-    result = subprocess.run(
-        ["git", "-C", str(start.resolve()), "rev-parse", "--show-toplevel"],
-        check=False,
-        capture_output=True,
-        shell=False,
-        text=True,
-    )
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(start.resolve()), "rev-parse", "--show-toplevel"],
+            check=False,
+            capture_output=True,
+            shell=False,
+            text=True,
+        )
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "repository-unavailable",
+                "Git is unavailable while locating the repository",
+                path=str(start),
+            )
+        ) from error
     if result.returncode != 0:
         raise ProductDocsError(
             Diagnostic(
@@ -713,7 +732,26 @@ def main(
                 else "correct the reported diagnostics and retry"
             ),
         )
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+    except OSError as error:
+        git_unavailable = Path(str(error.filename)).name == "git"
+        exit_code = EXIT_REPOSITORY if git_unavailable else EXIT_DOMAIN_FAILURE
+        payload = _payload(
+            arguments.command,
+            status="failure",
+            diagnostics=(
+                Diagnostic(
+                    "repository-unavailable" if git_unavailable else "file-unavailable",
+                    str(error),
+                    path=str(error.filename) if error.filename else None,
+                ),
+            ),
+            next_action=(
+                "restore access to Git and the repository, then retry"
+                if git_unavailable
+                else "restore or correct the requested file and retry"
+            ),
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
         exit_code = EXIT_DOMAIN_FAILURE
         payload = _payload(
             arguments.command,
