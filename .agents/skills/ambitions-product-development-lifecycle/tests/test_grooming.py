@@ -81,6 +81,32 @@ class GroomingValidationTests(unittest.TestCase):
 
         self.assertIn("missing-grooming-file", diagnostics(result))
 
+    def test_started_grooming_requires_approved_design(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory)
+            complete_initiative(initiative)
+            design = initiative / "design.md"
+            design.write_text(
+                design.read_text(encoding="utf-8").replace(
+                    'status = "approved"', 'status = "draft"'
+                ),
+                encoding="utf-8",
+            )
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            for filename, heading, body in (
+                ("plan.md", "Plan", "Implementation order."),
+                ("tasks.md", "Tasks", "1. Implement the flow."),
+                ("verification.md", "Verification", "Run the focused tests."),
+            ):
+                (implementation / filename).write_text(
+                    f"# {heading}\n\n{body}\n", encoding="utf-8"
+                )
+
+            result = validate_initiative(initiative)
+
+        self.assertIn("design-not-approved", diagnostics(result))
+
     def test_grooming_files_require_a_top_level_heading_and_body(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             initiative = Path(temporary_directory)

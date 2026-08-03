@@ -61,12 +61,20 @@ def _validate_traceability(scope: ProductDocument, design: ProductDocument) -> l
     ]
 
 
-def _validate_grooming(directory: Path) -> list[Diagnostic]:
+def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[Diagnostic]:
     implementation = directory / "implementation"
     if not implementation.exists():
         return []
 
     diagnostics: list[Diagnostic] = []
+    if design is None or design.status is not DocumentStatus.APPROVED:
+        diagnostics.append(
+            _diagnostic(
+                "design-not-approved",
+                "Implementation grooming requires approved Design",
+                path=design.source_path if design is not None else directory / "design.md",
+            )
+        )
     for filename in _GROOMING_FILES:
         path = implementation / filename
         if not path.is_file():
@@ -115,5 +123,5 @@ def validate_initiative(directory: Path | str) -> ValidationResult:
             diagnostics.append(_diagnostic("scope-not-approved", "Approved Design requires approved Scope", path=design.source_path))
     if scope is not None and design is not None:
         diagnostics.extend(_validate_traceability(scope, design))
-    diagnostics.extend(_validate_grooming(directory))
+    diagnostics.extend(_validate_grooming(directory, design))
     return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))
