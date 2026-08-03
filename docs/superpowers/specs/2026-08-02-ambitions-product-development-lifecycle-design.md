@@ -1,8 +1,8 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 4 — final verification candidate  
-**Repository baseline inspected:** `8d14184bf0f99069d16ef4fe4f03da8b7c70361c`  
+**Status:** Revision 5 — final verification candidate  
+**Repository baseline inspected:** `581fc28d8830e702e00ac76a9f15f11f57c05b80`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
@@ -51,9 +51,9 @@ research, guessing missing behavior, or loading unbounded context.
 
 A chat response is not a lifecycle document. A document becomes eligible for
 review only after it is persisted at its canonical repository path and sealed to
-an exact revision, contract hash, repository baseline, skill package, and
-template. A sealed document becomes eligible for downstream use only after both
-review lanes pass that same revision and hash.
+an exact revision, contract hash, repository baseline, skill package, template,
+and derived freshness set. A sealed document becomes eligible for downstream use
+only after both review lanes pass that same revision and hash.
 
 Codex consumption is an actual review lane. It verifies that the artifact is
 current, bounded, traceable, self-contained, and usable by the next phase. Codex
@@ -113,6 +113,7 @@ the work re-enters the earliest unresolved phase.
 ```text
 .agents/skills/ambitions-product-development-lifecycle/
 ├── SKILL.md
+├── package-manifest.json
 ├── agents/
 │   └── openai.yaml
 ├── assets/
@@ -146,9 +147,40 @@ There is one canonical package and one canonical template copy. ChatGPT
 distribution is generated from or installed from this package. Manually
 maintained duplicate templates are prohibited.
 
-## 6. Skill discovery and deployment
+## 6. Skill identity, discovery, and deployment
 
-### 6.1 Codex
+### 6.1 Deterministic package identity
+
+`package-manifest.json` identifies the operational package. It contains:
+
+```json
+{
+  "manifest_schema": 1,
+  "skill_version": "1.0.0",
+  "files": [
+    {"path": "SKILL.md", "sha256": "<lowercase-hex>"},
+    {"path": "agents/openai.yaml", "sha256": "<lowercase-hex>"},
+    {"path": "assets/templates/v1/research.md", "sha256": "<lowercase-hex>"}
+  ]
+}
+```
+
+The complete `files` array includes every operational file under `SKILL.md`,
+`agents/`, `assets/`, `references/`, and `scripts/`. It excludes tests and the
+manifest itself to avoid a hash cycle. Paths are repository-relative to the
+skill root, sorted lexicographically, unique, and use `/` separators. Each file
+hash is SHA-256 over its exact bytes.
+
+The manifest is serialized as UTF-8 canonical JSON with sorted keys, compact
+separators, and a terminal LF. `skill_package_hash` is lowercase SHA-256 over
+those canonical manifest bytes, prefixed with `sha256:`. `template_hash` is the
+prefixed exact-byte SHA-256 recorded for the selected template in the manifest.
+
+The CLI regenerates and verifies the manifest. A missing, extra, renamed, or
+content-changed operational file fails package verification until the manifest
+and skill version are intentionally updated.
+
+### 6.2 Codex discovery
 
 Codex discovers the repository package at:
 
@@ -166,15 +198,15 @@ description: Use when creating, reviewing, or consuming an Ambitions research, s
 ---
 ```
 
-### 6.2 ChatGPT
+### 6.3 ChatGPT deployment
 
 Repo-local Codex discovery does not guarantee ChatGPT availability. Initial
 delivery must verify one supported path for the owner's actual ChatGPT surface:
 
 1. the same standalone skill in a supported desktop surface;
 2. the same skill packaged as a private plugin for ChatGPT Work/web/mobile; or
-3. explicit loading of canonical `SKILL.md`, template, and producer contract from
-   the repository as a documented fallback.
+3. explicit loading of canonical `SKILL.md`, manifest, template, and producer
+   contract from the repository as a documented fallback.
 
 The document records both `skill_package_hash` and `template_hash`; matching
 version strings alone are insufficient. `agents/openai.yaml` provides display
@@ -187,9 +219,9 @@ after trigger and over-application tests pass.
 
 Producer mode must:
 
-1. load the canonical template and producer contract;
+1. load the canonical manifest, template, and producer contract;
 2. inspect current canon, source, tests, evidence, and initiative files;
-3. record the exact repository baseline and structured freshness paths;
+3. record the exact repository baseline and structured owner-path inputs;
 4. use current external research when claims are time-sensitive;
 5. write a self-contained artifact independent of chat history;
 6. preserve IDs, authority boundaries, and traceability;
@@ -219,10 +251,10 @@ invalidates the seal and both verdicts.
 Consumer mode must:
 
 1. load active instructions, the lifecycle skill, and consumer contract;
-2. run structural validation and recompute the sealed contract hash;
-3. compare the baseline commit with current `HEAD` using declared freshness
-   paths and semantic inspection of relevant changes;
-4. verify package, template, authority class, evidence, and upstream bindings;
+2. verify package identity and recompute the sealed contract hash;
+3. compare the baseline commit with current `HEAD` using the derived freshness
+   set and semantic inspection of relevant changes;
+4. verify template, authority class, evidence, and upstream bindings;
 5. read the handoff summary before linked detail sections;
 6. test whether the next phase can proceed without invention;
 7. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
@@ -241,7 +273,7 @@ A document is handoff-ready only when:
 
 - it exists at `docs/product-development/<initiative>/<phase>.md`;
 - identity, versions, package hashes, revision, and authority class are valid;
-- repository baseline and freshness paths are recorded;
+- repository baseline and structured owner paths are recorded;
 - the current revision is sealed and its stored hash recomputes exactly;
 - the content review passes that revision and contract hash;
 - upstream bindings and evidence-file hashes are current;
@@ -286,12 +318,13 @@ consumer_review_revision = 0
 consumer_review_hash = ""
 consumer_blocking_findings = 0
 
-freshness_paths = [
-  "docs/canon/specifications/surfaces/today.md",
-  "Native/Ambitions/Surfaces/Today/",
-]
 canon_targets = []
 canon_delta_ids = []
+source_owner_paths = []
+test_owner_paths = []
+dependency_paths = []
+additional_freshness_paths = []
+freshness_paths = []
 supersedes = []
 
 [[inputs]]
@@ -310,7 +343,8 @@ role = "supports FIND-003 and FIND-004"
 ```
 
 Research omits empty `[[inputs]]`. Parallel arrays for paths, revisions, and
-hashes are prohibited.
+hashes are prohibited. `freshness_paths` is CLI-managed and must be empty in a
+new unsealed template.
 
 ### 9.2 Typed input schemas
 
@@ -327,7 +361,29 @@ Unknown kinds fail validation. Fields not listed for the selected kind fail
 validation unless added by a future schema version. Every path must be repository
 relative and remain inside the repository root.
 
-### 9.3 Status values and transitions
+### 9.3 Derived freshness set
+
+Authors declare exact `canon_targets`, `source_owner_paths`, `test_owner_paths`,
+`dependency_paths`, and optional `additional_freshness_paths`. `seal` derives
+`freshness_paths` as the sorted, deduplicated union of:
+
+- all declared owner and dependency path arrays;
+- every `inputs[].path`;
+- every `evidence_files[].path`;
+- current generated canon routing when `canon_targets` is non-empty;
+- the skill package manifest and active template path.
+
+Authors may expand freshness through `additional_freshness_paths` but cannot
+remove a derived path. The validator rejects a manually altered or incomplete
+`freshness_paths` array.
+
+The phase rubrics also require reviewers to verify that declared owners cover all
+repository evidence and all canon/source/test areas on which material findings,
+requirements, decisions, or proof obligations depend. Deterministic derivation
+prevents omission of declared authority; review prevents omission of undeclared
+but materially relied-on authority.
+
+### 9.4 Status values and transitions
 
 Allowed statuses:
 
@@ -344,7 +400,7 @@ The state machine is deterministic:
 | Current state | Command/result | Next state | Required side effects |
 |---|---|---|---|
 | absent | `new` | `draft` | Create exact template with revision `1`; no hash or verdicts |
-| `draft` or `needs-revision` | `seal` succeeds | `sealed` | Validate, compute and store hash, clear both review lanes |
+| `draft` or `needs-revision` | `seal` succeeds | `sealed` | Derive freshness, compute/store hash, clear both review lanes |
 | `sealed` | content review `PASS` | `content-reviewed` | Record content verdict and append review history |
 | `sealed` | content review `NEEDS REVISION` | `needs-revision` | Record blockers and append review history |
 | `content-reviewed` | consumer review `PASS` | `passed` | Record consumer verdict and append review history |
@@ -353,16 +409,17 @@ The state machine is deterministic:
 | `stale` | `reconcile --reopen` | `draft` | Increment revision, update inputs/baseline, clear seal and both reviews |
 | any non-superseded state | `supersede` | `superseded` | Record replacement document and reason |
 
-An authority-bearing edit is permitted only in `draft`, `needs-revision`, or
-`stale`. Editing a sealed, content-reviewed, or passed body without first running
-`reconcile --reopen` is invalid. The validator detects a mismatched stored hash
-and fails even when the status was not changed.
+Authority-bearing edits are permitted only in `draft` or `needs-revision`.
+A `stale` document must first run `reconcile --reopen`. Editing a sealed,
+content-reviewed, passed, stale, or superseded body directly is invalid. The
+validator detects a mismatched stored hash and fails even when status was not
+changed.
 
 `passed` requires both verdicts and blocker counts to pass the same current
 revision and contract hash, valid current inputs and evidence hashes, and
 successful structural and consumer validation.
 
-### 9.4 Versioning
+### 9.5 Versioning
 
 `schema_version` controls machine interpretation. `template_version` controls
 headings and section contracts. `skill_version` identifies the package release.
@@ -386,7 +443,8 @@ The canonical frontmatter projection includes:
 - initiative and document identity;
 - document type, authority class, and entry point;
 - repository baseline and external research date;
-- freshness paths, canon targets, canon delta IDs, and supersession IDs;
+- canon targets, canon delta IDs, owner/dependency arrays, derived freshness,
+  and supersession IDs;
 - canonicalized `inputs` and `evidence_files` records.
 
 ### 10.2 Excluded frontmatter
@@ -497,11 +555,8 @@ conditional pass.
 
 ## 13. Freshness and repository-drift contract
 
-`freshness_paths` are machine-readable paths or directory prefixes whose changes
-may invalidate the document. They include cited canon, owning source areas,
-relevant tests, dependency manifests, and generated routing relied upon.
-
-Consumer review compares `repository_baseline_commit..HEAD`:
+Consumer review compares `repository_baseline_commit..HEAD` against the derived
+`freshness_paths`:
 
 1. no changed freshness path: report unrelated drift and continue;
 2. changed freshness path: perform semantic inspection and return pass only when
@@ -655,15 +710,15 @@ Codex reads in this order:
 3. target frontmatter and Agent handoff summary;
 4. upstream summaries and linked IDs;
 5. current owning canon and declared canon deltas;
-6. current source, tests, and freshness-path diffs;
+6. current source, tests, and derived-freshness diffs;
 7. full sections only as needed.
 
 Before acceptance, Codex runs `check` and `consume`. It returns
 `NEEDS REVISION` when:
 
-- canonical path, identity, versions, or package hashes are invalid;
+- canonical path, identity, versions, manifest, or package hashes are invalid;
 - seal, contract hash, or review binding is stale;
-- baseline or freshness data is missing;
+- baseline or owner/freshness data is missing;
 - relevant repo changes are unreconciled;
 - inputs or evidence hashes are stale;
 - external evidence is expired or non-self-contained;
@@ -681,6 +736,7 @@ ignored after path and semantic inspection.
 Use one Python standard-library CLI:
 
 ```text
+ambitions_product_docs.py package
 ambitions_product_docs.py new
 ambitions_product_docs.py check
 ambitions_product_docs.py hash
@@ -691,23 +747,27 @@ ambitions_product_docs.py consume
 ambitions_product_docs.py supersede
 ```
 
-`check`, `hash`, and `consume` are read-only. `new`, `seal`, `review`,
-`reconcile`, and `supersede` are explicit write commands.
+`check`, `hash`, and `consume` are read-only. `package`, `new`, `seal`, `review`,
+`reconcile`, and `supersede` are explicit write commands. `package --check` is
+read-only; `package --write` regenerates the manifest.
 
 ### 18.1 `seal` contract
 
-`seal` is the only command that may establish or replace `contract_hash`. It:
+`seal` is the only command that may establish or replace `contract_hash` and
+`freshness_paths`. It:
 
 1. requires a writable state;
-2. validates schema, headings, inputs, evidence hashes, freshness paths, package,
-   and template identity;
-3. requires revision to have increased after a previously sealed contract was
+2. verifies package and template identity;
+3. validates schema, headings, typed inputs, evidence hashes, declared owners,
+   dependencies, and additional freshness paths;
+4. derives and writes the exact freshness set;
+5. requires revision to have increased after a previously sealed contract was
    reopened;
-4. computes and writes the exact contract hash;
-5. clears both review lanes and blocker counts;
-6. changes status to `sealed`;
-7. appends a non-review seal event to Review history;
-8. prints the sealed revision, hash, and next required review lane.
+6. computes and writes the exact contract hash;
+7. clears both review lanes and blocker counts;
+8. changes status to `sealed`;
+9. appends a non-review seal event to Review history;
+10. prints the sealed revision, hash, freshness set, and next review lane.
 
 ### 18.2 General CLI behavior
 
@@ -716,11 +776,11 @@ The CLI must:
 - instantiate exact templates without overwrite;
 - support producer-created drafts when shell execution was unavailable;
 - parse TOML and validate all schema variants;
-- verify package and template hashes;
+- generate and verify the package manifest and template hashes;
 - implement the exact contract-hash algorithm;
 - validate seals, review records, and status combinations;
 - validate typed inputs and evidence-file hashes;
-- compare baseline diffs against freshness paths;
+- derive freshness and compare baseline diffs against it;
 - require finding-to-source, requirement-to-finding, requirement-to-acceptance,
   design-to-verification, and canon-delta traceability;
 - reject placeholders and empty required sections before sealing;
@@ -775,6 +835,7 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 
 - Design arrives without chat history;
 - relevant and unrelated repo changes occur after baseline;
+- an author omits a materially relied-on owner path;
 - source links lack evidence summaries;
 - evidence annex content changes without hash update;
 - Scope has ambiguous exclusions;
@@ -788,24 +849,24 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 
 A fixture initiative is authored through ChatGPT and consumed through Codex. It
 proves identical package/template hashes, canonical persistence, authoritative
-sealing, durable review records, summary-first reading, relevant-drift detection,
-evidence-hash checking, Research → Scope → Design → canon reconciliation →
-grooming, and independence from the original chat.
+sealing, derived freshness, durable review records, summary-first reading,
+relevant-drift detection, evidence-hash checking, Research → Scope → Design →
+canon reconciliation → grooming, and independence from the original chat.
 
 ### 21.4 CLI tests
 
-Tests cover templates, versions, package hashes, IDs, TOML, canonical hashing,
-sealing, illegal post-seal edits, review history, state transitions, typed
-inputs, evidence hashes, freshness paths, relevant drift, canon deltas,
-traceability, stale reconciliation, path safety, read-only behavior, JSON output,
-and failure exits.
+Tests cover package manifest generation, templates, versions, package hashes,
+IDs, TOML, canonical hashing, sealing, freshness derivation, incomplete
+freshness rejection, illegal post-seal edits, review history, state transitions,
+typed inputs, evidence hashes, relevant drift, canon deltas, traceability, stale
+reconciliation, path safety, read-only behavior, JSON output, and failure exits.
 
 ## 22. Delivery boundary
 
 ### 22.1 Initial implementation — required
 
-1. Create the portable package, role contracts, immutable templates, CLI,
-   fixtures, and tests.
+1. Create the portable package, manifest, role contracts, immutable templates,
+   CLI, fixtures, and tests.
 2. Add `agents/openai.yaml` and concise root routing.
 3. Verify the owner's actual ChatGPT invocation path against canonical package
    and template hashes.
@@ -837,7 +898,7 @@ Codex can consume it offline.
 
 The system is complete when:
 
-1. The canonical package and every specified file exist.
+1. The canonical package, manifest, and every specified file exist.
 2. ChatGPT and Codex load identical package and template hashes.
 3. ChatGPT can create canonical drafts without hidden chat context or a local
    shell; authoritative sealing and review binding still occur before pass.
@@ -845,9 +906,10 @@ The system is complete when:
    verification.
 5. Both review lanes bind to one sealed revision and contract hash and have
    durable append-only review records.
-6. The exact hash algorithm and seal transition are implemented and tested.
-7. Typed inputs, evidence hashes, freshness paths, and relevant drift are
-   enforced.
+6. Package identity, the exact document-hash algorithm, and the seal transition
+   are implemented and tested.
+7. Typed inputs, evidence hashes, owner declarations, derived freshness, and
+   relevant drift are enforced.
 8. Relevant changes invalidate consumption; unrelated changes do not.
 9. Research is reproducible and self-contained enough for offline Codex use.
 10. Scope cannot pass with product ambiguity Design would need to invent.
@@ -866,18 +928,18 @@ The system is complete when:
 - Each phase requires actual Codex consumption review.
 - Repository files, not chat history, are canonical handoffs.
 - Documents declare distinct authority classes.
-- Versions and exact package/template hashes prevent cross-product drift.
-- An explicit seal establishes the reviewable revision and hash.
+- A canonical package manifest and exact hashes prevent cross-product drift.
+- An explicit seal establishes the reviewable revision, freshness set, and hash.
 - Review verdicts bind to exact sealed revision and deterministic contract hash.
 - Review records are durable and append-only.
 - Typed inputs eliminate parallel-array ambiguity.
 - A complete state machine prevents implicit lifecycle transitions.
-- Structured freshness paths make baseline drift inspectable.
+- Freshness is derived from structured owners and cannot be weakened manually.
 - Evidence annexes are content-hashed.
 - Declared canon/source deltas are permitted; undeclared conflicts block.
 - Every document starts with a bounded Agent handoff summary.
 - Codex reads summaries and linked sections before full documents.
-- One lifecycle CLI owns deterministic validation and transitions.
+- One lifecycle CLI owns deterministic identity, validation, and transitions.
 
 ## 26. Open questions
 
@@ -888,7 +950,8 @@ the lifecycle system is complete.
 
 ## 27. Review gate
 
-Revision 4 incorporates both ruthless review passes and the final mechanical
-repair. Approval requires verification that the seal, typed-input, state-machine,
-review-binding, freshness, authority-delta, and cross-product contracts are now
-internally consistent and directly implementable.
+Revision 5 incorporates both ruthless review passes and all final mechanical
+repairs. Approval requires verification that package identity, sealing,
+typed-input schemas, derived freshness, state transitions, review binding,
+authority deltas, and the cross-product handoff are internally consistent and
+directly implementable.
