@@ -12,18 +12,18 @@ document_type = "design"
 authority_class = "implementation-design"
 entry_point = "design"
 
-status = "needs-revision"
-revision = 1
+status = "draft"
+revision = 2
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
 repository_baseline_commit = "0cd783b2cf25e32f21e9f2b24fd7891c5062f76b"
 external_research_as_of = "2026-08-03"
-contract_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
+contract_hash = ""
 
-content_review_verdict = "needs-revision"
-content_review_revision = 1
-content_review_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
-content_blocking_findings = 1
+content_review_verdict = "unreviewed"
+content_review_revision = 0
+content_review_hash = ""
+content_blocking_findings = 0
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
 consumer_review_hash = ""
@@ -35,7 +35,7 @@ source_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/sc
 test_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py"]
 dependency_paths = ["AGENTS.md", ".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/design.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md"]
 additional_freshness_paths = []
-freshness_paths = [".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/design.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py", ".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py", "AGENTS.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md", "docs/product-development/lifecycle-fixture/scope.md"]
+freshness_paths = []
 supersedes = []
 
 [[inputs]]
@@ -443,3 +443,9 @@ reconcile
 #### Drift assessments
 
 - None
+### Reopen event
+
+- Reopened at: `2026-08-03T19:17:48Z`
+- Revision: `2`
+- Repository baseline: `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b`
+- Corrective work: Bindings preserved.
