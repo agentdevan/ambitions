@@ -76,6 +76,12 @@ Scope v1 at `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b` is the exact committed up
 | Content review | Packet `cf48607a16a5bfab0372e8cee1782e42ccae259f845a5e7c206ec086c19565c7`; raw `965f3316d855456810f79839c717ba1f4382ac479c1cb7708c07d195c45f3697`; normalized `d6e074f177b57c3441082dedb05583d1a83d7bbcfb8535140b981235ddaa7d14` | Content state `1556991ae17b85064ebabb1db5d1a65a4658e87a` | ChatGPT Content `REV-CONTENT-DESIGN-001`: pass; exact v1 contract binding; reviewer surface declared `chatgpt; no earlier producer conversation used`. |
 | Codex Consumer review | Payload `task-10-codex-design-consumer-review.json`: `f3fd2b42c68a63a75bf6f36b1d16b41ceff4fc14e6be987dcdf4a923c01f0581` | Passed state `de69bc47d5eaecf26988007db2a634eef81e5c4f` | Codex first read passed Scope at its exact binding, then Design and `consume --json`; `relevant_paths = []`. `REV-CONSUMER-DESIGN-001` passed with no findings. |
 
+### Current Design state after raw replay
+
+The preceding pre-raw-repair Content PASS (`1556991ae17b85064ebabb1db5d1a65a4658e87a`) and Consumer PASS (`de69bc47d5eaecf26988007db2a634eef81e5c4f`) are preserved historical facts, but they are superseded and non-current for active lifecycle state. They were removed from the active document through non-rewriting reverts `6bcdf164b39a47520cd6c11d01312867970aa0d7` and `10cf563ff795c3f7f5995b6e28ba3e78b703265c`, respectively.
+
+The direct byte-valid raw import of `REV-CONTENT-DESIGN-001` at `7daafb3f1b96adb5b4a8417acd3c00864da5bc6d` records `NEEDS REVISION`. Active Design revision 1 is `needs-revision`, has no current Consumer review, and has no local correction, reopen, seal, or pass claim.
+
 ## Authoritative local commands and status
 
 The controller verified producer commits were reachable from

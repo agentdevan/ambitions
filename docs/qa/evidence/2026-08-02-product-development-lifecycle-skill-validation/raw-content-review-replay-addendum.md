@@ -10,4 +10,4 @@ This addendum makes the byte-valid raw Content review payloads independently aud
 
 The current durable Codex Consumer review IDs are `REV-CONSUMER-RESEARCH-003` and `REV-CONSUMER-SCOPE-001`. Their fresh local payload hashes are respectively `6febdfeaf23e1d32164a864f33ea7dcf875680d1b1c770f6985e211d84b29410` and `62b0040c7c208a2bd3dcf179266c695e2b5fdfa7bb7911c906bd363c69895e9c`; their state commits are `f2efdc2090b1760693a1001472927e1f01d2ea59` and `4145fcc6d6bd18b1088023ae4fb375f9f33f1813`.
 
-The Design attachment directly records `needs-revision`; no local Design correction, reopen, seal, Consumer review, or pass claim has been made.
+The Design attachment directly records `needs-revision`. The preceding normalized Content and Consumer PASS records are historical and non-current: their active state was non-rewriting reverted before the direct raw import at `7daafb3f1b96adb5b4a8417acd3c00864da5bc6d`. Active Design revision 1 has no current Consumer review and no local correction, reopen, seal, or pass claim.
