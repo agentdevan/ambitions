@@ -289,6 +289,9 @@ git commit -m "feat: validate implementation grooming"
 - Create: `docs/product-development/lifecycle-fixture/implementation/verification.md`
 - Delete: `docs/product-development/lifecycle-fixture/evidence/comparison.md`
 - Delete: `docs/qa/evidence/2026-08-02-product-development-lifecycle-skill-validation/`
+- Modify: `.agents/skills/ambitions-product-development-lifecycle/SKILL.md`
+- Modify: `.agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md`
+- Delete: `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/toml_codec.py`
 - Modify: `AGENTS.md`
 
 **Interfaces:**
@@ -313,11 +316,11 @@ Contributor guidance describes phase order, human-plus-ChatGPT approval, and gro
 python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_*.py' -v
 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py check docs/product-development/lifecycle-fixture --json
 python3 scripts/ambitions-canon.py check
-rg -n "contract_hash|freshness_paths|consumer_review|review-file|provenance packet" .agents/skills/ambitions-product-development-lifecycle docs/product-development/lifecycle-fixture AGENTS.md
+rg -n --glob '!**/tests/**' "contract_hash|freshness_paths|consumer_review|review-file|provenance packet" .agents/skills/ambitions-product-development-lifecycle docs/product-development/lifecycle-fixture AGENTS.md
 git diff --check
 ```
 
-Expected: tests, fixture, canon, and diff checks exit 0. The marker scan returns no matches.
+Expected: tests, fixture, canon, and diff checks exit 0. The marker scan excludes regression-test literals and returns no matches.
 
 - [ ] **Step 5: Commit**
 
