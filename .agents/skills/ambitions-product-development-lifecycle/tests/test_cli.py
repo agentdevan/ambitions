@@ -6,6 +6,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 import json
 from pathlib import Path
+import shutil
 import sys
 
 
@@ -40,6 +41,27 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(stderr, "")
         return result, json.loads(stdout)
 
+    def approve(self, phase: str) -> None:
+        path = self.root / DOCUMENTS_PATH / "example" / f"{phase}.md"
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                'status = "draft"', 'status = "approved"'
+            ),
+            encoding="utf-8",
+        )
+
+    def write_phase(self, phase: str, *, status: str) -> Path:
+        template = self.root / SKILL_PATH / "assets/templates/v1" / f"{phase}.md"
+        target = self.root / DOCUMENTS_PATH / "example" / f"{phase}.md"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(
+            template.read_text(encoding="utf-8")
+            .replace('initiative = ""', 'initiative = "example"')
+            .replace('status = "draft"', f'status = "{status}"'),
+            encoding="utf-8",
+        )
+        return target
+
     def assert_command_succeeds(self, *arguments: str) -> None:
         result, _, _ = self.invoke(*arguments)
         self.assertNotEqual(result, EXIT_USAGE)
@@ -69,12 +91,24 @@ class CliTests(TemporaryRepositoryTestCase):
             "scope": "research.md",
             "design": "scope.md",
         }
-        self.assertEqual(EXIT_SUCCESS, self.invoke("new", "research", "--initiative", "example")[0])
+        self.assertEqual(
+            EXIT_SUCCESS,
+            self.invoke("new", "research", "--initiative", "example")[0],
+        )
+        self.approve("research")
+        self.assertEqual(
+            EXIT_SUCCESS, self.invoke("new", "scope", "--initiative", "example")[0]
+        )
+        self.approve("scope")
+        self.assertEqual(
+            EXIT_SUCCESS, self.invoke("new", "design", "--initiative", "example")[0]
+        )
 
-        for phase, upstream in tuple(expected.items())[1:]:
+        for phase, upstream in expected.items():
             with self.subTest(phase=phase):
-                self.assertEqual(EXIT_SUCCESS, self.invoke("new", phase, "--initiative", "example")[0])
-                document = parse_document(self.root / DOCUMENTS_PATH / "example" / f"{phase}.md")
+                document = parse_document(
+                    self.root / DOCUMENTS_PATH / "example" / f"{phase}.md"
+                )
                 self.assertEqual(document.initiative, "example")
                 self.assertEqual(document.document_type.value, phase)
                 self.assertEqual(document.upstream, upstream)
@@ -95,6 +129,29 @@ class CliTests(TemporaryRepositoryTestCase):
 
         self.assertEqual(result, EXIT_DOMAIN_FAILURE)
         self.assertEqual(payload["diagnostics"][0]["code"], "upstream-unavailable")
+
+    def test_new_requires_an_approved_immediate_upstream(self) -> None:
+        self.assertEqual(
+            EXIT_SUCCESS,
+            self.invoke("new", "research", "--initiative", "example")[0],
+        )
+
+        result, payload = self.invoke_json("new", "scope", "--initiative", "example")
+        self.assertEqual(result, EXIT_DOMAIN_FAILURE)
+        self.assertEqual(payload["diagnostics"][0]["code"], "upstream-not-approved")
+
+        self.approve("research")
+        self.assertEqual(
+            EXIT_SUCCESS, self.invoke("new", "scope", "--initiative", "example")[0]
+        )
+        result, payload = self.invoke_json("new", "design", "--initiative", "example")
+        self.assertEqual(result, EXIT_DOMAIN_FAILURE)
+        self.assertEqual(payload["diagnostics"][0]["code"], "upstream-not-approved")
+
+        self.approve("scope")
+        self.assertEqual(
+            EXIT_SUCCESS, self.invoke("new", "design", "--initiative", "example")[0]
+        )
 
     def test_check_emits_stable_json_for_a_document_and_initiative(self) -> None:
         self.assertEqual(EXIT_SUCCESS, self.invoke("new", "research", "--initiative", "example")[0])
@@ -130,6 +187,31 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(result, EXIT_DOMAIN_FAILURE)
         self.assertEqual(payload["status"], "failure")
         self.assertIn("missing-required-heading", {item["code"] for item in payload["diagnostics"]})
+
+    def test_check_file_validates_approval_order_for_approved_downstream_documents(
+        self,
+    ) -> None:
+        cases = (
+            ("scope", None, "research-not-approved"),
+            ("scope", ("research", "draft"), "research-not-approved"),
+            ("design", None, "scope-not-approved"),
+            ("design", ("scope", "draft"), "scope-not-approved"),
+        )
+        for phase, upstream, expected_code in cases:
+            with self.subTest(phase=phase, upstream=upstream):
+                self.write_phase(phase, status="approved")
+                if upstream is not None:
+                    self.write_phase(upstream[0], status=upstream[1])
+
+                result, payload = self.invoke_json(
+                    "check", f"docs/product-development/example/{phase}.md"
+                )
+
+                self.assertEqual(result, EXIT_DOMAIN_FAILURE)
+                self.assertIn(
+                    expected_code, {item["code"] for item in payload["diagnostics"]}
+                )
+                shutil.rmtree(self.root / DOCUMENTS_PATH / "example")
 
     def test_check_rejects_an_empty_initiative_directory(self) -> None:
         directory = self.root / DOCUMENTS_PATH / "example"

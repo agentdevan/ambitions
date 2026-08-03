@@ -13,7 +13,7 @@ from .constants import DOCUMENTS_ROOT, SKILL_ROOT
 from .documents import parse_document, write_document_atomic
 from .errors import Diagnostic, ProductDocsError
 from .models import DocumentStatus, DocumentType, ProductDocument
-from .validation import validate_document, validate_initiative
+from .validation import validate_initiative
 
 
 EXIT_SUCCESS = 0
@@ -174,6 +174,15 @@ def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, 
         upstream = directory / f"{DocumentType.RESEARCH.value if phase == DocumentType.SCOPE.value else DocumentType.SCOPE.value}.md"
         if not upstream.is_file():
             raise ProductDocsError(Diagnostic("upstream-unavailable", "Create the upstream document before this phase", path=upstream.relative_to(root).as_posix()))
+        upstream_document = parse_document(upstream, repository_root=root)
+        if upstream_document.status is not DocumentStatus.APPROVED:
+            raise ProductDocsError(
+                Diagnostic(
+                    "upstream-not-approved",
+                    "Approve the upstream document before creating this phase",
+                    path=upstream.relative_to(root).as_posix(),
+                )
+            )
 
     contents = _template_path(root, phase).read_text(encoding="utf-8").replace('initiative = ""', f'initiative = "{initiative}"', 1)
     write_document_atomic(target, contents, repository_root=root)
@@ -220,6 +229,8 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
             )
     else:
         document_path = _document_path(target, relative)
+        report = validate_initiative(document_path.parent)
+        diagnostics.extend(report.diagnostics)
         paths = [document_path]
 
     for path in paths:
@@ -233,8 +244,6 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
             continue
         documents.append(document)
         records.append(_document_record(document, path_relative))
-        if target.is_file():
-            diagnostics.extend(validate_document(document).diagnostics)
 
     status = "success" if not diagnostics else "failure"
     return (
