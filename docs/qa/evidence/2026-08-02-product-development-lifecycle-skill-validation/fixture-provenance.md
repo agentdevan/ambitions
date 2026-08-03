@@ -21,7 +21,7 @@ independently verifiable claim about an external service.
 | Repository | `agentdevan/ambitions` |
 | Branch | `codex/product-development-lifecycle` |
 | Skill version | `1.0.0` |
-| Skill package | `sha256:b810179fdc59fb037091b03502b226d996d9ea128cde7118d60eee46e7e178cf` |
+| Current skill package | `sha256:8e7bcaf7ef33edcf33b9334f40c7eb3e42277b146604165428f32f495c12d2e2` |
 | Fixture objective | A synthetic Research → Scope → Design lifecycle fixture, using committed canonical documents and independent Content and Consumer lanes. |
 
 ## Artifact handling
@@ -38,11 +38,12 @@ companion was created for each historical response, preserving the response's
 semantic fields, and only that companion was imported. Therefore those
 historical records do **not** establish strict raw JSON compliance.
 
-Design revision 2 is the exception: its fresh Content-review response is
-tracked at `raw-content-reviews/design-revision-2.json` as byte-identical,
-strict UTF-8 JSON. Its SHA-256 is
-`4073fdf31b721882326c709eaaa9563ced1659bb8e16e0bcfe5f79f2dfc0f6c6`.
-The response declares `chatgpt; no earlier producer conversation used`; this
+Design revisions 2 and 3 provide byte-identical, strict UTF-8 raw Content
+review JSON. Revision 2 is tracked at `raw-content-reviews/design-revision-2.json`
+with SHA-256 `4073fdf31b721882326c709eaaa9563ced1659bb8e16e0bcfe5f79f2dfc0f6c6`.
+Revision 3 is tracked at `raw-content-reviews/design-revision-3.json` with
+SHA-256 `73d975fa31253ee2e8652b17a499568662772fa175403500ef090b79a7892299`.
+Both responses declare `chatgpt; no earlier producer conversation used`; this
 remains author-declared external provenance, not an independent service claim.
 
 ## Research: producer, reconciliation, and review handoff
@@ -83,7 +84,7 @@ Scope v1 at `0cd783b2cf25e32f21e9f2b24fd7891c5062f76b` is the exact committed up
 | Content review | Packet `cf48607a16a5bfab0372e8cee1782e42ccae259f845a5e7c206ec086c19565c7`; raw `965f3316d855456810f79839c717ba1f4382ac479c1cb7708c07d195c45f3697`; normalized `d6e074f177b57c3441082dedb05583d1a83d7bbcfb8535140b981235ddaa7d14` | Content state `1556991ae17b85064ebabb1db5d1a65a4658e87a` | ChatGPT Content `REV-CONTENT-DESIGN-001`: pass; exact v1 contract binding; reviewer surface declared `chatgpt; no earlier producer conversation used`. |
 | Codex Consumer review | Payload `task-10-codex-design-consumer-review.json`: `f3fd2b42c68a63a75bf6f36b1d16b41ceff4fc14e6be987dcdf4a923c01f0581` | Passed state `de69bc47d5eaecf26988007db2a634eef81e5c4f` | Codex first read passed Scope at its exact binding, then Design and `consume --json`; `relevant_paths = []`. `REV-CONSUMER-DESIGN-001` passed with no findings. |
 
-### Historical Design revision 1 and current Design revision 2
+### Historical Design revisions 1 and 2; current Design revision 3
 
 The revision-1 normalized Content PASS (`1556991ae17b85064ebabb1db5d1a65a4658e87a`) and Consumer PASS (`de69bc47d5eaecf26988007db2a634eef81e5c4f`) are preserved historical facts only. They were superseded and removed from active lifecycle state through non-rewriting reverts `6bcdf164b39a47520cd6c11d01312867970aa0d7` and `10cf563ff795c3f7f5995b6e28ba3e78b703265c`. The direct byte-valid raw revision-1 import at `7daafb3f1b96adb5b4a8417acd3c00864da5bc6d` records `REV-CONTENT-DESIGN-001` as `NEEDS REVISION`; it too is historical and non-current.
 
@@ -95,7 +96,11 @@ The exact strict raw Content PASS is tracked at `raw-content-reviews/design-revi
 
 Codex then performed the separate Consumer review. Pre-import `consume design.md --json` identified exactly one relevant current-drift path, `docs/product-development/lifecycle-fixture/scope.md`, and returned `semantic-review-required`; all reported Design, Research, and validation-evidence paths were unrelated. The strict local consumer payload SHA-256 is `1d3a315c3211090a28be60d5d40790fd2910689f317b7d645f6b277c1816bbcf`, with durable ID `REV-CONSUMER-DESIGN-002`. It supplied exactly the required Scope assessment: `impact = none`, because the Scope's passed revision, contract, input binding, requirements, acceptance criteria, owner paths, and Design-relevant authority remain unchanged from the Design baseline; only review-history timestamps and a prior nonmaterial assessment changed. Direct import succeeded without diagnostics and committed active Design `passed` at `908295b8eb721793764b4d0be03085bb9dc21132`.
 
-Active Design is therefore `passed`, revision `2`, contract `sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224`, with both recorded review lanes passed. A later standalone `consume --json` still reports `semantic-review-required` for that current Scope drift because it reports fresh unassessed drift; it does **not** replay stored review-event assessments. The accepted Consumer event supplied the required assessment for the state transition; this record does not claim standalone post-review `consume` passes.
+Design revision 3 was sealed at `44d22c74afc4eeab26f97dde77f9777218f5aa88` with contract `sha256:50f3c7287b5eb9ba2c1185d223db0b488a8327c32de772cd579fd123db6f3bb2`. The strict external JSON was preserved byte-for-byte at `raw-content-reviews/design-revision-3.json` and in the ignored SDD workspace; both hashes are `73d975fa31253ee2e8652b17a499568662772fa175403500ef090b79a7892299`. It declares `REV-CONTENT-DESIGN-003`, reviewer surface `chatgpt; no earlier producer conversation used`, revision `3`, the exact sealed contract, and `PASS`. Direct `review design.md --review-file <unchanged copy> --json` import succeeded without diagnostics and committed content-reviewed state at `5d173be523791a08b0b023e5e4c07fea878e0e93`.
+
+Codex then performed the separate Consumer review. It read the exact passed Scope input, Design handoff summary, declared owner paths, current canon boundary, traceability, and `consume --json`; consumption reported `relevant_paths = []`, so no drift assessment was required or permitted. The strict local Consumer payload SHA-256 is `b2b941cd69d07e5d8603e0ad0d55292d9d50b19afead1d9840284524247113b8`, with durable ID `REV-CONSUMER-DESIGN-003`. Direct import succeeded without diagnostics and committed active Design `passed` at `799ea03b3be7ec1fe1538494a6bb41f31dfedbe8`.
+
+Active Design is therefore `passed`, revision `3`, contract `sha256:50f3c7287b5eb9ba2c1185d223db0b488a8327c32de772cd579fd123db6f3bb2`, with both recorded review lanes passed. The standalone consume at the reviewed state passed with no relevant paths; it does not establish implementation, merge, deployment, release, or canon authority.
 
 ## Authoritative local commands and status
 
@@ -116,18 +121,19 @@ PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/ambitions-product-development-l
 # no seal occurred until repaired draft validation passed.
 
 PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py seal DOC --json
-# PASS for Research v1/v2/v3, Scope v1, and Design v1/v2 with the contracts above.
+# PASS for Research v1/v2/v3, Scope v1, and Design v1/v2/v3 with the contracts above.
 
 PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py review DOC --review-file REVIEW --json
 # Historical typographic-quote raw response: rejected as invalid JSON without document mutation.
 # Historical syntax-normalized semantic companion: imported the recorded Content verdict.
 # Design revision 2 strict raw JSON: direct unchanged Content import succeeded at afaaea2d7.
 # Design revision 2 Codex Consumer JSON with its exact Scope assessment succeeded at 908295b8.
+# Design revision 3 strict raw JSON: direct unchanged Content import succeeded at 5d173be52.
+# Design revision 3 Codex Consumer JSON with no assessments (none required) succeeded at 799ea03b3.
 
 PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py consume DOC --json
 # Historical Research, Scope, and Design r1 consumption passed with relevant_paths = [].
-# Current Design r2 reports current Scope drift and requires a fresh assessment; its stored
-# Consumer-review event included the exact accepted nonmaterial assessment.
+# Current Design r3 consumption passed with relevant_paths = [] and required no assessment.
 
 git diff --check BASELINE..HEAD
 # PASS for every producer/repair change set and transition commit checked.
