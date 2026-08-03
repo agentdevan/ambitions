@@ -1,8 +1,8 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 3 — dual-review repairs complete; final verification pending  
-**Repository baseline inspected:** `a758c727ea62ae0d7bc1ef634b8a59e5366970ae`  
+**Status:** Revision 4 — final verification candidate  
+**Repository baseline inspected:** `8d14184bf0f99069d16ef4fe4f03da8b7c70361c`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
@@ -12,12 +12,15 @@ Ambitions will use this lifecycle for material product work:
 ```text
 Idea
   → ChatGPT authors Research
+  → Seal exact revision
   → Content review and revision until PASS
   → Codex consumption review and revision until PASS
   → ChatGPT authors Scope
+  → Seal exact revision
   → Content review and revision until PASS
   → Codex consumption review and revision until PASS
   → ChatGPT authors Design
+  → Seal exact revision
   → Content review and revision until PASS
   → Codex consumption review and revision until PASS
   → Canon reconciliation and Codex implementation grooming
@@ -47,9 +50,10 @@ each committed document without reconstructing chat history, repeating accepted
 research, guessing missing behavior, or loading unbounded context.
 
 A chat response is not a lifecycle document. A document becomes eligible for
-Codex consumption only after it is persisted at its canonical repository path,
-bound to a repository baseline, hashed, content-reviewed, and structurally
-valid.
+review only after it is persisted at its canonical repository path and sealed to
+an exact revision, contract hash, repository baseline, skill package, and
+template. A sealed document becomes eligible for downstream use only after both
+review lanes pass that same revision and hash.
 
 Codex consumption is an actual review lane. It verifies that the artifact is
 current, bounded, traceable, self-contained, and usable by the next phase. Codex
@@ -192,7 +196,7 @@ Producer mode must:
 7. persist the file at the canonical path;
 8. perform a non-authoritative preflight when deterministic tooling is
    unavailable;
-9. obtain the authoritative contract hash before content review passes;
+9. obtain an authoritative seal before requesting a review verdict;
 10. complete the content-integrity review lane;
 11. stop at `needs-revision` when evidence, access, or decisions are insufficient.
 
@@ -203,19 +207,19 @@ substitute for the lifecycle CLI.
 
 Content review attempts to falsify factual support, product logic, alternatives,
 boundaries, privacy, accessibility, and internal consistency. It is performed
-only after the current contract hash exists and binds to the exact revision and
-hash.
+only after the current revision is sealed and binds to the exact revision and
+contract hash.
 
 A fresh context or agent is preferred. Self-review is permitted only as a
 separate explicit pass using the same rubric. Any authority-bearing edit
-invalidates the verdict.
+invalidates the seal and both verdicts.
 
 ### 7.3 Consumer mode — Codex
 
 Consumer mode must:
 
 1. load active instructions, the lifecycle skill, and consumer contract;
-2. run structural validation and calculate the current contract hash;
+2. run structural validation and recompute the sealed contract hash;
 3. compare the baseline commit with current `HEAD` using declared freshness
    paths and semantic inspection of relevant changes;
 4. verify package, template, authority class, evidence, and upstream bindings;
@@ -238,7 +242,8 @@ A document is handoff-ready only when:
 - it exists at `docs/product-development/<initiative>/<phase>.md`;
 - identity, versions, package hashes, revision, and authority class are valid;
 - repository baseline and freshness paths are recorded;
-- the content review passes the current revision and contract hash;
+- the current revision is sealed and its stored hash recomputes exactly;
+- the content review passes that revision and contract hash;
 - upstream bindings and evidence-file hashes are current;
 - authoritative structural validation passes.
 
@@ -304,29 +309,60 @@ role = "supports FIND-003 and FIND-004"
 +++
 ```
 
-Research omits empty `[[inputs]]`. Scope binds to passed Research. Design binds
-to passed Scope. Reduced entry uses `kind = "canon"` or `kind = "approved-design"`
-with the exact authority ID, path, and commit. Fields that do not apply to that
-kind are omitted; the schema defines required fields per kind.
+Research omits empty `[[inputs]]`. Parallel arrays for paths, revisions, and
+hashes are prohibited.
 
-Parallel arrays for paths, revisions, and hashes are prohibited.
+### 9.2 Typed input schemas
 
-### 9.2 Status values
+The validator enforces these exact input records:
+
+| `kind` | Required fields | Permitted use |
+|---|---|---|
+| `lifecycle-document` | `authority_id`, `path`, `revision`, `contract_hash`, `commit` | Scope-to-Research and Design-to-Scope binding |
+| `canon` | `authority_id`, `path`, `commit` | Reduced entry from current normative authority |
+| `approved-design` | `authority_id`, `path`, `revision`, `contract_hash`, `commit` | Reduced Design entry from a separately approved design authority |
+| `repository-evidence` | `authority_id`, `path`, `commit` | Exact source, test, or evidence authority needed to justify reduced entry |
+
+Unknown kinds fail validation. Fields not listed for the selected kind fail
+validation unless added by a future schema version. Every path must be repository
+relative and remain inside the repository root.
+
+### 9.3 Status values and transitions
 
 Allowed statuses:
 
 - `draft`;
+- `sealed`;
 - `content-reviewed`;
 - `needs-revision`;
 - `passed`;
 - `stale`;
 - `superseded`.
 
+The state machine is deterministic:
+
+| Current state | Command/result | Next state | Required side effects |
+|---|---|---|---|
+| absent | `new` | `draft` | Create exact template with revision `1`; no hash or verdicts |
+| `draft` or `needs-revision` | `seal` succeeds | `sealed` | Validate, compute and store hash, clear both review lanes |
+| `sealed` | content review `PASS` | `content-reviewed` | Record content verdict and append review history |
+| `sealed` | content review `NEEDS REVISION` | `needs-revision` | Record blockers and append review history |
+| `content-reviewed` | consumer review `PASS` | `passed` | Record consumer verdict and append review history |
+| `content-reviewed` | consumer review `NEEDS REVISION` | `needs-revision` | Record blockers and append review history |
+| `passed` | relevant upstream or evidence drift | effective `stale` | Read-only checks fail; explicit `reconcile --mark-stale` persists `stale` |
+| `stale` | `reconcile --reopen` | `draft` | Increment revision, update inputs/baseline, clear seal and both reviews |
+| any non-superseded state | `supersede` | `superseded` | Record replacement document and reason |
+
+An authority-bearing edit is permitted only in `draft`, `needs-revision`, or
+`stale`. Editing a sealed, content-reviewed, or passed body without first running
+`reconcile --reopen` is invalid. The validator detects a mismatched stored hash
+and fails even when the status was not changed.
+
 `passed` requires both verdicts and blocker counts to pass the same current
 revision and contract hash, valid current inputs and evidence hashes, and
 successful structural and consumer validation.
 
-### 9.3 Versioning
+### 9.4 Versioning
 
 `schema_version` controls machine interpretation. `template_version` controls
 headings and section contracts. `skill_version` identifies the package release.
@@ -388,8 +424,8 @@ The contract hash is lowercase SHA-256 prefixed with `sha256:`.
 
 Any textual change in an included body section changes the hash, including a
 spelling correction. This conservative invalidation is intentional. Every
-authority-bearing edit increments `revision`, clears both review lanes, and may
-stale downstream documents.
+authority-bearing edit increments `revision`, clears the seal and both review
+lanes, and may stale downstream documents.
 
 ## 11. Agent handoff summary
 
@@ -417,7 +453,7 @@ without external network access.
 
 ## 12. Dual review gate and durable review record
 
-Each phase has two verdict lanes bound to the same revision and hash.
+Each phase has two verdict lanes bound to the same sealed revision and hash.
 
 ### 12.1 Content-integrity review
 
@@ -452,17 +488,18 @@ Required revisions
 Next permitted lifecycle phase
 ```
 
-The lifecycle CLI `review` command atomically updates the lane-specific
-frontmatter and appends the complete review entry under `Review history`.
-Review-history entries are append-only, have stable IDs, record reviewer surface
-and date, and are excluded from the contract hash. A revision invalidates both
-lanes; there is no conditional pass.
+The lifecycle CLI `review` command requires a sealed document, verifies the
+submitted revision and hash, atomically updates lane-specific frontmatter, and
+appends the complete review entry under `Review history`. Review-history entries
+are append-only, have stable IDs, record reviewer surface and date, and are
+excluded from the contract hash. A revision invalidates both lanes; there is no
+conditional pass.
 
 ## 13. Freshness and repository-drift contract
 
 `freshness_paths` are machine-readable paths or directory prefixes whose changes
 may invalidate the document. They include cited canon, owning source areas,
-relevant tests, dependency manifests, and any generated routing relied upon.
+relevant tests, dependency manifests, and generated routing relied upon.
 
 Consumer review compares `repository_baseline_commit..HEAD`:
 
@@ -625,7 +662,7 @@ Before acceptance, Codex runs `check` and `consume`. It returns
 `NEEDS REVISION` when:
 
 - canonical path, identity, versions, or package hashes are invalid;
-- contract hash or review binding is stale;
+- seal, contract hash, or review binding is stale;
 - baseline or freshness data is missing;
 - relevant repo changes are unreconciled;
 - inputs or evidence hashes are stale;
@@ -647,27 +684,48 @@ Use one Python standard-library CLI:
 ambitions_product_docs.py new
 ambitions_product_docs.py check
 ambitions_product_docs.py hash
+ambitions_product_docs.py seal
 ambitions_product_docs.py review
 ambitions_product_docs.py reconcile
 ambitions_product_docs.py consume
+ambitions_product_docs.py supersede
 ```
 
-`check`, `hash`, and `consume` are read-only by default. `review` and `reconcile`
-are explicit write commands. Required behavior:
+`check`, `hash`, and `consume` are read-only. `new`, `seal`, `review`,
+`reconcile`, and `supersede` are explicit write commands.
+
+### 18.1 `seal` contract
+
+`seal` is the only command that may establish or replace `contract_hash`. It:
+
+1. requires a writable state;
+2. validates schema, headings, inputs, evidence hashes, freshness paths, package,
+   and template identity;
+3. requires revision to have increased after a previously sealed contract was
+   reopened;
+4. computes and writes the exact contract hash;
+5. clears both review lanes and blocker counts;
+6. changes status to `sealed`;
+7. appends a non-review seal event to Review history;
+8. prints the sealed revision, hash, and next required review lane.
+
+### 18.2 General CLI behavior
+
+The CLI must:
 
 - instantiate exact templates without overwrite;
 - support producer-created drafts when shell execution was unavailable;
 - parse TOML and validate all schema variants;
 - verify package and template hashes;
 - implement the exact contract-hash algorithm;
-- validate review records and status combinations;
+- validate seals, review records, and status combinations;
 - validate typed inputs and evidence-file hashes;
 - compare baseline diffs against freshness paths;
 - require finding-to-source, requirement-to-finding, requirement-to-acceptance,
   design-to-verification, and canon-delta traceability;
-- reject placeholders and empty required sections before review;
-- append review records atomically;
-- explicitly mark or rebind stale documents;
+- reject placeholders and empty required sections before sealing;
+- append seal and review records atomically;
+- explicitly mark or reopen stale documents;
 - never mutate during CI or read-only commands;
 - restrict writes to approved roots and reject path traversal;
 - emit stable JSON diagnostics and nonzero failure exits.
@@ -684,8 +742,8 @@ After Design passes and before implementation grooming is final:
 3. update the owning canon source before or atomically with implementation;
 4. update requirement and verification links under current canon conventions;
 5. run `python3 scripts/ambitions-canon.py check`;
-6. re-run Design consumption if canon reconciliation changes an
-   authority-bearing decision.
+6. re-run Design consumption after relevant canon changes;
+7. reopen Design only if reconciliation changes an authority-bearing decision.
 
 A passed Design authorizes planning for declared deltas; it does not make those
 deltas normative before canon reconciliation.
@@ -710,7 +768,7 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 - stale package or template is used;
 - evidence or unknowns are invented;
 - trivial work triggers the full lifecycle;
-- a passed body changes without review invalidation;
+- a passed body changes without reopening and resealing;
 - a preflight is mistaken for authoritative validation.
 
 ### 21.2 Consumer scenarios
@@ -729,17 +787,18 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 ### 21.3 Cross-product fixture
 
 A fixture initiative is authored through ChatGPT and consumed through Codex. It
-proves identical package/template hashes, canonical persistence, durable review
-records, summary-first reading, relevant-drift detection, evidence-hash checking,
-Research → Scope → Design → canon reconciliation → grooming, and independence
-from the original chat.
+proves identical package/template hashes, canonical persistence, authoritative
+sealing, durable review records, summary-first reading, relevant-drift detection,
+evidence-hash checking, Research → Scope → Design → canon reconciliation →
+grooming, and independence from the original chat.
 
 ### 21.4 CLI tests
 
 Tests cover templates, versions, package hashes, IDs, TOML, canonical hashing,
-review history, status rules, typed inputs, evidence hashes, freshness paths,
-relevant drift, canon deltas, traceability, stale reconciliation, path safety,
-read-only behavior, JSON output, and failure exits.
+sealing, illegal post-seal edits, review history, state transitions, typed
+inputs, evidence hashes, freshness paths, relevant drift, canon deltas,
+traceability, stale reconciliation, path safety, read-only behavior, JSON output,
+and failure exits.
 
 ## 22. Delivery boundary
 
@@ -781,12 +840,12 @@ The system is complete when:
 1. The canonical package and every specified file exist.
 2. ChatGPT and Codex load identical package and template hashes.
 3. ChatGPT can create canonical drafts without hidden chat context or a local
-   shell; authoritative validation and review binding still occur before pass.
+   shell; authoritative sealing and review binding still occur before pass.
 4. Codex consumes each document using summary-first routing and current-repo
    verification.
-5. Both review lanes bind to one current revision and contract hash and have
+5. Both review lanes bind to one sealed revision and contract hash and have
    durable append-only review records.
-6. The exact hash algorithm is implemented and tested.
+6. The exact hash algorithm and seal transition are implemented and tested.
 7. Typed inputs, evidence hashes, freshness paths, and relevant drift are
    enforced.
 8. Relevant changes invalidate consumption; unrelated changes do not.
@@ -808,8 +867,11 @@ The system is complete when:
 - Repository files, not chat history, are canonical handoffs.
 - Documents declare distinct authority classes.
 - Versions and exact package/template hashes prevent cross-product drift.
-- Review verdicts bind to exact revision and deterministic contract hash.
+- An explicit seal establishes the reviewable revision and hash.
+- Review verdicts bind to exact sealed revision and deterministic contract hash.
 - Review records are durable and append-only.
+- Typed inputs eliminate parallel-array ambiguity.
+- A complete state machine prevents implicit lifecycle transitions.
 - Structured freshness paths make baseline drift inspectable.
 - Evidence annexes are content-hashed.
 - Declared canon/source deltas are permitted; undeclared conflicts block.
@@ -826,7 +888,7 @@ the lifecycle system is complete.
 
 ## 27. Review gate
 
-Revision 3 incorporates the producer and consumer review findings. Approval
-requires a final verification that the revised hash, review, freshness,
-authority-delta, and cross-product contracts are internally consistent and
-implementation-ready.
+Revision 4 incorporates both ruthless review passes and the final mechanical
+repair. Approval requires verification that the seal, typed-input, state-machine,
+review-binding, freshness, authority-delta, and cross-product contracts are now
+internally consistent and directly implementable.
