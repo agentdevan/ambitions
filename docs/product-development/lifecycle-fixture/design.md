@@ -12,13 +12,13 @@ document_type = "design"
 authority_class = "implementation-design"
 entry_point = "design"
 
-status = "draft"
+status = "sealed"
 revision = 3
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
 repository_baseline_commit = "fc3085ab0b61fa48b0172a359980f7902b30a801"
 external_research_as_of = "2026-08-03"
-contract_hash = ""
+contract_hash = "sha256:50f3c7287b5eb9ba2c1185d223db0b488a8327c32de772cd579fd123db6f3bb2"
 
 content_review_verdict = "unreviewed"
 content_review_revision = 0
@@ -35,7 +35,7 @@ source_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/sc
 test_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py"]
 dependency_paths = ["AGENTS.md", ".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/design.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md"]
 additional_freshness_paths = []
-freshness_paths = []
+freshness_paths = [".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/design.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py", ".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py", "AGENTS.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md", "docs/product-development/lifecycle-fixture/scope.md"]
 supersedes = []
 
 [[inputs]]
@@ -561,3 +561,25 @@ canon-reconciliation
 - Revision: `3`
 - Repository baseline: `fc3085ab0b61fa48b0172a359980f7902b30a801`
 - Corrective work: Bindings preserved.
+### Seal event
+
+- Sealed at: `2026-08-03T21:12:43Z`
+- Revision: `3`
+- Contract hash: `sha256:50f3c7287b5eb9ba2c1185d223db0b488a8327c32de772cd579fd123db6f3bb2`
+- Freshness paths:
+- .agents/skills/ambitions-product-development-lifecycle/SKILL.md
+- .agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/design.md
+- .agents/skills/ambitions-product-development-lifecycle/package-manifest.json
+- .agents/skills/ambitions-product-development-lifecycle/references/design-review-rubric.md
+- .agents/skills/ambitions-product-development-lifecycle/references/lifecycle-contract.md
+- .agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py
+- .agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py
+- AGENTS.md
+- docs/canon/CONSTITUTION.md
+- docs/canon/generated/CODEX_START_HERE.md
+- docs/product-development/lifecycle-fixture/evidence/comparison.md
+- docs/product-development/lifecycle-fixture/scope.md
