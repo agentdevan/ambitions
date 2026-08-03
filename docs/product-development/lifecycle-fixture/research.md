@@ -12,7 +12,7 @@ document_type = "research"
 authority_class = "evidence"
 entry_point = "research"
 
-status = "sealed"
+status = "needs-revision"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -20,10 +20,10 @@ repository_baseline_commit = "fc8eca8d7b913a3d6cef82e33bfd3c7f419c0021"
 external_research_as_of = "2026-08-03"
 contract_hash = "sha256:40d8bfa07e1e374c3345b617d1370e79ea696c28befe76e7d266883ff04416e0"
 
-content_review_verdict = "unreviewed"
-content_review_revision = 0
-content_review_hash = ""
-content_blocking_findings = 0
+content_review_verdict = "needs-revision"
+content_review_revision = 1
+content_review_hash = "sha256:40d8bfa07e1e374c3345b617d1370e79ea696c28befe76e7d266883ff04416e0"
+content_blocking_findings = 1
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
 consumer_review_hash = ""
@@ -263,3 +263,40 @@ Scope must not answer any real product question, activate canon, select implemen
 - docs/canon/CONSTITUTION.md
 - docs/canon/generated/CODEX_START_HERE.md
 - docs/product-development/lifecycle-fixture/evidence/comparison.md
+### Review event: REV-CONTENT-RESEARCH-001
+
+- Review lane: `CONTENT`
+- Verdict: `NEEDS REVISION`
+- Reviewer surface: `chatgpt; no earlier producer conversation used`
+- Reviewed at: `2026-08-03T13:17:00Z`
+- Reviewed revision: `1`
+- Reviewed contract hash: `sha256:40d8bfa07e1e374c3345b617d1370e79ea696c28befe76e7d266883ff04416e0`
+
+#### Blocking findings
+
+- Revision 1 is internally inconsistent about lifecycle state: its sealed frontmatter and seal event conflict with present-tense statements that the same revision is a draft, unsealed, and lacks a known contract hash or freshness set.
+
+#### Non-blocking improvements
+
+- None
+
+#### Traceability gaps
+
+- The statement that authoring used only GitHub reads and writes and no local checkout is not supported by a committed audit artifact and should be labeled as declared provenance or removed.
+
+#### Stale or conflicting inputs
+
+- The pre-seal body text was not reconciled after the 2026-08-03T13:06:04Z seal event.
+
+#### Required revisions
+
+- Reconcile the document to state that the Research revision has already been sealed with the recorded contract hash and freshness paths, updating FIND-008, the recommendation, remaining unknowns, and Scope handoff accordingly.
+- Remove the GitHub-only and no-local-checkout claim or explicitly label it as unverified author-declared provenance.
+
+#### Next permitted lifecycle phase
+
+reconcile
+
+#### Drift assessments
+
+- None
