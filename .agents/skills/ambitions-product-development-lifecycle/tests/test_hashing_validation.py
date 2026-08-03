@@ -3,6 +3,7 @@ from __future__ import annotations
 # ruff: noqa: E402 -- the package-under-test path is intentionally injected below.
 
 from dataclasses import replace
+from itertools import product
 from pathlib import Path
 import sys
 import unittest
@@ -368,6 +369,76 @@ class StructureAndFreshnessTests(unittest.TestCase):
             "invalid-review-state", diagnostic_codes(validate_structure(candidate))
         )
 
+    def test_state_review_matrix_accepts_only_reachable_lane_pairs(self) -> None:
+        document = complete_document("research")
+        contract_hash = document.metadata.contract_hash
+        lane_values = {
+            "clear": (ReviewVerdict.UNREVIEWED, 0, "", 0),
+            "pass": (ReviewVerdict.PASS, 1, contract_hash, 0),
+            "needs-revision": (
+                ReviewVerdict.NEEDS_REVISION,
+                1,
+                contract_hash,
+                1,
+            ),
+        }
+        allowed = {
+            DocumentStatus.DRAFT: {("clear", "clear")},
+            DocumentStatus.SEALED: {("clear", "clear")},
+            DocumentStatus.CONTENT_REVIEWED: {("pass", "clear")},
+            DocumentStatus.NEEDS_REVISION: {
+                ("needs-revision", "clear"),
+                ("pass", "needs-revision"),
+            },
+            DocumentStatus.PASSED: {("pass", "pass")},
+            DocumentStatus.STALE: {("pass", "pass")},
+            DocumentStatus.SUPERSEDED: {
+                ("clear", "clear"),
+                ("pass", "clear"),
+                ("needs-revision", "clear"),
+                ("pass", "needs-revision"),
+                ("pass", "pass"),
+            },
+        }
+
+        for status, content_lane, consumer_lane in product(
+            DocumentStatus, lane_values, lane_values
+        ):
+            with self.subTest(
+                status=status.value,
+                content=content_lane,
+                consumer=consumer_lane,
+            ):
+                content = lane_values[content_lane]
+                consumer = lane_values[consumer_lane]
+                metadata = replace(
+                    document.metadata,
+                    status=status,
+                    contract_hash=""
+                    if status is DocumentStatus.DRAFT
+                    else contract_hash,
+                    freshness_paths=()
+                    if status is DocumentStatus.DRAFT
+                    else document.metadata.freshness_paths,
+                    content_review_verdict=content[0],
+                    content_review_revision=content[1],
+                    content_review_hash=content[2],
+                    content_blocking_findings=content[3],
+                    consumer_review_verdict=consumer[0],
+                    consumer_review_revision=consumer[1],
+                    consumer_review_hash=consumer[2],
+                    consumer_blocking_findings=consumer[3],
+                )
+
+                codes = diagnostic_codes(
+                    validate_structure(replace(document, metadata=metadata))
+                )
+
+                self.assertEqual(
+                    "invalid-review-state" not in codes,
+                    (content_lane, consumer_lane) in allowed[status],
+                )
+
     def test_rejects_malformed_contract_hash(self) -> None:
         document = complete_document("research")
         candidate = replace(
@@ -538,6 +609,61 @@ class SourceAndTraceabilityTests(unittest.TestCase):
 
     def test_research_findings_resolve_to_source_ledger(self) -> None:
         self.assertEqual(validate_sources(self._research()), ())
+
+    def test_required_phase_tables_cannot_pass_without_primary_records(self) -> None:
+        cases = (
+            (complete_document("research"), validate_sources, {"missing-findings"}),
+            (
+                complete_document("scope"),
+                validate_traceability,
+                {"missing-requirements", "missing-acceptance-criteria"},
+            ),
+            (
+                complete_document("design"),
+                validate_traceability,
+                {"missing-design-traceability", "missing-implementation-seams"},
+            ),
+        )
+
+        for document, validator, expected_codes in cases:
+            with self.subTest(document_type=document.metadata.document_type.value):
+                self.assertTrue(
+                    expected_codes.issubset(diagnostic_codes(validator(document)))
+                )
+
+    def test_malformed_required_table_surfaces_parser_diagnostic(self) -> None:
+        document = replace_section(
+            complete_document("research"),
+            "Findings",
+            "| Finding ID | Classification | Finding | Source IDs | Scope implication |\n"
+            "|---|---|\n"
+            "| FIND-001 | Fact | Supported | SRC-001 | Bound |\n"
+            "Complete.\n",
+        )
+
+        self.assertIn(
+            "invalid-table-separator", diagnostic_codes(validate_structure(document))
+        )
+
+    def test_repository_evidence_reference_requires_exact_path_match(self) -> None:
+        document = replace_section(
+            complete_document("research"),
+            "Findings",
+            "| Finding ID | Classification | Finding | Source IDs | Scope implication |\n"
+            "|---|---|---|---|---|\n"
+            "| FIND-001 | Fact | Spoofed support | docs/evidence.md.bak | Bound the scope |\n",
+        )
+        document = replace(
+            document,
+            metadata=replace(
+                document.metadata,
+                evidence_files=(
+                    EvidenceFile("docs/evidence.md", "3" * 64, "supports FIND-001"),
+                ),
+            ),
+        )
+
+        self.assertIn("unresolved-source", diagnostic_codes(validate_sources(document)))
 
     def test_rejects_unresolved_research_source_and_zero_id(self) -> None:
         unresolved = replace_section(

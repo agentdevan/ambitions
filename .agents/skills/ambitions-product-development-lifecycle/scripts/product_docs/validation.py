@@ -59,6 +59,25 @@ _DEFINITION_COLUMNS = {
     "Canon impact and proposed canon deltas": ("Canon delta ID", "CANON-DELTA"),
     "Implementation seams and dependency order": ("Seam ID", "SEAM"),
 }
+_ALLOWED_REVIEW_LANES = {
+    DocumentStatus.DRAFT: frozenset({("clear", "clear")}),
+    DocumentStatus.SEALED: frozenset({("clear", "clear")}),
+    DocumentStatus.CONTENT_REVIEWED: frozenset({("pass", "clear")}),
+    DocumentStatus.NEEDS_REVISION: frozenset(
+        {("needs-revision", "clear"), ("pass", "needs-revision")}
+    ),
+    DocumentStatus.PASSED: frozenset({("pass", "pass")}),
+    DocumentStatus.STALE: frozenset({("pass", "pass")}),
+    DocumentStatus.SUPERSEDED: frozenset(
+        {
+            ("clear", "clear"),
+            ("pass", "clear"),
+            ("needs-revision", "clear"),
+            ("pass", "needs-revision"),
+            ("pass", "pass"),
+        }
+    ),
+}
 
 
 def _diagnostic(
@@ -107,9 +126,11 @@ def _section(document: LifecycleDocument, heading: str) -> Section | None:
     )
 
 
-def _tables(section: Section | None) -> tuple[tuple[dict[str, str], ...], ...]:
+def _parse_tables(
+    section: Section | None,
+) -> tuple[tuple[tuple[dict[str, str], ...], ...], tuple[Diagnostic, ...]]:
     if section is None:
-        return ()
+        return (), ()
     blocks: list[str] = []
     current: list[str] = []
     for line in section.body.splitlines():
@@ -121,12 +142,27 @@ def _tables(section: Section | None) -> tuple[tuple[dict[str, str], ...], ...]:
     if current:
         blocks.append("\n".join(current))
     parsed = []
+    diagnostics = []
     for block in blocks:
         try:
             parsed.append(parse_markdown_table(block))
-        except ProductDocsError:
-            continue
-    return tuple(parsed)
+        except ProductDocsError as error:
+            diagnostics.extend(
+                Diagnostic(
+                    diagnostic.code,
+                    diagnostic.message,
+                    path=diagnostic.path,
+                    section=section.heading,
+                    identifier=diagnostic.identifier,
+                    remediation=diagnostic.remediation,
+                )
+                for diagnostic in error.diagnostics
+            )
+    return tuple(parsed), tuple(diagnostics)
+
+
+def _tables(section: Section | None) -> tuple[tuple[dict[str, str], ...], ...]:
+    return _parse_tables(section)[0]
 
 
 def _rows(document: LifecycleDocument, heading: str) -> tuple[dict[str, str], ...]:
@@ -157,97 +193,75 @@ def _ids(text: str, kind: str) -> tuple[str, ...]:
     return tuple(match.group(0) for match in _TOKEN_PATTERNS[kind].finditer(text))
 
 
-def _review_lane_is_clear(
-    verdict: ReviewVerdict, revision: int, contract_hash: str, blockers: int
-) -> bool:
-    return (
+def _structured_references(text: str) -> tuple[str, ...]:
+    normalized = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
+    references = []
+    for part in re.split(r"[,;\n]+", normalized):
+        candidate = part.strip().strip("`").strip()
+        if not candidate:
+            continue
+        words = candidate.split()
+        if len(words) > 1 and all(
+            any(_id_valid(word.strip("`"), kind) for kind in _ID_NAMES)
+            for word in words
+        ):
+            references.extend(word.strip("`") for word in words)
+        else:
+            references.append(candidate)
+    return tuple(references)
+
+
+def _review_lane_state(
+    verdict: ReviewVerdict,
+    revision: int,
+    contract_hash: str,
+    blockers: int,
+    metadata: DocumentMetadata,
+) -> str | None:
+    if (
         verdict is ReviewVerdict.UNREVIEWED
         and revision == 0
         and contract_hash == ""
         and blockers == 0
-    )
-
-
-def _review_lane_is_pass(
-    verdict: ReviewVerdict,
-    review_revision: int,
-    review_hash: str,
-    blockers: int,
-    metadata: DocumentMetadata,
-) -> bool:
-    return (
+    ):
+        return "clear"
+    if (
         verdict is ReviewVerdict.PASS
-        and review_revision == metadata.revision
-        and review_hash == metadata.contract_hash
+        and revision == metadata.revision
+        and contract_hash == metadata.contract_hash
         and blockers == 0
-    )
-
-
-def _review_lane_needs_revision(
-    verdict: ReviewVerdict,
-    review_revision: int,
-    review_hash: str,
-    blockers: int,
-    metadata: DocumentMetadata,
-) -> bool:
-    return (
+    ):
+        return "pass"
+    if (
         verdict is ReviewVerdict.NEEDS_REVISION
-        and review_revision == metadata.revision
-        and review_hash == metadata.contract_hash
+        and revision == metadata.revision
+        and contract_hash == metadata.contract_hash
         and blockers > 0
-    )
+    ):
+        return "needs-revision"
+    return None
 
 
 def _validate_review_state(metadata: DocumentMetadata) -> bool:
-    content_clear = _review_lane_is_clear(
-        metadata.content_review_verdict,
-        metadata.content_review_revision,
-        metadata.content_review_hash,
-        metadata.content_blocking_findings,
-    )
-    consumer_clear = _review_lane_is_clear(
-        metadata.consumer_review_verdict,
-        metadata.consumer_review_revision,
-        metadata.consumer_review_hash,
-        metadata.consumer_blocking_findings,
-    )
-    content_pass = _review_lane_is_pass(
+    content_lane = _review_lane_state(
         metadata.content_review_verdict,
         metadata.content_review_revision,
         metadata.content_review_hash,
         metadata.content_blocking_findings,
         metadata,
     )
-    consumer_pass = _review_lane_is_pass(
+    consumer_lane = _review_lane_state(
         metadata.consumer_review_verdict,
         metadata.consumer_review_revision,
         metadata.consumer_review_hash,
         metadata.consumer_blocking_findings,
         metadata,
     )
-    content_revision = _review_lane_needs_revision(
-        metadata.content_review_verdict,
-        metadata.content_review_revision,
-        metadata.content_review_hash,
-        metadata.content_blocking_findings,
-        metadata,
+    return (
+        content_lane is not None
+        and consumer_lane is not None
+        and (content_lane, consumer_lane) in _ALLOWED_REVIEW_LANES[metadata.status]
     )
-    consumer_revision = _review_lane_needs_revision(
-        metadata.consumer_review_verdict,
-        metadata.consumer_review_revision,
-        metadata.consumer_review_hash,
-        metadata.consumer_blocking_findings,
-        metadata,
-    )
-    if metadata.status in (DocumentStatus.DRAFT, DocumentStatus.SEALED):
-        return content_clear and consumer_clear
-    if metadata.status is DocumentStatus.CONTENT_REVIEWED:
-        return content_pass and consumer_clear
-    if metadata.status is DocumentStatus.PASSED:
-        return content_pass and consumer_pass
-    if metadata.status is DocumentStatus.NEEDS_REVISION:
-        return content_revision or consumer_revision
-    return True
 
 
 def _definition_ids(document: LifecycleDocument) -> tuple[tuple[str, str, str], ...]:
@@ -273,6 +287,7 @@ def validate_structure(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
             )
         )
     for section in document.sections:
+        diagnostics.extend(_parse_tables(section)[1])
         if _DRAFT_SENTINEL in section.body:
             diagnostics.append(
                 _diagnostic(
@@ -428,6 +443,14 @@ def validate_sources(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
     diagnostics: list[Diagnostic] = []
     finding_rows = _rows(document, "Findings")
     source_rows = _rows(document, "Source ledger")
+    if not finding_rows:
+        diagnostics.append(
+            _diagnostic(
+                "missing-findings",
+                "Research requires at least one applicable finding record",
+                section="Findings",
+            )
+        )
     source_ids = {
         row.get("Source ID", "").strip()
         for row in source_rows
@@ -450,12 +473,16 @@ def validate_sources(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
     for row in finding_rows:
         identifier = row.get("Finding ID", "").strip()
         support = row.get("Source IDs", "")
-        references = _ids(support, "SRC")
+        references = _structured_references(support)
         unresolved = [
-            reference for reference in references if reference not in source_ids
+            reference
+            for reference in references
+            if not (
+                (_id_valid(reference, "SRC") and reference in source_ids)
+                or reference in repository_evidence
+            )
         ]
-        has_repository_evidence = any(path in support for path in repository_evidence)
-        if unresolved or (not references and not has_repository_evidence):
+        if not references or unresolved:
             diagnostics.append(
                 _diagnostic(
                     "unresolved-source",
@@ -484,9 +511,10 @@ def validate_sources(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
                     identifier=identifier,
                 )
             )
-        supported = _ids(row.get("Supports", ""), "FIND")
+        supported = _structured_references(row.get("Supports", ""))
         if not supported or any(
-            reference not in finding_ids for reference in supported
+            not _id_valid(reference, "FIND") or reference not in finding_ids
+            for reference in supported
         ):
             diagnostics.append(
                 _diagnostic(
@@ -513,6 +541,22 @@ def _scope_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
     diagnostics: list[Diagnostic] = []
     requirements = _rows(document, "Product requirements")
     acceptances = _rows(document, "Acceptance criteria")
+    if not requirements:
+        diagnostics.append(
+            _diagnostic(
+                "missing-requirements",
+                "Scope requires at least one product requirement record",
+                section="Product requirements",
+            )
+        )
+    if not acceptances:
+        diagnostics.append(
+            _diagnostic(
+                "missing-acceptance-criteria",
+                "Scope requires at least one acceptance criterion record",
+                section="Acceptance criteria",
+            )
+        )
     acceptance_ids = {
         row.get("Acceptance ID", "").strip()
         for row in acceptances
@@ -568,9 +612,10 @@ def _scope_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
                         identifier=identifier,
                     )
                 )
-        mapped_acceptance = _ids(row.get("Acceptance IDs", ""), "AC")
+        mapped_acceptance = _structured_references(row.get("Acceptance IDs", ""))
         if not mapped_acceptance or any(
-            reference not in acceptance_ids for reference in mapped_acceptance
+            not _id_valid(reference, "AC") or reference not in acceptance_ids
+            for reference in mapped_acceptance
         ):
             diagnostics.append(
                 _diagnostic(
@@ -615,11 +660,14 @@ def _scope_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
     )
     for row in delta_rows:
         identifier = row.get("Canon delta ID", "").strip()
-        requirement_refs = _ids(row.get("Requirement IDs", ""), "REQ")
+        requirement_refs = _structured_references(row.get("Requirement IDs", ""))
         if (
             any(not row.get(column, "").strip() for column in required_delta_columns)
             or not requirement_refs
-            or any(reference not in requirement_ids for reference in requirement_refs)
+            or any(
+                not _id_valid(reference, "REQ") or reference not in requirement_ids
+                for reference in requirement_refs
+            )
         ):
             diagnostics.append(
                 _diagnostic(
@@ -635,6 +683,23 @@ def _scope_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
 def _design_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
     diagnostics: list[Diagnostic] = []
     trace_rows = _rows(document, "Requirement-to-design traceability")
+    seam_rows = _rows(document, "Implementation seams and dependency order")
+    if not trace_rows:
+        diagnostics.append(
+            _diagnostic(
+                "missing-design-traceability",
+                "Design requires at least one requirement-to-design traceability record",
+                section="Requirement-to-design traceability",
+            )
+        )
+    if not seam_rows:
+        diagnostics.append(
+            _diagnostic(
+                "missing-implementation-seams",
+                "Design requires at least one bounded implementation seam",
+                section="Implementation seams and dependency order",
+            )
+        )
     traced_requirements: set[str] = set()
     traced_acceptances: set[str] = set()
     traced_designs: set[str] = set()
@@ -700,10 +765,14 @@ def _design_traceability(document: LifecycleDocument) -> tuple[Diagnostic, ...]:
             )
         )
 
-    for row in _rows(document, "Implementation seams and dependency order"):
+    for row in seam_rows:
         identifier = row.get("Seam ID", "").strip()
-        verification_ids = _ids(row.get("Verification IDs", ""), "VERIFY")
-        if not _id_valid(identifier, "SEAM") or not verification_ids:
+        verification_ids = _structured_references(row.get("Verification IDs", ""))
+        if (
+            not _id_valid(identifier, "SEAM")
+            or not verification_ids
+            or any(not _id_valid(reference, "VERIFY") for reference in verification_ids)
+        ):
             diagnostics.append(
                 _diagnostic(
                     "unverified-seam",
