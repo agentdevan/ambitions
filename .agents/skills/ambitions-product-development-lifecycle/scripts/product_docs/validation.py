@@ -12,6 +12,9 @@ from .models import DocumentStatus, DocumentType, ProductDocument, ValidationRes
 
 
 _PLACEHOLDER = re.compile(r"PRODUCT-DOC-DRAFT:|\b(?:TODO|TBD)\b|\[(?:placeholder|fill in)\]", re.IGNORECASE)
+_REQUIREMENT_ID = re.compile(r"REQ-[0-9]{3}")
+_GROOMING_DOCUMENT = re.compile(r"\A#\s+(?P<heading>\S[^\r\n]*)(?:\r?\n)(?P<body>.*\S)\s*\Z", re.DOTALL)
+_GROOMING_FILES = ("plan.md", "tasks.md", "verification.md")
 
 
 def _diagnostic(code: str, message: str, *, path: Path | None = None, section: str | None = None) -> Diagnostic:
@@ -38,6 +41,46 @@ def validate_document(document: ProductDocument) -> ValidationResult:
             if _PLACEHOLDER.search(section.body):
                 diagnostics.append(_diagnostic("approved-placeholder", "Approved documents cannot contain unresolved placeholders", path=document.source_path, section=section.heading))
     return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))
+
+
+def _section_body(document: ProductDocument, heading: str) -> str:
+    return next((section.body for section in document.sections if section.heading == heading), "")
+
+
+def _validate_traceability(scope: ProductDocument, design: ProductDocument) -> list[Diagnostic]:
+    scope_requirements = set(_REQUIREMENT_ID.findall(_section_body(scope, "Requirements")))
+    design_requirements = set(_REQUIREMENT_ID.findall(_section_body(design, "Requirement traceability")))
+    return [
+        _diagnostic(
+            "missing-design-traceability",
+            f"Design requirement traceability is missing {requirement}",
+            path=design.source_path,
+            section="Requirement traceability",
+        )
+        for requirement in sorted(scope_requirements - design_requirements)
+    ]
+
+
+def _validate_grooming(directory: Path) -> list[Diagnostic]:
+    implementation = directory / "implementation"
+    if not implementation.exists():
+        return []
+
+    diagnostics: list[Diagnostic] = []
+    for filename in _GROOMING_FILES:
+        path = implementation / filename
+        if not path.is_file():
+            diagnostics.append(_diagnostic("missing-grooming-file", f"Missing implementation grooming file: {filename}", path=path))
+            continue
+        if not _GROOMING_DOCUMENT.fullmatch(path.read_text(encoding="utf-8")):
+            diagnostics.append(
+                _diagnostic(
+                    "invalid-grooming-file",
+                    f"Implementation grooming file must have a nonempty top-level heading and body: {filename}",
+                    path=path,
+                )
+            )
+    return diagnostics
 
 
 def validate_initiative(directory: Path | str) -> ValidationResult:
@@ -70,4 +113,7 @@ def validate_initiative(directory: Path | str) -> ValidationResult:
             diagnostics.append(_diagnostic("invalid-upstream", "Design must use scope.md as its upstream", path=design.source_path))
         if design.status is DocumentStatus.APPROVED and (scope is None or scope.status is not DocumentStatus.APPROVED):
             diagnostics.append(_diagnostic("scope-not-approved", "Approved Design requires approved Scope", path=design.source_path))
+    if scope is not None and design is not None:
+        diagnostics.extend(_validate_traceability(scope, design))
+    diagnostics.extend(_validate_grooming(directory))
     return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))

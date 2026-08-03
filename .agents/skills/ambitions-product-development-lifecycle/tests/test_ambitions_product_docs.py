@@ -134,6 +134,34 @@ class InstalledSkillSurfaceTests(TemporaryRepositoryTestCase):
             },
         )
 
+    def test_installed_cli_accepts_complete_grooming_documents(self) -> None:
+        with installed_cli(self.skill_root) as (cli, _):
+            for phase in ("research", "scope", "design"):
+                result, _, _ = self.invoke(cli, "new", phase, "--initiative", "example")
+                self.assertEqual(result, cli.EXIT_SUCCESS)
+                path = self.root / "docs/product-development/example" / f"{phase}.md"
+                path.write_text(
+                    path.read_text(encoding="utf-8").replace(
+                        'status = "draft"', 'status = "approved"'
+                    ),
+                    encoding="utf-8",
+                )
+
+            implementation = self.root / "docs/product-development/example/implementation"
+            implementation.mkdir()
+            for filename, heading, body in (
+                ("plan.md", "Plan", "Implementation order."),
+                ("tasks.md", "Tasks", "1. Implement the flow."),
+                ("verification.md", "Verification", "Run the focused tests."),
+            ):
+                (implementation / filename).write_text(
+                    f"# {heading}\n\n{body}\n", encoding="utf-8"
+                )
+
+            result, _, _ = self.invoke(cli, "check", "docs/product-development/example")
+
+        self.assertEqual(result, cli.EXIT_SUCCESS)
+
 
 if __name__ == "__main__":
     import unittest
