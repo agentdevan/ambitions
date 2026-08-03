@@ -12,13 +12,13 @@ document_type = "research"
 authority_class = "evidence"
 entry_point = "research"
 
-status = "draft"
+status = "sealed"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
 repository_baseline_commit = "fc8eca8d7b913a3d6cef82e33bfd3c7f419c0021"
 external_research_as_of = "2026-08-03"
-contract_hash = ""
+contract_hash = "sha256:40d8bfa07e1e374c3345b617d1370e79ea696c28befe76e7d266883ff04416e0"
 
 content_review_verdict = "unreviewed"
 content_review_revision = 0
@@ -35,7 +35,7 @@ source_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/sc
 test_owner_paths = [".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py"]
 dependency_paths = ["AGENTS.md", ".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/research.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/research-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/constants.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/models.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/toml_codec.py", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md"]
 additional_freshness_paths = []
-freshness_paths = []
+freshness_paths = [".agents/skills/ambitions-product-development-lifecycle/SKILL.md", ".agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/research.md", ".agents/skills/ambitions-product-development-lifecycle/package-manifest.json", ".agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md", ".agents/skills/ambitions-product-development-lifecycle/references/research-review-rubric.md", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/constants.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/models.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/toml_codec.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py", ".agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py", ".agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py", "AGENTS.md", "docs/canon/CONSTITUTION.md", "docs/canon/generated/CODEX_START_HERE.md", "docs/product-development/lifecycle-fixture/evidence/comparison.md"]
 supersedes = []
 
 [[evidence_files]]
@@ -240,3 +240,26 @@ Scope must not answer any real product question, activate canon, select implemen
 ## Review history
 
 - 2026-08-03: Revision 1 authored as an unsealed, unreviewed ChatGPT draft from committed repository evidence. No lifecycle review verdict was issued.
+### Seal event
+
+- Sealed at: `2026-08-03T13:06:04Z`
+- Revision: `1`
+- Contract hash: `sha256:40d8bfa07e1e374c3345b617d1370e79ea696c28befe76e7d266883ff04416e0`
+- Freshness paths:
+- .agents/skills/ambitions-product-development-lifecycle/SKILL.md
+- .agents/skills/ambitions-product-development-lifecycle/assets/templates/v1/research.md
+- .agents/skills/ambitions-product-development-lifecycle/package-manifest.json
+- .agents/skills/ambitions-product-development-lifecycle/references/producer-contract.md
+- .agents/skills/ambitions-product-development-lifecycle/references/research-review-rubric.md
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/constants.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/models.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/package_identity.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/repository.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/toml_codec.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py
+- .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/validation.py
+- .agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py
+- AGENTS.md
+- docs/canon/CONSTITUTION.md
+- docs/canon/generated/CODEX_START_HERE.md
+- docs/product-development/lifecycle-fixture/evidence/comparison.md
