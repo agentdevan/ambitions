@@ -181,6 +181,7 @@ git commit -m "refactor: simplify product document validation"
 - Delete: `.agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/transitions.py`
 - Delete: `.agents/skills/ambitions-product-development-lifecycle/package-manifest.json`
 - Replace: `.agents/skills/ambitions-product-development-lifecycle/tests/test_cli.py`
+- Modify: `.agents/skills/ambitions-product-development-lifecycle/tests/test_ambitions_product_docs.py`
 - Delete: `.agents/skills/ambitions-product-development-lifecycle/tests/test_package_identity.py`
 - Delete: `.agents/skills/ambitions-product-development-lifecycle/tests/test_transitions.py`
 - Delete: `.agents/skills/ambitions-product-development-lifecycle/tests/test_consume.py`
@@ -217,7 +218,7 @@ Expected: failures because legacy commands remain.
 
 `check` accepts one Markdown file or initiative directory. Exit 1 means validation diagnostics, 2 usage error, and 3 repository unavailable.
 
-- [ ] **Step 5: Delete legacy modules/tests, run the full suite, and commit**
+- [ ] **Step 5: Delete legacy modules/tests, update the installed-surface test, run the full suite, and commit**
 
 Run: `python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_*.py' -v`
 
