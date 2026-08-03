@@ -24,132 +24,119 @@ Idea
 ```
 
 The repository will implement this as one project-local Codex skill named
-`ambitions-product-development-lifecycle`, supported by three canonical document
-templates, four reference contracts, two deterministic Python utilities, and
-pressure-scenario validation.
+`ambitions-product-development-lifecycle`, supported by three versioned document
+templates, four reference contracts, two deterministic Python utilities, unit
+fixtures, and pressure-scenario validation.
 
-The lifecycle is a quality and reasoning system. It is not a task authorization,
-owner attestation, merge permission, or process-only repository gate. Existing
-repository law remains controlling: canon defines durable product truth, normal
-repository work remains governed by relevant source, tests, and Code Quality,
-and implementation may merge only after its actual code and evidence pass the
-applicable engineering checks.
+The lifecycle is a quality and reasoning system. It is not task authorization,
+owner attestation, merge permission, or a process-only repository gate. Canon
+remains the durable product authority. Source, tests, runtime evidence, and the
+existing Code Quality workflow remain the implementation and merge controls.
 
-## 2. Context and current repository alignment
+## 2. Repository alignment
 
-The design follows existing Ambitions conventions rather than creating a
-parallel operating model.
+The design extends current Ambitions conventions:
 
-- `AGENTS.md` routes contributors through generated canon, owning
-  specifications, source, and tests, while explicitly rejecting process-only
-  authorization ceremony.
-- `docs/canon/README.md` establishes canon as the durable product and engineering
-  truth and provides the deterministic compiler and reading order.
-- `.agents/skills/ambitions-native-visual-foundry/SKILL.md` proves that
-  project-local skills under `.agents/skills/` are an accepted repository
-  mechanism.
+- `AGENTS.md` routes work through relevant canon, source, and tests while
+  rejecting process-only authorization ceremony.
+- `docs/canon/README.md` defines canon as durable product and engineering truth.
+- `.agents/skills/ambitions-native-visual-foundry/SKILL.md` establishes
+  project-local skills under `.agents/skills/`.
 - `docs/qa/evidence/2026-07-23-vc14-native-foundry-bootstrap/skill-validation.md`
-  establishes a precedent for testing skill behavior with fresh agents before
-  and after skill installation.
+  establishes before-and-after pressure testing for repository skills.
 
-This lifecycle must cooperate with those systems:
+The resulting authority flow is:
 
-1. Product-development documents capture discovery, decisions, and provenance.
-2. Passed documents declare the canon changes required by the initiative.
-3. Durable accepted behavior is written into the appropriate canon source.
-4. Canon, source, tests, and runtime evidence control implementation and release.
-5. Historical research, scope, and design documents remain provenance; they do
-   not become a competing normative specification network.
+1. Research records evidence, uncertainty, alternatives, and recommendation.
+2. Scope records the bounded product commitment.
+3. Design resolves how the commitment becomes a native, testable system.
+4. Passed scope and design identify required canon changes.
+5. Accepted durable behavior is incorporated into owning canon sources.
+6. Canon, source, tests, and runtime evidence control implementation thereafter.
+7. Lifecycle documents remain provenance and do not override newer canon.
 
 ## 3. Goals
 
 The system must:
 
 1. Produce consistently structured research, scope, and design documents.
-2. Prevent Codex from skipping directly from an idea into implementation for a
-   material product or architecture change.
-3. Separate evidence gathering from commitment and separate commitment from
-   implementation design.
-4. Make review outcomes binary and actionable.
-5. Preserve traceability from research findings through requirements, design
-   decisions, implementation, and verification.
-6. Detect when an approved downstream document depends on an outdated upstream
-   revision.
-7. Keep the skill concise by loading only the template and review rubric relevant
-   to the active phase.
-8. Support Ambitions as a native, local-first, privacy-preserving iPhone product,
-   with accessibility, recovery, data integrity, and Apple-platform behavior
-   treated as first-class concerns.
-9. Give implementation grooming a sufficiently complete design so that Codex
-   does not invent unresolved product behavior while coding.
-10. Apply only where the expected quality benefit exceeds the process cost.
+2. Prevent material ideas from becoming code before evidence, commitment, and
+   design decisions are resolved.
+3. Separate research from scope and scope from implementation design.
+4. Make formal review outcomes binary and actionable.
+5. Preserve traceability from findings through requirements, design, and proof.
+6. Detect downstream documents bound to obsolete upstream meaning.
+7. Keep the skill concise through progressive loading of templates and rubrics.
+8. Embed native Apple behavior, local-first architecture, privacy,
+   accessibility, data integrity, interruption, recovery, and performance in
+   the applicable phase rather than deferring them to final testing.
+9. Give implementation grooming enough resolved detail to prevent invention
+   during coding.
+10. Avoid lifecycle overhead when existing authority already resolves the work.
 
 ## 4. Non-goals
 
 The system will not:
 
-- create a new source of durable product truth beside canon;
-- require a research, scope, and design packet for typo fixes, mechanical
-  maintenance, contained bug fixes with already-canonical expected behavior, or
-  routine dependency updates;
+- create a competing source of product truth beside canon;
+- require all three documents for typo fixes, routine maintenance, mechanical
+  refactors, or contained defects whose expected behavior is already canonical;
 - replace issue tracking, implementation plans, pull requests, code review, or
   test evidence;
 - use document status as merge authorization;
-- permit a passed document with unresolved placeholders or blocking findings;
-- silently change an approved upstream decision while revising a downstream
-  document;
-- force visual mockups when the initiative has no material visual dimension;
-- treat screenshots, Figma, fixtures, or preview state as proof of runtime
-  capability;
-- duplicate the instructions of existing implementation, debugging, testing,
-  accessibility, security, or native visual skills.
+- allow a passed document with blockers, contradictory decisions, or unresolved
+  behavior that would force implementation invention;
+- silently alter approved upstream decisions from a downstream phase;
+- treat Figma, screenshots, fixtures, or previews as proof of runtime behavior;
+- duplicate existing implementation, debugging, testing, security,
+  accessibility, or native-visual skill instructions;
+- migrate historical documents solely to make them match the new format.
 
 ## 5. Applicability
 
-### 5.1 Required lifecycle
+### 5.1 Complete lifecycle required
 
-Use the complete lifecycle for any change that materially affects one or more of:
+Use research, scope, and design for material changes to one or more of:
 
-- product behavior or user outcomes;
-- canonical objects, ownership, identity, lifecycle, or consequence semantics;
+- product behavior or user outcome;
+- canonical objects, identity, ownership, lifecycle, or consequence semantics;
 - information architecture, navigation, primary journeys, or presentation;
 - architecture, persistence, migration, concurrency, replay, recovery, or sync;
 - private-data boundaries or off-device egress;
 - accessibility semantics or equivalent interaction;
 - performance budgets or operational behavior;
 - a new system, surface, major capability, or externally observable contract;
-- multiple domains whose interaction requires explicit reconciliation.
+- multiple domains requiring explicit reconciliation.
 
-### 5.2 Reduced lifecycle
+### 5.2 Reduced entry point
 
-A contained change may begin at scope or design only when the earlier answers are
-already established by current canon and source. The document must cite the
-specific upstream authority and explain why new research is unnecessary.
+Work may begin at scope or design when current canon and source already establish
+all earlier answers. The new document must cite the exact authority and explain
+why new research or scope is unnecessary.
 
-Examples include:
+Examples:
 
 - implementing an already-normative requirement with no unresolved product
   choice;
-- redesigning a bounded viewport where the product behavior is fully specified;
-- repairing an architecture seam whose correct ownership and invariants are
-  already canonical.
+- designing a bounded viewport whose behavior and acceptance conditions are
+  fully specified;
+- repairing an architecture seam whose ownership and invariants are canonical.
 
-The validator records the approved entry point. It does not fabricate missing
-upstream documents.
+The reduced entry point is explicit metadata. The validator does not fabricate
+missing documents.
 
-### 5.3 Lifecycle not required
+### 5.3 Complete lifecycle normally unnecessary
 
-The complete lifecycle is normally unnecessary for:
+The full chain is normally unnecessary for:
 
-- spelling, copy, or comment corrections that do not change meaning;
+- spelling, comment, or non-semantic copy corrections;
 - mechanical refactors with no contract change;
-- dependency or tooling maintenance with bounded expected behavior;
-- test-only additions for existing behavior;
-- contained defects where current canon, source, and tests already establish the
-  expected result.
+- bounded dependency and tooling maintenance;
+- tests added for existing behavior;
+- contained defects where canon, source, and tests establish the expected result.
 
-If investigation reveals a product decision rather than a defect, the work must
-re-enter the appropriate lifecycle phase.
+If investigation exposes a product choice rather than a defect, work re-enters
+the earliest unresolved lifecycle phase.
 
 ## 6. Repository architecture
 
@@ -176,10 +163,9 @@ docs/product-development/
     └── design.md
 ```
 
-The templates are assets because they are copied into initiative directories.
-The contracts and rubrics are references because agents read them when making or
-reviewing documents. The scripts enforce mechanical invariants that should not
-be left to prose judgment.
+Templates are copied assets. Lifecycle and review rules are references loaded
+only when relevant. Scripts enforce mechanical rules that should not depend on
+agent judgment.
 
 ## 7. Skill contract
 
@@ -192,37 +178,35 @@ description: Use when an Ambitions idea, feature, product behavior, architecture
 ---
 ```
 
-The description states only the triggering conditions. It does not summarize the
-workflow, because agents must load the complete skill rather than treating its
-description as sufficient instructions.
+The description states triggering conditions only, so agents must read the
+complete skill rather than treating frontmatter as a workflow shortcut.
 
-### 7.2 Skill responsibilities
+### 7.2 Responsibilities
 
 The skill must:
 
-1. Inspect current repository state, relevant canon, source, tests, and existing
-   initiative documents before drafting.
-2. Classify the correct lifecycle entry point.
-3. Resolve the initiative ID and stable slug.
-4. Use `new_document.py` to instantiate the exact phase template.
-5. Preserve required headings and stable identifier conventions.
-6. Distinguish source-backed fact, observed repository fact, inference,
+1. Inspect current repository state, relevant canon, source, tests, evidence,
+   and existing initiative documents.
+2. Select the correct lifecycle entry point.
+3. Resolve a stable initiative ID and slug.
+4. Instantiate the exact phase template through `new_document.py`.
+5. Preserve required headings and identifier conventions.
+6. Distinguish sourced fact, observed repository fact, user intent, inference,
    recommendation, assumption, and unresolved unknown.
-7. Load the review rubric for the active phase.
-8. Return exactly `PASS` or `NEEDS REVISION` for formal phase reviews.
-9. Make blocking findings concrete and reference the affected section or ID.
-10. Refuse phase advancement while blocking findings remain.
-11. Reopen an upstream phase when a downstream review discovers an upstream
-    error or missing decision.
-12. Run the validator before claiming a document is passed.
-13. Mark downstream documents stale after a material upstream revision.
-14. End a passed design phase by handing off to implementation grooming rather
-    than embedding a full task plan inside the design document.
-15. Preserve the distinction between document approval and code readiness.
+7. Load the phase-specific review rubric.
+8. Return exactly `PASS` or `NEEDS REVISION` for a formal phase review.
+9. Reference each blocker to an affected section or stable ID.
+10. Prevent phase advancement while blockers remain.
+11. Reopen the earliest upstream phase responsible for a downstream defect.
+12. Run validation before claiming a document passed.
+13. Reconcile downstream status after an accepted upstream semantic revision.
+14. Hand a passed design to implementation grooming rather than embedding a full
+    task plan in the design document.
+15. Preserve the distinction between document quality and code readiness.
 
-### 7.3 Required output for formal reviews
+### 7.3 Formal review output
 
-Every formal phase review must use these headings in this order:
+Formal reviews use these headings in this order:
 
 ```text
 Verdict: PASS | NEEDS REVISION
@@ -235,14 +219,14 @@ Required revisions
 Next permitted lifecycle phase
 ```
 
-There is no conditional pass. A document with a blocker receives
-`NEEDS REVISION`. Non-blocking improvements may remain after `PASS` only when
-omitting them does not create ambiguity, untested behavior, data risk,
-accessibility failure, or implementation invention.
+There is no conditional pass. A blocker produces `NEEDS REVISION`.
+Non-blocking improvements may remain after `PASS` only when omission creates no
+ambiguity, untested obligation, data risk, accessibility failure, or
+implementation invention.
 
 ## 8. Initiative document model
 
-### 8.1 Stable initiative directory
+### 8.1 Stable directory and files
 
 Each initiative uses one stable directory:
 
@@ -250,22 +234,16 @@ Each initiative uses one stable directory:
 docs/product-development/<initiative-slug>/
 ```
 
-The directory is not renamed when a document is revised. Git history preserves
-past revisions. Separate `-r01`, `-r02`, and similar document copies are not
-created for normal revision cycles.
+The directory and phase filenames do not change during revisions. Git preserves
+history; routine `-r01`, `-r02`, and similar document copies are prohibited.
 
 ### 8.2 Stable identifiers
 
-An initiative receives an ID in this form:
+Initiative IDs use the creation month and remain unchanged if work continues in
+later months:
 
 ```text
 PD-YYYY-MM-<UPPERCASE-SLUG>
-```
-
-Example:
-
-```text
-PD-2026-08-ADAPTIVE-START-HERE
 ```
 
 Document IDs append the phase:
@@ -276,21 +254,19 @@ PD-2026-08-ADAPTIVE-START-HERE-SCOPE
 PD-2026-08-ADAPTIVE-START-HERE-DESIGN
 ```
 
-Content identifiers are local to the initiative but stable across revisions:
+Content IDs are stable within the initiative:
 
-- research findings: `FIND-001`;
+- findings: `FIND-001`;
 - risks: `RISK-001`;
-- product requirements: `REQ-001`;
+- requirements: `REQ-001`;
 - acceptance criteria: `AC-001`;
 - design decisions: `DESIGN-001`;
 - planned verification: `VERIFY-001`;
 - open decisions: `OPEN-001`.
 
-Removed identifiers are retired, not reassigned to different concepts.
+Removed IDs are retired and never reassigned to a different concept.
 
-### 8.3 Shared frontmatter
-
-All three documents begin with TOML frontmatter:
+### 8.3 Shared TOML frontmatter
 
 ```toml
 +++
@@ -314,7 +290,7 @@ supersedes = []
 +++
 ```
 
-Allowed document statuses are:
+Allowed statuses:
 
 - `draft`;
 - `in-review`;
@@ -323,29 +299,40 @@ Allowed document statuses are:
 - `stale`;
 - `superseded`.
 
-Allowed review verdicts are:
+Allowed verdicts:
 
 - `unreviewed`;
 - `needs-revision`;
 - `pass`.
 
 `status = "passed"` requires `review_verdict = "pass"`, zero blocking findings,
-a successful validator run, and no stale upstream input.
+a successful validation result, and current upstream inputs.
 
-### 8.4 Upstream binding
+### 8.4 Upstream binding and semantic staleness
 
-Scope binds to the exact passed research revision and content hash. Design binds
-to the exact passed scope revision and hash. A reduced lifecycle binds to the
-specific canon or design authority that justifies skipping an earlier document.
+Scope binds to the exact passed research revision and semantic hash. Design
+binds to the exact passed scope revision and semantic hash. A reduced entry point
+binds to exact canon or approved design authority.
 
-A material change to passed research makes dependent scope and design stale. A
-material change to passed scope makes dependent design stale. Stale documents
-may be read as history but cannot authorize phase advancement.
+A material research change makes dependent scope and design effectively stale.
+A material scope change makes dependent design effectively stale. Material
+changes include findings, recommendations, requirements, acceptance criteria,
+boundaries, dependencies, risks, design decisions, or verification obligations.
+Formatting-only and spelling-only changes do not propagate staleness when the
+normalized semantic hash remains unchanged.
 
-A material change is one that affects a finding, recommendation, requirement,
-acceptance criterion, boundary, dependency, risk posture, design decision, or
-verification obligation. Formatting-only and spelling-only edits do not require
-staleness propagation when the normalized semantic hash remains unchanged.
+Staleness handling must be safe and explicit:
+
+1. `validate_document.py` is read-only by default.
+2. When an upstream semantic hash changes, validation reports the dependent
+   document's effective status as stale and exits nonzero.
+3. CI never silently edits initiative files.
+4. After the upstream revision is intentionally accepted, the skill explicitly
+   changes affected downstream frontmatter to `status = "stale"` in a separate,
+   reviewable edit.
+5. A stale document remains historical evidence but cannot advance the phase.
+6. Revalidation clears the effective stale error only after the downstream
+   document is reconciled, rebound to the new input, reviewed, and passed again.
 
 ## 9. Research document contract
 
@@ -354,7 +341,7 @@ The research document answers:
 > What is true, what remains uncertain, what constraints exist, and which
 > direction is best supported by evidence?
 
-It does not commit implementation scope.
+It does not commit detailed implementation scope.
 
 ### 9.1 Required sections
 
@@ -383,12 +370,11 @@ It does not commit implementation scope.
 19. Handoff to scope
 20. Review history
 
-Sections remain present even when not applicable; they explicitly state why the
-area is not material rather than disappearing.
+A non-applicable section remains present and states why it is not material.
 
 ### 9.2 Evidence classification
 
-Every material statement must be classifiable as one of:
+Material statements must be classifiable as:
 
 - externally sourced fact;
 - observed current-repository fact;
@@ -399,24 +385,24 @@ Every material statement must be classifiable as one of:
 - unresolved unknown.
 
 External claims require sources. Repository claims cite paths, symbols, tests,
-commands, or evidence artifacts. Inference must name the evidence it depends on.
+commands, or evidence artifacts. Inferences name their supporting evidence.
 
 ### 9.3 Research pass criteria
 
 Research passes only when:
 
-- all material claims are sourced or explicitly classified;
+- material claims are sourced or explicitly classified;
 - current repo and canon reality were inspected;
 - research questions are answered or carried forward as explicit unknowns;
 - meaningful alternatives were compared;
-- the recommended direction follows from the findings;
+- recommendation follows from findings;
 - rejected directions include reasons;
-- privacy, local-first behavior, accessibility, Apple-platform behavior,
-  failure, and recovery are considered where relevant;
-- known contradictions are reconciled or escalated;
-- the document does not prematurely lock detailed implementation scope;
-- no unresolved unknown prevents a bounded scope decision;
-- the source ledger is complete enough to reproduce the analysis.
+- privacy, local-first behavior, accessibility, Apple behavior, failure, and
+  recovery are considered where relevant;
+- contradictions are reconciled or escalated;
+- detailed implementation scope is not prematurely locked;
+- no unknown prevents a bounded scope decision;
+- the source ledger is sufficient to reproduce material analysis.
 
 ## 10. Scope document contract
 
@@ -425,9 +411,9 @@ The scope document answers:
 > What exact product outcome are we committing to, and what are we explicitly
 > not building?
 
-It consumes passed research or cites existing authority for a reduced entry
-point. It defines observable product obligations without unnecessarily choosing
-implementation mechanics.
+It consumes passed research or cites exact authority for a reduced entry point.
+It defines observable obligations without unnecessarily choosing implementation
+mechanics.
 
 ### 10.1 Required sections
 
@@ -464,30 +450,29 @@ Each `REQ-*` must:
 - identify its owner domain or intended canon owner;
 - avoid combining independent requirements;
 - be testable or inspectable;
-- reference at least one supporting `FIND-*` or established authority;
+- reference supporting findings or established authority;
 - map to one or more `AC-*` entries.
 
-Each `AC-*` must define the evidence required to determine success. It must not
-use subjective closure language such as “looks good,” “works correctly,” or
-“feels native” without measurable or inspectable conditions.
+Each `AC-*` defines inspectable evidence. Subjective closure such as “looks
+good,” “works correctly,” or “feels native” is insufficient without measurable
+or observable conditions.
 
 ### 10.3 Scope pass criteria
 
 Scope passes only when:
 
-- the outcome and release boundary are bounded;
+- outcome and release boundary are bounded;
 - in-scope and out-of-scope behavior are unambiguous;
-- every requirement is supported by research or existing authority;
+- requirements are supported by research or authority;
 - every requirement maps to acceptance criteria;
 - every acceptance criterion is verifiable;
-- privacy, local-first, accessibility, offline, interruption, failure, recovery,
-  migration, and performance obligations are explicit where relevant;
-- dependencies and product risks are identified;
-- open decisions do not require Codex to invent behavior during design or
-  implementation;
-- required canon changes and affected owner domains are named;
-- the scope is small enough to become one coherent design and implementation
-  program or is explicitly decomposed before passing.
+- privacy, local-first, accessibility, offline, interruption, failure,
+  recovery, migration, and performance obligations are explicit where relevant;
+- dependencies and risks are identified;
+- open decisions do not require invention during design or implementation;
+- canon targets and owner domains are named;
+- scope is one coherent design and implementation program or is decomposed
+  before passing.
 
 ## 11. Design document contract
 
@@ -496,9 +481,9 @@ The design document answers:
 > How will the passed scope become a coherent, native, testable Ambitions
 > implementation?
 
-The design combines product interaction, state, architecture, privacy,
-accessibility, data integrity, and verification. It is not merely a visual
-mockup document or a code-level task list.
+It combines product interaction, state, architecture, privacy, accessibility,
+data integrity, and verification. It is neither a visual-only document nor a
+code-level task plan.
 
 ### 11.1 Required sections
 
@@ -542,25 +527,24 @@ Each `DESIGN-*` must:
 - resolve one material product or technical decision;
 - reference the `REQ-*` and `AC-*` entries it satisfies;
 - identify the owning layer or module;
-- state alternatives rejected when the choice is non-obvious;
-- name failure and recovery behavior when the decision can fail;
-- identify the intended verification evidence.
+- state rejected alternatives when the decision is non-obvious;
+- define failure and recovery behavior when applicable;
+- identify intended verification evidence.
 
-Design may include diagrams, screen references, native frames, prototypes, or
-pseudocode when useful. Those artifacts support the written contract; they do
-not replace it.
+Diagrams, native frames, prototypes, and pseudocode may support the contract but
+never replace it.
 
 ### 11.3 Traceability matrix
 
-The design includes a complete matrix with at least these columns:
+The design contains a complete matrix:
 
 | Research finding or authority | Scope requirement | Acceptance criterion | Design decision | Planned verification |
 |---|---|---|---|---|
 | `FIND-003` | `REQ-004` | `AC-007` | `DESIGN-011` | `VERIFY-009` |
 
-Every requirement and acceptance criterion must appear in the matrix. A design
-cannot pass with orphan requirements, unverified acceptance criteria, or design
-decisions that have no scope basis.
+Every requirement and acceptance criterion appears. Orphan requirements,
+unverified acceptance criteria, and design decisions with no scope basis block
+passage.
 
 ### 11.4 Design pass criteria
 
@@ -569,95 +553,86 @@ Design passes only when:
 - every passed scope requirement is covered;
 - every acceptance criterion has planned verification;
 - object, state, command, data, source, and module ownership are explicit;
-- native presentation, navigation, dismissal, focus, restoration, and keyboard
-  behavior are resolved where applicable;
+- native presentation, navigation, dismissal, focus, restoration, keyboard, and
+  safe-area behavior are resolved where applicable;
 - loading, empty, populated, degraded, error, interrupted, recovery, completed,
   archived, and destructive states are addressed where applicable;
-- local-first, privacy, accessibility, migration, concurrency, replay, rollback,
-  and data-integrity behavior are resolved where relevant;
-- preview or fixture evidence is not misrepresented as runtime proof;
+- local-first, privacy, accessibility, migration, concurrency, replay,
+  rollback, and data-integrity behavior are resolved where relevant;
+- preview or fixture evidence is not represented as runtime proof;
 - implementation seams are narrow and independently testable;
 - file impact and intended legacy deletion are identified;
-- no `TODO`, `TBD`, contradictory decision, or unresolved product behavior
-  remains;
-- a Codex implementation agent can groom the work without inventing behavior.
+- no placeholder, contradiction, or unresolved product behavior remains;
+- implementation can be groomed without inventing behavior.
 
 ## 12. Review and revision behavior
 
-### 12.1 Review independence
+### 12.1 Independent review
 
-A formal review evaluates the document against the phase contract and the
-current upstream authority. It does not merely proofread prose. The reviewer
-must attempt to falsify completeness, consistency, traceability, feasibility,
-privacy, accessibility, and verification claims.
+Formal review attempts to falsify completeness, consistency, traceability,
+feasibility, privacy, accessibility, and verification claims. It is not merely a
+prose edit.
 
 ### 12.2 Revision rules
 
-When revising:
+A semantic revision must:
 
 - preserve stable IDs for unchanged concepts;
-- increment `revision` for semantic changes;
+- increment `revision`;
 - update `updated_at`;
-- record the review verdict and resolved blockers in Review history;
-- do not silently alter upstream decisions;
-- explicitly reopen the upstream phase when a downstream blocker originates
-  there;
-- rerun validation after every semantic revision;
-- recalculate semantic hashes and propagate staleness.
+- record verdict and resolved blockers in Review history;
+- avoid silently changing upstream decisions;
+- reopen the responsible upstream phase when necessary;
+- recalculate the semantic hash;
+- reconcile dependent status;
+- pass validation before a new pass claim.
 
 ### 12.3 Phase reversal
 
-The lifecycle is intentionally reversible:
+The lifecycle is reversible:
 
 ```text
 Research review may reopen research.
 Scope work or review may reopen research.
 Design work or review may reopen scope or research.
 Implementation grooming may reopen design, scope, or research.
-Implementation or testing may expose a design, scope, or research defect.
+Implementation or testing may expose an earlier defect.
 ```
 
-The earliest defective phase is corrected first. Downstream work is then
-reconciled against the new passed revision.
+Correct the earliest defective phase first, then reconcile downstream work.
 
 ## 13. Deterministic tooling
 
-Both utilities use Python 3.12 standard library only unless the current
-repository establishes a different supported baseline at implementation time.
+Utilities use the Python 3.12 standard library unless the repository establishes
+a different supported baseline during implementation.
 
 ### 13.1 `new_document.py`
 
-Proposed interface:
+Example:
 
 ```sh
 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/new_document.py \
   --initiative "Adaptive Start Here" \
   --phase research
-
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/new_document.py \
-  --initiative-id PD-2026-08-ADAPTIVE-START-HERE \
-  --phase scope
 ```
 
 Required behavior:
 
-- normalize and validate the initiative slug;
-- generate stable initiative and document IDs;
+- normalize and validate slug and IDs;
 - create the initiative directory when absent;
-- copy the exact template for the requested phase;
-- populate dates, phase, entry point, and upstream references;
-- calculate and store upstream hashes;
-- refuse to overwrite an existing document;
-- refuse scope creation when required research is absent, stale, or not passed;
-- refuse design creation when required scope is absent, stale, or not passed;
-- support an explicit reduced lifecycle only when a valid authority path and
-  rationale are supplied;
+- copy the exact phase template;
+- populate dates, entry point, and upstream references;
+- calculate upstream semantic hashes;
+- refuse overwrite;
+- refuse scope when required research is missing, stale, or not passed;
+- refuse design when required scope is missing, stale, or not passed;
+- allow reduced entry only with a valid authority path and rationale;
 - print the created path and next required action;
-- make no unrelated repository edits.
+- make no unrelated edits.
 
 ### 13.2 `validate_document.py`
 
-Proposed interfaces:
+Examples:
 
 ```sh
 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_document.py \
@@ -667,296 +642,263 @@ python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_
   --initiative docs/product-development/adaptive-start-here
 
 python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_document.py \
-  --all
+  --all --format json
 ```
 
 Required validation:
 
-- parse and validate TOML frontmatter;
-- require correct document and initiative IDs;
-- require the exact mandatory heading set and order;
-- reject unknown status or verdict values;
+- parse TOML frontmatter;
+- validate document and initiative IDs;
+- require mandatory heading set and order;
 - enforce valid status and verdict combinations;
 - reject duplicate active content IDs;
-- detect missing identifier sequences only when they indicate malformed or
-  reassigned IDs; retired IDs may create intentional gaps;
-- validate upstream paths, revisions, hashes, and passed status;
-- detect stale downstream documents;
-- require research source ledger entries for material findings;
+- allow intentional gaps for retired IDs but reject malformed or reassigned IDs;
+- validate upstream paths, revisions, hashes, and pass state;
+- detect effective staleness without mutating files;
+- require source-ledger support for material findings;
 - require requirement-to-finding or authority linkage;
 - require requirement-to-acceptance linkage;
 - require complete design traceability;
-- reject placeholders such as `TODO`, `TBD`, `FIXME`, fill-in markers, and empty
-  required sections in passed documents;
-- reject `status = "passed"` with blocking findings or open questions that would
-  require implementation invention;
-- report errors with file, section, identifier, and remediation;
+- reject placeholders, fill-in markers, and empty required sections in passed
+  documents;
+- reject passed status with blockers or open decisions that require invention;
+- report file, section, identifier, and remediation;
 - exit nonzero on failure;
-- provide a stable machine-readable JSON mode for CI and future tooling.
+- provide stable JSON diagnostics for CI and future tools.
 
 ### 13.3 Semantic hash
 
-The implementation must define a normalized semantic hash that excludes fields
-whose change does not alter meaning, such as `updated_at`, formatting-only
-whitespace, and review-history append-only metadata. It includes findings,
-requirements, acceptance criteria, boundaries, risks, decisions, traceability,
-and other semantic body content.
+The semantic hash excludes non-semantic fields such as `updated_at`,
+formatting-only whitespace, and append-only review-history metadata. It includes
+findings, recommendations, requirements, acceptance criteria, boundaries,
+risks, decisions, traceability, and other semantic body content.
 
-The exact normalization algorithm must be documented and unit-tested. A raw
-file hash alone is insufficient because harmless formatting edits would
-otherwise invalidate every downstream phase.
+The normalization algorithm must be documented and unit-tested. A raw file hash
+is insufficient because harmless formatting changes would invalidate every
+downstream phase.
 
 ## 14. Code Quality integration
 
-A lightweight validation lane may be added to the existing Code Quality workflow
-when any of these paths change:
+After the standalone system is validated, an affected-path lane may be added to
+the existing Code Quality workflow for:
 
 ```text
 .agents/skills/ambitions-product-development-lifecycle/**
 docs/product-development/**
 ```
 
-The lane runs the validator against affected initiative documents and the skill
-fixture corpus. It must not add a process-only branch protection check beyond
-the existing Code Quality workflow.
-
-The workflow validates document consistency; it does not determine whether a
-pull request is authorized to merge or whether an initiative is strategically
-approved.
+The lane validates document consistency and skill fixtures. It does not create a
+new branch-protection check, authorize merging, or decide strategic approval.
+CI validation is read-only.
 
 ## 15. Canon handoff
 
-Passed scope and design documents include `canon_targets` naming the owning
-canon files or owner domains expected to change. During grooming or
+Passed scope and design documents include `canon_targets`. During grooming or
 implementation:
 
-1. Review the canon targets against current generated routing.
-2. Amend the owning normative source when the initiative changes durable product
-   truth.
-3. Add or update requirement IDs and verification links according to current
-   canon conventions.
+1. Resolve each target against current generated canon routing.
+2. Amend the owning normative source when durable product truth changes.
+3. Add or update requirement and verification IDs under current canon rules.
 4. Run `python3 scripts/ambitions-canon.py check`.
-5. Keep the product-development documents as provenance.
+5. Retain lifecycle documents as provenance.
 
-After the durable truth is incorporated, canon controls future work. A conflict
-between an old initiative document and current canon is resolved in favor of
-current canon unless a new lifecycle explicitly proposes changing it.
+Current canon wins over an older lifecycle document unless a new lifecycle
+explicitly proposes changing canon.
 
 ## 16. Implementation grooming handoff
 
-A passed design does not contain a complete implementation plan. Its grooming
-handoff provides the bounded inputs needed to create one:
+A passed design provides bounded planning inputs rather than a task list:
 
-- passed document paths, revisions, and hashes;
-- canon amendments required before or with implementation;
-- implementation seams and dependency ordering;
+- passed paths, revisions, and hashes;
+- required canon amendments;
+- implementation seams and dependency order;
 - affected modules and expected file classes;
 - required tests and proof lanes;
-- migration or compatibility requirements;
+- migration and compatibility obligations;
 - legacy deletion obligations;
-- known risks and stop conditions;
-- requirement, acceptance, decision, and verification IDs.
+- risks and stop conditions;
+- requirement, acceptance, design, and verification IDs.
 
-The implementation-planning workflow converts those inputs into executable
-work items. Grooming must return to an earlier lifecycle phase when the design
-cannot be decomposed without inventing behavior.
+If these cannot be converted into executable work without invention, grooming
+reopens the responsible lifecycle phase.
 
-## 17. Testing strategy for the skill
+## 17. Skill testing strategy
 
-The skill itself is developed using documentation TDD: observe baseline agent
-behavior without the skill, install the minimum skill and assets, rerun the same
-pressure scenarios, then refine only for observed gaps.
+The skill is developed using documentation TDD: run fresh agents without the
+skill, record failures, add the minimum instruction or contract needed, rerun the
+same scenarios, and refine only for observed loopholes.
 
-### 17.1 Baseline pressure scenarios
+### 17.1 Pressure scenarios
 
-At minimum, test fresh agents against these cases:
+At minimum:
 
-1. **Implementation pressure** — The user demands immediate SwiftUI coding from
-   a vague feature idea and says documentation can be written later.
-2. **Research-to-scope leakage** — The research evidence is incomplete, but the
-   agent is encouraged to invent a bounded scope from plausible assumptions.
-3. **Conditional-pass pressure** — A scope document has one material unresolved
-   privacy question and many otherwise strong sections.
-4. **Stale-upstream pressure** — Passed research changes after scope and design
-   have already passed.
-5. **Visual-proof inflation** — A preview screenshot exists, but runtime state,
-   persistence, navigation, and recovery are unverified.
-6. **Over-application pressure** — A spelling correction is presented, and the
-   agent is asked to create the full three-document lifecycle.
-7. **Canon conflict** — A historical passed design conflicts with current canon.
-8. **Architecture invention** — The scope passes, but the design omits object
-   ownership and concurrency behavior.
-9. **Traceability omission** — A polished design covers the user journey but
-   leaves two acceptance criteria without planned verification.
-10. **Process bureaucracy** — An agent tries to turn document pass status into a
-    required merge authorization receipt.
+1. Immediate SwiftUI implementation requested from a vague idea.
+2. Incomplete research encouraged to produce plausible scope.
+3. One unresolved privacy blocker presented as a candidate conditional pass.
+4. Passed research changes after scope and design pass.
+5. Preview screenshot presented as runtime proof.
+6. A spelling correction presented as requiring the full lifecycle.
+7. Historical passed design conflicts with current canon.
+8. Design omits ownership and concurrency behavior.
+9. Acceptance criteria lack planned verification.
+10. Document pass status is treated as a merge authorization receipt.
 
 ### 17.2 Expected post-skill behavior
 
-The validated skill must cause fresh agents to:
+Fresh agents must:
 
-- choose the correct lifecycle entry point;
-- resist implementation before required upstream pass;
+- choose the correct entry point;
+- resist premature implementation;
 - distinguish evidence, inference, and assumption;
-- return binary review verdicts;
-- mark downstream documents stale;
+- issue binary verdicts;
+- detect and explicitly reconcile stale dependencies;
 - treat canon as current durable authority;
 - reject preview-only runtime claims;
-- avoid full lifecycle overhead for trivial work;
+- avoid over-applying the lifecycle;
 - surface ownership, privacy, accessibility, recovery, and verification gaps;
-- preserve document pass as a quality state rather than merge authorization.
+- keep document quality separate from merge authorization.
 
 ### 17.3 Script tests
 
-Add unit tests for:
+Unit tests cover:
 
 - ID and slug generation;
-- template instantiation;
-- overwrite refusal;
-- upstream pass requirements;
-- reduced-entry authority validation;
-- frontmatter parsing;
-- heading validation;
-- status transitions;
+- template instantiation and overwrite refusal;
+- upstream pass requirements and reduced-entry authority;
+- frontmatter and heading validation;
+- status and verdict combinations;
 - stable identifier uniqueness;
-- semantic hashing;
-- stale propagation;
+- semantic hashing and effective stale detection;
 - source-ledger enforcement;
 - requirement and acceptance coverage;
-- design traceability completeness;
-- placeholder rejection;
-- JSON diagnostic output;
-- expected nonzero exit behavior.
+- design traceability;
+- placeholder and empty-section rejection;
+- JSON diagnostics and nonzero exit behavior;
+- path traversal rejection;
+- proof that validation does not mutate files.
 
-Use temporary directories and fixture documents. Tests must not mutate real
-initiative documents.
+Tests use temporary directories and fixtures only.
 
-## 18. Rollout
+## 18. Delivery boundary and adoption sequence
 
-### Phase 1 — Skill and contract implementation
+This design is intentionally bounded so one implementation plan can complete the
+skill system without also delivering an unrelated Ambitions product feature.
 
-Create the skill, assets, references, scripts, and test fixtures. Do not migrate
-historical documents.
+### 18.1 Initial implementation — in scope
 
-### Phase 2 — Pressure validation
+1. Create the skill, templates, rubrics, lifecycle contract, scripts, and tests.
+2. Run and commit baseline and post-skill pressure-scenario evidence.
+3. Validate a synthetic or fixture initiative through research, scope, design,
+   review, semantic staleness, and grooming handoff.
+4. Add concise repository routing for material initiatives.
+5. Leave historical documents unchanged.
 
-Run documented before-and-after agent scenarios. Record exact baseline failures,
-post-skill behavior, remaining loopholes, and any refinements.
+### 18.2 Follow-up adoption — not required for initial completion
 
-### Phase 3 — Pilot initiative
+1. Use the lifecycle for the first real bounded Ambitions initiative.
+2. Evaluate whether template or rubric refinement is needed.
+3. Add the affected-path Code Quality lane only after standalone behavior is
+   stable.
+4. Measure whether the lifecycle reduces invention, revision churn, and proof
+   gaps without adding disproportionate process cost.
 
-Use one new, bounded Ambitions initiative to exercise all three document phases,
-review loops, staleness handling, grooming handoff, canon update, implementation,
-testing, and merge.
-
-### Phase 4 — Code Quality integration
-
-Add affected-path validation after the pilot demonstrates stable templates and
-script behavior. Keep the check inside the existing Code Quality workflow.
-
-### Phase 5 — Adopt as default
-
-Update concise contributor routing so material initiatives load the lifecycle
-skill. Do not rewrite historical evidence or force old projects into the new
-shape unless they are actively reopened.
+A real feature implementation and merge are evidence of adoption, not blockers
+to completing the lifecycle skill itself.
 
 ## 19. Failure handling
 
-- **Missing upstream document:** stop phase creation and name the required prior
-  phase or explicit reduced-entry authority.
-- **Invalid frontmatter:** report the exact field and accepted values; do not
-  rewrite silently during validation.
-- **Stale dependency:** mark the dependent document stale and identify the first
-  changed upstream revision.
-- **Conflicting authority:** stop and resolve the conflict in the earliest owning
-  document or canon source.
-- **Unreachable source:** classify the claim as unverified; do not cite an
-  inaccessible source as established evidence.
-- **Oversized initiative:** decompose during research or scope before allowing
-  scope or design to pass.
-- **Validator defect:** preserve the document, fail safely, and repair the
-  validator with tests before trusting its result.
-- **Skill ambiguity:** add a pressure scenario reproducing the failure before
-  changing the skill.
+- **Missing upstream document:** stop and name the required phase or reduced-entry
+  authority.
+- **Invalid frontmatter:** identify the field and accepted values; do not rewrite
+  silently during validation.
+- **Stale dependency:** report effective stale status and the changed input;
+  apply explicit frontmatter updates only through a separate edit.
+- **Conflicting authority:** resolve the conflict in the earliest owning phase or
+  canon source.
+- **Unreachable source:** classify the claim as unverified.
+- **Oversized initiative:** decompose during research or scope before pass.
+- **Validator defect:** fail safely, preserve documents, and repair with tests.
+- **Skill ambiguity:** reproduce it with a pressure scenario before editing the
+  skill.
 
 ## 20. Security and privacy
 
-The templates must prevent private user data, credentials, production secrets,
-or unnecessary personal records from being copied into research or design
-artifacts. Research uses public sources, repository evidence, or redacted
-user-provided context unless the initiative specifically requires a protected
-internal source.
+Templates must prevent credentials, production secrets, unnecessary personal
+records, or private-life graph content from being copied into artifacts.
+Research uses public sources, repository evidence, or redacted user context
+unless a protected internal source is explicitly required.
 
-The skill must not instruct agents to send Ambitions private-life graph content
-to external research services. Any proposed external processing is an explicit
-scope and design decision subject to current privacy canon.
+The skill never directs private Ambitions data to external research services.
+Scripts use no network access, execute no embedded document content, restrict
+operations to approved repository roots, and reject path traversal.
 
-Scripts operate only on repository files, use no network access, execute no
-content embedded in documents, and treat paths as untrusted input. They reject
-path traversal outside approved skill and product-development roots.
+## 21. Accessibility and quality posture
 
-## 21. Accessibility and product-quality posture
-
-The lifecycle embeds accessibility rather than adding it at final testing.
-Research identifies accessibility constraints and user impact. Scope defines
-requirements and acceptance criteria. Design resolves semantic structure,
-focus, Dynamic Type, VoiceOver, Switch Control, Reduce Motion, Reduce
-Transparency, contrast, interruption, error, and recovery behavior as relevant.
-Implementation and testing then produce evidence against those obligations.
+Accessibility is resolved across phases: research identifies constraints, scope
+defines obligations, design resolves semantic and interaction behavior, and
+implementation/testing produces proof. Applicable concerns include VoiceOver,
+Switch Control, Dynamic Type, focus, Reduce Motion, Reduce Transparency,
+contrast, interruption, errors, and recovery.
 
 The same early-to-late treatment applies to privacy, local-first behavior,
 persistence, migration, concurrency, replay, recovery, performance, and native
 Apple conventions.
 
-## 22. Acceptance criteria for implementing this design
+## 22. Initial implementation acceptance criteria
 
-The lifecycle system is complete when:
+The first implementation is complete when:
 
-1. The repository contains the named skill directory and all specified files.
-2. `SKILL.md` remains concise and delegates detailed templates and rubrics to
-   assets and references.
-3. All three templates contain their required sections and shared frontmatter.
-4. The two utilities implement the described safe interfaces.
-5. Unit tests cover the mechanical invariants.
-6. Baseline and post-skill pressure-scenario evidence is committed.
-7. Post-skill agents pass all required behavior scenarios without creating
-   process-only merge authorization.
-8. A pilot initiative successfully proceeds through research, scope, design,
-   grooming, implementation, testing, and merge.
-9. Upstream semantic changes correctly mark downstream documents stale.
-10. The validator rejects incomplete traceability and placeholders in passed
-    documents.
-11. Required canon changes are incorporated into owning normative sources and
-    the canon compiler remains green.
-12. Code Quality integration, when added, runs only for affected paths and stays
-    within the existing workflow.
-13. Repository guidance clearly distinguishes material initiatives from trivial
-    work that does not require the full lifecycle.
+1. The complete skill directory and specified files exist.
+2. `SKILL.md` is concise and delegates templates and rubrics.
+3. All templates contain required frontmatter and sections.
+4. Both utilities implement the safe interfaces in this design.
+5. Unit tests cover all mechanical invariants and pass.
+6. Baseline and post-skill pressure evidence is committed.
+7. Fresh post-skill agents satisfy every required behavior scenario.
+8. A fixture initiative completes all three document phases and grooming handoff.
+9. Upstream semantic changes are detected without silent mutation and correctly
+   invalidate downstream pass state.
+10. The validator rejects incomplete traceability, placeholders, blockers, and
+    invalid status combinations.
+11. Repository guidance distinguishes material initiatives from trivial work.
+12. Applicable canon changes for the lifecycle system itself are reconciled and
+    `python3 scripts/ambitions-canon.py check` remains green.
+13. No process-only merge gate or authorization receipt is introduced.
 
 ## 23. Resolved design choices
 
-- Use one lifecycle skill rather than three independent skills.
-- Store templates as skill assets and review rubrics as references.
-- Store initiative documents under `docs/product-development/<initiative>/`.
-- Use one file per phase with Git history for revisions.
-- Use binary `PASS` or `NEEDS REVISION` review outcomes.
-- Use semantic upstream hashes and automatic stale detection.
-- Keep product-development documents pre-canon and provenance-oriented.
-- Do not add process-only merge gates.
-- Use deterministic scripts for structure, status, traceability, and staleness.
-- Test the skill with before-and-after pressure scenarios before adoption.
+- One lifecycle skill, not three independent skills.
+- Templates as assets; contracts and rubrics as references.
+- Initiative documents under `docs/product-development/<initiative>/`.
+- One file per phase with Git history for revisions.
+- Binary `PASS` or `NEEDS REVISION` verdicts.
+- Semantic upstream hashes and explicit stale-state reconciliation.
+- Read-only validation and CI; no silent file mutation.
+- Lifecycle documents as pre-canon provenance.
+- Deterministic scripts for mechanical rules.
+- Before-and-after pressure testing before adoption.
+- Initial implementation bounded to the lifecycle system and fixture proof.
+- Real feature adoption and optional CI integration deferred to follow-up.
 
 ## 24. Open questions
 
-None block implementation planning. Implementation may refine command-line
-spelling, internal parser decomposition, fixture organization, and exact test
-file locations while preserving every behavioral contract and acceptance
-criterion in this design.
+None block implementation planning. Implementation may refine command spelling,
+internal parser decomposition, fixture organization, and exact test locations
+while preserving every behavior and acceptance criterion in this design.
 
-## 25. Owner review gate
+## 25. Self-review result
+
+- **Placeholder scan:** No unresolved fill-in content exists.
+- **Internal consistency:** Read-only validation, explicit stale reconciliation,
+  canon authority, and binary review states agree across sections.
+- **Scope check:** Initial implementation is bounded to one skill system and
+  fixture proof; real feature adoption and CI integration are follow-up work.
+- **Ambiguity check:** Lifecycle entry, pass requirements, reduced entry,
+  staleness behavior, authority precedence, and completion criteria are explicit.
+
+## 26. Owner review gate
 
 This written specification requires owner review before implementation planning.
-Requested revisions must be applied here and the specification rechecked for
-placeholders, contradictions, ambiguity, and excessive scope. After owner
-approval, create the detailed implementation plan using the repository's
+Requested revisions must be applied here and the self-review repeated. After
+owner approval, create the detailed implementation plan using the repository's
 implementation-planning workflow.
