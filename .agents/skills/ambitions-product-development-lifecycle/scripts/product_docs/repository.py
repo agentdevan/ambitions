@@ -15,7 +15,12 @@ GIT_PATHSPEC_METACHARACTERS = frozenset("*?[")
 
 def validate_commit_id(commit: str) -> str:
     if not isinstance(commit, str) or not COMMIT_ID.fullmatch(commit):
-        raise ProductDocsError(Diagnostic("invalid-commit-id", "Commit IDs must be 40 lowercase hexadecimal characters"))
+        raise ProductDocsError(
+            Diagnostic(
+                "invalid-commit-id",
+                "Commit IDs must be 40 lowercase hexadecimal characters",
+            )
+        )
     return commit
 
 
@@ -29,15 +34,31 @@ def validate_repository_path(path: str) -> str:
         or path.startswith(":")
         or any(character in GIT_PATHSPEC_METACHARACTERS for character in path)
     ):
-        raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must be nonempty canonical relative POSIX paths"))
+        raise ProductDocsError(
+            Diagnostic(
+                "noncanonical-path",
+                "Repository paths must be nonempty canonical relative POSIX paths",
+            )
+        )
     parsed = PurePosixPath(path)
     if parsed.is_absolute():
-        raise ProductDocsError(Diagnostic("absolute-path", "Repository paths must be relative"))
+        raise ProductDocsError(
+            Diagnostic("absolute-path", "Repository paths must be relative")
+        )
     if any(part in {".", ".."} for part in parsed.parts):
-        raise ProductDocsError(Diagnostic("path-traversal", "Repository paths must not contain traversal segments"))
+        raise ProductDocsError(
+            Diagnostic(
+                "path-traversal", "Repository paths must not contain traversal segments"
+            )
+        )
     canonical = parsed.as_posix()
     if canonical in {"", "."} or canonical != path:
-        raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must use canonical POSIX spelling"))
+        raise ProductDocsError(
+            Diagnostic(
+                "noncanonical-path",
+                "Repository paths must use canonical POSIX spelling",
+            )
+        )
     return canonical
 
 
@@ -52,9 +73,13 @@ class GitRepository:
     def __init__(self, root: Path | str) -> None:
         self.root = Path(root).resolve()
         if not self.root.is_dir():
-            raise ProductDocsError(Diagnostic("repository-unavailable", "Repository root does not exist"))
+            raise ProductDocsError(
+                Diagnostic("repository-unavailable", "Repository root does not exist")
+            )
 
-    def _run(self, arguments: list[str], *, check: bool = True) -> subprocess.CompletedProcess[bytes]:
+    def _run(
+        self, arguments: list[str], *, check: bool = True
+    ) -> subprocess.CompletedProcess[bytes]:
         result = subprocess.run(
             ["git", "-C", str(self.root), *arguments],
             check=False,
@@ -63,7 +88,9 @@ class GitRepository:
         )
         if check and result.returncode != 0:
             detail = result.stderr.decode("utf-8", errors="replace").strip()
-            raise ProductDocsError(Diagnostic("git-read-failed", detail or "Git read failed"))
+            raise ProductDocsError(
+                Diagnostic("git-read-failed", detail or "Git read failed")
+            )
         return result
 
     def head(self) -> str:
@@ -80,14 +107,32 @@ class GitRepository:
         path = validate_repository_path(path)
         result = self._run(["show", f"{commit}:{path}"], check=False)
         if result.returncode != 0:
-            raise ProductDocsError(Diagnostic("historical-path-missing", "Path does not exist at the requested commit", path=path))
+            raise ProductDocsError(
+                Diagnostic(
+                    "historical-path-missing",
+                    "Path does not exist at the requested commit",
+                    path=path,
+                )
+            )
         return result.stdout
 
-    def changed_paths(self, baseline_commit: str, head_commit: str | None = None) -> tuple[str, ...]:
+    def changed_paths(
+        self, baseline_commit: str, head_commit: str | None = None
+    ) -> tuple[str, ...]:
         baseline_commit = validate_commit_id(baseline_commit)
-        head_commit = self.head() if head_commit is None else validate_commit_id(head_commit)
-        result = self._run(["diff", "--name-only", "--no-renames", baseline_commit, head_commit])
-        return tuple(sorted(validate_repository_path(path) for path in result.stdout.decode("utf-8").splitlines() if path))
+        head_commit = (
+            self.head() if head_commit is None else validate_commit_id(head_commit)
+        )
+        result = self._run(
+            ["diff", "--name-only", "--no-renames", baseline_commit, head_commit]
+        )
+        return tuple(
+            sorted(
+                validate_repository_path(path)
+                for path in result.stdout.decode("utf-8").splitlines()
+                if path
+            )
+        )
 
     def path_exists_at(self, commit: str, path: str) -> bool:
         commit = validate_commit_id(commit)
@@ -97,10 +142,36 @@ class GitRepository:
 
     def is_tracked_at_head(self, path: str) -> bool:
         path = validate_repository_path(path)
-        result = self._run(["ls-tree", "-r", "--name-only", "HEAD", "--", _literal_pathspec(path)], check=False)
+        result = self._run(
+            ["ls-tree", "-r", "--name-only", "HEAD", "--", _literal_pathspec(path)],
+            check=False,
+        )
         return result.returncode == 0 and bool(result.stdout.strip())
 
     def has_worktree_change(self, path: str) -> bool:
         path = validate_repository_path(path)
-        result = self._run(["status", "--porcelain", "--untracked-files=all", "--", _literal_pathspec(path)])
+        result = self._run(
+            [
+                "status",
+                "--porcelain",
+                "--untracked-files=all",
+                "--",
+                _literal_pathspec(path),
+            ]
+        )
         return bool(result.stdout.strip())
+
+    def is_committed_exact(self, path: str) -> bool:
+        """Return whether a regular worktree file has its exact ``HEAD`` bytes."""
+        path = validate_repository_path(path)
+        target = self.root / path
+        if (
+            not self.is_tracked_at_head(path)
+            or not target.is_file()
+            or target.is_symlink()
+        ):
+            return False
+        try:
+            return target.read_bytes() == self.read_bytes_at(self.head(), path)
+        except (OSError, ProductDocsError):
+            return False

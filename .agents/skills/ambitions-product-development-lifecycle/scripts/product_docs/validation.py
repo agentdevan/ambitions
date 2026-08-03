@@ -14,19 +14,23 @@ from .constants import (
     TEMPLATE_PROFILES,
 )
 from .errors import Diagnostic, ProductDocsError
+from .documents import parse_document
 from .hashing import compute_contract_hash
 from .markdown import parse_markdown_table
 from .models import (
+    ConsumptionReport,
     DocumentMetadata,
     DocumentStatus,
     DocumentType,
+    InputKind,
     LifecycleDocument,
+    ReviewLane,
     ReviewVerdict,
     Section,
     ValidationReport,
 )
-from .package_identity import TEMPLATE_PATHS
-from .repository import GitRepository
+from .package_identity import TEMPLATE_PATHS, verify_historical_package
+from .repository import GitRepository, validate_repository_path
 
 
 _HASH = re.compile(r"sha256:[0-9a-f]{64}\Z")
@@ -897,4 +901,259 @@ def validate_document(
         contract_hash=metadata.contract_hash,
         diagnostics=tuple(diagnostics),
         valid=not diagnostics,
+    )
+
+
+def consume_document(
+    path: Path | str,
+    *,
+    repository_root: Path | str | None = None,
+    as_of: str | None = None,
+) -> ConsumptionReport:
+    """Validate one committed lifecycle handoff against the current repository."""
+    del as_of  # Source-ledger triggers are explicit semantic review inputs in v1.
+    root = Path(repository_root or Path.cwd()).resolve()
+    target = Path(path)
+    target = target.resolve() if target.is_absolute() else (root / target).resolve()
+    try:
+        relative = validate_repository_path(target.relative_to(root).as_posix())
+    except ValueError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "path-outside-repository",
+                "Lifecycle documents must remain inside the repository",
+                path=str(path),
+            )
+        ) from error
+    document = parse_document(target, repository_root=root)
+    repository = GitRepository(root)
+    metadata = document.metadata
+    diagnostics: list[Diagnostic] = []
+
+    def add(
+        code: str,
+        message: str,
+        *,
+        item_path: str | None = None,
+        identifier: str | None = None,
+    ) -> None:
+        key = (code, item_path, identifier)
+        if all(
+            (existing.code, existing.path, existing.identifier) != key
+            for existing in diagnostics
+        ):
+            diagnostics.append(
+                Diagnostic(code, message, path=item_path, identifier=identifier)
+            )
+
+    canonical = re.fullmatch(
+        r"docs/product-development/([a-z0-9]+(?:-[a-z0-9]+)*)/(research|scope|design)\.md",
+        relative,
+    )
+    identity = re.fullmatch(
+        r"PD-\d{4}-\d{2}-([A-Z0-9]+(?:-[A-Z0-9]+)*)",
+        metadata.initiative_id,
+    )
+    if (
+        canonical is None
+        or identity is None
+        or canonical.group(1) != identity.group(1).lower()
+        or canonical.group(2) != metadata.document_type.value
+        or metadata.document_id
+        != f"{metadata.initiative_id}-{metadata.document_type.value.upper()}"
+    ):
+        add(
+            "noncanonical-document-path",
+            "Lifecycle identity must match its canonical repository path",
+            item_path=relative,
+        )
+    if not repository.is_committed_exact(relative):
+        add(
+            "document-not-committed-exact",
+            "Consumption requires the exact target bytes committed at HEAD",
+            item_path=relative,
+        )
+        return _consumption_report(document, diagnostics, (), ())
+
+    package_dirty = repository.has_worktree_change(SKILL_ROOT)
+    if package_dirty:
+        add(
+            "uncommitted-package",
+            "Consumption requires a clean committed operational package",
+            item_path=SKILL_ROOT,
+        )
+
+    validation = validate_document(document, repository_root=root)
+    for diagnostic in validation.diagnostics:
+        add(
+            diagnostic.code,
+            diagnostic.message,
+            item_path=diagnostic.path,
+            identifier=diagnostic.identifier,
+        )
+
+    try:
+        baseline_reachable = repository.is_commit_reachable(
+            metadata.repository_baseline_commit
+        )
+    except ProductDocsError:
+        baseline_reachable = False
+    if not baseline_reachable:
+        add(
+            "unreachable-baseline",
+            "Document baseline commit must be reachable from current HEAD",
+            identifier=metadata.repository_baseline_commit,
+        )
+    elif not package_dirty:
+        try:
+            verify_historical_package(
+                repository,
+                baseline_commit=metadata.repository_baseline_commit,
+                schema_version=metadata.schema_version,
+                template_version=metadata.template_version,
+                expected_package_hash=metadata.skill_package_hash,
+                expected_template_hash=metadata.template_hash,
+                active_skill_root=root / SKILL_ROOT,
+            )
+        except ProductDocsError as error:
+            for diagnostic in error.diagnostics:
+                add(
+                    diagnostic.code,
+                    diagnostic.message,
+                    item_path=diagnostic.path,
+                    identifier=diagnostic.identifier,
+                )
+
+    for evidence in metadata.evidence_files:
+        if not repository.is_committed_exact(evidence.path):
+            add(
+                "uncommitted-evidence",
+                "Evidence must have exact current bytes committed at HEAD",
+                item_path=evidence.path,
+            )
+            continue
+        actual = hashlib.sha256(
+            repository.read_bytes_at(repository.head(), evidence.path)
+        ).hexdigest()
+        if actual != evidence.sha256:
+            add(
+                "evidence-hash-mismatch",
+                "Current evidence bytes do not match the declared digest",
+                item_path=evidence.path,
+            )
+
+    for binding in metadata.inputs:
+        if not repository.is_committed_exact(binding.path):
+            add(
+                "uncommitted-upstream",
+                "Upstream inputs must have exact current bytes committed at HEAD",
+                item_path=binding.path,
+            )
+            continue
+        try:
+            bound_reachable = repository.is_commit_reachable(binding.commit)
+        except ProductDocsError:
+            bound_reachable = False
+        if not bound_reachable or not repository.path_exists_at(
+            binding.commit, binding.path
+        ):
+            add(
+                "upstream-not-passed-at-bound-commit",
+                "Lifecycle upstream must exist and be passed at its bound commit",
+                item_path=binding.path,
+            )
+            continue
+        if binding.kind not in {
+            InputKind.LIFECYCLE_DOCUMENT,
+            InputKind.APPROVED_DESIGN,
+        }:
+            continue
+        try:
+            bound = parse_document(
+                repository.read_bytes_at(binding.commit, binding.path).decode("utf-8"),
+                repository_root=root,
+            )
+        except (UnicodeDecodeError, ProductDocsError):
+            bound = None
+        if (
+            bound is None
+            or bound.metadata.status is not DocumentStatus.PASSED
+            or bound.metadata.document_id != binding.authority_id
+            or bound.metadata.revision != binding.revision
+            or bound.metadata.contract_hash != binding.contract_hash
+            or not validate_document(bound).valid
+        ):
+            add(
+                "upstream-not-passed-at-bound-commit",
+                "Lifecycle upstream identity must be valid and passed at its bound commit",
+                item_path=binding.path,
+            )
+            continue
+        try:
+            current = parse_document(root / binding.path, repository_root=root)
+        except ProductDocsError:
+            current = None
+        if (
+            current is None
+            or current.metadata.status is not DocumentStatus.PASSED
+            or current.metadata.document_id != binding.authority_id
+            or current.metadata.revision != binding.revision
+            or current.metadata.contract_hash != binding.contract_hash
+        ):
+            add(
+                "current-upstream-binding-mismatch",
+                "Current upstream revision and contract hash must match the binding",
+                item_path=binding.path,
+            )
+
+    relevant: tuple[str, ...] = ()
+    unrelated: tuple[str, ...] = ()
+    if baseline_reachable:
+        changed = repository.changed_paths(metadata.repository_baseline_commit)
+        relevant = tuple(
+            changed_path
+            for changed_path in changed
+            if any(
+                changed_path == freshness
+                or changed_path.startswith(f"{freshness.rstrip('/')}/")
+                for freshness in metadata.freshness_paths
+            )
+        )
+        relevant_set = set(relevant)
+        unrelated = tuple(item for item in changed if item not in relevant_set)
+        if relevant:
+            add(
+                "semantic-review-required",
+                "Relevant repository drift requires one assessment per path",
+            )
+
+    return _consumption_report(document, diagnostics, relevant, unrelated)
+
+
+def _consumption_report(
+    document: LifecycleDocument,
+    diagnostics: list[Diagnostic],
+    relevant_paths: tuple[str, ...],
+    unrelated_paths: tuple[str, ...],
+) -> ConsumptionReport:
+    blockers = tuple(diagnostic.code for diagnostic in diagnostics)
+    return ConsumptionReport(
+        document_id=document.metadata.document_id,
+        revision=document.metadata.revision,
+        contract_hash=document.metadata.contract_hash,
+        lane=ReviewLane.CONSUMER,
+        verdict=(ReviewVerdict.PASS if not blockers else ReviewVerdict.NEEDS_REVISION),
+        blockers=blockers,
+        next_permitted_lifecycle_phase=(
+            {
+                DocumentType.RESEARCH: "scope",
+                DocumentType.SCOPE: "design",
+                DocumentType.DESIGN: "canon-reconciliation",
+            }[document.metadata.document_type]
+            if not blockers
+            else "revision"
+        ),
+        diagnostics=tuple(diagnostics),
+        relevant_paths=relevant_paths,
+        unrelated_paths=unrelated_paths,
     )

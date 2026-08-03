@@ -38,7 +38,7 @@ from .package_identity import (
     verify_historical_package,
 )
 from .repository import GitRepository, validate_commit_id, validate_repository_path
-from .validation import derive_freshness_paths, validate_document
+from .validation import consume_document, derive_freshness_paths, validate_document
 
 
 _REVIEW_FIELDS = frozenset(
@@ -935,6 +935,51 @@ def record_review(
     report = validate_document(document, repository_root=root)
     if not report.valid:
         raise ProductDocsError(report.diagnostics)
+
+    if record.lane is ReviewLane.CONSUMER and record.verdict is ReviewVerdict.PASS:
+        consumption = consume_document(target, repository_root=root)
+        deterministic = tuple(
+            blocker
+            for blocker in consumption.blockers
+            if blocker != "semantic-review-required"
+        )
+        if deterministic:
+            raise _error(
+                deterministic[0],
+                "Consumer PASS is blocked by deterministic consumption diagnostics",
+            )
+        assessed_paths = tuple(item["path"] for item in assessments)
+        assessed_set = set(assessed_paths)
+        relevant_set = set(consumption.relevant_paths)
+        if len(assessed_paths) != len(assessed_set):
+            raise _error(
+                "extra-drift-assessment",
+                "Consumer PASS permits exactly one assessment per relevant path",
+            )
+        missing = relevant_set.difference(assessed_set)
+        if missing:
+            raise _error(
+                "missing-drift-assessment",
+                "Consumer PASS requires one assessment for every relevant path",
+                path=sorted(missing)[0],
+            )
+        extra = assessed_set.difference(relevant_set)
+        if extra:
+            raise _error(
+                "extra-drift-assessment",
+                "Consumer PASS rejects assessments for unrelated paths",
+                path=sorted(extra)[0],
+            )
+        material = sorted(
+            item["path"] for item in assessments if item["impact"] == "material"
+        )
+        if material:
+            raise _error(
+                "material-drift",
+                "Material repository drift requires document revision",
+                path=material[0],
+            )
+        assessments = tuple(sorted(assessments, key=lambda item: item["path"]))
 
     status = (
         DocumentStatus.NEEDS_REVISION

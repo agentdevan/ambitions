@@ -184,3 +184,6 @@ class ConsumptionReport:
     verdict: ReviewVerdict
     blockers: tuple[str, ...]
     next_permitted_lifecycle_phase: str
+    diagnostics: tuple[Diagnostic, ...] = ()
+    relevant_paths: tuple[str, ...] = ()
+    unrelated_paths: tuple[str, ...] = ()
