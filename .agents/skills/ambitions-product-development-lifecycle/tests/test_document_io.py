@@ -117,10 +117,24 @@ class DocumentIOTests(unittest.TestCase):
             InputKind.CANON,
             "CANON-001",
             "docs/canon/example.md",
-            "0123456789abcdef0123456789abcdef01234567",
+            commit="0123456789abcdef0123456789abcdef01234567",
         )
         rendered = render_document(replace(document, metadata=replace(document.metadata, inputs=(binding,))))
         self.assertIn('commit = "0123456789abcdef0123456789abcdef01234567"', rendered)
+
+    def test_input_binding_preserves_six_field_positional_order(self) -> None:
+        binding = InputBinding(
+            InputKind.LIFECYCLE_DOCUMENT,
+            "PD-001",
+            "docs/product-development/example.md",
+            2,
+            "sha256:example",
+            "0123456789abcdef0123456789abcdef01234567",
+        )
+
+        self.assertEqual(binding.revision, 2)
+        self.assertEqual(binding.contract_hash, "sha256:example")
+        self.assertEqual(binding.commit, "0123456789abcdef0123456789abcdef01234567")
 
     def test_render_preserves_trailing_blank_lines_and_normalizes_one_final_newline(self) -> None:
         template = TEMPLATE_DIRECTORY.joinpath("research.md").read_text(encoding="utf-8")
@@ -134,6 +148,21 @@ class DocumentIOTests(unittest.TestCase):
         crlf_contents = template[:body_start] + template[body_start:].replace("\n", "\r\n")
         crlf_rendered = render_document(parse_document(crlf_contents, repository_root=SKILL_ROOT.parents[2]))
         self.assertEqual(crlf_rendered, crlf_contents[:-2] + "\n")
+
+    def test_path_based_parsing_preserves_body_crlf_bytes(self) -> None:
+        from tempfile import TemporaryDirectory
+
+        template = TEMPLATE_DIRECTORY.joinpath("research.md").read_text(encoding="utf-8")
+        crlf_contents = template.replace("\n", "\r\n")
+        source_body_start = crlf_contents.index("+++\r\n", 4) + len("+++\r\n")
+        with TemporaryDirectory() as temporary_directory:
+            document_path = Path(temporary_directory) / "research.md"
+            document_path.write_bytes(crlf_contents.encode("utf-8"))
+            rendered = render_document(parse_document(document_path, repository_root=SKILL_ROOT.parents[2]))
+
+        rendered_body_start = rendered.index("+++\n", 4) + len("+++\n")
+        self.assertEqual(rendered[rendered_body_start:], crlf_contents[source_body_start:-2] + "\n")
+        self.assertIn("\r\n## Agent handoff summary", rendered)
 
     def test_atomic_write_preserves_target_when_candidate_is_invalid(self) -> None:
         with self.subTest("candidate validation"):

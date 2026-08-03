@@ -49,7 +49,7 @@ class InputKind(str, Enum):
     REPOSITORY_EVIDENCE = "repository-evidence"
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, init=False)
 class InputBinding:
     kind: InputKind
     authority_id: str
@@ -57,6 +57,24 @@ class InputBinding:
     commit: str
     revision: int | None = None
     contract_hash: str | None = None
+
+    def __init__(
+        self,
+        kind: InputKind,
+        authority_id: str,
+        path: str,
+        revision: int | None = None,
+        contract_hash: str | None = None,
+        commit: str | None = None,
+    ) -> None:
+        if not isinstance(commit, str):
+            raise TypeError("InputBinding.commit must be a required string")
+        object.__setattr__(self, "kind", kind)
+        object.__setattr__(self, "authority_id", authority_id)
+        object.__setattr__(self, "path", path)
+        object.__setattr__(self, "revision", revision)
+        object.__setattr__(self, "contract_hash", contract_hash)
+        object.__setattr__(self, "commit", commit)
 
 
 @dataclass(frozen=True)

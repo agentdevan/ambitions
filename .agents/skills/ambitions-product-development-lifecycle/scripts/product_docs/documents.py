@@ -33,12 +33,12 @@ def _split_frontmatter(contents: str) -> tuple[str, str]:
 
 def _contents_and_path(source: Path | str) -> tuple[str, Path | None]:
     if isinstance(source, Path):
-        return source.read_text(encoding="utf-8"), source
+        return source.read_bytes().decode("utf-8"), source
     if source.startswith("+++") or "\n" in source or "\r" in source:
         return source, None
     candidate = Path(source)
     if candidate.exists():
-        return candidate.read_text(encoding="utf-8"), candidate
+        return candidate.read_bytes().decode("utf-8"), candidate
     return source, None
 
 
@@ -46,7 +46,7 @@ def parse_document(source: Path | str, *, repository_root: Path | None = None) -
     contents, source_path = _contents_and_path(source)
     root = (repository_root or Path.cwd()).resolve()
     frontmatter, body = _split_frontmatter(contents)
-    metadata = parse_frontmatter(frontmatter, root)
+    metadata = parse_frontmatter(frontmatter.replace("\r\n", "\n").replace("\r", "\n"), root)
     sections = parse_sections(body)
     expected_headings = TEMPLATE_PROFILES[metadata.document_type.value]
     actual_headings = tuple(section.heading for section in sections)
