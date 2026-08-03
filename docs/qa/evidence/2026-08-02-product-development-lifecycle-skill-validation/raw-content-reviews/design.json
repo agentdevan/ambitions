@@ -1,0 +1,20 @@
+{
+  "review_id": "REV-CONTENT-DESIGN-001",
+  "lane": "content",
+  "verdict": "needs-revision",
+  "reviewer_surface": "chatgpt; no earlier producer conversation used",
+  "reviewed_at": "2026-08-03T18:46:00Z",
+  "reviewed_revision": 1,
+  "reviewed_contract_hash": "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224",
+  "blocking_findings": [
+    "Review history states that no seal outcome is claimed, but the same sealed revision declares status = \"sealed\" and immediately records a Seal event for revision 1 and the reviewed contract hash."
+  ],
+  "non_blocking_improvements": [],
+  "traceability_gaps": [],
+  "stale_or_conflicting_inputs": [],
+  "required_revisions": [
+    "Revise the Review history denial so it does not deny the recorded seal event, while preserving the distinction between producer-authored claims and lifecycle-recorded state."
+  ],
+  "next_permitted_lifecycle_phase": "reconcile",
+  "drift_assessments": []
+}
