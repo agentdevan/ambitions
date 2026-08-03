@@ -107,6 +107,40 @@ class PackageIdentityTests(TemporaryRepositoryTestCase):
             verify_active_package(skill_root)
         self.assertEqual(changed.exception.diagnostics[0].code, "package-manifest-mismatch")
 
+    def test_package_identity_rejects_operational_symlink_entries(self) -> None:
+        skill_root = self.write_package()
+        outside_file = self.root / "outside.py"
+        outside_file.write_bytes(b"outside\n")
+        outside_directory = self.root / "outside-directory"
+        outside_directory.mkdir()
+
+        for relative_path, target, target_is_directory in (
+            ("scripts/linked.py", outside_file, False),
+            ("assets/linked", outside_directory, True),
+        ):
+            with self.subTest(path=relative_path):
+                link = skill_root / relative_path
+                link.symlink_to(target, target_is_directory=target_is_directory)
+                with self.assertRaises(ProductDocsError) as build:
+                    build_manifest(skill_root)
+                self.assertEqual(build.exception.diagnostics[0].code, "unsafe-operational-path")
+                with self.assertRaises(ProductDocsError) as verify:
+                    verify_active_package(skill_root)
+                self.assertEqual(verify.exception.diagnostics[0].code, "unsafe-operational-path")
+                link.unlink()
+
+    def test_active_verification_rejects_a_symlinked_manifest(self) -> None:
+        skill_root = self.write_package()
+        manifest_path = skill_root / "package-manifest.json"
+        manifest_copy = skill_root / "manifest-copy.json"
+        manifest_path.rename(manifest_copy)
+        manifest_path.symlink_to(manifest_copy.name)
+
+        with self.assertRaises(ProductDocsError) as raised:
+            verify_active_package(skill_root)
+
+        self.assertEqual(raised.exception.diagnostics[0].code, "unsafe-operational-path")
+
     def test_historical_verification_accepts_a_baseline_package_after_active_package_changes(self) -> None:
         skill_root = self.write_package(skill_contents=b"historical skill\n")
         historical_manifest = build_manifest(skill_root)
@@ -160,10 +194,36 @@ class PackageIdentityTests(TemporaryRepositoryTestCase):
             with self.subTest(commit=commit):
                 with self.assertRaises(ProductDocsError):
                     repository.is_commit_reachable(commit)
-        for path in ("/absolute.md", "docs/../outside.md", "docs//double.md", "docs\\backslash.md", ""):
+        for path in (
+            "/absolute.md",
+            "docs/../outside.md",
+            "docs//double.md",
+            "docs\\backslash.md",
+            "",
+            "*.md",
+            "docs/?.md",
+            "docs/[a-z].md",
+            ":(glob)docs/*.md",
+            ":(exclude)docs/private.md",
+            "docs/nul\x00path.md",
+        ):
             with self.subTest(path=path):
                 with self.assertRaises(ProductDocsError):
                     repository.is_tracked_at_head(path)
+
+    def test_git_repository_uses_exact_literal_paths_for_worktree_queries(self) -> None:
+        tracked = self.root / "docs" / "tracked.md"
+        tracked.parent.mkdir()
+        tracked.write_bytes(b"tracked\n")
+        self.commit_all("tracked path")
+        repository = GitRepository(self.root)
+
+        self.assertTrue(repository.is_tracked_at_head("docs/tracked.md"))
+        self.assertFalse(repository.has_worktree_change("docs/tracked.md"))
+        (self.root / "unrelated.md").write_bytes(b"unrelated\n")
+        self.assertFalse(repository.has_worktree_change("docs/tracked.md"))
+        tracked.write_bytes(b"changed\n")
+        self.assertTrue(repository.has_worktree_change("docs/tracked.md"))
 
 
 if __name__ == "__main__":

@@ -45,8 +45,12 @@ def _manifest_contracts() -> list[dict[str, object]]:
 
 def _operational_files(skill_root: Path) -> tuple[Path, ...]:
     skill_root = Path(skill_root)
+    if skill_root.is_symlink():
+        raise ProductDocsError(Diagnostic("unsafe-operational-path", "Skill package root must not be a symbolic link"))
     required = skill_root / "SKILL.md"
-    if not required.is_file() or required.is_symlink():
+    if required.is_symlink():
+        raise ProductDocsError(Diagnostic("unsafe-operational-path", "SKILL.md must not be a symbolic link"))
+    if not required.is_file():
         raise ProductDocsError(Diagnostic("package-operational-file-missing", "SKILL.md must be a regular operational file"))
     files = [required]
     for directory_name in OPERATIONAL_DIRECTORIES:
@@ -56,10 +60,12 @@ def _operational_files(skill_root: Path) -> tuple[Path, ...]:
         if not directory.is_dir() or directory.is_symlink():
             raise ProductDocsError(Diagnostic("unsafe-operational-path", "Operational package directories must be regular directories"))
         for candidate in directory.rglob("*"):
+            if candidate.is_symlink():
+                raise ProductDocsError(Diagnostic("unsafe-operational-path", "Operational package paths must not be symbolic links", path=candidate.relative_to(skill_root).as_posix()))
             if not candidate.is_file():
                 continue
             relative_parts = candidate.relative_to(skill_root).parts
-            if "__pycache__" in relative_parts or candidate.suffix == ".pyc" or candidate.is_symlink():
+            if "__pycache__" in relative_parts or candidate.suffix == ".pyc":
                 continue
             files.append(candidate)
     return tuple(sorted(files, key=lambda file: file.relative_to(skill_root).as_posix()))
@@ -148,6 +154,8 @@ def verify_active_package(skill_root: Path | str) -> dict[str, object]:
     """Verify that the stored active manifest exactly represents its package."""
     root = Path(skill_root)
     manifest_path = root / MANIFEST_NAME
+    if manifest_path.is_symlink():
+        raise ProductDocsError(Diagnostic("unsafe-operational-path", "Active package manifest must not be a symbolic link", path=MANIFEST_NAME))
     if not manifest_path.is_file():
         raise ProductDocsError(Diagnostic("package-manifest-missing", "Active package manifest is missing", path=MANIFEST_NAME))
     stored = _load_manifest_bytes(manifest_path.read_bytes(), path=MANIFEST_NAME, diagnostic_code="package-manifest-invalid")

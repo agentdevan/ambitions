@@ -10,6 +10,7 @@ from .errors import Diagnostic, ProductDocsError
 
 
 COMMIT_ID = re.compile(r"[0-9a-f]{40}\Z")
+GIT_PATHSPEC_METACHARACTERS = frozenset("*?[")
 
 
 def validate_commit_id(commit: str) -> str:
@@ -19,7 +20,15 @@ def validate_commit_id(commit: str) -> str:
 
 
 def validate_repository_path(path: str) -> str:
-    if not isinstance(path, str) or not path or "\\" in path:
+    if (
+        not isinstance(path, str)
+        or not path
+        or "\\" in path
+        or "\x00" in path
+        or any(ord(character) < 32 or ord(character) == 127 for character in path)
+        or path.startswith(":")
+        or any(character in GIT_PATHSPEC_METACHARACTERS for character in path)
+    ):
         raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must be nonempty canonical relative POSIX paths"))
     parsed = PurePosixPath(path)
     if parsed.is_absolute():
@@ -30,6 +39,11 @@ def validate_repository_path(path: str) -> str:
     if canonical in {"", "."} or canonical != path:
         raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must use canonical POSIX spelling"))
     return canonical
+
+
+def _literal_pathspec(path: str) -> str:
+    """Prevent Git from interpreting a validated declared path as a glob."""
+    return f":(literal){path}"
 
 
 class GitRepository:
@@ -83,10 +97,10 @@ class GitRepository:
 
     def is_tracked_at_head(self, path: str) -> bool:
         path = validate_repository_path(path)
-        result = self._run(["ls-tree", "-r", "--name-only", "HEAD", "--", path], check=False)
+        result = self._run(["ls-tree", "-r", "--name-only", "HEAD", "--", _literal_pathspec(path)], check=False)
         return result.returncode == 0 and bool(result.stdout.strip())
 
     def has_worktree_change(self, path: str) -> bool:
         path = validate_repository_path(path)
-        result = self._run(["status", "--porcelain", "--untracked-files=all", "--", path])
+        result = self._run(["status", "--porcelain", "--untracked-files=all", "--", _literal_pathspec(path)])
         return bool(result.stdout.strip())
