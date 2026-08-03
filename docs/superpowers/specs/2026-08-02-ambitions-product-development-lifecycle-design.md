@@ -1,13 +1,13 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 2 — producer review complete; consumer review pending  
+**Status:** Revision 3 — dual-review repairs complete; final verification pending  
 **Repository baseline inspected:** `a758c727ea62ae0d7bc1ef634b8a59e5366970ae`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
 
-Ambitions will use this development lifecycle for material product work:
+Ambitions will use this lifecycle for material product work:
 
 ```text
 Idea
@@ -20,62 +20,57 @@ Idea
   → ChatGPT authors Design
   → Content review and revision until PASS
   → Codex consumption review and revision until PASS
-  → Codex grooms for implementation
+  → Canon reconciliation and Codex implementation grooming
   → Implement
   → Test
   → Merge
 ```
 
-The system will be implemented as one portable, versioned skill package that both
-ChatGPT and Codex use in different role modes. The repository copy is canonical.
-Codex discovers it from `.agents/skills`; ChatGPT must use an installed copy of
-the same package or explicitly load the canonical package before authoring.
-Repo-local Codex discovery must never be assumed to make the skill available in
-ChatGPT web or mobile.
+The system is one portable, versioned skill package used by ChatGPT and Codex in
+different role modes. The repository package is canonical. Codex discovers it
+from `.agents/skills`; ChatGPT must use an installed or explicitly loaded copy
+whose package and template hashes match the repository source.
 
-The package contains three versioned document templates, producer and consumer
-contracts, phase review rubrics, one deterministic lifecycle CLI, test fixtures,
-and cross-product pressure validation.
+The package contains three immutable versioned templates, producer and consumer
+contracts, phase rubrics, one deterministic lifecycle CLI, fixtures, and
+cross-product validation.
 
-The lifecycle is a product-quality and handoff system. It is not task
+This is a product-quality and cross-agent handoff system. It is not task
 authorization, owner attestation, merge permission, or a process-only branch
 gate. Current canon, source, tests, runtime evidence, and Code Quality remain the
 implementation authority.
 
 ## 2. Core operating premise
 
-ChatGPT creates the research, scope, and design documents. Codex must be able to
-consume each committed document without reconstructing the prior conversation,
-repeating the research, guessing missing product behavior, or loading the entire
-document when a bounded summary and linked sections are sufficient.
+ChatGPT creates the Research, Scope, and Design documents. Codex must consume
+each committed document without reconstructing chat history, repeating accepted
+research, guessing missing behavior, or loading unbounded context.
 
 A chat response is not a lifecycle document. A document becomes eligible for
 Codex consumption only after it is persisted at its canonical repository path,
-bound to a repository baseline, content-reviewed, and structurally valid.
+bound to a repository baseline, hashed, content-reviewed, and structurally
+valid.
 
-Codex consumption is an actual phase gate, not a hypothetical rubric. For each
-document, Codex verifies that the artifact is current, internally coherent,
-properly bounded, traceable, and usable by the next phase. Codex does not replace
-product judgment; it tests whether the documented judgment can be acted on
-without invention.
+Codex consumption is an actual review lane. It verifies that the artifact is
+current, bounded, traceable, self-contained, and usable by the next phase. Codex
+does not replace product judgment; it determines whether the documented judgment
+can be acted on without invention.
 
 ## 3. Authority model
-
-The three documents have different authority classes:
 
 | Document | Authority class | May establish | Must not establish |
 |---|---|---|---|
 | Research | `evidence` | Findings, uncertainty, alternatives, recommendation, constraints | Committed scope or implementation architecture |
 | Scope | `product-commitment` | User outcome, boundaries, requirements, acceptance criteria, release boundary | Unnecessary code structure or unresearched behavior |
-| Design | `implementation-design` | Resolved interaction, state, architecture, data, recovery, accessibility, and proof design | Authority that conflicts with current canon or source reality |
+| Design | `implementation-design` | Resolved interaction, state, architecture, data, recovery, accessibility, and proof design | Undeclared authority that conflicts with current canon |
 
-All three remain pre-canon provenance. When durable product truth changes, the
-owning canon source must be amended. Current canon wins over an older lifecycle
-document unless a new lifecycle explicitly proposes changing that canon.
+All three documents are pre-canon provenance. Current canon wins over an older
+lifecycle document unless the current initiative explicitly declares a canon
+delta. An explicit canon delta is a proposal, not active law, until the owning
+canon source is amended and the canon compiler passes.
 
-Codex must not implement from Research or Scope alone unless the initiative has
-an explicitly validated reduced entry point whose current authority already
-resolves Design.
+Codex must not implement from Research or Scope alone unless a validated reduced
+entry point proves that current authority already resolves Design.
 
 ## 4. Applicability
 
@@ -96,10 +91,10 @@ Use all three documents for material changes to one or more of:
 
 ### 4.2 Reduced entry point
 
-Work may begin at Scope or Design only when current canon and live source already
-resolve every skipped-phase question. The document must cite exact authority,
-its repository revision, and a rationale. Codex consumption review must verify
-that the cited authority actually covers the skipped phase.
+Work may begin at Scope or Design only when current canon and live source resolve
+every skipped-phase question. The document cites exact authority, repository
+commit, and rationale. Codex consumption review verifies that the authority
+actually covers the skipped phase.
 
 ### 4.3 Lifecycle normally unnecessary
 
@@ -140,28 +135,25 @@ docs/product-development/
     ├── research.md
     ├── scope.md
     ├── design.md
-    └── evidence/               # optional referenced annexes
+    └── evidence/               # optional, locally referenced annexes
 ```
 
 There is one canonical package and one canonical template copy. ChatGPT
-distribution must be generated from or installed from this package; manually
+distribution is generated from or installed from this package. Manually
 maintained duplicate templates are prohibited.
 
 ## 6. Skill discovery and deployment
 
-The skill package follows the open skill format and is usable by both products,
-but discovery differs by surface.
-
 ### 6.1 Codex
 
-Codex discovers the canonical repository package at:
+Codex discovers the repository package at:
 
 ```text
 $REPO_ROOT/.agents/skills/ambitions-product-development-lifecycle/
 ```
 
-Root `AGENTS.md` receives one concise routing statement for material product
-work. The skill description must front-load the trigger and boundary:
+Root `AGENTS.md` receives one concise routing statement. The skill description
+front-loads the trigger and boundary:
 
 ```yaml
 ---
@@ -172,89 +164,86 @@ description: Use when creating, reviewing, or consuming an Ambitions research, s
 
 ### 6.2 ChatGPT
 
-The repository-local path alone does not guarantee availability in ChatGPT.
-Initial delivery must provide and verify one supported ChatGPT invocation path:
+Repo-local Codex discovery does not guarantee ChatGPT availability. Initial
+delivery must verify one supported path for the owner's actual ChatGPT surface:
 
-1. install the same standalone skill package in a supported ChatGPT desktop
-   surface; or
-2. package the same skill as a private plugin for the owner's ChatGPT Work/web/
-   mobile workflow; or
-3. explicitly load the canonical `SKILL.md`, active template, and producer
-   contract from the repository before authoring.
+1. the same standalone skill in a supported desktop surface;
+2. the same skill packaged as a private plugin for ChatGPT Work/web/mobile; or
+3. explicit loading of canonical `SKILL.md`, template, and producer contract from
+   the repository as a documented fallback.
 
-Option 3 is an operational fallback, not permission to copy or fork templates.
-The skill version and template version written into the document must match the
-canonical repository package.
-
-`agents/openai.yaml` supplies a clear display name, short description, and
-default authoring prompt. Implicit invocation remains enabled only after trigger
-and over-application tests pass.
+The document records both `skill_package_hash` and `template_hash`; matching
+version strings alone are insufficient. `agents/openai.yaml` provides display
+metadata and a default authoring prompt. Implicit invocation remains enabled only
+after trigger and over-application tests pass.
 
 ## 7. Role modes
-
-One package exposes three tightly bounded role modes.
 
 ### 7.1 Producer mode — ChatGPT
 
 Producer mode must:
 
 1. load the canonical template and producer contract;
-2. inspect current canon, source, tests, evidence, and existing initiative files;
-3. record the exact repository baseline used;
-4. use current external research where the question is time-sensitive;
-5. write a self-contained artifact that does not depend on chat history;
-6. preserve IDs, headings, authority boundaries, and traceability;
-7. persist the document at the canonical repository path;
-8. run or emulate structural validation when tools permit;
-9. perform the content-integrity review lane;
-10. stop at `needs-revision` when evidence, decisions, or access are insufficient.
+2. inspect current canon, source, tests, evidence, and initiative files;
+3. record the exact repository baseline and structured freshness paths;
+4. use current external research when claims are time-sensitive;
+5. write a self-contained artifact independent of chat history;
+6. preserve IDs, authority boundaries, and traceability;
+7. persist the file at the canonical path;
+8. perform a non-authoritative preflight when deterministic tooling is
+   unavailable;
+9. obtain the authoritative contract hash before content review passes;
+10. complete the content-integrity review lane;
+11. stop at `needs-revision` when evidence, access, or decisions are insufficient.
 
-Producer mode does not declare Codex consumption readiness.
+Producer mode never declares Codex consumption readiness. A preflight is not a
+substitute for the lifecycle CLI.
 
-### 7.2 Review mode — ChatGPT or a fresh reviewer
+### 7.2 Content review mode — ChatGPT or a fresh reviewer
 
-Content review attempts to falsify factual support, completeness, product logic,
-boundaries, alternatives, privacy, accessibility, and internal consistency. It
-binds its verdict to the exact document revision and contract hash.
+Content review attempts to falsify factual support, product logic, alternatives,
+boundaries, privacy, accessibility, and internal consistency. It is performed
+only after the current contract hash exists and binds to the exact revision and
+hash.
 
-A semantic edit invalidates the content-review verdict. A fresh context or fresh
-agent is preferred. Self-review is allowed only when the review pass is explicit,
-separate from drafting, and uses the same rubric and hash binding.
+A fresh context or agent is preferred. Self-review is permitted only as a
+separate explicit pass using the same rubric. Any authority-bearing edit
+invalidates the verdict.
 
 ### 7.3 Consumer mode — Codex
 
 Consumer mode must:
 
-1. load root instructions, the lifecycle skill, and consumer contract;
-2. validate document structure and current review binding;
-3. compare the recorded repository baseline with current `HEAD`;
-4. inspect changes to cited canon, source, tests, and owner domains;
-5. verify authority class and upstream bindings;
-6. read the handoff summary before loading linked detail sections;
-7. test whether the next phase can proceed without invention;
-8. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
-9. bind the consumer verdict to the current revision and contract hash;
-10. set `status = "passed"` only when both review lanes pass the same hash.
+1. load active instructions, the lifecycle skill, and consumer contract;
+2. run structural validation and calculate the current contract hash;
+3. compare the baseline commit with current `HEAD` using declared freshness
+   paths and semantic inspection of relevant changes;
+4. verify package, template, authority class, evidence, and upstream bindings;
+5. read the handoff summary before linked detail sections;
+6. test whether the next phase can proceed without invention;
+7. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
+8. record the consumer review only through an explicit lifecycle CLI write;
+9. set `passed` only when both lanes pass the same revision and hash.
 
-Consumer review is not merge authorization and does not approve product strategy
-beyond determining that the accepted strategy is coherent and actionable.
+Consumer review is not merge authorization and does not replace product
+approval. It tests actionability and current-repository coherence.
 
 ## 8. Canonical persistence and handoff
 
-The canonical handoff is the committed repository file, not a pasted message,
-attachment, local temporary file, or uncommitted draft.
+The canonical handoff is the committed repository file, not pasted text,
+attachment, temporary file, or uncommitted draft.
 
 A document is handoff-ready only when:
 
 - it exists at `docs/product-development/<initiative>/<phase>.md`;
-- its identity, schema, template, revision, and authority class are valid;
-- its repository baseline is recorded;
-- its content review passes the current revision and contract hash;
-- its upstream bindings are current;
-- structural validation passes.
+- identity, versions, package hashes, revision, and authority class are valid;
+- repository baseline and freshness paths are recorded;
+- the content review passes the current revision and contract hash;
+- upstream bindings and evidence-file hashes are current;
+- authoritative structural validation passes.
 
-Codex may consume an unpassed document only to perform consumer review. It must
-not use it for implementation or downstream phase advancement.
+Codex may consume an unpassed document only to review it. It must not use it for
+implementation or downstream phase advancement.
 
 ## 9. Shared document contract
 
@@ -264,8 +253,11 @@ not use it for implementation or downstream phase advancement.
 +++
 schema_version = 1
 template_version = "research-v1"
+template_hash = "sha256:<hash>"
 skill_version = "1.0.0"
+skill_package_hash = "sha256:<hash>"
 
+authoring_surface = "chatgpt"
 initiative_id = "PD-2026-08-ADAPTIVE-START-HERE"
 document_id = "PD-2026-08-ADAPTIVE-START-HERE-RESEARCH"
 document_type = "research"
@@ -283,26 +275,39 @@ contract_hash = ""
 content_review_verdict = "unreviewed"
 content_review_revision = 0
 content_review_hash = ""
+content_blocking_findings = 0
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
 consumer_review_hash = ""
-blocking_findings = 0
+consumer_blocking_findings = 0
 
+freshness_paths = [
+  "docs/canon/specifications/surfaces/today.md",
+  "Native/Ambitions/Surfaces/Today/",
+]
 canon_targets = []
+canon_delta_ids = []
 supersedes = []
 
 [[inputs]]
-document_id = ""
-path = ""
-revision = 0
-contract_hash = ""
-authority_commit = ""
+kind = "lifecycle-document"
+authority_id = "PD-2026-08-ADAPTIVE-START-HERE-RESEARCH"
+path = "docs/product-development/adaptive-start-here/research.md"
+revision = 1
+contract_hash = "sha256:<hash>"
+commit = "0123456789abcdef0123456789abcdef01234567"
+
+[[evidence_files]]
+path = "docs/product-development/adaptive-start-here/evidence/comparison.md"
+sha256 = "<hash>"
+role = "supports FIND-003 and FIND-004"
 +++
 ```
 
 Research omits empty `[[inputs]]`. Scope binds to passed Research. Design binds
-to passed Scope. A reduced entry uses `[[inputs]]` entries for the exact canon or
-approved design authority it relies on.
+to passed Scope. Reduced entry uses `kind = "canon"` or `kind = "approved-design"`
+with the exact authority ID, path, and commit. Fields that do not apply to that
+kind are omitted; the schema defines required fields per kind.
 
 Parallel arrays for paths, revisions, and hashes are prohibited.
 
@@ -317,102 +322,127 @@ Allowed statuses:
 - `stale`;
 - `superseded`.
 
-`passed` requires:
-
-- both verdicts equal `pass`;
-- both review revisions equal the current revision;
-- both review hashes equal the current contract hash;
-- zero blocking findings;
-- valid current inputs;
-- successful structural and consumption validation.
+`passed` requires both verdicts and blocker counts to pass the same current
+revision and contract hash, valid current inputs and evidence hashes, and
+successful structural and consumer validation.
 
 ### 9.3 Versioning
 
-`schema_version` controls machine interpretation. `template_version` controls the
-required headings and section contract. `skill_version` records the package used
-by the author.
+`schema_version` controls machine interpretation. `template_version` controls
+headings and section contracts. `skill_version` identifies the package release.
+The package and template hashes prove exact content identity.
 
-A new template version must not silently invalidate or reinterpret a previously
-passed document. Validators retain support for active historical versions or
-require an explicit migration. Migrations are reviewable, never automatic, and
-invalidate prior review bindings when authority-bearing text changes.
+Templates are immutable within a version. A new version does not silently
+reinterpret passed historical documents. Validators retain explicit support or
+require a reviewable migration that invalidates affected review bindings.
 
-## 10. Contract hash and revision binding
+## 10. Exact contract-hash algorithm
 
-The system uses a deterministic **contract hash**, not a claimed semantic hash.
-The tool does not attempt to decide whether two different sentences mean the
-same thing.
+The system uses a deterministic **contract hash**. It does not infer semantic
+equivalence.
 
-The contract hash includes authority-bearing frontmatter and body sections. It
-excludes the hash field itself, review metadata, timestamps, and append-only
-review history. Normalization handles line endings, trailing whitespace, and
-pure formatting rules documented by the tool.
+### 10.1 Included frontmatter
 
-Any textual change inside an authority-bearing section changes the contract
-hash, including a spelling correction. This conservative invalidation is
-intentional. The system may avoid revision churn only for changes confined to
-explicitly excluded metadata or review-history fields.
+The canonical frontmatter projection includes:
 
-Every semantic or authority-bearing edit increments `revision`, clears both
-review verdicts and hashes, and may stale downstream documents. A verdict that
-does not match the current revision and contract hash is invalid even if the
-frontmatter still says `pass`.
+- schema, template, and skill versions and hashes;
+- authoring surface;
+- initiative and document identity;
+- document type, authority class, and entry point;
+- repository baseline and external research date;
+- freshness paths, canon targets, canon delta IDs, and supersession IDs;
+- canonicalized `inputs` and `evidence_files` records.
+
+### 10.2 Excluded frontmatter
+
+The projection excludes:
+
+- `status`, `revision`, `created_at`, and `updated_at`;
+- `contract_hash`;
+- all review verdict, review hash, and blocker-count fields.
+
+Reviews bind separately to both revision and contract hash.
+
+### 10.3 Body normalization
+
+The CLI:
+
+1. removes the `Review history` heading and all descendant content;
+2. converts line endings to LF;
+3. removes trailing whitespace on each line;
+4. removes leading and trailing blank lines;
+5. preserves all other text, heading order, code, tables, and internal spacing.
+
+### 10.4 Canonical serialization
+
+The included frontmatter is serialized as UTF-8 canonical JSON with keys sorted,
+compact separators, arrays preserved except set-like path arrays sorted and
+deduplicated, and structured records sorted by `kind`, `path`, and
+`authority_id`. The hash input is:
+
+```text
+<canonical-frontmatter-json>\n---BODY---\n<normalized-body>
+```
+
+The contract hash is lowercase SHA-256 prefixed with `sha256:`.
+
+Any textual change in an included body section changes the hash, including a
+spelling correction. This conservative invalidation is intentional. Every
+authority-bearing edit increments `revision`, clears both review lanes, and may
+stale downstream documents.
 
 ## 11. Agent handoff summary
 
 Every document begins with `## Agent handoff summary` immediately after
-frontmatter. It is the first semantic section and has a hard maximum of 1,200
-words.
+frontmatter. It is the first included body section and has a hard maximum of
+1,200 words.
 
 It contains:
 
-- one-sentence decision or finding;
+- one-sentence finding or decision;
 - authority class and permitted use;
 - repository baseline and research-as-of date;
 - required upstream inputs;
-- top decisions or findings by stable ID;
+- top findings or decisions by stable ID;
 - protected constraints and explicit exclusions;
+- declared canon deltas;
 - unresolved blockers, which must be `None` for passage;
 - exact next action;
 - section-reading map for deeper context.
 
-The summary is not a substitute for validation or the full contract. It is a
-context-efficient routing layer for Codex.
+The summary routes Codex; it does not replace the full contract. Large evidence,
+comparisons, or visuals move to hashed files under `evidence/`. The primary
+document remains self-contained enough to understand accepted conclusions
+without external network access.
 
-Primary documents should remain concise. When evidence, comparisons, or visual
-material would dominate the core contract, move it to referenced files under
-`evidence/`. The primary document must still contain enough analysis and
-conclusions to remain usable if Codex cannot access an external website.
+## 12. Dual review gate and durable review record
 
-## 12. Dual review gate
-
-Each phase has two independent verdict lanes bound to the same revision and
-contract hash.
+Each phase has two verdict lanes bound to the same revision and hash.
 
 ### 12.1 Content-integrity review
 
-This lane asks whether the document is factually supported, internally coherent,
-appropriately bounded, and product-complete for its phase.
+Determines whether the document is factually supported, internally coherent,
+appropriately bounded, and complete for its authority class.
 
 ### 12.2 Codex-consumption review
 
-This lane asks whether the next phase can consume the document without hidden
-chat context, stale repository assumptions, missing authority, ambiguous IDs,
-unbounded reading, or product invention.
+Determines whether the next phase can proceed without hidden conversation state,
+stale repository assumptions, missing authority, unbounded reading, or product
+invention.
 
-For Research, the consumer question is whether Scope can be authored without
-repeating research or guessing constraints. For Scope, it is whether Design can
-resolve implementation behavior without inventing product requirements. For
-Design, it is whether Codex can groom and implement without inventing behavior
-or violating current canon and source.
+For Research, Codex tests whether Scope can be authored without redoing research.
+For Scope, it tests whether Design can be authored without inventing product
+requirements. For Design, it tests whether canon reconciliation and
+implementation grooming can proceed without inventing behavior.
 
 ### 12.3 Formal review output
 
 ```text
 Verdict: PASS | NEEDS REVISION
 Review lane: CONTENT | CONSUMER
+Review ID: REV-CONTENT-001
 Reviewed revision: <integer>
-Reviewed contract hash: <sha256>
+Reviewed contract hash: sha256:<hash>
 
 Blocking findings
 Non-blocking improvements
@@ -422,10 +452,34 @@ Required revisions
 Next permitted lifecycle phase
 ```
 
-There is no conditional pass. Any authority-bearing revision invalidates both
-lanes and reruns both reviews.
+The lifecycle CLI `review` command atomically updates the lane-specific
+frontmatter and appends the complete review entry under `Review history`.
+Review-history entries are append-only, have stable IDs, record reviewer surface
+and date, and are excluded from the contract hash. A revision invalidates both
+lanes; there is no conditional pass.
 
-## 13. Research document contract
+## 13. Freshness and repository-drift contract
+
+`freshness_paths` are machine-readable paths or directory prefixes whose changes
+may invalidate the document. They include cited canon, owning source areas,
+relevant tests, dependency manifests, and any generated routing relied upon.
+
+Consumer review compares `repository_baseline_commit..HEAD`:
+
+1. no changed freshness path: report unrelated drift and continue;
+2. changed freshness path: perform semantic inspection and return pass only when
+   the change cannot affect a finding, requirement, decision, dependency, or
+   proof obligation;
+3. missing baseline or unreachable commit: `NEEDS REVISION`;
+4. changed package or template hash: use the document's declared supported
+   version; do not reinterpret it under the new package.
+
+Path intersection is a conservative filter, not the final semantic judgment.
+Each time-sensitive external source records an access date and recheck trigger in
+the Source ledger. Expired or triggered evidence blocks consumption until
+refreshed or explicitly shown to remain valid.
+
+## 14. Research document contract
 
 Research answers:
 
@@ -453,18 +507,17 @@ Required sections:
 17. Handoff to Scope
 18. Review history
 
-Every material finding has a stable `FIND-*` ID and cites `SRC-*` or exact
-repository evidence. Each source-ledger entry includes title, publisher or repo
-path, URL when applicable, access date, temporal sensitivity, supported claim
-IDs, and a concise evidence summary. Codex must not need network access merely to
-understand why an accepted finding exists.
+Every material finding has `FIND-*` and cites `SRC-*` or exact repository
+evidence. Source entries include title, publisher or path, URL when applicable,
+access date, temporal sensitivity, recheck trigger, supported IDs, and concise
+evidence summary. Evidence annexes are hashed in frontmatter.
 
-Research passes only when no unresolved unknown prevents a bounded scope choice,
-meaningful alternatives were compared, current repo and canon were inspected,
-time-sensitive claims are current, and recommendation follows from evidence.
-Research must not preselect detailed implementation architecture.
+Research passes only when no unknown prevents a bounded scope choice, meaningful
+alternatives were compared, current repo and canon were inspected, time-sensitive
+evidence is current, and recommendation follows from evidence. It must not lock
+detailed implementation architecture.
 
-## 14. Scope document contract
+## 15. Scope document contract
 
 Scope answers:
 
@@ -491,22 +544,24 @@ Required sections:
 16. Dependencies and risks
 17. Measurement and success evidence
 18. Release boundary
-19. Canon impact
+19. Canon impact and proposed canon deltas
 20. Design brief
 21. Open decisions
 22. Review history
 
-Each `REQ-*` is one observable obligation, cites supporting findings or current
-authority, names its intended owner domain, and maps to one or more `AC-*`
-entries. Each `AC-*` defines inspectable evidence and avoids subjective closure
-without observable conditions.
+Each `REQ-*` is one observable obligation, cites findings or authority, names its
+intended owner domain, and maps to `AC-*`. Each `AC-*` defines inspectable
+evidence.
 
-Scope passes only when its outcome, boundaries, states, risks, dependencies,
-canon targets, and release boundary are explicit, every requirement is
-verifiable, and no open decision forces Design or implementation to invent
-product behavior.
+A proposed canon change receives `CANON-DELTA-*` and records the current authority,
+proposed replacement or amendment, rationale, affected requirements, and
+migration or compatibility implications.
 
-## 15. Design document contract
+Scope passes only when outcome, boundaries, states, risks, dependencies, canon
+targets, canon deltas, and release boundary are explicit, requirements are
+verifiable, and no open decision forces Design or implementation invention.
+
+## 16. Design document contract
 
 Design answers:
 
@@ -536,58 +591,57 @@ Required sections:
 19. Testing strategy
 20. Visual and runtime proof plan
 21. File and module impact
-22. Legacy deletion or supersession
-23. Implementation seams and dependency order
-24. Requirement-to-design traceability
-25. Implementation grooming handoff
-26. Open questions
-27. Review history
+22. Current-source delta and legacy deletion
+23. Canon reconciliation plan
+24. Implementation seams and dependency order
+25. Requirement-to-design traceability
+26. Implementation grooming handoff
+27. Open questions
+28. Review history
 
 Each `DESIGN-*` resolves one material decision, maps to `REQ-*`, `AC-*`, and
-`VERIFY-*`, names its owner layer or module, records non-obvious rejected
-alternatives, and defines failure and recovery where applicable.
+`VERIFY-*`, names an owner layer, records non-obvious rejected alternatives, and
+defines failure and recovery where applicable.
 
-The traceability matrix includes every requirement and acceptance criterion.
-Design passes only when current canon and source do not contradict it, all
-applicable states and platform behaviors are resolved, preview evidence is not
-inflated into runtime proof, implementation seams are bounded, and Codex can
-groom the work without product invention.
+Design may intentionally differ from current source and may propose canon
+changes. It passes only when those deltas are explicit, scoped, feasible, and
+traceable. Undeclared conflict with canon or source is a blocker. Preview evidence
+must not be represented as runtime proof, implementation seams must be bounded,
+and Codex must be able to groom without product invention.
 
-## 16. Codex consumption protocol
+## 17. Codex consumption protocol
 
 Codex reads in this order:
 
 1. active `AGENTS.md` instruction chain;
 2. lifecycle `SKILL.md` and consumer contract;
-3. target document frontmatter and Agent handoff summary;
-4. upstream handoff summaries and linked IDs;
-5. current owning canon;
-6. current source, tests, and changed paths relevant to cited authority;
-7. full document sections only as needed to resolve the task.
+3. target frontmatter and Agent handoff summary;
+4. upstream summaries and linked IDs;
+5. current owning canon and declared canon deltas;
+6. current source, tests, and freshness-path diffs;
+7. full sections only as needed.
 
-Before accepting a document, Codex runs the lifecycle CLI in `consume` mode. It
-must stop and return `NEEDS REVISION` when:
+Before acceptance, Codex runs `check` and `consume`. It returns
+`NEEDS REVISION` when:
 
-- the document is not at the canonical path;
-- schema or template version is unsupported;
-- review binding does not match current revision and hash;
-- recorded repository baseline is absent or relevant authority changed;
-- upstream inputs are stale, missing, or not passed;
-- cited source evidence is unavailable and the document is not self-contained;
+- canonical path, identity, versions, or package hashes are invalid;
+- contract hash or review binding is stale;
+- baseline or freshness data is missing;
+- relevant repo changes are unreconciled;
+- inputs or evidence hashes are stale;
+- external evidence is expired or non-self-contained;
 - authority class is exceeded;
-- required IDs are orphaned or contradictory;
-- the next phase requires inference not authorized by the document;
-- current canon or source conflicts with the document.
+- IDs or traceability are incomplete;
+- the next phase requires unauthorized inference;
+- canon or source conflict is undeclared;
+- declared deltas omit consequences, migration, or proof obligations.
 
-A baseline commit difference alone does not automatically fail. Codex inspects
-whether changed files affect cited canon, source owners, tests, dependencies, or
-assumptions. Unrelated repository changes are reported but do not stale the
-document.
+A baseline commit difference alone does not fail. Unrelated drift is reported and
+ignored after path and semantic inspection.
 
-## 17. Deterministic lifecycle CLI
+## 18. Deterministic lifecycle CLI
 
-Use one Python standard-library CLI to avoid duplicated parsers and inconsistent
-state transitions:
+Use one Python standard-library CLI:
 
 ```text
 ambitions_product_docs.py new
@@ -598,176 +652,181 @@ ambitions_product_docs.py reconcile
 ambitions_product_docs.py consume
 ```
 
-Required behavior:
+`check`, `hash`, and `consume` are read-only by default. `review` and `reconcile`
+are explicit write commands. Required behavior:
 
-- instantiate the exact active template without overwrite;
-- support producer-created files when shell execution was unavailable;
-- parse and validate TOML frontmatter;
-- validate schema, template, skill, IDs, headings, and authority class;
-- compute the documented contract hash;
-- validate review bindings and status combinations;
-- validate structured `[[inputs]]` records;
-- detect relevant repository-baseline drift;
+- instantiate exact templates without overwrite;
+- support producer-created drafts when shell execution was unavailable;
+- parse TOML and validate all schema variants;
+- verify package and template hashes;
+- implement the exact contract-hash algorithm;
+- validate review records and status combinations;
+- validate typed inputs and evidence-file hashes;
+- compare baseline diffs against freshness paths;
 - require finding-to-source, requirement-to-finding, requirement-to-acceptance,
-  and design-to-verification traceability;
-- reject placeholders and empty required sections in reviewable documents;
-- record review verdicts only against the current revision and hash;
-- explicitly mark or rebind stale documents through reviewable commands;
-- never silently mutate files during `check` or CI;
-- restrict writes to approved repository roots and reject path traversal;
-- provide stable JSON output and nonzero failure exits.
+  design-to-verification, and canon-delta traceability;
+- reject placeholders and empty required sections before review;
+- append review records atomically;
+- explicitly mark or rebind stale documents;
+- never mutate during CI or read-only commands;
+- restrict writes to approved roots and reject path traversal;
+- emit stable JSON diagnostics and nonzero failure exits.
 
-The CLI may update metadata only through explicit write subcommands. Every write
-prints the path, fields changed, previous value, new value, and next required
-action.
+Every write prints path, changed fields, previous and new values, and next action.
 
-## 18. Template evolution
+## 19. Canon reconciliation
 
-Templates are immutable within a version. Improvements create `v2`, not an
-in-place reinterpretation of `v1` documents.
+After Design passes and before implementation grooming is final:
 
-A version change requires:
+1. resolve each `canon_target` and `CANON-DELTA-*` against current generated
+   routing;
+2. classify the delta as amendment, addition, supersession, or no canon change;
+3. update the owning canon source before or atomically with implementation;
+4. update requirement and verification links under current canon conventions;
+5. run `python3 scripts/ambitions-canon.py check`;
+6. re-run Design consumption if canon reconciliation changes an
+   authority-bearing decision.
 
-- migration rationale;
-- compatibility decision for passed historical documents;
-- validator coverage for each supported version;
-- explicit migration command if migration is needed;
-- review invalidation when authority-bearing content changes;
-- a cross-product test proving ChatGPT and Codex load the same version.
+A passed Design authorizes planning for declared deltas; it does not make those
+deltas normative before canon reconciliation.
 
-## 19. Testing strategy
+## 20. Template evolution
 
-The skill is developed with documentation TDD: run pressure scenarios without
-the skill, record failures, install the minimum contract, rerun the same cases,
-and refine only for observed gaps.
+Templates are immutable within a version. Improvements create a new version.
+Version changes require migration rationale, compatibility policy, validator
+coverage, explicit migration commands where needed, review invalidation for
+contract changes, and a cross-product proof that ChatGPT and Codex use identical
+package and template hashes.
 
-Required scenario groups:
+## 21. Testing strategy
 
-### 19.1 Producer scenarios
+Develop the skill with documentation TDD: record baseline failures, add minimum
+contracts, rerun identical scenarios, and refine only for observed gaps.
 
-- ChatGPT lacks live repo access but attempts to pass Research.
-- ChatGPT writes a polished chat response but does not persist the document.
-- ChatGPT uses a stale template or skill version.
-- ChatGPT invents evidence or silently fills an unknown.
-- ChatGPT over-applies the lifecycle to a trivial correction.
-- ChatGPT edits a passed revision without invalidating review bindings.
+### 21.1 Producer scenarios
 
-### 19.2 Consumer scenarios
+- no live repo access but Research is marked passed;
+- polished chat output is not persisted;
+- stale package or template is used;
+- evidence or unknowns are invented;
+- trivial work triggers the full lifecycle;
+- a passed body changes without review invalidation;
+- a preflight is mistaken for authoritative validation.
 
-- Codex receives only Design and hidden chat context is missing.
-- Current canon changed after the recorded baseline.
-- Research links external sources but omits evidence summaries.
-- Scope has testable requirements but ambiguous out-of-scope behavior.
-- Design is visually complete but omits data ownership or recovery.
-- A preview screenshot is presented as runtime proof.
-- A consumer attempts to implement from Research or Scope alone.
+### 21.2 Consumer scenarios
 
-### 19.3 Cross-product fixture
+- Design arrives without chat history;
+- relevant and unrelated repo changes occur after baseline;
+- source links lack evidence summaries;
+- evidence annex content changes without hash update;
+- Scope has ambiguous exclusions;
+- Design omits ownership or recovery;
+- current source differs intentionally but the delta is undeclared;
+- a canon delta is declared without migration or proof consequences;
+- preview evidence is inflated;
+- implementation starts from Research or Scope alone.
 
-A fixture initiative must be authored through the ChatGPT producer path and
-consumed through the Codex path. The test proves:
+### 21.3 Cross-product fixture
 
-- identical skill and template versions;
-- canonical repository persistence;
-- both review lanes bound to one revision and hash;
-- bounded summary-first reading;
-- stale detection after a relevant upstream or canon change;
-- successful Research → Scope → Design → grooming handoff;
-- no dependence on the original ChatGPT conversation.
+A fixture initiative is authored through ChatGPT and consumed through Codex. It
+proves identical package/template hashes, canonical persistence, durable review
+records, summary-first reading, relevant-drift detection, evidence-hash checking,
+Research → Scope → Design → canon reconciliation → grooming, and independence
+from the original chat.
 
-### 19.4 CLI tests
+### 21.4 CLI tests
 
-Unit tests cover template creation, version support, IDs, TOML parsing, contract
-hashing, review binding, status rules, input records, traceability, baseline
-comparison, stale reconciliation, path safety, read-only checks, JSON output, and
-nonzero failure behavior.
+Tests cover templates, versions, package hashes, IDs, TOML, canonical hashing,
+review history, status rules, typed inputs, evidence hashes, freshness paths,
+relevant drift, canon deltas, traceability, stale reconciliation, path safety,
+read-only behavior, JSON output, and failure exits.
 
-## 20. Delivery boundary
+## 22. Delivery boundary
 
-### 20.1 Initial implementation — required
+### 22.1 Initial implementation — required
 
-1. Create the portable skill package, role contracts, versioned templates,
-   lifecycle CLI, fixtures, and tests.
-2. Add `agents/openai.yaml` and concise root `AGENTS.md` routing.
-3. Establish and verify the owner's ChatGPT invocation path for the same package.
+1. Create the portable package, role contracts, immutable templates, CLI,
+   fixtures, and tests.
+2. Add `agents/openai.yaml` and concise root routing.
+3. Verify the owner's actual ChatGPT invocation path against canonical package
+   and template hashes.
 4. Run baseline and post-skill producer, consumer, and cross-product scenarios.
-5. Complete one fixture initiative through all three phases and grooming handoff.
-6. Leave historical initiative documents unchanged.
+5. Complete one fixture through all document phases, canon reconciliation
+   simulation, and grooming handoff.
+6. Leave historical documents unchanged.
 
-### 20.2 Follow-up adoption
+### 22.2 Follow-up adoption
 
-1. Use the lifecycle for the first real bounded Ambitions initiative.
-2. Refine only from observed producer or consumer failures.
-3. Add affected-path Code Quality validation after standalone behavior is stable.
-4. Measure revision churn, implementation invention, context usage, and proof
-   gaps.
+Use the first real bounded initiative, refine only from observed failures, add
+Code Quality validation after stability, and measure revision churn,
+implementation invention, context use, and proof gaps.
 
 A real feature implementation is adoption evidence, not a blocker to completing
 the lifecycle system.
 
-## 21. Security, privacy, and offline posture
+## 23. Security, privacy, and offline posture
 
 Templates must not copy credentials, production secrets, unnecessary personal
 records, or private-life graph content into repository artifacts. Research uses
 public sources, repository evidence, or appropriately redacted internal context.
 
 The lifecycle CLI uses no network access, executes no document content, and
-performs writes only inside approved roots. External research is summarized in
-the document so Codex can consume accepted findings without network access.
+writes only inside approved roots. Accepted external evidence is summarized so
+Codex can consume it offline.
 
-## 22. Initial implementation acceptance criteria
+## 24. Initial implementation acceptance criteria
 
-The lifecycle system is complete when:
+The system is complete when:
 
 1. The canonical package and every specified file exist.
-2. ChatGPT and Codex demonstrably load the same skill and template versions.
-3. ChatGPT can create each canonical document without relying on hidden chat
-   context or a local shell.
-4. Codex can consume each document using summary-first routing and current repo
+2. ChatGPT and Codex load identical package and template hashes.
+3. ChatGPT can create canonical drafts without hidden chat context or a local
+   shell; authoritative validation and review binding still occur before pass.
+4. Codex consumes each document using summary-first routing and current-repo
    verification.
-5. Both review lanes bind to the same current revision and contract hash.
-6. The CLI enforces structure, authority, traceability, versions, review binding,
-   stale inputs, and safe writes.
-7. Relevant repository or canon changes invalidate consumption; unrelated changes
-   do not.
-8. Research source evidence is reproducible and self-contained enough for Codex.
-9. Scope cannot pass with product ambiguity that Design would need to invent.
-10. Design cannot pass with implementation ambiguity, ownership gaps, or proof
-    inflation.
-11. A cross-product fixture completes Research, Scope, Design, and grooming.
-12. Pressure tests correct observed baseline failures.
-13. Current canon remains green after any required lifecycle-system amendment.
-14. No process-only merge gate, owner receipt, or authorization ceremony is
-    introduced.
+5. Both review lanes bind to one current revision and contract hash and have
+   durable append-only review records.
+6. The exact hash algorithm is implemented and tested.
+7. Typed inputs, evidence hashes, freshness paths, and relevant drift are
+   enforced.
+8. Relevant changes invalidate consumption; unrelated changes do not.
+9. Research is reproducible and self-contained enough for offline Codex use.
+10. Scope cannot pass with product ambiguity Design would need to invent.
+11. Design cannot pass with undeclared source/canon differences, ownership gaps,
+    or proof inflation.
+12. Declared canon deltas include authority, consequences, migration, and proof.
+13. A cross-product fixture completes all phases and grooming handoff.
+14. Pressure tests correct observed baseline failures.
+15. Canon reconciliation remains green.
+16. No process-only merge gate or authorization ceremony is introduced.
 
-## 23. Resolved design choices
+## 25. Resolved design choices
 
-- One canonical portable skill package serves both ChatGPT and Codex.
-- Product-specific role modes are Producer, Content Review, and Consumer.
-- Every phase requires both content and actual Codex-consumption review.
-- The repository file, not chat history, is the canonical handoff.
-- Each document declares a distinct authority class.
-- Templates and schemas are versioned and immutable within a version.
-- Review verdicts bind to exact revision and contract hash.
-- A deterministic contract hash replaces unverifiable semantic-equivalence
-  claims.
-- Every document begins with a bounded Agent handoff summary.
-- Codex uses summary-first, linked-section consumption.
-- External evidence is summarized so accepted research survives offline use.
-- One lifecycle CLI owns deterministic parsing and state transitions.
-- ChatGPT deployment is explicitly verified rather than inferred from Codex
-  repo-local discovery.
+- One canonical portable package serves both products.
+- Producer, Content Review, and Consumer are distinct role modes.
+- Each phase requires actual Codex consumption review.
+- Repository files, not chat history, are canonical handoffs.
+- Documents declare distinct authority classes.
+- Versions and exact package/template hashes prevent cross-product drift.
+- Review verdicts bind to exact revision and deterministic contract hash.
+- Review records are durable and append-only.
+- Structured freshness paths make baseline drift inspectable.
+- Evidence annexes are content-hashed.
+- Declared canon/source deltas are permitted; undeclared conflicts block.
+- Every document starts with a bounded Agent handoff summary.
+- Codex reads summaries and linked sections before full documents.
+- One lifecycle CLI owns deterministic validation and transitions.
 
-## 24. Open questions
+## 26. Open questions
 
-None block the second review pass. Implementation planning may choose the exact
-private ChatGPT distribution mechanism after checking the owner's supported
-surface, but the final system must verify that ChatGPT uses the canonical package
-and version rather than a copied prompt or divergent template.
+None block final verification or implementation planning. The implementation plan
+may select the supported ChatGPT installation mechanism after checking the
+owner's available surface, but it must deliver and verify one mechanism before
+the lifecycle system is complete.
 
-## 25. Review gate
+## 27. Review gate
 
-This revision has completed the producer-side ruthless review. It requires a
-second, independent Codex-consumer review. If that pass finds no blocker after
-revision, the specification is approved and may proceed directly to detailed
-implementation planning.
+Revision 3 incorporates the producer and consumer review findings. Approval
+requires a final verification that the revised hash, review, freshness,
+authority-delta, and cross-product contracts are internally consistent and
+implementation-ready.
