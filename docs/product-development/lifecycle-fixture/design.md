@@ -12,7 +12,7 @@ document_type = "design"
 authority_class = "implementation-design"
 entry_point = "design"
 
-status = "sealed"
+status = "needs-revision"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -20,10 +20,10 @@ repository_baseline_commit = "0cd783b2cf25e32f21e9f2b24fd7891c5062f76b"
 external_research_as_of = "2026-08-03"
 contract_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
 
-content_review_verdict = "unreviewed"
-content_review_revision = 0
-content_review_hash = ""
-content_blocking_findings = 0
+content_review_verdict = "needs-revision"
+content_review_revision = 1
+content_review_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
+content_blocking_findings = 1
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
 consumer_review_hash = ""
@@ -407,3 +407,39 @@ The exact upstream binding, package/template identity, synthetic boundary, owner
 - docs/canon/generated/CODEX_START_HERE.md
 - docs/product-development/lifecycle-fixture/evidence/comparison.md
 - docs/product-development/lifecycle-fixture/scope.md
+### Review event: REV-CONTENT-DESIGN-001
+
+- Review lane: `CONTENT`
+- Verdict: `NEEDS REVISION`
+- Reviewer surface: `chatgpt; no earlier producer conversation used`
+- Reviewed at: `2026-08-03T18:46:00Z`
+- Reviewed revision: `1`
+- Reviewed contract hash: `sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224`
+
+#### Blocking findings
+
+- Review history states that no seal outcome is claimed, but the same sealed revision declares status = "sealed" and immediately records a Seal event for revision 1 and the reviewed contract hash.
+
+#### Non-blocking improvements
+
+- None
+
+#### Traceability gaps
+
+- None
+
+#### Stale or conflicting inputs
+
+- None
+
+#### Required revisions
+
+- Revise the Review history denial so it does not deny the recorded seal event, while preserving the distinction between producer-authored claims and lifecycle-recorded state.
+
+#### Next permitted lifecycle phase
+
+reconcile
+
+#### Drift assessments
+
+- None
