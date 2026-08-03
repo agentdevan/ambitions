@@ -13,6 +13,12 @@ visual system, design provenance, and engineering standards. Read relevant
 canon together with live source and tests. Canon describes what Ambitions is;
 it does not authorize edits or merges.
 
+For a material new product, UX, or architecture initiative whose behavior is not
+already resolved by current canon, use the repository skill
+`ambitions-product-development-lifecycle`. ChatGPT authors the canonical Research,
+Scope, and Design files; Codex performs consumer review before each downstream
+phase. This is a quality workflow, not edit or merge authorization.
+
 ## Required engineering practice
 
 - Work from the current branch and inspect the current diff before editing.

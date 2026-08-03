@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ambitions Product Development"
+  short_description: "Create, review, and consume Ambitions lifecycle documents."
+  default_prompt: "Use $ambitions-product-development-lifecycle to create, review, or consume the correct Research, Scope, or Design document for this material Ambitions initiative."
+policy:
+  allow_implicit_invocation: true
