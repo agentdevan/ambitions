@@ -12,7 +12,7 @@ document_type = "scope"
 authority_class = "product-commitment"
 entry_point = "scope"
 
-status = "sealed"
+status = "content-reviewed"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -20,9 +20,9 @@ repository_baseline_commit = "5d224acfd5f4ad7063be14ae4b3f0a030a195ccd"
 external_research_as_of = "2026-08-03"
 contract_hash = "sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58"
 
-content_review_verdict = "unreviewed"
-content_review_revision = 0
-content_review_hash = ""
+content_review_verdict = "pass"
+content_review_revision = 1
+content_review_hash = "sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58"
 content_blocking_findings = 0
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
@@ -311,3 +311,39 @@ All behavior needed by Design is resolved in this Scope: the exact upstream bind
 - docs/canon/generated/CODEX_START_HERE.md
 - docs/product-development/lifecycle-fixture/evidence/comparison.md
 - docs/product-development/lifecycle-fixture/research.md
+### Review event: REV-CONTENT-SCOPE-001
+
+- Review lane: `CONTENT`
+- Verdict: `PASS`
+- Reviewer surface: `chatgpt; no earlier producer conversation used`
+- Reviewed at: `2026-08-03T16:28:00Z`
+- Reviewed revision: `1`
+- Reviewed contract hash: `sha256:c36b663f358c3b23170b2a455274d70c2035afa79eb0f860c6cf628b27afef58`
+
+#### Blocking findings
+
+- None
+
+#### Non-blocking improvements
+
+- None
+
+#### Traceability gaps
+
+- None
+
+#### Stale or conflicting inputs
+
+- None
+
+#### Required revisions
+
+- None
+
+#### Next permitted lifecycle phase
+
+consumer-review
+
+#### Drift assessments
+
+- None
