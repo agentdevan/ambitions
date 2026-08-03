@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ambitions product-development lifecycle entrypoint."""
+"""Ambitions product-document CLI entrypoint."""
 
 from __future__ import annotations
 
