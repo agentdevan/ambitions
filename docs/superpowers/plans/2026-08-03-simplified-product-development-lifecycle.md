@@ -122,7 +122,12 @@ def test_approved_document_rejects_placeholders():
 
 - [ ] **Step 2: Run focused tests and verify failure**
 
-Run: `python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_document_io.py' -v`
+Run:
+
+```bash
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_document_io.py' -v
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_validation.py' -v
+```
 
 Expected: failures because legacy metadata remains required.
 
@@ -156,7 +161,7 @@ class ValidationResult:
 
 - [ ] **Step 5: Run focused tests and commit**
 
-Run: `python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_document_io.py' -v`
+Run both focused commands from Step 2.
 
 ```bash
 git add .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs .agents/skills/ambitions-product-development-lifecycle/tests
