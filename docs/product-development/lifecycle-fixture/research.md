@@ -12,7 +12,7 @@ document_type = "research"
 authority_class = "evidence"
 entry_point = "research"
 
-status = "sealed"
+status = "needs-revision"
 revision = 2
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -20,10 +20,10 @@ repository_baseline_commit = "fc8eca8d7b913a3d6cef82e33bfd3c7f419c0021"
 external_research_as_of = "2026-08-03"
 contract_hash = "sha256:cbbdc69545cc0aa9a662a847aedc5f3446722891fce6390ba8ad9d88e94ad9e0"
 
-content_review_verdict = "unreviewed"
-content_review_revision = 0
-content_review_hash = ""
-content_blocking_findings = 0
+content_review_verdict = "needs-revision"
+content_review_revision = 2
+content_review_hash = "sha256:cbbdc69545cc0aa9a662a847aedc5f3446722891fce6390ba8ad9d88e94ad9e0"
+content_blocking_findings = 1
 consumer_review_verdict = "unreviewed"
 consumer_review_revision = 0
 consumer_review_hash = ""
@@ -353,3 +353,39 @@ reconcile
 - docs/canon/CONSTITUTION.md
 - docs/canon/generated/CODEX_START_HERE.md
 - docs/product-development/lifecycle-fixture/evidence/comparison.md
+### Review event: REV-CONTENT-RESEARCH-002
+
+- Review lane: `CONTENT`
+- Verdict: `NEEDS REVISION`
+- Reviewer surface: `chatgpt; no earlier producer conversation used`
+- Reviewed at: `2026-08-03T15:26:00Z`
+- Reviewed revision: `2`
+- Reviewed contract hash: `sha256:cbbdc69545cc0aa9a662a847aedc5f3446722891fce6390ba8ad9d88e94ad9e0`
+
+#### Blocking findings
+
+- Revision 2 is internally inconsistent: sealed frontmatter and the revision 2 seal event conflict with present-tense statements throughout the document that revision 2 is a draft, unsealed, has no contract hash or freshness set, and must next be sealed.
+
+#### Non-blocking improvements
+
+- None
+
+#### Traceability gaps
+
+- None
+
+#### Stale or conflicting inputs
+
+- Pre-seal revision 2 body text and the correction note were not reconciled after the 2026-08-03T15:24:29Z revision 2 seal event.
+
+#### Required revisions
+
+- Reconcile all current-state statements, including the handoff summary, baseline discussion, FIND-008, FIND-009, recommended direction, rejected directions, remaining unknowns, risk register, Scope handoff, and revision 2 correction note, to recognize that revision 2 is sealed with the recorded contract hash and freshness paths while remaining unreviewed and unauthorized for Scope pending required reviews.
+
+#### Next permitted lifecycle phase
+
+reconcile
+
+#### Drift assessments
+
+- None
