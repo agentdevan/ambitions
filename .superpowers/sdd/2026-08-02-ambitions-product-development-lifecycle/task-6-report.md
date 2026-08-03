@@ -109,3 +109,75 @@ consumer PASS semantic-assessment integration; Task 8 still owns CLI parsing,
 exit codes, and JSON command envelopes. This task establishes transition-domain
 behavior only and makes no implementation, merge, visual, device, accessibility,
 or release-readiness claim.
+
+## Fix round 1 — upstream identity and phase-aware authority
+
+All three Important review findings are corrected without widening Task 6.
+
+### Corrections
+
+1. Standard upstream binding now proves all parts of the adjacent-phase
+   contract: the upstream file must use the canonical path for the target
+   initiative, carry the same `initiative_id`, and carry the exact expected
+   adjacent-phase `document_id`. A valid passed Research from another initiative
+   can no longer create Scope, and an alias path cannot substitute for the
+   canonical Research path. The valid same-initiative path remains covered.
+2. Reduced-entry typed authority validation now receives the target document
+   phase. `approved-design` is permitted only for reduced Design entry and is
+   rejected for Scope. Research reopen explicitly rejects both lifecycle input
+   and reduced-authority rebinding instead of falling through to Scope-upstream
+   handling.
+3. Active package identity now returns the manifest's exact `skill_version`.
+   Creation writes that value into document metadata, while seal rejects any
+   document metadata mismatch before mutation; `999.0.0` is covered and leaves
+   target bytes unchanged.
+
+The Minor observation about clean-package checks scanning test-only files is
+deferred exactly as requested. No workflow file changed.
+
+### Fix-round TDD evidence
+
+The four new focused regressions were written and run before production edits.
+RED was the expected four behavioral failures:
+
+```text
+test_new_scope_binds_only_same_initiative_canonical_research ... FAIL
+  AssertionError: ProductDocsError not raised
+test_reduced_scope_rejects_approved_design_authority ... FAIL
+  AssertionError: ProductDocsError not raised
+test_research_reopen_rejects_input_rebinding ... FAIL
+  AssertionError: 'upstream-not-passed' != 'invalid-entry-authority'
+test_seal_refuses_document_skill_version_mismatch ... FAIL
+  AssertionError: ProductDocsError not raised
+
+Ran 16 tests in 12.452s
+FAILED (failures=4)
+```
+
+After the bounded transition changes, focused GREEN was:
+
+```text
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_transitions.py' -v
+Ran 16 tests in 12.255s
+OK
+```
+
+### Fix-round validation
+
+```text
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -v
+Ran 71 tests in 13.884s
+OK
+
+ruff check <transition implementation and tests>
+All checks passed!
+
+ruff format --check <transition implementation and tests>
+2 files already formatted
+
+python3 -m py_compile .agents/skills/ambitions-product-development-lifecycle/scripts/product_docs/*.py
+success
+
+git diff --check
+success
+```

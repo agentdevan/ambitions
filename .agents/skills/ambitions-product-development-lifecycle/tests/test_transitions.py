@@ -115,8 +115,8 @@ class TransitionTests(TemporaryRepositoryTestCase):
             ),
         )
 
-    def _tracked_complete_draft(self) -> Path:
-        path = self._create_research()
+    def _tracked_complete_draft(self, initiative: str = "Adaptive Start Here") -> Path:
+        path = self._create_research(initiative)
         self.commit_all("track draft")
         self._complete(path)
         document = parse_document(path, repository_root=self.root)
@@ -128,6 +128,36 @@ class TransitionTests(TemporaryRepositoryTestCase):
             ),
         )
         write_document_atomic(path, document, repository_root=self.root)
+        return path
+
+    def _passed_research(self, initiative: str) -> Path:
+        path = self._tracked_complete_draft(initiative)
+        sealed = seal_document(
+            path,
+            repository_root=self.root,
+            sealed_at="2026-08-02T10:00:00Z",
+        )
+        self.commit_all("seal research")
+        content = record_review(
+            path,
+            self._review_payload(
+                sealed,
+                review_id="REV-CONTENT-001",
+                lane="content",
+            ),
+            repository_root=self.root,
+        )
+        self.commit_all("content review")
+        record_review(
+            path,
+            self._review_payload(
+                content,
+                review_id="REV-CONSUMER-001",
+                lane="consumer",
+            ),
+            repository_root=self.root,
+        )
+        self.commit_all("consumer review")
         return path
 
     def _sealed_document(self) -> Path:
@@ -221,6 +251,58 @@ class TransitionTests(TemporaryRepositoryTestCase):
                     raised.exception.diagnostics[0].code, "upstream-not-passed"
                 )
 
+    def test_new_scope_binds_only_same_initiative_canonical_research(self) -> None:
+        research = self._passed_research("Same Initiative")
+
+        scope = create_document(
+            self.root,
+            initiative="Same Initiative",
+            phase="scope",
+            today=TODAY,
+        )
+
+        document = parse_document(scope, repository_root=self.root)
+        self.assertEqual(
+            document.metadata.inputs[0].path,
+            "docs/product-development/same-initiative/research.md",
+        )
+        self.assertEqual(
+            document.metadata.inputs[0].authority_id,
+            "PD-2026-08-SAME-INITIATIVE-RESEARCH",
+        )
+
+        with self.assertRaises(ProductDocsError) as cross_initiative:
+            create_document(
+                self.root,
+                initiative="Different Initiative",
+                phase="scope",
+                input_path=research,
+                today=TODAY,
+            )
+        self.assertEqual(
+            cross_initiative.exception.diagnostics[0].code,
+            "upstream-identity-mismatch",
+        )
+
+        alias_research = self._passed_research("Alias Initiative")
+        renamed = (
+            self.root / "docs/product-development/alias-initiative/renamed-research.md"
+        )
+        renamed.write_bytes(alias_research.read_bytes())
+        self.commit_all("add noncanonical upstream alias")
+        with self.assertRaises(ProductDocsError) as noncanonical:
+            create_document(
+                self.root,
+                initiative="Alias Initiative",
+                phase="scope",
+                input_path=renamed,
+                today=TODAY,
+            )
+        self.assertEqual(
+            noncanonical.exception.diagnostics[0].code,
+            "upstream-path-mismatch",
+        )
+
     def test_reduced_entry_requires_and_validates_typed_authority_json(self) -> None:
         with self.assertRaises(ProductDocsError) as absent:
             create_document(
@@ -291,6 +373,43 @@ class TransitionTests(TemporaryRepositoryTestCase):
             )
         self.assertEqual(
             invalid.exception.diagnostics[0].code, "invalid-authority-file"
+        )
+
+    def test_reduced_scope_rejects_approved_design_authority(self) -> None:
+        approved_design = self.root / "docs" / "approved-design.md"
+        approved_design.write_text("# Approved design\n", encoding="utf-8")
+        authority_commit = self.commit_all("add approved design authority")
+        authority_file = self.root / "approved-design-authority.json"
+        authority_file.write_text(
+            json.dumps(
+                {
+                    "inputs": [
+                        {
+                            "kind": "approved-design",
+                            "authority_id": "APPROVED-DESIGN-001",
+                            "path": "docs/approved-design.md",
+                            "revision": 1,
+                            "contract_hash": "sha256:" + "a" * 64,
+                            "commit": authority_commit,
+                        }
+                    ],
+                    "rationale": "Approved design does not replace Research authority for Scope.",
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        with self.assertRaises(ProductDocsError) as raised:
+            create_document(
+                self.root,
+                initiative="Invalid Scope Authority",
+                phase="scope",
+                authority_file=authority_file,
+                today=TODAY,
+            )
+
+        self.assertEqual(
+            raised.exception.diagnostics[0].code, "authority-kind-not-permitted"
         )
 
     def test_seal_populates_contract_and_preserves_target_on_validation_failure(
@@ -380,6 +499,25 @@ class TransitionTests(TemporaryRepositoryTestCase):
             baseline.exception.diagnostics[0].code,
             {"unreachable-baseline", "historical-path-missing"},
         )
+
+    def test_seal_refuses_document_skill_version_mismatch(self) -> None:
+        path = self._tracked_complete_draft()
+        document = parse_document(path, repository_root=self.root)
+        write_document_atomic(
+            path,
+            replace(
+                document,
+                metadata=replace(document.metadata, skill_version="999.0.0"),
+            ),
+            repository_root=self.root,
+        )
+        before = path.read_bytes()
+
+        with self.assertRaises(ProductDocsError) as raised:
+            seal_document(path, repository_root=self.root)
+
+        self.assertEqual(raised.exception.diagnostics[0].code, "skill-version-mismatch")
+        self.assertEqual(path.read_bytes(), before)
 
     def test_review_lanes_advance_only_with_exact_committed_revision_and_hash(
         self,
@@ -521,6 +659,29 @@ class TransitionTests(TemporaryRepositoryTestCase):
         with self.assertRaises(ProductDocsError) as twice:
             reopen_document(path, repository_root=self.root)
         self.assertEqual(twice.exception.diagnostics[0].code, "invalid-transition")
+
+    def test_research_reopen_rejects_input_rebinding(self) -> None:
+        path = self._sealed_document()
+        sealed = parse_document(path, repository_root=self.root)
+        failure = self._review_payload(
+            sealed,
+            review_id="REV-CONTENT-FAIL-001",
+            lane="content",
+            verdict="needs-revision",
+            blockers=["Resolve FIND-001."],
+        )
+        record_review(path, failure, repository_root=self.root)
+
+        with self.assertRaises(ProductDocsError) as raised:
+            reopen_document(
+                path,
+                repository_root=self.root,
+                input_path="docs/canon/specifications/surfaces/today.md",
+            )
+
+        self.assertEqual(
+            raised.exception.diagnostics[0].code, "invalid-entry-authority"
+        )
 
     def test_mark_stale_and_supersede_change_only_state_and_history(self) -> None:
         path = self._sealed_document()

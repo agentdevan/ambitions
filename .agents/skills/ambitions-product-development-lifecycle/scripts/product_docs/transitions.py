@@ -179,7 +179,7 @@ def _normalized_slug(initiative: str) -> str:
 
 def _active_identity(
     root: Path, phase: DocumentType
-) -> tuple[Path, dict[str, object], str, str]:
+) -> tuple[Path, dict[str, object], str, str, str]:
     skill_root = root / SKILL_ROOT
     manifest = verify_active_package(skill_root)
     template_version = f"{phase.value}-v1"
@@ -198,11 +198,18 @@ def _active_identity(
             "Active package manifest does not contain the selected template",
             path=relative_template,
         )
+    skill_version = manifest.get("skill_version")
+    if not isinstance(skill_version, str) or not skill_version:
+        raise _error(
+            "package-manifest-invalid",
+            "Active package manifest requires an exact skill version",
+        )
     return (
         skill_root,
         manifest,
         package_hash(manifest),
         f"sha256:{template_digest}",
+        skill_version,
     )
 
 
@@ -226,7 +233,9 @@ def is_committed_exact(
         return False
 
 
-def _input_from_record(record: Any, repository: GitRepository) -> InputBinding:
+def _input_from_record(
+    record: Any, repository: GitRepository, target_phase: DocumentType
+) -> InputBinding:
     if not isinstance(record, dict):
         raise _error("invalid-authority-file", "Authority inputs must be JSON objects")
     try:
@@ -248,6 +257,11 @@ def _input_from_record(record: Any, repository: GitRepository) -> InputBinding:
         raise _error(
             "invalid-authority-file",
             "Reduced-entry authority inputs must use the exact typed record fields",
+        )
+    if kind is InputKind.APPROVED_DESIGN and target_phase is not DocumentType.DESIGN:
+        raise _error(
+            "authority-kind-not-permitted",
+            "Approved-design authority is permitted only for reduced Design entry",
         )
     authority_id = _single_line(record.get("authority_id"), "authority_id")
     try:
@@ -292,7 +306,9 @@ def _input_from_record(record: Any, repository: GitRepository) -> InputBinding:
 
 
 def _authority_bindings(
-    authority_file: Path | str, repository: GitRepository
+    authority_file: Path | str,
+    repository: GitRepository,
+    target_phase: DocumentType,
 ) -> tuple[tuple[InputBinding, ...], str]:
     path = Path(authority_file)
     try:
@@ -312,7 +328,9 @@ def _authority_bindings(
         raise _error(
             "invalid-authority-file", "Authority JSON inputs must be a nonempty array"
         )
-    bindings = tuple(_input_from_record(record, repository) for record in records)
+    bindings = tuple(
+        _input_from_record(record, repository, target_phase) for record in records
+    )
     identities = {
         (binding.kind, binding.path, binding.authority_id) for binding in bindings
     }
@@ -326,8 +344,11 @@ def _upstream_binding(
     repository: GitRepository,
     path: Path | str,
     expected_phase: DocumentType,
+    expected_initiative_id: str,
+    expected_path: Path | str,
 ) -> InputBinding:
     relative = _relative_path(path, root)
+    canonical_relative = _relative_path(expected_path, root)
     target = root / relative
     if not is_committed_exact(target, repository_root=root):
         raise _error(
@@ -343,6 +364,22 @@ def _upstream_binding(
             "The required upstream lifecycle document is unavailable or invalid",
             path=relative,
         ) from error
+    expected_document_id = f"{expected_initiative_id}-{expected_phase.value.upper()}"
+    if (
+        upstream.metadata.initiative_id != expected_initiative_id
+        or upstream.metadata.document_id != expected_document_id
+    ):
+        raise _error(
+            "upstream-identity-mismatch",
+            "Upstream lifecycle identity must match the target initiative and adjacent phase",
+            path=relative,
+        )
+    if relative != canonical_relative:
+        raise _error(
+            "upstream-path-mismatch",
+            "Upstream lifecycle input must use its canonical adjacent-phase path",
+            path=relative,
+        )
     report = validate_document(upstream, repository_root=root)
     if (
         upstream.metadata.document_type is not expected_phase
@@ -438,9 +475,13 @@ def create_document(
             path=target.relative_to(root).as_posix(),
         )
 
-    skill_root, manifest, active_package_hash, template_hash = _active_identity(
-        root, document_type
-    )
+    (
+        skill_root,
+        manifest,
+        active_package_hash,
+        template_hash,
+        active_skill_version,
+    ) = _active_identity(root, document_type)
     manifest_path = skill_root / MANIFEST_NAME
     if not is_committed_exact(
         manifest_path, repository_root=root
@@ -467,7 +508,9 @@ def create_document(
                     "conflicting-entry-authority",
                     "Choose either one lifecycle input or a reduced-entry authority file",
                 )
-            inputs, rationale = _authority_bindings(authority_file, repository)
+            inputs, rationale = _authority_bindings(
+                authority_file, repository, document_type
+            )
         else:
             selected_input = default_upstream if input_path is None else input_path
             if selected_input == "":
@@ -476,7 +519,14 @@ def create_document(
                     "Skipping the upstream phase requires a validated authority JSON file",
                 )
             inputs = (
-                _upstream_binding(root, repository, selected_input, upstream_type),
+                _upstream_binding(
+                    root,
+                    repository,
+                    selected_input,
+                    upstream_type,
+                    identity,
+                    default_upstream,
+                ),
             )
     elif authority_file is not None or input_path not in (None, ""):
         raise _error(
@@ -489,6 +539,7 @@ def create_document(
     metadata = replace(
         document.metadata,
         template_hash=template_hash,
+        skill_version=active_skill_version,
         skill_package_hash=active_package_hash,
         authoring_surface=_single_line(authoring_surface, "authoring_surface"),
         initiative_id=identity,
@@ -593,9 +644,19 @@ def seal_document(
             "Seal requires a document tracked at HEAD",
             path=relative,
         )
-    skill_root, manifest, active_package_hash, template_hash = _active_identity(
-        root, document.metadata.document_type
-    )
+    (
+        skill_root,
+        manifest,
+        active_package_hash,
+        template_hash,
+        active_skill_version,
+    ) = _active_identity(root, document.metadata.document_type)
+    if document.metadata.skill_version != active_skill_version:
+        raise _error(
+            "skill-version-mismatch",
+            "Document skill version must match the active package manifest exactly",
+            identifier=document.metadata.skill_version,
+        )
     if repository.has_worktree_change(SKILL_ROOT) or not is_committed_exact(
         skill_root / MANIFEST_NAME, repository_root=root
     ):
@@ -623,6 +684,7 @@ def seal_document(
         metadata=replace(
             document.metadata,
             template_hash=template_hash,
+            skill_version=active_skill_version,
             skill_package_hash=active_package_hash,
             updated_at=current_day,
             contract_hash="",
@@ -979,20 +1041,38 @@ def reopen_document(
             )
     new_inputs = document.metadata.inputs
     rationale: str | None = None
+    if document.metadata.document_type is DocumentType.RESEARCH and (
+        authority_file is not None or input_path not in (None, "")
+    ):
+        raise _error(
+            "invalid-entry-authority",
+            "Research is the first lifecycle phase and cannot bind an upstream input",
+        )
     if authority_file is not None:
         if input_path not in (None, ""):
             raise _error(
                 "conflicting-entry-authority",
                 "Choose either one lifecycle input or a reduced-entry authority file",
             )
-        new_inputs, rationale = _authority_bindings(authority_file, repository)
+        new_inputs, rationale = _authority_bindings(
+            authority_file, repository, document.metadata.document_type
+        )
     elif input_path not in (None, ""):
         upstream_type = (
             DocumentType.RESEARCH
             if document.metadata.document_type is DocumentType.SCOPE
             else DocumentType.SCOPE
         )
-        new_inputs = (_upstream_binding(root, repository, input_path, upstream_type),)
+        new_inputs = (
+            _upstream_binding(
+                root,
+                repository,
+                input_path,
+                upstream_type,
+                document.metadata.initiative_id,
+                target.parent / f"{upstream_type.value}.md",
+            ),
+        )
     instant = _timestamp(reopened_at)
     reopened = replace(
         document,
