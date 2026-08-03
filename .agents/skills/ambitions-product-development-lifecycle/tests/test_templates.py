@@ -47,8 +47,15 @@ class TemplateProfileTests(unittest.TestCase):
         for mode in ("create", "review", "approve", "groom"):
             self.assertIn(mode, skill.lower())
 
-        for phase in ("research", "scope", "design"):
+        next_phases = {
+            "research": "Scope creation",
+            "scope": "Design creation",
+            "design": "implementation grooming",
+        }
+        for phase, next_phase in next_phases.items():
             contents = (REFERENCE_DIRECTORY / f"{phase}-review-rubric.md").read_text(encoding="utf-8")
             self.assertIn("PASS", contents)
             self.assertIn("NEEDS REVISION", contents)
             self.assertIn("conversational", contents.lower())
+            self.assertIn("ready for Devan's approval", contents)
+            self.assertIn(f"Only after Devan's explicit approval is it ready for {next_phase}", contents)
