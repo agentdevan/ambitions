@@ -152,6 +152,33 @@ class GitRepository:
             )
         return validate_commit_id(commit)
 
+    def commits_touching(self, path: str) -> tuple[str, ...]:
+        """Return HEAD-reachable commits that changed ``path``, newest first."""
+        path = validate_repository_path(path)
+        result = self._run(
+            ["log", "--format=%H", "HEAD", "--", _literal_pathspec(path)]
+        )
+        return tuple(
+            validate_commit_id(commit)
+            for commit in result.stdout.decode("ascii").splitlines()
+            if commit
+        )
+
+    def parent_of(self, commit: str) -> str:
+        """Return the sole first parent needed for a lifecycle transition check."""
+        commit = validate_commit_id(commit)
+        result = self._run(["rev-parse", f"{commit}^"], check=False)
+        parent = result.stdout.decode("ascii", errors="replace").strip()
+        if result.returncode != 0 or not parent:
+            raise ProductDocsError(
+                Diagnostic(
+                    "transition-parent-missing",
+                    "Lifecycle transition commit requires a reachable parent",
+                    identifier=commit,
+                )
+            )
+        return validate_commit_id(parent)
+
     def path_exists_at(self, commit: str, path: str) -> bool:
         commit = validate_commit_id(commit)
         path = validate_repository_path(path)

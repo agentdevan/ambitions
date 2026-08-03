@@ -575,6 +575,23 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
         )
         self.assertEqual(report.blockers, ("semantic-review-required",))
 
+    def test_declared_skill_owner_drift_remains_relevant(self) -> None:
+        owner_relative = (
+            SKILL_PATH / "scripts" / "product_docs" / "validation.py"
+        ).as_posix()
+        path = self._content_reviewed_research(freshness_paths=(owner_relative,))
+        owner = self.root / owner_relative
+        owner.write_text(owner.read_text(encoding="utf-8") + "# drift\n", encoding="utf-8")
+        (self.skill_root / "package-manifest.json").write_bytes(
+            canonical_manifest_bytes(build_manifest(self.skill_root))
+        )
+        self.commit_all("declared skill owner drift")
+
+        report = consume_document(path, repository_root=self.root)
+
+        self.assertEqual(report.blockers, ("semantic-review-required",))
+        self.assertEqual(report.relevant_paths, (owner_relative,))
+
     def test_consumer_pass_requires_exact_nonmaterial_drift_assessments(self) -> None:
         path = self._content_reviewed_research(freshness_paths=("Sources",))
         changed = self.root / "Sources" / "Nested.swift"
@@ -663,6 +680,53 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
             fresh_report.blockers, ("semantic-review-required",)
         )
         self.assertEqual(fresh_report.relevant_paths, ("Sources/AfterReview.swift",))
+
+        tampered = path.read_text(encoding="utf-8")
+        tampered += """
+### Review event: REV-CONSUMER-TAMPER-011
+
+- Review lane: `CONSUMER`
+- Verdict: `PASS`
+- Reviewer surface: `codex`
+- Reviewed at: `2026-08-02T12:00:00Z`
+- Reviewed revision: `1`
+- Reviewed contract hash: `""" + content.metadata.contract_hash + """`
+
+#### Blocking findings
+
+- None
+
+#### Non-blocking improvements
+
+- None
+
+#### Traceability gaps
+
+- None
+
+#### Stale or conflicting inputs
+
+- None
+
+#### Required revisions
+
+- None
+
+#### Next permitted lifecycle phase
+
+scope
+
+#### Drift assessments
+
+- `Sources/AfterReview.swift`: `none` — Manual append must not reset the boundary.
+"""
+        path.write_text(tampered, encoding="utf-8")
+        self.commit_all("tampered consumer history append")
+
+        tampered_report = consume_document(path, repository_root=self.root)
+        self.assertEqual(
+            tampered_report.blockers, ("semantic-review-required",)
+        )
 
 
 if __name__ == "__main__":

@@ -39,7 +39,8 @@ _RAW_HASH = re.compile(r"[0-9a-f]{64}\Z")
 _WORD = re.compile(r"\b[\w'-]+\b", re.UNICODE)
 _DRAFT_SENTINEL = "PRODUCT-DOC-DRAFT:"
 _REVIEW_EVENT = re.compile(
-    r"(?ms)^### Review event: [^\n]+\n(?P<body>.*?)(?=^### Review event:|\Z)"
+    r"(?ms)^### Review event: (?P<review_id>[A-Z0-9]+(?:-[A-Z0-9]+)*)\n"
+    r"(?P<body>.*?)(?=^### Review event:|\Z)"
 )
 _DRIFT_ASSESSMENT = re.compile(
     r"^- `(?P<path>[^`]+)`: `(?P<impact>none|material)` — (?P<rationale>.+)$"
@@ -137,15 +138,16 @@ def _section(document: LifecycleDocument, heading: str) -> Section | None:
     )
 
 
-def _accepted_consumer_assessments(
+def _consumer_pass_events(
     document: LifecycleDocument,
-) -> tuple[tuple[str, str], ...] | None:
-    """Read the active revision/hash-bound Consumer PASS assessments from history."""
+) -> tuple[tuple[str, str, tuple[tuple[str, str], ...]], ...]:
+    """Parse current revision/hash-bound Consumer PASS events exactly."""
     history = _section(document, "Review history")
     if history is None:
-        return None
+        return ()
     metadata = document.metadata
-    for event in reversed(tuple(_REVIEW_EVENT.finditer(history.body))):
+    parsed = []
+    for event in _REVIEW_EVENT.finditer(history.body):
         body = event.group("body")
         if (
             "- Review lane: `CONSUMER`" not in body
@@ -158,22 +160,90 @@ def _accepted_consumer_assessments(
             r"(?ms)^#### Drift assessments\n\n(?P<body>.*?)(?=^#### |\Z)", body
         )
         if assessment_section is None:
-            return None
+            return ()
         lines = tuple(
             line for line in assessment_section.group("body").splitlines() if line
         )
         if lines == ("- None",):
-            return ()
-        assessments = []
-        for line in lines:
-            match = _DRIFT_ASSESSMENT.fullmatch(line)
-            if match is None:
-                return None
-            assessments.append((match.group("path"), match.group("impact")))
-        if len({path for path, _ in assessments}) != len(assessments):
-            return None
-        return tuple(sorted(assessments))
-    return None
+            assessments: tuple[tuple[str, str], ...] = ()
+        else:
+            values = []
+            for line in lines:
+                match = _DRIFT_ASSESSMENT.fullmatch(line)
+                if match is None:
+                    return ()
+                values.append((match.group("path"), match.group("impact")))
+            if len({path for path, _ in values}) != len(values):
+                return ()
+            assessments = tuple(sorted(values))
+        parsed.append((event.group("review_id"), event.group(0), assessments))
+    return tuple(parsed)
+
+
+def _historical_document(
+    repository: GitRepository, commit: str, path: str, root: Path
+) -> LifecycleDocument | None:
+    try:
+        return parse_document(
+            repository.read_bytes_at(commit, path).decode("utf-8"),
+            repository_root=root,
+        )
+    except (UnicodeDecodeError, ProductDocsError):
+        return None
+
+
+def _accepted_consumer_assessment_boundary(
+    document: LifecycleDocument,
+    repository: GitRepository,
+    path: str,
+    root: Path,
+) -> tuple[str, tuple[tuple[str, str], ...]] | None:
+    """Authenticate the active Consumer PASS to its transition commit."""
+    active_events = _consumer_pass_events(document)
+    if len(active_events) != 1:
+        return None
+    review_id, active_event, assessments = active_events[0]
+    metadata = document.metadata
+    candidates = []
+    for commit in repository.commits_touching(path):
+        child = _historical_document(repository, commit, path, root)
+        if child is None or child.metadata.status is not DocumentStatus.PASSED:
+            continue
+        child_metadata = child.metadata
+        if (
+            child_metadata.revision != metadata.revision
+            or child_metadata.contract_hash != metadata.contract_hash
+            or child_metadata.content_review_verdict is not ReviewVerdict.PASS
+            or child_metadata.consumer_review_verdict is not ReviewVerdict.PASS
+            or child_metadata.consumer_review_revision != metadata.revision
+            or child_metadata.consumer_review_hash != metadata.contract_hash
+            or child_metadata.consumer_blocking_findings != 0
+        ):
+            continue
+        child_events = _consumer_pass_events(child)
+        if child_events != ((review_id, active_event, assessments),):
+            continue
+        try:
+            parent_commit = repository.parent_of(commit)
+        except ProductDocsError:
+            continue
+        parent = _historical_document(repository, parent_commit, path, root)
+        if parent is None or parent.metadata.status is not DocumentStatus.CONTENT_REVIEWED:
+            continue
+        parent_metadata = parent.metadata
+        if (
+            parent_metadata.revision != metadata.revision
+            or parent_metadata.contract_hash != metadata.contract_hash
+            or parent_metadata.content_review_verdict is not ReviewVerdict.PASS
+            or parent_metadata.consumer_review_verdict is not ReviewVerdict.UNREVIEWED
+            or parent_metadata.consumer_review_revision != 0
+            or parent_metadata.consumer_review_hash != ""
+            or parent_metadata.consumer_blocking_findings != 0
+            or any(event[0] == review_id for event in _consumer_pass_events(parent))
+        ):
+            continue
+        candidates.append((commit, assessments))
+    return candidates[0] if len(candidates) == 1 else None
 
 
 def _semantic_relevant_paths(
@@ -187,10 +257,7 @@ def _semantic_relevant_paths(
     return tuple(
         changed_path
         for changed_path in changed_paths
-        if (
-            changed_path not in package_identity_paths
-            and not changed_path.startswith(f"{SKILL_ROOT}/")
-        )
+        if changed_path not in package_identity_paths
         and any(
             changed_path == freshness
             or changed_path.startswith(f"{freshness.rstrip('/')}/")
@@ -1312,12 +1379,11 @@ def consume_document(
         baseline_relevant = _semantic_relevant_paths(changed, metadata)
         relevant_set = set(baseline_relevant)
         unrelated = tuple(item for item in changed if item not in relevant_set)
-        try:
-            review_commit = repository.latest_commit_touching(relative)
-        except ProductDocsError:
-            review_commit = ""
-        assessments = _accepted_consumer_assessments(document)
-        if review_commit and assessments is not None:
+        accepted_boundary = _accepted_consumer_assessment_boundary(
+            document, repository, relative, root
+        )
+        if accepted_boundary is not None:
+            review_commit, assessments = accepted_boundary
             reviewed_relevant = _semantic_relevant_paths(
                 repository.changed_paths(metadata.repository_baseline_commit, review_commit),
                 metadata,
