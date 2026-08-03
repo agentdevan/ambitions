@@ -1,8 +1,8 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 5 — final verification candidate  
-**Repository baseline inspected:** `581fc28d8830e702e00ac76a9f15f11f57c05b80`  
+**Status:** Revision 6 — final verification candidate  
+**Repository baseline inspected:** `ee57f8fa65052d3361bee72442318a9034f60272`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
@@ -370,8 +370,13 @@ Authors declare exact `canon_targets`, `source_owner_paths`, `test_owner_paths`,
 - all declared owner and dependency path arrays;
 - every `inputs[].path`;
 - every `evidence_files[].path`;
-- current generated canon routing when `canon_targets` is non-empty;
-- the skill package manifest and active template path.
+- these canon-routing files when `canon_targets` is non-empty:
+  - `docs/canon/generated/CODEX_START_HERE.md`;
+  - `docs/canon/generated/INDEX.md`;
+  - `docs/canon/generated/canon-index.json`;
+  - `docs/canon/generated/requirement-graph.json`;
+- `.agents/skills/ambitions-product-development-lifecycle/package-manifest.json`;
+- the active template path.
 
 Authors may expand freshness through `additional_freshness_paths` but cannot
 remove a derived path. The validator rejects a manually altered or incomplete
@@ -400,20 +405,20 @@ The state machine is deterministic:
 | Current state | Command/result | Next state | Required side effects |
 |---|---|---|---|
 | absent | `new` | `draft` | Create exact template with revision `1`; no hash or verdicts |
-| `draft` or `needs-revision` | `seal` succeeds | `sealed` | Derive freshness, compute/store hash, clear both review lanes |
+| `draft` | `seal` succeeds | `sealed` | Derive freshness, compute/store hash, clear both review lanes |
 | `sealed` | content review `PASS` | `content-reviewed` | Record content verdict and append review history |
 | `sealed` | content review `NEEDS REVISION` | `needs-revision` | Record blockers and append review history |
 | `content-reviewed` | consumer review `PASS` | `passed` | Record consumer verdict and append review history |
 | `content-reviewed` | consumer review `NEEDS REVISION` | `needs-revision` | Record blockers and append review history |
 | `passed` | relevant upstream or evidence drift | effective `stale` | Read-only checks fail; explicit `reconcile --mark-stale` persists `stale` |
-| `stale` | `reconcile --reopen` | `draft` | Increment revision, update inputs/baseline, clear seal and both reviews |
-| any non-superseded state | `supersede` | `superseded` | Record replacement document and reason |
+| `needs-revision` or `stale` | `reconcile --reopen` | `draft` | Increment revision, update baseline/inputs as supplied, clear hash and both reviews |
+| any non-superseded state | `supersede` | `superseded` | Record replacement document and reason without changing authority-bearing body |
 
-Authority-bearing edits are permitted only in `draft` or `needs-revision`.
-A `stale` document must first run `reconcile --reopen`. Editing a sealed,
-content-reviewed, passed, stale, or superseded body directly is invalid. The
-validator detects a mismatched stored hash and fails even when status was not
-changed.
+Authority-bearing edits are permitted only in `draft`. A `needs-revision` or
+`stale` document must first run `reconcile --reopen`. Editing a sealed,
+content-reviewed, passed, needs-revision, stale, or superseded body directly is
+invalid. The validator detects a mismatched stored hash and fails even when
+status was not changed.
 
 `passed` requires both verdicts and blocker counts to pass the same current
 revision and contract hash, valid current inputs and evidence hashes, and
@@ -756,20 +761,33 @@ read-only; `package --write` regenerates the manifest.
 `seal` is the only command that may establish or replace `contract_hash` and
 `freshness_paths`. It:
 
-1. requires a writable state;
+1. requires `status = "draft"`;
 2. verifies package and template identity;
 3. validates schema, headings, typed inputs, evidence hashes, declared owners,
    dependencies, and additional freshness paths;
 4. derives and writes the exact freshness set;
-5. requires revision to have increased after a previously sealed contract was
-   reopened;
+5. verifies that `reconcile --reopen` incremented revision after any prior seal;
 6. computes and writes the exact contract hash;
 7. clears both review lanes and blocker counts;
 8. changes status to `sealed`;
 9. appends a non-review seal event to Review history;
 10. prints the sealed revision, hash, freshness set, and next review lane.
 
-### 18.2 General CLI behavior
+### 18.2 `reconcile --reopen` contract
+
+`reconcile --reopen` is the only transition from `needs-revision` or `stale` to
+an editable draft. It:
+
+1. requires one of those two statuses;
+2. increments revision exactly once;
+3. updates baseline and input bindings only from supplied, validated values;
+4. clears `contract_hash`, `freshness_paths`, both review lanes, and blocker
+   counts;
+5. changes status to `draft`;
+6. appends a reopen event to Review history;
+7. prints the new revision and required corrective work.
+
+### 18.3 General CLI behavior
 
 The CLI must:
 
@@ -784,7 +802,7 @@ The CLI must:
 - require finding-to-source, requirement-to-finding, requirement-to-acceptance,
   design-to-verification, and canon-delta traceability;
 - reject placeholders and empty required sections before sealing;
-- append seal and review records atomically;
+- append seal, reopen, and review records atomically;
 - explicitly mark or reopen stale documents;
 - never mutate during CI or read-only commands;
 - restrict writes to approved roots and reject path traversal;
@@ -849,17 +867,19 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 
 A fixture initiative is authored through ChatGPT and consumed through Codex. It
 proves identical package/template hashes, canonical persistence, authoritative
-sealing, derived freshness, durable review records, summary-first reading,
-relevant-drift detection, evidence-hash checking, Research → Scope → Design →
-canon reconciliation → grooming, and independence from the original chat.
+sealing, derived freshness, deterministic reopen/revision behavior, durable
+review records, summary-first reading, relevant-drift detection, evidence-hash
+checking, Research → Scope → Design → canon reconciliation → grooming, and
+independence from the original chat.
 
 ### 21.4 CLI tests
 
 Tests cover package manifest generation, templates, versions, package hashes,
 IDs, TOML, canonical hashing, sealing, freshness derivation, incomplete
-freshness rejection, illegal post-seal edits, review history, state transitions,
-typed inputs, evidence hashes, relevant drift, canon deltas, traceability, stale
-reconciliation, path safety, read-only behavior, JSON output, and failure exits.
+freshness rejection, failed-review reopening, exact revision increments, illegal
+post-seal edits, review history, state transitions, typed inputs, evidence hashes,
+relevant drift, canon deltas, traceability, stale reconciliation, path safety,
+read-only behavior, JSON output, and failure exits.
 
 ## 22. Delivery boundary
 
@@ -906,8 +926,8 @@ The system is complete when:
    verification.
 5. Both review lanes bind to one sealed revision and contract hash and have
    durable append-only review records.
-6. Package identity, the exact document-hash algorithm, and the seal transition
-   are implemented and tested.
+6. Package identity, the exact document-hash algorithm, seal, and reopen
+   transitions are implemented and tested.
 7. Typed inputs, evidence hashes, owner declarations, derived freshness, and
    relevant drift are enforced.
 8. Relevant changes invalidate consumption; unrelated changes do not.
@@ -930,6 +950,7 @@ The system is complete when:
 - Documents declare distinct authority classes.
 - A canonical package manifest and exact hashes prevent cross-product drift.
 - An explicit seal establishes the reviewable revision, freshness set, and hash.
+- An explicit reopen transition controls every corrective revision.
 - Review verdicts bind to exact sealed revision and deterministic contract hash.
 - Review records are durable and append-only.
 - Typed inputs eliminate parallel-array ambiguity.
@@ -950,8 +971,8 @@ the lifecycle system is complete.
 
 ## 27. Review gate
 
-Revision 5 incorporates both ruthless review passes and all final mechanical
-repairs. Approval requires verification that package identity, sealing,
-typed-input schemas, derived freshness, state transitions, review binding,
-authority deltas, and the cross-product handoff are internally consistent and
-directly implementable.
+Revision 6 incorporates both ruthless review passes and all mechanical repairs.
+Approval requires verification that package identity, sealing, corrective
+reopening, typed-input schemas, derived freshness, state transitions, review
+binding, authority deltas, and the cross-product handoff are internally
+consistent and directly implementable.
