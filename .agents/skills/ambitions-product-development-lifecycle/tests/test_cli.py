@@ -188,6 +188,30 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(payload["status"], "failure")
         self.assertIn("missing-required-heading", {item["code"] for item in payload["diagnostics"]})
 
+    def test_check_file_emits_one_parse_diagnostic_for_a_malformed_document(self) -> None:
+        path = self.root / DOCUMENTS_PATH / "example" / "research.md"
+        path.parent.mkdir(parents=True)
+        path.write_text("not TOML frontmatter\n", encoding="utf-8")
+
+        result, payload = self.invoke_json(
+            "check", "docs/product-development/example/research.md"
+        )
+
+        self.assertEqual(result, EXIT_DOMAIN_FAILURE)
+        self.assertEqual(
+            payload["diagnostics"],
+            [
+                {
+                    "code": "missing-frontmatter",
+                    "message": "Document must begin with TOML frontmatter",
+                    "path": None,
+                    "section": None,
+                    "identifier": None,
+                    "remediation": None,
+                }
+            ],
+        )
+
     def test_check_file_validates_approval_order_for_approved_downstream_documents(
         self,
     ) -> None:

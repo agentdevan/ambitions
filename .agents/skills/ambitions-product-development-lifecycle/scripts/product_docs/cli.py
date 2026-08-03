@@ -240,7 +240,11 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
         try:
             document = parse_document(path, repository_root=root)
         except ProductDocsError as error:
-            diagnostics.extend(error.diagnostics)
+            diagnostics.extend(
+                diagnostic
+                for diagnostic in error.diagnostics
+                if diagnostic not in diagnostics
+            )
             continue
         documents.append(document)
         records.append(_document_record(document, path_relative))
