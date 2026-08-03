@@ -12,7 +12,7 @@ document_type = "design"
 authority_class = "implementation-design"
 entry_point = "design"
 
-status = "passed"
+status = "content-reviewed"
 revision = 1
 created_at = "2026-08-03"
 updated_at = "2026-08-03"
@@ -24,9 +24,9 @@ content_review_verdict = "pass"
 content_review_revision = 1
 content_review_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
 content_blocking_findings = 0
-consumer_review_verdict = "pass"
-consumer_review_revision = 1
-consumer_review_hash = "sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224"
+consumer_review_verdict = "unreviewed"
+consumer_review_revision = 0
+consumer_review_hash = ""
 consumer_blocking_findings = 0
 
 canon_targets = []
@@ -439,42 +439,6 @@ The exact upstream binding, package/template identity, synthetic boundary, owner
 #### Next permitted lifecycle phase
 
 consumer-review
-
-#### Drift assessments
-
-- None
-### Review event: REV-CONSUMER-DESIGN-001
-
-- Review lane: `CONSUMER`
-- Verdict: `PASS`
-- Reviewer surface: `codex`
-- Reviewed at: `2026-08-03T17:56:21Z`
-- Reviewed revision: `1`
-- Reviewed contract hash: `sha256:30b689731623644dc2a19873418f25fa425b56c28930e3a67af52661a8257224`
-
-#### Blocking findings
-
-- None
-
-#### Non-blocking improvements
-
-- None
-
-#### Traceability gaps
-
-- None
-
-#### Stale or conflicting inputs
-
-- None
-
-#### Required revisions
-
-- None
-
-#### Next permitted lifecycle phase
-
-canon-reconciliation
 
 #### Drift assessments
 
