@@ -1,59 +1,75 @@
 ---
 name: ambitions-product-development-lifecycle
-description: Use when creating, reviewing, or consuming an Ambitions research, scope, or design document for a material product, UX, or architecture change; do not use for routine work whose behavior is already canonical.
+description: Use when turning a material Ambitions product, UX, or architecture idea into Research, Scope, Design, and implementation grooming documents; do not use for routine work whose behavior is already canonical.
 ---
 
-# Ambitions product development lifecycle
+# Ambitions product-development lifecycle
 
-## Choose the role
+Use this as one continuing, conversational workflow with Devan. The durable
+handoff is the initiative directory:
 
-Choose exactly one role before acting: Producer, Content review, or Consumer.
-Load the [lifecycle contract](references/lifecycle-contract.md), the applicable
-role contract, and the matching phase rubric. Use the
-[Research rubric](references/research-review-rubric.md),
-[Scope rubric](references/scope-review-rubric.md), or
-[Design rubric](references/design-review-rubric.md) for the document phase.
-Do not blend authoring and review in one pass.
+```text
+docs/product-development/<initiative>/
+├── research.md
+├── scope.md
+├── design.md
+└── implementation/
+    ├── plan.md
+    ├── tasks.md
+    └── verification.md
+```
 
-## Producer
+## Create
 
-Read the [producer contract](references/producer-contract.md). Select the exact
-[Research template](assets/templates/v1/research.md),
-[Scope template](assets/templates/v1/scope.md), or
-[Design template](assets/templates/v1/design.md). Inspect current canon, source,
-tests, evidence, and initiative files; record committed inputs and owner paths.
-Create one self-contained canonical document, commit the completed draft, seal
-that exact revision, then request Content review. Stop when evidence, access, or
-owner decisions are insufficient.
+When Devan brings an idea, inspect the relevant canon, source, tests, and
+available evidence. Read the [creation guidance](references/producer-contract.md)
+and create the appropriate document from the matching template:
+[Research](assets/templates/v1/research.md),
+[Scope](assets/templates/v1/scope.md), or
+[Design](assets/templates/v1/design.md).
 
-## Content review
+Research explains the problem and evidence without committing scope or
+implementation. Scope uses approved Research and commits the intended product
+behavior without inventing implementation details. Design uses approved Scope
+and defines flows, states, architecture, privacy, accessibility, traceability,
+and verification in enough detail to groom implementation work.
 
-Review only a committed, sealed revision. Use the matching phase rubric to test
-factual support, product logic, boundaries, privacy, accessibility, alternatives,
-and internal consistency. Return the rubric's exact `PASS` or `NEEDS REVISION`
-form and bind it to the revision and contract hash. Do not perform Consumer work.
+## Review
 
-## Consumer
+Review the current document in the same conversation using its matching rubric:
+[Research](references/research-review-rubric.md),
+[Scope](references/scope-review-rubric.md), or
+[Design](references/design-review-rubric.md). Return `PASS` when it is complete,
+internally consistent, grounded in current repository truth, and has no blocking
+finding. Otherwise return `NEEDS REVISION` with a concise list of blockers.
 
-Read the [consumer contract](references/consumer-contract.md). Verify the active
-instruction chain, committed document, historical package, current compatibility,
-seal, reviews, inputs, evidence, and relevant repository drift. Read the handoff
-summary before needed detail. Use the matching phase rubric and return `PASS` or
-`NEEDS REVISION` without inventing missing authority. Record a verdict only with
-an explicit lifecycle command.
+When Devan agrees, revise the document directly and review it again. Do not
+create separate review artifacts or require seals, hashes, provenance packets,
+freshness replay, or isolated reviewer sessions.
 
-## Lifecycle boundaries
+## Approve
 
-Use this workflow only for material behavior not already resolved by current
-canon. Research gathers evidence; Scope commits product behavior; Design defines
-implementation design. Research and Scope cannot authorize implementation.
-Lifecycle documents propose canon changes but do not activate them.
-A document PASS cannot authorize merge. This workflow grants no edit, approval, release, or
-deployment authority.
+Mark a document `status = "approved"` only after Devan explicitly approves it
+and the ChatGPT review has no blocking finding. Research must be approved before
+Scope, and Scope must be approved before Design. Approval does not authorize
+implementation, merging, deployment, or release.
 
-## Commands
+## Groom
 
-Run the [lifecycle CLI](scripts/ambitions_product_docs.py) from the repository
-root. Use `package --check`, `new`, `check`, `hash`, `seal`, `review`, `reconcile`,
-`consume`, and `supersede`. Write commands must be explicit; `package --check`,
-`check`, `hash`, and `consume` are read-only.
+After Design is approved, create `implementation/plan.md`,
+`implementation/tasks.md`, and `implementation/verification.md`. Keep every
+engineering task traceable to a Design decision and every Design decision
+traceable to a Scope requirement. Grooming may resolve technical details but
+must not invent product behavior; return to Scope or Design for any new product
+decision.
+
+## Boundaries and tooling
+
+Current canon continues to govern until implementation deliberately updates the
+owning canon sources. Stop and explain what is missing when repository access,
+evidence, or a product decision is unavailable.
+
+Use `scripts/ambitions_product_docs.py new` to create a phase document and
+`scripts/ambitions_product_docs.py check` to validate initiative structure.
+These tools do not review content, change approval state, authorize work, or
+replace the conversational lifecycle.

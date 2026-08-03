@@ -1,19 +1,19 @@
-# Producer contract
+# Creation guidance
 
-Before authoring, inspect current canon, source, tests, evidence, and existing
-initiative files. Classify each source as repository evidence, current canon,
-or external evidence; record exact paths, commits, access dates, and recheck
-triggers where applicable. Use current research for time-sensitive claims.
+Work conversationally with Devan. Before creating or revising a document,
+inspect the relevant canon, source, tests, existing initiative files, and
+available evidence. Use the phase template at the canonical initiative path and
+keep the document self-contained enough for the next phase to use without chat
+history.
 
-Load the canonical manifest, selected template, and this contract. Write one
-self-contained file at its canonical repository path: a reader must understand
-the conclusion, constraints, IDs, inputs, owner paths, exclusions, unresolved
-blockers, and next action without chat history. Preserve the document's
-authority boundary and traceability; do not turn evidence into product
-commitment or product commitment into implementation architecture.
+Research records the problem, current truth, evidence, alternatives, risks, and
+a recommended direction. It does not commit Scope or implementation. Scope is
+created from approved Research and resolves product behavior, exclusions,
+requirements, and acceptance criteria without forcing Design to invent a product
+decision. Design is created from approved Scope and resolves the flows, states,
+architecture, data, privacy, accessibility, traceability, and verification
+needed for implementation grooming.
 
-Commit the completed draft as the canonical handoff. Obtain an authoritative
-seal for that exact committed revision before requesting review. A draft
-preflight is useful but cannot replace sealing. Stop at `needs-revision` when
-evidence, access, or decisions are insufficient. Producer mode cannot declare
-Codex consumption readiness.
+If evidence, repository access, or a product decision is missing, stop and
+explain what is needed. Do not require a seal, contract hash, provenance packet,
+freshness replay, review artifact, or isolated reviewer session.

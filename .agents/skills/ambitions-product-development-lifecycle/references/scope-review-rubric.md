@@ -1,28 +1,11 @@
 # Scope review rubric
 
-## Content review
+Review Scope conversationally with Devan. Confirm that approved Research is its
+upstream input, the outcome and boundaries are clear, requirements and
+acceptance criteria are observable, potential canon impact is identified, and
+risks and product decisions are explicit. Confirm that unresolved decisions do
+not force Design or implementation to invent product behavior.
 
-Confirm a clear user outcome, explicit boundaries, requirements and acceptance
-criteria with inspectable evidence, states, invariants, privacy, accessibility,
-recovery, dependencies, risks, release boundary, and explicit canon impact.
-Confirm declared owner paths cover every material repository, canon, source,
-test, and evidence dependency. Open decisions must not force Design invention.
-
-## Codex consumption review
-
-Confirm Design can proceed from the summary, upstream bindings, IDs, and
-requirements without inventing behavior. Verify committed inputs, seal binding,
-freshness, traceability, authority boundary, and compatibility with current
-canon and source.
-
-## Required output
-
-`Verdict: PASS | NEEDS REVISION`
-`Review lane: CONTENT | CONSUMER`
-`Review ID: REV-<LANE>-<NUMBER>`
-`Reviewed revision: <integer>`
-`Reviewed contract hash: sha256:<hash>`
-
-Then state Blocking findings, Non-blocking improvements, Traceability gaps,
-Stale or conflicting inputs, Required revisions, and Next permitted lifecycle
-phase. A PASS has no blocking finding.
+Return `PASS` in prose when there are no blocking findings and Scope is ready
+for Devan's approval or Design creation. Otherwise return `NEEDS REVISION` in
+prose followed by a concise list of blocking findings and the revisions needed.
