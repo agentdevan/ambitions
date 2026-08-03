@@ -648,10 +648,21 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
             if section.heading == "Review history"
         )
         self.assertIn("The new file is unrelated to FIND-001.", history)
-        self.assertFalse(
-            consume_document(path, repository_root=self.root).verdict
-            is ReviewVerdict.PASS
+        self.commit_all("consumer review")
+
+        accepted_report = consume_document(path, repository_root=self.root)
+        self.assertIs(accepted_report.verdict, ReviewVerdict.PASS)
+        self.assertEqual(accepted_report.relevant_paths, ())
+
+        later_drift = self.root / "Sources" / "AfterReview.swift"
+        later_drift.write_text("struct AfterReview {}\n", encoding="utf-8")
+        self.commit_all("fresh relevant owner drift")
+
+        fresh_report = consume_document(path, repository_root=self.root)
+        self.assertEqual(
+            fresh_report.blockers, ("semantic-review-required",)
         )
+        self.assertEqual(fresh_report.relevant_paths, ("Sources/AfterReview.swift",))
 
 
 if __name__ == "__main__":

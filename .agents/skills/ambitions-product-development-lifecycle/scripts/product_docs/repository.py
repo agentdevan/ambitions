@@ -134,6 +134,24 @@ class GitRepository:
             )
         )
 
+    def latest_commit_touching(self, path: str) -> str:
+        """Return the reachable HEAD-history commit that last changed ``path``."""
+        path = validate_repository_path(path)
+        result = self._run(
+            ["log", "-1", "--format=%H", "HEAD", "--", _literal_pathspec(path)],
+            check=False,
+        )
+        commit = result.stdout.decode("ascii", errors="replace").strip()
+        if result.returncode != 0 or not commit:
+            raise ProductDocsError(
+                Diagnostic(
+                    "historical-path-missing",
+                    "Path has no reachable committed history",
+                    path=path,
+                )
+            )
+        return validate_commit_id(commit)
+
     def path_exists_at(self, commit: str, path: str) -> bool:
         commit = validate_commit_id(commit)
         path = validate_repository_path(path)

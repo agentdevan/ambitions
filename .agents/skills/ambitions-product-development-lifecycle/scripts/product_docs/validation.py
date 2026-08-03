@@ -38,6 +38,12 @@ _HASH = re.compile(r"sha256:[0-9a-f]{64}\Z")
 _RAW_HASH = re.compile(r"[0-9a-f]{64}\Z")
 _WORD = re.compile(r"\b[\w'-]+\b", re.UNICODE)
 _DRAFT_SENTINEL = "PRODUCT-DOC-DRAFT:"
+_REVIEW_EVENT = re.compile(
+    r"(?ms)^### Review event: [^\n]+\n(?P<body>.*?)(?=^### Review event:|\Z)"
+)
+_DRIFT_ASSESSMENT = re.compile(
+    r"^- `(?P<path>[^`]+)`: `(?P<impact>none|material)` — (?P<rationale>.+)$"
+)
 _ID_NAMES = (
     "FIND",
     "SRC",
@@ -128,6 +134,65 @@ def derive_freshness_paths(
 def _section(document: LifecycleDocument, heading: str) -> Section | None:
     return next(
         (section for section in document.sections if section.heading == heading), None
+    )
+
+
+def _accepted_consumer_assessments(
+    document: LifecycleDocument,
+) -> tuple[tuple[str, str], ...] | None:
+    """Read the active revision/hash-bound Consumer PASS assessments from history."""
+    history = _section(document, "Review history")
+    if history is None:
+        return None
+    metadata = document.metadata
+    for event in reversed(tuple(_REVIEW_EVENT.finditer(history.body))):
+        body = event.group("body")
+        if (
+            "- Review lane: `CONSUMER`" not in body
+            or "- Verdict: `PASS`" not in body
+            or f"- Reviewed revision: `{metadata.revision}`" not in body
+            or f"- Reviewed contract hash: `{metadata.contract_hash}`" not in body
+        ):
+            continue
+        assessment_section = re.search(
+            r"(?ms)^#### Drift assessments\n\n(?P<body>.*?)(?=^#### |\Z)", body
+        )
+        if assessment_section is None:
+            return None
+        lines = tuple(
+            line for line in assessment_section.group("body").splitlines() if line
+        )
+        if lines == ("- None",):
+            return ()
+        assessments = []
+        for line in lines:
+            match = _DRIFT_ASSESSMENT.fullmatch(line)
+            if match is None:
+                return None
+            assessments.append((match.group("path"), match.group("impact")))
+        if len({path for path, _ in assessments}) != len(assessments):
+            return None
+        return tuple(sorted(assessments))
+    return None
+
+
+def _semantic_relevant_paths(
+    changed_paths: tuple[str, ...], metadata: DocumentMetadata
+) -> tuple[str, ...]:
+    """Keep package evolution distinct from semantic owner-path drift."""
+    package_identity_paths = {
+        f"{SKILL_ROOT}/package-manifest.json",
+        _active_template_path(metadata),
+    }
+    return tuple(
+        changed_path
+        for changed_path in changed_paths
+        if changed_path not in package_identity_paths
+        and any(
+            changed_path == freshness
+            or changed_path.startswith(f"{freshness.rstrip('/')}/")
+            for freshness in metadata.freshness_paths
+        )
     )
 
 
@@ -1241,17 +1306,31 @@ def consume_document(
     unrelated: tuple[str, ...] = ()
     if baseline_reachable:
         changed = repository.changed_paths(metadata.repository_baseline_commit)
-        relevant = tuple(
-            changed_path
-            for changed_path in changed
-            if any(
-                changed_path == freshness
-                or changed_path.startswith(f"{freshness.rstrip('/')}/")
-                for freshness in metadata.freshness_paths
-            )
-        )
-        relevant_set = set(relevant)
+        baseline_relevant = _semantic_relevant_paths(changed, metadata)
+        relevant_set = set(baseline_relevant)
         unrelated = tuple(item for item in changed if item not in relevant_set)
+        try:
+            review_commit = repository.latest_commit_touching(relative)
+        except ProductDocsError:
+            review_commit = ""
+        assessments = _accepted_consumer_assessments(document)
+        if review_commit and assessments is not None:
+            reviewed_relevant = _semantic_relevant_paths(
+                repository.changed_paths(metadata.repository_baseline_commit, review_commit),
+                metadata,
+            )
+            assessed_paths = tuple(path for path, _ in assessments)
+            if (
+                assessed_paths == reviewed_relevant
+                and all(impact == "none" for _, impact in assessments)
+            ):
+                relevant = _semantic_relevant_paths(
+                    repository.changed_paths(review_commit), metadata
+                )
+            else:
+                relevant = baseline_relevant
+        else:
+            relevant = baseline_relevant
         if relevant:
             add(
                 "semantic-review-required",
