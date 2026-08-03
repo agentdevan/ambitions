@@ -1,0 +1,92 @@
+"""Small, validated Git reads for lifecycle package and document verification."""
+
+from __future__ import annotations
+
+from pathlib import Path, PurePosixPath
+import re
+import subprocess
+
+from .errors import Diagnostic, ProductDocsError
+
+
+COMMIT_ID = re.compile(r"[0-9a-f]{40}\Z")
+
+
+def validate_commit_id(commit: str) -> str:
+    if not isinstance(commit, str) or not COMMIT_ID.fullmatch(commit):
+        raise ProductDocsError(Diagnostic("invalid-commit-id", "Commit IDs must be 40 lowercase hexadecimal characters"))
+    return commit
+
+
+def validate_repository_path(path: str) -> str:
+    if not isinstance(path, str) or not path or "\\" in path:
+        raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must be nonempty canonical relative POSIX paths"))
+    parsed = PurePosixPath(path)
+    if parsed.is_absolute():
+        raise ProductDocsError(Diagnostic("absolute-path", "Repository paths must be relative"))
+    if any(part in {".", ".."} for part in parsed.parts):
+        raise ProductDocsError(Diagnostic("path-traversal", "Repository paths must not contain traversal segments"))
+    canonical = parsed.as_posix()
+    if canonical in {"", "."} or canonical != path:
+        raise ProductDocsError(Diagnostic("noncanonical-path", "Repository paths must use canonical POSIX spelling"))
+    return canonical
+
+
+class GitRepository:
+    """Read-only access to one repository, without shell command construction."""
+
+    def __init__(self, root: Path | str) -> None:
+        self.root = Path(root).resolve()
+        if not self.root.is_dir():
+            raise ProductDocsError(Diagnostic("repository-unavailable", "Repository root does not exist"))
+
+    def _run(self, arguments: list[str], *, check: bool = True) -> subprocess.CompletedProcess[bytes]:
+        result = subprocess.run(
+            ["git", "-C", str(self.root), *arguments],
+            check=False,
+            capture_output=True,
+            shell=False,
+        )
+        if check and result.returncode != 0:
+            detail = result.stderr.decode("utf-8", errors="replace").strip()
+            raise ProductDocsError(Diagnostic("git-read-failed", detail or "Git read failed"))
+        return result
+
+    def head(self) -> str:
+        result = self._run(["rev-parse", "HEAD"])
+        return validate_commit_id(result.stdout.decode("ascii").strip())
+
+    def is_commit_reachable(self, commit: str) -> bool:
+        commit = validate_commit_id(commit)
+        result = self._run(["merge-base", "--is-ancestor", commit, "HEAD"], check=False)
+        return result.returncode == 0
+
+    def read_bytes_at(self, commit: str, path: str) -> bytes:
+        commit = validate_commit_id(commit)
+        path = validate_repository_path(path)
+        result = self._run(["show", f"{commit}:{path}"], check=False)
+        if result.returncode != 0:
+            raise ProductDocsError(Diagnostic("historical-path-missing", "Path does not exist at the requested commit", path=path))
+        return result.stdout
+
+    def changed_paths(self, baseline_commit: str, head_commit: str | None = None) -> tuple[str, ...]:
+        baseline_commit = validate_commit_id(baseline_commit)
+        head_commit = self.head() if head_commit is None else validate_commit_id(head_commit)
+        result = self._run(["diff", "--name-only", "--no-renames", baseline_commit, head_commit])
+        return tuple(sorted(validate_repository_path(path) for path in result.stdout.decode("utf-8").splitlines() if path))
+
+    def path_exists_at(self, commit: str, path: str) -> bool:
+        commit = validate_commit_id(commit)
+        path = validate_repository_path(path)
+        result = self._run(["cat-file", "-e", f"{commit}:{path}"], check=False)
+        return result.returncode == 0
+
+    def is_tracked_at_head(self, path: str) -> bool:
+        path = validate_repository_path(path)
+        result = self._run(["ls-tree", "-r", "--name-only", "HEAD", "--", path], check=False)
+        return result.returncode == 0 and bool(result.stdout.strip())
+
+    def has_worktree_change(self, path: str) -> bool:
+        path = validate_repository_path(path)
+        result = self._run(["status", "--porcelain", "--untracked-files=all", "--", path])
+        return bool(result.stdout.strip())
