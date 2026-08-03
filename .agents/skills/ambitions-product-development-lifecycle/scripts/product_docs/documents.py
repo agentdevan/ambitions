@@ -64,7 +64,13 @@ def parse_document(source: Path | str, *, repository_root: Path | None = None) -
 
 def render_document(document: LifecycleDocument) -> str:
     body = document.body_prefix + render_sections(document.sections)
-    return f"+++\n{render_frontmatter(document.metadata)}\n+++\n{body.rstrip(chr(10)).rstrip(chr(13))}\n"
+    if body.endswith("\r\n"):
+        normalized_body = body[:-2] + "\n"
+    elif body.endswith(("\n", "\r")):
+        normalized_body = body[:-1] + "\n"
+    else:
+        normalized_body = body + "\n"
+    return f"+++\n{render_frontmatter(document.metadata)}\n+++\n{normalized_body}"
 
 
 def append_history_event(document: LifecycleDocument, event: str) -> LifecycleDocument:

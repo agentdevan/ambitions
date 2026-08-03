@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import tomllib
 from enum import Enum
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .errors import Diagnostic, ProductDocsError
@@ -33,6 +33,10 @@ ARRAY_FIELDS = (
     "additional_freshness_paths", "freshness_paths", "supersedes",
 )
 KNOWN_FIELDS = frozenset((*SCALAR_FIELDS, *ARRAY_FIELDS, "inputs", "evidence_files"))
+INTEGER_FIELDS = frozenset((
+    "schema_version", "revision", "content_review_revision", "content_blocking_findings",
+    "consumer_review_revision", "consumer_blocking_findings",
+))
 INPUT_FIELDS = {
     InputKind.LIFECYCLE_DOCUMENT: frozenset(("kind", "authority_id", "path", "revision", "contract_hash", "commit")),
     InputKind.CANON: frozenset(("kind", "authority_id", "path", "commit")),
@@ -47,16 +51,23 @@ def _error(code: str, message: str, *, path: str | None = None) -> ProductDocsEr
 
 
 def _validate_repository_path(value: str, repository_root: Path, field: str) -> str:
-    candidate = Path(value)
+    if not value:
+        raise _error("noncanonical-path", f"{field} must be a nonempty normalized POSIX-relative path", path=value)
+    if "\\" in value:
+        raise _error("noncanonical-path", f"{field} must use POSIX path separators", path=value)
+    candidate = PurePosixPath(value)
     if candidate.is_absolute():
         raise _error("absolute-path", f"{field} must be repository relative", path=value)
     if ".." in candidate.parts:
         raise _error("path-traversal", f"{field} must not traverse outside the repository", path=value)
+    canonical = candidate.as_posix()
+    if canonical == "." or value != canonical:
+        raise _error("noncanonical-path", f"{field} must use normalized POSIX-relative spelling", path=value)
     try:
-        (repository_root / candidate).resolve().relative_to(repository_root.resolve())
+        (repository_root / Path(canonical)).resolve().relative_to(repository_root.resolve())
     except ValueError as error:
         raise _error("path-outside-repository", f"{field} must remain inside the repository", path=value) from error
-    return value
+    return canonical
 
 
 def _string_array(data: dict[str, Any], field: str, repository_root: Path) -> tuple[str, ...]:
@@ -92,11 +103,18 @@ def _parse_input(record: Any, repository_root: Path) -> InputBinding:
     revision = record.get("revision")
     contract_hash = record.get("contract_hash")
     if kind in (InputKind.LIFECYCLE_DOCUMENT, InputKind.APPROVED_DESIGN):
-        if not isinstance(revision, int) or not isinstance(contract_hash, str):
+        if type(revision) is not int or not isinstance(contract_hash, str):
             raise _error("invalid-input-record", f"{kind.value} requires integer revision and string contract_hash")
     elif revision is not None or contract_hash is not None:
         raise _error("unknown-input-field", f"{kind.value} does not permit revision or contract_hash")
-    return InputBinding(kind, authority_id, path, revision, contract_hash, commit)
+    return InputBinding(
+        kind=kind,
+        authority_id=authority_id,
+        path=path,
+        commit=commit,
+        revision=revision,
+        contract_hash=contract_hash,
+    )
 
 
 def parse_frontmatter(text: str, repository_root: Path) -> DocumentMetadata:
@@ -110,10 +128,10 @@ def parse_frontmatter(text: str, repository_root: Path) -> DocumentMetadata:
     missing = set((*SCALAR_FIELDS, *ARRAY_FIELDS)).difference(data)
     if missing:
         raise _error("missing-frontmatter-field", f"Missing frontmatter fields: {', '.join(sorted(missing))}")
-    for field in ("schema_version", "revision", "content_review_revision", "content_blocking_findings", "consumer_review_revision", "consumer_blocking_findings"):
-        if not isinstance(data[field], int):
+    for field in INTEGER_FIELDS:
+        if type(data[field]) is not int:
             raise _error("invalid-frontmatter-type", f"{field} must be an integer")
-    for field in set(SCALAR_FIELDS).difference({"schema_version", "revision", "content_review_revision", "content_blocking_findings", "consumer_review_revision", "consumer_blocking_findings", "document_type", "authority_class", "status", "content_review_verdict", "consumer_review_verdict"}):
+    for field in set(SCALAR_FIELDS).difference(INTEGER_FIELDS | {"document_type", "authority_class", "status", "content_review_verdict", "consumer_review_verdict"}):
         if not isinstance(data[field], str):
             raise _error("invalid-frontmatter-type", f"{field} must be a string")
     try:
@@ -164,7 +182,12 @@ def render_frontmatter(metadata: DocumentMetadata) -> str:
         value = values[field]
         if isinstance(value, Enum):
             value = value.value
-        lines.append(f"{field} = {value}" if isinstance(value, int) else f"{field} = {_toml_string(value)}")
+        if field in INTEGER_FIELDS:
+            if type(value) is not int:
+                raise _error("invalid-frontmatter-type", f"{field} must be an integer")
+            lines.append(f"{field} = {value}")
+        else:
+            lines.append(f"{field} = {_toml_string(value)}")
     for field in ARRAY_FIELDS:
         if field == ARRAY_FIELDS[0]:
             lines.append("")
@@ -172,11 +195,12 @@ def render_frontmatter(metadata: DocumentMetadata) -> str:
     for binding in metadata.inputs:
         lines.extend(("", "[[inputs]]", f"kind = {_toml_string(binding.kind.value)}", f"authority_id = {_toml_string(binding.authority_id)}", f"path = {_toml_string(binding.path)}"))
         if binding.revision is not None:
+            if type(binding.revision) is not int:
+                raise _error("invalid-input-record", "inputs.revision must be an integer")
             lines.append(f"revision = {binding.revision}")
         if binding.contract_hash is not None:
             lines.append(f"contract_hash = {_toml_string(binding.contract_hash)}")
-        if binding.commit is not None:
-            lines.append(f"commit = {_toml_string(binding.commit)}")
+        lines.append(f"commit = {_toml_string(binding.commit)}")
     for evidence in metadata.evidence_files:
         lines.extend(("", "[[evidence_files]]", f"path = {_toml_string(evidence.path)}", f"sha256 = {_toml_string(evidence.sha256)}", f"role = {_toml_string(evidence.role)}"))
     return "\n".join(lines)

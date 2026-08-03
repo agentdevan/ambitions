@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 import sys
 import unittest
@@ -12,6 +13,7 @@ if str(SCRIPTS_DIRECTORY) not in sys.path:
 from product_docs.documents import parse_document, render_document, write_document_atomic
 from product_docs.errors import ProductDocsError
 from product_docs.markdown import parse_markdown_table
+from product_docs.models import InputBinding, InputKind
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +81,59 @@ class DocumentIOTests(unittest.TestCase):
         with self.assertRaises(ProductDocsError) as traversal:
             parse_document(template.replace("+++\n\n## Agent", traversal_record + "+++\n\n## Agent", 1), repository_root=SKILL_ROOT.parents[2])
         self.assertEqual(traversal.exception.diagnostics[0].code, "path-traversal")
+
+    def test_rejects_noncanonical_repository_path_spellings(self) -> None:
+        template = TEMPLATE_DIRECTORY.joinpath("research.md").read_text(encoding="utf-8")
+        for path in ("docs/./source.md", "docs//source.md", ".", ""):
+            with self.subTest(path=path):
+                input_record = (
+                    "\n[[inputs]]\nkind = \"canon\"\nauthority_id = \"CANON-001\"\n"
+                    f'path = "{path}"\ncommit = "0123456789abcdef0123456789abcdef01234567"\n'
+                )
+                candidate = template.replace("+++\n\n## Agent", input_record + "+++\n\n## Agent", 1)
+                with self.assertRaises(ProductDocsError) as raised:
+                    parse_document(candidate, repository_root=SKILL_ROOT.parents[2])
+                self.assertEqual(raised.exception.diagnostics[0].code, "noncanonical-path")
+
+    def test_rejects_boolean_integer_fields(self) -> None:
+        template = TEMPLATE_DIRECTORY.joinpath("research.md").read_text(encoding="utf-8")
+        for field in ("schema_version", "revision"):
+            with self.subTest(field=field):
+                candidate = template.replace(f"{field} = 1", f"{field} = true", 1)
+                with self.assertRaises(ProductDocsError) as raised:
+                    parse_document(candidate, repository_root=SKILL_ROOT.parents[2])
+                self.assertEqual(raised.exception.diagnostics[0].code, "invalid-frontmatter-type")
+
+        document = parse_document(TEMPLATE_DIRECTORY / "research.md", repository_root=SKILL_ROOT.parents[2])
+        with self.assertRaises(ProductDocsError):
+            render_document(replace(document, metadata=replace(document.metadata, schema_version=True)))
+
+    def test_input_bindings_require_and_render_commit_identity(self) -> None:
+        with self.assertRaises(TypeError):
+            InputBinding(InputKind.CANON, "CANON-001", "docs/canon/example.md")
+
+        document = parse_document(TEMPLATE_DIRECTORY / "research.md", repository_root=SKILL_ROOT.parents[2])
+        binding = InputBinding(
+            InputKind.CANON,
+            "CANON-001",
+            "docs/canon/example.md",
+            "0123456789abcdef0123456789abcdef01234567",
+        )
+        rendered = render_document(replace(document, metadata=replace(document.metadata, inputs=(binding,))))
+        self.assertIn('commit = "0123456789abcdef0123456789abcdef01234567"', rendered)
+
+    def test_render_preserves_trailing_blank_lines_and_normalizes_one_final_newline(self) -> None:
+        template = TEMPLATE_DIRECTORY.joinpath("research.md").read_text(encoding="utf-8")
+        body_start = template.index("+++\n", 4) + len("+++\n")
+        contents = template[:body_start] + template[body_start:].rstrip("\n") + "\n\n\n"
+
+        rendered = render_document(parse_document(contents, repository_root=SKILL_ROOT.parents[2]))
+
+        self.assertEqual(rendered, contents)
+
+        crlf_contents = template[:body_start] + template[body_start:].replace("\n", "\r\n")
+        crlf_rendered = render_document(parse_document(crlf_contents, repository_root=SKILL_ROOT.parents[2]))
+        self.assertEqual(crlf_rendered, crlf_contents[:-2] + "\n")
 
     def test_atomic_write_preserves_target_when_candidate_is_invalid(self) -> None:
         with self.subTest("candidate validation"):

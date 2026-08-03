@@ -54,9 +54,9 @@ class InputBinding:
     kind: InputKind
     authority_id: str
     path: str
+    commit: str
     revision: int | None = None
     contract_hash: str | None = None
-    commit: str | None = None
 
 
 @dataclass(frozen=True)
