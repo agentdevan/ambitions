@@ -207,7 +207,15 @@ def _emit(
 
 
 def _repository_root(candidate: Path | str | None) -> Path:
-    start = Path.cwd() if candidate is None else Path(candidate)
+    try:
+        start = Path.cwd() if candidate is None else Path(candidate)
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "repository-unavailable",
+                "Current directory could not be resolved",
+            )
+        ) from error
     try:
         accessible = start.is_dir()
     except OSError as error:
@@ -250,8 +258,18 @@ def _repository_root(candidate: Path | str | None) -> Path:
                 path=str(start),
             )
         )
-    root = Path(result.stdout.strip()).resolve()
-    if not root.is_dir():
+    try:
+        root = Path(result.stdout.strip()).resolve()
+        root_accessible = root.is_dir()
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "repository-unavailable",
+                "Git repository root could not be resolved",
+                path=result.stdout.strip() or None,
+            )
+        ) from error
+    if not root_accessible:
         raise ProductDocsError(
             Diagnostic(
                 "repository-unavailable",

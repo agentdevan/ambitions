@@ -381,6 +381,39 @@ class CliTests(TemporaryRepositoryTestCase):
         self.assertEqual(payload["status"], "failure")
         self.assertEqual(payload["diagnostics"][0]["code"], "repository-unavailable")
 
+    def test_actual_entrypoint_returns_three_when_current_directory_was_deleted(
+        self,
+    ) -> None:
+        entrypoint = self.skill_root / "scripts" / "ambitions_product_docs.py"
+        program = """
+import os
+from pathlib import Path
+import runpy
+import sys
+import tempfile
+
+entrypoint = sys.argv[1]
+parent = sys.argv[2]
+deleted = tempfile.mkdtemp(dir=parent)
+os.chdir(deleted)
+Path(deleted).rmdir()
+sys.argv = [entrypoint, "package", "--check", "--json"]
+runpy.run_path(entrypoint, run_name="__main__")
+"""
+
+        result = subprocess.run(
+            [sys.executable, "-c", program, str(entrypoint), str(self.root)],
+            cwd=self.root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads(result.stdout)
+
+        self.assertEqual(result.returncode, 3, result.stderr)
+        self.assertEqual(payload["status"], "failure")
+        self.assertEqual(payload["diagnostics"][0]["code"], "repository-unavailable")
+
     def test_actual_entrypoint_never_writes_bytecode_on_success_or_failure(
         self,
     ) -> None:
