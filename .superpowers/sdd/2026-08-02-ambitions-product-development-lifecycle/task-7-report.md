@@ -61,8 +61,9 @@ OK
   relevant drift emits only `semantic-review-required` after deterministic
   validation.
 - Reuses existing source, authority-class, canon-delta, source-owner, and
-  traceability validation. Version-one source recheck triggers remain required
-  free-text semantic inputs; no unsupported expiry grammar is invented.
+  traceability validation. Version-one source recheck triggers retain their
+  review prose while explicit dates and access-date-relative day durations are
+  evaluated deterministically.
 - Consumer PASS reruns consumption against current `HEAD`, rejects every
   deterministic blocker, requires exactly one assessment per relevant path,
   rejects duplicates/extras/material impact, and appends accepted nonmaterial
@@ -108,4 +109,75 @@ No workflow, repository gate, approval receipt, product canon, application
 source, or generated Xcode state changed. The only file beyond the brief's
 listed implementation modules is `models.py`, changed additively because the
 predeclared report lacked the required relevant/unrelated path outputs. Task 8
-still owns CLI parsing, JSON envelopes, and `--as-of` input validation.
+still owns CLI parsing, JSON envelopes, and the `--as-of` command-line surface.
+
+## Fix round 1 — Important review findings
+
+All four Important findings are corrected without widening Task 7.
+
+### Corrections
+
+1. Consumption now validates `as_of` and external Source-ledger access dates.
+   Explicit `After N days` triggers expire relative to the recorded access date;
+   explicit ISO trigger dates fire on or after that date. Both blockers retain
+   exact `Source ledger` section and `SRC-*` identifier context.
+2. Current lifecycle and approved-design upstreams now run full
+   `validate_document(..., repository_root=...)` validation. A committed body
+   tamper with unchanged stored revision/hash/status is rejected as
+   `contract-hash-mismatch` plus `current-upstream-invalid`; binding mismatch is
+   still reported independently when revision or hash also differs.
+3. Canonical path spelling and committed-exact repository handoff are checked
+   before TOML parsing. Malformed untracked canonical bytes report
+   `document-not-committed-exact`; malformed committed noncanonical bytes report
+   `noncanonical-document-path`, with metadata-free stable reports rather than
+   parser leakage.
+4. Consumption retains original `Diagnostic` objects, including path, section,
+   identifier, and remediation. Consumer PASS now raises those exact diagnostics
+   instead of collapsing them into a generic code/message wrapper.
+
+### Fix-round TDD evidence
+
+The five new focused regressions were written and run before production edits.
+RED was the expected three behavioral failures and one parser-order error:
+
+```text
+test_consume_blocks_expired_and_triggered_external_sources ... FAIL
+test_consume_checks_handoff_before_parsing_untracked_malformed_target ... ERROR
+test_consume_revalidates_committed_current_upstream_body ... FAIL
+test_consumer_pass_preserves_consumption_diagnostic_context ... FAIL
+
+Ran 12 tests in 20.453s
+FAILED (failures=3, errors=1)
+```
+
+After the bounded corrections and one pre-existing expectation adjustment so
+full upstream invalidity and revision mismatch are both reported, focused GREEN
+was:
+
+```text
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_consume.py' -v
+Ran 12 tests in 21.249s
+OK
+```
+
+The complementary committed-noncanonical pre-parse regression and a final
+red/green case proving malformed explicit trigger dates produce a stable
+`invalid-source-recheck-date` diagnostic bring the final focused count to 14.
+
+### Fix-round validation
+
+```text
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -v
+Ran 85 tests in 38.299s
+OK
+
+ruff check <Task 7 implementation and tests>
+All checks passed!
+
+ruff format --check <Task 7 implementation and tests>
+3 files already formatted
+```
+
+The deferred Minor observations remain deferred exactly as requested: package
+cleanliness still includes test paths, and downstream committed-PASS behavior
+continues to rely on the existing committed-exact guard. No workflow changed.

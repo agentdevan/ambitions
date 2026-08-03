@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from datetime import date, timedelta
 import hashlib
 from pathlib import Path
 import re
@@ -911,7 +912,6 @@ def consume_document(
     as_of: str | None = None,
 ) -> ConsumptionReport:
     """Validate one committed lifecycle handoff against the current repository."""
-    del as_of  # Source-ledger triggers are explicit semantic review inputs in v1.
     root = Path(repository_root or Path.cwd()).resolve()
     target = Path(path)
     target = target.resolve() if target.is_absolute() else (root / target).resolve()
@@ -925,38 +925,77 @@ def consume_document(
                 path=str(path),
             )
         ) from error
-    document = parse_document(target, repository_root=root)
     repository = GitRepository(root)
-    metadata = document.metadata
     diagnostics: list[Diagnostic] = []
+
+    def append_diagnostic(diagnostic: Diagnostic) -> None:
+        key = (
+            diagnostic.code,
+            diagnostic.path,
+            diagnostic.section,
+            diagnostic.identifier,
+            diagnostic.remediation,
+        )
+        if all(
+            (
+                existing.code,
+                existing.path,
+                existing.section,
+                existing.identifier,
+                existing.remediation,
+            )
+            != key
+            for existing in diagnostics
+        ):
+            diagnostics.append(diagnostic)
 
     def add(
         code: str,
         message: str,
         *,
         item_path: str | None = None,
+        section: str | None = None,
         identifier: str | None = None,
+        remediation: str | None = None,
     ) -> None:
-        key = (code, item_path, identifier)
-        if all(
-            (existing.code, existing.path, existing.identifier) != key
-            for existing in diagnostics
-        ):
-            diagnostics.append(
-                Diagnostic(code, message, path=item_path, identifier=identifier)
+        append_diagnostic(
+            Diagnostic(
+                code,
+                message,
+                path=item_path,
+                section=section,
+                identifier=identifier,
+                remediation=remediation,
             )
+        )
 
     canonical = re.fullmatch(
         r"docs/product-development/([a-z0-9]+(?:-[a-z0-9]+)*)/(research|scope|design)\.md",
         relative,
     )
+    if canonical is None:
+        add(
+            "noncanonical-document-path",
+            "Lifecycle documents must use their canonical repository path",
+            item_path=relative,
+        )
+    if not repository.is_committed_exact(relative):
+        add(
+            "document-not-committed-exact",
+            "Consumption requires the exact target bytes committed at HEAD",
+            item_path=relative,
+        )
+    if diagnostics:
+        return _consumption_report(None, diagnostics, (), ())
+
+    document = parse_document(target, repository_root=root)
+    metadata = document.metadata
     identity = re.fullmatch(
         r"PD-\d{4}-\d{2}-([A-Z0-9]+(?:-[A-Z0-9]+)*)",
         metadata.initiative_id,
     )
     if (
-        canonical is None
-        or identity is None
+        identity is None
         or canonical.group(1) != identity.group(1).lower()
         or canonical.group(2) != metadata.document_type.value
         or metadata.document_id
@@ -967,13 +1006,6 @@ def consume_document(
             "Lifecycle identity must match its canonical repository path",
             item_path=relative,
         )
-    if not repository.is_committed_exact(relative):
-        add(
-            "document-not-committed-exact",
-            "Consumption requires the exact target bytes committed at HEAD",
-            item_path=relative,
-        )
-        return _consumption_report(document, diagnostics, (), ())
 
     package_dirty = repository.has_worktree_change(SKILL_ROOT)
     if package_dirty:
@@ -985,12 +1017,7 @@ def consume_document(
 
     validation = validate_document(document, repository_root=root)
     for diagnostic in validation.diagnostics:
-        add(
-            diagnostic.code,
-            diagnostic.message,
-            item_path=diagnostic.path,
-            identifier=diagnostic.identifier,
-        )
+        append_diagnostic(diagnostic)
 
     try:
         baseline_reachable = repository.is_commit_reachable(
@@ -1017,11 +1044,69 @@ def consume_document(
             )
         except ProductDocsError as error:
             for diagnostic in error.diagnostics:
+                append_diagnostic(diagnostic)
+
+    try:
+        as_of_day = date.today() if as_of is None else date.fromisoformat(as_of)
+    except (TypeError, ValueError):
+        as_of_day = None
+        add(
+            "invalid-as-of-date",
+            "Consumption as-of dates must use a real YYYY-MM-DD date",
+        )
+    if metadata.document_type is DocumentType.RESEARCH and as_of_day is not None:
+        for source in _rows(document, "Source ledger"):
+            identifier = source.get("Source ID", "").strip() or None
+            if not source.get("URL", "").strip():
+                continue
+            accessed_text = source.get("Accessed", "").strip()
+            try:
+                accessed = date.fromisoformat(accessed_text)
+            except ValueError:
                 add(
-                    diagnostic.code,
-                    diagnostic.message,
-                    item_path=diagnostic.path,
-                    identifier=diagnostic.identifier,
+                    "invalid-source-access-date",
+                    "External source access dates must use a real YYYY-MM-DD date",
+                    section="Source ledger",
+                    identifier=identifier,
+                )
+                continue
+            if accessed > as_of_day:
+                add(
+                    "source-access-after-as-of",
+                    "External source access date cannot be after consumption as-of",
+                    section="Source ledger",
+                    identifier=identifier,
+                )
+            trigger = source.get("Recheck trigger", "").strip()
+            duration_match = re.search(
+                r"\bafter\s+(\d+)\s+days?\b", trigger, re.IGNORECASE
+            )
+            if duration_match is not None:
+                expires = accessed + timedelta(days=int(duration_match.group(1)))
+                if as_of_day >= expires:
+                    add(
+                        "external-source-expired",
+                        "External source exceeded its declared access-date lifetime",
+                        section="Source ledger",
+                        identifier=identifier,
+                    )
+            trigger_dates = []
+            for value in re.findall(r"\b\d{4}-\d{2}-\d{2}\b", trigger):
+                try:
+                    trigger_dates.append(date.fromisoformat(value))
+                except ValueError:
+                    add(
+                        "invalid-source-recheck-date",
+                        "External source recheck dates must name a real date",
+                        section="Source ledger",
+                        identifier=identifier,
+                    )
+            if trigger_dates and as_of_day >= min(trigger_dates):
+                add(
+                    "source-recheck-triggered",
+                    "External source reached its declared recheck date",
+                    section="Source ledger",
+                    identifier=identifier,
                 )
 
     for evidence in metadata.evidence_files:
@@ -1093,9 +1178,25 @@ def consume_document(
             current = parse_document(root / binding.path, repository_root=root)
         except ProductDocsError:
             current = None
+        current_validation = (
+            validate_document(current, repository_root=root)
+            if current is not None
+            else None
+        )
+        if current_validation is None or not current_validation.valid:
+            if current_validation is not None:
+                for diagnostic in current_validation.diagnostics:
+                    append_diagnostic(diagnostic)
+            add(
+                "current-upstream-invalid",
+                "Current upstream must pass full structural and repository validation",
+                item_path=binding.path,
+                identifier=binding.authority_id,
+            )
+        if current is None:
+            continue
         if (
-            current is None
-            or current.metadata.status is not DocumentStatus.PASSED
+            current.metadata.status is not DocumentStatus.PASSED
             or current.metadata.document_id != binding.authority_id
             or current.metadata.revision != binding.revision
             or current.metadata.contract_hash != binding.contract_hash
@@ -1131,16 +1232,17 @@ def consume_document(
 
 
 def _consumption_report(
-    document: LifecycleDocument,
+    document: LifecycleDocument | None,
     diagnostics: list[Diagnostic],
     relevant_paths: tuple[str, ...],
     unrelated_paths: tuple[str, ...],
 ) -> ConsumptionReport:
     blockers = tuple(diagnostic.code for diagnostic in diagnostics)
+    metadata = document.metadata if document is not None else None
     return ConsumptionReport(
-        document_id=document.metadata.document_id,
-        revision=document.metadata.revision,
-        contract_hash=document.metadata.contract_hash,
+        document_id=metadata.document_id if metadata is not None else "",
+        revision=metadata.revision if metadata is not None else 0,
+        contract_hash=metadata.contract_hash if metadata is not None else "",
         lane=ReviewLane.CONSUMER,
         verdict=(ReviewVerdict.PASS if not blockers else ReviewVerdict.NEEDS_REVISION),
         blockers=blockers,
@@ -1149,8 +1251,8 @@ def _consumption_report(
                 DocumentType.RESEARCH: "scope",
                 DocumentType.SCOPE: "design",
                 DocumentType.DESIGN: "canon-reconciliation",
-            }[document.metadata.document_type]
-            if not blockers
+            }[metadata.document_type]
+            if not blockers and metadata is not None
             else "revision"
         ),
         diagnostics=tuple(diagnostics),

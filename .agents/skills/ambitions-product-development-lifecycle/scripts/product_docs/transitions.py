@@ -939,15 +939,12 @@ def record_review(
     if record.lane is ReviewLane.CONSUMER and record.verdict is ReviewVerdict.PASS:
         consumption = consume_document(target, repository_root=root)
         deterministic = tuple(
-            blocker
-            for blocker in consumption.blockers
-            if blocker != "semantic-review-required"
+            diagnostic
+            for diagnostic in consumption.diagnostics
+            if diagnostic.code != "semantic-review-required"
         )
         if deterministic:
-            raise _error(
-                deterministic[0],
-                "Consumer PASS is blocked by deterministic consumption diagnostics",
-            )
+            raise ProductDocsError(deterministic)
         assessed_paths = tuple(item["path"] for item in assessments)
         assessed_set = set(assessed_paths)
         relevant_set = set(consumption.relevant_paths)

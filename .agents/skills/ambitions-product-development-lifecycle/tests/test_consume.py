@@ -203,6 +203,23 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
             path, replace(document, metadata=metadata), repository_root=self.root
         )
 
+    def _rewrite_source_ledger(self, path: Path, source_row: str) -> None:
+        document = parse_document(path, repository_root=self.root)
+        document = self._replace_section(
+            document,
+            "Source ledger",
+            "\n| Source ID | Title or repository path | Publisher | URL | Accessed | Temporal sensitivity | Recheck trigger | Supports | Evidence summary |\n"
+            "|---|---|---|---|---|---|---|---|---|\n"
+            f"{source_row}\n\nComplete.\n\n",
+        )
+        metadata = replace(document.metadata, contract_hash="")
+        document = replace(document, metadata=metadata)
+        digest = compute_contract_hash(document)
+        metadata = replace(metadata, contract_hash=digest, content_review_hash=digest)
+        write_document_atomic(
+            path, replace(document, metadata=metadata), repository_root=self.root
+        )
+
     def test_consume_rejects_untracked_target_before_document_state(self) -> None:
         path = create_document(
             self.root,
@@ -222,6 +239,31 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
         report = consume_document(path, repository_root=self.root)
 
         self.assertEqual(report.blockers, ("document-not-committed-exact",))
+
+    def test_consume_checks_handoff_before_parsing_untracked_malformed_target(
+        self,
+    ) -> None:
+        path = self.root / "docs" / "product-development" / "malformed" / "research.md"
+        path.parent.mkdir(parents=True)
+        path.write_text("not lifecycle TOML\n", encoding="utf-8")
+
+        report = consume_document(path, repository_root=self.root)
+
+        self.assertEqual(report.blockers, ("document-not-committed-exact",))
+        self.assertEqual(report.document_id, "")
+
+    def test_consume_checks_noncanonical_path_before_parsing_committed_target(
+        self,
+    ) -> None:
+        path = self.root / "docs" / "product-development" / "malformed.txt"
+        path.parent.mkdir(parents=True)
+        path.write_text("not lifecycle TOML\n", encoding="utf-8")
+        self.commit_all("commit malformed noncanonical target")
+
+        report = consume_document(path, repository_root=self.root)
+
+        self.assertEqual(report.blockers, ("noncanonical-document-path",))
+        self.assertEqual(report.document_id, "")
 
     def test_consume_rejects_uncommitted_package_and_evidence(self) -> None:
         path = self._content_reviewed_research(evidence=True)
@@ -304,6 +346,101 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
         self.commit_all("bind upstream before it passed")
         report = consume_document(target, repository_root=self.root)
         self.assertIn("upstream-not-passed-at-bound-commit", report.blockers)
+
+    def test_consume_revalidates_committed_current_upstream_body(self) -> None:
+        upstream = self._passed_research("Tampered Upstream")
+        bound = parse_document(upstream, repository_root=self.root)
+        binding = InputBinding(
+            InputKind.LIFECYCLE_DOCUMENT,
+            bound.metadata.document_id,
+            upstream.resolve().relative_to(self.root.resolve()).as_posix(),
+            revision=bound.metadata.revision,
+            contract_hash=bound.metadata.contract_hash,
+            commit=GitRepository(self.root).head(),
+        )
+        target = self._content_reviewed_research(
+            "Tamper Consumer", input_binding=binding, freshness_paths=()
+        )
+        upstream.write_text(
+            upstream.read_text(encoding="utf-8").replace(
+                "The fixture is complete.", "The committed body was tampered."
+            ),
+            encoding="utf-8",
+        )
+        self.commit_all("commit upstream body tamper")
+
+        report = consume_document(target, repository_root=self.root)
+
+        self.assertIn("current-upstream-invalid", report.blockers)
+
+    def test_consume_blocks_expired_and_triggered_external_sources(self) -> None:
+        expired = self._content_reviewed_research("Expired Source")
+        self._rewrite_source_ledger(
+            expired,
+            "| SRC-001 | Fixture source | Ambitions | https://example.invalid | 2026-07-01 | High | After 30 days | FIND-001 | Fixture support. |",
+        )
+        self.commit_all("write expired source")
+
+        triggered = self._content_reviewed_research("Triggered Source")
+        self._rewrite_source_ledger(
+            triggered,
+            "| SRC-001 | Fixture source | Ambitions | https://example.invalid | 2026-08-02 | High | On or after 2026-08-02 | FIND-001 | Fixture support. |",
+        )
+        self.commit_all("write triggered source")
+
+        expired_report = consume_document(
+            expired, repository_root=self.root, as_of="2026-08-02"
+        )
+        triggered_report = consume_document(
+            triggered, repository_root=self.root, as_of="2026-08-02"
+        )
+
+        self.assertIn("external-source-expired", expired_report.blockers)
+        self.assertIn("source-recheck-triggered", triggered_report.blockers)
+        diagnostic = next(
+            item
+            for item in triggered_report.diagnostics
+            if item.code == "source-recheck-triggered"
+        )
+        self.assertEqual(diagnostic.section, "Source ledger")
+        self.assertEqual(diagnostic.identifier, "SRC-001")
+
+    def test_consume_reports_invalid_explicit_recheck_date(self) -> None:
+        path = self._content_reviewed_research("Invalid Trigger Date")
+        self._rewrite_source_ledger(
+            path,
+            "| SRC-001 | Fixture source | Ambitions | https://example.invalid | 2026-08-02 | High | On or after 2026-99-99 | FIND-001 | Fixture support. |",
+        )
+        self.commit_all("write invalid source trigger")
+
+        report = consume_document(path, repository_root=self.root, as_of="2026-08-02")
+
+        self.assertIn("invalid-source-recheck-date", report.blockers)
+
+    def test_consumer_pass_preserves_consumption_diagnostic_context(self) -> None:
+        path = self._content_reviewed_research("Diagnostic Context")
+        self._rewrite_source_ledger(
+            path,
+            "| SRC-001 | Fixture source | Ambitions | https://example.invalid | 2026-08-02 | High | On or after 2026-08-02 | FIND-001 | Fixture support. |",
+        )
+        self.commit_all("write triggered source")
+        content = parse_document(path, repository_root=self.root)
+
+        with self.assertRaises(ProductDocsError) as raised:
+            record_review(
+                path,
+                self._review_payload(
+                    content,
+                    review_id="REV-CONSUMER-CONTEXT-001",
+                    lane="consumer",
+                ),
+                repository_root=self.root,
+            )
+
+        diagnostic = raised.exception.diagnostics[0]
+        self.assertEqual(diagnostic.code, "source-recheck-triggered")
+        self.assertEqual(diagnostic.section, "Source ledger")
+        self.assertEqual(diagnostic.identifier, "SRC-001")
 
     def test_consume_sorts_relevant_and_unrelated_drift_with_prefix_matching(
         self,
