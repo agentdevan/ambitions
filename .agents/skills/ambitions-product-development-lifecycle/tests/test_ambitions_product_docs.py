@@ -2,27 +2,25 @@ from __future__ import annotations
 
 # ruff: noqa: E402 -- the package-under-test path is intentionally injected below.
 
+from contextlib import contextmanager
 from dataclasses import replace
 from datetime import date
 import hashlib
+import importlib
 from pathlib import Path
 import re
 import sys
+from types import SimpleNamespace
 
 
 SCRIPTS_DIRECTORY = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIRECTORY))
 
-from product_docs.documents import parse_document, write_document_atomic
-from product_docs.errors import ProductDocsError
-from product_docs.models import EvidenceFile, ReviewVerdict
 from product_docs.package_identity import (
     build_manifest,
     canonical_manifest_bytes,
 )
-from product_docs.transitions import create_document, record_review, seal_document
-from product_docs.validation import consume_document
 
 from support import TemporaryRepositoryTestCase, copy_skill_skeleton
 
@@ -42,6 +40,65 @@ EXPECTED_OPENAI_YAML = """interface:
 policy:
   allow_implicit_invocation: true
 """
+
+
+@contextmanager
+def isolated_installed_product_docs(skill_root: Path):
+    """Load product_docs only from one copied package, restoring the test runner."""
+    scripts = (skill_root / "scripts").resolve()
+    saved_modules = {
+        name: module
+        for name, module in tuple(sys.modules.items())
+        if name == "product_docs" or name.startswith("product_docs.")
+    }
+    for name in saved_modules:
+        sys.modules.pop(name, None)
+    sys.path.insert(0, str(scripts))
+    importlib.invalidate_caches()
+    try:
+        documents = importlib.import_module("product_docs.documents")
+        errors = importlib.import_module("product_docs.errors")
+        models = importlib.import_module("product_docs.models")
+        package_identity = importlib.import_module("product_docs.package_identity")
+        transitions = importlib.import_module("product_docs.transitions")
+        validation = importlib.import_module("product_docs.validation")
+        loaded_modules = (
+            documents,
+            errors,
+            models,
+            package_identity,
+            transitions,
+            validation,
+        )
+        for module in loaded_modules:
+            module_path = Path(module.__file__).resolve()
+            if not module_path.is_relative_to(scripts):
+                raise AssertionError(
+                    f"{module.__name__} loaded outside installed package: {module_path}"
+                )
+        yield SimpleNamespace(
+            parse_document=documents.parse_document,
+            write_document_atomic=documents.write_document_atomic,
+            ProductDocsError=errors.ProductDocsError,
+            EvidenceFile=models.EvidenceFile,
+            ReviewVerdict=models.ReviewVerdict,
+            build_manifest=package_identity.build_manifest,
+            canonical_manifest_bytes=package_identity.canonical_manifest_bytes,
+            create_document=transitions.create_document,
+            record_review=transitions.record_review,
+            seal_document=transitions.seal_document,
+            consume_document=validation.consume_document,
+            module_paths=tuple(
+                Path(module.__file__).resolve() for module in loaded_modules
+            ),
+        )
+    finally:
+        for name in tuple(sys.modules):
+            if name == "product_docs" or name.startswith("product_docs."):
+                sys.modules.pop(name, None)
+        sys.modules.update(saved_modules)
+        sys.path.remove(str(scripts))
+        importlib.invalidate_caches()
 
 
 class InstalledSkillSurfaceTests(TemporaryRepositoryTestCase):
@@ -132,9 +189,11 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         super().setUp()
         self.skill_root = self.root / INSTALLED_SKILL
         copy_skill_skeleton(self.skill_root)
-        manifest = build_manifest(self.skill_root)
+        self._installed_context = isolated_installed_product_docs(self.skill_root)
+        self.api = self._installed_context.__enter__()
+        manifest = self.api.build_manifest(self.skill_root)
         (self.skill_root / "package-manifest.json").write_bytes(
-            canonical_manifest_bytes(manifest)
+            self.api.canonical_manifest_bytes(manifest)
         )
         self.package_commit = self.commit_all("install complete lifecycle package")
 
@@ -148,6 +207,10 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         self.evidence.write_text("# Evidence\n\nFixture evidence.\n", encoding="utf-8")
         self.evidence_commit = self.commit_all("add lifecycle evidence")
 
+    def tearDown(self) -> None:
+        self._installed_context.__exit__(None, None, None)
+        super().tearDown()
+
     @staticmethod
     def _replace_section(document, heading: str, body: str):
         return replace(
@@ -159,14 +222,14 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         )
 
     def _complete(self, path: Path) -> None:
-        document = parse_document(path, repository_root=self.root)
+        document = self.api.parse_document(path, repository_root=self.root)
         document = replace(
             document,
             metadata=replace(
                 document.metadata,
                 source_owner_paths=("Sources/Feature.swift",),
                 evidence_files=(
-                    EvidenceFile(
+                    self.api.EvidenceFile(
                         "docs/product-development/lifecycle-fixture/evidence/source.md",
                         hashlib.sha256(self.evidence.read_bytes()).hexdigest(),
                         "supports the fixture lifecycle",
@@ -235,7 +298,7 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
                 "| FIND-001 | REQ-001 | AC-001 | DESIGN-001 | VERIFY-001 |\n\n"
                 "Complete.\n\n",
             )
-        write_document_atomic(path, document, repository_root=self.root)
+        self.api.write_document_atomic(path, document, repository_root=self.root)
 
     @staticmethod
     def _review_payload(
@@ -271,7 +334,7 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         }
 
     def _create_complete_seal_and_content_review(self, phase: str) -> Path:
-        path = create_document(
+        path = self.api.create_document(
             self.root,
             initiative="Lifecycle Fixture",
             phase=phase,
@@ -279,13 +342,13 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         )
         self._complete(path)
         self.commit_all(f"complete {phase}")
-        sealed = seal_document(
+        sealed = self.api.seal_document(
             path,
             repository_root=self.root,
             sealed_at="2026-08-03T10:00:00Z",
         )
         self.commit_all(f"seal {phase}")
-        record_review(
+        self.api.record_review(
             path,
             self._review_payload(
                 sealed,
@@ -305,8 +368,8 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         *,
         assessments: list[dict[str, str]] | None = None,
     ) -> str:
-        document = parse_document(path, repository_root=self.root)
-        passed = record_review(
+        document = self.api.parse_document(path, repository_root=self.root)
+        passed = self.api.record_review(
             path,
             self._review_payload(
                 document,
@@ -320,6 +383,24 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         self.assertEqual(passed.metadata.status.value, "passed")
         return self.commit_all(f"consumer review {phase}")
 
+    def test_installed_loader_rejects_corrupted_transition_module(self) -> None:
+        transition_path = self.skill_root / "scripts/product_docs/transitions.py"
+        original = transition_path.read_bytes()
+        transition_path.write_text(
+            'raise RuntimeError("installed transition corruption probe")\n',
+            encoding="utf-8",
+        )
+        try:
+            with self.assertRaisesRegex(
+                RuntimeError, "installed transition corruption probe"
+            ):
+                with isolated_installed_product_docs(self.skill_root):
+                    pass
+        finally:
+            transition_path.write_bytes(original)
+
+        self.assertEqual(transition_path.read_bytes(), original)
+
     def test_complete_research_scope_design_chain_and_drift_contract(self) -> None:
         self.assertNotEqual(self.package_commit, self.evidence_commit)
 
@@ -328,31 +409,33 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
         unrelated.parent.mkdir(parents=True)
         unrelated.write_text("unrelated repository drift\n", encoding="utf-8")
         self.commit_all("add unrelated drift")
-        unrelated_report = consume_document(research, repository_root=self.root)
+        unrelated_report = self.api.consume_document(
+            research, repository_root=self.root
+        )
         self.assertEqual(unrelated_report.blockers, ())
         self.assertIn("notes/unrelated.md", unrelated_report.unrelated_paths)
         research_commit = self._consumer_review(research, "research")
 
         scope = self._create_complete_seal_and_content_review("scope")
-        scope_document = parse_document(scope, repository_root=self.root)
+        scope_document = self.api.parse_document(scope, repository_root=self.root)
         self.assertEqual(scope_document.metadata.inputs[0].commit, research_commit)
         scope_commit = self._consumer_review(scope, "scope")
 
         design = self._create_complete_seal_and_content_review("design")
-        design_document = parse_document(design, repository_root=self.root)
+        design_document = self.api.parse_document(design, repository_root=self.root)
         self.assertEqual(design_document.metadata.inputs[0].commit, scope_commit)
 
         self.owner.write_text(
             "struct Feature { let changed = true }\n", encoding="utf-8"
         )
         self.commit_all("add relevant owner drift")
-        relevant_report = consume_document(design, repository_root=self.root)
+        relevant_report = self.api.consume_document(design, repository_root=self.root)
         self.assertEqual(relevant_report.relevant_paths, ("Sources/Feature.swift",))
         self.assertIn("semantic-review-required", relevant_report.blockers)
 
-        current = parse_document(design, repository_root=self.root)
-        with self.assertRaises(ProductDocsError) as missing:
-            record_review(
+        current = self.api.parse_document(design, repository_root=self.root)
+        with self.assertRaises(self.api.ProductDocsError) as missing:
+            self.api.record_review(
                 design,
                 self._review_payload(
                     current,
@@ -377,10 +460,10 @@ class LifecycleAcceptanceTests(TemporaryRepositoryTestCase):
                 }
             ],
         )
-        final_document = parse_document(design, repository_root=self.root)
+        final_document = self.api.parse_document(design, repository_root=self.root)
         self.assertEqual(final_document.metadata.status.value, "passed")
         self.assertEqual(
-            final_document.metadata.consumer_review_verdict, ReviewVerdict.PASS
+            final_document.metadata.consumer_review_verdict, self.api.ReviewVerdict.PASS
         )
         self.assertTrue(design_commit)
 
