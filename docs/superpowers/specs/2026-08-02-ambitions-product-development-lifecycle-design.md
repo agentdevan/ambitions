@@ -1,215 +1,418 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Pending owner review  
+**Status:** Revision 2 — producer review complete; consumer review pending  
 **Repository baseline inspected:** `a758c727ea62ae0d7bc1ef634b8a59e5366970ae`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
 
-Ambitions will standardize material product development around this lifecycle:
+Ambitions will use this development lifecycle for material product work:
 
 ```text
 Idea
-  → Research document
-  → Review and revision until PASS
-  → Scope document
-  → Review and revision until PASS
-  → Design document
-  → Review and revision until PASS
-  → Groom for implementation
+  → ChatGPT authors Research
+  → Content review and revision until PASS
+  → Codex consumption review and revision until PASS
+  → ChatGPT authors Scope
+  → Content review and revision until PASS
+  → Codex consumption review and revision until PASS
+  → ChatGPT authors Design
+  → Content review and revision until PASS
+  → Codex consumption review and revision until PASS
+  → Codex grooms for implementation
   → Implement
   → Test
   → Merge
 ```
 
-The repository will implement this as one project-local Codex skill named
-`ambitions-product-development-lifecycle`, supported by three versioned document
-templates, four reference contracts, two deterministic Python utilities, unit
-fixtures, and pressure-scenario validation.
+The system will be implemented as one portable, versioned skill package that both
+ChatGPT and Codex use in different role modes. The repository copy is canonical.
+Codex discovers it from `.agents/skills`; ChatGPT must use an installed copy of
+the same package or explicitly load the canonical package before authoring.
+Repo-local Codex discovery must never be assumed to make the skill available in
+ChatGPT web or mobile.
 
-The lifecycle is a quality and reasoning system. It is not task authorization,
-owner attestation, merge permission, or a process-only repository gate. Canon
-remains the durable product authority. Source, tests, runtime evidence, and the
-existing Code Quality workflow remain the implementation and merge controls.
+The package contains three versioned document templates, producer and consumer
+contracts, phase review rubrics, one deterministic lifecycle CLI, test fixtures,
+and cross-product pressure validation.
 
-## 2. Repository alignment
+The lifecycle is a product-quality and handoff system. It is not task
+authorization, owner attestation, merge permission, or a process-only branch
+gate. Current canon, source, tests, runtime evidence, and Code Quality remain the
+implementation authority.
 
-The design extends current Ambitions conventions:
+## 2. Core operating premise
 
-- `AGENTS.md` routes work through relevant canon, source, and tests while
-  rejecting process-only authorization ceremony.
-- `docs/canon/README.md` defines canon as durable product and engineering truth.
-- `.agents/skills/ambitions-native-visual-foundry/SKILL.md` establishes
-  project-local skills under `.agents/skills/`.
-- `docs/qa/evidence/2026-07-23-vc14-native-foundry-bootstrap/skill-validation.md`
-  establishes before-and-after pressure testing for repository skills.
+ChatGPT creates the research, scope, and design documents. Codex must be able to
+consume each committed document without reconstructing the prior conversation,
+repeating the research, guessing missing product behavior, or loading the entire
+document when a bounded summary and linked sections are sufficient.
 
-The resulting authority flow is:
+A chat response is not a lifecycle document. A document becomes eligible for
+Codex consumption only after it is persisted at its canonical repository path,
+bound to a repository baseline, content-reviewed, and structurally valid.
 
-1. Research records evidence, uncertainty, alternatives, and recommendation.
-2. Scope records the bounded product commitment.
-3. Design resolves how the commitment becomes a native, testable system.
-4. Passed scope and design identify required canon changes.
-5. Accepted durable behavior is incorporated into owning canon sources.
-6. Canon, source, tests, and runtime evidence control implementation thereafter.
-7. Lifecycle documents remain provenance and do not override newer canon.
+Codex consumption is an actual phase gate, not a hypothetical rubric. For each
+document, Codex verifies that the artifact is current, internally coherent,
+properly bounded, traceable, and usable by the next phase. Codex does not replace
+product judgment; it tests whether the documented judgment can be acted on
+without invention.
 
-## 3. Goals
+## 3. Authority model
 
-The system must:
+The three documents have different authority classes:
 
-1. Produce consistently structured research, scope, and design documents.
-2. Prevent material ideas from becoming code before evidence, commitment, and
-   design decisions are resolved.
-3. Separate research from scope and scope from implementation design.
-4. Make formal review outcomes binary and actionable.
-5. Preserve traceability from findings through requirements, design, and proof.
-6. Detect downstream documents bound to obsolete upstream meaning.
-7. Keep the skill concise through progressive loading of templates and rubrics.
-8. Embed native Apple behavior, local-first architecture, privacy,
-   accessibility, data integrity, interruption, recovery, and performance in
-   the applicable phase rather than deferring them to final testing.
-9. Give implementation grooming enough resolved detail to prevent invention
-   during coding.
-10. Avoid lifecycle overhead when existing authority already resolves the work.
+| Document | Authority class | May establish | Must not establish |
+|---|---|---|---|
+| Research | `evidence` | Findings, uncertainty, alternatives, recommendation, constraints | Committed scope or implementation architecture |
+| Scope | `product-commitment` | User outcome, boundaries, requirements, acceptance criteria, release boundary | Unnecessary code structure or unresearched behavior |
+| Design | `implementation-design` | Resolved interaction, state, architecture, data, recovery, accessibility, and proof design | Authority that conflicts with current canon or source reality |
 
-## 4. Non-goals
+All three remain pre-canon provenance. When durable product truth changes, the
+owning canon source must be amended. Current canon wins over an older lifecycle
+document unless a new lifecycle explicitly proposes changing that canon.
 
-The system will not:
+Codex must not implement from Research or Scope alone unless the initiative has
+an explicitly validated reduced entry point whose current authority already
+resolves Design.
 
-- create a competing source of product truth beside canon;
-- require all three documents for typo fixes, routine maintenance, mechanical
-  refactors, or contained defects whose expected behavior is already canonical;
-- replace issue tracking, implementation plans, pull requests, code review, or
-  test evidence;
-- use document status as merge authorization;
-- allow a passed document with blockers, contradictory decisions, or unresolved
-  behavior that would force implementation invention;
-- silently alter approved upstream decisions from a downstream phase;
-- treat Figma, screenshots, fixtures, or previews as proof of runtime behavior;
-- duplicate existing implementation, debugging, testing, security,
-  accessibility, or native-visual skill instructions;
-- migrate historical documents solely to make them match the new format.
+## 4. Applicability
 
-## 5. Applicability
+### 4.1 Complete lifecycle required
 
-### 5.1 Complete lifecycle required
+Use all three documents for material changes to one or more of:
 
-Use research, scope, and design for material changes to one or more of:
-
-- product behavior or user outcome;
-- canonical objects, identity, ownership, lifecycle, or consequence semantics;
-- information architecture, navigation, primary journeys, or presentation;
-- architecture, persistence, migration, concurrency, replay, recovery, or sync;
+- user outcome or externally observable product behavior;
+- canonical object identity, ownership, lifecycle, projection, or consequence;
+- information architecture, navigation, primary journey, or presentation;
+- architecture, persistence, migration, concurrency, replay, atomicity,
+  recovery, sync, or repair;
 - private-data boundaries or off-device egress;
 - accessibility semantics or equivalent interaction;
 - performance budgets or operational behavior;
-- a new system, surface, major capability, or externally observable contract;
+- a new system, surface, major capability, or contract;
 - multiple domains requiring explicit reconciliation.
 
-### 5.2 Reduced entry point
+### 4.2 Reduced entry point
 
-Work may begin at scope or design when current canon and source already establish
-all earlier answers. The new document must cite the exact authority and explain
-why new research or scope is unnecessary.
+Work may begin at Scope or Design only when current canon and live source already
+resolve every skipped-phase question. The document must cite exact authority,
+its repository revision, and a rationale. Codex consumption review must verify
+that the cited authority actually covers the skipped phase.
 
-Examples:
+### 4.3 Lifecycle normally unnecessary
 
-- implementing an already-normative requirement with no unresolved product
-  choice;
-- designing a bounded viewport whose behavior and acceptance conditions are
-  fully specified;
-- repairing an architecture seam whose ownership and invariants are canonical.
+The complete chain is normally unnecessary for spelling corrections,
+non-semantic comments, mechanical refactors with no contract change, bounded
+tooling maintenance, tests for established behavior, and contained defects whose
+expected result is already canonical. If investigation exposes a product choice,
+the work re-enters the earliest unresolved phase.
 
-The reduced entry point is explicit metadata. The validator does not fabricate
-missing documents.
-
-### 5.3 Complete lifecycle normally unnecessary
-
-The full chain is normally unnecessary for:
-
-- spelling, comment, or non-semantic copy corrections;
-- mechanical refactors with no contract change;
-- bounded dependency and tooling maintenance;
-- tests added for existing behavior;
-- contained defects where canon, source, and tests establish the expected result.
-
-If investigation exposes a product choice rather than a defect, work re-enters
-the earliest unresolved lifecycle phase.
-
-## 6. Repository architecture
+## 5. Repository and package architecture
 
 ```text
 .agents/skills/ambitions-product-development-lifecycle/
 ├── SKILL.md
+├── agents/
+│   └── openai.yaml
 ├── assets/
-│   ├── research-document-template.md
-│   ├── scope-document-template.md
-│   └── design-document-template.md
+│   └── templates/
+│       └── v1/
+│           ├── research.md
+│           ├── scope.md
+│           └── design.md
 ├── references/
 │   ├── lifecycle-contract.md
+│   ├── producer-contract.md
+│   ├── consumer-contract.md
 │   ├── research-review-rubric.md
 │   ├── scope-review-rubric.md
 │   └── design-review-rubric.md
-└── scripts/
-    ├── new_document.py
-    └── validate_document.py
+├── scripts/
+│   └── ambitions_product_docs.py
+└── tests/
+    ├── fixtures/
+    └── test_ambitions_product_docs.py
 
 docs/product-development/
 └── <initiative-slug>/
     ├── research.md
     ├── scope.md
-    └── design.md
+    ├── design.md
+    └── evidence/               # optional referenced annexes
 ```
 
-Templates are copied assets. Lifecycle and review rules are references loaded
-only when relevant. Scripts enforce mechanical rules that should not depend on
-agent judgment.
+There is one canonical package and one canonical template copy. ChatGPT
+distribution must be generated from or installed from this package; manually
+maintained duplicate templates are prohibited.
 
-## 7. Skill contract
+## 6. Skill discovery and deployment
 
-### 7.1 Frontmatter
+The skill package follows the open skill format and is usable by both products,
+but discovery differs by surface.
+
+### 6.1 Codex
+
+Codex discovers the canonical repository package at:
+
+```text
+$REPO_ROOT/.agents/skills/ambitions-product-development-lifecycle/
+```
+
+Root `AGENTS.md` receives one concise routing statement for material product
+work. The skill description must front-load the trigger and boundary:
 
 ```yaml
 ---
 name: ambitions-product-development-lifecycle
-description: Use when an Ambitions idea, feature, product behavior, architecture change, or UX change requires research, scope definition, implementation design, or readiness review before implementation.
+description: Use when creating, reviewing, or consuming an Ambitions research, scope, or design document for a material product, UX, or architecture change; do not use for routine work whose behavior is already canonical.
 ---
 ```
 
-The description states triggering conditions only, so agents must read the
-complete skill rather than treating frontmatter as a workflow shortcut.
+### 6.2 ChatGPT
 
-### 7.2 Responsibilities
+The repository-local path alone does not guarantee availability in ChatGPT.
+Initial delivery must provide and verify one supported ChatGPT invocation path:
 
-The skill must:
+1. install the same standalone skill package in a supported ChatGPT desktop
+   surface; or
+2. package the same skill as a private plugin for the owner's ChatGPT Work/web/
+   mobile workflow; or
+3. explicitly load the canonical `SKILL.md`, active template, and producer
+   contract from the repository before authoring.
 
-1. Inspect current repository state, relevant canon, source, tests, evidence,
-   and existing initiative documents.
-2. Select the correct lifecycle entry point.
-3. Resolve a stable initiative ID and slug.
-4. Instantiate the exact phase template through `new_document.py`.
-5. Preserve required headings and identifier conventions.
-6. Distinguish sourced fact, observed repository fact, user intent, inference,
-   recommendation, assumption, and unresolved unknown.
-7. Load the phase-specific review rubric.
-8. Return exactly `PASS` or `NEEDS REVISION` for a formal phase review.
-9. Reference each blocker to an affected section or stable ID.
-10. Prevent phase advancement while blockers remain.
-11. Reopen the earliest upstream phase responsible for a downstream defect.
-12. Run validation before claiming a document passed.
-13. Reconcile downstream status after an accepted upstream semantic revision.
-14. Hand a passed design to implementation grooming rather than embedding a full
-    task plan in the design document.
-15. Preserve the distinction between document quality and code readiness.
+Option 3 is an operational fallback, not permission to copy or fork templates.
+The skill version and template version written into the document must match the
+canonical repository package.
 
-### 7.3 Formal review output
+`agents/openai.yaml` supplies a clear display name, short description, and
+default authoring prompt. Implicit invocation remains enabled only after trigger
+and over-application tests pass.
 
-Formal reviews use these headings in this order:
+## 7. Role modes
+
+One package exposes three tightly bounded role modes.
+
+### 7.1 Producer mode — ChatGPT
+
+Producer mode must:
+
+1. load the canonical template and producer contract;
+2. inspect current canon, source, tests, evidence, and existing initiative files;
+3. record the exact repository baseline used;
+4. use current external research where the question is time-sensitive;
+5. write a self-contained artifact that does not depend on chat history;
+6. preserve IDs, headings, authority boundaries, and traceability;
+7. persist the document at the canonical repository path;
+8. run or emulate structural validation when tools permit;
+9. perform the content-integrity review lane;
+10. stop at `needs-revision` when evidence, decisions, or access are insufficient.
+
+Producer mode does not declare Codex consumption readiness.
+
+### 7.2 Review mode — ChatGPT or a fresh reviewer
+
+Content review attempts to falsify factual support, completeness, product logic,
+boundaries, alternatives, privacy, accessibility, and internal consistency. It
+binds its verdict to the exact document revision and contract hash.
+
+A semantic edit invalidates the content-review verdict. A fresh context or fresh
+agent is preferred. Self-review is allowed only when the review pass is explicit,
+separate from drafting, and uses the same rubric and hash binding.
+
+### 7.3 Consumer mode — Codex
+
+Consumer mode must:
+
+1. load root instructions, the lifecycle skill, and consumer contract;
+2. validate document structure and current review binding;
+3. compare the recorded repository baseline with current `HEAD`;
+4. inspect changes to cited canon, source, tests, and owner domains;
+5. verify authority class and upstream bindings;
+6. read the handoff summary before loading linked detail sections;
+7. test whether the next phase can proceed without invention;
+8. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
+9. bind the consumer verdict to the current revision and contract hash;
+10. set `status = "passed"` only when both review lanes pass the same hash.
+
+Consumer review is not merge authorization and does not approve product strategy
+beyond determining that the accepted strategy is coherent and actionable.
+
+## 8. Canonical persistence and handoff
+
+The canonical handoff is the committed repository file, not a pasted message,
+attachment, local temporary file, or uncommitted draft.
+
+A document is handoff-ready only when:
+
+- it exists at `docs/product-development/<initiative>/<phase>.md`;
+- its identity, schema, template, revision, and authority class are valid;
+- its repository baseline is recorded;
+- its content review passes the current revision and contract hash;
+- its upstream bindings are current;
+- structural validation passes.
+
+Codex may consume an unpassed document only to perform consumer review. It must
+not use it for implementation or downstream phase advancement.
+
+## 9. Shared document contract
+
+### 9.1 Required TOML frontmatter
+
+```toml
++++
+schema_version = 1
+template_version = "research-v1"
+skill_version = "1.0.0"
+
+initiative_id = "PD-2026-08-ADAPTIVE-START-HERE"
+document_id = "PD-2026-08-ADAPTIVE-START-HERE-RESEARCH"
+document_type = "research"
+authority_class = "evidence"
+entry_point = "research"
+
+status = "draft"
+revision = 1
+created_at = "2026-08-02"
+updated_at = "2026-08-02"
+repository_baseline_commit = "0123456789abcdef0123456789abcdef01234567"
+external_research_as_of = "2026-08-02"
+contract_hash = ""
+
+content_review_verdict = "unreviewed"
+content_review_revision = 0
+content_review_hash = ""
+consumer_review_verdict = "unreviewed"
+consumer_review_revision = 0
+consumer_review_hash = ""
+blocking_findings = 0
+
+canon_targets = []
+supersedes = []
+
+[[inputs]]
+document_id = ""
+path = ""
+revision = 0
+contract_hash = ""
+authority_commit = ""
++++
+```
+
+Research omits empty `[[inputs]]`. Scope binds to passed Research. Design binds
+to passed Scope. A reduced entry uses `[[inputs]]` entries for the exact canon or
+approved design authority it relies on.
+
+Parallel arrays for paths, revisions, and hashes are prohibited.
+
+### 9.2 Status values
+
+Allowed statuses:
+
+- `draft`;
+- `content-reviewed`;
+- `needs-revision`;
+- `passed`;
+- `stale`;
+- `superseded`.
+
+`passed` requires:
+
+- both verdicts equal `pass`;
+- both review revisions equal the current revision;
+- both review hashes equal the current contract hash;
+- zero blocking findings;
+- valid current inputs;
+- successful structural and consumption validation.
+
+### 9.3 Versioning
+
+`schema_version` controls machine interpretation. `template_version` controls the
+required headings and section contract. `skill_version` records the package used
+by the author.
+
+A new template version must not silently invalidate or reinterpret a previously
+passed document. Validators retain support for active historical versions or
+require an explicit migration. Migrations are reviewable, never automatic, and
+invalidate prior review bindings when authority-bearing text changes.
+
+## 10. Contract hash and revision binding
+
+The system uses a deterministic **contract hash**, not a claimed semantic hash.
+The tool does not attempt to decide whether two different sentences mean the
+same thing.
+
+The contract hash includes authority-bearing frontmatter and body sections. It
+excludes the hash field itself, review metadata, timestamps, and append-only
+review history. Normalization handles line endings, trailing whitespace, and
+pure formatting rules documented by the tool.
+
+Any textual change inside an authority-bearing section changes the contract
+hash, including a spelling correction. This conservative invalidation is
+intentional. The system may avoid revision churn only for changes confined to
+explicitly excluded metadata or review-history fields.
+
+Every semantic or authority-bearing edit increments `revision`, clears both
+review verdicts and hashes, and may stale downstream documents. A verdict that
+does not match the current revision and contract hash is invalid even if the
+frontmatter still says `pass`.
+
+## 11. Agent handoff summary
+
+Every document begins with `## Agent handoff summary` immediately after
+frontmatter. It is the first semantic section and has a hard maximum of 1,200
+words.
+
+It contains:
+
+- one-sentence decision or finding;
+- authority class and permitted use;
+- repository baseline and research-as-of date;
+- required upstream inputs;
+- top decisions or findings by stable ID;
+- protected constraints and explicit exclusions;
+- unresolved blockers, which must be `None` for passage;
+- exact next action;
+- section-reading map for deeper context.
+
+The summary is not a substitute for validation or the full contract. It is a
+context-efficient routing layer for Codex.
+
+Primary documents should remain concise. When evidence, comparisons, or visual
+material would dominate the core contract, move it to referenced files under
+`evidence/`. The primary document must still contain enough analysis and
+conclusions to remain usable if Codex cannot access an external website.
+
+## 12. Dual review gate
+
+Each phase has two independent verdict lanes bound to the same revision and
+contract hash.
+
+### 12.1 Content-integrity review
+
+This lane asks whether the document is factually supported, internally coherent,
+appropriately bounded, and product-complete for its phase.
+
+### 12.2 Codex-consumption review
+
+This lane asks whether the next phase can consume the document without hidden
+chat context, stale repository assumptions, missing authority, ambiguous IDs,
+unbounded reading, or product invention.
+
+For Research, the consumer question is whether Scope can be authored without
+repeating research or guessing constraints. For Scope, it is whether Design can
+resolve implementation behavior without inventing product requirements. For
+Design, it is whether Codex can groom and implement without inventing behavior
+or violating current canon and source.
+
+### 12.3 Formal review output
 
 ```text
 Verdict: PASS | NEEDS REVISION
+Review lane: CONTENT | CONSUMER
+Reviewed revision: <integer>
+Reviewed contract hash: <sha256>
 
 Blocking findings
 Non-blocking improvements
@@ -219,686 +422,352 @@ Required revisions
 Next permitted lifecycle phase
 ```
 
-There is no conditional pass. A blocker produces `NEEDS REVISION`.
-Non-blocking improvements may remain after `PASS` only when omission creates no
-ambiguity, untested obligation, data risk, accessibility failure, or
-implementation invention.
+There is no conditional pass. Any authority-bearing revision invalidates both
+lanes and reruns both reviews.
 
-## 8. Initiative document model
+## 13. Research document contract
 
-### 8.1 Stable directory and files
-
-Each initiative uses one stable directory:
-
-```text
-docs/product-development/<initiative-slug>/
-```
-
-The directory and phase filenames do not change during revisions. Git preserves
-history; routine `-r01`, `-r02`, and similar document copies are prohibited.
-
-### 8.2 Stable identifiers
-
-Initiative IDs use the creation month and remain unchanged if work continues in
-later months:
-
-```text
-PD-YYYY-MM-<UPPERCASE-SLUG>
-```
-
-Document IDs append the phase:
-
-```text
-PD-2026-08-ADAPTIVE-START-HERE-RESEARCH
-PD-2026-08-ADAPTIVE-START-HERE-SCOPE
-PD-2026-08-ADAPTIVE-START-HERE-DESIGN
-```
-
-Content IDs are stable within the initiative:
-
-- findings: `FIND-001`;
-- risks: `RISK-001`;
-- requirements: `REQ-001`;
-- acceptance criteria: `AC-001`;
-- design decisions: `DESIGN-001`;
-- planned verification: `VERIFY-001`;
-- open decisions: `OPEN-001`.
-
-Removed IDs are retired and never reassigned to a different concept.
-
-### 8.3 Shared TOML frontmatter
-
-```toml
-+++
-initiative_id = "PD-2026-08-ADAPTIVE-START-HERE"
-document_id = "PD-2026-08-ADAPTIVE-START-HERE-RESEARCH"
-document_type = "research"
-status = "draft"
-revision = 1
-created_at = "2026-08-02"
-updated_at = "2026-08-02"
-
-entry_point = "research"
-input_documents = []
-input_revisions = []
-input_hashes = []
-
-review_verdict = "unreviewed"
-blocking_findings = 0
-canon_targets = []
-supersedes = []
-+++
-```
-
-Allowed statuses:
-
-- `draft`;
-- `in-review`;
-- `needs-revision`;
-- `passed`;
-- `stale`;
-- `superseded`.
-
-Allowed verdicts:
-
-- `unreviewed`;
-- `needs-revision`;
-- `pass`.
-
-`status = "passed"` requires `review_verdict = "pass"`, zero blocking findings,
-a successful validation result, and current upstream inputs.
-
-### 8.4 Upstream binding and semantic staleness
-
-Scope binds to the exact passed research revision and semantic hash. Design
-binds to the exact passed scope revision and semantic hash. A reduced entry point
-binds to exact canon or approved design authority.
-
-A material research change makes dependent scope and design effectively stale.
-A material scope change makes dependent design effectively stale. Material
-changes include findings, recommendations, requirements, acceptance criteria,
-boundaries, dependencies, risks, design decisions, or verification obligations.
-Formatting-only and spelling-only changes do not propagate staleness when the
-normalized semantic hash remains unchanged.
-
-Staleness handling must be safe and explicit:
-
-1. `validate_document.py` is read-only by default.
-2. When an upstream semantic hash changes, validation reports the dependent
-   document's effective status as stale and exits nonzero.
-3. CI never silently edits initiative files.
-4. After the upstream revision is intentionally accepted, the skill explicitly
-   changes affected downstream frontmatter to `status = "stale"` in a separate,
-   reviewable edit.
-5. A stale document remains historical evidence but cannot advance the phase.
-6. Revalidation clears the effective stale error only after the downstream
-   document is reconciled, rebound to the new input, reviewed, and passed again.
-
-## 9. Research document contract
-
-The research document answers:
+Research answers:
 
 > What is true, what remains uncertain, what constraints exist, and which
 > direction is best supported by evidence?
 
-It does not commit detailed implementation scope.
+Required sections:
 
-### 9.1 Required sections
-
-1. Executive finding
+1. Agent handoff summary
 2. Idea and problem statement
 3. Research questions
-4. Hypotheses requiring validation
-5. Current Ambitions state
-   - Relevant canon
-   - Live implementation
-   - Existing tests and evidence
-   - Known gaps or contradictions
-6. User and product evidence
-7. Apple platform and ecosystem research
-8. Technical feasibility
-9. Privacy and local-first implications
-10. Accessibility implications
-11. Alternatives considered
-12. Tradeoff analysis
-13. Findings
-14. Recommended direction
-15. Rejected directions
-16. Remaining unknowns
-17. Risk register
-18. Source ledger
-19. Handoff to scope
-20. Review history
+4. Current Ambitions baseline
+5. User and product evidence
+6. Apple platform and ecosystem evidence
+7. Technical feasibility
+8. Privacy and local-first implications
+9. Accessibility implications
+10. Alternatives and tradeoffs
+11. Findings
+12. Recommended direction
+13. Rejected directions
+14. Remaining unknowns
+15. Risk register
+16. Source ledger
+17. Handoff to Scope
+18. Review history
 
-A non-applicable section remains present and states why it is not material.
+Every material finding has a stable `FIND-*` ID and cites `SRC-*` or exact
+repository evidence. Each source-ledger entry includes title, publisher or repo
+path, URL when applicable, access date, temporal sensitivity, supported claim
+IDs, and a concise evidence summary. Codex must not need network access merely to
+understand why an accepted finding exists.
 
-### 9.2 Evidence classification
+Research passes only when no unresolved unknown prevents a bounded scope choice,
+meaningful alternatives were compared, current repo and canon were inspected,
+time-sensitive claims are current, and recommendation follows from evidence.
+Research must not preselect detailed implementation architecture.
 
-Material statements must be classifiable as:
+## 14. Scope document contract
 
-- externally sourced fact;
-- observed current-repository fact;
-- user-provided product intent;
-- inference;
-- recommendation;
-- assumption;
-- unresolved unknown.
-
-External claims require sources. Repository claims cite paths, symbols, tests,
-commands, or evidence artifacts. Inferences name their supporting evidence.
-
-### 9.3 Research pass criteria
-
-Research passes only when:
-
-- material claims are sourced or explicitly classified;
-- current repo and canon reality were inspected;
-- research questions are answered or carried forward as explicit unknowns;
-- meaningful alternatives were compared;
-- recommendation follows from findings;
-- rejected directions include reasons;
-- privacy, local-first behavior, accessibility, Apple behavior, failure, and
-  recovery are considered where relevant;
-- contradictions are reconciled or escalated;
-- detailed implementation scope is not prematurely locked;
-- no unknown prevents a bounded scope decision;
-- the source ledger is sufficient to reproduce material analysis.
-
-## 10. Scope document contract
-
-The scope document answers:
+Scope answers:
 
 > What exact product outcome are we committing to, and what are we explicitly
 > not building?
 
-It consumes passed research or cites exact authority for a reduced entry point.
-It defines observable obligations without unnecessarily choosing implementation
-mechanics.
+Required sections:
 
-### 10.1 Required sections
+1. Agent handoff summary
+2. Research input and authority
+3. Problem and desired user outcome
+4. Target users and scenarios
+5. In scope
+6. Out of scope
+7. Product requirements
+8. Required states and behaviors
+9. Acceptance criteria
+10. Product invariants
+11. Native Apple constraints
+12. Privacy and data boundaries
+13. Accessibility requirements
+14. Offline, interruption, failure, and recovery expectations
+15. Performance expectations
+16. Dependencies and risks
+17. Measurement and success evidence
+18. Release boundary
+19. Canon impact
+20. Design brief
+21. Open decisions
+22. Review history
 
-1. Scope decision
-2. Research input and revision
-3. Problem being solved
-4. Desired user outcome
-5. Target users and scenarios
-6. In scope
-7. Out of scope
-8. Product requirements
-9. Required states and behaviors
-10. Acceptance criteria
-11. Product invariants
-12. Native Apple constraints
-13. Privacy and data boundaries
-14. Accessibility requirements
-15. Offline, interruption, and recovery expectations
-16. Performance expectations
-17. Dependencies
-18. Risks and mitigations
-19. Measurement and success evidence
-20. Release boundary
-21. Canon impact
-22. Design brief
-23. Open decisions
-24. Review history
+Each `REQ-*` is one observable obligation, cites supporting findings or current
+authority, names its intended owner domain, and maps to one or more `AC-*`
+entries. Each `AC-*` defines inspectable evidence and avoids subjective closure
+without observable conditions.
 
-### 10.2 Requirement rules
+Scope passes only when its outcome, boundaries, states, risks, dependencies,
+canon targets, and release boundary are explicit, every requirement is
+verifiable, and no open decision forces Design or implementation to invent
+product behavior.
 
-Each `REQ-*` must:
+## 15. Design document contract
 
-- describe one observable obligation;
-- identify its owner domain or intended canon owner;
-- avoid combining independent requirements;
-- be testable or inspectable;
-- reference supporting findings or established authority;
-- map to one or more `AC-*` entries.
-
-Each `AC-*` defines inspectable evidence. Subjective closure such as “looks
-good,” “works correctly,” or “feels native” is insufficient without measurable
-or observable conditions.
-
-### 10.3 Scope pass criteria
-
-Scope passes only when:
-
-- outcome and release boundary are bounded;
-- in-scope and out-of-scope behavior are unambiguous;
-- requirements are supported by research or authority;
-- every requirement maps to acceptance criteria;
-- every acceptance criterion is verifiable;
-- privacy, local-first, accessibility, offline, interruption, failure,
-  recovery, migration, and performance obligations are explicit where relevant;
-- dependencies and risks are identified;
-- open decisions do not require invention during design or implementation;
-- canon targets and owner domains are named;
-- scope is one coherent design and implementation program or is decomposed
-  before passing.
-
-## 11. Design document contract
-
-The design document answers:
+Design answers:
 
 > How will the passed scope become a coherent, native, testable Ambitions
 > implementation?
 
-It combines product interaction, state, architecture, privacy, accessibility,
-data integrity, and verification. It is neither a visual-only document nor a
-code-level task plan.
+Required sections:
 
-### 11.1 Required sections
+1. Agent handoff summary
+2. Scope input and authority
+3. Design principles and protected characteristics
+4. User journey and information architecture
+5. Canonical object ownership
+6. State model
+7. Command and consequence model
+8. Screen and presentation behavior
+9. Navigation, focus, dismissal, restoration, keyboard, and safe areas
+10. SwiftUI composition
+11. Domain and service boundaries
+12. Persistence, migration, concurrency, replay, and atomicity
+13. Offline behavior
+14. Privacy and security
+15. Accessibility
+16. Motion, Reduce Motion, Reduce Transparency, contrast, and legibility
+17. Error, interruption, recovery, rollback, and Undo
+18. Performance and diagnostics boundaries
+19. Testing strategy
+20. Visual and runtime proof plan
+21. File and module impact
+22. Legacy deletion or supersession
+23. Implementation seams and dependency order
+24. Requirement-to-design traceability
+25. Implementation grooming handoff
+26. Open questions
+27. Review history
 
-1. Design decision summary
-2. Scope input and revision
-3. Design principles
-4. Protected product characteristics
-5. User journey
-6. Information architecture
-7. Canonical object ownership
-8. State model
-9. Command and consequence model
-10. Screen and presentation behavior
-11. Navigation, focus, dismissal, and restoration
-12. SwiftUI composition
-13. Domain and service boundaries
-14. Persistence and migration behavior
-15. Concurrency, replay, and atomicity implications
-16. Offline behavior
-17. Privacy and security
-18. Accessibility
-19. Motion and Reduce Motion
-20. Reduce Transparency, contrast, and legibility
-21. Error, interruption, recovery, rollback, and Undo
-22. Performance considerations
-23. Diagnostics and telemetry boundaries
-24. Testing strategy
-25. Visual and runtime proof plan
-26. File and module impact
-27. Legacy deletion or supersession
-28. Implementation seams
-29. Requirement-to-design traceability
-30. Implementation grooming handoff
-31. Open questions
-32. Review history
+Each `DESIGN-*` resolves one material decision, maps to `REQ-*`, `AC-*`, and
+`VERIFY-*`, names its owner layer or module, records non-obvious rejected
+alternatives, and defines failure and recovery where applicable.
 
-### 11.2 Design decision rules
+The traceability matrix includes every requirement and acceptance criterion.
+Design passes only when current canon and source do not contradict it, all
+applicable states and platform behaviors are resolved, preview evidence is not
+inflated into runtime proof, implementation seams are bounded, and Codex can
+groom the work without product invention.
 
-Each `DESIGN-*` must:
+## 16. Codex consumption protocol
 
-- resolve one material product or technical decision;
-- reference the `REQ-*` and `AC-*` entries it satisfies;
-- identify the owning layer or module;
-- state rejected alternatives when the decision is non-obvious;
-- define failure and recovery behavior when applicable;
-- identify intended verification evidence.
+Codex reads in this order:
 
-Diagrams, native frames, prototypes, and pseudocode may support the contract but
-never replace it.
+1. active `AGENTS.md` instruction chain;
+2. lifecycle `SKILL.md` and consumer contract;
+3. target document frontmatter and Agent handoff summary;
+4. upstream handoff summaries and linked IDs;
+5. current owning canon;
+6. current source, tests, and changed paths relevant to cited authority;
+7. full document sections only as needed to resolve the task.
 
-### 11.3 Traceability matrix
+Before accepting a document, Codex runs the lifecycle CLI in `consume` mode. It
+must stop and return `NEEDS REVISION` when:
 
-The design contains a complete matrix:
+- the document is not at the canonical path;
+- schema or template version is unsupported;
+- review binding does not match current revision and hash;
+- recorded repository baseline is absent or relevant authority changed;
+- upstream inputs are stale, missing, or not passed;
+- cited source evidence is unavailable and the document is not self-contained;
+- authority class is exceeded;
+- required IDs are orphaned or contradictory;
+- the next phase requires inference not authorized by the document;
+- current canon or source conflicts with the document.
 
-| Research finding or authority | Scope requirement | Acceptance criterion | Design decision | Planned verification |
-|---|---|---|---|---|
-| `FIND-003` | `REQ-004` | `AC-007` | `DESIGN-011` | `VERIFY-009` |
+A baseline commit difference alone does not automatically fail. Codex inspects
+whether changed files affect cited canon, source owners, tests, dependencies, or
+assumptions. Unrelated repository changes are reported but do not stale the
+document.
 
-Every requirement and acceptance criterion appears. Orphan requirements,
-unverified acceptance criteria, and design decisions with no scope basis block
-passage.
+## 17. Deterministic lifecycle CLI
 
-### 11.4 Design pass criteria
-
-Design passes only when:
-
-- every passed scope requirement is covered;
-- every acceptance criterion has planned verification;
-- object, state, command, data, source, and module ownership are explicit;
-- native presentation, navigation, dismissal, focus, restoration, keyboard, and
-  safe-area behavior are resolved where applicable;
-- loading, empty, populated, degraded, error, interrupted, recovery, completed,
-  archived, and destructive states are addressed where applicable;
-- local-first, privacy, accessibility, migration, concurrency, replay,
-  rollback, and data-integrity behavior are resolved where relevant;
-- preview or fixture evidence is not represented as runtime proof;
-- implementation seams are narrow and independently testable;
-- file impact and intended legacy deletion are identified;
-- no placeholder, contradiction, or unresolved product behavior remains;
-- implementation can be groomed without inventing behavior.
-
-## 12. Review and revision behavior
-
-### 12.1 Independent review
-
-Formal review attempts to falsify completeness, consistency, traceability,
-feasibility, privacy, accessibility, and verification claims. It is not merely a
-prose edit.
-
-### 12.2 Revision rules
-
-A semantic revision must:
-
-- preserve stable IDs for unchanged concepts;
-- increment `revision`;
-- update `updated_at`;
-- record verdict and resolved blockers in Review history;
-- avoid silently changing upstream decisions;
-- reopen the responsible upstream phase when necessary;
-- recalculate the semantic hash;
-- reconcile dependent status;
-- pass validation before a new pass claim.
-
-### 12.3 Phase reversal
-
-The lifecycle is reversible:
+Use one Python standard-library CLI to avoid duplicated parsers and inconsistent
+state transitions:
 
 ```text
-Research review may reopen research.
-Scope work or review may reopen research.
-Design work or review may reopen scope or research.
-Implementation grooming may reopen design, scope, or research.
-Implementation or testing may expose an earlier defect.
-```
-
-Correct the earliest defective phase first, then reconcile downstream work.
-
-## 13. Deterministic tooling
-
-Utilities use the Python 3.12 standard library unless the repository establishes
-a different supported baseline during implementation.
-
-### 13.1 `new_document.py`
-
-Example:
-
-```sh
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/new_document.py \
-  --initiative "Adaptive Start Here" \
-  --phase research
+ambitions_product_docs.py new
+ambitions_product_docs.py check
+ambitions_product_docs.py hash
+ambitions_product_docs.py review
+ambitions_product_docs.py reconcile
+ambitions_product_docs.py consume
 ```
 
 Required behavior:
 
-- normalize and validate slug and IDs;
-- create the initiative directory when absent;
-- copy the exact phase template;
-- populate dates, entry point, and upstream references;
-- calculate upstream semantic hashes;
-- refuse overwrite;
-- refuse scope when required research is missing, stale, or not passed;
-- refuse design when required scope is missing, stale, or not passed;
-- allow reduced entry only with a valid authority path and rationale;
-- print the created path and next required action;
-- make no unrelated edits.
+- instantiate the exact active template without overwrite;
+- support producer-created files when shell execution was unavailable;
+- parse and validate TOML frontmatter;
+- validate schema, template, skill, IDs, headings, and authority class;
+- compute the documented contract hash;
+- validate review bindings and status combinations;
+- validate structured `[[inputs]]` records;
+- detect relevant repository-baseline drift;
+- require finding-to-source, requirement-to-finding, requirement-to-acceptance,
+  and design-to-verification traceability;
+- reject placeholders and empty required sections in reviewable documents;
+- record review verdicts only against the current revision and hash;
+- explicitly mark or rebind stale documents through reviewable commands;
+- never silently mutate files during `check` or CI;
+- restrict writes to approved repository roots and reject path traversal;
+- provide stable JSON output and nonzero failure exits.
 
-### 13.2 `validate_document.py`
+The CLI may update metadata only through explicit write subcommands. Every write
+prints the path, fields changed, previous value, new value, and next required
+action.
 
-Examples:
+## 18. Template evolution
 
-```sh
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_document.py \
-  docs/product-development/adaptive-start-here/research.md
+Templates are immutable within a version. Improvements create `v2`, not an
+in-place reinterpretation of `v1` documents.
 
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_document.py \
-  --initiative docs/product-development/adaptive-start-here
+A version change requires:
 
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/validate_document.py \
-  --all --format json
-```
+- migration rationale;
+- compatibility decision for passed historical documents;
+- validator coverage for each supported version;
+- explicit migration command if migration is needed;
+- review invalidation when authority-bearing content changes;
+- a cross-product test proving ChatGPT and Codex load the same version.
 
-Required validation:
+## 19. Testing strategy
 
-- parse TOML frontmatter;
-- validate document and initiative IDs;
-- require mandatory heading set and order;
-- enforce valid status and verdict combinations;
-- reject duplicate active content IDs;
-- allow intentional gaps for retired IDs but reject malformed or reassigned IDs;
-- validate upstream paths, revisions, hashes, and pass state;
-- detect effective staleness without mutating files;
-- require source-ledger support for material findings;
-- require requirement-to-finding or authority linkage;
-- require requirement-to-acceptance linkage;
-- require complete design traceability;
-- reject placeholders, fill-in markers, and empty required sections in passed
-  documents;
-- reject passed status with blockers or open decisions that require invention;
-- report file, section, identifier, and remediation;
-- exit nonzero on failure;
-- provide stable JSON diagnostics for CI and future tools.
+The skill is developed with documentation TDD: run pressure scenarios without
+the skill, record failures, install the minimum contract, rerun the same cases,
+and refine only for observed gaps.
 
-### 13.3 Semantic hash
+Required scenario groups:
 
-The semantic hash excludes non-semantic fields such as `updated_at`,
-formatting-only whitespace, and append-only review-history metadata. It includes
-findings, recommendations, requirements, acceptance criteria, boundaries,
-risks, decisions, traceability, and other semantic body content.
+### 19.1 Producer scenarios
 
-The normalization algorithm must be documented and unit-tested. A raw file hash
-is insufficient because harmless formatting changes would invalidate every
-downstream phase.
+- ChatGPT lacks live repo access but attempts to pass Research.
+- ChatGPT writes a polished chat response but does not persist the document.
+- ChatGPT uses a stale template or skill version.
+- ChatGPT invents evidence or silently fills an unknown.
+- ChatGPT over-applies the lifecycle to a trivial correction.
+- ChatGPT edits a passed revision without invalidating review bindings.
 
-## 14. Code Quality integration
+### 19.2 Consumer scenarios
 
-After the standalone system is validated, an affected-path lane may be added to
-the existing Code Quality workflow for:
+- Codex receives only Design and hidden chat context is missing.
+- Current canon changed after the recorded baseline.
+- Research links external sources but omits evidence summaries.
+- Scope has testable requirements but ambiguous out-of-scope behavior.
+- Design is visually complete but omits data ownership or recovery.
+- A preview screenshot is presented as runtime proof.
+- A consumer attempts to implement from Research or Scope alone.
 
-```text
-.agents/skills/ambitions-product-development-lifecycle/**
-docs/product-development/**
-```
+### 19.3 Cross-product fixture
 
-The lane validates document consistency and skill fixtures. It does not create a
-new branch-protection check, authorize merging, or decide strategic approval.
-CI validation is read-only.
+A fixture initiative must be authored through the ChatGPT producer path and
+consumed through the Codex path. The test proves:
 
-## 15. Canon handoff
+- identical skill and template versions;
+- canonical repository persistence;
+- both review lanes bound to one revision and hash;
+- bounded summary-first reading;
+- stale detection after a relevant upstream or canon change;
+- successful Research → Scope → Design → grooming handoff;
+- no dependence on the original ChatGPT conversation.
 
-Passed scope and design documents include `canon_targets`. During grooming or
-implementation:
+### 19.4 CLI tests
 
-1. Resolve each target against current generated canon routing.
-2. Amend the owning normative source when durable product truth changes.
-3. Add or update requirement and verification IDs under current canon rules.
-4. Run `python3 scripts/ambitions-canon.py check`.
-5. Retain lifecycle documents as provenance.
+Unit tests cover template creation, version support, IDs, TOML parsing, contract
+hashing, review binding, status rules, input records, traceability, baseline
+comparison, stale reconciliation, path safety, read-only checks, JSON output, and
+nonzero failure behavior.
 
-Current canon wins over an older lifecycle document unless a new lifecycle
-explicitly proposes changing canon.
+## 20. Delivery boundary
 
-## 16. Implementation grooming handoff
+### 20.1 Initial implementation — required
 
-A passed design provides bounded planning inputs rather than a task list:
+1. Create the portable skill package, role contracts, versioned templates,
+   lifecycle CLI, fixtures, and tests.
+2. Add `agents/openai.yaml` and concise root `AGENTS.md` routing.
+3. Establish and verify the owner's ChatGPT invocation path for the same package.
+4. Run baseline and post-skill producer, consumer, and cross-product scenarios.
+5. Complete one fixture initiative through all three phases and grooming handoff.
+6. Leave historical initiative documents unchanged.
 
-- passed paths, revisions, and hashes;
-- required canon amendments;
-- implementation seams and dependency order;
-- affected modules and expected file classes;
-- required tests and proof lanes;
-- migration and compatibility obligations;
-- legacy deletion obligations;
-- risks and stop conditions;
-- requirement, acceptance, design, and verification IDs.
-
-If these cannot be converted into executable work without invention, grooming
-reopens the responsible lifecycle phase.
-
-## 17. Skill testing strategy
-
-The skill is developed using documentation TDD: run fresh agents without the
-skill, record failures, add the minimum instruction or contract needed, rerun the
-same scenarios, and refine only for observed loopholes.
-
-### 17.1 Pressure scenarios
-
-At minimum:
-
-1. Immediate SwiftUI implementation requested from a vague idea.
-2. Incomplete research encouraged to produce plausible scope.
-3. One unresolved privacy blocker presented as a candidate conditional pass.
-4. Passed research changes after scope and design pass.
-5. Preview screenshot presented as runtime proof.
-6. A spelling correction presented as requiring the full lifecycle.
-7. Historical passed design conflicts with current canon.
-8. Design omits ownership and concurrency behavior.
-9. Acceptance criteria lack planned verification.
-10. Document pass status is treated as a merge authorization receipt.
-
-### 17.2 Expected post-skill behavior
-
-Fresh agents must:
-
-- choose the correct entry point;
-- resist premature implementation;
-- distinguish evidence, inference, and assumption;
-- issue binary verdicts;
-- detect and explicitly reconcile stale dependencies;
-- treat canon as current durable authority;
-- reject preview-only runtime claims;
-- avoid over-applying the lifecycle;
-- surface ownership, privacy, accessibility, recovery, and verification gaps;
-- keep document quality separate from merge authorization.
-
-### 17.3 Script tests
-
-Unit tests cover:
-
-- ID and slug generation;
-- template instantiation and overwrite refusal;
-- upstream pass requirements and reduced-entry authority;
-- frontmatter and heading validation;
-- status and verdict combinations;
-- stable identifier uniqueness;
-- semantic hashing and effective stale detection;
-- source-ledger enforcement;
-- requirement and acceptance coverage;
-- design traceability;
-- placeholder and empty-section rejection;
-- JSON diagnostics and nonzero exit behavior;
-- path traversal rejection;
-- proof that validation does not mutate files.
-
-Tests use temporary directories and fixtures only.
-
-## 18. Delivery boundary and adoption sequence
-
-This design is intentionally bounded so one implementation plan can complete the
-skill system without also delivering an unrelated Ambitions product feature.
-
-### 18.1 Initial implementation — in scope
-
-1. Create the skill, templates, rubrics, lifecycle contract, scripts, and tests.
-2. Run and commit baseline and post-skill pressure-scenario evidence.
-3. Validate a synthetic or fixture initiative through research, scope, design,
-   review, semantic staleness, and grooming handoff.
-4. Add concise repository routing for material initiatives.
-5. Leave historical documents unchanged.
-
-### 18.2 Follow-up adoption — not required for initial completion
+### 20.2 Follow-up adoption
 
 1. Use the lifecycle for the first real bounded Ambitions initiative.
-2. Evaluate whether template or rubric refinement is needed.
-3. Add the affected-path Code Quality lane only after standalone behavior is
-   stable.
-4. Measure whether the lifecycle reduces invention, revision churn, and proof
-   gaps without adding disproportionate process cost.
+2. Refine only from observed producer or consumer failures.
+3. Add affected-path Code Quality validation after standalone behavior is stable.
+4. Measure revision churn, implementation invention, context usage, and proof
+   gaps.
 
-A real feature implementation and merge are evidence of adoption, not blockers
-to completing the lifecycle skill itself.
+A real feature implementation is adoption evidence, not a blocker to completing
+the lifecycle system.
 
-## 19. Failure handling
+## 21. Security, privacy, and offline posture
 
-- **Missing upstream document:** stop and name the required phase or reduced-entry
-  authority.
-- **Invalid frontmatter:** identify the field and accepted values; do not rewrite
-  silently during validation.
-- **Stale dependency:** report effective stale status and the changed input;
-  apply explicit frontmatter updates only through a separate edit.
-- **Conflicting authority:** resolve the conflict in the earliest owning phase or
-  canon source.
-- **Unreachable source:** classify the claim as unverified.
-- **Oversized initiative:** decompose during research or scope before pass.
-- **Validator defect:** fail safely, preserve documents, and repair with tests.
-- **Skill ambiguity:** reproduce it with a pressure scenario before editing the
-  skill.
+Templates must not copy credentials, production secrets, unnecessary personal
+records, or private-life graph content into repository artifacts. Research uses
+public sources, repository evidence, or appropriately redacted internal context.
 
-## 20. Security and privacy
-
-Templates must prevent credentials, production secrets, unnecessary personal
-records, or private-life graph content from being copied into artifacts.
-Research uses public sources, repository evidence, or redacted user context
-unless a protected internal source is explicitly required.
-
-The skill never directs private Ambitions data to external research services.
-Scripts use no network access, execute no embedded document content, restrict
-operations to approved repository roots, and reject path traversal.
-
-## 21. Accessibility and quality posture
-
-Accessibility is resolved across phases: research identifies constraints, scope
-defines obligations, design resolves semantic and interaction behavior, and
-implementation/testing produces proof. Applicable concerns include VoiceOver,
-Switch Control, Dynamic Type, focus, Reduce Motion, Reduce Transparency,
-contrast, interruption, errors, and recovery.
-
-The same early-to-late treatment applies to privacy, local-first behavior,
-persistence, migration, concurrency, replay, recovery, performance, and native
-Apple conventions.
+The lifecycle CLI uses no network access, executes no document content, and
+performs writes only inside approved roots. External research is summarized in
+the document so Codex can consume accepted findings without network access.
 
 ## 22. Initial implementation acceptance criteria
 
-The first implementation is complete when:
+The lifecycle system is complete when:
 
-1. The complete skill directory and specified files exist.
-2. `SKILL.md` is concise and delegates templates and rubrics.
-3. All templates contain required frontmatter and sections.
-4. Both utilities implement the safe interfaces in this design.
-5. Unit tests cover all mechanical invariants and pass.
-6. Baseline and post-skill pressure evidence is committed.
-7. Fresh post-skill agents satisfy every required behavior scenario.
-8. A fixture initiative completes all three document phases and grooming handoff.
-9. Upstream semantic changes are detected without silent mutation and correctly
-   invalidate downstream pass state.
-10. The validator rejects incomplete traceability, placeholders, blockers, and
-    invalid status combinations.
-11. Repository guidance distinguishes material initiatives from trivial work.
-12. Applicable canon changes for the lifecycle system itself are reconciled and
-    `python3 scripts/ambitions-canon.py check` remains green.
-13. No process-only merge gate or authorization receipt is introduced.
+1. The canonical package and every specified file exist.
+2. ChatGPT and Codex demonstrably load the same skill and template versions.
+3. ChatGPT can create each canonical document without relying on hidden chat
+   context or a local shell.
+4. Codex can consume each document using summary-first routing and current repo
+   verification.
+5. Both review lanes bind to the same current revision and contract hash.
+6. The CLI enforces structure, authority, traceability, versions, review binding,
+   stale inputs, and safe writes.
+7. Relevant repository or canon changes invalidate consumption; unrelated changes
+   do not.
+8. Research source evidence is reproducible and self-contained enough for Codex.
+9. Scope cannot pass with product ambiguity that Design would need to invent.
+10. Design cannot pass with implementation ambiguity, ownership gaps, or proof
+    inflation.
+11. A cross-product fixture completes Research, Scope, Design, and grooming.
+12. Pressure tests correct observed baseline failures.
+13. Current canon remains green after any required lifecycle-system amendment.
+14. No process-only merge gate, owner receipt, or authorization ceremony is
+    introduced.
 
 ## 23. Resolved design choices
 
-- One lifecycle skill, not three independent skills.
-- Templates as assets; contracts and rubrics as references.
-- Initiative documents under `docs/product-development/<initiative>/`.
-- One file per phase with Git history for revisions.
-- Binary `PASS` or `NEEDS REVISION` verdicts.
-- Semantic upstream hashes and explicit stale-state reconciliation.
-- Read-only validation and CI; no silent file mutation.
-- Lifecycle documents as pre-canon provenance.
-- Deterministic scripts for mechanical rules.
-- Before-and-after pressure testing before adoption.
-- Initial implementation bounded to the lifecycle system and fixture proof.
-- Real feature adoption and optional CI integration deferred to follow-up.
+- One canonical portable skill package serves both ChatGPT and Codex.
+- Product-specific role modes are Producer, Content Review, and Consumer.
+- Every phase requires both content and actual Codex-consumption review.
+- The repository file, not chat history, is the canonical handoff.
+- Each document declares a distinct authority class.
+- Templates and schemas are versioned and immutable within a version.
+- Review verdicts bind to exact revision and contract hash.
+- A deterministic contract hash replaces unverifiable semantic-equivalence
+  claims.
+- Every document begins with a bounded Agent handoff summary.
+- Codex uses summary-first, linked-section consumption.
+- External evidence is summarized so accepted research survives offline use.
+- One lifecycle CLI owns deterministic parsing and state transitions.
+- ChatGPT deployment is explicitly verified rather than inferred from Codex
+  repo-local discovery.
 
 ## 24. Open questions
 
-None block implementation planning. Implementation may refine command spelling,
-internal parser decomposition, fixture organization, and exact test locations
-while preserving every behavior and acceptance criterion in this design.
+None block the second review pass. Implementation planning may choose the exact
+private ChatGPT distribution mechanism after checking the owner's supported
+surface, but the final system must verify that ChatGPT uses the canonical package
+and version rather than a copied prompt or divergent template.
 
-## 25. Self-review result
+## 25. Review gate
 
-- **Placeholder scan:** No unresolved fill-in content exists.
-- **Internal consistency:** Read-only validation, explicit stale reconciliation,
-  canon authority, and binary review states agree across sections.
-- **Scope check:** Initial implementation is bounded to one skill system and
-  fixture proof; real feature adoption and CI integration are follow-up work.
-- **Ambiguity check:** Lifecycle entry, pass requirements, reduced entry,
-  staleness behavior, authority precedence, and completion criteria are explicit.
-
-## 26. Owner review gate
-
-This written specification requires owner review before implementation planning.
-Requested revisions must be applied here and the self-review repeated. After
-owner approval, create the detailed implementation plan using the repository's
-implementation-planning workflow.
+This revision has completed the producer-side ruthless review. It requires a
+second, independent Codex-consumer review. If that pass finds no blocker after
+revision, the specification is approved and may proceed directly to detailed
+implementation planning.
