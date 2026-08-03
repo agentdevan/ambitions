@@ -58,13 +58,13 @@ role = "Repository-only comparison evidence for relevant-versus-unrelated drift 
 
 The sole lifecycle authority is `PD-2026-08-LIFECYCLE-FIXTURE-RESEARCH`, revision 3, contract hash `sha256:850dea049c234d05bc54493ee5c6adde18c15f438a27d1c1cfba7bbc953042c1`, committed at `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`. Requirements below convert Research findings into inspectable obligations for the fixture document chain: exact upstream binding, self-contained traceability, complete owner paths, explicit exclusions, deterministic acceptance criteria, revision-bound lifecycle state, and separation of relevant repository drift from unrelated changes.
 
-The intended reader is a later lifecycle producer or reviewer working only from committed repository files. That reader must be able to determine what the fixture promises, what it excludes, which repository paths own its mechanics, how each requirement is accepted, and which questions are deliberately closed. Current lifecycle state remains authoritative only in frontmatter and recorded lifecycle events. This committed file remains a draft; no seal, review verdict, CLI validation, canon activation, implementation readiness, merge readiness, or release readiness is asserted.
+The intended reader is a later lifecycle producer or reviewer working only from committed repository files. That reader must be able to determine what the fixture promises, what it excludes, which repository paths own its mechanics, how each requirement is accepted, and which questions are deliberately closed. The current revision's lifecycle status, seal and contract binding, freshness, and review state are determined only by frontmatter and recorded lifecycle events. No body statement independently establishes those facts or any canon activation, implementation readiness, merge readiness, or release readiness.
 
 ## Research input and authority
 
 Upstream lifecycle input: `PD-2026-08-LIFECYCLE-FIXTURE-RESEARCH`, revision 3, `sha256:850dea049c234d05bc54493ee5c6adde18c15f438a27d1c1cfba7bbc953042c1`, commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`.
 
-This Scope consumes `FIND-001` through `FIND-009`, the Research source ledger, risk register, owner paths, evidence binding, and its synthetic non-product boundary. The Research remains evidence authority; this Scope may commit only the fixture’s documentation obligations. It may not reinterpret repository mechanics into Ambitions product behavior or select implementation architecture.
+This Scope consumes `FIND-001` through `FIND-009`, the Research source ledger, risk register, owner paths, evidence binding, and its synthetic non-product boundary. The Research remains evidence authority; this Scope may commit only the fixture's documentation obligations. It may not reinterpret repository mechanics into Ambitions product behavior or select implementation architecture.
 
 The exact upstream binding is immutable for this revision. Historical Research revisions, their seals, contract hashes, or review records are context only and cannot substitute for revision 3 at the named commit. No originating chat, prior lifecycle conversation, hidden expected answer, lifecycle design specification, implementation plan, SDD ledger, baseline scoring, or local checkout is an input to this Scope.
 
@@ -121,20 +121,20 @@ No scenario includes an Ambitions end user, runtime interaction, product telemet
 
 | Requirement ID | Observable obligation | Owner domain | Finding or authority IDs | Acceptance IDs |
 |---|---|---|---|---|
-| REQ-001 | The Scope must identify itself as a synthetic documentation-only fixture and must state that it creates no Ambitions feature, canon, implementation, merge, or release authority. | Lifecycle documentation boundary | FIND-003, FIND-007, FIND-009, SRC-001, SRC-003, SRC-014, SRC-015 | AC-001, AC-010 |
-| REQ-002 | The Scope must bind exactly one upstream lifecycle input: `PD-2026-08-LIFECYCLE-FIXTURE-RESEARCH`, revision 3, contract hash `sha256:850dea049c234d05bc54493ee5c6adde18c15f438a27d1c1cfba7bbc953042c1`, commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`. | Lifecycle input binding | FIND-004, FIND-008, FIND-009, SRC-007, SRC-015 | AC-002 |
-| REQ-003 | The Scope must remain self-contained: its conclusion, constraints, IDs, inputs, owner paths, exclusions, acceptance evidence, risks, and next permitted authoring concern must be understandable without chat history. | Producer handoff | FIND-003, SRC-005 | AC-003 |
-| REQ-004 | Every material repository dependency must be declared through source owner, test owner, dependency, input, evidence, package, or template paths so relevant drift cannot be silently classified as unrelated. | Freshness and ownership | FIND-002, FIND-004, FIND-005, RISK-003, SRC-002, SRC-007, SRC-008, SRC-010, SRC-011 | AC-004, AC-005 |
-| REQ-005 | The Scope must require relevant repository drift to receive explicit semantic assessment before a later Consumer PASS, while unrelated changed paths remain separately reported and are not automatic blockers. | Drift classification | FIND-004, FIND-005, FIND-006, RISK-004, SRC-008, SRC-011, SRC-012 | AC-006, AC-007 |
-| REQ-006 | Lifecycle state must be revision-bound: current status, seal, review, and contract-hash authority must be taken from frontmatter and recorded lifecycle events, never inferred from historical records or stale narrative prose. | Lifecycle state integrity | FIND-008, FIND-009, RISK-002, RISK-008, RISK-009, SRC-007, SRC-015 | AC-008 |
-| REQ-007 | Requirement and acceptance IDs must provide complete traceability from Research findings or repository authority to observable obligations and inspectable evidence. | Traceability | FIND-002, FIND-003, FIND-005, SRC-005, SRC-008, SRC-011 | AC-009 |
-| REQ-008 | Canon impact must remain explicitly empty, and the document must state that no proposed canon delta exists for this fixture. | Canon boundary | FIND-007, RISK-001, SRC-013, SRC-014, SRC-015 | AC-010 |
-| REQ-009 | The Scope must not leave any open decision that would require Design to invent product behavior, fixture semantics, owner coverage, acceptance evidence, or authority. | Design readiness | FIND-003, FIND-009, SRC-005, SRC-006 | AC-011 |
-| REQ-010 | The committed draft must preserve `authoring_surface = "chatgpt"`, active package version `1.0.0`, package hash `sha256:b810179fdc59fb037091b03502b226d996d9ea128cde7118d60eee46e7e178cf`, template version `scope-v1`, and template hash `sha256:94840a4ce88a5be28f9ba2154a5aa025d1f3923618389fd2648bfeb4ce41bb6e`. | Package and template identity | FIND-002, SRC-002, SRC-010 | AC-012 |
+| REQ-001 | The Scope must identify itself as a synthetic documentation-only fixture and must state that it creates no Ambitions feature, canon, implementation, merge, or release authority. | Lifecycle documentation boundary | FIND-003, FIND-007, FIND-009 | AC-001, AC-010 |
+| REQ-002 | The Scope must bind exactly one upstream lifecycle input: `PD-2026-08-LIFECYCLE-FIXTURE-RESEARCH`, revision 3, contract hash `sha256:850dea049c234d05bc54493ee5c6adde18c15f438a27d1c1cfba7bbc953042c1`, commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`. | Lifecycle input binding | FIND-004, FIND-008, FIND-009, PD-2026-08-LIFECYCLE-FIXTURE-RESEARCH | AC-002 |
+| REQ-003 | The Scope must remain self-contained: its conclusion, constraints, IDs, inputs, owner paths, exclusions, acceptance evidence, risks, and next permitted authoring concern must be understandable without chat history. | Producer handoff | FIND-003, FIND-009 | AC-003 |
+| REQ-004 | Every material repository dependency must be declared through source owner, test owner, dependency, input, evidence, package, or template paths so relevant drift cannot be silently classified as unrelated. | Freshness and ownership | FIND-002, FIND-004, FIND-005, FIND-006 | AC-004, AC-005 |
+| REQ-005 | The Scope must require relevant repository drift to receive explicit semantic assessment before a later Consumer PASS, while unrelated changed paths remain separately reported and are not automatic blockers. | Drift classification | FIND-004, FIND-005, FIND-006 | AC-006, AC-007 |
+| REQ-006 | Lifecycle state must be revision-bound: current status, seal, review, and contract-hash authority must be taken from frontmatter and recorded lifecycle events, never inferred from historical records or stale narrative prose. | Lifecycle state integrity | FIND-008, FIND-009 | AC-008 |
+| REQ-007 | Requirement and acceptance IDs must provide complete traceability from Research findings or repository authority to observable obligations and inspectable evidence. | Traceability | FIND-002, FIND-003, FIND-005, FIND-006 | AC-009 |
+| REQ-008 | Canon impact must remain explicitly empty, and the document must state that no proposed canon delta exists for this fixture. | Canon boundary | FIND-007 | AC-010 |
+| REQ-009 | The Scope must not leave any open decision that would require Design to invent product behavior, fixture semantics, owner coverage, acceptance evidence, or authority. | Design readiness | FIND-003, FIND-009 | AC-011 |
+| REQ-010 | The committed document must preserve `authoring_surface = "chatgpt"`, active package version `1.0.0`, package hash `sha256:b810179fdc59fb037091b03502b226d996d9ea128cde7118d60eee46e7e178cf`, template version `scope-v1`, and template hash `sha256:94840a4ce88a5be28f9ba2154a5aa025d1f3923618389fd2648bfeb4ce41bb6e`. | Package and template identity | FIND-002 | AC-012 |
 
 ## Required states and behaviors
 
-The fixture Scope has one authority-bearing state in this document: a committed revision 1 draft. A future seal or review would be a separate explicit lifecycle transition and is not part of this authoring commitment.
+Lifecycle state for any revision is represented by that revision's frontmatter and recorded lifecycle events. Narrative obligations in this section are transition-independent and do not establish the current revision's status, seal, contract hash, freshness, or review state.
 
 Required behavior for later lifecycle handling:
 
@@ -160,7 +160,7 @@ No runtime state machine, product state, UI state, persistence state, or Apple-p
 | AC-006 | The Scope states that changed paths in the authoritative freshness union are relevant and require explicit semantic assessment before Consumer PASS. | REQ-005, Required states and behaviors, `validation.py`, and the installed acceptance test. |
 | AC-007 | The Scope states that unrelated changed paths are separately reported and are not automatic blockers. | REQ-005, Required states and behaviors, Research `FIND-006`, comparison evidence, and the installed acceptance test. |
 | AC-008 | The Scope assigns current lifecycle authority only to frontmatter and recorded events and prohibits reuse of prior revision seals, reviews, or contract hashes. | REQ-006, Product invariants, Research revision history, `transitions.py`, and `lifecycle-contract.md`. |
-| AC-009 | Every `REQ-*` row cites at least one Research finding or repository authority and at least one `AC-*`; each `AC-*` names inspectable repository evidence. | Product requirements and Acceptance criteria tables in this file. |
+| AC-009 | Every `REQ-*` row cites at least one Research `FIND-*` or the declared upstream input authority ID and at least one `AC-*`; each `AC-*` names inspectable repository evidence. | Product requirements and Acceptance criteria tables in this file. |
 | AC-010 | `canon_targets` and `canon_delta_ids` are empty, and the Canon impact section declares no proposed delta. | Scope frontmatter and Canon impact and proposed canon deltas section. |
 | AC-011 | Open decisions contains no unresolved choice and explicitly states that Design must not invent behavior or authority. | Open decisions and Design brief sections. |
 | AC-012 | Frontmatter exactly preserves the requested authoring surface, skill version, package hash, template version, and template hash. | Scope frontmatter and `package-manifest.json` at the repository baseline. |
@@ -210,7 +210,7 @@ For the lifecycle fixture, failure handling is documentary:
 - stale or rejected authority-bearing content must reopen as a new draft revision before correction;
 - historical records remain preserved for auditability.
 
-This Scope does not claim that any of these checks have been run for the committed draft.
+This section states obligations only; authoritative lifecycle records determine whether any check, transition, or review has occurred for a revision.
 
 ## Performance expectations
 
@@ -236,7 +236,7 @@ Material risks and treatments:
 
 Success is demonstrated by repository inspection, not product telemetry.
 
-The Scope is successful as a draft when its committed bytes provide:
+The Scope's committed bytes provide the inspectable basis for evaluating:
 
 - exact upstream binding;
 - stable requirement and acceptance IDs;
@@ -247,13 +247,13 @@ The Scope is successful as a draft when its committed bytes provide:
 - closed decisions;
 - explicit non-product and non-authorization boundaries.
 
-Later lifecycle seal or review outcomes, if any, must be recorded separately and bound to their exact revision and contract hash. No CLI execution, automated validation result, review verdict, or downstream consumption result is claimed here.
+Lifecycle seal, freshness, review, and consumption outcomes, when recorded, are bound separately to their exact revision and contract hash. No CLI execution or automated validation result is claimed by this document.
 
 ## Release boundary
 
 There is no Ambitions product release in this initiative.
 
-The only deliverable committed by this Scope is a documentation artifact that may be considered by later lifecycle phases. Completion of this draft does not authorize Design, implementation, source changes, canon edits, tests, merge, deployment, distribution, or release. Any later transition requires its own explicit repository record and remains subject to the lifecycle’s non-authorization boundary.
+The only deliverable described by this Scope is a documentation artifact that may be considered by later lifecycle phases. The artifact does not authorize Design, implementation, source changes, canon edits, tests, merge, deployment, distribution, or release. Any later transition requires its own explicit repository record and remains subject to the lifecycle's non-authorization boundary.
 
 ## Canon impact and proposed canon deltas
 
@@ -264,7 +264,7 @@ No canon delta is proposed. `canon_targets = []` and `canon_delta_ids = []` are 
 
 ## Design brief
 
-A later Design document may describe how the existing lifecycle package mechanics represent this fixture’s committed obligations. It must bind exactly to the passed revision of this Scope available at that time and must not invent new behavior.
+A later Design document may describe how the existing lifecycle package mechanics represent this fixture's committed obligations. It must bind exactly to the passed revision of this Scope available at that time and must not invent new behavior.
 
 Design must map each `REQ-*` and `AC-*` to existing repository seams covering:
 
@@ -286,6 +286,6 @@ All behavior needed by Design is resolved in this Scope: the exact upstream bind
 
 ## Review history
 
-- 2026-08-03: Revision 1 authored and committed as an unsealed, unreviewed ChatGPT draft from the exact passed Research revision 3 binding at commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`.
+- 2026-08-03: Revision 1 authored and committed from the exact passed Research revision 3 binding at commit `5d224acfd5f4ad7063be14ae4b3f0a030a195ccd`.
 - No originating chat or previous lifecycle conversation was used.
-- No lifecycle CLI execution, validation, seal, Content verdict, Consumer verdict, pass, canon activation, implementation, merge, deployment, or release is claimed.
+- No lifecycle CLI execution or validation is claimed by this authoring record.
