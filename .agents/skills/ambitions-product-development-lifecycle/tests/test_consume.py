@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import replace
 from datetime import date
 import hashlib
+import json
 from pathlib import Path
 import sys
 
@@ -96,6 +97,23 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
                 "| SRC-001 | Fixture source | Ambitions | https://example.invalid | 2026-08-02 | Low | Owner changes | FIND-001 | Fixture support. |\n\n"
                 "Complete.\n\n",
             )
+        elif document.metadata.document_type.value == "design":
+            document = self._replace_section(
+                document,
+                "Implementation seams and dependency order",
+                "\n| Seam ID | Responsibility | Consumes | Produces | Depends on | Verification IDs |\n"
+                "|---|---|---|---|---|---|\n"
+                "| SEAM-001 | Render result | REQ-001 | UI | None | VERIFY-001 |\n\n"
+                "Complete.\n\n",
+            )
+            document = self._replace_section(
+                document,
+                "Requirement-to-design traceability",
+                "\n| Finding or authority ID | Requirement ID | Acceptance ID | Design ID | Verification ID |\n"
+                "|---|---|---|---|---|\n"
+                "| APPROVED-DESIGN-001 | REQ-001 | AC-001 | DESIGN-001 | VERIFY-001 |\n\n"
+                "Complete.\n\n",
+            )
         write_document_atomic(path, document, repository_root=self.root)
 
     @staticmethod
@@ -183,6 +201,56 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
         )
         self.commit_all("consumer review")
         return path
+
+    def _content_reviewed_reduced_design(self, initiative: str) -> tuple[Path, Path]:
+        approved_design = self.root / "docs" / f"{initiative.lower()}-approved.md"
+        approved_design.write_text("# Separately approved design\n", encoding="utf-8")
+        authority_commit = self.commit_all("add approved design authority")
+        authority_file = self.root / f"{initiative.lower()}-authority.json"
+        authority_file.write_text(
+            json.dumps(
+                {
+                    "inputs": [
+                        {
+                            "kind": "approved-design",
+                            "authority_id": "APPROVED-DESIGN-001",
+                            "path": approved_design.resolve()
+                            .relative_to(self.root.resolve())
+                            .as_posix(),
+                            "revision": 3,
+                            "contract_hash": "sha256:" + "a" * 64,
+                            "commit": authority_commit,
+                        }
+                    ],
+                    "rationale": "Separate approval supplies the skipped Scope authority.",
+                }
+            ),
+            encoding="utf-8",
+        )
+        path = create_document(
+            self.root,
+            initiative=initiative,
+            phase="design",
+            authority_file=authority_file,
+            today=TODAY,
+        )
+        self.commit_all("track reduced design")
+        self._complete(path)
+        sealed = seal_document(
+            path,
+            repository_root=self.root,
+            sealed_at="2026-08-02T10:00:00Z",
+        )
+        self.commit_all("seal reduced design")
+        record_review(
+            path,
+            self._review_payload(
+                sealed, review_id="REV-CONTENT-DESIGN-001", lane="content"
+            ),
+            repository_root=self.root,
+        )
+        self.commit_all("content review reduced design")
+        return path, approved_design
 
     def _rewrite_sealed_identity(self, path: Path, **changes) -> None:
         document = parse_document(path, repository_root=self.root)
@@ -372,6 +440,44 @@ class ConsumptionTests(TemporaryRepositoryTestCase):
         report = consume_document(target, repository_root=self.root)
 
         self.assertIn("current-upstream-invalid", report.blockers)
+
+    def test_reduced_design_approved_authority_consumes_and_consumer_passes(
+        self,
+    ) -> None:
+        path, _ = self._content_reviewed_reduced_design("Reduced Design")
+
+        report = consume_document(path, repository_root=self.root)
+        self.assertEqual(report.blockers, ())
+
+        content = parse_document(path, repository_root=self.root)
+        passed = record_review(
+            path,
+            self._review_payload(
+                content,
+                review_id="REV-CONSUMER-DESIGN-001",
+                lane="consumer",
+            ),
+            repository_root=self.root,
+        )
+        self.assertEqual(passed.metadata.status.value, "passed")
+
+    def test_reduced_design_rejects_invalid_approved_authority_binding(self) -> None:
+        path, approved_design = self._content_reviewed_reduced_design(
+            "Invalid Approved Binding"
+        )
+        approved_design.write_text("# Changed approved design\n", encoding="utf-8")
+        self.commit_all("change approved design authority")
+
+        changed = consume_document(path, repository_root=self.root)
+        self.assertIn("current-approved-design-binding-mismatch", changed.blockers)
+
+        document = parse_document(path, repository_root=self.root)
+        invalid_binding = replace(document.metadata.inputs[0], revision=0)
+        self._rewrite_sealed_identity(path, inputs=(invalid_binding,))
+        self.commit_all("write invalid approved design binding")
+
+        invalid = consume_document(path, repository_root=self.root)
+        self.assertIn("invalid-approved-design-binding", invalid.blockers)
 
     def test_consume_blocks_expired_and_triggered_external_sources(self) -> None:
         expired = self._content_reviewed_research("Expired Source")

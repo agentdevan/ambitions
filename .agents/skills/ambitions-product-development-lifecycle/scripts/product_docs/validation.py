@@ -1143,15 +1143,45 @@ def consume_document(
             binding.commit, binding.path
         ):
             add(
-                "upstream-not-passed-at-bound-commit",
-                "Lifecycle upstream must exist and be passed at its bound commit",
+                (
+                    "upstream-not-passed-at-bound-commit"
+                    if binding.kind is InputKind.LIFECYCLE_DOCUMENT
+                    else "authority-input-missing-at-bound-commit"
+                ),
+                "Input authority must exist at its reachable bound commit",
                 item_path=binding.path,
             )
             continue
-        if binding.kind not in {
-            InputKind.LIFECYCLE_DOCUMENT,
-            InputKind.APPROVED_DESIGN,
-        }:
+        if binding.kind is InputKind.APPROVED_DESIGN:
+            if (
+                not isinstance(binding.authority_id, str)
+                or not binding.authority_id.strip()
+                or binding.authority_id != binding.authority_id.strip()
+                or "\n" in binding.authority_id
+                or "\r" in binding.authority_id
+                or type(binding.revision) is not int
+                or binding.revision < 1
+                or not isinstance(binding.contract_hash, str)
+                or not _HASH.fullmatch(binding.contract_hash)
+            ):
+                add(
+                    "invalid-approved-design-binding",
+                    "Approved-design authority requires an exact ID, positive revision, and contract hash",
+                    item_path=binding.path,
+                    identifier=binding.authority_id,
+                )
+                continue
+            bound_bytes = repository.read_bytes_at(binding.commit, binding.path)
+            current_bytes = repository.read_bytes_at(repository.head(), binding.path)
+            if current_bytes != bound_bytes:
+                add(
+                    "current-approved-design-binding-mismatch",
+                    "Current approved-design authority bytes must match the bound commit",
+                    item_path=binding.path,
+                    identifier=binding.authority_id,
+                )
+            continue
+        if binding.kind is not InputKind.LIFECYCLE_DOCUMENT:
             continue
         try:
             bound = parse_document(

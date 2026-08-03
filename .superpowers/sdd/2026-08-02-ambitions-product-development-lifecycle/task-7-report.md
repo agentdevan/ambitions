@@ -181,3 +181,113 @@ ruff format --check <Task 7 implementation and tests>
 The deferred Minor observations remain deferred exactly as requested: package
 cleanliness still includes test paths, and downstream committed-PASS behavior
 continues to rely on the existing committed-exact guard. No workflow changed.
+
+## Fix-round re-review — NEEDS REVISION
+
+### Important finding
+
+1. `approved-design` inputs cannot pass consumption. The reduced Design-entry
+   contract accepts `approved-design` as an external committed authority record
+   with its own revision and contract hash (see `transitions.py:247-305`), not
+   as a lifecycle document. `consume_document()` nevertheless routes it through
+   `parse_document()` and requires lifecycle `PASSED` metadata
+   (`validation.py:1151-1175`). A valid committed approved-design Markdown
+   authority will therefore deterministically produce
+   `upstream-not-passed-at-bound-commit`, preventing every reduced-Design
+   handoff from receiving Consumer PASS. Validate this input against its
+   declared external-authority contract and current committed bytes/revision/
+   hash, or restrict the input kind if lifecycle-document semantics are truly
+   required; add an end-to-end passing reduced-Design consumption regression.
+
+### Verified corrections
+
+- External source expiry/recheck checks use `as_of`, retain Source-ledger
+  section and source ID context, and consumer PASS rethrows the original
+  diagnostics.
+- Canonical-path and exact-HEAD checks occur before parsing.
+- Current lifecycle upstreams receive full repository validation.
+
+### Re-review validation
+
+```text
+test_consume.py: 14 tests passed
+full lifecycle suite: 85 tests passed
+ruff check: passed
+ruff format --check: passed
+git diff --check (review range): passed
+```
+
+## Fix round 2 — approved-design authority consumption
+
+The remaining Important finding is corrected without changing lifecycle-document
+semantics or widening Task 7.
+
+### Correction
+
+`consume_document()` now branches typed inputs before document parsing:
+
+- `approved-design` validates a nonempty exact authority ID, positive integer
+  revision, lowercase prefixed contract hash, reachable bound commit, committed
+  current file, and byte equality between the bound commit and current `HEAD`;
+- a malformed binding reports `invalid-approved-design-binding`;
+- committed authority drift reports
+  `current-approved-design-binding-mismatch` and still appears in freshness
+  drift;
+- only `lifecycle-document` inputs are parsed as lifecycle documents and
+  required to be valid `passed` revisions.
+
+The declared approved-design revision/hash/authority tuple remains sealed by the
+target Design contract hash. The external Markdown authority is not assigned
+unsupported lifecycle metadata or status requirements.
+
+### Fix-round TDD evidence
+
+The valid and invalid reduced-Design tests were written before the typed branch.
+After correcting one missing test import, RED was the expected two behavioral
+failures:
+
+```text
+test_reduced_design_approved_authority_consumes_and_consumer_passes ... FAIL
+  ('upstream-not-passed-at-bound-commit',) != ()
+test_reduced_design_rejects_invalid_approved_authority_binding ... FAIL
+  current-approved-design-binding-mismatch not found
+
+Ran 2 tests in 3.107s
+FAILED (failures=2)
+```
+
+Focused GREEN after the minimal branch was:
+
+```text
+python3 -m unittest -v \
+  test_consume.ConsumptionTests.test_reduced_design_approved_authority_consumes_and_consumer_passes \
+  test_consume.ConsumptionTests.test_reduced_design_rejects_invalid_approved_authority_binding
+Ran 2 tests in 4.121s
+OK
+```
+
+The passing end-to-end case creates a reduced-entry Design from committed
+approved Markdown, completes/seals/commits/content-reviews it, receives a clean
+consumption report, and records Consumer PASS. The invalid case proves both
+committed authority-byte drift and a zero revision are rejected.
+
+### Fix-round validation
+
+```text
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -p 'test_consume.py' -v
+Ran 16 tests in 26.543s
+OK
+
+python3 -m unittest discover -s .agents/skills/ambitions-product-development-lifecycle/tests -v
+Ran 87 tests in 41.669s
+OK
+
+ruff check <Task 7 implementation and tests>
+All checks passed!
+
+ruff format --check <Task 7 implementation and tests>
+2 files already formatted
+```
+
+No workflow or gate changed. The previously deferred Minor observations remain
+deferred.
