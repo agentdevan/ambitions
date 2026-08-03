@@ -187,7 +187,10 @@ def _semantic_relevant_paths(
     return tuple(
         changed_path
         for changed_path in changed_paths
-        if changed_path not in package_identity_paths
+        if (
+            changed_path not in package_identity_paths
+            and not changed_path.startswith(f"{SKILL_ROOT}/")
+        )
         and any(
             changed_path == freshness
             or changed_path.startswith(f"{freshness.rstrip('/')}/")
