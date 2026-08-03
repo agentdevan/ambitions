@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import stat
 from typing import Any, Mapping
 
 from .constants import SKILL_VERSION
@@ -55,9 +56,11 @@ def _operational_files(skill_root: Path) -> tuple[Path, ...]:
     files = [required]
     for directory_name in OPERATIONAL_DIRECTORIES:
         directory = skill_root / directory_name
-        if not directory.exists():
+        try:
+            mode = directory.lstat().st_mode
+        except FileNotFoundError:
             continue
-        if not directory.is_dir() or directory.is_symlink():
+        if stat.S_ISLNK(mode) or not stat.S_ISDIR(mode):
             raise ProductDocsError(Diagnostic("unsafe-operational-path", "Operational package directories must be regular directories"))
         for candidate in directory.rglob("*"):
             if candidate.is_symlink():

@@ -141,6 +141,19 @@ class PackageIdentityTests(TemporaryRepositoryTestCase):
 
         self.assertEqual(raised.exception.diagnostics[0].code, "unsafe-operational-path")
 
+    def test_package_identity_rejects_a_dangling_operational_root_symlink(self) -> None:
+        skill_root = self.write_package()
+        assets = skill_root / "assets"
+        assets.rename(skill_root / "assets-original")
+        assets.symlink_to("missing-assets", target_is_directory=True)
+
+        with self.assertRaises(ProductDocsError) as build:
+            build_manifest(skill_root)
+        self.assertEqual(build.exception.diagnostics[0].code, "unsafe-operational-path")
+        with self.assertRaises(ProductDocsError) as verify:
+            verify_active_package(skill_root)
+        self.assertEqual(verify.exception.diagnostics[0].code, "unsafe-operational-path")
+
     def test_historical_verification_accepts_a_baseline_package_after_active_package_changes(self) -> None:
         skill_root = self.write_package(skill_contents=b"historical skill\n")
         historical_manifest = build_manifest(skill_root)
