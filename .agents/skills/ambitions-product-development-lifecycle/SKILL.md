@@ -57,11 +57,20 @@ implementation, merging, deployment, or release.
 ## Groom
 
 After Design is approved, create `implementation/plan.md`,
-`implementation/tasks.md`, and `implementation/verification.md`. Keep every
+`implementation/tasks.md`, and `implementation/verification.md`:
+
+- The plan covers affected components, interfaces, data flow, persistence,
+  migrations, canon changes, rollout concerns, and implementation order.
+- The tasks are small and ordered, naming exact files, dependencies, acceptance
+  criteria, and tests.
+- Verification specifies the affected automated, build, runtime, accessibility,
+  privacy, migration, performance, and device evidence.
+
+Use an explicit `N/A` with a reason when a category does not apply. Keep every
 engineering task traceable to a Design decision and every Design decision
-traceable to a Scope requirement. Grooming may resolve technical details but
-must not invent product behavior; return to Scope or Design for any new product
-decision.
+traceable to a Scope `REQ-###` requirement. Grooming may resolve technical
+details but must not invent product behavior; return to Scope or Design for any
+new product decision.
 
 ## Boundaries and tooling
 

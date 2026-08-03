@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 import re
 
@@ -13,6 +14,7 @@ from .models import DocumentStatus, DocumentType, ProductDocument, ValidationRes
 
 _PLACEHOLDER = re.compile(r"PRODUCT-DOC-DRAFT:|\b(?:TODO|TBD)\b|\[(?:placeholder|fill in)\]", re.IGNORECASE)
 _REQUIREMENT_ID = re.compile(r"REQ-[0-9]{3}")
+_INITIATIVE_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 _GROOMING_DOCUMENT = re.compile(r"\A#\s+(?P<heading>\S[^\r\n]*)(?:\r?\n)(?P<body>.*\S)\s*\Z", re.DOTALL)
 _GROOMING_FILES = ("plan.md", "tasks.md", "verification.md")
 
@@ -40,6 +42,18 @@ def validate_document(document: ProductDocument) -> ValidationResult:
         for section in document.sections:
             if _PLACEHOLDER.search(section.body):
                 diagnostics.append(_diagnostic("approved-placeholder", "Approved documents cannot contain unresolved placeholders", path=document.source_path, section=section.heading))
+        if (
+            document.document_type is DocumentType.SCOPE
+            and not _REQUIREMENT_ID.search(_section_body(document, "Requirements"))
+        ):
+            diagnostics.append(
+                _diagnostic(
+                    "missing-scope-requirement",
+                    "Approved Scope must define at least one REQ-### requirement",
+                    path=document.source_path,
+                    section="Requirements",
+                )
+            )
     return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))
 
 
@@ -67,6 +81,32 @@ def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[
         return []
 
     diagnostics: list[Diagnostic] = []
+    if not implementation.is_dir():
+        return [
+            _diagnostic(
+                "invalid-grooming-directory",
+                "Implementation grooming must be a directory",
+                path=implementation,
+            )
+        ]
+    try:
+        present_entries = {entry.name: entry for entry in implementation.iterdir()}
+    except OSError:
+        return [
+            _diagnostic(
+                "document-read-error",
+                "Implementation grooming directory could not be read",
+                path=implementation,
+            )
+        ]
+    for filename in sorted(set(present_entries) - set(_GROOMING_FILES)):
+        diagnostics.append(
+            _diagnostic(
+                "unexpected-grooming-file",
+                f"Unexpected implementation grooming entry: {filename}",
+                path=present_entries[filename],
+            )
+        )
     if design is None or design.status is not DocumentStatus.APPROVED:
         diagnostics.append(
             _diagnostic(
@@ -80,7 +120,27 @@ def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[
         if not path.is_file():
             diagnostics.append(_diagnostic("missing-grooming-file", f"Missing implementation grooming file: {filename}", path=path))
             continue
-        if not _GROOMING_DOCUMENT.fullmatch(path.read_text(encoding="utf-8")):
+        try:
+            contents = path.read_text(encoding="utf-8")
+        except UnicodeError:
+            diagnostics.append(
+                _diagnostic(
+                    "document-decode-error",
+                    "File must contain valid UTF-8 text",
+                    path=path,
+                )
+            )
+            continue
+        except OSError:
+            diagnostics.append(
+                _diagnostic(
+                    "document-read-error",
+                    "File could not be read",
+                    path=path,
+                )
+            )
+            continue
+        if not _GROOMING_DOCUMENT.fullmatch(contents):
             diagnostics.append(
                 _diagnostic(
                     "invalid-grooming-file",
@@ -91,26 +151,73 @@ def _validate_grooming(directory: Path, design: ProductDocument | None) -> list[
     return diagnostics
 
 
-def validate_initiative(directory: Path | str) -> ValidationResult:
+def _repository_relative_diagnostics(
+    diagnostics: list[Diagnostic], repository_root: Path | None
+) -> list[Diagnostic]:
+    if repository_root is None:
+        return diagnostics
+    root = Path(repository_root).resolve()
+    normalized: list[Diagnostic] = []
+    for diagnostic in diagnostics:
+        path = Path(diagnostic.path) if diagnostic.path is not None else None
+        if path is not None and path.is_absolute():
+            try:
+                path = path.resolve().relative_to(root)
+            except (OSError, ValueError):
+                pass
+        normalized.append(
+            replace(diagnostic, path=str(path) if path is not None else None)
+        )
+    return normalized
+
+
+def validate_initiative(
+    directory: Path | str, *, repository_root: Path | None = None
+) -> ValidationResult:
     """Validate present phase documents and their approval order."""
     directory = Path(directory)
     diagnostics: list[Diagnostic] = []
     documents: dict[DocumentType, ProductDocument] = {}
+    initiative_slug = directory.name
+    if not _INITIATIVE_SLUG.fullmatch(initiative_slug):
+        diagnostics.append(
+            _diagnostic(
+                "invalid-initiative-directory",
+                "Initiative directory name must be a lowercase hyphenated slug",
+                path=directory,
+            )
+        )
     for document_type in DocumentType:
         path = directory / f"{document_type.value}.md"
         if not path.exists():
             continue
         try:
-            document = parse_document(path)
+            document = parse_document(path, repository_root=repository_root)
         except ProductDocsError as error:
             diagnostics.extend(error.diagnostics)
             continue
         documents[document_type] = document
         diagnostics.extend(validate_document(document).diagnostics)
+        if document.initiative != initiative_slug:
+            diagnostics.append(
+                _diagnostic(
+                    "initiative-mismatch",
+                    f"Document initiative must match directory slug {initiative_slug}",
+                    path=document.source_path,
+                )
+            )
 
     research = documents.get(DocumentType.RESEARCH)
     scope = documents.get(DocumentType.SCOPE)
     design = documents.get(DocumentType.DESIGN)
+    if research is not None and research.upstream != "":
+        diagnostics.append(
+            _diagnostic(
+                "invalid-upstream",
+                "Research must not declare an upstream document",
+                path=research.source_path,
+            )
+        )
     if scope is not None:
         if scope.upstream != "research.md":
             diagnostics.append(_diagnostic("invalid-upstream", "Scope must use research.md as its upstream", path=scope.source_path))
@@ -124,4 +231,5 @@ def validate_initiative(directory: Path | str) -> ValidationResult:
     if scope is not None and design is not None:
         diagnostics.extend(_validate_traceability(scope, design))
     diagnostics.extend(_validate_grooming(directory, design))
+    diagnostics = _repository_relative_diagnostics(diagnostics, repository_root)
     return ValidationResult(valid=not diagnostics, diagnostics=tuple(diagnostics))

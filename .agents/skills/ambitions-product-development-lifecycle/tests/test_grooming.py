@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 -- the package-under-test path is intentionally injected below.
+
 from pathlib import Path
+import re
 import sys
 from tempfile import TemporaryDirectory
 import unittest
@@ -22,19 +25,26 @@ def diagnostics(result) -> set[str]:
 
 
 def completed_document(document_type: str, *, content: str) -> str:
-    return (
+    contents = (
         (TEMPLATE_DIRECTORY / f"{document_type}.md")
         .read_text(encoding="utf-8")
         .replace('initiative = ""', 'initiative = "example"')
         .replace('status = "draft"', 'status = "approved"')
-        .replace(
-            {
-                "scope": "Define the product requirements without inventing implementation design.",
-                "design": "Map each Scope requirement to the Design decisions that satisfy it.",
-            }.get(document_type, ""),
-            content,
-        )
     )
+    contents = re.sub(
+        r"<!-- PRODUCT-DOC-DRAFT:.*?-->", "Complete content.", contents
+    )
+    if document_type == "scope":
+        contents = contents.replace(
+            "## Requirements\n\nComplete content.",
+            f"## Requirements\n\n{content}",
+        )
+    elif document_type == "design":
+        contents = contents.replace(
+            "## Requirement traceability\n\nComplete content.",
+            f"## Requirement traceability\n\n{content}",
+        )
+    return contents
 
 
 def complete_initiative(directory: Path) -> None:
@@ -54,7 +64,8 @@ def complete_initiative(directory: Path) -> None:
 class GroomingValidationTests(unittest.TestCase):
     def test_design_must_trace_every_scope_requirement(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             complete_initiative(initiative)
             scope = initiative / "scope.md"
             scope.write_text(
@@ -71,7 +82,8 @@ class GroomingValidationTests(unittest.TestCase):
 
     def test_started_grooming_requires_all_three_files(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             complete_initiative(initiative)
             implementation = initiative / "implementation"
             implementation.mkdir()
@@ -83,7 +95,8 @@ class GroomingValidationTests(unittest.TestCase):
 
     def test_started_grooming_requires_approved_design(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             complete_initiative(initiative)
             design = initiative / "design.md"
             design.write_text(
@@ -109,7 +122,8 @@ class GroomingValidationTests(unittest.TestCase):
 
     def test_grooming_files_require_a_top_level_heading_and_body(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             complete_initiative(initiative)
             implementation = initiative / "implementation"
             implementation.mkdir()
@@ -123,7 +137,8 @@ class GroomingValidationTests(unittest.TestCase):
 
     def test_complete_idea_to_grooming_fixture_passes(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             complete_initiative(initiative)
             implementation = initiative / "implementation"
             implementation.mkdir()
@@ -139,6 +154,50 @@ class GroomingValidationTests(unittest.TestCase):
             result = validate_initiative(initiative)
 
         self.assertTrue(result.valid)
+
+    def test_grooming_rejects_unexpected_sibling_files(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            complete_initiative(initiative)
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            for filename in ("plan.md", "tasks.md", "verification.md"):
+                (implementation / filename).write_text(
+                    "# Complete\n\nComplete grooming content.\n", encoding="utf-8"
+                )
+            (implementation / "notes.md").write_text(
+                "# Notes\n\nUnexpected.\n", encoding="utf-8"
+            )
+
+            result = validate_initiative(initiative)
+
+        unexpected = [
+            item for item in result.diagnostics if item.code == "unexpected-grooming-file"
+        ]
+        self.assertEqual(len(unexpected), 1)
+        self.assertTrue(unexpected[0].path.endswith("implementation/notes.md"))
+
+    def test_grooming_decode_failure_is_a_stable_path_diagnostic(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            complete_initiative(initiative)
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            (implementation / "plan.md").write_bytes(b"\xff")
+            for filename in ("tasks.md", "verification.md"):
+                (implementation / filename).write_text(
+                    "# Complete\n\nComplete grooming content.\n", encoding="utf-8"
+                )
+
+            result = validate_initiative(initiative)
+
+        decode = [
+            item for item in result.diagnostics if item.code == "document-decode-error"
+        ]
+        self.assertEqual(len(decode), 1)
+        self.assertTrue(decode[0].path.endswith("implementation/plan.md"))
 
 
 if __name__ == "__main__":

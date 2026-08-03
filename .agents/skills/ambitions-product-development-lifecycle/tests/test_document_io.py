@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 -- the package-under-test path is intentionally injected below.
+
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 import unittest
 
 
@@ -33,7 +36,7 @@ class DocumentIOTests(unittest.TestCase):
 
         self.assertEqual(
             document.sections[0].body,
-            "\nState the intended user and product outcome from approved Research.\n\n",
+            "\n<!-- PRODUCT-DOC-DRAFT: State the intended user and product outcome from approved Research. -->\n\n",
         )
 
     def test_rejects_extra_frontmatter_fields(self) -> None:
@@ -58,6 +61,28 @@ class DocumentIOTests(unittest.TestCase):
             parse_document(duplicate)
 
         self.assertEqual(raised.exception.diagnostics[0].code, "duplicate-section-heading")
+
+    def test_path_parse_diagnostic_names_the_source_file(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "research.md"
+            path.write_text("not TOML frontmatter\n", encoding="utf-8")
+
+            with self.assertRaises(ProductDocsError) as raised:
+                parse_document(path)
+
+        self.assertEqual(raised.exception.diagnostics[0].code, "missing-frontmatter")
+        self.assertEqual(raised.exception.diagnostics[0].path, str(path))
+
+    def test_invalid_utf8_is_a_stable_path_diagnostic(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "research.md"
+            path.write_bytes(b"\xff")
+
+            with self.assertRaises(ProductDocsError) as raised:
+                parse_document(path)
+
+        self.assertEqual(raised.exception.diagnostics[0].code, "document-decode-error")
+        self.assertEqual(raised.exception.diagnostics[0].path, str(path))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+# ruff: noqa: E402 -- the package-under-test path is intentionally injected below.
+
 from pathlib import Path
+import re
 import sys
 from tempfile import TemporaryDirectory
 import unittest
@@ -25,12 +28,37 @@ def approved_template(document_type: str) -> str:
     )
 
 
+def completed_template(document_type: str) -> str:
+    contents = re.sub(
+        r"<!-- PRODUCT-DOC-DRAFT:.*?-->",
+        "Complete content.",
+        approved_template(document_type),
+    )
+    if document_type == "scope":
+        contents = contents.replace(
+            "## Requirements\n\nComplete content.",
+            "## Requirements\n\n- REQ-001: The user can complete the outcome.",
+        )
+    if document_type == "design":
+        contents = contents.replace(
+            "## Requirement traceability\n\nComplete content.",
+            "## Requirement traceability\n\n- REQ-001: DESIGN-001 completes the outcome.",
+        )
+    return contents
+
+
 class ValidationTests(unittest.TestCase):
+    def test_status_only_scope_promotion_remains_incomplete(self) -> None:
+        result = validate_document(parse_document(approved_template("scope")))
+
+        self.assertIn("approved-placeholder", {item.code for item in result.diagnostics})
+        self.assertIn("missing-scope-requirement", {item.code for item in result.diagnostics})
+
     def test_approved_document_rejects_placeholders(self) -> None:
-        incomplete_approved_path = TEMPLATE_DIRECTORY / "research.md"
-        contents = approved_template("research").replace(
-            "Describe the idea, the user problem, and why it matters.",
+        contents = completed_template("research").replace(
+            "Complete content.",
             "<!-- PRODUCT-DOC-DRAFT: explain the problem -->",
+            1,
         )
 
         result = validate_document(parse_document(contents))
@@ -39,8 +67,10 @@ class ValidationTests(unittest.TestCase):
 
     def test_requires_canonical_filename_and_headings(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            path = Path(temporary_directory) / "notes.md"
-            path.write_text(approved_template("research").replace("## Evidence", "## Sources"), encoding="utf-8")
+            directory = Path(temporary_directory) / "example"
+            directory.mkdir()
+            path = directory / "notes.md"
+            path.write_text(completed_template("research").replace("## Evidence", "## Sources"), encoding="utf-8")
 
             result = validate_document(parse_document(path))
 
@@ -51,7 +81,8 @@ class ValidationTests(unittest.TestCase):
 
     def test_validates_approval_order_and_upstream_paths(self) -> None:
         with TemporaryDirectory() as temporary_directory:
-            initiative = Path(temporary_directory)
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
             (initiative / "research.md").write_text(
                 (TEMPLATE_DIRECTORY / "research.md").read_text(encoding="utf-8").replace(
                     'initiative = ""', 'initiative = "example"'
@@ -59,11 +90,11 @@ class ValidationTests(unittest.TestCase):
                 encoding="utf-8",
             )
             (initiative / "scope.md").write_text(
-                approved_template("scope").replace('upstream = "research.md"', 'upstream = "wrong.md"'),
+                completed_template("scope").replace('upstream = "research.md"', 'upstream = "wrong.md"'),
                 encoding="utf-8",
             )
             (initiative / "design.md").write_text(
-                approved_template("design").replace('upstream = "scope.md"', 'upstream = "wrong.md"'),
+                completed_template("design").replace('upstream = "scope.md"', 'upstream = "wrong.md"'),
                 encoding="utf-8",
             )
 
@@ -73,6 +104,53 @@ class ValidationTests(unittest.TestCase):
             {item.code for item in result.diagnostics},
             {"research-not-approved", "invalid-upstream"},
         )
+
+    def test_approved_design_directly_reports_unapproved_scope(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            (initiative / "research.md").write_text(
+                completed_template("research"), encoding="utf-8"
+            )
+            (initiative / "scope.md").write_text(
+                (TEMPLATE_DIRECTORY / "scope.md")
+                .read_text(encoding="utf-8")
+                .replace('initiative = ""', 'initiative = "example"'),
+                encoding="utf-8",
+            )
+            (initiative / "design.md").write_text(
+                completed_template("design"), encoding="utf-8"
+            )
+
+            result = validate_initiative(initiative)
+
+        self.assertIn("scope-not-approved", {item.code for item in result.diagnostics})
+
+    def test_initiative_metadata_and_research_upstream_match_directory(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            (initiative / "research.md").write_text(
+                completed_template("research")
+                .replace('initiative = "example"', 'initiative = "other"')
+                .replace('upstream = ""', 'upstream = "scope.md"'),
+                encoding="utf-8",
+            )
+            (initiative / "scope.md").write_text(
+                completed_template("scope"), encoding="utf-8"
+            )
+            (initiative / "design.md").write_text(
+                completed_template("design").replace(
+                    'initiative = "example"', 'initiative = "another"'
+                ),
+                encoding="utf-8",
+            )
+
+            result = validate_initiative(initiative)
+
+        codes = {item.code for item in result.diagnostics}
+        self.assertIn("initiative-mismatch", codes)
+        self.assertIn("invalid-upstream", codes)
 
 
 if __name__ == "__main__":

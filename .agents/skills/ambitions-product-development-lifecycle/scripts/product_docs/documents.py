@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from dataclasses import replace
 from pathlib import Path
 import tempfile
 import tomllib
@@ -30,13 +31,34 @@ def _split_frontmatter(contents: str) -> tuple[str, str]:
 
 def _contents_and_path(source: Path | str) -> tuple[str, Path]:
     if isinstance(source, Path):
-        return source.read_text(encoding="utf-8"), source
+        return _read_path(source), source
     if source.startswith("+++") or "\n" in source or "\r" in source:
         return source, _MEMORY_PATH
     candidate = Path(source)
     if candidate.exists():
-        return candidate.read_text(encoding="utf-8"), candidate
+        return _read_path(candidate), candidate
     return source, _MEMORY_PATH
+
+
+def _read_path(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "document-decode-error",
+                "File must contain valid UTF-8 text",
+                path=str(path),
+            )
+        ) from error
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "document-read-error",
+                "File could not be read",
+                path=str(path),
+            )
+        ) from error
 
 
 def _frontmatter(frontmatter: str) -> tuple[str, DocumentType, DocumentStatus, str]:
@@ -56,18 +78,49 @@ def _frontmatter(frontmatter: str) -> tuple[str, DocumentType, DocumentStatus, s
     return metadata["initiative"], document_type, status, metadata["upstream"]
 
 
+def _display_path(path: Path, repository_root: Path | None) -> Path:
+    if repository_root is None:
+        return path
+    try:
+        return path.resolve().relative_to(Path(repository_root).resolve())
+    except (OSError, ValueError):
+        return path
+
+
 def parse_document(source: Path | str, *, repository_root: Path | None = None) -> ProductDocument:
     """Parse the four-field frontmatter and lossless level-two sections."""
-    del repository_root
-    contents, source_path = _contents_and_path(source)
-    frontmatter, body = _split_frontmatter(contents)
-    initiative, document_type, status, upstream = _frontmatter(frontmatter)
+    try:
+        contents, source_path = _contents_and_path(source)
+    except ProductDocsError as error:
+        if repository_root is None:
+            raise
+        raise ProductDocsError(
+            replace(
+                diagnostic,
+                path=str(_display_path(Path(diagnostic.path), repository_root))
+                if diagnostic.path is not None
+                else None,
+            )
+            for diagnostic in error.diagnostics
+        ) from error
+    source_path = _display_path(source_path, repository_root)
+    try:
+        frontmatter, body = _split_frontmatter(contents)
+        initiative, document_type, status, upstream = _frontmatter(frontmatter)
+        sections = parse_sections(body)
+    except ProductDocsError as error:
+        if source_path == _MEMORY_PATH:
+            raise
+        raise ProductDocsError(
+            replace(diagnostic, path=diagnostic.path or str(source_path))
+            for diagnostic in error.diagnostics
+        ) from error
     return ProductDocument(
         initiative=initiative,
         document_type=document_type,
         status=status,
         upstream=upstream,
-        sections=parse_sections(body),
+        sections=sections,
         source_path=source_path,
     )
 
@@ -82,12 +135,6 @@ def render_document(document: ProductDocument) -> str:
         )
     )
     return f"+++\n{frontmatter}\n+++\n{render_sections(document.sections)}"
-
-
-def append_history_event(document: ProductDocument, event: str) -> ProductDocument:
-    """The simplified lifecycle has no review-history artifact."""
-    del document, event
-    raise ProductDocsError(Diagnostic("unsupported-operation", "Review history is not part of product documents"))
 
 
 def write_document_atomic(target: Path, document: ProductDocument | str, *, repository_root: Path | None = None) -> None:

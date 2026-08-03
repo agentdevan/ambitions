@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
 import json
 from pathlib import Path
 import re
@@ -22,6 +24,7 @@ EXIT_USAGE = 2
 EXIT_REPOSITORY = 3
 _PHASES = tuple(document_type.value for document_type in DocumentType)
 _INITIATIVE_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+_GROOMING_FILES = frozenset(("plan.md", "tasks.md", "verification.md"))
 
 
 class _ParserExit(Exception):
@@ -159,6 +162,25 @@ def _template_path(root: Path, phase: str) -> Path:
     return template
 
 
+def _template_contents(root: Path, phase: str) -> str:
+    template = _template_path(root, phase)
+    relative = template.relative_to(root).as_posix()
+    try:
+        return template.read_text(encoding="utf-8")
+    except UnicodeError as error:
+        raise ProductDocsError(
+            Diagnostic(
+                "document-decode-error",
+                "File must contain valid UTF-8 text",
+                path=relative,
+            )
+        ) from error
+    except OSError as error:
+        raise ProductDocsError(
+            Diagnostic("document-read-error", "File could not be read", path=relative)
+        ) from error
+
+
 def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, object]]:
     initiative = arguments.initiative
     if not _INITIATIVE_SLUG.fullmatch(initiative):
@@ -174,6 +196,9 @@ def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, 
         upstream = directory / f"{DocumentType.RESEARCH.value if phase == DocumentType.SCOPE.value else DocumentType.SCOPE.value}.md"
         if not upstream.is_file():
             raise ProductDocsError(Diagnostic("upstream-unavailable", "Create the upstream document before this phase", path=upstream.relative_to(root).as_posix()))
+        report = validate_initiative(directory, repository_root=root)
+        if report.diagnostics:
+            raise ProductDocsError(report.diagnostics)
         upstream_document = parse_document(upstream, repository_root=root)
         if upstream_document.status is not DocumentStatus.APPROVED:
             raise ProductDocsError(
@@ -184,7 +209,9 @@ def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, 
                 )
             )
 
-    contents = _template_path(root, phase).read_text(encoding="utf-8").replace('initiative = ""', f'initiative = "{initiative}"', 1)
+    contents = _template_contents(root, phase).replace(
+        'initiative = ""', f'initiative = "{initiative}"', 1
+    )
     write_document_atomic(target, contents, repository_root=root)
     document = parse_document(target, repository_root=root)
     return EXIT_SUCCESS, _payload(
@@ -195,7 +222,7 @@ def _run_new(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, 
     )
 
 
-def _next_action(documents: Sequence[ProductDocument]) -> str:
+def _next_action(documents: Sequence[ProductDocument], directory: Path) -> str:
     by_type = {document.document_type: document for document in documents}
     research = by_type.get(DocumentType.RESEARCH)
     scope = by_type.get(DocumentType.SCOPE)
@@ -210,30 +237,36 @@ def _next_action(documents: Sequence[ProductDocument]) -> str:
         return "create design"
     if design.status is not DocumentStatus.APPROVED:
         return "complete design"
+    implementation = directory / "implementation"
+    if implementation.is_dir() and {path.name for path in implementation.iterdir()} == _GROOMING_FILES:
+        return "implementation grooming complete"
     return "groom implementation"
 
 
 def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str, object]]:
     target, relative = _relative_path(arguments.path, root)
     diagnostics: list[Diagnostic] = []
-    documents: list[ProductDocument] = []
+    action_documents: list[ProductDocument] = []
     records: list[dict[str, str]] = []
     if target.is_dir():
         directory = _initiative_directory(target, relative)
-        report = validate_initiative(directory)
+        report = validate_initiative(directory, repository_root=root)
         diagnostics.extend(report.diagnostics)
-        paths = [directory / f"{phase}.md" for phase in _PHASES]
-        if not any(path.is_file() for path in paths):
+        requested_paths = [directory / f"{phase}.md" for phase in _PHASES]
+        if not any(path.is_file() for path in requested_paths):
             diagnostics.append(
                 Diagnostic("no-documents", "No product documents found", path=relative)
             )
     else:
         document_path = _document_path(target, relative)
-        report = validate_initiative(document_path.parent)
+        directory = document_path.parent
+        report = validate_initiative(document_path.parent, repository_root=root)
         diagnostics.extend(report.diagnostics)
-        paths = [document_path]
+        requested_paths = [document_path]
 
-    for path in paths:
+    requested = set(requested_paths)
+    all_paths = [directory / f"{phase}.md" for phase in _PHASES]
+    for path in all_paths:
         if not path.is_file():
             continue
         path_relative = path.relative_to(root).as_posix()
@@ -246,8 +279,9 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
                 if diagnostic not in diagnostics
             )
             continue
-        documents.append(document)
-        records.append(_document_record(document, path_relative))
+        action_documents.append(document)
+        if path in requested:
+            records.append(_document_record(document, path_relative))
 
     status = "success" if not diagnostics else "failure"
     return (
@@ -257,7 +291,7 @@ def _run_check(arguments: argparse.Namespace, root: Path) -> tuple[int, dict[str
             status=status,
             documents=records,
             diagnostics=diagnostics,
-            next_action=_next_action(documents) if not diagnostics else "correct the reported diagnostics",
+            next_action=_next_action(action_documents, directory) if not diagnostics else "correct the reported diagnostics",
         ),
     )
 
@@ -281,9 +315,21 @@ def main(
     stderr = sys.stderr if stderr is None else stderr
     as_json = "--json" in arguments_list
     command = arguments_list[0] if arguments_list and not arguments_list[0].startswith("-") else ""
+    parser_stdout = StringIO()
+    parser_stderr = StringIO()
     try:
-        arguments = build_parser().parse_args(arguments_list)
+        with redirect_stdout(parser_stdout), redirect_stderr(parser_stderr):
+            arguments = build_parser().parse_args(arguments_list)
     except _ParserExit as error:
+        if error.status == EXIT_SUCCESS:
+            help_text = parser_stdout.getvalue() or parser_stderr.getvalue()
+            if as_json:
+                payload = _payload(command, status="success", next_action="none")
+                payload["help"] = help_text
+                _emit(payload, as_json=True, stdout=stdout, stderr=stderr)
+            else:
+                stdout.write(help_text)
+            return EXIT_SUCCESS
         diagnostic = Diagnostic("usage-error", (error.message or "Invalid command usage").strip())
         _emit(_payload(command, status="failure", diagnostics=(diagnostic,), next_action="correct the command syntax"), as_json=as_json, stdout=stdout, stderr=stderr)
         return EXIT_USAGE

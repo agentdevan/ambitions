@@ -18,7 +18,8 @@ already resolved by current canon, use the repository skill
 `ambitions-product-development-lifecycle`. ChatGPT authors the canonical Research,
 Scope, and Design files in that order. Devan reviews each phase, ChatGPT checks
 it for completeness and consistency, and a phase becomes approved only after
-Devan explicitly approves it. After approved Design, ChatGPT or Codex creates
+Devan explicitly approves it and ChatGPT's review has no blocking findings.
+After approved Design, ChatGPT or Codex creates
 `implementation/plan.md`, `implementation/tasks.md`, and
 `implementation/verification.md`. This workflow supports product quality and
 does not control ordinary edits or merges.

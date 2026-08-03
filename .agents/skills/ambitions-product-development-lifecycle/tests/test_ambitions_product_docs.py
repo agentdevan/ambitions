@@ -7,6 +7,7 @@ import importlib
 from io import StringIO
 import json
 from pathlib import Path
+import re
 import sys
 
 
@@ -18,6 +19,26 @@ from support import TemporaryRepositoryTestCase, copy_skill_skeleton
 
 
 INSTALLED_SKILL = Path(".agents/skills/ambitions-product-development-lifecycle")
+
+
+def complete_document(path: Path, phase: str) -> None:
+    contents = path.read_text(encoding="utf-8").replace(
+        'status = "draft"', 'status = "approved"'
+    )
+    contents = re.sub(
+        r"<!-- PRODUCT-DOC-DRAFT:.*?-->", "Complete content.", contents
+    )
+    if phase == "scope":
+        contents = contents.replace(
+            "## Requirements\n\nComplete content.",
+            "## Requirements\n\n- REQ-001: The user can complete the outcome.",
+        )
+    elif phase == "design":
+        contents = contents.replace(
+            "## Requirement traceability\n\nComplete content.",
+            "## Requirement traceability\n\n- REQ-001: DESIGN-001 completes the outcome.",
+        )
+    path.write_text(contents, encoding="utf-8")
 
 
 @contextmanager
@@ -102,12 +123,7 @@ class InstalledSkillSurfaceTests(TemporaryRepositoryTestCase):
             self.assertEqual(document.initiative, "example")
             self.assertEqual(document.upstream, "")
 
-            path.write_text(
-                path.read_text(encoding="utf-8").replace(
-                    'status = "draft"', 'status = "approved"'
-                ),
-                encoding="utf-8",
-            )
+            complete_document(path, "research")
             result, stdout, stderr = self.invoke(
                 cli,
                 "check",
@@ -134,18 +150,41 @@ class InstalledSkillSurfaceTests(TemporaryRepositoryTestCase):
             },
         )
 
+    def test_installed_cli_rejects_status_only_template_approval(self) -> None:
+        with installed_cli(self.skill_root) as (cli, _):
+            result, _, _ = self.invoke(
+                cli, "new", "research", "--initiative", "example"
+            )
+            self.assertEqual(result, cli.EXIT_SUCCESS)
+            path = self.root / "docs/product-development/example/research.md"
+            path.write_text(
+                path.read_text(encoding="utf-8").replace(
+                    'status = "draft"', 'status = "approved"'
+                ),
+                encoding="utf-8",
+            )
+
+            result, stdout, stderr = self.invoke(
+                cli,
+                "check",
+                "docs/product-development/example/research.md",
+                "--json",
+            )
+
+        self.assertEqual(result, cli.EXIT_DOMAIN_FAILURE)
+        self.assertEqual(stderr, "")
+        self.assertIn(
+            "approved-placeholder",
+            {item["code"] for item in json.loads(stdout)["diagnostics"]},
+        )
+
     def test_installed_cli_accepts_complete_grooming_documents(self) -> None:
         with installed_cli(self.skill_root) as (cli, _):
             for phase in ("research", "scope", "design"):
                 result, _, _ = self.invoke(cli, "new", phase, "--initiative", "example")
                 self.assertEqual(result, cli.EXIT_SUCCESS)
                 path = self.root / "docs/product-development/example" / f"{phase}.md"
-                path.write_text(
-                    path.read_text(encoding="utf-8").replace(
-                        'status = "draft"', 'status = "approved"'
-                    ),
-                    encoding="utf-8",
-                )
+                complete_document(path, phase)
 
             implementation = self.root / "docs/product-development/example/implementation"
             implementation.mkdir()

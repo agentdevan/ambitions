@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import sys
+import tomllib
 import unittest
 
 
@@ -29,6 +30,49 @@ def extracted_headings(contents: str) -> list[str]:
 
 
 class TemplateProfileTests(unittest.TestCase):
+    def test_templates_use_exact_four_string_frontmatter_fields(self) -> None:
+        expected = {
+            "research": {
+                "initiative": "",
+                "document_type": "research",
+                "status": "draft",
+                "upstream": "",
+            },
+            "scope": {
+                "initiative": "",
+                "document_type": "scope",
+                "status": "draft",
+                "upstream": "research.md",
+            },
+            "design": {
+                "initiative": "",
+                "document_type": "design",
+                "status": "draft",
+                "upstream": "scope.md",
+            },
+        }
+
+        for phase, expected_metadata in expected.items():
+            with self.subTest(phase=phase):
+                contents = template_path(phase).read_text(encoding="utf-8")
+                frontmatter = contents.split("+++", 2)[1]
+                metadata = tomllib.loads(frontmatter)
+                self.assertEqual(set(metadata), {"initiative", "document_type", "status", "upstream"})
+                self.assertTrue(all(type(value) is str for value in metadata.values()))
+                self.assertEqual(metadata, expected_metadata)
+
+    def test_templates_mark_every_prompt_as_unresolved(self) -> None:
+        for phase in EXPECTED_HEADINGS:
+            with self.subTest(phase=phase):
+                contents = template_path(phase).read_text(encoding="utf-8")
+                self.assertEqual(
+                    contents.count("PRODUCT-DOC-DRAFT:"),
+                    len(EXPECTED_HEADINGS[phase]),
+                )
+
+        self.assertIn("REQ-###", template_path("scope").read_text(encoding="utf-8"))
+        self.assertIn("REQ-###", template_path("design").read_text(encoding="utf-8"))
+
     def test_templates_use_simple_metadata(self) -> None:
         for phase, headings in EXPECTED_HEADINGS.items():
             contents = template_path(phase).read_text(encoding="utf-8")
