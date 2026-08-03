@@ -1,8 +1,8 @@
 # Ambitions Product Development Lifecycle Skill Design
 
 **Date:** 2026-08-02  
-**Status:** Revision 6 — final verification candidate  
-**Repository baseline inspected:** `ee57f8fa65052d3361bee72442318a9034f60272`  
+**Status:** Revision 7 — final verification candidate  
+**Repository baseline inspected:** `cba4fc570f7c3ce4c728bed39343d031b6467207`  
 **Target repository:** `agentdevan/ambitions`
 
 ## 1. Decision summary
@@ -151,12 +151,18 @@ maintained duplicate templates are prohibited.
 
 ### 6.1 Deterministic package identity
 
-`package-manifest.json` identifies the operational package. It contains:
+`package-manifest.json` identifies the active operational package. It contains:
 
 ```json
 {
   "manifest_schema": 1,
   "skill_version": "1.0.0",
+  "supported_document_contracts": [
+    {
+      "schema_version": 1,
+      "template_versions": ["research-v1", "scope-v1", "design-v1"]
+    }
+  ],
   "files": [
     {"path": "SKILL.md", "sha256": "<lowercase-hex>"},
     {"path": "agents/openai.yaml", "sha256": "<lowercase-hex>"},
@@ -176,9 +182,17 @@ separators, and a terminal LF. `skill_package_hash` is lowercase SHA-256 over
 those canonical manifest bytes, prefixed with `sha256:`. `template_hash` is the
 prefixed exact-byte SHA-256 recorded for the selected template in the manifest.
 
-The CLI regenerates and verifies the manifest. A missing, extra, renamed, or
-content-changed operational file fails package verification until the manifest
-and skill version are intentionally updated.
+The CLI regenerates and verifies the active manifest. A missing, extra, renamed,
+or content-changed operational file fails active-package verification until the
+manifest and skill version are intentionally updated.
+
+A historical document remains verifiable after the active package evolves. The
+consumer loads `package-manifest.json` and the listed operational files from the
+document's `repository_baseline_commit`, recomputes the recorded package and
+template hashes, and separately requires the current active manifest to declare
+support for the document's schema and template versions. Git history is the
+immutable package snapshot; an old package does not remain active merely to
+validate old documents. An unreachable baseline commit blocks consumption.
 
 ### 6.2 Codex discovery
 
@@ -251,15 +265,17 @@ invalidates the seal and both verdicts.
 Consumer mode must:
 
 1. load active instructions, the lifecycle skill, and consumer contract;
-2. verify package identity and recompute the sealed contract hash;
-3. compare the baseline commit with current `HEAD` using the derived freshness
+2. verify historical package identity at the document baseline;
+3. verify current schema/template compatibility and recompute the sealed contract
+   hash;
+4. compare the baseline commit with current `HEAD` using the derived freshness
    set and semantic inspection of relevant changes;
-4. verify template, authority class, evidence, and upstream bindings;
-5. read the handoff summary before linked detail sections;
-6. test whether the next phase can proceed without invention;
-7. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
-8. record the consumer review only through an explicit lifecycle CLI write;
-9. set `passed` only when both lanes pass the same revision and hash.
+5. verify authority class, evidence, and upstream bindings;
+6. read the handoff summary before linked detail sections;
+7. test whether the next phase can proceed without invention;
+8. return `PASS` or `NEEDS REVISION` with exact IDs and sections;
+9. record the consumer review only through an explicit lifecycle CLI write;
+10. set `passed` only when both lanes pass the same revision and hash.
 
 Consumer review is not merge authorization and does not replace product
 approval. It tests actionability and current-repository coherence.
@@ -431,8 +447,10 @@ headings and section contracts. `skill_version` identifies the package release.
 The package and template hashes prove exact content identity.
 
 Templates are immutable within a version. A new version does not silently
-reinterpret passed historical documents. Validators retain explicit support or
-require a reviewable migration that invalidates affected review bindings.
+reinterpret passed historical documents. Historical package identity is verified
+at the document baseline; the current validator must explicitly support the old
+schema and template or require a reviewable migration that invalidates affected
+review bindings.
 
 ## 10. Exact contract-hash algorithm
 
@@ -568,8 +586,9 @@ Consumer review compares `repository_baseline_commit..HEAD` against the derived
    the change cannot affect a finding, requirement, decision, dependency, or
    proof obligation;
 3. missing baseline or unreachable commit: `NEEDS REVISION`;
-4. changed package or template hash: use the document's declared supported
-   version; do not reinterpret it under the new package.
+4. active package or template differs: verify the historical package at the
+   document baseline, then require the current package to declare schema/template
+   compatibility; otherwise require migration.
 
 Path intersection is a conservative filter, not the final semantic judgment.
 Each time-sensitive external source records an access date and recheck trigger in
@@ -722,6 +741,8 @@ Before acceptance, Codex runs `check` and `consume`. It returns
 `NEEDS REVISION` when:
 
 - canonical path, identity, versions, manifest, or package hashes are invalid;
+- the historical package cannot be verified at the document baseline;
+- the current validator does not support the document schema/template;
 - seal, contract hash, or review binding is stale;
 - baseline or owner/freshness data is missing;
 - relevant repo changes are unreconciled;
@@ -762,7 +783,7 @@ read-only; `package --write` regenerates the manifest.
 `freshness_paths`. It:
 
 1. requires `status = "draft"`;
-2. verifies package and template identity;
+2. verifies active package and template identity;
 3. validates schema, headings, typed inputs, evidence hashes, declared owners,
    dependencies, and additional freshness paths;
 4. derives and writes the exact freshness set;
@@ -794,7 +815,9 @@ The CLI must:
 - instantiate exact templates without overwrite;
 - support producer-created drafts when shell execution was unavailable;
 - parse TOML and validate all schema variants;
-- generate and verify the package manifest and template hashes;
+- generate and verify the active package manifest and template hashes;
+- verify historical package identity from the document baseline;
+- enforce current schema/template compatibility declarations;
 - implement the exact contract-hash algorithm;
 - validate seals, review records, and status combinations;
 - validate typed inputs and evidence-file hashes;
@@ -826,13 +849,18 @@ After Design passes and before implementation grooming is final:
 A passed Design authorizes planning for declared deltas; it does not make those
 deltas normative before canon reconciliation.
 
-## 20. Template evolution
+## 20. Template and package evolution
 
 Templates are immutable within a version. Improvements create a new version.
+The active package may evolve, but historical document provenance remains
+verifiable through its baseline commit.
+
 Version changes require migration rationale, compatibility policy, validator
 coverage, explicit migration commands where needed, review invalidation for
 contract changes, and a cross-product proof that ChatGPT and Codex use identical
-package and template hashes.
+package and template hashes. Removing current support for a historical schema or
+template requires either an explicit migration path or a documented decision
+that the historical document is no longer consumable.
 
 ## 21. Testing strategy
 
@@ -853,6 +881,8 @@ contracts, rerun identical scenarios, and refine only for observed gaps.
 
 - Design arrives without chat history;
 - relevant and unrelated repo changes occur after baseline;
+- the active package changes while an older document remains supported;
+- the historical baseline package is unreachable;
 - an author omits a materially relied-on owner path;
 - source links lack evidence summaries;
 - evidence annex content changes without hash update;
@@ -869,17 +899,18 @@ A fixture initiative is authored through ChatGPT and consumed through Codex. It
 proves identical package/template hashes, canonical persistence, authoritative
 sealing, derived freshness, deterministic reopen/revision behavior, durable
 review records, summary-first reading, relevant-drift detection, evidence-hash
-checking, Research → Scope → Design → canon reconciliation → grooming, and
-independence from the original chat.
+checking, historical package verification, Research → Scope → Design → canon
+reconciliation → grooming, and independence from the original chat.
 
 ### 21.4 CLI tests
 
-Tests cover package manifest generation, templates, versions, package hashes,
-IDs, TOML, canonical hashing, sealing, freshness derivation, incomplete
-freshness rejection, failed-review reopening, exact revision increments, illegal
-post-seal edits, review history, state transitions, typed inputs, evidence hashes,
-relevant drift, canon deltas, traceability, stale reconciliation, path safety,
-read-only behavior, JSON output, and failure exits.
+Tests cover active manifest generation, historical package verification,
+compatibility declarations, templates, versions, package hashes, IDs, TOML,
+canonical hashing, sealing, freshness derivation, incomplete freshness rejection,
+failed-review reopening, exact revision increments, illegal post-seal edits,
+review history, state transitions, typed inputs, evidence hashes, relevant drift,
+canon deltas, traceability, stale reconciliation, path safety, read-only behavior,
+JSON output, and failure exits.
 
 ## 22. Delivery boundary
 
@@ -926,8 +957,8 @@ The system is complete when:
    verification.
 5. Both review lanes bind to one sealed revision and contract hash and have
    durable append-only review records.
-6. Package identity, the exact document-hash algorithm, seal, and reopen
-   transitions are implemented and tested.
+6. Active and historical package identity, the exact document-hash algorithm,
+   seal, and reopen transitions are implemented and tested.
 7. Typed inputs, evidence hashes, owner declarations, derived freshness, and
    relevant drift are enforced.
 8. Relevant changes invalidate consumption; unrelated changes do not.
@@ -949,6 +980,8 @@ The system is complete when:
 - Repository files, not chat history, are canonical handoffs.
 - Documents declare distinct authority classes.
 - A canonical package manifest and exact hashes prevent cross-product drift.
+- Historical package identity is verified at the document baseline.
+- Current validators explicitly declare supported document contracts.
 - An explicit seal establishes the reviewable revision, freshness set, and hash.
 - An explicit reopen transition controls every corrective revision.
 - Review verdicts bind to exact sealed revision and deterministic contract hash.
@@ -971,8 +1004,8 @@ the lifecycle system is complete.
 
 ## 27. Review gate
 
-Revision 6 incorporates both ruthless review passes and all mechanical repairs.
-Approval requires verification that package identity, sealing, corrective
-reopening, typed-input schemas, derived freshness, state transitions, review
-binding, authority deltas, and the cross-product handoff are internally
-consistent and directly implementable.
+Revision 7 incorporates both ruthless review passes and all mechanical and
+compatibility repairs. Approval requires verification that active and historical
+package identity, sealing, corrective reopening, typed-input schemas, derived
+freshness, state transitions, review binding, authority deltas, and the
+cross-product handoff are internally consistent and directly implementable.
