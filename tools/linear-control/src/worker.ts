@@ -139,6 +139,13 @@ async function enqueue(
 }
 
 async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
+  const existing = await env.CONTROL_DB.prepare(
+    "SELECT status FROM deliveries WHERE id = ?",
+  )
+    .bind(event.deliveryId)
+    .first<{ status: string }>();
+  if (existing?.status === "verified" || existing?.status === "superseded")
+    return;
   const started = new Date().toISOString();
   await env.CONTROL_DB.prepare(
     "UPDATE deliveries SET status = 'processing', attempts = attempts + 1, updated_at = ? WHERE id = ?",
@@ -246,8 +253,8 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     ...(status === "converged"
       ? [
           env.CONTROL_DB.prepare(
-            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status = 'queued' AND received_at < ?",
-          ).bind(completed, started),
+            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status IN ('queued', 'processing', 'retrying', 'drift') AND received_at < ? AND id <> ?",
+          ).bind(completed, started, event.deliveryId),
         ]
       : []),
   ]);
