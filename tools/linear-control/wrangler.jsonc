@@ -9,7 +9,7 @@
     "LINEAR_API_URL": "https://api.linear.app/graphql",
     "GITHUB_REPOSITORY": "agentdevan/ambitions",
     "MANIFEST_PATH": "tools/linear-control/generated/desired-workspace.json",
-    "MUTATIONS_ENABLED": false,
+    "MUTATIONS_ENABLED": true,
     "MAX_EVENT_BYTES": "262144",
   },
   "d1_databases": [

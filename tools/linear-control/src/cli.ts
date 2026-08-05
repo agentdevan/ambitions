@@ -4,6 +4,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { compileRepository } from "./core/compiler.js";
 import { stableJson } from "./core/hash.js";
+import { LinearClient } from "./adapters/linear.js";
+import { auditLiveWorkspace } from "./core/live-audit.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(here, "../../..");
@@ -74,6 +76,28 @@ async function main(): Promise<void> {
       JSON.stringify(project ?? task ?? { error: "NOT_FOUND", key }, null, 2),
     );
     if (!project && !task) process.exitCode = 1;
+    return;
+  }
+  if (command === "live-check") {
+    const token = process.env.LINEAR_API_TOKEN;
+    if (!token) throw new Error("LINEAR_API_TOKEN_REQUIRED");
+    const result = await auditLiveWorkspace(
+      new LinearClient(token, process.env.LINEAR_API_URL),
+      manifest,
+      false,
+    );
+    console.log(
+      JSON.stringify(
+        {
+          status: result.exceptions.length === 0 ? "converged" : "drift",
+          metrics: result.metrics,
+          exceptions: result.exceptions,
+        },
+        null,
+        2,
+      ),
+    );
+    if (result.exceptions.length > 0) process.exitCode = 2;
     return;
   }
   if (command === "apply" || command === "replay")

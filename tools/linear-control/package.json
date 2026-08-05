@@ -17,6 +17,8 @@
     "compile": "tsx src/cli.ts compile",
     "check": "tsx src/cli.ts check",
     "plan": "tsx src/cli.ts plan",
+    "live-check": "tsx src/cli.ts live-check",
+    "sync-documents": "tsx src/sync-documents.ts",
     "deploy:dry-run": "wrangler deploy --dry-run",
     "deploy": "wrangler deploy"
   },

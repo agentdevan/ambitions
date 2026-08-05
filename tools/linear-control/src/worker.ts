@@ -1,6 +1,9 @@
 import { sha256Text } from "./core/hash.js";
 import type { EventEnvelope } from "./core/types.js";
 import { timingSafeEqual as nodeTimingSafeEqual } from "node:crypto";
+import { LinearClient } from "./adapters/linear.js";
+import { auditLiveWorkspace } from "./core/live-audit.js";
+import type { DesiredWorkspaceManifest } from "./core/types.js";
 
 const encoder = new TextEncoder();
 
@@ -123,30 +126,76 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     .bind(started, event.deliveryId)
     .run();
   const runId = crypto.randomUUID();
-  const commit = event.authorityCommit ?? "main";
-  const desiredHash = await sha256Text(
-    `${event.source}\0${event.deliveryId}\0${commit}`,
-  );
+  const repositoryUrl = `https://raw.githubusercontent.com/${env.GITHUB_REPOSITORY}/main/${env.MANIFEST_PATH}`;
+  const manifestResponse = await fetch(repositoryUrl, {
+    headers: { "User-Agent": "ambitions-linear-control" },
+  });
+  if (!manifestResponse.ok)
+    throw new Error(`MANIFEST_HTTP_${manifestResponse.status}`);
+  const manifest: DesiredWorkspaceManifest = await manifestResponse.json();
+  const commit = manifest.authorityCommit;
+  const desiredHash = manifest.contractHash;
   await env.CONTROL_DB.prepare(
     "INSERT INTO runs (id, delivery_id, mode, authority_commit, desired_hash, status, started_at) VALUES (?, ?, 'event', ?, ?, 'verifying', ?)",
   )
     .bind(runId, event.deliveryId, commit, desiredHash, started)
     .run();
+  const audit = await auditLiveWorkspace(
+    new LinearClient(env.LINEAR_API_TOKEN, env.LINEAR_API_URL),
+    manifest,
+    env.MUTATIONS_ENABLED,
+  );
   const completed = new Date().toISOString();
+  await env.CONTROL_DB.prepare(
+    "UPDATE exceptions SET resolved_at = ? WHERE resolved_at IS NULL",
+  )
+    .bind(completed)
+    .run();
+  for (const item of audit.exceptions) {
+    const id = await sha256Text(
+      `${item.canonicalKey ?? "workspace"}\0${item.summary}`,
+    );
+    await env.CONTROL_DB.prepare(
+      "INSERT INTO exceptions (id, canonical_key, category, severity, summary, first_seen_at, last_seen_at, resolved_at) VALUES (?, ?, ?, ?, ?, ?, ?, NULL) ON CONFLICT(id) DO UPDATE SET severity = excluded.severity, summary = excluded.summary, last_seen_at = excluded.last_seen_at, resolved_at = NULL",
+    )
+      .bind(
+        id,
+        item.canonicalKey ?? null,
+        item.category,
+        item.severity,
+        item.summary,
+        completed,
+        completed,
+      )
+      .run();
+  }
+  await env.CONTROL_DB.prepare(
+    "INSERT INTO metric_snapshots (id, captured_at, authority_commit, payload_json) VALUES (?, ?, ?, ?)",
+  )
+    .bind(crypto.randomUUID(), completed, commit, JSON.stringify(audit.metrics))
+    .run();
+  const status = audit.exceptions.length === 0 ? "converged" : "drift";
   await env.CONTROL_DB.batch([
     env.CONTROL_DB.prepare(
-      "UPDATE runs SET status = 'converged', completed_at = ? WHERE id = ?",
-    ).bind(completed, runId),
+      "UPDATE runs SET status = ?, mutation_count = ?, completed_at = ? WHERE id = ?",
+    ).bind(status, audit.repairs, completed, runId),
     env.CONTROL_DB.prepare(
-      "UPDATE deliveries SET status = 'verified', updated_at = ?, last_error = NULL WHERE id = ?",
-    ).bind(completed, event.deliveryId),
+      "UPDATE deliveries SET status = ?, updated_at = ?, last_error = NULL WHERE id = ?",
+    ).bind(
+      status === "converged" ? "verified" : "drift",
+      completed,
+      event.deliveryId,
+    ),
   ]);
   console.log(
     JSON.stringify({
-      message: "delivery verified",
+      message: "workspace reconciliation completed",
       deliveryId: event.deliveryId,
       source: event.source,
       mutationsEnabled: env.MUTATIONS_ENABLED,
+      status,
+      exceptions: audit.exceptions.length,
+      repairs: audit.repairs,
     }),
   );
 }
@@ -158,10 +207,24 @@ export default {
       const row = await env.CONTROL_DB.prepare(
         "SELECT COUNT(*) AS count FROM exceptions WHERE resolved_at IS NULL",
       ).first<{ count: number }>();
+      const latest = await env.CONTROL_DB.prepare(
+        "SELECT captured_at, authority_commit, payload_json FROM metric_snapshots ORDER BY captured_at DESC LIMIT 1",
+      ).first<{
+        captured_at: string;
+        authority_commit: string;
+        payload_json: string;
+      }>();
       return json({
         status: "ok",
         mutationsEnabled: env.MUTATIONS_ENABLED,
         openExceptions: row?.count ?? 0,
+        latestAudit: latest
+          ? {
+              capturedAt: latest.captured_at,
+              authorityCommit: latest.authority_commit,
+              metrics: JSON.parse(latest.payload_json) as unknown,
+            }
+          : null,
         now: new Date().toISOString(),
       });
     }

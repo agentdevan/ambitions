@@ -173,7 +173,7 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run cf-types && git diff --exit-code -- worker-configuration.d.ts
-      - run: npm run compile && git diff --exit-code -- generated/desired-workspace.json
+      - run: npm run check
       - run: npm run deploy:dry-run
 
   Code-Quality:
