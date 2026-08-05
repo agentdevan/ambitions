@@ -52,11 +52,21 @@ async function signedEnvelope(
     ) ?? request.headers.get("x-delivery-id");
   if (!deliveryId) throw new Error("MISSING_DELIVERY_ID");
   const supplied = request.headers
-    .get(source === "linear" ? "linear-signature" : "x-hub-signature-256")
+    .get(
+      source === "linear"
+        ? "linear-signature"
+        : source === "github"
+          ? "x-hub-signature-256"
+          : "x-control-signature",
+    )
     ?.replace(/^sha256=/, "");
   if (!supplied) throw new Error("MISSING_SIGNATURE");
   const secret =
-    source === "linear" ? env.LINEAR_WEBHOOK_SECRET : env.GITHUB_WEBHOOK_SECRET;
+    source === "linear"
+      ? env.LINEAR_WEBHOOK_SECRET
+      : source === "github"
+        ? env.GITHUB_WEBHOOK_SECRET
+        : env.CONTROL_ADMIN_SECRET;
   const expected = await hmacHex(secret, body);
   if (!timingSafeEqual(expected, supplied))
     throw new Error("INVALID_SIGNATURE");
@@ -90,13 +100,14 @@ async function persistDelivery(
   const hash = await sha256Text(JSON.stringify(event.payload));
   const now = new Date().toISOString();
   const result = await env.CONTROL_DB.prepare(
-    "INSERT OR IGNORE INTO deliveries (id, source, schema_version, payload_hash, status, authority_commit, received_at, updated_at) VALUES (?, ?, ?, ?, 'queued', ?, ?, ?)",
+    "INSERT OR IGNORE INTO deliveries (id, source, schema_version, payload_hash, payload_json, status, authority_commit, received_at, updated_at) VALUES (?, ?, ?, ?, ?, 'queued', ?, ?, ?)",
   )
     .bind(
       event.deliveryId,
       event.source,
       event.schemaVersion,
       hash,
+      JSON.stringify(event.payload),
       event.authorityCommit ?? null,
       now,
       now,
@@ -247,6 +258,34 @@ export default {
         return await enqueue(env, await signedEnvelope(request, env, "github"));
       if (url.pathname === "/reconcile")
         return await enqueue(env, await signedEnvelope(request, env, "manual"));
+      if (url.pathname === "/replay") {
+        const requestEvent = await signedEnvelope(request, env, "manual");
+        const requested = requestEvent.payload as { deliveryId?: unknown };
+        if (typeof requested.deliveryId !== "string")
+          return json({ error: "DELIVERY_ID_REQUIRED" }, 400);
+        const stored = await env.CONTROL_DB.prepare(
+          "SELECT source, schema_version, payload_json, authority_commit FROM deliveries WHERE id = ?",
+        )
+          .bind(requested.deliveryId)
+          .first<{
+            source: EventEnvelope["source"];
+            schema_version: 1;
+            payload_json: string | null;
+            authority_commit: string | null;
+          }>();
+        if (!stored?.payload_json)
+          return json({ error: "DELIVERY_NOT_REPLAYABLE" }, 404);
+        return await enqueue(env, {
+          schemaVersion: stored.schema_version,
+          deliveryId: `replay:${requested.deliveryId}:${crypto.randomUUID()}`,
+          source: stored.source,
+          receivedAt: new Date().toISOString(),
+          ...(stored.authority_commit
+            ? { authorityCommit: stored.authority_commit }
+            : {}),
+          payload: JSON.parse(stored.payload_json) as unknown,
+        });
+      }
       return json({ error: "NOT_FOUND" }, 404);
     } catch (error) {
       const message = error instanceof Error ? error.message : "UNKNOWN_ERROR";
