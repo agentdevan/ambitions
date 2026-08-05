@@ -5,6 +5,7 @@ import type {
   IssueState,
 } from "./types.js";
 import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
+import { sha256Text, stableJson } from "./hash.js";
 
 interface LiveProject {
   id: string;
@@ -43,6 +44,24 @@ export interface LiveAuditResult {
   exceptions: ControlException[];
   metrics: Readonly<Record<string, number>>;
   repairs: number;
+  repairReceipts: LiveRepairReceipt[];
+  mappings: LiveObjectMapping[];
+}
+
+export interface LiveRepairReceipt {
+  canonicalKey: string;
+  operation: "issue-state-update";
+  beforeHash: string;
+  desiredHash: string;
+  resultHash: string;
+  verified: boolean;
+}
+
+export interface LiveObjectMapping {
+  canonicalKey: string;
+  linearId: string;
+  objectType: "project" | "issue";
+  desiredHash: string;
 }
 
 const milestones = [
@@ -213,6 +232,8 @@ export async function auditLiveWorkspace(
 
   const exceptions: ControlException[] = [];
   let repairs = 0;
+  const repairReceipts: LiveRepairReceipt[] = [];
+  const mappings: LiveObjectMapping[] = [];
   const projectsBySlug = new Map(
     projectData.projects.nodes
       .filter((project) => project.name.startsWith("Lifecycle — "))
@@ -297,6 +318,18 @@ export async function auditLiveWorkspace(
       );
       continue;
     }
+    mappings.push({
+      canonicalKey: project.canonicalKey,
+      linearId: live.id,
+      objectType: "project",
+      desiredHash: await sha256Text(
+        stableJson({
+          authorityCommit: desired.authorityCommit,
+          contractHash: desired.contractHash,
+          project,
+        }),
+      ),
+    });
     const names = new Set(
       live.projectMilestones.nodes.map((item) => item.name),
     );
@@ -356,9 +389,25 @@ export async function auditLiveWorkspace(
         );
         continue;
       }
+      mappings.push({
+        canonicalKey: task.canonicalKey,
+        linearId: liveIssue.id,
+        objectType: "issue",
+        desiredHash: await sha256Text(
+          stableJson({
+            authorityCommit: desired.authorityCommit,
+            contractHash: desired.contractHash,
+            task,
+          }),
+        ),
+      });
       const state = expectedState(liveIssue);
       if (state !== liveIssue.state.name) {
         if (mutationsEnabled) {
+          const beforeHash = await sha256Text(
+            stableJson({ state: liveIssue.state.name }),
+          );
+          const desiredHash = await sha256Text(stableJson({ state }));
           await client.request(
             `mutation($id: String!, $state: String!) {
               issueUpdate(id: $id, input: { stateId: $state }) { success }
@@ -371,7 +420,31 @@ export async function auditLiveWorkspace(
                   : "ceec6cae-b2f1-4223-8d8c-33c8a42da556",
             },
           );
+          const verified = await client.request<{
+            issue: { state: { name: IssueState } };
+          }>(`query($id: String!) { issue(id: $id) { state { name } } }`, {
+            id: liveIssue.id,
+          });
+          const resultHash = await sha256Text(
+            stableJson({ state: verified.issue.state.name }),
+          );
+          const matches = verified.issue.state.name === state;
+          repairReceipts.push({
+            canonicalKey: task.canonicalKey,
+            operation: "issue-state-update",
+            beforeHash,
+            desiredHash,
+            resultHash,
+            verified: matches,
+          });
           repairs += 1;
+          if (!matches)
+            exceptions.push(
+              exception(
+                task.canonicalKey,
+                `Issue state repair did not verify: expected ${state}, observed ${verified.issue.state.name}`,
+              ),
+            );
         } else {
           exceptions.push(
             exception(
@@ -427,6 +500,8 @@ export async function auditLiveWorkspace(
   return {
     exceptions,
     repairs,
+    repairReceipts,
+    mappings,
     metrics: {
       admittedProjects: admitted.length,
       liveLifecycleProjects: projectsBySlug.size,

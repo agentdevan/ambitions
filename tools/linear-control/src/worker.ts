@@ -157,6 +157,41 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     env.MUTATIONS_ENABLED,
   );
   const completed = new Date().toISOString();
+  for (const receipt of audit.repairReceipts) {
+    const id = await sha256Text(
+      `${runId}\0${receipt.canonicalKey}\0${receipt.operation}\0${receipt.desiredHash}`,
+    );
+    await env.CONTROL_DB.prepare(
+      "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    )
+      .bind(
+        id,
+        runId,
+        receipt.canonicalKey,
+        receipt.operation,
+        receipt.beforeHash,
+        receipt.desiredHash,
+        receipt.resultHash,
+        receipt.verified ? "verified" : "failed",
+        completed,
+        receipt.verified ? completed : null,
+        receipt.verified ? null : "POST_WRITE_VERIFICATION_FAILED",
+      )
+      .run();
+  }
+  for (const mapping of audit.mappings)
+    await env.CONTROL_DB.prepare(
+      "INSERT INTO object_mappings (canonical_key, linear_id, object_type, authority_commit, desired_hash, verified_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(canonical_key) DO UPDATE SET linear_id = excluded.linear_id, object_type = excluded.object_type, authority_commit = excluded.authority_commit, desired_hash = excluded.desired_hash, verified_at = excluded.verified_at",
+    )
+      .bind(
+        mapping.canonicalKey,
+        mapping.linearId,
+        mapping.objectType,
+        commit,
+        mapping.desiredHash,
+        completed,
+      )
+      .run();
   await env.CONTROL_DB.prepare(
     "UPDATE exceptions SET resolved_at = ? WHERE resolved_at IS NULL",
   )
