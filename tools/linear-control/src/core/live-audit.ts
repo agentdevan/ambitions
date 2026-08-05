@@ -174,7 +174,7 @@ export async function auditLiveWorkspace(
   const projectData = await client.request<{
     projects: { nodes: LiveProject[] };
   }>(`query {
-    projects(first: 100) {
+    projects(first: 50) {
       nodes {
         id name description status { id name }
         labels { nodes { id name } }
