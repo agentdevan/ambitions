@@ -4,6 +4,7 @@ import type {
   DesiredWorkspaceManifest,
   IssueState,
 } from "./types.js";
+import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
 
 interface LiveProject {
   id: string;
@@ -20,8 +21,10 @@ interface LiveIssue {
   identifier: string;
   title: string;
   description?: string | null;
-  state: { id: string; name: IssueState };
+  state: { id: string; name: IssueState; type: string };
   project?: { name: string } | null;
+  parent?: { id: string } | null;
+  labels: { nodes: Array<{ name: string }> };
   relations: {
     nodes: Array<{
       type: string;
@@ -58,6 +61,54 @@ const documentTitles = [
   "20 — Scope",
   "30 — Design",
   "40 — Implementation Plan",
+];
+
+const issueStates = [
+  "Backlog",
+  "Ready For Codex",
+  "Blocked",
+  "In Progress",
+  "In Review",
+  "Needs Repair",
+  "Done",
+  "Canceled",
+  "Duplicate",
+  "Won’t Do",
+];
+
+const initiatives = [
+  "Ambitions Constitution → Market-Leading App Store Launch",
+  "Onboarding + Reviews + Guidance",
+  "Source / Trust / Reference Infrastructure",
+  "QA + Release + App Store Readiness",
+  "Security + Privacy",
+  "Accessibility + Inclusive Interaction",
+  "Design System + Visual Language",
+  "iOS System Integrations",
+  "Accounts + Entitlements",
+  "Persistence + Local Data System",
+  "Private Life Runtime",
+  "Motion Behavior Layer",
+  "Search + Local Find/Act/Inspect",
+  "Global Capture",
+  "You Surface",
+  "Goals Surface",
+  "Time Surface",
+  "Today Surface",
+  "Native Stage OS + Shell",
+  "Ambitions Product Canon + Operating Model",
+];
+
+const allowedLabelPrefixes = [
+  "area:",
+  "work:",
+  "proof:",
+  "risk:",
+  "gate:",
+  "acceptance:",
+  "phase:",
+  "sync:",
+  "lifecycle:",
 ];
 
 function taskNumber(title: string): number | undefined {
@@ -113,6 +164,23 @@ export async function auditLiveWorkspace(
       }
     }
   }`);
+  const controlData = await client.request<{
+    workflowStates: { nodes: Array<{ name: string }> };
+    issueLabels: { nodes: Array<{ name: string }> };
+    projectLabels: { nodes: Array<{ name: string }> };
+    customViews: { nodes: Array<{ name: string }> };
+    templates: Array<{ name: string }>;
+    initiatives: { nodes: Array<{ name: string }> };
+    cycles: { nodes: Array<{ isActive: boolean; isNext: boolean }> };
+  }>(`query {
+    workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { name } }
+    issueLabels(first: 250) { nodes { name } }
+    projectLabels(first: 100) { nodes { name } }
+    customViews(first: 50) { nodes { name } }
+    templates { name }
+    initiatives(first: 50) { nodes { name } }
+    cycles(first: 10, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { isActive isNext } }
+  }`);
   const issues: LiveIssue[] = [];
   let after: string | null = null;
   do {
@@ -125,8 +193,10 @@ export async function auditLiveWorkspace(
       `query($after: String) {
         issues(first: 100, after: $after) {
           nodes {
-            id identifier title description state { id name }
+            id identifier title description state { id name type }
             project { name }
+            parent { id }
+            labels { nodes { name } }
             relations { nodes { type relatedIssue { id state { name } } } }
             inverseRelations { nodes { type issue { id state { name } } } }
           }
@@ -159,6 +229,59 @@ export async function auditLiveWorkspace(
     );
   }
 
+  const exactSetChecks: Array<{
+    key: string;
+    expected: readonly string[];
+    actual: string[];
+  }> = [
+    {
+      key: "workspace:issue-states",
+      expected: issueStates,
+      actual: controlData.workflowStates.nodes.map((item) => item.name),
+    },
+    {
+      key: "workspace:views",
+      expected: OPERATIONAL_VIEWS.map((item) => item.name),
+      actual: controlData.customViews.nodes.map((item) => item.name),
+    },
+    {
+      key: "workspace:templates",
+      expected: CONTROLLED_TEMPLATES,
+      actual: controlData.templates.map((item) => item.name),
+    },
+    {
+      key: "workspace:initiatives",
+      expected: initiatives,
+      actual: controlData.initiatives.nodes.map((item) => item.name),
+    },
+  ];
+  for (const check of exactSetChecks) {
+    const expected = new Set(check.expected);
+    const actual = new Set(check.actual);
+    for (const name of expected)
+      if (!actual.has(name))
+        exceptions.push(
+          exception(check.key, `Missing controlled object: ${name}`),
+        );
+    for (const name of actual)
+      if (!expected.has(name))
+        exceptions.push(
+          exception(check.key, `Unexpected legacy object: ${name}`),
+        );
+  }
+  for (const label of [
+    ...controlData.issueLabels.nodes,
+    ...controlData.projectLabels.nodes,
+  ])
+    if (!allowedLabelPrefixes.some((prefix) => label.name.startsWith(prefix)))
+      exceptions.push(
+        exception("workspace:labels", `Unexpected legacy label: ${label.name}`),
+      );
+  if (!controlData.cycles.nodes.some((cycle) => cycle.isActive))
+    exceptions.push(exception("workspace:cycles", "Current cycle is missing"));
+  if (!controlData.cycles.nodes.some((cycle) => cycle.isNext))
+    exceptions.push(exception("workspace:cycles", "Next cycle is missing"));
+
   const admitted = desired.projects.filter(
     (project) =>
       project.admission === "ready" &&
@@ -185,6 +308,14 @@ export async function auditLiveWorkspace(
             `Missing lifecycle milestone: ${name}`,
           ),
         );
+    for (const name of names)
+      if (!milestones.includes(name))
+        exceptions.push(
+          exception(
+            project.canonicalKey,
+            `Unexpected legacy milestone: ${name}`,
+          ),
+        );
     const titles = new Set(live.documents.nodes.map((item) => item.title));
     for (const title of documentTitles)
       if (!titles.has(title))
@@ -192,6 +323,14 @@ export async function auditLiveWorkspace(
           exception(
             project.canonicalKey,
             `Missing synchronized Document: ${title}`,
+          ),
+        );
+    for (const title of titles)
+      if (!documentTitles.includes(title))
+        exceptions.push(
+          exception(
+            project.canonicalKey,
+            `Unexpected Project Document: ${title}`,
           ),
         );
     for (const document of live.documents.nodes) {
@@ -255,6 +394,36 @@ export async function auditLiveWorkspace(
     }
   }
 
+  const canonicalIssueIds = new Set(
+    [...issuesByKey.values()].map((issue) => issue.id),
+  );
+  for (const issue of issues) {
+    if (issue.parent && canonicalIssueIds.has(issue.id))
+      exceptions.push(
+        exception(
+          issue.identifier,
+          "Canonical Plan Task is unexpectedly a sub-issue",
+        ),
+      );
+    if (
+      issue.state.type !== "completed" &&
+      issue.state.type !== "canceled" &&
+      issue.identifier !== "AMB-2085" &&
+      !canonicalIssueIds.has(issue.id)
+    )
+      exceptions.push(
+        exception(
+          issue.identifier,
+          "Active Issue is not mapped to a canonical Plan Task",
+        ),
+      );
+    for (const label of issue.labels.nodes)
+      if (!allowedLabelPrefixes.some((prefix) => label.name.startsWith(prefix)))
+        exceptions.push(
+          exception(issue.identifier, `Issue uses legacy label: ${label.name}`),
+        );
+  }
+
   return {
     exceptions,
     repairs,
@@ -268,6 +437,9 @@ export async function auditLiveWorkspace(
       livePlanTasks: issuesByKey.size,
       driftExceptions: exceptions.length,
       repairs,
+      controlledInitiatives: controlData.initiatives.nodes.length,
+      controlledViews: controlData.customViews.nodes.length,
+      controlledTemplates: controlData.templates.length,
     },
   };
 }
