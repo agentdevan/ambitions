@@ -7,6 +7,15 @@ import type { DesiredWorkspaceManifest } from "./core/types.js";
 
 const encoder = new TextEncoder();
 
+async function executeD1Batches(
+  database: D1Database,
+  statements: D1PreparedStatement[],
+  batchSize = 50,
+): Promise<void> {
+  for (let index = 0; index < statements.length; index += batchSize)
+    await database.batch(statements.slice(index, index + batchSize));
+}
+
 function json(value: unknown, status = 200): Response {
   return Response.json(value, {
     status,
@@ -157,14 +166,14 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     env.MUTATIONS_ENABLED,
   );
   const completed = new Date().toISOString();
-  for (const receipt of audit.repairReceipts) {
-    const id = await sha256Text(
-      `${runId}\0${receipt.canonicalKey}\0${receipt.operation}\0${receipt.desiredHash}`,
-    );
-    await env.CONTROL_DB.prepare(
-      "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    )
-      .bind(
+  const receiptStatements = await Promise.all(
+    audit.repairReceipts.map(async (receipt) => {
+      const id = await sha256Text(
+        `${runId}\0${receipt.canonicalKey}\0${receipt.operation}\0${receipt.desiredHash}`,
+      );
+      return env.CONTROL_DB.prepare(
+        "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      ).bind(
         id,
         runId,
         receipt.canonicalKey,
@@ -176,35 +185,36 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
         completed,
         receipt.verified ? completed : null,
         receipt.verified ? null : "POST_WRITE_VERIFICATION_FAILED",
-      )
-      .run();
-  }
-  for (const mapping of audit.mappings)
-    await env.CONTROL_DB.prepare(
+      );
+    }),
+  );
+  await executeD1Batches(env.CONTROL_DB, receiptStatements);
+  const mappingStatements = audit.mappings.map((mapping) =>
+    env.CONTROL_DB.prepare(
       "INSERT INTO object_mappings (canonical_key, linear_id, object_type, authority_commit, desired_hash, verified_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(canonical_key) DO UPDATE SET linear_id = excluded.linear_id, object_type = excluded.object_type, authority_commit = excluded.authority_commit, desired_hash = excluded.desired_hash, verified_at = excluded.verified_at",
-    )
-      .bind(
-        mapping.canonicalKey,
-        mapping.linearId,
-        mapping.objectType,
-        commit,
-        mapping.desiredHash,
-        completed,
-      )
-      .run();
+    ).bind(
+      mapping.canonicalKey,
+      mapping.linearId,
+      mapping.objectType,
+      commit,
+      mapping.desiredHash,
+      completed,
+    ),
+  );
+  await executeD1Batches(env.CONTROL_DB, mappingStatements);
   await env.CONTROL_DB.prepare(
     "UPDATE exceptions SET resolved_at = ? WHERE resolved_at IS NULL",
   )
     .bind(completed)
     .run();
-  for (const item of audit.exceptions) {
-    const id = await sha256Text(
-      `${item.canonicalKey ?? "workspace"}\0${item.summary}`,
-    );
-    await env.CONTROL_DB.prepare(
-      "INSERT INTO exceptions (id, canonical_key, category, severity, summary, first_seen_at, last_seen_at, resolved_at) VALUES (?, ?, ?, ?, ?, ?, ?, NULL) ON CONFLICT(id) DO UPDATE SET severity = excluded.severity, summary = excluded.summary, last_seen_at = excluded.last_seen_at, resolved_at = NULL",
-    )
-      .bind(
+  const exceptionStatements = await Promise.all(
+    audit.exceptions.map(async (item) => {
+      const id = await sha256Text(
+        `${item.canonicalKey ?? "workspace"}\0${item.summary}`,
+      );
+      return env.CONTROL_DB.prepare(
+        "INSERT INTO exceptions (id, canonical_key, category, severity, summary, first_seen_at, last_seen_at, resolved_at) VALUES (?, ?, ?, ?, ?, ?, ?, NULL) ON CONFLICT(id) DO UPDATE SET severity = excluded.severity, summary = excluded.summary, last_seen_at = excluded.last_seen_at, resolved_at = NULL",
+      ).bind(
         id,
         item.canonicalKey ?? null,
         item.category,
@@ -212,9 +222,10 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
         item.summary,
         completed,
         completed,
-      )
-      .run();
-  }
+      );
+    }),
+  );
+  await executeD1Batches(env.CONTROL_DB, exceptionStatements);
   await env.CONTROL_DB.prepare(
     "INSERT INTO metric_snapshots (id, captured_at, authority_commit, payload_json) VALUES (?, ?, ?, ?)",
   )
