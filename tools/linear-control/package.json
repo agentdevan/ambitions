@@ -18,6 +18,8 @@
     "check": "tsx src/cli.ts check",
     "plan": "tsx src/cli.ts plan",
     "live-check": "tsx src/cli.ts live-check",
+    "apply": "tsx src/cli.ts apply",
+    "replay": "tsx src/cli.ts replay",
     "sync-documents": "tsx src/sync-documents.ts",
     "deploy:dry-run": "wrangler deploy --dry-run",
     "deploy": "wrangler deploy"

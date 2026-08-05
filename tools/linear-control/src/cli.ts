@@ -6,6 +6,7 @@ import { compileRepository } from "./core/compiler.js";
 import { stableJson } from "./core/hash.js";
 import { LinearClient } from "./adapters/linear.js";
 import { auditLiveWorkspace } from "./core/live-audit.js";
+import { createHmac, randomUUID } from "node:crypto";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(here, "../../..");
@@ -100,8 +101,52 @@ async function main(): Promise<void> {
     if (result.exceptions.length > 0) process.exitCode = 2;
     return;
   }
-  if (command === "apply" || command === "replay")
-    throw new Error(`${command.toUpperCase()}_REQUIRES_HOSTED_LEDGER`);
+  if (command === "apply") {
+    const token = process.env.LINEAR_API_TOKEN;
+    if (!token) throw new Error("LINEAR_API_TOKEN_REQUIRED");
+    const result = await auditLiveWorkspace(
+      new LinearClient(token, process.env.LINEAR_API_URL),
+      manifest,
+      true,
+    );
+    console.log(
+      JSON.stringify(
+        {
+          status: result.exceptions.length === 0 ? "converged" : "drift",
+          metrics: result.metrics,
+          repairs: result.repairs,
+          exceptions: result.exceptions,
+        },
+        null,
+        2,
+      ),
+    );
+    if (result.exceptions.length > 0) process.exitCode = 2;
+    return;
+  }
+  if (command === "replay") {
+    const deliveryId = process.argv[3];
+    const baseUrl = process.env.CONTROL_URL;
+    const secret = process.env.CONTROL_ADMIN_SECRET;
+    if (!deliveryId) throw new Error("DELIVERY_ID_REQUIRED");
+    if (!baseUrl) throw new Error("CONTROL_URL_REQUIRED");
+    if (!secret) throw new Error("CONTROL_ADMIN_SECRET_REQUIRED");
+    const body = JSON.stringify({ deliveryId });
+    const signature = createHmac("sha256", secret).update(body).digest("hex");
+    const response = await fetch(new URL("/replay", baseUrl), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-control-signature": signature,
+        "x-delivery-id": `cli-replay:${randomUUID()}`,
+      },
+      body,
+    });
+    const result: unknown = await response.json();
+    console.log(JSON.stringify(result, null, 2));
+    if (!response.ok) process.exitCode = 2;
+    return;
+  }
   throw new Error(`UNKNOWN_COMMAND:${command}`);
 }
 

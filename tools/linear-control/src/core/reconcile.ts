@@ -15,10 +15,18 @@ export async function planReconciliation(
   const exceptions: ReconciliationPlan["exceptions"] extends readonly (infer T)[]
     ? T[]
     : never = [];
+  const operationalSlugs = new Set(
+    desired.schedule.flatMap((group) => group.projectSlugs),
+  );
   const desiredTasks = new Map(
-    desired.projects.flatMap((project) =>
-      project.tasks.map((task) => [task.canonicalKey, task] as const),
-    ),
+    desired.projects
+      .filter(
+        (project) =>
+          project.admission === "ready" && operationalSlugs.has(project.slug),
+      )
+      .flatMap((project) =>
+        project.tasks.map((task) => [task.canonicalKey, task] as const),
+      ),
   );
   const currentByKey = new Map(
     current.issues
