@@ -186,6 +186,13 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
       completed,
       event.deliveryId,
     ),
+    ...(status === "converged"
+      ? [
+          env.CONTROL_DB.prepare(
+            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status = 'queued' AND received_at < ?",
+          ).bind(completed, started),
+        ]
+      : []),
   ]);
   console.log(
     JSON.stringify({
