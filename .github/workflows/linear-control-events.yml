@@ -1,0 +1,45 @@
+name: Linear Control Events
+
+on:
+  workflow_run:
+    workflows: [Code Quality]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: linear-control-events-${{ github.event.workflow_run.head_sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    environment: Ambitions Linear Control
+    env:
+      CONTROL_URL: ${{ secrets.LINEAR_CONTROL_URL }}
+      CONTROL_SECRET: ${{ secrets.LINEAR_CONTROL_GITHUB_SECRET }}
+    steps:
+      - name: Deliver signed repository evidence
+        shell: bash
+        env:
+          AUTHORITY_COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion || 'manual' }}
+          DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          test -n "$CONTROL_URL"
+          test -n "$CONTROL_SECRET"
+          payload="$(jq -cn \
+            --arg commit "$AUTHORITY_COMMIT" \
+            --arg conclusion "$CONCLUSION" \
+            --arg repository "$GITHUB_REPOSITORY" \
+            '{schemaVersion:1,kind:"code-quality",authorityCommit:$commit,conclusion:$conclusion,repository:$repository}')"
+          signature="$(printf '%s' "$payload" | openssl dgst -sha256 -hmac "$CONTROL_SECRET" -hex | awk '{print $2}')"
+          curl --fail-with-body --silent --show-error \
+            --request POST "$CONTROL_URL/events/github" \
+            --header "content-type: application/json" \
+            --header "x-github-delivery: $DELIVERY_ID" \
+            --header "x-hub-signature-256: sha256=$signature" \
+            --data-binary "$payload"

@@ -1,0 +1,36 @@
+{
+  "name": "@ambitions/linear-control",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "lint": "eslint src test --max-warnings=0",
+    "format": "prettier --write src test *.json *.jsonc *.ts",
+    "format:check": "prettier --check src test *.json *.jsonc *.ts",
+    "cf-types": "wrangler types",
+    "compile": "tsx src/cli.ts compile",
+    "check": "tsx src/cli.ts check",
+    "plan": "tsx src/cli.ts plan",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260804.1",
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.1",
+    "vitest": "^4.0.15",
+    "wrangler": "4.119.0"
+  }
+}

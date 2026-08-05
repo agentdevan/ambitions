@@ -19,6 +19,7 @@ jobs:
     outputs:
       native: ${{ steps.scope.outputs.native }}
       source_atlas: ${{ steps.scope.outputs.source_atlas }}
+      linear_control: ${{ steps.scope.outputs.linear_control }}
       shell: ${{ steps.scope.outputs.shell }}
       workflow: ${{ steps.scope.outputs.workflow }}
       base: ${{ steps.scope.outputs.base }}
@@ -44,11 +45,13 @@ jobs:
           has() { rg -q "$1" "$paths"; }
           has '^(Native/|Packages/|project\.yml$|Package\.swift$|Package\.resolved$|scripts/ambitions-xcode)' && native=true || native=false
           has '^(tools/source-atlas/|requirements-ci\.txt$)' && source_atlas=true || source_atlas=false
+          has '^(tools/linear-control/|docs/product-development/linear-realtime-lifecycle-control/)' && linear_control=true || linear_control=false
           has '^scripts/.*\.sh$' && shell=true || shell=false
           has '^\.github/workflows/' && workflow=true || workflow=false
           {
             echo "native=$native"
             echo "source_atlas=$source_atlas"
+            echo "linear_control=$linear_control"
             echo "shell=$shell"
             echo "workflow=$workflow"
             echo "base=$base"
@@ -150,9 +153,32 @@ jobs:
         shell: bash
         run: scripts/ambitions-xcode-build-for-testing.sh --batch code-quality --scheme AmbitionsSmoke --timeout 35m --kill-after 120s
 
+  linear-control:
+    needs: changes
+    if: needs.changes.outputs.linear_control == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/linear-control
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tools/linear-control/package-lock.json
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run cf-types && git diff --exit-code -- worker-configuration.d.ts
+      - run: npm run compile && git diff --exit-code -- generated/desired-workspace.json
+      - run: npm run deploy:dry-run
+
   Code-Quality:
     name: Code Quality
-    needs: [fast-checks, ios-build-and-tests]
+    needs: [fast-checks, ios-build-and-tests, linear-control]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -160,6 +186,8 @@ jobs:
         env:
           FAST: ${{ needs.fast-checks.result }}
           IOS: ${{ needs.ios-build-and-tests.result }}
+          LINEAR_CONTROL: ${{ needs.linear-control.result }}
         run: |
           test "$FAST" = success
           test "$IOS" = success || test "$IOS" = skipped
+          test "$LINEAR_CONTROL" = success || test "$LINEAR_CONTROL" = skipped
