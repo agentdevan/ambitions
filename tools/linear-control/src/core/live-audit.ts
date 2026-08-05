@@ -135,6 +135,21 @@ function taskNumber(title: string): number | undefined {
   return match ? Number(match[1]) : undefined;
 }
 
+export function fencedTextBodies(content: string): string[] {
+  const lines = content.split("\n");
+  const bodies: string[] = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const opening = /^(`{3,}|~{3,})text$/.exec(lines[index]!);
+    if (!opening) continue;
+    const fence = opening[1]!;
+    const closing = lines.indexOf(fence, index + 1);
+    if (closing === -1) continue;
+    bodies.push(lines.slice(index + 1, closing).join("\n"));
+    index = closing;
+  }
+  return bodies;
+}
+
 function expectedState(issue: LiveIssue): IssueState {
   if (
     [
@@ -380,6 +395,44 @@ export async function auditLiveWorkspace(
             `Stale authority metadata in ${document.title}`,
           ),
         );
+      const expectedDocuments =
+        document.title === "10 — Research"
+          ? project.documents.filter((item) => item.kind === "research")
+          : document.title === "20 — Scope"
+            ? project.documents.filter((item) => item.kind === "scope")
+            : document.title === "30 — Design"
+              ? project.documents.filter((item) => item.kind === "design")
+              : document.title === "40 — Implementation Plan"
+                ? project.documents.filter(
+                    (item) =>
+                      item.kind === "plan" ||
+                      (project.slug === "linear-realtime-lifecycle-control" &&
+                        (item.kind === "tasks" ||
+                          item.kind === "verification")),
+                  )
+                : [];
+      if (expectedDocuments.length > 0) {
+        const bodyHashes = new Set(
+          await Promise.all(
+            fencedTextBodies(content).flatMap((body) => [
+              sha256Text(body),
+              sha256Text(`${body}\n`),
+            ]),
+          ),
+        );
+        for (const expected of expectedDocuments)
+          if (
+            !content.includes(expected.path) ||
+            !content.includes(expected.sha256) ||
+            !bodyHashes.has(expected.sha256)
+          )
+            exceptions.push(
+              exception(
+                project.canonicalKey,
+                `Repository body/hash drift in ${document.title}: ${expected.path}`,
+              ),
+            );
+      }
     }
     for (const task of project.tasks) {
       const liveIssue = issuesByKey.get(task.canonicalKey);
@@ -463,6 +516,32 @@ export async function auditLiveWorkspace(
       )
         exceptions.push(
           exception(task.canonicalKey, "Plan-task authority envelope is stale"),
+        );
+      const group = desired.schedule.find((item) =>
+        item.projectSlugs.includes(project.slug),
+      );
+      const taskBodyHashes = new Set(
+        await Promise.all(
+          fencedTextBodies(liveIssue.description ?? "").map((body) =>
+            sha256Text(body),
+          ),
+        ),
+      );
+      const expectedTaskHash = await sha256Text(task.body);
+      if (
+        !taskBodyHashes.has(expectedTaskHash) ||
+        !liveIssue.description?.includes(
+          `Global portfolio rank: ${task.globalRank}`,
+        ) ||
+        !liveIssue.description.includes(
+          `Portfolio execution group: ${group?.id ?? "unsequenced"}`,
+        )
+      )
+        exceptions.push(
+          exception(
+            task.canonicalKey,
+            "Plan-task body, global rank, or execution group is stale",
+          ),
         );
     }
   }
