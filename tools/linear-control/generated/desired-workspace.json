@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "5c61dc525dff00f2b2f939deb5b06d634319bfd0",
+  "authorityCommit": "6885ee1f9d9dddc044302eff3d50a7e772868d76",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -526,44 +526,236 @@
           "path": "docs/product-development/adaptive-skills-and-pathways/research.md",
           "revision": "1",
           "status": "approved",
-          "sha256": "8c657048106811f4fc43c4a1c916495353643c80ac1339c9d16a190bd47cb271",
-          "byteLength": 54141
+          "sha256": "dc4f76e36020e637a108c8f69be6f5fef5cfa30a0ade99fd8da2dfd1e6f5e600",
+          "byteLength": 55202
+        },
+        {
+          "kind": "scope",
+          "path": "docs/product-development/adaptive-skills-and-pathways/scope.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "0d9847e4e921d2414ecbe1998c5d98df5b0cd07b5d16db09d96601cf30a2df08",
+          "byteLength": 10356
+        },
+        {
+          "kind": "design",
+          "path": "docs/product-development/adaptive-skills-and-pathways/design.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "67690e9da6d02616742caf37e8c9258944828dd0b093dc32080d582e6d45df42",
+          "byteLength": 10545
+        },
+        {
+          "kind": "plan",
+          "path": "docs/product-development/adaptive-skills-and-pathways/implementation/plan.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "15c830b5af15d0c8f34236eb5d83c699ec1ae7919c450fbc73aeac0e46dc7385",
+          "byteLength": 3577
+        },
+        {
+          "kind": "tasks",
+          "path": "docs/product-development/adaptive-skills-and-pathways/implementation/tasks.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "6376fa9c3415d7e4e574372163ce0e5c810f194c3219bdff4d916e23e5729e4d",
+          "byteLength": 4609
+        },
+        {
+          "kind": "verification",
+          "path": "docs/product-development/adaptive-skills-and-pathways/implementation/verification.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "c04544b120367e3d0f06913c04191d1838dfa23acea038c913865b132a6e72f5",
+          "byteLength": 3024
         }
       ],
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "T1",
+          "canonicalKey": "adaptive-skills-and-pathways:T1",
+          "title": "Add `docs/canon/specifications/journeys/adaptive-skills-and-pathways.md` and register it in `docs/canon/MANIFEST.toml`",
+          "body": "1. Add `docs/canon/specifications/journeys/adaptive-skills-and-pathways.md` and register it in `docs/canon/MANIFEST.toml`. Dependency: none. Trace: Design canon journey map, REQ-001 through REQ-016. Acceptance: one owner/handoff/degradation/non-claim row exists for every portfolio edge, links resolve to approved child authority, and no child behavior is restated or widened. Tests: `python3 scripts/ambitions-canon.py check` and canon compiler tests. Rollback/stop: remove the integration journey if it creates duplicate product authority or requires an unresolved child decision.\n   Frontend: none — this task changes canon integration mapping only and creates no production interface.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 1,
+          "dependencies": [],
+          "sharedPaths": [
+            "docs/canon/MANIFEST.toml",
+            "docs/canon/specifications/journeys/adaptive-skills-and-pathways.md",
+            "python3 scripts/ambitions-canon.py check"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "`python3 scripts/ambitions-canon.py check` and canon compiler tests. Rollback/stop: remove the integration journey if it creates duplicate product authority or requires an unresolved child decision."
+            ],
+            "rollback": "remove the integration journey if it creates duplicate product authority or requires an unresolved child decision."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 268,
+          "parallelGroup": "G19"
+        },
+        {
+          "id": "T2",
+          "canonicalKey": "adaptive-skills-and-pathways:T2",
+          "title": "Add `Native/AmbitionsTests/Support/AdaptiveSkillsPathwaysJourneyFixture.swift` with deterministic, separately constructed public and private astronaut-style scenario inputs",
+          "body": "2. Add `Native/AmbitionsTests/Support/AdaptiveSkillsPathwaysJourneyFixture.swift` with deterministic, separately constructed public and private astronaut-style scenario inputs. Dependency: Task 1. Trace: Design test-only acceptance harness, REQ-002 through REQ-005 and REQ-012 through REQ-014. Acceptance: fixture IDs, revisions, clocks, provenance, authority, freshness, sensitivity, and failure variants are explicit; no fixture becomes production seed data. Tests: `Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift`. Rollback/stop: stop if a required child type is absent or incompatible; do not add an umbrella compatibility model.\n   Frontend: none — this task creates test fixtures only and does not modify application UI.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 2,
+          "dependencies": [
+            "adaptive-skills-and-pathways:T1"
+          ],
+          "sharedPaths": [
+            "Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift",
+            "Native/AmbitionsTests/Support/AdaptiveSkillsPathwaysJourneyFixture.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "`Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift`. Rollback/stop: stop if a required child type is absent or incompatible; do not add an umbrella compatibility model."
+            ],
+            "rollback": "stop if a required child type is absent or incompatible; do not add an umbrella compatibility model."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 269,
+          "parallelGroup": "G19"
+        },
+        {
+          "id": "T3",
+          "canonicalKey": "adaptive-skills-and-pathways:T3",
+          "title": "Add `Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift` for capability, recommendation, adoption, Goal Path, comparison, scheduling, and pivot handoffs",
+          "body": "3. Add `Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift` for capability, recommendation, adoption, Goal Path, comparison, scheduling, and pivot handoffs. Dependency: Tasks 1-2. Trace: primary flows and recovery, REQ-003 and REQ-005 through REQ-013. Acceptance: every receiver revalidates the frozen handoff, no mutation occurs before the child-owned confirmation boundary, and missing/stale/conflicted/canceled inputs degrade with exact reasons. Tests: focused `AdaptiveSkillsPathwaysIntegrationTests`. Rollback/stop: stop on any child authority ambiguity rather than bypassing its command or projection.\n   Frontend: none — this task verifies runtime contracts without creating or modifying a rendered interface.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 3,
+          "dependencies": [
+            "adaptive-skills-and-pathways:T1"
+          ],
+          "sharedPaths": [
+            "Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "focused `AdaptiveSkillsPathwaysIntegrationTests`. Rollback/stop: stop on any child authority ambiguity rather than bypassing its command or projection."
+            ],
+            "rollback": "stop on any child authority ambiguity rather than bypassing its command or projection."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 270,
+          "parallelGroup": "G19"
+        },
+        {
+          "id": "T4",
+          "canonicalKey": "adaptive-skills-and-pathways:T4",
+          "title": "Add `Native/AmbitionsTests/LocalRuntimeOS/Boundary/AdaptiveSkillsPathwaysAuthorityBoundaryTests.swift` and extend privacy/replay audits for cross-portfolio handoffs",
+          "body": "4. Add `Native/AmbitionsTests/LocalRuntimeOS/Boundary/AdaptiveSkillsPathwaysAuthorityBoundaryTests.swift` and extend privacy/replay audits for cross-portfolio handoffs. Dependency: Tasks 1-3. Trace: privacy, deletion, replay, REQ-001 through REQ-004 and REQ-010 through REQ-014. Acceptance: fixed public IDs are the only outbound reference inputs; private and derived-sensitive fields never egress; correction/deletion changes future influence; replay is equivalent; and no umbrella owner/store/score exists. Tests: focused boundary test plus `scripts/source-atlas-no-private-graph-egress-audit.py`, `scripts/ambitions-local-first-boundary-scan.py`, and runtime direct-write audit. Rollback/stop: fail closed and keep the portfolio unaccepted on any boundary, lineage, or replay defect.\n   Frontend: none — this task is privacy, authority, and replay verification with no UI change.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 4,
+          "dependencies": [
+            "adaptive-skills-and-pathways:T1"
+          ],
+          "sharedPaths": [
+            "Native/AmbitionsTests/LocalRuntimeOS/Boundary/AdaptiveSkillsPathwaysAuthorityBoundaryTests.swift",
+            "scripts/ambitions-local-first-boundary-scan.py",
+            "scripts/source-atlas-no-private-graph-egress-audit.py"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "focused boundary test plus `scripts/source-atlas-no-private-graph-egress-audit.py`, `scripts/ambitions-local-first-boundary-scan.py`, and runtime direct-write audit. Rollback/stop: fail closed and keep the portfolio unaccepted on any boundary, lineage, or replay defect."
+            ],
+            "rollback": "fail closed and keep the portfolio unaccepted on any boundary, lineage, or replay defect."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 271,
+          "parallelGroup": "G19"
+        },
+        {
+          "id": "T5",
+          "canonicalKey": "adaptive-skills-and-pathways:T5",
+          "title": "Add `Native/AmbitionsUITests/AdaptiveSkillsPathwaysJourneyUITests.swift` after all child visual gates and focused UI suites pass",
+          "body": "5. Add `Native/AmbitionsUITests/AdaptiveSkillsPathwaysJourneyUITests.swift` after all child visual gates and focused UI suites pass. Dependency: Tasks 1-4. Trace: existing-surface journey and accessibility, REQ-005 through REQ-011 and REQ-015. Acceptance: the test navigates only approved child-owned Goals, You, Time, Today, and Trust routes; verifies visible non-claims, degradation, focus, re-entry, and correction; and adds no production route or UI source. Tests: focused UI test on a named simulator followed by physical-device accessibility evidence. Rollback/stop: do not add UI or weaken child assertions to make the journey pass.\n   Frontend: none — this is verification-only coverage of already approved child interfaces and introduces no production frontend behavior.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 5,
+          "dependencies": [
+            "adaptive-skills-and-pathways:T1"
+          ],
+          "sharedPaths": [
+            "Native/AmbitionsUITests/AdaptiveSkillsPathwaysJourneyUITests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "focused UI test on a named simulator followed by physical-device accessibility evidence. Rollback/stop: do not add UI or weaken child assertions to make the journey pass."
+            ],
+            "rollback": "do not add UI or weaken child assertions to make the journey pass."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 272,
+          "parallelGroup": "G19"
+        },
+        {
+          "id": "T6",
+          "canonicalKey": "adaptive-skills-and-pathways:T6",
+          "title": "Run the complete integration evidence matrix and close out the portfolio Project",
+          "body": "6. Run the complete integration evidence matrix and close out the portfolio Project. Dependency: Tasks 1-5. Trace: all Design verification lanes and REQ-001 through REQ-016. Acceptance: automated, canon, build, runtime, privacy, replay, deletion, migration, performance, accessibility, and device requirements pass with exact evidence ceilings; every child dependency is accepted; and no external, release, or App Store outcome is claimed. Tests: run `implementation/verification.md` in full. Rollback/stop: keep the Project blocked or Needs Repair while any child dependency or required proof remains incomplete.\n   Frontend: none — this task records and verifies evidence only; it does not change application presentation.",
+          "projectSlug": "adaptive-skills-and-pathways",
+          "order": 6,
+          "dependencies": [
+            "adaptive-skills-and-pathways:T1"
+          ],
+          "sharedPaths": [
+            "implementation/verification.md"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [
+              "run `implementation/verification.md` in full. Rollback/stop: keep the Project blocked or Needs Repair while any child dependency or required proof remains incomplete."
+            ],
+            "rollback": "keep the Project blocked or Needs Repair while any child dependency or required proof remains incomplete."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required",
+          "globalRank": 273,
+          "parallelGroup": "G19"
+        }
+      ],
       "projectDependencies": [],
-      "sharedPaths": [],
+      "sharedPaths": [
+        "Native/AmbitionsTests/LocalRuntimeOS/Boundary/AdaptiveSkillsPathwaysAuthorityBoundaryTests.swift",
+        "Native/AmbitionsTests/Runtime/AdaptiveSkillsPathwaysIntegrationTests.swift",
+        "Native/AmbitionsTests/Support/AdaptiveSkillsPathwaysJourneyFixture.swift",
+        "Native/AmbitionsUITests/AdaptiveSkillsPathwaysJourneyUITests.swift",
+        "docs/canon/MANIFEST.toml",
+        "docs/canon/specifications/journeys/adaptive-skills-and-pathways.md",
+        "implementation/verification.md",
+        "python3 scripts/ambitions-canon.py check",
+        "scripts/ambitions-local-first-boundary-scan.py",
+        "scripts/source-atlas-no-private-graph-egress-audit.py"
+      ],
       "frontendAudit": {
-        "status": "blocked",
-        "visualGate": "unclassified"
+        "status": "passed",
+        "visualGate": "not-required"
       },
-      "admission": "pending",
-      "admissionBlockers": [
-        "scope.md:missing",
-        "design.md:missing",
-        "implementation/plan.md:missing",
-        "implementation/tasks.md:missing",
-        "implementation/verification.md:missing",
-        "implementation/tasks.md:no-tasks",
-        "scope.md:frontend-field=Surface impact:missing",
-        "design.md:frontend-field=Surface impact:missing",
-        "scope.md:frontend-field=IA/navigation:missing",
-        "design.md:frontend-field=IA/navigation:missing",
-        "scope.md:frontend-field=Assets/iconography:missing",
-        "design.md:frontend-field=Assets/iconography:missing",
-        "scope.md:frontend-field=Visual language:missing",
-        "design.md:frontend-field=Visual language:missing",
-        "scope.md:frontend-field=Motion:missing",
-        "design.md:frontend-field=Motion:missing",
-        "scope.md:frontend-field=Copy/localization:missing",
-        "design.md:frontend-field=Copy/localization:missing",
-        "scope.md:frontend-field=Accessibility:missing",
-        "design.md:frontend-field=Accessibility:missing",
-        "scope.md:frontend-field=Visual proof:missing",
-        "design.md:frontend-field=Visual proof:missing",
-        "design.md:frontend-field=Visual gate:missing",
-        "design.md:frontend-contract-missing"
-      ]
+      "admission": "ready",
+      "admissionBlockers": []
     },
     {
       "slug": "capability-continuity-foundation",
@@ -9530,7 +9722,21 @@
         "life-branch-reconciliation:T7",
         "life-branch-reconciliation:T8"
       ]
+    },
+    {
+      "id": "G19",
+      "projectSlugs": [
+        "adaptive-skills-and-pathways"
+      ],
+      "taskKeys": [
+        "adaptive-skills-and-pathways:T1",
+        "adaptive-skills-and-pathways:T2",
+        "adaptive-skills-and-pathways:T3",
+        "adaptive-skills-and-pathways:T4",
+        "adaptive-skills-and-pathways:T5",
+        "adaptive-skills-and-pathways:T6"
+      ]
     }
   ],
-  "contractHash": "d8b68112fa0275f26047baaea585229fb2c0e4c4cb42f3d45c9b737db3499c98"
+  "contractHash": "e24fd0277910e9986e8d303d88cb6aa8fe697b4a1dc607ee1e803c165c08e01c"
 }
