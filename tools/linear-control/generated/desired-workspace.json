@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "68372c6a4ee19806116ed57b221f95bc6caebfde",
+  "authorityCommit": "5c61dc525dff00f2b2f939deb5b06d634319bfd0",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -9532,5 +9532,5 @@
       ]
     }
   ],
-  "contractHash": "31ac88e64179b0f047aca2544781d6911f9d161cc31a1f31b512edfc8b48e620"
+  "contractHash": "d8b68112fa0275f26047baaea585229fb2c0e4c4cb42f3d45c9b737db3499c98"
 }
