@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "6885ee1f9d9dddc044302eff3d50a7e772868d76",
+  "authorityCommit": "05178082f28eca277d6cfce0b0469448bc2e2c8c",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -7697,7 +7697,7 @@
           "path": "docs/product-development/public-reference-knowledge-foundation/design.md",
           "revision": "1",
           "status": "approved",
-          "sha256": "cd67cbd7c875d6ee3bd9da4c54469bee8fab2b79d33cd61d15690dfa775710f1",
+          "sha256": "51a933b2c19efe47026550f814d2440c7b5a36fb05a42343307afe49fa5bbbac",
           "byteLength": 21027
         },
         {
@@ -7713,7 +7713,7 @@
           "path": "docs/product-development/public-reference-knowledge-foundation/implementation/tasks.md",
           "revision": "1",
           "status": "groomed",
-          "sha256": "7e1bc6891615c7be0c6403c747ff41510b8d2bc3caf55893786013f8859e1245",
+          "sha256": "9cd62c351e379c00a8b1d41680af6e62e50578d959d5d7102bc0be0bcc36f32f",
           "byteLength": 4417
         },
         {
@@ -7809,7 +7809,7 @@
           "id": "T4",
           "canonicalKey": "public-reference-knowledge-foundation:T4",
           "title": "Implement `PublicReferenceQueryService.swift`,",
-          "body": "4. Implement `PublicReferenceQueryService.swift`,\n   `PublicReferenceInspectionProjection.swift`, and\n   `PublicReferenceInspectionView.swift`. Dependency: Task 3. Trace: inspection\n   and accessibility, REQ-001, REQ-005, REQ-009, REQ-011. Acceptance: clients\n   can inspect authority, retrieval, freshness, limits, conflict, and recheck\n   triggers without badges, private context, or a new root surface. Tests:\n   `Native/AmbitionsTests/LocalRuntimeOS/Inspection/PublicReferenceInspectionProjectionTests.swift`\n   and `Native/AmbitionsUITests/PublicReferenceInspectionUITests.swift`.\n   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.",
+          "body": "4. Implement `PublicReferenceQueryService.swift`,\n   `PublicReferenceInspectionProjection.swift`, and\n   `PublicReferenceInspectionView.swift`. Dependency: Task 3. Trace: inspection\n   and accessibility, REQ-001, REQ-005, REQ-009, REQ-011. Acceptance: clients\n   can inspect authority, retrieval, freshness, limits, conflict, and recheck\n   triggers without badges, private context, or a new root surface. Tests:\n   `Native/AmbitionsTests/LocalRuntimeOS/Inspection/PublicReferenceInspectionProjectionTests.swift`\n   and `Native/AmbitionsUITests/PublicReferenceInspectionUITests.swift`.\n   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: approved. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.",
           "projectSlug": "public-reference-knowledge-foundation",
           "order": 4,
           "dependencies": [
@@ -7829,7 +7829,7 @@
             "rollback": "Stop and preserve the last verified state."
           },
           "frontendImpact": "affected",
-          "visualGate": "required",
+          "visualGate": "approved",
           "globalRank": 18,
           "parallelGroup": "G01"
         },
@@ -7902,7 +7902,7 @@
       ],
       "frontendAudit": {
         "status": "passed",
-        "visualGate": "required",
+        "visualGate": "approved",
         "firstFrontendTaskKey": "public-reference-knowledge-foundation:T4"
       },
       "admission": "ready",
@@ -9738,5 +9738,5 @@
       ]
     }
   ],
-  "contractHash": "e24fd0277910e9986e8d303d88cb6aa8fe697b4a1dc607ee1e803c165c08e01c"
+  "contractHash": "ec0c930eeed8842d67f05eb5603300c1793b8de023b8d82e8957729ca78c9aeb"
 }
