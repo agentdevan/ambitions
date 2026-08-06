@@ -34,7 +34,7 @@ const projectData = await client.request<{
     }>;
   };
 }>(`query {
-  projects(first: 50, filter: { name: { startsWith: "Lifecycle — " }, state: { nin: ["completed", "canceled"] } }) {
+  projects(first: 50, filter: { name: { startsWith: "Lifecycle — " } }) {
     nodes { id name documents { nodes { id title content } } }
   }
 }`);
