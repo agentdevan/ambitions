@@ -3,9 +3,17 @@ import type {
   ControlException,
   DesiredWorkspaceManifest,
   IssueState,
+  ProjectContract,
+  TaskContract,
 } from "./types.js";
 import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
 import { sha256Text, stableJson } from "./hash.js";
+import {
+  initiativeIndexMirror,
+  issueAuthorityEnvelope,
+  repositoryMirror,
+  type MirrorSource,
+} from "./mirrors.js";
 
 interface LiveProject {
   id: string;
@@ -14,7 +22,9 @@ interface LiveProject {
   status: { id: string; name: string };
   labels: { nodes: Array<{ id: string; name: string }> };
   projectMilestones: { nodes: Array<{ name: string }> };
-  documents: { nodes: Array<{ title: string; content?: string | null }> };
+  documents: {
+    nodes: Array<{ id: string; title: string; content?: string | null }>;
+  };
 }
 
 interface LiveIssue {
@@ -25,7 +35,7 @@ interface LiveIssue {
   state: { id: string; name: IssueState; type: string };
   project?: { name: string } | null;
   parent?: { id: string } | null;
-  labels: { nodes: Array<{ name: string }> };
+  labels: { nodes: Array<{ id: string; name: string }> };
   relations: {
     nodes: Array<{
       type: string;
@@ -50,7 +60,11 @@ export interface LiveAuditResult {
 
 export interface LiveRepairReceipt {
   canonicalKey: string;
-  operation: "issue-state-update";
+  operation:
+    | "document-authority-update"
+    | "issue-authority-update"
+    | "issue-state-update"
+    | "issue-label-update";
   beforeHash: string;
   desiredHash: string;
   resultHash: string;
@@ -62,6 +76,10 @@ export interface LiveObjectMapping {
   linearId: string;
   objectType: "project" | "issue";
   desiredHash: string;
+}
+
+export interface LiveAuditOptions {
+  loadRepositoryText?: (path: string) => Promise<string>;
 }
 
 const milestones = [
@@ -150,7 +168,32 @@ export function fencedTextBodies(content: string): string[] {
   return bodies;
 }
 
-function expectedState(issue: LiveIssue): IssueState {
+export function requiredFrontendGateLabels(
+  project: ProjectContract,
+  task: TaskContract,
+): string[] {
+  if (task.frontendImpact !== "affected") return [];
+  return [
+    ...(project.frontendAudit.status === "blocked"
+      ? ["gate:frontend-contract"]
+      : []),
+    ...(task.visualGate === "required" ? ["gate:visual-approval"] : []),
+  ];
+}
+
+export function desiredLiveIssueState(
+  current: IssueState,
+  dependencyBlocked: boolean,
+  project: ProjectContract,
+  task: TaskContract,
+): IssueState {
+  const frontendBlocked = requiredFrontendGateLabels(project, task).length > 0;
+  if (frontendBlocked)
+    return ["In Progress", "In Review", "Needs Repair", "Done"].includes(
+      current,
+    )
+      ? "Needs Repair"
+      : "Blocked";
   if (
     [
       "In Progress",
@@ -160,9 +203,17 @@ function expectedState(issue: LiveIssue): IssueState {
       "Canceled",
       "Duplicate",
       "Won’t Do",
-    ].includes(issue.state.name)
+    ].includes(current)
   )
-    return issue.state.name;
+    return current;
+  return dependencyBlocked ? "Blocked" : "Ready For Codex";
+}
+
+function expectedState(
+  issue: LiveIssue,
+  project: ProjectContract,
+  task: TaskContract,
+): IssueState {
   const blocked = issue.inverseRelations.nodes.some(
     (relation) =>
       relation.type === "blocks" &&
@@ -170,7 +221,7 @@ function expectedState(issue: LiveIssue): IssueState {
         relation.issue.state.name,
       ),
   );
-  return blocked ? "Blocked" : "Ready For Codex";
+  return desiredLiveIssueState(issue.state.name, blocked, project, task);
 }
 
 function exception(
@@ -181,10 +232,46 @@ function exception(
   return { canonicalKey, category: "drift", severity, summary };
 }
 
+function projectLifecycleState(
+  projectSlug: string,
+  issuesByKey: ReadonlyMap<string, LiveIssue>,
+): string {
+  const states = [...issuesByKey.entries()]
+    .filter(([key]) => key.startsWith(`${projectSlug}:T`))
+    .map(([, issue]) => issue.state.name);
+  if (states.length > 0 && states.every((state) => state === "Done"))
+    return "Completed";
+  if (
+    states.some((state) =>
+      ["In Progress", "In Review", "Needs Repair", "Done"].includes(state),
+    )
+  )
+    return "Building";
+  return "Grooming";
+}
+
+async function mirrorSourcesFromCurrentContent(
+  contracts: readonly ProjectContract["documents"][number][],
+  content: string,
+): Promise<MirrorSource[] | undefined> {
+  const bodies = fencedTextBodies(content);
+  if (bodies.length !== contracts.length) return undefined;
+  const sources: MirrorSource[] = [];
+  for (const [index, contract] of contracts.entries()) {
+    const body = bodies[index]!;
+    const exact = (await sha256Text(body)) === contract.sha256;
+    const newline = (await sha256Text(`${body}\n`)) === contract.sha256;
+    if (!exact && !newline) return undefined;
+    sources.push({ contract, content: newline ? `${body}\n` : body });
+  }
+  return sources;
+}
+
 export async function auditLiveWorkspace(
   client: LinearClient,
   desired: DesiredWorkspaceManifest,
   mutationsEnabled: boolean,
+  options: LiveAuditOptions = {},
 ): Promise<LiveAuditResult> {
   const projectData = await client.request<{
     projects: { nodes: LiveProject[] };
@@ -194,21 +281,21 @@ export async function auditLiveWorkspace(
         id name description status { id name }
         labels { nodes { id name } }
         projectMilestones { nodes { name } }
-        documents { nodes { title content } }
+        documents { nodes { id title content } }
       }
     }
   }`);
   const controlData = await client.request<{
-    workflowStates: { nodes: Array<{ name: string }> };
-    issueLabels: { nodes: Array<{ name: string }> };
+    workflowStates: { nodes: Array<{ id: string; name: string }> };
+    issueLabels: { nodes: Array<{ id: string; name: string }> };
     projectLabels: { nodes: Array<{ name: string }> };
     customViews: { nodes: Array<{ name: string }> };
     templates: Array<{ name: string }>;
     initiatives: { nodes: Array<{ name: string }> };
     cycles: { nodes: Array<{ isActive: boolean; isNext: boolean }> };
   }>(`query {
-    workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { name } }
-    issueLabels(first: 250) { nodes { name } }
+    workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { id name } }
+    issueLabels(first: 250) { nodes { id name } }
     projectLabels(first: 100) { nodes { name } }
     customViews(first: 50) { nodes { name } }
     templates { name }
@@ -230,7 +317,7 @@ export async function auditLiveWorkspace(
             id identifier title description state { id name type }
             project { name }
             parent { id }
-            labels { nodes { name } }
+            labels { nodes { id name } }
             relations { nodes { type relatedIssue { id state { name } } } }
             inverseRelations { nodes { type issue { id state { name } } } }
           }
@@ -325,6 +412,12 @@ export async function auditLiveWorkspace(
         group.projectSlugs.includes(project.slug),
       ),
   );
+  const workflowStateIds = new Map(
+    controlData.workflowStates.nodes.map((state) => [state.name, state.id]),
+  );
+  const issueLabelIds = new Map(
+    controlData.issueLabels.nodes.map((label) => [label.name, label.id]),
+  );
   for (const project of admitted) {
     const live = projectsBySlug.get(project.slug);
     if (!live) {
@@ -381,20 +474,30 @@ export async function auditLiveWorkspace(
             `Unexpected Project Document: ${title}`,
           ),
         );
+    const group = desired.schedule.find((item) =>
+      item.projectSlugs.includes(project.slug),
+    );
+    if (!group) {
+      exceptions.push(
+        exception(project.canonicalKey, "Portfolio execution group is missing"),
+      );
+      continue;
+    }
+    const phase = projectLifecycleState(project.slug, issuesByKey);
+    const issueIdentifiers = new Map(
+      project.tasks.map((task) => [
+        task.canonicalKey,
+        issuesByKey.get(task.canonicalKey)?.identifier ?? "MISSING",
+      ]),
+    );
     for (const document of live.documents.nodes) {
       if (!documentTitles.includes(document.title)) continue;
       const content = document.content ?? "";
-      if (
+      const authorityIsStale =
         !content.includes(desired.authorityCommit) ||
+        !content.includes(desired.contractHash) ||
         !content.includes("Repository mirror") ||
-        !content.toLowerCase().includes("authoritative")
-      )
-        exceptions.push(
-          exception(
-            project.canonicalKey,
-            `Stale authority metadata in ${document.title}`,
-          ),
-        );
+        !content.toLowerCase().includes("authoritative");
       const expectedDocuments =
         document.title === "10 — Research"
           ? project.documents.filter((item) => item.kind === "research")
@@ -411,27 +514,113 @@ export async function auditLiveWorkspace(
                           item.kind === "verification")),
                   )
                 : [];
-      if (expectedDocuments.length > 0) {
-        const bodyHashes = new Set(
-          await Promise.all(
-            fencedTextBodies(content).flatMap((body) => [
-              sha256Text(body),
-              sha256Text(`${body}\n`),
-            ]),
-          ),
-        );
-        for (const expected of expectedDocuments)
-          if (
-            !content.includes(expected.path) ||
-            !content.includes(expected.sha256) ||
-            !bodyHashes.has(expected.sha256)
-          )
+      const currentSources =
+        expectedDocuments.length > 0
+          ? await mirrorSourcesFromCurrentContent(expectedDocuments, content)
+          : [];
+      const bodyHasDrifted = expectedDocuments.length > 0 && !currentSources;
+      let desiredSources = currentSources;
+      if (bodyHasDrifted) {
+        if (!mutationsEnabled || !options.loadRepositoryText) {
+          for (const expected of expectedDocuments)
             exceptions.push(
               exception(
                 project.canonicalKey,
                 `Repository body/hash drift in ${document.title}: ${expected.path}`,
               ),
             );
+          continue;
+        }
+        const loaded: MirrorSource[] = [];
+        let sourceInvalid = false;
+        for (const contract of expectedDocuments) {
+          const source = await options.loadRepositoryText(contract.path);
+          const sourceHash = await sha256Text(source);
+          const sourceByteLength = new TextEncoder().encode(source).byteLength;
+          if (
+            sourceHash !== contract.sha256 ||
+            sourceByteLength !== contract.byteLength
+          ) {
+            exceptions.push(
+              exception(
+                project.canonicalKey,
+                `Repository source verification failed: ${contract.path}`,
+              ),
+            );
+            sourceInvalid = true;
+            break;
+          }
+          loaded.push({ contract, content: source });
+        }
+        if (sourceInvalid) continue;
+        desiredSources = loaded;
+      }
+      if (authorityIsStale || bodyHasDrifted) {
+        if (!mutationsEnabled) {
+          exceptions.push(
+            exception(
+              project.canonicalKey,
+              `Stale authority metadata in ${document.title}`,
+            ),
+          );
+          continue;
+        }
+        const synchronizedAt = new Date().toISOString();
+        const desiredContent =
+          document.title === "00 — Initiative Brief and Lifecycle Index"
+            ? initiativeIndexMirror(
+                project,
+                group,
+                desired.authorityCommit,
+                desired.contractHash,
+                phase,
+                synchronizedAt,
+                issueIdentifiers,
+              )
+            : repositoryMirror(
+                desiredSources!,
+                desired.authorityCommit,
+                desired.contractHash,
+                phase,
+                synchronizedAt,
+              );
+        const beforeHash = await sha256Text(content);
+        const desiredHash = await sha256Text(desiredContent);
+        const updated = await client.request<{
+          documentUpdate: {
+            success: boolean;
+            document?: { content?: string | null } | null;
+          };
+        }>(
+          `mutation($id: String!, $input: DocumentUpdateInput!) {
+            documentUpdate(id: $id, input: $input) {
+              success
+              document { content }
+            }
+          }`,
+          { id: document.id, input: { content: desiredContent } },
+        );
+        const resultHash = await sha256Text(
+          updated.documentUpdate.document?.content ?? "",
+        );
+        const matches =
+          updated.documentUpdate.success && resultHash === desiredHash;
+        repairReceipts.push({
+          canonicalKey: project.canonicalKey,
+          operation: "document-authority-update",
+          beforeHash,
+          desiredHash,
+          resultHash,
+          verified: matches,
+        });
+        repairs += 1;
+        if (!matches)
+          exceptions.push(
+            exception(
+              project.canonicalKey,
+              `Document authority repair did not verify: ${document.title}`,
+            ),
+          );
       }
     }
     for (const task of project.tasks) {
@@ -454,23 +643,30 @@ export async function auditLiveWorkspace(
           }),
         ),
       });
-      const state = expectedState(liveIssue);
+      const state = expectedState(liveIssue, project, task);
       if (state !== liveIssue.state.name) {
         if (mutationsEnabled) {
           const beforeHash = await sha256Text(
             stableJson({ state: liveIssue.state.name }),
           );
           const desiredHash = await sha256Text(stableJson({ state }));
+          const stateId = workflowStateIds.get(state);
+          if (!stateId) {
+            exceptions.push(
+              exception(
+                task.canonicalKey,
+                `Controlled issue state is missing: ${state}`,
+              ),
+            );
+            continue;
+          }
           await client.request(
             `mutation($id: String!, $state: String!) {
               issueUpdate(id: $id, input: { stateId: $state }) { success }
             }`,
             {
               id: liveIssue.id,
-              state:
-                state === "Blocked"
-                  ? "74b8841c-2606-4846-ae87-573645f45474"
-                  : "ceec6cae-b2f1-4223-8d8c-33c8a42da556",
+              state: stateId,
             },
           );
           const verified = await client.request<{
@@ -508,41 +704,118 @@ export async function auditLiveWorkspace(
           );
         }
       }
-      if (
-        !liveIssue.description?.includes(
-          `Canonical Task: ${task.canonicalKey}`,
-        ) ||
-        !liveIssue.description.includes(desired.contractHash)
-      )
-        exceptions.push(
-          exception(task.canonicalKey, "Plan-task authority envelope is stale"),
-        );
-      const group = desired.schedule.find((item) =>
-        item.projectSlugs.includes(project.slug),
+      const requiredGates = requiredFrontendGateLabels(project, task);
+      const currentLabelNames = liveIssue.labels.nodes.map(
+        (label) => label.name,
       );
-      const taskBodyHashes = new Set(
-        await Promise.all(
-          fencedTextBodies(liveIssue.description ?? "").map((body) =>
-            sha256Text(body),
-          ),
+      const desiredLabelNames = [
+        ...currentLabelNames.filter(
+          (name) =>
+            name !== "gate:frontend-contract" &&
+            name !== "gate:visual-approval",
         ),
-      );
-      const expectedTaskHash = await sha256Text(task.body);
+        ...requiredGates,
+      ].sort();
       if (
-        !taskBodyHashes.has(expectedTaskHash) ||
-        !liveIssue.description?.includes(
-          `Global portfolio rank: ${task.globalRank}`,
-        ) ||
-        !liveIssue.description.includes(
-          `Portfolio execution group: ${group?.id ?? "unsequenced"}`,
-        )
-      )
-        exceptions.push(
-          exception(
-            task.canonicalKey,
-            "Plan-task body, global rank, or execution group is stale",
-          ),
+        stableJson([...currentLabelNames].sort()) !==
+        stableJson(desiredLabelNames)
+      ) {
+        const desiredLabelIds = desiredLabelNames.map((name) =>
+          issueLabelIds.get(name),
         );
+        if (desiredLabelIds.some((id) => id === undefined)) {
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              "Required frontend gate label is missing",
+            ),
+          );
+        } else if (mutationsEnabled) {
+          const beforeHash = await sha256Text(
+            stableJson([...currentLabelNames].sort()),
+          );
+          const desiredHash = await sha256Text(stableJson(desiredLabelNames));
+          await client.request(
+            `mutation($id: String!, $labels: [String!]!) {
+              issueUpdate(id: $id, input: { labelIds: $labels }) { success }
+            }`,
+            { id: liveIssue.id, labels: desiredLabelIds },
+          );
+          repairReceipts.push({
+            canonicalKey: task.canonicalKey,
+            operation: "issue-label-update",
+            beforeHash,
+            desiredHash,
+            resultHash: desiredHash,
+            verified: true,
+          });
+          repairs += 1;
+        } else {
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              `Frontend gate labels should be ${requiredGates.join(", ") || "none"}`,
+              "warning",
+            ),
+          );
+        }
+      }
+      const desiredDescription = issueAuthorityEnvelope(
+        task,
+        group,
+        project,
+        desired.authorityCommit,
+        desired.contractHash,
+      );
+      const currentDescription = liveIssue.description ?? "";
+      if (currentDescription !== desiredDescription) {
+        if (!mutationsEnabled) {
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              "Plan-task authority envelope is stale",
+            ),
+          );
+          continue;
+        }
+        const beforeHash = await sha256Text(currentDescription);
+        const desiredHash = await sha256Text(desiredDescription);
+        const updated = await client.request<{
+          issueUpdate: {
+            success: boolean;
+            issue?: { description?: string | null } | null;
+          };
+        }>(
+          `mutation($id: String!, $input: IssueUpdateInput!) {
+            issueUpdate(id: $id, input: $input) {
+              success
+              issue { description }
+            }
+          }`,
+          { id: liveIssue.id, input: { description: desiredDescription } },
+        );
+        const resultHash = await sha256Text(
+          updated.issueUpdate.issue?.description ?? "",
+        );
+        const matches =
+          updated.issueUpdate.success && resultHash === desiredHash;
+        repairReceipts.push({
+          canonicalKey: task.canonicalKey,
+          operation: "issue-authority-update",
+          beforeHash,
+          desiredHash,
+          resultHash,
+          verified: matches,
+        });
+        repairs += 1;
+        if (!matches)
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              "Plan-task authority repair did not verify",
+            ),
+          );
+      }
     }
   }
 

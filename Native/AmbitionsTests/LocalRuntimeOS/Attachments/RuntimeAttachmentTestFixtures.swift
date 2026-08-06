@@ -27,7 +27,7 @@ actor FixedRuntimeAttachmentKeyCustody: RuntimeAttachmentKeyCustody {
         return dataKey
     }
 
-    func wrap(_ key: SymmetricKey, for blobID: RuntimeBlobID) async throws -> RuntimeBlobKeyEnvelope {
+    func wrap(_ key: SymmetricKey, for blobID: RuntimeAttachmentBlobID) async throws -> RuntimeBlobKeyEnvelope {
         let sealed = try AES.GCM.seal(
             key.withUnsafeBytes { Data($0) },
             using: wrapping,
@@ -178,7 +178,7 @@ enum XCTAttachmentFixtures {
             byteCount: Int64(bytes.count)
         )
         let revisionID = RuntimeAttachmentRevisionID(rawValue: revision)!
-        let blobID = RuntimeBlobID(rawValue: blob)!
+        let blobID = RuntimeAttachmentBlobID(rawValue: blob)!
         let proof = try RuntimeAttachmentCodec.issueIntakeProof(
             revisionID: revisionID, blobID: blobID,
             ownedFilename: source.lastPathComponent,

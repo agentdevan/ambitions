@@ -205,6 +205,12 @@ best fits current canon and preserves a no-network fallback.
 - Current user demand and representative archive variability have not been
   validated. The format contract should remain narrow until fixtures exist.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/ProfileArchiveImportView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 The evidence favors an optional, user-initiated, local-only tabular profile

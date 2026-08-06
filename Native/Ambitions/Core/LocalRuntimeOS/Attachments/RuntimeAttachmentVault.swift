@@ -3,7 +3,7 @@ import Darwin
 import Foundation
 
 struct RuntimeAttachmentFinalizationProof: Sendable, Equatable, Hashable {
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let receiptID: RuntimeReceiptID
     let terminalEventSequence: UInt64
@@ -12,7 +12,7 @@ struct RuntimeAttachmentFinalizationProof: Sendable, Equatable, Hashable {
     let proofDigest: String
 
     fileprivate init(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         receiptID: RuntimeReceiptID,
         terminalEventSequence: UInt64,
@@ -31,7 +31,7 @@ struct RuntimeAttachmentFinalizationProof: Sendable, Equatable, Hashable {
 }
 
 struct RuntimeAttachmentPhysicalDeletionProof: Sendable, Equatable, Hashable {
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let leaseID: RuntimeBlobGCLeaseID
     let expectedStateVersion: UInt64
@@ -42,7 +42,7 @@ struct RuntimeAttachmentPhysicalDeletionProof: Sendable, Equatable, Hashable {
     let proofDigest: String
 
     fileprivate init(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         leaseID: RuntimeBlobGCLeaseID,
         expectedStateVersion: UInt64,
@@ -131,7 +131,7 @@ struct RuntimeAttachmentVaultManifestDeletionClaim: Sendable, Equatable {
 
 struct RuntimeAttachmentManifestDeletionProof: Codable, Sendable, Equatable, Hashable {
     let claimID: String
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let originalRelativeDirectory: String
     let quarantineRelativeDirectory: String
@@ -142,7 +142,7 @@ struct RuntimeAttachmentManifestDeletionProof: Codable, Sendable, Equatable, Has
 
     fileprivate init(
         claimID: String,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         originalRelativeDirectory: String,
         quarantineRelativeDirectory: String,
@@ -167,7 +167,7 @@ struct RuntimeAttachmentVaultStageRequest: Sendable {
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let ownedPlaintextURL: URL
     let intakeProof: RuntimeAttachmentValidatedIntakeProof
     let normalizedFilename: String
@@ -184,7 +184,7 @@ struct RuntimeAttachmentVaultStageRequest: Sendable {
 
 struct RuntimeAttachmentFinalizationMarker: Codable, Sendable, Equatable, Hashable {
     let version: Int
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let receiptID: RuntimeReceiptID
     let terminalEventSequence: UInt64
@@ -192,7 +192,7 @@ struct RuntimeAttachmentFinalizationMarker: Codable, Sendable, Equatable, Hashab
 }
 
 struct RuntimeAttachmentReadCursor: Sendable, Equatable {
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let nextChunkIndex: Int
     let plaintextBytesRead: Int64
 }
@@ -238,7 +238,7 @@ actor RuntimeAttachmentVault {
     private static let maximumOwnedTemporaryDirectoryCount = 4_096
     private struct Header: Codable {
         let version: Int
-        let blobID: RuntimeBlobID
+        let blobID: RuntimeAttachmentBlobID
         let privacyDomain: RuntimeAttachmentPrivacyDomain
         let dedupPolicy: RuntimeAttachmentDedupPolicy
         let keyedContentAddress: RuntimeAttachmentContentAddress
@@ -249,7 +249,7 @@ actor RuntimeAttachmentVault {
 
     private struct Terminal: Codable, Equatable {
         let version: Int
-        let blobID: RuntimeBlobID
+        let blobID: RuntimeAttachmentBlobID
         let headerDigest: String
         let chunkCount: Int
         let plaintextByteCount: Int64
@@ -345,7 +345,7 @@ actor RuntimeAttachmentVault {
                 throw RuntimeCanonicalAttachmentError.protectedDataUnavailable
             }
             #endif
-            guard Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+            guard flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             try synchronizeDirectoryForProcessLock(rootDirectory)
@@ -1500,7 +1500,7 @@ private extension RuntimeAttachmentVault {
 
     func verifyDeletionDirectory(
         _ directory: URL,
-        expectedBlobID: RuntimeBlobID,
+        expectedBlobID: RuntimeAttachmentBlobID,
         manifestDigest: String
     ) throws {
         let allowed = Set(["payload.aead", "manifest.json", "finalized.json"])
@@ -1840,7 +1840,7 @@ private extension RuntimeAttachmentVault {
         expectedBytes: Int64,
         headerBytes: Data,
         headerDigest: String,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         expectedPlaintextDigest: SHA256.Digest,
         key: SymmetricKey
     ) throws -> (chunkCount: Int, ciphertextBytes: Int64, terminalDigest: String) {
@@ -1934,11 +1934,11 @@ private extension RuntimeAttachmentVault {
         )
     }
 
-    func chunkAAD(blobID: RuntimeBlobID?, headerDigest: String, index: Int) -> Data {
+    func chunkAAD(blobID: RuntimeAttachmentBlobID?, headerDigest: String, index: Int) -> Data {
         Data("ambitions.attachment.chunk.v1\u{0}\(blobID?.rawValue ?? "bound-in-header")\u{0}\(headerDigest)\u{0}\(index)".utf8)
     }
 
-    func terminalAAD(blobID: RuntimeBlobID, headerDigest: String) -> Data {
+    func terminalAAD(blobID: RuntimeAttachmentBlobID, headerDigest: String) -> Data {
         Data("ambitions.attachment.terminal.v1\u{0}\(blobID.rawValue)\u{0}\(headerDigest)".utf8)
     }
 
@@ -1948,7 +1948,7 @@ private extension RuntimeAttachmentVault {
         manifest: RuntimeBlobManifestAuthority,
         key: SymmetricKey
     ) throws {
-        guard try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+        guard try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               expectedAuthority.byteCount == manifest.ciphertextByteCount else {
             throw RuntimeCanonicalAttachmentError.manifestInvalid
         }
@@ -2002,7 +2002,7 @@ private extension RuntimeAttachmentVault {
         )
         let trailing = try handle.read(upToCount: 1) ?? Data()
         guard trailing.isEmpty,
-              try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+              try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               terminal.version == manifest.formatVersion,
               terminal.blobID == manifest.blobID,
               terminal.headerDigest == manifest.headerDigest,
@@ -2014,7 +2014,7 @@ private extension RuntimeAttachmentVault {
         }
     }
 
-    func opaqueDirectory(for blobID: RuntimeBlobID) throws -> String {
+    func opaqueDirectory(for blobID: RuntimeAttachmentBlobID) throws -> String {
         let digest = RuntimeAttachmentCodec.sha256(Data(blobID.rawValue.utf8))
         let token = try validatedOpaqueToken()
         let value = "v1/\(digest.prefix(2))/\(token)"
@@ -2134,7 +2134,7 @@ private extension RuntimeAttachmentVault {
     }
 
     func verifyOwnedDirectory(_ url: URL, expectedRelative: String) throws {
-        guard url == try ownedURL(relativeDirectory: expectedRelative) else {
+        guard try url == ownedURL(relativeDirectory: expectedRelative) else {
             throw RuntimeCanonicalAttachmentError.pathAuthorityDenied
         }
         let values = try url.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])

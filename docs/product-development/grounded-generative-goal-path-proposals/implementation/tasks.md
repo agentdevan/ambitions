@@ -1,19 +1,29 @@
 # Implementation Tasks
 
 1. Canon/task contracts and NASA/sparse fixtures (REQ-002–008, 015–017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Evidence graph/adapters/semantic classifier (REQ-001–004, 006–008).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Alias task and private runtime composer (REQ-005, 007, 013, 015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Ordered validation/security pipeline (REQ-002–008, 015–016).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Proposal repository/coordinator/progressive projection (REQ-007, 009,
    013–014, 017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Semantic delta/invalidation preserving completion (REQ-008, 012–014).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Comparison and activation handoffs with no mutation (REQ-010–011).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. Review/delta/accessibility UI (REQ-006–009, 012–013, 017).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 9. Integration/resources/project regeneration if required (all requirements).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. Full verification and REQ-001–REQ-017 evidence matrix; keep unsupported
     corpora, canonical adoption, scheduling, device breadth and release ceilings.
 
 Run focused tests and inspect each task diff before proceeding.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

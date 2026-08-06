@@ -139,6 +139,12 @@ keep the user in control. This best matches canon and evidence.
 - External user research is still needed to learn which contextual factors users
   understand, want to state, or consider intrusive.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Time/ContextFitReviewView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Research supports a task-specific context-fit system rather than a universal

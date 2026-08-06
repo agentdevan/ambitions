@@ -1,26 +1,36 @@
 # Implementation Tasks
 
 1. Canon and registered task contract (REQ-003–006, 010, 015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Interpretation models/repository/correction flow (REQ-001–002, 008, 011,
    014, 016); exact statement and facets must remain separate.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Career/education/hobby providers and closed candidate bundle (REQ-003–009);
    no provider receives private context.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Identity/source/route/transfer/constraint/current validators (REQ-003–010,
    015); reject minted IDs and unsupported prose.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Private-runtime composition and semantic renderer (REQ-005–006, 010, 013);
    alias-only output and deterministic fallback.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Proposal repository/coordinator/invalidation/purge (REQ-011, 013–015);
    stale async discard and deletion terminality.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Comparison, inspection and correction UI (REQ-001, 004–011, 013, 016).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 8. Adoption-input builder and owner revalidation integration (REQ-012); prove no
    command/client path from generation.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. Integration/resources/project generation (all requirements).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. Run full verification (all requirements); source breadth, path generation,
     Goal mutation, hosted mode, deployment and release remain explicit ceilings.
 
 Each task runs focused tests and diff inspection. Requirements not explicitly
 listed on a task are covered by tasks 9–10; task 10 must produce a complete
 REQ-001–REQ-016 evidence matrix.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

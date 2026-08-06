@@ -589,6 +589,12 @@ corrections, and failure behavior as well as the rendered result.
 - Aggregate reporting must preserve denominators and slices without creating a
   stable person identifier or hidden profile.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/IntelligenceEvaluationInspectionModels.swift`, `Native/Ambitions/Trust/IntelligenceEvaluationInspectionProjection.swift`, `Native/Ambitions/Trust/IntelligenceEvaluationInspectionView.swift`, `Native/Ambitions/Trust/IntelligenceEvaluationInspectionAccessibility.swift`, `Native/Ambitions/Trust/InspectionSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 7 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create a **version-bound, layered intelligence evaluation contract** that

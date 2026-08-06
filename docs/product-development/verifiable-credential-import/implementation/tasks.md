@@ -10,6 +10,7 @@ files are named with full repository-relative paths.
    endorsement, validity, receiver acceptance, relationship, lifecycle, and
    lineage remain independently representable. Test:
    `Native/AmbitionsTests/Domain/CredentialModelsTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Implement `CredentialArtifactStagingService.swift` and
    `Repair/CredentialImport/CredentialArtifactVerifier.swift`. Dependency: Task 1. Trace: intake/trust,
    REQ-001 through REQ-008, REQ-012. Acceptance: scoped file access, size/schema/
@@ -19,18 +20,21 @@ files are named with full repository-relative paths.
    cleanup. Tests:
    `Native/AmbitionsTests/LocalRuntimeOS/Repair/CredentialArtifactVerifierTests.swift`
    and `Native/AmbitionsTests/LocalRuntimeOS/Attachments/CredentialArtifactStagingServiceTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Implement `CredentialStoreSchema.swift`, `CredentialStateStore.swift`, and
    `CredentialSchemaMigration.swift`. Dependency: Tasks 1-2. Trace: persistence,
    REQ-006, REQ-009 through REQ-015. Acceptance: empty additive migration,
    encrypted content-addressed artifact, CAS, lifecycle, supersession lineage,
    revocation snapshots, deletion/redaction, quarantine, backup, and replay.
    Test: `Native/AmbitionsTests/LocalRuntimeOS/State/CredentialStateStoreTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Implement `CredentialCommandService.swift` with separately confirmed Proof
    and Capability relationships. Dependency: Tasks 1-3. Trace: acceptance and
    recovery, REQ-004 through REQ-013. Acceptance: one Credential under duplicate
    delivery; edges never change Proof/Capability meaning; stale status requires
    review; no external acceptance or automatic replacement. Test:
    `Native/AmbitionsTests/LocalRuntimeOS/Commands/CredentialCommandServiceTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Implement `CredentialStatusRequestPolicy.swift` and
    `CredentialStatusCheckService.swift`. Dependency: Tasks 1-4. Trace: explicit
    current-status flow, REQ-003 through REQ-008, REQ-011 through REQ-015.
@@ -41,6 +45,7 @@ files are named with full repository-relative paths.
    replay produce truthful external-operation state without automatic reissue.
    Tests: `Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/CredentialStatusRequestPolicyTests.swift`
    and `Native/AmbitionsTests/LocalRuntimeOS/ExternalOperations/CredentialStatusCheckServiceTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Implement `CredentialInspectionProjection.swift`,
    `CredentialImportView.swift`, and `CredentialInspectionView.swift`.
    Dependency: Tasks 1-5. Trace: flows/privacy/accessibility, REQ-001 through
@@ -48,8 +53,10 @@ files are named with full repository-relative paths.
    relationships, status-check preview/result, expiry/revocation, correction,
    deletion, and recovery is readable without trust-badge compression. Test:
    `Native/AmbitionsUITests/VerifiableCredentialImportUITests.swift`.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 7. Add adversarial artifact and network/status fixtures, update canon, regenerate
    project, and run verification. Dependency: Tasks 1-6. Trace: all REQ-001
    through REQ-015. Acceptance: all requirements pass without competence,
    equivalency, acceptance, or hosted-verification claim. Tests: run
    `implementation/verification.md` in full.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.

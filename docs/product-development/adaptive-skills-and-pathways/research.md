@@ -46,11 +46,22 @@ work, health-supporting routines, and other user-chosen directions.
 
 ## Current truth
 
-This Research used baseline main SHA: `40894e92c61de55841c31fd797fd5ae39625c5dc`,
+This Research was reconciled against baseline main SHA:
+`5c2668ff0ef3b480aa48871528d58826056d354b`,
 together with current canon,
 source, tests, and prior audit evidence. External sources were reviewed on
 2026-08-03. Source presence and test fixtures are reported as implementation
 evidence only; they do not establish shipped or release-ready behavior.
+
+The decomposition recommended by this Research is now documentation-complete.
+Every focused lifecycle package named below, together with the later privacy,
+continuity, intelligence, corpus, generation, simulation, and external-action
+packages derived from it, has approved Research, Scope, and Design plus a
+groomed implementation package. Most implementation remains pending. This
+portfolio package therefore has one remaining legitimate role: define and
+verify the end-to-end integration contract after the child-owned behavior is
+implemented. It must not re-create their product authority or become another
+runtime owner.
 
 Canon strongly supports the intended outcome and guardrails, but it does not
 yet resolve this initiative's complete product behavior:
@@ -712,13 +723,22 @@ compound across a changed destination.
   privacy-egress, replay, deletion, accessibility, and recommendation-quality
   proof remain implementation obligations, not Research evidence.
 
+## Frontend impact investigation
+
+- Potential frontend impact: none
+- Existing surfaces investigated: Existing child-owned Goals, You, Time, Today, and Trust routes specified by the approved capability, recommendation, adoption, path, scheduling, and branch lifecycle packages.
+- Evidence and unknowns: The remaining portfolio role is integration and acceptance proof only. It creates no production surface, route, component, asset, copy contract, motion behavior, or visual-language authority; every child-owned frontend task retains its own visual gate and proof obligations.
+
 ## Recommended direction
 
 Treat this document as portfolio Research, not as authority for one umbrella
-Scope. The evidence supports a connected product system, but its delivery
-contracts have different owners, source authorities, privacy risks, and commit
-boundaries. Each named initiative below therefore needs its own self-contained
-Research and approved Scope before Design.
+product Scope. The evidence supports a connected product system, but its
+delivery contracts have different owners, source authorities, privacy risks,
+and commit boundaries. Those focused initiatives now have self-contained,
+approved lifecycle packages. A downstream Scope is justified only for bounded
+portfolio integration and acceptance: it may define handoff compatibility,
+end-to-end degradation, and cross-owner proof, but it may not add or override
+child-owned behavior.
 
 The leading product direction is an evidence-linked Life Capital experience,
 not a resume, social profile, capability graph, or universal skill score. A

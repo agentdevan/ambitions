@@ -435,6 +435,12 @@ No runtime/user evidence from v1 is required to define these public data and
 authority behaviors. Recommendation usefulness must still wait for its own
 direct-user evidence.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/CareerCorpusInspectionModels.swift`, `Native/Ambitions/Trust/CareerCorpusInspectionProjection.swift`, `Native/Ambitions/Trust/CareerCorpusInspectionView.swift`, `Native/Ambitions/Trust/CareerCorpusInspectionAccessibility.swift`, `Native/Ambitions/Trust/SourceInspectionView.swift`, `Native/Ambitions/Trust/InspectionSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Scope a source-native United States career corpus with a full O*NET 30.3 base

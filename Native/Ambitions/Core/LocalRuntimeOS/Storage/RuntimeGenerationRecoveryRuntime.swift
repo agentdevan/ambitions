@@ -1,5 +1,9 @@
 import Foundation
 
+private struct RuntimeGenerationRecoveryFileManager: @unchecked Sendable {
+    let value: FileManager
+}
+
 /// Production-injectable composition root for the schema-v8 recovery path.
 /// It owns exactly one control-store lock, one resolved active canonical store,
 /// and the matching process-local generation barrier. It deliberately does not
@@ -33,20 +37,21 @@ actor RuntimeGenerationRecoveryRuntime {
         environment: RuntimeEnvironment = .live,
         fileManager: FileManager = .default
     ) async throws -> RuntimeGenerationRecoveryRuntime {
+        let fileManager = RuntimeGenerationRecoveryFileManager(value: fileManager)
         let rootAuthority = try RuntimeStoreRootAuthority.appPrivate(
-            fileManager: fileManager
+            fileManager: fileManager.value
         )
         let controlStore = try await RuntimeGenerationControlStore.open(
             rootAuthority: rootAuthority,
             environment: environment,
-            fileManager: fileManager
+            fileManager: fileManager.value
         )
         do {
             return try await openActive(
                 rootAuthority: rootAuthority,
                 controlStore: controlStore,
                 environment: environment,
-                fileManager: fileManager
+                fileManager: fileManager.value
             )
         } catch {
             let openingError = error
@@ -71,10 +76,11 @@ actor RuntimeGenerationRecoveryRuntime {
         environment: RuntimeEnvironment = .live,
         fileManager: FileManager = .default
     ) async throws -> RuntimeGenerationRecoveryRuntime {
+        let fileManager = RuntimeGenerationRecoveryFileManager(value: fileManager)
         let generationManager = try RuntimeStoreGenerationManager(
             environment: environment,
             rootAuthority: rootAuthority,
-            fileManager: fileManager
+            fileManager: fileManager.value
         )
         let barrierAuthority = RuntimeGenerationBarrierAuthority(
             activeGenerationID: nil
@@ -99,14 +105,14 @@ actor RuntimeGenerationRecoveryRuntime {
             generationManager: generationManager,
             barrierAuthority: barrierAuthority,
             environment: environment,
-            fileManager: fileManager
+            fileManager: fileManager.value
         )
         let recoveryService = RuntimeGenerationRecoveryService(
             controlStore: controlStore,
             lifecycle: lifecycle,
             generationManager: generationManager,
             environment: environment,
-            fileManager: fileManager
+            fileManager: fileManager.value
         )
         return RuntimeGenerationRecoveryRuntime(
             controlStore: controlStore,

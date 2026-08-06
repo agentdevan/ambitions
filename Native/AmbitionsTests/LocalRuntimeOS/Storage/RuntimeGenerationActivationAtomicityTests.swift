@@ -56,9 +56,10 @@ final class RuntimeGenerationActivationAtomicityTests: XCTestCase {
                     let after = try RuntimeGenerationArtifactSnapshot.capture(
                         locations: harness.locations
                     )
+                    let activeGenerationID = try await harness.resolveActive().selector.generationID
                     XCTAssertEqual(after.selectorBytes, before.selectorBytes)
                     XCTAssertEqual(
-                        try await harness.resolveActive().selector.generationID,
+                        activeGenerationID,
                         sourceActivation.generationID
                     )
                 }
@@ -99,8 +100,9 @@ final class RuntimeGenerationActivationAtomicityTests: XCTestCase {
                     .selectorBytes,
                 before.selectorBytes
             )
+            let activeGenerationID = try await harness.resolveActive().selector.generationID
             XCTAssertEqual(
-                try await harness.resolveActive().selector.generationID,
+                activeGenerationID,
                 sourceActivation.generationID
             )
             try await source.close()
@@ -161,8 +163,9 @@ final class RuntimeGenerationActivationAtomicityTests: XCTestCase {
             )
 
             XCTAssertTrue(result.committedWithCleanupWarning)
+            let activeGenerationID = try await harness.resolveActive().selector.generationID
             XCTAssertEqual(
-                try await harness.resolveActive().selector.generationID,
+                activeGenerationID,
                 result.generationID
             )
             try await source.close()
@@ -197,8 +200,9 @@ final class RuntimeGenerationActivationAtomicityTests: XCTestCase {
                 )
                 XCTFail("A stale source cannot activate a second descendant")
             } catch {
+                let activeGenerationID = try await harness.resolveActive().selector.generationID
                 XCTAssertEqual(
-                    try await harness.resolveActive().selector.generationID,
+                    activeGenerationID,
                     first.generationID
                 )
             }

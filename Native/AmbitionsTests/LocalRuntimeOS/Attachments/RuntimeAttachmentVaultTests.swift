@@ -128,7 +128,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
     func testReadCursorRejectsCrossBlobAndOutOfRangeAuthority() async throws {
         let fixture = try await makeFixture("cursor")
         let foreign = RuntimeAttachmentReadCursor(
-            blobID: RuntimeBlobID(rawValue: "foreign-blob")!, nextChunkIndex: 1,
+            blobID: RuntimeAttachmentBlobID(rawValue: "foreign-blob")!, nextChunkIndex: 1,
             plaintextBytesRead: Int64(RuntimeAttachmentLimits.minimumChunkBytes)
         )
         await assertAttachmentError(.invalidRecord) {
@@ -254,8 +254,9 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         let vault = try XCTAttachmentFixtures.vault(root: root)
         let source = root.appendingPathComponent("cancel.bin")
         try Data(repeating: 8, count: 20_000).write(to: source)
+        let request = try stageRequest(source: source, size: 20_000)
         let task = Task {
-            try await vault.stage(try stageRequest(source: source, size: 20_000))
+            try await vault.stage(request)
         }
         task.cancel()
         do {
@@ -359,7 +360,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         size: Int64
     ) throws -> RuntimeAttachmentVaultStageRequest {
         var metadata = stat()
-        let isRegular = Darwin.stat(source.path, &metadata) == 0 &&
+        let isRegular = stat(source.path, &metadata) == 0 &&
             (metadata.st_mode & S_IFMT) == S_IFREG && metadata.st_size > 0
         #if os(iOS)
         if isRegular {
@@ -369,7 +370,7 @@ final class RuntimeAttachmentVaultTests: XCTestCase {
         }
         #endif
         let revisionID = RuntimeAttachmentRevisionID(rawValue: "revision-direct-stage")!
-        let blobID = RuntimeBlobID(rawValue: "blob-direct-stage")!
+        let blobID = RuntimeAttachmentBlobID(rawValue: "blob-direct-stage")!
         let classification = RuntimeAttachmentContentClassification(
             normalizedFilename: "direct.bin",
             declaredContentType: "application/octet-stream",

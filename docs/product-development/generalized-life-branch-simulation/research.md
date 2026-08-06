@@ -197,6 +197,12 @@ status and consent.
 No hard fork remains. The protocol explicitly supports atomic-local where proven
 and saga/recovery otherwise; production stays gated until evidence passes.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/LifeBranch/`.
+- Evidence and unknowns: Repository audit identifies Task 9 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Build a generalized `LifeBranchCoordinator` over owner-provided snapshots,

@@ -16,8 +16,8 @@ final class RuntimeGenerationSchemaVerificationTests: XCTestCase {
 
             XCTAssertTrue(integrity.isOK)
             XCTAssertTrue(foreignKeyViolations.isEmpty)
-            XCTAssertEqual(journal.first?.value(at: 0), .text("wal"))
-            XCTAssertEqual(synchronous.first?.value(at: 0), .integer(2))
+            XCTAssertEqual(journal.first?.value(named: "journal_mode"), .text("wal"))
+            XCTAssertEqual(synchronous.first?.value(named: "synchronous"), .integer(2))
             try await verified.close()
             return ()
         }

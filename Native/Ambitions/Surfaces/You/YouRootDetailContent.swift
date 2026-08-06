@@ -145,6 +145,7 @@ struct YouRootDetailContent: View {
         case .capturePreferences:
             YouControlGroup(eyebrow: "Capture", section: captureSettingsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
         case .sourceSettings:
+            PublicReferenceInspectionView(projection: profileProjection.publicReferenceInspection)
             SourceInspectionView(presentation: sourceSettingsInspectionPresentation)
             YouControlGroup(
                 eyebrow: "Sources",

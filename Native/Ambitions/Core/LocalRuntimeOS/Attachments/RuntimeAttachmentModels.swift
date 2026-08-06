@@ -35,9 +35,10 @@ extension RuntimeAttachmentIdentity {
     static func < (lhs: Self, rhs: Self) -> Bool { lhs.rawValue < rhs.rawValue }
 
     static func validate(_ raw: String, maximumBytes: Int = 1_024) -> String? {
+        let canonicalRaw = raw.precomposedStringWithCanonicalMapping
         guard raw.isEmpty == false,
               raw == raw.trimmingCharacters(in: .whitespacesAndNewlines),
-              raw == raw.precomposedStringWithCanonicalMapping,
+              raw.utf8.elementsEqual(canonicalRaw.utf8),
               raw.utf8.count <= maximumBytes,
               raw.unicodeScalars.contains(where: CharacterSet.controlCharacters.contains) == false else {
             return nil
@@ -56,7 +57,7 @@ struct RuntimeAttachmentRevisionID: RuntimeAttachmentIdentity {
     init?(rawValue: String) { guard let value = Self.validate(rawValue) else { return nil }; self.rawValue = value }
 }
 
-struct RuntimeBlobID: RuntimeAttachmentIdentity {
+struct RuntimeAttachmentBlobID: RuntimeAttachmentIdentity {
     let rawValue: String
     init?(rawValue: String) { guard let value = Self.validate(rawValue) else { return nil }; self.rawValue = value }
 }
@@ -171,7 +172,7 @@ struct RuntimeAttachmentContentClassification: Codable, Sendable, Equatable, Has
 struct RuntimeAttachmentValidatedIntakeProof: Sendable, Equatable {
     let version: Int
     let revisionID: RuntimeAttachmentRevisionID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let ownedFilename: String
     let sourceDevice: UInt64
     let sourceInode: UInt64
@@ -187,7 +188,7 @@ struct RuntimeAttachmentValidatedIntakeProof: Sendable, Equatable {
 
 struct RuntimeBlobManifestAuthority: Codable, Sendable, Equatable, Hashable {
     let formatVersion: Int
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let privacyDomain: RuntimeAttachmentPrivacyDomain
     let dedupPolicy: RuntimeAttachmentDedupPolicy
     let keyedContentAddress: RuntimeAttachmentContentAddress
@@ -205,7 +206,7 @@ struct RuntimeBlobManifestAuthority: Codable, Sendable, Equatable, Hashable {
 
 struct RuntimeBlobKeyEnvelope: Codable, Sendable, Equatable, Hashable {
     let version: Int
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let wrappingKeyID: RuntimeBlobKeyID
     let wrappingKeyVersion: Int
     let algorithm: String
@@ -219,7 +220,7 @@ struct RuntimeAttachmentRevision: Codable, Sendable, Equatable, Hashable {
     let revisionID: RuntimeAttachmentRevisionID
     let attachmentID: RuntimeAttachmentID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let classification: RuntimeAttachmentContentClassification
     let privacy: EventLedgerPrivacyClassification
@@ -243,7 +244,7 @@ struct RuntimeAttachmentReference: Codable, Sendable, Equatable, Hashable {
 
 struct RuntimeAttachmentCurrentLifecycle: Codable, Sendable, Equatable, Hashable {
     let version: Int
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let state: RuntimeAttachmentLifecycleState
     let stateVersion: UInt64
     let referenceCount: Int
@@ -269,7 +270,7 @@ struct RuntimeAttachmentSystemTransitionAuthority: Codable, Sendable, Equatable,
 struct RuntimeAttachmentLifecycleHistory: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let historyID: RuntimeAttachmentHistoryID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let stateVersion: UInt64
     let fromState: RuntimeAttachmentLifecycleState?
     let toState: RuntimeAttachmentLifecycleState
@@ -288,7 +289,7 @@ struct RuntimeAttachmentReferenceHistory: Codable, Sendable, Equatable, Hashable
     let historyID: RuntimeAttachmentReferenceHistoryID
     let referenceID: RuntimeAttachmentReferenceID
     let revisionID: RuntimeAttachmentRevisionID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let fromState: RuntimeAttachmentReferenceState?
     let toState: RuntimeAttachmentReferenceState
     let commandID: RuntimeCommandID
@@ -323,7 +324,7 @@ struct RuntimeBlobQuotaReservation: Codable, Sendable, Equatable, Hashable {
     let ownerID: String
     let createdAt: Date
     let expiresAt: Date
-    let consumedByBlobID: RuntimeBlobID?
+    let consumedByBlobID: RuntimeAttachmentBlobID?
 }
 
 struct RuntimeAttachmentQuotaAuthorization: Sendable, Equatable, Hashable {
@@ -352,7 +353,7 @@ protocol RuntimeAttachmentQuotaAuthorizing: Sendable {
 struct RuntimeBlobRetentionHold: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let holdID: RuntimeBlobHoldID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let kind: RuntimeAttachmentHoldKind
     let authorityID: String
     let retainUntil: Date?
@@ -362,7 +363,7 @@ struct RuntimeBlobRetentionHold: Codable, Sendable, Equatable, Hashable {
 struct RuntimeBlobRetentionHoldRelease: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let holdID: RuntimeBlobHoldID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let authorityID: String
     let releasedByCommandID: RuntimeCommandID
     let releasedByReceiptID: RuntimeReceiptID
@@ -378,7 +379,7 @@ enum RuntimeBlobRetentionHoldTransitionKind: String, Codable, Sendable, Equatabl
 struct RuntimeBlobRetentionHoldHistory: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let holdID: RuntimeBlobHoldID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let transition: RuntimeBlobRetentionHoldTransitionKind
     let authorityID: String
     let commandID: RuntimeCommandID
@@ -391,7 +392,7 @@ struct RuntimeBlobRetentionHoldHistory: Codable, Sendable, Equatable, Hashable {
 struct RuntimeBlobGCLease: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let leaseID: RuntimeBlobGCLeaseID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let expectedStateVersion: UInt64
     let ownerID: String
     let acquiredAt: Date
@@ -418,7 +419,7 @@ struct RuntimeBlobGCCurrentLeaseAuthority: Codable, Sendable, Equatable, Hashabl
 struct RuntimeBlobGCLeaseHistory: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let historyID: String
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let transition: RuntimeBlobGCLeaseTransition
     let leaseID: RuntimeBlobGCLeaseID
     let leaseToken: String
@@ -441,7 +442,7 @@ struct RuntimeBlobGCLeaseHistory: Codable, Sendable, Equatable, Hashable {
 struct RuntimeBlobDeletionTombstone: Codable, Sendable, Equatable, Hashable {
     let version: Int
     let tombstoneID: RuntimeBlobTombstoneID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let finalStateVersion: UInt64
     let deletionAuthorizationID: String
@@ -453,8 +454,8 @@ struct RuntimeBlobDeletionTombstone: Codable, Sendable, Equatable, Hashable {
 
 struct RuntimeBlobStagingOrphan: Codable, Sendable, Equatable, Hashable {
     let version: Int
-    let losingBlobID: RuntimeBlobID
-    let canonicalBlobID: RuntimeBlobID
+    let losingBlobID: RuntimeAttachmentBlobID
+    let canonicalBlobID: RuntimeAttachmentBlobID
     let manifest: RuntimeBlobManifestAuthority
     let reasonCode: String
     let recordedAt: Date
@@ -476,7 +477,7 @@ struct RuntimeAttachmentReceiptRevisionEvidence: Codable, Sendable, Equatable, H
     let version: Int
     let receiptID: RuntimeReceiptID
     let revisionID: RuntimeAttachmentRevisionID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let linkKind: String
     let referenceTransitionDigests: [String]
@@ -485,7 +486,7 @@ struct RuntimeAttachmentReceiptRevisionEvidence: Codable, Sendable, Equatable, H
 
 struct RuntimeAttachmentFinalizationIntentEvidence: Codable, Sendable, Equatable, Hashable {
     let version: Int
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let commandID: RuntimeCommandID
     let receiptID: RuntimeReceiptID
@@ -532,7 +533,7 @@ enum RuntimeAttachmentRecoveryScanKind: String, Codable, Sendable, Equatable, Ha
 
 struct RuntimeAttachmentManifestDeletionClaim: Codable, Sendable, Equatable, Hashable {
     let claimID: String
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let opaqueRelativeDirectory: String
     let observedDevice: UInt64
@@ -567,7 +568,7 @@ struct RuntimeAttachmentRecoveryAttempt: Sendable, Equatable, Hashable {
 
 struct RuntimeAttachmentRecoveryFinding: Sendable, Equatable {
     let issue: RuntimeAttachmentRecoveryIssue
-    let blobID: RuntimeBlobID?
+    let blobID: RuntimeAttachmentBlobID?
     let opaqueRelativeDirectory: String
     let evidenceFingerprint: String
     let observedAt: Date
@@ -584,7 +585,7 @@ enum RuntimeAttachmentStagePersistenceResult: Sendable, Equatable {
     case inserted(RuntimeAttachmentRevision)
     case deduplicated(
         effectiveRevision: RuntimeAttachmentRevision,
-        canonicalBlobID: RuntimeBlobID,
+        canonicalBlobID: RuntimeAttachmentBlobID,
         losingManifest: RuntimeBlobManifestAuthority,
         cleanup: RuntimeAttachmentDedupCleanupState
     )
@@ -609,11 +610,11 @@ struct RuntimeAttachmentCommandIntent: Codable, Sendable, Equatable, Hashable {
     let action: RuntimeAttachmentMutationAction
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let referenceID: RuntimeAttachmentReferenceID?
     let replacesReferenceID: RuntimeAttachmentReferenceID?
     let replacesRevisionID: RuntimeAttachmentRevisionID?
-    let replacesBlobID: RuntimeBlobID?
+    let replacesBlobID: RuntimeAttachmentBlobID?
     let target: RuntimeSemanticAggregate?
     let expectedLifecycleVersion: UInt64
     let expectedReplacedLifecycleVersion: UInt64?

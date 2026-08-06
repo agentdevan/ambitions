@@ -44,10 +44,152 @@ def completed_template(document_type: str) -> str:
             "## Requirement traceability\n\nComplete content.",
             "## Requirement traceability\n\n- REQ-001: DESIGN-001 completes the outcome.",
         )
+    if document_type == "research":
+        contents = replace_section(
+            contents,
+            "Frontend impact investigation",
+            "\n".join(
+                (
+                    "- Potential frontend impact: none",
+                    "- Existing surfaces investigated: N/A — structural fixture.",
+                    "- Evidence and unknowns: N/A — structural fixture.",
+                )
+            ),
+        )
+    if document_type == "scope":
+        contents = replace_section(
+            contents,
+            "Frontend impact contract",
+            "\n".join(
+                (
+                    "- Surface impact: none",
+                    "- IA/navigation: none",
+                    "- Assets/iconography: none",
+                    "- Visual language: unchanged",
+                    "- Motion: unchanged",
+                    "- Copy/localization: N/A — structural fixture.",
+                    "- Accessibility: N/A — structural fixture.",
+                    "- Visual proof: N/A — structural fixture.",
+                )
+            ),
+        )
+    if document_type == "design":
+        contents = replace_section(
+            contents,
+            "Frontend experience specification",
+            "\n".join(
+                (
+                    "- Surface impact: none",
+                    "- IA/navigation: none",
+                    "- Assets/iconography: none",
+                    "- Visual language: unchanged",
+                    "- Motion: unchanged",
+                    "- Copy/localization: N/A — structural fixture.",
+                    "- Accessibility: N/A — structural fixture.",
+                    "- Visual proof: N/A — structural fixture.",
+                    "- Visual gate: not-required",
+                )
+            ),
+        )
     return contents
 
 
+def replace_section(contents: str, heading: str, body: str) -> str:
+    return re.sub(
+        rf"(## {re.escape(heading)}\n\n).*?(?=\n## |\Z)",
+        rf"\1{body}\n",
+        contents,
+        flags=re.DOTALL,
+    )
+
+
 class ValidationTests(unittest.TestCase):
+    def test_approved_documents_require_complete_frontend_contract_fields(self) -> None:
+        contents = replace_section(
+            completed_template("scope"),
+            "Frontend impact contract",
+            "- Surface impact: existing",
+        )
+
+        result = validate_document(parse_document(contents))
+
+        codes = {item.code for item in result.diagnostics}
+        self.assertIn("missing-frontend-field", codes)
+
+    def test_frontend_scope_and_design_classifications_must_match(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            research = completed_template("research")
+            scope = replace_section(
+                completed_template("scope"),
+                "Frontend impact contract",
+                "\n".join(
+                    (
+                        "- Surface impact: existing",
+                        "- IA/navigation: none",
+                        "- Assets/iconography: system-only",
+                        "- Visual language: unchanged",
+                        "- Motion: unchanged",
+                        "- Copy/localization: Existing localized copy patterns.",
+                        "- Accessibility: Existing native semantics.",
+                        "- Visual proof: Changed-state screenshots.",
+                    )
+                ),
+            )
+            design = replace_section(
+                completed_template("design"),
+                "Frontend experience specification",
+                "\n".join(
+                    (
+                        "- Surface impact: new-child",
+                        "- IA/navigation: none",
+                        "- Assets/iconography: system-only",
+                        "- Visual language: unchanged",
+                        "- Motion: unchanged",
+                        "- Copy/localization: Existing localized copy patterns.",
+                        "- Accessibility: Existing native semantics.",
+                        "- Visual proof: One native fixture and viewport.",
+                        "- Visual gate: required",
+                    )
+                ),
+            )
+            (initiative / "research.md").write_text(research, encoding="utf-8")
+            (initiative / "scope.md").write_text(scope, encoding="utf-8")
+            (initiative / "design.md").write_text(design, encoding="utf-8")
+
+            result = validate_initiative(initiative)
+
+        self.assertIn(
+            "frontend-contract-mismatch",
+            {item.code for item in result.diagnostics},
+        )
+
+    def test_material_frontend_design_requires_visual_gate(self) -> None:
+        contents = replace_section(
+            completed_template("design"),
+            "Frontend experience specification",
+            "\n".join(
+                (
+                    "- Surface impact: new-child",
+                    "- IA/navigation: none",
+                    "- Assets/iconography: system-only",
+                    "- Visual language: unchanged",
+                    "- Motion: unchanged",
+                    "- Copy/localization: Existing localized copy patterns.",
+                    "- Accessibility: Existing native semantics.",
+                    "- Visual proof: One native fixture and viewport.",
+                    "- Visual gate: not-required",
+                )
+            ),
+        )
+
+        result = validate_document(parse_document(contents))
+
+        self.assertIn(
+            "frontend-visual-gate-required",
+            {item.code for item in result.diagnostics},
+        )
     def test_status_only_scope_promotion_remains_incomplete(self) -> None:
         result = validate_document(parse_document(approved_template("scope")))
 

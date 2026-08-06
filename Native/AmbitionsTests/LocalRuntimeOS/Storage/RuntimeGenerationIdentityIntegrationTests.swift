@@ -62,9 +62,10 @@ final class RuntimeGenerationIdentityIntegrationTests: XCTestCase {
             let after = try RuntimeGenerationArtifactSnapshot.capture(
                 locations: harness.locations
             )
+            let activeGenerationID = try await harness.resolveActive().selector.generationID
             XCTAssertEqual(after.selectorBytes, before.selectorBytes)
             XCTAssertEqual(
-                try await harness.resolveActive().selector.generationID,
+                activeGenerationID,
                 first.generationID
             )
             return ()
@@ -124,15 +125,16 @@ final class RuntimeGenerationIdentityIntegrationTests: XCTestCase {
                 keyCustody: FixedRuntimeAttachmentKeyCustody()
             )
             let resolved = try await harness.resolveActive()
+            let sourceResolved = await source.resolved
 
             XCTAssertEqual(resolved.selector.generationID, target.generationID)
             XCTAssertEqual(
                 resolved.selector.priorGenerationID,
-                source.resolved.selector.generationID
+                sourceResolved.selector.generationID
             )
             XCTAssertEqual(
                 resolved.selector.priorAuthorityManifestDigest,
-                source.resolved.candidate.authorityManifest.manifestDigest
+                sourceResolved.candidate.authorityManifest.manifestDigest
             )
             try await source.close()
             return ()

@@ -3,12 +3,38 @@ import XCTest
 
 final class CommandsLeafTests: XCTestCase {
     func testMarkedTodayRecommendationRejectionCompilesAsLocalRuntimeMutation() {
+        let target = AmbitionsCommandTarget(
+            stepID: "step-1",
+            recommendationID: "candidate-1",
+            destination: .today
+        )
+        let event = TodayReceiptDomainEvent(
+            kind: .recommendationRejection,
+            receipt: ActionReceipt(
+                id: "today.rejection.candidate-1",
+                resultState: .changed,
+                title: "Not this",
+                summary: "The recommendation rejection was recorded.",
+                sourceDomain: .today,
+                occurredAt: "2027-02-20T09:00:00Z",
+                affectedObjects: [
+                    LifeGraphObjectReference(kind: .step, id: "step-1"),
+                    LifeGraphObjectReference(kind: .decision, id: "candidate-1"),
+                ]
+            ),
+            privacyLevel: .safeToShow,
+            localOnly: true,
+            proofRelevance: .notProof,
+            requiresConfirmationBeforeBroaderUse: false
+        )
         let command = AmbitionsCommand(
             id: "today.rejection.command.reducer-proof",
-            kind: .dismissRecommendation,
             source: .today,
-            target: AmbitionsCommandTarget(stepID: "step-1", recommendationID: "candidate-1", destination: .today),
-            payload: AmbitionsCommandPayload(metadata: [TodayReceiptDomainEvent.mutationMarkerKey: "true"]),
+            typedPayload: .history(HistoryCommand(
+                action: .todayReceipt(event),
+                target: target,
+                content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Not this"))
+            )),
             createdAt: "2027-02-20T09:00:00Z",
             privacy: .privateUserText
         )

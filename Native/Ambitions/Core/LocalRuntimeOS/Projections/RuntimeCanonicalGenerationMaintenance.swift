@@ -637,6 +637,10 @@ private struct RuntimeCanonicalCleanupJob: Sendable {
 }
 
 private extension RuntimeCanonicalDerivedTransactionGateway {
+    static func isCanonicalSQLiteCorruption(_ error: SQLiteError) -> Bool {
+        [11, 18, 19, 20, 21, 26].contains(Int(error.primaryCode))
+    }
+
     static func nextCanonicalMaintenanceCandidate(
         ownerID: String,
         nowMilliseconds: Int64,
@@ -1452,9 +1456,9 @@ private extension RuntimeCanonicalDerivedTransactionGateway {
                   job.expectedPostingCount == 0, job.expectedPostingBytes == 0,
                   job.observedPrivacyCounts.values.reduce(0, +) == job.observedCount,
                   job.observedNonlocalCount <= job.observedCount,
-                  privacy == job.observedPrivacyCounts.compactMap {
+                  privacy == job.observedPrivacyCounts.compactMap({
                       $0.value > 0 ? $0.key.rawValue : nil
-                  }.sorted().joined(separator: ","),
+                  }).sorted().joined(separator: ","),
                   (localOnly == 1) == (job.observedNonlocalCount == 0),
                   rootDigest == job.rollingRootDigest else {
                 throw RuntimeCanonicalProjectionPersistenceError.generationMismatch

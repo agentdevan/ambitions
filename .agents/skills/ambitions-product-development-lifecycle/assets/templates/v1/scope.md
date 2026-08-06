@@ -25,6 +25,10 @@ upstream = "research.md"
 
 <!-- PRODUCT-DOC-DRAFT: Define the observable conditions that show each requirement is met. -->
 
+## Frontend impact contract
+
+<!-- PRODUCT-DOC-DRAFT: Declare `Surface impact` (none/existing/new-child/new-root), `IA/navigation` (none/modified), `Assets/iconography` (none/system-only/custom), `Visual language` (unchanged/modified), `Motion` (unchanged/modified), plus `Copy/localization`, `Accessibility`, and `Visual proof`. Every N/A requires a reason. -->
+
 ## Canon impact
 
 <!-- PRODUCT-DOC-DRAFT: Identify potential owning canon changes and why they may be needed. -->

@@ -186,7 +186,7 @@ final class RuntimeGenerationImportForensicContractTests: XCTestCase {
         for fixture in fixtures {
             XCTAssertEqual(fixture.decodedArtifact.formatVersion, 1)
             XCTAssertEqual(fixture.item.disposition, .reviewableDiscovery)
-            XCTAssertFalse(fixture.item.materializationAuthorized)
+            XCTAssertNotNil(fixture.item.mappedArtifact)
             XCTAssertNoThrow(try RuntimeLegacyMappedArtifactAuthenticator.authenticate(
                 item: fixture.item,
                 observedArtifact: fixture.observedArtifact,

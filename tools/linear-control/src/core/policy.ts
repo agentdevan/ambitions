@@ -60,6 +60,17 @@ export function desiredIssueState(issue: CurrentIssue): IssueState {
   )
     return issue.state;
   if (issue.requiredProofFailed) return "Needs Repair";
+  if (
+    issue.frontendAffected &&
+    (!issue.frontendContractPassed ||
+      (issue.visualGateRequired && !issue.visualGateApproved))
+  )
+    return issue.state === "Done" ||
+      issue.state === "In Progress" ||
+      issue.state === "In Review" ||
+      issue.mergedToMain
+      ? "Needs Repair"
+      : "Blocked";
   if (issue.blockedBy.length > 0) return "Blocked";
   if (issue.mergedToMain && issue.proofPassed) return "Done";
   if (issue.pullRequestUrl || issue.mergedToMain) return "In Review";

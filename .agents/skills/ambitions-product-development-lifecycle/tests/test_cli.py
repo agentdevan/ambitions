@@ -19,7 +19,7 @@ if str(SCRIPTS_DIRECTORY) not in sys.path:
 from product_docs.cli import EXIT_DOMAIN_FAILURE, EXIT_SUCCESS, EXIT_USAGE, main
 from product_docs.documents import parse_document
 
-from support import TemporaryRepositoryTestCase, copy_skill_skeleton
+from support import TemporaryRepositoryTestCase, complete_frontend_sections, copy_skill_skeleton
 
 
 SKILL_PATH = Path(".agents/skills/ambitions-product-development-lifecycle")
@@ -61,6 +61,7 @@ class CliTests(TemporaryRepositoryTestCase):
                 "## Requirement traceability\n\nComplete content.",
                 "## Requirement traceability\n\n- REQ-001: DESIGN-001 completes the outcome.",
             )
+        contents = complete_frontend_sections(contents, phase)
         path.write_text(contents, encoding="utf-8")
 
     def write_phase(self, phase: str, *, status: str) -> Path:

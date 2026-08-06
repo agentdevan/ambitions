@@ -36,6 +36,7 @@ function project(
     tasks: [],
     projectDependencies: dependencies,
     sharedPaths,
+    frontendAudit: { status: "passed", visualGate: "not-required" },
     admission: "ready",
     admissionBlockers: [],
   };
@@ -51,6 +52,37 @@ describe("lifecycle policy", () => {
     ).toBe("Done");
     expect(desiredIssueState(issue({ requiredProofFailed: true }))).toBe(
       "Needs Repair",
+    );
+  });
+
+  it("blocks frontend work until repository and visual gates pass", () => {
+    expect(
+      desiredIssueState(
+        issue({ frontendAffected: true, frontendContractPassed: false }),
+      ),
+    ).toBe("Blocked");
+    expect(
+      desiredIssueState(
+        issue({
+          frontendAffected: true,
+          frontendContractPassed: true,
+          visualGateRequired: true,
+          visualGateApproved: false,
+        }),
+      ),
+    ).toBe("Blocked");
+    expect(
+      desiredIssueState(
+        issue({
+          frontendAffected: true,
+          frontendContractPassed: true,
+          visualGateRequired: true,
+          visualGateApproved: true,
+        }),
+      ),
+    ).toBe("Ready For Codex");
+    expect(desiredIssueState(issue({ frontendAffected: false }))).toBe(
+      "Ready For Codex",
     );
   });
 

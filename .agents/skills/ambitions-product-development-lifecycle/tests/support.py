@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
@@ -40,3 +41,44 @@ def copy_skill_skeleton(destination: Path) -> None:
         target = destination / source.relative_to(skill_root)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
+
+
+def complete_frontend_sections(contents: str, phase: str) -> str:
+    sections = {
+        "research": (
+            "Frontend impact investigation",
+            "- Potential frontend impact: none\n"
+            "- Existing surfaces investigated: N/A — structural fixture.\n"
+            "- Evidence and unknowns: N/A — structural fixture.",
+        ),
+        "scope": (
+            "Frontend impact contract",
+            "- Surface impact: none\n"
+            "- IA/navigation: none\n"
+            "- Assets/iconography: none\n"
+            "- Visual language: unchanged\n"
+            "- Motion: unchanged\n"
+            "- Copy/localization: N/A — structural fixture.\n"
+            "- Accessibility: N/A — structural fixture.\n"
+            "- Visual proof: N/A — structural fixture.",
+        ),
+        "design": (
+            "Frontend experience specification",
+            "- Surface impact: none\n"
+            "- IA/navigation: none\n"
+            "- Assets/iconography: none\n"
+            "- Visual language: unchanged\n"
+            "- Motion: unchanged\n"
+            "- Copy/localization: N/A — structural fixture.\n"
+            "- Accessibility: N/A — structural fixture.\n"
+            "- Visual proof: N/A — structural fixture.\n"
+            "- Visual gate: not-required",
+        ),
+    }
+    heading, body = sections[phase]
+    return re.sub(
+        rf"(## {re.escape(heading)}\n\n).*?(?=\n## |\Z)",
+        rf"\1{body}\n",
+        contents,
+        flags=re.DOTALL,
+    )

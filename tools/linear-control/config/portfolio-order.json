@@ -19,6 +19,7 @@
     ["adaptive-path-comparison", "grounded-generative-goal-path-proposals"],
     ["multi-goal-portfolio-simulation"],
     ["generalized-life-branch-simulation"],
-    ["life-branch-reconciliation"]
+    ["life-branch-reconciliation"],
+    ["adaptive-skills-and-pathways"]
   ]
 }

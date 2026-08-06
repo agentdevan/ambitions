@@ -28,6 +28,9 @@ export async function planReconciliation(
         project.tasks.map((task) => [task.canonicalKey, task] as const),
       ),
   );
+  const projectsBySlug = new Map(
+    desired.projects.map((project) => [project.slug, project] as const),
+  );
   const currentByKey = new Map(
     current.issues
       .filter((issue) => issue.canonicalKey)
@@ -35,11 +38,32 @@ export async function planReconciliation(
   );
   for (const [key, task] of desiredTasks) {
     const issue = currentByKey.get(key);
+    const project = projectsBySlug.get(task.projectSlug)!;
+    const frontend = {
+      frontendAffected: task.frontendImpact === "affected",
+      frontendContractPassed: project.frontendAudit.status === "passed",
+      visualGateRequired: task.visualGate === "required",
+      visualGateApproved: task.visualGate === "approved",
+    };
     const payload = {
       title: task.title,
       description: task.body,
       projectSlug: task.projectSlug,
       globalRank: task.globalRank,
+      frontendImpact: task.frontendImpact,
+      visualGate: task.visualGate,
+      frontendAuditStatus: project.frontendAudit.status,
+      requiredGateLabels:
+        task.frontendImpact !== "affected"
+          ? []
+          : [
+              ...(project.frontendAudit.status === "blocked"
+                ? ["gate:frontend-contract"]
+                : []),
+              ...(task.visualGate === "required"
+                ? ["gate:visual-approval"]
+                : []),
+            ],
     };
     const desiredHash = await sha256Text(stableJson(payload));
     if (!issue) {
@@ -56,7 +80,7 @@ export async function planReconciliation(
       );
       continue;
     }
-    const state = desiredIssueState(issue);
+    const state = desiredIssueState({ ...issue, ...frontend });
     if (state !== issue.state)
       mutations.push(
         await mutation(

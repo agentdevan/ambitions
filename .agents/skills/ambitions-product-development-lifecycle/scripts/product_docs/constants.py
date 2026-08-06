@@ -12,6 +12,7 @@ TEMPLATE_PROFILES = {
         "Evidence",
         "Alternatives",
         "Unknowns and risks",
+        "Frontend impact investigation",
         "Recommended direction",
     ),
     "scope": (
@@ -20,6 +21,7 @@ TEMPLATE_PROFILES = {
         "Out of scope",
         "Requirements",
         "Acceptance criteria",
+        "Frontend impact contract",
         "Canon impact",
         "Risks and open decisions",
     ),
@@ -27,6 +29,7 @@ TEMPLATE_PROFILES = {
         "Design summary",
         "User flows",
         "States and recovery",
+        "Frontend experience specification",
         "Architecture and data",
         "Privacy and accessibility",
         "Requirement traceability",

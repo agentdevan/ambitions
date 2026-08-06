@@ -12,6 +12,7 @@ files are named with full repository-relative paths.
    non-exclusive provenance facets, lifecycle, evidence-edge, permission, and
    claim ceilings are representable without scores or duplicated Proof. Tests:
    `Native/AmbitionsTests/Domain/CapabilityModelsTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Add `CapabilityStoreSchema.swift`, `CapabilityStateStore.swift`, and
    `CapabilitySchemaMigration.swift`. Dependency: Task 1. Trace: persistence and
    recovery, REQ-007, REQ-009, REQ-013, REQ-015. Acceptance: empty additive
@@ -19,12 +20,14 @@ files are named with full repository-relative paths.
    quarantine, backup, and replay invariants pass. Tests:
    `Native/AmbitionsTests/LocalRuntimeOS/Storage/CapabilityStateStoreTests.swift`
    and `Native/AmbitionsTests/LocalRuntimeOS/Repair/CapabilitySchemaMigrationTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Implement `CapabilityProposalPolicy.swift` using only approved completion,
    evidence, permission, and lifecycle inputs. Dependency: Tasks 1-2. Trace:
    proposal flow and privacy boundary, REQ-002 through REQ-005, REQ-010,
    REQ-014. Acceptance: proposals are deterministic, quiet when unsupported,
    never inferred from Receipt kind alone, and cannot create or edit Capability.
    Tests: `Native/AmbitionsTests/LocalRuntimeOS/Planning/CapabilityProposalPolicyTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Implement `CapabilityCommandService.swift`,
    `CapabilitySourceLifecycleReconciler.swift`, and extend the existing event,
    Receipt, History, and replay registries with typed Capability operations.
@@ -36,6 +39,7 @@ files are named with full repository-relative paths.
    temporary pending state truthfully. Tests:
    `Native/AmbitionsTests/LocalRuntimeOS/Commands/CapabilityCommandServiceTests.swift`
    and `Native/AmbitionsTests/LocalRuntimeOS/Planning/CapabilitySourceLifecycleReconcilerTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Implement `CapabilityProjector.swift`, `CapabilityCollectionView.swift`, and
    `CapabilityProposalCard.swift`, then wire existing You/Goals composition.
    Dependency: Task 4. Trace: user flows, states, accessibility, REQ-001,
@@ -44,6 +48,7 @@ files are named with full repository-relative paths.
    assistive-control paths work without adding a root or score. Tests:
    `Native/AmbitionsTests/You/CapabilityCollectionProjectionTests.swift` and
    `Native/AmbitionsUITests/CapabilityContinuityUITests.swift`.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 6. Update `local-learning.md`, `you.md`, and `closure-and-proof.md`; regenerate
    canon and `Ambitions.xcodeproj`, then run the full verification contract.
    Dependency: Tasks 1-5. Trace: all REQ-001 through REQ-016. Acceptance: canon,
@@ -51,3 +56,4 @@ files are named with full repository-relative paths.
    migration, and replay evidence are green with no downstream consumer enabled.
    Tests: run every exact command and evidence lane in
    `implementation/verification.md`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.

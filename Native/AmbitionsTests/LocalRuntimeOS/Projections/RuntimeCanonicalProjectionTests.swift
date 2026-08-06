@@ -1,4 +1,5 @@
 import Foundation
+import AmbitionsRuntimeCore
 import AmbitionsRuntimeSQLite
 @testable import Ambitions
 import XCTest
@@ -263,9 +264,13 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let database = try SQLiteDatabase(
             url: temporaryDatabaseURL("empty-v5")
         )
-        try await database.transaction(.exclusive) { isolated in
-            for statement in CanonicalRuntimeStore.schemaStatements +
-                CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements {
+        let statements = CanonicalRuntimeStore.schemaStatements +
+            CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements
+        try await database.bootstrapTransaction(
+            .exclusive,
+            authorization: try CanonicalRuntimeStore.schemaBootstrapAuthorization(statements)
+        ) { isolated in
+            for statement in statements {
                 try isolated.execute(statement)
             }
             try isolated.execute("PRAGMA user_version = 5")
@@ -333,7 +338,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testActivationPublishesCapturedPrefixWhileLaterAppendRemainsPending() async throws {
-        let database = try await makeV5Database("prefix-publication")
+        let database = try await makeExternalOperationIntegratedDatabase("prefix-publication")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 64, totalCount: 65,
@@ -377,7 +382,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testCompatibleBaseRejectsDefinitionMismatchAndScrubQuarantine() async throws {
-        let database = try await makeV5Database("base-compatibility")
+        let database = try await makeExternalOperationIntegratedDatabase("base-compatibility")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -471,7 +476,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testFirstMutationRetainsScrubCertifiedHistoricalEmptyBaseForClone() async throws {
-        let database = try await makeV5Database("empty-base-clone")
+        let database = try await makeExternalOperationIntegratedDatabase("empty-base-clone")
         let definition = try projectionDefinition(.aggregateState)
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
         let emptyGenerationID = RuntimeTransactionDigest.digest([
@@ -553,7 +558,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testBlockedJobIsExcludedAndTruthFailsClosed() async throws {
-        let database = try await makeV5Database("blocked-job")
+        let database = try await makeExternalOperationIntegratedDatabase("blocked-job")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -561,7 +566,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             blockedReason: "historical_privacy_missing"
         )
         try await database.transaction(.deferred) { isolated in
-            XCTAssertNil(try CanonicalRuntimeStore.nextCanonicalProjectionID(database: isolated))
+            XCTAssertNil(try CanonicalRuntimeStore.nextCanonicalProjectionID(
+                registry: RuntimeCanonicalProjectionDefinitionRegistry.canonical(),
+                database: isolated
+            ))
             let truth = try XCTUnwrap(CanonicalRuntimeStore.canonicalProjectionJobTruth(
                 projectionID: definition.id,
                 expectedDefinitionVersion: definition.definitionVersion,
@@ -595,7 +603,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testBlockedBuildCanBeAuthenticatedIntoBoundedCleanup() async throws {
-        let database = try await makeV5Database("blocked-retirement")
+        let database = try await makeExternalOperationIntegratedDatabase("blocked-retirement")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -635,7 +643,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testTargetRecoveryDoesNotPoisonBoundBaseAndSealedAbandonRequiresFence() async throws {
-        let database = try await makeV5Database("repair-provenance")
+        let database = try await makeExternalOperationIntegratedDatabase("repair-provenance")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -669,7 +677,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testUnavailableCloneBaseCreatesRepairAndBoundedTargetCleanupBeforeFullReplay() async throws {
-        let database = try await makeV5Database("clone-base-recovery")
+        let database = try await makeExternalOperationIntegratedDatabase("clone-base-recovery")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -825,7 +833,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testProjectionScrubAuthenticatesPrivacyAndLocalSummary() async throws {
-        let database = try await makeV5Database("projection-scrub-summary")
+        let database = try await makeExternalOperationIntegratedDatabase("projection-scrub-summary")
         let definition = try projectionDefinition(.aggregateState)
         let entry = try makeEntry(
             id: "goal-private", privacy: .privateUserText, cursor: try fixtureCursor(1)
@@ -878,7 +886,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testProjectionScrubDefersUndersizedConfigurationBeforeClaim() async throws {
-        let database = try await makeV5Database("projection-scrub-budget")
+        let database = try await makeExternalOperationIntegratedDatabase("projection-scrub-budget")
         let definition = try projectionDefinition(.aggregateState)
         let entries = try [
             makeEntry(id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)),
@@ -938,7 +946,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testDurableMaintenanceAndProjectionFSMRejectsSkippedOrRegressingWrites() async throws {
-        let database = try await makeV5Database("durable-fsm")
+        let database = try await makeExternalOperationIntegratedDatabase("durable-fsm")
         let definition = try projectionDefinition(.aggregateState)
         let entry = try makeEntry(
             id: "goal-fsm", privacy: .standard, cursor: try fixtureCursor(1)
@@ -1036,7 +1044,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testSearchActivationRequiresProjectionAndSearchScrubCertificates() async throws {
-        let database = try await makeV5Database("search-preactivation-scrub")
+        let database = try await makeExternalOperationIntegratedDatabase("search-preactivation-scrub")
         let definition = try projectionDefinition(.search)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -1118,7 +1126,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testOldBuildRepairDoesNotHideActiveAuthorityButCurrentRepairFailsClosed() async throws {
-        let database = try await makeV5Database("repair-truth-scope")
+        let database = try await makeExternalOperationIntegratedDatabase("repair-truth-scope")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
@@ -1167,7 +1175,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let definition = try projectionDefinition(.aggregateState)
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
         for defect in ["gap_suffix", "overlap", "header_count", "header_root"] {
-            let database = try await makeV5Database("scrub-\(defect)")
+            let database = try await makeExternalOperationIntegratedDatabase("scrub-\(defect)")
             let generationID = RuntimeTransactionDigest.digest(["scrub-defect", defect])
             let first = try makeEntry(
                 id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)
@@ -1207,10 +1215,11 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 }
                 func insertShard(
                     ordinal: Int, prior: String,
-                    entries: [RuntimeCanonicalProjectionEntry]
+                    entries: [RuntimeCanonicalProjectionEntry],
+                    database: isolated SQLiteDatabase
                 ) throws -> String {
                     let digest = shardDigest(ordinal: ordinal, prior: prior, entries: entries)
-                    try isolated.execute(
+                    try database.execute(
                         """
                         INSERT INTO runtime_canonical_projection_shards VALUES (
                             ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -1233,29 +1242,33 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 let declaredRoot: String
                 switch defect {
                 case "gap_suffix":
-                    let shard0 = try insertShard(ordinal: 0, prior: empty, entries: [first])
+                    let shard0 = try insertShard(
+                        ordinal: 0, prior: empty, entries: [first], database: isolated
+                    )
                     declaredRoot = try insertShard(
-                        ordinal: 2, prior: shard0, entries: [second]
+                        ordinal: 2, prior: shard0, entries: [second], database: isolated
                     )
                     declaredEntryCount = 2
                     declaredShardCount = 2
                 case "overlap":
                     let shard0 = try insertShard(
-                        ordinal: 0, prior: empty, entries: [first, second]
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
                     )
                     declaredRoot = try insertShard(
-                        ordinal: 1, prior: shard0, entries: [second]
+                        ordinal: 1, prior: shard0, entries: [second], database: isolated
                     )
                     declaredEntryCount = 3
                     declaredShardCount = 2
                 case "header_count":
                     declaredRoot = try insertShard(
-                        ordinal: 0, prior: empty, entries: [first, second]
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
                     )
                     declaredEntryCount = 2
                     declaredShardCount = 2
                 default:
-                    _ = try insertShard(ordinal: 0, prior: empty, entries: [first, second])
+                    _ = try insertShard(
+                        ordinal: 0, prior: empty, entries: [first, second], database: isolated
+                    )
                     declaredEntryCount = 2
                     declaredShardCount = 1
                     declaredRoot = String(repeating: "e", count: 64)
@@ -1315,7 +1328,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testRecurringRepairFailureCreatesNewRequiredOccurrenceAfterResolution() async throws {
-        let database = try await makeV5Database("repair-recurrence")
+        let database = try await makeExternalOperationIntegratedDatabase("repair-recurrence")
         let definition = try projectionDefinition(.aggregateState)
         let generationID = String(repeating: "9", count: 64)
         try await database.transaction(.immediate) { isolated in
@@ -1357,7 +1370,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testRetiredScrubCancellationAndProjectionGCDependencyArePersisted() async throws {
-        let database = try await makeV5Database("maintenance-dependency")
+        let database = try await makeExternalOperationIntegratedDatabase("maintenance-dependency")
         let definition = try projectionDefinition(.aggregateState)
         let projectionID = String(repeating: "a", count: 64)
         let searchID = String(repeating: "b", count: 64)
@@ -1442,7 +1455,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testMaintenanceSchedulerUsesEnqueueFIFOThenRotatesAheadOfLaterArrival() async throws {
-        let database = try await makeV5Database("maintenance-fairness")
+        let database = try await makeExternalOperationIntegratedDatabase("maintenance-fairness")
         let definition = try projectionDefinition(.aggregateState)
         let searchDefinition = try projectionDefinition(.search)
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
@@ -1643,7 +1656,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testAbandonedBuildUsesBoundedCleanupInsteadOfSynchronousDeletion() async throws {
-        let database = try await makeV5Database("bounded-build-cleanup")
+        let database = try await makeExternalOperationIntegratedDatabase("bounded-build-cleanup")
         let definition = try projectionDefinition(.aggregateState)
         let cursor = RuntimeCanonicalReplayCursor(
             sequence: 1, eventID: "event-1",
@@ -1745,7 +1758,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testAbandonedSearchBuildDrainsEveryDerivedPhaseBeforeProjectionHeader() async throws {
-        let database = try await makeV5Database("full-search-cleanup")
+        let database = try await makeExternalOperationIntegratedDatabase("full-search-cleanup")
         let definition = try projectionDefinition(.search)
         let entry = try makeEntry(
             id: "goal-search-cleanup", privacy: .standard, cursor: try fixtureCursor(1)
@@ -1756,7 +1769,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         )
         let searchID = CanonicalRuntimeStore.canonicalSearchGenerationID(fixture.work)
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
-        try await database.transaction(.immediate) { isolated in
+        try await database.transaction(
+            .immediate,
+            writeAuthorization: try fixtureWriteAuthorization()
+        ) { isolated in
             try isolated.execute(
                 """
                 INSERT INTO runtime_canonical_search_generations VALUES (
@@ -1771,7 +1787,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                 ]
             )
             let metadata = try RuntimeCanonicalSearchMetadataExtractor.extract(
-                entry: entry, allowedFields: definition.allowedSearchFields
+                entry: entry, allowedFields: Set(definition.allowedSearchFields)
             )
             let documentDigest = RuntimeCanonicalSearchDocument.authorityDigest(
                 generationID: searchID, aggregate: entry.aggregate,
@@ -1872,7 +1888,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testPrivacyFilteredKeysetReadsAndTransactionLocalActionVerification() async throws {
-        let database = try await makeV5Database("entry-access")
+        let database = try await makeExternalOperationIntegratedDatabase("entry-access")
         let definition = try projectionDefinition(.aggregateState)
         let entries = try [
             makeEntry(id: "goal-a", privacy: .standard, cursor: try fixtureCursor(1)),
@@ -1953,7 +1969,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testProjectionEntryBudgetRejectsOversizedFirstRowInsteadOfForcingProgress() async throws {
-        let database = try await makeV5Database("first-row-budget")
+        let database = try await makeExternalOperationIntegratedDatabase("first-row-budget")
         let definition = try projectionDefinition(.aggregateState)
         let generationID = String(repeating: "7", count: 64)
         let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
@@ -1987,15 +2003,15 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
     }
 
     func testLeaseFenceRejectsStaleOwnerAndCancellation() async throws {
-        let database = try await makeV5Database("lease-fence")
+        let database = try await makeExternalOperationIntegratedDatabase("lease-fence")
         let definition = try projectionDefinition(.aggregateState)
         let fixture = try await seedActivationFixture(
             definition: definition, capturedCount: 1, totalCount: 1,
-            entries: [], database: database
+            entries: [], database: database, phase: .replay
         )
         try await database.transaction(.deferred) { isolated in
             try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                fixture.work, phase: .ready, database: isolated
+                fixture.work, phase: .replay, database: isolated
             )
             let staleLease = RuntimeCanonicalProjectionLease(
                 projectionID: definition.id, ownerID: "other-owner", version: 99,
@@ -2003,7 +2019,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             )
             let stale = replacingLease(fixture.work, lease: staleLease)
             XCTAssertThrowsError(try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                stale, phase: .ready, database: isolated
+                stale, phase: .replay, database: isolated
             ))
         }
         let cancelled = await Task { () -> Bool in
@@ -2011,7 +2027,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
             do {
                 try await database.transaction(.deferred) { isolated in
                     try CanonicalRuntimeStore.requireCanonicalProjectionBuildFence(
-                        fixture.work, phase: .ready, database: isolated
+                        fixture.work, phase: .replay, database: isolated
                     )
                 }
                 return false
@@ -2033,17 +2049,46 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         )
     }
 
-    private func makeV5Database(_ label: String) async throws -> SQLiteDatabase {
+    private func makeExternalOperationIntegratedDatabase(
+        _ label: String
+    ) async throws -> SQLiteDatabase {
         let database = try SQLiteDatabase(url: temporaryDatabaseURL(label))
-        try await database.transaction(.exclusive) { isolated in
-            for statement in CanonicalRuntimeStore.schemaStatements +
-                CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements {
+        let statements = CanonicalRuntimeExternalOperationSchemaPlan.fullGenerationStatements
+        try await database.bootstrapTransaction(
+            .exclusive,
+            authorization: try CanonicalRuntimeStore.schemaBootstrapAuthorization(statements)
+        ) { isolated in
+            for statement in statements {
                 try isolated.execute(statement)
             }
-            try isolated.execute("PRAGMA user_version = 5")
-            try CanonicalRuntimeProjectionSchemaPlan.requireIntegratedSchema(in: isolated)
+            try isolated.execute(
+                "INSERT INTO runtime_store_metadata(singleton_id, schema_version, generation_id, created_at_ms) VALUES(1, ?, ?, 0)",
+                bindings: [
+                    .integer(Int64(runtimeCanonicalExternalOperationSchemaVersion)),
+                    .text("projection-tests"),
+                ]
+            )
+            try isolated.execute(
+                "PRAGMA user_version = \(runtimeCanonicalExternalOperationSchemaVersion)"
+            )
+            try CanonicalRuntimeExternalOperationSchemaPlan.requireIntegratedSchema(in: isolated)
         }
         return database
+    }
+
+    private func fixtureWriteAuthorization() throws -> SQLiteWriteAuthorization {
+        let statements = CanonicalRuntimeExternalOperationSchemaPlan.fullGenerationStatements
+        let tables = Set(statements.compactMap { statement -> String? in
+            let tokens = statement.split(whereSeparator: { $0.isWhitespace }).map(String.init)
+            guard tokens.count > 2, tokens[0] == "CREATE", tokens[1] == "TABLE" else {
+                return nil
+            }
+            return tokens[2]
+        })
+        return try SQLiteWriteAuthorization(
+            allowedTables: tables,
+            allowedReadTables: tables.union(["sqlite_master", "sqlite_schema"])
+        )
     }
 
     private func fixtureCursor(_ sequence: Int) throws -> RuntimeCanonicalReplayCursor {
@@ -2111,7 +2156,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         let previousHash = sequence == 1
             ? nil
             : try fixtureSemanticRecord(sequence - 1).lineage.eventHash
-        let occurredAt = Date(timeIntervalSince1970: Double(sequence) / 1_000)
+        let occurredAt = Date(timeIntervalSince1970: Double(sequence))
         let sourceDigest = SHA256Digest.digest(sourceBytes)
         let eventHash = try RuntimeSemanticEventHashing.eventHash(
             eventID: eventID,
@@ -2157,7 +2202,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
         phase: RuntimeCanonicalProjectionBuildPhase = .ready,
         blockedReason: String? = nil
     ) async throws -> ActivationFixture {
-        try await database.transaction(.immediate) { isolated in
+        try await database.transaction(
+            .immediate,
+            writeAuthorization: try fixtureWriteAuthorization()
+        ) { isolated in
             let empty = RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal
             let firstRecord = try fixtureSemanticRecord(1)
             let firstTransition = try XCTUnwrap(
@@ -2225,7 +2273,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         record.lineage.previousEventHash.map {
                             .text($0.hexadecimal)
                         } ?? .null,
-                        .text(cursor.eventHash), .integer(Int64(sequence)),
+                        .text(cursor.eventHash), .integer(Int64(sequence) * 1_000),
                     ]
                 )
                 let invalidationID = "invalidation.\(sequence).\(definition.id.rawValue)"
@@ -2284,7 +2332,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                     )],
                     undoability: .noncompensable(evidence),
                     confirmationToken: nil, confirmationDecisionDigest: nil,
-                    committedAt: Date(timeIntervalSince1970: Double(sequence) / 1_000)
+                    committedAt: Date(timeIntervalSince1970: Double(sequence))
                 )
                 try isolated.execute(
                     """
@@ -2297,7 +2345,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         .text(receipt.receiptID.rawValue),
                         .text(receipt.preparationID.rawValue), .text(commandID),
                         .integer(Int64(sequence)), .integer(Int64(runtimeCommitAnchorVersion)),
-                        .integer(Int64(sequence)),
+                        .integer(Int64(sequence) * 1_000),
                     ]
                 )
                 let core = try RuntimeCommittedReceiptAuthority.persist(
@@ -2305,9 +2353,10 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                     eventRecord: record,
                     correlationID: record.lineage.correlationID,
                     dispositionIntent: .noncompensable(evidence),
-                    pendingExternalOperations: [],
+                    externalOperationCreations: [],
+                    attachmentArtifacts: [],
                     compensationConsumption: nil,
-                    createdAtMilliseconds: Int64(sequence),
+                    createdAtMilliseconds: Int64(sequence) * 1_000,
                     database: isolated
                 )
                 let finalOutcome = RuntimeAtomicCommitFinalOutcome(
@@ -2318,7 +2367,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         projectionDegradation: []
                     ),
                     receipt: core,
-                    pendingExternalOperations: []
+                    externalOperationCreations: []
                 )
                 let finalBytes = try RuntimeAtomicCommitCoding.encodeFinalOutcome(finalOutcome)
                 try isolated.execute(
@@ -2332,7 +2381,7 @@ final class RuntimeCanonicalProjectionTests: XCTestCase, @unchecked Sendable {
                         .integer(Int64(canonicalIdempotencyFinalResultVersion)),
                         .blob(finalBytes),
                         .text(LocalRuntimeStorageChecksum.sha256Hex(for: finalBytes)),
-                        .integer(Int64(sequence)), .text(commandID),
+                        .integer(Int64(sequence) * 1_000), .text(commandID),
                     ]
                 )
             }

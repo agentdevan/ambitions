@@ -204,6 +204,12 @@ No unresolved product hard fork blocks Scope. The recommended v1 can select an
 exact Capture-only eligibility set, conservative numeric limits, in-app-only use,
 and confirmation fallback while direct-user value remains an evidence gate.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Composer/Capture/ScopedAutomationReviewSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 7 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Proceed to Scope with a **scoped automation authority** below every current

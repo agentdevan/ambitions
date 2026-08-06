@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
+  "canon_content_sha": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
   "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [
@@ -9306,6 +9306,42 @@
         "UX-STATE-VARIANT-TIME-WEEK-EXTERNAL-HIDDEN-CAPACITY",
         "UX-STATE-VARIANT-TIME-YEAR-EXTERNAL-HIDDEN-CAPACITY"
       ]
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Capability identity, independent evidence facets, lifecycle, future-use permission, and claim ceilings are domain semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "OBJ-CAPABILITY-IDENTITY-001",
+      "requirement_text_sha256": "1b6823f298ad21fff0348c2d2f79f8d01c4a48863f70871a9f3b7a8abcc87eb6",
+      "source_path": "docs/canon/specifications/objects/capability.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Public-reference claim identity is source-native and cannot imply a personal qualification, acceptance, or recommendation fit. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002",
+      "requirement_text_sha256": "0c9940db5823c0ca4f1d32f6448e44e49f4eef6febdd1b389eacc1ad324cb5fe",
+      "source_path": "docs/canon/specifications/objects/source-reference.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Public-reference and private graph data remain separated at Source Atlas and R2 boundaries. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003",
+      "requirement_text_sha256": "89a69d89cbbea5069156a44d23dab8d9fb624806b86988e629bacacfbdec1d83",
+      "source_path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Public-reference delivery, semantic review, freshness, rights, and conflict states are source-bound domain semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002",
+      "requirement_text_sha256": "f8049811aa33805ed3583bc48fccc8c94490dbe68fb6f6c019409aa9d6b4ba8d",
+      "source_path": "docs/canon/specifications/systems/source-atlas.md",
+      "state_blueprint_ids": []
     }
   ],
   "schema_version": 1,

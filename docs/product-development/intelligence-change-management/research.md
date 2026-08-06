@@ -220,6 +220,12 @@ from inventing unsafe update logic while preserving semantic ownership.
 No hard product fork remains. Use app-pinned trust metadata and signed immutable
 public releases; disable/fallback where external model rollback is impossible.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/IntelligenceReleases/`.
+- Evidence and unknowns: Repository audit identifies Task 9 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create `IntelligenceReleaseCoordinator`, immutable artifact/attestation store,

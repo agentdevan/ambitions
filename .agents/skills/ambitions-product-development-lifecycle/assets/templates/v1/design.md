@@ -17,6 +17,10 @@ upstream = "scope.md"
 
 <!-- PRODUCT-DOC-DRAFT: Define visible states, failures, empty states, and recovery behavior. -->
 
+## Frontend experience specification
+
+<!-- PRODUCT-DOC-DRAFT: Repeat Scope's exact frontend classifications; resolve surfaces, hierarchy, navigation, components, assets, copy/localization, visible states, motion, accessibility, and visual proof; and declare `Visual gate` as not-required, required, or approved. -->
+
 ## Architecture and data
 
 <!-- PRODUCT-DOC-DRAFT: Describe affected components, interfaces, data flow, persistence, and migrations. -->

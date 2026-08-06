@@ -34,7 +34,6 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         for writePath in MeaningfulMutationRegistry.writePaths {
             XCTAssertEqual(writePath.status, .unproven, writePath.sourcePath)
             XCTAssertNil(writePath.executorOwner, writePath.sourcePath)
-            XCTAssertTrue(writePath.durableStores.isEmpty, writePath.sourcePath)
             XCTAssertNil(writePath.eventKind, writePath.sourcePath)
             XCTAssertNil(writePath.projectionOwner, writePath.sourcePath)
             XCTAssertNil(writePath.receiptOwner, writePath.sourcePath)

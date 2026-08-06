@@ -375,6 +375,12 @@ the user explicitly chooses a canonical object transition.
   factual quality, persistence, end-to-end activation, runtime scheduling,
   privacy egress, accessibility, performance, or device behavior.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/GoalPathGenerationView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue toward **source-bounded, assumption-explicit candidate route

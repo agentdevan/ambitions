@@ -48,6 +48,8 @@ export interface TaskContract {
   dependencies: readonly string[];
   sharedPaths: readonly string[];
   proof: ProofContract;
+  frontendImpact: "none" | "affected" | "unclassified";
+  visualGate: "not-required" | "required" | "approved" | "unclassified";
   globalRank?: number;
   parallelGroup?: string;
 }
@@ -62,6 +64,11 @@ export interface ProjectContract {
   tasks: readonly TaskContract[];
   projectDependencies: readonly string[];
   sharedPaths: readonly string[];
+  frontendAudit: {
+    status: "passed" | "blocked";
+    visualGate: "not-required" | "required" | "approved" | "unclassified";
+    firstFrontendTaskKey?: string;
+  };
   admission: "ready" | "pending";
   admissionBlockers: readonly string[];
 }
@@ -93,6 +100,10 @@ export interface CurrentIssue {
   mergedToMain: boolean;
   proofPassed: boolean;
   requiredProofFailed: boolean;
+  frontendAffected?: boolean;
+  frontendContractPassed?: boolean;
+  visualGateRequired?: boolean;
+  visualGateApproved?: boolean;
 }
 
 export interface CurrentProject {

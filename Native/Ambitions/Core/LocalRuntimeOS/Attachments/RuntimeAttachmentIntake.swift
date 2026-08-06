@@ -7,7 +7,7 @@ struct RuntimeAttachmentIntakePart: Sendable {
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let sourceURL: URL
     let originalFilename: String
     let declaredContentType: String
@@ -42,7 +42,7 @@ struct RuntimeAttachmentPortableIntakeRequest: Sendable {
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let reservationID: RuntimeBlobQuotaReservationID
     let importReceipt: RuntimeAttachmentPortableImportReceipt
     let dedupPolicy: RuntimeAttachmentDedupPolicy

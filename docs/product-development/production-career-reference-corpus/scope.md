@@ -358,6 +358,17 @@ unknown and no success or qualification claim appears.
     tests and evidence types, limitations, and resulting eligibility; no broad
     corpus or recommendation claim follows from a narrower pass.
 
+## Frontend impact contract
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: The approved requirements, acceptance criteria, and user flows own visible terminology and non-claims; implementation must localize that meaning without inventing promotional, score, authority, or outcome language.
+- Accessibility: Every new child view and action must preserve the approved semantic order, Dynamic Type/reflow, assistive-input parity, non-color meaning, focus, announcements, and reduced-effects behavior.
+- Visual proof: One production-intended native fixture and viewport requires owner visual approval before implementation, followed by changed-state runtime, screenshot, accessibility, and named-device evidence required by Verification.
+
 ## Canon impact
 
 Implementation would likely extend the Source Atlas system specification with a

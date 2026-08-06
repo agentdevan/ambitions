@@ -58,7 +58,7 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
         assertExplainabilityParity(runtimeContext?.explainability, directExplainability)
     }
 
-    func testCaptureCorrectionMatchesCanonicalTeachingSignalShape() async throws {
+    func testProposeCorrectionMatchesCanonicalTeachingProposalWithoutMutation() async throws {
         let runtimeRepositories = try await makeRepositories()
         let directRepositories = try await makeRepositories()
         let runtimeSetup = try await createGoalContext(repositories: runtimeRepositories, title: "Launch my business")
@@ -70,12 +70,12 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
         )
 
         let runtimeService = RepositoryBackedRuntimeGoalIntelligenceService(repositories: runtimeRepositories)
-        let runtimeSignal = try await runtimeService.captureCorrection(
+        let runtimeProposal = try await runtimeService.proposeCorrection(
             target: runtimeSetup.target,
             control: control,
             now: fixedNow
         )
-        let directSignal = try await DefaultGoalTeachingSignalService(repository: directRepositories.teaching).capture(
+        let directProposal = try DefaultGoalTeachingSignalService(repository: directRepositories.teaching).propose(
             GoalTeachingCaptureRequest(
                 goalID: try XCTUnwrap(directContext.goalID),
                 capturedAt: DomainTimestamp.string(from: fixedNow),
@@ -87,13 +87,18 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
             metadata: directContext.metadata
         )
 
-        XCTAssertEqual(runtimeSignal.kind, directSignal.kind)
-        XCTAssertEqual(runtimeSignal.anchor, directSignal.anchor)
-        XCTAssertEqual(runtimeSignal.payload, directSignal.payload)
+        XCTAssertEqual(runtimeProposal.capturedAt, directProposal.capturedAt)
+        XCTAssertEqual(runtimeProposal.kind, directProposal.kind)
+        XCTAssertEqual(runtimeProposal.source, directProposal.source)
+        XCTAssertEqual(runtimeProposal.anchor, directProposal.anchor)
         XCTAssertEqual(
-            normalizedApplicationKey(runtimeSignal.applicationKey),
-            normalizedApplicationKey(directSignal.applicationKey)
+            normalizedApplicationKey(runtimeProposal.applicationKey),
+            normalizedApplicationKey(directProposal.applicationKey)
         )
+        let runtimeSignals = try await runtimeRepositories.teaching.listSignals(goalID: nil)
+        let directSignals = try await directRepositories.teaching.listSignals(goalID: nil)
+        XCTAssertTrue(runtimeSignals.isEmpty)
+        XCTAssertTrue(directSignals.isEmpty)
     }
 
     func testBatchLoadContextMatchesSingleTargetProjectionAndOrdering() async throws {

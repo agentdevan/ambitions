@@ -12,6 +12,7 @@ resources once `project.yml` includes the resource directory.
    identity/right/eligibility has a strict contract, exact release placeholders
    must be resolved before build, and unknown members fail closed. Tests:
    schema cases in `test_education_corpus_release.py` and canon compiler tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. **CIP 2020 and source-value semantics.** Implement models, CIP adapter, full
    hierarchy/crosswalk fixtures, and reported/imputed/derived/suppressed/not-
    applicable/missing/revised value semantics. Dependency: Task 1. Trace:
@@ -19,6 +20,7 @@ resources once `project.yml` includes the resource directory.
    baseline hierarchy is accounted; split/combined relations never become
    identity; a CIP record cannot become an offering/competency. Tests:
    `test_education_corpus_cip_2020.py` and model schema cases.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. **IPEDS and College Scorecard adapters.** Implement exact release/file/field
    allowlists and fixtures for identity, mixed component years, completions,
    admissions, cost/aid, outcome measures, field/credential level, imputation,
@@ -27,6 +29,7 @@ resources once `project.yml` includes the resource directory.
    Acceptance: every value retains source definition/clock/population/state;
    completions never create current offerings; suppressed values never render,
    compare, or rank. Tests: IPEDS and Scorecard foundry test files.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. **DAPIP and explicit identity assertions.** Implement DAPIP adapter and
    identity resolver with exact institution/program/site/agency/scope/action/
    dates/disclaimer plus confirmed, ambiguous, conflicting, merger/closure,
@@ -34,6 +37,7 @@ resources once `project.yml` includes the resource directory.
    `REQ-007` through `REQ-009`, `REQ-013`, `REQ-014`. Acceptance: recognition
    never inherits across scope and claims cannot traverse ambiguous/conflicting
    links. Tests: DAPIP and identity foundry test files.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. **Rights, access, and CTDL/CASE fail-closed reservations.** Implement the
    rights engine, adapter reservations, and fixtures for individual access,
    bulk approval, research agreement, content-rights absent, attribution,
@@ -42,18 +46,21 @@ resources once `project.yml` includes the resource directory.
    `REQ-016`. Acceptance: technical parse/conformance cannot enable content;
    failures isolate affected records; withdrawal produces the exact purge plan.
    Tests: `test_education_corpus_rights.py` and release tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. **Foundry validation, coverage, diff, and archive builder.** Implement the
    remaining foundry modules/CLI and deterministic signed `.saec` generation.
    Dependency: Tasks 2-5. Trace: `REQ-001` through `REQ-018`, `REQ-020`.
    Acceptance: reproducible bytes, exact denominators, explicit identity and
    source-family shards, release diff/invalidation, evaluation bindings, and no
    partial/rights-blocked/regressive promotion. Tests: all eight foundry files.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. **Native models, decoder, identity, and semantic parity.** Implement native
    data models, decoder, identity resolver, and semantic validator. Dependency:
    Tasks 1-6. Trace: `REQ-001` through `REQ-014`, `REQ-018`, `REQ-019`.
    Acceptance: Swift/Python accept/reject identical golden archives and produce
    matching count, identity, processing, suppression, recognition, rights, and
    eligibility results. Tests: models/decoder/semantic/identity native tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. **Snapshot store, migration, coordinator, and recovery.** Implement store,
    migration, coordinator, invalidation planner, reset, and purge on the public
    cache. Dependency: Task 7. Trace: `REQ-011`, `REQ-013` through `REQ-016`,
@@ -61,6 +68,7 @@ resources once `project.yml` includes the resource directory.
    idempotent crash replay, corrupt-index rebuild, exact legacy supersession,
    and complete resumable rights purge. Tests: store, migration, coordinator,
    and invalidation/purge files.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. **Local query and read-only consumer boundary.** Implement query index/actor,
    read client, runtime projection boundary, and bootstrap composition without
    a command/rank/model client. Dependency: Task 8. Trace: `REQ-002` through
@@ -68,12 +76,14 @@ resources once `project.yml` includes the resource directory.
    paging, inspection, and same-definition comparison are deterministic and
    snapshot-bound; no private input, network, feedback, ranking, mutation, or
    external-action path exists. Tests: query/privacy boundary tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. **Inspection and accessibility.** Implement four Trust files and update the
     exact source inspection and You entry files. Dependency: Task 9. Trace:
     `REQ-002` through `REQ-010`, `REQ-013` through `REQ-017`. Acceptance: every
     source/value/identity/recognition/failure state and recovery is accessible,
     comprehensible, and free of ranking/prediction/endorsement overclaim. Tests:
     inspection, accessibility, and UI files.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 11. **Bundled bootstrap, refresh registry, and project generation.** Generate
     and byte-review bootstrap JSON/archive; update fixed refresh entries,
     lifecycle scheduler, `project.yml`, and generated project. Dependency:
@@ -82,6 +92,7 @@ resources once `project.yml` includes the resource directory.
     partition exists; resource/archive/storage budgets are measured against
     approved evidence. Tests: decoder/store/coordinator/privacy/resource-bundle
     integration.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 12. **Portfolio evaluation and complete verification.** Run every ordinary and
     adversarial fixture plus all commands/evidence lanes in
     `implementation/verification.md`. Dependency: Tasks 1-11. Trace: all
@@ -90,6 +101,7 @@ resources once `project.yml` includes the resource directory.
     build, simulator, and physical-device lanes are green; recommendation,
     current offerings, CTDL/CASE unapproved content, direct-user usefulness,
     merge, deployment, and release remain explicit N/A or insufficient.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Requirement-to-task traceability
 

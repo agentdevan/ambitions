@@ -14,6 +14,7 @@ if str(SCRIPTS_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIRECTORY))
 
 from product_docs.validation import validate_initiative
+from support import complete_frontend_sections
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
@@ -44,7 +45,7 @@ def completed_document(document_type: str, *, content: str) -> str:
             "## Requirement traceability\n\nComplete content.",
             f"## Requirement traceability\n\n{content}",
         )
-    return contents
+    return complete_frontend_sections(contents, document_type)
 
 
 def complete_initiative(directory: Path) -> None:
@@ -62,6 +63,28 @@ def complete_initiative(directory: Path) -> None:
 
 
 class GroomingValidationTests(unittest.TestCase):
+    def test_groomed_tasks_require_explicit_frontend_classification(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            complete_initiative(initiative)
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            (implementation / "plan.md").write_text(
+                "# Plan\n\nImplementation order.\n", encoding="utf-8"
+            )
+            (implementation / "tasks.md").write_text(
+                "# Tasks\n\n1. Implement the flow. Dependency: none.\n",
+                encoding="utf-8",
+            )
+            (implementation / "verification.md").write_text(
+                "# Verification\n\nRun the focused tests.\n", encoding="utf-8"
+            )
+
+            result = validate_initiative(initiative)
+
+        self.assertIn("missing-task-frontend-declaration", diagnostics(result))
+
     def test_design_must_trace_every_scope_requirement(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             initiative = Path(temporary_directory) / "example"
@@ -109,7 +132,11 @@ class GroomingValidationTests(unittest.TestCase):
             implementation.mkdir()
             for filename, heading, body in (
                 ("plan.md", "Plan", "Implementation order."),
-                ("tasks.md", "Tasks", "1. Implement the flow."),
+                (
+                    "tasks.md",
+                    "Tasks",
+                    "1. Implement the flow. Dependency: none. Frontend: none — structural fixture.",
+                ),
                 ("verification.md", "Verification", "Run the focused tests."),
             ):
                 (implementation / filename).write_text(
@@ -144,7 +171,11 @@ class GroomingValidationTests(unittest.TestCase):
             implementation.mkdir()
             for filename, heading, body in (
                 ("plan.md", "Plan", "Implementation order."),
-                ("tasks.md", "Tasks", "1. Implement the flow."),
+                (
+                    "tasks.md",
+                    "Tasks",
+                    "1. Implement the flow. Dependency: none. Frontend: none — structural fixture.",
+                ),
                 ("verification.md", "Verification", "Run the focused tests."),
             ):
                 (implementation / filename).write_text(

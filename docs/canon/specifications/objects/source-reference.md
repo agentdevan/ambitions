@@ -6,13 +6,24 @@ status = "normative"
 owner_domain = "object-source-reference"
 canon_revision = 1
 profile = "object-v1"
-owns_concepts = ["object.source-reference.identity-visibility"]
+owns_concepts = ["object.source-reference.identity-visibility", "object.source-reference.public-claim-identity"]
 inherits = ["TIME-EXTERNAL-VISIBILITY-001", "LAW-R2-PUBLIC-ONLY-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-EVENT", "GLOBAL-TRUST-INSPECTION", "SURFACE-YOU"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
 +++
 
 # Source Reference
+
+## OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002 — Public claim identity remains source-native
+
+- **Concept:** `object.source-reference.public-claim-identity`
+- **Modality:** `MUST`
+- **Scope:** Public-reference claim identity, release, authority, jurisdiction, rights, and inspection
+- **Status:** `normative`
+- **Verification:** `SCENARIO-PUBLIC-REFERENCE-IDENTITY-001`
+- **Supersedes:** none
+
+An approved public-reference claim MUST retain a stable Ambitions public claim ID, source-native subject and record IDs, predicate, authority for that predicate, jurisdiction, release/effective period, retrieval and checked dates, freshness, rights/attribution, risk/review, conflict, and supersession facts. A source-level official label, public delivery, or inspection availability MUST NOT imply personal qualification, user acceptance, recommendation fitness, or authority outside the declared predicate lane. Missing required claim meaning is unavailable rather than inferred.
 
 ## OBJ-SOURCE-REFERENCE-IDENTITY-001 — Inspectable provenance after native import
 

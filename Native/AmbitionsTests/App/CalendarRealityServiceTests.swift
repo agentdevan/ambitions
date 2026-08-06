@@ -84,11 +84,12 @@ final class CalendarRealityServiceTests: XCTestCase {
         let store = RecordingRealityEventKitStoreClient()
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
-        await store.setWriteOnlyAuthorizationResponse(state: .writeOnly)
+        await store.setAuthorizationResponse(state: .writeOnly, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
-            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger)),
+            pendingOperationStore: MemoryPendingEventKitOperationStore()
         )
         let block = ScheduledAmbitionsBlock(
             id: "block-1",
@@ -100,18 +101,22 @@ final class CalendarRealityServiceTests: XCTestCase {
             isUserConfirmed: true
         )
 
-        let written = try await service.createCalendarBlock(
-            intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
+        let operationID = "00000000-0000-4000-8000-000000000001"
+        let written = try await service.createCalendarEvent(
+            for: schedulingSelection(from: block),
+            durationMinutes: 30,
             now: now,
-            localCommit: runtimeLocalCommitEvidence("calendar-block")
+            operationID: operationID,
+            localCommit: runtimeLocalCommitEvidence("calendar-block", operationID: operationID)
         )
         let payload = await store.lastEventPayload
-        let writeOnlyRequestCount = await store.currentWriteOnlyRequestCount()
+        let requestedScopes = await store.requestedScopes
 
-        XCTAssertEqual(written.calendarEventIdentifier, "event-1")
-        XCTAssertEqual(writeOnlyRequestCount, 1)
+        XCTAssertEqual(written.identifier, "event-1")
+        XCTAssertEqual(requestedScopes, [.calendarEvents])
         XCTAssertEqual(payload?.title, "Draft proposal")
-        XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Time confirmation.")
+        XCTAssertTrue(payload?.notes.contains("Created by Ambitions after an explicit calendar event request.") == true)
+        XCTAssertTrue(payload?.notes.contains(operationID) == true)
 
         let records = await sideEffectLedger.records
         let completedSideEffect = records.first
@@ -119,10 +124,10 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(completedSideEffect?.effectKind, .calendar)
         XCTAssertEqual(completedSideEffect?.status, .succeeded)
         XCTAssertEqual(completedSideEffect?.actionKind, .writeCalendarBlock)
-        XCTAssertEqual(completedSideEffect?.requiresConfirmation, true)
+        XCTAssertEqual(completedSideEffect?.requiresConfirmation, false)
         XCTAssertEqual(completedSideEffect?.externalEffect, true)
         XCTAssertEqual(completedSideEffect?.receiptID, "event-1")
-        XCTAssertTrue(completedSideEffect?.degradedFacts.contains("Calendar block write completed through EventKit side-effect owner.") == true)
+        XCTAssertTrue(completedSideEffect?.degradedFacts.contains("Calendar event write completed through EventKit side-effect owner.") == true)
     }
 
     func testConfirmedBlockWriteRequiresLocalCommitReceiptBeforeSavingEvent() async throws {
@@ -133,7 +138,8 @@ final class CalendarRealityServiceTests: XCTestCase {
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
-            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger)),
+            pendingOperationStore: MemoryPendingEventKitOperationStore()
         )
         let block = ScheduledAmbitionsBlock(
             id: "block-1",
@@ -146,9 +152,12 @@ final class CalendarRealityServiceTests: XCTestCase {
         )
 
         do {
-            _ = try await service.createCalendarBlock(
-                intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
-                now: now
+            _ = try await service.createCalendarEvent(
+                for: schedulingSelection(from: block),
+                durationMinutes: 30,
+                now: now,
+                operationID: "00000000-0000-4000-8000-000000000002",
+                localCommit: nil
             )
             XCTFail("Expected missing local commit receipt to throw.")
         } catch let error as CalendarRemindersError {
@@ -172,11 +181,12 @@ final class CalendarRealityServiceTests: XCTestCase {
         let store = RecordingRealityEventKitStoreClient()
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
-        await store.setWriteOnlyAuthorizationResponse(state: .denied)
+        await store.setAuthorizationResponse(state: .denied, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
-            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger)),
+            pendingOperationStore: MemoryPendingEventKitOperationStore()
         )
         let block = ScheduledAmbitionsBlock(
             id: "block-1",
@@ -189,10 +199,13 @@ final class CalendarRealityServiceTests: XCTestCase {
         )
 
         do {
-            _ = try await service.createCalendarBlock(
-                intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
+            let operationID = "00000000-0000-4000-8000-000000000003"
+            _ = try await service.createCalendarEvent(
+                for: schedulingSelection(from: block),
+                durationMinutes: 30,
                 now: now,
-                localCommit: runtimeLocalCommitEvidence("calendar-block-denied")
+                operationID: operationID,
+                localCommit: runtimeLocalCommitEvidence("calendar-block-denied", operationID: operationID)
             )
             XCTFail("Expected calendar block write authorization denial to throw.")
         } catch let error as CalendarRemindersError {
@@ -212,8 +225,8 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(record?.externalEffect, false)
         XCTAssertEqual(record?.localOnly, true)
         XCTAssertNotNil(record?.receiptID)
-        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for the confirmed block.") == true)
-        XCTAssertTrue(record?.degradedFacts.contains("Calendar block write permission was denied before EventKit save.") == true)
+        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
+        XCTAssertTrue(record?.degradedFacts.contains("Calendar write permission was denied before EventKit save.") == true)
     }
 }
 
@@ -338,8 +351,21 @@ private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
     }
 }
 
-private func runtimeLocalCommitEvidence(_ suffix: String) -> SideEffectLocalCommitEvidence {
+private func schedulingSelection(from block: ScheduledAmbitionsBlock) -> NextStepSchedulingSelection {
+    NextStepSchedulingSelection(
+        goalID: block.relatedGoalID ?? "goal-calendar-reality",
+        goalTitle: block.title,
+        stepID: block.id,
+        stepTitle: block.title,
+        stepSummary: nil,
+        suggestedDate: block.start
+    )
+}
+
+private func runtimeLocalCommitEvidence(_ suffix: String, operationID: String) -> SideEffectLocalCommitEvidence {
     SideEffectLocalCommitEvidence(
+        authorityCommandID: "authority.command.\(suffix)",
+        operationID: operationID,
         receiptID: "runtime.commit-receipt.\(suffix)",
         writeScope: .localSwiftDataSingleContext,
         committedAt: "2026-04-16T09:00:00Z",

@@ -54,6 +54,15 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         return SourceAtlasPublicPackRequestIssue.allCases.filter { issues.contains($0) }
     }
 
+    /// Structural request validation remains separate from the public claim
+    /// certificate. Both are required before a claim can be inspected.
+    func validate(
+        _ input: PublicReferenceAuthorityValidationInput,
+        policy: PublicReferenceAuthorityPolicy = PublicReferenceAuthorityPolicy()
+    ) -> PublicReferenceAuthorityDecision {
+        policy.evaluate(input)
+    }
+
     private static func isSHA256Hex(_ value: String) -> Bool {
         value.count == 64 && value.allSatisfy { character in
             character.isNumber || ("a"..."f").contains(character)
@@ -120,7 +129,7 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         let publicPrefixes = [
             "source-atlas/v1/domain/",
             "source-atlas/v1/production/stable/",
-            "source-atlas/v1/staging/candidate/",
+            "source-atlas/v1/staging/candidate/"
         ]
         guard publicPrefixes.contains(where: normalizedValue.hasPrefix) else {
             return false
@@ -137,7 +146,7 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
             "private_goal",
             "proof_payload",
             "receipt_payload",
-            "user_id",
+            "user_id"
         ]
         return blockedTokens.contains { normalizedValue.contains($0) } == false
     }

@@ -18,8 +18,20 @@ enum RuntimeBootstrap {
             clock: clock,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
-            scheduleStoreFileURL: scheduleStoreFileURL
+            scheduleStoreFileURL: scheduleStoreFileURL,
+            publicReferenceInspectionOverride: debugPublicReferenceInspectionOverride()
         )
+    }
+
+    private static func debugPublicReferenceInspectionOverride() -> PublicReferenceInspectionProjection? {
+        #if DEBUG
+        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_PUBLIC_REFERENCE_FIXTURE"] == "1" else {
+            return nil
+        }
+        return .previewCurrent
+        #else
+        return nil
+        #endif
     }
 
     @MainActor

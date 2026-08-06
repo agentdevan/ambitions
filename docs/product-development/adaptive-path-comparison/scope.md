@@ -255,6 +255,17 @@ candidate, selection summary, or recovery action.
 - `life-branch-reconciliation` owns only complete cross-object all-or-none
   correction after ordinary Goal Path and Time mechanisms are insufficient.
 
+## Frontend impact contract
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: The approved requirements, acceptance criteria, and user flows own visible terminology and non-claims; implementation must localize that meaning without inventing promotional, score, authority, or outcome language.
+- Accessibility: Every new child view and action must preserve the approved semantic order, Dynamic Type/reflow, assistive-input parity, non-color meaning, focus, announcements, and reduced-effects behavior.
+- Visual proof: One production-intended native fixture and viewport requires owner visual approval before implementation, followed by changed-state runtime, screenshot, accessibility, and named-device evidence required by Verification.
+
 ## Canon impact
 
 - Goal Path canon should explicitly distinguish a current version, comparison

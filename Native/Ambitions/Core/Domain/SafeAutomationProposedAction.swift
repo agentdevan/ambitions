@@ -338,7 +338,7 @@ extension SafeAutomationActionKind {
             case .calendarWrite: self = .writeCalendarBlock
             case .ritual: self = .correctRecommendation
             }
-        case .reminder: self = .createReminder
+        case .reminder: self = .externalCommand
         case .profile: self = .editLocalNote
         case let .history(value):
             switch value.action {
@@ -356,9 +356,11 @@ extension SafeAutomationActionKind {
             case .forgetMemory: self = .forgetMemory
             }
         case let .externalOperation(value):
-            self = value.kind == .reminder ? .createReminder : .writeCalendarBlock
+            self = value.kind == .reminder ? .externalCommand : .writeCalendarBlock
         case let .attachment(value):
             self = value.intent.action == .authorizeDeletion ? .deleteObject : .manageAttachment
+        case .compensation:
+            self = .deleteObject
         }
     }
 }

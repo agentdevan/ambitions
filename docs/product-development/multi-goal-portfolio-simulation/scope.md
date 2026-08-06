@@ -124,6 +124,17 @@ Context/Capability runtime and direct-user evidence listed in Research pass.
 - AC-015: accessibility/device/user comprehension evidence passes.
 - AC-016: production mode remains unavailable until signed gate record passes.
 
+## Frontend impact contract
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: The approved requirements, acceptance criteria, and user flows own visible terminology and non-claims; implementation must localize that meaning without inventing promotional, score, authority, or outcome language.
+- Accessibility: Every new child view and action must preserve the approved semantic order, Dynamic Type/reflow, assistive-input parity, non-color meaning, focus, announcements, and reduced-effects behavior.
+- Visual proof: One production-intended native fixture and viewport requires owner visual approval before implementation, followed by changed-state runtime, screenshot, accessibility, and named-device evidence required by Verification.
+
 ## Canon impact
 
 Add Multi-Goal Portfolio Simulation canon; update simulation, Goal/Path/Time,

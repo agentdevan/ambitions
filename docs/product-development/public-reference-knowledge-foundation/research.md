@@ -341,6 +341,12 @@ shape the request.
 - Attribution, trademarks, and redistribution terms can vary by dataset and
   release. Legal review may be required before packaging real corpora.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/PublicReferenceInspectionView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 4 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue toward a shared, source-preserving public-reference foundation, with

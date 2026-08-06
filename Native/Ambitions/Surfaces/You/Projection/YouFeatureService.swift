@@ -11,6 +11,8 @@ struct RepositoryBackedYouService: YouServicing {
     let syncCapability: any SyncCapability
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
+    let publicReferenceQueryService: PublicReferenceQueryService
+    let publicReferenceInspectionOverride: PublicReferenceInspectionProjection?
 
     /// Initializes the service with designated repositories and integration dependencies.
     ///
@@ -23,12 +25,18 @@ struct RepositoryBackedYouService: YouServicing {
         repositories: AppRepositories,
         syncCapability: any SyncCapability = LocalOnlySyncCapability(),
         notificationService: any NotificationServicing = StubNotificationService(),
-        calendarRemindersService: any CalendarRemindersServicing = StubCalendarRemindersService()
+        calendarRemindersService: any CalendarRemindersServicing = StubCalendarRemindersService(),
+        publicReferenceQueryService: PublicReferenceQueryService = PublicReferenceQueryService(
+            repository: PublicReferenceRepository()
+        ),
+        publicReferenceInspectionOverride: PublicReferenceInspectionProjection? = nil
     ) {
         self.repositories = repositories
         self.syncCapability = syncCapability
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
+        self.publicReferenceQueryService = publicReferenceQueryService
+        self.publicReferenceInspectionOverride = publicReferenceInspectionOverride
     }
 
     /// Compiles a thread-safe dashboard representation by reading user data models and authorization parameters concurrently.
@@ -41,14 +49,32 @@ struct RepositoryBackedYouService: YouServicing {
         async let notificationAuthorization = notificationService.currentAuthorizationState()
         async let remindersAuthorization = calendarRemindersService.authorizationState(for: .reminders)
         async let calendarAuthorization = calendarRemindersService.authorizationState(for: .calendarEvents)
-        
+        async let publicReferenceInspection = loadPublicReferenceInspection()
+
         return try await makeDashboard(
             snapshot: snapshot,
-            syncStatus: syncStatus,
-            notificationAuthorization: notificationAuthorization,
-            remindersAuthorization: remindersAuthorization,
-            calendarAuthorization: calendarAuthorization
+            context: DashboardContext(
+                syncStatus: syncStatus,
+                notificationAuthorization: notificationAuthorization,
+                remindersAuthorization: remindersAuthorization,
+                calendarAuthorization: calendarAuthorization,
+                publicReferenceInspection: publicReferenceInspection
+            )
         )
+    }
+
+    private func loadPublicReferenceInspection() async -> PublicReferenceInspectionProjection {
+        if let publicReferenceInspectionOverride {
+            return publicReferenceInspectionOverride
+        }
+        do {
+            let result = try await publicReferenceQueryService.inspect(
+                PublicReferenceInspectionQuery(artifactID: PublicReferencePackAdapter.approvedArtifactID)
+            )
+            return .make(from: result)
+        } catch {
+            return .unavailable
+        }
     }
 
     /// Persists visual accent and functional preference updates to on-device storage.

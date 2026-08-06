@@ -85,7 +85,34 @@ struct RuntimeGenerationProjectionRebuildAdmissionRequest: Sendable, Equatable {
     /// Optional only to preserve source compatibility for callers that have
     /// not yet been migrated. Admission rejects nil at runtime; no projection
     /// rebuild can enter the v10 authority path without this stage-one fact.
-    let candidateAuthorityReservation: RuntimeGenerationProjectionRebuildCandidateReservation? = nil
+    let candidateAuthorityReservation: RuntimeGenerationProjectionRebuildCandidateReservation?
+
+    init(
+        plan: RuntimeGenerationRecoveryOperationPlan,
+        claim: RuntimeGenerationRecoveryOperationExecutionClaim,
+        quarantine: RuntimeGenerationQuarantineRecord,
+        authorization: RuntimeGenerationRecoveryAuthorization,
+        sourceSafetyBackup: RuntimeGenerationBackupRecord,
+        reservation: RuntimeGenerationReservation,
+        operationLease: RuntimeGenerationOperationLease,
+        candidatePreparation: RuntimeGenerationCandidatePreparationRecord,
+        migrationRun: RuntimeGenerationMigrationRun,
+        admittedTransition: RuntimeGenerationProjectionRebuildLifecycleTransition,
+        candidateAuthorityReservation:
+            RuntimeGenerationProjectionRebuildCandidateReservation? = nil
+    ) {
+        self.plan = plan
+        self.claim = claim
+        self.quarantine = quarantine
+        self.authorization = authorization
+        self.sourceSafetyBackup = sourceSafetyBackup
+        self.reservation = reservation
+        self.operationLease = operationLease
+        self.candidatePreparation = candidatePreparation
+        self.migrationRun = migrationRun
+        self.admittedTransition = admittedTransition
+        self.candidateAuthorityReservation = candidateAuthorityReservation
+    }
 }
 
 struct RuntimeGenerationProjectionRebuildAdmissionRecords: Sendable, Equatable {
@@ -226,7 +253,7 @@ actor RuntimeGenerationControlStore {
             O_RDWR | O_NOFOLLOW | O_CLOEXEC
         )
         guard controlLockDescriptor >= 0,
-              Darwin.flock(controlLockDescriptor, LOCK_EX | LOCK_NB) == 0 else {
+              flock(controlLockDescriptor, LOCK_EX | LOCK_NB) == 0 else {
             if controlLockDescriptor >= 0 { _ = Darwin.close(controlLockDescriptor) }
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -234,7 +261,7 @@ actor RuntimeGenerationControlStore {
         guard fstat(controlLockDescriptor, &lockStatus) == 0,
               lockStatus.st_mode & S_IFMT == S_IFREG,
               lockStatus.st_nlink == 1 else {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -247,7 +274,7 @@ actor RuntimeGenerationControlStore {
                 fileManager: fileManager
             )
         } catch {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
@@ -264,7 +291,7 @@ actor RuntimeGenerationControlStore {
                 )
             )
         } catch {
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
@@ -274,11 +301,11 @@ actor RuntimeGenerationControlStore {
             let precedingError = error
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw precedingError
         }
@@ -306,22 +333,22 @@ actor RuntimeGenerationControlStore {
         } catch {
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw error
         }
-        guard Darwin.flock(controlLockDescriptor, LOCK_SH | LOCK_NB) == 0 else {
+        guard flock(controlLockDescriptor, LOCK_SH | LOCK_NB) == 0 else {
             do { try await database.close() }
             catch {
-                _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+                _ = flock(controlLockDescriptor, LOCK_UN)
                 _ = Darwin.close(controlLockDescriptor)
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
-            _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+            _ = flock(controlLockDescriptor, LOCK_UN)
             _ = Darwin.close(controlLockDescriptor)
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
         }
@@ -338,7 +365,7 @@ actor RuntimeGenerationControlStore {
 
     deinit {
         guard case .open = lifecycle, let controlLockDescriptor else { return }
-        _ = Darwin.flock(controlLockDescriptor, LOCK_UN)
+        _ = flock(controlLockDescriptor, LOCK_UN)
         _ = Darwin.close(controlLockDescriptor)
     }
 
@@ -364,7 +391,7 @@ actor RuntimeGenerationControlStore {
 
         if let descriptor = controlLockDescriptor {
             controlLockDescriptor = nil
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked && closed else {
                 lifecycle = .closeIndeterminate
@@ -754,7 +781,8 @@ actor RuntimeGenerationControlStore {
         }
         guard let legacyVersion else { return }
 
-        let token = environment.uuid.nextUUID().uuidString.lowercased()
+        var identifierSource = environment.uuid
+        let token = identifierSource.nextUUID().uuidString.lowercased()
         let stagingURL = controlDirectoryURL.appendingPathComponent(
             ".RuntimeGenerationControl.upgrading-\(token).sqlite", isDirectory: false
         )
@@ -1169,7 +1197,7 @@ actor RuntimeGenerationControlStore {
         let journal = try RuntimeGenerationControlCodec.decode(
             RuntimeGenerationControlUpgradeJournal.self, from: journalData
         )
-        guard journal.journalDigest == try upgradeJournalDigest(
+        guard try journal.journalDigest == upgradeJournalDigest(
             RuntimeGenerationControlUpgradeJournal(
                 token: journal.token, sourceSchemaVersion: journal.sourceSchemaVersion,
                 source: journal.source, staging: journal.staging,
@@ -2464,7 +2492,7 @@ actor RuntimeGenerationControlStore {
                     let consumptions = try database.query(
                         "SELECT authorization_id FROM runtime_generation_recovery_authorization_consumptions WHERE authorization_id = ? LIMIT 1",
                         bindings: [.text(authorizationID)],
-                        maximumDecodedBytes: maximumControlReadBytes
+                        maximumDecodedBytes: Self.maximumControlReadBytes
                     )
                     let targetMatches: Bool
                     if record.operationKind == .restore {
@@ -2475,7 +2503,7 @@ actor RuntimeGenerationControlStore {
                         let rollbackRows = try database.query(
                             "SELECT * FROM runtime_generation_rollbacks WHERE rollback_digest = ? LIMIT 2",
                             bindings: [.text(authorization.targetDigest)],
-                            maximumDecodedBytes: maximumControlReadBytes
+                            maximumDecodedBytes: Self.maximumControlReadBytes
                         )
                         guard rollbackRows.count == 1 else {
                             throw RuntimeGenerationControlError.rollbackUnsafe
@@ -2921,7 +2949,7 @@ actor RuntimeGenerationControlStore {
             let existing = try database.query(
                 "SELECT * FROM runtime_generation_activation_consumptions WHERE intent_id = ? LIMIT 2",
                 bindings: [.text(consumption.intentID)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             if existing.isEmpty == false {
                 guard existing.count == 1,
@@ -3525,7 +3553,7 @@ actor RuntimeGenerationControlStore {
                 let rollbackRows = try database.query(
                     "SELECT * FROM runtime_generation_rollbacks WHERE rollback_digest = ? LIMIT 2",
                     bindings: [.text(authorization.targetDigest)],
-                    maximumDecodedBytes: maximumControlReadBytes
+                    maximumDecodedBytes: Self.maximumControlReadBytes
                 )
                 guard rollbackRows.count == 1 else {
                     throw RuntimeGenerationControlError.rollbackUnsafe
@@ -3556,7 +3584,7 @@ actor RuntimeGenerationControlStore {
                   target.authorityManifest.sourceGenerationID == record.sourceGenerationID,
                   target.authorityManifest.sourceGenerationDigest == record.sourceGenerationDigest,
                   target.authorityManifest.sourceFence == safetyBackup.sourceFence,
-                  target.authorityManifest.activationBaseline.baselineDigest ==
+                  target.authorityManifest.activationBaseline.candidateIdentityDigest ==
                     record.targetActivationBaselineDigest,
                   verification.candidateGenerationID == record.targetGenerationID,
                   verification.verificationID == record.targetVerificationID,
@@ -3667,7 +3695,7 @@ actor RuntimeGenerationControlStore {
                   plan.targetGenerationID == record.targetGenerationID,
                   plan.targetVerificationID == record.targetVerificationID,
                   plan.targetActivationBaselineDigest ==
-                    target.authorityManifest.activationBaseline.baselineDigest,
+                    target.authorityManifest.activationBaseline.candidateIdentityDigest,
                   target.authorityManifest.sourceFence == safetyBackup.sourceFence,
                   observed.generationDigest == target.authorityManifest.manifestDigest,
                   observed.eventSequence == baseline.eventSequence,
@@ -3905,12 +3933,12 @@ actor RuntimeGenerationControlStore {
                   latestLease.leaseEpoch >= run.operationLeaseEpoch,
                   latestLease.fencingToken >= run.operationFencingToken,
                   leases[admissionIndex].ownerInstanceID == claim.executorInstanceID,
-                  zip(leases.dropFirst(admissionIndex), leases.dropFirst(admissionIndex + 1)).allSatisfy {
+                  zip(leases.dropFirst(admissionIndex), leases.dropFirst(admissionIndex + 1)).allSatisfy({
                       previous, successor in
                       successor.leaseEpoch == previous.leaseEpoch + 1 &&
                           successor.priorLeaseDigest == previous.leaseDigest &&
                           successor.fencingToken >= previous.fencingToken
-                  },
+                  }),
                   latestTransition.migrationRunID == run.migrationRunID,
                   latestTransition.phase == .readyForCertification,
                   latestTransition.transitionDigest == record.readyTransitionDigest,
@@ -4190,7 +4218,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_retention_transitions WHERE generation_id = ? ORDER BY occurred_at_ms DESC, transition_id DESC LIMIT 2",
                 bindings: [.text(generationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count <= 1 else {
                 // LIMIT 2 intentionally makes an equal timestamp/identity
@@ -6405,7 +6433,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_restore_baselines WHERE target_generation_id = ? LIMIT 2",
                 bindings: [.text(targetGenerationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count == 1 else {
                 throw RuntimeGenerationControlError.recordMissing(
@@ -6444,7 +6472,7 @@ actor RuntimeGenerationControlStore {
         let rows = try await database.query(
             "SELECT authorization_id FROM runtime_generation_recovery_authorization_consumptions WHERE authorization_id = ? LIMIT 2",
             bindings: [.text(id)],
-            maximumDecodedBytes: maximumControlReadBytes
+            maximumDecodedBytes: Self.maximumControlReadBytes
         )
         guard rows.count <= 1 else {
             throw RuntimeGenerationControlError.recordCorrupt(
@@ -6523,7 +6551,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_activation_intents WHERE candidate_generation_id = ? LIMIT 2",
                 bindings: [.text(candidateGenerationID.rawValue)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count == 1 else {
                 throw RuntimeGenerationControlError.recordMissing(
@@ -6546,7 +6574,7 @@ actor RuntimeGenerationControlStore {
             let rows = try database.query(
                 "SELECT * FROM runtime_generation_activation_consumptions WHERE intent_id = ? LIMIT 2",
                 bindings: [.text(intentID)],
-                maximumDecodedBytes: maximumControlReadBytes
+                maximumDecodedBytes: Self.maximumControlReadBytes
             )
             guard rows.count <= 1 else {
                 throw RuntimeGenerationControlError.recordCorrupt(
@@ -6561,6 +6589,37 @@ actor RuntimeGenerationControlStore {
                 )
             }
         }
+    }
+
+    func recoveryOperationPlan(
+        id: String
+    ) async throws -> RuntimeGenerationRecoveryOperationPlan {
+        try await load(
+            RuntimeGenerationRecoveryOperationPlan.self,
+            table: "runtime_generation_recovery_operation_plans",
+            idColumn: "plan_id",
+            id: id
+        )
+    }
+
+    func recoveryOperationExecutionClaim(
+        id: String
+    ) async throws -> RuntimeGenerationRecoveryOperationExecutionClaim {
+        try await load(
+            RuntimeGenerationRecoveryOperationExecutionClaim.self,
+            table: "runtime_generation_recovery_operation_execution_claims",
+            idColumn: "claim_id",
+            id: id
+        )
+    }
+
+    func operationLease(id: String) async throws -> RuntimeGenerationOperationLease {
+        try await load(
+            RuntimeGenerationOperationLease.self,
+            table: "runtime_generation_operation_leases",
+            idColumn: "lease_id",
+            id: id
+        )
     }
 }
 
@@ -6603,7 +6662,7 @@ private extension RuntimeGenerationControlStore {
         }
     }
 
-    func authorityNowMilliseconds() throws -> Int64 {
+    nonisolated func authorityNowMilliseconds() throws -> Int64 {
         let value = environment.clock.now.timeIntervalSince1970 * 1_000
         guard value.isFinite, value >= 0, value <= Double(Int64.max) else {
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -8380,7 +8439,11 @@ private extension RuntimeGenerationControlStore {
     static func legacyV5ToV6MigrationAuthorization() throws -> SQLiteSchemaMigrationAuthorization {
         let tables = ["runtime_generation_control_metadata", "runtime_generation_control_metadata_upgrade_v6", "runtime_generation_recovery_operation_plans", "runtime_generation_recovery_operation_consumptions", "runtime_generation_recovery_operation_execution_claims", "runtime_generation_recovery_operation_execution_receipts", "runtime_generation_recovery_operation_plan_dispositions", "runtime_generation_recovery_operation_plan_successions", "runtime_generation_recovery_operation_verification_bindings"]
         let triggers = tables.flatMap { immutableTrigger(table: $0) }.compactMap { $0.split(separator: " ").dropFirst(2).first.map(String.init) }
-        return try SQLiteSchemaMigrationAuthorization(allowedSchemaObjects: tables + triggers, allowedTables: tables, allowedReadTables: tables + ["runtime_generation_recovery_authorizations", "runtime_generation_quarantines", "runtime_generation_verifications", "runtime_generation_rebuilds", "runtime_generation_records", "sqlite_master", "sqlite_schema"])
+        return try SQLiteSchemaMigrationAuthorization(
+            allowedSchemaObjects: Set(tables + triggers),
+            allowedTables: Set(tables),
+            allowedReadTables: Set(tables + ["runtime_generation_recovery_authorizations", "runtime_generation_quarantines", "runtime_generation_verifications", "runtime_generation_rebuilds", "runtime_generation_records", "sqlite_master", "sqlite_schema"])
+        )
     }
 
     static func migrateExactLegacyV6Schema(in database: SQLiteDatabase) async throws {
@@ -8551,7 +8614,7 @@ private extension RuntimeGenerationControlStore {
                 }
 
                 let transitionRows = try database.query(
-                    "SELECT * FROM \(upgradedName(\"runtime_generation_projection_rebuild_lifecycle_transitions\")) WHERE migration_run_id = ? ORDER BY occurred_at_ms, transition_id",
+                    "SELECT * FROM \(upgradedName("runtime_generation_projection_rebuild_lifecycle_transitions")) WHERE migration_run_id = ? ORDER BY occurred_at_ms, transition_id",
                     bindings: [.text(legacy.migrationRunID)],
                     maximumDecodedBytes: maximumControlReadBytes
                 )
@@ -8610,11 +8673,11 @@ private extension RuntimeGenerationControlStore {
                       claim.claimEpoch == firstTransition.recoveryExecutionClaimEpoch,
                       firstTransition.phase == .admitted,
                       firstTransition.priorTransitionDigest == nil,
-                      transitions.allSatisfy {
+                      transitions.allSatisfy({
                           $0.occurredAtMilliseconds >= claim.claimedAtMilliseconds &&
                               $0.occurredAtMilliseconds < claim.expiresAtMilliseconds
-                      },
-                      zip(transitions, transitions.dropFirst()).allSatisfy {
+                      }),
+                      zip(transitions, transitions.dropFirst()).allSatisfy({
                           previous, current in
                           current.priorTransitionDigest == previous.transitionDigest &&
                               current.occurredAtMilliseconds >=
@@ -8623,7 +8686,7 @@ private extension RuntimeGenerationControlStore {
                                 from: previous.phase,
                                 to: current.phase
                               )
-                      },
+                      }),
                       reservation.operationKind == .projectionRebuild,
                       reservation.candidateGenerationID == legacy.candidateGenerationID,
                       safetyBackup.sourceGenerationID == reservation.sourceGenerationID,
@@ -8764,14 +8827,18 @@ private extension RuntimeGenerationControlStore {
             "runtime_generation_migration_runs_recovery_execution_idx",
             "runtime_generation_recovery_execution_claims_plan_claim_epoch_uq",
         ]
-        return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: rebuiltTables + upgradeTables + triggerNames + indexes + [
+        let allowedSchemaObjects = Set(
+            rebuiltTables + upgradeTables + triggerNames + indexes + [
                 "runtime_generation_recovery_operation_execution_claims",
-            ],
-            allowedTables: rebuiltTables + upgradeTables + [
+            ]
+        )
+        let allowedTables = Set(
+            rebuiltTables + upgradeTables + [
                 "runtime_generation_recovery_operation_execution_claims",
-            ],
-            allowedReadTables: rebuiltTables + upgradeTables + [
+            ]
+        )
+        let allowedReadTables = Set(
+            rebuiltTables + upgradeTables + [
                 "runtime_generation_reservations",
                 "runtime_generation_backups",
                 "runtime_generation_backup_preparations",
@@ -8783,6 +8850,11 @@ private extension RuntimeGenerationControlStore {
                 "sqlite_master",
                 "sqlite_schema",
             ]
+        )
+        return try SQLiteSchemaMigrationAuthorization(
+            allowedSchemaObjects: allowedSchemaObjects,
+            allowedTables: allowedTables,
+            allowedReadTables: allowedReadTables
         )
     }
 
@@ -8823,10 +8895,10 @@ private extension RuntimeGenerationControlStore {
             // Rename child first, then its parent. The replacement child is
             // installed only after the new parent exists, preserving FK shape.
             try database.execute(
-                "ALTER TABLE runtime_generation_recovery_operation_execution_receipts RENAME TO \(upgradedName(\"runtime_generation_recovery_operation_execution_receipts\"))"
+                "ALTER TABLE runtime_generation_recovery_operation_execution_receipts RENAME TO \(upgradedName("runtime_generation_recovery_operation_execution_receipts"))"
             )
             try database.execute(
-                "ALTER TABLE runtime_generation_rebuilds RENAME TO \(upgradedName(\"runtime_generation_rebuilds\"))"
+                "ALTER TABLE runtime_generation_rebuilds RENAME TO \(upgradedName("runtime_generation_rebuilds"))"
             )
             try database.execute(try tableStatement("runtime_generation_rebuilds"))
             try database.execute(try tableStatement("runtime_generation_recovery_operation_execution_receipts"))
@@ -8992,11 +9064,11 @@ private extension RuntimeGenerationControlStore {
             }
         }
         return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: rebuiltTables + upgradedTables + triggerNames + [
+            allowedSchemaObjects: Set(rebuiltTables + upgradedTables + triggerNames + [
                 "runtime_generation_rebuilds_recovery_execution_idx",
-            ],
-            allowedTables: rebuiltTables + upgradedTables,
-            allowedReadTables: rebuiltTables + upgradedTables + [
+            ]),
+            allowedTables: Set(rebuiltTables + upgradedTables),
+            allowedReadTables: Set(rebuiltTables + upgradedTables + [
                 "runtime_generation_migration_runs",
                 "runtime_generation_reservations",
                 "runtime_generation_records",
@@ -9005,7 +9077,7 @@ private extension RuntimeGenerationControlStore {
                 "runtime_generation_projection_rebuild_lifecycle_transitions",
                 "sqlite_master",
                 "sqlite_schema",
-            ]
+            ])
         )
     }
 
@@ -9069,10 +9141,10 @@ private extension RuntimeGenerationControlStore {
             }
         }
         return try SQLiteSchemaMigrationAuthorization(
-            allowedSchemaObjects: tables + triggers + [
+            allowedSchemaObjects: Set(tables + triggers + [
                 "runtime_generation_projection_rebuild_candidate_reservations_claim_idx",
-            ],
-            allowedTables: tables,
+            ]),
+            allowedTables: Set(tables),
             allowedReadTables: [metadata, upgradedMetadata, "sqlite_master", "sqlite_schema"]
         )
     }

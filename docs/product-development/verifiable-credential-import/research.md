@@ -211,6 +211,12 @@ Proof. This offers value without claiming a universal wallet.
 - Export/presentation of a credential is excluded, uncommitted future work and
   cannot be implied by import or by the focused capability-export initiative.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/CredentialImportView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 6 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Research favors a narrow, optional Open Badges 3.0 JSON/JSON-LD import that

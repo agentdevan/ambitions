@@ -200,6 +200,12 @@ loop without inventing remote infrastructure.
 No hard fork remains. Start with framework plus Calendar editor handoff and leave
 remote adapters/high-consequence classes unavailable until individually approved.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/ExternalActions/`, `Native/Ambitions/Surfaces/Shared/ExternalActions/`.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create `ExternalActionOrchestrator`, adapter admission registry, exact draft/

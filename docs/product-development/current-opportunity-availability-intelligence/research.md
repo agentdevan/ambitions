@@ -223,6 +223,12 @@ blocked family does not block the registry.
 No hard product fork remains for a bounded registry. Each source family can be
 admitted or withheld independently behind explicit rights and quality gates.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: the owning surfaces named by the approved User flows and implementation plan.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create a **Current Authority Registry** over Source Atlas with source-specific

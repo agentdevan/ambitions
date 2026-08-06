@@ -191,6 +191,12 @@ testable failure mode: no supported candidate is better than a fluent fiction.
 No hard fork remains: the feature can use validated on-device generation with a
 deterministic/manual fallback and expand only as corpora/evidence qualify.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/DestinationProposals/`.
+- Evidence and unknowns: Repository audit identifies Task 7 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Build a two-stage **Interpretation Draft -> Grounded Destination Proposal Set**

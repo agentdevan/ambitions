@@ -34,6 +34,12 @@ upstream links, requirement traceability, and complete grooming files.
 The fixture must remain synthetic so readers do not mistake its examples for a
 product commitment or implementation plan.
 
+## Frontend impact investigation
+
+- Potential frontend impact: none
+- Existing surfaces investigated: N/A — this initiative is repository tooling or a documentation-only fixture.
+- Evidence and unknowns: The approved scope, design, and grooming files create no application surface, route, asset, or user-visible state.
+
 ## Recommended direction
 
 Use one approved, documentation-only initiative with a clear handoff from

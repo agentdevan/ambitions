@@ -27,10 +27,13 @@ function project(slug: string): ProjectContract {
           validationCommands: [],
           rollback: "stop",
         },
+        frontendImpact: "none",
+        visualGate: "not-required",
       },
     ],
     projectDependencies: [],
     sharedPaths: [],
+    frontendAudit: { status: "passed", visualGate: "not-required" },
     admission: "ready",
     admissionBlockers: [],
   };
@@ -58,5 +61,44 @@ describe("reconciliation planner", () => {
     expect(plan.mutations.map((mutation) => mutation.canonicalKey)).toEqual([
       "operational:T1",
     ]);
+  });
+
+  it("blocks an existing frontend issue while visual approval is required", async () => {
+    const gated = project("gated");
+    gated.tasks[0]!.frontendImpact = "affected";
+    gated.tasks[0]!.visualGate = "required";
+    gated.frontendAudit = {
+      status: "passed",
+      visualGate: "required",
+      firstFrontendTaskKey: "gated:T1",
+    };
+    const manifest: DesiredWorkspaceManifest = {
+      schemaVersion: 1,
+      authorityCommit: "abc",
+      contractHash: "hash",
+      projects: [gated],
+      schedule: [
+        { id: "G00", projectSlugs: ["gated"], taskKeys: ["gated:T1"] },
+      ],
+    };
+
+    const plan = await planReconciliation(manifest, {
+      projects: [],
+      issues: [
+        {
+          id: "issue",
+          identifier: "AMB-1",
+          canonicalKey: "gated:T1",
+          state: "Backlog",
+          labels: [],
+          blockedBy: [],
+          mergedToMain: false,
+          proofPassed: false,
+          requiredProofFailed: false,
+        },
+      ],
+    });
+
+    expect(plan.mutations[0]!.payload.state).toBe("Blocked");
   });
 });

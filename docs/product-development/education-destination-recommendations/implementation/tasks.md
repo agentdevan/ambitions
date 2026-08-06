@@ -10,6 +10,7 @@ files are named with full repository-relative paths.
    source claim, user input/consent, uncertainty, option, and lifecycle encode
    every claim ceiling without Goal or score semantics. Test:
    `Native/AmbitionsTests/Domain/EducationRecommendationModelsTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Implement `EducationEligibilityPolicy.swift` with the six authority lanes,
    exact-purpose consent, source certificate, and sensitive-output gates.
    Dependency: Task 1. Trace: authority/privacy, REQ-003 through REQ-010,
@@ -17,6 +18,7 @@ files are named with full repository-relative paths.
    accreditation never becomes transfer, provider facts never become acceptance,
    and unknown/conflict fails closed. Test:
    `Native/AmbitionsTests/LocalRuntimeOS/Planning/EducationEligibilityPolicyTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Implement `EducationOptionComposer.swift`,
    `EducationExplanationBuilder.swift`, and
    `EducationExplorationCoordinator.swift`. Dependency: Tasks 1-2. Trace: flows,
@@ -25,6 +27,7 @@ files are named with full repository-relative paths.
    unavailable states, correction, cancellation, and stale recovery. Tests:
    `Native/AmbitionsTests/LocalRuntimeOS/Planning/EducationOptionComposerTests.swift`
    and `Native/AmbitionsTests/LocalRuntimeOS/Planning/EducationExplorationCoordinatorTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Implement `EducationExplorationStore.swift` and
    `EducationPreferenceCommandService.swift` with additive empty migration,
    CAS, events, Receipts, History, replay, archive/Trash/restore/delete, and
@@ -33,14 +36,17 @@ files are named with full repository-relative paths.
    once, stale revisions fail closed, consent is purpose-bound, deletion is
    non-reconstructive, and replay rebuilds the same projection. Test:
    `Native/AmbitionsTests/LocalRuntimeOS/Commands/EducationPreferenceCommandServiceTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Implement `EducationRecommendationProjector.swift`,
    `EducationExplorationView.swift`, and `EducationOptionInspectionView.swift`.
    Dependency: Tasks 1-4. Trace: review/accessibility, REQ-001, REQ-005,
    REQ-008, REQ-009, REQ-014 through REQ-019. Acceptance: every authority and
    unknown state is readable nonvisually; no provider write or hidden adoption
    occurs. Tests: `Native/AmbitionsUITests/EducationExplorationUITests.swift`.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 6. Add destination-adoption handoff compatibility, update canon, regenerate the
    project, and run verification. Dependency: Tasks 1-5. Trace: all REQ-001
    through REQ-019. Acceptance: all requirements pass while education-specific
    authority remains independent of career and hobby policies. Tests: run
    `implementation/verification.md` in full.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.

@@ -1,18 +1,28 @@
 # Implementation Tasks
 
 1. Canon and typed fact/grant contracts (REQ-001–006, 014–017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Protected repository/events/migration (REQ-001–006, 013–015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Unit/timezone resolver and precedence/conflict engine (REQ-002, 008, 014).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Capability-scoped ephemeral read clients (REQ-005–009, 015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Task-local override and influence receipts (REQ-010–011, 015–016).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Dependency impact/mutation/archive/reset/purge (REQ-012–013).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Context library and progressive capture UI (REQ-003, 005–006, 010–013, 016).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 8. Disabled suggestion-policy seam and conformance harness (REQ-004, 017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. Bootstrap/project integration and cross-consumer contract tests (all REQs).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. Full verification with REQ-001–REQ-017 matrix; imports, suggestion defaults,
     usefulness, external processing, deployment and release remain claim ceilings.
 
 Run focused checks and inspect each task diff before continuing.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

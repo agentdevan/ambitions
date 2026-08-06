@@ -214,6 +214,12 @@ If no implementation can preserve local authority, account isolation,
 deterministic history/deletion, and humane recovery under these constraints,
 continuity must remain disabled and local-only use remains the product.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/ContinuityControlCenterSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 9 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Advance to a bounded Scope for **optional user-owned CloudKit continuity** while

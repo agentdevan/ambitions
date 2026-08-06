@@ -238,6 +238,17 @@ predictable focus and status announcements.
     recovery behavior without dependence on timeline position, gesture, color,
     motion, or visual-only relationships.
 
+## Frontend impact contract
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: The approved requirements, acceptance criteria, and user flows own visible terminology and non-claims; implementation must localize that meaning without inventing promotional, score, authority, or outcome language.
+- Accessibility: Every new child view and action must preserve the approved semantic order, Dynamic Type/reflow, assistive-input parity, non-color meaning, focus, announcements, and reduced-effects behavior.
+- Visual proof: One production-intended native fixture and viewport requires owner visual approval before implementation, followed by changed-state runtime, screenshot, accessibility, and named-device evidence required by Verification.
+
 ## Canon impact
 
 - `docs/canon/specifications/systems/scheduling-and-capacity.md` should own the

@@ -58,6 +58,19 @@ Recovery is replay-based. Idempotency keys combine source, delivery ID,
 authority commit, canonical object key, operation, and desired hash. Partial
 runs resume from verified receipts; successful mutations are not repeated.
 
+## Frontend experience specification
+
+- Surface impact: none
+- IA/navigation: none
+- Assets/iconography: none
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: N/A — the design has no application copy surface.
+- Accessibility: N/A — the design has no rendered application interface.
+- Visual proof: N/A — repository structural evidence is the applicable proof ceiling.
+- Visual gate: not-required
+- Experience authority: The remaining Design sections contain no user-interface implementation authority.
+
 ## Architecture and data
 
 ### Repository package

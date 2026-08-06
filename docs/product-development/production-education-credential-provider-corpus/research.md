@@ -490,6 +490,12 @@ No v1 runtime or user evidence is required to define these public-data and
 authority contracts. Direct-user evidence remains required before claiming
 education recommendation usefulness.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/EducationCorpusInspectionModels.swift`, `Native/Ambitions/Trust/EducationCorpusInspectionProjection.swift`, `Native/Ambitions/Trust/EducationCorpusInspectionView.swift`, `Native/Ambitions/Trust/EducationCorpusInspectionAccessibility.swift`, `Native/Ambitions/Trust/SourceInspectionView.swift`, `Native/Ambitions/Trust/InspectionSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 10 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Scope a source-native U.S. education, credential, and provider reference corpus

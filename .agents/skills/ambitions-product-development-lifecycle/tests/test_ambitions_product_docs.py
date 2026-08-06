@@ -15,7 +15,7 @@ SCRIPTS_DIRECTORY = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIRECTORY))
 
-from support import TemporaryRepositoryTestCase, copy_skill_skeleton
+from support import TemporaryRepositoryTestCase, complete_frontend_sections, copy_skill_skeleton
 
 
 INSTALLED_SKILL = Path(".agents/skills/ambitions-product-development-lifecycle")
@@ -38,6 +38,7 @@ def complete_document(path: Path, phase: str) -> None:
             "## Requirement traceability\n\nComplete content.",
             "## Requirement traceability\n\n- REQ-001: DESIGN-001 completes the outcome.",
         )
+    contents = complete_frontend_sections(contents, phase)
     path.write_text(contents, encoding="utf-8")
 
 
@@ -190,7 +191,11 @@ class InstalledSkillSurfaceTests(TemporaryRepositoryTestCase):
             implementation.mkdir()
             for filename, heading, body in (
                 ("plan.md", "Plan", "Implementation order."),
-                ("tasks.md", "Tasks", "1. Implement the flow."),
+                (
+                    "tasks.md",
+                    "Tasks",
+                    "1. Implement the flow. Dependency: none. Frontend: none — structural fixture.",
+                ),
                 ("verification.md", "Verification", "Run the focused tests."),
             ):
                 (implementation / filename).write_text(
