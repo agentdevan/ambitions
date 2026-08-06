@@ -47,7 +47,6 @@ extension SourceAtlasCapabilityPathComposer {
         )
     }
 
-
     func explanationSummary(
         for selectedPath: SourceAtlasCapabilityPath,
         alternatives: [SourceAtlasPathTradeoff]
@@ -61,7 +60,6 @@ extension SourceAtlasCapabilityPathComposer {
         }
         return parts.joined(separator: " ")
     }
-
 
     func explanationReasons(
         for selectedPath: SourceAtlasCapabilityPath,
@@ -82,7 +80,6 @@ extension SourceAtlasCapabilityPathComposer {
         return reasons
     }
 
-
     struct TraversalSnapshot {
         let selectedNodeIDs: [String]
         let selectedEdgeIDs: [String]
@@ -92,11 +89,9 @@ extension SourceAtlasCapabilityPathComposer {
         let missingSourceNodes: [String]
     }
 
-
     static func normalized(_ values: [String]) -> [String] {
         Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
     }
-
 
     static func orderedUniquePreservingOrder(_ values: [String]) -> [String] {
         var seen: Set<String> = []
@@ -111,7 +106,6 @@ extension SourceAtlasCapabilityPathComposer {
         return ordered
     }
 
-
     static func tokens(_ text: String) -> Set<String> {
         Set(
             text
@@ -124,7 +118,6 @@ extension SourceAtlasCapabilityPathComposer {
                 .filter { $0.isEmpty == false }
         )
     }
-
 
     static func clamp(_ value: Double) -> Double {
         min(max(value, 0), 1)

@@ -78,13 +78,11 @@ extension SourceAtlasCapabilityPathComposer {
         )
     }
 
-
     var selectedPacks: [SourceAtlasPack] {
         let selectedIDs = Set(selection.selectedPackIDs)
         let selected = packs.filter { selectedIDs.isEmpty || selectedIDs.contains($0.id) }
         return selected.isEmpty ? packs.filter { match.sourceAtlasPackIDs.contains($0.id) } : selected
     }
-
 
     func composePaths(in graph: SourceAtlasCapabilityGraph, pack: SourceAtlasPack) -> [SourceAtlasCapabilityPath] {
         let overlays = graph.ladders.flatMap(\.pathOverlays)
@@ -121,16 +119,13 @@ extension SourceAtlasCapabilityPathComposer {
         }
     }
 
-
     func overlayMatches(_ overlay: SourceAtlasPathOverlay, graph: SourceAtlasCapabilityGraph) -> Bool {
         let skillSliceIDs = match.matchedSkillSliceIDs.isEmpty ? graph.nodes.map(\.id) : match.matchedSkillSliceIDs
         let roleIDs = match.matchedRoleIDs.isEmpty ? [overlay.roleID].compactMap { $0 } : match.matchedRoleIDs
 
         for skillSliceID in skillSliceIDs {
-            for roleID in roleIDs {
-                if overlay.matches(skillSliceID: skillSliceID, roleID: roleID) {
-                    return true
-                }
+            for roleID in roleIDs where overlay.matches(skillSliceID: skillSliceID, roleID: roleID) {
+                return true
             }
         }
 
@@ -140,7 +135,6 @@ extension SourceAtlasCapabilityPathComposer {
 
         return match.matchedSkillSliceIDs.isEmpty && match.matchedRoleIDs.isEmpty
     }
-
 
     func roleOverlayMatches(_ roleOverlay: SourceAtlasRoleOverlay, graph: SourceAtlasCapabilityGraph) -> Bool {
         let skillSliceIDs = match.matchedSkillSliceIDs.isEmpty ? graph.nodes.map(\.id) : match.matchedSkillSliceIDs
@@ -156,7 +150,6 @@ extension SourceAtlasCapabilityPathComposer {
 
         return match.matchedSkillSliceIDs.isEmpty && match.matchedRoleIDs.isEmpty
     }
-
 
     func buildPath(
         graph: SourceAtlasCapabilityGraph,
@@ -227,7 +220,6 @@ extension SourceAtlasCapabilityPathComposer {
             planSkeleton: planSkeleton
         )
     }
-
 
     func traverse(
         graphID: String,
@@ -307,7 +299,6 @@ extension SourceAtlasCapabilityPathComposer {
             missingSourceNodes: Self.orderedUniquePreservingOrder(Array(missingSourceNodes))
         )
     }
-
 
     func roots(
         in nodesByID: [String: SourceAtlasCapabilityNode],

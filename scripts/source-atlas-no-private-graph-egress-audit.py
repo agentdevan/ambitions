@@ -31,6 +31,8 @@ PRIVATE_AUTHORITY_PATTERNS = {
     "PersonalizationFactorLedgerBuilder": "personal profiling builder authority",
     "PersonalizationFactorLedgerInput": "personal profiling input authority",
     "PrivateLifeRuntimeKernel": "private runtime kernel authority",
+    "LifeContextRuntimeProjection": "private runtime life-context authority",
+    "SourceAtlasLocalInfluenceSet": "private planning influence authority",
     "DecisionKernel": "private runtime decision authority",
     "RecommendationKernel": "private runtime recommendation authority",
     "AmbitionsCommand": "direct command mutation marker",
@@ -150,15 +152,23 @@ def audit_native_source_text_from_string(text: str, relative: str) -> list[str]:
 
 
 def self_test() -> int:
-    invalid = "let ledger: PersonalizationFactorLedger?\nlet command = AmbitionsCommand.capture\nlet context: ModelContext\n"
+    invalid = (
+        "let ledger: PersonalizationFactorLedger?\n"
+        "let command = AmbitionsCommand.capture\n"
+        "let context: ModelContext\n"
+        "let lifeContext: LifeContextRuntimeProjection\n"
+        "let influence: SourceAtlasLocalInfluenceSet\n"
+    )
     invalid_path = f"{NATIVE_SOURCE_ATLAS_ROOT}SelfTest.swift"
     issues = audit_native_source_text_from_string(invalid, invalid_path)
-    assert len(issues) == 3
+    assert len(issues) == 5
     assert any("PersonalizationFactorLedger" in issue for issue in issues)
     assert any("AmbitionsCommand" in issue for issue in issues)
     assert any("ModelContext" in issue for issue in issues)
+    assert any("LifeContextRuntimeProjection" in issue for issue in issues)
+    assert any("SourceAtlasLocalInfluenceSet" in issue for issue in issues)
 
-    valid = "let signal = SourceAtlasLocalInfluenceSet(stableFingerprint: \"local\", signals: [])\n"
+    valid = "let context = SourceAtlasPublicPlanningContext.self\n"
     assert audit_native_source_text_from_string(valid, invalid_path) == []
     print("source-atlas-no-private-graph-egress-audit self-test passed")
     return 0

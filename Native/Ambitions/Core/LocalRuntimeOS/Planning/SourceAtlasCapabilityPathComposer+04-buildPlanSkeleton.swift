@@ -2,6 +2,8 @@ import Foundation
 
 extension SourceAtlasCapabilityPathComposer {
 
+    // Legacy local-planning composition contract; grouped inputs are handled in a successor task.
+    // swiftlint:disable:next function_parameter_count
     func buildPlanSkeleton(
         pathID: String,
         pathSummary: String,
@@ -239,7 +241,6 @@ extension SourceAtlasCapabilityPathComposer {
         )
     }
 
-
     func weeklyCadenceSummary(
         pathSummary: String,
         score: Double,
@@ -260,7 +261,6 @@ extension SourceAtlasCapabilityPathComposer {
         }
         return parts.joined(separator: " ")
     }
-
 
     func feasibilityBand(
         score: Double,

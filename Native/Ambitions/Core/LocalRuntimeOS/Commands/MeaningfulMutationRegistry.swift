@@ -42,7 +42,7 @@ enum MeaningfulMutationRegistry {
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
             id: "preview.runtime-command-client",
-            sourcePath: "PreviewAppContainerFactory.preview",
+            sourcePath: "PreviewAppContainerFactory.previewBundle",
             commandKind: .placeStepInTime,
             status: .unproven,
             rationale: "DEBUG-only preview composition installs an in-memory runtime command closure; it is not production mutation authority."

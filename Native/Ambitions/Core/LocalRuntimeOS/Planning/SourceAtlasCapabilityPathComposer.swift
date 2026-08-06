@@ -83,7 +83,6 @@ struct SourceAtlasCapabilityPathComposer: Sendable, Equatable {
 
     let localInfluenceSet: SourceAtlasLocalInfluenceSet?
 
-
     init(
         goalID: String,
         userContextVersion: String,

@@ -2,6 +2,8 @@ import Foundation
 
 extension SourceAtlasCapabilityPathComposer {
 
+    // Legacy local-planning composition contract; grouped inputs are handled in a successor task.
+    // swiftlint:disable:next function_parameter_count
     func scorePath(
         graph: SourceAtlasCapabilityGraph,
         packID: String,
@@ -27,7 +29,8 @@ extension SourceAtlasCapabilityPathComposer {
         return Self.clamp(score)
     }
 
-
+    // Legacy local-planning composition contract; grouped inputs are handled in a successor task.
+    // swiftlint:disable:next function_parameter_count
     func candidateText(
         graph: SourceAtlasCapabilityGraph,
         pack: SourceAtlasPack,
@@ -57,7 +60,6 @@ extension SourceAtlasCapabilityPathComposer {
         ]
         .joined(separator: " ")
     }
-
 
     func contextAlignmentScore(
         pathText: String,
@@ -127,7 +129,6 @@ extension SourceAtlasCapabilityPathComposer {
         return score
     }
 
-
     func localInfluenceScore(pathText: String) -> Double {
         guard let localInfluenceSet else {
             return 0.0
@@ -177,7 +178,6 @@ extension SourceAtlasCapabilityPathComposer {
         return score
     }
 
-
     func requirementScore(requirementProjection: SourceAtlasRequirementProjection) -> Double {
         var score = 0.0
         score += requirementProjection.hardRequirements.isEmpty == false ? 0.03 : 0.0
@@ -188,7 +188,6 @@ extension SourceAtlasCapabilityPathComposer {
         score += requirementProjection.deadlineSensitiveItems.isEmpty == false ? 0.02 : 0.0
         return score
     }
-
 
     func pathSummary(
         for graph: SourceAtlasCapabilityGraph,
@@ -202,7 +201,6 @@ extension SourceAtlasCapabilityPathComposer {
         let missingCount = traversal.missingSourceNodes.count
         return "\(overlayTitle) with \(nodeCount) nodes, \(blockerCount) blockers, \(staleCount) stale nodes, and \(missingCount) missing sources."
     }
-
 
     func pathID(
         for graph: SourceAtlasCapabilityGraph,

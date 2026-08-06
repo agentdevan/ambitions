@@ -25,10 +25,17 @@ REPAIR_PATH = REPO_ROOT / "tools" / "source-atlas" / "fixtures" / "m09" / "sourc
 
 def test_m09_validation_command_matrix_references_real_or_explicitly_unavailable_commands(tmp_path: Path):
     result = validate_command_matrix(MATRIX_PATH, REPO_ROOT, tmp_path / "matrix-result.json")
+    unavailable = {
+        command["id"]: command
+        for command in read_json(MATRIX_PATH)["commands"]
+        if command["availability"] == "not_available"
+    }
 
     assert result["valid"], result["issues"]
-    assert result["notAvailableCount"] == 1
-    assert "production R2 upload".lower() in read_json(MATRIX_PATH)["commands"][-1]["notAvailableReason"].lower()
+    assert result["notAvailableCount"] == 2
+    assert set(unavailable) == {"m09.local.pr.review", "m09.production.r2.upload"}
+    assert "intentionally removed" in unavailable["m09.local.pr.review"]["notAvailableReason"]
+    assert "production r2 upload" in unavailable["m09.production.r2.upload"]["notAvailableReason"].lower()
 
 
 def test_m09_golden_benchmark_matrix_covers_17_scenarios_8_states_and_no_false_completion(tmp_path: Path):

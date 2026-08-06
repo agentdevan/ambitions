@@ -27,6 +27,8 @@ enum SourceAtlasNoPrivateGraphEgressAudit {
         "goaltext",
         "goal_id",
         "goal_ids",
+        "capability_id",
+        "capability_ids",
         "goal_payload",
         "goals_payload",
         "capture_text",
@@ -53,6 +55,7 @@ enum SourceAtlasNoPrivateGraphEgressAudit {
         "private_graph",
         "privategraph",
         "private_graph_id",
+        "private_graph_hash",
         "private_life_graph",
         "account_secret",
         "accountsecret",
@@ -71,7 +74,7 @@ enum SourceAtlasNoPrivateGraphEgressAudit {
         "final_schedule",
         "step_list",
         "calendar_context",
-        "life_area",
+        "life_area"
     ]
 
     static func validate(_ records: [SourceAtlasNoPrivateGraphEgressRecord]) -> [SourceAtlasNoPrivateGraphEgressFinding] {
