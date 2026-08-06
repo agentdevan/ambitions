@@ -1,5 +1,5 @@
 {
-  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
+  "canon_digest": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
   "canon_revision": 2,
   "executable_resolution_policy": {
     "binding_source": "executed test result manifests",
@@ -4271,6 +4271,30 @@
       ]
     },
     {
+      "blueprint_ids": [],
+      "concept": "object.capability.identity-continuity",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "A Capability MUST be a durable, user-owned, private Life Capital record for a reusable ability, body of knowledge, or useful method. Experience is evidence or context for a Capability, never the Capability itself. A record becomes user-owned through manual creation or confirmation of a proposal; it remains distinct from every Goal, Step, Proof, Receipt, credential, public taxonomy, requirement, recommendation, and eligibility decision.",
+      "modality": "MUST",
+      "owner_spec_id": "OBJECT-CAPABILITY",
+      "requirement_id": "OBJ-CAPABILITY-IDENTITY-001",
+      "scope": "Capability identity, evidence facets, lifecycle, future-use permission, and claim ceiling",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/Capability/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/objects/capability.md",
+      "verification_declarations": [
+        "SCENARIO-CAPABILITY-CONTINUITY-001"
+      ]
+    },
+    {
       "blueprint_ids": [
         "UX-OBJECT-SAVED-FOR-LATER-DRAFT",
         "UX-SCREEN-CAPTURE-SAVED-FOR-LATER"
@@ -5824,6 +5848,30 @@
       "source_path": "specifications/objects/source-reference.md",
       "verification_declarations": [
         "SCENARIO-SOURCE-INSPECTION-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "object.source-reference.public-claim-identity",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "An approved public-reference claim MUST retain a stable Ambitions public claim ID, source-native subject and record IDs, predicate, authority for that predicate, jurisdiction, release/effective period, retrieval and checked dates, freshness, rights/attribution, risk/review, conflict, and supersession facts. A source-level official label, public delivery, or inspection availability MUST NOT imply personal qualification, user acceptance, recommendation fitness, or authority outside the declared predicate lane. Missing required claim meaning is unavailable rather than inferred.",
+      "modality": "MUST",
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002",
+      "scope": "Public-reference claim identity, release, authority, jurisdiction, rights, and inspection",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/objects/source-reference.md",
+      "verification_declarations": [
+        "SCENARIO-PUBLIC-REFERENCE-IDENTITY-001"
       ]
     },
     {
@@ -11355,6 +11403,29 @@
       ]
     },
     {
+      "blueprint_ids": [],
+      "concept": "system.privacy.public-reference-boundary",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Public-reference identity, source-native facts, authority, jurisdiction, release, freshness, rights, attribution, risk, review, conflict, and supersession may use the public-reference handling class. Combining one of those facts with a Goal, Capability, Proof, schedule, location, private identifier, rejection, rationale, or derived private key creates private graph data and MUST remain under local Planning; it cannot enter a Source Atlas request, cache key, public pack, diagnostic, telemetry, or R2 object.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "requirement_id": "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003",
+      "scope": "Public-reference artifacts, claims, cache, diagnostics, inspection, and local/private joins",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/privacy-and-data-classification.md",
+      "verification_declarations": [
+        "PRIVACY-PUBLIC-REFERENCE-BOUNDARY-001"
+      ]
+    },
+    {
       "blueprint_ids": [
         "UX-SCREEN-TIME-IMPORT",
         "UX-SCREEN-YOU-DATA"
@@ -11743,6 +11814,29 @@
       "source_path": "specifications/systems/source-atlas.md",
       "verification_declarations": [
         "SCENARIO-SYSTEM-SOURCE-ATLAS-PUBLIC-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.source-atlas.public-claim-state",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Source Atlas MUST model public claim delivery, semantic review, freshness, rights, and conflict as independent axes. A claim may be authoritative, contextual, conflicting, last-known-good, or unavailable only from its retained source-bound facts. Bundled/cached verified and last-known-good public claims remain inspectable offline with their actual state; invalid, quarantined, rights-blocked, authority-incomplete, stale-blocked, revoked, or unknown claims are unavailable. Claim availability never asserts user fit, acceptance, qualification, or recommendation readiness.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002",
+      "scope": "Public claim authority, delivery, semantic review, freshness, rights, conflict, last-known-good, and unavailable recovery",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/source-atlas.md",
+      "verification_declarations": [
+        "SCENARIO-PUBLIC-REFERENCE-STATE-001"
       ]
     },
     {

@@ -1,0 +1,44 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ambitions-linear-control",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": {
+    "LINEAR_API_URL": "https://api.linear.app/graphql",
+    "GITHUB_REPOSITORY": "agentdevan/ambitions",
+    "MANIFEST_PATH": "tools/linear-control/generated/desired-workspace.json",
+    "MUTATIONS_ENABLED": true,
+    "MAX_EVENT_BYTES": "262144",
+  },
+  "d1_databases": [
+    {
+      "binding": "CONTROL_DB",
+      "database_name": "ambitions-linear-control",
+      "database_id": "932b419a-7075-4a11-854e-b056e170b37c",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "queues": {
+    "producers": [
+      { "binding": "CONTROL_QUEUE", "queue": "ambitions-linear-control" },
+    ],
+    "consumers": [
+      {
+        "queue": "ambitions-linear-control",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 5,
+        "dead_letter_queue": "ambitions-linear-control-dlq",
+        "max_concurrency": 1,
+      },
+    ],
+  },
+  "triggers": { "crons": ["7 * * * *", "0 14 * * MON"] },
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.05 },
+  },
+}

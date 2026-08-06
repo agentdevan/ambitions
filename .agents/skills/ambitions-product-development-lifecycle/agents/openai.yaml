@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ambitions Product Development"
+  short_description: "Create, review, approve, and groom Ambitions product documents."
+  default_prompt: "Use $ambitions-product-development-lifecycle to turn this material Ambitions idea into Research, Scope, Design, and implementation grooming documents through a conversational create, review, approve, and groom workflow."
+policy:
+  allow_implicit_invocation: true

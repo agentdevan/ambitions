@@ -1,5 +1,5 @@
 {
-  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
+  "canon_digest": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
   "concepts": {
     "accessibility.dynamic-type": {
       "owner_spec_id": "STANDARD-ACCESSIBILITY",
@@ -925,6 +925,10 @@
       "owner_spec_id": "CONSTITUTION",
       "requirement_id": "OBJECT-CANONICAL-GRAPH-001"
     },
+    "object.capability.identity-continuity": {
+      "owner_spec_id": "OBJECT-CAPABILITY",
+      "requirement_id": "OBJ-CAPABILITY-IDENTITY-001"
+    },
     "object.capture-draft.identity-lifecycle": {
       "owner_spec_id": "OBJECT-SAVED-FOR-LATER-DRAFT",
       "requirement_id": "OBJ-CAPTURE-DRAFT-IDENTITY-001"
@@ -1172,6 +1176,10 @@
     "object.source-reference.identity-visibility": {
       "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
       "requirement_id": "OBJ-SOURCE-REFERENCE-IDENTITY-001"
+    },
+    "object.source-reference.public-claim-identity": {
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002"
     },
     "object.state.orthogonal-axes": {
       "owner_spec_id": "OBJECT-LIFE-AREA",
@@ -1777,6 +1785,10 @@
       "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
       "requirement_id": "SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001"
     },
+    "system.privacy.public-reference-boundary": {
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "requirement_id": "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003"
+    },
     "system.runtime.cloud-independence": {
       "owner_spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME",
       "requirement_id": "SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001"
@@ -1824,6 +1836,10 @@
     "system.source-atlas.egress-firewall": {
       "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
       "requirement_id": "SYSTEM-SOURCE-ATLAS-FIREWALL-001"
+    },
+    "system.source-atlas.public-claim-state": {
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002"
     },
     "system.source-atlas.public-reference": {
       "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
@@ -2135,6 +2151,7 @@
         "APP-SHELL",
         "GLOBAL-TRUST-INSPECTION",
         "OBJECT-BRANCH-VIABILITY-CERTIFICATE",
+        "OBJECT-CAPABILITY",
         "OBJECT-HISTORY-EVENT",
         "OBJECT-RECEIPT",
         "STANDARD-PERFORMANCE-ENERGY",
@@ -2156,6 +2173,7 @@
         "GLOBAL-SEARCH",
         "OBJECT-ATTACHMENT",
         "OBJECT-BRANCH-VIABILITY-CERTIFICATE",
+        "OBJECT-CAPABILITY",
         "OBJECT-CLOSURE",
         "OBJECT-EVENT",
         "OBJECT-GOAL",
@@ -2890,6 +2908,11 @@
       "owner_spec_id": "OBJECT-LIFE-AREA",
       "source_path": "specifications/objects/life-area.md"
     },
+    "OBJ-CAPABILITY-IDENTITY-001": {
+      "inherited_by": [],
+      "owner_spec_id": "OBJECT-CAPABILITY",
+      "source_path": "specifications/objects/capability.md"
+    },
     "OBJ-CAPTURE-DRAFT-IDENTITY-001": {
       "inherited_by": [],
       "owner_spec_id": "OBJECT-SAVED-FOR-LATER-DRAFT",
@@ -3066,12 +3089,16 @@
       "source_path": "specifications/objects/life-branch.md"
     },
     "OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001": {
-      "inherited_by": [],
+      "inherited_by": [
+        "OBJECT-CAPABILITY"
+      ],
       "owner_spec_id": "OBJECT-LIFE-AREA",
       "source_path": "specifications/objects/life-area.md"
     },
     "OBJ-LIFE-CAPITAL-EDITABILITY-001": {
-      "inherited_by": [],
+      "inherited_by": [
+        "OBJECT-CAPABILITY"
+      ],
       "owner_spec_id": "OBJECT-LIFE-AREA",
       "source_path": "specifications/objects/life-area.md"
     },
@@ -3156,6 +3183,11 @@
       "source_path": "specifications/objects/schedule-placement.md"
     },
     "OBJ-SOURCE-REFERENCE-IDENTITY-001": {
+      "inherited_by": [],
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "source_path": "specifications/objects/source-reference.md"
+    },
+    "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002": {
       "inherited_by": [],
       "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
       "source_path": "specifications/objects/source-reference.md"
@@ -4265,7 +4297,9 @@
       "source_path": "specifications/systems/local-learning.md"
     },
     "SYSTEM-LEARNING-LOCAL-001": {
-      "inherited_by": [],
+      "inherited_by": [
+        "OBJECT-CAPABILITY"
+      ],
       "owner_spec_id": "SYSTEM-LOCAL-LEARNING",
       "source_path": "specifications/systems/local-learning.md"
     },
@@ -4315,6 +4349,11 @@
       "source_path": "specifications/systems/privacy-and-data-classification.md"
     },
     "SYSTEM-PRIVACY-EGRESS-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "source_path": "specifications/systems/privacy-and-data-classification.md"
+    },
+    "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003": {
       "inherited_by": [],
       "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
       "source_path": "specifications/systems/privacy-and-data-classification.md"
@@ -4385,6 +4424,11 @@
       "source_path": "specifications/systems/source-atlas.md"
     },
     "SYSTEM-SOURCE-ATLAS-PUBLIC-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "source_path": "specifications/systems/source-atlas.md"
+    },
+    "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002": {
       "inherited_by": [],
       "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
       "source_path": "specifications/systems/source-atlas.md"
@@ -4617,6 +4661,7 @@
         "JOURNEY-START-AND-COMPLETE-STEP",
         "OBJECT-ATTACHMENT",
         "OBJECT-BRANCH-VIABILITY-CERTIFICATE",
+        "OBJECT-CAPABILITY",
         "OBJECT-CLOSURE",
         "OBJECT-EVENT",
         "OBJECT-GOAL",
@@ -5004,6 +5049,25 @@
       ],
       "source_path": "specifications/objects/branch-viability-certificate.md"
     },
+    "OBJECT-CAPABILITY": {
+      "dependencies": [
+        "CONSTITUTION",
+        "OBJECT-GOAL",
+        "OBJECT-PROOF",
+        "OBJECT-RECEIPT",
+        "SURFACE-YOU",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+      ],
+      "dependents": [],
+      "inherits": [
+        "OBJ-LIFE-CAPITAL-EDITABILITY-001",
+        "OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001",
+        "SYSTEM-LEARNING-LOCAL-001",
+        "CONST-PROOF-EVIDENCE-001",
+        "CONST-RUNTIME-MUTATION-001"
+      ],
+      "source_path": "specifications/objects/capability.md"
+    },
     "OBJECT-CLOSURE": {
       "dependencies": [
         "CONSTITUTION",
@@ -5058,6 +5122,7 @@
       "dependents": [
         "JOURNEY-CLOSURE-AND-PROOF",
         "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+        "OBJECT-CAPABILITY",
         "OBJECT-CLOSURE",
         "OBJECT-GOAL-PATH",
         "OBJECT-LIFE-BRANCH",
@@ -5221,6 +5286,7 @@
         "JOURNEY-CLOSURE-AND-PROOF",
         "JOURNEY-START-AND-COMPLETE-STEP",
         "OBJECT-ATTACHMENT",
+        "OBJECT-CAPABILITY",
         "OBJECT-CLOSURE",
         "OBJECT-RECEIPT"
       ],
@@ -5242,6 +5308,7 @@
         "JOURNEY-BACKUP-RESTORE-RESET",
         "JOURNEY-CLOSURE-AND-PROOF",
         "JOURNEY-LIFE-BRANCH-RECONCILIATION",
+        "OBJECT-CAPABILITY",
         "OBJECT-HISTORY-EVENT",
         "OBJECT-LIFE-BRANCH"
       ],
@@ -5575,6 +5642,7 @@
       "dependents": [
         "JOURNEY-BACKUP-RESTORE-RESET",
         "JOURNEY-LIFE-BRANCH-RECONCILIATION",
+        "OBJECT-CAPABILITY",
         "OBJECT-HISTORY-EVENT",
         "OBJECT-NOTIFICATION-RULE",
         "OBJECT-RECEIPT",
@@ -5744,6 +5812,7 @@
         "SYSTEM-PRIVATE-LIFE-RUNTIME"
       ],
       "dependents": [
+        "OBJECT-CAPABILITY",
         "STANDARD-SECURITY-PRIVACY",
         "SYSTEM-APPLE-ECOSYSTEM",
         "SYSTEM-DIAGNOSTICS",

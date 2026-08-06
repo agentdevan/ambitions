@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "system-privacy-data-classification"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.privacy.classification", "system.privacy.egress-firewall", "system.privacy.external-assistance"]
+owns_concepts = ["system.privacy.classification", "system.privacy.egress-firewall", "system.privacy.external-assistance", "system.privacy.public-reference-boundary"]
 inherits = ["LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "LAW-ACCOUNT-BOUNDARY-001", "LAW-R2-PUBLIC-ONLY-001", "PRIVACY-CLOUDKIT-CONTINUITY-001", "PRIVACY-VISIBILITY-001"]
 depends_on = ["CONSTITUTION", "SURFACE-YOU", "APP-PERMISSIONS", "GLOBAL-TRUST-INSPECTION", "SYSTEM-PRIVATE-LIFE-RUNTIME"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
@@ -41,6 +41,17 @@ If the user provides sensitive context, Ambitions MAY use it locally.
 No Ambitions backend, Account service, R2, Source Atlas, hosted AI/cloud model, analytics, telemetry, implicit support upload, or server profiler MAY receive, store, infer from, personalize from, or transmit Goals, Life Areas, Captures, notes, attachments, calendar facts, schedule assumptions, availability, Protected time, Proof, Receipts, closure/history, corrections, behavior patterns, inferred priorities, recommendation context, private identifiers, or any private-graph payload. An explicitly user-controlled reviewed export or named external integration may carry only user-selected private data through its owning import/export or integration contract, with minimum fields, destination preview, confirmation, Receipt/History, and durable outbox/result where applicable. This reviewed-egress route never permits private-graph receipt by an Ambitions backend, Account service, R2, Source Atlas, hosted AI/cloud model, analytics, telemetry, implicit support upload, or server profiler. A separate explicitly approved user-owned CloudKit continuity path is governed only by `SYSTEM-SYNC-CONTINUITY` and is disabled until its complete gate passes.
 
 Ambitions Account MUST NOT store the private life graph unless a future canon explicitly approves a user-owned sync architecture.
+
+## SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003 — Public claims remain public-only
+
+- **Concept:** `system.privacy.public-reference-boundary`
+- **Modality:** `MUST`
+- **Scope:** Public-reference artifacts, claims, cache, diagnostics, inspection, and local/private joins
+- **Status:** `normative`
+- **Verification:** `PRIVACY-PUBLIC-REFERENCE-BOUNDARY-001`
+- **Supersedes:** none
+
+Public-reference identity, source-native facts, authority, jurisdiction, release, freshness, rights, attribution, risk, review, conflict, and supersession may use the public-reference handling class. Combining one of those facts with a Goal, Capability, Proof, schedule, location, private identifier, rejection, rationale, or derived private key creates private graph data and MUST remain under local Planning; it cannot enter a Source Atlas request, cache key, public pack, diagnostic, telemetry, or R2 object.
 
 ## Completeness contract
 

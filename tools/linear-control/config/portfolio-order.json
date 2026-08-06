@@ -1,0 +1,25 @@
+{
+  "excludedSlugs": ["lifecycle-fixture"],
+  "groups": [
+    ["linear-realtime-lifecycle-control"],
+    ["capability-continuity-foundation", "public-reference-knowledge-foundation"],
+    ["capability-export", "personal-context-and-constraint-controls"],
+    ["user-owned-cloudkit-continuity"],
+    ["private-generative-model-runtime", "scoped-automation-authority"],
+    ["cross-taxonomy-relationship-authority", "user-profile-archive-import"],
+    ["adaptive-local-learning-and-replanning", "context-quality-scheduling"],
+    ["production-career-reference-corpus", "verifiable-credential-import"],
+    ["career-destination-recommendations", "production-education-credential-provider-corpus"],
+    ["education-destination-recommendations", "production-hobby-life-path-reference-corpus"],
+    ["hobby-destination-recommendations", "intelligence-quality-safety-evaluation"],
+    ["current-opportunity-availability-intelligence", "intelligence-change-management"],
+    ["destination-adoption-and-pivot"],
+    ["external-action-integration-orchestration", "goal-path-generation"],
+    ["grounded-generative-destination-proposals"],
+    ["adaptive-path-comparison", "grounded-generative-goal-path-proposals"],
+    ["multi-goal-portfolio-simulation"],
+    ["generalized-life-branch-simulation"],
+    ["life-branch-reconciliation"],
+    ["adaptive-skills-and-pathways"]
+  ]
+}

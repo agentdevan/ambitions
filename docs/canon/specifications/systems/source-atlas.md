@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "system-source-atlas"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.source-atlas.public-reference", "system.source-atlas.egress-firewall"]
+owns_concepts = ["system.source-atlas.public-reference", "system.source-atlas.egress-firewall", "system.source-atlas.public-claim-state"]
 inherits = ["LAW-R2-PUBLIC-ONLY-001", "LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "CONST-PROOF-EVIDENCE-001"]
 depends_on = ["CONSTITUTION", "OBJECT-SOURCE-REFERENCE", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SYSTEM-PRIVATE-LIFE-RUNTIME"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Quality/"]
@@ -39,6 +39,17 @@ Source Atlas and R2 MAY store or deliver approved public or reference packs, man
 - **Supersedes:** none
 
 Source Atlas/R2 MUST NOT receive, store, infer from, personalize from, or transmit Goals, Life Areas, Captures, notes, attachments, calendar facts, schedules, availability, Protected time, Proof, Receipts, closure/history, corrections, behavior patterns, inferred priorities, recommendation context, stable private identifiers, private search terms, private-derived cache keys, or the private life graph. Requests are selected only from a finite allowlisted public artifact namespace; unrecognized or private-influenced request shapes fail closed. No user feedback or diagnostics path may smuggle private context upstream.
+
+## SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002 — Claim availability is orthogonal and honest
+
+- **Concept:** `system.source-atlas.public-claim-state`
+- **Modality:** `MUST`
+- **Scope:** Public claim authority, delivery, semantic review, freshness, rights, conflict, last-known-good, and unavailable recovery
+- **Status:** `normative`
+- **Verification:** `SCENARIO-PUBLIC-REFERENCE-STATE-001`
+- **Supersedes:** none
+
+Source Atlas MUST model public claim delivery, semantic review, freshness, rights, and conflict as independent axes. A claim may be authoritative, contextual, conflicting, last-known-good, or unavailable only from its retained source-bound facts. Bundled/cached verified and last-known-good public claims remain inspectable offline with their actual state; invalid, quarantined, rights-blocked, authority-incomplete, stale-blocked, revoked, or unknown claims are unavailable. Claim availability never asserts user fit, acceptance, qualification, or recommendation readiness.
 
 ## Completeness contract
 

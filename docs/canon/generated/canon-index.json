@@ -1,5 +1,5 @@
 {
-  "canon_digest": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
+  "canon_digest": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
   "canon_revision": 2,
   "documents": [
     {
@@ -4081,6 +4081,64 @@
       "depends_on": [
         "CONSTITUTION",
         "OBJECT-GOAL",
+        "OBJECT-PROOF",
+        "OBJECT-RECEIPT",
+        "SURFACE-YOU",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+      ],
+      "inherits": [
+        "OBJ-LIFE-CAPITAL-EDITABILITY-001",
+        "OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001",
+        "SYSTEM-LEARNING-LOCAL-001",
+        "CONST-PROOF-EVIDENCE-001",
+        "CONST-RUNTIME-MUTATION-001"
+      ],
+      "kind": "object",
+      "owner_domain": "object-capability",
+      "owns_concepts": [
+        "object.capability.identity-continuity"
+      ],
+      "path": "specifications/objects/capability.md",
+      "requirements": [
+        {
+          "concept": "object.capability.identity-continuity",
+          "id": "OBJ-CAPABILITY-IDENTITY-001",
+          "line": 17,
+          "modality": "MUST",
+          "scope": "Capability identity, evidence facets, lifecycle, future-use permission, and claim ceiling",
+          "source_owners": [
+            "Native/Ambitions/Core/Domain/Capability/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Surfaces/You/",
+            "Native/Ambitions/Surfaces/Goals/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/objects/capability.md",
+          "supersedes": [],
+          "title": "User-owned Life Capital meaning",
+          "verification": [
+            "SCENARIO-CAPABILITY-CONTINUITY-001"
+          ]
+        }
+      ],
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/Capability/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Quality/"
+      ],
+      "spec_id": "OBJECT-CAPABILITY",
+      "title": "Capability"
+    },
+    {
+      "depends_on": [
+        "CONSTITUTION",
+        "OBJECT-GOAL",
         "OBJECT-STEP",
         "OBJECT-PROOF",
         "GLOBAL-MOTION"
@@ -5765,14 +5823,37 @@
       "kind": "object",
       "owner_domain": "object-source-reference",
       "owns_concepts": [
-        "object.source-reference.identity-visibility"
+        "object.source-reference.identity-visibility",
+        "object.source-reference.public-claim-identity"
       ],
       "path": "specifications/objects/source-reference.md",
       "requirements": [
         {
+          "concept": "object.source-reference.public-claim-identity",
+          "id": "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002",
+          "line": 17,
+          "modality": "MUST",
+          "scope": "Public-reference claim identity, release, authority, jurisdiction, rights, and inspection",
+          "source_owners": [
+            "Native/Ambitions/Core/Domain/",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Trust/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/objects/source-reference.md",
+          "supersedes": [],
+          "title": "Public claim identity remains source-native",
+          "verification": [
+            "SCENARIO-PUBLIC-REFERENCE-IDENTITY-001"
+          ]
+        },
+        {
           "concept": "object.source-reference.identity-visibility",
           "id": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
-          "line": 17,
+          "line": 28,
           "modality": "MUST",
           "scope": "Imported, shared, captured, or public-reference provenance",
           "source_owners": [
@@ -11246,7 +11327,8 @@
       "owns_concepts": [
         "system.privacy.classification",
         "system.privacy.egress-firewall",
-        "system.privacy.external-assistance"
+        "system.privacy.external-assistance",
+        "system.privacy.public-reference-boundary"
       ],
       "path": "specifications/systems/privacy-and-data-classification.md",
       "requirements": [
@@ -11293,9 +11375,30 @@
           ]
         },
         {
+          "concept": "system.privacy.public-reference-boundary",
+          "id": "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003",
+          "line": 45,
+          "modality": "MUST",
+          "scope": "Public-reference artifacts, claims, cache, diagnostics, inspection, and local/private joins",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Surfaces/You/",
+            "Native/Ambitions/Trust/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/privacy-and-data-classification.md",
+          "supersedes": [],
+          "title": "Public claims remain public-only",
+          "verification": [
+            "PRIVACY-PUBLIC-REFERENCE-BOUNDARY-001"
+          ]
+        },
+        {
           "concept": "system.privacy.external-assistance",
           "id": "SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001",
-          "line": 88,
+          "line": 99,
           "modality": "MUST NOT",
           "scope": "External assistance boundary",
           "source_owners": [
@@ -11669,7 +11772,8 @@
       "owner_domain": "system-source-atlas",
       "owns_concepts": [
         "system.source-atlas.public-reference",
-        "system.source-atlas.egress-firewall"
+        "system.source-atlas.egress-firewall",
+        "system.source-atlas.public-claim-state"
       ],
       "path": "specifications/systems/source-atlas.md",
       "requirements": [
@@ -11713,6 +11817,27 @@
           "title": "Requests and R2 artifacts contain no private graph signal",
           "verification": [
             "PRIVACY-SOURCE-ATLAS-NO-PRIVATE-GRAPH-EGRESS-001"
+          ]
+        },
+        {
+          "concept": "system.source-atlas.public-claim-state",
+          "id": "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002",
+          "line": 43,
+          "modality": "MUST",
+          "scope": "Public claim authority, delivery, semantic review, freshness, rights, conflict, last-known-good, and unavailable recovery",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/source-atlas.md",
+          "supersedes": [],
+          "title": "Claim availability is orthogonal and honest",
+          "verification": [
+            "SCENARIO-PUBLIC-REFERENCE-STATE-001"
           ]
         }
       ],
