@@ -173,7 +173,9 @@ export function desiredLiveIssueState(
 ): IssueState {
   const frontendBlocked = requiredFrontendGateLabels(project, task).length > 0;
   if (frontendBlocked)
-    return ["In Progress", "In Review", "Done"].includes(current)
+    return ["In Progress", "In Review", "Needs Repair", "Done"].includes(
+      current,
+    )
       ? "Needs Repair"
       : "Blocked";
   if (

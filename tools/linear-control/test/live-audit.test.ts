@@ -73,6 +73,14 @@ describe("live mirror audit", () => {
     expect(
       desiredLiveIssueState("Done", false, required.project, required.task),
     ).toBe("Needs Repair");
+    expect(
+      desiredLiveIssueState(
+        "Needs Repair",
+        false,
+        required.project,
+        required.task,
+      ),
+    ).toBe("Needs Repair");
 
     const approved = contracts("approved");
     expect(requiredFrontendGateLabels(approved.project, approved.task)).toEqual(
