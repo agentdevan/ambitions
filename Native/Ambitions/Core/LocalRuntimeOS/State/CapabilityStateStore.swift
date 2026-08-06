@@ -5,6 +5,9 @@ enum CapabilityStoreOperation: Codable, Sendable, Equatable, Hashable {
     case replace(CapabilityRecord)
     case attachEvidence(CapabilityEvidenceRelationship)
     case detachEvidence(relationshipID: String)
+    /// A source owner can reconcile every affected relationship in one
+    /// capability-owned event without mutating the source itself.
+    case reconcileEvidence([CapabilityEvidenceRelationship])
     case archive(capabilityID: CapabilityID)
     case trash(capabilityID: CapabilityID)
     case restore(capabilityID: CapabilityID)
@@ -167,6 +170,22 @@ private enum CapabilityStateReducer {
                     .map(\.id),
                 in: &snapshot
             )
+        case let .reconcileEvidence(reconciled):
+            let ids = reconciled.map(\.id)
+            guard Set(ids).count == ids.count else {
+                throw CapabilityStateStoreError.duplicateEvidenceRelationship(ids.sorted().first ?? "")
+            }
+            var relationships = snapshot.evidenceRelationships
+            for relationship in reconciled {
+                guard let index = relationships.firstIndex(where: { $0.id == relationship.id }) else {
+                    throw CapabilityStateStoreError.missingEvidenceRelationship(relationship.id)
+                }
+                guard relationships[index].capabilityID == relationship.capabilityID else {
+                    throw CapabilityStateStoreError.missingCapability(relationship.capabilityID)
+                }
+                relationships[index] = relationship
+            }
+            snapshot = replacing(relationships: relationships, in: snapshot)
         case let .archive(capabilityID):
             try transition(capabilityID: capabilityID, to: .archived, in: &snapshot)
         case let .trash(capabilityID):
