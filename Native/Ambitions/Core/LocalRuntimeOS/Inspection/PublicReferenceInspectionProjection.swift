@@ -1,10 +1,16 @@
 import Foundation
 
 struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+    enum Availability: String, Codable, Sendable, Equatable, Hashable {
+        case available
+        case unavailable
+    }
+
     struct Claim: Codable, Sendable, Equatable, Hashable, Identifiable {
         let id: PublicReferenceClaimID
         let title: String
         let value: String
+        let sourceNativeIdentity: String
         let authority: String
         let jurisdictionAndRelease: String
         let retrieval: String
@@ -25,8 +31,12 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
 
     let id: String
     let title: String
+    let corpusTitle: String
+    let availability: Availability
     let sourceRevision: String
     let delivery: String
+    let semanticUse: String
+    let recommendationReadiness: String
     let authority: String
     let retrieval: String
     let freshness: String
@@ -46,9 +56,15 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
         let freshness = source.map { $0.freshnessState.rawValue.replacingOccurrences(of: "_", with: " ") } ?? "Unavailable"
         return PublicReferenceInspectionProjection(
             id: "public-reference-inspection-\(release.artifactID)-\(release.release.id)",
-            title: "Public reference details",
+            title: "Public reference sources",
+            corpusTitle: "O*NET 30.3 — Software Developers (15-1252.00), United States",
+            availability: .available,
             sourceRevision: release.sourceRevision,
             delivery: result.snapshot.delivery.rawValue.replacingOccurrences(of: "_", with: " "),
+            semanticUse: release.claims.allSatisfy { $0.semanticReviewState == .complete }
+                ? "Complete for approved descriptive claims"
+                : "Incomplete for current use",
+            recommendationReadiness: "Not approved for recommendation use",
             authority: authority,
             retrieval: retrieval,
             freshness: freshness,
@@ -89,13 +105,48 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
         let title = value.predicateID.replacingOccurrences(of: "occupation.", with: "").replacingOccurrences(of: "_", with: " ").capitalized
         return Claim(
             id: value.id, title: title, value: value.value.text,
+            sourceNativeIdentity: "\(value.sourceNativeSubjectID) · \(value.predicateID) · \(value.sourceRecordID)",
             authority: "\(value.authority.publisherID) — \(value.authority.statement)",
             jurisdictionAndRelease: "\(value.jurisdiction.label) (\(value.jurisdiction.code)), release \(value.release.id)",
             retrieval: "Retrieved \(value.retrievedAt); checked \(value.checkedAt)",
             freshness: freshness, limits: limits, conflicts: conflicts, supersession: supersession,
             attribution: value.requiredAttribution,
             accessibilityLabel: "\(title) public reference claim",
-            accessibilityValue: "\(value.value.text). Authority \(value.authority.publisherID). Freshness \(freshness)."
+            accessibilityValue: [
+                value.value.text,
+                "Authority \(value.authority.publisherID) — \(value.authority.statement)",
+                "Jurisdiction and release \(value.jurisdiction.label), \(value.release.id)",
+                "Freshness \(freshness)",
+                "Limits \(limits)",
+                "Conflicts \(conflicts)",
+                "Supersession \(supersession)",
+                "Attribution \(value.requiredAttribution)"
+            ].joined(separator: ". ")
         )
     }
+}
+
+extension PublicReferenceInspectionProjection {
+    static let unavailable = PublicReferenceInspectionProjection(
+        id: "public-reference-inspection-unavailable",
+        title: "Public reference sources",
+        corpusTitle: "No verified public corpus installed",
+        availability: .unavailable,
+        sourceRevision: "Unavailable",
+        delivery: "Unavailable",
+        semanticUse: "No approved public claims available",
+        recommendationReadiness: "Not approved for recommendation use",
+        authority: "Unavailable",
+        retrieval: "No verified local reference is available",
+        freshness: "Unavailable",
+        selectedClaimID: nil,
+        selectedClaim: nil,
+        claims: [],
+        recheckTrigger: RecheckTrigger(
+            title: "Check approved source release",
+            detail: "Local planning remains available. Check again after an approved public reference is installed.",
+            isRequired: false
+        ),
+        isReadOnly: true
+    )
 }

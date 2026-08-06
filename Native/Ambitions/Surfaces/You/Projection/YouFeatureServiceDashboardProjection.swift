@@ -2,13 +2,22 @@ import AmbitionsDesignSystem
 import Foundation
 
 extension RepositoryBackedYouService {
+    struct DashboardContext {
+        let syncStatus: SyncCapabilityStatus
+        let notificationAuthorization: NotificationAuthorizationState
+        let remindersAuthorization: CalendarRemindersAuthorizationState
+        let calendarAuthorization: CalendarRemindersAuthorizationState
+        let publicReferenceInspection: PublicReferenceInspectionProjection
+    }
+
     func makeDashboard(
         snapshot: Snapshot,
-        syncStatus: SyncCapabilityStatus,
-        notificationAuthorization: NotificationAuthorizationState,
-        remindersAuthorization: CalendarRemindersAuthorizationState,
-        calendarAuthorization: CalendarRemindersAuthorizationState
+        context: DashboardContext
     ) -> YouDashboard {
+        let syncStatus = context.syncStatus
+        let notificationAuthorization = context.notificationAuthorization
+        let remindersAuthorization = context.remindersAuthorization
+        let calendarAuthorization = context.calendarAuthorization
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let clarificationCount = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
@@ -250,7 +259,9 @@ extension RepositoryBackedYouService {
                     personalVault: personalVault
                 ),
                 receiptSummaries: ActionReceiptProjection(receipts: policyReceipts).displaySummaries(limit: 3),
-                footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. Ambitions does not claim live sync, account systems, verified accessibility, or complete personal vault coverage here."
+                footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. "
+                    + "Ambitions does not claim live sync, account systems, verified accessibility, "
+                    + "or complete personal vault coverage here."
             ),
             contextVault: YouContextVaultState(
                 title: "Local memory map",
@@ -314,6 +325,7 @@ extension RepositoryBackedYouService {
                 footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context and personal vault boundaries understandable without inventing account, sync, or export flows."
             ),
             sourceAtlasKnowledge: makeSourceAtlasKnowledgeState(snapshot: snapshot),
+            publicReferenceInspection: context.publicReferenceInspection,
             lifeContext: lifeContext,
             integrationsSection: YouSectionGroup(
                 title: "Integrations and permissions",
