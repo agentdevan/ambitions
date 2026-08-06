@@ -272,6 +272,17 @@ must be announced and focus restored to the affected stage or recovery action.
 - The existing Goal Path owner alone revalidates and activates a selected
   proposal; scheduling remains under Time/placement owners.
 
+## Frontend impact contract
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: The approved requirements, acceptance criteria, and user flows own visible terminology and non-claims; implementation must localize that meaning without inventing promotional, score, authority, or outcome language.
+- Accessibility: Every new child view and action must preserve the approved semantic order, Dynamic Type/reflow, assistive-input parity, non-color meaning, focus, announcements, and reduced-effects behavior.
+- Visual proof: One production-intended native fixture and viewport requires owner visual approval before implementation, followed by changed-state runtime, screenshot, accessibility, and named-device evidence required by Verification.
+
 ## Canon impact
 
 - Goal Path and Goal-creation-and-activation canon should distinguish candidate

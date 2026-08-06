@@ -172,6 +172,19 @@ the last honest source store and exact result. Recovery offers new destination,
 fresh preview, inspect pending/ambiguous result, or verified cleanup. No export
 failure mutates a Capability or treats the artifact as backup.
 
+## Frontend experience specification
+
+- Surface impact: new-child
+- IA/navigation: none
+- Assets/iconography: system-only
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: Use only the visible meaning, actions, limits, and recovery language resolved by User flows and States and recovery; localization must preserve every non-claim.
+- Accessibility: Use native semantic containers and controls with the exact reading order, reflow, assistive actions, focus, announcements, non-color status, and reduced-effects behavior defined below.
+- Visual proof: Before the frontend task starts, render one production-intended SwiftUI fixture in one representative viewport, record protected characteristics, and obtain owner approval. Runtime navigation/state, screenshot, accessibility, and named-device proof remain separately required.
+- Visual gate: required
+- Experience authority: Task 5 may implement only the routes, hierarchy, components, actions, and visible/recovery states already resolved by User flows and States and recovery. It may not add a root, alter IA, introduce custom assets, or change the visual language without returning to Scope and Design.
+
 ## Architecture and data
 
 ### Ownership and data flow

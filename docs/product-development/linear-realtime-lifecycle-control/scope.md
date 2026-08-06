@@ -154,6 +154,17 @@ mapping history.
 - Queue retry/DLQ replay, API throttling, scheduled repair, and credential
   rejection tests pass.
 
+## Frontend impact contract
+
+- Surface impact: none
+- IA/navigation: none
+- Assets/iconography: none
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: N/A — no application copy is created or changed.
+- Accessibility: N/A — no rendered application interface is created or changed.
+- Visual proof: N/A — repository structural evidence is the applicable proof ceiling.
+
 ## Canon impact
 
 No product canon change is required. This initiative governs the external

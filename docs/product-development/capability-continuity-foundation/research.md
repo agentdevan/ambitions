@@ -177,6 +177,12 @@ prevents downstream engines from inventing their own incompatible person model.
   Design questions. Current Proof-capital and public capability graph types are
   evidence, not automatic architectural authority.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/CapabilityCollectionView.swift`, `Native/Ambitions/Surfaces/Goals/CapabilityProposalCard.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 The evidence favors a focused capability-continuity foundation: an inspectable

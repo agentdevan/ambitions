@@ -1,21 +1,31 @@
 # Implementation Tasks
 
 1. Canon/contracts/artifact/provenance/release fixtures (REQ-001, 003–006, 017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Pinned trust metadata/rotation/attack verifier (REQ-002, 016).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Domain semantic validator registry/receipts (REQ-003, 005, 009).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Compatibility graph/environment detector and evaluation gate (REQ-004, 006,
    008, 012, 017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Change classifier/dependency impact/no-mutation notifier (REQ-005, 010–011).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Quarantine/content/attestation/generation stores and reader leases (REQ-001,
    007, 012–015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Promotion/LKG/safe rollback/environment fallback (REQ-007–008, 012, 015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. Revocation/withdrawal/purge/incident recovery (REQ-002, 009, 015–016).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. Trust inspection/change notes/accessibility/resources/project integration
    (REQ-011, 014, 017–018; all integration).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 10. Full verification and REQ-001–REQ-018 evidence/security review; rollout/
     model/corpus task claims remain exact and no release/deployment is implied.
 
 Run focused checks and inspect each task diff.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

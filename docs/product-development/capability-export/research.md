@@ -170,6 +170,12 @@ create or hand off one immutable artifact. This matches current privacy law.
   content-free warning is honest but cannot identify every copy the user made
   after export.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/CapabilityExportView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Research favors a first purpose-bound advisor-summary export in UTF-8 plain

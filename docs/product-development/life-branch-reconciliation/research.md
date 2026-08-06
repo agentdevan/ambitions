@@ -339,6 +339,12 @@ alternatives. Goal Path and schedule-reflow should remain the normal owners.
   promotion tests were found. This is a high proof burden across runtime,
   persistence, privacy, accessibility, performance, and device behavior.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/LifeBranchReviewView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 7 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Preserve Life Branch as a **guarded reconciliation mechanism for complete,

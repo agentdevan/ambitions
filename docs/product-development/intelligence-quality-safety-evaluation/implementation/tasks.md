@@ -14,6 +14,7 @@ tests green and a review of the task diff before the next task starts.
    limitations, hard invariants, and no private or fabricated production data.
    Tests: `test_schema_and_reports.py` schema/fixture cases and canon compiler
    tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. **Domain models, decoding, and registry.** Implement the four model files,
    manifest loader, and registry. Dependency: Task 1. Trace: `REQ-001` through
    `REQ-004`, `REQ-013`, `REQ-017`. Acceptance: strict versioned round trips,
@@ -21,6 +22,7 @@ tests green and a review of the task diff before the next task starts.
    legal states, and no aggregate score. Tests:
    `IntelligenceEvaluationModelsTests.swift` and
    `IntelligenceEvaluationRegistryTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. **Protected evaluation store and deletion.** Implement store schema, store,
    and deletion service beneath the active runtime generation. Dependency: Task
    2. Trace: `REQ-003`, `REQ-008`, `REQ-009`, `REQ-012`, `REQ-017`, `REQ-018`.
@@ -29,6 +31,7 @@ tests green and a review of the task diff before the next task starts.
    unsupported-schema failure, resumable deletion, and no derived influence.
    Tests: `IntelligenceEvaluationStoreTests.swift`,
    `IntelligenceEvaluationDeletionTests.swift`, and privacy storage cases.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. **Runner and evidence methods.** Implement the actor runner, deterministic
    method registration, bounded execution, injected clock/seed, cancellation,
    partial runs, and adjudication-pending evidence. Dependency: Tasks 2-3.
@@ -37,6 +40,7 @@ tests green and a review of the task diff before the next task starts.
    partial pass, captured non-deterministic evidence, and truthful recovery.
    Tests: `IntelligenceEvaluationRunnerTests.swift` plus source/model/failure
    matrices.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. **Hard invariants and verdict derivation.** Implement the invariant evaluator
    and verdict engine. Dependency: Task 4. Trace: `REQ-004` through `REQ-011`,
    `REQ-013`, `REQ-014`, `REQ-016`, `REQ-017`. Acceptance: every named hard
@@ -45,6 +49,7 @@ tests green and a review of the task diff before the next task starts.
    a model cannot self/sole-approve protected claims. Tests:
    `IntelligenceEvaluationInvariantEvaluatorTests.swift` and
    `IntelligenceEvaluationVerdictEngineTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. **Invalidation and read-only handoffs.** Implement the invalidation planner,
    runtime read client, reverse dependency index, immutable supersession, and
    non-authoritative change-impact DTO. Dependency: Tasks 3-5. Trace:
@@ -53,6 +58,7 @@ tests green and a review of the task diff before the next task starts.
    reruns receive new identities, and no handoff imports command/approval
    authority. Tests: `IntelligenceEvaluationInvalidationTests.swift` and
    compile-time mutation-negative client tests.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. **Redacted inspection and accessibility.** Implement the four Trust files and
    development/review route. Dependency: Task 6. Trace: `REQ-003`, `REQ-008`,
    `REQ-015`, `REQ-017`, `REQ-018`. Acceptance: exact bindings, evidence,
@@ -62,6 +68,7 @@ tests green and a review of the task diff before the next task starts.
    `IntelligenceEvaluationInspectionTests.swift`,
    `IntelligenceEvaluationAccessibilityTests.swift`, and
    `IntelligenceEvaluationInspectionUITests.swift`.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 8. **CLI, reports, and cross-decoder conformance.** Implement the Python CLI and
    report formatter. Dependency: Tasks 1-6. Trace: `REQ-001` through `REQ-004`,
    `REQ-008`, `REQ-012`, `REQ-017`, `REQ-018`. Acceptance: Swift and Python
@@ -69,6 +76,7 @@ tests green and a review of the task diff before the next task starts.
    claim-bound, coverage-complete, redacted, and machine-readable; the CLI never
    reads a private app store by default. Tests: all
    `test_schema_and_reports.py` cases and Swift golden-decoder cases.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. **End-to-end fixture and integration ceiling.** Compose the owner in
    `RuntimeBootstrap.swift`, wire Source Atlas/Planning/Scheduling/Trust and
    non-production external-operation test seams, and run the astronaut pivot
@@ -79,6 +87,7 @@ tests green and a review of the task diff before the next task starts.
    source, production provider, direct-user, and release claims remain
    insufficient/N/A. Tests: `FutureAstronautPivotEvaluationTests.swift` and
    `IntelligenceEvaluationPrivacyTests.swift`.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. **Project generation and complete verification.** Confirm `project.yml`
     remains unchanged because its recursive source declarations cover every new
     Swift/test path, regenerate `Ambitions.xcodeproj`, run every command and
@@ -89,6 +98,7 @@ tests green and a review of the task diff before the next task starts.
     physical-device evidence are green; any unavailable lane remains explicitly
     unproven rather than silently waived. If a target/resource change makes a
     `project.yml` edit necessary, return to the plan before editing it.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Requirement-to-task traceability
 

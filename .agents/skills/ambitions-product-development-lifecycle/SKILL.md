@@ -34,6 +34,13 @@ behavior without inventing implementation details. Design uses approved Scope
 and defines flows, states, architecture, privacy, accessibility, traceability,
 and verification in enough detail to groom implementation work.
 
+Every phase must make frontend impact explicit. Research investigates whether
+the initiative can affect user-visible behavior and names the existing surfaces
+examined. Scope commits the surface, IA/navigation, asset/iconography, visual
+language, motion, copy/localization, accessibility, and proof boundary. Design
+repeats those classifications exactly and resolves the experience. `none` or
+`N/A` is valid only with a concrete reason; omission never means no impact.
+
 ## Review
 
 Review the current document in the same conversation using its matching rubric:
@@ -71,6 +78,14 @@ engineering task traceable to a Design decision and every Design decision
 traceable to a Scope `REQ-###` requirement. Grooming may resolve technical
 details but must not invent product behavior; return to Scope or Design for any
 new product decision.
+
+Every implementation task declares either `Frontend: none — <reason>` or
+`Frontend: affected — <REQ/design trace>; Visual gate:
+<not-required|required|approved>`. New child/root surfaces, changed
+IA/navigation, custom assets, or changed visual language or motion require the
+`ambitions-native-visual-foundry` workflow and explicit owner visual approval
+before the task is executable. Bounded work inside an already approved native
+surface does not require a separate visual gate.
 
 ## Boundaries and tooling
 

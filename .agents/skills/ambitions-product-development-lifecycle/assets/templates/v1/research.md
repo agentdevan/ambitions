@@ -25,6 +25,10 @@ upstream = ""
 
 <!-- PRODUCT-DOC-DRAFT: State unresolved questions, assumptions, dependencies, and risks. -->
 
+## Frontend impact investigation
+
+<!-- PRODUCT-DOC-DRAFT: Record `Potential frontend impact`, `Existing surfaces investigated`, and `Evidence and unknowns`. Use none/possible/certain for potential impact; `none` still requires a reason. -->
+
 ## Recommended direction
 
 <!-- PRODUCT-DOC-DRAFT: Recommend a bounded direction without committing Scope or implementation. -->

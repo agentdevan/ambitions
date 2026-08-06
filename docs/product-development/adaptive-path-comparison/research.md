@@ -287,6 +287,12 @@ explainable tradeoff and never path-selection authority.
   full mutation boundary, app integration, persistence, replay, privacy,
   accessibility, performance, or device behavior.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/PathComparisonView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue with a **qualitative, source-bound, side-effect-free comparison of

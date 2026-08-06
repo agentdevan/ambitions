@@ -19,6 +19,22 @@ const REQUIRED = [
   "implementation/tasks.md",
   "implementation/verification.md",
 ] as const;
+const RESEARCH_FRONTEND_FIELDS = [
+  "Potential frontend impact",
+  "Existing surfaces investigated",
+  "Evidence and unknowns",
+] as const;
+const FRONTEND_MATRIX_FIELDS = [
+  "Surface impact",
+  "IA/navigation",
+  "Assets/iconography",
+  "Visual language",
+  "Motion",
+  "Copy/localization",
+  "Accessibility",
+  "Visual proof",
+] as const;
+const FRONTEND_MATCH_FIELDS = FRONTEND_MATRIX_FIELDS.slice(0, 5);
 
 function frontmatter(text: string): Record<string, string> {
   const match = /^\+\+\+\r?\n([\s\S]*?)\r?\n\+\+\+/.exec(text);
@@ -30,6 +46,43 @@ function frontmatter(text: string): Record<string, string> {
       .filter((item): item is RegExpExecArray => item !== null)
       .map((item) => [item[1]!, item[2]!]),
   );
+}
+
+function fieldValue(text: string, field: string): string | undefined {
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`^-\\s*${escaped}\\s*:\\s*(\\S.*)$`, "im")
+    .exec(text)?.[1]
+    ?.trim()
+    .toLowerCase();
+}
+
+function validateFrontendDocuments(
+  research: string,
+  scope: string,
+  design: string,
+  blockers: string[],
+): boolean {
+  const before = blockers.length;
+  for (const field of RESEARCH_FRONTEND_FIELDS)
+    if (!fieldValue(research, field))
+      blockers.push(`research.md:frontend-field=${field}:missing`);
+  for (const field of FRONTEND_MATRIX_FIELDS) {
+    const scopeValue = fieldValue(scope, field);
+    const designValue = fieldValue(design, field);
+    if (!scopeValue) blockers.push(`scope.md:frontend-field=${field}:missing`);
+    if (!designValue)
+      blockers.push(`design.md:frontend-field=${field}:missing`);
+    if (
+      FRONTEND_MATCH_FIELDS.includes(field) &&
+      scopeValue &&
+      designValue &&
+      scopeValue !== designValue
+    )
+      blockers.push(`design.md:frontend-field=${field}:mismatch`);
+  }
+  if (!fieldValue(design, "Visual gate"))
+    blockers.push("design.md:frontend-field=Visual gate:missing");
+  return blockers.length === before;
 }
 
 function taskContracts(slug: string, text: string): TaskContract[] {
@@ -64,6 +117,12 @@ function taskContracts(slug: string, text: string): TaskContract[] {
     const title = match[2]!
       .split(/\.\s+(?:Dependency|Trace|Acceptance|Proof|Rollback|Tests):/)[0]!
       .trim();
+    const frontend = /\bFrontend:\s*(none|affected)\b/i
+      .exec(body)?.[1]
+      ?.toLowerCase();
+    const visualGate = /\bVisual gate:\s*(not-required|required|approved)\b/i
+      .exec(body)?.[1]
+      ?.toLowerCase();
     return {
       id: `T${order}`,
       canonicalKey: `${slug}:T${order}`,
@@ -74,8 +133,33 @@ function taskContracts(slug: string, text: string): TaskContract[] {
       dependencies,
       sharedPaths: [...new Set(sharedPaths)].sort(),
       proof: { required: ["audit"], validationCommands, rollback },
+      frontendImpact:
+        frontend === "none" || frontend === "affected"
+          ? frontend
+          : "unclassified",
+      visualGate:
+        frontend === "none"
+          ? "not-required"
+          : visualGate === "not-required" ||
+              visualGate === "required" ||
+              visualGate === "approved"
+            ? visualGate
+            : "unclassified",
     };
   });
+}
+
+function designVisualGate(
+  text: string,
+): ProjectContract["frontendAudit"]["visualGate"] {
+  const value = /^-\s*Visual gate:\s*(not-required|required|approved)\s*$/im
+    .exec(text)?.[1]
+    ?.toLowerCase();
+  return value === "not-required" ||
+    value === "required" ||
+    value === "approved"
+    ? value
+    : "unclassified";
 }
 
 function inferProjectDependencies(tasks: readonly TaskContract[]): string[] {
@@ -105,6 +189,9 @@ export async function compileRepository(
     const documents: DocumentContract[] = [];
     const blockers: string[] = [];
     let tasks: TaskContract[] = [];
+    let researchText = "";
+    let scopeText = "";
+    let designText = "";
     for (const path of REQUIRED) {
       try {
         const bytes = await readFile(join(folder, path));
@@ -133,11 +220,49 @@ export async function compileRepository(
         });
         if (path === "implementation/tasks.md")
           tasks = taskContracts(slug, text);
+        if (path === "research.md") researchText = text;
+        if (path === "scope.md") scopeText = text;
+        if (path === "design.md") designText = text;
       } catch {
         blockers.push(`${path}:missing`);
       }
     }
     if (tasks.length === 0) blockers.push("implementation/tasks.md:no-tasks");
+    for (const task of tasks) {
+      if (task.frontendImpact === "unclassified")
+        blockers.push(
+          `implementation/tasks.md:${task.id}:frontend-unclassified`,
+        );
+      if (
+        task.frontendImpact === "affected" &&
+        task.visualGate === "unclassified"
+      )
+        blockers.push(
+          `implementation/tasks.md:${task.id}:visual-gate-unclassified`,
+        );
+    }
+    const frontendDocumentsValid = validateFrontendDocuments(
+      researchText,
+      scopeText,
+      designText,
+      blockers,
+    );
+    const visualGate = designVisualGate(designText);
+    if (visualGate === "unclassified")
+      blockers.push("design.md:frontend-contract-missing");
+    for (const task of tasks)
+      if (
+        task.frontendImpact === "affected" &&
+        task.visualGate !== "unclassified" &&
+        visualGate !== "unclassified" &&
+        task.visualGate !== visualGate
+      )
+        blockers.push(
+          `implementation/tasks.md:${task.id}:visual-gate-mismatch`,
+        );
+    const firstFrontendTask = tasks.find(
+      (task) => task.frontendImpact === "affected",
+    );
     const sharedPaths = [
       ...new Set(tasks.flatMap((task) => task.sharedPaths)),
     ].sort();
@@ -156,6 +281,23 @@ export async function compileRepository(
       tasks,
       projectDependencies: inferProjectDependencies(tasks),
       sharedPaths,
+      frontendAudit: {
+        status:
+          frontendDocumentsValid &&
+          visualGate !== "unclassified" &&
+          tasks.every(
+            (task) =>
+              task.frontendImpact !== "unclassified" &&
+              (task.frontendImpact === "none" ||
+                task.visualGate === visualGate),
+          )
+            ? "passed"
+            : "blocked",
+        visualGate,
+        ...(firstFrontendTask
+          ? { firstFrontendTaskKey: firstFrontendTask.canonicalKey }
+          : {}),
+      },
       admission: blockers.length === 0 ? "ready" : "pending",
       admissionBlockers: blockers,
     });

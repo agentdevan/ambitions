@@ -392,6 +392,12 @@ No v1 runtime/user evidence is required to define public mapping semantics.
 Personal capability-transfer usefulness and generated-path usefulness require
 their own direct-user evidence later.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/RelationshipInspectionModels.swift`, `Native/Ambitions/Trust/RelationshipInspectionProjection.swift`, `Native/Ambitions/Trust/RelationshipInspectionView.swift`, `Native/Ambitions/Trust/RelationshipInspectionAccessibility.swift`, `Native/Ambitions/Trust/SourceInspectionView.swift`, `Native/Ambitions/Trust/InspectionSurface.swift`.
+- Evidence and unknowns: Repository audit identifies Task 9 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Scope a local, source-native `Relationship Registry` whose records include:

@@ -219,6 +219,12 @@ complete user control.
 No hard fork remains. Initial Scope can fully define explicit/candidate learning
 and replan proposals while auto-active implicit learning stays excluded.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/LocalLearning/`, `Native/Ambitions/Surfaces/Shared/LocalLearning/`.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Implement a deterministic local observation ledger, pattern-candidate builder,

@@ -308,6 +308,12 @@ avoids pretending one ontology or authority model fits every hobby.
 - Career and social-profile framing can pressure the user to publish, compete,
   credentialize, or monetize a private practice.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/HobbyExplorationView.swift`, `Native/Ambitions/Trust/HobbySourceInspectionView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue researching a calm, opt-in hobby exploration portfolio that treats

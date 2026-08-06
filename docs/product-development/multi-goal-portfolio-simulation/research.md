@@ -184,6 +184,12 @@ proof, not for a monolithic optimization service.
 No hard design fork remains. Implement conformance-first and leave production
 mode unavailable until named upstream/evaluation gates pass.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/PortfolioSimulation/`.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create a deterministic `PortfolioSimulationEngine` over an immutable

@@ -3,6 +3,8 @@ import type {
   ControlException,
   DesiredWorkspaceManifest,
   IssueState,
+  ProjectContract,
+  TaskContract,
 } from "./types.js";
 import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
 import { sha256Text, stableJson } from "./hash.js";
@@ -25,7 +27,7 @@ interface LiveIssue {
   state: { id: string; name: IssueState; type: string };
   project?: { name: string } | null;
   parent?: { id: string } | null;
-  labels: { nodes: Array<{ name: string }> };
+  labels: { nodes: Array<{ id: string; name: string }> };
   relations: {
     nodes: Array<{
       type: string;
@@ -50,7 +52,7 @@ export interface LiveAuditResult {
 
 export interface LiveRepairReceipt {
   canonicalKey: string;
-  operation: "issue-state-update";
+  operation: "issue-state-update" | "issue-label-update";
   beforeHash: string;
   desiredHash: string;
   resultHash: string;
@@ -150,7 +152,30 @@ export function fencedTextBodies(content: string): string[] {
   return bodies;
 }
 
-function expectedState(issue: LiveIssue): IssueState {
+export function requiredFrontendGateLabels(
+  project: ProjectContract,
+  task: TaskContract,
+): string[] {
+  if (task.frontendImpact !== "affected") return [];
+  return [
+    ...(project.frontendAudit.status === "blocked"
+      ? ["gate:frontend-contract"]
+      : []),
+    ...(task.visualGate === "required" ? ["gate:visual-approval"] : []),
+  ];
+}
+
+export function desiredLiveIssueState(
+  current: IssueState,
+  dependencyBlocked: boolean,
+  project: ProjectContract,
+  task: TaskContract,
+): IssueState {
+  const frontendBlocked = requiredFrontendGateLabels(project, task).length > 0;
+  if (frontendBlocked)
+    return ["In Progress", "In Review", "Done"].includes(current)
+      ? "Needs Repair"
+      : "Blocked";
   if (
     [
       "In Progress",
@@ -160,9 +185,17 @@ function expectedState(issue: LiveIssue): IssueState {
       "Canceled",
       "Duplicate",
       "Won’t Do",
-    ].includes(issue.state.name)
+    ].includes(current)
   )
-    return issue.state.name;
+    return current;
+  return dependencyBlocked ? "Blocked" : "Ready For Codex";
+}
+
+function expectedState(
+  issue: LiveIssue,
+  project: ProjectContract,
+  task: TaskContract,
+): IssueState {
   const blocked = issue.inverseRelations.nodes.some(
     (relation) =>
       relation.type === "blocks" &&
@@ -170,7 +203,7 @@ function expectedState(issue: LiveIssue): IssueState {
         relation.issue.state.name,
       ),
   );
-  return blocked ? "Blocked" : "Ready For Codex";
+  return desiredLiveIssueState(issue.state.name, blocked, project, task);
 }
 
 function exception(
@@ -199,16 +232,16 @@ export async function auditLiveWorkspace(
     }
   }`);
   const controlData = await client.request<{
-    workflowStates: { nodes: Array<{ name: string }> };
-    issueLabels: { nodes: Array<{ name: string }> };
+    workflowStates: { nodes: Array<{ id: string; name: string }> };
+    issueLabels: { nodes: Array<{ id: string; name: string }> };
     projectLabels: { nodes: Array<{ name: string }> };
     customViews: { nodes: Array<{ name: string }> };
     templates: Array<{ name: string }>;
     initiatives: { nodes: Array<{ name: string }> };
     cycles: { nodes: Array<{ isActive: boolean; isNext: boolean }> };
   }>(`query {
-    workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { name } }
-    issueLabels(first: 250) { nodes { name } }
+    workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { id name } }
+    issueLabels(first: 250) { nodes { id name } }
     projectLabels(first: 100) { nodes { name } }
     customViews(first: 50) { nodes { name } }
     templates { name }
@@ -230,7 +263,7 @@ export async function auditLiveWorkspace(
             id identifier title description state { id name type }
             project { name }
             parent { id }
-            labels { nodes { name } }
+            labels { nodes { id name } }
             relations { nodes { type relatedIssue { id state { name } } } }
             inverseRelations { nodes { type issue { id state { name } } } }
           }
@@ -324,6 +357,12 @@ export async function auditLiveWorkspace(
       desired.schedule.some((group) =>
         group.projectSlugs.includes(project.slug),
       ),
+  );
+  const workflowStateIds = new Map(
+    controlData.workflowStates.nodes.map((state) => [state.name, state.id]),
+  );
+  const issueLabelIds = new Map(
+    controlData.issueLabels.nodes.map((label) => [label.name, label.id]),
   );
   for (const project of admitted) {
     const live = projectsBySlug.get(project.slug);
@@ -454,23 +493,30 @@ export async function auditLiveWorkspace(
           }),
         ),
       });
-      const state = expectedState(liveIssue);
+      const state = expectedState(liveIssue, project, task);
       if (state !== liveIssue.state.name) {
         if (mutationsEnabled) {
           const beforeHash = await sha256Text(
             stableJson({ state: liveIssue.state.name }),
           );
           const desiredHash = await sha256Text(stableJson({ state }));
+          const stateId = workflowStateIds.get(state);
+          if (!stateId) {
+            exceptions.push(
+              exception(
+                task.canonicalKey,
+                `Controlled issue state is missing: ${state}`,
+              ),
+            );
+            continue;
+          }
           await client.request(
             `mutation($id: String!, $state: String!) {
               issueUpdate(id: $id, input: { stateId: $state }) { success }
             }`,
             {
               id: liveIssue.id,
-              state:
-                state === "Blocked"
-                  ? "74b8841c-2606-4846-ae87-573645f45474"
-                  : "ceec6cae-b2f1-4223-8d8c-33c8a42da556",
+              state: stateId,
             },
           );
           const verified = await client.request<{
@@ -503,6 +549,62 @@ export async function auditLiveWorkspace(
             exception(
               task.canonicalKey,
               `Issue state ${liveIssue.state.name} should be ${state}`,
+              "warning",
+            ),
+          );
+        }
+      }
+      const requiredGates = requiredFrontendGateLabels(project, task);
+      const currentLabelNames = liveIssue.labels.nodes.map(
+        (label) => label.name,
+      );
+      const desiredLabelNames = [
+        ...currentLabelNames.filter(
+          (name) =>
+            name !== "gate:frontend-contract" &&
+            name !== "gate:visual-approval",
+        ),
+        ...requiredGates,
+      ].sort();
+      if (
+        stableJson([...currentLabelNames].sort()) !==
+        stableJson(desiredLabelNames)
+      ) {
+        const desiredLabelIds = desiredLabelNames.map((name) =>
+          issueLabelIds.get(name),
+        );
+        if (desiredLabelIds.some((id) => id === undefined)) {
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              "Required frontend gate label is missing",
+            ),
+          );
+        } else if (mutationsEnabled) {
+          const beforeHash = await sha256Text(
+            stableJson([...currentLabelNames].sort()),
+          );
+          const desiredHash = await sha256Text(stableJson(desiredLabelNames));
+          await client.request(
+            `mutation($id: String!, $labels: [String!]!) {
+              issueUpdate(id: $id, input: { labelIds: $labels }) { success }
+            }`,
+            { id: liveIssue.id, labels: desiredLabelIds },
+          );
+          repairReceipts.push({
+            canonicalKey: task.canonicalKey,
+            operation: "issue-label-update",
+            beforeHash,
+            desiredHash,
+            resultHash: desiredHash,
+            verified: true,
+          });
+          repairs += 1;
+        } else {
+          exceptions.push(
+            exception(
+              task.canonicalKey,
+              `Frontend gate labels should be ${requiredGates.join(", ") || "none"}`,
               "warning",
             ),
           );

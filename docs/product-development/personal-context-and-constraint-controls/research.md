@@ -210,6 +210,12 @@ intelligence while remaining local and correctable.
 No hard fork remains. Sensitive imports and implicit suggestions stay disabled
 until separately scoped/evidenced; manual/purpose-bound context is complete.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/You/PersonalContext/`, `Native/Ambitions/Surfaces/Shared/PersonalContext/`.
+- Evidence and unknowns: Repository audit identifies Task 7 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create a local `PersonalContextRegistry` of typed user-controlled facts, purpose

@@ -712,6 +712,12 @@ compound across a changed destination.
   privacy-egress, replay, deletion, accessibility, and recommendation-quality
   proof remain implementation obligations, not Research evidence.
 
+## Frontend impact investigation
+
+- Potential frontend impact: possible
+- Existing surfaces investigated: Goals, You, and the existing capability/pathway concepts named by current Research.
+- Evidence and unknowns: Scope has not been approved, so no surface, IA, asset, or visual commitment exists; any future frontend behavior must be resolved before admission.
+
 ## Recommended direction
 
 Treat this document as portfolio Research, not as authority for one umbrella

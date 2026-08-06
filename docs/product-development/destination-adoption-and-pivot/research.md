@@ -287,6 +287,12 @@ canonical objects; it is not a recommendation container or a second Goal.
   user flow, persistence, privacy egress, replay, accessibility, or runtime
   behavior.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/DestinationAdoptionView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 6 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue product discovery around an explicit **candidate-to-Goal adoption

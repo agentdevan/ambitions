@@ -1,21 +1,31 @@
 # Implementation Tasks
 
 1. Canon/adapter contracts/calendar/fake-provider fixtures (REQ-001–006, 015–017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Intent/draft/payload/preflight/preview (REQ-002–004, 011, 017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Separate action authorization and account/credential/OAuth fake harness
    (REQ-005–006, 012–015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Adapter protocol/empty remote registry/Calendar editor adapter (REQ-001, 007,
    011, 016).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Protected outbox/idempotency/journal/execution (REQ-007–009, 012).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Result/reconciliation/owner notification/receipts (REQ-008–010, 012).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Disconnect/revoke/local purge and unknown recovery record (REQ-013–015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. Action Center/preview/progress/settings accessibility UI (REQ-004–005,
    008–009, 013–017).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 9. Bootstrap/project permission generation and integration tests (all REQs).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. Full verification/REQ-001–REQ-017 matrix; remote/high-consequence actions,
     external success/undo, deployment and release remain ceilings.
 
 Run focused tests and inspect each task diff.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

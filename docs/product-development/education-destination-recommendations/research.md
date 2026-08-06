@@ -363,6 +363,12 @@ individual decision.
 - Overly broad results could become a provider directory rather than a calm
   decision aid tied to the user's chosen direction.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/EducationExplorationView.swift`, `Native/Ambitions/Trust/EducationOptionInspectionView.swift`.
+- Evidence and unknowns: Repository audit identifies Task 5 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Continue researching a local, authority-layered education destination

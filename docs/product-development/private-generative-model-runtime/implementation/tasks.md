@@ -2,31 +2,42 @@
 
 1. **Canon and task bundle Foundry.** Add canon, contracts, config, linter,
    deterministic compiler and fixtures. Trace: REQ-001, 008–010, 015–017.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. **Native task registry and mode policy.** Implement registry parity,
    availability and content-blind routing. Dependency: 1. Trace: REQ-001–003,
    013, 015, 017. Acceptance: unknown tuple unavailable; no silent escalation.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. **Context and consent.** Implement owner field clients, capsule minimization,
    preview and scoped consent. Dependency: 2. Trace: REQ-004–006, 014, 018.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. **Read-only tools.** Implement typed registry/gateway/budgets/revision checks.
    Dependency: 1–3. Trace: REQ-007, 016. Acceptance: no write/arbitrary graph.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. **Envelope and deterministic validation.** Implement ordered validators and
    feature handoff. Dependency: 1–4. Trace: REQ-008–009, 012, 016.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. **Adapters.** Implement deterministic fake and on-device adapter; compile PCC
    behind unavailable gates; keep hosted registry empty. Dependency: 2–5. Trace:
    REQ-002–003, 006, 008, 013, 017.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. **Sessions, cancellation and repair.** Implement actor/event stream, bounded
    repair, stale-revision rejection and recovery. Dependency: 5–6. Trace:
    REQ-010, 013, 016.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. **Receipts, change invalidation and purge.** Implement no-payload receipts,
    compatibility invalidation and scoped deletion. Dependency: 1–7. Trace:
    REQ-014–015.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 9. **Disclosure and accessibility UI.** Implement context/mode/progress/result/
    failure/clear projections. Dependency: 3–8. Trace: REQ-004, 011, 013–014, 018.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 10. **Resources and integration.** Generate/byte-review registry, update project
     and runtime bootstrap/boundaries. Dependency: 1–9. Trace: all requirements.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 11. **Full verification.** Run `implementation/verification.md`. Dependency:
     1–10. Acceptance: all relevant lanes pass; PCC/provider/feature usefulness,
     canonical mutation, deployment and release remain N/A/insufficient.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

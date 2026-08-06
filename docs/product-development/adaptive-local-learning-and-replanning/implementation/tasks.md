@@ -1,19 +1,29 @@
 # Implementation Tasks
 
 1. Canon/policy contracts/golden histories (REQ-001–004, 011, 014–017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 2. Owner adapters and private observation ledger (REQ-001, 005, 013–015).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 3. Deterministic hypothesis/counterevidence/rebuild (REQ-002–004, 010–011).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 4. Candidate review and command-only influence activation (REQ-003–007, 012,
    017).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 5. Consumer capability views/use receipts (REQ-005–006, 010, 014).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 6. Scoped correction/contradiction/expiry/reset (REQ-007, 010–013).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 7. Dependency impact and non-mutating owner replan assembly (REQ-008–010).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 8. Learning/replan controls and accessibility UI (REQ-006–007, 009–012, 017).
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 9. Migration/purge/security/resources/bootstrap (REQ-013–015; all integration).
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 10. Full verification and REQ-001–REQ-017 matrix; auto-active patterns,
     longitudinal benefit, canonical mutation, deployment/release remain ceilings.
 
 Run focused checks and inspect each task diff.
+   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.
 
 ## Dependency and acceptance matrix
 

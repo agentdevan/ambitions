@@ -38,6 +38,17 @@ documentation lifecycle from Research through implementation grooming.
   verification documents.
 - AC-004: The fixture makes no claim of product, runtime, or release work.
 
+## Frontend impact contract
+
+- Surface impact: none
+- IA/navigation: none
+- Assets/iconography: none
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: N/A — no application copy is created or changed.
+- Accessibility: N/A — no rendered application interface is created or changed.
+- Visual proof: N/A — repository structural evidence is the applicable proof ceiling.
+
 ## Canon impact
 
 None. This synthetic fixture documents the existing lifecycle tooling and does

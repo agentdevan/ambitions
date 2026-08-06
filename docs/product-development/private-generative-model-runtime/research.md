@@ -237,6 +237,12 @@ No hard product fork remains. The architecture can ship with deterministic and
 on-device modes while PCC and third-party modes stay unavailable until their
 independent gates pass.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Trust/PrivateGenerativeRuntime/`.
+- Evidence and unknowns: Repository audit identifies Task 9 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Create a `PrivateGenerativeRuntime` with a versioned task registry, deterministic

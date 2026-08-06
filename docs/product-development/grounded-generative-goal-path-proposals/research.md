@@ -199,6 +199,12 @@ not a new Goal/Path authority or a chatbot that writes canonical Steps.
 No hard fork remains. The generative lane can be built on the existing proposal
 owner while retaining deterministic/manual fallback and source-needed states.
 
+## Frontend impact investigation
+
+- Potential frontend impact: certain
+- Existing surfaces investigated: `Native/Ambitions/Surfaces/Goals/PathProposal/`.
+- Evidence and unknowns: Repository audit identifies Task 8 as the first frontend-affecting task. Earlier tasks are non-frontend foundations; no unapproved root, route, asset, or visual-language expansion is permitted.
+
 ## Recommended direction
 
 Extend the approved Goal Path candidate architecture with a closed

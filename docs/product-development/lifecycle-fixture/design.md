@@ -24,6 +24,19 @@ All phase documents are approved in this complete example. If a real initiative
 discovers a product decision during grooming, its Scope or Design returns to the
 normal revision and approval conversation before implementation proceeds.
 
+## Frontend experience specification
+
+- Surface impact: none
+- IA/navigation: none
+- Assets/iconography: none
+- Visual language: unchanged
+- Motion: unchanged
+- Copy/localization: N/A — the design has no application copy surface.
+- Accessibility: N/A — the design has no rendered application interface.
+- Visual proof: N/A — repository structural evidence is the applicable proof ceiling.
+- Visual gate: not-required
+- Experience authority: The remaining Design sections contain no user-interface implementation authority.
+
 ## Architecture and data
 
 DESIGN-001: The fixture uses the lifecycle's three phase documents with the
