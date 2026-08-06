@@ -16,9 +16,18 @@ extension PublicReferenceInspectionProjection {
             limits: "Descriptive public occupation reference only. It does not describe the user and does not authorize recommendations.",
             conflicts: "No recorded conflicts.",
             supersession: "No recorded supersession.",
-            attribution: "O*NET 30.3",
+            attribution: "O*NET 30.3. Use terms: approved with attribution.",
             accessibilityLabel: "Task public reference claim",
-            accessibilityValue: "Public task description. Authority O*NET. United States release 30.3. Freshness current. Descriptive reference only. No conflicts or supersession. Attribution O*NET 30.3."
+            accessibilityValue: [
+                "Public task description",
+                "Authority O*NET",
+                "United States release 30.3",
+                "Freshness current",
+                "Descriptive reference only",
+                "No conflicts or supersession",
+                "Attribution O*NET 30.3",
+                "Use terms approved with attribution"
+            ].joined(separator: ". ") + "."
         )
         return PublicReferenceInspectionProjection(
             id: "public-reference-inspection-onet-30.3-30.3",
@@ -32,8 +41,8 @@ extension PublicReferenceInspectionProjection {
             authority: "onet — O*NET descriptive authority.",
             retrieval: "Bundled with the approved 30.3 release; checked 2026-08-06",
             freshness: "current",
-            selectedClaimID: selectedClaim.id,
-            selectedClaim: selectedClaim,
+            selectedClaimID: nil,
+            selectedClaim: nil,
             claims: [selectedClaim],
             recheckTrigger: RecheckTrigger(
                 title: "Check approved source release",

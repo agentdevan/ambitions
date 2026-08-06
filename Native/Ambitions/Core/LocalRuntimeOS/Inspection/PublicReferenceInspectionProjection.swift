@@ -109,8 +109,9 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
             authority: "\(value.authority.publisherID) — \(value.authority.statement)",
             jurisdictionAndRelease: "\(value.jurisdiction.label) (\(value.jurisdiction.code)), release \(value.release.id)",
             retrieval: "Retrieved \(value.retrievedAt); checked \(value.checkedAt)",
-            freshness: freshness, limits: limits, conflicts: conflicts, supersession: supersession,
-            attribution: value.requiredAttribution,
+            freshness: freshness,
+            limits: limits, conflicts: conflicts, supersession: supersession,
+            attribution: "\(value.requiredAttribution). Use terms: \(value.rightsState.rawValue.replacingOccurrences(of: "_", with: " ")).",
             accessibilityLabel: "\(title) public reference claim",
             accessibilityValue: [
                 value.value.text,
@@ -120,7 +121,7 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
                 "Limits \(limits)",
                 "Conflicts \(conflicts)",
                 "Supersession \(supersession)",
-                "Attribution \(value.requiredAttribution)"
+                "Attribution \(value.requiredAttribution). Use terms \(value.rightsState.rawValue.replacingOccurrences(of: "_", with: " "))"
             ].joined(separator: ". ")
         )
     }

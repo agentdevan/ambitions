@@ -21,6 +21,17 @@ final class PublicReferenceInspectionUITests: AmbitionsUITestCase {
         XCTAssertTrue(inspection.waitForExistence(timeout: 30))
         XCTAssertTrue(app.staticTexts["O*NET 30.3 — Software Developers (15-1252.00), United States"].exists)
         XCTAssertTrue(app.staticTexts["Not approved for recommendation use"].exists)
+
+        dismissContinuityReceiptIfNeeded(in: app)
+        let taskClaim = scrollUntilButtonHittable(
+            "trust.public-reference.claim.onet-task-1",
+            in: app
+        )
+        XCTAssertTrue(taskClaim.isHittable)
+        XCTAssertFalse(app.staticTexts["CLAIM INSPECTION"].exists)
+        taskClaim.tap()
+
+        XCTAssertTrue(scrollUntilHittable(app.staticTexts["CLAIM INSPECTION"], in: app))
         XCTAssertTrue(app.staticTexts["What this source can claim"].exists)
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
@@ -45,6 +56,38 @@ final class PublicReferenceInspectionUITests: AmbitionsUITestCase {
 
         XCTAssertTrue(app.staticTexts["Public reference sources"].waitForExistence(timeout: 30))
         XCTAssertTrue(app.staticTexts["Not approved for recommendation use"].exists)
+
+        dismissContinuityReceiptIfNeeded(in: app)
+        let taskClaim = scrollUntilButtonHittable(
+            "trust.public-reference.claim.onet-task-1",
+            in: app,
+            maxAttempts: 12
+        )
+        XCTAssertTrue(taskClaim.isHittable)
+        taskClaim.tap()
+
+        XCTAssertTrue(scrollUntilHittable(app.staticTexts["CLAIM INSPECTION"], in: app, maxAttempts: 12))
         XCTAssertTrue(app.staticTexts["What this source can claim"].exists)
+    }
+
+    private func dismissContinuityReceiptIfNeeded(in app: XCUIApplication) {
+        let dismissReceipt = app.buttons["shell.continuity-receipt.dismiss-button"]
+        if dismissReceipt.waitForExistence(timeout: 2), dismissReceipt.isHittable {
+            dismissReceipt.tap()
+        }
+    }
+
+    private func scrollUntilHittable(
+        _ element: XCUIElement,
+        in app: XCUIApplication,
+        maxAttempts: Int = 8
+    ) -> Bool {
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 1), element.isHittable {
+                return true
+            }
+            app.swipeUp()
+        }
+        return element.exists && element.isHittable
     }
 }
