@@ -5,6 +5,15 @@ import { LinearClient } from "./adapters/linear.js";
 import { auditLiveWorkspace } from "./core/live-audit.js";
 import type { DesiredWorkspaceManifest } from "./core/types.js";
 
+declare global {
+  interface Env extends Cloudflare.Env {
+    LINEAR_API_TOKEN: string;
+    LINEAR_WEBHOOK_SECRET: string;
+    GITHUB_WEBHOOK_SECRET: string;
+    CONTROL_ADMIN_SECRET: string;
+  }
+}
+
 const encoder = new TextEncoder();
 
 async function executeD1Batches(
@@ -171,6 +180,19 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     new LinearClient(env.LINEAR_API_TOKEN, env.LINEAR_API_URL),
     manifest,
     env.MUTATIONS_ENABLED,
+    {
+      loadRepositoryText: async (path) => {
+        const sourceResponse = await fetch(
+          `https://raw.githubusercontent.com/${env.GITHUB_REPOSITORY}/main/${path}`,
+          { headers: { "User-Agent": "ambitions-linear-control" } },
+        );
+        if (!sourceResponse.ok)
+          throw new Error(
+            `REPOSITORY_SOURCE_HTTP_${sourceResponse.status}:${path}`,
+          );
+        return sourceResponse.text();
+      },
+    },
   );
   const completed = new Date().toISOString();
   const receiptStatements = await Promise.all(
